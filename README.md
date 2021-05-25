@@ -1,6 +1,6 @@
 # Modus Web Components
 
-The [Trimble Modus Design System](https://modus.trimble.com/) describes the UX that Trimble wants to provide in it's UI across it's many applications. The benefits of using Modus include rapid prototyping, development efficiency, and UX consistency.
+The [Trimble Modus Design System](https://modus.trimble.com/) describes the UX that Trimble wants to provide in its UI across its many applications. The benefits of using Modus include rapid prototyping, development efficiency, and UX consistency.
 
 Modus includes...
 
@@ -19,8 +19,24 @@ This library provides Modus Elements as web components. Web components are reusa
   - **Implemented**
     - TODO
   - **Not Implemented**
+    - [Accordion](#accordion)
+    - [Alert](#alert)
+    - [Badge](#badge)
+    - [Breadcrumb](#breadcrumb)
     - [Button](#button)
     - [Checkbox](#checkbox)
+    - [Chip](#chip)
+    - [Dialog](#dialog)
+    - [Dropdown](#dropdown)
+    - [Pattern](#pattern)
+    - [Radio](#radio)
+    - [Switch](#switch)
+    - [Table/List](#table/list)
+    - [Table/Sheet](#table/sheet)
+    - [Tab](#tab)
+    - [Text Input](#text-input)
+    - [Toast](#toast)
+    - [Tooltip](#tooltip)
 
 
 
@@ -50,9 +66,41 @@ All NPM scripts are run from the root of the project.
 
 ### Not Implemented
 
-##### **Button**
+##### Accordion
+
+##### Alert
+
+##### Badge
+
+##### Breadcrumb
+
+##### Button
 
 ##### Checkbox
+
+##### Chip
+
+##### Dialog
+
+##### Dropdown
+
+##### Pattern
+
+##### Radio
+
+##### Switch
+
+##### Table/List
+
+##### Table/Sheet
+
+##### Tab
+
+##### Text Input
+
+##### Toast
+
+##### Tooltip
 
 ------
 
