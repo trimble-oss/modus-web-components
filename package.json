@@ -20,7 +20,7 @@
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate",
-    "lint": "eslint src/**"
+    "lint": "eslint src/** --no-error-on-unmatched-pattern"
   },
   "dependencies": {
     "@stencil/core": "^2.0.1"
