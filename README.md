@@ -14,6 +14,7 @@ This library provides Modus Elements as web components. Web components are reusa
 ## Table of Contents
 
 - [Getting Started](#getting-started)
+- [Available Scripts](#available-scripts)
 - [Technology](#technology)
 - [Components](#components)
   - **Implemented**
@@ -39,6 +40,16 @@ This library provides Modus Elements as web components. Web components are reusa
   
 ## Getting Started
 
+If this is your first time in the project, run `npm install` to download 3rd party packages.
+
+All web components are located under the src/components directory. 
+
+The index.html file provides a place to render components for development and end to end testing.
+
+Global SCSS files are available to provide Modus colors, variables and functions for component styling.
+
+## Available Scripts
+
 All NPM scripts are run from the root of the project.
 
 `npm install` - Install 3rd party packages
@@ -52,6 +63,8 @@ All NPM scripts are run from the root of the project.
 `npm run test.watch` - Run the unit and e2e tests with auto re-run on changes
 
 `npm run generate` - Start the interactive Stencil component generator
+
+`npm run lint` - Run ESLint to find problems with JS and TS code
 
 ## Technology
 
