@@ -1,29 +1,44 @@
 .container {
+  align-items: center;
+  color: $col_trimble_gray;
   display: flex;
   flex-direction: row;
-  font-weight: $label-font-size;
+  font-size: $label-font-size;
+  height: 2rem;
   text-align: center;
   white-space: nowrap;
-  vertical-align: middle;
 
   input {
-
+    margin: 0 .28rem;
   }
 
   div {
-    color: $gray-700;
+    align-items: center;
+    display: flex;
+
+    &.disabled {
+      color: $col_gray_9;
+    }
   }
 
   &.medium {
-    height: 24px;
+    height: $rem-24px;
+
+    input {
+      height: $rem-16px;
+      width: $rem-16px;
+    }
   }
 
   &.small {
-    height: 18px;
+    height: $rem-18px;
+
+    input {
+      height: $rem-12px;
+      width: $rem-12px;
+    }
   }
 }
-
-// Default
 
 // Checked
 
@@ -32,13 +47,3 @@
 // Focused
 
 // Mixed
-
-// Disabled
-
-// Default Size
-
-// Small Size
-
-// Label
-
-// No Label

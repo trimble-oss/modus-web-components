@@ -49,7 +49,7 @@ export class ModusCheckbox {
           onClick={() => this.handleCheckboxClick()}
           ref={(el) => this.checkboxInput = el as HTMLInputElement}>
         </input>
-        <div>{this.label}</div>
+        {this.label ? <div class={this.disabled ? 'disabled' : null}>{this.label}</div> : null}
       </div>
     );
   }
