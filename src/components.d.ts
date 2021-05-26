@@ -20,6 +20,24 @@ export namespace Components {
          */
         "type": 'cta' | 'default' | 'primary' | 'secondary' | 'warning';
     }
+    interface ModusCheckbox {
+        /**
+          * (optional) Whether the checkbox is checked.
+         */
+        "checked": boolean;
+        /**
+          * (optional) Whether the checkbox is disabled.
+         */
+        "disabled": boolean;
+        /**
+          * (optional) The checkbox label.
+         */
+        "label": string;
+        /**
+          * (optional) The size of the button
+         */
+        "size": 'small' | 'medium';
+    }
 }
 declare global {
     interface HTMLModusButtonElement extends Components.ModusButton, HTMLStencilElement {
@@ -28,8 +46,15 @@ declare global {
         prototype: HTMLModusButtonElement;
         new (): HTMLModusButtonElement;
     };
+    interface HTMLModusCheckboxElement extends Components.ModusCheckbox, HTMLStencilElement {
+    }
+    var HTMLModusCheckboxElement: {
+        prototype: HTMLModusCheckboxElement;
+        new (): HTMLModusCheckboxElement;
+    };
     interface HTMLElementTagNameMap {
         "modus-button": HTMLModusButtonElement;
+        "modus-checkbox": HTMLModusCheckboxElement;
     }
 }
 declare namespace LocalJSX {
@@ -51,8 +76,31 @@ declare namespace LocalJSX {
          */
         "type"?: 'cta' | 'default' | 'primary' | 'secondary' | 'warning';
     }
+    interface ModusCheckbox {
+        /**
+          * (optional) Whether the checkbox is checked.
+         */
+        "checked"?: boolean;
+        /**
+          * (optional) Whether the checkbox is disabled.
+         */
+        "disabled"?: boolean;
+        /**
+          * (optional) The checkbox label.
+         */
+        "label"?: string;
+        /**
+          * An event that fires on checkbox click.
+         */
+        "onCheckboxClick"?: (event: CustomEvent<any>) => void;
+        /**
+          * (optional) The size of the button
+         */
+        "size"?: 'small' | 'medium';
+    }
     interface IntrinsicElements {
         "modus-button": ModusButton;
+        "modus-checkbox": ModusCheckbox;
     }
 }
 export { LocalJSX as JSX };
@@ -60,6 +108,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "modus-button": LocalJSX.ModusButton & JSXBase.HTMLAttributes<HTMLModusButtonElement>;
+            "modus-checkbox": LocalJSX.ModusCheckbox & JSXBase.HTMLAttributes<HTMLModusCheckboxElement>;
         }
     }
 }
