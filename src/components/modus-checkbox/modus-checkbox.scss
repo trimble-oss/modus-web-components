@@ -1,0 +1,44 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  font-weight: $label-font-size;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+
+  input {
+
+  }
+
+  div {
+    color: $gray-700;
+  }
+
+  &.medium {
+    height: 24px;
+  }
+
+  &.small {
+    height: 18px;
+  }
+}
+
+// Default
+
+// Checked
+
+// Hover
+
+// Focused
+
+// Mixed
+
+// Disabled
+
+// Default Size
+
+// Small Size
+
+// Label
+
+// No Label
