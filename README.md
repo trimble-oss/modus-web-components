@@ -17,13 +17,12 @@ This library provides Modus Elements as web components. Web components are reusa
 - [Technology](#technology)
 - [Components](#components)
   - **Implemented**
-    - TODO
+    - [Button](src/components/modus-button/readme.md)
   - **Not Implemented**
     - [Accordion](#accordion)
     - [Alert](#alert)
     - [Badge](#badge)
     - [Breadcrumb](#breadcrumb)
-    - [Button](#button)
     - [Checkbox](#checkbox)
     - [Chip](#chip)
     - [Dialog](#dialog)
@@ -37,9 +36,7 @@ This library provides Modus Elements as web components. Web components are reusa
     - [Text Input](#text-input)
     - [Toast](#toast)
     - [Tooltip](#tooltip)
-
-
-
+  
 ## Getting Started
 
 All NPM scripts are run from the root of the project.
@@ -50,57 +47,19 @@ All NPM scripts are run from the root of the project.
 
 `npm run build` - Compile the component library
 
-`npm run test` - Run the unit tests
+`npm run test` - Run the unit and e2e tests
+
+`npm run test.watch` - Run the unit and e2e tests with auto re-run on changes
+
+`npm run generate` - Start the interactive Stencil component generator
 
 ## Technology
 
+- [ESLint](https://eslint.org/) - A JS linter to help find and fix problems in code.
+- [Jest](https://jestjs.io/) - A JS testing framework.
 - [Stencil](https://stenciljs.com/) - A toolchain for building reusable, scalable design systems and web components.
 - [SASS](https://sass-lang.com/) - The most mature, stable, and powerful professional grade CSS extension language in the world.
 - [rollup.js](https://rollupjs.org/) - A module bundler for JavaScript which compiles small pieces of code into something larger and more complex, such as a library or application.
-
-## Components
-
-### Implemented
-
-
-
-### Not Implemented
-
-##### Accordion
-
-##### Alert
-
-##### Badge
-
-##### Breadcrumb
-
-##### Button
-
-##### Checkbox
-
-##### Chip
-
-##### Dialog
-
-##### Dropdown
-
-##### Pattern
-
-##### Radio
-
-##### Switch
-
-##### Table/List
-
-##### Table/Sheet
-
-##### Tab
-
-##### Text Input
-
-##### Toast
-
-##### Tooltip
 
 ------
 

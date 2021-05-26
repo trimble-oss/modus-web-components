@@ -20,38 +20,6 @@ export namespace Components {
          */
         "type": 'cta' | 'default' | 'primary' | 'secondary' | 'warning';
     }
-    interface ModusCheckbox {
-        /**
-          * (optional) Whether the checkbox is checked.
-         */
-        "checked": boolean;
-        /**
-          * (optional) Whether the checkbox is disabled.
-         */
-        "disabled": boolean;
-        /**
-          * (optional) The checkbox label.
-         */
-        "label": string;
-        /**
-          * (optional) The size of the button
-         */
-        "size": 'small' | 'medium';
-    }
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first": string;
-        /**
-          * The last name
-         */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
-    }
 }
 declare global {
     interface HTMLModusButtonElement extends Components.ModusButton, HTMLStencilElement {
@@ -60,22 +28,8 @@ declare global {
         prototype: HTMLModusButtonElement;
         new (): HTMLModusButtonElement;
     };
-    interface HTMLModusCheckboxElement extends Components.ModusCheckbox, HTMLStencilElement {
-    }
-    var HTMLModusCheckboxElement: {
-        prototype: HTMLModusCheckboxElement;
-        new (): HTMLModusCheckboxElement;
-    };
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
-    }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
-    };
     interface HTMLElementTagNameMap {
         "modus-button": HTMLModusButtonElement;
-        "modus-checkbox": HTMLModusCheckboxElement;
-        "my-component": HTMLMyComponentElement;
     }
 }
 declare namespace LocalJSX {
@@ -97,46 +51,8 @@ declare namespace LocalJSX {
          */
         "type"?: 'cta' | 'default' | 'primary' | 'secondary' | 'warning';
     }
-    interface ModusCheckbox {
-        /**
-          * (optional) Whether the checkbox is checked.
-         */
-        "checked"?: boolean;
-        /**
-          * (optional) Whether the checkbox is disabled.
-         */
-        "disabled"?: boolean;
-        /**
-          * (optional) The checkbox label.
-         */
-        "label"?: string;
-        /**
-          * An event that fires on checkbox click.
-         */
-        "onCheckboxClick"?: (event: CustomEvent<any>) => void;
-        /**
-          * (optional) The size of the button
-         */
-        "size"?: 'small' | 'medium';
-    }
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first"?: string;
-        /**
-          * The last name
-         */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
-    }
     interface IntrinsicElements {
         "modus-button": ModusButton;
-        "modus-checkbox": ModusCheckbox;
-        "my-component": MyComponent;
     }
 }
 export { LocalJSX as JSX };
@@ -144,8 +60,6 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "modus-button": LocalJSX.ModusButton & JSXBase.HTMLAttributes<HTMLModusButtonElement>;
-            "modus-checkbox": LocalJSX.ModusCheckbox & JSXBase.HTMLAttributes<HTMLModusCheckboxElement>;
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
         }
     }
 }
