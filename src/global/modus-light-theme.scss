@@ -1,0 +1,201 @@
+/**
+ *  Modus Light Theme Variables
+ *
+ *  These variables are specific to the Light Theme of Modus
+ */
+
+// Gray Colors
+
+$white:    #fff !default;
+$gray-50:  #f9f9fb !default;
+$gray-100: #F3F3F7 !default;
+$gray-150: #EAEAEF !default;
+$gray-200: #E2E2E7 !default;
+$gray-250: #D0D0D7 !default;
+$gray-300: #BFBFC6 !default;
+$gray-350: #AEAEB6 !default;
+$gray-400: #9D9DA6 !default;
+$gray-450: #8C8B96 !default;
+$gray-500: #7B7A86 !default;
+$gray-550: #6A6976 !default;
+$gray-600: #595868 !default;
+$gray-700: #363545 !default;
+$gray-750: #262533 !default;
+$gray-800: #1B1A26 !default;
+$gray-900: #0B0A12 !default;
+$black:    #000 !default;
+
+$gray-colors: () !default;
+
+$gray-colors: map-merge(
+  (
+    "gray-50":  $gray-50,
+    "gray-100": $gray-100,
+    "gray-150": $gray-150,
+    "gray-200": $gray-200,
+    "gray-250": $gray-250,
+    "gray-300": $gray-300,
+    "gray-350": $gray-350,
+    "gray-400": $gray-400,
+    "gray-450": $gray-450,
+    "gray-500": $gray-500,
+    "gray-550": $gray-550,
+    "gray-600": $gray-600,
+    "gray-700": $gray-700,
+    "gray-750": $gray-750,
+    "gray-800": $gray-800,
+    "gray-900": $gray-900,
+  ),
+  $gray-colors
+);
+
+$trimble-grays: () !default;
+
+$trimble-grays: map-merge(
+  (
+    "white":        $col_white,
+    "gray-half":    $col_gray_half,
+    "gray-light":   $col_gray_light,
+    "gray-0":       $col_gray_0,
+    "gray-1":       $col_gray_1,
+    "gray-2":       $col_gray_2,
+    "gray-3":       $col_gray_3,
+    "gray-4":       $col_gray_4,
+    "gray-5":       $col_gray_5,
+    "gray-6":       $col_gray_6,
+    "gray-7":       $col_gray_7,
+    "gray-8":       $col_gray_8,
+    "gray-9":       $col_gray_9,
+    "gray-10":      $col_gray_10,
+    "trimble-gray": $col_trimble_gray,
+    "gray-dark-1":  $col_gray_dark_1,
+    "gray-dark-2":  $col_gray_dark_2,
+    "gray-dark-3":  $col_gray_dark_3,
+    "black":        $col_black,
+  ),
+  $trimble-grays
+);
+
+// Root Colors
+
+$blue:    #007bff !default;
+$indigo:  #6610f2 !default;
+$purple:  #6f42c1 !default;
+$pink:    #e83e8c !default;
+$red:     #dc3545 !default;
+$orange:  #fd7e14 !default;
+$yellow:  #ffc107 !default;
+$green:   #28a745 !default;
+$teal:    #20c997 !default;
+$cyan:    #17a2b8 !default;
+
+$colors: () !default;
+
+$colors: map-merge(
+  (
+    "blue":       $blue,
+    "indigo":     $indigo,
+    "purple":     $purple,
+    "pink":       $pink,
+    "red":        $red,
+    "orange":     $orange,
+    "yellow":     $yellow,
+    "green":      $green,
+    "teal":       $teal,
+    "cyan":       $cyan,
+    "white":      $white,
+    "gray":       $gray-600,
+    "gray-dark":  $gray-800
+  ),
+  $colors
+);
+
+// Theme Colors
+
+$primary:       $col_trimble_blue_mid !default;
+$secondary:     $col_gray_8 !default;
+$tertiary:      $col_gray_2 !default;
+$success:       $col_green_dark !default;
+$warning:       $col_yellow_dark !default;
+$theme-yellow:  $col_trimble_yellow !default;
+$danger:        $col_red !default;
+$dark:          $col_trimble_gray !default;
+
+$theme-colors: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$theme-colors: map-merge(
+  (
+    "primary":    $primary,
+    "secondary":  $secondary,
+    "tertiary":   $tertiary,
+    "success":    $success,
+    "warning":    $warning,
+    "yellow":     $theme-yellow,
+    "danger":     $danger,
+    "dark":       $dark
+  ),
+  $theme-colors
+);
+
+// UI Colors
+
+$main-background:     $col_white !default;
+$panel-background:    $col_gray_light !default;
+$active:              $col_blue_alt !default;
+$hover:               $col_gray_0 !default;
+$selected:            #CFE1EE !default;
+
+$ui-colors: () !default;
+
+$ui-colors: map-merge(
+  (
+    "main-background":      $main-background,
+    "panel-background":     $panel-background,
+    "active":               $active,
+    "hover":                $hover,
+    "selected":             $selected,
+  ),
+  $ui-colors
+);
+
+// Trimble Brand Colors
+
+$trimble-brand-colors: () !default;
+
+$trimble-brand-colors: map-merge(
+  (
+    "trimble-blue-dark":  $col_trimble_blue_dark,
+    "trimble-blue":       $col_trimble_blue,
+    "trimble-blue-mid":   $col_trimble_blue_mid,
+    "trimble-blue-light": $col_trimble_blue_light,
+    "trimble-yellow":     $col_trimble_yellow,
+    "trimble-green":      $col_trimble_green,
+    "trimble-red":        $col_trimble_red
+  ),
+  $trimble-brand-colors
+);
+
+// Set a specific jump point for requesting color jumps
+$theme-color-interval:      8% !default;
+
+// The yiq lightness value that determines when the lightness of color changes from "dark" to "light". Acceptable values are between 0 and 255.
+$yiq-contrasted-threshold:  200 !default;
+
+// Customize the light and dark text colors for use in our YIQ color contrast function.
+$yiq-text-dark:             $gray-900 !default;
+$yiq-text-light:            $white !default;
+
+// Custom Control Colors
+$control-bg-color:          $col_gray_6 !default;
+$control-surface-color:     ui-color('main-background') !default;
+$control-element-color:     trimble-gray('gray-6') !default;
+$control-checked-color:     ui-color('active') !default;
+$control-hover-color:       ui-color('active') !default;
+
+// Text Colors
+$body-color:                theme-color('dark') !default;
+$input-color:               $secondary !default;
+$link-color:                ui-color('active') !default;
+$headings-color:            theme-color('dark') !default;
+
+$code-color:                #c37;
