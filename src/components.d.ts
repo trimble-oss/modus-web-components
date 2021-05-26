@@ -6,56 +6,60 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
-    interface MyComponent {
+    interface ModusButton {
         /**
-          * The first name
+          * (optional) Disables the button
          */
-        "first": string;
+        "disabled": boolean;
         /**
-          * The last name
+          * (optional) The size of the button
          */
-        "last": string;
+        "size": 'small' | 'medium' | 'large';
         /**
-          * The middle name
+          * (optional) The type of button
          */
-        "middle": string;
+        "type": 'cta' | 'default' | 'primary' | 'secondary' | 'warning';
     }
 }
 declare global {
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
+    interface HTMLModusButtonElement extends Components.ModusButton, HTMLStencilElement {
     }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
+    var HTMLModusButtonElement: {
+        prototype: HTMLModusButtonElement;
+        new (): HTMLModusButtonElement;
     };
     interface HTMLElementTagNameMap {
-        "my-component": HTMLMyComponentElement;
+        "modus-button": HTMLModusButtonElement;
     }
 }
 declare namespace LocalJSX {
-    interface MyComponent {
+    interface ModusButton {
         /**
-          * The first name
+          * (optional) Disables the button
          */
-        "first"?: string;
+        "disabled"?: boolean;
         /**
-          * The last name
+          * (optional) An event that fires on button click
          */
-        "last"?: string;
+        "onButtonClick"?: (event: CustomEvent<any>) => void;
         /**
-          * The middle name
+          * (optional) The size of the button
          */
-        "middle"?: string;
+        "size"?: 'small' | 'medium' | 'large';
+        /**
+          * (optional) The type of button
+         */
+        "type"?: 'cta' | 'default' | 'primary' | 'secondary' | 'warning';
     }
     interface IntrinsicElements {
-        "my-component": MyComponent;
+        "modus-button": ModusButton;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "modus-button": LocalJSX.ModusButton & JSXBase.HTMLAttributes<HTMLModusButtonElement>;
         }
     }
 }
