@@ -19,7 +19,8 @@
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
-    "generate": "stencil generate"
+    "generate": "stencil generate",
+    "lint": "eslint src/**"
   },
   "dependencies": {
     "@stencil/core": "^2.0.1"
@@ -29,6 +30,9 @@
     "@types/jest": "^26.0.23",
     "@types/puppeteer": "^5.4.3",
     "@types/puppeteer-core": "^5.4.0",
+    "@typescript-eslint/eslint-plugin": "^4.25.0",
+    "@typescript-eslint/parser": "^4.25.0",
+    "eslint": "^7.27.0",
     "jest": "^26.6.3",
     "jest-cli": "^26.6.3",
     "puppeteer": "^5.5.0",

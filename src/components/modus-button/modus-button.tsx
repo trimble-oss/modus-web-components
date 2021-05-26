@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import { Component, Prop, h, Event, EventEmitter } from '@stencil/core';
 
 @Component({
@@ -32,7 +33,7 @@ export class ModusButton {
     ['large', 'large'],
   ]);
 
-  render() {
+  render(): unknown {
     const className = `${this.classBySize.get(this.size)} ${this.classByType.get(this.type)}`;
 
     return (
