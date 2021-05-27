@@ -48,7 +48,7 @@ describe('modus-button', () => {
     expect(element).toHaveClass('primary');
   });
 
-  it('emits buttonClick event on click', async () => {
+  it('emits buttonClick event on button click', async () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-button></modus-button>');

@@ -20,6 +20,26 @@ export namespace Components {
          */
         "type": 'cta' | 'default' | 'primary' | 'secondary' | 'warning';
     }
+    interface ModusDropdown {
+        /**
+          * (optional) Disables the button
+         */
+        "disabled": boolean;
+    }
+    interface ModusListItem {
+        /**
+          * (optional) The selected state of the item
+         */
+        "selected": boolean;
+        /**
+          * (optional) The size of list item
+         */
+        "size": 'condensed' | 'standard';
+        /**
+          * (optional) The type of list item
+         */
+        "type": 'standard';
+    }
 }
 declare global {
     interface HTMLModusButtonElement extends Components.ModusButton, HTMLStencilElement {
@@ -28,8 +48,22 @@ declare global {
         prototype: HTMLModusButtonElement;
         new (): HTMLModusButtonElement;
     };
+    interface HTMLModusDropdownElement extends Components.ModusDropdown, HTMLStencilElement {
+    }
+    var HTMLModusDropdownElement: {
+        prototype: HTMLModusDropdownElement;
+        new (): HTMLModusDropdownElement;
+    };
+    interface HTMLModusListItemElement extends Components.ModusListItem, HTMLStencilElement {
+    }
+    var HTMLModusListItemElement: {
+        prototype: HTMLModusListItemElement;
+        new (): HTMLModusListItemElement;
+    };
     interface HTMLElementTagNameMap {
         "modus-button": HTMLModusButtonElement;
+        "modus-dropdown": HTMLModusDropdownElement;
+        "modus-list-item": HTMLModusListItemElement;
     }
 }
 declare namespace LocalJSX {
@@ -51,8 +85,38 @@ declare namespace LocalJSX {
          */
         "type"?: 'cta' | 'default' | 'primary' | 'secondary' | 'warning';
     }
+    interface ModusDropdown {
+        /**
+          * (optional) Disables the button
+         */
+        "disabled"?: boolean;
+        /**
+          * (optional) An event that fires on item select
+         */
+        "onItemSelect"?: (event: CustomEvent<any>) => void;
+    }
+    interface ModusListItem {
+        /**
+          * (optional) An event that fires on item click
+         */
+        "onItemClick"?: (event: CustomEvent<any>) => void;
+        /**
+          * (optional) The selected state of the item
+         */
+        "selected"?: boolean;
+        /**
+          * (optional) The size of list item
+         */
+        "size"?: 'condensed' | 'standard';
+        /**
+          * (optional) The type of list item
+         */
+        "type"?: 'standard';
+    }
     interface IntrinsicElements {
         "modus-button": ModusButton;
+        "modus-dropdown": ModusDropdown;
+        "modus-list-item": ModusListItem;
     }
 }
 export { LocalJSX as JSX };
@@ -60,6 +124,8 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "modus-button": LocalJSX.ModusButton & JSXBase.HTMLAttributes<HTMLModusButtonElement>;
+            "modus-dropdown": LocalJSX.ModusDropdown & JSXBase.HTMLAttributes<HTMLModusDropdownElement>;
+            "modus-list-item": LocalJSX.ModusListItem & JSXBase.HTMLAttributes<HTMLModusListItemElement>;
         }
     }
 }
