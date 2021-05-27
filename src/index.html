@@ -7,11 +7,24 @@
 
     <script type="module" src="/build/modus-web-components.esm.js"></script>
     <script nomodule src="/build/modus-web-components.js"></script>
+
+    <!--Load Modus icons-->
+    <link rel="stylesheet" href="https://modus.trimble.com/assets/0.5.0/fonts/modus-icons.css">
+
+    <!--Manually load Modus font-family-->
+    <link rel="stylesheet" src="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+    <style>
+      body {
+        font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      }
+    </style>
   </head>
   <body>
     <h2>Modus Web Components</h2>
     <hr>
-    <h4>Button</h4>
+    <h4>modus-button</h4>
     <modus-button>Button</modus-button>
+    <h4>modus-list-item</h4>
+    <modus-list-item>List Item</modus-list-item>
   </body>
 </html>
