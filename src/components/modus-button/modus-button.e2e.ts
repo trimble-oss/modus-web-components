@@ -59,4 +59,19 @@ describe('modus-button', () => {
     await page.waitForChanges();
     expect(buttonClick).toHaveReceivedEvent();
   });
+
+  it('does not emit buttonClick event on disabled button click', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-button></modus-button>');
+    const buttonClick = await page.spyOnEvent('buttonClick');
+    const component = await page.find('modus-button');
+    const element = await page.find('modus-button >>> button');
+    component.setProperty('disabled', true);
+    await page.waitForChanges();
+
+    await element.click();
+    await page.waitForChanges();
+    expect(buttonClick).not.toHaveReceivedEvent();
+  });
 });

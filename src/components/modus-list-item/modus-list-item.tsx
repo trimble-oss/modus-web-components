@@ -7,7 +7,10 @@ import { Component, Prop, h, Event, EventEmitter } from '@stencil/core';
   shadow: true,
 })
 export class ModusListItem {
-  /** (optional) The selected state of the item */
+  /** (optional) Disables the list item */
+  @Prop() disabled: boolean;
+
+  /** (optional) The selected state of the list item */
   @Prop() selected: boolean;
 
   /** (optional) The size of list item */
@@ -16,7 +19,7 @@ export class ModusListItem {
   /** (optional) The type of list item */
   @Prop() type: 'standard' = 'standard'; // Future support for 'checkbox' | 'icon' | 'menu' | 'standard' | 'switchLeft' | 'switchRight'
 
-  /** (optional) An event that fires on item click */
+  /** (optional) An event that fires on list item click */
   @Event() itemClick: EventEmitter;
 
   classBySize: Map<string, string> = new Map([
@@ -25,10 +28,10 @@ export class ModusListItem {
   ]);
 
   render(): unknown {
-    const containerClass = `${this.classBySize.get(this.size)} ${this.selected ? 'selected' : ''}`;
+    const containerClass = `${this.classBySize.get(this.size)} ${this.disabled ? 'disabled' : ''} ${this.selected ? 'selected' : ''}`;
 
     return (
-      <li class={containerClass} onClick={() => this.itemClick.emit()}>
+      <li class={containerClass} onClick={() => !this.disabled ? this.itemClick.emit() : null}>
         <slot />
         {this.selected ? <i class="modus-icons selected-icon">check</i> : null}
       </li>

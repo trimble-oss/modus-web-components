@@ -26,9 +26,15 @@ export namespace Components {
          */
         "disabled": boolean;
     }
+    interface ModusList {
+    }
     interface ModusListItem {
         /**
-          * (optional) The selected state of the item
+          * (optional) Disables the list item
+         */
+        "disabled": boolean;
+        /**
+          * (optional) The selected state of the list item
          */
         "selected": boolean;
         /**
@@ -54,6 +60,12 @@ declare global {
         prototype: HTMLModusDropdownElement;
         new (): HTMLModusDropdownElement;
     };
+    interface HTMLModusListElement extends Components.ModusList, HTMLStencilElement {
+    }
+    var HTMLModusListElement: {
+        prototype: HTMLModusListElement;
+        new (): HTMLModusListElement;
+    };
     interface HTMLModusListItemElement extends Components.ModusListItem, HTMLStencilElement {
     }
     var HTMLModusListItemElement: {
@@ -63,6 +75,7 @@ declare global {
     interface HTMLElementTagNameMap {
         "modus-button": HTMLModusButtonElement;
         "modus-dropdown": HTMLModusDropdownElement;
+        "modus-list": HTMLModusListElement;
         "modus-list-item": HTMLModusListItemElement;
     }
 }
@@ -95,13 +108,19 @@ declare namespace LocalJSX {
          */
         "onItemSelect"?: (event: CustomEvent<any>) => void;
     }
+    interface ModusList {
+    }
     interface ModusListItem {
         /**
-          * (optional) An event that fires on item click
+          * (optional) Disables the list item
+         */
+        "disabled"?: boolean;
+        /**
+          * (optional) An event that fires on list item click
          */
         "onItemClick"?: (event: CustomEvent<any>) => void;
         /**
-          * (optional) The selected state of the item
+          * (optional) The selected state of the list item
          */
         "selected"?: boolean;
         /**
@@ -116,6 +135,7 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "modus-button": ModusButton;
         "modus-dropdown": ModusDropdown;
+        "modus-list": ModusList;
         "modus-list-item": ModusListItem;
     }
 }
@@ -125,6 +145,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "modus-button": LocalJSX.ModusButton & JSXBase.HTMLAttributes<HTMLModusButtonElement>;
             "modus-dropdown": LocalJSX.ModusDropdown & JSXBase.HTMLAttributes<HTMLModusDropdownElement>;
+            "modus-list": LocalJSX.ModusList & JSXBase.HTMLAttributes<HTMLModusListElement>;
             "modus-list-item": LocalJSX.ModusListItem & JSXBase.HTMLAttributes<HTMLModusListItemElement>;
         }
     }
