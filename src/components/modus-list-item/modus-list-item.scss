@@ -3,7 +3,6 @@
 li {
   align-items: center;
   border: 1px solid $col_gray_0;
-  border-radius: 2px 2px 0 0;
   display: flex;
   font-size: $rem-16px;
   min-height: $list-group-item-height;
@@ -26,6 +25,12 @@ li {
     .selected-icon {
       font-size: $rem-16px !important;
     }
+  }
+
+  &.disabled {
+    background-color: $col_gray_1;
+    border-color: $col_gray_1;
+    opacity: .7;
   }
 
   &.selected {

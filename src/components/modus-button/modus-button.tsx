@@ -37,7 +37,7 @@ export class ModusButton {
     const className = `${this.classBySize.get(this.size)} ${this.classByType.get(this.type)}`;
 
     return (
-      <button class={className} disabled={this.disabled} onClick={() => this.buttonClick.emit()}>
+      <button class={className} disabled={this.disabled} onClick={() => !this.disabled ? this.buttonClick.emit() : null}>
         <slot />
       </button>
     );
