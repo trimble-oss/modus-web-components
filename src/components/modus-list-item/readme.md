@@ -7,18 +7,19 @@
 
 ## Properties
 
-| Property   | Attribute  | Description                               | Type                        | Default      |
-| ---------- | ---------- | ----------------------------------------- | --------------------------- | ------------ |
-| `selected` | `selected` | (optional) The selected state of the item | `boolean`                   | `undefined`  |
-| `size`     | `size`     | (optional) The size of list item          | `"condensed" \| "standard"` | `'standard'` |
-| `type`     | `type`     | (optional) The type of list item          | `"standard"`                | `'standard'` |
+| Property   | Attribute  | Description                                    | Type                        | Default      |
+| ---------- | ---------- | ---------------------------------------------- | --------------------------- | ------------ |
+| `disabled` | `disabled` | (optional) Disables the list item              | `boolean`                   | `undefined`  |
+| `selected` | `selected` | (optional) The selected state of the list item | `boolean`                   | `undefined`  |
+| `size`     | `size`     | (optional) The size of list item               | `"condensed" \| "standard"` | `'standard'` |
+| `type`     | `type`     | (optional) The type of list item               | `"standard"`                | `'standard'` |
 
 
 ## Events
 
-| Event       | Description                                  | Type               |
-| ----------- | -------------------------------------------- | ------------------ |
-| `itemClick` | (optional) An event that fires on item click | `CustomEvent<any>` |
+| Event       | Description                                       | Type               |
+| ----------- | ------------------------------------------------- | ------------------ |
+| `itemClick` | (optional) An event that fires on list item click | `CustomEvent<any>` |
 
 
 ----------------------------------------------
