@@ -32,7 +32,7 @@ export class ModusListItem {
 
     return (
       <li class={containerClass} onClick={() => !this.disabled ? this.itemClick.emit() : null}>
-        <slot />
+        <span class="slot"><slot /></span>
         {this.selected ? <i class="modus-icons selected-icon">check</i> : null}
       </li>
     );
