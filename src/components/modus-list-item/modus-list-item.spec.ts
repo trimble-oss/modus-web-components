@@ -11,7 +11,9 @@ describe('modus-list-item', () => {
       <modus-list-item>
         <mock:shadow-root>
           <li class='standard'>
-            <slot></slot>
+            <span class='slot'>
+              <slot></slot>
+            </span>
           </li>
         </mock:shadow-root>
       </modus-list-item>
@@ -27,7 +29,9 @@ describe('modus-list-item', () => {
       <modus-list-item>
         <mock:shadow-root>
           <li class='standard'>
-            <slot></slot>
+            <span class='slot'>
+              <slot></slot>
+            </span>
           </li>
         </mock:shadow-root>
         List Item

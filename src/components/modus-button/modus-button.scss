@@ -1,8 +1,9 @@
 button {
+  align-items: center;
   border: 1px solid transparent;
   border-radius: 2px;
   cursor: pointer;
-  display: inline-block;
+  display: inline-flex;
   font-weight: $btn-font-weight;
   text-align: center;
   transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
