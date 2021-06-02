@@ -19,6 +19,7 @@ This library provides Modus Elements as web components. Web components are reusa
 - [Components](#components)
   - **Implemented**
     - [modus-button](src/components/modus-button/readme.md)
+    - [modus-dropdown](src/components/modus-dropdown/readme.md)
     - [modus-list](src/components/modus-list/readme.md)
     - [modus-list-item](src/components/modus-list-item/readme.md)
   - **Not Implemented**
@@ -29,7 +30,6 @@ This library provides Modus Elements as web components. Web components are reusa
     - [Card](#card)
     - [Chip](#chip)
     - [Dialog](#dialog)
-    - [Dropdown](#dropdown)
     - [Input Checkbox](#input-checkbox)
     - [Input Date](#input-date)
     - [Input Number](#input-number)
