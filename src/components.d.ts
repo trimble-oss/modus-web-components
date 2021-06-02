@@ -22,9 +22,17 @@ export namespace Components {
     }
     interface ModusDropdown {
         /**
-          * (optional) Disables the button
+          * (optional) Disables the dropdown
          */
         "disabled": boolean;
+        /**
+          * (optional) The placement of the dropdown in related to the toggleElement
+         */
+        "placement": 'top' | 'right' | 'bottom' | 'left';
+        /**
+          * (required) The element id that the list renders near and that triggers the toggling of the list
+         */
+        "toggleElementId": string;
     }
     interface ModusList {
     }
@@ -100,13 +108,21 @@ declare namespace LocalJSX {
     }
     interface ModusDropdown {
         /**
-          * (optional) Disables the button
+          * (optional) Disables the dropdown
          */
         "disabled"?: boolean;
         /**
-          * (optional) An event that fires on item select
+          * (optional) An event that fires on dropdown close
          */
-        "onItemSelect"?: (event: CustomEvent<any>) => void;
+        "onDropdownClose"?: (event: CustomEvent<any>) => void;
+        /**
+          * (optional) The placement of the dropdown in related to the toggleElement
+         */
+        "placement"?: 'top' | 'right' | 'bottom' | 'left';
+        /**
+          * (required) The element id that the list renders near and that triggers the toggling of the list
+         */
+        "toggleElementId"?: string;
     }
     interface ModusList {
     }

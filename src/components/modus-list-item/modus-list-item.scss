@@ -2,11 +2,18 @@
 
 li {
   align-items: center;
+  background-color: $col_white;
   border: 1px solid $col_gray_0;
   display: flex;
   font-size: $rem-16px;
   min-height: $list-group-item-height;
   padding: $rem-2px $rem-16px;
+
+  .slot {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 
   .selected-icon {
     font-size: $rem-20px;
