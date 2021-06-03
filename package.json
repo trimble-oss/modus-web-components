@@ -1,7 +1,14 @@
 {
-  "name": "modus-web-components",
+  "name": "@trimble-oss/modus-web-components",
   "version": "0.0.1",
   "description": "Trimble Modus Web Component Library",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/trimble-oss/modus-web-components"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/trimble-oss"
+  },
   "main": "dist/index.cjs.js",
   "module": "dist/custom-elements/index.js",
   "es2015": "dist/esm/index.mjs",
