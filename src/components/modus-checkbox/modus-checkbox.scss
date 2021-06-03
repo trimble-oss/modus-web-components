@@ -1,0 +1,81 @@
+.modus-checkbox {
+  align-items: center;
+  color: $col_trimble_gray;
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: row;
+  font-size: $label-font-size;
+  height: 2rem;
+  text-align: center;
+  white-space: nowrap;
+
+  .checkbox {
+    align-items: center;
+    border: 2px solid $col_gray_6;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    margin: 0 .28rem;
+    transition: background-color .15s ease-in-out;
+
+    &.checked {
+      background-color: $col_trimble_blue_mid;
+      border: 2px solid $col_trimble_blue_mid;
+    }
+
+    &.disabled {
+      background-color: $col_gray_5;
+      border: 2px solid $col_gray_5;
+    }
+
+    svg {
+      transform: scale(0);
+      transition: transform .25s ease-in-out;
+      visibility: hidden;
+
+      &.checked {
+        transform: scale(1);
+        visibility: visible;
+      }
+    }
+  }
+
+  input {
+    display: none;
+  }
+
+  label {
+    align-items: center;
+    display: flex;
+
+    &.disabled {
+      color: $col_gray_9;
+    }
+  }
+
+  &.medium {
+    height: $rem-24px;
+
+    .checkbox {
+      height: $rem-16px;
+      width: $rem-16px;
+    }
+  }
+
+  &.small {
+    height: $rem-18px;
+
+    .checkbox {
+      height: $rem-12px;
+      width: $rem-12px;
+    }
+  }
+
+  &:hover {
+    .checkbox {
+      &:not(.checked):not(.disabled) {
+        border: 2px solid $col_gray_8;
+      }
+    }
+  }
+}
