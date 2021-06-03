@@ -5,7 +5,7 @@ describe('modus-checkbox', () => {
   it('renders', async () => {
     const page = await newSpecPage({
       components: [ModusCheckbox],
-      html: `<modus-checkbox></modus-checkbox>`,
+      html: '<modus-checkbox></modus-checkbox>',
     });
     expect(page.root).toEqualHtml(`
       <modus-checkbox>
