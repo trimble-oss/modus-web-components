@@ -73,7 +73,7 @@
 
   &:hover {
     .checkbox {
-      &:not(.checked) {
+      &:not(.checked):not(.disabled) {
         border: 2px solid $col_gray_8;
       }
     }
