@@ -56,6 +56,9 @@ describe('modus-checkbox', () => {
     const input = await page.find('modus-checkbox >>> input');
     expect(input).toHaveAttribute('disabled');
 
+    const checkbox = await page.find('modus-checkbox >>> .checkbox');
+    expect(checkbox).toHaveClass('disabled');
+
     const label = await page.find('modus-checkbox >>> label');
     expect(label).toHaveClass('disabled');
   });

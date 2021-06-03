@@ -46,8 +46,8 @@ export class ModusCheckbox {
 
     return (
       <div class={className} onClick={() => this.handleCheckboxClick()}>
-        <div class={this.checked ? 'checkbox checked' : 'checkbox' }>
-          <svg width="12" height="10" viewBox="0 0 12 10" fill="none" class={this.checked ? 'checked' : null}>
+        <div class={`${this.checked ? 'checkbox checked' : 'checkbox'} ${this.disabled ? 'disabled' : ''}`}>
+          <svg width="12" height="10" viewBox="0 0 12 10" fill="none" class={this.checked ? 'checked' : ''}>
             <path d="M3.81353 7.21774L0.968732 4.37294L0 5.33485L3.81353 9.14838L12 0.96191L11.0381 0L3.81353 7.21774Z" fill="white"/>
           </svg>
         </div>

@@ -23,6 +23,11 @@
       border: 2px solid $col_trimble_blue_mid;
     }
 
+    &.disabled {
+      background-color: $col_gray_5;
+      border: 2px solid $col_gray_5;
+    }
+
     svg {
       transform: scale(0);
       transition: transform .25s ease-in-out;
