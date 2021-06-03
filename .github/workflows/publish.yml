@@ -18,9 +18,9 @@ jobs:
         uses: actions/setup-node@v2.1.5
         with:
           node-version: '12.x'
-          registry-url: 'https://github.com/trimble-oss/modus-web-components/packages'
+          registry-url: 'https://npm.pkg.github.com'
           # Defaults to the user or organization that owns the workflow file
-          scope: 'trimble-oss'
+          scope: '@trimble-oss'
       - name: Install dependencies
         run: npm ci
       - name: Publish GitHub Package
