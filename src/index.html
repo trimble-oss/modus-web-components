@@ -7,14 +7,45 @@
 
     <script type="module" src="/build/modus-web-components.esm.js"></script>
     <script nomodule src="/build/modus-web-components.js"></script>
+
+    <!--Load Modus icons-->
+    <link rel="stylesheet" href="https://modus.trimble.com/assets/0.5.0/fonts/modus-icons.css">
+
+    <!--Manually load Modus font-family-->
+    <link rel="stylesheet" src="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+    <style>
+      body {
+        font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      }
+    </style>
   </head>
   <body>
     <h2>Modus Web Components</h2>
     <hr>
-    <h4>Button</h4>
+
+    <h4>modus-button</h4>
     <modus-button>Button</modus-button>
-    <hr>
-    <h4>Checkbox</h4>
-    <modus-checkbox label="Checkbox"></modus-checkbox>
+
+    <h4>modus-dropdown</h4>
+    <modus-dropdown toggle-element-id="dropdown-button">
+      <modus-button id="dropdown-button" slot="dropdownToggle">Dropdown</modus-button>
+      <modus-list slot="dropdownList">
+        <modus-list-item size="condensed">Item 1</modus-list-item>
+        <modus-list-item size="condensed">Item 2</modus-list-item>
+        <modus-list-item size="condensed">Item 3</modus-list-item>
+        <modus-list-item size="condensed">Item 4</modus-list-item>
+        <modus-list-item size="condensed">Item 5</modus-list-item>
+      </modus-list>
+    </modus-dropdown>
+
+    <h4>modus-list</h4>
+    <modus-list>
+        <modus-list-item>Item 1</modus-list-item>
+        <modus-list-item selected="true">Item 2</modus-list-item>
+        <modus-list-item>Item 3</modus-list-item>
+    </modus-list>
+
+    <h4>modus-list-item</h4>
+    <modus-list-item>List Item</modus-list-item>
   </body>
 </html>

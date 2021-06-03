@@ -1,0 +1,30 @@
+:host {
+  position: relative;
+
+  .dropdown-list {
+    display: none;
+    max-height: 200px;
+    max-width: 300px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: absolute;
+    z-index: 1;
+
+    &.visible {
+      display: block;
+    }
+
+    &.top {
+      bottom: 0;
+    }
+
+    &.right {
+      top: 0;
+    }
+
+    &.left {
+      right: 0;
+      top: 0;
+    }
+  }
+}

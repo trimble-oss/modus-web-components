@@ -18,27 +18,40 @@ This library provides Modus Elements as web components. Web components are reusa
 - [Technology](#technology)
 - [Components](#components)
   - **Implemented**
-    - [Button](src/components/modus-button/readme.md)
+    - [modus-button](src/components/modus-button/readme.md)
+    - [modus-dropdown](src/components/modus-dropdown/readme.md)
+    - [modus-list](src/components/modus-list/readme.md)
+    - [modus-list-item](src/components/modus-list-item/readme.md)
   - **Not Implemented**
     - [Accordion](#accordion)
     - [Alert](#alert)
     - [Badge](#badge)
     - [Breadcrumb](#breadcrumb)
-    - [Checkbox](#checkbox)
+    - [Card](#card)
     - [Chip](#chip)
     - [Dialog](#dialog)
-    - [Dropdown](#dropdown)
+    - [Input Checkbox](#input-checkbox)
+    - [Input Date](#input-date)
+    - [Input Number](#input-number)
+    - [Input Radio](#input-radio)
+    - [Input Select](#input-select)
+    - [Input Text](#input-text)
+    - [Message](#message)
+    - [Pagination](#pagination)
     - [Pattern](#pattern)
-    - [Radio](#radio)
+    - [Progress Bar](#progress-bar)
+    - [Slider](#slider)
+    - [Spinner](#spinner)
     - [Switch](#switch)
     - [Table/List](#table/list)
     - [Table/Sheet](#table/sheet)
     - [Tab](#tab)
-    - [Text Input](#text-input)
     - [Toast](#toast)
     - [Tooltip](#tooltip)
   
 ## Getting Started
+
+###Contribution
 
 If this is your first time in the project, run `npm install` to download 3rd party packages.
 
@@ -47,6 +60,13 @@ All web components are located under the src/components directory.
 The index.html file provides a place to render components for development and end to end testing.
 
 Global SCSS files are available to provide Modus colors, variables and functions for component styling.
+
+###Implementation
+
+Stencil web component implementation details can be found in their [Framework Integration Docs](https://stenciljs.com/docs/overview).
+
+If you need to use form input web components (eg modus-checkbox, modus-text-input, etc) there are many good examples online. 
+We won't cover them here as they are often very specific to an individual SPA framework.
 
 ## Available Scripts
 

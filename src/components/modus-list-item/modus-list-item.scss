@@ -1,0 +1,47 @@
+@import url("https://modus.trimble.com/assets/0.5.0/fonts/modus-icons.css");
+
+li {
+  align-items: center;
+  background-color: $col_white;
+  border: 1px solid $col_gray_0;
+  display: flex;
+  font-size: $rem-16px;
+  min-height: $list-group-item-height;
+  padding: $rem-2px $rem-16px;
+
+  .slot {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .selected-icon {
+    font-size: $rem-20px;
+    margin-left: auto;
+  }
+
+  &:hover {
+    background-color: $col_gray_0;
+  }
+
+  &.small {
+    font-size: $rem-12px;
+    min-height: $list-group-item-height-sm;
+    padding: $rem-3px $rem-12px;
+
+    .selected-icon {
+      font-size: $rem-16px !important;
+    }
+  }
+
+  &.disabled {
+    background-color: $col_gray_1;
+    border-color: $col_gray_1;
+    opacity: .7;
+  }
+
+  &.selected {
+    background-color: $col_blue_pale;
+    border-color: $col_blue_pale;
+  }
+}
