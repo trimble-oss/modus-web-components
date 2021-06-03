@@ -1,8 +1,8 @@
-.container {
+.modus-checkbox {
   align-items: center;
   color: $col_trimble_gray;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   font-size: $label-font-size;
   height: 2rem;
@@ -74,11 +74,3 @@
     }
   }
 }
-
-// Checked
-
-// Hover
-
-// Focused
-
-// Mixed

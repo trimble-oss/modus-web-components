@@ -30,8 +30,10 @@ export class ModusCheckbox {
   ]);
 
   handleCheckboxClick(): void {
-    this.updateChecked();
-    this.checkboxClick.emit(this.checked);
+    if (!this.disabled) {
+      this.updateChecked();
+      this.checkboxClick.emit(this.checked);
+    }
   }
 
   updateChecked(): void {
@@ -40,12 +42,12 @@ export class ModusCheckbox {
   }
 
   render(): unknown {
-    const className = `container ${this.classBySize?.get(this.size)}`;
+    const className = `modus-checkbox ${this.classBySize?.get(this.size)}`;
 
     return (
       <div class={className} onClick={() => this.handleCheckboxClick()}>
         <div class={this.checked ? 'checkbox checked' : 'checkbox' }>
-          <svg width="12" height="10" viewBox="0 0 12 10" fill="none" class={this.checked ? 'checked' : null} xmlns="http://www.w3.org/2000/svg">
+          <svg width="12" height="10" viewBox="0 0 12 10" fill="none" class={this.checked ? 'checked' : null}>
             <path d="M3.81353 7.21774L0.968732 4.37294L0 5.33485L3.81353 9.14838L12 0.96191L11.0381 0L3.81353 7.21774Z" fill="white"/>
           </svg>
         </div>
@@ -55,7 +57,7 @@ export class ModusCheckbox {
           ref={(el) => this.checkboxInput = el as HTMLInputElement}
           type="checkbox">
         </input>
-        {this.label ? <label class={this.disabled ? 'ourCrazyLabel disabled' : null}>{this.label}</label> : null}
+        {this.label ? <label class={this.disabled ? 'disabled' : null}>{this.label}</label> : null}
       </div>
     );
   }

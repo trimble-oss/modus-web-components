@@ -10,9 +10,9 @@ describe('modus-checkbox', () => {
     expect(page.root).toEqualHtml(`
       <modus-checkbox>
         <mock:shadow-root>
-            <div class="container medium">
+            <div class="modus-checkbox medium">
                 <div class="checkbox">
-                    <svg fill="none" height="10" viewBox="0 0 12 10" width="12" xmlns="http://www.w3.org/2000/svg">
+                    <svg fill="none" height="10" viewBox="0 0 12 10" width="12">
                         <path d="M3.81353 7.21774L0.968732 4.37294L0 5.33485L3.81353 9.14838L12 0.96191L11.0381 0L3.81353 7.21774Z" fill="white"></path>
                     </svg>
                 </div>
