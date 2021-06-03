@@ -17,7 +17,7 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.1.5
         with:
-          node-version: '14.x'
+          node-version: '12.x'
           registry-url: 'https://github.com/trimble-oss/modus-web-components/packages'
           # Defaults to the user or organization that owns the workflow file
           scope: 'trimble-oss'
