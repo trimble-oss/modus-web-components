@@ -92,7 +92,7 @@ declare namespace LocalJSX {
         /**
           * An event that fires on checkbox click.
          */
-        "onCheckboxClick"?: (event: CustomEvent<any>) => void;
+        "onCheckboxClick"?: (event: CustomEvent<boolean>) => void;
         /**
           * (optional) The size of the button
          */

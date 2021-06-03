@@ -1,9 +1,10 @@
+// eslint-disable-next-line
 import { Component, Prop, h, Event, EventEmitter } from '@stencil/core';
 
 @Component({
   tag: 'modus-checkbox',
   styleUrl: 'modus-checkbox.scss',
-  shadow: true
+  shadow: true,
 })
 export class ModusCheckbox {
   /** (optional) Whether the checkbox is checked. */
@@ -19,37 +20,42 @@ export class ModusCheckbox {
   @Prop() size: 'small' | 'medium' = 'medium'
 
   /** An event that fires on checkbox click. */
-  @Event() checkboxClick: EventEmitter;
+  @Event() checkboxClick: EventEmitter<boolean>;
 
   checkboxInput: HTMLInputElement;
-
-  handleCheckboxClick(): void {
-    this.updateChecked();
-    this.checkboxClick.emit();
-  }
-
-  updateChecked(): void {
-    this.checked = this.checkboxInput.checked;
-  }
 
   classBySize: Map<string, string> = new Map([
     ['small', 'small'],
     ['medium', 'medium']
   ]);
 
-  render() {
-    const className = `container ${this.classBySize.get(this.size)}`;
+  handleCheckboxClick(): void {
+    this.updateChecked();
+    this.checkboxClick.emit(this.checked);
+  }
+
+  updateChecked(): void {
+    this.checked = !this.checked;
+    this.checkboxInput.checked = this.checked;
+  }
+
+  render(): unknown {
+    const className = `container ${this.classBySize?.get(this.size)}`;
 
     return (
-      <div class={className}>
+      <div class={className} onClick={() => this.handleCheckboxClick()}>
+        <div class={this.checked ? 'checkbox checked' : 'checkbox' }>
+          <svg width="12" height="10" viewBox="0 0 12 10" fill="none" class={this.checked ? 'checked' : null} xmlns="http://www.w3.org/2000/svg">
+            <path d="M3.81353 7.21774L0.968732 4.37294L0 5.33485L3.81353 9.14838L12 0.96191L11.0381 0L3.81353 7.21774Z" fill="white"/>
+          </svg>
+        </div>
         <input
-          type="checkbox"
           checked={this.checked}
           disabled={this.disabled}
-          onClick={() => this.handleCheckboxClick()}
-          ref={(el) => this.checkboxInput = el as HTMLInputElement}>
+          ref={(el) => this.checkboxInput = el as HTMLInputElement}
+          type="checkbox">
         </input>
-        {this.label ? <div class={this.disabled ? 'disabled' : null}>{this.label}</div> : null}
+        {this.label ? <label class={this.disabled ? 'ourCrazyLabel disabled' : null}>{this.label}</label> : null}
       </div>
     );
   }

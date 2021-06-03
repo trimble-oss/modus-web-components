@@ -1,6 +1,7 @@
 .container {
   align-items: center;
   color: $col_trimble_gray;
+  cursor: pointer;
   display: flex;
   flex-direction: row;
   font-size: $label-font-size;
@@ -8,11 +9,37 @@
   text-align: center;
   white-space: nowrap;
 
-  input {
+  .checkbox {
+    align-items: center;
+    border: 2px solid $col_gray_6;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
     margin: 0 .28rem;
+    transition: background-color .15s ease-in-out;
+
+    &.checked {
+      background-color: $col_trimble_blue_mid;
+      border: 2px solid $col_trimble_blue_mid;
+    }
+
+    svg {
+      transform: scale(0);
+      transition: transform .25s ease-in-out;
+      visibility: hidden;
+
+      &.checked {
+        transform: scale(1);
+        visibility: visible;
+      }
+    }
   }
 
-  div {
+  input {
+    display: none;
+  }
+
+  label {
     align-items: center;
     display: flex;
 
@@ -24,7 +51,7 @@
   &.medium {
     height: $rem-24px;
 
-    input {
+    .checkbox {
       height: $rem-16px;
       width: $rem-16px;
     }
@@ -33,9 +60,17 @@
   &.small {
     height: $rem-18px;
 
-    input {
+    .checkbox {
       height: $rem-12px;
       width: $rem-12px;
+    }
+  }
+
+  &:hover {
+    .checkbox {
+      &:not(.checked) {
+        border: 2px solid $col_gray_8;
+      }
     }
   }
 }
