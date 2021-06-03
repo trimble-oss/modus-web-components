@@ -1,7 +1,5 @@
 name: Create and publish NPM package
 on:
-  pull_request:
-    branches: [ main ]
   release:
     types: [ created ]
 jobs:

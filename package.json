@@ -1,5 +1,5 @@
 {
-  "name": "modus-web-components",
+  "name": "@trimble-oss/modus-web-components",
   "version": "0.0.1",
   "description": "Trimble Modus Web Component Library",
   "repository": {
