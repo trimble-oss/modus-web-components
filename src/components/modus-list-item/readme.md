@@ -17,9 +17,9 @@
 
 ## Events
 
-| Event       | Description                                       | Type               |
-| ----------- | ------------------------------------------------- | ------------------ |
-| `itemClick` | (optional) An event that fires on list item click | `CustomEvent<any>` |
+| Event       | Description                            | Type               |
+| ----------- | -------------------------------------- | ------------------ |
+| `itemClick` | An event that fires on list item click | `CustomEvent<any>` |
 
 
 ----------------------------------------------
