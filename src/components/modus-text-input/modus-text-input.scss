@@ -1,0 +1,121 @@
+@import url("https://modus.trimble.com/assets/0.5.0/fonts/modus-icons.css");
+
+.modus-text-input {
+  display: inline-flex;
+  flex-direction: column;
+
+  label {
+    color: $col_trimble_gray;
+    font-size: $rem-12px;
+    margin-bottom: $rem-4px;
+
+    span {
+      color: $col_gray_6;
+      margin: $rem-4px;
+    }
+  }
+
+  .label-container {
+    display: flex;
+
+    .required {
+      margin-left: $rem-4px;
+    }
+  }
+
+  .input-container {
+    align-items: center;
+    background-color: $col_white;
+    border-width: 0 0 $rem-2px 0;
+    display: flex;
+    flex-direction: row;
+    height: 2rem;
+
+    svg {
+      padding: 0 $rem-6px;
+    }
+
+    input {
+      border: $col_white;
+      font-size: $rem-14px;
+      outline: none;
+      padding-left: $rem-8px;
+
+      &.has-icon {
+        padding-left: 0;
+      }
+
+      &::placeholder {
+        color: $col_gray_5;
+        font-style: italic;
+      }
+    }
+
+    .modus-icons {
+      align-items: center;
+      background-color: $col_white;
+      color: $col_gray_6;
+      display: flex;
+      font-size: $rem-16px;
+      justify-content: center;
+      width: $rem-24px;
+
+      &.clear {
+        cursor: pointer;
+
+        &:hover {
+          color: $col_gray_8;
+        }
+      }
+    }
+
+    &:focus-within {
+      border: solid $col_trimble_blue;
+      border-width: 0 0 $rem-2px 0;
+    }
+
+    &.error {
+      border: solid $col_red;
+      border-width: 0 0 $rem-2px 0;
+    }
+  }
+
+  label {
+    &.error {
+      color: $col_red;
+    }
+  }
+
+  span {
+    &.required {
+      color: $col_red;
+    }
+  }
+
+  &.disabled {
+    .input-container {
+      background-color: $col_gray_5;
+
+      .modus-icons {
+        background-color: $col_gray_5;
+      }
+
+      input {
+        background-color: $col_gray_5;
+        border-radius: 0;
+      }
+
+      .modus-icons {
+        cursor: default;
+
+        &.clear {
+          color: $col_gray_5;
+
+          &.hover {
+            color: $col_gray_5;
+          }
+        }
+      }
+    }
+  }
+}
