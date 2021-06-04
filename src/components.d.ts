@@ -72,6 +72,40 @@ export namespace Components {
          */
         "type": 'standard';
     }
+    interface ModusTextInput {
+        /**
+          * (optional) Whether the text input has a clear button.
+         */
+        "clearable": boolean;
+        /**
+          * (optional) Whether the text input is disabled.
+         */
+        "disabled": boolean;
+        /**
+          * (optional) The text input's error text.
+         */
+        "error": string;
+        /**
+          * (optional) Whether the search icon is included.
+         */
+        "includeSearchIcon": boolean;
+        /**
+          * (optional) The text input label.
+         */
+        "label": string;
+        /**
+          * (optional) The text input placeholder text.
+         */
+        "placeholder": string;
+        /**
+          * (optional) Whether the input is required.
+         */
+        "required": boolean;
+        /**
+          * (optional) The text input value.
+         */
+        "value": string;
+    }
 }
 declare global {
     interface HTMLModusButtonElement extends Components.ModusButton, HTMLStencilElement {
@@ -104,12 +138,19 @@ declare global {
         prototype: HTMLModusListItemElement;
         new (): HTMLModusListItemElement;
     };
+    interface HTMLModusTextInputElement extends Components.ModusTextInput, HTMLStencilElement {
+    }
+    var HTMLModusTextInputElement: {
+        prototype: HTMLModusTextInputElement;
+        new (): HTMLModusTextInputElement;
+    };
     interface HTMLElementTagNameMap {
         "modus-button": HTMLModusButtonElement;
         "modus-checkbox": HTMLModusCheckboxElement;
         "modus-dropdown": HTMLModusDropdownElement;
         "modus-list": HTMLModusListElement;
         "modus-list-item": HTMLModusListItemElement;
+        "modus-text-input": HTMLModusTextInputElement;
     }
 }
 declare namespace LocalJSX {
@@ -195,12 +236,48 @@ declare namespace LocalJSX {
          */
         "type"?: 'standard';
     }
+    interface ModusTextInput {
+        /**
+          * (optional) Whether the text input has a clear button.
+         */
+        "clearable"?: boolean;
+        /**
+          * (optional) Whether the text input is disabled.
+         */
+        "disabled"?: boolean;
+        /**
+          * (optional) The text input's error text.
+         */
+        "error"?: string;
+        /**
+          * (optional) Whether the search icon is included.
+         */
+        "includeSearchIcon"?: boolean;
+        /**
+          * (optional) The text input label.
+         */
+        "label"?: string;
+        "onValueChange"?: (event: CustomEvent<string>) => void;
+        /**
+          * (optional) The text input placeholder text.
+         */
+        "placeholder"?: string;
+        /**
+          * (optional) Whether the input is required.
+         */
+        "required"?: boolean;
+        /**
+          * (optional) The text input value.
+         */
+        "value"?: string;
+    }
     interface IntrinsicElements {
         "modus-button": ModusButton;
         "modus-checkbox": ModusCheckbox;
         "modus-dropdown": ModusDropdown;
         "modus-list": ModusList;
         "modus-list-item": ModusListItem;
+        "modus-text-input": ModusTextInput;
     }
 }
 export { LocalJSX as JSX };
@@ -212,6 +289,7 @@ declare module "@stencil/core" {
             "modus-dropdown": LocalJSX.ModusDropdown & JSXBase.HTMLAttributes<HTMLModusDropdownElement>;
             "modus-list": LocalJSX.ModusList & JSXBase.HTMLAttributes<HTMLModusListElement>;
             "modus-list-item": LocalJSX.ModusListItem & JSXBase.HTMLAttributes<HTMLModusListItemElement>;
+            "modus-text-input": LocalJSX.ModusTextInput & JSXBase.HTMLAttributes<HTMLModusTextInputElement>;
         }
     }
 }
