@@ -19,7 +19,9 @@
     display: flex;
 
     .required {
+      bottom: 1px;
       margin-left: $rem-4px;
+      position: relative;
     }
   }
 
