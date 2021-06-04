@@ -34,7 +34,7 @@ describe('modus-list-item', () => {
     await page.waitForChanges();
     const selectedIconElement = await page.find('modus-list-item >>> .selected-icon')
     expect(liElement).toHaveClass('selected');
-    expect(selectedIconElement).toHaveClass('modus-icons');
+    expect(selectedIconElement).toHaveClass('selected-icon');
   });
 
   it('renders changes to the size prop', async () => {
