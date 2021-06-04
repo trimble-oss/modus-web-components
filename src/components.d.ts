@@ -200,7 +200,7 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
-          * (optional) An event that fires on dropdown close
+          * An event that fires on dropdown close
          */
         "onDropdownClose"?: (event: CustomEvent<any>) => void;
         /**
@@ -220,7 +220,7 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
-          * (optional) An event that fires on list item click
+          * An event that fires on list item click
          */
         "onItemClick"?: (event: CustomEvent<any>) => void;
         /**
@@ -257,6 +257,9 @@ declare namespace LocalJSX {
           * (optional) The text input label.
          */
         "label"?: string;
+        /**
+          * An event that fires on text input value change.
+         */
         "onValueChange"?: (event: CustomEvent<string>) => void;
         /**
           * (optional) The text input placeholder text.

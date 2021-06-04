@@ -16,7 +16,7 @@ export class ModusDropdown {
   /** (required) The element id that the list renders near and that triggers the toggling of the list */
   @Prop() toggleElementId: string;
 
-  /** (optional) An event that fires on dropdown close */
+  /** An event that fires on dropdown close */
   @Event() dropdownClose: EventEmitter;
 
   @State() toggleElement: HTMLElement;

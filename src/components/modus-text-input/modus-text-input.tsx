@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import { Component, Event, EventEmitter, h, Prop, State, Watch } from '@stencil/core';
 
 @Component({
@@ -30,6 +31,7 @@ export class ModusTextInput {
   /** (optional) The text input value. */
   @Prop() value: string;
 
+  /** An event that fires on text input value change. */
   @Event() valueChange: EventEmitter<string>;
 
   @Watch('value')
@@ -53,6 +55,7 @@ export class ModusTextInput {
 
   handleOnInput(event: Event): void {
     const value = (event.currentTarget as HTMLInputElement).value;
+    this.value = value;
     this.showClear = !!value;
     this.valueChange.emit(value);
   }
@@ -75,7 +78,12 @@ export class ModusTextInput {
                  placeholder={this.placeholder}
                  ref={(el) => this.textInput = el as HTMLInputElement}
                  value={this.value}/>
-          {(this.clearable && this.showClear) ? <span class="modus-icons clear" onClick={() => this.handleClear()}>close</span> : <span class="modus-icons"></span>}
+          {(this.clearable && this.showClear) ?
+            <span class="modus-icons clear" onClick={() => this.handleClear()}>
+              <svg width="9" height="9" viewBox="0 0 9 9" fill="none">
+                <path d="M8.66667 0.872857L7.79381 0L4.33333 3.46048L0.872857 0L0 0.872857L3.46048 4.33333L0 7.79381L0.872857 8.66667L4.33333 5.20619L7.79381 8.66667L8.66667 7.79381L5.20619 4.33333L8.66667 0.872857Z" fill="#6A6976"/>
+              </svg>
+            </span> : <span class="modus-icons"></span>}
         </div>
         {this.error ? <label class="error">{this.error}</label> : null}
       </div>

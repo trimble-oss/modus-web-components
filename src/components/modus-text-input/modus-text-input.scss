@@ -56,7 +56,7 @@
     .modus-icons {
       align-items: center;
       background-color: $col_white;
-      color: $col_gray_6;
+      color: $col_gray_10;
       display: flex;
       font-size: $rem-16px;
       justify-content: center;
@@ -66,7 +66,19 @@
         cursor: pointer;
 
         &:hover {
-          color: $col_gray_8;
+          svg {
+            path {
+              fill: $col_gray_6;
+            }
+          }
+        }
+
+        &:active {
+          svg {
+            path {
+              fill: $col_trimble_gray;
+            }
+          }
         }
       }
     }
@@ -95,15 +107,17 @@
   }
 
   &.disabled {
+    pointer-events: none;
+
     .input-container {
-      background-color: $col_gray_5;
+      background-color: $col_gray_3;
 
       .modus-icons {
-        background-color: $col_gray_5;
+        background-color: $col_gray_3;
       }
 
       input {
-        background-color: $col_gray_5;
+        background-color: $col_gray_3;
         border-radius: 0;
       }
 
@@ -111,11 +125,7 @@
         cursor: default;
 
         &.clear {
-          color: $col_gray_5;
-
-          &.hover {
-            color: $col_gray_5;
-          }
+          visibility: hidden;
         }
       }
     }

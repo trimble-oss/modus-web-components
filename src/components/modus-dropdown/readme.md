@@ -16,9 +16,9 @@
 
 ## Events
 
-| Event           | Description                                      | Type               |
-| --------------- | ------------------------------------------------ | ------------------ |
-| `dropdownClose` | (optional) An event that fires on dropdown close | `CustomEvent<any>` |
+| Event           | Description                           | Type               |
+| --------------- | ------------------------------------- | ------------------ |
+| `dropdownClose` | An event that fires on dropdown close | `CustomEvent<any>` |
 
 
 ----------------------------------------------

@@ -5,7 +5,7 @@ describe('modus-text-input', () => {
   it('renders', async () => {
     const page = await newSpecPage({
       components: [ModusTextInput],
-      html: `<modus-text-input></modus-text-input>`,
+      html: '<modus-text-input></modus-text-input>',
     });
     expect(page.root).toEqualHtml(`
       <modus-text-input>

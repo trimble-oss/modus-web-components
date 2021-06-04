@@ -25,8 +25,13 @@
     }
 
     &.disabled {
-      background-color: $col_gray_5;
-      border: 2px solid $col_gray_5;
+      background-color: transparent;
+      border: 2px solid $col_gray_3;
+      cursor: default;
+
+      &.checked {
+        background-color: $col_gray_3;
+      }
     }
 
     svg {
@@ -75,7 +80,15 @@
   &:hover {
     .checkbox {
       &:not(.checked):not(.disabled) {
-        border: 2px solid $col_gray_8;
+        border: 2px solid $col_gray_5;
+      }
+    }
+  }
+
+  &:active {
+    .checkbox {
+      &:not(.checked):not(.disabled) {
+        border: 2px solid $col_trimble_gray;
       }
     }
   }

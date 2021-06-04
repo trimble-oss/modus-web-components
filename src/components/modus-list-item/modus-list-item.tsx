@@ -19,7 +19,7 @@ export class ModusListItem {
   /** (optional) The type of list item */
   @Prop() type: 'standard' = 'standard'; // Future support for 'checkbox' | 'icon' | 'menu' | 'standard' | 'switchLeft' | 'switchRight'
 
-  /** (optional) An event that fires on list item click */
+  /** An event that fires on list item click */
   @Event() itemClick: EventEmitter;
 
   classBySize: Map<string, string> = new Map([
