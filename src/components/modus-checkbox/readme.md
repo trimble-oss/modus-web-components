@@ -17,9 +17,9 @@
 
 ## Events
 
-| Event           | Description                            | Type               |
-| --------------- | -------------------------------------- | ------------------ |
-| `checkboxClick` | An event that fires on checkbox click. | `CustomEvent<any>` |
+| Event           | Description                            | Type                   |
+| --------------- | -------------------------------------- | ---------------------- |
+| `checkboxClick` | An event that fires on checkbox click. | `CustomEvent<boolean>` |
 
 
 ----------------------------------------------
