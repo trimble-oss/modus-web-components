@@ -16,106 +16,106 @@ button {
     opacity: .3;
   }
 
-  &.small {
+  &.size-small {
     font-size: 12px;
     height: 24px;
     padding: 0 8px;
   }
 
-  &.medium {
+  &.size-medium {
     font-size: 14px;
     height: 32px;
     padding: 0 16px;
   }
 
-  &.large {
+  &.size-large {
     font-size: 16px;
     height: 48px;
     padding: 0 24px;
   }
 
-  &.cta {
-    background-color: $col_yellow;
-    border-color: $col_yellow;
-    color: $col_white;
-    fill: $col_white;
-  }
-
-  &.cta:hover {
-    background-color: $col_yellow_light;
-    border-color: $col_yellow_light;
-  }
-
-  &.cta:active {
-    background-color: $col_yellow_dark;
-    border-color: $col_yellow_dark;
-  }
-
-  &.primary {
-    background-color: $col_blue;
-    border-color: $col_blue;
-    color: $col_white;
-    fill: $col_white;
-  }
-
-  &.primary:hover {
-    background-color: $col_blue_light;
-    border-color: $col_blue_light;
-  }
-
-  &.primary:active {
-    background-color: $col_blue_dark;
-    border-color: $col_blue_dark;
-  }
-
-  &.secondary {
-    background-color: $secondary;
-    border-color: $secondary;
-    color: $col_white;
-    fill: $col_white;
-  }
-
-  &.secondary:hover {
-    background-color: $col_gray_6;
-    border-color: $col_gray_6;
-  }
-
-  &.secondary:active {
-    background-color: $col_gray_8;
-    border-color: $col_gray_8;
-  }
-
-  &.tertiary {
-    background-color: $tertiary;
-    border-color: $tertiary;
-    color: $col_gray_dark_3;
-    fill: $col_gray_dark_3;
-  }
-
-  &.tertiary:hover {
-    background-color: $col_gray_0;
-    border-color: $col_gray_0;
-  }
-
-  &.tertiary:active {
-    background-color: $col_gray_2;
-    border-color: $col_gray_2;
-  }
-
-  &.warning {
+  &.color-danger {
     background-color: $col_red;
     border-color: $col_red;
     color: $col_white;
     fill: $col_white;
   }
 
-  &.warning:hover {
+  &.color-danger:hover {
     background-color: $col_red_light;
     border-color: $col_red_light;
   }
 
-  &.warning:active {
+  &.color-danger:active {
     background-color: $col_red_dark;
     border-color: $col_red_dark;
+  }
+
+  &.color-primary {
+    background-color: $col_blue;
+    border-color: $col_blue;
+    color: $col_white;
+    fill: $col_white;
+  }
+
+  &.color-primary:hover {
+    background-color: $col_blue_light;
+    border-color: $col_blue_light;
+  }
+
+  &.color-primary:active {
+    background-color: $col_blue_dark;
+    border-color: $col_blue_dark;
+  }
+
+  &.color-secondary {
+    background-color: $secondary;
+    border-color: $secondary;
+    color: $col_white;
+    fill: $col_white;
+  }
+
+  &.color-secondary:hover {
+    background-color: $col_gray_6;
+    border-color: $col_gray_6;
+  }
+
+  &.color-secondary:active {
+    background-color: $col_gray_8;
+    border-color: $col_gray_8;
+  }
+
+  &.color-tertiary {
+    background-color: $tertiary;
+    border-color: $tertiary;
+    color: $col_gray_dark_3;
+    fill: $col_gray_dark_3;
+  }
+
+  &.color-tertiary:hover {
+    background-color: $col_gray_0;
+    border-color: $col_gray_0;
+  }
+
+  &.color-tertiary:active {
+    background-color: $col_gray_2;
+    border-color: $col_gray_2;
+  }
+
+  &.color-warning {
+    background-color: $col_yellow;
+    border-color: $col_yellow;
+    color: $col_white;
+    fill: $col_white;
+  }
+
+  &.color-warning:hover {
+    background-color: $col_yellow_light;
+    border-color: $col_yellow_light;
+  }
+
+  &.color-warning:active {
+    background-color: $col_yellow_dark;
+    border-color: $col_yellow_dark;
   }
 }

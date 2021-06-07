@@ -9,6 +9,19 @@ describe('modus-button', () => {
     expect(element).toHaveClass('hydrated');
   });
 
+  it('renders changes to the color prop', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-button></modus-button>');
+    const component = await page.find('modus-button');
+    const element = await page.find('modus-button >>> button');
+    expect(element).toHaveClass('color-tertiary');
+
+    component.setProperty('color', 'primary');
+    await page.waitForChanges();
+    expect(element).toHaveClass('color-primary');
+  });
+
   it('renders changes to the disabled prop', async () => {
     const page = await newE2EPage();
 
@@ -28,24 +41,11 @@ describe('modus-button', () => {
     await page.setContent('<modus-button></modus-button>');
     const component = await page.find('modus-button');
     const element = await page.find('modus-button >>> button');
-    expect(element).toHaveClass('medium');
+    expect(element).toHaveClass('size-medium');
 
     component.setProperty('size', 'large');
     await page.waitForChanges();
-    expect(element).toHaveClass('large');
-  });
-
-  it('renders changes to the type prop', async () => {
-    const page = await newE2EPage();
-
-    await page.setContent('<modus-button></modus-button>');
-    const component = await page.find('modus-button');
-    const element = await page.find('modus-button >>> button');
-    expect(element).toHaveClass('tertiary');
-
-    component.setProperty('type', 'primary');
-    await page.waitForChanges();
-    expect(element).toHaveClass('primary');
+    expect(element).toHaveClass('size-large');
   });
 
   it('emits buttonClick event on button click', async () => {
