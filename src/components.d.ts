@@ -86,6 +86,16 @@ export namespace Components {
          */
         "type": 'standard';
     }
+    interface ModusSpinner {
+        /**
+          * (optional) The color of the spinner in hex format (eg #FFFFFF)
+         */
+        "color": string;
+        /**
+          * (optional) The size of the spinner, will be applied to both the height and width
+         */
+        "size": string;
+    }
     interface ModusTextInput {
         /**
           * (optional) Whether the text input has a clear button.
@@ -158,6 +168,12 @@ declare global {
         prototype: HTMLModusListItemElement;
         new (): HTMLModusListItemElement;
     };
+    interface HTMLModusSpinnerElement extends Components.ModusSpinner, HTMLStencilElement {
+    }
+    var HTMLModusSpinnerElement: {
+        prototype: HTMLModusSpinnerElement;
+        new (): HTMLModusSpinnerElement;
+    };
     interface HTMLModusTextInputElement extends Components.ModusTextInput, HTMLStencilElement {
     }
     var HTMLModusTextInputElement: {
@@ -171,6 +187,7 @@ declare global {
         "modus-dropdown": HTMLModusDropdownElement;
         "modus-list": HTMLModusListElement;
         "modus-list-item": HTMLModusListItemElement;
+        "modus-spinner": HTMLModusSpinnerElement;
         "modus-text-input": HTMLModusTextInputElement;
     }
 }
@@ -271,6 +288,16 @@ declare namespace LocalJSX {
          */
         "type"?: 'standard';
     }
+    interface ModusSpinner {
+        /**
+          * (optional) The color of the spinner in hex format (eg #FFFFFF)
+         */
+        "color"?: string;
+        /**
+          * (optional) The size of the spinner, will be applied to both the height and width
+         */
+        "size"?: string;
+    }
     interface ModusTextInput {
         /**
           * (optional) Whether the text input has a clear button.
@@ -316,6 +343,7 @@ declare namespace LocalJSX {
         "modus-dropdown": ModusDropdown;
         "modus-list": ModusList;
         "modus-list-item": ModusListItem;
+        "modus-spinner": ModusSpinner;
         "modus-text-input": ModusTextInput;
     }
 }
@@ -329,6 +357,7 @@ declare module "@stencil/core" {
             "modus-dropdown": LocalJSX.ModusDropdown & JSXBase.HTMLAttributes<HTMLModusDropdownElement>;
             "modus-list": LocalJSX.ModusList & JSXBase.HTMLAttributes<HTMLModusListElement>;
             "modus-list-item": LocalJSX.ModusListItem & JSXBase.HTMLAttributes<HTMLModusListItemElement>;
+            "modus-spinner": LocalJSX.ModusSpinner & JSXBase.HTMLAttributes<HTMLModusSpinnerElement>;
             "modus-text-input": LocalJSX.ModusTextInput & JSXBase.HTMLAttributes<HTMLModusTextInputElement>;
         }
     }
