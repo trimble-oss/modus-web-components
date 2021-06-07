@@ -7,11 +7,24 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface ModusBadge {
+        /**
+          * (optional) The color of the badge
+         */
         "color": 'danger' | 'dark' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning';
+        /**
+          * (optional) The size of the badge
+         */
         "size": 'small' | 'medium' | 'large';
+        /**
+          * (optional) The type of the badge
+         */
         "type": 'counter' | 'default' | 'text';
     }
     interface ModusButton {
+        /**
+          * (optional) The color of the button
+         */
+        "color": 'danger' | 'default' | 'primary' | 'secondary' | 'warning';
         /**
           * (optional) Disables the button
          */
@@ -20,10 +33,6 @@ export namespace Components {
           * (optional) The size of the button
          */
         "size": 'small' | 'medium' | 'large';
-        /**
-          * (optional) The type of button
-         */
-        "type": 'cta' | 'default' | 'primary' | 'secondary' | 'warning';
     }
     interface ModusCheckbox {
         /**
@@ -167,11 +176,24 @@ declare global {
 }
 declare namespace LocalJSX {
     interface ModusBadge {
+        /**
+          * (optional) The color of the badge
+         */
         "color"?: 'danger' | 'dark' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning';
+        /**
+          * (optional) The size of the badge
+         */
         "size"?: 'small' | 'medium' | 'large';
+        /**
+          * (optional) The type of the badge
+         */
         "type"?: 'counter' | 'default' | 'text';
     }
     interface ModusButton {
+        /**
+          * (optional) The color of the button
+         */
+        "color"?: 'danger' | 'default' | 'primary' | 'secondary' | 'warning';
         /**
           * (optional) Disables the button
          */
@@ -184,10 +206,6 @@ declare namespace LocalJSX {
           * (optional) The size of the button
          */
         "size"?: 'small' | 'medium' | 'large';
-        /**
-          * (optional) The type of button
-         */
-        "type"?: 'cta' | 'default' | 'primary' | 'secondary' | 'warning';
     }
     interface ModusCheckbox {
         /**

@@ -10,7 +10,7 @@ describe('modus-button', () => {
     expect(root).toEqualHtml(`
       <modus-button>
         <mock:shadow-root>
-          <button class="medium tertiary">
+          <button class="size-medium color-tertiary">
             <slot></slot>
           </button>
         </mock:shadow-root>
@@ -26,7 +26,7 @@ describe('modus-button', () => {
     expect(root).toEqualHtml(`
       <modus-button>
         <mock:shadow-root>
-          <button class="medium tertiary">
+          <button class="size-medium color-tertiary">
             <slot></slot>
           </button>
         </mock:shadow-root>
@@ -37,31 +37,31 @@ describe('modus-button', () => {
 
   it('should get the correct class by type', async () => {
     const modusButton = new ModusButton();
-    let className = modusButton.classByType.get(modusButton.type);
-    expect(className).toEqual('tertiary');
+    let className = modusButton.classByType.get(modusButton.color);
+    expect(className).toEqual('color-tertiary');
 
-    className = modusButton.classByType.get('cta');
-    expect(className).toEqual('cta');
+    className = modusButton.classByType.get('danger');
+    expect(className).toEqual('color-danger');
 
     className = modusButton.classByType.get('primary');
-    expect(className).toEqual('primary');
+    expect(className).toEqual('color-primary');
 
     className = modusButton.classByType.get('secondary');
-    expect(className).toEqual('secondary');
+    expect(className).toEqual('color-secondary');
 
     className = modusButton.classByType.get('warning');
-    expect(className).toEqual('warning');
+    expect(className).toEqual('color-warning');
   });
 
   it('should get the correct class by size', async () => {
     const modusButton = new ModusButton();
     let className = modusButton.classBySize.get(modusButton.size);
-    expect(className).toEqual('medium');
+    expect(className).toEqual('size-medium');
 
     className = modusButton.classBySize.get('small');
-    expect(className).toEqual('small');
+    expect(className).toEqual('size-small');
 
     className = modusButton.classBySize.get('large');
-    expect(className).toEqual('large');
+    expect(className).toEqual('size-large');
   });
 });

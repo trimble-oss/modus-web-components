@@ -7,11 +7,11 @@
 
 ## Properties
 
-| Property   | Attribute  | Description                       | Type                                                          | Default     |
-| ---------- | ---------- | --------------------------------- | ------------------------------------------------------------- | ----------- |
-| `disabled` | `disabled` | (optional) Disables the button    | `boolean`                                                     | `undefined` |
-| `size`     | `size`     | (optional) The size of the button | `"large" \| "medium" \| "small"`                              | `'medium'`  |
-| `type`     | `type`     | (optional) The type of button     | `"cta" \| "default" \| "primary" \| "secondary" \| "warning"` | `'default'` |
+| Property   | Attribute  | Description                        | Type                                                             | Default     |
+| ---------- | ---------- | ---------------------------------- | ---------------------------------------------------------------- | ----------- |
+| `color`    | `color`    | (optional) The color of the button | `"danger" \| "default" \| "primary" \| "secondary" \| "warning"` | `'default'` |
+| `disabled` | `disabled` | (optional) Disables the button     | `boolean`                                                        | `undefined` |
+| `size`     | `size`     | (optional) The size of the button  | `"large" \| "medium" \| "small"`                                 | `'medium'`  |
 
 
 ## Events

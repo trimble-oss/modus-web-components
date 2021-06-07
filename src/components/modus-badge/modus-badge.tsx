@@ -7,10 +7,13 @@ import { Component, Prop, h } from '@stencil/core';
   shadow: true,
 })
 export class ModusBadge {
+  /** (optional) The color of the badge */
   @Prop() color: 'danger' | 'dark' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning' = 'primary';
 
+  /** (optional) The size of the badge */
   @Prop() size: 'small' | 'medium' | 'large' = 'medium';
 
+  /** (optional) The type of the badge */
   @Prop() type: 'counter' | 'default' | 'text' = 'default';
 
   classByColor: Map<string, string> = new Map([
