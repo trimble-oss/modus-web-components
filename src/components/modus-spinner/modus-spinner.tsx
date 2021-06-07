@@ -8,10 +8,10 @@ import { Component, Prop, h } from '@stencil/core';
 })
 export class ModusSpinner {
   /** (optional) The color of the spinner in hex format (eg #FFFFFF) */
-  @Prop() color: string = '#005F9E';
+  @Prop() color = '#005F9E';
 
   /** (optional) The size of the spinner, will be applied to both the height and width */
-  @Prop() size: string = '2rem';
+  @Prop() size = '2rem';
 
   render(): unknown {
     return (
