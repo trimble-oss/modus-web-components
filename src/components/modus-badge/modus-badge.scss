@@ -1,0 +1,93 @@
+div.badge {
+  align-items: center;
+  border-radius: 2px;
+  display: inline-flex;
+
+  // Default color, size, and type
+  background-color: $col_blue_dark;
+  color: $col_white;
+  font-size: $rem-12px;
+  font-weight: $chip-font-weight;
+  height: 20px;
+  padding: 0 8px;
+  position: relative;
+
+  &.color-danger {
+    background-color: $col_red;
+  }
+
+  &.color-dark {
+    background-color: $col_trimble_gray;
+  }
+
+  &.color-secondary {
+    background-color: $col_gray_8;
+  }
+
+  &.color-success {
+    background-color: $col_green_dark;
+  }
+
+  &.color-tertiary {
+    background-color: $col_gray_1;
+    color: $col_trimble_gray;
+  }
+
+  &.color-warning {
+    background-color: $col_yellow;
+    color: $col_trimble_gray;
+  }
+
+  &.type-text {
+    background-color: unset;
+    color: $col_blue_dark;
+
+    &.color-danger {
+      color: $col_red;
+    }
+
+    &.color-dark {
+      color: $col_trimble_gray;
+    }
+
+    &.color-secondary {
+      color: $col_gray_8;
+    }
+
+    &.color-success {
+      color: $col_green_dark;
+    }
+
+    &.color-tertiary {
+      color: $col_gray_1;
+    }
+
+    &.color-warning {
+      color: $col_yellow;
+    }
+  }
+
+  &.type-counter {
+    border-radius: 20px;
+  }
+
+  &.size-small {
+    font-size: $rem-10px;
+    height: 14px;
+    padding: 0 4px;
+
+    &.type-counter {
+      border-radius: 14px;
+    }
+  }
+
+  &.size-large {
+    font-size: $rem-16px;
+    height: 28px;
+    padding: 0 12px;
+
+    &.type-counter {
+      border-radius: 28px;
+    }
+  }
+}

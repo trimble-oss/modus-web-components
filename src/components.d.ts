@@ -6,6 +6,11 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface ModusBadge {
+        "color": 'danger' | 'dark' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning';
+        "size": 'small' | 'medium' | 'large';
+        "type": 'counter' | 'default' | 'text';
+    }
     interface ModusButton {
         /**
           * (optional) Disables the button
@@ -108,6 +113,12 @@ export namespace Components {
     }
 }
 declare global {
+    interface HTMLModusBadgeElement extends Components.ModusBadge, HTMLStencilElement {
+    }
+    var HTMLModusBadgeElement: {
+        prototype: HTMLModusBadgeElement;
+        new (): HTMLModusBadgeElement;
+    };
     interface HTMLModusButtonElement extends Components.ModusButton, HTMLStencilElement {
     }
     var HTMLModusButtonElement: {
@@ -145,6 +156,7 @@ declare global {
         new (): HTMLModusTextInputElement;
     };
     interface HTMLElementTagNameMap {
+        "modus-badge": HTMLModusBadgeElement;
         "modus-button": HTMLModusButtonElement;
         "modus-checkbox": HTMLModusCheckboxElement;
         "modus-dropdown": HTMLModusDropdownElement;
@@ -154,6 +166,11 @@ declare global {
     }
 }
 declare namespace LocalJSX {
+    interface ModusBadge {
+        "color"?: 'danger' | 'dark' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning';
+        "size"?: 'small' | 'medium' | 'large';
+        "type"?: 'counter' | 'default' | 'text';
+    }
     interface ModusButton {
         /**
           * (optional) Disables the button
@@ -275,6 +292,7 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface IntrinsicElements {
+        "modus-badge": ModusBadge;
         "modus-button": ModusButton;
         "modus-checkbox": ModusCheckbox;
         "modus-dropdown": ModusDropdown;
@@ -287,6 +305,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "modus-badge": LocalJSX.ModusBadge & JSXBase.HTMLAttributes<HTMLModusBadgeElement>;
             "modus-button": LocalJSX.ModusButton & JSXBase.HTMLAttributes<HTMLModusButtonElement>;
             "modus-checkbox": LocalJSX.ModusCheckbox & JSXBase.HTMLAttributes<HTMLModusCheckboxElement>;
             "modus-dropdown": LocalJSX.ModusDropdown & JSXBase.HTMLAttributes<HTMLModusDropdownElement>;
