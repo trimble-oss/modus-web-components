@@ -24,6 +24,7 @@ This library provides Modus Elements as web components. Web components are reusa
     - Dropdown (modus-dropdown)
     - List (modus-list)
     - List Item (modus-list-item)
+    - Spinner (modus-spinner)
     - Text Input (modus-text-input)
   - **Not Implemented**
     - [Accordion](#accordion)
@@ -41,7 +42,6 @@ This library provides Modus Elements as web components. Web components are reusa
     - [Pattern](#pattern)
     - [Progress Bar](#progress-bar)
     - [Slider](#slider)
-    - [Spinner](#spinner)
     - [Switch](#switch)
     - [Table/List](#table/list)
     - [Table/Sheet](#table/sheet)
