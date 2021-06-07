@@ -18,6 +18,7 @@ This library provides Modus Elements as web components. Web components are reusa
 - [Technology](#technology)
 - [Components](#components)
   - **Implemented**
+    - [modus-badge](src/components/modus-badge/readme.md)
     - [modus-button](src/components/modus-button/readme.md)
     - [modus-dropdown](src/components/modus-dropdown/readme.md)
     - [modus-list](src/components/modus-list/readme.md)
@@ -25,7 +26,6 @@ This library provides Modus Elements as web components. Web components are reusa
   - **Not Implemented**
     - [Accordion](#accordion)
     - [Alert](#alert)
-    - [Badge](#badge)
     - [Breadcrumb](#breadcrumb)
     - [Card](#card)
     - [Chip](#chip)
