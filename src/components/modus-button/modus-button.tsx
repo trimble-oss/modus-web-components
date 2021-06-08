@@ -19,7 +19,7 @@ export class ModusButton {
   /** (optional) An event that fires on button click */
   @Event() buttonClick: EventEmitter;
 
-  classByType: Map<string, string> = new Map([
+  classByColor: Map<string, string> = new Map([
     ['danger', 'color-danger'],
     ['default', 'color-tertiary'],
     ['primary', 'color-primary'],
@@ -34,7 +34,7 @@ export class ModusButton {
   ]);
 
   render(): unknown {
-    const className = `${this.classBySize.get(this.size)} ${this.classByType.get(this.color)}`;
+    const className = `${this.classBySize.get(this.size)} ${this.classByColor.get(this.color)}`;
 
     return (
       <button class={className} disabled={this.disabled} onClick={() => !this.disabled ? this.buttonClick.emit() : null}>
