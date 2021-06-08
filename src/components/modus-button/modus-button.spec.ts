@@ -37,19 +37,19 @@ describe('modus-button', () => {
 
   it('should get the correct class by type', async () => {
     const modusButton = new ModusButton();
-    let className = modusButton.classByType.get(modusButton.color);
+    let className = modusButton.classByColor.get(modusButton.color);
     expect(className).toEqual('color-tertiary');
 
-    className = modusButton.classByType.get('danger');
+    className = modusButton.classByColor.get('danger');
     expect(className).toEqual('color-danger');
 
-    className = modusButton.classByType.get('primary');
+    className = modusButton.classByColor.get('primary');
     expect(className).toEqual('color-primary');
 
-    className = modusButton.classByType.get('secondary');
+    className = modusButton.classByColor.get('secondary');
     expect(className).toEqual('color-secondary');
 
-    className = modusButton.classByType.get('warning');
+    className = modusButton.classByColor.get('warning');
     expect(className).toEqual('color-warning');
   });
 

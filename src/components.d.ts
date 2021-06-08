@@ -6,6 +6,20 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface ModusAlert {
+        /**
+          * (optional) Whether the alert has a dismiss button
+         */
+        "dismissible": boolean;
+        /**
+          * (optional) The alert message
+         */
+        "message": string;
+        /**
+          * (optional) The type of alert, sets the color and icon to render
+         */
+        "type": 'error' | 'info' | 'info-gray' | 'info-gray-dark' | 'success' | 'warning';
+    }
     interface ModusBadge {
         /**
           * (optional) The color of the badge
@@ -132,6 +146,12 @@ export namespace Components {
     }
 }
 declare global {
+    interface HTMLModusAlertElement extends Components.ModusAlert, HTMLStencilElement {
+    }
+    var HTMLModusAlertElement: {
+        prototype: HTMLModusAlertElement;
+        new (): HTMLModusAlertElement;
+    };
     interface HTMLModusBadgeElement extends Components.ModusBadge, HTMLStencilElement {
     }
     var HTMLModusBadgeElement: {
@@ -181,6 +201,7 @@ declare global {
         new (): HTMLModusTextInputElement;
     };
     interface HTMLElementTagNameMap {
+        "modus-alert": HTMLModusAlertElement;
         "modus-badge": HTMLModusBadgeElement;
         "modus-button": HTMLModusButtonElement;
         "modus-checkbox": HTMLModusCheckboxElement;
@@ -192,6 +213,24 @@ declare global {
     }
 }
 declare namespace LocalJSX {
+    interface ModusAlert {
+        /**
+          * (optional) Whether the alert has a dismiss button
+         */
+        "dismissible"?: boolean;
+        /**
+          * (optional) The alert message
+         */
+        "message"?: string;
+        /**
+          * An event that fires when the alert is dismissed
+         */
+        "onDismissClick"?: (event: CustomEvent<any>) => void;
+        /**
+          * (optional) The type of alert, sets the color and icon to render
+         */
+        "type"?: 'error' | 'info' | 'info-gray' | 'info-gray-dark' | 'success' | 'warning';
+    }
     interface ModusBadge {
         /**
           * (optional) The color of the badge
@@ -337,6 +376,7 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface IntrinsicElements {
+        "modus-alert": ModusAlert;
         "modus-badge": ModusBadge;
         "modus-button": ModusButton;
         "modus-checkbox": ModusCheckbox;
@@ -351,6 +391,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "modus-alert": LocalJSX.ModusAlert & JSXBase.HTMLAttributes<HTMLModusAlertElement>;
             "modus-badge": LocalJSX.ModusBadge & JSXBase.HTMLAttributes<HTMLModusBadgeElement>;
             "modus-button": LocalJSX.ModusButton & JSXBase.HTMLAttributes<HTMLModusButtonElement>;
             "modus-checkbox": LocalJSX.ModusCheckbox & JSXBase.HTMLAttributes<HTMLModusCheckboxElement>;
