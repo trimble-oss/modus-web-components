@@ -1,5 +1,6 @@
 // eslint-disable-next-line
 import { Component, Prop, h, Event, EventEmitter } from '@stencil/core';
+import { IconCheck } from '../icons/icon-check';
 
 @Component({
   tag: 'modus-checkbox',
@@ -30,10 +31,10 @@ export class ModusCheckbox {
   ]);
 
   handleCheckboxClick(): void {
-    if (!this.disabled) {
-      this.updateChecked();
-      this.checkboxClick.emit(this.checked);
-    }
+    if (this.disabled) { return; }
+
+    this.updateChecked();
+    this.checkboxClick.emit(this.checked);
   }
 
   updateChecked(): void {
@@ -47,9 +48,7 @@ export class ModusCheckbox {
     return (
       <div class={className} onClick={() => this.handleCheckboxClick()}>
         <div class={`${this.checked ? 'checkbox checked' : 'checkbox'} ${this.disabled ? 'disabled' : ''}`}>
-          <svg width="12" height="10" viewBox="0 0 12 10" fill="none" class={this.checked ? 'checked' : ''}>
-            <path d="M3.81353 7.21774L0.968732 4.37294L0 5.33485L3.81353 9.14838L12 0.96191L11.0381 0L3.81353 7.21774Z" fill="white"/>
-          </svg>
+          <div class={this.checked ? 'checked' : ''}><IconCheck color="#FFFFFF" size="24"/></div>
         </div>
         <input
           checked={this.checked}

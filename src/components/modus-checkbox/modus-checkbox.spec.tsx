@@ -10,14 +10,16 @@ describe('modus-checkbox', () => {
     expect(page.root).toEqualHtml(`
       <modus-checkbox>
         <mock:shadow-root>
-            <div class="modus-checkbox medium">
-                <div class="checkbox">
-                    <svg fill="none" height="10" viewBox="0 0 12 10" width="12">
-                        <path d="M3.81353 7.21774L0.968732 4.37294L0 5.33485L3.81353 9.14838L12 0.96191L11.0381 0L3.81353 7.21774Z" fill="white"></path>
-                    </svg>
-                </div>
-                <input type="checkbox">
+          <div class="medium modus-checkbox">
+            <div class="checkbox">
+              <div>
+                <svg class="icon-check" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                  <path clip-rule="evenodd" d="M9.08471 15.4676L5.29164 11.736L4 12.9978L9.08471 18L20 7.26174L18.7175 6L9.08471 15.4676Z" fill="#FFFFFF" fill-rule="evenodd"></path>
+                </svg>
+              </div>
             </div>
+            <input type="checkbox">
+          </div>
         </mock:shadow-root>
       </modus-checkbox>
     `);

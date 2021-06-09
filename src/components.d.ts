@@ -132,9 +132,21 @@ export namespace Components {
          */
         "label": string;
         /**
+          * (optional) The text input's max length.
+         */
+        "maxLength": number;
+        /**
+          * The text input's minimum length.
+         */
+        "minLength": number;
+        /**
           * (optional) The text input placeholder text.
          */
         "placeholder": string;
+        /**
+          * (optional) Whether the text input contents is read-only
+         */
+        "readOnly": boolean;
         /**
           * (optional) Whether the input is required.
          */
@@ -359,6 +371,14 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
+          * (optional) The text input's max length.
+         */
+        "maxLength"?: number;
+        /**
+          * The text input's minimum length.
+         */
+        "minLength"?: number;
+        /**
           * An event that fires on text input value change.
          */
         "onValueChange"?: (event: CustomEvent<string>) => void;
@@ -366,6 +386,10 @@ declare namespace LocalJSX {
           * (optional) The text input placeholder text.
          */
         "placeholder"?: string;
+        /**
+          * (optional) Whether the text input contents is read-only
+         */
+        "readOnly"?: boolean;
         /**
           * (optional) Whether the input is required.
          */
