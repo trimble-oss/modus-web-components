@@ -14,7 +14,7 @@ describe('modus-text-input', () => {
                 <div class="label-container"></div>
                 <div class="input-container">
                     <input type="text">
-                    <span class="modus-icons"></span>
+                    <span class="icons"></span>
                 </div>
             </div>
         </mock:shadow-root>
@@ -60,5 +60,15 @@ describe('modus-text-input', () => {
   it('should default with no value', async () => {
     const modusTextInput = new ModusTextInput();
     expect(modusTextInput.value).toBeFalsy();
+  });
+
+  it('should not default with minimum length validation', async () => {
+    const modusTextInput = new ModusTextInput();
+    expect(modusTextInput.minLength).toBeFalsy();
+  });
+
+  it('should not default with maximum length validation', async () => {
+    const modusTextInput = new ModusTextInput();
+    expect(modusTextInput.minLength).toBeFalsy();
   });
 });

@@ -130,11 +130,15 @@ describe('modus-text-input', () => {
 
     await page.setContent('<modus-text-input value="Some value"></modus-text-input>');
 
-    const textInput = await page.find('modus-text-input');
-    const clear = await page.find('modus-text-input >>> .clear');
+    const valueChange = await page.spyOnEvent('valueChange');
+    const clear = await page.find('modus-text-input >>> span.clear');
     await clear.click();
 
+    await page.waitForChanges();
+
+    const textInput = await page.find('modus-text-input');
     expect(await textInput.getProperty('value')).toBeFalsy();
+    expect(valueChange).toHaveReceivedEvent();
   });
 
   it('emits valueChange event', async () => {

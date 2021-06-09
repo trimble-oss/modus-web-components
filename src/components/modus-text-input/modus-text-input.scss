@@ -1,5 +1,3 @@
-@import url("https://modus.trimble.com/assets/0.5.0/fonts/modus-icons.css");
-
 .modus-text-input {
   display: inline-flex;
   flex-direction: column;
@@ -53,14 +51,14 @@
       }
     }
 
-    .modus-icons {
+    .icons {
       align-items: center;
       background-color: $col_white;
       color: $col_gray_10;
       display: flex;
       font-size: $rem-16px;
       justify-content: center;
-      width: $rem-24px;
+      width: 2rem;
 
       &.clear {
         cursor: pointer;
@@ -112,7 +110,7 @@
     .input-container {
       background-color: $col_gray_3;
 
-      .modus-icons {
+      .icons {
         background-color: $col_gray_3;
       }
 
@@ -121,7 +119,7 @@
         border-radius: 0;
       }
 
-      .modus-icons {
+      .icons {
         cursor: default;
 
         &.clear {
