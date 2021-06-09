@@ -48,7 +48,7 @@ export class ModusCheckbox {
     return (
       <div class={className} onClick={() => this.handleCheckboxClick()}>
         <div class={`${this.checked ? 'checkbox checked' : 'checkbox'} ${this.disabled ? 'disabled' : ''}`}>
-          <div class={this.checked ? 'checked' : ''}><IconCheck color="#FFFFFF" size="24"/></div>
+          <div class={this.checked ? 'checkmark checked' : 'checkmark'}><IconCheck color="#FFFFFF" size="24"/></div>
         </div>
         <input
           checked={this.checked}

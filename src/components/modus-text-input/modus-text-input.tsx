@@ -24,10 +24,10 @@ export class ModusTextInput {
   /** (optional) The text input label. */
   @Prop() label: string;
 
-  /** (optional) The text input's max length. */
+  /** (optional) The text input's maximum length. */
   @Prop() maxLength: number;
 
-  /** The text input's minimum length. */
+  /** (optional) The text input's minimum length. */
   @Prop() minLength: number;
 
   /** (optional) The text input placeholder text. */
