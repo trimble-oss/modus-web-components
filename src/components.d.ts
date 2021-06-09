@@ -132,11 +132,11 @@ export namespace Components {
          */
         "label": string;
         /**
-          * (optional) The text input's max length.
+          * (optional) The text input's maximum length.
          */
         "maxLength": number;
         /**
-          * The text input's minimum length.
+          * (optional) The text input's minimum length.
          */
         "minLength": number;
         /**
@@ -371,11 +371,11 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
-          * (optional) The text input's max length.
+          * (optional) The text input's maximum length.
          */
         "maxLength"?: number;
         /**
-          * The text input's minimum length.
+          * (optional) The text input's minimum length.
          */
         "minLength"?: number;
         /**
