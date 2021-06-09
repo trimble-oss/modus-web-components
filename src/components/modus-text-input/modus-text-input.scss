@@ -1,6 +1,7 @@
 .modus-text-input {
   display: inline-flex;
   flex-direction: column;
+  width: 100%;
 
   label {
     color: $col_trimble_gray;
@@ -17,7 +18,7 @@
     display: flex;
 
     .required {
-      bottom: 1px;
+      bottom: $rem-1px;
       margin-left: $rem-4px;
       position: relative;
     }
@@ -26,10 +27,13 @@
   .input-container {
     align-items: center;
     background-color: $col_white;
-    border-width: 0 0 $rem-2px 0;
+    border: solid;
+    border-color: $col_gray_0 $col_gray_0 $col_gray_6 $col_gray_0;
+    border-width: $rem-1px;
     display: flex;
     flex-direction: row;
     height: 2rem;
+    width: 100%;
 
     svg {
       padding: 0 $rem-6px;
@@ -37,12 +41,17 @@
 
     input {
       border: $col_white;
-      font-size: $rem-14px;
+      font-size: $rem-12px;
       outline: none;
-      padding-left: $rem-8px;
+      padding: 0 $rem-8px;
+      width: 100%;
 
-      &.has-icon {
+      &.has-left-icon {
         padding-left: 0;
+      }
+
+      &.has-right-icon {
+        padding-right: 0;
       }
 
       &::placeholder {
@@ -81,20 +90,54 @@
       }
     }
 
+    &:hover {
+      cursor: text;
+    }
+
+    &:focus-within, &.error, &.valid {
+      border: solid;
+      border-width: $rem-1px $rem-1px $rem-2px $rem-1px;
+      height: 1.9375rem; // Counteract bottom border width.
+    }
+
     &:focus-within {
-      border: solid $col_trimble_blue;
-      border-width: 0 0 $rem-2px 0;
+      border-color: $col_gray_0 $col_gray_0 $col_trimble_blue $col_gray_0;
     }
 
     &.error {
-      border: solid $col_red;
-      border-width: 0 0 $rem-2px 0;
+      border-color: $col_gray_0 $col_gray_0 $col_red $col_gray_0;
+    }
+
+    &.valid {
+      border-color: $col_gray_0 $col_gray_0 $col_green $col_gray_0;
+    }
+
+    &.large {
+      height: 3rem;
+
+      input {
+        font-size: $rem-14px;
+      }
+
+      &:focus-within, &.error, &.valid {
+        height: 2.9375rem; // Counteract bottom border width.
+      }
     }
   }
 
-  label {
+  .below-text {
+    margin-top: $rem-4px;
+
+    &.helper {
+      color: $col_gray_9;
+    }
+
     &.error {
       color: $col_red;
+    }
+
+    &.valid {
+      color: $col_green;
     }
   }
 
@@ -102,6 +145,11 @@
     &.required {
       color: $col_red;
     }
+  }
+
+  &.large {
+    height: 48px;
+    font-size: $rem-14px;
   }
 
   &.disabled {

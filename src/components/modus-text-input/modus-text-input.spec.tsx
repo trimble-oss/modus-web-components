@@ -34,7 +34,7 @@ describe('modus-text-input', () => {
 
   it('should default to errorless', async () => {
     const modusTextInput = new ModusTextInput();
-    expect(modusTextInput.error).toBeFalsy();
+    expect(modusTextInput.errorText).toBeFalsy();
   });
 
   it('should default with no search icon', async () => {
