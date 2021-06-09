@@ -9,41 +9,54 @@ import { IconClose } from '../icons/icon-close';
   shadow: true,
 })
 export class ModusTextInput {
-  /** (optional) Whether the text input has a clear button. */
+  /** (optional) Whether the input has a clear button. */
   @Prop() clearable = true;
 
-  /** (optional) Whether the text input is disabled. */
+  /** (optional) Whether the input is disabled. */
   @Prop() disabled: boolean;
 
-  /** (optional) The text input's error text. */
-  @Prop() error: string;
+  /** (optional) The error state text. */
+  @Prop() errorText: string;
+
+  /** (optional) The helper text displayed below the input */
+  @Prop() helperText: string;
 
   /** (optional) Whether the search icon is included. */
   @Prop() includeSearchIcon: boolean;
 
-  /** (optional) The text input label. */
+  /** (optional) The input's label. */
   @Prop() label: string;
 
-  /** (optional) The text input's maximum length. */
+  /** (optional) The input's maximum length. */
   @Prop() maxLength: number;
 
-  /** (optional) The text input's minimum length. */
+  /** (optional) The input's minimum length. */
   @Prop() minLength: number;
 
-  /** (optional) The text input placeholder text. */
+  /** (optional) The input's placeholder text. */
   @Prop() placeholder: string;
 
-  /** (optional) Whether the text input contents is read-only */
+  /** (optional) Whether the input's content is read-only */
   @Prop() readOnly: boolean;
 
   /** (optional) Whether the input is required. */
   @Prop() required: boolean;
 
-  /** (optional) The text input value. */
+  @Prop() size: 'medium' | 'large' = 'medium';
+
+  /** (optional) The input's valid state text. */
+  @Prop() validText: string;
+
+  /** (optional) The input's value. */
   @Prop() value: string;
 
-  /** An event that fires on text input value change. */
+  /** An event that fires on input value change. */
   @Event() valueChange: EventEmitter<string>;
+
+  classBySize: Map<string, string> = new Map([
+    ['medium', 'medium'],
+    ['large', 'large']
+  ]);
 
   textInput: HTMLInputElement;
 
@@ -64,26 +77,37 @@ export class ModusTextInput {
 
     return (
       <div class={className}>
-        <div class={'label-container'}>{this.label ? <label>{this.label}</label> : null}{this.required ? <span class="required">*</span> : null}</div>
-        <div class={`input-container ${this.error ? 'error' : ''}`}>
-          {this.includeSearchIcon ? <IconSearch /> : null}
-          <input class={this.includeSearchIcon ? 'has-icon' : ''}
-                 disabled={this.disabled}
-                 maxlength={this.maxLength}
-                 minlength={this.minLength}
-                 onInput={(event) => this.handleOnInput(event)}
-                 placeholder={this.placeholder}
-                 readonly={this.readOnly}
-                 ref={(el) => this.textInput = el as HTMLInputElement}
-                 type="text"
-                 value={this.value}/>
-          {(this.clearable && !this.readOnly && !!this.value) ?
-            <span class="icons clear">
-              <IconClose onClick={() => this.handleClear()} size="16" />
-            </span> :
-            <span class="icons"></span>}
+        <div class={'label-container'}>
+          {this.label ? <label>{this.label}</label> : null}{this.required ? <span class="required">*</span> : null}
         </div>
-        {this.error ? <label class="error">{this.error}</label> : null}
+        <div
+          class={`input-container ${this.errorText ? 'error' : this.validText ? 'valid' : ''} ${this.classBySize.get(this.size)}`}
+          onClick={() => this.textInput.focus()}>
+            {this.includeSearchIcon ? <IconSearch /> : null}
+            <input class={`${this.includeSearchIcon ? 'has-left-icon' : ''} ${this.clearable ? 'has-right-icon' : null}`}
+                   disabled={this.disabled}
+                   maxlength={this.maxLength}
+                   minlength={this.minLength}
+                   onInput={(event) => this.handleOnInput(event)}
+                   placeholder={this.placeholder}
+                   readonly={this.readOnly}
+                   ref={(el) => this.textInput = el as HTMLInputElement}
+                   type="text"
+                   value={this.value}/>
+            {
+              (this.clearable && !this.readOnly && !!this.value) ?
+                <span class="icons clear">
+                  <IconClose onClick={() => this.handleClear()} size="16" />
+                </span> :
+                <span class="icons"></span>
+            }
+        </div>
+        {
+          this.errorText ? <label class="below-text error">{this.errorText}</label> :
+          this.validText ? <label class="below-text valid">{this.validText}</label> :
+          this.helperText ? <label class="below-text helper">{this.helperText}</label> :
+          null
+        }
       </div>
     );
   }

@@ -112,47 +112,56 @@ export namespace Components {
     }
     interface ModusTextInput {
         /**
-          * (optional) Whether the text input has a clear button.
+          * (optional) Whether the input has a clear button.
          */
         "clearable": boolean;
         /**
-          * (optional) Whether the text input is disabled.
+          * (optional) Whether the input is disabled.
          */
         "disabled": boolean;
         /**
-          * (optional) The text input's error text.
+          * (optional) The error state text.
          */
-        "error": string;
+        "errorText": string;
+        /**
+          * (optional) The helper text displayed below the input
+         */
+        "helperText": string;
         /**
           * (optional) Whether the search icon is included.
          */
         "includeSearchIcon": boolean;
         /**
-          * (optional) The text input label.
+          * (optional) The input's label.
          */
         "label": string;
         /**
-          * (optional) The text input's maximum length.
+          * (optional) The input's maximum length.
          */
         "maxLength": number;
         /**
-          * (optional) The text input's minimum length.
+          * (optional) The input's minimum length.
          */
         "minLength": number;
         /**
-          * (optional) The text input placeholder text.
+          * (optional) The input's placeholder text.
          */
         "placeholder": string;
         /**
-          * (optional) Whether the text input contents is read-only
+          * (optional) Whether the input's content is read-only
          */
         "readOnly": boolean;
         /**
           * (optional) Whether the input is required.
          */
         "required": boolean;
+        "size": 'medium' | 'large';
         /**
-          * (optional) The text input value.
+          * (optional) The input's valid state text.
+         */
+        "validText": string;
+        /**
+          * (optional) The input's value.
          */
         "value": string;
     }
@@ -351,51 +360,60 @@ declare namespace LocalJSX {
     }
     interface ModusTextInput {
         /**
-          * (optional) Whether the text input has a clear button.
+          * (optional) Whether the input has a clear button.
          */
         "clearable"?: boolean;
         /**
-          * (optional) Whether the text input is disabled.
+          * (optional) Whether the input is disabled.
          */
         "disabled"?: boolean;
         /**
-          * (optional) The text input's error text.
+          * (optional) The error state text.
          */
-        "error"?: string;
+        "errorText"?: string;
+        /**
+          * (optional) The helper text displayed below the input
+         */
+        "helperText"?: string;
         /**
           * (optional) Whether the search icon is included.
          */
         "includeSearchIcon"?: boolean;
         /**
-          * (optional) The text input label.
+          * (optional) The input's label.
          */
         "label"?: string;
         /**
-          * (optional) The text input's maximum length.
+          * (optional) The input's maximum length.
          */
         "maxLength"?: number;
         /**
-          * (optional) The text input's minimum length.
+          * (optional) The input's minimum length.
          */
         "minLength"?: number;
         /**
-          * An event that fires on text input value change.
+          * An event that fires on input value change.
          */
         "onValueChange"?: (event: CustomEvent<string>) => void;
         /**
-          * (optional) The text input placeholder text.
+          * (optional) The input's placeholder text.
          */
         "placeholder"?: string;
         /**
-          * (optional) Whether the text input contents is read-only
+          * (optional) Whether the input's content is read-only
          */
         "readOnly"?: boolean;
         /**
           * (optional) Whether the input is required.
          */
         "required"?: boolean;
+        "size"?: 'medium' | 'large';
         /**
-          * (optional) The text input value.
+          * (optional) The input's valid state text.
+         */
+        "validText"?: string;
+        /**
+          * (optional) The input's value.
          */
         "value"?: string;
     }
