@@ -15,10 +15,10 @@ export class ModusTextInput {
   /** (optional) Whether the input is disabled. */
   @Prop() disabled: boolean;
 
-  /** (optional) The error state text. */
+  /** (optional) The input's error state text. */
   @Prop() errorText: string;
 
-  /** (optional) The helper text displayed below the input */
+  /** (optional) The input's helper text displayed below the input. */
   @Prop() helperText: string;
 
   /** (optional) Whether the search icon is included. */
