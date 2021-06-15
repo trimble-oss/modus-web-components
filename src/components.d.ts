@@ -120,11 +120,11 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
-          * (optional) The error state text.
+          * (optional) The input's error state text.
          */
         "errorText": string;
         /**
-          * (optional) The helper text displayed below the input
+          * (optional) The input's helper text displayed below the input.
          */
         "helperText": string;
         /**
@@ -371,11 +371,11 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
-          * (optional) The error state text.
+          * (optional) The input's error state text.
          */
         "errorText"?: string;
         /**
-          * (optional) The helper text displayed below the input
+          * (optional) The input's helper text displayed below the input.
          */
         "helperText"?: string;
         /**
