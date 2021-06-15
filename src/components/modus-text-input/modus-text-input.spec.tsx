@@ -12,14 +12,23 @@ describe('modus-text-input', () => {
         <mock:shadow-root>
             <div class="modus-text-input">
                 <div class="label-container"></div>
-                <div class="input-container">
-                    <input type="text">
+                <div class="input-container medium">
+                    <input class="has-right-icon" type="text">
                     <span class="icons"></span>
                 </div>
             </div>
         </mock:shadow-root>
       </modus-text-input>
     `);
+  });
+
+  it('should get the correct class by size', async () => {
+    const modusTextInput = new ModusTextInput();
+    let className = modusTextInput.classBySize.get(modusTextInput.size);
+    expect(className).toEqual('medium');
+
+    className = modusTextInput.classBySize.get('large');
+    expect(className).toEqual('large');
   });
 
   it('should default to clearable', async () => {
@@ -32,9 +41,24 @@ describe('modus-text-input', () => {
     expect(modusTextInput.disabled).toBeFalsy();
   });
 
-  it('should default to errorless', async () => {
+  it('should default to no error text', async () => {
     const modusTextInput = new ModusTextInput();
     expect(modusTextInput.errorText).toBeFalsy();
+  });
+
+  it('should default to no valid text', async () => {
+    const modusTextInput = new ModusTextInput();
+    expect(modusTextInput.validText).toBeFalsy();
+  });
+
+  it('should default to no helper text', async () => {
+    const modusTextInput = new ModusTextInput();
+    expect(modusTextInput.helperText).toBeFalsy();
+  });
+
+  it('should default to size medium', async () => {
+    const modusTextInput = new ModusTextInput();
+    expect(modusTextInput.size).toEqual('medium');
   });
 
   it('should default with no search icon', async () => {

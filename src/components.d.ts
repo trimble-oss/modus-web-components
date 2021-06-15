@@ -155,6 +155,9 @@ export namespace Components {
           * (optional) Whether the input is required.
          */
         "required": boolean;
+        /**
+          * (optional) The input's size.
+         */
         "size": 'medium' | 'large';
         /**
           * (optional) The input's valid state text.
@@ -407,6 +410,9 @@ declare namespace LocalJSX {
           * (optional) Whether the input is required.
          */
         "required"?: boolean;
+        /**
+          * (optional) The input's size.
+         */
         "size"?: 'medium' | 'large';
         /**
           * (optional) The input's valid state text.

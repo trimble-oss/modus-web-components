@@ -42,6 +42,7 @@ export class ModusTextInput {
   /** (optional) Whether the input is required. */
   @Prop() required: boolean;
 
+  /** (optional) The input's size. */
   @Prop() size: 'medium' | 'large' = 'medium';
 
   /** (optional) The input's valid state text. */

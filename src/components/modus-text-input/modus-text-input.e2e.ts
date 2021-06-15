@@ -41,13 +41,13 @@ describe('modus-text-input', () => {
     expect(await input.getProperty('disabled')).toBeTruthy();
   });
 
-  it('renders changes to error', async () => {
+  it('renders changes to errorText', async () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-text-input></modus-text-input>');
 
     const textInput = await page.find('modus-text-input');
-    textInput.setProperty('error', 'Error.');
+    textInput.setProperty('errorText', 'Error.');
     await page.waitForChanges();
 
     const inputContainer = await page.find('modus-text-input >>> .input-container');
@@ -55,6 +55,35 @@ describe('modus-text-input', () => {
 
     const errorLabel = await page.find('modus-text-input >>> label.error');
     expect(errorLabel).not.toBeNull();
+  });
+
+  it('renders changes to validText', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-text-input></modus-text-input>');
+
+    const textInput = await page.find('modus-text-input');
+    textInput.setProperty('validText', 'Valid.');
+    await page.waitForChanges();
+
+    const inputContainer = await page.find('modus-text-input >>> .input-container');
+    expect(inputContainer).toHaveClass('valid');
+
+    const validLabel = await page.find('modus-text-input >>> label.valid');
+    expect(validLabel).not.toBeNull();
+  });
+
+  it('renders changes to helperText', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-text-input></modus-text-input>');
+
+    const textInput = await page.find('modus-text-input');
+    textInput.setProperty('helperText', 'Helper.');
+    await page.waitForChanges();
+
+    const helperLabel = await page.find('modus-text-input >>> label.helper');
+    expect(helperLabel).not.toBeNull();
   });
 
   it('renders changes to includeSearchIcon', async () => {
