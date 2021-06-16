@@ -108,7 +108,11 @@ export namespace Components {
         /**
           * (optional) The input's error text.
          */
-        "error": string;
+        "errorText": string;
+        /**
+          * (optional) The input's helper text.
+         */
+        "helperText": string;
         /**
           * (optional) The input label.
          */
@@ -125,6 +129,14 @@ export namespace Components {
           * (optional) Whether the input is required.
          */
         "required": boolean;
+        /**
+          * (optional) The input's size.
+         */
+        "size": 'medium' | 'large';
+        /**
+          * (optional) The input's valid text.
+         */
+        "validText": string;
         /**
           * (optional) The input value.
          */
@@ -396,7 +408,11 @@ declare namespace LocalJSX {
         /**
           * (optional) The input's error text.
          */
-        "error"?: string;
+        "errorText"?: string;
+        /**
+          * (optional) The input's helper text.
+         */
+        "helperText"?: string;
         /**
           * (optional) The input label.
          */
@@ -417,6 +433,14 @@ declare namespace LocalJSX {
           * (optional) Whether the input is required.
          */
         "required"?: boolean;
+        /**
+          * (optional) The input's size.
+         */
+        "size"?: 'medium' | 'large';
+        /**
+          * (optional) The input's valid text.
+         */
+        "validText"?: string;
         /**
           * (optional) The input value.
          */
