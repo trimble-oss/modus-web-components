@@ -1,0 +1,15 @@
+.modus-progress {
+  border: $rem-1px solid $col_gray_6;
+  display: flex;
+  height: $rem-16px;
+  width: 100%;
+
+  .progress {
+    align-items: center;
+    display: flex;
+    font-size: $rem-12px;
+    height: 100%;
+    justify-content: center;
+    transition: width .6s ease;
+  }
+}
