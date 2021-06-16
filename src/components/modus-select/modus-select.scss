@@ -3,18 +3,17 @@
   position: relative;
 
   .label-container {
+    align-items: baseline;
     display: flex;
 
     label {
       color: $col_trimble_gray;
       font-size: $rem-12px;
-      margin: $rem-4px;
+      margin: 0 $rem-4px $rem-4px 0;
     }
 
-    span.required {
-      bottom: 1px;
+    .required {
       color: $col_red;
-      position: relative;
     }
   }
 
@@ -24,7 +23,8 @@
     button {
       align-items: center;
       background-color: $col_white;
-      border-width: 0 0 $rem-2px 0;
+      border: solid $rem-1px;
+      border-color: $col_gray_0 $col_gray_0 $col_gray_6 $col_gray_0;
       display: flex;
       height: $btn_height;
       padding: 0;
@@ -32,13 +32,23 @@
       width: 100%;
 
       &:focus-within {
-        border: solid $col_trimble_blue;
+        border-bottom-color: $col_blue_alt;
         border-width: $rem-2px;
       }
 
+      &.large {
+        font-size: $rem-14px;
+        height: 3rem;
+      }
+
       &.error {
-        border: solid $col_red;
-        border-width: 0 0 $rem-2px 0;
+        border-bottom-color: $col_red;
+        border-width: $rem-2px;
+      }
+
+      &.valid {
+        border-bottom-color: $col_green;
+        border-width: $rem-2px;
       }
 
       .dropdown-text {
@@ -69,6 +79,10 @@
         display: block;
       }
 
+      &.large {
+        top: 3.125rem;
+      }
+
       .dropdown-list-item {
         align-items: center;
         display: flex;
@@ -83,8 +97,20 @@
     }
   }
 
-  label.error {
-    color: $col_red;
+  .sub-text {
     font-size: $rem-10px;
+    margin-top: $rem-4px;
+
+    &.helper {
+      color: $col_gray_9;
+    }
+
+    &.error {
+      color: $col_red;
+    }
+
+    &.valid {
+      color: $col_green;
+    }
   }
 }

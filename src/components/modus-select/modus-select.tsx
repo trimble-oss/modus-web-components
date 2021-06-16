@@ -16,10 +16,16 @@ export class ModusSelect {
   @Prop() disabled: boolean;
 
   /** (optional) The input's error text. */
-  @Prop() error: string;
+  @Prop() errorText: string;
+
+  /** (optional) The input's helper text. */
+  @Prop() helperText: string;
 
   /** (optional) The input label. */
   @Prop() label: string;
+
+  /** (optional) The number of visible options in a drop-down list. */
+  // @Prop() numberOfOptions = 5;
 
   /** The options for the dropdown list. */
   @Prop() options: unknown[] = [];
@@ -30,8 +36,11 @@ export class ModusSelect {
   /** (optional) Whether the input is required. */
   @Prop() required: boolean;
 
-  /** (optional) The number of visible options in a drop-down list. */
-  // @Prop() size = 5;
+  /** (optional) The input's size. */
+  @Prop() size: 'medium' | 'large' = 'medium';
+
+  /** (optional) The input's valid text. */
+  @Prop() validText: string;
 
   /** (optional) The input value. */
   @Prop() value: unknown;
@@ -44,6 +53,11 @@ export class ModusSelect {
   @State() activeItemIndex = 0;
 
   @State() visible: boolean;
+
+  classBySize: Map<string, string> = new Map([
+    ['medium', 'medium'],
+    ['large', 'large']
+  ]);
 
   @Listen('click', { target: 'document' })
   documentClickHandler(event: MouseEvent): void {
@@ -90,9 +104,9 @@ export class ModusSelect {
   }
 
   render(): unknown {
-    const buttonClass = `${this.error ? 'error' : ''}`;
+    const buttonClass = `${this.classBySize.get(this.size)} ${this.errorText ? 'error' : this.validText ? 'valid' : ''}`;
+    const dropdownListClass = `dropdown-list ${this.visible ? 'visible' : 'hidden'} ${this.classBySize.get(this.size)}`;
     const inputContainerClass = `input-container ${this.visible ? 'dropdown-visible' : ''}`;
-    const dropdownListClass = `dropdown-list ${this.visible ? 'visible' : 'hidden'}`;
 
     return (
       <div>
@@ -106,7 +120,8 @@ export class ModusSelect {
             <IconTriangleDown size={'12'} />
           </button>
           <div class={dropdownListClass}>
-            {this.options.map((option, index) =>
+            {
+              this.options.map((option, index) =>
               <div
                 class={`dropdown-list-item ${index === this.activeItemIndex ? 'active' : ''}`}
                 key={createGuid()}
@@ -117,7 +132,12 @@ export class ModusSelect {
             )}
           </div>
         </div>
-        {this.error ? <label class="error">{this.error}</label> : null}
+        {
+          this.errorText ? <label class="sub-text error">{this.errorText}</label> :
+          this.validText ? <label class="sub-text valid">{this.validText}</label> :
+          this.helperText ? <label class="sub-text helper">{this.helperText}</label> :
+          null
+        }
       </div>
     );
   }
