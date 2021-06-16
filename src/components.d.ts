@@ -100,6 +100,36 @@ export namespace Components {
          */
         "type": 'standard';
     }
+    interface ModusSelect {
+        /**
+          * (optional) Whether the input is disabled.
+         */
+        "disabled": boolean;
+        /**
+          * (optional) The input's error text.
+         */
+        "error": string;
+        /**
+          * (optional) The input label.
+         */
+        "label": string;
+        /**
+          * The options for the dropdown list.
+         */
+        "options": unknown[];
+        /**
+          * The options property to render in the dropdown list.
+         */
+        "optionsDisplayProp": string;
+        /**
+          * (optional) Whether the input is required.
+         */
+        "required": boolean;
+        /**
+          * (optional) The input value.
+         */
+        "value": unknown;
+    }
     interface ModusSpinner {
         /**
           * (optional) The color of the spinner in hex format (eg #FFFFFF)
@@ -212,6 +242,12 @@ declare global {
         prototype: HTMLModusListItemElement;
         new (): HTMLModusListItemElement;
     };
+    interface HTMLModusSelectElement extends Components.ModusSelect, HTMLStencilElement {
+    }
+    var HTMLModusSelectElement: {
+        prototype: HTMLModusSelectElement;
+        new (): HTMLModusSelectElement;
+    };
     interface HTMLModusSpinnerElement extends Components.ModusSpinner, HTMLStencilElement {
     }
     var HTMLModusSpinnerElement: {
@@ -232,6 +268,7 @@ declare global {
         "modus-dropdown": HTMLModusDropdownElement;
         "modus-list": HTMLModusListElement;
         "modus-list-item": HTMLModusListItemElement;
+        "modus-select": HTMLModusSelectElement;
         "modus-spinner": HTMLModusSpinnerElement;
         "modus-text-input": HTMLModusTextInputElement;
     }
@@ -351,6 +388,40 @@ declare namespace LocalJSX {
          */
         "type"?: 'standard';
     }
+    interface ModusSelect {
+        /**
+          * (optional) Whether the input is disabled.
+         */
+        "disabled"?: boolean;
+        /**
+          * (optional) The input's error text.
+         */
+        "error"?: string;
+        /**
+          * (optional) The input label.
+         */
+        "label"?: string;
+        /**
+          * An event that fires on input value change.
+         */
+        "onValueChange"?: (event: CustomEvent<unknown>) => void;
+        /**
+          * The options for the dropdown list.
+         */
+        "options"?: unknown[];
+        /**
+          * The options property to render in the dropdown list.
+         */
+        "optionsDisplayProp"?: string;
+        /**
+          * (optional) Whether the input is required.
+         */
+        "required"?: boolean;
+        /**
+          * (optional) The input value.
+         */
+        "value"?: unknown;
+    }
     interface ModusSpinner {
         /**
           * (optional) The color of the spinner in hex format (eg #FFFFFF)
@@ -431,6 +502,7 @@ declare namespace LocalJSX {
         "modus-dropdown": ModusDropdown;
         "modus-list": ModusList;
         "modus-list-item": ModusListItem;
+        "modus-select": ModusSelect;
         "modus-spinner": ModusSpinner;
         "modus-text-input": ModusTextInput;
     }
@@ -446,6 +518,7 @@ declare module "@stencil/core" {
             "modus-dropdown": LocalJSX.ModusDropdown & JSXBase.HTMLAttributes<HTMLModusDropdownElement>;
             "modus-list": LocalJSX.ModusList & JSXBase.HTMLAttributes<HTMLModusListElement>;
             "modus-list-item": LocalJSX.ModusListItem & JSXBase.HTMLAttributes<HTMLModusListItemElement>;
+            "modus-select": LocalJSX.ModusSelect & JSXBase.HTMLAttributes<HTMLModusSelectElement>;
             "modus-spinner": LocalJSX.ModusSpinner & JSXBase.HTMLAttributes<HTMLModusSpinnerElement>;
             "modus-text-input": LocalJSX.ModusTextInput & JSXBase.HTMLAttributes<HTMLModusTextInputElement>;
         }
