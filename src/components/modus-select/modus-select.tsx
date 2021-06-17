@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 import { Component, Element, Event, EventEmitter, h, Listen, Prop, State } from '@stencil/core';
 import { IconTriangleDown } from '../icons/icon-triangle-down';
-import { createGuid } from '../../utils/utils';
+import { createGuid, generateRandomNumber } from '../../utils/utils';
 
 @Component({
   tag: 'modus-select',
@@ -54,10 +54,15 @@ export class ModusSelect {
 
   @State() visible: boolean;
 
+  accessibilityId: number;
   classBySize: Map<string, string> = new Map([
     ['medium', 'medium'],
     ['large', 'large']
   ]);
+
+  componentWillLoad(): void {
+    this.accessibilityId = generateRandomNumber();
+  }
 
   @Listen('click', { target: 'document' })
   documentClickHandler(event: MouseEvent): void {
@@ -110,6 +115,11 @@ export class ModusSelect {
 
   showDropdown(): void {
     this.visible = true;
+
+    const activeOptionIndex = this.options?.findIndex(option => option === this.value);
+    if (activeOptionIndex > -1) {
+      this.activeItemIndex = activeOptionIndex;
+    }
   }
 
   render(): unknown {
@@ -117,14 +127,17 @@ export class ModusSelect {
     const dropdownListClass = `dropdown-list ${this.visible ? 'visible' : 'hidden'} ${this.classBySize.get(this.size)}`;
     const inputContainerClass = `input-container ${this.visible ? 'dropdown-visible' : ''}`;
 
+    const selectLabel = `selectLabel${this.accessibilityId}`;
+    const selectDesc = `selectDesc${this.accessibilityId}`;
+
     return (
-      <div>
+      <div role="combobox" aria-labelledby={selectLabel} aria-describedby={selectDesc}>
         <div class={'label-container'}>
-          {this.label ? <label>{this.label}</label> : null}
+          {this.label ? <label id={selectLabel}>{this.label}</label> : null}
           {this.required ? <span class="required">*</span> : null}
         </div>
         <div class={inputContainerClass}>
-          <button class={buttonClass} disabled={this.disabled} onClick={() => this.handleButtonClick()} type="button">
+          <button class={buttonClass} disabled={this.disabled} onClick={() => this.handleButtonClick()} type="button" aria-invalid={!!this.errorText}>
             <div class="dropdown-text">{this.value ? this.value[this.optionsDisplayProp] : null}</div>
             <IconTriangleDown size={'12'} />
           </button>
@@ -142,9 +155,9 @@ export class ModusSelect {
           </div>
         </div>
         {
-          this.errorText ? <label class="sub-text error">{this.errorText}</label> :
-          this.validText ? <label class="sub-text valid">{this.validText}</label> :
-          this.helperText ? <label class="sub-text helper">{this.helperText}</label> :
+          this.errorText ? <label class="sub-text error" id={selectDesc}>{this.errorText}</label> :
+          this.validText ? <label class="sub-text valid" id={selectDesc}>{this.validText}</label> :
+          this.helperText ? <label class="sub-text helper" id={selectDesc}>{this.helperText}</label> :
           null
         }
       </div>

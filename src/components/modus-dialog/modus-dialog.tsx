@@ -1,6 +1,7 @@
 // eslint-disable-next-line
 import { Component, Prop, h, Event, EventEmitter } from '@stencil/core';
 import { IconClose } from '../icons/icon-close';
+import { generateRandomNumber } from '../../utils/utils';
 
 @Component({
   tag: 'modus-dialog',
@@ -32,9 +33,15 @@ export class ModusDialog {
   /** (optional) An event that fires on secondary button click. */
   @Event() secondaryButtonClick: EventEmitter;
 
+  accessibilityId: number;
+
   close(): void {
     this.visible = false;
     this.dialogClose.emit();
+  }
+
+  componentWillLoad(): void {
+    this.accessibilityId = generateRandomNumber();
   }
 
   handleOverlayClick(event: MouseEvent): void {
@@ -46,14 +53,17 @@ export class ModusDialog {
   render(): unknown {
     const overlayClass = `overlay ${this.visible ? 'visible' : ''}`;
 
+    const dialogContent = `dialogContent${this.accessibilityId}`;
+    const dialogTitle = `dialogTitle${this.accessibilityId}`;
+
     return (
       <div class={overlayClass} onClick={(event) => this.handleOverlayClick(event)}>
-        <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialogTitle" aria-describedby="dialogContent">
+        <div class="dialog" role="dialog" aria-modal="true" aria-labelledby={dialogTitle} aria-describedby={dialogContent}>
           <div class="header">
-            <span class="header-text" id="dialogTitle">{this.headerText}</span>
+            <span class="header-text" id={dialogTitle}>{this.headerText}</span>
             <IconClose size={'20'} onClick={() => this.close()} />
           </div>
-          <div class="content" id="dialogContent">
+          <div class="content" id={dialogContent}>
             <slot />
           </div>
           <div class="controls">
