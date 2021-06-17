@@ -44,9 +44,9 @@ describe('modus-progress-bar', () => {
     expect(modusProgress.minValue).toEqual(0);
   });
 
-  it('should default to percentage color $col_white', async () => {
+  it('should default to text color $col_white', async () => {
     const modusProgress = new ModusProgressBar();
-    expect(modusProgress.percentageColor).toEqual('#FFFFFF');
+    expect(modusProgress.textColor).toEqual('#FFFFFF');
   });
 
   it('should default value to 0', async () => {

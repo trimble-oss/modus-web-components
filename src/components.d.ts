@@ -140,13 +140,13 @@ export namespace Components {
          */
         "minValue": number;
         /**
-          * (optional) The progress bar's percentage text color.
-         */
-        "percentageColor": string;
-        /**
           * (optional) The text displayed on the progress bar.
          */
         "text": string;
+        /**
+          * (optional) The progress bar's text color.
+         */
+        "textColor": string;
         /**
           * (optional) The progress bar's value.
          */
@@ -518,13 +518,13 @@ declare namespace LocalJSX {
          */
         "minValue"?: number;
         /**
-          * (optional) The progress bar's percentage text color.
-         */
-        "percentageColor"?: string;
-        /**
           * (optional) The text displayed on the progress bar.
          */
         "text"?: string;
+        /**
+          * (optional) The progress bar's text color.
+         */
+        "textColor"?: string;
         /**
           * (optional) The progress bar's value.
          */
