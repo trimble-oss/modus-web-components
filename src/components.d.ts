@@ -122,6 +122,36 @@ export namespace Components {
          */
         "type": 'standard';
     }
+    interface ModusProgressBar {
+        /**
+          * (optional) The progress bar's background color.
+         */
+        "backgroundColor": string;
+        /**
+          * (optional) The progress bar's foreground color.
+         */
+        "color": string;
+        /**
+          * (optional) The progress bar's maximum value.
+         */
+        "maxValue": number;
+        /**
+          * (optional) The progress bar's minimum value.
+         */
+        "minValue": number;
+        /**
+          * (optional) The progress bar's percentage text color.
+         */
+        "percentageColor": string;
+        /**
+          * (optional) The text displayed on the progress bar.
+         */
+        "text": string;
+        /**
+          * (optional) The progress bar's value.
+         */
+        "value": number;
+    }
     interface ModusSelect {
         /**
           * (optional) Whether the input is disabled.
@@ -282,6 +312,12 @@ declare global {
         prototype: HTMLModusListItemElement;
         new (): HTMLModusListItemElement;
     };
+    interface HTMLModusProgressBarElement extends Components.ModusProgressBar, HTMLStencilElement {
+    }
+    var HTMLModusProgressBarElement: {
+        prototype: HTMLModusProgressBarElement;
+        new (): HTMLModusProgressBarElement;
+    };
     interface HTMLModusSelectElement extends Components.ModusSelect, HTMLStencilElement {
     }
     var HTMLModusSelectElement: {
@@ -309,6 +345,7 @@ declare global {
         "modus-dropdown": HTMLModusDropdownElement;
         "modus-list": HTMLModusListElement;
         "modus-list-item": HTMLModusListItemElement;
+        "modus-progress-bar": HTMLModusProgressBarElement;
         "modus-select": HTMLModusSelectElement;
         "modus-spinner": HTMLModusSpinnerElement;
         "modus-text-input": HTMLModusTextInputElement;
@@ -463,6 +500,36 @@ declare namespace LocalJSX {
          */
         "type"?: 'standard';
     }
+    interface ModusProgressBar {
+        /**
+          * (optional) The progress bar's background color.
+         */
+        "backgroundColor"?: string;
+        /**
+          * (optional) The progress bar's foreground color.
+         */
+        "color"?: string;
+        /**
+          * (optional) The progress bar's maximum value.
+         */
+        "maxValue"?: number;
+        /**
+          * (optional) The progress bar's minimum value.
+         */
+        "minValue"?: number;
+        /**
+          * (optional) The progress bar's percentage text color.
+         */
+        "percentageColor"?: string;
+        /**
+          * (optional) The text displayed on the progress bar.
+         */
+        "text"?: string;
+        /**
+          * (optional) The progress bar's value.
+         */
+        "value"?: number;
+    }
     interface ModusSelect {
         /**
           * (optional) Whether the input is disabled.
@@ -590,6 +657,7 @@ declare namespace LocalJSX {
         "modus-dropdown": ModusDropdown;
         "modus-list": ModusList;
         "modus-list-item": ModusListItem;
+        "modus-progress-bar": ModusProgressBar;
         "modus-select": ModusSelect;
         "modus-spinner": ModusSpinner;
         "modus-text-input": ModusTextInput;
@@ -607,6 +675,7 @@ declare module "@stencil/core" {
             "modus-dropdown": LocalJSX.ModusDropdown & JSXBase.HTMLAttributes<HTMLModusDropdownElement>;
             "modus-list": LocalJSX.ModusList & JSXBase.HTMLAttributes<HTMLModusListElement>;
             "modus-list-item": LocalJSX.ModusListItem & JSXBase.HTMLAttributes<HTMLModusListItemElement>;
+            "modus-progress-bar": LocalJSX.ModusProgressBar & JSXBase.HTMLAttributes<HTMLModusProgressBarElement>;
             "modus-select": LocalJSX.ModusSelect & JSXBase.HTMLAttributes<HTMLModusSelectElement>;
             "modus-spinner": LocalJSX.ModusSpinner & JSXBase.HTMLAttributes<HTMLModusSpinnerElement>;
             "modus-text-input": LocalJSX.ModusTextInput & JSXBase.HTMLAttributes<HTMLModusTextInputElement>;
