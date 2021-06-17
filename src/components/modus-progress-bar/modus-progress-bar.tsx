@@ -9,10 +9,10 @@ import { Component, Prop, h } from '@stencil/core';
 
 export class ModusProgressBar {
   /** (optional) The progress bar's background color. */
-  @Prop() backgroundColor = '#FFFFFF'; // $col_white
+  @Prop() backgroundColor: string;
 
   /** (optional) The progress bar's foreground color. */
-  @Prop() color = '#005F9E'; // $col_trimble_blue_mid
+  @Prop() color: string;
 
   /** (optional) The progress bar's maximum value. */
   @Prop() maxValue = 100;
@@ -24,22 +24,44 @@ export class ModusProgressBar {
   @Prop() text: string;
 
   /** (optional) The progress bar's text color. */
-  @Prop() textColor = '#FFFFFF'; // $col_white
+  @Prop() textColor: string;
 
   /** (optional) The progress bar's value. */
   @Prop() value = 0;
 
   render(): unknown {
-    const progressBarStyle = {backgroundColor: this.backgroundColor};
     const percentage = (this.value - this.minValue) / (this.maxValue - this.minValue) * 100;
-    const progressStyle = {backgroundColor: this.color, color: this.textColor, width: `${percentage}%`};
+    const progressBarBackgroundColorClass = this.backgroundColor ? '' : 'default-background-color';
+    const progressColorClass = this.color ? '' : 'default-color';
+    const progressTextColor = this.textColor ? '' : 'default-text-color';
+
+    const progressBarClass = `modus-progress-bar ${progressBarBackgroundColorClass}`;
+    const progressClass = `progress ${progressColorClass} ${progressTextColor}`;
 
     return (
-      <div class="modus-progress-bar" style={progressBarStyle}>
-        <div class="progress" style={progressStyle}>
+      <div class={progressBarClass} style={this.getProgressBarStyle()}>
+        <div class={progressClass} style={this.getProgressStyle(percentage)}>
           {this.text}
         </div>
       </div>
     );
+  }
+
+  getProgressStyle(percentage: number): { backgroundColor: string, color: string, width: string } {
+    const progressStyle = {
+      backgroundColor: this.color,
+      color: this.textColor,
+      width: `${percentage}%`
+    };
+
+    return progressStyle;
+  }
+
+  getProgressBarStyle(): { backgroundColor: string } {
+    const progressBarStyle = {
+      backgroundColor: this.backgroundColor
+    };
+
+    return progressBarStyle;
   }
 }
