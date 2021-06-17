@@ -15,13 +15,11 @@ describe('modus-progress-bar', () => {
     await page.setContent('<modus-progress-bar></modus-progress-bar>');
     const component = await page.find('modus-progress-bar');
     const el = await page.find('modus-progress-bar >>> .modus-progress-bar');
-    const computedStyle = await el.getComputedStyle();
-    expect(computedStyle['background-color']).toEqual('rgb(255, 255, 255)');
 
     component.setProperty('backgroundColor', '#FF0000');
     await page.waitForChanges();
-    const computedStyle2 = await el.getComputedStyle();
-    expect(computedStyle2['background-color']).toEqual('rgb(255, 0, 0)');
+    const computedStyle = await el.getComputedStyle();
+    expect(computedStyle['background-color']).toEqual('rgb(255, 0, 0)');
   });
 
   it('renders changes to color prop', async () => {
@@ -30,13 +28,11 @@ describe('modus-progress-bar', () => {
     await page.setContent('<modus-progress-bar></modus-progress-bar>');
     const component = await page.find('modus-progress-bar');
     const el = await page.find('modus-progress-bar >>> .progress');
-    const computedStyle = await el.getComputedStyle();
-    expect(computedStyle['background-color']).toEqual('rgb(0, 95, 158)');
 
     component.setProperty('color', '#FF0000');
     await page.waitForChanges();
-    const computedStyle2 = await el.getComputedStyle();
-    expect(computedStyle2['background-color']).toEqual('rgb(255, 0, 0)');
+    const computedStyle = await el.getComputedStyle();
+    expect(computedStyle['background-color']).toEqual('rgb(255, 0, 0)');
   });
 
   it('renders changes to text color prop', async () => {
@@ -45,13 +41,11 @@ describe('modus-progress-bar', () => {
     await page.setContent('<modus-progress-bar></modus-progress-bar>');
     const component = await page.find('modus-progress-bar');
     const el = await page.find('modus-progress-bar >>> .progress');
-    const computedStyle = await el.getComputedStyle();
-    expect(computedStyle['color']).toEqual('rgb(255, 255, 255)');
 
     component.setProperty('textColor', '#FF0000');
     await page.waitForChanges();
-    const computedStyle2 = await el.getComputedStyle();
-    expect(computedStyle2['color']).toEqual('rgb(255, 0, 0)');
+    const computedStyle = await el.getComputedStyle();
+    expect(computedStyle['color']).toEqual('rgb(255, 0, 0)');
   });
 
   it('renders changes to text prop', async () => {
