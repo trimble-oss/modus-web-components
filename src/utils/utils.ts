@@ -4,3 +4,9 @@ export function createGuid(): string {
     return v.toString(16);
   });
 }
+
+export function generateRandomNumber(): number {
+  const array = new Uint32Array(1);
+  window.crypto.getRandomValues(array);
+  return array[0];
+}

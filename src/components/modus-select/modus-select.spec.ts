@@ -1,3 +1,7 @@
+jest.mock('../../utils/utils', () => ({
+  generateRandomNumber: () => 12345,
+}));
+
 import { newSpecPage } from '@stencil/core/testing';
 import { ModusSelect } from './modus-select';
 
@@ -11,7 +15,7 @@ describe('modus-select', () => {
     expect(root).toEqualHtml(`
       <modus-select>
         <mock:shadow-root>
-          <div>
+          <div aria-describedby="selectDesc12345" aria-labelledby="selectLabel12345" role="combobox">
             <div class='label-container'></div>
             <div class='input-container'>
               <button class='medium' type="button">

@@ -1,3 +1,7 @@
+jest.mock('../../utils/utils', () => ({
+  generateRandomNumber: () => 12345,
+}));
+
 import { newSpecPage } from '@stencil/core/testing';
 import { ModusDialog } from './modus-dialog';
 
@@ -11,9 +15,9 @@ describe('modus-dialog', () => {
       <modus-dialog>
         <mock:shadow-root>
           <div class='overlay'>
-            <div class='dialog' role="dialog" aria-modal="true" aria-labelledby="dialogTitle" aria-describedby="dialogContent">
+            <div aria-describedby="dialogContent12345" aria-labelledby="dialogTitle12345" aria-modal="true" class="dialog" role="dialog">
               <div class="header">
-                <span class="header-text" id="dialogTitle"></span>
+                <span class="header-text" id="dialogTitle12345"></span>
                 <svg class="icon-close" fill="none" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg">
                   <g clip-path="url(#clip0)">
                     <path d="M19 7.30929L17.6907 6L12.5 11.1907L7.30929 6L6 7.30929L11.1907 12.5L6 17.6907L7.30929 19L12.5 13.8093L17.6907 19L19 17.6907L13.8093 12.5L19 7.30929Z" fill="#6A6976"></path>
@@ -25,7 +29,7 @@ describe('modus-dialog', () => {
                   </defs>
                 </svg>
               </div>
-              <div class="content" id="dialogContent">
+              <div class="content" id="dialogContent12345">
                 <slot></slot>
               </div>
               <div class="controls">
