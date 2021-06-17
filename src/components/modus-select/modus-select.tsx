@@ -61,18 +61,10 @@ export class ModusSelect {
 
   @Listen('click', { target: 'document' })
   documentClickHandler(event: MouseEvent): void {
-    if (!event.defaultPrevented) {
-      if ((event.target as HTMLElement).closest('modus-select')) {
-        this.visible = !this.visible;
-      } else {
-        this.visible = false;
-      }
+    // Close the select when click is outside the current element.
+    if (event.defaultPrevented || (event.target as HTMLElement).closest('modus-select')) { return; }
 
-      // Reset activeItemIndex when closed.
-      if (!this.visible) {
-        this.activeItemIndex = 0;
-      }
-    }
+    this.hideDropdown();
   }
 
   @Listen('keydown')
@@ -91,16 +83,33 @@ export class ModusSelect {
         this.activeItemIndex = 0;
         break;
       case 'Tab':
-        this.visible = false;
-        this.activeItemIndex = 0;
+        this.hideDropdown();
         break;
+    }
+  }
+
+  handleButtonClick(): void {
+    if (this.visible) {
+      this.hideDropdown();
+    } else {
+      this.showDropdown();
     }
   }
 
   handleItemSelect(option: unknown): void {
     this.value = option;
     this.valueChange.emit(option);
+    this.hideDropdown();
     (this.el.shadowRoot.querySelector('button') as HTMLElement).focus();
+  }
+
+  hideDropdown(): void {
+    this.visible = false;
+    this.activeItemIndex = 0;
+  }
+
+  showDropdown(): void {
+    this.visible = true;
   }
 
   render(): unknown {
@@ -115,7 +124,7 @@ export class ModusSelect {
           {this.required ? <span class="required">*</span> : null}
         </div>
         <div class={inputContainerClass}>
-          <button class={buttonClass} disabled={this.disabled} type="button">
+          <button class={buttonClass} disabled={this.disabled} onClick={() => this.handleButtonClick()} type="button">
             <div class="dropdown-text">{this.value ? this.value[this.optionsDisplayProp] : null}</div>
             <IconTriangleDown size={'12'} />
           </button>
