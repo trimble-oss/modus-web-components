@@ -66,6 +66,28 @@ export namespace Components {
          */
         "size": 'small' | 'medium';
     }
+    interface ModusDialog {
+        /**
+          * (optional) The text to display in the header.
+         */
+        "headerText": string;
+        /**
+          * (optional) The text to display in the primary button.
+         */
+        "primaryButtonText": string;
+        /**
+          * (optional) The text to display in the secondary button.
+         */
+        "secondaryButtonText": string;
+        /**
+          * (optional) Whether to show the secondary button.
+         */
+        "showSecondaryButton": boolean;
+        /**
+          * (optional) Whether to show the dialog.
+         */
+        "visible": boolean;
+    }
     interface ModusDropdown {
         /**
           * (optional) Disables the dropdown
@@ -236,6 +258,12 @@ declare global {
         prototype: HTMLModusCheckboxElement;
         new (): HTMLModusCheckboxElement;
     };
+    interface HTMLModusDialogElement extends Components.ModusDialog, HTMLStencilElement {
+    }
+    var HTMLModusDialogElement: {
+        prototype: HTMLModusDialogElement;
+        new (): HTMLModusDialogElement;
+    };
     interface HTMLModusDropdownElement extends Components.ModusDropdown, HTMLStencilElement {
     }
     var HTMLModusDropdownElement: {
@@ -277,6 +305,7 @@ declare global {
         "modus-badge": HTMLModusBadgeElement;
         "modus-button": HTMLModusButtonElement;
         "modus-checkbox": HTMLModusCheckboxElement;
+        "modus-dialog": HTMLModusDialogElement;
         "modus-dropdown": HTMLModusDropdownElement;
         "modus-list": HTMLModusListElement;
         "modus-list-item": HTMLModusListItemElement;
@@ -357,6 +386,40 @@ declare namespace LocalJSX {
           * (optional) The size of the button
          */
         "size"?: 'small' | 'medium';
+    }
+    interface ModusDialog {
+        /**
+          * (optional) The text to display in the header.
+         */
+        "headerText"?: string;
+        /**
+          * (optional) An event that fires on close.
+         */
+        "onDialogClose"?: (event: CustomEvent<any>) => void;
+        /**
+          * (optional) An event that fires on primary button click.
+         */
+        "onPrimaryButtonClick"?: (event: CustomEvent<any>) => void;
+        /**
+          * (optional) An event that fires on secondary button click.
+         */
+        "onSecondaryButtonClick"?: (event: CustomEvent<any>) => void;
+        /**
+          * (optional) The text to display in the primary button.
+         */
+        "primaryButtonText"?: string;
+        /**
+          * (optional) The text to display in the secondary button.
+         */
+        "secondaryButtonText"?: string;
+        /**
+          * (optional) Whether to show the secondary button.
+         */
+        "showSecondaryButton"?: boolean;
+        /**
+          * (optional) Whether to show the dialog.
+         */
+        "visible"?: boolean;
     }
     interface ModusDropdown {
         /**
@@ -523,6 +586,7 @@ declare namespace LocalJSX {
         "modus-badge": ModusBadge;
         "modus-button": ModusButton;
         "modus-checkbox": ModusCheckbox;
+        "modus-dialog": ModusDialog;
         "modus-dropdown": ModusDropdown;
         "modus-list": ModusList;
         "modus-list-item": ModusListItem;
@@ -539,6 +603,7 @@ declare module "@stencil/core" {
             "modus-badge": LocalJSX.ModusBadge & JSXBase.HTMLAttributes<HTMLModusBadgeElement>;
             "modus-button": LocalJSX.ModusButton & JSXBase.HTMLAttributes<HTMLModusButtonElement>;
             "modus-checkbox": LocalJSX.ModusCheckbox & JSXBase.HTMLAttributes<HTMLModusCheckboxElement>;
+            "modus-dialog": LocalJSX.ModusDialog & JSXBase.HTMLAttributes<HTMLModusDialogElement>;
             "modus-dropdown": LocalJSX.ModusDropdown & JSXBase.HTMLAttributes<HTMLModusDropdownElement>;
             "modus-list": LocalJSX.ModusList & JSXBase.HTMLAttributes<HTMLModusListElement>;
             "modus-list-item": LocalJSX.ModusListItem & JSXBase.HTMLAttributes<HTMLModusListItemElement>;

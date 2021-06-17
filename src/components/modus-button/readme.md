@@ -21,6 +21,19 @@
 | `buttonClick` | (optional) An event that fires on button click | `CustomEvent<any>` |
 
 
+## Dependencies
+
+### Used by
+
+ - [modus-dialog](../modus-dialog)
+
+### Graph
+```mermaid
+graph TD;
+  modus-dialog --> modus-button
+  style modus-button fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 
