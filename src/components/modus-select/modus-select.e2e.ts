@@ -134,6 +134,7 @@ describe('modus-select', () => {
     await item.click();
     await page.waitForChanges();
 
+    expect(valueChange).toHaveReceivedEvent();
     expect(valueChange).toHaveReceivedEventDetail(options[0]);
   });
 });
