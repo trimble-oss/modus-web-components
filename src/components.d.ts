@@ -5,6 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 export namespace Components {
     interface ModusAlert {
         /**
@@ -33,6 +34,12 @@ export namespace Components {
           * (optional) The type of the badge
          */
         "type": 'counter' | 'default' | 'text';
+    }
+    interface ModusBreadcrumb {
+        /**
+          * The breadcrumbs to render.
+         */
+        "crumbs": Crumb[];
     }
     interface ModusButton {
         /**
@@ -276,6 +283,12 @@ declare global {
         prototype: HTMLModusBadgeElement;
         new (): HTMLModusBadgeElement;
     };
+    interface HTMLModusBreadcrumbElement extends Components.ModusBreadcrumb, HTMLStencilElement {
+    }
+    var HTMLModusBreadcrumbElement: {
+        prototype: HTMLModusBreadcrumbElement;
+        new (): HTMLModusBreadcrumbElement;
+    };
     interface HTMLModusButtonElement extends Components.ModusButton, HTMLStencilElement {
     }
     var HTMLModusButtonElement: {
@@ -339,6 +352,7 @@ declare global {
     interface HTMLElementTagNameMap {
         "modus-alert": HTMLModusAlertElement;
         "modus-badge": HTMLModusBadgeElement;
+        "modus-breadcrumb": HTMLModusBreadcrumbElement;
         "modus-button": HTMLModusButtonElement;
         "modus-checkbox": HTMLModusCheckboxElement;
         "modus-dialog": HTMLModusDialogElement;
@@ -383,6 +397,16 @@ declare namespace LocalJSX {
           * (optional) The type of the badge
          */
         "type"?: 'counter' | 'default' | 'text';
+    }
+    interface ModusBreadcrumb {
+        /**
+          * The breadcrumbs to render.
+         */
+        "crumbs"?: Crumb[];
+        /**
+          * (optional) An event that fires on breadcrumb click.
+         */
+        "onCrumbClick"?: (event: CustomEvent<Crumb>) => void;
     }
     interface ModusButton {
         /**
@@ -651,6 +675,7 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "modus-alert": ModusAlert;
         "modus-badge": ModusBadge;
+        "modus-breadcrumb": ModusBreadcrumb;
         "modus-button": ModusButton;
         "modus-checkbox": ModusCheckbox;
         "modus-dialog": ModusDialog;
@@ -669,6 +694,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "modus-alert": LocalJSX.ModusAlert & JSXBase.HTMLAttributes<HTMLModusAlertElement>;
             "modus-badge": LocalJSX.ModusBadge & JSXBase.HTMLAttributes<HTMLModusBadgeElement>;
+            "modus-breadcrumb": LocalJSX.ModusBreadcrumb & JSXBase.HTMLAttributes<HTMLModusBreadcrumbElement>;
             "modus-button": LocalJSX.ModusButton & JSXBase.HTMLAttributes<HTMLModusButtonElement>;
             "modus-checkbox": LocalJSX.ModusCheckbox & JSXBase.HTMLAttributes<HTMLModusCheckboxElement>;
             "modus-dialog": LocalJSX.ModusDialog & JSXBase.HTMLAttributes<HTMLModusDialogElement>;

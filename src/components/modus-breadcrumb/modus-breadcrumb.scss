@@ -1,0 +1,41 @@
+nav {
+  font-size: $rem-14px;
+  position: relative;
+
+  ol {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: $rem-10px 0;
+
+    li {
+      .crumb {
+        a {
+          color: $col_blue;
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+
+          &:active {
+            color: $col_trimble_gray;
+            text-decoration: none;
+          }
+        }
+
+        .divider {
+          color: $col_gray_8;
+          cursor: default;
+          padding: 0 $rem-8px;
+        }
+      }
+
+      .last-crumb {
+        color: $col_trimble_gray;
+      }
+    }
+  }
+}
