@@ -1,18 +1,18 @@
 button {
   align-items: center;
-  border: 1px solid transparent;
-  border-radius: 2px;
-  cursor: pointer;
+  border: $rem-1px solid transparent;
+  border-radius: $rem-2px;
+  cursor: default;
   display: inline-flex;
   font-weight: $btn-font-weight;
-  text-align: center;
+  justify-content: center;
+  padding: 0;
+  position: relative;
   transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
   user-select: none;
   white-space: nowrap;
-  vertical-align: middle;
 
   &:disabled {
-    cursor: default;
     opacity: .3;
   }
 
@@ -34,88 +34,139 @@ button {
     padding: 0 24px;
   }
 
-  &.color-danger {
-    background-color: $col_red;
-    border-color: $col_red;
-    color: $col_white;
-    fill: $col_white;
+  &.style-borderless {
+    background-color: transparent;
+    color: $col_blue_dark;
+    fill: $col_blue_dark;
+
+    &:hover:not([disabled]) {
+      background-color: $col_gray_light;
+    }
+
+    &:active:not([disabled]) {
+      background-color: $col_blue_pale;
+    }
   }
 
-  &.color-danger:hover {
-    background-color: $col_red_light;
-    border-color: $col_red_light;
+  &.style-fill {
+    &.color-danger {
+      background-color: $col_red;
+      border-color: $col_red;
+      color: $col_white;
+      fill: $col_white;
+    }
+
+    &.color-danger:hover:not([disabled]) {
+      background-color: $col_red_light;
+      border-color: $col_red_light;
+    }
+
+    &.color-danger:active:not([disabled]) {
+      background-color: $col_red_dark;
+      border-color: $col_red_dark;
+    }
+
+    &.color-primary {
+      background-color: $col_blue;
+      border-color: $col_blue;
+      color: $col_white;
+      fill: $col_white;
+    }
+
+    &.color-primary:hover:not([disabled]) {
+      background-color: $col_blue_light;
+      border-color: $col_blue_light;
+    }
+
+    &.color-primary:active:not([disabled]) {
+      background-color: $col_blue_dark;
+      border-color: $col_blue_dark;
+    }
+
+    &.color-secondary {
+      background-color: $secondary;
+      border-color: $secondary;
+      color: $col_white;
+      fill: $col_white;
+    }
+
+    &.color-secondary:hover:not([disabled]) {
+      background-color: $col_gray_6;
+      border-color: $col_gray_6;
+    }
+
+    &.color-secondary:active:not([disabled]) {
+      background-color: $col_gray_8;
+      border-color: $col_gray_8;
+    }
+
+    &.color-tertiary {
+      background-color: $tertiary;
+      border-color: $tertiary;
+      color: $col_gray_dark_3;
+      fill: $col_gray_dark_3;
+    }
+
+    &.color-tertiary:hover:not([disabled]) {
+      background-color: $col_gray_0;
+      border-color: $col_gray_0;
+    }
+
+    &.color-tertiary:active:not([disabled]) {
+      background-color: $col_gray_2;
+      border-color: $col_gray_2;
+    }
+
+    &.color-warning {
+      background-color: $col_yellow;
+      border-color: $col_yellow;
+      color: $col_white;
+      fill: $col_white;
+    }
+
+    &.color-warning:hover:not([disabled]) {
+      background-color: $col_yellow_light;
+      border-color: $col_yellow_light;
+    }
+
+    &.color-warning:active:not([disabled]) {
+      background-color: $col_yellow_dark;
+      border-color: $col_yellow_dark;
+    }
   }
 
-  &.color-danger:active {
-    background-color: $col_red_dark;
-    border-color: $col_red_dark;
-  }
+  &.style-outline {
+    &.color-primary {
+      background-color: transparent;
+      border-color: $col_trimble_blue_mid;
+      color: $col_trimble_blue_mid;
+      fill: $col_trimble_blue_mid;
+    }
 
-  &.color-primary {
-    background-color: $col_blue;
-    border-color: $col_blue;
-    color: $col_white;
-    fill: $col_white;
-  }
+    &.color-primary:hover:not([disabled]) {
+      background-color: #DDE7F1;
+      border-color: #017ED1;
+    }
 
-  &.color-primary:hover {
-    background-color: $col_blue_light;
-    border-color: $col_blue_light;
-  }
+    &.color-primary:active:not([disabled]) {
+      background-color: #D2DFEC;
+      border-color: #005085;
+    }
 
-  &.color-primary:active {
-    background-color: $col_blue_dark;
-    border-color: $col_blue_dark;
-  }
+    &.color-secondary {
+      background-color: transparent;
+      border-color: $col_trimble_gray;
+      color: $col_trimble_gray;
+      fill: $col_trimble_gray;
+    }
 
-  &.color-secondary {
-    background-color: $secondary;
-    border-color: $secondary;
-    color: $col_white;
-    fill: $col_white;
-  }
+    &.color-secondary:hover:not([disabled]) {
+      background-color: #E0E0E4;
+    }
 
-  &.color-secondary:hover {
-    background-color: $col_gray_6;
-    border-color: $col_gray_6;
-  }
-
-  &.color-secondary:active {
-    background-color: $col_gray_8;
-    border-color: $col_gray_8;
-  }
-
-  &.color-tertiary {
-    background-color: $tertiary;
-    border-color: $tertiary;
-    color: $col_gray_dark_3;
-    fill: $col_gray_dark_3;
-  }
-
-  &.color-tertiary:hover {
-    background-color: $col_gray_0;
-    border-color: $col_gray_0;
-  }
-
-  &.color-tertiary:active {
-    background-color: $col_gray_2;
-    border-color: $col_gray_2;
-  }
-
-  &.color-warning {
-    background-color: $col_yellow;
-    border-color: $col_yellow;
-    color: $col_white;
-    fill: $col_white;
-  }
-
-  &.color-warning:hover {
-    background-color: $col_yellow_light;
-    border-color: $col_yellow_light;
-  }
-
-  &.color-warning:active {
-    background-color: $col_yellow_dark;
-    border-color: $col_yellow_dark;
+    &.color-secondary:active:not([disabled]) {
+      background-color: $col_gray_2;
+      border-color: $col_gray_8;
+    }
   }
 }

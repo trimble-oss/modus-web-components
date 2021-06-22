@@ -9,6 +9,19 @@ describe('modus-button', () => {
     expect(element).toHaveClass('hydrated');
   });
 
+  it('renders changes to the buttonStyle prop', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-button></modus-button>');
+    const component = await page.find('modus-button');
+    const element = await page.find('modus-button >>> button');
+    expect(element).toHaveClass('style-fill');
+
+    component.setProperty('buttonStyle', 'borderless');
+    await page.waitForChanges();
+    expect(element).toHaveClass('style-borderless');
+  });
+
   it('renders changes to the color prop', async () => {
     const page = await newE2EPage();
 
