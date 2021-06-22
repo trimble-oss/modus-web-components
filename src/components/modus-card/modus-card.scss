@@ -1,0 +1,11 @@
+article {
+  background-color: $col_white;
+  border: $rem-1px solid $col_gray_light;
+  border-radius: $rem-2px;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    box-shadow: $box-shadow-lg;
+  }
+}

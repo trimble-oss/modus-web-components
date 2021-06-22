@@ -55,6 +55,16 @@ export namespace Components {
          */
         "size": 'small' | 'medium' | 'large';
     }
+    interface ModusCard {
+        /**
+          * (optional) The height of the card.
+         */
+        "height": string;
+        /**
+          * (optional) The width of the card.
+         */
+        "width": string;
+    }
     interface ModusCheckbox {
         /**
           * (optional) Whether the checkbox is checked.
@@ -295,6 +305,12 @@ declare global {
         prototype: HTMLModusButtonElement;
         new (): HTMLModusButtonElement;
     };
+    interface HTMLModusCardElement extends Components.ModusCard, HTMLStencilElement {
+    }
+    var HTMLModusCardElement: {
+        prototype: HTMLModusCardElement;
+        new (): HTMLModusCardElement;
+    };
     interface HTMLModusCheckboxElement extends Components.ModusCheckbox, HTMLStencilElement {
     }
     var HTMLModusCheckboxElement: {
@@ -354,6 +370,7 @@ declare global {
         "modus-badge": HTMLModusBadgeElement;
         "modus-breadcrumb": HTMLModusBreadcrumbElement;
         "modus-button": HTMLModusButtonElement;
+        "modus-card": HTMLModusCardElement;
         "modus-checkbox": HTMLModusCheckboxElement;
         "modus-dialog": HTMLModusDialogElement;
         "modus-dropdown": HTMLModusDropdownElement;
@@ -425,6 +442,16 @@ declare namespace LocalJSX {
           * (optional) The size of the button
          */
         "size"?: 'small' | 'medium' | 'large';
+    }
+    interface ModusCard {
+        /**
+          * (optional) The height of the card.
+         */
+        "height"?: string;
+        /**
+          * (optional) The width of the card.
+         */
+        "width"?: string;
     }
     interface ModusCheckbox {
         /**
@@ -677,6 +704,7 @@ declare namespace LocalJSX {
         "modus-badge": ModusBadge;
         "modus-breadcrumb": ModusBreadcrumb;
         "modus-button": ModusButton;
+        "modus-card": ModusCard;
         "modus-checkbox": ModusCheckbox;
         "modus-dialog": ModusDialog;
         "modus-dropdown": ModusDropdown;
@@ -696,6 +724,7 @@ declare module "@stencil/core" {
             "modus-badge": LocalJSX.ModusBadge & JSXBase.HTMLAttributes<HTMLModusBadgeElement>;
             "modus-breadcrumb": LocalJSX.ModusBreadcrumb & JSXBase.HTMLAttributes<HTMLModusBreadcrumbElement>;
             "modus-button": LocalJSX.ModusButton & JSXBase.HTMLAttributes<HTMLModusButtonElement>;
+            "modus-card": LocalJSX.ModusCard & JSXBase.HTMLAttributes<HTMLModusCardElement>;
             "modus-checkbox": LocalJSX.ModusCheckbox & JSXBase.HTMLAttributes<HTMLModusCheckboxElement>;
             "modus-dialog": LocalJSX.ModusDialog & JSXBase.HTMLAttributes<HTMLModusDialogElement>;
             "modus-dropdown": LocalJSX.ModusDropdown & JSXBase.HTMLAttributes<HTMLModusDropdownElement>;

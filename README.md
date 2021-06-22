@@ -22,6 +22,7 @@ This library provides Modus Elements as web components. Web components are reusa
     - Badge (modus-badge)
     - Breadcrumb (modus-breadcrumb)
     - Button (modus-button)
+    - Card (modus-card)
     - Checkbox (modus-checkbox)
     - Dialog (modus-dialog)
     - Dropdown (modus-dropdown)
@@ -33,7 +34,6 @@ This library provides Modus Elements as web components. Web components are reusa
     - Text Input (modus-text-input)
   - **Not Implemented**
     - [Accordion](#accordion)
-    - [Card](#card)
     - [Chip](#chip)
     - [Header](#header)
     - [Input Date](#input-date)
