@@ -43,15 +43,19 @@ export namespace Components {
     }
     interface ModusButton {
         /**
-          * (optional) The color of the button
+          * (optional) The style of the button
+         */
+        "buttonStyle": 'borderless' | 'fill' | 'outline';
+        /**
+          * (optional) The color of the button.
          */
         "color": 'danger' | 'default' | 'primary' | 'secondary' | 'warning';
         /**
-          * (optional) Disables the button
+          * (optional) Disables the button.
          */
         "disabled": boolean;
         /**
-          * (optional) The size of the button
+          * (optional) The size of the button.
          */
         "size": 'small' | 'medium' | 'large';
     }
@@ -427,19 +431,23 @@ declare namespace LocalJSX {
     }
     interface ModusButton {
         /**
-          * (optional) The color of the button
+          * (optional) The style of the button
+         */
+        "buttonStyle"?: 'borderless' | 'fill' | 'outline';
+        /**
+          * (optional) The color of the button.
          */
         "color"?: 'danger' | 'default' | 'primary' | 'secondary' | 'warning';
         /**
-          * (optional) Disables the button
+          * (optional) Disables the button.
          */
         "disabled"?: boolean;
         /**
-          * (optional) An event that fires on button click
+          * (optional) An event that fires on button click.
          */
         "onButtonClick"?: (event: CustomEvent<any>) => void;
         /**
-          * (optional) The size of the button
+          * (optional) The size of the button.
          */
         "size"?: 'small' | 'medium' | 'large';
     }

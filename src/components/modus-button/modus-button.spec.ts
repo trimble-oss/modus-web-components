@@ -10,7 +10,7 @@ describe('modus-button', () => {
     expect(root).toEqualHtml(`
       <modus-button>
         <mock:shadow-root>
-          <button class="size-medium color-tertiary">
+          <button aria-label="" class="size-medium color-tertiary style-fill" role="button">
             <slot></slot>
           </button>
         </mock:shadow-root>
@@ -26,7 +26,7 @@ describe('modus-button', () => {
     expect(root).toEqualHtml(`
       <modus-button>
         <mock:shadow-root>
-          <button class="size-medium color-tertiary">
+          <button aria-label="Button" class="size-medium color-tertiary style-fill" role="button">
             <slot></slot>
           </button>
         </mock:shadow-root>
@@ -35,7 +35,19 @@ describe('modus-button', () => {
     `);
   });
 
-  it('should get the correct class by type', async () => {
+  it('should get the correct class by buttonStyle', async () => {
+    const modusButton = new ModusButton();
+    let className = modusButton.classByButtonStyle.get(modusButton.buttonStyle);
+    expect(className).toEqual('style-fill');
+
+    className = modusButton.classByButtonStyle.get('borderless');
+    expect(className).toEqual('style-borderless');
+
+    className = modusButton.classByButtonStyle.get('outline');
+    expect(className).toEqual('style-outline');
+  });
+
+  it('should get the correct class by color', async () => {
     const modusButton = new ModusButton();
     let className = modusButton.classByColor.get(modusButton.color);
     expect(className).toEqual('color-tertiary');
