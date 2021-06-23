@@ -7,6 +7,26 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 export namespace Components {
+    interface ModusAccordion {
+    }
+    interface ModusAccordionItem {
+        /**
+          * (optional) Disables the accordion item, locks expand/collapse.
+         */
+        "disabled": boolean;
+        /**
+          * (optional) Whether the accordion item is expanded.
+         */
+        "expanded": boolean;
+        /**
+          * (required) The text to render in the header.
+         */
+        "headerText": string;
+        /**
+          * (optional) The size of accordion item.
+         */
+        "size": 'condensed' | 'standard';
+    }
     interface ModusAlert {
         /**
           * (optional) Whether the alert has a dismiss button
@@ -285,6 +305,18 @@ export namespace Components {
     }
 }
 declare global {
+    interface HTMLModusAccordionElement extends Components.ModusAccordion, HTMLStencilElement {
+    }
+    var HTMLModusAccordionElement: {
+        prototype: HTMLModusAccordionElement;
+        new (): HTMLModusAccordionElement;
+    };
+    interface HTMLModusAccordionItemElement extends Components.ModusAccordionItem, HTMLStencilElement {
+    }
+    var HTMLModusAccordionItemElement: {
+        prototype: HTMLModusAccordionItemElement;
+        new (): HTMLModusAccordionItemElement;
+    };
     interface HTMLModusAlertElement extends Components.ModusAlert, HTMLStencilElement {
     }
     var HTMLModusAlertElement: {
@@ -370,6 +402,8 @@ declare global {
         new (): HTMLModusTextInputElement;
     };
     interface HTMLElementTagNameMap {
+        "modus-accordion": HTMLModusAccordionElement;
+        "modus-accordion-item": HTMLModusAccordionItemElement;
         "modus-alert": HTMLModusAlertElement;
         "modus-badge": HTMLModusBadgeElement;
         "modus-breadcrumb": HTMLModusBreadcrumbElement;
@@ -387,6 +421,34 @@ declare global {
     }
 }
 declare namespace LocalJSX {
+    interface ModusAccordion {
+    }
+    interface ModusAccordionItem {
+        /**
+          * (optional) Disables the accordion item, locks expand/collapse.
+         */
+        "disabled"?: boolean;
+        /**
+          * (optional) Whether the accordion item is expanded.
+         */
+        "expanded"?: boolean;
+        /**
+          * (required) The text to render in the header.
+         */
+        "headerText"?: string;
+        /**
+          * An event that fires on every accordion close.
+         */
+        "onClosed"?: (event: CustomEvent<any>) => void;
+        /**
+          * An event that fires on every accordion open.
+         */
+        "onOpened"?: (event: CustomEvent<any>) => void;
+        /**
+          * (optional) The size of accordion item.
+         */
+        "size"?: 'condensed' | 'standard';
+    }
     interface ModusAlert {
         /**
           * (optional) Whether the alert has a dismiss button
@@ -708,6 +770,8 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface IntrinsicElements {
+        "modus-accordion": ModusAccordion;
+        "modus-accordion-item": ModusAccordionItem;
         "modus-alert": ModusAlert;
         "modus-badge": ModusBadge;
         "modus-breadcrumb": ModusBreadcrumb;
@@ -728,6 +792,8 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "modus-accordion": LocalJSX.ModusAccordion & JSXBase.HTMLAttributes<HTMLModusAccordionElement>;
+            "modus-accordion-item": LocalJSX.ModusAccordionItem & JSXBase.HTMLAttributes<HTMLModusAccordionItemElement>;
             "modus-alert": LocalJSX.ModusAlert & JSXBase.HTMLAttributes<HTMLModusAlertElement>;
             "modus-badge": LocalJSX.ModusBadge & JSXBase.HTMLAttributes<HTMLModusBadgeElement>;
             "modus-breadcrumb": LocalJSX.ModusBreadcrumb & JSXBase.HTMLAttributes<HTMLModusBreadcrumbElement>;
