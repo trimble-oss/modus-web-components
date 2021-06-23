@@ -18,6 +18,8 @@ This library provides Modus Elements as web components. Web components are reusa
 - [Technology](#technology)
 - [Components](#components)
   - **Implemented**
+    - Accordion (modus-accordion)
+    - Accordion Item (modus-accordion-item)
     - Alert (modus-alert)
     - Badge (modus-badge)
     - Breadcrumb (modus-breadcrumb)
@@ -33,7 +35,6 @@ This library provides Modus Elements as web components. Web components are reusa
     - Spinner (modus-spinner)
     - Text Input (modus-text-input)
   - **Not Implemented**
-    - [Accordion](#accordion)
     - [Chip](#chip)
     - [Header](#header)
     - [Input Date](#input-date)
