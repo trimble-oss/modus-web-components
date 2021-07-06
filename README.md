@@ -28,17 +28,17 @@ This library provides Modus Elements as web components. Web components are reusa
     - Checkbox (modus-checkbox)
     - Dialog (modus-dialog)
     - Dropdown (modus-dropdown)
+    - Input Number (modus-number-input)
+    - Input Text (modus-text-input)
     - List (modus-list)
     - List Item (modus-list-item)
     - Progress Bar (modus-progress-bar)
     - Select (modus-select)
     - Spinner (modus-spinner)
-    - Text Input (modus-text-input)
   - **Not Implemented**
     - Chip
     - Header
     - Input Date
-    - Input Number - in progress
     - Input Radio
     - Message
     - Navbar - in progress

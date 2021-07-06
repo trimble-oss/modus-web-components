@@ -193,6 +193,60 @@ export namespace Components {
          */
         "showSearch": boolean;
     }
+    interface ModusNumberInput {
+        /**
+          * (optional) Whether the input is disabled.
+         */
+        "disabled": boolean;
+        /**
+          * (optional) The input's error state text.
+         */
+        "errorText": string;
+        /**
+          * (optional) The input's helper text displayed below the input.
+         */
+        "helperText": string;
+        /**
+          * (optional) The input's label.
+         */
+        "label": string;
+        /**
+          * (optional) The input's maximum value.
+         */
+        "maxValue": number;
+        /**
+          * (optional) The input's minimum value.
+         */
+        "minValue": number;
+        /**
+          * (optional) The input's placeholder text.
+         */
+        "placeholder": string;
+        /**
+          * (optional) Whether the input's content is read-only
+         */
+        "readOnly": boolean;
+        /**
+          * (optional) Whether the input is required.
+         */
+        "required": boolean;
+        /**
+          * (optional) The input's size.
+         */
+        "size": 'medium' | 'large';
+        /**
+          * (optional) The input's step.
+         */
+        "step": number;
+        /**
+          * (optional) The input's valid state text.
+         */
+        "validText": string;
+        /**
+          * (optional) The input's value.
+         */
+        "value": number;
+    }
     interface ModusProgressBar {
         /**
           * (optional) The progress bar's background color.
@@ -413,6 +467,12 @@ declare global {
         prototype: HTMLModusNavbarElement;
         new (): HTMLModusNavbarElement;
     };
+    interface HTMLModusNumberInputElement extends Components.ModusNumberInput, HTMLStencilElement {
+    }
+    var HTMLModusNumberInputElement: {
+        prototype: HTMLModusNumberInputElement;
+        new (): HTMLModusNumberInputElement;
+    };
     interface HTMLModusProgressBarElement extends Components.ModusProgressBar, HTMLStencilElement {
     }
     var HTMLModusProgressBarElement: {
@@ -451,6 +511,7 @@ declare global {
         "modus-list": HTMLModusListElement;
         "modus-list-item": HTMLModusListItemElement;
         "modus-navbar": HTMLModusNavbarElement;
+        "modus-number-input": HTMLModusNumberInputElement;
         "modus-progress-bar": HTMLModusProgressBarElement;
         "modus-select": HTMLModusSelectElement;
         "modus-spinner": HTMLModusSpinnerElement;
@@ -692,6 +753,64 @@ declare namespace LocalJSX {
          */
         "showSearch"?: boolean;
     }
+    interface ModusNumberInput {
+        /**
+          * (optional) Whether the input is disabled.
+         */
+        "disabled"?: boolean;
+        /**
+          * (optional) The input's error state text.
+         */
+        "errorText"?: string;
+        /**
+          * (optional) The input's helper text displayed below the input.
+         */
+        "helperText"?: string;
+        /**
+          * (optional) The input's label.
+         */
+        "label"?: string;
+        /**
+          * (optional) The input's maximum value.
+         */
+        "maxValue"?: number;
+        /**
+          * (optional) The input's minimum value.
+         */
+        "minValue"?: number;
+        /**
+          * An event that fires on input value change.
+         */
+        "onValueChange"?: (event: CustomEvent<number>) => void;
+        /**
+          * (optional) The input's placeholder text.
+         */
+        "placeholder"?: string;
+        /**
+          * (optional) Whether the input's content is read-only
+         */
+        "readOnly"?: boolean;
+        /**
+          * (optional) Whether the input is required.
+         */
+        "required"?: boolean;
+        /**
+          * (optional) The input's size.
+         */
+        "size"?: 'medium' | 'large';
+        /**
+          * (optional) The input's step.
+         */
+        "step"?: number;
+        /**
+          * (optional) The input's valid state text.
+         */
+        "validText"?: string;
+        /**
+          * (optional) The input's value.
+         */
+        "value"?: number;
+    }
     interface ModusProgressBar {
         /**
           * (optional) The progress bar's background color.
@@ -854,6 +973,7 @@ declare namespace LocalJSX {
         "modus-list": ModusList;
         "modus-list-item": ModusListItem;
         "modus-navbar": ModusNavbar;
+        "modus-number-input": ModusNumberInput;
         "modus-progress-bar": ModusProgressBar;
         "modus-select": ModusSelect;
         "modus-spinner": ModusSpinner;
@@ -877,6 +997,7 @@ declare module "@stencil/core" {
             "modus-list": LocalJSX.ModusList & JSXBase.HTMLAttributes<HTMLModusListElement>;
             "modus-list-item": LocalJSX.ModusListItem & JSXBase.HTMLAttributes<HTMLModusListItemElement>;
             "modus-navbar": LocalJSX.ModusNavbar & JSXBase.HTMLAttributes<HTMLModusNavbarElement>;
+            "modus-number-input": LocalJSX.ModusNumberInput & JSXBase.HTMLAttributes<HTMLModusNumberInputElement>;
             "modus-progress-bar": LocalJSX.ModusProgressBar & JSXBase.HTMLAttributes<HTMLModusProgressBarElement>;
             "modus-select": LocalJSX.ModusSelect & JSXBase.HTMLAttributes<HTMLModusSelectElement>;
             "modus-spinner": LocalJSX.ModusSpinner & JSXBase.HTMLAttributes<HTMLModusSpinnerElement>;
