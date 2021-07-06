@@ -163,6 +163,36 @@ export namespace Components {
          */
         "type": 'standard';
     }
+    interface ModusNavbar {
+        /**
+          * (required) Product logo options.
+         */
+        "productLogoOptions": { url: string };
+        /**
+          * (required) Profile menu options.
+         */
+        "profileMenuOptions": { avatarUrl?: string, email?: string, initials?: string, username: string };
+        /**
+          * (optional) Whether to show the apps menu.
+         */
+        "showAppsMenu": boolean;
+        /**
+          * (optional) Whether to show the help menu.
+         */
+        "showHelpMenu": boolean;
+        /**
+          * (optional) Whether to show the main menu.
+         */
+        "showMainMenu": boolean;
+        /**
+          * (optional) Whether to show notifications.
+         */
+        "showNotifications": boolean;
+        /**
+          * (optional) Whether to show search.
+         */
+        "showSearch": boolean;
+    }
     interface ModusProgressBar {
         /**
           * (optional) The progress bar's background color.
@@ -377,6 +407,12 @@ declare global {
         prototype: HTMLModusListItemElement;
         new (): HTMLModusListItemElement;
     };
+    interface HTMLModusNavbarElement extends Components.ModusNavbar, HTMLStencilElement {
+    }
+    var HTMLModusNavbarElement: {
+        prototype: HTMLModusNavbarElement;
+        new (): HTMLModusNavbarElement;
+    };
     interface HTMLModusProgressBarElement extends Components.ModusProgressBar, HTMLStencilElement {
     }
     var HTMLModusProgressBarElement: {
@@ -414,6 +450,7 @@ declare global {
         "modus-dropdown": HTMLModusDropdownElement;
         "modus-list": HTMLModusListElement;
         "modus-list-item": HTMLModusListItemElement;
+        "modus-navbar": HTMLModusNavbarElement;
         "modus-progress-bar": HTMLModusProgressBarElement;
         "modus-select": HTMLModusSelectElement;
         "modus-spinner": HTMLModusSpinnerElement;
@@ -621,6 +658,40 @@ declare namespace LocalJSX {
          */
         "type"?: 'standard';
     }
+    interface ModusNavbar {
+        /**
+          * An event that fires on product logo click.
+         */
+        "onProductLogoClick"?: (event: CustomEvent<MouseEvent>) => void;
+        /**
+          * (required) Product logo options.
+         */
+        "productLogoOptions"?: { url: string };
+        /**
+          * (required) Profile menu options.
+         */
+        "profileMenuOptions"?: { avatarUrl?: string, email?: string, initials?: string, username: string };
+        /**
+          * (optional) Whether to show the apps menu.
+         */
+        "showAppsMenu"?: boolean;
+        /**
+          * (optional) Whether to show the help menu.
+         */
+        "showHelpMenu"?: boolean;
+        /**
+          * (optional) Whether to show the main menu.
+         */
+        "showMainMenu"?: boolean;
+        /**
+          * (optional) Whether to show notifications.
+         */
+        "showNotifications"?: boolean;
+        /**
+          * (optional) Whether to show search.
+         */
+        "showSearch"?: boolean;
+    }
     interface ModusProgressBar {
         /**
           * (optional) The progress bar's background color.
@@ -782,6 +853,7 @@ declare namespace LocalJSX {
         "modus-dropdown": ModusDropdown;
         "modus-list": ModusList;
         "modus-list-item": ModusListItem;
+        "modus-navbar": ModusNavbar;
         "modus-progress-bar": ModusProgressBar;
         "modus-select": ModusSelect;
         "modus-spinner": ModusSpinner;
@@ -804,6 +876,7 @@ declare module "@stencil/core" {
             "modus-dropdown": LocalJSX.ModusDropdown & JSXBase.HTMLAttributes<HTMLModusDropdownElement>;
             "modus-list": LocalJSX.ModusList & JSXBase.HTMLAttributes<HTMLModusListElement>;
             "modus-list-item": LocalJSX.ModusListItem & JSXBase.HTMLAttributes<HTMLModusListItemElement>;
+            "modus-navbar": LocalJSX.ModusNavbar & JSXBase.HTMLAttributes<HTMLModusNavbarElement>;
             "modus-progress-bar": LocalJSX.ModusProgressBar & JSXBase.HTMLAttributes<HTMLModusProgressBarElement>;
             "modus-select": LocalJSX.ModusSelect & JSXBase.HTMLAttributes<HTMLModusSelectElement>;
             "modus-spinner": LocalJSX.ModusSpinner & JSXBase.HTMLAttributes<HTMLModusSpinnerElement>;

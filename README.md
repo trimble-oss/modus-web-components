@@ -35,21 +35,22 @@ This library provides Modus Elements as web components. Web components are reusa
     - Spinner (modus-spinner)
     - Text Input (modus-text-input)
   - **Not Implemented**
-    - [Chip](#chip)
-    - [Header](#header)
-    - [Input Date](#input-date)
-    - [Input Number](#input-number)
-    - [Input Radio](#input-radio)
-    - [Message](#message)
-    - [Pagination](#pagination)
-    - [Pattern](#pattern)
-    - [Slider](#slider)
-    - [Switch](#switch)
-    - [Table/List](#table/list)
-    - [Table/Sheet](#table/sheet)
-    - [Tab](#tab)
-    - [Toast](#toast)
-    - [Tooltip](#tooltip)
+    - Chip
+    - Header
+    - Input Date
+    - Input Number - in progress
+    - Input Radio
+    - Message
+    - Navbar - in progress
+    - Pagination
+    - Pattern
+    - Slider
+    - Switch
+    - Table/List
+    - Table/Sheet
+    - Tab
+    - Toast
+    - Tooltip
   
 ## Getting Started
 

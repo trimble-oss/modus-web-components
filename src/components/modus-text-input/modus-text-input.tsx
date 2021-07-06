@@ -84,7 +84,7 @@ export class ModusTextInput {
         <div
           class={`input-container ${this.errorText ? 'error' : this.validText ? 'valid' : ''} ${this.classBySize.get(this.size)}`}
           onClick={() => this.textInput.focus()}>
-            {this.includeSearchIcon ? <IconSearch /> : null}
+            {this.includeSearchIcon ? <IconSearch size="16" /> : null}
             <input class={`${this.includeSearchIcon ? 'has-left-icon' : ''} ${this.clearable ? 'has-right-icon' : null}`}
                    disabled={this.disabled}
                    maxlength={this.maxLength}

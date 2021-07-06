@@ -3,12 +3,12 @@ import { FunctionalComponent, h } from '@stencil/core';
 
 interface IconProps {
   color?: string;
-  onClick?: () => void;
+  onClick?: (event: MouseEvent) => void;
   size?: string;
 }
 
 export const IconSearch: FunctionalComponent<IconProps> = (props: IconProps) => (
-  <svg width={props.size ?? '14'} height={props.size ?? 14} viewBox="0 0 14 14" onClick={props.onClick ? () => props.onClick() : null} fill = "none" >
-    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.37336 8.80503H10.0057L14 12.8073L12.8073 14L8.80503 10.0057V9.37336L8.58891 9.14923C7.67639 9.93368 6.49171 10.4059 5.20297 10.4059C2.32933 10.4059 0 8.07662 0 5.20297C0 2.32933 2.32933 0 5.20297 0C8.07662 0 10.4059 2.32933 10.4059 5.20297C10.4059 6.49171 9.93368 7.67639 9.14923 8.58891L9.37336 8.80503ZM1.60092 5.20298C1.60092 7.19612 3.20984 8.80504 5.20298 8.80504C7.19612 8.80504 8.80504 7.19612 8.80504 5.20298C8.80504 3.20984 7.19612 1.60092 5.20298 1.60092C3.20984 1.60092 1.60092 3.20984 1.60092 5.20298Z" fill={props.color ?? '#6A6976'}/>
+  <svg class="icon-search" width={props.size ?? '14'} height={props.size ?? 14} onClick={props.onClick ? (event) => props.onClick(event) : null} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15.5 14H14.71L14.43 13.73C15.41 12.59 16 11.11 16 9.5C16 5.91 13.09 3 9.5 3C5.91 3 3 5.91 3 9.5C3 13.09 5.91 16 9.5 16C11.11 16 12.59 15.41 13.73 14.43L14 14.71V15.5L19 20.49L20.49 19L15.5 14ZM9.5 14C7.01 14 5 11.99 5 9.5C5 7.01 7.01 5 9.5 5C11.99 5 14 7.01 14 9.5C14 11.99 11.99 14 9.5 14Z" fill={props.color ?? '#6A6976'} />
   </svg>
 );
