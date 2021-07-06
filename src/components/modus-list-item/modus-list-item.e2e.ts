@@ -32,9 +32,7 @@ describe('modus-list-item', () => {
 
     component.setProperty('selected', true);
     await page.waitForChanges();
-    const selectedIconElement = await page.find('modus-list-item >>> .selected-icon')
     expect(liElement).toHaveClass('selected');
-    expect(selectedIconElement).toHaveClass('selected-icon');
   });
 
   it('renders changes to the size prop', async () => {

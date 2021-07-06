@@ -1,5 +1,6 @@
 // eslint-disable-next-line
 import { Component, Event, EventEmitter, Prop, h } from '@stencil/core';
+import { IconCheck } from '../icons/icon-check';
 
 @Component({
   tag: 'modus-list-item',
@@ -29,16 +30,13 @@ export class ModusListItem {
 
   render(): unknown {
     const containerClass = `${this.classBySize.get(this.size)} ${this.disabled ? 'disabled' : ''} ${this.selected ? 'selected' : ''}`;
-    const svgHeight = this.size === 'standard' ? 12 : 10;
-    const svgWidth = this.size === 'standard' ? 14 : 12;
+    const iconSize = this.size === 'standard' ? '22' : '18';
 
     return (
       <li class={containerClass} onClick={() => !this.disabled ? this.itemClick.emit() : null}>
         <span class="slot"><slot /></span>
         {this.selected ?
-          <svg width={svgWidth} height={svgHeight} viewBox="0 0 12 10" fill="none" class="selected-icon">
-            <path d="M3.81353 7.21774L0.968732 4.37294L0 5.33485L3.81353 9.14838L12 0.96191L11.0381 0L3.81353 7.21774Z" fill="#363545"/>
-          </svg>
+          <IconCheck size={iconSize} />
         : null}
       </li>
     );
