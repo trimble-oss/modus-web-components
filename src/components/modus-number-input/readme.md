@@ -21,14 +21,14 @@
 | `size`        | `size`        | (optional) The input's size.                                  | `"large" \| "medium"` | `'medium'`  |
 | `step`        | `step`        | (optional) The input's step.                                  | `number`              | `undefined` |
 | `validText`   | `valid-text`  | (optional) The input's valid state text.                      | `string`              | `undefined` |
-| `value`       | `value`       | (optional) The input's value.                                 | `number`              | `undefined` |
+| `value`       | `value`       | (optional) The input's value.                                 | `string`              | `undefined` |
 
 
 ## Events
 
 | Event         | Description                                | Type                  |
 | ------------- | ------------------------------------------ | --------------------- |
-| `valueChange` | An event that fires on input value change. | `CustomEvent<number>` |
+| `valueChange` | An event that fires on input value change. | `CustomEvent<string>` |
 
 
 ----------------------------------------------

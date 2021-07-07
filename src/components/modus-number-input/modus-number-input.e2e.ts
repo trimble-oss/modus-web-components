@@ -132,10 +132,12 @@ describe('modus-number-input', () => {
 
     const numberInput = await page.find('modus-number-input');
     const input = await page.find('modus-number-input >>> input');
+    expect(await numberInput.getProperty('value')).toBeFalsy();
     expect(await input.getProperty('value')).toBeFalsy();
 
     numberInput.setProperty('value', '3');
     await page.waitForChanges();
+    expect(await numberInput.getProperty('value')).toEqual('3');
     expect(await input.getProperty('value')).toEqual('3');
   });
 
@@ -188,5 +190,33 @@ describe('modus-number-input', () => {
     await page.waitForChanges();
 
     expect(await element.getProperty('readOnly')).toEqual(true);
+  });
+
+  it('renders changes to step', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-number-input></modus-number-input>');
+    const numberInput = await page.find('modus-number-input');
+    numberInput.setProperty('step', '2');
+    const element = await page.find('modus-number-input >>> input');
+    await page.waitForChanges();
+
+    expect(await element.getProperty('step')).toEqual('2');
+  });
+
+  it('should not update value if value is set to not a number', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-number-input></modus-number-input>');
+    const numberInput = await page.find('modus-number-input');
+    numberInput.setProperty('value', '2');
+    await page.waitForChanges();
+
+    numberInput.setProperty('value', 'abcd');
+    await page.waitForChanges();
+
+    const element = await page.find('modus-number-input >>> input');
+
+    expect(await element.getProperty('value')).toEqual('2');
   });
 });

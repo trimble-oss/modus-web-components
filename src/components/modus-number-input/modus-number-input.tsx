@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { Component, Event, EventEmitter, h, Prop } from '@stencil/core';
+import { Component, Event, EventEmitter, h, Prop, Watch } from '@stencil/core';
 import { generateRandomNumber } from '../../utils/utils';
 
 @Component({
@@ -45,26 +45,35 @@ export class ModusNumberInput {
   @Prop() validText: string;
 
   /** (optional) The input's value. */
-  @Prop({ mutable: true }) value: number;
+  @Prop({ mutable: true }) value: string;
 
   /** An event that fires on input value change. */
-  @Event() valueChange: EventEmitter<number>;
+  @Event() valueChange: EventEmitter<string>;
 
   accessibilityId: number;
   classBySize: Map<string, string> = new Map([
     ['medium', 'medium'],
     ['large', 'large']
   ]);
-
   numberInput: HTMLInputElement;
 
   componentWillLoad(): void {
     this.accessibilityId = generateRandomNumber();
   }
 
-  handleOnInput(event: Event): void {
-    this.value = (event.currentTarget as HTMLInputElement).valueAsNumber;
+  handleOnInput(): void {
+    this.value = this.numberInput.value;
     this.valueChange.emit(this.value);
+  }
+
+  @Watch('value')
+  watchValue(newValue: string, oldValue: string): void {
+    if (isNaN(+newValue)) {
+      this.value = oldValue;
+      console.error(`${newValue} is not a number.`);
+    } else {
+      this.value = newValue;
+    }
   }
 
   render(): unknown {
@@ -90,7 +99,7 @@ export class ModusNumberInput {
             disabled={this.disabled}
             max={this.maxValue}
             min={this.minValue}
-            onInput={(event) => this.handleOnInput(event)}
+            onInput={() => this.handleOnInput()}
             placeholder={this.placeholder}
             readonly={this.readOnly}
             ref={(el) => this.numberInput = el as HTMLInputElement}

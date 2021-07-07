@@ -245,7 +245,7 @@ export namespace Components {
         /**
           * (optional) The input's value.
          */
-        "value": number;
+        "value": string;
     }
     interface ModusProgressBar {
         /**
@@ -781,7 +781,7 @@ declare namespace LocalJSX {
         /**
           * An event that fires on input value change.
          */
-        "onValueChange"?: (event: CustomEvent<number>) => void;
+        "onValueChange"?: (event: CustomEvent<string>) => void;
         /**
           * (optional) The input's placeholder text.
          */
@@ -809,7 +809,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The input's value.
          */
-        "value"?: number;
+        "value"?: string;
     }
     interface ModusProgressBar {
         /**
