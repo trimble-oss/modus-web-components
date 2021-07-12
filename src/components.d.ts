@@ -193,6 +193,12 @@ export namespace Components {
          */
         "showSearch": boolean;
     }
+    interface ModusNavbarProfileMenu {
+        "avatarUrl": string;
+        "email": string;
+        "initials": string;
+        "username": string;
+    }
     interface ModusNumberInput {
         /**
           * (optional) Whether the input is disabled.
@@ -467,6 +473,12 @@ declare global {
         prototype: HTMLModusNavbarElement;
         new (): HTMLModusNavbarElement;
     };
+    interface HTMLModusNavbarProfileMenuElement extends Components.ModusNavbarProfileMenu, HTMLStencilElement {
+    }
+    var HTMLModusNavbarProfileMenuElement: {
+        prototype: HTMLModusNavbarProfileMenuElement;
+        new (): HTMLModusNavbarProfileMenuElement;
+    };
     interface HTMLModusNumberInputElement extends Components.ModusNumberInput, HTMLStencilElement {
     }
     var HTMLModusNumberInputElement: {
@@ -511,6 +523,7 @@ declare global {
         "modus-list": HTMLModusListElement;
         "modus-list-item": HTMLModusListItemElement;
         "modus-navbar": HTMLModusNavbarElement;
+        "modus-navbar-profile-menu": HTMLModusNavbarProfileMenuElement;
         "modus-number-input": HTMLModusNumberInputElement;
         "modus-progress-bar": HTMLModusProgressBarElement;
         "modus-select": HTMLModusSelectElement;
@@ -725,6 +738,10 @@ declare namespace LocalJSX {
          */
         "onProductLogoClick"?: (event: CustomEvent<MouseEvent>) => void;
         /**
+          * An event that fires on profile menu sign out click.
+         */
+        "onProfileMenuSignOutClick"?: (event: CustomEvent<MouseEvent>) => void;
+        /**
           * (required) Product logo options.
          */
         "productLogoOptions"?: { url: string };
@@ -752,6 +769,13 @@ declare namespace LocalJSX {
           * (optional) Whether to show search.
          */
         "showSearch"?: boolean;
+    }
+    interface ModusNavbarProfileMenu {
+        "avatarUrl"?: string;
+        "email"?: string;
+        "initials"?: string;
+        "onSignOutClick"?: (event: CustomEvent<MouseEvent>) => void;
+        "username"?: string;
     }
     interface ModusNumberInput {
         /**
@@ -973,6 +997,7 @@ declare namespace LocalJSX {
         "modus-list": ModusList;
         "modus-list-item": ModusListItem;
         "modus-navbar": ModusNavbar;
+        "modus-navbar-profile-menu": ModusNavbarProfileMenu;
         "modus-number-input": ModusNumberInput;
         "modus-progress-bar": ModusProgressBar;
         "modus-select": ModusSelect;
@@ -997,6 +1022,7 @@ declare module "@stencil/core" {
             "modus-list": LocalJSX.ModusList & JSXBase.HTMLAttributes<HTMLModusListElement>;
             "modus-list-item": LocalJSX.ModusListItem & JSXBase.HTMLAttributes<HTMLModusListItemElement>;
             "modus-navbar": LocalJSX.ModusNavbar & JSXBase.HTMLAttributes<HTMLModusNavbarElement>;
+            "modus-navbar-profile-menu": LocalJSX.ModusNavbarProfileMenu & JSXBase.HTMLAttributes<HTMLModusNavbarProfileMenuElement>;
             "modus-number-input": LocalJSX.ModusNumberInput & JSXBase.HTMLAttributes<HTMLModusNumberInputElement>;
             "modus-progress-bar": LocalJSX.ModusProgressBar & JSXBase.HTMLAttributes<HTMLModusProgressBarElement>;
             "modus-select": LocalJSX.ModusSelect & JSXBase.HTMLAttributes<HTMLModusSelectElement>;

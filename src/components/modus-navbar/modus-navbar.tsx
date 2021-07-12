@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { Component, Prop, h, Event, EventEmitter } from '@stencil/core';
+import { Component, Prop, h, Event, EventEmitter, State, Listen } from '@stencil/core';
 import { IconMenu } from '../icons/icon-menu';
 import { IconNotifications } from '../icons/icon-notifications';
 import { IconHelp } from '../icons/icon-help';
@@ -36,6 +36,29 @@ export class ModusNavbar {
   /** An event that fires on product logo click. */
   @Event() productLogoClick: EventEmitter<MouseEvent>;
 
+  /** An event that fires on profile menu sign out click. */
+  @Event() profileMenuSignOutClick: EventEmitter<MouseEvent>;
+
+  @State() profileMenuVisible: boolean;
+
+  @Listen('click', { target: 'document' })
+  documentClickHandler(event: MouseEvent): void {
+    // Individual menus can prevent this listener from closing them.
+    if (event.defaultPrevented) { return; }
+
+    this.profileMenuVisible = false;
+  }
+
+  @Listen('signOutClick')
+  signOutClickHandler(event: MouseEvent): void {
+    this.profileMenuSignOutClick.emit(event);
+  }
+
+  profileMenuClickHandler(event: MouseEvent): void {
+    event.preventDefault();
+    this.profileMenuVisible = !this.profileMenuVisible;
+  }
+
   render(): unknown {
     return (
       <nav>
@@ -54,8 +77,15 @@ export class ModusNavbar {
           {this.showAppsMenu ? <IconApps size="24" /> : null}
           <div class="profile-menu">
             {this.profileMenuOptions?.avatarUrl ?
-              <img class="avatar" height="32" src={this.profileMenuOptions?.avatarUrl} alt="Modus navbar profile menu avatar" />
-            : <span class="initials">{this.profileMenuOptions?.initials}</span>}
+              <img class="avatar" height="32" src={this.profileMenuOptions?.avatarUrl} alt="Modus navbar profile menu avatar" onClick={(event) => this.profileMenuClickHandler(event)} />
+            : <span class="initials" onClick={(event) => this.profileMenuClickHandler(event)}>{this.profileMenuOptions?.initials}</span>}
+            {this.profileMenuVisible ?
+              <modus-navbar-profile-menu
+                avatar-url={this.profileMenuOptions?.avatarUrl}
+                email={this.profileMenuOptions?.email}
+                initials={this.profileMenuOptions?.initials}
+                username={this.profileMenuOptions?.username} />
+            : null}
           </div>
         </div>
       </nav>

@@ -20,10 +20,25 @@
 
 ## Events
 
-| Event              | Description                                | Type                      |
-| ------------------ | ------------------------------------------ | ------------------------- |
-| `productLogoClick` | An event that fires on product logo click. | `CustomEvent<MouseEvent>` |
+| Event                     | Description                                         | Type                      |
+| ------------------------- | --------------------------------------------------- | ------------------------- |
+| `productLogoClick`        | An event that fires on product logo click.          | `CustomEvent<MouseEvent>` |
+| `profileMenuSignOutClick` | An event that fires on profile menu sign out click. | `CustomEvent<MouseEvent>` |
 
+
+## Dependencies
+
+### Depends on
+
+- [modus-navbar-profile-menu](profile-menu)
+
+### Graph
+```mermaid
+graph TD;
+  modus-navbar --> modus-navbar-profile-menu
+  modus-navbar-profile-menu --> modus-button
+  style modus-navbar fill:#f9f,stroke:#333,stroke-width:4px
+```
 
 ----------------------------------------------
 
