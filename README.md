@@ -26,6 +26,7 @@ This library provides Modus Elements as web components. Web components are reusa
     - Button (modus-button)
     - Card (modus-card)
     - Checkbox (modus-checkbox)
+    - Chip (modus-chip)
     - Dialog (modus-dialog)
     - Dropdown (modus-dropdown)
     - Input Number (modus-number-input)
@@ -36,7 +37,6 @@ This library provides Modus Elements as web components. Web components are reusa
     - Select (modus-select)
     - Spinner (modus-spinner)
   - **Not Implemented**
-    - Chip
     - Header
     - Input Date
     - Input Radio
@@ -54,7 +54,7 @@ This library provides Modus Elements as web components. Web components are reusa
   
 ## Getting Started
 
-###Contribution
+### Contribution
 
 If this is your first time in the project, run `npm install` to download 3rd party packages.
 
@@ -64,7 +64,7 @@ The index.html file provides a place to render components for development and en
 
 Global SCSS files are available to provide Modus colors, variables and functions for component styling.
 
-###Implementation
+### Implementation
 
 Stencil web component implementation details can be found in their [Framework Integration Docs](https://stenciljs.com/docs/overview).
 
