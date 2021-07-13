@@ -19,7 +19,7 @@ export class ModusChip {
   /** (optional) Whether the chip has an error. */
   @Prop() hasError = false;
 
-  /** (optional) The image's url */
+  /** (optional) The image's url. */
   @Prop() imageUrl: string;
 
   /** (optional) Whether to show the checkmark. */
@@ -71,14 +71,17 @@ export class ModusChip {
     `;
 
     return (
-      <div class={chipClass} onClick={!this.disabled ? (event) => this.onChipClick(event) : null}>
+      <div class={chipClass} onClick={this.disabled ? null : (event) => this.onChipClick(event)}>
         {
           this.imageUrl ? <img src={this.imageUrl}/> :
           this.showCheckmark ? <IconCheck size={'24'}></IconCheck> :
           null
         }
         <span>{this.value}</span>
-        {this.showClose ? <IconRemove onClick={!this.disabled ? (event) => this.onCloseClick(event) : null} size={'24'}></IconRemove> : null}
+        {
+          this.showClose ? <IconRemove onClick={this.disabled ? null : (event) => this.onCloseClick(event)} size={'24'}></IconRemove> :
+          null
+        }
       </div>
     );
   }
