@@ -107,6 +107,40 @@ export namespace Components {
          */
         "size": 'small' | 'medium';
     }
+    interface ModusChip {
+        /**
+          * (optional) The chip's style.
+         */
+        "chipStyle": 'outline' | 'solid';
+        /**
+          * (optional) Whether the chip is disabled.
+         */
+        "disabled": boolean;
+        /**
+          * (optional) Whether the chip has an error.
+         */
+        "hasError": boolean;
+        /**
+          * (optional) The image's url
+         */
+        "imageUrl": string;
+        /**
+          * (optional) Whether to show the checkmark.
+         */
+        "showCheckmark": boolean;
+        /**
+          * (optional) Whether to show the close icon.
+         */
+        "showClose": boolean;
+        /**
+          * (optional) The chip's size.
+         */
+        "size": 'medium' | 'large';
+        /**
+          * (optional) The chip's value.
+         */
+        "value": string;
+    }
     interface ModusDialog {
         /**
           * (optional) The text to display in the header.
@@ -437,6 +471,12 @@ declare global {
         prototype: HTMLModusCheckboxElement;
         new (): HTMLModusCheckboxElement;
     };
+    interface HTMLModusChipElement extends Components.ModusChip, HTMLStencilElement {
+    }
+    var HTMLModusChipElement: {
+        prototype: HTMLModusChipElement;
+        new (): HTMLModusChipElement;
+    };
     interface HTMLModusDialogElement extends Components.ModusDialog, HTMLStencilElement {
     }
     var HTMLModusDialogElement: {
@@ -506,6 +546,7 @@ declare global {
         "modus-button": HTMLModusButtonElement;
         "modus-card": HTMLModusCardElement;
         "modus-checkbox": HTMLModusCheckboxElement;
+        "modus-chip": HTMLModusChipElement;
         "modus-dialog": HTMLModusDialogElement;
         "modus-dropdown": HTMLModusDropdownElement;
         "modus-list": HTMLModusListElement;
@@ -642,6 +683,48 @@ declare namespace LocalJSX {
           * (optional) The size of the button
          */
         "size"?: 'small' | 'medium';
+    }
+    interface ModusChip {
+        /**
+          * (optional) The chip's style.
+         */
+        "chipStyle"?: 'outline' | 'solid';
+        /**
+          * (optional) Whether the chip is disabled.
+         */
+        "disabled"?: boolean;
+        /**
+          * (optional) Whether the chip has an error.
+         */
+        "hasError"?: boolean;
+        /**
+          * (optional) The image's url
+         */
+        "imageUrl"?: string;
+        /**
+          * An event that fires on chip click.
+         */
+        "onChipClick"?: (event: CustomEvent<MouseEvent>) => void;
+        /**
+          * An event that fires on close icon click.
+         */
+        "onCloseClick"?: (event: CustomEvent<MouseEvent>) => void;
+        /**
+          * (optional) Whether to show the checkmark.
+         */
+        "showCheckmark"?: boolean;
+        /**
+          * (optional) Whether to show the close icon.
+         */
+        "showClose"?: boolean;
+        /**
+          * (optional) The chip's size.
+         */
+        "size"?: 'medium' | 'large';
+        /**
+          * (optional) The chip's value.
+         */
+        "value"?: string;
     }
     interface ModusDialog {
         /**
@@ -968,6 +1051,7 @@ declare namespace LocalJSX {
         "modus-button": ModusButton;
         "modus-card": ModusCard;
         "modus-checkbox": ModusCheckbox;
+        "modus-chip": ModusChip;
         "modus-dialog": ModusDialog;
         "modus-dropdown": ModusDropdown;
         "modus-list": ModusList;
@@ -992,6 +1076,7 @@ declare module "@stencil/core" {
             "modus-button": LocalJSX.ModusButton & JSXBase.HTMLAttributes<HTMLModusButtonElement>;
             "modus-card": LocalJSX.ModusCard & JSXBase.HTMLAttributes<HTMLModusCardElement>;
             "modus-checkbox": LocalJSX.ModusCheckbox & JSXBase.HTMLAttributes<HTMLModusCheckboxElement>;
+            "modus-chip": LocalJSX.ModusChip & JSXBase.HTMLAttributes<HTMLModusChipElement>;
             "modus-dialog": LocalJSX.ModusDialog & JSXBase.HTMLAttributes<HTMLModusDialogElement>;
             "modus-dropdown": LocalJSX.ModusDropdown & JSXBase.HTMLAttributes<HTMLModusDropdownElement>;
             "modus-list": LocalJSX.ModusList & JSXBase.HTMLAttributes<HTMLModusListElement>;
