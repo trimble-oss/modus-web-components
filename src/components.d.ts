@@ -121,7 +121,7 @@ export namespace Components {
          */
         "hasError": boolean;
         /**
-          * (optional) The image's url
+          * (optional) The image's url.
          */
         "imageUrl": string;
         /**
@@ -711,7 +711,7 @@ declare namespace LocalJSX {
          */
         "hasError"?: boolean;
         /**
-          * (optional) The image's url
+          * (optional) The image's url.
          */
         "imageUrl"?: string;
         /**
