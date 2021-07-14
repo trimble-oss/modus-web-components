@@ -40,7 +40,7 @@ export class ModusSwitch {
     return (
       <div class={containerClassName} onClick={() => this.handleSwitchClick()}>
         <div class={switchClassName}>
-            <span class="slider round"></span>
+            <span class="slider"></span>
         </div>
         <input
           checked={this.checked}
