@@ -378,6 +378,20 @@ export namespace Components {
          */
         "size": string;
     }
+    interface ModusSwitch {
+        /**
+          * (optional) Whether the switch is checked.
+         */
+        "checked": boolean;
+        /**
+          * (optional) Whether the switch is disabled.
+         */
+        "disabled": boolean;
+        /**
+          * (optional) The switch label.
+         */
+        "label": string;
+    }
     interface ModusTextInput {
         /**
           * (optional) Whether the input has a clear button.
@@ -558,6 +572,12 @@ declare global {
         prototype: HTMLModusSpinnerElement;
         new (): HTMLModusSpinnerElement;
     };
+    interface HTMLModusSwitchElement extends Components.ModusSwitch, HTMLStencilElement {
+    }
+    var HTMLModusSwitchElement: {
+        prototype: HTMLModusSwitchElement;
+        new (): HTMLModusSwitchElement;
+    };
     interface HTMLModusTextInputElement extends Components.ModusTextInput, HTMLStencilElement {
     }
     var HTMLModusTextInputElement: {
@@ -585,6 +605,7 @@ declare global {
         "modus-progress-bar": HTMLModusProgressBarElement;
         "modus-select": HTMLModusSelectElement;
         "modus-spinner": HTMLModusSpinnerElement;
+        "modus-switch": HTMLModusSwitchElement;
         "modus-text-input": HTMLModusTextInputElement;
     }
 }
@@ -1027,6 +1048,24 @@ declare namespace LocalJSX {
          */
         "size"?: string;
     }
+    interface ModusSwitch {
+        /**
+          * (optional) Whether the switch is checked.
+         */
+        "checked"?: boolean;
+        /**
+          * (optional) Whether the switch is disabled.
+         */
+        "disabled"?: boolean;
+        /**
+          * (optional) The switch label.
+         */
+        "label"?: string;
+        /**
+          * An event that fires on switch click.
+         */
+        "onSwitchClick"?: (event: CustomEvent<boolean>) => void;
+    }
     interface ModusTextInput {
         /**
           * (optional) Whether the input has a clear button.
@@ -1110,6 +1149,7 @@ declare namespace LocalJSX {
         "modus-progress-bar": ModusProgressBar;
         "modus-select": ModusSelect;
         "modus-spinner": ModusSpinner;
+        "modus-switch": ModusSwitch;
         "modus-text-input": ModusTextInput;
     }
 }
@@ -1137,6 +1177,7 @@ declare module "@stencil/core" {
             "modus-progress-bar": LocalJSX.ModusProgressBar & JSXBase.HTMLAttributes<HTMLModusProgressBarElement>;
             "modus-select": LocalJSX.ModusSelect & JSXBase.HTMLAttributes<HTMLModusSelectElement>;
             "modus-spinner": LocalJSX.ModusSpinner & JSXBase.HTMLAttributes<HTMLModusSpinnerElement>;
+            "modus-switch": LocalJSX.ModusSwitch & JSXBase.HTMLAttributes<HTMLModusSwitchElement>;
             "modus-text-input": LocalJSX.ModusTextInput & JSXBase.HTMLAttributes<HTMLModusTextInputElement>;
         }
     }
