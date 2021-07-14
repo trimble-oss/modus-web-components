@@ -53,17 +53,13 @@
       }
     }
 
-    &:active {
-      .slider {
-        background-color: $col_blue_alt;
-      }
+    &:active .slider {
+      background-color: $col_blue_alt;
     }
   }
 
-  &:hover {
-    .switch {
-      border-color: $col_blue_alt;
-    }
+  &:hover .switch {
+    border-color: $col_blue_alt;
   }
 
   input {
