@@ -1,15 +1,8 @@
 .profile-menu {
+  @include navbar-menu;
   align-items: center;
-  background-color: $col_white;
-  border-radius: $rem_2px;
-  box-shadow: $box-shadow-lg;
-  display: flex;
-  flex-direction: column;
-  max-width: 384px;
-  padding: $rem-24px 48px;
-  position: absolute;
-  right: 0;
-  top: 44px;
+  padding-left: 48px;
+  padding-right: 48px;
 
   .avatar, .initials {
     background-color: $col_gray_0;

@@ -27,6 +27,7 @@ export const config: Config = {
         'src/global/modus-colors.scss', // adds @import 'src/global/modus-colors.scss' statement
         'src/global/modus-light-theme.scss', // adds @import 'src/global/modus-light-theme.scss' statement
         'src/global/modus-variables.scss', // adds @import 'src/global/modus-variables.scss' statement
+        'src/global/shared-mixins.scss',
       ]
     })
   ],

@@ -44,6 +44,8 @@ export class ModusNavbar {
   @Event() profileMenuSignOutClick: EventEmitter<MouseEvent>;
 
   @State() appsMenuVisible: boolean;
+  @State() helpMenuVisible: boolean;
+  @State() notificationsMenuVisible: boolean;
   @State() profileMenuVisible: boolean;
 
   @Listen('click', { target: 'document' })
@@ -69,6 +71,28 @@ export class ModusNavbar {
     }
   }
 
+  helpMenuClickHandler(event: MouseEvent): void {
+    event.preventDefault();
+
+    if (this.helpMenuVisible) {
+      this.helpMenuVisible = false;
+    } else {
+      this.hideMenus();
+      this.helpMenuVisible = true;
+    }
+  }
+
+  notificationsMenuClickHandler(event: MouseEvent): void {
+    event.preventDefault();
+
+    if (this.notificationsMenuVisible) {
+      this.notificationsMenuVisible = false;
+    } else {
+      this.hideMenus();
+      this.notificationsMenuVisible = true;
+    }
+  }
+
   profileMenuClickHandler(event: MouseEvent): void {
     event.preventDefault();
 
@@ -82,6 +106,8 @@ export class ModusNavbar {
 
   private hideMenus(): void {
     this.appsMenuVisible = false;
+    this.helpMenuVisible = false;
+    this.notificationsMenuVisible = false;
     this.profileMenuVisible = false;
   }
 
@@ -104,12 +130,14 @@ export class ModusNavbar {
             : null}
           {this.showNotifications ?
             <div class="navbar-button">
-              <IconNotifications size="24" />
+              <IconNotifications size="24" onClick={(event) => this.notificationsMenuClickHandler(event)} />
+              {this.notificationsMenuVisible ? <modus-navbar-notifications-menu><slot name="notifications"></slot></modus-navbar-notifications-menu> : null}
             </div>
             : null}
           {this.showHelpMenu ?
             <div class="navbar-button">
-              <IconHelp size="24" />
+              <IconHelp size="24" onClick={(event) => this.helpMenuClickHandler(event)} />
+              {this.helpMenuVisible ? <modus-navbar-help-menu><slot name="help"></slot></modus-navbar-help-menu> : null}
             </div>
             : null}
           {this.showAppsMenu ?
