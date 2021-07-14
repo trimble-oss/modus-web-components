@@ -1,0 +1,49 @@
+.apps-menu {
+  align-items: flex-start;
+  background-color: $col_white;
+  border-radius: $rem_2px;
+  box-shadow: $box-shadow-lg;
+  display: flex;
+  flex-direction: column;
+  max-width: 384px;
+  padding: $rem-24px;
+  position: absolute;
+  right: 0;
+  top: 44px;
+  width: max-content;
+
+  .app {
+    border-radius: $rem-2px;
+    cursor: default;
+    display: flex;
+    padding: $rem-4px;
+    width: 100%;
+
+    &:hover {
+      background-color: $col_gray_0;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: $rem-8px;
+    }
+
+    img {
+      height: 48px;
+      margin-right: $rem-12px;
+      width: 48px;
+    }
+
+    .right {
+      align-self: center;
+
+      .name {
+        font-size: $rem-14px;
+        font-weight: $font-weight-semi-bold;
+      }
+
+      .description {
+        font-size: $rem-12px;
+      }
+    }
+  }
+}

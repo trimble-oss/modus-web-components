@@ -6,6 +6,8 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
+import { App } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
+import { App as App1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 export namespace Components {
     interface ModusAccordion {
     }
@@ -199,6 +201,10 @@ export namespace Components {
     }
     interface ModusNavbar {
         /**
+          * (optional) The apps to render in the apps menu.
+         */
+        "apps": App[];
+        /**
           * (required) Product logo options.
          */
         "productLogoOptions": { url: string };
@@ -226,6 +232,9 @@ export namespace Components {
           * (optional) Whether to show search.
          */
         "showSearch": boolean;
+    }
+    interface ModusNavbarAppsMenu {
+        "apps": App[];
     }
     interface ModusNavbarProfileMenu {
         "avatarUrl": string;
@@ -513,6 +522,12 @@ declare global {
         prototype: HTMLModusNavbarElement;
         new (): HTMLModusNavbarElement;
     };
+    interface HTMLModusNavbarAppsMenuElement extends Components.ModusNavbarAppsMenu, HTMLStencilElement {
+    }
+    var HTMLModusNavbarAppsMenuElement: {
+        prototype: HTMLModusNavbarAppsMenuElement;
+        new (): HTMLModusNavbarAppsMenuElement;
+    };
     interface HTMLModusNavbarProfileMenuElement extends Components.ModusNavbarProfileMenu, HTMLStencilElement {
     }
     var HTMLModusNavbarProfileMenuElement: {
@@ -564,6 +579,7 @@ declare global {
         "modus-list": HTMLModusListElement;
         "modus-list-item": HTMLModusListItemElement;
         "modus-navbar": HTMLModusNavbarElement;
+        "modus-navbar-apps-menu": HTMLModusNavbarAppsMenuElement;
         "modus-navbar-profile-menu": HTMLModusNavbarProfileMenuElement;
         "modus-number-input": HTMLModusNumberInputElement;
         "modus-progress-bar": HTMLModusProgressBarElement;
@@ -817,6 +833,10 @@ declare namespace LocalJSX {
     }
     interface ModusNavbar {
         /**
+          * (optional) The apps to render in the apps menu.
+         */
+        "apps"?: App[];
+        /**
           * An event that fires on product logo click.
          */
         "onProductLogoClick"?: (event: CustomEvent<MouseEvent>) => void;
@@ -852,6 +872,9 @@ declare namespace LocalJSX {
           * (optional) Whether to show search.
          */
         "showSearch"?: boolean;
+    }
+    interface ModusNavbarAppsMenu {
+        "apps"?: App[];
     }
     interface ModusNavbarProfileMenu {
         "avatarUrl"?: string;
@@ -1081,6 +1104,7 @@ declare namespace LocalJSX {
         "modus-list": ModusList;
         "modus-list-item": ModusListItem;
         "modus-navbar": ModusNavbar;
+        "modus-navbar-apps-menu": ModusNavbarAppsMenu;
         "modus-navbar-profile-menu": ModusNavbarProfileMenu;
         "modus-number-input": ModusNumberInput;
         "modus-progress-bar": ModusProgressBar;
@@ -1107,6 +1131,7 @@ declare module "@stencil/core" {
             "modus-list": LocalJSX.ModusList & JSXBase.HTMLAttributes<HTMLModusListElement>;
             "modus-list-item": LocalJSX.ModusListItem & JSXBase.HTMLAttributes<HTMLModusListItemElement>;
             "modus-navbar": LocalJSX.ModusNavbar & JSXBase.HTMLAttributes<HTMLModusNavbarElement>;
+            "modus-navbar-apps-menu": LocalJSX.ModusNavbarAppsMenu & JSXBase.HTMLAttributes<HTMLModusNavbarAppsMenuElement>;
             "modus-navbar-profile-menu": LocalJSX.ModusNavbarProfileMenu & JSXBase.HTMLAttributes<HTMLModusNavbarProfileMenuElement>;
             "modus-number-input": LocalJSX.ModusNumberInput & JSXBase.HTMLAttributes<HTMLModusNumberInputElement>;
             "modus-progress-bar": LocalJSX.ModusProgressBar & JSXBase.HTMLAttributes<HTMLModusProgressBarElement>;
