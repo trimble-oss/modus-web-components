@@ -236,6 +236,10 @@ export namespace Components {
     interface ModusNavbarAppsMenu {
         "apps": App[];
     }
+    interface ModusNavbarHelpMenu {
+    }
+    interface ModusNavbarNotificationsMenu {
+    }
     interface ModusNavbarProfileMenu {
         "avatarUrl": string;
         "email": string;
@@ -542,6 +546,18 @@ declare global {
         prototype: HTMLModusNavbarAppsMenuElement;
         new (): HTMLModusNavbarAppsMenuElement;
     };
+    interface HTMLModusNavbarHelpMenuElement extends Components.ModusNavbarHelpMenu, HTMLStencilElement {
+    }
+    var HTMLModusNavbarHelpMenuElement: {
+        prototype: HTMLModusNavbarHelpMenuElement;
+        new (): HTMLModusNavbarHelpMenuElement;
+    };
+    interface HTMLModusNavbarNotificationsMenuElement extends Components.ModusNavbarNotificationsMenu, HTMLStencilElement {
+    }
+    var HTMLModusNavbarNotificationsMenuElement: {
+        prototype: HTMLModusNavbarNotificationsMenuElement;
+        new (): HTMLModusNavbarNotificationsMenuElement;
+    };
     interface HTMLModusNavbarProfileMenuElement extends Components.ModusNavbarProfileMenu, HTMLStencilElement {
     }
     var HTMLModusNavbarProfileMenuElement: {
@@ -600,6 +616,8 @@ declare global {
         "modus-list-item": HTMLModusListItemElement;
         "modus-navbar": HTMLModusNavbarElement;
         "modus-navbar-apps-menu": HTMLModusNavbarAppsMenuElement;
+        "modus-navbar-help-menu": HTMLModusNavbarHelpMenuElement;
+        "modus-navbar-notifications-menu": HTMLModusNavbarNotificationsMenuElement;
         "modus-navbar-profile-menu": HTMLModusNavbarProfileMenuElement;
         "modus-number-input": HTMLModusNumberInputElement;
         "modus-progress-bar": HTMLModusProgressBarElement;
@@ -897,6 +915,10 @@ declare namespace LocalJSX {
     interface ModusNavbarAppsMenu {
         "apps"?: App[];
     }
+    interface ModusNavbarHelpMenu {
+    }
+    interface ModusNavbarNotificationsMenu {
+    }
     interface ModusNavbarProfileMenu {
         "avatarUrl"?: string;
         "email"?: string;
@@ -1144,6 +1166,8 @@ declare namespace LocalJSX {
         "modus-list-item": ModusListItem;
         "modus-navbar": ModusNavbar;
         "modus-navbar-apps-menu": ModusNavbarAppsMenu;
+        "modus-navbar-help-menu": ModusNavbarHelpMenu;
+        "modus-navbar-notifications-menu": ModusNavbarNotificationsMenu;
         "modus-navbar-profile-menu": ModusNavbarProfileMenu;
         "modus-number-input": ModusNumberInput;
         "modus-progress-bar": ModusProgressBar;
@@ -1172,6 +1196,8 @@ declare module "@stencil/core" {
             "modus-list-item": LocalJSX.ModusListItem & JSXBase.HTMLAttributes<HTMLModusListItemElement>;
             "modus-navbar": LocalJSX.ModusNavbar & JSXBase.HTMLAttributes<HTMLModusNavbarElement>;
             "modus-navbar-apps-menu": LocalJSX.ModusNavbarAppsMenu & JSXBase.HTMLAttributes<HTMLModusNavbarAppsMenuElement>;
+            "modus-navbar-help-menu": LocalJSX.ModusNavbarHelpMenu & JSXBase.HTMLAttributes<HTMLModusNavbarHelpMenuElement>;
+            "modus-navbar-notifications-menu": LocalJSX.ModusNavbarNotificationsMenu & JSXBase.HTMLAttributes<HTMLModusNavbarNotificationsMenuElement>;
             "modus-navbar-profile-menu": LocalJSX.ModusNavbarProfileMenu & JSXBase.HTMLAttributes<HTMLModusNavbarProfileMenuElement>;
             "modus-number-input": LocalJSX.ModusNumberInput & JSXBase.HTMLAttributes<HTMLModusNumberInputElement>;
             "modus-progress-bar": LocalJSX.ModusProgressBar & JSXBase.HTMLAttributes<HTMLModusProgressBarElement>;

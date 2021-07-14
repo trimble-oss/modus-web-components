@@ -38,16 +38,14 @@ This library provides Modus Elements as web components. Web components are reusa
     - Spinner (modus-spinner)
     - Switch (modus-switch)
   - **Not Implemented**
-    - Header
     - Input Date
     - Input Radio
     - Message
-    - Navbar - in progress
+    - Navbar (in progress)
     - Pagination
-    - Pattern
     - Slider
-    - Table/List
-    - Table/Sheet
+    - Table/List (in re-design by tiger team - do not create)
+    - Table/Sheet (in re-design by tiger team - do not create)
     - Tab
     - Toast
     - Tooltip

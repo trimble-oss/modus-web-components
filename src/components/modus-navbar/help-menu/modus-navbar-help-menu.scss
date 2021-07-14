@@ -1,0 +1,10 @@
+.help-menu {
+  @include navbar-menu;
+  width: max-content;
+
+  .title {
+    font-size: $rem-18px;
+    font-weight: $font-weight-semi-bold;
+    margin-bottom: $rem-8px;
+  }
+}

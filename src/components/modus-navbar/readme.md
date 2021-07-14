@@ -31,12 +31,16 @@
 
 ### Depends on
 
+- [modus-navbar-notifications-menu](notifications-menu)
+- [modus-navbar-help-menu](help-menu)
 - [modus-navbar-apps-menu](apps-menu)
 - [modus-navbar-profile-menu](profile-menu)
 
 ### Graph
 ```mermaid
 graph TD;
+  modus-navbar --> modus-navbar-notifications-menu
+  modus-navbar --> modus-navbar-help-menu
   modus-navbar --> modus-navbar-apps-menu
   modus-navbar --> modus-navbar-profile-menu
   modus-navbar-profile-menu --> modus-button

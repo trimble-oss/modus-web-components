@@ -1,15 +1,6 @@
 .apps-menu {
+  @include navbar-menu;
   align-items: flex-start;
-  background-color: $col_white;
-  border-radius: $rem_2px;
-  box-shadow: $box-shadow-lg;
-  display: flex;
-  flex-direction: column;
-  max-width: 384px;
-  padding: $rem-24px;
-  position: absolute;
-  right: 0;
-  top: 44px;
   width: max-content;
 
   .app {
