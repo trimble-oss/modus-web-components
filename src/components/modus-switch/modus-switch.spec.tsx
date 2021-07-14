@@ -12,7 +12,7 @@ describe('modus-switch', () => {
         <mock:shadow-root>
           <div class="modus-switch">
             <div class="switch">
-              <span class="round slider"></span>
+              <span class="slider"></span>
             </div>
             <input type="checkbox">
           </div>
