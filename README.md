@@ -36,6 +36,7 @@ This library provides Modus Elements as web components. Web components are reusa
     - Progress Bar (modus-progress-bar)
     - Select (modus-select)
     - Spinner (modus-spinner)
+    - Switch (modus-switch)
   - **Not Implemented**
     - Header
     - Input Date
@@ -45,7 +46,6 @@ This library provides Modus Elements as web components. Web components are reusa
     - Pagination
     - Pattern
     - Slider
-    - Switch
     - Table/List
     - Table/Sheet
     - Tab
