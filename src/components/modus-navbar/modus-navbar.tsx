@@ -5,6 +5,7 @@ import { IconNotifications } from '../icons/icon-notifications';
 import { IconHelp } from '../icons/icon-help';
 import { IconApps } from '../icons/icon-apps';
 import { IconSearch } from '../icons/icon-search';
+import { App } from './apps-menu/modus-navbar-apps-menu';
 
 @Component({
   tag: 'modus-navbar',
@@ -12,6 +13,9 @@ import { IconSearch } from '../icons/icon-search';
   shadow: true,
 })
 export class ModusNavbar {
+  /** (optional) The apps to render in the apps menu. */
+  @Prop() apps: App[];
+
   /** (optional) Whether to show the apps menu. */
   @Prop() showAppsMenu: boolean;
 
@@ -39,14 +43,14 @@ export class ModusNavbar {
   /** An event that fires on profile menu sign out click. */
   @Event() profileMenuSignOutClick: EventEmitter<MouseEvent>;
 
+  @State() appsMenuVisible: boolean;
   @State() profileMenuVisible: boolean;
 
   @Listen('click', { target: 'document' })
   documentClickHandler(event: MouseEvent): void {
     // Individual menus can prevent this listener from closing them.
     if (event.defaultPrevented) { return; }
-
-    this.profileMenuVisible = false;
+    this.hideMenus();
   }
 
   @Listen('signOutClick')
@@ -54,27 +58,66 @@ export class ModusNavbar {
     this.profileMenuSignOutClick.emit(event);
   }
 
+  appsMenuClickHandler(event: MouseEvent): void {
+    event.preventDefault();
+
+    if (this.appsMenuVisible) {
+      this.appsMenuVisible = false;
+    } else {
+      this.hideMenus();
+      this.appsMenuVisible = true;
+    }
+  }
+
   profileMenuClickHandler(event: MouseEvent): void {
     event.preventDefault();
-    this.profileMenuVisible = !this.profileMenuVisible;
+
+    if (this.profileMenuVisible) {
+      this.profileMenuVisible = false;
+    } else {
+      this.hideMenus();
+      this.profileMenuVisible = true;
+    }
+  }
+
+  private hideMenus(): void {
+    this.appsMenuVisible = false;
+    this.profileMenuVisible = false;
   }
 
   render(): unknown {
     return (
       <nav>
         <div class="left">
-          {this.showMainMenu ? <IconMenu size="24" /> : null}
+          {this.showMainMenu ?
+            <div class="navbar-button">
+              <IconMenu size="24" />
+            </div>
+            : null}
           <img class="product-logo" height="24" src={this.productLogoOptions?.url} alt="Modus navbar product logo" onClick={(event) => this.productLogoClick.emit(event)} />
         </div>
         <div class="right">
           {this.showSearch ?
-            <div class="search">
+            <div class="navbar-button search">
               <IconSearch size="24" />
             </div>
             : null}
-          {this.showNotifications ? <IconNotifications size="24" /> : null}
-          {this.showHelpMenu ? <IconHelp size="24" /> : null}
-          {this.showAppsMenu ? <IconApps size="24" /> : null}
+          {this.showNotifications ?
+            <div class="navbar-button">
+              <IconNotifications size="24" />
+            </div>
+            : null}
+          {this.showHelpMenu ?
+            <div class="navbar-button">
+              <IconHelp size="24" />
+            </div>
+            : null}
+          {this.showAppsMenu ?
+            <div class="navbar-button">
+              <IconApps size="24" onClick={(event) => this.appsMenuClickHandler(event)} />
+              {this.appsMenuVisible ? <modus-navbar-apps-menu apps={this.apps} /> : null}
+            </div>
+            : null}
           <div class="profile-menu">
             {this.profileMenuOptions?.avatarUrl ?
               <img class="avatar" height="32" src={this.profileMenuOptions?.avatarUrl} alt="Modus navbar profile menu avatar" onClick={(event) => this.profileMenuClickHandler(event)} />
