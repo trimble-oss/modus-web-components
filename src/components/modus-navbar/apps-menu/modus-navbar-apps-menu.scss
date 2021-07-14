@@ -23,6 +23,10 @@
       background-color: $col_gray_0;
     }
 
+    &:active {
+      background-color: $gray-250;
+    }
+
     &:not(:last-child) {
       margin-bottom: $rem-8px;
     }
