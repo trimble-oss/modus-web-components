@@ -33,16 +33,12 @@ export class ModusRadioGroup {
     });
   }
 
-  @Watch('checkedId')
-  onCheckedIdChange(): void {
-    this.setCheckedIdAndUpdateRadioButtons(this.checkedId);
-  }
-
   private handleButtonClick(id: string) {
     this.setCheckedIdAndUpdateRadioButtons(id);
     this.buttonClick.emit(this.checkedId);
   }
 
+  @Watch('checkedId')
   private setCheckedIdAndUpdateRadioButtons(id: string): void {
     this.checkedId = id;
     this.radioButtons.forEach(radioButton => {
@@ -65,7 +61,6 @@ export class ModusRadioGroup {
             </ModusRadioButton>
           )
         })}
-        {this.checkedId}
       </ul>
     );
   }
