@@ -19,7 +19,7 @@
     </style>
   </head>
   <body>
-    <modus-radio-group id="grp" name="mu-group"></modus-radio-group>
+    <modus-radio-group id="grp"></modus-radio-group>
   </body>
   <script>
     const radios = [
@@ -27,7 +27,11 @@
       { checked: true, id: '2', label: 'Option 2' },
       { disabled: true, id: '3', label: 'Option 3' },
     ]
+    document.querySelector('#grp').name = 'my-group';
     document.querySelector('#grp').radioButtons = radios;
+    setInterval(() => {
+      document.querySelector('#grp').checkedId = 1;
+    }, 4000)
     document.querySelector('#grp').addEventListener('buttonClick', (event) => {
       window.alert(event.detail);
     })
