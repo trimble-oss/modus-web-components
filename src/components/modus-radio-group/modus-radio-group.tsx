@@ -1,5 +1,6 @@
 // eslint-disable-next-line
-import { Component, Event, EventEmitter, h, Prop } from '@stencil/core';
+import { Component, Event, EventEmitter, h, Prop, Watch } from '@stencil/core';
+import { ModusRadioButton } from './modus-radio-button';
 
 export interface RadioButton {
   checked?: boolean;
@@ -14,41 +15,58 @@ export interface RadioButton {
   shadow: true,
 })
 export class ModusRadioGroup {
-  /** The currently checked radio button's ID. */
-  @Prop() checkedId: string;
+  /** The ID of the checked radio button. */
+  @Prop({ mutable: true }) checkedId: string;
 
   /** The radio button group name. */
   @Prop() name: string;
 
   /** The radio buttons to render. */
-  @Prop() radioButtons: RadioButton[] = [];
+  @Prop({ mutable: true }) radioButtons: RadioButton[] = [];
 
   /** Fires on radio button click. */
   @Event() buttonClick: EventEmitter<string>;
 
-  handleButtonClick(event: CustomEvent) {
-    this.checkedId = event.detail;
+  componentWillLoad(): void {
+    this.radioButtons.forEach(radioButton => {
+      this.checkedId = radioButton.checked ? radioButton.id : this.checkedId;
+    });
+  }
+
+  @Watch('checkedId')
+  onCheckedIdChange(): void {
+    this.setCheckedIdAndUpdateRadioButtons(this.checkedId);
+  }
+
+  private handleButtonClick(id: string) {
+    this.setCheckedIdAndUpdateRadioButtons(id);
     this.buttonClick.emit(this.checkedId);
+  }
+
+  private setCheckedIdAndUpdateRadioButtons(id: string): void {
+    this.checkedId = id;
+    this.radioButtons.forEach(radioButton => {
+      radioButton.checked = radioButton.id === this.checkedId;
+    });
   }
 
   render(): unknown {
     return (
-      <div>
+      <ul>
         {this.radioButtons.map(radioButton => {
           return (
-            <ul>
-              <modus-radio-button
-                checked={radioButton.checked}
-                disabled={radioButton.disabled}
-                label={radioButton.label}
-                name={this.name}
-                radioId={radioButton.id}
-                onButtonClick={(event) => this.handleButtonClick(event)}>
-              </modus-radio-button>
-            </ul>
+            <ModusRadioButton
+              checked={radioButton.checked}
+              disabled={radioButton.disabled}
+              label={radioButton.label}
+              name={this.name}
+              id={radioButton.id}
+              handleButtonClick={(id) => this.handleButtonClick(id)}>
+            </ModusRadioButton>
           )
         })}
-      </div>
+        {this.checkedId}
+      </ul>
     );
   }
 }

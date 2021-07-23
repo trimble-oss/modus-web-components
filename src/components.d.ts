@@ -331,31 +331,9 @@ export namespace Components {
          */
         "value": number;
     }
-    interface ModusRadioButton {
-        /**
-          * (optional) Whether the radio button is checked.
-         */
-        "checked": boolean;
-        /**
-          * (optional) Whether the radio button is disabled.
-         */
-        "disabled": boolean;
-        /**
-          * (optional) The radio button's label.
-         */
-        "label": string;
-        /**
-          * The radio button's group name.
-         */
-        "name": string;
-        /**
-          * The radio button's id.
-         */
-        "radioId": string;
-    }
     interface ModusRadioGroup {
         /**
-          * The currently checked radio button's ID.
+          * The ID of the checked radio button.
          */
         "checkedId": string;
         /**
@@ -613,12 +591,6 @@ declare global {
         prototype: HTMLModusProgressBarElement;
         new (): HTMLModusProgressBarElement;
     };
-    interface HTMLModusRadioButtonElement extends Components.ModusRadioButton, HTMLStencilElement {
-    }
-    var HTMLModusRadioButtonElement: {
-        prototype: HTMLModusRadioButtonElement;
-        new (): HTMLModusRadioButtonElement;
-    };
     interface HTMLModusRadioGroupElement extends Components.ModusRadioGroup, HTMLStencilElement {
     }
     var HTMLModusRadioGroupElement: {
@@ -670,7 +642,6 @@ declare global {
         "modus-navbar-profile-menu": HTMLModusNavbarProfileMenuElement;
         "modus-number-input": HTMLModusNumberInputElement;
         "modus-progress-bar": HTMLModusProgressBarElement;
-        "modus-radio-button": HTMLModusRadioButtonElement;
         "modus-radio-group": HTMLModusRadioGroupElement;
         "modus-select": HTMLModusSelectElement;
         "modus-spinner": HTMLModusSpinnerElement;
@@ -1065,35 +1036,9 @@ declare namespace LocalJSX {
          */
         "value"?: number;
     }
-    interface ModusRadioButton {
-        /**
-          * (optional) Whether the radio button is checked.
-         */
-        "checked"?: boolean;
-        /**
-          * (optional) Whether the radio button is disabled.
-         */
-        "disabled"?: boolean;
-        /**
-          * (optional) The radio button's label.
-         */
-        "label"?: string;
-        /**
-          * The radio button's group name.
-         */
-        "name"?: string;
-        /**
-          * An event that fires on radio button click.
-         */
-        "onButtonClick"?: (event: CustomEvent<string>) => void;
-        /**
-          * The radio button's id.
-         */
-        "radioId"?: string;
-    }
     interface ModusRadioGroup {
         /**
-          * The currently checked radio button's ID.
+          * The ID of the checked radio button.
          */
         "checkedId"?: string;
         /**
@@ -1266,7 +1211,6 @@ declare namespace LocalJSX {
         "modus-navbar-profile-menu": ModusNavbarProfileMenu;
         "modus-number-input": ModusNumberInput;
         "modus-progress-bar": ModusProgressBar;
-        "modus-radio-button": ModusRadioButton;
         "modus-radio-group": ModusRadioGroup;
         "modus-select": ModusSelect;
         "modus-spinner": ModusSpinner;
@@ -1298,7 +1242,6 @@ declare module "@stencil/core" {
             "modus-navbar-profile-menu": LocalJSX.ModusNavbarProfileMenu & JSXBase.HTMLAttributes<HTMLModusNavbarProfileMenuElement>;
             "modus-number-input": LocalJSX.ModusNumberInput & JSXBase.HTMLAttributes<HTMLModusNumberInputElement>;
             "modus-progress-bar": LocalJSX.ModusProgressBar & JSXBase.HTMLAttributes<HTMLModusProgressBarElement>;
-            "modus-radio-button": LocalJSX.ModusRadioButton & JSXBase.HTMLAttributes<HTMLModusRadioButtonElement>;
             "modus-radio-group": LocalJSX.ModusRadioGroup & JSXBase.HTMLAttributes<HTMLModusRadioGroupElement>;
             "modus-select": LocalJSX.ModusSelect & JSXBase.HTMLAttributes<HTMLModusSelectElement>;
             "modus-spinner": LocalJSX.ModusSpinner & JSXBase.HTMLAttributes<HTMLModusSpinnerElement>;
