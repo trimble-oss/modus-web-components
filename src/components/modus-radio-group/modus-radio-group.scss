@@ -24,8 +24,8 @@ ul {
       background-color: transparent;
       border: $rem-2px solid $col_gray_6;
       border-radius: 50%;
-      position: absolute;
       height: $rem-14px;
+      position: absolute;
       transition: background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
       width: $rem-14px;
     }
