@@ -19,18 +19,6 @@
     </style>
   </head>
   <body>
-    <modus-radio-group id="grp"></modus-radio-group>
+
   </body>
-  <script>
-    const radios = [
-      { id: '1', label: 'Option 1' },
-      { checked: true, id: '2', label: 'Option 2' },
-      { disabled: true, id: '3', label: 'Option 3' },
-    ]
-    document.querySelector('#grp').name = 'my-group';
-    document.querySelector('#grp').radioButtons = radios;
-    document.querySelector('#grp').addEventListener('buttonClick', (event) => {
-      window.alert(event.detail);
-    })
-  </script>
 </html>
