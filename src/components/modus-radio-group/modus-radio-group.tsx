@@ -52,7 +52,7 @@ export class ModusRadioGroup {
               id={radioButton.id}
               handleButtonClick={(id) => this.handleButtonClick(id)}>
             </ModusRadioButton>
-          )
+          );
         })}
       </ul>
     );
