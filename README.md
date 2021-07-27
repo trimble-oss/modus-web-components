@@ -30,6 +30,7 @@ This library provides Modus Elements as web components. Web components are reusa
     - Dialog (modus-dialog)
     - Dropdown (modus-dropdown)
     - Input Number (modus-number-input)
+    - Input Radio Buttons (modus-radio-group)
     - Input Text (modus-text-input)
     - List (modus-list)
     - List Item (modus-list-item)
@@ -39,7 +40,6 @@ This library provides Modus Elements as web components. Web components are reusa
     - Switch (modus-switch)
   - **Not Implemented**
     - Input Date
-    - Input Radio
     - Message
     - Navbar (in progress)
     - Pagination

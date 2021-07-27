@@ -8,7 +8,7 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 import { App } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { App as App1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
-import { RadioButton } from "./components/modus-radio-group/modus-radio-group";
+import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 export namespace Components {
     interface ModusAccordion {
     }

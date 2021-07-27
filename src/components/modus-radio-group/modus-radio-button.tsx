@@ -1,6 +1,13 @@
 // eslint-disable-next-line
 import { FunctionalComponent, h } from '@stencil/core';
 
+export interface RadioButton {
+  checked?: boolean;
+  disabled?: boolean;
+  id: string;
+  label: string;
+}
+
 interface ModusRadioButtonProps {
   checked: boolean;
   disabled: boolean;
