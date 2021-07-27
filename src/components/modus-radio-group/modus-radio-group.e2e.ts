@@ -76,6 +76,28 @@ describe('modus-radio-group', () => {
     expect(await inputs[0].getProperty('disabled')).toBeTruthy();
   });
 
+  it('renders changes to checkedId', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-radio-group></modus-radio-group>');
+    let component = await page.find('modus-radio-group');
+    let radioButtons: RadioButton[] = [
+      { id: '1', label: 'Option 1', checked: true },
+      { id: '2', label: 'Option 2' }
+    ];
+    component.setProperty('radioButtons', radioButtons);
+    await page.waitForChanges();
+
+    let inputs = await page.findAll('modus-radio-group >>> .modus-radio-button input');
+    expect(inputs[0].getProperty('checked')).toBeTruthy();
+
+    component.setProperty('checkedId', '2');
+    await page.waitForChanges();
+
+    inputs = await page.findAll('modus-radio-group >>> .modus-radio-button input');
+    expect(inputs[1].getProperty('checked')).toBeTruthy();
+  });
+
   it('emits buttonClick event on button click', async () => {
     const page = await newE2EPage();
 
