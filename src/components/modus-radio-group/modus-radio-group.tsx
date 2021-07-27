@@ -1,13 +1,6 @@
 // eslint-disable-next-line
 import { Component, Event, EventEmitter, h, Prop, Watch } from '@stencil/core';
-import { ModusRadioButton } from './modus-radio-button';
-
-export interface RadioButton {
-  checked?: boolean;
-  disabled?: boolean;
-  id: string;
-  label: string;
-}
+import { ModusRadioButton, RadioButton } from './modus-radio-button';
 
 @Component({
   tag: 'modus-radio-group',
