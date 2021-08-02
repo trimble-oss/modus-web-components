@@ -125,7 +125,8 @@
     }
   }
 
-  .below-text {
+  .sub-text {
+    font-size: $rem-10px;
     margin-top: $rem-4px;
 
     &.helper {

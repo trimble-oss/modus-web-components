@@ -28,4 +28,13 @@ describe('modus-message', () => {
           </modus-message>
     `);
   });
+
+  it('should get the correct class by type', async () => {
+    const modusMessage = new ModusMessage();
+    let className = modusMessage.classByType.get(modusMessage.type);
+    expect(className).toEqual('info');
+
+    className = modusMessage.classByType.get('question');
+    expect(className).toEqual('question');
+  });
 });
