@@ -78,9 +78,12 @@ export class ModusTextInput {
 
     return (
       <div class={className}>
-        <div class={'label-container'}>
-          {this.label ? <label>{this.label}</label> : null}{this.required ? <span class="required">*</span> : null}
-        </div>
+        {this.label || this.required
+         ? <div class={'label-container'}>
+             {this.label ? <label>{this.label}</label> : null}{this.required ? <span class="required">*</span> : null}
+           </div>
+         : null
+        }
         <div
           class={`input-container ${this.errorText ? 'error' : this.validText ? 'valid' : ''} ${this.classBySize.get(this.size)}`}
           onClick={() => this.textInput.focus()}>

@@ -91,9 +91,12 @@ export class ModusNumberInput {
         aria-placeholder={this.placeholder}
         aria-readonly={this.readOnly}
         aria-required={this.required}>
-        <div class="label-container">
-          {this.label ? <label id={inputLabel}>{this.label}</label> : null}{this.required ? <span class="required">*</span> : null}
-        </div>
+        {this.label || this.required
+         ? <div class="label-container">
+            {this.label ? <label id={inputLabel}>{this.label}</label> : null}{this.required ? <span class="required">*</span> : null}
+           </div>
+         : null
+        }
         <div class={inputContainerClassName}>
           <input
             disabled={this.disabled}
