@@ -72,20 +72,12 @@
       &.clear {
         cursor: pointer;
 
-        &:hover {
-          svg {
-            path {
-              fill: $col_gray_6;
-            }
-          }
+        &:hover svg path{
+          fill: $col_gray_6;
         }
 
-        &:active {
-          svg {
-            path {
-              fill: $col_trimble_gray;
-            }
-          }
+        &:active svg path{
+          fill: $col_trimble_gray;
         }
       }
     }
