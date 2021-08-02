@@ -98,18 +98,17 @@ export class ModusTextInput {
                    ref={(el) => this.textInput = el as HTMLInputElement}
                    type="text"
                    value={this.value}/>
-            {
-              (this.clearable && !this.readOnly && !!this.value) ?
-                <span class="icons clear">
+            {this.clearable && !this.readOnly && !!this.value
+             ? <span class="icons clear">
                   <IconClose onClick={() => this.handleClear()} size="16" />
-                </span> :
-                <span class="icons"></span>
+                </span>
+             : <span class="icons"></span>
             }
         </div>
         {
-          this.errorText ? <label class="below-text error">{this.errorText}</label> :
-          this.validText ? <label class="below-text valid">{this.validText}</label> :
-          this.helperText ? <label class="below-text helper">{this.helperText}</label> :
+          this.errorText ? <label class="sub-text error">{this.errorText}</label> :
+          this.validText ? <label class="sub-text valid">{this.validText}</label> :
+          this.helperText ? <label class="sub-text helper">{this.helperText}</label> :
           null
         }
       </div>
