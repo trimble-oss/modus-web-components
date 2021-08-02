@@ -11,7 +11,6 @@ describe('modus-text-input', () => {
       <modus-text-input>
         <mock:shadow-root>
             <div class="modus-text-input">
-                <div class="label-container"></div>
                 <div class="input-container medium">
                     <input class="has-right-icon" type="text">
                     <span class="icons"></span>

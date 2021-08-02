@@ -15,7 +15,6 @@ describe('modus-number-input', () => {
         <modus-number-input>
           <mock:shadow-root>
             <div aria-describedby="inputDesc12345" aria-labelledby="inputLabel12345" class="modus-number-input">
-              <div class="label-container"></div>
               <div class="input-container medium">
                 <input type="number">
               </div>

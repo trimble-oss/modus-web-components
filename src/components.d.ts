@@ -200,6 +200,12 @@ export namespace Components {
          */
         "type": 'standard';
     }
+    interface ModusMessage {
+        /**
+          * (optional) The message's type.
+         */
+        "type": 'info' | 'question';
+    }
     interface ModusNavbar {
         /**
           * (optional) The apps to render in the apps menu.
@@ -549,6 +555,12 @@ declare global {
         prototype: HTMLModusListItemElement;
         new (): HTMLModusListItemElement;
     };
+    interface HTMLModusMessageElement extends Components.ModusMessage, HTMLStencilElement {
+    }
+    var HTMLModusMessageElement: {
+        prototype: HTMLModusMessageElement;
+        new (): HTMLModusMessageElement;
+    };
     interface HTMLModusNavbarElement extends Components.ModusNavbar, HTMLStencilElement {
     }
     var HTMLModusNavbarElement: {
@@ -635,6 +647,7 @@ declare global {
         "modus-dropdown": HTMLModusDropdownElement;
         "modus-list": HTMLModusListElement;
         "modus-list-item": HTMLModusListItemElement;
+        "modus-message": HTMLModusMessageElement;
         "modus-navbar": HTMLModusNavbarElement;
         "modus-navbar-apps-menu": HTMLModusNavbarAppsMenuElement;
         "modus-navbar-help-menu": HTMLModusNavbarHelpMenuElement;
@@ -891,6 +904,12 @@ declare namespace LocalJSX {
           * (optional) The type of list item
          */
         "type"?: 'standard';
+    }
+    interface ModusMessage {
+        /**
+          * (optional) The message's type.
+         */
+        "type"?: 'info' | 'question';
     }
     interface ModusNavbar {
         /**
@@ -1204,6 +1223,7 @@ declare namespace LocalJSX {
         "modus-dropdown": ModusDropdown;
         "modus-list": ModusList;
         "modus-list-item": ModusListItem;
+        "modus-message": ModusMessage;
         "modus-navbar": ModusNavbar;
         "modus-navbar-apps-menu": ModusNavbarAppsMenu;
         "modus-navbar-help-menu": ModusNavbarHelpMenu;
@@ -1235,6 +1255,7 @@ declare module "@stencil/core" {
             "modus-dropdown": LocalJSX.ModusDropdown & JSXBase.HTMLAttributes<HTMLModusDropdownElement>;
             "modus-list": LocalJSX.ModusList & JSXBase.HTMLAttributes<HTMLModusListElement>;
             "modus-list-item": LocalJSX.ModusListItem & JSXBase.HTMLAttributes<HTMLModusListItemElement>;
+            "modus-message": LocalJSX.ModusMessage & JSXBase.HTMLAttributes<HTMLModusMessageElement>;
             "modus-navbar": LocalJSX.ModusNavbar & JSXBase.HTMLAttributes<HTMLModusNavbarElement>;
             "modus-navbar-apps-menu": LocalJSX.ModusNavbarAppsMenu & JSXBase.HTMLAttributes<HTMLModusNavbarAppsMenuElement>;
             "modus-navbar-help-menu": LocalJSX.ModusNavbarHelpMenu & JSXBase.HTMLAttributes<HTMLModusNavbarHelpMenuElement>;
