@@ -16,7 +16,6 @@ describe('modus-select', () => {
       <modus-select>
         <mock:shadow-root>
           <div aria-describedby="selectDesc12345" aria-labelledby="selectLabel12345" role="combobox">
-            <div class='label-container'></div>
             <div class='input-container'>
               <button class='medium' type="button">
                 <div class="dropdown-text"></div>
