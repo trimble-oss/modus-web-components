@@ -23,7 +23,12 @@ export class ModusMessage {
     return (
       <div class={className}>
         <span class="icon">
-          {this.type === 'info' ? <IconInfo color="#005F9E" size="18"></IconInfo> : <IconHelp color="#6A6976" size="18"></IconHelp>}
+          {this.type === 'info'
+            ? <IconInfo color="#005F9E" size="18" />
+            : this.type === 'question'
+            ? <IconHelp color="#6A6976" size="18" />
+            : null
+          }
         </span>
         <span class="message">
           <slot />

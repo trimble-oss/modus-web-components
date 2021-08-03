@@ -72,11 +72,11 @@
       &.clear {
         cursor: pointer;
 
-        &:hover svg path{
+        &:hover svg path {
           fill: $col_gray_6;
         }
 
-        &:active svg path{
+        &:active svg path {
           fill: $col_trimble_gray;
         }
       }

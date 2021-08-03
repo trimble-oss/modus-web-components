@@ -132,10 +132,13 @@ export class ModusSelect {
 
     return (
       <div role="combobox" aria-labelledby={selectLabel} aria-describedby={selectDesc}>
-        <div class={'label-container'}>
-          {this.label ? <label id={selectLabel}>{this.label}</label> : null}
-          {this.required ? <span class="required">*</span> : null}
-        </div>
+        {this.label || this.required
+          ? <div class={'label-container'}>
+              {this.label ? <label id={selectLabel}>{this.label}</label> : null}
+              {this.required ? <span class="required">*</span> : null}
+            </div>
+          : null
+        }
         <div class={inputContainerClass}>
           <button class={buttonClass} disabled={this.disabled} onClick={() => this.handleButtonClick()} type="button" aria-invalid={!!this.errorText}>
             <div class="dropdown-text">{this.value ? this.value[this.optionsDisplayProp] : null}</div>
