@@ -3,6 +3,11 @@
   align-items: center;
   padding-left: 48px;
   padding-right: 48px;
+  width: fit-content;
+
+  &.reverse {
+    left: 0;
+  }
 
   .avatar, .initials {
     background-color: $col_gray_0;

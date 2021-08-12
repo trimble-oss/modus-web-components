@@ -4,6 +4,10 @@ nav {
   display: flex;
   height: 56px;
 
+  &.reverse {
+    flex-direction: row-reverse;
+  }
+
   .icon-menu, .icon-search, .icon-notifications, .icon-help, .icon-apps {
     border-radius: $rem-2px;
     padding: $rem-8px;
@@ -30,6 +34,10 @@ nav {
     display: inline-flex;
     padding: 0 $rem-16px;
 
+    &.reverse {
+      flex-direction: row-reverse;
+    }
+
     img.product-logo {
       margin: 0 $rem-8px;
       max-height: 32px;
@@ -41,6 +49,12 @@ nav {
     display: inline-flex;
     margin-left: auto;
     padding: 0 $rem-16px;
+
+    &.reverse {
+      flex-direction: row-reverse;
+      margin-left: 0;
+      margin-right: auto;
+    }
 
     .search {
       align-items: center;

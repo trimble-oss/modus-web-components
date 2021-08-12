@@ -220,6 +220,10 @@ export namespace Components {
          */
         "profileMenuOptions": { avatarUrl?: string, email?: string, initials?: string, username: string };
         /**
+          * (optional) Whether to display the navbar items in reverse order.
+         */
+        "reverse": boolean;
+        /**
           * (optional) Whether to show the apps menu.
          */
         "showAppsMenu": boolean;
@@ -242,15 +246,19 @@ export namespace Components {
     }
     interface ModusNavbarAppsMenu {
         "apps": App[];
+        "reverse": boolean;
     }
     interface ModusNavbarHelpMenu {
+        "reverse": boolean;
     }
     interface ModusNavbarNotificationsMenu {
+        "reverse": boolean;
     }
     interface ModusNavbarProfileMenu {
         "avatarUrl": string;
         "email": string;
         "initials": string;
+        "reverse": boolean;
         "username": string;
     }
     interface ModusNumberInput {
@@ -933,6 +941,10 @@ declare namespace LocalJSX {
          */
         "profileMenuOptions"?: { avatarUrl?: string, email?: string, initials?: string, username: string };
         /**
+          * (optional) Whether to display the navbar items in reverse order.
+         */
+        "reverse"?: boolean;
+        /**
           * (optional) Whether to show the apps menu.
          */
         "showAppsMenu"?: boolean;
@@ -955,16 +967,20 @@ declare namespace LocalJSX {
     }
     interface ModusNavbarAppsMenu {
         "apps"?: App[];
+        "reverse"?: boolean;
     }
     interface ModusNavbarHelpMenu {
+        "reverse"?: boolean;
     }
     interface ModusNavbarNotificationsMenu {
+        "reverse"?: boolean;
     }
     interface ModusNavbarProfileMenu {
         "avatarUrl"?: string;
         "email"?: string;
         "initials"?: string;
         "onSignOutClick"?: (event: CustomEvent<MouseEvent>) => void;
+        "reverse"?: boolean;
         "username"?: string;
     }
     interface ModusNumberInput {

@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { Component, h } from '@stencil/core';
+import { Component, h, Prop } from '@stencil/core';
 
 @Component({
   tag: 'modus-navbar-help-menu',
@@ -7,9 +7,13 @@ import { Component, h } from '@stencil/core';
   shadow: true,
 })
 export class ModusNavbarHelpMenu {
+  @Prop() reverse: boolean;
+
   render(): unknown {
+    const direction = this.reverse ? 'reverse' : '';
+
     return (
-      <div class="help-menu" onClick={(event) => event.preventDefault()}>
+      <div class={`help-menu ${direction}`} onClick={(event) => event.preventDefault()}>
         <div class="title">Help</div>
         <slot />
       </div>

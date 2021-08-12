@@ -15,14 +15,17 @@ export interface App {
 })
 export class ModusNavbarAppsMenu {
   @Prop() apps: App[];
+  @Prop() reverse: boolean;
 
   clickAppHandler(app: App): void {
     window.open(app.url, '_blank');
   }
 
   render(): unknown {
+    const direction = this.reverse ? 'reverse' : '';
+
     return (
-      <div class="apps-menu" onClick={(event) => event.preventDefault()}>
+      <div class={`apps-menu ${direction}`} onClick={(event) => event.preventDefault()}>
         {this.apps?.map((app) =>
           <div class="app" onClick={() => this.clickAppHandler(app)}>
             <img src={app.logoUrl} />

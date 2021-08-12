@@ -3,6 +3,10 @@
   align-items: flex-start;
   width: max-content;
 
+  &.reverse {
+    left: 0;
+  }
+
   .app {
     border-radius: $rem-2px;
     cursor: default;

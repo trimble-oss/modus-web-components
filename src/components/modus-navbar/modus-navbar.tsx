@@ -16,6 +16,15 @@ export class ModusNavbar {
   /** (optional) The apps to render in the apps menu. */
   @Prop() apps: App[];
 
+  /** (required) Product logo options. */
+  @Prop() productLogoOptions: { url: string };
+
+  /** (required) Profile menu options. */
+  @Prop() profileMenuOptions: { avatarUrl?: string, email?: string, initials?: string, username: string };
+
+  /** (optional) Whether to display the navbar items in reverse order. */
+  @Prop() reverse: boolean;
+
   /** (optional) Whether to show the apps menu. */
   @Prop() showAppsMenu: boolean;
 
@@ -30,12 +39,6 @@ export class ModusNavbar {
 
   /** (optional) Whether to show search. */
   @Prop() showSearch: boolean;
-
-  /** (required) Product logo options. */
-  @Prop() productLogoOptions: { url: string };
-
-  /** (required) Profile menu options. */
-  @Prop() profileMenuOptions: { avatarUrl?: string, email?: string, initials?: string, username: string };
 
   /** An event that fires on product logo click. */
   @Event() productLogoClick: EventEmitter<MouseEvent>;
@@ -112,9 +115,11 @@ export class ModusNavbar {
   }
 
   render(): unknown {
+    const direction = this.reverse ? 'reverse' : '';
+
     return (
-      <nav>
-        <div class="left">
+      <nav class={direction}>
+        <div class={`left ${direction}`}>
           {this.showMainMenu ?
             <div class="navbar-button">
               <IconMenu size="24" />
@@ -122,7 +127,7 @@ export class ModusNavbar {
             : null}
           <img class="product-logo" height="24" src={this.productLogoOptions?.url} alt="Modus navbar product logo" onClick={(event) => this.productLogoClick.emit(event)} />
         </div>
-        <div class="right">
+        <div class={`right ${direction}`}>
           {this.showSearch ?
             <div class="navbar-button search">
               <IconSearch size="24" />
@@ -131,19 +136,19 @@ export class ModusNavbar {
           {this.showNotifications ?
             <div class="navbar-button">
               <IconNotifications size="24" onClick={(event) => this.notificationsMenuClickHandler(event)} />
-              {this.notificationsMenuVisible ? <modus-navbar-notifications-menu><slot name="notifications"></slot></modus-navbar-notifications-menu> : null}
+              {this.notificationsMenuVisible ? <modus-navbar-notifications-menu  reverse={this.reverse}><slot name="notifications"></slot></modus-navbar-notifications-menu> : null}
             </div>
             : null}
           {this.showHelpMenu ?
             <div class="navbar-button">
               <IconHelp size="24" onClick={(event) => this.helpMenuClickHandler(event)} />
-              {this.helpMenuVisible ? <modus-navbar-help-menu><slot name="help"></slot></modus-navbar-help-menu> : null}
+              {this.helpMenuVisible ? <modus-navbar-help-menu  reverse={this.reverse}><slot name="help"></slot></modus-navbar-help-menu> : null}
             </div>
             : null}
           {this.showAppsMenu ?
             <div class="navbar-button">
               <IconApps size="24" onClick={(event) => this.appsMenuClickHandler(event)} />
-              {this.appsMenuVisible ? <modus-navbar-apps-menu apps={this.apps} /> : null}
+              {this.appsMenuVisible ? <modus-navbar-apps-menu apps={this.apps} reverse={this.reverse} /> : null}
             </div>
             : null}
           <div class="profile-menu">
@@ -155,6 +160,7 @@ export class ModusNavbar {
                 avatar-url={this.profileMenuOptions?.avatarUrl}
                 email={this.profileMenuOptions?.email}
                 initials={this.profileMenuOptions?.initials}
+                reverse={this.reverse}
                 username={this.profileMenuOptions?.username} />
             : null}
           </div>
