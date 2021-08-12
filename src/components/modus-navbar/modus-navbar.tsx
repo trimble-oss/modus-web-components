@@ -136,13 +136,13 @@ export class ModusNavbar {
           {this.showNotifications ?
             <div class="navbar-button">
               <IconNotifications size="24" onClick={(event) => this.notificationsMenuClickHandler(event)} />
-              {this.notificationsMenuVisible ? <modus-navbar-notifications-menu  reverse={this.reverse}><slot name="notifications"></slot></modus-navbar-notifications-menu> : null}
+              {this.notificationsMenuVisible ? <modus-navbar-notifications-menu reverse={this.reverse}><slot name="notifications"></slot></modus-navbar-notifications-menu> : null}
             </div>
             : null}
           {this.showHelpMenu ?
             <div class="navbar-button">
               <IconHelp size="24" onClick={(event) => this.helpMenuClickHandler(event)} />
-              {this.helpMenuVisible ? <modus-navbar-help-menu  reverse={this.reverse}><slot name="help"></slot></modus-navbar-help-menu> : null}
+              {this.helpMenuVisible ? <modus-navbar-help-menu reverse={this.reverse}><slot name="help"></slot></modus-navbar-help-menu> : null}
             </div>
             : null}
           {this.showAppsMenu ?
