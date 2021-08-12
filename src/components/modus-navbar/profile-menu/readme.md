@@ -7,12 +7,13 @@
 
 ## Properties
 
-| Property    | Attribute    | Description | Type     | Default     |
-| ----------- | ------------ | ----------- | -------- | ----------- |
-| `avatarUrl` | `avatar-url` |             | `string` | `undefined` |
-| `email`     | `email`      |             | `string` | `undefined` |
-| `initials`  | `initials`   |             | `string` | `undefined` |
-| `username`  | `username`   |             | `string` | `undefined` |
+| Property    | Attribute    | Description | Type      | Default     |
+| ----------- | ------------ | ----------- | --------- | ----------- |
+| `avatarUrl` | `avatar-url` |             | `string`  | `undefined` |
+| `email`     | `email`      |             | `string`  | `undefined` |
+| `initials`  | `initials`   |             | `string`  | `undefined` |
+| `reverse`   | `reverse`    |             | `boolean` | `undefined` |
+| `username`  | `username`   |             | `string`  | `undefined` |
 
 
 ## Events

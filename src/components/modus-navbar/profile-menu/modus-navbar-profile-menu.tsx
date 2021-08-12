@@ -10,6 +10,7 @@ export class ModusNavbarProfileMenu {
   @Prop() avatarUrl: string;
   @Prop() email: string;
   @Prop() initials: string;
+  @Prop() reverse: boolean;
   @Prop() username: string;
 
   @Event() signOutClick: EventEmitter<MouseEvent>;
@@ -20,8 +21,10 @@ export class ModusNavbarProfileMenu {
   }
 
   render(): unknown {
+    const direction = this.reverse ? 'reverse' : '';
+
     return (
-      <div class="profile-menu" onClick={(event) => event.preventDefault()}>
+      <div class={`profile-menu ${direction}`} onClick={(event) => event.preventDefault()}>
         {this.avatarUrl ?
           <img class="avatar" height="64" src={this.avatarUrl} alt="Profile avatar" />
         : <span class="initials">{this.initials}</span>}

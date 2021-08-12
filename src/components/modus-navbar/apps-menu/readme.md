@@ -7,9 +7,10 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type    | Default     |
-| -------- | --------- | ----------- | ------- | ----------- |
-| `apps`   | --        |             | `App[]` | `undefined` |
+| Property  | Attribute | Description | Type      | Default     |
+| --------- | --------- | ----------- | --------- | ----------- |
+| `apps`    | --        |             | `App[]`   | `undefined` |
+| `reverse` | `reverse` |             | `boolean` | `undefined` |
 
 
 ## Dependencies

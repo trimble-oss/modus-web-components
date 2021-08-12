@@ -2,6 +2,10 @@
   @include navbar-menu;
   width: max-content;
 
+  &.reverse {
+    left: 0;
+  }
+
   .title {
     font-size: $rem-18px;
     font-weight: $font-weight-semi-bold;
