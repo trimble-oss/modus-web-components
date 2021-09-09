@@ -400,6 +400,28 @@ export namespace Components {
          */
         "value": unknown;
     }
+    interface ModusSlider {
+        /**
+          * (optional) Whether the slider is disabled. *
+         */
+        "disabled": boolean;
+        /**
+          * (optional) The slider's label.
+         */
+        "label": string;
+        /**
+          * (optional) The slider's maximum value.
+         */
+        "maxValue": number;
+        /**
+          * (optional) The slider's minimum value.
+         */
+        "minValue": number;
+        /**
+          * (optional) The slider's value.
+         */
+        "value": string;
+    }
     interface ModusSpinner {
         /**
           * (optional) The color of the spinner in hex format (eg #FFFFFF)
@@ -622,6 +644,12 @@ declare global {
         prototype: HTMLModusSelectElement;
         new (): HTMLModusSelectElement;
     };
+    interface HTMLModusSliderElement extends Components.ModusSlider, HTMLStencilElement {
+    }
+    var HTMLModusSliderElement: {
+        prototype: HTMLModusSliderElement;
+        new (): HTMLModusSliderElement;
+    };
     interface HTMLModusSpinnerElement extends Components.ModusSpinner, HTMLStencilElement {
     }
     var HTMLModusSpinnerElement: {
@@ -664,6 +692,7 @@ declare global {
         "modus-progress-bar": HTMLModusProgressBarElement;
         "modus-radio-group": HTMLModusRadioGroupElement;
         "modus-select": HTMLModusSelectElement;
+        "modus-slider": HTMLModusSliderElement;
         "modus-spinner": HTMLModusSpinnerElement;
         "modus-switch": HTMLModusSwitchElement;
         "modus-text-input": HTMLModusTextInputElement;
@@ -1133,6 +1162,36 @@ declare namespace LocalJSX {
          */
         "value"?: unknown;
     }
+    interface ModusSlider {
+        /**
+          * (optional) Whether the slider is disabled. *
+         */
+        "disabled"?: boolean;
+        /**
+          * (optional) The slider's label.
+         */
+        "label"?: string;
+        /**
+          * (optional) The slider's maximum value.
+         */
+        "maxValue"?: number;
+        /**
+          * (optional) The slider's minimum value.
+         */
+        "minValue"?: number;
+        /**
+          * An event that fires on slider value change.
+         */
+        "onValueChange"?: (event: CustomEvent<string>) => void;
+        /**
+          * An event that fires on slider value input.
+         */
+        "onValueInput"?: (event: CustomEvent<string>) => void;
+        /**
+          * (optional) The slider's value.
+         */
+        "value"?: string;
+    }
     interface ModusSpinner {
         /**
           * (optional) The color of the spinner in hex format (eg #FFFFFF)
@@ -1247,6 +1306,7 @@ declare namespace LocalJSX {
         "modus-progress-bar": ModusProgressBar;
         "modus-radio-group": ModusRadioGroup;
         "modus-select": ModusSelect;
+        "modus-slider": ModusSlider;
         "modus-spinner": ModusSpinner;
         "modus-switch": ModusSwitch;
         "modus-text-input": ModusTextInput;
@@ -1279,6 +1339,7 @@ declare module "@stencil/core" {
             "modus-progress-bar": LocalJSX.ModusProgressBar & JSXBase.HTMLAttributes<HTMLModusProgressBarElement>;
             "modus-radio-group": LocalJSX.ModusRadioGroup & JSXBase.HTMLAttributes<HTMLModusRadioGroupElement>;
             "modus-select": LocalJSX.ModusSelect & JSXBase.HTMLAttributes<HTMLModusSelectElement>;
+            "modus-slider": LocalJSX.ModusSlider & JSXBase.HTMLAttributes<HTMLModusSliderElement>;
             "modus-spinner": LocalJSX.ModusSpinner & JSXBase.HTMLAttributes<HTMLModusSpinnerElement>;
             "modus-switch": LocalJSX.ModusSwitch & JSXBase.HTMLAttributes<HTMLModusSwitchElement>;
             "modus-text-input": LocalJSX.ModusTextInput & JSXBase.HTMLAttributes<HTMLModusTextInputElement>;
