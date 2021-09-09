@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { Component, Prop, h } from '@stencil/core';
+import { Component, Prop, h, EventEmitter, Event } from '@stencil/core';
 
 export interface App {
   description?: string;
@@ -17,8 +17,11 @@ export class ModusNavbarAppsMenu {
   @Prop() apps: App[];
   @Prop() reverse: boolean;
 
+  @Event({ bubbles: false }) itemClick: EventEmitter<string>;
+
   clickAppHandler(app: App): void {
     window.open(app.url, '_blank');
+    this.itemClick.emit(app.name);
   }
 
   render(): unknown {

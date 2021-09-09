@@ -40,6 +40,9 @@ export class ModusNavbar {
   /** (optional) Whether to show search. */
   @Prop() showSearch: boolean;
 
+  /** An event that fires on apps menu item click. */
+  @Event() appsMenuItemClick: EventEmitter<string>;
+
   /** An event that fires on product logo click. */
   @Event() productLogoClick: EventEmitter<MouseEvent>;
 
@@ -148,7 +151,7 @@ export class ModusNavbar {
           {this.showAppsMenu ?
             <div class="navbar-button">
               <IconApps size="24" onClick={(event) => this.appsMenuClickHandler(event)} />
-              {this.appsMenuVisible ? <modus-navbar-apps-menu apps={this.apps} reverse={this.reverse} /> : null}
+              {this.appsMenuVisible ? <modus-navbar-apps-menu apps={this.apps} reverse={this.reverse} onItemClick={(name) => this.appsMenuItemClick.emit(name.detail)}/> : null}
             </div>
             : null}
           <div class="profile-menu">

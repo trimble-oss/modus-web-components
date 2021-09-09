@@ -925,6 +925,10 @@ declare namespace LocalJSX {
          */
         "apps"?: App[];
         /**
+          * An event that fires on apps menu item click.
+         */
+        "onAppsMenuItemClick"?: (event: CustomEvent<string>) => void;
+        /**
           * An event that fires on product logo click.
          */
         "onProductLogoClick"?: (event: CustomEvent<MouseEvent>) => void;
@@ -967,6 +971,7 @@ declare namespace LocalJSX {
     }
     interface ModusNavbarAppsMenu {
         "apps"?: App[];
+        "onItemClick"?: (event: CustomEvent<string>) => void;
         "reverse"?: boolean;
     }
     interface ModusNavbarHelpMenu {

@@ -13,6 +13,13 @@
 | `reverse` | `reverse` |             | `boolean` | `undefined` |
 
 
+## Events
+
+| Event       | Description | Type                  |
+| ----------- | ----------- | --------------------- |
+| `itemClick` |             | `CustomEvent<string>` |
+
+
 ## Dependencies
 
 ### Used by

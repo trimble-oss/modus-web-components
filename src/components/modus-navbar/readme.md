@@ -24,6 +24,7 @@
 
 | Event                     | Description                                         | Type                      |
 | ------------------------- | --------------------------------------------------- | ------------------------- |
+| `appsMenuItemClick`       | An event that fires on apps menu item click.        | `CustomEvent<string>`     |
 | `productLogoClick`        | An event that fires on product logo click.          | `CustomEvent<MouseEvent>` |
 | `profileMenuSignOutClick` | An event that fires on profile menu sign out click. | `CustomEvent<MouseEvent>` |
 
