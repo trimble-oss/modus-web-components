@@ -98,5 +98,11 @@ nav {
         border: $rem-4px solid $col_gray_2;
       }
     }
+
+    .pendo-placeholder {
+      height: 2rem;
+      margin: 0 $rem-10px;
+      width: 2rem;
+    }
   }
 }
