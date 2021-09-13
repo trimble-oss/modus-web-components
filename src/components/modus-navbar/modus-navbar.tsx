@@ -37,6 +37,9 @@ export class ModusNavbar {
   /** (optional) Whether to show notifications. */
   @Prop() showNotifications: boolean;
 
+  /** (optional) Whether to show the placeholder for Pendo. */
+  @Prop() showPendoPlaceholder: boolean;
+
   /** (optional) Whether to show search. */
   @Prop() showSearch: boolean;
 
@@ -164,6 +167,7 @@ export class ModusNavbar {
                 username={this.profileMenuOptions?.username} />
             : null}
           </div>
+          {this.showPendoPlaceholder && <div class="pendo-placeholder" />}
         </div>
       </nav>
     );

@@ -240,6 +240,10 @@ export namespace Components {
          */
         "showNotifications": boolean;
         /**
+          * (optional) Whether to show the placeholder for Pendo.
+         */
+        "showPendoPlaceholder": boolean;
+        /**
           * (optional) Whether to show search.
          */
         "showSearch": boolean;
@@ -960,6 +964,10 @@ declare namespace LocalJSX {
           * (optional) Whether to show notifications.
          */
         "showNotifications"?: boolean;
+        /**
+          * (optional) Whether to show the placeholder for Pendo.
+         */
+        "showPendoPlaceholder"?: boolean;
         /**
           * (optional) Whether to show search.
          */
