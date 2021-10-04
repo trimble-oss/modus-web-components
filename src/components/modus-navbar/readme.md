@@ -33,6 +33,7 @@
 
 ### Depends on
 
+- [modus-navbar-main-menu](main-menu)
 - [modus-navbar-notifications-menu](notifications-menu)
 - [modus-navbar-help-menu](help-menu)
 - [modus-navbar-apps-menu](apps-menu)
@@ -41,6 +42,7 @@
 ### Graph
 ```mermaid
 graph TD;
+  modus-navbar --> modus-navbar-main-menu
   modus-navbar --> modus-navbar-notifications-menu
   modus-navbar --> modus-navbar-help-menu
   modus-navbar --> modus-navbar-apps-menu

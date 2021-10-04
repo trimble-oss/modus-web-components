@@ -51,6 +51,7 @@ export class ModusNavbar {
 
   @State() appsMenuVisible: boolean;
   @State() helpMenuVisible: boolean;
+  @State() mainMenuVisible: boolean;
   @State() notificationsMenuVisible: boolean;
   @State() profileMenuVisible: boolean;
 
@@ -88,6 +89,17 @@ export class ModusNavbar {
     }
   }
 
+  mainMenuClickHandler(event: MouseEvent): void {
+    event.preventDefault();
+
+    if (this.mainMenuVisible) {
+      this.mainMenuVisible = false;
+    } else {
+      this.hideMenus();
+      this.mainMenuVisible = true;
+    }
+  }
+
   notificationsMenuClickHandler(event: MouseEvent): void {
     event.preventDefault();
 
@@ -113,6 +125,7 @@ export class ModusNavbar {
   private hideMenus(): void {
     this.appsMenuVisible = false;
     this.helpMenuVisible = false;
+    this.mainMenuVisible = false;
     this.notificationsMenuVisible = false;
     this.profileMenuVisible = false;
   }
@@ -125,7 +138,8 @@ export class ModusNavbar {
         <div class={`left ${direction}`}>
           {this.showMainMenu ?
             <div class="navbar-button">
-              <IconMenu size="24" />
+              <IconMenu size="24" onClick={(event) => this.mainMenuClickHandler(event)}/>
+              {this.mainMenuVisible && <modus-navbar-main-menu><slot name="main"></slot></modus-navbar-main-menu>}
             </div>
             : null}
           <img class="product-logo" height="24" src={this.productLogoOptions?.url} alt="Modus navbar product logo" onClick={(event) => this.productLogoClick.emit(event)} />

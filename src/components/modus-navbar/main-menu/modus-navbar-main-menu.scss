@@ -1,0 +1,8 @@
+.main-menu {
+  @include navbar-menu;
+  height: calc(100vh - 108px);
+  left: 0;
+  max-width: 560px;
+  min-width: 248px;
+  width: max-content;
+}
