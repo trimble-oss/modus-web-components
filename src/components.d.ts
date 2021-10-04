@@ -255,6 +255,8 @@ export namespace Components {
     interface ModusNavbarHelpMenu {
         "reverse": boolean;
     }
+    interface ModusNavbarMainMenu {
+    }
     interface ModusNavbarNotificationsMenu {
         "reverse": boolean;
     }
@@ -591,6 +593,12 @@ declare global {
         prototype: HTMLModusNavbarHelpMenuElement;
         new (): HTMLModusNavbarHelpMenuElement;
     };
+    interface HTMLModusNavbarMainMenuElement extends Components.ModusNavbarMainMenu, HTMLStencilElement {
+    }
+    var HTMLModusNavbarMainMenuElement: {
+        prototype: HTMLModusNavbarMainMenuElement;
+        new (): HTMLModusNavbarMainMenuElement;
+    };
     interface HTMLModusNavbarNotificationsMenuElement extends Components.ModusNavbarNotificationsMenu, HTMLStencilElement {
     }
     var HTMLModusNavbarNotificationsMenuElement: {
@@ -663,6 +671,7 @@ declare global {
         "modus-navbar": HTMLModusNavbarElement;
         "modus-navbar-apps-menu": HTMLModusNavbarAppsMenuElement;
         "modus-navbar-help-menu": HTMLModusNavbarHelpMenuElement;
+        "modus-navbar-main-menu": HTMLModusNavbarMainMenuElement;
         "modus-navbar-notifications-menu": HTMLModusNavbarNotificationsMenuElement;
         "modus-navbar-profile-menu": HTMLModusNavbarProfileMenuElement;
         "modus-number-input": HTMLModusNumberInputElement;
@@ -980,6 +989,8 @@ declare namespace LocalJSX {
     interface ModusNavbarHelpMenu {
         "reverse"?: boolean;
     }
+    interface ModusNavbarMainMenu {
+    }
     interface ModusNavbarNotificationsMenu {
         "reverse"?: boolean;
     }
@@ -1251,6 +1262,7 @@ declare namespace LocalJSX {
         "modus-navbar": ModusNavbar;
         "modus-navbar-apps-menu": ModusNavbarAppsMenu;
         "modus-navbar-help-menu": ModusNavbarHelpMenu;
+        "modus-navbar-main-menu": ModusNavbarMainMenu;
         "modus-navbar-notifications-menu": ModusNavbarNotificationsMenu;
         "modus-navbar-profile-menu": ModusNavbarProfileMenu;
         "modus-number-input": ModusNumberInput;
@@ -1283,6 +1295,7 @@ declare module "@stencil/core" {
             "modus-navbar": LocalJSX.ModusNavbar & JSXBase.HTMLAttributes<HTMLModusNavbarElement>;
             "modus-navbar-apps-menu": LocalJSX.ModusNavbarAppsMenu & JSXBase.HTMLAttributes<HTMLModusNavbarAppsMenuElement>;
             "modus-navbar-help-menu": LocalJSX.ModusNavbarHelpMenu & JSXBase.HTMLAttributes<HTMLModusNavbarHelpMenuElement>;
+            "modus-navbar-main-menu": LocalJSX.ModusNavbarMainMenu & JSXBase.HTMLAttributes<HTMLModusNavbarMainMenuElement>;
             "modus-navbar-notifications-menu": LocalJSX.ModusNavbarNotificationsMenu & JSXBase.HTMLAttributes<HTMLModusNavbarNotificationsMenuElement>;
             "modus-navbar-profile-menu": LocalJSX.ModusNavbarProfileMenu & JSXBase.HTMLAttributes<HTMLModusNavbarProfileMenuElement>;
             "modus-number-input": LocalJSX.ModusNumberInput & JSXBase.HTMLAttributes<HTMLModusNumberInputElement>;
