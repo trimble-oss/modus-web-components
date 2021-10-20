@@ -2,7 +2,6 @@
 import { Component, Prop, h, Event, EventEmitter, State, Listen } from '@stencil/core';
 import { IconMenu } from '../icons/icon-menu';
 import { IconNotifications } from '../icons/icon-notifications';
-import { IconHelp } from '../icons/icon-help';
 import { IconApps } from '../icons/icon-apps';
 import { IconSearch } from '../icons/icon-search';
 import { App } from './apps-menu/modus-navbar-apps-menu';
@@ -28,9 +27,6 @@ export class ModusNavbar {
   /** (optional) Whether to show the apps menu. */
   @Prop() showAppsMenu: boolean;
 
-  /** (optional) Whether to show the help menu. */
-  @Prop() showHelpMenu: boolean;
-
   /** (optional) Whether to show the main menu. */
   @Prop() showMainMenu: boolean;
 
@@ -50,7 +46,6 @@ export class ModusNavbar {
   @Event() profileMenuSignOutClick: EventEmitter<MouseEvent>;
 
   @State() appsMenuVisible: boolean;
-  @State() helpMenuVisible: boolean;
   @State() mainMenuVisible: boolean;
   @State() notificationsMenuVisible: boolean;
   @State() profileMenuVisible: boolean;
@@ -75,17 +70,6 @@ export class ModusNavbar {
     } else {
       this.hideMenus();
       this.appsMenuVisible = true;
-    }
-  }
-
-  helpMenuClickHandler(event: MouseEvent): void {
-    event.preventDefault();
-
-    if (this.helpMenuVisible) {
-      this.helpMenuVisible = false;
-    } else {
-      this.hideMenus();
-      this.helpMenuVisible = true;
     }
   }
 
@@ -124,7 +108,6 @@ export class ModusNavbar {
 
   private hideMenus(): void {
     this.appsMenuVisible = false;
-    this.helpMenuVisible = false;
     this.mainMenuVisible = false;
     this.notificationsMenuVisible = false;
     this.profileMenuVisible = false;
@@ -156,12 +139,7 @@ export class ModusNavbar {
               {this.notificationsMenuVisible ? <modus-navbar-notifications-menu reverse={this.reverse}><slot name="notifications"></slot></modus-navbar-notifications-menu> : null}
             </div>
             : null}
-          {this.showHelpMenu ?
-            <div class="navbar-button">
-              <IconHelp size="24" onClick={(event) => this.helpMenuClickHandler(event)} />
-              {this.helpMenuVisible ? <modus-navbar-help-menu reverse={this.reverse}><slot name="help"></slot></modus-navbar-help-menu> : null}
-            </div>
-            : null}
+          {this.showPendoPlaceholder && <div class={'pendo-placeholder'} />}
           {this.showAppsMenu ?
             <div class="navbar-button">
               <IconApps size="24" onClick={(event) => this.appsMenuClickHandler(event)} />
@@ -181,7 +159,6 @@ export class ModusNavbar {
                 username={this.profileMenuOptions?.username} />
             : null}
           </div>
-          {this.showPendoPlaceholder && <div class="pendo-placeholder" />}
         </div>
       </nav>
     );

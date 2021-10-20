@@ -61,6 +61,11 @@ nav {
       display: inline-flex;
     }
 
+    .pendo-placeholder{
+      height: 40px;
+      width: 40px;
+    }
+
     .profile-menu {
       align-items: center;
       cursor: default;
@@ -97,12 +102,6 @@ nav {
       >:first-child:active {
         border: $rem-4px solid $col_gray_2;
       }
-    }
-
-    .pendo-placeholder {
-      height: 2rem;
-      margin: 0 $rem-10px;
-      width: 2rem;
     }
   }
 }

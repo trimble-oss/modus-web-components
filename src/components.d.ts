@@ -228,10 +228,6 @@ export namespace Components {
          */
         "showAppsMenu": boolean;
         /**
-          * (optional) Whether to show the help menu.
-         */
-        "showHelpMenu": boolean;
-        /**
           * (optional) Whether to show the main menu.
          */
         "showMainMenu": boolean;
@@ -250,9 +246,6 @@ export namespace Components {
     }
     interface ModusNavbarAppsMenu {
         "apps": App[];
-        "reverse": boolean;
-    }
-    interface ModusNavbarHelpMenu {
         "reverse": boolean;
     }
     interface ModusNavbarMainMenu {
@@ -587,12 +580,6 @@ declare global {
         prototype: HTMLModusNavbarAppsMenuElement;
         new (): HTMLModusNavbarAppsMenuElement;
     };
-    interface HTMLModusNavbarHelpMenuElement extends Components.ModusNavbarHelpMenu, HTMLStencilElement {
-    }
-    var HTMLModusNavbarHelpMenuElement: {
-        prototype: HTMLModusNavbarHelpMenuElement;
-        new (): HTMLModusNavbarHelpMenuElement;
-    };
     interface HTMLModusNavbarMainMenuElement extends Components.ModusNavbarMainMenu, HTMLStencilElement {
     }
     var HTMLModusNavbarMainMenuElement: {
@@ -670,7 +657,6 @@ declare global {
         "modus-message": HTMLModusMessageElement;
         "modus-navbar": HTMLModusNavbarElement;
         "modus-navbar-apps-menu": HTMLModusNavbarAppsMenuElement;
-        "modus-navbar-help-menu": HTMLModusNavbarHelpMenuElement;
         "modus-navbar-main-menu": HTMLModusNavbarMainMenuElement;
         "modus-navbar-notifications-menu": HTMLModusNavbarNotificationsMenuElement;
         "modus-navbar-profile-menu": HTMLModusNavbarProfileMenuElement;
@@ -962,10 +948,6 @@ declare namespace LocalJSX {
          */
         "showAppsMenu"?: boolean;
         /**
-          * (optional) Whether to show the help menu.
-         */
-        "showHelpMenu"?: boolean;
-        /**
           * (optional) Whether to show the main menu.
          */
         "showMainMenu"?: boolean;
@@ -984,9 +966,6 @@ declare namespace LocalJSX {
     }
     interface ModusNavbarAppsMenu {
         "apps"?: App[];
-        "reverse"?: boolean;
-    }
-    interface ModusNavbarHelpMenu {
         "reverse"?: boolean;
     }
     interface ModusNavbarMainMenu {
@@ -1261,7 +1240,6 @@ declare namespace LocalJSX {
         "modus-message": ModusMessage;
         "modus-navbar": ModusNavbar;
         "modus-navbar-apps-menu": ModusNavbarAppsMenu;
-        "modus-navbar-help-menu": ModusNavbarHelpMenu;
         "modus-navbar-main-menu": ModusNavbarMainMenu;
         "modus-navbar-notifications-menu": ModusNavbarNotificationsMenu;
         "modus-navbar-profile-menu": ModusNavbarProfileMenu;
@@ -1294,7 +1272,6 @@ declare module "@stencil/core" {
             "modus-message": LocalJSX.ModusMessage & JSXBase.HTMLAttributes<HTMLModusMessageElement>;
             "modus-navbar": LocalJSX.ModusNavbar & JSXBase.HTMLAttributes<HTMLModusNavbarElement>;
             "modus-navbar-apps-menu": LocalJSX.ModusNavbarAppsMenu & JSXBase.HTMLAttributes<HTMLModusNavbarAppsMenuElement>;
-            "modus-navbar-help-menu": LocalJSX.ModusNavbarHelpMenu & JSXBase.HTMLAttributes<HTMLModusNavbarHelpMenuElement>;
             "modus-navbar-main-menu": LocalJSX.ModusNavbarMainMenu & JSXBase.HTMLAttributes<HTMLModusNavbarMainMenuElement>;
             "modus-navbar-notifications-menu": LocalJSX.ModusNavbarNotificationsMenu & JSXBase.HTMLAttributes<HTMLModusNavbarNotificationsMenuElement>;
             "modus-navbar-profile-menu": LocalJSX.ModusNavbarProfileMenu & JSXBase.HTMLAttributes<HTMLModusNavbarProfileMenuElement>;
