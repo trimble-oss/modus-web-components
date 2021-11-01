@@ -2,6 +2,10 @@
   "name": "@trimble-oss/modus-web-components",
   "version": "0.0.15",
   "description": "Trimble Modus Web Component Library",
+  "homepage": "https://github.com/trimble-oss/modus-web-components",
+  "bugs": {
+    "url": "https://github.com/trimble-oss/modus-web-components/issues/"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/trimble-oss/modus-web-components"
