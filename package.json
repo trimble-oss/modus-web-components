@@ -38,7 +38,7 @@
     "@stencil/core": "^2.10.0"
   },
   "devDependencies": {
-    "@stencil/sass": "^1.4.1",
+    "@stencil/sass": "^1.5.2",
     "@types/jest": "^26.0.23",
     "@types/puppeteer": "^5.4.3",
     "@types/puppeteer-core": "^5.4.0",
