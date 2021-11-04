@@ -1,0 +1,6 @@
+*.md
+*.tsx
+
+modus-colors.scss
+modus-light-theme.scss
+modus-variables.scss

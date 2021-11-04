@@ -31,7 +31,8 @@
     "test": "stencil test --spec --e2e --silent",
     "test.watch": "stencil test --spec --e2e --silent --watchAll",
     "generate": "stencil generate",
-    "lint": "eslint src/** --no-error-on-unmatched-pattern"
+    "lint": "eslint src/** --no-error-on-unmatched-pattern",
+    "lint-css": "stylelint src/**/*.scss"
   },
   "dependencies": {
     "@stencil/core": "^2.0.1"
@@ -48,6 +49,8 @@
     "jest-cli": "^26.6.3",
     "puppeteer": "^5.5.0",
     "puppeteer-core": "^9.1.1",
+    "stylelint": "^14.0.1",
+    "stylelint-config-standard-scss": "^2.0.1",
     "typescript": "^4.3.2"
   },
   "license": "UNLICENSED"

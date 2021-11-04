@@ -1,5 +1,6 @@
 .profile-menu {
   @include navbar-menu;
+
   align-items: center;
   padding-left: 48px;
   padding-right: 48px;
@@ -9,7 +10,8 @@
     left: 0;
   }
 
-  .avatar, .initials {
+  .avatar,
+  .initials {
     background-color: $col_gray_0;
     border-radius: 50%;
     margin-bottom: $rem-16px;

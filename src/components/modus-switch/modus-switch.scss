@@ -27,7 +27,7 @@
       -webkit-transition: .2s;
     }
 
-    .slider:before {
+    .slider::before {
       background-color: $col_white;
       border-radius: 50%;
       content: "";
@@ -46,7 +46,7 @@
         background-color: $col_blue_alt;
       }
 
-      .slider:before {
+      .slider::before {
         transform: translateX($rem-16px);
         -ms-transform: translateX($rem-16px);
         -webkit-transform: translateX($rem-16px);

@@ -86,7 +86,9 @@
       cursor: text;
     }
 
-    &:focus-within, &.error, &.valid {
+    &:focus-within,
+    &.error,
+    &.valid {
       border: solid;
       border-width: $rem-1px $rem-1px $rem-2px $rem-1px;
       height: 1.9375rem; // Counteract bottom border width.
@@ -111,7 +113,9 @@
         font-size: $rem-14px;
       }
 
-      &:focus-within, &.error, &.valid {
+      &:focus-within,
+      &.error,
+      &.valid {
         height: 2.9375rem; // Counteract bottom border width.
       }
     }
@@ -153,19 +157,16 @@
 
       .icons {
         background-color: $col_gray_3;
-      }
-
-      input {
-        background-color: $col_gray_3;
-        border-radius: 0;
-      }
-
-      .icons {
         cursor: default;
 
         &.clear {
           visibility: hidden;
         }
+      }
+
+      input {
+        background-color: $col_gray_3;
+        border-radius: 0;
       }
     }
   }
