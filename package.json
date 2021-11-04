@@ -35,7 +35,7 @@
     "lint-css": "stylelint src/**/*.scss"
   },
   "dependencies": {
-    "@stencil/core": "^2.0.1"
+    "@stencil/core": "^2.10.0"
   },
   "devDependencies": {
     "@stencil/sass": "^1.4.1",
