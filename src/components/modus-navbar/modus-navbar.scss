@@ -8,7 +8,11 @@ nav {
     flex-direction: row-reverse;
   }
 
-  .icon-menu, .icon-search, .icon-notifications, .icon-help, .icon-apps {
+  .icon-menu,
+  .icon-search,
+  .icon-notifications,
+  .icon-help,
+  .icon-apps {
     border-radius: $rem-2px;
     padding: $rem-8px;
 
@@ -61,7 +65,7 @@ nav {
       display: inline-flex;
     }
 
-    .pendo-placeholder{
+    .pendo-placeholder {
       height: 40px;
       width: 40px;
     }

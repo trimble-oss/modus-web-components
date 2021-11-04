@@ -40,7 +40,9 @@
       width: 100%;
     }
 
-    &:focus-within, &.error, &.valid {
+    &:focus-within,
+    &.error,
+    &.valid {
       border: solid $rem-1px;
       border-bottom-width: $rem-2px;
       height: 31px; // Counteract bottom border width.
@@ -69,7 +71,9 @@
         height: 47px;
       }
 
-      &:focus-within, &.error, &.valid {
+      &:focus-within,
+      &.error,
+      &.valid {
         height: 47px; // Counteract bottom border width.
       }
     }

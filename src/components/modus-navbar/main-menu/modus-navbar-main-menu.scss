@@ -1,7 +1,8 @@
 .main-menu {
   @include navbar-menu;
+
   border-radius: 0 0 $rem_2px $rem_2px;
-  clip-path: inset(0px -10px -10px -10px);
+  clip-path: inset(0 -10px -10px -10px);
   height: calc(100vh - 56px);
   left: -16px;
   max-width: 616px;

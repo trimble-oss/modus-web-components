@@ -13,7 +13,10 @@ div.alert {
     border-color: $col_red;
     color: $col_red;
 
-    .icon-check-circle, .icon-error, .icon-info, .icon-warning {
+    .icon-check-circle,
+    .icon-error,
+    .icon-info,
+    .icon-warning {
       path {
         fill: $col_red;
       }
@@ -24,7 +27,10 @@ div.alert {
     border-color: $col_blue;
     color: $col_blue;
 
-    .icon-check-circle, .icon-error, .icon-info, .icon-warning {
+    .icon-check-circle,
+    .icon-error,
+    .icon-info,
+    .icon-warning {
       path {
         fill: $col_blue;
       }
@@ -35,7 +41,10 @@ div.alert {
     border-color: $col_gray_8;
     color: $col_gray_8;
 
-    .icon-check-circle, .icon-error, .icon-info, .icon-warning {
+    .icon-check-circle,
+    .icon-error,
+    .icon-info,
+    .icon-warning {
       path {
         fill: $col_gray_8;
       }
@@ -46,7 +55,10 @@ div.alert {
     border-color: $col_trimble_gray;
     color: $col_trimble_gray;
 
-    .icon-check-circle, .icon-error, .icon-info, .icon-warning {
+    .icon-check-circle,
+    .icon-error,
+    .icon-info,
+    .icon-warning {
       path {
         fill: $col_trimble_gray;
       }
@@ -57,7 +69,10 @@ div.alert {
     border-color: $col_green_dark;
     color: $col_green_dark;
 
-    .icon-check-circle, .icon-error, .icon-info, .icon-warning {
+    .icon-check-circle,
+    .icon-error,
+    .icon-info,
+    .icon-warning {
       path {
         fill: $col_green_dark;
       }
@@ -68,7 +83,10 @@ div.alert {
     border-color: $col_trimble_yellow;
     color: $col_trimble_gray;
 
-    .icon-check-circle, .icon-error, .icon-info, .icon-warning {
+    .icon-check-circle,
+    .icon-error,
+    .icon-info,
+    .icon-warning {
       path {
         fill: $col_trimble_gray;
       }
@@ -80,7 +98,10 @@ div.alert {
     font-weight: $alert-font-weight;
   }
 
-  .icon-check-circle, .icon-error, .icon-info, .icon-warning {
+  .icon-check-circle,
+  .icon-error,
+  .icon-info,
+  .icon-warning {
     margin-right: 8px;
   }
 

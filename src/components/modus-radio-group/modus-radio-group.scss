@@ -30,10 +30,10 @@ ul {
       width: $rem-14px;
     }
 
-    .checkmark:after {
+    .checkmark::after {
       background: $col_trimble_blue_mid;
       border-radius: 50%;
-      content: '';
+      content: "";
       display: none;
       height: 0.5125rem; // Specific size so that the check is centered.
       left: $rem-3px;
@@ -47,7 +47,7 @@ ul {
       border-color: $col_trimble_blue_mid;
     }
 
-    input:checked ~ .checkmark:after {
+    input:checked ~ .checkmark::after {
       display: block;
     }
 

@@ -24,7 +24,8 @@
     flex-direction: column;
     width: fit-content;
 
-    .header, .controls {
+    .header,
+    .controls {
       align-items: center;
       display: flex;
       height: 64px;
