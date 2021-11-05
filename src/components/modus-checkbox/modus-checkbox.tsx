@@ -18,7 +18,7 @@ export class ModusCheckbox {
   @Prop() label: string;
 
   /** (optional) The size of the button */
-  @Prop() size: 'small' | 'medium' = 'medium'
+  @Prop() size: 'small' | 'medium' = 'medium';
 
   /** An event that fires on checkbox click. */
   @Event() checkboxClick: EventEmitter<boolean>;
