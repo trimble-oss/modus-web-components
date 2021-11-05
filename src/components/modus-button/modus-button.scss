@@ -12,7 +12,12 @@ button {
   user-select: none;
   white-space: nowrap;
 
+  &:hover {
+    cursor: pointer;
+  }
+
   &:disabled {
+    cursor: default;
     opacity: .3;
   }
 
