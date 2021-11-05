@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "@stencil/sass": "^1.5.2",
-    "@types/jest": "^26.0.23",
+    "@types/jest": "^27.0.2",
     "@types/puppeteer": "^5.4.4",
     "@types/puppeteer-core": "^5.4.0",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
