@@ -86,7 +86,7 @@ All NPM scripts are run from the root of the project.
 
 `npm run generate` - Start the interactive Stencil component generator
 
-`npm run lint` - Run ESLint to find problems with JS and TS code
+`npm run lint` - Run ESLint to find problems with JS, TS and SCSS code
 
 ## Technology
 
