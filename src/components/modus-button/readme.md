@@ -26,13 +26,13 @@
 
 ### Used by
 
- - [modus-dialog](../modus-dialog)
+ - [modus-modal](../modus-modal)
  - [modus-navbar-profile-menu](../modus-navbar/profile-menu)
 
 ### Graph
 ```mermaid
 graph TD;
-  modus-dialog --> modus-button
+  modus-modal --> modus-button
   modus-navbar-profile-menu --> modus-button
   style modus-button fill:#f9f,stroke:#333,stroke-width:4px
 ```

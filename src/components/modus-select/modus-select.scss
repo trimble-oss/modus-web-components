@@ -20,6 +20,10 @@
   .input-container {
     position: relative;
 
+    &:hover {
+      cursor: pointer;
+    }
+
     button {
       align-items: center;
       background-color: $col_white;
@@ -30,6 +34,10 @@
       padding: 0;
       position: relative;
       width: 100%;
+
+      &:hover {
+        cursor: pointer;
+      }
 
       &:focus-within {
         border-bottom-color: $col_blue_alt;

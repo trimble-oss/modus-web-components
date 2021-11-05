@@ -9,6 +9,7 @@ import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 import { App } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { App as App1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
+import { Tab } from "./components/modus-tabs/modus-tabs";
 export namespace Components {
     interface ModusAccordion {
     }
@@ -144,28 +145,6 @@ export namespace Components {
          */
         "value": string;
     }
-    interface ModusDialog {
-        /**
-          * (optional) The text to display in the header.
-         */
-        "headerText": string;
-        /**
-          * (optional) The text to display in the primary button.
-         */
-        "primaryButtonText": string;
-        /**
-          * (optional) The text to display in the secondary button.
-         */
-        "secondaryButtonText": string;
-        /**
-          * (optional) Whether to show the secondary button.
-         */
-        "showSecondaryButton": boolean;
-        /**
-          * (optional) Whether to show the dialog.
-         */
-        "visible": boolean;
-    }
     interface ModusDropdown {
         /**
           * (optional) Disables the dropdown
@@ -205,6 +184,22 @@ export namespace Components {
           * (optional) The message's type.
          */
         "type": 'info' | 'question';
+    }
+    interface ModusModal {
+        "close": () => Promise<void>;
+        /**
+          * (optional) The modal's primary button text.
+         */
+        "headerText": string;
+        "open": () => Promise<void>;
+        /**
+          * (optional) The modal's primary button text.
+         */
+        "primaryButtonText": string;
+        /**
+          * (optional) The modal's secondary button text.
+         */
+        "secondaryButtonText": string;
     }
     interface ModusNavbar {
         /**
@@ -313,6 +308,12 @@ export namespace Components {
           * (optional) The input's value.
          */
         "value": string;
+    }
+    interface ModusPagination {
+        "activePage": number;
+        "maxPage": number;
+        "minPage": number;
+        "size": 'large' | 'medium' | 'small';
     }
     interface ModusProgressBar {
         /**
@@ -445,6 +446,13 @@ export namespace Components {
           * (optional) The switch label.
          */
         "label": string;
+    }
+    interface ModusTabs {
+        "size": 'medium' | 'small';
+        /**
+          * The tabs to render.
+         */
+        "tabs": Tab[];
     }
     interface ModusTextInput {
         /**
@@ -584,12 +592,6 @@ declare global {
         prototype: HTMLModusChipElement;
         new (): HTMLModusChipElement;
     };
-    interface HTMLModusDialogElement extends Components.ModusDialog, HTMLStencilElement {
-    }
-    var HTMLModusDialogElement: {
-        prototype: HTMLModusDialogElement;
-        new (): HTMLModusDialogElement;
-    };
     interface HTMLModusDropdownElement extends Components.ModusDropdown, HTMLStencilElement {
     }
     var HTMLModusDropdownElement: {
@@ -613,6 +615,12 @@ declare global {
     var HTMLModusMessageElement: {
         prototype: HTMLModusMessageElement;
         new (): HTMLModusMessageElement;
+    };
+    interface HTMLModusModalElement extends Components.ModusModal, HTMLStencilElement {
+    }
+    var HTMLModusModalElement: {
+        prototype: HTMLModusModalElement;
+        new (): HTMLModusModalElement;
     };
     interface HTMLModusNavbarElement extends Components.ModusNavbar, HTMLStencilElement {
     }
@@ -650,6 +658,12 @@ declare global {
         prototype: HTMLModusNumberInputElement;
         new (): HTMLModusNumberInputElement;
     };
+    interface HTMLModusPaginationElement extends Components.ModusPagination, HTMLStencilElement {
+    }
+    var HTMLModusPaginationElement: {
+        prototype: HTMLModusPaginationElement;
+        new (): HTMLModusPaginationElement;
+    };
     interface HTMLModusProgressBarElement extends Components.ModusProgressBar, HTMLStencilElement {
     }
     var HTMLModusProgressBarElement: {
@@ -686,6 +700,12 @@ declare global {
         prototype: HTMLModusSwitchElement;
         new (): HTMLModusSwitchElement;
     };
+    interface HTMLModusTabsElement extends Components.ModusTabs, HTMLStencilElement {
+    }
+    var HTMLModusTabsElement: {
+        prototype: HTMLModusTabsElement;
+        new (): HTMLModusTabsElement;
+    };
     interface HTMLModusTextInputElement extends Components.ModusTextInput, HTMLStencilElement {
     }
     var HTMLModusTextInputElement: {
@@ -714,23 +734,25 @@ declare global {
         "modus-card": HTMLModusCardElement;
         "modus-checkbox": HTMLModusCheckboxElement;
         "modus-chip": HTMLModusChipElement;
-        "modus-dialog": HTMLModusDialogElement;
         "modus-dropdown": HTMLModusDropdownElement;
         "modus-list": HTMLModusListElement;
         "modus-list-item": HTMLModusListItemElement;
         "modus-message": HTMLModusMessageElement;
+        "modus-modal": HTMLModusModalElement;
         "modus-navbar": HTMLModusNavbarElement;
         "modus-navbar-apps-menu": HTMLModusNavbarAppsMenuElement;
         "modus-navbar-main-menu": HTMLModusNavbarMainMenuElement;
         "modus-navbar-notifications-menu": HTMLModusNavbarNotificationsMenuElement;
         "modus-navbar-profile-menu": HTMLModusNavbarProfileMenuElement;
         "modus-number-input": HTMLModusNumberInputElement;
+        "modus-pagination": HTMLModusPaginationElement;
         "modus-progress-bar": HTMLModusProgressBarElement;
         "modus-radio-group": HTMLModusRadioGroupElement;
         "modus-select": HTMLModusSelectElement;
         "modus-slider": HTMLModusSliderElement;
         "modus-spinner": HTMLModusSpinnerElement;
         "modus-switch": HTMLModusSwitchElement;
+        "modus-tabs": HTMLModusTabsElement;
         "modus-text-input": HTMLModusTextInputElement;
         "modus-toast": HTMLModusToastElement;
         "modus-tooltip": HTMLModusTooltipElement;
@@ -903,40 +925,6 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
-    interface ModusDialog {
-        /**
-          * (optional) The text to display in the header.
-         */
-        "headerText"?: string;
-        /**
-          * (optional) An event that fires on close.
-         */
-        "onDialogClose"?: (event: CustomEvent<any>) => void;
-        /**
-          * (optional) An event that fires on primary button click.
-         */
-        "onPrimaryButtonClick"?: (event: CustomEvent<any>) => void;
-        /**
-          * (optional) An event that fires on secondary button click.
-         */
-        "onSecondaryButtonClick"?: (event: CustomEvent<any>) => void;
-        /**
-          * (optional) The text to display in the primary button.
-         */
-        "primaryButtonText"?: string;
-        /**
-          * (optional) The text to display in the secondary button.
-         */
-        "secondaryButtonText"?: string;
-        /**
-          * (optional) Whether to show the secondary button.
-         */
-        "showSecondaryButton"?: boolean;
-        /**
-          * (optional) Whether to show the dialog.
-         */
-        "visible"?: boolean;
-    }
     interface ModusDropdown {
         /**
           * (optional) Disables the dropdown
@@ -984,6 +972,36 @@ declare namespace LocalJSX {
           * (optional) The message's type.
          */
         "type"?: 'info' | 'question';
+    }
+    interface ModusModal {
+        /**
+          * (optional) The modal's primary button text.
+         */
+        "headerText"?: string;
+        /**
+          * An event that fires on modal close.
+         */
+        "onClosed"?: (event: CustomEvent<any>) => void;
+        /**
+          * An event that fires on modal open.
+         */
+        "onOpened"?: (event: CustomEvent<any>) => void;
+        /**
+          * An event that fires on primary button click.
+         */
+        "onPrimaryButtonClick"?: (event: CustomEvent<any>) => void;
+        /**
+          * An event that fires on secondary button click.
+         */
+        "onSecondaryButtonClick"?: (event: CustomEvent<any>) => void;
+        /**
+          * (optional) The modal's primary button text.
+         */
+        "primaryButtonText"?: string;
+        /**
+          * (optional) The modal's secondary button text.
+         */
+        "secondaryButtonText"?: string;
     }
     interface ModusNavbar {
         /**
@@ -1105,6 +1123,16 @@ declare namespace LocalJSX {
           * (optional) The input's value.
          */
         "value"?: string;
+    }
+    interface ModusPagination {
+        "activePage"?: number;
+        "maxPage"?: number;
+        "minPage"?: number;
+        /**
+          * An event that fires on page change.
+         */
+        "onPageChange"?: (event: CustomEvent<number>) => void;
+        "size"?: 'large' | 'medium' | 'small';
     }
     interface ModusProgressBar {
         /**
@@ -1258,6 +1286,17 @@ declare namespace LocalJSX {
          */
         "onSwitchClick"?: (event: CustomEvent<boolean>) => void;
     }
+    interface ModusTabs {
+        /**
+          * An event that fires on tab change.
+         */
+        "onTabChange"?: (event: CustomEvent<string>) => void;
+        "size"?: 'medium' | 'small';
+        /**
+          * The tabs to render.
+         */
+        "tabs"?: Tab[];
+    }
     interface ModusTextInput {
         /**
           * (optional) Whether the input has a clear button.
@@ -1358,23 +1397,25 @@ declare namespace LocalJSX {
         "modus-card": ModusCard;
         "modus-checkbox": ModusCheckbox;
         "modus-chip": ModusChip;
-        "modus-dialog": ModusDialog;
         "modus-dropdown": ModusDropdown;
         "modus-list": ModusList;
         "modus-list-item": ModusListItem;
         "modus-message": ModusMessage;
+        "modus-modal": ModusModal;
         "modus-navbar": ModusNavbar;
         "modus-navbar-apps-menu": ModusNavbarAppsMenu;
         "modus-navbar-main-menu": ModusNavbarMainMenu;
         "modus-navbar-notifications-menu": ModusNavbarNotificationsMenu;
         "modus-navbar-profile-menu": ModusNavbarProfileMenu;
         "modus-number-input": ModusNumberInput;
+        "modus-pagination": ModusPagination;
         "modus-progress-bar": ModusProgressBar;
         "modus-radio-group": ModusRadioGroup;
         "modus-select": ModusSelect;
         "modus-slider": ModusSlider;
         "modus-spinner": ModusSpinner;
         "modus-switch": ModusSwitch;
+        "modus-tabs": ModusTabs;
         "modus-text-input": ModusTextInput;
         "modus-toast": ModusToast;
         "modus-tooltip": ModusTooltip;
@@ -1393,23 +1434,25 @@ declare module "@stencil/core" {
             "modus-card": LocalJSX.ModusCard & JSXBase.HTMLAttributes<HTMLModusCardElement>;
             "modus-checkbox": LocalJSX.ModusCheckbox & JSXBase.HTMLAttributes<HTMLModusCheckboxElement>;
             "modus-chip": LocalJSX.ModusChip & JSXBase.HTMLAttributes<HTMLModusChipElement>;
-            "modus-dialog": LocalJSX.ModusDialog & JSXBase.HTMLAttributes<HTMLModusDialogElement>;
             "modus-dropdown": LocalJSX.ModusDropdown & JSXBase.HTMLAttributes<HTMLModusDropdownElement>;
             "modus-list": LocalJSX.ModusList & JSXBase.HTMLAttributes<HTMLModusListElement>;
             "modus-list-item": LocalJSX.ModusListItem & JSXBase.HTMLAttributes<HTMLModusListItemElement>;
             "modus-message": LocalJSX.ModusMessage & JSXBase.HTMLAttributes<HTMLModusMessageElement>;
+            "modus-modal": LocalJSX.ModusModal & JSXBase.HTMLAttributes<HTMLModusModalElement>;
             "modus-navbar": LocalJSX.ModusNavbar & JSXBase.HTMLAttributes<HTMLModusNavbarElement>;
             "modus-navbar-apps-menu": LocalJSX.ModusNavbarAppsMenu & JSXBase.HTMLAttributes<HTMLModusNavbarAppsMenuElement>;
             "modus-navbar-main-menu": LocalJSX.ModusNavbarMainMenu & JSXBase.HTMLAttributes<HTMLModusNavbarMainMenuElement>;
             "modus-navbar-notifications-menu": LocalJSX.ModusNavbarNotificationsMenu & JSXBase.HTMLAttributes<HTMLModusNavbarNotificationsMenuElement>;
             "modus-navbar-profile-menu": LocalJSX.ModusNavbarProfileMenu & JSXBase.HTMLAttributes<HTMLModusNavbarProfileMenuElement>;
             "modus-number-input": LocalJSX.ModusNumberInput & JSXBase.HTMLAttributes<HTMLModusNumberInputElement>;
+            "modus-pagination": LocalJSX.ModusPagination & JSXBase.HTMLAttributes<HTMLModusPaginationElement>;
             "modus-progress-bar": LocalJSX.ModusProgressBar & JSXBase.HTMLAttributes<HTMLModusProgressBarElement>;
             "modus-radio-group": LocalJSX.ModusRadioGroup & JSXBase.HTMLAttributes<HTMLModusRadioGroupElement>;
             "modus-select": LocalJSX.ModusSelect & JSXBase.HTMLAttributes<HTMLModusSelectElement>;
             "modus-slider": LocalJSX.ModusSlider & JSXBase.HTMLAttributes<HTMLModusSliderElement>;
             "modus-spinner": LocalJSX.ModusSpinner & JSXBase.HTMLAttributes<HTMLModusSpinnerElement>;
             "modus-switch": LocalJSX.ModusSwitch & JSXBase.HTMLAttributes<HTMLModusSwitchElement>;
+            "modus-tabs": LocalJSX.ModusTabs & JSXBase.HTMLAttributes<HTMLModusTabsElement>;
             "modus-text-input": LocalJSX.ModusTextInput & JSXBase.HTMLAttributes<HTMLModusTextInputElement>;
             "modus-toast": LocalJSX.ModusToast & JSXBase.HTMLAttributes<HTMLModusToastElement>;
             "modus-tooltip": LocalJSX.ModusTooltip & JSXBase.HTMLAttributes<HTMLModusTooltipElement>;
