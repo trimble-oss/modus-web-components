@@ -504,6 +504,30 @@ export namespace Components {
          */
         "value": string;
     }
+    interface ModusToast {
+        /**
+          * (optional) Whether the toast has a dismiss button.
+         */
+        "dismissible": boolean;
+        /**
+          * (optional) Whether to show the toasts' icon.
+         */
+        "showIcon": boolean;
+        /**
+          * (optional) The toasts' type.
+         */
+        "type": 'danger' | 'dark' | 'default' | 'primary' | 'secondary' | 'success'| 'tertiary' | 'warning';
+    }
+    interface ModusTooltip {
+        /**
+          * (optional) The tooltip's position relative to its content.
+         */
+        "position": 'bottom' | 'left' | 'right' | 'top';
+        /**
+          * The tooltip's text.
+         */
+        "text": string;
+    }
 }
 declare global {
     interface HTMLModusAccordionElement extends Components.ModusAccordion, HTMLStencilElement {
@@ -668,6 +692,18 @@ declare global {
         prototype: HTMLModusTextInputElement;
         new (): HTMLModusTextInputElement;
     };
+    interface HTMLModusToastElement extends Components.ModusToast, HTMLStencilElement {
+    }
+    var HTMLModusToastElement: {
+        prototype: HTMLModusToastElement;
+        new (): HTMLModusToastElement;
+    };
+    interface HTMLModusTooltipElement extends Components.ModusTooltip, HTMLStencilElement {
+    }
+    var HTMLModusTooltipElement: {
+        prototype: HTMLModusTooltipElement;
+        new (): HTMLModusTooltipElement;
+    };
     interface HTMLElementTagNameMap {
         "modus-accordion": HTMLModusAccordionElement;
         "modus-accordion-item": HTMLModusAccordionItemElement;
@@ -696,6 +732,8 @@ declare global {
         "modus-spinner": HTMLModusSpinnerElement;
         "modus-switch": HTMLModusSwitchElement;
         "modus-text-input": HTMLModusTextInputElement;
+        "modus-toast": HTMLModusToastElement;
+        "modus-tooltip": HTMLModusTooltipElement;
     }
 }
 declare namespace LocalJSX {
@@ -1282,6 +1320,34 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
+    interface ModusToast {
+        /**
+          * (optional) Whether the toast has a dismiss button.
+         */
+        "dismissible"?: boolean;
+        /**
+          * An event that fires when the toast is dismissed
+         */
+        "onDismissClick"?: (event: CustomEvent<any>) => void;
+        /**
+          * (optional) Whether to show the toasts' icon.
+         */
+        "showIcon"?: boolean;
+        /**
+          * (optional) The toasts' type.
+         */
+        "type"?: 'danger' | 'dark' | 'default' | 'primary' | 'secondary' | 'success'| 'tertiary' | 'warning';
+    }
+    interface ModusTooltip {
+        /**
+          * (optional) The tooltip's position relative to its content.
+         */
+        "position"?: 'bottom' | 'left' | 'right' | 'top';
+        /**
+          * The tooltip's text.
+         */
+        "text"?: string;
+    }
     interface IntrinsicElements {
         "modus-accordion": ModusAccordion;
         "modus-accordion-item": ModusAccordionItem;
@@ -1310,6 +1376,8 @@ declare namespace LocalJSX {
         "modus-spinner": ModusSpinner;
         "modus-switch": ModusSwitch;
         "modus-text-input": ModusTextInput;
+        "modus-toast": ModusToast;
+        "modus-tooltip": ModusTooltip;
     }
 }
 export { LocalJSX as JSX };
@@ -1343,6 +1411,8 @@ declare module "@stencil/core" {
             "modus-spinner": LocalJSX.ModusSpinner & JSXBase.HTMLAttributes<HTMLModusSpinnerElement>;
             "modus-switch": LocalJSX.ModusSwitch & JSXBase.HTMLAttributes<HTMLModusSwitchElement>;
             "modus-text-input": LocalJSX.ModusTextInput & JSXBase.HTMLAttributes<HTMLModusTextInputElement>;
+            "modus-toast": LocalJSX.ModusToast & JSXBase.HTMLAttributes<HTMLModusToastElement>;
+            "modus-tooltip": LocalJSX.ModusTooltip & JSXBase.HTMLAttributes<HTMLModusTooltipElement>;
         }
     }
 }

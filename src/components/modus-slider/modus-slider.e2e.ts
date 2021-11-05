@@ -24,7 +24,7 @@ describe('modus-slider', () => {
     expect(await shadowContainer.classList.contains('disabled'));
   });
 
-  it('renders changes to minVal', async () => {
+  it('renders changes to minValue', async () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-slider></modus-slider>');
@@ -36,7 +36,7 @@ describe('modus-slider', () => {
     expect(await slider.getProperty('minValue')).toEqual(10);
   });
 
-  it('renders changes to maxVal', async () => {
+  it('renders changes to maxValue', async () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-slider></modus-slider>');

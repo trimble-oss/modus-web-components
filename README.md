@@ -34,21 +34,22 @@ This library provides Modus Elements as web components. Web components are reusa
     - Input Text (modus-text-input)
     - List (modus-list)
     - List Item (modus-list-item)
+    - Message (modus-message)
     - Progress Bar (modus-progress-bar)
     - Select (modus-select)
+    - Slider (modus-slider)
     - Spinner (modus-spinner)
     - Switch (modus-switch)
+    - Toast (modus-toast)
+    - Tooltip (modus-tooltip)
   - **Not Implemented**
-    - Input Date
-    - Message
     - Navbar (in progress)
     - Pagination
-    - Slider
-    - Table/List (in re-design by tiger team - do not create)
-    - Table/Sheet (in re-design by tiger team - do not create)
     - Tab
-    - Toast
-    - Tooltip
+  - **Future Development**
+    - Input Date (design not currently specified)
+    - Table/List (in re-design by tiger team - do not create)
+    - Table/Sheet (in re-design by tiger team - do not create)    
   
 ## Getting Started
 
