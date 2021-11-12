@@ -1,6 +1,6 @@
 {
   "name": "@trimble-oss/modus-web-components",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Trimble Modus Web Component Library",
   "homepage": "https://github.com/trimble-oss/modus-web-components",
   "bugs": {
@@ -37,7 +37,7 @@
     "full": "npm ci && npm run lint-js && npm run lint-css && npm run build && npm run test"
   },
   "dependencies": {
-    "@stencil/core": "^2.10.0"
+    "@stencil/core": "2.9.0"
   },
   "devDependencies": {
     "@stencil/sass": "^1.5.2",
