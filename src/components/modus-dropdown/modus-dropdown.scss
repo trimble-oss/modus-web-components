@@ -1,6 +1,10 @@
 :host {
   position: relative;
 
+  .dropdown:hover {
+    cursor: pointer;
+  }
+
   .dropdown-list {
     display: none;
     max-height: 200px;

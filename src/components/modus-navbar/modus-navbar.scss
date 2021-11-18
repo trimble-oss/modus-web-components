@@ -31,6 +31,10 @@ nav {
 
   .navbar-button {
     position: relative;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   .left {
@@ -105,6 +109,10 @@ nav {
 
       >:first-child:active {
         border: $rem-4px solid $col_gray_2;
+      }
+
+      &:hover {
+        cursor: pointer;
       }
     }
   }

@@ -55,7 +55,7 @@ export class ModusDropdown {
     const width = `${this.toggleElement.offsetWidth ? this.toggleElement.offsetWidth : 0}px`;
 
     return (
-      <div>
+      <div class="dropdown">
         <slot name="dropdownToggle" />
         <div class={listContainerClass} style={{'left': left, 'min-width': width}}>
           <slot name="dropdownList" />
