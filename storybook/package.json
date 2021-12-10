@@ -1,0 +1,27 @@
+{
+  "name": "mwc-storybook",
+  "version": "0.0.0",
+  "scripts": {
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook -o ./dist"
+  },
+  "dependencies": {
+    "@storybook/addon-docs": "^6.4.9",
+    "@storybook/addons": "^6.4.9",
+    "@storybook/components": "^6.4.9",
+    "@storybook/theming": "^6.4.9",
+    "@types/mdx": "^2.0.1",
+    "lit-html": "^2.0.2",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@storybook/addon-actions": "^6.4.9",
+    "@storybook/addon-essentials": "^6.4.9",
+    "@storybook/addon-links": "^6.4.9",
+    "@storybook/web-components": "^6.4.9",
+    "babel-loader": "^8.2.3"
+  },
+  "license": "UNLICENSED"
+}
