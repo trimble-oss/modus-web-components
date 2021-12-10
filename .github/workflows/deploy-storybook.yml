@@ -1,0 +1,31 @@
+name: Azure Static Web App Storybook Deployment
+on:
+  push:
+    branches: [ main ]
+jobs:
+  deploy-storybook:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.4.0
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.5.0
+        with:
+          node-version: '14.x'
+
+      - name: Full Build
+        run: npm run full
+
+      - name: Deploy
+        id: builddeploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_LEMON_GRASS_05A9CD01E }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
+          action: "upload"
+          ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
+          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
+          app_location: "/storybook/dist" # App source code path
+          skip_app_build: true
+          ###### End of Repository/Build Configurations ######

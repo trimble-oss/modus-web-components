@@ -1,0 +1,118 @@
+import { Anchor } from '@storybook/addon-docs';
+
+# Alert
+---
+
+<Anchor storyId="components-alert--default" />
+<Story>
+  <modus-alert message="Info alert (default)"></modus-alert>
+</Story>
+<br />
+
+<Anchor storyId="components-alert--dismissible" />
+<Story>
+  <modus-alert dismissible message="Dismissible alert"></modus-alert>
+</Story>
+<br />
+
+<Anchor storyId="components-alert--error" />
+<Story>
+  <modus-alert message="Error alert" type="error"></modus-alert>
+</Story>
+<br />
+
+<Anchor storyId="components-alert--info-gray" />
+<Story>
+  <modus-alert message="Info gray alert" type="info-gray"></modus-alert>
+</Story>
+<br />
+
+<Anchor storyId="components-alert--info-gray-dark" />
+<Story>
+  <modus-alert message="Info gray dark alert" type="info-gray-dark"></modus-alert>
+</Story>
+<br />
+
+<Anchor storyId="components-alert--success" />
+<Story>
+  <modus-alert message="Success alert" type="success"></modus-alert>
+</Story>
+<br />
+
+<Anchor storyId="components-alert--warning" />
+<Story id="components-alert--warning">
+  <modus-alert message="Warning alert" type="warning"></modus-alert>
+</Story>
+
+```html
+<modus-alert message="Info alert (default)"></modus-alert>
+<modus-alert dismissible message="Dismissible alert"></modus-alert>
+<modus-alert message="Error alert" type="error"></modus-alert>
+<modus-alert message="Info gray alert" type="info-gray"></modus-alert>
+<modus-alert message="Info gray dark alert" type="info-gray-dark"></modus-alert>
+<modus-alert message="Success alert" type="success"></modus-alert>
+<modus-alert message="Warning alert" type="warning"></modus-alert>
+```
+
+<section>
+  <h4>Properties</h4>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Type</th>
+      <th>Options</th>
+      <th>Default Value</th>
+      <th>Required</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>message</td>
+      <td>The alert message</td>
+      <td>string</td>
+      <td></td>
+      <td></td>
+      <td><span class="material-icons">&#10004;</span></td>
+    </tr>
+    <tr>
+      <td>dismissible</td>
+      <td>Whether the alert is dismissible, renders the close icon</td>
+      <td>boolean</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td>The type of the alert</td>
+      <td>string</td>
+      <td>'error', 'info', 'info-gray', 'info-gray-dark', 'success', 'warning'</td>
+      <td>'info'</td>
+      <td></td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h4>DOM Events</h4>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Emits</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>dismissClick</td>
+      <td>Fires on dismiss icon click</td>
+      <td></td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+

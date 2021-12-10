@@ -6,7 +6,6 @@ export const config: Config = {
   outputTargets: [
     {
       type: 'dist',
-      esmLoaderPath: '../loader',
     },
     {
       type: 'dist-custom-elements-bundle',
