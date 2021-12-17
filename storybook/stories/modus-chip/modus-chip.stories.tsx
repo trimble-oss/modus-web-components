@@ -1,0 +1,135 @@
+import { html } from 'lit-html';
+// @ts-ignore: JSX/MDX with Stencil
+import docs from './modus-chip-storybook-docs.mdx';
+
+export default {
+  title: 'Components/Chip',
+  argTypes: {
+    chipStyle: {
+      name: 'chip-style',
+      control: {
+        options: ['solid', 'outline'],
+        type: 'select',
+      },
+      description: 'The style of the chip',
+      table: {
+        defaultValue: { summary: `'solid'` },
+        type: { summary: `'solid' | 'outline'` },
+      }
+    },
+    disabled: {
+      description: 'Whether the chip is disabled',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      }
+    },
+    hasError: {
+      name: 'has-error',
+      description: 'Whether the chip has an error',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      }
+    },
+    imageUrl: {
+      name: 'image-url',
+      description: 'The chip\'s image URL',
+      table: {
+        type: { summary: 'string' }
+      }
+    },
+    showCheckmark: {
+      name: 'show-checkmark',
+      description: 'Whether to show the checkmark',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      }
+    },
+    showClose: {
+      name: 'show-close',
+      description: 'Whether to show the close icon',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      }
+    },
+    size: {
+      control: {
+        options: ['medium', 'large'],
+        type: 'select',
+      },
+      description: 'The size of the chip',
+      table: {
+        defaultValue: { summary: `'medium'` },
+        type: { summary: `medium' | 'large'` },
+      }
+    },
+    value: {
+      description: 'The chip\'s value',
+      table: {
+        type: { summary: 'string' }
+      }
+    }
+  },
+  parameters: {
+    controls: { expanded: true },
+    actions: {
+      handles: ['chipClick', 'closeClick'],
+    },
+    docs: {
+      page: docs,
+    },
+    options: {
+      isToolshown: true
+    },
+  },
+};
+
+export const Default = ({ chipStyle, disabled, hasError, imageUrl, showCheckmark, showClose, size, value }) => html`
+  <modus-chip
+    chip-style=${chipStyle}
+    disabled=${disabled}
+    has-error=${hasError}
+    image-url=${imageUrl}
+    show-checkmark=${showCheckmark}
+    show-close=${showClose}
+    size=${size}
+    value=${value}>
+  </modus-chip>
+`;
+Default.args = {
+  chipStyle: 'solid',
+  disabled: false,
+  hasError: false,
+  imageUrl: 'https://randomuser.me/api/portraits/lego/1.jpg',
+  showCheckmark: false,
+  showClose: false,
+  size: 'medium',
+  value: 'Bryan'
+};
+
+export const Outline = ({ chipStyle, disabled, hasError, imageUrl, showCheckmark, showClose, size, value }) => html`
+  <modus-chip
+    chip-style=${chipStyle}
+    disabled=${disabled}
+    has-error=${hasError}
+    image-url=${imageUrl}
+    show-checkmark=${showCheckmark}
+    show-close=${showClose}
+    size=${size}
+    value=${value}>
+  </modus-chip>
+`;
+Outline.args = {
+  chipStyle: 'outline',
+  disabled: false,
+  hasError: false,
+  imageUrl: 'https://randomuser.me/api/portraits/lego/1.jpg',
+  showCheckmark: false,
+  showClose: false,
+  size: 'medium',
+  value: 'Bryan'
+};
+

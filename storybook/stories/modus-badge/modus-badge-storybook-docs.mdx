@@ -1,0 +1,126 @@
+import { Anchor } from '@storybook/addon-docs';
+
+# Badge
+---
+
+[Modus Badge](https://modus.trimble.com/elements/badges/) web components provide non-interactive labels for displaying small amounts of information. They are referenced using the `<modus-badge>` custom HTML element.
+This component utilizes the slot element, allowing you to render your own HTML in the badge.
+
+<Anchor storyId="components-badge--default" />
+
+### Default
+<modus-badge>Default</modus-badge>
+<modus-badge color="secondary">Secondary</modus-badge>
+<modus-badge color="tertiary">Tertiary</modus-badge>
+<modus-badge color="dark">Dark</modus-badge>
+<modus-badge color="warning">Warning</modus-badge>
+<modus-badge color="danger">Danger</modus-badge>
+
+<modus-badge size="small">Small</modus-badge>
+<modus-badge size="medium">Medium</modus-badge>
+<modus-badge size="large">Large</modus-badge>
+
+<Anchor storyId="components-badge--counter" />
+
+### Counter
+<modus-badge type="counter">Counter</modus-badge>
+<modus-badge color="secondary" type="counter">Counter</modus-badge>
+<modus-badge color="tertiary" type="counter">Counter</modus-badge>
+<modus-badge color="dark" type="counter">Counter</modus-badge>
+<modus-badge color="warning" type="counter">Counter</modus-badge>
+<modus-badge color="danger" type="counter">Counter</modus-badge>
+
+<modus-badge size="small" type="counter">Small</modus-badge>
+<modus-badge size="medium" type="counter">Medium</modus-badge>
+<modus-badge size="large" type="counter">Large</modus-badge>
+
+<Anchor storyId="components-badge--text" />
+
+### Text
+<modus-badge type="text">Text</modus-badge>
+<modus-badge color="secondary" type="text">Text</modus-badge>
+<modus-badge color="tertiary" type="text">Text</modus-badge>
+<modus-badge color="dark" type="text">Text</modus-badge>
+<modus-badge color="warning" type="text">Text</modus-badge>
+<modus-badge color="danger" type="text">Text</modus-badge>
+
+<modus-badge size="small" type="text">Small</modus-badge>
+<modus-badge size="medium" type="text">Medium</modus-badge>
+<modus-badge size="large" type="text">Large</modus-badge>
+
+```html
+<modus-badge>Default</modus-badge>
+<modus-badge color="secondary">Secondary</modus-badge>
+<modus-badge color="tertiary">Tertiary</modus-badge>
+<modus-badge color="dark">Dark</modus-badge>
+<bmodus-badge color="warning">Warning</bmodus-badge>
+<modus-badge color="danger">Danger</modus-badge>
+
+<modus-badge size="small">Small</modus-badge>
+<modus-badge size="medium">Medium</modus-badge>
+<modus-badge size="large">Large</modus-badge>
+
+<modus-badge type="counter">Counter</modus-badge>
+<modus-badge color="secondary" type="counter">Counter</modus-badge>
+<modus-badge color="tertiary" type="counter">Counter</modus-badge>
+<modus-badge color="dark" type="counter">Counter</modus-badge>
+<modus-badge color="warning" type="counter">Counter</modus-badge>
+<modus-badge color="danger" type="counter">Counter</modus-badge>
+
+<modus-badge size="small" type="counter">Small</modus-badge>
+<modus-badge size="medium" type="counter">Medium</modus-badge>
+<modus-badge size="large" type="counter">Large</modus-badge>
+
+<modus-badge type="text">Text</modus-badge>
+<modus-badge color="secondary" type="text">Text</modus-badge>
+<modus-badge color="tertiary" type="text">Text</modus-badge>
+<modus-badge color="dark" type="text">Text</modus-badge>
+<modus-badge color="warning" type="text">Text</modus-badge>
+<modus-badge color="danger" type="text">Text</modus-badge>
+
+<modus-badge size="small" type="text">Small</modus-badge>
+<modus-badge size="medium" type="text">Medium</modus-badge>
+<modus-badge size="large" type="text">Large</modus-badge>
+```
+
+<section>
+  <h4>Properties</h4>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Type</th>
+      <th>Options</th>
+      <th>Default Value</th>
+      <th>Required</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>color</td>
+      <td>The color of the badge</td>
+      <td>string</td>
+      <td>'danger', 'dark', 'primary', 'secondary', 'success', 'tertiary', 'warning'</td>
+      <td>'primary'</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>size</td>
+      <td>The size of the badge</td>
+      <td>string</td>
+      <td>'small', 'medium', 'large'</td>
+      <td>'medium'</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td>The type of the badge</td>
+      <td>string</td>
+      <td>'counter', 'default', 'text'</td>
+      <td>'default'</td>
+      <td></td>
+    </tr>
+    </tbody>
+  </table>
+</section>
