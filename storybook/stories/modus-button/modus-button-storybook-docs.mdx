@@ -1,0 +1,122 @@
+import { Anchor } from '@storybook/addon-docs';
+
+# Button
+---
+
+[Modus Button](https://modus.trimble.com/elements/buttons/) web components are wrappers around native `<button>` elements. They are referenced using the `<modus-button>` custom HTML element.
+This component utilizes the slot element, allowing you to render your own HTML in the button.
+
+Implementation Details
+- Outline buttons only support 'primary' and 'secondary' colors.
+- Borderless buttons only support a single color.
+
+<Anchor storyId="components-button--default" />
+
+### Default
+<modus-button>Default</modus-button>
+<modus-button color="primary">Primary</modus-button>
+<modus-button color="secondary">Secondary</modus-button>
+<modus-button color="warning">Warning</modus-button>
+<modus-button color="danger">Danger</modus-button>
+<modus-button disabled color="danger">Disabled</modus-button>
+
+<modus-button size="small" color="primary">Small</modus-button>
+<modus-button size="large" color="primary">Large</modus-button>
+
+<Anchor storyId="components-button--borderless" />
+
+### Borderless
+<modus-button button-style="borderless">Borderless</modus-button>
+
+<Anchor storyId="components-button--outline" />
+
+### Outline
+<modus-button button-style="outline" color="primary">Outline</modus-button>
+<modus-button button-style="outline" color="secondary">Outline</modus-button>
+
+```html
+<modus-button>Default</modus-button>
+<modus-button color="primary">Primary</modus-button>
+<modus-button color="secondary">Secondary</modus-button>
+<modus-button color="warning">Warning</modus-button>
+<modus-button color="danger">Danger</modus-button>
+<modus-button disabled color="danger">Disabled</modus-button>
+<modus-button size="small" color="primary">Small</modus-button>
+<modus-button size="large" color="primary">Large</modus-button>
+
+<modus-button button-style="borderless">Borderless</modus-button>
+
+<modus-button button-style="outline" color="primary">Outline</modus-button>
+<modus-button button-style="outline" color="secondary">Outline</modus-button>
+```
+
+<section>
+  <h4>Properties</h4>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Type</th>
+      <th>Options</th>
+      <th>Default Value</th>
+      <th>Required</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>button-style</td>
+      <td>The style of the button</td>
+      <td>string</td>
+      <td>'borderless', 'fill', 'outline'</td>
+      <td>'fill'</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>color</td>
+      <td>The color of the button</td>
+      <td>string</td>
+      <td>'danger', 'default', 'primary', 'secondary', 'warning'</td>
+      <td>'default'</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>disabled</td>
+      <td>Disables the button</td>
+      <td>boolean</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>size</td>
+      <td>The size of the button</td>
+      <td>string</td>
+      <td>'small', 'medium', 'large'</td>
+      <td>'medium'</td>
+      <td></td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h4>DOM Events</h4>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Emits</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>buttonClick</td>
+      <td>Fires on button click</td>
+      <td></td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+
