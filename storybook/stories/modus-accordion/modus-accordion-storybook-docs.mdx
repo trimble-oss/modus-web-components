@@ -1,0 +1,109 @@
+# Accordion
+---
+
+[Modus Accordion](https://modus.trimble.com/elements/accordions/) web components are wrappers around `<modus-accordion-item>` custom HTML elements. They are referenced using the `<modus-accordion>` custom HTML element.
+
+The `<modus-accordion-item>` utilizes the slot element, allowing you to render your own HTML in the component.
+
+<modus-accordion>
+  <modus-accordion-item header-text="Item 1">Content</modus-accordion-item>
+  <modus-accordion-item header-text="Item 2">Content</modus-accordion-item>
+  <modus-accordion-item disabled header-text="Item 3">Content</modus-accordion-item>
+</modus-accordion>
+
+<modus-accordion>
+  <modus-accordion-item header-text="Item 1" size="condensed">Content</modus-accordion-item>
+  <modus-accordion-item header-text="Item 2" size="condensed">Content</modus-accordion-item>
+  <modus-accordion-item disabled expanded header-text="Item 3" size="condensed">Content</modus-accordion-item>
+</modus-accordion>
+
+```html
+<modus-accordion>
+    <modus-accordion-item header-text="Item 1">Content</modus-accordion-item>
+    <modus-accordion-item header-text="Item 2">Content</modus-accordion-item>
+    <modus-accordion-item disabled header-text="Item 3">Content</modus-accordion-item>
+</modus-accordion>
+
+<modus-accordion>
+    <modus-accordion-item header-text="Item 1" size="condensed">Content</modus-accordion-item>
+    <modus-accordion-item header-text="Item 2" size="condensed">Content</modus-accordion-item>
+    <modus-accordion-item disabled expanded header-text="Item 3" size="condensed">Content</modus-accordion-item>
+</modus-accordion>
+```
+
+<section>
+  <h4>Properties</h4>
+  <h5>Modus Accordion Item</h5>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Type</th>
+      <th>Options</th>
+      <th>Default Value</th>
+      <th>Required</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>disabled</td>
+      <td>Disables the accordion item</td>
+      <td>boolean</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>expanded</td>
+      <td>The expanded state of the accordion item</td>
+      <td>boolean</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>header-text</td>
+      <td>The text to render in the accordion item header</td>
+      <td>string</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>size</td>
+      <td>The size of the accordion item</td>
+      <td>string</td>
+      <td>'condensed', 'standard'</td>
+      <td>'standard'</td>
+      <td></td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h4>DOM Events</h4>
+  <h5>Modus Accordion Item</h5>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Emits</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>closed</td>
+      <td>Fires on accordion item collapse</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>opened</td>
+      <td>Fires on accordion item expand</td>
+      <td></td>
+    </tr>
+    </tbody>
+  </table>
+</section>

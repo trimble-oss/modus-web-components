@@ -1,0 +1,94 @@
+import { Story } from '@storybook/addon-docs';
+
+# Modal
+---
+
+[Modus Dialog]() web components interrupt workflows when user interaction is required. They are referenced using the `<modus-modal>` custom HTML element.
+
+This component utilizes the slot element, allowing you to render your own HTML in the content portion of the modal.
+
+<Story id="components-modal--default"/>
+
+```html
+<modus-button color="primary">Open Modal</modus-button>
+<modus-modal header-text="Modus Modal" primary-button-text="Sweet!" secondary-button-text="Ahh okay...">
+    <p>Here is some modal content. Render anything here.</p>
+</modus-modal>
+```
+
+<section>
+  <h4>Properties</h4>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Type</th>
+      <th>Options</th>
+      <th>Default Value</th>
+      <th>Required</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>header-text</td>
+      <td>The text to display in the header</td>
+      <td>string</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>primary-button-text</td>
+      <td>The text to display in the primary button</td>
+      <td>string</td>
+      <td></td>
+      <td>'Save Changes'</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>secondary-button-text</td>
+      <td>The text to display in the secondary button</td>
+      <td>string</td>
+      <td></td>
+      <td>'Close'</td>
+      <td></td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h4>DOM Events</h4>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Emits</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>closed</td>
+      <td>Fires on modal closed</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>opened</td>
+      <td>Fires on modal open</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>primaryButtonClick</td>
+      <td>Fires on primary button click</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>secondaryButtonClick</td>
+      <td>Fires on secondary button click</td>
+      <td></td>
+    </tr>
+    </tbody>
+  </table>
+</section>
