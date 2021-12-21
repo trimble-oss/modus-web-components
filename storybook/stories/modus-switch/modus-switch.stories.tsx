@@ -3,7 +3,7 @@ import { html } from 'lit-html';
 import docs from './modus-switch-storybook-docs.mdx';
 
 export default {
-  title: 'Components/Switch',
+  title: 'User Inputs/Switch',
   argTypes: {
     checked: {
       description: 'Whether the switch is checked',

@@ -25,7 +25,6 @@ const Template = () => html`
 `;
 export const Default = Template.bind({});
 
-
 // The <script> tag cannot be used in the MDX file, so we use this method to
 // set the breadcrumbs for the default story.
 const setBreadcrumb = () => {
