@@ -1,0 +1,98 @@
+# Slider
+---
+
+[Modus Slider](https://modus.trimble.com/components/sliders/) web components are referenced using the `<modus-slider>` custom HTML element.
+
+### Default
+<modus-slider label="Slider"></modus-slider>
+
+<modus-slider disabled label="Disabled slider"></modus-slider>
+
+```html
+<modus-slider label="Slider"></modus-slider>
+<modus-slider disabled label="Disabled slider"></modus-slider>
+```
+
+<section>
+  <h4>Properties</h4>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Type</th>
+      <th>Options</th>
+      <th>Default Value</th>
+      <th>Required</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>disabled</td>
+      <td>Whether the slider is disabled</td>
+      <td>boolean</td>
+      <td></td>
+      <td>false</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>label</td>
+      <td>The slider's label</td>
+      <td>string</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>max-value</td>
+      <td>The slider's maximum value</td>
+      <td>number</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>min-value</td>
+      <td>The slider's minimum value</td>
+      <td>number</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>The slider's value</td>
+      <td>number</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h4>DOM Events</h4>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Emits</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>valueChange</td>
+      <td>Fires on value change</td>
+      <td>The slider's value</td>
+    </tr>
+    <tr>
+      <td>valueInput</td>
+      <td>Fires on value input</td>
+      <td>The input value</td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+

@@ -1,0 +1,50 @@
+# Tooltip
+---
+
+[Modus Tooltip](https://modus.trimble.com/components/tooltips/) web components display the completion progress of a task. They are referenced using the `<modus-tooltip>` custom HTML element.
+This component utilizes the slot element, allowing you to wrap anything with a tooltip.
+
+<modus-tooltip text="Tooltip text..." position="right">
+  <modus-button>Button</modus-button>
+</modus-tooltip>
+
+```html
+<modus-tooltip text="Tooltip text..." position="right">
+  <modus-button>Button</modus-button>
+</modus-tooltip>
+```
+
+<section>
+  <h4>Properties</h4>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Type</th>
+      <th>Options</th>
+      <th>Default Value</th>
+      <th>Required</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>text</td>
+      <td>The tooltip's text</td>
+      <td>string</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>position</td>
+      <td>The tooltip's position relative to the item it's wrapping</td>
+      <td>string</td>
+      <td>'bottom', 'left', 'right', 'top'</td>
+      <td>'top'</td>
+      <td></td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+
