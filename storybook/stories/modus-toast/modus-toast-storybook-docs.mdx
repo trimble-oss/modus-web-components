@@ -1,0 +1,120 @@
+import { Anchor } from '@storybook/addon-docs';
+
+# Toast
+---
+
+[Modus Toast](https://modus.trimble.com/components/toasts/) web components are referenced using the `<modus-toast>` custom HTML element.
+
+<Anchor storyId="components-toast--default" />
+
+### Default
+<modus-toast type="default">Default</modus-toast>
+
+<Anchor storyId="components-toast--danger" />
+
+### Danger
+<modus-toast type="danger">Danger</modus-toast>
+
+<Anchor storyId="components-toast--dark" />
+
+### Dark
+<modus-toast type="dark">Dark</modus-toast>
+
+<Anchor storyId="components-toast--primary" />
+
+### Primary
+<modus-toast type="primary">Primary</modus-toast>
+
+<Anchor storyId="components-toast--secondary" />
+
+### Secondary
+<modus-toast type="secondary">Secondary</modus-toast>
+
+<Anchor storyId="components-toast--success" />
+
+### Success
+<modus-toast type="success">Success</modus-toast>
+
+<Anchor storyId="components-toast--tertiary" />
+
+### Tertiary
+<modus-toast type="tertiary">Tertiary</modus-toast>
+
+<Anchor storyId="components-toast--warning" />
+
+### Warning
+<modus-toast type="warning">Warning</modus-toast>
+
+```html
+<modus-toast type="default">Default</modus-toast>
+<modus-toast type="danger">Danger</modus-toast>
+<modus-toast type="dark">Dark</modus-toast>
+<modus-toast type="primary">Primary</modus-toast>
+<modus-toast type="secondary">Secondary</modus-toast>
+<modus-toast type="success">Success</modus-toast>
+<modus-toast type="tertiary">Tertiary</modus-toast>
+<modus-toast type="warning">Warning</modus-toast>
+```
+
+<section>
+  <h4>Properties</h4>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Type</th>
+      <th>Options</th>
+      <th>Default Value</th>
+      <th>Required</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>dismissible</td>
+      <td>Whether the toast is dismissible</td>
+      <td>boolean</td>
+      <td></td>
+      <td>false</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>show-icon</td>
+      <td>Whether to show the toast's</td>
+      <td>boolean</td>
+      <td></td>
+      <td>false</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td>The toast's type</td>
+      <td>string</td>
+      <td>'danger', 'dark', 'default', 'primary', 'secondary', 'success', 'tertiary', 'warning'</td>
+      <td>'default'</td>
+      <td></td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h4>DOM Events</h4>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Emits</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>dismissClick</td>
+      <td>Fires on dismiss click</td>
+      <td></td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+

@@ -1,0 +1,102 @@
+import { Story } from '@storybook/addon-docs';
+
+# Radio Group
+---
+
+[Modus Radio Group](https://modus.trimble.com/elements/lists/) web components are wrappers around native `<modus-radio-button>` custom HTML elements. They are referenced using the `<modus-radio-group>` custom HTML element.
+
+A new TypeScript typing has been provided named RadioButton defined as:
+
+    {
+      checked?: boolean;
+      disabled?: boolean;
+      id: string;
+      label: string;
+    }
+
+<Story id="components-radio-group--default" />
+
+```html
+<modus-radio-group checked-id="1" name="my-group"></modus-radio-group>
+
+<script>
+    const modusRadioGroup = document.querySelector('modus-radio-group');
+    modusRadioGroup.radioButtons = [
+      {
+        id: '0',
+        label: 'Radio 1'
+      },
+      {
+        id: '1',
+        label: 'Radio 1'
+      },
+      {
+        id: '2',
+        label: 'Radio 1'
+      }
+    ];
+</script>
+```
+
+<section>
+  <h4>Properties</h4>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Type</th>
+      <th>Options</th>
+      <th>Default Value</th>
+      <th>Required</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>checked-id</td>
+      <td>The id of the checked radio button</td>
+      <td>string</td>
+      <td></td>
+      <td></td>
+      <td><span class="material-icons">&#10004;</span></td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>The name of the radio group</td>
+      <td>string</td>
+      <td></td>
+      <td></td>
+      <td><span class="material-icons">&#10004;</span></td>
+    </tr>
+    <tr>
+      <td>radioButtons</td>
+      <td>The radio buttons</td>
+      <td>RadioButton[]</td>
+      <td></td>
+      <td></td>
+      <td><span class="material-icons">&#10004;</span></td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h4>DOM Events</h4>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Emits</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>buttonClick</td>
+      <td>Fires on radio button click</td>
+      <td>The currently checked radio button</td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+

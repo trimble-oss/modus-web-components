@@ -1,0 +1,80 @@
+# Pagination
+---
+
+[Modus Pagination](https://modus.trimble.com/components/pagination/) web components are referenced using the `<modus-pagination>` custom HTML element.
+
+<modus-pagination active-page="8" max-page="32" min-page="1" size="large"></modus-pagination>
+
+```html
+<modus-pagination active-page="8" max-page="32" min-page="1" size="large"></modus-pagination>
+```
+
+<section class="properties">
+  <h4>Properties</h4>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Type</th>
+      <th>Options</th>
+      <th>Default Value</th>
+      <th>Required</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>active-page</td>
+      <td>The pagination's active page</td>
+      <td>number</td>
+      <td></td>
+      <td></td>
+      <td><span class="material-icons">&#10004;</span></td>
+    </tr>
+    <tr>
+      <td>max-page</td>
+      <td>The pagination's maximum page</td>
+      <td>number</td>
+      <td></td>
+      <td></td>
+      <td><span class="material-icons">&#10004;</span></td>
+    </tr>
+    <tr>
+      <td>min-page</td>
+      <td>The pagination's minimum page</td>
+      <td>number</td>
+      <td></td>
+      <td></td>
+      <td><span class="material-icons">&#10004;</span></td>
+    </tr>
+    <tr>
+      <td>size</td>
+      <td>The pagination's size</td>
+      <td>string</td>
+      <td>'small', 'medium', 'large'</td>
+      <td>'medium'</td>
+      <td></td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h4>DOM Events</h4>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Emits</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>pageChange</td>
+      <td>Fires on page change</td>
+      <td>The current page</td>
+    </tr>
+    </tbody>
+  </table>
+</section>

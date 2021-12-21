@@ -31,10 +31,8 @@ export const Default = Template.bind({});
 const setScript = () => {
   const tag = document.createElement('script');
   tag.innerHTML = `
-    const modusButton = document.querySelector('modus-button');
-    modusButton.addEventListener('buttonClick', () => {
-      const modusModal = document.querySelector('modus-modal');
-      modusModal.open();
+    document.querySelector('modus-button').addEventListener('buttonClick', () => {
+      document.querySelector('modus-modal').open();
     });
   `;
 

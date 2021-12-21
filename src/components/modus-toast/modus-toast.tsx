@@ -20,7 +20,7 @@ export class ModusToast {
   @Prop() showIcon = true;
 
   /** (optional) The toasts' type. */
-  @Prop() type: 'danger' | 'dark' | 'default' | 'primary' | 'secondary' | 'success'| 'tertiary' | 'warning' = 'default';
+  @Prop() type: 'danger' | 'dark' | 'default' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning' = 'default';
 
   /** An event that fires when the toast is dismissed */
   @Event() dismissClick: EventEmitter;

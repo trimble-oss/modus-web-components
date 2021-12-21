@@ -30,14 +30,12 @@ export const Default = Template.bind({});
 const setBreadcrumb = () => {
   const tag = document.createElement('script');
   tag.innerHTML = `
-    const modusBreadcrumb = document.querySelector('modus-breadcrumb');
-    const crumbs = [
+   document.querySelector('modus-breadcrumb').crumbs = [
       { id: '1', display: 'Crumb 1' },
       { id: '2', display: 'Crumb 2' },
       { id: '3', display: 'Crumb 3' },
       { id: '4', display: 'Crumb 4' },
     ];
-    modusBreadcrumb.crumbs = crumbs;
   `;
 
   return tag;
