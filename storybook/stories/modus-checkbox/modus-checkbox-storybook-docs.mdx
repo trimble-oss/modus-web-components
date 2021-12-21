@@ -1,0 +1,93 @@
+# Checkbox
+---
+
+[Modus Checkbox](https://modus.trimble.com/elements/checkboxes/) web components are wrappers around native `<input type="checkbox">` elements. They are referenced using the `<modus-checkbox>` custom HTML element.
+
+This component is compatible with Angular reactive forms. This can be achieved through the implementation of a simple directive.
+
+### Default
+<modus-checkbox></modus-checkbox><br />
+<modus-checkbox disabled></modus-checkbox><br />
+<modus-checkbox label="Checkbox"></modus-checkbox><br />
+<modus-checkbox disabled label="Checkbox"></modus-checkbox><br />
+<modus-checkbox checked disabled label="Checkbox"></modus-checkbox><br />
+<modus-checkbox label="Small Checkbox" size="small"></modus-checkbox>
+
+```html
+<modus-checkbox></modus-checkbox>
+<modus-checkbox disabled></modus-checkbox>
+<modus-checkbox label="Checkbox"></modus-checkbox>
+<modus-checkbox disabled label="Checkbox"></modus-checkbox>
+<modus-checkbox checked disabled label="Checkbox"></modus-checkbox>
+<modus-checkbox label="Small Checkbox" size="small"></modus-checkbox>
+```
+
+<section>
+  <h4>Properties</h4>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Type</th>
+      <th>Options</th>
+      <th>Default Value</th>
+      <th>Required</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>checked</td>
+      <td>Whether the checkbox is checked</td>
+      <td>boolean</td>
+      <td></td>
+      <td>false</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>disabled</td>
+      <td>Whether the checkbox is disabled</td>
+      <td>boolean</td>
+      <td></td>
+      <td>false</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>label</td>
+      <td>The label</td>
+      <td>string</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>size</td>
+      <td>The size of the checkbox</td>
+      <td>string</td>
+      <td>'small', 'medium'</td>
+      <td>'medium'</td>
+      <td></td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h4>DOM Events</h4>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Emits</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>checkboxClick</td>
+      <td>Fires on checkbox click</td>
+      <td>boolean</td>
+    </tr>
+    </tbody>
+  </table>
+</section>

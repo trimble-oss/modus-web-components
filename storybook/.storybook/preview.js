@@ -15,7 +15,8 @@ export const parameters = {
       order: [
         'Introduction',
         ['Welcome', 'Getting Started'],
-        'Components'
+        'Components',
+        'User Inputs'
       ]
     }
   },
