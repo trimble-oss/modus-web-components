@@ -439,6 +439,10 @@ export namespace Components {
     }
     interface ModusSwitch {
         /**
+          * (optional) The switch's aria-label.
+         */
+        "ariaLabel": string;
+        /**
           * (optional) Whether the switch is checked.
          */
         "checked": boolean;
@@ -1277,6 +1281,10 @@ declare namespace LocalJSX {
         "size"?: string;
     }
     interface ModusSwitch {
+        /**
+          * (optional) The switch's aria-label.
+         */
+        "ariaLabel"?: string;
         /**
           * (optional) Whether the switch is checked.
          */

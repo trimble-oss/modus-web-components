@@ -68,8 +68,9 @@ export default {
   },
 };
 
-export const Default = ({ buttonStyle, color, disabled, size }) => html`
+export const Default = ({ ariaLabel, buttonStyle, color, disabled, size }) => html`
   <modus-button
+    aria-label=${ariaLabel}
     button-style=${buttonStyle}
     color=${color}
     disabled=${disabled}
@@ -77,10 +78,11 @@ export const Default = ({ buttonStyle, color, disabled, size }) => html`
     Default
   </modus-button>
 `;
-Default.args = { buttonStyle: 'fill', color: 'default', disabled: false, size: 'medium' };
+Default.args = { ariaLabel: '', buttonStyle: 'fill', color: 'default', disabled: false, size: 'medium' };
 
-export const Borderless = ({ buttonStyle, color, disabled, size }) => html`
+export const Borderless = ({ ariaLabel, buttonStyle, color, disabled, size }) => html`
   <modus-button
+    aria-label=${ariaLabel}
     button-style=${buttonStyle}
     color=${color}
     disabled=${disabled}
@@ -88,10 +90,11 @@ export const Borderless = ({ buttonStyle, color, disabled, size }) => html`
     Borderless
   </modus-button>
 `;
-Borderless.args = { buttonStyle: 'borderless', color: 'default', disabled: false, size: 'medium' };
+Borderless.args = { ariaLabel: '', buttonStyle: 'borderless', color: 'default', disabled: false, size: 'medium' };
 
-export const Outline = ({ buttonStyle, color, disabled, size }) => html`
+export const Outline = ({ ariaLabel, buttonStyle, color, disabled, size }) => html`
   <modus-button
+    aria-label=${ariaLabel}
     button-style=${buttonStyle}
     color=${color}
     disabled=${disabled}
@@ -99,5 +102,5 @@ export const Outline = ({ buttonStyle, color, disabled, size }) => html`
     Outline
   </modus-button>
 `;
-Outline.args = { buttonStyle: 'outline', color: 'default', disabled: false, size: 'medium' };
+Outline.args = { ariaLabel: '', buttonStyle: 'outline', color: 'default', disabled: false, size: 'medium' };
 
