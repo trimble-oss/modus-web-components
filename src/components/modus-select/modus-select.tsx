@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 import { Component, Element, Event, EventEmitter, h, Listen, Prop, State } from '@stencil/core';
 import { IconTriangleDown } from '../icons/icon-triangle-down';
-import { createGuid, generateRandomNumber } from '../../utils/utils';
+import { createGuid } from '../../utils/utils';
 
 @Component({
   tag: 'modus-select',
@@ -11,6 +11,9 @@ import { createGuid, generateRandomNumber } from '../../utils/utils';
 export class ModusSelect {
   /** (optional) Whether the input gets focus automatically on page load. */
   // @Prop() autofocus: boolean;
+
+  /** (optional) The select's aria-label. */
+  @Prop() ariaLabel: string;
 
   /** (optional) Whether the input is disabled. */
   @Prop() disabled: boolean;
@@ -54,15 +57,10 @@ export class ModusSelect {
 
   @State() visible: boolean;
 
-  accessibilityId: number;
   classBySize: Map<string, string> = new Map([
     ['medium', 'medium'],
     ['large', 'large']
   ]);
-
-  componentWillLoad(): void {
-    this.accessibilityId = generateRandomNumber();
-  }
 
   @Listen('click', { target: 'document' })
   documentClickHandler(event: MouseEvent): void {
@@ -127,14 +125,11 @@ export class ModusSelect {
     const dropdownListClass = `dropdown-list ${this.visible ? 'visible' : 'hidden'} ${this.classBySize.get(this.size)}`;
     const inputContainerClass = `input-container ${this.visible ? 'dropdown-visible' : ''}`;
 
-    const selectLabel = `selectLabel${this.accessibilityId}`;
-    const selectDesc = `selectDesc${this.accessibilityId}`;
-
     return (
-      <div role="combobox" aria-labelledby={selectLabel} aria-describedby={selectDesc}>
+      <div role="listbox" aria-disabled={this.disabled} aria-label={this.ariaLabel}>
         {this.label || this.required
           ? <div class={'label-container'}>
-              {this.label ? <label id={selectLabel}>{this.label}</label> : null}
+              {this.label ? <label>{this.label}</label> : null}
               {this.required ? <span class="required">*</span> : null}
             </div>
           : null
@@ -148,6 +143,7 @@ export class ModusSelect {
             {
               this.options.map((option, index) =>
               <div
+                aria-label={option[this.optionsDisplayProp]}
                 class={`dropdown-list-item ${index === this.activeItemIndex ? 'active' : ''}`}
                 key={createGuid()}
                 onClick={() => this.handleItemSelect(option)}
@@ -158,9 +154,9 @@ export class ModusSelect {
           </div>
         </div>
         {
-          this.errorText ? <label class="sub-text error" id={selectDesc}>{this.errorText}</label> :
-          this.validText ? <label class="sub-text valid" id={selectDesc}>{this.validText}</label> :
-          this.helperText ? <label class="sub-text helper" id={selectDesc}>{this.helperText}</label> :
+          this.errorText ? <label class="sub-text error">{this.errorText}</label> :
+          this.validText ? <label class="sub-text valid">{this.validText}</label> :
+          this.helperText ? <label class="sub-text helper">{this.helperText}</label> :
           null
         }
       </div>
