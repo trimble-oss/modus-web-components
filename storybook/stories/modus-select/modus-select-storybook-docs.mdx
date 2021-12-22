@@ -34,8 +34,8 @@ This component is compatible with Angular reactive forms. This can be achieved t
 <modus-select label="Select Demo 4" valid-text="Valid demo"></modus-select>
 ```
 
+### Properties
 <section>
-  <h4>Properties</h4>
   <table>
     <thead>
     <tr>
@@ -132,8 +132,8 @@ This component is compatible with Angular reactive forms. This can be achieved t
   </table>
 </section>
 
+### DOM Events
 <section>
-  <h4>DOM Events</h4>
   <table>
     <thead>
     <tr>
@@ -151,4 +151,14 @@ This component is compatible with Angular reactive forms. This can be achieved t
     </tbody>
   </table>
 </section>
+
+### Accessibility
+- Select has `role` of `listbox`.
+- Select gets an `aria-label` provided by the `aria-label` property input.
+- Select gets an `aria-disabled` set to whether Select is disabled.
+- When Select has focus:
+  - **Enter** opens the option list.
+  - **ArrowUp**, **ArrowDown** navigate the list.
+  - **Enter** selects an item from the list.
+  - **Space** closes the open list without selecting an item.
 

@@ -365,6 +365,10 @@ export namespace Components {
     }
     interface ModusSelect {
         /**
+          * (optional) The select's aria-label.
+         */
+        "ariaLabel": string;
+        /**
           * (optional) Whether the input is disabled.
          */
         "disabled": boolean;
@@ -1195,6 +1199,10 @@ declare namespace LocalJSX {
         "radioButtons"?: RadioButton[];
     }
     interface ModusSelect {
+        /**
+          * (optional) The select's aria-label.
+         */
+        "ariaLabel"?: string;
         /**
           * (optional) Whether the input is disabled.
          */

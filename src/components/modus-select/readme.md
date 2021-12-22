@@ -9,6 +9,7 @@
 
 | Property             | Attribute              | Description                                          | Type                  | Default     |
 | -------------------- | ---------------------- | ---------------------------------------------------- | --------------------- | ----------- |
+| `ariaLabel`          | `aria-label`           | (optional) The select's aria-label.                  | `string`              | `undefined` |
 | `disabled`           | `disabled`             | (optional) Whether the input is disabled.            | `boolean`             | `undefined` |
 | `errorText`          | `error-text`           | (optional) The input's error text.                   | `string`              | `undefined` |
 | `helperText`         | `helper-text`          | (optional) The input's helper text.                  | `string`              | `undefined` |
