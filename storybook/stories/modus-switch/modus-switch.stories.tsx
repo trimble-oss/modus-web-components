@@ -5,6 +5,13 @@ import docs from './modus-switch-storybook-docs.mdx';
 export default {
   title: 'User Inputs/Switch',
   argTypes: {
+    ariaLabel: {
+      name: 'aria-label',
+      description: 'The switch\'s aria-label',
+      table: {
+        type: { summary: 'string' }
+      }
+    },
     checked: {
       description: 'Whether the switch is checked',
       table: {
@@ -40,40 +47,46 @@ export default {
   },
 };
 
-export const Default = ({ checked, disabled, label }) => html`
+export const Default = ({ ariaLabel, checked, disabled, label }) => html`
   <modus-switch
+    aria-label=${ariaLabel}
     checked=${checked}
     disabled=${disabled}
     label=${label}>
   </modus-switch>
 `;
 Default.args = {
+  ariaLabel: '',
   checked: false,
   disabled: false,
   label: 'Default'
 };
 
-export const Checked = ({ checked, disabled, label }) => html`
+export const Checked = ({ ariaLabel, checked, disabled, label }) => html`
   <modus-switch
+    aria-label=${ariaLabel}
     checked=${checked}
     disabled=${disabled}
     label=${label}>
   </modus-switch>
 `;
 Checked.args = {
+  ariaLabel: '',
   checked: true,
   disabled: false,
   label: 'Checked'
 };
 
-export const Disabled = ({ checked, disabled, label }) => html`
+export const Disabled = ({ ariaLabel, checked, disabled, label }) => html`
   <modus-switch
+    aria-label=${ariaLabel}
     checked=${checked}
     disabled=${disabled}
     label=${label}>
   </modus-switch>
 `;
 Disabled.args = {
+  ariaLabel: '',
   checked: false,
   disabled: true,
   label: 'Disabled'
