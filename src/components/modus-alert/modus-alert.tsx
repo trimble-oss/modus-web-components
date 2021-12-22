@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { Component, Prop, h, Event, EventEmitter } from '@stencil/core';
+import { Component, Prop, h, Event, EventEmitter, Listen } from '@stencil/core';
 import { IconClose } from '../icons/icon-close';
 import { IconError } from '../icons/icon-error';
 import { IconWarning } from '../icons/icon-warning';
@@ -12,6 +12,9 @@ import { IconInfo } from '../icons/icon-info';
   shadow: true,
 })
 export class ModusAlert {
+  /** (optional) The alert's aria-label. */
+  @Prop() ariaLabel: string;
+
   /** (optional) Whether the alert has a dismiss button */
   @Prop() dismissible: boolean;
 
@@ -35,12 +38,23 @@ export class ModusAlert {
 
   infoTypes = ['info', 'info-gray', 'info-gray-dark'];
 
+  @Listen('keyup')
+  elementKeyupHandler(event: KeyboardEvent): void {
+    switch (event.code) {
+      case 'Escape':
+        if (!this.dismissible) { return; }
+
+        this.dismissClick.emit();
+        break;
+    }
+  }
+
   render(): unknown {
     const className = `alert ${this.classByType.get(this.type)}`;
     const iconSize = '24';
 
     return (
-      <div class={className}>
+      <div aria-label={this.ariaLabel} class={className} role="alert" tabIndex={0}>
         {this.type === 'error' ? <IconError size={iconSize} /> : null}
         {this.infoTypes.includes(this.type) ? <IconInfo size={iconSize} /> : null}
         {this.type === 'success' ? <IconCheckCircle size={iconSize} /> : null}

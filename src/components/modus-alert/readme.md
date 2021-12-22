@@ -9,6 +9,7 @@
 
 | Property      | Attribute     | Description                                                     | Type                                                                             | Default     |
 | ------------- | ------------- | --------------------------------------------------------------- | -------------------------------------------------------------------------------- | ----------- |
+| `ariaLabel`   | `aria-label`  | (optional) The alert's aria-label.                              | `string`                                                                         | `undefined` |
 | `dismissible` | `dismissible` | (optional) Whether the alert has a dismiss button               | `boolean`                                                                        | `undefined` |
 | `message`     | `message`     | (optional) The alert message                                    | `string`                                                                         | `undefined` |
 | `type`        | `type`        | (optional) The type of alert, sets the color and icon to render | `"error" \| "info" \| "info-gray" \| "info-gray-dark" \| "success" \| "warning"` | `'info'`    |

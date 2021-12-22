@@ -56,8 +56,8 @@ import { Anchor } from '@storybook/addon-docs';
 <modus-alert message="Warning alert" type="warning"></modus-alert>
 ```
 
+###  Properties
 <section>
-  <h4>Properties</h4>
   <table>
     <thead>
     <tr>
@@ -79,6 +79,14 @@ import { Anchor } from '@storybook/addon-docs';
       <td><span class="material-icons">&#10004;</span></td>
     </tr>
     <tr>
+      <td>aria-label</td>
+      <td>The alert's aria-label</td>
+      <td>string</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
       <td>dismissible</td>
       <td>Whether the alert is dismissible, renders the close icon</td>
       <td>boolean</td>
@@ -98,8 +106,8 @@ import { Anchor } from '@storybook/addon-docs';
   </table>
 </section>
 
+### DOM Events
 <section>
-  <h4>DOM Events</h4>
   <table>
     <thead>
     <tr>
@@ -118,3 +126,7 @@ import { Anchor } from '@storybook/addon-docs';
   </table>
 </section>
 
+### Accessibility
+- Alert has `role` of `alert`.
+- Alert gets an `aria-label` provided by the `aria-label` property input.
+- When Alert has focus, **Escape** causes the `dismissClick` event to fire if dismissible.
