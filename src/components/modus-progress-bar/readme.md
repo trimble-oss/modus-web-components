@@ -9,6 +9,7 @@
 
 | Property          | Attribute          | Description                                        | Type     | Default     |
 | ----------------- | ------------------ | -------------------------------------------------- | -------- | ----------- |
+| `ariaLabel`       | `aria-label`       | (optional) The progress bar's aria-label.          | `string` | `undefined` |
 | `backgroundColor` | `background-color` | (optional) The progress bar's background color.    | `string` | `undefined` |
 | `color`           | `color`            | (optional) The progress bar's foreground color.    | `string` | `undefined` |
 | `maxValue`        | `max-value`        | (optional) The progress bar's maximum value.       | `number` | `100`       |

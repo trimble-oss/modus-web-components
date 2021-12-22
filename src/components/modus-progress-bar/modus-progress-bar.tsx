@@ -8,6 +8,9 @@ import { Component, Prop, h } from '@stencil/core';
 })
 
 export class ModusProgressBar {
+  /** (optional) The progress bar's aria-label. */
+  @Prop() ariaLabel: string;
+
   /** (optional) The progress bar's background color. */
   @Prop() backgroundColor: string;
 
@@ -57,7 +60,15 @@ export class ModusProgressBar {
     const progressClass = `progress ${progressColorClass} ${progressTextColor}`;
 
     return (
-      <div class={progressBarClass} style={this.getProgressBarStyle()}>
+      <div
+        aria-label={this.ariaLabel}
+        aria-valuemax={this.maxValue}
+        aria-valuemin={this.minValue}
+        aria-valuenow={this.value}
+        class={progressBarClass}
+        role="progressbar"
+        style={this.getProgressBarStyle()}
+        tabIndex={0}>
         <div class={progressClass} style={this.getProgressStyle(percentage)}>
           {this.text}
         </div>

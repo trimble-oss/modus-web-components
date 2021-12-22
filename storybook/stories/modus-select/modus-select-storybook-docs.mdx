@@ -164,9 +164,12 @@ This component is compatible with Angular reactive forms. This can be achieved t
 - Select has `role` of `listbox`.
 - Select gets an `aria-label` provided by the `aria-label` property input.
 - Select gets an `aria-disabled` set to whether Select is disabled.
+- Select gets an `aria-required` set to whether the Select is required.
 - When Select has focus:
   - **Enter** opens the option list.
   - **ArrowUp**, **ArrowDown** navigate the list.
   - **Enter** selects an item from the list.
   - **Space** closes the open list without selecting an item.
-
+- Select Items get:
+  - An `aria-label` set to the display value.
+  - An `aria-selected` set to whether the item is selected.

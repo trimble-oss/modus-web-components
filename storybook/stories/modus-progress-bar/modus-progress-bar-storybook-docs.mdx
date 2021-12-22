@@ -11,8 +11,8 @@
 <modus-progress-bar value="3" max-value="4" min-value="0" text="75%"></modus-progress-bar>
 ```
 
+### Properties
 <section>
-  <h4>Properties</h4>
   <table>
     <thead>
     <tr>
@@ -25,6 +25,14 @@
     </tr>
     </thead>
     <tbody>
+    <tr>
+      <td>aria-label</td>
+      <td>The progress bar's aria-label</td>
+      <td>string</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
     <tr>
       <td>background-color</td>
       <td>The bar's background color</td>
@@ -85,3 +93,9 @@
   </table>
 </section>
 
+### Accessibility
+- Progress Bar has `role` of `progressbar`.
+- Progress Bar gets an `aria-label` provided by the `aria-label` property input.
+- Progress Bar gets an `aria-maxvalue` provided by the `max-value` property input.
+- Progress Bar gets an `aria-minvalue` provided by the `min-value` property input.
+- Progress Bar gets an `aria-valuenow` set to the current value.

@@ -325,6 +325,10 @@ export namespace Components {
     }
     interface ModusProgressBar {
         /**
+          * (optional) The progress bar's aria-label.
+         */
+        "ariaLabel": string;
+        /**
           * (optional) The progress bar's background color.
          */
         "backgroundColor": string;
@@ -1159,6 +1163,10 @@ declare namespace LocalJSX {
         "size"?: 'large' | 'medium' | 'small';
     }
     interface ModusProgressBar {
+        /**
+          * (optional) The progress bar's aria-label.
+         */
+        "ariaLabel"?: string;
         /**
           * (optional) The progress bar's background color.
          */
