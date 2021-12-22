@@ -5,6 +5,13 @@ import docs from './modus-button-storybook-docs.mdx';
 export default {
   title: 'Components/Button',
   argTypes: {
+    ariaLabel: {
+      name: 'aria-label',
+      description: 'The button\'s aria-label',
+      table: {
+        type: { summary: 'string' }
+      }
+    },
     buttonStyle: {
       name: 'button-style',
       control: {
@@ -48,7 +55,7 @@ export default {
     }
   },
   parameters: {
-    controls: { expanded: true },
+    controls: { expanded: true, sort: 'alpha' },
     actions: {
       handles: ['buttonClick'],
     },
