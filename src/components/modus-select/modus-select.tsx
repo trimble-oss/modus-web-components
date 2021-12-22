@@ -126,7 +126,7 @@ export class ModusSelect {
     const inputContainerClass = `input-container ${this.visible ? 'dropdown-visible' : ''}`;
 
     return (
-      <div role="listbox" aria-disabled={this.disabled} aria-label={this.ariaLabel}>
+      <div role="listbox" aria-disabled={this.disabled} aria-label={this.ariaLabel} aria-required={this.required}>
         {this.label || this.required
           ? <div class={'label-container'}>
               {this.label ? <label>{this.label}</label> : null}
@@ -143,6 +143,7 @@ export class ModusSelect {
             {
               this.options.map((option, index) =>
               <div
+                aria-selected={index === this.activeItemIndex}
                 aria-label={option[this.optionsDisplayProp]}
                 class={`dropdown-list-item ${index === this.activeItemIndex ? 'active' : ''}`}
                 key={createGuid()}
