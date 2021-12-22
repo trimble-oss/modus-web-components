@@ -15,7 +15,11 @@ export class ModusSpinner {
 
   render(): unknown {
     return (
-      <div class="spinner" style={{'border-color': this.color, 'border-right-color': 'transparent', 'height': this.size, 'width': this.size}}></div>
+      <div
+        aria-busy="true"
+        class="spinner"
+        style={{'border-color': this.color, 'border-right-color': 'transparent', 'height': this.size, 'width': this.size}}>
+      </div>
     );
   }
 }

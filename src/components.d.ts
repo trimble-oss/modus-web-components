@@ -33,6 +33,10 @@ export namespace Components {
     }
     interface ModusAlert {
         /**
+          * (optional) The alert's aria-label.
+         */
+        "ariaLabel": string;
+        /**
           * (optional) Whether the alert has a dismiss button
          */
         "dismissible": boolean;
@@ -800,6 +804,10 @@ declare namespace LocalJSX {
         "size"?: 'condensed' | 'standard';
     }
     interface ModusAlert {
+        /**
+          * (optional) The alert's aria-label.
+         */
+        "ariaLabel"?: string;
         /**
           * (optional) Whether the alert has a dismiss button
          */

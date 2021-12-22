@@ -10,7 +10,7 @@ describe('modus-spinner', () => {
     expect(root).toEqualHtml(`
       <modus-spinner>
         <mock:shadow-root>
-          <div class='spinner' style='border-color: #005F9E; border-right-color: transparent; height: 2rem; width: 2rem;'></div>
+          <div aria-busy="true" class='spinner' style='border-color: #005F9E; border-right-color: transparent; height: 2rem; width: 2rem;'></div>
         </mock:shadow-root>
       </modus-spinner>
     `);
