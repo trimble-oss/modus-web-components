@@ -9,6 +9,7 @@
 
 | Property      | Attribute      | Description                         | Type                                                             | Default     |
 | ------------- | -------------- | ----------------------------------- | ---------------------------------------------------------------- | ----------- |
+| `ariaLabel`   | `aria-label`   | (optional) The button's aria-label. | `string`                                                         | `undefined` |
 | `buttonStyle` | `button-style` | (optional) The style of the button  | `"borderless" \| "fill" \| "outline"`                            | `'fill'`    |
 | `color`       | `color`        | (optional) The color of the button. | `"danger" \| "default" \| "primary" \| "secondary" \| "warning"` | `'default'` |
 | `disabled`    | `disabled`     | (optional) Disables the button.     | `boolean`                                                        | `undefined` |

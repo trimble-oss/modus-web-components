@@ -10,7 +10,7 @@ describe('modus-button', () => {
     expect(root).toEqualHtml(`
       <modus-button>
         <mock:shadow-root>
-          <button aria-label="" class="size-medium color-tertiary style-fill" role="button">
+          <button class="size-medium color-tertiary style-fill" role="button">
             <slot></slot>
           </button>
         </mock:shadow-root>
@@ -26,7 +26,7 @@ describe('modus-button', () => {
     expect(root).toEqualHtml(`
       <modus-button>
         <mock:shadow-root>
-          <button aria-label="Button" class="size-medium color-tertiary style-fill" role="button">
+          <button class="size-medium color-tertiary style-fill" role="button">
             <slot></slot>
           </button>
         </mock:shadow-root>

@@ -49,9 +49,8 @@ Implementation Details
 <modus-button button-style="outline" color="primary">Outline</modus-button>
 <modus-button button-style="outline" color="secondary">Outline</modus-button>
 ```
-
+### Properties
 <section>
-  <h4>Properties</h4>
   <table>
     <thead>
     <tr>
@@ -64,6 +63,14 @@ Implementation Details
     </tr>
     </thead>
     <tbody>
+    <tr>
+      <td>aria-label</td>
+      <td>The button's aria-label</td>
+      <td>string</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
     <tr>
       <td>button-style</td>
       <td>The style of the button</td>
@@ -100,8 +107,8 @@ Implementation Details
   </table>
 </section>
 
+### DOM Events
 <section>
-  <h4>DOM Events</h4>
   <table>
     <thead>
     <tr>
@@ -119,4 +126,12 @@ Implementation Details
     </tbody>
   </table>
 </section>
+
+
+### Accessibility
+- Button has `role` of `button`.
+- Button gets an `aria-label` provided by the `aria-label` property input.
+- Button gets an `aria-disabled` set to whether Button is disabled.
+- Button gets an `aria-pressed` set to whether Button is pressed.
+- When Button has focus, **Space** or **Enter** activates it.
 

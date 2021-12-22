@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { Component, Prop, h, Event, EventEmitter, Element } from '@stencil/core';
+import { Component, Prop, h, Event, EventEmitter, Element, State, Listen } from '@stencil/core';
 
 @Component({
   tag: 'modus-button',
@@ -7,6 +7,9 @@ import { Component, Prop, h, Event, EventEmitter, Element } from '@stencil/core'
   shadow: true,
 })
 export class ModusButton {
+  /** (optional) The button's aria-label. */
+  @Prop() ariaLabel: string;
+
   /** (optional) The style of the button */
   @Prop() buttonStyle: 'borderless' | 'fill' | 'outline' = 'fill';
 
@@ -23,6 +26,8 @@ export class ModusButton {
   @Event() buttonClick: EventEmitter;
 
   @Element() el: HTMLElement;
+
+  @State() pressed: boolean;
 
   classByButtonStyle: Map<string, string> = new Map([
     ['borderless', 'style-borderless'],
@@ -44,16 +49,30 @@ export class ModusButton {
     ['large', 'size-large'],
   ]);
 
+  @Listen('keyup')
+  elementKeyupHandler(event: KeyboardEvent): void {
+    switch (event.code) {
+      case 'Space':
+        this.buttonClick.emit();
+        break;
+    }
+  }
+
   render(): unknown {
     const className = `${this.classBySize.get(this.size)} ${this.classByColor.get(this.color)} ${this.classByButtonStyle.get(this.buttonStyle)}`;
 
     return (
       <button
         aria-disabled={this.disabled}
-        aria-label={this.el.innerText}
+        aria-label={this.ariaLabel}
+        aria-pressed={this.pressed}
         class={className}
         disabled={this.disabled}
         onClick={() => !this.disabled ? this.buttonClick.emit() : null}
+        onKeyDown={() => this.pressed = true}
+        onKeyUp={() => this.pressed = false}
+        onMouseDown={() => this.pressed = true}
+        onMouseUp={() => this.pressed = false}
         role="button">
         <slot />
       </button>
