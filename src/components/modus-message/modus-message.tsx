@@ -9,6 +9,9 @@ import { IconHelp } from '../icons/icon-help';
   shadow: true,
 })
 export class ModusMessage {
+  /** (optional) The message's aria-label. */
+  @Prop() ariaLabel: string;
+
   /** (optional) The message's type. */
   @Prop() type: 'info' | 'question' = 'info';
 
@@ -21,7 +24,7 @@ export class ModusMessage {
     const className = `modus-message ${this.classByType.get(this.type)}`;
 
     return (
-      <div class={className}>
+      <div aria-label={this.ariaLabel} class={className} role="note">
         <span class="icon">
           {this.type === 'info'
             ? <IconInfo color="#005F9E" size="18" />

@@ -193,6 +193,10 @@ export namespace Components {
     }
     interface ModusMessage {
         /**
+          * (optional) The message's aria-label.
+         */
+        "ariaLabel": string;
+        /**
           * (optional) The message's type.
          */
         "type": 'info' | 'question';
@@ -1004,6 +1008,10 @@ declare namespace LocalJSX {
         "type"?: 'standard';
     }
     interface ModusMessage {
+        /**
+          * (optional) The message's aria-label.
+         */
+        "ariaLabel"?: string;
         /**
           * (optional) The message's type.
          */

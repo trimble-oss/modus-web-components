@@ -10,7 +10,7 @@ describe('modus-message', () => {
     expect(root).toEqualHtml(`
       <modus-message>
             <mock:shadow-root>
-              <div class="info modus-message">
+              <div class="info modus-message" role="note">
                 <span class="icon">
                   <svg class="icon-info" fill="none" height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
                     <path clip-rule="evenodd" d="M12 21C16.968 21 21 16.968 21 12C21 7.032 16.968 3 12 3C7.032 3 3 7.032 3 12C3 16.968 7.032 21 12 21ZM11 7H13V9H11V7ZM11 11H13L13 17H11L11 11Z" fill="#005F9E" fill-rule="evenodd"></path>
