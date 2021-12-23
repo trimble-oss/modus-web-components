@@ -22,8 +22,8 @@ This component is compatible with Angular reactive forms. This can be achieved t
 <modus-checkbox label="Small Checkbox" size="small"></modus-checkbox>
 ```
 
+### Properties
 <section>
-  <h4>Properties</h4>
   <table>
     <thead>
     <tr>
@@ -36,6 +36,14 @@ This component is compatible with Angular reactive forms. This can be achieved t
     </tr>
     </thead>
     <tbody>
+    <tr>
+      <td>aria-label</td>
+      <td>The checkbox's aria-label</td>
+      <td>string</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
     <tr>
       <td>checked</td>
       <td>Whether the checkbox is checked</td>
@@ -72,8 +80,8 @@ This component is compatible with Angular reactive forms. This can be achieved t
   </table>
 </section>
 
+### DOM Events
 <section>
-  <h4>DOM Events</h4>
   <table>
     <thead>
     <tr>
@@ -91,3 +99,9 @@ This component is compatible with Angular reactive forms. This can be achieved t
     </tbody>
   </table>
 </section>
+
+### Accessibility
+- Checkbox gets an `aria-checked` set to whether Checkbox is checked.
+- Checkbox gets an `aria-label` provided by the `aria-label` property input.
+- Checkbox gets an `aria-disabled` set to whether Checkbox is disabled.
+- When Checkbox has focus, **Space** or **Enter** toggle it.
