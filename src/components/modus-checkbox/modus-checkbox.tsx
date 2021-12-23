@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { Component, Prop, h, Event, EventEmitter } from '@stencil/core';
+import { Component, Prop, h, Event, EventEmitter, Listen } from '@stencil/core';
 import { IconCheck } from '../icons/icon-check';
 
 @Component({
@@ -8,6 +8,9 @@ import { IconCheck } from '../icons/icon-check';
   shadow: true,
 })
 export class ModusCheckbox {
+  /** (optional) The checkbox's aria-label. */
+  @Prop() ariaLabel: string;
+
   /** (optional) Whether the checkbox is checked. */
   @Prop({ mutable: true }) checked: boolean;
 
@@ -30,6 +33,24 @@ export class ModusCheckbox {
     ['medium', 'medium']
   ]);
 
+  @Listen('keydown')
+  elementKeydownHandler(event: KeyboardEvent): void {
+    switch (event.code) {
+      case 'Enter':
+        this.handleCheckboxClick();
+        break;
+    }
+  }
+
+  @Listen('keyup')
+  elementKeyupHandler(event: KeyboardEvent): void {
+    switch (event.code) {
+      case 'Space':
+        this.handleCheckboxClick();
+        break;
+    }
+  }
+
   handleCheckboxClick(): void {
     if (this.disabled) { return; }
 
@@ -46,11 +67,14 @@ export class ModusCheckbox {
     const className = `modus-checkbox ${this.classBySize?.get(this.size)}`;
 
     return (
-      <div class={className} onClick={() => this.handleCheckboxClick()}>
+      <div class={className} onClick={() => this.handleCheckboxClick()} tabIndex={0}>
         <div class={`${this.checked ? 'checkbox checked' : 'checkbox'} ${this.disabled ? 'disabled' : ''}`}>
           <div class={this.checked ? 'checkmark checked' : 'checkmark'}><IconCheck color="#FFFFFF" size="24"/></div>
         </div>
         <input
+          aria-checked={this.checked}
+          aria-disabled={this.disabled}
+          aria-label={this.ariaLabel}
           checked={this.checked}
           disabled={this.disabled}
           ref={(el) => this.checkboxInput = el as HTMLInputElement}

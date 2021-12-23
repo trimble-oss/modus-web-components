@@ -103,6 +103,10 @@ export namespace Components {
     }
     interface ModusCheckbox {
         /**
+          * (optional) The checkbox's aria-label.
+         */
+        "ariaLabel": string;
+        /**
           * (optional) Whether the checkbox is checked.
          */
         "checked": boolean;
@@ -898,6 +902,10 @@ declare namespace LocalJSX {
         "width"?: string;
     }
     interface ModusCheckbox {
+        /**
+          * (optional) The checkbox's aria-label.
+         */
+        "ariaLabel"?: string;
         /**
           * (optional) Whether the checkbox is checked.
          */
