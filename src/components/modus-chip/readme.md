@@ -9,6 +9,7 @@
 
 | Property        | Attribute        | Description                                | Type                   | Default     |
 | --------------- | ---------------- | ------------------------------------------ | ---------------------- | ----------- |
+| `ariaLabel`     | `aria-label`     | (optional) The chip's aria-label.          | `string`               | `undefined` |
 | `chipStyle`     | `chip-style`     | (optional) The chip's style.               | `"outline" \| "solid"` | `'solid'`   |
 | `disabled`      | `disabled`       | (optional) Whether the chip is disabled.   | `boolean`              | `false`     |
 | `hasError`      | `has-error`      | (optional) Whether the chip has an error.  | `boolean`              | `false`     |
@@ -21,10 +22,10 @@
 
 ## Events
 
-| Event        | Description                              | Type                      |
-| ------------ | ---------------------------------------- | ------------------------- |
-| `chipClick`  | An event that fires on chip click.       | `CustomEvent<MouseEvent>` |
-| `closeClick` | An event that fires on close icon click. | `CustomEvent<MouseEvent>` |
+| Event        | Description                              | Type               |
+| ------------ | ---------------------------------------- | ------------------ |
+| `chipClick`  | An event that fires on chip click.       | `CustomEvent<any>` |
+| `closeClick` | An event that fires on close icon click. | `CustomEvent<any>` |
 
 
 ----------------------------------------------

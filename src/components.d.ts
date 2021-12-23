@@ -121,6 +121,10 @@ export namespace Components {
     }
     interface ModusChip {
         /**
+          * (optional) The chip's aria-label.
+         */
+        "ariaLabel": string;
+        /**
           * (optional) The chip's style.
          */
         "chipStyle": 'outline' | 'solid';
@@ -913,6 +917,10 @@ declare namespace LocalJSX {
     }
     interface ModusChip {
         /**
+          * (optional) The chip's aria-label.
+         */
+        "ariaLabel"?: string;
+        /**
           * (optional) The chip's style.
          */
         "chipStyle"?: 'outline' | 'solid';
@@ -931,11 +939,11 @@ declare namespace LocalJSX {
         /**
           * An event that fires on chip click.
          */
-        "onChipClick"?: (event: CustomEvent<MouseEvent>) => void;
+        "onChipClick"?: (event: CustomEvent<any>) => void;
         /**
           * An event that fires on close icon click.
          */
-        "onCloseClick"?: (event: CustomEvent<MouseEvent>) => void;
+        "onCloseClick"?: (event: CustomEvent<any>) => void;
         /**
           * (optional) Whether to show the checkmark.
          */

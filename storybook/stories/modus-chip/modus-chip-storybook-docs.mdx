@@ -34,8 +34,8 @@ import { Anchor } from '@storybook/addon-docs';
 <modus-chip show-checkmark size="large" value="Pets OK"></modus-chip>
 ```
 
+### Properties
 <section>
-  <h4>Properties</h4>
   <table>
     <thead>
     <tr>
@@ -48,6 +48,14 @@ import { Anchor } from '@storybook/addon-docs';
     </tr>
     </thead>
     <tbody>
+    <tr>
+      <td>aria-label</td>
+      <td>The chip's aria-label</td>
+      <td>string</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
     <tr>
       <td>chip-style</td>
       <td>The chip's style</td>
@@ -116,8 +124,8 @@ import { Anchor } from '@storybook/addon-docs';
   </table>
 </section>
 
+### DOM Events
 <section>
-  <h4>DOM Events</h4>
   <table>
     <thead>
     <tr>
@@ -130,13 +138,19 @@ import { Anchor } from '@storybook/addon-docs';
     <tr>
       <td>chipClick</td>
       <td>Fires on chip click</td>
-      <td>MouseEvent</td>
+      <td>KeyboardEvent, MouseEvent</td>
     </tr>
     <tr>
       <td>closeClick</td>
       <td>Fires on close icon click</td>
-      <td>MouseEvent</td>
+      <td>KeyboardEvent, MouseEvent</td>
     </tr>
     </tbody>
   </table>
 </section>
+
+### Accessibility
+- Chip gets an `aria-label` provided by the `aria-label` property input.
+- Chip gets an `aria-disabled` set to whether Chip is disabled.
+- When Chip has focus, **Enter** triggers the `chipClick` event.
+- When Chip has focus, **Escape** triggers the `closeClick` event.
