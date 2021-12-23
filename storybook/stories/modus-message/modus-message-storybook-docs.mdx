@@ -13,8 +13,8 @@
 <modus-message type="question">Question message?</modus-message>
 ```
 
+### Properties
 <section>
-  <h4>Properties</h4>
   <table>
     <thead>
     <tr>
@@ -28,6 +28,14 @@
     </thead>
     <tbody>
     <tr>
+      <td>aria-label</td>
+      <td>The message's aria-label</td>
+      <td>string</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
       <td>type</td>
       <td>The message's type</td>
       <td>string</td>
@@ -39,3 +47,6 @@
   </table>
 </section>
 
+### Accessibility
+- Message has `role` of `note`.
+- Message gets an `aria-label` provided by the `aria-label` property input.
