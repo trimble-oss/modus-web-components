@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { Component, Prop, h, EventEmitter, Event } from '@stencil/core';
+import { Component, Prop, h, EventEmitter, Event, Listen } from '@stencil/core';
 import { IconRemove } from '../icons/icon-remove';
 import { IconCheck } from '../icons/icon-check';
 
@@ -10,6 +10,9 @@ import { IconCheck } from '../icons/icon-check';
 })
 
 export class ModusChip {
+  /** (optional) The chip's aria-label. */
+  @Prop() ariaLabel: string;
+
   /** (optional) The chip's style. */
   @Prop() chipStyle: 'outline' | 'solid'  = 'solid';
 
@@ -35,10 +38,10 @@ export class ModusChip {
   @Prop() value: string;
 
   /** An event that fires on chip click. */
-  @Event() chipClick: EventEmitter<MouseEvent>;
+  @Event() chipClick: EventEmitter;
 
   /** An event that fires on close icon click. */
-  @Event() closeClick: EventEmitter<MouseEvent>;
+  @Event() closeClick: EventEmitter;
 
   classByChipStyle: Map<string, string> = new Map([
     ['outline', 'style-outline'],
@@ -48,6 +51,26 @@ export class ModusChip {
     ['medium', 'medium'],
     ['large', 'large'],
   ]);
+
+  @Listen('keyup')
+  elementKeyupHandler(event: KeyboardEvent): void {
+    switch (event.code) {
+      case 'Escape':
+        if (!this.showClose) { return; }
+
+        this.closeClick.emit(event);
+        break;
+    }
+  }
+
+  @Listen('keydown')
+  elementKeydownHandler(event: KeyboardEvent): void {
+    switch (event.code) {
+      case 'Enter':
+        this.chipClick.emit(event);
+        break;
+    }
+  }
 
   onChipClick(event: MouseEvent): void {
     if (event.defaultPrevented) { return; } // Don't emit chipClick if closeClick has emitted.
@@ -71,7 +94,12 @@ export class ModusChip {
     `;
 
     return (
-      <div class={chipClass} onClick={this.disabled ? null : (event) => this.onChipClick(event)}>
+      <div
+        aria-disabled={this.disabled}
+        aria-label={this.ariaLabel}
+        class={chipClass}
+        onClick={this.disabled ? null : (event) => this.onChipClick(event)}
+        tabIndex={0}>
         {
           this.imageUrl ? <img src={this.imageUrl}/> :
           this.showCheckmark ? <IconCheck size={'24'}></IconCheck> :

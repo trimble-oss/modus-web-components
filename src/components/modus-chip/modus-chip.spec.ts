@@ -10,7 +10,7 @@ describe('modus-chip', () => {
     expect(root).toEqualHtml(`
       <modus-chip>
         <mock:shadow-root>
-          <div class="medium modus-chip no-left-icon no-right-icon style-solid">
+          <div class="medium modus-chip no-left-icon no-right-icon style-solid" tabindex="0">
             <span></span>
           </div>
         </mock:shadow-root>

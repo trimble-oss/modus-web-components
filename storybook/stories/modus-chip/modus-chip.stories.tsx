@@ -5,6 +5,13 @@ import docs from './modus-chip-storybook-docs.mdx';
 export default {
   title: 'Components/Chip',
   argTypes: {
+    ariaLabel: {
+      name: 'aria-label',
+      description: 'The chip\'s aria-label',
+      table: {
+        type: { summary: 'string' }
+      }
+    },
     chipStyle: {
       name: 'chip-style',
       control: {
@@ -87,8 +94,9 @@ export default {
   },
 };
 
-export const Default = ({ chipStyle, disabled, hasError, imageUrl, showCheckmark, showClose, size, value }) => html`
+export const Default = ({ ariaLabel, chipStyle, disabled, hasError, imageUrl, showCheckmark, showClose, size, value }) => html`
   <modus-chip
+    aria-label=${ariaLabel}
     chip-style=${chipStyle}
     disabled=${disabled}
     has-error=${hasError}
@@ -100,6 +108,7 @@ export const Default = ({ chipStyle, disabled, hasError, imageUrl, showCheckmark
   </modus-chip>
 `;
 Default.args = {
+  ariaLabel: '',
   chipStyle: 'solid',
   disabled: false,
   hasError: false,
@@ -110,8 +119,9 @@ Default.args = {
   value: 'Bryan'
 };
 
-export const Outline = ({ chipStyle, disabled, hasError, imageUrl, showCheckmark, showClose, size, value }) => html`
+export const Outline = ({ ariaLabel, chipStyle, disabled, hasError, imageUrl, showCheckmark, showClose, size, value }) => html`
   <modus-chip
+    aria-label=${ariaLabel}
     chip-style=${chipStyle}
     disabled=${disabled}
     has-error=${hasError}
@@ -123,6 +133,7 @@ export const Outline = ({ chipStyle, disabled, hasError, imageUrl, showCheckmark
   </modus-chip>
 `;
 Outline.args = {
+  ariaLabel: '',
   chipStyle: 'outline',
   disabled: false,
   hasError: false,
