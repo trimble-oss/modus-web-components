@@ -45,7 +45,7 @@
     "@types/jest": "^27.0.3",
     "@types/puppeteer": "^5.4.4",
     "@types/puppeteer-core": "^5.4.0",
-    "@typescript-eslint/eslint-plugin": "^5.5.0",
+    "@typescript-eslint/eslint-plugin": "^5.8.0",
     "@typescript-eslint/parser": "^5.4.0",
     "eslint": "^8.4.0",
     "jest": "^27.4.3",
