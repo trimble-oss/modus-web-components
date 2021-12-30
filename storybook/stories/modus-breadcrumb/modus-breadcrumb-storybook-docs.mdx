@@ -35,8 +35,8 @@ Implementation Details
 </script>
 ```
 
+### Properties
 <section>
-  <h4>Properties</h4>
   <table>
     <thead>
     <tr>
@@ -57,12 +57,20 @@ Implementation Details
       <td>[]</td>
       <td><span class="material-icons">&#10004;</span></td>
     </tr>
+    <tr>
+      <td>aria-label</td>
+      <td>The breadcrumb's aria-label</td>
+      <td>string</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
     </tbody>
   </table>
 </section>
 
+### DOM Events
 <section>
-  <h4>DOM Events</h4>
   <table>
     <thead>
     <tr>
@@ -80,3 +88,7 @@ Implementation Details
     </tbody>
   </table>
 </section>
+
+### Accessibility
+- Breadcrumb has `role` of `navigation`.
+- When a Breadcrumb has focus, **Enter** emits the `crumbClick` event.
