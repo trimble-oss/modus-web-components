@@ -496,6 +496,7 @@ export namespace Components {
         "label": string;
     }
     interface ModusTabs {
+        "ariaLabel": string;
         "size": 'medium' | 'small';
         /**
           * The tabs to render.
@@ -1395,6 +1396,7 @@ declare namespace LocalJSX {
         "onSwitchClick"?: (event: CustomEvent<boolean>) => void;
     }
     interface ModusTabs {
+        "ariaLabel"?: string;
         /**
           * An event that fires on tab change.
          */

@@ -13,6 +13,9 @@ export interface Tab {
   shadow: true,
 })
 export class ModusTabs {
+  /* (optional) The tabs' aria-label. */
+  @Prop() ariaLabel: string;
+
   /* (optional) The tabs' size. */
   @Prop() size: 'medium' | 'small' = 'medium';
 
@@ -27,6 +30,12 @@ export class ModusTabs {
     ['small', 'small'],
   ]);
 
+  handleKeyDown(event: KeyboardEvent, id: string): void {
+    if (event.code !== 'Enter') { return; }
+
+    this.handleTabChange(id);
+  }
+
   handleTabChange(id: string): void {
     if (id === this.tabs.find(tab => tab.active).id) { return; }
 
@@ -40,13 +49,17 @@ export class ModusTabs {
   render(): unknown {
     const tabs = this.tabs.map((tab: Tab) => {
       return (
-        <div class={`tab ${tab.active ? 'active' : ''} ${this.classBySize.get(this.size)}`} onClick={() => this.handleTabChange(tab.id)}>
+        <div
+          class={`tab ${tab.active ? 'active' : ''} ${this.classBySize.get(this.size)}`}
+          onClick={() => this.handleTabChange(tab.id)}
+          onKeyDown={(event) => this.handleKeyDown(event, tab.id)}
+          tabIndex={0}>
           {tab.label}
         </div>
       );});
 
     return (
-      <div class={`modus-tabs ${this.classBySize.get(this.size)}`}>
+      <div aria-label={this.ariaLabel} class={`modus-tabs ${this.classBySize.get(this.size)}`}>
         {tabs}
       </div>
     );

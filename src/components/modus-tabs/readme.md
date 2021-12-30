@@ -7,10 +7,11 @@
 
 ## Properties
 
-| Property | Attribute | Description         | Type                  | Default    |
-| -------- | --------- | ------------------- | --------------------- | ---------- |
-| `size`   | `size`    |                     | `"medium" \| "small"` | `'medium'` |
-| `tabs`   | --        | The tabs to render. | `Tab[]`               | `[]`       |
+| Property    | Attribute    | Description         | Type                  | Default     |
+| ----------- | ------------ | ------------------- | --------------------- | ----------- |
+| `ariaLabel` | `aria-label` |                     | `string`              | `undefined` |
+| `size`      | `size`       |                     | `"medium" \| "small"` | `'medium'`  |
+| `tabs`      | --           | The tabs to render. | `Tab[]`               | `[]`        |
 
 
 ## Events
