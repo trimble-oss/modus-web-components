@@ -9,6 +9,9 @@ import { IconChevronRightThick } from '../icons/icon-chevron-right-thick';
   shadow: true,
 })
 export class ModusPagination {
+  /* (optional) The pagination's aria-label. */
+  @Prop() ariaLabel: string;
+
   /* The active page. */
   @Prop() activePage: number;
 
@@ -82,6 +85,18 @@ export class ModusPagination {
     }
   }
 
+  handleKeydownBack(event: KeyboardEvent): void {
+    if (event.code !== 'Enter') { return; }
+
+    this.handleChevronClick('back');
+  }
+
+  handleKeydownForward(event: KeyboardEvent): void {
+    if (event.code !== 'Enter') { return; }
+
+    this.handleChevronClick('forward');
+  }
+
   handlePageClick(page: number): void {
     if (!isNaN(page)) {
       this.activePage = page;
@@ -93,9 +108,14 @@ export class ModusPagination {
     this.setPages();
 
     return (
-      <nav class={`${this.classBySize.get(this.size)}`}>
+      <nav aria-label={this.ariaLabel} class={`${this.classBySize.get(this.size)}`}>
         <ol>
-          {this.maxPage - this.minPage >= 7 && <li class={`${this.activePage != this.minPage ? 'hoverable' : 'disabled'}`} onClick={() => this.handleChevronClick('back')}>
+          {this.maxPage - this.minPage >= 7 &&
+            <li
+              class={`${this.activePage != this.minPage ? 'hoverable' : 'disabled'}`}
+              onClick={() => this.handleChevronClick('back')}
+              onKeyDown={(event) => this.handleKeydownBack(event)}
+              tabIndex={0}>
             <IconChevronLeftThick size={this.chevronSizeBySize.get(this.size)} />
           </li>}
           {this.pages.map(page => {
@@ -105,7 +125,12 @@ export class ModusPagination {
                 </li>
               );
           })}
-          {this.maxPage - this.minPage >= 7 && <li class={`${this.activePage != this.maxPage ? 'hoverable' : 'disabled'}`} onClick={() => this.handleChevronClick('forward')}>
+          {this.maxPage - this.minPage >= 7 &&
+            <li
+              class={`${this.activePage != this.maxPage ? 'hoverable' : 'disabled'}`}
+              onClick={() => this.handleChevronClick('forward')}
+              onKeyDown={(event) => this.handleKeydownForward(event)}
+              tabIndex={0}>
             <IconChevronRightThick size={this.chevronSizeBySize.get(this.size)} />
           </li>}
         </ol>

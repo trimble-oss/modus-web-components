@@ -24,7 +24,8 @@ Implementation Details
 <Story id="components-navbar--default" />
 
 ```html
-<modus-navbar show-apps-menu show-help-menu show-notifications>
+<modus-navbar show-apps-menu show-help-menu show-main-menu show-notifications>
+    <div slot="main">Render your own main menu.</div>
     <div slot="help">Render your own help.</div>
     <div slot="notifications">Render your own notifications.</div>
 </modus-navbar>
@@ -49,8 +50,8 @@ Implementation Details
 </script>
 ```
 
+### Properties
 <section>
-  <h4>Properties</h4>
   <table>
     <thead>
     <tr>
@@ -131,8 +132,8 @@ Implementation Details
   </table>
 </section>
 
+### DOM Events
 <section>
-  <h4>DOM Events</h4>
   <table>
     <thead>
     <tr>
@@ -155,4 +156,10 @@ Implementation Details
     </tbody>
   </table>
 </section>
+
+### Accessibility
+- When Main Menu has focus, **Enter** toggles it.
+- When Notifications Menu has focus, **Enter** toggles it.
+- When Apps Menu has focus, **Enter** toggles it.
+- When User Menu has focus, **Enter** toggles it.
 
