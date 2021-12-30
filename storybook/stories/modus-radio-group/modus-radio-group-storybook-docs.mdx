@@ -28,18 +28,19 @@ A new TypeScript typing has been provided named RadioButton defined as:
       },
       {
         id: '1',
-        label: 'Radio 1'
+        checked: true,
+        label: 'Radio 2'
       },
       {
         id: '2',
-        label: 'Radio 1'
+        label: 'Radio 3'
       }
     ];
 </script>
 ```
 
+### Properties
 <section>
-  <h4>Properties</h4>
   <table>
     <thead>
     <tr>
@@ -76,12 +77,20 @@ A new TypeScript typing has been provided named RadioButton defined as:
       <td></td>
       <td><span class="material-icons">&#10004;</span></td>
     </tr>
+    <tr>
+      <td>aria-label</td>
+      <td>The radio group's aria-label</td>
+      <td>string</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
     </tbody>
   </table>
 </section>
 
+### DOM Events
 <section>
-  <h4>DOM Events</h4>
   <table>
     <thead>
     <tr>
@@ -99,4 +108,7 @@ A new TypeScript typing has been provided named RadioButton defined as:
     </tbody>
   </table>
 </section>
+
+### Accessibility
+- When a Radio Button has focus, **Enter** selects it, and emits `buttonClick` event.
 

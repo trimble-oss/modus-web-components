@@ -8,6 +8,9 @@ import { ModusRadioButton, RadioButton } from './modus-radio-button';
   shadow: true,
 })
 export class ModusRadioGroup {
+  /** The radio group's aria-label. */
+  @Prop() ariaLabel: string;
+
   /** The ID of the checked radio button. */
   @Prop({ mutable: true }) checkedId: string;
 
@@ -31,6 +34,12 @@ export class ModusRadioGroup {
     this.buttonClick.emit(this.checkedId);
   }
 
+  private handleButtonKeydown(event: KeyboardEvent, id: string) {
+    if (event.code !== 'Enter') { return; }
+
+    this.handleButtonClick(id);
+  }
+
   @Watch('checkedId')
   private setCheckedIdAndUpdateRadioButtons(id: string): void {
     this.checkedId = id;
@@ -41,7 +50,7 @@ export class ModusRadioGroup {
 
   render(): unknown {
     return (
-      <ul>
+      <ul aria-label={this.ariaLabel}>
         {this.radioButtons.map(radioButton => {
           return (
             <ModusRadioButton
@@ -50,7 +59,8 @@ export class ModusRadioGroup {
               label={radioButton.label}
               name={this.name}
               id={radioButton.id}
-              handleButtonClick={(id) => this.handleButtonClick(id)}>
+              handleButtonClick={(id) => this.handleButtonClick(id)}
+              handleKeydown={(event, id) => this.handleButtonKeydown(event, id)}>
             </ModusRadioButton>
           );
         })}

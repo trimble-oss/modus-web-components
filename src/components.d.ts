@@ -69,6 +69,10 @@ export namespace Components {
     }
     interface ModusBreadcrumb {
         /**
+          * The breadcrumb's aria-label.
+         */
+        "ariaLabel": string;
+        /**
           * The breadcrumbs to render.
          */
         "crumbs": Crumb[];
@@ -386,6 +390,10 @@ export namespace Components {
         "value": number;
     }
     interface ModusRadioGroup {
+        /**
+          * The radio group's aria-label.
+         */
+        "ariaLabel": string;
         /**
           * The ID of the checked radio button.
          */
@@ -894,6 +902,10 @@ declare namespace LocalJSX {
     }
     interface ModusBreadcrumb {
         /**
+          * The breadcrumb's aria-label.
+         */
+        "ariaLabel"?: string;
+        /**
           * The breadcrumbs to render.
          */
         "crumbs"?: Crumb[];
@@ -1270,6 +1282,10 @@ declare namespace LocalJSX {
         "value"?: number;
     }
     interface ModusRadioGroup {
+        /**
+          * The radio group's aria-label.
+         */
+        "ariaLabel"?: string;
         /**
           * The ID of the checked radio button.
          */

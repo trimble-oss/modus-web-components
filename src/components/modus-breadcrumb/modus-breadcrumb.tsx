@@ -12,6 +12,9 @@ export interface Crumb {
   shadow: true,
 })
 export class ModusBreadcrumb {
+  /** The breadcrumb's aria-label. */
+  @Prop() ariaLabel: string;
+
   /** The breadcrumbs to render. */
   @Prop() crumbs: Crumb[] = [];
 
@@ -20,7 +23,7 @@ export class ModusBreadcrumb {
 
   render(): unknown {
     return (
-      <nav role="navigation" aria-label="breadcrumbs">
+      <nav aria-label={this.ariaLabel} role="navigation">
         <ol>
           {
             this.crumbs.map((crumb, index) =>
