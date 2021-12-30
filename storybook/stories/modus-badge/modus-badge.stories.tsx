@@ -5,6 +5,13 @@ import docs from './modus-badge-storybook-docs.mdx';
 export default {
   title: 'Components/Badge',
   argTypes: {
+    ariaLabel: {
+      name: 'aria-label',
+      description: 'The badge\'s aria-label',
+      table: {
+        type: { summary: 'string' }
+      }
+    },
     color: {
       control: {
         options: ['danger', 'dark', 'primary', 'secondary', 'success', 'tertiary', 'warning'],
@@ -51,34 +58,37 @@ export default {
 };
 
 // TODO - Figure how to work with slots.
-export const Default = ({ color, size, type }) => html`
+export const Default = ({ ariaLabel, color, size, type }) => html`
   <modus-badge
+    aria-label=${ariaLabel}
     color=${color}
     size=${size}
     type=${type}>
     Default
   </modus-badge>
 `;
-Default.args = { color: 'primary', size: 'medium', type: 'default' };
+Default.args = { ariaLabel: '', color: 'primary', size: 'medium', type: 'default' };
 
-export const Counter = ({ color, size, type }) => html`
+export const Counter = ({ ariaLabel, color, size, type }) => html`
   <modus-badge
+    aria-label=${ariaLabel}
     color=${color}
     size=${size}
     type=${type}>
     Counter
   </modus-badge>
 `;
-Counter.args = { color: 'primary', size: 'medium', type: 'counter' };
+Counter.args = { ariaLabel: '', color: 'primary', size: 'medium', type: 'counter' };
 
-export const Text = ({ color, size, type }) => html`
+export const Text = ({ ariaLabel, color, size, type }) => html`
   <modus-badge
+    aria-label=${ariaLabel}
     color=${color}
     size=${size}
     type=${type}>
     Text
   </modus-badge>
 `;
-Text.args = { color: 'primary', size: 'medium', type: 'text' };
+Text.args = { ariaLabel: '', color: 'primary', size: 'medium', type: 'text' };
 
 

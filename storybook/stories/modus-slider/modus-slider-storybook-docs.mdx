@@ -13,8 +13,8 @@
 <modus-slider disabled label="Disabled slider"></modus-slider>
 ```
 
+### Properties
 <section>
-  <h4>Properties</h4>
   <table>
     <thead>
     <tr>
@@ -27,6 +27,14 @@
     </tr>
     </thead>
     <tbody>
+    <tr>
+      <td>aria-label</td>
+      <td>The slider's aria-label</td>
+      <td>string</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
     <tr>
       <td>disabled</td>
       <td>Whether the slider is disabled</td>
@@ -71,8 +79,8 @@
   </table>
 </section>
 
+### DOM Events
 <section>
-  <h4>DOM Events</h4>
   <table>
     <thead>
     <tr>
@@ -95,4 +103,11 @@
     </tbody>
   </table>
 </section>
+
+### Accessibility
+- Slider gets an `aria-label` provided by the `aria-label` property input.
+- Slider gets an `aria-disabled` set to whether Slider is disabled.
+- Slider gets an `aria-valuemax` set to Slider's maximum value.
+- Slider gets an `aria-valuemin` set to Slider's minimum value.
+- Slider gets an `aria-valuenow` set to Slider's current value.
 

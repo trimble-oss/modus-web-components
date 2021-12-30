@@ -83,8 +83,8 @@ This component utilizes the slot element, allowing you to render your own HTML i
 <modus-badge size="large" type="text">Large</modus-badge>
 ```
 
+### Properties
 <section>
-  <h4>Properties</h4>
   <table>
     <thead>
     <tr>
@@ -97,6 +97,14 @@ This component utilizes the slot element, allowing you to render your own HTML i
     </tr>
     </thead>
     <tbody>
+    <tr>
+      <td>aria-label</td>
+      <td>The badge's aria-label</td>
+      <td>string</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
     <tr>
       <td>color</td>
       <td>The color of the badge</td>
@@ -124,3 +132,7 @@ This component utilizes the slot element, allowing you to render your own HTML i
     </tbody>
   </table>
 </section>
+
+### Accessibility
+- Badge has `role` of `status`.
+- Badge gets an `aria-label` provided by the `aria-label` property input.

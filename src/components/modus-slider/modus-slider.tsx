@@ -7,6 +7,9 @@ import { Component, Event, EventEmitter, h, Prop } from '@stencil/core';
   shadow: true,
 })
 export class ModusSlider {
+  /** (optional) The slider's aria-label. */
+  @Prop() ariaLabel: string;
+
   /** (optional) Whether the slider is disabled. **/
   @Prop() disabled = false;
 
@@ -44,7 +47,13 @@ export class ModusSlider {
     const className = `modus-slider ${this.disabled ? 'disabled' : ''}`;
 
     return (
-      <div class={className}>
+      <div
+        aria-disabled={this.disabled}
+        aria-label={this.ariaLabel}
+        aria-valuemax={this.maxValue}
+        aria-valuemin={this.minValue}
+        aria-valuenow={this.value}
+        class={className}>
         {this.label && <label>{this.label}</label>}
         <input
           class="slider"

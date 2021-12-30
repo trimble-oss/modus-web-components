@@ -7,6 +7,9 @@ import { Component, Prop, h } from '@stencil/core';
   shadow: true,
 })
 export class ModusBadge {
+  /** (optional) The badge's aria-label */
+  @Prop() ariaLabel: string;
+
   /** (optional) The color of the badge */
   @Prop() color: 'danger' | 'dark' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning' = 'primary';
 
@@ -42,7 +45,7 @@ export class ModusBadge {
     const className = `badge ${this.classByColor.get(this.color)} ${this.classBySize.get(this.size)} ${this.classByType.get(this.type)}`;
 
     return (
-      <div class={className}>
+      <div aria-label={this.ariaLabel} class={className} role="status">
         <slot />
       </div>
     );

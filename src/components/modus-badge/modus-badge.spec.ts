@@ -10,7 +10,7 @@ describe('modus-badge', () => {
     expect(root).toEqualHtml(`
       <modus-badge>
         <mock:shadow-root>
-          <div class="badge color-primary size-medium type-default">
+          <div class="badge color-primary size-medium type-default" role="status">
             <slot></slot>
           </div>
         </mock:shadow-root>
@@ -26,7 +26,7 @@ describe('modus-badge', () => {
     expect(root).toEqualHtml(`
       <modus-badge>
         <mock:shadow-root>
-          <div class="badge color-primary size-medium type-default">
+          <div class="badge color-primary size-medium type-default" role="status">
             <slot></slot>
           </div>
         </mock:shadow-root>

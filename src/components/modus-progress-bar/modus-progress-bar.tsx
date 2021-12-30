@@ -67,8 +67,7 @@ export class ModusProgressBar {
         aria-valuenow={this.value}
         class={progressBarClass}
         role="progressbar"
-        style={this.getProgressBarStyle()}
-        tabIndex={0}>
+        style={this.getProgressBarStyle()}>
         <div class={progressClass} style={this.getProgressStyle(percentage)}>
           {this.text}
         </div>
