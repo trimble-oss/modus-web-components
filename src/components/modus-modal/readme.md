@@ -9,6 +9,7 @@
 
 | Property              | Attribute               | Description                                   | Type     | Default     |
 | --------------------- | ----------------------- | --------------------------------------------- | -------- | ----------- |
+| `ariaLabel`           | `aria-label`            | (optional) The modal's aria-label.            | `string` | `undefined` |
 | `headerText`          | `header-text`           | (optional) The modal's primary button text.   | `string` | `undefined` |
 | `primaryButtonText`   | `primary-button-text`   | (optional) The modal's primary button text.   | `string` | `undefined` |
 | `secondaryButtonText` | `secondary-button-text` | (optional) The modal's secondary button text. | `string` | `undefined` |

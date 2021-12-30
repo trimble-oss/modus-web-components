@@ -8,6 +8,9 @@ import { IconClose } from '../icons/icon-close';
   shadow: true,
 })
 export class ModusModal {
+  /** (optional) The modal's aria-label. */
+  @Prop() ariaLabel: string;
+
   /** (optional) The modal's primary button text. */
   @Prop() headerText: string;
 
@@ -54,9 +57,30 @@ export class ModusModal {
     }
   }
 
+  handlePrimaryKeydown(event: KeyboardEvent): void {
+    switch (event.code) {
+      case 'Enter':
+        this.primaryButtonClick.emit();
+        break;
+    }
+  }
+
+  handleSecondaryKeydown(event: KeyboardEvent): void {
+    switch (event.code) {
+      case 'Enter':
+        this.secondaryButtonClick.emit();
+        break;
+    }
+  }
+
   render(): unknown {
     return (
-      <div class={`modus-modal overlay ${this.visible ? 'visible' : 'hidden'}`} onClick={(event) => this.handleOverlayClick(event)}>
+      <div
+        aria-hidden={this.closed}
+        aria-label={this.ariaLabel}
+        class={`modus-modal overlay ${this.visible ? 'visible' : 'hidden'}`}
+        onClick={(event) => this.handleOverlayClick(event)}
+        role="dialog">
         <div class="content">
           <div class="header">
             {this.headerText}
@@ -69,11 +93,11 @@ export class ModusModal {
           </div>
           <div class="footer">
             {this.secondaryButtonText &&
-              <modus-button button-style="outline" color="secondary" onClick={() => this.secondaryButtonClick.emit()}>
+              <modus-button button-style="outline" color="secondary" onClick={() => this.secondaryButtonClick.emit()} onKeyDown={(event) => this.handlePrimaryKeydown(event)}>
                 {this.secondaryButtonText}
               </modus-button>}
             {this.primaryButtonText &&
-              <modus-button color="primary" onClick={() => this.primaryButtonClick.emit()}>
+              <modus-button color="primary" onClick={() => this.primaryButtonClick.emit()} onKeyDown={(event) => this.handleSecondaryKeydown(event)}>
                 {this.primaryButtonText}
               </modus-button>}
           </div>

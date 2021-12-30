@@ -214,6 +214,10 @@ export namespace Components {
         "type": 'info' | 'question';
     }
     interface ModusModal {
+        /**
+          * (optional) The modal's aria-label.
+         */
+        "ariaLabel": string;
         "close": () => Promise<void>;
         /**
           * (optional) The modal's primary button text.
@@ -1063,6 +1067,10 @@ declare namespace LocalJSX {
         "type"?: 'info' | 'question';
     }
     interface ModusModal {
+        /**
+          * (optional) The modal's aria-label.
+         */
+        "ariaLabel"?: string;
         /**
           * (optional) The modal's primary button text.
          */
