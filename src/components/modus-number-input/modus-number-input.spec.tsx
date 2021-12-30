@@ -1,7 +1,3 @@
-jest.mock('../../utils/utils', () => ({
-  generateRandomNumber: () => 12345,
-}));
-
 import { newSpecPage } from '@stencil/core/testing';
 import { ModusNumberInput } from './modus-number-input';
 
@@ -12,15 +8,15 @@ describe('modus-number-input', () => {
       html: '<modus-number-input></modus-number-input>',
     });
     expect(page.root).toEqualHtml(`
-        <modus-number-input>
-          <mock:shadow-root>
-            <div aria-describedby="inputDesc12345" aria-labelledby="inputLabel12345" class="modus-number-input">
-              <div class="input-container medium">
-                <input type="number">
-              </div>
+      <modus-number-input>
+        <mock:shadow-root>
+          <div class="modus-number-input">
+            <div class="input-container medium">
+              <input tabindex="0" type="number">
             </div>
-          </mock:shadow-root>
-        </modus-number-input>
+          </div>
+        </mock:shadow-root>
+      </modus-number-input>
     `);
   });
 

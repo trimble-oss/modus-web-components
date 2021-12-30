@@ -9,6 +9,9 @@ import { IconClose } from '../icons/icon-close';
   shadow: true,
 })
 export class ModusTextInput {
+  /** (optional) The input's aria-label. */
+  @Prop() ariaLabel: string;
+
   /** (optional) Whether the input has a clear button. */
   @Prop() clearable = true;
 
@@ -77,7 +80,14 @@ export class ModusTextInput {
     const className = `modus-text-input ${this.disabled ? 'disabled' : ''}`;
 
     return (
-      <div class={className}>
+      <div
+        aria-disabled={this.disabled}
+        aria-invalid={!!this.errorText}
+        aria-label={this.ariaLabel}
+        aria-placeholder={this.placeholder}
+        aria-readonly={this.readOnly}
+        aria-required={this.required}
+        class={className}>
         {this.label || this.required
          ? <div class={'label-container'}>
              {this.label ? <label>{this.label}</label> : null}{this.required ? <span class="required">*</span> : null}
@@ -96,6 +106,7 @@ export class ModusTextInput {
                    placeholder={this.placeholder}
                    readonly={this.readOnly}
                    ref={(el) => this.textInput = el as HTMLInputElement}
+                   tabIndex={0}
                    type="text"
                    value={this.value}/>
             {this.clearable && !this.readOnly && !!this.value
