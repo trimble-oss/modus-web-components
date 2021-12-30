@@ -584,6 +584,10 @@ export namespace Components {
     }
     interface ModusTooltip {
         /**
+          * (optional) The tooltip's aria-label.
+         */
+        "ariaLabel": string;
+        /**
           * (optional) The tooltip's position relative to its content.
          */
         "position": 'bottom' | 'left' | 'right' | 'top';
@@ -1490,6 +1494,10 @@ declare namespace LocalJSX {
         "type"?: 'danger' | 'dark' | 'default' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning';
     }
     interface ModusTooltip {
+        /**
+          * (optional) The tooltip's aria-label.
+         */
+        "ariaLabel"?: string;
         /**
           * (optional) The tooltip's position relative to its content.
          */

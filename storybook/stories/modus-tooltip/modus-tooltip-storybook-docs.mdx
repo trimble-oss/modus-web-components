@@ -14,8 +14,8 @@ This component utilizes the slot element, allowing you to wrap anything with a t
 </modus-tooltip>
 ```
 
+### Properties
 <section>
-  <h4>Properties</h4>
   <table>
     <thead>
     <tr>
@@ -28,6 +28,14 @@ This component utilizes the slot element, allowing you to wrap anything with a t
     </tr>
     </thead>
     <tbody>
+    <tr>
+      <td>aria-label</td>
+      <td>The tooltip's aria-label</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
     <tr>
       <td>text</td>
       <td>The tooltip's text</td>
@@ -47,4 +55,8 @@ This component utilizes the slot element, allowing you to wrap anything with a t
     </tbody>
   </table>
 </section>
+
+### Accessibility
+- Tooltip has `role` of `tooltip`.
+- Tooltip gets an `aria-label` provided by the `aria-label` property input.
 

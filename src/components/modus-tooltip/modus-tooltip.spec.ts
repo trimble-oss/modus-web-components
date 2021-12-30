@@ -12,7 +12,7 @@ describe('modus-tooltip', () => {
         <mock:shadow-root>
           <div class="modus-tooltip top">
             <slot></slot>
-            <div class="text"></div>
+            <div class="text" role="tooltip"></div>
           </div>
         </mock:shadow-root>
       </modus-tooltip>
