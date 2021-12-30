@@ -51,6 +51,10 @@ export namespace Components {
     }
     interface ModusBadge {
         /**
+          * (optional) The badge's aria-label
+         */
+        "ariaLabel": string;
+        /**
           * (optional) The color of the badge
          */
         "color": 'danger' | 'dark' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning';
@@ -92,6 +96,10 @@ export namespace Components {
         "size": 'small' | 'medium' | 'large';
     }
     interface ModusCard {
+        /**
+          * (optional) The card's aria-label.
+         */
+        "ariaLabel": string;
         /**
           * (optional) The height of the card.
          */
@@ -431,6 +439,10 @@ export namespace Components {
     }
     interface ModusSlider {
         /**
+          * (optional) The slider's aria-label.
+         */
+        "ariaLabel": string;
+        /**
           * (optional) Whether the slider is disabled. *
          */
         "disabled": boolean;
@@ -545,6 +557,10 @@ export namespace Components {
         "value": string;
     }
     interface ModusToast {
+        /**
+          * (optional) The toast's aria-label.
+         */
+        "ariaLabel": boolean;
         /**
           * (optional) Whether the toast has a dismiss button.
          */
@@ -843,6 +859,10 @@ declare namespace LocalJSX {
     }
     interface ModusBadge {
         /**
+          * (optional) The badge's aria-label
+         */
+        "ariaLabel"?: string;
+        /**
           * (optional) The color of the badge
          */
         "color"?: 'danger' | 'dark' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning';
@@ -892,6 +912,10 @@ declare namespace LocalJSX {
         "size"?: 'small' | 'medium' | 'large';
     }
     interface ModusCard {
+        /**
+          * (optional) The card's aria-label.
+         */
+        "ariaLabel"?: string;
         /**
           * (optional) The height of the card.
          */
@@ -1290,6 +1314,10 @@ declare namespace LocalJSX {
     }
     interface ModusSlider {
         /**
+          * (optional) The slider's aria-label.
+         */
+        "ariaLabel"?: string;
+        /**
           * (optional) Whether the slider is disabled. *
          */
         "disabled"?: boolean;
@@ -1424,6 +1452,10 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface ModusToast {
+        /**
+          * (optional) The toast's aria-label.
+         */
+        "ariaLabel"?: boolean;
         /**
           * (optional) Whether the toast has a dismiss button.
          */

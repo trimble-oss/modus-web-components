@@ -20,8 +20,8 @@ This component utilizes the slot element, allowing you to render your own HTML i
 </modus-card>
 ```
 
+### Properties
 <section class="properties">
-  <h4>Properties</h4>
   <table>
     <thead>
     <tr>
@@ -34,6 +34,14 @@ This component utilizes the slot element, allowing you to render your own HTML i
     </tr>
     </thead>
     <tbody>
+    <tr>
+      <td>aria-label</td>
+      <td>The card's aria-label</td>
+      <td>string</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
     <tr>
       <td>height</td>
       <td>The height of the card</td>
@@ -53,3 +61,6 @@ This component utilizes the slot element, allowing you to render your own HTML i
     </tbody>
   </table>
 </section>
+
+### Accessibility
+- Card gets an `aria-label` provided by the `aria-label` property input.

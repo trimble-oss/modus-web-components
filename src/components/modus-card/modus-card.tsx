@@ -7,6 +7,9 @@ import { Component, Prop, h } from '@stencil/core';
   shadow: true,
 })
 export class ModusCard {
+  /** (optional) The card's aria-label. */
+  @Prop() ariaLabel: string;
+
   /** (optional) The height of the card. */
   @Prop() height = '269px';
 
@@ -15,7 +18,7 @@ export class ModusCard {
 
   render(): unknown {
     return (
-      <article style={{'height': this.height, 'width': this.width}}>
+      <article aria-label={this.ariaLabel} style={{'height': this.height, 'width': this.width}}>
         <slot />
       </article>
     );

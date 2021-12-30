@@ -2,6 +2,7 @@
   @include navbar-menu;
 
   align-items: flex-start;
+  cursor: default;
   width: max-content;
 
   &.reverse {

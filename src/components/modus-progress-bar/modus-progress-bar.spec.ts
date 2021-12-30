@@ -10,7 +10,7 @@ describe('modus-progress-bar', () => {
     expect(root).toEqualHtml(`
       <modus-progress-bar>
         <mock:shadow-root>
-          <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" class="default-background-color modus-progress-bar" role="progressbar" tabindex="0">
+          <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" class="default-background-color modus-progress-bar" role="progressbar">
             <div class="default-color default-text-color progress" style="width: 0%;">
             </div>
           </div>

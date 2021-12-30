@@ -10,7 +10,7 @@ describe('modus-slider', () => {
     expect(root).toEqualHtml(`
       <modus-slider>
         <mock:shadow-root>
-          <div class="modus-slider">
+          <div aria-valuemax="100" aria-valuemin="0" class="modus-slider">
             <input class="slider" max="100" min="0" type="range">
           </div>
         </mock:shadow-root>

@@ -1,6 +1,7 @@
 .notifications-menu {
   @include navbar-menu;
 
+  cursor: default;
   width: max-content;
 
   &.reverse {

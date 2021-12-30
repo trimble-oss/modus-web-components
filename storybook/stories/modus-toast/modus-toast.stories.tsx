@@ -19,12 +19,13 @@ export default {
   },
 };
 
-const Template = ({dismissible, showIcon, type}) => html`
-  <modus-toast dismissible=${dismissible} show-icon=${showIcon} type=${type}></modus-toast>
+const Template = ({ariaLabel, dismissible, showIcon, type}) => html`
+  <modus-toast aria-label=${ariaLabel} dismissible=${dismissible} show-icon=${showIcon} type=${type}></modus-toast>
 `;
 
 export const Default = Template.bind({});
 Default.args = {
+  ariaLabel: '',
   dismissible: false,
   showIcon: false,
   type: 'default'
@@ -32,6 +33,7 @@ Default.args = {
 
 export const danger = Template.bind({});
 danger.args = {
+  ariaLabel: '',
   dismissible: false,
   showIcon: false,
   type: 'danger'
@@ -39,6 +41,7 @@ danger.args = {
 
 export const Dark = Template.bind({});
 Dark.args = {
+  ariaLabel: '',
   dismissible: false,
   showIcon: false,
   type: 'dark'
@@ -46,6 +49,7 @@ Dark.args = {
 
 export const Primary = Template.bind({});
 Primary.args = {
+  ariaLabel: '',
   dismissible: false,
   showIcon: false,
   type: 'primary'
@@ -53,6 +57,7 @@ Primary.args = {
 
 export const Secondary = Template.bind({});
 Secondary.args = {
+  ariaLabel: '',
   dismissible: false,
   showIcon: false,
   type: 'secondary'
@@ -60,6 +65,7 @@ Secondary.args = {
 
 export const Success = Template.bind({});
 Success.args = {
+  ariaLabel: '',
   dismissible: false,
   showIcon: false,
   type: 'success'
@@ -67,6 +73,7 @@ Success.args = {
 
 export const Tertiary = Template.bind({});
 Tertiary.args = {
+  ariaLabel: '',
   dismissible: false,
   showIcon: false,
   type: 'tertiary'
@@ -74,6 +81,7 @@ Tertiary.args = {
 
 export const Warning = Template.bind({});
 Warning.args = {
+  ariaLabel: '',
   dismissible: false,
   showIcon: false,
   type: 'warning'

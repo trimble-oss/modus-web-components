@@ -13,6 +13,9 @@ import { IconClose } from '../icons/icon-close';
   shadow: true,
 })
 export class ModusToast {
+  /** (optional) The toast's aria-label. */
+  @Prop() ariaLabel: boolean;
+
   /** (optional) Whether the toast has a dismiss button. */
   @Prop() dismissible: boolean;
 
@@ -52,7 +55,7 @@ export class ModusToast {
     const className = `modus-toast ${this.classByType.get(this.type)}`;
 
     return (
-      <div class={className}>
+      <div aria-label={this.ariaLabel} class={className} role="status">
         {this.showIcon && icon}
         <span class={'text'}>
           <slot />
