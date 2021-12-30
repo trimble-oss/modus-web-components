@@ -16,7 +16,7 @@ describe('modus-navbar', () => {
             </div>
             <div class="right">
               <div class="profile-menu">
-                <span class="initials"></span>
+                <span class="initials" tabindex="0"></span>
               </div>
             </div>
           </nav>

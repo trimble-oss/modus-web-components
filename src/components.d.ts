@@ -12,6 +12,10 @@ import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { Tab } from "./components/modus-tabs/modus-tabs";
 export namespace Components {
     interface ModusAccordion {
+        /**
+          * (optional) The accordion's aria-label.
+         */
+        "ariaLabel": string;
     }
     interface ModusAccordionItem {
         /**
@@ -174,6 +178,10 @@ export namespace Components {
         "value": string;
     }
     interface ModusDropdown {
+        /**
+          * (optional) The dropdown's aria-label.
+         */
+        "ariaLabel": string;
         /**
           * (optional) Disables the dropdown
          */
@@ -351,6 +359,7 @@ export namespace Components {
     }
     interface ModusPagination {
         "activePage": number;
+        "ariaLabel": string;
         "maxPage": number;
         "minPage": number;
         "size": 'large' | 'medium' | 'small';
@@ -833,6 +842,10 @@ declare global {
 }
 declare namespace LocalJSX {
     interface ModusAccordion {
+        /**
+          * (optional) The accordion's aria-label.
+         */
+        "ariaLabel"?: string;
     }
     interface ModusAccordionItem {
         /**
@@ -1027,6 +1040,10 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface ModusDropdown {
+        /**
+          * (optional) The dropdown's aria-label.
+         */
+        "ariaLabel"?: string;
         /**
           * (optional) Disables the dropdown
          */
@@ -1239,6 +1256,7 @@ declare namespace LocalJSX {
     }
     interface ModusPagination {
         "activePage"?: number;
+        "ariaLabel"?: string;
         "maxPage"?: number;
         "minPage"?: number;
         /**

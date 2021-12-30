@@ -31,8 +31,8 @@ The `<modus-accordion-item>` utilizes the slot element, allowing you to render y
 </modus-accordion>
 ```
 
+### Properties
 <section>
-  <h4>Properties</h4>
   <h5>Modus Accordion Item</h5>
   <table>
     <thead>
@@ -46,6 +46,14 @@ The `<modus-accordion-item>` utilizes the slot element, allowing you to render y
     </tr>
     </thead>
     <tbody>
+    <tr>
+      <td>aria-label</td>
+      <td>The accordion's aria-label</td>
+      <td>string</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
     <tr>
       <td>disabled</td>
       <td>Disables the accordion item</td>
@@ -82,8 +90,8 @@ The `<modus-accordion-item>` utilizes the slot element, allowing you to render y
   </table>
 </section>
 
+### DOM Events
 <section>
-  <h4>DOM Events</h4>
   <h5>Modus Accordion Item</h5>
   <table>
     <thead>
@@ -107,3 +115,7 @@ The `<modus-accordion-item>` utilizes the slot element, allowing you to render y
     </tbody>
   </table>
 </section>
+
+### Accessibility
+- Accordion gets an `aria-label` provided by the `aria-label` property input.
+- When an Accordion Item has focus, **Enter** toggles it, and emits the appropriate `closed` or `open` event.

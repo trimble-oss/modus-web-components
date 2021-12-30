@@ -7,6 +7,9 @@ import { Component, Prop, h, Event, EventEmitter, Listen, State } from '@stencil
   shadow: true,
 })
 export class ModusDropdown {
+  /** (optional) The dropdown's aria-label. */
+  @Prop() ariaLabel: string;
+
   /** (optional) Disables the dropdown */
   @Prop() disabled: boolean; // TODO
 
@@ -55,7 +58,7 @@ export class ModusDropdown {
     const width = `${this.toggleElement.offsetWidth ? this.toggleElement.offsetWidth : 0}px`;
 
     return (
-      <div class="dropdown">
+      <div aria-label={this.ariaLabel} class="dropdown" role="listbox">
         <slot name="dropdownToggle" />
         <div class={listContainerClass} style={{'left': left, 'min-width': width}}>
           <slot name="dropdownList" />

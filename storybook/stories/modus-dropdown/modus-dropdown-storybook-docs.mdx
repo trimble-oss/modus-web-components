@@ -26,8 +26,8 @@ Implementation Details
 </modus-dropdown>
 ```
 
+### Properties
 <section>
-  <h4>Properties</h4>
   <table>
     <thead>
     <tr>
@@ -49,6 +49,14 @@ Implementation Details
       <td><span class="material-icons">&#10004;</span></td>
     </tr>
     <tr>
+      <td>aria-label</td>
+      <td>The dropdown's aria-label</td>
+      <td>string</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
       <td>disabled</td>
       <td>Disables the button</td>
       <td>boolean</td>
@@ -68,8 +76,8 @@ Implementation Details
   </table>
 </section>
 
+### DOM Events
 <section>
-  <h4>DOM Events</h4>
   <table>
     <thead>
     <tr>
@@ -87,4 +95,8 @@ Implementation Details
     </tbody>
   </table>
 </section>
+
+### Accessibility
+- Dropdown has `role` of `listbox`.
+- When the Dropdown Toggle has focus, **Enter** toggles the dropdown.
 

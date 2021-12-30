@@ -10,6 +10,7 @@
 | Property     | Attribute     | Description | Type                             | Default     |
 | ------------ | ------------- | ----------- | -------------------------------- | ----------- |
 | `activePage` | `active-page` |             | `number`                         | `undefined` |
+| `ariaLabel`  | `aria-label`  |             | `string`                         | `undefined` |
 | `maxPage`    | `max-page`    |             | `number`                         | `undefined` |
 | `minPage`    | `min-page`    |             | `number`                         | `undefined` |
 | `size`       | `size`        |             | `"large" \| "medium" \| "small"` | `'medium'`  |

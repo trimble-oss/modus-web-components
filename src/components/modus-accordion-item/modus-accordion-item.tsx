@@ -43,6 +43,12 @@ export class ModusAccordionItem {
     }
   }
 
+  handleKeydown(event: KeyboardEvent): void {
+    if (event.code !== 'Enter') { return; }
+
+    this.handleHeaderClick();
+  }
+
   render(): unknown {
     const sizeClass = `${this.classBySize.get(this.size)}`;
     const disabledClass = `${this.disabled ? 'disabled' : ''}`;
@@ -50,8 +56,8 @@ export class ModusAccordionItem {
     const bodyClass = `body ${sizeClass} ${this.expanded ? 'expanded' : ''}`;
 
     return (
-      <div class="accordion-item">
-        <div class={`header ${sizeClass} ${disabledClass}`} onClick={() => this.handleHeaderClick()}>
+      <div aria-disabled={this.disabled} aria-expanded={this.expanded} class="accordion-item" role="region">
+        <div class={`header ${sizeClass} ${disabledClass}`} onClick={() => this.handleHeaderClick()} onKeyDown={(event) => this.handleKeydown(event)} tabIndex={0}>
           <span class="title">{this.headerText}</span>
           {this.expanded ? <IconChevronUpThick size={iconSize}></IconChevronUpThick> : <IconChevronDownThick size={iconSize}></IconChevronDownThick>}
         </div>
