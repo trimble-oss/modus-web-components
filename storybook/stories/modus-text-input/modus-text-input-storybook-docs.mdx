@@ -21,8 +21,8 @@ This component is compatible with Angular reactive forms. This can be achieved t
 <modus-text-input label="Text Input Demo 6" placeholder="Placeholder" value="Value" size="large" include-search-icon></modus-text-input>
 ```
 
+### Properties
 <section>
-  <h4>Properties</h4>
   <table>
     <thead>
     <tr>
@@ -35,6 +35,14 @@ This component is compatible with Angular reactive forms. This can be achieved t
     </tr>
     </thead>
     <tbody>
+    <tr>
+      <td>aria-label</td>
+      <td>The input's aria-label</td>
+      <td>string</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
     <tr>
       <td>clearable</td>
       <td>Whether the text input can be cleared</td>
@@ -151,8 +159,8 @@ This component is compatible with Angular reactive forms. This can be achieved t
   </table>
 </section>
 
+### DOM Events
 <section>
-  <h4>DOM Events</h4>
   <table>
     <thead>
     <tr>
@@ -170,4 +178,12 @@ This component is compatible with Angular reactive forms. This can be achieved t
     </tbody>
   </table>
 </section>
+
+### Accessibility
+- Text Input gets an `aria-label` provided by the `aria-label` property input.
+- Text Input gets an `aria-disabled` set to whether Text Input is disabled.
+- Text Input gets an `aria-placeholder` provided by the `placeholder` property input.
+- Text Input gets an `aria-invalid` set to whether Text Input is invalid.
+- Text Input gets an `aria-readonly` set to whether Text Input is readonly.
+- Text Input gets an `aria-required` set to whether Text Input is required.
 

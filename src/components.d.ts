@@ -285,6 +285,10 @@ export namespace Components {
     }
     interface ModusNumberInput {
         /**
+          * (optional) The input's aria-label.
+         */
+        "ariaLabel": string;
+        /**
           * (optional) Whether the input is disabled.
          */
         "disabled": boolean;
@@ -499,6 +503,10 @@ export namespace Components {
         "tabs": Tab[];
     }
     interface ModusTextInput {
+        /**
+          * (optional) The input's aria-label.
+         */
+        "ariaLabel": string;
         /**
           * (optional) Whether the input has a clear button.
          */
@@ -1144,6 +1152,10 @@ declare namespace LocalJSX {
     }
     interface ModusNumberInput {
         /**
+          * (optional) The input's aria-label.
+         */
+        "ariaLabel"?: string;
+        /**
           * (optional) Whether the input is disabled.
          */
         "disabled"?: boolean;
@@ -1390,6 +1402,10 @@ declare namespace LocalJSX {
         "tabs"?: Tab[];
     }
     interface ModusTextInput {
+        /**
+          * (optional) The input's aria-label.
+         */
+        "ariaLabel"?: string;
         /**
           * (optional) Whether the input has a clear button.
          */

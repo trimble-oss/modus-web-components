@@ -12,7 +12,7 @@ describe('modus-text-input', () => {
         <mock:shadow-root>
             <div class="modus-text-input">
                 <div class="input-container medium">
-                    <input class="has-right-icon" type="text">
+                    <input class="has-right-icon" type="text" tabindex="0">
                     <span class="icons"></span>
                 </div>
             </div>

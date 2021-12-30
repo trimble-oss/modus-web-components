@@ -1,6 +1,5 @@
 // eslint-disable-next-line
 import { Component, Event, EventEmitter, h, Prop, Watch } from '@stencil/core';
-import { generateRandomNumber } from '../../utils/utils';
 
 @Component({
   tag: 'modus-number-input',
@@ -8,6 +7,9 @@ import { generateRandomNumber } from '../../utils/utils';
   shadow: true,
 })
 export class ModusNumberInput {
+  /** (optional) The input's aria-label. */
+  @Prop() ariaLabel: string;
+
   /** (optional) Whether the input is disabled. */
   @Prop() disabled: boolean;
 
@@ -50,16 +52,11 @@ export class ModusNumberInput {
   /** An event that fires on input value change. */
   @Event() valueChange: EventEmitter<string>;
 
-  accessibilityId: number;
   classBySize: Map<string, string> = new Map([
     ['medium', 'medium'],
     ['large', 'large']
   ]);
   numberInput: HTMLInputElement;
-
-  componentWillLoad(): void {
-    this.accessibilityId = generateRandomNumber();
-  }
 
   handleOnInput(): void {
     this.value = this.numberInput.value;
@@ -80,20 +77,21 @@ export class ModusNumberInput {
     const className = `modus-number-input ${this.disabled ? 'disabled' : ''}`;
     const inputContainerClassName = `input-container ${this.errorText ? 'error' : this.validText ? 'valid' : ''} ${this.classBySize.get(this.size)}`;
 
-    const inputLabel = `inputLabel${this.accessibilityId}`;
-    const inputDesc = `inputDesc${this.accessibilityId}`;
-
     return (
       <div
-        class={className}
-        aria-describedby={inputDesc}
-        aria-labelledby={inputLabel}
+        aria-disabled={this.disabled}
+        aria-label={this.ariaLabel}
         aria-placeholder={this.placeholder}
+        aria-invalid={!!this.errorText}
         aria-readonly={this.readOnly}
-        aria-required={this.required}>
+        aria-required={this.required}
+        aria-valuemax={this.maxValue}
+        aria-valuemin={this.minValue}
+        aria-valuenow={this.value}
+        class={className}>
         {this.label || this.required
          ? <div class="label-container">
-            {this.label ? <label id={inputLabel}>{this.label}</label> : null}{this.required ? <span class="required">*</span> : null}
+            {this.label ? <label>{this.label}</label> : null}{this.required ? <span class="required">*</span> : null}
            </div>
          : null
         }
@@ -107,14 +105,15 @@ export class ModusNumberInput {
             readonly={this.readOnly}
             ref={(el) => this.numberInput = el as HTMLInputElement}
             step={this.step}
+            tabIndex={0}
             type="number"
             value={this.value}>
           </input>
         </div>
         {
-          this.errorText ? <label class="sub-text error" id={inputDesc}>{this.errorText}</label> :
-          this.validText ? <label class="sub-text valid" id={inputDesc}>{this.validText}</label> :
-          this.helperText ? <label class="sub-text helper" id={inputDesc}>{this.helperText}</label> :
+          this.errorText ? <label class="sub-text error">{this.errorText}</label> :
+          this.validText ? <label class="sub-text valid">{this.validText}</label> :
+          this.helperText ? <label class="sub-text helper">{this.helperText}</label> :
           null
         }
       </div>
