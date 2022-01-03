@@ -24,7 +24,6 @@
       top: 0;
       transition: .2s;
       width: 1.875rem;
-      -webkit-transition: .2s;
     }
 
     .slider::before {
@@ -35,7 +34,6 @@
       position: absolute;
       transition: .2s;
       width: $rem-14px;
-      -webkit-transition: .2s;
     }
 
     &.checked {
@@ -48,8 +46,6 @@
 
       .slider::before {
         transform: translateX($rem-16px);
-        -ms-transform: translateX($rem-16px);
-        -webkit-transform: translateX($rem-16px);
       }
     }
 
