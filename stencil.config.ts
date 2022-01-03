@@ -1,5 +1,7 @@
 import { Config } from '@stencil/core';
 import { sass } from '@stencil/sass';
+import { postcss } from '@stencil/postcss';
+import autoprefixer from 'autoprefixer';
 
 export const config: Config = {
   namespace: 'modus-web-components',
@@ -21,6 +23,9 @@ export const config: Config = {
     },
   ],
   plugins: [
+    postcss({
+      plugins: [autoprefixer()]
+    }),
     sass({
       injectGlobalPaths: [
         'src/global/modus-functions.scss', // adds @import 'src/global/modus-functions.scss' statement
@@ -29,6 +34,6 @@ export const config: Config = {
         'src/global/modus-variables.scss', // adds @import 'src/global/modus-variables.scss' statement
         'src/global/shared-mixins.scss',
       ]
-    })
+    }),
   ],
 };

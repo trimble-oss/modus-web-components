@@ -5,10 +5,10 @@
   justify-content: center;
 
   .slider {
+    appearance: none;
     background: $col_trimble_blue_mid;
     border-radius: $rem-8px;
     height: $rem-8px;
-    -webkit-appearance: none;
   }
 
   label {
@@ -31,7 +31,6 @@
     height: $rem-16px;
     transition: .2s background;
     width: $rem-16px;
-    -webkit-appearance: none;
 
     &:hover {
       background: $col_trimble_blue_mid;
