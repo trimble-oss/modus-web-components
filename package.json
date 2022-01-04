@@ -14,10 +14,10 @@
     "registry": "https://npm.pkg.github.com/trimble-oss"
   },
   "main": "dist/index.cjs.js",
-  "module": "dist/custom-elements/index.js",
+  "module": "dist/index.js",
   "es2015": "dist/esm/index.mjs",
   "es2017": "dist/esm/index.mjs",
-  "types": "dist/custom-elements/index.d.ts",
+  "types": "dist/types/components.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "collection:main": "dist/collection/index.js",
   "unpkg": "dist/modus-web-components/modus-web-components.esm.js",
@@ -38,7 +38,7 @@
     "ci-storybook": "cd storybook && npm ci && npm run build-storybook"
   },
   "dependencies": {
-    "@stencil/core": "2.9.0"
+    "@stencil/core": "2.12.0"
   },
   "devDependencies": {
     "@stencil/postcss": "^2.1.0",
@@ -47,8 +47,8 @@
     "@types/jest": "^27.4.0",
     "@types/puppeteer": "^5.4.4",
     "@types/puppeteer-core": "^5.4.0",
-    "@typescript-eslint/eslint-plugin": "^5.8.1",
-    "@typescript-eslint/parser": "^5.8.1",
+    "@typescript-eslint/eslint-plugin": "^5.9.0",
+    "@typescript-eslint/parser": "^5.9.0",
     "autoprefixer": "^10.4.1",
     "eslint": "^8.6.0",
     "eslint-plugin-storybook": "^0.5.5",
