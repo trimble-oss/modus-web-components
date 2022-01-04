@@ -38,24 +38,27 @@
     "ci-storybook": "cd storybook && npm ci && npm run build-storybook"
   },
   "dependencies": {
-    "@stencil/core": "2.9.0"
+    "@stencil/core": "2.12.0"
   },
   "devDependencies": {
+    "@stencil/postcss": "^2.1.0",
     "@stencil/sass": "^1.5.2",
-    "@types/jest": "^27.0.3",
+    "@types/autoprefixer": "^10.2.0",
+    "@types/jest": "^27.4.0",
     "@types/puppeteer": "^5.4.4",
     "@types/puppeteer-core": "^5.4.0",
     "@typescript-eslint/eslint-plugin": "^5.8.1",
     "@typescript-eslint/parser": "^5.8.1",
-    "eslint": "^8.4.0",
-    "jest": "^27.4.5",
+    "autoprefixer": "^10.4.1",
+    "eslint": "^8.6.0",
+    "eslint-plugin-storybook": "^0.5.5",
+    "jest": "^27.4.0",
     "jest-cli": "26.5.3",
-    "puppeteer": "^12.0.1",
+    "puppeteer": "^13.0.1",
     "puppeteer-core": "^13.0.1",
-    "stylelint": "^14.1.0",
+    "stylelint": "^14.2.0",
     "stylelint-config-standard-scss": "^3.0.0",
-    "typescript": "^4.5.4",
-    "eslint-plugin-storybook": "^0.5.3"
+    "typescript": "^4.5.4"
   },
   "license": "UNLICENSED"
 }
