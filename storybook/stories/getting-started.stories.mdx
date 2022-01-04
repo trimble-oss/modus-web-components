@@ -16,8 +16,27 @@ import { Meta } from '@storybook/addon-docs';
 
 # Getting Started
 
-Under Construction - Follow the steps under 'Getting Started' of this [git repo](https://github.com/trimble-oss/modus-web-components-portal#readme) until official public release. Once released install will be as simple as adding a reference to your package.json file.
+## Generating a GitHub PAT
+The Modus Web Component NPM package is hosted privately through GitHub packages. To consume this package, you must have access to the Trimble OSS organization and create a GitHub PAT.
+  - Generate a GitHub PAT with 'read:packages' permissions by following [these steps](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
+  - Once you have generated your PAT, make sure to enable its SSO by clicking 'Enable SSO' on the PAT page in your GitHub Developer Settings.
+  - Create a local OS environment variable on your machine named `NPM_AUTH_TOKEN` using the generated GitHub PAT. This will give you permission to read the package locally.
+    - In Windows, you can do this by opening 'Environment Variables' and adding a new 'System Variable'.
+    - In Mac, you can do this by adding an environment variable to your `.bash-profile` and executing the updated file.
 
-Stencil provides documentation on popular [framework integrations](https://stenciljs.com/docs/overview).
+## Installation
+Now that you've generated a PAT and are referencing it locally, you will have access to the package through NPM. Make sure you have the NPM CLI installed.
+  - From the root of your application, run `npm install @trimble-oss/modus-web-components`.
+  - The package exposes the `defineCustomElements()` method which will define every component in the bundle. It does not run automatically, so you must import it and execute it yourself. We recommend you do this near the root of your application like so:
+  ```javascript
+  import { defineCustomElements } from "@trimble-oss/modus-web-components";
 
-Recommended - Abstract away from 3rd party libraries. Consider wrapping each Modus Web Component in a component native to your application.
+  defineCustomElements();
+  ```
+  - You can now reference the Modus Web Components like any other standard HTML element:
+  ```html
+  <modus-alert message="You've installed Modus Web Components!" type="success" />
+  ```
+
+## Recommendations
+- Abstract away from 3rd party libraries. Consider wrapping each Modus Web Component in a component native to your application.
