@@ -1,4 +1,5 @@
 import { defineCustomElements } from '../../loader';
+import yourTheme from './your-theme';
 
 defineCustomElements();
 
@@ -9,6 +10,9 @@ export const parameters = {
       color: /(background|color)$/i,
       date: /Date$/,
     },
+  },
+  docs: {
+    theme: yourTheme,
   },
   options: {
     storySort: {
