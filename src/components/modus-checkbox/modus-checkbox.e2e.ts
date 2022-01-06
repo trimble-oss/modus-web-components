@@ -123,4 +123,42 @@ describe('modus-checkbox', () => {
     expect(await modusCheckbox.getProperty('checked')).toBeFalsy();
     expect(await input.getProperty('checked')).toBeFalsy();
   });
+
+  it('updates indeterminate correctly', async () => {
+    /*
+      Indeterminate cannot be set to true through a click, only programmatically.
+      This means, once the user clicks the checkbox, indeterminate is only able to be set again through JS.
+      Indeterminate and checked can both be true (with the indeterminate dash taking visual precedence).
+      This should not be confused with a "tri-state" where it's either checked, unchecked, or indeterminate.
+    */
+
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-checkbox checked="false" indeterminate="true"></modus-checkbox>');
+    const modusCheckbox = await page.find('modus-checkbox');
+    const element = await page.find('modus-checkbox >>> .modus-checkbox')
+    await page.waitForChanges();
+
+    const input = await page.find('modus-checkbox >>> input');
+    expect(await modusCheckbox.getProperty('checked')).toBeFalsy();
+    expect(await input.getProperty('checked')).toBeFalsy();
+    expect(await modusCheckbox.getProperty('indeterminate')).toBeTruthy();
+    expect(await input.getProperty('indeterminate')).toBeTruthy();
+
+    await element.click();
+    await page.waitForChanges();
+
+    expect(await modusCheckbox.getProperty('checked')).toBeTruthy();
+    expect(await input.getProperty('checked')).toBeTruthy();
+    expect(await modusCheckbox.getProperty('indeterminate')).toBeFalsy();
+    expect(await input.getProperty('indeterminate')).toBeFalsy();
+
+    await element.click();
+    await page.waitForChanges();
+
+    expect(await modusCheckbox.getProperty('checked')).toBeFalsy();
+    expect(await input.getProperty('checked')).toBeFalsy();
+    expect(await modusCheckbox.getProperty('indeterminate')).toBeFalsy();
+    expect(await input.getProperty('indeterminate')).toBeFalsy();
+  });
 });

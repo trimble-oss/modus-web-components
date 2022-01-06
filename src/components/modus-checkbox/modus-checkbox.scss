@@ -19,7 +19,7 @@
     margin: 0 .28rem;
     transition: background-color .15s ease-in-out;
 
-    &.checked {
+    &.blue-background {
       background-color: $col_trimble_blue_mid;
       border: 2px solid $col_trimble_blue_mid;
     }
@@ -37,12 +37,13 @@
     .checkmark {
       align-items: center;
       display: flex;
+      justify-content: center;
       transform: scale(0);
       transition: transform .25s ease-in-out;
       visibility: hidden;
 
       &.checked {
-        transform: scale(1);
+        transform: scale(0.75);
         visibility: visible;
       }
     }

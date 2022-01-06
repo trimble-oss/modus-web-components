@@ -1,9 +1,13 @@
+import { Anchor } from '@storybook/addon-docs';
+
 # Checkbox
 ---
 
 [Modus Checkbox](https://modus.trimble.com/elements/checkboxes/) web components are wrappers around native `<input type="checkbox">` elements. They are referenced using the `<modus-checkbox>` custom HTML element.
 
 This component is compatible with Angular reactive forms. This can be achieved through the implementation of a simple directive.
+
+<Anchor storyId="user-inputs-checkbox--default" />
 
 ### Default
 <modus-checkbox></modus-checkbox><br />
@@ -13,6 +17,11 @@ This component is compatible with Angular reactive forms. This can be achieved t
 <modus-checkbox checked disabled label="Checkbox"></modus-checkbox><br />
 <modus-checkbox label="Small Checkbox" size="small"></modus-checkbox>
 
+<Anchor storyId="user-inputs-checkbox--indeterminate" />
+
+### Indeterminate
+<modus-checkbox indeterminate></modus-checkbox>
+
 ```html
 <modus-checkbox></modus-checkbox>
 <modus-checkbox disabled></modus-checkbox>
@@ -20,6 +29,8 @@ This component is compatible with Angular reactive forms. This can be achieved t
 <modus-checkbox disabled label="Checkbox"></modus-checkbox>
 <modus-checkbox checked disabled label="Checkbox"></modus-checkbox>
 <modus-checkbox label="Small Checkbox" size="small"></modus-checkbox>
+
+<modus-checkbox indeterminate></modus-checkbox>
 ```
 
 ### Properties
@@ -55,6 +66,14 @@ This component is compatible with Angular reactive forms. This can be achieved t
     <tr>
       <td>disabled</td>
       <td>Whether the checkbox is disabled</td>
+      <td>boolean</td>
+      <td></td>
+      <td>false</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>indeterminate</td>
+      <td>Whether the checkbox is indeterminate</td>
       <td>boolean</td>
       <td></td>
       <td>false</td>
