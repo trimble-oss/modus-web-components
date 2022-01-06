@@ -26,6 +26,13 @@ export default {
         type: { summary: 'boolean' },
       }
     },
+    indeterminate: {
+      description: 'Whether the checkbox is indeterminate',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' }
+      }
+    },
     label: {
       description: 'The checkbox\'s label',
       table: {
@@ -58,11 +65,14 @@ export default {
   },
 };
 
-const Template = ({ ariaLabel, checked, disabled, label, size }) => html`
-  <modus-checkbox aria-label=${ariaLabel} checked=${checked} disabled=${disabled} label=${label} size=${size}></modus-checkbox>
+const Template = ({ ariaLabel, checked, disabled, indeterminate, label, size }) => html`
+  <modus-checkbox aria-label=${ariaLabel} checked=${checked} disabled=${disabled} indeterminate=${indeterminate} label=${label} size=${size}></modus-checkbox>
 `;
 
 export const Default = Template.bind({});
-Default.args = { ariaLabel: '', checked: false, disabled: false, label: 'Checkbox', size: 'medium' };
+Default.args = { ariaLabel: '', checked: false, disabled: false, indeterminate: false, label: 'Checkbox', size: 'medium' };
+
+export const Indeterminate = Template.bind({});
+Indeterminate.args = { ariaLabel: '', checked: false, disabled: false, indeterminate: true, label: 'Checkbox', size: 'medium' };
 
 

@@ -1,6 +1,7 @@
 // eslint-disable-next-line
 import { Component, Prop, h, Event, EventEmitter, Listen } from '@stencil/core';
 import { IconCheck } from '../icons/icon-check';
+import { IconIndeterminate } from '../icons/icon-indeterminate';
 
 @Component({
   tag: 'modus-checkbox',
@@ -16,6 +17,9 @@ export class ModusCheckbox {
 
   /** (optional) Whether the checkbox is disabled. */
   @Prop() disabled: boolean;
+
+  /** (optional) Whether the checkbox is indeterminate. */
+  @Prop({ mutable: true }) indeterminate: boolean;
 
   /** (optional) The checkbox label. */
   @Prop() label: string;
@@ -51,6 +55,10 @@ export class ModusCheckbox {
     }
   }
 
+  componentDidRender(): void {
+    this.checkboxInput.indeterminate = this.indeterminate;
+  }
+
   handleCheckboxClick(): void {
     if (this.disabled) { return; }
 
@@ -61,6 +69,7 @@ export class ModusCheckbox {
   updateChecked(): void {
     this.checked = !this.checked;
     this.checkboxInput.checked = this.checked;
+    this.indeterminate = false;
   }
 
   render(): unknown {
@@ -68,8 +77,15 @@ export class ModusCheckbox {
 
     return (
       <div class={className} onClick={() => this.handleCheckboxClick()} tabIndex={0}>
-        <div class={`${this.checked ? 'checkbox checked' : 'checkbox'} ${this.disabled ? 'disabled' : ''}`}>
-          <div class={this.checked ? 'checkmark checked' : 'checkmark'}><IconCheck color="#FFFFFF" size="24"/></div>
+        <div class={`${this.checked || this.indeterminate ? 'checkbox blue-background' : 'checkbox'} ${this.disabled ? 'disabled' : ''}`}>
+          {this.indeterminate
+            ? <div class={'checkmark checked'}>
+                <IconIndeterminate color="#FFFFFF" size="24" />
+              </div>
+            : <div class={this.checked ? 'checkmark checked' : 'checkmark'}>
+                <IconCheck color="#FFFFFF" size="24" />
+              </div>
+          }
         </div>
         <input
           aria-checked={this.checked}
