@@ -15,7 +15,8 @@ export default {
       canvas: {
         hidden: true
       }
-    }
+    },
+    viewMode: 'docs'
   },
 };
 
