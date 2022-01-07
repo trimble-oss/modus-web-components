@@ -74,7 +74,7 @@ $font-size-base:              $rem-16px !default;
 $font-size-small:             $rem-12px !default;
 $font-size-large:             $rem-14px !default;
 $icon-font-size-base:         $rem-16px !default;
-$small-font-size:             75% !default;
+$small-font-size:             $rem-12px !default;
 $body-font-size:              $font-size-large !default;
 
 $font-weight-semi-bold:       600 !default;
@@ -357,6 +357,7 @@ $modal-backdrop-opacity:            .75 !default;
 $modal-title-font-size:             $rem-16px !default;
 $modal-title-line-height:           1.75 !default;
 
+$modal-header-border-color:         $col_gray_0 !default;
 $modal-header-height:               4.25rem !default;
 $modal-header-padding-y:            1rem !default;
 $modal-header-padding-x:            1rem !default;
@@ -417,8 +418,8 @@ $chip-font-weight:                  600 !default;
 $chip-border-radius:                1rem !default;
 $chip-font-size:                    $rem-13px !default;
 $chip-padding-y:                    $rem-2px !default;
-$chip-base-color:                   $gray-200 !default;
-$chip-font-color:                   $gray-700 !default;
+$chip-base-color:                   $col_gray_1 !default;
+$chip-font-color:                   $col_gray_9 !default;
 
 $chip-sm-font-size:                 $rem-12px !default;
 $chip-sm-padding-y:                 $rem-2px !default;
@@ -444,5 +445,3 @@ $accordion-active-border-color:     ui-color('active') !default;
 // $accordion-indicator-closed:        str-replace(url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2726%27%20height%3D%2716%27%3E%3Cpath%20fill%3D%22#{$control-element-color}%22%20d%3D%27M3.5%2C0.6l9.7%2C9.8l9.7-9.8c0.7-0.8%2C2-0.7%2C2.7%2C0l0.1%2C0.1c0.7%2C0.8%2C0.7%2C2%2C0%2C2.7L13.2%2C16L0.8%2C3.4C0%2C2.6%2C0%2C1.4%2C0.8%2C0.6l0.1-0.1C1.6-0.2%2C2.8-0.2%2C3.5%2C0.6z%27%2F%3E%3C%2Fsvg%3E%0A"), "#", "%23") !default;
 // $accordion-indicator-open:          str-replace(url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2726%27%20height%3D%2716%27%3E%3Cpath%20transform%3D%22rotate%28180%2C%2013%2C%208%29%22%20fill%3D%22#{$control-element-color}%22%20d%3D%27M3.5%2C0.6l9.7%2C9.8l9.7-9.8c0.7-0.8%2C2-0.7%2C2.7%2C0l0.1%2C0.1c0.7%2C0.8%2C0.7%2C2%2C0%2C2.7L13.2%2C16L0.8%2C3.4C0%2C2.6%2C0%2C1.4%2C0.8%2C0.6l0.1-0.1C1.6-0.2%2C2.8-0.2%2C3.5%2C0.6z%27%2F%3E%3C%2Fsvg%3E%0D%0A"), "#", "%23") !default;
 
-// Modals
-$modal-header-border-color:  $col_gray_0 !default;

@@ -6,7 +6,7 @@
 
   .slider {
     appearance: none;
-    background: $col_trimble_blue_mid;
+    background: $col_trimble_blue;
     border-radius: $rem-8px;
     height: $rem-8px;
   }
@@ -25,7 +25,7 @@
   .slider::-webkit-slider-thumb {
     appearance: none;
     background: $col_white;
-    border: $rem-2px solid $col_trimble_blue_mid;
+    border: $rem-2px solid $col_trimble_blue;
     border-radius: 50%;
     cursor: pointer;
     height: $rem-16px;
@@ -33,13 +33,13 @@
     width: $rem-16px;
 
     &:hover {
-      background: $col_trimble_blue_mid;
+      background: $col_trimble_blue;
     }
   }
 
   .slider::-moz-range-thumb {
     background: $col_white;
-    border: $rem-2px solid $col_trimble_blue_mid;
+    border: $rem-2px solid $col_trimble_blue;
     border-radius: 50%;
     cursor: pointer;
     height: $rem-16px;
@@ -47,7 +47,7 @@
     width: $rem-16px;
 
     &:hover {
-      background: $col_trimble_blue_mid;
+      background: $col_trimble_blue;
     }
   }
 

@@ -20,8 +20,8 @@
     transition: background-color .15s ease-in-out;
 
     &.blue-background {
-      background-color: $col_trimble_blue_mid;
-      border: 2px solid $col_trimble_blue_mid;
+      background-color: $col_trimble_blue;
+      border: 2px solid $col_trimble_blue;
     }
 
     &.disabled {

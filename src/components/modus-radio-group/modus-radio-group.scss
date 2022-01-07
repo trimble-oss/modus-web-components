@@ -31,7 +31,7 @@ ul {
     }
 
     .checkmark::after {
-      background: $col_trimble_blue_mid;
+      background: $col_trimble_blue;
       border-radius: 50%;
       content: "";
       display: none;
@@ -44,7 +44,7 @@ ul {
 
     input:checked ~ .checkmark {
       background-color: transparent;
-      border-color: $col_trimble_blue_mid;
+      border-color: $col_trimble_blue;
     }
 
     input:checked ~ .checkmark::after {
@@ -58,12 +58,12 @@ ul {
   }
 
   &:active .radio .checkmark {
-    background-color: $col_trimble_blue_mid;
-    border-color: $col_trimble_blue_mid;
+    background-color: $col_trimble_blue;
+    border-color: $col_trimble_blue;
   }
 
   &:hover .radio .checkmark {
-    border-color: $col_trimble_blue_mid;
+    border-color: $col_trimble_blue;
   }
 
   &.disabled {

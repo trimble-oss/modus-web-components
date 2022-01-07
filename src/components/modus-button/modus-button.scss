@@ -108,8 +108,8 @@ button {
     &.color-tertiary {
       background-color: $tertiary;
       border-color: $tertiary;
-      color: $col_gray_dark_3;
-      fill: $col_gray_dark_3;
+      color: $col_gray_10;
+      fill: $col_gray_10;
     }
 
     &.color-tertiary:hover:not([disabled]) {
@@ -143,9 +143,9 @@ button {
   &.style-outline {
     &.color-primary {
       background-color: transparent;
-      border-color: $col_trimble_blue_mid;
-      color: $col_trimble_blue_mid;
-      fill: $col_trimble_blue_mid;
+      border-color: $col_trimble_blue;
+      color: $col_trimble_blue;
+      fill: $col_trimble_blue;
     }
 
     &.color-primary:hover:not([disabled]) {

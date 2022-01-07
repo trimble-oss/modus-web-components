@@ -37,11 +37,11 @@
     }
 
     &.checked {
-      background-color: $col_blue_alt;
-      border-color: $col_blue_alt;
+      background-color: $col_blue_light;
+      border-color: $col_blue_light;
 
       .slider {
-        background-color: $col_blue_alt;
+        background-color: $col_blue_light;
       }
 
       .slider::before {
@@ -50,12 +50,12 @@
     }
 
     &:active .slider {
-      background-color: $col_blue_alt;
+      background-color: $col_blue_light;
     }
   }
 
   &:hover .switch {
-    border-color: $col_blue_alt;
+    border-color: $col_blue_light;
   }
 
   input {
