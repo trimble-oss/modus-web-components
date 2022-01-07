@@ -20,7 +20,8 @@ export const parameters = {
         'Introduction',
         ['Welcome', 'Getting Started'],
         'Components',
-        'User Inputs'
+        'User Inputs',
+        'Framework Integrations'
       ]
     }
   },
