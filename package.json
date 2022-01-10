@@ -52,7 +52,7 @@
     "autoprefixer": "^10.4.2",
     "eslint": "^8.6.0",
     "eslint-plugin-storybook": "^0.5.5",
-    "jest": "^27.4.0",
+    "jest": "^27.4.7",
     "jest-cli": "26.5.3",
     "puppeteer": "^13.0.1",
     "puppeteer-core": "^13.0.1",
