@@ -26,8 +26,27 @@ The Modus Web Component NPM package is hosted privately through GitHub packages.
 
 ## Installation
 Now that you've generated a PAT and are referencing it locally, you will have access to the package through NPM. Make sure you have the NPM CLI installed.
-  1. From the root of your application, run `npm install @trimble-oss/modus-web-components`.
-  2. The package exposes the `defineCustomElements()` method which will define every component in the bundle. It does not run automatically, so you must import it and execute it yourself. We recommend you do this near the root of your application like so:
+  1. In the root of your application, create a file named `.npmrc` with the contents:
+  ```
+@trimble-oss:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${NPM_AUTH_TOKEN}
+always-auth=true
+  ```
+  2. From the root of your application, run the command:
+
+  ```
+  npm install @trimble-oss/modus-web-components --save
+  ```
+
+  3. Make sure Open Sans, and Google Material Icons are available browser resources in your application:
+
+  ```html
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  ```
+
+  4. The package exposes the `defineCustomElements()` method which will define every component in the bundle. It does not run automatically, so you must import it and execute it yourself. We recommend you do this near the root of your application like so:
   ```javascript
   import { defineCustomElements } from "@trimble-oss/modus-web-components";
 
