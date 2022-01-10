@@ -13,6 +13,7 @@ jobs:
         uses: actions/setup-node@v2.5.1
         with:
           node-version: '14.x'
+          cache: 'npm'
 
       - name: Full Build
         run: npm run full
