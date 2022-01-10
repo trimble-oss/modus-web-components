@@ -10,6 +10,10 @@
   <a href="https://github.com/trimble-oss/modus-web-components/releases/tag/v0.0.18">
     <img src="https://img.shields.io/badge/latest%20version-v0.0.18-%230063a3" />
   </a>
+  
+  <a href="https://app.netlify.com/sites/modus-web-components/deploys"> 
+  <img src="https://api.netlify.com/api/v1/badges/c9f1de7d-daf8-4dd4-876d-4aa36a077213/deploy-status" />
+  </a>
 </p>
 
 The [Trimble Modus Design System](https://modus.trimble.com/) describes the UX that Trimble wants to provide in its UI across its many applications. The benefits of using Modus include rapid prototyping, development efficiency, and UX consistency.
