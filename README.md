@@ -6,7 +6,7 @@
   <a href="https://modus.vpteamdev.trimble.com/" target="_blank">
     <img src="https://cdn.jsdelivr.net/gh/storybookjs/brand@master/badge/badge-storybook.svg">
   </a>
-  
+
   <a href="https://github.com/trimble-oss/modus-web-components/releases/tag/v0.0.18">
     <img src="https://img.shields.io/badge/latest%20version-v0.0.18-%230063a3" />
   </a>
@@ -63,15 +63,15 @@ This library provides Modus Elements as web components. Web components are reusa
   - **Future Development**
     - Input Date (design not currently specified)
     - Table/List (in re-design by tiger team - do not create)
-    - Table/Sheet (in re-design by tiger team - do not create)    
-  
+    - Table/Sheet (in re-design by tiger team - do not create)
+
 ## Getting Started
 
 ### Contribution
 
 If this is your first time in the project, run `npm install` to download 3rd party packages.
 
-All web components are located under the src/components directory. 
+All web components are located under the src/components directory.
 
 The index.html file provides a place to render components for development and end to end testing.
 
@@ -81,7 +81,7 @@ Global SCSS files are available to provide Modus colors, variables and functions
 
 Stencil web component implementation details can be found in their [Framework Integration Docs](https://stenciljs.com/docs/overview).
 
-If you need to use form input web components (eg modus-checkbox, modus-text-input, etc) there are many good examples online. 
+If you need to use form input web components (eg modus-checkbox, modus-text-input, etc) there are many good examples online.
 We won't cover them here as they are often very specific to an individual SPA framework.
 
 ## Available Scripts
