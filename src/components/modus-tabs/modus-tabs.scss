@@ -3,6 +3,7 @@
   border-width: 0 0 $rem-1px 0;
   display: inline-flex;
   flex-direction: row;
+  font-family: $primary-font;
   justify-content: flex-start;
 
   &.medium {

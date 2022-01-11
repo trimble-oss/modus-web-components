@@ -2,8 +2,9 @@ article {
   background-color: $col_white;
   border: $rem-1px solid $col_gray_light;
   border-radius: $rem-2px;
-  position: relative;
+  font-family: $primary-font;
   overflow: hidden;
+  position: relative;
 
   &:hover {
     box-shadow: $box-shadow-lg;

@@ -5,6 +5,7 @@ div.alert {
   border-radius: 2px;
   border-left-width: $alert-left-border-width;
   display: flex;
+  font-family: $primary-font;
   height: 56px;
   padding: 0 $rem-16px;
   position: relative;

@@ -3,6 +3,7 @@ li {
   background-color: $col_white;
   border: 1px solid $col_gray_0;
   display: flex;
+  font-family: $primary-font;
   font-size: $rem-16px;
   min-height: $list-group-item-height;
   padding: $rem-2px $rem-16px;

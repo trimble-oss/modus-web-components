@@ -2,6 +2,7 @@ nav {
   align-items: center;
   background-color: $col_white;
   display: flex;
+  font-family: $primary-font;
   height: 56px;
 
   &.reverse {
