@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <a href="https://modus.vpteamdev.trimble.com/" target="_blank">
+  <a href="https://modus-web-components.netlify.app/" target="_blank">
     <img src="https://cdn.jsdelivr.net/gh/storybookjs/brand@master/badge/badge-storybook.svg">
   </a>
 
