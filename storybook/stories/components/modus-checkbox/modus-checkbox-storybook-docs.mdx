@@ -1,6 +1,7 @@
-import { Anchor } from '@storybook/addon-docs';
+import { Anchor } from "@storybook/addon-docs";
 
 # Checkbox
+
 ---
 
 [Modus Checkbox](https://modus.trimble.com/elements/checkboxes/) web components are wrappers around native `<input type="checkbox">` elements. They are referenced using the `<modus-checkbox>` custom HTML element.
@@ -10,6 +11,7 @@ This component is compatible with Angular reactive forms. This can be achieved t
 <Anchor storyId="user-inputs-checkbox--default" />
 
 ### Default
+
 <modus-checkbox></modus-checkbox><br />
 <modus-checkbox disabled></modus-checkbox><br />
 <modus-checkbox label="Checkbox"></modus-checkbox><br />
@@ -20,6 +22,7 @@ This component is compatible with Angular reactive forms. This can be achieved t
 <Anchor storyId="user-inputs-checkbox--indeterminate" />
 
 ### Indeterminate
+
 <modus-checkbox indeterminate></modus-checkbox>
 
 ```html
@@ -34,92 +37,95 @@ This component is compatible with Angular reactive forms. This can be achieved t
 ```
 
 ### Properties
+
 <section>
   <table>
     <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Type</th>
-      <th>Options</th>
-      <th>Default Value</th>
-      <th>Required</th>
-    </tr>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Options</th>
+        <th>Default Value</th>
+        <th>Required</th>
+      </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>aria-label</td>
-      <td>The checkbox's aria-label</td>
-      <td>string</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>checked</td>
-      <td>Whether the checkbox is checked</td>
-      <td>boolean</td>
-      <td></td>
-      <td>false</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>disabled</td>
-      <td>Whether the checkbox is disabled</td>
-      <td>boolean</td>
-      <td></td>
-      <td>false</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>indeterminate</td>
-      <td>Whether the checkbox is indeterminate</td>
-      <td>boolean</td>
-      <td></td>
-      <td>false</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>label</td>
-      <td>The label</td>
-      <td>string</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>size</td>
-      <td>The size of the checkbox</td>
-      <td>string</td>
-      <td>'small', 'medium'</td>
-      <td>'medium'</td>
-      <td></td>
-    </tr>
+      <tr>
+        <td>aria-label</td>
+        <td>The checkbox's aria-label</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>checked</td>
+        <td>Whether the checkbox is checked</td>
+        <td>boolean</td>
+        <td></td>
+        <td>false</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>disabled</td>
+        <td>Whether the checkbox is disabled</td>
+        <td>boolean</td>
+        <td></td>
+        <td>false</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>indeterminate</td>
+        <td>Whether the checkbox is indeterminate</td>
+        <td>boolean</td>
+        <td></td>
+        <td>false</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>label</td>
+        <td>The label</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>size</td>
+        <td>The size of the checkbox</td>
+        <td>string</td>
+        <td>'small', 'medium'</td>
+        <td>'medium'</td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
 </section>
 
 ### DOM Events
+
 <section>
   <table>
     <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Emits</th>
-    </tr>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Emits</th>
+      </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>checkboxClick</td>
-      <td>Fires on checkbox click</td>
-      <td>boolean</td>
-    </tr>
+      <tr>
+        <td>checkboxClick</td>
+        <td>Fires on checkbox click</td>
+        <td>boolean</td>
+      </tr>
     </tbody>
   </table>
 </section>
 
 ### Accessibility
+
 - Checkbox gets an `aria-checked` set to whether Checkbox is checked.
 - Checkbox gets an `aria-label` provided by the `aria-label` property input.
 - Checkbox gets an `aria-disabled` set to whether Checkbox is disabled.

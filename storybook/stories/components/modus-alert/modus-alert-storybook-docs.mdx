@@ -1,6 +1,7 @@
-import { Anchor } from '@storybook/addon-docs';
+import { Anchor } from "@storybook/addon-docs";
 
 # Alert
+
 ---
 
 [Modus Alert](https://modus.trimble.com/elements/alerts/) web components provide well defined elements for rendering system level messages. They are referenced using the `<modus-alert>` custom HTML element.
@@ -8,43 +9,44 @@ import { Anchor } from '@storybook/addon-docs';
 <Anchor storyId="components-alert--default" />
 
 ### Default
-<modus-alert message="Info alert (default)"></modus-alert>
 
+<modus-alert message="Info alert (default)"></modus-alert>
 
 <Anchor storyId="components-alert--dismissible" />
 
 ### Dismissible
-<modus-alert dismissible message="Dismissible alert"></modus-alert>
 
+<modus-alert dismissible message="Dismissible alert"></modus-alert>
 
 <Anchor storyId="components-alert--error" />
 
 ### Error
+
 <modus-alert message="Error alert" type="error"></modus-alert>
 
 <Anchor storyId="components-alert--info-gray" />
 
 ### Info Gray
-<modus-alert message="Info gray alert" type="info-gray"></modus-alert>
 
+<modus-alert message="Info gray alert" type="info-gray"></modus-alert>
 
 <Anchor storyId="components-alert--info-gray-dark" />
 
 ### Gray Dark
-<modus-alert message="Info gray dark alert" type="info-gray-dark"></modus-alert>
 
+<modus-alert message="Info gray dark alert" type="info-gray-dark"></modus-alert>
 
 <Anchor storyId="components-alert--success" />
 
 ### Success
-<modus-alert message="Success alert" type="success"></modus-alert>
 
+<modus-alert message="Success alert" type="success"></modus-alert>
 
 <Anchor storyId="components-alert--warning" />
 
 ### Warning
-<modus-alert message="Warning alert" type="warning"></modus-alert>
 
+<modus-alert message="Warning alert" type="warning"></modus-alert>
 
 ```html
 <modus-alert message="Info alert (default)"></modus-alert>
@@ -56,77 +58,82 @@ import { Anchor } from '@storybook/addon-docs';
 <modus-alert message="Warning alert" type="warning"></modus-alert>
 ```
 
-###  Properties
+### Properties
+
 <section>
   <table>
     <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Type</th>
-      <th>Options</th>
-      <th>Default Value</th>
-      <th>Required</th>
-    </tr>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Options</th>
+        <th>Default Value</th>
+        <th>Required</th>
+      </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>message</td>
-      <td>The alert message</td>
-      <td>string</td>
-      <td></td>
-      <td></td>
-      <td><span class="material-icons">&#10004;</span></td>
-    </tr>
-    <tr>
-      <td>aria-label</td>
-      <td>The alert's aria-label</td>
-      <td>string</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>dismissible</td>
-      <td>Whether the alert is dismissible, renders the close icon</td>
-      <td>boolean</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>type</td>
-      <td>The type of the alert</td>
-      <td>string</td>
-      <td>'error', 'info', 'info-gray', 'info-gray-dark', 'success', 'warning'</td>
-      <td>'info'</td>
-      <td></td>
-    </tr>
+      <tr>
+        <td>message</td>
+        <td>The alert message</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td>
+          <span class="material-icons">&#10004;</span>
+        </td>
+      </tr>
+      <tr>
+        <td>aria-label</td>
+        <td>The alert's aria-label</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>dismissible</td>
+        <td>Whether the alert is dismissible, renders the close icon</td>
+        <td>boolean</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>type</td>
+        <td>The type of the alert</td>
+        <td>string</td>
+        <td>'error', 'info', 'info-gray', 'info-gray-dark', 'success', 'warning'</td>
+        <td>'info'</td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
 </section>
 
 ### DOM Events
+
 <section>
   <table>
     <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Emits</th>
-    </tr>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Emits</th>
+      </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>dismissClick</td>
-      <td>Fires on dismiss icon click</td>
-      <td></td>
-    </tr>
+      <tr>
+        <td>dismissClick</td>
+        <td>Fires on dismiss icon click</td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
 </section>
 
 ### Accessibility
+
 - Alert has `role` of `alert`.
 - Alert gets an `aria-label` provided by the `aria-label` property input.
 - When Alert has focus, **Escape** causes the `dismissClick` event to fire if dismissible.

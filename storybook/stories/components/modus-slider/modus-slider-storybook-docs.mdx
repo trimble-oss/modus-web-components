@@ -1,113 +1,116 @@
 # Slider
+
 ---
 
 [Modus Slider](https://modus.trimble.com/components/sliders/) web components are referenced using the `<modus-slider>` custom HTML element.
 
 ### Default
+
 <modus-slider label="Slider"></modus-slider>
 
 <modus-slider disabled label="Disabled slider"></modus-slider>
 
 ```html
-<modus-slider label="Slider"></modus-slider>
-<modus-slider disabled label="Disabled slider"></modus-slider>
+<modus-slider label="Slider"></modus-slider> <modus-slider disabled label="Disabled slider"></modus-slider>
 ```
 
 ### Properties
+
 <section>
   <table>
     <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Type</th>
-      <th>Options</th>
-      <th>Default Value</th>
-      <th>Required</th>
-    </tr>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Options</th>
+        <th>Default Value</th>
+        <th>Required</th>
+      </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>aria-label</td>
-      <td>The slider's aria-label</td>
-      <td>string</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>disabled</td>
-      <td>Whether the slider is disabled</td>
-      <td>boolean</td>
-      <td></td>
-      <td>false</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>label</td>
-      <td>The slider's label</td>
-      <td>string</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>max-value</td>
-      <td>The slider's maximum value</td>
-      <td>number</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>min-value</td>
-      <td>The slider's minimum value</td>
-      <td>number</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>value</td>
-      <td>The slider's value</td>
-      <td>number</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
+      <tr>
+        <td>aria-label</td>
+        <td>The slider's aria-label</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>disabled</td>
+        <td>Whether the slider is disabled</td>
+        <td>boolean</td>
+        <td></td>
+        <td>false</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>label</td>
+        <td>The slider's label</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>max-value</td>
+        <td>The slider's maximum value</td>
+        <td>number</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>min-value</td>
+        <td>The slider's minimum value</td>
+        <td>number</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>value</td>
+        <td>The slider's value</td>
+        <td>number</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
 </section>
 
 ### DOM Events
+
 <section>
   <table>
     <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Emits</th>
-    </tr>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Emits</th>
+      </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>valueChange</td>
-      <td>Fires on value change</td>
-      <td>The slider's value</td>
-    </tr>
-    <tr>
-      <td>valueInput</td>
-      <td>Fires on value input</td>
-      <td>The input value</td>
-    </tr>
+      <tr>
+        <td>valueChange</td>
+        <td>Fires on value change</td>
+        <td>The slider's value</td>
+      </tr>
+      <tr>
+        <td>valueInput</td>
+        <td>Fires on value input</td>
+        <td>The input value</td>
+      </tr>
     </tbody>
   </table>
 </section>
 
 ### Accessibility
+
 - Slider gets an `aria-label` provided by the `aria-label` property input.
 - Slider gets an `aria-disabled` set to whether Slider is disabled.
 - Slider gets an `aria-valuemax` set to Slider's maximum value.
 - Slider gets an `aria-valuemin` set to Slider's minimum value.
 - Slider gets an `aria-valuenow` set to Slider's current value.
-

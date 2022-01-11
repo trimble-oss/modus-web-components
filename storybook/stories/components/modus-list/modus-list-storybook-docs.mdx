@@ -1,4 +1,5 @@
 # List
+
 ---
 
 [Modus List](https://modus.trimble.com/elements/lists/) web components are wrappers around native `<modus-list-item>` custom HTML elements. They are referenced using the `<modus-list>` custom HTML element.
@@ -6,15 +7,19 @@
 The `<modus-list-item>` utilizes the slot element, allowing you to render your own HTML in the component.
 
 Implementation Details
+
 - To support a wide variety of selection methods (single, multi, etc) it is up to the implementation to control which items are selected.
 
 ### Default
+
 <modus-list>
   <modus-list-item>Default</modus-list-item>
   <modus-list-item selected>Selected</modus-list-item>
   <modus-list-item disabled>Disabled</modus-list-item>
   <modus-list-item size="condensed">Condensed</modus-list-item>
-  <modus-list-item selected size="condensed">Condensed & Selected</modus-list-item>
+  <modus-list-item selected size="condensed">
+    Condensed & Selected
+  </modus-list-item>
 </modus-list>
 
 ```html
@@ -28,66 +33,69 @@ Implementation Details
 ```
 
 ### Properties
+
 ##### Modus List Item
+
 <section>
   <table>
     <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Type</th>
-      <th>Options</th>
-      <th>Default Value</th>
-      <th>Required</th>
-    </tr>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Options</th>
+        <th>Default Value</th>
+        <th>Required</th>
+      </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>disabled</td>
-      <td>Disables the list item</td>
-      <td>boolean</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>selected</td>
-      <td>Renders the list item selected</td>
-      <td>boolean</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>size</td>
-      <td>The size of the list item</td>
-      <td>string</td>
-      <td>'condensed', 'standard'</td>
-      <td>'standard'</td>
-      <td></td>
-    </tr>
+      <tr>
+        <td>disabled</td>
+        <td>Disables the list item</td>
+        <td>boolean</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>selected</td>
+        <td>Renders the list item selected</td>
+        <td>boolean</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>size</td>
+        <td>The size of the list item</td>
+        <td>string</td>
+        <td>'condensed', 'standard'</td>
+        <td>'standard'</td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
 </section>
 
 ### DOM Events
+
 ##### Modus List Item
+
 <section>
   <table>
     <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Emits</th>
-    </tr>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Emits</th>
+      </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>itemClick</td>
-      <td>Fires on list item click</td>
-      <td></td>
-    </tr>
+      <tr>
+        <td>itemClick</td>
+        <td>Fires on list item click</td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
 </section>
-

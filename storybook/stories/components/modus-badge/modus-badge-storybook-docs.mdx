@@ -1,6 +1,7 @@
-import { Anchor } from '@storybook/addon-docs';
+import { Anchor } from "@storybook/addon-docs";
 
 # Badge
+
 ---
 
 [Modus Badge](https://modus.trimble.com/elements/badges/) web components provide non-interactive labels for displaying small amounts of information. They are referenced using the `<modus-badge>` custom HTML element.
@@ -9,6 +10,7 @@ This component utilizes the slot element, allowing you to render your own HTML i
 <Anchor storyId="components-badge--default" />
 
 ### Default
+
 <modus-badge>Default</modus-badge>
 <modus-badge color="secondary">Secondary</modus-badge>
 <modus-badge color="tertiary">Tertiary</modus-badge>
@@ -23,6 +25,7 @@ This component utilizes the slot element, allowing you to render your own HTML i
 <Anchor storyId="components-badge--counter" />
 
 ### Counter
+
 <modus-badge type="counter">Counter</modus-badge>
 <modus-badge color="secondary" type="counter">Counter</modus-badge>
 <modus-badge color="tertiary" type="counter">Counter</modus-badge>
@@ -37,6 +40,7 @@ This component utilizes the slot element, allowing you to render your own HTML i
 <Anchor storyId="components-badge--text" />
 
 ### Text
+
 <modus-badge type="text">Text</modus-badge>
 <modus-badge color="secondary" type="text">Text</modus-badge>
 <modus-badge color="tertiary" type="text">Text</modus-badge>
@@ -84,55 +88,57 @@ This component utilizes the slot element, allowing you to render your own HTML i
 ```
 
 ### Properties
+
 <section>
   <table>
     <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Type</th>
-      <th>Options</th>
-      <th>Default Value</th>
-      <th>Required</th>
-    </tr>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Options</th>
+        <th>Default Value</th>
+        <th>Required</th>
+      </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>aria-label</td>
-      <td>The badge's aria-label</td>
-      <td>string</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>color</td>
-      <td>The color of the badge</td>
-      <td>string</td>
-      <td>'danger', 'dark', 'primary', 'secondary', 'success', 'tertiary', 'warning'</td>
-      <td>'primary'</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>size</td>
-      <td>The size of the badge</td>
-      <td>string</td>
-      <td>'small', 'medium', 'large'</td>
-      <td>'medium'</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>type</td>
-      <td>The type of the badge</td>
-      <td>string</td>
-      <td>'counter', 'default', 'text'</td>
-      <td>'default'</td>
-      <td></td>
-    </tr>
+      <tr>
+        <td>aria-label</td>
+        <td>The badge's aria-label</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>color</td>
+        <td>The color of the badge</td>
+        <td>string</td>
+        <td>'danger', 'dark', 'primary', 'secondary', 'success', 'tertiary', 'warning'</td>
+        <td>'primary'</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>size</td>
+        <td>The size of the badge</td>
+        <td>string</td>
+        <td>'small', 'medium', 'large'</td>
+        <td>'medium'</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>type</td>
+        <td>The type of the badge</td>
+        <td>string</td>
+        <td>'counter', 'default', 'text'</td>
+        <td>'default'</td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
 </section>
 
 ### Accessibility
+
 - Badge has `role` of `status`.
 - Badge gets an `aria-label` provided by the `aria-label` property input.

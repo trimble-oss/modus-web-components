@@ -1,6 +1,7 @@
-import { Story } from '@storybook/addon-docs';
+import { Story } from "@storybook/addon-docs";
 
 # Select
+
 ---
 
 [Modus Select](https://modus.trimble.com/elements/inputs/) web components are replacements for native `<select>` elements. They are referenced using the `<modus-select>` custom HTML element.
@@ -8,21 +9,22 @@ import { Story } from '@storybook/addon-docs';
 This component is compatible with Angular reactive forms. This can be achieved through the implementation of a simple directive.
 
 ### Default
+
 <Story id="user-inputs-select--default" />
 
 ```html
 <!-- Without preset value -->
 <modus-select id="select-demo-1" label="Select Demo 1" options-display-prop="display"></modus-select>
 <script>
-    const modusSelect = document.querySelector('#select-demo-1');
-    modusSelect.options = [ { display: 'Option 1' }, { display: 'Option 2' }, { display: 'Option 3' } ];
+  const modusSelect = document.querySelector("#select-demo-1");
+  modusSelect.options = [{ display: "Option 1" }, { display: "Option 2" }, { display: "Option 3" }];
 </script>
 
 <!-- Disabled with helper text and preset value -->
 <modus-select disabled helper-text="Helper demo" id="select-demo-2" label="Select Demo 2" options-display-prop="display"></modus-select>
 <script>
-  const modusSelect = document.querySelector('#select-demo-2');
-  const options = [ { display: 'Option 1' }, { display: 'Option 2' }, { display: 'Option 3' } ];
+  const modusSelect = document.querySelector("#select-demo-2");
+  const options = [{ display: "Option 1" }, { display: "Option 2" }, { display: "Option 3" }];
   modusSelect.options = options;
   modusSelect.value = options[1];
 </script>
@@ -35,132 +37,135 @@ This component is compatible with Angular reactive forms. This can be achieved t
 ```
 
 ### Properties
+
 <section>
   <table>
     <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Type</th>
-      <th>Options</th>
-      <th>Default Value</th>
-      <th>Required</th>
-    </tr>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Options</th>
+        <th>Default Value</th>
+        <th>Required</th>
+      </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>aria-label</td>
-      <td>The select's aria-label</td>
-      <td>string</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>disabled</td>
-      <td>Disables the input</td>
-      <td>boolean</td>
-      <td></td>
-      <td>false</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>error-text</td>
-      <td>The input's error message, puts the input into an error state</td>
-      <td>string</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>helper-text</td>
-      <td>The input's helper text</td>
-      <td>string</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>label</td>
-      <td>The input label</td>
-      <td>string</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>options</td>
-      <td>The options for the dropdown list</td>
-      <td>any[]</td>
-      <td></td>
-      <td>[]</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>options-display-prop</td>
-      <td>The options property to render in the dropdown list</td>
-      <td>string</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>required</td>
-      <td>Whether the input is required</td>
-      <td>boolean</td>
-      <td></td>
-      <td>false</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>size</td>
-      <td>The size of the input</td>
-      <td>string</td>
-      <td>'medium', 'large'</td>
-      <td>'medium'</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>valid-text</td>
-      <td>The input's valid message, puts the input into an valid state</td>
-      <td>string</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>value</td>
-      <td>The input's value</td>
-      <td>any</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
+      <tr>
+        <td>aria-label</td>
+        <td>The select's aria-label</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>disabled</td>
+        <td>Disables the input</td>
+        <td>boolean</td>
+        <td></td>
+        <td>false</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>error-text</td>
+        <td>The input's error message, puts the input into an error state</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>helper-text</td>
+        <td>The input's helper text</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>label</td>
+        <td>The input label</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>options</td>
+        <td>The options for the dropdown list</td>
+        <td>any[]</td>
+        <td></td>
+        <td>[]</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>options-display-prop</td>
+        <td>The options property to render in the dropdown list</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>required</td>
+        <td>Whether the input is required</td>
+        <td>boolean</td>
+        <td></td>
+        <td>false</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>size</td>
+        <td>The size of the input</td>
+        <td>string</td>
+        <td>'medium', 'large'</td>
+        <td>'medium'</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>valid-text</td>
+        <td>The input's valid message, puts the input into an valid state</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>value</td>
+        <td>The input's value</td>
+        <td>any</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
 </section>
 
 ### DOM Events
+
 <section>
   <table>
     <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Emits</th>
-    </tr>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Emits</th>
+      </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>valueChange</td>
-      <td>Fires on value change</td>
-      <td>The value of the selected option</td>
-    </tr>
+      <tr>
+        <td>valueChange</td>
+        <td>Fires on value change</td>
+        <td>The value of the selected option</td>
+      </tr>
     </tbody>
   </table>
 </section>
 
 ### Accessibility
+
 - Select has `role` of `listbox`.
 - Select gets an `aria-label` provided by the `aria-label` property input.
 - Select gets an `aria-disabled` set to whether Select is disabled.

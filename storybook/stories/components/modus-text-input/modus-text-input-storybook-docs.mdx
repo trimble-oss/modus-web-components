@@ -1,10 +1,13 @@
 # Text Input
+
 ---
 
 [Modus Text](https://modus.trimble.com/elements/inputs/) Input web components are wrappers around native `<input type="text">` elements. They are referenced using the `<modus-text-input>` custom HTML element.
 
 This component is compatible with Angular reactive forms. This can be achieved through the implementation of a simple directive.
+
 ### Default
+
 <modus-text-input label="Text Input Demo 1" placeholder="Placeholder" include-search-icon required></modus-text-input>
 <modus-text-input label="Text Input Demo 2" include-search-icon disabled></modus-text-input>
 <modus-text-input label="Text Input Demo 3" placeholder="Placeholder" value="Value" helper-text="Helper Demo" include-search-icon required></modus-text-input>
@@ -22,168 +25,170 @@ This component is compatible with Angular reactive forms. This can be achieved t
 ```
 
 ### Properties
+
 <section>
   <table>
     <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Type</th>
-      <th>Options</th>
-      <th>Default Value</th>
-      <th>Required</th>
-    </tr>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Options</th>
+        <th>Default Value</th>
+        <th>Required</th>
+      </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>aria-label</td>
-      <td>The input's aria-label</td>
-      <td>string</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>clearable</td>
-      <td>Whether the text input can be cleared</td>
-      <td>boolean</td>
-      <td></td>
-      <td>true</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>disabled</td>
-      <td>Whether the text input is disabled</td>
-      <td>boolean</td>
-      <td></td>
-      <td>false</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>error-text</td>
-      <td>The error text</td>
-      <td>string</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>helper-text</td>
-      <td>The helper text</td>
-      <td>string</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>include-search-icon</td>
-      <td>Whether to include the search icon</td>
-      <td>boolean</td>
-      <td></td>
-      <td>false</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>label</td>
-      <td>The text input label</td>
-      <td>string</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>max-length</td>
-      <td>The maximum length of the value</td>
-      <td>number</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>min-length</td>
-      <td>The minimum length of the value</td>
-      <td>number</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>placeholder</td>
-      <td>The placeholder text</td>
-      <td>string</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>read-only</td>
-      <td>Whether the text input is read-only</td>
-      <td>boolean</td>
-      <td></td>
-      <td>false</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>required</td>
-      <td>Whether the text input is required</td>
-      <td>boolean</td>
-      <td></td>
-      <td>false</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>size</td>
-      <td>The size of the input</td>
-      <td>string</td>
-      <td>'medium', 'large'</td>
-      <td>'medium'</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>valid-text</td>
-      <td>The valid text</td>
-      <td>string</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>value</td>
-      <td>The text input string value</td>
-      <td>string</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
+      <tr>
+        <td>aria-label</td>
+        <td>The input's aria-label</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>clearable</td>
+        <td>Whether the text input can be cleared</td>
+        <td>boolean</td>
+        <td></td>
+        <td>true</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>disabled</td>
+        <td>Whether the text input is disabled</td>
+        <td>boolean</td>
+        <td></td>
+        <td>false</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>error-text</td>
+        <td>The error text</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>helper-text</td>
+        <td>The helper text</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>include-search-icon</td>
+        <td>Whether to include the search icon</td>
+        <td>boolean</td>
+        <td></td>
+        <td>false</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>label</td>
+        <td>The text input label</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>max-length</td>
+        <td>The maximum length of the value</td>
+        <td>number</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>min-length</td>
+        <td>The minimum length of the value</td>
+        <td>number</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>placeholder</td>
+        <td>The placeholder text</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>read-only</td>
+        <td>Whether the text input is read-only</td>
+        <td>boolean</td>
+        <td></td>
+        <td>false</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>required</td>
+        <td>Whether the text input is required</td>
+        <td>boolean</td>
+        <td></td>
+        <td>false</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>size</td>
+        <td>The size of the input</td>
+        <td>string</td>
+        <td>'medium', 'large'</td>
+        <td>'medium'</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>valid-text</td>
+        <td>The valid text</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>value</td>
+        <td>The text input string value</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
 </section>
 
 ### DOM Events
+
 <section>
   <table>
     <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Emits</th>
-    </tr>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Emits</th>
+      </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>valueChange</td>
-      <td>Fires on text input value change</td>
-      <td>string</td>
-    </tr>
+      <tr>
+        <td>valueChange</td>
+        <td>Fires on text input value change</td>
+        <td>string</td>
+      </tr>
     </tbody>
   </table>
 </section>
 
 ### Accessibility
+
 - Text Input gets an `aria-label` provided by the `aria-label` property input.
 - Text Input gets an `aria-disabled` set to whether Text Input is disabled.
 - Text Input gets an `aria-placeholder` provided by the `placeholder` property input.
 - Text Input gets an `aria-invalid` set to whether Text Input is invalid.
 - Text Input gets an `aria-readonly` set to whether Text Input is readonly.
 - Text Input gets an `aria-required` set to whether Text Input is required.
-
