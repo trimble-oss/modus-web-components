@@ -1,6 +1,7 @@
-import { Anchor } from '@storybook/addon-docs';
+import { Anchor } from "@storybook/addon-docs";
 
 # Chip
+
 ---
 
 [Modus Chip](https://modus.trimble.com/elements/chips/) web components are referenced using the `<modus-chip>` custom HTML element.
@@ -8,6 +9,7 @@ import { Anchor } from '@storybook/addon-docs';
 <Anchor storyId="components-chip--default" />
 
 ### Default
+
 <modus-chip image-url="https://randomuser.me/api/portraits/lego/1.jpg" show-close value="Bryan"></modus-chip>
 <modus-chip has-error image-url="https://randomuser.me/api/portraits/lego/1.jpg" show-close value="Bryan"></modus-chip>
 <modus-chip disabled image-url="https://randomuser.me/api/portraits/lego/1.jpg" show-close value="Bryan"></modus-chip>
@@ -15,11 +17,13 @@ import { Anchor } from '@storybook/addon-docs';
 <Anchor storyId="components-chip--outline" />
 
 ### Outline
+
 <modus-chip image-url="https://randomuser.me/api/portraits/lego/1.jpg" show-close chip-style="outline" value="Bryan"></modus-chip>
 <modus-chip has-error image-url="https://randomuser.me/api/portraits/lego/1.jpg" show-close chip-style="outline" value="Bryan"></modus-chip>
 <modus-chip disabled image-url="https://randomuser.me/api/portraits/lego/1.jpg" show-close chip-style="outline" value="Bryan"></modus-chip>
 
 ### Checkmark, Large
+
 <modus-chip show-checkmark size="large" value="Pets OK"></modus-chip>
 
 ```html
@@ -35,121 +39,124 @@ import { Anchor } from '@storybook/addon-docs';
 ```
 
 ### Properties
+
 <section>
   <table>
     <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Type</th>
-      <th>Options</th>
-      <th>Default Value</th>
-      <th>Required</th>
-    </tr>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Options</th>
+        <th>Default Value</th>
+        <th>Required</th>
+      </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>aria-label</td>
-      <td>The chip's aria-label</td>
-      <td>string</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>chip-style</td>
-      <td>The chip's style</td>
-      <td>string</td>
-      <td>'outline', 'solid'</td>
-      <td>'solid'</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>disabled</td>
-      <td>Whether the chip is disabled</td>
-      <td>boolean</td>
-      <td></td>
-      <td>false</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>has-error</td>
-      <td>Whether the chip has an error</td>
-      <td>boolean</td>
-      <td></td>
-      <td>false</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>image-url</td>
-      <td>The chip's image url</td>
-      <td>string</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>show-checkmark</td>
-      <td>Whether to show the checkmark</td>
-      <td>boolean</td>
-      <td></td>
-      <td>false</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>show-close</td>
-      <td>Whether to show the close icon</td>
-      <td>boolean</td>
-      <td></td>
-      <td>false</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>size</td>
-      <td>The chip's size</td>
-      <td>string</td>
-      <td>'medium', 'large'</td>
-      <td>'medium'</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>value</td>
-      <td>The chip's value</td>
-      <td>string</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
+      <tr>
+        <td>aria-label</td>
+        <td>The chip's aria-label</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>chip-style</td>
+        <td>The chip's style</td>
+        <td>string</td>
+        <td>'outline', 'solid'</td>
+        <td>'solid'</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>disabled</td>
+        <td>Whether the chip is disabled</td>
+        <td>boolean</td>
+        <td></td>
+        <td>false</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>has-error</td>
+        <td>Whether the chip has an error</td>
+        <td>boolean</td>
+        <td></td>
+        <td>false</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>image-url</td>
+        <td>The chip's image url</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>show-checkmark</td>
+        <td>Whether to show the checkmark</td>
+        <td>boolean</td>
+        <td></td>
+        <td>false</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>show-close</td>
+        <td>Whether to show the close icon</td>
+        <td>boolean</td>
+        <td></td>
+        <td>false</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>size</td>
+        <td>The chip's size</td>
+        <td>string</td>
+        <td>'medium', 'large'</td>
+        <td>'medium'</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>value</td>
+        <td>The chip's value</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
 </section>
 
 ### DOM Events
+
 <section>
   <table>
     <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Emits</th>
-    </tr>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Emits</th>
+      </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>chipClick</td>
-      <td>Fires on chip click</td>
-      <td>KeyboardEvent, MouseEvent</td>
-    </tr>
-    <tr>
-      <td>closeClick</td>
-      <td>Fires on close icon click</td>
-      <td>KeyboardEvent, MouseEvent</td>
-    </tr>
+      <tr>
+        <td>chipClick</td>
+        <td>Fires on chip click</td>
+        <td>KeyboardEvent, MouseEvent</td>
+      </tr>
+      <tr>
+        <td>closeClick</td>
+        <td>Fires on close icon click</td>
+        <td>KeyboardEvent, MouseEvent</td>
+      </tr>
     </tbody>
   </table>
 </section>
 
 ### Accessibility
+
 - Chip gets an `aria-label` provided by the `aria-label` property input.
 - Chip gets an `aria-disabled` set to whether Chip is disabled.
 - When Chip has focus, **Enter** emits the `chipClick` event.

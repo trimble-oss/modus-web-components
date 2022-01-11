@@ -1,6 +1,7 @@
-import { Story } from '@storybook/addon-docs';
+import { Story } from "@storybook/addon-docs";
 
 # Tabs
+
 ---
 
 [Modus Tabs](https://modus.trimble.com/components/tabs/) web components are referenced using the `<modus-tabs>` custom HTML element.
@@ -21,83 +22,88 @@ A new TypeScript typing has been provided named Tab defined as:
 <modus-tabs></modus-tabs>
 
 <script>
-    const modusTabs = document.querySelector('modus-tabs');
-    modusTabs.tabs = [
-      {
-        id: 0,
-        label: 'Tab 1'
-      },
-      {
-        active: true,
-        id: 1,
-        label: 'Tab 2'
-      }
-    ];
+  const modusTabs = document.querySelector("modus-tabs");
+  modusTabs.tabs = [
+    {
+      id: 0,
+      label: "Tab 1",
+    },
+    {
+      active: true,
+      id: 1,
+      label: "Tab 2",
+    },
+  ];
 </script>
 ```
 
 ### Properties
+
 <section class="properties">
   <table>
     <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Type</th>
-      <th>Options</th>
-      <th>Default Value</th>
-      <th>Required</th>
-    </tr>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Options</th>
+        <th>Default Value</th>
+        <th>Required</th>
+      </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>tabs</td>
-      <td>The tabs' tabs</td>
-      <td>Tab[]</td>
-      <td></td>
-      <td></td>
-      <td><span class="material-icons">&#10004;</span></td>
-    </tr>
-    <tr>
-      <td>aria-label</td>
-      <td>The tabs' aria-label</td>
-      <td>string</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>size</td>
-      <td>The tabs' size</td>
-      <td>string</td>
-      <td>'medium', 'small</td>
-      <td>'medium'</td>
-      <td></td>
-    </tr>
+      <tr>
+        <td>tabs</td>
+        <td>The tabs' tabs</td>
+        <td>Tab[]</td>
+        <td></td>
+        <td></td>
+        <td>
+          <span class="material-icons">&#10004;</span>
+        </td>
+      </tr>
+      <tr>
+        <td>aria-label</td>
+        <td>The tabs' aria-label</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>size</td>
+        <td>The tabs' size</td>
+        <td>string</td>
+        <td>'medium', 'small</td>
+        <td>'medium'</td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
 </section>
 
 ### DOM Events
+
 <section>
   <table>
     <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Emits</th>
-    </tr>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Emits</th>
+      </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>tabChange</td>
-      <td>Fires on tab change</td>
-      <td>The current tab</td>
-    </tr>
+      <tr>
+        <td>tabChange</td>
+        <td>Fires on tab change</td>
+        <td>The current tab</td>
+      </tr>
     </tbody>
   </table>
 </section>
 
 ### Accessibility
+
 - Tabs gets an `aria-label` provided by the `aria-label` property input.
 - When a Tab has focus, **Enter** activates the Tab, and emits the `tabChange` event.

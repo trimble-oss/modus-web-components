@@ -1,29 +1,33 @@
-import { Meta } from '@storybook/addon-docs';
+import { Meta } from "@storybook/addon-docs";
 
-<Meta title="Framework Integrations/Angular"
-      parameters={{
-        previewTabs: {
-          canvas: {
-            hidden: true
-          }
-        },
-        options: {
-          isToolshown: false
-        },
-        viewMode: 'docs'
-      }}
+<Meta
+  title="Framework Integrations/Angular"
+  parameters={{
+    previewTabs: {
+      canvas: {
+        hidden: true,
+      },
+    },
+    options: {
+      isToolshown: false,
+    },
+    viewMode: "docs",
+  }}
 />
 
 # Angular Integration
+
 Angular has built-in support for web components and custom elements. Working with web components in Angular is straightfoward, they work with the same template API we are familiar with.
 
 ## Installation
+
 If you haven't viewed the [Getting Started](/docs/introduction-getting-started--page) page yet, go ahead and give that a look.
 In an Angular application, import and execute `defineCustomElements()` in your application's main file.
 
 If you're unsure which is your main file, you can find out in the application's `angular.json` file, under `projects` > `architect` > `build` > `options` > `main`.
 
 ## Custom Elements Schema
+
 In your `app.module.ts` file, you need to tell Angular that you will be working with custom element schemas so that it does not throw errors when unknown element names are provided in the markup.
 
 Import `CUSTOM_ELEMENTS_SCHEMA` and add it to your `@NgModule`'s schemas:
@@ -39,6 +43,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 ```
 
 ## Wrapping Components
+
 A strong suggestion we have is to wrap Modus Web Components in corresponding Angular components within your application.
 This will abstract away from the library dependency, allowing more flexibility for you and your application in the future.
 Each part of the component is able to be abstracted, leaving you with an Angular-native component.
@@ -51,29 +56,25 @@ A wrapped Modus Button will look like this:
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
-  selector: 'button-component',
+  selector: "button-component",
   template: `
-    <modus-button
-      [buttonStyle]="buttonStyle"
-      [color]="color"
-      [disabled]="disabled"
-      [size]="size"
-      (buttonClick)="onButtonClick.emit()">
+    <modus-button [buttonStyle]="buttonStyle" [color]="color" [disabled]="disabled" [size]="size" (buttonClick)="onButtonClick.emit()">
       <ng-content></ng-content>
     </modus-button>
-  `
+  `,
 })
 export class ButtonComponent {
-  @Input() buttonStyle: 'borderless' | 'fill' | 'outline' = 'fill';
-  @Input() color: 'danger' | 'default' | 'primary' | 'secondary' | 'warning' = 'default';
+  @Input() buttonStyle: "borderless" | "fill" | "outline" = "fill";
+  @Input() color: "danger" | "default" | "primary" | "secondary" | "warning" = "default";
   @Input() disabled: boolean;
-  @Input() size: 'small' | 'medium' | 'large' = 'medium';
+  @Input() size: "small" | "medium" | "large" = "medium";
 
   @Output() onButtonClick = new EventEmitter();
 }
 ```
 
 ## Reactive Forms
+
 Working with a web component's inputs/outputs works great but these components do not integrate with Angular's reactive forms quite as easily.
 Since web components do not know about Angular's form APIs, we must extend form-compatible components' behavior with simple directives.
 These directives are applied to the web component selectors, giving the components Angular form functionality.
@@ -90,7 +91,7 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { FormControl } from "@angular/forms";
 
 @Component({
-  selector: 'select-component',
+  selector: "select-component",
   template: `
     <modus-select
       #select
@@ -107,7 +108,7 @@ import { FormControl } from "@angular/forms";
       [validText]="validText"
       (valueChange)="onSelectValueChange.emit(select.value)">
     </modus-select>
-  `
+  `,
 })
 export class SelectComponent {
   @Input() disabled: boolean;
@@ -118,7 +119,7 @@ export class SelectComponent {
   @Input() options: unknown[] = [];
   @Input() optionsDisplayProp: string;
   @Input() required: boolean;
-  @Input() size: 'medium' | 'large' = 'medium';
+  @Input() size: "medium" | "large" = "medium";
   @Input() validText: string;
   @Input() value: unknown;
 
@@ -129,6 +130,7 @@ export class SelectComponent {
 ### Directive
 
 Moving onto the directive, there are a few things to keep in mind.
+
 - The directive's `selector` is set to the web component's tag, not the wrapper's.
 - Implementing the [ControlValueAccessor](https://angular.io/api/forms/ControlValueAccessor) interface helps Angular understand when the form control has been updated or changed.
   - When the value is set, `onChange()` notifies that the control has been updated.
@@ -139,18 +141,18 @@ Moving onto the directive, there are a few things to keep in mind.
 Here is what our directive looks like:
 
 ```typescript
-import { Directive, forwardRef, ElementRef, HostListener, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Directive, forwardRef, ElementRef, HostListener, Input, OnInit, Output, EventEmitter } from "@angular/core";
+import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Directive({
-  selector: 'modus-select',
+  selector: "modus-select",
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => ModusSelectDirective),
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 })
 export class ModusSelectDirective implements ControlValueAccessor, OnInit {
   @Input() disabled: boolean;
@@ -162,7 +164,7 @@ export class ModusSelectDirective implements ControlValueAccessor, OnInit {
   @Input() optionsDisplayProp: string;
   @Input() required: boolean;
   @Input() selectValue: unknown;
-  @Input() size: 'medium' | 'large';
+  @Input() size: "medium" | "large";
   @Input() validText: string;
 
   @Output() valueChange = new EventEmitter<string>();
@@ -188,7 +190,7 @@ export class ModusSelectDirective implements ControlValueAccessor, OnInit {
   constructor(private elementRef: ElementRef) {}
 
   ngOnInit(): void {
-    const modusSelect = (this.elementRef.nativeElement as HTMLModusSelectElement);
+    const modusSelect = this.elementRef.nativeElement as HTMLModusSelectElement;
     modusSelect.disabled = this.disabled;
     modusSelect.errorText = this.errorText;
     modusSelect.helperText = this.helperText;
@@ -205,7 +207,7 @@ export class ModusSelectDirective implements ControlValueAccessor, OnInit {
     }
   }
 
-  @HostListener('valueChange', ['$event.detail'])
+  @HostListener("valueChange", ["$event.detail"])
   listenForValueChange(value: string): void {
     this.value = value;
   }
@@ -233,11 +235,5 @@ export class ModusSelectDirective implements ControlValueAccessor, OnInit {
 Now adding the Modus Select as a form control is as easy as:
 
 ```html
-  <select-component
-    [formControl]="$any(form).controls['select1']"
-    [label]="'Select Form Demo'"
-    [options]="options"
-    [optionsDisplayProp]="'display'">
-</select-component>
+<select-component [formControl]="$any(form).controls['select1']" [label]="'Select Form Demo'" [options]="options" [optionsDisplayProp]="'display'"> </select-component>
 ```
-

@@ -1,8 +1,11 @@
 # Progress Bar
+
 ---
 
 [Modus Progress Bar](https://modus.trimble.com/elements/progress-bars/) web components display the completion progress of a task. They are referenced using the `<modus-progress-bar>` custom HTML element.
+
 ### Default
+
 <div>
   <modus-progress-bar value="3" max-value="4" min-value="0" text="75%"></modus-progress-bar>
 </div>
@@ -12,88 +15,90 @@
 ```
 
 ### Properties
+
 <section>
   <table>
     <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Type</th>
-      <th>Options</th>
-      <th>Default Value</th>
-      <th>Required</th>
-    </tr>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Options</th>
+        <th>Default Value</th>
+        <th>Required</th>
+      </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>aria-label</td>
-      <td>The progress bar's aria-label</td>
-      <td>string</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>background-color</td>
-      <td>The bar's background color</td>
-      <td>string</td>
-      <td></td>
-      <td>'#FFFFFF' (Trimble White)</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>color</td>
-      <td>The bar's color</td>
-      <td>string</td>
-      <td></td>
-      <td>'#005F9E' (Trimble Blue Mid)</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>max-value</td>
-      <td>The maximum value</td>
-      <td>number</td>
-      <td></td>
-      <td>100</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>min-value</td>
-      <td>The minimum value</td>
-      <td>number</td>
-      <td></td>
-      <td>0</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>text</td>
-      <td>The text displayed on the bar</td>
-      <td>string</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>text-color</td>
-      <td>The text color</td>
-      <td>string</td>
-      <td></td>
-      <td>'#FFFFFF' (Trimble White)</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>value</td>
-      <td>The progress value</td>
-      <td>number</td>
-      <td></td>
-      <td>0</td>
-      <td></td>
-    </tr>
+      <tr>
+        <td>aria-label</td>
+        <td>The progress bar's aria-label</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>background-color</td>
+        <td>The bar's background color</td>
+        <td>string</td>
+        <td></td>
+        <td>'#FFFFFF' (Trimble White)</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>color</td>
+        <td>The bar's color</td>
+        <td>string</td>
+        <td></td>
+        <td>'#005F9E' (Trimble Blue Mid)</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>max-value</td>
+        <td>The maximum value</td>
+        <td>number</td>
+        <td></td>
+        <td>100</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>min-value</td>
+        <td>The minimum value</td>
+        <td>number</td>
+        <td></td>
+        <td>0</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>text</td>
+        <td>The text displayed on the bar</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>text-color</td>
+        <td>The text color</td>
+        <td>string</td>
+        <td></td>
+        <td>'#FFFFFF' (Trimble White)</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>value</td>
+        <td>The progress value</td>
+        <td>number</td>
+        <td></td>
+        <td>0</td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
 </section>
 
 ### Accessibility
+
 - Progress Bar has `role` of `progressbar`.
 - Progress Bar gets an `aria-label` provided by the `aria-label` property input.
 - Progress Bar gets an `aria-maxvalue` provided by the `max-value` property input.

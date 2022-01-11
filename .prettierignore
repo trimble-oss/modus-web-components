@@ -1,0 +1,8 @@
+*.min.*
+
+*.css
+*.html
+*.js
+
+dist/*
+www/*

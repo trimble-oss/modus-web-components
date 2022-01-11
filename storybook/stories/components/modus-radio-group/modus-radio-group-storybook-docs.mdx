@@ -1,6 +1,7 @@
-import { Story } from '@storybook/addon-docs';
+import { Story } from "@storybook/addon-docs";
 
 # Radio Group
+
 ---
 
 [Modus Radio Group](https://modus.trimble.com/elements/lists/) web components are wrappers around native `<modus-radio-button>` custom HTML elements. They are referenced using the `<modus-radio-group>` custom HTML element.
@@ -22,95 +23,103 @@ A new TypeScript typing has been provided named RadioButton defined as:
 <modus-radio-group checked-id="1" name="my-group"></modus-radio-group>
 
 <script>
-    const modusRadioGroup = document.querySelector('modus-radio-group');
-    modusRadioGroup.radioButtons = [
-      {
-        id: '0',
-        label: 'Radio 1'
-      },
-      {
-        id: '1',
-        checked: true,
-        label: 'Radio 2'
-      },
-      {
-        id: '2',
-        label: 'Radio 3'
-      }
-    ];
+  const modusRadioGroup = document.querySelector("modus-radio-group");
+  modusRadioGroup.radioButtons = [
+    {
+      id: "0",
+      label: "Radio 1",
+    },
+    {
+      id: "1",
+      checked: true,
+      label: "Radio 2",
+    },
+    {
+      id: "2",
+      label: "Radio 3",
+    },
+  ];
 </script>
 ```
 
 ### Properties
+
 <section>
   <table>
     <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Type</th>
-      <th>Options</th>
-      <th>Default Value</th>
-      <th>Required</th>
-    </tr>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Options</th>
+        <th>Default Value</th>
+        <th>Required</th>
+      </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>checked-id</td>
-      <td>The id of the checked radio button</td>
-      <td>string</td>
-      <td></td>
-      <td></td>
-      <td><span class="material-icons">&#10004;</span></td>
-    </tr>
-    <tr>
-      <td>name</td>
-      <td>The name of the radio group</td>
-      <td>string</td>
-      <td></td>
-      <td></td>
-      <td><span class="material-icons">&#10004;</span></td>
-    </tr>
-    <tr>
-      <td>radioButtons</td>
-      <td>The radio buttons</td>
-      <td>RadioButton[]</td>
-      <td></td>
-      <td></td>
-      <td><span class="material-icons">&#10004;</span></td>
-    </tr>
-    <tr>
-      <td>aria-label</td>
-      <td>The radio group's aria-label</td>
-      <td>string</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
+      <tr>
+        <td>checked-id</td>
+        <td>The id of the checked radio button</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td>
+          <span class="material-icons">&#10004;</span>
+        </td>
+      </tr>
+      <tr>
+        <td>name</td>
+        <td>The name of the radio group</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td>
+          <span class="material-icons">&#10004;</span>
+        </td>
+      </tr>
+      <tr>
+        <td>radioButtons</td>
+        <td>The radio buttons</td>
+        <td>RadioButton[]</td>
+        <td></td>
+        <td></td>
+        <td>
+          <span class="material-icons">&#10004;</span>
+        </td>
+      </tr>
+      <tr>
+        <td>aria-label</td>
+        <td>The radio group's aria-label</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
 </section>
 
 ### DOM Events
+
 <section>
   <table>
     <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Emits</th>
-    </tr>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Emits</th>
+      </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>buttonClick</td>
-      <td>Fires on radio button click</td>
-      <td>The currently checked radio button</td>
-    </tr>
+      <tr>
+        <td>buttonClick</td>
+        <td>Fires on radio button click</td>
+        <td>The currently checked radio button</td>
+      </tr>
     </tbody>
   </table>
 </section>
 
 ### Accessibility
-- When a Radio Button has focus, **Enter** selects it, and emits `buttonClick` event.
 
+- When a Radio Button has focus, **Enter** selects it, and emits `buttonClick` event.
