@@ -56,7 +56,7 @@ npm install @trimble-oss/modus-web-components --save
 4. The package exposes the `defineCustomElements()` method which will define every component in the bundle. It does not run automatically, so you must import it and execute it yourself. We recommend you do this near the root of your application like so:
 
 ```javascript
-import { defineCustomElements } from "@trimble-oss/modus-web-components";
+import { defineCustomElements } from "@trimble-oss/modus-web-components/loader";
 
 defineCustomElements();
 ```
