@@ -7,8 +7,8 @@
     <img src="https://cdn.jsdelivr.net/gh/storybookjs/brand@master/badge/badge-storybook.svg">
   </a>
 
-  <a href="https://github.com/trimble-oss/modus-web-components/releases/tag/v0.0.18">
-    <img src="https://img.shields.io/badge/latest%20version-v0.0.18-%230063a3" />
+  <a href="https://github.com/trimble-oss/modus-web-components/releases/tag/v0.0.19">
+    <img src="https://img.shields.io/badge/latest%20version-v0.0.19-%230063a3" />
   </a>
   
   <a href="https://app.netlify.com/sites/modus-web-components/deploys"> 
