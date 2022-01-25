@@ -4,15 +4,17 @@ import { Story } from "@storybook/addon-docs";
 
 ---
 
-[Modus Breadcrumb](https://modus.trimble.com/elements/breadcrumbs/) web components are wrappers around native `<nav>` elements. They are referenced using the `<modus-breadcrumb>` custom HTML element.
+[Modus Breadcrumb](https://modus.trimble.com/components/breadcrumbs/) web components are wrappers around native `<nav>` elements. They are referenced using the `<modus-breadcrumb>` custom HTML element.
 
 A new TypeScript typing has been provided named Crumb defined as:
 
-    {
-      id: string; // required, must be unique.
-      display: string; // required.
-      route?: string; // optional, leave undefined to handle routing externally.
-    }
+```ts
+{
+  id: string; // required, must be unique.
+  display: string; // required.
+  route?: string; // optional, leave undefined to handle routing externally.
+}
+```
 
 Implementation Details
 
