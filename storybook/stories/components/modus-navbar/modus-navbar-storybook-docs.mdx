@@ -4,18 +4,20 @@ import { Story } from "@storybook/addon-docs";
 
 ---
 
-[Modus Navbar](https://modus.trimble.com/elements/navbar/) web components are the header of all Trimble applications. They are referenced using the `<modus-navbar>` custom HTML element.
+[Modus Navbar](https://modus.trimble.com/components/navbar/) web components are the header of all Trimble applications. They are referenced using the `<modus-navbar>` custom HTML element.
 
 This component utilizes the slot element, allowing you to render your own HTML in the help and notification menus.
 
 A new TypeScript typing has been provided named App defined as:
 
-    {
-      description?: string; // optional.
-      logoUrl: string; // required.
-      name: string; // required.
-      url: string; // required.
-    }
+```ts
+{
+  description?: string; // optional.
+  logoUrl: string; // required.
+  name: string; // required.
+  url: string; // required.
+}
+```
 
 Implementation Details
 
