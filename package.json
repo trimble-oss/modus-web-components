@@ -39,7 +39,7 @@
     "ci-storybook": "cd storybook && npm ci && npm run build-storybook"
   },
   "dependencies": {
-    "@stencil/core": "2.12.1"
+    "@stencil/core": "2.13.0"
   },
   "devDependencies": {
     "@stencil/postcss": "^2.1.0",
