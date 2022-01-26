@@ -20,7 +20,7 @@
     "@storybook/addon-actions": "^6.4.12",
     "@storybook/addon-essentials": "^6.4.12",
     "@storybook/addon-links": "^6.4.14",
-    "@storybook/web-components": "^6.4.12",
+    "@storybook/web-components": "^6.4.14",
     "babel-loader": "^8.2.3"
   },
   "license": "UNLICENSED"
