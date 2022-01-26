@@ -49,8 +49,8 @@ npm install @trimble-oss/modus-web-components --save
 
 ```html
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=fallback" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons&display=block" rel="stylesheet" />
 ```
 
 4. The package exposes the `defineCustomElements()` method which will define every component in the bundle. It does not run automatically, so you must import it and execute it yourself. We recommend you do this near the root of your application like so:
