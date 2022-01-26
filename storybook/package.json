@@ -11,7 +11,7 @@
     "@storybook/components": "^6.4.12",
     "@storybook/theming": "^6.4.14",
     "@types/mdx": "^2.0.1",
-    "lit-html": "^2.0.2",
+    "lit-html": "^2.1.2",
     "react": "^16.14.0",
     "react-dom": "^16.14.0"
   },
