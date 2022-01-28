@@ -44,6 +44,6 @@ describe('modus-dropdown', () => {
 
   it('should throw matching element not found error', async () => {
     const modusDropdown = new ModusDropdown();
-    expect(() => { modusDropdown.componentWillLoad() }).toThrowError('matching element not found for toggle-element-id');
+    expect(() => { modusDropdown.componentDidRender() }).toThrowError('matching element not found for toggle-element-id');
   });
 });

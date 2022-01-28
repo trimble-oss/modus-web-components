@@ -187,15 +187,15 @@ export namespace Components {
          */
         "ariaLabel": string;
         /**
-          * (optional) Disables the dropdown
+          * (optional) Disables the dropdown.
          */
         "disabled": boolean;
         /**
-          * (optional) The placement of the dropdown in related to the toggleElement
+          * (optional) The placement of the dropdown in related to the toggleElement.
          */
         "placement": 'top' | 'right' | 'bottom' | 'left';
         /**
-          * (required) The element id that the list renders near and that triggers the toggling of the list
+          * (required) The element id that the list renders near and that triggers the toggling of the list.
          */
         "toggleElementId": string;
     }
@@ -1053,19 +1053,19 @@ declare namespace LocalJSX {
          */
         "ariaLabel"?: string;
         /**
-          * (optional) Disables the dropdown
+          * (optional) Disables the dropdown.
          */
         "disabled"?: boolean;
         /**
-          * An event that fires on dropdown close
+          * An event that fires on dropdown close.
          */
         "onDropdownClose"?: (event: CustomEvent<any>) => void;
         /**
-          * (optional) The placement of the dropdown in related to the toggleElement
+          * (optional) The placement of the dropdown in related to the toggleElement.
          */
         "placement"?: 'top' | 'right' | 'bottom' | 'left';
         /**
-          * (required) The element id that the list renders near and that triggers the toggling of the list
+          * (required) The element id that the list renders near and that triggers the toggling of the list.
          */
         "toggleElementId"?: string;
     }
