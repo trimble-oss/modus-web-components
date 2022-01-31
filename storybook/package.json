@@ -21,7 +21,7 @@
     "@storybook/addon-actions": "^6.4.17",
     "@storybook/addon-essentials": "^6.4.17",
     "@storybook/addon-links": "^6.4.17",
-    "@storybook/web-components": "^6.4.14",
+    "@storybook/web-components": "^6.4.17",
     "babel-loader": "^8.2.3"
   },
   "license": "MIT"
