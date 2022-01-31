@@ -6,7 +6,7 @@
     "build-storybook": "build-storybook -o ./dist"
   },
   "dependencies": {
-    "@storybook/addon-docs": "^6.4.14",
+    "@storybook/addon-docs": "^6.4.17",
     "@storybook/addons": "^6.4.14",
     "@storybook/components": "^6.4.14",
     "@storybook/theming": "^6.4.14",
