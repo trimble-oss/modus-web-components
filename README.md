@@ -3,16 +3,14 @@
 </p>
 
 <p align="center">
-  <a href="https://modus-web-components.netlify.app/" target="_blank">
-    <img src="https://cdn.jsdelivr.net/gh/storybookjs/brand@master/badge/badge-storybook.svg">
+  <a href="https://modus-web-components.trimble.com/" target="_blank">
+    <img src="https://cdn.jsdelivr.net/gh/storybookjs/brand@master/badge/badge-storybook.svg" alt>
   </a>
-
-  <a href="https://github.com/trimble-oss/modus-web-components/releases/tag/v0.0.19">
-    <img src="https://img.shields.io/badge/latest%20version-v0.0.20-%230063a3" />
+  <a href="https://github.com/trimble-oss/modus-web-components/releases">
+    <img src="https://img.shields.io/badge/latest%20version-v0.0.20-%230063a3" alt/>
   </a>
-  
-  <a href="https://app.netlify.com/sites/modus-web-components/deploys"> 
-  <img src="https://api.netlify.com/api/v1/badges/c9f1de7d-daf8-4dd4-876d-4aa36a077213/deploy-status" />
+  <a href="https://app.netlify.com/sites/modus-web-components/deploys">
+    <img src="https://api.netlify.com/api/v1/badges/c9f1de7d-daf8-4dd4-876d-4aa36a077213/deploy-status" alt/>
   </a>
 </p>
 
