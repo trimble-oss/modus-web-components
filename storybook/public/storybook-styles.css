@@ -1,8 +1,15 @@
 /* https://storybook.js.org/docs/react/configure/theming */
 
 body,
-.sbdocs {
-  color: #252a2e !important;
+#docs-root,
+#docs-root p,
+.sbdocs,
+.sbdocs-h1,
+.sbdocs-h2,
+.sbdocs-li,
+.sbdocs-p,
+.sbdocs-ul {
+  color: #252a2e;
 }
 
 .sbdocs-table thead tr th {
@@ -28,4 +35,8 @@ body,
 
 .token.comment {
   opacity: 0.8;
+}
+
+body .sbdocs a {
+  color: #217cbb;
 }
