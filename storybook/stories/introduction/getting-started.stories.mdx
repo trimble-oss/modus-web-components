@@ -17,35 +17,17 @@ import { Meta } from "@storybook/addon-docs";
 
 # Getting Started
 
-## Generating a GitHub PAT
-
-The Modus Web Component NPM package is hosted privately through GitHub packages. To consume this package, you must have access to the Trimble OSS organization and create a GitHub PAT.
-
-1. Generate a GitHub PAT with 'read:packages' permissions by following [these steps](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
-2. Make sure to enable the PATs SSO by clicking 'Enable SSO' on the PAT page in your GitHub Developer Settings.
-3. Create a local OS environment variable on your machine named `NPM_AUTH_TOKEN` using the generated GitHub PAT. This will give you permission to read the package locally.
-   - In Windows, you can do this by opening 'Environment Variables' and adding a new 'System Variable'.
-   - In Mac, you can do this by adding an environment variable to your `.bash-profile` and executing the updated file.
+The Modus Web Components package is hosted publically through the NPM package registry. To consume this package, you'll need to have the [NPM CLI](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) installed.
 
 ## Installation
 
-Now that you've generated a PAT and are referencing it locally, you will have access to the package through NPM. Make sure you have the NPM CLI installed.
-
-1. In the root of your application, create a file named `.npmrc` with the contents:
-
-```
-@trimble-oss:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=${NPM_AUTH_TOKEN}
-always-auth=true
-```
-
-2. From the root of your application, run the command:
+1. From the root of your application, run the command:
 
 ```
 npm install @trimble-oss/modus-web-components --save
 ```
 
-3. Make sure Open Sans, and Google Material Icons are available browser resources in your application:
+2. Make sure Open Sans, and Google Material Icons are available browser resources in your application:
 
 ```html
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -53,7 +35,7 @@ npm install @trimble-oss/modus-web-components --save
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons&display=block" rel="stylesheet" />
 ```
 
-4. The package exposes the `defineCustomElements()` method which will define every component in the bundle. It does not run automatically, so you must import it and execute it yourself. We recommend you do this near the root of your application like so:
+3. The package exposes the `defineCustomElements()` method which will define every component in the bundle. It does not run automatically, so you must import it and execute it yourself. We recommend you do this near the root of your application like so:
 
 ```javascript
 import { defineCustomElements } from "@trimble-oss/modus-web-components/loader";
