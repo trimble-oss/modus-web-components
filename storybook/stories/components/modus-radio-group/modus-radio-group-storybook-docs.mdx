@@ -46,81 +46,18 @@ A new TypeScript typing has been provided named RadioButton defined as:
 
 ### Properties
 
-<section>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Type</th>
-        <th>Options</th>
-        <th>Default Value</th>
-        <th>Required</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>checked-id</td>
-        <td>The id of the checked radio button</td>
-        <td>string</td>
-        <td></td>
-        <td></td>
-        <td>
-          <span class="material-icons">&#10004;</span>
-        </td>
-      </tr>
-      <tr>
-        <td>name</td>
-        <td>The name of the radio group</td>
-        <td>string</td>
-        <td></td>
-        <td></td>
-        <td>
-          <span class="material-icons">&#10004;</span>
-        </td>
-      </tr>
-      <tr>
-        <td>radioButtons</td>
-        <td>The radio buttons</td>
-        <td>RadioButton[]</td>
-        <td></td>
-        <td></td>
-        <td>
-          <span class="material-icons">&#10004;</span>
-        </td>
-      </tr>
-      <tr>
-        <td>aria-label</td>
-        <td>The radio group's aria-label</td>
-        <td>string</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+| Name           | Description                        | Type            | Options | Default Value | Required |
+| -------------- | ---------------------------------- | --------------- | ------- | ------------- | -------- |
+| `checked-id`   | The id of the checked radio button | `string`        |         |               | ✔        |
+| `name`         | The name of the radio group        | `string`        |         |               | ✔        |
+| `radioButtons` | The radio buttons                  | `RadioButton[]` |         |               | ✔        |
+| `aria-label`   | The radio group's aria-label       | `string`        |         |               |          |
 
 ### DOM Events
 
-<section>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Emits</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>buttonClick</td>
-        <td>Fires on radio button click</td>
-        <td>The currently checked radio button</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+| Name          | Description                 | Emits                              |
+| ------------- | --------------------------- | ---------------------------------- |
+| `buttonClick` | Fires on radio button click | The currently checked radio button |
 
 ### Accessibility
 
