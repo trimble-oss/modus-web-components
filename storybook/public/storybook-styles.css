@@ -12,6 +12,10 @@ body,
   color: #252a2e;
 }
 
+.sbdocs-table {
+  width: 100%;
+}
+
 .sbdocs-table thead tr th {
   color: #252a2e;
   background-color: #f1f1f6;
@@ -23,6 +27,11 @@ body,
 
 .sbdocs-table tbody tr td {
   border: 1px solid #b7b9c3;
+}
+
+.sbdocs-table tbody tr td:first-of-type {
+  max-width: 160px;
+  width: 160px;
 }
 
 .docblock-source {
