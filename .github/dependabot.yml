@@ -3,12 +3,12 @@ updates:
   - package-ecosystem: npm
     directory: "/"
     schedule:
-      interval: weekly
+      interval: monthly
     versioning-strategy: increase
   - package-ecosystem: npm
     directory: "/storybook/"
     schedule:
-      interval: weekly
+      interval: monthly
     versioning-strategy: increase
   - package-ecosystem: github-actions
     directory: "/"
