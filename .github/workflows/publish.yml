@@ -3,7 +3,7 @@ on:
   release:
     types: [ published ]
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2.4.0
-      # Setup .npmrc file to publish to npm
+      # Setup Node, build, and publish to the npm, and GitHub registries
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.5.1
         with:
@@ -21,7 +21,11 @@ jobs:
         run: npm ci
       - name: Run Stencil build
         run: npm run build
-      - name: Publish NPM Package
+      - name: Set NPM Registry Auth Token
+        run: npm set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TRIMBLE_OSS_AUTOMATION_TOKEN }}
+      - name: Publish NPM Package Publicly
         run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TRIMBLE_OSS_AUTOMATION_TOKEN }}
+      - name: Set GitHub Registry Auth Token
+        run: npm set //npm.pkg.github.com/:_authToken ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish NPM Package to GitHub Registry
+        run: npm publish --access public --ignore-scripts --@trimble-oss:registry='https://npm.pkg.github.com'
