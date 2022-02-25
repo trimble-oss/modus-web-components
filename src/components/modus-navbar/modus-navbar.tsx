@@ -16,7 +16,7 @@ export class ModusNavbar {
   @Prop() apps: App[];
 
   /** (required) Product logo options. */
-  @Prop() productLogoOptions: { url: string };
+  @Prop() productLogoOptions: { height?: string; url: string };
 
   /** (required) Profile menu options. */
   @Prop() profileMenuOptions: { avatarUrl?: string, email?: string, initials?: string, username: string };
@@ -158,7 +158,7 @@ export class ModusNavbar {
               </span>
               {this.mainMenuVisible && <modus-navbar-main-menu><slot name="main"></slot></modus-navbar-main-menu>}
             </div>}
-          <img class="product-logo" height="24" src={this.productLogoOptions?.url} alt="Modus navbar product logo" onClick={(event) => this.productLogoClick.emit(event)} />
+          <img class="product-logo" height={this.productLogoOptions?.height ?? '24'} src={this.productLogoOptions?.url} alt="Modus navbar product logo" onClick={(event) => this.productLogoClick.emit(event)} />
         </div>
         <div class={`right ${direction}`}>
           {this.showSearch &&

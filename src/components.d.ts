@@ -257,7 +257,7 @@ export namespace Components {
         /**
           * (required) Product logo options.
          */
-        "productLogoOptions": { url: string };
+        "productLogoOptions": { height?: string; url: string };
         /**
           * (required) Profile menu options.
          */
@@ -1153,7 +1153,7 @@ declare namespace LocalJSX {
         /**
           * (required) Product logo options.
          */
-        "productLogoOptions"?: { url: string };
+        "productLogoOptions"?: { height?: string; url: string };
         /**
           * (required) Profile menu options.
          */
