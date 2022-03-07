@@ -113,6 +113,36 @@ All NPM scripts are run from the root of the project.
 - [SASS](https://sass-lang.com/) - The most mature, stable, and powerful professional grade CSS extension language in the world.
 - [rollup.js](https://rollupjs.org/) - A module bundler for JavaScript which compiles small pieces of code into something larger and more complex, such as a library or application.
 
+## Changelog
+- Changelog - A file that contains a curated list of chronological entries for each version of a project.
+- Purpose - Enable users to quickly see precise changes between each release or version of a project.
+- Uses - End users want to know how and why the software they use changes.
+
+### Semantic Versioning
+This project uses the following semantic versioning convention for the repository and changelog entries.
+Given a version number [MAJOR.MINOR.PATCH], increment the following:
+1. Major Version: to make incompatible API changes - updates containing new dependencies.
+2. Minor Version: to add functionality in a backwards compatible manner.
+3. Patch Version: to make backwards compatible bug fixes.
+Example: Version 1.0.0 has a function added in accordance with a minor version update. The new version will be 1.1.0.
+See: [semver.org](https://semver.org/spec/v2.0.0.html).
+
+### Guidelines
+- Entries are are easy to understand.
+- Each version has an entry and release date.
+- Entries have corresponding addresses linked.
+- Entries are ordered by date from newest to oldest.
+- Entries contain updates relevant to an end user and may not reflect every commit.
+
+### Update-Types
+Each changelog entry will include one or more update types relevant to each change:
+- Added: New features.
+- Changed: Changes in functionality.
+- Deprecated: For soon to be removed features.
+- Removed: For removed features.
+- Fixed: For bug Fixes.
+- Security: For vulnerabilities.
+
 ------
 
 [Back to Top](#modus-web-components)
