@@ -19,7 +19,7 @@ export class ModusNavbar {
   @Prop() productLogoOptions: { height?: string; url: string };
 
   /** (required) Profile menu options. */
-  @Prop() profileMenuOptions: { avatarUrl?: string, email?: string, initials?: string, username: string };
+  @Prop({ mutable: true }) profileMenuOptions: { avatarUrl?: string, email?: string, initials?: string, username: string };
 
   /** (optional) Whether to display the navbar items in reverse order. */
   @Prop() reverse: boolean;
@@ -50,6 +50,8 @@ export class ModusNavbar {
   @State() notificationsMenuVisible: boolean;
   @State() profileMenuVisible: boolean;
 
+  profileAvatarElement: HTMLImageElement;
+
   @Listen('click', { target: 'document' })
   documentClickHandler(event: MouseEvent): void {
     // Individual menus can prevent this listener from closing them.
@@ -60,6 +62,16 @@ export class ModusNavbar {
   @Listen('signOutClick')
   signOutClickHandler(event: MouseEvent): void {
     this.profileMenuSignOutClick.emit(event);
+  }
+
+  componentDidRender(): void {
+    // If there is an error loading the avatar image, remove it so that the initials show.
+    this.profileAvatarElement?.addEventListener('error', () => {
+      this.profileMenuOptions = {
+        ...this.profileMenuOptions,
+        avatarUrl: null
+      };
+    });
   }
 
   appsMenuClickHandler(event: MouseEvent): void {
@@ -182,7 +194,7 @@ export class ModusNavbar {
             </div>}
           <div class="profile-menu">
             {this.profileMenuOptions?.avatarUrl ?
-              <img class="avatar" height="32" src={this.profileMenuOptions?.avatarUrl} alt="Modus navbar profile menu avatar" onClick={(event) => this.profileMenuClickHandler(event)} onKeyDown={(event) => this.profileMenuKeydownHandler(event)} tabIndex={0}/>
+              <img class="avatar" height="32" src={this.profileMenuOptions?.avatarUrl} alt="Modus navbar profile menu avatar" onClick={(event) => this.profileMenuClickHandler(event)} onKeyDown={(event) => this.profileMenuKeydownHandler(event)} tabIndex={0} ref={(el) => this.profileAvatarElement = el as HTMLImageElement}/>
             : <span class="initials" onClick={(event) => this.profileMenuClickHandler(event)} onKeyDown={(event) => this.profileMenuKeydownHandler(event)} tabIndex={0}>{this.profileMenuOptions?.initials}</span>}
             {this.profileMenuVisible &&
               <modus-navbar-profile-menu
