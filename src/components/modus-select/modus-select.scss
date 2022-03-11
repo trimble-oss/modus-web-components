@@ -97,7 +97,9 @@
         display: flex;
         font-size: $rem-12px;
         height: $rem-20px;
+        overflow: hidden;
         padding-left: $rem-8px;
+        white-space: nowrap;
 
         &.active {
           background-color: $col_gray_0;
