@@ -98,6 +98,8 @@
         font-size: $rem-12px;
         height: $rem-20px;
         padding-left: $rem-8px;
+        white-space: nowrap;
+        overflow: hidden;
 
         &.active {
           background-color: $col_gray_0;
