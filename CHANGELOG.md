@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.1.3] - 2022-14-03
+### Fixed
+- Add styling to modus-select component so that items with long text in the dropdown wrap properly
+
 ## [0.1.1] - 2022-02-03
 ### Added
 - Add explanation of semantic versioning to the readme file.
