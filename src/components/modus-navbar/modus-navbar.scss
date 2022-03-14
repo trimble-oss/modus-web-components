@@ -9,6 +9,10 @@ nav {
     flex-direction: row-reverse;
   }
 
+  &.shadow {
+    box-shadow: $box-shadow;
+  }
+
   .icon-menu,
   .icon-search,
   .icon-notifications,

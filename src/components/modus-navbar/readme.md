@@ -18,6 +18,7 @@
 | `showNotifications`    | `show-notifications`     | (optional) Whether to show notifications.                        | `boolean`                                                                      | `undefined` |
 | `showPendoPlaceholder` | `show-pendo-placeholder` | (optional) Whether to show the placeholder for Pendo.            | `boolean`                                                                      | `undefined` |
 | `showSearch`           | `show-search`            | (optional) Whether to show search.                               | `boolean`                                                                      | `undefined` |
+| `showShadow`           | `show-shadow`            | (optional) Whether to show a shadow under the navbar.            | `boolean`                                                                      | `undefined` |
 
 
 ## Events

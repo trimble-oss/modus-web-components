@@ -286,6 +286,10 @@ export namespace Components {
           * (optional) Whether to show search.
          */
         "showSearch": boolean;
+        /**
+          * (optional) Whether to show a shadow under the navbar.
+         */
+        "showShadow": boolean;
     }
     interface ModusNavbarAppsMenu {
         "apps": App[];
@@ -1182,6 +1186,10 @@ declare namespace LocalJSX {
           * (optional) Whether to show search.
          */
         "showSearch"?: boolean;
+        /**
+          * (optional) Whether to show a shadow under the navbar.
+         */
+        "showShadow"?: boolean;
     }
     interface ModusNavbarAppsMenu {
         "apps"?: App[];
