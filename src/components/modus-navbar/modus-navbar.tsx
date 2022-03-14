@@ -39,6 +39,9 @@ export class ModusNavbar {
   /** (optional) Whether to show search. */
   @Prop() showSearch: boolean;
 
+  /** (optional) Whether to show a shadow under the navbar. */
+  @Prop() showShadow: boolean;
+
   /** An event that fires on product logo click. */
   @Event() productLogoClick: EventEmitter<MouseEvent>;
 
@@ -159,9 +162,9 @@ export class ModusNavbar {
 
   render(): unknown {
     const direction = this.reverse ? 'reverse' : '';
-
+    const shadow = this.showShadow ? 'shadow' : '';
     return (
-      <nav class={direction}>
+      <nav class={`${direction} ${shadow}`} >
         <div class={`left ${direction}`}>
           {this.showMainMenu &&
             <div class="navbar-button">
