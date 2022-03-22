@@ -7,7 +7,7 @@
 - Node (v14.18.0)
 - NPM CLI (v6.14.15)
 
-***We recommend using [NVM](https://github.com/nvm-sh/nvm). It is a great tool for switching between Node versions***
+*We recommend using [NVM](https://github.com/nvm-sh/nvm). It is a great tool for switching between Node versions*
 
 ## Submitting Issues
 
