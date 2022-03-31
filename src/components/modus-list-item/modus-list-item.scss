@@ -6,7 +6,7 @@ li {
   font-family: $primary-font;
   font-size: $rem-16px;
   min-height: $list-group-item-height;
-  padding: $rem-2px $rem-16px;
+  padding: 0 $rem-16px;
 
   .slot {
     overflow: hidden;
@@ -25,7 +25,10 @@ li {
   &.small {
     font-size: $rem-12px;
     min-height: $list-group-item-height-sm;
-    padding: $rem-3px $rem-12px;
+  }
+
+  &.large {
+    min-height: $list-group-item-height-lg;
   }
 
   &.disabled {

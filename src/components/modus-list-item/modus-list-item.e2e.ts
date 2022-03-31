@@ -46,6 +46,10 @@ describe('modus-list-item', () => {
     component.setProperty('size', 'condensed');
     await page.waitForChanges();
     expect(element).toHaveClass('small');
+
+    component.setProperty('size', 'large');
+    await page.waitForChanges();
+    expect(element).toHaveClass('large');
   });
 
   it('emits itemClick event on li click', async () => {

@@ -213,7 +213,7 @@ export namespace Components {
         /**
           * (optional) The size of list item
          */
-        "size": 'condensed' | 'standard';
+        "size": 'condensed' | 'large' | 'standard';
         /**
           * (optional) The type of list item
          */
@@ -1091,7 +1091,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The size of list item
          */
-        "size"?: 'condensed' | 'standard';
+        "size"?: 'condensed' | 'large' | 'standard';
         /**
           * (optional) The type of list item
          */

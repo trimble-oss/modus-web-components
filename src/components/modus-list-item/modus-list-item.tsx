@@ -15,7 +15,7 @@ export class ModusListItem {
   @Prop() selected: boolean;
 
   /** (optional) The size of list item */
-  @Prop() size: 'condensed' | 'standard' = 'standard';
+  @Prop() size: 'condensed' | 'large' | 'standard' = 'standard';
 
   /** (optional) The type of list item */
   @Prop() type: 'standard' = 'standard'; // Future support for 'checkbox' | 'icon' | 'menu' | 'standard' | 'switchLeft' | 'switchRight'
@@ -26,18 +26,17 @@ export class ModusListItem {
   classBySize: Map<string, string> = new Map([
     ['condensed', 'small'],
     ['standard', 'standard'],
+    ['large', 'large'],
   ]);
 
   render(): unknown {
     const containerClass = `${this.classBySize.get(this.size)} ${this.disabled ? 'disabled' : ''} ${this.selected ? 'selected' : ''}`;
-    const iconSize = this.size === 'standard' ? '22' : '18';
+    const iconSize = this.size === 'condensed' ? '18' : '22';
 
     return (
       <li class={containerClass} onClick={() => !this.disabled ? this.itemClick.emit() : null}>
         <span class="slot"><slot /></span>
-        {this.selected ?
-          <IconCheck size={iconSize} />
-        : null}
+        {this.selected && <IconCheck size={iconSize} />}
       </li>
     );
   }

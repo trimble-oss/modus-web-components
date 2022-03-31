@@ -13,22 +13,28 @@ Implementation Details
 ### Default
 
 <modus-list>
-  <modus-list-item>Default</modus-list-item>
-  <modus-list-item selected>Selected</modus-list-item>
-  <modus-list-item disabled>Disabled</modus-list-item>
   <modus-list-item size="condensed">Condensed</modus-list-item>
   <modus-list-item selected size="condensed">
     Condensed & Selected
+  </modus-list-item>
+  <modus-list-item>Default</modus-list-item>
+  <modus-list-item selected>Selected</modus-list-item>
+  <modus-list-item disabled>Disabled</modus-list-item>
+  <modus-list-item size="large">Large</modus-list-item>
+  <modus-list-item selected size="large">
+    Large & Selected
   </modus-list-item>
 </modus-list>
 
 ```html
 <modus-list>
+  <modus-list-item size="condensed">Condensed</modus-list-item>
+  <modus-list-item selected size="condensed">Condensed & Selected</modus-list-item>
   <modus-list-item>Default</modus-list-item>
   <modus-list-item selected>Selected</modus-list-item>
   <modus-list-item disabled>Disabled</modus-list-item>
-  <modus-list-item size="condensed">Condensed</modus-list-item>
-  <modus-list-item selected size="condensed">Condensed & Selected</modus-list-item>
+  <modus-list-item size="large">Large</modus-list-item>
+  <modus-list-item selected size="large">Large & Selected</modus-list-item>
 </modus-list>
 ```
 
@@ -69,7 +75,7 @@ Implementation Details
         <td>size</td>
         <td>The size of the list item</td>
         <td>string</td>
-        <td>'condensed', 'standard'</td>
+        <td>'condensed', 'large', 'standard'</td>
         <td>'standard'</td>
         <td></td>
       </tr>
