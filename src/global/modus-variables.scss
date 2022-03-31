@@ -338,6 +338,7 @@ $toast-border-radius:               $border-radius !default;
 // Badges
 
 $badge-font-size:                   $rem-12px !default;
+$badge-font-weight:                 700 !default;
 $badge-padding-y:                   calc((20px - #{$badge-font-size}) / 2) !default;
 $badge-padding-x:                   .5rem !default;
 
