@@ -46,5 +46,8 @@ describe('modus-list-item', () => {
 
     className = modusListItem.classBySize.get('condensed');
     expect(className).toEqual('small');
+
+    className = modusListItem.classBySize.get('large');
+    expect(className).toEqual('large');
   });
 });

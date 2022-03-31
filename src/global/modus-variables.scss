@@ -388,8 +388,9 @@ $list-group-bg:                     ui-color('main-background') !default;
 $list-group-item-border-color:      ui-color('hover') !default;
 $list-group-item-outline-color:     ui-color('hover') !default;
 
-$list-group-item-height:            3rem !default; // 48px
-$list-group-item-height-sm:         2rem !default; // 32px
+$list-group-item-height-lg:            2.875rem !default; // 46px, 2px removed to account for border width
+$list-group-item-height:               2.375rem !default; // 38px, 2px removed to account for border width
+$list-group-item-height-sm:            1.875rem !default; // 30px, 2px removed to account for border width
 
 $list-group-item-padding-y:         $rem-7px !default;
 $list-group-item-padding-y-sm:      $rem-3px !default;

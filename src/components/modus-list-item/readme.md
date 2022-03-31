@@ -7,12 +7,12 @@
 
 ## Properties
 
-| Property   | Attribute  | Description                                    | Type                        | Default      |
-| ---------- | ---------- | ---------------------------------------------- | --------------------------- | ------------ |
-| `disabled` | `disabled` | (optional) Disables the list item              | `boolean`                   | `undefined`  |
-| `selected` | `selected` | (optional) The selected state of the list item | `boolean`                   | `undefined`  |
-| `size`     | `size`     | (optional) The size of list item               | `"condensed" \| "standard"` | `'standard'` |
-| `type`     | `type`     | (optional) The type of list item               | `"standard"`                | `'standard'` |
+| Property   | Attribute  | Description                                    | Type                                   | Default      |
+| ---------- | ---------- | ---------------------------------------------- | -------------------------------------- | ------------ |
+| `disabled` | `disabled` | (optional) Disables the list item              | `boolean`                              | `undefined`  |
+| `selected` | `selected` | (optional) The selected state of the list item | `boolean`                              | `undefined`  |
+| `size`     | `size`     | (optional) The size of list item               | `"condensed" \| "large" \| "standard"` | `'standard'` |
+| `type`     | `type`     | (optional) The type of list item               | `"standard"`                           | `'standard'` |
 
 
 ## Events
