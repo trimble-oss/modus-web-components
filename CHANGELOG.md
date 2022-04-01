@@ -2,6 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+### Changed
+- `modus-list-item` added a `size` option, and now has three options for its `size` property: `'condensed'`, `'standard'`, and `'large'`. `'standard'` is the default, and is now a height `40px`.
 
 ## [0.1.4] - 2022-14-03
 ### Added
