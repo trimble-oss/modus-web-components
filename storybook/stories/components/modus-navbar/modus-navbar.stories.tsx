@@ -23,7 +23,6 @@ export default {
 const Template = () => html`
   <modus-navbar show-apps-menu show-help-menu show-main-menu show-notifications>
     <div slot="main">Render your own main menu.</div>
-    <div slot="help">Render your own help.</div>
     <div slot="notifications">Render your own notifications.</div>
   </modus-navbar>
   ${setNavbar()}
@@ -47,5 +46,4 @@ const setNavbar = () => {
 
   return tag;
 }
-
 
