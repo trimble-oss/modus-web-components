@@ -254,6 +254,7 @@ export namespace Components {
           * (optional) The apps to render in the apps menu.
          */
         "apps": App[];
+        "hideMainMenu": () => Promise<void>;
         /**
           * (required) Product logo options.
          */

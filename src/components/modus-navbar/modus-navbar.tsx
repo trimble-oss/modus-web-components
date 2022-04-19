@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { Component, Prop, h, Event, EventEmitter, State, Listen } from '@stencil/core';
+import { Component, Prop, h, Event, EventEmitter, State, Listen, Method } from '@stencil/core';
 import { IconMenu } from '../icons/icon-menu';
 import { IconNotifications } from '../icons/icon-notifications';
 import { IconApps } from '../icons/icon-apps';
@@ -47,6 +47,11 @@ export class ModusNavbar {
 
   /** An event that fires on profile menu sign out click. */
   @Event() profileMenuSignOutClick: EventEmitter<MouseEvent>;
+
+  @Method()
+  async hideMainMenu() {
+    this.mainMenuVisible = false;
+  }
 
   @State() appsMenuVisible: boolean;
   @State() mainMenuVisible: boolean;
