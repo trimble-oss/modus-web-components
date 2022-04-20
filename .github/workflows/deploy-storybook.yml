@@ -5,6 +5,9 @@ on:
 jobs:
   deploy-storybook:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./stencil-workspace
     steps:
       - name: Checkout
         uses: actions/checkout@v3

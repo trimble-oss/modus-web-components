@@ -21,7 +21,7 @@
   "files": [
     "dist/",
     "loader/",
-    "SUPPORT.md"
+    "../SUPPORT.md"
   ],
   "scripts": {
     "build": "stencil build --docs",
@@ -32,7 +32,7 @@
     "lint": "npm run lint-js && npm run lint-css",
     "lint-js": "eslint src/** --no-error-on-unmatched-pattern",
     "lint-css": "stylelint src/**/*.scss",
-    "prettier": "prettier --write \"storybook/**/*.mdx\"",
+    "prettier": "prettier --write \\\\\\\"storybook/**/*.mdx\\\\\\\"",
     "full": "npm ci && npm run lint-js && npm run lint-css && npm run build && npm run test && npm run ci-storybook",
     "ci-storybook": "cd storybook && npm ci && npm run build-storybook"
   },

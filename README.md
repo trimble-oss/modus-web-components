@@ -74,9 +74,9 @@ This library provides Modus Elements as web components. Web components are reusa
 
 ### Contribution
 
-If this is your first time in the project, run `npm install` to download 3rd party packages.
+If this is your first time in the project, navigate to the `./stencil-workspace` directory and run `npm install` to download 3rd party packages.
 
-All web components are located under the src/components directory.
+All web components are located under the `./stencil-workspace/src/components directory.`
 
 The index.html file provides a place to render components for development and end to end testing.
 
@@ -91,7 +91,7 @@ We won't cover them here as they are often very specific to an individual SPA fr
 
 ## Available Scripts
 
-All NPM scripts are run from the root of the project.
+All NPM scripts are run from the `./stencil-workspace` project directory.
 
 `npm install` - Install 3rd party packages
 
