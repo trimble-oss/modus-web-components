@@ -1,12 +1,12 @@
 version: 2
 updates:
   - package-ecosystem: npm
-    directory: "/"
+    directory: "/stencil-workspace/"
     schedule:
       interval: monthly
     versioning-strategy: increase
   - package-ecosystem: npm
-    directory: "/storybook/"
+    directory: "/stencil-workspace/storybook/"
     schedule:
       interval: monthly
     versioning-strategy: increase

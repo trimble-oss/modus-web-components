@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+### Changed
+Restructured the repo to allow for build generated angular and react components:
+- Updated github actions to refer to the new stencil location
+- Updated .prettierrc to force single quotes which is consistent with our lint settings
+- Moved all stencil source code into ./stencil-workspace
+- Moved storybook code along with stencil code to simplify the  build script changes
+- Updated package.json types to use interfaces.d.ts which exposes
+  internal interfaces to consumers of Angular Components.
 
 ## [0.1.5] - 2022-19-04
 ### Changed

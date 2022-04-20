@@ -38,7 +38,7 @@ We are hosting this package on both the @trimble-oss GitHub NPM registry, and th
 
 ## Available Scripts
 
-All NPM scripts are run from the root of the project.
+All NPM scripts are run from the `./stencil-workspace` project directory.
 
 `npm install` - Install 3rd party packages
 
