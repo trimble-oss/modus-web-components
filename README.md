@@ -7,7 +7,7 @@
     <img src="https://cdn.jsdelivr.net/gh/storybookjs/brand@master/badge/badge-storybook.svg" alt/>
   </a>
   <a href="https://www.npmjs.com/package/@trimble-oss/modus-web-components">
-    <img src="https://img.shields.io/github/package-json/v/trimble-oss/modus-web-components?color=blue" alt/>
+    <img src="https://img.shields.io/github/package-json/v/trimble-oss/modus-web-components?color=blue&filename=stencil-workspace%2Fpackage.json" alt/>
   </a>
   <a href="https://app.netlify.com/sites/modus-web-components/deploys">
     <img src="https://api.netlify.com/api/v1/badges/c9f1de7d-daf8-4dd4-876d-4aa36a077213/deploy-status" alt/>
