@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 ### Changed
+Added angular-workspace project directory to house the generated angular wrapper components
+
+## [Unreleased]
+### Changed
 Restructured the repo to allow for build generated angular and react components:
 - Updated github actions to refer to the new stencil location
 - Updated .prettierrc to force single quotes which is consistent with our lint settings

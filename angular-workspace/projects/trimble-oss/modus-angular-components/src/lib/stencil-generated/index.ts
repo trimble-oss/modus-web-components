@@ -1,0 +1,36 @@
+
+import * as d from './components';
+
+export const DIRECTIVES = [
+  d.ModusAccordion,
+  d.ModusAccordionItem,
+  d.ModusAlert,
+  d.ModusBadge,
+  d.ModusBreadcrumb,
+  d.ModusButton,
+  d.ModusCard,
+  d.ModusCheckbox,
+  d.ModusChip,
+  d.ModusDropdown,
+  d.ModusList,
+  d.ModusListItem,
+  d.ModusMessage,
+  d.ModusModal,
+  d.ModusNavbar,
+  d.ModusNavbarAppsMenu,
+  d.ModusNavbarMainMenu,
+  d.ModusNavbarNotificationsMenu,
+  d.ModusNavbarProfileMenu,
+  d.ModusNumberInput,
+  d.ModusPagination,
+  d.ModusProgressBar,
+  d.ModusRadioGroup,
+  d.ModusSelect,
+  d.ModusSlider,
+  d.ModusSpinner,
+  d.ModusSwitch,
+  d.ModusTabs,
+  d.ModusTextInput,
+  d.ModusToast,
+  d.ModusTooltip
+];

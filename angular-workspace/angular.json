@@ -1,0 +1,142 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "@trimble-oss/modus-angular-components": {
+      "projectType": "library",
+      "root": "projects/trimble-oss/modus-angular-components",
+      "sourceRoot": "projects/trimble-oss/modus-angular-components/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/trimble-oss/modus-angular-components/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/trimble-oss/modus-angular-components/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/trimble-oss/modus-angular-components/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/trimble-oss/modus-angular-components/src/test.ts",
+            "tsConfig": "projects/trimble-oss/modus-angular-components/tsconfig.spec.json",
+            "karmaConfig": "projects/trimble-oss/modus-angular-components/karma.conf.js"
+          }
+        }
+      }
+    },
+    "test-harness": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "projects/test-harness",
+      "sourceRoot": "projects/test-harness/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/test-harness",
+            "index": "projects/test-harness/src/index.html",
+            "main": "projects/test-harness/src/main.ts",
+            "polyfills": "projects/test-harness/src/polyfills.ts",
+            "tsConfig": "projects/test-harness/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/test-harness/src/favicon.ico",
+              "projects/test-harness/src/assets"
+            ],
+            "styles": [
+              "projects/test-harness/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/test-harness/src/environments/environment.ts",
+                  "with": "projects/test-harness/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "test-harness:build:production"
+            },
+            "development": {
+              "browserTarget": "test-harness:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "test-harness:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/test-harness/src/test.ts",
+            "polyfills": "projects/test-harness/src/polyfills.ts",
+            "tsConfig": "projects/test-harness/tsconfig.spec.json",
+            "karmaConfig": "projects/test-harness/karma.conf.js",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/test-harness/src/favicon.ico",
+              "projects/test-harness/src/assets"
+            ],
+            "styles": [
+              "projects/test-harness/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "@trimble-oss/modus-angular-components"
+}
