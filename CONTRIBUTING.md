@@ -60,6 +60,8 @@ To get this application up and running, there are just two commands needed:
 - Run `npm install`
 - Run `npm start`
 
+> **Note:** The `./stencil-workspace` project directory is the source of truth for this component library. This where all component changes will take place.
+
 ## Developing a Component
 
 Stencil gives us a dev server to work with out of the box. Using this dev server is our recommended way for developing on these components.
