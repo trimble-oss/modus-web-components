@@ -566,13 +566,13 @@ export declare interface ModusProgressBar extends Components.ModusProgressBar {}
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['ariaLabel', 'backgroundColor', 'color', 'maxValue', 'minValue', 'text', 'textColor', 'value']
+  inputs: ['ariaLabel', 'backgroundColor', 'color', 'maxValue', 'minValue', 'size', 'text', 'textColor', 'value']
 })
 @Component({
   selector: 'modus-progress-bar',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['ariaLabel', 'backgroundColor', 'color', 'maxValue', 'minValue', 'text', 'textColor', 'value']
+  inputs: ['ariaLabel', 'backgroundColor', 'color', 'maxValue', 'minValue', 'size', 'text', 'textColor', 'value']
 })
 export class ModusProgressBar {
   protected el: HTMLElement;

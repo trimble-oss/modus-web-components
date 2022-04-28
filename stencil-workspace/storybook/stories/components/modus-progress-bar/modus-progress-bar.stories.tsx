@@ -41,6 +41,13 @@ export default {
         type: { summary: 'number' }
       }
     },
+    size: {
+      description: 'The progress bar\'s size',
+      table: {
+        defaultValue: { summary: 'default' },
+        type: { summary: 'string' }
+      }
+    },
     text: {
       description: 'The progress bar\'s text',
       table: {
@@ -73,13 +80,14 @@ export default {
   },
 };
 
-const Template = ({ ariaLabel, backgroundColor, color, maxValue, minValue, text, textColor, value }) => html`
+const Template = ({ ariaLabel, backgroundColor, color, maxValue, minValue, size, text, textColor, value }) => html`
   <modus-progress-bar
     aria-label=${ariaLabel}
     background-color=${backgroundColor}
     color=${color}
     max-value=${maxValue}
     min-value=${minValue}
+    size=${size}
     text=${text}
     text-color=${textColor}
     value=${value}>
@@ -87,6 +95,9 @@ const Template = ({ ariaLabel, backgroundColor, color, maxValue, minValue, text,
 `;
 
 export const Default = Template.bind({});
-Default.args = { ariaLabel: '', backgroundColor: '', color: '', maxValue: 100, minValue: 0, text: 'Some progress!', textColor: '', value: 50 };
+Default.args = { ariaLabel: '', backgroundColor: '', color: '', maxValue: 100, minValue: 0, size: 'default', text: 'Some progress!', textColor: '', value: 50 };
+
+export const Compact = Template.bind({});
+Compact.args = { ariaLabel: '', backgroundColor: '', color: '', maxValue: 100, minValue: 0, size: 'compact', text: '', textColor: '', value: 50 };
 
 

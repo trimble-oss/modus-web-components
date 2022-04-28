@@ -24,4 +24,8 @@
       color: $col_white;
     }
   }
+
+  &.compact {
+    height: $rem-8px;
+  }
 }

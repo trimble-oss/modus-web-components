@@ -60,4 +60,17 @@ describe('modus-progress-bar', () => {
     await page.waitForChanges();
     expect(await el.innerText).toEqual('Hello, World!');
   });
+
+  it('renders changes to size prop', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-progress-bar></modus-progress-bar>');
+    const component = await page.find('modus-progress-bar');
+    const el = await page.find('modus-progress-bar >>> .modus-progress-bar');
+
+    expect(el).toHaveClass('default');
+    component.setProperty('size', 'compact');
+    await page.waitForChanges();
+    expect(el).toHaveClass('compact');
+  });
 });
