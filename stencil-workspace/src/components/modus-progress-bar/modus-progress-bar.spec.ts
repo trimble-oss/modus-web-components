@@ -10,7 +10,7 @@ describe('modus-progress-bar', () => {
     expect(root).toEqualHtml(`
       <modus-progress-bar>
         <mock:shadow-root>
-          <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" class="default-background-color modus-progress-bar" role="progressbar">
+          <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" class="default default-background-color modus-progress-bar" role="progressbar">
             <div class="default-color default-text-color progress" style="width: 0%;">
             </div>
           </div>
@@ -37,5 +37,14 @@ describe('modus-progress-bar', () => {
   it('should default value to 0', async () => {
     const modusProgress = new ModusProgressBar();
     expect(modusProgress.value).toEqual(0);
+  });
+
+  it('should get the correct class by size', async () => {
+    const modusProgress = new ModusProgressBar();
+    let className = modusProgress.classBySize.get(modusProgress.size);
+    expect(className).toEqual('default');
+
+    className = modusProgress.classBySize.get('compact');
+    expect(className).toEqual('compact');
   });
 });

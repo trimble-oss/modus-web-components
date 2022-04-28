@@ -23,6 +23,9 @@ export class ModusProgressBar {
   /** (optional) The progress bar's minimum value. */
   @Prop() minValue = 0;
 
+  /** (optional) The progress bar's size. */
+  @Prop() size: 'default' | 'compact' = 'default';
+
   /** (optional) The text displayed on the progress bar. */
   @Prop() text: string;
 
@@ -31,6 +34,11 @@ export class ModusProgressBar {
 
   /** (optional) The progress bar's value. */
   @Prop() value = 0;
+
+  classBySize: Map<string, string> = new Map([
+    ['default', 'default'],
+    ['compact', 'compact'],
+  ]);
 
   getProgressStyle(percentage: number): { backgroundColor: string, color: string, width: string } {
     const progressStyle = {
@@ -55,8 +63,11 @@ export class ModusProgressBar {
     const progressBarBackgroundColorClass = this.backgroundColor ? '' : 'default-background-color';
     const progressColorClass = this.color ? '' : 'default-color';
     const progressTextColor = this.textColor ? '' : 'default-text-color';
-
-    const progressBarClass = `modus-progress-bar ${progressBarBackgroundColorClass}`;
+    const progressBarClass = `
+      modus-progress-bar
+      ${progressBarBackgroundColorClass}
+      ${this.classBySize.get(this.size)}
+     `;
     const progressClass = `progress ${progressColorClass} ${progressTextColor}`;
 
     return (
@@ -69,7 +80,7 @@ export class ModusProgressBar {
         role="progressbar"
         style={this.getProgressBarStyle()}>
         <div class={progressClass} style={this.getProgressStyle(percentage)}>
-          {this.text}
+          {this.size === 'default' && this.text}
         </div>
       </div>
     );

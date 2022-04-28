@@ -2,8 +2,9 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
-### Changed
-Added angular-workspace project directory to house the generated angular wrapper components
+### Added
+- Added angular-workspace project directory to house the generated angular wrapper components
+- Added a 'size' input to the modus-progress-bar component. This includes a new 'compact' size.
 
 ## [Unreleased]
 ### Changed

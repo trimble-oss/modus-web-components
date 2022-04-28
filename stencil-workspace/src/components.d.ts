@@ -395,6 +395,10 @@ export namespace Components {
          */
         "minValue": number;
         /**
+          * (optional) The progress bar's size.
+         */
+        "size": 'default' | 'compact';
+        /**
           * (optional) The text displayed on the progress bar.
          */
         "text": string;
@@ -1303,6 +1307,10 @@ declare namespace LocalJSX {
           * (optional) The progress bar's minimum value.
          */
         "minValue"?: number;
+        /**
+          * (optional) The progress bar's size.
+         */
+        "size"?: 'default' | 'compact';
         /**
           * (optional) The text displayed on the progress bar.
          */
