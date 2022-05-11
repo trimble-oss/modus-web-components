@@ -275,6 +275,35 @@ export class ModusDropdown {
 }
 
 
+export declare interface ModusFileDropzone extends Components.ModusFileDropzone {
+  /**
+   * An event that fires when files have been added or removed, regardless of whether they're valid. 
+   */
+  files: EventEmitter<CustomEvent<[File[], string | null]>>;
+
+}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['ariaLabel', 'description', 'dropzoneHeight', 'dropzoneWidth', 'includeStateIcon', 'label', 'maxFileCount', 'maxFileNameLength', 'maxTotalFileSizeBytes', 'multiple'],
+  methods: ['addFile', 'getError', 'getFiles', 'removeFile']
+})
+@Component({
+  selector: 'modus-file-dropzone',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['ariaLabel', 'description', 'dropzoneHeight', 'dropzoneWidth', 'includeStateIcon', 'label', 'maxFileCount', 'maxFileNameLength', 'maxTotalFileSizeBytes', 'multiple']
+})
+export class ModusFileDropzone {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['files']);
+  }
+}
+
+
 export declare interface ModusList extends Components.ModusList {}
 
 @ProxyCmp({

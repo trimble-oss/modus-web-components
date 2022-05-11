@@ -1,0 +1,84 @@
+import { Anchor } from "@storybook/addon-docs";
+
+# File Dropzone
+
+---
+
+The [Modus File Dropzone](https://modus.trimble.com/components/file-upload-dropzone/) web component allows users to upload content from their computer or device into the application by dragging a file (or files) into a target zone.
+They are referenced using the `<modus-file-dropzone>` tag.
+
+#### Implementation Details
+
+- The File Dropzone component provides the consumer a styled file picker. The dropzone does not provide functionality outside of selecting and holding files. This allows the consumer to use the component in a variety of scenarios, displaying and adding files how they'd like.
+- There are multiple component methods available: `addFile`, `getError`, `getFiles`, and `removeFile`. Since the component does not provide interaction outside of file selecting, the consumer can use these to control the dropzone in code.
+- The `files` event fires when a file has been added or removed. It contains the file(s) along with the current error value. These values can be accessed by array deconstruction respectively on the `event.detail`.
+  - If the error value returned is `null`, there is not an error. The possible error values are: `'maxFileCount'`, `'maxFileNameLength'`, and `'maxTotalFileSize'`.
+
+<Anchor storyId="components-file-dropzone--default" />
+
+### Default
+
+<modus-file-dropzone
+  aria-Label="dropzone"
+  description="File dropzone description"
+  dropzone-Height="175px"
+  dropzone-Width="400px"
+  label="Dropzone Label"
+  multiple="false">
+</modus-file-dropzone>
+
+```html
+<modus-file-dropzone
+  aria-Label="dropzone"
+  description="File dropzone description"
+  dropzone-Height="175px"
+  dropzone-Width="400px"
+  label="Dropzone Label"
+  multiple="false">
+</modus-file-dropzone>
+
+<script>
+    document.querySelector('modus-file-dropzone').addEventListener('files', (event) => {
+        const [files, error] = event.detail;
+        console.log(files);
+        console.log(error);
+    });
+</script>
+```
+
+## Properties
+
+| Property                | Attribute                   | Description                                                  | Type      | Default     |
+| ----------------------- | --------------------------- | ------------------------------------------------------------ | --------- | ----------- |
+| `ariaLabel`             | `aria-label`                | (optional) The dropzone's aria-label.                        | `string`  | `undefined` |
+| `description`           | `description`               | (optional) The dropzone's description text.                  | `string`  | `undefined` |
+| `dropzoneHeight`        | `dropzone-height`           | (optional) The dropzone's height.                            | `string`  | `undefined` |
+| `dropzoneWidth`         | `dropzone-width`            | (optional) The dropzone's width.                             | `string`  | `undefined` |
+| `includeStateIcon`      | `include-state-icon`        | (optional) Whether to include the upload icon.               | `boolean` | `true`      |
+| `label`                 | `label`                     | (optional) The dropzone's label text.                        | `string`  | `undefined` |
+| `maxFileCount`          | `max-file-count`            | (optional) The dropzone's max file count.                    | `number`  | `undefined` |
+| `maxFileNameLength`     | `max-file-name-length`      | (optional) The dropzone's max file name length of each file. | `number`  | `undefined` |
+| `maxTotalFileSizeBytes` | `max-total-file-size-bytes` | (optional) The dropzone's max total file size.               | `number`  | `undefined` |
+| `multiple`              | `multiple`                  | (optional) Whether multiple files can be uploaded.           | `boolean` | `true`      |
+
+
+## Events
+
+| Event   | Description                                                                                                               | Type                            |
+| ------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------- |
+| `files` | An event that fires when files have been added or removed, regardless of whether they're valid. Returns the files and current error. | `CustomEvent<[File[], string]>` |
+
+
+## Methods
+
+| Method name  | Description                              | Parameter                         | Return                    |
+| ------------ | ---------------------------------------- | --------------------------------- | ------------------------- |
+| `addFile`    |  Add a file to the dropzone              | `file: File`                      | `Promise<void>`           |
+| `getError`   |  Get the dropzone's error                |                                   | Promise<string | null>  |
+| `getFiles`   |  Get the dropzone's files                |                                   | `Promise<File[]>`         |
+| `removeFile` |  Remove a file from the dropzone         | `fileName: string`                | `Promise<void>`           |
+
+### Accessibility
+
+- File Dropzone has `role` of `button`.
+- When File Dropzone is focused, clicking **Enter** opens the file picker.
