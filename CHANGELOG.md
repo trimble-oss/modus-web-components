@@ -7,6 +7,9 @@ All notable changes to this project will be documented in this file.
 - Added a 'size' input to the modus-progress-bar component. This includes a new 'compact' size.
 
 ## [Unreleased]
+### Added
+- Modus File Dropzone component.
+
 ### Changed
 Restructured the repo to allow for build generated angular and react components:
 - Updated github actions to refer to the new stencil location

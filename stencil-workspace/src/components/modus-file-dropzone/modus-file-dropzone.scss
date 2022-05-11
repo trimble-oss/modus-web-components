@@ -1,0 +1,79 @@
+.modus-file-dropzone {
+  color: $col_trimble_gray;
+  display: flex;
+  flex-direction: column;
+  font-family: $primary-font;
+
+  input {
+    display: none;
+  }
+
+  .header {
+    align-items: start;
+    display: flex;
+    flex-direction: column;
+
+    label {
+      font-size: $h1-font-size;
+      font-weight: $font-weight-semi-bold;
+      margin-bottom: $rem-8px;
+    }
+
+    span {
+      margin-bottom: $rem-8px;
+    }
+  }
+
+  .dropzone {
+    align-items: center;
+    background-color: $col_white;
+    border: $rem-1px dashed $col_trimble_gray;
+    border-radius: $rem-4px;
+    color: $col_gray_6;
+    display: flex;
+    flex-direction: column;
+    font-weight: $font-weight-semi-bold;
+    justify-content: center;
+    padding: $rem-12px $rem-16px;
+
+    .browse {
+      color: $col_trimble_blue;
+
+      &:hover {
+        color: $col_trimble_blue_dark;
+        cursor: pointer;
+      }
+    }
+
+    &.highlight {
+      background-color: $col_blue_pale;
+      border: $rem-1px solid $col_trimble_blue;
+      color: $col_trimble_blue;
+
+      svg {
+        fill: $col_trimble_blue;
+      }
+    }
+
+    &.error {
+      background-color: $col_red_pale;
+      border-color: $col_trimble_red;
+      color: $col_trimble_red;
+
+      svg {
+        fill: $col_trimble_red;
+      }
+    }
+
+    .error-messages {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+    }
+
+    svg {
+      fill: $col_gray_6;
+      margin-bottom: $rem-4px;
+    }
+  }
+}

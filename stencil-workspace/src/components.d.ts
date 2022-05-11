@@ -199,6 +199,64 @@ export namespace Components {
          */
         "toggleElementId": string;
     }
+    interface ModusFileDropzone {
+        /**
+          * Add a file to the dropzone.
+         */
+        "addFile": (file: File) => Promise<File[]>;
+        /**
+          * (optional) The dropzone's aria-label.
+         */
+        "ariaLabel": string;
+        /**
+          * (optional) The dropzone's description text.
+         */
+        "description": string;
+        /**
+          * (optional) The dropzone's height.
+         */
+        "dropzoneHeight": string;
+        /**
+          * (optional) The dropzone's width.
+         */
+        "dropzoneWidth": string;
+        /**
+          * Get the dropzone's error.
+         */
+        "getError": () => Promise<string | null>;
+        /**
+          * Get the dropzone's files.
+         */
+        "getFiles": () => Promise<File[]>;
+        /**
+          * (optional) Whether to include the upload icon.
+         */
+        "includeStateIcon": boolean;
+        /**
+          * (optional) The dropzone's label text.
+         */
+        "label": string;
+        /**
+          * (optional) The dropzone's max file count.
+         */
+        "maxFileCount": number;
+        /**
+          * (optional) The dropzone's max file name length of each file.
+         */
+        "maxFileNameLength": number;
+        /**
+          * (optional) The dropzone's max total file size.
+         */
+        "maxTotalFileSizeBytes": number;
+        /**
+          * (optional) Whether multiple files can be uploaded.
+         */
+        "multiple": boolean;
+        /**
+          * Remove a file from the dropzone.
+         */
+        "removeFile": (fileName: string) => Promise<void>;
+    }
     interface ModusList {
     }
     interface ModusListItem {
@@ -693,6 +751,12 @@ declare global {
         prototype: HTMLModusDropdownElement;
         new (): HTMLModusDropdownElement;
     };
+    interface HTMLModusFileDropzoneElement extends Components.ModusFileDropzone, HTMLStencilElement {
+    }
+    var HTMLModusFileDropzoneElement: {
+        prototype: HTMLModusFileDropzoneElement;
+        new (): HTMLModusFileDropzoneElement;
+    };
     interface HTMLModusListElement extends Components.ModusList, HTMLStencilElement {
     }
     var HTMLModusListElement: {
@@ -830,6 +894,7 @@ declare global {
         "modus-checkbox": HTMLModusCheckboxElement;
         "modus-chip": HTMLModusChipElement;
         "modus-dropdown": HTMLModusDropdownElement;
+        "modus-file-dropzone": HTMLModusFileDropzoneElement;
         "modus-list": HTMLModusListElement;
         "modus-list-item": HTMLModusListItemElement;
         "modus-message": HTMLModusMessageElement;
@@ -1077,6 +1142,52 @@ declare namespace LocalJSX {
           * (required) The element id that the list renders near and that triggers the toggling of the list.
          */
         "toggleElementId"?: string;
+    }
+    interface ModusFileDropzone {
+        /**
+          * (optional) The dropzone's aria-label.
+         */
+        "ariaLabel"?: string;
+        /**
+          * (optional) The dropzone's description text.
+         */
+        "description"?: string;
+        /**
+          * (optional) The dropzone's height.
+         */
+        "dropzoneHeight"?: string;
+        /**
+          * (optional) The dropzone's width.
+         */
+        "dropzoneWidth"?: string;
+        /**
+          * (optional) Whether to include the upload icon.
+         */
+        "includeStateIcon"?: boolean;
+        /**
+          * (optional) The dropzone's label text.
+         */
+        "label"?: string;
+        /**
+          * (optional) The dropzone's max file count.
+         */
+        "maxFileCount"?: number;
+        /**
+          * (optional) The dropzone's max file name length of each file.
+         */
+        "maxFileNameLength"?: number;
+        /**
+          * (optional) The dropzone's max total file size.
+         */
+        "maxTotalFileSizeBytes"?: number;
+        /**
+          * (optional) Whether multiple files can be uploaded.
+         */
+        "multiple"?: boolean;
+        /**
+          * An event that fires when files have been added or removed, regardless of whether they're valid.
+         */
+        "onFiles"?: (event: CustomEvent<[File[], string | null]>) => void;
     }
     interface ModusList {
     }
@@ -1587,6 +1698,7 @@ declare namespace LocalJSX {
         "modus-checkbox": ModusCheckbox;
         "modus-chip": ModusChip;
         "modus-dropdown": ModusDropdown;
+        "modus-file-dropzone": ModusFileDropzone;
         "modus-list": ModusList;
         "modus-list-item": ModusListItem;
         "modus-message": ModusMessage;
@@ -1624,6 +1736,7 @@ declare module "@stencil/core" {
             "modus-checkbox": LocalJSX.ModusCheckbox & JSXBase.HTMLAttributes<HTMLModusCheckboxElement>;
             "modus-chip": LocalJSX.ModusChip & JSXBase.HTMLAttributes<HTMLModusChipElement>;
             "modus-dropdown": LocalJSX.ModusDropdown & JSXBase.HTMLAttributes<HTMLModusDropdownElement>;
+            "modus-file-dropzone": LocalJSX.ModusFileDropzone & JSXBase.HTMLAttributes<HTMLModusFileDropzoneElement>;
             "modus-list": LocalJSX.ModusList & JSXBase.HTMLAttributes<HTMLModusListElement>;
             "modus-list-item": LocalJSX.ModusListItem & JSXBase.HTMLAttributes<HTMLModusListItemElement>;
             "modus-message": LocalJSX.ModusMessage & JSXBase.HTMLAttributes<HTMLModusMessageElement>;
