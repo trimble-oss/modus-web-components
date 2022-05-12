@@ -4,8 +4,8 @@
 
 ## Dependencies
 
-- Node (v16.14.2)
-- NPM CLI (v8.5.5)
+- Node (>= v14)
+- NPM CLI (>= v7)
 
 *We recommend using [NVM](https://github.com/nvm-sh/nvm). It is a great tool for switching between Node versions*
 
