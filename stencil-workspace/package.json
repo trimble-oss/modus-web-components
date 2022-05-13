@@ -50,7 +50,7 @@
     "@typescript-eslint/eslint-plugin": "^5.10.2",
     "@typescript-eslint/parser": "^5.10.2",
     "autoprefixer": "^10.4.2",
-    "eslint": "^8.8.0",
+    "eslint": "^8.15.0",
     "eslint-plugin-storybook": "^0.5.6",
     "jest": "^27.5.0",
     "jest-cli": "27.5.0",
@@ -61,6 +61,10 @@
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-standard-scss": "^3.0.0",
     "typescript": "^4.5.5"
+  },
+  "engines": {
+    "node": ">=14",
+    "npm": ">=7"
   },
   "license": "MIT"
 }
