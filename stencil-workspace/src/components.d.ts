@@ -203,7 +203,7 @@ export namespace Components {
         /**
           * Add a file to the dropzone.
          */
-        "addFile": (file: File) => Promise<File[]>;
+        "addFile": (file: File) => Promise<void>;
         /**
           * (optional) The dropzone's aria-label.
          */
