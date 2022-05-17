@@ -7,22 +7,22 @@
   },
   "dependencies": {
     "@storybook/addon-docs": "^6.4.19",
-    "@storybook/addons": "^6.4.19",
-    "@storybook/components": "^6.4.19",
-    "@storybook/theming": "^6.4.19",
-    "@types/mdx": "^2.0.1",
-    "lit-html": "^2.1.2",
+    "@storybook/addons": "^6.4.22",
+    "@storybook/components": "^6.4.22",
+    "@storybook/theming": "^6.4.22",
+    "@types/mdx": "^2.0.2",
+    "lit-html": "^2.2.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.0",
-    "@storybook/addon-a11y": "^6.4.19",
-    "@storybook/addon-actions": "^6.4.19",
+    "@babel/core": "^7.17.12",
+    "@storybook/addon-a11y": "^6.4.22",
+    "@storybook/addon-actions": "^6.4.22",
     "@storybook/addon-essentials": "^6.4.19",
-    "@storybook/addon-links": "^6.4.19",
-    "@storybook/web-components": "^6.4.19",
-    "babel-loader": "^8.2.3"
+    "@storybook/addon-links": "^6.4.22",
+    "@storybook/web-components": "^6.4.22",
+    "babel-loader": "^8.2.5"
   },
   "license": "MIT"
 }

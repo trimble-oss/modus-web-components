@@ -30,13 +30,13 @@
 
 ## Methods
 
-### `addFile(file: File) => Promise<File[]>`
+### `addFile(file: File) => Promise<void>`
 
 Add a file to the dropzone.
 
 #### Returns
 
-Type: `Promise<File[]>`
+Type: `Promise<void>`
 
 
 
