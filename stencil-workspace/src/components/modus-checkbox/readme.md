@@ -24,6 +24,19 @@
 | `checkboxClick` | An event that fires on checkbox click. | `CustomEvent<boolean>` |
 
 
+## Dependencies
+
+### Used by
+
+ - [modus-content-tree-item](../modus-content-tree/modus-content-tree-item)
+
+### Graph
+```mermaid
+graph TD;
+  modus-content-tree-item --> modus-checkbox
+  style modus-checkbox fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 

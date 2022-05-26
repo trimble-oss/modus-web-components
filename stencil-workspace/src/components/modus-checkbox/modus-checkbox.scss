@@ -1,3 +1,8 @@
+:host {
+  align-items: center;
+  display: flex;
+}
+
 .modus-checkbox {
   align-items: center;
   color: $col_trimble_gray;
@@ -13,8 +18,8 @@
   .checkbox {
     align-items: center;
     background-color: $col_white;
-    border: 2px solid $col_gray_6;
-    border-radius: 2px;
+    border: $rem-2px solid $col_gray_6;
+    border-radius: $rem-2px;
     display: flex;
     justify-content: center;
     margin: 0 .28rem;
@@ -22,16 +27,17 @@
 
     &.blue-background {
       background-color: $col_trimble_blue;
-      border: 2px solid $col_trimble_blue;
+      border: $rem-2px solid $col_trimble_blue;
     }
 
     &.disabled {
-      background-color: transparent;
-      border: 2px solid $col_gray_3;
+      background-color: $col_gray_light;
+      border: $rem-2px solid $col_gray_2;
       cursor: default;
 
       &.checked {
-        background-color: $col_gray_3;
+        background-color: $col_blue_light;
+        border: $rem-2px solid $col_blue_light;
       }
     }
 
@@ -84,7 +90,7 @@
   &:hover {
     .checkbox {
       &:not(.checked):not(.disabled) {
-        border: 2px solid $col_gray_5;
+        border: $rem-2px solid $col_gray_5;
       }
     }
   }
@@ -92,7 +98,7 @@
   &:active {
     .checkbox {
       &:not(.checked):not(.disabled) {
-        border: 2px solid $col_trimble_gray;
+        border: $rem-2px solid $col_trimble_gray;
       }
     }
   }
