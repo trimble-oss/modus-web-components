@@ -181,6 +181,52 @@ export namespace Components {
          */
         "value": string;
     }
+    interface ModusContentTreeItem {
+        /**
+          * Whether the item can be dragged
+         */
+        "allowDrag": boolean;
+        /**
+          * Whether the item's checkbox is checked
+         */
+        "checkboxChecked": boolean;
+        /**
+          * The item's depth
+         */
+        "depth": number;
+        /**
+          * (optional) Disables the item
+         */
+        "disabled": boolean;
+        /**
+          * Whether the item is expandable
+         */
+        "expandable": boolean;
+        /**
+          * Whether the item is expanded
+         */
+        "expanded": boolean;
+        /**
+          * Whether to include the item's bottom border
+         */
+        "includeBottomBorder": boolean;
+        /**
+          * Whether to include the item's checkbox
+         */
+        "includeCheckbox": boolean;
+        /**
+          * Whether to include the folder icon
+         */
+        "includeFolderIcon": boolean;
+        /**
+          * (optional) The selected state of the item
+         */
+        "selected": boolean;
+        /**
+          * (optional) The size of the item
+         */
+        "size": 'condensed' | 'standard';
+    }
     interface ModusDropdown {
         /**
           * (optional) The dropdown's aria-label.
@@ -745,6 +791,12 @@ declare global {
         prototype: HTMLModusChipElement;
         new (): HTMLModusChipElement;
     };
+    interface HTMLModusContentTreeItemElement extends Components.ModusContentTreeItem, HTMLStencilElement {
+    }
+    var HTMLModusContentTreeItemElement: {
+        prototype: HTMLModusContentTreeItemElement;
+        new (): HTMLModusContentTreeItemElement;
+    };
     interface HTMLModusDropdownElement extends Components.ModusDropdown, HTMLStencilElement {
     }
     var HTMLModusDropdownElement: {
@@ -893,6 +945,7 @@ declare global {
         "modus-card": HTMLModusCardElement;
         "modus-checkbox": HTMLModusCheckboxElement;
         "modus-chip": HTMLModusChipElement;
+        "modus-content-tree-item": HTMLModusContentTreeItemElement;
         "modus-dropdown": HTMLModusDropdownElement;
         "modus-file-dropzone": HTMLModusFileDropzoneElement;
         "modus-list": HTMLModusListElement;
@@ -1120,6 +1173,64 @@ declare namespace LocalJSX {
           * (optional) The chip's value.
          */
         "value"?: string;
+    }
+    interface ModusContentTreeItem {
+        /**
+          * Whether the item can be dragged
+         */
+        "allowDrag"?: boolean;
+        /**
+          * Whether the item's checkbox is checked
+         */
+        "checkboxChecked"?: boolean;
+        /**
+          * The item's depth
+         */
+        "depth"?: number;
+        /**
+          * (optional) Disables the item
+         */
+        "disabled"?: boolean;
+        /**
+          * Whether the item is expandable
+         */
+        "expandable"?: boolean;
+        /**
+          * Whether the item is expanded
+         */
+        "expanded"?: boolean;
+        /**
+          * Whether to include the item's bottom border
+         */
+        "includeBottomBorder"?: boolean;
+        /**
+          * Whether to include the item's checkbox
+         */
+        "includeCheckbox"?: boolean;
+        /**
+          * Whether to include the folder icon
+         */
+        "includeFolderIcon"?: boolean;
+        /**
+          * An event that first on item checkbox click
+         */
+        "onCheckboxClick"?: (event: CustomEvent<boolean>) => void;
+        /**
+          * An event that fires on item expand click
+         */
+        "onExpandClick"?: (event: CustomEvent<boolean>) => void;
+        /**
+          * An event that fires on item click
+         */
+        "onItemClick"?: (event: CustomEvent<any>) => void;
+        /**
+          * (optional) The selected state of the item
+         */
+        "selected"?: boolean;
+        /**
+          * (optional) The size of the item
+         */
+        "size"?: 'condensed' | 'standard';
     }
     interface ModusDropdown {
         /**
@@ -1697,6 +1808,7 @@ declare namespace LocalJSX {
         "modus-card": ModusCard;
         "modus-checkbox": ModusCheckbox;
         "modus-chip": ModusChip;
+        "modus-content-tree-item": ModusContentTreeItem;
         "modus-dropdown": ModusDropdown;
         "modus-file-dropzone": ModusFileDropzone;
         "modus-list": ModusList;
@@ -1735,6 +1847,7 @@ declare module "@stencil/core" {
             "modus-card": LocalJSX.ModusCard & JSXBase.HTMLAttributes<HTMLModusCardElement>;
             "modus-checkbox": LocalJSX.ModusCheckbox & JSXBase.HTMLAttributes<HTMLModusCheckboxElement>;
             "modus-chip": LocalJSX.ModusChip & JSXBase.HTMLAttributes<HTMLModusChipElement>;
+            "modus-content-tree-item": LocalJSX.ModusContentTreeItem & JSXBase.HTMLAttributes<HTMLModusContentTreeItemElement>;
             "modus-dropdown": LocalJSX.ModusDropdown & JSXBase.HTMLAttributes<HTMLModusDropdownElement>;
             "modus-file-dropzone": LocalJSX.ModusFileDropzone & JSXBase.HTMLAttributes<HTMLModusFileDropzoneElement>;
             "modus-list": LocalJSX.ModusList & JSXBase.HTMLAttributes<HTMLModusListElement>;

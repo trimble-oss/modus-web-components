@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 ### Added
 - Modus File Dropzone component.
+- Created modus-content-tree-item to aid content tree development.
 
 ### Changed
 Restructured the repo to allow for build generated angular and react components:

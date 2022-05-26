@@ -10,14 +10,16 @@ describe('modus-accordion-item', () => {
     expect(root).toEqualHtml(`
       <modus-accordion-item>
         <mock:shadow-root>
-          <div class='accordion-item' role="region">
-            <div class='header standard' tabindex="0">
-              <span class='title'></span>
-              <svg class="icon-chevron-down-thick" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M11.4708 15.7835C11.7595 16.0722 12.2405 16.0722 12.5292 15.7835L18.7835 9.56128C19.0722 9.24055 19.0722 8.89864 18.7835 8.60998L18 8C17.7113 7.71134 17.3207 7.71134 17 8L12 13L7 8C6.67927 7.71134 6.24284 7.44444 5.95418 7.7331L5.21649 8.47079C4.92783 8.75945 4.92783 9.24055 5.21649 9.56128L11.4708 15.7835Z" fill="#6A6976"></path>
+          <div class="accordion-item" role="region">
+            <div class="header standard" tabindex="0">
+              <span class="title"></span>
+              <svg class="icon-chevron-down-thick" fill="currentColor" height="24" viewBox="0 0 32 32" width="24" xmlns="http://www.w3.org/2000/svg">
+                <g>
+                  <path d="M28.06 11.383A2.483 2.483 0 0 0 26 10.27c-.523 0-1.024.165-1.45.477l-.035.025-.032.028L16 18.194l-8.483-7.393-.032-.028-.035-.025A2.444 2.444 0 0 0 6 10.27c-.823 0-1.593.416-2.06 1.112-.76 1.135-.501 2.704.574 3.52l9.974 8.572.03.026.032.023a2.445 2.445 0 0 0 2.9 0l.032-.023.03-.026 9.974-8.573c1.075-.815 1.335-2.384.574-3.52z" fill="#6A6976"></path>
+                </g>
               </svg>
             </div>
-            <div class='body standard'>
+            <div class="body standard">
               <slot></slot>
             </div>
           </div>
@@ -34,19 +36,23 @@ describe('modus-accordion-item', () => {
     expect(root).toEqualHtml(`
       <modus-accordion-item>
         <mock:shadow-root>
-          <div class='accordion-item' role="region">
-            <div class='header standard' tabindex="0">
-              <span class='title'></span>
-              <svg class="icon-chevron-down-thick" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M11.4708 15.7835C11.7595 16.0722 12.2405 16.0722 12.5292 15.7835L18.7835 9.56128C19.0722 9.24055 19.0722 8.89864 18.7835 8.60998L18 8C17.7113 7.71134 17.3207 7.71134 17 8L12 13L7 8C6.67927 7.71134 6.24284 7.44444 5.95418 7.7331L5.21649 8.47079C4.92783 8.75945 4.92783 9.24055 5.21649 9.56128L11.4708 15.7835Z" fill="#6A6976"></path>
+          <div class="accordion-item" role="region">
+            <div class="header standard" tabindex="0">
+              <span class="title"></span>
+              <svg class="icon-chevron-down-thick" fill="currentColor" height="24" viewBox="0 0 32 32" width="24" xmlns="http://www.w3.org/2000/svg">
+                <g>
+                  <path d="M28.06 11.383A2.483 2.483 0 0 0 26 10.27c-.523 0-1.024.165-1.45.477l-.035.025-.032.028L16 18.194l-8.483-7.393-.032-.028-.035-.025A2.444 2.444 0 0 0 6 10.27c-.823 0-1.593.416-2.06 1.112-.76 1.135-.501 2.704.574 3.52l9.974 8.572.03.026.032.023a2.445 2.445 0 0 0 2.9 0l.032-.023.03-.026 9.974-8.573c1.075-.815 1.335-2.384.574-3.52z" fill="#6A6976"></path>
+                </g>
               </svg>
             </div>
-            <div class='body standard'>
+            <div class="body standard">
               <slot></slot>
             </div>
           </div>
         </mock:shadow-root>
-        <span class='test'>Test</span>
+        <span class="test">
+          Test
+        </span>
       </modus-accordion-item>
     `);
   });
