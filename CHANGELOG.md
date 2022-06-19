@@ -2,14 +2,14 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
-### Added
-- Added angular-workspace project directory to house the generated angular wrapper components
-- Added a 'size' input to the modus-progress-bar component. This includes a new 'compact' size.
 
-## [Unreleased]
+## [0.1.6] - 2022-19-06
 ### Added
 - Modus File Dropzone component.
 - Created modus-content-tree-item to aid content tree development.
+- Added angular-workspace project directory to house the generated angular wrapper components
+- Added a 'size' input to the modus-progress-bar component. This includes a new 'compact' size.
+- Added a 'type' input to the modus-text-component, allows values 'text' or 'password'.
 
 ### Changed
 Restructured the repo to allow for build generated angular and react components:

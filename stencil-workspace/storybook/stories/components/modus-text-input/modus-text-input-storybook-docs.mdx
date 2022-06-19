@@ -14,6 +14,7 @@ This component is compatible with Angular reactive forms. This can be achieved t
 <modus-text-input label="Text Input Demo 4" placeholder="Placeholder" value="Value" error-text="Error Demo" include-search-icon></modus-text-input>
 <modus-text-input label="Text Input Demo 5" placeholder="Placeholder" value="Value" valid-text="Valid Demo" include-search-icon></modus-text-input>
 <modus-text-input label="Text Input Demo 6" placeholder="Placeholder" value="Value" size="large" include-search-icon></modus-text-input>
+<modus-text-input label="Text Input Demo Password" placeholder="Password" type="password"></modus-text-input>
 
 ```html
 <modus-text-input label="Text Input Demo 1" placeholder="Placeholder" include-search-icon required></modus-text-input>
@@ -22,27 +23,29 @@ This component is compatible with Angular reactive forms. This can be achieved t
 <modus-text-input label="Text Input Demo 4" placeholder="Placeholder" value="Value" error-text="Error Demo" include-search-icon></modus-text-input>
 <modus-text-input label="Text Input Demo 5" placeholder="Placeholder" value="Value" valid-text="Valid Demo" include-search-icon></modus-text-input>
 <modus-text-input label="Text Input Demo 6" placeholder="Placeholder" value="Value" size="large" include-search-icon></modus-text-input>
+<modus-text-input label="Text Input Demo Password" placeholder="Password" type="password"></modus-text-input>
 ```
 
 ### Properties
 
-| Name                  | Description                           | Type      | Options           | Default Value | Required |
-| --------------------- | ------------------------------------- | --------- | ----------------- | ------------- | -------- |
-| `aria-label`          | The input's aria-label                | `string`  |                   |               |          |
-| `clearable`           | Whether the text input can be cleared | `boolean` |                   | true          |          |
-| `disabled`            | Whether the text input is disabled    | `boolean` |                   | false         |          |
-| `error-text`          | The error text                        | `string`  |                   |               |          |
-| `helper-text`         | The helper text                       | `string`  |                   |               |          |
-| `include-search-icon` | Whether to include the search icon    | `boolean` |                   | false         |          |
-| `label`               | The text input label                  | `string`  |                   |               |          |
-| `max-length`          | The maximum length of the value       | `number`  |                   |               |          |
-| `min-length`          | The minimum length of the value       | `number`  |                   |               |          |
-| `placeholder`         | The placeholder text                  | `string`  |                   |               |          |
-| `read-onl`y           | Whether the text input is read-only   | `boolean` |                   | false         |          |
-| `required`            | Whether the text input is required    | `boolean` |                   | false         |          |
-| `size`                | The size of the input                 | `string`  | 'medium', 'large' | 'medium'      |          |
-| `valid-text`          | The valid text                        | `string`  |                   |               |          |
-| `value`               | The text input string value           | `string`  |                   |               |          |
+| Property            | Attribute             | Description                                                   | Type                   | Default     |
+| ------------------- | --------------------- | ------------------------------------------------------------- | ---------------------- | ----------- |
+| `ariaLabel`         | `aria-label`          | (optional) The input's aria-label.                            | `string`               | `undefined` |
+| `clearable`         | `clearable`           | (optional) Whether the input has a clear button.              | `boolean`              | `true`      |
+| `disabled`          | `disabled`            | (optional) Whether the input is disabled.                     | `boolean`              | `undefined` |
+| `errorText`         | `error-text`          | (optional) The input's error state text.                      | `string`               | `undefined` |
+| `helperText`        | `helper-text`         | (optional) The input's helper text displayed below the input. | `string`               | `undefined` |
+| `includeSearchIcon` | `include-search-icon` | (optional) Whether the search icon is included.               | `boolean`              | `undefined` |
+| `label`             | `label`               | (optional) The input's label.                                 | `string`               | `undefined` |
+| `maxLength`         | `max-length`          | (optional) The input's maximum length.                        | `number`               | `undefined` |
+| `minLength`         | `min-length`          | (optional) The input's minimum length.                        | `number`               | `undefined` |
+| `placeholder`       | `placeholder`         | (optional) The input's placeholder text.                      | `string`               | `undefined` |
+| `readOnly`          | `read-only`           | (optional) Whether the input's content is read-only           | `boolean`              | `undefined` |
+| `required`          | `required`            | (optional) Whether the input is required.                     | `boolean`              | `undefined` |
+| `size`              | `size`                | (optional) The input's size.                                  | `"large", "medium"`  | `'medium'`  |
+| `type`              | `type`                | (optional) The input's type.                                  | `"password", "text"` | `'text'`    |
+| `validText`         | `valid-text`          | (optional) The input's valid state text.                      | `string`               | `undefined` |
+| `value`             | `value`               | (optional) The input's value.                                 | `string`               | `undefined` |
 
 ### DOM Events
 

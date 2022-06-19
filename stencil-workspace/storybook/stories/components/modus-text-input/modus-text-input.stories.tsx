@@ -100,6 +100,17 @@ export default {
         type: { summary: `'medium' | 'large'` },
       }
     },
+    type: {
+      control: {
+        options: ['text', 'password'],
+        type: 'select',
+      },
+      description: 'The input type',
+      table: {
+        defaultValue: { summary: `'text'` },
+        type: { summary: `'text' | 'password'` },
+      }
+    },
     validText: {
       name: 'valid-text',
       description: 'The text input\'s valid text',
@@ -128,7 +139,7 @@ export default {
   },
 };
 
-const Template = ({ ariaLabel, clearable, disabled, errorText, helperText, includeSearchIcon, label, maxLength, minLength, placeholder, readOnly, required, size, validText, value }) => html`
+const Template = ({ ariaLabel, clearable, disabled, errorText, helperText, includeSearchIcon, label, maxLength, minLength, placeholder, readOnly, required, size, type, validText, value }) => html`
   <modus-text-input
     aria-label=${ariaLabel}
     clearable=${clearable}
@@ -143,6 +154,7 @@ const Template = ({ ariaLabel, clearable, disabled, errorText, helperText, inclu
     read-only=${readOnly}
     required=${required}
     size=${size}
+    type=${type}
     valid-text=${validText}
     value=${value}
   ></modus-text-input>
@@ -163,6 +175,7 @@ Default.args = {
   readOnly: false,
   required: false,
   size: 'medium',
+  type: 'text',
   validText: '',
   value: 'Hello, text input!'
 };

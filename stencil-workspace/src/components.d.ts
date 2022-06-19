@@ -695,6 +695,10 @@ export namespace Components {
          */
         "size": 'medium' | 'large';
         /**
+          * (optional) The input's type.
+         */
+        "type": 'text' | 'password';
+        /**
           * (optional) The input's valid state text.
          */
         "validText": string;
@@ -1753,6 +1757,10 @@ declare namespace LocalJSX {
           * (optional) The input's size.
          */
         "size"?: 'medium' | 'large';
+        /**
+          * (optional) The input's type.
+         */
+        "type"?: 'text' | 'password';
         /**
           * (optional) The input's valid state text.
          */

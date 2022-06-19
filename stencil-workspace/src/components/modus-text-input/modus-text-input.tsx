@@ -48,6 +48,9 @@ export class ModusTextInput {
   /** (optional) The input's size. */
   @Prop() size: 'medium' | 'large' = 'medium';
 
+  /** (optional) The input's type. */
+  @Prop() type: 'text' | 'password' = 'text';
+
   /** (optional) The input's valid state text. */
   @Prop() validText: string;
 
@@ -107,7 +110,7 @@ export class ModusTextInput {
                    readonly={this.readOnly}
                    ref={(el) => this.textInput = el as HTMLInputElement}
                    tabIndex={0}
-                   type="text"
+                   type={this.type}
                    value={this.value}/>
             {this.clearable && !this.readOnly && !!this.value
              ? <span class="icons clear">
