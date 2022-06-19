@@ -138,6 +138,19 @@ describe('modus-text-input', () => {
     expect(required).not.toBeNull();
   });
 
+  it('renders changes to type', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-text-input></modus-text-input>');
+
+    const textInput = await page.find('modus-text-input');
+    textInput.setProperty('type', 'password');
+    await page.waitForChanges();
+
+    const input = await page.find('modus-text-input >>> input');
+    expect(input.getAttribute('type')).toEqual('password');
+  });
+
   it('renders changes to value', async () => {
     const page = await newE2EPage();
 
