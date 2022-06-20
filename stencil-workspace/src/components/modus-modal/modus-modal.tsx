@@ -20,6 +20,9 @@ export class ModusModal {
   /** (optional) The modal's secondary button text. */
   @Prop() secondaryButtonText: string;
 
+  /** (optional) The modal's z-index. */
+  @Prop() zIndex = '1';
+
   /** An event that fires on modal close.  */
   @Event() closed: EventEmitter;
 
@@ -80,7 +83,8 @@ export class ModusModal {
         aria-label={this.ariaLabel}
         class={`modus-modal overlay ${this.visible ? 'visible' : 'hidden'}`}
         onClick={(event) => this.handleOverlayClick(event)}
-        role="dialog">
+        role="dialog"
+        style={{zIndex: this.zIndex}}>
         <div class="content">
           <div class="header">
             {this.headerText}

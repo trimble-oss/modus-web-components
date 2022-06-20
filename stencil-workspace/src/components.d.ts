@@ -352,6 +352,10 @@ export namespace Components {
           * (optional) The modal's secondary button text.
          */
         "secondaryButtonText": string;
+        /**
+          * (optional) The modal's z-index.
+         */
+        "zIndex": string;
     }
     interface ModusNavbar {
         /**
@@ -1371,6 +1375,10 @@ declare namespace LocalJSX {
           * (optional) The modal's secondary button text.
          */
         "secondaryButtonText"?: string;
+        /**
+          * (optional) The modal's z-index.
+         */
+        "zIndex"?: string;
     }
     interface ModusNavbar {
         /**
