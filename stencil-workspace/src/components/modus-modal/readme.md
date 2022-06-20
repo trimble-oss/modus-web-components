@@ -13,6 +13,7 @@
 | `headerText`          | `header-text`           | (optional) The modal's primary button text.   | `string` | `undefined` |
 | `primaryButtonText`   | `primary-button-text`   | (optional) The modal's primary button text.   | `string` | `undefined` |
 | `secondaryButtonText` | `secondary-button-text` | (optional) The modal's secondary button text. | `string` | `undefined` |
+| `zIndex`              | `z-index`               | (optional) The modal's z-index.               | `string` | `'1'`       |
 
 
 ## Events

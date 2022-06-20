@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.1.7] - 2022-19-06
+### Added
+- Input to change the modal's z-index.
+
 ## [0.1.6] - 2022-19-06
 ### Added
 - Modus File Dropzone component.
