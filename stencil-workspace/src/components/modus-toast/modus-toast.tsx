@@ -14,7 +14,7 @@ import { IconClose } from '../icons/icon-close';
 })
 export class ModusToast {
   /** (optional) The toast's aria-label. */
-  @Prop() ariaLabel: boolean;
+  @Prop() ariaLabel: string;
 
   /** (optional) Whether the toast has a dismiss button. */
   @Prop() dismissible: boolean;
