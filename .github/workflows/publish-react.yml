@@ -31,7 +31,7 @@ jobs:
         run: npm set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TRIMBLE_OSS_AUTOMATION_TOKEN }}
 
       - name: Publish React NPM Package Publicly
-        run: npm publish
+        run: npm publish --access public
 
       - name: Set GitHub Registry Auth Token
         run: npm set //npm.pkg.github.com/:_authToken ${{ secrets.GITHUB_TOKEN }}
