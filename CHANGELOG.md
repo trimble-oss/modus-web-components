@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.1.8] - 2022-24-07
+### Fixed
+- Fixed Toast's ariaLabel type.
+- Added JSX to types output.
+
 ## [0.1.7] - 2022-19-06
 ### Added
 - Input to change the modal's z-index.

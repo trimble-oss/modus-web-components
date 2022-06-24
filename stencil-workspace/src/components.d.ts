@@ -715,7 +715,7 @@ export namespace Components {
         /**
           * (optional) The toast's aria-label.
          */
-        "ariaLabel": boolean;
+        "ariaLabel": string;
         /**
           * (optional) Whether the toast has a dismiss button.
          */
@@ -1782,7 +1782,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The toast's aria-label.
          */
-        "ariaLabel"?: boolean;
+        "ariaLabel"?: string;
         /**
           * (optional) Whether the toast has a dismiss button.
          */
