@@ -1,0 +1,40 @@
+name: Create and publish React NPM package
+on:
+  workflow_dispatch:
+jobs:
+  publish_react:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./react-workspace
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Setup Node, build, and publish to the npm, and GitHub registries
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install React project dependencies
+        run: npm ci
+
+      - name: Build React project
+        run: npm run build
+
+      - name: Set NPM Registry Auth Token
+        run: npm set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TRIMBLE_OSS_AUTOMATION_TOKEN }}
+
+      - name: Publish React NPM Package Publicly
+        run: npm publish
+
+      - name: Set GitHub Registry Auth Token
+        run: npm set //npm.pkg.github.com/:_authToken ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish React NPM Package to GitHub Registry
+        run: npm publish --access public --ignore-scripts --@trimble-oss:registry='https://npm.pkg.github.com'
