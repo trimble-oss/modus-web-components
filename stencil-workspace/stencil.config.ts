@@ -2,6 +2,7 @@ import { Config } from '@stencil/core';
 import { sass } from '@stencil/sass';
 import { postcss } from '@stencil/postcss';
 import { angularOutputTarget } from '@stencil/angular-output-target';
+import { reactOutputTarget as react } from '@stencil/react-output-target';
 import autoprefixer from 'autoprefixer';
 
 export const config: Config = {
@@ -26,6 +27,11 @@ export const config: Config = {
       componentCorePackage: '@trimble-oss/modus-web-components',
       directivesProxyFile: '../angular-workspace/projects/trimble-oss/modus-angular-components/src/lib/stencil-generated/components.ts',
       directivesArrayFile: '../angular-workspace/projects/trimble-oss/modus-angular-components/src/lib/stencil-generated/index.ts',
+    }),
+    react({
+      componentCorePackage: '@trimble-oss/modus-web-components',
+      proxiesFile: '../react-workspace/src/components/stencil-generated/index.ts',
+      includeDefineCustomElements: true,
     }),
   ],
   plugins: [
