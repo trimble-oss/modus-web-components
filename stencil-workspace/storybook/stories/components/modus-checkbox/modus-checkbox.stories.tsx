@@ -74,5 +74,3 @@ Default.args = { ariaLabel: '', checked: false, disabled: false, indeterminate: 
 
 export const Indeterminate = Template.bind({});
 Indeterminate.args = { ariaLabel: '', checked: false, disabled: false, indeterminate: true, label: 'Checkbox', size: 'medium' };
-
-

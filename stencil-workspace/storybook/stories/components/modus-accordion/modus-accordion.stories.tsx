@@ -8,19 +8,24 @@ export default {
     docs: {
       page: docs,
     },
+    controls: {
+      disabled: true,
+    },
     options: {
       isToolshown: true
-    },
-    previewTabs: {
-      canvas: {
-        hidden: true
-      }
-    },
-    viewMode: 'docs'
+    }
   },
 };
 
-const Template = () => html``;
+const Template = () => html`
+<modus-accordion>
+  <modus-accordion-item header-text="Item 1">Content</modus-accordion-item>
+  <modus-accordion-item header-text="Item 2">Content</modus-accordion-item>
+  <modus-accordion-item disabled header-text="Item 3">
+    Content
+  </modus-accordion-item>
+</modus-accordion>
+`;
 export const Default = Template.bind({});
 
 

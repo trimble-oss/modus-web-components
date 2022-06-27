@@ -8,15 +8,12 @@ export default {
     docs: {
       page: docs,
     },
+    controls: {
+      disabled: true,
+    },
     options: {
       isToolshown: true
-    },
-    previewTabs: {
-      canvas: {
-        hidden: true
-      }
-    },
-    viewMode: 'docs'
+    }
   },
 };
 
@@ -41,5 +38,3 @@ const setBreadcrumb = () => {
 
   return tag;
 }
-
-

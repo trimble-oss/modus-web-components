@@ -8,20 +8,22 @@ export default {
     docs: {
       page: docs,
     },
+    controls: {
+      disabled: true,
+    },
     options: {
       isToolshown: true
-    },
-    previewTabs: {
-      canvas: {
-        hidden: true
-      }
-    },
-    viewMode: 'docs'
+    }
   },
 };
 
 const Template = () => html`
-  <modus-dropdown></modus-dropdown>
+  <modus-dropdown toggle-element-id="toggleElement">
+  <modus-button id="toggleElement" slot="dropdownToggle">Dropdown</modus-button>
+  <modus-list slot="dropdownList">
+    <modus-list-item size="condensed">Item 1</modus-list-item>
+  </modus-list>
+  </modus-dropdown>
 `;
 export const Default = Template.bind({});
 

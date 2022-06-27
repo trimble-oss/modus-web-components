@@ -8,18 +8,22 @@ export default {
     docs: {
       page: docs,
     },
+    controls: {
+      disabled: true,
+    },
     options: {
       isToolshown: true
-    },
-    previewTabs: {
-      canvas: {
-        hidden: true
-      }
-    },
-    viewMode: 'docs'
+    }
   },
 };
 
-const Template = () => html``;
+const Template = () => html`
+<modus-card>
+  <!-- Render anything here -->
+  <div>
+    <img src="https://modus.trimble.com/icon.png" alt="Trimble icon" />
+  </div>
+</modus-card>
+`;
 export const Default = Template.bind({});
 
