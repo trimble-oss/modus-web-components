@@ -11,10 +11,8 @@ export default {
     options: {
       isToolshown: true
     },
-    previewTabs: {
-      canvas: {
-        hidden: true
-      }
+    controls: {
+      disabled: true,
     },
     viewMode: 'docs'
   },
