@@ -103,4 +103,3 @@ export const Outline = ({ ariaLabel, buttonStyle, color, disabled, size }) => ht
   </modus-button>
 `;
 Outline.args = { ariaLabel: '', buttonStyle: 'outline', color: 'default', disabled: false, size: 'medium' };
-

@@ -65,8 +65,8 @@ Default.args = {
   type: 'default'
 };
 
-export const danger = Template.bind({});
-danger.args = {
+export const Danger = Template.bind({});
+Danger.args = {
   ariaLabel: '',
   dismissible: false,
   showIcon: true,

@@ -28,21 +28,14 @@ They are referenced using the `<modus-file-dropzone>` tag.
 </modus-file-dropzone>
 
 ```html
-<modus-file-dropzone
-  aria-Label="dropzone"
-  description="File dropzone description"
-  dropzone-Height="175px"
-  dropzone-Width="400px"
-  label="Dropzone Label"
-  multiple="false">
-</modus-file-dropzone>
+<modus-file-dropzone aria-Label="dropzone" description="File dropzone description" dropzone-Height="175px" dropzone-Width="400px" label="Dropzone Label" multiple="false"> </modus-file-dropzone>
 
 <script>
-    document.querySelector('modus-file-dropzone').addEventListener('files', (event) => {
-        const [files, error] = event.detail;
-        console.log(files);
-        console.log(error);
-    });
+  document.querySelector("modus-file-dropzone").addEventListener("files", (event) => {
+    const [files, error] = event.detail;
+    console.log(files);
+    console.log(error);
+  });
 </script>
 ```
 
@@ -61,22 +54,20 @@ They are referenced using the `<modus-file-dropzone>` tag.
 | `maxTotalFileSizeBytes` | `max-total-file-size-bytes` | (optional) The dropzone's max total file size.               | `number`  | `undefined` |
 | `multiple`              | `multiple`                  | (optional) Whether multiple files can be uploaded.           | `boolean` | `true`      |
 
-
 ## Events
 
-| Event   | Description                                                                                                               | Type                            |
-| ------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------- |
+| Event   | Description                                                                                                                          | Type                            |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------- |
 | `files` | An event that fires when files have been added or removed, regardless of whether they're valid. Returns the files and current error. | `CustomEvent<[File[], string]>` |
-
 
 ## Methods
 
-| Method name  | Description                              | Parameter                         | Return                    |
-| ------------ | ---------------------------------------- | --------------------------------- | ------------------------- |
-| `addFile`    |  Add a file to the dropzone              | `file: File`                      | `Promise<void>`           |
-| `getError`   |  Get the dropzone's error                |                                   | Promise<string | null>  |
-| `getFiles`   |  Get the dropzone's files                |                                   | `Promise<File[]>`         |
-| `removeFile` |  Remove a file from the dropzone         | `fileName: string`                | `Promise<void>`           |
+| Method name  | Description                     | Parameter          | Return            |
+| ------------ | ------------------------------- | ------------------ | ----------------- | ----- |
+| `addFile`    | Add a file to the dropzone      | `file: File`       | `Promise<void>`   |
+| `getError`   | Get the dropzone's error        |                    | Promise<string    | null> |
+| `getFiles`   | Get the dropzone's files        |                    | `Promise<File[]>` |
+| `removeFile` | Remove a file from the dropzone | `fileName: string` | `Promise<void>`   |
 
 ### Accessibility
 

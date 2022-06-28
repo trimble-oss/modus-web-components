@@ -155,5 +155,3 @@ Default.args = {
   validText: '',
   value: 100
 };
-
-

@@ -97,4 +97,3 @@ export const Small = ({ activePage, ariaLabel, maxPage, minPage, size }) => html
   </modus-pagination>
 `;
 Small.args = { activePage: '4', ariaLabel: '', maxPage: '100', minPage: '1', size: 'small' };
-

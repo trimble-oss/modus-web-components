@@ -126,4 +126,3 @@ Default.args = {
   maxTotalFileSizeBytes: '1000000',
   multiple: true,
 };
-
