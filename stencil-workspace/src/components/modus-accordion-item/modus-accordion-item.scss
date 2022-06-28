@@ -8,12 +8,14 @@
   .header {
     align-items: center;
     display: inline-flex;
+    cursor: pointer;
     font-size: $rem-18px;
     font-weight: $font-weight-semi-bold;
     height: 48px;
 
     &.disabled {
       opacity: .3;
+      cursor: auto;
     }
 
     &.small {
