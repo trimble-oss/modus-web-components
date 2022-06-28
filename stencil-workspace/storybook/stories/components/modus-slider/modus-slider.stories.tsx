@@ -75,5 +75,3 @@ const Template = ({ ariaLabel, disabled, label, maxValue, minValue, value }) => 
 
 export const Default = Template.bind({});
 Default.args = { ariaLabel: '', disabled: false, label: '', maxValue: 100, minValue: 0, value: 50 };
-
-

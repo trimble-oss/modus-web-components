@@ -39,4 +39,3 @@ Default.args = {
   color: '#005F9E',
   size: '2rem'
 };
-

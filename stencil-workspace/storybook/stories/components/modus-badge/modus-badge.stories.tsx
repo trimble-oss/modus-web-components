@@ -90,5 +90,3 @@ export const Text = ({ ariaLabel, color, size, type }) => html`
   </modus-badge>
 `;
 Text.args = { ariaLabel: '', color: 'primary', size: 'medium', type: 'text' };
-
-

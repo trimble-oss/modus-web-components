@@ -52,5 +52,3 @@ export const Question = ({ ariaLabel, type }) => html`
   </modus-message>
 `;
 Question.args = { ariaLabel: '', type: 'question' };
-
-

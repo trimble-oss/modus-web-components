@@ -22,5 +22,3 @@ const Template = () => html`
   <modus-tooltip></modus-tooltip>
 `;
 export const Default = Template.bind({});
-
-

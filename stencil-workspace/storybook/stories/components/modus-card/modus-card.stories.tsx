@@ -26,4 +26,3 @@ const Template = () => html`
 </modus-card>
 `;
 export const Default = Template.bind({});
-

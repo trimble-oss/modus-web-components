@@ -99,5 +99,3 @@ Default.args = { ariaLabel: '', backgroundColor: '', color: '', maxValue: 100, m
 
 export const Compact = Template.bind({});
 Compact.args = { ariaLabel: '', backgroundColor: '', color: '', maxValue: 100, minValue: 0, size: 'compact', text: '', textColor: '', value: 50 };
-
-
