@@ -1,8 +1,10 @@
 .modus-modal {
+  align-items: center;
   background-color: rgba(0, 0, 0, 0.4);
   color: $col_black;
   font-family: $primary-font;
   height: 100%;
+  justify-content: center;
   left: 0;
   overflow: auto;
   position: fixed;
@@ -10,7 +12,7 @@
   width: 100%;
 
   &.visible {
-    display: block;
+    display: inline-flex;
   }
 
   &.hidden {
@@ -23,11 +25,9 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 15% auto;
     max-width: 650px;
-    min-width: 375px;
+    min-width: 300px;
     padding: 0 $rem-16px;
-    width: max-content;
 
     .header {
       align-items: center;

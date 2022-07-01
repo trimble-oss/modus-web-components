@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { Component, Prop, h, Event, EventEmitter, State, Element } from '@stencil/core';
+import { Component, Prop, h, Event, EventEmitter, State, Element, Listen } from '@stencil/core';
 
 @Component({
   tag: 'modus-dropdown',
@@ -38,6 +38,15 @@ export class ModusDropdown {
   componentDidRender(): void {
     this.toggleElement = this.el.querySelector(`#${this.toggleElementId}`);
     if (!this.toggleElement) { throw Error('matching element not found for toggle-element-id'); }
+  }
+
+  @Listen('click', { target: 'document' })
+  documentClickHandler(event: MouseEvent): void {
+    // Close the dropdown when click is outside the current element.
+    if (event.defaultPrevented || (event.target as HTMLElement).closest('modus-dropdown')) { return; }
+
+    this.visible = false;
+    this.dropdownClose.emit();
   }
 
   handleDropdownClick(event: MouseEvent): void {

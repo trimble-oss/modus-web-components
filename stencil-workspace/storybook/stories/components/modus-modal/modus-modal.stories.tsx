@@ -5,6 +5,9 @@ import { html } from 'lit-html';
 export default {
   title: 'Components/Modal',
   parameters: {
+    actions: {
+      handles: ['closed'],
+    },
     docs: {
       page: docs,
     },

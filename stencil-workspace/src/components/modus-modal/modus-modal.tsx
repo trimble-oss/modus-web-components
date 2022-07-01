@@ -55,9 +55,9 @@ export class ModusModal {
   visible: boolean;
 
   handleOverlayClick(event: MouseEvent): void {
-    if ((event.target as HTMLElement).classList.contains('overlay')) {
-      this.close();
-    }
+    if (!(event.target as HTMLElement).classList.contains('overlay')) { return; }
+
+    this.close();
   }
 
   handlePrimaryKeydown(event: KeyboardEvent): void {

@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { Component, Prop, h } from '@stencil/core';
+import { Component, Prop, h, Host } from '@stencil/core';
 
 @Component({
   tag: 'modus-progress-bar',
@@ -71,18 +71,20 @@ export class ModusProgressBar {
     const progressClass = `progress ${progressColorClass} ${progressTextColor}`;
 
     return (
-      <div
+      <Host
         aria-label={this.ariaLabel}
         aria-valuemax={this.maxValue}
         aria-valuemin={this.minValue}
         aria-valuenow={this.value}
-        class={progressBarClass}
-        role="progressbar"
-        style={this.getProgressBarStyle()}>
-        <div class={progressClass} style={this.getProgressStyle(percentage)}>
-          {this.size === 'default' && this.text}
+        role="progressbar">
+        <div
+          class={progressBarClass}
+          style={this.getProgressBarStyle()}>
+          <div class={progressClass} style={this.getProgressStyle(percentage)}>
+            {this.size === 'default' && this.text}
+          </div>
         </div>
-      </div>
+      </Host>
     );
   }
 }

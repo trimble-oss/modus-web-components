@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+### Fixed
+- Fixed Modus Modal's sizing minimum sizing for mobile views.
+- Fixed aria-labels on Modus Progress Bar and Modus File Dropzone by moving to host elements.
+- Fixed Modus Dropdown closing issue, it now closes when you click outside.
 
 ## [0.1.8] - 2022-24-07
 ### Fixed
