@@ -55,6 +55,11 @@ describe('modus-text-input', () => {
     expect(modusTextInput.helperText).toBeFalsy();
   });
 
+  it('should default to no inputmode', async () => {
+    const modusTextInput = new ModusTextInput();
+    expect(modusTextInput.inputmode).toBeFalsy();
+  });
+
   it('should default to size medium', async () => {
     const modusTextInput = new ModusTextInput();
     expect(modusTextInput.size).toEqual('medium');

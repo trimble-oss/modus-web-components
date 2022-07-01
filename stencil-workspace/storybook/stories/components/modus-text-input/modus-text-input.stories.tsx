@@ -48,6 +48,16 @@ export default {
         type: { summary: 'boolean' },
       }
     },
+    inputmode: {
+      control: {
+        options: ['decimal', 'email', 'numeric', 'search', 'tel', 'text', 'url'],
+        type: 'select',
+      },
+      description: 'The inputmode type',
+      table: {
+        type: { summary: `'decimal' | 'email' | 'numeric' | 'search' | 'tel' | 'text' | 'url'` },
+      }
+    },
     label: {
       description: 'The text input\'s label',
       table: {
@@ -139,7 +149,7 @@ export default {
   },
 };
 
-const Template = ({ ariaLabel, clearable, disabled, errorText, helperText, includeSearchIcon, label, maxLength, minLength, placeholder, readOnly, required, size, type, validText, value }) => html`
+const Template = ({ ariaLabel, clearable, disabled, errorText, helperText, includeSearchIcon, inputmode, label, maxLength, minLength, placeholder, readOnly, required, size, type, validText, value }) => html`
   <modus-text-input
     aria-label=${ariaLabel}
     clearable=${clearable}
@@ -147,6 +157,7 @@ const Template = ({ ariaLabel, clearable, disabled, errorText, helperText, inclu
     error-text=${errorText}
     helper-text=${helperText}
     include-search-icon=${includeSearchIcon}
+    inputmode=${inputmode}
     label=${label}
     max-length=${maxLength}
     min-length=${minLength}
@@ -168,6 +179,7 @@ Default.args = {
   errorText: '',
   helperText: '',
   includeSearchIcon: false,
+  inputmode: '',
   label: '',
   maxLength: 100,
   minLength: 0,

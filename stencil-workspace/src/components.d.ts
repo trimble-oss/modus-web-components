@@ -671,6 +671,10 @@ export namespace Components {
          */
         "includeSearchIcon": boolean;
         /**
+          * (optional) The input's inputmode.
+         */
+        "inputmode": 'decimal' | 'email' | 'numeric' | 'search' | 'tel' | 'text' | 'url';
+        /**
           * (optional) The input's label.
          */
         "label": string;
@@ -743,6 +747,94 @@ export namespace Components {
          */
         "text": string;
     }
+}
+export interface ModusAccordionItemCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusAccordionItemElement;
+}
+export interface ModusAlertCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusAlertElement;
+}
+export interface ModusBreadcrumbCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusBreadcrumbElement;
+}
+export interface ModusButtonCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusButtonElement;
+}
+export interface ModusCheckboxCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusCheckboxElement;
+}
+export interface ModusChipCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusChipElement;
+}
+export interface ModusContentTreeItemCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusContentTreeItemElement;
+}
+export interface ModusDropdownCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusDropdownElement;
+}
+export interface ModusFileDropzoneCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusFileDropzoneElement;
+}
+export interface ModusListItemCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusListItemElement;
+}
+export interface ModusModalCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusModalElement;
+}
+export interface ModusNavbarCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusNavbarElement;
+}
+export interface ModusNavbarProfileMenuCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusNavbarProfileMenuElement;
+}
+export interface ModusNumberInputCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusNumberInputElement;
+}
+export interface ModusPaginationCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusPaginationElement;
+}
+export interface ModusRadioGroupCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusRadioGroupElement;
+}
+export interface ModusSelectCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusSelectElement;
+}
+export interface ModusSliderCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusSliderElement;
+}
+export interface ModusSwitchCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusSwitchElement;
+}
+export interface ModusTabsCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusTabsElement;
+}
+export interface ModusTextInputCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusTextInputElement;
+}
+export interface ModusToastCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusToastElement;
 }
 declare global {
     interface HTMLModusAccordionElement extends Components.ModusAccordion, HTMLStencilElement {
@@ -1002,11 +1094,11 @@ declare namespace LocalJSX {
         /**
           * An event that fires on every accordion close.
          */
-        "onClosed"?: (event: CustomEvent<any>) => void;
+        "onClosed"?: (event: ModusAccordionItemCustomEvent<any>) => void;
         /**
           * An event that fires on every accordion open.
          */
-        "onOpened"?: (event: CustomEvent<any>) => void;
+        "onOpened"?: (event: ModusAccordionItemCustomEvent<any>) => void;
         /**
           * (optional) The size of accordion item.
          */
@@ -1028,7 +1120,7 @@ declare namespace LocalJSX {
         /**
           * An event that fires when the alert is dismissed
          */
-        "onDismissClick"?: (event: CustomEvent<any>) => void;
+        "onDismissClick"?: (event: ModusAlertCustomEvent<any>) => void;
         /**
           * (optional) The type of alert, sets the color and icon to render
          */
@@ -1064,7 +1156,7 @@ declare namespace LocalJSX {
         /**
           * (optional) An event that fires on breadcrumb click.
          */
-        "onCrumbClick"?: (event: CustomEvent<Crumb>) => void;
+        "onCrumbClick"?: (event: ModusBreadcrumbCustomEvent<Crumb>) => void;
     }
     interface ModusButton {
         /**
@@ -1086,7 +1178,7 @@ declare namespace LocalJSX {
         /**
           * (optional) An event that fires on button click.
          */
-        "onButtonClick"?: (event: CustomEvent<any>) => void;
+        "onButtonClick"?: (event: ModusButtonCustomEvent<any>) => void;
         /**
           * (optional) The size of the button.
          */
@@ -1130,7 +1222,7 @@ declare namespace LocalJSX {
         /**
           * An event that fires on checkbox click.
          */
-        "onCheckboxClick"?: (event: CustomEvent<boolean>) => void;
+        "onCheckboxClick"?: (event: ModusCheckboxCustomEvent<boolean>) => void;
         /**
           * (optional) The size of the button
          */
@@ -1160,11 +1252,11 @@ declare namespace LocalJSX {
         /**
           * An event that fires on chip click.
          */
-        "onChipClick"?: (event: CustomEvent<any>) => void;
+        "onChipClick"?: (event: ModusChipCustomEvent<any>) => void;
         /**
           * An event that fires on close icon click.
          */
-        "onCloseClick"?: (event: CustomEvent<any>) => void;
+        "onCloseClick"?: (event: ModusChipCustomEvent<any>) => void;
         /**
           * (optional) Whether to show the checkmark.
          */
@@ -1222,15 +1314,15 @@ declare namespace LocalJSX {
         /**
           * An event that first on item checkbox click
          */
-        "onCheckboxClick"?: (event: CustomEvent<boolean>) => void;
+        "onCheckboxClick"?: (event: ModusContentTreeItemCustomEvent<boolean>) => void;
         /**
           * An event that fires on item expand click
          */
-        "onExpandClick"?: (event: CustomEvent<boolean>) => void;
+        "onExpandClick"?: (event: ModusContentTreeItemCustomEvent<boolean>) => void;
         /**
           * An event that fires on item click
          */
-        "onItemClick"?: (event: CustomEvent<any>) => void;
+        "onItemClick"?: (event: ModusContentTreeItemCustomEvent<any>) => void;
         /**
           * (optional) The selected state of the item
          */
@@ -1252,7 +1344,7 @@ declare namespace LocalJSX {
         /**
           * An event that fires on dropdown close.
          */
-        "onDropdownClose"?: (event: CustomEvent<any>) => void;
+        "onDropdownClose"?: (event: ModusDropdownCustomEvent<any>) => void;
         /**
           * (optional) The placement of the dropdown in related to the toggleElement.
          */
@@ -1306,7 +1398,7 @@ declare namespace LocalJSX {
         /**
           * An event that fires when files have been added or removed, regardless of whether they're valid.
          */
-        "onFiles"?: (event: CustomEvent<[File[], string | null]>) => void;
+        "onFiles"?: (event: ModusFileDropzoneCustomEvent<[File[], string | null]>) => void;
     }
     interface ModusList {
     }
@@ -1318,7 +1410,7 @@ declare namespace LocalJSX {
         /**
           * An event that fires on list item click
          */
-        "onItemClick"?: (event: CustomEvent<any>) => void;
+        "onItemClick"?: (event: ModusListItemCustomEvent<any>) => void;
         /**
           * (optional) The selected state of the list item
          */
@@ -1354,19 +1446,19 @@ declare namespace LocalJSX {
         /**
           * An event that fires on modal close.
          */
-        "onClosed"?: (event: CustomEvent<any>) => void;
+        "onClosed"?: (event: ModusModalCustomEvent<any>) => void;
         /**
           * An event that fires on modal open.
          */
-        "onOpened"?: (event: CustomEvent<any>) => void;
+        "onOpened"?: (event: ModusModalCustomEvent<any>) => void;
         /**
           * An event that fires on primary button click.
          */
-        "onPrimaryButtonClick"?: (event: CustomEvent<any>) => void;
+        "onPrimaryButtonClick"?: (event: ModusModalCustomEvent<any>) => void;
         /**
           * An event that fires on secondary button click.
          */
-        "onSecondaryButtonClick"?: (event: CustomEvent<any>) => void;
+        "onSecondaryButtonClick"?: (event: ModusModalCustomEvent<any>) => void;
         /**
           * (optional) The modal's primary button text.
          */
@@ -1388,11 +1480,11 @@ declare namespace LocalJSX {
         /**
           * An event that fires on product logo click.
          */
-        "onProductLogoClick"?: (event: CustomEvent<MouseEvent>) => void;
+        "onProductLogoClick"?: (event: ModusNavbarCustomEvent<MouseEvent>) => void;
         /**
           * An event that fires on profile menu sign out click.
          */
-        "onProfileMenuSignOutClick"?: (event: CustomEvent<MouseEvent>) => void;
+        "onProfileMenuSignOutClick"?: (event: ModusNavbarCustomEvent<MouseEvent>) => void;
         /**
           * (required) Product logo options.
          */
@@ -1443,7 +1535,7 @@ declare namespace LocalJSX {
         "avatarUrl"?: string;
         "email"?: string;
         "initials"?: string;
-        "onSignOutClick"?: (event: CustomEvent<MouseEvent>) => void;
+        "onSignOutClick"?: (event: ModusNavbarProfileMenuCustomEvent<MouseEvent>) => void;
         "reverse"?: boolean;
         "username"?: string;
     }
@@ -1479,7 +1571,7 @@ declare namespace LocalJSX {
         /**
           * An event that fires on input value change.
          */
-        "onValueChange"?: (event: CustomEvent<string>) => void;
+        "onValueChange"?: (event: ModusNumberInputCustomEvent<string>) => void;
         /**
           * (optional) The input's placeholder text.
          */
@@ -1517,7 +1609,7 @@ declare namespace LocalJSX {
         /**
           * An event that fires on page change.
          */
-        "onPageChange"?: (event: CustomEvent<number>) => void;
+        "onPageChange"?: (event: ModusPaginationCustomEvent<number>) => void;
         "size"?: 'large' | 'medium' | 'small';
     }
     interface ModusProgressBar {
@@ -1574,7 +1666,7 @@ declare namespace LocalJSX {
         /**
           * Fires on radio button click.
          */
-        "onButtonClick"?: (event: CustomEvent<string>) => void;
+        "onButtonClick"?: (event: ModusRadioGroupCustomEvent<string>) => void;
         /**
           * The radio buttons to render.
          */
@@ -1604,7 +1696,7 @@ declare namespace LocalJSX {
         /**
           * An event that fires on input value change.
          */
-        "onValueChange"?: (event: CustomEvent<unknown>) => void;
+        "onValueChange"?: (event: ModusSelectCustomEvent<unknown>) => void;
         /**
           * The options for the dropdown list.
          */
@@ -1654,11 +1746,11 @@ declare namespace LocalJSX {
         /**
           * An event that fires on slider value change.
          */
-        "onValueChange"?: (event: CustomEvent<string>) => void;
+        "onValueChange"?: (event: ModusSliderCustomEvent<string>) => void;
         /**
           * An event that fires on slider value input.
          */
-        "onValueInput"?: (event: CustomEvent<string>) => void;
+        "onValueInput"?: (event: ModusSliderCustomEvent<string>) => void;
         /**
           * (optional) The slider's value.
          */
@@ -1694,14 +1786,14 @@ declare namespace LocalJSX {
         /**
           * An event that fires on switch click.
          */
-        "onSwitchClick"?: (event: CustomEvent<boolean>) => void;
+        "onSwitchClick"?: (event: ModusSwitchCustomEvent<boolean>) => void;
     }
     interface ModusTabs {
         "ariaLabel"?: string;
         /**
           * An event that fires on tab change.
          */
-        "onTabChange"?: (event: CustomEvent<string>) => void;
+        "onTabChange"?: (event: ModusTabsCustomEvent<string>) => void;
         "size"?: 'medium' | 'small';
         /**
           * The tabs to render.
@@ -1734,6 +1826,10 @@ declare namespace LocalJSX {
          */
         "includeSearchIcon"?: boolean;
         /**
+          * (optional) The input's inputmode.
+         */
+        "inputmode"?: 'decimal' | 'email' | 'numeric' | 'search' | 'tel' | 'text' | 'url';
+        /**
           * (optional) The input's label.
          */
         "label"?: string;
@@ -1748,7 +1844,7 @@ declare namespace LocalJSX {
         /**
           * An event that fires on input value change.
          */
-        "onValueChange"?: (event: CustomEvent<string>) => void;
+        "onValueChange"?: (event: ModusTextInputCustomEvent<string>) => void;
         /**
           * (optional) The input's placeholder text.
          */
@@ -1790,7 +1886,7 @@ declare namespace LocalJSX {
         /**
           * An event that fires when the toast is dismissed
          */
-        "onDismissClick"?: (event: CustomEvent<any>) => void;
+        "onDismissClick"?: (event: ModusToastCustomEvent<any>) => void;
         /**
           * (optional) Whether to show the toasts' icon.
          */

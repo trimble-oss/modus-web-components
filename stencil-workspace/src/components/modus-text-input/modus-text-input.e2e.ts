@@ -99,6 +99,19 @@ describe('modus-text-input', () => {
     expect(searchIcon).not.toBeNull();
   });
 
+  it('renders changes to inputmode', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-text-input></modus-text-input>');
+
+    const textInput = await page.find('modus-text-input');
+    textInput.setProperty('inputmode', 'search');
+    await page.waitForChanges();
+
+    const input = await page.find('modus-text-input >>> input');
+    expect(input.getAttribute('inputmode')).toEqual('search');
+  });
+
   it('renders changes to label', async () => {
     const page = await newE2EPage();
 

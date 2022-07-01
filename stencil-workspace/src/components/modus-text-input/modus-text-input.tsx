@@ -27,6 +27,9 @@ export class ModusTextInput {
   /** (optional) Whether the search icon is included. */
   @Prop() includeSearchIcon: boolean;
 
+  /** (optional) The input's inputmode. */
+  @Prop() inputmode: 'decimal' | 'email' | 'numeric' | 'search' | 'tel' | 'text' | 'url';
+
   /** (optional) The input's label. */
   @Prop() label: string;
 
@@ -103,6 +106,7 @@ export class ModusTextInput {
             {this.includeSearchIcon ? <IconSearch size="16" /> : null}
             <input class={`${this.includeSearchIcon ? 'has-left-icon' : ''} ${this.clearable ? 'has-right-icon' : null}`}
                    disabled={this.disabled}
+                   inputmode={this.inputmode}
                    maxlength={this.maxLength}
                    minlength={this.minLength}
                    onInput={(event) => this.handleOnInput(event)}
