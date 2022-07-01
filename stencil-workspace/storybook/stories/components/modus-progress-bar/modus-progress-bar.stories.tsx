@@ -95,7 +95,7 @@ const Template = ({ ariaLabel, backgroundColor, color, maxValue, minValue, size,
 `;
 
 export const Default = Template.bind({});
-Default.args = { ariaLabel: '', backgroundColor: '', color: '', maxValue: 100, minValue: 0, size: 'default', text: 'Some progress!', textColor: '', value: 50 };
+Default.args = { ariaLabel: 'progress bar', backgroundColor: '', color: '', maxValue: 100, minValue: 0, size: 'default', text: 'Some progress!', textColor: '', value: 50 };
 
 export const Compact = Template.bind({});
-Compact.args = { ariaLabel: '', backgroundColor: '', color: '', maxValue: 100, minValue: 0, size: 'compact', text: '', textColor: '', value: 50 };
+Compact.args = { ariaLabel: 'progress bar', backgroundColor: '', color: '', maxValue: 100, minValue: 0, size: 'compact', text: '', textColor: '', value: 50 };

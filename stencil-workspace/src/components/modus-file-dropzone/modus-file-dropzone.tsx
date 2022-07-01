@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { Component, h, Prop, State, Event, EventEmitter, Method, Listen } from '@stencil/core';
+import { Component, h, Prop, State, Event, EventEmitter, Method, Listen, Host } from '@stencil/core';
 import { IconUploadCloud } from '../icons/icon-upload-cloud';
 import { IconCancel } from '../icons/icon-cancel';
 
@@ -167,42 +167,44 @@ export class ModusFileDropzone {
 
   render(): unknown {
     return (
-      <div aria-label={this.ariaLabel} class="modus-file-dropzone" role="button">
-        <input
-          onChange={this.onFileChange}
-          multiple={this.multiple}
-          ref={(el) => this.fileInput = el as HTMLInputElement}
-          type="file" />
-        <div class="header">
-          <label>{this.label}</label>
-          <span>{this.description}</span>
-        </div>
-        <div
-          class={`dropzone ${this.fileDraggedOver ? 'highlight' : null} ${this.error ? 'error' : null}`}
-          onDragLeave={(e) => this.onDragLeave(e)}
-          onDragOver={(e) => this.onDragOver(e)}
-          onDrop={(e) => this.onDrop(e)}
-          style={{height: this.dropzoneHeight, width: this.dropzoneWidth}}
-          tabIndex={0}>
-          {this.includeStateIcon && (this.error ? <IconCancel size={'36'} /> : <IconUploadCloud size={'36'} />)}
-          {!this.error &&
-            <div>
-              Drag files here
-              {!this.fileDraggedOver &&
-                <span> or
+      <Host aria-label={this.ariaLabel} role="button">
+        <div class="modus-file-dropzone">
+          <input
+            onChange={this.onFileChange}
+            multiple={this.multiple}
+            ref={(el) => this.fileInput = el as HTMLInputElement}
+            type="file" />
+          <div class="header">
+            <label>{this.label}</label>
+            <span>{this.description}</span>
+          </div>
+          <div
+            class={`dropzone ${this.fileDraggedOver ? 'highlight' : null} ${this.error ? 'error' : null}`}
+            onDragLeave={(e) => this.onDragLeave(e)}
+            onDragOver={(e) => this.onDragOver(e)}
+            onDrop={(e) => this.onDrop(e)}
+            style={{height: this.dropzoneHeight, width: this.dropzoneWidth}}
+            tabIndex={0}>
+            {this.includeStateIcon && (this.error ? <IconCancel size={'36'} /> : <IconUploadCloud size={'36'} />)}
+            {!this.error &&
+              <div>
+                Drag files here
+                {!this.fileDraggedOver &&
+                  <span> or
                   <span class="browse" onClick={this.openBrowse}> browse</span> to upload
                 </span>
-              }.
-            </div>
-          }
-          {this.error &&
-            <div class="error-messages">
-              {this.errorMessageTop && <span>{this.errorMessageTop}</span>}
-              {this.errorMessageBottom && <span>{this.errorMessageBottom}</span>}
-            </div>
-          }
+                }.
+              </div>
+            }
+            {this.error &&
+              <div class="error-messages">
+                {this.errorMessageTop && <span>{this.errorMessageTop}</span>}
+                {this.errorMessageBottom && <span>{this.errorMessageBottom}</span>}
+              </div>
+            }
+          </div>
         </div>
-      </div>
+      </Host>
     );
   }
 }

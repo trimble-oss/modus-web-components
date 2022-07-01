@@ -8,9 +8,9 @@ describe('modus-file-dropzone', () => {
       html: '<modus-file-dropzone></modus-file-dropzone>',
     });
     expect(root).toEqualHtml(`
-      <modus-file-dropzone>
+      <modus-file-dropzone role="button">
         <mock:shadow-root>
-          <div class="modus-file-dropzone" role="button">
+          <div class="modus-file-dropzone">
             <input multiple="" type="file">
             <div class="header">
               <label></label>

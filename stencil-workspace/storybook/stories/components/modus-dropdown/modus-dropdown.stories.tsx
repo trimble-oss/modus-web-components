@@ -5,6 +5,9 @@ import { html } from 'lit-html';
 export default {
   title: 'Components/Dropdown',
   parameters: {
+    actions: {
+      handles: ['dropdownClose'],
+    },
     docs: {
       page: docs,
     },

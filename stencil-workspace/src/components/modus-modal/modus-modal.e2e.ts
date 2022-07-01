@@ -114,16 +114,19 @@ describe('modus-modal', () => {
 
   it('closes on overlay click', async () => {
     const page = await newE2EPage();
-
     await page.setContent('<modus-modal secondary-button-text="Secondary Text"></modus-modal>');
     const modal = await page.find('modus-modal');
     await modal.callMethod('open');
-
     const closed = await page.spyOnEvent('closed');
-    const overlay = await page.find('modus-modal >>> .overlay');
-    await overlay.click();
-    await page.waitForChanges();
 
+    // Was having trouble finding the modal's overlay, so click it through evaluate().
+    await page.evaluate(() => {
+      const overlay = document.querySelector('modus-modal').shadowRoot.querySelector('.overlay');
+      overlay.scrollIntoView({ block: "center", inline: "center" });
+      (overlay as HTMLElement).click();
+    });
+
+    await page.waitForChanges();
     expect(closed).toHaveReceivedEvent();
   });
 });
