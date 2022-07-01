@@ -38,7 +38,7 @@
     "ci-storybook": "cd storybook && npm ci && npm run build-storybook"
   },
   "dependencies": {
-    "@stencil/core": "^2.15.2"
+    "@stencil/core": "^2.17.0"
   },
   "devDependencies": {
     "@stencil/angular-output-target": "^0.4.0",
@@ -58,7 +58,7 @@
     "jest-cli": "^27.4.5",
     "prettier": "^2.7.1",
     "puppeteer": "^14.1.0",
-    "puppeteer-core": "^14.1.0",
+    "puppeteer-core": "^15.2.0",
     "stylelint": "^14.9.1",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-standard-scss": "^3.0.0",
