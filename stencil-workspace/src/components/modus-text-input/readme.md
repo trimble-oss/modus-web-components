@@ -7,24 +7,25 @@
 
 ## Properties
 
-| Property            | Attribute             | Description                                                   | Type                   | Default     |
-| ------------------- | --------------------- | ------------------------------------------------------------- | ---------------------- | ----------- |
-| `ariaLabel`         | `aria-label`          | (optional) The input's aria-label.                            | `string`               | `undefined` |
-| `clearable`         | `clearable`           | (optional) Whether the input has a clear button.              | `boolean`              | `true`      |
-| `disabled`          | `disabled`            | (optional) Whether the input is disabled.                     | `boolean`              | `undefined` |
-| `errorText`         | `error-text`          | (optional) The input's error state text.                      | `string`               | `undefined` |
-| `helperText`        | `helper-text`         | (optional) The input's helper text displayed below the input. | `string`               | `undefined` |
-| `includeSearchIcon` | `include-search-icon` | (optional) Whether the search icon is included.               | `boolean`              | `undefined` |
-| `label`             | `label`               | (optional) The input's label.                                 | `string`               | `undefined` |
-| `maxLength`         | `max-length`          | (optional) The input's maximum length.                        | `number`               | `undefined` |
-| `minLength`         | `min-length`          | (optional) The input's minimum length.                        | `number`               | `undefined` |
-| `placeholder`       | `placeholder`         | (optional) The input's placeholder text.                      | `string`               | `undefined` |
-| `readOnly`          | `read-only`           | (optional) Whether the input's content is read-only           | `boolean`              | `undefined` |
-| `required`          | `required`            | (optional) Whether the input is required.                     | `boolean`              | `undefined` |
-| `size`              | `size`                | (optional) The input's size.                                  | `"large" \| "medium"`  | `'medium'`  |
-| `type`              | `type`                | (optional) The input's type.                                  | `"password" \| "text"` | `'text'`    |
-| `validText`         | `valid-text`          | (optional) The input's valid state text.                      | `string`               | `undefined` |
-| `value`             | `value`               | (optional) The input's value.                                 | `string`               | `undefined` |
+| Property            | Attribute             | Description                                                   | Type                                                                        | Default     |
+| ------------------- | --------------------- | ------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------- |
+| `ariaLabel`         | `aria-label`          | (optional) The input's aria-label.                            | `string`                                                                    | `undefined` |
+| `clearable`         | `clearable`           | (optional) Whether the input has a clear button.              | `boolean`                                                                   | `true`      |
+| `disabled`          | `disabled`            | (optional) Whether the input is disabled.                     | `boolean`                                                                   | `undefined` |
+| `errorText`         | `error-text`          | (optional) The input's error state text.                      | `string`                                                                    | `undefined` |
+| `helperText`        | `helper-text`         | (optional) The input's helper text displayed below the input. | `string`                                                                    | `undefined` |
+| `includeSearchIcon` | `include-search-icon` | (optional) Whether the search icon is included.               | `boolean`                                                                   | `undefined` |
+| `inputmode`         | `inputmode`           | (optional) The input's inputmode.                             | `"decimal" \| "email" \| "numeric" \| "search" \| "tel" \| "text" \| "url"` | `'text'`    |
+| `label`             | `label`               | (optional) The input's label.                                 | `string`                                                                    | `undefined` |
+| `maxLength`         | `max-length`          | (optional) The input's maximum length.                        | `number`                                                                    | `undefined` |
+| `minLength`         | `min-length`          | (optional) The input's minimum length.                        | `number`                                                                    | `undefined` |
+| `placeholder`       | `placeholder`         | (optional) The input's placeholder text.                      | `string`                                                                    | `undefined` |
+| `readOnly`          | `read-only`           | (optional) Whether the input's content is read-only           | `boolean`                                                                   | `undefined` |
+| `required`          | `required`            | (optional) Whether the input is required.                     | `boolean`                                                                   | `undefined` |
+| `size`              | `size`                | (optional) The input's size.                                  | `"large" \| "medium"`                                                       | `'medium'`  |
+| `type`              | `type`                | (optional) The input's type.                                  | `"password" \| "text"`                                                      | `'text'`    |
+| `validText`         | `valid-text`          | (optional) The input's valid state text.                      | `string`                                                                    | `undefined` |
+| `value`             | `value`               | (optional) The input's value.                                 | `string`                                                                    | `undefined` |
 
 
 ## Events

@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Fixed Toast's ariaLabel type.
 - Added JSX to types output.
+- Added inputmode option to modus-text-input components.
 
 ## [0.1.7] - 2022-19-06
 ### Added
