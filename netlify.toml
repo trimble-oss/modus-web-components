@@ -1,0 +1,23 @@
+[build]
+  command = "npm run full"
+  functions = "netlify/functions"
+  publish = "storybook/dist/"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "upgrade-insecure-requests"
+    Permissions-Policy = "microphone=()"
+    Referrer-Policy = "no-referrer-when-downgrade"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    X-XSS-Protection = "0"
+
+[[plugins]]
+package = "@netlify/plugin-lighthouse"
+
+  # optional, fails build when a category is below a threshold
+  [plugins.inputs.thresholds]
+    accessibility = 0.8
+    best-practices = 0.8
+    seo = 0.8
