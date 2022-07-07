@@ -6,6 +6,8 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 
 ## Unreleased
 
+## 0.1.9 - 2022-07-07
+
 ### Fixed
 
 - Fixed Modus Modal's sizing minimum sizing for mobile views.
@@ -14,7 +16,7 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 - Added inputmode option to modus-text-input components.
 - Add `cursor: pointer;` CSS to acccordion headers
 
-## 0.1.8 - 2022-24-07
+## 0.1.8 - 2022-24-06
 
 ### Fixed
 
