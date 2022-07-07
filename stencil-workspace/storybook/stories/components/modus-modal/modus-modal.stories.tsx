@@ -22,9 +22,9 @@ export default {
 };
 
 const Template = () => html`
-  <modus-button color="primary">Open Modal</modus-button>
-  <modus-modal header-text="Modus Modal" primary-button-text="Sweet!" secondary-button-text="Ahh okay...">
-    <p>Here is some modal content. Render anything here.</p>
+  <modus-button color="primary">Open modal</modus-button>
+  <modus-modal header-text="Modal title" primary-button-text="Save changes" secondary-button-text="Sweet!">
+    <p>Woo-hoo, you're reading this text in a modal!</p>
   </modus-modal>
   ${setScript()}
 `;
