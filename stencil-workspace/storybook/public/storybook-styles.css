@@ -49,3 +49,8 @@ body,
 body .sbdocs a {
   color: #217cbb;
 }
+
+/* Fixes code block z-index issue */
+pre .os-padding {
+  z-index: inherit !important;
+}
