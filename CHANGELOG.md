@@ -6,6 +6,10 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 
 ## Unreleased
 
+- Added `role="button"` and `aria-label="Close"` to Modal Close button.
+- Correct font size for modal header and body text.
+- Correct font size for accordion header.
+
 ## 0.1.9 - 2022-07-07
 
 ### Fixed
@@ -14,7 +18,7 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 - Fixed aria-labels on Modus Progress Bar and Modus File Dropzone by moving to host elements.
 - Fixed Modus Dropdown closing issue, it now closes when you click outside.
 - Added inputmode option to modus-text-input components.
-- Add `cursor: pointer;` CSS to acccordion headers
+- Add `cursor: pointer;` CSS to acccordion headers.
 
 ## 0.1.8 - 2022-24-06
 

@@ -15,7 +15,7 @@
 | `errorText`         | `error-text`          | (optional) The input's error state text.                      | `string`                                                                    | `undefined` |
 | `helperText`        | `helper-text`         | (optional) The input's helper text displayed below the input. | `string`                                                                    | `undefined` |
 | `includeSearchIcon` | `include-search-icon` | (optional) Whether the search icon is included.               | `boolean`                                                                   | `undefined` |
-| `inputmode`         | `inputmode`           | (optional) The input's inputmode.                             | `"decimal" \| "email" \| "numeric" \| "search" \| "tel" \| "text" \| "url"` | `'text'`    |
+| `inputmode`         | `inputmode`           | (optional) The input's inputmode.                             | `"decimal" \| "email" \| "numeric" \| "search" \| "tel" \| "text" \| "url"` | `undefined` |
 | `label`             | `label`               | (optional) The input's label.                                 | `string`                                                                    | `undefined` |
 | `maxLength`         | `max-length`          | (optional) The input's maximum length.                        | `number`                                                                    | `undefined` |
 | `minLength`         | `min-length`          | (optional) The input's minimum length.                        | `number`                                                                    | `undefined` |

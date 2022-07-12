@@ -88,8 +88,8 @@ export class ModusModal {
         <div class="content">
           <div class="header">
             {this.headerText}
-            <div class="icon-close" onClick={() => this.close()} >
-              <IconClose size="20"/>
+            <div class="icon-close" role="button" aria-label="Close" onClick={() => this.close()}>
+              <IconClose size="20" />
             </div>
           </div>
           <div class="body">
