@@ -20,7 +20,7 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 - Added inputmode option to modus-text-input components.
 - Add `cursor: pointer;` CSS to acccordion headers.
 
-## 0.1.8 - 2022-24-07
+## 0.1.8 - 2022-24-06
 
 ### Fixed
 
