@@ -1,5 +1,5 @@
 .accordion-item {
-  border-bottom: $rem-2px solid $col_gray_1;
+  border-bottom: $rem-1px solid $col_gray_1;
   display: flex;
   flex-direction: column;
   font-family: $primary-font;
@@ -36,6 +36,7 @@
   .body {
     display: none;
     padding: $rem-16px $rem-8px;
+    font-size: $rem-14px;
 
     &.expanded {
       display: block;
