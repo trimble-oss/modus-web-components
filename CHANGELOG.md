@@ -9,6 +9,11 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 - Added `role="button"` and `aria-label="Close"` to Modal Close button.
 - Correct font size for modal header and body text.
 - Correct font size for accordion header.
+- Change Accordion items border from 2px to 1px
+- Change Accordion body font size change from 16px to 14px
+- Remove _italic_ style from text input placeholder
+- Change disabled text input to lighter gray (from `$col_gray_3` to `$col_gray_1`)
+- Correct checkbox border color (from `$col_gray_6` to `$col_gray_4`)
 
 ## 0.1.9 - 2022-07-07
 

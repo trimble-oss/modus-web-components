@@ -57,7 +57,6 @@
 
       &::placeholder {
         color: $col_gray_5;
-        font-style: italic;
       }
     }
 
@@ -154,10 +153,10 @@
     pointer-events: none;
 
     .input-container {
-      background-color: $col_gray_3;
+      background-color: $col_gray_1;
 
       .icons {
-        background-color: $col_gray_3;
+        background-color: $col_gray_1;
         cursor: default;
 
         &.clear {
@@ -166,7 +165,8 @@
       }
 
       input {
-        background-color: $col_gray_3;
+        background-color: $col_gray_1;
+        color: $col_gray_6;
         border-radius: 0;
       }
     }
