@@ -1,6 +1,5 @@
 {
   "name": "@trimble-oss/modus-react-components",
-  "sideEffects": false,
   "version": "0.0.0-1",
   "description": "Trimble Modus React Component Library",
   "homepage": "https://modus-web-components.trimble.com/",
@@ -11,11 +10,8 @@
     "type": "git",
     "url": "https://github.com/trimble-oss/modus-web-components"
   },
-  "scripts": {
-    "build": "npm run compile",
-    "compile": "npm run tsc",
-    "tsc": "tsc -p ."
-  },
+  "license": "MIT",
+  "sideEffects": false,
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -24,6 +20,22 @@
     "../README.md",
     "../SUPPORT.md"
   ],
+  "scripts": {
+    "build": "npm run compile",
+    "compile": "npm run tsc",
+    "tsc": "tsc -p ."
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "setupTestFrameworkScriptFile": "<rootDir>/jest.setup.js",
+    "testPathIgnorePatterns": [
+      "node_modules",
+      "dist"
+    ]
+  },
+  "dependencies": {
+    "@trimble-oss/modus-web-components": "0.1.9"
+  },
   "devDependencies": {
     "@types/jest": "23.3.9",
     "@types/node": "^15.12.2",
@@ -36,20 +48,8 @@
     "react-dom": "^17.0.2",
     "typescript": "^4.7.4"
   },
-  "dependencies": {
-    "@trimble-oss/modus-web-components": "0.1.8"
-  },
   "peerDependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
-  },
-  "jest": {
-    "preset": "ts-jest",
-    "setupTestFrameworkScriptFile": "<rootDir>/jest.setup.js",
-    "testPathIgnorePatterns": [
-      "node_modules",
-      "dist"
-    ]
-  },
-  "license": "MIT"
+  }
 }
