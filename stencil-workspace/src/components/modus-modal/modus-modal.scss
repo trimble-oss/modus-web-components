@@ -1,6 +1,6 @@
 .modus-modal {
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.75);
   color: $col_black;
   font-family: $primary-font;
   font-size: $rem-14px;
@@ -23,6 +23,7 @@
   .content {
     background-color: $col_white;
     border: $rem-1px solid #888;
+    border-radius: $rem-2px;
     display: flex;
     flex-direction: column;
     justify-content: center;

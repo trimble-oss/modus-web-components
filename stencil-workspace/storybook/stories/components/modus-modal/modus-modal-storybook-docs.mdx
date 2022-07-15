@@ -13,13 +13,13 @@ This component utilizes the slot element, allowing you to render your own HTML i
 <Story id="components-modal--default" />
 
 ```html
-<modus-button color="primary">Open modal</modus-button>
-<modus-modal header-text="Modal title" primary-button-text="Save changes" secondary-button-text="Close">
-  <p>Modal body text goes here.</p>
+<modus-button id="btn-modal" color="primary">Open modal</modus-button>
+<modus-modal header-text="Modal title" primary-button-text="Sweet!" secondary-button-text="Save changes">
+  <p>Woo-hoo, you're reading this text in a modal!</p>
 </modus-modal>
 
 <script>
-  document.querySelector("modus-button").addEventListener("buttonClick", () => {
+  document.querySelector("#btn-modal").addEventListener("buttonClick", () => {
     document.querySelector("modus-modal").open();
   });
 </script>

@@ -22,7 +22,7 @@ export default {
 };
 
 const Template = () => html`
-  <modus-button color="primary">Open modal</modus-button>
+  <modus-button id="btn-modal" color="primary">Open modal</modus-button>
   <modus-modal header-text="Modal title" primary-button-text="Save changes" secondary-button-text="Sweet!">
     <p>Woo-hoo, you're reading this text in a modal!</p>
   </modus-modal>
@@ -33,7 +33,7 @@ export const Default = Template.bind({});
 const setScript = () => {
   const tag = document.createElement('script');
   tag.innerHTML = `
-    document.querySelector('modus-button').addEventListener('buttonClick', () => {
+    document.querySelector('#btn-modal').addEventListener('buttonClick', () => {
       document.querySelector('modus-modal').open();
     });
   `;
