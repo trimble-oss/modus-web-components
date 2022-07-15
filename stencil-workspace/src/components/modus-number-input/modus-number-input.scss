@@ -101,10 +101,11 @@
     pointer-events: none;
 
     .input-container {
-      background-color: $col_gray_3;
+      background-color: $col_gray_1;
 
       input {
-        background-color: $col_gray_3;
+        background-color: $col_gray_1;
+        color: $col_gray_6;
       }
     }
   }

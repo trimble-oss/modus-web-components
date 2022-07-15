@@ -14,6 +14,9 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 - Remove _italic_ style from text input placeholder
 - Change disabled text input to lighter gray (from `$col_gray_3` to `$col_gray_1`)
 - Correct checkbox border color (from `$col_gray_6` to `$col_gray_4`)
+- Add border-radius to Modus Dropdowns
+- Correct bg color for disabled Modus number inputs
+- Correct Active color for Pagination (now `$col_blue_light`).
 
 ## 0.1.9 - 2022-07-07
 
