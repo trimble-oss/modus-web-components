@@ -7,20 +7,20 @@
 
   .header {
     align-items: center;
-    display: inline-flex;
     cursor: pointer;
+    display: inline-flex;
     font-size: $rem-16px;
     font-weight: $font-weight-semi-bold;
     height: 48px;
 
     &.disabled {
-      opacity: .3;
       cursor: auto;
+      opacity: .3;
     }
 
     &.small {
-      height: 32px;
       font-size: $rem-14px;
+      height: 32px;
     }
 
     .title {
@@ -35,8 +35,8 @@
 
   .body {
     display: none;
-    padding: $rem-16px $rem-8px;
     font-size: $rem-14px;
+    padding: $rem-16px $rem-8px;
 
     &.expanded {
       display: block;
