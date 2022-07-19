@@ -6,7 +6,12 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 
 ## Unreleased
 
+## 0.1.10 - 2022-19-07
+
+### Added
 - Added `role="button"` and `aria-label="Close"` to Modal Close button.
+
+### Fixed
 - Correct font size for modal header and body text.
 - Correct font size for accordion header.
 - Change Accordion items border from 2px to 1px
