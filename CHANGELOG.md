@@ -17,6 +17,8 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 - Add border-radius to Modus Dropdowns
 - Correct bg color for disabled Modus number inputs
 - Correct Active color for Pagination (now `$col_blue_light`).
+- Adds 2px border radius to Modus-Modal
+- Changes modal background opacity from 0.4 to 0.75 for greater contrast
 
 ## 0.1.9 - 2022-07-07
 
