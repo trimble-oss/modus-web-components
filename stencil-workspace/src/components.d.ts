@@ -747,6 +747,60 @@ export namespace Components {
          */
         "text": string;
     }
+    interface ModusTreeView {
+        /**
+          * (optional) Enables checkbox selection on each tree item
+         */
+        "checkboxSelection": boolean;
+        /**
+          * (optional) Disables each tree item
+         */
+        "disabled": boolean;
+        /**
+          * (optional) Enables multiple checkbox selection
+         */
+        "multiCheckboxSelection": boolean;
+        /**
+          * (optional) Enables multiple tree items selection
+         */
+        "multiSelection": boolean;
+        /**
+          * (optional) The default size of all tree items
+         */
+        "size": 'condensed' | 'large' | 'standard';
+    }
+    interface ModusTreeViewItem {
+        /**
+          * (optional) Checked state of the tree item
+         */
+        "checked": boolean;
+        /**
+          * (optional) Disables the tree item
+         */
+        "disabled": boolean;
+        /**
+          * (optional) Expanded state of the tree item
+         */
+        "expanded": boolean;
+        /**
+          * (optional) Checkbox indeterminate state of the tree item
+         */
+        "indeterminate": boolean;
+        /**
+          * (required) Label for the tree item
+         */
+        "label": string;
+        "level": number;
+        /**
+          * (required) Unique tree item identifier
+         */
+        "nodeId": string;
+        "options": TreeViewItemOptions;
+        /**
+          * (optional) Selected state of the tree item
+         */
+        "selected": boolean;
+    }
 }
 export interface ModusAccordionItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -835,6 +889,10 @@ export interface ModusTextInputCustomEvent<T> extends CustomEvent<T> {
 export interface ModusToastCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusToastElement;
+}
+export interface ModusTreeViewItemCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusTreeViewItemElement;
 }
 declare global {
     interface HTMLModusAccordionElement extends Components.ModusAccordion, HTMLStencilElement {
@@ -1035,6 +1093,18 @@ declare global {
         prototype: HTMLModusTooltipElement;
         new (): HTMLModusTooltipElement;
     };
+    interface HTMLModusTreeViewElement extends Components.ModusTreeView, HTMLStencilElement {
+    }
+    var HTMLModusTreeViewElement: {
+        prototype: HTMLModusTreeViewElement;
+        new (): HTMLModusTreeViewElement;
+    };
+    interface HTMLModusTreeViewItemElement extends Components.ModusTreeViewItem, HTMLStencilElement {
+    }
+    var HTMLModusTreeViewItemElement: {
+        prototype: HTMLModusTreeViewItemElement;
+        new (): HTMLModusTreeViewItemElement;
+    };
     interface HTMLElementTagNameMap {
         "modus-accordion": HTMLModusAccordionElement;
         "modus-accordion-item": HTMLModusAccordionItemElement;
@@ -1069,6 +1139,8 @@ declare global {
         "modus-text-input": HTMLModusTextInputElement;
         "modus-toast": HTMLModusToastElement;
         "modus-tooltip": HTMLModusTooltipElement;
+        "modus-tree-view": HTMLModusTreeViewElement;
+        "modus-tree-view-item": HTMLModusTreeViewItemElement;
     }
 }
 declare namespace LocalJSX {
@@ -1910,6 +1982,73 @@ declare namespace LocalJSX {
          */
         "text"?: string;
     }
+    interface ModusTreeView {
+        /**
+          * (optional) Enables checkbox selection on each tree item
+         */
+        "checkboxSelection"?: boolean;
+        /**
+          * (optional) Disables each tree item
+         */
+        "disabled"?: boolean;
+        /**
+          * (optional) Enables multiple checkbox selection
+         */
+        "multiCheckboxSelection"?: boolean;
+        /**
+          * (optional) Enables multiple tree items selection
+         */
+        "multiSelection"?: boolean;
+        /**
+          * (optional) The default size of all tree items
+         */
+        "size"?: 'condensed' | 'large' | 'standard';
+    }
+    interface ModusTreeViewItem {
+        /**
+          * (optional) Checked state of the tree item
+         */
+        "checked"?: boolean;
+        /**
+          * (optional) Disables the tree item
+         */
+        "disabled"?: boolean;
+        /**
+          * (optional) Expanded state of the tree item
+         */
+        "expanded"?: boolean;
+        /**
+          * (optional) Checkbox indeterminate state of the tree item
+         */
+        "indeterminate"?: boolean;
+        /**
+          * (required) Label for the tree item
+         */
+        "label": string;
+        "level"?: number;
+        /**
+          * (required) Unique tree item identifier
+         */
+        "nodeId": string;
+        /**
+          * An event that fires on tree item checkbox click
+         */
+        "onCheckboxClick"?: (event: ModusTreeViewItemCustomEvent<boolean>) => void;
+        "onItemAdded"?: (event: ModusTreeViewItemCustomEvent<HTMLElement>) => void;
+        /**
+          * An event that fires on tree item click
+         */
+        "onItemClick"?: (event: ModusTreeViewItemCustomEvent<boolean>) => void;
+        /**
+          * An event that fires on tree item expand/collapse
+         */
+        "onItemExpandToggle"?: (event: ModusTreeViewItemCustomEvent<boolean>) => void;
+        "options"?: TreeViewItemOptions;
+        /**
+          * (optional) Selected state of the tree item
+         */
+        "selected"?: boolean;
+    }
     interface IntrinsicElements {
         "modus-accordion": ModusAccordion;
         "modus-accordion-item": ModusAccordionItem;
@@ -1944,6 +2083,8 @@ declare namespace LocalJSX {
         "modus-text-input": ModusTextInput;
         "modus-toast": ModusToast;
         "modus-tooltip": ModusTooltip;
+        "modus-tree-view": ModusTreeView;
+        "modus-tree-view-item": ModusTreeViewItem;
     }
 }
 export { LocalJSX as JSX };
@@ -1983,6 +2124,8 @@ declare module "@stencil/core" {
             "modus-text-input": LocalJSX.ModusTextInput & JSXBase.HTMLAttributes<HTMLModusTextInputElement>;
             "modus-toast": LocalJSX.ModusToast & JSXBase.HTMLAttributes<HTMLModusToastElement>;
             "modus-tooltip": LocalJSX.ModusTooltip & JSXBase.HTMLAttributes<HTMLModusTooltipElement>;
+            "modus-tree-view": LocalJSX.ModusTreeView & JSXBase.HTMLAttributes<HTMLModusTreeViewElement>;
+            "modus-tree-view-item": LocalJSX.ModusTreeViewItem & JSXBase.HTMLAttributes<HTMLModusTreeViewItemElement>;
         }
     }
 }

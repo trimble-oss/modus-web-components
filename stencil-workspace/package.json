@@ -35,7 +35,8 @@
     "lint-css": "stylelint src/**/*.scss",
     "prettier": "prettier --write storybook/stories/**/*.mdx",
     "full": "npm ci && npm run lint-js && npm run lint-css && npm run build && npm run test && npm run ci-storybook",
-    "ci-storybook": "cd storybook && npm ci && npm run build-storybook"
+    "ci-storybook": "cd storybook && npm ci && npm run build-storybook",
+    "start-storybook": "npm run build && cd storybook && npm run storybook"
   },
   "dependencies": {
     "@stencil/core": "^2.17.1"
