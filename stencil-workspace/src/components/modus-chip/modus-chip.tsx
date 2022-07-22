@@ -101,7 +101,7 @@ export class ModusChip {
         onClick={this.disabled ? null : (event) => this.onChipClick(event)}
         tabIndex={0}>
         {
-          this.imageUrl ? <img src={this.imageUrl}/> :
+          this.imageUrl ? <img src={this.imageUrl} alt=""/> :
           this.showCheckmark ? <IconCheck size={'24'}></IconCheck> :
           null
         }
