@@ -10,7 +10,7 @@ describe('modus-accordion-item', () => {
     expect(root).toEqualHtml(`
       <modus-accordion-item>
         <mock:shadow-root>
-          <div class="accordion-item" role="region">
+          <div class="accordion-item">
             <div class="header standard" tabindex="0">
               <span class="title"></span>
               <svg class="icon-chevron-down-thick" fill="currentColor" height="24" viewBox="0 0 32 32" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -36,7 +36,7 @@ describe('modus-accordion-item', () => {
     expect(root).toEqualHtml(`
       <modus-accordion-item>
         <mock:shadow-root>
-          <div class="accordion-item" role="region">
+          <div class="accordion-item">
             <div class="header standard" tabindex="0">
               <span class="title"></span>
               <svg class="icon-chevron-down-thick" fill="currentColor" height="24" viewBox="0 0 32 32" width="24" xmlns="http://www.w3.org/2000/svg">
