@@ -10,7 +10,7 @@ describe('modus-radio-group', () => {
     expect(root).toEqualHtml(`
       <modus-radio-group>
         <mock:shadow-root>
-          <ul></ul>
+          <div></div>
         </mock:shadow-root>
       </modus-radio-group>
     `);
