@@ -50,8 +50,8 @@ export class ModusRadioGroup {
 
   render(): unknown {
     return (
-      <ul aria-label={this.ariaLabel}>
-        {this.radioButtons.map(radioButton => {
+      <div class="modus-radio-group" aria-label={this.ariaLabel}>
+        {this.radioButtons.map((radioButton) => {
           return (
             <ModusRadioButton
               checked={radioButton.checked}
@@ -60,11 +60,10 @@ export class ModusRadioGroup {
               name={this.name}
               id={radioButton.id}
               handleButtonClick={(id) => this.handleButtonClick(id)}
-              handleKeydown={(event, id) => this.handleButtonKeydown(event, id)}>
-            </ModusRadioButton>
+              handleKeydown={(event, id) => this.handleButtonKeydown(event, id)}></ModusRadioButton>
           );
         })}
-      </ul>
+      </div>
     );
   }
 }
