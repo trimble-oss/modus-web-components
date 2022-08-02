@@ -3,10 +3,14 @@ import { ModusTreeViewItem } from './modus-tree-view-item/modus-tree-view-item';
 import { ModusTreeView } from './modus-tree-view/modus-tree-view';
 
 describe('modus-tree-view-item', () => {
-  it('renders tree root', async () => {
+  it('renders tree with item', async () => {
     const page = await newSpecPage({
       components: [ModusTreeView],
-      html: '<modus-tree-view></modus-tree-view>',
+      html: `
+      <modus-tree-view>
+        <modus-tree-view-item node-Id="1" label="Node one">
+        </modus-tree-view-item>
+      </modus-tree-view>`,
     });
     expect(page.root).toEqualHtml(`
       <modus-tree-view>
