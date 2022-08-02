@@ -19,6 +19,7 @@ describe('modus-tree-view-item', () => {
             <slot></slot>
           </ul>
         </mock:shadow-root>
+        <modus-tree-view-item label="Node one" node-id="1"></modus-tree-view-item>
       </modus-tree-view>
     `);
   });
