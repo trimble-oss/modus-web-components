@@ -66,7 +66,6 @@ export class ModusTreeViewItem {
   }
 
   handleSlotChange(): void {
-    console.log(`${this.nodeId} slot changed.`);
     const children = this.element.querySelectorAll('modus-tree-view-item') as unknown as HTMLModusTreeViewItemElement[];
     if (children.length > 0) {
       this.expandable = true;
@@ -117,7 +116,6 @@ export class ModusTreeViewItem {
   private itemIconSlot = 'item-icon';
 
   render(): HTMLLIElement {
-    console.log(`${this.nodeId} rendered.`);
     const { checkboxSelection, multiCheckboxSelection, disabled: defaultDisabled, size, onCheckboxSelection, onItemSelection } = this.options || {};
 
     const ariaControls = {
