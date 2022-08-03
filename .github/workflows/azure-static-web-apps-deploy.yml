@@ -19,7 +19,7 @@ jobs:
         with:
           submodules: true
 
-      - run: cd stencil-workspace && npm i && npm run build && npm run ci-storybook
+      - run: cd stencil-workspace && npm run full
 
       - name: Build And Deploy
         id: builddeploy
