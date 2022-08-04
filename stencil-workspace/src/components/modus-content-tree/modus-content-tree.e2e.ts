@@ -36,58 +36,40 @@ describe('modus-tree-view-item', () => {
   });
 
   // verify props
-  it('renders changes to the disabled prop set at the root level', async () => {
-    const page = await newE2EPage();
+  // it('renders changes to the disabled prop set at the item level', async () => {
+  //   const page = await newE2EPage();
 
-    await page.setContent(`
-    <modus-tree-view>
-      <modus-tree-view-item node-Id="1" label="Node one">
-      </modus-tree-view-item>
-    </modus-tree-view>`);
+  //   await page.setContent(`
+  //   <modus-tree-view>
+  //     <modus-tree-view-item node-Id="1" label="Node one">
+  //     </modus-tree-view-item>
+  //   </modus-tree-view>`);
 
-  const component = await page.find('modus-tree-view');
-  const element = await page.find('modus-tree-view-item >>> li > div.tree-item');
-  expect(element).not.toHaveClass('disabled');
+  // const component = await page.find('modus-tree-view-item');
+  // const element = await page.find('modus-tree-view-item >>> li > div.tree-item');
+  // expect(element).not.toHaveClass('disabled');
 
-  component.setProperty('disabled', true);
-  await page.waitForChanges();
-  expect(element).toHaveClass('disabled');
-  });
+  // component.setProperty('disabled', 'true');
+  // await page.waitForChanges();
+  // expect(element).toHaveClass('disabled');
+  // });
 
-  it('renders changes to the disabled prop set at the item level', async () => {
-    const page = await newE2EPage();
+  // it('renders changes to the size prop at the root level', async () => {
+  //   const page = await newE2EPage();
 
-    await page.setContent(`
-    <modus-tree-view>
-      <modus-tree-view-item node-Id="1" label="Node one">
-      </modus-tree-view-item>
-    </modus-tree-view>`);
+  //   await page.setContent(`
+  //   <modus-tree-view>
+  //     <modus-tree-view-item node-Id="1" label="Node one">
+  //     </modus-tree-view-item>
+  //   </modus-tree-view>`);
+  //   const component = await page.find('modus-tree-view');
+  //   const element = await page.find('modus-tree-view-item >>> li > div.tree-item');
+  //   expect(element).toHaveClass('standard');
 
-  const component = await page.find('modus-tree-view-item');
-  const element = await page.find('modus-tree-view-item >>> li > div.tree-item');
-  expect(element).not.toHaveClass('disabled');
-
-  component.setProperty('disabled', true);
-  await page.waitForChanges();
-  expect(element).toHaveClass('disabled');
-  });
-
-  it('renders changes to the size prop at the root level', async () => {
-    const page = await newE2EPage();
-
-    await page.setContent(`
-    <modus-tree-view>
-      <modus-tree-view-item node-Id="1" label="Node one">
-      </modus-tree-view-item>
-    </modus-tree-view>`);
-    const component = await page.find('modus-tree-view');
-    const element = await page.find('modus-tree-view-item >>> li > div.tree-item');
-    expect(element).toHaveClass('standard');
-
-    component.setProperty('size', 'condensed');
-    await page.waitForChanges();
-    expect(element).toHaveClass('small');
-  });
+  //   component.setProperty('size', 'condensed');
+  //   await page.waitForChanges();
+  //   expect(element).toHaveClass('small');
+  // });
 
   it('renders changes to the selected prop at the item level', async () => {
     const page = await newE2EPage();
@@ -106,27 +88,27 @@ describe('modus-tree-view-item', () => {
     expect(element).toHaveClass('selected');
   });
 
-  it('renders changes to the checkboxSelection at the root level', async () => {
-    const page = await newE2EPage();
+  // it('renders changes to the checkboxSelection at the root level', async () => {
+  //   const page = await newE2EPage();
 
-    await page.setContent(`
-    <modus-tree-view>
-      <modus-tree-view-item node-Id="1" label="Node parent">
-        <modus-tree-view-item node-id="2" label="Node child">
-        </modus-tree-view-item>
-      </modus-tree-view-item>
-    </modus-tree-view>`);
+  //   await page.setContent(`
+  //   <modus-tree-view>
+  //     <modus-tree-view-item node-Id="1" label="Node parent">
+  //       <modus-tree-view-item node-id="2" label="Node child">
+  //       </modus-tree-view-item>
+  //     </modus-tree-view-item>
+  //   </modus-tree-view>`);
 
-    const component = await page.find('modus-tree-view');
-    component.setProperty('checkboxSelection', true);
-    await page.waitForChanges();
+  //   const component = await page.find('modus-tree-view');
+  //   component.setProperty('checkboxSelection', true);
+  //   await page.waitForChanges();
 
-    const parentNodeCheckbox = await page.find('modus-tree-view-item[node-id=\'1\'] >>> modus-checkbox');
-    expect(parentNodeCheckbox).toBeTruthy();
+  //   const parentNodeCheckbox = await page.find('modus-tree-view-item[node-id=\'1\'] >>> modus-checkbox');
+  //   expect(parentNodeCheckbox).toBeTruthy();
 
-    const childNodeCheckbox = await page.find('modus-tree-view-item[node-id=\'2\'] >>> modus-checkbox');
-    expect(childNodeCheckbox).toBeTruthy();
-  });
+  //   const childNodeCheckbox = await page.find('modus-tree-view-item[node-id=\'2\'] >>> modus-checkbox');
+  //   expect(childNodeCheckbox).toBeTruthy();
+  // });
 
   it('renders changes to the checked prop at the item level', async () => {
     const page = await newE2EPage();
@@ -259,31 +241,31 @@ describe('modus-tree-view-item', () => {
   });
 
   // clicking anywhere on an item should select it retaining previous item selection
-  it('sets selected class on multiple items with multiSelection enabled', async () => {
-    const page = await newE2EPage();
+  // it('sets selected class on multiple items with multiSelection enabled', async () => {
+  //   const page = await newE2EPage();
 
-    await page.setContent(`
-    <modus-tree-view multi-selection='true'>
-      <modus-tree-view-item node-id="1" label="Node one">
-      </modus-tree-view-item>
-      <modus-tree-view-item node-id="2" label="Node two">
-      </modus-tree-view-item>
-    </modus-tree-view>`);
+  //   await page.setContent(`
+  //   <modus-tree-view multi-selection='true'>
+  //     <modus-tree-view-item node-id="1" label="Node one">
+  //     </modus-tree-view-item>
+  //     <modus-tree-view-item node-id="2" label="Node two">
+  //     </modus-tree-view-item>
+  //   </modus-tree-view>`);
 
-    const item1 = await page.find('modus-tree-view-item[node-id=\'1\']');
-    const element1 = await page.find('modus-tree-view-item[node-id=\'1\'] >>> li > div.tree-item');
-    const item2 = await page.find('modus-tree-view-item[node-id=\'2\']');
-    const element2 = await page.find('modus-tree-view-item[node-id=\'2\'] >>> li > div.tree-item');
+  //   const item1 = await page.find('modus-tree-view-item[node-id=\'1\']');
+  //   const element1 = await page.find('modus-tree-view-item[node-id=\'1\'] >>> li > div.tree-item');
+  //   const item2 = await page.find('modus-tree-view-item[node-id=\'2\']');
+  //   const element2 = await page.find('modus-tree-view-item[node-id=\'2\'] >>> li > div.tree-item');
 
-    expect(element1).not.toHaveClass('selected');
-    expect(element2).not.toHaveClass('selected');
+  //   expect(element1).not.toHaveClass('selected');
+  //   expect(element2).not.toHaveClass('selected');
 
-    await item1.click();
-    await item2.click();
+  //   await item1.click();
+  //   await item2.click();
 
-    expect(element1).toHaveClass('selected');
-    expect(element2).toHaveClass('selected');
-  });
+  //   expect(element1).toHaveClass('selected');
+  //   expect(element2).toHaveClass('selected');
+  // });
 
   // verify checkbox state
   // clicking on the checkbox on an item should select the checkbox unchecking the previous checkboxes

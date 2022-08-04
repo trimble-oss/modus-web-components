@@ -27,6 +27,29 @@
 | `itemExpandToggle` | An event that fires on tree item expand/collapse | `CustomEvent<boolean>` |
 
 
+## Methods
+
+### `focusItem() => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+
+## Slots
+
+| Slot             | Description                   |
+| ---------------- | ----------------------------- |
+| `"collapseIcon"` | Slot for custom collapse icon |
+| `"dragIcon"`     | Slot for custom drag icon     |
+| `"expandIcon"`   | Slot for custom expand icon   |
+| `"itemIcon"`     | Slot for custom item icon     |
+
+
 ## Dependencies
 
 ### Depends on

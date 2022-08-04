@@ -10,6 +10,7 @@ import { App } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu"
 import { App as App1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { Tab } from "./components/modus-tabs/modus-tabs";
+import { TreeViewItemOptions } from "./components/modus-content-tree/types";
 export namespace Components {
     interface ModusAccordion {
         /**
@@ -707,9 +708,13 @@ export namespace Components {
          */
         "checkboxSelection": boolean;
         /**
-          * (optional) Disables each tree item
+          * (optional) Checked tree items by default
          */
-        "disabled": boolean;
+        "checkedItems": string[];
+        /**
+          * (optional) Expanded tree items by default
+         */
+        "expandedItems": string[];
         /**
           * (optional) Enables multiple checkbox selection
          */
@@ -718,6 +723,10 @@ export namespace Components {
           * (optional) Enables multiple tree items selection
          */
         "multiSelection": boolean;
+        /**
+          * (optional) Selected tree items by default
+         */
+        "selectedItems": string[];
         /**
           * (optional) The default size of all tree items
          */
@@ -736,6 +745,7 @@ export namespace Components {
           * (optional) Expanded state of the tree item
          */
         "expanded": boolean;
+        "focusItem": () => Promise<void>;
         /**
           * (optional) Checkbox indeterminate state of the tree item
          */
@@ -1873,9 +1883,13 @@ declare namespace LocalJSX {
          */
         "checkboxSelection"?: boolean;
         /**
-          * (optional) Disables each tree item
+          * (optional) Checked tree items by default
          */
-        "disabled"?: boolean;
+        "checkedItems"?: string[];
+        /**
+          * (optional) Expanded tree items by default
+         */
+        "expandedItems"?: string[];
         /**
           * (optional) Enables multiple checkbox selection
          */
@@ -1884,6 +1898,10 @@ declare namespace LocalJSX {
           * (optional) Enables multiple tree items selection
          */
         "multiSelection"?: boolean;
+        /**
+          * (optional) Selected tree items by default
+         */
+        "selectedItems"?: string[];
         /**
           * (optional) The default size of all tree items
          */
