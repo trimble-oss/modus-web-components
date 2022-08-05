@@ -137,6 +137,5 @@
         }
       }
     }
-  },
-  "defaultProject": "@trimble-oss/modus-angular-components"
+  }
 }

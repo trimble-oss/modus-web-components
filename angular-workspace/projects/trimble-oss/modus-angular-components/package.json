@@ -1,6 +1,6 @@
 {
   "name": "@trimble-oss/modus-angular-components",
-  "version": "0.0.0-4",
+  "version": "0.1.11-1411",
   "license": "MIT",
   "description": "Trimble Modus Angular Components Library",
   "homepage": "https://modus-web-components.trimble.com/",
@@ -12,9 +12,9 @@
     "url": "https://github.com/trimble-oss/modus-web-components"
   },
   "peerDependencies": {
-    "@angular/common": "^13.3.0",
-    "@angular/core": "^13.3.0",
-    "@trimble-oss/modus-web-components": "^0.1.9"
+    "@angular/common": "^14.1.1",
+    "@angular/core": "^14.1.1",
+    "@trimble-oss/modus-web-components": "0.1.11"
   },
   "dependencies": {
     "tslib": "^2.3.0"
