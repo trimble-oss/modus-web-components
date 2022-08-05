@@ -11,7 +11,6 @@ export const DIRECTIVES = [
   d.ModusCard,
   d.ModusCheckbox,
   d.ModusChip,
-  d.ModusContentTreeItem,
   d.ModusDropdown,
   d.ModusFileDropzone,
   d.ModusList,
@@ -34,5 +33,7 @@ export const DIRECTIVES = [
   d.ModusTabs,
   d.ModusTextInput,
   d.ModusToast,
-  d.ModusTooltip
+  d.ModusTooltip,
+  d.ModusTreeView,
+  d.ModusTreeViewItem
 ];

@@ -6,6 +6,10 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 
 ## Unreleased
 
+## 0.1.11 - 2022-05-08
+
+### Fixed
+
 - Images in Modus Chips now have an alt tag for improve accessibility.
 - Removed unneeded `role="region"` from accordion-items.
 
