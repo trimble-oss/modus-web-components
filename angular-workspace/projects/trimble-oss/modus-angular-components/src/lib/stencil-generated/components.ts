@@ -247,42 +247,6 @@ export class ModusChip {
 }
 
 
-export declare interface ModusContentTreeItem extends Components.ModusContentTreeItem {
-  /**
-   * An event that first on item checkbox click 
-   */
-  checkboxClick: EventEmitter<CustomEvent<boolean>>;
-  /**
-   * An event that fires on item expand click 
-   */
-  expandClick: EventEmitter<CustomEvent<boolean>>;
-  /**
-   * An event that fires on item click 
-   */
-  itemClick: EventEmitter<CustomEvent<any>>;
-
-}
-
-@ProxyCmp({
-  defineCustomElementFn: undefined,
-  inputs: ['allowDrag', 'checkboxChecked', 'depth', 'disabled', 'expandable', 'expanded', 'includeBottomBorder', 'includeCheckbox', 'includeFolderIcon', 'selected', 'size']
-})
-@Component({
-  selector: 'modus-content-tree-item',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '<ng-content></ng-content>',
-  inputs: ['allowDrag', 'checkboxChecked', 'depth', 'disabled', 'expandable', 'expanded', 'includeBottomBorder', 'includeCheckbox', 'includeFolderIcon', 'selected', 'size']
-})
-export class ModusContentTreeItem {
-  protected el: HTMLElement;
-  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
-    c.detach();
-    this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['checkboxClick', 'expandClick', 'itemClick']);
-  }
-}
-
-
 export declare interface ModusDropdown extends Components.ModusDropdown {
   /**
    * An event that fires on dropdown close. 
@@ -886,5 +850,62 @@ export class ModusTooltip {
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
+  }
+}
+
+
+export declare interface ModusTreeView extends Components.ModusTreeView {}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['checkboxSelection', 'disabled', 'multiCheckboxSelection', 'multiSelection', 'size']
+})
+@Component({
+  selector: 'modus-tree-view',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['checkboxSelection', 'disabled', 'multiCheckboxSelection', 'multiSelection', 'size']
+})
+export class ModusTreeView {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
+export declare interface ModusTreeViewItem extends Components.ModusTreeViewItem {
+  /**
+   * An event that fires on tree item click 
+   */
+  itemClick: EventEmitter<CustomEvent<boolean>>;
+  /**
+   * An event that fires on tree item expand/collapse 
+   */
+  itemExpandToggle: EventEmitter<CustomEvent<boolean>>;
+  /**
+   * An event that fires on tree item checkbox click 
+   */
+  checkboxClick: EventEmitter<CustomEvent<boolean>>;
+
+}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['checked', 'disabled', 'expanded', 'indeterminate', 'label', 'nodeId', 'selected']
+})
+@Component({
+  selector: 'modus-tree-view-item',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['checked', 'disabled', 'expanded', 'indeterminate', 'label', 'nodeId', 'selected']
+})
+export class ModusTreeViewItem {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['itemClick', 'itemExpandToggle', 'checkboxClick']);
   }
 }
