@@ -1,0 +1,58 @@
+table, td, th {
+  border: $rem-1px $col_gray_4 solid;
+}
+
+table {
+  border-collapse: collapse;
+
+  th {
+    background-color: $col_gray_light;
+    color: $col_gray_8;
+    font-size: $rem-14px;
+    font-weight: $font-weight-semi-bold;
+    height: 3rem;
+
+    div {
+      padding: 0 $rem-4px;
+
+      &.align-left {
+        text-align: left;
+      }
+
+      &.align-right {
+        text-align: right;
+      }
+    }
+  }
+
+  tr {
+    color: $col_trimble_gray;
+    font-size: $rem-14px;
+    font-weight: $font-weight-semi-bold;
+    height: 3rem;
+
+    td {
+      background-color: $col_white;
+      padding: 0 $rem-4px;
+
+      &.align-left {
+        text-align: left;
+      }
+
+      &.align-right {
+        text-align: right;
+      }
+
+      &.readonly {
+        background-color: $col_gray_0;
+      }
+    }
+  }
+
+  &.size-condensed {
+    th,
+    tr {
+      height: 2rem;
+    }
+  }
+}

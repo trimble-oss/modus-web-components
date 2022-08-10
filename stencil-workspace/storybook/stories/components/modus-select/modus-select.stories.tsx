@@ -6,6 +6,7 @@ export default {
   title: 'User Inputs/Select',
   parameters: {
     docs: {
+      inlineStories: false,
       page: docs,
     },
     options: {

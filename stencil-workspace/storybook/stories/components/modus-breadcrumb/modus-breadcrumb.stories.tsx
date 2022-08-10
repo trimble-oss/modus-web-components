@@ -6,6 +6,7 @@ export default {
   title: 'Components/Breadcrumb',
   parameters: {
     docs: {
+      inlineStories: false,
       page: docs,
     },
     controls: {

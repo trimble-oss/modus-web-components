@@ -17,6 +17,7 @@ export const ModusButton = /*@__PURE__*/createReactComponent<JSX.ModusButton, HT
 export const ModusCard = /*@__PURE__*/createReactComponent<JSX.ModusCard, HTMLModusCardElement>('modus-card');
 export const ModusCheckbox = /*@__PURE__*/createReactComponent<JSX.ModusCheckbox, HTMLModusCheckboxElement>('modus-checkbox');
 export const ModusChip = /*@__PURE__*/createReactComponent<JSX.ModusChip, HTMLModusChipElement>('modus-chip');
+export const ModusDataTable = /*@__PURE__*/createReactComponent<JSX.ModusDataTable, HTMLModusDataTableElement>('modus-data-table');
 export const ModusDropdown = /*@__PURE__*/createReactComponent<JSX.ModusDropdown, HTMLModusDropdownElement>('modus-dropdown');
 export const ModusFileDropzone = /*@__PURE__*/createReactComponent<JSX.ModusFileDropzone, HTMLModusFileDropzoneElement>('modus-file-dropzone');
 export const ModusList = /*@__PURE__*/createReactComponent<JSX.ModusList, HTMLModusListElement>('modus-list');

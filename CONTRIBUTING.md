@@ -98,6 +98,8 @@ For more information about Stencil's testing, and a better distinction between t
 
 Run the tests with `npm run test`.
 
+To run a specific test, run `stencil test --spec --e2e --silent [test file name]`.
+
 ## Making Changes and Submitting a PR
 
 1. Before working on an issue, the repository should be forked with intent to contribute to the parent repository.

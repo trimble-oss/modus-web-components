@@ -6,6 +6,7 @@ export default {
   title: 'Components/Tabs',
   parameters: {
     docs: {
+      inlineStories: false,
       page: docs,
     },
     options: {

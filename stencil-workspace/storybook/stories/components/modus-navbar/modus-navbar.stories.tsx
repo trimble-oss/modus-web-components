@@ -6,6 +6,7 @@ export default {
   title: 'Components/Navbar',
   parameters: {
     docs: {
+      inlineStories: false,
       page: docs,
     },
     options: {
