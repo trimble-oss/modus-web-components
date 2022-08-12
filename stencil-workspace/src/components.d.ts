@@ -93,7 +93,7 @@ export namespace Components {
         /**
           * (optional) The color of the button.
          */
-        "color": 'danger' | 'default' | 'primary' | 'secondary' | 'warning';
+        "color": 'danger' | 'primary' | 'secondary' | 'tertiary';
         /**
           * (optional) Disables the button.
          */
@@ -1185,7 +1185,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The color of the button.
          */
-        "color"?: 'danger' | 'default' | 'primary' | 'secondary' | 'warning';
+        "color"?: 'danger' | 'primary' | 'secondary' | 'tertiary';
         /**
           * (optional) Disables the button.
          */
