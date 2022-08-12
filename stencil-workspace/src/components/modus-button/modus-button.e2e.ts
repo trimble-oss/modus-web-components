@@ -28,7 +28,7 @@ describe('modus-button', () => {
     await page.setContent('<modus-button></modus-button>');
     const component = await page.find('modus-button');
     const element = await page.find('modus-button >>> button');
-    expect(element).toHaveClass('color-tertiary');
+    expect(element).toHaveClass('color-primary');
 
     component.setProperty('color', 'primary');
     await page.waitForChanges();
