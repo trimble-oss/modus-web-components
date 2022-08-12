@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { Component, Prop, State, h, Element, Event, EventEmitter, Method, FunctionalComponent } from '@stencil/core';
+import { Component, Prop, State, h, Element, Event, EventEmitter, Method, Watch, FunctionalComponent } from '@stencil/core';
 import { IconChevronDownThick } from '../../icons/icon-chevron-down-thick';
 import { IconChevronRightThick } from '../../icons/icon-chevron-right-thick';
 import { TreeViewItemOptions } from '../types';
@@ -119,6 +119,18 @@ export class ModusTreeViewItem {
     updateItem({ nodeId: this.nodeId, children: this.childrenIds });
   }
 
+  @Watch('disabled')
+  handleDisabledChanged(newValue: boolean) {
+    const { updateItem } = this.options || {};
+    if (updateItem) updateItem({ nodeId: this.nodeId, disabled: newValue });
+  }
+
+  @Watch('nodeId')
+  handleNodeIdChanged(newValue: string, oldValue: string) {
+    const { updateItem } = this.options || {};
+    if (updateItem) updateItem({ nodeId: newValue }, { nodeId: oldValue });
+  }
+
   handleExpandToggle(e: Event): void {
     const { onItemExpandToggle, hasItemDisabled } = this.options || {};
     e.stopPropagation();
@@ -136,15 +148,6 @@ export class ModusTreeViewItem {
     }
   }
 
-  handleItemClick(e: MouseEvent): void {
-    const { onItemSelection, hasItemDisabled } = this.options || {};
-
-    if (hasItemDisabled(this.nodeId)) return;
-
-    if (onItemSelection) onItemSelection(e, this.nodeId);
-    this.itemClick.emit(!this.selected);
-  }
-
   handleIconSlotChange(): void {
     const slotElements = this.element.querySelectorAll('[slot]') as unknown as HTMLSlotElement[];
     const newSlots: Map<string, boolean> = new Map();
@@ -155,6 +158,15 @@ export class ModusTreeViewItem {
     });
 
     if (isUpdated) this.slots = new Map(newSlots);
+  }
+
+  handleItemClick(e: MouseEvent): void {
+    const { onItemSelection, hasItemDisabled } = this.options || {};
+
+    if (hasItemDisabled(this.nodeId)) return;
+
+    if (onItemSelection) onItemSelection(e, this.nodeId);
+    this.itemClick.emit(!this.selected);
   }
 
   handleSpaceEnterKeyPress(e: KeyboardEvent, handler: () => void): void {

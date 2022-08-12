@@ -37,22 +37,24 @@ export class ModusTreeView {
   private lastSelected: string;
   private lastChecked: string;
 
-  componentDidUpdate() {
+  componentWillUpdate() {
     // To check if the `TreeViewItemOptions` passed to all the tree items should be updated
     // For verification taking only the first item's `TreeViewItemOptions`
-    if (!this.items.length) return;
+    if (!this.items) return;
     let isUpdated = false;
     const firstItem = Object.keys(this.items)[0];
     const existingOptions = this.items[firstItem].element?.options;
-    Object.keys(existingOptions).forEach((key) => {
-      if (typeof existingOptions[key] != 'function') {
-        isUpdated = existingOptions[key] !== this.element[key] || isUpdated;
-      }
-    });
+    if (existingOptions) {
+      Object.keys(existingOptions).forEach((key) => {
+        if (typeof existingOptions[key] != 'function') {
+          isUpdated = existingOptions[key] !== this.element[key] || isUpdated;
+        }
+      });
 
-    if (isUpdated) {
-      this.updateOptions();
-    }
+      if (isUpdated) {
+        this.updateOptions();
+      }
+    } else this.updateOptions();
   }
 
   getChildrenIds(itemId: string, recursive = true): string[] {
@@ -132,7 +134,7 @@ export class ModusTreeView {
       hasItemFocus: (id) => this.isItemInFocus(id),
       hasItemSelected: (id) => this.isItemSelected(id),
       hasItemDisabled: (id) => this.isItemDisabled(id),
-      updateItem: (info) => this.updateItem(info),
+      updateItem: (newValue, oldValue) => this.updateItem(newValue, oldValue),
     };
   }
 
@@ -365,15 +367,21 @@ export class ModusTreeView {
     return disabled || this.items[parentId]?.disabled;
   }
 
-  updateItem(update: TreeViewItemInfo): void {
-    const existing = this.items[update.nodeId];
+  updateItem(newValue: TreeViewItemInfo, oldValue?: TreeViewItemInfo): void {
+    let existing: TreeViewItemInfo;
+
+    if (oldValue && newValue.nodeId !== oldValue.nodeId) {
+      existing = { ...this.items[oldValue.nodeId] };
+      delete this.items[oldValue.nodeId];
+    } else existing = { ...this.items[newValue.nodeId] };
+
     if (existing) {
-      this.items[update.nodeId] = { ...existing, ...update };
-      update.children?.forEach((i) => {
+      this.items[newValue.nodeId] = { ...existing, ...newValue };
+      newValue.children?.forEach((i) => {
         const item = this.items[i];
-        this.items[i] = { ...item, parentId: update.nodeId };
+        this.items[i] = { ...item, parentId: newValue.nodeId };
       });
-    }
+    } else this.items[newValue.nodeId] = { ...newValue };
   }
 
   updateOptions() {

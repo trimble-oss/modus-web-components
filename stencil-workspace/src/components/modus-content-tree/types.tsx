@@ -10,7 +10,7 @@ export type TreeViewItemOptions = {
   onItemExpandToggle?: (itemId: string) => void;
   onItemFocus?: (itemId: string) => void;
   size?: string;
-  updateItem?: (item: TreeViewItemInfo) => void;
+  updateItem?: (newValue: TreeViewItemInfo, oldValue?: TreeViewItemInfo) => void;
 };
 
 export type TreeViewItemInfo = {
