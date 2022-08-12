@@ -6,6 +6,10 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 
 ## Unreleased
 
+### Fixed
+
+- Modus Chips active state color is now blue
+
 ## 0.1.11 - 2022-05-08
 
 ### Fixed
