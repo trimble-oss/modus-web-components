@@ -1,6 +1,6 @@
 # AngularWorkspace
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.0.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.1.
 
 This Angular Project is a utility wrapper to help build the `@trimble-oss/modus-angular-components` library.
 

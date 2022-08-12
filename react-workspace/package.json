@@ -1,6 +1,6 @@
 {
   "name": "@trimble-oss/modus-react-components",
-  "version": "0.0.0-1",
+  "version": "0.1.11-1702",
   "description": "Trimble Modus React Component Library",
   "homepage": "https://modus-web-components.trimble.com/",
   "bugs": {
@@ -34,7 +34,7 @@
     ]
   },
   "dependencies": {
-    "@trimble-oss/modus-web-components": "0.1.9"
+    "@trimble-oss/modus-web-components": "0.1.11"
   },
   "devDependencies": {
     "@types/jest": "23.3.9",

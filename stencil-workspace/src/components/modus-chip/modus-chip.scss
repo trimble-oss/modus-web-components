@@ -47,10 +47,22 @@
   }
 
   &:active {
-    background-color: $col_gray_3;
+    background-color: rgba($col_blue_light, 30%);
+    border-color: transparent;
 
     &.style-outline {
-      background-color: $col_gray_1;
+      background-color: $col_blue_pale;
+      border-color: $col_blue_light;
+
+      span {
+        color: $col_trimble_gray;
+      }
+
+      svg {
+        path {
+          fill: $col_blue_light;
+        }
+      }
     }
 
     span {
