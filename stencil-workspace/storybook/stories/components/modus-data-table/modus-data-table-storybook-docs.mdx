@@ -13,7 +13,9 @@ They are referenced using the `<modus-data-table>` custom HTML element.
 <Story id="components-data-table--default" height={'250px'}/>
 
 ```html
-<modus-data-table />
+<div style="width: 500px">
+  <modus-data-table />
+</div>
 <script>
     document.querySelector('modus-data-table').columns = ['Name', 'Age', 'Contacted'];
     document.querySelector('modus-data-table').data = [
@@ -59,7 +61,7 @@ To define columns and data in the table *using objects*:
   - `desc`: descending sort
 - The table sorting options can be set with the optional `sortOptions` property. The property accepts a `ModusTableSortOptions` object.
   - The object defines whether the table can be sorted on header click, and if the sort is done on the client or server-side.
-- If the table is sortable, it will output the `sort` event on header click. This event's detail is a `ModusDataTableSort` object.
+- If the table is sortable, it will output the `sort` event on header click. This event's detail is a `ModusDataTableSortEvent` object.
 - If the table's `serverSide` sort option is `false`, it will sort the columns on the client-side. Otherwise, it is up to the consumer to update the table's `data` property with the sorted data.
 
 ### Types

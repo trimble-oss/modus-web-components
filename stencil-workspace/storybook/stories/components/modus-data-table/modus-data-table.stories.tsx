@@ -21,8 +21,17 @@ export default {
 };
 
 export const Default = () => html`
-  <modus-data-table />
+  <div style="width: 800px">
+    <modus-data-table />
+  </div>
   ${setDataTable()}
+`;
+
+export const Sortable = () => html`
+  <div style="width: 800px">
+    <modus-data-table />
+  </div>
+  ${setDataTableCanSort()}
 `;
 
 // The <script> tag cannot be used in the MDX file, so we use this method to
@@ -30,8 +39,19 @@ export const Default = () => html`
 const setDataTable = () => {
   const tag = document.createElement('script');
   tag.innerHTML = `
-    document.querySelector('modus-data-table').columns = ['Name', 'Age', 'Contacted'];
+    document.querySelector('modus-data-table').columns = [{ display: 'Name', width: '33%'}, { display: 'Age', width: '33%' }, { display: 'Contacted', width: '33%' }];
     document.querySelector('modus-data-table').data = [['John', 25, false], ['Jane', 26, false], ['Joe', 27, true]];
+  `;
+
+  return tag;
+}
+
+const setDataTableCanSort = () => {
+  const tag = document.createElement('script');
+  tag.innerHTML = `
+    document.querySelector('modus-data-table').columns = [{ display: 'Name', width: '33%'}, { display: 'Age', width: '33%' }, { display: 'Contacted', width: '33%' }];
+    document.querySelector('modus-data-table').data = [['John', 25, false], ['Jane', 26, false], ['Joe', 27, true]];
+    document.querySelector('modus-data-table').sortOptions = { canSort: true, serverSide: false };
   `;
 
   return tag;

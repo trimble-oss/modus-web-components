@@ -14,6 +14,19 @@
 | `text`      | `text`       | The tooltip's text.                                        | `string`                                 | `undefined` |
 
 
+## Dependencies
+
+### Used by
+
+ - [modus-data-table](../modus-data-table)
+
+### Graph
+```mermaid
+graph TD;
+  modus-data-table --> modus-tooltip
+  style modus-tooltip fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 

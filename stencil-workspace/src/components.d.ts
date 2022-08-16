@@ -1316,6 +1316,9 @@ declare namespace LocalJSX {
     interface ModusDataTable {
         "columns"?: string[] | TColumn[];
         "data"?: TCell[][] | TRow[];
+        /**
+          * An event that fires on column sort.
+         */
         "onSort"?: (event: ModusDataTableCustomEvent<ModusDataTableSortEvent>) => void;
         /**
           * The size of the table.

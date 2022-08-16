@@ -249,7 +249,7 @@ export class ModusChip {
 import type { ModusDataTableSortEvent as IModusDataTableModusDataTableSortEvent } from '@trimble-oss/modus-web-components';
 export declare interface ModusDataTable extends Components.ModusDataTable {
   /**
-   *  
+   * An event that fires on column sort. 
    */
   sort: EventEmitter<CustomEvent<IModusDataTableModusDataTableSortEvent>>;
 
