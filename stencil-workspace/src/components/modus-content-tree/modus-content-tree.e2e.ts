@@ -241,31 +241,33 @@ describe('modus-tree-view-item', () => {
   });
 
   // clicking anywhere on an item should select it retaining previous item selection
-  // it('sets selected class on multiple items with multiSelection enabled', async () => {
-  //   const page = await newE2EPage();
+  it('sets selected class on multiple items with multiSelection enabled', async () => {
+    const page = await newE2EPage();
 
-  //   await page.setContent(`
-  //   <modus-tree-view multi-selection='true'>
-  //     <modus-tree-view-item node-id="1" label="Node one">
-  //     </modus-tree-view-item>
-  //     <modus-tree-view-item node-id="2" label="Node two">
-  //     </modus-tree-view-item>
-  //   </modus-tree-view>`);
+    await page.setContent(`
+    <modus-tree-view multi-selection='true'>
+      <modus-tree-view-item node-id="1" label="Node one">
+      </modus-tree-view-item>
+      <modus-tree-view-item node-id="2" label="Node two">
+      </modus-tree-view-item>
+    </modus-tree-view>`);
 
-  //   const item1 = await page.find('modus-tree-view-item[node-id=\'1\']');
-  //   const element1 = await page.find('modus-tree-view-item[node-id=\'1\'] >>> li > div.tree-item');
-  //   const item2 = await page.find('modus-tree-view-item[node-id=\'2\']');
-  //   const element2 = await page.find('modus-tree-view-item[node-id=\'2\'] >>> li > div.tree-item');
+    const item1 = await page.find('modus-tree-view-item[node-id=\'1\']');
+    const element1 = await page.find('modus-tree-view-item[node-id=\'1\'] >>> li > div.tree-item');
+    const item2 = await page.find('modus-tree-view-item[node-id=\'2\']');
+    const element2 = await page.find('modus-tree-view-item[node-id=\'2\'] >>> li > div.tree-item');
 
-  //   expect(element1).not.toHaveClass('selected');
-  //   expect(element2).not.toHaveClass('selected');
+    expect(element1).not.toHaveClass('selected');
+    expect(element2).not.toHaveClass('selected');
 
-  //   await item1.click();
-  //   await item2.click();
+    item1.setProperty('selected', true);
+    await page.waitForChanges();
+    item2.setProperty('selected', true);
+    await page.waitForChanges();
 
-  //   expect(element1).toHaveClass('selected');
-  //   expect(element2).toHaveClass('selected');
-  // });
+    expect(element1).toHaveClass('selected');
+    expect(element2).toHaveClass('selected');
+  });
 
   // verify checkbox state
   // clicking on the checkbox on an item should select the checkbox unchecking the previous checkboxes
