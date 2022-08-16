@@ -2,6 +2,7 @@
 import { Component, Event, EventEmitter, h, Prop, State, Watch } from '@stencil/core';
 import { ModusDataTableUtilities } from './modus-data-table.utilities';
 import { TCell, TColumn, TRow, ModusTableSortOptions, ModusDataTableSort, ModusDataTableSortEvent } from './modus-data-table.models';
+import { ModusDataTableHeader } from './parts/modus-data-table-header';
 
 @Component({
   tag: 'modus-data-table',
@@ -15,7 +16,7 @@ export class ModusDataTable {
   /* (required) The data (rows) to display in the table. */
   @Prop({ mutable: true }) data: TCell[][] | TRow[];
   @Watch('data') dataChanged(_, oldValue: TCell[][] | TRow[]): void {
-    this.originalData = this.originalData ?? ModusDataTableUtilities.convertToTRows(oldValue, this.columns)?.slice();
+    this.originalData = this.originalData ?? ModusDataTableUtilities.convertToTRows(oldValue, this.columns);
   }
 
   /** The size of the table. */
@@ -27,6 +28,7 @@ export class ModusDataTable {
     serverSide: false,
   };
 
+  /** An event that fires on column sort. */
   @Event() sort: EventEmitter<ModusDataTableSortEvent>;
 
   @State() sortState: ModusDataTableSort = {
@@ -45,7 +47,7 @@ export class ModusDataTable {
   }
 
   componentDidLoad() {
-    this.originalData = (this.data as TRow[])?.slice();
+    this.originalData = ModusDataTableUtilities.convertToTRows(this.data, this.columns);
   }
 
   componentWillUpdate() {
@@ -55,12 +57,6 @@ export class ModusDataTable {
   convertColumnsAndRows() {
     this.columns = ModusDataTableUtilities.convertToTColumns(this.columns);
     this.data = ModusDataTableUtilities.convertToTRows(this.data, this.columns);
-  }
-
-  convertToSingleSpaceTitleCase(title: string): string {
-    return title?.replace(/\w\S*/g, (word) => {
-      return word.charAt(0).toUpperCase() + word.substring(1).toLowerCase();
-    }).replace(/\s+/g, ' ');
   }
 
   handleColumnHeaderClick(columnId: string): void {
@@ -86,7 +82,7 @@ export class ModusDataTable {
 
     if (!this.sortOptions.serverSide) {
       this.data = this.sortState.direction === 'none'
-        ? this.originalData?.slice()
+        ? [...this.originalData]
         : ModusDataTableUtilities.sortData(this.data as TRow[], this.sortState.columnId, this.sortState.direction);
     }
   }
@@ -101,15 +97,13 @@ export class ModusDataTable {
         </colgroup>
         <thead>
           <tr>
-            {(this.columns as TColumn[])?.map((column: TColumn) => {
-              return (
-                <th onClick={() => this.handleColumnHeaderClick(column.id)}>
-                  <div class={`align-${column.align}`}>
-                    {this.convertToSingleSpaceTitleCase(column.display)}
-                  </div>
-                </th>
-              );
-            })}
+            {(this.columns as TColumn[])?.map((column: TColumn) => (
+              <ModusDataTableHeader
+                column={column}
+                onColumnHeaderClick={(id: string) => this.handleColumnHeaderClick(id)}
+                sortOptions={this.sortOptions}
+                sortState={this.sortState} />
+            ))}
           </tr>
         </thead>
         <tbody>

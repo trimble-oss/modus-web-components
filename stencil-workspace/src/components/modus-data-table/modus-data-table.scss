@@ -4,6 +4,7 @@ table, td, th {
 
 table {
   border-collapse: collapse;
+  width: 100%;
 
   th {
     background-color: $col_gray_light;
@@ -12,15 +13,41 @@ table {
     font-weight: $font-weight-semi-bold;
     height: 3rem;
 
-    div {
+    &.can-sort {
+      cursor: pointer;
+    }
+
+    .column-header {
+      display: flex;
+      flex-direction: row;
+      height: $rem-20px;
+      justify-content: center;
       padding: 0 $rem-4px;
 
-      &.align-left {
-        text-align: left;
+      &.align-left,
+      &.align-right {
+        justify-content: space-between;
       }
 
-      &.align-right {
-        text-align: right;
+      &.align-center {
+        justify-content: center;
+      }
+
+      .icon-container {
+        align-items: center;
+        display: flex;
+        height: $rem-16px;
+        justify-content: center;
+
+        .sort-icon {
+          border-radius: $rem-4px;
+          display: flex;
+          padding: $rem-4px;
+
+          &:hover {
+            background-color: $col_gray_3;
+          }
+        }
       }
     }
   }
@@ -34,6 +61,10 @@ table {
     td {
       background-color: $col_white;
       padding: 0 $rem-4px;
+
+      &.align-center {
+        text-align: center;
+      }
 
       &.align-left {
         text-align: left;

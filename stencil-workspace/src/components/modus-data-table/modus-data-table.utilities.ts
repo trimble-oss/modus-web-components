@@ -7,7 +7,7 @@ export class ModusDataTableUtilities {
         align: column.align ?? 'left',
         display: column.display ?? column,
         id: column.id ?? column.display?.toLocaleLowerCase() ?? column.toLocaleLowerCase(),
-        readonly: column.readonly ?? true,
+        readonly: column.readonly ?? false,
         width: column.width ?? ''
       };
     });
@@ -27,7 +27,7 @@ export class ModusDataTableUtilities {
   }
 
   static sortData(data: TRow[], columnId: string, direction: 'asc' | 'desc' | 'none'): TRow[] {
-    const dataCopy = data.slice();
+    const dataCopy = [...data];
     if (direction === 'asc') {
       return dataCopy.sort((row1, row2) => (row1[columnId] > row2[columnId] ? 1 : -1 ));
     } else {

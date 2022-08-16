@@ -17,10 +17,23 @@
 
 ## Events
 
-| Event  | Description | Type                                   |
-| ------ | ----------- | -------------------------------------- |
-| `sort` |             | `CustomEvent<ModusDataTableSortEvent>` |
+| Event  | Description                         | Type                                   |
+| ------ | ----------------------------------- | -------------------------------------- |
+| `sort` | An event that fires on column sort. | `CustomEvent<ModusDataTableSortEvent>` |
 
+
+## Dependencies
+
+### Depends on
+
+- [modus-tooltip](../modus-tooltip)
+
+### Graph
+```mermaid
+graph TD;
+  modus-data-table --> modus-tooltip
+  style modus-data-table fill:#f9f,stroke:#333,stroke-width:4px
+```
 
 ----------------------------------------------
 

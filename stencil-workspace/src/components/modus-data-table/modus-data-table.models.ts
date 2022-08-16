@@ -11,7 +11,7 @@ export interface ModusDataTableSort {
 export interface ModusDataTableSortEvent extends ModusDataTableSort {}
 
 export interface TColumn {
-  align?: 'left' | 'right';
+  align?: 'center' | 'left' | 'right';
   display: string;
   id?: string;
   readonly?: boolean;

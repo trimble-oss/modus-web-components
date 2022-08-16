@@ -119,7 +119,7 @@ describe('modus-data-table', () => {
 
     component.setProperty('columns', ['some   TItLe wiTh  Weird Spacing AND   CasING']);
     await page.waitForChanges();
-    col = await page.find('modus-data-table >>> th > div');
+    col = await page.find('modus-data-table >>> th > .column-header > div');
     expect(col.innerHTML).toEqual('Some Title With Weird Spacing And Casing');
   });
 
@@ -130,21 +130,33 @@ describe('modus-data-table', () => {
 
     component.setProperty('columns', [{ display: 'Col1' }]);
     await page.waitForChanges();
-    col = await page.find('modus-data-table >>> th > div');
+    col = await page.find('modus-data-table >>> th > .column-header > div');
     expect(col.innerHTML).toEqual('Col1');
   });
 
   it('should apply column align', async () => {
     const component = await page.find('modus-data-table');
     component.setProperty('columns', [{ display: 'Col1' }]);
+    component.setProperty('data', [['Some value']]);
     await page.waitForChanges();
     let align = await page.find('modus-data-table >>> .align-left');
+    let alignCell = await page.find('modus-data-table >>> td.align-left');
     expect(align).toBeTruthy();
+    expect(alignCell).toBeTruthy();
 
     component.setProperty('columns', [{ display: 'Col1', align: 'right' }]);
     await page.waitForChanges();
     align = await page.find('modus-data-table >>> .align-right');
+    alignCell = await page.find('modus-data-table >>> td.align-right');
     expect(align).toBeTruthy();
+    expect(alignCell).toBeTruthy();
+
+    component.setProperty('columns', [{ display: 'Col1', align: 'center' }]);
+    await page.waitForChanges();
+    align = await page.find('modus-data-table >>> .align-center');
+    alignCell = await page.find('modus-data-table >>> td.align-center');
+    expect(align).toBeTruthy();
+    expect(alignCell).toBeTruthy();
   });
 
   it('should apply column readonly', async () => {
@@ -153,19 +165,19 @@ describe('modus-data-table', () => {
     component.setProperty('data', [['Val1']]);
     await page.waitForChanges();
     let readonly = await page.find('modus-data-table >>> .readonly');
-    expect(readonly).toBeTruthy();
+    expect(readonly).toBeFalsy();
 
-    component.setProperty('columns', [{ display: 'Col1', readonly: false }]);
+    component.setProperty('columns', [{ display: 'Col1', readonly: true }]);
     await page.waitForChanges();
     readonly = await page.find('modus-data-table >>> .readonly');
-    expect(readonly).toBeFalsy();
+    expect(readonly).toBeTruthy();
   });
 
   it('should output sort event on column header click with sort enabled', async () => {
     const component = await page.find('modus-data-table');
     component.setProperty('columns', [{ display: 'Col1' }]);
     component.setProperty('data', [['Val1'], ['Val2'], ['Val3']]);
-    component.setProperty('sortOptions', { canSort: true, serverSide: false});
+    component.setProperty('sortOptions', { canSort: true, serverSide: false });
     await page.waitForChanges();
     const sortEvent = await page.spyOnEvent('sort');
 
@@ -181,7 +193,7 @@ describe('modus-data-table', () => {
     const component = await page.find('modus-data-table');
     component.setProperty('columns', [{ display: 'Col1' }]);
     component.setProperty('data', [['Val1'], ['Val2'], ['Val3']]);
-    component.setProperty('sortOptions', { canSort: false, serverSide: false});
+    component.setProperty('sortOptions', { canSort: false, serverSide: false });
     await page.waitForChanges();
     const sortEvent = await page.spyOnEvent('sort');
 
@@ -197,7 +209,7 @@ describe('modus-data-table', () => {
     const component = await page.find('modus-data-table');
     component.setProperty('columns', [{ display: 'Col1' }]);
     component.setProperty('data', [['Val1'], ['Val2'], ['Val3']]);
-    component.setProperty('sortOptions', { canSort: true, serverSide: false});
+    component.setProperty('sortOptions', { canSort: true, serverSide: false });
     await page.waitForChanges();
     const sortEvent = await page.spyOnEvent('sort');
 

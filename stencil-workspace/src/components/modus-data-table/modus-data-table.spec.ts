@@ -2,6 +2,7 @@ import { newSpecPage } from '@stencil/core/testing';
 import { ModusDataTable } from './modus-data-table';
 import { ModusDataTableUtilities } from './modus-data-table.utilities';
 import { TColumn } from './modus-data-table.models';
+import { convertToSingleSpaceTitleCase } from './parts/modus-data-table-header';
 
 describe('modus-data-table', () => {
   it('renders', async () => {
@@ -36,8 +37,8 @@ describe('modus-data-table', () => {
   it('should convert column prop as string array to TColumn array', async () => {
     const cols: TColumn[] = ModusDataTableUtilities.convertToTColumns(['name', 'age']);
     expect(cols).toEqual([
-        { align: 'left', display: 'name', id: 'name', readonly: true, width: '' },
-        { align: 'left', display: 'age', id: 'age', readonly: true, width: '' }
+        { align: 'left', display: 'name', id: 'name', readonly: false, width: '' },
+        { align: 'left', display: 'age', id: 'age', readonly: false, width: '' }
       ]
     );
   });
@@ -48,8 +49,8 @@ describe('modus-data-table', () => {
       { display: 'age' }
     ]);
     expect(cols).toEqual([
-        { align: 'left', display: 'name', id: 'name', readonly: true, width: '' },
-        { align: 'left', display: 'age', id: 'age', readonly: true, width: '' }
+        { align: 'left', display: 'name', id: 'name', readonly: false, width: '' },
+        { align: 'left', display: 'age', id: 'age', readonly: false, width: '' }
       ]
     );
   });
@@ -100,8 +101,8 @@ describe('modus-data-table', () => {
   });
 
   it('should convert column header to single space title case', async () => {
-    const table = new ModusDataTable();
-    const headerText = table.convertToSingleSpaceTitleCase('some   TItLe wiTh  Weird Spacing AND   CasING');
+    // Function brought in from data table header component.
+    const headerText = convertToSingleSpaceTitleCase('some   TItLe wiTh  Weird Spacing AND   CasING');
     expect(headerText).toEqual('Some Title With Weird Spacing And Casing');
   });
 });
