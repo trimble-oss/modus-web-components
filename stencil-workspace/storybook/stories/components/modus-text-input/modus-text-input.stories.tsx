@@ -9,36 +9,43 @@ export default {
       name: 'aria-label',
       description: 'The text input\'s aria-label',
       table: {
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
+    },
+    autoFocusInput: {
+      name: 'auto-focus-input',
+      description: 'Sets autofocus for the input',
+      table: {
+        type: { summary: 'string' },
+      },
     },
     clearable: {
       description: 'Whether the text input is clearable',
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },
-      }
+      },
     },
     disabled: {
       description: 'Whether the text input is disabled',
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },
-      }
+      },
     },
     errorText: {
       name: 'error-text',
       description: 'The text input\'s error text',
       table: {
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     helperText: {
       name: 'helper-text',
       description: 'The text input\'s helper text',
       table: {
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     includeSearchIcon: {
       name: 'include-search-icon',
@@ -46,7 +53,7 @@ export default {
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },
-      }
+      },
     },
     inputmode: {
       control: {
@@ -55,34 +62,34 @@ export default {
       },
       description: 'The inputmode type',
       table: {
-        type: { summary: `'decimal' | 'email' | 'numeric' | 'search' | 'tel' | 'text' | 'url'` },
-      }
+        type: { summary: '\'decimal\' | \'email\' | \'numeric\' | \'search\' | \'tel\' | \'text\' | \'url\'' },
+      },
     },
     label: {
       description: 'The text input\'s label',
       table: {
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     maxLength: {
       name: 'max-length',
       description: 'The text input\'s maximum length',
       table: {
-        type: { summary: 'string' }
+        type: { summary: 'string' },
       },
     },
     minLength: {
       name: 'min-length',
       description: 'The text input\'s minimum length',
       table: {
-        type: { summary: 'string' }
+        type: { summary: 'string' },
       },
     },
     placeholder: {
       description: 'The text input\'s placeholder text',
       table: {
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     readOnly: {
       name: 'read-only',
@@ -90,14 +97,14 @@ export default {
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },
-      }
+      },
     },
     required: {
       description: 'Whether the text input is required',
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },
-      }
+      },
     },
     size: {
       control: {
@@ -106,9 +113,9 @@ export default {
       },
       description: 'The size of the text input',
       table: {
-        defaultValue: { summary: `'medium'` },
-        type: { summary: `'medium' | 'large'` },
-      }
+        defaultValue: { summary: '\'medium\'' },
+        type: { summary: '\'medium\' | \'large\'' },
+      },
     },
     type: {
       control: {
@@ -117,23 +124,23 @@ export default {
       },
       description: 'The input type',
       table: {
-        defaultValue: { summary: `'text'` },
-        type: { summary: `'text' | 'password'` },
-      }
+        defaultValue: { summary: '\'text\'' },
+        type: { summary: '\'text\' | \'password\'' },
+      },
     },
     validText: {
       name: 'valid-text',
       description: 'The text input\'s valid text',
       table: {
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     value: {
       description: 'The text input\'s value',
       table: {
-        type: { summary: 'string' }
-      }
-    }
+        type: { summary: 'string' },
+      },
+    },
   },
   parameters: {
     actions: {
@@ -144,14 +151,15 @@ export default {
       page: docs,
     },
     options: {
-      isToolshown: true
+      isToolshown: true,
     },
   },
 };
 
-const Template = ({ ariaLabel, clearable, disabled, errorText, helperText, includeSearchIcon, inputmode, label, maxLength, minLength, placeholder, readOnly, required, size, type, validText, value }) => html`
+const Template = ({ ariaLabel, autoFocusInput, clearable, disabled, errorText, helperText, includeSearchIcon, inputmode, label, maxLength, minLength, placeholder, readOnly, required, size, type, validText, value }) => html`
   <modus-text-input
     aria-label=${ariaLabel}
+    auto-focus-input=${autoFocusInput}
     clearable=${clearable}
     disabled=${disabled}
     error-text=${errorText}
@@ -167,13 +175,13 @@ const Template = ({ ariaLabel, clearable, disabled, errorText, helperText, inclu
     size=${size}
     type=${type}
     valid-text=${validText}
-    value=${value}
-  ></modus-text-input>
+    value=${value}></modus-text-input>
 `;
 
 export const Default = Template.bind({});
 Default.args = {
   ariaLabel: '',
+  autoFocusInput: true,
   clearable: false,
   disabled: false,
   errorText: '',
@@ -189,7 +197,5 @@ Default.args = {
   size: 'medium',
   type: 'text',
   validText: '',
-  value: 'Hello, text input!'
+  value: 'Hello, text input!',
 };
-
-

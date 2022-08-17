@@ -180,6 +180,16 @@ describe('modus-text-input', () => {
     expect(clear).not.toBeNull();
   });
 
+  it('renders changes to autoFocusInput', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-text-input auto-focus-input="true"></modus-text-input>');
+    await page.waitForChanges();
+
+    const input = await page.find('modus-text-input >>> input');
+    expect(await input.getProperty('autofocus')).toBeTruthy();
+  });
+
   it('should clear on handleClear', async () => {
     const page = await newE2EPage();
 
@@ -201,7 +211,7 @@ describe('modus-text-input', () => {
 
     await page.setContent('<modus-text-input></modus-text-input>');
     const valueChange = await page.spyOnEvent('valueChange');
-    const element = await page.find('modus-text-input >>> input')
+    const element = await page.find('modus-text-input >>> input');
     await page.waitForChanges();
 
     await element.type('modus-text-input >>> input', { delay: 20 });
