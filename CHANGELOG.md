@@ -10,6 +10,7 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 
 - Modus Chips active state color is now blue
 - Remove unused Warning button and make Primary button the default
+- Modus Message color updates
 
 ## 0.1.11 - 2022-05-08
 
