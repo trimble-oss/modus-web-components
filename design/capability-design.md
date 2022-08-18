@@ -4,7 +4,7 @@ This document breaks the site into front-end capabilities. By breaking an applic
 
 Capability based design requires less knowledge up front about individual features. Instead it focuses on providing solutions for more general front-end questions. A sample of these types of questions are...
 
-- How large will the application be? 
+- How large will the application be?
 - How many teams will be contributing?
 - How important is performance?
 - How much front-end experience does the development team have?
@@ -112,7 +112,7 @@ This project provides Trimble Modus Elements as a web component library. Web com
 
 *CDN Resources*
 
-- 
+-
 
 ------
 
