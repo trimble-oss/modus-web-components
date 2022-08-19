@@ -17,7 +17,11 @@ export class ModusDataTableUtilities {
     if (data?.length && !Array.isArray(data[0])) { return data as TRow[]; }
 
     return data?.map((row) => {
-      const tRows = {};
+      const tRows = {
+        _id: row._id ?? '',
+        _selected: row._selected ?? false,
+      };
+
       row.forEach((cell, rowIndex) => {
         tRows[(columns[rowIndex] as TColumn).id] = cell;
       });

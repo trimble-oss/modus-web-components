@@ -46,7 +46,15 @@ export const ModusDataTableHeader: FunctionalComponent<ModusDataTableHeaderProps
         }
         {props.column.align === 'center'
           && props.sortState.columnId === props.column.id
-          && <div style={{display: 'flex', width: props.column.width, paddingRight: '14px',justifyContent: 'flex-end', position: 'absolute'}}>{sortIcon}</div>
+          && (
+            <div style={{
+              display: 'flex',
+              width: props.column.width,
+              paddingRight: '14px',
+              justifyContent: 'flex-end',
+              position: 'absolute'
+            }}>{sortIcon}</div>
+          )
         }
       </div>
     </th>

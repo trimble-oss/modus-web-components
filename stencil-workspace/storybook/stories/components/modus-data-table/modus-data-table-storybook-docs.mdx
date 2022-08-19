@@ -2,6 +2,8 @@ import { Story } from "@storybook/addon-docs";
 
 # Data Table
 
+<modus-alert type="warning" message="This component is under construction!"/>
+
 ---
 
 [Modus Data Table](https://modus.trimble.com/components/tables/) web components are wrappers around the HTML table element.
@@ -64,10 +66,22 @@ To define columns and data in the table *using objects*:
 - If the table is sortable, it will output the `sort` event on header click. This event's detail is a `ModusDataTableSortEvent` object.
 - If the table's `serverSide` sort option is `false`, it will sort the columns on the client-side. Otherwise, it is up to the consumer to update the table's `data` property with the sorted data.
 
+### Selection
+- The `TRow` object has two optional properties that are used for selection:
+  - `_id`: The row's unique id. Output in the event detail on row selection.
+  - `_selected`: Whether the row is selected. You can set this to change selection state with code.
+- The `selectionOptions` property accepts a `ModusTableSelectionOptions` object.
+  - The options define whether the table rows can be selected, and if the selection uses a checkbox column.
+- When a selection changes, the `selection` event fires detailing the currently selected rows' IDs.
+
 ### Types
 ```ts
-type TCell = number | string | boolean;
-type TRow = { [key: string]: TCell };
+type TCell = number | string | boolean | ModusDataTableCellLink;
+type TRow = {
+  _id?: string;
+  _selected?: boolean;
+  [key: string]: TCell;
+};
 
 interface TColumn {
   align?: 'left' | 'right';
@@ -77,12 +91,23 @@ interface TColumn {
   width?: string;
 }
 
+interface ModusDataTableCellLink {
+  display: string;
+  type: 'link';
+  url: string;
+}
+
 interface ModusDataTableSort {
   columnId: string;
   direction: 'asc' | 'desc' | 'none';
 }
 
 interface ModusDataTableSortEvent extends ModusDataTableSort {}
+
+interface ModusTableSelectionOptions {
+  canSelect: boolean;
+  checkboxSelection: boolean;
+}
 
 interface ModusTableSortOptions {
   canSort: boolean;
@@ -92,17 +117,21 @@ interface ModusTableSortOptions {
 
 ### Properties
 
-| Property      | Attribute | Description                         | Type                        | Default                                            |
-| ------------- | --------- | ----------------------------------- | --------------------------- | -------------------------------------------------- |
-| `columns`     | --        |                                     | `TColumn[], string[]`     | `undefined`                                        |
-| `data`        | --        |                                     | `TCell[][], TRow[]`       | `undefined`                                        |
-| `size`        | `size`    | The size of the table.              | `'condensed', 'standard'` | `'standard'`                                       |
-| `sortOptions` | --        | Options for data table column sort. | `ModusTableSortOptions`     | `{     canSort: false,     serverSide: false,   }` |
+| Property               | Attribute | Description                            | Type                         | Default                                                     |
+| ---------------------- | --------- | -------------------------------------- | ---------------------------- | ----------------------------------------------------------- |
+| `columns` _(required)_ | --        |                                        | `TColumn[], string[]`        | `undefined`                                                 |
+| `data` _(required)_    | --        |                                        | `TCell[][], TRow[]`          | `undefined`                                                 |
+| `selectionOptions`     | --        | Options for data table item selection. | `ModusTableSelectionOptions` | `{     canSelect: false,     checkboxSelection: false,   }` |
+| `size`                 | `size`    | The size of the table.                 | `"condensed", "standard"`    | `'standard'`                                                |
+| `sortOptions`          | --        | Options for data table column sort.    | `ModusTableSortOptions`      | `{     canSort: false,     serverSide: false,   }`          |
 
 
 ### Events
 
-| Event  | Description                         | Type                                   |
-| ------ | ----------------------------------- | -------------------------------------- |
-| `sort` | An event that fires on column sort. | `CustomEvent<ModusDataTableSortEvent>` |
+| Event            | Description                              | Type                                   |
+| ---------------- | ---------------------------------------- | -------------------------------------- |
+| `cellLinkClick`  | An event that fires on cell link click.  | `CustomEvent<ModusDataTableCellLink>`  |
+| `rowDoubleClick` | An event that fires on row double click. | `CustomEvent<string>`                  |
+| `selection`      | An event that fires on selection change. | `CustomEvent<string[]>`                |
+| `sort`           | An event that fires on column sort.      | `CustomEvent<ModusDataTableSortEvent>` |
 

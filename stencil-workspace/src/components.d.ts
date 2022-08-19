@@ -6,7 +6,7 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
-import { ModusDataTableSortEvent, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
+import { ModusDataTableCellLink, ModusDataTableSortEvent, ModusTableSelectionOptions, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 import { App } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { App as App1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
@@ -186,6 +186,10 @@ export namespace Components {
     interface ModusDataTable {
         "columns": string[] | TColumn[];
         "data": TCell[][] | TRow[];
+        /**
+          * Options for data table item selection.
+         */
+        "selectionOptions"?: ModusTableSelectionOptions;
         /**
           * The size of the table.
          */
@@ -1332,12 +1336,28 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface ModusDataTable {
-        "columns"?: string[] | TColumn[];
-        "data"?: TCell[][] | TRow[];
+        "columns": string[] | TColumn[];
+        "data": TCell[][] | TRow[];
+        /**
+          * An event that fires on cell link click.
+         */
+        "onCellLinkClick"?: (event: ModusDataTableCustomEvent<ModusDataTableCellLink>) => void;
+        /**
+          * An event that fires on row double click.
+         */
+        "onRowDoubleClick"?: (event: ModusDataTableCustomEvent<string>) => void;
+        /**
+          * An event that fires on selection change.
+         */
+        "onSelection"?: (event: ModusDataTableCustomEvent<string[]>) => void;
         /**
           * An event that fires on column sort.
          */
         "onSort"?: (event: ModusDataTableCustomEvent<ModusDataTableSortEvent>) => void;
+        /**
+          * Options for data table item selection.
+         */
+        "selectionOptions"?: ModusTableSelectionOptions;
         /**
           * The size of the table.
          */

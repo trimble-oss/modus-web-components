@@ -246,8 +246,21 @@ export class ModusChip {
   }
 }
 
+import type { ModusDataTableCellLink as IModusDataTableModusDataTableCellLink } from '@trimble-oss/modus-web-components';
 import type { ModusDataTableSortEvent as IModusDataTableModusDataTableSortEvent } from '@trimble-oss/modus-web-components';
 export declare interface ModusDataTable extends Components.ModusDataTable {
+  /**
+   * An event that fires on cell link click. 
+   */
+  cellLinkClick: EventEmitter<CustomEvent<IModusDataTableModusDataTableCellLink>>;
+  /**
+   * An event that fires on row double click. 
+   */
+  rowDoubleClick: EventEmitter<CustomEvent<string>>;
+  /**
+   * An event that fires on selection change. 
+   */
+  selection: EventEmitter<CustomEvent<string[]>>;
   /**
    * An event that fires on column sort. 
    */
@@ -257,20 +270,20 @@ export declare interface ModusDataTable extends Components.ModusDataTable {
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['columns', 'data', 'size', 'sortOptions']
+  inputs: ['columns', 'data', 'selectionOptions', 'size', 'sortOptions']
 })
 @Component({
   selector: 'modus-data-table',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['columns', 'data', 'size', 'sortOptions']
+  inputs: ['columns', 'data', 'selectionOptions', 'size', 'sortOptions']
 })
 export class ModusDataTable {
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['sort']);
+    proxyOutputs(this, this.el, ['cellLinkClick', 'rowDoubleClick', 'selection', 'sort']);
   }
 }
 

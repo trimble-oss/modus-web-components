@@ -28,11 +28,13 @@
 
 ### Used by
 
+ - [modus-data-table](../modus-data-table)
  - [modus-tree-view-item](../modus-content-tree/modus-tree-view-item)
 
 ### Graph
 ```mermaid
 graph TD;
+  modus-data-table --> modus-checkbox
   modus-tree-view-item --> modus-checkbox
   style modus-checkbox fill:#f9f,stroke:#333,stroke-width:4px
 ```

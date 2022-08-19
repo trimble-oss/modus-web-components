@@ -64,6 +64,13 @@ table {
 
       &.align-center {
         text-align: center;
+
+        div {
+          display: flex;
+          height: 100%;
+          justify-content: center;
+          width: 100%;
+        }
       }
 
       &.align-left {
@@ -76,6 +83,20 @@ table {
 
       &.readonly {
         background-color: $col_gray_0;
+      }
+
+      &.selected {
+        background-color: $col_blue_pale;
+      }
+
+      .cell-link {
+        color: $col_blue_light;
+        cursor: pointer;
+        display: inline-block;
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
   }
