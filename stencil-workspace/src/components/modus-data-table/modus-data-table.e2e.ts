@@ -277,4 +277,353 @@ describe('modus-data-table', () => {
     expect(cells[1].innerHTML).toEqual('Val3');
     expect(cells[2].innerHTML).toEqual('Val1');
   });
+
+  it('should select when canSelect is true', async () => {
+    const component = await page.find('modus-data-table');
+    component.setProperty('columns', [{ display: 'Col1' }]);
+    component.setProperty('data', [['Val2'], ['Val3'], ['Val1']]);
+    component.setProperty('selectionOptions', { canSelect: true });
+    await page.waitForChanges();
+
+    const cells = await page.findAll('modus-data-table >>> td');
+    const cell = cells.find((cell) => cell.innerHTML === 'Val2');
+
+    await cell.click();
+    await page.waitForChanges();
+
+    expect(cell.classList.contains('selected')).toBeTruthy();
+  });
+
+  it('should not select when canSelect is false', async () => {
+    const component = await page.find('modus-data-table');
+    component.setProperty('columns', [{ display: 'Col1' }]);
+    component.setProperty('data', [['Val2'], ['Val3'], ['Val1']]);
+    component.setProperty('selectionOptions', { canSelect: false });
+    await page.waitForChanges();
+
+    const cells = await page.findAll('modus-data-table >>> td');
+    const cell = cells.find((cell) => cell.innerHTML === 'Val2');
+
+    await cell.click();
+    await page.waitForChanges();
+
+    expect(cell.classList.contains('selected')).toBeFalsy();
+  });
+
+  it('should fire selection with correct item', async () => {
+    const component = await page.find('modus-data-table');
+    component.setProperty('columns', [{ display: 'Col1' }]);
+    component.setProperty('data', [{ _id: '2', col1: 'Val2' }, { _id: '3', col1: 'Val3' }, { _id: '1', col1: 'Val1' }]);
+    component.setProperty('selectionOptions', { canSelect: true });
+    await page.waitForChanges();
+
+    const cells = await page.findAll('modus-data-table >>> td');
+    const cell = cells.find((cell) => cell.innerHTML === 'Val2');
+    const selectionEvent = await page.spyOnEvent('selection');
+
+    await cell.click();
+    await page.waitForChanges();
+
+    expect(selectionEvent).toHaveReceivedEventDetail(['2']);
+  });
+
+  it('should fire selection with correct items', async () => {
+    const component = await page.find('modus-data-table');
+    component.setProperty('columns', [{ display: 'Col1' }]);
+    component.setProperty('data', [{ _id: '2', col1: 'Val2' }, { _id: '3', col1: 'Val3' }, { _id: '1', col1: 'Val1' }]);
+    component.setProperty('selectionOptions', { canSelect: true });
+    await page.waitForChanges();
+
+    const cells = await page.findAll('modus-data-table >>> td');
+    const cell1 = cells.find((cell) => cell.innerHTML === 'Val2');
+    const cell2 = cells.find((cell) => cell.innerHTML === 'Val3');
+    const selectionEvent = await page.spyOnEvent('selection');
+
+    await cell1.click();
+    await page.waitForChanges();
+    expect(selectionEvent).toHaveReceivedEventDetail(['2']);
+
+    await cell2.click();
+    await page.waitForChanges();
+    expect(selectionEvent).toHaveReceivedEventDetail(['2', '3']);
+
+    expect(selectionEvent).toHaveReceivedEventTimes(2);
+  });
+
+  it('should fire selection with correct items when deselecting', async () => {
+    const component = await page.find('modus-data-table');
+    component.setProperty('columns', [{ display: 'Col1' }]);
+    component.setProperty('data', [{ _id: '2', col1: 'Val2' }, { _id: '3', col1: 'Val3' }, { _id: '1', col1: 'Val1' }]);
+    component.setProperty('selectionOptions', { canSelect: true });
+    await page.waitForChanges();
+
+    const cells = await page.findAll('modus-data-table >>> td');
+    const cell1 = cells.find((cell) => cell.innerHTML === 'Val2');
+    const cell2 = cells.find((cell) => cell.innerHTML === 'Val3');
+    const selectionEvent = await page.spyOnEvent('selection');
+
+    await cell1.click();
+    await page.waitForChanges();
+    expect(selectionEvent).toHaveReceivedEventDetail(['2']);
+
+    await cell2.click();
+    await page.waitForChanges();
+    expect(selectionEvent).toHaveReceivedEventDetail(['2', '3']);
+
+    await cell2.click();
+    await page.waitForChanges();
+    expect(selectionEvent).toHaveReceivedEventDetail(['2']);
+
+    expect(selectionEvent).toHaveReceivedEventTimes(3);
+  });
+
+  it('should fire selection with correct items when checking checkbox', async () => {
+    const component = await page.find('modus-data-table');
+    component.setProperty('columns', [{ display: 'Col1' }]);
+    component.setProperty('data', [{ _id: '2', col1: 'Val2' }, { _id: '3', col1: 'Val3' }, { _id: '1', col1: 'Val1' }]);
+    component.setProperty('selectionOptions', { canSelect: true, checkboxSelection: true });
+    await page.waitForChanges();
+
+    const selectionEvent = await page.spyOnEvent('selection');
+
+    const checkboxes = await page.findAll('modus-data-table >>> modus-checkbox');
+    const checkbox2 = checkboxes[1];
+
+    await checkbox2.click();
+    await page.waitForChanges();
+
+    expect(selectionEvent).toHaveReceivedEventDetail(['2']);
+  });
+
+  it('should fire selection with correct items when checking multiple checkboxes', async () => {
+    const component = await page.find('modus-data-table');
+    component.setProperty('columns', [{ display: 'Col1' }]);
+    component.setProperty('data', [{ _id: '2', col1: 'Val2' }, { _id: '3', col1: 'Val3' }, { _id: '1', col1: 'Val1' }]);
+    component.setProperty('selectionOptions', { canSelect: true, checkboxSelection: true });
+    await page.waitForChanges();
+
+    const selectionEvent = await page.spyOnEvent('selection');
+
+    const checkboxes = await page.findAll('modus-data-table >>> modus-checkbox');
+    const checkbox2 = checkboxes[1];
+    const checkbox3 = checkboxes[2];
+
+    await checkbox2.click();
+    await page.waitForChanges();
+    expect(selectionEvent).toHaveReceivedEventDetail(['2']);
+
+    await checkbox3.click();
+    await page.waitForChanges();
+    expect(selectionEvent).toHaveReceivedEventDetail(['2', '3']);
+  });
+
+  it('should fire selection with correct items when unchecking checkbox', async () => {
+    const component = await page.find('modus-data-table');
+    component.setProperty('columns', [{ display: 'Col1' }]);
+    component.setProperty('data', [{ _id: '2', col1: 'Val2' }, { _id: '3', col1: 'Val3' }, { _id: '1', col1: 'Val1' }]);
+    component.setProperty('selectionOptions', { canSelect: true, checkboxSelection: true });
+    await page.waitForChanges();
+
+    const selectionEvent = await page.spyOnEvent('selection');
+
+    const checkboxes = await page.findAll('modus-data-table >>> modus-checkbox');
+    const checkbox2 = checkboxes[1];
+    const checkbox3 = checkboxes[2];
+
+    await checkbox2.click();
+    await page.waitForChanges();
+    expect(selectionEvent).toHaveReceivedEventDetail(['2']);
+
+    await checkbox3.click();
+    await page.waitForChanges();
+    expect(selectionEvent).toHaveReceivedEventDetail(['2', '3']);
+
+    await checkbox3.click();
+    await page.waitForChanges();
+    expect(selectionEvent).toHaveReceivedEventDetail(['2']);
+  });
+
+  it('should not render checkbox is checkboxSelection is false', async () => {
+    const component = await page.find('modus-data-table');
+    component.setProperty('columns', [{ display: 'Col1' }]);
+    component.setProperty('data', [{ _id: '2', col1: 'Val2' }, { _id: '3', col1: 'Val3' }, { _id: '1', col1: 'Val1' }]);
+    component.setProperty('selectionOptions', { canSelect: true, checkboxSelection: false });
+    await page.waitForChanges();
+
+    const checkbox = await page.find('modus-data-table >>> modus-checkbox');
+    expect(checkbox).toBeFalsy();
+  });
+
+  it('should fire selection when select all is checked', async () => {
+    const component = await page.find('modus-data-table');
+    component.setProperty('columns', [{ display: 'Col1' }]);
+    component.setProperty('data', [{ _id: '2', col1: 'Val2' }, { _id: '3', col1: 'Val3' }, { _id: '1', col1: 'Val1' }]);
+    component.setProperty('selectionOptions', { canSelect: true, checkboxSelection: true });
+    await page.waitForChanges();
+
+    const selectionEvent = await page.spyOnEvent('selection');
+
+    const checkboxes = await page.findAll('modus-data-table >>> modus-checkbox');
+    const selectAllCheckbox = checkboxes[0];
+
+    await selectAllCheckbox.click();
+    await page.waitForChanges();
+
+    expect(selectionEvent).toHaveReceivedEventDetail(['2', '3', '1']);
+  });
+
+  it('should fire selection when select all is unchecked', async () => {
+    const component = await page.find('modus-data-table');
+    component.setProperty('columns', [{ display: 'Col1' }]);
+    component.setProperty('data', [{ _id: '2', col1: 'Val2' }, { _id: '3', col1: 'Val3' }, { _id: '1', col1: 'Val1' }]);
+    component.setProperty('selectionOptions', { canSelect: true, checkboxSelection: true });
+    await page.waitForChanges();
+
+    const selectionEvent = await page.spyOnEvent('selection');
+
+    const checkboxes = await page.findAll('modus-data-table >>> modus-checkbox');
+    const selectAllCheckbox = checkboxes[0];
+
+    await selectAllCheckbox.click();
+    await page.waitForChanges();
+    expect(selectionEvent).toHaveReceivedEventDetail(['2', '3', '1']);
+
+    await selectAllCheckbox.click();
+    await page.waitForChanges();
+    expect(selectionEvent).toHaveReceivedEventDetail([]);
+  });
+
+  it('should update select all checkbox when all rows become checked', async () => {
+    const component = await page.find('modus-data-table');
+    component.setProperty('columns', [{ display: 'Col1' }]);
+    component.setProperty('data', [{ _id: '2', col1: 'Val2' }, { _id: '3', col1: 'Val3' }, { _id: '1', col1: 'Val1' }]);
+    component.setProperty('selectionOptions', { canSelect: true, checkboxSelection: true });
+    await page.waitForChanges();
+
+    const checkboxes = await page.findAll('modus-data-table >>> modus-checkbox');
+
+    const selectAllCheckbox = checkboxes[0];
+    const checkbox1 = checkboxes[1];
+    const checkbox2 = checkboxes[2];
+    const checkbox3 = checkboxes[3];
+
+    await checkbox1.click();
+    await checkbox2.click();
+    await checkbox3.click();
+    await page.waitForChanges();
+
+    expect(await selectAllCheckbox.getProperty('checked')).toBe(true);
+  });
+
+  it('should update select all checkbox when a row becomes unchecked', async () => {
+    const component = await page.find('modus-data-table');
+    component.setProperty('columns', [{ display: 'Col1' }]);
+    component.setProperty('data', [{ _id: '2', col1: 'Val2' }, { _id: '3', col1: 'Val3' }, { _id: '1', col1: 'Val1' }]);
+    component.setProperty('selectionOptions', { canSelect: true, checkboxSelection: true });
+    await page.waitForChanges();
+
+    const checkboxes = await page.findAll('modus-data-table >>> modus-checkbox');
+
+    const selectAllCheckbox = checkboxes[0];
+    const checkbox1 = checkboxes[1];
+    const checkbox2 = checkboxes[2];
+    const checkbox3 = checkboxes[3];
+
+    await checkbox1.click();
+    await checkbox2.click();
+    await checkbox3.click();
+    await page.waitForChanges();
+    expect(await selectAllCheckbox.getProperty('checked')).toBe(true);
+
+    await checkbox1.click();
+    await page.waitForChanges();
+    expect(await selectAllCheckbox.getProperty('checked')).toBe(false);
+  });
+
+  it('should select all rows when select all checkbox is checked', async () => {
+    const component = await page.find('modus-data-table');
+    component.setProperty('columns', [{ display: 'Col1' }]);
+    component.setProperty('data', [{ _id: '2', col1: 'Val2' }, { _id: '3', col1: 'Val3' }, { _id: '1', col1: 'Val1' }]);
+    component.setProperty('selectionOptions', { canSelect: true, checkboxSelection: true });
+    await page.waitForChanges();
+
+    const checkboxes = await page.findAll('modus-data-table >>> modus-checkbox');
+
+    const selectAllCheckbox = checkboxes[0];
+    await selectAllCheckbox.click();
+    await page.waitForChanges();
+    expect(await checkboxes[1].getProperty('checked')).toBe(true);
+    expect(await checkboxes[2].getProperty('checked')).toBe(true);
+    expect(await checkboxes[3].getProperty('checked')).toBe(true);
+  });
+
+  it('should unselect all rows when select all checkbox is unchecked', async () => {
+    const component = await page.find('modus-data-table');
+    component.setProperty('columns', [{ display: 'Col1' }]);
+    component.setProperty('data', [{ _id: '2', col1: 'Val2' }, { _id: '3', col1: 'Val3' }, { _id: '1', col1: 'Val1' }]);
+    component.setProperty('selectionOptions', { canSelect: true, checkboxSelection: true });
+    await page.waitForChanges();
+
+    const checkboxes = await page.findAll('modus-data-table >>> modus-checkbox');
+
+    const selectAllCheckbox = checkboxes[0];
+    await selectAllCheckbox.click();
+    await page.waitForChanges();
+    expect(await checkboxes[1].getProperty('checked')).toBe(true);
+    expect(await checkboxes[2].getProperty('checked')).toBe(true);
+    expect(await checkboxes[3].getProperty('checked')).toBe(true);
+
+    await selectAllCheckbox.click();
+    await page.waitForChanges();
+    expect(await checkboxes[1].getProperty('checked')).toBe(false);
+    expect(await checkboxes[2].getProperty('checked')).toBe(false);
+    expect(await checkboxes[3].getProperty('checked')).toBe(false);
+  });
+
+  it('should fire rowDoubleClick with correct id', async () => {
+    const component = await page.find('modus-data-table');
+    component.setProperty('columns', [{ display: 'Col1' }]);
+    component.setProperty('data', [{ _id: '2', col1: 'Val2' }, { _id: '3', col1: 'Val3' }, { _id: '1', col1: 'Val1' }]);
+    component.setProperty('selectionOptions', { canSelect: true });
+    await page.waitForChanges();
+
+    const cells = await page.findAll('modus-data-table >>> td');
+    const cell = cells.find((cell) => cell.innerHTML === 'Val2');
+    const rowDoubleClickEvent = await page.spyOnEvent('rowDoubleClick');
+
+    await cell.click({ clickCount: 2 });
+    await page.waitForChanges();
+
+    expect(rowDoubleClickEvent).toHaveReceivedEventDetail('2');
+    expect(rowDoubleClickEvent).toHaveReceivedEventTimes(1);
+  });
+
+  it('should render cell link type', async () => {
+    const component = await page.find('modus-data-table');
+    component.setProperty('columns', [{ display: 'Link' }]);
+    component.setProperty('data', [{ link: { display: 'My Link', url: 'https://example.com', type: 'link' } }]);
+    await page.waitForChanges();
+
+    const cellLink = await page.find('modus-data-table >>> .cell-link');
+
+    await cellLink.click();
+    await page.waitForChanges();
+
+    expect(cellLink).toBeTruthy();
+  });
+
+  it('should fire cellLinkClick on cell link click', async () => {
+    const component = await page.find('modus-data-table');
+    component.setProperty('columns', [{ display: 'Link' }]);
+    component.setProperty('data', [{ link: { display: 'My Link', url: 'https://example.com', type: 'link' } }]);
+    await page.waitForChanges();
+
+    const cellLinkClickEvent = await page.spyOnEvent('cellLinkClick');
+    const cellLink = await page.find('modus-data-table >>> .cell-link');
+
+    await cellLink.click();
+    await page.waitForChanges();
+
+    expect(cellLinkClickEvent).toHaveReceivedEventTimes(1);
+  });
 });

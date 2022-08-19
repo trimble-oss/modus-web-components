@@ -62,8 +62,8 @@ describe('modus-data-table', () => {
     ];
     const rows = ModusDataTableUtilities.convertToTRows([['John', 32], ['Joe', 28]], cols);
     expect(rows).toEqual([
-      { name: 'John', age: 32 },
-      { name: 'Joe', age: 28 }
+      { _id: '', _selected: false, name: 'John', age: 32 },
+      { _id: '', _selected: false, name: 'Joe', age: 28 }
     ]);
   });
 

@@ -1,6 +1,16 @@
-export type TCell = number | string | boolean;
+export type TCell = number | string | boolean | ModusDataTableCellLink;
 
-export type TRow = { [key: string]: TCell };
+export type TRow = {
+  _id?: string;
+  _selected?: boolean;
+  [key: string]: TCell;
+};
+
+export interface ModusDataTableCellLink {
+  display: string;
+  type: 'link';
+  url: string;
+}
 
 export interface ModusDataTableSort {
   columnId: string;
@@ -16,6 +26,11 @@ export interface TColumn {
   id?: string;
   readonly?: boolean;
   width?: string;
+}
+
+export interface ModusTableSelectionOptions {
+  canSelect: boolean;
+  checkboxSelection: boolean;
 }
 
 export interface ModusTableSortOptions {
