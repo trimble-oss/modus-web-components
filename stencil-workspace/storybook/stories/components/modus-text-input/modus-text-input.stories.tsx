@@ -16,7 +16,7 @@ export default {
       name: 'auto-focus-input',
       description: 'Sets autofocus for the input',
       table: {
-        type: { summary: 'string' },
+        type: { summary: 'boolean' },
       },
     },
     clearable: {
