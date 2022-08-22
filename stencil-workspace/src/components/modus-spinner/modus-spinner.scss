@@ -1,11 +1,15 @@
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 div.spinner {
-  animation: spin .75s linear infinite;
-  border: .25em solid $col_trimble_blue;
+  animation: spin 0.75s linear infinite;
+  border: 0.25em solid $col_trimble_blue;
   border-radius: 50%;
   border-right-color: transparent;
   display: inline-flex;
