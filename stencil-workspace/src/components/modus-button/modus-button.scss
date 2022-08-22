@@ -122,23 +122,6 @@ button {
       background-color: $col_gray_2;
       border-color: $col_gray_2;
     }
-
-    &.color-warning {
-      background-color: $col_yellow;
-      border-color: $col_yellow;
-      color: $col_white;
-      fill: $col_white;
-    }
-
-    &.color-warning:hover:not([disabled]) {
-      background-color: $col_yellow_light;
-      border-color: $col_yellow_light;
-    }
-
-    &.color-warning:active:not([disabled]) {
-      background-color: $col_yellow_dark;
-      border-color: $col_yellow_dark;
-    }
   }
 
   &.style-outline {

@@ -246,6 +246,34 @@ export class ModusChip {
   }
 }
 
+import type { ModusDataTableSortEvent as IModusDataTableModusDataTableSortEvent } from '@trimble-oss/modus-web-components';
+export declare interface ModusDataTable extends Components.ModusDataTable {
+  /**
+   * An event that fires on column sort. 
+   */
+  sort: EventEmitter<CustomEvent<IModusDataTableModusDataTableSortEvent>>;
+
+}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['columns', 'data', 'size', 'sortOptions']
+})
+@Component({
+  selector: 'modus-data-table',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['columns', 'data', 'size', 'sortOptions']
+})
+export class ModusDataTable {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['sort']);
+  }
+}
+
 
 export declare interface ModusDropdown extends Components.ModusDropdown {
   /**

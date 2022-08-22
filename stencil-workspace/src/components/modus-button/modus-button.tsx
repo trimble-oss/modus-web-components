@@ -14,7 +14,7 @@ export class ModusButton {
   @Prop() buttonStyle: 'borderless' | 'fill' | 'outline' = 'fill';
 
   /** (optional) The color of the button. */
-  @Prop() color: 'danger' | 'default' | 'primary' | 'secondary' | 'warning' = 'default';
+  @Prop() color: 'danger' | 'primary' | 'secondary' | 'tertiary' = 'primary';
 
   /** (optional) Disables the button. */
   @Prop() disabled: boolean;
@@ -37,10 +37,9 @@ export class ModusButton {
 
   classByColor: Map<string, string> = new Map([
     ['danger', 'color-danger'],
-    ['default', 'color-tertiary'],
     ['primary', 'color-primary'],
     ['secondary', 'color-secondary'],
-    ['warning', 'color-warning'],
+    ['tertiary', 'color-tertiary'],
   ]);
 
   classBySize: Map<string, string> = new Map([
@@ -68,11 +67,11 @@ export class ModusButton {
         aria-pressed={this.pressed}
         class={className}
         disabled={this.disabled}
-        onClick={() => !this.disabled ? this.buttonClick.emit() : null}
-        onKeyDown={() => this.pressed = true}
-        onKeyUp={() => this.pressed = false}
-        onMouseDown={() => this.pressed = true}
-        onMouseUp={() => this.pressed = false}
+        onClick={() => (!this.disabled ? this.buttonClick.emit() : null)}
+        onKeyDown={() => (this.pressed = true)}
+        onKeyUp={() => (this.pressed = false)}
+        onMouseDown={() => (this.pressed = true)}
+        onMouseUp={() => (this.pressed = false)}
         role="button">
         <slot />
       </button>

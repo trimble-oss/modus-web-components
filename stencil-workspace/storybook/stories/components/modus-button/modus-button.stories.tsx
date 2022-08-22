@@ -7,10 +7,10 @@ export default {
   argTypes: {
     ariaLabel: {
       name: 'aria-label',
-      description: 'The button\'s aria-label',
+      description: "The button's aria-label",
       table: {
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     buttonStyle: {
       name: 'button-style',
@@ -22,25 +22,25 @@ export default {
       table: {
         defaultValue: { summary: `'fill'` },
         type: { summary: `'borderless' | 'fill' | 'outline'` },
-      }
+      },
     },
     color: {
       control: {
-        options: ['danger', 'default', 'primary', 'secondary', 'warning'],
+        options: ['danger', 'primary', 'secondary', 'tertiary'],
         type: 'select',
       },
       description: 'The color of the button',
       table: {
-        defaultValue: { summary: `'default'` },
-        type: { summary: `'danger' | 'default' | 'primary' | 'secondary' | 'warning'` },
-      }
+        defaultValue: { summary: `'primary'` },
+        type: { summary: `'danger' | 'primary' | 'secondary' | 'tertiary'` },
+      },
     },
     disabled: {
       description: 'Whether the button is disabled',
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },
-      }
+      },
     },
     size: {
       control: {
@@ -51,8 +51,8 @@ export default {
       table: {
         defaultValue: { summary: `'medium'` },
         type: { summary: `'small' | 'medium' | 'large'` },
-      }
-    }
+      },
+    },
   },
   parameters: {
     controls: { expanded: true, sort: 'alpha' },
@@ -63,22 +63,15 @@ export default {
       page: docs,
     },
     options: {
-      isToolshown: true
+      isToolshown: true,
     },
   },
 };
 
 export const Default = ({ ariaLabel, buttonStyle, color, disabled, size }) => html`
-  <modus-button
-    aria-label=${ariaLabel}
-    button-style=${buttonStyle}
-    color=${color}
-    disabled=${disabled}
-    size=${size}>
-    Default
-  </modus-button>
+  <modus-button aria-label=${ariaLabel} button-style=${buttonStyle} color=${color} disabled=${disabled} size=${size}> Default </modus-button>
 `;
-Default.args = { ariaLabel: '', buttonStyle: 'fill', color: 'default', disabled: false, size: 'medium' };
+Default.args = { ariaLabel: '', buttonStyle: 'fill', color: 'primary', disabled: false, size: 'medium' };
 
 export const Borderless = ({ ariaLabel, buttonStyle, color, disabled, size }) => html`
   <modus-button

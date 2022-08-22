@@ -6,9 +6,15 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 
 ## Unreleased
 
+### Added
+- Barebones Modus Data Table
+
 ### Fixed
 
 - Modus Chips active state color is now blue
+- Remove unused Warning button and make Primary button the default
+- Modus Message color updates
+- Add border to Modus Modal header and footer
 
 ### Added
 

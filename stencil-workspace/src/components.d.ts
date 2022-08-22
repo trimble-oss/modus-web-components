@@ -6,6 +6,7 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
+import { ModusDataTableSortEvent, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 import { App } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { App as App1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
@@ -94,7 +95,7 @@ export namespace Components {
         /**
           * (optional) The color of the button.
          */
-        "color": 'danger' | 'default' | 'primary' | 'secondary' | 'warning';
+        "color": 'danger' | 'primary' | 'secondary' | 'tertiary';
         /**
           * (optional) Disables the button.
          */
@@ -181,6 +182,18 @@ export namespace Components {
           * (optional) The chip's value.
          */
         "value": string;
+    }
+    interface ModusDataTable {
+        "columns": string[] | TColumn[];
+        "data": TCell[][] | TRow[];
+        /**
+          * The size of the table.
+         */
+        "size"?: 'condensed' | 'standard';
+        /**
+          * Options for data table column sort.
+         */
+        "sortOptions"?: ModusTableSortOptions;
     }
     interface ModusDropdown {
         /**
@@ -790,6 +803,10 @@ export interface ModusChipCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusChipElement;
 }
+export interface ModusDataTableCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusDataTableElement;
+}
 export interface ModusDropdownCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusDropdownElement;
@@ -908,6 +925,12 @@ declare global {
     var HTMLModusChipElement: {
         prototype: HTMLModusChipElement;
         new (): HTMLModusChipElement;
+    };
+    interface HTMLModusDataTableElement extends Components.ModusDataTable, HTMLStencilElement {
+    }
+    var HTMLModusDataTableElement: {
+        prototype: HTMLModusDataTableElement;
+        new (): HTMLModusDataTableElement;
     };
     interface HTMLModusDropdownElement extends Components.ModusDropdown, HTMLStencilElement {
     }
@@ -1069,6 +1092,7 @@ declare global {
         "modus-card": HTMLModusCardElement;
         "modus-checkbox": HTMLModusCheckboxElement;
         "modus-chip": HTMLModusChipElement;
+        "modus-data-table": HTMLModusDataTableElement;
         "modus-dropdown": HTMLModusDropdownElement;
         "modus-file-dropzone": HTMLModusFileDropzoneElement;
         "modus-list": HTMLModusListElement;
@@ -1195,7 +1219,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The color of the button.
          */
-        "color"?: 'danger' | 'default' | 'primary' | 'secondary' | 'warning';
+        "color"?: 'danger' | 'primary' | 'secondary' | 'tertiary';
         /**
           * (optional) Disables the button.
          */
@@ -1298,6 +1322,22 @@ declare namespace LocalJSX {
           * (optional) The chip's value.
          */
         "value"?: string;
+    }
+    interface ModusDataTable {
+        "columns"?: string[] | TColumn[];
+        "data"?: TCell[][] | TRow[];
+        /**
+          * An event that fires on column sort.
+         */
+        "onSort"?: (event: ModusDataTableCustomEvent<ModusDataTableSortEvent>) => void;
+        /**
+          * The size of the table.
+         */
+        "size"?: 'condensed' | 'standard';
+        /**
+          * Options for data table column sort.
+         */
+        "sortOptions"?: ModusTableSortOptions;
     }
     interface ModusDropdown {
         /**
@@ -1962,6 +2002,7 @@ declare namespace LocalJSX {
         "modus-card": ModusCard;
         "modus-checkbox": ModusCheckbox;
         "modus-chip": ModusChip;
+        "modus-data-table": ModusDataTable;
         "modus-dropdown": ModusDropdown;
         "modus-file-dropzone": ModusFileDropzone;
         "modus-list": ModusList;
@@ -2002,6 +2043,7 @@ declare module "@stencil/core" {
             "modus-card": LocalJSX.ModusCard & JSXBase.HTMLAttributes<HTMLModusCardElement>;
             "modus-checkbox": LocalJSX.ModusCheckbox & JSXBase.HTMLAttributes<HTMLModusCheckboxElement>;
             "modus-chip": LocalJSX.ModusChip & JSXBase.HTMLAttributes<HTMLModusChipElement>;
+            "modus-data-table": LocalJSX.ModusDataTable & JSXBase.HTMLAttributes<HTMLModusDataTableElement>;
             "modus-dropdown": LocalJSX.ModusDropdown & JSXBase.HTMLAttributes<HTMLModusDropdownElement>;
             "modus-file-dropzone": LocalJSX.ModusFileDropzone & JSXBase.HTMLAttributes<HTMLModusFileDropzoneElement>;
             "modus-list": LocalJSX.ModusList & JSXBase.HTMLAttributes<HTMLModusListElement>;

@@ -1,0 +1,108 @@
+import { Story } from "@storybook/addon-docs";
+
+# Data Table
+
+---
+
+[Modus Data Table](https://modus.trimble.com/components/tables/) web components are wrappers around the HTML table element.
+They organize information in a way that’s easy to scan, so that users can look for patterns and insights.
+They are referenced using the `<modus-data-table>` custom HTML element.
+
+### Default
+
+<Story id="components-data-table--default" height={'250px'}/>
+
+```html
+<div style="width: 500px">
+  <modus-data-table />
+</div>
+<script>
+    document.querySelector('modus-data-table').columns = ['Name', 'Age', 'Contacted'];
+    document.querySelector('modus-data-table').data = [
+        ['John', 25, false],
+        ['Jane', 26, false],
+        ['Joe', 27, true]
+    ];
+</script>
+```
+
+### Implementation Details
+- The table `columns` property accepts an array of strings, or an array of objects.
+  - Defining the columns with objects allows you to define extra properties on the column/column cells.
+- The table `data` property accepts either a 2D array of primitive types (`string`, `number`, or `boolean`) or an array of objects.
+  - Note: the objects in `data` get their property names mapped to each column `id`.
+- The table needs a unique `id` for each column that maps to each cell in that column. If it is not provided, the table will generate a unique id for each column.
+
+
+### Inputs
+Refer to the **Default** example above to see how to define simple `columns` and `data` in the table.
+
+To define columns and data in the table *using objects*:
+```html
+<modus-data-table />
+<script>
+    document.querySelector('modus-data-table').columns = [
+        { display: 'Name', id: 'name', width: '50%' },
+        { display: 'Age', id: 'age', align: 'right' },
+        { display: 'Contacted', id: 'contacted' }
+    ];
+
+    const john = { name: 'John', age: 25, contacted: false };
+    const jane = { name: 'Jane', age: 26, contacted: false };
+    const joe = { name: 'Joe', age: 27, contacted: true };
+    document.querySelector('modus-data-table').data = [john, jane, joe];
+</script>
+```
+
+### Sorting
+- The table uses a tri-state for its sorting:
+  - `none`: no sorting is applied
+  - `asc`: ascending sort
+  - `desc`: descending sort
+- The table sorting options can be set with the optional `sortOptions` property. The property accepts a `ModusTableSortOptions` object.
+  - The object defines whether the table can be sorted on header click, and if the sort is done on the client or server-side.
+- If the table is sortable, it will output the `sort` event on header click. This event's detail is a `ModusDataTableSortEvent` object.
+- If the table's `serverSide` sort option is `false`, it will sort the columns on the client-side. Otherwise, it is up to the consumer to update the table's `data` property with the sorted data.
+
+### Types
+```ts
+type TCell = number | string | boolean;
+type TRow = { [key: string]: TCell };
+
+interface TColumn {
+  align?: 'left' | 'right';
+  display: string;
+  id?: string;
+  readonly?: boolean;
+  width?: string;
+}
+
+interface ModusDataTableSort {
+  columnId: string;
+  direction: 'asc' | 'desc' | 'none';
+}
+
+interface ModusDataTableSortEvent extends ModusDataTableSort {}
+
+interface ModusTableSortOptions {
+  canSort: boolean;
+  serverSide: boolean;
+}
+```
+
+### Properties
+
+| Property      | Attribute | Description                         | Type                        | Default                                            |
+| ------------- | --------- | ----------------------------------- | --------------------------- | -------------------------------------------------- |
+| `columns`     | --        |                                     | `TColumn[], string[]`     | `undefined`                                        |
+| `data`        | --        |                                     | `TCell[][], TRow[]`       | `undefined`                                        |
+| `size`        | `size`    | The size of the table.              | `'condensed', 'standard'` | `'standard'`                                       |
+| `sortOptions` | --        | Options for data table column sort. | `ModusTableSortOptions`     | `{     canSort: false,     serverSide: false,   }` |
+
+
+### Events
+
+| Event  | Description                         | Type                                   |
+| ------ | ----------------------------------- | -------------------------------------- |
+| `sort` | An event that fires on column sort. | `CustomEvent<ModusDataTableSortEvent>` |
+
