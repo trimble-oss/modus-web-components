@@ -34,7 +34,7 @@ export class ModusCheckbox {
 
   classBySize: Map<string, string> = new Map([
     ['small', 'small'],
-    ['medium', 'medium']
+    ['medium', 'medium'],
   ]);
 
   @Listen('keydown')
@@ -43,12 +43,6 @@ export class ModusCheckbox {
       case 'Enter':
         this.handleCheckboxClick();
         break;
-    }
-  }
-
-  @Listen('keyup')
-  elementKeyupHandler(event: KeyboardEvent): void {
-    switch (event.code) {
       case 'Space':
         this.handleCheckboxClick();
         break;
@@ -60,7 +54,9 @@ export class ModusCheckbox {
   }
 
   handleCheckboxClick(): void {
-    if (this.disabled) { return; }
+    if (this.disabled) {
+      return;
+    }
 
     this.updateChecked();
     this.checkboxClick.emit(this.checked);
@@ -73,19 +69,26 @@ export class ModusCheckbox {
   }
 
   render(): unknown {
-    const className = `modus-checkbox ${this.classBySize?.get(this.size)}`;
+    const className = `modus-checkbox ${this.classBySize.get(this.size)}`;
+    const tabIndexValue = this.disabled ? -1 : 0;
 
     return (
-      <div class={className} onClick={() => this.handleCheckboxClick()} tabIndex={0}>
+      <div
+        class={className}
+        onClick={() => {
+          this.handleCheckboxClick();
+        }}
+        tabIndex={tabIndexValue}>
         <div class={`${this.checked || this.indeterminate ? 'checkbox blue-background checked' : 'checkbox'} ${this.disabled ? 'disabled' : ''}`}>
-          {this.indeterminate
-            ? <div class={'checkmark checked'}>
-                <IconIndeterminate color="#FFFFFF" size="24" />
-              </div>
-            : <div class={this.checked ? 'checkmark checked' : 'checkmark'}>
-                <IconCheck color="#FFFFFF" size="24" />
-              </div>
-          }
+          {this.indeterminate ? (
+            <div class={'checkmark checked'}>
+              <IconIndeterminate color="#FFFFFF" size="24" />
+            </div>
+          ) : (
+            <div class={this.checked ? 'checkmark checked' : 'checkmark'}>
+              <IconCheck color="#FFFFFF" size="24" />
+            </div>
+          )}
         </div>
         <input
           aria-checked={this.checked}
@@ -93,9 +96,8 @@ export class ModusCheckbox {
           aria-label={this.ariaLabel}
           checked={this.checked}
           disabled={this.disabled}
-          ref={(el) => this.checkboxInput = el as HTMLInputElement}
-          type="checkbox">
-        </input>
+          ref={(el) => (this.checkboxInput = el as HTMLInputElement)}
+          type="checkbox"></input>
         {this.label ? <label class={this.disabled ? 'disabled' : null}>{this.label}</label> : null}
       </div>
     );

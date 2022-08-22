@@ -33,11 +33,12 @@ describe('modus-tree-view-item', () => {
      <modus-tree-view-item label="test" node-id="1">
        <mock:shadow-root>
          <li aria-disabled="false" aria-level="1" aria-selected="false" class="tree-item-container" role="treeitem">
-           <div class="tree-item standard">
+           <div class="tree-item standard" tabindex="0">
             <div class="icon-slot drag-icon">
-                <slot name="drag-icon"></slot>
+                <slot name="dragIcon"></slot>
               </div>
-              <div class="icon-slot" style="padding-left: 0rem;"></div>
+              <div aria-disabled="true" style="padding-left: 0rem;"></div>
+              <div class="icon-slot" tabindex="-1"></div>
               <div aria-level="1" role="heading">
                 <div class="label-slot" role="button">
                   test

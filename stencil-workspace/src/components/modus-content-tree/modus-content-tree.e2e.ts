@@ -36,24 +36,6 @@ describe('modus-tree-view-item', () => {
   });
 
   // verify props
-  it('renders changes to the disabled prop set at the root level', async () => {
-    const page = await newE2EPage();
-
-    await page.setContent(`
-    <modus-tree-view>
-      <modus-tree-view-item node-Id="1" label="Node one">
-      </modus-tree-view-item>
-    </modus-tree-view>`);
-
-  const component = await page.find('modus-tree-view');
-  const element = await page.find('modus-tree-view-item >>> li > div.tree-item');
-  expect(element).not.toHaveClass('disabled');
-
-  component.setProperty('disabled', true);
-  await page.waitForChanges();
-  expect(element).toHaveClass('disabled');
-  });
-
   it('renders changes to the disabled prop set at the item level', async () => {
     const page = await newE2EPage();
 
@@ -67,7 +49,7 @@ describe('modus-tree-view-item', () => {
   const element = await page.find('modus-tree-view-item >>> li > div.tree-item');
   expect(element).not.toHaveClass('disabled');
 
-  component.setProperty('disabled', true);
+  component.setProperty('disabled', 'true');
   await page.waitForChanges();
   expect(element).toHaveClass('disabled');
   });
@@ -278,8 +260,10 @@ describe('modus-tree-view-item', () => {
     expect(element1).not.toHaveClass('selected');
     expect(element2).not.toHaveClass('selected');
 
-    await item1.click();
-    await item2.click();
+    item1.setProperty('selected', true);
+    await page.waitForChanges();
+    item2.setProperty('selected', true);
+    await page.waitForChanges();
 
     expect(element1).toHaveClass('selected');
     expect(element2).toHaveClass('selected');
