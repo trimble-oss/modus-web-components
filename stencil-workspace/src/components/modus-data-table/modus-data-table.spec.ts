@@ -13,7 +13,7 @@ describe('modus-data-table', () => {
     expect(root).toEqualHtml(`
       <modus-data-table>
         <mock:shadow-root>
-          <table class="size-standard">
+          <table class="borderless cell-borderless size-large">
             <colgroup></colgroup>
             <thead>
               <tr></tr>
@@ -27,11 +27,11 @@ describe('modus-data-table', () => {
 
   it('should get the correct class by size', async () => {
     const table = new ModusDataTable();
-    let className = table.classBySize.get(table.size);
-    expect(className).toEqual('size-standard');
+    let className = table.classBySize.get(table.displayOptions.size);
+    expect(className).toEqual('size-large');
 
-    className = table.classBySize.get('condensed');
-    expect(className).toEqual('size-condensed');
+    className = table.classBySize.get('small');
+    expect(className).toEqual('size-small');
   });
 
   it('should convert column prop as string array to TColumn array', async () => {

@@ -36,15 +36,15 @@ describe('modus-data-table', () => {
     expect(row).toBeTruthy();
   });
 
-  it('renders changes to size prop', async () => {
+  it('renders changes to displayOptions size prop', async () => {
     const component = await page.find('modus-data-table');
-    let size = await page.find('modus-data-table >>> .size-standard');
+    let size = await page.find('modus-data-table >>> .size-large');
     expect(size).toBeTruthy();
 
     component.setProperty('columns', ['Col1']);
-    component.setProperty('size', 'condensed');
+    component.setProperty('displayOptions', { size: 'small' });
     await page.waitForChanges();
-    size = await page.find('modus-data-table >>> .size-condensed');
+    size = await page.find('modus-data-table >>> .size-small');
     expect(size).toBeTruthy();
   });
 
@@ -625,5 +625,28 @@ describe('modus-data-table', () => {
     await page.waitForChanges();
 
     expect(cellLinkClickEvent).toHaveReceivedEventTimes(1);
+  });
+
+  it('should render changes to displayOptions prop', async () => {
+    const component = await page.find('modus-data-table');
+    let borderless = await page.find('modus-data-table >>> .borderless');
+    let cellBorderless = await page.find('modus-data-table >>> .cell-borderless');
+    let rowStripe = await page.find('modus-data-table >>> .row-stripe');
+    expect(borderless).toBeTruthy();
+    expect(cellBorderless).toBeTruthy();
+    expect(rowStripe).toBeFalsy();
+
+    component.setProperty('displayOptions', {
+      borderless: false,
+      cellBorderless: false,
+      rowStripe: true
+    });
+    await page.waitForChanges();
+    borderless = await page.find('modus-data-table >>> .borderless');
+    cellBorderless = await page.find('modus-data-table >>> .cell-borderless');
+    rowStripe = await page.find('modus-data-table >>> .row-stripe');
+    expect(borderless).toBeFalsy();
+    expect(cellBorderless).toBeFalsy();
+    expect(rowStripe).toBeTruthy();
   });
 });

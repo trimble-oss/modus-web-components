@@ -28,6 +28,13 @@ export interface TColumn {
   width?: string;
 }
 
+export interface ModusDataTableDisplayOptions {
+  borderless?: boolean;
+  cellBorderless?: boolean;
+  rowStripe?: boolean;
+  size?: 'small' | 'large';
+}
+
 export interface ModusTableSelectionOptions {
   canSelect: boolean;
   checkboxSelection: boolean;

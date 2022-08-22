@@ -6,7 +6,7 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
-import { ModusDataTableCellLink, ModusDataTableSortEvent, ModusTableSelectionOptions, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
+import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableSortEvent, ModusTableSelectionOptions, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 import { App } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { App as App1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
@@ -187,13 +187,13 @@ export namespace Components {
         "columns": string[] | TColumn[];
         "data": TCell[][] | TRow[];
         /**
+          * Options for data table display.
+         */
+        "displayOptions"?: ModusDataTableDisplayOptions;
+        /**
           * Options for data table item selection.
          */
         "selectionOptions"?: ModusTableSelectionOptions;
-        /**
-          * The size of the table.
-         */
-        "size"?: 'condensed' | 'standard';
         /**
           * Options for data table column sort.
          */
@@ -1339,6 +1339,10 @@ declare namespace LocalJSX {
         "columns": string[] | TColumn[];
         "data": TCell[][] | TRow[];
         /**
+          * Options for data table display.
+         */
+        "displayOptions"?: ModusDataTableDisplayOptions;
+        /**
           * An event that fires on cell link click.
          */
         "onCellLinkClick"?: (event: ModusDataTableCustomEvent<ModusDataTableCellLink>) => void;
@@ -1358,10 +1362,6 @@ declare namespace LocalJSX {
           * Options for data table item selection.
          */
         "selectionOptions"?: ModusTableSelectionOptions;
-        /**
-          * The size of the table.
-         */
-        "size"?: 'condensed' | 'standard';
         /**
           * Options for data table column sort.
          */

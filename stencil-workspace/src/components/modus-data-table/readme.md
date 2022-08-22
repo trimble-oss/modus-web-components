@@ -7,13 +7,13 @@
 
 ## Properties
 
-| Property               | Attribute | Description                            | Type                         | Default                                                     |
-| ---------------------- | --------- | -------------------------------------- | ---------------------------- | ----------------------------------------------------------- |
-| `columns` _(required)_ | --        |                                        | `TColumn[] \| string[]`      | `undefined`                                                 |
-| `data` _(required)_    | --        |                                        | `TCell[][] \| TRow[]`        | `undefined`                                                 |
-| `selectionOptions`     | --        | Options for data table item selection. | `ModusTableSelectionOptions` | `{     canSelect: false,     checkboxSelection: false,   }` |
-| `size`                 | `size`    | The size of the table.                 | `"condensed" \| "standard"`  | `'standard'`                                                |
-| `sortOptions`          | --        | Options for data table column sort.    | `ModusTableSortOptions`      | `{     canSort: false,     serverSide: false,   }`          |
+| Property               | Attribute | Description                            | Type                           | Default                                                                                         |
+| ---------------------- | --------- | -------------------------------------- | ------------------------------ | ----------------------------------------------------------------------------------------------- |
+| `columns` _(required)_ | --        |                                        | `TColumn[] \| string[]`        | `undefined`                                                                                     |
+| `data` _(required)_    | --        |                                        | `TCell[][] \| TRow[]`          | `undefined`                                                                                     |
+| `displayOptions`       | --        | Options for data table display.        | `ModusDataTableDisplayOptions` | `{     borderless: true,     cellBorderless: true,     rowStripe: false,     size: 'large'   }` |
+| `selectionOptions`     | --        | Options for data table item selection. | `ModusTableSelectionOptions`   | `{     canSelect: false,     checkboxSelection: false,   }`                                     |
+| `sortOptions`          | --        | Options for data table column sort.    | `ModusTableSortOptions`        | `{     canSort: false,     serverSide: false,   }`                                              |
 
 
 ## Events
