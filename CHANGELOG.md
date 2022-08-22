@@ -6,6 +6,8 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 
 ## Unreleased
 
+## 0.1.12 - 2022-22-08
+
 ### Added
 
 - Barebones Modus Data Table
