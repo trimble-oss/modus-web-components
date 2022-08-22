@@ -6,11 +6,19 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 
 ## Unreleased
 
+### Added
+- Barebones Modus Data Table
+
 ### Fixed
 
 - Modus Chips active state color is now blue
 - Remove unused Warning button and make Primary button the default
 - Modus Message color updates
+- Add border to Modus Modal header and footer
+
+### Added
+
+- Enabled keyboard interactions for `Content Tree` components.
 
 ### Added
 
@@ -28,6 +36,13 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 ### Added
 
 - Added `role="button"` and `aria-label="Close"` to Modal Close button.
+- Created new `Content Tree` components,
+  - `modus-tree-view` is the root tag that manages context for all the tree items.
+  - `modus-tree-view-item` is the item tag which is used to render each node in the tree.
+
+### Removed
+
+- Replaced `modus-content-tree-item` with the above content tree components.
 
 ### Fixed
 

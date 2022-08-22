@@ -6,6 +6,7 @@ export default {
   title: 'Components/Radio Group',
   parameters: {
     docs: {
+      inlineStories: false,
       page: docs,
     },
     options: {

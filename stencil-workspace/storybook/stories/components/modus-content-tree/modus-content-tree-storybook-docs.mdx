@@ -10,48 +10,80 @@ It is located on the left side of the screen and cannot be combined with Side Na
 - Content tree can be created using the components `modus-tree-view` in the root and `modus-tree-view-item` for nodes.
 - The `modus-tree-view-item` takes `nodeId` which should be a unique number and the `label` prop to display the node text.
 - Clicking on collapse/expand button expands or collapse a tree view item and clicking on the node selects it.
+- By default multiple items selection is disabled. The prop `multi-selection` lets multiple items to be selected using `Shift + Up/Down arrow` and `Ctrl + click`.
+- Checkbox selection can be enabled using the prop `checkbox-selection` and to let multiple checkbox selection use the prop `multi-checkbox-selection`.
+- This component utilizes the slot element, allowing you to render custom expand icon, collapse icon, drag icon, item icon and the slot names are `expandIcon`, `collapseIcon`, `dragIcon`, `itemIcon`.
+- Every item and the elements inside it such as drag icon, expand & collapse icon and the checkbox are accessible through keyboard. `Tab` key moves focus to the next focusable element and `Shift + Tab` moves focus to the previous focusable element.
 
 ### Default
 
-<modus-tree-view multi-Selection="true" checkbox-Selection="true" multi-Checkbox-Selection="true">
-  <modus-tree-view-item node-Id="1" label="Node root">
-    <modus-tree-view-item node-Id="2" label="Node one"></modus-tree-view-item>
-    <modus-tree-view-item node-Id="3" label="Node two">
-      <modus-tree-view-item node-Id="4" label="Node four"></modus-tree-view-item>
-      <modus-tree-view-item node-Id="5" label="Node five"></modus-tree-view-item>
-    </modus-tree-view-item>
-    <modus-tree-view-item node-Id="6" label="Node three"></modus-tree-view-item>
+<modus-tree-view multi-selection="true" checkbox-selection="true" multi-checkbox-selection="true">
+  <modus-tree-view-item node-Id="1" label="Inbox">
+    <modus-tree-view-item node-Id="2" label="Personal"></modus-tree-view-item>
+    <modus-tree-view-item node-Id="3" label="Work"></modus-tree-view-item>
+    <modus-tree-view-item node-Id="4" label="Social"></modus-tree-view-item>
+    <modus-tree-view-item node-Id="5" label="More ..."></modus-tree-view-item>
   </modus-tree-view-item>
-  <modus-tree-view-item node-Id="7" label="Node seven"></modus-tree-view-item>
-  <modus-tree-view-item node-Id="8" label="Node eight"></modus-tree-view-item>
+  <modus-tree-view-item node-Id="6" label="Archived">
+    <modus-tree-view-item node-Id="7" label="Folder1">
+      <modus-tree-view-item node-Id="8" label="File1"></modus-tree-view-item>
+      <modus-tree-view-item node-Id="9" label="Folder2" disabled="true">
+        <modus-tree-view-item node-Id="10" label="File2"></modus-tree-view-item>
+      </modus-tree-view-item>
+      <modus-tree-view-item node-Id="11" label="File3"></modus-tree-view-item>
+    </modus-tree-view-item>
+  </modus-tree-view-item>
+  <modus-tree-view-item node-Id="12" label="Spam"></modus-tree-view-item>
 </modus-tree-view>
 
 ```html
-<modus-tree-view multi-Selection="true" checkbox-Selection="true" multi-Checkbox-Selection="true">
-  <modus-tree-view-item node-Id="1" label="Node root">
-    <modus-tree-view-item node-Id="2" label="Node one"> </modus-tree-view-item>
-    <modus-tree-view-item node-Id="3" label="Node two">
-      <modus-tree-view-item node-Id="4" label="Node four"> </modus-tree-view-item>
-      <modus-tree-view-item node-Id="5" label="Node five"> </modus-tree-view-item>
-    </modus-tree-view-item>
-    <modus-tree-view-item node-Id="6" label="Node three"> </modus-tree-view-item>
+<modus-tree-view multi-selection="true" checkbox-selection="true" multi-checkbox-selection="true">
+  <modus-tree-view-item node-Id="1" label="Inbox">
+    <modus-tree-view-item node-Id="2" label="Personal"></modus-tree-view-item>
+    <modus-tree-view-item node-Id="3" label="Work"></modus-tree-view-item>
+    <modus-tree-view-item node-Id="4" label="Social"></modus-tree-view-item>
+    <modus-tree-view-item node-Id="5" label="More ..."></modus-tree-view-item>
   </modus-tree-view-item>
-  <modus-tree-view-item node-Id="7" label="Node seven"> </modus-tree-view-item>
-  <modus-tree-view-item node-Id="8" label="Node eight"> </modus-tree-view-item>
+  <modus-tree-view-item node-Id="6" label="Archived">
+    <modus-tree-view-item node-Id="7" label="Folder1">
+      <modus-tree-view-item node-Id="8" label="File1"></modus-tree-view-item>
+      <modus-tree-view-item node-Id="9" label="Folder2" disabled="true">
+        <modus-tree-view-item node-Id="10" label="File2"></modus-tree-view-item>
+      </modus-tree-view-item>
+      <modus-tree-view-item node-Id="11" label="File3"></modus-tree-view-item>
+    </modus-tree-view-item>
+  </modus-tree-view-item>
+  <modus-tree-view-item node-Id="12" label="Spam"></modus-tree-view-item>
 </modus-tree-view>
 ```
+
+### Keyboard Navigation
+
+| Key                   | Description                                                                                                        |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Arrow Left            | Collapses the item                                                                                                 |
+| Arrow Right           | Expands the item                                                                                                   |
+| Arrow Up              | Moves to the previous focusable item and focus moves to a child if the current or previous parent item is expanded |
+| Arrow Down            | Moves to the next focusable item and focus moves to a child if the current or next parent item is expanded         |
+| Enter                 | Selects the item if it is in focus and toggles the expansion state if the focus is on expand/collapse icon         |
+| Space                 | Expands/Collapses the item when it is in focus                                                                     |
+| Shift + Arrow Up/Down | If `multi-selection` is true, it performs multiple selection starting from the item that is already selected       |
+| Ctrl + click          | If `multi-selection` is true, it performs multiple selection on the clicked items                                  |
 
 ### Properties
 
 ##### Modus Tree View
 
-| Name                     | Description                                  | Type    | Options                          | Default Value | Required                                     |
-| ------------------------ | -------------------------------------------- | ------- | -------------------------------- | ------------- | -------------------------------------------- |
-| checkbox-selection       | Enables checkbox selection on each tree item | boolean |                                  |               |                                              |
-| disabled                 | Disables each tree item                      | boolean |                                  |               |                                              |
-| multi-checkbox-selection | Enables multiple checkbox selection          | boolean |                                  |               |                                              |
-| multi-selection          | Enables multiple tree items selection        | boolean |                                  |               |                                              |
-| size                     | The default size of all tree items           | string  | 'condensed', 'standard', 'large' | standard      | <span class="material-icons">&#10004;</span> |
+| Name                     | Description                                  | Type     | Options                          | Default Value | Required                                     |
+| ------------------------ | -------------------------------------------- | -------- | -------------------------------- | ------------- | -------------------------------------------- |
+| checkbox-selection       | Enables checkbox selection on each tree item | boolean  |                                  |               |                                              |
+| checked-items            | Checked tree items by default                | string[] |                                  |               |                                              |
+| disabled                 | Disables each tree item                      | boolean  |                                  |               |                                              |
+| expanded-items           | Expanded tree items by default               | string[] |                                  |               |                                              |
+| multi-checkbox-selection | Enables multiple checkbox selection          | boolean  |                                  |               |                                              |
+| multi-selection          | Enables multiple tree items selection        | boolean  |                                  |               |                                              |
+| selected-items           | Selected tree items by default               | string[] |                                  |               |                                              |
+| size                     | The default size of all tree items           | string   | 'condensed', 'standard', 'large' | standard      | <span class="material-icons">&#10004;</span> |
 
 ##### Modus Tree View Item
 

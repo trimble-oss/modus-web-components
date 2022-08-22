@@ -9,6 +9,7 @@ export default {
       handles: ['closed'],
     },
     docs: {
+      inlineStories: false,
       page: docs,
     },
     options: {
