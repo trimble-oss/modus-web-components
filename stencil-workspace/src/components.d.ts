@@ -619,6 +619,10 @@ export namespace Components {
          */
         "ariaLabel": string;
         /**
+          * (optional) Sets autofocus on the input.
+         */
+        "autoFocusInput": boolean;
+        /**
           * (optional) Whether the input has a clear button.
          */
         "clearable": boolean;
@@ -630,6 +634,10 @@ export namespace Components {
           * (optional) The input's error state text.
          */
         "errorText": string;
+        /**
+          * Focus the input.
+         */
+        "focusInput": () => Promise<void>;
         /**
           * (optional) The input's helper text displayed below the input.
          */
@@ -1812,6 +1820,10 @@ declare namespace LocalJSX {
           * (optional) The input's aria-label.
          */
         "ariaLabel"?: string;
+        /**
+          * (optional) Sets autofocus on the input.
+         */
+        "autoFocusInput"?: boolean;
         /**
           * (optional) Whether the input has a clear button.
          */

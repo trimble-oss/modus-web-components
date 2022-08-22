@@ -20,6 +20,10 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 
 - Enabled keyboard interactions for `Content Tree` components.
 
+### Added
+
+- Added a prop `auto-focus-input` and a public method `focusInput` to `modus-text-input` component.
+
 ## 0.1.11 - 2022-05-08
 
 ### Fixed

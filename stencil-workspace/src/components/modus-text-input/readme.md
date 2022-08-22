@@ -10,6 +10,7 @@
 | Property            | Attribute             | Description                                                   | Type                                                                        | Default     |
 | ------------------- | --------------------- | ------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------- |
 | `ariaLabel`         | `aria-label`          | (optional) The input's aria-label.                            | `string`                                                                    | `undefined` |
+| `autoFocusInput`    | `auto-focus-input`    | (optional) Sets autofocus on the input.                       | `boolean`                                                                   | `undefined` |
 | `clearable`         | `clearable`           | (optional) Whether the input has a clear button.              | `boolean`                                                                   | `true`      |
 | `disabled`          | `disabled`            | (optional) Whether the input is disabled.                     | `boolean`                                                                   | `undefined` |
 | `errorText`         | `error-text`          | (optional) The input's error state text.                      | `string`                                                                    | `undefined` |
@@ -33,6 +34,19 @@
 | Event         | Description                                | Type                  |
 | ------------- | ------------------------------------------ | --------------------- |
 | `valueChange` | An event that fires on input value change. | `CustomEvent<string>` |
+
+
+## Methods
+
+### `focusInput() => Promise<void>`
+
+Focus the input.
+
+#### Returns
+
+Type: `Promise<void>`
+
+
 
 
 ----------------------------------------------
