@@ -7,7 +7,10 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 ## Unreleased
 
 ### Added
+
 - Barebones Modus Data Table
+- Enabled keyboard interactions for `Content Tree` components.
+- Added a prop `auto-focus-input` and a public method `focusInput` to `modus-text-input` component.
 
 ### Fixed
 
@@ -15,14 +18,7 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 - Remove unused Warning button and make Primary button the default
 - Modus Message color updates
 - Add border to Modus Modal header and footer
-
-### Added
-
-- Enabled keyboard interactions for `Content Tree` components.
-
-### Added
-
-- Added a prop `auto-focus-input` and a public method `focusInput` to `modus-text-input` component.
+- Final breadcrumb item now has `aria-current="page"`
 
 ## 0.1.11 - 2022-05-08
 

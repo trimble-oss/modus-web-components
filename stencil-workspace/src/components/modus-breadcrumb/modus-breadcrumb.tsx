@@ -25,18 +25,22 @@ export class ModusBreadcrumb {
     return (
       <nav aria-label={this.ariaLabel} role="navigation">
         <ol>
-          {
-            this.crumbs.map((crumb, index) =>
-              <li key={crumb.id}>
-                {index < this.crumbs.length - 1
-                  ? <span class="crumb">
-                      <a href="src/components/modus-breadcrumb/modus-breadcrumb#" onClick={() => this.crumbClick.emit(crumb)}>{crumb.display}</a>
-                      <span class="divider">{'>'}</span>
-                    </span>
-                  : <span class="last-crumb">{crumb.display}</span>
-                }
-              </li>
-          )}
+          {this.crumbs.map((crumb, index) => (
+            <li key={crumb.id}>
+              {index < this.crumbs.length - 1 ? (
+                <span class="crumb">
+                  <a href="src/components/modus-breadcrumb/modus-breadcrumb#" onClick={() => this.crumbClick.emit(crumb)}>
+                    {crumb.display}
+                  </a>
+                  <span class="divider">{'>'}</span>
+                </span>
+              ) : (
+                <span class="last-crumb" aria-current="page">
+                  {crumb.display}
+                </span>
+              )}
+            </li>
+          ))}
         </ol>
       </nav>
     );
