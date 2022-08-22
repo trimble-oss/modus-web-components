@@ -74,6 +74,13 @@ To define columns and data in the table *using objects*:
   - The options define whether the table rows can be selected, and if the selection uses a checkbox column.
 - When a selection changes, the `selection` event fires detailing the currently selected rows' IDs.
 
+### Display
+- The table's display can be configured with the `displayOptions` prop. The property accepts a `ModusTableDisplayOptions` object:
+  - `borderless`: Whether the table has a border. Defaults to true.
+  - `cellBorderless`: Whether the table cells have a border. Default to true.
+  - `rowStripe`: Whether the table rows have a stripe. Defaults to false.
+  - `size`: The table's size. Defaults to 'large'.
+
 ### Types
 ```ts
 type TCell = number | string | boolean | ModusDataTableCellLink;
@@ -104,6 +111,13 @@ interface ModusDataTableSort {
 
 interface ModusDataTableSortEvent extends ModusDataTableSort {}
 
+interface ModusDataTableDisplayOptions {
+  borderless?: boolean;
+  cellBorderless?: boolean;
+  rowStripe?: boolean;
+  size?: 'small' | 'large';
+}
+
 interface ModusTableSelectionOptions {
   canSelect: boolean;
   checkboxSelection: boolean;
@@ -117,13 +131,13 @@ interface ModusTableSortOptions {
 
 ### Properties
 
-| Property               | Attribute | Description                            | Type                         | Default                                                     |
-| ---------------------- | --------- | -------------------------------------- | ---------------------------- | ----------------------------------------------------------- |
-| `columns` _(required)_ | --        |                                        | `TColumn[], string[]`        | `undefined`                                                 |
-| `data` _(required)_    | --        |                                        | `TCell[][], TRow[]`          | `undefined`                                                 |
-| `selectionOptions`     | --        | Options for data table item selection. | `ModusTableSelectionOptions` | `{     canSelect: false,     checkboxSelection: false,   }` |
-| `size`                 | `size`    | The size of the table.                 | `"condensed", "standard"`    | `'standard'`                                                |
-| `sortOptions`          | --        | Options for data table column sort.    | `ModusTableSortOptions`      | `{     canSort: false,     serverSide: false,   }`          |
+| Property               | Attribute | Description                            | Type                           | Default                                                                                         |
+| ---------------------- | --------- | -------------------------------------- | ------------------------------ | ----------------------------------------------------------------------------------------------- |
+| `columns` _(required)_ | --        |                                        | `TColumn[] | string[]`        | `undefined`                                                                                     |
+| `data` _(required)_    | --        |                                        | `TCell[][] | TRow[]`          | `undefined`                                                                                     |
+| `displayOptions`       | --        | Options for data table display.        | `ModusDataTableDisplayOptions` | `{     borderless: true,     cellBorderless: true,     rowStripe: false,     size: 'large'   }` |
+| `selectionOptions`     | --        | Options for data table item selection. | `ModusTableSelectionOptions`   | `{     canSelect: false,     checkboxSelection: false,   }`                                     |
+| `sortOptions`          | --        | Options for data table column sort.    | `ModusTableSortOptions`        | `{     canSort: false,     serverSide: false,   }`                                              |
 
 
 ### Events

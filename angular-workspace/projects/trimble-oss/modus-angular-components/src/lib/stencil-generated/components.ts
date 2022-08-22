@@ -270,13 +270,13 @@ export declare interface ModusDataTable extends Components.ModusDataTable {
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['columns', 'data', 'selectionOptions', 'size', 'sortOptions']
+  inputs: ['columns', 'data', 'displayOptions', 'selectionOptions', 'sortOptions']
 })
 @Component({
   selector: 'modus-data-table',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['columns', 'data', 'selectionOptions', 'size', 'sortOptions']
+  inputs: ['columns', 'data', 'displayOptions', 'selectionOptions', 'sortOptions']
 })
 export class ModusDataTable {
   protected el: HTMLElement;

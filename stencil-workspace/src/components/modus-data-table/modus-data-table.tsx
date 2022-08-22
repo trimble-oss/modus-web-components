@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 import { Component, Event, EventEmitter, h, Prop, State, Watch } from '@stencil/core';
 import { ModusDataTableUtilities } from './modus-data-table.utilities';
-import { TCell, TColumn, TRow, ModusTableSortOptions, ModusDataTableSort, ModusDataTableSortEvent, ModusTableSelectionOptions, ModusDataTableCellLink } from './modus-data-table.models';
+import { TCell, TColumn, TRow, ModusTableSortOptions, ModusDataTableSort, ModusDataTableSortEvent, ModusTableSelectionOptions, ModusDataTableCellLink, ModusDataTableDisplayOptions } from './modus-data-table.models';
 import { ModusDataTableHeader } from './parts/modus-data-table-header';
 import { ModusDataTableCellLinkPart } from './parts/modus-data-table-cell-link';
 
@@ -20,8 +20,13 @@ export class ModusDataTable {
     this.originalData = this.originalData ?? ModusDataTableUtilities.convertToTRows(oldValue, this.columns);
   }
 
-  /** The size of the table. */
-  @Prop() size?: 'condensed' | 'standard' = 'standard';
+  /** Options for data table display. */
+  @Prop() displayOptions?: ModusDataTableDisplayOptions = {
+    borderless: true,
+    cellBorderless: true,
+    rowStripe: false,
+    size: 'large'
+  };
 
   /** Options for data table item selection. */
   @Prop() selectionOptions?: ModusTableSelectionOptions = {
@@ -54,8 +59,8 @@ export class ModusDataTable {
   };
 
   classBySize: Map<string, string> = new Map([
-    ['condensed', 'size-condensed'],
-    ['standard', 'size-standard'],
+    ['small', 'size-small'],
+    ['large', 'size-large'],
   ]);
   originalData: TRow[];
 
@@ -153,7 +158,12 @@ export class ModusDataTable {
   }
 
   render(): unknown {
-    const className = `${this.classBySize.get(this.size)}`;
+    const className = `
+      ${this.displayOptions.borderless ? 'borderless' : ''}
+      ${this.displayOptions.cellBorderless ? 'cell-borderless' : ''}
+      ${this.displayOptions.rowStripe ? 'row-stripe' : ''}
+      ${this.classBySize.get(this.displayOptions.size)}
+    `;
 
     return (
       <table class={className}>
