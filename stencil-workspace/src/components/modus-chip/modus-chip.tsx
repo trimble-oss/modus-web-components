@@ -8,13 +8,12 @@ import { IconCheck } from '../icons/icon-check';
   styleUrl: 'modus-chip.scss',
   shadow: true,
 })
-
 export class ModusChip {
   /** (optional) The chip's aria-label. */
   @Prop() ariaLabel: string;
 
   /** (optional) The chip's style. */
-  @Prop() chipStyle: 'outline' | 'solid'  = 'solid';
+  @Prop() chipStyle: 'outline' | 'solid' = 'solid';
 
   /** (optional) Whether the chip is disabled. */
   @Prop() disabled = false;
@@ -32,7 +31,7 @@ export class ModusChip {
   @Prop() showClose = false;
 
   /** (optional) The chip's size. */
-  @Prop() size: 'medium' | 'large' = 'medium';
+  @Prop() size: 'medium' | 'small' = 'medium';
 
   /** (optional) The chip's value. */
   @Prop() value: string;
@@ -49,14 +48,16 @@ export class ModusChip {
   ]);
   classBySize: Map<string, string> = new Map([
     ['medium', 'medium'],
-    ['large', 'large'],
+    ['small', 'small'],
   ]);
 
   @Listen('keyup')
   elementKeyupHandler(event: KeyboardEvent): void {
     switch (event.code) {
       case 'Escape':
-        if (!this.showClose) { return; }
+        if (!this.showClose) {
+          return;
+        }
 
         this.closeClick.emit(event);
         break;
@@ -73,7 +74,9 @@ export class ModusChip {
   }
 
   onChipClick(event: MouseEvent): void {
-    if (event.defaultPrevented) { return; } // Don't emit chipClick if closeClick has emitted.
+    if (event.defaultPrevented) {
+      return;
+    } // Don't emit chipClick if closeClick has emitted.
 
     this.chipClick.emit(event);
   }
@@ -94,22 +97,10 @@ export class ModusChip {
     `;
 
     return (
-      <div
-        aria-disabled={this.disabled}
-        aria-label={this.ariaLabel}
-        class={chipClass}
-        onClick={this.disabled ? null : (event) => this.onChipClick(event)}
-        tabIndex={0}>
-        {
-          this.imageUrl ? <img src={this.imageUrl} alt=""/> :
-          this.showCheckmark ? <IconCheck size={'24'}></IconCheck> :
-          null
-        }
+      <div aria-disabled={this.disabled} aria-label={this.ariaLabel} class={chipClass} onClick={this.disabled ? null : (event) => this.onChipClick(event)} tabIndex={0}>
+        {this.imageUrl ? <img src={this.imageUrl} alt="" /> : this.showCheckmark ? <IconCheck size={'24'}></IconCheck> : null}
         <span>{this.value}</span>
-        {
-          this.showClose ? <IconRemove onClick={this.disabled ? null : (event) => this.onCloseClick(event)} size={'24'}></IconRemove> :
-          null
-        }
+        {this.showClose ? <IconRemove onClick={this.disabled ? null : (event) => this.onCloseClick(event)} size={'24'}></IconRemove> : null}
       </div>
     );
   }

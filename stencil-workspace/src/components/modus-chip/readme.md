@@ -16,7 +16,7 @@
 | `imageUrl`      | `image-url`      | (optional) The image's url.                | `string`               | `undefined` |
 | `showCheckmark` | `show-checkmark` | (optional) Whether to show the checkmark.  | `boolean`              | `false`     |
 | `showClose`     | `show-close`     | (optional) Whether to show the close icon. | `boolean`              | `false`     |
-| `size`          | `size`           | (optional) The chip's size.                | `"large" \| "medium"`  | `'medium'`  |
+| `size`          | `size`           | (optional) The chip's size.                | `"medium" \| "small"`  | `'medium'`  |
 | `value`         | `value`          | (optional) The chip's value.               | `string`               | `undefined` |
 
 

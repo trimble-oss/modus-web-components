@@ -109,12 +109,12 @@ describe('modus-chip', () => {
     const chip = await page.find('modus-chip');
     expect(await chip.getProperty('size')).toEqual('medium');
 
-    chip.setProperty('size', 'large');
+    chip.setProperty('size', 'small');
     await page.waitForChanges();
-    expect(await chip.getProperty('size')).toEqual('large');
+    expect(await chip.getProperty('size')).toEqual('small');
 
     const shadowContainer = await page.find('modus-chip >>> .modus-chip');
-    expect(await shadowContainer.classList.contains('large'));
+    expect(await shadowContainer.classList.contains('small'));
   });
 
   it('renders changes to value', async () => {
