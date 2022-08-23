@@ -26,6 +26,7 @@ import { IconWarning } from './icon-warning';
 import { IconWarningOutline } from './icon-warning-outline';
 import { IconChevronLeftThick } from './icon-chevron-left-thick';
 import { IconChevronUpThick } from './icon-chevron-up-thick';
+import { IconDelete } from './icon-delete';
 
 interface IconProps {
   color?: string;
@@ -46,6 +47,7 @@ export const IconMap: FunctionalComponent<IconProps> = (props: IconProps) => {
     case 'chevron-right-thick': return <IconChevronRightThick color={props.color} onClick={props.onClick} size={props.size} />;
     case 'chevron-up-thick': return <IconChevronUpThick color={props.color} onClick={props.onClick} size={props.size} />;
     case 'close': return <IconClose color={props.color} onClick={props.onClick} size={props.size} />;
+    case 'delete': return <IconDelete color={props.color} onClick={props.onClick} size={props.size} />;
     case 'error': return <IconError color={props.color} onClick={props.onClick} size={props.size} />;
     case 'folder': return <IconFolder color={props.color} onClick={props.onClick} size={props.size} />;
     case 'help': return <IconHelp color={props.color} onClick={props.onClick} size={props.size} />;
