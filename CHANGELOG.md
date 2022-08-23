@@ -6,6 +6,8 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 
 ## Unreleased
 
+## 0.1.13 - 2022-23-08
+
 ### Added
 
 - Added small Modus Chip variant
