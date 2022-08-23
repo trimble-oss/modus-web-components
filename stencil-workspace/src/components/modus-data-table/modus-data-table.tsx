@@ -4,6 +4,7 @@ import { ModusDataTableUtilities } from './modus-data-table.utilities';
 import { TCell, TColumn, TRow, ModusTableSortOptions, ModusDataTableSort, ModusDataTableSortEvent, ModusTableSelectionOptions, ModusDataTableCellLink, ModusDataTableDisplayOptions } from './modus-data-table.models';
 import { ModusDataTableHeader } from './parts/modus-data-table-header';
 import { ModusDataTableCellLinkPart } from './parts/modus-data-table-cell-link';
+import { ModusDataTableCellBadgePart } from './parts/modus-data-table-cell-badge';
 
 @Component({
   tag: 'modus-data-table',
@@ -201,9 +202,9 @@ export class ModusDataTable {
               )}
               {(this.columns as TColumn[])?.map((column: TColumn) => (
                 <td class={`align-${column.align} ${column.readonly ? 'readonly' : ''} ${row._selected ? 'selected' : ''}`}>
-                  {row[column.id].type === 'link'
-                    ? <ModusDataTableCellLinkPart link={row[column.id]} onLinkClick={() => this.cellLinkClick.emit(row[column.id])} />
-                    : row[column.id].toString()}
+                  {row[column.id]?._type === 'link' && <ModusDataTableCellLinkPart link={row[column.id]} onLinkClick={() => this.cellLinkClick.emit(row[column.id])} />}
+                  {row[column.id]?._type === 'badge' && <ModusDataTableCellBadgePart badge={row[column.id]} />}
+                  {!row[column.id]?._type && row[column.id]?.toString()}
                 </td>
               ))}
             </tr>

@@ -32,12 +32,14 @@
 
 - [modus-checkbox](../modus-checkbox)
 - [modus-tooltip](../modus-tooltip)
+- [modus-badge](../modus-badge)
 
 ### Graph
 ```mermaid
 graph TD;
   modus-data-table --> modus-checkbox
   modus-data-table --> modus-tooltip
+  modus-data-table --> modus-badge
   style modus-data-table fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

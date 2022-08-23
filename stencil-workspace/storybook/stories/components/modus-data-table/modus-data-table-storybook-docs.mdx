@@ -81,9 +81,20 @@ To define columns and data in the table *using objects*:
   - `rowStripe`: Whether the table rows have a stripe. Defaults to false.
   - `size`: The table's size. Defaults to 'large'.
 
+
+### Cell Types
+- The Data Table accepts `number`, `string`, `booleans`, `ModusDataTableCellBadge` and `ModusDataTableCellLink` as data.
+  - `ModusDataTableCellBadge` displays a Modus Badge in the center of the cell. You must pass `badge` as the data's `_type` property. This cell type accepts all properties to configure a Modus Badge (see Types below).
+    ```ts
+      const data = [{ badgeColumnId: { _type: 'badge', text: 'Some badge text' }}];
+    ```
+  - `ModusDataTableCellLink` displays a Link in the cell. You must pass `link` as the data's `_type` property, similarly to the badge above. This cell type accepts `display` and `url` (see Types below).
+    ```ts
+      const data = [{ linkColumnId: { _type: 'link', display: 'Some link text', url: 'https://www.google.com' }}];
+    ```
 ### Types
 ```ts
-type TCell = number | string | boolean | ModusDataTableCellLink;
+type TCell = number | string | boolean | ModusDataTableCellBadge | ModusDataTableCellLink;
 type TRow = {
   _id?: string;
   _selected?: boolean;
@@ -96,6 +107,13 @@ interface TColumn {
   id?: string;
   readonly?: boolean;
   width?: string;
+}
+
+interface ModusDataTableCellBadge {
+  _type: 'badge'; // Used internally to identify the type of cell. Does not set the badge's type.
+  color?: 'danger' | 'dark' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning';
+  text: string;
+  type?: 'counter' | 'default' | 'text';
 }
 
 interface ModusDataTableCellLink {

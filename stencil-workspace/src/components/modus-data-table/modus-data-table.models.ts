@@ -1,4 +1,4 @@
-export type TCell = number | string | boolean | ModusDataTableCellLink;
+export type TCell = number | string | boolean | ModusDataTableCellBadge | ModusDataTableCellLink;
 
 export type TRow = {
   _id?: string;
@@ -6,9 +6,16 @@ export type TRow = {
   [key: string]: TCell;
 };
 
+export interface ModusDataTableCellBadge {
+  _type: 'badge'; // Used internally to identify the type of cell. Does not set the badge's type.
+  color?: 'danger' | 'dark' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning';
+  text: string;
+  type?: 'counter' | 'default' | 'text';
+}
+
 export interface ModusDataTableCellLink {
+  _type: 'link';
   display: string;
-  type: 'link';
   url: string;
 }
 

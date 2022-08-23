@@ -20,7 +20,7 @@ export function convertToSingleSpaceTitleCase(title: string): string {
 export const ModusDataTableHeader: FunctionalComponent<ModusDataTableHeaderProps> = (props: ModusDataTableHeaderProps) => {
   const sortIcon = props.sortState.direction !== 'none'
     ? (
-      <modus-tooltip position="bottom" text={'Sort descending'}>
+      <modus-tooltip position="bottom" text={`${props.sortState.direction === 'asc' ? 'Sort descending' : 'Remove sort'}`}>
         <div class="icon-container">
           <div class="sort-icon">
             {props.sortState.direction === 'asc' ? <IconSortAZ size={'16'}/> : <IconSortZA size={'16'}/>}
@@ -47,13 +47,11 @@ export const ModusDataTableHeader: FunctionalComponent<ModusDataTableHeaderProps
         {props.column.align === 'center'
           && props.sortState.columnId === props.column.id
           && (
-            <div style={{
-              display: 'flex',
-              width: props.column.width,
-              paddingRight: '14px',
-              justifyContent: 'flex-end',
-              position: 'absolute'
-            }}>{sortIcon}</div>
+            <div style={{position: 'relative'}}>
+              <div style={{display: 'flex', justifyContent: 'flex-end', position: 'absolute'}}>
+                {sortIcon}
+              </div>
+            </div>
           )
         }
       </div>
