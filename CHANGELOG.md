@@ -6,6 +6,12 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 
 ## Unreleased
 
+## 0.1.14 - 2022-23-08
+
+### Added
+
+- Added Modus delete icon component svg and added this to the Icon Map
+
 ## 0.1.13 - 2022-23-08
 
 ### Added
