@@ -71,6 +71,7 @@
 
       &.clear {
         cursor: pointer;
+        min-height: 1.5rem;
 
         &:hover svg path {
           fill: $col_gray_6;
