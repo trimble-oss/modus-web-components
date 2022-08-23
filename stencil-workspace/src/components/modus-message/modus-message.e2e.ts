@@ -23,4 +23,20 @@ describe('modus-message', () => {
 
     expect(message).toHaveClass('question');
   });
+
+  it('renders changes to icon', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-message></modus-message>');
+    const element = await page.find('modus-message');
+
+    await page.waitForChanges();
+
+    let icon = await page.find('modus-message >>> .icon-check');
+    expect(icon).toBeNull();
+    element.setProperty('icon', 'check');
+    await page.waitForChanges();
+    icon = await page.find('modus-message >>> .icon-check');
+    expect(icon).not.toBeNull();
+  });
 });

@@ -10,6 +10,7 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 
 - Added small Modus Chip variant
 - Added Badge cell type to Data Table
+- Added an Icon Map, and an example usage in Modus Message. It now takes an `icon` property.
 
 ### Fixed
 

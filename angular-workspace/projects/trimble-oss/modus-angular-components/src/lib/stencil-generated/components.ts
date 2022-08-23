@@ -396,13 +396,13 @@ export declare interface ModusMessage extends Components.ModusMessage {}
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['ariaLabel', 'type']
+  inputs: ['ariaLabel', 'icon', 'type']
 })
 @Component({
   selector: 'modus-message',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['ariaLabel', 'type']
+  inputs: ['ariaLabel', 'icon', 'type']
 })
 export class ModusMessage {
   protected el: HTMLElement;
