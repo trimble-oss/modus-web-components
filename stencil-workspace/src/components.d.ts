@@ -293,7 +293,7 @@ export namespace Components {
         /**
           * (optional) The type of list item
          */
-        "type": 'standard';
+        "type": string;
     }
     interface ModusMessage {
         /**
@@ -1461,7 +1461,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The type of list item
          */
-        "type"?: 'standard';
+        "type"?: string;
     }
     interface ModusMessage {
         /**

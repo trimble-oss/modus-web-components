@@ -18,7 +18,7 @@ export class ModusListItem {
   @Prop() size: 'condensed' | 'large' | 'standard' = 'standard';
 
   /** (optional) The type of list item */
-  @Prop() type: 'standard' = 'standard'; // Future support for 'checkbox' | 'icon' | 'menu' | 'standard' | 'switchLeft' | 'switchRight'
+  @Prop() type = 'standard'; // Future support for 'checkbox' | 'icon' | 'menu' | 'standard' | 'switchLeft' | 'switchRight'
 
   /** An event that fires on list item click */
   @Event() itemClick: EventEmitter;
