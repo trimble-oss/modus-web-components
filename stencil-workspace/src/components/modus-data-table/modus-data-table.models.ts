@@ -1,9 +1,10 @@
 export type TCell = number | string | boolean | ModusDataTableCellBadge | ModusDataTableCellLink;
 
 export type TRow = {
+  [key: string]: TCell;
+} & {
   _id?: string;
   _selected?: boolean;
-  [key: string]: TCell;
 };
 
 export interface ModusDataTableCellBadge {

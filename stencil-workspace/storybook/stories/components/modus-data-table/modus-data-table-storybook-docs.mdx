@@ -96,9 +96,10 @@ To define columns and data in the table *using objects*:
 ```ts
 type TCell = number | string | boolean | ModusDataTableCellBadge | ModusDataTableCellLink;
 type TRow = {
+  [key: string]: TCell;
+} & {
   _id?: string;
   _selected?: boolean;
-  [key: string]: TCell;
 };
 
 interface TColumn {
