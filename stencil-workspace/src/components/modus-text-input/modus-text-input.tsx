@@ -120,7 +120,7 @@ export class ModusTextInput {
             autofocus={this.autoFocusInput}
           />
           {this.clearable && !this.readOnly && !!this.value ? (
-            <span class="icons clear">
+            <span class="icons clear" role="button" aria-label="Clear entry">
               <IconClose onClick={() => this.handleClear()} size="16" />
             </span>
           ) : (

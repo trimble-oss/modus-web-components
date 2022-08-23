@@ -10,6 +10,10 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 
 - Added small Modus Chip variant
 
+### Fixed
+
+- Improved accessibility for clear input buttons for Modus text Inputs
+
 ### Removed
 
 - Removed large Modus Chip variant
