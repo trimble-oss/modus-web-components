@@ -2,6 +2,7 @@
 import { Component, Prop, h } from '@stencil/core';
 import { IconInfo } from '../icons/icon-info';
 import { IconHelp } from '../icons/icon-help';
+import { IconMap } from '../icons/icon-map';
 
 @Component({
   tag: 'modus-message',
@@ -10,10 +11,13 @@ import { IconHelp } from '../icons/icon-help';
 })
 export class ModusMessage {
   /** (optional) The message's aria-label. */
-  @Prop() ariaLabel: string;
+  @Prop() ariaLabel?: string;
+
+  /** (optional) The message's icon. */
+  @Prop() icon?: string;
 
   /** (optional) The message's type. */
-  @Prop() type: 'info' | 'question' = 'info';
+  @Prop() type?: 'info' | 'question' = 'info';
 
   classByType: Map<string, string> = new Map([
     ['info', 'info'],
@@ -26,11 +30,13 @@ export class ModusMessage {
     return (
       <div aria-label={this.ariaLabel} class={className} role="note">
         <span class="icon">
-          {this.type === 'info'
-            ? <IconInfo color="#005F9E" size="18" />
-            : this.type === 'question'
-            ? <IconHelp color="#6A6976" size="18" />
-            : null
+          {this.icon
+            ? <IconMap color={`${this.type === 'info' ? '#005F9E' : '#6A6976'}`} icon={this.icon} size="18" />
+            : this.type === 'info'
+              ? <IconInfo color="#005F9E" size="18" />
+              : this.type === 'question'
+                ? <IconHelp color="#6A6976" size="18" />
+                : null
           }
         </span>
         <span class="message">

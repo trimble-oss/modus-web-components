@@ -12,6 +12,13 @@ export default {
         type: { summary: 'string' }
       }
     },
+    icon: {
+      name: 'icon',
+      description: 'The message\'s icon',
+      table: {
+        type: { summary: 'string' }
+      }
+    },
     type: {
       control: {
         options: ['info', 'question'],
@@ -35,20 +42,22 @@ export default {
   },
 };
 
-export const Default = ({ ariaLabel, type }) => html`
+export const Default = ({ ariaLabel, icon, type }) => html`
   <modus-message
     aria-label=${ariaLabel}
+    icon=${icon}
     type=${type}>
     Info (Default)
   </modus-message>
 `;
-Default.args = { ariaLabel: '', type: 'info' };
+Default.args = { ariaLabel: '', icon: '', type: 'info' };
 
-export const Question = ({ ariaLabel, type }) => html`
+export const Question = ({ ariaLabel, icon, type }) => html`
   <modus-message
     aria-label=${ariaLabel}
+    icon=${icon}
     type=${type}>
     Question
   </modus-message>
 `;
-Question.args = { ariaLabel: '', type: 'question' };
+Question.args = { ariaLabel: '', icon: '', type: 'question' };

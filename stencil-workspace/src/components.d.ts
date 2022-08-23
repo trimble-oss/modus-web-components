@@ -299,11 +299,15 @@ export namespace Components {
         /**
           * (optional) The message's aria-label.
          */
-        "ariaLabel": string;
+        "ariaLabel"?: string;
+        /**
+          * (optional) The message's icon.
+         */
+        "icon"?: string;
         /**
           * (optional) The message's type.
          */
-        "type": 'info' | 'question';
+        "type"?: 'info' | 'question';
     }
     interface ModusModal {
         /**
@@ -1464,6 +1468,10 @@ declare namespace LocalJSX {
           * (optional) The message's aria-label.
          */
         "ariaLabel"?: string;
+        /**
+          * (optional) The message's icon.
+         */
+        "icon"?: string;
         /**
           * (optional) The message's type.
          */
