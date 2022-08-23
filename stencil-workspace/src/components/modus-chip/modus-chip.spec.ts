@@ -23,8 +23,8 @@ describe('modus-chip', () => {
     let className = modusChip.classBySize.get(modusChip.size);
     expect(className).toEqual('medium');
 
-    className = modusChip.classBySize.get('large');
-    expect(className).toEqual('large');
+    className = modusChip.classBySize.get('small');
+    expect(className).toEqual('small');
   });
 
   it('should get the correct class by chip style', async () => {

@@ -177,7 +177,7 @@ export namespace Components {
         /**
           * (optional) The chip's size.
          */
-        "size": 'medium' | 'large';
+        "size": 'medium' | 'small';
         /**
           * (optional) The chip's value.
          */
@@ -1329,7 +1329,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The chip's size.
          */
-        "size"?: 'medium' | 'large';
+        "size"?: 'medium' | 'small';
         /**
           * (optional) The chip's value.
          */

@@ -7,10 +7,10 @@ export default {
   argTypes: {
     ariaLabel: {
       name: 'aria-label',
-      description: 'The chip\'s aria-label',
+      description: "The chip's aria-label",
       table: {
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     chipStyle: {
       name: 'chip-style',
@@ -22,14 +22,14 @@ export default {
       table: {
         defaultValue: { summary: `'solid'` },
         type: { summary: `'solid' | 'outline'` },
-      }
+      },
     },
     disabled: {
       description: 'Whether the chip is disabled',
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },
-      }
+      },
     },
     hasError: {
       name: 'has-error',
@@ -37,14 +37,14 @@ export default {
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },
-      }
+      },
     },
     imageUrl: {
       name: 'image-url',
-      description: 'The chip\'s image URL',
+      description: "The chip's image URL",
       table: {
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     showCheckmark: {
       name: 'show-checkmark',
@@ -52,7 +52,7 @@ export default {
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },
-      }
+      },
     },
     showClose: {
       name: 'show-close',
@@ -60,25 +60,25 @@ export default {
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },
-      }
+      },
     },
     size: {
       control: {
-        options: ['medium', 'large'],
+        options: ['medium', 'small'],
         type: 'select',
       },
       description: 'The size of the chip',
       table: {
         defaultValue: { summary: `'medium'` },
-        type: { summary: `medium' | 'large'` },
-      }
+        type: { summary: `medium' | 'small'` },
+      },
     },
     value: {
-      description: 'The chip\'s value',
+      description: "The chip's value",
       table: {
-        type: { summary: 'string' }
-      }
-    }
+        type: { summary: 'string' },
+      },
+    },
   },
   parameters: {
     controls: { expanded: true },
@@ -89,7 +89,7 @@ export default {
       page: docs,
     },
     options: {
-      isToolshown: true
+      isToolshown: true,
     },
   },
 };
