@@ -1,4 +1,4 @@
-import { TCell, TColumn, TRow } from './modus-data-table.models';
+import { ModusDataTableCellBadge, ModusDataTableCellLink, TCell, TColumn, TRow } from './modus-data-table.models';
 
 export class ModusDataTableUtilities {
   static convertToTColumns(columns: string[] | TColumn[]): TColumn[] {
@@ -6,7 +6,7 @@ export class ModusDataTableUtilities {
       return {
         align: column.align ?? 'left',
         display: column.display ?? column,
-        id: column.id ?? column.display?.toLocaleLowerCase() ?? column.toLocaleLowerCase(),
+        id: column._id ?? column.display?.toLocaleLowerCase() ?? column.toLocaleLowerCase(),
         readonly: column.readonly ?? false,
         width: column.width ?? ''
       };
@@ -33,9 +33,29 @@ export class ModusDataTableUtilities {
   static sortData(data: TRow[], columnId: string, direction: 'asc' | 'desc' | 'none'): TRow[] {
     const dataCopy = [...data];
     if (direction === 'asc') {
-      return dataCopy.sort((row1, row2) => (row1[columnId] > row2[columnId] ? 1 : -1 ));
+      return dataCopy.sort((row1, row2) => {
+        if (row1[columnId]['_type'] === 'badge') {
+          return (row1[columnId] as ModusDataTableCellBadge).text > (row2[columnId] as ModusDataTableCellBadge).text ? 1 : -1;
+        }
+
+        if (row1[columnId]['_type'] === 'link') {
+          return (row1[columnId] as ModusDataTableCellLink).display > (row2[columnId] as ModusDataTableCellLink).display ? 1 : -1;
+        }
+
+        return row1[columnId] > row2[columnId] ? 1 : -1;
+      });
     } else {
-      return dataCopy.sort((row1, row2) => (row1[columnId] > row2[columnId] ? -1 : 1 ));
+      return dataCopy.sort((row1, row2) => {
+        if (row1[columnId]['_type'] === 'badge') {
+          return (row1[columnId] as ModusDataTableCellBadge).text > (row2[columnId] as ModusDataTableCellBadge).text ? -1 : 1;
+        }
+
+        if (row1[columnId]['_type'] === 'link') {
+          return (row1[columnId] as ModusDataTableCellLink).display > (row2[columnId] as ModusDataTableCellLink).display ? -1 : 1;
+        }
+
+        return row1[columnId] > row2[columnId] ? -1 : 1;
+      });
     }
   }
 }

@@ -97,6 +97,12 @@ table {
           text-decoration: underline;
         }
       }
+
+      .cell-badge {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+      }
     }
   }
 

@@ -9,6 +9,7 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 ### Added
 
 - Added small Modus Chip variant
+- Added Badge cell type to Data Table
 
 ### Fixed
 

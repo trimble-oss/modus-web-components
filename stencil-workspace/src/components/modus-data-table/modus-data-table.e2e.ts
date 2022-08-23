@@ -598,24 +598,32 @@ describe('modus-data-table', () => {
     expect(rowDoubleClickEvent).toHaveReceivedEventTimes(1);
   });
 
-  it('should render cell link type', async () => {
+  it('should render cell link _type', async () => {
     const component = await page.find('modus-data-table');
     component.setProperty('columns', [{ display: 'Link' }]);
-    component.setProperty('data', [{ link: { display: 'My Link', url: 'https://example.com', type: 'link' } }]);
+    component.setProperty('data', [{ link: { display: 'My Link', url: 'https://example.com', _type: 'link' } }]);
     await page.waitForChanges();
 
     const cellLink = await page.find('modus-data-table >>> .cell-link');
 
-    await cellLink.click();
+    expect(cellLink).toBeTruthy();
+  });
+
+  it('should render cell badge _type', async () => {
+    const component = await page.find('modus-data-table');
+    component.setProperty('columns', [{ display: 'Badge' }]);
+    component.setProperty('data', [{ badge: { text: 'My Badge', _type: 'badge' } }]);
     await page.waitForChanges();
 
-    expect(cellLink).toBeTruthy();
+    const cellBadge = await page.find('modus-data-table >>> .cell-badge');
+
+    expect(cellBadge).toBeTruthy();
   });
 
   it('should fire cellLinkClick on cell link click', async () => {
     const component = await page.find('modus-data-table');
     component.setProperty('columns', [{ display: 'Link' }]);
-    component.setProperty('data', [{ link: { display: 'My Link', url: 'https://example.com', type: 'link' } }]);
+    component.setProperty('data', [{ link: { display: 'My Link', url: 'https://example.com', _type: 'link' } }]);
     await page.waitForChanges();
 
     const cellLinkClickEvent = await page.spyOnEvent('cellLinkClick');
@@ -648,5 +656,97 @@ describe('modus-data-table', () => {
     expect(borderless).toBeFalsy();
     expect(cellBorderless).toBeFalsy();
     expect(rowStripe).toBeTruthy();
+  });
+
+  it('should sort cell link types', async () => {
+    const component = await page.find('modus-data-table');
+    component.setProperty('columns', [{ display: 'Link' }]);
+    component.setProperty('sortOptions', { canSort: true });
+    component.setProperty('data', [
+      { link: { display: 'Link C', url: 'https://example.com', _type: 'link' } },
+      { link: { display: 'Link A', url: 'https://example.com', _type: 'link' } },
+      { link: { display: 'Link B', url: 'https://example.com', _type: 'link' } }
+    ]);
+
+    await page.waitForChanges();
+
+    const sortEvent = await page.spyOnEvent('sort');
+    const header = await page.find('modus-data-table >>> th');
+    await header.click();
+
+    // Ascending sort
+    expect(sortEvent).toHaveReceivedEventDetail({ columnId: 'link', direction: 'asc' });
+    let cells = await page.findAll('modus-data-table >>> .cell-link');
+    expect(cells[0].innerHTML).toEqual('Link A');
+    expect(cells[1].innerHTML).toEqual('Link B');
+    expect(cells[2].innerHTML).toEqual('Link C');
+
+    await header.click();
+    await page.waitForChanges();
+
+    // Descending sort
+    expect(sortEvent).toHaveReceivedEventDetail({ columnId: 'link', direction: 'desc' });
+    cells = await page.findAll('modus-data-table >>> .cell-link');
+    expect(cells[0].innerHTML).toEqual('Link C');
+    expect(cells[1].innerHTML).toEqual('Link B');
+    expect(cells[2].innerHTML).toEqual('Link A');
+
+    await header.click();
+    await page.waitForChanges();
+
+    // No sort
+    expect(sortEvent).toHaveReceivedEventDetail({ columnId: 'link', direction: 'none' });
+    cells = await page.findAll('modus-data-table >>> .cell-link');
+    expect(cells[0].innerHTML).toEqual('Link C');
+    expect(cells[1].innerHTML).toEqual('Link A');
+    expect(cells[2].innerHTML).toEqual('Link B');
+
+    expect(sortEvent).toHaveReceivedEventTimes(3);
+  });
+
+  it('should sort cell badge types', async () => {
+    const component = await page.find('modus-data-table');
+    component.setProperty('columns', [{ display: 'Badge' }]);
+    component.setProperty('sortOptions', { canSort: true });
+    component.setProperty('data', [
+      { badge: { text: 'Badge C', _type: 'badge' } },
+      { badge: { text: 'Badge A', _type: 'badge' } },
+      { badge: { text: 'Badge B', _type: 'badge' } }
+    ]);
+
+    await page.waitForChanges();
+
+    const sortEvent = await page.spyOnEvent('sort');
+    const header = await page.find('modus-data-table >>> th');
+    await header.click();
+
+    // Ascending sort
+    expect(sortEvent).toHaveReceivedEventDetail({ columnId: 'badge', direction: 'asc' });
+    let cells = await page.findAll('modus-data-table >>> modus-badge');
+    expect(cells[0].innerHTML).toEqual('Badge A');
+    expect(cells[1].innerHTML).toEqual('Badge B');
+    expect(cells[2].innerHTML).toEqual('Badge C');
+
+    await header.click();
+    await page.waitForChanges();
+
+    // Descending sort
+    expect(sortEvent).toHaveReceivedEventDetail({ columnId: 'badge', direction: 'desc' });
+    cells = await page.findAll('modus-data-table >>> modus-badge');
+    expect(cells[0].innerHTML).toEqual('Badge C');
+    expect(cells[1].innerHTML).toEqual('Badge B');
+    expect(cells[2].innerHTML).toEqual('Badge A');
+
+    await header.click();
+    await page.waitForChanges();
+
+    // No sort
+    expect(sortEvent).toHaveReceivedEventDetail({ columnId: 'badge', direction: 'none' });
+    cells = await page.findAll('modus-data-table >>> modus-badge');
+    expect(cells[0].innerHTML).toEqual('Badge C');
+    expect(cells[1].innerHTML).toEqual('Badge A');
+    expect(cells[2].innerHTML).toEqual('Badge B');
+
+    expect(sortEvent).toHaveReceivedEventTimes(3);
   });
 });

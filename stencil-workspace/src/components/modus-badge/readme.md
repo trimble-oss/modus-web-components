@@ -15,6 +15,19 @@
 | `type`      | `type`       | (optional) The type of the badge  | `"counter" \| "default" \| "text"`                                                       | `'default'` |
 
 
+## Dependencies
+
+### Used by
+
+ - [modus-data-table](../modus-data-table)
+
+### Graph
+```mermaid
+graph TD;
+  modus-data-table --> modus-badge
+  style modus-badge fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 

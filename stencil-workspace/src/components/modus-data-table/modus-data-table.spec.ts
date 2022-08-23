@@ -1,7 +1,7 @@
 import { newSpecPage } from '@stencil/core/testing';
 import { ModusDataTable } from './modus-data-table';
 import { ModusDataTableUtilities } from './modus-data-table.utilities';
-import { TColumn } from './modus-data-table.models';
+import { TColumn, TRow } from './modus-data-table.models';
 import { convertToSingleSpaceTitleCase } from './parts/modus-data-table-header';
 
 describe('modus-data-table', () => {
@@ -98,6 +98,48 @@ describe('modus-data-table', () => {
     const descRowsByAge = ModusDataTableUtilities.sortData(rows, 'age', 'desc');
     expect(ascRowsByAge).toEqual([{ name: 'Jane', age: 16 }, { name: 'John', age: 32 }, { name: 'Bo', age: 56 }]);
     expect(descRowsByAge).toEqual([{ name: 'Bo', age: 56 }, { name: 'John', age: 32 }, { name: 'Jane', age: 16 }]);
+  });
+
+  it('should sort data links', async () => {
+    const rows = [
+      { link: { display: 'Link C', url: 'https://example.com', _type: 'link' }},
+      { link: { display: 'Link A', url: 'https://example.com', _type: 'link' }},
+      { link: { display: 'Link B', url: 'https://example.com', _type: 'link' }}
+    ];
+
+    const ascLinks = ModusDataTableUtilities.sortData(rows as TRow[], 'link', 'asc');
+    const descLinks = ModusDataTableUtilities.sortData(rows as TRow[], 'link', 'desc');
+    expect(ascLinks).toEqual([
+      { link: { display: 'Link A', url: 'https://example.com', _type: 'link' }},
+      { link: { display: 'Link B', url: 'https://example.com', _type: 'link' }},
+      { link: { display: 'Link C', url: 'https://example.com', _type: 'link' }}
+    ]);
+    expect(descLinks).toEqual([
+      { link: { display: 'Link C', url: 'https://example.com', _type: 'link' }},
+      { link: { display: 'Link B', url: 'https://example.com', _type: 'link' }},
+      { link: { display: 'Link A', url: 'https://example.com', _type: 'link' }}
+    ]);
+  });
+
+  it('should sort data badges', async () => {
+    const rows = [
+      { badge: { text: 'Badge C', _type: 'badge' }},
+      { badge: { text: 'Badge A', _type: 'badge' }},
+      { badge: { text: 'Badge B', _type: 'badge' }}
+    ];
+
+    const ascBadges = ModusDataTableUtilities.sortData(rows as TRow[], 'badge', 'asc');
+    const descBadges = ModusDataTableUtilities.sortData(rows as TRow[], 'badge', 'desc');
+    expect(ascBadges).toEqual([
+      { badge: { text: 'Badge A', _type: 'badge' }},
+      { badge: { text: 'Badge B', _type: 'badge' }},
+      { badge: { text: 'Badge C', _type: 'badge' }}
+    ]);
+    expect(descBadges).toEqual([
+      { badge: { text: 'Badge C', _type: 'badge' }},
+      { badge: { text: 'Badge B', _type: 'badge' }},
+      { badge: { text: 'Badge A', _type: 'badge' }}
+    ]);
   });
 
   it('should convert column header to single space title case', async () => {
