@@ -118,3 +118,21 @@ To run a specific test, run `stencil test --spec --e2e --silent [test file name]
 9. Submit your PR with your branch as the `head`, and the `@trimble-oss/modus-web-components` `main` branch as the `base`.
    - Don't forget to link your relevant issue in the PR description.
 10. Rebase and Merge the PR upon approval.
+
+## Releasing Framework Outputs
+
+Before releasing any of the framework outputs, the targeted version of the Modus Web Components should be successfully released.
+
+### Angular
+
+1. Update `./angular-workspace/projects/trimble-oss/modus-angular-components/package.json`'s dependency on the Modus Web Components library to the targeted version.
+2. From the `./angular-workspace` directory, run `npm run i`.
+3. From the `./angular-workspace` directory, run `npm run build`.
+4. From the newly generated `./angular-workspace/dist` directory, run `npm run publish`.
+
+### React
+
+1. Update `./react-workspace/package.json`'s dependency on the Modus Web Components library to the targeted version.
+2. From the `./react-workspace` directory, run `npm run i`.
+3. From the `./react-workspace` directory, run `npm run build`.
+4. From the `./react-workspace` directory, run `npm run publish`.
