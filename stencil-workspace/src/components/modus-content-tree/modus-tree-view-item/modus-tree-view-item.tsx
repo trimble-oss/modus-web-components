@@ -196,7 +196,6 @@ export class ModusTreeViewItem {
     const finalExpandIcon = this.slots.has(this.expandIconSlot) ? <this.IconSlotTemplate name={this.expandIconSlot} /> : <IconChevronRightThick />;
     const finalCollapseIcon = this.slots.has(this.collapseIconSlot) ? <this.IconSlotTemplate name={this.collapseIconSlot} /> : <IconChevronDownThick />;
     const sizeClass = `${this.classBySize.get(size || 'standard')}`;
-    const checkboxSize = size === 'condensed' ? 'small' : 'medium';
     const treeItemClass = `tree-item ${this.selected ? 'selected' : ''} ${sizeClass} ${isDisabled ? 'disabled' : ''} `;
     const treeItemChildrenClass = `tree-item-group ${sizeClass} ${this.expanded ? 'expanded' : ''}`;
     const hasSelectionIndicator = this.selected || (!this.expanded && expandable && Boolean(this.childrenIds.find((i) => hasItemSelected(i))));
@@ -216,7 +215,6 @@ export class ModusTreeViewItem {
           {(checkboxSelection || multiCheckboxSelection) && (
             <div class="icon-slot">
               <modus-checkbox
-                size={checkboxSize}
                 checked={this.checked}
                 disabled={isDisabled}
                 indeterminate={this.indeterminate}

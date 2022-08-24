@@ -24,18 +24,10 @@ export class ModusCheckbox {
   /** (optional) The checkbox label. */
   @Prop() label: string;
 
-  /** (optional) The size of the button */
-  @Prop() size: 'small' | 'medium' = 'medium';
-
   /** An event that fires on checkbox click. */
   @Event() checkboxClick: EventEmitter<boolean>;
 
   checkboxInput: HTMLInputElement;
-
-  classBySize: Map<string, string> = new Map([
-    ['small', 'small'],
-    ['medium', 'medium'],
-  ]);
 
   @Listen('keydown')
   elementKeydownHandler(event: KeyboardEvent): void {
@@ -69,7 +61,7 @@ export class ModusCheckbox {
   }
 
   render(): unknown {
-    const className = `modus-checkbox ${this.classBySize.get(this.size)}`;
+    const className = 'modus-checkbox';
     const tabIndexValue = this.disabled ? -1 : 0;
 
     return (

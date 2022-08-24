@@ -10,7 +10,7 @@ describe('modus-checkbox', () => {
     expect(page.root).toEqualHtml(`
       <modus-checkbox>
         <mock:shadow-root>
-          <div class="medium modus-checkbox" tabindex="0">
+          <div class="modus-checkbox" tabindex="0">
             <div class="checkbox">
               <div class="checkmark">
                 <svg class="icon-check" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -25,15 +25,6 @@ describe('modus-checkbox', () => {
     `);
   });
 
-  it('should get the correct class by size', async () => {
-    const modusCheckbox = new ModusCheckbox();
-    let className = modusCheckbox.classBySize.get(modusCheckbox.size);
-    expect(className).toEqual('medium');
-
-    className = modusCheckbox.classBySize.get('small');
-    expect(className).toEqual('small');
-  });
-
   it('should default to unchecked', async () => {
     const modusCheckbox = new ModusCheckbox();
     expect(modusCheckbox.checked).toBeFalsy();
@@ -42,11 +33,6 @@ describe('modus-checkbox', () => {
   it('should default to enabled', async () => {
     const modusCheckbox = new ModusCheckbox();
     expect(modusCheckbox.disabled).toBeFalsy();
-  });
-
-  it('should default to size medium', async () => {
-    const modusCheckbox = new ModusCheckbox();
-    expect(modusCheckbox.size).toBe('medium');
   });
 
   it('should default to no label', async () => {

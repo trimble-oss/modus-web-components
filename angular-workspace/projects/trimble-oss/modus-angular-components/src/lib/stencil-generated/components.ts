@@ -197,13 +197,13 @@ export declare interface ModusCheckbox extends Components.ModusCheckbox {
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['ariaLabel', 'checked', 'disabled', 'indeterminate', 'label', 'size']
+  inputs: ['ariaLabel', 'checked', 'disabled', 'indeterminate', 'label']
 })
 @Component({
   selector: 'modus-checkbox',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['ariaLabel', 'checked', 'disabled', 'indeterminate', 'label', 'size']
+  inputs: ['ariaLabel', 'checked', 'disabled', 'indeterminate', 'label']
 })
 export class ModusCheckbox {
   protected el: HTMLElement;

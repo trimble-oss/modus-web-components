@@ -6,6 +6,10 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 
 ## Unreleased
 
+### Removed
+
+- Removed Small checkbox
+
 ## 0.1.14 - 2022-23-08
 
 ### Added
