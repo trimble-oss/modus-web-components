@@ -1,4 +1,4 @@
-import { Anchor } from "@storybook/addon-docs";
+import { Anchor } from '@storybook/addon-docs';
 
 # File Dropzone
 
@@ -28,14 +28,23 @@ They are referenced using the `<modus-file-dropzone>` tag.
 </modus-file-dropzone>
 
 ```html
-<modus-file-dropzone aria-Label="dropzone" description="File dropzone description" dropzone-Height="175px" dropzone-Width="400px" label="Dropzone Label" multiple="false"> </modus-file-dropzone>
+<modus-file-dropzone
+  aria-Label="dropzone"
+  description="File dropzone description"
+  dropzone-Height="175px"
+  dropzone-Width="400px"
+  label="Dropzone Label"
+  multiple="false">
+</modus-file-dropzone>
 
 <script>
-  document.querySelector("modus-file-dropzone").addEventListener("files", (event) => {
-    const [files, error] = event.detail;
-    console.log(files);
-    console.log(error);
-  });
+  document
+    .querySelector('modus-file-dropzone')
+    .addEventListener('files', (event) => {
+      const [files, error] = event.detail;
+      console.log(files);
+      console.log(error);
+    });
 </script>
 ```
 

@@ -7,7 +7,7 @@ export default {
   argTypes: {
     ariaLabel: {
       name: 'aria-label',
-      description: 'The text input\'s aria-label',
+      description: "The text input's aria-label",
       table: {
         type: { summary: 'string' },
       },
@@ -35,14 +35,14 @@ export default {
     },
     errorText: {
       name: 'error-text',
-      description: 'The text input\'s error text',
+      description: "The text input's error text",
       table: {
         type: { summary: 'string' },
       },
     },
     helperText: {
       name: 'helper-text',
-      description: 'The text input\'s helper text',
+      description: "The text input's helper text",
       table: {
         type: { summary: 'string' },
       },
@@ -57,36 +57,47 @@ export default {
     },
     inputmode: {
       control: {
-        options: ['decimal', 'email', 'numeric', 'search', 'tel', 'text', 'url'],
+        options: [
+          'decimal',
+          'email',
+          'numeric',
+          'search',
+          'tel',
+          'text',
+          'url',
+        ],
         type: 'select',
       },
       description: 'The inputmode type',
       table: {
-        type: { summary: '\'decimal\' | \'email\' | \'numeric\' | \'search\' | \'tel\' | \'text\' | \'url\'' },
+        type: {
+          summary:
+            "'decimal' | 'email' | 'numeric' | 'search' | 'tel' | 'text' | 'url'",
+        },
       },
     },
     label: {
-      description: 'The text input\'s label',
+      description: "The text input's label",
       table: {
         type: { summary: 'string' },
       },
     },
     maxLength: {
       name: 'max-length',
-      description: 'The text input\'s maximum length',
+      description: "The text input's maximum length",
       table: {
         type: { summary: 'string' },
       },
     },
     minLength: {
       name: 'min-length',
-      description: 'The text input\'s minimum length',
+      description: "The text input's minimum length",
       table: {
         type: { summary: 'string' },
       },
     },
     placeholder: {
-      description: 'The text input\'s placeholder text',
+      description: "The text input's placeholder text",
       table: {
         type: { summary: 'string' },
       },
@@ -113,8 +124,8 @@ export default {
       },
       description: 'The size of the text input',
       table: {
-        defaultValue: { summary: '\'medium\'' },
-        type: { summary: '\'medium\' | \'large\'' },
+        defaultValue: { summary: "'medium'" },
+        type: { summary: "'medium' | 'large'" },
       },
     },
     type: {
@@ -124,19 +135,19 @@ export default {
       },
       description: 'The input type',
       table: {
-        defaultValue: { summary: '\'text\'' },
-        type: { summary: '\'text\' | \'password\'' },
+        defaultValue: { summary: "'text'" },
+        type: { summary: "'text' | 'password'" },
       },
     },
     validText: {
       name: 'valid-text',
-      description: 'The text input\'s valid text',
+      description: "The text input's valid text",
       table: {
         type: { summary: 'string' },
       },
     },
     value: {
-      description: 'The text input\'s value',
+      description: "The text input's value",
       table: {
         type: { summary: 'string' },
       },
@@ -156,7 +167,26 @@ export default {
   },
 };
 
-const Template = ({ ariaLabel, autoFocusInput, clearable, disabled, errorText, helperText, includeSearchIcon, inputmode, label, maxLength, minLength, placeholder, readOnly, required, size, type, validText, value }) => html`
+const Template = ({
+  ariaLabel,
+  autoFocusInput,
+  clearable,
+  disabled,
+  errorText,
+  helperText,
+  includeSearchIcon,
+  inputmode,
+  label,
+  maxLength,
+  minLength,
+  placeholder,
+  readOnly,
+  required,
+  size,
+  type,
+  validText,
+  value,
+}) => html`
   <modus-text-input
     aria-label=${ariaLabel}
     auto-focus-input=${autoFocusInput}

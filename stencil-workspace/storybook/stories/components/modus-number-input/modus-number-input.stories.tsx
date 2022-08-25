@@ -7,57 +7,57 @@ export default {
   argTypes: {
     ariaLabel: {
       name: 'aria-label',
-      description: 'The number input\'s aria-label',
+      description: "The number input's aria-label",
       table: {
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     disabled: {
       description: 'Whether the number input is disabled',
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },
-      }
+      },
     },
     errorText: {
       name: 'error-text',
-      description: 'The number input\'s error text',
+      description: "The number input's error text",
       table: {
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     helperText: {
       name: 'helper-text',
-      description: 'The number input\'s helper text',
+      description: "The number input's helper text",
       table: {
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     label: {
-      description: 'The number input\'s label',
+      description: "The number input's label",
       table: {
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     maxValue: {
       name: 'max-value',
-      description: 'The number input\'s maximum value',
+      description: "The number input's maximum value",
       table: {
-        type: { summary: 'number' }
+        type: { summary: 'number' },
       },
     },
     minValue: {
       name: 'min-value',
-      description: 'The number input\'s minimum value',
+      description: "The number input's minimum value",
       table: {
-        type: { summary: 'number' }
+        type: { summary: 'number' },
       },
     },
     placeholder: {
-      description: 'The number input\'s placeholder text',
+      description: "The number input's placeholder text",
       table: {
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     readOnly: {
       name: 'read-only',
@@ -65,14 +65,14 @@ export default {
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },
-      }
+      },
     },
     required: {
       description: 'Whether the number input is required',
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },
-      }
+      },
     },
     size: {
       control: {
@@ -83,27 +83,27 @@ export default {
       table: {
         defaultValue: { summary: `'medium'` },
         type: { summary: `'medium' | 'large'` },
-      }
+      },
     },
     step: {
-      description: 'The number input\'s step',
+      description: "The number input's step",
       table: {
-        type: { summary: 'number' }
-      }
+        type: { summary: 'number' },
+      },
     },
     validText: {
       name: 'valid-text',
-      description: 'The number input\'s valid text',
+      description: "The number input's valid text",
       table: {
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     value: {
-      description: 'The number input\'s value',
+      description: "The number input's value",
       table: {
-        type: { summary: 'number' }
-      }
-    }
+        type: { summary: 'number' },
+      },
+    },
   },
   parameters: {
     actions: {
@@ -114,12 +114,27 @@ export default {
       page: docs,
     },
     options: {
-      isToolshown: true
+      isToolshown: true,
     },
   },
 };
 
-const Template = ({ ariaLabel, disabled, errorText, helperText, label, maxValue, minValue, placeholder, readOnly, required, size, step, validText, value }) => html`
+const Template = ({
+  ariaLabel,
+  disabled,
+  errorText,
+  helperText,
+  label,
+  maxValue,
+  minValue,
+  placeholder,
+  readOnly,
+  required,
+  size,
+  step,
+  validText,
+  value,
+}) => html`
   <modus-number-input
     aria-label=${ariaLabel}
     disabled=${disabled}
@@ -134,8 +149,7 @@ const Template = ({ ariaLabel, disabled, errorText, helperText, label, maxValue,
     size=${size}
     step=${step}
     valid-text=${validText}
-    value=${value}
-  ></modus-number-input>
+    value=${value}></modus-number-input>
 `;
 
 export const Default = Template.bind({});
@@ -153,5 +167,5 @@ Default.args = {
   size: 'medium',
   step: 1,
   validText: '',
-  value: 100
+  value: 100,
 };

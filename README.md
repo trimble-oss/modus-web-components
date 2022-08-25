@@ -53,7 +53,7 @@ We won't cover them here as they are often very specific to an individual SPA fr
 
 ## Available Scripts
 
-All NPM scripts are run from the `./stencil-workspace` project directory.
+All npm scripts are run from the `./stencil-workspace` project directory.
 
 `npm install` - Install 3rd party packages
 

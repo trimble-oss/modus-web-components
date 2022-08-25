@@ -7,34 +7,34 @@ export default {
   argTypes: {
     activePage: {
       name: 'active-page',
-      description: 'The pagination\'s active page',
+      description: "The pagination's active page",
       table: {
-        type: { summary: 'number' }
+        type: { summary: 'number' },
       },
-      type: { required: true }
+      type: { required: true },
     },
     ariaLabel: {
       name: 'aria-label',
-      description: 'The pagination\'s aria-label',
+      description: "The pagination's aria-label",
       table: {
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     maxPage: {
       name: 'max-page',
-      description: 'The pagination\'s maximum page',
+      description: "The pagination's maximum page",
       table: {
-        type: { summary: 'number' }
+        type: { summary: 'number' },
       },
-      type: { required: true }
+      type: { required: true },
     },
     minPage: {
       name: 'min-page',
-      description: 'The pagination\'s minimum page',
+      description: "The pagination's minimum page",
       table: {
-        type: { summary: 'number' }
+        type: { summary: 'number' },
       },
-      type: { required: true }
+      type: { required: true },
     },
     size: {
       control: {
@@ -45,7 +45,7 @@ export default {
       table: {
         defaultValue: { summary: `'medium'` },
         type: { summary: `'small' | 'medium' | 'large'` },
-      }
+      },
     },
   },
   parameters: {
@@ -57,12 +57,18 @@ export default {
       page: docs,
     },
     options: {
-      isToolshown: true
+      isToolshown: true,
     },
   },
 };
 
-export const Default = ({ activePage, ariaLabel, maxPage, minPage, size }) => html`
+export const Default = ({
+  activePage,
+  ariaLabel,
+  maxPage,
+  minPage,
+  size,
+}) => html`
   <modus-pagination
     active-page=${activePage}
     aria-label=${ariaLabel}
@@ -72,9 +78,21 @@ export const Default = ({ activePage, ariaLabel, maxPage, minPage, size }) => ht
     Default
   </modus-pagination>
 `;
-Default.args = { activePage: '4', ariaLabel: '', maxPage: '100', minPage: '1', size: 'medium' };
+Default.args = {
+  activePage: '4',
+  ariaLabel: '',
+  maxPage: '100',
+  minPage: '1',
+  size: 'medium',
+};
 
-export const Large = ({ activePage, ariaLabel, maxPage, minPage, size }) => html`
+export const Large = ({
+  activePage,
+  ariaLabel,
+  maxPage,
+  minPage,
+  size,
+}) => html`
   <modus-pagination
     active-page=${activePage}
     aria-label=${ariaLabel}
@@ -84,9 +102,21 @@ export const Large = ({ activePage, ariaLabel, maxPage, minPage, size }) => html
     Large
   </modus-pagination>
 `;
-Large.args = { activePage: '4', ariaLabel: '', maxPage: '100', minPage: '1', size: 'large' };
+Large.args = {
+  activePage: '4',
+  ariaLabel: '',
+  maxPage: '100',
+  minPage: '1',
+  size: 'large',
+};
 
-export const Small = ({ activePage, ariaLabel, maxPage, minPage, size }) => html`
+export const Small = ({
+  activePage,
+  ariaLabel,
+  maxPage,
+  minPage,
+  size,
+}) => html`
   <modus-pagination
     active-page=${activePage}
     aria-label=${ariaLabel}
@@ -96,4 +126,10 @@ export const Small = ({ activePage, ariaLabel, maxPage, minPage, size }) => html
     Small
   </modus-pagination>
 `;
-Small.args = { activePage: '4', ariaLabel: '', maxPage: '100', minPage: '1', size: 'small' };
+Small.args = {
+  activePage: '4',
+  ariaLabel: '',
+  maxPage: '100',
+  minPage: '1',
+  size: 'small',
+};

@@ -1,4 +1,4 @@
-import { Story } from "@storybook/addon-docs";
+import { Story } from '@storybook/addon-docs';
 
 # Select
 
@@ -10,21 +10,37 @@ This component is compatible with Angular reactive forms. This can be achieved t
 
 ### Default
 
-<Story id="user-inputs-select--default" height={'325px'}/>
+<Story id="user-inputs-select--default" height={'325px'} />
 
 ```html
 <!-- Without preset value -->
-<modus-select id="select-demo-1" label="Select Demo 1" options-display-prop="display"></modus-select>
+<modus-select
+  id="select-demo-1"
+  label="Select Demo 1"
+  options-display-prop="display"></modus-select>
 <script>
-  const modusSelect = document.querySelector("#select-demo-1");
-  modusSelect.options = [{ display: "Option 1" }, { display: "Option 2" }, { display: "Option 3" }];
+  const modusSelect = document.querySelector('#select-demo-1');
+  modusSelect.options = [
+    { display: 'Option 1' },
+    { display: 'Option 2' },
+    { display: 'Option 3' },
+  ];
 </script>
 
 <!-- Disabled with helper text and preset value -->
-<modus-select disabled helper-text="Helper demo" id="select-demo-2" label="Select Demo 2" options-display-prop="display"></modus-select>
+<modus-select
+  disabled
+  helper-text="Helper demo"
+  id="select-demo-2"
+  label="Select Demo 2"
+  options-display-prop="display"></modus-select>
 <script>
-  const modusSelect = document.querySelector("#select-demo-2");
-  const options = [{ display: "Option 1" }, { display: "Option 2" }, { display: "Option 3" }];
+  const modusSelect = document.querySelector('#select-demo-2');
+  const options = [
+    { display: 'Option 1' },
+    { display: 'Option 2' },
+    { display: 'Option 3' },
+  ];
   modusSelect.options = options;
   modusSelect.value = options[1];
 </script>

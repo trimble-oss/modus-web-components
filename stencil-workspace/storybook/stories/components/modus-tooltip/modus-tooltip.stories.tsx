@@ -9,16 +9,14 @@ export default {
       page: docs,
     },
     options: {
-      isToolshown: true
+      isToolshown: true,
     },
     controls: {
       disabled: true,
     },
-    viewMode: 'docs'
+    viewMode: 'docs',
   },
 };
 
-const Template = () => html`
-  <modus-tooltip></modus-tooltip>
-`;
+const Template = () => html` <modus-tooltip></modus-tooltip> `;
 export const Default = Template.bind({});

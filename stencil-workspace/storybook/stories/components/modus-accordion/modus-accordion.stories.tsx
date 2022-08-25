@@ -12,20 +12,18 @@ export default {
       disabled: true,
     },
     options: {
-      isToolshown: true
-    }
+      isToolshown: true,
+    },
   },
 };
 
 const Template = () => html`
-<modus-accordion>
-  <modus-accordion-item header-text="Item 1">Content</modus-accordion-item>
-  <modus-accordion-item header-text="Item 2">Content</modus-accordion-item>
-  <modus-accordion-item disabled header-text="Item 3">
-    Content
-  </modus-accordion-item>
-</modus-accordion>
+  <modus-accordion>
+    <modus-accordion-item header-text="Item 1">Content</modus-accordion-item>
+    <modus-accordion-item header-text="Item 2">Content</modus-accordion-item>
+    <modus-accordion-item disabled header-text="Item 3">
+      Content
+    </modus-accordion-item>
+  </modus-accordion>
 `;
 export const Default = Template.bind({});
-
-

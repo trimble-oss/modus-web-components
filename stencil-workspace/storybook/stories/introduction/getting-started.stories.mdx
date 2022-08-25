@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/addon-docs";
+import { Meta } from '@storybook/addon-docs';
 
 <Meta
   title="Introduction/Getting Started"
@@ -11,13 +11,13 @@ import { Meta } from "@storybook/addon-docs";
     options: {
       isToolshown: false,
     },
-    viewMode: "docs",
+    viewMode: 'docs',
   }}
 />
 
 # Getting Started
 
-The Modus Web Components package is hosted publicly through the NPM package registry. To consume this package, you'll need to have the [NPM CLI](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) installed.
+The Modus Web Components package is hosted publicly through the npm package registry. To consume this package, you'll need to have the [npm CLI](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) installed.
 
 ## Installation
 
@@ -31,14 +31,18 @@ npm install @trimble-oss/modus-web-components --save
 
 ```html
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=fallback" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons&display=block" rel="stylesheet" />
+<link
+  href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=fallback"
+  rel="stylesheet" />
+<link
+  href="https://fonts.googleapis.com/icon?family=Material+Icons&display=block"
+  rel="stylesheet" />
 ```
 
 3. The package exposes the `defineCustomElements()` method which will define every component in the bundle. It does not run automatically, so you must import it and execute it yourself. We recommend you do this near the root of your application like so:
 
 ```javascript
-import { defineCustomElements } from "@trimble-oss/modus-web-components/loader";
+import { defineCustomElements } from '@trimble-oss/modus-web-components/loader';
 
 defineCustomElements();
 ```
@@ -52,3 +56,11 @@ defineCustomElements();
 ## Recommendations
 
 - Abstract away from 3rd party libraries. Consider wrapping each Modus Web Component in a component native to your application.
+
+## GitHub
+
+<img src={'github.svg'} height={'20'} width={'20'} alt="GitHub Icon" /> <a
+  href="https://github.com/trimble-oss/modus-web-components"
+  target="_blank">
+  Modus Web Component Library (built on Stencil)
+</a>

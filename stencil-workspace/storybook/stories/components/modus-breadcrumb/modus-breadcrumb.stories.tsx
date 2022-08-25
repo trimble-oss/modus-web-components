@@ -13,8 +13,8 @@ export default {
       disabled: true,
     },
     options: {
-      isToolshown: true
-    }
+      isToolshown: true,
+    },
   },
 };
 
@@ -38,4 +38,4 @@ const setBreadcrumb = () => {
   `;
 
   return tag;
-}
+};

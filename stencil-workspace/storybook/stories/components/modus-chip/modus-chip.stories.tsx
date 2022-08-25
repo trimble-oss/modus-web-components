@@ -94,7 +94,17 @@ export default {
   },
 };
 
-export const Default = ({ ariaLabel, chipStyle, disabled, hasError, imageUrl, showCheckmark, showClose, size, value }) => html`
+export const Default = ({
+  ariaLabel,
+  chipStyle,
+  disabled,
+  hasError,
+  imageUrl,
+  showCheckmark,
+  showClose,
+  size,
+  value,
+}) => html`
   <modus-chip
     aria-label=${ariaLabel}
     chip-style=${chipStyle}
@@ -116,10 +126,20 @@ Default.args = {
   showCheckmark: false,
   showClose: false,
   size: 'medium',
-  value: 'Bryan'
+  value: 'Bryan',
 };
 
-export const Outline = ({ ariaLabel, chipStyle, disabled, hasError, imageUrl, showCheckmark, showClose, size, value }) => html`
+export const Outline = ({
+  ariaLabel,
+  chipStyle,
+  disabled,
+  hasError,
+  imageUrl,
+  showCheckmark,
+  showClose,
+  size,
+  value,
+}) => html`
   <modus-chip
     aria-label=${ariaLabel}
     chip-style=${chipStyle}
@@ -141,6 +161,5 @@ Outline.args = {
   showCheckmark: false,
   showClose: false,
   size: 'medium',
-  value: 'Bryan'
+  value: 'Bryan',
 };
-

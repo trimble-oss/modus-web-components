@@ -1,4 +1,4 @@
-name: Create and publish React NPM package
+name: Create and publish React npm package
 on:
   workflow_dispatch:
 jobs:
@@ -27,14 +27,14 @@ jobs:
       - name: Build React project
         run: npm run build
 
-      - name: Set NPM Registry Auth Token
+      - name: Set npm Registry Auth Token
         run: npm set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TRIMBLE_OSS_AUTOMATION_TOKEN }}
 
-      - name: Publish React NPM Package Publicly
+      - name: Publish React npm Package Publicly
         run: npm publish --access public
 
       - name: Set GitHub Registry Auth Token
         run: npm set //npm.pkg.github.com/:_authToken ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Publish React NPM Package to GitHub Registry
+      - name: Publish React npm Package to GitHub Registry
         run: npm publish --access public --ignore-scripts --@trimble-oss:registry='https://npm.pkg.github.com'

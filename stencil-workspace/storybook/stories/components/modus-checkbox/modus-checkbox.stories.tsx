@@ -54,12 +54,35 @@ export default {
   },
 };
 
-const Template = ({ ariaLabel, checked, disabled, indeterminate, label }) => html`
-  <modus-checkbox aria-label=${ariaLabel} checked=${checked} disabled=${disabled} indeterminate=${indeterminate} label=${label}></modus-checkbox>
+const Template = ({
+  ariaLabel,
+  checked,
+  disabled,
+  indeterminate,
+  label,
+}) => html`
+  <modus-checkbox
+    aria-label=${ariaLabel}
+    checked=${checked}
+    disabled=${disabled}
+    indeterminate=${indeterminate}
+    label=${label}></modus-checkbox>
 `;
 
 export const Default = Template.bind({});
-Default.args = { ariaLabel: '', checked: false, disabled: false, indeterminate: false, label: 'Checkbox' };
+Default.args = {
+  ariaLabel: '',
+  checked: false,
+  disabled: false,
+  indeterminate: false,
+  label: 'Checkbox',
+};
 
 export const Indeterminate = Template.bind({});
-Indeterminate.args = { ariaLabel: '', checked: false, disabled: false, indeterminate: true, label: 'Checkbox' };
+Indeterminate.args = {
+  ariaLabel: '',
+  checked: false,
+  disabled: false,
+  indeterminate: true,
+  label: 'Checkbox',
+};

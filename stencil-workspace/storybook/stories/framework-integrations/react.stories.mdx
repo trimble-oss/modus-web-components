@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/addon-docs";
+import { Meta } from '@storybook/addon-docs';
 
 <Meta
   title="Framework Integrations/React"
@@ -11,7 +11,7 @@ import { Meta } from "@storybook/addon-docs";
     options: {
       isToolshown: false,
     },
-    viewMode: "docs",
+    viewMode: 'docs',
   }}
 />
 
@@ -47,20 +47,29 @@ Each part of the component is able to be abstracted, leaving you with a React co
 A wrapped Modus Button will look like this:
 
 ```javascript
-import React from "react";
+import React from 'react';
 
 declare interface ButtonComponentProps {
-  buttonStyle?: "borderless" | "fill" | "outline";
+  buttonStyle?: 'borderless' | 'fill' | 'outline';
   children?: React.ReactNode | React.ReactNode[];
-  color?: "danger" | "default" | "primary" | "secondary" | "warning";
+  color?: 'danger' | 'default' | 'primary' | 'secondary' | 'warning';
   disabled?: boolean;
   onClick?: (event: React.MouseEvent) => void;
-  size?: "small" | "medium" | "large";
+  size?: 'small' | 'medium' | 'large';
 }
 
-const ButtonComponent: React.FC<ButtonComponentProps> = (props: ButtonComponentProps) => {
+const ButtonComponent: React.FC<ButtonComponentProps> = (
+  props: ButtonComponentProps
+) => {
   return (
-    <modus-button button-style={props.buttonStyle} color={props.color} disabled={props.disabled} onClick={(event: React.MouseEvent) => (props.onClick ? props.onClick(event) : null)} size={props.size}>
+    <modus-button
+      button-style={props.buttonStyle}
+      color={props.color}
+      disabled={props.disabled}
+      onClick={(event: React.MouseEvent) =>
+        props.onClick ? props.onClick(event) : null
+      }
+      size={props.size}>
       {props.children}
     </modus-button>
   );
