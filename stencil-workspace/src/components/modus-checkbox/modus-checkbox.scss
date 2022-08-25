@@ -11,7 +11,7 @@
   flex-direction: row;
   font-family: $primary-font;
   font-size: $label-font-size;
-  height: 2rem;
+  height: $rem-24px;
   text-align: center;
   white-space: nowrap;
 
@@ -21,9 +21,11 @@
     border: $rem-2px solid $col_gray_4;
     border-radius: $rem-2px;
     display: flex;
+    height: $rem-16px;
     justify-content: center;
     margin: 0 .28rem;
     transition: background-color .15s ease-in-out;
+    width: $rem-16px;
 
     &.blue-background {
       background-color: $col_trimble_blue;
@@ -66,24 +68,6 @@
 
     &.disabled {
       color: $col_gray_9;
-    }
-  }
-
-  &.medium {
-    height: $rem-24px;
-
-    .checkbox {
-      height: $rem-16px;
-      width: $rem-16px;
-    }
-  }
-
-  &.small {
-    height: $rem-18px;
-
-    .checkbox {
-      height: $rem-12px;
-      width: $rem-12px;
     }
   }
 

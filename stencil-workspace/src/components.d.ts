@@ -140,10 +140,6 @@ export namespace Components {
           * (optional) The checkbox label.
          */
         "label": string;
-        /**
-          * (optional) The size of the button
-         */
-        "size": 'small' | 'medium';
     }
     interface ModusChip {
         /**
@@ -1288,10 +1284,6 @@ declare namespace LocalJSX {
           * An event that fires on checkbox click.
          */
         "onCheckboxClick"?: (event: ModusCheckboxCustomEvent<boolean>) => void;
-        /**
-          * (optional) The size of the button
-         */
-        "size"?: 'small' | 'medium';
     }
     interface ModusChip {
         /**

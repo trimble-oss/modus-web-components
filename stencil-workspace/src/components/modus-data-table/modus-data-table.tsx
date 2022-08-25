@@ -169,24 +169,22 @@ export class ModusDataTable {
     return (
       <table class={className}>
         <colgroup>
-          {this.selectionOptions.canSelect && this.selectionOptions.checkboxSelection && <col style={{width: '34px'}} />}
-          {(this.columns as TColumn[])?.map((column: TColumn) => <col style={{width: column.width }} />)}
+          {this.selectionOptions.canSelect && this.selectionOptions.checkboxSelection && <col style={{ width: '34px' }} />}
+          {(this.columns as TColumn[])?.map((column: TColumn) => (
+            <col style={{ width: column.width }} />
+          ))}
         </colgroup>
         <thead>
           <tr>
             {this.selectionOptions.canSelect && this.selectionOptions.checkboxSelection && (
               <th>
                 <div class="column-header align-center">
-                  <modus-checkbox checked={this.allSelected} onCheckboxClick={(e) => this.handleHeaderCheckboxClick(e.detail)} size="small"/>
+                  <modus-checkbox checked={this.allSelected} onCheckboxClick={(e) => this.handleHeaderCheckboxClick(e.detail)} />
                 </div>
               </th>
             )}
             {(this.columns as TColumn[])?.map((column: TColumn) => (
-              <ModusDataTableHeader
-                column={column}
-                onColumnHeaderClick={(id: string) => this.handleColumnHeaderClick(id)}
-                sortOptions={this.sortOptions}
-                sortState={this.sortState} />
+              <ModusDataTableHeader column={column} onColumnHeaderClick={(id: string) => this.handleColumnHeaderClick(id)} sortOptions={this.sortOptions} sortState={this.sortState} />
             ))}
           </tr>
         </thead>
@@ -194,9 +192,9 @@ export class ModusDataTable {
           {this.data?.map((row) => (
             <tr onClick={() => this.handleRowClick(row._id)} onDblClick={() => this.handleRowDoubleClick(row._id)}>
               {this.selectionOptions.canSelect && this.selectionOptions.checkboxSelection && (
-                <td class={`align-center ${row._selected ? 'selected' : ''}`} onClick={e => e.stopPropagation()} onDblClick={e => e.stopPropagation()}>
+                <td class={`align-center ${row._selected ? 'selected' : ''}`} onClick={(e) => e.stopPropagation()} onDblClick={(e) => e.stopPropagation()}>
                   <div>
-                    <modus-checkbox checked={row._selected} onCheckboxClick={() => this.handleCheckboxClick(row._id)} size="small" />
+                    <modus-checkbox checked={row._selected} onCheckboxClick={() => this.handleCheckboxClick(row._id)} />
                   </div>
                 </td>
               )}

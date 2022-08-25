@@ -18,19 +18,6 @@ describe('modus-checkbox', () => {
     expect(label).toBeNull();
   });
 
-  it('renders changes to the size prop', async () => {
-    const page = await newE2EPage();
-
-    await page.setContent('<modus-checkbox></modus-checkbox>');
-    const component = await page.find('modus-checkbox');
-    const element = await page.find('modus-checkbox >>> .modus-checkbox');
-    expect(element).toHaveClass('medium');
-
-    component.setProperty('size', 'small');
-    await page.waitForChanges();
-    expect(element).toHaveClass('small');
-  });
-
   it('renders changes to the label', async () => {
     const page = await newE2EPage();
 
@@ -81,7 +68,7 @@ describe('modus-checkbox', () => {
 
     await page.setContent('<modus-checkbox></modus-checkbox>');
     const checkboxClick = await page.spyOnEvent('checkboxClick');
-    const element = await page.find('modus-checkbox >>> .modus-checkbox')
+    const element = await page.find('modus-checkbox >>> .modus-checkbox');
     await page.waitForChanges();
 
     await element.click();
@@ -94,7 +81,7 @@ describe('modus-checkbox', () => {
 
     await page.setContent('<modus-checkbox disabled></modus-checkbox>');
     const checkboxClick = await page.spyOnEvent('checkboxClick');
-    const element = await page.find('modus-checkbox >>> .modus-checkbox')
+    const element = await page.find('modus-checkbox >>> .modus-checkbox');
     await page.waitForChanges();
 
     await element.click();
@@ -107,7 +94,7 @@ describe('modus-checkbox', () => {
 
     await page.setContent('<modus-checkbox></modus-checkbox>');
     const modusCheckbox = await page.find('modus-checkbox');
-    const element = await page.find('modus-checkbox >>> .modus-checkbox')
+    const element = await page.find('modus-checkbox >>> .modus-checkbox');
     await page.waitForChanges();
 
     await element.click();
@@ -136,7 +123,7 @@ describe('modus-checkbox', () => {
 
     await page.setContent('<modus-checkbox checked="false" indeterminate="true"></modus-checkbox>');
     const modusCheckbox = await page.find('modus-checkbox');
-    const element = await page.find('modus-checkbox >>> .modus-checkbox')
+    const element = await page.find('modus-checkbox >>> .modus-checkbox');
     await page.waitForChanges();
 
     const input = await page.find('modus-checkbox >>> input');
