@@ -28,6 +28,11 @@ export interface ModusDataTableSort {
 // eslint-disable-next-line
 export interface ModusDataTableSortEvent extends ModusDataTableSort {}
 
+export interface ModusDataTableRowActionClickEvent {
+  actionId: string,
+  rowId: string
+}
+
 export interface TColumn {
   align?: 'center' | 'left' | 'right';
   display: string;
@@ -37,10 +42,19 @@ export interface TColumn {
 }
 
 export interface ModusDataTableDisplayOptions {
+  animateRowActionsDropdown?: boolean;
   borderless?: boolean;
   cellBorderless?: boolean;
   rowStripe?: boolean;
   size?: 'small' | 'large';
+}
+
+export interface ModusDataTableRowAction {
+  _id: string;
+  display: {
+    icon?: string;
+    text: string;
+  };
 }
 
 export interface ModusTableSelectionOptions {

@@ -20,7 +20,7 @@ table {
       flex-direction: row;
       height: $rem-20px;
       justify-content: center;
-      padding: 0 $rem-4px;
+      padding: 0 $rem-8px;
 
       &.align-left,
       &.align-right {
@@ -58,7 +58,7 @@ table {
     td {
       background-color: $col_white;
       border: $rem-1px $col_gray_1 solid;
-      padding: 0 $rem-4px;
+      padding: 0 $rem-8px;
 
       &.align-center {
         text-align: center;
@@ -127,6 +127,82 @@ table {
     th,
     tr {
       min-height: 2rem;
+    }
+  }
+}
+
+/* Modus Data Table Row Action Dropdown */
+modus-dropdown {
+  .row-action {
+    border-radius: 50%;
+    cursor: pointer;
+    padding: $rem-2px;
+    transition: background-color 0.15s ease-in-out;
+
+    svg {
+      fill: $col_trimble_gray;
+    }
+  }
+
+  .list-container {
+    position: relative;
+    left: 84px;
+    top: -6px;
+
+    .items-container {
+      display: inline-block;
+      position: fixed;
+      width: 200px;
+
+      .action-item {
+        height: $rem-24px;
+        padding: $rem-8px;
+        text-align: left;
+        user-select: none;
+        width: 200px;
+
+        .action-item-content {
+          align-items: center;
+          background-color: $col_white;
+          border: $rem-1px solid $col_gray_1;
+          display: flex;
+          height: $rem-24px;
+          justify-content: flex-start;
+          overflow: hidden;
+          padding: $rem-8px $rem-16px;
+
+          svg {
+            margin-right: $rem-8px;
+          }
+
+          .display-text {
+            display: block;
+            font-size: $rem-16px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 100%;
+          }
+        }
+
+        &:hover {
+          .action-item-content {
+            background-color: $col_gray_0;
+          }
+        }
+      }
+    }
+  }
+
+  &:hover {
+    .row-action {
+      background-color: $col_gray_0;
+    }
+  }
+
+  &:active {
+    .row-action {
+      background-color: $col_gray_1;
     }
   }
 }

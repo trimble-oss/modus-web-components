@@ -10,6 +10,20 @@ import { Story } from '@storybook/addon-docs';
 They organize information in a way that’s easy to scan, so that users can look for patterns and insights.
 They are referenced using the `<modus-data-table>` custom HTML element.
 
+## Overview
+- [Implementation Details](#implementation-details)
+- [Inputs](#inputs)
+- [Sorting](#sorting)
+- [Selection](#selection)
+- [Display](#display)
+- [Row Actions](#row-actions)
+- [Cell Types](#cell-types)
+- [Types](#types)
+- [Properties](#properties)
+- [Events](#events)
+
+---
+
 ### Default
 
 <Story id="components-data-table--default" height={'250px'} />
@@ -90,6 +104,29 @@ To define columns and data in the table _using objects_:
   - `rowStripe`: Whether the table rows have a stripe. Defaults to false.
   - `size`: The table's size. Defaults to 'large'.
 
+### Row Actions
+
+- The table's `rowActions` can be set to give each table row a context menu.
+- When a row action is clicked, a `ModusDataTableRowActionClickEvent` is fired with the relevant `actionId`, and `rowId`.
+  - Each row action takes an `_id` (which will be emitted in the event detail), and a `display` object that sets the `text` and optional `icon`.
+    ```ts
+      document.querySelector('modus-data-table').rowActions = [
+          {
+              _id: '0',
+              display: {
+                  text: 'Delete',
+                  icon: 'delete'
+              }
+          },
+          {
+              _id: '1',
+              display: {
+                  text: 'Edit'
+              }
+          }
+      ];
+    ```
+
 ### Cell Types
 
 - The Data Table accepts `number`, `string`, `booleans`, `ModusDataTableCellBadge` and `ModusDataTableCellLink` as data.
@@ -162,12 +199,25 @@ interface ModusDataTableSort {
 }
 
 interface ModusDataTableSortEvent extends ModusDataTableSort {}
+interface ModusDataTableRowActionClickEvent {
+  actionId: string,
+  rowId: string
+}
 
 interface ModusDataTableDisplayOptions {
+  animateRowActionsDropdown?: boolean;
   borderless?: boolean;
   cellBorderless?: boolean;
   rowStripe?: boolean;
   size?: 'small' | 'large';
+}
+
+interface ModusDataTableRowAction {
+  _id: string;
+  display: {
+    icon?: string;
+    text: string;
+  };
 }
 
 interface ModusTableSelectionOptions {
@@ -183,19 +233,22 @@ interface ModusTableSortOptions {
 
 ### Properties
 
-| Property               | Attribute | Description                            | Type                           | Default                                                                       |
-| ---------------------- | --------- | -------------------------------------- | ------------------------------ | ----------------------------------------------------------------------------- | ----------- |
-| `columns` _(required)_ | --        |                                        | `TColumn[]                     | string[]`                                                                     | `undefined` |
-| `data` _(required)_    | --        |                                        | `TCell[][]                     | TRow[]`                                                                       | `undefined` |
-| `displayOptions`       | --        | Options for data table display.        | `ModusDataTableDisplayOptions` | `{ borderless: true, cellBorderless: true, rowStripe: false, size: 'large' }` |
-| `selectionOptions`     | --        | Options for data table item selection. | `ModusTableSelectionOptions`   | `{ canSelect: false, checkboxSelection: false, }`                             |
-| `sortOptions`          | --        | Options for data table column sort.    | `ModusTableSortOptions`        | `{ canSort: false, serverSide: false, }`                                      |
+| Property               | Attribute | Description                                | Type                           | Default                                                                                                                               |
+| ---------------------- | --------- | ------------------------------------------ | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `columns` _(required)_ | --        |                                            | `TColumn[], string[]`        | `undefined`                                                                                                                           |
+| `data` _(required)_    | --        |                                            | `TCell[][], TRow[]`          | `undefined`                                                                                                                           |
+| `displayOptions`       | --        | Options for data table display.            | `ModusDataTableDisplayOptions` | `{     animateRowActionsDropdown: false,     borderless: true,     cellBorderless: true,     rowStripe: false,     size: 'large'   }` |
+| `rowActions`           | --        | Actions that can be performed on each row. | `ModusDataTableRowAction[]`    | `[]`                                                                                                                                  |
+| `selectionOptions`     | --        | Options for data table item selection.     | `ModusTableSelectionOptions`   | `{     canSelect: false,     checkboxSelection: false,   }`                                                                           |
+| `sortOptions`          | --        | Options for data table column sort.        | `ModusTableSortOptions`        | `{     canSort: false,     serverSide: false,   }`                                                                                    |
+
 
 ### Events
 
-| Event            | Description                              | Type                                   |
-| ---------------- | ---------------------------------------- | -------------------------------------- |
-| `cellLinkClick`  | An event that fires on cell link click.  | `CustomEvent<ModusDataTableCellLink>`  |
-| `rowDoubleClick` | An event that fires on row double click. | `CustomEvent<string>`                  |
-| `selection`      | An event that fires on selection change. | `CustomEvent<string[]>`                |
-| `sort`           | An event that fires on column sort.      | `CustomEvent<ModusDataTableSortEvent>` |
+| Event            | Description                                       | Type                                                |
+| ---------------- | ------------------------------------------------- | --------------------------------------------------- |
+| `cellLinkClick`  | An event that fires on cell link click.           | `CustomEvent<ModusDataTableCellLink>`               |
+| `rowActionClick` | An event that fires when a row action is clicked. | `CustomEvent<{ actionId: string; rowId: string; }>` |
+| `rowDoubleClick` | An event that fires on row double click.          | `CustomEvent<string>`                               |
+| `selection`      | An event that fires on selection change.          | `CustomEvent<string[]>`                             |
+| `sort`           | An event that fires on column sort.               | `CustomEvent<ModusDataTableSortEvent>`              |

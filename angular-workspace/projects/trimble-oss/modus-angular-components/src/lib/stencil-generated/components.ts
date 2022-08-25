@@ -248,6 +248,7 @@ export class ModusChip {
 
 import type { ModusDataTableCellLink as IModusDataTableModusDataTableCellLink } from '@trimble-oss/modus-web-components';
 import type { ModusDataTableSortEvent as IModusDataTableModusDataTableSortEvent } from '@trimble-oss/modus-web-components';
+import type { ModusDataTableRowActionClickEvent as IModusDataTableModusDataTableRowActionClickEvent } from '@trimble-oss/modus-web-components';
 export declare interface ModusDataTable extends Components.ModusDataTable {
   /**
    * An event that fires on cell link click. 
@@ -265,25 +266,29 @@ export declare interface ModusDataTable extends Components.ModusDataTable {
    * An event that fires on column sort. 
    */
   sort: EventEmitter<CustomEvent<IModusDataTableModusDataTableSortEvent>>;
+  /**
+   * An event that fires when a row action is clicked. 
+   */
+  rowActionClick: EventEmitter<CustomEvent<IModusDataTableModusDataTableRowActionClickEvent>>;
 
 }
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['columns', 'data', 'displayOptions', 'selectionOptions', 'sortOptions']
+  inputs: ['columns', 'data', 'displayOptions', 'rowActions', 'selectionOptions', 'sortOptions']
 })
 @Component({
   selector: 'modus-data-table',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['columns', 'data', 'displayOptions', 'selectionOptions', 'sortOptions']
+  inputs: ['columns', 'data', 'displayOptions', 'rowActions', 'selectionOptions', 'sortOptions']
 })
 export class ModusDataTable {
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['cellLinkClick', 'rowDoubleClick', 'selection', 'sort']);
+    proxyOutputs(this, this.el, ['cellLinkClick', 'rowDoubleClick', 'selection', 'sort', 'rowActionClick']);
   }
 }
 
@@ -298,13 +303,13 @@ export declare interface ModusDropdown extends Components.ModusDropdown {
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['ariaLabel', 'disabled', 'placement', 'toggleElementId']
+  inputs: ['animateList', 'ariaLabel', 'customPlacement', 'disabled', 'placement', 'toggleElementId']
 })
 @Component({
   selector: 'modus-dropdown',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['ariaLabel', 'disabled', 'placement', 'toggleElementId']
+  inputs: ['animateList', 'ariaLabel', 'customPlacement', 'disabled', 'placement', 'toggleElementId']
 })
 export class ModusDropdown {
   protected el: HTMLElement;
