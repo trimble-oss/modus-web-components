@@ -1,4 +1,4 @@
-import { Story } from "@storybook/addon-docs";
+import { Story } from '@storybook/addon-docs';
 
 # Radio Group
 
@@ -19,26 +19,26 @@ A new TypeScript typing has been provided named RadioButton defined as:
 
 ### Default
 
-<Story id="components-radio-group--default" height={'150px'}/>
+<Story id="components-radio-group--default" height={'150px'} />
 
 ```html
 <modus-radio-group checked-id="1" name="my-group"></modus-radio-group>
 
 <script>
-  const modusRadioGroup = document.querySelector("modus-radio-group");
+  const modusRadioGroup = document.querySelector('modus-radio-group');
   modusRadioGroup.radioButtons = [
     {
-      id: "0",
-      label: "Radio 1",
+      id: '0',
+      label: 'Radio 1',
     },
     {
-      id: "1",
+      id: '1',
       checked: true,
-      label: "Radio 2",
+      label: 'Radio 2',
     },
     {
-      id: "2",
-      label: "Radio 3",
+      id: '2',
+      label: 'Radio 3',
     },
   ];
 </script>

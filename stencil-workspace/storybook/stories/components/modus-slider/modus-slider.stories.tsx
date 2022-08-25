@@ -7,45 +7,45 @@ export default {
   argTypes: {
     ariaLabel: {
       name: 'aria-label',
-      description: 'The slider\'s aria-label',
+      description: "The slider's aria-label",
       table: {
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     disabled: {
       description: 'Whether the slider is disabled',
       table: {
-        type: { summary: 'boolean' }
-      }
+        type: { summary: 'boolean' },
+      },
     },
     label: {
-      description: 'The slider\'s label',
+      description: "The slider's label",
       table: {
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     maxValue: {
       name: 'max-value',
-      description: 'The slider\'s maximum value',
+      description: "The slider's maximum value",
       table: {
         defaultValue: { summary: 100 },
-        type: { summary: 'number' }
+        type: { summary: 'number' },
       },
     },
     minValue: {
       name: 'min-value',
-      description: 'The slider\'s minimum value',
+      description: "The slider's minimum value",
       table: {
         defaultValue: { summary: 0 },
-        type: { summary: 'number' }
-      }
+        type: { summary: 'number' },
+      },
     },
     value: {
-      description: 'The slider\'s value',
+      description: "The slider's value",
       table: {
         defaultValue: { summary: 0 },
-        type: { summary: 'number' }
-      }
+        type: { summary: 'number' },
+      },
     },
   },
   parameters: {
@@ -57,12 +57,19 @@ export default {
       page: docs,
     },
     options: {
-      isToolshown: true
+      isToolshown: true,
     },
-  }
+  },
 };
 
-const Template = ({ ariaLabel, disabled, label, maxValue, minValue, value }) => html`
+const Template = ({
+  ariaLabel,
+  disabled,
+  label,
+  maxValue,
+  minValue,
+  value,
+}) => html`
   <modus-slider
     aria-label=${ariaLabel}
     disabled=${disabled}
@@ -74,4 +81,11 @@ const Template = ({ ariaLabel, disabled, label, maxValue, minValue, value }) => 
 `;
 
 export const Default = Template.bind({});
-Default.args = { ariaLabel: '', disabled: false, label: '', maxValue: 100, minValue: 0, value: 50 };
+Default.args = {
+  ariaLabel: '',
+  disabled: false,
+  label: '',
+  maxValue: 100,
+  minValue: 0,
+  value: 50,
+};

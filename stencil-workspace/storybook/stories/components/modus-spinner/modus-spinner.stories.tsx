@@ -8,15 +8,15 @@ export default {
     color: {
       description: 'The color of the spinner',
       table: {
-        type: { summary: 'color' }
-      }
+        type: { summary: 'color' },
+      },
     },
     size: {
       description: 'The size of the spinner',
       table: {
-        type: { summary: 'string' }
-      }
-    }
+        type: { summary: 'string' },
+      },
+    },
   },
   parameters: {
     controls: { expanded: true },
@@ -24,18 +24,14 @@ export default {
       page: docs,
     },
     options: {
-      isToolshown: true
+      isToolshown: true,
     },
   },
 };
 
-export const Default = ({ color, size }) => html`
-  <modus-spinner
-    color=${color}
-    size=${size}>
-  </modus-spinner>
-`;
+export const Default = ({ color, size }) =>
+  html` <modus-spinner color=${color} size=${size}> </modus-spinner> `;
 Default.args = {
   color: '#005F9E',
-  size: '2rem'
+  size: '2rem',
 };

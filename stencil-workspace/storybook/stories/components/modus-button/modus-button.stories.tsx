@@ -68,12 +68,37 @@ export default {
   },
 };
 
-export const Default = ({ ariaLabel, buttonStyle, color, disabled, size }) => html`
-  <modus-button aria-label=${ariaLabel} button-style=${buttonStyle} color=${color} disabled=${disabled} size=${size}> Default </modus-button>
+export const Default = ({
+  ariaLabel,
+  buttonStyle,
+  color,
+  disabled,
+  size,
+}) => html`
+  <modus-button
+    aria-label=${ariaLabel}
+    button-style=${buttonStyle}
+    color=${color}
+    disabled=${disabled}
+    size=${size}>
+    Default
+  </modus-button>
 `;
-Default.args = { ariaLabel: '', buttonStyle: 'fill', color: 'primary', disabled: false, size: 'medium' };
+Default.args = {
+  ariaLabel: '',
+  buttonStyle: 'fill',
+  color: 'primary',
+  disabled: false,
+  size: 'medium',
+};
 
-export const Borderless = ({ ariaLabel, buttonStyle, color, disabled, size }) => html`
+export const Borderless = ({
+  ariaLabel,
+  buttonStyle,
+  color,
+  disabled,
+  size,
+}) => html`
   <modus-button
     aria-label=${ariaLabel}
     button-style=${buttonStyle}
@@ -83,9 +108,21 @@ export const Borderless = ({ ariaLabel, buttonStyle, color, disabled, size }) =>
     Borderless
   </modus-button>
 `;
-Borderless.args = { ariaLabel: '', buttonStyle: 'borderless', color: 'default', disabled: false, size: 'medium' };
+Borderless.args = {
+  ariaLabel: '',
+  buttonStyle: 'borderless',
+  color: 'default',
+  disabled: false,
+  size: 'medium',
+};
 
-export const Outline = ({ ariaLabel, buttonStyle, color, disabled, size }) => html`
+export const Outline = ({
+  ariaLabel,
+  buttonStyle,
+  color,
+  disabled,
+  size,
+}) => html`
   <modus-button
     aria-label=${ariaLabel}
     button-style=${buttonStyle}
@@ -95,4 +132,10 @@ export const Outline = ({ ariaLabel, buttonStyle, color, disabled, size }) => ht
     Outline
   </modus-button>
 `;
-Outline.args = { ariaLabel: '', buttonStyle: 'outline', color: 'default', disabled: false, size: 'medium' };
+Outline.args = {
+  ariaLabel: '',
+  buttonStyle: 'outline',
+  color: 'default',
+  disabled: false,
+  size: 'medium',
+};

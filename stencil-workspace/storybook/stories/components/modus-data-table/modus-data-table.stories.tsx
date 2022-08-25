@@ -4,9 +4,7 @@ import docs from './modus-data-table-storybook-docs.mdx';
 
 export default {
   title: 'Components/Data Table',
-  argTypes: {
-
-  },
+  argTypes: {},
   parameters: {
     controls: { disabled: true, expanded: true, sort: 'alpha' },
     actions: {},
@@ -44,7 +42,7 @@ const setDataTable = () => {
   `;
 
   return tag;
-}
+};
 
 const setDataTableCanSort = () => {
   const tag = document.createElement('script');
@@ -55,4 +53,4 @@ const setDataTableCanSort = () => {
   `;
 
   return tag;
-}
+};

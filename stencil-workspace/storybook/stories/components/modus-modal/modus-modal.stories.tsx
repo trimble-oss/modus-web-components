@@ -13,18 +13,21 @@ export default {
       page: docs,
     },
     options: {
-      isToolshown: true
+      isToolshown: true,
     },
     controls: {
       disabled: true,
     },
-    viewMode: 'docs'
+    viewMode: 'docs',
   },
 };
 
 const Template = () => html`
   <modus-button id="btn-modal" color="primary">Open modal</modus-button>
-  <modus-modal header-text="Modal title" primary-button-text="Save changes" secondary-button-text="Sweet!">
+  <modus-modal
+    header-text="Modal title"
+    primary-button-text="Save changes"
+    secondary-button-text="Sweet!">
     <p>Woo-hoo, you're reading this text in a modal!</p>
   </modus-modal>
   ${setScript()}
@@ -41,4 +44,3 @@ const setScript = () => {
 
   return tag;
 };
-

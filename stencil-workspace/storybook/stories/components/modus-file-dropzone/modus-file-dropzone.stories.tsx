@@ -7,73 +7,73 @@ export default {
   argTypes: {
     ariaLabel: {
       name: 'aria-label',
-      description: 'The dropzone\'s aria-label',
+      description: "The dropzone's aria-label",
       table: {
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     description: {
       name: 'description',
-      description: 'The dropzone\'s description',
+      description: "The dropzone's description",
       table: {
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     dropzoneHeight: {
       name: 'dropzone-height',
-      description: 'The dropzone\'s height',
+      description: "The dropzone's height",
       table: {
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     dropzoneWidth: {
       name: 'dropzone-width',
-      description: 'The dropzone\'s width',
+      description: "The dropzone's width",
       table: {
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     includeStateIcon: {
       name: 'include-state-icon',
       description: 'Whether to include the state icon',
       table: {
-        type: { summary: 'boolean' }
-      }
+        type: { summary: 'boolean' },
+      },
     },
     label: {
       name: 'label',
-      description: 'The dropzone\'s label',
+      description: "The dropzone's label",
       table: {
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     maxFileCount: {
       name: 'max-file-count',
-      description: 'The dropzone\'s max file count',
+      description: "The dropzone's max file count",
       table: {
-        type: { summary: 'number' }
-      }
+        type: { summary: 'number' },
+      },
     },
     maxFileNameLength: {
       name: 'max-file-name-length',
-      description: 'The dropzone\'s max file name length',
+      description: "The dropzone's max file name length",
       table: {
-        type: { summary: 'number' }
-      }
+        type: { summary: 'number' },
+      },
     },
     maxTotalFileSizeBytes: {
       name: 'max-total-file-size-bytes',
-      description: 'The dropzone\'s max total file size bytes',
+      description: "The dropzone's max total file size bytes",
       table: {
-        type: { summary: 'number' }
-      }
+        type: { summary: 'number' },
+      },
     },
     multiple: {
       name: 'multiple',
       description: 'Whether multiple files are allowed',
       table: {
-        type: { summary: 'boolean' }
-      }
+        type: { summary: 'boolean' },
+      },
     },
   },
   parameters: {
@@ -85,22 +85,23 @@ export default {
       page: docs,
     },
     options: {
-      isToolshown: true
+      isToolshown: true,
     },
   },
 };
 
 export const Default = ({
-                          ariaLabel,
-                          description,
-                          dropzoneHeight,
-                          dropzoneWidth,
-                          includeStateIcon,
-                          label,
-                          maxFileCount,
-                          maxFileNameLength,
-                          maxTotalFileSizeBytes,
-                          multiple }) => html`
+  ariaLabel,
+  description,
+  dropzoneHeight,
+  dropzoneWidth,
+  includeStateIcon,
+  label,
+  maxFileCount,
+  maxFileNameLength,
+  maxTotalFileSizeBytes,
+  multiple,
+}) => html`
   <modus-file-dropzone
     aria-label=${ariaLabel}
     description=${description}

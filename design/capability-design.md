@@ -96,9 +96,9 @@ This project provides Trimble Modus Elements as a web component library. Web com
 
 ### Manage 3rd Party Libraries & Frameworks
 
-**Patterns** for retrieving 3rd party libraries are package registry (NPM or Yarn), CDN, and forking. NPM is preferred for larger libraries or those needed by the IDE during development. Forking is highly discouraged as it leaves all future maintenance and security concerns on us.
+**Patterns** for retrieving 3rd party libraries are package registry (npm or Yarn), CDN, and forking. npm is preferred for larger libraries or those needed by the IDE during development. Forking is highly discouraged as it leaves all future maintenance and security concerns on us.
 
-*NPM Packages*
+*npm Packages*
 
 - eslint
 - @stencil/core
@@ -124,7 +124,7 @@ This project provides Trimble Modus Elements as a web component library. Web com
 
 **SEO (Search Engine Optimization)** N/A
 
-**Publishing** The primary method of distribution will be an NPM package but a CDN is also a good idea. Published packages will follow semantic versioning rules.
+**Publishing** The primary method of distribution will be an npm package but a CDN is also a good idea. Published packages will follow semantic versioning rules.
 
 ------
 

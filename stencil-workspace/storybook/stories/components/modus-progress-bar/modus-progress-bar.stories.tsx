@@ -7,66 +7,66 @@ export default {
   argTypes: {
     ariaLabel: {
       name: 'aria-label',
-      description: 'The progress bar\'s aria-label',
+      description: "The progress bar's aria-label",
       table: {
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     backgroundColor: {
       name: 'background-color',
-      description: 'The progress bar\'s background-color',
+      description: "The progress bar's background-color",
       table: {
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     color: {
-      description: 'The progress bar\'s color',
+      description: "The progress bar's color",
       table: {
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     maxValue: {
       name: 'max-value',
-      description: 'The progress bar\'s maximum value',
+      description: "The progress bar's maximum value",
       table: {
         defaultValue: { summary: 100 },
-        type: { summary: 'number' }
+        type: { summary: 'number' },
       },
     },
     minValue: {
       name: 'min-value',
-      description: 'The progress bar\'s minimum value',
+      description: "The progress bar's minimum value",
       table: {
         defaultValue: { summary: 0 },
-        type: { summary: 'number' }
-      }
+        type: { summary: 'number' },
+      },
     },
     size: {
-      description: 'The progress bar\'s size',
+      description: "The progress bar's size",
       table: {
         defaultValue: { summary: 'default' },
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     text: {
-      description: 'The progress bar\'s text',
+      description: "The progress bar's text",
       table: {
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     textColor: {
       name: 'text-color',
-      description: 'The progress bar\'s text color',
+      description: "The progress bar's text color",
       table: {
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     value: {
-      description: 'The progress bar\'s value',
+      description: "The progress bar's value",
       table: {
         defaultValue: { summary: 0 },
-        type: { summary: 'number' }
-      }
+        type: { summary: 'number' },
+      },
     },
   },
   parameters: {
@@ -75,12 +75,22 @@ export default {
       page: docs,
     },
     options: {
-      isToolshown: true
+      isToolshown: true,
     },
   },
 };
 
-const Template = ({ ariaLabel, backgroundColor, color, maxValue, minValue, size, text, textColor, value }) => html`
+const Template = ({
+  ariaLabel,
+  backgroundColor,
+  color,
+  maxValue,
+  minValue,
+  size,
+  text,
+  textColor,
+  value,
+}) => html`
   <modus-progress-bar
     aria-label=${ariaLabel}
     background-color=${backgroundColor}
@@ -95,7 +105,27 @@ const Template = ({ ariaLabel, backgroundColor, color, maxValue, minValue, size,
 `;
 
 export const Default = Template.bind({});
-Default.args = { ariaLabel: 'progress bar', backgroundColor: '', color: '', maxValue: 100, minValue: 0, size: 'default', text: 'Some progress!', textColor: '', value: 50 };
+Default.args = {
+  ariaLabel: 'progress bar',
+  backgroundColor: '',
+  color: '',
+  maxValue: 100,
+  minValue: 0,
+  size: 'default',
+  text: 'Some progress!',
+  textColor: '',
+  value: 50,
+};
 
 export const Compact = Template.bind({});
-Compact.args = { ariaLabel: 'progress bar', backgroundColor: '', color: '', maxValue: 100, minValue: 0, size: 'compact', text: '', textColor: '', value: 50 };
+Compact.args = {
+  ariaLabel: 'progress bar',
+  backgroundColor: '',
+  color: '',
+  maxValue: 100,
+  minValue: 0,
+  size: 'compact',
+  text: '',
+  textColor: '',
+  value: 50,
+};

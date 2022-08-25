@@ -10,18 +10,26 @@ export default {
       page: docs,
     },
     options: {
-      isToolshown: true
+      isToolshown: true,
     },
     controls: {
       disabled: true,
     },
-    viewMode: 'docs'
+    viewMode: 'docs',
   },
 };
 
 const Template = () => html`
-  <modus-select id="select-demo-1" label="Select Demo 1" options-display-prop="display"></modus-select>
-  <modus-select disabled helper-text="Helper demo" id="select-demo-2" label="Select Demo 2" options-display-prop="display"></modus-select>
+  <modus-select
+    id="select-demo-1"
+    label="Select Demo 1"
+    options-display-prop="display"></modus-select>
+  <modus-select
+    disabled
+    helper-text="Helper demo"
+    id="select-demo-2"
+    label="Select Demo 2"
+    options-display-prop="display"></modus-select>
   <modus-select error-text="Error demo" label="Select Demo 3"></modus-select>
   <modus-select label="Select Demo 4" valid-text="Valid demo"></modus-select>
   ${setSelects()}

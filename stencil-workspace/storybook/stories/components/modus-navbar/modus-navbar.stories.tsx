@@ -10,12 +10,12 @@ export default {
       page: docs,
     },
     options: {
-      isToolshown: true
+      isToolshown: true,
     },
     controls: {
       disabled: true,
     },
-    viewMode: 'docs'
+    viewMode: 'docs',
   },
 };
 
@@ -44,5 +44,4 @@ const setNavbar = () => {
   `;
 
   return tag;
-}
-
+};

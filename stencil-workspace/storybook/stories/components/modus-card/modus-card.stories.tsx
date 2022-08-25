@@ -12,17 +12,17 @@ export default {
       disabled: true,
     },
     options: {
-      isToolshown: true
-    }
+      isToolshown: true,
+    },
   },
 };
 
 const Template = () => html`
-<modus-card>
-  <!-- Render anything here -->
-  <div>
-    <img src="https://modus.trimble.com/icon.png" alt="Trimble icon" />
-  </div>
-</modus-card>
+  <modus-card>
+    <!-- Render anything here -->
+    <div>
+      <img src="https://modus.trimble.com/icon.png" alt="Trimble icon" />
+    </div>
+  </modus-card>
 `;
 export const Default = Template.bind({});

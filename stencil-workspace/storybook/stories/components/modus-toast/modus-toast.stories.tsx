@@ -7,37 +7,48 @@ export default {
   argTypes: {
     ariaLabel: {
       name: 'aria-label',
-      description: 'The toast\'s aria-label',
+      description: "The toast's aria-label",
       table: {
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     dismissible: {
       description: 'Whether the toast is dismissible, renders the close icon',
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },
-      }
+      },
     },
     showIcon: {
       name: 'show-icon',
-      description: 'The toast\'s message',
+      description: "The toast's message",
       table: {
-      defaultValue: { summary: true },
-        type: { summary: 'boolean' }
-      }
+        defaultValue: { summary: true },
+        type: { summary: 'boolean' },
+      },
     },
     type: {
       control: {
-        options: ['danger', 'dark', 'default', 'primary', 'secondary', 'success', 'tertiary', 'warning'],
+        options: [
+          'danger',
+          'dark',
+          'default',
+          'primary',
+          'secondary',
+          'success',
+          'tertiary',
+          'warning',
+        ],
         type: 'select',
       },
       description: 'The type of the toast',
       table: {
         defaultValue: { summary: `'default'` },
-        type: { summary: `'danger' | 'dark' | 'default' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning'` },
-      }
-    }
+        type: {
+          summary: `'danger' | 'dark' | 'default' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning'`,
+        },
+      },
+    },
   },
   parameters: {
     actions: {
@@ -48,21 +59,28 @@ export default {
       page: docs,
     },
     options: {
-      isToolshown: true
+      isToolshown: true,
     },
   },
 };
 
-const Template = ({ariaLabel, dismissible, showIcon, type}) => html`
-  <modus-toast aria-label=${ariaLabel} dismissible=${dismissible} show-icon=${showIcon} type=${type}>Toast!</modus-toast>
-`;
+const Template = ({ ariaLabel, dismissible, showIcon, type }) =>
+  html`
+    <modus-toast
+      aria-label=${ariaLabel}
+      dismissible=${dismissible}
+      show-icon=${showIcon}
+      type=${type}
+      >Toast!</modus-toast
+    >
+  `;
 
 export const Default = Template.bind({});
 Default.args = {
   ariaLabel: '',
   dismissible: false,
   showIcon: true,
-  type: 'default'
+  type: 'default',
 };
 
 export const Danger = Template.bind({});
@@ -70,7 +88,7 @@ Danger.args = {
   ariaLabel: '',
   dismissible: false,
   showIcon: true,
-  type: 'danger'
+  type: 'danger',
 };
 
 export const Dark = Template.bind({});
@@ -78,7 +96,7 @@ Dark.args = {
   ariaLabel: '',
   dismissible: false,
   showIcon: true,
-  type: 'dark'
+  type: 'dark',
 };
 
 export const Primary = Template.bind({});
@@ -86,7 +104,7 @@ Primary.args = {
   ariaLabel: '',
   dismissible: false,
   showIcon: true,
-  type: 'primary'
+  type: 'primary',
 };
 
 export const Secondary = Template.bind({});
@@ -94,7 +112,7 @@ Secondary.args = {
   ariaLabel: '',
   dismissible: false,
   showIcon: true,
-  type: 'secondary'
+  type: 'secondary',
 };
 
 export const Success = Template.bind({});
@@ -102,7 +120,7 @@ Success.args = {
   ariaLabel: '',
   dismissible: false,
   showIcon: true,
-  type: 'success'
+  type: 'success',
 };
 
 export const Tertiary = Template.bind({});
@@ -110,7 +128,7 @@ Tertiary.args = {
   ariaLabel: '',
   dismissible: false,
   showIcon: true,
-  type: 'tertiary'
+  type: 'tertiary',
 };
 
 export const Warning = Template.bind({});
@@ -118,8 +136,5 @@ Warning.args = {
   ariaLabel: '',
   dismissible: false,
   showIcon: true,
-  type: 'warning'
+  type: 'warning',
 };
-
-
-
