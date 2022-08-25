@@ -37,77 +37,21 @@
 
 ### Properties
 
-<section>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Type</th>
-        <th>Options</th>
-        <th>Default Value</th>
-        <th>Required</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>toggle-element-id</td>
-        <td>The id of the toggle element</td>
-        <td>string</td>
-        <td></td>
-        <td></td>
-        <td>
-          <span class="material-icons">&#10004;</span>
-        </td>
-      </tr>
-      <tr>
-        <td>aria-label</td>
-        <td>The dropdown's aria-label</td>
-        <td>string</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>disabled</td>
-        <td>Disables the button</td>
-        <td>boolean</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>placement</td>
-        <td>The placement of the list in relation to the toggle element</td>
-        <td>string</td>
-        <td>'top', 'right', 'bottom', 'left'</td>
-        <td>'bottom'</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+| Property          | Attribute           | Description                                                                                      | Type                                                                | Default     |
+| ----------------- | ------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------- | ----------- |
+| `animateList`     | `animate-list`      | Whether to apply list opening animation.                                                         | `boolean`                                                           | `false`     |
+| `ariaLabel`       | `aria-label`        | (optional) The dropdown's aria-label.                                                            | `string`                                                            | `undefined` |
+| `customPlacement` | --                  | (optional) Determines custom dropdown placement offset.                                          | `{ top?: number; right?: number; bottom?: number; left?: number; }` | `undefined` |
+| `disabled`        | `disabled`          | (optional) Disables the dropdown.                                                                | `boolean`                                                           | `undefined` |
+| `placement`       | `placement`         | (optional) The placement of the dropdown in related to the toggleElement.                        | `"bottom", "left", "right", "top"`                                  | `'bottom'`  |
+| `toggleElementId` | `toggle-element-id` | (required) The element id that the list renders near and that triggers the toggling of the list. | `string`                                                            | `undefined` |
 
-### DOM Events
 
-<section>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Emits</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>dropdownClose</td>
-        <td>Fires on dropdown list close</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+### Events
+
+| Event           | Description                            | Type               |
+| --------------- | -------------------------------------- | ------------------ |
+| `dropdownClose` | An event that fires on dropdown close. | `CustomEvent<any>` |
 
 ### Accessibility
 

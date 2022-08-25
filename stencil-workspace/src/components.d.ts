@@ -6,7 +6,7 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
-import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableSortEvent, ModusTableSelectionOptions, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
+import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSortEvent, ModusTableSelectionOptions, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 import { App } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { App as App1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
@@ -187,6 +187,10 @@ export namespace Components {
          */
         "displayOptions"?: ModusDataTableDisplayOptions;
         /**
+          * Actions that can be performed on each row.
+         */
+        "rowActions"?: ModusDataTableRowAction[];
+        /**
           * Options for data table item selection.
          */
         "selectionOptions"?: ModusTableSelectionOptions;
@@ -197,9 +201,22 @@ export namespace Components {
     }
     interface ModusDropdown {
         /**
+          * Whether to apply list opening animation.
+         */
+        "animateList": boolean;
+        /**
           * (optional) The dropdown's aria-label.
          */
         "ariaLabel": string;
+        /**
+          * (optional) Determines custom dropdown placement offset.
+         */
+        "customPlacement": {
+    top?: number,
+    right?: number,
+    bottom?: number,
+    left?: number
+  };
         /**
           * (optional) Disables the dropdown.
          */
@@ -1343,6 +1360,10 @@ declare namespace LocalJSX {
          */
         "onCellLinkClick"?: (event: ModusDataTableCustomEvent<ModusDataTableCellLink>) => void;
         /**
+          * An event that fires when a row action is clicked.
+         */
+        "onRowActionClick"?: (event: ModusDataTableCustomEvent<ModusDataTableRowActionClickEvent>) => void;
+        /**
           * An event that fires on row double click.
          */
         "onRowDoubleClick"?: (event: ModusDataTableCustomEvent<string>) => void;
@@ -1355,6 +1376,10 @@ declare namespace LocalJSX {
          */
         "onSort"?: (event: ModusDataTableCustomEvent<ModusDataTableSortEvent>) => void;
         /**
+          * Actions that can be performed on each row.
+         */
+        "rowActions"?: ModusDataTableRowAction[];
+        /**
           * Options for data table item selection.
          */
         "selectionOptions"?: ModusTableSelectionOptions;
@@ -1365,9 +1390,22 @@ declare namespace LocalJSX {
     }
     interface ModusDropdown {
         /**
+          * Whether to apply list opening animation.
+         */
+        "animateList"?: boolean;
+        /**
           * (optional) The dropdown's aria-label.
          */
         "ariaLabel"?: string;
+        /**
+          * (optional) Determines custom dropdown placement offset.
+         */
+        "customPlacement"?: {
+    top?: number,
+    right?: number,
+    bottom?: number,
+    left?: number
+  };
         /**
           * (optional) Disables the dropdown.
          */

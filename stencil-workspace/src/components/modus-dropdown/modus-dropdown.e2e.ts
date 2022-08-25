@@ -9,6 +9,26 @@ describe('modus-dropdown', () => {
     expect(element).toHaveClass('hydrated');
   });
 
+  it('renders changes to the animateList prop', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-dropdown toggle-element-id='toggle-id'>
+        <modus-button id='toggle-id'>Dropdown</modus-button>
+        <modus-list>
+          <modus-list-item>Item 1</modus-list-item>
+        </modus-list>
+      </modus-dropdown>
+    `);
+    const component = await page.find('modus-dropdown');
+    const element = await page.find('modus-dropdown >>> .dropdown-list');
+    expect(element).not.toHaveClass('animate-list');
+
+    component.setProperty('animateList', 'true');
+    await page.waitForChanges();
+    expect(element).toHaveClass('animate-list');
+  });
+
   it('renders changes to the placement prop', async () => {
     const page = await newE2EPage();
 

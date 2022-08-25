@@ -27,6 +27,7 @@ import { IconWarningOutline } from './icon-warning-outline';
 import { IconChevronLeftThick } from './icon-chevron-left-thick';
 import { IconChevronUpThick } from './icon-chevron-up-thick';
 import { IconDelete } from './icon-delete';
+import { IconVerticalEllipsis } from './icon-vertical-ellipsis';
 
 interface IconProps {
   color?: string;
@@ -62,6 +63,7 @@ export const IconMap: FunctionalComponent<IconProps> = (props: IconProps) => {
     case 'sort-z-a': return <IconSortZA color={props.color} onClick={props.onClick} size={props.size} />;
     case 'triangle-down': return <IconTriangleDown color={props.color} onClick={props.onClick} size={props.size} />;
     case 'upload-cloud': return <IconUploadCloud color={props.color} onClick={props.onClick} size={props.size} />;
+    case 'vertical-ellipsis': return <IconVerticalEllipsis color={props.color} onClick={props.onClick} size={props.size} />;
     case 'warning': return <IconWarning color={props.color} onClick={props.onClick} size={props.size} />;
     case 'warning-outline': return <IconWarningOutline color={props.color} onClick={props.onClick} size={props.size} />;
   }

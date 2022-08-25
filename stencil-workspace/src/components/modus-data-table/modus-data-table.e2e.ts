@@ -278,6 +278,31 @@ describe('modus-data-table', () => {
     expect(cells[2].innerHTML).toEqual('Val1');
   });
 
+  it('should maintain row selection after sort', async () => {
+    const component = await page.find('modus-data-table');
+    component.setProperty('columns', [{ display: 'Col1' }]);
+    component.setProperty('data', [['Val2'], ['Val3'], ['Val1']]);
+    component.setProperty('selectionOptions', { canSelect: true, serverSide: false });
+    component.setProperty('sortOptions', { canSort: true, serverSide: false });
+    await page.waitForChanges();
+
+    let cells = await page.findAll('modus-data-table >>> td');
+    let cell = cells.find((cell) => cell.innerHTML === 'Val2');
+    await cell.click();
+    await page.waitForChanges();
+
+    const header = await page.find('modus-data-table >>> th');
+    await header.click({ clickCount: 6 }); // Cycle through original data value replacement
+    await page.waitForChanges();
+
+    cells = await page.findAll('modus-data-table >>> td');
+    cell = cells.find((cell) => cell.innerHTML === 'Val2');
+
+    await page.waitForChanges();
+
+    expect(cell.classList.contains('selected')).toBeTruthy();
+  });
+
   it('should select when canSelect is true', async () => {
     const component = await page.find('modus-data-table');
     component.setProperty('columns', [{ display: 'Col1' }]);
@@ -748,5 +773,47 @@ describe('modus-data-table', () => {
     expect(cells[2].innerHTML).toEqual('Badge B');
 
     expect(sortEvent).toHaveReceivedEventTimes(3);
+  });
+
+  it('renders changes to rowActions', async () => {
+    const component = await page.find('modus-data-table');
+    component.setProperty('columns', ['Name', 'Age']);
+    component.setProperty('data', [{ name: 'Josh', age: 25 }]);
+    component.setProperty('rowActions', [{
+      _id: 'delete',
+      display: {
+        text: 'Delete',
+        icon: 'delete'
+      }
+    }]);
+    await page.waitForChanges();
+
+    const rowAction = await page.find('modus-data-table >>> .action-item');
+    expect(rowAction).toBeTruthy();
+  });
+
+  it('should fire rowActionClick when row action is clicked', async () => {
+    const component = await page.find('modus-data-table');
+    component.setProperty('columns', ['Name', 'Age']);
+    component.setProperty('data', [{ _id: 'josh', name: 'Josh', age: 25 }]);
+    component.setProperty('rowActions', [{
+      _id: 'delete',
+      display: {
+        text: 'Delete',
+        icon: 'delete'
+      }
+    }]);
+    await page.waitForChanges();
+
+    const rowActionClick = await page.spyOnEvent('rowActionClick');
+    const rowAction = await page.find('modus-data-table >>> .row-action');
+    const actionItem = await page.find('modus-data-table >>> .action-item');
+
+    await rowAction.click();
+    await actionItem.click();
+    await page.waitForChanges();
+
+    expect(rowActionClick).toHaveReceivedEventDetail({ actionId: 'delete', rowId: 'josh' });
+    expect(rowActionClick).toHaveReceivedEventTimes(1);
   });
 });

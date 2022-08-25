@@ -11,13 +11,23 @@
     display: none;
     max-height: 200px;
     max-width: 300px;
+    opacity: 1;
     overflow-x: hidden;
     overflow-y: auto;
     position: absolute;
+    transition: opacity 0.2s ease-in-out;
     z-index: 1;
+
+    &.animate-list {
+      display: block;
+      opacity: 0;
+      visibility: hidden;
+    }
 
     &.visible {
       display: block;
+      opacity: 1;
+      visibility: visible;
     }
 
     &.top {

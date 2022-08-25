@@ -1,10 +1,11 @@
 // eslint-disable-next-line
 import { Component, Event, EventEmitter, h, Prop, State, Watch } from '@stencil/core';
 import { ModusDataTableUtilities } from './modus-data-table.utilities';
-import { TCell, TColumn, TRow, ModusTableSortOptions, ModusDataTableSort, ModusDataTableSortEvent, ModusTableSelectionOptions, ModusDataTableCellLink, ModusDataTableDisplayOptions } from './modus-data-table.models';
+import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSort, ModusDataTableSortEvent, ModusTableSelectionOptions, ModusTableSortOptions, TCell, TColumn, TRow } from './modus-data-table.models';
 import { ModusDataTableHeader } from './parts/modus-data-table-header';
-import { ModusDataTableCellLinkPart } from './parts/modus-data-table-cell-link';
-import { ModusDataTableCellBadgePart } from './parts/modus-data-table-cell-badge';
+import { ModusDataTableCellLinkPart } from './parts/modus-data-table-cell-link-part';
+import { ModusDataTableCellBadgePart } from './parts/modus-data-table-cell-badge-part';
+import { ModusDataTableRowActionDropdown } from './parts/modus-data-table-row-action-dropdown';
 
 @Component({
   tag: 'modus-data-table',
@@ -23,11 +24,15 @@ export class ModusDataTable {
 
   /** Options for data table display. */
   @Prop() displayOptions?: ModusDataTableDisplayOptions = {
+    animateRowActionsDropdown: false,
     borderless: true,
     cellBorderless: true,
     rowStripe: false,
     size: 'large'
   };
+
+  /** Actions that can be performed on each row. */
+  @Prop() rowActions?: ModusDataTableRowAction[] = [];
 
   /** Options for data table item selection. */
   @Prop() selectionOptions?: ModusTableSelectionOptions = {
@@ -52,6 +57,9 @@ export class ModusDataTable {
 
   /** An event that fires on column sort. */
   @Event() sort: EventEmitter<ModusDataTableSortEvent>;
+
+  /** An event that fires when a row action is clicked. */
+  @Event() rowActionClick: EventEmitter<ModusDataTableRowActionClickEvent>;
 
   @State() allSelected = false;
   @State() sortState: ModusDataTableSort = {
@@ -121,8 +129,15 @@ export class ModusDataTable {
 
     if (!this.sortOptions.serverSide) {
       this.data = this.sortState.direction === 'none'
-        ? [...this.originalData]
+        ? this.originalData.map((originalRow: TRow) => {
+          return {
+            ...originalRow,
+            _selected: (this.data as TRow[]).find((dataRow: TRow) => dataRow._id === originalRow._id)._selected
+          };
+        })
         : ModusDataTableUtilities.sortData(this.data as TRow[], this.sortState.columnId, this.sortState.direction);
+
+      this.updateAllSelected();
     }
   }
 
@@ -173,6 +188,7 @@ export class ModusDataTable {
           {(this.columns as TColumn[])?.map((column: TColumn) => (
             <col style={{ width: column.width }} />
           ))}
+          {!!this.rowActions.length && <col style={{ width: '34px' }} />}
         </colgroup>
         <thead>
           <tr>
@@ -186,6 +202,7 @@ export class ModusDataTable {
             {(this.columns as TColumn[])?.map((column: TColumn) => (
               <ModusDataTableHeader column={column} onColumnHeaderClick={(id: string) => this.handleColumnHeaderClick(id)} sortOptions={this.sortOptions} sortState={this.sortState} />
             ))}
+            {!!this.rowActions.length && <th />}
           </tr>
         </thead>
         <tbody>
@@ -205,6 +222,15 @@ export class ModusDataTable {
                   {!row[column.id]?._type && row[column.id]?.toString()}
                 </td>
               ))}
+              {!!this.rowActions.length && (
+                <td class={`align-center ${row._selected ? 'selected' : ''}`} onClick={(e) => e.stopPropagation()} onDblClick={(e) => e.stopPropagation()}>
+                  <ModusDataTableRowActionDropdown
+                    actions={this.rowActions}
+                    animateDropdown={this.displayOptions.animateRowActionsDropdown}
+                    onRowActionClick={(actionId, rowId) => this.rowActionClick.emit({ actionId, rowId })}
+                    rowId={row._id} />
+                </td>
+              )}
             </tr>
           ))}
         </tbody>
