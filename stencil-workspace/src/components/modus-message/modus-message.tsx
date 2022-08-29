@@ -11,7 +11,7 @@ import { IconMap } from '../icons/icon-map';
 })
 export class ModusMessage {
   /** (optional) The message's aria-label. */
-  @Prop() ariaLabel?: string;
+  @Prop() ariaLabel: string;
 
   /** (optional) The message's icon. */
   @Prop() icon?: string;
