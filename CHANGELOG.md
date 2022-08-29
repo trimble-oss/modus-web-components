@@ -6,6 +6,12 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 
 ## Unreleased
 
+## 0.1.15 - 2022-29-08
+
+### Fixed
+
+- Fixed explicit optional aria label on Modus Message. Explicitly setting and optional aria labels gives the consumer this error: `Interface 'HTMLModusMessageElement' cannot simultaneously extend types 'ModusMessage' and 'HTMLStencilElement'.Named property 'ariaLabel' of types 'ModusMessage' and 'HTMLStencilElement' are not identical.`
+
 ### Removed
 
 - Removed Small checkbox

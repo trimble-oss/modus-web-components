@@ -295,7 +295,7 @@ export namespace Components {
         /**
           * (optional) The message's aria-label.
          */
-        "ariaLabel"?: string;
+        "ariaLabel": string;
         /**
           * (optional) The message's icon.
          */
