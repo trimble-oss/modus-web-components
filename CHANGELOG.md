@@ -6,6 +6,13 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 
 ## Unreleased
 
+## 0.1.17 - 2022-30-08
+
+### Added
+
+- Added Data Table row actions property
+- Added custom placement option for dropdown
+
 ## 0.1.16 - 2022-29-08
 
 ### Fixed
