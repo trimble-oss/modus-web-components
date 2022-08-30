@@ -6,6 +6,12 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 
 ## Unreleased
 
+## 0.1.16 - 2022-29-08
+
+### Fixed
+
+- An issue where the Modus Dropdown would not open/close when nested in another component.
+
 ## 0.1.15 - 2022-29-08
 
 ### Fixed

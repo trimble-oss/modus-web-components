@@ -43,7 +43,7 @@ export class ModusDropdown {
   @Listen('click', { target: 'document' })
   documentClickHandler(event: MouseEvent): void {
     // Close the dropdown when click is outside the current element.
-    if (event.defaultPrevented || (event.target as HTMLElement).closest('modus-dropdown')) { return; }
+    if (event.defaultPrevented || (event.target as HTMLElement).closest(`#${this.toggleElementId}`)) { return; }
 
     this.visible = false;
     this.dropdownClose.emit();
@@ -60,6 +60,8 @@ export class ModusDropdown {
       if (!this.visible) {
         this.dropdownClose.emit();
       }
+
+      event.preventDefault();
     }
   }
 
