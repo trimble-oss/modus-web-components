@@ -414,24 +414,24 @@ export class ModusTreeViewItem {
           />
           <div
             aria-disabled="true"
-            style={{ paddingLeft: `${(level - 1) * 1}rem` }}>
+            style={{ paddingLeft: `${(level - 1) * 0.5}rem` }}>
             {/* used for level indentation purpose */}
           </div>
           <div
-            class="slot-container"
+            class="icon-slot"
             onClick={(e) => this.handleExpandToggle(e)}
             onKeyDown={(e) =>
               this.handleDefaultKeyDown(e, () => this.handleExpandToggle(e))
             }
             tabIndex={expandable ? tabIndex : -1}>
             <this.CustomSlot
-              className="icon-slot"
+              className="inline-flex"
               defaultContent={<IconChevronRightThick />}
               hidden={!expandable || (expandable && expanded)}
               name={this.SLOT_EXPAND_ICON}
             />
             <this.CustomSlot
-              className="icon-slot"
+              className="inline-flex"
               defaultContent={<IconChevronDownThick />}
               hidden={!expandable || !(expandable && expanded)}
               name={this.SLOT_COLLAPSE_ICON}
