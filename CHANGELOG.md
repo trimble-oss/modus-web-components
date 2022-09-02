@@ -12,6 +12,11 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 
 - Added Data Table row actions property
 - Added custom placement option for dropdown
+- Added props `draggableItem`, `droppableItem`, `editable` and a `label` slot in `modus-tree-view-item` component
+
+### Removed
+
+- Removed `checked`, `expanded`, `selected`, `indeterminate` props from `modus-tree-view-item` component
 
 ## 0.1.16 - 2022-29-08
 

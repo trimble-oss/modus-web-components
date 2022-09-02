@@ -5,3 +5,35 @@
 ul {
   padding: 0;
 }
+
+.drag-content {
+  z-index: 99999;
+  left: 0;
+  top: 0;
+  position: absolute;
+  cursor: '-webkit-grabbing';
+  opacity: '0.9';
+
+  &.drop-allow {
+    outline: 2px dashed #0063a3 !important;
+  }
+
+  &.drop-block {
+    outline: 2px dashed red !important;
+  }
+
+  .icon-slot {
+    visibility: hidden;
+  }
+
+  .tree-item {
+    align-items: center;
+    background-color: $col_white;
+    border: $rem-1px solid $col_gray_0;
+    display: flex;
+    font-family: $primary-font;
+    font-size: $rem-16px;
+    min-height: $list-group-item-height;
+    width: 100%;
+  }
+}

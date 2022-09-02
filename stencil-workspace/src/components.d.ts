@@ -11,7 +11,7 @@ import { App } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu"
 import { App as App1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { Tab } from "./components/modus-tabs/modus-tabs";
-import { TreeViewItemOptions } from "./components/modus-content-tree/types";
+import { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export namespace Components {
     interface ModusAccordion {
         /**
@@ -750,11 +750,11 @@ export namespace Components {
          */
         "checkboxSelection": boolean;
         /**
-          * (optional) Checked tree items by default
+          * (optional) Set checked tree items
          */
         "checkedItems": string[];
         /**
-          * (optional) Expanded tree items by default
+          * (optional) Set expanded tree items
          */
         "expandedItems": string[];
         /**
@@ -766,7 +766,7 @@ export namespace Components {
          */
         "multiSelection": boolean;
         /**
-          * (optional) Selected tree items by default
+          * (optional) Set selected tree items
          */
         "selectedItems": string[];
         /**
@@ -776,36 +776,32 @@ export namespace Components {
     }
     interface ModusTreeViewItem {
         /**
-          * (optional) Checked state of the tree item
-         */
-        "checked": boolean;
-        /**
           * (optional) Disables the tree item
          */
         "disabled": boolean;
         /**
-          * (optional) Expanded state of the tree item
+          * (optional) Allows the item to be dragged across the tree
          */
-        "expanded": boolean;
-        "focusItem": () => Promise<void>;
+        "draggableItem": boolean;
         /**
-          * (optional) Checkbox indeterminate state of the tree item
+          * (optional) Allows the item to be a drop zone so other tree items can be dropped above it
          */
-        "indeterminate": boolean;
+        "droppableItem": boolean;
+        /**
+          * (optional) Changes the label field into a text box
+         */
+        "editable": boolean;
+        "focusItem": () => Promise<void>;
+        "initTreeViewItem": (newValue: TreeViewItemOptions) => Promise<void>;
         /**
           * (required) Label for the tree item
          */
         "label": string;
-        "level": number;
         /**
           * (required) Unique tree item identifier
          */
         "nodeId": string;
-        "options": TreeViewItemOptions;
-        /**
-          * (optional) Selected state of the tree item
-         */
-        "selected": boolean;
+        "syncWithRoot": () => Promise<void>;
     }
 }
 export interface ModusAccordionItemCustomEvent<T> extends CustomEvent<T> {
@@ -1993,11 +1989,11 @@ declare namespace LocalJSX {
          */
         "checkboxSelection"?: boolean;
         /**
-          * (optional) Checked tree items by default
+          * (optional) Set checked tree items
          */
         "checkedItems"?: string[];
         /**
-          * (optional) Expanded tree items by default
+          * (optional) Set expanded tree items
          */
         "expandedItems"?: string[];
         /**
@@ -2009,7 +2005,7 @@ declare namespace LocalJSX {
          */
         "multiSelection"?: boolean;
         /**
-          * (optional) Selected tree items by default
+          * (optional) Set selected tree items
          */
         "selectedItems"?: string[];
         /**
@@ -2019,26 +2015,25 @@ declare namespace LocalJSX {
     }
     interface ModusTreeViewItem {
         /**
-          * (optional) Checked state of the tree item
-         */
-        "checked"?: boolean;
-        /**
           * (optional) Disables the tree item
          */
         "disabled"?: boolean;
         /**
-          * (optional) Expanded state of the tree item
+          * (optional) Allows the item to be dragged across the tree
          */
-        "expanded"?: boolean;
+        "draggableItem"?: boolean;
         /**
-          * (optional) Checkbox indeterminate state of the tree item
+          * (optional) Allows the item to be a drop zone so other tree items can be dropped above it
          */
-        "indeterminate"?: boolean;
+        "droppableItem"?: boolean;
+        /**
+          * (optional) Changes the label field into a text box
+         */
+        "editable"?: boolean;
         /**
           * (required) Label for the tree item
          */
         "label": string;
-        "level"?: number;
         /**
           * (required) Unique tree item identifier
          */
@@ -2056,11 +2051,6 @@ declare namespace LocalJSX {
           * An event that fires on tree item expand/collapse
          */
         "onItemExpandToggle"?: (event: ModusTreeViewItemCustomEvent<boolean>) => void;
-        "options"?: TreeViewItemOptions;
-        /**
-          * (optional) Selected state of the tree item
-         */
-        "selected"?: boolean;
     }
     interface IntrinsicElements {
         "modus-accordion": ModusAccordion;
