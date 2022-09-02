@@ -38,8 +38,8 @@ describe('modus-tree-view-item', () => {
                 <slot name="dragIcon"></slot>
               </div>
               <div aria-disabled="true" style="padding-left: 0rem;"></div>
-              <div class="slot-container" tabindex="-1">
-                  <div class="hidden icon-slot">
+              <div class="icon-slot" tabindex="-1">
+                  <div class="hidden inline-flex">
                     <slot name="expandIcon"></slot>
                     <svg class="icon-chevron-right-thick" fill="currentColor" height="16" viewBox="0 0 32 32" width="16" xmlns="http://www.w3.org/2000/svg">
                       <g>
@@ -47,7 +47,7 @@ describe('modus-tree-view-item', () => {
                       </g>
                     </svg>
                   </div>
-                  <div class="hidden icon-slot">
+                  <div class="hidden inline-flex">
                     <slot name="collapseIcon"></slot>
                     <svg class="icon-chevron-down-thick" fill="currentColor" height="16" viewBox="0 0 32 32" width="16" xmlns="http://www.w3.org/2000/svg">
                       <g>
