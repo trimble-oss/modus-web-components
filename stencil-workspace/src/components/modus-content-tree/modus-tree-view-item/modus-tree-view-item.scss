@@ -26,32 +26,39 @@
   width: 100%;
   cursor: pointer;
 
+  &.drop-allow {
+    box-shadow: 0 -2px 0 #0063a3 !important;
+  }
+
+  &.drop-block {
+    box-shadow: 0 -2px 0 red !important;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
   .label-slot {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     padding-left: $rem-8px;
+    padding-right: $rem-8px;
+    width: 100%;
   }
 
+  .slot-container,
   .icon-slot {
     width: $rem-24px;
     display: flex;
     align-items: center;
     justify-content: center;
+  }
 
-    &.drag-icon {
-      width: $rem-16px;
-    }
-
+  .icon-slot {
     svg {
       height: $rem-16px;
       width: $rem-16px;
-    }
-
-    &.hidden {
-      slot {
-        visibility: hidden;
-      }
     }
   }
 
@@ -74,10 +81,10 @@
   }
 
   &.disabled {
-    background-color: $col_gray_1;
-    border-color: $col_gray_1;
-    opacity: 0.7;
-    cursor: default;
+    background-color: $col_gray_1 !important;
+    border-color: $col_gray_1 !important;
+    opacity: 0.7 !important;
+    cursor: default !important;
   }
 
   &.selected {
