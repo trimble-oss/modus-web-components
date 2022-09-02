@@ -6,6 +6,14 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 
 ## Unreleased
 
+### Added
+
+- Added props `draggableItem`, `droppableItem`, `editable` and `label` slot in `modus-tree-view-item` component
+
+### Removed
+
+- Removed `checked`, `expanded`, `selected`, `indeterminate` props from `modus-tree-view-item` component
+
 ## 0.1.17 - 2022-30-08
 
 ### Added
