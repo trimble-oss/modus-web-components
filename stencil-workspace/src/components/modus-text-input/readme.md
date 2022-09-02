@@ -49,6 +49,19 @@ Type: `Promise<void>`
 
 
 
+## Dependencies
+
+### Used by
+
+ - [modus-tree-view-item](../modus-content-tree/modus-tree-view-item)
+
+### Graph
+```mermaid
+graph TD;
+  modus-tree-view-item --> modus-text-input
+  style modus-text-input fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 

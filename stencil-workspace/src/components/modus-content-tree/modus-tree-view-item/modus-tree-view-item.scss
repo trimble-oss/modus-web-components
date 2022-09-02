@@ -1,62 +1,73 @@
-.tree-item-container {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-
-  &.selected-indicator::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    width: 0.3rem;
-    height: 100%;
-    z-index: 5;
-    box-shadow: inset 0.3rem 0 0 0 #217cbb;
-  }
-}
-
 .tree-item {
   align-items: center;
   background-color: $col_white;
   border: $rem-1px solid $col_gray_0;
+  cursor: pointer;
   display: flex;
   font-family: $primary-font;
   font-size: $rem-16px;
   min-height: $list-group-item-height;
   width: 100%;
-  cursor: pointer;
 
-  .label-slot {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    padding-left: $rem-8px;
+  &.disabled {
+    background-color: $col_gray_1 !important;
+    border-color: $col_gray_1 !important;
+    opacity: 0.7 !important;
+    cursor: default !important;
+  }
+
+  &.drop-allow {
+    box-shadow: 0 -2px 0 $col_blue !important;
+  }
+
+  &.drop-block {
+    box-shadow: 0 -2px 0 $col_red_light !important;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  &:hover {
+    background-color: $col_gray_0;
   }
 
   .icon-slot {
-    width: $rem-24px;
-    display: flex;
     align-items: center;
+    display: flex;
     justify-content: center;
+    width: $rem-24px;
 
     &.drag-icon {
-      width: $rem-16px;
+      cursor: grab !important;
+    }
+
+    .inline-flex {
+      display: inline-flex;
     }
 
     svg {
       height: $rem-16px;
       width: $rem-16px;
     }
-
-    &.hidden {
-      slot {
-        visibility: hidden;
-      }
-    }
   }
 
-  &:hover {
-    background-color: $col_gray_0;
+  .label-slot {
+    overflow: hidden;
+    padding-left: $rem-8px;
+    padding-right: $rem-8px;
+    text-overflow: ellipsis;
+    width: 100%;
+    white-space: nowrap;
+  }
+
+  &.large {
+    min-height: $list-group-item-height-lg;
+  }
+
+  &.selected {
+    background-color: $col_blue_pale;
+    border-color: $col_blue_pale;
   }
 
   &.small {
@@ -68,29 +79,30 @@
       width: $rem-12px;
     }
   }
+}
 
-  &.large {
-    min-height: $list-group-item-height-lg;
-  }
+.tree-item-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
 
-  &.disabled {
-    background-color: $col_gray_1;
-    border-color: $col_gray_1;
-    opacity: 0.7;
-    cursor: default;
-  }
-
-  &.selected {
-    background-color: $col_blue_pale;
-    border-color: $col_blue_pale;
+  &.selected-indicator::before {
+    box-shadow: inset 0.3rem 0 0 0 $col_blue_light;
+    content: '';
+    height: 100%;
+    left: 0;
+    position: absolute;
+    right: 0;
+    width: 0.3rem;
+    z-index: 5;
   }
 }
 
 .tree-item-group {
-  width: 100%;
   display: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
+  width: 100%;
 
   &.expanded {
     display: block;

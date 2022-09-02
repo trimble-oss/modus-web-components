@@ -31,7 +31,14 @@ export class ModusTextInput {
   @Prop() includeSearchIcon: boolean;
 
   /** (optional) The input's inputmode. */
-  @Prop() inputmode: 'decimal' | 'email' | 'numeric' | 'search' | 'tel' | 'text' | 'url';
+  @Prop() inputmode:
+    | 'decimal'
+    | 'email'
+    | 'numeric'
+    | 'search'
+    | 'tel'
+    | 'text'
+    | 'url';
 
   /** (optional) The input's label. */
   @Prop() label: string;
@@ -95,17 +102,30 @@ export class ModusTextInput {
     const className = `modus-text-input ${this.disabled ? 'disabled' : ''}`;
 
     return (
-      <div aria-disabled={this.disabled} aria-invalid={!!this.errorText} aria-label={this.ariaLabel} aria-placeholder={this.placeholder} aria-readonly={this.readOnly} aria-required={this.required} class={className}>
+      <div
+        aria-disabled={this.disabled}
+        aria-invalid={!!this.errorText}
+        aria-label={this.ariaLabel}
+        aria-readonly={this.readOnly}
+        aria-required={this.required}
+        class={className}>
         {this.label || this.required ? (
           <div class={'label-container'}>
             {this.label ? <label>{this.label}</label> : null}
             {this.required ? <span class="required">*</span> : null}
           </div>
         ) : null}
-        <div class={`input-container ${this.errorText ? 'error' : this.validText ? 'valid' : ''} ${this.classBySize.get(this.size)}`} onClick={() => this.textInput.focus()}>
+        <div
+          class={`input-container ${
+            this.errorText ? 'error' : this.validText ? 'valid' : ''
+          } ${this.classBySize.get(this.size)}`}
+          onClick={() => this.textInput.focus()}>
           {this.includeSearchIcon ? <IconSearch size="16" /> : null}
           <input
-            class={`${this.includeSearchIcon ? 'has-left-icon' : ''} ${this.clearable ? 'has-right-icon' : null}`}
+            aria-placeholder={this.placeholder}
+            class={`${this.includeSearchIcon ? 'has-left-icon' : ''} ${
+              this.clearable ? 'has-right-icon' : null
+            }`}
             disabled={this.disabled}
             inputmode={this.inputmode}
             maxlength={this.maxLength}
