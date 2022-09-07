@@ -2,9 +2,11 @@
 import { FunctionalComponent, h } from '@stencil/core';
 import { IconProps } from './IconMap';
 
-export const IconCopy: FunctionalComponent<IconProps> = (props: IconProps) => (
+export const IconCollapseAll: FunctionalComponent<IconProps> = (
+  props: IconProps
+) => (
   <svg
-    class="icon-copy"
+    class="icon-collapse-all"
     height={props.size ?? 16}
     width={props.size ?? 16}
     onClick={props.onClick}
@@ -13,7 +15,7 @@ export const IconCopy: FunctionalComponent<IconProps> = (props: IconProps) => (
     xmlns="http://www.w3.org/2000/svg">
     <path d="M0,0H24V24H0Z" fill="none" />
     <path
-      d="M16,1H4A2.006,2.006,0,0,0,2,3V17H4V3H16Zm3,4H8A2.006,2.006,0,0,0,6,7V21a2.006,2.006,0,0,0,2,2H19a2.006,2.006,0,0,0,2-2V7A2.006,2.006,0,0,0,19,5Zm0,16H8V7H19Z"
+      d="M7.41,18.59,8.83,20,12,16.83,15.17,20l1.41-1.41L12,14ZM16.59,5.41,15.17,4,12,7.17,8.83,4,7.41,5.41,12,10Z"
       fill="#252a2e"
     />
   </svg>

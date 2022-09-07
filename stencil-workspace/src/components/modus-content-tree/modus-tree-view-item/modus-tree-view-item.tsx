@@ -11,9 +11,7 @@ import {
   Watch,
   FunctionalComponent,
 } from '@stencil/core';
-import { IconChevronDownThick } from '../../icons/icon-chevron-down-thick';
-import { IconChevronRightThick } from '../../icons/icon-chevron-right-thick';
-import { IconDrag } from '../../icons/icon-drag';
+import { IconMap } from '../../icons/IconMap';
 import { TreeViewItemOptions } from '../modus-content-tree.types';
 
 /**
@@ -408,7 +406,7 @@ export class ModusTreeViewItem {
           tabindex={tabIndex}>
           <this.CustomSlot
             className="icon-slot drag-icon"
-            defaultContent={this.draggableItem ? <IconDrag /> : null}
+            defaultContent={this.draggableItem ? <IconMap icon="drag" /> : null}
             name={this.SLOT_DRAG_ICON}
             onMouseDown={(e) => this.handleDrag(e)}
           />
@@ -426,13 +424,13 @@ export class ModusTreeViewItem {
             tabIndex={expandable ? tabIndex : -1}>
             <this.CustomSlot
               className="inline-flex"
-              defaultContent={<IconChevronRightThick />}
+              defaultContent={<IconMap icon="chevron-right-thick" />}
               hidden={!expandable || (expandable && expanded)}
               name={this.SLOT_EXPAND_ICON}
             />
             <this.CustomSlot
               className="inline-flex"
-              defaultContent={<IconChevronDownThick />}
+              defaultContent={<IconMap icon="chevron-down-thick" />}
               hidden={!expandable || !(expandable && expanded)}
               name={this.SLOT_COLLAPSE_ICON}
             />

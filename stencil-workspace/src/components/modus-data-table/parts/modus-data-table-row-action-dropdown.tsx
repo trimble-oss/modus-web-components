@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 import { FunctionalComponent, h } from '@stencil/core';
-import { IconMap } from '../../icons/icon-map';
+import { IconMap } from '../../icons/IconMap';
 import { ModusDataTableRowAction } from '../modus-data-table.models';
 
 interface Props {

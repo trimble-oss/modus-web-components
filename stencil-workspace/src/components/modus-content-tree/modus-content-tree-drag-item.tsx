@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import { FunctionalComponent, h } from '@stencil/core';
 import { TreeViewItemDragState } from './modus-content-tree.types';
 
