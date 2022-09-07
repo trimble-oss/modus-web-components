@@ -807,7 +807,7 @@ export namespace Components {
           * (required) Unique tree item identifier
          */
         "nodeId": string;
-        "syncWithRoot": () => Promise<void>;
+        "updateComponent": () => Promise<void>;
     }
 }
 export interface ModusAccordionItemCustomEvent<T> extends CustomEvent<T> {
