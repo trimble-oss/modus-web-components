@@ -940,14 +940,14 @@ export declare interface ModusTreeViewItem extends Components.ModusTreeViewItem 
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['checked', 'disabled', 'expanded', 'indeterminate', 'label', 'nodeId', 'selected'],
+  inputs: ['disabled', 'draggableItem', 'droppableItem', 'editable', 'label', 'nodeId'],
   methods: ['focusItem']
 })
 @Component({
   selector: 'modus-tree-view-item',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['checked', 'disabled', 'expanded', 'indeterminate', 'label', 'nodeId', 'selected']
+  inputs: ['disabled', 'draggableItem', 'droppableItem', 'editable', 'label', 'nodeId']
 })
 export class ModusTreeViewItem {
   protected el: HTMLElement;
