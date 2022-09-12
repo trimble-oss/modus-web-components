@@ -2,7 +2,7 @@
 import { Component, Prop, h } from '@stencil/core';
 import { IconInfo } from '../icons/icon-info';
 import { IconHelp } from '../icons/icon-help';
-import { IconMap } from '../icons/icon-map';
+import { IconMap } from '../icons/IconMap';
 
 @Component({
   tag: 'modus-message',

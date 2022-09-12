@@ -1,14 +1,14 @@
 // eslint-disable-next-line
 import { Component, Prop, State, h, Element, Event, EventEmitter, Method, Watch, FunctionalComponent } from '@stencil/core';
-import { IconChevronDownThick } from '../../icons/icon-chevron-down-thick';
-import { IconChevronRightThick } from '../../icons/icon-chevron-right-thick';
-import { TreeViewItemOptions } from '../types';
+import { IconMap } from '../../icons/IconMap';
+import { TreeViewItemOptions } from '../modus-content-tree.types';
 
 /**
  * @slot collapseIcon - Slot for custom collapse icon
  * @slot dragIcon - Slot for custom drag icon
  * @slot expandIcon - Slot for custom expand icon
  * @slot itemIcon - Slot for custom item icon
+ * @slot label - Slot for custom label element
  */
 
 @Component({
@@ -19,17 +19,20 @@ import { TreeViewItemOptions } from '../types';
 export class ModusTreeViewItem {
   @Element() element: HTMLElement;
 
-  /** (optional) Checked state of the tree item */
-  @Prop({ mutable: true }) checked: boolean;
-
   /** An event that fires on tree item checkbox click */
   @Event() checkboxClick: EventEmitter<boolean>;
 
   /** (optional) Disables the tree item */
   @Prop() disabled: boolean;
 
-  /** (optional) Expanded state of the tree item */
-  @Prop({ mutable: true }) expanded: boolean;
+  /** (optional) Allows the item to be dragged across the tree */
+  @Prop() draggableItem: boolean;
+
+  /** (optional) Allows the item to be a drop zone so other tree items can be dropped above it */
+  @Prop() droppableItem: boolean;
+
+  /** (optional) Changes the label field into a text box */
+  @Prop({ mutable: true }) editable: boolean;
 
   /** An event that fires on tree item click */
   @Event() itemClick: EventEmitter<boolean>;
@@ -37,139 +40,100 @@ export class ModusTreeViewItem {
   /** An event that fires on tree item expand/collapse */
   @Event() itemExpandToggle: EventEmitter<boolean>;
 
-  /** (optional) Checkbox indeterminate state of the tree item */
-  @Prop({ mutable: true }) indeterminate: boolean;
-
   /** (required) Label for the tree item */
-  @Prop() label!: string;
-
-  /**
-   * @internal
-   */
-  @Prop() level = 1;
+  @Prop({ mutable: true, reflect: true }) label!: string;
 
   /** (required) Unique tree item identifier */
-  @Prop() nodeId!: string;
-
-  /**
-   * @internal
-   */
-  @Prop() options: TreeViewItemOptions;
-
-  /** (optional) Selected state of the tree item */
-  @Prop({ mutable: true }) selected: boolean;
+  @Prop({ reflect: true }) nodeId!: string;
 
   /**
    * @internal
    */
   @Event() itemAdded: EventEmitter<HTMLElement>;
 
+  @State() childrenIds: string[];
+  @State() forceUpdate = {};
   @State() slots: Map<string, boolean> = new Map();
 
-  private childrenIds: string[] = [];
   private classBySize: Map<string, string> = new Map([
     ['condensed', 'small'],
     ['standard', 'standard'],
     ['large', 'large'],
   ]);
-  private collapseIconSlot = 'collapseIcon';
-  private dragIconSlot = 'dragIcon';
-  private expandIconSlot = 'expandIcon';
-  private itemIconSlot = 'itemIcon';
-  private treeItemDiv;
+  private refItemContent: HTMLDivElement;
+  private refLabelInput: HTMLModusTextInputElement;
+  private options: TreeViewItemOptions;
 
-  private IconSlotTemplate: FunctionalComponent<{ name: string }> = ({ name }) => <slot onSlotchange={() => this.handleIconSlotChange()} name={name}></slot>;
+  readonly SLOT_COLLAPSE_ICON = 'collapseIcon';
+  readonly SLOT_DRAG_ICON = 'dragIcon';
+  readonly SLOT_EXPAND_ICON = 'expandIcon';
+  readonly SLOT_ITEM_ICON = 'itemIcon';
+  readonly SLOT_LABEL = 'label';
+
+  CustomSlot: FunctionalComponent<{
+    name: string;
+    className?: string;
+    defaultContent?: string | HTMLElement;
+    hidden?: boolean;
+    onClick?: (e: MouseEvent) => void;
+    onMouseDown?: (e: MouseEvent) => void;
+    role?: string;
+  }> = ({ name, className, defaultContent, hidden, ...props }) => {
+    const showDefault = !this.slots.has(name) && defaultContent;
+    return (
+      <div {...props} class={`${className || ''} ${hidden ? 'hidden' : ''}`}>
+        <slot name={name} onSlotchange={() => this.handleDefaultSlotChange()}></slot>
+        {showDefault && defaultContent}
+      </div>
+    );
+  };
+
+  connectedCallback() {
+    // the element is moved in the DOM, register it on the root
+    // example, drag and drop
+    if (this.options) {
+      this.options.onItemAdd(this.element);
+    }
+  }
+
+  componentDidRender() {
+    // Needed for retaining focus on the label input while in edit mode
+    if (this.refLabelInput && this.editable) {
+      this.refLabelInput.focusInput();
+    }
+  }
 
   componentWillLoad() {
     this.itemAdded.emit(this.element);
-    this.handleIconSlotChange();
+    this.handleDefaultSlotChange();
+  }
+
+  disconnectedCallback() {
+    // the element has been moved or deleted in the DOM, deregister it on the root
+    this.options?.onItemDelete(this.nodeId);
   }
 
   @Method()
   async focusItem(): Promise<void> {
-    this.treeItemDiv.focus();
+    this.refItemContent.focus();
   }
 
-  handleCheckboxClick(e: Event): void {
-    const { onCheckboxSelection, hasItemDisabled } = this.options || {};
-    e.stopPropagation();
-
-    if (hasItemDisabled(this.nodeId)) return;
-
-    if (onCheckboxSelection) onCheckboxSelection(this.nodeId);
-    this.checkboxClick.emit(!this.checked);
+  getChildrenIds(): string[] {
+    return Array.from(this.element.children as unknown as HTMLModusTreeViewItemElement[])
+      .map((i) => i.nodeId)
+      .filter((i) => i);
   }
 
-  handleDefaultSlotChange(): void {
-    const { updateItem } = this.options || {};
-    // eslint-disable-next-line prefer-const
-    let siblings: string[] = [];
+  handleCheckboxClick(e?: Event): void {
+    if (this.shouldHandleEvent(e)) {
+      const { onCheckboxSelection, hasItemChecked } = this.options;
 
-    const children = this.element.children as unknown as HTMLModusTreeViewItemElement[];
-    if (children.length > 0) {
-      Array.from(children)
-        .filter((c) => c.nodeId)
-        .forEach((c) => {
-          c.level = this.level + 1;
-          siblings.push(c.nodeId);
-        });
-    }
-
-    this.childrenIds = [...siblings];
-    updateItem({ nodeId: this.nodeId, children: this.childrenIds });
-  }
-
-  @Watch('disabled')
-  handleDisabledChanged(newValue: boolean) {
-    const { updateItem } = this.options || {};
-    if (updateItem) updateItem({ nodeId: this.nodeId, disabled: newValue });
-  }
-
-  @Watch('nodeId')
-  handleNodeIdChanged(newValue: string, oldValue: string) {
-    const { updateItem } = this.options || {};
-    if (updateItem) updateItem({ nodeId: newValue }, { nodeId: oldValue });
-  }
-
-  handleExpandToggle(e: Event): void {
-    const { onItemExpandToggle, hasItemDisabled } = this.options || {};
-    e.stopPropagation();
-
-    if (hasItemDisabled(this.nodeId)) return;
-
-    if (onItemExpandToggle) onItemExpandToggle(this.nodeId);
-    this.itemExpandToggle.emit(this.expanded);
-  }
-
-  handleFocus(): void {
-    const { onItemFocus, hasItemFocus } = this.options || {};
-    if (!hasItemFocus(this.nodeId)) {
-      onItemFocus(this.nodeId);
+      onCheckboxSelection(this.nodeId);
+      this.checkboxClick.emit(hasItemChecked(this.nodeId));
     }
   }
 
-  handleIconSlotChange(): void {
-    const slotElements = this.element.querySelectorAll('[slot]') as unknown as HTMLSlotElement[];
-    const newSlots: Map<string, boolean> = new Map();
-    let isUpdated = slotElements.length !== this.slots.size;
-    slotElements.forEach((e) => {
-      newSlots.set(e.slot, true);
-      isUpdated = !this.slots.get(e.slot) || isUpdated;
-    });
-
-    if (isUpdated) this.slots = new Map(newSlots);
-  }
-
-  handleItemClick(e: MouseEvent): void {
-    const { onItemSelection, hasItemDisabled } = this.options || {};
-
-    if (hasItemDisabled(this.nodeId)) return;
-
-    if (onItemSelection) onItemSelection(e, this.nodeId);
-    this.itemClick.emit(!this.selected);
-  }
-
-  handleSpaceEnterKeyPress(e: KeyboardEvent, handler: () => void): void {
+  handleDefaultKeyDown(e: KeyboardEvent, handler: () => void): void {
     switch (e.code) {
       case 'Space':
       case 'Enter':
@@ -179,62 +143,255 @@ export class ModusTreeViewItem {
     }
   }
 
-  render(): HTMLLIElement {
-    const { checkboxSelection, multiCheckboxSelection, size, hasItemSelected, hasItemDisabled } = this.options || {};
+  handleDefaultSlotChange(): void {
+    const slotElements = this.element.querySelectorAll('[slot]') as unknown as HTMLSlotElement[];
+    const newSlots: Map<string, boolean> = new Map();
 
-    const expandable = this.element.hasChildNodes();
-    const isDisabled = hasItemDisabled && hasItemDisabled(this.nodeId);
-    const tabIndex = isDisabled ? -1 : 0;
+    // look for icon/label slot added/removed
+    let isUpdated = slotElements.length !== this.slots.size;
+    slotElements.forEach((e) => {
+      newSlots.set(e.slot, true);
+      isUpdated = !this.slots.get(e.slot) || isUpdated;
+    });
+
+    if (isUpdated) this.slots = new Map(newSlots);
+  }
+
+  handleDrag(e: MouseEvent) {
+    if (this.shouldHandleEvent(e)) {
+      e.preventDefault();
+
+      const dragContent = this.refItemContent.cloneNode(true) as HTMLElement;
+      this.options.onItemDrag(this.nodeId, dragContent, e);
+    }
+  }
+
+  handleExpandToggle(e?: Event): void {
+    if (this.shouldHandleEvent(e)) {
+      const { onItemExpandToggle, hasItemExpanded } = this.options;
+
+      onItemExpandToggle(this.nodeId);
+      this.itemExpandToggle.emit(hasItemExpanded(this.nodeId));
+    }
+  }
+
+  handleFocus(): void {
+    const { onItemFocus, hasItemFocus } = this.options || {};
+    if (!hasItemFocus(this.nodeId)) {
+      onItemFocus(this.nodeId);
+    }
+  }
+
+  handleItemClick(e?: KeyboardEvent | MouseEvent): void {
+    if (this.shouldHandleEvent(e)) {
+      const { onItemSelection, hasItemSelected } = this.options;
+
+      onItemSelection(this.nodeId, e);
+      this.itemClick.emit(hasItemSelected(this.nodeId));
+    }
+  }
+
+  handleKeyDownTreeItem(e: KeyboardEvent) {
+    if (e.defaultPrevented) {
+      return; // Do nothing if event already handled
+    }
+    switch (e.code) {
+      case 'Space':
+        this.handleExpandToggle(e);
+        e.preventDefault();
+        e.stopPropagation();
+        break;
+      case 'Enter':
+        this.handleItemClick(e);
+        e.stopPropagation();
+        break;
+    }
+  }
+
+  handleLabelInputClick(e: Event) {
+    e.stopPropagation();
+  }
+
+  handleLabelInputBlur() {
+    this.updateLabelInput();
+  }
+
+  handleLabelInputKeyDown(e: KeyboardEvent) {
+    switch (e.code) {
+      case 'Enter':
+        e.preventDefault();
+        this.updateLabelInput();
+        break;
+    }
+  }
+
+  @Watch('disabled')
+  handlePropDisabledChange(newValue: boolean) {
+    // sync root
+    this.options?.onItemUpdate({ nodeId: this.nodeId, disabled: newValue });
+  }
+
+  @Watch('nodeId')
+  handlePropNodeIdChange(newValue: string, oldValue: string) {
+    // sync root
+    this.options?.onItemUpdate({ nodeId: newValue }, { nodeId: oldValue });
+  }
+
+  handleRefItemContent(ref) {
+    this.refItemContent = ref;
+    this.options?.onItemUpdate({ nodeId: this.nodeId, content: ref });
+  }
+
+  handleTreeSlotChange(): void {
+    const newChildren = this.getChildrenIds();
+    const isUpdated = this.childrenIds && newChildren ? this.childrenIds.length !== newChildren.filter((c) => this.childrenIds.includes(c)).length : this.childrenIds?.length !== newChildren?.length;
+
+    if (this.options) {
+      const { onItemUpdate, multiCheckboxSelection, onCheckboxSelection } = this.options;
+
+      // sync root
+      onItemUpdate({ nodeId: this.nodeId, children: [...newChildren] });
+
+      // sync the checkboxes if there is any child added/removed
+      if (this.childrenIds?.length && this.childrenIds.length !== newChildren?.length && multiCheckboxSelection) {
+        onCheckboxSelection(this.nodeId, true);
+      }
+    }
+    // avoid re-render if the value is not updated
+    this.childrenIds = isUpdated ? [...newChildren] : this.childrenIds;
+  }
+
+  /**
+   * @internal
+   */
+  @Method()
+  async initTreeViewItem(newValue: TreeViewItemOptions): Promise<void> {
+    this.options = { ...newValue };
+    this.handleTreeSlotChange();
+    this.updateComponent();
+  }
+
+  rootOptions() {
+    if (this.options) {
+      const { checkboxSelection, multiCheckboxSelection, showSelectionIndicator, size, getLevel, hasItemSelected, hasItemDisabled, hasItemIndeterminate, hasItemExpanded, hasItemChecked } = this.options;
+      const selected = hasItemSelected(this.nodeId);
+      const checked = hasItemChecked(this.nodeId);
+      const indeterminate = hasItemIndeterminate(this.nodeId);
+      const expanded = hasItemExpanded(this.nodeId);
+      const level = getLevel(this.nodeId);
+      const isDisabled = hasItemDisabled(this.nodeId);
+      const selectionIndicator = showSelectionIndicator(this.nodeId);
+
+      return {
+        selected,
+        checked,
+        indeterminate,
+        expanded,
+        expandable: Boolean(this.childrenIds?.length),
+        level,
+        checkboxSelection,
+        multiCheckboxSelection,
+        size,
+        isDisabled,
+        selectionIndicator,
+      };
+    } else
+      return {
+        level: 1,
+      };
+  }
+
+  shouldHandleEvent(e?: Event) {
+    if (e) e.stopPropagation();
+    // Do not handle the event when the item is disabled
+    return this.options && !this.options.hasItemDisabled(this.nodeId);
+  }
+
+  /**
+   * @internal
+   */
+  @Method()
+  async updateComponent(): Promise<void> {
+    this.forceUpdate = { ...this.forceUpdate };
+  }
+
+  updateLabelInput() {
+    if (this.refLabelInput) {
+      this.label = this.refLabelInput.value;
+    }
+    this.refLabelInput = null;
+    this.editable = false;
+  }
+
+  render(): HTMLLIElement {
+    const { selected, checked, indeterminate, expanded, expandable, level, checkboxSelection, multiCheckboxSelection, size, isDisabled, selectionIndicator } = this.rootOptions();
 
     const ariaControls = {
-      'aria-level': this.level,
-      'aria-selected': this.selected ? 'true' : 'false',
+      'aria-level': level,
+      'aria-selected': selected ? 'true' : 'false',
       'aria-disabled': isDisabled ? 'true' : 'false',
-      ...(expandable ? { 'aria-expanded': this.expanded ? 'true' : 'false' } : {}),
+      ...(expandable ? { 'aria-expanded': expanded ? 'true' : 'false' } : {}),
       role: 'treeitem',
     };
-    const finalExpandIcon = this.slots.has(this.expandIconSlot) ? <this.IconSlotTemplate name={this.expandIconSlot} /> : <IconChevronRightThick />;
-    const finalCollapseIcon = this.slots.has(this.collapseIconSlot) ? <this.IconSlotTemplate name={this.collapseIconSlot} /> : <IconChevronDownThick />;
     const sizeClass = `${this.classBySize.get(size || 'standard')}`;
-    const treeItemClass = `tree-item ${this.selected ? 'selected' : ''} ${sizeClass} ${isDisabled ? 'disabled' : ''} `;
-    const treeItemChildrenClass = `tree-item-group ${sizeClass} ${this.expanded ? 'expanded' : ''}`;
-    const hasSelectionIndicator = this.selected || (!this.expanded && expandable && Boolean(this.childrenIds.find((i) => hasItemSelected(i))));
+    const tabIndex = isDisabled ? -1 : 0;
+    const treeItemClass = `tree-item ${selected ? 'selected' : ''} ${sizeClass} ${isDisabled ? 'disabled' : ''} `;
+    const treeItemChildrenClass = `tree-item-group ${sizeClass} ${expanded ? 'expanded' : ''}`;
 
     return (
-      <li {...ariaControls} class={`tree-item-container${hasSelectionIndicator ? ' selected-indicator' : ''}`}>
-        <div class={treeItemClass} ref={(el) => (this.treeItemDiv = el)} tabindex={tabIndex} onFocus={() => this.handleFocus()} onClick={(e) => this.handleItemClick(e)}>
-          <div class="icon-slot drag-icon">
-            <this.IconSlotTemplate name={this.dragIconSlot} />
-          </div>
-          <div style={{ paddingLeft: `${(this.level - 1) * 0.5}rem` }} aria-disabled="true">
+      <li {...ariaControls} class={`tree-item-container${selectionIndicator ? ' selected-indicator' : ''}`}>
+        <div
+          class={treeItemClass}
+          onFocus={() => this.handleFocus()}
+          onClick={(e) => this.handleItemClick(e)}
+          onKeyDown={(e) => this.handleKeyDownTreeItem(e)}
+          ref={(el) => this.handleRefItemContent(el)}
+          tabindex={tabIndex}>
+          <this.CustomSlot className="icon-slot drag-icon" defaultContent={this.draggableItem ? <IconMap icon="drag" /> : null} name={this.SLOT_DRAG_ICON} onMouseDown={(e) => this.handleDrag(e)} />
+          <div aria-disabled="true" style={{ paddingLeft: `${(level - 1) * 0.5}rem` }}>
             {/* used for level indentation purpose */}
           </div>
-          <div tabIndex={expandable ? tabIndex : -1} class="icon-slot" onClick={(e) => this.handleExpandToggle(e)} onKeyDown={(e) => this.handleSpaceEnterKeyPress(e, () => this.handleExpandToggle(e))}>
-            {expandable && (this.expanded ? finalCollapseIcon : finalExpandIcon)}
+          <div class="icon-slot" onClick={(e) => this.handleExpandToggle(e)} onKeyDown={(e) => this.handleDefaultKeyDown(e, () => this.handleExpandToggle(e))} tabIndex={expandable ? tabIndex : -1}>
+            <this.CustomSlot className="inline-flex" defaultContent={<IconMap icon="chevron-right-thick" />} hidden={!expandable || (expandable && expanded)} name={this.SLOT_EXPAND_ICON} />
+            <this.CustomSlot className="inline-flex" defaultContent={<IconMap icon="chevron-down-thick" />} hidden={!expandable || !(expandable && expanded)} name={this.SLOT_COLLAPSE_ICON} />
           </div>
-          {(checkboxSelection || multiCheckboxSelection) && (
-            <div class="icon-slot">
-              <modus-checkbox
-                checked={this.checked}
-                disabled={isDisabled}
-                indeterminate={this.indeterminate}
-                onClick={(e) => this.handleCheckboxClick(e)}
-                onKeyDown={(e) => this.handleSpaceEnterKeyPress(e, () => this.handleCheckboxClick(e))}></modus-checkbox>
-            </div>
-          )}
-          {this.slots.has(this.itemIconSlot) && (
-            <div class="icon-slot">
-              <this.IconSlotTemplate name={this.itemIconSlot} />
-            </div>
-          )}
-          <div role="heading" aria-level={this.level}>
-            <div role="button" class="label-slot">
-              {this.label}
-            </div>
+          <div>
+            {(checkboxSelection || multiCheckboxSelection) && (
+              <div class="icon-slot">
+                <modus-checkbox
+                  checked={checked}
+                  disabled={isDisabled}
+                  indeterminate={indeterminate}
+                  onClick={(e) => this.handleCheckboxClick(e)}
+                  onKeyDown={(e) => this.handleDefaultKeyDown(e, () => this.handleCheckboxClick(e))}></modus-checkbox>
+              </div>
+            )}
+          </div>
+
+          <this.CustomSlot className="icon-slot" name={this.SLOT_ITEM_ICON} hidden={!this.slots.has(this.SLOT_ITEM_ICON)} />
+          <div role="heading" aria-level={level} class="label-slot">
+            <this.CustomSlot
+              role="button"
+              name={this.SLOT_LABEL}
+              defaultContent={
+                this.editable ? (
+                  <modus-text-input
+                    size={size == 'large' ? 'large' : 'medium'}
+                    autoFocusInput={true}
+                    tabIndex={0}
+                    ref={(el) => (this.refLabelInput = el)}
+                    value={this.label}
+                    onClick={(e) => this.handleLabelInputClick(e)}
+                    onBlur={() => this.handleLabelInputBlur()}
+                    onKeyDown={(e) => this.handleLabelInputKeyDown(e)}></modus-text-input>
+                ) : (
+                  this.label
+                )
+              }></this.CustomSlot>
           </div>
         </div>
         <ul class={treeItemChildrenClass} role="tree">
-          <slot onSlotchange={() => this.handleDefaultSlotChange()} />
+          <slot onSlotchange={() => this.handleTreeSlotChange()} />
         </ul>
       </li>
     );

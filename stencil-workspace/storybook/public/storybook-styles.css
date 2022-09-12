@@ -54,3 +54,7 @@ body .sbdocs a {
 pre .os-padding {
   z-index: inherit !important;
 }
+
+pre .os-content{
+  max-height: 500px;
+}

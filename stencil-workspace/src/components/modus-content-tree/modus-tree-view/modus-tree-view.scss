@@ -1,3 +1,35 @@
+.drag-content {
+  cursor: grabbing !important;
+  left: 0;
+  opacity: 0.9;
+  position: fixed;
+  top: 0;
+  z-index: 99999;
+
+  &.drop-allow {
+    outline: 2px dashed $col_blue !important;
+  }
+
+  &.drop-block {
+    outline: 2px dashed $col_red_light !important;
+  }
+
+  .tree-item {
+    align-items: center;
+    background-color: $col_white;
+    border: $rem-1px solid $col_gray_0;
+    display: flex;
+    font-family: $primary-font;
+    font-size: $rem-16px;
+    min-height: $list-group-item-height;
+    width: 100%;
+
+    .icon-slot {
+      visibility: hidden;
+    }
+  }
+}
+
 :host {
   display: block;
 }
