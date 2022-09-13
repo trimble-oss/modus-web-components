@@ -8,7 +8,7 @@
   "dependencies": {
     "@storybook/addon-docs": "^6.5.10",
     "@storybook/addons": "^6.5.11",
-    "@storybook/components": "^6.5.10",
+    "@storybook/components": "^6.5.11",
     "@storybook/theming": "^6.5.11",
     "@types/mdx": "^2.0.2",
     "lit-html": "^2.3.1",
