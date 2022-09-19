@@ -5,6 +5,7 @@ import { IconNotifications } from '../icons/icon-notifications';
 import { IconApps } from '../icons/icon-apps';
 import { IconSearch } from '../icons/icon-search';
 import { App } from './apps-menu/modus-navbar-apps-menu';
+import { IconHelp } from '../icons/icon-help';
 
 @Component({
   tag: 'modus-navbar',
@@ -41,6 +42,12 @@ export class ModusNavbar {
 
   /** (optional) Whether to show a shadow under the navbar. */
   @Prop() showShadow: boolean;
+
+  /** (optional) Whether to show help. */
+  @Prop() showHelp: boolean;
+
+  /** (optional) Help URL. */
+  @Prop() helpUrl: string;
 
   /** An event that fires on product logo click. */
   @Event() productLogoClick: EventEmitter<MouseEvent>;
@@ -165,6 +172,11 @@ export class ModusNavbar {
     this.profileMenuVisible = false;
   }
 
+  helpMenuClickHandler(event: MouseEvent): void {
+    event.preventDefault();
+    window.open(this.helpUrl, '_blank');
+  }
+
   render(): unknown {
     const direction = this.reverse ? 'reverse' : '';
     const shadow = this.showShadow ? 'shadow' : '';
@@ -193,6 +205,10 @@ export class ModusNavbar {
               {this.notificationsMenuVisible && <modus-navbar-notifications-menu reverse={this.reverse}><slot name="notifications"></slot></modus-navbar-notifications-menu>}
             </div>}
           {this.showPendoPlaceholder && <div class={'pendo-placeholder'} />}
+          {this.showHelp && 
+            <div class="navbar-button">
+              <IconHelp size="24" onClick={(event) => this.helpMenuClickHandler(event)} />
+            </div>}
           {this.showAppsMenu &&
             <div class="navbar-button">
               <span onKeyDown={(event) => this.appsMenuKeydownHandler(event)} tabIndex={0}>

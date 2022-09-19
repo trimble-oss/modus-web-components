@@ -6,6 +6,12 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 
 ## Unreleased
 
+## 0.1.19 - 2022-19-09
+
+### Added
+
+- Added props `showHelp` and `helpUrl` slot in `modus-navbar` component
+
 ## 0.1.18 - 2022-12-09
 
 ### Added
