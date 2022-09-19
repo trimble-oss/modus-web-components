@@ -351,6 +351,10 @@ export namespace Components {
           * (optional) The apps to render in the apps menu.
          */
         "apps": App[];
+        /**
+          * (optional) Help URL.
+         */
+        "helpUrl": string;
         "hideMainMenu": () => Promise<void>;
         /**
           * (required) Product logo options.
@@ -368,6 +372,10 @@ export namespace Components {
           * (optional) Whether to show the apps menu.
          */
         "showAppsMenu": boolean;
+        /**
+          * (optional) Whether to show help.
+         */
+        "showHelp": boolean;
         /**
           * (optional) Whether to show the main menu.
          */
@@ -1553,6 +1561,10 @@ declare namespace LocalJSX {
          */
         "apps"?: App[];
         /**
+          * (optional) Help URL.
+         */
+        "helpUrl"?: string;
+        /**
           * An event that fires on product logo click.
          */
         "onProductLogoClick"?: (event: ModusNavbarCustomEvent<MouseEvent>) => void;
@@ -1576,6 +1588,10 @@ declare namespace LocalJSX {
           * (optional) Whether to show the apps menu.
          */
         "showAppsMenu"?: boolean;
+        /**
+          * (optional) Whether to show help.
+         */
+        "showHelp"?: boolean;
         /**
           * (optional) Whether to show the main menu.
          */

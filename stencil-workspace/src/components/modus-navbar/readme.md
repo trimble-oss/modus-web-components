@@ -1,4 +1,4 @@
-# modus-button
+# modus-navbar
 
 
 
@@ -14,6 +14,7 @@
 | `profileMenuOptions`   | --                       | (required) Profile menu options.                                 | `{ avatarUrl?: string; email?: string; initials?: string; username: string; }` | `undefined` |
 | `reverse`              | `reverse`                | (optional) Whether to display the navbar items in reverse order. | `boolean`                                                                      | `undefined` |
 | `showAppsMenu`         | `show-apps-menu`         | (optional) Whether to show the apps menu.                        | `boolean`                                                                      | `undefined` |
+| `showHelp`             | `show-help`              | (optional) Whether to show help.                                 | `boolean`                                                                      | `undefined` |
 | `showMainMenu`         | `show-main-menu`         | (optional) Whether to show the main menu.                        | `boolean`                                                                      | `undefined` |
 | `showNotifications`    | `show-notifications`     | (optional) Whether to show notifications.                        | `boolean`                                                                      | `undefined` |
 | `showPendoPlaceholder` | `show-pendo-placeholder` | (optional) Whether to show the placeholder for Pendo.            | `boolean`                                                                      | `undefined` |
