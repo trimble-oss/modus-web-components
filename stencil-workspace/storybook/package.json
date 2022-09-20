@@ -20,7 +20,7 @@
     "@storybook/addon-a11y": "^6.5.11",
     "@storybook/addon-actions": "^6.5.11",
     "@storybook/addon-essentials": "^6.5.11",
-    "@storybook/addon-links": "^6.5.11",
+    "@storybook/addon-links": "^6.5.12",
     "@storybook/web-components": "^6.5.11",
     "babel-loader": "^8.2.5"
   },
