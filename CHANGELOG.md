@@ -6,6 +6,12 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 
 ## Unreleased
 
+## 0.1.20 - 2022-19-28
+
+### Added
+
+- Added props `category` and `showCategory` slot in `App` interface and modified modus-navbar-apps-menu's style
+
 ## 0.1.19 - 2022-19-09
 
 ### Added

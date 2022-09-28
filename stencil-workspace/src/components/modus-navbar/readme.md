@@ -10,6 +10,7 @@
 | Property               | Attribute                | Description                                                      | Type                                                                           | Default     |
 | ---------------------- | ------------------------ | ---------------------------------------------------------------- | ------------------------------------------------------------------------------ | ----------- |
 | `apps`                 | --                       | (optional) The apps to render in the apps menu.                  | `App[]`                                                                        | `undefined` |
+| `helpUrl`              | `help-url`               | (optional) Help URL.                                             | `string`                                                                       | `undefined` |
 | `productLogoOptions`   | --                       | (required) Product logo options.                                 | `{ height?: string; url: string; }`                                            | `undefined` |
 | `profileMenuOptions`   | --                       | (required) Profile menu options.                                 | `{ avatarUrl?: string; email?: string; initials?: string; username: string; }` | `undefined` |
 | `reverse`              | `reverse`                | (optional) Whether to display the navbar items in reverse order. | `boolean`                                                                      | `undefined` |

@@ -473,14 +473,14 @@ export declare interface ModusNavbar extends Components.ModusNavbar {
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['apps', 'productLogoOptions', 'profileMenuOptions', 'reverse', 'showAppsMenu', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showSearch', 'showShadow'],
+  inputs: ['apps', 'helpUrl', 'productLogoOptions', 'profileMenuOptions', 'reverse', 'showAppsMenu', 'showHelp', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showSearch', 'showShadow'],
   methods: ['hideMainMenu']
 })
 @Component({
   selector: 'modus-navbar',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['apps', 'productLogoOptions', 'profileMenuOptions', 'reverse', 'showAppsMenu', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showSearch', 'showShadow']
+  inputs: ['apps', 'helpUrl', 'productLogoOptions', 'profileMenuOptions', 'reverse', 'showAppsMenu', 'showHelp', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showSearch', 'showShadow']
 })
 export class ModusNavbar {
   protected el: HTMLElement;
