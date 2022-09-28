@@ -4,9 +4,15 @@
   align-items: flex-start;
   cursor: default;
   width: max-content;
+  overflow-y: auto;
+  max-height: 605px;
 
   &.reverse {
     left: 0;
+  }
+
+  .app-div {
+    width: 100%;
   }
 
   .app {
@@ -30,9 +36,9 @@
     }
 
     img {
-      height: 48px;
+      height: 2em;
       margin-right: $rem-12px;
-      width: 48px;
+      width: 2em;
     }
 
     .right {
@@ -47,5 +53,15 @@
         font-size: $rem-12px;
       }
     }
+  }
+
+  .category {
+    color: $col_gray_8;
+    font-size: $rem-12px;
+    font-weight: $font-weight-semi-bold;
+    margin-top: $rem-8px;
+    padding-top: $rem-18px;
+    padding-bottom: $rem-10px;
+    border-top: 1px solid $col_gray_0;
   }
 }

@@ -16,6 +16,8 @@ A new TypeScript typing has been provided named App defined as:
   logoUrl: string; // required.
   name: string; // required.
   url: string; // required.
+  category: string;
+  showCategory: boolean;
 }
 ```
 
@@ -43,6 +45,8 @@ A new TypeScript typing has been provided named App defined as:
       logoUrl: '',
       name: '',
       url: '',
+      category: '',
+      showCategory: false,
     },
   ];
   element.productLogoOptions = { height: 24, url: '' };
