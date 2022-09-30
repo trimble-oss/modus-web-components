@@ -40,7 +40,7 @@ If this is your first time in the project, navigate to the `./stencil-workspace`
 
 All web components are located under the `./stencil-workspace/src/components directory.`
 
-The index.html file provides a place to render components for development and end to end testing.
+The index.html file provides a place to render components for development and end-to-end testing.
 
 Global SCSS files are available to provide Modus colors, variables and functions for component styling.
 
@@ -74,7 +74,7 @@ All npm scripts are run from the `./stencil-workspace` project directory.
 - [ESLint](https://eslint.org/) - A JS linter to help find and fix problems in code.
 - [Jest](https://jestjs.io/) - A JS testing framework.
 - [Stencil](https://stenciljs.com/) - A toolchain for building reusable, scalable design systems and web components.
-- [SASS](https://sass-lang.com/) - The most mature, stable, and powerful professional grade CSS extension language in the world.
+- [Sass](https://sass-lang.com/) - The most mature, stable, and powerful professional grade CSS extension language in the world.
 - [rollup.js](https://rollupjs.org/) - A module bundler for JavaScript which compiles small pieces of code into something larger and more complex, such as a library or application.
 
 ## Changelog

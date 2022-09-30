@@ -42,7 +42,7 @@ This project provides Trimble Modus Elements as a web component library. Web com
 
 **Data** N/A
 
-**3rd Party Libraries** All 3rd party libraries are retrieved via NPM. The `npm audit` command will be run to discover package vulnerabilities.
+**3rd Party Libraries** All 3rd party libraries are retrieved via npm. The `npm audit` command will be run to discover package vulnerabilities.
 
 **Testing** Possibly white source but likely just `npm audit` to start with.
 
@@ -76,7 +76,7 @@ This project provides Trimble Modus Elements as a web component library. Web com
 
 ### Manage State
 
-**Patterns** Stencil provides a built in state management pattern called the state decorator.
+**Patterns** Stencil provides a built-in state management pattern called the state decorator.
 
 **Technology** Stencil
 
@@ -132,15 +132,15 @@ This project provides Trimble Modus Elements as a web component library. Web com
 
 **Documentation** The README at the project root will describe the project, tech, and all of the Modus web components. Stencil will auto generate individual component markdown documentation based on the comments in each component. This documentation can be copied and pasted into the README to provide complete library documentation.
 
-**Enforcing Best Practices** Follow the Stencil docs. Implement eslint and run it as part of the build.
+**Enforcing Best Practices** Follow the Stencil docs. Implement ESLint and run it as part of the build.
 
-**Maintaining Performance Standards** The QA team can enable automated lighthouse tests and thresholds through puppetlabs.
+**Maintaining Performance Standards** The QA team can enable automated Lighthouse tests and thresholds through Puppet.
 
 **Implementing Telemetry** N/A
 
 **Unit Testing** Jest will be used for unit testing. Follow the Stencil docs for best practices.
 
-**End to End Testing** Jest will be used for end to end testing. Follow the Stencil docs for best practices.
+**End to End Testing** Jest will be used for end-to-end testing. Follow the Stencil docs for best practices.
 
 ------
 
