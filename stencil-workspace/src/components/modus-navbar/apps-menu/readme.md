@@ -7,10 +7,10 @@
 
 ## Properties
 
-| Property  | Attribute | Description | Type      | Default     |
-| --------- | --------- | ----------- | --------- | ----------- |
-| `apps`    | --        |             | `App[]`   | `undefined` |
-| `reverse` | `reverse` |             | `boolean` | `undefined` |
+| Property  | Attribute | Description | Type               | Default     |
+| --------- | --------- | ----------- | ------------------ | ----------- |
+| `apps`    | --        |             | `ModusNavbarApp[]` | `undefined` |
+| `reverse` | `reverse` |             | `boolean`          | `undefined` |
 
 
 ## Dependencies

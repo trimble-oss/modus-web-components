@@ -8,19 +8,6 @@ import { Story } from '@storybook/addon-docs';
 
 This component utilizes the slot element, allowing you to render your own HTML in the help and notification menus.
 
-A new TypeScript typing has been provided named App defined as:
-
-```ts
-{
-  description?: string; // optional.
-  logoUrl: string; // required.
-  name: string; // required.
-  url: string; // required.
-  category: string;
-  showCategory: boolean;
-}
-```
-
 #### Implementation Details
 
 - The only required navigation items are the product logo and the user menu. The rest are hidden by default.
@@ -54,147 +41,54 @@ A new TypeScript typing has been provided named App defined as:
     avatarUrl: '',
     email: '',
     initials: '',
+    links: [],
     username: '',
   };
 </script>
 ```
 
+### Types
+
+```ts
+interface ModusNavbarApp {
+  description?: string;
+  logoUrl: string;
+  name: string;
+  url: string;
+  category: string;
+  showCategory: boolean;
+}
+
+interface ModusNavbarProfileMenuLink {
+  display: string;
+  id: string;
+}
+```
+
 ### Properties
 
-<section>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Type</th>
-        <th>Options</th>
-        <th>Default Value</th>
-        <th>Required</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>product-logo-options</td>
-        <td>Options for rendering the product logo</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>
-          <span class="material-icons">&#10004;</span>
-        </td>
-      </tr>
-      <tr>
-        <td>profile-menu-options</td>
-        <td>Options for rendering the profile menu</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>
-          <span class="material-icons">&#10004;</span>
-        </td>
-      </tr>
-      <tr>
-        <td>apps</td>
-        <td>The apps to render in the apps menu</td>
-        <td>App[]</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>show-apps-menu</td>
-        <td>Whether to show the apps menu item</td>
-        <td>boolean</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>show-main-menu</td>
-        <td>Whether to show the main menu item</td>
-        <td>boolean</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>show-notifications</td>
-        <td>Whether to show the notifications item</td>
-        <td>boolean</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>show-pendo-placeholder</td>
-        <td>Whether to show the placeholder for Pendo</td>
-        <td>boolean</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>show-search</td>
-        <td>Whether to show the search item</td>
-        <td>boolean</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>show-shadow</td>
-        <td>Whether to show a shadow under the navbar</td>
-        <td>boolean</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>show-help</td>
-        <td>Whether to show help</td>
-        <td>boolean</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>help-url</td>
-        <td>Help URL</td>
-        <td>boolean</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+| Property               | Attribute                | Description                                                      | Type                                                                                                                 | Default     |
+| ---------------------- | ------------------------ | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | ----------- |
+| `apps`                 | --                       | (optional) The apps to render in the apps menu.                  | `ModusNavbarApp[]`                                                                                                   | `undefined` |
+| `helpUrl`              | `help-url`               | (optional) Help URL.                                             | `string`                                                                                                             | `undefined` |
+| `productLogoOptions`   | --                       | (required) Product logo options.                                 | `{ height?: string; url: string; }`                                                                                  | `undefined` |
+| `profileMenuOptions`   | --                       | (required) Profile menu options.                                 | `{ avatarUrl?: string; email?: string; initials?: string; links?: ModusNavbarProfileMenuLink[]; username: string; }` | `undefined` |
+| `reverse`              | `reverse`                | (optional) Whether to display the navbar items in reverse order. | `boolean`                                                                                                            | `undefined` |
+| `showAppsMenu`         | `show-apps-menu`         | (optional) Whether to show the apps menu.                        | `boolean`                                                                                                            | `undefined` |
+| `showHelp`             | `show-help`              | (optional) Whether to show help.                                 | `boolean`                                                                                                            | `undefined` |
+| `showMainMenu`         | `show-main-menu`         | (optional) Whether to show the main menu.                        | `boolean`                                                                                                            | `undefined` |
+| `showNotifications`    | `show-notifications`     | (optional) Whether to show notifications.                        | `boolean`                                                                                                            | `undefined` |
+| `showPendoPlaceholder` | `show-pendo-placeholder` | (optional) Whether to show the placeholder for Pendo.            | `boolean`                                                                                                            | `undefined` |
+| `showSearch`           | `show-search`            | (optional) Whether to show search.                               | `boolean`                                                                                                            | `undefined` |
+| `showShadow`           | `show-shadow`            | (optional) Whether to show a shadow under the navbar.            | `boolean`                                                                                                            | `undefined` |
 
 ### DOM Events
 
-<section>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Emits</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>productLogoClick</td>
-        <td>Fires on product logo click</td>
-        <td>MouseEvent</td>
-      </tr>
-      <tr>
-        <td>profileMenuSignOutClick</td>
-        <td>Fires on profile menu sign out click</td>
-        <td>MouseEvent</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+| Event                     | Description                                         | Type                      |
+| ------------------------- | --------------------------------------------------- | ------------------------- |
+| `productLogoClick`        | An event that fires on product logo click.          | `CustomEvent<MouseEvent>` |
+| `profileMenuLinkClick`    | An event that fires on profile menu link click.     | `CustomEvent<string>`     |
+| `profileMenuSignOutClick` | An event that fires on profile menu sign out click. | `CustomEvent<MouseEvent>` |
 
 ### Methods
 

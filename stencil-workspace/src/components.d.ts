@@ -7,8 +7,10 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSortEvent, ModusTableSelectionOptions, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
-import { App } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
-import { App as App1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
+import { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
+import { ModusNavbarProfileMenuLink } from "./components/modus-navbar/profile-menu/modus-navbar-profile-menu";
+import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
+import { ModusNavbarProfileMenuLink as ModusNavbarProfileMenuLink1 } from "./components/modus-navbar/profile-menu/modus-navbar-profile-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { Tab } from "./components/modus-tabs/modus-tabs";
 import { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
@@ -350,7 +352,7 @@ export namespace Components {
         /**
           * (optional) The apps to render in the apps menu.
          */
-        "apps": App[];
+        "apps": ModusNavbarApp[];
         /**
           * (optional) Help URL.
          */
@@ -363,7 +365,13 @@ export namespace Components {
         /**
           * (required) Profile menu options.
          */
-        "profileMenuOptions": { avatarUrl?: string, email?: string, initials?: string, username: string };
+        "profileMenuOptions": {
+    avatarUrl?: string,
+    email?: string,
+    initials?: string,
+    links?: ModusNavbarProfileMenuLink[],
+    username: string
+  };
         /**
           * (optional) Whether to display the navbar items in reverse order.
          */
@@ -398,7 +406,7 @@ export namespace Components {
         "showShadow": boolean;
     }
     interface ModusNavbarAppsMenu {
-        "apps": App[];
+        "apps": ModusNavbarApp[];
         "reverse": boolean;
     }
     interface ModusNavbarMainMenu {
@@ -410,6 +418,7 @@ export namespace Components {
         "avatarUrl": string;
         "email": string;
         "initials": string;
+        "links": ModusNavbarProfileMenuLink[];
         "reverse": boolean;
         "username": string;
     }
@@ -1559,7 +1568,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The apps to render in the apps menu.
          */
-        "apps"?: App[];
+        "apps"?: ModusNavbarApp[];
         /**
           * (optional) Help URL.
          */
@@ -1568,6 +1577,10 @@ declare namespace LocalJSX {
           * An event that fires on product logo click.
          */
         "onProductLogoClick"?: (event: ModusNavbarCustomEvent<MouseEvent>) => void;
+        /**
+          * An event that fires on profile menu link click.
+         */
+        "onProfileMenuLinkClick"?: (event: ModusNavbarCustomEvent<string>) => void;
         /**
           * An event that fires on profile menu sign out click.
          */
@@ -1579,7 +1592,13 @@ declare namespace LocalJSX {
         /**
           * (required) Profile menu options.
          */
-        "profileMenuOptions"?: { avatarUrl?: string, email?: string, initials?: string, username: string };
+        "profileMenuOptions"?: {
+    avatarUrl?: string,
+    email?: string,
+    initials?: string,
+    links?: ModusNavbarProfileMenuLink[],
+    username: string
+  };
         /**
           * (optional) Whether to display the navbar items in reverse order.
          */
@@ -1614,7 +1633,7 @@ declare namespace LocalJSX {
         "showShadow"?: boolean;
     }
     interface ModusNavbarAppsMenu {
-        "apps"?: App[];
+        "apps"?: ModusNavbarApp[];
         "reverse"?: boolean;
     }
     interface ModusNavbarMainMenu {
@@ -1626,6 +1645,8 @@ declare namespace LocalJSX {
         "avatarUrl"?: string;
         "email"?: string;
         "initials"?: string;
+        "links"?: ModusNavbarProfileMenuLink[];
+        "onLinkClick"?: (event: ModusNavbarProfileMenuCustomEvent<string>) => void;
         "onSignOutClick"?: (event: ModusNavbarProfileMenuCustomEvent<MouseEvent>) => void;
         "reverse"?: boolean;
         "username"?: string;

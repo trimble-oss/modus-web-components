@@ -3,38 +3,97 @@
 
   align-items: center;
   cursor: default;
-  padding-left: 48px;
-  padding-right: 48px;
+  max-width: 19rem;
+  padding: 0;
   width: fit-content;
+
+  .user {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding: $rem-20px $rem-20px 0 $rem-20px;
+
+    .avatar,
+    .initials {
+      background-color: $col_gray_light;
+      border-radius: 50%;
+      height: 6rem;
+      margin: 0 $rem-16px $rem-20px 0;
+      user-select: none;
+      width: 6rem;
+    }
+
+    .initials {
+      align-items: center;
+      display: flex;
+      font-size: $rem-24px;
+      font-weight: $font-weight-semi-bold;
+      justify-content: center;
+    }
+
+    .username {
+      font-size: $rem-16px;
+      font-weight: $font-weight-semi-bold;
+      max-width: 10rem;
+      overflow-wrap: break-word;
+      padding: 0 $rem-4px;
+    }
+
+    .email {
+      font-size: $rem-12px;
+      margin-bottom: $rem-16px;
+      max-width: 10rem;
+      overflow-wrap: break-word;
+      padding: 0 $rem-4px;
+    }
+  }
+
+  .links {
+    font-size: $rem-14px;
+    margin-bottom: $rem-12px;
+    max-width: 19rem;
+    user-select: none;
+    width: 100%;
+
+    .link {
+      cursor: pointer;
+      overflow: hidden;
+      padding: $rem-10px $rem-20px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      @media (hover: hover) {
+        &:hover {
+          background-color: $col_gray_0;
+        }
+      }
+
+      &:active {
+        background-color: $col_gray_light;
+      }
+    }
+  }
+
+  .sign-out {
+    background-color: $col_gray_light;
+    user-select: none;
+    width: 100%;
+
+    div {
+      color: $col_blue;
+      cursor: pointer;
+      font-size: $rem-14px;
+      padding: $rem-10px $rem-20px;
+
+      @media (hover: hover) {
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
 
   &.reverse {
     left: 0;
-  }
-
-  .avatar,
-  .initials {
-    background-color: $col_gray_0;
-    border-radius: 50%;
-    height: 64px;
-    margin-bottom: $rem-16px;
-    width: 64px;
-  }
-
-  .initials {
-    align-items: center;
-    display: flex;
-    font-size: $rem-24px;
-    justify-content: center;
-  }
-
-  .username {
-    font-size: $rem-20px;
-    padding: 0 $rem-4px;
-  }
-
-  .email {
-    font-size: $rem-14px;
-    margin-bottom: $rem-16px;
-    padding: 0 $rem-4px;
   }
 }

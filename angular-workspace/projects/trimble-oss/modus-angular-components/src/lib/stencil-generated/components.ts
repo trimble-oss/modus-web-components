@@ -465,6 +465,10 @@ export declare interface ModusNavbar extends Components.ModusNavbar {
    */
   productLogoClick: EventEmitter<CustomEvent<MouseEvent>>;
   /**
+   * An event that fires on profile menu link click. 
+   */
+  profileMenuLinkClick: EventEmitter<CustomEvent<string>>;
+  /**
    * An event that fires on profile menu sign out click. 
    */
   profileMenuSignOutClick: EventEmitter<CustomEvent<MouseEvent>>;
@@ -487,7 +491,7 @@ export class ModusNavbar {
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['productLogoClick', 'profileMenuSignOutClick']);
+    proxyOutputs(this, this.el, ['productLogoClick', 'profileMenuLinkClick', 'profileMenuSignOutClick']);
   }
 }
 
@@ -557,26 +561,30 @@ export declare interface ModusNavbarProfileMenu extends Components.ModusNavbarPr
   /**
    *  
    */
+  linkClick: EventEmitter<CustomEvent<string>>;
+  /**
+   *  
+   */
   signOutClick: EventEmitter<CustomEvent<MouseEvent>>;
 
 }
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['avatarUrl', 'email', 'initials', 'reverse', 'username']
+  inputs: ['avatarUrl', 'email', 'initials', 'links', 'reverse', 'username']
 })
 @Component({
   selector: 'modus-navbar-profile-menu',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['avatarUrl', 'email', 'initials', 'reverse', 'username']
+  inputs: ['avatarUrl', 'email', 'initials', 'links', 'reverse', 'username']
 })
 export class ModusNavbarProfileMenu {
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['signOutClick']);
+    proxyOutputs(this, this.el, ['linkClick', 'signOutClick']);
   }
 }
 
