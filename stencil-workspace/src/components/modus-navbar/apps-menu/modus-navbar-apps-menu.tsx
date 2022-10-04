@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 import { Component, Prop, h } from '@stencil/core';
 
-export interface App {
+export interface ModusNavbarApp {
   description?: string;
   logoUrl: string;
   name: string;
@@ -16,10 +16,10 @@ export interface App {
   shadow: true,
 })
 export class ModusNavbarAppsMenu {
-  @Prop() apps: App[];
+  @Prop() apps: ModusNavbarApp[];
   @Prop() reverse: boolean;
 
-  clickAppHandler(app: App): void {
+  clickAppHandler(app: ModusNavbarApp): void {
     window.open(app.url, '_blank');
   }
 
@@ -28,7 +28,7 @@ export class ModusNavbarAppsMenu {
 
     return (
       <div class={`apps-menu ${direction}`} onClick={(event) => event.preventDefault()}>
-        {this.apps?.map((app) => 
+        {this.apps?.map((app) =>
           <div class="app-div">
             {app.showCategory? <div class="category">{app.category}</div> : null}
             <div class="app" onClick={() => this.clickAppHandler(app)}>

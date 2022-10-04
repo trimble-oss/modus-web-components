@@ -4,8 +4,9 @@ import { IconMenu } from '../icons/icon-menu';
 import { IconNotifications } from '../icons/icon-notifications';
 import { IconApps } from '../icons/icon-apps';
 import { IconSearch } from '../icons/icon-search';
-import { App } from './apps-menu/modus-navbar-apps-menu';
+import { ModusNavbarApp } from './apps-menu/modus-navbar-apps-menu';
 import { IconHelp } from '../icons/icon-help';
+import { ModusNavbarProfileMenuLink } from './profile-menu/modus-navbar-profile-menu';
 
 @Component({
   tag: 'modus-navbar',
@@ -14,13 +15,19 @@ import { IconHelp } from '../icons/icon-help';
 })
 export class ModusNavbar {
   /** (optional) The apps to render in the apps menu. */
-  @Prop() apps: App[];
+  @Prop() apps: ModusNavbarApp[];
 
   /** (required) Product logo options. */
   @Prop() productLogoOptions: { height?: string; url: string };
 
   /** (required) Profile menu options. */
-  @Prop({ mutable: true }) profileMenuOptions: { avatarUrl?: string, email?: string, initials?: string, username: string };
+  @Prop({ mutable: true }) profileMenuOptions: {
+    avatarUrl?: string,
+    email?: string,
+    initials?: string,
+    links?: ModusNavbarProfileMenuLink[],
+    username: string
+  };
 
   /** (optional) Whether to display the navbar items in reverse order. */
   @Prop() reverse: boolean;
@@ -52,6 +59,9 @@ export class ModusNavbar {
   /** An event that fires on product logo click. */
   @Event() productLogoClick: EventEmitter<MouseEvent>;
 
+  /** An event that fires on profile menu link click. */
+  @Event() profileMenuLinkClick: EventEmitter<string>;
+
   /** An event that fires on profile menu sign out click. */
   @Event() profileMenuSignOutClick: EventEmitter<MouseEvent>;
 
@@ -72,6 +82,12 @@ export class ModusNavbar {
     // Individual menus can prevent this listener from closing them.
     if (event.defaultPrevented) { return; }
     this.hideMenus();
+  }
+
+  @Listen('linkClick')
+  linkClickHandler(linkClickEvent: CustomEvent<string>): void {
+    linkClickEvent.stopPropagation();
+    this.profileMenuLinkClick.emit(linkClickEvent.detail);
   }
 
   @Listen('signOutClick')
@@ -205,7 +221,7 @@ export class ModusNavbar {
               {this.notificationsMenuVisible && <modus-navbar-notifications-menu reverse={this.reverse}><slot name="notifications"></slot></modus-navbar-notifications-menu>}
             </div>}
           {this.showPendoPlaceholder && <div class={'pendo-placeholder'} />}
-          {this.showHelp && 
+          {this.showHelp &&
             <div class="navbar-button">
               <IconHelp size="24" onClick={(event) => this.helpMenuClickHandler(event)} />
             </div>}
@@ -225,6 +241,7 @@ export class ModusNavbar {
                 avatar-url={this.profileMenuOptions?.avatarUrl}
                 email={this.profileMenuOptions?.email}
                 initials={this.profileMenuOptions?.initials}
+                links={this.profileMenuOptions?.links}
                 reverse={this.reverse}
                 username={this.profileMenuOptions?.username} />}
           </div>
