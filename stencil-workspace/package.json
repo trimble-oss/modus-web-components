@@ -39,7 +39,7 @@
     "start-storybook": "npm run build && cd storybook && npm run storybook"
   },
   "dependencies": {
-    "@stencil/core": "^2.18.0"
+    "@stencil/core": "^2.18.1"
   },
   "devDependencies": {
     "@stencil/angular-output-target": "^0.4.0",
