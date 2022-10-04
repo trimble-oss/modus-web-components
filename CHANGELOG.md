@@ -77,7 +77,7 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 
 ### Added
 
-- Barebones Modus Data Table
+- Bare-bones Modus Data Table
 - Enabled keyboard interactions for `Content Tree` components.
 - Added a prop `auto-focus-input` and a public method `focusInput` to `modus-text-input` component.
 
@@ -132,7 +132,7 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 - Fixed aria-labels on Modus Progress Bar and Modus File Dropzone by moving to host elements.
 - Fixed Modus Dropdown closing issue, it now closes when you click outside.
 - Added inputmode option to modus-text-input components.
-- Add `cursor: pointer;` CSS to acccordion headers.
+- Add `cursor: pointer;` CSS to accordion headers.
 
 ## 0.1.8 - 2022-24-06
 
@@ -161,10 +161,10 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 
 Restructured the repo to allow for build generated angular and react components:
 
-- Updated github actions to refer to the new stencil location
+- Updated GitHub Actions to refer to the new Stencil location
 - Updated `.prettierrc` to force single quotes which is consistent with our lint settings
-- Moved all stencil source code into ./stencil-workspace
-- Moved storybook code along with stencil code to simplify the build script changes
+- Moved all Stencil source code into ./stencil-workspace
+- Moved Storybook code along with Stencil code to simplify the build script changes
 - Updated `package.json` types to use interfaces.d.ts which exposes
   internal interfaces to consumers of Angular Components.
 
