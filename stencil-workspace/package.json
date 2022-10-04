@@ -52,7 +52,7 @@
     "@typescript-eslint/eslint-plugin": "^5.38.1",
     "@typescript-eslint/parser": "^5.39.0",
     "autoprefixer": "^10.4.12",
-    "eslint": "^8.23.1",
+    "eslint": "^8.24.0",
     "eslint-plugin-storybook": "^0.6.4",
     "jest": "^27.0.3",
     "jest-cli": "^27.5.1",
