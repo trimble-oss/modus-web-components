@@ -21,8 +21,8 @@
   "files": [
     "dist/",
     "loader/",
-    "../README.md",
-    "../SUPPORT.md"
+    "README.md",
+    "SUPPORT.md"
   ],
   "scripts": {
     "build": "stencil build --docs",
@@ -34,9 +34,10 @@
     "lint-js": "eslint src/** --no-error-on-unmatched-pattern",
     "lint-css": "stylelint src/**/*.scss",
     "prettier": "prettier --write storybook/stories/**/*.*",
-    "full": "npm ci && npm run lint-js && npm run lint-css && npm run build && npm run test && npm run ci-storybook",
+    "full": "npm ci && npm run lint && npm run copy-docs && npm run build && npm run test && npm run ci-storybook",
     "ci-storybook": "cd storybook && npm ci && npm run build-storybook",
-    "start-storybook": "npm run build && cd storybook && npm run storybook"
+    "start-storybook": "npm run build && cd storybook && npm run storybook",
+    "copy-docs": "copyfiles -f ../README.md ../SUPPORT.md ./"
   },
   "dependencies": {
     "@stencil/core": "^2.18.1"
@@ -52,6 +53,7 @@
     "@typescript-eslint/eslint-plugin": "^5.39.0",
     "@typescript-eslint/parser": "^5.39.0",
     "autoprefixer": "^10.4.12",
+    "copyfiles": "^2.4.1",
     "eslint": "^8.24.0",
     "eslint-plugin-storybook": "^0.6.4",
     "jest": "^27.0.3",

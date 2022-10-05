@@ -2,6 +2,20 @@
 
 ---
 
+## Table of Contents
+- [Dependencies](#dependencies)
+- [Getting Started](#getting-started)
+- [Available Scripts](#available-scripts)
+- [Submitting Issues](#submitting-issues)
+- [Technologies](#technologies)
+- [Running Locally](#running-locally)
+- [Developing a Component](#developing-a-component)
+- [Styleguide](#styleguide)
+- [Testing](#testing)
+- [Making Changes and Submitting a PR](#making-changes-and-submitting-a-pr)
+- [Changelog](#changelog)
+- [Releasing Framework Outputs](#releasing-framework-outputs)
+
 ## Dependencies
 
 - Node (>= v14)
@@ -9,32 +23,23 @@
 
 _We recommend using [NVM](https://github.com/nvm-sh/nvm). It is a great tool for switching between Node versions_
 
-## Submitting Issues
+## Getting Started
 
-Whether you're contributing directly to the code or have suggestions, submitting an issue through GitHub is needed
-for referencing changes. Please submit change items as an Issue [here](https://github.com/trimble-oss/modus-web-components/issues).
+### Running the App
 
-If the issue's considered a bug, add the 'bug' label to the issue.
+If this is your first time in the project, navigate to the `./stencil-workspace` directory and run `npm install` to download 3rd party packages.
 
-Also add a priority level label to the issue. The priority options are low, medium, and high.
-If you are unsure of its priority, reach out to one of the developers for their opinion.
+Once you've installed the project's packages, run `npm start`.
+A development environment will start up with the contents of `index.html`.
+This file provides a place to render components for development and end-to-end testing.
 
-## Technologies
+All web components are located under the `./stencil-workspace/src/components` directory.
 
-### Stencil
+Global SCSS files are available to provide Modus colors, variables and functions for component styling.
 
-Stencil is a web component compiler. Web components is a suite of JavaScript technologies that let you register a component
-directly with the browser. This means that the component can be used in any web application. It comes packed with a dev server
-and live re-rendering. We are using it to build out the components.
+### Implementation
 
-### Storybook
-
-Storybook is a tool for developing components in isolation. It also provides a framework for developing component library
-documentation sites. We are using it to document our components.
-
-### npm
-
-We are hosting this package on both the @trimble-oss GitHub npm registry, and the public npm registry.
+Stencil web component implementation details can be found in their [Framework Integration Docs](https://stenciljs.com/docs/overview).
 
 ## Available Scripts
 
@@ -54,6 +59,45 @@ All npm scripts are run from the `./stencil-workspace` project directory.
 
 `npm run lint` - Run ESLint to find problems with JS, TS and SCSS code
 
+`npm run start-storybook`: Build and run the Storybook documentation site.
+Note: You will need to manually install the packages in `./stencil-workspace/storybook` before running this command
+
+## Submitting Issues
+
+Whether you're contributing directly to the code or have suggestions, submitting an issue through GitHub is needed
+for referencing changes. Please submit change items as an Issue [here](https://github.com/trimble-oss/modus-web-components/issues).
+
+If the issue's considered a bug, add the 'bug' label to the issue.
+
+Also add a priority level label to the issue. The priority options are low, medium, and high.
+If you are unsure of its priority, reach out to one of the developers for their opinion.
+
+## Technologies
+
+- [Stencil](https://stenciljs.com/)
+- [Storybook](https://storybook.js.org/)
+- [npm](https://docs.npmjs.com/getting-started)
+- [Sass](https://sass-lang.com/)
+- [ESLint](https://eslint.org/)
+- [Prettier](https://prettier.io/)
+- [Jest](https://jestjs.io/)
+- [rollup.js](https://rollupjs.org/)
+
+### Stencil
+
+Stencil is a web component compiler. Web components is a suite of JavaScript technologies that let you register a component
+directly with the browser. This means that the component can be used in any web application. It comes packed with a dev server
+and live re-rendering. We are using it to build out the components.
+
+### Storybook
+
+Storybook is a tool for developing components in isolation. It also provides a framework for developing component library
+documentation sites. We are using it to document our components.
+
+### npm
+
+We are hosting this package on both the @trimble-oss GitHub npm registry, and the public npm registry.
+
 ## Running Locally
 
 To get this application up and running, there are just two commands needed:
@@ -61,7 +105,7 @@ To get this application up and running, there are just two commands needed:
 - Run `npm install`
 - Run `npm start`
 
-> **Note:** The `./stencil-workspace` project directory is the source of truth for this component library. This is where all component changes will take place.
+> **Note:** The `./stencil-workspace` project directory is the source of truth for this component library. This is where all component changes will take place. The other directories are generated.
 
 ## Developing a Component
 
@@ -118,6 +162,39 @@ To run a specific test, run `stencil test --spec --e2e --silent [test file name]
 9. Submit your PR with your branch as the `head`, and the `@trimble-oss/modus-web-components` `main` branch as the `base`.
    - Don't forget to link your relevant issue in the PR description.
 10. Rebase and Merge the PR upon approval.
+
+## Changelog
+
+The CHANGELOG is a file that contains a curated list of chronological entries for each version of the project.
+This will enable users to quickly see precise changes between each release or version of a project.
+
+### Semantic Versioning
+
+This project uses the following semantic versioning convention for the repository and changelog entries.
+Given a version number [MAJOR.MINOR.PATCH], increment the following:
+
+1. Major: to make incompatible API changes - updates containing new dependencies.
+2. Minor: to add functionality in a backwards compatible manner.
+3. Patch: to make backwards compatible bug fixes.
+   Example: Version 1.0.0 has a function added in accordance with a minor version update. The new version will be 1.1.0.
+   See: [semver.org](https://semver.org/spec/v2.0.0.html).
+
+### Guidelines
+
+- Each version has an entry and release date.
+- Entries are ordered from newest to oldest.
+- Entries contain updates relevant to an end user and may not reflect every commit.
+
+### Update Types
+
+Each changelog entry will include one or more update types relevant to each change:
+
+- Added: New features.
+- Changed: Changes in functionality.
+- Deprecated: For soon to be removed features.
+- Removed: For removed features.
+- Fixed: For bug Fixes.
+- Security: For vulnerabilities.
 
 ## Releasing Framework Outputs
 
