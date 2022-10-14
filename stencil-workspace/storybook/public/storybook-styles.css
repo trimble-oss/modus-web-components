@@ -1,6 +1,43 @@
 /* https://storybook.js.org/docs/react/configure/theming */
 
-body,
+/* hide the toggler until dark mode is enabled for all the components */
+button[title="Change theme to dark mode"],
+button[title="Change theme to light mode"] {
+  opacity: 0;
+  cursor: auto;
+}
+
+body[data-mwc-theme="light"] {
+  --theme-bg-color: #fff;
+  --theme-color: #252a2e;
+  --theme-sbdocs-table-head-bg-color: #f1f1f6;
+  --theme-sbdocs-table-stripe-bg-color: #f8f8f8;
+  --theme-sbdocs-table-border-color: #b7b9c3;
+  --theme-docblock-source-color: #252a2e;
+  --theme-docblock-source-bg-color: #fff;
+  --theme-sidebar-subheading-color: #495057;
+  --theme-sbdocs-link-color: #217cbb;
+  --theme-code-color: #333;
+  --theme-code-bg-color: #f8f8f8;
+  --theme-code-border-color: #eee;
+}
+
+body[data-mwc-theme="dark"] {
+  --theme-bg-color: #252a2e;
+  --theme-color: #f1f1f6;
+  --theme-sbdocs-table-head-bg-color: #171c1e;
+  --theme-sbdocs-table-stripe-bg-color: #252a2e;
+  --theme-sbdocs-table-border-color: #464b52;
+  --theme-docblock-source-color: #f1f1f6;
+  --theme-docblock-source-bg-color: #6a6e79;
+  --theme-sidebar-subheading-color: #495057;
+  --theme-sbdocs-link-color: #217cbb;
+  --theme-code-color: #f1f1f6;
+  --theme-code-bg-color: #6a6e79;
+  --theme-code-border-color: #6a6e79;
+}
+
+body.sb-show-main,
 #docs-root,
 #docs-root p,
 .sbdocs,
@@ -9,24 +46,33 @@ body,
 .sbdocs-li,
 .sbdocs-p,
 .sbdocs-ul {
-  color: #252a2e;
+  color: var(--theme-color) !important;
+  background-color: var(--theme-bg-color) !important;
 }
 
 .sbdocs-table {
   width: 100%;
 }
 
+.sbdocs-table td {
+  color: var(--theme-color) !important;
+}
+
 .sbdocs-table thead tr th {
-  color: #252a2e;
-  background-color: #f1f1f6;
-  border: 1px solid #b7b9c3;
+  color: var(--theme-color);
+  background-color: var(--theme-sbdocs-table-head-bg-color);
+  border: 1px solid var(--theme-sbdocs-table-border-color);
   border-bottom-width: 2px;
   font-weight: 600;
   text-align: left;
 }
 
+.sbdocs-table tbody tr:nth-of-type(2n) {
+  background-color: var(--theme-sbdocs-table-stripe-bg-color);
+}
+
 .sbdocs-table tbody tr td {
-  border: 1px solid #b7b9c3;
+  border: 1px solid var(--theme-sbdocs-table-border-color);
 }
 
 .sbdocs-table tbody tr td:first-of-type {
@@ -35,11 +81,22 @@ body,
 }
 
 .docblock-source {
-  color: #252a2e;
+  color: var(--theme-docblock-source-color) !important;
+  background-color: var(--theme-docblock-source-bg-color) !important;
+}
+
+[data-mwc-theme="dark"] .docblock-source pre span,
+[data-mwc-theme="dark"] .docblock-source button {
+  color: var(--theme-docblock-source-color) !important;
+}
+
+[data-mwc-theme="dark"] .docblock-source button {
+  background-color: var(--theme-docblock-source-bg-color);
+  border-color: var(--theme-docblock-source-color);
 }
 
 .sidebar-subheading {
-  color: #495057 !important;
+  color: var(--theme-sidebar-subheading-color) !important;
 }
 
 .token.comment {
@@ -47,7 +104,7 @@ body,
 }
 
 body .sbdocs a {
-  color: #217cbb;
+  color: var(--theme-sbdocs-link-color) !important;
 }
 
 /* Fixes code block z-index issue */
@@ -55,6 +112,12 @@ pre .os-padding {
   z-index: inherit !important;
 }
 
-pre .os-content{
+pre .os-content {
   max-height: 500px;
+}
+
+code {
+  color: var(--theme-code-color) !important;
+  background-color: var(--theme-code-bg-color) !important;
+  border-color: var(--theme-code-border-color) !important;
 }

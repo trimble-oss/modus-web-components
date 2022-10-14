@@ -6,6 +6,8 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 
 ## Unreleased
 
+- Added a theme toggler to the toolbar in storybook pages to switch between `light` and `dark` themes
+
 ## 0.1.21 - 2022-10-04
 
 ### Added
