@@ -1,12 +1,5 @@
 /* https://storybook.js.org/docs/react/configure/theming */
 
-/* hide the toggler until dark mode is enabled for all the components */
-button[title="Change theme to dark mode"],
-button[title="Change theme to light mode"] {
-  opacity: 0;
-  cursor: auto;
-}
-
 body[data-mwc-theme="light"] {
   --theme-bg-color: #fff;
   --theme-color: #252a2e;
