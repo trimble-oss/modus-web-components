@@ -33,7 +33,9 @@
     "valuenow",
     "yxxx"
   ],
+  "flagWords": ["hte"],
   "language": "en-US",
+  "allowCompoundWords": true,
   "ignorePaths": [".cspell.json", "CODEOWNERS", "modus-variables.scss"],
   "useGitignore": true
 }
