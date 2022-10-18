@@ -209,7 +209,7 @@ Before releasing any of the framework outputs, the targeted version of the Modus
 2. From the `./angular-workspace/projects/trimble-oss/modus-angular-components` directory, run `npm i`.
 3. From the `./angular-workspace` directory, run `npm i`.
 4. From the `./angular-workspace` directory, run `npm run build`.
-5. From the newly generated `./angular-workspace/dist/trimble-oss/modus-angular-components` directory, run `npm run publish`.
+5. From the newly generated `./angular-workspace/dist/trimble-oss/modus-angular-components` directory, run `npm publish`.
 
 ### React
 
