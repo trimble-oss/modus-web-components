@@ -6,7 +6,7 @@ export class ModusDataTableUtilities {
       return {
         align: column.align ?? 'left',
         display: column.display ?? column,
-        id: column._id ?? column.display?.toLocaleLowerCase() ?? column.toLocaleLowerCase(),
+        id: column.id ?? column.display?.toLocaleLowerCase() ?? column.toLocaleLowerCase(),
         readonly: column.readonly ?? false,
         width: column.width ?? ''
       };

@@ -55,6 +55,18 @@ describe('modus-data-table', () => {
     );
   });
 
+  it('should convert column prop as TColumn (with ids) array to TColumn array', async () => {
+    const cols: TColumn[] = ModusDataTableUtilities.convertToTColumns([
+      { id: 'name id', display: 'name' },
+      { id: 'age id', display: 'age' }
+    ]);
+    expect(cols).toEqual([
+        { align: 'left', display: 'name', id: 'name id', readonly: false, width: '' },
+        { align: 'left', display: 'age', id: 'age id', readonly: false, width: '' }
+      ]
+    );
+  });
+
   it('should convert row prop as string array to TRow array', async () => {
     const cols: TColumn[] = [
       { align: 'left', display: 'Name', id: 'name', readonly: true, width: '' },
