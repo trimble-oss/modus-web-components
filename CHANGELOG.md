@@ -6,6 +6,12 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 
 ## Unreleased
 
+## 0.1.22 - 2022-10-18
+
+### Fixed
+
+- Fixed an issue with the Data Table where setting column ids was not working
+
 ## 0.1.21 - 2022-10-04
 
 ### Added
