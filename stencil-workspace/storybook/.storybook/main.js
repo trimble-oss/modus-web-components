@@ -9,6 +9,11 @@ module.exports = {
     "@storybook/addon-links",
     "@storybook/addon-docs",
     "@storybook/addon-essentials",
+    // "storybook-dark-mode"
   ],
+  babel: async (options) => ({
+    ...options,
+    presets: [...options.presets, '@babel/preset-react'],
+  }),
   "framework": "@storybook/web-components"
 }
