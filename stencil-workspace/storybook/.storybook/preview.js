@@ -23,6 +23,8 @@ export const parameters = {
     },
   },
   darkMode: {
+    // Set the initial theme
+    current: 'light',
     // Override the default dark theme
     dark: { ...themes.dark, appBg: '#252a2e' },
     stylePreview: true

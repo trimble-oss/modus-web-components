@@ -9,7 +9,7 @@ module.exports = {
     "@storybook/addon-links",
     "@storybook/addon-docs",
     "@storybook/addon-essentials",
-    "storybook-dark-mode"
+    // "storybook-dark-mode"
   ],
   babel: async (options) => ({
     ...options,
