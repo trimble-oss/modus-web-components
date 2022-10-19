@@ -3,6 +3,7 @@
 ---
 
 ## Table of Contents
+
 - [Dependencies](#dependencies)
 - [Getting Started](#getting-started)
 - [Available Scripts](#available-scripts)
@@ -10,7 +11,7 @@
 - [Technologies](#technologies)
 - [Running Locally](#running-locally)
 - [Developing a Component](#developing-a-component)
-- [Styleguide](#styleguide)
+- [Style Guide](#style-guide)
 - [Testing](#testing)
 - [Making Changes and Submitting a PR](#making-changes-and-submitting-a-pr)
 - [Changelog](#changelog)
@@ -27,7 +28,7 @@ _We recommend using [NVM](https://github.com/nvm-sh/nvm). It is a great tool for
 
 ### Running the App
 
-If this is your first time in the project, navigate to the `./stencil-workspace` directory and run `npm install` to download 3rd party packages.
+If this is your first time in the project, navigate to the `./stencil-workspace` directory and run `npm install` to download third-party packages.
 
 Once you've installed the project's packages, run `npm start`.
 A development environment will start up with the contents of `index.html`.
@@ -45,7 +46,7 @@ Stencil web component implementation details can be found in their [Framework In
 
 All npm scripts are run from the `./stencil-workspace` project directory.
 
-`npm install` - Install 3rd party packages
+`npm install` - Install third-party packages
 
 `npm start` - Compile and run the Stencil development site
 
@@ -127,7 +128,7 @@ The components are automatically registered with the browser in this environment
 
 You can find more in depth examples of how these attributes and properties are set on the [Modus Web Components Storybook site](https://modus-web-components.trimble.com/?path=/docs/introduction-getting-started--page).
 
-## Styleguide
+## Style Guide
 
 This project follows [Stencil's Style Guide](https://stenciljs.com/docs/style-guide).
 
@@ -208,7 +209,7 @@ Before releasing any of the framework outputs, the targeted version of the Modus
 2. From the `./angular-workspace/projects/trimble-oss/modus-angular-components` directory, run `npm i`.
 3. From the `./angular-workspace` directory, run `npm i`.
 4. From the `./angular-workspace` directory, run `npm run build`.
-5. From the newly generated `./angular-workspace/dist/trimble-oss/modus-angular-components` directory, run `npm run publish`.
+5. From the newly generated `./angular-workspace/dist/trimble-oss/modus-angular-components` directory, run `npm publish`.
 
 ### React
 

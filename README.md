@@ -16,7 +16,7 @@
 
 The [Trimble Modus Design System](https://modus.trimble.com/) describes the UX that Trimble wants to provide in its UI across its many applications. The benefits of using Modus include rapid prototyping, development efficiency, and UX consistency.
 
-Modus includes...
+Modus includes:
 
 - Typography
 - Colors
