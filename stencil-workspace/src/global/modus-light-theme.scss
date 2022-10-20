@@ -6,109 +6,109 @@
 
 // Gray Colors
 
-$white:    #fff !default;
+$white: #fff !default;
 
 $trimble-grays: () !default;
 
 $trimble-grays: map-merge(
   (
-    "white":        $col_white,
-    "gray-light":   $col_gray_light,
-    "gray-0":       $col_gray_0,
-    "gray-1":       $col_gray_1,
-    "gray-2":       $col_gray_2,
-    "gray-3":       $col_gray_3,
-    "gray-4":       $col_gray_4,
-    "gray-5":       $col_gray_5,
-    "gray-6":       $col_gray_6,
-    "gray-7":       $col_gray_7,
-    "gray-8":       $col_gray_8,
-    "gray-9":       $col_gray_9,
-    "gray-10":      $col_gray_10,
-    "trimble-gray": $col_trimble_gray,
-    "black":        $col_black,
+    'white': $col_white,
+    'gray-light': $col_gray_light,
+    'gray-0': $col_gray_0,
+    'gray-1': $col_gray_1,
+    'gray-2': $col_gray_2,
+    'gray-3': $col_gray_3,
+    'gray-4': $col_gray_4,
+    'gray-5': $col_gray_5,
+    'gray-6': $col_gray_6,
+    'gray-7': $col_gray_7,
+    'gray-8': $col_gray_8,
+    'gray-9': $col_gray_9,
+    'gray-10': $col_gray_10,
+    'trimble-gray': $col_trimble_gray,
+    'black': $col_black,
   ),
   $trimble-grays
 );
 
 // Root Colors
 
-$blue:    #007bff !default;
-$indigo:  #6610f2 !default;
-$purple:  #6f42c1 !default;
-$pink:    #e83e8c !default;
-$red:     #dc3545 !default;
-$orange:  #fd7e14 !default;
-$yellow:  #ffc107 !default;
-$green:   #28a745 !default;
-$teal:    #20c997 !default;
-$cyan:    #17a2b8 !default;
+$blue: #007bff !default;
+$indigo: #6610f2 !default;
+$purple: #6f42c1 !default;
+$pink: #e83e8c !default;
+$red: #dc3545 !default;
+$orange: #fd7e14 !default;
+$yellow: #ffc107 !default;
+$green: #28a745 !default;
+$teal: #20c997 !default;
+$cyan: #17a2b8 !default;
 
 $colors: () !default;
 
 $colors: map-merge(
   (
-    "blue":       $blue,
-    "indigo":     $indigo,
-    "purple":     $purple,
-    "pink":       $pink,
-    "red":        $red,
-    "orange":     $orange,
-    "yellow":     $yellow,
-    "green":      $green,
-    "teal":       $teal,
-    "cyan":       $cyan,
-    "white":      $white,
-    "gray":       $col_gray_7,
-    "gray-dark":  $col_gray_10
+    'blue': $blue,
+    'indigo': $indigo,
+    'purple': $purple,
+    'pink': $pink,
+    'red': $red,
+    'orange': $orange,
+    'yellow': $yellow,
+    'green': $green,
+    'teal': $teal,
+    'cyan': $cyan,
+    'white': $white,
+    'gray': $col_gray_7,
+    'gray-dark': $col_gray_10,
   ),
   $colors
 );
 
 // Theme Colors
 
-$primary:       $col_blue !default;
-$secondary:     $col_gray_6 !default;
-$tertiary:      $col_gray_1 !default;
-$success:       $col_green_dark !default;
-$warning:       $col_yellow_dark !default;
-$theme-yellow:  $col_trimble_yellow !default;
-$danger:        $col_red !default;
-$dark:          $col_trimble_gray !default;
+$primary: $col_blue !default;
+$secondary: $col_gray_6 !default;
+$tertiary: $col_gray_1 !default;
+$success: $col_green_dark !default;
+$warning: $col_yellow_dark !default;
+$theme-yellow: $col_trimble_yellow !default;
+$danger: $col_red !default;
+$dark: $col_trimble_gray !default;
 
 $theme-colors: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
 $theme-colors: map-merge(
   (
-    "primary":    $primary,
-    "secondary":  $secondary,
-    "tertiary":   $tertiary,
-    "success":    $success,
-    "warning":    $warning,
-    "yellow":     $theme-yellow,
-    "danger":     $danger,
-    "dark":       $dark
+    'primary': $primary,
+    'secondary': $secondary,
+    'tertiary': $tertiary,
+    'success': $success,
+    'warning': $warning,
+    'yellow': $theme-yellow,
+    'danger': $danger,
+    'dark': $dark,
   ),
   $theme-colors
 );
 
 // UI Colors
 
-$main-background:     $col_white !default;
-$panel-background:    $col_gray_light !default;
-$active:              $col_blue_light !default;
-$hover:               $col_gray_0 !default;
-$selected:            $col_blue_pale !default;
+$main-background: $col_white !default;
+$panel-background: $col_gray_light !default;
+$active: $col_blue_light !default;
+$hover: $col_gray_0 !default;
+$selected: $col_blue_pale !default;
 
 $ui-colors: () !default;
 
 $ui-colors: map-merge(
   (
-    "main-background":      $main-background,
-    "panel-background":     $panel-background,
-    "active":               $active,
-    "hover":                $hover,
-    "selected":             $selected,
+    'main-background': $main-background,
+    'panel-background': $panel-background,
+    'active': $active,
+    'hover': $hover,
+    'selected': $selected,
   ),
   $ui-colors
 );
@@ -119,36 +119,36 @@ $trimble-brand-colors: () !default;
 
 $trimble-brand-colors: map-merge(
   (
-    "trimble-blue-dark":  $col_trimble_blue_dark,
-    "trimble-blue":       $col_trimble_blue,
-    "trimble-yellow":     $col_trimble_yellow,
-    "trimble-green":      $col_trimble_green,
-    "trimble-red":        $col_trimble_red
+    'trimble-blue-dark': $col_trimble_blue_dark,
+    'trimble-blue': $col_trimble_blue,
+    'trimble-yellow': $col_trimble_yellow,
+    'trimble-green': $col_trimble_green,
+    'trimble-red': $col_trimble_red,
   ),
   $trimble-brand-colors
 );
 
 // Set a specific jump point for requesting color jumps
-$theme-color-interval:      8% !default;
+$theme-color-interval: 8% !default;
 
 // The yiq lightness value that determines when the lightness of color changes from "dark" to "light". Acceptable values are between 0 and 255.
-$yiq-contrasted-threshold:  200 !default;
+$yiq-contrasted-threshold: 200 !default;
 
 // Customize the light and dark text colors for use in our YIQ color contrast function.
-$yiq-text-dark:             $col_gray_9 !default;
-$yiq-text-light:            $white !default;
+$yiq-text-dark: $col_gray_9 !default;
+$yiq-text-light: $white !default;
 
 // Custom Control Colors
-$control-bg-color:          $col_gray_6 !default;
-$control-surface-color:     ui-color('main-background') !default;
-$control-element-color:     trimble-gray('gray-6') !default;
-$control-checked-color:     ui-color('active') !default;
-$control-hover-color:       ui-color('active') !default;
+$control-bg-color: $col_gray_6 !default;
+$control-surface-color: ui-color('main-background') !default;
+$control-element-color: trimble-gray('gray-6') !default;
+$control-checked-color: ui-color('active') !default;
+$control-hover-color: ui-color('active') !default;
 
 // Text Colors
-$body-color:                theme-color('dark') !default;
-$input-color:               $secondary !default;
-$link-color:                ui-color('active') !default;
-$headings-color:            theme-color('dark') !default;
+$body-color: theme-color('dark') !default;
+$input-color: $secondary !default;
+$link-color: ui-color('active') !default;
+$headings-color: theme-color('dark') !default;
 
-$code-color:                #c37;
+$code-color: #c37;

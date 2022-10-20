@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="en">
+<html dir="ltr" lang="en" data-mwc-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
@@ -17,9 +17,21 @@
         font-family: "Open Sans", sans-serif;
         margin: 0;
       }
+      [data-mwc-theme='dark']{
+        background-color: #252a2e;
+      }
     </style>
   </head>
   <body>
-      <!-- Test your components here -->
+<div style="padding:10px; background-color: inherit;background-color: #252a2e">
+  <modus-accordion data-mwc-theme='dark'  >
+    <modus-accordion-item header-text="Collapsible Group Item #1">This is the first item's accordion body. It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables.</modus-accordion-item>
+    <modus-accordion-item header-text="Collapsible Group Item #2">Content</modus-accordion-item>
+    <modus-accordion-item disabled header-text="Collapsible Group Item #3"
+      >Content</modus-accordion-item
+    >
+  </modus-accordion>
+</div>
+
   </body>
 </html>

@@ -1,0 +1,9 @@
+:root {
+  --modus-body-bg: transparent;
+  --modus-body-color: #252a2e;
+}
+
+body[data-mwc-theme='dark'] {
+  --modus-body-bg: #252a2e;
+  --modus-body-color: #f1f1f6;
+}

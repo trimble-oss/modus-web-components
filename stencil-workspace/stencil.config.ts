@@ -40,10 +40,10 @@ export const config: Config = {
     }),
     sass({
       injectGlobalPaths: [
-        'src/global/modus-functions.scss', // adds @import 'src/global/modus-functions.scss' statement
-        'src/global/modus-colors.scss', // adds @import 'src/global/modus-colors.scss' statement
-        'src/global/modus-light-theme.scss', // adds @import 'src/global/modus-light-theme.scss' statement
-        'src/global/modus-variables.scss', // adds @import 'src/global/modus-variables.scss' statement
+        'src/global/modus-functions.scss',
+        'src/global/modus-colors.scss',
+        'src/global/modus-light-theme.scss',
+        'src/global/modus-variables.scss',
         'src/global/shared-mixins.scss',
       ],
     }),
