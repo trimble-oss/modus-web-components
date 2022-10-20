@@ -7,6 +7,7 @@ import { DocsContainer } from '@storybook/addon-docs';
 import {
   useDarkMode
 } from 'storybook-dark-mode';
+import '../../dist/modus-web-components/modus-web-components.css'
 
 defineCustomElements();
 
@@ -29,13 +30,16 @@ export const parameters = {
     dark: { ...themes.dark, appBg: '#252a2e' },
     stylePreview: true
   },
+  backgrounds: {
+    disable: true
+  },
   docs: {
     theme: yourTheme,
     container: props => {
       const isDark = useDarkMode();
       React.useEffect(() => {
-        document.body.setAttribute('data-mwc-theme', isDark ? 'dark' : 'light');
-      }, [isDark]);
+        document.body?.setAttribute('data-mwc-theme', isDark ? 'dark' : 'light');
+      }, [isDark, useDarkMode]);
 
       return (
           <DocsContainer {...props} />

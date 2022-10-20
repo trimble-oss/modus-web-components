@@ -1,0 +1,135 @@
+:root,
+[data-mwc-theme='light'] {
+  // Colors
+  --modus-black: #000;
+  --modus-white: #fff;
+
+  // Variants
+  --modus-primary: #0063a3;
+  --modus-secondary: #6a6e79;
+  --modus-tertiary: #cbcdd6;
+  --modus-dark: #252a2e;
+  --modus-success: #006638;
+  --modus-danger: #da212c;
+  --modus-warning: #e49325;
+
+  // Body
+  --modus-body-bg: var(--modus-white);
+  --modus-body-color: #252a2e;
+  --modus-border-color: #cbcdd6;
+
+  // Background
+  --modus-alert-primary-bg: var(--modus-white);
+  --modus-alert-secondary-bg: var(--modus-white);
+  --modus-alert-dark-bg: var(--modus-white);
+  --modus-alert-success-bg: var(--modus-white);
+  --modus-alert-danger-bg: var(--modus-white);
+  --modus-alert-warning-bg: var(--modus-white);
+
+  // Text
+  --modus-alert-primary-bg-color: var(--modus-primary);
+  --modus-alert-secondary-bg-color: var(--modus-secondary);
+  --modus-alert-dark-bg-color: var(--modus-dark);
+  --modus-alert-success-bg-color: var(--modus-success);
+  --modus-alert-danger-bg-color: var(--modus-danger);
+  --modus-alert-warning-bg-color: #252a2e;
+
+  // Border
+  --modus-alert-primary-border-color: var(--modus-primary);
+  --modus-alert-secondary-border-color: var(--modus-secondary);
+  --modus-alert-dark-border-color: var(--modus-dark);
+  --modus-alert-success-border-color: var(--modus-success);
+  --modus-alert-danger-border-color: var(--modus-danger);
+  --modus-alert-warning-border-color: #e49325;
+
+  // Badge
+  // Text for variant background
+  --modus-badge-primary-bg-color: #fff;
+  --modus-badge-secondary-bg-color: #fff;
+  --modus-badge-tertiary-bg-color: #252a2e;
+  --modus-badge-dark-bg-color: #fff;
+  --modus-badge-success-bg-color: #fff;
+  --modus-badge-warning-bg-color: #252a2e;
+  --modus-badge-danger-bg-color: #fff;
+}
+
+[data-mwc-theme='dark'] {
+  // Variants
+  --modus-primary: #019aeb;
+  --modus-secondary: #6a6e79;
+  --modus-tertiary: #cbcdd6;
+  --modus-success: #1e8a44;
+  --modus-warning: #fbad26;
+  --modus-danger: #da212c;
+  --modus-dark: #f1f1f6;
+
+  // Body
+  --modus-body-bg: #252a2e;
+  --modus-body-color: #f1f1f6;
+  --modus-border-color: #6a6e79;
+
+  // Alert
+  --modus-alert-close: var(--modus-body-color);
+  --modus-alert-close-hover: #f1f1f6;
+
+  // Background
+  --modus-alert-primary-bg: #019aeb80;
+  --modus-alert-secondary-bg: #6a6e7980;
+  --modus-alert-dark-bg: (rgba(#171c1e, 0.5));
+  --modus-alert-success-bg: #1e8a4480;
+  --modus-alert-danger-bg: #da212c80;
+  --modus-alert-warning-bg: #fbad2680;
+
+  // Text
+  --modus-alert-primary-bg-color: #f1f1f6;
+  --modus-alert-secondary-bg-color: #f1f1f6;
+  --modus-alert-dark-bg-color: #f1f1f6;
+  --modus-alert-success-bg-color: #f1f1f6;
+  --modus-alert-danger-bg-color: #f1f1f6;
+  --modus-alert-warning-bg-color: #f1f1f6;
+
+  // Border
+  --modus-alert-primary-border-color: #019aeb;
+  --modus-alert-secondary-border-color: #6a6e79;
+  --modus-alert-dark-border-color: (rgba(#171c1e, 0.5));
+
+  // Badge
+  // Text color
+  --modus-badge-primary-bg-color: #fff;
+  --modus-badge-secondary-bg-color: #fff;
+  --modus-badge-tertiary-bg-color: #171c1e;
+  --modus-badge-dark-bg-color: #171c1e;
+  --modus-badge-success-bg-color: #fff;
+  --modus-badge-warning-bg-color: #252a2e;
+  --modus-badge-danger-bg-color: #fff;
+}
+
+modus-accordion-item {
+  --modus-accordion-bg: var(--modus-body-bg);
+  --modus-accordion-color: var(--modus-body-color);
+  --modus-accordion-border-color: var(--modus-border-color);
+}
+
+modus-alert {
+  --modus-alert-close: var(--modus-body-color);
+}
+
+modus-badge {
+  // Background
+  --modus-badge-primary-bg: var(--modus-primary);
+  --modus-badge-secondary-bg: var(--modus-secondary);
+  --modus-badge-tertiary-bg: var(--modus-tertiary);
+  --modus-badge-dark-bg: var(--modus-dark);
+  --modus-badge-success-bg: var(--modus-success);
+  --modus-badge-warning-bg: var(--modus-warning);
+  --modus-badge-danger-bg: var(--modus-danger);
+
+  // Text only badge variants
+  --modus-badge-text-primary: var(--modus-primary);
+  --modus-badge-text-secondary: var(--modus-secondary);
+  --modus-badge-text-tertiary: var(--modus-tertiary);
+  --modus-badge-text-dark: var(--modus-dark);
+  --modus-badge-text-success: var(--modus-success);
+  --modus-badge-text-warning: var(--modus-warning);
+  --modus-badge-text-danger: var(--modus-danger);
+}
