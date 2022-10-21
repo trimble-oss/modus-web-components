@@ -1,13 +1,7 @@
-@import '../../global/theme-variables';
-
-// Dark mode
-:host([data-mwc-theme='dark']) {
-  --modus-body-bg: #252a2e;
-  --modus-body-color: #f1f1f6;
-}
+@import '../../themes/components/modus-accordion-item';
 
 .accordion-item {
-  border-bottom: $rem-1px solid $col_gray_1;
+  border-bottom: $rem-1px solid var(--modus-accordion-border-color);
   display: flex;
   flex-direction: column;
   font-family: $primary-font;

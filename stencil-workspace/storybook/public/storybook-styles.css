@@ -17,7 +17,7 @@ body[data-mwc-theme="light"] {
 
 body[data-mwc-theme="dark"] {
   --theme-bg-color: #252a2e;
-  /* --theme-color: #f1f1f6;
+  --theme-color: #f1f1f6;
   --theme-sbdocs-table-head-bg-color: #171c1e;
   --theme-sbdocs-table-stripe-bg-color: #252a2e;
   --theme-sbdocs-table-border-color: #464b52;
@@ -27,7 +27,7 @@ body[data-mwc-theme="dark"] {
   --theme-sbdocs-link-color: #217cbb;
   --theme-code-color: #f1f1f6;
   --theme-code-bg-color: #6a6e79;
-  --theme-code-border-color: #6a6e79; */
+  --theme-code-border-color: #6a6e79;
 }
 
 body.sb-show-main,

@@ -1,9 +1,28 @@
-:root {
+:host {
   --modus-body-bg: transparent;
   --modus-body-color: #252a2e;
-}
 
-body[data-mwc-theme='dark'] {
-  --modus-body-bg: #252a2e;
-  --modus-body-color: #f1f1f6;
+  --modus-accordion-border-color: #cbcdd6;
+
+  --modus-alert-bg: #fff;
+  --modus-alert-primary-bg: var(--modus-alert-bg);
+  --modus-alert-secondary-bg: var(--modus-alert-bg);
+  --modus-alert-dark-bg: var(--modus-alert-bg);
+  --modus-alert-success-bg: var(--modus-alert-bg);
+  --modus-alert-danger-bg: var(--modus-alert-bg);
+  --modus-alert-warning-bg: var(--modus-alert-bg);
+
+  --modus-alert-primary-color: #0063a3;
+  --modus-alert-secondary-color: #6a6e79;
+  --modus-alert-dark-color: #252a2e;
+  --modus-alert-success-color: #006638;
+  --modus-alert-danger-color: #da212c;
+  --modus-alert-warning-color: #e49325;
+
+  --modus-alert-primary-border-color: #0063a3;
+  --modus-alert-secondary-border-color: #6a6e79;
+  --modus-alert-dark-border-color: #252a2e;
+  --modus-alert-success-border-color: #006638;
+  --modus-alert-danger-border-color: #da212c;
+  --modus-alert-warning-border-color: #e49325;
 }

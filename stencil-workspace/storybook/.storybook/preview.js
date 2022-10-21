@@ -29,12 +29,21 @@ export const parameters = {
     dark: { ...themes.dark, appBg: '#252a2e' },
     stylePreview: true
   },
+  backgrounds: {
+    disable: true
+  },
   docs: {
     theme: yourTheme,
     container: props => {
       const isDark = useDarkMode();
       React.useEffect(() => {
         document.body.setAttribute('data-mwc-theme', isDark ? 'dark' : 'light');
+
+
+        // workaround, SHOULD BE REPLACED BY A BETTER LOGIC
+        Array.from(document.body.querySelectorAll('modus-accordion-item')).map(i => i.setAttribute('data-mwc-theme', isDark ? 'dark' : 'light'));
+        Array.from(document.body.querySelectorAll('modus-alert')).map(i => i.setAttribute('data-mwc-theme', isDark ? 'dark' : 'light'));
+
       }, [isDark]);
 
       return (
