@@ -116,6 +116,7 @@ div.alert {
   .icon-close {
     cursor: pointer;
     margin-left: auto;
+
     path {
       fill: var(--modus-alert-close);
     }
@@ -126,6 +127,7 @@ div.alert {
           fill: var(--modus-alert-close-hover, $col_gray_6);
         }
       }
+
       opacity: 0.5;
     }
 

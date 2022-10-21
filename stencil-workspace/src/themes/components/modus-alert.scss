@@ -1,9 +1,8 @@
-@import '../root.scss';
+@import '../root';
 
 :host {
+  // Background color
   --modus-alert-bg: #fff;
-  --modus-alert-close: #252a2e;
-
   --modus-alert-primary-bg: var(--modus-alert-bg);
   --modus-alert-secondary-bg: var(--modus-alert-bg);
   --modus-alert-dark-bg: var(--modus-alert-bg);
@@ -11,6 +10,7 @@
   --modus-alert-danger-bg: var(--modus-alert-bg);
   --modus-alert-warning-bg: var(--modus-alert-bg);
 
+  // Text color
   --modus-alert-primary-color: #0063a3;
   --modus-alert-secondary-color: #6a6e79;
   --modus-alert-dark-color: #252a2e;
@@ -18,20 +18,26 @@
   --modus-alert-danger-color: #da212c;
   --modus-alert-warning-color: #252a2e;
 
+  // Border color
   --modus-alert-primary-border-color: #0063a3;
   --modus-alert-secondary-border-color: #6a6e79;
   --modus-alert-dark-border-color: #252a2e;
   --modus-alert-success-border-color: #006638;
   --modus-alert-danger-border-color: #da212c;
   --modus-alert-warning-border-color: #e49325;
+
+  // Close button
+  --modus-alert-close: #252a2e;
 }
 
 // Dark mode
 :host([data-mwc-theme='dark']) {
+  // Close button
   --modus-alert-color: #f1f1f6;
   --modus-alert-close: var(--modus-alert-color);
   --modus-alert-close-hover: var(--modus-alert-color);
 
+  // Background color
   --modus-alert-primary-bg: #019aeb80;
   --modus-alert-secondary-bg: #6a6e7980;
   --modus-alert-dark-bg: (rgba(#171c1e, 0.5));
@@ -39,6 +45,7 @@
   --modus-alert-danger-bg: #da212c80;
   --modus-alert-warning-bg: #fbad2680;
 
+  // Text color
   --modus-alert-primary-color: var(--modus-alert-color);
   --modus-alert-secondary-color: var(--modus-alert-color);
   --modus-alert-dark-color: var(--modus-alert-color);
@@ -46,6 +53,7 @@
   --modus-alert-danger-color: var(--modus-alert-color);
   --modus-alert-warning-color: var(--modus-alert-color);
 
+  // Border color
   --modus-alert-primary-border-color: #019aeb;
   --modus-alert-secondary-border-color: #6a6e79;
   --modus-alert-dark-border-color: (rgba(#171c1e, 0.5));
