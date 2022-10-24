@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 View all releases at: https://github.com/trimble-oss/modus-web-components/releases/
 
+### Added
+
+- Added "width" for modus-tabs in CSS file. Now component can be resizable from UI.
+
 ## Unreleased
 
 ### Added
