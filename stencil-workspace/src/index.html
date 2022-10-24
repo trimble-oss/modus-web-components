@@ -21,39 +21,5 @@
   </head>
   <body>
       <!-- Test your components here -->
-      <div id="placeholder" class="tab-placeholder">
-        <modus-tabs class="medium" aria-label="hello"> </modus-tabs>
-      </div>
   </body>
-  <script>
-    const modusTabs = document.querySelector('modus-tabs');
-    modusTabs.tabs = [
-      {
-        id: 0,
-        label: 'Tab 1',
-      },
-      {
-        active: true,
-        id: 1,
-        label: 'Tab 2',
-      },
-      {
-        active: false,
-        id: 2,
-        label: 'Tab 3',
-      },
-
-      {
-        active: false,
-        id: 3,
-        label: 'Long name just for testing',
-      },
-    ];
-
-    const placeholderStyle = document.getElementById('placeholder');
-    placeholderStyle.style.width = '350px';
-    placeholderStyle.style.resize = 'auto';
-    placeholderStyle.style.overflow = 'auto';
-    placeholderStyle.style.backgroundColor = 'red';
-  </script>
 </html>
