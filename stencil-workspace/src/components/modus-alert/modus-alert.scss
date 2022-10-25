@@ -1,4 +1,4 @@
-@import '../../themes/components/modus-alert';
+@import './modus-alert.vars';
 
 div.alert {
   align-items: center;
@@ -12,91 +12,91 @@ div.alert {
   position: relative;
 
   &.type-error {
-    background-color: var(--modus-alert-danger-bg);
-    border-color: var(--modus-alert-danger-border-color);
-    color: var(--modus-alert-danger-color);
+    background-color: $modus-alert-danger-bg;
+    border-color: $modus-alert-danger-border-color;
+    color: $modus-alert-danger-color;
 
     .icon-check-circle,
     .icon-error,
     .icon-info,
     .icon-warning {
       path {
-        fill: var(--modus-alert-danger-color);
+        fill: $modus-alert-danger-color;
       }
     }
   }
 
   &.type-info {
-    background-color: var(--modus-alert-primary-bg);
-    border-color: var(--modus-alert-primary-border-color);
-    color: var(--modus-alert-primary-color);
+    background-color: $modus-alert-primary-bg;
+    border-color: $modus-alert-primary-border-color;
+    color: $modus-alert-primary-color;
 
     .icon-check-circle,
     .icon-error,
     .icon-info,
     .icon-warning {
       path {
-        fill: var(--modus-alert-primary-color);
+        fill: $modus-alert-primary-color;
       }
     }
   }
 
   &.type-info-gray {
-    background-color: var(--modus-alert-secondary-bg);
-    border-color: var(--modus-alert-secondary-border-color);
-    color: var(--modus-alert-secondary-color);
+    background-color: $modus-alert-secondary-bg;
+    border-color: $modus-alert-secondary-border-color;
+    color: $modus-alert-secondary-color;
 
     .icon-check-circle,
     .icon-error,
     .icon-info,
     .icon-warning {
       path {
-        fill: var(--modus-alert-secondary-color);
+        fill: $modus-alert-secondary-color;
       }
     }
   }
 
   &.type-info-gray-dark {
-    background-color: var(--modus-alert-dark-bg);
-    border-color: var(--modus-alert-dark-border-color);
-    color: var(--modus-alert-dark-color);
+    background-color: $modus-alert-dark-bg;
+    border-color: $modus-alert-dark-border-color;
+    color: $modus-alert-dark-color;
 
     .icon-check-circle,
     .icon-error,
     .icon-info,
     .icon-warning {
       path {
-        fill: var(--modus-alert-dark-color);
+        fill: $modus-alert-dark-color;
       }
     }
   }
 
   &.type-success {
-    background-color: var(--modus-alert-success-bg);
-    border-color: var(--modus-alert-success-border-color);
-    color: var(--modus-alert-success-color);
+    background-color: $modus-alert-success-bg;
+    border-color: $modus-alert-success-border-color;
+    color: $modus-alert-success-color;
 
     .icon-check-circle,
     .icon-error,
     .icon-info,
     .icon-warning {
       path {
-        fill: var(--modus-alert-success-color);
+        fill: $modus-alert-success-color;
       }
     }
   }
 
   &.type-warning {
-    background-color: var(--modus-alert-warning-bg);
-    border-color: var(--modus-alert-warning-border-color);
-    color: var(--modus-alert-warning-color);
+    background-color: $modus-alert-warning-bg;
+    border-color: $modus-alert-warning-border-color;
+    color: $modus-alert-warning-color;
 
     .icon-check-circle,
     .icon-error,
     .icon-info,
     .icon-warning {
       path {
-        fill: var(--modus-alert-warning-color);
+        fill: $modus-alert-warning-color;
       }
     }
   }
@@ -118,13 +118,13 @@ div.alert {
     margin-left: auto;
 
     path {
-      fill: var(--modus-alert-close);
+      fill: $modus-alert-close;
     }
 
     &:hover {
       g {
         path {
-          fill: var(--modus-alert-close-hover, $col_gray_6);
+          fill: $modus-alert-close-hover, $col_gray_6;
         }
       }
 
@@ -134,7 +134,7 @@ div.alert {
     &:active {
       g {
         path {
-          fill: var(--modus-alert-close);
+          fill: $modus-alert-close;
         }
       }
     }

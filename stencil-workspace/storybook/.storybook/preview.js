@@ -36,15 +36,26 @@ export const parameters = {
     theme: yourTheme,
     container: props => {
       const isDark = useDarkMode();
+      const getBodyElement = () => {
+        const iframe = document.getElementById('storybook-preview-iframe');
+
+        if (!iframe) {
+          return;
+        }
+
+        const iframeDocument = iframe.contentDocument || iframe.contentWindow?.document;
+        const target = iframeDocument?.querySelector('body');
+
+        if (!target) {
+          return document.body;
+        }
+      };
+
       React.useEffect(() => {
-        document.body.setAttribute('data-mwc-theme', isDark ? 'dark' : 'light');
+        document.body?.setAttribute('data-mwc-theme', isDark ? 'dark' : 'light');
+      }, [isDark, useDarkMode]);
 
 
-        // workaround, SHOULD BE REPLACED BY A BETTER LOGIC
-        Array.from(document.body.querySelectorAll('modus-accordion-item')).map(i => i.setAttribute('data-mwc-theme', isDark ? 'dark' : 'light'));
-        Array.from(document.body.querySelectorAll('modus-alert')).map(i => i.setAttribute('data-mwc-theme', isDark ? 'dark' : 'light'));
-
-      }, [isDark]);
 
       return (
           <DocsContainer {...props} />
