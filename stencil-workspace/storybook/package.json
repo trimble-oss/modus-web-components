@@ -8,10 +8,10 @@
   "dependencies": {
     "@storybook/addon-docs": "^6.5.10",
     "@storybook/addons": "^6.5.11",
-    "@storybook/components": "^6.5.10",
-    "@storybook/theming": "^6.5.11",
+    "@storybook/components": "^6.5.13",
+    "@storybook/theming": "^6.5.13",
     "@types/mdx": "^2.0.2",
-    "lit-html": "^2.3.1",
+    "lit-html": "^2.4.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
@@ -21,8 +21,8 @@
     "@storybook/addon-a11y": "^6.5.11",
     "@storybook/addon-actions": "^6.5.11",
     "@storybook/addon-essentials": "^6.5.11",
-    "@storybook/addon-links": "^6.5.11",
-    "@storybook/web-components": "^6.5.11",
+    "@storybook/addon-links": "^6.5.13",
+    "@storybook/web-components": "^6.5.13",
     "babel-loader": "^8.2.5",
     "storybook-dark-mode": "^1.1.2"
   },
