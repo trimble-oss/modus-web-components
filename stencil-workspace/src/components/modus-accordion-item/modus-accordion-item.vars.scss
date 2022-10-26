@@ -1,19 +1,3 @@
-@import '../../themes/root';
-
-// Light mode
-:host([data-mwc-theme='light']) {
-  --modus-body-bg: transparent;
-  --modus-body-color: #252a2e;
-  --modus-accordion-border-color: #cbcdd6;
-}
-
-// Dark mode
-:host([data-mwc-theme='dark']) {
-  --modus-body-bg: #252a2e;
-  --modus-body-color: #f1f1f6;
-  --modus-accordion-border-color: #6a6e79;
-}
-
-$modus-accordion-bg: var(--modus-body-bg, $modus-body-bg) !default;
-$modus-accordion-color: var(--modus-body-color, $modus-body-color) !default;
-$modus-accordion-border-color: var(--modus-accordion-border-color, #cbcdd6) !default;
+$modus-accordion-bg: var(--modus-body-bg, #fff) !default;
+$modus-accordion-color: var(--modus-body-color, #252a2e) !default;
+$modus-accordion-border-color: #cbcdd6 !default;

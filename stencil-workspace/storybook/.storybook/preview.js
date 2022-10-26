@@ -7,6 +7,7 @@ import { DocsContainer } from '@storybook/addon-docs';
 import {
   useDarkMode
 } from 'storybook-dark-mode';
+import '../../dist/modus-web-components/modus-web-components.css'
 
 defineCustomElements();
 
@@ -36,26 +37,9 @@ export const parameters = {
     theme: yourTheme,
     container: props => {
       const isDark = useDarkMode();
-      const getBodyElement = () => {
-        const iframe = document.getElementById('storybook-preview-iframe');
-
-        if (!iframe) {
-          return;
-        }
-
-        const iframeDocument = iframe.contentDocument || iframe.contentWindow?.document;
-        const target = iframeDocument?.querySelector('body');
-
-        if (!target) {
-          return document.body;
-        }
-      };
-
       React.useEffect(() => {
         document.body?.setAttribute('data-mwc-theme', isDark ? 'dark' : 'light');
       }, [isDark, useDarkMode]);
-
-
 
       return (
           <DocsContainer {...props} />
