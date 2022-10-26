@@ -645,6 +645,7 @@ export namespace Components {
     }
     interface ModusTabs {
         "ariaLabel": string;
+        "fullWidth": boolean;
         "size": 'medium' | 'small';
         /**
           * The tabs to render.
@@ -1902,6 +1903,7 @@ declare namespace LocalJSX {
     }
     interface ModusTabs {
         "ariaLabel"?: string;
+        "fullWidth"?: boolean;
         /**
           * An event that fires on tab change.
          */

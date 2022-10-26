@@ -24,4 +24,10 @@ describe('modus-button', () => {
     className = modusTabs.classBySize.get('small');
     expect(className).toEqual('small');
   });
+  it('should have flag "fullWidth" set on false as default', async () => {
+    const modusTabs = new ModusTabs();
+    const flag = modusTabs.fullWidth;
+
+    expect(flag.toString()).toEqual('false');
+  });
 });

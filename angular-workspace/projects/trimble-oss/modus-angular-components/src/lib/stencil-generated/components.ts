@@ -813,13 +813,13 @@ export declare interface ModusTabs extends Components.ModusTabs {
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['ariaLabel', 'size', 'tabs']
+  inputs: ['ariaLabel', 'fullWidth', 'size', 'tabs']
 })
 @Component({
   selector: 'modus-tabs',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['ariaLabel', 'size', 'tabs']
+  inputs: ['ariaLabel', 'fullWidth', 'size', 'tabs']
 })
 export class ModusTabs {
   protected el: HTMLElement;
