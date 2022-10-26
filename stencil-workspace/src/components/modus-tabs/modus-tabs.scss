@@ -28,7 +28,10 @@
     text-transform: uppercase;
     text-wrap: none;
     user-select: none;
-    width: 100%;
+    
+    &.resizable {
+      width: 100%;
+    }
 
     &.medium {
       font-size: $rem-14px;
