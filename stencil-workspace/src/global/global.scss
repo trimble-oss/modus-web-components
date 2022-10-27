@@ -4,6 +4,8 @@
   --modus-black: #000;
   --modus-white: #fff;
 
+  --modus-link-color: #217cbb;
+
   // Variants
   --modus-primary: #0063a3;
   --modus-secondary: #6a6e79;
@@ -51,6 +53,9 @@
   --modus-badge-success-bg-color: #fff;
   --modus-badge-warning-bg-color: #252a2e;
   --modus-badge-danger-bg-color: #fff;
+
+  // Breadcrumb
+  --modus-breadcrumb-item-active-color: #6c757d;
 }
 
 [data-mwc-theme='dark'] {
@@ -102,6 +107,9 @@
   --modus-badge-success-bg-color: #fff;
   --modus-badge-warning-bg-color: #252a2e;
   --modus-badge-danger-bg-color: #fff;
+
+  // Breadcrumb
+  --modus-breadcrumb-item-active-color: #f1f1f6;
 }
 
 modus-accordion-item {
@@ -132,4 +140,8 @@ modus-badge {
   --modus-badge-text-success: var(--modus-success);
   --modus-badge-text-warning: var(--modus-warning);
   --modus-badge-text-danger: var(--modus-danger);
+}
+
+modus-breadcrumb {
+  --modus-breadcrumb-divider-color: #6c757d;
 }

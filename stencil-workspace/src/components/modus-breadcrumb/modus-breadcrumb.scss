@@ -1,3 +1,5 @@
+@import './modus-breadcrumb.vars.scss';
+
 nav {
   font-family: $primary-font;
   font-size: $rem-14px;
@@ -14,7 +16,7 @@ nav {
     li {
       .crumb {
         a {
-          color: $col_blue;
+          color: $modus-breadcrumb-item-color;
           text-decoration: none;
 
           &:hover {
@@ -22,20 +24,20 @@ nav {
           }
 
           &:active {
-            color: $col_trimble_gray;
+            color: $modus-breadcrumb-item-active-color;
             text-decoration: none;
           }
         }
 
         .divider {
-          color: $col_gray_8;
+          color: $modus-breadcrumb-divider-color;
           cursor: default;
           padding: 0 $rem-8px;
         }
       }
 
       .last-crumb {
-        color: $col_trimble_gray;
+        color: $modus-breadcrumb-item-active-color;
       }
     }
   }

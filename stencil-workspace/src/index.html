@@ -77,6 +77,8 @@
     <modus-badge color="warning" type="text">Text</modus-badge>
     <modus-badge color="danger" type="text">Text</modus-badge>
   </div>
+
+  <modus-breadcrumb></modus-breadcrumb>
 </div>
   </body>
   <script>
@@ -103,5 +105,14 @@
         i.setAttribute('data-mwc-theme',  i.getAttribute('data-mwc-theme') === 'dark' ? 'light' : 'dark');
       });
   });
+
+  const modusBreadcrumb = document.querySelector('modus-breadcrumb');
+  const crumbs = [
+    { id: '1', display: 'Crumb 1' },
+    { id: '2', display: 'Crumb 2' },
+    { id: '3', display: 'Crumb 3' },
+    { id: '4', display: 'Crumb 4' },
+  ];
+  modusBreadcrumb.crumbs = crumbs;
   </script>
 </html>
