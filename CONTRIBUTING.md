@@ -214,6 +214,6 @@ Before releasing any of the framework outputs, the targeted version of the Modus
 ### React
 
 1. Update `./react-workspace/package.json`'s dependency on the Modus Web Components library to the targeted version.
-2. From the `./react-workspace` directory, run `npm run i`.
+2. From the `./react-workspace` directory, run `npm i`.
 3. From the `./react-workspace` directory, run `npm run build`.
-4. From the `./react-workspace` directory, run `npm run publish`.
+4. From the `./react-workspace` directory, run `npm publish`.
