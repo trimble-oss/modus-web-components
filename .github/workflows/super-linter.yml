@@ -5,7 +5,7 @@ on:
     branches: [main]
   pull_request:
     branches-ignore:
-      - "dependabot/**"
+      - 'dependabot/**'
 
 jobs:
   build:
@@ -28,7 +28,11 @@ jobs:
           LOG_LEVEL: NOTICE
           SUPPRESS_POSSUM: true
           VALIDATE_ALL_CODEBASE: false
+          VALIDATE_CSS: false
           VALIDATE_EDITORCONFIG: false
+          VALIDATE_HTML: false
           VALIDATE_MARKDOWN: false
           VALIDATE_NATURAL_LANGUAGE: false
           VALIDATE_YAML: false
+          VALIDATE_TYPESCRIPT_ES: false
+          VALIDATE_TYPESCRIPT_STANDARD: false
