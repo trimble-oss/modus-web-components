@@ -13,8 +13,9 @@ export interface Tab {
   shadow: true,
 })
 export class ModusTabs {
-  /*(false as default) the tab full width, can be resized inside a parent*/
+  /* (optional) Whether the Tabs take up the full width of their parent container. */
   @Prop() fullWidth = false;
+
   /* (optional) The tabs' aria-label. */
   @Prop() ariaLabel: string;
 
