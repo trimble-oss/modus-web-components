@@ -1,6 +1,7 @@
+@import './modus-alert.vars';
+
 div.alert {
   align-items: center;
-  background-color: $col_white;
   border: 1px solid;
   border-left-width: $alert-left-border-width;
   border-radius: 2px;
@@ -11,85 +12,91 @@ div.alert {
   position: relative;
 
   &.type-error {
-    border-color: $col_red;
-    color: $col_red;
+    background-color: $modus-alert-danger-bg;
+    border-color: $modus-alert-danger-border-color;
+    color: $modus-alert-danger-color;
 
     .icon-check-circle,
     .icon-error,
     .icon-info,
     .icon-warning {
       path {
-        fill: $col_red;
+        fill: $modus-alert-danger-color;
       }
     }
   }
 
   &.type-info {
-    border-color: $col_blue;
-    color: $col_blue;
+    background-color: $modus-alert-primary-bg;
+    border-color: $modus-alert-primary-border-color;
+    color: $modus-alert-primary-color;
 
     .icon-check-circle,
     .icon-error,
     .icon-info,
     .icon-warning {
       path {
-        fill: $col_blue;
+        fill: $modus-alert-primary-color;
       }
     }
   }
 
   &.type-info-gray {
-    border-color: $col_gray_8;
-    color: $col_gray_8;
+    background-color: $modus-alert-secondary-bg;
+    border-color: $modus-alert-secondary-border-color;
+    color: $modus-alert-secondary-color;
 
     .icon-check-circle,
     .icon-error,
     .icon-info,
     .icon-warning {
       path {
-        fill: $col_gray_8;
+        fill: $modus-alert-secondary-color;
       }
     }
   }
 
   &.type-info-gray-dark {
-    border-color: $col_trimble_gray;
-    color: $col_trimble_gray;
+    background-color: $modus-alert-dark-bg;
+    border-color: $modus-alert-dark-border-color;
+    color: $modus-alert-dark-color;
 
     .icon-check-circle,
     .icon-error,
     .icon-info,
     .icon-warning {
       path {
-        fill: $col_trimble_gray;
+        fill: $modus-alert-dark-color;
       }
     }
   }
 
   &.type-success {
-    border-color: $col_green_dark;
-    color: $col_green_dark;
+    background-color: $modus-alert-success-bg;
+    border-color: $modus-alert-success-border-color;
+    color: $modus-alert-success-color;
 
     .icon-check-circle,
     .icon-error,
     .icon-info,
     .icon-warning {
       path {
-        fill: $col_green_dark;
+        fill: $modus-alert-success-color;
       }
     }
   }
 
   &.type-warning {
-    border-color: $col_trimble_yellow;
-    color: $col_trimble_gray;
+    background-color: $modus-alert-warning-bg;
+    border-color: $modus-alert-warning-border-color;
+    color: $modus-alert-warning-color;
 
     .icon-check-circle,
     .icon-error,
     .icon-info,
     .icon-warning {
       path {
-        fill: $col_trimble_gray;
+        fill: $modus-alert-warning-color;
       }
     }
   }
@@ -110,18 +117,24 @@ div.alert {
     cursor: pointer;
     margin-left: auto;
 
+    path {
+      fill: $modus-alert-close;
+    }
+
     &:hover {
       g {
         path {
-          fill: $col_gray_6;
+          fill: $modus-alert-close-hover, $col_gray_6;
         }
       }
+
+      opacity: 0.5;
     }
 
     &:active {
       g {
         path {
-          fill: $col_trimble_gray;
+          fill: $modus-alert-close;
         }
       }
     }
