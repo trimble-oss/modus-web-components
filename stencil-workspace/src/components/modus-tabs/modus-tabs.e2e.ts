@@ -31,7 +31,7 @@ describe('modus-tabs', () => {
     let tabs = await page.findAll('modus-tabs >>> .tab');
     expect(tabs.length).toBeFalsy();
 
-    modusTabs.setProperty('tabs', [{ id: 0, label: "Tab1" }]);
+    modusTabs.setProperty('tabs', [{ id: 0, label: 'Tab1' }]);
     await page.waitForChanges();
     tabs = await page.findAll('modus-tabs >>> .tab');
     expect(tabs.length).toEqual(1);
@@ -44,7 +44,7 @@ describe('modus-tabs', () => {
     const tabChange = await page.spyOnEvent('tabChange');
 
     const modusTabs = await page.find('modus-tabs');
-    modusTabs.setProperty('tabs', [{ active: true, id: 0, label: 'Tab1' }, { id: 1, label: 'Tab2' }])
+    modusTabs.setProperty('tabs', [{ active: true, id: 0, label: 'Tab1' }, { id: 1, label: 'Tab2' }]);
     await page.waitForChanges();
     const element = await page.find('modus-tabs >>> div.active + div');
 
