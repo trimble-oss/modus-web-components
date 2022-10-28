@@ -6,14 +6,11 @@ View all releases at: https://github.com/trimble-oss/modus-web-components/releas
 
 ## Unreleased
 
-### Added 
-
-- Added optional property `fullWidth` for modus-tabs. Now component can be resizable from UI if `fullWidth` flag is set on true.
-
-## 0.1.23 - 2022-10-26
+### 0.1.23 - 2022-10-28
 
 ### Added
 
+- Added optional property `fullWidth` for modus-tabs. Now component can be resizable from UI if `fullWidth` flag is set on true.
 - Added a theme toggler to the toolbar in storybook pages to switch between `light` and `dark` themes
 
 ## 0.1.22 - 2022-10-18
