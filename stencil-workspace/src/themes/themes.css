@@ -1,6 +1,0 @@
-:root,
-:host([data-mwc-theme=light]),
-[data-mwc-theme=light] {
-  --modus-body-bg: #fff;
-  --modus-body-color: #252a2e;
-}

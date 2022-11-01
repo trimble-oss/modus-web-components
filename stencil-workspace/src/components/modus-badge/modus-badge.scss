@@ -6,8 +6,8 @@ div.badge {
   display: inline-flex;
 
   // Default color, size, and type
-  background-color: var(--modus-badge-primary-bg);
-  color: var(--modus-badge-primary-bg-color);
+  background-color: $modus-badge-primary-bg;
+  color: $modus-badge-primary-color;
   font-family: $primary-font;
   font-size: $rem-12px;
   font-weight: $badge-font-weight;
@@ -16,61 +16,61 @@ div.badge {
   position: relative;
 
   &.color-danger {
-    background-color: var(--modus-badge-danger-bg);
-    color: var(--modus-badge-danger-bg-color);
+    background-color: $modus-badge-danger-bg;
+    color: $modus-badge-danger-color;
   }
 
   &.color-dark {
-    background-color: var(--modus-badge-dark-bg);
-    color: var(--modus-badge-dark-bg-color);
+    background-color: $modus-badge-dark-bg;
+    color: $modus-badge-dark-color;
   }
 
   &.color-secondary {
-    background-color: var(--modus-badge-secondary-bg);
-    color: var(--modus-badge-secondary-bg-color);
+    background-color: $modus-badge-secondary-bg;
+    color: $modus-badge-secondary-color;
   }
 
   &.color-success {
-    background-color: var(--modus-badge-success-bg);
-    color: var(--modus-badge-success-bg-color);
+    background-color: $modus-badge-success-bg;
+    color: $modus-badge-success-color;
   }
 
   &.color-tertiary {
-    background-color: var(--modus-badge-tertiary-bg);
-    color: var(--modus-badge-tertiary-bg-color);
+    background-color: $modus-badge-tertiary-bg;
+    color: $modus-badge-tertiary-color;
   }
 
   &.color-warning {
-    background-color: var(--modus-badge-warning-bg);
-    color: var(--modus-badge-warning-bg-color);
+    background-color: $modus-badge-warning-bg;
+    color: $modus-badge-warning-color;
   }
 
   &.type-text {
     background-color: unset;
-    color: var(--modus-badge-text-primary);
+    color: $modus-badge-text-primary;
 
     &.color-danger {
-      color: var(--modus-badge-text-danger);
+      color: $modus-badge-text-danger;
     }
 
     &.color-dark {
-      color: var(--modus-badge-text-dark);
+      color: $modus-badge-text-dark;
     }
 
     &.color-secondary {
-      color: var(--modus-badge-text-secondary);
+      color: $modus-badge-text-secondary;
     }
 
     &.color-success {
-      color: var(--modus-badge-text-success);
+      color: $modus-badge-text-success;
     }
 
     &.color-tertiary {
-      color: var(--modus-badge-text-tertiary);
+      color: $modus-badge-text-tertiary;
     }
 
     &.color-warning {
-      color: var(--modus-badge-text-warning);
+      color: $modus-badge-text-warning;
     }
   }
 

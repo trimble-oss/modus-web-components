@@ -14,17 +14,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link rel="stylesheet" src="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
     <style>
-      [data-mwc-theme='dark']{
+      body[data-mwc-theme='dark']{
         background-color: #252a2e;
       }
        div {
             display: block;
             margin-top: 30px;
         }
-        :root{
+        /* :root{
         --modus-body-bg: black;
         --modus-body-color: white;
-        }
+        } */
 
     </style>
   </head>
@@ -33,7 +33,7 @@
   <modus-button color="primary" id="toggle">Toggle theme</modus-button>
 
   <div>
-    <modus-button color="primary" id="toggle-accordion">Toggle Accordion theme</modus-button>
+    <modus-button color="primary" id="toggle_accordion-item">Toggle Accordion theme</modus-button>
   </div>
   <div>
     <modus-accordion >
@@ -46,7 +46,7 @@
   </div>
 
   <div>
-    <modus-button color="primary" id="toggle-alerts">Toggle Alerts theme</modus-button>
+    <modus-button color="primary" id="toggle_alert">Toggle Alerts theme</modus-button>
   </div>
   <div>
     <modus-alert message="Info alert (default)"></modus-alert>
@@ -58,7 +58,7 @@
     <modus-alert message="Warning alert" type="warning"></modus-alert>
   </div>
   <div>
-    <modus-button color="primary" id="toggle-badges">Toggle Badges theme</modus-button>
+    <modus-button color="primary" id="toggle_badge">Toggle Badges theme</modus-button>
   </div>
   <div>
     <modus-badge>Default</modus-badge>
@@ -78,41 +78,83 @@
     <modus-badge color="danger" type="text">Text</modus-badge>
   </div>
 
-  <modus-breadcrumb></modus-breadcrumb>
+  <div>
+    <modus-button color="primary" id="toggle_breadcrumb">Toggle Buttons theme</modus-button>
+  </div>
+  <div>
+    <modus-breadcrumb></modus-breadcrumb>
+  </div>
+
+  <div>
+    <modus-button color="primary" id="toggle_button">Toggle Buttons theme</modus-button>
+  </div>
+  <div>
+    <modus-button color="primary">Primary</modus-button>
+    <modus-button color="secondary">Secondary</modus-button>
+    <modus-button color="tertiary">Tertiary</modus-button>
+
+    <modus-button color="danger">Danger</modus-button>
+    <modus-button disabled color="danger">Disabled</modus-button>
+
+    <modus-button size="small" color="primary">Small</modus-button>
+    <modus-button size="large" color="primary">Large</modus-button>
+
+    <modus-button button-style="borderless">Borderless</modus-button>
+
+    <modus-button button-style="outline" color="primary">Outline</modus-button>
+    <modus-button button-style="outline" color="secondary">Outline</modus-button>
+  </div>
+
+  <div>
+    <modus-button color="primary" id="toggle_checkbox">Toggle Checkbox theme</modus-button>
+  </div>
+  <div>
+    <modus-checkbox></modus-checkbox>
+    <modus-checkbox disabled></modus-checkbox>
+    <modus-checkbox label="Checkbox"></modus-checkbox>
+    <modus-checkbox disabled label="Checkbox"></modus-checkbox>
+    <modus-checkbox checked disabled label="Checkbox"></modus-checkbox>
+    <modus-checkbox indeterminate></modus-checkbox>
+  </div>
+
+  <div>
+    <modus-button color="primary" id="toggle_card">Toggle Card theme</modus-button>
+  </div>
+  <div>
+    <modus-card>
+      <div style="padding:10px">
+        <h4 id="card-title">Card title</h4>
+        <h5 id="card-subtitle">Card subtitle</h5>
+        <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <modus-button color="primary">Go somewhere</modus-button>
+      </div>
+    </modus-card>
+  </div>
 </div>
   </body>
   <script>
     document.querySelector('#toggle').addEventListener('buttonClick', () => {
-      document.body.setAttribute('data-mwc-theme',  document.body.getAttribute('data-mwc-theme') === 'dark' ? 'light' : 'dark');
-  });
+        document.body.setAttribute('data-mwc-theme',  document.body.getAttribute('data-mwc-theme') === 'dark' ? 'light' : 'dark');
+    });
 
-  document.querySelector('#toggle-accordion').addEventListener('buttonClick', () => {
-      Array.from(document.querySelectorAll('modus-accordion-item')).map(i => {
-        i.setAttribute('data-mwc-theme',  i.getAttribute('data-mwc-theme') === 'dark' ? 'light' : 'dark');
-      });
-  });
+    Array.from(document.querySelectorAll('modus-button'))
+    .filter(b => b.id !== 'toggle' && b.id.startsWith('toggle'))
+    .map(b => b.id.split('_')[1])
+    .forEach((c) => {
+      document.querySelector(`#toggle_${c}`).addEventListener('buttonClick', () => {
+        Array.from(document.querySelectorAll(`modus-${c}`)).map(i => {
+          i.setAttribute('data-mwc-theme',  i.getAttribute('data-mwc-theme') === 'dark' ? 'light' : 'dark');
+        });
+    });
+    });
 
-
-  document.querySelector('#toggle-alerts').addEventListener('buttonClick', () => {
-      Array.from(document.querySelectorAll('modus-alert')).map(i => {
-        i.setAttribute('data-mwc-theme',  i.getAttribute('data-mwc-theme') === 'dark' ? 'light' : 'dark');
-      });
-  });
-
-
-  document.querySelector('#toggle-badges').addEventListener('buttonClick', () => {
-      Array.from(document.querySelectorAll('modus-badge')).map(i => {
-        i.setAttribute('data-mwc-theme',  i.getAttribute('data-mwc-theme') === 'dark' ? 'light' : 'dark');
-      });
-  });
-
-  const modusBreadcrumb = document.querySelector('modus-breadcrumb');
-  const crumbs = [
-    { id: '1', display: 'Crumb 1' },
-    { id: '2', display: 'Crumb 2' },
-    { id: '3', display: 'Crumb 3' },
-    { id: '4', display: 'Crumb 4' },
-  ];
-  modusBreadcrumb.crumbs = crumbs;
+    const modusBreadcrumb = document.querySelector('modus-breadcrumb');
+    const crumbs = [
+      { id: '1', display: 'Crumb 1' },
+      { id: '2', display: 'Crumb 2' },
+      { id: '3', display: 'Crumb 3' },
+      { id: '4', display: 'Crumb 4' },
+    ];
+    modusBreadcrumb.crumbs = crumbs;
   </script>
 </html>
