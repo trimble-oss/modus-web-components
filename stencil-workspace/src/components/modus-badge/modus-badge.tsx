@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { Component, Prop, h } from '@stencil/core';
+import { Component, Prop, h, Element } from '@stencil/core';
 
 @Component({
   tag: 'modus-badge',
@@ -40,6 +40,19 @@ export class ModusBadge {
     ['default', 'type-default'],
     ['text', 'type-text'],
   ]);
+
+  @Prop() customStyle: string;
+
+  @Element() el: HTMLElement;
+
+  componentDidRender() {
+    this.appendCustomStyles();
+  }
+
+  appendCustomStyles() {
+    const style = this.el.shadowRoot.querySelector('style');
+    style.append(this.customStyle);
+  }
 
   render(): unknown {
     const className = `badge ${this.classByColor.get(this.color)} ${this.classBySize.get(this.size)} ${this.classByType.get(this.type)}`;

@@ -66,6 +66,7 @@ export namespace Components {
           * (optional) The color of the badge
          */
         "color": 'danger' | 'dark' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning';
+        "customStyle": string;
         /**
           * (optional) The size of the badge
          */
@@ -1233,6 +1234,7 @@ declare namespace LocalJSX {
           * (optional) The color of the badge
          */
         "color"?: 'danger' | 'dark' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning';
+        "customStyle"?: string;
         /**
           * (optional) The size of the badge
          */
