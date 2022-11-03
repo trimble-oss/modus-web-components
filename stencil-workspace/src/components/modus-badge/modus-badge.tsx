@@ -50,8 +50,9 @@ export class ModusBadge {
   }
 
   appendCustomStyles() {
+    const customStyle = this.el.querySelector('[slot="custom-style-with-slot"]');
     const style = this.el.shadowRoot.querySelector('style');
-    style.append(this.customStyle);
+    style.append(customStyle);
   }
 
   render(): unknown {
@@ -59,6 +60,7 @@ export class ModusBadge {
 
     return (
       <div aria-label={this.ariaLabel} class={className} role="status">
+        <slot name="custom-style-with-slot" />
         <slot />
       </div>
     );

@@ -21,6 +21,15 @@
   </head>
   <body>
       <!-- Test your components here -->
-      <modus-badge color="secondary" custom-style="div.badge { background-color: red !important; border-radius: 16px; padding: 10px; }">Secondary</modus-badge>
+      <modus-badge color="secondary">
+        <style slot="custom-style-with-slot">
+          div.badge {
+            background-color: red !important;
+            border-radius: 16px;
+            padding: 10px;
+          }
+        </style>
+        1234
+      </modus-badge>
   </body>
 </html>
