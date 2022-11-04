@@ -112,10 +112,14 @@ export namespace Components {
           * (optional) The card's aria-label.
          */
         "ariaLabel": string;
+        "backgroundColor": string;
+        "borderRadius": string;
         /**
           * (optional) The height of the card.
          */
         "height": string;
+        "showCardBorder": boolean;
+        "showShadowHover": boolean;
         /**
           * (optional) The width of the card.
          */
@@ -1286,10 +1290,14 @@ declare namespace LocalJSX {
           * (optional) The card's aria-label.
          */
         "ariaLabel"?: string;
+        "backgroundColor"?: string;
+        "borderRadius"?: string;
         /**
           * (optional) The height of the card.
          */
         "height"?: string;
+        "showCardBorder"?: boolean;
+        "showShadowHover"?: boolean;
         /**
           * (optional) The width of the card.
          */

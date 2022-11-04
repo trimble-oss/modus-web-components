@@ -170,13 +170,13 @@ export declare interface ModusCard extends Components.ModusCard {}
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['ariaLabel', 'height', 'width']
+  inputs: ['ariaLabel', 'backgroundColor', 'borderRadius', 'height', 'showCardBorder', 'showShadowHover', 'width']
 })
 @Component({
   selector: 'modus-card',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['ariaLabel', 'height', 'width']
+  inputs: ['ariaLabel', 'backgroundColor', 'borderRadius', 'height', 'showCardBorder', 'showShadowHover', 'width']
 })
 export class ModusCard {
   protected el: HTMLElement;

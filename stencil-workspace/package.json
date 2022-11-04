@@ -20,9 +20,7 @@
   "unpkg": "dist/modus-web-components/modus-web-components.esm.js",
   "files": [
     "dist/",
-    "loader/",
-    "README.md",
-    "SUPPORT.md"
+    "loader/"
   ],
   "scripts": {
     "build": "stencil build --docs",

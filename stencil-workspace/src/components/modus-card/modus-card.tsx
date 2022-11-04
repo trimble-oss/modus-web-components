@@ -15,10 +15,22 @@ export class ModusCard {
 
   /** (optional) The width of the card. */
   @Prop() width = '240px';
+  @Prop() backgroundColor: string;
+  @Prop() borderRadius: string;
+  @Prop() showCardBorder = true;
+  @Prop() showShadowHover = true;
 
   render(): unknown {
     return (
-      <article aria-label={this.ariaLabel} style={{'height': this.height, 'width': this.width}}>
+      <article
+        class={`${this.showShadowHover ? 'shadow' : ''} ${this.showCardBorder ? 'card-border' : ''}  `}
+        aria-label={this.ariaLabel}
+        style={{
+          'height': this.height,
+          'width': this.width,
+          'background-color': this.backgroundColor,
+          'border-radius': this.borderRadius,
+        }}>
         <slot />
       </article>
     );
