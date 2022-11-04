@@ -79,22 +79,49 @@
   --modus-btn-danger-active: #c41e28;
 
   // Primary Outline
-  --modus-btn-primary-outline-hover-bg: rgba(0, 99, 163, 0.15);
-  --modus-btn-primary-outline-hover-color: var(--modus-btn-primary-hover);
-  --modus-btn-primary-outline-active-bg: rgba(0, 99, 163, 0.2);
-  --modus-btn-primary-outline-active-color: var(--modus-btn-primary-active);
+  --modus-btn-outline-primary-hover-bg: rgba(0, 99, 163, 0.15);
+  --modus-btn-outline-primary-hover-color: var(--modus-btn-primary-hover);
+  --modus-btn-outline-primary-active-bg: rgba(0, 99, 163, 0.2);
+  --modus-btn-outline-primary-active-color: var(--modus-btn-primary-active);
 
   // Dark Outline
-  --modus-btn-dark-outline-hover-bg: rgba(33, 42, 50, 0.15);
-  --modus-btn-dark-outline-hover-color: var(--modus-btn-dark-hover);
-  --modus-btn-dark-outline-active-bg: rgba(33, 42, 50, 0.2);
-  --modus-btn-dark-outline-active-color: var(--modus-btn-dark-active);
+  --modus-btn-outline-dark-hover-bg: rgba(33, 42, 50, 0.15);
+  --modus-btn-outline-dark-hover-color: var(--modus-btn-dark-hover);
+  --modus-btn-outline-dark-active-bg: rgba(33, 42, 50, 0.2);
+  --modus-btn-outline-dark-active-color: var(--modus-btn-dark-active);
+
+  // Text only Button variant
+  --modus-btn-text-primary-hover-bg: rgba(0, 99, 163, 0.2);
+  --modus-btn-text-primary-hover-color: #0082d6;
+  --modus-btn-text-primary-active-bg: rgba(0, 99, 163, 0.3);
+  --modus-btn-text-primary-active-color: #004470;
 
   // Input controls
   --modus-custom-control-bg: var(--modus-body-bg);
 
   // Checkbox
   --modus-checkbox-active-color: #217cbb;
+
+  // Chip
+  // Active
+  --modus-chip-active-bg: rgba(33, 124, 187, 0.3);
+  --modus-chip-active-color: var(--modus-black);
+  --modus-chip-active-border-color: transparent;
+
+  // Outline
+  --modus-chip-outline-bg: transparent;
+  --modus-chip-outline-border-color: #a2a4ab;
+  --modus-chip-outline-color: var(--modus-chip-color);
+
+  // Hover
+  --modus-chip-outline-hover-bg: #eaebef;
+  --modus-chip-outline-hover-color: #4c535c;
+  --modus-chip-outline-hover-border-color: #7a7b80;
+
+  // Active
+  --modus-chip-outline-active-bg: #dcedf9;
+  --modus-chip-outline-active-color: #252a2e;
+  --modus-chip-outline-active-border-color: #217cbb;
 }
 
 [data-mwc-theme='dark'] {
@@ -171,22 +198,44 @@
   --modus-btn-danger-active: #c41e28;
 
   // Primary Outline
-  --modus-btn-primary-outline-hover-bg: rgba(0, 154, 236, 0.15);
-  --modus-btn-primary-outline-hover-color: #20b2ff;
-  --modus-btn-primary-outline-active: #004f83;
-  --modus-btn-primary-outline-active-color: #019aeb;
+  --modus-btn-outline-primary-hover-bg: rgba(0, 154, 236, 0.15);
+  --modus-btn-outline-primary-hover-color: #20b2ff;
+  --modus-btn-outline-primary-active: #004f83;
+  --modus-btn-outline-primary-active-color: #019aeb;
 
   // Dark Outline
-  --modus-btn-dark-outline-hover-bg: rgba(240, 240, 247, 0.15);
-  --modus-btn-dark-outline-active: rgba(240, 240, 247, 0.2);
-  --modus-btn-dark-outline-hover-color: #fff;
-  --modus-btn-dark-outline-active-color: #e1e1ec;
+  --modus-btn-outline-dark-hover-bg: rgba(240, 240, 247, 0.15);
+  --modus-btn-outline-dark-active: rgba(240, 240, 247, 0.2);
+  --modus-btn-outline-dark-hover-color: #fff;
+  --modus-btn-outline-dark-active-color: #e1e1ec;
+
+  // Text only Button
+  --modus-btn-text-primary-hover-bg: rgba(1, 154, 235, 0.2);
+  --modus-btn-text-primary-hover-color: #21b2fe;
+  --modus-btn-text-primary-active-bg: rgba(1, 154, 235, 0.3);
+  --modus-btn-text-primary-active-color: #20b2ff;
 
   // Input controls
   --modus-custom-control-bg: transparent;
 
   // Checkbox
   --modus-checkbox-active-color: #0c77be;
+
+  // Chip
+  // Active
+  --modus-chip-active-bg: #004f83;
+  --modus-chip-active-color: var(--modus-white);
+
+  // Outline
+  --modus-chip-outline-color: #cbcdd6;
+
+  // Hover
+  --modus-chip-outline-hover-bg: #cbcdd61f;
+
+  // Active
+  --modus-chip-outline-active-bg: rgba(0, 79, 131, 0.5);
+  --modus-chip-outline-active-border-color: #019aeb;
+  --modus-chip-outline-active-color: #cbcdd6;
 }
 
 modus-accordion-item {
@@ -272,15 +321,28 @@ modus-button[button-style='outline'] {
     --modus-btn-border-color: var(--modus-#{$color});
 
     // Hover
-    --modus-btn-hover-color: var(--modus-btn-#{$color}-outline-hover-color);
-    --modus-btn-hover-bg: var(--modus-btn-#{$color}-outline-hover-bg);
+    --modus-btn-hover-color: var(--modus-btn-outline-#{$color}-hover-color);
+    --modus-btn-hover-bg: var(--modus-btn-outline-#{$color}-hover-bg);
     --modus-btn-hover-border-color: var(--modus-btn-#{$color}-outline-hover-color);
 
     // Active
-    --modus-btn-active-color: var(--modus-btn-#{$color}-outline-hover-color);
-    --modus-btn-active-bg: var(--modus-btn-#{$color}-outline-hover-bg);
+    --modus-btn-active-color: var(--modus-btn-outline-#{$color}-hover-color);
+    --modus-btn-active-bg: var(--modus-btn-outline-#{$color}-hover-bg);
     --modus-btn-active-border-color: var(--modus-btn-#{$color}-outline-hover-color);
   }
+}
+
+modus-button[button-style='borderless'] {
+  --modus-btn-bg: transparent;
+  --modus-btn-color: var(--modus-primary);
+
+  // Hover
+  --modus-btn-hover-color: var(--modus-btn-outline-primary-hover-color);
+  --modus-btn-hover-bg: var(--modus-btn-outline-primary-hover-bg);
+
+  // Active
+  --modus-btn-active-color: var(--modus-btn-outline-primary-hover-color);
+  --modus-btn-active-bg: var(--modus-btn-outline-primary-hover-bg);
 }
 
 modus-checkbox {
@@ -303,4 +365,58 @@ modus-card {
   --modus-card-bg: var(--modus-body-bg);
   --modus-card-color: var(--modus-body-color);
   --modus-card-border-color: var(--modus-border-color);
+}
+
+modus-chip {
+  --modus-chip-bg: var(--modus-tertiary);
+  --modus-chip-border-color: var(--modus-tertiary);
+  --modus-chip-color: #353a40;
+
+  // Hover
+  --modus-chip-hover-bg: #dbdce2;
+  --modus-chip-hover-border-color: #dbdce2;
+  --modus-chip-hover-color: var(--modus-chip-color);
+
+  // Hover
+  --modus-chip-hover-bg: #dbdce2;
+  --modus-chip-hover-border-color: #dbdce2;
+  --modus-chip-hover-color: var(--modus-chip-color);
+
+  &[has-error] {
+    --modus-chip-bg: #f4bcc0;
+    --modus-chip-border-color: var(--modus-chip-bg);
+    --modus-chip-color: #83141a;
+
+    // Active
+    --modus-chip-active-bg: #adaeb6;
+    --modus-chip-active-border-color: #adaeb6;
+    --modus-chip-active-color: #000;
+
+    &[chip-style='outline'] {
+      --modus-chip-bg: #fbe9ea;
+      --modus-chip-border-color: #ed9096;
+      --modus-chip-color: #83141a;
+
+      // Active
+      --modus-chip-active-bg: #d3d5dc;
+      --modus-chip-active-border-color: #7a7b80;
+      --modus-chip-active-color: #252a2e;
+    }
+  }
+
+  &[chip-style='outline'] {
+    --modus-chip-bg: var(--modus-chip-outline-bg);
+    --modus-chip-border-color: var(--modus-chip-outline-border-color);
+    --modus-chip-color: var(--modus-chip-outline-color);
+
+    // Hover
+    --modus-chip-hover-bg: var(--modus-chip-outline-hover-bg);
+    --modus-chip-hover-border-color: var(--modus-chip-outline-hover-border-color);
+    --modus-chip-hover-color: var(--modus-chip-outline-hover-color);
+
+    // Active
+    --modus-chip-active-bg: var(--modus-chip-outline-active-bg);
+    --modus-chip-active-border-color: var(--modus-chip-outline-active-border-color);
+    --modus-chip-active-color: var(--modus-chip-outline-active-color);
+  }
 }

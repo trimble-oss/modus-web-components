@@ -46,16 +46,20 @@ button {
   }
 
   &.style-borderless {
-    background-color: transparent;
-    color: $col_blue_dark;
-    fill: $col_blue_dark;
+    background-color: $modus-btn-borderless-bg;
+    color: $modus-btn-borderless-color;
+    fill: $modus-btn-borderless-color;
 
     &:hover:not([disabled]) {
-      background-color: $col_gray_light;
+      background-color: $modus-btn-borderless-hover-bg;
+      color: $modus-btn-borderless-hover-color;
+      fill: $modus-btn-borderless-hover-color;
     }
 
     &:active:not([disabled]) {
-      background-color: $col_blue_pale;
+      background-color: $modus-btn-borderless-active-bg;
+      color: $modus-btn-borderless-active-color;
+      fill: $modus-btn-borderless-active-color;
     }
   }
 
