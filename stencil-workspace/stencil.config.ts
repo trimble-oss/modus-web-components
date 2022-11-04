@@ -34,7 +34,7 @@ export const config: Config = {
       includeDefineCustomElements: true,
     }),
   ],
-  globalStyle: 'src/global/global.scss',
+  globalStyle: 'src/global/themes.scss',
   plugins: [
     postcss({
       plugins: [autoprefixer()],

@@ -8,6 +8,7 @@
     "number-leading-zero": null,
     "property-no-vendor-prefix": null,
     "selector-class-pattern": "^[a-z][a-z0-9\\-]*[a-z0-9]$",
-    "selector-not-notation": null
+    "selector-not-notation": null,
+    "scss/no-global-function-names": null
   }
 }

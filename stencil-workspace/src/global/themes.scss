@@ -1,0 +1,422 @@
+:root,
+[data-mwc-theme='light'] {
+  // Colors
+  --modus-black: #000;
+  --modus-white: #fff;
+  --modus-link-color: #217cbb;
+
+  // Variants
+  --modus-primary: #0063a3;
+  --modus-secondary: #6a6e79;
+  --modus-tertiary: #cbcdd6;
+  --modus-dark: #252a2e;
+  --modus-success: #006638;
+  --modus-danger: #da212c;
+  --modus-warning: #e49325;
+
+  // Text colors
+  --modus-tertiary-color: #252a2e;
+  --modus-warning-color: #252a2e;
+
+  // Body
+  --modus-body-bg: var(--modus-white);
+  --modus-body-color: #252a2e;
+  --modus-border-color: #cbcdd6;
+
+  // Label
+  --modus-label: #464b52;
+
+  // Background
+  --modus-alert-primary-bg: var(--modus-white);
+  --modus-alert-secondary-bg: var(--modus-white);
+  --modus-alert-dark-bg: var(--modus-white);
+  --modus-alert-success-bg: var(--modus-white);
+  --modus-alert-danger-bg: var(--modus-white);
+  --modus-alert-warning-bg: var(--modus-white);
+
+  // Text
+  --modus-alert-primary-color: var(--modus-primary);
+  --modus-alert-secondary-color: var(--modus-secondary);
+  --modus-alert-dark-color: var(--modus-dark);
+  --modus-alert-success-color: var(--modus-success);
+  --modus-alert-danger-color: var(--modus-danger);
+  --modus-alert-warning-color: var(--modus-tertiary-color);
+
+  // Border
+  --modus-alert-primary-border-color: var(--modus-primary);
+  --modus-alert-secondary-border-color: var(--modus-secondary);
+  --modus-alert-dark-border-color: var(--modus-dark);
+  --modus-alert-success-border-color: var(--modus-success);
+  --modus-alert-danger-border-color: var(--modus-danger);
+  --modus-alert-warning-border-color: var(--modus-warning);
+
+  // Badge
+  // Text for variant background
+  --modus-badge-primary-color: var(--modus-white);
+  --modus-badge-secondary-color: var(--modus-white);
+  --modus-badge-tertiary-color: var(--modus-tertiary-color);
+  --modus-badge-dark-color: var(--modus-white);
+  --modus-badge-success-color: var(--modus-white);
+  --modus-badge-warning-color: var(--modus-tertiary-color);
+  --modus-badge-danger-color: var(--modus-white);
+
+  // Breadcrumb
+  --modus-breadcrumb-item-active-color: #6c757d;
+
+  // Button
+  // Variants Hover Color
+  --modus-btn-primary-hover: #0082d6;
+  --modus-btn-secondary-hover: #838793;
+  --modus-btn-tertiary-hover: #e8e8ec;
+  --modus-btn-dark-hover: #3c444a;
+  --modus-btn-danger-hover: #e44a53;
+
+  // Variants Active Color
+  --modus-btn-primary-active: #00548a;
+  --modus-btn-secondary-active: #5e626b;
+  --modus-btn-tertiary-active: #bdbfcb;
+  --modus-btn-dark-active: #1a1d20;
+  --modus-btn-danger-active: #c41e28;
+
+  // Primary Outline
+  --modus-btn-outline-primary-hover-bg: rgba(0, 99, 163, 0.15);
+  --modus-btn-outline-primary-hover-color: var(--modus-btn-primary-hover);
+  --modus-btn-outline-primary-active-bg: rgba(0, 99, 163, 0.2);
+  --modus-btn-outline-primary-active-color: var(--modus-btn-primary-active);
+
+  // Dark Outline
+  --modus-btn-outline-dark-hover-bg: rgba(33, 42, 50, 0.15);
+  --modus-btn-outline-dark-hover-color: var(--modus-btn-dark-hover);
+  --modus-btn-outline-dark-active-bg: rgba(33, 42, 50, 0.2);
+  --modus-btn-outline-dark-active-color: var(--modus-btn-dark-active);
+
+  // Text only Button variant
+  --modus-btn-text-primary-hover-bg: rgba(0, 99, 163, 0.2);
+  --modus-btn-text-primary-hover-color: #0082d6;
+  --modus-btn-text-primary-active-bg: rgba(0, 99, 163, 0.3);
+  --modus-btn-text-primary-active-color: #004470;
+
+  // Input controls
+  --modus-custom-control-bg: var(--modus-body-bg);
+
+  // Checkbox
+  --modus-checkbox-active-color: #217cbb;
+
+  // Chip
+  // Active
+  --modus-chip-active-bg: rgba(33, 124, 187, 0.3);
+  --modus-chip-active-color: var(--modus-black);
+  --modus-chip-active-border-color: transparent;
+
+  // Outline
+  --modus-chip-outline-bg: transparent;
+  --modus-chip-outline-border-color: #a2a4ab;
+  --modus-chip-outline-color: var(--modus-chip-color);
+
+  // Hover
+  --modus-chip-outline-hover-bg: #eaebef;
+  --modus-chip-outline-hover-color: #4c535c;
+  --modus-chip-outline-hover-border-color: #7a7b80;
+
+  // Active
+  --modus-chip-outline-active-bg: #dcedf9;
+  --modus-chip-outline-active-color: #252a2e;
+  --modus-chip-outline-active-border-color: #217cbb;
+}
+
+[data-mwc-theme='dark'] {
+  // Variants
+  --modus-primary: #019aeb;
+  --modus-secondary: #6a6e79;
+  --modus-tertiary: #cbcdd6;
+  --modus-success: #1e8a44;
+  --modus-warning: #fbad26;
+  --modus-danger: #da212c;
+  --modus-dark: #f1f1f6;
+
+  // Text colors
+  --modus-tertiary-color: #171c1e;
+  --modus-dark-color: #171c1e;
+
+  // Body
+  --modus-body-bg: #252a2e;
+  --modus-body-color: #f1f1f6;
+  --modus-border-color: #6a6e79;
+
+  // Label
+  --modus-label: #b7b9c3;
+
+  // Alert
+  --modus-alert-close: #f1f1f6;
+  --modus-alert-close-hover: #f1f1f6;
+
+  // Background
+  --modus-alert-primary-bg: #019aeb80;
+  --modus-alert-secondary-bg: #6a6e7980;
+  --modus-alert-dark-bg: (rgba(#171c1e, 0.5));
+  --modus-alert-success-bg: #1e8a4480;
+  --modus-alert-danger-bg: #da212c80;
+  --modus-alert-warning-bg: #fbad2680;
+
+  // Text
+  --modus-alert-primary-color: #f1f1f6;
+  --modus-alert-secondary-color: #f1f1f6;
+  --modus-alert-dark-color: #f1f1f6;
+  --modus-alert-success-color: #f1f1f6;
+  --modus-alert-danger-color: #f1f1f6;
+  --modus-alert-warning-color: #f1f1f6;
+
+  // Border
+  --modus-alert-primary-border-color: #019aeb;
+  --modus-alert-secondary-border-color: #6a6e79;
+  --modus-alert-dark-border-color: #171c1e;
+
+  // Badge
+  // Text color
+  --modus-badge-primary-color: #fff;
+  --modus-badge-secondary-color: #fff;
+  --modus-badge-tertiary-color: #171c1e;
+  --modus-badge-dark-color: #171c1e;
+  --modus-badge-success-color: #fff;
+  --modus-badge-warning-color: #252a2e;
+  --modus-badge-danger-color: #fff;
+
+  // Breadcrumb
+  --modus-breadcrumb-item-active-color: #f1f1f6;
+
+  // Button
+  // Variants Hover Color
+  --modus-btn-primary-hover: #217cbb;
+  --modus-btn-secondary-hover: #838793;
+  --modus-btn-tertiary-hover: #e8e8ec;
+  --modus-btn-danger-hover: #e44a53;
+
+  // Variants Active Color
+  --modus-btn-primary-active: #004f83;
+  --modus-btn-secondary-active: #585c65;
+  --modus-btn-tertiary-active: #b7b9c3;
+  --modus-btn-danger-active: #c41e28;
+
+  // Primary Outline
+  --modus-btn-outline-primary-hover-bg: rgba(0, 154, 236, 0.15);
+  --modus-btn-outline-primary-hover-color: #20b2ff;
+  --modus-btn-outline-primary-active: #004f83;
+  --modus-btn-outline-primary-active-color: #019aeb;
+
+  // Dark Outline
+  --modus-btn-outline-dark-hover-bg: rgba(240, 240, 247, 0.15);
+  --modus-btn-outline-dark-active: rgba(240, 240, 247, 0.2);
+  --modus-btn-outline-dark-hover-color: #fff;
+  --modus-btn-outline-dark-active-color: #e1e1ec;
+
+  // Text only Button
+  --modus-btn-text-primary-hover-bg: rgba(1, 154, 235, 0.2);
+  --modus-btn-text-primary-hover-color: #21b2fe;
+  --modus-btn-text-primary-active-bg: rgba(1, 154, 235, 0.3);
+  --modus-btn-text-primary-active-color: #20b2ff;
+
+  // Input controls
+  --modus-custom-control-bg: transparent;
+
+  // Checkbox
+  --modus-checkbox-active-color: #0c77be;
+
+  // Chip
+  // Active
+  --modus-chip-active-bg: #004f83;
+  --modus-chip-active-color: var(--modus-white);
+
+  // Outline
+  --modus-chip-outline-color: #cbcdd6;
+
+  // Hover
+  --modus-chip-outline-hover-bg: #cbcdd61f;
+
+  // Active
+  --modus-chip-outline-active-bg: rgba(0, 79, 131, 0.5);
+  --modus-chip-outline-active-border-color: #019aeb;
+  --modus-chip-outline-active-color: #cbcdd6;
+}
+
+modus-accordion-item {
+  --modus-accordion-bg: var(--modus-body-bg);
+  --modus-accordion-color: var(--modus-body-color);
+  --modus-accordion-border-color: var(--modus-border-color);
+}
+
+modus-alert {
+  --modus-alert-close: var(--modus-body-color);
+}
+
+modus-badge {
+  // Background
+  --modus-badge-primary-bg: var(--modus-primary);
+  --modus-badge-secondary-bg: var(--modus-secondary);
+  --modus-badge-tertiary-bg: var(--modus-tertiary);
+  --modus-badge-dark-bg: var(--modus-dark);
+  --modus-badge-success-bg: var(--modus-success);
+  --modus-badge-warning-bg: var(--modus-warning);
+  --modus-badge-danger-bg: var(--modus-danger);
+
+  // Text only badge variants
+  --modus-badge-text-primary: var(--modus-primary);
+  --modus-badge-text-secondary: var(--modus-secondary);
+  --modus-badge-text-tertiary: var(--modus-tertiary);
+  --modus-badge-text-dark: var(--modus-dark);
+  --modus-badge-text-success: var(--modus-success);
+  --modus-badge-text-warning: var(--modus-warning);
+  --modus-badge-text-danger: var(--modus-danger);
+}
+
+modus-breadcrumb {
+  --modus-breadcrumb-divider-color: #6c757d;
+}
+
+$btn-theme-colors: 'primary', 'secondary', 'tertiary', 'danger';
+
+modus-button[disabled] {
+  --modus-btn-disabled-color: ;
+  --modus-btn-disabled-bg: ;
+  --modus-btn-disabled-border-color: ;
+}
+
+@each $color in $btn-theme-colors {
+  modus-button[color='#{$color}'] {
+    @if $color == 'tertiary' {
+      --modus-btn-color: var(--modus-#{$color}-color, --modus-white);
+      --modus-btn-hover-color: var(--modus-#{$color}-color, --modus-white);
+      --modus-btn-active-color: var(--modus-#{$color}-color, --modus-white);
+    } @else {
+      --modus-btn-color: var(--modus-white);
+      --modus-btn-hover-color: var(--modus-white);
+      --modus-btn-active-color: var(--modus-white);
+    }
+
+    --modus-btn-bg: var(--modus-#{$color});
+    --modus-btn-border-color: var(--modus-#{$color});
+
+    // Hover
+    --modus-btn-hover-bg: var(--modus-btn-#{$color}-hover);
+    --modus-btn-hover-border-color: var(--modus-btn-#{$color}-hover);
+
+    // Active
+    --modus-btn-active-bg: var(--modus-btn-#{$color}-active);
+    --modus-btn-active-border-color: var(--modus-btn-#{$color}-active);
+  }
+}
+
+$btn-outline-variants: 'primary', 'dark';
+
+modus-button[button-style='outline'] {
+  --modus-btn-bg: transparent;
+}
+
+@each $color in $btn-outline-variants {
+  $alias: $color;
+  @if $color == 'dark' {
+    $alias: 'secondary';
+  }
+  modus-button[button-style='outline'][color='#{$alias}'] {
+    --modus-btn-color: var(--modus-#{$color});
+    --modus-btn-border-color: var(--modus-#{$color});
+
+    // Hover
+    --modus-btn-hover-color: var(--modus-btn-outline-#{$color}-hover-color);
+    --modus-btn-hover-bg: var(--modus-btn-outline-#{$color}-hover-bg);
+    --modus-btn-hover-border-color: var(--modus-btn-#{$color}-outline-hover-color);
+
+    // Active
+    --modus-btn-active-color: var(--modus-btn-outline-#{$color}-hover-color);
+    --modus-btn-active-bg: var(--modus-btn-outline-#{$color}-hover-bg);
+    --modus-btn-active-border-color: var(--modus-btn-#{$color}-outline-hover-color);
+  }
+}
+
+modus-button[button-style='borderless'] {
+  --modus-btn-bg: transparent;
+  --modus-btn-color: var(--modus-primary);
+
+  // Hover
+  --modus-btn-hover-color: var(--modus-btn-outline-primary-hover-color);
+  --modus-btn-hover-bg: var(--modus-btn-outline-primary-hover-bg);
+
+  // Active
+  --modus-btn-active-color: var(--modus-btn-outline-primary-hover-color);
+  --modus-btn-active-bg: var(--modus-btn-outline-primary-hover-bg);
+}
+
+modus-checkbox {
+  --modus-checkbox-bg: var(--modus-custom-control-bg);
+  --modus-checkbox-focus-border-color: var(--modus-checkbox-active-color);
+  --modus-checkbox-border-color: #90939f;
+
+  // Checked state
+  --modus-checkbox-checked-color: var(--modus-checkbox-active-color);
+  --modus-checkbox-checked-bg-color: var(--modus-checkbox-active-color);
+  --modus-checkbox-checked-border-color: var(--modus-checkbox-active-color);
+
+  // Indeterminate state
+  --modus-checkbox-indeterminate-color: var(--modus-checkbox-active-color);
+  --modus-checkbox-indeterminate-bg-color: var(--modus-checkbox-active-color);
+  --modus-checkbox-indeterminate-border-color: var(--modus-checkbox-active-color);
+}
+
+modus-card {
+  --modus-card-bg: var(--modus-body-bg);
+  --modus-card-color: var(--modus-body-color);
+  --modus-card-border-color: var(--modus-border-color);
+}
+
+modus-chip {
+  --modus-chip-bg: var(--modus-tertiary);
+  --modus-chip-border-color: var(--modus-tertiary);
+  --modus-chip-color: #353a40;
+
+  // Hover
+  --modus-chip-hover-bg: #dbdce2;
+  --modus-chip-hover-border-color: #dbdce2;
+  --modus-chip-hover-color: var(--modus-chip-color);
+
+  // Hover
+  --modus-chip-hover-bg: #dbdce2;
+  --modus-chip-hover-border-color: #dbdce2;
+  --modus-chip-hover-color: var(--modus-chip-color);
+
+  &[has-error] {
+    --modus-chip-bg: #f4bcc0;
+    --modus-chip-border-color: var(--modus-chip-bg);
+    --modus-chip-color: #83141a;
+
+    // Active
+    --modus-chip-active-bg: #adaeb6;
+    --modus-chip-active-border-color: #adaeb6;
+    --modus-chip-active-color: #000;
+
+    &[chip-style='outline'] {
+      --modus-chip-bg: #fbe9ea;
+      --modus-chip-border-color: #ed9096;
+      --modus-chip-color: #83141a;
+
+      // Active
+      --modus-chip-active-bg: #d3d5dc;
+      --modus-chip-active-border-color: #7a7b80;
+      --modus-chip-active-color: #252a2e;
+    }
+  }
+
+  &[chip-style='outline'] {
+    --modus-chip-bg: var(--modus-chip-outline-bg);
+    --modus-chip-border-color: var(--modus-chip-outline-border-color);
+    --modus-chip-color: var(--modus-chip-outline-color);
+
+    // Hover
+    --modus-chip-hover-bg: var(--modus-chip-outline-hover-bg);
+    --modus-chip-hover-border-color: var(--modus-chip-outline-hover-border-color);
+    --modus-chip-hover-color: var(--modus-chip-outline-hover-color);
+
+    // Active
+    --modus-chip-active-bg: var(--modus-chip-outline-active-bg);
+    --modus-chip-active-border-color: var(--modus-chip-outline-active-border-color);
+    --modus-chip-active-color: var(--modus-chip-outline-active-color);
+  }
+}

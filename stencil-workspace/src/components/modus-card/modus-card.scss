@@ -1,7 +1,10 @@
+@import './modus-card.vars';
+
 article {
-  background-color: $col_white;
-  border: $rem-1px solid $col_gray_light;
+  background-color: $modus-card-bg;
+  border: $rem-1px solid $modus-card-border-color;
   border-radius: $rem-2px;
+  color: $modus-card-color;
   font-family: $primary-font;
   overflow: hidden;
   position: relative;
