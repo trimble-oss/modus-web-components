@@ -14,7 +14,6 @@
   padding: $rem-2px $rem-4px;
   vertical-align: middle;
   color: $modus-chip-color;
-  // fill: $modus-chip-color;
 
   &.no-left-icon {
     padding-left: $rem-16px;
@@ -54,6 +53,10 @@
     margin: 0 $rem-4px;
   }
 
+  svg:not(.icon-remove) path {
+    fill: $modus-chip-color !important;
+  }
+
   .icon-remove,
   .icon-remove path {
     fill: $modus-chip-close-icon-color !important;
@@ -63,7 +66,10 @@
     background-color: $modus-chip-outline-bg;
     border: $rem-1px solid $modus-chip-border-color;
     color: $modus-chip-outline-color;
-    fill: $modus-chip-outline-color;
+
+    svg:not(.icon-remove) path {
+      fill: $modus-chip-outline-color !important;
+    }
 
     .icon-remove,
     .icon-remove path {
@@ -75,7 +81,10 @@
     background-color: $modus-chip-hover-bg;
     border: $rem-1px solid $modus-chip-hover-border-color;
     color: $modus-chip-hover-color;
-    fill: $modus-chip-hover-color;
+
+    svg:not(.icon-remove) path {
+      fill: $modus-chip-hover-color !important;
+    }
 
     .icon-remove,
     .icon-remove path {
@@ -86,7 +95,10 @@
       background-color: $modus-chip-outline-hover-bg;
       border: $rem-1px solid $modus-chip-outline-hover-border-color;
       color: $modus-chip-outline-hover-color;
-      fill: $modus-chip-outline-hover-color;
+
+      svg:not(.icon-remove) path {
+        fill: $modus-chip-outline-hover-color !important;
+      }
 
       .icon-remove,
       .icon-remove path {
@@ -99,7 +111,10 @@
     background-color: $modus-chip-active-bg;
     border: $rem-1px solid $modus-chip-active-border-color;
     color: $modus-chip-active-color;
-    fill: $modus-chip-active-color;
+
+    svg:not(.icon-remove) path {
+      fill: $modus-chip-active-color !important;
+    }
 
     .icon-remove,
     .icon-remove path {
@@ -110,7 +125,10 @@
       background-color: $modus-chip-outline-active-bg;
       border: $rem-1px solid $modus-chip-outline-active-border-color;
       color: $modus-chip-outline-active-color;
-      fill: $modus-chip-outline-active-color;
+
+      svg:not(.icon-remove) path {
+        fill: $modus-chip-outline-active-color !important;
+      }
 
       .icon-remove,
       .icon-remove path {
@@ -123,7 +141,10 @@
     background-color: $modus-chip-error-bg;
     border: $rem-1px solid $modus-chip-error-border-color;
     color: $modus-chip-error-color;
-    fill: $modus-chip-error-color;
+
+    svg:not(.icon-remove) path {
+      fill: $modus-chip-error-color !important;
+    }
 
     .icon-remove,
     .icon-remove path {
@@ -134,7 +155,10 @@
       background-color: $modus-chip-error-active-bg;
       border: $rem-1px solid $modus-chip-error-active-border-color;
       color: $modus-chip-error-active-color;
-      fill: $modus-chip-error-active-color;
+
+      svg:not(.icon-remove) path {
+        fill: $modus-chip-error-active-color !important;
+      }
 
       .icon-remove,
       .icon-remove path {
@@ -146,7 +170,10 @@
       background-color: $modus-chip-outline-error-bg;
       border: $rem-1px solid $modus-chip-outline-error-border-color;
       color: $modus-chip-outline-error-color;
-      fill: $modus-chip-outline-error-color;
+
+      svg:not(.icon-remove) path {
+        fill: $modus-chip-outline-error-color !important;
+      }
 
       .icon-remove,
       .icon-remove path {
@@ -157,7 +184,10 @@
         background-color: $modus-chip-outline-error-active-bg;
         border: $rem-1px solid $modus-chip-outline-error-active-border-color;
         color: $modus-chip-outline-error-active-color;
-        fill: $modus-chip-outline-error-active-color;
+
+        svg:not(.icon-remove) path {
+          fill: $modus-chip-outline-error-active-color !important;
+        }
 
         .icon-remove,
         .icon-remove path {
