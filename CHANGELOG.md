@@ -2,9 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
-View all releases at: https://github.com/trimble-oss/modus-web-components/releases/
+View all releases at: <https://github.com/trimble-oss/modus-web-components/releases/>
 
 ## Unreleased
+
+### Fixed
+
+- Modus Tooltips now have the correct background color (`$col_gray_9`) and vertical padding
 
 ### 0.1.23 - 2022-10-28
 
