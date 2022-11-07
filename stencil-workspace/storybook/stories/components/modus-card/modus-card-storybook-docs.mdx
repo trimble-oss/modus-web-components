@@ -25,79 +25,18 @@ This component utilizes the slot element, allowing you to render your own HTML i
 
 ### Properties
 
-<section class="properties">
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Type</th>
-        <th>Options</th>
-        <th>Default Value</th>
-        <th>Required</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>aria-label</td>
-        <td>The card's aria-label</td>
-        <td>string</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>height</td>
-        <td>The height of the card</td>
-        <td>string</td>
-        <td></td>
-        <td>'269px'</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>width</td>
-        <td>The width of the card</td>
-        <td>string</td>
-        <td></td>
-        <td>'240px'</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>background-color</td>
-        <td>The color of the card</td>
-        <td>string</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>border-radius</td>
-        <td>The radius for border of the card</td>
-        <td>string</td>
-        <td></td>
-        <td>'2px'</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>show-card-border</td>
-        <td>The radius for border of the card</td>
-        <td>boolean</td>
-        <td>true, false</td>
-        <td>true</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>show-shadow-on-hover</td>
-        <td>The shadow box on hover for the card</td>
-        <td>boolean</td>
-        <td>true, false</td>
-        <td>true</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+| Property            | Attribute              | Description                                                                            | Type      | Default     | Required     | 
+| ------------------- | ---------------------- | -------------------------------------------------------------------------------------- | --------- | ----------- | -----------  |
+| `ariaLabel`         | `aria-label`           | (optional) The card's aria-label.                                                      | `string`  | `undefined` |              |
+| `backgroundColor`   | `background-color`     | (optional) The color of the card.                                                      | `string`  | `undefined` |              |
+| `borderRadius`      | `border-radius`        | (optional) The border radius of the card.                                              | `string`  | `undefined` |              |
+| `height`            | `height`               | (optional) The height of the card.                                                     | `string`  | `'269px'`   |              |
+| `showCardBorder`    | `show-card-border`     | (optional) A flag that controls the display of border.                                 | `boolean` | `true`      |              |
+| `showShadowOnHover` | `show-shadow-on-hover` | (optional) A flag that controls the display of shadow box when the element is hovered. | `boolean` | `true`      |              |
+| `width`             | `width`                | (optional) The width of the card.                                                      | `string`  | `'240px'`   |              |
 
+
+----------------------------------------------
 ### Accessibility
 
 - Card gets an `aria-label` provided by the `aria-label` property input.

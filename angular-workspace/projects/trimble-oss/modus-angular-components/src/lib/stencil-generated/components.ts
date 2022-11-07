@@ -170,13 +170,13 @@ export declare interface ModusCard extends Components.ModusCard {}
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['ariaLabel', 'backgroundColor', 'borderRadius', 'height', 'showCardBorder', 'showShadowHover', 'width']
+  inputs: ['ariaLabel', 'backgroundColor', 'borderRadius', 'height', 'showCardBorder', 'showShadowOnHover', 'width']
 })
 @Component({
   selector: 'modus-card',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['ariaLabel', 'backgroundColor', 'borderRadius', 'height', 'showCardBorder', 'showShadowHover', 'width']
+  inputs: ['ariaLabel', 'backgroundColor', 'borderRadius', 'height', 'showCardBorder', 'showShadowOnHover', 'width']
 })
 export class ModusCard {
   protected el: HTMLElement;
@@ -813,13 +813,13 @@ export declare interface ModusTabs extends Components.ModusTabs {
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['ariaLabel', 'size', 'tabs']
+  inputs: ['ariaLabel', 'fullWidth', 'size', 'tabs']
 })
 @Component({
   selector: 'modus-tabs',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['ariaLabel', 'size', 'tabs']
+  inputs: ['ariaLabel', 'fullWidth', 'size', 'tabs']
 })
 export class ModusTabs {
   protected el: HTMLElement;

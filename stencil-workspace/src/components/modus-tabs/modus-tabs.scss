@@ -5,6 +5,7 @@
   flex-direction: row;
   font-family: $primary-font;
   justify-content: flex-start;
+  width: 100%;
 
   &.medium {
     height: 48px;
@@ -27,6 +28,10 @@
     text-transform: uppercase;
     text-wrap: none;
     user-select: none;
+    
+    &.resizable {
+      width: 100%;
+    }
 
     &.medium {
       font-size: $rem-14px;
