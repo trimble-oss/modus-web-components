@@ -42,9 +42,9 @@ describe('modus-card', () => {
       expect(flag.toString()).toEqual('true');
     });
   
-   it('should have flag "showShadowHover" set on true as default', async () => {
+   it('should have flag "showShadowOnHover" set on true as default', async () => {
      const modusCard = new ModusCard();
-     const flag = modusCard.showShadowHover;
+     const flag = modusCard.showShadowOnHover;
 
      expect(flag.toString()).toEqual('true');
    });

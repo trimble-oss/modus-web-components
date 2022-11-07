@@ -80,7 +80,7 @@ describe('modus-card', () => {
      expect(computedStyle['backgroundColor']).toEqual('rgb(255, 0, 0)');
    });
   
-    it('should remove class "shadow" when showShadowHover flag is set on "false"' , async () => {
+    it('should remove class "shadow" when showShadowOnHover flag is set on "false"', async () => {
       const page = await newE2EPage();
 
       await page.setContent('<modus-card></modus-card>');
@@ -88,7 +88,7 @@ describe('modus-card', () => {
       const element = await page.find('modus-card >>> article');
       expect(element).toHaveClass('shadow');
 
-      component.setProperty('showShadowHover', 'false');
+      component.setProperty('showShadowOnHover', 'false');
       await page.waitForChanges();
       expect(element).not.toHaveClass('shadow');
     });

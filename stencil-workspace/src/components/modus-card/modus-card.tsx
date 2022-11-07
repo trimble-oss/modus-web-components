@@ -15,15 +15,23 @@ export class ModusCard {
 
   /** (optional) The width of the card. */
   @Prop() width = '240px';
+
+  /** (optional) The color of the card. */
   @Prop() backgroundColor: string;
+
+  /** (optional) The border radius of the card. */
   @Prop() borderRadius: string;
+
+  /** (optional) A flag that controls the display of border. */
   @Prop() showCardBorder = true;
-  @Prop() showShadowHover = true;
+
+  /** (optional) A flag that controls the display of shadow box when the element is hovered. */
+  @Prop() showShadowOnHover = true;
 
   render(): unknown {
     return (
       <article
-        class={`${this.showShadowHover ? 'shadow' : ''} ${this.showCardBorder ? 'card-border' : ''}  `}
+        class={`${this.showShadowOnHover ? 'shadow' : ''} ${this.showCardBorder ? 'card-border' : ''}  `}
         aria-label={this.ariaLabel}
         style={{
           'height': this.height,

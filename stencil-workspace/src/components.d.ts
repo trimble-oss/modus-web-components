@@ -112,14 +112,26 @@ export namespace Components {
           * (optional) The card's aria-label.
          */
         "ariaLabel": string;
+        /**
+          * (optional) The color of the card.
+         */
         "backgroundColor": string;
+        /**
+          * (optional) The border radius of the card.
+         */
         "borderRadius": string;
         /**
           * (optional) The height of the card.
          */
         "height": string;
+        /**
+          * (optional) A flag that controls the display of border.
+         */
         "showCardBorder": boolean;
-        "showShadowHover": boolean;
+        /**
+          * (optional) A flag that controls the display of shadow box when the element is hovered.
+         */
+        "showShadowOnHover": boolean;
         /**
           * (optional) The width of the card.
          */
@@ -1290,14 +1302,26 @@ declare namespace LocalJSX {
           * (optional) The card's aria-label.
          */
         "ariaLabel"?: string;
+        /**
+          * (optional) The color of the card.
+         */
         "backgroundColor"?: string;
+        /**
+          * (optional) The border radius of the card.
+         */
         "borderRadius"?: string;
         /**
           * (optional) The height of the card.
          */
         "height"?: string;
+        /**
+          * (optional) A flag that controls the display of border.
+         */
         "showCardBorder"?: boolean;
-        "showShadowHover"?: boolean;
+        /**
+          * (optional) A flag that controls the display of shadow box when the element is hovered.
+         */
+        "showShadowOnHover"?: boolean;
         /**
           * (optional) The width of the card.
          */
