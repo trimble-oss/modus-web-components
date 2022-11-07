@@ -21,8 +21,7 @@
   "files": [
     "dist/",
     "loader/",
-    "README.md",
-    "SUPPORT.md"
+    "README.md"
   ],
   "scripts": {
     "build": "stencil build --docs",
