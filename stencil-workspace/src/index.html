@@ -21,19 +21,27 @@
             display: block;
             margin-top: 30px;
         }
-        /* :root{
-        --modus-body-bg: black;
-        --modus-body-color: white;
+        /* :root,
+[data-mwc-theme='light'],
+[data-mwc-theme='dark'],
+modus-checkbox{
+          --modus-checkbox-bg:green !important;
         } */
+
+        body{
+          --modus-checkbox-bg:yellow !important;
+
+        }
 
     </style>
   </head>
   <body>
 <div style="padding:10px;">
-  <modus-button color="primary" style="position: sticky;top:5;" id="toggle">Toggle theme</modus-button>
+  <modus-button color="primary" style="position: sticky;top:0;z-index:1000; padding: 10px;" id="toggle">Toggle theme</modus-button>
+  <modus-button color="primary" style="position: sticky;top:0;z-index:1000; padding: 10px;" id="reset">Reset theme</modus-button>
 
   <div>
-    <modus-button color="primary" id="toggle_accordion-item">Toggle Accordion theme</modus-button>
+    <modus-button color="primary" style="padding: 10px;" id="toggle_accordion-item">Toggle Accordion theme</modus-button>
   </div>
   <div>
     <modus-accordion >
@@ -46,7 +54,7 @@
   </div>
 
   <div>
-    <modus-button color="primary" id="toggle_alert">Toggle Alerts theme</modus-button>
+    <modus-button color="primary" style="padding: 10px;" id="toggle_alert">Toggle Alerts theme</modus-button>
   </div>
   <div>
     <modus-alert message="Info alert (default)"></modus-alert>
@@ -58,7 +66,7 @@
     <modus-alert message="Warning alert" type="warning"></modus-alert>
   </div>
   <div>
-    <modus-button color="primary" id="toggle_badge">Toggle Badges theme</modus-button>
+    <modus-button color="primary" id="toggle_badge" style="padding: 10px;">Toggle Badges theme</modus-button>
   </div>
   <div>
     <modus-badge>Default</modus-badge>
@@ -79,14 +87,14 @@
   </div>
 
   <div>
-    <modus-button color="primary" id="toggle_breadcrumb">Toggle Buttons theme</modus-button>
+    <modus-button color="primary" id="toggle_breadcrumb" style="padding: 10px;">Toggle Buttons theme</modus-button>
   </div>
   <div>
     <modus-breadcrumb></modus-breadcrumb>
   </div>
 
   <div>
-    <modus-button color="primary" id="toggle_button">Toggle Buttons theme</modus-button>
+    <modus-button color="primary" id="toggle_button" style="padding: 10px;">Toggle Buttons theme</modus-button>
   </div>
   <div>
     <modus-button color="primary">Primary</modus-button>
@@ -106,7 +114,7 @@
   </div>
 
   <div>
-    <modus-button color="primary" id="toggle_checkbox">Toggle Checkbox theme</modus-button>
+    <modus-button color="primary" id="toggle_checkbox" style="padding: 10px;">Toggle Checkbox theme</modus-button>
   </div>
   <div>
     <modus-checkbox></modus-checkbox>
@@ -118,7 +126,7 @@
   </div>
 
   <div>
-    <modus-button color="primary" id="toggle_card">Toggle Card theme</modus-button>
+    <modus-button color="primary" id="toggle_card" style="padding: 10px;">Toggle Card theme</modus-button>
   </div>
   <div>
     <modus-card>
@@ -131,7 +139,7 @@
     </modus-card>
   </div>
   <div>
-    <modus-button color="primary" id="toggle_chip">Toggle Chip theme</modus-button>
+    <modus-button color="primary" id="toggle_chip" style="padding: 10px;">Toggle Chip theme</modus-button>
   </div>
   <div>
     <modus-chip
@@ -169,6 +177,43 @@
 
     <modus-chip show-checkmark size="small" value="Pets OK"></modus-chip>
   </div>
+
+  <div>
+    <modus-button color="primary" id="toggle_tree-view--tree-view-item" style="padding: 10px;">Toggle Content tree theme</modus-button>
+  </div>
+  <div>
+    <modus-tree-view style="width:400px;"
+    checkbox-selection="true" class="hydrated">
+      <modus-tree-view-item node-id="1" label="Inbox" class="hydrated">
+        <svg
+          slot="itemIcon"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          height="16"
+          width="16"
+          viewBox="0 0 32 32">
+          <path
+            d="M28.79 12.39A1 1 0 0 0 28 12h-2V9c0-.55-.45-1-1-1h-9.59l-1.7-1.71C13.52 6.11 13.27 6 13 6H4c-.55 0-1 .45-1 1v17c0 .04.02.07.02.11.01.05.02.11.04.16.02.09.06.17.1.25.02.03.02.06.05.09.01.01.03.02.04.03.07.08.15.14.23.19.04.03.06.05.1.07.13.06.27.1.42.1h21c.13 0 .25-.03.36-.07.04-.02.07-.04.1-.06.07-.04.14-.08.2-.13.03-.03.06-.06.09-.1.05-.05.09-.11.12-.18a.31.31 0 0 0 .06-.13c.01-.02.03-.04.03-.07l3-11c.09-.3.02-.62-.17-.87zM5 8h7.59l1.7 1.71c.19.18.44.29.71.29h9v2H7c-.45 0-.85.3-.96.74L5 16.53V8z"></path>
+        </svg>
+        <modus-tree-view-item
+          node-id="2"
+          label="Personal"
+          class="hydrated" draggable-item droppable-item></modus-tree-view-item>
+        <modus-tree-view-item
+          node-id="3"
+          label="Work"
+          class="hydrated" draggable-item droppable-item></modus-tree-view-item>
+        <modus-tree-view-item
+          node-id="4"
+          label="Social"
+          class="hydrated" draggable-item droppable-item></modus-tree-view-item>
+        <modus-tree-view-item
+          node-id="5"
+          label="More ..."
+          class="hydrated" draggable-item droppable-item></modus-tree-view-item>
+      </modus-tree-view-item>
+    </modus-tree-view>
+  </div>
 </div>
   </body>
   <script>
@@ -176,15 +221,30 @@
         document.body.setAttribute('data-mwc-theme',  document.body.getAttribute('data-mwc-theme') === 'dark' ? 'light' : 'dark');
     });
 
+    document.querySelector('#reset').addEventListener('buttonClick', () => {
+        document.body.removeAttribute('data-mwc-theme');
+    });
+
+    function updateTheme(c){
+    Array.from(document.querySelectorAll(`modus-${c}`)).map(i => {
+          i.setAttribute('data-mwc-theme',  i.getAttribute('data-mwc-theme') === 'dark' ? 'light' : 'dark');
+        });
+    }
+
     Array.from(document.querySelectorAll('modus-button'))
     .filter(b => b.id !== 'toggle' && b.id.startsWith('toggle'))
     .map(b => b.id.split('_')[1])
     .forEach((c) => {
       document.querySelector(`#toggle_${c}`).addEventListener('buttonClick', () => {
-        Array.from(document.querySelectorAll(`modus-${c}`)).map(i => {
-          i.setAttribute('data-mwc-theme',  i.getAttribute('data-mwc-theme') === 'dark' ? 'light' : 'dark');
-        });
-    });
+        if(c.includes('--')){
+          c.split('--').forEach(d => {
+            updateTheme(d);
+          });
+        }
+        else
+            updateTheme(c);
+      });
+
     });
 
     const modusBreadcrumb = document.querySelector('modus-breadcrumb');

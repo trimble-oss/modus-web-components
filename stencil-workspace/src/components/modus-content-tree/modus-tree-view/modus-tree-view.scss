@@ -1,3 +1,5 @@
+@import './../modus-tree-view-item.vars';
+
 .drag-content {
   cursor: grabbing !important;
   left: 0;
@@ -7,17 +9,18 @@
   z-index: 99999;
 
   &.drop-allow {
-    outline: 2px dashed $col_blue !important;
+    outline: 2px dashed $modus-tree-view-item-drag-allow !important;
   }
 
   &.drop-block {
-    outline: 2px dashed $col_red_light !important;
+    outline: 2px dashed $modus-tree-view-item-drag-error !important;
   }
 
   .tree-item {
     align-items: center;
-    background-color: $col_white;
-    border: $rem-1px solid $col_gray_0;
+    background-color: $modus-tree-view-item-bg;
+    border: $rem-1px solid $modus-tree-view-item-border-color;
+    color: $modus-tree-view-item-color;
     display: flex;
     font-family: $primary-font;
     font-size: $rem-16px;
