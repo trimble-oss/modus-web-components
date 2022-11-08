@@ -49,13 +49,10 @@ $btn-borderless-active: (
     'color': #004470,
   ),
 );
-
 $modus-btn-borderless-bg: var(--modus-btn-bg, transparent) !default;
 $modus-btn-borderless-color: var(--modus-btn-color, map-get($theme-colors, 'primary')) !default;
-
 $modus-btn-borderless-hover-bg: var(--modus-btn-hover-bg, map-get($btn-borderless-hover, 'primary', 'bg')) !default;
 $modus-btn-borderless-hover-color: var(--modus-btn-hover-color, map-get($btn-borderless-hover, 'primary', 'color')) !default;
-
 $modus-btn-borderless-active-bg: var(--modus-btn-active-bg, map-get($btn-borderless-active, 'primary', 'bg')) !default;
 $modus-btn-borderless-active-color: var(--modus-btn-active-color, map-get($btn-borderless-active, 'primary', 'color')) !default;
 
