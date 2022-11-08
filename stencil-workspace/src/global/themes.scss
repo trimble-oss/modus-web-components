@@ -4,7 +4,7 @@
   --modus-black: #000;
   --modus-white: #fff;
   --modus-link-color: #217cbb;
-  --modus-highlight-blue:#217cbb;
+  --modus-highlight-blue: #217cbb;
 
   // Variants
   --modus-primary: #0063a3;
@@ -127,26 +127,26 @@
   // Content Tree
   --modus-tree-view-item-bg: var(--modus-white);
   --modus-tree-view-item-border-color: #e0e1e9;
-  --modus-tree-view-item-color:#252a2e;
+  --modus-tree-view-item-color: #252a2e;
 
   // Hover
   --modus-tree-view-item-hover-bg: #e0e1e9;
   --modus-tree-view-item-hover-border-color: var(--modus-tree-view-item-hover-bg);
-  --modus-tree-view-item-hover-color:var(--modus-tree-view-item-color);
+  --modus-tree-view-item-hover-color: var(--modus-tree-view-item-color);
 
   // Selected
-  --modus-tree-view-item-selected-bg: #dcedf9
+  --modus-tree-view-item-selected-bg: #dcedf9;
   --modus-tree-view-item-selected-border-color: var(--modus-tree-view-item-selected-bg);
-  --modus-tree-view-item-selected-color:var(--modus-tree-view-item-color);
+  --modus-tree-view-item-selected-color: var(--modus-tree-view-item-color);
 
   // Disabled
   --modus-tree-view-item-disabled-bg: var(--modus-tree-view-item-bg);
   --modus-tree-view-item-disabled-border-color: var(--modus-tree-view-item-border);
-  --modus-tree-view-item-disabled-color:#b7b9c3;
+  --modus-tree-view-item-disabled-color: #b7b9c3;
 }
 
 [data-mwc-theme='dark'] {
-  --modus-highlight-blue:#019aeb;
+  --modus-highlight-blue: #019aeb;
 
   // Variants
   --modus-primary: #019aeb;
@@ -263,22 +263,22 @@
   // Content Tree
   --modus-tree-view-item-bg: #171c1e;
   --modus-tree-view-item-border-color: #464b52;
-  --modus-tree-view-item-color:var(--modus-white);
+  --modus-tree-view-item-color: var(--modus-white);
 
   // Hover
   --modus-tree-view-item-hover-bg: #464b52;
   --modus-tree-view-item-hover-border-color: var(--modus-tree-view-item-hover-bg);
-  --modus-tree-view-item-hover-color:var(--modus-tree-view-item-color);
+  --modus-tree-view-item-hover-color: var(--modus-tree-view-item-color);
 
   // Selected
   --modus-tree-view-item-selected-bg: #1a4c67;
   --modus-tree-view-item-selected-border-color: #019aeb;
-  --modus-tree-view-item-selected-color:var(--modus-tree-view-item-color);
+  --modus-tree-view-item-selected-color: var(--modus-tree-view-item-color);
 
   // Disabled
   --modus-tree-view-item-disabled-bg: #171c1e;
   --modus-tree-view-item-disabled-border-color: var(--modus-tree-view-item-border);
-  --modus-tree-view-item-disabled-color:rgba(241,241,246,.3);
+  --modus-tree-view-item-disabled-color: rgba(241, 241, 246, 0.3);
 }
 
 modus-accordion-item {
@@ -465,7 +465,7 @@ modus-chip {
 }
 
 modus-tree-view,
-modus-tree-view-item{
+modus-tree-view-item {
   // Indicator
   --modus-tree-view-item-selected-indicator-color: var(--modus-highlight-blue);
   --modus-tree-view-item-drag-border-color: var(--modus-highlight-blue);

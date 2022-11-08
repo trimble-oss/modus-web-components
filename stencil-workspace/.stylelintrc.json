@@ -3,7 +3,6 @@
   "rules": {
     "alpha-value-notation": null,
     "color-function-notation": null,
-    "custom-property-no-missing-var-function": null,
     "max-line-length": null,
     "no-descending-specificity": null,
     "number-leading-zero": null,
