@@ -1,5 +1,7 @@
+@import './modus-file-dropzone.vars';
+
 .modus-file-dropzone {
-  color: $col_trimble_gray;
+  color: $modus-file-upload-dropzone-label;
   display: flex;
   flex-direction: column;
   font-family: $primary-font;
@@ -26,10 +28,10 @@
 
   .dropzone {
     align-items: center;
-    background-color: $col_white;
-    border: $rem-1px dashed $col_trimble_gray;
+    background-color: $modus-file-upload-dropzone-bg;
+    border: $rem-1px dashed $modus-file-upload-dropzone-border-color;
     border-radius: $rem-4px;
-    color: $col_gray_6;
+    color: $modus-file-upload-dropzone-color;
     display: flex;
     flex-direction: column;
     font-weight: $font-weight-semi-bold;
@@ -37,31 +39,30 @@
     padding: $rem-12px $rem-16px;
 
     .browse {
-      color: $col_trimble_blue;
+      color: $modus-file-upload-dropzone-browse-color;
 
       &:hover {
-        color: $col_trimble_blue_dark;
         cursor: pointer;
       }
     }
 
     &.highlight {
-      background-color: $col_blue_pale;
-      border: $rem-1px solid $col_trimble_blue;
-      color: $col_trimble_blue;
+      background-color: $modus-file-upload-dropzone-highlight-bg;
+      border-color: $modus-file-upload-dropzone-highlight-border-color;
+      color: $modus-file-upload-dropzone-highlight-color;
 
       svg {
-        fill: $col_trimble_blue;
+        fill: $modus-file-upload-dropzone-highlight-color;
       }
     }
 
     &.error {
-      background-color: $col_red_pale;
-      border-color: $col_trimble_red;
-      color: $col_trimble_red;
+      background-color: $modus-file-upload-dropzone-error-bg;
+      border-color: $modus-file-upload-dropzone-error-border-color;
+      color: $modus-file-upload-dropzone-error-color;
 
       svg {
-        fill: $col_trimble_red;
+        fill: $modus-file-upload-dropzone-error-color;
       }
     }
 
@@ -72,7 +73,7 @@
     }
 
     svg {
-      fill: $col_gray_6;
+      fill: $modus-file-upload-dropzone-color;
       margin-bottom: $rem-4px;
     }
   }

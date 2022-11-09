@@ -1,7 +1,11 @@
+@import './modus-list-item.vars';
+
 li {
   align-items: center;
-  background-color: $col_white;
-  border: 1px solid $col_gray_0;
+  background-color: $modus-list-item-bg;
+  border: 1px solid $modus-list-item-border-color;
+  color: $modus-list-item-color;
+  fill: $modus-list-item-color;
   display: flex;
   font-family: $primary-font;
   font-size: $rem-16px;
@@ -19,7 +23,10 @@ li {
   }
 
   &:hover {
-    background-color: $col_gray_0;
+    background-color: $modus-list-item-hover-bg;
+    border: 1px solid $modus-list-item-hover-border-color;
+    color: $modus-list-item-hover-color;
+    fill: $modus-list-item-hover-color;
   }
 
   &.small {
@@ -32,13 +39,16 @@ li {
   }
 
   &.disabled {
-    background-color: $col_gray_1;
-    border-color: $col_gray_1;
-    opacity: .7;
+    background-color: $modus-list-item-disabled-bg;
+    border: 1px solid $modus-list-item-disabled-border-color;
+    color: $modus-list-item-disabled-color;
+    fill: $modus-list-item-disabled-color;
   }
 
   &.selected {
-    background-color: $col_blue_pale;
-    border-color: $col_blue_pale;
+    background-color: $modus-list-item-selected-bg;
+    border: 1px solid $modus-list-item-selected-border-color;
+    color: $modus-list-item-selected-color;
+    fill: $modus-list-item-selected-color;
   }
 }

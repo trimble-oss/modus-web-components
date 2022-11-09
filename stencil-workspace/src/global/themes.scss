@@ -124,25 +124,41 @@
   --modus-chip-outline-active-color: #252a2e;
   --modus-chip-outline-active-border-color: #217cbb;
 
-  // Content Tree
-  --modus-tree-view-item-bg: var(--modus-white);
-  --modus-tree-view-item-border-color: #e0e1e9;
-  --modus-tree-view-item-color: #252a2e;
+  // Used in content tree, list, dropdown list items
+  --modus-group-item-bg: var(--modus-white);
+  --modus-group-item-border-color: #e0e1e9;
+  --modus-group-item-color: #252a2e;
 
   // Hover
-  --modus-tree-view-item-hover-bg: #e0e1e9;
-  --modus-tree-view-item-hover-border-color: var(--modus-tree-view-item-hover-bg);
-  --modus-tree-view-item-hover-color: var(--modus-tree-view-item-color);
+  --modus-group-item-hover-bg: #e0e1e9;
+  --modus-group-item-hover-border-color: var(--modus-group-item-hover-bg);
+  --modus-group-item-hover-color: var(--modus-group-item-color);
 
   // Selected
-  --modus-tree-view-item-selected-bg: #dcedf9;
-  --modus-tree-view-item-selected-border-color: var(--modus-tree-view-item-selected-bg);
-  --modus-tree-view-item-selected-color: var(--modus-tree-view-item-color);
+  --modus-group-item-selected-bg: #dcedf9;
+  --modus-group-item-selected-border-color: var(--modus-group-item-selected-bg);
+  --modus-group-item-selected-color: var(--modus-group-item-color);
 
   // Disabled
-  --modus-tree-view-item-disabled-bg: var(--modus-tree-view-item-bg);
-  --modus-tree-view-item-disabled-border-color: var(--modus-tree-view-item-border);
-  --modus-tree-view-item-disabled-color: #b7b9c3;
+  --modus-group-item-disabled-bg: var(--modus-group-item-bg);
+  --modus-group-item-disabled-border-color: var(--modus-group-item-border-color);
+  --modus-group-item-disabled-color: #b7b9c3;
+
+  // File upload dropzone
+  --modus-file-upload-dropzone-bg: #f1f1f6cc;
+  --modus-file-upload-dropzone-border-color: #6a6e79;
+  --modus-file-upload-dropzone-color: #6a6e79;
+  --modus-file-upload-dropzone-browse-color: #0063a3;
+
+  // Highlight
+  --modus-file-upload-dropzone-highlight-bg: #dcedf9;
+  --modus-file-upload-dropzone-highlight-border-color: #0063a3;
+  --modus-file-upload-dropzone-highlight-color: #0063a3;
+
+  // Error
+  --modus-file-upload-dropzone-error-bg: #fbd4d7;
+  --modus-file-upload-dropzone-error-border-color: #ab1f26;
+  --modus-file-upload-dropzone-error-color: #ab1f26;
 }
 
 [data-mwc-theme='dark'] {
@@ -260,25 +276,46 @@
   --modus-chip-outline-active-border-color: #019aeb;
   --modus-chip-outline-active-color: #cbcdd6;
 
-  // Content Tree
-  --modus-tree-view-item-bg: #171c1e;
-  --modus-tree-view-item-border-color: #464b52;
-  --modus-tree-view-item-color: var(--modus-white);
+  // Used in content tree, list and dropdown
+  --modus-group-item-bg: #171c1e;
+  --modus-group-item-border-color: #464b52;
+  --modus-group-item-color: var(--modus-white);
 
   // Hover
-  --modus-tree-view-item-hover-bg: #464b52;
-  --modus-tree-view-item-hover-border-color: var(--modus-tree-view-item-hover-bg);
-  --modus-tree-view-item-hover-color: var(--modus-tree-view-item-color);
+  --modus-group-item-hover-bg: #464b52;
+  --modus-group-item-hover-border-color: var(--modus-group-item-hover-bg);
+  --modus-group-item-hover-color: var(--modus-group-item-color);
 
   // Selected
-  --modus-tree-view-item-selected-bg: #1a4c67;
-  --modus-tree-view-item-selected-border-color: #019aeb;
-  --modus-tree-view-item-selected-color: var(--modus-tree-view-item-color);
+  --modus-group-item-selected-bg: #1a4c67;
+  --modus-group-item-selected-border-color: #019aeb;
+  --modus-group-item-selected-color: var(--modus-group-item-color);
 
   // Disabled
-  --modus-tree-view-item-disabled-bg: #171c1e;
-  --modus-tree-view-item-disabled-border-color: var(--modus-tree-view-item-border);
-  --modus-tree-view-item-disabled-color: rgba(241, 241, 246, 0.3);
+  --modus-group-item-disabled-bg: #171c1e;
+  --modus-group-item-disabled-border-color: var(--modus-group-item-border-color);
+  --modus-group-item-disabled-color: #fff6;
+
+  // File upload dropzone
+  --modus-file-upload-dropzone-bg: #252a2e66;
+  --modus-file-upload-dropzone-border-color: #6a6e79;
+  --modus-file-upload-dropzone-color: var(--modus-white);
+  --modus-file-upload-dropzone-browse-color: #019aeb;
+
+  // Disabled
+  --modus-file-upload-dropzone-disabled-bg: #252a2e;
+  --modus-file-upload-dropzone-disabled-border-color: var(--modus-file-upload-dropzone-border-color);
+  --modus-file-upload-dropzone-disabled-color: var(--modus-file-upload-dropzone-color);
+
+  // Highlight
+  --modus-file-upload-dropzone-highlight-bg: #019aeb33;
+  --modus-file-upload-dropzone-highlight-border-color: #0063a3;
+  --modus-file-upload-dropzone-highlight-color: var(--modus-file-upload-dropzone-color);
+
+  // Error
+  --modus-file-upload-dropzone-error-bg: #da212c33;
+  --modus-file-upload-dropzone-error-border-color: #da212c;
+  --modus-file-upload-dropzone-error-color: var(--modus-file-upload-dropzone-color);
 }
 
 modus-accordion-item {
@@ -466,8 +503,48 @@ modus-chip {
 
 modus-tree-view,
 modus-tree-view-item {
+  --modus-tree-view-item-bg: var(--modus-group-item-bg);
+  --modus-tree-view-item-border-color: var(--modus-group-item-border-color);
+  --modus-tree-view-item-color: var(--modus-group-item-color);
+
+  // Hover
+  --modus-tree-view-item-hover-bg: var(--modus-group-item-hover-bg);
+  --modus-tree-view-item-hover-border-color: var(--modus-group-item-hover-border-color);
+  --modus-tree-view-item-hover-color: var(--modus-group-item-hover-color);
+
+  // Selected
+  --modus-tree-view-item-selected-bg: var(--modus-group-item-selected-bg);
+  --modus-tree-view-item-selected-border-color: var(--modus-group-item-selected-border-color);
+  --modus-tree-view-item-selected-color: var(--modus-group-item-selected-color);
+
+  // Disabled
+  --modus-tree-view-item-disabled-bg: var(--modus-group-item-disabled-bg);
+  --modus-tree-view-item-disabled-border-color: var(--modus-group-item-disabled-border-color);
+  --modus-tree-view-item-disabled-color: var(--modus-group-item-disabled-color);
+
   // Indicator
   --modus-tree-view-item-selected-indicator-color: var(--modus-highlight-blue);
   --modus-tree-view-item-drag-border-color: var(--modus-highlight-blue);
   --modus-tree-view-item-drag-error-border-color: var(--modus-danger);
+}
+
+modus-list-item {
+  --modus-list-item-bg: var(--modus-group-item-bg);
+  --modus-list-item-border-color: var(--modus-group-item-border-color);
+  --modus-list-item-color: var(--modus-group-item-color);
+
+  // Hover
+  --modus-list-item-hover-bg: var(--modus-group-item-hover-bg);
+  --modus-list-item-hover-border-color: var(--modus-group-item-hover-border-color);
+  --modus-list-item-hover-color: var(--modus-group-item-hover-color);
+
+  // Selected
+  --modus-list-item-selected-bg: var(--modus-group-item-selected-bg);
+  --modus-list-item-selected-border-color: var(--modus-group-item-selected-border-color);
+  --modus-list-item-selected-color: var(--modus-group-item-selected-color);
+
+  // Disabled
+  --modus-list-item-disabled-bg: var(--modus-group-item-disabled-bg);
+  --modus-list-item-disabled-border-color: var(--modus-group-item-disabled-border-color);
+  --modus-list-item-disabled-color: var(--modus-group-item-disabled-color);
 }
