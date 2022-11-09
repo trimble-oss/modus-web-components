@@ -4,6 +4,7 @@
   --modus-black: #000;
   --modus-white: #fff;
   --modus-link-color: #217cbb;
+  --modus-highlight-blue: #217cbb;
 
   // Variants
   --modus-primary: #0063a3;
@@ -122,9 +123,31 @@
   --modus-chip-outline-active-bg: #dcedf9;
   --modus-chip-outline-active-color: #252a2e;
   --modus-chip-outline-active-border-color: #217cbb;
+
+  // Content Tree
+  --modus-tree-view-item-bg: var(--modus-white);
+  --modus-tree-view-item-border-color: #e0e1e9;
+  --modus-tree-view-item-color: #252a2e;
+
+  // Hover
+  --modus-tree-view-item-hover-bg: #e0e1e9;
+  --modus-tree-view-item-hover-border-color: var(--modus-tree-view-item-hover-bg);
+  --modus-tree-view-item-hover-color: var(--modus-tree-view-item-color);
+
+  // Selected
+  --modus-tree-view-item-selected-bg: #dcedf9;
+  --modus-tree-view-item-selected-border-color: var(--modus-tree-view-item-selected-bg);
+  --modus-tree-view-item-selected-color: var(--modus-tree-view-item-color);
+
+  // Disabled
+  --modus-tree-view-item-disabled-bg: var(--modus-tree-view-item-bg);
+  --modus-tree-view-item-disabled-border-color: var(--modus-tree-view-item-border);
+  --modus-tree-view-item-disabled-color: #b7b9c3;
 }
 
 [data-mwc-theme='dark'] {
+  --modus-highlight-blue: #019aeb;
+
   // Variants
   --modus-primary: #019aeb;
   --modus-secondary: #6a6e79;
@@ -236,6 +259,26 @@
   --modus-chip-outline-active-bg: rgba(0, 79, 131, 0.5);
   --modus-chip-outline-active-border-color: #019aeb;
   --modus-chip-outline-active-color: #cbcdd6;
+
+  // Content Tree
+  --modus-tree-view-item-bg: #171c1e;
+  --modus-tree-view-item-border-color: #464b52;
+  --modus-tree-view-item-color: var(--modus-white);
+
+  // Hover
+  --modus-tree-view-item-hover-bg: #464b52;
+  --modus-tree-view-item-hover-border-color: var(--modus-tree-view-item-hover-bg);
+  --modus-tree-view-item-hover-color: var(--modus-tree-view-item-color);
+
+  // Selected
+  --modus-tree-view-item-selected-bg: #1a4c67;
+  --modus-tree-view-item-selected-border-color: #019aeb;
+  --modus-tree-view-item-selected-color: var(--modus-tree-view-item-color);
+
+  // Disabled
+  --modus-tree-view-item-disabled-bg: #171c1e;
+  --modus-tree-view-item-disabled-border-color: var(--modus-tree-view-item-border);
+  --modus-tree-view-item-disabled-color: rgba(241, 241, 246, 0.3);
 }
 
 modus-accordion-item {
@@ -345,7 +388,18 @@ modus-button[button-style='borderless'] {
   --modus-btn-active-bg: var(--modus-btn-outline-primary-hover-bg);
 }
 
-modus-checkbox {
+modus-card {
+  --modus-card-bg: var(--modus-body-bg);
+  --modus-card-color: var(--modus-body-color);
+  --modus-card-border-color: var(--modus-border-color);
+}
+
+// Note:
+// CSS variables defined in component selectors ex: 'modus-checkbox {...}' won't work well if the component is nested inside another component, ex: checkbox in content tree
+// Possible workarounds: Add CSS variables at the root or add it to the respective component css file, ex: components/modus-checkbox/modus-checkbox.vars.scss
+:root,
+[data-mwc-theme='light'],
+[data-mwc-theme='dark'] {
   --modus-checkbox-bg: var(--modus-custom-control-bg);
   --modus-checkbox-focus-border-color: var(--modus-checkbox-active-color);
   --modus-checkbox-border-color: #90939f;
@@ -361,21 +415,10 @@ modus-checkbox {
   --modus-checkbox-indeterminate-border-color: var(--modus-checkbox-active-color);
 }
 
-modus-card {
-  --modus-card-bg: var(--modus-body-bg);
-  --modus-card-color: var(--modus-body-color);
-  --modus-card-border-color: var(--modus-border-color);
-}
-
 modus-chip {
   --modus-chip-bg: var(--modus-tertiary);
   --modus-chip-border-color: var(--modus-tertiary);
   --modus-chip-color: #353a40;
-
-  // Hover
-  --modus-chip-hover-bg: #dbdce2;
-  --modus-chip-hover-border-color: #dbdce2;
-  --modus-chip-hover-color: var(--modus-chip-color);
 
   // Hover
   --modus-chip-hover-bg: #dbdce2;
@@ -419,4 +462,12 @@ modus-chip {
     --modus-chip-active-border-color: var(--modus-chip-outline-active-border-color);
     --modus-chip-active-color: var(--modus-chip-outline-active-color);
   }
+}
+
+modus-tree-view,
+modus-tree-view-item {
+  // Indicator
+  --modus-tree-view-item-selected-indicator-color: var(--modus-highlight-blue);
+  --modus-tree-view-item-drag-border-color: var(--modus-highlight-blue);
+  --modus-tree-view-item-drag-error-border-color: var(--modus-danger);
 }
