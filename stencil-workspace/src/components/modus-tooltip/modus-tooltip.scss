@@ -6,12 +6,12 @@
   position: relative;
 
   .text {
-    background-color: $col_trimble_gray;
+    background-color: $col_gray_9;
     border-radius: $rem-2px;
     color: $col_white;
     font-size: $rem-12px;
     opacity: 0;
-    padding: $rem-6px $rem-8px;
+    padding: $rem-4px $rem-8px;
     position: absolute;
     text-align: center;
     transition: opacity 0.3s ease-in-out;
@@ -33,7 +33,7 @@
     }
 
     .text::after {
-      border-color: $col_trimble_gray transparent transparent transparent;
+      border-color: $col_gray_9 transparent transparent transparent;
       left: 50%;
       margin-left: -0.313rem;
       top: 100%;
@@ -46,7 +46,7 @@
     }
 
     .text::after {
-      border-color: transparent transparent $col_trimble_gray transparent;
+      border-color: transparent transparent $col_gray_9 transparent;
       bottom: 100%;
       left: 50%;
       margin-left: -0.313rem;
@@ -59,7 +59,7 @@
     }
 
     .text::after {
-      border-color: transparent transparent transparent $col_trimble_gray;
+      border-color: transparent transparent transparent $col_gray_9;
       left: 100%;
       margin-top: -0.313rem;
       top: 50%;
@@ -72,7 +72,7 @@
     }
 
     .text::after {
-      border-color: transparent $col_trimble_gray transparent transparent;
+      border-color: transparent $col_gray_9 transparent transparent;
       margin-top: -0.313rem;
       right: 100%;
       top: 50%;

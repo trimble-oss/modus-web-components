@@ -10,7 +10,7 @@ describe('modus-card', () => {
     expect(root).toEqualHtml(`
       <modus-card>
         <mock:shadow-root>
-          <article style='height: 269px; width: 240px;'>
+          <article class="card-border shadow" style='height: 269px; width: 240px;'>
             <slot></slot>
           </article>
         </mock:shadow-root>
@@ -26,7 +26,7 @@ describe('modus-card', () => {
     expect(root).toEqualHtml(`
       <modus-card>
         <mock:shadow-root>
-          <article style='height: 269px; width: 240px;'>
+          <article class="card-border shadow" style='height: 269px; width: 240px;'>
             <slot></slot>
           </article>
         </mock:shadow-root>
@@ -34,4 +34,19 @@ describe('modus-card', () => {
       </modus-card>
     `);
   });
+
+    it('should have flag "showCardBorder" set on true as default', async () => {
+      const modusCard = new ModusCard();
+      const flag = modusCard.showCardBorder;
+
+      expect(flag.toString()).toEqual('true');
+    });
+  
+   it('should have flag "showShadowOnHover" set on true as default', async () => {
+     const modusCard = new ModusCard();
+     const flag = modusCard.showShadowOnHover;
+
+     expect(flag.toString()).toEqual('true');
+   });
+  
 });

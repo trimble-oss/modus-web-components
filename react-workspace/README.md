@@ -16,14 +16,7 @@
 
 The [Trimble Modus Design System](https://modus.trimble.com/) describes the UX that Trimble wants to provide in its UI across its many applications. The benefits of using Modus include rapid prototyping, development efficiency, and UX consistency.
 
-Modus includes:
-
-- Typography
-- Colors
-- Rules
-- Elements (components)
-
-This library provides Modus Elements as web components. Web components are reusable, encapsulated UI elements that are framework agnostic (can be implemented in any site). The modus-web-components library was built using the latest UX specs from Figma. Releases follow the [semantic versioning 2.0.0](https://semver.org/) spec.
+Modus Web Components are reusable, encapsulated UI elements that are framework agnostic (can be implemented in any site). The modus-web-components library was built using the latest UX specs from Figma. Releases follow the [semantic versioning 2.0.0](https://semver.org/) spec.
 
 # Looking for documentation?
 
@@ -31,7 +24,7 @@ You can check out <https://modus-web-components.trimble.com> for the library's l
 
 # Installing Modus Web Components
 
-Check out the Storybook site's [Getting Started page](https://modus-web-components.trimble.com/?path=/docs/introduction-getting-started--page).
+Check out the [Getting Started page](https://modus-web-components.trimble.com/?path=/docs/introduction-getting-started--page).
 
 # Contributing
 
