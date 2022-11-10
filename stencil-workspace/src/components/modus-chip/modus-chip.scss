@@ -5,6 +5,7 @@
   background-color: $modus-chip-bg;
   border: $rem-1px solid $modus-chip-border-color;
   border-radius: $rem-16px;
+  color: $modus-chip-color;
   cursor: pointer;
   display: inline-flex;
   flex-direction: row;
@@ -13,7 +14,6 @@
   justify-content: center;
   padding: $rem-2px $rem-4px;
   vertical-align: middle;
-  color: $modus-chip-color;
 
   &.no-left-icon {
     padding-left: $rem-16px;

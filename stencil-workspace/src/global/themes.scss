@@ -360,28 +360,39 @@ modus-button[disabled] {
   --modus-btn-disabled-border-color: ;
 }
 
+@mixin button-variant($color) {
+  @if $color == 'tertiary' {
+    --modus-btn-color: var(--modus-#{$color}-color, --modus-white);
+    --modus-btn-hover-color: var(--modus-#{$color}-color, --modus-white);
+    --modus-btn-active-color: var(--modus-#{$color}-color, --modus-white);
+  } @else {
+    --modus-btn-color: var(--modus-white);
+    --modus-btn-hover-color: var(--modus-white);
+    --modus-btn-active-color: var(--modus-white);
+  }
+
+  --modus-btn-bg: var(--modus-#{$color});
+  --modus-btn-border-color: var(--modus-#{$color});
+
+  // Hover
+  --modus-btn-hover-bg: var(--modus-btn-#{$color}-hover);
+  --modus-btn-hover-border-color: var(--modus-btn-#{$color}-hover);
+
+  // Active
+  --modus-btn-active-bg: var(--modus-btn-#{$color}-active);
+  --modus-btn-active-border-color: var(--modus-btn-#{$color}-active);
+}
+
 @each $color in $btn-theme-colors {
-  modus-button[color='#{$color}'] {
-    @if $color == 'tertiary' {
-      --modus-btn-color: var(--modus-#{$color}-color, --modus-white);
-      --modus-btn-hover-color: var(--modus-#{$color}-color, --modus-white);
-      --modus-btn-active-color: var(--modus-#{$color}-color, --modus-white);
-    } @else {
-      --modus-btn-color: var(--modus-white);
-      --modus-btn-hover-color: var(--modus-white);
-      --modus-btn-active-color: var(--modus-white);
+  @if $color == 'primary' {
+    modus-button:not([color]),
+    modus-button[color='#{$color}'] {
+      @include button-variant($color);
     }
-
-    --modus-btn-bg: var(--modus-#{$color});
-    --modus-btn-border-color: var(--modus-#{$color});
-
-    // Hover
-    --modus-btn-hover-bg: var(--modus-btn-#{$color}-hover);
-    --modus-btn-hover-border-color: var(--modus-btn-#{$color}-hover);
-
-    // Active
-    --modus-btn-active-bg: var(--modus-btn-#{$color}-active);
-    --modus-btn-active-border-color: var(--modus-btn-#{$color}-active);
+  } @else {
+    modus-button[color='#{$color}'] {
+      @include button-variant($color);
+    }
   }
 }
 

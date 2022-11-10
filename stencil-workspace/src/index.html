@@ -206,9 +206,49 @@
   <div>
     <modus-button color="primary" id="toggle_dropdown" style="padding: 10px;">Toggle Dropdown</modus-button>
   </div>
-  <div>
-    <modus-dropdown toggle-element-id="toggleElement">
-      <modus-button color="primary" id="toggleElement" slot="dropdownToggle">Dropdown</modus-button>
+  <div style="display: flex; flex-wrap: wrap; margin-top: 1rem;">
+    <modus-dropdown toggle-element-id="toggleElement1">
+      <modus-button id="toggleElement1" slot="dropdownToggle">Dropdown</modus-button>
+      <modus-list slot="dropdownList">
+        <modus-list-item size="condensed">Item 1</modus-list-item>
+        <modus-list-item size="condensed">Item 2</modus-list-item>
+        <modus-list-item size="condensed">Item 3</modus-list-item>
+      </modus-list>
+    </modus-dropdown>
+    <modus-dropdown toggle-element-id="toggleElement2">
+      <modus-button color="secondary" id="toggleElement2" slot="dropdownToggle">Dropdown</modus-button>
+      <modus-list slot="dropdownList">
+        <modus-list-item size="condensed">Item 1</modus-list-item>
+        <modus-list-item size="condensed">Item 2</modus-list-item>
+        <modus-list-item size="condensed">Item 3</modus-list-item>
+      </modus-list>
+    </modus-dropdown>
+    <modus-dropdown toggle-element-id="toggleElement3">
+      <modus-button color="tertiary" id="toggleElement3" slot="dropdownToggle">Dropdown</modus-button>
+      <modus-list slot="dropdownList">
+        <modus-list-item size="condensed">Item 1</modus-list-item>
+        <modus-list-item size="condensed">Item 2</modus-list-item>
+        <modus-list-item size="condensed">Item 3</modus-list-item>
+      </modus-list>
+    </modus-dropdown>
+    <modus-dropdown toggle-element-id="toggleElement4">
+      <modus-button button-style="borderless" id="toggleElement4" slot="dropdownToggle">Dropdown</modus-button>
+      <modus-list slot="dropdownList">
+        <modus-list-item size="condensed">Item 1</modus-list-item>
+        <modus-list-item size="condensed">Item 2</modus-list-item>
+        <modus-list-item size="condensed">Item 3</modus-list-item>
+      </modus-list>
+    </modus-dropdown>
+    <modus-dropdown toggle-element-id="toggleElement5">
+      <modus-button button-style="outline" color="primary" id="toggleElement5" slot="dropdownToggle">Dropdown</modus-button>
+      <modus-list slot="dropdownList">
+        <modus-list-item size="condensed">Item 1</modus-list-item>
+        <modus-list-item size="condensed">Item 2</modus-list-item>
+        <modus-list-item size="condensed">Item 3</modus-list-item>
+      </modus-list>
+    </modus-dropdown>
+    <modus-dropdown toggle-element-id="toggleElement6">
+      <modus-button button-style="outline" color="secondary" id="toggleElement6" slot="dropdownToggle">Dropdown</modus-button>
       <modus-list slot="dropdownList">
         <modus-list-item size="condensed">Item 1</modus-list-item>
         <modus-list-item size="condensed">Item 2</modus-list-item>
