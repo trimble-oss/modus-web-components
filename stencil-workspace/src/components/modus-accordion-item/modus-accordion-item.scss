@@ -1,13 +1,13 @@
 @import './modus-accordion-item.vars';
 
 .accordion-item {
+  background-color: $modus-accordion-bg;
   border-bottom: $rem-1px solid $modus-accordion-border-color;
+  color: $modus-accordion-color;
   display: flex;
   flex-direction: column;
   font-family: $primary-font;
   position: relative;
-  background-color: $modus-accordion-bg;
-  color: $modus-accordion-color;
 
   .header {
     align-items: center;
