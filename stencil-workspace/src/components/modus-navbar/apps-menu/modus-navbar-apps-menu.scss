@@ -3,9 +3,9 @@
 
   align-items: flex-start;
   cursor: default;
-  width: max-content;
-  overflow-y: auto;
   max-height: 605px;
+  overflow-y: auto;
+  width: max-content;
 
   &.reverse {
     left: 0;
@@ -56,12 +56,12 @@
   }
 
   .category {
+    border-top: 1px solid $col_gray_0;
     color: $col_gray_8;
     font-size: $rem-12px;
     font-weight: $font-weight-semi-bold;
     margin-top: $rem-8px;
-    padding-top: $rem-18px;
     padding-bottom: $rem-10px;
-    border-top: 1px solid $col_gray_0;
+    padding-top: $rem-18px;
   }
 }
