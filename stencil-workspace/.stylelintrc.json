@@ -1,11 +1,13 @@
 {
   "extends": ["stylelint-config-standard-scss", "stylelint-config-prettier"],
+  "plugins": ["stylelint-order"],
   "rules": {
     "alpha-value-notation": null,
     "color-function-notation": null,
     "max-line-length": null,
     "no-descending-specificity": null,
     "number-leading-zero": null,
+    "order/properties-alphabetical-order": true,
     "property-no-vendor-prefix": null,
     "selector-class-pattern": "^[a-z][a-z0-9\\-]*[a-z0-9]$",
     "selector-not-notation": null
