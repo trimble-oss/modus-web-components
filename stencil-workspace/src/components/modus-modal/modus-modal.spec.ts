@@ -13,7 +13,7 @@ describe('modus-modal', () => {
           <div class="hidden modus-modal overlay" role="dialog" style="z-index: 1;">
             <div class="content">
               <div class="header">
-                <div class="icon-close" role="button" aria-label="Close">
+                <div role="button" aria-label="Close">
                   <svg class="icon-close" fill="none" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0)">
                       <path d="M19 7.30929L17.6907 6L12.5 11.1907L7.30929 6L6 7.30929L11.1907 12.5L6 17.6907L7.30929 19L12.5 13.8093L17.6907 19L19 17.6907L13.8093 12.5L19 7.30929Z" fill="#6A6976"></path>

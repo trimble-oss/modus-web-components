@@ -21,8 +21,8 @@
     background-color: $modus-tree-view-item-disabled-bg !important;
     border-color: $modus-tree-view-item-disabled-border-color !important;
     color: $modus-tree-view-item-disabled-color !important;
-    fill: $modus-tree-view-item-disabled-color !important;
     cursor: default !important;
+    fill: $modus-tree-view-item-disabled-color !important;
 
     svg path {
       fill: $modus-tree-view-item-disabled-color !important;
@@ -43,9 +43,9 @@
 
   &:hover {
     background-color: $modus-tree-view-item-hover-bg;
+    border-color: $modus-tree-view-item-hover-border-color;
     color: $modus-tree-view-item-hover-color;
     fill: $modus-tree-view-item-hover-color;
-    border-color: $modus-tree-view-item-hover-border-color;
 
     svg path {
       fill: $modus-tree-view-item-hover-color;

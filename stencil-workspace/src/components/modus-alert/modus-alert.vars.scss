@@ -23,5 +23,5 @@ $modus-alert-danger-border-color: var(--modus-alert-danger-border-color, #da212c
 $modus-alert-warning-border-color: var(--modus-alert-warning-border-color, #e49325) !default;
 
 // Close button
-$modus-alert-close: var(--modus-alert-close, #252a2e) !default;
-$modus-alert-close-hover: #f1f1f6 !default;
+$modus-alert-close-color: var(--modus-alert-close-color, #252a2e) !default;
+$modus-alert-close-hover-opacity: var(--modus-alert-close-hover-opacity, 0.5) !default;

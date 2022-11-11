@@ -24,10 +24,7 @@ export default {
 
 const Template = () => html`
   <modus-button id="btn-modal" color="primary">Open modal</modus-button>
-  <modus-modal
-    header-text="Modal title"
-    primary-button-text="Save changes"
-    secondary-button-text="Sweet!">
+  <modus-modal header-text="Modal title" primary-button-text="Save changes" secondary-button-text="Sweet!">
     <p>Woo-hoo, you're reading this text in a modal!</p>
   </modus-modal>
   ${setScript()}
@@ -38,6 +35,11 @@ const setScript = () => {
   const tag = document.createElement('script');
   tag.innerHTML = `
     document.querySelector('#btn-modal').addEventListener('buttonClick', () => {
+      document.body.setAttribute('data-mwc-theme', localStorage.getItem("data-mwc-theme") || 'light');
+
+      window.addEventListener('storage', () => {
+        document.body.setAttribute('data-mwc-theme', localStorage.getItem("data-mwc-theme") || 'light');
+      });
       document.querySelector('modus-modal').open();
     });
   `;

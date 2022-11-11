@@ -39,6 +39,9 @@ export const parameters = {
       const isDark = useDarkMode();
       React.useEffect(() => {
         document.body?.setAttribute('data-mwc-theme', isDark ? 'dark' : 'light');
+
+        localStorage.setItem('data-mwc-theme', isDark ? 'dark' : 'light');
+
       }, [isDark, useDarkMode]);
 
       return (

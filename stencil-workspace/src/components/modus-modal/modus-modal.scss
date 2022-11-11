@@ -1,6 +1,8 @@
+@import './modus-modal.vars';
+
 .modus-modal {
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: $modus-modal-backdrop-bg;
   font-size: $rem-14px;
   height: 100%;
   justify-content: center;
@@ -19,10 +21,12 @@
   }
 
   .content {
-    background-color: $col_white;
-    border: 1px solid rgba(0,0,0,.2);
+    background-color: $modus-modal-bg;
+    border: 1px solid $modus-modal-border-color;
     border-radius: $rem-2px;
+    color: $modus-modal-color;
     display: flex;
+    fill: $modus-modal-color;
     flex-direction: column;
     justify-content: center;
     max-width: 650px;
@@ -32,7 +36,7 @@
 
     .header {
       align-items: center;
-      border-bottom: 1px solid #e0e1e9;
+      border-bottom: 1px solid $modus-modal-header-border-color;
       display: flex;
       font-size: $rem-16px;
       font-weight: $font-weight-semi-bold;
@@ -42,12 +46,12 @@
       .icon-close {
         cursor: pointer;
 
-        &:hover svg path {
-          fill: $col_gray_6;
+        path {
+          fill: $modus-modal-close-color;
         }
 
-        &:active svg path {
-          fill: $col_trimble_gray;
+        &:hover path {
+          opacity: $modus-modal-close-hover-opacity;
         }
       }
     }
@@ -59,7 +63,7 @@
 
     .footer {
       align-items: center;
-      border-top: 1px solid #e0e1e9;
+      border-top: 1px solid $modus-modal-footer-border-color;
       display: flex;
       height: 64px;
       justify-content: flex-end;

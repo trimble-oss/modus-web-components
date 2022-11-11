@@ -37,24 +37,28 @@ $btn-outline-active: (
 );
 
 // Borderless
+$modus-btn-borderless-bg: var(--modus-btn-text-primary-bg, transparent) !default;
+$modus-btn-borderless-color: var(--modus-btn-text-primary-color, map-get($theme-colors, 'primary')) !default;
+
+// Hover
 $btn-borderless-hover: (
   'primary': (
     'bg': rgba(0, 99, 163, 0.2),
     'color': #0082d6,
   ),
 );
+$modus-btn-borderless-hover-bg: var(--modus-btn-text-primary-hover-bg, map-get($btn-borderless-hover, 'primary', 'bg')) !default;
+$modus-btn-borderless-hover-color: var(--modus-btn-text-primary-hover-color, map-get($btn-borderless-hover, 'primary', 'color')) !default;
+
+// Active
 $btn-borderless-active: (
   'primary': (
     'bg': rgba(0, 99, 163, 0.3),
     'color': #004470,
   ),
 );
-$modus-btn-borderless-bg: var(--modus-btn-bg, transparent) !default;
-$modus-btn-borderless-color: var(--modus-btn-color, map-get($theme-colors, 'primary')) !default;
-$modus-btn-borderless-hover-bg: var(--modus-btn-hover-bg, map-get($btn-borderless-hover, 'primary', 'bg')) !default;
-$modus-btn-borderless-hover-color: var(--modus-btn-hover-color, map-get($btn-borderless-hover, 'primary', 'color')) !default;
-$modus-btn-borderless-active-bg: var(--modus-btn-active-bg, map-get($btn-borderless-active, 'primary', 'bg')) !default;
-$modus-btn-borderless-active-color: var(--modus-btn-active-color, map-get($btn-borderless-active, 'primary', 'color')) !default;
+$modus-btn-borderless-active-bg: var(--modus-btn-text-primary-active-bg, map-get($btn-borderless-active, 'primary', 'bg')) !default;
+$modus-btn-borderless-active-color: var(--modus-btn-text-primary-active-color, map-get($btn-borderless-active, 'primary', 'color')) !default;
 
 // Disabled
 $modus-btn-disabled-color: var(--modus-btn-disabled-color) !default;

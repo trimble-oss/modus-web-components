@@ -41,6 +41,11 @@ const setNavbar = () => {
           initials: 'MU',
           username: 'Modus User',
         };
+        document.body.setAttribute('data-mwc-theme', localStorage.getItem("data-mwc-theme") || 'light');
+
+        window.addEventListener('storage', () => {
+          document.body.setAttribute('data-mwc-theme', localStorage.getItem("data-mwc-theme") || 'light');
+        });
   `;
 
   return tag;
