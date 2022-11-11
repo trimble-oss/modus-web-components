@@ -22,7 +22,6 @@
     border-color: $modus-tree-view-item-disabled-border-color !important;
     color: $modus-tree-view-item-disabled-color !important;
     fill: $modus-tree-view-item-disabled-color !important;
-    opacity: 0.7 !important;
     cursor: default !important;
 
     svg path {
@@ -78,8 +77,8 @@
     padding-left: $rem-8px;
     padding-right: $rem-8px;
     text-overflow: ellipsis;
-    width: 100%;
     white-space: nowrap;
+    width: 100%;
   }
 
   &.large {

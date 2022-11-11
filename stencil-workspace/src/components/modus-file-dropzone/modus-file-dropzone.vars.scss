@@ -1,0 +1,20 @@
+// File upload dropzone
+$modus-file-upload-dropzone-bg: var(--modus-file-upload-dropzone-bg, rgba(#f1f1f6, 0.8)) !default;
+$modus-file-upload-dropzone-border-color: var(--modus-file-upload-dropzone-border-color, #6a6e79) !default;
+$modus-file-upload-dropzone-color: var(--modus-file-upload-dropzone-color, #6a6e79) !default;
+
+// Browse link
+$modus-file-upload-dropzone-browse-color: var(--modus-file-upload-dropzone-browse-color, #0063a3) !default;
+
+// Label
+$modus-file-upload-dropzone-label: var(--modus-body-color, $col_trimble_gray) !default;
+
+// Highlight
+$modus-file-upload-dropzone-highlight-bg: var(--modus-file-upload-dropzone-highlight-bg, #dcedf9) !default;
+$modus-file-upload-dropzone-highlight-border-color: var(--modus-file-upload-dropzone-highlight-border-color, #0063a3) !default;
+$modus-file-upload-dropzone-highlight-color: var(--modus-file-upload-dropzone-highlight-color, #0063a3) !default;
+
+// Error
+$modus-file-upload-dropzone-error-bg: var(--modus-file-upload-dropzone-error-bg, #fbd4d7) !default;
+$modus-file-upload-dropzone-error-border-color: var(--modus-file-upload-dropzone-error-border-color, #ab1f26) !default;
+$modus-file-upload-dropzone-error-color: var(--modus-file-upload-dropzone-error-color, #ab1f26) !default;

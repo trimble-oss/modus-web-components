@@ -1,15 +1,15 @@
 // Default theme colors
 $btn-theme-colors: map-remove($theme-colors, 'success', 'warning', 'yellow', 'dark');
 $btn-hover-colors: (
-  'primary': #217cbb,
+  'primary': #0082d6,
   'secondary': #838793,
   'tertiary': #e8e8ec,
   'danger': #e44a53,
 );
 $btn-active-colors: (
-  'primary': #004f83,
-  'secondary': #585c65,
-  'tertiary': #b7b9c3,
+  'primary': #00548a,
+  'secondary': #5e626b,
+  'tertiary': #bdbfcb,
   'danger': #c41e28,
 );
 

@@ -17,8 +17,7 @@
   "types": "./dist/index.d.ts",
   "files": [
     "dist/",
-    "../README.md",
-    "../SUPPORT.md"
+    "README.md"
   ],
   "scripts": {
     "build": "npm run compile",

@@ -1,6 +1,6 @@
 {
   "name": "@trimble-oss/modus-web-components",
-  "version": "0.1.22",
+  "version": "0.1.23",
   "description": "Trimble Modus Web Component Library",
   "homepage": "https://modus-web-components.trimble.com/",
   "bugs": {
@@ -21,8 +21,7 @@
   "files": [
     "dist/",
     "loader/",
-    "README.md",
-    "SUPPORT.md"
+    "README.md"
   ],
   "scripts": {
     "build": "stencil build --docs",
@@ -32,7 +31,7 @@
     "generate": "stencil generate",
     "lint": "npm run lint-js && npm run lint-css",
     "lint-js": "eslint src/** --no-error-on-unmatched-pattern",
-    "lint-css": "stylelint src/**/*.scss",
+    "lint-css": "stylelint src/**/*.scss --fix",
     "prettier": "prettier --write storybook/stories/**/*.*",
     "full": "npm ci && npm run lint && npm run copy-docs && npm run build && npm run test && npm run ci-storybook",
     "ci-storybook": "cd storybook && npm ci && npm run build-storybook",
@@ -40,7 +39,7 @@
     "copy-docs": "copyfiles -f ../README.md ../SUPPORT.md ./"
   },
   "dependencies": {
-    "@stencil/core": "^2.18.1"
+    "@stencil/core": "^2.19.2"
   },
   "devDependencies": {
     "@stencil/angular-output-target": "^0.4.0",
@@ -59,11 +58,12 @@
     "jest": "^27.0.3",
     "jest-cli": "^27.5.1",
     "prettier": "^2.7.1",
-    "puppeteer": "^19.0.0",
+    "puppeteer": "^19.2.0",
     "puppeteer-core": "^19.0.0",
-    "stylelint": "^14.13.0",
-    "stylelint-config-prettier": "^9.0.3",
-    "stylelint-config-standard-scss": "^5.0.0",
+    "stylelint": "14.14.1",
+    "stylelint-config-prettier": "9.0.4",
+    "stylelint-config-standard-scss": "6.1.0",
+    "stylelint-order": "5.0.0",
     "typescript": "^4.8.4"
   },
   "engines": {

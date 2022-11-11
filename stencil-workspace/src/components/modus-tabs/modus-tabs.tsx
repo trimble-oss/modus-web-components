@@ -13,6 +13,9 @@ export interface Tab {
   shadow: true,
 })
 export class ModusTabs {
+  /* (optional) Whether the Tabs take up the full width of their parent container. */
+  @Prop() fullWidth = false;
+
   /* (optional) The tabs' aria-label. */
   @Prop() ariaLabel: string;
 
@@ -50,7 +53,7 @@ export class ModusTabs {
     const tabs = this.tabs.map((tab: Tab) => {
       return (
         <div
-          class={`tab ${tab.active ? 'active' : ''} ${this.classBySize.get(this.size)}`}
+          class={`tab ${tab.active ? 'active' : ''} ${this.classBySize.get(this.size)} ${this.fullWidth ? 'resizable' : ''} `}
           onClick={() => this.handleTabChange(tab.id)}
           onKeyDown={(event) => this.handleKeyDown(event, tab.id)}
           tabIndex={0}>

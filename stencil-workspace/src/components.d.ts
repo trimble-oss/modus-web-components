@@ -113,9 +113,25 @@ export namespace Components {
          */
         "ariaLabel": string;
         /**
+          * (optional) The color of the card.
+         */
+        "backgroundColor": string;
+        /**
+          * (optional) The border radius of the card.
+         */
+        "borderRadius": string;
+        /**
           * (optional) The height of the card.
          */
         "height": string;
+        /**
+          * (optional) A flag that controls the display of border.
+         */
+        "showCardBorder": boolean;
+        /**
+          * (optional) A flag that controls the display of shadow box when the element is hovered.
+         */
+        "showShadowOnHover": boolean;
         /**
           * (optional) The width of the card.
          */
@@ -645,6 +661,7 @@ export namespace Components {
     }
     interface ModusTabs {
         "ariaLabel": string;
+        "fullWidth": boolean;
         "size": 'medium' | 'small';
         /**
           * The tabs to render.
@@ -1287,9 +1304,25 @@ declare namespace LocalJSX {
          */
         "ariaLabel"?: string;
         /**
+          * (optional) The color of the card.
+         */
+        "backgroundColor"?: string;
+        /**
+          * (optional) The border radius of the card.
+         */
+        "borderRadius"?: string;
+        /**
           * (optional) The height of the card.
          */
         "height"?: string;
+        /**
+          * (optional) A flag that controls the display of border.
+         */
+        "showCardBorder"?: boolean;
+        /**
+          * (optional) A flag that controls the display of shadow box when the element is hovered.
+         */
+        "showShadowOnHover"?: boolean;
         /**
           * (optional) The width of the card.
          */
@@ -1902,6 +1935,7 @@ declare namespace LocalJSX {
     }
     interface ModusTabs {
         "ariaLabel"?: string;
+        "fullWidth"?: boolean;
         /**
           * An event that fires on tab change.
          */

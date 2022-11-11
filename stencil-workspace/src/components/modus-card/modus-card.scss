@@ -9,7 +9,11 @@ article {
   overflow: hidden;
   position: relative;
 
-  &:hover {
+  &.shadow:hover {
     box-shadow: $box-shadow-lg;
+  }
+
+  &.card-border {
+    border: $rem-1px solid $col_gray_light;
   }
 }

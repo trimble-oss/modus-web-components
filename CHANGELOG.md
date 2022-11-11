@@ -2,12 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
-View all releases at: https://github.com/trimble-oss/modus-web-components/releases/
+View all releases at: <https://github.com/trimble-oss/modus-web-components/releases/>
 
 ## Unreleased
 
 ### Added
 
+- Added `backgroundColor`and `borderRadius` props for `modus-card` component in order to customize `background-color` and `border-radius` 
+- Added `showCardBorder` and `showShadowOnHover` flags props for `modus-card` component in order to display or not border for card component and shadow box when component is hovered.
+
+## 0.1.24 - 2022-11-07
+
+### Fixed
+
+- Modus Tooltips now have the correct background color (`$col_gray_9`) and vertical padding
+
+## 0.1.23 - 2022-10-28
+
+### Added
+
+- Added optional property `fullWidth` for modus-tabs. Now component can be resizable from UI if `fullWidth` flag is set on true.
 - Added a theme toggler to the toolbar in storybook pages to switch between `light` and `dark` themes
 
 ## 0.1.22 - 2022-10-18

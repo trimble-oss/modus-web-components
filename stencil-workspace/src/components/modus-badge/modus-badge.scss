@@ -2,12 +2,10 @@
 
 div.badge {
   align-items: center;
-  border-radius: 2px;
-  display: inline-flex;
-
-  // Default color, size, and type
   background-color: $modus-badge-primary-bg;
+  border-radius: 2px;
   color: $modus-badge-primary-color;
+  display: inline-flex;
   font-family: $primary-font;
   font-size: $rem-12px;
   font-weight: $badge-font-weight;
