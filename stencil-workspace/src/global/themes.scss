@@ -204,6 +204,15 @@
 
   // Profile icon
   --modus-navbar-profile-icon-active-border-color: #d6d5db;
+
+  // Pagination
+  --modus-pagination-bg: transparent;
+  --modus-pagination-color: var(--modus-body-color);
+  --modus-pagination-chevron-color: #6a6e79;
+  --modus-pagination-hover-bg: #e0e1e9;
+  --modus-pagination-hover-color: var(--modus-body-color);
+  --modus-pagination-active-bg: #dcedf9;
+  --modus-pagination-active-color: #217cbb;
 }
 
 [data-mwc-theme='dark'] {
@@ -402,6 +411,14 @@
 
   // Profile icon
   --modus-navbar-profile-icon-active-border-color: #6a6e79;
+
+  // Pagination
+  --modus-pagination-color: #b7b9c3;
+  --modus-pagination-chevron-color: var(--modus-pagination-color);
+  --modus-pagination-hover-bg: #464b52;
+  --modus-pagination-hover-color: var(--modus-body-color);
+  --modus-pagination-active-bg: #019aeb;
+  --modus-pagination-active-color: #fff;
 }
 
 modus-accordion-item {
