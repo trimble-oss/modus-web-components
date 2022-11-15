@@ -517,11 +517,8 @@ modus-card {
 }
 
 // Note:
-// CSS variables defined in component selectors ex: 'modus-checkbox {...}' won't work well if the component is nested inside another component, ex: checkbox in content tree
-// Possible workarounds: Add CSS variables at the root or add it to the respective component css file, ex: components/modus-checkbox/modus-checkbox.vars.scss
-:root,
-[data-mwc-theme='light'],
-[data-mwc-theme='dark'] {
+// Workaround - CSS variables don't penetrate into nested components in shadow DOM, examples: checkbox in a Tree view item, buttons in Modal dialog, etc.
+@mixin modus-checkbox {
   --modus-checkbox-bg: var(--modus-custom-control-bg);
   --modus-checkbox-focus-border-color: var(--modus-checkbox-active-color);
   --modus-checkbox-border-color: #90939f;
@@ -535,6 +532,10 @@ modus-card {
   --modus-checkbox-indeterminate-color: var(--modus-checkbox-active-color);
   --modus-checkbox-indeterminate-bg-color: var(--modus-checkbox-active-color);
   --modus-checkbox-indeterminate-border-color: var(--modus-checkbox-active-color);
+}
+
+modus-checkbox {
+  @include modus-checkbox;
 }
 
 modus-chip {
@@ -611,6 +612,8 @@ modus-tree-view-item {
   --modus-tree-view-item-selected-indicator-color: var(--modus-highlight-blue);
   --modus-tree-view-item-drag-border-color: var(--modus-highlight-blue);
   --modus-tree-view-item-drag-error-border-color: var(--modus-danger);
+
+  @include modus-checkbox;
 }
 
 modus-list-item {
