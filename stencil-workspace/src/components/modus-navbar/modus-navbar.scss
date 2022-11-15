@@ -124,7 +124,7 @@ nav {
       }
 
       > :first-child:active {
-        border: $rem-4px solid $modus-navbar-profile-icon-active-border-color;
+        outline: $rem-4px solid $modus-navbar-profile-icon-active-border-color;
       }
 
       &:hover {
