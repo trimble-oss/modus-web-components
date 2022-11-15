@@ -66,45 +66,33 @@ button {
   // Solid variants
   &.style-fill {
     @each $color, $value in $btn-theme-colors {
-      &.color-#{$color} {
-        background-color: var(--modus-btn-bg, $value);
-        border-color: var(--modus-btn-border-color, $value);
+      $default-text-color: $white;
 
-        @if $color == 'tertiary' {
-          color: var(--modus-btn-color, $col_trimble_gray);
-          fill: var(--modus-btn-color, $col_trimble_gray);
-        } @else {
-          color: var(--modus-btn-color, $white);
-          fill: var(--modus-btn-color, $white);
-        }
+      @if $color == 'tertiary' {
+        $default-text-color: $col_trimble_gray;
+      }
+
+      &.color-#{$color} {
+        background-color: var(--modus-btn-#{$color}-bg, $value);
+        border-color: var(--modus-btn-#{$color}-border-color, $value);
+        color: var(--modus-btn-#{$color}-color, $default-text-color);
+        fill: var(--modus-btn-#{$color}-color, $default-text-color);
       }
 
       // Hover state
       &.color-#{$color}:hover:not([disabled]) {
-        background-color: var(--modus-btn-hover-bg, map-get($btn-hover-colors, $color));
-        border-color: var(--modus-btn-hover-border-color, map-get($btn-hover-colors, $color));
-
-        @if $color == 'tertiary' {
-          color: var(--modus-btn-hover-color, $col_trimble_gray);
-          fill: var(--modus-btn-hover-color, $col_trimble_gray);
-        } @else {
-          color: var(--modus-btn-hover-color, $white);
-          fill: var(--modus-btn-hover-color, $white);
-        }
+        background-color: var(--modus-btn-#{$color}-hover-bg, map-get($btn-hover-colors, $color));
+        border-color: var(--modus-btn-#{$color}-hover-border-color, map-get($btn-hover-colors, $color));
+        color: var(--modus-btn-#{$color}-hover-color, $default-text-color);
+        fill: var(--modus-btn-#{$color}-hover-color, $default-text-color);
       }
 
       // Active state
       &.color-#{$color}:active:not([disabled]) {
-        background-color: var(--modus-btn-active-bg, map-get($btn-active-colors, $color));
-        border-color: var(--modus-btn-active-border-color, map-get($btn-active-colors, $color));
-
-        @if $color == 'tertiary' {
-          color: var(--modus-btn-active-color, $col_trimble_gray);
-          fill: var(--modus-btn-active-color, $col_trimble_gray);
-        } @else {
-          color: var(--modus-btn-active-color, $white);
-          fill: var(--modus-btn-active-color, $white);
-        }
+        background-color: var(--modus-btn-#{$color}-active-bg, map-get($btn-active-colors, $color));
+        border-color: var(--modus-btn-#{$color}-active-border-color, map-get($btn-active-colors, $color));
+        color: var(--modus-btn-#{$color}-active-color, $default-text-color);
+        fill: var(--modus-btn-#{$color}-active-color, $default-text-color);
       }
     }
   }
@@ -117,26 +105,26 @@ button {
         $alias: 'secondary';
       }
       &.color-#{$alias} {
-        background-color: var(--modus-btn-bg, transparent);
-        border-color: var(--modus-btn-border-color, $value);
-        color: var(--modus-btn-color, $value);
-        fill: var(--modus-btn-color, $value);
+        background-color: var(--modus-btn-outline-#{$color}-bg, transparent);
+        border-color: var(--modus-btn-outline-#{$color}-border-color, $value);
+        color: var(--modus-btn-outline-#{$color}-color, $value);
+        fill: var(--modus-btn-outline-#{$color}-color, $value);
       }
 
       // Hover state
       &.color-#{$alias}:hover:not([disabled]) {
-        background-color: var(--modus-btn-hover-bg, map-get($btn-outline-hover, $color, 'bg'));
-        border-color: var(--modus-btn-hover-border-color, map-get($btn-outline-hover, $color, 'color'));
-        color: var(--modus-btn-hover-color, map-get($btn-outline-hover, $color, 'color'));
-        fill: var(--modus-btn-hover-color, map-get($btn-outline-hover, $color, 'color'));
+        background-color: var(--modus-btn-outline-#{$color}-hover-bg, map-get($btn-outline-hover, $color, 'bg'));
+        border-color: var(--modus-btn-outline-#{$color}-hover-border-color, map-get($btn-outline-hover, $color, 'color'));
+        color: var(--modus-btn-outline-#{$color}-hover-color, map-get($btn-outline-hover, $color, 'color'));
+        fill: var(--modus-btn-outline-#{$color}-hover-color, map-get($btn-outline-hover, $color, 'color'));
       }
 
       // Active state
       &.color-#{$alias}:active:not([disabled]) {
-        background-color: var(--modus-btn-active-bg, map-get($btn-outline-active, $color, 'bg'));
-        border-color: var(--modus-btn-active-border-color, map-get($btn-outline-active, $color, 'color'));
-        color: var(--modus-btn-active-color, map-get($btn-outline-active, $color, 'color'));
-        fill: var(--modus-btn-active-color, map-get($btn-outline-active, $color, 'color'));
+        background-color: var(--modus-btn-outline-#{$color}-active-bg, map-get($btn-outline-active, $color, 'bg'));
+        border-color: var(--modus-btn-outline-#{$color}-active-border-color, map-get($btn-outline-active, $color, 'color'));
+        color: var(--modus-btn-outline-#{$color}-active-color, map-get($btn-outline-active, $color, 'color'));
+        fill: var(--modus-btn-outline-#{$color}-active-color, map-get($btn-outline-active, $color, 'color'));
       }
     }
   }

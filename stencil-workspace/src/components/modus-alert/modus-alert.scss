@@ -118,25 +118,11 @@ div.alert {
     margin-left: auto;
 
     path {
-      fill: $modus-alert-close;
+      fill: $modus-alert-close-color;
     }
 
     &:hover {
-      g {
-        path {
-          fill: $modus-alert-close-hover, $col_gray_6;
-        }
-      }
-
-      opacity: 0.5;
-    }
-
-    &:active {
-      g {
-        path {
-          fill: $modus-alert-close;
-        }
-      }
+      opacity: $modus-alert-close-hover-opacity;
     }
   }
 }

@@ -23,6 +23,7 @@
   --modus-body-bg: var(--modus-white);
   --modus-body-color: #252a2e;
   --modus-border-color: #cbcdd6;
+  --modus-backdrop-bg: #252a2ebf;
 
   // Label
   --modus-label: #464b52;
@@ -92,10 +93,23 @@
   --modus-btn-outline-dark-active-color: var(--modus-btn-dark-active);
 
   // Text only Button variant
+  // Primary
   --modus-btn-text-primary-hover-bg: rgba(0, 99, 163, 0.2);
   --modus-btn-text-primary-hover-color: #0082d6;
   --modus-btn-text-primary-active-bg: rgba(0, 99, 163, 0.3);
   --modus-btn-text-primary-active-color: #004470;
+
+  // Dark
+  --modus-btn-text-dark-hover-bg: rgba(37, 42, 46, 0.2);
+  --modus-btn-text-dark-hover-color: #3c444a;
+  --modus-btn-text-dark-active-bg: rgba(37, 42, 46, 0.3);
+  --modus-btn-text-dark-active-color: #0e1012;
+
+  // Secondary
+  --modus-btn-text-secondary-hover-bg: rgba(106, 110, 121, 0.2);
+  --modus-btn-text-secondary-hover-color: #838793;
+  --modus-btn-text-secondary-active-bg: rgba(106, 110, 121, 0.3);
+  --modus-btn-text-secondary-active-color: #52555e;
 
   // Input controls
   --modus-custom-control-bg: var(--modus-body-bg);
@@ -159,6 +173,46 @@
   --modus-file-upload-dropzone-error-bg: #fbd4d7;
   --modus-file-upload-dropzone-error-border-color: #ab1f26;
   --modus-file-upload-dropzone-error-color: #ab1f26;
+
+  // Message
+  // Type - Info
+  --modus-message-info-bg: #dcedf9;
+  --modus-message-info-color: #0063a3;
+
+  // Type - Question
+  --modus-message-question-bg: #f1f1f6;
+  --modus-message-question-color: #6a6e79;
+
+  // Modal
+  --modus-modal-bg: #fff;
+  --modus-modal-border-color: rgba(0, 0, 0, 0.2);
+  --modus-modal-header-border-color: #e0e1e9;
+  --modus-modal-footer-border-color: #e0e1e9;
+
+  // Navbar
+  --modus-navbar-bg: var(--modus-body-bg);
+  --modus-navbar-brand-logo-filter: ;
+  --modus-navbar-icon-color: #252a2e;
+
+  // Hover
+  --modus-navbar-icon-hover-bg: #e0e1e9;
+  --modus-navbar-icon-hover-color: #3c444a;
+
+  // Active
+  --modus-navbar-icon-active-bg: #cbcdd6;
+  --modus-navbar-icon-active-color: #0e1012;
+
+  // Profile icon
+  --modus-navbar-profile-icon-active-border-color: #d6d5db;
+
+  // Pagination
+  --modus-pagination-bg: transparent;
+  --modus-pagination-color: var(--modus-body-color);
+  --modus-pagination-chevron-color: #6a6e79;
+  --modus-pagination-hover-bg: #e0e1e9;
+  --modus-pagination-hover-color: var(--modus-body-color);
+  --modus-pagination-active-bg: #dcedf9;
+  --modus-pagination-active-color: #217cbb;
 }
 
 [data-mwc-theme='dark'] {
@@ -181,13 +235,10 @@
   --modus-body-bg: #252a2e;
   --modus-body-color: #f1f1f6;
   --modus-border-color: #6a6e79;
+  --modus-backdrop-bg: #000000bf;
 
   // Label
   --modus-label: #b7b9c3;
-
-  // Alert
-  --modus-alert-close: #f1f1f6;
-  --modus-alert-close-hover: #f1f1f6;
 
   // Background
   --modus-alert-primary-bg: #019aeb80;
@@ -249,10 +300,23 @@
   --modus-btn-outline-dark-active-color: #e1e1ec;
 
   // Text only Button
+  // Primary
   --modus-btn-text-primary-hover-bg: rgba(1, 154, 235, 0.2);
   --modus-btn-text-primary-hover-color: #21b2fe;
   --modus-btn-text-primary-active-bg: rgba(1, 154, 235, 0.3);
   --modus-btn-text-primary-active-color: #20b2ff;
+
+  // Dark
+  --modus-btn-text-dark-hover-bg: rgba(241, 241, 246, 0.2);
+  --modus-btn-text-dark-hover-color: #fff;
+  --modus-btn-text-dark-active-bg: rgba(241, 241, 246, 0.3);
+  --modus-btn-text-dark-active-color: #d2d2e2;
+
+  // Secondary
+  --modus-btn-text-secondary-hover-bg: rgba(106, 110, 121, 0.2);
+  --modus-btn-text-secondary-hover-color: #838793;
+  --modus-btn-text-secondary-active-bg: rgba(106, 110, 121, 0.3);
+  --modus-btn-text-secondary-active-color: #52555e;
 
   // Input controls
   --modus-custom-control-bg: transparent;
@@ -316,16 +380,51 @@
   --modus-file-upload-dropzone-error-bg: #da212c33;
   --modus-file-upload-dropzone-error-border-color: #da212c;
   --modus-file-upload-dropzone-error-color: var(--modus-file-upload-dropzone-color);
+
+  // Message
+  // Type - Info
+  --modus-message-info-bg: rgba(1, 154, 235, 0.2);
+  --modus-message-info-color: #f1f1f6;
+
+  // Type - Question
+  --modus-message-question-bg: rgba(106, 110, 121, 0.2);
+  --modus-message-question-color: #f1f1f6;
+
+  // Modal
+  --modus-modal-bg: #353a40;
+  --modus-modal-border-color: #171c1e;
+  --modus-modal-header-border-color: #6a6e79;
+  --modus-modal-footer-border-color: #6a6e79;
+
+  // Navbar
+  --modus-navbar-bg: #171c1e;
+  --modus-navbar-brand-logo-filter: brightness(9999%) saturate(0);
+  --modus-navbar-icon-color: #fff;
+
+  // Hover
+  --modus-navbar-icon-hover-bg: #90939f;
+  --modus-navbar-icon-hover-color: var(--modus-navbar-icon-color);
+
+  // Active
+  --modus-navbar-icon-active-bg: #6a6e79;
+  --modus-navbar-icon-active-color: var(--modus-navbar-icon-color);
+
+  // Profile icon
+  --modus-navbar-profile-icon-active-border-color: #6a6e79;
+
+  // Pagination
+  --modus-pagination-color: #b7b9c3;
+  --modus-pagination-chevron-color: var(--modus-pagination-color);
+  --modus-pagination-hover-bg: #464b52;
+  --modus-pagination-hover-color: var(--modus-body-color);
+  --modus-pagination-active-bg: #019aeb;
+  --modus-pagination-active-color: #fff;
 }
 
 modus-accordion-item {
   --modus-accordion-bg: var(--modus-body-bg);
   --modus-accordion-color: var(--modus-body-color);
   --modus-accordion-border-color: var(--modus-border-color);
-}
-
-modus-alert {
-  --modus-alert-close: var(--modus-body-color);
 }
 
 modus-badge {
@@ -353,6 +452,7 @@ modus-breadcrumb {
 }
 
 $btn-theme-colors: 'primary', 'secondary', 'tertiary', 'danger';
+$btn-outline-variants: 'primary', 'dark';
 
 modus-button[disabled] {
   --modus-btn-disabled-color: ;
@@ -360,46 +460,52 @@ modus-button[disabled] {
   --modus-btn-disabled-border-color: ;
 }
 
-@mixin button-variant($color) {
-  @if $color == 'tertiary' {
-    --modus-btn-color: var(--modus-#{$color}-color, --modus-white);
-    --modus-btn-hover-color: var(--modus-#{$color}-color, --modus-white);
-    --modus-btn-active-color: var(--modus-#{$color}-color, --modus-white);
-  } @else {
-    --modus-btn-color: var(--modus-white);
-    --modus-btn-hover-color: var(--modus-white);
-    --modus-btn-active-color: var(--modus-white);
+@mixin button-variant($button-style, $color) {
+  @if $button-style == 'outline' {
+    --modus-btn-outline-#{$color}-bg: transparent;
+    --modus-btn-outline-#{$color}-color: var(--modus-#{$color});
+    --modus-btn-outline-#{$color}-border-color: var(--modus-#{$color});
+
+    // Hover
+    --modus-btn-outline-#{$color}-hover-border-color: var(--modus-btn-outline-#{$color}-hover-color);
+
+    // Active
+    --modus-btn-outline-#{$color}-active-border-color: var(--modus-btn-outline-#{$color}-active-color);
   }
 
-  --modus-btn-bg: var(--modus-#{$color});
-  --modus-btn-border-color: var(--modus-#{$color});
+  @if $button-style == 'borderless' {
+    --modus-btn-text-primary-bg: transparent;
+    --modus-btn-text-primary-color: var(--modus-primary);
+  }
 
-  // Hover
-  --modus-btn-hover-bg: var(--modus-btn-#{$color}-hover);
-  --modus-btn-hover-border-color: var(--modus-btn-#{$color}-hover);
+  @if $button-style == 'solid' {
+    --modus-btn-#{$color}-bg: var(--modus-#{$color});
+    --modus-btn-#{$color}-border-color: var(--modus-#{$color});
+    --modus-btn-#{$color}-color: if($color == 'tertiary', var(--modus-#{$color}-color), var(--modus-white));
 
-  // Active
-  --modus-btn-active-bg: var(--modus-btn-#{$color}-active);
-  --modus-btn-active-border-color: var(--modus-btn-#{$color}-active);
+    // Hover
+    --modus-btn-#{$color}-hover-bg: var(--modus-btn-#{$color}-hover);
+    --modus-btn-#{$color}-hover-border-color: var(--modus-btn-#{$color}-hover);
+    --modus-btn-#{$color}-hover-color: if($color == 'tertiary', var(--modus-#{$color}-color), var(--modus-white));
+
+    // Active
+    --modus-btn-#{$color}-active-bg: var(--modus-btn-#{$color}-active);
+    --modus-btn-#{$color}-active-border-color: var(--modus-btn-#{$color}-active);
+    --modus-btn-#{$color}-active-color: if($color == 'tertiary', var(--modus-#{$color}-color), var(--modus-white));
+  }
 }
 
 @each $color in $btn-theme-colors {
   @if $color == 'primary' {
     modus-button:not([color]),
     modus-button[color='#{$color}'] {
-      @include button-variant($color);
+      @include button-variant('solid', $color);
     }
   } @else {
     modus-button[color='#{$color}'] {
-      @include button-variant($color);
+      @include button-variant('solid', $color);
     }
   }
-}
-
-$btn-outline-variants: 'primary', 'dark';
-
-modus-button[button-style='outline'] {
-  --modus-btn-bg: transparent;
 }
 
 @each $color in $btn-outline-variants {
@@ -408,32 +514,17 @@ modus-button[button-style='outline'] {
     $alias: 'secondary';
   }
   modus-button[button-style='outline'][color='#{$alias}'] {
-    --modus-btn-color: var(--modus-#{$color});
-    --modus-btn-border-color: var(--modus-#{$color});
-
-    // Hover
-    --modus-btn-hover-color: var(--modus-btn-outline-#{$color}-hover-color);
-    --modus-btn-hover-bg: var(--modus-btn-outline-#{$color}-hover-bg);
-    --modus-btn-hover-border-color: var(--modus-btn-#{$color}-outline-hover-color);
-
-    // Active
-    --modus-btn-active-color: var(--modus-btn-outline-#{$color}-hover-color);
-    --modus-btn-active-bg: var(--modus-btn-outline-#{$color}-hover-bg);
-    --modus-btn-active-border-color: var(--modus-btn-#{$color}-outline-hover-color);
+    @include button-variant('outline', $color);
   }
 }
 
 modus-button[button-style='borderless'] {
-  --modus-btn-bg: transparent;
-  --modus-btn-color: var(--modus-primary);
+  @include button-variant('borderless', 'primary');
+}
 
-  // Hover
-  --modus-btn-hover-color: var(--modus-btn-outline-primary-hover-color);
-  --modus-btn-hover-bg: var(--modus-btn-outline-primary-hover-bg);
-
-  // Active
-  --modus-btn-active-color: var(--modus-btn-outline-primary-hover-color);
-  --modus-btn-active-bg: var(--modus-btn-outline-primary-hover-bg);
+modus-alert {
+  --modus-alert-close-color: var(--modus-body-color);
+  --modus-alert-close-hover-opacity: 0.5;
 }
 
 modus-card {
@@ -443,11 +534,8 @@ modus-card {
 }
 
 // Note:
-// CSS variables defined in component selectors ex: 'modus-checkbox {...}' won't work well if the component is nested inside another component, ex: checkbox in content tree
-// Possible workarounds: Add CSS variables at the root or add it to the respective component css file, ex: components/modus-checkbox/modus-checkbox.vars.scss
-:root,
-[data-mwc-theme='light'],
-[data-mwc-theme='dark'] {
+// Workaround - CSS variables don't penetrate into nested components in shadow DOM, examples: checkbox in a Tree view item, buttons in Modal dialog, etc.
+@mixin modus-checkbox {
   --modus-checkbox-bg: var(--modus-custom-control-bg);
   --modus-checkbox-focus-border-color: var(--modus-checkbox-active-color);
   --modus-checkbox-border-color: #90939f;
@@ -461,6 +549,10 @@ modus-card {
   --modus-checkbox-indeterminate-color: var(--modus-checkbox-active-color);
   --modus-checkbox-indeterminate-bg-color: var(--modus-checkbox-active-color);
   --modus-checkbox-indeterminate-border-color: var(--modus-checkbox-active-color);
+}
+
+modus-checkbox {
+  @include modus-checkbox;
 }
 
 modus-chip {
@@ -537,6 +629,8 @@ modus-tree-view-item {
   --modus-tree-view-item-selected-indicator-color: var(--modus-highlight-blue);
   --modus-tree-view-item-drag-border-color: var(--modus-highlight-blue);
   --modus-tree-view-item-drag-error-border-color: var(--modus-danger);
+
+  @include modus-checkbox;
 }
 
 modus-list-item {
@@ -558,4 +652,14 @@ modus-list-item {
   --modus-list-item-disabled-bg: var(--modus-group-item-disabled-bg);
   --modus-list-item-disabled-border-color: var(--modus-group-item-disabled-border-color);
   --modus-list-item-disabled-color: var(--modus-group-item-disabled-color);
+}
+
+modus-modal {
+  --modus-modal-color: var(--modus-body-color);
+  --modus-modal-backdrop-bg: var(--modus-backdrop-bg);
+  --modus-modal-close-color: var(--modus-body-color);
+  --modus-modal-close-hover-opacity: 0.75;
+
+  @include button-variant('outline', 'dark');
+  @include button-variant('solid', 'primary');
 }

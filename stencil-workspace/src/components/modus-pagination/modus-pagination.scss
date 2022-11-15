@@ -1,12 +1,19 @@
+@import './modus-pagination.vars';
+
 nav {
   align-items: center;
-  background-color: $col_white;
+  background-color: $modus-pagination-bg;
   border-radius: $rem-2px;
+  color: $modus-pagination-color;
   display: inline-flex;
   font-family: $primary-font;
   justify-content: center;
   user-select: none;
   width: 100%;
+
+  svg path {
+    fill: $modus-pagination-chevron-color;
+  }
 
   ol {
     align-items: center;
@@ -24,8 +31,8 @@ nav {
       min-width: min-content;
 
       &.active {
-        background-color: $col_blue_pale;
-        color: $col_blue_light;
+        background-color: $modus-pagination-active-bg;
+        color: $modus-pagination-active-color;
       }
 
       &.disabled {
@@ -38,7 +45,8 @@ nav {
 
       &.hoverable:not(.active) {
         &:hover {
-          background-color: $col_gray_1;
+          background-color: $modus-pagination-hover-bg;
+          color: $modus-pagination-hover-color;
         }
       }
     }
