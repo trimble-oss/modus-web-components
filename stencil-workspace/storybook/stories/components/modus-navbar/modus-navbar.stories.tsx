@@ -40,7 +40,7 @@ const setNavbar = () => {
         ];
         document.querySelector('modus-navbar').productLogoOptions = { url: 'https://modus.trimble.com/img/trimble-logo.svg' };
         document.querySelector('modus-navbar').profileMenuOptions = {
-          avatarUrl: 'https://www.w3schools.com/howto/img_avatar.png',
+          avatarUrl: '/023-student.svg',
           email: 'modus_user@trimble.com',
           initials: 'MU',
           username: 'Modus User',

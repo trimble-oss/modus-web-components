@@ -34,11 +34,11 @@ export const Default = Template.bind({});
 const setScript = () => {
   const tag = document.createElement('script');
   tag.innerHTML = `
-  document.body.setAttribute('data-mwc-theme', localStorage.getItem("data-mwc-theme") || 'light');
-
-  window.addEventListener('storage', () => {
     document.body.setAttribute('data-mwc-theme', localStorage.getItem("data-mwc-theme") || 'light');
-  });
+
+    window.addEventListener('storage', () => {
+      document.body.setAttribute('data-mwc-theme', localStorage.getItem("data-mwc-theme") || 'light');
+    });
     document.querySelector('#btn-modal').addEventListener('buttonClick', () => {
       document.querySelector('modus-modal').open();
     });
