@@ -7,7 +7,7 @@
 
 .modus-checkbox {
   align-items: center;
-  color: $modus-label;
+  color: $modus-checkbox-label-color;
   cursor: pointer;
   display: inline-flex;
   flex-direction: row;
@@ -30,8 +30,8 @@
     width: $rem-16px;
 
     &.blue-background {
-      background-color: $modus-checkbox-checked-bg-color !important;
-      border: $rem-2px solid $modus-checkbox-checked-border-color !important;
+      background-color: $modus-checkbox-selected-border-color !important;
+      border: $rem-2px solid $modus-checkbox-selected-border-color !important;
     }
 
     &.disabled {
@@ -67,8 +67,11 @@
     }
   }
 
-  &:hover .checkbox:not(.checked):not(.disabled),
+  &:hover .checkbox:not(.checked):not(.disabled) {
+    border: $rem-2px solid $modus-checkbox-hover-border-color;
+  }
+
   &:active .checkbox:not(.checked):not(.disabled) {
-    border: $rem-2px solid $modus-checkbox-checked-border-color;
+    border: $rem-2px solid $modus-checkbox-selected-border-color;
   }
 }

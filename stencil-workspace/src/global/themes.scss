@@ -26,7 +26,7 @@
   --modus-backdrop-bg: #252a2ebf;
 
   // Label
-  --modus-label: #464b52;
+  --modus-input-control-label-color: #464b52;
 
   // Background
   --modus-alert-primary-bg: var(--modus-white);
@@ -112,10 +112,11 @@
   --modus-btn-text-secondary-active-color: #52555e;
 
   // Input controls
-  --modus-custom-control-bg: var(--modus-body-bg);
-
-  // Checkbox
-  --modus-checkbox-active-color: #217cbb;
+  --modus-input-control-bg: var(--modus-body-bg);
+  --modus-input-control-border-color: #90939f;
+  --modus-input-control-label-color: #464b52;
+  --modus-input-control-hover-border-color: var(--modus-highlight-blue);
+  --modus-input-control-active-border-color: var(--modus-highlight-blue);
 
   // Chip
   // Active
@@ -206,13 +207,20 @@
   --modus-navbar-profile-icon-active-border-color: #d6d5db;
 
   // Pagination
+  --modus-pagination-active-bg: #dcedf9;
+  --modus-pagination-active-color: #217cbb;
   --modus-pagination-bg: transparent;
   --modus-pagination-color: var(--modus-body-color);
   --modus-pagination-chevron-color: #6a6e79;
   --modus-pagination-hover-bg: #e0e1e9;
   --modus-pagination-hover-color: var(--modus-body-color);
-  --modus-pagination-active-bg: #dcedf9;
-  --modus-pagination-active-color: #217cbb;
+
+  // Radio button
+  --modus-radio-btn-active-color: var(--modus-highlight-blue);
+  --modus-radio-btn-bg: transparent;
+  --modus-radio-btn-color: #90939f;
+  --modus-radio-btn-hover-color: var(--modus-highlight-blue);
+  --modus-radio-btn-label-color: #464b52;
 }
 
 [data-mwc-theme='dark'] {
@@ -236,9 +244,6 @@
   --modus-body-color: #f1f1f6;
   --modus-border-color: #6a6e79;
   --modus-backdrop-bg: #000000bf;
-
-  // Label
-  --modus-label: #b7b9c3;
 
   // Background
   --modus-alert-primary-bg: #019aeb80;
@@ -319,10 +324,10 @@
   --modus-btn-text-secondary-active-color: #52555e;
 
   // Input controls
-  --modus-custom-control-bg: transparent;
-
-  // Checkbox
-  --modus-checkbox-active-color: #0c77be;
+  --modus-input-control-bg: transparent;
+  --modus-input-control-label-color: #fff;
+  --modus-input-control-hover-border-color: var(--modus-highlight-blue);
+  --modus-input-control-active-border-color: var(--modus-highlight-blue);
 
   // Chip
   // Active
@@ -536,19 +541,12 @@ modus-card {
 // Note:
 // Workaround - CSS variables don't penetrate into nested components in shadow DOM, examples: checkbox in a Tree view item, buttons in Modal dialog, etc.
 @mixin modus-checkbox {
-  --modus-checkbox-bg: var(--modus-custom-control-bg);
-  --modus-checkbox-focus-border-color: var(--modus-checkbox-active-color);
-  --modus-checkbox-border-color: #90939f;
-
-  // Checked state
-  --modus-checkbox-checked-color: var(--modus-checkbox-active-color);
-  --modus-checkbox-checked-bg-color: var(--modus-checkbox-active-color);
-  --modus-checkbox-checked-border-color: var(--modus-checkbox-active-color);
-
-  // Indeterminate state
-  --modus-checkbox-indeterminate-color: var(--modus-checkbox-active-color);
-  --modus-checkbox-indeterminate-bg-color: var(--modus-checkbox-active-color);
-  --modus-checkbox-indeterminate-border-color: var(--modus-checkbox-active-color);
+  --modus-checkbox-bg: var(--modus-input-control-bg);
+  --modus-checkbox-border-color: var(--modus-input-control-border-color);
+  --modus-checkbox-label-color: var(--modus-input-control-label-color);
+  --modus-checkbox-hover-border-color: var(--modus-input-control-active-border-color);
+  --modus-checkbox-selected-border-color: var(--modus-input-control-active-border-color);
+  --modus-checkbox-indeterminate-border-color: var(--modus-input-control-active-border-color);
 }
 
 modus-checkbox {
@@ -662,4 +660,19 @@ modus-modal {
 
   @include button-variant('outline', 'dark');
   @include button-variant('solid', 'primary');
+}
+
+modus-progress-bar {
+  --modus-progress-bg: var(--modus-body-bg);
+  --modus-progress-bar-bg: var(--modus-primary);
+  --modus-progress-border-color: #6a6e79;
+}
+
+modus-radio-group {
+  // Radio button
+  --modus-radio-btn-bg: var(--modus-input-control-bg);
+  --modus-radio-btn-border-color: var(--modus-input-control-border-color);
+  --modus-radio-btn-label-color: var(--modus-input-control-label-color);
+  --modus-radio-btn-hover-border-color: var(--modus-input-control-active-border-color);
+  --modus-radio-btn-selected-border-color: var(--modus-input-control-active-border-color);
 }

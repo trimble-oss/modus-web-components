@@ -329,9 +329,60 @@
     min-page="1"
     size="medium"></modus-pagination>
   </div>
+
+  <div>
+    <modus-button color="primary" id="toggle_progress-bar" style="padding: 10px;">Toggle Progress Bar</modus-button>
+  </div>
+  <div>
+    <div>
+      <modus-progress-bar
+        value="3"
+        max-value="4"
+        min-value="0"
+        text="75%"></modus-progress-bar>
+    </div>
+    <div>
+      <modus-progress-bar
+        value="3"
+        max-value="4"
+        min-value="0"
+        size="compact"></modus-progress-bar>
+    </div>
+  </div>
+
+  <div>
+    <modus-button color="primary" id="toggle_radio-group" style="padding: 10px;">Toggle Radio group</modus-button>
+  </div>
+  <div>
+    <modus-radio-group checked-id="1" name="my-group"></modus-radio-group>
+  </div>
 </div>
   </body>
   <script>
+
+    document.querySelector('#btn-modal').addEventListener('buttonClick', () => {
+      document.querySelector('modus-modal').open();
+    });
+
+
+    const modusRadioGroup = document.querySelector('modus-radio-group');
+    modusRadioGroup.radioButtons = [
+      {
+        id: '0',
+        label: 'Radio 1',
+      },
+      {
+        id: '1',
+        checked: true,
+        label: 'Radio 2',
+      },
+      {
+        id: '2',
+        label: 'Radio 3',
+      },
+    ];
+
+
     document.querySelector('#toggle').addEventListener('buttonClick', () => {
         document.body.setAttribute('data-mwc-theme',  document.body.getAttribute('data-mwc-theme') === 'dark' ? 'light' : 'dark');
     });
@@ -339,11 +390,6 @@
     document.querySelector('#reset').addEventListener('buttonClick', () => {
         document.body.removeAttribute('data-mwc-theme');
     });
-
-
-  document.querySelector('#btn-modal').addEventListener('buttonClick', () => {
-    document.querySelector('modus-modal').open();
-  });
 
     function updateTheme(c){
       Array.from(document.querySelectorAll(`modus-${c}`)).map(i => {
