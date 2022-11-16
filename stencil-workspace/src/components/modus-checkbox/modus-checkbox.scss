@@ -1,3 +1,5 @@
+@import './modus-checkbox.vars';
+
 :host {
   align-items: center;
   display: flex;
@@ -5,7 +7,7 @@
 
 .modus-checkbox {
   align-items: center;
-  color: $col_trimble_gray;
+  color: $modus-checkbox-label-color;
   cursor: pointer;
   display: inline-flex;
   flex-direction: row;
@@ -17,30 +19,24 @@
 
   .checkbox {
     align-items: center;
-    background-color: $col_white;
-    border: $rem-2px solid $col_gray_4;
+    background-color: $modus-checkbox-bg;
+    border: $rem-2px solid $modus-checkbox-border-color;
     border-radius: $rem-2px;
     display: flex;
     height: $rem-16px;
     justify-content: center;
-    margin: 0 .28rem;
-    transition: background-color .15s ease-in-out;
+    margin: 0 0.28rem;
+    transition: background-color 0.15s ease-in-out;
     width: $rem-16px;
 
     &.blue-background {
-      background-color: $col_trimble_blue;
-      border: $rem-2px solid $col_trimble_blue;
+      background-color: $modus-checkbox-selected-border-color !important;
+      border: $rem-2px solid $modus-checkbox-selected-border-color !important;
     }
 
     &.disabled {
-      background-color: $col_gray_light;
-      border: $rem-2px solid $col_gray_2;
       cursor: default;
-
-      &.checked {
-        background-color: $col_blue_light;
-        border: $rem-2px solid $col_blue_light;
-      }
+      opacity: 0.3;
     }
 
     .checkmark {
@@ -48,7 +44,7 @@
       display: flex;
       justify-content: center;
       transform: scale(0);
-      transition: transform .25s ease-in-out;
+      transition: transform 0.25s ease-in-out;
       visibility: hidden;
 
       &.checked {
@@ -67,23 +63,15 @@
     display: flex;
 
     &.disabled {
-      color: $col_gray_9;
+      opacity: 0.3;
     }
   }
 
-  &:hover {
-    .checkbox {
-      &:not(.checked):not(.disabled) {
-        border: $rem-2px solid $col_gray_5;
-      }
-    }
+  &:hover .checkbox:not(.checked):not(.disabled) {
+    border: $rem-2px solid $modus-checkbox-hover-border-color;
   }
 
-  &:active {
-    .checkbox {
-      &:not(.checked):not(.disabled) {
-        border: $rem-2px solid $col_trimble_gray;
-      }
-    }
+  &:active .checkbox:not(.checked):not(.disabled) {
+    border: $rem-2px solid $modus-checkbox-selected-border-color;
   }
 }

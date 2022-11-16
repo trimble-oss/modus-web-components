@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="en">
+<html dir="ltr" lang="en" >
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
@@ -8,18 +8,418 @@
     <script type="module" src="/build/modus-web-components.esm.js"></script>
     <script nomodule src="/build/modus-web-components.js"></script>
 
+    <link rel="stylesheet" href="/build/modus-web-components.css" />
+
     <!--Manually load Modus font-family-->
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link rel="stylesheet" src="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
     <style>
-      body {
-        background-color: #f9f9fb;
-        font-family: "Open Sans", sans-serif;
-        margin: 0;
+      body[data-mwc-theme='dark']{
+        background-color: #252a2e;
       }
+       div {
+            display: block;
+            margin-top: 30px;
+        }
+
     </style>
   </head>
   <body>
-      <!-- Test your components here -->
+<div style="padding:10px;">
+  <modus-button color="primary" style="position: sticky;top:0;z-index:1000; padding: 10px;" id="toggle">Toggle theme</modus-button>
+  <modus-button color="primary" style="position: sticky;top:0;z-index:1000; padding: 10px;" id="reset">Reset theme</modus-button>
+
+  <div>
+    <modus-button color="primary" style="padding: 10px;" id="toggle_accordion-item">Toggle Accordion theme</modus-button>
+  </div>
+  <div>
+    <modus-accordion >
+      <modus-accordion-item  header-text="Collapsible Group Item #1">This is the first item's accordion body. It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables.</modus-accordion-item>
+      <modus-accordion-item header-text="Collapsible Group Item #2">Content</modus-accordion-item>
+      <modus-accordion-item disabled header-text="Collapsible Group Item #3"
+        >Content</modus-accordion-item
+      >
+    </modus-accordion>
+  </div>
+
+  <div>
+    <modus-button color="primary" style="padding: 10px;" id="toggle_alert">Toggle Alerts theme</modus-button>
+  </div>
+  <div>
+    <modus-alert message="Info alert (default)"></modus-alert>
+    <modus-alert dismissible message="Dismissible alert"></modus-alert>
+    <modus-alert message="Error alert" type="error"></modus-alert>
+    <modus-alert message="Info gray alert" type="info-gray"></modus-alert>
+    <modus-alert message="Info gray dark alert" type="info-gray-dark"></modus-alert>
+    <modus-alert message="Success alert" type="success"></modus-alert>
+    <modus-alert message="Warning alert" type="warning"></modus-alert>
+  </div>
+  <div>
+    <modus-button color="primary" id="toggle_badge" style="padding: 10px;">Toggle Badges theme</modus-button>
+  </div>
+  <div>
+    <modus-badge>Default</modus-badge>
+    <modus-badge color="secondary">Secondary</modus-badge>
+    <modus-badge color="tertiary">Tertiary</modus-badge>
+    <modus-badge color="dark">Dark</modus-badge>
+    <modus-badge color="success">Success</modus-badge>
+    <modus-badge color="warning">Warning</modus-badge>
+    <modus-badge color="danger">Danger</modus-badge>
+
+    <modus-badge type="text">Text</modus-badge>
+    <modus-badge color="secondary" type="text">Text</modus-badge>
+    <modus-badge color="tertiary" type="text">Text</modus-badge>
+    <modus-badge color="dark" type="text">Text</modus-badge>
+    <modus-badge color="success" type="text">Success</modus-badge>
+    <modus-badge color="warning" type="text">Text</modus-badge>
+    <modus-badge color="danger" type="text">Text</modus-badge>
+  </div>
+
+  <div>
+    <modus-button color="primary" id="toggle_breadcrumb" style="padding: 10px;">Toggle Buttons theme</modus-button>
+  </div>
+  <div>
+    <modus-breadcrumb></modus-breadcrumb>
+  </div>
+
+  <div>
+    <modus-button color="primary" id="toggle_button" style="padding: 10px;">Toggle Buttons theme</modus-button>
+  </div>
+  <div>
+    <modus-button color="primary">Primary</modus-button>
+    <modus-button color="secondary">Secondary</modus-button>
+    <modus-button color="tertiary">Tertiary</modus-button>
+
+    <modus-button color="danger">Danger</modus-button>
+    <modus-button disabled color="danger">Disabled</modus-button>
+
+    <modus-button size="small" color="primary">Small</modus-button>
+    <modus-button size="large" color="primary">Large</modus-button>
+
+    <modus-button button-style="borderless">Borderless</modus-button>
+
+    <modus-button button-style="outline" color="primary">Outline</modus-button>
+    <modus-button button-style="outline" color="secondary">Outline</modus-button>
+  </div>
+
+  <div>
+    <modus-button color="primary" id="toggle_checkbox" style="padding: 10px;">Toggle Checkbox theme</modus-button>
+  </div>
+  <div>
+    <modus-checkbox></modus-checkbox>
+    <modus-checkbox disabled></modus-checkbox>
+    <modus-checkbox label="Checkbox"></modus-checkbox>
+    <modus-checkbox disabled label="Checkbox"></modus-checkbox>
+    <modus-checkbox checked disabled label="Checkbox"></modus-checkbox>
+    <modus-checkbox indeterminate></modus-checkbox>
+  </div>
+
+  <div>
+    <modus-button color="primary" id="toggle_card" style="padding: 10px;">Toggle Card theme</modus-button>
+  </div>
+  <div>
+    <modus-card>
+      <div style="padding:10px">
+        <h4 id="card-title">Card title</h4>
+        <h5 id="card-subtitle">Card subtitle</h5>
+        <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <modus-button color="primary">Go somewhere</modus-button>
+      </div>
+    </modus-card>
+  </div>
+  <div>
+    <modus-button color="primary" id="toggle_chip" style="padding: 10px;">Toggle Chip theme</modus-button>
+  </div>
+  <div>
+    <modus-chip
+      image-url="https://modus.trimble.com/icon.png"
+      show-close
+      value="Bryan"></modus-chip>
+    <modus-chip
+      has-error
+      image-url="https://modus.trimble.com/icon.png"
+      show-close
+      value="Bryan"></modus-chip>
+    <modus-chip
+      disabled
+      image-url="https://modus.trimble.com/icon.png"
+      show-close
+      value="Bryan"></modus-chip>
+
+    <modus-chip
+      image-url="https://modus.trimble.com/icon.png"
+      show-close
+      chip-style="outline"
+      value="Bryan"></modus-chip>
+    <modus-chip
+      has-error
+      image-url="https://modus.trimble.com/icon.png"
+      show-close
+      chip-style="outline"
+      value="Bryan"></modus-chip>
+    <modus-chip
+      disabled
+      image-url="https://modus.trimble.com/icon.png"
+      show-close
+      chip-style="outline"
+      value="Bryan"></modus-chip>
+
+    <modus-chip show-checkmark size="small" value="Pets OK"></modus-chip>
+  </div>
+
+  <div>
+    <modus-button color="primary" id="toggle_tree-view--tree-view-item" style="padding: 10px;">Toggle Content tree theme</modus-button>
+  </div>
+  <div>
+    <modus-tree-view style="width:400px;"
+    checkbox-selection="true" class="hydrated">
+      <modus-tree-view-item node-id="1" label="Inbox" class="hydrated">
+        <svg
+          slot="itemIcon"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          height="16"
+          width="16"
+          viewBox="0 0 32 32">
+          <path
+            d="M28.79 12.39A1 1 0 0 0 28 12h-2V9c0-.55-.45-1-1-1h-9.59l-1.7-1.71C13.52 6.11 13.27 6 13 6H4c-.55 0-1 .45-1 1v17c0 .04.02.07.02.11.01.05.02.11.04.16.02.09.06.17.1.25.02.03.02.06.05.09.01.01.03.02.04.03.07.08.15.14.23.19.04.03.06.05.1.07.13.06.27.1.42.1h21c.13 0 .25-.03.36-.07.04-.02.07-.04.1-.06.07-.04.14-.08.2-.13.03-.03.06-.06.09-.1.05-.05.09-.11.12-.18a.31.31 0 0 0 .06-.13c.01-.02.03-.04.03-.07l3-11c.09-.3.02-.62-.17-.87zM5 8h7.59l1.7 1.71c.19.18.44.29.71.29h9v2H7c-.45 0-.85.3-.96.74L5 16.53V8z"></path>
+        </svg>
+        <modus-tree-view-item disabled
+          node-id="2"
+          label="Personal"
+          class="hydrated" draggable-item droppable-item></modus-tree-view-item>
+        <modus-tree-view-item
+          node-id="3"
+          label="Work"
+          class="hydrated" draggable-item droppable-item></modus-tree-view-item>
+        <modus-tree-view-item
+          node-id="4"
+          label="Social"
+          class="hydrated" draggable-item droppable-item></modus-tree-view-item>
+        <modus-tree-view-item
+          node-id="5"
+          label="More ..."
+          class="hydrated" draggable-item droppable-item></modus-tree-view-item>
+      </modus-tree-view-item>
+    </modus-tree-view>
+  </div>
+  <div>
+    <modus-button color="primary" id="toggle_dropdown" style="padding: 10px;">Toggle Dropdown</modus-button>
+  </div>
+  <div style="display: flex; flex-wrap: wrap; margin-top: 1rem;">
+    <modus-dropdown toggle-element-id="toggleElement1">
+      <modus-button id="toggleElement1" slot="dropdownToggle">Dropdown</modus-button>
+      <modus-list slot="dropdownList">
+        <modus-list-item size="condensed">Item 1</modus-list-item>
+        <modus-list-item size="condensed">Item 3</modus-list-item>
+      </modus-list>
+    </modus-dropdown>
+    <modus-dropdown toggle-element-id="toggleElement2">
+      <modus-button color="secondary" id="toggleElement2" slot="dropdownToggle">Dropdown</modus-button>
+      <modus-list slot="dropdownList">
+        <modus-list-item size="condensed">Item 2</modus-list-item>
+        <modus-list-item size="condensed">Item 3</modus-list-item>
+      </modus-list>
+    </modus-dropdown>
+    <modus-dropdown toggle-element-id="toggleElement3">
+      <modus-button color="tertiary" id="toggleElement3" slot="dropdownToggle">Dropdown</modus-button>
+      <modus-list slot="dropdownList">
+        <modus-list-item size="condensed">Item 1</modus-list-item>
+        <modus-list-item size="condensed">Item 2</modus-list-item>
+      </modus-list>
+    </modus-dropdown>
+    <modus-dropdown toggle-element-id="toggleElement4">
+      <modus-button button-style="borderless" id="toggleElement4" slot="dropdownToggle">Dropdown</modus-button>
+      <modus-list slot="dropdownList">
+        <modus-list-item size="condensed">Item 3</modus-list-item>
+      </modus-list>
+    </modus-dropdown>
+    <modus-dropdown toggle-element-id="toggleElement5">
+      <modus-button button-style="outline" color="primary" id="toggleElement5" slot="dropdownToggle">Dropdown</modus-button>
+      <modus-list slot="dropdownList">
+        <modus-list-item size="condensed">Item 1</modus-list-item>
+      </modus-list>
+    </modus-dropdown>
+    <modus-dropdown toggle-element-id="toggleElement6">
+      <modus-button button-style="outline" color="secondary" id="toggleElement6" slot="dropdownToggle">Dropdown</modus-button>
+      <modus-list slot="dropdownList">
+        <modus-list-item size="condensed">Item 1</modus-list-item>
+        <modus-list-item size="condensed">Item 2</modus-list-item>
+        <modus-list-item size="condensed">Item 3</modus-list-item>
+      </modus-list>
+    </modus-dropdown>
+  </div>
+  <div>
+    <modus-button color="primary" id="toggle_list-item" style="padding: 10px;">Toggle List items</modus-button>
+  </div>
+  <div>
+    <modus-list>
+      <modus-list-item size="condensed">Condensed</modus-list-item>
+      <modus-list-item selected size="condensed"
+        >Condensed & Selected</modus-list-item
+      >
+      <modus-list-item>Default</modus-list-item>
+      <modus-list-item selected>Selected</modus-list-item>
+      <modus-list-item disabled>Disabled</modus-list-item>
+      <modus-list-item size="large">Large</modus-list-item>
+      <modus-list-item selected size="large">Large & Selected</modus-list-item>
+    </modus-list>
+
+    <modus-list>
+      <modus-list-item>Condensed</modus-list-item>
+      <modus-list-item>Condensed & Selected</modus-list-item
+      >
+      <modus-list-item>Default</modus-list-item>
+      <modus-list-item>Selected</modus-list-item>
+      <modus-list-item>Disabled</modus-list-item>
+      <modus-list-item>Large</modus-list-item>
+      <modus-list-item>Large & Selected</modus-list-item>
+    </modus-list>
+  </div>
+  <div>
+    <modus-button color="primary" id="toggle_file-dropzone" style="padding: 10px;">Toggle File upload dropzone</modus-button>
+  </div>
+  <div>
+    <modus-file-dropzone
+    aria-Label="dropzone"
+    description="File dropzone description"
+    dropzone-Height="175px"
+    dropzone-Width="400px"
+    label="Dropzone Label"
+    multiple="false">
+    </modus-file-dropzone>
+  </div>
+  <div>
+    <modus-button color="primary" id="toggle_message" style="padding: 10px;">Toggle Messages theme</modus-button>
+  </div>
+  <div>
+    <modus-message type="info">Info message.</modus-message>
+    <modus-message type="question">Question message?</modus-message>
+  </div>
+
+  <div>
+    <modus-button color="primary" id="toggle_modal" style="padding: 10px;">Toggle Modal</modus-button>
+  </div>
+  <div>
+    <modus-button id="btn-modal" color="primary">Open modal</modus-button>
+    <modus-modal
+      header-text="Modal title"
+      primary-button-text="Sweet!"
+      secondary-button-text="Save changes">
+      <p>Woo-hoo, you're reading this text in a modal!</p>
+    </modus-modal>
+  </div>
+
+  <div>
+    <modus-button color="primary" id="toggle_navbar" style="padding: 10px;">Toggle Navbar</modus-button>
+  </div>
+  <div>
+    <modus-navbar show-apps-menu show-help show-main-menu show-notifications>
+      <div slot="main">Render your own main menu.</div>
+      <div slot="notifications">Render your own notifications.</div>
+    </modus-navbar>
+  </div>
+  <div>
+    <modus-button color="primary" id="toggle_pagination" style="padding: 10px;">Toggle Pagination</modus-button>
+  </div>
+  <div>
+    <modus-pagination
+    active-page="8"
+    max-page="32"
+    min-page="1"
+    size="medium"></modus-pagination>
+  </div>
+
+  <div>
+    <modus-button color="primary" id="toggle_progress-bar" style="padding: 10px;">Toggle Progress Bar</modus-button>
+  </div>
+  <div>
+    <div>
+      <modus-progress-bar
+        value="3"
+        max-value="4"
+        min-value="0"
+        text="75%"></modus-progress-bar>
+    </div>
+    <div>
+      <modus-progress-bar
+        value="3"
+        max-value="4"
+        min-value="0"
+        size="compact"></modus-progress-bar>
+    </div>
+  </div>
+
+  <div>
+    <modus-button color="primary" id="toggle_radio-group" style="padding: 10px;">Toggle Radio group</modus-button>
+  </div>
+  <div>
+    <modus-radio-group checked-id="1" name="my-group"></modus-radio-group>
+  </div>
+</div>
   </body>
+  <script>
+
+    document.querySelector('#btn-modal').addEventListener('buttonClick', () => {
+      document.querySelector('modus-modal').open();
+    });
+
+
+    const modusRadioGroup = document.querySelector('modus-radio-group');
+    modusRadioGroup.radioButtons = [
+      {
+        id: '0',
+        label: 'Radio 1',
+      },
+      {
+        id: '1',
+        checked: true,
+        label: 'Radio 2',
+      },
+      {
+        id: '2',
+        label: 'Radio 3',
+      },
+    ];
+
+
+    document.querySelector('#toggle').addEventListener('buttonClick', () => {
+        document.body.setAttribute('data-mwc-theme',  document.body.getAttribute('data-mwc-theme') === 'dark' ? 'light' : 'dark');
+    });
+
+    document.querySelector('#reset').addEventListener('buttonClick', () => {
+        document.body.removeAttribute('data-mwc-theme');
+    });
+
+    function updateTheme(c){
+      Array.from(document.querySelectorAll(`modus-${c}`)).map(i => {
+            i.setAttribute('data-mwc-theme',  i.getAttribute('data-mwc-theme') === 'dark' ? 'light' : 'dark');
+          });
+    }
+
+    Array.from(document.querySelectorAll('modus-button'))
+    .filter(b => b.id !== 'toggle' && b.id.startsWith('toggle_'))
+    .map(b => b.id.split('_')[1])
+    .forEach((c) => {
+      document.querySelector(`#toggle_${c}`).addEventListener('buttonClick', () => {
+        if(c.includes('--')){
+          c.split('--').forEach(d => {
+            updateTheme(d);
+          });
+        }
+        else
+            updateTheme(c);
+      });
+
+    });
+
+    const modusBreadcrumb = document.querySelector('modus-breadcrumb');
+    const crumbs = [
+      { id: '1', display: 'Crumb 1' },
+      { id: '2', display: 'Crumb 2' },
+      { id: '3', display: 'Crumb 3' },
+      { id: '4', display: 'Crumb 4' },
+    ];
+    modusBreadcrumb.crumbs = crumbs;
+  </script>
 </html>

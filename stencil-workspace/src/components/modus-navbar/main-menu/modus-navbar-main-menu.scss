@@ -1,5 +1,7 @@
+@import './../modus-navbar.vars';
+
 .main-menu {
-  @include navbar-menu;
+  @include custom-navbar-menu;
 
   border-radius: 0 0 $rem_2px $rem_2px;
   clip-path: inset(0 -10px -10px -10px);

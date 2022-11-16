@@ -1,0 +1,31 @@
+@mixin custom-navbar-menu {
+  background-color: var(--modus-body-bg, $col_white);
+  border: $rem-1px solid var(--modus-border-color, #cbcdd6);
+  border-radius: $rem_2px;
+  box-shadow: $box-shadow-lg;
+  color: var(--modus-body-color, #252a2e);
+  display: flex;
+  flex-direction: column;
+  max-width: 384px;
+  padding: $rem-24px;
+  position: absolute;
+  right: 0;
+  top: 44px;
+  z-index: 100;
+}
+
+$menu-bg: var(--modus-body-bg, #fff) !default;
+$menu-color: var(--modus-body-color, #252a2e) !default;
+$menu-border-color: var(--modus-border-color, #cbcdd6) !default;
+$modus-navbar-bg: var(--modus-navbar-bg, $col_white) !default;
+$modus-navbar-brand-logo-filter: var(--modus-navbar-brand-logo-filter);
+$modus-navbar-icon-color: var(--modus-navbar-icon-color, #252a2e) !default;
+$modus-navbar-profile-icon-active-border-color: var(--modus-navbar-profile-icon-active-border-color, #d6d5db) !default;
+
+// Hover
+$modus-navbar-icon-hover-bg: var(--modus-navbar-icon-hover-bg, #e0e1e9) !default;
+$modus-navbar-icon-hover-color: var(--modus-navbar-icon-hover-color, #3c444a) !default;
+
+// Active
+$modus-navbar-icon-active-bg: var(--modus-navbar-icon-active-bg, #cbcdd6) !default;
+$modus-navbar-icon-active-color: var(--modus-navbar-icon-active-color, #0e1012) !default;

@@ -1,3 +1,5 @@
+@import './modus-radio-button.vars';
+
 div.modus-radio-group {
   display: flex;
   flex-direction: column;
@@ -20,19 +22,19 @@ div.modus-radio-group {
     }
 
     .checkmark {
-      background-color: transparent;
-      border: $rem-2px solid $col_gray_6;
+      background-color: $modus-radio-btn-bg;
+      border: $rem-2px solid $modus-radio-btn-border-color;
       border-radius: 50%;
       height: $rem-14px;
       position: absolute;
-      transition: background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+      transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
       width: $rem-14px;
     }
 
     .checkmark::after {
-      background: $col_trimble_blue;
+      background: $modus-radio-btn-selected-border-color;
       border-radius: 50%;
-      content: "";
+      content: '';
       display: none;
       height: 0.5125rem; // Specific size so that the check is centered.
       left: $rem-3px;
@@ -42,8 +44,8 @@ div.modus-radio-group {
     }
 
     input:checked ~ .checkmark {
-      background-color: transparent;
-      border-color: $col_trimble_blue;
+      background-color: $modus-radio-btn-bg;
+      border-color: $modus-radio-btn-selected-border-color;
     }
 
     input:checked ~ .checkmark::after {
@@ -51,18 +53,19 @@ div.modus-radio-group {
     }
 
     label {
+      color: $modus-radio-btn-label-color;
       font-size: $rem-12px;
       margin-left: 1.625rem;
     }
   }
 
   &:active .radio .checkmark {
-    background-color: $col_trimble_blue;
-    border-color: $col_trimble_blue;
+    background-color: $modus-radio-btn-selected-border-color;
+    border-color: $modus-radio-btn-selected-border-color;
   }
 
   &:hover .radio .checkmark {
-    border-color: $col_trimble_blue;
+    border-color: $modus-radio-btn-hover-border-color;
   }
 
   &.disabled {

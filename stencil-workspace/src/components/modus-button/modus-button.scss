@@ -1,3 +1,5 @@
+@import './modus-button.vars';
+
 button {
   align-items: center;
   border: $rem-1px solid transparent;
@@ -9,7 +11,7 @@ button {
   justify-content: center;
   padding: 0;
   position: relative;
-  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   user-select: none;
   white-space: nowrap;
 
@@ -18,8 +20,11 @@ button {
   }
 
   &:disabled {
+    background-color: $modus-btn-disabled-bg;
+    border-color: $modus-btn-disabled-border-color;
+    color: $modus-btn-disabled-color;
     cursor: default;
-    opacity: .3;
+    opacity: 0.3;
   }
 
   &.size-small {
@@ -41,121 +46,86 @@ button {
   }
 
   &.style-borderless {
-    background-color: transparent;
-    color: $col_blue_dark;
-    fill: $col_blue_dark;
+    background-color: $modus-btn-borderless-bg;
+    color: $modus-btn-borderless-color;
+    fill: $modus-btn-borderless-color;
 
     &:hover:not([disabled]) {
-      background-color: $col_gray_light;
+      background-color: $modus-btn-borderless-hover-bg;
+      color: $modus-btn-borderless-hover-color;
+      fill: $modus-btn-borderless-hover-color;
     }
 
     &:active:not([disabled]) {
-      background-color: $col_blue_pale;
+      background-color: $modus-btn-borderless-active-bg;
+      color: $modus-btn-borderless-active-color;
+      fill: $modus-btn-borderless-active-color;
     }
   }
 
+  // Solid variants
   &.style-fill {
-    &.color-danger {
-      background-color: $col_red;
-      border-color: $col_red;
-      color: $col_white;
-      fill: $col_white;
-    }
+    @each $color, $value in $btn-theme-colors {
+      $default-text-color: $white;
 
-    &.color-danger:hover:not([disabled]) {
-      background-color: $col_red_light;
-      border-color: $col_red_light;
-    }
+      @if $color == 'tertiary' {
+        $default-text-color: $col_trimble_gray;
+      }
 
-    &.color-danger:active:not([disabled]) {
-      background-color: $col_red_dark;
-      border-color: $col_red_dark;
-    }
+      &.color-#{$color} {
+        background-color: var(--modus-btn-#{$color}-bg, $value);
+        border-color: var(--modus-btn-#{$color}-border-color, $value);
+        color: var(--modus-btn-#{$color}-color, $default-text-color);
+        fill: var(--modus-btn-#{$color}-color, $default-text-color);
+      }
 
-    &.color-primary {
-      background-color: $col_blue;
-      border-color: $col_blue;
-      color: $col_white;
-      fill: $col_white;
-    }
+      // Hover state
+      &.color-#{$color}:hover:not([disabled]) {
+        background-color: var(--modus-btn-#{$color}-hover-bg, map-get($btn-hover-colors, $color));
+        border-color: var(--modus-btn-#{$color}-hover-border-color, map-get($btn-hover-colors, $color));
+        color: var(--modus-btn-#{$color}-hover-color, $default-text-color);
+        fill: var(--modus-btn-#{$color}-hover-color, $default-text-color);
+      }
 
-    &.color-primary:hover:not([disabled]) {
-      background-color: $col_blue_light;
-      border-color: $col_blue_light;
-    }
-
-    &.color-primary:active:not([disabled]) {
-      background-color: $col_blue_dark;
-      border-color: $col_blue_dark;
-    }
-
-    &.color-secondary {
-      background-color: $secondary;
-      border-color: $secondary;
-      color: $col_white;
-      fill: $col_white;
-    }
-
-    &.color-secondary:hover:not([disabled]) {
-      background-color: $col_gray_6;
-      border-color: $col_gray_6;
-    }
-
-    &.color-secondary:active:not([disabled]) {
-      background-color: $col_gray_8;
-      border-color: $col_gray_8;
-    }
-
-    &.color-tertiary {
-      background-color: $tertiary;
-      border-color: $tertiary;
-      color: $col_gray_10;
-      fill: $col_gray_10;
-    }
-
-    &.color-tertiary:hover:not([disabled]) {
-      background-color: $col_gray_0;
-      border-color: $col_gray_0;
-    }
-
-    &.color-tertiary:active:not([disabled]) {
-      background-color: $col_gray_2;
-      border-color: $col_gray_2;
+      // Active state
+      &.color-#{$color}:active:not([disabled]) {
+        background-color: var(--modus-btn-#{$color}-active-bg, map-get($btn-active-colors, $color));
+        border-color: var(--modus-btn-#{$color}-active-border-color, map-get($btn-active-colors, $color));
+        color: var(--modus-btn-#{$color}-active-color, $default-text-color);
+        fill: var(--modus-btn-#{$color}-active-color, $default-text-color);
+      }
     }
   }
 
+  // Outline variants
   &.style-outline {
-    &.color-primary {
-      background-color: transparent;
-      border-color: $col_trimble_blue;
-      color: $col_trimble_blue;
-      fill: $col_trimble_blue;
-    }
+    @each $color, $value in $btn-outline-theme-colors {
+      $alias: $color;
+      @if $color == 'dark' {
+        $alias: 'secondary';
+      }
+      &.color-#{$alias} {
+        background-color: var(--modus-btn-outline-#{$color}-bg, transparent);
+        border-color: var(--modus-btn-outline-#{$color}-border-color, $value);
+        color: var(--modus-btn-outline-#{$color}-color, $value);
+        fill: var(--modus-btn-outline-#{$color}-color, $value);
+      }
 
-    &.color-primary:hover:not([disabled]) {
-      background-color: #dde7f1;
-      border-color: #017ed1;
-    }
+      // Hover state
+      &.color-#{$alias}:hover:not([disabled]) {
+        background-color: var(--modus-btn-outline-#{$color}-hover-bg, map-get($btn-outline-hover, $color, 'bg'));
+        border-color: var(--modus-btn-outline-#{$color}-hover-border-color, map-get($btn-outline-hover, $color, 'color'));
+        color: var(--modus-btn-outline-#{$color}-hover-color, map-get($btn-outline-hover, $color, 'color'));
+        fill: var(--modus-btn-outline-#{$color}-hover-color, map-get($btn-outline-hover, $color, 'color'));
+      }
 
-    &.color-primary:active:not([disabled]) {
-      background-color: #d2dfec;
-      border-color: #005085;
-    }
-
-    &.color-secondary {
-      background-color: transparent;
-      border-color: $col_trimble_gray;
-      color: $col_trimble_gray;
-      fill: $col_trimble_gray;
-    }
-
-    &.color-secondary:hover:not([disabled]) {
-      background-color: #e0e0e4;
-    }
-
-    &.color-secondary:active:not([disabled]) {
-      background-color: $col_gray_2;
-      border-color: $col_gray_8;
+      // Active state
+      &.color-#{$alias}:active:not([disabled]) {
+        background-color: var(--modus-btn-outline-#{$color}-active-bg, map-get($btn-outline-active, $color, 'bg'));
+        border-color: var(--modus-btn-outline-#{$color}-active-border-color, map-get($btn-outline-active, $color, 'color'));
+        color: var(--modus-btn-outline-#{$color}-active-color, map-get($btn-outline-active, $color, 'color'));
+        fill: var(--modus-btn-outline-#{$color}-active-color, map-get($btn-outline-active, $color, 'color'));
+      }
     }
   }
 }

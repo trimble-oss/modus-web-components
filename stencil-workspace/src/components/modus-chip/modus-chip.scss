@@ -1,8 +1,11 @@
+@import './modus-chip.vars';
+
 .modus-chip {
   align-items: center;
-  background-color: $col_gray_2;
-  border: $rem-1px solid $col_gray_2;
+  background-color: $modus-chip-bg;
+  border: $rem-1px solid $modus-chip-border-color;
   border-radius: $rem-16px;
+  color: $modus-chip-color;
   cursor: pointer;
   display: inline-flex;
   flex-direction: row;
@@ -45,97 +48,157 @@
   }
 
   span {
-    color: $col_trimble_gray;
     font-size: $rem-13px;
     font-weight: $chip-font-weight;
     margin: 0 $rem-4px;
   }
 
+  svg:not(.icon-remove) path {
+    fill: $modus-chip-color !important;
+  }
+
+  .icon-remove,
+  .icon-remove path {
+    fill: $modus-chip-close-icon-color !important;
+  }
+
+  &.style-outline {
+    background-color: $modus-chip-outline-bg;
+    border: $rem-1px solid $modus-chip-border-color;
+    color: $modus-chip-outline-color;
+
+    svg:not(.icon-remove) path {
+      fill: $modus-chip-outline-color !important;
+    }
+
+    .icon-remove,
+    .icon-remove path {
+      fill: $modus-chip-outline-close-icon-color !important;
+    }
+  }
+
   &:hover {
-    background-color: $col_gray_1;
-    border: $rem-1px solid $col_gray_1;
+    background-color: $modus-chip-hover-bg;
+    border: $rem-1px solid $modus-chip-hover-border-color;
+    color: $modus-chip-hover-color;
+
+    svg:not(.icon-remove) path {
+      fill: $modus-chip-hover-color !important;
+    }
+
+    .icon-remove,
+    .icon-remove path {
+      fill: $modus-chip-close-icon-hover-color !important;
+    }
 
     &.style-outline {
-      background-color: $col_white;
+      background-color: $modus-chip-outline-hover-bg;
+      border: $rem-1px solid $modus-chip-outline-hover-border-color;
+      color: $modus-chip-outline-hover-color;
+
+      svg:not(.icon-remove) path {
+        fill: $modus-chip-outline-hover-color !important;
+      }
+
+      .icon-remove,
+      .icon-remove path {
+        fill: $modus-chip-outline-close-icon-hover-color !important;
+      }
     }
   }
 
   &:active {
-    background-color: rgba($col_blue_light, 30%);
-    border-color: transparent;
+    background-color: $modus-chip-active-bg;
+    border: $rem-1px solid $modus-chip-active-border-color;
+    color: $modus-chip-active-color;
+
+    svg:not(.icon-remove) path {
+      fill: $modus-chip-active-color !important;
+    }
+
+    .icon-remove,
+    .icon-remove path {
+      fill: $modus-chip-close-icon-active-color !important;
+    }
 
     &.style-outline {
-      background-color: $col_blue_pale;
-      border-color: $col_blue_light;
+      background-color: $modus-chip-outline-active-bg;
+      border: $rem-1px solid $modus-chip-outline-active-border-color;
+      color: $modus-chip-outline-active-color;
 
-      span {
-        color: $col_trimble_gray;
+      svg:not(.icon-remove) path {
+        fill: $modus-chip-outline-active-color !important;
       }
 
-      svg {
-        path {
-          fill: $col_blue_light;
-        }
-      }
-    }
-
-    span {
-      color: $col_black;
-    }
-
-    svg {
-      path {
-        fill: $col_black;
+      .icon-remove,
+      .icon-remove path {
+        fill: $modus-chip-outline-close-icon-active-color !important;
       }
     }
   }
 
   &.has-error {
-    background-color: $col_red_pale;
-    border: $rem-1px solid $col_red_pale;
+    background-color: $modus-chip-error-bg;
+    border: $rem-1px solid $modus-chip-error-border-color;
+    color: $modus-chip-error-color;
 
-    &.style-outline {
-      background-color: $col_red_pale;
-      border: $rem-1px solid $col_red;
+    svg:not(.icon-remove) path {
+      fill: $modus-chip-error-color !important;
     }
 
-    span {
-      color: $col_trimble_red;
-    }
-
-    svg {
-      path {
-        fill: $col_trimble_red;
-      }
+    .icon-remove,
+    .icon-remove path {
+      fill: $modus-chip-error-close-icon-color !important;
     }
 
     &:active {
-      background-color: $col_gray_3;
-      border: $rem-1px solid $col_gray_3;
+      background-color: $modus-chip-error-active-bg;
+      border: $rem-1px solid $modus-chip-error-active-border-color;
+      color: $modus-chip-error-active-color;
 
-      &.style-outline {
-        background-color: $col_gray_1;
+      svg:not(.icon-remove) path {
+        fill: $modus-chip-error-active-color !important;
       }
 
-      span {
-        color: $col_black;
+      .icon-remove,
+      .icon-remove path {
+        fill: $modus-chip-error-close-icon-active-color !important;
+      }
+    }
+
+    &.style-outline {
+      background-color: $modus-chip-outline-error-bg;
+      border: $rem-1px solid $modus-chip-outline-error-border-color;
+      color: $modus-chip-outline-error-color;
+
+      svg:not(.icon-remove) path {
+        fill: $modus-chip-outline-error-color !important;
       }
 
-      svg {
-        path {
-          fill: $col_black;
+      .icon-remove,
+      .icon-remove path {
+        fill: $modus-chip-outline-error-close-icon-color !important;
+      }
+
+      &:active {
+        background-color: $modus-chip-outline-error-active-bg;
+        border: $rem-1px solid $modus-chip-outline-error-active-border-color;
+        color: $modus-chip-outline-error-active-color;
+
+        svg:not(.icon-remove) path {
+          fill: $modus-chip-outline-error-active-color !important;
+        }
+
+        .icon-remove,
+        .icon-remove path {
+          fill: $modus-chip-outline-error-close-icon-active-color !important;
         }
       }
     }
   }
 
-  &.style-outline {
-    background-color: transparent;
-    border: $rem-1px solid $col_gray_6;
-  }
-
   &.disabled {
-    opacity: .3;
+    opacity: 0.3;
     pointer-events: none;
   }
 }

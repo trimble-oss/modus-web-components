@@ -1,5 +1,9 @@
+@import './modus-accordion-item.vars';
+
 .accordion-item {
-  border-bottom: $rem-1px solid $col_gray_1;
+  background-color: $modus-accordion-bg;
+  border-bottom: $rem-1px solid $modus-accordion-border-color;
+  color: $modus-accordion-color;
   display: flex;
   flex-direction: column;
   font-family: $primary-font;
@@ -15,7 +19,7 @@
 
     &.disabled {
       cursor: auto;
-      opacity: .3;
+      opacity: 0.3;
     }
 
     &.small {

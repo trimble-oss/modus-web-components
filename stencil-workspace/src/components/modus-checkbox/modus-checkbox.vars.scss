@@ -1,0 +1,12 @@
+$modus-checkbox-bg: var(--modus-checkbox-bg, #fff) !default;
+$modus-checkbox-border-color: var(--modus-checkbox-border-color, #90939f) !default;
+$modus-checkbox-label-color: var(--modus-input-control-label-color, #464b52) !default;
+
+// Hover state
+$modus-checkbox-hover-border-color: var(--modus-checkbox-hover-border-color, #217cbb) !default;
+
+// Checked state
+$modus-checkbox-selected-border-color: var(--modus-checkbox-selected-border-color, #217cbb) !default;
+
+// Indeterminate state
+$modus-checkbox-indeterminate-border-color: var(--modus-checkbox-indeterminate-border-color, #217cbb) !default;
