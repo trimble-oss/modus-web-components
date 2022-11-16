@@ -4,7 +4,8 @@
   --modus-black: #000;
   --modus-white: #fff;
   --modus-link-color: #217cbb;
-  --modus-highlight-blue: #217cbb;
+  --modus-highlight-blue-color: #217cbb;
+  --modus-highlight-blue-bg: #dcedf9;
 
   // Variants
   --modus-primary: #0063a3;
@@ -112,8 +113,8 @@
   --modus-input-control-bg: var(--modus-body-bg);
   --modus-input-control-border-color: #90939f;
   --modus-input-control-label-color: #464b52;
-  --modus-input-control-hover-border-color: var(--modus-highlight-blue);
-  --modus-input-control-active-border-color: var(--modus-highlight-blue);
+  --modus-input-control-hover-border-color: var(--modus-highlight-blue-color);
+  --modus-input-control-active-border-color: var(--modus-highlight-blue-color);
 
   // Chip
   // Active
@@ -132,7 +133,7 @@
   --modus-chip-outline-hover-border-color: #7a7b80;
 
   // Active
-  --modus-chip-outline-active-bg: #dcedf9;
+  --modus-chip-outline-active-bg: var(--modus-highlight-blue-bg);
   --modus-chip-outline-active-color: #252a2e;
   --modus-chip-outline-active-border-color: #217cbb;
 
@@ -147,7 +148,7 @@
   --modus-group-item-hover-color: var(--modus-group-item-color);
 
   // Selected
-  --modus-group-item-selected-bg: #dcedf9;
+  --modus-group-item-selected-bg: var(--modus-highlight-blue-bg);
   --modus-group-item-selected-border-color: var(--modus-group-item-selected-bg);
   --modus-group-item-selected-color: var(--modus-group-item-color);
 
@@ -163,7 +164,7 @@
   --modus-file-upload-dropzone-browse-color: #0063a3;
 
   // Highlight
-  --modus-file-upload-dropzone-highlight-bg: #dcedf9;
+  --modus-file-upload-dropzone-highlight-bg: var(--modus-highlight-blue-bg);
   --modus-file-upload-dropzone-highlight-border-color: #0063a3;
   --modus-file-upload-dropzone-highlight-color: #0063a3;
 
@@ -204,7 +205,7 @@
   --modus-navbar-profile-icon-active-border-color: #d6d5db;
 
   // Pagination
-  --modus-pagination-active-bg: #dcedf9;
+  --modus-pagination-active-bg: var(--modus-highlight-blue-bg);
   --modus-pagination-active-color: #217cbb;
   --modus-pagination-bg: transparent;
   --modus-pagination-color: var(--modus-body-color);
@@ -213,15 +214,64 @@
   --modus-pagination-hover-color: var(--modus-body-color);
 
   // Radio button
-  --modus-radio-btn-active-color: var(--modus-highlight-blue);
+  --modus-radio-btn-active-color: var(--modus-highlight-blue-color);
   --modus-radio-btn-bg: transparent;
   --modus-radio-btn-color: #90939f;
-  --modus-radio-btn-hover-color: var(--modus-highlight-blue);
+  --modus-radio-btn-hover-color: var(--modus-highlight-blue-color);
   --modus-radio-btn-label-color: #464b52;
+
+  // Slider
+  --modus-slider-range-disabled-bg: #e0e1e9;
+  --modus-slider-thumb-disabled-border-color: #b7b9c3;
+  --modus-slider-thumb-disabled-bg: #cbcdd6;
+
+  // Tabs
+  --modus-tab-bg: transparent;
+  --modus-tab-color: var(--modus-body-color);
+  --modus-tab-bottom-line-color: var(--modus-tertiary);
+  --modus-tab-hover-bg: var(--modus-highlight-blue-bg);
+  --modus-tab-hover-color: var(--modus-highlight-blue-color);
+  --modus-tab-disabled-color: #b7b9c3;
+
+  // Toasts
+  --modus-toast-bg: var(--modus-white);
+  --modus-toast-border-color: #0000001a;
+  --modus-toast-color: var(--modus-body-color);
+  --modus-toast-close-btn-color: var(--modus-body-color);
+
+  --modus-toast-primary-bg: #dcedf9;
+  --modus-toast-primary-border-color: var(--modus-primary);
+  --modus-toast-primary-color: var(--modus-primary);
+  --modus-toast-primary-close-btn-color: #0e416c;
+
+  --modus-toast-secondary-bg: var(--modus-tertiary);
+  --modus-toast-secondary-border-color: var(--modus-body-color);
+  --modus-toast-secondary-color: var(--modus-body-color);
+
+  --modus-toast-tertiary-bg: #f1f1f6;
+  --modus-toast-tertiary-border-color: var(--modus-tertiary);
+  --modus-toast-tertiary-color: var(--modus-body-color);
+
+  --modus-toast-dark-bg: var(--modus-dark);
+  --modus-toast-dark-border-color: var(--modus-dark);
+  --modus-toast-dark-color: var(--modus-white);
+  --modus-toast-dark-close-btn-color: var(--modus-white);
+
+  --modus-toast-success-bg: #e0eccf;
+  --modus-toast-success-border-color: #4a821f;
+  --modus-toast-success-color: var(--modus-body-color);
+
+  --modus-toast-danger-bg: #fbd4d7;
+  --modus-toast-danger-border-color: #ab1f26;
+  --modus-toast-danger-color: var(--modus-body-color);
+
+  --modus-toast-warning-bg: #fff2cc;
+  --modus-toast-warning-border-color: var(--modus-warning);
+  --modus-toast-warning-color: var(--modus-body-color);
 }
 
 [data-mwc-theme='dark'] {
-  --modus-highlight-blue: #019aeb;
+  --modus-highlight-blue-color: #019aeb;
 
   // Variants
   --modus-primary: #019aeb;
@@ -323,8 +373,8 @@
   // Input controls
   --modus-input-control-bg: transparent;
   --modus-input-control-label-color: #fff;
-  --modus-input-control-hover-border-color: var(--modus-highlight-blue);
-  --modus-input-control-active-border-color: var(--modus-highlight-blue);
+  --modus-input-control-hover-border-color: var(--modus-highlight-blue-color);
+  --modus-input-control-active-border-color: var(--modus-highlight-blue-color);
 
   // Chip
   // Active
@@ -421,6 +471,54 @@
   --modus-pagination-hover-color: var(--modus-body-color);
   --modus-pagination-active-bg: #019aeb;
   --modus-pagination-active-color: #fff;
+
+  // Slider
+  --modus-slider-range-disabled-bg: #6a6e79;
+  --modus-slider-thumb-disabled-border-color: #7d808d;
+  --modus-slider-thumb-disabled-bg: #353a40;
+
+  // Tabs
+  --modus-tab-color: var(--modus-white);
+  --modus-tab-bottom-line-color: var(--modus-secondary);
+  --modus-tab-hover-bg: #464b52;
+  --modus-tab-hover-color: var(--modus-tab-color);
+  --modus-tab-disabled-color: #ffffff66;
+
+  // Toasts
+  --modus-toast-bg: #252a2e80;
+  --modus-toast-border-color: #585c65;
+  --modus-toast-color: var(--modus-white);
+  --modus-toast-close-btn-color: var(--modus-white);
+
+  --modus-toast-primary-bg: #019aeb80;
+  --modus-toast-primary-border-color: var(--modus-primary);
+  --modus-toast-primary-color: var(--modus-white);
+  --modus-toast-primary-close-btn-color: var(--modus-white);
+
+  --modus-toast-secondary-bg: #6a6e7980;
+  --modus-toast-secondary-border-color: var(--modus-secondary);
+  --modus-toast-secondary-color: var(--modus-white);
+
+  --modus-toast-tertiary-bg: #cbcdd680;
+  --modus-toast-tertiary-border-color: var(--modus-tertiary);
+  --modus-toast-tertiary-color: var(--modus-white);
+
+  --modus-toast-dark-bg: #171c1eb3;
+  --modus-toast-dark-border-color: #171c1e;
+  --modus-toast-dark-color: var(--modus-white);
+  --modus-toast-dark-close-btn-color: var(--modus-white);
+
+  --modus-toast-success-bg: #1e8a4480;
+  --modus-toast-success-border-color: var(--modus-success);
+  --modus-toast-success-color: var(--modus-white);
+
+  --modus-toast-danger-bg: #da212c80;
+  --modus-toast-danger-border-color: var(--modus-danger);
+  --modus-toast-danger-color: var(--modus-white);
+
+  --modus-toast-warning-bg: #fbad2680;
+  --modus-toast-warning-border-color: var(--modus-warning);
+  --modus-toast-warning-color: var(--modus-white);
 }
 
 modus-accordion-item {
@@ -621,8 +719,8 @@ modus-tree-view-item {
   --modus-tree-view-item-disabled-color: var(--modus-group-item-disabled-color);
 
   // Indicator
-  --modus-tree-view-item-selected-indicator-color: var(--modus-highlight-blue);
-  --modus-tree-view-item-drag-border-color: var(--modus-highlight-blue);
+  --modus-tree-view-item-selected-indicator-color: var(--modus-highlight-blue-color);
+  --modus-tree-view-item-drag-border-color: var(--modus-highlight-blue-color);
   --modus-tree-view-item-drag-error-border-color: var(--modus-danger);
 
   @include modus-checkbox;
@@ -672,4 +770,18 @@ modus-radio-group {
   --modus-radio-btn-label-color: var(--modus-input-control-label-color);
   --modus-radio-btn-hover-border-color: var(--modus-input-control-active-border-color);
   --modus-radio-btn-selected-border-color: var(--modus-input-control-active-border-color);
+}
+
+modus-slider {
+  --modus-slider-range-bg: var(--modus-primary);
+  --modus-slider-thumb-border-color: #217cbb;
+}
+
+modus-tabs {
+  --modus-tab-active-color: var(--modus-highlight-blue-color);
+}
+
+modus-tooltip {
+  --modus-tooltip-bg: #585c65;
+  --modus-tooltip-color: #fff;
 }
