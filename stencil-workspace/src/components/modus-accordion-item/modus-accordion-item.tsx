@@ -56,7 +56,7 @@ export class ModusAccordionItem {
     const bodyClass = `body ${sizeClass} ${this.expanded ? 'expanded' : ''}`;
 
     return (
-      <div aria-disabled={this.disabled} aria-expanded={this.expanded} class="accordion-item">
+      <div aria-disabled={this.disabled ? 'true' : undefined} aria-expanded={this.expanded} class="accordion-item">
         <div class={`header ${sizeClass} ${disabledClass}`} onClick={() => this.handleHeaderClick()} onKeyDown={(event) => this.handleKeydown(event)} tabIndex={0}>
           <span class="title">{this.headerText}</span>
           {this.expanded ? <IconChevronUpThick size={iconSize}></IconChevronUpThick> : <IconChevronDownThick size={iconSize}></IconChevronDownThick>}
