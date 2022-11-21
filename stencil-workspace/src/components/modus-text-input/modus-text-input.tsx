@@ -16,7 +16,7 @@ export class ModusTextInput {
   @Prop() autoFocusInput: boolean;
 
   /** (optional) Whether the input has a clear button. */
-  @Prop() clearable = true;
+  @Prop() clearable = false;
 
   /** (optional) Whether the input is disabled. */
   @Prop() disabled: boolean;
