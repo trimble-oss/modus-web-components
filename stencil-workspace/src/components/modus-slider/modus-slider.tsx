@@ -48,7 +48,7 @@ export class ModusSlider {
 
     return (
       <div
-        aria-disabled={this.disabled}
+        aria-disabled={this.disabled ? 'true' : undefined}
         aria-label={this.ariaLabel}
         aria-valuemax={this.maxValue}
         aria-valuemin={this.minValue}
