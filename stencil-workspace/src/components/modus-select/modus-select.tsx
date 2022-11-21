@@ -126,7 +126,7 @@ export class ModusSelect {
     const inputContainerClass = `input-container ${this.visible ? 'dropdown-visible' : ''}`;
 
     return (
-      <div role="listbox" aria-disabled={this.disabled} aria-label={this.ariaLabel} aria-required={this.required}>
+      <div role="listbox" aria-disabled={this.disabled ? 'true' : undefined} aria-label={this.ariaLabel} aria-required={this.required}>
         {this.label || this.required
           ? <div class={'label-container'}>
               {this.label ? <label>{this.label}</label> : null}

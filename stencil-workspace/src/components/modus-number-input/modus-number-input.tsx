@@ -79,7 +79,7 @@ export class ModusNumberInput {
 
     return (
       <div
-        aria-disabled={this.disabled}
+        aria-disabled={this.disabled ? 'true' : undefined}
         aria-label={this.ariaLabel}
         aria-placeholder={this.placeholder}
         aria-invalid={!!this.errorText}

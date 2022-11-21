@@ -103,7 +103,7 @@ export class ModusTextInput {
 
     return (
       <div
-        aria-disabled={this.disabled}
+        aria-disabled={this.disabled ? 'true' : undefined}
         aria-invalid={!!this.errorText}
         aria-label={this.ariaLabel}
         aria-readonly={this.readOnly}

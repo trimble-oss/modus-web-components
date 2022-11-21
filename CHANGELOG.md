@@ -6,12 +6,16 @@ View all releases at: <https://github.com/trimble-oss/modus-web-components/relea
 
 ## Unreleased
 
+### Fixed
+
+- Fixed inexplicitly set aria-disabled values
+
+## 0.1.24 - 2022-11-17
+
 ### Added
 
-- Added `backgroundColor`and `borderRadius` props for `modus-card` component in order to customize `background-color` and `border-radius` 
+- Added `backgroundColor`and `borderRadius` props for `modus-card` component in order to customize `background-color` and `border-radius`
 - Added `showCardBorder` and `showShadowOnHover` flags props for `modus-card` component in order to display or not border for card component and shadow box when component is hovered.
-
-## 0.1.24 - 2022-11-07
 
 ### Fixed
 
