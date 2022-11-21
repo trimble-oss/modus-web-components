@@ -30,11 +30,6 @@ describe('modus-text-input', () => {
     expect(className).toEqual('large');
   });
 
-  it('should default to clearable', async () => {
-    const modusTextInput = new ModusTextInput();
-    expect(modusTextInput.clearable).toBeTruthy();
-  });
-
   it('should default to enabled', async () => {
     const modusTextInput = new ModusTextInput();
     expect(modusTextInput.disabled).toBeFalsy();
@@ -88,6 +83,11 @@ describe('modus-text-input', () => {
   it('should default with no value', async () => {
     const modusTextInput = new ModusTextInput();
     expect(modusTextInput.value).toBeFalsy();
+  });
+
+  it('should not default to clearable', async () => {
+    const modusTextInput = new ModusTextInput();
+    expect(modusTextInput.clearable).toBeFalsy();
   });
 
   it('should not default with minimum length validation', async () => {
