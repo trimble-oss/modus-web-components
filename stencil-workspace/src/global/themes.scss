@@ -819,3 +819,17 @@ modus-tooltip {
   --modus-tooltip-bg: #585c65;
   --modus-tooltip-color: #fff;
 }
+
+modus-slider {
+  --modus-slider-range-bg: var(--modus-primary);
+  --modus-slider-thumb-border-color: #217cbb;
+}
+
+modus-tabs {
+  --modus-tab-active-color: var(--modus-highlight-blue-color);
+}
+
+modus-tooltip {
+  --modus-tooltip-bg: #585c65;
+  --modus-tooltip-color: #fff;
+}
