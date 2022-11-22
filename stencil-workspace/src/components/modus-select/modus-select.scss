@@ -110,7 +110,7 @@
 
         &.active {
           background-color: $modus-select-item-selected-bg;
-          border: 1px solid $modus-select-item-selected-border-color;
+          outline: 1px solid $modus-select-item-selected-border-color;
           color: $modus-select-item-selected-color;
         }
 
