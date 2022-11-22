@@ -1,5 +1,7 @@
+@import './modus-tabs.vars';
+
 .modus-tabs {
-  border: solid $col_gray_1;
+  border: solid $modus-tab-bottom-line-color;
   border-width: 0 0 $rem-1px 0;
   display: inline-flex;
   flex-direction: row;
@@ -17,10 +19,10 @@
 
   .tab {
     align-items: center;
-    background-color: $col_white;
+    background-color: $modus-tab-bg;
     border: solid transparent $rem-3px;
     border-radius: $rem-2px $rem-2px 0 0;
-    color: $col_trimble_gray;
+    color: $modus-tab-color;
     display: flex;
     font-weight: $font-weight-semi-bold;
     justify-content: center;
@@ -28,7 +30,7 @@
     text-transform: uppercase;
     text-wrap: none;
     user-select: none;
-    
+
     &.resizable {
       width: 100%;
     }
@@ -44,13 +46,13 @@
     }
 
     &.active {
-      border-color: transparent transparent $col_blue_light transparent;
-      color: $col_blue_light;
+      border-color: transparent transparent $modus-tab-active-color transparent;
+      color: $modus-tab-active-color;
     }
 
     &:hover {
-      background-color: $col_blue_pale;
-      color: $col_blue_light;
+      background-color: $modus-tab-hover-bg;
+      color: $modus-tab-hover-color;
       cursor: pointer;
     }
   }

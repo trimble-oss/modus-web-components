@@ -1,0 +1,49 @@
+$modus-toast-bg: var(--modus-toast-bg, $col_white) !default;
+$modus-toast-border-color: var(--modus-toast-border-color, #0000001a) !default;
+$modus-toast-color: var(--modus-toast-color, #252a2e) !default;
+$modus-toast-close-btn-color: var(--modus-toast-close-btn-color, #252a2e) !default;
+$modus-toast-colors: map-remove($theme-colors, 'yellow');
+$modus-toast-variants: (
+  'primary': (
+    'bg': #dcedf9,
+    'border-color': #0063a3,
+    'color': #0063a3,
+    'close-button': #0e416c,
+  ),
+  'secondary': (
+    'bg': #cbcdd6,
+    'border-color': #252a2e,
+    'color': #252a2e,
+    'close-button': #252a2e,
+  ),
+  'tertiary': (
+    'bg': #f1f1f6,
+    'border-color': #cbcdd6,
+    'color': #252a2e,
+    'close-button': #252a2e,
+  ),
+  'dark': (
+    'bg': #252a2e,
+    'border-color': #252a2e,
+    'color': #fff,
+    'close-button': #fff,
+  ),
+  'success': (
+    'bg': #e0eccf,
+    'border-color': #4a821f,
+    'color': #252a2e,
+    'close-button': #252a2e,
+  ),
+  'danger': (
+    'bg': #fbd4d7,
+    'border-color': #ab1f26,
+    'color': #252a2e,
+    'close-button': #252a2e,
+  ),
+  'warning': (
+    'bg': #fff2cc,
+    'border-color': #e49325,
+    'color': #252a2e,
+    'close-button': #252a2e,
+  ),
+);
