@@ -389,6 +389,70 @@
         options-display-prop="display"></modus-select>
       <modus-select error-text="Error demo" label="Select Demo 3"></modus-select>
       <modus-select label="Select Demo 4" valid-text="Valid demo"></modus-select>
+
+      <div>
+        <modus-button color="primary" id="toggle_slider" style="padding: 10px">Toggle Slider </modus-button>
+      </div>
+      <div>
+        <modus-slider label="Slider"></modus-slider>
+        <br />
+        <modus-slider disabled label="Disabled slider"></modus-slider>
+      </div>
+      <div>
+        <modus-button color="primary" id="toggle_spinner" style="padding: 10px">Toggle Spinner </modus-button>
+      </div>
+      <div>
+        <modus-spinner></modus-spinner>
+        <modus-spinner color="secondary"></modus-spinner>
+        <modus-spinner color="dark"></modus-spinner>
+        <br/>
+        <br/>
+        <modus-button color="primary" >
+          <modus-spinner color="white" size=".5rem"></modus-spinner>
+          &nbsp;Loading...
+        </modus-button>
+        <br/>
+        <br/>
+        <modus-button color="primary" disabled>
+          <modus-spinner color="white" size=".5rem"></modus-spinner>
+          &nbsp;Loading...
+        </modus-button>
+      </div>
+      <div>
+        <modus-button color="primary" id="toggle_tabs" style="padding: 10px">Toggle Tabs </modus-button>
+      </div>
+      <div>
+        <modus-tabs></modus-tabs>
+      </div>
+
+      <div>
+        <modus-button color="primary" id="toggle_toast" style="padding: 10px">Toggle Toasts </modus-button>
+      </div>
+      <div>
+        <modus-toast dismissible>Default</modus-toast>
+        <br/>
+        <modus-toast dismissible type="danger">Danger</modus-toast>
+        <br/>
+        <modus-toast dismissible type="dark">Dark</modus-toast>
+        <br/>
+        <modus-toast dismissible type="primary">Primary</modus-toast>
+        <br/>
+        <modus-toast dismissible type="secondary">Secondary</modus-toast>
+        <br/>
+        <modus-toast dismissible type="success">Success</modus-toast>
+        <br/>
+        <modus-toast dismissible type="tertiary">Tertiary</modus-toast>
+        <br/>
+        <modus-toast dismissible type="warning">Warning</modus-toast>
+      </div>
+
+      <div>
+        <modus-button color="primary" id="toggle_tooltip" style="padding: 10px">Toggle Tooltip </modus-button>
+      </div>
+      <div>
+        <modus-tooltip text="Tooltip text..." position="right">
+          <modus-button>Button</modus-button>
+        </modus-tooltip>
       </div>
     </div>
   </body>
@@ -421,6 +485,18 @@
     const options = [ { display: 'Option 1' }, { display: 'Option 2' }, { display: 'Option 3' } ];
     modusSelect2.options = options;
     modusSelect2.value = options[1];
+    const modusTabs = document.querySelector('modus-tabs');
+    modusTabs.tabs = [
+      {
+        id: 0,
+        label: 'Tab 1',
+      },
+      {
+        active: true,
+        id: 1,
+        label: 'Tab 2',
+      },
+    ];
 
     document.querySelector('#toggle').addEventListener('buttonClick', () => {
       document.body.setAttribute('data-mwc-theme', document.body.getAttribute('data-mwc-theme') === 'dark' ? 'light' : 'dark');

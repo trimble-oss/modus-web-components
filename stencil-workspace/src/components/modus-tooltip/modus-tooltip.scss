@@ -1,3 +1,5 @@
+@import './modus-tooltip.vars';
+
 .modus-tooltip {
   align-items: center;
   display: inline-flex;
@@ -6,9 +8,9 @@
   position: relative;
 
   .text {
-    background-color: $col_gray_9;
+    background-color: $modus-tooltip-bg;
     border-radius: $rem-2px;
-    color: $col_white;
+    color: $modus-tooltip-color;
     font-size: $rem-12px;
     opacity: 0;
     padding: $rem-4px $rem-8px;
@@ -23,7 +25,7 @@
   .text::after {
     border-style: solid;
     border-width: $rem-5px;
-    content: "";
+    content: '';
     position: absolute;
   }
 
@@ -33,7 +35,7 @@
     }
 
     .text::after {
-      border-color: $col_gray_9 transparent transparent transparent;
+      border-color: $modus-tooltip-bg transparent transparent transparent;
       left: 50%;
       margin-left: -0.313rem;
       top: 100%;
@@ -46,7 +48,7 @@
     }
 
     .text::after {
-      border-color: transparent transparent $col_gray_9 transparent;
+      border-color: transparent transparent $modus-tooltip-bg transparent;
       bottom: 100%;
       left: 50%;
       margin-left: -0.313rem;
@@ -59,7 +61,7 @@
     }
 
     .text::after {
-      border-color: transparent transparent transparent $col_gray_9;
+      border-color: transparent transparent transparent $modus-tooltip-bg;
       left: 100%;
       margin-top: -0.313rem;
       top: 50%;
@@ -72,7 +74,7 @@
     }
 
     .text::after {
-      border-color: transparent $col_gray_9 transparent transparent;
+      border-color: transparent $modus-tooltip-bg transparent transparent;
       margin-top: -0.313rem;
       right: 100%;
       top: 50%;
