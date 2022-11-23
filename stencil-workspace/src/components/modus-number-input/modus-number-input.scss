@@ -1,3 +1,5 @@
+@import './modus-number-input.vars';
+
 .modus-number-input {
   display: inline-flex;
   flex-direction: column;
@@ -5,12 +7,12 @@
   width: 100%;
 
   label {
-    color: $col_trimble_gray;
+    color: $modus-input-label-color;
     font-size: $rem-12px;
     margin-bottom: $rem-4px;
 
     span {
-      color: $col_gray_6;
+      color: $modus-input-bottom-line-color;
       margin: $rem-4px;
     }
   }
@@ -20,22 +22,24 @@
     display: flex;
 
     .required {
-      color: $col_red;
+      color: $modus-input-validation-error-color;
       margin-left: $rem-4px;
     }
   }
 
   .input-container {
     align-items: center;
-    background-color: $col_white;
-    border: $rem-1px solid $col_gray_0;
-    border-bottom-color: $col_gray_6;
+    background-color: $modus-input-bg;
+    border: $rem-1px solid $modus-input-border-color;
+    border-bottom-color: $modus-input-bottom-line-color;
     display: flex;
     flex-direction: row;
     height: 32px;
 
     input {
+      background-color: transparent;
       border: none;
+      color: $modus-input-color;
       outline: 0;
       padding: 0 $rem-8px;
       width: 100%;
@@ -44,24 +48,20 @@
     &:focus-within,
     &.error,
     &.valid {
-      border: solid $rem-1px;
       border-bottom-width: $rem-2px;
       height: 31px; // Counteract bottom border width.
     }
 
     &:focus-within {
-      border-color: $col_gray_0;
-      border-bottom-color: $col_blue_light;
+      border-bottom-color: $modus-input-bottom-line-active-color;
     }
 
     &.error {
-      border-color: $col_gray_0;
-      border-bottom-color: $col_red;
+      border-bottom-color: $modus-input-validation-error-color;
     }
 
     &.valid {
-      border-color: $col_gray_0;
-      border-bottom-color: $col_green;
+      border-bottom-color: $modus-input-validation-success-color;
     }
 
     &.large {
@@ -85,15 +85,15 @@
     margin-top: $rem-4px;
 
     &.helper {
-      color: $col_gray_9;
+      color: $modus-input-hint-text-color;
     }
 
     &.error {
-      color: $col_red;
+      color: $modus-input-validation-error-color;
     }
 
     &.valid {
-      color: $col_green;
+      color: $modus-input-validation-success-color;
     }
   }
 
@@ -101,11 +101,13 @@
     pointer-events: none;
 
     .input-container {
-      background-color: $col_gray_1;
+      background-color: $modus-input-disabled-bg;
+      border: $rem-1px solid $modus-input-disabled-border-color;
+      border-bottom-color: $modus-input-disabled-bottom-line-color;
 
       input {
-        background-color: $col_gray_1;
-        color: $col_gray_6;
+        background-color: transparent;
+        color: $modus-input-disabled-color;
       }
     }
   }

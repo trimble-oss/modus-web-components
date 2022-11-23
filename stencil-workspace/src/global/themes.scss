@@ -109,12 +109,32 @@
   --modus-btn-text-secondary-active-bg: rgba(106, 110, 121, 0.3);
   --modus-btn-text-secondary-active-color: #52555e;
 
-  // Input controls
-  --modus-input-control-bg: var(--modus-body-bg);
-  --modus-input-control-border-color: #90939f;
-  --modus-input-control-label-color: #464b52;
-  --modus-input-control-hover-border-color: var(--modus-highlight-blue-color);
-  --modus-input-control-active-border-color: var(--modus-highlight-blue-color);
+  // Input
+  --modus-input-bg: var(--modus-white);
+  --modus-input-color: #252a2e;
+  --modus-input-border-color: #e0e1e9;
+  --modus-input-bottom-line-color: #6a6e79;
+  --modus-input-bottom-line-active-color: var(--modus-highlight-blue);
+  --modus-input-hint-text-color: #6a6e79;
+  --modus-input-label-color: #464b52;
+  --modus-input-placeholder-text-color: #b7b9c3;
+  --modus-input-validation-success-color: #006638;
+  --modus-input-validation-error-color: #da212c;
+
+  // Input disabled
+  --modus-input-disabled-bg: #e0e1e9;
+  --modus-input-disabled-border-color: #e0e1e9;
+  --modus-input-disabled-bottom-line-color: #a3a6b1;
+  --modus-input-disabled-color: #a3a6b1;
+  --modus-input-hint-text-disabled-color: #a3a6b1;
+  --modus-input-placeholder-disabled-text-color: #a3a6b1;
+
+  // Checkbox and Radio button Inputs
+  --modus-check-input-bg: var(--modus-white);
+  --modus-check-input-border-color: #90939f;
+  --modus-check-input-label-color: #464b52;
+  --modus-check-input-hover-border-color: var(--modus-highlight-blue);
+  --modus-check-input-active-border-color: var(--modus-highlight-blue);
 
   // Chip
   // Active
@@ -364,11 +384,29 @@
   --modus-btn-text-secondary-active-bg: rgba(106, 110, 121, 0.3);
   --modus-btn-text-secondary-active-color: #52555e;
 
-  // Input controls
-  --modus-input-control-bg: transparent;
-  --modus-input-control-label-color: #fff;
-  --modus-input-control-hover-border-color: var(--modus-highlight-blue-color);
-  --modus-input-control-active-border-color: var(--modus-highlight-blue-color);
+  // Input
+  --modus-input-bg: #171c1e;
+  --modus-input-color: #f1f1f6;
+  --modus-input-label-color: #b7b9c3;
+  --modus-input-placeholder-text-color: #7d808d;
+  --modus-input-hint-text-color: #b7b9c3;
+  --modus-input-border-color: #464b52;
+  --modus-input-bottom-line-active-color: var(--modus-highlight-blue);
+  --modus-input-validation-success-color: #1e8a44;
+
+  // Input disabled
+  --modus-input-disabled-bg: #171c1e66;
+  --modus-input-disabled-color: #7d808d66;
+  --modus-input-disabled-border-color: #464b5266;
+  --modus-input-disabled-bottom-line-color: #90939f66;
+  --modus-input-placeholder-disabled-text-color: #7d808d66;
+  --modus-input-hint-text-disabled-color: #7d808d66;
+
+  // Checkbox and Radio button Inputs
+  --modus-check-input-bg: transparent;
+  --modus-check-input-label-color: #fff;
+  --modus-check-input-hover-border-color: var(--modus-highlight-blue);
+  --modus-check-input-active-border-color: var(--modus-highlight-blue);
 
   // Chip
   // Active
@@ -624,12 +662,12 @@ modus-card {
 // Note:
 // Workaround - CSS variables don't penetrate into nested components in shadow DOM, examples: checkbox in a Tree view item, buttons in Modal dialog, etc.
 @mixin modus-checkbox {
-  --modus-checkbox-bg: var(--modus-input-control-bg);
-  --modus-checkbox-border-color: var(--modus-input-control-border-color);
-  --modus-checkbox-label-color: var(--modus-input-control-label-color);
-  --modus-checkbox-hover-border-color: var(--modus-input-control-active-border-color);
-  --modus-checkbox-selected-border-color: var(--modus-input-control-active-border-color);
-  --modus-checkbox-indeterminate-border-color: var(--modus-input-control-active-border-color);
+  --modus-checkbox-bg: var(--modus-check-input-bg);
+  --modus-checkbox-border-color: var(--modus-check-input-border-color);
+  --modus-checkbox-label-color: var(--modus-check-input-label-color);
+  --modus-checkbox-hover-border-color: var(--modus-check-input-active-border-color);
+  --modus-checkbox-selected-border-color: var(--modus-check-input-active-border-color);
+  --modus-checkbox-indeterminate-border-color: var(--modus-check-input-active-border-color);
 }
 
 modus-checkbox {
@@ -753,11 +791,19 @@ modus-progress-bar {
 
 modus-radio-group {
   // Radio button
-  --modus-radio-btn-bg: var(--modus-input-control-bg);
-  --modus-radio-btn-border-color: var(--modus-input-control-border-color);
-  --modus-radio-btn-label-color: var(--modus-input-control-label-color);
-  --modus-radio-btn-hover-border-color: var(--modus-input-control-active-border-color);
-  --modus-radio-btn-selected-border-color: var(--modus-input-control-active-border-color);
+  --modus-radio-btn-bg: var(--modus-check-input-bg);
+  --modus-radio-btn-border-color: var(--modus-check-input-border-color);
+  --modus-radio-btn-label-color: var(--modus-check-input-label-color);
+  --modus-radio-btn-hover-border-color: var(--modus-check-input-active-border-color);
+  --modus-radio-btn-selected-border-color: var(--modus-check-input-active-border-color);
+}
+
+modus-switch {
+  --modus-switch-bg: var(--modus-check-input-border-color);
+  --modus-switch-border-color: var(--modus-check-input-border-color);
+  --modus-switch-label-color: var(--modus-check-input-label-color);
+  --modus-switch-hover-border-color: var(--modus-check-input-active-border-color);
+  --modus-switch-selected-border-color: var(--modus-check-input-active-border-color);
 }
 
 modus-slider {
