@@ -1,3 +1,5 @@
+@import './modus-switch.vars';
+
 .modus-switch {
   align-items: center;
   display: inline-flex;
@@ -6,15 +8,15 @@
   font-size: $rem-12px;
 
   .switch {
-    background-color: $col_gray_6;
-    border: $rem-2px $col_gray_6 solid;
+    background-color: $modus-switch-bg;
+    border: $rem-2px $modus-switch-border-color solid;
     border-radius: $rem-16px;
     height: $rem-14px;
     position: relative;
     width: 1.875rem;
 
     .slider {
-      background-color: $col_gray_6;
+      background-color: $modus-switch-bg;
       border-radius: $rem-16px;
       bottom: 0;
       cursor: pointer;
@@ -23,26 +25,26 @@
       position: absolute;
       right: 0;
       top: 0;
-      transition: .2s;
+      transition: 0.2s;
       width: 1.875rem;
     }
 
     .slider::before {
       background-color: $col_white;
       border-radius: 50%;
-      content: "";
+      content: '';
       height: $rem-14px;
       position: absolute;
-      transition: .2s;
+      transition: 0.2s;
       width: $rem-14px;
     }
 
     &.checked {
-      background-color: $col_blue_light;
-      border-color: $col_blue_light;
+      background-color: $modus-switch-selected-border-color;
+      border-color: $modus-switch-selected-border-color;
 
       .slider {
-        background-color: $col_blue_light;
+        background-color: $modus-switch-selected-border-color;
       }
 
       .slider::before {
@@ -51,12 +53,12 @@
     }
 
     &:active .slider {
-      background-color: $col_blue_light;
+      background-color: $modus-switch-selected-border-color;
     }
   }
 
   &:hover .switch {
-    border-color: $col_blue_light;
+    border-color: $modus-switch-hover-border-color;
   }
 
   input {
@@ -64,11 +66,12 @@
   }
 
   label {
+    color: $modus-switch-label-color;
     margin-left: $rem-8px;
   }
 
   &.disabled {
-    opacity: .3;
+    opacity: 0.3;
     pointer-events: none;
   }
 }
