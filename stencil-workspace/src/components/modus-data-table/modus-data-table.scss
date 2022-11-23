@@ -1,12 +1,14 @@
+@import './modus-data-table.vars';
+
 table {
-  border: $rem-1px $col_gray_1 solid;
+  border: $rem-1px $modus-table-border-color solid;
   border-collapse: collapse;
   width: 100%;
 
   th {
-    background-color: $col_gray_light;
-    border: $rem-1px $col_gray_1 solid;
-    color: $col_gray_8;
+    background-color: $modus-table-header-bg;
+    border: $rem-1px $modus-table-header-border-color solid;
+    color: $modus-table-header-color;
     font-size: $rem-14px;
     font-weight: $font-weight-semi-bold;
     min-height: 3rem;
@@ -43,7 +45,23 @@ table {
           padding: $rem-4px;
 
           &:hover {
-            background-color: $col_gray_3;
+            background-color: $modus-btn-icon-only-dark-hover-bg;
+
+            svg path {
+              fill: $modus-btn-icon-only-dark-hover-color;
+            }
+          }
+
+          &:active {
+            background-color: $modus-btn-icon-only-dark-active-bg;
+
+            svg path {
+              fill: $modus-btn-icon-only-dark-active-color;
+            }
+          }
+
+          svg path {
+            fill: $modus-btn-icon-only-dark-color;
           }
         }
       }
@@ -51,13 +69,13 @@ table {
   }
 
   tr {
-    color: $col_trimble_gray;
+    color: $modus-table-color;
     font-size: $rem-14px;
     height: 3rem;
 
     td {
-      background-color: $col_white;
-      border: $rem-1px $col_gray_1 solid;
+      background-color: $modus-table-bg;
+      border: $rem-1px $modus-table-border-color solid;
       padding: 0 $rem-8px;
 
       &.align-center {
@@ -80,15 +98,17 @@ table {
       }
 
       &.readonly {
-        background-color: $col_gray_0;
+        background-color: $modus-table-readonly-bg;
+        color: $modus-table-readonly-color;
       }
 
       &.selected {
-        background-color: $col_blue_pale;
+        background-color: $modus-table-selected-bg;
+        border-color: $modus-table-selected-border-color;
       }
 
       .cell-link {
-        color: $col_blue_light;
+        color: $modus-link-color;
         cursor: pointer;
         display: inline-block;
         font-weight: $font-weight-semi-bold;
@@ -119,7 +139,7 @@ table {
 
   &.row-stripe {
     tr {
-      border-bottom: $rem-1px $col_gray_1 solid;
+      border-bottom: $rem-1px $modus-table-border-color solid;
     }
   }
 
@@ -140,7 +160,23 @@ modus-dropdown {
     transition: background-color 0.15s ease-in-out;
 
     svg {
-      fill: $col_trimble_gray;
+      fill: $modus-btn-icon-only-dark-color;
+    }
+
+    &:hover {
+      background-color: $modus-btn-icon-only-dark-hover-bg;
+
+      svg path {
+        fill: $modus-btn-icon-only-dark-hover-color;
+      }
+    }
+
+    &:active {
+      background-color: $modus-btn-icon-only-dark-active-bg;
+
+      svg path {
+        fill: $modus-btn-icon-only-dark-active-color;
+      }
     }
   }
 
@@ -163,8 +199,9 @@ modus-dropdown {
 
         .action-item-content {
           align-items: center;
-          background-color: $col_white;
-          border: $rem-1px solid $col_gray_1;
+          background-color: $modus-list-item-bg;
+          border: $rem-1px solid $modus-list-item-border-color;
+          color: $modus-list-item-color;
           display: flex;
           height: $rem-24px;
           justify-content: flex-start;
@@ -173,6 +210,10 @@ modus-dropdown {
 
           svg {
             margin-right: $rem-8px;
+
+            path {
+              fill: $modus-btn-icon-only-dark-color;
+            }
           }
 
           .display-text {
@@ -187,22 +228,12 @@ modus-dropdown {
 
         &:hover {
           .action-item-content {
-            background-color: $col_gray_0;
+            background-color: $modus-list-item-hover-bg;
+            border: $rem-1px solid $modus-list-item-hover-border-color;
+            color: $modus-list-item-hover-color;
           }
         }
       }
-    }
-  }
-
-  &:hover {
-    .row-action {
-      background-color: $col_gray_0;
-    }
-  }
-
-  &:active {
-    .row-action {
-      background-color: $col_gray_1;
     }
   }
 }

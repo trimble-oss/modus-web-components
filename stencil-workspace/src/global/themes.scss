@@ -109,6 +109,13 @@
   --modus-btn-text-secondary-active-bg: rgba(106, 110, 121, 0.3);
   --modus-btn-text-secondary-active-color: #52555e;
 
+  // Icon only Button
+  --modus-btn-icon-only-dark-color: var(--modus-dark);
+  --modus-btn-icon-only-dark-hover-bg: #e0e1e9;
+  --modus-btn-icon-only-dark-hover-color: #353a40;
+  --modus-btn-icon-only-dark-active-bg: #cbcdd6;
+  --modus-btn-icon-only-dark-active-color: #2b2a37;
+
   // Input controls
   --modus-input-control-bg: var(--modus-body-bg);
   --modus-input-control-border-color: #90939f;
@@ -262,6 +269,23 @@
   --modus-toast-warning-bg: #fff2cc;
   --modus-toast-warning-border-color: var(--modus-warning);
   --modus-toast-warning-color: var(--modus-body-color);
+
+  // Table
+  --modus-table-bg: #fff;
+  --modus-table-border-color: #b7b9c3;
+  --modus-table-color: #464b52;
+
+  // Header
+  --modus-table-header-bg: #f1f1f6;
+
+  // Body
+  --modus-table-hover-bg: #dcedf9;
+  --modus-table-hover-border-color: var(--modus-table-border-color);
+  --modus-table-selected-bg: #dcedf9;
+  --modus-table-selected-border-color: var(--modus-highlight-blue-bg);
+  --modus-table-edit-border-color: var(--modus-highlight-blue-bg);
+  --modus-table-readonly-bg: #e0e1e9;
+  --modus-table-readonly-color: var(--modus-table-color);
 }
 
 [data-mwc-theme='dark'] {
@@ -363,6 +387,13 @@
   --modus-btn-text-secondary-hover-color: #838793;
   --modus-btn-text-secondary-active-bg: rgba(106, 110, 121, 0.3);
   --modus-btn-text-secondary-active-color: #52555e;
+
+  // Icon only Button
+  --modus-btn-icon-only-dark-color: var(--modus-dark);
+  --modus-btn-icon-only-dark-hover-bg: #90939f;
+  --modus-btn-icon-only-dark-hover-color: #fff;
+  --modus-btn-icon-only-dark-active-bg: #6a6e79;
+  --modus-btn-icon-only-dark-active-color: #fff;
 
   // Input controls
   --modus-input-control-bg: transparent;
@@ -507,6 +538,25 @@
   --modus-toast-warning-bg: #fbad2680;
   --modus-toast-warning-border-color: var(--modus-warning);
   --modus-toast-warning-color: var(--modus-white);
+
+  // Table
+  --modus-table-bg: #171c1e;
+  --modus-table-border-color: #464b52;
+  --modus-table-color: #fff;
+
+  // Header
+  --modus-table-header-bg: #464b52;
+  --modus-table-header-border-color: #585c65;
+  --modus-table-header-color: #e0e1e9;
+
+  // Body
+  --modus-table-hover-bg: #019aeb4c;
+  --modus-table-hover-border-color: #6a6e79;
+  --modus-table-selected-bg: #019aeb4d;
+  --modus-table-selected-border-color: var(--modus-highlight-blue-bg);
+  --modus-table-edit-border-color: var(--modus-highlight-blue-bg);
+  --modus-table-readonly-bg: var(--modus-table-bg);
+  --modus-table-readonly-color: #b7b9c3;
 }
 
 modus-accordion-item {
@@ -515,7 +565,7 @@ modus-accordion-item {
   --modus-accordion-border-color: var(--modus-border-color);
 }
 
-modus-badge {
+@mixin modus-badge {
   // Background
   --modus-badge-primary-bg: var(--modus-primary);
   --modus-badge-secondary-bg: var(--modus-secondary);
@@ -533,6 +583,10 @@ modus-badge {
   --modus-badge-text-success: var(--modus-success);
   --modus-badge-text-warning: var(--modus-warning);
   --modus-badge-text-danger: var(--modus-danger);
+}
+
+modus-badge {
+  @include modus-badge;
 }
 
 modus-breadcrumb {
@@ -714,7 +768,7 @@ modus-tree-view-item {
   @include modus-checkbox;
 }
 
-modus-list-item {
+@mixin modus-list-item {
   --modus-list-item-bg: var(--modus-group-item-bg);
   --modus-list-item-border-color: var(--modus-group-item-border-color);
   --modus-list-item-color: var(--modus-group-item-color);
@@ -733,6 +787,10 @@ modus-list-item {
   --modus-list-item-disabled-bg: var(--modus-group-item-disabled-bg);
   --modus-list-item-disabled-border-color: var(--modus-group-item-disabled-border-color);
   --modus-list-item-disabled-color: var(--modus-group-item-disabled-color);
+}
+
+modus-list-item {
+  @include modus-list-item;
 }
 
 modus-modal {
@@ -769,7 +827,18 @@ modus-tabs {
   --modus-tab-active-color: var(--modus-highlight-blue-color);
 }
 
-modus-tooltip {
+@mixin modus-tooltip {
   --modus-tooltip-bg: #585c65;
   --modus-tooltip-color: #fff;
+}
+
+modus-tooltip {
+  @include modus-tooltip;
+}
+
+modus-data-table {
+  @include modus-badge;
+  @include modus-checkbox;
+  @include modus-list-item;
+  @include modus-tooltip;
 }
