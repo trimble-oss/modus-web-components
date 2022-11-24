@@ -12,7 +12,7 @@ describe('modus-text-input', () => {
         <mock:shadow-root>
             <div class="modus-text-input">
                 <div class="input-container medium">
-                    <input class="has-right-icon" type="text" tabindex="0">
+                    <input type="text" tabindex="0">
                     <span class="icons"></span>
                 </div>
             </div>
@@ -28,6 +28,11 @@ describe('modus-text-input', () => {
 
     className = modusTextInput.classBySize.get('large');
     expect(className).toEqual('large');
+  });
+
+  it('should not default to clearable', async () => {
+    const modusTextInput = new ModusTextInput();
+    expect(modusTextInput.clearable).toBeFalsy();
   });
 
   it('should default to enabled', async () => {
@@ -83,11 +88,6 @@ describe('modus-text-input', () => {
   it('should default with no value', async () => {
     const modusTextInput = new ModusTextInput();
     expect(modusTextInput.value).toBeFalsy();
-  });
-
-  it('should not default to clearable', async () => {
-    const modusTextInput = new ModusTextInput();
-    expect(modusTextInput.clearable).toBeFalsy();
   });
 
   it('should not default with minimum length validation', async () => {

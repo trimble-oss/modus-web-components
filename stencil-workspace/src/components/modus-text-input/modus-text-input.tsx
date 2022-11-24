@@ -124,7 +124,7 @@ export class ModusTextInput {
           <input
             aria-placeholder={this.placeholder}
             class={`${this.includeSearchIcon ? 'has-left-icon' : ''} ${
-              this.clearable ? 'has-right-icon' : null
+              this.clearable ? 'has-right-icon' : ''
             }`}
             disabled={this.disabled}
             inputmode={this.inputmode}
