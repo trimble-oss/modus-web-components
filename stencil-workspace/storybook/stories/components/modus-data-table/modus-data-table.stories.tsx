@@ -8,13 +8,7 @@ export default {
   parameters: {
     controls: { disabled: true, expanded: true, sort: 'alpha' },
     actions: {
-      handles: [
-        'cellLinkClick',
-        'rowDoubleClick',
-        'selection',
-        'sort',
-        'rowActionClick'
-      ],
+      handles: ['cellLinkClick', 'rowDoubleClick', 'selection', 'sort', 'rowActionClick'],
     },
     docs: {
       inlineStories: false,
@@ -45,6 +39,10 @@ export const Hodgepodge = () => html`
 const setDataTable = () => {
   const tag = document.createElement('script');
   tag.innerHTML = `
+    document.body.setAttribute('data-mwc-theme', localStorage.getItem("data-mwc-theme") || 'light');
+    window.addEventListener('storage', () => {
+      document.body.setAttribute('data-mwc-theme', localStorage.getItem("data-mwc-theme") || 'light');
+    });
     document.querySelector('modus-data-table').columns = [{ display: 'Name', width: '33%'}, { display: 'Age', width: '33%' }, { display: 'Contacted', width: '33%' }];
     document.querySelector('modus-data-table').data = [['John', 25, false], ['Jane', 26, false], ['Joe', 27, true]];
   `;
@@ -55,6 +53,10 @@ const setDataTable = () => {
 const setDataTableHodgepodge = () => {
   const tag = document.createElement('script');
   tag.innerHTML = `
+    document.body.setAttribute('data-mwc-theme', localStorage.getItem("data-mwc-theme") || 'light');
+    window.addEventListener('storage', () => {
+      document.body.setAttribute('data-mwc-theme', localStorage.getItem("data-mwc-theme") || 'light');
+    });
     document.querySelector('modus-data-table').columns = [
       { display: 'Name', width: '100px' },
       { display: 'Age', align: 'right', width: '34px' },
