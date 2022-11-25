@@ -13,7 +13,7 @@ export default {
         'rowDoubleClick',
         'selection',
         'sort',
-        'rowActionClick'
+        'rowActionClick',
       ],
     },
     docs: {
