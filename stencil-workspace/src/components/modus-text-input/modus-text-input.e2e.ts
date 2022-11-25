@@ -12,7 +12,7 @@ describe('modus-text-input', () => {
   it('renders changes to clearable', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<modus-text-input></modus-text-input>');
+    await page.setContent('<modus-text-input clearable></modus-text-input>');
 
     let clear = await page.find('modus-text-input >>> .clear');
     expect(clear).toBeNull();
@@ -167,7 +167,7 @@ describe('modus-text-input', () => {
   it('renders changes to value', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<modus-text-input></modus-text-input>');
+    await page.setContent('<modus-text-input clearable></modus-text-input>');
 
     const textInput = await page.find('modus-text-input');
     textInput.setProperty('value', 'Some value');
@@ -193,7 +193,7 @@ describe('modus-text-input', () => {
   it('should clear on handleClear', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<modus-text-input value="Some value"></modus-text-input>');
+    await page.setContent('<modus-text-input clearable value="Some value"></modus-text-input>');
 
     const valueChange = await page.spyOnEvent('valueChange');
     const clear = await page.find('modus-text-input >>> span.clear');
