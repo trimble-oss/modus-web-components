@@ -1,13 +1,13 @@
 # CODEOWNERS
 # https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
-# Folders
+## Folders
 
 *                    @ryan-henness-trimble
 /react-workspace/    @msankaran0712
 /stencil-workspace/  @ryan-henness-trimble
 
-# File Types
+## File Types
 
 .cspell.json              @coliff
 *.css                     @coliff
