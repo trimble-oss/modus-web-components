@@ -42,7 +42,7 @@
       padding: 0 $rem-6px;
 
       path {
-        fill: $modus-input-hint-text-color;
+        fill: $modus-input-helper-icon-color;
       }
     }
 
@@ -64,14 +64,14 @@
       }
 
       &::placeholder {
-        color: $modus-input-placeholder-text-color;
+        color: $modus-input-hint-text-color;
       }
     }
 
     .icons {
       align-items: center;
       background-color: $modus-input-bg;
-      color: $modus-input-hint-text-color;
+      color: $modus-input-helper-icon-color;
       display: flex;
       font-size: $rem-16px;
       justify-content: center;
@@ -94,6 +94,7 @@
     &:focus-within,
     &.error,
     &.valid {
+      border-bottom-width: $rem-2px;
       height: 1.9375rem; // Counteract bottom border width.
     }
 
@@ -129,7 +130,7 @@
     margin-top: $rem-4px;
 
     &.helper {
-      color: $modus-input-hint-text-color;
+      color: $modus-input-label-color;
     }
 
     &.error {
@@ -161,7 +162,7 @@
       border-bottom-color: $modus-input-disabled-bottom-line-color;
 
       svg path {
-        fill: $modus-input-hint-text-disabled-color;
+        fill: $modus-input-disabled-color;
       }
 
       .icons {

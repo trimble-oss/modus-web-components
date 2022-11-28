@@ -36,7 +36,7 @@
 
     &.disabled {
       cursor: default;
-      opacity: 0.3;
+      opacity: $modus-checkbox-disabled-opacity;
     }
 
     .checkmark {

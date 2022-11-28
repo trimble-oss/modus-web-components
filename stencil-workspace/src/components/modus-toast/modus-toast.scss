@@ -21,10 +21,6 @@
   .close {
     margin-left: auto;
 
-    svg path {
-      fill: $modus-toast-close-btn-color;
-    }
-
     &:hover svg path {
       opacity: 0.5;
     }
@@ -34,11 +30,21 @@
     &.#{$color} {
       background-color: var(--modus-toast-#{$color}-bg, map-get($value, 'bg'));
       border-color: var(--modus-toast-#{$color}-border-color, map-get($value, 'border-color'));
-      color: var(--modus-toast-#{$color}-color, map-get($value, 'color'));
+      color: var(--modus-toast-#{$color}-color, if(map-get($value, 'color') == null, $modus-toast-color, map-get($value, 'color')));
 
       .close {
         svg path {
-          fill: var(--modus-toast-#{$color}-close-btn-color, $modus-toast-close-btn-color);
+          fill: var(--modus-toast-#{$color}-close-btn-color, if(map-get($value, 'close-button') == null, $modus-toast-close-btn-color, map-get($value, 'close-button')));
+        }
+      }
+
+      @if $color == 'dark' {
+        svg:not(.icon-close) path {
+          fill: var(--modus-toast-#{$color}-color, if(map-get($value, 'color') == null, $modus-toast-color, map-get($value, 'color')));
+        }
+      } @else {
+        svg:not(.icon-close) path {
+          fill: var(--modus-toast-#{$color}-border-color, map-get($value, 'border-color'));
         }
       }
     }

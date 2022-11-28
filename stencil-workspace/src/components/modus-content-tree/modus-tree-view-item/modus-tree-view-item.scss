@@ -17,15 +17,19 @@
     fill: $modus-tree-view-item-color;
   }
 
+  .icon-chevron-right-thick,
+  .icon-chevron-down-thick {
+    path {
+      fill: $modus-tree-view-item-chevron-color;
+    }
+  }
+
   &.disabled {
-    background-color: $modus-tree-view-item-disabled-bg !important;
-    border-color: $modus-tree-view-item-disabled-border-color !important;
-    color: $modus-tree-view-item-disabled-color !important;
+    color: $modus-tree-view-item-disabled-color;
     cursor: default !important;
-    fill: $modus-tree-view-item-disabled-color !important;
 
     svg path {
-      fill: $modus-tree-view-item-disabled-color !important;
+      fill: $modus-tree-view-item-disabled-color;
     }
   }
 
@@ -41,15 +45,8 @@
     display: none !important;
   }
 
-  &:hover {
+  &:hover:not(.disabled) {
     background-color: $modus-tree-view-item-hover-bg;
-    border-color: $modus-tree-view-item-hover-border-color;
-    color: $modus-tree-view-item-hover-color;
-    fill: $modus-tree-view-item-hover-color;
-
-    svg path {
-      fill: $modus-tree-view-item-hover-color;
-    }
   }
 
   .icon-slot {
@@ -88,12 +85,6 @@
   &.selected {
     background-color: $modus-tree-view-item-selected-bg;
     border-color: $modus-tree-view-item-selected-border-color;
-    color: $modus-tree-view-item-selected-color;
-    fill: $modus-tree-view-item-selected-color;
-
-    svg path {
-      fill: $modus-tree-view-item-selected-color;
-    }
   }
 
   &.small {

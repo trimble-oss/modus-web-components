@@ -4,15 +4,10 @@ $modus-list-item-color: var(--modus-list-item-color, #252a2e) !default;
 
 // Hover
 $modus-list-item-hover-bg: var(--modus-list-item-hover-bg, #e0e1e9) !default;
-$modus-list-item-hover-border-color: var(--modus-list-item-hover-border-color, #e0e1e9) !default;
-$modus-list-item-hover-color: var(--modus-list-item-hover-color, #252a2e) !default;
 
 // Selected
 $modus-list-item-selected-bg: var(--modus-list-item-selected-bg, #dcedf9) !default;
 $modus-list-item-selected-border-color: var(--modus-list-item-selected-border-color, #dcedf9) !default;
-$modus-list-item-selected-color: var(--modus-list-item-selected-color, #252a2e);
 
 // Disabled
-$modus-list-item-disabled-bg: var(--modus-list-item-disabled-bg, #fff) !default;
-$modus-list-item-disabled-border-color: var(--modus-list-item-disabled-border-color, #e0e1e9) !default;
 $modus-list-item-disabled-color: var(--modus-list-item-disabled-color, #b7b9c3) !default;

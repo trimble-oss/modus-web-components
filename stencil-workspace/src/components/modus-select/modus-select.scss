@@ -76,7 +76,7 @@
         padding: 0 $rem-8px;
 
         svg path {
-          fill: $modus-input-hint-text-color;
+          fill: $modus-input-helper-icon-color;
         }
       }
     }
@@ -110,13 +110,11 @@
 
         &.active {
           background-color: $modus-select-item-selected-bg;
-          outline: 1px solid $modus-select-item-selected-border-color;
-          color: $modus-select-item-selected-color;
+          outline: 1px solid $modus-select-item-selected-bg;
         }
 
         &:hover {
           background-color: $modus-select-item-hover-bg;
-          color: $modus-select-item-hover-color;
         }
       }
     }
@@ -127,7 +125,7 @@
     margin-top: $rem-4px;
 
     &.helper {
-      color: $modus-input-hint-text-color;
+      color: $modus-input-label-color;
     }
 
     &.error {
@@ -156,7 +154,7 @@
       }
 
       svg path {
-        fill: $modus-input-hint-text-disabled-color;
+        fill: $modus-input-disabled-color;
       }
 
       input {

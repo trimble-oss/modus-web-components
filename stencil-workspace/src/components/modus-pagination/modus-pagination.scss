@@ -2,7 +2,7 @@
 
 nav {
   align-items: center;
-  background-color: $modus-pagination-bg;
+  background-color: transparent;
   border-radius: $rem-2px;
   color: $modus-pagination-color;
   display: inline-flex;
@@ -46,7 +46,6 @@ nav {
       &.hoverable:not(.active) {
         &:hover {
           background-color: $modus-pagination-hover-bg;
-          color: $modus-pagination-hover-color;
         }
       }
     }
