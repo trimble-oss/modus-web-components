@@ -202,7 +202,7 @@ export class ModusNavbar {
           {this.showMainMenu &&
             <div class="navbar-button">
               <span onKeyDown={(event) => this.mainMenuKeydownHandler(event)} tabIndex={0}>
-                <IconMenu size="24" onClick={(event) => this.mainMenuClickHandler(event)} />
+                <IconMenu size="32" onClick={(event) => this.mainMenuClickHandler(event)} />
               </span>
               {this.mainMenuVisible && <modus-navbar-main-menu><slot name="main"></slot></modus-navbar-main-menu>}
             </div>}
@@ -211,24 +211,24 @@ export class ModusNavbar {
         <div class={`right ${direction}`}>
           {this.showSearch &&
             <div class="navbar-button search">
-              <IconSearch size="24" />
+              <IconSearch size="32" />
             </div>}
           {this.showNotifications &&
             <div class="navbar-button">
               <span onKeyDown={(event) => this.notificationsMenuKeydownHandler(event)} tabIndex={0}>
-                <IconNotifications size="24" onClick={(event) => this.notificationsMenuClickHandler(event)} />
+                <IconNotifications size="32" onClick={(event) => this.notificationsMenuClickHandler(event)} />
               </span>
               {this.notificationsMenuVisible && <modus-navbar-notifications-menu reverse={this.reverse}><slot name="notifications"></slot></modus-navbar-notifications-menu>}
             </div>}
           {this.showPendoPlaceholder && <div class={'pendo-placeholder'} />}
           {this.showHelp &&
             <div class="navbar-button">
-              <IconHelp size="24" onClick={(event) => this.helpMenuClickHandler(event)} />
+              <IconHelp size="32" onClick={(event) => this.helpMenuClickHandler(event)} />
             </div>}
           {this.showAppsMenu &&
             <div class="navbar-button">
               <span onKeyDown={(event) => this.appsMenuKeydownHandler(event)} tabIndex={0}>
-                <IconApps size="24" onClick={(event) => this.appsMenuClickHandler(event)} />
+                <IconApps size="32" onClick={(event) => this.appsMenuClickHandler(event)} />
               </span>
               {this.appsMenuVisible && <modus-navbar-apps-menu apps={this.apps} reverse={this.reverse} />}
             </div>}
