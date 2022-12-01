@@ -9,6 +9,7 @@ View all releases at: <https://github.com/trimble-oss/modus-web-components/relea
 ### Fixed
 
 - Fixed inexplicitly set aria-disabled values
+- Modus Text Inputs no longer have 'clear input' button on by default
 
 ## 0.1.24 - 2022-11-17
 

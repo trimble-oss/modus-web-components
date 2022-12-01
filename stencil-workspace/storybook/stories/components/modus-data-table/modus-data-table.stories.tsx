@@ -8,7 +8,13 @@ export default {
   parameters: {
     controls: { disabled: true, expanded: true, sort: 'alpha' },
     actions: {
-      handles: ['cellLinkClick', 'rowDoubleClick', 'selection', 'sort', 'rowActionClick'],
+      handles: [
+        'cellLinkClick',
+        'rowDoubleClick',
+        'selection',
+        'sort',
+        'rowActionClick',
+      ],
     },
     docs: {
       inlineStories: false,

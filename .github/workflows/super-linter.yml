@@ -7,8 +7,14 @@ on:
     branches-ignore:
       - 'dependabot/**'
 
+permissions:  # added using https://github.com/step-security/secure-workflows
+  contents: read
+
 jobs:
   build:
+    permissions:
+      contents: read  # for actions/checkout to fetch code
+      statuses: write  # for github/super-linter/slim to mark status of each linter run
     name: Lint Code Base
     runs-on: ubuntu-latest
 
@@ -26,13 +32,13 @@ jobs:
           JAVASCRIPT_DEFAULT_STYLE: prettier
           LINTER_RULES_PATH: /
           LOG_LEVEL: NOTICE
+          MARKDOWN_CONFIG_FILE: .markdownlint.json
           SUPPRESS_POSSUM: true
           VALIDATE_ALL_CODEBASE: false
           VALIDATE_CSS: false
           VALIDATE_EDITORCONFIG: false
           VALIDATE_GITLEAKS: false
           VALIDATE_HTML: false
-          VALIDATE_MARKDOWN: false
           VALIDATE_NATURAL_LANGUAGE: false
           VALIDATE_YAML: false
           VALIDATE_TYPESCRIPT_ES: false
