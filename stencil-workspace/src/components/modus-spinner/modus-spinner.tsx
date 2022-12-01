@@ -7,7 +7,7 @@ import { Component, Prop, h } from '@stencil/core';
   shadow: true,
 })
 export class ModusSpinner {
-  /** (optional) The color of the spinner in hex format (eg #FFFFFF) */
+  /** (optional) The color of the spinner. It can be a custom color or one of the variants  - primary, secondary, tertiary, dark, success, danger and warning.  */
   @Prop() color = 'primary';
 
   /** (optional) The size of the spinner, will be applied to both the height and width */
