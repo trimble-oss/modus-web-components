@@ -1,9 +1,6 @@
 name: Create and publish React npm package
 on:
   workflow_dispatch:
-permissions:  # added using https://github.com/step-security/secure-workflows
-  contents: read
-
 jobs:
   publish_react:
     runs-on: ubuntu-latest

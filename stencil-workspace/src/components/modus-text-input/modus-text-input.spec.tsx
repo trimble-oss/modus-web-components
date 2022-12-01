@@ -12,7 +12,7 @@ describe('modus-text-input', () => {
         <mock:shadow-root>
             <div class="modus-text-input">
                 <div class="input-container medium">
-                    <input type="text" tabindex="0">
+                    <input class="has-right-icon" type="text" tabindex="0">
                     <span class="icons"></span>
                 </div>
             </div>
@@ -30,9 +30,9 @@ describe('modus-text-input', () => {
     expect(className).toEqual('large');
   });
 
-  it('should not default to clearable', async () => {
+  it('should default to clearable', async () => {
     const modusTextInput = new ModusTextInput();
-    expect(modusTextInput.clearable).toBeFalsy();
+    expect(modusTextInput.clearable).toBeTruthy();
   });
 
   it('should default to enabled', async () => {

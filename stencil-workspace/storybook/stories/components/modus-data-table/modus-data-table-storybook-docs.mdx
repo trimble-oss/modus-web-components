@@ -111,21 +111,21 @@ To define columns and data in the table _using objects_:
 - When a row action is clicked, a `ModusDataTableRowActionClickEvent` is fired with the relevant `actionId`, and `rowId`.
   - Each row action takes an `_id` (which will be emitted in the event detail), and a `display` object that sets the `text` and optional `icon`.
     ```ts
-    document.querySelector('modus-data-table').rowActions = [
-      {
-        _id: '0',
-        display: {
-          text: 'Delete',
-          icon: 'delete',
-        },
-      },
-      {
-        _id: '1',
-        display: {
-          text: 'Edit',
-        },
-      },
-    ];
+      document.querySelector('modus-data-table').rowActions = [
+          {
+              _id: '0',
+              display: {
+                  text: 'Delete',
+                  icon: 'delete'
+              }
+          },
+          {
+              _id: '1',
+              display: {
+                  text: 'Edit'
+              }
+          }
+      ];
     ```
 
 ### Cell Types
@@ -201,8 +201,8 @@ interface ModusDataTableSort {
 
 interface ModusDataTableSortEvent extends ModusDataTableSort {}
 interface ModusDataTableRowActionClickEvent {
-  actionId: string;
-  rowId: string;
+  actionId: string,
+  rowId: string
 }
 
 interface ModusDataTableDisplayOptions {
@@ -234,14 +234,15 @@ interface ModusTableSortOptions {
 
 ### Properties
 
-| Property               | Attribute | Description                                | Type                           | Default                                                                                                         |
-| ---------------------- | --------- | ------------------------------------------ | ------------------------------ | --------------------------------------------------------------------------------------------------------------- |
-| `columns` _(required)_ | --        |                                            | `TColumn[], string[]`          | `undefined`                                                                                                     |
-| `data` _(required)_    | --        |                                            | `TCell[][], TRow[]`            | `undefined`                                                                                                     |
-| `displayOptions`       | --        | Options for data table display.            | `ModusDataTableDisplayOptions` | `{ animateRowActionsDropdown: false, borderless: true, cellBorderless: true, rowStripe: false, size: 'large' }` |
-| `rowActions`           | --        | Actions that can be performed on each row. | `ModusDataTableRowAction[]`    | `[]`                                                                                                            |
-| `selectionOptions`     | --        | Options for data table item selection.     | `ModusTableSelectionOptions`   | `{ canSelect: false, checkboxSelection: false, }`                                                               |
-| `sortOptions`          | --        | Options for data table column sort.        | `ModusTableSortOptions`        | `{ canSort: false, serverSide: false, }`                                                                        |
+| Property               | Attribute | Description                                | Type                           | Default                                                                                                                               |
+| ---------------------- | --------- | ------------------------------------------ | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `columns` _(required)_ | --        |                                            | `TColumn[], string[]`        | `undefined`                                                                                                                           |
+| `data` _(required)_    | --        |                                            | `TCell[][], TRow[]`          | `undefined`                                                                                                                           |
+| `displayOptions`       | --        | Options for data table display.            | `ModusDataTableDisplayOptions` | `{     animateRowActionsDropdown: false,     borderless: true,     cellBorderless: true,     rowStripe: false,     size: 'large'   }` |
+| `rowActions`           | --        | Actions that can be performed on each row. | `ModusDataTableRowAction[]`    | `[]`                                                                                                                                  |
+| `selectionOptions`     | --        | Options for data table item selection.     | `ModusTableSelectionOptions`   | `{     canSelect: false,     checkboxSelection: false,   }`                                                                           |
+| `sortOptions`          | --        | Options for data table column sort.        | `ModusTableSortOptions`        | `{     canSort: false,     serverSide: false,   }`                                                                                    |
+
 
 ### Events
 

@@ -16,7 +16,7 @@ export class ModusTextInput {
   @Prop() autoFocusInput: boolean;
 
   /** (optional) Whether the input has a clear button. */
-  @Prop() clearable = false;
+  @Prop() clearable = true;
 
   /** (optional) Whether the input is disabled. */
   @Prop() disabled: boolean;
@@ -124,7 +124,7 @@ export class ModusTextInput {
           <input
             aria-placeholder={this.placeholder}
             class={`${this.includeSearchIcon ? 'has-left-icon' : ''} ${
-              this.clearable ? 'has-right-icon' : ''
+              this.clearable ? 'has-right-icon' : null
             }`}
             disabled={this.disabled}
             inputmode={this.inputmode}
