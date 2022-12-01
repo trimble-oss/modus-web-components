@@ -23,7 +23,7 @@
     "@storybook/addon-essentials": "^6.5.13",
     "@storybook/addon-links": "^6.5.13",
     "@storybook/web-components": "^6.5.13",
-    "babel-loader": "^8.2.5",
+    "babel-loader": "^9.1.0",
     "storybook-dark-mode": "^1.1.2"
   },
   "license": "MIT"
