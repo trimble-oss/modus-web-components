@@ -54,7 +54,7 @@
     "autoprefixer": "^10.4.12",
     "copyfiles": "^2.4.1",
     "eslint": "^8.24.0",
-    "eslint-plugin-storybook": "^0.6.4",
+    "eslint-plugin-storybook": "^0.6.7",
     "jest": "^27.0.3",
     "jest-cli": "^27.5.1",
     "prettier": "^2.7.1",
