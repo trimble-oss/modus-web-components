@@ -14,7 +14,7 @@ export class ModusDropdown {
   @Prop() animateList = false;
 
   /** (optional) The dropdown's aria-label. */
-  @Prop() ariaLabel: string;
+  @Prop() ariaLabel: string | null;
 
   /** (optional) Determines custom dropdown placement offset. */
   @Prop() customPlacement: {

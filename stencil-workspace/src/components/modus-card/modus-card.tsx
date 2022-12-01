@@ -8,7 +8,7 @@ import { Component, Prop, h } from '@stencil/core';
 })
 export class ModusCard {
   /** (optional) The card's aria-label. */
-  @Prop() ariaLabel: string;
+  @Prop() ariaLabel: string | null;
 
   /** (optional) The height of the card. */
   @Prop() height = '269px';

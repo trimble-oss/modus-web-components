@@ -9,7 +9,7 @@ import { Component, h, Prop } from '@stencil/core';
 
 export class ModusAccordion {
   /** (optional) The accordion's aria-label. */
-  @Prop() ariaLabel: string;
+  @Prop() ariaLabel: string | null;
 
   render(): unknown {
     return (

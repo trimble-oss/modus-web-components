@@ -8,7 +8,7 @@ import { Component, Event, EventEmitter, h, Prop, Watch } from '@stencil/core';
 })
 export class ModusNumberInput {
   /** (optional) The input's aria-label. */
-  @Prop() ariaLabel: string;
+  @Prop() ariaLabel: string | null;
 
   /** (optional) Whether the input is disabled. */
   @Prop() disabled: boolean;

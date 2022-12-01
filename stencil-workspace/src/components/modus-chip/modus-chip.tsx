@@ -10,7 +10,7 @@ import { IconCheck } from '../icons/icon-check';
 })
 export class ModusChip {
   /** (optional) The chip's aria-label. */
-  @Prop() ariaLabel: string;
+  @Prop() ariaLabel: string | null;
 
   /** (optional) The chip's style. */
   @Prop() chipStyle: 'outline' | 'solid' = 'solid';

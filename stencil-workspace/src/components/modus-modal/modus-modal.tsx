@@ -9,7 +9,7 @@ import { IconClose } from '../icons/icon-close';
 })
 export class ModusModal {
   /** (optional) The modal's aria-label. */
-  @Prop() ariaLabel: string;
+  @Prop() ariaLabel: string | null;
 
   /** (optional) The modal's primary button text. */
   @Prop() headerText: string;

@@ -8,7 +8,7 @@ import { Component, Prop, h } from '@stencil/core';
 })
 export class ModusBadge {
   /** (optional) The badge's aria-label */
-  @Prop() ariaLabel: string;
+  @Prop() ariaLabel: string | null;
 
   /** (optional) The color of the badge */
   @Prop() color: 'danger' | 'dark' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning' = 'primary';

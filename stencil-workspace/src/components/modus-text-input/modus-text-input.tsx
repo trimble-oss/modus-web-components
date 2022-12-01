@@ -10,7 +10,7 @@ import { IconClose } from '../icons/icon-close';
 })
 export class ModusTextInput {
   /** (optional) The input's aria-label. */
-  @Prop() ariaLabel: string;
+  @Prop() ariaLabel: string | null;
 
   /** (optional) Sets autofocus on the input. */
   @Prop() autoFocusInput: boolean;

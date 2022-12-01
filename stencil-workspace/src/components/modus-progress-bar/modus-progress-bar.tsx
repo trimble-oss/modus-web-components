@@ -9,7 +9,7 @@ import { Component, Prop, h, Host } from '@stencil/core';
 
 export class ModusProgressBar {
   /** (optional) The progress bar's aria-label. */
-  @Prop() ariaLabel: string;
+  @Prop() ariaLabel: string | null;
 
   /** (optional) The progress bar's background color. */
   @Prop() backgroundColor: string;

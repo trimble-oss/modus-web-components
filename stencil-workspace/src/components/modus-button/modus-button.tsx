@@ -8,7 +8,7 @@ import { Component, Prop, h, Event, EventEmitter, Element, State, Listen } from 
 })
 export class ModusButton {
   /** (optional) The button's aria-label. */
-  @Prop() ariaLabel: string;
+  @Prop() ariaLabel: string | null;
 
   /** (optional) The style of the button */
   @Prop() buttonStyle: 'borderless' | 'fill' | 'outline' = 'fill';
