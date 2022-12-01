@@ -39,7 +39,7 @@
     "copy-docs": "copyfiles -f ../README.md ../SUPPORT.md ./"
   },
   "dependencies": {
-    "@stencil/core": "^2.19.2"
+    "@stencil/core": "^2.19.3"
   },
   "devDependencies": {
     "@stencil/angular-output-target": "^0.4.0",
@@ -49,7 +49,7 @@
     "@types/jest": "^27.5.1",
     "@types/puppeteer": "^5.4.6",
     "@types/puppeteer-core": "^7.0.4",
-    "@typescript-eslint/eslint-plugin": "^5.39.0",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
     "@typescript-eslint/parser": "^5.39.0",
     "autoprefixer": "^10.4.13",
     "copyfiles": "^2.4.1",
@@ -64,7 +64,7 @@
     "stylelint-config-prettier": "9.0.4",
     "stylelint-config-standard-scss": "6.1.0",
     "stylelint-order": "5.0.0",
-    "typescript": "^4.8.4"
+    "typescript": "^4.9.3"
   },
   "engines": {
     "node": ">=14",
