@@ -19,7 +19,7 @@ export namespace Components {
         /**
           * (optional) The accordion's aria-label.
          */
-        "ariaLabel": string;
+        "ariaLabel": string | null;
     }
     interface ModusAccordionItem {
         /**
@@ -43,7 +43,7 @@ export namespace Components {
         /**
           * (optional) The alert's aria-label.
          */
-        "ariaLabel": string;
+        "ariaLabel": string | null;
         /**
           * (optional) Whether the alert has a dismiss button
          */
@@ -61,7 +61,7 @@ export namespace Components {
         /**
           * (optional) The badge's aria-label
          */
-        "ariaLabel": string;
+        "ariaLabel": string | null;
         /**
           * (optional) The color of the badge
          */
@@ -79,7 +79,7 @@ export namespace Components {
         /**
           * The breadcrumb's aria-label.
          */
-        "ariaLabel": string;
+        "ariaLabel": string | null;
         /**
           * The breadcrumbs to render.
          */
@@ -89,7 +89,7 @@ export namespace Components {
         /**
           * (optional) The button's aria-label.
          */
-        "ariaLabel": string;
+        "ariaLabel": string | null;
         /**
           * (optional) The style of the button
          */
@@ -111,7 +111,7 @@ export namespace Components {
         /**
           * (optional) The card's aria-label.
          */
-        "ariaLabel": string;
+        "ariaLabel": string | null;
         /**
           * (optional) The color of the card.
          */
@@ -141,7 +141,7 @@ export namespace Components {
         /**
           * (optional) The checkbox's aria-label.
          */
-        "ariaLabel": string;
+        "ariaLabel": string | null;
         /**
           * (optional) Whether the checkbox is checked.
          */
@@ -163,7 +163,7 @@ export namespace Components {
         /**
           * (optional) The chip's aria-label.
          */
-        "ariaLabel": string;
+        "ariaLabel": string | null;
         /**
           * (optional) The chip's style.
          */
@@ -225,7 +225,7 @@ export namespace Components {
         /**
           * (optional) The dropdown's aria-label.
          */
-        "ariaLabel": string;
+        "ariaLabel": string | null;
         /**
           * (optional) Determines custom dropdown placement offset.
          */
@@ -256,7 +256,7 @@ export namespace Components {
         /**
           * (optional) The dropzone's aria-label.
          */
-        "ariaLabel": string;
+        "ariaLabel": string | null;
         /**
           * (optional) The dropzone's description text.
          */
@@ -330,7 +330,7 @@ export namespace Components {
         /**
           * (optional) The message's aria-label.
          */
-        "ariaLabel": string;
+        "ariaLabel": string | null;
         /**
           * (optional) The message's icon.
          */
@@ -344,7 +344,7 @@ export namespace Components {
         /**
           * (optional) The modal's aria-label.
          */
-        "ariaLabel": string;
+        "ariaLabel": string | null;
         "close": () => Promise<void>;
         /**
           * (optional) The modal's primary button text.
@@ -442,7 +442,7 @@ export namespace Components {
         /**
           * (optional) The input's aria-label.
          */
-        "ariaLabel": string;
+        "ariaLabel": string | null;
         /**
           * (optional) Whether the input is disabled.
          */
@@ -498,7 +498,7 @@ export namespace Components {
     }
     interface ModusPagination {
         "activePage": number;
-        "ariaLabel": string;
+        "ariaLabel": string | null;
         "maxPage": number;
         "minPage": number;
         "size": 'large' | 'medium' | 'small';
@@ -507,7 +507,7 @@ export namespace Components {
         /**
           * (optional) The progress bar's aria-label.
          */
-        "ariaLabel": string;
+        "ariaLabel": string | null;
         /**
           * (optional) The progress bar's background color.
          */
@@ -545,7 +545,7 @@ export namespace Components {
         /**
           * The radio group's aria-label.
          */
-        "ariaLabel": string;
+        "ariaLabel": string | null;
         /**
           * The ID of the checked radio button.
          */
@@ -563,7 +563,7 @@ export namespace Components {
         /**
           * (optional) The select's aria-label.
          */
-        "ariaLabel": string;
+        "ariaLabel": string | null;
         /**
           * (optional) Whether the input is disabled.
          */
@@ -609,7 +609,7 @@ export namespace Components {
         /**
           * (optional) The slider's aria-label.
          */
-        "ariaLabel": string;
+        "ariaLabel": string | null;
         /**
           * (optional) Whether the slider is disabled. *
          */
@@ -633,7 +633,7 @@ export namespace Components {
     }
     interface ModusSpinner {
         /**
-          * (optional) The color of the spinner in hex format (eg #FFFFFF)
+          * (optional) The color of the spinner. It can be a custom color or one of the variants  - primary, secondary, tertiary, dark, success, danger and warning.
          */
         "color": string;
         /**
@@ -645,7 +645,7 @@ export namespace Components {
         /**
           * (optional) The switch's aria-label.
          */
-        "ariaLabel": string;
+        "ariaLabel": string | null;
         /**
           * (optional) Whether the switch is checked.
          */
@@ -660,7 +660,7 @@ export namespace Components {
         "label": string;
     }
     interface ModusTabs {
-        "ariaLabel": string;
+        "ariaLabel": string | null;
         "fullWidth": boolean;
         "size": 'medium' | 'small';
         /**
@@ -672,7 +672,7 @@ export namespace Components {
         /**
           * (optional) The input's aria-label.
          */
-        "ariaLabel": string;
+        "ariaLabel": string | null;
         /**
           * (optional) Sets autofocus on the input.
          */
@@ -756,7 +756,7 @@ export namespace Components {
         /**
           * (optional) The toast's aria-label.
          */
-        "ariaLabel": string;
+        "ariaLabel": string | null;
         /**
           * (optional) Whether the toast has a dismiss button.
          */
@@ -774,7 +774,7 @@ export namespace Components {
         /**
           * (optional) The tooltip's aria-label.
          */
-        "ariaLabel": string;
+        "ariaLabel": string | null;
         /**
           * (optional) The tooltip's position relative to its content.
          */
@@ -1190,7 +1190,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The accordion's aria-label.
          */
-        "ariaLabel"?: string;
+        "ariaLabel"?: string | null;
     }
     interface ModusAccordionItem {
         /**
@@ -1222,7 +1222,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The alert's aria-label.
          */
-        "ariaLabel"?: string;
+        "ariaLabel"?: string | null;
         /**
           * (optional) Whether the alert has a dismiss button
          */
@@ -1244,7 +1244,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The badge's aria-label
          */
-        "ariaLabel"?: string;
+        "ariaLabel"?: string | null;
         /**
           * (optional) The color of the badge
          */
@@ -1262,7 +1262,7 @@ declare namespace LocalJSX {
         /**
           * The breadcrumb's aria-label.
          */
-        "ariaLabel"?: string;
+        "ariaLabel"?: string | null;
         /**
           * The breadcrumbs to render.
          */
@@ -1276,7 +1276,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The button's aria-label.
          */
-        "ariaLabel"?: string;
+        "ariaLabel"?: string | null;
         /**
           * (optional) The style of the button
          */
@@ -1302,7 +1302,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The card's aria-label.
          */
-        "ariaLabel"?: string;
+        "ariaLabel"?: string | null;
         /**
           * (optional) The color of the card.
          */
@@ -1332,7 +1332,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The checkbox's aria-label.
          */
-        "ariaLabel"?: string;
+        "ariaLabel"?: string | null;
         /**
           * (optional) Whether the checkbox is checked.
          */
@@ -1358,7 +1358,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The chip's aria-label.
          */
-        "ariaLabel"?: string;
+        "ariaLabel"?: string | null;
         /**
           * (optional) The chip's style.
          */
@@ -1448,7 +1448,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The dropdown's aria-label.
          */
-        "ariaLabel"?: string;
+        "ariaLabel"?: string | null;
         /**
           * (optional) Determines custom dropdown placement offset.
          */
@@ -1479,7 +1479,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The dropzone's aria-label.
          */
-        "ariaLabel"?: string;
+        "ariaLabel"?: string | null;
         /**
           * (optional) The dropzone's description text.
          */
@@ -1549,7 +1549,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The message's aria-label.
          */
-        "ariaLabel"?: string;
+        "ariaLabel"?: string | null;
         /**
           * (optional) The message's icon.
          */
@@ -1563,7 +1563,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The modal's aria-label.
          */
-        "ariaLabel"?: string;
+        "ariaLabel"?: string | null;
         /**
           * (optional) The modal's primary button text.
          */
@@ -1688,7 +1688,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The input's aria-label.
          */
-        "ariaLabel"?: string;
+        "ariaLabel"?: string | null;
         /**
           * (optional) Whether the input is disabled.
          */
@@ -1748,7 +1748,7 @@ declare namespace LocalJSX {
     }
     interface ModusPagination {
         "activePage"?: number;
-        "ariaLabel"?: string;
+        "ariaLabel"?: string | null;
         "maxPage"?: number;
         "minPage"?: number;
         /**
@@ -1761,7 +1761,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The progress bar's aria-label.
          */
-        "ariaLabel"?: string;
+        "ariaLabel"?: string | null;
         /**
           * (optional) The progress bar's background color.
          */
@@ -1799,7 +1799,7 @@ declare namespace LocalJSX {
         /**
           * The radio group's aria-label.
          */
-        "ariaLabel"?: string;
+        "ariaLabel"?: string | null;
         /**
           * The ID of the checked radio button.
          */
@@ -1821,7 +1821,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The select's aria-label.
          */
-        "ariaLabel"?: string;
+        "ariaLabel"?: string | null;
         /**
           * (optional) Whether the input is disabled.
          */
@@ -1871,7 +1871,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The slider's aria-label.
          */
-        "ariaLabel"?: string;
+        "ariaLabel"?: string | null;
         /**
           * (optional) Whether the slider is disabled. *
          */
@@ -1903,7 +1903,7 @@ declare namespace LocalJSX {
     }
     interface ModusSpinner {
         /**
-          * (optional) The color of the spinner in hex format (eg #FFFFFF)
+          * (optional) The color of the spinner. It can be a custom color or one of the variants  - primary, secondary, tertiary, dark, success, danger and warning.
          */
         "color"?: string;
         /**
@@ -1915,7 +1915,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The switch's aria-label.
          */
-        "ariaLabel"?: string;
+        "ariaLabel"?: string | null;
         /**
           * (optional) Whether the switch is checked.
          */
@@ -1934,7 +1934,7 @@ declare namespace LocalJSX {
         "onSwitchClick"?: (event: ModusSwitchCustomEvent<boolean>) => void;
     }
     interface ModusTabs {
-        "ariaLabel"?: string;
+        "ariaLabel"?: string | null;
         "fullWidth"?: boolean;
         /**
           * An event that fires on tab change.
@@ -1950,7 +1950,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The input's aria-label.
          */
-        "ariaLabel"?: string;
+        "ariaLabel"?: string | null;
         /**
           * (optional) Sets autofocus on the input.
          */
@@ -2034,7 +2034,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The toast's aria-label.
          */
-        "ariaLabel"?: string;
+        "ariaLabel"?: string | null;
         /**
           * (optional) Whether the toast has a dismiss button.
          */
@@ -2056,7 +2056,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The tooltip's aria-label.
          */
-        "ariaLabel"?: string;
+        "ariaLabel"?: string | null;
         /**
           * (optional) The tooltip's position relative to its content.
          */

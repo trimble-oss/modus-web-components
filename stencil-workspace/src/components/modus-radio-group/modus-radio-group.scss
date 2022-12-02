@@ -69,7 +69,7 @@ div.modus-radio-group {
   }
 
   &.disabled {
-    opacity: 0.3;
+    opacity: $modus-radio-btn-disabled-opacity;
     pointer-events: none;
   }
 }

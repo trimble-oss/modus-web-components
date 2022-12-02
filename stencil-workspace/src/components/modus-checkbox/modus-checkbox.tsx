@@ -10,7 +10,7 @@ import { IconIndeterminate } from '../icons/icon-indeterminate';
 })
 export class ModusCheckbox {
   /** (optional) The checkbox's aria-label. */
-  @Prop() ariaLabel: string;
+  @Prop() ariaLabel: string | null;
 
   /** (optional) Whether the checkbox is checked. */
   @Prop({ mutable: true }) checked: boolean;

@@ -9,7 +9,7 @@ import { ModusRadioButton, RadioButton } from './modus-radio-button';
 })
 export class ModusRadioGroup {
   /** The radio group's aria-label. */
-  @Prop() ariaLabel: string;
+  @Prop() ariaLabel: string | null;
 
   /** The ID of the checked radio button. */
   @Prop({ mutable: true }) checkedId: string;

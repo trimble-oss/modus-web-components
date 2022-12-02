@@ -10,10 +10,10 @@ article {
   position: relative;
 
   &.shadow:hover {
-    box-shadow: $box-shadow-lg;
+    box-shadow: 0 0 4px $modus-card-shadow-color;
   }
 
   &.card-border {
-    border: $rem-1px solid $col_gray_light;
+    border: $rem-1px solid $modus-card-shadow-color;
   }
 }

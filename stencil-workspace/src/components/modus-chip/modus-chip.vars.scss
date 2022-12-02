@@ -1,65 +1,52 @@
 // Default Start
-$modus-chip-bg: var(--modus-chip-bg, map-get($theme-colors, 'tertiary')) !default;
-$modus-chip-border-color: var(--modus-chip-border-color, map-get($theme-colors, 'tertiary')) !default;
+$modus-chip-bg: var(--modus-chip-bg, #cbcdd6) !default;
 $modus-chip-color: var(--modus-chip-color, #353a40) !default;
+$modus-chip-disabled-opacity: var(--modus-chip-disabled-opacity, 0.3) !default;
 
 // Hover
-$modus-chip-hover-bg: var(--modus-chip-hover-bg, #dbdce2) !default;
+$modus-chip-hover-bg: var(--modus-chip-hover-bg, #e0e1e9) !default;
 $modus-chip-hover-color: $modus-chip-color;
-$modus-chip-hover-border-color: var(--modus-chip-hover-border-color, #dbdce2) !default;
 
 // Active
-$modus-chip-active-bg: var(--modus-chip-active-bg, rgba(33, 124, 187, 0.3)) !default;
-$modus-chip-active-color: var(--modus-chip-active-color, $col_black) !default;
-$modus-chip-active-border-color: var(--modus-chip-active-border-color, transparent) !default;
+$modus-chip-active-bg: var(--modus-chip-active-bg, #217cbb4d) !default;
+$modus-chip-active-color: var(--modus-chip-active-color, #252a2e) !default;
 
 // Error
-$modus-chip-error-bg: var(--modus-chip-bg, #f4bcc0) !default;
-$modus-chip-error-border-color: var(--modus-chip-border-color, #f4bcc0) !default;
-$modus-chip-error-color: var(--modus-chip-color, #83141a) !default;
+$modus-chip-error-bg: var(--modus-chip-error-bg, #fbd4d7) !default;
+$modus-chip-error-color: var(--modus-chip-error-color, #ab1f26) !default;
 
 // Error Active
-$modus-chip-error-active-bg: var(--modus-chip-active-bg, #adaeb6) !default;
-$modus-chip-error-active-border-color: var(--modus-chip-active-border-color, #adaeb6) !default;
-$modus-chip-error-active-color: var(--modus-chip-active-color, #000) !default;
+$modus-chip-error-active-bg: var(--modus-chip-error-active-bg, #adaeb6) !default;
+$modus-chip-error-active-border-color: var(--modus-chip-error-active-border-color, #adaeb6) !default;
+$modus-chip-error-active-color: var(--modus-chip-error-active-color, #000) !default;
 
 // Default End
 
 // Outline Start
-$modus-chip-outline-bg: var(--modus-chip-bg, transparent) !default;
-$modus-chip-outline-border-color: var(--modus-chip-border-color, #a2a4ab) !default;
-$modus-chip-outline-color: $modus-chip-color;
+$modus-chip-outline-border-color: var(--modus-chip-outline-border-color, #90939f) !default;
+$modus-chip-outline-color: var(--modus-chip-outline-color, #353a40) !default;
+$modus-chip-outline-disabled-opacity: var(--modus-chip-outline-disabled-opacity, 0.3) !default;
 
 // Hover
-$modus-chip-outline-hover-bg: var(--modus-chip-hover-bg, #eaebef) !default;
-$modus-chip-outline-hover-border-color: var(--modus-chip-hover-border-color, #7a7b80) !default;
-$modus-chip-outline-hover-color: var(--modus-chip-hover-color, #4c535c) !default;
+$modus-chip-outline-hover-bg: var(--modus-chip-outline-hover-bg, #e0e1e9) !default;
+$modus-chip-outline-hover-border-color: var(--modus-chip-outline-hover-border-color, #90939f) !default;
+$modus-chip-outline-hover-color: var(--modus-chip-outline-hover-color, #585c65) !default;
 
 // Active
-$modus-chip-outline-active-bg: var(--modus-chip-active-bg, #dcedf9) !default;
-$modus-chip-outline-active-border-color: var(--modus-chip-active-border-color, #217cbb) !default;
-$modus-chip-outline-active-color: var(--modus-chip-active-color, #252a2e) !default;
+$modus-chip-outline-active-bg: var(--modus-chip-outline-active-bg, #dcedf9) !default;
+$modus-chip-outline-active-border-color: var(--modus-chip-outline-active-border-color, #217cbb) !default;
+$modus-chip-outline-active-color: var(--modus-chip-outline-active-color, #252a2e) !default;
 
 // Error
-$modus-chip-outline-error-bg: var(--modus-chip-bg, #fbe9ea) !default;
-$modus-chip-outline-error-border-color: var(--modus-chip-border-color, #83141a) !default;
-$modus-chip-outline-error-color: var(--modus-chip-color, #ed9096) !default;
+$modus-chip-outline-error-bg: var(--modus-chip-outline-error-bg, #fbd4d7) !default;
+$modus-chip-outline-error-border-color: var(--modus-chip-outline-error-border-color, #ab1f26) !default;
+$modus-chip-outline-error-color: var(--modus-chip-outline-error-color, #ab1f26) !default;
 
 // Error Active
-$modus-chip-outline-error-active-bg: var(--modus-chip-active-bg, #d3d5dc) !default;
-$modus-chip-outline-error-active-border-color: var(--modus-chip-active-border-color, #7a7b80) !default;
-$modus-chip-outline-error-active-color: var(--modus-chip-active-color, #252a2e) !default;
+$modus-chip-outline-error-active-bg: var(--modus-chip-outline-error-active-bg, #d3d5dc) !default;
+$modus-chip-outline-error-active-border-color: var(--modus-chip-outline-error-active-border-color, #7a7b80) !default;
+$modus-chip-outline-error-active-color: var(--modus-chip-outline-error-active-color, #252a2e) !default;
 
 // Outline End
 
 // Close icon
-$modus-chip-close-icon-color: var(--modus-chip-close-icon-color, $modus-chip-color) !default;
-$modus-chip-close-icon-hover-color: var(--modus-chip-close-icon-color, $modus-chip-hover-color) !default;
-$modus-chip-close-icon-active-color: var(--modus-chip-close-icon-color, $modus-chip-active-color) !default;
-$modus-chip-error-close-icon-color: var(--modus-chip-close-icon-color, $modus-chip-error-color) !default;
-$modus-chip-error-close-icon-active-color: var(--modus-chip-close-icon-color, $modus-chip-error-active-color) !default;
-$modus-chip-outline-close-icon-color: var(--modus-chip-close-icon-color, $modus-chip-outline-color) !default;
-$modus-chip-outline-close-icon-hover-color: var(--modus-chip-close-icon-color, $modus-chip-outline-hover-color) !default;
-$modus-chip-outline-close-icon-active-color: var(--modus-chip-close-icon-color, $modus-chip-outline-active-border-color) !default;
-$modus-chip-outline-error-close-icon-color: var(--modus-chip-close-icon-color, $modus-chip-outline-error-color) !default;
-$modus-chip-outline-error-close-icon-active-color: var(--modus-chip-close-icon-color, $modus-chip-outline-error-active-color) !default;

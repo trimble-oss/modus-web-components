@@ -51,11 +51,17 @@
       </div>
       <div>
         <modus-alert message="Info alert (default)"></modus-alert>
+        <br />
         <modus-alert dismissible message="Dismissible alert"></modus-alert>
+        <br />
         <modus-alert message="Error alert" type="error"></modus-alert>
+        <br />
         <modus-alert message="Info gray alert" type="info-gray"></modus-alert>
+        <br />
         <modus-alert message="Info gray dark alert" type="info-gray-dark"></modus-alert>
+        <br />
         <modus-alert message="Success alert" type="success"></modus-alert>
+        <br />
         <modus-alert message="Warning alert" type="warning"></modus-alert>
       </div>
       <div>
@@ -80,7 +86,7 @@
       </div>
 
       <div>
-        <modus-button color="primary" id="toggle_breadcrumb" style="padding: 10px">Toggle Buttons theme</modus-button>
+        <modus-button color="primary" id="toggle_breadcrumb" style="padding: 10px">Toggle Breadcrumb theme</modus-button>
       </div>
       <div>
         <modus-breadcrumb></modus-breadcrumb>
@@ -483,6 +489,7 @@
       {
         id: '2',
         label: 'Radio 31',
+        disabled: true
       },
     ];
 
@@ -493,7 +500,7 @@
     const options = [ { display: 'Option 1' }, { display: 'Option 2' }, { display: 'Option 3' } ];
     modusSelect2.options = options;
     modusSelect2.value = options[1];
-    
+
     const modusTabs = document.querySelector('modus-tabs');
     modusTabs.tabs = [
       {

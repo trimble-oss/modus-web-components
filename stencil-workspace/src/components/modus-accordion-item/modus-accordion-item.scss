@@ -1,9 +1,9 @@
 @import './modus-accordion-item.vars';
 
 .accordion-item {
-  background-color: $modus-accordion-bg;
-  border-bottom: $rem-1px solid $modus-accordion-border-color;
-  color: $modus-accordion-color;
+  background-color: $modus-accordion-item-bg;
+  border-bottom: $rem-1px solid $modus-accordion-item-border-color;
+  color: $modus-accordion-item-color;
   display: flex;
   flex-direction: column;
   font-family: $primary-font;
@@ -19,7 +19,15 @@
 
     &.disabled {
       cursor: auto;
-      opacity: 0.3;
+      opacity: 0.4;
+    }
+
+    &.expanded {
+      color: $modus-accordion-item-header-expand-color;
+    }
+
+    &:hover:not(.disabled) {
+      background-color: $modus-accordion-item-header-hover-bg;
     }
 
     &.small {
@@ -34,6 +42,10 @@
     .icon-chevron-up-thick,
     .icon-chevron-down-thick {
       margin-left: auto;
+
+      path {
+        fill: $modus-accordion-item-chevron-color;
+      }
     }
   }
 

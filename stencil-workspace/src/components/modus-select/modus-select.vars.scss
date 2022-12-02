@@ -1,10 +1,10 @@
 $modus-input-bg: var(--modus-input-bg, #fff) !default;
 $modus-input-color: var(--modus-input-color, #252a2e) !default;
-$modus-input-label-color: var(--modus-input-label-color, #464b52) !default;
-$modus-input-hint-text-color: var(--modus-input-hint-text-color, #6a6e79) !default;
 $modus-input-border-color: var(--modus-input-border-color, #e0e1e9) !default;
 $modus-input-bottom-line-color: var(--modus-input-bottom-line-color, #6a6e79) !default;
 $modus-input-bottom-line-active-color: var(--modus-input-bottom-line-active-color, #217cbb) !default;
+$modus-input-label-color: var(--modus-input-label-color, #464b52) !default;
+$modus-input-helper-icon-color: var(--modus-input-helper-icon-color, #6a6e79);
 
 // Validation
 $modus-input-validation-success-color: var(--modus-input-validation-success-color, #006638) !default;
@@ -15,15 +15,7 @@ $modus-input-disabled-bg: var(--modus-input-disabled-bg, #e0e1e9) !default;
 $modus-input-disabled-border-color: var(--modus-input-disabled-border-color, #e0e1e9) !default;
 $modus-input-disabled-bottom-line-color: var(--modus-input-disabled-bottom-line-color, #a3a6b1) !default;
 $modus-input-disabled-color: var(--modus-input-disabled-color, #a3a6b1) !default;
-$modus-input-hint-text-disabled-color: var(--modus-input-hint-text-disabled-color, #a3a6b1) !default;
 
-// Select Item states
-// Hover
+// Hover and Select
 $modus-select-item-hover-bg: var(--modus-group-item-hover-bg, #e0e1e9) !default;
-$modus-select-item-hover-border-color: var(--modus-group-item-hover-border-color, #e0e1e9) !default;
-$modus-select-item-hover-color: var(--modus-group-item-hover-color, #252a2e) !default;
-
-// Selected
 $modus-select-item-selected-bg: var(--modus-group-item-selected-bg, #dcedf9) !default;
-$modus-select-item-selected-border-color: var(--modus-group-item-selected-border-color, #dcedf9) !default;
-$modus-select-item-selected-color: var(--modus-group-item-selected-color, #252a2e) !default;

@@ -105,26 +105,32 @@ button {
         $alias: 'secondary';
       }
       &.color-#{$alias} {
+        $btn-color: var(--modus-btn-outline-#{$color}-color, $value);
+
         background-color: var(--modus-btn-outline-#{$color}-bg, transparent);
-        border-color: var(--modus-btn-outline-#{$color}-border-color, $value);
-        color: var(--modus-btn-outline-#{$color}-color, $value);
-        fill: var(--modus-btn-outline-#{$color}-color, $value);
+        border-color: $btn-color;
+        color: $btn-color;
+        fill: $btn-color;
       }
 
       // Hover state
       &.color-#{$alias}:hover:not([disabled]) {
+        $btn-color: var(--modus-btn-outline-#{$color}-hover-color, map-get($btn-outline-hover, $color, 'color'));
+
         background-color: var(--modus-btn-outline-#{$color}-hover-bg, map-get($btn-outline-hover, $color, 'bg'));
-        border-color: var(--modus-btn-outline-#{$color}-hover-border-color, map-get($btn-outline-hover, $color, 'color'));
-        color: var(--modus-btn-outline-#{$color}-hover-color, map-get($btn-outline-hover, $color, 'color'));
-        fill: var(--modus-btn-outline-#{$color}-hover-color, map-get($btn-outline-hover, $color, 'color'));
+        border-color: $btn-color;
+        color: $btn-color;
+        fill: $btn-color;
       }
 
       // Active state
       &.color-#{$alias}:active:not([disabled]) {
+        $btn-color: var(--modus-btn-outline-#{$color}-active-color, map-get($btn-outline-active, $color, 'color'));
+
         background-color: var(--modus-btn-outline-#{$color}-active-bg, map-get($btn-outline-active, $color, 'bg'));
-        border-color: var(--modus-btn-outline-#{$color}-active-border-color, map-get($btn-outline-active, $color, 'color'));
-        color: var(--modus-btn-outline-#{$color}-active-color, map-get($btn-outline-active, $color, 'color'));
-        fill: var(--modus-btn-outline-#{$color}-active-color, map-get($btn-outline-active, $color, 'color'));
+        border-color: $btn-color;
+        color: $btn-color;
+        fill: $btn-color;
       }
     }
   }

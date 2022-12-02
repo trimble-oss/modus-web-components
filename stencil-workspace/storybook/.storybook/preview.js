@@ -44,6 +44,15 @@ export const parameters = {
 
       }, [isDark, useDarkMode]);
 
+      React.useEffect(() => {
+        // Workaround for canvas tab not notified about the theme change all the time
+        window.addEventListener('storage', () => {
+          document.body.setAttribute('data-mwc-theme', localStorage.getItem("data-mwc-theme") || 'light');
+        });
+
+      }, []);
+
+
       return (
           <DocsContainer {...props} />
       );

@@ -6,9 +6,18 @@ View all releases at: <https://github.com/trimble-oss/modus-web-components/relea
 
 ## Unreleased
 
+## 0.1.26 - 2022-12-01
+
+### Fixed
+
+- Component `ariaLabel` input type mismatch bug
+
+## 0.1.25 - 2022-12-01
+
 ### Fixed
 
 - Fixed inexplicitly set aria-disabled values
+- Modus Text Inputs no longer have 'clear input' button on by default
 
 ## 0.1.24 - 2022-11-17
 

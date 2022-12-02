@@ -104,7 +104,6 @@ table {
 
       &.selected {
         background-color: $modus-table-selected-bg;
-        border-color: $modus-table-selected-border-color;
       }
 
       .cell-link {
@@ -127,13 +126,13 @@ table {
   }
 
   &.borderless {
-    border: none;
+    border: none !important;
   }
 
   &.cell-borderless {
     th,
     td {
-      border: none;
+      border: none !important;
     }
   }
 

@@ -43,6 +43,10 @@
       outline: 0;
       padding: 0 $rem-8px;
       width: 100%;
+
+      &::placeholder {
+        color: $modus-input-hint-text-color;
+      }
     }
 
     &:focus-within,
@@ -85,7 +89,7 @@
     margin-top: $rem-4px;
 
     &.helper {
-      color: $modus-input-hint-text-color;
+      color: $modus-input-label-color;
     }
 
     &.error {

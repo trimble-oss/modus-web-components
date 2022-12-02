@@ -71,7 +71,7 @@
   }
 
   &.disabled {
-    opacity: 0.3;
+    opacity: $modus-switch-disabled-opacity;
     pointer-events: none;
   }
 }
