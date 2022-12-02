@@ -14,7 +14,7 @@ export class ModusFileDropzone {
   @State() fileDraggedOver = false;
 
   /** (optional) The dropzone's aria-label. */
-  @Prop() ariaLabel: string;
+  @Prop() ariaLabel: string | null;
 
   /** (optional) The dropzone's description text. */
   @Prop() description: string;

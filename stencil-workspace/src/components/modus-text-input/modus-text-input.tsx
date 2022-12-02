@@ -10,13 +10,13 @@ import { IconClose } from '../icons/icon-close';
 })
 export class ModusTextInput {
   /** (optional) The input's aria-label. */
-  @Prop() ariaLabel: string;
+  @Prop() ariaLabel: string | null;
 
   /** (optional) Sets autofocus on the input. */
   @Prop() autoFocusInput: boolean;
 
   /** (optional) Whether the input has a clear button. */
-  @Prop() clearable = true;
+  @Prop() clearable = false;
 
   /** (optional) Whether the input is disabled. */
   @Prop() disabled: boolean;
@@ -124,7 +124,7 @@ export class ModusTextInput {
           <input
             aria-placeholder={this.placeholder}
             class={`${this.includeSearchIcon ? 'has-left-icon' : ''} ${
-              this.clearable ? 'has-right-icon' : null
+              this.clearable ? 'has-right-icon' : ''
             }`}
             disabled={this.disabled}
             inputmode={this.inputmode}

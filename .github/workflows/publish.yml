@@ -2,6 +2,9 @@ name: Create and publish npm package
 on:
   release:
     types: [ published ]
+permissions:  # added using https://github.com/step-security/secure-workflows
+  contents: read
+
 jobs:
   publish:
     runs-on: ubuntu-latest

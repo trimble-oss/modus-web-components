@@ -17,7 +17,7 @@ export class ModusTabs {
   @Prop() fullWidth = false;
 
   /* (optional) The tabs' aria-label. */
-  @Prop() ariaLabel: string;
+  @Prop() ariaLabel: string | null;
 
   /* (optional) The tabs' size. */
   @Prop() size: 'medium' | 'small' = 'medium';

@@ -13,7 +13,7 @@ export class ModusSelect {
   // @Prop() autofocus: boolean;
 
   /** (optional) The select's aria-label. */
-  @Prop() ariaLabel: string;
+  @Prop() ariaLabel: string | null;
 
   /** (optional) Whether the input is disabled. */
   @Prop() disabled: boolean;

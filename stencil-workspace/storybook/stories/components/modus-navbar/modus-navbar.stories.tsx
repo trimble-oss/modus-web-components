@@ -20,7 +20,12 @@ export default {
 };
 
 const Template = () => html`
-  <modus-navbar id="working" show-apps-menu show-help-menu show-main-menu show-notifications>
+  <modus-navbar
+    id="working"
+    show-apps-menu
+    show-help-menu
+    show-main-menu
+    show-notifications>
     <div slot="main">Render your own main menu.</div>
     <div slot="notifications">Render your own notifications.</div>
   </modus-navbar>
@@ -29,7 +34,12 @@ const Template = () => html`
 export const Default = Template.bind({});
 
 const FailedToLoadAvatarTemplate = () => html`
-  <modus-navbar id="broken" show-apps-menu show-help-menu show-main-menu show-notifications>
+  <modus-navbar
+    id="broken"
+    show-apps-menu
+    show-help-menu
+    show-main-menu
+    show-notifications>
     <div slot="main">Render your own main menu.</div>
     <div slot="notifications">Render your own notifications.</div>
   </modus-navbar>

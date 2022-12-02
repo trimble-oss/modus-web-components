@@ -8,7 +8,7 @@ import { Component, Prop, h, Event, EventEmitter, Listen } from '@stencil/core';
 })
 export class ModusSwitch {
   /** (optional) The switch's aria-label. */
-  @Prop() ariaLabel: string;
+  @Prop() ariaLabel: string | null;
 
   /** (optional) Whether the switch is checked. */
   @Prop({ mutable: true }) checked: boolean;
