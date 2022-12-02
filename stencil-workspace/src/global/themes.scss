@@ -70,9 +70,9 @@
   --modus-border-color: var(--modus-gray-1);
   --modus-backdrop-bg: #252a2ebf;
   --modus-chevron-color: var(--modus-gray-6);
-  --modus-link-color: var(--modus-blue-light);
   --modus-highlight-blue-color: var(--modus-blue-light);
   --modus-highlight-blue-bg: var(--modus-blue-pale);
+  --modus-link-color: var(--modus-blue-light);
 
   // Accordion
   --modus-accordion-item-header-hover-bg: var(--modus-gray-0);
@@ -225,7 +225,9 @@
 
   // Highlight
   --modus-file-upload-dropzone-highlight-bg: var(--modus-highlight-blue-bg);
-  --modus-file-upload-dropzone-highlight-color: var(--modus-highlight-blue-color);
+  --modus-file-upload-dropzone-highlight-color: var(
+    --modus-highlight-blue-color
+  );
 
   // Error
   --modus-file-upload-dropzone-error-bg: #fbd4d780;
@@ -496,12 +498,16 @@
 
   // Highlight
   --modus-file-upload-dropzone-highlight-bg: #019aeb33;
-  --modus-file-upload-dropzone-highlight-color: var(--modus-file-upload-dropzone-color);
+  --modus-file-upload-dropzone-highlight-color: var(
+    --modus-file-upload-dropzone-color
+  );
 
   // Error
   --modus-file-upload-dropzone-error-bg: #da212c33;
   --modus-file-upload-dropzone-error-border-color: var(--modus-red);
-  --modus-file-upload-dropzone-error-color: var(--modus-file-upload-dropzone-color);
+  --modus-file-upload-dropzone-error-color: var(
+    --modus-file-upload-dropzone-color
+  );
 
   // Message
   // Type - Info
@@ -638,9 +644,15 @@
   --modus-checkbox-border-color: var(--modus-check-input-border-color);
   --modus-checkbox-disabled-opacity: var(--modus-check-input-disabled-opacity);
   --modus-checkbox-label-color: var(--modus-check-input-label-color);
-  --modus-checkbox-hover-border-color: var(--modus-check-input-active-border-color);
-  --modus-checkbox-selected-border-color: var(--modus-check-input-active-border-color);
-  --modus-checkbox-indeterminate-border-color: var(--modus-check-input-active-border-color);
+  --modus-checkbox-hover-border-color: var(
+    --modus-check-input-active-border-color
+  );
+  --modus-checkbox-selected-border-color: var(
+    --modus-check-input-active-border-color
+  );
+  --modus-checkbox-indeterminate-border-color: var(
+    --modus-check-input-active-border-color
+  );
 }
 
 @mixin modus-list-item {
@@ -653,7 +665,9 @@
 
   // Selected
   --modus-list-item-selected-bg: var(--modus-group-item-selected-bg);
-  --modus-list-item-selected-border-color: var(--modus-group-item-selected-border-color);
+  --modus-list-item-selected-border-color: var(
+    --modus-group-item-selected-border-color
+  );
 
   // Disabled
   --modus-list-item-disabled-color: var(--modus-group-item-disabled-color);
@@ -707,17 +721,31 @@ modus-button[disabled] {
   @if $button-style == 'solid' {
     --modus-btn-#{$color}-bg: var(--modus-#{$color});
     --modus-btn-#{$color}-border-color: var(--modus-#{$color});
-    --modus-btn-#{$color}-color: if($color == 'tertiary', var(--modus-#{$color}-color), var(--modus-white));
+    --modus-btn-#{$color}-color: if(
+      $color == 'tertiary',
+      var(--modus-#{$color}-color),
+      var(--modus-white)
+    );
 
     // Hover
     --modus-btn-#{$color}-hover-bg: var(--modus-btn-#{$color}-hover);
     --modus-btn-#{$color}-hover-border-color: var(--modus-btn-#{$color}-hover);
-    --modus-btn-#{$color}-hover-color: if($color == 'tertiary', var(--modus-#{$color}-color), var(--modus-white));
+    --modus-btn-#{$color}-hover-color: if(
+      $color == 'tertiary',
+      var(--modus-#{$color}-color),
+      var(--modus-white)
+    );
 
     // Active
     --modus-btn-#{$color}-active-bg: var(--modus-btn-#{$color}-active);
-    --modus-btn-#{$color}-active-border-color: var(--modus-btn-#{$color}-active);
-    --modus-btn-#{$color}-active-color: if($color == 'tertiary', var(--modus-#{$color}-color), var(--modus-white));
+    --modus-btn-#{$color}-active-border-color: var(
+      --modus-btn-#{$color}-active
+    );
+    --modus-btn-#{$color}-active-color: if(
+      $color == 'tertiary',
+      var(--modus-#{$color}-color),
+      var(--modus-white)
+    );
   }
 }
 
@@ -798,7 +826,9 @@ modus-data-table {
 modus-file-dropzone {
   --modus-file-upload-dropzone-border-color: var(--modus-gray-6);
   --modus-file-upload-dropzone-browse-color: var(--modus-trimble-blue);
-  --modus-file-upload-dropzone-highlight-border-color: var(--modus-highlight-blue-color);
+  --modus-file-upload-dropzone-highlight-border-color: var(
+    --modus-highlight-blue-color
+  );
 }
 
 modus-list-item {
@@ -827,8 +857,12 @@ modus-radio-group {
   --modus-radio-btn-border-color: var(--modus-check-input-border-color);
   --modus-radio-btn-disabled-opacity: var(--modus-check-input-disabled-opacity);
   --modus-radio-btn-label-color: var(--modus-check-input-label-color);
-  --modus-radio-btn-hover-border-color: var(--modus-check-input-active-border-color);
-  --modus-radio-btn-selected-border-color: var(--modus-check-input-active-border-color);
+  --modus-radio-btn-hover-border-color: var(
+    --modus-check-input-active-border-color
+  );
+  --modus-radio-btn-selected-border-color: var(
+    --modus-check-input-active-border-color
+  );
 }
 
 modus-slider {
@@ -841,8 +875,12 @@ modus-switch {
   --modus-switch-border-color: var(--modus-check-input-border-color);
   --modus-switch-disabled-opacity: var(--modus-check-input-disabled-opacity);
   --modus-switch-label-color: var(--modus-check-input-label-color);
-  --modus-switch-hover-border-color: var(--modus-check-input-active-border-color);
-  --modus-switch-selected-border-color: var(--modus-check-input-active-border-color);
+  --modus-switch-hover-border-color: var(
+    --modus-check-input-active-border-color
+  );
+  --modus-switch-selected-border-color: var(
+    --modus-check-input-active-border-color
+  );
 }
 
 modus-tabs {
@@ -861,13 +899,17 @@ modus-tree-view-item {
 
   // Selected
   --modus-tree-view-item-selected-bg: var(--modus-group-item-selected-bg);
-  --modus-tree-view-item-selected-border-color: var(--modus-group-item-selected-border-color);
+  --modus-tree-view-item-selected-border-color: var(
+    --modus-group-item-selected-border-color
+  );
 
   // Disabled
   --modus-tree-view-item-disabled-color: var(--modus-group-item-disabled-color);
 
   // Indicator
-  --modus-tree-view-item-selected-indicator-color: var(--modus-highlight-blue-color);
+  --modus-tree-view-item-selected-indicator-color: var(
+    --modus-highlight-blue-color
+  );
   --modus-tree-view-item-drag-border-color: var(--modus-highlight-blue-color);
   --modus-tree-view-item-drag-error-border-color: var(--modus-red);
 
