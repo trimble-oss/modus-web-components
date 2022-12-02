@@ -10,7 +10,7 @@ import { IconChevronRightThick } from '../icons/icon-chevron-right-thick';
 })
 export class ModusPagination {
   /* (optional) The pagination's aria-label. */
-  @Prop() ariaLabel: string;
+  @Prop() ariaLabel: string | null;
 
   /* The active page. */
   @Prop() activePage: number;

@@ -13,7 +13,7 @@ export interface Crumb {
 })
 export class ModusBreadcrumb {
   /** The breadcrumb's aria-label. */
-  @Prop() ariaLabel: string;
+  @Prop() ariaLabel: string | null;
 
   /** The breadcrumbs to render. */
   @Prop() crumbs: Crumb[] = [];

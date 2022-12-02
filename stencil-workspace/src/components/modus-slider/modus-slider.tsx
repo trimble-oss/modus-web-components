@@ -8,7 +8,7 @@ import { Component, Event, EventEmitter, h, Prop } from '@stencil/core';
 })
 export class ModusSlider {
   /** (optional) The slider's aria-label. */
-  @Prop() ariaLabel: string;
+  @Prop() ariaLabel: string | null;
 
   /** (optional) Whether the slider is disabled. **/
   @Prop() disabled = false;

@@ -13,7 +13,7 @@ import { IconInfo } from '../icons/icon-info';
 })
 export class ModusAlert {
   /** (optional) The alert's aria-label. */
-  @Prop() ariaLabel: string;
+  @Prop() ariaLabel: string | null;
 
   /** (optional) Whether the alert has a dismiss button */
   @Prop() dismissible: boolean;
