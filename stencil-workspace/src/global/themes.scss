@@ -60,10 +60,6 @@
   --modus-danger: var(--modus-red);
   --modus-warning: var(--modus-yellow-dark);
 
-  // Text colors
-  --modus-tertiary-color: var(--modus-gray-10);
-  --modus-warning-color: var(--modus-gray-10);
-
   // Body
   --modus-body-bg: var(--modus-white);
   --modus-body-color: var(--modus-gray-10);
@@ -721,31 +717,16 @@ modus-button[disabled] {
   @if $button-style == 'solid' {
     --modus-btn-#{$color}-bg: var(--modus-#{$color});
     --modus-btn-#{$color}-border-color: var(--modus-#{$color});
-    --modus-btn-#{$color}-color: if(
-      $color == 'tertiary',
-      var(--modus-#{$color}-color),
-      var(--modus-white)
-    );
 
-    // Hover
+    @if $color == 'tertiary' {
+      --modus-btn-#{$color}-color: var(--modus-gray-10);
+    } @else {
+      --modus-btn-#{$color}-color: var(--modus-white);
+    }
+
+    // States
     --modus-btn-#{$color}-hover-bg: var(--modus-btn-#{$color}-hover);
-    --modus-btn-#{$color}-hover-border-color: var(--modus-btn-#{$color}-hover);
-    --modus-btn-#{$color}-hover-color: if(
-      $color == 'tertiary',
-      var(--modus-#{$color}-color),
-      var(--modus-white)
-    );
-
-    // Active
     --modus-btn-#{$color}-active-bg: var(--modus-btn-#{$color}-active);
-    --modus-btn-#{$color}-active-border-color: var(
-      --modus-btn-#{$color}-active
-    );
-    --modus-btn-#{$color}-active-color: if(
-      $color == 'tertiary',
-      var(--modus-#{$color}-color),
-      var(--modus-white)
-    );
   }
 }
 

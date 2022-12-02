@@ -228,8 +228,6 @@ modus-dropdown {
         &:hover {
           .action-item-content {
             background-color: $modus-list-item-hover-bg;
-            border: $rem-1px solid $modus-list-item-hover-border-color;
-            color: $modus-list-item-hover-color;
           }
         }
       }
