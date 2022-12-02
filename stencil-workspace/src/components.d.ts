@@ -633,7 +633,7 @@ export namespace Components {
     }
     interface ModusSpinner {
         /**
-          * (optional) The color of the spinner in hex format (eg #FFFFFF)
+          * (optional) The color of the spinner. It can be a custom color or one of the variants  - primary, secondary, tertiary, dark, success, danger and warning.
          */
         "color": string;
         /**
@@ -1903,7 +1903,7 @@ declare namespace LocalJSX {
     }
     interface ModusSpinner {
         /**
-          * (optional) The color of the spinner in hex format (eg #FFFFFF)
+          * (optional) The color of the spinner. It can be a custom color or one of the variants  - primary, secondary, tertiary, dark, success, danger and warning.
          */
         "color"?: string;
         /**

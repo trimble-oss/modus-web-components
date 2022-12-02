@@ -1,6 +1,8 @@
+@import './modus-navbar.vars';
+
 nav {
   align-items: center;
-  background-color: $col_white;
+  background-color: $modus-navbar-bg;
   display: flex;
   font-family: $primary-font;
   height: 56px;
@@ -21,15 +23,23 @@ nav {
     border-radius: $rem-2px;
     padding: $rem-12px;
 
+    path {
+      fill: $modus-navbar-icon-color;
+    }
+
     &:hover {
-      background-color: $col_gray_0;
+      background-color: $modus-navbar-icon-hover-bg;
+
+      path {
+        fill: $modus-navbar-icon-hover-color;
+      }
     }
 
     &:active {
-      background-color: $col_gray_2;
+      background-color: $modus-navbar-icon-active-bg;
 
       path {
-        fill: $col_trimble_blue;
+        fill: $modus-navbar-icon-active-color;
       }
     }
   }
@@ -52,6 +62,7 @@ nav {
     }
 
     img.product-logo {
+      filter: $modus-navbar-brand-logo-filter;
       margin: 0 $rem-8px;
       max-height: 32px;
     }
@@ -90,7 +101,7 @@ nav {
       width: 40px;
 
       img.avatar {
-        background-color: $col_gray_0;
+        background-color: $modus-navbar-icon-color;
         border-radius: 50%;
         height: 32px;
         width: 32px;
@@ -98,8 +109,9 @@ nav {
 
       .initials {
         align-items: center;
-        background-color: $col_gray_0;
+        background-color: $modus-navbar-icon-color;
         border-radius: 50%;
+        color: $modus-navbar-profile-icon-initials-color;
         display: flex;
         font-size: $rem-14px;
         font-weight: $font-weight-semi-bold;
@@ -108,12 +120,12 @@ nav {
         width: 32px;
       }
 
-      >:first-child:hover {
-        border: $rem-4px solid $col_gray_0;
+      > :first-child:hover {
+        border: $rem-4px solid $modus-navbar-icon-color;
       }
 
-      >:first-child:active {
-        border: $rem-4px solid $col_gray_2;
+      > :first-child:active {
+        outline: $rem-4px solid $modus-navbar-profile-icon-active-border-color;
       }
 
       &:hover {

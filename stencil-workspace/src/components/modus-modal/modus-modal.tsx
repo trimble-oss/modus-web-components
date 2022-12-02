@@ -55,7 +55,9 @@ export class ModusModal {
   visible: boolean;
 
   handleOverlayClick(event: MouseEvent): void {
-    if (!(event.target as HTMLElement).classList.contains('overlay')) { return; }
+    if (!(event.target as HTMLElement).classList.contains('overlay')) {
+      return;
+    }
 
     this.close();
   }
@@ -84,11 +86,11 @@ export class ModusModal {
         class={`modus-modal overlay ${this.visible ? 'visible' : 'hidden'}`}
         onClick={(event) => this.handleOverlayClick(event)}
         role="dialog"
-        style={{zIndex: this.zIndex}}>
+        style={{ zIndex: this.zIndex }}>
         <div class="content">
           <div class="header">
             {this.headerText}
-            <div class="icon-close" role="button" aria-label="Close" onClick={() => this.close()}>
+            <div role="button" aria-label="Close" onClick={() => this.close()}>
               <IconClose size="20" />
             </div>
           </div>
@@ -96,14 +98,16 @@ export class ModusModal {
             <slot />
           </div>
           <div class="footer">
-            {this.secondaryButtonText &&
+            {this.secondaryButtonText && (
               <modus-button button-style="outline" color="secondary" onClick={() => this.secondaryButtonClick.emit()} onKeyDown={(event) => this.handlePrimaryKeydown(event)}>
                 {this.secondaryButtonText}
-              </modus-button>}
-            {this.primaryButtonText &&
+              </modus-button>
+            )}
+            {this.primaryButtonText && (
               <modus-button color="primary" onClick={() => this.primaryButtonClick.emit()} onKeyDown={(event) => this.handleSecondaryKeydown(event)}>
                 {this.primaryButtonText}
-              </modus-button>}
+              </modus-button>
+            )}
           </div>
         </div>
       </div>

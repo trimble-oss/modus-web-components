@@ -1,3 +1,5 @@
+@import './modus-message.vars';
+
 .modus-message {
   align-items: center;
   border-radius: $rem-2px;
@@ -13,12 +15,20 @@
   }
 
   &.info {
-    background-color: #dcedf9;
-    color: $col_trimble_blue;
+    background-color: $modus-message-info-bg;
+    color: $modus-message-info-color;
+
+    svg path {
+      fill: $modus-message-info-color !important;
+    }
   }
 
   &.question {
-    background-color: #f1f1f6;
-    color: $col_gray_6;
+    background-color: $modus-message-question-bg;
+    color: $modus-message-question-color;
+
+    svg path {
+      fill: $modus-message-question-color !important;
+    }
   }
 }

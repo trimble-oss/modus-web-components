@@ -1,0 +1,66 @@
+// Default theme colors
+$btn-theme-colors: map-remove($theme-colors, 'success', 'warning', 'yellow', 'dark');
+$btn-hover-colors: (
+  'primary': #0082d6,
+  'secondary': #838793,
+  'tertiary': #e8e8ec,
+  'danger': #e44a53,
+);
+$btn-active-colors: (
+  'primary': #00548a,
+  'secondary': #5e626b,
+  'tertiary': #bdbfcb,
+  'danger': #c41e28,
+);
+
+// Outline
+$btn-outline-theme-colors: map-remove($theme-colors, 'success', 'warning', 'yellow', 'secondary', 'tertiary', 'danger');
+$btn-outline-hover: (
+  'primary': (
+    'bg': rgba(0, 99, 163, 0.15),
+    'color': #0082d6,
+  ),
+  'dark': (
+    'bg': rgba(33, 42, 50, 0.15),
+    'color': #3c444a,
+  ),
+);
+$btn-outline-active: (
+  'primary': (
+    'bg': rgba(0, 99, 163, 0.2),
+    'color': #00548a,
+  ),
+  'dark': (
+    'bg': rgba(33, 42, 50, 0.2),
+    'color': #1a1d20,
+  ),
+);
+
+// Borderless
+$modus-btn-borderless-bg: var(--modus-btn-text-primary-bg, transparent) !default;
+$modus-btn-borderless-color: var(--modus-btn-text-primary-color, map-get($theme-colors, 'primary')) !default;
+
+// Hover
+$btn-borderless-hover: (
+  'primary': (
+    'bg': rgba(0, 99, 163, 0.2),
+    'color': #0082d6,
+  ),
+);
+$modus-btn-borderless-hover-bg: var(--modus-btn-text-primary-hover-bg, map-get($btn-borderless-hover, 'primary', 'bg')) !default;
+$modus-btn-borderless-hover-color: var(--modus-btn-text-primary-hover-color, map-get($btn-borderless-hover, 'primary', 'color')) !default;
+
+// Active
+$btn-borderless-active: (
+  'primary': (
+    'bg': rgba(0, 99, 163, 0.3),
+    'color': #004470,
+  ),
+);
+$modus-btn-borderless-active-bg: var(--modus-btn-text-primary-active-bg, map-get($btn-borderless-active, 'primary', 'bg')) !default;
+$modus-btn-borderless-active-color: var(--modus-btn-text-primary-active-color, map-get($btn-borderless-active, 'primary', 'color')) !default;
+
+// Disabled
+$modus-btn-disabled-color: var(--modus-btn-disabled-color) !default;
+$modus-btn-disabled-bg: var(--modus-btn-disabled-bg) !default;
+$modus-btn-disabled-border-color: var(--modus-btn-disabled-border-color) !default;

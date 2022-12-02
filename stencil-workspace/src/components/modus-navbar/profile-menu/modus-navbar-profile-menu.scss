@@ -1,5 +1,7 @@
+@import './../modus-navbar.vars';
+
 .profile-menu {
-  @include navbar-menu;
+  @include custom-navbar-menu;
 
   align-items: center;
   cursor: default;
@@ -25,6 +27,7 @@
 
     .initials {
       align-items: center;
+      color: $modus-navbar-profile-icon-initials-color;
       display: flex;
       font-size: $rem-24px;
       font-weight: $font-weight-semi-bold;

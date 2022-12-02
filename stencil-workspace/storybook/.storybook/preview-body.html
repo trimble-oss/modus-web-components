@@ -3,3 +3,21 @@
     font-family: "Open Sans", sans-serif;
   }
 </style>
+
+<script>
+    function updateTheme(){
+      const storage = window.localStorage.getItem('sb-addon-themes-3');
+      const themeContext = JSON.parse(storage);
+      const theme = themeContext.current;
+      window.document.body?.setAttribute('data-mwc-theme', theme);
+      if(theme !== window.localStorage.getItem('data-mwc-theme')){
+        window.localStorage.setItem('data-mwc-theme', theme);
+      }
+    }
+    window.addEventListener('DOMContentLoaded', () => updateTheme());
+    window.addEventListener('storage', ({key}) => {
+      if('sb-addon-themes-3'){
+        updateTheme();
+      }
+    });
+</script>

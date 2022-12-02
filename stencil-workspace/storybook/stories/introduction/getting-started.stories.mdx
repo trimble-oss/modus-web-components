@@ -53,6 +53,22 @@ defineCustomElements();
 <modus-alert message="You've installed Modus Web Components!" type="success" />
 ```
 
+## Dark Mode
+
+By default, `light` theme is applied on the components without any additional CSS. Inorder to enable `dark` theme you need to reference the `./node_modules/@trimble-oss/modus-web-components/dist/modus-web-components/modus-web-components.css` CSS file. Themes can be toggled globally on the `<html>, <body>` elements, or on specific components using `data-mwc-theme` attribute.
+
+<modus-button color="primary" data-mwc-theme="light">Primary</modus-button>
+
+```html
+<modus-button color="primary" data-mwc-theme="light">Primary</modus-button>
+```
+
+<modus-button color="primary" data-mwc-theme="dark">Primary</modus-button>
+
+```html
+<modus-button color="primary" data-mwc-theme="dark">Primary</modus-button>
+```
+
 ## Recommendations
 
 - Abstract away from 3rd party libraries. Consider wrapping each Modus Web Component in a component native to your application.

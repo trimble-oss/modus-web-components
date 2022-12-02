@@ -1,10 +1,12 @@
+@import './modus-toast.vars';
+
 .modus-toast {
   align-items: center;
-  background-color: $col_white;
-  border: $rem-1px solid $col_gray_6;
+  background-color: $modus-toast-bg;
+  border: $rem-1px solid $modus-toast-border-color;
   border-radius: $rem-2px;
-  box-shadow: 0 0 8px rgba(36, 35, 45, .3);
-  color: $col_trimble_gray;
+  box-shadow: 0 0 8px rgba(36, 35, 45, 0.3);
+  color: $modus-toast-color;
   display: flex;
   flex-direction: row;
   font-family: $primary-font;
@@ -20,61 +22,31 @@
     margin-left: auto;
 
     &:hover svg path {
-      fill: $col_gray_6;
-    }
-
-    &:active svg path {
-      fill: $col_trimble_gray;
+      opacity: 0.5;
     }
   }
 
-  &.danger {
-    background-color: $col_red_pale;
-    border-color: $col_red;
-  }
+  @each $color, $value in $modus-toast-variants {
+    &.#{$color} {
+      background-color: var(--modus-toast-#{$color}-bg, map-get($value, 'bg'));
+      border-color: var(--modus-toast-#{$color}-border-color, map-get($value, 'border-color'));
+      color: var(--modus-toast-#{$color}-color, if(map-get($value, 'color') == null, $modus-toast-color, map-get($value, 'color')));
 
-  &.dark {
-    background-color: $col_trimble_gray;
-    color: $col_white;
-
-    .close {
-      svg path {
-        fill: $col_white;
+      .close {
+        svg path {
+          fill: var(--modus-toast-#{$color}-close-btn-color, if(map-get($value, 'close-button') == null, $modus-toast-close-btn-color, map-get($value, 'close-button')));
+        }
       }
 
-      &:hover svg path {
-        fill: $col_gray_2;
-      }
-
-      &:active svg path {
-        fill: $col_gray_6;
+      @if $color == 'dark' {
+        svg:not(.icon-close) path {
+          fill: var(--modus-toast-#{$color}-color, if(map-get($value, 'color') == null, $modus-toast-color, map-get($value, 'color')));
+        }
+      } @else {
+        svg:not(.icon-close) path {
+          fill: var(--modus-toast-#{$color}-border-color, map-get($value, 'border-color'));
+        }
       }
     }
-  }
-
-  &.primary {
-    background-color: $col_blue_pale;
-    border-color: $col_blue_dark;
-    color: $col_blue;
-  }
-
-  &.secondary {
-    background-color: $col_gray_2;
-    border-color: $col_black;
-  }
-
-  &.success {
-    background-color: $col_green_pale;
-    border-color: $col_green;
-  }
-
-  &.tertiary {
-    background-color: $col_gray_light;
-    border-color: $col_gray_2;
-  }
-
-  &.warning {
-    background-color: $col_yellow_pale;
-    border-color: $col_yellow;
   }
 }
