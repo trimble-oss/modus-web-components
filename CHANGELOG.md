@@ -6,6 +6,8 @@ View all releases at: <https://github.com/trimble-oss/modus-web-components/relea
 
 ## Unreleased
 
+## 0.1.25 - 2022-12-01
+
 ### Fixed
 
 - Fixed inexplicitly set aria-disabled values
