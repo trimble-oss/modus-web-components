@@ -159,7 +159,7 @@
   --modus-input-color: var(--modus-body-color);
   --modus-input-border-color: var(--modus-gray-0);
   --modus-input-bottom-line-color: var(--modus-gray-6);
-  --modus-input-bottom-line-active-color: var(--modus-highlight-blue);
+  --modus-input-bottom-line-active-color: var(--modus-highlight-blue-color);
   --modus-input-helper-icon-color: var(--modus-gray-6);
   --modus-input-hint-text-color: var(--modus-gray-3);
   --modus-input-label-color: var(--modus-gray-8);
@@ -177,8 +177,8 @@
   --modus-check-input-border-color: var(--modus-gray-4);
   --modus-check-input-disabled-opacity: 0.3;
   --modus-check-input-label-color: var(--modus-input-label-color);
-  --modus-check-input-hover-border-color: var(--modus-highlight-blue);
-  --modus-check-input-active-border-color: var(--modus-highlight-blue);
+  --modus-check-input-hover-border-color: var(--modus-highlight-blue-color);
+  --modus-check-input-active-border-color: var(--modus-highlight-blue-color);
 
   // Card
   --modus-card-bg: var(--modus-white);
@@ -424,7 +424,7 @@
   --modus-input-bg: var(--modus-gray-10);
   --modus-input-color: var(--modus-body-color);
   --modus-input-border-color: var(--modus-gray-8);
-  --modus-input-bottom-line-active-color: var(--modus-highlight-blue);
+  --modus-input-bottom-line-active-color: var(--modus-highlight-blue-color);
   --modus-input-helper-icon-color: var(--modus-gray-2);
   --modus-input-hint-text-color: var(--modus-gray-5);
   --modus-input-label-color: var(--modus-gray-2);
@@ -440,8 +440,8 @@
   --modus-check-input-bg: transparent;
   --modus-check-input-disabled-opacity: 0.4;
   --modus-check-input-label-color: var(--modus-input-label-color);
-  --modus-check-input-hover-border-color: var(--modus-highlight-blue);
-  --modus-check-input-active-border-color: var(--modus-highlight-blue);
+  --modus-check-input-hover-border-color: var(--modus-highlight-blue-color);
+  --modus-check-input-active-border-color: var(--modus-highlight-blue-color);
 
   // Card
   --modus-card-bg: var(--modus-gray-9);
@@ -611,17 +611,9 @@
   --modus-table-readonly-color: var(--modus-gray-2);
 }
 
-modus-accordion-item {
-  --modus-accordion-item-bg: var(--modus-body-bg);
-  --modus-accordion-item-color: var(--modus-body-color);
-  --modus-accordion-item-border-color: var(--modus-border-color);
-}
-
-modus-alert {
-  --modus-alert-close-color: var(--modus-body-color);
-  --modus-alert-close-hover-opacity: 0.5;
-}
-
+// Mixins
+// Note:
+// Workaround - Using Mixin to resuse CSS variables which cannot penetrate into nested components, examples: A checkbox in Tree view item, buttons in Modal dialog, a badge in Datatable cell.
 @mixin modus-badge {
   // Background
   --modus-badge-primary-bg: var(--modus-primary);
@@ -639,6 +631,49 @@ modus-alert {
   --modus-badge-text-success: var(--modus-success);
   --modus-badge-text-warning: var(--modus-warning);
   --modus-badge-text-danger: var(--modus-danger);
+}
+
+@mixin modus-checkbox {
+  --modus-checkbox-bg: var(--modus-check-input-bg);
+  --modus-checkbox-border-color: var(--modus-check-input-border-color);
+  --modus-checkbox-disabled-opacity: var(--modus-check-input-disabled-opacity);
+  --modus-checkbox-label-color: var(--modus-check-input-label-color);
+  --modus-checkbox-hover-border-color: var(--modus-check-input-active-border-color);
+  --modus-checkbox-selected-border-color: var(--modus-check-input-active-border-color);
+  --modus-checkbox-indeterminate-border-color: var(--modus-check-input-active-border-color);
+}
+
+@mixin modus-list-item {
+  --modus-list-item-bg: var(--modus-group-item-bg);
+  --modus-list-item-border-color: var(--modus-group-item-border-color);
+  --modus-list-item-color: var(--modus-group-item-color);
+
+  // Hover
+  --modus-list-item-hover-bg: var(--modus-group-item-hover-bg);
+
+  // Selected
+  --modus-list-item-selected-bg: var(--modus-group-item-selected-bg);
+  --modus-list-item-selected-border-color: var(--modus-group-item-selected-border-color);
+
+  // Disabled
+  --modus-list-item-disabled-color: var(--modus-group-item-disabled-color);
+}
+
+@mixin modus-tooltip {
+  --modus-tooltip-bg: var(--modus-gray-7);
+  --modus-tooltip-color: var(--modus-white);
+}
+
+// Components
+modus-accordion-item {
+  --modus-accordion-item-bg: var(--modus-body-bg);
+  --modus-accordion-item-color: var(--modus-body-color);
+  --modus-accordion-item-border-color: var(--modus-border-color);
+}
+
+modus-alert {
+  --modus-alert-close-color: var(--modus-body-color);
+  --modus-alert-close-hover-opacity: 0.5;
 }
 
 modus-badge {
@@ -717,18 +752,6 @@ modus-card {
   --modus-card-color: var(--modus-body-color);
 }
 
-// Note:
-// Workaround - CSS variables don't penetrate into nested components in shadow DOM, examples: checkbox in a Tree view item, buttons in Modal dialog, etc.
-@mixin modus-checkbox {
-  --modus-checkbox-bg: var(--modus-check-input-bg);
-  --modus-checkbox-border-color: var(--modus-check-input-border-color);
-  --modus-checkbox-disabled-opacity: var(--modus-check-input-disabled-opacity);
-  --modus-checkbox-label-color: var(--modus-check-input-label-color);
-  --modus-checkbox-hover-border-color: var(--modus-check-input-active-border-color);
-  --modus-checkbox-selected-border-color: var(--modus-check-input-active-border-color);
-  --modus-checkbox-indeterminate-border-color: var(--modus-check-input-active-border-color);
-}
-
 modus-checkbox {
   @include modus-checkbox;
 }
@@ -765,45 +788,17 @@ modus-chip {
   }
 }
 
-modus-tree-view,
-modus-tree-view-item {
-  --modus-tree-view-item-bg: var(--modus-group-item-bg);
-  --modus-tree-view-item-border-color: var(--modus-group-item-border-color);
-  --modus-tree-view-item-color: var(--modus-group-item-color);
-  --modus-chevron-color: var(--modus-gray-4);
-
-  // Hover
-  --modus-tree-view-item-hover-bg: var(--modus-group-item-hover-bg);
-
-  // Selected
-  --modus-tree-view-item-selected-bg: var(--modus-group-item-selected-bg);
-  --modus-tree-view-item-selected-border-color: var(--modus-group-item-selected-border-color);
-
-  // Disabled
-  --modus-tree-view-item-disabled-color: var(--modus-group-item-disabled-color);
-
-  // Indicator
-  --modus-tree-view-item-selected-indicator-color: var(--modus-highlight-blue-color);
-  --modus-tree-view-item-drag-border-color: var(--modus-highlight-blue-color);
-  --modus-tree-view-item-drag-error-border-color: var(--modus-red);
-
+modus-data-table {
+  @include modus-badge;
   @include modus-checkbox;
+  @include modus-list-item;
+  @include modus-tooltip;
 }
 
-@mixin modus-list-item {
-  --modus-list-item-bg: var(--modus-group-item-bg);
-  --modus-list-item-border-color: var(--modus-group-item-border-color);
-  --modus-list-item-color: var(--modus-group-item-color);
-
-  // Hover
-  --modus-list-item-hover-bg: var(--modus-group-item-hover-bg);
-
-  // Selected
-  --modus-list-item-selected-bg: var(--modus-group-item-selected-bg);
-  --modus-list-item-selected-border-color: var(--modus-group-item-selected-border-color);
-
-  // Disabled
-  --modus-list-item-disabled-color: var(--modus-group-item-disabled-color);
+modus-file-dropzone {
+  --modus-file-upload-dropzone-border-color: var(--modus-gray-6);
+  --modus-file-upload-dropzone-browse-color: var(--modus-trimble-blue);
+  --modus-file-upload-dropzone-highlight-border-color: var(--modus-highlight-blue-color);
 }
 
 modus-list-item {
@@ -836,6 +831,11 @@ modus-radio-group {
   --modus-radio-btn-selected-border-color: var(--modus-check-input-active-border-color);
 }
 
+modus-slider {
+  --modus-slider-range-bg: var(--modus-primary);
+  --modus-slider-thumb-border-color: #217cbb;
+}
+
 modus-switch {
   --modus-switch-bg: var(--modus-check-input-border-color);
   --modus-switch-border-color: var(--modus-check-input-border-color);
@@ -845,33 +845,35 @@ modus-switch {
   --modus-switch-selected-border-color: var(--modus-check-input-active-border-color);
 }
 
-modus-slider {
-  --modus-slider-range-bg: var(--modus-primary);
-  --modus-slider-thumb-border-color: #217cbb;
-}
-
 modus-tabs {
   --modus-tab-active-color: var(--modus-highlight-blue-color);
 }
 
-@mixin modus-tooltip {
-  --modus-tooltip-bg: var(--modus-gray-7);
-  --modus-tooltip-color: var(--modus-white);
+modus-tree-view,
+modus-tree-view-item {
+  --modus-tree-view-item-bg: var(--modus-group-item-bg);
+  --modus-tree-view-item-border-color: var(--modus-group-item-border-color);
+  --modus-tree-view-item-color: var(--modus-group-item-color);
+  --modus-chevron-color: var(--modus-gray-4);
+
+  // Hover
+  --modus-tree-view-item-hover-bg: var(--modus-group-item-hover-bg);
+
+  // Selected
+  --modus-tree-view-item-selected-bg: var(--modus-group-item-selected-bg);
+  --modus-tree-view-item-selected-border-color: var(--modus-group-item-selected-border-color);
+
+  // Disabled
+  --modus-tree-view-item-disabled-color: var(--modus-group-item-disabled-color);
+
+  // Indicator
+  --modus-tree-view-item-selected-indicator-color: var(--modus-highlight-blue-color);
+  --modus-tree-view-item-drag-border-color: var(--modus-highlight-blue-color);
+  --modus-tree-view-item-drag-error-border-color: var(--modus-red);
+
+  @include modus-checkbox;
 }
 
 modus-tooltip {
   @include modus-tooltip;
-}
-
-modus-data-table {
-  @include modus-badge;
-  @include modus-checkbox;
-  @include modus-list-item;
-  @include modus-tooltip;
-}
-
-modus-file-dropzone {
-  --modus-file-upload-dropzone-border-color: var(--modus-gray-6);
-  --modus-file-upload-dropzone-browse-color: var(--modus-trimble-blue);
-  --modus-file-upload-dropzone-highlight-border-color: var(--modus-highlight-blue-color);
 }
