@@ -1,5 +1,7 @@
+@import './../modus-navbar.vars';
+
 .apps-menu {
-  @include navbar-menu;
+  @include custom-navbar-menu;
 
   align-items: flex-start;
   cursor: default;
@@ -16,19 +18,21 @@
   }
 
   .app {
+    border-color: $menu-border-color;
     border-radius: $rem-2px;
+    color: $menu-color;
     cursor: default;
     display: flex;
     padding: $rem-4px;
     width: 100%;
 
     &:hover {
-      background-color: $col_gray_0;
+      background-color: $modus-navbar-icon-hover-bg;
       cursor: pointer;
     }
 
     &:active {
-      background-color: $col_gray_2;
+      background-color: $modus-navbar-icon-active-bg;
     }
 
     &:not(:last-child) {
@@ -56,8 +60,8 @@
   }
 
   .category {
-    border-top: 1px solid $col_gray_0;
-    color: $col_gray_8;
+    border-top: 1px solid $menu-border-color;
+    color: $menu-color;
     font-size: $rem-12px;
     font-weight: $font-weight-semi-bold;
     margin-top: $rem-8px;

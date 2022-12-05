@@ -1,4 +1,5 @@
 **/*.scss
+**/*.css
 **/*.spec.ts
 **/*.e2e.ts
 **/*.html

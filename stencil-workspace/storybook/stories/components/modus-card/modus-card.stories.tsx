@@ -20,8 +20,11 @@ export default {
 const Template = () => html`
   <modus-card>
     <!-- Render anything here -->
-    <div>
-      <img src="https://modus.trimble.com/icon.png" alt="Trimble icon" />
+    <div style="padding:10px">
+      <h4 id="card-title">Card title</h4>
+      <h5 id="card-subtitle">Card subtitle</h5>
+      <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <modus-button color="primary">Go somewhere</modus-button>
     </div>
   </modus-card>
 `;

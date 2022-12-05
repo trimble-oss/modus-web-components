@@ -1,10 +1,10 @@
+@import './modus-badge.vars';
+
 div.badge {
   align-items: center;
-
-  // Default color, size, and type
-  background-color: $col_trimble_blue;
+  background-color: $modus-badge-primary-bg;
   border-radius: 2px;
-  color: $col_white;
+  color: $modus-badge-primary-color;
   display: inline-flex;
   font-family: $primary-font;
   font-size: $rem-12px;
@@ -14,57 +14,61 @@ div.badge {
   position: relative;
 
   &.color-danger {
-    background-color: $col_red;
+    background-color: $modus-badge-danger-bg;
+    color: $modus-badge-danger-color;
   }
 
   &.color-dark {
-    background-color: $col_trimble_gray;
+    background-color: $modus-badge-dark-bg;
+    color: $modus-badge-dark-color;
   }
 
   &.color-secondary {
-    background-color: $col_gray_8;
+    background-color: $modus-badge-secondary-bg;
+    color: $modus-badge-secondary-color;
   }
 
   &.color-success {
-    background-color: $col_green_dark;
+    background-color: $modus-badge-success-bg;
+    color: $modus-badge-success-color;
   }
 
   &.color-tertiary {
-    background-color: $col_gray_1;
-    color: $col_trimble_gray;
+    background-color: $modus-badge-tertiary-bg;
+    color: $modus-badge-tertiary-color;
   }
 
   &.color-warning {
-    background-color: $col_yellow;
-    color: $col_trimble_gray;
+    background-color: $modus-badge-warning-bg;
+    color: $modus-badge-warning-color;
   }
 
   &.type-text {
     background-color: unset;
-    color: $col_blue_dark;
+    color: $modus-badge-text-primary;
 
     &.color-danger {
-      color: $col_red;
+      color: $modus-badge-text-danger;
     }
 
     &.color-dark {
-      color: $col_trimble_gray;
+      color: $modus-badge-text-dark;
     }
 
     &.color-secondary {
-      color: $col_gray_8;
+      color: $modus-badge-text-secondary;
     }
 
     &.color-success {
-      color: $col_green_dark;
+      color: $modus-badge-text-success;
     }
 
     &.color-tertiary {
-      color: $col_gray_1;
+      color: $modus-badge-text-tertiary;
     }
 
     &.color-warning {
-      color: $col_yellow;
+      color: $modus-badge-text-warning;
     }
   }
 

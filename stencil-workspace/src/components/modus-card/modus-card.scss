@@ -1,15 +1,19 @@
+@import './modus-card.vars';
+
 article {
-  background-color: $col_white;
+  background-color: $modus-card-bg;
+  border: $rem-1px solid $modus-card-border-color;
   border-radius: $rem-2px;
+  color: $modus-card-color;
   font-family: $primary-font;
   overflow: hidden;
   position: relative;
 
   &.shadow:hover {
-    box-shadow: $box-shadow-lg;
+    box-shadow: 0 0 4px $modus-card-shadow-color;
   }
 
   &.card-border {
-    border: $rem-1px solid $col_gray_light;
+    border: $rem-1px solid $modus-card-shadow-color;
   }
 }

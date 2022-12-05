@@ -32,18 +32,19 @@ describe('modus-breadcrumb', () => {
     const page = await newE2EPage();
     const crumbs = [
       { display: 'one', id: '1' },
-      { display: 'one', id: '1' },
-      { display: 'one', id: '1' },
+      { display: 'one', id: '2' },
+      { display: 'one', id: '3' },
     ];
 
     await page.setContent('<modus-breadcrumb></modus-breadcrumb>');
     const component = await page.find('modus-breadcrumb');
     component.setProperty('crumbs', crumbs);
     await page.waitForChanges();
-    const crumbClick = await page.spyOnEvent('crumbClick');
-    const elements = await page.findAll('modus-breadcrumb >>> a');
 
-    await elements[0].click();
+    const crumbClick = await page.spyOnEvent('crumbClick');
+    const elements = await page.findAll('modus-breadcrumb >>> li');
+
+    await (await elements[0].find('a')).click();
     await page.waitForChanges();
 
     expect(crumbClick).toHaveReceivedEvent();

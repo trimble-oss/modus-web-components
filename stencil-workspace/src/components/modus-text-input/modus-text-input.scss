@@ -1,3 +1,5 @@
+@import './modus-text-input.vars';
+
 .modus-text-input {
   display: inline-flex;
   flex-direction: column;
@@ -5,12 +7,12 @@
   width: 100%;
 
   label {
-    color: $col_trimble_gray;
+    color: $modus-input-label-color;
     font-size: $rem-12px;
     margin-bottom: $rem-4px;
 
     span {
-      color: $col_gray_6;
+      color: $modus-input-bottom-line-color;
       margin: $rem-4px;
     }
   }
@@ -20,6 +22,7 @@
 
     .required {
       bottom: $rem-1px;
+      color: $modus-input-validation-error-color;
       margin-left: $rem-4px;
       position: relative;
     }
@@ -27,10 +30,9 @@
 
   .input-container {
     align-items: center;
-    background-color: $col_white;
-    border: solid;
-    border-color: $col_gray_0 $col_gray_0 $col_gray_6 $col_gray_0;
-    border-width: $rem-1px;
+    background-color: $modus-input-bg;
+    border: $rem-1px solid $modus-input-border-color;
+    border-bottom-color: $modus-input-bottom-line-color;
     display: flex;
     flex-direction: row;
     height: 2rem;
@@ -38,10 +40,16 @@
 
     svg {
       padding: 0 $rem-6px;
+
+      path {
+        fill: $modus-input-helper-icon-color;
+      }
     }
 
     input {
-      border: $col_white;
+      background-color: transparent;
+      border: none;
+      color: $modus-input-color;
       font-size: $rem-12px;
       outline: none;
       padding: 0 $rem-8px;
@@ -56,14 +64,14 @@
       }
 
       &::placeholder {
-        color: $col_gray_5;
+        color: $modus-input-hint-text-color;
       }
     }
 
     .icons {
       align-items: center;
-      background-color: $col_white;
-      color: $col_gray_10;
+      background-color: $modus-input-bg;
+      color: $modus-input-helper-icon-color;
       display: flex;
       font-size: $rem-16px;
       justify-content: center;
@@ -74,11 +82,7 @@
         min-height: 1.5rem;
 
         &:hover svg path {
-          fill: $col_gray_6;
-        }
-
-        &:active svg path {
-          fill: $col_trimble_gray;
+          opacity: 0.75;
         }
       }
     }
@@ -90,21 +94,20 @@
     &:focus-within,
     &.error,
     &.valid {
-      border: solid;
-      border-width: $rem-1px $rem-1px $rem-2px $rem-1px;
+      border-bottom-width: $rem-2px;
       height: 1.9375rem; // Counteract bottom border width.
     }
 
     &:focus-within {
-      border-color: $col_gray_0 $col_gray_0 $col_trimble_blue $col_gray_0;
+      border-bottom-color: $modus-input-bottom-line-active-color;
     }
 
     &.error {
-      border-color: $col_gray_0 $col_gray_0 $col_red $col_gray_0;
+      border-bottom-color: $modus-input-validation-error-color;
     }
 
     &.valid {
-      border-color: $col_gray_0 $col_gray_0 $col_green $col_gray_0;
+      border-bottom-color: $modus-input-validation-success-color;
     }
 
     &.large {
@@ -127,21 +130,21 @@
     margin-top: $rem-4px;
 
     &.helper {
-      color: $col_gray_9;
+      color: $modus-input-label-color;
     }
 
     &.error {
-      color: $col_red;
+      color: $modus-input-validation-error-color;
     }
 
     &.valid {
-      color: $col_green;
+      color: $modus-input-validation-success-color;
     }
   }
 
   span {
     &.required {
-      color: $col_red;
+      color: $modus-input-validation-error-color;
     }
   }
 
@@ -154,10 +157,16 @@
     pointer-events: none;
 
     .input-container {
-      background-color: $col_gray_1;
+      background-color: $modus-input-disabled-bg;
+      border: $rem-1px solid $modus-input-disabled-border-color;
+      border-bottom-color: $modus-input-disabled-bottom-line-color;
+
+      svg path {
+        fill: $modus-input-disabled-color;
+      }
 
       .icons {
-        background-color: $col_gray_1;
+        background-color: $modus-input-disabled-bg;
         cursor: default;
 
         &.clear {
@@ -166,9 +175,10 @@
       }
 
       input {
-        background-color: $col_gray_1;
+        background-color: transparent;
         border-radius: 0;
-        color: $col_gray_6;
+        color: $modus-input-disabled-color;
+        height: 100%;
       }
     }
   }
