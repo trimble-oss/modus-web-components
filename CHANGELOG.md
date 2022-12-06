@@ -6,6 +6,12 @@ View all releases at: <https://github.com/trimble-oss/modus-web-components/relea
 
 ## Unreleased
 
+## 0.1.28 - 2022-12-06
+
+### Fixed
+
+- Pressed state when the Modus Navbar menus are visible to indicate that they're open
+
 ## 0.1.27 - 2022-12-05
 
 ### Added
