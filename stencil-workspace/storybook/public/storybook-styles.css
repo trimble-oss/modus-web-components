@@ -13,6 +13,7 @@ body[data-mwc-theme="light"] {
   --theme-code-color: #333;
   --theme-code-bg-color: #f8f8f8;
   --theme-code-border-color: #eee;
+  --theme-header-underline-color: rgba(0,0,0,.1);
 }
 
 body[data-mwc-theme="dark"] {
@@ -28,6 +29,7 @@ body[data-mwc-theme="dark"] {
   --theme-code-color: #f1f1f6;
   --theme-code-bg-color: #6a6e79;
   --theme-code-border-color: #6a6e79;
+  --theme-header-underline-color: rgba(255,255,255,.2);
 }
 
 body.sb-show-main,
@@ -40,6 +42,12 @@ body.sb-show-main,
 .sbdocs-ul {
   color: var(--theme-color) !important;
   background-color: var(--theme-bg-color) !important;
+}
+
+.sbdocs-h1 + h2:not(.sbdocs-h2),
+.sbdocs-h2,
+hr {
+  border-color: var(--theme-header-underline-color) !important;
 }
 
 .sbdocs-table {
