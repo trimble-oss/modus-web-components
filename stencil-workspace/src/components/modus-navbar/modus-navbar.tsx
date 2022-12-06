@@ -202,7 +202,7 @@ export class ModusNavbar {
           {this.showMainMenu &&
             <div class="navbar-button">
               <span onKeyDown={(event) => this.mainMenuKeydownHandler(event)} tabIndex={0}>
-                <IconMenu size="24" onClick={(event) => this.mainMenuClickHandler(event)} />
+                <IconMenu size="24" pressed={this.mainMenuVisible} onClick={(event) => this.mainMenuClickHandler(event)} />
               </span>
               {this.mainMenuVisible && <modus-navbar-main-menu><slot name="main"></slot></modus-navbar-main-menu>}
             </div>}
@@ -228,7 +228,7 @@ export class ModusNavbar {
           {this.showAppsMenu &&
             <div class="navbar-button">
               <span onKeyDown={(event) => this.appsMenuKeydownHandler(event)} tabIndex={0}>
-                <IconApps size="24" onClick={(event) => this.appsMenuClickHandler(event)} />
+                <IconApps size="24" pressed={this.appsMenuVisible} onClick={(event) => this.appsMenuClickHandler(event)} />
               </span>
               {this.appsMenuVisible && <modus-navbar-apps-menu apps={this.apps} reverse={this.reverse} />}
             </div>}

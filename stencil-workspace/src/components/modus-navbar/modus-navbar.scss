@@ -15,11 +15,9 @@ nav {
     box-shadow: $box-shadow;
   }
 
-  .icon-menu,
   .icon-search,
   .icon-notifications,
-  .icon-help,
-  .icon-apps {
+  .icon-help {
     border-radius: $rem-2px;
     padding: $rem-12px;
 
@@ -41,6 +39,36 @@ nav {
       path {
         fill: $modus-navbar-icon-active-color;
       }
+    }
+  }
+
+  .icon-menu,
+  .icon-apps {
+    border-radius: $rem-2px;
+    padding: $rem-12px;
+    
+    &:hover:not(.pressed) {
+      background-color: $modus-navbar-icon-hover-bg;
+
+      path {
+        fill: $modus-navbar-icon-hover-color;
+      }
+    }
+
+    &:active {
+      background-color: $modus-navbar-icon-active-bg;
+
+      path {
+        fill: $modus-navbar-icon-active-color;
+      }
+    }
+  }
+
+  .pressed {
+    background-color: $modus-navbar-icon-active-bg;
+
+    path {
+      fill: $modus-navbar-icon-active-color;
     }
   }
 
