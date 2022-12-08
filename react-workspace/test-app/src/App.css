@@ -1,0 +1,10 @@
+
+  body[data-mwc-theme='dark'] {
+    background-color: #252a2e;
+  }
+
+  div {
+    display: block;
+    padding: 10px;
+  }
+

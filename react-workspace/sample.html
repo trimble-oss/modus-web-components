@@ -5,14 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
     <title>Trimble Modus Web Components</title>
 
-    <script type="module" src="/build/modus-web-components.esm.js"></script>
-    <script nomodule src="/build/modus-web-components.js"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
 
-    <link rel="stylesheet" href="/build/modus-web-components.css" />
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="module" src="/dist/components/index.js"></script>
+
+    <link rel="stylesheet" href="/dist/modus-web-components.css" />
 
     <!--Manually load Modus font-family-->
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+
     <link rel="stylesheet" src="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" />
+
     <style>
       body[data-mwc-theme='dark'] {
         background-color: #252a2e;
@@ -25,15 +32,21 @@
         display: block;
         margin-top: 30px;
       }
+      h1 {
+        color: var(--modus-primary);
+      }
     </style>
   </head>
   <body>
+    <div id="mydiv"></div>
 
-<modus-accordion>
-  <modus-accordion-item header-text="Item 1">Content</modus-accordion-item>
-  <modus-accordion-item header-text="Item 2">Content</modus-accordion-item>
-  <modus-accordion-item disabled header-text="Item 3">Content</modus-accordion-item>
-</modus-accordion>
+    <script type="text/babel">
+      function Hello() {
+        return <h1>Hello World!</h1>;
+      }
+
+      ReactDOM.render(<Hello />, document.getElementById('mydiv'))
+    </script>
+
   </body>
-
 </html>

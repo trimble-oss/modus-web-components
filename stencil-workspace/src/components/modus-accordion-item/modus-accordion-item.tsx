@@ -31,6 +31,7 @@ export class ModusAccordionItem {
     ['condensed', 'small'],
     ['standard', 'standard'],
   ]);
+  private accordionContent: HTMLDivElement;
 
   handleHeaderClick(): void {
     if (this.disabled) {
@@ -38,6 +39,11 @@ export class ModusAccordionItem {
     }
 
     this.expanded = !this.expanded;
+    if (this.accordionContent.style.maxHeight) {
+      this.accordionContent.style.maxHeight = null;
+    } else {
+      this.accordionContent.style.height = '150px';
+    }
     if (this.expanded) {
       this.opened.emit();
     } else {
@@ -62,12 +68,25 @@ export class ModusAccordionItem {
     const headerClass = `header ${sizeClass} ${disabledClass} ${expandedClass}`;
 
     return (
-      <div aria-disabled={this.disabled ? 'true' : undefined} aria-expanded={this.expanded} class="accordion-item">
-        <div class={headerClass} onClick={() => this.handleHeaderClick()} onKeyDown={(event) => this.handleKeydown(event)} tabIndex={0}>
+      <div
+        aria-disabled={this.disabled ? 'true' : undefined}
+        aria-expanded={this.expanded}
+        class="accordion-item">
+        <div
+          class={headerClass}
+          onClick={() => this.handleHeaderClick()}
+          onKeyDown={(event) => this.handleKeydown(event)}
+          tabIndex={0}>
           <span class="title">{this.headerText}</span>
-          {this.expanded ? <IconChevronUpThick size={iconSize}></IconChevronUpThick> : <IconChevronDownThick size={iconSize}></IconChevronDownThick>}
+          {this.expanded ? (
+            <IconChevronUpThick size={iconSize}></IconChevronUpThick>
+          ) : (
+            <IconChevronDownThick size={iconSize}></IconChevronDownThick>
+          )}
         </div>
-        <div class={bodyClass}>
+        <div
+          class={bodyClass}
+          ref={(el) => (this.accordionContent = el as HTMLDivElement)}>
           <slot />
         </div>
       </div>
