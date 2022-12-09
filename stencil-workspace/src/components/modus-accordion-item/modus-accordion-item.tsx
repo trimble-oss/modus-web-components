@@ -1,6 +1,5 @@
 // eslint-disable-next-line
 import { Component, Event, EventEmitter, Prop, h } from '@stencil/core';
-import { IconChevronUpThick } from '../icons/icon-chevron-up-thick';
 import { IconChevronDownThick } from '../icons/icon-chevron-down-thick';
 
 @Component({
@@ -32,16 +31,63 @@ export class ModusAccordionItem {
     ['standard', 'standard'],
   ]);
 
+  accordionBodyRef: HTMLDivElement;
+  accordionOpenTimeout;
+  accordionCloseTimeout;
+  chevronContainerRef: HTMLDivElement;
+
   handleHeaderClick(): void {
     if (this.disabled) {
       return;
     }
+    this.chevronContainerRef.classList.toggle('reverse');
 
-    this.expanded = !this.expanded;
-    if (this.expanded) {
-      this.opened.emit();
+    // Logic to trigger a transition animation and handle it
+    // Because transition won't have any effect when using 'display:' on an element
+    if (!this.expanded) {
+      this.accordionBodyRef.classList.remove('collapse');
+      this.accordionBodyRef.classList.add('collapsing');
+
+      // Required to calculate scrollHeight and set the value on 'height' for transition to start
+      this.accordionBodyRef.style.height = '0';
+
+      // Timeout to reset collapsing class
+      this.accordionOpenTimeout = setTimeout(() => {
+        this.accordionBodyRef.classList.remove('collapsing');
+        this.accordionBodyRef.classList.add('show');
+        this.accordionBodyRef.classList.add('collapse');
+
+        // reset height to original state
+        // this.accordionBodyRef.style.height = '';
+
+        clearTimeout(this.accordionOpenTimeout);
+        this.expanded = true;
+        this.opened.emit();
+      }, 350);
+
+      // Triggers transition
+      this.accordionBodyRef.style.height = `${this.accordionBodyRef.scrollHeight}px`;
     } else {
-      this.closed.emit();
+      this.accordionBodyRef.style.height = `${
+        this.accordionBodyRef.getBoundingClientRect().height
+      }px`;
+      this.reflow(this.accordionBodyRef);
+
+      this.accordionBodyRef.classList.add('collapsing');
+      this.accordionBodyRef.classList.remove('collapse');
+      this.accordionBodyRef.classList.remove('show');
+
+      // Timeout to reset collapsing class
+      this.accordionCloseTimeout = setTimeout(() => {
+        this.accordionBodyRef.classList.remove('collapsing');
+        this.accordionBodyRef.classList.add('collapse');
+
+        clearTimeout(this.accordionCloseTimeout);
+        this.expanded = false;
+        this.closed.emit();
+      }, 350);
+
+      this.accordionBodyRef.style.height = '';
     }
   }
 
@@ -53,22 +99,46 @@ export class ModusAccordionItem {
     this.handleHeaderClick();
   }
 
+  // Trick to restart an element's animation
+  // see https://www.charistheo.io/blog/2021/02/restart-a-css-animation-with-javascript/#restarting-a-css-animation
+  // taken from: https://getbootstrap.com/docs/5.2/dist/js/bootstrap.js
+  reflow = (element) => {
+    element.offsetHeight; // eslint-disable-line no-unused-expressions
+  };
+
   render(): unknown {
     const sizeClass = `${this.classBySize.get(this.size)}`;
     const disabledClass = `${this.disabled ? 'disabled' : ''}`;
     const expandedClass = `${this.expanded ? 'expanded' : ''}`;
     const iconSize = this.size === 'standard' ? '24' : '20';
-    const bodyClass = `body ${sizeClass} ${this.expanded ? 'expanded' : ''}`;
+    const bodyClass = `body ${sizeClass} collapse${
+      this.expanded ? ' show' : ''
+    }`;
     const headerClass = `header ${sizeClass} ${disabledClass} ${expandedClass}`;
 
     return (
-      <div aria-disabled={this.disabled ? 'true' : undefined} aria-expanded={this.expanded} class="accordion-item">
-        <div class={headerClass} onClick={() => this.handleHeaderClick()} onKeyDown={(event) => this.handleKeydown(event)} tabIndex={0}>
+      <div
+        aria-disabled={this.disabled ? 'true' : undefined}
+        aria-expanded={this.expanded ? 'true' : undefined}
+        class="accordion-item">
+        <div
+          class={headerClass}
+          onClick={() => this.handleHeaderClick()}
+          onKeyDown={(event) => this.handleKeydown(event)}
+          tabIndex={0}>
           <span class="title">{this.headerText}</span>
-          {this.expanded ? <IconChevronUpThick size={iconSize}></IconChevronUpThick> : <IconChevronDownThick size={iconSize}></IconChevronDownThick>}
+          {
+            <div
+              class={`chevron-container ${this.expanded ? 'reverse' : ''} `}
+              ref={(el) => (this.chevronContainerRef = el)}>
+              <IconChevronDownThick size={iconSize}></IconChevronDownThick>
+            </div>
+          }
         </div>
-        <div class={bodyClass}>
-          <slot />
+        <div class={bodyClass} ref={(el) => (this.accordionBodyRef = el)}>
+          <div class="body-content">
+            <slot />
+          </div>
         </div>
       </div>
     );

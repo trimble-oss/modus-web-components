@@ -6,6 +6,10 @@ View all releases at: <https://github.com/trimble-oss/modus-web-components/relea
 
 ## Unreleased
 
+### Fixed
+
+- Modus Accordions now have transition animations
+
 ## 0.1.28 - 2022-12-06
 
 ### Fixed
