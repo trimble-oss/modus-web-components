@@ -193,8 +193,8 @@
   .toggle-password {
     z-index: 9;
 
-    svg.eye-icon,
-    svg.eye-icon-cross {
+    svg.visibility,
+    svg.visibility-off {
       display: none;
     }
   }
@@ -216,11 +216,11 @@
     padding-right: calc(1.5em + 0.75rem);
   }
 
-  input[type='text'] + .toggle-password > svg.eye-icon {
+  input[type='password'] + .toggle-password > svg.visibility {
     display: inline;
   }
 
-  input[type='password'] + .toggle-password > svg.eye-icon-cross {
+  input[type='text'] + .toggle-password > svg.visibility-off {
     display: inline;
   }
 }
