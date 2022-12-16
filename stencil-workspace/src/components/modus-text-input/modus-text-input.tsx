@@ -30,6 +30,9 @@ export class ModusTextInput {
   /** (optional) Whether the search icon is included. */
   @Prop() includeSearchIcon: boolean;
 
+  /** (optional) Whether the password text toggle icon is included. */
+  @Prop() includePasswordTextToggle = true;
+
   /** (optional) The input's inputmode. */
   @Prop() inputmode:
     | 'decimal'
@@ -117,7 +120,13 @@ export class ModusTextInput {
   render(): unknown {
     const className = `modus-text-input ${this.disabled ? 'disabled' : ''}`;
     const isPassword = this.type === 'password';
-    const showPasswordToggle = !!(isPassword && this.value?.length);
+    const showPasswordToggle = !!(
+      this.includePasswordTextToggle &&
+      isPassword &&
+      this.value?.length
+    );
+    const showClearIcon =
+      (isPassword && !this.includePasswordTextToggle) || !isPassword;
 
     return (
       <div
@@ -143,8 +152,7 @@ export class ModusTextInput {
             aria-placeholder={this.placeholder}
             class={`${this.includeSearchIcon ? 'has-left-icon' : ''} ${
               this.clearable ? 'has-right-icon' : ''
-            } ${showPasswordToggle ? 'input-password' : ''}
-              `}
+            }`}
             disabled={this.disabled}
             inputmode={this.inputmode}
             maxlength={this.maxLength}
@@ -197,7 +205,7 @@ export class ModusTextInput {
               </svg>
             </div>
           )}
-          {!isPassword &&
+          {showClearIcon &&
             (this.clearable && !this.readOnly && !!this.value ? (
               <span class="icons clear" role="button" aria-label="Clear entry">
                 <IconClose onClick={() => this.handleClear()} size="16" />
