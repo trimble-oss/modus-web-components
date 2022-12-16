@@ -6,6 +6,10 @@ View all releases at: <https://github.com/trimble-oss/modus-web-components/relea
 
 ## Unreleased
 
+### Added
+
+- Added password text toggle feature to `modus-text-input` component.
+
 ## 0.1.28 - 2022-12-06
 
 ### Fixed

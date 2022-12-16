@@ -27,151 +27,18 @@
       }
     </style>
   </head>
-  <body>
-    <!-- Test your components here -->
+  <body data-mwc-theme="dark">
+    <div style="width:500px">
+      <modus-text-input
+      label="Text Input Demo 7"
+      placeholder="Placeholder"
+      value="Value"
+      clearable="true"></modus-text-input>
+    <modus-text-input
+      label="Text Input Demo Password"
+      placeholder="Password"
+      type="password"></modus-text-input>
+    </div>
+
   </body>
-  <script>
-    document.querySelector('#btn-modal').addEventListener('buttonClick', () => {
-      document.querySelector('modus-modal').open();
-    });
-
-    const modusRadioGroup = document.querySelector('modus-radio-group');
-    modusRadioGroup.radioButtons = [
-      {
-        id: '0',
-        label: 'Radio 1',
-      },
-      {
-        id: '1',
-        checked: true,
-        label: 'Radio 2',
-      },
-      {
-        id: '2',
-        label: 'Radio 31',
-        disabled: true
-      },
-    ];
-
-    const modusSelect = document.querySelector('#select-demo-1');
-    modusSelect.options = [ { display: 'Option 1' }, { display: 'Option 2' }, { display: 'Option 3' } ];
-
-    const modusSelect2 = document.querySelector('#select-demo-2');
-    const options = [ { display: 'Option 1' }, { display: 'Option 2' }, { display: 'Option 3' } ];
-    modusSelect2.options = options;
-    modusSelect2.value = options[1];
-
-    const modusTabs = document.querySelector('modus-tabs');
-    modusTabs.tabs = [
-      {
-        id: 0,
-        label: 'Tab 1',
-      },
-      {
-        active: true,
-        id: 1,
-        label: 'Tab 2',
-      },
-    ];
-
-    document.querySelector('modus-data-table').columns = [
-      { display: 'Name', width: '100px' },
-      { display: 'Age', align: 'right', width: '34px' },
-      { display: 'Status', align: 'center' },
-      { display: 'Email' }
-    ];
-    document.querySelector('modus-data-table').data = [
-      {
-        _id: '0',
-        name: 'Joe',
-        age: 27,
-        status: {
-          _type: 'badge',
-          text: 'Complete'
-        },
-        email: {
-          _type: 'link',
-          display: 'joe@example.com',
-          url: 'mailto:joe@example.com',
-        },
-      },
-      {
-        _id: '1',
-        name: 'Jane',
-        age: 34,
-        status: {
-          _type: 'badge',
-          text: 'Complete'
-        },
-        email: {
-          _type: 'link',
-          display: 'jane@example.com',
-          url: 'mailto:jane@example.com',
-        },
-      },
-      {
-        _id: '2',
-        name: 'William',
-        age: 28,
-        status: {
-          _type: 'badge',
-          text: 'Incomplete',
-          color: 'warning'
-        },
-        email: {
-          _type: 'link',
-          display: 'william@example.com',
-          url: 'mailto:william@example.com',
-        },
-      },
-    ];
-    document.querySelector('modus-data-table').sortOptions = { canSort: true, serverSide: false };
-    document.querySelector('modus-data-table').selectionOptions = { canSelect: true, checkboxSelection: true };
-    document.querySelector('modus-data-table').rowActions = [
-      {
-        _id: '0',
-        display: {
-          text: 'Delete',
-          icon: 'delete'
-        }
-      }
-    ];
-    document.querySelector('modus-data-table').displayOptions={borderless: false};
-
-    document.querySelector('#toggle').addEventListener('buttonClick', () => {
-      document.body.setAttribute('data-mwc-theme', document.body.getAttribute('data-mwc-theme') === 'dark' ? 'light' : 'dark');
-    });
-
-    document.querySelector('#reset').addEventListener('buttonClick', () => {
-      document.body.removeAttribute('data-mwc-theme');
-    });
-
-    function updateTheme(c) {
-      Array.from(document.querySelectorAll(`modus-${c}`)).map((i) => {
-        i.setAttribute('data-mwc-theme', i.getAttribute('data-mwc-theme') === 'dark' ? 'light' : 'dark');
-      });
-    }
-
-    Array.from(document.querySelectorAll('modus-button'))
-      .filter((b) => b.id !== 'toggle' && b.id.startsWith('toggle_'))
-      .map((b) => b.id.split('_')[1])
-      .forEach((c) => {
-        document.querySelector(`#toggle_${c}`).addEventListener('buttonClick', () => {
-          if (c.includes('--')) {
-            c.split('--').forEach((d) => {
-              updateTheme(d);
-            });
-          } else updateTheme(c);
-        });
-      });
-
-    const modusBreadcrumb = document.querySelector('modus-breadcrumb');
-    const crumbs = [
-      { id: '1', display: 'Crumb 1' },
-      { id: '2', display: 'Crumb 2' },
-      { id: '3', display: 'Crumb 3' },
-      { id: '4', display: 'Crumb 4' },
-    ];
-    modusBreadcrumb.crumbs = crumbs;
-  </script>
 </html>
