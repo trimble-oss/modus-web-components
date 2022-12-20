@@ -28,11 +28,12 @@ describe('modus-accordion-item', () => {
     await page.setContent('<modus-accordion-item></modus-accordion-item>');
     const component = await page.find('modus-accordion-item');
     const element = await page.find('modus-accordion-item >>> .body');
-    expect(element).not.toHaveClass('expanded');
+    expect(element).toHaveClass('collapse');
+    expect(element).not.toHaveClass('show');
 
     component.setProperty('expanded', true);
     await page.waitForChanges();
-    expect(element).toHaveClass('expanded');
+    expect(element).toHaveClass('show');
   });
 
   it('renders changes to the headerText prop', async () => {
@@ -74,9 +75,12 @@ describe('modus-accordion-item', () => {
     const element = await page.find('modus-accordion-item >>> .header');
 
     await element.click();
+    await new Promise((r) => setTimeout(r, 1000));
     await page.waitForChanges();
     expect(closed).toHaveReceivedEvent();
   });
+
+
 
   it('emits opened event on header click', async () => {
     const page = await newE2EPage();
@@ -86,6 +90,7 @@ describe('modus-accordion-item', () => {
     const element = await page.find('modus-accordion-item >>> .header');
 
     await element.click();
+    await new Promise((r) => setTimeout(r, 1000));
     await page.waitForChanges();
     expect(opened).toHaveReceivedEvent();
   });

@@ -39,23 +39,45 @@
       padding-left: $rem-4px;
     }
 
-    .icon-chevron-up-thick,
-    .icon-chevron-down-thick {
+    .chevron-container {
       margin-left: auto;
+      transition: transform 0.2s ease-in-out;
 
-      path {
-        fill: $modus-accordion-item-chevron-color;
+      &.reverse {
+        transform: rotate(-180deg);
+      }
+
+      .icon-chevron-up-thick,
+      .icon-chevron-down-thick {
+        path {
+          fill: $modus-accordion-item-chevron-color;
+        }
       }
     }
   }
 
   .body {
-    display: none;
-    font-size: $rem-14px;
-    padding: $rem-16px $rem-8px;
+    overflow: hidden;
 
-    &.expanded {
-      display: block;
+    .body-content {
+      font-size: $rem-14px;
+      padding: $rem-16px $rem-8px;
+    }
+
+    &.collapse:not(.show) {
+      display: none;
+    }
+
+    &.collapsing {
+      height: 0;
+      position: relative;
+      transition: all 0.35s ease-out;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      &.collapsing {
+        transition: none;
+      }
     }
   }
 }
