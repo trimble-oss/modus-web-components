@@ -52,7 +52,11 @@ button {
   &.style-borderless {
     background-color: $modus-btn-borderless-bg;
     color: $modus-btn-borderless-color;
-    fill: $modus-btn-borderless-color;
+    fill: $modus-btn-borderless-color !important;
+
+    svg path {
+      fill: $modus-btn-borderless-color !important;
+    }
 
     &:hover:not([disabled]) {
       background-color: $modus-btn-borderless-hover-bg;

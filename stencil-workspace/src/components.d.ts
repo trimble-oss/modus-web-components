@@ -605,6 +605,31 @@ export namespace Components {
          */
         "value": unknown;
     }
+    interface ModusSideNavigation {
+        /**
+          * (optional) The expanded state of side navigation panel and items.
+         */
+        "expanded": boolean;
+        "maxWidth": string;
+    }
+    interface ModusSideNavigationItem {
+        /**
+          * (optional) The disabled state of side navigation panel item.
+         */
+        "disabled": boolean;
+        /**
+          * (optional) The expanded state of side navigation panel item.
+         */
+        "expanded": boolean;
+        /**
+          * (optional) Label for the item and tooltip messages.
+         */
+        "label": string;
+        /**
+          * (optional) The selected state of side navigation panel item.
+         */
+        "selected": boolean;
+    }
     interface ModusSlider {
         /**
           * (optional) The slider's aria-label.
@@ -912,6 +937,14 @@ export interface ModusSelectCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusSelectElement;
 }
+export interface ModusSideNavigationCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusSideNavigationElement;
+}
+export interface ModusSideNavigationItemCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusSideNavigationItemElement;
+}
 export interface ModusSliderCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusSliderElement;
@@ -1093,6 +1126,18 @@ declare global {
         prototype: HTMLModusSelectElement;
         new (): HTMLModusSelectElement;
     };
+    interface HTMLModusSideNavigationElement extends Components.ModusSideNavigation, HTMLStencilElement {
+    }
+    var HTMLModusSideNavigationElement: {
+        prototype: HTMLModusSideNavigationElement;
+        new (): HTMLModusSideNavigationElement;
+    };
+    interface HTMLModusSideNavigationItemElement extends Components.ModusSideNavigationItem, HTMLStencilElement {
+    }
+    var HTMLModusSideNavigationItemElement: {
+        prototype: HTMLModusSideNavigationItemElement;
+        new (): HTMLModusSideNavigationItemElement;
+    };
     interface HTMLModusSliderElement extends Components.ModusSlider, HTMLStencilElement {
     }
     var HTMLModusSliderElement: {
@@ -1174,6 +1219,8 @@ declare global {
         "modus-progress-bar": HTMLModusProgressBarElement;
         "modus-radio-group": HTMLModusRadioGroupElement;
         "modus-select": HTMLModusSelectElement;
+        "modus-side-navigation": HTMLModusSideNavigationElement;
+        "modus-side-navigation-item": HTMLModusSideNavigationItemElement;
         "modus-slider": HTMLModusSliderElement;
         "modus-spinner": HTMLModusSpinnerElement;
         "modus-switch": HTMLModusSwitchElement;
@@ -1867,6 +1914,39 @@ declare namespace LocalJSX {
          */
         "value"?: unknown;
     }
+    interface ModusSideNavigation {
+        /**
+          * (optional) The expanded state of side navigation panel and items.
+         */
+        "expanded"?: boolean;
+        "maxWidth"?: string;
+        /**
+          * An event that fires on side navigation panel collapse & expand.
+         */
+        "onSideNavExpand"?: (event: ModusSideNavigationCustomEvent<boolean>) => void;
+    }
+    interface ModusSideNavigationItem {
+        /**
+          * (optional) The disabled state of side navigation panel item.
+         */
+        "disabled"?: boolean;
+        /**
+          * (optional) The expanded state of side navigation panel item.
+         */
+        "expanded"?: boolean;
+        /**
+          * (optional) Label for the item and tooltip messages.
+         */
+        "label"?: string;
+        /**
+          * An event that fires on item selection.
+         */
+        "onSideNavItemSelected"?: (event: ModusSideNavigationItemCustomEvent<boolean>) => void;
+        /**
+          * (optional) The selected state of side navigation panel item.
+         */
+        "selected"?: boolean;
+    }
     interface ModusSlider {
         /**
           * (optional) The slider's aria-label.
@@ -2162,6 +2242,8 @@ declare namespace LocalJSX {
         "modus-progress-bar": ModusProgressBar;
         "modus-radio-group": ModusRadioGroup;
         "modus-select": ModusSelect;
+        "modus-side-navigation": ModusSideNavigation;
+        "modus-side-navigation-item": ModusSideNavigationItem;
         "modus-slider": ModusSlider;
         "modus-spinner": ModusSpinner;
         "modus-switch": ModusSwitch;
@@ -2203,6 +2285,8 @@ declare module "@stencil/core" {
             "modus-progress-bar": LocalJSX.ModusProgressBar & JSXBase.HTMLAttributes<HTMLModusProgressBarElement>;
             "modus-radio-group": LocalJSX.ModusRadioGroup & JSXBase.HTMLAttributes<HTMLModusRadioGroupElement>;
             "modus-select": LocalJSX.ModusSelect & JSXBase.HTMLAttributes<HTMLModusSelectElement>;
+            "modus-side-navigation": LocalJSX.ModusSideNavigation & JSXBase.HTMLAttributes<HTMLModusSideNavigationElement>;
+            "modus-side-navigation-item": LocalJSX.ModusSideNavigationItem & JSXBase.HTMLAttributes<HTMLModusSideNavigationItemElement>;
             "modus-slider": LocalJSX.ModusSlider & JSXBase.HTMLAttributes<HTMLModusSliderElement>;
             "modus-spinner": LocalJSX.ModusSpinner & JSXBase.HTMLAttributes<HTMLModusSpinnerElement>;
             "modus-switch": LocalJSX.ModusSwitch & JSXBase.HTMLAttributes<HTMLModusSwitchElement>;

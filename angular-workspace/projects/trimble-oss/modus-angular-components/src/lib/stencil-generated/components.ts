@@ -722,6 +722,62 @@ export class ModusSelect {
 }
 
 
+export declare interface ModusSideNavigation extends Components.ModusSideNavigation {
+  /**
+   * An event that fires on side navigation panel collapse & expand. 
+   */
+  sideNavExpand: EventEmitter<CustomEvent<boolean>>;
+
+}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['expanded', 'maxWidth']
+})
+@Component({
+  selector: 'modus-side-navigation',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['expanded', 'maxWidth']
+})
+export class ModusSideNavigation {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['sideNavExpand']);
+  }
+}
+
+
+export declare interface ModusSideNavigationItem extends Components.ModusSideNavigationItem {
+  /**
+   * An event that fires on item selection. 
+   */
+  sideNavItemSelected: EventEmitter<CustomEvent<boolean>>;
+
+}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['disabled', 'expanded', 'label', 'selected']
+})
+@Component({
+  selector: 'modus-side-navigation-item',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['disabled', 'expanded', 'label', 'selected']
+})
+export class ModusSideNavigationItem {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['sideNavItemSelected']);
+  }
+}
+
+
 export declare interface ModusSlider extends Components.ModusSlider {
   /**
    * An event that fires on slider value change. 

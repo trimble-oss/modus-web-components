@@ -1,0 +1,28 @@
+@import './modus-side-navigation.vars';
+
+:host {
+  display: block;
+}
+
+.side-nav-panel {
+  background-color: $modus-side-navigation-bg;
+  box-shadow: 4px 0 4px -4px rgba(36, 35, 45, 0.3);
+  height: 100%;
+  min-width: 4rem !important;
+  position: absolute;
+  transition: width 0.25s ease-in 0s;
+  width: 4rem;
+  z-index: 1029;
+
+  &.expanded {
+    transition: width 0.2s ease-out 0s !important;
+    width: 16rem;
+  }
+
+  .side-nav-menu {
+    height: 100%;
+    margin: 0%;
+    padding: 0%;
+    width: 100%;
+  }
+}
