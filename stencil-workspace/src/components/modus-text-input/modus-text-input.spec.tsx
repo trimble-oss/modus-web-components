@@ -2,7 +2,7 @@ import { newSpecPage } from '@stencil/core/testing';
 import { ModusTextInput } from './modus-text-input';
 
 describe('modus-text-input', () => {
-  it('renders', async () => {
+  it('renders default', async () => {
     const page = await newSpecPage({
       components: [ModusTextInput],
       html: '<modus-text-input></modus-text-input>',
@@ -14,6 +14,24 @@ describe('modus-text-input', () => {
                 <div class="input-container medium">
                     <input type="text" tabindex="0">
                     <span class="icons"></span>
+                </div>
+            </div>
+        </mock:shadow-root>
+      </modus-text-input>
+    `);
+  });
+
+  it('renders password', async () => {
+    const page = await newSpecPage({
+      components: [ModusTextInput],
+      html: '<modus-text-input type="password"></modus-text-input>',
+    });
+    expect(page.root).toEqualHtml(`
+      <modus-text-input type="password">
+        <mock:shadow-root>
+            <div class="modus-text-input">
+                <div class="input-container medium">
+                <input tabindex="0" type="password">
                 </div>
             </div>
         </mock:shadow-root>

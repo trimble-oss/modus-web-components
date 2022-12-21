@@ -2,6 +2,8 @@
 import { Component, Event, EventEmitter, h, Method, Prop } from '@stencil/core';
 import { IconSearch } from '../icons/icon-search';
 import { IconClose } from '../icons/icon-close';
+import { IconVisibility } from '../icons/icon-visibility';
+import { IconVisibilityOff } from '../icons/icon-visibility-off';
 
 @Component({
   tag: 'modus-text-input',
@@ -29,6 +31,9 @@ export class ModusTextInput {
 
   /** (optional) Whether the search icon is included. */
   @Prop() includeSearchIcon: boolean;
+
+  /** (optional) Whether the password text toggle icon is included. */
+  @Prop() includePasswordTextToggle = true;
 
   /** (optional) The input's inputmode. */
   @Prop() inputmode:
@@ -79,6 +84,7 @@ export class ModusTextInput {
   ]);
 
   textInput: HTMLInputElement;
+  buttonTogglePassword: HTMLDivElement;
 
   /** Focus the input. */
   @Method()
@@ -95,11 +101,34 @@ export class ModusTextInput {
   handleOnInput(event: Event): void {
     const value = (event.currentTarget as HTMLInputElement).value;
     this.value = value;
+
     this.valueChange.emit(value);
+  }
+
+  handleTogglePassword() {
+    if (this.textInput.type === 'password') {
+      this.textInput.type = 'text';
+      this.buttonTogglePassword.setAttribute('aria-label', 'Hide password.');
+    } else {
+      this.textInput.type = 'password';
+      this.buttonTogglePassword.setAttribute(
+        'aria-label',
+        'Show password as plain text. ' +
+          'Warning: this will display your password on the screen.'
+      );
+    }
   }
 
   render(): unknown {
     const className = `modus-text-input ${this.disabled ? 'disabled' : ''}`;
+    const isPassword = this.type === 'password';
+    const showPasswordToggle = !!(
+      this.includePasswordTextToggle &&
+      isPassword &&
+      this.value?.length
+    );
+    const showClearIcon =
+      (isPassword && !this.includePasswordTextToggle) || !isPassword;
 
     return (
       <div
@@ -139,13 +168,24 @@ export class ModusTextInput {
             value={this.value}
             autofocus={this.autoFocusInput}
           />
-          {this.clearable && !this.readOnly && !!this.value ? (
-            <span class="icons clear" role="button" aria-label="Clear entry">
-              <IconClose onClick={() => this.handleClear()} size="16" />
-            </span>
-          ) : (
-            <span class="icons"></span>
+          {showPasswordToggle && (
+            <div
+              class="icons toggle-password"
+              aria-label="Show password as plain text. Warning: this will display your password on the screen."
+              ref={(el) => (this.buttonTogglePassword = el as HTMLDivElement)}
+              onClick={() => this.handleTogglePassword()}>
+              <IconVisibility size="16" />
+              <IconVisibilityOff size="16" />
+            </div>
           )}
+          {showClearIcon &&
+            (this.clearable && !this.readOnly && !!this.value ? (
+              <span class="icons clear" role="button" aria-label="Clear entry">
+                <IconClose onClick={() => this.handleClear()} size="16" />
+              </span>
+            ) : (
+              <span class="icons"></span>
+            ))}
         </div>
         {this.errorText ? (
           <label class="sub-text error">{this.errorText}</label>

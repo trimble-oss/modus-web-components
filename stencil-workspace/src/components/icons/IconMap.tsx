@@ -34,6 +34,8 @@ import { IconChevronLeftThick } from './icon-chevron-left-thick';
 import { IconChevronUpThick } from './icon-chevron-up-thick';
 import { IconDelete } from './icon-delete';
 import { IconVerticalEllipsis } from './icon-vertical-ellipsis';
+import { IconVisibility } from './icon-visibility';
+import { IconVisibilityOff } from './icon-visibility-off';
 
 export interface IconProps {
   color?: string;
@@ -316,6 +318,22 @@ export const IconMap: FunctionalComponent<IconMapProps> = (
     case 'warning-outline':
       return (
         <IconWarningOutline
+          color={props.color}
+          onClick={props.onClick}
+          size={props.size}
+        />
+      );
+    case 'visibility':
+      return (
+        <IconVisibility
+          color={props.color}
+          onClick={props.onClick}
+          size={props.size}
+        />
+      );
+    case 'visibility-off':
+      return (
+        <IconVisibilityOff
           color={props.color}
           onClick={props.onClick}
           size={props.size}
