@@ -21,7 +21,7 @@
     "@storybook/addon-a11y": "^6.5.15",
     "@storybook/addon-actions": "^6.5.11",
     "@storybook/addon-essentials": "^6.5.15",
-    "@storybook/addon-links": "^6.5.13",
+    "@storybook/addon-links": "^6.5.15",
     "@storybook/web-components": "^6.5.15",
     "babel-loader": "^8.2.5",
     "storybook-dark-mode": "^1.1.2"
