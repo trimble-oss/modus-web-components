@@ -50,7 +50,7 @@
     "@types/puppeteer": "^7.0.4",
     "@types/puppeteer-core": "^7.0.4",
     "@typescript-eslint/eslint-plugin": "^5.45.0",
-    "@typescript-eslint/parser": "^5.39.0",
+    "@typescript-eslint/parser": "^5.47.0",
     "autoprefixer": "^10.4.13",
     "copyfiles": "^2.4.1",
     "eslint": "^8.28.0",
