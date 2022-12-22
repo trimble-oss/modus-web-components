@@ -59,7 +59,7 @@
     "jest-cli": "^27.5.1",
     "prettier": "^2.8.1",
     "puppeteer": "^19.3.0",
-    "puppeteer-core": "^19.3.0",
+    "puppeteer-core": "^19.4.1",
     "stylelint": "14.16.0",
     "stylelint-config-prettier": "9.0.4",
     "stylelint-config-standard-scss": "6.1.0",
