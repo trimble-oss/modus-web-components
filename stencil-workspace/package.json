@@ -39,7 +39,7 @@
     "copy-docs": "copyfiles -f ../README.md ../SUPPORT.md ./"
   },
   "dependencies": {
-    "@stencil/core": "^2.19.3"
+    "@stencil/core": "^2.20.0"
   },
   "devDependencies": {
     "@stencil/angular-output-target": "^0.4.0",
