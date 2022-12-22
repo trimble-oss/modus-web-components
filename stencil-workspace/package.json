@@ -45,7 +45,7 @@
     "@stencil/angular-output-target": "^0.4.0",
     "@stencil/postcss": "^2.1.0",
     "@stencil/react-output-target": "^0.3.1",
-    "@stencil/sass": "^1.5.2",
+    "@stencil/sass": "^2.0.1",
     "@types/jest": "^27.5.1",
     "@types/puppeteer": "^7.0.4",
     "@types/puppeteer-core": "^7.0.4",
