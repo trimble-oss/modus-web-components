@@ -12,6 +12,7 @@ import { ModusNavbarProfileMenuLink } from "./components/modus-navbar/profile-me
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { ModusNavbarProfileMenuLink as ModusNavbarProfileMenuLink1 } from "./components/modus-navbar/profile-menu/modus-navbar-profile-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
+import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.types";
 import { Tab } from "./components/modus-tabs/modus-tabs";
 import { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export namespace Components {
@@ -607,6 +608,10 @@ export namespace Components {
     }
     interface ModusSideNavigation {
         /**
+          * (optional) Data property to create the items.
+         */
+        "data": ModusSideNavigationItemInfo[];
+        /**
           * (optional) The expanded state of side navigation panel and items.
          */
         "expanded": boolean;
@@ -628,6 +633,10 @@ export namespace Components {
           * (optional) Label for the item and the tooltip message.
          */
         "label": string;
+        /**
+          * (optional) Url Menu Icon url.
+         */
+        "menuIconUrl": string;
         /**
           * (optional) The selected state of side navigation panel item.
          */
@@ -1923,6 +1932,10 @@ declare namespace LocalJSX {
     }
     interface ModusSideNavigation {
         /**
+          * (optional) Data property to create the items.
+         */
+        "data"?: ModusSideNavigationItemInfo[];
+        /**
           * (optional) The expanded state of side navigation panel and items.
          */
         "expanded"?: boolean;
@@ -1948,6 +1961,10 @@ declare namespace LocalJSX {
           * (optional) Label for the item and the tooltip message.
          */
         "label"?: string;
+        /**
+          * (optional) Url Menu Icon url.
+         */
+        "menuIconUrl"?: string;
         /**
           * An event that fires on item selection.
          */

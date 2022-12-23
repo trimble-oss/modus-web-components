@@ -732,13 +732,13 @@ export declare interface ModusSideNavigation extends Components.ModusSideNavigat
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['expanded', 'maxWidth']
+  inputs: ['data', 'expanded', 'maxWidth']
 })
 @Component({
   selector: 'modus-side-navigation',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['expanded', 'maxWidth']
+  inputs: ['data', 'expanded', 'maxWidth']
 })
 export class ModusSideNavigation {
   protected el: HTMLElement;
@@ -760,13 +760,13 @@ export declare interface ModusSideNavigationItem extends Components.ModusSideNav
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['disabled', 'expanded', 'label', 'selected']
+  inputs: ['disabled', 'expanded', 'label', 'menuIconUrl', 'selected']
 })
 @Component({
   selector: 'modus-side-navigation-item',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['disabled', 'expanded', 'label', 'selected']
+  inputs: ['disabled', 'expanded', 'label', 'menuIconUrl', 'selected']
 })
 export class ModusSideNavigationItem {
   protected el: HTMLElement;

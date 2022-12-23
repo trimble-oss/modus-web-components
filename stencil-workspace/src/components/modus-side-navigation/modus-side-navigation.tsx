@@ -1,14 +1,15 @@
 // eslint-disable-next-line
-import {
+import { h,
   Component,
   Prop,
   Element,
   State,
   Watch,
-  h,
   EventEmitter,
   Event,
 } from '@stencil/core';
+import { ModusSideNavigationTree } from './modus-side-navigation-tree';
+import { ModusSideNavigationItemInfo } from './modus-side-navigation.types';
 
 @Component({
   tag: 'modus-side-navigation',
@@ -17,6 +18,9 @@ import {
 })
 export class ModusSideNavigation {
   @Element() element: HTMLElement;
+
+  /** (optional) Data property to create the items. */
+  @Prop() data: ModusSideNavigationItemInfo[];
 
   /** (optional) The expanded state of side navigation panel and items. */
   @Prop() expanded = false;
@@ -27,7 +31,7 @@ export class ModusSideNavigation {
   /** An event that fires on side navigation panel collapse & expand.  */
   @Event() sideNavExpand: EventEmitter<boolean>;
 
-  @State() children: HTMLModusSideNavigationItemElement[];
+  @State() children: HTMLModusSideNavigationItemElement[] = [];
 
   handleSlotChange(): void {
     this.children = Array.from(
@@ -58,6 +62,11 @@ export class ModusSideNavigation {
     }
   }
 
+  handleDataItemAdded(item: HTMLModusSideNavigationItemElement): void {
+    this.children.push(item);
+    item.expanded = this.expanded;
+  }
+
   render() {
     return (
       <nav
@@ -67,7 +76,13 @@ export class ModusSideNavigation {
         onKeyDown={(e) => this.handleKeyDown(e)}
         aria-label="side navigation">
         <ul class="side-nav-menu">
-          <slot onSlotchange={() => this.handleSlotChange()}></slot>
+          <slot
+            onSlotchange={() =>
+              !this.data?.length && this.handleSlotChange()
+            }></slot>
+          <ModusSideNavigationTree
+            onItemAdded={(item) => this.handleDataItemAdded(item)}
+            data={this.data}></ModusSideNavigationTree>
         </ul>
       </nav>
     );

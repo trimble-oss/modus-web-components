@@ -7,12 +7,13 @@
 
 ## Properties
 
-| Property   | Attribute  | Description                                                  | Type      | Default     |
-| ---------- | ---------- | ------------------------------------------------------------ | --------- | ----------- |
-| `disabled` | `disabled` | (optional) The disabled state of side navigation panel item. | `boolean` | `false`     |
-| `expanded` | `expanded` | (optional) The expanded state of side navigation panel item. | `boolean` | `false`     |
-| `label`    | `label`    | (optional) Label for the item and the tooltip message.       | `string`  | `undefined` |
-| `selected` | `selected` | (optional) The selected state of side navigation panel item. | `boolean` | `false`     |
+| Property      | Attribute       | Description                                                  | Type      | Default     |
+| ------------- | --------------- | ------------------------------------------------------------ | --------- | ----------- |
+| `disabled`    | `disabled`      | (optional) The disabled state of side navigation panel item. | `boolean` | `false`     |
+| `expanded`    | `expanded`      | (optional) The expanded state of side navigation panel item. | `boolean` | `false`     |
+| `label`       | `label`         | (optional) Label for the item and the tooltip message.       | `string`  | `undefined` |
+| `menuIconUrl` | `menu-icon-url` | (optional) Url Menu Icon url.                                | `string`  | `undefined` |
+| `selected`    | `selected`      | (optional) The selected state of side navigation panel item. | `boolean` | `false`     |
 
 
 ## Events
@@ -24,6 +25,10 @@
 
 ## Dependencies
 
+### Used by
+
+ - [modus-side-navigation](..)
+
 ### Depends on
 
 - [modus-tooltip](../../modus-tooltip)
@@ -32,6 +37,7 @@
 ```mermaid
 graph TD;
   modus-side-navigation-item --> modus-tooltip
+  modus-side-navigation --> modus-side-navigation-item
   style modus-side-navigation-item fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

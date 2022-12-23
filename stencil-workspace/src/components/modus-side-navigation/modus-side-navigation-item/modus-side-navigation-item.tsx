@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 import {
-  Component,
   h,
+  Component,
   Prop,
   Element,
   State,
@@ -24,11 +24,14 @@ export class ModusSideNavigationItem {
   /** (optional) The expanded state of side navigation panel item. */
   @Prop() expanded = false;
 
+  /** (optional) Label for the item and the tooltip message. */
+  @Prop() label: string;
+
   /** (optional) The selected state of side navigation panel item. */
   @Prop() selected = false;
 
-  /** (optional) Label for the item and the tooltip message. */
-  @Prop() label: string;
+  /** (optional) Url for menu icon. */
+  @Prop() menuIconUrl: string;
 
   /** An event that fires on item selection.  */
   @Event() sideNavItemSelected: EventEmitter<boolean>;
@@ -62,6 +65,7 @@ export class ModusSideNavigationItem {
 
     return (
       <li
+        tabIndex={this.disabled ? -1 : 0}
         class={classes}
         onClick={() => this.handleClick()}
         onKeyDown={(e) => this.handleKeyDown(e)}
@@ -71,12 +75,11 @@ export class ModusSideNavigationItem {
         <div class="menu-icon">
           <modus-tooltip text={menuIconTooltip} position="right">
             <slot name="menu-icon"></slot>
+            {this.menuIconUrl && <img src={this.menuIconUrl} />}
           </modus-tooltip>
         </div>
 
-        <div class="menu-text">
-          <span>{this.label}</span>
-        </div>
+        {this.expanded && <div class="menu-text">{this.label}</div>}
 
         <div class="level-icon">
           {this.children?.length > 0 && <IconChevronRightThick />}

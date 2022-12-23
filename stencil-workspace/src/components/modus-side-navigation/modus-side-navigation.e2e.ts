@@ -34,6 +34,33 @@ describe('modus-side-navigation', () => {
     expect(element2).toHaveClass('expanded');
   });
 
+  it('renders changes to data prop', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<modus-side-navigation>
+  </modus-side-navigation>`);
+
+    const component = await page.find('modus-side-navigation');
+    component.setProperty('data', [{
+      id:'test',
+      menuIconUrl: 'data:image/svg+xml, %3Csvg slot=\'menu-icon\' xmlns=\'http://www.w3.org/2000/svg\' fill=\'currentColor\' height=\'24\' width=\'24\' viewBox=\'0 0 32 32\'%3E%3Cpath d=\'M30 25h-1v-9a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v9h-2V5a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v20h-2V12a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v13H3a1 1 0 1 0 0 2h27a1 1 0 1 0 0-2zM6 25V13h3v12H6zm9 0V6h3v19h-3zm9 0v-8h3v8h-3z\' /%3E%3C/svg%3E',
+      label: 'test label'
+    }]);
+    await page.waitForChanges();
+
+    const sideNavItem = await page.find('modus-side-navigation >>> modus-side-navigation-item');
+    expect(sideNavItem).toBeTruthy();
+    await page.waitForChanges();
+
+    const label = await sideNavItem.getProperty('label');
+    expect(label).toEqual('test label');
+
+    const id = await sideNavItem.getProperty('id');
+    expect(id).toEqual('test');
+
+    const menuIconUrl = await sideNavItem.getProperty('menuIconUrl');
+    expect(menuIconUrl).toBeTruthy();
+  });
+
   it('renders changes to maxWidth prop', async () => {
     const page = await newE2EPage();
     await page.setContent(`<modus-side-navigation>
@@ -106,7 +133,7 @@ describe('modus-side-navigation-item', () => {
   </modus-side-navigation>`);
 
     const component = await page.find('modus-side-navigation-item');
-    const element = await page.find('modus-side-navigation-item >>> .menu-text > span');
+    const element = await page.find('modus-side-navigation-item >>> .menu-text');
 
     component.setProperty('label', 'Test');
     await page.waitForChanges();
@@ -155,6 +182,24 @@ describe('modus-side-navigation-item', () => {
     await page.waitForChanges();
 
     expect(element).toHaveClass('selected');
+  });
+
+  it('renders changes to menuIconUrl prop', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<modus-side-navigation>
+    <modus-side-navigation-item label="Test">
+    </modus-side-navigation-item>
+  </modus-side-navigation>`);
+
+    const component = await page.find('modus-side-navigation-item');
+    component.setProperty('menuIconUrl', 'data:image/svg+xml, %3Csvg slot=\'menu-icon\' xmlns=\'http://www.w3.org/2000/svg\' fill=\'currentColor\' height=\'24\' width=\'24\' viewBox=\'0 0 32 32\'%3E%3Cpath d=\'M30 25h-1v-9a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v9h-2V5a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v20h-2V12a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v13H3a1 1 0 1 0 0 2h27a1 1 0 1 0 0-2zM6 25V13h3v12H6zm9 0V6h3v19h-3zm9 0v-8h3v8h-3z\' /%3E%3C/svg%3E');
+    await page.waitForChanges();
+
+    const element = await page.find('modus-side-navigation-item >>> img ');
+    expect(element).toBeTruthy();
+
+    const prop = await element.getProperty('src');
+    expect(prop).toEqual('data:image/svg+xml, %3Csvg slot=\'menu-icon\' xmlns=\'http://www.w3.org/2000/svg\' fill=\'currentColor\' height=\'24\' width=\'24\' viewBox=\'0 0 32 32\'%3E%3Cpath d=\'M30 25h-1v-9a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v9h-2V5a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v20h-2V12a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v13H3a1 1 0 1 0 0 2h27a1 1 0 1 0 0-2zM6 25V13h3v12H6zm9 0V6h3v19h-3zm9 0v-8h3v8h-3z\' /%3E%3C/svg%3E');
   });
 
   it('emits sideNavItemSelected event', async () => {
