@@ -47,6 +47,14 @@ export default {
         type: { summary: 'string' },
       },
     },
+    includePasswordTextToggle: {
+      name: 'include-password-text-toggle',
+      description: 'Whether the password text toggle icon is included',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      },
+    },
     includeSearchIcon: {
       name: 'include-search-icon',
       description: 'Whether to include the search icon',
@@ -174,6 +182,7 @@ const Template = ({
   disabled,
   errorText,
   helperText,
+  includePasswordTextToggle,
   includeSearchIcon,
   inputmode,
   label,
@@ -194,6 +203,7 @@ const Template = ({
     disabled=${disabled}
     error-text=${errorText}
     helper-text=${helperText}
+    include-password-text-toggle=${includePasswordTextToggle}
     include-search-icon=${includeSearchIcon}
     inputmode=${inputmode}
     label=${label}
@@ -216,6 +226,7 @@ Default.args = {
   disabled: false,
   errorText: '',
   helperText: '',
+  includePasswordTextToggle: true,
   includeSearchIcon: false,
   inputmode: '',
   label: '',

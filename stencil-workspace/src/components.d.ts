@@ -723,6 +723,10 @@ export namespace Components {
          */
         "helperText": string;
         /**
+          * (optional) Whether the password text toggle icon is included.
+         */
+        "includePasswordTextToggle": boolean;
+        /**
           * (optional) Whether the search icon is included.
          */
         "includeSearchIcon": boolean;
@@ -2051,6 +2055,10 @@ declare namespace LocalJSX {
           * (optional) The input's helper text displayed below the input.
          */
         "helperText"?: string;
+        /**
+          * (optional) Whether the password text toggle icon is included.
+         */
+        "includePasswordTextToggle"?: boolean;
         /**
           * (optional) Whether the search icon is included.
          */
