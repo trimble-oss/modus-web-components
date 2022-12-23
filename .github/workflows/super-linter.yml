@@ -31,6 +31,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           JAVASCRIPT_DEFAULT_STYLE: prettier
           LINTER_RULES_PATH: /
+          FILTER_REGEX_EXCLUDE: .*src/components/.*/readme.md
           LOG_LEVEL: NOTICE
           MARKDOWN_CONFIG_FILE: .markdownlint.json
           SUPPRESS_POSSUM: true
@@ -39,6 +40,7 @@ jobs:
           VALIDATE_EDITORCONFIG: false
           VALIDATE_GITLEAKS: false
           VALIDATE_HTML: false
+          VALIDATE_JSCPD: false
           VALIDATE_NATURAL_LANGUAGE: false
           VALIDATE_YAML: false
           VALIDATE_TYPESCRIPT_ES: false

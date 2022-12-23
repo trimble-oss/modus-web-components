@@ -99,6 +99,7 @@ describe('modus-text-input', () => {
     expect(searchIcon).not.toBeNull();
   });
 
+
   it('renders changes to inputmode', async () => {
     const page = await newE2EPage();
 
@@ -162,6 +163,24 @@ describe('modus-text-input', () => {
 
     const input = await page.find('modus-text-input >>> input');
     expect(input.getAttribute('type')).toEqual('password');
+  });
+
+
+  it('renders changes to includePasswordTextToggle', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-text-input type="password" value="dummy"></modus-text-input>');
+    await page.waitForChanges();
+
+    const textInput = await page.find('modus-text-input');
+    const togglePasswordBefore = await page.find('modus-text-input >>> .toggle-password');
+    expect(togglePasswordBefore).not.toBeNull();
+
+    textInput.setProperty('includePasswordTextToggle', 'false');
+    await page.waitForChanges();
+
+    const togglePasswordAfter = await page.find('modus-text-input >>> .toggle-password');
+    expect(togglePasswordAfter).toBeNull();
   });
 
   it('renders changes to value', async () => {
