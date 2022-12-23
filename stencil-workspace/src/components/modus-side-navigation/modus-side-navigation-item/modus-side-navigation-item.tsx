@@ -1,12 +1,13 @@
 // eslint-disable-next-line
 import {
-  Component,
   h,
+  Component,
   Prop,
   Element,
   State,
   Event,
   EventEmitter,
+  Method,
 } from '@stencil/core';
 import { IconChevronRightThick } from '../../icons/icon-chevron-right-thick';
 
@@ -24,16 +25,46 @@ export class ModusSideNavigationItem {
   /** (optional) The expanded state of side navigation panel item. */
   @Prop() expanded = false;
 
-  /** (optional) The selected state of side navigation panel item. */
-  @Prop() selected = false;
-
   /** (optional) Label for the item and the tooltip message. */
   @Prop() label: string;
 
+  /** (optional) Url for menu icon. */
+  @Prop() menuIconUrl: string;
+
+  /** (optional) The selected state of side navigation panel item. */
+  @Prop() selected = false;
+
   /** An event that fires on item selection.  */
-  @Event() sideNavItemSelected: EventEmitter<boolean>;
+  @Event() sideNavItemSelected: EventEmitter<{ id: string; selected: boolean }>;
+
+  /** An event that fires when an item is in focus.  */
+  @Event() sideNavItemFocus: EventEmitter<{ id: string }>;
+
+  /**
+   * @internal
+   */
+  @Event() itemAdded: EventEmitter<HTMLElement>;
+
+  /**
+   * @internal
+   */
+  @Event() itemRemoved: EventEmitter<HTMLElement>;
 
   @State() children: HTMLModusSideNavigationItemElement[];
+
+  itemRef: HTMLLIElement;
+  @Method()
+  async focusItem(): Promise<void> {
+    this.itemRef?.focus();
+  }
+
+  connectedCallback() {
+    this.itemAdded.emit(this.element);
+  }
+
+  disconnectedCallback() {
+    this.itemRemoved.emit(this.element);
+  }
 
   handleDefaultSlotChange(): void {
     this.children = Array.from(
@@ -45,7 +76,10 @@ export class ModusSideNavigationItem {
     if (this.disabled) return;
 
     this.selected = !this.selected;
-    this.sideNavItemSelected.emit(this.selected);
+    this.sideNavItemSelected?.emit({
+      id: this.element.id,
+      selected: this.selected,
+    });
   }
 
   handleKeyDown(e: KeyboardEvent): void {
@@ -62,21 +96,25 @@ export class ModusSideNavigationItem {
 
     return (
       <li
+        ref={(el) => (this.itemRef = el)}
+        tabIndex={this.disabled ? -1 : 0}
         class={classes}
         onClick={() => this.handleClick()}
         onKeyDown={(e) => this.handleKeyDown(e)}
         aria-disabled={this.disabled ? 'true' : null}
         aria-label={this.label}
-        aria-current={this.selected ? 'true' : null}>
-        <div class="menu-icon">
+        aria-current={this.selected ? 'true' : null}
+        onFocus={() => this.sideNavItemFocus.emit({ id: this.element.id })}>
+        <div
+          class="menu-icon"
+          onClick={() => this.sideNavItemFocus.emit({ id: this.element.id })}>
           <modus-tooltip text={menuIconTooltip} position="right">
             <slot name="menu-icon"></slot>
+            {this.menuIconUrl && <img src={this.menuIconUrl} />}
           </modus-tooltip>
         </div>
 
-        <div class="menu-text">
-          <span>{this.label}</span>
-        </div>
+        {this.expanded && <div class="menu-text">{this.label}</div>}
 
         <div class="level-icon">
           {this.children?.length > 0 && <IconChevronRightThick />}

@@ -12,6 +12,7 @@ import { ModusNavbarProfileMenuLink } from "./components/modus-navbar/profile-me
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { ModusNavbarProfileMenuLink as ModusNavbarProfileMenuLink1 } from "./components/modus-navbar/profile-menu/modus-navbar-profile-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
+import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.types";
 import { Tab } from "./components/modus-tabs/modus-tabs";
 import { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export namespace Components {
@@ -607,6 +608,10 @@ export namespace Components {
     }
     interface ModusSideNavigation {
         /**
+          * (optional) Data property to create the items.
+         */
+        "data": ModusSideNavigationItemInfo[];
+        /**
           * (optional) The expanded state of side navigation panel and items.
          */
         "expanded": boolean;
@@ -624,10 +629,15 @@ export namespace Components {
           * (optional) The expanded state of side navigation panel item.
          */
         "expanded": boolean;
+        "focusItem": () => Promise<void>;
         /**
           * (optional) Label for the item and the tooltip message.
          */
         "label": string;
+        /**
+          * (optional) Url for menu icon.
+         */
+        "menuIconUrl": string;
         /**
           * (optional) The selected state of side navigation panel item.
          */
@@ -1923,6 +1933,10 @@ declare namespace LocalJSX {
     }
     interface ModusSideNavigation {
         /**
+          * (optional) Data property to create the items.
+         */
+        "data"?: ModusSideNavigationItemInfo[];
+        /**
           * (optional) The expanded state of side navigation panel and items.
          */
         "expanded"?: boolean;
@@ -1949,9 +1963,19 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
+          * (optional) Url for menu icon.
+         */
+        "menuIconUrl"?: string;
+        "onItemAdded"?: (event: ModusSideNavigationItemCustomEvent<HTMLElement>) => void;
+        "onItemRemoved"?: (event: ModusSideNavigationItemCustomEvent<HTMLElement>) => void;
+        /**
+          * An event that fires when an item is in focus.
+         */
+        "onSideNavItemFocus"?: (event: ModusSideNavigationItemCustomEvent<{ id: string }>) => void;
+        /**
           * An event that fires on item selection.
          */
-        "onSideNavItemSelected"?: (event: ModusSideNavigationItemCustomEvent<boolean>) => void;
+        "onSideNavItemSelected"?: (event: ModusSideNavigationItemCustomEvent<{ id: string; selected: boolean }>) => void;
         /**
           * (optional) The selected state of side navigation panel item.
          */

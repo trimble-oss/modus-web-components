@@ -67,14 +67,11 @@ describe('modus-side-navigation-item', () => {
     expect(page.root).toEqualHtml(`
       <modus-side-navigation-item label="Test">
         <mock:shadow-root>
-        <li class="side-nav-item" aria-label="Test">
+        <li class="side-nav-item" aria-label="Test"  tabindex="0">
           <div class="menu-icon">
             <modus-tooltip position="right" text="Test">
               <slot name="menu-icon"></slot>
             </modus-tooltip>
-          </div>
-          <div class="menu-text">
-            <span>Test</span>
           </div>
           <div class="level-icon">
           </div>

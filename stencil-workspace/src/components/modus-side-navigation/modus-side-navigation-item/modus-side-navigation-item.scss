@@ -15,7 +15,7 @@
   transition: top, left, height, width, opacity 0.25s linear 0s;
   z-index: 1030;
 
-  &:hover:not(.disabled) {
+  &:hover:not(.disabled):not(.selected) {
     background-color: $modus-side-navigation-item-hover-bg;
   }
 
@@ -30,13 +30,17 @@
       height: 1.5rem;
       width: 1.5rem;
     }
+
+    img {
+      filter: $modus-side-navigation-item-icon-filter;
+    }
   }
 
   .menu-text {
-    display: none;
     font-family: $primary-font;
     font-size: $rem-14px;
     overflow: hidden;
+    padding-left: 1rem;
     text-overflow: clip;
     white-space: nowrap;
   }
@@ -57,11 +61,6 @@
   }
 
   &.expanded {
-    .menu-text {
-      display: unset;
-      padding-left: 1rem;
-    }
-
     .level-icon {
       height: 1.5rem;
       padding: 0 1rem;
@@ -74,10 +73,14 @@
     }
   }
 
-  &.selected:not(:hover) {
+  &.selected {
     background-color: $modus-side-navigation-item-active-bg;
     box-shadow: inset 0 0 2px $modus-side-navigation-item-active-border-color;
     color: $modus-side-navigation-item-active-color;
+
+    .menu-icon img {
+      filter: $modus-side-navigation-item-icon-active-filter;
+    }
 
     .level-icon {
       svg path {
