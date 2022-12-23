@@ -32,7 +32,9 @@
     "Toolshown",
     "trimble",
     "valuenow",
-    "yxxx"
+    "yxxx",
+    "ARROWUP",
+    "ARROWDOWN"
   ],
   "flagWords": ["hte"],
   "language": "en-US",

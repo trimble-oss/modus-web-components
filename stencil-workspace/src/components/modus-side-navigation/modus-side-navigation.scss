@@ -6,23 +6,107 @@
 
 .side-nav-panel {
   background-color: $modus-side-navigation-bg;
-  box-shadow: 4px 0 4px -4px rgba(36, 35, 45, 0.3);
+  box-shadow: 1px 0 4px rgba(36, 35, 45, 0.3);
   height: 100%;
   min-width: 4rem !important;
   position: absolute;
-  transition: width 0.25s ease-in 0s;
+  transition: all 0.25s ease-in 0s;
   width: 4rem;
   z-index: 1029;
 
+  // added overflow:hidden only when '.expanded' due to the limitation of Modus tooltip issue#958
   &.expanded {
-    transition: width 0.2s ease-out 0s !important;
+    overflow: hidden;
+    transition: all 0.2s ease-out 0s !important;
     width: 16rem;
   }
 
-  .side-nav-menu {
-    height: 100%;
-    margin: 0%;
-    padding: 0%;
+  &:not(.expanded) {
+    .side-nav-level:not(.center) {
+      display: none;
+    }
+  }
+
+  .side-nav-level {
+    position: absolute;
+    transition: all 0.4s linear 0s;
     width: 100%;
+
+    &:not(.center) {
+      opacity: 0;
+      transition-duration: 0.25s;
+    }
+
+    .side-nav-menu {
+      height: 100%;
+      margin: 0%;
+      padding: 0%;
+      transition: all 0.4s linear 0s;
+      width: 100%;
+    }
+
+    .collapse:not(.show) {
+      display: none;
+    }
+
+    .collapsing {
+      height: 0;
+      opacity: 0;
+      position: relative;
+      transition: all 0.25s ease-in 0s;
+
+      &.show {
+        transition: all 0.25s ease-out 0s;
+      }
+    }
+
+    .level-headings {
+      color: $modus-side-navigation-item-color;
+      font-family: $primary-font !important;
+      margin-bottom: 1rem;
+      padding-left: 1.25rem;
+
+      svg.icon-chevron-left-thick > path {
+        fill: $modus-side-navigation-item-chevron-color;
+      }
+
+      &:focus {
+        border: none;
+        outline: none;
+      }
+
+      h4 {
+        margin: 0;
+      }
+
+      a {
+        color: $modus-side-navigation-link-color;
+        cursor: pointer;
+        font-size: $rem-14px !important;
+        padding-left: 1rem;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    &.left {
+      .side-nav-menu {
+        transform: translateX(-100%);
+      }
+    }
+
+    &.center {
+      .side-nav-menu {
+        transform: translate(0%);
+      }
+    }
+
+    &.right {
+      .side-nav-menu {
+        transform: translate(100%);
+      }
+    }
   }
 }

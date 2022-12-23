@@ -46,7 +46,11 @@ nav {
   .icon-apps {
     border-radius: $rem-2px;
     padding: $rem-12px;
-    
+
+    path {
+      fill: $modus-navbar-icon-color;
+    }
+
     &:hover:not(.pressed) {
       background-color: $modus-navbar-icon-hover-bg;
 
@@ -73,6 +77,7 @@ nav {
   }
 
   .navbar-button {
+    padding: 0 $rem-8px;
     position: relative;
 
     &:hover {
@@ -83,7 +88,6 @@ nav {
   .left {
     align-items: center;
     display: inline-flex;
-    padding: 0 $rem-16px;
 
     &.reverse {
       flex-direction: row-reverse;
@@ -91,8 +95,8 @@ nav {
 
     img.product-logo {
       filter: $modus-navbar-brand-logo-filter;
-      margin: 0 $rem-8px;
       max-height: 32px;
+      padding: 0 $rem-8px;
     }
   }
 

@@ -12,6 +12,7 @@ import { ModusNavbarProfileMenuLink } from "./components/modus-navbar/profile-me
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { ModusNavbarProfileMenuLink as ModusNavbarProfileMenuLink1 } from "./components/modus-navbar/profile-menu/modus-navbar-profile-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
+import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.types";
 import { Tab } from "./components/modus-tabs/modus-tabs";
 import { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export namespace Components {
@@ -382,11 +383,11 @@ export namespace Components {
           * (required) Profile menu options.
          */
         "profileMenuOptions": {
-    avatarUrl?: string,
-    email?: string,
-    initials?: string,
-    links?: ModusNavbarProfileMenuLink[],
-    username: string
+    avatarUrl?: string;
+    email?: string;
+    initials?: string;
+    links?: ModusNavbarProfileMenuLink[];
+    username: string;
   };
         /**
           * (optional) Whether to display the navbar items in reverse order.
@@ -607,6 +608,10 @@ export namespace Components {
     }
     interface ModusSideNavigation {
         /**
+          * (optional) Data property to create the items.
+         */
+        "data": ModusSideNavigationItemInfo[];
+        /**
           * (optional) The expanded state of side navigation panel and items.
          */
         "expanded": boolean;
@@ -614,6 +619,14 @@ export namespace Components {
           * (optional) Maximum width of the side navigation panel in an expanded state.
          */
         "maxWidth": string;
+        /**
+          * Mode to make side navigation either overlay or push the content for the selector specified in `targetContent`
+         */
+        "mode": 'overlay' | 'push';
+        /**
+          * (optional) Specify the selector for the page's content for which paddings and margins will be set by side navigation based on the `mode`.
+         */
+        "targetContent": string;
     }
     interface ModusSideNavigationItem {
         /**
@@ -624,10 +637,15 @@ export namespace Components {
           * (optional) The expanded state of side navigation panel item.
          */
         "expanded": boolean;
+        "focusItem": () => Promise<void>;
         /**
           * (optional) Label for the item and the tooltip message.
          */
         "label": string;
+        /**
+          * (optional) Url for menu icon.
+         */
+        "menuIconUrl": string;
         /**
           * (optional) The selected state of side navigation panel item.
          */
@@ -1661,6 +1679,10 @@ declare namespace LocalJSX {
          */
         "helpUrl"?: string;
         /**
+          * An event that fires on main menu click.
+         */
+        "onMainMenuClick"?: (event: ModusNavbarCustomEvent<MouseEvent>) => void;
+        /**
           * An event that fires on product logo click.
          */
         "onProductLogoClick"?: (event: ModusNavbarCustomEvent<MouseEvent>) => void;
@@ -1680,11 +1702,11 @@ declare namespace LocalJSX {
           * (required) Profile menu options.
          */
         "profileMenuOptions"?: {
-    avatarUrl?: string,
-    email?: string,
-    initials?: string,
-    links?: ModusNavbarProfileMenuLink[],
-    username: string
+    avatarUrl?: string;
+    email?: string;
+    initials?: string;
+    links?: ModusNavbarProfileMenuLink[];
+    username: string;
   };
         /**
           * (optional) Whether to display the navbar items in reverse order.
@@ -1923,6 +1945,10 @@ declare namespace LocalJSX {
     }
     interface ModusSideNavigation {
         /**
+          * (optional) Data property to create the items.
+         */
+        "data"?: ModusSideNavigationItemInfo[];
+        /**
           * (optional) The expanded state of side navigation panel and items.
          */
         "expanded"?: boolean;
@@ -1931,9 +1957,17 @@ declare namespace LocalJSX {
          */
         "maxWidth"?: string;
         /**
+          * Mode to make side navigation either overlay or push the content for the selector specified in `targetContent`
+         */
+        "mode"?: 'overlay' | 'push';
+        /**
           * An event that fires on side navigation panel collapse & expand.
          */
         "onSideNavExpand"?: (event: ModusSideNavigationCustomEvent<boolean>) => void;
+        /**
+          * (optional) Specify the selector for the page's content for which paddings and margins will be set by side navigation based on the `mode`.
+         */
+        "targetContent"?: string;
     }
     interface ModusSideNavigationItem {
         /**
@@ -1949,9 +1983,23 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
+          * (optional) Url for menu icon.
+         */
+        "menuIconUrl"?: string;
+        "onSideNavItemAdded"?: (event: ModusSideNavigationItemCustomEvent<HTMLElement>) => void;
+        /**
+          * An event that fires when an item is in focus.
+         */
+        "onSideNavItemFocus"?: (event: ModusSideNavigationItemCustomEvent<{ id: string }>) => void;
+        /**
+          * An event that fires when an item's level expand icon is clicked.
+         */
+        "onSideNavItemLevelExpandClick"?: (event: ModusSideNavigationItemCustomEvent<{ id: string }>) => void;
+        "onSideNavItemRemoved"?: (event: ModusSideNavigationItemCustomEvent<HTMLElement>) => void;
+        /**
           * An event that fires on item selection.
          */
-        "onSideNavItemSelected"?: (event: ModusSideNavigationItemCustomEvent<boolean>) => void;
+        "onSideNavItemSelected"?: (event: ModusSideNavigationItemCustomEvent<{ id: string; selected: boolean }>) => void;
         /**
           * (optional) The selected state of side navigation panel item.
          */
