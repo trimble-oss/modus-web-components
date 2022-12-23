@@ -4,6 +4,15 @@ import { Story } from '@storybook/addon-docs';
 
 ---
 
+[Modus Side Navigation](https://modus.trimble.com/components/web/side-navigation/) is a collapsible side content of the site’s pages. It is located alongside the page’s primary content. The component is designed to add side content to a fullscreen application. It is activated through the “hamburger” menu in the [Navbar](https://modus-web-components.trimble.com/?path=/docs/components-navbar--default).
+
+#### Implementation Details
+
+- Modus Side Navigation can be added using the components `modus-side-navigation` for root and `modus-side-navigation-item` for menu items.
+- The `expanded` prop on `modus-side-navigation` controls the expanded state of all the side navigation menu items.
+- The width of the panel in an expanded state can be set using `maxWidth` prop.
+- The prop `label` on `modus-side-navigation-item` is set as the menu text and a `modus-side-navigation-item` can be selected through `selected` prop.
+
 ### Default
 
 <Story id="components-side-navigation--default" />
@@ -69,7 +78,7 @@ style="display:flex; min-height:500px; overflow-y: auto; position: relative;box-
         d="M30 25h-1v-9a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v9h-2V5a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v20h-2V12a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v13H3a1 1 0 1 0 0 2h27a1 1 0 1 0 0-2zM6 25V13h3v12H6zm9 0V6h3v19h-3zm9 0v-8h3v8h-3z" />
     </svg>
   </modus-side-navigation-item>
-  <modus-side-navigation-item id="accessibility-menu" label="Accessibility and the text is really longggggggggg..">
+  <modus-side-navigation-item id="accessibility-menu" label="Accessibility">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       slot="menu-icon"
@@ -170,16 +179,29 @@ style="display:flex; min-height:500px; overflow-y: auto; position: relative;box-
 
 ### Properties
 
-## Properties
+#### Modus Side Navigation
 
-| Property   | Attribute  | Description                                                                            | Type      | Default     |
-| ---------- | ---------- | -------------------------------------------------------------------------------------- | --------- | ----------- |
-| `disabled` | `disabled` | (optional) The disabled state of side navigation panel item.                           | `boolean` | `false`     |
-| `expanded` | `expanded` | (optional) The expanded state of side navigation panel item.                           | `boolean` | `false`     |
-| `selected` | `selected` | (optional) The selected state of side navigation panel item.                           | `boolean` | `false`     |
-| `text`     | `text`     | (optional) Label for the item. Note: `text` can be overridden by the `slot='content'`. | `string`  | `undefined` |
+| Property   | Attribute   | Description                                                                 | Type      | Default   |
+| ---------- | ----------- | --------------------------------------------------------------------------- | --------- | --------- |
+| `expanded` | `expanded`  | (optional) The expanded state of side navigation panel and items.           | `boolean` | `false`   |
+| `maxWidth` | `max-width` | (optional) Maximum width of the side navigation panel in an expanded state. | `string`  | `'256px'` |
 
-## Events
+#### Events
+
+| Event           | Description                                                     | Type                   |
+| --------------- | --------------------------------------------------------------- | ---------------------- |
+| `sideNavExpand` | An event that fires on side navigation panel collapse & expand. | `CustomEvent<boolean>` |
+
+#### Modus Side Navigation Item
+
+| Property   | Attribute  | Description                                                  | Type      | Default     |
+| ---------- | ---------- | ------------------------------------------------------------ | --------- | ----------- |
+| `disabled` | `disabled` | (optional) The disabled state of side navigation panel item. | `boolean` | `false`     |
+| `expanded` | `expanded` | (optional) The expanded state of side navigation panel item. | `boolean` | `false`     |
+| `label`    | `label`    | (optional) Label for the item and the tooltip message.       | `string`  | `undefined` |
+| `selected` | `selected` | (optional) The selected state of side navigation panel item. | `boolean` | `false`     |
+
+#### Events
 
 | Event                 | Description                            | Type                   |
 | --------------------- | -------------------------------------- | ---------------------- |

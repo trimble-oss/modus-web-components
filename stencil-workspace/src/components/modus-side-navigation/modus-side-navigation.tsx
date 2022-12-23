@@ -1,5 +1,14 @@
 // eslint-disable-next-line
-import { Component, Prop, Element, State, Watch, h, EventEmitter, Event, } from '@stencil/core';
+import {
+  Component,
+  Prop,
+  Element,
+  State,
+  Watch,
+  h,
+  EventEmitter,
+  Event,
+} from '@stencil/core';
 
 @Component({
   tag: 'modus-side-navigation',
@@ -12,6 +21,7 @@ export class ModusSideNavigation {
   /** (optional) The expanded state of side navigation panel and items. */
   @Prop() expanded = false;
 
+  /** (optional) Maximum width of the side navigation panel in an expanded state. */
   @Prop() maxWidth = '256px';
 
   /** An event that fires on side navigation panel collapse & expand.  */
@@ -42,12 +52,19 @@ export class ModusSideNavigation {
     }
   }
 
+  handleKeyDown(e: KeyboardEvent): void {
+    if (e.code.toUpperCase() === 'ENTER' || e.code.toUpperCase() === 'SPACE') {
+      this.handleClick(e);
+    }
+  }
+
   render() {
     return (
       <nav
         class={`side-nav-panel${this.expanded ? ' expanded' : ''}`}
         style={{ width: this.expanded ? this.maxWidth : null }}
         onClick={(e) => this.handleClick(e)}
+        onKeyDown={(e) => this.handleKeyDown(e)}
         aria-label="side navigation">
         <ul class="side-nav-menu">
           <slot onSlotchange={() => this.handleSlotChange()}></slot>

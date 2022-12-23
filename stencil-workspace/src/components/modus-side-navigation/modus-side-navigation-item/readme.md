@@ -11,7 +11,7 @@
 | ---------- | ---------- | ------------------------------------------------------------ | --------- | ----------- |
 | `disabled` | `disabled` | (optional) The disabled state of side navigation panel item. | `boolean` | `false`     |
 | `expanded` | `expanded` | (optional) The expanded state of side navigation panel item. | `boolean` | `false`     |
-| `label`    | `label`    | (optional) Label for the item and tooltip messages.          | `string`  | `undefined` |
+| `label`    | `label`    | (optional) Label for the item and the tooltip message.       | `string`  | `undefined` |
 | `selected` | `selected` | (optional) The selected state of side navigation panel item. | `boolean` | `false`     |
 
 

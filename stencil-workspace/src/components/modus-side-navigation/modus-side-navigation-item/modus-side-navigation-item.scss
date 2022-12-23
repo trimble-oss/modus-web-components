@@ -74,7 +74,7 @@
     }
   }
 
-  &.selected {
+  &.selected:not(:hover) {
     background-color: $modus-side-navigation-item-active-bg;
     box-shadow: inset 0 0 2px $modus-side-navigation-item-active-border-color;
     color: $modus-side-navigation-item-active-color;

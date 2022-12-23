@@ -610,6 +610,9 @@ export namespace Components {
           * (optional) The expanded state of side navigation panel and items.
          */
         "expanded": boolean;
+        /**
+          * (optional) Maximum width of the side navigation panel in an expanded state.
+         */
         "maxWidth": string;
     }
     interface ModusSideNavigationItem {
@@ -622,7 +625,7 @@ export namespace Components {
          */
         "expanded": boolean;
         /**
-          * (optional) Label for the item and tooltip messages.
+          * (optional) Label for the item and the tooltip message.
          */
         "label": string;
         /**
@@ -1919,6 +1922,9 @@ declare namespace LocalJSX {
           * (optional) The expanded state of side navigation panel and items.
          */
         "expanded"?: boolean;
+        /**
+          * (optional) Maximum width of the side navigation panel in an expanded state.
+         */
         "maxWidth"?: string;
         /**
           * An event that fires on side navigation panel collapse & expand.
@@ -1935,7 +1941,7 @@ declare namespace LocalJSX {
          */
         "expanded"?: boolean;
         /**
-          * (optional) Label for the item and tooltip messages.
+          * (optional) Label for the item and the tooltip message.
          */
         "label"?: string;
         /**

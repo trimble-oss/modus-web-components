@@ -79,7 +79,7 @@ style="display:flex; min-height:500px; overflow-y: auto; position: relative;box-
         d="M30 25h-1v-9a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v9h-2V5a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v20h-2V12a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v13H3a1 1 0 1 0 0 2h27a1 1 0 1 0 0-2zM6 25V13h3v12H6zm9 0V6h3v19h-3zm9 0v-8h3v8h-3z" />
     </svg>
   </modus-side-navigation-item>
-  <modus-side-navigation-item id="accessibility-menu" label="Accessibility and the text is really longggggggggg..">
+  <modus-side-navigation-item id="accessibility-menu" label="Accessibility">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       slot="menu-icon"

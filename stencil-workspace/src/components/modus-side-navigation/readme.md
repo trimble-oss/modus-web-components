@@ -7,10 +7,10 @@
 
 ## Properties
 
-| Property   | Attribute   | Description                                                       | Type      | Default   |
-| ---------- | ----------- | ----------------------------------------------------------------- | --------- | --------- |
-| `expanded` | `expanded`  | (optional) The expanded state of side navigation panel and items. | `boolean` | `false`   |
-| `maxWidth` | `max-width` |                                                                   | `string`  | `'256px'` |
+| Property   | Attribute   | Description                                                                 | Type      | Default   |
+| ---------- | ----------- | --------------------------------------------------------------------------- | --------- | --------- |
+| `expanded` | `expanded`  | (optional) The expanded state of side navigation panel and items.           | `boolean` | `false`   |
+| `maxWidth` | `max-width` | (optional) Maximum width of the side navigation panel in an expanded state. | `string`  | `'256px'` |
 
 
 ## Events

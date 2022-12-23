@@ -27,7 +27,7 @@ export class ModusSideNavigationItem {
   /** (optional) The selected state of side navigation panel item. */
   @Prop() selected = false;
 
-  /** (optional) Label for the item and tooltip messages. */
+  /** (optional) Label for the item and the tooltip message. */
   @Prop() label: string;
 
   /** An event that fires on item selection.  */
@@ -48,6 +48,12 @@ export class ModusSideNavigationItem {
     this.sideNavItemSelected.emit(this.selected);
   }
 
+  handleKeyDown(e: KeyboardEvent): void {
+    if (e.code.toUpperCase() === 'ENTER' || e.code.toUpperCase() === 'SPACE') {
+      this.handleClick();
+    }
+  }
+
   render() {
     const classes = `side-nav-item${this.expanded ? ' expanded' : ''}${
       this.selected ? ' selected' : ''
@@ -58,6 +64,7 @@ export class ModusSideNavigationItem {
       <li
         class={classes}
         onClick={() => this.handleClick()}
+        onKeyDown={(e) => this.handleKeyDown(e)}
         aria-disabled={this.disabled ? 'true' : null}
         aria-label={this.label}
         aria-current={this.selected ? 'true' : null}>
