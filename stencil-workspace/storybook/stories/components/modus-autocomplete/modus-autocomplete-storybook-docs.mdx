@@ -1,0 +1,116 @@
+import { Story } from '@storybook/addon-docs';
+
+# Autocomplete
+
+---
+
+[Modus Autocomplete](https://modus.trimble.com/components/web/autocomplete/) web components allow the user to search and select one option
+from a set of choices. When the user enters text into the input field, a list of suggestions are provided.
+
+## Overview
+
+- [Implementation Details](#implementation-details)
+- [Types](#types)
+- [Properties](#properties)
+- [Events](#events)
+
+---
+
+### Default
+
+<Story id="user-inputs-autocomplete--default" />
+
+### With Option
+
+<Story id="user-inputs-autocomplete--with-option" />
+
+### With Custom Option
+
+<Story id="user-inputs-autocomplete--with-custom-option" height="174px"/>
+
+```html
+<div style="width: 500px">
+  <!-- Default (values set in <script />) -->
+  <modus-autocomplete id="default" label="Default Autocomplete" placeholder="Search..."></modus-autocomplete>
+
+  <!-- With ModusAutocompleteOption model (values set in <script />) -->
+  <modus-autocomplete id="with-option" label="Autocomplete using option model" placeholder="Search..."></modus-autocomplete>
+
+  <!-- With custom option slot -->
+  <modus-autocomplete required="true" label="Employee Search" clearable placeholder="Search...">
+      <li data-search-value="The Git Guru" data-id="1" style="padding: 8px">
+        <div style="font-weight: bold">The Git Guru</div>
+        <div style="font-size: 12px">Lead DevOps Engineer</div>
+      </li>
+      <li data-search-value="Bob the Builder" data-id="2" style="padding: 8px">
+        <div style="font-weight: bold">Bob the Builder</div>
+        <div style="font-size: 12px">Senior Construction Engineer</div>
+      </li>
+  </modus-autocomplete>
+</div>
+<script>
+  document.querySelector('#default').options = ['Apple', 'Banana', 'Orange'];
+  document.querySelector('#with-option').options = [
+    { id: '0', value: 'Apple' },
+    { id: '1', value: 'Banana' },
+    { id: '2', value: 'Orange' }
+  ];
+</script>
+```
+
+### Implementation Details
+
+#### Options
+
+The `options` property of the Autocomplete component can be either a `string[]` or an array of `ModusAutocompleteOption` objects.
+
+If a `string[]` is passed as the `options` property, it will be converted into an array of `ModusAutocompleteOption` objects,
+with the `id` and `value` properties both set to the value of each string in the original array.
+
+The `optionSelected` event emits the `id` of the selected `ModusAutocompleteOption`.
+
+#### Custom Options
+
+To pass custom markup as an option for the Autocomplete component,
+you must add the option as a child slot to the `<modus-autocomplete>` element.
+The `<li>` element passed as the slot must contain two data properties:
+- `data-search-value`: This is the value that will be used to filter the option while the user types into the search input.
+- `data-id`: This is the value that will be emitted when the option is clicked on.
+
+### Types
+
+```ts
+interface ModusAutocompleteOption {
+  id: string;
+  value: string;
+}
+```
+
+### Properties
+
+| Property                    | Attribute                       | Description                                   | Type                                    | Default                                       |
+| --------------------------- | ------------------------------- | --------------------------------------------- | --------------------------------------- | --------------------------------------------- |
+| `ariaLabel`                 | `aria-label`                    | The autocomplete's aria label.                | `string`                                | `undefined`                                   |
+| `clearable`                 | `clearable`                     | Whether the input has a clear button.         | `boolean`                               | `false`                                       |
+| `disabled`                  | `disabled`                      | Whether the input is disabled.                | `boolean`                               | `undefined`                                   |
+| `dropdownMaxHeight`         | `dropdown-max-height`           | The autocomplete's dropdown's max height.     | `string`                                | `'300px'`                                     |
+| `dropdownZIndex`            | `dropdown-z-index`              | The autocomplete's dropdown z-index.          | `string`                                | `'1'`                                         |
+| `errorText`                 | `error-text`                    | The autocomplete's error text.                | `string`                                | `undefined`                                   |
+| `includeSearchIcon`         | `include-search-icon`           | Whether the search icon is included.          | `boolean`                               | `true`                                        |
+| `label`                     | `label`                         | The autocomplete's label.                     | `string`                                | `undefined`                                   |
+| `noResultsFoundSubtext`     | `no-results-found-subtext`      | The autocomplete's no results sub-text.       | `string`                                | `'Check spelling or try a different keyword'` |
+| `noResultsFoundText`        | `no-results-found-text`         | The autocomplete's no results text.           | `string`                                | `'No results found'`                          |
+| `options`                   | --                              | The autocomplete's options.                   | `ModusAutocompleteOption[] | string[]`  | `undefined`                                   |
+| `placeholder`               | `placeholder`                   | The autocomplete's input placeholder.         | `string`                                | `undefined`                                   |
+| `readOnly`                  | `read-only`                     | Whether the autocomplete is read-only.        | `boolean`                               | `undefined`                                   |
+| `required`                  | `required`                      | Whether the autocomplete is required.         | `boolean`                               | `undefined`                                   |
+| `showNoResultsFoundMessage` | `show-no-results-found-message` | Whether to show the no results found message. | `boolean`                               | `true`                                        |
+| `size`                      | `size`                          | The autocomplete's size.                      | `"large"  | "medium"`                   | `'medium'`                                    |
+| `value`                     | `value`                         | The autocomplete's search value.              | `string`                                | `undefined`                                   |
+
+### Events
+
+| Event            | Description                                                                  | Type                  |
+| ---------------- | ---------------------------------------------------------------------------- | --------------------- |
+| `optionSelected` | An event that fires when a dropdown option is selected. Emits the option id. | `CustomEvent<string>` |
+| `valueChange`    | An event that fires when the input value changes. Emits the value string.    | `CustomEvent<string>` |

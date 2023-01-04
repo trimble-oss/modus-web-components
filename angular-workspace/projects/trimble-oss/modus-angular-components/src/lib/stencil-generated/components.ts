@@ -89,6 +89,38 @@ export class ModusAlert {
 }
 
 
+export declare interface ModusAutocomplete extends Components.ModusAutocomplete {
+  /**
+   * An event that fires when the input value changes. Emits the value string. 
+   */
+  valueChange: EventEmitter<CustomEvent<string>>;
+  /**
+   * An event that fires when a dropdown option is selected. Emits the option id. 
+   */
+  optionSelected: EventEmitter<CustomEvent<string>>;
+
+}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['ariaLabel', 'clearable', 'disabled', 'dropdownMaxHeight', 'dropdownZIndex', 'errorText', 'includeSearchIcon', 'label', 'noResultsFoundSubtext', 'noResultsFoundText', 'options', 'placeholder', 'readOnly', 'required', 'showNoResultsFoundMessage', 'size', 'value']
+})
+@Component({
+  selector: 'modus-autocomplete',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['ariaLabel', 'clearable', 'disabled', 'dropdownMaxHeight', 'dropdownZIndex', 'errorText', 'includeSearchIcon', 'label', 'noResultsFoundSubtext', 'noResultsFoundText', 'options', 'placeholder', 'readOnly', 'required', 'showNoResultsFoundMessage', 'size', 'value']
+})
+export class ModusAutocomplete {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['valueChange', 'optionSelected']);
+  }
+}
+
+
 export declare interface ModusBadge extends Components.ModusBadge {}
 
 @ProxyCmp({
