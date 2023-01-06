@@ -15,16 +15,12 @@
   padding: $rem-2px $rem-4px;
   vertical-align: middle;
 
-  &.no-left-icon {
-    padding-left: $rem-16px;
-  }
-
-  &.no-right-icon {
-    padding-right: $rem-16px;
+  &.no-left-icon.no-right-icon {
+    padding: 0 $rem-16px;
   }
 
   &.small {
-    height: 1rem;
+    height: $rem-16px;
 
     span {
       font-size: $rem-12px;
