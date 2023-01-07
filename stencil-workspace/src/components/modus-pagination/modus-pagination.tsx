@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { Component, Event, EventEmitter, h, Prop, State } from '@stencil/core';
+import { Component, Event, EventEmitter, h, Prop, State, Watch } from '@stencil/core';
 import { IconChevronLeftThick } from '../icons/icon-chevron-left-thick';
 import { IconChevronRightThick } from '../icons/icon-chevron-right-thick';
 
@@ -13,7 +13,15 @@ export class ModusPagination {
   @Prop() ariaLabel: string | null;
 
   /* The active page. */
-  @Prop() activePage: number;
+  @Prop({ mutable: true }) activePage: number;
+
+  @Watch('activePage')
+  activePageWatch(newValue: number, oldValue: number) {
+    if (newValue !== oldValue) {
+      this.setPages();
+      this.pageChange.emit(newValue);
+    }
+  }
 
   /* The maximum page value. */
   @Prop() maxPage: number;
@@ -28,6 +36,10 @@ export class ModusPagination {
   @Event() pageChange: EventEmitter<number>;
 
   @State() pages: (number | string)[];
+
+  constructor() {
+    this.setPages();
+  }
 
   chevronSizeBySize: Map<string, string> = new Map([
     ['small', '16'],
@@ -100,13 +112,10 @@ export class ModusPagination {
   handlePageClick(page: number): void {
     if (!isNaN(page)) {
       this.activePage = page;
-      this.pageChange.emit(page);
     }
   }
 
   render(): unknown {
-    this.setPages();
-
     return (
       <nav aria-label={this.ariaLabel} class={`${this.classBySize.get(this.size)}`}>
         <ol>
@@ -116,14 +125,14 @@ export class ModusPagination {
               onClick={() => this.handleChevronClick('back')}
               onKeyDown={(event) => this.handleKeydownBack(event)}
               tabIndex={0}>
-            <IconChevronLeftThick size={this.chevronSizeBySize.get(this.size)} />
-          </li>}
+              <IconChevronLeftThick size={this.chevronSizeBySize.get(this.size)} />
+            </li>}
           {this.pages.map(page => {
             return (
-                <li class={`${page === this.activePage ? 'active' : ''} ${!isNaN(+page) ? 'hoverable' : ''}`} onClick={() => this.handlePageClick(+page)}>
-                  {page}
-                </li>
-              );
+              <li class={`${page === this.activePage ? 'active' : ''} ${!isNaN(+page) ? 'hoverable' : ''}`} onClick={() => this.handlePageClick(+page)}>
+                {page}
+              </li>
+            );
           })}
           {this.maxPage - this.minPage >= 7 &&
             <li
@@ -131,8 +140,8 @@ export class ModusPagination {
               onClick={() => this.handleChevronClick('forward')}
               onKeyDown={(event) => this.handleKeydownForward(event)}
               tabIndex={0}>
-            <IconChevronRightThick size={this.chevronSizeBySize.get(this.size)} />
-          </li>}
+              <IconChevronRightThick size={this.chevronSizeBySize.get(this.size)} />
+            </li>}
         </ol>
       </nav>
     );
