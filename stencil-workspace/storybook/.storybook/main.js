@@ -9,7 +9,15 @@ module.exports = {
     "@storybook/addon-links",
     "@storybook/addon-docs",
     "@storybook/addon-essentials",
-    "storybook-dark-mode"
+    "storybook-dark-mode",
+    {
+      name: '@storybook/addon-postcss',
+      options: {
+        postcssLoaderOptions: {
+        implementation: require('postcss'),
+        },
+      },
+    },
   ],
   babel: async (options) => ({
     ...options,

@@ -6,6 +6,12 @@ View all releases at: <https://github.com/trimble-oss/modus-web-components/relea
 
 ## Unreleased
 
+## 0.1.29 - 2023-01-06
+
+### Fixed
+
+- Fixed a padding issue for the case when the Chip contained a close icon but no left-hand icon
+
 ### Added
 
 - Added Modus Side navigation component.
