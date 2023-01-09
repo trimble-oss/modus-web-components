@@ -56,6 +56,7 @@ export class ModusSideNavigation {
 
   componentDidRender() {
     // Execute the callbacks on Render
+    // Be careful with updating states in these callbacks to avoid infinite looping
     if (this.callbackQueue?.length) {
       this.callbackQueue.forEach((callbackFn) => callbackFn && callbackFn());
     }
