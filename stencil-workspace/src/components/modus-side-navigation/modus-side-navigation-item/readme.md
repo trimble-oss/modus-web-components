@@ -7,13 +7,13 @@
 
 ## Properties
 
-| Property      | Attribute       | Description                                                  | Type      | Default     |
-| ------------- | --------------- | ------------------------------------------------------------ | --------- | ----------- |
-| `disabled`    | `disabled`      | (optional) The disabled state of side navigation panel item. | `boolean` | `false`     |
-| `expanded`    | `expanded`      | (optional) The expanded state of side navigation panel item. | `boolean` | `false`     |
-| `label`       | `label`         | (optional) Label for the item and the tooltip message.       | `string`  | `undefined` |
-| `menuIconUrl` | `menu-icon-url` | (optional) Url for menu icon.                                | `string`  | `undefined` |
-| `selected`    | `selected`      | (optional) The selected state of side navigation panel item. | `boolean` | `false`     |
+| Property   | Attribute   | Description                                                  | Type      | Default     |
+| ---------- | ----------- | ------------------------------------------------------------ | --------- | ----------- |
+| `disabled` | `disabled`  | (optional) The disabled state of side navigation panel item. | `boolean` | `false`     |
+| `expanded` | `expanded`  | (optional) The expanded state of side navigation panel item. | `boolean` | `false`     |
+| `label`    | `label`     | (optional) Label for the item and the tooltip message.       | `string`  | `undefined` |
+| `menuIcon` | `menu-icon` | (optional) A built-in menu icon string or a image url.       | `string`  | `undefined` |
+| `selected` | `selected`  | (optional) The selected state of side navigation panel item. | `boolean` | `false`     |
 
 
 ## Events

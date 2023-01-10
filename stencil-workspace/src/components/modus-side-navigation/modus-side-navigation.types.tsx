@@ -2,7 +2,7 @@ import { ModusSideNavigationItemCustomEvent } from '../../components';
 
 export type ModusSideNavigationItemInfo = {
   id: string;
-  menuIconUrl?: string;
+  menuIcon?: string;
   label: string;
   disabled?: boolean;
   selected?: boolean;

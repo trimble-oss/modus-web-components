@@ -772,14 +772,14 @@ export declare interface ModusSideNavigationItem extends Components.ModusSideNav
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['disabled', 'expanded', 'label', 'menuIconUrl', 'selected'],
+  inputs: ['disabled', 'expanded', 'label', 'menuIcon', 'selected'],
   methods: ['focusItem']
 })
 @Component({
   selector: 'modus-side-navigation-item',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['disabled', 'expanded', 'label', 'menuIconUrl', 'selected']
+  inputs: ['disabled', 'expanded', 'label', 'menuIcon', 'selected']
 })
 export class ModusSideNavigationItem {
   protected el: HTMLElement;

@@ -643,9 +643,9 @@ export namespace Components {
          */
         "label": string;
         /**
-          * (optional) Url for menu icon.
+          * (optional) A built-in menu icon string or a image url.
          */
-        "menuIconUrl": string;
+        "menuIcon": string;
         /**
           * (optional) The selected state of side navigation panel item.
          */
@@ -1681,7 +1681,7 @@ declare namespace LocalJSX {
         /**
           * An event that fires on main menu click.
          */
-        "onMainMenuClick"?: (event: ModusNavbarCustomEvent<MouseEvent>) => void;
+        "onMainMenuClick"?: (event: ModusNavbarCustomEvent<KeyboardEvent | MouseEvent>) => void;
         /**
           * An event that fires on product logo click.
          */
@@ -1983,10 +1983,9 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
-          * (optional) Url for menu icon.
+          * (optional) A built-in menu icon string or a image url.
          */
-        "menuIconUrl"?: string;
-        "onSideNavItemAdded"?: (event: ModusSideNavigationItemCustomEvent<HTMLElement>) => void;
+        "menuIcon"?: string;
         /**
           * An event that fires when an item is in focus.
          */
@@ -1995,11 +1994,12 @@ declare namespace LocalJSX {
           * An event that fires when an item's level expand icon is clicked.
          */
         "onSideNavItemLevelExpandClick"?: (event: ModusSideNavigationItemCustomEvent<{ id: string }>) => void;
-        "onSideNavItemRemoved"?: (event: ModusSideNavigationItemCustomEvent<HTMLElement>) => void;
         /**
           * An event that fires on item selection.
          */
         "onSideNavItemSelected"?: (event: ModusSideNavigationItemCustomEvent<{ id: string; selected: boolean }>) => void;
+        "on_sideNavItemAdded"?: (event: ModusSideNavigationItemCustomEvent<HTMLElement>) => void;
+        "on_sideNavItemRemoved"?: (event: ModusSideNavigationItemCustomEvent<HTMLElement>) => void;
         /**
           * (optional) The selected state of side navigation panel item.
          */

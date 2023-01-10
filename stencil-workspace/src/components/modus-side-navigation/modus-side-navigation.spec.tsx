@@ -11,11 +11,11 @@ describe('modus-side-navigation', () => {
     expect(page.root).toEqualHtml(`
       <modus-side-navigation>
         <mock:shadow-root>
-          <nav
+          <nav role="navigation"
             class="side-nav-panel"
             aria-label="side navigation">
             <div class="side-nav-level center">
-            <ul class="side-nav-menu">
+            <ul class="side-nav-menu" role="tree">
               <slot></slot>
             </ul>
             </div>
@@ -40,11 +40,11 @@ describe('modus-side-navigation', () => {
     expect(page.root).toEqualHtml(`
       <modus-side-navigation>
         <mock:shadow-root>
-          <nav
+          <nav role="navigation"
             class="side-nav-panel"
             aria-label="side navigation">
             <div class="side-nav-level center">
-            <ul class="side-nav-menu">
+            <ul class="side-nav-menu" role="tree">
               <slot></slot>
             </ul>
             </div>
@@ -71,7 +71,7 @@ describe('modus-side-navigation-item', () => {
     expect(page.root).toEqualHtml(`
       <modus-side-navigation-item label="Test">
         <mock:shadow-root>
-        <li class="side-nav-item" aria-label="Test"  tabindex="0">
+        <li class="side-nav-item" role="treeitem" aria-label="Test"  tabindex="0">
           <div class="menu-icon">
             <modus-tooltip position="right" text="Test">
               <slot name="menu-icon"></slot>

@@ -46,6 +46,14 @@ Type: `Promise<void>`
 
 
 
+## Slots
+
+| Slot              | Description                          |
+| ----------------- | ------------------------------------ |
+| `"main"`          | Renders custom main menu content     |
+| `"notifications"` | Renders custom notifications content |
+
+
 ## Dependencies
 
 ### Depends on

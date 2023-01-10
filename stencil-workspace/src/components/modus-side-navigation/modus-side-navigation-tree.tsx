@@ -13,7 +13,7 @@ export const ModusSideNavigationTree: FunctionalComponent<{
       disabled,
       selected,
       label,
-      menuIconUrl,
+      menuIcon,
       children,
       onSideNavItemSelected,
       options,
@@ -25,7 +25,7 @@ export const ModusSideNavigationTree: FunctionalComponent<{
           disabled={disabled}
           selected={selected}
           label={label}
-          menuIconUrl={menuIconUrl}
+          menuIcon={menuIcon}
           onSideNavItemSelected={(e) =>
             onSideNavItemSelected && onSideNavItemSelected(e)
           }

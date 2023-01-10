@@ -295,12 +295,12 @@ const setJavascriptDataTemplate = (containerId) => {
       sidenav.data=[
         {
           id:'home-menu',
-          menuIconUrl: "${homeIcon}",
+          menuIcon: "${homeIcon}",
           label: 'Home page 1',
           children: [
             {
               id:'home-menu-2',
-              menuIconUrl: "${homeIcon}",
+              menuIcon: "${homeIcon}",
               label: 'Home page 2',
               ${selectionHandler}
             },
@@ -309,30 +309,30 @@ const setJavascriptDataTemplate = (containerId) => {
               children: [
                 {
                   id:'home-menu-3',
-                  menuIconUrl: "${homeIcon}",
+                  menuIcon: "${homeIcon}",
                   label: 'Home page 3',
                   ${selectionHandler}
                 }],
-              menuIconUrl: "${usageIcon}"            ,
+              menuIcon: "${usageIcon}"            ,
               label: 'Usage page 2',
               ${selectionHandler}
             }],
         },
         {
           id:'usage-menu',
-          menuIconUrl: "${usageIcon}"            ,
+          menuIcon: "${usageIcon}"            ,
           label: 'Usage page 1',
           ${selectionHandler}
         },
         {
           id:'styles-menu',
-          menuIconUrl: "${stylesIcon}",
+          menuIcon: "${stylesIcon}",
           label: 'Styles page 1',
           ${selectionHandler}
         },
         {
           id:'accessibility-menu',
-          menuIconUrl: "${accessibilityIcon}",
+          menuIcon: "${accessibilityIcon}",
           label: 'Accessibility page 1',
           ${selectionHandler}
         },
@@ -356,7 +356,7 @@ const setJavascriptDataTemplate = (containerId) => {
       });
 
       getRoot().querySelector("#switch-mode").addEventListener('switchClick', (e)=> {
-        debugger;
+
         const sidenav = getRoot().querySelector('modus-side-navigation');
         sidenav.mode = sidenav.mode === 'push' ? 'overlay' : 'push';
       });

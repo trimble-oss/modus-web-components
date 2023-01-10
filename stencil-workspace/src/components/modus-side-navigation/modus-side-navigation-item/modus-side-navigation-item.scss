@@ -91,10 +91,8 @@
       filter: $modus-side-navigation-item-icon-active-filter;
     }
 
-    .level-icon {
-      svg path {
-        fill: $modus-side-navigation-item-active-color;
-      }
+    svg path {
+      fill: $modus-side-navigation-item-icon-active-color;
     }
   }
 

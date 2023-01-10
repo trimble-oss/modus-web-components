@@ -45,6 +45,7 @@ export interface IconProps {
 
 interface IconMapProps extends IconProps {
   icon: string;
+  imageOptions?: { [key: string]: string };
 }
 
 export const IconMap: FunctionalComponent<IconMapProps> = (
@@ -339,5 +340,7 @@ export const IconMap: FunctionalComponent<IconMapProps> = (
           size={props.size}
         />
       );
+    default:
+      return <img src={props.icon} {...(props.imageOptions || {})} />;
   }
 };

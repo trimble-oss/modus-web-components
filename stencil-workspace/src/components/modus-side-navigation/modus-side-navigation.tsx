@@ -43,24 +43,24 @@ export class ModusSideNavigation {
   /** An event that fires on side navigation panel collapse & expand.  */
   @Event() sideNavExpand: EventEmitter<boolean>;
 
-  private children: { [key: string]: HTMLModusSideNavigationItemElement } = {};
-  private firstChild: string;
-  private itemInFocus: string;
-  private itemSelected: string;
-  private levelsContainerRef: HTMLDivElement;
-  private callbackQueue: any[] = []; // eslint-disable-line @typescript-eslint/no-explicit-any
-  private timeout: any; // eslint-disable-line @typescript-eslint/no-explicit-any
-  private minWidth = '4rem';
+  private _callbackQueue: any[] = []; // eslint-disable-line @typescript-eslint/no-explicit-any
+  private _children: { [key: string]: HTMLModusSideNavigationItemElement } = {};
+  private _firstChild: string;
+  private _itemInFocus: string;
+  private _itemSelected: string;
+  private _minWidth = '4rem';
+  private _levelsContainerRef: HTMLDivElement;
+  private _timeout: any; // eslint-disable-line @typescript-eslint/no-explicit-any
 
-  @State() navigationLevelInfo: ModusSideNavigationLevelInfo[] = [];
+  @State() _navigationLevelInfo: ModusSideNavigationLevelInfo[] = [];
 
   componentDidRender() {
     // Execute the callbacks on Render
     // Be careful with updating states in these callbacks to avoid infinite looping
-    if (this.callbackQueue?.length) {
-      this.callbackQueue.forEach((callbackFn) => callbackFn && callbackFn());
+    if (this._callbackQueue?.length) {
+      this._callbackQueue.forEach((callbackFn) => callbackFn && callbackFn());
     }
-    this.callbackQueue = [];
+    this._callbackQueue = [];
   }
 
   componentWillLoad() {
@@ -68,65 +68,6 @@ export class ModusSideNavigation {
 
     // If data prop is set, get the level1 info
     this.initializeLevelInfo(this.data);
-  }
-
-  gotoNextLevel(id: string) {
-    if (this.data) {
-      const newLevels = [...(this.navigationLevelInfo || [])];
-      const existing = newLevels.length
-        ? newLevels[newLevels.length - 1]
-        : null;
-
-      const level = existing
-        ? existing.children?.find((i) => i.id === id)
-        : this.data.find((i) => i.id === id);
-      if (!level?.children) return;
-
-      newLevels.push({ ...level, slidePosition: 'right' });
-
-      this.navigationLevelInfo = [...newLevels];
-      this.expanded = true;
-
-      // Animation for sliding levels
-      this.callbackQueue.push(() => {
-        const levels = [...this.navigationLevelInfo];
-        levels.forEach((level, index) => {
-          if (index === levels.length - 2) {
-            level.slidePosition = 'left';
-          } else if (index === levels.length - 1) {
-            level.slidePosition = 'center';
-          }
-        });
-        this.navigationLevelInfo = [...levels];
-      });
-    }
-  }
-
-  gotoPreviousLevel() {
-    const levels = [...this.navigationLevelInfo];
-
-    // Animation for sliding levels
-    levels.forEach((level, index) => {
-      if (levels.length > 1) {
-        if (index === levels.length - 2) {
-          level.slidePosition = 'center';
-        } else if (index === levels.length - 1) {
-          level.slidePosition = 'right';
-        }
-      } else {
-        level.slidePosition = 'center';
-      }
-    });
-    this.navigationLevelInfo = [...levels];
-
-    this.callbackQueue.push(() => {
-      this.timeout = setTimeout(() => {
-        levels.pop();
-        this.navigationLevelInfo = [...levels];
-
-        clearTimeout(this.timeout);
-      }, 250);
-    });
   }
 
   @Listen('click', { target: 'document' })
@@ -141,12 +82,79 @@ export class ModusSideNavigation {
     this.expanded = false;
   }
 
-  @Listen('sideNavItemAdded')
+  gotoNextLevel(id: string) {
+    if (this.data) {
+      const newLevels = [...(this._navigationLevelInfo || [])];
+      const existing = newLevels.length
+        ? newLevels[newLevels.length - 1]
+        : null;
+
+      const level = existing
+        ? existing.children?.find((i) => i.id === id)
+        : this.data.find((i) => i.id === id);
+      if (!level?.children) return;
+
+      newLevels.push({ ...level, slidePosition: 'right' });
+
+      this._navigationLevelInfo = [...newLevels];
+      this.expanded = true;
+
+      // Animation for sliding levels
+      this._callbackQueue.push(() => {
+        const levels = [...this._navigationLevelInfo];
+        levels.forEach((level, index) => {
+          if (index === levels.length - 2) {
+            level.slidePosition = 'left';
+          } else if (index === levels.length - 1) {
+            level.slidePosition = 'center';
+          }
+        });
+        this._navigationLevelInfo = [...levels];
+      });
+    }
+  }
+
+  gotoPreviousLevel() {
+    const levels = [...this._navigationLevelInfo];
+
+    // Animation for sliding levels
+    levels.forEach((level, index) => {
+      if (levels.length > 1) {
+        if (index === levels.length - 2) {
+          level.slidePosition = 'center';
+        } else if (index === levels.length - 1) {
+          level.slidePosition = 'right';
+        }
+      } else {
+        level.slidePosition = 'center';
+      }
+    });
+    this._navigationLevelInfo = [...levels];
+
+    this._callbackQueue.push(() => {
+      this._timeout = setTimeout(() => {
+        levels.pop();
+        this._navigationLevelInfo = [...levels];
+
+        clearTimeout(this._timeout);
+      }, 250);
+    });
+  }
+
+  @Listen('_sideNavItemAdded')
   handleItemAdded(event: ModusSideNavigationItemCustomEvent<HTMLElement>) {
     if (event.detail?.id) {
-      this.children[event.detail.id] =
+      this._children[event.detail.id] =
         event.detail as HTMLModusSideNavigationItemElement;
-      this.children[event.detail.id].expanded = this.expanded;
+      this._children[event.detail.id].expanded = this.expanded;
+    }
+    this.itemChanged(event);
+  }
+
+  @Listen('_sideNavItemRemoved')
+  handleItemRemoved(event: ModusSideNavigationItemCustomEvent<HTMLElement>) {
+    if (event.detail?.id) {
+      delete this._children[event.detail.id];
     }
     this.itemChanged(event);
   }
@@ -167,19 +175,11 @@ export class ModusSideNavigation {
   handleItemSelected(
     event: ModusSideNavigationItemCustomEvent<{ id: string; selected: boolean }>
   ) {
-    if (this.itemSelected) {
-      this.children[this.itemSelected].selected = false;
-      this.itemSelected = null;
+    if (this._itemSelected) {
+      this._children[this._itemSelected].selected = false;
+      this._itemSelected = null;
     }
-    this.itemSelected = event.detail.selected ? event.detail.id : null;
-  }
-
-  @Listen('sideNavItemRemoved')
-  handleItemRemoved(event: ModusSideNavigationItemCustomEvent<HTMLElement>) {
-    if (event.detail?.id) {
-      delete this.children[event.detail.id];
-    }
-    this.itemChanged(event);
+    this._itemSelected = event.detail.selected ? event.detail.id : null;
   }
 
   @Watch('data')
@@ -191,12 +191,12 @@ export class ModusSideNavigation {
   @Watch('expanded')
   handleExpandedChange(isExpanded) {
     const handleChange = () => {
-      Object.values(this.children).forEach((c) => (c.expanded = isExpanded));
+      Object.values(this._children).forEach((c) => (c.expanded = isExpanded));
       this.sideNavExpand?.emit(this.expanded);
 
       this.setTargetContentMargin(isExpanded, this.mode, this.targetContent);
     };
-    const levelHeadings = this.levelsContainerRef?.querySelector(
+    const levelHeadings = this._levelsContainerRef?.querySelector(
       '.side-nav-level.center .level-headings'
     ) as HTMLElement;
 
@@ -207,11 +207,11 @@ export class ModusSideNavigation {
         levelHeadings.classList.add('collapsing');
         levelHeadings.style.height = '0';
 
-        this.timeout = setTimeout(() => {
+        this._timeout = setTimeout(() => {
           levelHeadings.classList.remove('collapsing');
           levelHeadings.classList.add('show');
           levelHeadings.style.height = '';
-          clearTimeout(this.timeout);
+          clearTimeout(this._timeout);
 
           handleChange();
         }, 150);
@@ -225,12 +225,12 @@ export class ModusSideNavigation {
         levelHeadings.classList.add('collapsing');
 
         // Timeout to reset collapsing class
-        this.timeout = setTimeout(() => {
+        this._timeout = setTimeout(() => {
           levelHeadings.classList.remove('show');
           levelHeadings.classList.remove('collapsing');
           levelHeadings.classList.add('collapse');
 
-          clearTimeout(this.timeout);
+          clearTimeout(this._timeout);
 
           handleChange();
         }, 200);
@@ -270,9 +270,9 @@ export class ModusSideNavigation {
     }
 
     const key = event.code.toUpperCase();
-    let flag = false;
+    let preventDefault = false;
     // If the tree is empty there will be no child
-    if (event.altKey || !this.firstChild) {
+    if (event.altKey || !this._firstChild) {
       return;
     }
     switch (key) {
@@ -282,23 +282,23 @@ export class ModusSideNavigation {
         break;
       case 'ARROWDOWN':
         // eslint-disable-next-line no-case-declarations
-        const nextItem: HTMLModusSideNavigationItemElement = this.children[
-          this.itemInFocus
+        const nextItem: HTMLModusSideNavigationItemElement = this._children[
+          this._itemInFocus
         ]?.nextElementSibling as HTMLModusSideNavigationItemElement;
 
         nextItem?.focusItem();
-        flag = true;
+        preventDefault = true;
         break;
       case 'ARROWUP':
         // eslint-disable-next-line no-case-declarations
-        const prevItem = this.children[this.itemInFocus]
+        const prevItem = this._children[this._itemInFocus]
           ?.previousElementSibling as HTMLModusSideNavigationItemElement;
 
         prevItem?.focusItem();
-        flag = true;
+        preventDefault = true;
         break;
       case 'ARROWRIGHT':
-        this.gotoNextLevel(this.itemInFocus);
+        this.gotoNextLevel(this._itemInFocus);
         break;
       case 'ARROWLEFT':
         this.gotoPreviousLevel();
@@ -306,7 +306,7 @@ export class ModusSideNavigation {
       default:
     }
 
-    if (flag) {
+    if (preventDefault) {
       event.preventDefault();
       event.stopPropagation();
     }
@@ -314,7 +314,7 @@ export class ModusSideNavigation {
 
   initializeLevelInfo(data: ModusSideNavigationItemInfo[]) {
     if (data) {
-      this.navigationLevelInfo = [
+      this._navigationLevelInfo = [
         {
           id: null,
           label: null,
@@ -326,8 +326,8 @@ export class ModusSideNavigation {
   }
 
   itemChanged(event: ModusSideNavigationItemCustomEvent<HTMLElement>) {
-    const keys = Object.keys(this.children);
-    this.firstChild = keys[0];
+    const keys = Object.keys(this._children);
+    this._firstChild = keys[0];
 
     event.preventDefault();
     event.stopPropagation();
@@ -338,13 +338,13 @@ export class ModusSideNavigation {
       const content = document.querySelector(target) as HTMLElement;
       if (content) {
         content.style.marginLeft =
-          isExpanded && mode === 'push' ? this.maxWidth : this.minWidth;
+          isExpanded && mode === 'push' ? this.maxWidth : this._minWidth;
       }
     }
   }
 
   setFocusItem(itemId: string): void {
-    this.itemInFocus = itemId;
+    this._itemInFocus = itemId;
   }
 
   // Trick to restart an element's animation
@@ -357,13 +357,14 @@ export class ModusSideNavigation {
   render() {
     return (
       <nav
+        role="navigation"
         class={`side-nav-panel${this.expanded ? ' expanded' : ''}`}
         style={{ width: this.expanded ? this.maxWidth : null }}
         onKeyDown={(e) => this.handleKeyDown(e)}
         aria-label="side navigation">
         {this.data ? (
-          <div ref={(el) => (this.levelsContainerRef = el)}>
-            {this.navigationLevelInfo.map((level, index) => (
+          <div ref={(el) => (this._levelsContainerRef = el)}>
+            {this._navigationLevelInfo.map((level, index) => (
               <div class={`side-nav-level ${level.slidePosition}`}>
                 {index !== 0 && (
                   <div
@@ -384,7 +385,7 @@ export class ModusSideNavigation {
                   </div>
                 )}
                 <div>
-                  <ul class="side-nav-menu">
+                  <ul class="side-nav-menu" role="tree">
                     <ModusSideNavigationTree
                       data={level.children}></ModusSideNavigationTree>
                   </ul>
@@ -394,7 +395,7 @@ export class ModusSideNavigation {
           </div>
         ) : (
           <div class="side-nav-level center">
-            <ul class="side-nav-menu">
+            <ul class="side-nav-menu" role="tree">
               <slot></slot>
             </ul>
           </div>

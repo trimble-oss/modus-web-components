@@ -1,7 +1,5 @@
-/* eslint-disable */
 import {
-  h,
-  /* eslint-enable */
+  h, // eslint-disable-line @typescript-eslint/no-unused-vars
   Component,
   Prop,
   Event,
@@ -18,6 +16,11 @@ import { IconSearch } from '../icons/icon-search';
 import { ModusNavbarApp } from './apps-menu/modus-navbar-apps-menu';
 import { IconHelp } from '../icons/icon-help';
 import { ModusNavbarProfileMenuLink } from './profile-menu/modus-navbar-profile-menu';
+
+/**
+ * @slot main - Renders custom main menu content
+ * @slot notifications - Renders custom notifications content
+ */
 
 @Component({
   tag: 'modus-navbar',
@@ -70,7 +73,7 @@ export class ModusNavbar {
   @Prop() helpUrl: string;
 
   /** An event that fires on main menu click. */
-  @Event() mainMenuClick: EventEmitter<MouseEvent>;
+  @Event() mainMenuClick: EventEmitter<KeyboardEvent | MouseEvent>;
 
   /** An event that fires on product logo click. */
   @Event() productLogoClick: EventEmitter<MouseEvent>;
@@ -91,6 +94,9 @@ export class ModusNavbar {
   @State() notificationsMenuVisible: boolean;
   @State() profileMenuVisible: boolean;
   @State() slots: string[] = [];
+
+  readonly SLOT_MAIN = 'main';
+  readonly SLOT_NOTIFICATIONS = 'notifications';
 
   profileAvatarElement: HTMLImageElement;
 
@@ -130,7 +136,7 @@ export class ModusNavbar {
 
     const isUpdated =
       this.slots?.length !== slotNames.length ||
-      this.slots?.filter((s) => !slotNames.includes(s)).length > 0;
+      this.slots?.filter((s) => !slotNames.includes(s)).length;
     if (isUpdated) this.slots = [...slotNames];
   }
 
@@ -157,25 +163,27 @@ export class ModusNavbar {
 
   mainMenuClickHandler(event: MouseEvent): void {
     event.preventDefault();
-    this.mainMenuToggle();
-    this.mainMenuClick.emit(event);
+    this.mainMenuToggle(event);
   }
 
   mainMenuKeydownHandler(event: KeyboardEvent): void {
     if (event.code !== 'Enter') {
       return;
     }
-    this.mainMenuToggle();
+    this.mainMenuToggle(event);
   }
 
-  mainMenuToggle(): void {
-    if (!this.slots?.includes('main')) return;
-    if (this.mainMenuVisible) {
-      this.mainMenuVisible = false;
-    } else {
-      this.hideMenus();
-      this.mainMenuVisible = true;
+  mainMenuToggle(event: KeyboardEvent | MouseEvent): void {
+    if (this.slots?.includes(this.SLOT_MAIN)) {
+      if (this.mainMenuVisible) {
+        this.mainMenuVisible = false;
+      } else {
+        this.hideMenus();
+        this.mainMenuVisible = true;
+      }
     }
+
+    this.mainMenuClick.emit(event);
   }
 
   notificationsMenuClickHandler(event: MouseEvent): void {
@@ -251,7 +259,7 @@ export class ModusNavbar {
               </span>
               {this.mainMenuVisible && (
                 <modus-navbar-main-menu>
-                  <slot name="main"></slot>
+                  <slot name={this.SLOT_MAIN}></slot>
                 </modus-navbar-main-menu>
               )}
             </div>
@@ -284,7 +292,7 @@ export class ModusNavbar {
               </span>
               {this.notificationsMenuVisible && (
                 <modus-navbar-notifications-menu reverse={this.reverse}>
-                  <slot name="notifications"></slot>
+                  <slot name={this.SLOT_NOTIFICATIONS}></slot>
                 </modus-navbar-notifications-menu>
               )}
             </div>

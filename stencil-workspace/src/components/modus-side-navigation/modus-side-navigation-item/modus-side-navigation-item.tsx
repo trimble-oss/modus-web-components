@@ -8,7 +8,7 @@ import {
   EventEmitter,
   Method,
 } from '@stencil/core';
-import { IconChevronRightThick } from '../../icons/icon-chevron-right-thick';
+import { IconMap } from '../../icons/IconMap';
 
 @Component({
   tag: 'modus-side-navigation-item',
@@ -27,8 +27,8 @@ export class ModusSideNavigationItem {
   /** (optional) Label for the item and the tooltip message. */
   @Prop() label: string;
 
-  /** (optional) Url for menu icon. */
-  @Prop() menuIconUrl: string;
+  /** (optional) A built-in menu icon string or a image url. */
+  @Prop() menuIcon: string;
 
   /** (optional) The selected state of side navigation panel item. */
   @Prop({ mutable: true, reflect: true }) selected = false;
@@ -44,32 +44,34 @@ export class ModusSideNavigationItem {
 
   /**
    * @internal
+   * Only to be used by modus side navigation components
    */
-  @Event() sideNavItemAdded: EventEmitter<HTMLElement>;
+  @Event() _sideNavItemAdded: EventEmitter<HTMLElement>;
 
   /**
    * @internal
+   * Only to be used by modus side navigation components
    */
-  @Event() sideNavItemRemoved: EventEmitter<HTMLElement>;
+  @Event() _sideNavItemRemoved: EventEmitter<HTMLElement>;
 
-  @State() children: HTMLModusSideNavigationItemElement[];
+  @State() _children: HTMLModusSideNavigationItemElement[];
 
-  itemRef: HTMLLIElement;
+  private _itemRef: HTMLLIElement;
   @Method()
   async focusItem(): Promise<void> {
-    this.itemRef?.focus();
+    this._itemRef?.focus();
   }
 
   connectedCallback() {
-    this.sideNavItemAdded.emit(this.element);
+    this._sideNavItemAdded.emit(this.element);
   }
 
   disconnectedCallback() {
-    this.sideNavItemRemoved.emit(this.element);
+    this._sideNavItemRemoved.emit(this.element);
   }
 
   handleDefaultSlotChange(): void {
-    this.children = Array.from(
+    this._children = Array.from(
       this.element.children as unknown as HTMLModusSideNavigationItemElement[]
     ).filter((i) => i && i.nodeName === 'MODUS-SIDE-NAVIGATION-ITEM');
   }
@@ -77,7 +79,7 @@ export class ModusSideNavigationItem {
   handleClick(e: Event): void {
     if (this.disabled) return;
 
-    if (this.children?.length) {
+    if (this._children?.length) {
       this.sideNavItemLevelExpandClick.emit({ id: this.element.id });
       e.stopPropagation();
     } else {
@@ -103,7 +105,8 @@ export class ModusSideNavigationItem {
 
     return (
       <li
-        ref={(el) => (this.itemRef = el)}
+        role="treeitem"
+        ref={(el) => (this._itemRef = el)}
         tabIndex={this.disabled ? -1 : 0}
         class={classes}
         onClick={(e) => this.handleClick(e)}
@@ -117,14 +120,19 @@ export class ModusSideNavigationItem {
           onClick={() => this.sideNavItemFocus.emit({ id: this.element.id })}>
           <modus-tooltip text={menuIconTooltip} position="right">
             <slot name="menu-icon"></slot>
-            {this.menuIconUrl && <img src={this.menuIconUrl} />}
+            {this.menuIcon && (
+              <IconMap
+                icon={this.menuIcon}
+                aria-label={this.label}
+                size="24"></IconMap>
+            )}
           </modus-tooltip>
         </div>
 
         {this.expanded && <div class="menu-text">{this.label}</div>}
 
         <div class="level-icon">
-          {this.children?.length > 0 && <IconChevronRightThick />}
+          {this._children?.length > 0 && <IconMap icon="chevron-right-thick" />}
         </div>
 
         <div style={{ display: 'none' }}>

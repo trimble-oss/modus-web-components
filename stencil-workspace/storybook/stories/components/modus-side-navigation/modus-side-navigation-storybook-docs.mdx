@@ -347,11 +347,13 @@ Modus side navigation uses CSS variables for theming ex:`--modus-side-navigation
 
 #### Modus Side Navigation
 
-| Property   | Attribute   | Description                                                                 | Type                            | Default     |
-| ---------- | ----------- | --------------------------------------------------------------------------- | ------------------------------- | ----------- |
-| `data`     | --          | (optional) Data property to create the items.                               | `ModusSideNavigationItemInfo[]` | `undefined` |
-| `expanded` | `expanded`  | (optional) The expanded state of side navigation panel and items.           | `boolean`                       | `false`     |
-| `maxWidth` | `max-width` | (optional) Maximum width of the side navigation panel in an expanded state. | `string`                        | `'256px'`   |
+| Property        | Attribute        | Description                                                                                                                               | Type                            | Default     |
+| --------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------- | ----------- |
+| `data`          | --               | (optional) Data property to create the items.                                                                                             | `ModusSideNavigationItemInfo[]` | `undefined` |
+| `expanded`      | `expanded`       | (optional) The expanded state of side navigation panel and items.                                                                         | `boolean`                       | `false`     |
+| `maxWidth`      | `max-width`      | (optional) Maximum width of the side navigation panel in an expanded state.                                                               | `string`                        | `'256px'`   |
+| `mode`          | `mode`           | Mode to make side navigation either overlay or push the content for the selector specified in `targetContent`                             | `"overlay" \| "push"`           | `'overlay'` |
+| `targetContent` | `target-content` | (optional) Specify the selector for the page's content for which paddings and margins will be set by side navigation based on the `mode`. | `string`                        | `undefined` |
 
 ## Events
 
@@ -361,14 +363,14 @@ Modus side navigation uses CSS variables for theming ex:`--modus-side-navigation
 
 #### Modus Side Navigation Item
 
-| Property      | Attribute       | Description                                                  | Type      | Default     |
-| ------------- | --------------- | ------------------------------------------------------------ | --------- | ----------- |
-| `id`          | `id`            | Unique identifier for a side navigation panel item.          | `string`  |             |
-| `disabled`    | `disabled`      | (optional) The disabled state of side navigation panel item. | `boolean` | `false`     |
-| `expanded`    | `expanded`      | (optional) The expanded state of side navigation panel item. | `boolean` | `false`     |
-| `label`       | `label`         | (optional) Label for the item and the tooltip message.       | `string`  | `undefined` |
-| `menuIconUrl` | `menu-icon-url` | (optional) Url for menu icon.                                | `string`  | `undefined` |
-| `selected`    | `selected`      | (optional) The selected state of side navigation panel item. | `boolean` | `false`     |
+| Property   | Attribute   | Description                                                  | Type      | Default     |
+| ---------- | ----------- | ------------------------------------------------------------ | --------- | ----------- |
+| `id`       | `id`        | Unique identifier for a side navigation panel item.          | `string`  |             |
+| `disabled` | `disabled`  | (optional) The disabled state of side navigation panel item. | `boolean` | `false`     |
+| `expanded` | `expanded`  | (optional) The expanded state of side navigation panel item. | `boolean` | `false`     |
+| `label`    | `label`     | (optional) Label for the item and the tooltip message.       | `string`  | `undefined` |
+| `menuIcon` | `menu-icon` | (optional) A built-in menu icon string or a image url.       | `string`  | `undefined` |
+| `selected` | `selected`  | (optional) The selected state of side navigation panel item. | `boolean` | `false`     |
 
 ## Events
 
