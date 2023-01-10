@@ -1,0 +1,25 @@
+name: Mend Scan
+
+on:
+  schedule:
+    - cron: '0 0 1 * *'
+
+jobs:
+  scan:
+    name: Mend Scan Runner
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          submodules: 'true'
+
+      - name: Run Mend Scan Action
+        uses: trimble-oss/gh-actions/mend-scanner@main
+
+        with:
+          apiKey: ${{ secrets.WSS_API_KEY }}
+          configFile: 'wss-unified-agent.config'
