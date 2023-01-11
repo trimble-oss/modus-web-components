@@ -463,7 +463,7 @@ export declare interface ModusNavbar extends Components.ModusNavbar {
   /**
    * An event that fires on main menu click. 
    */
-  mainMenuClick: EventEmitter<CustomEvent<MouseEvent>>;
+  mainMenuClick: EventEmitter<CustomEvent<KeyboardEvent | MouseEvent>>;
   /**
    * An event that fires on product logo click. 
    */
@@ -756,37 +756,33 @@ export class ModusSideNavigation {
 
 export declare interface ModusSideNavigationItem extends Components.ModusSideNavigationItem {
   /**
-   * An event that fires on item selection. 
+   * An event that fires when mouse click or `Enter` key press on an item. 
    */
-  sideNavItemSelected: EventEmitter<CustomEvent<{ id: string; selected: boolean }>>;
+  sideNavItemClicked: EventEmitter<CustomEvent<{ id: string; selected: boolean }>>;
   /**
    * An event that fires when an item is in focus. 
    */
   sideNavItemFocus: EventEmitter<CustomEvent<{ id: string }>>;
-  /**
-   * An event that fires when an item's level expand icon is clicked. 
-   */
-  sideNavItemLevelExpandClick: EventEmitter<CustomEvent<{ id: string }>>;
 
 }
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['disabled', 'expanded', 'label', 'menuIcon', 'selected'],
+  inputs: ['disableSelection', 'disabled', 'expanded', 'label', 'menuIcon', 'selected', 'showExpandIcon'],
   methods: ['focusItem']
 })
 @Component({
   selector: 'modus-side-navigation-item',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['disabled', 'expanded', 'label', 'menuIcon', 'selected']
+  inputs: ['disableSelection', 'disabled', 'expanded', 'label', 'menuIcon', 'selected', 'showExpandIcon']
 })
 export class ModusSideNavigationItem {
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['sideNavItemSelected', 'sideNavItemFocus', 'sideNavItemLevelExpandClick']);
+    proxyOutputs(this, this.el, ['sideNavItemClicked', 'sideNavItemFocus']);
   }
 }
 

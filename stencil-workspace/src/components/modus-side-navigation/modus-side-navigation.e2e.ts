@@ -93,30 +93,6 @@ describe('modus-side-navigation', () => {
   expect(computedStyle['width']).toEqual('300px');
   });
 
-  it('emits sideNavExpand event', async () => {
-    const page = await newE2EPage();
-
-    await page.setContent(`
-  <modus-side-navigation>
-    <modus-side-navigation-item label="Test">
-      <svg slot="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="24" width="24" viewBox="0 0 32 32">
-        <g>
-          <path d="m27.707 14.293-11-11a1 1 0 0 0-1.414 0l-11 11A1 1 0 0 0 5 16h5v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V16h5a1 1 0 0 0 .707-1.707z"/>
-        </g>
-      </svg>
-    </modus-side-navigation-item>
-  </modus-side-navigation>`);
-    const component = await page.find('modus-side-navigation');
-    const expandEvent = await page.spyOnEvent('sideNavExpand');
-
-    component.setProperty('expanded', 'true');
-    await page.waitForChanges();
-    await new Promise((r) => setTimeout(r, 300));
-
-    expect(expandEvent).toHaveReceivedEvent();
-    expect(expandEvent).toHaveReceivedEventDetail(true);
-  });
-
   it('renders changes to mode prop', async () => {
     const page = await newE2EPage();
     await page.setContent(`<div><modus-side-navigation max-width="300px">
@@ -149,6 +125,31 @@ describe('modus-side-navigation', () => {
     computedStyle = await element.getComputedStyle();
     expect(computedStyle['marginLeft']).toEqual('300px');
   });
+
+  it('emits sideNavExpand event', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+  <modus-side-navigation>
+    <modus-side-navigation-item label="Test">
+      <svg slot="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="24" width="24" viewBox="0 0 32 32">
+        <g>
+          <path d="m27.707 14.293-11-11a1 1 0 0 0-1.414 0l-11 11A1 1 0 0 0 5 16h5v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V16h5a1 1 0 0 0 .707-1.707z"/>
+        </g>
+      </svg>
+    </modus-side-navigation-item>
+  </modus-side-navigation>`);
+    const component = await page.find('modus-side-navigation');
+    const expandEvent = await page.spyOnEvent('sideNavExpand');
+
+    component.setProperty('expanded', 'true');
+    await page.waitForChanges();
+    await new Promise((r) => setTimeout(r, 300));
+
+    expect(expandEvent).toHaveReceivedEvent();
+    expect(expandEvent).toHaveReceivedEventDetail(true);
+  });
+
 });
 
 // Modus side navigation item
@@ -221,6 +222,55 @@ describe('modus-side-navigation-item', () => {
     expect(element).toHaveClass('disabled');
   });
 
+  it('renders changes to disableSelection prop', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<modus-side-navigation>
+    <modus-side-navigation-item label="Test">
+      <svg slot="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="24" width="24" viewBox="0 0 32 32">
+        <g>
+          <path d="m27.707 14.293-11-11a1 1 0 0 0-1.414 0l-11 11A1 1 0 0 0 5 16h5v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V16h5a1 1 0 0 0 .707-1.707z"/>
+        </g>
+      </svg>
+    </modus-side-navigation-item>
+  </modus-side-navigation>`);
+
+    const component = await page.find('modus-side-navigation-item');
+    const element = await page.find('modus-side-navigation-item >>> li');
+    expect(element).not.toHaveClass('disabled');
+
+    component.setProperty('disableSelection', 'true');
+    await page.waitForChanges();
+
+    await component.click();
+    await page.waitForChanges();
+
+    expect(element).not.toHaveClass('selected');
+  });
+
+  it('renders changes to showExpandIcon prop', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<modus-side-navigation>
+    <modus-side-navigation-item label="Test">
+      <svg slot="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="24" width="24" viewBox="0 0 32 32">
+        <g>
+          <path d="m27.707 14.293-11-11a1 1 0 0 0-1.414 0l-11 11A1 1 0 0 0 5 16h5v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V16h5a1 1 0 0 0 .707-1.707z"/>
+        </g>
+      </svg>
+    </modus-side-navigation-item>
+  </modus-side-navigation>`);
+
+    const component = await page.find('modus-side-navigation-item');
+    let element = await page.find('modus-side-navigation-item >>> .level-icon > svg');
+
+    expect(element).toBeFalsy();
+
+    component.setProperty('showExpandIcon', 'true');
+    await page.waitForChanges();
+
+    element = await page.find('modus-side-navigation-item >>> .level-icon > svg');
+    expect(element).toBeTruthy();
+  });
+
   it('renders changes to selected prop', async () => {
     const page = await newE2EPage();
     await page.setContent(`<modus-side-navigation>
@@ -268,7 +318,7 @@ describe('modus-side-navigation-item', () => {
     expect(element).toBeTruthy();
   });
 
-  it('emits sideNavItemSelected event', async () => {
+  it('emits sideNavItemClicked event', async () => {
     const page = await newE2EPage();
 
     await page.setContent(`
@@ -282,13 +332,13 @@ describe('modus-side-navigation-item', () => {
     </modus-side-navigation-item>
   </modus-side-navigation>`);
     const component = await page.find('modus-side-navigation-item');
-    const selectedEvent = await page.spyOnEvent('sideNavItemSelected');
+    const clickedEvent = await page.spyOnEvent('sideNavItemClicked');
     const focusEvent = await page.spyOnEvent('sideNavItemFocus');
 
     await component.click();
     await page.waitForChanges();
 
-    expect(selectedEvent).toHaveReceivedEvent();
+    expect(clickedEvent).toHaveReceivedEvent();
     expect(focusEvent).toHaveReceivedEvent();
   });
 });

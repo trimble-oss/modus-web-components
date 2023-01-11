@@ -3,7 +3,6 @@ import {
   Component,
   Prop,
   Element,
-  State,
   Event,
   EventEmitter,
   Method,
@@ -21,6 +20,9 @@ export class ModusSideNavigationItem {
   /** (optional) The disabled state of side navigation panel item. */
   @Prop() disabled = false;
 
+  /** (optional) Disables item selection. */
+  @Prop({ mutable: true, reflect: true }) disableSelection = false;
+
   /** (optional) The expanded state of side navigation panel item. */
   @Prop({ mutable: true, reflect: true }) expanded = false;
 
@@ -33,14 +35,14 @@ export class ModusSideNavigationItem {
   /** (optional) The selected state of side navigation panel item. */
   @Prop({ mutable: true, reflect: true }) selected = false;
 
-  /** An event that fires on item selection.  */
-  @Event() sideNavItemSelected: EventEmitter<{ id: string; selected: boolean }>;
+  /** (optional) Shows the expand icon. */
+  @Prop({ mutable: true, reflect: true }) showExpandIcon = false;
+
+  /** An event that fires when mouse click or `Enter` key press on an item.  */
+  @Event() sideNavItemClicked: EventEmitter<{ id: string; selected: boolean }>;
 
   /** An event that fires when an item is in focus.  */
   @Event() sideNavItemFocus: EventEmitter<{ id: string }>;
-
-  /** An event that fires when an item's level expand icon is clicked.  */
-  @Event() sideNavItemLevelExpandClick: EventEmitter<{ id: string }>;
 
   /**
    * @internal
@@ -53,8 +55,6 @@ export class ModusSideNavigationItem {
    * Only to be used by modus side navigation components
    */
   @Event() _sideNavItemRemoved: EventEmitter<HTMLElement>;
-
-  @State() _children: HTMLModusSideNavigationItemElement[];
 
   private _itemRef: HTMLLIElement;
   @Method()
@@ -70,30 +70,19 @@ export class ModusSideNavigationItem {
     this._sideNavItemRemoved.emit(this.element);
   }
 
-  handleDefaultSlotChange(): void {
-    this._children = Array.from(
-      this.element.children as unknown as HTMLModusSideNavigationItemElement[]
-    ).filter((i) => i && i.nodeName === 'MODUS-SIDE-NAVIGATION-ITEM');
-  }
-
-  handleClick(e: Event): void {
+  handleClick(): void {
     if (this.disabled) return;
 
-    if (this._children?.length) {
-      this.sideNavItemLevelExpandClick.emit({ id: this.element.id });
-      e.stopPropagation();
-    } else {
-      this.selected = !this.selected;
-      this.sideNavItemSelected?.emit({
-        id: this.element.id,
-        selected: this.selected,
-      });
-    }
+    this.selected = this.disableSelection ? this.selected : !this.selected;
+    this.sideNavItemClicked?.emit({
+      id: this.element.id,
+      selected: this.selected,
+    });
   }
 
   handleKeyDown(e: KeyboardEvent): void {
     if (e.code.toUpperCase() === 'ENTER' || e.code.toUpperCase() === 'SPACE') {
-      this.handleClick(e);
+      this.handleClick();
     }
   }
 
@@ -109,7 +98,7 @@ export class ModusSideNavigationItem {
         ref={(el) => (this._itemRef = el)}
         tabIndex={this.disabled ? -1 : 0}
         class={classes}
-        onClick={(e) => this.handleClick(e)}
+        onClick={() => this.handleClick()}
         onKeyDown={(e) => this.handleKeyDown(e)}
         aria-disabled={this.disabled ? 'true' : null}
         aria-label={this.label}
@@ -132,11 +121,7 @@ export class ModusSideNavigationItem {
         {this.expanded && <div class="menu-text">{this.label}</div>}
 
         <div class="level-icon">
-          {this._children?.length > 0 && <IconMap icon="chevron-right-thick" />}
-        </div>
-
-        <div style={{ display: 'none' }}>
-          <slot onSlotchange={() => this.handleDefaultSlotChange()}></slot>
+          {this.showExpandIcon && <IconMap icon="chevron-right-thick" />}
         </div>
       </li>
     );

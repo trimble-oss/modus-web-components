@@ -7,22 +7,23 @@
 
 ## Properties
 
-| Property   | Attribute   | Description                                                  | Type      | Default     |
-| ---------- | ----------- | ------------------------------------------------------------ | --------- | ----------- |
-| `disabled` | `disabled`  | (optional) The disabled state of side navigation panel item. | `boolean` | `false`     |
-| `expanded` | `expanded`  | (optional) The expanded state of side navigation panel item. | `boolean` | `false`     |
-| `label`    | `label`     | (optional) Label for the item and the tooltip message.       | `string`  | `undefined` |
-| `menuIcon` | `menu-icon` | (optional) A built-in menu icon string or a image url.       | `string`  | `undefined` |
-| `selected` | `selected`  | (optional) The selected state of side navigation panel item. | `boolean` | `false`     |
+| Property           | Attribute           | Description                                                  | Type      | Default     |
+| ------------------ | ------------------- | ------------------------------------------------------------ | --------- | ----------- |
+| `disableSelection` | `disable-selection` | (optional) Disables item selection.                          | `boolean` | `false`     |
+| `disabled`         | `disabled`          | (optional) The disabled state of side navigation panel item. | `boolean` | `false`     |
+| `expanded`         | `expanded`          | (optional) The expanded state of side navigation panel item. | `boolean` | `false`     |
+| `label`            | `label`             | (optional) Label for the item and the tooltip message.       | `string`  | `undefined` |
+| `menuIcon`         | `menu-icon`         | (optional) A built-in menu icon string or a image url.       | `string`  | `undefined` |
+| `selected`         | `selected`          | (optional) The selected state of side navigation panel item. | `boolean` | `false`     |
+| `showExpandIcon`   | `show-expand-icon`  | (optional) Shows the expand icon.                            | `boolean` | `false`     |
 
 
 ## Events
 
-| Event                         | Description                                                      | Type                                              |
-| ----------------------------- | ---------------------------------------------------------------- | ------------------------------------------------- |
-| `sideNavItemFocus`            | An event that fires when an item is in focus.                    | `CustomEvent<{ id: string; }>`                    |
-| `sideNavItemLevelExpandClick` | An event that fires when an item's level expand icon is clicked. | `CustomEvent<{ id: string; }>`                    |
-| `sideNavItemSelected`         | An event that fires on item selection.                           | `CustomEvent<{ id: string; selected: boolean; }>` |
+| Event                | Description                                                           | Type                                              |
+| -------------------- | --------------------------------------------------------------------- | ------------------------------------------------- |
+| `sideNavItemClicked` | An event that fires when mouse click or `Enter` key press on an item. | `CustomEvent<{ id: string; selected: boolean; }>` |
+| `sideNavItemFocus`   | An event that fires when an item is in focus.                         | `CustomEvent<{ id: string; }>`                    |
 
 
 ## Methods

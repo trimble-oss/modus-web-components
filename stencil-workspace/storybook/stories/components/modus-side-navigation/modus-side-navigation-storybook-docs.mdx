@@ -9,6 +9,7 @@ import { Story } from '@storybook/addon-docs';
 #### Implementation Details
 
 - There are two ways to add a Modus Side Navigation, either use the tags `modus-side-navigation` for root and `modus-side-navigation-item` for menu items or pass an object array for the prop `data`.
+- For modus side navigation to maintain state `modus-side-navigation-item` tag requires `id` which should be a unique identifier.
 - The `expanded` prop on `modus-side-navigation` controls the expanded state of all the side navigation menu items.
 - The width of the panel in an expanded state can be set using `maxWidth` prop.
 - The prop `label` on `modus-side-navigation-item` is used for menu text and a `modus-side-navigation-item` can be manually selected using `selected` prop.
@@ -39,7 +40,10 @@ A basic Modus Side Navigation with only item selection and keyboard navigation f
   <div
     id="container"
     style="display:flex; min-height:500px; overflow-y: auto; position: relative;box-shadow: 0 0 2px var(--modus-secondary)!important;">
-    <modus-side-navigation max-width="300px" id="sideNav">
+    <modus-side-navigation
+      max-width="300px"
+      id="sideNav"
+      target-content="#defaultTemplate #panelcontent">
       <modus-side-navigation-item id="home-menu" label="Home page">
         <svg
           slot="menu-icon"
@@ -100,7 +104,7 @@ A basic Modus Side Navigation with only item selection and keyboard navigation f
       </modus-side-navigation-item>
     </modus-side-navigation>
 
-    <div id="panelcontent">
+    <div id="panelcontent" style="padding:10px;">
       <div id="overview">
         <p>
           The side navigation of an application provides context through
@@ -135,22 +139,10 @@ A basic Modus Side Navigation with only item selection and keyboard navigation f
       panel.expanded = !panel.expanded;
     });
 
-    document
-      .querySelector('modus-side-navigation')
-      .addEventListener('sideNavExpand', (e) => {
-        const content = document.querySelector('#panelcontent');
-        const expanded = e.detail;
-        if (expanded) {
-          content.style.marginLeft = '310px';
-        } else {
-          content.style.marginLeft = '70px';
-        }
-      });
-
     Array.from(document.querySelectorAll('modus-side-navigation-item')).forEach(
       (c) => {
-        c.addEventListener('sideNavItemSelected', function callbackfn(e) {
-          if (e.detail) {
+        c.addEventListener('sideNavItemClicked', function callbackfn(e) {
+          if (e.detail.selected) {
             const panel = document.querySelector('#panelcontent');
             document.querySelector('#sidenav-content-title')?.remove();
             const el = document.createElement('h3');
@@ -172,12 +164,27 @@ A basic Modus Side Navigation with only item selection and keyboard navigation f
 
 For side navigation with multiple levels, `data` prop can be used to pass the details of parents and its children.
 
+#### Modus Side Navigation Types
+
+Modus side navigation can be configured to overlay the page's content or push the page's content. Specifying the selector for the page's content will enable the side navigation to set the necessary paddings and margins.
+
+Use the prop `mode` to choose whether to overlay or push and use the prop `target-content` to set the page's content selector. Listening to event `sideNavExpand` can also be used as an alternative to set the paddings and margins.
+
+#### Modus Side Navigation Blue Theme
+
+Modus side navigation uses CSS variables for theming ex:`--modus-side-navigation-bg: #fff;`, it can be leveraged to apply a blue theme too as shown in the example below.
+
 <Story id="components-side-navigation--side-navigation-with-data" />
 
 ```html
 <div id="dataTemplate">
+  <modus-switch id="switch-theme" label="Enable blue theme"></modus-switch>
+  <br />
+  <modus-switch
+    id="switch-mode"
+    label="Enable Push Side Navigation"></modus-switch>
   <div
-    style="width: 100%;align-items: center;height: 56px;box-shadow: 0 0 2px var(--modus-secondary)!important; margin-top: 50px;">
+    style="width: 100%;align-items: center;height: 56px;box-shadow: 0 0 2px var(--modus-secondary)!important; margin-top: 10px;">
     <modus-navbar
       id="navbar"
       show-apps-menu
@@ -186,12 +193,20 @@ For side navigation with multiple levels, `data` prop can be used to pass the de
       show-notifications>
     </modus-navbar>
   </div>
+
   <div
     id="container"
     style="display:flex; min-height:500px; overflow-y: auto; position: relative;box-shadow: 0 0 2px var(--modus-secondary)!important;">
-    <modus-side-navigation max-width="300px" id="sideNav">
+    <modus-side-navigation
+      max-width="300px"
+      id="sideNav"
+      target-content="#dataTemplate #panelcontent"
+      mode="overlay">
     </modus-side-navigation>
-    <div id="panelcontent">
+
+    <div
+      id="panelcontent"
+      style="padding:10px; transition: all 0.25s linear 0s;">
       <div id="overview">
         <p>
           The side navigation of an application provides context through
@@ -242,6 +257,9 @@ For side navigation with multiple levels, `data` prop can be used to pass the de
       panel.insertBefore(el, document.querySelector('#overview'));
     }
   };
+
+  const blueTheme = `--modus-side-navigation-bg:#0e416c;--modus-side-navigation-item-color:#ffffff;--modus-side-navigation-item-active-bg:#217cbb;--modus-side-navigation-item-hover-bg:#0063a3;--modus-side-navigation-item-icon-color:#ffffff;--modus-side-navigation-item-chevron-color:#ffffff;--modus-side-navigation-item-icon-filter:invert(100%) sepia(0%) saturate(24%) hue-rotate(114deg) brightness(108%) contrast(108%);`;
+
   function initialize() {
     const sidenav = document.querySelector('modus-side-navigation');
     sidenav.data = [
@@ -254,7 +272,7 @@ For side navigation with multiple levels, `data` prop can be used to pass the de
             id: 'home-menu-2',
             menuIconUrl: homeIcon,
             label: 'Home page 2',
-            onSideNavItemSelected: selectionHandler,
+            onSideNavItemClicked: selectionHandler,
           },
           {
             id: 'usage-menu-2',
@@ -263,12 +281,11 @@ For side navigation with multiple levels, `data` prop can be used to pass the de
                 id: 'home-menu-3',
                 menuIconUrl: homeIcon,
                 label: 'Home page 3',
-                onSideNavItemSelected: selectionHandler,
+                onSideNavItemClicked: selectionHandler,
               },
             ],
             menuIconUrl: usageIcon,
             label: 'Usage page 2',
-            onSideNavItemSelected: selectionHandler,
           },
         ],
       },
@@ -276,72 +293,52 @@ For side navigation with multiple levels, `data` prop can be used to pass the de
         id: 'usage-menu',
         menuIconUrl: usageIcon,
         label: 'Usage page 1',
-        onSideNavItemSelected: selectionHandler,
+        onSideNavItemClicked: selectionHandler,
       },
       {
         id: 'styles-menu',
         menuIconUrl: stylesIcon,
         label: 'Styles page 1',
-        onSideNavItemSelected: selectionHandler,
+        onSideNavItemClicked: selectionHandler,
       },
       {
         id: 'accessibility-menu',
         menuIconUrl: accessibilityIcon,
         label: 'Accessibility page 1',
-        onSideNavItemSelected: selectionHandler,
+        onSideNavItemClicked: selectionHandler,
       },
     ];
   }
 
   function addEventHandlers() {
     document.addEventListener('mainMenuClick', (e) => {
-      const panel = document.querySelector('modus-side-navigation');
-      panel.expanded = !panel.expanded;
+      executeListener(e, () => {
+        const panel = document.querySelector('modus-side-navigation');
+        panel.expanded = !panel.expanded;
+      });
     });
 
     document
-      .querySelector('modus-side-navigation')
-      .addEventListener('sideNavExpand', (e) => {
-        const content = document.querySelector('#panelcontent');
-        const expanded = e.detail;
-        if (expanded) {
-          content.style.marginLeft = '310px';
-        } else {
-          content.style.marginLeft = '70px';
-        }
+      .querySelector('#switch-theme')
+      .addEventListener('switchClick', (e) => {
+        const sidenav = document.querySelector('modus-side-navigation');
+        if (e.detail) {
+          sidenav.style = blueTheme;
+        } else sidenav.style = '';
       });
 
-    Array.from(document.querySelectorAll('modus-side-navigation-item')).forEach(
-      (c) => {
-        c.addEventListener('sideNavItemSelected', function callbackfn(e) {
-          if (e.detail) {
-            const panel = document.querySelector('#panelcontent');
-            document.querySelector('#dummy-text')?.remove();
-            const el = document.createElement('h3');
-            el.id = 'dummy-text';
-            el.innerHTML =
-              document.querySelector('#' + e.detail.id)?.label || 'Home page';
-            panel.insertBefore(el, document.querySelector('#overview'));
-          }
-        });
-      }
-    );
+    document
+      .querySelector('#switch-mode')
+      .addEventListener('switchClick', (e) => {
+        const sidenav = document.querySelector('modus-side-navigation');
+        sidenav.mode = sidenav.mode === 'push' ? 'overlay' : 'push';
+      });
   }
 
   initialize();
   addEventHandlers();
 </script>
 ```
-
-### Modus Side Navigation Types
-
-Modus side navigation can be configured to overlay the page's content or push the page's content. Specifying the selector for the page's content will enable Modus side navigation component to set the necessary paddings and margins.
-
-Use the prop `mode` to choose whether to overlay or push and use the prop `target-content` to set the page's content selector. Listening to event `sideNavExpand` can also be used as an alternative to set the paddings and margins manually. Please refer to the example above.
-
-### Modus Side Navigation Blue Theme
-
-Modus side navigation uses CSS variables for theming ex:`--modus-side-navigation-bg: #fff;`, it can be leveraged to apply a blue theme too as shown in the example above.
 
 ### Properties
 
@@ -363,19 +360,20 @@ Modus side navigation uses CSS variables for theming ex:`--modus-side-navigation
 
 #### Modus Side Navigation Item
 
-| Property   | Attribute   | Description                                                  | Type      | Default     |
-| ---------- | ----------- | ------------------------------------------------------------ | --------- | ----------- |
-| `id`       | `id`        | Unique identifier for a side navigation panel item.          | `string`  |             |
-| `disabled` | `disabled`  | (optional) The disabled state of side navigation panel item. | `boolean` | `false`     |
-| `expanded` | `expanded`  | (optional) The expanded state of side navigation panel item. | `boolean` | `false`     |
-| `label`    | `label`     | (optional) Label for the item and the tooltip message.       | `string`  | `undefined` |
-| `menuIcon` | `menu-icon` | (optional) A built-in menu icon string or a image url.       | `string`  | `undefined` |
-| `selected` | `selected`  | (optional) The selected state of side navigation panel item. | `boolean` | `false`     |
+| Property           | Attribute           | Description                                                  | Type      | Default     |
+| ------------------ | ------------------- | ------------------------------------------------------------ | --------- | ----------- |
+| `id`               | `id`                | Unique identifier for a side navigation panel item.          | `string`  |             |
+| `disableSelection` | `disable-selection` | (optional) Disables item selection.                          | `boolean` | `false`     |
+| `disabled`         | `disabled`          | (optional) The disabled state of side navigation panel item. | `boolean` | `false`     |
+| `expanded`         | `expanded`          | (optional) The expanded state of side navigation panel item. | `boolean` | `false`     |
+| `label`            | `label`             | (optional) Label for the item and the tooltip message.       | `string`  | `undefined` |
+| `menuIcon`         | `menu-icon`         | (optional) A built-in menu icon string or a image url.       | `string`  | `undefined` |
+| `selected`         | `selected`          | (optional) The selected state of side navigation panel item. | `boolean` | `false`     |
+| `showExpandIcon`   | `show-expand-icon`  | (optional) Shows the expand icon.                            | `boolean` | `false`     |
 
 ## Events
 
-| Event                         | Description                                                      | Type                                              |
-| ----------------------------- | ---------------------------------------------------------------- | ------------------------------------------------- |
-| `sideNavItemFocus`            | An event that fires when an item is in focus.                    | `CustomEvent<{ id: string; }>`                    |
-| `sideNavItemLevelExpandClick` | An event that fires when an item's level expand icon is clicked. | `CustomEvent<{ id: string; }>`                    |
-| `sideNavItemSelected`         | An event that fires on item selection.                           | `CustomEvent<{ id: string; selected: boolean; }>` |
+| Event                | Description                                                           | Type                                              |
+| -------------------- | --------------------------------------------------------------------- | ------------------------------------------------- |
+| `sideNavItemClicked` | An event that fires when mouse click or `Enter` key press on an item. | `CustomEvent<{ id: string; selected: boolean; }>` |
+| `sideNavItemFocus`   | An event that fires when an item is in focus.                         | `CustomEvent<{ id: string; }>`                    |

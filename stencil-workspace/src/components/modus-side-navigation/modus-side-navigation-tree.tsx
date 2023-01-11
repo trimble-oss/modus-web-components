@@ -4,7 +4,9 @@ import { ModusSideNavigationItemInfo } from './modus-side-navigation.types';
 
 export const ModusSideNavigationTree: FunctionalComponent<{
   data: ModusSideNavigationItemInfo[];
-}> = ({ data }) => {
+  itemSelected?: string;
+  tabIndex?: number;
+}> = ({ data, itemSelected, tabIndex }) => {
   if (!data?.length) return null;
 
   return data?.map(
@@ -15,23 +17,27 @@ export const ModusSideNavigationTree: FunctionalComponent<{
       label,
       menuIcon,
       children,
-      onSideNavItemSelected,
+      onSideNavItemClicked,
       options,
     }) => {
       const props = options ? Object.fromEntries(options) : {};
+      const defaults = children?.length
+        ? { showExpandIcon: true, disableSelection: true }
+        : {};
+
       return (
         <modus-side-navigation-item
           id={id}
           disabled={disabled}
-          selected={selected}
+          selected={selected || itemSelected === id}
           label={label}
           menuIcon={menuIcon}
-          onSideNavItemSelected={(e) =>
-            onSideNavItemSelected && onSideNavItemSelected(e)
+          onSideNavItemClicked={(e) =>
+            onSideNavItemClicked && onSideNavItemClicked(e)
           }
-          {...props}>
-          {<ModusSideNavigationTree data={children}></ModusSideNavigationTree>}
-        </modus-side-navigation-item>
+          {...defaults}
+          tabIndex={tabIndex}
+          {...props}></modus-side-navigation-item>
       );
     }
   );

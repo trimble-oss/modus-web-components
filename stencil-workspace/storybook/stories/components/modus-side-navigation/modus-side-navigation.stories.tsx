@@ -34,7 +34,10 @@ const DefaultTemplate = () => html`
     <div
       id="container"
       style="display:flex; min-height:500px; overflow-y: auto; position: relative;box-shadow: 0 0 2px var(--modus-secondary)!important;">
-      <modus-side-navigation max-width="300px" id="sideNav">
+      <modus-side-navigation
+        max-width="300px"
+        id="sideNav"
+        target-content="#defaultTemplate #panelcontent">
         <modus-side-navigation-item id="home-menu" label="Home page">
           <svg
             slot="menu-icon"
@@ -97,7 +100,7 @@ const DefaultTemplate = () => html`
         </modus-side-navigation-item>
       </modus-side-navigation>
 
-      <div id="panelcontent">
+      <div id="panelcontent" style="padding: 10px;">
         <div id="overview">
           <p>
             The side navigation of an application provides context through
@@ -147,7 +150,9 @@ const SideNavigationWithDataTemplate = () => html`
         mode="overlay">
       </modus-side-navigation>
 
-      <div id="panelcontent" style="padding:10px;">
+      <div
+        id="panelcontent"
+        style="padding:10px; transition: all 0.25s linear 0s;">
         <div id="overview">
           <p>
             The side navigation of an application provides context through
@@ -207,32 +212,19 @@ const helpers = (containerId) => {
 const setJavascriptDefaultTemplate = (containerId) => {
   const tag = document.createElement('script');
   tag.innerHTML = `
-  function defaultTempalte(){
+  function defaultTemplate(){
     ${helpers(containerId)}
 
     function addEventHandlers(){
-      document.addEventListener('mainMenuClick', (e)=> {
+      getRoot().addEventListener('mainMenuClick', (e)=> {
         executeListener(e, ()=>{
           const panel = getRoot().querySelector('modus-side-navigation');
           panel.expanded = !panel.expanded;
         });
       });
 
-      getRoot().querySelector('modus-side-navigation').addEventListener('sideNavExpand', (e)=>{
-        executeListener(e, ()=>{
-          const content =getRoot().querySelector('#panelcontent');
-          const expanded = e.detail;
-          if(expanded) {
-            content.style.marginLeft="310px";
-          }
-          else{
-            content.style.marginLeft="70px";
-          }
-        });
-      });
-
       Array.from(getRoot().querySelectorAll('modus-side-navigation-item')).forEach(c => {
-        c.addEventListener('sideNavItemSelected', function callbackfn(e){
+        c.addEventListener('sideNavItemClicked', function callbackfn(e){
           executeListener(e, () => {
             if(e.detail){
               const panel =getRoot().querySelector('#panelcontent');
@@ -249,7 +241,7 @@ const setJavascriptDefaultTemplate = (containerId) => {
 
     addEventHandlers();
   }
-  defaultTempalte();
+  defaultTemplate();
   `;
 
   return tag;
@@ -269,7 +261,7 @@ const setJavascriptDataTemplate = (containerId) => {
     "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='currentColor' height='24' width='24' viewBox='0 0 32 32'%3E%3Cg%3E%3Cpath d='M29 4H3c-.55 0-1 .45-1 1v17c0 .55.45 1 1 1h12v3h-4c-.55 0-1 .45-1 1s.45 1 1 1h10c.55 0 1-.45 1-1s-.45-1-1-1h-4v-3h12c.55 0 1-.45 1-1V5c0-.55-.45-1-1-1zm-1 17H4v-2h24v2z' /%3E%3C/g%3E%3C/svg%3E";
 
   const selectionHandler = `
-    onSideNavItemSelected: (e)=>{
+    onSideNavItemClicked: (e)=>{
       executeListener(e, () => {
         if(e.detail){
           const panel =getRoot().querySelector('#panelcontent');
@@ -313,9 +305,8 @@ const setJavascriptDataTemplate = (containerId) => {
                   label: 'Home page 3',
                   ${selectionHandler}
                 }],
-              menuIcon: "${usageIcon}"            ,
-              label: 'Usage page 2',
-              ${selectionHandler}
+              menuIcon: "${usageIcon}",
+              label: 'Usage page 2'
             }],
         },
         {
@@ -340,7 +331,7 @@ const setJavascriptDataTemplate = (containerId) => {
     }
 
     function addEventHandlers(){
-      document.addEventListener('mainMenuClick', (e)=> {
+      getRoot().addEventListener('mainMenuClick', (e)=> {
         executeListener(e, ()=>{
           const panel = getRoot().querySelector('modus-side-navigation');
           panel.expanded = !panel.expanded;
@@ -359,21 +350,6 @@ const setJavascriptDataTemplate = (containerId) => {
 
         const sidenav = getRoot().querySelector('modus-side-navigation');
         sidenav.mode = sidenav.mode === 'push' ? 'overlay' : 'push';
-      });
-
-      Array.from(getRoot().querySelectorAll('modus-side-navigation-item')).forEach(c => {
-        c.addEventListener('sideNavItemSelected', function callbackfn(e){
-          executeListener(e, () => {
-            if(e.detail){
-              const panel =getRoot().querySelector('#panelcontent');
-              document.querySelector('#dummy-text')?.remove();
-              const el = document.createElement('h3');
-              el.id="dummy-text";
-              el.innerHTML = getRoot().querySelector("#"+e.detail.id)?.label || "Home page";
-              panel.insertBefore(el, getRoot().querySelector('#overview'))
-            }
-          });
-        });
       });
     }
 

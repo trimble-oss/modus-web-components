@@ -10,14 +10,14 @@
   height: 100%;
   min-width: 4rem !important;
   position: absolute;
-  transition: all 0.25s ease-in 0s;
+  transition: all 0.2s ease-out 0s;
   width: 4rem;
   z-index: 1029;
 
   // added overflow:hidden only when '.expanded' due to the limitation of Modus tooltip issue#958
   &.expanded {
     overflow: hidden;
-    transition: all 0.2s ease-out 0s !important;
+    transition: all 0.25s ease-in 0s !important;
     width: 16rem;
   }
 
@@ -51,8 +51,8 @@
 
     .collapsing {
       height: 0;
-      opacity: 0;
       position: relative;
+      opacity: 0;
       transition: all 0.25s ease-in 0s;
 
       &.show {
@@ -63,11 +63,16 @@
     .level-headings {
       color: $modus-side-navigation-item-color;
       font-family: $primary-font !important;
-      margin-bottom: 1rem;
       padding-left: 1.25rem;
+      display: flex;
+      flex-direction: column;
 
-      svg.icon-chevron-left-thick > path {
-        fill: $modus-side-navigation-item-chevron-color;
+      svg.icon-chevron-left-thick {
+        padding-right: 1rem;
+
+        path {
+          fill: $modus-side-navigation-item-chevron-color;
+        }
       }
 
       &:focus {
@@ -75,15 +80,18 @@
         outline: none;
       }
 
+      p {
+        margin-block-end: 0;
+      }
+
       h4 {
-        margin: 0;
+        margin-block-end: 1em;
       }
 
       a {
         color: $modus-side-navigation-link-color;
         cursor: pointer;
         font-size: $rem-14px !important;
-        padding-left: 1rem;
 
         &:hover {
           text-decoration: underline;

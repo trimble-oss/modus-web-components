@@ -25,12 +25,12 @@
 
 ## Events
 
-| Event                     | Description                                         | Type                      |
-| ------------------------- | --------------------------------------------------- | ------------------------- |
-| `mainMenuClick`           | An event that fires on main menu click.             | `CustomEvent<MouseEvent>` |
-| `productLogoClick`        | An event that fires on product logo click.          | `CustomEvent<MouseEvent>` |
-| `profileMenuLinkClick`    | An event that fires on profile menu link click.     | `CustomEvent<string>`     |
-| `profileMenuSignOutClick` | An event that fires on profile menu sign out click. | `CustomEvent<MouseEvent>` |
+| Event                     | Description                                         | Type                                       |
+| ------------------------- | --------------------------------------------------- | ------------------------------------------ |
+| `mainMenuClick`           | An event that fires on main menu click.             | `CustomEvent<KeyboardEvent \| MouseEvent>` |
+| `productLogoClick`        | An event that fires on product logo click.          | `CustomEvent<MouseEvent>`                  |
+| `profileMenuLinkClick`    | An event that fires on profile menu link click.     | `CustomEvent<string>`                      |
+| `profileMenuSignOutClick` | An event that fires on profile menu sign out click. | `CustomEvent<MouseEvent>`                  |
 
 
 ## Methods

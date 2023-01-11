@@ -79,9 +79,6 @@ describe('modus-side-navigation-item', () => {
           </div>
           <div class="level-icon">
           </div>
-          <div style="display: none;">
-            <slot></slot>
-          </div>
         </li>
         </mock:shadow-root>
       </modus-side-navigation-item>

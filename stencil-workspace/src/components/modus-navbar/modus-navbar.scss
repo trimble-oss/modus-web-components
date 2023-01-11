@@ -152,7 +152,8 @@ nav {
         width: 32px;
       }
 
-      > :first-child:hover {
+      > :first-child:hover,
+      > :first-child:focus {
         border: $rem-4px solid $modus-navbar-icon-color;
       }
 

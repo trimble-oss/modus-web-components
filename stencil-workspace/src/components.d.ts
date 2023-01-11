@@ -630,6 +630,10 @@ export namespace Components {
     }
     interface ModusSideNavigationItem {
         /**
+          * (optional) Disables item selection.
+         */
+        "disableSelection": boolean;
+        /**
           * (optional) The disabled state of side navigation panel item.
          */
         "disabled": boolean;
@@ -650,6 +654,10 @@ export namespace Components {
           * (optional) The selected state of side navigation panel item.
          */
         "selected": boolean;
+        /**
+          * (optional) Shows the expand icon.
+         */
+        "showExpandIcon": boolean;
     }
     interface ModusSlider {
         /**
@@ -1971,6 +1979,10 @@ declare namespace LocalJSX {
     }
     interface ModusSideNavigationItem {
         /**
+          * (optional) Disables item selection.
+         */
+        "disableSelection"?: boolean;
+        /**
           * (optional) The disabled state of side navigation panel item.
          */
         "disabled"?: boolean;
@@ -1987,23 +1999,23 @@ declare namespace LocalJSX {
          */
         "menuIcon"?: string;
         /**
+          * An event that fires when mouse click or `Enter` key press on an item.
+         */
+        "onSideNavItemClicked"?: (event: ModusSideNavigationItemCustomEvent<{ id: string; selected: boolean }>) => void;
+        /**
           * An event that fires when an item is in focus.
          */
         "onSideNavItemFocus"?: (event: ModusSideNavigationItemCustomEvent<{ id: string }>) => void;
-        /**
-          * An event that fires when an item's level expand icon is clicked.
-         */
-        "onSideNavItemLevelExpandClick"?: (event: ModusSideNavigationItemCustomEvent<{ id: string }>) => void;
-        /**
-          * An event that fires on item selection.
-         */
-        "onSideNavItemSelected"?: (event: ModusSideNavigationItemCustomEvent<{ id: string; selected: boolean }>) => void;
         "on_sideNavItemAdded"?: (event: ModusSideNavigationItemCustomEvent<HTMLElement>) => void;
         "on_sideNavItemRemoved"?: (event: ModusSideNavigationItemCustomEvent<HTMLElement>) => void;
         /**
           * (optional) The selected state of side navigation panel item.
          */
         "selected"?: boolean;
+        /**
+          * (optional) Shows the expand icon.
+         */
+        "showExpandIcon"?: boolean;
     }
     interface ModusSlider {
         /**
