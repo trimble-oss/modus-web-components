@@ -2,6 +2,7 @@
 import { FunctionalComponent, h } from '@stencil/core';
 import { IconAdd } from './icon-add';
 import { IconApps } from './icon-apps';
+import { IconCalendar } from './icon-calendar';
 import { IconCancel } from './icon-cancel';
 import { IconCheck } from './icon-check';
 import { IconCheckCircle } from './icon-check-circle';
@@ -26,6 +27,7 @@ import { IconRemove } from './icon-remove';
 import { IconSearch } from './icon-search';
 import { IconSortAZ } from './icon-sort-a-z';
 import { IconSortZA } from './icon-sort-z-a';
+import { IconTriangleLeft } from './icon-triangle-left';
 import { IconTriangleDown } from './icon-triangle-down';
 import { IconUploadCloud } from './icon-upload-cloud';
 import { IconWarning } from './icon-warning';
@@ -63,6 +65,14 @@ export const IconMap: FunctionalComponent<IconMapProps> = (
     case 'apps':
       return (
         <IconApps
+          color={props.color}
+          onClick={props.onClick}
+          size={props.size}
+        />
+      );
+    case 'calendar':
+      return (
+        <IconCalendar
           color={props.color}
           onClick={props.onClick}
           size={props.size}
@@ -287,6 +297,14 @@ export const IconMap: FunctionalComponent<IconMapProps> = (
     case 'triangle-down':
       return (
         <IconTriangleDown
+          color={props.color}
+          onClick={props.onClick}
+          size={props.size}
+        />
+      );
+    case 'triangle-left':
+      return (
+        <IconTriangleLeft
           color={props.color}
           onClick={props.onClick}
           size={props.size}

@@ -7,6 +7,7 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSortEvent, ModusTableSelectionOptions, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
+import { DateInputEventData, DateInputType } from "./components/modus-date-picker/utils/modus-date-picker.types";
 import { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { ModusNavbarProfileMenuLink } from "./components/modus-navbar/profile-menu/modus-navbar-profile-menu";
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
@@ -217,6 +218,90 @@ export namespace Components {
           * Options for data table column sort.
          */
         "sortOptions"?: ModusTableSortOptions;
+    }
+    interface ModusDateInput {
+        /**
+          * (optional) The input's aria-label.
+         */
+        "ariaLabel": string | null;
+        /**
+          * (optional) Sets autofocus on the input.
+         */
+        "autoFocusInput": boolean;
+        /**
+          * (optional) Disables default validation for the date input.
+         */
+        "disableValidation": boolean;
+        /**
+          * (optional) Whether the input is disabled.
+         */
+        "disabled": boolean;
+        /**
+          * (optional) Custom error text displayed for the input.
+         */
+        "errorText": string;
+        /**
+          * Focus the input.
+         */
+        "focusInput": () => Promise<void>;
+        /**
+          * Gets date object value
+         */
+        "getDate": () => Promise<Date>;
+        /**
+          * (optional) Custom helper text displayed below the input. Default is 'dd/mm/yyyy'
+         */
+        "helperText": string;
+        /**
+          * (optional) Sets input error state.
+         */
+        "invalid": boolean;
+        /**
+          * (optional) The input's label.
+         */
+        "label": string;
+        /**
+          * (optional) The input's placeholder text.
+         */
+        "placeholder": string;
+        /**
+          * (optional) Whether the input's content is read-only
+         */
+        "readOnly": boolean;
+        /**
+          * (optional) Whether the input is required.
+         */
+        "required": boolean;
+        /**
+          * Sets value on the input field
+         */
+        "setDate": (date: Date) => Promise<void>;
+        /**
+          * (optional) Show a calendar icon. Note: Clicking on this icon will only emit an event `calendarIconClicked`.
+         */
+        "showCalendarIcon": boolean;
+        /**
+          * (optional) The input's size.
+         */
+        "size": 'medium' | 'large';
+        /**
+          * (optional) Denotes what type of date and the types are 'start','end','single'. Required when using `modus-date-picker`.
+         */
+        "type": DateInputType;
+        /**
+          * (optional) The input's valid state text.
+         */
+        "validText": string;
+        /**
+          * (optional) The input's value.
+         */
+        "value": string;
+    }
+    interface ModusDatePicker {
+        /**
+          * (optional) Label for the field.
+         */
+        "label": string;
     }
     interface ModusDropdown {
         /**
@@ -637,9 +722,6 @@ export namespace Components {
           * (optional) The disabled state of side navigation panel item.
          */
         "disabled": boolean;
-        /**
-          * (optional) The expanded state of side navigation panel item.
-         */
         "expanded": boolean;
         "focusItem": () => Promise<void>;
         /**
@@ -930,6 +1012,10 @@ export interface ModusDataTableCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusDataTableElement;
 }
+export interface ModusDateInputCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusDateInputElement;
+}
 export interface ModusDropdownCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusDropdownElement;
@@ -1062,6 +1148,18 @@ declare global {
     var HTMLModusDataTableElement: {
         prototype: HTMLModusDataTableElement;
         new (): HTMLModusDataTableElement;
+    };
+    interface HTMLModusDateInputElement extends Components.ModusDateInput, HTMLStencilElement {
+    }
+    var HTMLModusDateInputElement: {
+        prototype: HTMLModusDateInputElement;
+        new (): HTMLModusDateInputElement;
+    };
+    interface HTMLModusDatePickerElement extends Components.ModusDatePicker, HTMLStencilElement {
+    }
+    var HTMLModusDatePickerElement: {
+        prototype: HTMLModusDatePickerElement;
+        new (): HTMLModusDatePickerElement;
     };
     interface HTMLModusDropdownElement extends Components.ModusDropdown, HTMLStencilElement {
     }
@@ -1236,6 +1334,8 @@ declare global {
         "modus-checkbox": HTMLModusCheckboxElement;
         "modus-chip": HTMLModusChipElement;
         "modus-data-table": HTMLModusDataTableElement;
+        "modus-date-input": HTMLModusDateInputElement;
+        "modus-date-picker": HTMLModusDatePickerElement;
         "modus-dropdown": HTMLModusDropdownElement;
         "modus-file-dropzone": HTMLModusFileDropzoneElement;
         "modus-list": HTMLModusListElement;
@@ -1519,6 +1619,90 @@ declare namespace LocalJSX {
           * Options for data table column sort.
          */
         "sortOptions"?: ModusTableSortOptions;
+    }
+    interface ModusDateInput {
+        /**
+          * (optional) The input's aria-label.
+         */
+        "ariaLabel"?: string | null;
+        /**
+          * (optional) Sets autofocus on the input.
+         */
+        "autoFocusInput"?: boolean;
+        /**
+          * (optional) Disables default validation for the date input.
+         */
+        "disableValidation"?: boolean;
+        /**
+          * (optional) Whether the input is disabled.
+         */
+        "disabled"?: boolean;
+        /**
+          * (optional) Custom error text displayed for the input.
+         */
+        "errorText"?: string;
+        /**
+          * (optional) Custom helper text displayed below the input. Default is 'dd/mm/yyyy'
+         */
+        "helperText"?: string;
+        /**
+          * (optional) Sets input error state.
+         */
+        "invalid"?: boolean;
+        /**
+          * (optional) The input's label.
+         */
+        "label"?: string;
+        /**
+          * An event that fires on calendar icon click.
+         */
+        "onCalendarIconClicked"?: (event: ModusDateInputCustomEvent<DateInputEventData>) => void;
+        /**
+          * An event that fires on input value out of focus.
+         */
+        "onDateInputBlur"?: (event: ModusDateInputCustomEvent<DateInputEventData>) => void;
+        /**
+          * An event that fires on input value change.
+         */
+        "onValueChange"?: (event: ModusDateInputCustomEvent<DateInputEventData>) => void;
+        /**
+          * (optional) The input's placeholder text.
+         */
+        "placeholder"?: string;
+        /**
+          * (optional) Whether the input's content is read-only
+         */
+        "readOnly"?: boolean;
+        /**
+          * (optional) Whether the input is required.
+         */
+        "required"?: boolean;
+        /**
+          * (optional) Show a calendar icon. Note: Clicking on this icon will only emit an event `calendarIconClicked`.
+         */
+        "showCalendarIcon"?: boolean;
+        /**
+          * (optional) The input's size.
+         */
+        "size"?: 'medium' | 'large';
+        /**
+          * (optional) Denotes what type of date and the types are 'start','end','single'. Required when using `modus-date-picker`.
+         */
+        "type"?: DateInputType;
+        /**
+          * (optional) The input's valid state text.
+         */
+        "validText"?: string;
+        /**
+          * (optional) The input's value.
+         */
+        "value"?: string;
+    }
+    interface ModusDatePicker {
+        /**
+          * (optional) Label for the field.
+         */
+        "label"?: string;
     }
     interface ModusDropdown {
         /**
@@ -1986,9 +2170,6 @@ declare namespace LocalJSX {
           * (optional) The disabled state of side navigation panel item.
          */
         "disabled"?: boolean;
-        /**
-          * (optional) The expanded state of side navigation panel item.
-         */
         "expanded"?: boolean;
         /**
           * (optional) Label for the item and the tooltip message.
@@ -2300,6 +2481,8 @@ declare namespace LocalJSX {
         "modus-checkbox": ModusCheckbox;
         "modus-chip": ModusChip;
         "modus-data-table": ModusDataTable;
+        "modus-date-input": ModusDateInput;
+        "modus-date-picker": ModusDatePicker;
         "modus-dropdown": ModusDropdown;
         "modus-file-dropzone": ModusFileDropzone;
         "modus-list": ModusList;
@@ -2343,6 +2526,8 @@ declare module "@stencil/core" {
             "modus-checkbox": LocalJSX.ModusCheckbox & JSXBase.HTMLAttributes<HTMLModusCheckboxElement>;
             "modus-chip": LocalJSX.ModusChip & JSXBase.HTMLAttributes<HTMLModusChipElement>;
             "modus-data-table": LocalJSX.ModusDataTable & JSXBase.HTMLAttributes<HTMLModusDataTableElement>;
+            "modus-date-input": LocalJSX.ModusDateInput & JSXBase.HTMLAttributes<HTMLModusDateInputElement>;
+            "modus-date-picker": LocalJSX.ModusDatePicker & JSXBase.HTMLAttributes<HTMLModusDatePickerElement>;
             "modus-dropdown": LocalJSX.ModusDropdown & JSXBase.HTMLAttributes<HTMLModusDropdownElement>;
             "modus-file-dropzone": LocalJSX.ModusFileDropzone & JSXBase.HTMLAttributes<HTMLModusFileDropzoneElement>;
             "modus-list": LocalJSX.ModusList & JSXBase.HTMLAttributes<HTMLModusListElement>;

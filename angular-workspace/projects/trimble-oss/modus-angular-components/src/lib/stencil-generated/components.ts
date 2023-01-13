@@ -292,6 +292,64 @@ export class ModusDataTable {
   }
 }
 
+import type { DateInputEventData as IModusDateInputDateInputEventData } from '@trimble-oss/modus-web-components';
+export declare interface ModusDateInput extends Components.ModusDateInput {
+  /**
+   * An event that fires on calendar icon click. 
+   */
+  calendarIconClicked: EventEmitter<CustomEvent<IModusDateInputDateInputEventData>>;
+  /**
+   * An event that fires on input value out of focus. 
+   */
+  dateInputBlur: EventEmitter<CustomEvent<IModusDateInputDateInputEventData>>;
+  /**
+   * An event that fires on input value change. 
+   */
+  valueChange: EventEmitter<CustomEvent<IModusDateInputDateInputEventData>>;
+
+}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['ariaLabel', 'autoFocusInput', 'disableValidation', 'disabled', 'errorText', 'helperText', 'invalid', 'label', 'placeholder', 'readOnly', 'required', 'showCalendarIcon', 'size', 'type', 'validText', 'value'],
+  methods: ['focusInput', 'getDate', 'setDate']
+})
+@Component({
+  selector: 'modus-date-input',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['ariaLabel', 'autoFocusInput', 'disableValidation', 'disabled', 'errorText', 'helperText', 'invalid', 'label', 'placeholder', 'readOnly', 'required', 'showCalendarIcon', 'size', 'type', 'validText', 'value']
+})
+export class ModusDateInput {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['calendarIconClicked', 'dateInputBlur', 'valueChange']);
+  }
+}
+
+
+export declare interface ModusDatePicker extends Components.ModusDatePicker {}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['label']
+})
+@Component({
+  selector: 'modus-date-picker',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['label']
+})
+export class ModusDatePicker {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
 
 export declare interface ModusDropdown extends Components.ModusDropdown {
   /**
@@ -768,14 +826,14 @@ export declare interface ModusSideNavigationItem extends Components.ModusSideNav
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['disableSelection', 'disabled', 'expanded', 'label', 'menuIcon', 'selected', 'showExpandIcon'],
+  inputs: ['disableSelection', 'disabled', 'label', 'menuIcon', 'selected', 'showExpandIcon'],
   methods: ['focusItem']
 })
 @Component({
   selector: 'modus-side-navigation-item',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['disableSelection', 'disabled', 'expanded', 'label', 'menuIcon', 'selected', 'showExpandIcon']
+  inputs: ['disableSelection', 'disabled', 'label', 'menuIcon', 'selected', 'showExpandIcon']
 })
 export class ModusSideNavigationItem {
   protected el: HTMLElement;

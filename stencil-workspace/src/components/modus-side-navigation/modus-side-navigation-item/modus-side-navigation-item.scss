@@ -71,6 +71,7 @@
 
   &.expanded {
     transition: top, left, height, width, opacity 0.25s ease-in 0s;
+
     .level-icon {
       height: 1.5rem;
       padding: 0 1rem;

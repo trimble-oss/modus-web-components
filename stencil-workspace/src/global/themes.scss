@@ -343,6 +343,24 @@
   --modus-side-navigation-item-chevron-color: var(
     --modus-side-navigation-item-color
   );
+
+  // Date picker
+  --modus-date-input-helper-icon-color: var(--modus-input-helper-icon-color);
+  --modus-date-picker-calendar-header-bg: var(--modus-blue);
+  --modus-date-picker-calendar-header-color: var(--modus-white);
+  --modus-date-picker-calendar-body-bg: var(--modus-white);
+  --modus-date-picker-calendar-day-week-color: #363545;
+  --modus-date-picker-calendar-day-color: var(--modus-gray-10);
+  --modus-date-picker-calendar-day-hover-bg: var(--modus-gray-0);
+  --modus-date-picker-calendar-day-current-border-color: var(
+    --modus-highlight-blue-color
+  );
+  --modus-date-picker-calendar-day-selected-bg: var(
+    --modus-highlight-blue-color
+  );
+  --modus-date-picker-calendar-day-selected-color: var(--modus-white);
+  --modus-date-picker-calendar-day-selected-range-bg: var(--modus-blue-pale);
+  --modus-date-picker-calendar-day-disabled-opacity: 0.3;
 }
 
 [data-mwc-theme='dark'] {
@@ -632,6 +650,22 @@
     hue-rotate(151deg) brightness(104%) contrast(105%);
   --modus-side-navigation-item-disabled-opacity: 0.4;
   --modus-side-navigation-item-chevron-color: var(--modus-gray-5);
+
+  // Date picker
+  --modus-date-input-helper-icon-color: var(--modus-gray-5);
+  --modus-date-picker-calendar-header-bg: var(--modus-blue-dark);
+  --modus-date-picker-calendar-body-bg: var(--modus-gray-11);
+  --modus-date-picker-calendar-day-week-color: var(--modus-white);
+  --modus-date-picker-calendar-day-color: var(--modus-white);
+
+  --modus-date-picker-calendar-day-hover-bg: var(--modus-gray-8);
+  --modus-date-picker-calendar-day-current-border-color: var(
+    --modus-highlight-blue-color
+  );
+  --modus-date-picker-calendar-day-selected-bg: var(
+    --modus-highlight-blue-color
+  );
+  --modus-date-picker-calendar-day-selected-range-bg: #019aeb4d;
 }
 
 // Mixins
