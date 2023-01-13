@@ -28,6 +28,8 @@ export const DIRECTIVES = [
   d.ModusProgressBar,
   d.ModusRadioGroup,
   d.ModusSelect,
+  d.ModusSideNavigation,
+  d.ModusSideNavigationItem,
   d.ModusSlider,
   d.ModusSpinner,
   d.ModusSwitch,

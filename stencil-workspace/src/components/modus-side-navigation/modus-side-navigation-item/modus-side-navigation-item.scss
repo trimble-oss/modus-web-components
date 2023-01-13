@@ -1,0 +1,103 @@
+@import './modus-side-navigation-item.vars';
+
+:host {
+  display: block;
+}
+
+.side-nav-item {
+  align-items: center;
+  background-color: $modus-side-navigation-item-bg;
+  color: $modus-side-navigation-item-color;
+  cursor: pointer;
+  display: flex;
+  fill: $modus-side-navigation-item-icon-color;
+  height: 3rem;
+  position: relative;
+  transition: top, left, height, width, opacity 0.2s ease-out 0s;
+  z-index: 1030;
+
+  svg path {
+    fill: $modus-side-navigation-item-icon-color;
+  }
+
+  &:hover:not(.disabled):not(.selected) {
+    background-color: $modus-side-navigation-item-hover-bg;
+  }
+
+  .menu-icon {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding-left: 1.25rem;
+    z-index: 1030;
+
+    modus-tooltip {
+      height: 1.5rem;
+      width: 1.5rem;
+    }
+
+    img {
+      filter: $modus-side-navigation-item-icon-filter;
+    }
+  }
+
+  .menu-text {
+    font-family: $primary-font;
+    font-size: $rem-14px;
+    overflow: hidden;
+    padding-left: 1rem;
+    text-overflow: clip;
+    white-space: nowrap;
+  }
+
+  .level-icon {
+    align-items: center;
+    display: flex;
+    height: 1rem;
+    justify-content: center;
+    margin-left: auto;
+    padding: 0 2px;
+    width: 1rem;
+
+    svg {
+      height: $rem-10px;
+      width: $rem-10px;
+
+      path {
+        fill: $modus-side-navigation-item-chevron-color;
+      }
+    }
+  }
+
+  &.expanded {
+    transition: top, left, height, width, opacity 0.25s ease-in 0s;
+    .level-icon {
+      height: 1.5rem;
+      padding: 0 1rem;
+      width: 1.5rem;
+
+      svg {
+        height: $rem-16px;
+        width: $rem-16px;
+      }
+    }
+  }
+
+  &.selected {
+    background-color: $modus-side-navigation-item-active-bg;
+    box-shadow: inset 0 0 2px $modus-side-navigation-item-active-border-color;
+    color: $modus-side-navigation-item-active-color;
+
+    .menu-icon img {
+      filter: $modus-side-navigation-item-icon-active-filter;
+    }
+
+    svg path {
+      fill: $modus-side-navigation-item-icon-active-color;
+    }
+  }
+
+  &.disabled {
+    opacity: $modus-side-navigation-item-disabled-opacity;
+  }
+}

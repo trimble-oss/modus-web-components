@@ -334,6 +334,15 @@
   --modus-table-edit-border-color: var(--modus-highlight-blue-color);
   --modus-table-readonly-bg: var(--modus-gray-0);
   --modus-table-readonly-color: var(--modus-table-color);
+
+  // Side Navigation
+  --modus-side-navigation-bg: var(--modus-body-bg);
+  --modus-side-navigation-item-hover-bg: var(--modus-gray-0);
+  --modus-side-navigation-item-active-bg: var(--modus-highlight-blue-color);
+  --modus-side-navigation-item-disabled-opacity: 0.3;
+  --modus-side-navigation-item-chevron-color: var(
+    --modus-side-navigation-item-color
+  );
 }
 
 [data-mwc-theme='dark'] {
@@ -520,7 +529,7 @@
   --modus-modal-divider-color: var(--modus-gray-6);
 
   // Navbar
-  --modus-navbar-bg: #1a2022;
+  --modus-navbar-bg: var(--modus-gray-11);
   --modus-navbar-brand-logo-filter: brightness(9999%) saturate(0);
   --modus-navbar-icon-color: var(--modus-body-color);
 
@@ -611,6 +620,18 @@
   --modus-table-edit-border-color: var(--modus-highlight-blue-color);
   --modus-table-readonly-bg: var(--modus-table-bg);
   --modus-table-readonly-color: var(--modus-gray-2);
+
+  // Side Navigation
+  --modus-side-navigation-bg: var(--modus-gray-11);
+  --modus-side-navigation-item-hover-bg: var(--modus-gray-8);
+  --modus-side-navigation-item-active-bg: #019aeb4d;
+  --modus-side-navigation-item-active-border-color: var(
+    --modus-highlight-blue-color
+  );
+  --modus-side-navigation-item-icon-filter: invert(95%) sepia(100%) saturate(0%)
+    hue-rotate(151deg) brightness(104%) contrast(105%);
+  --modus-side-navigation-item-disabled-opacity: 0.4;
+  --modus-side-navigation-item-chevron-color: var(--modus-gray-5);
 }
 
 // Mixins
@@ -899,4 +920,19 @@ modus-tree-view-item {
 
 modus-tooltip {
   @include modus-tooltip;
+}
+
+modus-side-navigation {
+  --modus-side-navigation-shadow-color: #00000029;
+  --modus-side-navigation-item-bg: var(--modus-side-navigation-bg);
+  --modus-side-navigation-item-color: var(--modus-body-color);
+  --modus-side-navigation-item-active-color: var(--modus-white);
+  --modus-side-navigation-item-icon-color: var(
+    --modus-side-navigation-item-color
+  );
+  --modus-side-navigation-item-icon-active-color: var(
+    --modus-side-navigation-item-active-color
+  );
+  --modus-side-navigation-item-icon-active-filter: invert(95%) sepia(100%)
+    saturate(0%) hue-rotate(151deg) brightness(104%) contrast(105%);
 }

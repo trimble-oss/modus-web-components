@@ -14,9 +14,9 @@ View all releases at: <https://github.com/trimble-oss/modus-web-components/relea
 
 ### Added
 
+- Added Modus Side navigation component.
 - Added password text toggle feature to `modus-text-input` component.
-
-- Accordions now have transition animations
+- Modus Accordions now have transition animations
 
 ## 0.1.28 - 2022-12-06
 
