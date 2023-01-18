@@ -91,13 +91,13 @@ export class ModusAlert {
 
 export declare interface ModusAutocomplete extends Components.ModusAutocomplete {
   /**
-   * An event that fires when the input value changes. Emits the value string. 
-   */
-  valueChange: EventEmitter<CustomEvent<string>>;
-  /**
    * An event that fires when a dropdown option is selected. Emits the option id. 
    */
   optionSelected: EventEmitter<CustomEvent<string>>;
+  /**
+   * An event that fires when the input value changes. Emits the value string. 
+   */
+  valueChange: EventEmitter<CustomEvent<string>>;
 
 }
 
@@ -116,7 +116,7 @@ export class ModusAutocomplete {
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['valueChange', 'optionSelected']);
+    proxyOutputs(this, this.el, ['optionSelected', 'valueChange']);
   }
 }
 

@@ -61,7 +61,7 @@ const setAutocompleteWithOption = () => {
 
 export const WithCustomOption = () => html`
   <div style="width: 600px">
-    <modus-autocomplete required="true" label="Employee Search" clearable placeholder="Search...">
+    <modus-autocomplete label="Employee Search" clearable placeholder="Search...">
       <li data-search-value="The Git Guru" data-id="1" style="padding: 8px">
         <div style="font-weight: bold">The Git Guru</div>
         <div style="font-size: 12px">Lead DevOps Engineer</div>
