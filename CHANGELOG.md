@@ -6,6 +6,12 @@ View all releases at: <https://github.com/trimble-oss/modus-web-components/relea
 
 ## Unreleased
 
+## 0.1.30 - 2023-01-19
+
+### Fixed
+
+- Modus Navbar colors and spacing/margin
+
 ## 0.1.29 - 2023-01-06
 
 ### Fixed

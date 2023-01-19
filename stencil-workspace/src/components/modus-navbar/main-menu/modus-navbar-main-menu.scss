@@ -3,14 +3,15 @@
 .main-menu {
   @include custom-navbar-menu;
 
+  border-top: none;
   border-radius: 0 0 $rem_2px $rem_2px;
   clip-path: inset(0 -10px -10px -10px);
   cursor: default;
-  height: calc(100vh - 56px);
-  left: -16px;
+  height: calc(100vh - 55px);
+  left: 0;
   max-width: 616px;
   min-width: 248px;
   padding: 0;
-  top: 50px;
+  top: 55px;
   width: max-content;
 }
