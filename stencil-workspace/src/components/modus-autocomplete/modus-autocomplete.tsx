@@ -141,8 +141,7 @@ export class ModusAutocomplete {
     !this.visibleCustomOptions?.length &&
     this.value?.length > 0;
 
-  displayOptions = () =>
-    this.hasFocus && !this.disabled;
+  displayOptions = () => this.hasFocus && this.value?.length > 0 && !this.disabled;
 
   handleCustomOptionClick = (option: any) => {
     const optionValue = option.getAttribute(DATA_SEARCH_VALUE);

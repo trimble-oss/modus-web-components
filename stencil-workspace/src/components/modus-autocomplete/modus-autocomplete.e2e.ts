@@ -19,7 +19,10 @@ describe('modus-autocomplete', () => {
 
     element.setProperty('options', [{ id: 1, value: 'Test 1' }, { id: 2, value: 'Test 2' }]);
     await page.waitForChanges();
-    await element.click();
+
+    const textInput = await page.find('modus-autocomplete >>> modus-text-input');
+    await textInput.click();
+    await textInput.type('Test');
     await page.waitForChanges();
 
     const options = await page.findAll('modus-autocomplete >>> .options-container li');
@@ -32,7 +35,10 @@ describe('modus-autocomplete', () => {
 
     element.setProperty('options', ['Test 1', 'Test 2']);
     await page.waitForChanges();
-    await element.click();
+
+    const textInput = await page.find('modus-autocomplete >>> modus-text-input');
+    await textInput.click();
+    await textInput.type('Test');
     await page.waitForChanges();
 
     const options = await page.findAll('modus-autocomplete >>> .options-container li');
@@ -45,7 +51,10 @@ describe('modus-autocomplete', () => {
 
     element.setProperty('options', ['Test 1', 'Test 2']);
     await page.waitForChanges();
-    await element.click();
+
+    const textInput = await page.find('modus-autocomplete >>> modus-text-input');
+    await textInput.click();
+    await textInput.type('Test');
     await page.waitForChanges();
 
     element.setProperty('options', ['Test 1']);
@@ -65,9 +74,11 @@ describe('modus-autocomplete', () => {
         </li>
       </modus-autocomplete>
     `);
+    await p.waitForChanges();
 
-    const element = await p.find('modus-autocomplete');
-    await element.click();
+    const textInput = await p.find('modus-autocomplete >>> modus-text-input');
+    await textInput.click();
+    await textInput.type('Test');
     await p.waitForChanges();
 
     const options = await p.findAll('modus-autocomplete >>> .custom-option');
@@ -164,13 +175,14 @@ describe('modus-autocomplete', () => {
 
     const textInput = await page.find('modus-autocomplete >>> modus-text-input');
     await textInput.click();
+    await textInput.type('Test');
     await page.waitForChanges();
 
     const optionSelected = await element.spyOnEvent('optionSelected');
     const valueChange = await element.spyOnEvent('valueChange');
 
     const option = await page.find('modus-autocomplete >>> li');
-    option.click();
+    await option.click();
     await page.waitForChanges();
 
     expect(optionSelected).toHaveReceivedEventTimes(1);
@@ -187,16 +199,18 @@ describe('modus-autocomplete', () => {
         </li>
       </modus-autocomplete>
     `);
+
+    const textInput = await p.find('modus-autocomplete >>> modus-text-input');
+    await textInput.click();
+    await textInput.type('Test');
+    await p.waitForChanges();
+
     const element = await p.find('modus-autocomplete');
     const optionSelected = await element.spyOnEvent('optionSelected');
     const valueChange = await element.spyOnEvent('valueChange');
 
-    const textInput = await p.find('modus-autocomplete >>> modus-text-input');
-    await textInput.click();
-    await p.waitForChanges();
-
     const option = await p.find('modus-autocomplete >>> li');
-    option.click();
+    await option.click();
     await p.waitForChanges();
 
     expect(optionSelected).toHaveReceivedEventTimes(1);

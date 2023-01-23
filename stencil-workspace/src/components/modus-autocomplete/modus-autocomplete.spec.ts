@@ -109,6 +109,7 @@ describe('modus-autocomplete', () => {
     const modusAutocomplete = new ModusAutocomplete();
     modusAutocomplete.disabled = false;
     modusAutocomplete.hasFocus = true;
+    modusAutocomplete.value = 'search value';
 
     expect(modusAutocomplete.displayOptions()).toEqual(true);
   });
