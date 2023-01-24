@@ -3,8 +3,8 @@
 .main-menu {
   @include custom-navbar-menu;
 
-  border-top: none;
   border-radius: 0 0 $rem_2px $rem_2px;
+  border-top: none;
   clip-path: inset(0 -10px -10px -10px);
   cursor: default;
   height: calc(100vh - 54px);

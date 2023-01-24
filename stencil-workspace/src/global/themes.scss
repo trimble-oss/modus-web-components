@@ -260,7 +260,9 @@
   // Profile
   --modus-navbar-profile-icon-initials-color: var(--modus-white);
   --modus-navbar-profile-icon-active-border-color: #d6d5db;
-  --modus-navbar-profile-menu-sign-out-background-color: var(--modus-gray-light);
+  --modus-navbar-profile-menu-sign-out-background-color: var(
+    --modus-gray-light
+  );
 
   // Pagination
   --modus-pagination-color: var(--modus-body-color);
@@ -296,10 +298,6 @@
   // Secondary
   --modus-toast-secondary-bg: var(--modus-tertiary);
   --modus-toast-secondary-border-color: var(--modus-gray-10);
-
-  // Tertiary
-  --modus-toast-tertiary-bg: var(--modus-gray-light);
-  --modus-toast-tertiary-border-color: var(--modus-tertiary);
 
   // Dark
   --modus-toast-dark-bg: var(--modus-dark);
@@ -581,10 +579,6 @@
   // Secondary
   --modus-toast-secondary-bg: #6a6e7980;
   --modus-toast-secondary-border-color: var(--modus-secondary);
-
-  // Tertiary
-  --modus-toast-tertiary-bg: #cbcdd680;
-  --modus-toast-tertiary-border-color: var(--modus-tertiary);
 
   // Dark
   --modus-toast-dark-bg: #171c1eb3;
