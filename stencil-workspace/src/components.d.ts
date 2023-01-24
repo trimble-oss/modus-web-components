@@ -826,7 +826,13 @@ export namespace Components {
         /**
           * (optional) The toasts' type.
          */
-        "type": 'danger' | 'dark' | 'default' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning';
+        "type": | 'danger'
+    | 'dark'
+    | 'default'
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'warning';
     }
     interface ModusTooltip {
         /**
@@ -2204,7 +2210,13 @@ declare namespace LocalJSX {
         /**
           * (optional) The toasts' type.
          */
-        "type"?: 'danger' | 'dark' | 'default' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning';
+        "type"?: | 'danger'
+    | 'dark'
+    | 'default'
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'warning';
     }
     interface ModusTooltip {
         /**

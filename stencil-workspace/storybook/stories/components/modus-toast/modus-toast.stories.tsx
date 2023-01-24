@@ -36,7 +36,6 @@ export default {
           'primary',
           'secondary',
           'success',
-          'tertiary',
           'warning',
         ],
         type: 'select',
@@ -45,7 +44,7 @@ export default {
       table: {
         defaultValue: { summary: `'default'` },
         type: {
-          summary: `'danger' | 'dark' | 'default' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning'`,
+          summary: `'danger' | 'dark' | 'default' | 'primary' | 'secondary' | 'success' | 'warning'`,
         },
       },
     },
@@ -121,14 +120,6 @@ Success.args = {
   dismissible: false,
   showIcon: true,
   type: 'success',
-};
-
-export const Tertiary = Template.bind({});
-Tertiary.args = {
-  ariaLabel: '',
-  dismissible: false,
-  showIcon: true,
-  type: 'tertiary',
 };
 
 export const Warning = Template.bind({});

@@ -6,6 +6,8 @@ View all releases at: <https://github.com/trimble-oss/modus-web-components/relea
 
 ## Unreleased
 
+- Removed `tertiary` variant from Modus Toasts
+
 ## 0.1.31 - 2023-01-19
 
 ### Fixed

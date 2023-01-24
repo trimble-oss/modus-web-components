@@ -7,12 +7,12 @@
 
 ## Properties
 
-| Property      | Attribute     | Description                                        | Type                                                                                                  | Default     |
-| ------------- | ------------- | -------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------- |
-| `ariaLabel`   | `aria-label`  | (optional) The toast's aria-label.                 | `string`                                                                                              | `undefined` |
-| `dismissible` | `dismissible` | (optional) Whether the toast has a dismiss button. | `boolean`                                                                                             | `undefined` |
-| `showIcon`    | `show-icon`   | (optional) Whether to show the toasts' icon.       | `boolean`                                                                                             | `true`      |
-| `type`        | `type`        | (optional) The toasts' type.                       | `"danger" \| "dark" \| "default" \| "primary" \| "secondary" \| "success" \| "tertiary" \| "warning"` | `'default'` |
+| Property      | Attribute     | Description                                        | Type                                                                                    | Default     |
+| ------------- | ------------- | -------------------------------------------------- | --------------------------------------------------------------------------------------- | ----------- |
+| `ariaLabel`   | `aria-label`  | (optional) The toast's aria-label.                 | `string`                                                                                | `undefined` |
+| `dismissible` | `dismissible` | (optional) Whether the toast has a dismiss button. | `boolean`                                                                               | `undefined` |
+| `showIcon`    | `show-icon`   | (optional) Whether to show the toasts' icon.       | `boolean`                                                                               | `true`      |
+| `type`        | `type`        | (optional) The toasts' type.                       | `"danger" \| "dark" \| "default" \| "primary" \| "secondary" \| "success" \| "warning"` | `'default'` |
 
 
 ## Events
