@@ -8,6 +8,10 @@ View all releases at: <https://github.com/trimble-oss/modus-web-components/relea
 
 - Removed `tertiary` variant from Modus Toasts
 
+### Fixed
+
+- Fixed the thick chevron icons used in Modus Accordion and Modus Content Tree components
+
 ## 0.1.31 - 2023-01-19
 
 ### Fixed
