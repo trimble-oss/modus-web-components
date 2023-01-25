@@ -6,6 +6,20 @@ View all releases at: <https://github.com/trimble-oss/modus-web-components/relea
 
 ## Unreleased
 
+- Removed `tertiary` variant from Modus Toasts
+
+## 0.1.31 - 2023-01-19
+
+### Fixed
+
+- Modus Navbar main menu height
+
+## 0.1.30 - 2023-01-19
+
+### Fixed
+
+- Modus Navbar colors and spacing/margin
+
 ## 0.1.29 - 2023-01-06
 
 ### Fixed
@@ -14,9 +28,9 @@ View all releases at: <https://github.com/trimble-oss/modus-web-components/relea
 
 ### Added
 
+- Added Modus Side navigation component.
 - Added password text toggle feature to `modus-text-input` component.
-
-- Accordions now have transition animations
+- Modus Accordions now have transition animations
 
 ## 0.1.28 - 2022-12-06
 

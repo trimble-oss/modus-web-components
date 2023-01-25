@@ -18,11 +18,14 @@ export class ModusTooltip {
 
   render(): unknown {
     const className = `modus-tooltip ${this.position}`;
-
     return (
       <div class={className}>
         <slot />
-        <div aria-label={this.ariaLabel} class={'text'} role="tooltip">{this.text}</div>
+        {this.text && (
+          <div aria-label={this.ariaLabel} class={'text'} role="tooltip">
+            {this.text}
+          </div>
+        )}
       </div>
     );
   }

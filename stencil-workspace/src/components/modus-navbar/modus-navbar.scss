@@ -19,7 +19,6 @@ nav {
   .icon-notifications,
   .icon-help {
     border-radius: $rem-2px;
-    padding: $rem-12px;
 
     path {
       fill: $modus-navbar-icon-color;
@@ -46,7 +45,11 @@ nav {
   .icon-apps {
     border-radius: $rem-2px;
     padding: $rem-12px;
-    
+
+    path {
+      fill: $modus-navbar-icon-color;
+    }
+
     &:hover:not(.pressed) {
       background-color: $modus-navbar-icon-hover-bg;
 
@@ -62,6 +65,17 @@ nav {
         fill: $modus-navbar-icon-active-color;
       }
     }
+  }
+
+  .icon-search,
+  .icon-notifications,
+  .icon-help,
+  .icon-apps {
+    padding: $rem-12px;
+  }
+
+  .main-menu {
+    padding: 0 $rem-8px;
   }
 
   .pressed {
@@ -83,7 +97,6 @@ nav {
   .left {
     align-items: center;
     display: inline-flex;
-    padding: 0 $rem-16px;
 
     &.reverse {
       flex-direction: row-reverse;
@@ -91,8 +104,8 @@ nav {
 
     img.product-logo {
       filter: $modus-navbar-brand-logo-filter;
-      margin: 0 $rem-8px;
       max-height: 32px;
+      padding: 0 $rem-8px;
     }
   }
 
@@ -145,10 +158,12 @@ nav {
         font-weight: $font-weight-semi-bold;
         height: 32px;
         justify-content: center;
+        user-select: none;
         width: 32px;
       }
 
-      > :first-child:hover {
+      > :first-child:hover,
+      > :first-child:focus {
         border: $rem-4px solid $modus-navbar-icon-color;
       }
 

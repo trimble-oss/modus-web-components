@@ -35,6 +35,36 @@ describe('modus-pagination', () => {
     expect(pageChange).toHaveReceivedEvent();
   });
 
+  it('emits pageChange on chevron click', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-pagination min-page="0" max-page="100" active-page="40"></modus-pagination>');
+    const pageChange = await page.spyOnEvent('pageChange');
+    const leftChevron = await page.find('modus-pagination >>> li:first-child');
+
+    await leftChevron.click();
+    await page.waitForChanges();
+    expect(pageChange).toHaveReceivedEvent();
+
+    const rightChevron = await page.find('modus-pagination >>> li:last-child');
+
+    await rightChevron.click();
+    await page.waitForChanges();
+    expect(pageChange).toHaveReceivedEvent();
+  });
+
+  it('emits pageChange on active-page modification', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-pagination min-page="0" max-page="100" active-page="40"></modus-pagination>');
+    const pageChange = await page.spyOnEvent('pageChange');
+    const element = await page.find('modus-pagination');
+
+    element.setAttribute('active-page', 20);
+    await page.waitForChanges();
+    expect(pageChange).toHaveReceivedEvent();
+  });
+
   it('disables chevron control on minPage', async () => {
     const page = await newE2EPage();
 
