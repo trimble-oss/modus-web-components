@@ -147,6 +147,15 @@ Run the tests with `npm run test`.
 
 To run a specific test, run `stencil test --spec --e2e --silent [test file name]`.
 
+### Debugging Tests
+
+Before running the `test.debug` script, make sure to add the file you want to debug to the end of the script line. For example,
+`"stencil test --spec --e2e --watchAll --devtools -- modus-autocomplete.e2e.ts"`.
+This will open Chrome dev tools for debugging, and run only the Autocomplete e2e tests.
+
+You can add the following code to the test file to pause the test at a specific point while it's running in Chrome dev tools:
+`page.evaluate(() => { debugger; });`
+
 ## Making Changes and Submitting a PR
 
 1. Before working on an issue, the repository should be forked with intent to contribute to the parent repository.

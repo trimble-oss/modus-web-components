@@ -33,9 +33,12 @@
     background-color: $modus-input-bg;
     border: $rem-1px solid $modus-input-border-color;
     border-bottom-color: $modus-input-bottom-line-color;
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
     height: 2rem;
+    margin: 0;
+    padding: 0;
     position: relative;
     width: 100%;
 
@@ -96,7 +99,7 @@
     &.error,
     &.valid {
       border-bottom-width: $rem-2px;
-      height: 1.9375rem; // Counteract bottom border width.
+      height: 2rem; // Counteract bottom border width.
     }
 
     &:focus-within {
@@ -121,7 +124,7 @@
       &:focus-within,
       &.error,
       &.valid {
-        height: 2.9375rem; // Counteract bottom border width.
+        height: 3rem; // Counteract bottom border width.
       }
     }
   }
