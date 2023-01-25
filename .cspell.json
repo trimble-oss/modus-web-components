@@ -25,6 +25,8 @@
     "progressbar",
     "SAMEORIGIN",
     "sbdocs",
+    "sonarqube",
+    "Qube",
     "styleguide",
     "stylelint",
     "subdir",
@@ -32,7 +34,9 @@
     "Toolshown",
     "trimble",
     "valuenow",
-    "yxxx"
+    "yxxx",
+    "ARROWUP",
+    "ARROWDOWN"
   ],
   "flagWords": ["hte"],
   "language": "en-US",

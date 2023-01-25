@@ -17,7 +17,7 @@
 
     .avatar,
     .initials {
-      background-color: $col_gray_light;
+      background-color: $modus-navbar-icon-color;
       border-radius: 50%;
       height: 6rem;
       margin: 0 $rem-16px $rem-20px 0;
@@ -67,23 +67,23 @@
 
       @media (hover: hover) {
         &:hover {
-          background-color: $col_gray_0;
+          background-color: $modus-navbar-icon-hover-bg;
         }
       }
 
       &:active {
-        background-color: $col_gray_light;
+        background-color: $modus-navbar-icon-active-bg;
       }
     }
   }
 
   .sign-out {
-    background-color: $col_gray_light;
+    background-color: $modus-navbar-profile-menu-sign-out-background-color;
     user-select: none;
     width: 100%;
 
     div {
-      color: $col_blue;
+      color: $modus-navbar-profile-menu-sign-out-color;
       cursor: pointer;
       font-size: $rem-14px;
       padding: $rem-10px $rem-20px;

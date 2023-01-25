@@ -461,6 +461,10 @@ export class ModusModal {
 
 export declare interface ModusNavbar extends Components.ModusNavbar {
   /**
+   * An event that fires on main menu click. 
+   */
+  mainMenuClick: EventEmitter<CustomEvent<KeyboardEvent | MouseEvent>>;
+  /**
    * An event that fires on product logo click. 
    */
   productLogoClick: EventEmitter<CustomEvent<MouseEvent>>;
@@ -491,7 +495,7 @@ export class ModusNavbar {
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['productLogoClick', 'profileMenuLinkClick', 'profileMenuSignOutClick']);
+    proxyOutputs(this, this.el, ['mainMenuClick', 'productLogoClick', 'profileMenuLinkClick', 'profileMenuSignOutClick']);
   }
 }
 
@@ -718,6 +722,67 @@ export class ModusSelect {
     c.detach();
     this.el = r.nativeElement;
     proxyOutputs(this, this.el, ['valueChange']);
+  }
+}
+
+
+export declare interface ModusSideNavigation extends Components.ModusSideNavigation {
+  /**
+   * An event that fires on side navigation panel collapse & expand. 
+   */
+  sideNavExpand: EventEmitter<CustomEvent<boolean>>;
+
+}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['data', 'expanded', 'maxWidth', 'mode', 'targetContent']
+})
+@Component({
+  selector: 'modus-side-navigation',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['data', 'expanded', 'maxWidth', 'mode', 'targetContent']
+})
+export class ModusSideNavigation {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['sideNavExpand']);
+  }
+}
+
+
+export declare interface ModusSideNavigationItem extends Components.ModusSideNavigationItem {
+  /**
+   * An event that fires when mouse click or `Enter` key press on an item. 
+   */
+  sideNavItemClicked: EventEmitter<CustomEvent<{ id: string; selected: boolean }>>;
+  /**
+   * An event that fires when an item is in focus. 
+   */
+  sideNavItemFocus: EventEmitter<CustomEvent<{ id: string }>>;
+
+}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['disableSelection', 'disabled', 'expanded', 'label', 'menuIcon', 'selected', 'showExpandIcon'],
+  methods: ['focusItem']
+})
+@Component({
+  selector: 'modus-side-navigation-item',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['disableSelection', 'disabled', 'expanded', 'label', 'menuIcon', 'selected', 'showExpandIcon']
+})
+export class ModusSideNavigationItem {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['sideNavItemClicked', 'sideNavItemFocus']);
   }
 }
 

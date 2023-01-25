@@ -12,6 +12,7 @@ import { ModusNavbarProfileMenuLink } from "./components/modus-navbar/profile-me
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { ModusNavbarProfileMenuLink as ModusNavbarProfileMenuLink1 } from "./components/modus-navbar/profile-menu/modus-navbar-profile-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
+import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.types";
 import { Tab } from "./components/modus-tabs/modus-tabs";
 import { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export namespace Components {
@@ -382,11 +383,11 @@ export namespace Components {
           * (required) Profile menu options.
          */
         "profileMenuOptions": {
-    avatarUrl?: string,
-    email?: string,
-    initials?: string,
-    links?: ModusNavbarProfileMenuLink[],
-    username: string
+    avatarUrl?: string;
+    email?: string;
+    initials?: string;
+    links?: ModusNavbarProfileMenuLink[];
+    username: string;
   };
         /**
           * (optional) Whether to display the navbar items in reverse order.
@@ -605,6 +606,59 @@ export namespace Components {
          */
         "value": unknown;
     }
+    interface ModusSideNavigation {
+        /**
+          * (optional) Data property to create the items.
+         */
+        "data": ModusSideNavigationItemInfo[];
+        /**
+          * (optional) The expanded state of side navigation panel and items.
+         */
+        "expanded": boolean;
+        /**
+          * (optional) Maximum width of the side navigation panel in an expanded state.
+         */
+        "maxWidth": string;
+        /**
+          * Mode to make side navigation either overlay or push the content for the selector specified in `targetContent`
+         */
+        "mode": 'overlay' | 'push';
+        /**
+          * (optional) Specify the selector for the page's content for which paddings and margins will be set by side navigation based on the `mode`.
+         */
+        "targetContent": string;
+    }
+    interface ModusSideNavigationItem {
+        /**
+          * (optional) Disables item selection.
+         */
+        "disableSelection": boolean;
+        /**
+          * (optional) The disabled state of side navigation panel item.
+         */
+        "disabled": boolean;
+        /**
+          * (optional) The expanded state of side navigation panel item.
+         */
+        "expanded": boolean;
+        "focusItem": () => Promise<void>;
+        /**
+          * (optional) Label for the item and the tooltip message.
+         */
+        "label": string;
+        /**
+          * (optional) A built-in menu icon string or a image url.
+         */
+        "menuIcon": string;
+        /**
+          * (optional) The selected state of side navigation panel item.
+         */
+        "selected": boolean;
+        /**
+          * (optional) Shows the expand icon.
+         */
+        "showExpandIcon": boolean;
+    }
     interface ModusSlider {
         /**
           * (optional) The slider's aria-label.
@@ -772,7 +826,13 @@ export namespace Components {
         /**
           * (optional) The toasts' type.
          */
-        "type": 'danger' | 'dark' | 'default' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning';
+        "type": | 'danger'
+    | 'dark'
+    | 'default'
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'warning';
     }
     interface ModusTooltip {
         /**
@@ -915,6 +975,14 @@ export interface ModusRadioGroupCustomEvent<T> extends CustomEvent<T> {
 export interface ModusSelectCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusSelectElement;
+}
+export interface ModusSideNavigationCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusSideNavigationElement;
+}
+export interface ModusSideNavigationItemCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusSideNavigationItemElement;
 }
 export interface ModusSliderCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1097,6 +1165,18 @@ declare global {
         prototype: HTMLModusSelectElement;
         new (): HTMLModusSelectElement;
     };
+    interface HTMLModusSideNavigationElement extends Components.ModusSideNavigation, HTMLStencilElement {
+    }
+    var HTMLModusSideNavigationElement: {
+        prototype: HTMLModusSideNavigationElement;
+        new (): HTMLModusSideNavigationElement;
+    };
+    interface HTMLModusSideNavigationItemElement extends Components.ModusSideNavigationItem, HTMLStencilElement {
+    }
+    var HTMLModusSideNavigationItemElement: {
+        prototype: HTMLModusSideNavigationItemElement;
+        new (): HTMLModusSideNavigationItemElement;
+    };
     interface HTMLModusSliderElement extends Components.ModusSlider, HTMLStencilElement {
     }
     var HTMLModusSliderElement: {
@@ -1178,6 +1258,8 @@ declare global {
         "modus-progress-bar": HTMLModusProgressBarElement;
         "modus-radio-group": HTMLModusRadioGroupElement;
         "modus-select": HTMLModusSelectElement;
+        "modus-side-navigation": HTMLModusSideNavigationElement;
+        "modus-side-navigation-item": HTMLModusSideNavigationItemElement;
         "modus-slider": HTMLModusSliderElement;
         "modus-spinner": HTMLModusSpinnerElement;
         "modus-switch": HTMLModusSwitchElement;
@@ -1611,6 +1693,10 @@ declare namespace LocalJSX {
          */
         "helpUrl"?: string;
         /**
+          * An event that fires on main menu click.
+         */
+        "onMainMenuClick"?: (event: ModusNavbarCustomEvent<KeyboardEvent | MouseEvent>) => void;
+        /**
           * An event that fires on product logo click.
          */
         "onProductLogoClick"?: (event: ModusNavbarCustomEvent<MouseEvent>) => void;
@@ -1630,11 +1716,11 @@ declare namespace LocalJSX {
           * (required) Profile menu options.
          */
         "profileMenuOptions"?: {
-    avatarUrl?: string,
-    email?: string,
-    initials?: string,
-    links?: ModusNavbarProfileMenuLink[],
-    username: string
+    avatarUrl?: string;
+    email?: string;
+    initials?: string;
+    links?: ModusNavbarProfileMenuLink[];
+    username: string;
   };
         /**
           * (optional) Whether to display the navbar items in reverse order.
@@ -1871,6 +1957,72 @@ declare namespace LocalJSX {
          */
         "value"?: unknown;
     }
+    interface ModusSideNavigation {
+        /**
+          * (optional) Data property to create the items.
+         */
+        "data"?: ModusSideNavigationItemInfo[];
+        /**
+          * (optional) The expanded state of side navigation panel and items.
+         */
+        "expanded"?: boolean;
+        /**
+          * (optional) Maximum width of the side navigation panel in an expanded state.
+         */
+        "maxWidth"?: string;
+        /**
+          * Mode to make side navigation either overlay or push the content for the selector specified in `targetContent`
+         */
+        "mode"?: 'overlay' | 'push';
+        /**
+          * An event that fires on side navigation panel collapse & expand.
+         */
+        "onSideNavExpand"?: (event: ModusSideNavigationCustomEvent<boolean>) => void;
+        /**
+          * (optional) Specify the selector for the page's content for which paddings and margins will be set by side navigation based on the `mode`.
+         */
+        "targetContent"?: string;
+    }
+    interface ModusSideNavigationItem {
+        /**
+          * (optional) Disables item selection.
+         */
+        "disableSelection"?: boolean;
+        /**
+          * (optional) The disabled state of side navigation panel item.
+         */
+        "disabled"?: boolean;
+        /**
+          * (optional) The expanded state of side navigation panel item.
+         */
+        "expanded"?: boolean;
+        /**
+          * (optional) Label for the item and the tooltip message.
+         */
+        "label"?: string;
+        /**
+          * (optional) A built-in menu icon string or a image url.
+         */
+        "menuIcon"?: string;
+        /**
+          * An event that fires when mouse click or `Enter` key press on an item.
+         */
+        "onSideNavItemClicked"?: (event: ModusSideNavigationItemCustomEvent<{ id: string; selected: boolean }>) => void;
+        /**
+          * An event that fires when an item is in focus.
+         */
+        "onSideNavItemFocus"?: (event: ModusSideNavigationItemCustomEvent<{ id: string }>) => void;
+        "on_sideNavItemAdded"?: (event: ModusSideNavigationItemCustomEvent<HTMLElement>) => void;
+        "on_sideNavItemRemoved"?: (event: ModusSideNavigationItemCustomEvent<HTMLElement>) => void;
+        /**
+          * (optional) The selected state of side navigation panel item.
+         */
+        "selected"?: boolean;
+        /**
+          * (optional) Shows the expand icon.
+         */
+        "showExpandIcon"?: boolean;
+    }
     interface ModusSlider {
         /**
           * (optional) The slider's aria-label.
@@ -2058,7 +2210,13 @@ declare namespace LocalJSX {
         /**
           * (optional) The toasts' type.
          */
-        "type"?: 'danger' | 'dark' | 'default' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning';
+        "type"?: | 'danger'
+    | 'dark'
+    | 'default'
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'warning';
     }
     interface ModusTooltip {
         /**
@@ -2170,6 +2328,8 @@ declare namespace LocalJSX {
         "modus-progress-bar": ModusProgressBar;
         "modus-radio-group": ModusRadioGroup;
         "modus-select": ModusSelect;
+        "modus-side-navigation": ModusSideNavigation;
+        "modus-side-navigation-item": ModusSideNavigationItem;
         "modus-slider": ModusSlider;
         "modus-spinner": ModusSpinner;
         "modus-switch": ModusSwitch;
@@ -2211,6 +2371,8 @@ declare module "@stencil/core" {
             "modus-progress-bar": LocalJSX.ModusProgressBar & JSXBase.HTMLAttributes<HTMLModusProgressBarElement>;
             "modus-radio-group": LocalJSX.ModusRadioGroup & JSXBase.HTMLAttributes<HTMLModusRadioGroupElement>;
             "modus-select": LocalJSX.ModusSelect & JSXBase.HTMLAttributes<HTMLModusSelectElement>;
+            "modus-side-navigation": LocalJSX.ModusSideNavigation & JSXBase.HTMLAttributes<HTMLModusSideNavigationElement>;
+            "modus-side-navigation-item": LocalJSX.ModusSideNavigationItem & JSXBase.HTMLAttributes<HTMLModusSideNavigationItemElement>;
             "modus-slider": LocalJSX.ModusSlider & JSXBase.HTMLAttributes<HTMLModusSliderElement>;
             "modus-spinner": LocalJSX.ModusSpinner & JSXBase.HTMLAttributes<HTMLModusSpinnerElement>;
             "modus-switch": LocalJSX.ModusSwitch & JSXBase.HTMLAttributes<HTMLModusSwitchElement>;

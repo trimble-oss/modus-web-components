@@ -11,13 +11,13 @@
     background-color: $modus-tooltip-bg;
     border-radius: $rem-2px;
     color: $modus-tooltip-color;
+    display: none;
     font-size: $rem-12px;
     opacity: 0;
     padding: $rem-4px $rem-8px;
     position: absolute;
     text-align: center;
     transition: opacity 0.3s ease-in-out;
-    visibility: hidden;
     width: max-content;
     z-index: 1;
   }
@@ -82,7 +82,7 @@
   }
 
   &:hover .text {
+    display: unset;
     opacity: 1;
-    visibility: visible;
   }
 }
