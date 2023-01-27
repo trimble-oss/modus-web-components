@@ -13,6 +13,13 @@
 | `reverse` | `reverse` |             | `boolean`          | `undefined` |
 
 
+## Events
+
+| Event     | Description | Type                          |
+| --------- | ----------- | ----------------------------- |
+| `appOpen` |             | `CustomEvent<ModusNavbarApp>` |
+
+
 ## Dependencies
 
 ### Used by

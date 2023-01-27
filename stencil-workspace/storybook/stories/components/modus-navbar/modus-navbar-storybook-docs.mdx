@@ -88,11 +88,17 @@ interface ModusNavbarProfileMenuLink {
 
 ### DOM Events
 
-| Event                     | Description                                         | Type                      |
-| ------------------------- | --------------------------------------------------- | ------------------------- |
-| `productLogoClick`        | An event that fires on product logo click.          | `CustomEvent<MouseEvent>` |
-| `profileMenuLinkClick`    | An event that fires on profile menu link click.     | `CustomEvent<string>`     |
-| `profileMenuSignOutClick` | An event that fires on profile menu sign out click. | `CustomEvent<MouseEvent>` |
+| Event                     | Description                                            | Type                                       |
+| ------------------------- | ------------------------------------------------------ | ------------------------------------------ |
+| `appsMenuAppOpen`         | An event that fires when an apps menu app opens.       | `CustomEvent<ModusNavbarApp>`              |
+| `appsMenuOpen`            | An event that fires when the apps menu opens.          | `CustomEvent<void>`                        |
+| `helpOpen`                | An event that fires when the help link opens.          | `CustomEvent<void>`                        |
+| `mainMenuClick`           | An event that fires on main menu click.                | `CustomEvent<KeyboardEvent | MouseEvent>`  |
+| `notificationsMenuOpen`   | An event that fires when the notifications menu opens. | `CustomEvent<void>`                        |
+| `productLogoClick`        | An event that fires on product logo click.             | `CustomEvent<MouseEvent>`                  |
+| `profileMenuLinkClick`    | An event that fires on profile menu link click.        | `CustomEvent<string>`                      |
+| `profileMenuOpen`         | An event that fires when the profile menu opens.       | `CustomEvent<void>`                        |
+| `profileMenuSignOutClick` | An event that fires on profile menu sign out click.    | `CustomEvent<MouseEvent>`                  |
 
 ### Methods
 

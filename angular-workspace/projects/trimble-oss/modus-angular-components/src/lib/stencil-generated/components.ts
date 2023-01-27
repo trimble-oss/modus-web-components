@@ -490,8 +490,28 @@ export class ModusModal {
   }
 }
 
-
+import type { ModusNavbarApp as IModusNavbarModusNavbarApp } from '@trimble-oss/modus-web-components';
 export declare interface ModusNavbar extends Components.ModusNavbar {
+  /**
+   * An event that fires when the apps menu opens. 
+   */
+  appsMenuOpen: EventEmitter<CustomEvent<void>>;
+  /**
+   * An event that fires when an apps menu app opens. 
+   */
+  appsMenuAppOpen: EventEmitter<CustomEvent<IModusNavbarModusNavbarApp>>;
+  /**
+   * An event that fires when the notifications menu opens. 
+   */
+  notificationsMenuOpen: EventEmitter<CustomEvent<void>>;
+  /**
+   * An event that fires when the help link opens. 
+   */
+  helpOpen: EventEmitter<CustomEvent<void>>;
+  /**
+   * An event that fires when the profile menu opens. 
+   */
+  profileMenuOpen: EventEmitter<CustomEvent<void>>;
   /**
    * An event that fires on main menu click. 
    */
@@ -527,12 +547,18 @@ export class ModusNavbar {
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['mainMenuClick', 'productLogoClick', 'profileMenuLinkClick', 'profileMenuSignOutClick']);
+    proxyOutputs(this, this.el, ['appsMenuOpen', 'appsMenuAppOpen', 'notificationsMenuOpen', 'helpOpen', 'profileMenuOpen', 'mainMenuClick', 'productLogoClick', 'profileMenuLinkClick', 'profileMenuSignOutClick']);
   }
 }
 
+import type { ModusNavbarApp as IModusNavbarAppsMenuModusNavbarApp } from '@trimble-oss/modus-web-components';
+export declare interface ModusNavbarAppsMenu extends Components.ModusNavbarAppsMenu {
+  /**
+   *  
+   */
+  appOpen: EventEmitter<CustomEvent<IModusNavbarAppsMenuModusNavbarApp>>;
 
-export declare interface ModusNavbarAppsMenu extends Components.ModusNavbarAppsMenu {}
+}
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
@@ -549,6 +575,7 @@ export class ModusNavbarAppsMenu {
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['appOpen']);
   }
 }
 
