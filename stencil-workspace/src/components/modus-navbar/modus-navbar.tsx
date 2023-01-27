@@ -72,14 +72,29 @@ export class ModusNavbar {
   /** (optional) Help URL. */
   @Prop() helpUrl: string;
 
+  /** An event that fires when the apps menu opens. */
+  @Event() appsMenuOpen: EventEmitter<void>;
+
+  /** An event that fires when an apps menu app opens. */
+  @Event() appsMenuAppOpen: EventEmitter<ModusNavbarApp>;
+
+  /** An event that fires when the help link opens. */
+  @Event() helpOpen: EventEmitter<void>;
+
   /** An event that fires on main menu click. */
   @Event() mainMenuClick: EventEmitter<KeyboardEvent | MouseEvent>;
+
+  /** An event that fires when the notifications menu opens. */
+  @Event() notificationsMenuOpen: EventEmitter<void>;
 
   /** An event that fires on product logo click. */
   @Event() productLogoClick: EventEmitter<MouseEvent>;
 
   /** An event that fires on profile menu link click. */
   @Event() profileMenuLinkClick: EventEmitter<string>;
+
+  /** An event that fires when the profile menu opens. */
+  @Event() profileMenuOpen: EventEmitter<void>;
 
   /** An event that fires on profile menu sign out click. */
   @Event() profileMenuSignOutClick: EventEmitter<MouseEvent>;
@@ -158,7 +173,13 @@ export class ModusNavbar {
     } else {
       this.hideMenus();
       this.appsMenuVisible = true;
+      this.appsMenuOpen.emit();
     }
+  }
+
+  handleAppsMenuAppOpen(event: CustomEvent<ModusNavbarApp>) {
+    event.stopPropagation();
+    this.appsMenuAppOpen.emit(event.detail);
   }
 
   mainMenuClickHandler(event: MouseEvent): void {
@@ -204,6 +225,7 @@ export class ModusNavbar {
     } else {
       this.hideMenus();
       this.notificationsMenuVisible = true;
+      this.notificationsMenuOpen.emit();
     }
   }
 
@@ -225,6 +247,7 @@ export class ModusNavbar {
     } else {
       this.hideMenus();
       this.profileMenuVisible = true;
+      this.profileMenuOpen.emit();
     }
   }
 
@@ -238,6 +261,7 @@ export class ModusNavbar {
   helpMenuClickHandler(event: MouseEvent): void {
     event.preventDefault();
     window.open(this.helpUrl, '_blank');
+    this.helpOpen.emit();
   }
 
   render(): unknown {
@@ -249,6 +273,7 @@ export class ModusNavbar {
           {this.showMainMenu && (
             <div class="navbar-button main-menu">
               <span
+                class="navbar-button-icon"
                 onKeyDown={(event) => this.mainMenuKeydownHandler(event)}
                 tabIndex={0}>
                 <IconMenu
@@ -275,12 +300,15 @@ export class ModusNavbar {
         <div class={`right ${direction}`}>
           {this.showSearch && (
             <div class="navbar-button search">
-              <IconSearch size="24" />
+              <span class="navbar-button-icon">
+                <IconSearch size="24" />
+              </span>
             </div>
           )}
           {this.showNotifications && (
-            <div class="navbar-button">
+            <div class="navbar-button" data-test-id="notifications-menu">
               <span
+                class="navbar-button-icon"
                 onKeyDown={(event) =>
                   this.notificationsMenuKeydownHandler(event)
                 }
@@ -299,16 +327,19 @@ export class ModusNavbar {
           )}
           {this.showPendoPlaceholder && <div class={'pendo-placeholder'} />}
           {this.showHelp && (
-            <div class="navbar-button">
-              <IconHelp
-                size="24"
-                onClick={(event) => this.helpMenuClickHandler(event)}
-              />
+            <div class="navbar-button" data-test-id="help-menu">
+              <span class="navbar-button-icon">
+                <IconHelp
+                  size="24"
+                  onClick={(event) => this.helpMenuClickHandler(event)}
+                />
+              </span>
             </div>
           )}
           {this.showAppsMenu && (
-            <div class="navbar-button">
+            <div class="navbar-button" data-test-id="apps-menu">
               <span
+                class="navbar-button-icon"
                 onKeyDown={(event) => this.appsMenuKeydownHandler(event)}
                 tabIndex={0}>
                 <IconApps
@@ -321,6 +352,7 @@ export class ModusNavbar {
                 <modus-navbar-apps-menu
                   apps={this.apps}
                   reverse={this.reverse}
+                  onAppOpen={(event) => this.handleAppsMenuAppOpen(event)}
                 />
               )}
             </div>

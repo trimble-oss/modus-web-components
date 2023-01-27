@@ -92,11 +92,16 @@ nav {
     &:hover {
       cursor: pointer;
     }
+
+    .navbar-button-icon {
+      display: flex;
+    }
   }
 
   .left {
     align-items: center;
     display: inline-flex;
+    height: 100%;
 
     &.reverse {
       flex-direction: row-reverse;
@@ -112,6 +117,7 @@ nav {
   .right {
     align-items: center;
     display: inline-flex;
+    height: 100%;
     margin-left: auto;
     padding: 0 $rem-16px;
 

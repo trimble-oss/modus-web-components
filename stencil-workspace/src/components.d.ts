@@ -1031,6 +1031,10 @@ export interface ModusNavbarCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusNavbarElement;
 }
+export interface ModusNavbarAppsMenuCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusNavbarAppsMenuElement;
+}
 export interface ModusNavbarProfileMenuCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusNavbarProfileMenuElement;
@@ -1853,9 +1857,25 @@ declare namespace LocalJSX {
          */
         "helpUrl"?: string;
         /**
+          * An event that fires when an apps menu app opens.
+         */
+        "onAppsMenuAppOpen"?: (event: ModusNavbarCustomEvent<ModusNavbarApp>) => void;
+        /**
+          * An event that fires when the apps menu opens.
+         */
+        "onAppsMenuOpen"?: (event: ModusNavbarCustomEvent<void>) => void;
+        /**
+          * An event that fires when the help link opens.
+         */
+        "onHelpOpen"?: (event: ModusNavbarCustomEvent<void>) => void;
+        /**
           * An event that fires on main menu click.
          */
         "onMainMenuClick"?: (event: ModusNavbarCustomEvent<KeyboardEvent | MouseEvent>) => void;
+        /**
+          * An event that fires when the notifications menu opens.
+         */
+        "onNotificationsMenuOpen"?: (event: ModusNavbarCustomEvent<void>) => void;
         /**
           * An event that fires on product logo click.
          */
@@ -1864,6 +1884,10 @@ declare namespace LocalJSX {
           * An event that fires on profile menu link click.
          */
         "onProfileMenuLinkClick"?: (event: ModusNavbarCustomEvent<string>) => void;
+        /**
+          * An event that fires when the profile menu opens.
+         */
+        "onProfileMenuOpen"?: (event: ModusNavbarCustomEvent<void>) => void;
         /**
           * An event that fires on profile menu sign out click.
          */
@@ -1917,6 +1941,7 @@ declare namespace LocalJSX {
     }
     interface ModusNavbarAppsMenu {
         "apps"?: ModusNavbarApp[];
+        "onAppOpen"?: (event: ModusNavbarAppsMenuCustomEvent<ModusNavbarApp>) => void;
         "reverse"?: boolean;
     }
     interface ModusNavbarMainMenu {

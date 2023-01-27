@@ -6,7 +6,16 @@ View all releases at: <https://github.com/trimble-oss/modus-web-components/relea
 
 ## Unreleased
 
+## 0.1.32 - 2023-01-27
+
+### Fixed
+
 - Removed `tertiary` variant from Modus Toasts
+- Fixed `modus-navbar` button centering
+
+### Added
+
+- Events to know when the `modus-navbar` is opening links and menus
 
 ## 0.1.31 - 2023-01-19
 
