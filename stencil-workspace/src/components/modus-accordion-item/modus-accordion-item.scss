@@ -40,6 +40,8 @@
     }
 
     .chevron-container {
+      align-items: center;
+      display: flex;
       margin-left: auto;
       transition: transform 0.2s ease-in-out;
 

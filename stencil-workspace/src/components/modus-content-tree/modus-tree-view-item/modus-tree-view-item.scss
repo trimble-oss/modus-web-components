@@ -41,8 +41,12 @@
     box-shadow: 0 -2px 0 $modus-tree-view-item-drag-error !important;
   }
 
-  .hidden {
+  .d-none {
     display: none !important;
+  }
+
+  .hidden {
+    visibility: hidden;
   }
 
   &:hover:not(.disabled) {
@@ -57,15 +61,20 @@
 
     &.drag-icon {
       cursor: grab !important;
+      width: $rem-16px;
+
+      svg {
+        height: $rem-16px;
+        width: $rem-16px;
+      }
     }
 
     .inline-flex {
       display: inline-flex;
     }
 
-    svg {
-      height: $rem-16px;
-      width: $rem-16px;
+    .rotate-right {
+      transform: rotate(-90deg);
     }
   }
 
@@ -90,11 +99,6 @@
   &.small {
     font-size: $rem-12px;
     min-height: $list-group-item-height-sm;
-
-    .icon-slot svg {
-      height: $rem-12px;
-      width: $rem-12px;
-    }
   }
 }
 

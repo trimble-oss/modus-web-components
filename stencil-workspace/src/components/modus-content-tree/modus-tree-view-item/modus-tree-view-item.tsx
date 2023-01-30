@@ -1,5 +1,15 @@
-// eslint-disable-next-line
-import { Component, Prop, State, h, Element, Event, EventEmitter, Method, Watch, FunctionalComponent } from '@stencil/core';
+import {
+  Component,
+  Prop,
+  State,
+  h, // eslint-disable-line @typescript-eslint/no-unused-vars
+  Element,
+  Event,
+  EventEmitter,
+  Method,
+  Watch,
+  FunctionalComponent,
+} from '@stencil/core';
 import { IconMap } from '../../icons/IconMap';
 import { TreeViewItemOptions } from '../modus-content-tree.types';
 
@@ -74,15 +84,17 @@ export class ModusTreeViewItem {
     name: string;
     className?: string;
     defaultContent?: string | HTMLElement;
-    hidden?: boolean;
+    display?: boolean;
     onClick?: (e: MouseEvent) => void;
     onMouseDown?: (e: MouseEvent) => void;
     role?: string;
-  }> = ({ name, className, defaultContent, hidden, ...props }) => {
+  }> = ({ name, className, defaultContent, display = true, ...props }) => {
     const showDefault = !this.slots.has(name) && defaultContent;
     return (
-      <div {...props} class={`${className || ''} ${hidden ? 'hidden' : ''}`}>
-        <slot name={name} onSlotchange={() => this.handleDefaultSlotChange()}></slot>
+      <div {...props} class={`${className || ''} ${display ? '' : 'd-none'}`}>
+        <slot
+          name={name}
+          onSlotchange={() => this.handleDefaultSlotChange()}></slot>
         {showDefault && defaultContent}
       </div>
     );
@@ -119,7 +131,9 @@ export class ModusTreeViewItem {
   }
 
   getChildrenIds(): string[] {
-    return Array.from(this.element.children as unknown as HTMLModusTreeViewItemElement[])
+    return Array.from(
+      this.element.children as unknown as HTMLModusTreeViewItemElement[]
+    )
       .map((i) => i.nodeId)
       .filter((i) => i);
   }
@@ -144,7 +158,9 @@ export class ModusTreeViewItem {
   }
 
   handleDefaultSlotChange(): void {
-    const slotElements = this.element.querySelectorAll('[slot]') as unknown as HTMLSlotElement[];
+    const slotElements = this.element.querySelectorAll(
+      '[slot]'
+    ) as unknown as HTMLSlotElement[];
     const newSlots: Map<string, boolean> = new Map();
 
     // look for icon/label slot added/removed
@@ -244,16 +260,25 @@ export class ModusTreeViewItem {
 
   handleTreeSlotChange(): void {
     const newChildren = this.getChildrenIds();
-    const isUpdated = this.childrenIds && newChildren ? this.childrenIds.length !== newChildren.filter((c) => this.childrenIds.includes(c)).length : this.childrenIds?.length !== newChildren?.length;
+    const isUpdated =
+      this.childrenIds && newChildren
+        ? this.childrenIds.length !==
+          newChildren.filter((c) => this.childrenIds.includes(c)).length
+        : this.childrenIds?.length !== newChildren?.length;
 
     if (this.options) {
-      const { onItemUpdate, multiCheckboxSelection, onCheckboxSelection } = this.options;
+      const { onItemUpdate, multiCheckboxSelection, onCheckboxSelection } =
+        this.options;
 
       // sync root
       onItemUpdate({ nodeId: this.nodeId, children: [...newChildren] });
 
       // sync the checkboxes if there is any child added/removed
-      if (this.childrenIds?.length && this.childrenIds.length !== newChildren?.length && multiCheckboxSelection) {
+      if (
+        this.childrenIds?.length &&
+        this.childrenIds.length !== newChildren?.length &&
+        multiCheckboxSelection
+      ) {
         onCheckboxSelection(this.nodeId, true);
       }
     }
@@ -273,7 +298,18 @@ export class ModusTreeViewItem {
 
   rootOptions() {
     if (this.options) {
-      const { checkboxSelection, multiCheckboxSelection, showSelectionIndicator, size, getLevel, hasItemSelected, hasItemDisabled, hasItemIndeterminate, hasItemExpanded, hasItemChecked } = this.options;
+      const {
+        checkboxSelection,
+        multiCheckboxSelection,
+        showSelectionIndicator,
+        size,
+        getLevel,
+        hasItemSelected,
+        hasItemDisabled,
+        hasItemIndeterminate,
+        hasItemExpanded,
+        hasItemChecked,
+      } = this.options;
       const selected = hasItemSelected(this.nodeId);
       const checked = hasItemChecked(this.nodeId);
       const indeterminate = hasItemIndeterminate(this.nodeId);
@@ -324,7 +360,19 @@ export class ModusTreeViewItem {
   }
 
   render(): HTMLLIElement {
-    const { selected, checked, indeterminate, expanded, expandable, level, checkboxSelection, multiCheckboxSelection, size, isDisabled, selectionIndicator } = this.rootOptions();
+    const {
+      selected,
+      checked,
+      indeterminate,
+      expanded,
+      expandable,
+      level,
+      checkboxSelection,
+      multiCheckboxSelection,
+      size,
+      isDisabled,
+      selectionIndicator,
+    } = this.rootOptions();
 
     const ariaControls = {
       'aria-level': level,
@@ -335,11 +383,19 @@ export class ModusTreeViewItem {
     };
     const sizeClass = `${this.classBySize.get(size || 'standard')}`;
     const tabIndex = isDisabled ? -1 : 0;
-    const treeItemClass = `tree-item ${selected ? 'selected' : ''} ${sizeClass} ${isDisabled ? 'disabled' : ''} `;
-    const treeItemChildrenClass = `tree-item-group ${sizeClass} ${expanded ? 'expanded' : ''}`;
+    const treeItemClass = `tree-item ${
+      selected ? 'selected' : ''
+    } ${sizeClass} ${isDisabled ? 'disabled' : ''} `;
+    const treeItemChildrenClass = `tree-item-group ${sizeClass} ${
+      expanded ? 'expanded' : ''
+    }`;
 
     return (
-      <li {...ariaControls} class={`tree-item-container${selectionIndicator ? ' selected-indicator' : ''}`}>
+      <li
+        {...ariaControls}
+        class={`tree-item-container${
+          selectionIndicator ? ' selected-indicator' : ''
+        }`}>
         <div
           class={treeItemClass}
           onFocus={() => this.handleFocus()}
@@ -347,28 +403,60 @@ export class ModusTreeViewItem {
           onKeyDown={(e) => this.handleKeyDownTreeItem(e)}
           ref={(el) => this.handleRefItemContent(el)}
           tabindex={tabIndex}>
-          <this.CustomSlot className="icon-slot drag-icon" defaultContent={this.draggableItem ? <IconMap icon="drag" /> : null} name={this.SLOT_DRAG_ICON} onMouseDown={(e) => this.handleDrag(e)} />
-          <div aria-disabled="true" style={{ paddingLeft: `${(level - 1) * 0.5}rem` }}>
+          <this.CustomSlot
+            className={`icon-slot drag-icon${
+              !this.draggableItem ? ' hidden' : ''
+            }`}
+            defaultContent={<IconMap icon="drag" />}
+            name={this.SLOT_DRAG_ICON}
+            onMouseDown={(e) => this.handleDrag(e)}
+          />
+          <div
+            aria-disabled="true"
+            style={{ paddingLeft: `${(level - 1) * 0.5}rem` }}>
             {/* used for level indentation purpose */}
           </div>
-          <div class="icon-slot" onClick={(e) => this.handleExpandToggle(e)} onKeyDown={(e) => this.handleDefaultKeyDown(e, () => this.handleExpandToggle(e))} tabIndex={expandable ? tabIndex : -1}>
-            <this.CustomSlot className="inline-flex" defaultContent={<IconMap icon="chevron-right-thick" />} hidden={!expandable || (expandable && expanded)} name={this.SLOT_EXPAND_ICON} />
-            <this.CustomSlot className="inline-flex" defaultContent={<IconMap icon="chevron-down-thick" />} hidden={!expandable || !(expandable && expanded)} name={this.SLOT_COLLAPSE_ICON} />
-          </div>
-          <div>
-            {(checkboxSelection || multiCheckboxSelection) && (
-              <div class="icon-slot">
-                <modus-checkbox
-                  checked={checked}
-                  disabled={isDisabled}
-                  indeterminate={indeterminate}
-                  onClick={(e) => this.handleCheckboxClick(e)}
-                  onKeyDown={(e) => this.handleDefaultKeyDown(e, () => this.handleCheckboxClick(e))}></modus-checkbox>
-              </div>
-            )}
+          <div
+            class={`icon-slot${!expandable ? ' hidden' : ''}`}
+            onClick={(e) => this.handleExpandToggle(e)}
+            onKeyDown={(e) =>
+              this.handleDefaultKeyDown(e, () => this.handleExpandToggle(e))
+            }
+            tabIndex={expandable ? tabIndex : -1}>
+            <this.CustomSlot
+              className="inline-flex rotate-right"
+              defaultContent={<IconMap icon="chevron-down-thick" size="24" />}
+              display={!expanded}
+              name={this.SLOT_EXPAND_ICON}
+            />
+            <this.CustomSlot
+              className="inline-flex"
+              defaultContent={<IconMap icon="chevron-down-thick" size="24" />}
+              display={expanded}
+              name={this.SLOT_COLLAPSE_ICON}
+            />
           </div>
 
-          <this.CustomSlot className="icon-slot" name={this.SLOT_ITEM_ICON} hidden={!this.slots.has(this.SLOT_ITEM_ICON)} />
+          {(checkboxSelection || multiCheckboxSelection) && (
+            <div class="icon-slot">
+              <modus-checkbox
+                checked={checked}
+                disabled={isDisabled}
+                indeterminate={indeterminate}
+                onClick={(e) => this.handleCheckboxClick(e)}
+                onKeyDown={(e) =>
+                  this.handleDefaultKeyDown(e, () =>
+                    this.handleCheckboxClick(e)
+                  )
+                }></modus-checkbox>
+            </div>
+          )}
+
+          <this.CustomSlot
+            className="icon-slot"
+            name={this.SLOT_ITEM_ICON}
+            display={this.slots.has(this.SLOT_ITEM_ICON)}
+          />
           <div role="heading" aria-level={level} class="label-slot">
             <this.CustomSlot
               role="button"
@@ -383,7 +471,9 @@ export class ModusTreeViewItem {
                     value={this.label}
                     onClick={(e) => this.handleLabelInputClick(e)}
                     onBlur={() => this.handleLabelInputBlur()}
-                    onKeyDown={(e) => this.handleLabelInputKeyDown(e)}></modus-text-input>
+                    onKeyDown={(e) =>
+                      this.handleLabelInputKeyDown(e)
+                    }></modus-text-input>
                 ) : (
                   this.label
                 )
