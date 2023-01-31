@@ -6,6 +6,10 @@ View all releases at: <https://github.com/trimble-oss/modus-web-components/relea
 
 ## Unreleased
 
+### Added
+
+- Added support for Angular Reactive Forms 🎉
+
 ## 0.1.32 - 2023-01-27
 
 ### Fixed
