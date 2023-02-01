@@ -23,7 +23,7 @@
     "@storybook/addon-actions": "^6.5.15",
     "@storybook/addon-essentials": "^6.5.15",
     "@storybook/addon-links": "^6.5.15",
-    "@storybook/web-components": "^6.5.15",
+    "@storybook/web-components": "^6.5.16",
     "babel-loader": "8.2.5",
     "postcss": "^8.4.20",
     "storybook-dark-mode": "^2.0.5"
