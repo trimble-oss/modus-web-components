@@ -46,7 +46,7 @@
     "@stencil/angular-output-target": "^0.4.0",
     "@stencil/postcss": "^2.1.0",
     "@stencil/react-output-target": "^0.3.1",
-    "@stencil/sass": "^2.0.1",
+    "@stencil/sass": "^2.0.3",
     "@types/jest": "^27.5.1",
     "@typescript-eslint/eslint-plugin": "^5.47.1",
     "@typescript-eslint/parser": "^5.47.1",
