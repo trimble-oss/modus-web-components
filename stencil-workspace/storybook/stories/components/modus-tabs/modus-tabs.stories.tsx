@@ -19,11 +19,19 @@ export default {
   },
 };
 
-const Template = () => html`
-  <modus-tabs id="my-tabs"></modus-tabs>
+const Template = ({ size }) => html`
+  <modus-tabs id="my-tabs" size=${size}></modus-tabs>
   ${setTabs()}
 `;
 export const Default = Template.bind({});
+Default.args = {
+  size: 'medium'
+}
+
+export const Small = Template.bind({});
+Small.args = {
+  size: 'small'
+}
 
 const setTabs = () => {
   const tag = document.createElement('script');
