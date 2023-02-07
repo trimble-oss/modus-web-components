@@ -501,21 +501,17 @@ export declare interface ModusNavbar extends Components.ModusNavbar {
    */
   appsMenuAppOpen: EventEmitter<CustomEvent<IModusNavbarModusNavbarApp>>;
   /**
-   * An event that fires when the notifications menu opens. 
-   */
-  notificationsMenuOpen: EventEmitter<CustomEvent<void>>;
-  /**
    * An event that fires when the help link opens. 
    */
   helpOpen: EventEmitter<CustomEvent<void>>;
   /**
-   * An event that fires when the profile menu opens. 
-   */
-  profileMenuOpen: EventEmitter<CustomEvent<void>>;
-  /**
    * An event that fires on main menu click. 
    */
   mainMenuClick: EventEmitter<CustomEvent<KeyboardEvent | MouseEvent>>;
+  /**
+   * An event that fires when the notifications menu opens. 
+   */
+  notificationsMenuOpen: EventEmitter<CustomEvent<void>>;
   /**
    * An event that fires on product logo click. 
    */
@@ -524,6 +520,10 @@ export declare interface ModusNavbar extends Components.ModusNavbar {
    * An event that fires on profile menu link click. 
    */
   profileMenuLinkClick: EventEmitter<CustomEvent<string>>;
+  /**
+   * An event that fires when the profile menu opens. 
+   */
+  profileMenuOpen: EventEmitter<CustomEvent<void>>;
   /**
    * An event that fires on profile menu sign out click. 
    */
@@ -547,7 +547,7 @@ export class ModusNavbar {
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['appsMenuOpen', 'appsMenuAppOpen', 'notificationsMenuOpen', 'helpOpen', 'profileMenuOpen', 'mainMenuClick', 'productLogoClick', 'profileMenuLinkClick', 'profileMenuSignOutClick']);
+    proxyOutputs(this, this.el, ['appsMenuOpen', 'appsMenuAppOpen', 'helpOpen', 'mainMenuClick', 'notificationsMenuOpen', 'productLogoClick', 'profileMenuLinkClick', 'profileMenuOpen', 'profileMenuSignOutClick']);
   }
 }
 

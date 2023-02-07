@@ -20,8 +20,13 @@ A new TypeScript typing has been provided named Tab defined as:
 
 <Story id="components-tabs--default" height={'125px'} />
 
+### Small
+
+<Story id="components-tabs--small" height={'125px'} />
+
 ```html
 <modus-tabs></modus-tabs>
+<modus-tabs size="small"></modus-tabs>
 
 <script>
   const modusTabs = document.querySelector('modus-tabs');
@@ -41,12 +46,12 @@ A new TypeScript typing has been provided named Tab defined as:
 
 ### Properties
 
-| Name         | Description          | Type      | Options          | Default Value | Required |
-| ------------ | -------------------- | --------- | ---------------- | ------------- | -------- |
-| `tabs`       | The tabs' tabs       | `Tab[]`   |                  |               | ✔        |
-| `aria-label` | The tabs' aria-label | `string`  |                  |               |          |
-| `size`       | The tabs' size       | `string`  | 'medium', 'small | 'medium'      |          |
-| `full-width` | The tabs' width      | `boolean` | true, false      | false         |          |
+| Name         | Description          | Type      | Options           | Default Value | Required |
+| ------------ | -------------------- | --------- | ----------------- | ------------- | -------- |
+| `tabs`       | The tabs' tabs       | `Tab[]`   |                   |               | ✔        |
+| `aria-label` | The tabs' aria-label | `string`  |                   |               |          |
+| `size`       | The tabs' size       | `string`  | 'medium', 'small' | 'medium'      |          |
+| `full-width` | The tabs' width      | `boolean` | true, false       | false         |          |
 
 ### DOM Events
 
