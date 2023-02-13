@@ -117,6 +117,7 @@ button {
   &.style-outline {
     @each $color, $value in $btn-outline-theme-colors {
       $alias: $color;
+
       @if $color == 'dark' {
         $alias: 'secondary';
       }
