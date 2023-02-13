@@ -774,6 +774,7 @@ modus-button[disabled] {
 
 @each $color in $btn-outline-variants {
   $alias: $color;
+
   @if $color == 'dark' {
     $alias: 'secondary';
   }
