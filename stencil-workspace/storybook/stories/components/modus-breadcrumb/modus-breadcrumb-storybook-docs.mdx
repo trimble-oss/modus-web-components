@@ -12,14 +12,12 @@ A new TypeScript typing has been provided named Crumb defined as:
 {
   id: string; // required, must be unique.
   display: string; // required.
-  route?: string; // optional, leave undefined to handle routing externally.
 }
 ```
 
 #### Implementation Details
 
 - Crumb id values must be unique within the crumbs collection.
-- To handle routing outside of the breadcrumbs, leave the route value undefined and listen to the crumbClick DOM event.
 
 ### Default
 
