@@ -6,6 +6,12 @@ View all releases at: <https://github.com/trimble-oss/modus-web-components/relea
 
 ## Unreleased
 
+## 0.1.33 - 2021-02-16
+
+### Fixed
+
+- Fixed an issue where the breadcrumbs were pushing '#' to the route when clicked
+
 ### Added
 
 - Added support for Angular Reactive Forms 🎉
