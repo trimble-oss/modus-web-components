@@ -79,8 +79,8 @@
       width: 2rem;
 
       svg.icon-calendar {
-        padding: 0 $rem-6px;
         cursor: pointer !important;
+        padding: 0 $rem-6px;
 
         path {
           fill: $modus-input-helper-icon-color;
@@ -142,15 +142,15 @@
     font-size: $rem-10px;
     margin-top: $rem-4px;
 
-    &.helper {
+    .helper {
       color: $modus-input-label-color;
     }
 
-    &.error {
+    .error {
       color: $modus-input-validation-error-color;
     }
 
-    &.valid {
+    .valid {
       color: $modus-input-validation-success-color;
     }
   }
