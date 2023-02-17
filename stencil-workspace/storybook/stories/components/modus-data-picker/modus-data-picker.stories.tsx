@@ -3,7 +3,7 @@ import { html } from 'lit-html';
 import docs from './modus-data-picker-storybook-docs.mdx';
 
 export default {
-  title: 'User Inputs/Data Picker',
+  title: 'User Inputs/Date Picker',
   argTypes: {},
   parameters: {
     docs: {
