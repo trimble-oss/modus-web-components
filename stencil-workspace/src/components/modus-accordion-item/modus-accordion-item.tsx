@@ -110,7 +110,6 @@ export class ModusAccordionItem {
     const sizeClass = `${this.classBySize.get(this.size)}`;
     const disabledClass = `${this.disabled ? 'disabled' : ''}`;
     const expandedClass = `${this.expanded ? 'expanded' : ''}`;
-    const iconSize = this.size === 'standard' ? '24' : '20';
     const bodyClass = `body ${sizeClass} collapse${
       this.expanded ? ' show' : ''
     }`;
@@ -131,7 +130,7 @@ export class ModusAccordionItem {
             <div
               class={`chevron-container ${this.expanded ? 'reverse' : ''} `}
               ref={(el) => (this.chevronContainerRef = el)}>
-              <IconChevronDownThick size={iconSize}></IconChevronDownThick>
+              <IconChevronDownThick size="24"></IconChevronDownThick>
             </div>
           }
         </div>

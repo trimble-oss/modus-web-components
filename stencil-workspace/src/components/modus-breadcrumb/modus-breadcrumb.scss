@@ -17,6 +17,7 @@ nav {
       .crumb {
         a {
           color: $modus-breadcrumb-item-color;
+          cursor: pointer;
           text-decoration: none;
 
           &:hover {

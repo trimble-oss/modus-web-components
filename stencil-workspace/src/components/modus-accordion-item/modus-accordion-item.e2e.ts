@@ -64,7 +64,6 @@ describe('modus-accordion-item', () => {
     await page.waitForChanges();
     iconComputedStyle = await iconElement.getComputedStyle();
     expect(headerElement).toHaveClass('small');
-    expect(iconComputedStyle['height']).toEqual('20px');
   });
 
   it('emits closed event on header click', async () => {

@@ -32,45 +32,43 @@ describe('modus-tree-view-item', () => {
     expect(page.root).toEqualHtml(`
      <modus-tree-view-item label="test" node-id="1">
        <mock:shadow-root>
-         <li aria-disabled="false" aria-level="1" aria-selected="false" class="tree-item-container" role="treeitem">
-           <div class="tree-item standard" tabindex="0">
-              <div class="icon-slot drag-icon">
-                <slot name="dragIcon"></slot>
-              </div>
-              <div aria-disabled="true" style="padding-left: 0rem;"></div>
-              <div class="icon-slot" tabindex="-1">
-                  <div class="hidden inline-flex">
-                    <slot name="expandIcon"></slot>
-                    <svg class="icon-chevron-right-thick" fill="currentColor" height="16" viewBox="0 0 32 32" width="16" xmlns="http://www.w3.org/2000/svg">
-                      <g>
-                        <path d="m13.767 27.486 8.572-9.974.026-.03.023-.032a2.444 2.444 0 0 0 0-2.9l-.023-.032-.026-.03-8.572-9.974c-.815-1.075-2.384-1.335-3.52-.574A2.482 2.482 0 0 0 9.136 6c0 .523.164 1.024.476 1.45l.025.035.028.032L17.058 16l-7.392 8.483-.028.032-.026.034A2.442 2.442 0 0 0 9.136 26c0 .823.415 1.594 1.111 2.06 1.136.762 2.704.502 3.52-.573z" fill="#6A6976"></path>
-                      </g>
-                    </svg>
-                  </div>
-                  <div class="hidden inline-flex">
-                    <slot name="collapseIcon"></slot>
-                    <svg class="icon-chevron-down-thick" fill="currentColor" height="16" viewBox="0 0 32 32" width="16" xmlns="http://www.w3.org/2000/svg">
-                      <g>
-                        <path d="M28.06 11.383A2.483 2.483 0 0 0 26 10.27c-.523 0-1.024.165-1.45.477l-.035.025-.032.028L16 18.194l-8.483-7.393-.032-.028-.035-.025A2.444 2.444 0 0 0 6 10.27c-.823 0-1.593.416-2.06 1.112-.76 1.135-.501 2.704.574 3.52l9.974 8.572.03.026.032.023a2.445 2.445 0 0 0 2.9 0l.032-.023.03-.026 9.974-8.573c1.075-.815 1.335-2.384.574-3.52z" fill="#6A6976"></path>
-                      </g>
-                    </svg>
-                  </div>
-                </div>
-                <div></div>
-                <div class="hidden icon-slot">
-                  <slot name="itemIcon"></slot>
-                </div>
-                <div class="label-slot" aria-level="1" role="heading">
-                  <div role="button">
-                    <slot name="label"></slot>
-                      test
-                  </div>
-                </div>
-            </div>
-           <ul class="tree-item-group standard" role="tree">
-             <slot></slot>
-          </ul>
-         </li>
+       <li aria-disabled="false" aria-level="1" aria-selected="false" class="tree-item-container" role="treeitem">
+       <div class="tree-item standard" tabindex="0">
+          <div class="icon-slot drag-icon hidden">
+             <slot name="dragIcon"></slot>
+             <svg class="icon-drag" height="16" width="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11,18a2,2,0,1,1-2-2A2.006,2.006,0,0,1,11,18ZM9,10a2,2,0,1,0,2,2A2.006,2.006,0,0,0,9,10ZM9,4a2,2,0,1,0,2,2A2.006,2.006,0,0,0,9,4Zm6,4a2,2,0,1,0-2-2A2.006,2.006,0,0,0,15,8Zm0,2a2,2,0,1,0,2,2A2.006,2.006,0,0,0,15,10Zm0,6a2,2,0,1,0,2,2A2.006,2.006,0,0,0,15,16Z" fill="#252a2e"></path>
+             </svg>
+          </div>
+          <div aria-disabled="true" style="padding-left: 0rem;"></div>
+          <div class="icon-slot hidden" tabindex="-1">
+             <div class="inline-flex rotate-right">
+                <slot name="expandIcon"></slot>
+                <svg class="icon-chevron-down-thick" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="24" width="24" viewBox="0 0 24 24">
+                   <path d="M15.88 9.29 12 13.17 8.12 9.29a.996.996 0 1 0-1.41 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59a.996.996 0 0 0 0-1.41c-.39-.38-1.03-.39-1.42 0z"></path>
+                </svg>
+             </div>
+             <div class="inline-flex">
+                <slot name="collapseIcon"></slot>
+                <svg class="icon-chevron-down-thick" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="24" width="24" viewBox="0 0 24 24">
+                   <path d="M15.88 9.29 12 13.17 8.12 9.29a.996.996 0 1 0-1.41 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59a.996.996 0 0 0 0-1.41c-.39-.38-1.03-.39-1.42 0z"></path>
+                </svg>
+             </div>
+          </div>
+          <div class="icon-slot d-none">
+             <slot name="itemIcon"></slot>
+          </div>
+          <div class="label-slot" aria-level="1" role="heading">
+             <div role="button">
+                <slot name="label"></slot>
+                test
+             </div>
+          </div>
+       </div>
+       <ul class="tree-item-group standard" role="tree">
+          <slot></slot>
+       </ul>
+    </li>
         </mock:shadow-root>
       </modus-tree-view-item>
     `);

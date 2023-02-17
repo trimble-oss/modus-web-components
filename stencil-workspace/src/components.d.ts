@@ -5,6 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
 import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSortEvent, ModusTableSelectionOptions, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 import { DateInputEventData, DateInputType } from "./components/modus-date-picker/utils/modus-date-picker.types";
@@ -58,6 +59,76 @@ export namespace Components {
           * (optional) The type of alert, sets the color and icon to render
          */
         "type": 'error' | 'info' | 'info-gray' | 'info-gray-dark' | 'success' | 'warning';
+    }
+    interface ModusAutocomplete {
+        /**
+          * The autocomplete's aria label.
+         */
+        "ariaLabel": string | null;
+        /**
+          * Whether the input has a clear button.
+         */
+        "clearable": boolean;
+        /**
+          * Whether the input is disabled.
+         */
+        "disabled": boolean;
+        /**
+          * The autocomplete's dropdown's max height.
+         */
+        "dropdownMaxHeight": string;
+        /**
+          * The autocomplete's dropdown z-index.
+         */
+        "dropdownZIndex": string;
+        /**
+          * The autocomplete's error text.
+         */
+        "errorText": string;
+        /**
+          * Whether the search icon is included.
+         */
+        "includeSearchIcon": boolean;
+        /**
+          * The autocomplete's label.
+         */
+        "label": string;
+        /**
+          * The autocomplete's no results sub-text.
+         */
+        "noResultsFoundSubtext": string;
+        /**
+          * The autocomplete's no results text.
+         */
+        "noResultsFoundText": string;
+        /**
+          * The autocomplete's options.
+         */
+        "options": ModusAutocompleteOption[] | string[];
+        /**
+          * The autocomplete's input placeholder.
+         */
+        "placeholder": string;
+        /**
+          * Whether the autocomplete is read-only.
+         */
+        "readOnly": boolean;
+        /**
+          * Whether the autocomplete is required.
+         */
+        "required": boolean;
+        /**
+          * Whether to show the no results found message.
+         */
+        "showNoResultsFoundMessage": boolean;
+        /**
+          * The autocomplete's size.
+         */
+        "size": 'medium' | 'large';
+        /**
+          * The autocomplete's search value.
+         */
+        "value": string;
     }
     interface ModusBadge {
         /**
@@ -908,7 +979,13 @@ export namespace Components {
         /**
           * (optional) The toasts' type.
          */
-        "type": 'danger' | 'dark' | 'default' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning';
+        "type": | 'danger'
+    | 'dark'
+    | 'default'
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'warning';
     }
     interface ModusTooltip {
         /**
@@ -992,6 +1069,10 @@ export interface ModusAlertCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusAlertElement;
 }
+export interface ModusAutocompleteCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusAutocompleteElement;
+}
 export interface ModusBreadcrumbCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusBreadcrumbElement;
@@ -1035,6 +1116,10 @@ export interface ModusModalCustomEvent<T> extends CustomEvent<T> {
 export interface ModusNavbarCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusNavbarElement;
+}
+export interface ModusNavbarAppsMenuCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusNavbarAppsMenuElement;
 }
 export interface ModusNavbarProfileMenuCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1106,6 +1191,12 @@ declare global {
     var HTMLModusAlertElement: {
         prototype: HTMLModusAlertElement;
         new (): HTMLModusAlertElement;
+    };
+    interface HTMLModusAutocompleteElement extends Components.ModusAutocomplete, HTMLStencilElement {
+    }
+    var HTMLModusAutocompleteElement: {
+        prototype: HTMLModusAutocompleteElement;
+        new (): HTMLModusAutocompleteElement;
     };
     interface HTMLModusBadgeElement extends Components.ModusBadge, HTMLStencilElement {
     }
@@ -1327,6 +1418,7 @@ declare global {
         "modus-accordion": HTMLModusAccordionElement;
         "modus-accordion-item": HTMLModusAccordionItemElement;
         "modus-alert": HTMLModusAlertElement;
+        "modus-autocomplete": HTMLModusAutocompleteElement;
         "modus-badge": HTMLModusBadgeElement;
         "modus-breadcrumb": HTMLModusBreadcrumbElement;
         "modus-button": HTMLModusButtonElement;
@@ -1419,6 +1511,84 @@ declare namespace LocalJSX {
           * (optional) The type of alert, sets the color and icon to render
          */
         "type"?: 'error' | 'info' | 'info-gray' | 'info-gray-dark' | 'success' | 'warning';
+    }
+    interface ModusAutocomplete {
+        /**
+          * The autocomplete's aria label.
+         */
+        "ariaLabel"?: string | null;
+        /**
+          * Whether the input has a clear button.
+         */
+        "clearable"?: boolean;
+        /**
+          * Whether the input is disabled.
+         */
+        "disabled"?: boolean;
+        /**
+          * The autocomplete's dropdown's max height.
+         */
+        "dropdownMaxHeight"?: string;
+        /**
+          * The autocomplete's dropdown z-index.
+         */
+        "dropdownZIndex"?: string;
+        /**
+          * The autocomplete's error text.
+         */
+        "errorText"?: string;
+        /**
+          * Whether the search icon is included.
+         */
+        "includeSearchIcon"?: boolean;
+        /**
+          * The autocomplete's label.
+         */
+        "label"?: string;
+        /**
+          * The autocomplete's no results sub-text.
+         */
+        "noResultsFoundSubtext"?: string;
+        /**
+          * The autocomplete's no results text.
+         */
+        "noResultsFoundText"?: string;
+        /**
+          * An event that fires when a dropdown option is selected. Emits the option id.
+         */
+        "onOptionSelected"?: (event: ModusAutocompleteCustomEvent<string>) => void;
+        /**
+          * An event that fires when the input value changes. Emits the value string.
+         */
+        "onValueChange"?: (event: ModusAutocompleteCustomEvent<string>) => void;
+        /**
+          * The autocomplete's options.
+         */
+        "options"?: ModusAutocompleteOption[] | string[];
+        /**
+          * The autocomplete's input placeholder.
+         */
+        "placeholder"?: string;
+        /**
+          * Whether the autocomplete is read-only.
+         */
+        "readOnly"?: boolean;
+        /**
+          * Whether the autocomplete is required.
+         */
+        "required"?: boolean;
+        /**
+          * Whether to show the no results found message.
+         */
+        "showNoResultsFoundMessage"?: boolean;
+        /**
+          * The autocomplete's size.
+         */
+        "size"?: 'medium' | 'large';
+        /**
+          * The autocomplete's search value.
+         */
+        "value"?: string;
     }
     interface ModusBadge {
         /**
@@ -1871,9 +2041,25 @@ declare namespace LocalJSX {
          */
         "helpUrl"?: string;
         /**
+          * An event that fires when an apps menu app opens.
+         */
+        "onAppsMenuAppOpen"?: (event: ModusNavbarCustomEvent<ModusNavbarApp>) => void;
+        /**
+          * An event that fires when the apps menu opens.
+         */
+        "onAppsMenuOpen"?: (event: ModusNavbarCustomEvent<void>) => void;
+        /**
+          * An event that fires when the help link opens.
+         */
+        "onHelpOpen"?: (event: ModusNavbarCustomEvent<void>) => void;
+        /**
           * An event that fires on main menu click.
          */
         "onMainMenuClick"?: (event: ModusNavbarCustomEvent<KeyboardEvent | MouseEvent>) => void;
+        /**
+          * An event that fires when the notifications menu opens.
+         */
+        "onNotificationsMenuOpen"?: (event: ModusNavbarCustomEvent<void>) => void;
         /**
           * An event that fires on product logo click.
          */
@@ -1882,6 +2068,10 @@ declare namespace LocalJSX {
           * An event that fires on profile menu link click.
          */
         "onProfileMenuLinkClick"?: (event: ModusNavbarCustomEvent<string>) => void;
+        /**
+          * An event that fires when the profile menu opens.
+         */
+        "onProfileMenuOpen"?: (event: ModusNavbarCustomEvent<void>) => void;
         /**
           * An event that fires on profile menu sign out click.
          */
@@ -1935,6 +2125,7 @@ declare namespace LocalJSX {
     }
     interface ModusNavbarAppsMenu {
         "apps"?: ModusNavbarApp[];
+        "onAppOpen"?: (event: ModusNavbarAppsMenuCustomEvent<ModusNavbarApp>) => void;
         "reverse"?: boolean;
     }
     interface ModusNavbarMainMenu {
@@ -2385,7 +2576,13 @@ declare namespace LocalJSX {
         /**
           * (optional) The toasts' type.
          */
-        "type"?: 'danger' | 'dark' | 'default' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning';
+        "type"?: | 'danger'
+    | 'dark'
+    | 'default'
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'warning';
     }
     interface ModusTooltip {
         /**
@@ -2474,6 +2671,7 @@ declare namespace LocalJSX {
         "modus-accordion": ModusAccordion;
         "modus-accordion-item": ModusAccordionItem;
         "modus-alert": ModusAlert;
+        "modus-autocomplete": ModusAutocomplete;
         "modus-badge": ModusBadge;
         "modus-breadcrumb": ModusBreadcrumb;
         "modus-button": ModusButton;
@@ -2519,6 +2717,7 @@ declare module "@stencil/core" {
             "modus-accordion": LocalJSX.ModusAccordion & JSXBase.HTMLAttributes<HTMLModusAccordionElement>;
             "modus-accordion-item": LocalJSX.ModusAccordionItem & JSXBase.HTMLAttributes<HTMLModusAccordionItemElement>;
             "modus-alert": LocalJSX.ModusAlert & JSXBase.HTMLAttributes<HTMLModusAlertElement>;
+            "modus-autocomplete": LocalJSX.ModusAutocomplete & JSXBase.HTMLAttributes<HTMLModusAutocompleteElement>;
             "modus-badge": LocalJSX.ModusBadge & JSXBase.HTMLAttributes<HTMLModusBadgeElement>;
             "modus-breadcrumb": LocalJSX.ModusBreadcrumb & JSXBase.HTMLAttributes<HTMLModusBreadcrumbElement>;
             "modus-button": LocalJSX.ModusButton & JSXBase.HTMLAttributes<HTMLModusButtonElement>;

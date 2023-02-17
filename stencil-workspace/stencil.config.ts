@@ -4,6 +4,7 @@ import { postcss } from '@stencil/postcss';
 import { angularOutputTarget } from '@stencil/angular-output-target';
 import { reactOutputTarget as react } from '@stencil/react-output-target';
 import autoprefixer from 'autoprefixer';
+import angularValueAccessorBindings from './angular-value-accessor-bindings';
 
 export const config: Config = {
   namespace: 'modus-web-components',
@@ -27,6 +28,7 @@ export const config: Config = {
       componentCorePackage: '@trimble-oss/modus-web-components',
       directivesProxyFile: '../angular-workspace/projects/trimble-oss/modus-angular-components/src/lib/stencil-generated/components.ts',
       directivesArrayFile: '../angular-workspace/projects/trimble-oss/modus-angular-components/src/lib/stencil-generated/index.ts',
+      valueAccessorConfigs: angularValueAccessorBindings,
     }),
     react({
       componentCorePackage: '@trimble-oss/modus-web-components',

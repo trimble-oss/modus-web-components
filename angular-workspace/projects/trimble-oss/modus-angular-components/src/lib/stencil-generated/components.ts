@@ -89,6 +89,38 @@ export class ModusAlert {
 }
 
 
+export declare interface ModusAutocomplete extends Components.ModusAutocomplete {
+  /**
+   * An event that fires when a dropdown option is selected. Emits the option id. 
+   */
+  optionSelected: EventEmitter<CustomEvent<string>>;
+  /**
+   * An event that fires when the input value changes. Emits the value string. 
+   */
+  valueChange: EventEmitter<CustomEvent<string>>;
+
+}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['ariaLabel', 'clearable', 'disabled', 'dropdownMaxHeight', 'dropdownZIndex', 'errorText', 'includeSearchIcon', 'label', 'noResultsFoundSubtext', 'noResultsFoundText', 'options', 'placeholder', 'readOnly', 'required', 'showNoResultsFoundMessage', 'size', 'value']
+})
+@Component({
+  selector: 'modus-autocomplete',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['ariaLabel', 'clearable', 'disabled', 'dropdownMaxHeight', 'dropdownZIndex', 'errorText', 'includeSearchIcon', 'label', 'noResultsFoundSubtext', 'noResultsFoundText', 'options', 'placeholder', 'readOnly', 'required', 'showNoResultsFoundMessage', 'size', 'value']
+})
+export class ModusAutocomplete {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['optionSelected', 'valueChange']);
+  }
+}
+
+
 export declare interface ModusBadge extends Components.ModusBadge {}
 
 @ProxyCmp({
@@ -516,12 +548,28 @@ export class ModusModal {
   }
 }
 
-
+import type { ModusNavbarApp as IModusNavbarModusNavbarApp } from '@trimble-oss/modus-web-components';
 export declare interface ModusNavbar extends Components.ModusNavbar {
+  /**
+   * An event that fires when the apps menu opens. 
+   */
+  appsMenuOpen: EventEmitter<CustomEvent<void>>;
+  /**
+   * An event that fires when an apps menu app opens. 
+   */
+  appsMenuAppOpen: EventEmitter<CustomEvent<IModusNavbarModusNavbarApp>>;
+  /**
+   * An event that fires when the help link opens. 
+   */
+  helpOpen: EventEmitter<CustomEvent<void>>;
   /**
    * An event that fires on main menu click. 
    */
   mainMenuClick: EventEmitter<CustomEvent<KeyboardEvent | MouseEvent>>;
+  /**
+   * An event that fires when the notifications menu opens. 
+   */
+  notificationsMenuOpen: EventEmitter<CustomEvent<void>>;
   /**
    * An event that fires on product logo click. 
    */
@@ -530,6 +578,10 @@ export declare interface ModusNavbar extends Components.ModusNavbar {
    * An event that fires on profile menu link click. 
    */
   profileMenuLinkClick: EventEmitter<CustomEvent<string>>;
+  /**
+   * An event that fires when the profile menu opens. 
+   */
+  profileMenuOpen: EventEmitter<CustomEvent<void>>;
   /**
    * An event that fires on profile menu sign out click. 
    */
@@ -553,12 +605,18 @@ export class ModusNavbar {
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['mainMenuClick', 'productLogoClick', 'profileMenuLinkClick', 'profileMenuSignOutClick']);
+    proxyOutputs(this, this.el, ['appsMenuOpen', 'appsMenuAppOpen', 'helpOpen', 'mainMenuClick', 'notificationsMenuOpen', 'productLogoClick', 'profileMenuLinkClick', 'profileMenuOpen', 'profileMenuSignOutClick']);
   }
 }
 
+import type { ModusNavbarApp as IModusNavbarAppsMenuModusNavbarApp } from '@trimble-oss/modus-web-components';
+export declare interface ModusNavbarAppsMenu extends Components.ModusNavbarAppsMenu {
+  /**
+   *  
+   */
+  appOpen: EventEmitter<CustomEvent<IModusNavbarAppsMenuModusNavbarApp>>;
 
-export declare interface ModusNavbarAppsMenu extends Components.ModusNavbarAppsMenu {}
+}
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
@@ -575,6 +633,7 @@ export class ModusNavbarAppsMenu {
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['appOpen']);
   }
 }
 

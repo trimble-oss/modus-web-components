@@ -5,6 +5,7 @@ export const DIRECTIVES = [
   d.ModusAccordion,
   d.ModusAccordionItem,
   d.ModusAlert,
+  d.ModusAutocomplete,
   d.ModusBadge,
   d.ModusBreadcrumb,
   d.ModusButton,

@@ -4,13 +4,14 @@
   @include custom-navbar-menu;
 
   border-radius: 0 0 $rem_2px $rem_2px;
+  border-top: none;
   clip-path: inset(0 -10px -10px -10px);
   cursor: default;
-  height: calc(100vh - 56px);
-  left: -16px;
+  height: calc(100vh - 54px);
+  left: 0;
   max-width: 616px;
   min-width: 248px;
   padding: 0;
-  top: 50px;
+  top: 52px;
   width: max-content;
 }

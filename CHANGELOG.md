@@ -10,6 +10,43 @@ View all releases at: <https://github.com/trimble-oss/modus-web-components/relea
 
 - Added Modus Date Input(`<modus-date-input>`) and Modus Date Picker(`<modus-date-picker>`) components.
 
+## 0.1.33 - 2021-02-16
+
+### Fixed
+
+- Fixed an issue where the breadcrumbs were pushing '#' to the route when clicked
+
+### Added
+
+- Added support for Angular Reactive Forms 🎉
+
+## 0.1.32 - 2023-01-27
+
+### Fixed
+
+- Removed `tertiary` variant from Modus Toasts
+- Fixed `modus-navbar` button centering
+
+### Added
+
+- Events to know when the `modus-navbar` is opening links and menus
+
+### Fixed
+
+- Fixed the thick chevron icons used in Modus Accordion and Modus Content Tree components
+
+## 0.1.31 - 2023-01-19
+
+### Fixed
+
+- Modus Navbar main menu height
+
+## 0.1.30 - 2023-01-19
+
+### Fixed
+
+- Modus Navbar colors and spacing/margin
+
 ## 0.1.29 - 2023-01-06
 
 ### Fixed
@@ -21,6 +58,8 @@ View all releases at: <https://github.com/trimble-oss/modus-web-components/relea
 - Added Modus Side navigation component.
 - Added password text toggle feature to `modus-text-input` component.
 - Modus Accordions now have transition animations
+
+- Add `modus-autocomplete`
 
 ## 0.1.28 - 2022-12-06
 
