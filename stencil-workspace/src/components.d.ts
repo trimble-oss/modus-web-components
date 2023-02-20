@@ -424,9 +424,17 @@ export namespace Components {
         "headerText": string;
         "open": () => Promise<void>;
         /**
+          * (optional) The modal's primary button Area label.
+         */
+        "primaryButtonAreaLabel": string | null;
+        /**
           * (optional) The modal's primary button text.
          */
         "primaryButtonText": string;
+        /**
+          * (optional) The modal's secondary button Area Label.
+         */
+        "secondaryButtonAreaLabel": string | null;
         /**
           * (optional) The modal's secondary button text.
          */
@@ -1835,9 +1843,17 @@ declare namespace LocalJSX {
          */
         "onSecondaryButtonClick"?: (event: ModusModalCustomEvent<any>) => void;
         /**
+          * (optional) The modal's primary button Area label.
+         */
+        "primaryButtonAreaLabel"?: string | null;
+        /**
           * (optional) The modal's primary button text.
          */
         "primaryButtonText"?: string;
+        /**
+          * (optional) The modal's secondary button Area Label.
+         */
+        "secondaryButtonAreaLabel"?: string | null;
         /**
           * (optional) The modal's secondary button text.
          */
