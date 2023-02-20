@@ -11,9 +11,9 @@
 | -------------------------- | ----------------------------- | --------------------------------------------------- | -------- | ----------- |
 | `ariaLabel`                | `aria-label`                  | (optional) The modal's aria-label.                  | `string` | `undefined` |
 | `headerText`               | `header-text`                 | (optional) The modal's primary button text.         | `string` | `undefined` |
-| `primaryButtonAreaLabel`   | `primary-button-area-label`   | (optional) The modal's primary button Area label.   | `string` | `undefined` |
+| `primaryButtonAriaLabel`   | `primary-button-aria-label`   | (optional) The modal's primary button Aria label.   | `string` | `undefined` |
 | `primaryButtonText`        | `primary-button-text`         | (optional) The modal's primary button text.         | `string` | `undefined` |
-| `secondaryButtonAreaLabel` | `secondary-button-area-label` | (optional) The modal's secondary button Area Label. | `string` | `undefined` |
+| `secondaryButtonAriaLabel` | `secondary-button-aria-label` | (optional) The modal's secondary button Aria Label. | `string` | `undefined` |
 | `secondaryButtonText`      | `secondary-button-text`       | (optional) The modal's secondary button text.       | `string` | `undefined` |
 | `zIndex`                   | `z-index`                     | (optional) The modal's z-index.                     | `string` | `'1'`       |
 

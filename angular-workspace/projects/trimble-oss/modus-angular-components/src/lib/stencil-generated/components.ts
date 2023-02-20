@@ -472,14 +472,14 @@ export declare interface ModusModal extends Components.ModusModal {
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['ariaLabel', 'headerText', 'primaryButtonAreaLabel', 'primaryButtonText', 'secondaryButtonAreaLabel', 'secondaryButtonText', 'zIndex'],
+  inputs: ['ariaLabel', 'headerText', 'primaryButtonAriaLabel', 'primaryButtonText', 'secondaryButtonAriaLabel', 'secondaryButtonText', 'zIndex'],
   methods: ['close', 'open']
 })
 @Component({
   selector: 'modus-modal',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['ariaLabel', 'headerText', 'primaryButtonAreaLabel', 'primaryButtonText', 'secondaryButtonAreaLabel', 'secondaryButtonText', 'zIndex']
+  inputs: ['ariaLabel', 'headerText', 'primaryButtonAriaLabel', 'primaryButtonText', 'secondaryButtonAriaLabel', 'secondaryButtonText', 'zIndex']
 })
 export class ModusModal {
   protected el: HTMLElement;

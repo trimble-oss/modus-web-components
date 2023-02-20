@@ -23,11 +23,11 @@ export class ModusModal {
   /** (optional) The modal's z-index. */
   @Prop() zIndex = '1';
 
-  /** (optional) The modal's primary button Area label. */
-  @Prop() primaryButtonAreaLabel: string | null;
+  /** (optional) The modal's primary button Aria label. */
+  @Prop() primaryButtonAriaLabel: string | null;
 
-  /** (optional) The modal's secondary button Area Label. */
-  @Prop() secondaryButtonAreaLabel: string | null;
+  /** (optional) The modal's secondary button Aria Label. */
+  @Prop() secondaryButtonAriaLabel: string | null;
 
   /** An event that fires on modal close.  */
   @Event() closed: EventEmitter;
@@ -105,12 +105,12 @@ export class ModusModal {
           </div>
           <div class="footer">
             {this.secondaryButtonText && (
-              <modus-button button-style="outline" color="secondary" ariaLabel={this.secondaryButtonAreaLabel} onClick={() => this.secondaryButtonClick.emit()} onKeyDown={(event) => this.handlePrimaryKeydown(event)}>
+              <modus-button button-style="outline" color="secondary" ariaLabel={this.secondaryButtonAriaLabel} onClick={() => this.secondaryButtonClick.emit()} onKeyDown={(event) => this.handlePrimaryKeydown(event)}>
                 {this.secondaryButtonText}
               </modus-button>
             )}
             {this.primaryButtonText && (
-              <modus-button color="primary" ariaLabel={this.primaryButtonAreaLabel} onClick={() => this.primaryButtonClick.emit()} onKeyDown={(event) => this.handleSecondaryKeydown(event)}>
+              <modus-button color="primary" ariaLabel={this.primaryButtonAriaLabel} onClick={() => this.primaryButtonClick.emit()} onKeyDown={(event) => this.handleSecondaryKeydown(event)}>
                 {this.primaryButtonText}
               </modus-button>
             )}
