@@ -75,10 +75,10 @@
       }
 
       .year-icons {
-        opacity: 0;
         display: inline-flex;
         flex-direction: column;
         margin-left: 0.5rem;
+        opacity: 0;
 
         button:active {
           opacity: 0.5;

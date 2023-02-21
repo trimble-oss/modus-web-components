@@ -320,7 +320,7 @@ export namespace Components {
          */
         "getDate": () => Promise<Date>;
         /**
-          * (optional) Custom helper text displayed below the input. Default is 'dd/mm/yyyy'
+          * (optional) Custom helper text displayed below the input. Default is 'dd/mm/yyyy'.
          */
         "helperText": string;
         /**
@@ -331,6 +331,10 @@ export namespace Components {
           * (optional) The input's label.
          */
         "label": string;
+        /**
+          * (optional) The input's maximum length. Default is 10.
+         */
+        "maxLength": number;
         /**
           * (optional) The input's placeholder text.
          */
@@ -1812,7 +1816,7 @@ declare namespace LocalJSX {
          */
         "errorText"?: string;
         /**
-          * (optional) Custom helper text displayed below the input. Default is 'dd/mm/yyyy'
+          * (optional) Custom helper text displayed below the input. Default is 'dd/mm/yyyy'.
          */
         "helperText"?: string;
         /**
@@ -1823,6 +1827,10 @@ declare namespace LocalJSX {
           * (optional) The input's label.
          */
         "label"?: string;
+        /**
+          * (optional) The input's maximum length. Default is 10.
+         */
+        "maxLength"?: number;
         /**
           * An event that fires on calendar icon click.
          */

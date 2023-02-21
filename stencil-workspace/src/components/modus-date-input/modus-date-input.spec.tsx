@@ -12,14 +12,18 @@ describe('modus-date-input', () => {
        <mock:shadow-root>
          <div class="modus-date-input">
            <div class="label-container">
-             <label>
+             <label htmlFor="date-input">
                Single Date
              </label>
            </div>
            <div class="input-container medium">
-             <input inputmode="text" tabindex="0" type="text">
+             <input id="date-input" inputmode="text" maxlength="10" tabindex="0" type="text">
            </div>
-           <div class="validation"></div>
+           <div class="sub-text">
+             <label class="helper">
+               dd/mm/yyyy
+             </label>
+           </div>
          </div>
     `);
   });

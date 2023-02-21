@@ -186,7 +186,7 @@ describe('modus-date-picker', () => {
     await calendar.click();
     await page.waitForChanges();
 
-    const errorText = await page.find('modus-date-input[type="start"] >>> .validation > label');
+    const errorText = await page.find('modus-date-input[type="start"] >>> .sub-text > label');
     expect(errorText.innerHTML).toEqual('Invalid date range');
   });
 });

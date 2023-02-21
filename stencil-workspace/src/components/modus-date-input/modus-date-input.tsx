@@ -41,14 +41,17 @@ export class ModusDateInput {
   /** (optional) Custom error text displayed for the input. */
   @Prop() errorText: string;
 
-  /** (optional) Custom helper text displayed below the input. Default is 'dd/mm/yyyy' */
-  @Prop() helperText: string;
+  /** (optional) Custom helper text displayed below the input. Default is 'dd/mm/yyyy'. */
+  @Prop() helperText = 'dd/mm/yyyy';
 
   /** (optional) Sets input error state. */
   @Prop() invalid: boolean;
 
   /** (optional) The input's label. */
   @Prop() label: string;
+
+  /** (optional) The input's maximum length. Default is 10. */
+  @Prop() maxLength = 10;
 
   /** (optional) The input's placeholder text. */
   @Prop() placeholder: string;
@@ -157,6 +160,22 @@ export class ModusDateInput {
     this.invalid = Boolean(this.errorText);
   }
 
+  handleInputKeys(event: KeyboardEvent): boolean {
+    // Get the key
+    const key = event.key;
+
+    // eslint-disable-next-line no-useless-escape
+    const exp = /[0-9\/]+/; // only numbers and '/'
+    const regex = new RegExp(exp);
+
+    // Check if key is in the reg exp
+    if (!regex.test(key)) {
+      // Restrict the special characters
+      event.preventDefault();
+      return false;
+    }
+  }
+
   render() {
     const className = `modus-date-input ${this.disabled ? 'disabled' : ''}`;
     return (
@@ -169,7 +188,9 @@ export class ModusDateInput {
         class={className}>
         {this.label || this.required ? (
           <div class={'label-container'}>
-            {this.label ? <label>{this.label}</label> : null}
+            {this.label ? (
+              <label htmlFor="date-input">{this.label}</label>
+            ) : null}
             {this.required ? <span class="required">*</span> : null}
           </div>
         ) : null}
@@ -182,6 +203,7 @@ export class ModusDateInput {
               : ''
           } ${this.classBySize.get(this.size)}`}>
           <input
+            id="date-input"
             aria-placeholder={this.placeholder}
             class={{ 'has-right-icon': this.showCalendarIcon }}
             disabled={this.disabled}
@@ -195,6 +217,8 @@ export class ModusDateInput {
             value={this.value}
             autofocus={this.autoFocusInput}
             onBlur={() => this.handleBlur()}
+            maxLength={this.maxLength}
+            onKeyPress={(e) => this.handleInputKeys(e)}
           />
           {this.showCalendarIcon && (
             <span
@@ -210,13 +234,13 @@ export class ModusDateInput {
             </span>
           )}
         </div>
-        <div class="validation">
+        <div class="sub-text">
           {this.errorText ? (
-            <label class="sub-text error">{this.errorText}</label>
+            <label class="error">{this.errorText}</label>
           ) : this.validText ? (
-            <label class="sub-text valid">{this.validText}</label>
+            <label class="valid">{this.validText}</label>
           ) : this.helperText ? (
-            <label class="sub-text helper">{this.helperText}</label>
+            <label class="helper">{this.helperText}</label>
           ) : null}
         </div>
       </div>

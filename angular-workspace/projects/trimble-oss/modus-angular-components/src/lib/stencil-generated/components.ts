@@ -343,14 +343,14 @@ export declare interface ModusDateInput extends Components.ModusDateInput {
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['ariaLabel', 'autoFocusInput', 'disableValidation', 'disabled', 'errorText', 'helperText', 'invalid', 'label', 'placeholder', 'readOnly', 'required', 'showCalendarIcon', 'size', 'type', 'validText', 'value'],
+  inputs: ['ariaLabel', 'autoFocusInput', 'disableValidation', 'disabled', 'errorText', 'helperText', 'invalid', 'label', 'maxLength', 'placeholder', 'readOnly', 'required', 'showCalendarIcon', 'size', 'type', 'validText', 'value'],
   methods: ['focusInput', 'getDate', 'setDate']
 })
 @Component({
   selector: 'modus-date-input',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['ariaLabel', 'autoFocusInput', 'disableValidation', 'disabled', 'errorText', 'helperText', 'invalid', 'label', 'placeholder', 'readOnly', 'required', 'showCalendarIcon', 'size', 'type', 'validText', 'value']
+  inputs: ['ariaLabel', 'autoFocusInput', 'disableValidation', 'disabled', 'errorText', 'helperText', 'invalid', 'label', 'maxLength', 'placeholder', 'readOnly', 'required', 'showCalendarIcon', 'size', 'type', 'validText', 'value']
 })
 export class ModusDateInput {
   protected el: HTMLElement;
