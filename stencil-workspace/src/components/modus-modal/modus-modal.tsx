@@ -17,17 +17,17 @@ export class ModusModal {
   /** (optional) The modal's primary button text. */
   @Prop() primaryButtonText: string;
 
+  /** (optional) The modal's primary button aria-label. */
+  @Prop() primaryButtonAriaLabel: string | null;
+
   /** (optional) The modal's secondary button text. */
   @Prop() secondaryButtonText: string;
 
+  /** (optional) The modal's secondary button aria-label. */
+  @Prop() secondaryButtonAriaLabel: string | null;
+
   /** (optional) The modal's z-index. */
   @Prop() zIndex = '1';
-
-  /** (optional) The modal's primary button Aria label. */
-  @Prop() primaryButtonAriaLabel: string | null;
-
-  /** (optional) The modal's secondary button Aria Label. */
-  @Prop() secondaryButtonAriaLabel: string | null;
 
   /** An event that fires on modal close.  */
   @Event() closed: EventEmitter;
