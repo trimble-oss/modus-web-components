@@ -16,6 +16,22 @@
 
   </head>
   <body>
-    <!-- Test components here -->
+    <modus-time-picker label="Time" placeholder="12:39 PM" ampm="true">
+      <div style="width: 300px;padding-left: 0.5rem;" slot="timeZone">
+        <modus-select
+        id="select-demo-1"
+        label="Time Zone"
+        options-display-prop="display"></modus-select></div>
+    </modus-time-picker>
+
+    <modus-time-picker  label="Time"></modus-time-picker>
   </body>
+  <script>
+    const modusSelect = document.querySelector('#select-demo-1');
+    modusSelect.options = [
+      { display: 'Alpha Time Zone' },
+      { display: 'Australian Central Daylight Time' },
+      { display: 'Atlantic Daylight Time' },
+    ];
+  </script>
 </html>

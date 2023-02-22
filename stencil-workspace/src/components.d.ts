@@ -15,6 +15,7 @@ import { ModusNavbarProfileMenuLink as ModusNavbarProfileMenuLink1 } from "./com
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.types";
 import { Tab } from "./components/modus-tabs/modus-tabs";
+import { TimeInputEventData } from "./components/modus-time-input/modus-time-picker.types";
 import { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export namespace Components {
     interface ModusAccordion {
@@ -881,6 +882,72 @@ export namespace Components {
          */
         "value": string;
     }
+    interface ModusTimePicker {
+        /**
+          * (optional) Sets 12/24 hour format for the input string.
+         */
+        "ampm": boolean;
+        /**
+          * (optional) The input's aria-label.
+         */
+        "ariaLabel": string | null;
+        /**
+          * (optional) Sets autofocus on the input.
+         */
+        "autoFocusInput": boolean;
+        /**
+          * (optional) Disables default validation for the time input.
+         */
+        "disableValidation": boolean;
+        /**
+          * (optional) Whether the input is disabled.
+         */
+        "disabled": boolean;
+        /**
+          * (optional) Custom error text displayed for the input.
+         */
+        "errorText": string;
+        /**
+          * Focus the input.
+         */
+        "focusInput": () => Promise<void>;
+        /**
+          * (optional) Custom helper text displayed below the input.
+         */
+        "helperText": any;
+        /**
+          * (optional) The input's label.
+         */
+        "label": string;
+        /**
+          * (optional) The input's maximum length. Default is 10.
+         */
+        "maxLength": number;
+        /**
+          * (optional) The input's placeholder text.
+         */
+        "placeholder": string;
+        /**
+          * (optional) Whether the input's content is read-only
+         */
+        "readOnly": boolean;
+        /**
+          * (optional) Whether the input is required.
+         */
+        "required": boolean;
+        /**
+          * (optional) The input's size.
+         */
+        "size": 'medium' | 'large';
+        /**
+          * (optional) The input's valid state text.
+         */
+        "validText": string;
+        /**
+          * (optional) Value of the time entered into the input.
+         */
+        "value": string;
+    }
     interface ModusToast {
         /**
           * (optional) The toast's aria-label.
@@ -1078,6 +1145,10 @@ export interface ModusTabsCustomEvent<T> extends CustomEvent<T> {
 export interface ModusTextInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusTextInputElement;
+}
+export interface ModusTimePickerCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusTimePickerElement;
 }
 export interface ModusToastCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1292,6 +1363,12 @@ declare global {
         prototype: HTMLModusTextInputElement;
         new (): HTMLModusTextInputElement;
     };
+    interface HTMLModusTimePickerElement extends Components.ModusTimePicker, HTMLStencilElement {
+    }
+    var HTMLModusTimePickerElement: {
+        prototype: HTMLModusTimePickerElement;
+        new (): HTMLModusTimePickerElement;
+    };
     interface HTMLModusToastElement extends Components.ModusToast, HTMLStencilElement {
     }
     var HTMLModusToastElement: {
@@ -1351,6 +1428,7 @@ declare global {
         "modus-switch": HTMLModusSwitchElement;
         "modus-tabs": HTMLModusTabsElement;
         "modus-text-input": HTMLModusTextInputElement;
+        "modus-time-picker": HTMLModusTimePickerElement;
         "modus-toast": HTMLModusToastElement;
         "modus-tooltip": HTMLModusTooltipElement;
         "modus-tree-view": HTMLModusTreeViewElement;
@@ -2375,6 +2453,76 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
+    interface ModusTimePicker {
+        /**
+          * (optional) Sets 12/24 hour format for the input string.
+         */
+        "ampm"?: boolean;
+        /**
+          * (optional) The input's aria-label.
+         */
+        "ariaLabel"?: string | null;
+        /**
+          * (optional) Sets autofocus on the input.
+         */
+        "autoFocusInput"?: boolean;
+        /**
+          * (optional) Disables default validation for the time input.
+         */
+        "disableValidation"?: boolean;
+        /**
+          * (optional) Whether the input is disabled.
+         */
+        "disabled"?: boolean;
+        /**
+          * (optional) Custom error text displayed for the input.
+         */
+        "errorText"?: string;
+        /**
+          * (optional) Custom helper text displayed below the input.
+         */
+        "helperText"?: any;
+        /**
+          * (optional) The input's label.
+         */
+        "label"?: string;
+        /**
+          * (optional) The input's maximum length. Default is 10.
+         */
+        "maxLength"?: number;
+        /**
+          * An event that fires on input value out of focus.
+         */
+        "onTimeInputBlur"?: (event: ModusTimePickerCustomEvent<TimeInputEventData>) => void;
+        /**
+          * An event that fires on input value change.
+         */
+        "onValueChange"?: (event: ModusTimePickerCustomEvent<TimeInputEventData>) => void;
+        /**
+          * (optional) The input's placeholder text.
+         */
+        "placeholder"?: string;
+        /**
+          * (optional) Whether the input's content is read-only
+         */
+        "readOnly"?: boolean;
+        /**
+          * (optional) Whether the input is required.
+         */
+        "required"?: boolean;
+        /**
+          * (optional) The input's size.
+         */
+        "size"?: 'medium' | 'large';
+        /**
+          * (optional) The input's valid state text.
+         */
+        "validText"?: string;
+        /**
+          * (optional) Value of the time entered into the input.
+         */
+        "value"?: string;
+    }
     interface ModusToast {
         /**
           * (optional) The toast's aria-label.
@@ -2521,6 +2669,7 @@ declare namespace LocalJSX {
         "modus-switch": ModusSwitch;
         "modus-tabs": ModusTabs;
         "modus-text-input": ModusTextInput;
+        "modus-time-picker": ModusTimePicker;
         "modus-toast": ModusToast;
         "modus-tooltip": ModusTooltip;
         "modus-tree-view": ModusTreeView;
@@ -2565,6 +2714,7 @@ declare module "@stencil/core" {
             "modus-switch": LocalJSX.ModusSwitch & JSXBase.HTMLAttributes<HTMLModusSwitchElement>;
             "modus-tabs": LocalJSX.ModusTabs & JSXBase.HTMLAttributes<HTMLModusTabsElement>;
             "modus-text-input": LocalJSX.ModusTextInput & JSXBase.HTMLAttributes<HTMLModusTextInputElement>;
+            "modus-time-picker": LocalJSX.ModusTimePicker & JSXBase.HTMLAttributes<HTMLModusTimePickerElement>;
             "modus-toast": LocalJSX.ModusToast & JSXBase.HTMLAttributes<HTMLModusToastElement>;
             "modus-tooltip": LocalJSX.ModusTooltip & JSXBase.HTMLAttributes<HTMLModusTooltipElement>;
             "modus-tree-view": LocalJSX.ModusTreeView & JSXBase.HTMLAttributes<HTMLModusTreeViewElement>;

@@ -36,6 +36,7 @@ export const DIRECTIVES = [
   d.ModusSwitch,
   d.ModusTabs,
   d.ModusTextInput,
+  d.ModusTimePicker,
   d.ModusToast,
   d.ModusTooltip,
   d.ModusTreeView,

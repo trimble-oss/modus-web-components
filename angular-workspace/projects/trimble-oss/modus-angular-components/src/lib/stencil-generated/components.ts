@@ -983,6 +983,39 @@ export class ModusTextInput {
   }
 }
 
+import type { TimeInputEventData as IModusTimePickerTimeInputEventData } from '@trimble-oss/modus-web-components';
+export declare interface ModusTimePicker extends Components.ModusTimePicker {
+  /**
+   * An event that fires on input value out of focus. 
+   */
+  timeInputBlur: EventEmitter<CustomEvent<IModusTimePickerTimeInputEventData>>;
+  /**
+   * An event that fires on input value change. 
+   */
+  valueChange: EventEmitter<CustomEvent<IModusTimePickerTimeInputEventData>>;
+
+}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['ampm', 'ariaLabel', 'autoFocusInput', 'disableValidation', 'disabled', 'errorText', 'helperText', 'label', 'maxLength', 'placeholder', 'readOnly', 'required', 'size', 'validText', 'value'],
+  methods: ['focusInput']
+})
+@Component({
+  selector: 'modus-time-picker',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['ampm', 'ariaLabel', 'autoFocusInput', 'disableValidation', 'disabled', 'errorText', 'helperText', 'label', 'maxLength', 'placeholder', 'readOnly', 'required', 'size', 'validText', 'value']
+})
+export class ModusTimePicker {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['timeInputBlur', 'valueChange']);
+  }
+}
+
 
 export declare interface ModusToast extends Components.ModusToast {
   /**

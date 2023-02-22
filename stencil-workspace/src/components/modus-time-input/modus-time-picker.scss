@@ -1,0 +1,153 @@
+@import './modus-time-picker.vars';
+
+.modus-time-picker {
+  box-sizing: border-box;
+  display: inline-flex;
+  flex-direction: row;
+  font-family: $primary-font;
+  position: relative;
+  width: 100%;
+
+  .time-input-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  button {
+    background: 0;
+    border: 0;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+  }
+
+  label {
+    color: $modus-input-label-color;
+    margin-bottom: $rem-4px;
+  }
+
+  .label-container {
+    display: flex;
+
+    label {
+      font-size: $rem-12px;
+    }
+
+    span {
+      &.required {
+        bottom: $rem-1px;
+        color: $modus-input-validation-error-color;
+        margin-left: $rem-4px;
+        position: relative;
+      }
+    }
+  }
+
+  .input-container {
+    align-items: center;
+    background-color: $modus-input-bg;
+    border: $rem-1px solid $modus-input-border-color;
+    border-bottom-color: $modus-input-bottom-line-color;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    height: 2rem;
+    position: relative;
+    width: 100%;
+
+    input {
+      background-color: transparent;
+      background-position: right calc(0.375em + 0.1875rem) center;
+      background-repeat: no-repeat;
+      background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+      border: none;
+      color: $modus-input-color;
+      font-size: $rem-12px;
+      outline: none;
+      padding: 0 $rem-8px;
+      padding-right: calc(1.5em + 0.75rem);
+      width: 100%;
+
+      &::placeholder {
+        color: $modus-input-hint-text-color;
+      }
+    }
+
+    &:hover {
+      cursor: text;
+    }
+
+    &:focus-within,
+    &.error,
+    &.valid {
+      border-bottom-width: $rem-2px;
+      height: 1.9375rem; // Counteract bottom border width.
+    }
+
+    &:focus-within {
+      border-bottom-color: $modus-input-bottom-line-active-color;
+    }
+
+    &.error {
+      border-bottom-color: $modus-input-validation-error-color;
+    }
+
+    &.valid {
+      border-bottom-color: $modus-input-validation-success-color;
+    }
+
+    &.large {
+      height: 3rem;
+
+      input {
+        font-size: $rem-14px;
+      }
+
+      &:focus-within,
+      &.error,
+      &.valid {
+        height: 2.9375rem; // Counteract bottom border width.
+      }
+    }
+  }
+
+  .sub-text {
+    font-size: $rem-10px;
+    margin-top: $rem-4px;
+
+    &.helper {
+      color: $modus-input-label-color;
+    }
+
+    &.error {
+      color: $modus-input-validation-error-color;
+    }
+
+    &.valid {
+      color: $modus-input-validation-success-color;
+    }
+  }
+
+  &.large {
+    font-size: $rem-14px;
+    height: 48px;
+  }
+
+  &.disabled {
+    pointer-events: none;
+
+    .input-container {
+      background-color: $modus-input-disabled-bg;
+      border: $rem-1px solid $modus-input-disabled-border-color;
+      border-bottom-color: $modus-input-disabled-bottom-line-color;
+
+      input {
+        background-color: transparent;
+        border-radius: 0;
+        color: $modus-input-disabled-color;
+        height: 100%;
+      }
+    }
+  }
+}
