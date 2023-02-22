@@ -132,19 +132,6 @@ describe('modus-date-input', () => {
     expect(await input.getProperty('value')).toEqual('01/01/2023');
   });
 
-  it('renders changes to invalid', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<modus-date-input></modus-date-input>');
-
-    const inputContainer = await page.find('modus-date-input >>> .input-container');
-    expect(inputContainer).not.toHaveClass('error');
-
-    const textInput = await page.find('modus-date-input');
-    textInput.setProperty('invalid', true);
-    await page.waitForChanges();
-    expect(inputContainer).toHaveClass('error');
-  });
-
   it('renders changes to readOnly', async () => {
     const page = await newE2EPage();
     await page.setContent('<modus-date-input></modus-date-input>');

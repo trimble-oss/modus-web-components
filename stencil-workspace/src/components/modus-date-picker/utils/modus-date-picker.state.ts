@@ -21,11 +21,9 @@ export class DateInputInfo {
 
   setError(message: string = null) {
     this.element.errorText = message;
-    this.element.invalid = true;
   }
 
   resetError() {
-    this.element.invalid = null;
     this.element.errorText = null;
   }
 

@@ -71,7 +71,6 @@
     .icons {
       align-items: center;
       background-color: $modus-input-bg;
-      color: $modus-input-helper-icon-color;
       display: flex;
       font-size: $rem-16px;
       height: 100%;
@@ -83,7 +82,7 @@
         padding: 0 $rem-6px;
 
         path {
-          fill: $modus-input-helper-icon-color;
+          fill: $modus-input-calendar-icon-color;
         }
       }
     }

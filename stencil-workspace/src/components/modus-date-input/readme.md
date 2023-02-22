@@ -15,7 +15,6 @@
 | `disabled`          | `disabled`           | (optional) Whether the input is disabled.                                                                               | `boolean`                      | `undefined`    |
 | `errorText`         | `error-text`         | (optional) Custom error text displayed for the input.                                                                   | `string`                       | `undefined`    |
 | `helperText`        | `helper-text`        | (optional) Custom helper text displayed below the input. Default is 'dd/mm/yyyy'.                                       | `string`                       | `'dd/mm/yyyy'` |
-| `invalid`           | `invalid`            | (optional) Sets input error state.                                                                                      | `boolean`                      | `undefined`    |
 | `label`             | `label`              | (optional) The input's label.                                                                                           | `string`                       | `undefined`    |
 | `maxLength`         | `max-length`         | (optional) The input's maximum length. Default is 10.                                                                   | `number`                       | `10`           |
 | `placeholder`       | `placeholder`        | (optional) The input's placeholder text.                                                                                | `string`                       | `undefined`    |
