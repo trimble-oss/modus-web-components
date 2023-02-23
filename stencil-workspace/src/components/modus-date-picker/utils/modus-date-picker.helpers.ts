@@ -23,7 +23,7 @@ export function parseString(val: Date): string {
   });
 }
 
-export function validate(val:string, errorIfEmpty = false):string{
+export function validateDate(val:string, errorIfEmpty = false):string{
   let error = 'Invalid date';
   if (!val || EmptyStringPattern.test(val)) {
     error = errorIfEmpty ? 'Required' : null;

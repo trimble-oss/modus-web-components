@@ -57,8 +57,9 @@ export class ModusDatePicker {
     if (
       this.element.contains(event.target as HTMLElement) ||
       event.defaultPrevented
-    )
+    ) {
       return;
+    }
     // Collapse when clicked outside
     this.toggleCalendar(false);
   }
@@ -143,7 +144,7 @@ export class ModusDatePicker {
     this._forceUpdate = { ...this._forceUpdate };
   }
 
-  findDatePositionsInRange(
+  findDatePositionsInARange(
     date: Date,
     startDate: Date,
     endDate: Date
@@ -198,64 +199,118 @@ export class ModusDatePicker {
     }
   }
 
-  private renderMonth() {
+  private renderCalendarBody() {
     const today = new Date();
     const startDate = this._dateInputs['start']?.getDate();
     const endDate = this._dateInputs['end']?.getDate();
     const singleDate = this._dateInputs['single']?.getDate();
 
     return (
-      <div
-        class={{
-          'calendar-month grid': true,
-          'invalid-date-range': this.isInvalidDateRange(startDate, endDate),
-        }}>
-        {this._calendar.dates.map((date, index) => {
-          if (!date) {
-            return null;
-          }
+      <div class="calendar-body">
+        <div class="calendar-days-week grid">
+          {this._calendar.getDaysOfWeek(this._locale).map((d) => {
+            return <div class="grid-item">{d}</div>;
+          })}
+        </div>
+        <div class="calendar-month-container">
+          <div
+            class={{
+              'calendar-month grid': true,
+              'invalid-date-range': this.isInvalidDateRange(startDate, endDate),
+            }}>
+            {this._calendar.dates.map((date, index) => {
+              if (!date) {
+                return null;
+              }
 
-          const positions = this.findDatePositionsInRange(
-            date,
-            startDate,
-            endDate
-          );
+              const positions = this.findDatePositionsInARange(
+                date,
+                startDate,
+                endDate
+              );
 
-          const isStartDate = positions['start'];
-          const isEndDate = positions['end'];
-          const isToday = this.compare(date, today) === 0;
-          const isSingleDateSelected =
-            singleDate && this.compare(date, singleDate) === 0;
-          const isSelected = isStartDate || isEndDate || isSingleDateSelected;
-          const isInRange = !isSelected ? positions['in-range'] : false;
+              const isStartDate = positions['start'];
+              const isEndDate = positions['end'];
+              const isToday = this.compare(date, today) === 0;
+              const isSingleDateSelected =
+                singleDate && this.compare(date, singleDate) === 0;
+              const isSelected =
+                isStartDate || isEndDate || isSingleDateSelected;
+              const isInRange = !isSelected ? positions['in-range'] : false;
 
-          // Only for the last date in the calendar
-          const onBlurEvent =
-            index === this._calendar.dates.length - 1
-              ? {
-                  onBlur: () => {
-                    this.toggleCalendar(false);
-                  },
-                }
-              : {};
+              // Only for the last date in the calendar
+              const onBlurEvent =
+                index === this._calendar.dates.length - 1
+                  ? {
+                      onBlur: () => {
+                        this.toggleCalendar(false);
+                      },
+                    }
+                  : {};
 
-          return (
+              return (
+                <button
+                  class={{
+                    'calendar-day grid-item': true,
+                    selected: isSelected,
+                    start: isStartDate && !isEndDate,
+                    end: isEndDate && !isStartDate,
+                    'current-day': isToday,
+                    'range-selected': isInRange,
+                  }}
+                  tabIndex={0}
+                  onClick={() => this.pickCalendarDate(date)}
+                  {...onBlurEvent}>
+                  {date.getDate()}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  private renderCalendarHeader() {
+    return (
+      <div class="calendar-header">
+        <button
+          aria-label="Previous Month"
+          onClick={() => this.addMonthOffset(-1)}>
+          <IconMap icon="chevron-left-thick"></IconMap>
+        </button>
+
+        <div class="title">
+          <span
+            tabIndex={0}
+            class="calendar-title"
+            aria-label="Calendar title"
+            role="title">
+            {`${this._calendar?.month} ${this._calendar?.year}`}
+          </span>
+          <div class="year-icons">
             <button
-              class={{
-                'calendar-day grid-item': true,
-                selected: isSelected,
-                start: isStartDate && !isEndDate,
-                end: isEndDate && !isStartDate,
-                'current-day': isToday,
-                'range-selected': isInRange,
-              }}
               tabIndex={0}
-              onClick={() => this.pickCalendarDate(date)}
-              {...onBlurEvent}>
-              {date.getDate()}
+              aria-label="Previous Year"
+              onClick={() => this.addYearOffset(1)}
+              class="year-up">
+              <IconMap icon="triangle-down" size="8"></IconMap>
             </button>
-          );
-        })}
+            <button
+              tabIndex={0}
+              aria-label="Next Year"
+              onClick={() => this.addYearOffset(-1)}
+              class="year-down">
+              <IconMap size="8" icon="triangle-down"></IconMap>
+            </button>
+          </div>
+        </div>
+        <button
+          tabIndex={0}
+          aria-label="Next Month"
+          onClick={() => this.addMonthOffset(1)}>
+          <IconMap icon="chevron-right-thick"></IconMap>
+        </button>
       </div>
     );
   }
@@ -274,53 +329,8 @@ export class ModusDatePicker {
         <div style={{ display: 'inline-flex' }}>
           {this._showCalendar && (
             <nav class="calendar-container" aria-label="Pick a Date">
-              <div class="calendar-header">
-                <button
-                  aria-label="Previous Month"
-                  onClick={() => this.addMonthOffset(-1)}>
-                  <IconMap icon="chevron-left-thick"></IconMap>
-                </button>
-
-                <div class="title">
-                  <span
-                    tabIndex={0}
-                    class="calendar-title"
-                    aria-label="Calendar title"
-                    role="title">
-                    {`${this._calendar?.month} ${this._calendar?.year}`}
-                  </span>
-                  <div class="year-icons">
-                    <button
-                      tabIndex={0}
-                      aria-label="Previous Year"
-                      onClick={() => this.addYearOffset(1)}
-                      class="year-up">
-                      <IconMap icon="triangle-down" size="8"></IconMap>
-                    </button>
-                    <button
-                      tabIndex={0}
-                      aria-label="Next Year"
-                      onClick={() => this.addYearOffset(-1)}
-                      class="year-down">
-                      <IconMap size="8" icon="triangle-down"></IconMap>
-                    </button>
-                  </div>
-                </div>
-                <button
-                  tabIndex={0}
-                  aria-label="Next Month"
-                  onClick={() => this.addMonthOffset(1)}>
-                  <IconMap icon="chevron-right-thick"></IconMap>
-                </button>
-              </div>
-              <div class="calendar-body">
-                <div class="calendar-days-week grid">
-                  {this._calendar.getDaysOfWeek(this._locale).map((d) => {
-                    return <div class="grid-item">{d}</div>;
-                  })}
-                </div>
-                <div class="calendar-month-container">{this.renderMonth()}</div>
-              </div>
+              {this.renderCalendarHeader()}
+              {this.renderCalendarBody()}
             </nav>
           )}
         </div>

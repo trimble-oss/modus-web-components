@@ -14,14 +14,14 @@ const monthNames = [
 ];
 
 export default class Calendar {
-  private dateBacking: Date;
-  private datesBacking: Array<Date>;
+  private currentDate: Date;
+  private currentMonthDates: Array<Date>;
 
   constructor(calendar?: Calendar) {
     if (calendar) {
       this.gotoDate(
-        calendar.dateBacking.getFullYear(),
-        calendar.dateBacking.getMonth()
+        calendar.currentDate.getFullYear(),
+        calendar.currentDate.getMonth()
       );
     } else {
       const today = new Date();
@@ -30,35 +30,35 @@ export default class Calendar {
   }
 
   get year(): string {
-    return this.dateBacking.getFullYear().toString();
+    return this.currentDate.getFullYear().toString();
   }
 
   get month(): string {
-    return monthNames[this.dateBacking.getMonth()];
+    return monthNames[this.currentDate.getMonth()];
   }
 
   get dates(): Array<Date> {
-    return this.datesBacking;
+    return this.currentMonthDates;
   }
 
   addMonthOffset(offset: number): Calendar {
     this.gotoDate(
-      this.dateBacking.getFullYear(),
-      this.dateBacking.getMonth() + offset
+      this.currentDate.getFullYear(),
+      this.currentDate.getMonth() + offset
     );
     return this;
   }
 
   addYearOffset(offset: number): Calendar {
     this.gotoDate(
-      this.dateBacking.getFullYear() + offset,
-      this.dateBacking.getMonth()
+      this.currentDate.getFullYear() + offset,
+      this.currentDate.getMonth()
     );
     return this;
   }
 
   gotoDate(year: number, month: number): void {
-    this.dateBacking = new Date(year, month, 1);
+    this.currentDate = new Date(year, month, 1);
     this.calculateDates();
   }
 
@@ -88,8 +88,8 @@ export default class Calendar {
 
   private calculateDates(): void {
     const dates = [];
-    const year = this.dateBacking.getFullYear();
-    const month = this.dateBacking.getMonth();
+    const year = this.currentDate.getFullYear();
+    const month = this.currentDate.getMonth();
 
     const date = new Date(year, month, 1);
     while (date.getMonth() === month) {
@@ -97,9 +97,6 @@ export default class Calendar {
       date.setDate(date.getDate() + 1);
     }
 
-    this.datesBacking = dates;
+    this.currentMonthDates = dates;
   }
-
-
-
 }

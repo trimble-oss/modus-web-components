@@ -324,10 +324,6 @@ export namespace Components {
          */
         "helperText": string;
         /**
-          * (optional) Sets input error state.
-         */
-        "invalid": boolean;
-        /**
           * (optional) The input's label.
          */
         "label": string;
@@ -1819,10 +1815,6 @@ declare namespace LocalJSX {
           * (optional) Custom helper text displayed below the input. Default is 'dd/mm/yyyy'.
          */
         "helperText"?: string;
-        /**
-          * (optional) Sets input error state.
-         */
-        "invalid"?: boolean;
         /**
           * (optional) The input's label.
          */

@@ -10,7 +10,7 @@ import {
 } from '@stencil/core';
 import { IconMap } from '../icons/IconMap';
 import {
-  validate,
+  validateDate,
   parseDate,
   parseString,
 } from '../modus-date-picker/utils/modus-date-picker.helpers';
@@ -26,6 +26,7 @@ import {
 })
 export class ModusDateInput {
   @Element() element: HTMLElement;
+
   /** (optional) The input's aria-label. */
   @Prop() ariaLabel: string | null;
 
@@ -43,9 +44,6 @@ export class ModusDateInput {
 
   /** (optional) Custom helper text displayed below the input. Default is 'dd/mm/yyyy'. */
   @Prop() helperText = 'dd/mm/yyyy';
-
-  /** (optional) Sets input error state. */
-  @Prop() invalid: boolean;
 
   /** (optional) The input's label. */
   @Prop() label: string;
@@ -79,7 +77,7 @@ export class ModusDateInput {
   @Watch('value')
   handleValueChange(val: string): void {
     this.date = parseDate(val);
-    this.valueChange.emit(this.eventData());
+    this.valueChange.emit(this.getEventData());
   }
 
   /** An event that fires on calendar icon click. */
@@ -121,7 +119,7 @@ export class ModusDateInput {
 
   /** Handlers */
   handleCalendarClick(): void {
-    this.calendarIconClicked.emit(this.eventData());
+    this.calendarIconClicked.emit(this.getEventData());
   }
 
   handleDefaultKeyDown(e: KeyboardEvent, callback: () => void) {
@@ -130,8 +128,8 @@ export class ModusDateInput {
   }
 
   handleBlur(): void {
-    this.validate();
-    this.dateInputBlur.emit(this.eventData());
+    this.validateInput();
+    this.dateInputBlur.emit(this.getEventData());
   }
 
   handleOnInput(event: Event): void {
@@ -143,45 +141,47 @@ export class ModusDateInput {
   // Helpers
   clearValidation(): void {
     this.errorText = null;
-    this.invalid = false;
   }
 
-  eventData() {
+  getEventData(): DateInputEventData {
     return {
       date: this.date,
       type: this.type,
     };
   }
 
-  validate(): void {
+  validateInput(): void {
     if (this.disableValidation) return;
 
-    this.errorText = validate(this.value, this.required);
-    this.invalid = Boolean(this.errorText);
+    this.errorText = validateDate(this.value, this.required);
   }
 
-  handleInputKeys(event: KeyboardEvent): boolean {
-    // Get the key
-    const key = event.key;
-
-    // eslint-disable-next-line no-useless-escape
-    const exp = /[0-9\/]+/; // only numbers and '/'
-    const regex = new RegExp(exp);
-
-    // Check if key is in the reg exp
-    if (!regex.test(key)) {
-      // Restrict the special characters
+  handleInputKeyPress(event: KeyboardEvent): boolean {
+    const keyIsValid = this.keyIsValidDateCharacter(event.key);
+    if (!keyIsValid) {
       event.preventDefault();
-      return false;
     }
+
+    return keyIsValid;
   }
 
+  keyIsValidDateCharacter(key: string): boolean {
+    // eslint-disable-next-line no-useless-escape
+    const numbersAndSlashExp = /[0-9\/]+/;
+    const dateCharacterRegex = new RegExp(numbersAndSlashExp);
+
+    if (dateCharacterRegex.test(key)) {
+      return true;
+    }
+
+    return false;
+  }
   render() {
     const className = `modus-date-input ${this.disabled ? 'disabled' : ''}`;
     return (
       <div
         aria-disabled={this.disabled ? 'true' : undefined}
-        aria-invalid={!!this.errorText || this.invalid}
+        aria-invalid={!!this.errorText}
         aria-label={this.ariaLabel}
         aria-readonly={this.readOnly}
         aria-required={this.required}
@@ -196,11 +196,7 @@ export class ModusDateInput {
         ) : null}
         <div
           class={`input-container ${
-            this.errorText || this.invalid
-              ? 'error'
-              : this.validText
-              ? 'valid'
-              : ''
+            this.errorText ? 'error' : this.validText ? 'valid' : ''
           } ${this.classBySize.get(this.size)}`}>
           <input
             id="date-input"
@@ -218,7 +214,7 @@ export class ModusDateInput {
             autofocus={this.autoFocusInput}
             onBlur={() => this.handleBlur()}
             maxLength={this.maxLength}
-            onKeyPress={(e) => this.handleInputKeys(e)}
+            onKeyPress={(e) => this.handleInputKeyPress(e)}
           />
           {this.showCalendarIcon && (
             <span

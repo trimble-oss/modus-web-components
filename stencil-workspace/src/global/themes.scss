@@ -344,7 +344,7 @@
   );
 
   // Date picker
-  --modus-date-input-helper-icon-color: var(--modus-input-helper-icon-color);
+  --modus-date-input-calendar-icon-color: var(--modus-input-helper-icon-color);
   --modus-date-picker-calendar-header-bg: var(--modus-blue);
   --modus-date-picker-calendar-header-color: var(--modus-white);
   --modus-date-picker-calendar-body-bg: var(--modus-white);
@@ -364,7 +364,6 @@
   // Autocomplete
   --modus-autocomplete-no-results-message-color: var(--modus-gray-7);
   --modus-autocomplete-no-results-subtext-color: var(--modus-gray-4);
-
 }
 
 [data-mwc-theme='dark'] {
@@ -653,7 +652,7 @@
   --modus-side-navigation-item-chevron-color: var(--modus-gray-5);
 
   // Date picker
-  --modus-date-input-helper-icon-color: var(--modus-gray-5);
+  --modus-date-input-calendar-icon-color: var(--modus-gray-5);
   --modus-date-picker-calendar-header-bg: var(--modus-blue-dark);
   --modus-date-picker-calendar-body-bg: var(--modus-gray-11);
   --modus-date-picker-calendar-day-week-color: var(--modus-white);
@@ -670,7 +669,6 @@
   // Autocomplete
   --modus-autocomplete-no-results-message-color: var(--modus-gray-0);
   --modus-autocomplete-no-results-subtext-color: var(--modus-gray-4);
-
 }
 
 // Mixins
