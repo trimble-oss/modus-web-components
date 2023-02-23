@@ -27,7 +27,9 @@ const Template = () => html`
   <modus-modal
     header-text="Modal title"
     primary-button-text="Save changes"
-    secondary-button-text="Sweet!">
+    secondary-button-text="Sweet!"
+    primary-button-aria-label="Save changes"
+    secondary-button-aria-label="Sweet">
     <p>Woo-hoo, you're reading this text in a modal!</p>
   </modus-modal>
   ${setScript()}
