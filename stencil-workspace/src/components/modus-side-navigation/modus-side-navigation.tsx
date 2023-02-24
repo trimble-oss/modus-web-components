@@ -397,7 +397,9 @@ export class ModusSideNavigation {
         {this.data ? (
           <div tabindex={-1} ref={(el) => this.handleLevelsContainerRef(el)}>
             {this._navigationLevelInfo.map((level, index) => (
-              <div class={`side-nav-level ${level.slidePosition}`}>
+              <div
+                class={`side-nav-level ${level.slidePosition}`}
+                aria-hidden={level.slidePosition !== 'center' ? 'true' : null}>
                 {index !== 0 && (
                   <div
                     class="level-headings"

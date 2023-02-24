@@ -23,7 +23,10 @@ export class ModusSideNavigationItem {
   /** (optional) Disables item selection. */
   @Prop({ mutable: true, reflect: true }) disableSelection = false;
 
-  /** (optional) The expanded state of side navigation panel item. */
+  /**
+   * @internal
+   * Only to be used by modus side navigation components
+   */
   @Prop({ mutable: true, reflect: true }) expanded = false;
 
   /** (optional) Label for the item and the tooltip message. */
