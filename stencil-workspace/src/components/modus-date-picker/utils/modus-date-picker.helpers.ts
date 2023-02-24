@@ -1,10 +1,7 @@
-
-
-export const EmptyStringPattern = /^\s*$/;
 export const DateValidationPattern = /^\d{1,2}\/\d{1,2}(\/\d{4,4})?$/;
 
-export function parseDate(val: string): Date {
-  let output = null;
+export function parseDate(val: string): Date | null {
+  let output: Date = null;
   if (DateValidationPattern.test(val)) {
     const date = new Date(val);
     if (Number(date)) {
@@ -23,20 +20,6 @@ export function parseString(val: Date): string {
   });
 }
 
-export function validateDate(val:string, errorIfEmpty = false):string{
-  let error = 'Invalid date';
-  if (!val || EmptyStringPattern.test(val)) {
-    error = errorIfEmpty ? 'Required' : null;
-  } else if (DateValidationPattern.test(val)) {
-    const date = parseDate(val);
-    if (Number(date)) {
-      error = null;
-    }
-  }
-
-  return error;
-}
-
-export function isDateEmpty(val:string):boolean{
-  return !val || EmptyStringPattern.test(val);
+export function isDateEmpty(val:string): boolean{
+  return !val?.trim().length ;
 }
