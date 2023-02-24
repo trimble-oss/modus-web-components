@@ -10,32 +10,32 @@ export class DateInputInfo {
     this.refresh();
   }
 
-  getDate() {
+  getDate(): Date {
     return this.date;
   }
 
-  setDate(val: Date) {
+  setDate(val: Date): void {
     this.element.setDate(val);
     this.date = val;
   }
 
-  setError(message: string = null) {
+  setError(message: string = null): void {
     this.element.errorText = message;
   }
 
-  resetError() {
+  resetError(): void {
     this.element.errorText = null;
   }
 
-  refresh() {
+  refresh(): void {
     this.date = parseDate(this.element.value);
   }
 
-  toggleCalendar(val: boolean = null) {
+  toggleCalendar(val: boolean = null): void {
     this.isOpen = val !== null ? val : !this.isOpen;
   }
 
-  isCalendarOpen() {
+  isCalendarOpen(): boolean {
     return this.isOpen;
   }
 }

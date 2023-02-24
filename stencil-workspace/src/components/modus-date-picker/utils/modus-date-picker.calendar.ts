@@ -1,4 +1,4 @@
-const monthNames = [
+const MONTH_NAMES = [
   'January',
   'February',
   'March',
@@ -34,7 +34,7 @@ export default class Calendar {
   }
 
   get month(): string {
-    return monthNames[this.currentDate.getMonth()];
+    return MONTH_NAMES[this.currentDate.getMonth()];
   }
 
   get dates(): Array<Date> {

@@ -10,7 +10,8 @@ import {
 } from '@stencil/core';
 import { IconMap } from '../icons/IconMap';
 import {
-  validateDate,
+  DateValidationPattern,
+  isDateEmpty,
   parseDate,
   parseString,
 } from '../modus-date-picker/utils/modus-date-picker.helpers';
@@ -132,6 +133,15 @@ export class ModusDateInput {
     this.dateInputBlur.emit(this.getEventData());
   }
 
+  handleInputKeyPress(event: KeyboardEvent): boolean {
+    const keyIsValid = this.keyIsValidDateCharacter(event.key);
+    if (!keyIsValid) {
+      event.preventDefault();
+    }
+
+    return keyIsValid;
+  }
+
   handleOnInput(event: Event): void {
     event.stopPropagation();
     event.preventDefault();
@@ -150,19 +160,24 @@ export class ModusDateInput {
     };
   }
 
+  getValidationMessage(val: string, errorIfEmpty = false): string | null {
+    let error = 'Invalid date';
+    if (isDateEmpty(val)) {
+      error = errorIfEmpty ? 'Required' : null;
+    } else if (DateValidationPattern.test(val)) {
+      const date = parseDate(val);
+      if (Number(date)) {
+        error = null;
+      }
+    }
+
+    return error;
+  }
+
   validateInput(): void {
     if (this.disableValidation) return;
 
-    this.errorText = validateDate(this.value, this.required);
-  }
-
-  handleInputKeyPress(event: KeyboardEvent): boolean {
-    const keyIsValid = this.keyIsValidDateCharacter(event.key);
-    if (!keyIsValid) {
-      event.preventDefault();
-    }
-
-    return keyIsValid;
+    this.errorText = this.getValidationMessage(this.value, this.required);
   }
 
   keyIsValidDateCharacter(key: string): boolean {
@@ -176,6 +191,7 @@ export class ModusDateInput {
 
     return false;
   }
+
   render() {
     const className = `modus-date-input ${this.disabled ? 'disabled' : ''}`;
     return (
@@ -187,7 +203,7 @@ export class ModusDateInput {
         aria-required={this.required}
         class={className}>
         {this.label || this.required ? (
-          <div class={'label-container'}>
+          <div class="label-container">
             {this.label ? (
               <label htmlFor="date-input">{this.label}</label>
             ) : null}
