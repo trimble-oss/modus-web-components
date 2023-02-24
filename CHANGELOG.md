@@ -10,7 +10,13 @@ View all releases at: <https://github.com/trimble-oss/modus-web-components/relea
 
 - Added Modus Time Picker component
 
-## 0.1.33 - 2021-02-16
+## 0.1.34 - 2023-02-23
+
+### Added
+
+- Aria label properties for the Modal's buttons.
+
+## 0.1.33 - 2023-02-16
 
 ### Fixed
 
