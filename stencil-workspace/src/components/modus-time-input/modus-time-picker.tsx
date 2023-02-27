@@ -7,12 +7,9 @@ import {
   Method,
   Element,
   Watch,
+  State,
 } from '@stencil/core';
-import {
-  formatTime,
-  keyIsValidTimeCharacter,
-  parseTime,
-} from './modus-time-picker.helpers';
+import TimeInputFormatter from './modus-time-picker.formatter';
 import { TimeInputEventData } from './modus-time-picker.types';
 
 /**
@@ -25,11 +22,24 @@ import { TimeInputEventData } from './modus-time-picker.types';
 })
 export class ModusTimePicker {
   @Element() element: HTMLElement;
-  /** (optional) The input's aria-label. */
-  @Prop() ariaLabel: string | null;
 
   /** (optional) Sets 12/24 hour format for the input string. */
   @Prop() ampm: boolean;
+  @Watch('ampm')
+  handleAmPmChange(val: boolean): void {
+    this._formatter = new TimeInputFormatter(val);
+  }
+
+  /** (optional) Custom regex for allowing characters while typing the input.
+   * Override it with '.*' to allow any character.
+   */
+  @Prop() allowedCharsRegex: string;
+
+  /** (optional) The input's aria-label. */
+  @Prop() ariaLabel: string | null;
+
+  /** (optional) Formats the text while typing in the input field. */
+  @Prop() autoFormat: boolean;
 
   /** (optional) Sets autofocus on the input. */
   @Prop() autoFocusInput: boolean;
@@ -44,13 +54,22 @@ export class ModusTimePicker {
   @Prop() errorText: string;
 
   /** (optional) Custom helper text displayed below the input. */
-  @Prop() helperText;
+  @Prop() helperText: string;
 
   /** (optional) The input's label. */
   @Prop() label: string;
 
-  /** (optional) The input's maximum length. Default is 10. */
-  @Prop() maxLength = 8;
+  /** (optional) The input's minimum length. */
+  @Prop() minLength: number;
+
+  /** (optional) The input's maximum length. */
+  @Prop() maxLength: number;
+
+  /** (optional) Minimum time (in 24 hour format). */
+  @Prop() min: string;
+
+  /** (optional) Maximum time (in 24 hour format). */
+  @Prop() max: string;
 
   /** (optional) The input's placeholder text. */
   @Prop() placeholder: string;
@@ -71,12 +90,13 @@ export class ModusTimePicker {
   @Prop() value: string;
   @Watch('value')
   handleValueChange(val: string): void {
-    this.displayString = this.isEditing
-      ? this.displayString
-      : formatTime(val, this.ampm);
+    if (!this._isEditing) {
+      this._timeDisplay = this._formatter.formatTimeDisplay(val);
+    }
+
     this.valueChange.emit({
       value: val,
-      inputString: this.displayString,
+      inputString: this._timeDisplay,
     });
   }
 
@@ -91,25 +111,32 @@ export class ModusTimePicker {
     ['large', 'large'],
   ]);
 
-  private displayString: string;
-  private isEditing: boolean;
-  private textInput: HTMLInputElement;
+  private _formatter: TimeInputFormatter;
+  private _isEditing: boolean;
+  private _timeInput: HTMLInputElement;
 
+  @State() _timeDisplay: string;
+
+  // Life cycle methods
   componentWillLoad() {
-    this.displayString = formatTime(this.value, this.ampm);
+    this._formatter = new TimeInputFormatter(this.ampm);
+    this._timeDisplay = this._formatter.formatTimeDisplay(this.value);
   }
 
-  /** Methods */
+  /** Public Methods */
   /** Focus the input. */
   @Method()
   async focusInput(): Promise<void> {
-    this.textInput.focus();
+    this._timeInput.focus();
   }
 
+  // Handlers
   handleBlur(): void {
-    this.isEditing = false;
-    const inputString = this.textInput?.value;
-    this.validateInput(inputString);
+    this._isEditing = false;
+
+    const inputString = this._timeInput?.value;
+    this.validateTimeInput(inputString);
+
     this.timeInputBlur.emit({
       value: this.value,
       inputString,
@@ -124,16 +151,22 @@ export class ModusTimePicker {
   handleInputChange(event: Event): void {
     event.stopPropagation();
     event.preventDefault();
-    this.isEditing = true;
-    this.value = parseTime(
-      (event.currentTarget as HTMLInputElement)?.value,
-      this.ampm
+    this._isEditing = true;
+
+    const inputString = (event.currentTarget as HTMLInputElement)?.value;
+    this._timeDisplay = this._formatter.autoFormatTimeInput(
+      inputString,
+      this.autoFormat
     );
+    this.value = this._formatter.parseTimeDisplay(this._timeDisplay);
   }
 
   handleInputKeyPress(event: KeyboardEvent): boolean {
     const key = event.key;
-    const keyIsValid = keyIsValidTimeCharacter(key, this.ampm);
+    const keyIsValid = this._formatter.keyIsValidTimeCharacter(
+      key,
+      this.allowedCharsRegex
+    );
     if (!keyIsValid) {
       event.preventDefault();
     }
@@ -141,6 +174,7 @@ export class ModusTimePicker {
   }
 
   // Helpers
+
   clearValidation(): void {
     this.errorText = null;
   }
@@ -155,16 +189,28 @@ export class ModusTimePicker {
     };
   }
 
-  validateInput(inputString: string | null): void {
+  validateTimeInput(inputString: string | null): void {
     if (this.disableValidation) return;
 
     if (!inputString) {
       if (this.required) this.errorText = 'Required';
       else this.clearValidation();
     } else if (!this.value) this.errorText = 'Invalid time';
-    else this.clearValidation();
+    else if (this.min || this.max) {
+      const today = new Date();
+      const minDate = this._formatter.setTimeOnDate(today, this.min);
+      const maxDate = this._formatter.setTimeOnDate(today, this.max);
+      const inputDate = this._formatter.setTimeOnDate(today, this.value);
+
+      if (this.min && inputDate < minDate) {
+        this.errorText = 'Time input is lesser than minimum time allowed';
+      } else if (this.max && inputDate > maxDate) {
+        this.errorText = 'Time input is greater than maximum time allowed';
+      } else this.clearValidation();
+    } else this.clearValidation();
   }
 
+  // Renderers
   private renderTimeInput() {
     return (
       <input
@@ -176,12 +222,13 @@ export class ModusTimePicker {
         onInput={(event) => this.handleInputChange(event)}
         placeholder={this.placeholder}
         readonly={this.readOnly}
-        ref={(el) => (this.textInput = el as HTMLInputElement)}
+        ref={(el) => (this._timeInput = el as HTMLInputElement)}
         tabIndex={0}
         type="text"
-        value={this.displayString}
+        value={this._timeDisplay}
         autofocus={this.autoFocusInput}
         onBlur={() => this.handleBlur()}
+        minlength={this.minLength}
         maxLength={this.maxLength}
         onKeyPress={(e) => this.handleInputKeyPress(e)}
       />

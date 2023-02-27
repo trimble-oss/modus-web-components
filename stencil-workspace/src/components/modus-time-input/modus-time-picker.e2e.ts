@@ -189,6 +189,48 @@ describe('modus-time-picker', () => {
     expect(container).not.toHaveClass('error');
   });
 
+  it('renders changes to autoFormat', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-time-picker auto-focus-input="true"></modus-time-picker>');
+    await page.waitForChanges();
+
+    // Set autoFormat
+    const component = await page.find('modus-time-picker');
+    component.setProperty('autoFormat', true);
+    await page.waitForChanges();
+
+    // Input '12'
+    const input = await page.find('modus-time-picker >>> input');
+    await input.type('12', { delay: 20 });
+    await page.waitForChanges();
+
+    // Formatted
+    expect(await input.getProperty('value')).toEqual('12:');
+  });
+
+  it('renders changes to allowedCharsRegex', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-time-picker></modus-time-picker>');
+    await page.waitForChanges();
+
+    const input = await page.find('modus-time-picker >>> input');
+    await input.type('JK', { delay: 20 });
+    await page.waitForChanges();
+
+    expect(await input.getProperty('value')).toEqual('');
+
+    const component = await page.find('modus-time-picker');
+    component.setProperty('allowedCharsRegex', '.');
+    await page.waitForChanges();
+
+    await input.type('JK', { delay: 20 });
+    await page.waitForChanges();
+
+    expect(await input.getProperty('value')).toEqual('JK');
+  });
+
   it('checks validation', async () => {
     const page = await newE2EPage();
     await page.setContent('<modus-time-picker label="Time"></modus-time-picker>');

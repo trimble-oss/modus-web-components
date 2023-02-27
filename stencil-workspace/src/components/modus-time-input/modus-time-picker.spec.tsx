@@ -12,7 +12,7 @@ describe('modus-time-picker', () => {
       <mock:shadow-root>
         <div class="modus-time-picker">
             <div class="time-input-wrapper">
-              <div class="input-container medium"><input id="time-input" inputmode="text" tabindex="0" type="text" maxlength="8"></div>
+              <div class="input-container medium"><input id="time-input" inputmode="text" tabindex="0" type="text"></div>
             </div>
             <div class="time-zone-wrapper">
               <slot name="timeZone"></slot>
@@ -74,13 +74,28 @@ describe('modus-time-picker', () => {
     expect(modusTimeInput.value).toBeFalsy();
   });
 
-  it('should default with maximum length validation', async () => {
+  it('should default with no minimum length validation', async () => {
     const modusTimeInput = new ModusTimePicker();
-    expect(modusTimeInput.maxLength).toEqual(8);
+    expect(modusTimeInput.minLength).toBeFalsy();
+  });
+
+  it('should default with no maximum length validation', async () => {
+    const modusTimeInput = new ModusTimePicker();
+    expect(modusTimeInput.maxLength).toBeFalsy();
   });
 
   it('should default with no ampm set true', async () => {
     const modusTimeInput = new ModusTimePicker();
     expect(modusTimeInput.ampm).toBeFalsy();
+  });
+
+  it('should default with no min set', async () => {
+    const modusTimeInput = new ModusTimePicker();
+    expect(modusTimeInput.min).toBeFalsy();
+  });
+
+  it('should default with no max set', async () => {
+    const modusTimeInput = new ModusTimePicker();
+    expect(modusTimeInput.max).toBeFalsy();
   });
 });

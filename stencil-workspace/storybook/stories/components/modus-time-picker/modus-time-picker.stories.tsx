@@ -26,6 +26,13 @@ export default {
         type: { summary: 'boolean' },
       },
     },
+    autoFormat: {
+      name: 'auto-format',
+      description: 'Formats the text while typing in the input field',
+      table: {
+        type: { summary: 'boolean' },
+      },
+    },
     disabled: {
       description: 'Whether the text input is disabled',
       table: {
@@ -57,6 +64,20 @@ export default {
     },
     label: {
       description: "The input's label",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    min: {
+      name: 'min',
+      description: 'Minimum time (in 24 hour format)',
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    max: {
+      name: 'max',
+      description: 'Maximum time (in 24 hour format)',
       table: {
         type: { summary: 'string' },
       },
@@ -131,6 +152,7 @@ export default {
 
 const Template = ({
   ampm,
+  autoFormat,
   ariaLabel,
   autoFocusInput,
   disabled,
@@ -138,6 +160,8 @@ const Template = ({
   errorText,
   helperText,
   label,
+  min,
+  max,
   maxLength,
   placeholder,
   readOnly,
@@ -148,6 +172,7 @@ const Template = ({
 }) => html`
   <modus-time-picker
     ampm=${ampm}
+    auto-format=${autoFormat}
     aria-label=${ariaLabel}
     auto-focus-input=${autoFocusInput}
     disable-validation=${disableValidation}
@@ -155,6 +180,8 @@ const Template = ({
     error-text=${errorText}
     helper-text=${helperText}
     label=${label}
+    min=${min}
+    max=${max}
     max-length=${maxLength}
     placeholder=${placeholder}
     read-only=${readOnly}
@@ -164,9 +191,9 @@ const Template = ({
     value=${value}></modus-time-picker>
 `;
 
-export const Default = Template.bind({});
-Default.args = {
+const defaultArgs = {
   ampm: false,
+  autoFormat: false,
   ariaLabel: '',
   autoFocusInput: true,
   disableValidation: false,
@@ -174,18 +201,54 @@ Default.args = {
   errorText: '',
   helperText: 'hh:mm',
   label: 'Time',
-  maxLength: 8,
+  min: null,
+  max: null,
+  maxLength: 10,
   placeholder: '',
   readOnly: false,
   required: false,
   size: 'medium',
-  type: 'text',
   validText: '',
   value: '23:39',
 };
 
+export const Default = Template.bind({});
+Default.args = defaultArgs;
+
+export const TimeFormat = Template.bind({});
+TimeFormat.args = {
+  ...defaultArgs,
+  ...{ ampm: 'true', helperText: 'hh:mm AM/PM', placeholder: '12:00 AM' },
+};
+
+export const AutoFormat = Template.bind({});
+AutoFormat.args = {
+  ...defaultArgs,
+  ...{
+    ampm: true,
+    value: '',
+    helperText: 'hh:mm AM/PM',
+    autoFormat: true,
+    placeholder: '12:00 AM',
+  },
+};
+
+export const MinAndMax = Template.bind({});
+MinAndMax.args = {
+  ...defaultArgs,
+  ...{
+    min: '14:00',
+    max: '20:00',
+    helperText: 'hh:mm (min=14:00 to max=20:00)',
+    value: '14:00',
+    placeholder: '14:00',
+    autoFormat: true,
+  },
+};
+
 const WithTimeZoneTemplate = ({
   ampm,
+  autoFormat,
   ariaLabel,
   autoFocusInput,
   disabled,
@@ -193,6 +256,8 @@ const WithTimeZoneTemplate = ({
   errorText,
   helperText,
   label,
+  min,
+  max,
   maxLength,
   placeholder,
   readOnly,
@@ -203,6 +268,7 @@ const WithTimeZoneTemplate = ({
 }) => html`
   <modus-time-picker
     ampm=${ampm}
+    auto-format=${autoFormat}
     aria-label=${ariaLabel}
     auto-focus-input=${autoFocusInput}
     disable-validation=${disableValidation}
@@ -210,6 +276,8 @@ const WithTimeZoneTemplate = ({
     error-text=${errorText}
     helper-text=${helperText}
     label=${label}
+    min=${min}
+    max=${max}
     max-length=${maxLength}
     placeholder=${placeholder}
     read-only=${readOnly}
@@ -219,7 +287,7 @@ const WithTimeZoneTemplate = ({
     value=${value}>
     <div style="width: 300px;padding-left: 0.5rem;" slot="timeZone">
       <modus-select
-        id="select-demo-1"
+        id="timezone"
         label="Time Zone"
         aria-label="Time Zone"
         options-display-prop="display"></modus-select>
@@ -231,7 +299,8 @@ const WithTimeZoneTemplate = ({
 const setSelects = () => {
   const tag = document.createElement('script');
   tag.innerHTML = `
-  const modusSelect = document.querySelector('modus-select');
+  debugger;
+  const modusSelect = document.querySelector('#timezone');
   modusSelect.options = [
     { display: 'Alpha Time Zone' },
     { display: 'Australian Central Daylight Time' },
@@ -242,21 +311,4 @@ const setSelects = () => {
   return tag;
 };
 export const WithTimeZone = WithTimeZoneTemplate.bind({});
-WithTimeZone.args = {
-  ampm: false,
-  ariaLabel: '',
-  autoFocusInput: true,
-  disableValidation: false,
-  disabled: false,
-  errorText: '',
-  helperText: 'hh:mm',
-  label: 'Time',
-  maxLength: 8,
-  placeholder: '',
-  readOnly: false,
-  required: false,
-  size: 'medium',
-  type: 'text',
-  validText: '',
-  value: '23:39 PM',
-};
+WithTimeZone.args = defaultArgs;
