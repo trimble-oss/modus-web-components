@@ -892,6 +892,10 @@ export namespace Components {
     }
     interface ModusTimePicker {
         /**
+          * (optional) Custom regex for allowing characters while typing the input. Override it with '.*' to allow any character.
+         */
+        "allowedCharsRegex": string;
+        /**
           * (optional) Sets 12/24 hour format for the input string.
          */
         "ampm": boolean;
@@ -903,6 +907,10 @@ export namespace Components {
           * (optional) Sets autofocus on the input.
          */
         "autoFocusInput": boolean;
+        /**
+          * (optional) Formats the text while typing in the input field.
+         */
+        "autoFormat": boolean;
         /**
           * (optional) Disables default validation for the time input.
          */
@@ -922,15 +930,27 @@ export namespace Components {
         /**
           * (optional) Custom helper text displayed below the input.
          */
-        "helperText": any;
+        "helperText": string;
         /**
           * (optional) The input's label.
          */
         "label": string;
         /**
-          * (optional) The input's maximum length. Default is 10.
+          * (optional) Maximum time (in 24 hour format).
+         */
+        "max": string;
+        /**
+          * (optional) The input's maximum length.
          */
         "maxLength": number;
+        /**
+          * (optional) Minimum time (in 24 hour format).
+         */
+        "min": string;
+        /**
+          * (optional) The input's minimum length.
+         */
+        "minLength": number;
         /**
           * (optional) The input's placeholder text.
          */
@@ -2471,6 +2491,10 @@ declare namespace LocalJSX {
     }
     interface ModusTimePicker {
         /**
+          * (optional) Custom regex for allowing characters while typing the input. Override it with '.*' to allow any character.
+         */
+        "allowedCharsRegex"?: string;
+        /**
           * (optional) Sets 12/24 hour format for the input string.
          */
         "ampm"?: boolean;
@@ -2482,6 +2506,10 @@ declare namespace LocalJSX {
           * (optional) Sets autofocus on the input.
          */
         "autoFocusInput"?: boolean;
+        /**
+          * (optional) Formats the text while typing in the input field.
+         */
+        "autoFormat"?: boolean;
         /**
           * (optional) Disables default validation for the time input.
          */
@@ -2497,15 +2525,27 @@ declare namespace LocalJSX {
         /**
           * (optional) Custom helper text displayed below the input.
          */
-        "helperText"?: any;
+        "helperText"?: string;
         /**
           * (optional) The input's label.
          */
         "label"?: string;
         /**
-          * (optional) The input's maximum length. Default is 10.
+          * (optional) Maximum time (in 24 hour format).
+         */
+        "max"?: string;
+        /**
+          * (optional) The input's maximum length.
          */
         "maxLength"?: number;
+        /**
+          * (optional) Minimum time (in 24 hour format).
+         */
+        "min"?: string;
+        /**
+          * (optional) The input's minimum length.
+         */
+        "minLength"?: number;
         /**
           * An event that fires on input value out of focus.
          */

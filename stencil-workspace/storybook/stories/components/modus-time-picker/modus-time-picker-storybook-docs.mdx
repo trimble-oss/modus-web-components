@@ -11,12 +11,13 @@ import { Story } from '@storybook/addon-docs';
 - Modus Time Picker accepts input in 12 or 24-hour format depending on the value provided for prop `ampm`.
 - To use it along with a time zone, slot option is provided and referenced by `slot='timeZone'`.
 - The `value` which is a string representation of the time input is always in 24-hour format that includes leading zeros: `hh:mm`, regardless of the input format which is displayed.
+- The input string can be auto formatted while typing by enabling `autoFormat`.
 
 #### Validation
 
-- Modus Time Picker by default validates for an invalid time input string based on the 12/24 hour format and the validation is triggered on a blur event.
+- Modus Time Picker by default validates for an invalid time input based on the 12/24 hour format, and other validations based on the value provided for `required`, `min`, `max` fields. Validations are triggered on a blur event.
+- Modus Time picker by default allows only the characters in the format provided and it can be controlled by `allowedCharsRegex`.
 - If the default validation is disabled, using props `errorText`, `invalid` the error state can also be set manually.
-- Modus Time picker allows only the character keys part of the format.
 
 ### Default
 
@@ -68,23 +69,28 @@ import { Story } from '@storybook/addon-docs';
 
 ### Properties
 
-| Property            | Attribute            | Description                                                | Type                  | Default     |
-| ------------------- | -------------------- | ---------------------------------------------------------- | --------------------- | ----------- |
-| `ampm`              | `ampm`               | (optional) Sets 12/24 hour format for the input string.    | `boolean`             | `undefined` |
-| `ariaLabel`         | `aria-label`         | (optional) The input's aria-label.                         | `string`              | `undefined` |
-| `autoFocusInput`    | `auto-focus-input`   | (optional) Sets autofocus on the input.                    | `boolean`             | `undefined` |
-| `disableValidation` | `disable-validation` | (optional) Disables default validation for the time input. | `boolean`             | `undefined` |
-| `disabled`          | `disabled`           | (optional) Whether the input is disabled.                  | `boolean`             | `undefined` |
-| `errorText`         | `error-text`         | (optional) Custom error text displayed for the input.      | `string`              | `undefined` |
-| `helperText`        | `helper-text`        | (optional) Custom helper text displayed below the input.   | `any`                 | `undefined` |
-| `label`             | `label`              | (optional) The input's label.                              | `string`              | `undefined` |
-| `maxLength`         | `max-length`         | (optional) The input's maximum length. Default is 10.      | `number`              | `8`         |
-| `placeholder`       | `placeholder`        | (optional) The input's placeholder text.                   | `string`              | `undefined` |
-| `readOnly`          | `read-only`          | (optional) Whether the input's content is read-only        | `boolean`             | `undefined` |
-| `required`          | `required`           | (optional) Whether the input is required.                  | `boolean`             | `undefined` |
-| `size`              | `size`               | (optional) The input's size.                               | `"large" \| "medium"` | `'medium'`  |
-| `validText`         | `valid-text`         | (optional) The input's valid state text.                   | `string`              | `undefined` |
-| `value`             | `value`              | (optional) Value of the time entered into the input.       | `string`              | `undefined` |
+| Property            | Attribute             | Description                                                                                                                            | Type                  | Default     |
+| ------------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | ----------- |
+| `allowedCharsRegex` | `allowed-chars-regex` | (optional) Custom regex to control which characters are allowed while typing the input. Override it with '.\*' to allow any character. | `string`              | `undefined` |
+| `ampm`              | `ampm`                | (optional) Sets 12/24 hour format for the input string.                                                                                | `boolean`             | `undefined` |
+| `ariaLabel`         | `aria-label`          | (optional) The input's aria-label.                                                                                                     | `string`              | `undefined` |
+| `autoFocusInput`    | `auto-focus-input`    | (optional) Sets autofocus on the input.                                                                                                | `boolean`             | `undefined` |
+| `autoFormat`        | `auto-format`         | (optional) Formats the text while typing in the input field.                                                                           | `boolean`             | `undefined` |
+| `disableValidation` | `disable-validation`  | (optional) Disables default validation for the time input.                                                                             | `boolean`             | `undefined` |
+| `disabled`          | `disabled`            | (optional) Whether the input is disabled.                                                                                              | `boolean`             | `undefined` |
+| `errorText`         | `error-text`          | (optional) Custom error text displayed for the input.                                                                                  | `string`              | `undefined` |
+| `helperText`        | `helper-text`         | (optional) Custom helper text displayed below the input.                                                                               | `string`              | `undefined` |
+| `label`             | `label`               | (optional) The input's label.                                                                                                          | `string`              | `undefined` |
+| `max`               | `max`                 | (optional) Maximum time (in 24 hour format).                                                                                           | `string`              | `undefined` |
+| `maxLength`         | `max-length`          | (optional) The input's maximum length.                                                                                                 | `number`              | `undefined` |
+| `min`               | `min`                 | (optional) Minimum time (in 24 hour format).                                                                                           | `string`              | `undefined` |
+| `minLength`         | `min-length`          | (optional) The input's minimum length.                                                                                                 | `number`              | `undefined` |
+| `placeholder`       | `placeholder`         | (optional) The input's placeholder text.                                                                                               | `string`              | `undefined` |
+| `readOnly`          | `read-only`           | (optional) Whether the input's content is read-only                                                                                    | `boolean`             | `undefined` |
+| `required`          | `required`            | (optional) Whether the input is required.                                                                                              | `boolean`             | `undefined` |
+| `size`              | `size`                | (optional) The input's size.                                                                                                           | `"large" \| "medium"` | `'medium'`  |
+| `validText`         | `valid-text`          | (optional) The input's valid state text.                                                                                               | `string`              | `undefined` |
+| `value`             | `value`               | (optional) Value of the time entered into the input. Always in 24 hour format.                                                         | `string`              | `undefined` |
 
 ### DOM Events
 

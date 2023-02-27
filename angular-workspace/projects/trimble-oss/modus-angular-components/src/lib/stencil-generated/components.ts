@@ -998,14 +998,14 @@ export declare interface ModusTimePicker extends Components.ModusTimePicker {
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['ampm', 'ariaLabel', 'autoFocusInput', 'disableValidation', 'disabled', 'errorText', 'helperText', 'label', 'maxLength', 'placeholder', 'readOnly', 'required', 'size', 'validText', 'value'],
+  inputs: ['allowedCharsRegex', 'ampm', 'ariaLabel', 'autoFocusInput', 'autoFormat', 'disableValidation', 'disabled', 'errorText', 'helperText', 'label', 'max', 'maxLength', 'min', 'minLength', 'placeholder', 'readOnly', 'required', 'size', 'validText', 'value'],
   methods: ['focusInput']
 })
 @Component({
   selector: 'modus-time-picker',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['ampm', 'ariaLabel', 'autoFocusInput', 'disableValidation', 'disabled', 'errorText', 'helperText', 'label', 'maxLength', 'placeholder', 'readOnly', 'required', 'size', 'validText', 'value']
+  inputs: ['allowedCharsRegex', 'ampm', 'ariaLabel', 'autoFocusInput', 'autoFormat', 'disableValidation', 'disabled', 'errorText', 'helperText', 'label', 'max', 'maxLength', 'min', 'minLength', 'placeholder', 'readOnly', 'required', 'size', 'validText', 'value']
 })
 export class ModusTimePicker {
   protected el: HTMLElement;
