@@ -12,7 +12,7 @@ describe('modus-time-picker', () => {
       <mock:shadow-root>
         <div class="modus-time-picker">
             <div class="time-input-wrapper">
-              <div class="input-container medium"><input id="time-input" inputmode="text" tabindex="0" type="text"></div>
+              <div class="input-container medium"><input id="time-input" inputmode="text" tabindex="0"  maxlength="5" type="text"></div>
             </div>
             <div class="time-zone-wrapper">
               <slot name="timeZone"></slot>
