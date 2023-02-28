@@ -13,6 +13,8 @@ export const DIRECTIVES = [
   d.ModusCheckbox,
   d.ModusChip,
   d.ModusDataTable,
+  d.ModusDateInput,
+  d.ModusDatePicker,
   d.ModusDropdown,
   d.ModusFileDropzone,
   d.ModusList,

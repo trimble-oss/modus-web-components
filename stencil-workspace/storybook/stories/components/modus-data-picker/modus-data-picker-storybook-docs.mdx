@@ -1,0 +1,102 @@
+import { Story } from '@storybook/addon-docs';
+
+# Date Input
+
+<modus-alert type="warning" message="This component is under construction!"></modus-alert>
+
+---
+
+Modus Date Input web component is a wrapper around native `<input type="text">` element used to type the date. It is referenced using the `<modus-date-input>` custom HTML element.
+
+This component can be wrapped by a [Modus Date Picker](https://modus.trimble.com/components/web/date-time-picker) which is referenced by `<modus-date-picker>` to select a date or a date range from the calendar view.
+
+#### Implementation details
+
+- Modus Date Input accepts input in the format `dd/mm/yyyy`.
+- To use a calendar view for the date selection, Modus Date Input components must be wrapped by a `<modus-date-picker>` and the `type` must be specified. The prop `type` represents whether the date field is a start/end date or simple date (default).
+- Clicking on a calendar icon opens the calendar view with the current date highlighted and the icon is made visible by `showCalendarIcon`.
+- The header of the calendar view displays up and down arrows allowing for navigation to another year. Left and right arrows change the month.
+
+#### Validation
+
+Modus Date Input has a default validation which is triggered on a blur event and it can validate for invalid date inputs and invalid date range incase start and end dates are used inside `<modus-date-picker>`.
+
+Default validation can also be disabled and use the props `errorText`, `invalid` to control the error state.
+
+### Accessibility
+
+Every element in Modus Date Input is accessible through keyboard. Use `Tab` key and `Shift + Tab` key to interact with the Date Input field and the calendar view.
+
+### Default
+
+<modus-date-input label="Date"></modus-date-input>
+
+```html
+<modus-date-input label="Date"></modus-date-input>
+```
+
+### Date Range with picker
+
+<modus-date-picker label="Select date range">
+  <modus-date-input
+    show-calendar-icon="true"
+    type="start"
+    label="Start"></modus-date-input>
+  <modus-date-input
+    show-calendar-icon="true"
+    type="end"
+    label="End"></modus-date-input>
+</modus-date-picker>
+
+```html
+<modus-date-picker label="Select date range">
+  <modus-date-input show-calendar-icon="true" type="start" label="Start">
+  </modus-date-input>
+  <modus-date-input show-calendar-icon="true" type="end" label="End">
+  </modus-date-input>
+</modus-date-picker>
+```
+
+### Properties
+
+##### Modus Date Input
+
+| Property            | Attribute            | Description                                                                                                             | Type                           | Default        |
+| ------------------- | -------------------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------ | -------------- |
+| `ariaLabel`         | `aria-label`         | (optional) The input's aria-label.                                                                                      | `string`                       | `undefined`    |
+| `autoFocusInput`    | `auto-focus-input`   | (optional) Sets autofocus on the input.                                                                                 | `boolean`                      | `undefined`    |
+| `disableValidation` | `disable-validation` | (optional) Disables default validation for the date input.                                                              | `boolean`                      | `undefined`    |
+| `disabled`          | `disabled`           | (optional) Whether the input is disabled.                                                                               | `boolean`                      | `undefined`    |
+| `errorText`         | `error-text`         | (optional) Custom error text displayed for the input.                                                                   | `string`                       | `undefined`    |
+| `helperText`        | `helper-text`        | (optional) Custom helper text displayed below the input. Default is 'dd/mm/yyyy'.                                       | `string`                       | `'dd/mm/yyyy'` |
+| `invalid`           | `invalid`            | (optional) Sets input error state.                                                                                      | `boolean`                      | `undefined`    |
+| `label`             | `label`              | (optional) The input's label.                                                                                           | `string`                       | `undefined`    |
+| `maxLength`         | `max-length`         | (optional) The input's maximum length. Default is 10.                                                                   | `number`                       | `10`           |
+| `placeholder`       | `placeholder`        | (optional) The input's placeholder text.                                                                                | `string`                       | `undefined`    |
+| `readOnly`          | `read-only`          | (optional) Whether the input's content is read-only                                                                     | `boolean`                      | `undefined`    |
+| `required`          | `required`           | (optional) Whether the input is required.                                                                               | `boolean`                      | `undefined`    |
+| `showCalendarIcon`  | `show-calendar-icon` | (optional) Show a calendar icon. Note: Clicking on this icon will only emit an event `calendarIconClicked`.             | `boolean`                      | `undefined`    |
+| `size`              | `size`               | (optional) The input's size.                                                                                            | `"large" \| "medium"`          | `'medium'`     |
+| `type`              | `type`               | (optional) Denotes what type of date and the types are 'start','end','single'. Required when using `modus-date-picker`. | `"end" \| "single" \| "start"` | `'single'`     |
+| `validText`         | `valid-text`         | (optional) The input's valid state text.                                                                                | `string`                       | `undefined`    |
+| `value`             | `value`              | (optional) The input's value.                                                                                           | `string`                       | `undefined`    |
+
+##### Modus Date Picker
+
+| Property | Attribute | Description                     | Type     | Default     |
+| -------- | --------- | ------------------------------- | -------- | ----------- |
+| `label`  | `label`   | (optional) Label for the field. | `string` | `undefined` |
+
+### DOM Events
+
+| Name                  | Description                                      | Emits                                  |
+| --------------------- | ------------------------------------------------ | -------------------------------------- |
+| `calendarIconClicked` | An event that fires on calendar icon click.      | `{ date: Date; type: DateInputType; }` |
+| `dateInputBlur`       | An event that fires on input value out of focus. | `{ date: Date; type: DateInputType; }` |
+| `valueChange`         | An event that fires on input value change.       | `{ date: Date; type: DateInputType; }` |
+
+### Methods
+
+| Method name  | Description     | Parameter | Return          |
+| ------------ | --------------- | --------- | --------------- |
+| `focusInput` | Focus the input |           | `Promise<void>` |
