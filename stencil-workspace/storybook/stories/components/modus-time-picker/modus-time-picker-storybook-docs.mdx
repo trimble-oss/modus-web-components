@@ -2,6 +2,8 @@ import { Story } from '@storybook/addon-docs';
 
 # Time Picker
 
+<modus-alert type="warning" message="This component is under construction!"></modus-alert>
+
 ---
 
 [Modus Time Picker](https://modus.trimble.com/components/web/date-time-picker/styles/#time-picker) web component is a wrapper around native `<input type="text">` element used to input the time. It is referenced using the `<modus-time-picker>` custom HTML element.
@@ -21,9 +23,7 @@ import { Story } from '@storybook/addon-docs';
 
 ### Default
 
-#### 24 Hour Format
-
-<modus-time-picker label="Time" placeholder="23:39" helper-text="hh:mm"></modus-time-picker>
+<Story id="user-inputs-time-picker--default" />
 
 ```html
 <modus-time-picker
@@ -34,14 +34,29 @@ import { Story } from '@storybook/addon-docs';
 
 #### 12 Hour Format
 
-<modus-time-picker label="Time" ampm="true" placeholder="12:39 PM" helper-text="hh:mm (A/P)M"></modus-time-picker>
+<Story id="user-inputs-time-picker--time-format" />
 
 ```html
 <modus-time-picker
   label="Time"
   ampm="true"
-  placeholder="12:39 PM"
-  helper-text="hh:mm (A/P)M"></modus-time-picker>
+  value="11:39 PM"
+  placeholder="12:00 AM"
+  helper-text="hh:mm AM/PM"></modus-time-picker>
+```
+
+### Auto Format
+
+<Story id="user-inputs-time-picker--auto-format" />
+
+```html
+<modus-time-picker
+  ampm="true"
+  auto-format="true"
+  helper-text="hh:mm AM/PM"
+  label="Time"
+  max-length="10"
+  placeholder="12:00 AM"></modus-time-picker>
 ```
 
 ### Time Picker with Time Zone
@@ -49,11 +64,17 @@ import { Story } from '@storybook/addon-docs';
 <Story id="user-inputs-time-picker--with-time-zone" />
 
 ```html
-<modus-time-picker label="Time" placeholder="12:39 PM">
+<modus-time-picker
+  helper-text="hh:mm"
+  label="Time"
+  max-length="10"
+  auto-format="true"
+  value="23:39">
   <div style="width: 300px;padding-left: 0.5rem;" slot="timeZone">
     <modus-select
-      id="select-demo-1"
+      id="timezone"
       label="Time Zone"
+      aria-label="Time Zone"
       options-display-prop="display"></modus-select>
   </div>
 </modus-time-picker>
@@ -82,9 +103,7 @@ import { Story } from '@storybook/addon-docs';
 | `helperText`        | `helper-text`         | (optional) Custom helper text displayed below the input.                                                                               | `string`              | `undefined` |
 | `label`             | `label`               | (optional) The input's label.                                                                                                          | `string`              | `undefined` |
 | `max`               | `max`                 | (optional) Maximum time (in 24 hour format).                                                                                           | `string`              | `undefined` |
-| `maxLength`         | `max-length`          | (optional) The input's maximum length.                                                                                                 | `number`              | `undefined` |
 | `min`               | `min`                 | (optional) Minimum time (in 24 hour format).                                                                                           | `string`              | `undefined` |
-| `minLength`         | `min-length`          | (optional) The input's minimum length.                                                                                                 | `number`              | `undefined` |
 | `placeholder`       | `placeholder`         | (optional) The input's placeholder text.                                                                                               | `string`              | `undefined` |
 | `readOnly`          | `read-only`           | (optional) Whether the input's content is read-only                                                                                    | `boolean`             | `undefined` |
 | `required`          | `required`            | (optional) Whether the input is required.                                                                                              | `boolean`             | `undefined` |

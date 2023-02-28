@@ -1,6 +1,6 @@
 import { html } from 'lit-html';
 // @ts-ignore: JSX/MDX with Stencil
-import docs from './modus-data-picker-storybook-docs.mdx';
+import docs from './modus-date-picker-storybook-docs.mdx';
 
 export default {
   title: 'User Inputs/Date Picker',

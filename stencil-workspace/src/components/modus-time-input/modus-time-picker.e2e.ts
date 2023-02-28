@@ -231,6 +231,50 @@ describe('modus-time-picker', () => {
     expect(await input.getProperty('value')).toEqual('JK');
   });
 
+  it('renders changes to min', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-time-picker label="Time"></modus-time-picker>');
+    await page.waitForChanges();
+
+    const component = await page.find('modus-time-picker');
+    component.setProperty('min', '14:00');
+    await page.waitForChanges();
+
+    const input = await page.find('modus-time-picker >>> input');
+    await input.type('11:00', { delay: 20 });
+    await page.waitForChanges();
+
+    const label = await page.find('modus-time-picker >>> .label-container');
+    await label.click();
+    await page.waitForChanges();
+
+    const errorLabel = await page.find('modus-time-picker >>> label.error');
+    expect(errorLabel).not.toBeNull();
+  });
+
+  it('renders changes to max', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-time-picker label="Time"></modus-time-picker>');
+    await page.waitForChanges();
+
+    const component = await page.find('modus-time-picker');
+    component.setProperty('max', '14:00');
+    await page.waitForChanges();
+
+    const input = await page.find('modus-time-picker >>> input');
+    await input.type('20:00', { delay: 20 });
+    await page.waitForChanges();
+
+    const label = await page.find('modus-time-picker >>> .label-container');
+    await label.click();
+    await page.waitForChanges();
+
+    const errorLabel = await page.find('modus-time-picker >>> label.error');
+    expect(errorLabel).not.toBeNull();
+  });
+
   it('checks validation', async () => {
     const page = await newE2EPage();
     await page.setContent('<modus-time-picker label="Time"></modus-time-picker>');

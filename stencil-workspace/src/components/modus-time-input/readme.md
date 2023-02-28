@@ -20,9 +20,7 @@
 | `helperText`        | `helper-text`         | (optional) Custom helper text displayed below the input.                                                              | `string`              | `undefined` |
 | `label`             | `label`               | (optional) The input's label.                                                                                         | `string`              | `undefined` |
 | `max`               | `max`                 | (optional) Maximum time (in 24 hour format).                                                                          | `string`              | `undefined` |
-| `maxLength`         | `max-length`          | (optional) The input's maximum length.                                                                                | `number`              | `undefined` |
 | `min`               | `min`                 | (optional) Minimum time (in 24 hour format).                                                                          | `string`              | `undefined` |
-| `minLength`         | `min-length`          | (optional) The input's minimum length.                                                                                | `number`              | `undefined` |
 | `placeholder`       | `placeholder`         | (optional) The input's placeholder text.                                                                              | `string`              | `undefined` |
 | `readOnly`          | `read-only`           | (optional) Whether the input's content is read-only                                                                   | `boolean`             | `undefined` |
 | `required`          | `required`            | (optional) Whether the input is required.                                                                             | `boolean`             | `undefined` |

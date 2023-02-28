@@ -82,13 +82,6 @@ export default {
         type: { summary: 'string' },
       },
     },
-    maxLength: {
-      name: 'max-length',
-      description: "The input's maximum length",
-      table: {
-        type: { summary: 'string' },
-      },
-    },
     placeholder: {
       description: "The input's placeholder text",
       table: {
@@ -162,7 +155,6 @@ const Template = ({
   label,
   min,
   max,
-  maxLength,
   placeholder,
   readOnly,
   required,
@@ -182,7 +174,6 @@ const Template = ({
     label=${label}
     min=${min}
     max=${max}
-    max-length=${maxLength}
     placeholder=${placeholder}
     read-only=${readOnly}
     required=${required}
@@ -203,7 +194,6 @@ const defaultArgs = {
   label: 'Time',
   min: null,
   max: null,
-  maxLength: 10,
   placeholder: '',
   readOnly: false,
   required: false,
@@ -258,7 +248,6 @@ const WithTimeZoneTemplate = ({
   label,
   min,
   max,
-  maxLength,
   placeholder,
   readOnly,
   required,
@@ -278,7 +267,6 @@ const WithTimeZoneTemplate = ({
     label=${label}
     min=${min}
     max=${max}
-    max-length=${maxLength}
     placeholder=${placeholder}
     read-only=${readOnly}
     required=${required}
@@ -299,7 +287,6 @@ const WithTimeZoneTemplate = ({
 const setSelects = () => {
   const tag = document.createElement('script');
   tag.innerHTML = `
-  debugger;
   const modusSelect = document.querySelector('#timezone');
   modusSelect.options = [
     { display: 'Alpha Time Zone' },
@@ -311,4 +298,4 @@ const setSelects = () => {
   return tag;
 };
 export const WithTimeZone = WithTimeZoneTemplate.bind({});
-WithTimeZone.args = defaultArgs;
+WithTimeZone.args = { ...defaultArgs, autoFormat: true };

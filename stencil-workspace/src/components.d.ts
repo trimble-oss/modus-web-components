@@ -1022,17 +1022,9 @@ export namespace Components {
          */
         "max": string;
         /**
-          * (optional) The input's maximum length.
-         */
-        "maxLength": number;
-        /**
           * (optional) Minimum time (in 24 hour format).
          */
         "min": string;
-        /**
-          * (optional) The input's minimum length.
-         */
-        "minLength": number;
         /**
           * (optional) The input's placeholder text.
          */
@@ -2716,17 +2708,9 @@ declare namespace LocalJSX {
          */
         "max"?: string;
         /**
-          * (optional) The input's maximum length.
-         */
-        "maxLength"?: number;
-        /**
           * (optional) Minimum time (in 24 hour format).
          */
         "min"?: string;
-        /**
-          * (optional) The input's minimum length.
-         */
-        "minLength"?: number;
         /**
           * An event that fires on input value out of focus.
          */

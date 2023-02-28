@@ -74,16 +74,6 @@ describe('modus-time-picker', () => {
     expect(modusTimeInput.value).toBeFalsy();
   });
 
-  it('should default with no minimum length validation', async () => {
-    const modusTimeInput = new ModusTimePicker();
-    expect(modusTimeInput.minLength).toBeFalsy();
-  });
-
-  it('should default with no maximum length validation', async () => {
-    const modusTimeInput = new ModusTimePicker();
-    expect(modusTimeInput.maxLength).toBeFalsy();
-  });
-
   it('should default with no ampm set true', async () => {
     const modusTimeInput = new ModusTimePicker();
     expect(modusTimeInput.ampm).toBeFalsy();

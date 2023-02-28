@@ -28,6 +28,7 @@ export class ModusTimePicker {
   @Watch('ampm')
   handleAmPmChange(val: boolean): void {
     this._formatter = new TimeInputFormatter(val);
+    this._maxLength = val ? 8 : 5;
   }
 
   /** (optional) Custom regex for allowing characters while typing the input.
@@ -58,12 +59,6 @@ export class ModusTimePicker {
 
   /** (optional) The input's label. */
   @Prop() label: string;
-
-  /** (optional) The input's minimum length. */
-  @Prop() minLength: number;
-
-  /** (optional) The input's maximum length. */
-  @Prop() maxLength: number;
 
   /** (optional) Minimum time (in 24 hour format). */
   @Prop() min: string;
@@ -114,6 +109,7 @@ export class ModusTimePicker {
   private _formatter: TimeInputFormatter;
   private _isEditing: boolean;
   private _timeInput: HTMLInputElement;
+  private _maxLength = 5;
 
   @State() _timeDisplay: string;
 
@@ -228,8 +224,7 @@ export class ModusTimePicker {
         value={this._timeDisplay}
         autofocus={this.autoFocusInput}
         onBlur={() => this.handleBlur()}
-        minlength={this.minLength}
-        maxLength={this.maxLength}
+        maxLength={this._maxLength}
         onKeyPress={(e) => this.handleInputKeyPress(e)}
       />
     );
