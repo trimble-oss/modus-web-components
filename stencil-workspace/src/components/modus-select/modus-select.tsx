@@ -145,6 +145,7 @@ export class ModusSelect {
           <div class={dropdownListClass}>
             {this.options.map((option, index) => (
               <div
+                role="option"
                 aria-selected={index === this.activeItemIndex}
                 aria-label={option[this.optionsDisplayProp]}
                 class={`dropdown-list-item ${index === this.activeItemIndex ? 'active' : ''}`}
