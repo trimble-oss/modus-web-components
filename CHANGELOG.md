@@ -6,10 +6,13 @@ View all releases at: <https://github.com/trimble-oss/modus-web-components/relea
 
 ## Unreleased
 
+## 0.1.35 - 2023-03-03
+
 ### Added
 
 - Added Modus Time Picker component
 - Added Modus Date Input(`<modus-date-input>`) and Modus Date Picker(`<modus-date-picker>`) components.
+- Updated Modus Modal to have a default (non themed) color consistent with the default theme.
 
 ## 0.1.34 - 2023-02-23
 
