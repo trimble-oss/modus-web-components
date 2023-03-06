@@ -129,4 +129,30 @@ describe('modus-modal', () => {
     await page.waitForChanges();
     expect(closed).toHaveReceivedEvent();
   });
+
+  it('has a default overlay background color', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<modus-modal secondary-button-text="Secondary Text"></modus-modal>'
+    );
+    const modal = await page.find('modus-modal');
+    await modal.callMethod('open');
+
+    // Computed overlay color is returned from page.evaluate()
+
+    const backgroundColor = await page.evaluate(async (): Promise<string> => {
+      const overlay = document
+        .querySelector('modus-modal')
+        .shadowRoot.querySelector('.overlay');
+      overlay.scrollIntoView({ block: 'center', inline: 'center' });
+
+      const styles = window.getComputedStyle(overlay);
+      return styles.backgroundColor;
+    });
+
+    await page.waitForChanges();
+    console.error(backgroundColor);
+    expect(backgroundColor).toBe('rgba(37, 42, 46, 0.75)');
+  });
+
 });
