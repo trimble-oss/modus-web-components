@@ -10,7 +10,6 @@ import {
 } from '@stencil/core';
 import { IconMap } from '../icons/IconMap';
 import {
-  DateValidationPattern,
   isDateEmpty,
   parseDate,
   parseString,
@@ -43,8 +42,8 @@ export class ModusDateInput {
   /** (optional) Custom error text displayed for the input. */
   @Prop() errorText: string;
 
-  /** (optional) Custom helper text displayed below the input. Default is 'dd/mm/yyyy'. */
-  @Prop() helperText = 'dd/mm/yyyy';
+  /** (optional) Custom helper text displayed below the input. Default is 'mm/dd/yyyy'. */
+  @Prop() helperText = 'mm/dd/yyyy';
 
   /** (optional) The input's label. */
   @Prop() label: string;
@@ -164,11 +163,8 @@ export class ModusDateInput {
     let error = 'Invalid date';
     if (isDateEmpty(val)) {
       error = errorIfEmpty ? 'Required' : null;
-    } else if (DateValidationPattern.test(val)) {
-      const date = parseDate(val);
-      if (Number(date)) {
-        error = null;
-      }
+    } else {
+      error = parseDate(val) ? null : error;
     }
 
     return error;

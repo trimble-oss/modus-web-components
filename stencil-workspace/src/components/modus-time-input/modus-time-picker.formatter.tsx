@@ -29,7 +29,7 @@ export default class TimeInputFormatter {
     return edited;
   }
 
-  /** Format to 12 hour clock if hasAmPm flag is set */
+  /** Convert to display format, 12 hour clock if hasAmPm flag is set */
   formatTimeDisplay(val: string): string | null {
     if (!val) return null;
 
@@ -48,6 +48,7 @@ export default class TimeInputFormatter {
     return null;
   }
 
+  /** Update date object with time part*/
   setTimeOnDate(date: Date = new Date(), val: string): Date | null {
     const edited = new Date(date);
     const parse = this.processTimeRegex(val, TIME_24_HOUR_CLOCK_REGEX);
@@ -62,7 +63,7 @@ export default class TimeInputFormatter {
     return edited;
   }
 
-  /** Validate if the key pressed is allowed */
+  /** Validate key pressed */
   keyIsValidTimeCharacter(
     key: string,
     allowedKeysRegexInput: string = null
@@ -81,7 +82,7 @@ export default class TimeInputFormatter {
     return false;
   }
 
-  /** Parse the display time to 24 hour clock */
+  /** Parse the display time to standard 24 hour clock */
   parseTimeDisplay(val: string): string | null {
     if (!val) return null;
 
@@ -122,7 +123,7 @@ export default class TimeInputFormatter {
       editedHours = hours + hours !== 12 ? 12 : 0;
     }
     if (editedHours >= 0 && editedHours <= 23 && (minutes === 0 || minutes > 0))
-      return `${this.fillZeroes(editedHours)}:${this.fillZeroes(minutes)}`;
+      return `${this.pad(editedHours)}:${this.pad(minutes)}`;
 
     return null;
   }
@@ -144,9 +145,7 @@ export default class TimeInputFormatter {
     }
 
     if (editedHours && editedHours <= 12 && (minutes === 0 || minutes > 0))
-      return `${this.fillZeroes(editedHours)}:${this.fillZeroes(
-        minutes
-      )} ${ampm}`;
+      return `${this.pad(editedHours)}:${this.pad(minutes)} ${ampm}`;
 
     return null;
   }
@@ -167,8 +166,8 @@ export default class TimeInputFormatter {
     return null;
   }
 
-  /** To fill a number with preceding zeroes to match time format */
-  private fillZeroes(val: number): string {
+  /** To match the digits in time format */
+  private pad(val: number): string {
     if (val < 10) return `0${val}`;
     return val.toString();
   }
