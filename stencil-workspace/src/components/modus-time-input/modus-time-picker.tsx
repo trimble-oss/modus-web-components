@@ -27,8 +27,7 @@ export class ModusTimePicker {
   @Prop() ampm: boolean;
   @Watch('ampm')
   handleAmPmChange(val: boolean): void {
-    this._formatter = new TimeInputFormatter(val);
-    this._maxLength = val ? 8 : 5;
+    this.handleAmPmDependencies(val);
   }
 
   /** (optional) Custom regex for allowing characters while typing the input.
@@ -115,7 +114,7 @@ export class ModusTimePicker {
 
   // Life cycle methods
   componentWillLoad() {
-    this._formatter = new TimeInputFormatter(this.ampm);
+    this.handleAmPmDependencies(this.ampm);
     this._timeDisplay = this._formatter.formatTimeDisplay(this.value);
   }
 
@@ -183,6 +182,11 @@ export class ModusTimePicker {
       'aria-readonly': this.readOnly,
       'aria-required': this.required,
     };
+  }
+
+  handleAmPmDependencies(hasAmPm: boolean): void {
+    this._formatter = new TimeInputFormatter(hasAmPm);
+    this._maxLength = hasAmPm ? 8 : 5;
   }
 
   validateTimeInput(inputString: string | null): void {

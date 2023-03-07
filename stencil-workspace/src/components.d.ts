@@ -321,7 +321,7 @@ export namespace Components {
          */
         "getDate": () => Promise<Date>;
         /**
-          * (optional) Custom helper text displayed below the input. Default is 'dd/mm/yyyy'.
+          * (optional) Custom helper text displayed below the input. Default is 'mm/dd/yyyy'.
          */
         "helperText": string;
         /**
@@ -1910,7 +1910,7 @@ declare namespace LocalJSX {
          */
         "errorText"?: string;
         /**
-          * (optional) Custom helper text displayed below the input. Default is 'dd/mm/yyyy'.
+          * (optional) Custom helper text displayed below the input. Default is 'mm/dd/yyyy'.
          */
         "helperText"?: string;
         /**
