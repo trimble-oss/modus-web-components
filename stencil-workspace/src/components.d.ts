@@ -16,7 +16,7 @@ import { ModusNavbarProfileMenuLink as ModusNavbarProfileMenuLink1 } from "./com
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.types";
 import { Tab } from "./components/modus-tabs/modus-tabs";
-import { TimeInputEventData } from "./components/modus-time-input/modus-time-picker.types";
+import { TimeInputEventData } from "./components/modus-time-picker/modus-time-picker.types";
 import { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export namespace Components {
     interface ModusAccordion {
