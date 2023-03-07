@@ -21,7 +21,7 @@ describe('modus-date-input', () => {
            </div>
            <div class="sub-text">
              <label class="helper">
-               dd/mm/yyyy
+               mm/dd/yyyy
              </label>
            </div>
          </div>

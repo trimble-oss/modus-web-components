@@ -46,7 +46,7 @@ describe('modus-date-picker', () => {
     const title = `${monthNames[today.getMonth()]} ${today.getFullYear()}`;
 
     // renders calendar header
-    element = await page.find('modus-date-picker >>> .title');
+    element = await page.find('modus-date-picker >>> .calendar-title');
     expect(element.innerHTML).toContain(title);
   });
 
@@ -86,6 +86,7 @@ describe('modus-date-picker', () => {
     const calendar = await page.find('modus-date-input >>> .icon-calendar');
     await calendar.click();
     await page.waitForChanges();
+    await new Promise((r) => setTimeout(r, 500));
 
     let title = `${monthNames[date.getMonth()]} ${date.getFullYear()}`;
 
@@ -140,7 +141,7 @@ describe('modus-date-picker', () => {
     await calendarIcon.click();
     await page.waitForChanges();
 
-    const currentDay = await page.find('modus-date-picker >>> .calendar-day.current-day');
+    const currentDay = await page.find('modus-date-picker >>> .current-day');
     await currentDay.click();
     await page.waitForChanges();
     await new Promise((r) => setTimeout(r, 1000));
