@@ -37,6 +37,7 @@ describe('modus-date-picker', () => {
     const calendar = await page.find('modus-date-input >>> .icon-calendar');
     await calendar.click();
     await page.waitForChanges();
+    await new Promise((r) => setTimeout(r, 1000));
 
     // renders calendar body with current day highlighted
     let element = await page.find('modus-date-picker >>> .calendar-day.current-day');
@@ -62,6 +63,7 @@ describe('modus-date-picker', () => {
     const calendar = await page.find('modus-date-input >>> .icon-calendar');
     await calendar.click();
     await page.waitForChanges();
+    await new Promise((r) => setTimeout(r, 1000));
 
     const title = `${monthNames[date.getMonth()]} ${date.getFullYear()}`;
 
@@ -86,7 +88,7 @@ describe('modus-date-picker', () => {
     const calendar = await page.find('modus-date-input >>> .icon-calendar');
     await calendar.click();
     await page.waitForChanges();
-    await new Promise((r) => setTimeout(r, 500));
+    await new Promise((r) => setTimeout(r, 1000));
 
     let title = `${monthNames[date.getMonth()]} ${date.getFullYear()}`;
 
@@ -140,11 +142,12 @@ describe('modus-date-picker', () => {
     const calendarIcon = await page.find('modus-date-input >>> .icon-calendar');
     await calendarIcon.click();
     await page.waitForChanges();
+    await new Promise((r) => setTimeout(r, 1000));
 
     const currentDay = await page.find('modus-date-picker >>> .current-day');
     await currentDay.click();
     await page.waitForChanges();
-    await new Promise((r) => setTimeout(r, 1000));
+    await new Promise((r) => setTimeout(r, 500));
 
     // Receive value update event on the date input
     expect(valueChange).toHaveReceivedEvent();
