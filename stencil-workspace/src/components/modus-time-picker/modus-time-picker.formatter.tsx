@@ -2,8 +2,8 @@ const TIME_12_HOUR_CLOCK_REGEX = /^(1[0-2]|0?[1-9]):([0-5][0-9]) ([AaPp][Mm])$/;
 const TIME_24_HOUR_CLOCK_REGEX = /^(2[0-3]|[01]?[0-9]):([0-5][0-9])$/;
 
 // eslint-disable-next-line no-useless-escape
-const TIME_12_HOUR_CLOCK_ALLOWED_CHARS_REGEX = /[0-9AaPpMm:\s]+/;
-const TIME_24_HOUR_CLOCK_ALLOWED_CHARS_REGEX = /[0-9:]+/;
+const TIME_12_HOUR_CLOCK_ALLOWED_CHARS_REGEX = /[\d:apm\s]/gi;
+const TIME_24_HOUR_CLOCK_ALLOWED_CHARS_REGEX = /[\d:]/gi;
 
 export default class TimeInputFormatter {
   private readonly hasAmPm: boolean = false;
@@ -66,7 +66,7 @@ export default class TimeInputFormatter {
   /** Validate key pressed */
   keyIsValidTimeCharacter(
     key: string,
-    allowedKeysRegexInput: string = null
+    allowedKeysRegexInput: RegExp = null
   ): boolean {
     const allowedKeysRegex =
       allowedKeysRegexInput != null
@@ -166,7 +166,6 @@ export default class TimeInputFormatter {
     return null;
   }
 
-  /** To match the digits in time format */
   private pad(val: number): string {
     if (val < 10) return `0${val}`;
     return val.toString();

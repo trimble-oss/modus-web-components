@@ -7,17 +7,14 @@ import {
   Method,
   Element,
   Watch,
+  State,
 } from '@stencil/core';
 import { IconMap } from '../icons/IconMap';
-import {
-  isDateEmpty,
-  parseDate,
-  parseString,
-} from '../modus-date-picker/utils/modus-date-picker.helpers';
 import {
   DateInputEventData,
   DateInputType,
 } from '../modus-date-picker/utils/modus-date-picker.types';
+import DateInputFormatter from './utils/modus-date-input.formatter';
 
 @Component({
   tag: 'modus-date-input',
@@ -27,11 +24,18 @@ import {
 export class ModusDateInput {
   @Element() element: HTMLElement;
 
+  /** (optional) Regular expression to allow characters while typing the input.
+   */
+  @Prop() allowedCharsRegex: RegExp;
+
   /** (optional) The input's aria-label. */
   @Prop() ariaLabel: string | null;
 
   /** (optional) Sets autofocus on the input. */
   @Prop() autoFocusInput: boolean;
+
+  // /** (optional) Formats the text while typing in the date input. Default is 'true'. */
+  // @Prop() autoFormat = true;
 
   /** (optional) Whether the input is disabled. */
   @Prop() disabled: boolean;
@@ -42,14 +46,28 @@ export class ModusDateInput {
   /** (optional) Custom error text displayed for the input. */
   @Prop() errorText: string;
 
-  /** (optional) Custom helper text displayed below the input. Default is 'mm/dd/yyyy'. */
-  @Prop() helperText = 'mm/dd/yyyy';
+  /** (optional) Filler date is used as fillers for parts not in the display format when constructing a full date string, for 'value'. It must be in the ISO String format YYYY-MM-DD. Default is {current year}-01-01. */
+  @Prop() fillerDate: string;
+  @Watch('fillerDate')
+  handleFillerDateChange(val: string): void {
+    this._formatter = new DateInputFormatter(val, this.format);
+  }
+
+  /**
+   * Format string for the date input. Default 'mm/dd/yyyy'.
+   * Use 'm','mm' for month, 'd','dd' for date and 'yy','yyyy' for year with any separator that is not a regular expression. */
+  @Prop() format = 'mm/dd/yyyy';
+  @Watch('format')
+  handleFormatChange(val: string): void {
+    this._formatter = new DateInputFormatter(this.fillerDate, val);
+    this.handleValueChange(this.value);
+  }
+
+  /** (optional) Custom helper text displayed below the input. */
+  @Prop() helperText;
 
   /** (optional) The input's label. */
   @Prop() label: string;
-
-  /** (optional) The input's maximum length. Default is 10. */
-  @Prop() maxLength = 10;
 
   /** (optional) The input's placeholder text. */
   @Prop() placeholder: string;
@@ -72,12 +90,19 @@ export class ModusDateInput {
   /** (optional) The input's valid state text. */
   @Prop() validText: string;
 
-  /** (optional) The input's value. */
-  @Prop() value: string;
+  /** (optional) A string representing the date entered in the input. The date is formatted according to ISO8601 'yyyy-mm-dd'. The displayed date format will differ from the 'value'. */
+  @Prop({ mutable: true }) value: string;
   @Watch('value')
   handleValueChange(val: string): void {
-    this.date = parseDate(val);
-    this.valueChange.emit(this.getEventData());
+    if (!this._isEditing) {
+      this._dateDisplay = this._formatter.formatDisplayString(val);
+    }
+
+    this.valueChange.emit({
+      value: val,
+      type: this.type,
+      inputString: this._dateDisplay,
+    });
   }
 
   /** An event that fires on calendar icon click. */
@@ -94,32 +119,36 @@ export class ModusDateInput {
     ['large', 'large'],
   ]);
 
-  private date: Date;
-  private textInput: HTMLInputElement;
+  private _dateInput: HTMLInputElement;
+  private _formatter: DateInputFormatter;
+  private _isEditing: boolean;
+  readonly _maxLength = 10;
+
+  // TODO: Auto formatting for single tokens 'm' and 'd' is tricky because user can input double digits
+  private autoFormat = false;
+
+  @State() _dateDisplay: string;
+
+  componentWillLoad() {
+    this.handleFormatChange(this.format);
+    this._dateDisplay = this._formatter.formatDisplayString(this.value);
+    this.setDefaultAllowedKeysRegex(this.autoFormat);
+  }
 
   /** Methods */
   /** Focus the input. */
   @Method()
   async focusInput(): Promise<void> {
-    this.textInput.focus();
-  }
-
-  /** Gets date object value */
-  @Method()
-  async getDate(): Promise<Date> {
-    return this.date;
-  }
-
-  /** Sets value on the input field  */
-  @Method()
-  async setDate(date: Date): Promise<void> {
-    this.value = parseString(date);
-    this.focusInput();
+    this._dateInput.focus();
   }
 
   /** Handlers */
   handleCalendarClick(): void {
-    this.calendarIconClicked.emit(this.getEventData());
+    this.calendarIconClicked.emit({
+      value: this.value,
+      type: this.type,
+      inputString: this._dateDisplay,
+    });
   }
 
   handleDefaultKeyDown(e: KeyboardEvent, callback: () => void) {
@@ -128,8 +157,14 @@ export class ModusDateInput {
   }
 
   handleBlur(): void {
-    this.validateInput();
-    this.dateInputBlur.emit(this.getEventData());
+    this._isEditing = false;
+
+    this.validateInput(this._dateDisplay);
+    this.dateInputBlur.emit({
+      value: this.value,
+      type: this.type,
+      inputString: this._dateDisplay,
+    });
   }
 
   handleInputKeyPress(event: KeyboardEvent): boolean {
@@ -142,9 +177,17 @@ export class ModusDateInput {
   }
 
   handleOnInput(event: Event): void {
+    this._isEditing = true;
     event.stopPropagation();
     event.preventDefault();
-    this.value = (event.currentTarget as HTMLInputElement)?.value;
+
+    const inputString = (event.currentTarget as HTMLInputElement)?.value;
+
+    this._dateDisplay = this._formatter.autoFormatInput(
+      inputString,
+      this.autoFormat
+    );
+    this.value = this._formatter.parseDisplayString(this._dateDisplay);
   }
 
   // Helpers
@@ -152,40 +195,30 @@ export class ModusDateInput {
     this.errorText = null;
   }
 
-  getEventData(): DateInputEventData {
-    return {
-      date: this.date,
-      type: this.type,
-    };
-  }
-
-  getValidationMessage(val: string, errorIfEmpty = false): string | null {
-    let error = 'Invalid date';
-    if (isDateEmpty(val)) {
-      error = errorIfEmpty ? 'Required' : null;
-    } else {
-      error = parseDate(val) ? null : error;
-    }
-
-    return error;
-  }
-
-  validateInput(): void {
-    if (this.disableValidation) return;
-
-    this.errorText = this.getValidationMessage(this.value, this.required);
-  }
-
   keyIsValidDateCharacter(key: string): boolean {
-    // eslint-disable-next-line no-useless-escape
-    const numbersAndSlashExp = /[0-9\/]+/;
-    const dateCharacterRegex = new RegExp(numbersAndSlashExp);
+    if (!this.allowedCharsRegex) return true;
 
+    const dateCharacterRegex = new RegExp(this.allowedCharsRegex);
     if (dateCharacterRegex.test(key)) {
       return true;
     }
-
     return false;
+  }
+
+  setDefaultAllowedKeysRegex(autoFormat: boolean) {
+    if (!this.allowedCharsRegex) {
+      this.allowedCharsRegex = autoFormat ? /\d/gi : /.*/;
+    }
+  }
+
+  validateInput(inputString: string | null): void {
+    if (this.disableValidation) return;
+
+    if (!inputString) {
+      if (this.required) this.errorText = 'Required';
+      else this.clearValidation();
+    } else if (!this.value) this.errorText = 'Invalid date';
+    else this.clearValidation();
   }
 
   render() {
@@ -211,22 +244,22 @@ export class ModusDateInput {
             this.errorText ? 'error' : this.validText ? 'valid' : ''
           } ${this.classBySize.get(this.size)}`}>
           <input
-            id="date-input"
             aria-placeholder={this.placeholder}
+            autofocus={this.autoFocusInput}
             class={{ 'has-right-icon': this.showCalendarIcon }}
             disabled={this.disabled}
+            id="date-input"
             inputmode="text"
+            onBlur={() => this.handleBlur()}
             onInput={(event) => this.handleOnInput(event)}
+            onKeyPress={(e) => this.handleInputKeyPress(e)}
             placeholder={this.placeholder}
             readonly={this.readOnly}
-            ref={(el) => (this.textInput = el as HTMLInputElement)}
+            ref={(el) => (this._dateInput = el as HTMLInputElement)}
             tabIndex={0}
             type="text"
-            value={this.value}
-            autofocus={this.autoFocusInput}
-            onBlur={() => this.handleBlur()}
-            maxLength={this.maxLength}
-            onKeyPress={(e) => this.handleInputKeyPress(e)}
+            maxLength={this._maxLength}
+            value={this._dateDisplay}
           />
           {this.showCalendarIcon && (
             <span

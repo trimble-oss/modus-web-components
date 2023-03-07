@@ -30,10 +30,10 @@ export class ModusTimePicker {
     this.handleAmPmDependencies(val);
   }
 
-  /** (optional) Custom regex for allowing characters while typing the input.
-   * Override it with '.*' to allow any character.
+  /** (optional) Regular expression to allow characters while typing the input.
+   * Default is /[0-9AaPpMm:\s]+/ or /[0-9:]+/ based on the display format.
    */
-  @Prop() allowedCharsRegex: string;
+  @Prop() allowedCharsRegex: RegExp;
 
   /** (optional) The input's aria-label. */
   @Prop() ariaLabel: string | null;

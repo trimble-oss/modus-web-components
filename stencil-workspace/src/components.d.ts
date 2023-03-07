@@ -16,7 +16,7 @@ import { ModusNavbarProfileMenuLink as ModusNavbarProfileMenuLink1 } from "./com
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.types";
 import { Tab } from "./components/modus-tabs/modus-tabs";
-import { TimeInputEventData } from "./components/modus-time-input/modus-time-picker.types";
+import { TimeInputEventData } from "./components/modus-time-picker/modus-time-picker.types";
 import { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export namespace Components {
     interface ModusAccordion {
@@ -293,6 +293,10 @@ export namespace Components {
     }
     interface ModusDateInput {
         /**
+          * (optional) Regular expression to allow characters while typing the input.
+         */
+        "allowedCharsRegex": RegExp;
+        /**
           * (optional) The input's aria-label.
          */
         "ariaLabel": string | null;
@@ -313,25 +317,25 @@ export namespace Components {
          */
         "errorText": string;
         /**
+          * (optional) Filler date is used as fillers for parts not in the display format when constructing a full date string, for 'value'. It must be in the ISO String format YYYY-MM-DD. Default is {current year}-01-01.
+         */
+        "fillerDate": string;
+        /**
           * Focus the input.
          */
         "focusInput": () => Promise<void>;
         /**
-          * Gets date object value
+          * Format string for the date input. Default 'mm/dd/yyyy'. Use 'm','mm' for month, 'd','dd' for date and 'yy','yyyy' for year with any separator that is not a regular expression.
          */
-        "getDate": () => Promise<Date>;
+        "format": string;
         /**
-          * (optional) Custom helper text displayed below the input. Default is 'mm/dd/yyyy'.
+          * (optional) Custom helper text displayed below the input.
          */
-        "helperText": string;
+        "helperText": any;
         /**
           * (optional) The input's label.
          */
         "label": string;
-        /**
-          * (optional) The input's maximum length. Default is 10.
-         */
-        "maxLength": number;
         /**
           * (optional) The input's placeholder text.
          */
@@ -344,10 +348,6 @@ export namespace Components {
           * (optional) Whether the input is required.
          */
         "required": boolean;
-        /**
-          * Sets value on the input field
-         */
-        "setDate": (date: Date) => Promise<void>;
         /**
           * (optional) Show a calendar icon. Note: Clicking on this icon will only emit an event `calendarIconClicked`.
          */
@@ -365,7 +365,7 @@ export namespace Components {
          */
         "validText": string;
         /**
-          * (optional) The input's value.
+          * (optional) A string representing the date entered in the input. The date is formatted according to ISO8601 'yyyy-mm-dd'. The displayed date format will differ from the 'value'.
          */
         "value": string;
     }
@@ -974,9 +974,9 @@ export namespace Components {
     }
     interface ModusTimePicker {
         /**
-          * (optional) Custom regex for allowing characters while typing the input. Override it with '.*' to allow any character.
+          * (optional) Regular expression to allow characters while typing the input. Default is /[0-9AaPpMm:\s]+/ or /[0-9:]+/ based on the display format.
          */
-        "allowedCharsRegex": string;
+        "allowedCharsRegex": RegExp;
         /**
           * (optional) Sets 12/24 hour format for the input string.
          */
@@ -1890,6 +1890,10 @@ declare namespace LocalJSX {
     }
     interface ModusDateInput {
         /**
+          * (optional) Regular expression to allow characters while typing the input.
+         */
+        "allowedCharsRegex"?: RegExp;
+        /**
           * (optional) The input's aria-label.
          */
         "ariaLabel"?: string | null;
@@ -1910,17 +1914,21 @@ declare namespace LocalJSX {
          */
         "errorText"?: string;
         /**
-          * (optional) Custom helper text displayed below the input. Default is 'mm/dd/yyyy'.
+          * (optional) Filler date is used as fillers for parts not in the display format when constructing a full date string, for 'value'. It must be in the ISO String format YYYY-MM-DD. Default is {current year}-01-01.
          */
-        "helperText"?: string;
+        "fillerDate"?: string;
+        /**
+          * Format string for the date input. Default 'mm/dd/yyyy'. Use 'm','mm' for month, 'd','dd' for date and 'yy','yyyy' for year with any separator that is not a regular expression.
+         */
+        "format"?: string;
+        /**
+          * (optional) Custom helper text displayed below the input.
+         */
+        "helperText"?: any;
         /**
           * (optional) The input's label.
          */
         "label"?: string;
-        /**
-          * (optional) The input's maximum length. Default is 10.
-         */
-        "maxLength"?: number;
         /**
           * An event that fires on calendar icon click.
          */
@@ -1962,7 +1970,7 @@ declare namespace LocalJSX {
          */
         "validText"?: string;
         /**
-          * (optional) The input's value.
+          * (optional) A string representing the date entered in the input. The date is formatted according to ISO8601 'yyyy-mm-dd'. The displayed date format will differ from the 'value'.
          */
         "value"?: string;
     }
@@ -2664,9 +2672,9 @@ declare namespace LocalJSX {
     }
     interface ModusTimePicker {
         /**
-          * (optional) Custom regex for allowing characters while typing the input. Override it with '.*' to allow any character.
+          * (optional) Regular expression to allow characters while typing the input. Default is /[0-9AaPpMm:\s]+/ or /[0-9:]+/ based on the display format.
          */
-        "allowedCharsRegex"?: string;
+        "allowedCharsRegex"?: RegExp;
         /**
           * (optional) Sets 12/24 hour format for the input string.
          */

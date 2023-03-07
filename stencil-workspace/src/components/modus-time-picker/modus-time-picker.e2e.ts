@@ -222,7 +222,7 @@ describe('modus-time-picker', () => {
     expect(await input.getProperty('value')).toEqual('');
 
     const component = await page.find('modus-time-picker');
-    component.setProperty('allowedCharsRegex', '.');
+    component.setProperty('allowedCharsRegex', /./);
     await page.waitForChanges();
 
     await input.type('JK', { delay: 20 });

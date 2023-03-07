@@ -37,6 +37,7 @@ describe('modus-date-picker', () => {
     const calendar = await page.find('modus-date-input >>> .icon-calendar');
     await calendar.click();
     await page.waitForChanges();
+    await new Promise((r) => setTimeout(r, 2000));
 
     // renders calendar body with current day highlighted
     let element = await page.find('modus-date-picker >>> .calendar-day.current-day');
@@ -54,7 +55,7 @@ describe('modus-date-picker', () => {
     const page = await newE2EPage();
     await page.setContent(`
     <modus-date-picker>
-      <modus-date-input show-calendar-icon="true" value="2/2/2023" label="Single Date">
+      <modus-date-input show-calendar-icon="true" value="2023-2-2" label="Single Date">
       </modus-date-input>
     </modus-date-picker>`);
 
@@ -62,6 +63,7 @@ describe('modus-date-picker', () => {
     const calendar = await page.find('modus-date-input >>> .icon-calendar');
     await calendar.click();
     await page.waitForChanges();
+    await new Promise((r) => setTimeout(r, 2000));
 
     const title = `${monthNames[date.getMonth()]} ${date.getFullYear()}`;
 
@@ -78,7 +80,7 @@ describe('modus-date-picker', () => {
     const page = await newE2EPage();
     await page.setContent(`
     <modus-date-picker>
-      <modus-date-input show-calendar-icon="true" value="2/2/2023" label="Single Date">
+      <modus-date-input show-calendar-icon="true" value="2023-2-2" label="Single Date">
       </modus-date-input>
     </modus-date-picker>`);
 
@@ -86,7 +88,7 @@ describe('modus-date-picker', () => {
     const calendar = await page.find('modus-date-input >>> .icon-calendar');
     await calendar.click();
     await page.waitForChanges();
-    await new Promise((r) => setTimeout(r, 500));
+    await new Promise((r) => setTimeout(r, 2000));
 
     let title = `${monthNames[date.getMonth()]} ${date.getFullYear()}`;
 
@@ -140,22 +142,22 @@ describe('modus-date-picker', () => {
     const calendarIcon = await page.find('modus-date-input >>> .icon-calendar');
     await calendarIcon.click();
     await page.waitForChanges();
+    await new Promise((r) => setTimeout(r, 2000));
 
     const currentDay = await page.find('modus-date-picker >>> .current-day');
     await currentDay.click();
     await page.waitForChanges();
-    await new Promise((r) => setTimeout(r, 1000));
+    await new Promise((r) => setTimeout(r, 500));
 
     // Receive value update event on the date input
     expect(valueChange).toHaveReceivedEvent();
 
     // Check date string on the input field
-    const dateInput = await page.find('modus-date-input >>> input');
-    expect(await dateInput.getProperty('value')).toEqual(today.toLocaleDateString('en-US', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-    }));
+    const dateInput = await page.find('modus-date-input');
+
+    // Modus Date Input component's value should be 'yyyy-mm-dd' format
+    const todayString = `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`;
+    expect(await dateInput.getProperty('value')).toEqual(todayString);
 
     // Close the calendar once a date is selected
     const calendarContainer = await page.find('modus-date-picker >>> .calendar-container');
@@ -167,9 +169,9 @@ describe('modus-date-picker', () => {
     const page = await newE2EPage();
     await page.setContent(`
     <modus-date-picker>
-      <modus-date-input show-calendar-icon="true" type="start" label="Start Date">
+      <modus-date-input format="yyyy-mm-dd" show-calendar-icon="true" type="start" label="Start Date">
       </modus-date-input>
-      <modus-date-input show-calendar-icon="true" type="end" label="End Date">
+      <modus-date-input format="yyyy-mm-dd" show-calendar-icon="true" type="end" label="End Date">
       </modus-date-input>
     </modus-date-picker>`);
 
@@ -177,9 +179,9 @@ describe('modus-date-picker', () => {
     const endDateInput = await page.find('modus-date-input[type="end"] >>> input');
 
     // invalid date range validation
-    await startDateInput.type('1/1/2023', { delay: 20 });
+    await startDateInput.type('2023-1-1', { delay: 20 });
     await page.waitForChanges();
-    await endDateInput.type('1/1/2021', { delay: 20 });
+    await endDateInput.type('2021-1-1', { delay: 20 });
     await page.waitForChanges();
 
     // trigger a blur event for validation to happen

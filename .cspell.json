@@ -36,7 +36,8 @@
     "valuenow",
     "yxxx",
     "ARROWUP",
-    "ARROWDOWN"
+    "ARROWDOWN",
+    "ampm"
   ],
   "flagWords": ["hte"],
   "language": "en-US",

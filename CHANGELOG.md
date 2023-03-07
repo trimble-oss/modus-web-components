@@ -6,6 +6,10 @@ View all releases at: <https://github.com/trimble-oss/modus-web-components/relea
 
 ## Unreleased
 
+### Added
+
+- Added custom formatting option to the Modus Date Input component.
+
 ## 0.1.35 - 2023-03-03
 
 ### Added
