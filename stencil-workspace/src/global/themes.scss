@@ -93,7 +93,7 @@
   // Border
   --modus-alert-primary-border-color: var(--modus-primary);
   --modus-alert-secondary-border-color: var(--modus-gray-8);
-  --modus-alert-dark-border-color: var(--modus-dark);
+  --modus-alert-dark-border-color: var(--modus-gray-10);
   --modus-alert-success-border-color: var(--modus-success);
   --modus-alert-danger-border-color: var(--modus-danger);
   --modus-alert-warning-border-color: var(--modus-warning);
@@ -408,7 +408,7 @@
   // Border
   --modus-alert-primary-border-color: var(--modus-primary);
   --modus-alert-secondary-border-color: var(--modus-secondary);
-  --modus-alert-dark-border-color: var(--modus-dark);
+  --modus-alert-dark-border-color: var(--modus-gray-8);
   --modus-alert-success-border-color: var(--modus-success);
   --modus-alert-danger-border-color: var(--modus-danger);
   --modus-alert-warning-border-color: var(--modus-warning);
@@ -478,7 +478,7 @@
 
   // Chip
   // Active
-  --modus-chip-active-bg: #217cbb;
+  --modus-chip-active-bg: var(--modus-blue);
   --modus-chip-active-color: var(--modus-white);
 
   // Disabled
@@ -681,7 +681,7 @@
   --modus-badge-tertiary-bg: var(--modus-tertiary);
   --modus-badge-dark-bg: var(--modus-dark);
   --modus-badge-success-bg: var(--modus-success);
-  --modus-badge-warning-bg: var(--modus-warning);
+  --modus-badge-warning-bg: var(--modus-yellow);
   --modus-badge-danger-bg: var(--modus-danger);
 
   // Text only badge variants
