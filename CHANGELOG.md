@@ -6,6 +6,12 @@ View all releases at: <https://github.com/trimble-oss/modus-web-components/relea
 
 ## Unreleased
 
+## 0.1.36 - 2023-03-15
+
+### Fixed
+
+- Overflowing text in Modus Toast now uses an ellipsis
+
 ## 0.1.35 - 2023-03-03
 
 ### Added

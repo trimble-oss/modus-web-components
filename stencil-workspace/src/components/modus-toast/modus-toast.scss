@@ -14,8 +14,18 @@
   height: 2.6875rem;
   padding: 0 $rem-16px;
 
+  .icon {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    min-width: $rem-18px;
+  }
+
   .text {
     margin: 0 $rem-8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .close {
