@@ -26,7 +26,7 @@ export class ModusDateInput {
 
   /** (optional) Regular expression to allow characters while typing the input.
    */
-  @Prop() allowedCharsRegex: RegExp;
+  @Prop() allowedCharsRegex: RegExp | string;
 
   /** (optional) The input's aria-label. */
   @Prop() ariaLabel: string | null;

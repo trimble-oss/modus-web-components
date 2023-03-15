@@ -5,6 +5,14 @@ import docs from './modus-date-picker-storybook-docs.mdx';
 export default {
   title: 'User Inputs/Date Picker',
   argTypes: {
+    allowedCharsRegex: {
+      name: 'allowed-chars-regex',
+      description:
+        'Regular expression to allow characters while typing the input.',
+      table: {
+        type: { summary: 'string' },
+      },
+    },
     ariaLabel: {
       name: 'aria-label',
       description: "The input's aria-label",
@@ -132,6 +140,7 @@ export default {
 
 const defaultArgs = {
   ariaLabel: '',
+  allowedCharsRegex: '[\\d\\/]',
   autoFocusInput: true,
   disableValidation: false,
   disabled: false,
@@ -150,6 +159,7 @@ const defaultArgs = {
 
 const DefaultTemplate = ({
   ariaLabel,
+  allowedCharsRegex,
   autoFocusInput,
   disableValidation,
   disabled,
@@ -166,6 +176,7 @@ const DefaultTemplate = ({
   value,
 }) => html`
   <modus-date-input
+    allowed-chars-regex=${allowedCharsRegex}
     aria-label=${ariaLabel}
     auto-focus-input=${autoFocusInput}
     disable-validation=${disableValidation}
@@ -191,6 +202,7 @@ Default.args = {
 
 const DateRangeTemplate = ({
   ariaLabel,
+  allowedCharsRegex,
   autoFocusInput,
   disableValidation,
   disabled,
@@ -208,6 +220,7 @@ const DateRangeTemplate = ({
 }) => html`
   <modus-date-picker label="Select date range">
     <modus-date-input
+      allowed-chars-regex=${allowedCharsRegex}
       aria-label=${ariaLabel}
       auto-focus-input=${autoFocusInput}
       disable-validation=${disableValidation}
@@ -226,6 +239,7 @@ const DateRangeTemplate = ({
       value=${value}></modus-date-input>
 
     <modus-date-input
+      allowed-chars-regex=${allowedCharsRegex}
       aria-label=${ariaLabel}
       auto-focus-input=${autoFocusInput}
       disable-validation=${disableValidation}
@@ -247,5 +261,10 @@ const DateRangeTemplate = ({
 export const DateRange = DateRangeTemplate.bind({});
 DateRange.args = {
   ...defaultArgs,
-  ...{ showCalendarIcon: true, format: 'dd-mm-yyyy', helperText: 'dd-mm-yyyy' },
+  ...{
+    showCalendarIcon: true,
+    format: 'dd-mm-yyyy',
+    helperText: 'dd-mm-yyyy',
+    allowedCharsRegex: '[\\d-]',
+  },
 };

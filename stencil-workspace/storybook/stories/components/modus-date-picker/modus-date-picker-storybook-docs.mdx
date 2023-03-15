@@ -23,10 +23,6 @@ Modus Date Input has a default validation which is triggered on a blur event and
 
 Default validation can also be disabled and use the props `errorText`, `invalid` to control the error state.
 
-### Accessibility
-
-Every element in Modus Date Input is accessible through keyboard. Use `Tab` key and `Shift + Tab` key to interact with the Date Input field and the calendar view.
-
 ### Default
 
 <Story id="user-inputs-date-picker--default" />
@@ -35,6 +31,8 @@ Every element in Modus Date Input is accessible through keyboard. Use `Tab` key 
 <modus-date-input
   helper-text="mm/dd/yyyy"
   label="Single date"
+  allowed-chars-regex="[\d\/]"
+  format="mm/dd/yyyy"
   value="2022-12-22"></modus-date-input>
 ```
 
@@ -51,6 +49,7 @@ A custom date format can be set using the prop `format` as shown in the example.
 <modus-date-input
   label="Formatted date"
   helper-text="yyyy-mm"
+  allowed-chars-regex="[\d-]"
   format="yyyy-mm"
   value="2022-12-22"></modus-date-input>
 ```
@@ -66,6 +65,7 @@ A custom date format can be set using the prop `format` as shown in the example.
     label="Start"
     format="dd-mm-yyyy"
     helper-text="dd-mm-yyyy"
+    allowed-chars-regex="[\d-]"
     show-calendar-icon="true"
     value="2022-12-22"></modus-date-input>
 
@@ -74,6 +74,7 @@ A custom date format can be set using the prop `format` as shown in the example.
     label="End"
     format="dd-mm-yyyy"
     helper-text="dd-mm-yyyy"
+    allowed-chars-regex="[\d-]"
     show-calendar-icon="true"
     value="2022-12-22"></modus-date-input>
 </modus-date-picker>
@@ -81,7 +82,7 @@ A custom date format can be set using the prop `format` as shown in the example.
 
 ### Formatting Rules
 
-Each character as shown in the table below can be used for representing the date and any character can be used as a separator except for those in regular expressions.
+Each character as shown in the table below can be used for representing the date format and any character can be used as a separator except for those in regular expressions.
 
 | Character | Description                  | Example     |
 | --------- | ---------------------------- | ----------- |
@@ -98,7 +99,7 @@ Each character as shown in the table below can be used for representing the date
 
 | Property            | Attribute            | Description                                                                                                                                                                                                       | Type                           | Default        |
 | ------------------- | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ | -------------- |
-| `allowedCharsRegex` | --                   | (optional) Regular expression to allow characters while typing the input.                                                                                                                                         | `RegExp`                       | `undefined`    |
+| `allowedCharsRegex` | --                   | (optional) Regular expression to allow characters while typing the input.                                                                                                                                         | `RegExp \| string`             | `undefined`    |
 | `ariaLabel`         | `aria-label`         | (optional) The input's aria-label.                                                                                                                                                                                | `string`                       | `undefined`    |
 | `autoFocusInput`    | `auto-focus-input`   | (optional) Sets autofocus on the input.                                                                                                                                                                           | `boolean`                      | `undefined`    |
 | `disableValidation` | `disable-validation` | (optional) Disables default validation for the date input.                                                                                                                                                        | `boolean`                      | `undefined`    |
@@ -138,3 +139,13 @@ Each character as shown in the table below can be used for representing the date
 | Method name  | Description     | Parameter | Return          |
 | ------------ | --------------- | --------- | --------------- |
 | `focusInput` | Focus the input |           | `Promise<void>` |
+
+### Accessibility
+
+- Every element in Modus Date Input is accessible through keyboard. Use `Tab` key and `Shift + Tab` key to interact with the Date Input field and the calendar view.
+- Date Input gets an `aria-label` provided by the `aria-label` property input.
+- Date Input gets an `aria-disabled` provided by the `disabled` property input.
+- Date Input gets an `aria-placeholder` provided by the `placeholder` property input.
+- Date Input gets an `aria-invalid` from `invalid` property input.
+- Date Input gets an `aria-readonly` from `readonly` property input.
+- Date Input gets an `aria-required` from `required` property input.

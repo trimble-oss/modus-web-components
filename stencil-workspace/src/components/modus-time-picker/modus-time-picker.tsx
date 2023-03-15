@@ -31,9 +31,9 @@ export class ModusTimePicker {
   }
 
   /** (optional) Regular expression to allow characters while typing the input.
-   * Default is /[0-9AaPpMm:\s]+/ or /[0-9:]+/ based on the display format.
+   * Default is `/[\d:apm\s]/gi` or `/[\d:]/gi` based on the display format.
    */
-  @Prop() allowedCharsRegex: RegExp;
+  @Prop() allowedCharsRegex: RegExp | string;
 
   /** (optional) The input's aria-label. */
   @Prop() ariaLabel: string | null;

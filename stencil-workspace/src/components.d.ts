@@ -295,7 +295,7 @@ export namespace Components {
         /**
           * (optional) Regular expression to allow characters while typing the input.
          */
-        "allowedCharsRegex": RegExp;
+        "allowedCharsRegex": RegExp | string;
         /**
           * (optional) The input's aria-label.
          */
@@ -976,7 +976,7 @@ export namespace Components {
         /**
           * (optional) Regular expression to allow characters while typing the input. Default is /[0-9AaPpMm:\s]+/ or /[0-9:]+/ based on the display format.
          */
-        "allowedCharsRegex": RegExp;
+        "allowedCharsRegex": RegExp | string;
         /**
           * (optional) Sets 12/24 hour format for the input string.
          */
@@ -1892,7 +1892,7 @@ declare namespace LocalJSX {
         /**
           * (optional) Regular expression to allow characters while typing the input.
          */
-        "allowedCharsRegex"?: RegExp;
+        "allowedCharsRegex"?: RegExp | string;
         /**
           * (optional) The input's aria-label.
          */
@@ -2674,7 +2674,7 @@ declare namespace LocalJSX {
         /**
           * (optional) Regular expression to allow characters while typing the input. Default is /[0-9AaPpMm:\s]+/ or /[0-9:]+/ based on the display format.
          */
-        "allowedCharsRegex"?: RegExp;
+        "allowedCharsRegex"?: RegExp | string;
         /**
           * (optional) Sets 12/24 hour format for the input string.
          */

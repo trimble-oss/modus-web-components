@@ -16,7 +16,7 @@ export default class DateInputFormatter {
   private _dateRegExp: string;
   private _displayFormat: string;
   private _fillerDate: Date;
-  private _tokenSeparators: tokenSeparators; // ex: {'-': 2, '-': 5}
+  private _tokenSeparators: tokenSeparators; // ex: {2: '-', 5; '-'}
 
   constructor(fillerDateString: string, format: string) {
     const [regex, tokens, separators] = this.buildRegexAndTokens(format);
@@ -50,27 +50,27 @@ export default class DateInputFormatter {
     const separators: tokenSeparators = new Map();
 
     for (let i = 0; i < format.length; i++) {
-      let tokn = format[i];
-      const tokens = [tokn];
+      let token = format[i];
+      const tokens = [token];
 
-      while (format[i + 1] === tokn) {
-        tokens.push(tokn);
+      while (format[i + 1] === token) {
+        tokens.push(token);
         ++i;
       }
 
-      const tokenString = tokens.join('') as token;
-      const tokenInfo = Tokens[tokenString];
+      const validToken = tokens.join('') as token;
+      const tokenInfo = Tokens[validToken];
       if (tokenInfo && tokenInfo.regex) {
         dtTokens.set(tokenInfo.type, {
           index: dtTokens.size,
-          tokenString: tokenString,
+          tokenString: validToken,
         });
-        tokn = tokenInfo.regex;
+        token = tokenInfo.regex;
       } else {
-        separators.set(i, tokn);
+        separators.set(i, token);
       }
 
-      regexParts.push(tokn);
+      regexParts.push(token);
     }
 
     return [`^${regexParts.join('')}$`, dtTokens, separators];

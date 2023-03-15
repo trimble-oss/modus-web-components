@@ -66,7 +66,7 @@ export default class TimeInputFormatter {
   /** Validate key pressed */
   keyIsValidTimeCharacter(
     key: string,
-    allowedKeysRegexInput: RegExp = null
+    allowedKeysRegexInput: RegExp | string = null
   ): boolean {
     const allowedKeysRegex =
       allowedKeysRegexInput != null
