@@ -63,7 +63,7 @@ export class ModusToast {
 
     return (
       <div aria-label={this.ariaLabel} class={className} role="status">
-        {this.showIcon && icon}
+        {this.showIcon && <div class="icon">{icon}</div>}
         <span class={'text'}>
           <slot />
         </span>
