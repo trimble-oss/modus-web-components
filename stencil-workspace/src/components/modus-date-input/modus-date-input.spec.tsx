@@ -20,9 +20,6 @@ describe('modus-date-input', () => {
              <input id="date-input" inputmode="text" maxlength="10" tabindex="0" type="text">
            </div>
            <div class="sub-text">
-             <label class="helper">
-               mm/dd/yyyy
-             </label>
            </div>
          </div>
     `);

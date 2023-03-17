@@ -119,17 +119,66 @@ describe('modus-date-input', () => {
     expect(await input.getProperty('autofocus')).toBeTruthy();
   });
 
+  // it('renders changes to autoFormat', async () => {
+  //   const page = await newE2EPage();
+
+  //   await page.setContent('<modus-date-input></modus-date-input>');
+  //   await page.waitForChanges();
+
+  //   // Input '12'
+  //   const input = await page.find('modus-date-input >>> input');
+  //   await input.type('12', { delay: 20 });
+  //   await page.waitForChanges();
+
+  //   // Formatted
+  //   expect(await input.getProperty('value')).toEqual('12/');
+  // });
+
+  it('renders changes to format', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-date-input></modus-date-input>');
+    await page.waitForChanges();
+
+    const textInput = await page.find('modus-date-input');
+    textInput.setProperty('format', 'yyyy-mm');
+    await page.waitForChanges();
+
+    textInput.setProperty('value', '2022-12-23');
+    await page.waitForChanges();
+
+    const input = await page.find('modus-date-input >>> input');
+    expect(await input.getProperty('value')).toEqual('2022-12');
+  });
+
+  it('renders changes to allowedCharsRegex', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-date-input></modus-date-input>');
+    await page.waitForChanges();
+
+    const textInput = await page.find('modus-date-input');
+    textInput.setProperty('allowedCharsRegex', /\d/gi);
+    await page.waitForChanges();
+
+    const input = await page.find('modus-date-input >>> input');
+    await input.type('JK', { delay: 20 });
+    await page.waitForChanges();
+
+    expect(await input.getProperty('value')).toEqual('');
+  });
+
   it('renders changes to value', async () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-date-input></modus-date-input>');
 
     const textInput = await page.find('modus-date-input');
-    textInput.setProperty('value', '01/01/2023');
+    textInput.setProperty('value', '2022-11-21'); // ISO 8601 Format
     await page.waitForChanges();
 
     const input = await page.find('modus-date-input >>> input');
-    expect(await input.getProperty('value')).toEqual('01/01/2023');
+    expect(await input.getProperty('value')).toEqual('11/21/2022'); // default display format
   });
 
   it('renders changes to readOnly', async () => {

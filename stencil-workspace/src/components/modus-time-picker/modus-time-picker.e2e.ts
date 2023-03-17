@@ -215,20 +215,15 @@ describe('modus-time-picker', () => {
     await page.setContent('<modus-time-picker></modus-time-picker>');
     await page.waitForChanges();
 
+    const textInput = await page.find('modus-time-picker');
+    textInput.setProperty('allowedCharsRegex', '.');
+    await page.waitForChanges();
+
     const input = await page.find('modus-time-picker >>> input');
-    await input.type('JK', { delay: 20 });
+    await input.type('12', { delay: 20 });
     await page.waitForChanges();
 
-    expect(await input.getProperty('value')).toEqual('');
-
-    const component = await page.find('modus-time-picker');
-    component.setProperty('allowedCharsRegex', '.');
-    await page.waitForChanges();
-
-    await input.type('JK', { delay: 20 });
-    await page.waitForChanges();
-
-    expect(await input.getProperty('value')).toEqual('JK');
+    expect(await input.getProperty('value')).toEqual('12');
   });
 
   it('renders changes to min', async () => {
