@@ -631,6 +631,10 @@ It is located on the left side of the screen and cannot be combined with Side Na
 </script>
 ```
 
+### Accessibility
+
+Every item and the elements such as drag icon, expand & collapse icon and the checkbox are accessible through keyboard. `Tab` key moves focus to the next focusable element and `Shift + Tab` moves focus to the previous focusable element. If `disableTabbing` is set `true`, tabbing inside the tree isn't allowed. Please refer to the next section for more details on keyboard interaction.
+
 ### Keyboard Navigation
 
 | Key                   | Description                                                                                                                                                                                                                  |
@@ -639,35 +643,38 @@ It is located on the left side of the screen and cannot be combined with Side Na
 | Arrow Right           | Expands the item                                                                                                                                                                                                             |
 | Arrow Up              | Moves to the previous focusable item and focus moves to a child if the current or previous parent item is expanded                                                                                                           |
 | Arrow Down            | Moves to the next focusable item and focus moves to a child if the current or next parent item is expanded                                                                                                                   |
-| Enter                 | Using `Tab` key if the focus is set on an item, pressing `Enter` key will select it and if the focus is on an element like checkbox, collapse/expand icon, pressing `Enter` key will perform operations only on that element |
-| Space                 | Expands/Collapses the item when it is in focus                                                                                                                                                                               |
-| Shift + Arrow Up/Down | If `multi-selection` is true, it performs multiple selection starting from the item that is already selected                                                                                                                 |
 | Ctrl + click          | If `multi-selection` is true, it performs multiple selection on the clicked items                                                                                                                                            |
+| Enter                 | Using `Tab` key if the focus is set on an item, pressing `Enter` key will select it and if the focus is on an element like checkbox, collapse/expand icon, pressing `Enter` key will perform operations only on that element |
+| Shift + Arrow Up/Down | If `multi-selection` is true, it performs multiple selection starting from the item that is already selected                                                                                                                 |
+| Shift + Arrow Right   | Can be used to focus the checkbox inside a tree item if `disableTabbing` is true                                                                                                                                             |
+| Space                 | Expands/Collapses the item when it is in focus                                                                                                                                                                               |
 
 ### Properties
 
 ##### Modus Tree View
 
-| Name                     | Description                                  | Type     | Options                          | Default Value | Required                                     |
-| ------------------------ | -------------------------------------------- | -------- | -------------------------------- | ------------- | -------------------------------------------- |
-| checkbox-selection       | Enables checkbox selection on each tree item | boolean  |                                  |               |                                              |
-| checked-items            | Check tree items                             | string[] |                                  |               |                                              |
-| expanded-items           | Expand tree items                            | string[] |                                  |               |                                              |
-| multi-checkbox-selection | Enables multiple checkbox selection          | boolean  |                                  |               |                                              |
-| multi-selection          | Enables multiple tree items selection        | boolean  |                                  |               |                                              |
-| selected-items           | Select tree items                            | string[] |                                  |               |                                              |
-| size                     | The default size of all tree items           | string   | 'condensed', 'standard', 'large' | standard      | <span class="material-icons">&#10004;</span> |
+| Property                 | Attribute                  | Description                                                                                                                                                                                   | Type                                   | Default      |
+| ------------------------ | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- | ------------ |
+| `checkboxSelection`      | `checkbox-selection`       | (optional) Enables checkbox selection on each tree item                                                                                                                                       | `boolean`                              | `undefined`  |
+| `checkedItems`           | --                         | (optional) Set checked tree items                                                                                                                                                             | `string[]`                             | `[]`         |
+| `disableTabbing`         | `disable-tabbing`          | (optional) Disable usage of `tab` key to focus elements inside a tree view. Use `Arrow Up/Down` for focussing a tree item and `Shift + Arrow Right` for focussing a checkbox inside the item. | `boolean`                              | `undefined`  |
+| `expandedItems`          | --                         | (optional) Set expanded tree items                                                                                                                                                            | `string[]`                             | `[]`         |
+| `multiCheckboxSelection` | `multi-checkbox-selection` | (optional) Enables multiple checkbox selection                                                                                                                                                | `boolean`                              | `undefined`  |
+| `multiSelection`         | `multi-selection`          | (optional) Enables multiple tree items selection                                                                                                                                              | `boolean`                              | `undefined`  |
+| `selectedItems`          | --                         | (optional) Set selected tree items                                                                                                                                                            | `string[]`                             | `[]`         |
+| `size`                   | `size`                     | (optional) The default size of all tree items                                                                                                                                                 | `"condensed" \| "large" \| "standard"` | `'standard'` |
 
 ##### Modus Tree View Item
 
-| Name          | Description                                                                                                            | Type    | Options | Default Value | Required                                     |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------- | ------- | ------- | ------------- | -------------------------------------------- |
-| disabled      | Disables the tree item                                                                                                 | boolean |         |               |                                              |
-| draggableItem | Allows the item to be dragged across the tree                                                                          | boolean |         |               |                                              |
-| droppableItem | Allows the item to be a drop zone so other tree items can be dropped above it                                          | boolean |         |               |                                              |
-| editable      | Changes the label text into a input text box for editing (Note: applicable only when the value is set by prop `label`) | string  |         |               | <span class="material-icons">&#10004;</span> |
-| label         | Label for the tree item                                                                                                | string  |         |               | <span class="material-icons">&#10004;</span> |
-| node-id       | Unique tree item identifier                                                                                            | string  |         |               | <span class="material-icons">&#10004;</span> |
+| Property              | Attribute         | Description                                                                              | Type               | Default     |
+| --------------------- | ----------------- | ---------------------------------------------------------------------------------------- | ------------------ | ----------- |
+| `disabled`            | `disabled`        | (optional) Disables the tree item                                                        | `boolean`          | `undefined` |
+| `draggableItem`       | `draggable-item`  | (optional) Allows the item to be dragged across the tree                                 | `boolean`          | `undefined` |
+| `droppableItem`       | `droppable-item`  | (optional) Allows the item to be a drop zone so other tree items can be dropped above it | `boolean`          | `undefined` |
+| `editable`            | `editable`        | (optional) Changes the label field into a text box                                       | `boolean`          | `undefined` |
+| `label` _(required)_  | `label`           | (required) Label for the tree item                                                       | `string`           | `undefined` |
+| `nodeId` _(required)_ | `node-id`         | (required) Unique tree item identifier                                                   | `string`           | `undefined` |
+| `tabIndexValue`       | `tab-index-value` | (optional) Tab Index for the tree item                                                   | `number \| string` | `0`         |
 
 ### DOM Events
 
@@ -679,6 +686,11 @@ It is located on the left side of the screen and cannot be combined with Side Na
 | itemClick        | An event that fires on tree item click           | boolean |
 | itemExpandToggle | An event that fires on tree item expand/collapse | boolean |
 
-### Accessibility
+### Methods
 
-Every item and the elements inside it such as drag icon, expand & collapse icon and the checkbox are accessible through keyboard. `Tab` key moves focus to the next focusable element and `Shift + Tab` moves focus to the previous focusable element.
+##### Modus Tree View Item
+
+| Method name     | Description                           | Parameter | Return          |
+| --------------- | ------------------------------------- | --------- | --------------- |
+| `focusCheckbox` | Focus the checkbox inside a tree item |           | `Promise<void>` |
+| `focusItem`     | Focus the tree item                   |           | `Promise<void>` |

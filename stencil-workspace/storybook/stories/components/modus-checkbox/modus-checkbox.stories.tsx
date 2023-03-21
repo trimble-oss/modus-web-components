@@ -39,6 +39,12 @@ export default {
         type: { summary: 'string' },
       },
     },
+    tabIndexValue: {
+      description: 'Tab Index for the checkbox',
+      table: {
+        type: { summary: 'string' },
+      },
+    },
   },
   parameters: {
     actions: {
@@ -60,13 +66,15 @@ const Template = ({
   disabled,
   indeterminate,
   label,
+  tabIndexValue,
 }) => html`
   <modus-checkbox
     aria-label=${ariaLabel}
     checked=${checked}
     disabled=${disabled}
     indeterminate=${indeterminate}
-    label=${label}></modus-checkbox>
+    label=${label}
+    tab-index-value=${tabIndexValue}></modus-checkbox>
 `;
 
 export const Default = Template.bind({});
@@ -76,6 +84,7 @@ Default.args = {
   disabled: false,
   indeterminate: false,
   label: 'Checkbox',
+  tabIndexValue: 0,
 };
 
 export const Indeterminate = Template.bind({});
@@ -85,4 +94,5 @@ Indeterminate.args = {
   disabled: false,
   indeterminate: true,
   label: 'Checkbox',
+  tabIndexValue: 0,
 };

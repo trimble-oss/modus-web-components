@@ -30,89 +30,31 @@ This component is compatible with Angular reactive forms. This can be achieved t
 <modus-checkbox label="Checkbox"></modus-checkbox>
 <modus-checkbox disabled label="Checkbox"></modus-checkbox>
 <modus-checkbox checked disabled label="Checkbox"></modus-checkbox>
-
 <modus-checkbox indeterminate></modus-checkbox>
 ```
 
 ### Properties
 
-<section>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Type</th>
-        <th>Options</th>
-        <th>Default Value</th>
-        <th>Required</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>aria-label</td>
-        <td>The checkbox's aria-label</td>
-        <td>string</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>checked</td>
-        <td>Whether the checkbox is checked</td>
-        <td>boolean</td>
-        <td></td>
-        <td>false</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>disabled</td>
-        <td>Whether the checkbox is disabled</td>
-        <td>boolean</td>
-        <td></td>
-        <td>false</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>indeterminate</td>
-        <td>Whether the checkbox is indeterminate</td>
-        <td>boolean</td>
-        <td></td>
-        <td>false</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>label</td>
-        <td>The label</td>
-        <td>string</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+| Property        | Attribute         | Description                                       | Type               | Default     |
+| --------------- | ----------------- | ------------------------------------------------- | ------------------ | ----------- |
+| `ariaLabel`     | `aria-label`      | (optional) The checkbox's aria-label.             | `string`           | `undefined` |
+| `checked`       | `checked`         | (optional) Whether the checkbox is checked.       | `boolean`          | `undefined` |
+| `disabled`      | `disabled`        | (optional) Whether the checkbox is disabled.      | `boolean`          | `undefined` |
+| `indeterminate` | `indeterminate`   | (optional) Whether the checkbox is indeterminate. | `boolean`          | `undefined` |
+| `label`         | `label`           | (optional) The checkbox label.                    | `string`           | `undefined` |
+| `tabIndexValue` | `tab-index-value` | (optional) Tab Index for the checkbox             | `number \| string` | `0`         |
 
 ### DOM Events
 
-<section>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Emits</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>checkboxClick</td>
-        <td>Fires on checkbox click</td>
-        <td>boolean</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+| Event           | Description                            | Type                   |
+| --------------- | -------------------------------------- | ---------------------- |
+| `checkboxClick` | An event that fires on checkbox click. | `CustomEvent<boolean>` |
+
+### Methods
+
+| Method name     | Description              | Parameter | Return          |
+| --------------- | ------------------------ | --------- | --------------- |
+| `focusCheckbox` | Focus the checkbox input |           | `Promise<void>` |
 
 ### Accessibility
 

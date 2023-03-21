@@ -1,6 +1,19 @@
-// eslint-disable-next-line
-import { Component, Element, h, Host, Listen, Prop, State, Watch } from '@stencil/core';
-import { TreeViewItemOptions, TreeViewItemInfo, TreeViewItemDragState, Position } from '../modus-content-tree.types';
+import {
+  Component,
+  Element,
+  h, // eslint-disable-line @typescript-eslint/no-unused-vars
+  Host,
+  Listen,
+  Prop,
+  State,
+  Watch,
+} from '@stencil/core';
+import {
+  TreeViewItemOptions,
+  TreeViewItemInfo,
+  TreeViewItemDragState,
+  Position,
+} from '../modus-content-tree.types';
 import { ModusContentTreeDragItem } from '../modus-content-tree-drag-item';
 
 @Component({
@@ -16,6 +29,9 @@ export class ModusTreeView {
 
   /** (optional) Set checked tree items */
   @Prop({ mutable: true }) checkedItems: string[] = [];
+
+  /** (optional) Disable usage of `tab` key to focus elements inside a tree view. Use `Arrow Up/Down` for focussing a tree item and `Shift + Arrow Right` for focussing a checkbox inside the item.*/
+  @Prop({ mutable: true }) disableTabbing: boolean;
 
   /** (optional) Set expanded tree items */
   @Prop({ mutable: true }) expandedItems: string[] = [];
@@ -55,8 +71,23 @@ export class ModusTreeView {
     return { ...rest, targetId: null, validTarget: null };
   }
 
+  @Listen('click', { target: 'document' })
+  handleDocumentClick(event: MouseEvent): void {
+    if (
+      this.element.contains(event.target as HTMLElement) ||
+      event.defaultPrevented
+    )
+      return;
+
+    // Clear focus
+    this.focusItem = null;
+  }
+
   @Watch('itemDragState')
-  handleItemDragState(newValue: TreeViewItemDragState, oldValue: TreeViewItemDragState) {
+  handleItemDragState(
+    newValue: TreeViewItemDragState,
+    oldValue: TreeViewItemDragState
+  ) {
     if (oldValue && newValue && oldValue.itemId === newValue.itemId) return;
     if (newValue) {
       document.addEventListener('mousemove', this.onMouseMove);
@@ -67,7 +98,11 @@ export class ModusTreeView {
     }
   }
 
-  handleItemDragStart(itemId: string, dragContent: HTMLElement, event: MouseEvent) {
+  handleItemDragStart(
+    itemId: string,
+    dragContent: HTMLElement,
+    event: MouseEvent
+  ) {
     const { clientX, clientY, currentTarget } = event;
     const parent = (currentTarget as HTMLElement)?.parentElement;
     this.clearItemDropState();
@@ -89,7 +124,11 @@ export class ModusTreeView {
       y: clientY,
     };
 
-    const { nodeId: dropZoneId, element: dropZoneItem, content: dropZoneContent } = this.getItemWithinBounds(clientX, clientY) || {};
+    const {
+      nodeId: dropZoneId,
+      element: dropZoneItem,
+      content: dropZoneContent,
+    } = this.getItemWithinBounds(clientX, clientY) || {};
 
     let newDragState = { ...this.clearItemDropState(), translation };
 
@@ -98,7 +137,11 @@ export class ModusTreeView {
       newDragState = { ...newDragState, targetId: dropZoneId };
 
       // avoid parent drag & drop over its children
-      if (dropZoneItem.droppableItem && !this.isItemDisabled(dropZoneId) && !(parents && parents.includes(newDragState.itemId))) {
+      if (
+        dropZoneItem.droppableItem &&
+        !this.isItemDisabled(dropZoneId) &&
+        !(parents && parents.includes(newDragState.itemId))
+      ) {
         newDragState.validTarget = true;
         dropZoneContent.classList.add('drop-allow');
       } else {
@@ -117,9 +160,11 @@ export class ModusTreeView {
     if (dropItemId && validTarget && dropItemId !== targetId) {
       const { parentId, element } = this.items[targetId];
       if (element) {
-        const insertAtParent = (this.items[parentId]?.element || this.element) as HTMLElement;
+        const insertAtParent = (this.items[parentId]?.element ||
+          this.element) as HTMLElement;
         const insertBefore = element as unknown as HTMLElement;
-        const insertElement = this.items[this.itemDragState.itemId].element as unknown as HTMLElement;
+        const insertElement = this.items[this.itemDragState.itemId]
+          .element as unknown as HTMLElement;
 
         insertAtParent.insertBefore(insertElement, insertBefore);
       }
@@ -137,6 +182,7 @@ export class ModusTreeView {
   }
 
   @Watch('checkboxSelection')
+  @Watch('disableTabbing')
   @Watch('multiCheckboxSelection')
   @Watch('multiSelection')
   @Watch('size')
@@ -148,7 +194,9 @@ export class ModusTreeView {
   }
 
   handleTreeSlotChange() {
-    const childrenAtRoot = Array.from(this.element.children as unknown as HTMLModusTreeViewItemElement[])
+    const childrenAtRoot = Array.from(
+      this.element.children as unknown as HTMLModusTreeViewItemElement[]
+    )
       .map((i) => i.nodeId)
       .filter((i) => i);
 
@@ -181,8 +229,11 @@ export class ModusTreeView {
     const treeItem = ele as unknown as HTMLModusTreeViewItemElement;
     const parent = ele.parentNode;
     if (treeItem.nodeId) {
-      const { children: siblings, nodeId: parentId } = parent as unknown as HTMLModusTreeViewItemElement;
-      const index = Array.from(siblings as unknown as HTMLModusTreeViewItemElement[])
+      const { children: siblings, nodeId: parentId } =
+        parent as unknown as HTMLModusTreeViewItemElement;
+      const index = Array.from(
+        siblings as unknown as HTMLModusTreeViewItemElement[]
+      )
         .filter((i) => i.nodeId)
         .indexOf(treeItem);
       const level = this.getLevel(parentId) + 1;
@@ -224,7 +275,8 @@ export class ModusTreeView {
 
       // remove from API
       const removeFromAPI = (array) => {
-        if (array.find((i) => deletedItems.includes(i))) return array.filter((i) => !deletedItems.includes(i));
+        if (array.find((i) => deletedItems.includes(i)))
+          return array.filter((i) => !deletedItems.includes(i));
         return array;
       };
       this.checkedItems = removeFromAPI(this.checkedItems);
@@ -243,13 +295,40 @@ export class ModusTreeView {
       .map((c) => this.items[c])
       .sort((a, b) => a.index - b.index)
       .reduce((r, c) => {
-        r.push(c.nodeId, ...(recursive ? this.getChildrenIds(c.nodeId, recursive) : []));
+        r.push(
+          c.nodeId,
+          ...(recursive ? this.getChildrenIds(c.nodeId, recursive) : [])
+        );
         return r;
       }, []);
   }
 
   getLevel(itemId: string): number {
     return this.items[itemId]?.level || 0;
+  }
+
+  getFirstItem(): string {
+    const item = this.element.firstElementChild;
+    if (item) {
+      return (item as unknown as HTMLModusTreeViewItemElement).nodeId;
+    }
+    return null;
+  }
+
+  getLastItem(): string {
+    const ele = this.element.lastElementChild;
+    if (ele) {
+      const lastItem = ele as unknown as HTMLModusTreeViewItemElement;
+      let lastItemId = lastItem.nodeId;
+
+      if (this.isItemExpanded(lastItem.nodeId)) {
+        const children = this.getChildrenIds(lastItem.nodeId, true);
+        lastItemId = children.slice(-1)[0];
+      }
+
+      return lastItemId;
+    }
+    return null;
   }
 
   getNavigableChildrenIds(parentId: string): string[] {
@@ -300,7 +379,10 @@ export class ModusTreeView {
 
     // get previous item, if expanded get its last child
     let curr = siblings[index - 1];
-    while (this.isItemExpanded(curr) && this.getNavigableChildrenIds(curr).length > 0) {
+    while (
+      this.isItemExpanded(curr) &&
+      this.getNavigableChildrenIds(curr).length > 0
+    ) {
       curr = this.getNavigableChildrenIds(curr).pop();
     }
 
@@ -313,6 +395,7 @@ export class ModusTreeView {
       checkboxSelection: this.checkboxSelection,
       multiCheckboxSelection: this.multiCheckboxSelection,
       size: this.size,
+      disableTabbing: this.disableTabbing,
 
       getLevel: (id) => this.getLevel(id),
       hasItemFocus: (id) => this.isItemInFocus(id),
@@ -324,7 +407,8 @@ export class ModusTreeView {
       showSelectionIndicator: (id) => this.showSelectionIndicator(id),
 
       onItemSelection: (id, e) => this.handleItemSelection(id, e),
-      onCheckboxSelection: (id, syncOnly) => this.handleCheckboxSelection(id, syncOnly),
+      onCheckboxSelection: (id, syncOnly) =>
+        this.handleCheckboxSelection(id, syncOnly),
       onItemExpandToggle: (id) => this.handleItemExpand(id),
       onItemFocus: (id) => this.handleItemFocus(id),
       onItemAdd: (ele) => this.addItem(ele),
@@ -358,7 +442,10 @@ export class ModusTreeView {
 
         if (currentChecked) {
           newCheckedItems.push(currentId, ...descendants);
-        } else newCheckedItems = newCheckedItems.filter((i) => i !== currentId).filter((i) => !descendants.includes(i));
+        } else
+          newCheckedItems = newCheckedItems
+            .filter((i) => i !== currentId)
+            .filter((i) => !descendants.includes(i));
 
         itemsToSync.push(...descendants);
       }
@@ -411,9 +498,15 @@ export class ModusTreeView {
     current.focusItem();
   }
 
-  handleItemSelection(itemId: string, event?: KeyboardEvent | MouseEvent): void {
+  handleItemSelection(
+    itemId: string,
+    event?: KeyboardEvent | MouseEvent
+  ): void {
     if (this.items[itemId].disabled) return;
-    const allowMultipleSelection = this.multiSelection && event && (event.shiftKey || event.ctrlKey || event.metaKey);
+    const allowMultipleSelection =
+      this.multiSelection &&
+      event &&
+      (event.shiftKey || event.ctrlKey || event.metaKey);
     const isSelected = !this.isItemSelected(itemId);
 
     const oldItems = [...this.selectedItems];
@@ -433,59 +526,91 @@ export class ModusTreeView {
   }
 
   handleKeyDown(event: KeyboardEvent): void {
-    if (event.defaultPrevented) {
-      return; // Do nothing if event already handled
+    if (event.defaultPrevented || event.altKey) {
+      return; // Do nothing if event already handled or alt key pressed
     }
+    const key = event.code.toUpperCase();
+    let preventDefault = false;
 
-    const key = event.code;
-    let flag = false;
-    // If the tree is empty there will be no focused node
-    if (event.altKey || !this.focusItem) {
-      return;
-    }
     switch (key) {
-      case 'Space':
-        this.handleItemExpand(this.focusItem);
-        flag = true;
+      case 'SPACE':
+        if (this.focusItem) {
+          this.handleItemExpand(this.focusItem);
+          preventDefault = true;
+        }
         break;
-      case 'Enter':
-        this.handleItemSelection(this.focusItem, event);
-        event.stopPropagation();
+      case 'ENTER':
+        if (this.focusItem) {
+          this.handleItemSelection(this.focusItem, event);
+          event.stopPropagation();
+        }
         break;
-      case 'ArrowDown':
+      case 'ARROWDOWN':
         // eslint-disable-next-line no-case-declarations
-        const nextItem = this.getNextNavigableItem(this.focusItem);
-        if (this.multiSelection && event.shiftKey && this.isItemSelected(this.focusItem)) {
+        const nextItem = this.focusItem
+          ? this.getNextNavigableItem(this.focusItem)
+          : this.getFirstItem();
+
+        // Multi-Selection
+        if (
+          this.multiSelection &&
+          event.shiftKey &&
+          this.isItemSelected(this.focusItem)
+        ) {
           // deselect if going back to the selected node
-          if (this.isItemSelected(nextItem)) this.handleItemSelection(this.focusItem, event);
+          if (this.isItemSelected(nextItem))
+            this.handleItemSelection(this.focusItem, event);
           else this.handleItemSelection(nextItem, event);
         }
+
         this.handleItemFocus(nextItem);
-        flag = true;
+        preventDefault = true;
         break;
-      case 'ArrowUp':
+      case 'ARROWUP':
         // eslint-disable-next-line no-case-declarations
-        const prevItem = this.getPrevNavigableItem(this.focusItem);
-        if (this.multiSelection && event.shiftKey && this.isItemSelected(this.focusItem)) {
+        const prevItem = this.focusItem
+          ? this.getPrevNavigableItem(this.focusItem)
+          : this.getLastItem();
+
+        // Multi-Selection
+        if (
+          this.multiSelection &&
+          event.shiftKey &&
+          this.isItemSelected(this.focusItem)
+        ) {
           // deselect if going back to the selected node
-          if (this.isItemSelected(prevItem)) this.handleItemSelection(this.focusItem, event);
+          if (this.isItemSelected(prevItem))
+            this.handleItemSelection(this.focusItem, event);
           else this.handleItemSelection(prevItem, event);
         }
 
         this.handleItemFocus(prevItem);
-        flag = true;
+        preventDefault = true;
         break;
-      case 'ArrowRight':
-        if (!this.isItemExpanded(this.focusItem)) this.handleItemExpand(this.focusItem);
-        break;
-      case 'ArrowLeft':
-        if (this.isItemExpanded(this.focusItem)) this.handleItemExpand(this.focusItem);
-        break;
+      case 'ARROWRIGHT':
+        if (this.focusItem) {
+          // 'Shift + Arrow Right' can be used to focus the checkbox when tabbing is disabled inside the tree
+          if (this.disableTabbing && event.shiftKey) {
+            const { element } = this.items[this.focusItem];
+            element.focusCheckbox();
+          } else if (!this.isItemExpanded(this.focusItem)) {
+            this.handleItemExpand(this.focusItem);
+          }
+        }
 
+        break;
+      case 'ARROWLEFT':
+        if (this.focusItem && this.isItemExpanded(this.focusItem)) {
+          this.handleItemExpand(this.focusItem);
+        }
+        break;
+      case 'TAB':
+        if (this.disableTabbing) this.resetFocusItem();
+        break;
       default:
     }
 
-    if (flag) {
+    if (preventDefault) {
       event.preventDefault();
       event.stopPropagation();
     }
@@ -523,8 +648,18 @@ export class ModusTreeView {
     return disabled || Boolean(parents?.find((p) => this.items[p].disabled));
   }
 
+  resetFocusItem(): void {
+    this.focusItem = null;
+  }
+
   showSelectionIndicator(itemId: string): boolean {
-    return this.isItemSelected(itemId) || (!this.isItemExpanded(itemId) && Boolean(this.getChildrenIds(itemId, true).find((i) => this.isItemSelected(i))));
+    return (
+      this.isItemSelected(itemId) ||
+      (!this.isItemExpanded(itemId) &&
+        Boolean(
+          this.getChildrenIds(itemId, true).find((i) => this.isItemSelected(i))
+        ))
+    );
   }
 
   syncTreeViewItem(itemId: string) {
@@ -553,10 +688,14 @@ export class ModusTreeView {
   render(): HTMLUListElement {
     return (
       <Host>
-        <ul role="tree" onKeyDown={(e) => this.handleKeyDown(e)}>
+        <ul
+          role="tree"
+          tabindex={this.disableTabbing ? 0 : null}
+          onKeyDown={(e) => this.handleKeyDown(e)}>
           <slot onSlotchange={() => this.handleTreeSlotChange()} />
         </ul>
-        <ModusContentTreeDragItem draggingState={this.itemDragState}></ModusContentTreeDragItem>
+        <ModusContentTreeDragItem
+          draggingState={this.itemDragState}></ModusContentTreeDragItem>
       </Host>
     );
   }

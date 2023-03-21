@@ -4,13 +4,49 @@ import { html } from 'lit-html';
 
 export default {
   title: 'Components/Content Tree',
+  argTypes: {
+    checkboxSelection: {
+      name: 'checkbox-selection',
+      description: 'Enables checkbox selection on each tree item.',
+      table: {
+        type: { summary: 'boolean' },
+      },
+    },
+    disableTabbing: {
+      name: 'disable-tabbing',
+      description:
+        'Disables tabbing inside a tree view. Use `Arrow Up/Down` for focussing a tree item and `Shift + Arrow Right` for focussing a checkbox inside the item.',
+      table: {
+        type: { summary: 'boolean' },
+      },
+    },
+    multiCheckboxSelection: {
+      name: 'multi-checkbox-selection',
+      description: 'Enables multiple checkbox selection.',
+      table: {
+        type: { summary: 'boolean' },
+      },
+    },
+    multiSelection: {
+      name: 'multi-selection',
+      description: 'Enables multiple tree items selection.',
+      table: {
+        type: { summary: 'boolean' },
+      },
+    },
+    size: {
+      name: 'size',
+      description: 'The default size of all tree items.',
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+  },
   parameters: {
     docs: {
       page: docs,
     },
-    controls: {
-      disabled: true,
-    },
+    controls: { expanded: true, sort: 'requiredFirst' },
     options: {
       isToolshown: true,
       enableShortcuts: false,
@@ -20,21 +56,17 @@ export default {
 
 const Template = ({
   checkboxSelection,
-  checkedItems,
-  expandedItems,
   multiCheckboxSelection,
   multiSelection,
-  selectedItems,
+  disableTabbing,
   size,
 }) => html`
   <modus-tree-view
     style="width:400px;"
     checkbox-selection=${checkboxSelection ? 'true' : 'false'}
-    checked-items=${checkedItems ? 'true' : 'false'}
-    expanded-items=${expandedItems ? 'true' : 'false'}
+    disable-tabbing=${disableTabbing ? 'true' : 'false'}
     multi-checkbox-selection=${multiCheckboxSelection ? 'true' : 'false'}
     multi-selection=${multiSelection ? 'true' : 'false'}
-    selected-items=${selectedItems ? 'true' : 'false'}
     size=${size}>
     <modus-tree-view-item node-Id="1" label="Inbox">
       <modus-tree-view-item node-Id="2" label="Personal"></modus-tree-view-item>
@@ -79,6 +111,13 @@ const SlotIconTemplate = () => html`
 `;
 
 export const Default = Template.bind({});
+Default.args = {
+  checkboxSelection: false,
+  disableTabbing: false,
+  multiCheckboxSelection: false,
+  multiSelection: true,
+  size: 'standard',
+};
 
 export const WithIcon = SlotIconTemplate.bind({});
 
