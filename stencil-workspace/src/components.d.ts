@@ -225,6 +225,10 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
+          * Focus the checkbox input
+         */
+        "focusCheckbox": () => Promise<void>;
+        /**
           * (optional) Whether the checkbox is indeterminate.
          */
         "indeterminate": boolean;
@@ -232,6 +236,10 @@ export namespace Components {
           * (optional) The checkbox label.
          */
         "label": string;
+        /**
+          * (optional) Tab Index for the checkbox
+         */
+        "tabIndexValue": string | number;
     }
     interface ModusChip {
         /**
@@ -1107,6 +1115,10 @@ export namespace Components {
          */
         "checkedItems": string[];
         /**
+          * (optional) Disable usage of `tab` key to focus elements inside a tree view. Use `Arrow Up/Down` for focussing an tree item and `Shift + Arrow Right` for focussing a checkbox inside the item.
+         */
+        "disableTabbing": boolean;
+        /**
           * (optional) Set expanded tree items
          */
         "expandedItems": string[];
@@ -1144,6 +1156,13 @@ export namespace Components {
           * (optional) Changes the label field into a text box
          */
         "editable": boolean;
+        /**
+          * Focus the checkbox inside a tree item
+         */
+        "focusCheckbox": () => Promise<void>;
+        /**
+          * Focus the tree item
+         */
         "focusItem": () => Promise<void>;
         "initTreeViewItem": (newValue: TreeViewItemOptions) => Promise<void>;
         /**
@@ -1154,6 +1173,10 @@ export namespace Components {
           * (required) Unique tree item identifier
          */
         "nodeId": string;
+        /**
+          * (optional) Tab Index for the tree item
+         */
+        "tabIndexValue": string | number;
         "updateComponent": () => Promise<void>;
     }
 }
@@ -1810,6 +1833,10 @@ declare namespace LocalJSX {
           * An event that fires on checkbox click.
          */
         "onCheckboxClick"?: (event: ModusCheckboxCustomEvent<boolean>) => void;
+        /**
+          * (optional) Tab Index for the checkbox
+         */
+        "tabIndexValue"?: string | number;
     }
     interface ModusChip {
         /**
@@ -2822,6 +2849,10 @@ declare namespace LocalJSX {
          */
         "checkedItems"?: string[];
         /**
+          * (optional) Disable usage of `tab` key to focus elements inside a tree view. Use `Arrow Up/Down` for focussing an tree item and `Shift + Arrow Right` for focussing a checkbox inside the item.
+         */
+        "disableTabbing"?: boolean;
+        /**
           * (optional) Set expanded tree items
          */
         "expandedItems"?: string[];
@@ -2880,6 +2911,10 @@ declare namespace LocalJSX {
           * An event that fires on tree item expand/collapse
          */
         "onItemExpandToggle"?: (event: ModusTreeViewItemCustomEvent<boolean>) => void;
+        /**
+          * (optional) Tab Index for the tree item
+         */
+        "tabIndexValue"?: string | number;
     }
     interface IntrinsicElements {
         "modus-accordion": ModusAccordion;

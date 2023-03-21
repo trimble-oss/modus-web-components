@@ -56,6 +56,9 @@ export class ModusTreeViewItem {
   /** (required) Unique tree item identifier */
   @Prop({ reflect: true }) nodeId!: string;
 
+  /** (optional) Tab Index for the tree item */
+  @Prop({ mutable: true }) tabIndexValue: string | number = 0;
+
   /**
    * @internal
    */
@@ -72,6 +75,7 @@ export class ModusTreeViewItem {
   ]);
   private refItemContent: HTMLDivElement;
   private refLabelInput: HTMLModusTextInputElement;
+  private refCheckbox: HTMLModusCheckboxElement;
   private options: TreeViewItemOptions;
 
   readonly SLOT_COLLAPSE_ICON = 'collapseIcon';
@@ -125,9 +129,16 @@ export class ModusTreeViewItem {
     this.options?.onItemDelete(this.nodeId);
   }
 
+  /** Focus the tree item */
   @Method()
   async focusItem(): Promise<void> {
     this.refItemContent.focus();
+  }
+
+  /** Focus the checkbox inside a tree item */
+  @Method()
+  async focusCheckbox(): Promise<void> {
+    if (this.refCheckbox) this.refCheckbox.focusCheckbox();
   }
 
   getChildrenIds(): string[] {
@@ -294,6 +305,7 @@ export class ModusTreeViewItem {
     this.options = { ...newValue };
     this.handleTreeSlotChange();
     this.updateComponent();
+    this.tabIndexValue = this.options.disableTabbing ? -1 : this.tabIndexValue;
   }
 
   rootOptions() {
@@ -382,7 +394,7 @@ export class ModusTreeViewItem {
       role: 'treeitem',
     };
     const sizeClass = `${this.classBySize.get(size || 'standard')}`;
-    const tabIndex = isDisabled ? -1 : 0;
+    const tabIndex: string | number = isDisabled ? -1 : this.tabIndexValue;
     const treeItemClass = `tree-item ${
       selected ? 'selected' : ''
     } ${sizeClass} ${isDisabled ? 'disabled' : ''} `;
@@ -422,7 +434,7 @@ export class ModusTreeViewItem {
             onKeyDown={(e) =>
               this.handleDefaultKeyDown(e, () => this.handleExpandToggle(e))
             }
-            tabIndex={expandable ? tabIndex : -1}>
+            tabindex={expandable ? tabIndex : -1}>
             <this.CustomSlot
               className="inline-flex rotate-right"
               defaultContent={<IconMap icon="chevron-down-thick" size="24" />}
@@ -448,7 +460,9 @@ export class ModusTreeViewItem {
                   this.handleDefaultKeyDown(e, () =>
                     this.handleCheckboxClick(e)
                   )
-                }></modus-checkbox>
+                }
+                ref={(el) => (this.refCheckbox = el)}
+                tabIndexValue={tabIndex}></modus-checkbox>
             </div>
           )}
 
@@ -466,7 +480,7 @@ export class ModusTreeViewItem {
                   <modus-text-input
                     size={size == 'large' ? 'large' : 'medium'}
                     autoFocusInput={true}
-                    tabIndex={0}
+                    tabindex={0}
                     ref={(el) => (this.refLabelInput = el)}
                     value={this.label}
                     onClick={(e) => this.handleLabelInputClick(e)}

@@ -1,5 +1,12 @@
-// eslint-disable-next-line
-import { Component, Prop, h, Event, EventEmitter, Listen } from '@stencil/core';
+import {
+  Component,
+  Prop,
+  h, // eslint-disable-line @typescript-eslint/no-unused-vars
+  Event,
+  EventEmitter,
+  Listen,
+  Method,
+} from '@stencil/core';
 import { IconCheck } from '../icons/icon-check';
 import { IconIndeterminate } from '../icons/icon-indeterminate';
 
@@ -24,10 +31,14 @@ export class ModusCheckbox {
   /** (optional) The checkbox label. */
   @Prop() label: string;
 
+  /** (optional) Tab Index for the checkbox */
+  @Prop({ mutable: true }) tabIndexValue: string | number = 0;
+
   /** An event that fires on checkbox click. */
   @Event() checkboxClick: EventEmitter<boolean>;
 
   checkboxInput: HTMLInputElement;
+  checkboxContainer: HTMLDivElement;
 
   @Listen('keydown')
   elementKeydownHandler(event: KeyboardEvent): void {
@@ -39,6 +50,12 @@ export class ModusCheckbox {
         this.handleCheckboxClick();
         break;
     }
+  }
+
+  /** Focus the checkbox input */
+  @Method()
+  async focusCheckbox(): Promise<void> {
+    this.checkboxContainer.focus();
   }
 
   componentDidRender(): void {
@@ -62,7 +79,7 @@ export class ModusCheckbox {
 
   render(): unknown {
     const className = 'modus-checkbox';
-    const tabIndexValue = this.disabled ? -1 : 0;
+    const tabIndexValue = this.disabled ? -1 : this.tabIndexValue;
 
     return (
       <div
@@ -70,8 +87,14 @@ export class ModusCheckbox {
         onClick={() => {
           this.handleCheckboxClick();
         }}
-        tabIndex={tabIndexValue}>
-        <div class={`${this.checked || this.indeterminate ? 'checkbox blue-background checked' : 'checkbox'} ${this.disabled ? 'disabled' : ''}`}>
+        tabindex={tabIndexValue}
+        ref={(el) => (this.checkboxContainer = el)}>
+        <div
+          class={`${
+            this.checked || this.indeterminate
+              ? 'checkbox blue-background checked'
+              : 'checkbox'
+          } ${this.disabled ? 'disabled' : ''}`}>
           {this.indeterminate ? (
             <div class={'checkmark checked'}>
               <IconIndeterminate color="#FFFFFF" size="24" />
@@ -90,7 +113,9 @@ export class ModusCheckbox {
           disabled={this.disabled}
           ref={(el) => (this.checkboxInput = el as HTMLInputElement)}
           type="checkbox"></input>
-        {this.label ? <label class={this.disabled ? 'disabled' : null}>{this.label}</label> : null}
+        {this.label ? (
+          <label class={this.disabled ? 'disabled' : null}>{this.label}</label>
+        ) : null}
       </div>
     );
   }

@@ -20,8 +20,8 @@ table {
     .column-header {
       display: flex;
       flex-direction: row;
-      min-height: $rem-20px;
       justify-content: center;
+      min-height: $rem-20px;
       padding: 0 $rem-8px;
 
       &.align-left,
