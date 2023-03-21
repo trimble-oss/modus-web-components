@@ -1,5 +1,6 @@
 export type TreeViewItemOptions = {
   checkboxSelection?: boolean;
+  disableTabbing?: boolean;
   getLevel?: (itemId: string) => number;
   hasItemDisabled?: (itemId: string) => boolean;
   hasItemFocus?: (itemId: string) => boolean;

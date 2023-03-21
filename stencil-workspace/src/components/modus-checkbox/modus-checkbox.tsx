@@ -24,6 +24,9 @@ export class ModusCheckbox {
   /** (optional) The checkbox label. */
   @Prop() label: string;
 
+  /** (optional) Tab Index for the tree item */
+  @Prop({ mutable: true }) tabIndexValue: string | number = 0;
+
   /** An event that fires on checkbox click. */
   @Event() checkboxClick: EventEmitter<boolean>;
 
@@ -62,7 +65,7 @@ export class ModusCheckbox {
 
   render(): unknown {
     const className = 'modus-checkbox';
-    const tabIndexValue = this.disabled ? -1 : 0;
+    const tabIndexValue = this.disabled ? -1 : this.tabIndexValue;
 
     return (
       <div
@@ -70,8 +73,13 @@ export class ModusCheckbox {
         onClick={() => {
           this.handleCheckboxClick();
         }}
-        tabIndex={tabIndexValue}>
-        <div class={`${this.checked || this.indeterminate ? 'checkbox blue-background checked' : 'checkbox'} ${this.disabled ? 'disabled' : ''}`}>
+        tabindex={tabIndexValue}>
+        <div
+          class={`${
+            this.checked || this.indeterminate
+              ? 'checkbox blue-background checked'
+              : 'checkbox'
+          } ${this.disabled ? 'disabled' : ''}`}>
           {this.indeterminate ? (
             <div class={'checkmark checked'}>
               <IconIndeterminate color="#FFFFFF" size="24" />
@@ -90,7 +98,9 @@ export class ModusCheckbox {
           disabled={this.disabled}
           ref={(el) => (this.checkboxInput = el as HTMLInputElement)}
           type="checkbox"></input>
-        {this.label ? <label class={this.disabled ? 'disabled' : null}>{this.label}</label> : null}
+        {this.label ? (
+          <label class={this.disabled ? 'disabled' : null}>{this.label}</label>
+        ) : null}
       </div>
     );
   }

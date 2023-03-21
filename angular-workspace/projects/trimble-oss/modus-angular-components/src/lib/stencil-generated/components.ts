@@ -229,13 +229,13 @@ export declare interface ModusCheckbox extends Components.ModusCheckbox {
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['ariaLabel', 'checked', 'disabled', 'indeterminate', 'label']
+  inputs: ['ariaLabel', 'checked', 'disabled', 'indeterminate', 'label', 'tabIndexValue']
 })
 @Component({
   selector: 'modus-checkbox',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['ariaLabel', 'checked', 'disabled', 'indeterminate', 'label']
+  inputs: ['ariaLabel', 'checked', 'disabled', 'indeterminate', 'label', 'tabIndexValue']
 })
 export class ModusCheckbox {
   protected el: HTMLElement;
@@ -1128,13 +1128,13 @@ export declare interface ModusTreeView extends Components.ModusTreeView {}
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['checkboxSelection', 'checkedItems', 'expandedItems', 'multiCheckboxSelection', 'multiSelection', 'selectedItems', 'size']
+  inputs: ['checkboxSelection', 'checkedItems', 'disableTabbing', 'expandedItems', 'multiCheckboxSelection', 'multiSelection', 'selectedItems', 'size']
 })
 @Component({
   selector: 'modus-tree-view',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['checkboxSelection', 'checkedItems', 'expandedItems', 'multiCheckboxSelection', 'multiSelection', 'selectedItems', 'size']
+  inputs: ['checkboxSelection', 'checkedItems', 'disableTabbing', 'expandedItems', 'multiCheckboxSelection', 'multiSelection', 'selectedItems', 'size']
 })
 export class ModusTreeView {
   protected el: HTMLElement;
@@ -1163,14 +1163,14 @@ export declare interface ModusTreeViewItem extends Components.ModusTreeViewItem 
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['disabled', 'draggableItem', 'droppableItem', 'editable', 'label', 'nodeId'],
+  inputs: ['disabled', 'draggableItem', 'droppableItem', 'editable', 'label', 'nodeId', 'tabIndexValue'],
   methods: ['focusItem']
 })
 @Component({
   selector: 'modus-tree-view-item',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['disabled', 'draggableItem', 'droppableItem', 'editable', 'label', 'nodeId']
+  inputs: ['disabled', 'draggableItem', 'droppableItem', 'editable', 'label', 'nodeId', 'tabIndexValue']
 })
 export class ModusTreeViewItem {
   protected el: HTMLElement;

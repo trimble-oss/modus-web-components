@@ -16,6 +16,68 @@
 
   </head>
   <body>
-    <!-- Test components here -->
+    <modus-accordion>
+      <modus-accordion-item header-text="Item 1" size="condensed">Content</modus-accordion-item>
+      <modus-accordion-item header-text="Item 2" size="condensed">Content</modus-accordion-item>
+      <modus-accordion-item disabled expanded header-text="Item 3" size="condensed">Content</modus-accordion-item>
+    </modus-accordion>
+
+    <modus-tree-view
+  style="width:400px;"
+  checkbox-selection="false"
+  checked-items="false"
+  expanded-items="false"
+  multi-checkbox-selection="false"
+  multi-selection="false"
+  selected-items="false"
+  size=""
+  class="hydrated">
+  <modus-tree-view-item node-id="1" label="Inbox" class="hydrated">
+    <modus-tree-view-item
+      node-id="2"
+      label="Personal"
+      class="hydrated"></modus-tree-view-item>
+    <modus-tree-view-item
+      node-id="3"
+      label="Work"
+      class="hydrated"></modus-tree-view-item>
+    <modus-tree-view-item
+      node-id="4"
+      label="Social"
+      class="hydrated"></modus-tree-view-item>
+    <modus-tree-view-item
+      node-id="5"
+      label="More ..."
+      class="hydrated"></modus-tree-view-item>
+  </modus-tree-view-item>
+  <modus-tree-view-item node-id="6" label="Archived" class="hydrated">
+    <modus-tree-view-item node-id="7" label="Folder1" class="hydrated">
+      <modus-tree-view-item
+        node-id="8"
+        label="File1"
+        class="hydrated"></modus-tree-view-item>
+      <modus-tree-view-item node-id="9" label="Folder2" class="hydrated">
+        <modus-tree-view-item
+          node-id="10"
+          label="File2"
+          class="hydrated"></modus-tree-view-item>
+      </modus-tree-view-item>
+      <modus-tree-view-item
+        node-id="11"
+        label="File3"
+        class="hydrated"></modus-tree-view-item>
+    </modus-tree-view-item>
+  </modus-tree-view-item>
+  <!-- <modus-tree-view-item
+    node-id="12"
+    label="Spam"
+    class="hydrated"></modus-tree-view-item> -->
+</modus-tree-view>
+
+<modus-accordion>
+  <modus-accordion-item header-text="Item 1" size="condensed">Content</modus-accordion-item>
+  <modus-accordion-item header-text="Item 2" size="condensed">Content</modus-accordion-item>
+  <modus-accordion-item disabled expanded header-text="Item 3" size="condensed">Content</modus-accordion-item>
+</modus-accordion>
   </body>
 </html>

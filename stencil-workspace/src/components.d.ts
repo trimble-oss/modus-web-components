@@ -232,6 +232,10 @@ export namespace Components {
           * (optional) The checkbox label.
          */
         "label": string;
+        /**
+          * (optional) Tab Index for the tree item
+         */
+        "tabIndexValue": string | number;
     }
     interface ModusChip {
         /**
@@ -974,7 +978,7 @@ export namespace Components {
     }
     interface ModusTimePicker {
         /**
-          * (optional) Regular expression to allow characters while typing the input. Default is /[0-9AaPpMm:\s]+/ or /[0-9:]+/ based on the display format.
+          * (optional) Regular expression to allow characters while typing the input. Default is `/[\d:apm\s]/gi` or `/[\d:]/gi` based on the display format.
          */
         "allowedCharsRegex": RegExp | string;
         /**
@@ -1098,6 +1102,10 @@ export namespace Components {
          */
         "checkedItems": string[];
         /**
+          * (optional) Disable navigation through tree using `tab` key, use `up/down` arrow keys for navigation.
+         */
+        "disableTabbing": boolean;
+        /**
           * (optional) Set expanded tree items
          */
         "expandedItems": string[];
@@ -1145,6 +1153,10 @@ export namespace Components {
           * (required) Unique tree item identifier
          */
         "nodeId": string;
+        /**
+          * (optional) Tab Index for the tree item
+         */
+        "tabIndexValue": string | number;
         "updateComponent": () => Promise<void>;
     }
 }
@@ -1801,6 +1813,10 @@ declare namespace LocalJSX {
           * An event that fires on checkbox click.
          */
         "onCheckboxClick"?: (event: ModusCheckboxCustomEvent<boolean>) => void;
+        /**
+          * (optional) Tab Index for the tree item
+         */
+        "tabIndexValue"?: string | number;
     }
     interface ModusChip {
         /**
@@ -2672,7 +2688,7 @@ declare namespace LocalJSX {
     }
     interface ModusTimePicker {
         /**
-          * (optional) Regular expression to allow characters while typing the input. Default is /[0-9AaPpMm:\s]+/ or /[0-9:]+/ based on the display format.
+          * (optional) Regular expression to allow characters while typing the input. Default is `/[\d:apm\s]/gi` or `/[\d:]/gi` based on the display format.
          */
         "allowedCharsRegex"?: RegExp | string;
         /**
@@ -2804,6 +2820,10 @@ declare namespace LocalJSX {
          */
         "checkedItems"?: string[];
         /**
+          * (optional) Disable navigation through tree using `tab` key, use `up/down` arrow keys for navigation.
+         */
+        "disableTabbing"?: boolean;
+        /**
           * (optional) Set expanded tree items
          */
         "expandedItems"?: string[];
@@ -2862,6 +2882,10 @@ declare namespace LocalJSX {
           * An event that fires on tree item expand/collapse
          */
         "onItemExpandToggle"?: (event: ModusTreeViewItemCustomEvent<boolean>) => void;
+        /**
+          * (optional) Tab Index for the tree item
+         */
+        "tabIndexValue"?: string | number;
     }
     interface IntrinsicElements {
         "modus-accordion": ModusAccordion;
