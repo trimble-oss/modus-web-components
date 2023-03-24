@@ -14,7 +14,7 @@ import { ModusNavbarProfileMenuLink } from "./components/modus-navbar/profile-me
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { ModusNavbarProfileMenuLink as ModusNavbarProfileMenuLink1 } from "./components/modus-navbar/profile-menu/modus-navbar-profile-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
-import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.types";
+import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
 import { Tab } from "./components/modus-tabs/modus-tabs";
 import { TimeInputEventData } from "./components/modus-time-picker/modus-time-picker.types";
 import { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
@@ -974,7 +974,7 @@ export namespace Components {
     }
     interface ModusTimePicker {
         /**
-          * (optional) Regular expression to allow characters while typing the input. Default is /[0-9AaPpMm:\s]+/ or /[0-9:]+/ based on the display format.
+          * (optional) Regular expression to allow characters while typing the input. Default is `/[\d:apm\s]/gi` or `/[\d:]/gi` based on the display format.
          */
         "allowedCharsRegex": RegExp | string;
         /**
@@ -2672,7 +2672,7 @@ declare namespace LocalJSX {
     }
     interface ModusTimePicker {
         /**
-          * (optional) Regular expression to allow characters while typing the input. Default is /[0-9AaPpMm:\s]+/ or /[0-9:]+/ based on the display format.
+          * (optional) Regular expression to allow characters while typing the input. Default is `/[\d:apm\s]/gi` or `/[\d:]/gi` based on the display format.
          */
         "allowedCharsRegex"?: RegExp | string;
         /**
