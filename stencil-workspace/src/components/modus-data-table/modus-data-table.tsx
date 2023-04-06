@@ -7,7 +7,6 @@ import {
   getCoreRowModel,
 } from '@tanstack/table-core';
 import { ModusTableDisplayOptions } from '../modus-table/modus-table.models';
-import { DefaultColumns, DefaultData } from './constants/constants';
 
 @Component({
   tag: 'modus-data-table',
@@ -16,10 +15,10 @@ import { DefaultColumns, DefaultData } from './constants/constants';
 })
 export class ModusDataTable {
   /* (required) To display headers in the table. */
-  @Prop({mutable: true}) columnHeaders: ColumnDef<any>[] = DefaultColumns;
+  @Prop({ mutable: true }) columnHeaders!: ColumnDef<any>[];
 
   /* (required) To display data in the table. */
-  @Prop({mutable: true}) data: any[] = DefaultData;
+  @Prop({ mutable: true }) data!: any[];
 
   /** Options for data table display. */
   @Prop() displayOptions?: ModusTableDisplayOptions = {

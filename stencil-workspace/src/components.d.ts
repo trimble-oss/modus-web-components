@@ -1865,8 +1865,8 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface ModusDataTable {
-        "columnHeaders"?: ColumnDef<any>[];
-        "data"?: any[];
+        "columnHeaders": ColumnDef<any>[];
+        "data": any[];
         /**
           * Options for data table display.
          */
