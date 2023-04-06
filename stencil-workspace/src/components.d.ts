@@ -7,6 +7,8 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
 import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
+import { ColumnDef } from "@tanstack/table-core";
+import { ModusTableCellLink, ModusTableDisplayOptions, ModusTableRowAction, ModusTableRowActionClickEvent, ModusTableSelectionOptions, ModusTableSortEvent, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-table/modus-table.models";
 import { DateInputEventData, DateInputType } from "./components/modus-date-picker/utils/modus-date-picker.types";
 import { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { ModusNavbarProfileMenuLink } from "./components/modus-navbar/profile-menu/modus-navbar-profile-menu";
@@ -14,7 +16,6 @@ import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/app
 import { ModusNavbarProfileMenuLink as ModusNavbarProfileMenuLink1 } from "./components/modus-navbar/profile-menu/modus-navbar-profile-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.types";
-import { ModusTableCellLink, ModusTableDisplayOptions, ModusTableRowAction, ModusTableRowActionClickEvent, ModusTableSelectionOptions, ModusTableSortEvent, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-table/modus-table.models";
 import { Tab } from "./components/modus-tabs/modus-tabs";
 import { TimeInputEventData } from "./components/modus-time-picker/modus-time-picker.types";
 import { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
@@ -270,6 +271,14 @@ export namespace Components {
           * (optional) The chip's value.
          */
         "value": string;
+    }
+    interface ModusDataTable {
+        "columnHeaders": ColumnDef<any>[];
+        "data": any[];
+        /**
+          * Options for data table display.
+         */
+        "displayOptions"?: ModusTableDisplayOptions;
     }
     interface ModusDateInput {
         /**
@@ -1325,6 +1334,12 @@ declare global {
         prototype: HTMLModusChipElement;
         new (): HTMLModusChipElement;
     };
+    interface HTMLModusDataTableElement extends Components.ModusDataTable, HTMLStencilElement {
+    }
+    var HTMLModusDataTableElement: {
+        prototype: HTMLModusDataTableElement;
+        new (): HTMLModusDataTableElement;
+    };
     interface HTMLModusDateInputElement extends Components.ModusDateInput, HTMLStencilElement {
     }
     var HTMLModusDateInputElement: {
@@ -1522,6 +1537,7 @@ declare global {
         "modus-card": HTMLModusCardElement;
         "modus-checkbox": HTMLModusCheckboxElement;
         "modus-chip": HTMLModusChipElement;
+        "modus-data-table": HTMLModusDataTableElement;
         "modus-date-input": HTMLModusDateInputElement;
         "modus-date-picker": HTMLModusDatePickerElement;
         "modus-dropdown": HTMLModusDropdownElement;
@@ -1847,6 +1863,14 @@ declare namespace LocalJSX {
           * (optional) The chip's value.
          */
         "value"?: string;
+    }
+    interface ModusDataTable {
+        "columnHeaders"?: ColumnDef<any>[];
+        "data"?: any[];
+        /**
+          * Options for data table display.
+         */
+        "displayOptions"?: ModusTableDisplayOptions;
     }
     interface ModusDateInput {
         /**
@@ -2874,6 +2898,7 @@ declare namespace LocalJSX {
         "modus-card": ModusCard;
         "modus-checkbox": ModusCheckbox;
         "modus-chip": ModusChip;
+        "modus-data-table": ModusDataTable;
         "modus-date-input": ModusDateInput;
         "modus-date-picker": ModusDatePicker;
         "modus-dropdown": ModusDropdown;
@@ -2921,6 +2946,7 @@ declare module "@stencil/core" {
             "modus-card": LocalJSX.ModusCard & JSXBase.HTMLAttributes<HTMLModusCardElement>;
             "modus-checkbox": LocalJSX.ModusCheckbox & JSXBase.HTMLAttributes<HTMLModusCheckboxElement>;
             "modus-chip": LocalJSX.ModusChip & JSXBase.HTMLAttributes<HTMLModusChipElement>;
+            "modus-data-table": LocalJSX.ModusDataTable & JSXBase.HTMLAttributes<HTMLModusDataTableElement>;
             "modus-date-input": LocalJSX.ModusDateInput & JSXBase.HTMLAttributes<HTMLModusDateInputElement>;
             "modus-date-picker": LocalJSX.ModusDatePicker & JSXBase.HTMLAttributes<HTMLModusDatePickerElement>;
             "modus-dropdown": LocalJSX.ModusDropdown & JSXBase.HTMLAttributes<HTMLModusDropdownElement>;
