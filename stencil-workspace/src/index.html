@@ -1,21 +1,139 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
-    <title>Trimble Modus Web Components</title>
 
-    <script type="module" src="/build/modus-web-components.esm.js"></script>
-    <script nomodule src="/build/modus-web-components.js"></script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+  <title>Trimble Modus Web Components</title>
 
-    <link rel="stylesheet" href="/build/modus-web-components.css" />
+  <script type="module" src="/build/modus-web-components.esm.js"></script>
+  <script nomodule src="/build/modus-web-components.js"></script>
 
-    <!--Manually load Modus font-family-->
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
-    <link rel="stylesheet" src="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" />
+  <link rel="stylesheet" href="/build/modus-web-components.css" />
 
-  </head>
-  <body>
-    <!-- Test components here -->
-  </body>
+  <!--Manually load Modus font-family-->
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+  <link rel="stylesheet" src="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" />
+
+</head>
+
+<body>
+  <!-- Test components here -->
+  <modus-data-table></modus-data-table>
+</body>
+<script>
+  const modusDataTable = document.querySelector('modus-data-table');
+
+  modusDataTable.data = [
+    {
+      age: 40,
+      firstName: 'Gordon',
+      lastName: 'Lemke',
+      progress: 97,
+      status: 'single',
+      subRows: undefined,
+      visits: 434,
+    },
+    {
+      firstName: 'Elliott',
+      lastName: 'Bosco',
+      age: 21,
+      visits: 348,
+      progress: 60,
+      status: 'complicated',
+    },
+    {
+      firstName: 'Agnes',
+      lastName: 'Breitenberg',
+      age: 34,
+      visits: 639,
+      progress: 84,
+      status: 'single',
+    },
+    {
+      firstName: 'Nicolette',
+      lastName: 'Stamm',
+      age: 13,
+      visits: 518,
+      progress: 28,
+      status: 'relationship',
+    },
+    {
+      firstName: 'Anjali',
+      lastName: 'Ratke',
+      age: 22,
+      visits: 585,
+      progress: 7,
+      status: 'single',
+    },
+    {
+      firstName: 'Kamryn',
+      lastName: 'Gerlach',
+      age: 23,
+      visits: 488,
+      progress: 71,
+      status: 'single',
+    },
+  ];
+
+  modusDataTable.columnHeaders = [
+    {
+      header: 'Name',
+      accessorKey: 'name',
+      id: 'name',
+      columns: [
+        {
+          header: 'First Name',
+          accessorKey: 'firstName',
+          id: 'first-name',
+        },
+        {
+          header: 'Last Name',
+          accessorKey: 'lastName',
+          id: 'last-name',
+        },
+      ],
+    },
+    {
+      header: 'Info',
+      accessorKey: 'info',
+      id: 'info',
+      columns: [
+        {
+          header: 'Age',
+          accessorKey: 'age',
+          id: 'age',
+        },
+        {
+          header: 'More Info',
+          accessorKey: 'moreInfo',
+          id: 'more-info',
+          columns: [
+            {
+              header: 'Visits',
+              accessorKey: 'visits',
+              id: 'visits',
+            },
+            {
+              header: 'Status',
+              accessorKey: 'status',
+              id: 'status',
+            },
+            {
+              header: 'Profile Progress',
+              accessorKey: 'progress',
+              id: 'progress',
+            },
+          ],
+        },
+        // {
+        //   header: 'Created At',
+        //   accessorKey: 'createdAt',
+        //   id: 'createdAt',
+        // },
+      ],
+    },
+  ];
+</script>
+
 </html>
