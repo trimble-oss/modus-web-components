@@ -1,12 +1,12 @@
 // eslint-disable-next-line
 import { FunctionalComponent, h } from '@stencil/core';
-import { ModusDataTableCellBadge } from '../modus-data-table.models';
+import { ModusTableCellBadge } from '../modus-table.models';
 
 interface Props {
-  badge: ModusDataTableCellBadge;
+  badge: ModusTableCellBadge;
 }
 
-export const ModusDataTableCellBadgePart: FunctionalComponent<Props> = (props: Props) => {
+export const ModusTableCellBadgePart: FunctionalComponent<Props> = (props: Props) => {
   return (
     <div class="cell-badge">
       <modus-badge color={props.badge.color} type={props.badge.type}>

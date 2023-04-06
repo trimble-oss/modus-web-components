@@ -1,6 +1,6 @@
-import { ModusDataTableCellBadge, ModusDataTableCellLink, TCell, TColumn, TRow } from './modus-data-table.models';
+import { ModusTableCellBadge, ModusTableCellLink, TCell, TColumn, TRow } from './modus-table.models';
 
-export class ModusDataTableUtilities {
+export class ModusTableUtilities {
   static convertToTColumns(columns: string[] | TColumn[]): TColumn[] {
     return columns?.map((column) => {
       return {
@@ -35,11 +35,11 @@ export class ModusDataTableUtilities {
     if (direction === 'asc') {
       return dataCopy.sort((row1, row2) => {
         if (row1[columnId]['_type'] === 'badge') {
-          return (row1[columnId] as ModusDataTableCellBadge).text > (row2[columnId] as ModusDataTableCellBadge).text ? 1 : -1;
+          return (row1[columnId] as ModusTableCellBadge).text > (row2[columnId] as ModusTableCellBadge).text ? 1 : -1;
         }
 
         if (row1[columnId]['_type'] === 'link') {
-          return (row1[columnId] as ModusDataTableCellLink).display > (row2[columnId] as ModusDataTableCellLink).display ? 1 : -1;
+          return (row1[columnId] as ModusTableCellLink).display > (row2[columnId] as ModusTableCellLink).display ? 1 : -1;
         }
 
         return row1[columnId] > row2[columnId] ? 1 : -1;
@@ -47,11 +47,11 @@ export class ModusDataTableUtilities {
     } else {
       return dataCopy.sort((row1, row2) => {
         if (row1[columnId]['_type'] === 'badge') {
-          return (row1[columnId] as ModusDataTableCellBadge).text > (row2[columnId] as ModusDataTableCellBadge).text ? -1 : 1;
+          return (row1[columnId] as ModusTableCellBadge).text > (row2[columnId] as ModusTableCellBadge).text ? -1 : 1;
         }
 
         if (row1[columnId]['_type'] === 'link') {
-          return (row1[columnId] as ModusDataTableCellLink).display > (row2[columnId] as ModusDataTableCellLink).display ? -1 : 1;
+          return (row1[columnId] as ModusTableCellLink).display > (row2[columnId] as ModusTableCellLink).display ? -1 : 1;
         }
 
         return row1[columnId] > row2[columnId] ? -1 : 1;
