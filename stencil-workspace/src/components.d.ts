@@ -7,7 +7,6 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
 import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
-import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSortEvent, ModusTableSelectionOptions, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 import { DateInputEventData, DateInputType } from "./components/modus-date-picker/utils/modus-date-picker.types";
 import { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { ModusNavbarProfileMenuLink } from "./components/modus-navbar/profile-menu/modus-navbar-profile-menu";
@@ -15,6 +14,8 @@ import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/app
 import { ModusNavbarProfileMenuLink as ModusNavbarProfileMenuLink1 } from "./components/modus-navbar/profile-menu/modus-navbar-profile-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
+import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.types";
+import { ModusTableCellLink, ModusTableDisplayOptions, ModusTableRowAction, ModusTableRowActionClickEvent, ModusTableSelectionOptions, ModusTableSortEvent, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-table/modus-table.models";
 import { Tab } from "./components/modus-tabs/modus-tabs";
 import { TimeInputEventData } from "./components/modus-time-picker/modus-time-picker.types";
 import { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
@@ -270,26 +271,6 @@ export namespace Components {
           * (optional) The chip's value.
          */
         "value": string;
-    }
-    interface ModusDataTable {
-        "columns": string[] | TColumn[];
-        "data": TCell[][] | TRow[];
-        /**
-          * Options for data table display.
-         */
-        "displayOptions"?: ModusDataTableDisplayOptions;
-        /**
-          * Actions that can be performed on each row.
-         */
-        "rowActions"?: ModusDataTableRowAction[];
-        /**
-          * Options for data table item selection.
-         */
-        "selectionOptions"?: ModusTableSelectionOptions;
-        /**
-          * Options for data table column sort.
-         */
-        "sortOptions"?: ModusTableSortOptions;
     }
     interface ModusDateInput {
         /**
@@ -880,6 +861,26 @@ export namespace Components {
          */
         "label": string;
     }
+    interface ModusTable {
+        "columns": string[] | TColumn[];
+        "data": TCell[][] | TRow[];
+        /**
+          * Options for data table display.
+         */
+        "displayOptions"?: ModusTableDisplayOptions;
+        /**
+          * Actions that can be performed on each row.
+         */
+        "rowActions"?: ModusTableRowAction[];
+        /**
+          * Options for data table item selection.
+         */
+        "selectionOptions"?: ModusTableSelectionOptions;
+        /**
+          * Options for data table column sort.
+         */
+        "sortOptions"?: ModusTableSortOptions;
+    }
     interface ModusTabs {
         "ariaLabel": string | null;
         "fullWidth": boolean;
@@ -1181,10 +1182,6 @@ export interface ModusChipCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusChipElement;
 }
-export interface ModusDataTableCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLModusDataTableElement;
-}
 export interface ModusDateInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusDateInputElement;
@@ -1248,6 +1245,10 @@ export interface ModusSliderCustomEvent<T> extends CustomEvent<T> {
 export interface ModusSwitchCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusSwitchElement;
+}
+export interface ModusTableCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusTableElement;
 }
 export interface ModusTabsCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1329,12 +1330,6 @@ declare global {
     var HTMLModusChipElement: {
         prototype: HTMLModusChipElement;
         new (): HTMLModusChipElement;
-    };
-    interface HTMLModusDataTableElement extends Components.ModusDataTable, HTMLStencilElement {
-    }
-    var HTMLModusDataTableElement: {
-        prototype: HTMLModusDataTableElement;
-        new (): HTMLModusDataTableElement;
     };
     interface HTMLModusDateInputElement extends Components.ModusDateInput, HTMLStencilElement {
     }
@@ -1474,6 +1469,12 @@ declare global {
         prototype: HTMLModusSwitchElement;
         new (): HTMLModusSwitchElement;
     };
+    interface HTMLModusTableElement extends Components.ModusTable, HTMLStencilElement {
+    }
+    var HTMLModusTableElement: {
+        prototype: HTMLModusTableElement;
+        new (): HTMLModusTableElement;
+    };
     interface HTMLModusTabsElement extends Components.ModusTabs, HTMLStencilElement {
     }
     var HTMLModusTabsElement: {
@@ -1527,7 +1528,6 @@ declare global {
         "modus-card": HTMLModusCardElement;
         "modus-checkbox": HTMLModusCheckboxElement;
         "modus-chip": HTMLModusChipElement;
-        "modus-data-table": HTMLModusDataTableElement;
         "modus-date-input": HTMLModusDateInputElement;
         "modus-date-picker": HTMLModusDatePickerElement;
         "modus-dropdown": HTMLModusDropdownElement;
@@ -1551,6 +1551,7 @@ declare global {
         "modus-slider": HTMLModusSliderElement;
         "modus-spinner": HTMLModusSpinnerElement;
         "modus-switch": HTMLModusSwitchElement;
+        "modus-table": HTMLModusTableElement;
         "modus-tabs": HTMLModusTabsElement;
         "modus-text-input": HTMLModusTextInputElement;
         "modus-time-picker": HTMLModusTimePickerElement;
@@ -1852,46 +1853,6 @@ declare namespace LocalJSX {
           * (optional) The chip's value.
          */
         "value"?: string;
-    }
-    interface ModusDataTable {
-        "columns": string[] | TColumn[];
-        "data": TCell[][] | TRow[];
-        /**
-          * Options for data table display.
-         */
-        "displayOptions"?: ModusDataTableDisplayOptions;
-        /**
-          * An event that fires on cell link click.
-         */
-        "onCellLinkClick"?: (event: ModusDataTableCustomEvent<ModusDataTableCellLink>) => void;
-        /**
-          * An event that fires when a row action is clicked.
-         */
-        "onRowActionClick"?: (event: ModusDataTableCustomEvent<ModusDataTableRowActionClickEvent>) => void;
-        /**
-          * An event that fires on row double click.
-         */
-        "onRowDoubleClick"?: (event: ModusDataTableCustomEvent<string>) => void;
-        /**
-          * An event that fires on selection change.
-         */
-        "onSelection"?: (event: ModusDataTableCustomEvent<string[]>) => void;
-        /**
-          * An event that fires on column sort.
-         */
-        "onSort"?: (event: ModusDataTableCustomEvent<ModusDataTableSortEvent>) => void;
-        /**
-          * Actions that can be performed on each row.
-         */
-        "rowActions"?: ModusDataTableRowAction[];
-        /**
-          * Options for data table item selection.
-         */
-        "selectionOptions"?: ModusTableSelectionOptions;
-        /**
-          * Options for data table column sort.
-         */
-        "sortOptions"?: ModusTableSortOptions;
     }
     interface ModusDateInput {
         /**
@@ -2579,6 +2540,46 @@ declare namespace LocalJSX {
          */
         "onSwitchClick"?: (event: ModusSwitchCustomEvent<boolean>) => void;
     }
+    interface ModusTable {
+        "columns": string[] | TColumn[];
+        "data": TCell[][] | TRow[];
+        /**
+          * Options for data table display.
+         */
+        "displayOptions"?: ModusTableDisplayOptions;
+        /**
+          * An event that fires on cell link click.
+         */
+        "onCellLinkClick"?: (event: ModusTableCustomEvent<ModusTableCellLink>) => void;
+        /**
+          * An event that fires when a row action is clicked.
+         */
+        "onRowActionClick"?: (event: ModusTableCustomEvent<ModusTableRowActionClickEvent>) => void;
+        /**
+          * An event that fires on row double click.
+         */
+        "onRowDoubleClick"?: (event: ModusTableCustomEvent<string>) => void;
+        /**
+          * An event that fires on selection change.
+         */
+        "onSelection"?: (event: ModusTableCustomEvent<string[]>) => void;
+        /**
+          * An event that fires on column sort.
+         */
+        "onSort"?: (event: ModusTableCustomEvent<ModusTableSortEvent>) => void;
+        /**
+          * Actions that can be performed on each row.
+         */
+        "rowActions"?: ModusTableRowAction[];
+        /**
+          * Options for data table item selection.
+         */
+        "selectionOptions"?: ModusTableSelectionOptions;
+        /**
+          * Options for data table column sort.
+         */
+        "sortOptions"?: ModusTableSortOptions;
+    }
     interface ModusTabs {
         "ariaLabel"?: string | null;
         "fullWidth"?: boolean;
@@ -2884,7 +2885,6 @@ declare namespace LocalJSX {
         "modus-card": ModusCard;
         "modus-checkbox": ModusCheckbox;
         "modus-chip": ModusChip;
-        "modus-data-table": ModusDataTable;
         "modus-date-input": ModusDateInput;
         "modus-date-picker": ModusDatePicker;
         "modus-dropdown": ModusDropdown;
@@ -2908,6 +2908,7 @@ declare namespace LocalJSX {
         "modus-slider": ModusSlider;
         "modus-spinner": ModusSpinner;
         "modus-switch": ModusSwitch;
+        "modus-table": ModusTable;
         "modus-tabs": ModusTabs;
         "modus-text-input": ModusTextInput;
         "modus-time-picker": ModusTimePicker;
@@ -2931,7 +2932,6 @@ declare module "@stencil/core" {
             "modus-card": LocalJSX.ModusCard & JSXBase.HTMLAttributes<HTMLModusCardElement>;
             "modus-checkbox": LocalJSX.ModusCheckbox & JSXBase.HTMLAttributes<HTMLModusCheckboxElement>;
             "modus-chip": LocalJSX.ModusChip & JSXBase.HTMLAttributes<HTMLModusChipElement>;
-            "modus-data-table": LocalJSX.ModusDataTable & JSXBase.HTMLAttributes<HTMLModusDataTableElement>;
             "modus-date-input": LocalJSX.ModusDateInput & JSXBase.HTMLAttributes<HTMLModusDateInputElement>;
             "modus-date-picker": LocalJSX.ModusDatePicker & JSXBase.HTMLAttributes<HTMLModusDatePickerElement>;
             "modus-dropdown": LocalJSX.ModusDropdown & JSXBase.HTMLAttributes<HTMLModusDropdownElement>;
@@ -2955,6 +2955,7 @@ declare module "@stencil/core" {
             "modus-slider": LocalJSX.ModusSlider & JSXBase.HTMLAttributes<HTMLModusSliderElement>;
             "modus-spinner": LocalJSX.ModusSpinner & JSXBase.HTMLAttributes<HTMLModusSpinnerElement>;
             "modus-switch": LocalJSX.ModusSwitch & JSXBase.HTMLAttributes<HTMLModusSwitchElement>;
+            "modus-table": LocalJSX.ModusTable & JSXBase.HTMLAttributes<HTMLModusTableElement>;
             "modus-tabs": LocalJSX.ModusTabs & JSXBase.HTMLAttributes<HTMLModusTabsElement>;
             "modus-text-input": LocalJSX.ModusTextInput & JSXBase.HTMLAttributes<HTMLModusTextInputElement>;
             "modus-time-picker": LocalJSX.ModusTimePicker & JSXBase.HTMLAttributes<HTMLModusTimePickerElement>;

@@ -1,29 +1,29 @@
 // eslint-disable-next-line
 import { Component, Event, EventEmitter, h, Prop, State, Watch } from '@stencil/core';
-import { ModusDataTableUtilities } from './modus-data-table.utilities';
-import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSort, ModusDataTableSortEvent, ModusTableSelectionOptions, ModusTableSortOptions, TCell, TColumn, TRow } from './modus-data-table.models';
-import { ModusDataTableHeader } from './parts/modus-data-table-header';
-import { ModusDataTableCellLinkPart } from './parts/modus-data-table-cell-link-part';
-import { ModusDataTableCellBadgePart } from './parts/modus-data-table-cell-badge-part';
-import { ModusDataTableRowActionDropdown } from './parts/modus-data-table-row-action-dropdown';
+import { ModusTableUtilities } from './modus-table.utilities';
+import { ModusTableCellLink, ModusTableDisplayOptions, ModusTableRowAction, ModusTableRowActionClickEvent, ModusTableSort, ModusTableSortEvent, ModusTableSelectionOptions, ModusTableSortOptions, TCell, TColumn, TRow } from './modus-table.models';
+import { ModusTableHeader } from './parts/modus-table-header';
+import { ModusTableCellLinkPart } from './parts/modus-table-cell-link-part';
+import { ModusTableCellBadgePart } from './parts/modus-table-cell-badge-part';
+import { ModusTableRowActionDropdown } from './parts/modus-table-row-action-dropdown';
 
 @Component({
-  tag: 'modus-data-table',
-  styleUrl: 'modus-data-table.scss',
+  tag: 'modus-table',
+  styleUrl: 'modus-table.scss',
   shadow: true,
 })
-export class ModusDataTable {
+export class ModusTable {
   /* (required) The columns to display in the table. */
   @Prop({ mutable: true }) columns!: string[] | TColumn[];
 
   /* (required) The data (rows) to display in the table. */
   @Prop({ mutable: true }) data!: TCell[][] | TRow[];
   @Watch('data') dataChanged(_, oldValue: TCell[][] | TRow[]): void {
-    this.originalData = this.originalData ?? ModusDataTableUtilities.convertToTRows(oldValue, this.columns);
+    this.originalData = this.originalData ?? ModusTableUtilities.convertToTRows(oldValue, this.columns);
   }
 
   /** Options for data table display. */
-  @Prop() displayOptions?: ModusDataTableDisplayOptions = {
+  @Prop() displayOptions?: ModusTableDisplayOptions = {
     animateRowActionsDropdown: false,
     borderless: true,
     cellBorderless: true,
@@ -32,7 +32,7 @@ export class ModusDataTable {
   };
 
   /** Actions that can be performed on each row. */
-  @Prop() rowActions?: ModusDataTableRowAction[] = [];
+  @Prop() rowActions?: ModusTableRowAction[] = [];
 
   /** Options for data table item selection. */
   @Prop() selectionOptions?: ModusTableSelectionOptions = {
@@ -47,7 +47,7 @@ export class ModusDataTable {
   };
 
   /** An event that fires on cell link click. */
-  @Event() cellLinkClick: EventEmitter<ModusDataTableCellLink>;
+  @Event() cellLinkClick: EventEmitter<ModusTableCellLink>;
 
   /** An event that fires on row double click. */
   @Event() rowDoubleClick: EventEmitter<string>;
@@ -56,13 +56,13 @@ export class ModusDataTable {
   @Event() selection: EventEmitter<string[]>;
 
   /** An event that fires on column sort. */
-  @Event() sort: EventEmitter<ModusDataTableSortEvent>;
+  @Event() sort: EventEmitter<ModusTableSortEvent>;
 
   /** An event that fires when a row action is clicked. */
-  @Event() rowActionClick: EventEmitter<ModusDataTableRowActionClickEvent>;
+  @Event() rowActionClick: EventEmitter<ModusTableRowActionClickEvent>;
 
   @State() allSelected = false;
-  @State() sortState: ModusDataTableSort = {
+  @State() sortState: ModusTableSort = {
     columnId: '',
     direction: 'none'
   };
@@ -79,7 +79,7 @@ export class ModusDataTable {
   }
 
   componentDidLoad() {
-    this.originalData = ModusDataTableUtilities.convertToTRows(this.data, this.columns);
+    this.originalData = ModusTableUtilities.convertToTRows(this.data, this.columns);
   }
 
   componentWillUpdate() {
@@ -87,8 +87,8 @@ export class ModusDataTable {
   }
 
   convertColumnsAndRows() {
-    this.columns = ModusDataTableUtilities.convertToTColumns(this.columns);
-    this.data = ModusDataTableUtilities.convertToTRows(this.data, this.columns);
+    this.columns = ModusTableUtilities.convertToTColumns(this.columns);
+    this.data = ModusTableUtilities.convertToTRows(this.data, this.columns);
   }
 
   emitSelection(): void {
@@ -135,7 +135,7 @@ export class ModusDataTable {
             _selected: (this.data as TRow[]).find((dataRow: TRow) => dataRow._id === originalRow._id)._selected
           };
         })
-        : ModusDataTableUtilities.sortData(this.data as TRow[], this.sortState.columnId, this.sortState.direction);
+        : ModusTableUtilities.sortData(this.data as TRow[], this.sortState.columnId, this.sortState.direction);
 
       this.updateAllSelected();
     }
@@ -200,7 +200,7 @@ export class ModusDataTable {
               </th>
             )}
             {(this.columns as TColumn[])?.map((column: TColumn) => (
-              <ModusDataTableHeader column={column} onColumnHeaderClick={(id: string) => this.handleColumnHeaderClick(id)} sortOptions={this.sortOptions} sortState={this.sortState} />
+              <ModusTableHeader column={column} onColumnHeaderClick={(id: string) => this.handleColumnHeaderClick(id)} sortOptions={this.sortOptions} sortState={this.sortState} />
             ))}
             {!!this.rowActions.length && <th />}
           </tr>
@@ -217,14 +217,14 @@ export class ModusDataTable {
               )}
               {(this.columns as TColumn[])?.map((column: TColumn) => (
                 <td class={`align-${column.align} ${column.readonly ? 'readonly' : ''} ${row._selected ? 'selected' : ''}`}>
-                  {row[column.id]?._type === 'link' && <ModusDataTableCellLinkPart link={row[column.id]} onLinkClick={() => this.cellLinkClick.emit(row[column.id])} />}
-                  {row[column.id]?._type === 'badge' && <ModusDataTableCellBadgePart badge={row[column.id]} />}
+                  {row[column.id]?._type === 'link' && <ModusTableCellLinkPart link={row[column.id]} onLinkClick={() => this.cellLinkClick.emit(row[column.id])} />}
+                  {row[column.id]?._type === 'badge' && <ModusTableCellBadgePart badge={row[column.id]} />}
                   {!row[column.id]?._type && row[column.id]?.toString()}
                 </td>
               ))}
               {!!this.rowActions.length && (
                 <td class={`align-center ${row._selected ? 'selected' : ''}`} onClick={(e) => e.stopPropagation()} onDblClick={(e) => e.stopPropagation()}>
-                  <ModusDataTableRowActionDropdown
+                  <ModusTableRowActionDropdown
                     actions={this.rowActions}
                     animateDropdown={this.displayOptions.animateRowActionsDropdown}
                     onRowActionClick={(actionId, rowId) => this.rowActionClick.emit({ actionId, rowId })}

@@ -1,14 +1,14 @@
 // eslint-disable-next-line
 import { FunctionalComponent, h } from '@stencil/core';
-import { ModusDataTableSort, ModusTableSortOptions, TColumn } from '../modus-data-table.models';
+import { ModusTableSort, ModusTableSortOptions, TColumn } from '../modus-table.models';
 import { IconSortAZ } from '../../icons/icon-sort-a-z';
 import { IconSortZA } from '../../icons/icon-sort-z-a';
 
-interface ModusDataTableHeaderProps {
+interface ModusTableHeaderProps {
   column: TColumn;
   onColumnHeaderClick: (columnId: string) => void;
   sortOptions: ModusTableSortOptions;
-  sortState: ModusDataTableSort;
+  sortState: ModusTableSort;
 }
 
 export function convertToSingleSpaceTitleCase(title: string): string {
@@ -17,7 +17,7 @@ export function convertToSingleSpaceTitleCase(title: string): string {
   }).replace(/\s+/g, ' ');
 }
 
-export const ModusDataTableHeader: FunctionalComponent<ModusDataTableHeaderProps> = (props: ModusDataTableHeaderProps) => {
+export const ModusTableHeader: FunctionalComponent<ModusTableHeaderProps> = (props: ModusTableHeaderProps) => {
   const sortIcon = props.sortState.direction !== 'none'
     ? (
       <modus-tooltip position="bottom" text={`${props.sortState.direction === 'asc' ? 'Sort descending' : 'Remove sort'}`}>
