@@ -7,7 +7,7 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
 import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
-import { ColumnDef } from "@tanstack/table-core";
+import { ModusDataTableColumn } from "./components/modus-data-table/models/modus-data-table-column";
 import { ModusTableCellLink, ModusTableDisplayOptions, ModusTableRowAction, ModusTableRowActionClickEvent, ModusTableSelectionOptions, ModusTableSortEvent, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-table/modus-table.models";
 import { DateInputEventData, DateInputType } from "./components/modus-date-picker/utils/modus-date-picker.types";
 import { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
@@ -274,12 +274,13 @@ export namespace Components {
         "value": string;
     }
     interface ModusDataTable {
-        "columnHeaders": ColumnDef<any>[];
+        "columnHeaders": ModusDataTableColumn[];
         "data": any[];
         /**
           * Options for data table display.
          */
         "displayOptions"?: ModusTableDisplayOptions;
+        "hover": boolean;
     }
     interface ModusDateInput {
         /**
@@ -1871,12 +1872,13 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface ModusDataTable {
-        "columnHeaders": ColumnDef<any>[];
+        "columnHeaders": ModusDataTableColumn[];
         "data": any[];
         /**
           * Options for data table display.
          */
         "displayOptions"?: ModusTableDisplayOptions;
+        "hover"?: boolean;
     }
     interface ModusDateInput {
         /**

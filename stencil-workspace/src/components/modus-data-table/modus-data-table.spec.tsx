@@ -1,5 +1,5 @@
 import { newSpecPage } from '@stencil/core/testing';
-import { ModusDataTable } from '../modus-data-table';
+import { ModusDataTable } from './modus-data-table';
 
 describe('modus-data-table', () => {
   it('renders', async () => {

@@ -7,6 +7,8 @@ import {
   getCoreRowModel,
 } from '@tanstack/table-core';
 import { ModusTableDisplayOptions } from '../modus-table/modus-table.models';
+import { ColumnDataType } from './enums/column-data-type';
+import { ModusDataTableColumn } from './models/modus-data-table-column';
 
 @Component({
   tag: 'modus-data-table',
@@ -15,52 +17,61 @@ import { ModusTableDisplayOptions } from '../modus-table/modus-table.models';
 })
 export class ModusDataTable {
   /* (required) To display headers in the table. */
-  @Prop({ mutable: true }) columnHeaders!: ColumnDef<any>[];
+  @Prop({ mutable: true }) columnHeaders!: ModusDataTableColumn[];
 
   /* (required) To display data in the table. */
   @Prop({ mutable: true }) data!: any[];
 
+  /* (optional) To enable hover on table rows. */
+  @Prop() hover = false;
+
   /** Options for data table display. */
   @Prop() displayOptions?: ModusTableDisplayOptions = {
-    animateRowActionsDropdown: false,
-    borderless: true,
+    borderless: false,
     cellBorderless: false,
-    rowStripe: false,
-    size: 'large',
   };
-
-  classBySize: Map<string, string> = new Map([
-    ['small', 'size-small'],
-    ['large', 'size-large'],
-  ]);
 
   options: TableOptionsResolved<any> = {
     data: this.data,
-    columns: this.columnHeaders,
+    columns: this.columnHeaders as ColumnDef<any>[],
     state: {
       columnPinning: {},
     },
     getCoreRowModel: getCoreRowModel(),
   } as TableOptionsResolved<any>;
-
   table: Table<any> = createTable(this.options);
 
+  columnDataTypeEnum = ColumnDataType;
+
   render() {
+    const lengthOfHeaderGroups: number = this.table.getHeaderGroups().length;
     const className = `
     ${this.displayOptions.borderless ? 'borderless' : ''}
     ${this.displayOptions.cellBorderless ? 'cell-borderless' : ''}
-    ${this.displayOptions.rowStripe ? 'row-stripe' : ''}
-    ${this.classBySize.get(this.displayOptions.size)}
   `;
 
     return (
       <table class={className}>
         <thead>
-          {this.table.getHeaderGroups().map((headerGroup) => (
+          {this.table.getHeaderGroups().map((headerGroup, index) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
-                  <th key={header.id} colSpan={header.colSpan}>
+                  <th
+                    key={header.id}
+                    colSpan={header.colSpan}
+                    class={`${
+                      index < lengthOfHeaderGroups - 1
+                        ? 'text-align-center'
+                        : ''
+                    } ${
+                      header.column.columnDef['dataType'] ===
+                        this.columnDataTypeEnum.Integer ||
+                      header.column.columnDef.id ===
+                        header.column.columnDef['dataType']
+                        ? 'text-align-right'
+                        : ''
+                    }`}>
                     {header.isPlaceholder
                       ? null
                       : header.column.columnDef.header}
@@ -76,9 +87,27 @@ export class ModusDataTable {
             .rows.slice(0, 10)
             .map((row) => {
               return (
-                <tr key={row.id}>
+                <tr key={row.id} class={this.hover ? 'enable-hover' : ''}>
                   {row.getVisibleCells().map((cell) => {
-                    return <td key={cell.id}>{cell.renderValue()}</td>;
+                    return (
+                      <td
+                        key={cell.id}
+                        class={
+                          cell.column.columnDef['dataType'] ===
+                            this.columnDataTypeEnum.Integer ||
+                          cell.column.columnDef['dataType'] ===
+                            this.columnDataTypeEnum.Currency
+                            ? 'text-align-right'
+                            : ''
+                        }>
+                        {cell.column.columnDef['dataType'] !==
+                        this.columnDataTypeEnum.Date
+                          ? cell.renderValue()
+                          : new Date(
+                              String(cell.renderValue())
+                            ).toLocaleString()}
+                      </td>
+                    );
                   })}
                 </tr>
               );
