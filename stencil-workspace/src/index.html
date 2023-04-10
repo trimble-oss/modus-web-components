@@ -14,7 +14,6 @@
   <!--Manually load Modus font-family-->
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
   <link rel="stylesheet" src="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" />
-
 </head>
 
 <body>
@@ -23,7 +22,7 @@
 </body>
 <script>
   const modusDataTable = document.querySelector('modus-data-table');
-
+  modusDataTable.hover = true;
   modusDataTable.data = [
     {
       age: 40,
@@ -33,6 +32,7 @@
       status: 'single',
       subRows: undefined,
       visits: 434,
+      createdAt: "2002-11-21T12:48:51.739Z"
     },
     {
       firstName: 'Elliott',
@@ -41,6 +41,7 @@
       visits: 348,
       progress: 60,
       status: 'complicated',
+      createdAt: "2012-02-08T12:14:22.776Z"
     },
     {
       firstName: 'Agnes',
@@ -49,6 +50,7 @@
       visits: 639,
       progress: 84,
       status: 'single',
+      createdAt: "1995-04-07T07:24:57.577Z"
     },
     {
       firstName: 'Nicolette',
@@ -57,6 +59,7 @@
       visits: 518,
       progress: 28,
       status: 'relationship',
+      createdAt: "2009-07-28T14:29:51.505Z"
     },
     {
       firstName: 'Anjali',
@@ -65,6 +68,7 @@
       visits: 585,
       progress: 7,
       status: 'single',
+      createdAt: "2000-09-10T12:45:15.824Z"
     },
     {
       firstName: 'Kamryn',
@@ -73,6 +77,7 @@
       visits: 488,
       progress: 71,
       status: 'single',
+      createdAt: "2003-10-25T20:58:20.233Z"
     },
   ];
 
@@ -86,11 +91,13 @@
           header: 'First Name',
           accessorKey: 'firstName',
           id: 'first-name',
+          dataType: 'text'
         },
         {
           header: 'Last Name',
           accessorKey: 'lastName',
           id: 'last-name',
+          dataType: 'text'
         },
       ],
     },
@@ -103,6 +110,7 @@
           header: 'Age',
           accessorKey: 'age',
           id: 'age',
+          dataType: 'integer'
         },
         {
           header: 'More Info',
@@ -113,24 +121,28 @@
               header: 'Visits',
               accessorKey: 'visits',
               id: 'visits',
+              dataType: 'integer'
             },
             {
               header: 'Status',
               accessorKey: 'status',
               id: 'status',
+              dataType: 'text'
             },
             {
               header: 'Profile Progress',
               accessorKey: 'progress',
               id: 'progress',
+              dataType: 'integer'
             },
           ],
         },
-        // {
-        //   header: 'Created At',
-        //   accessorKey: 'createdAt',
-        //   id: 'createdAt',
-        // },
+        {
+          header: 'Created At',
+          accessorKey: 'createdAt',
+          id: 'createdAt',
+          dataType: 'date'
+        },
       ],
     },
   ];
