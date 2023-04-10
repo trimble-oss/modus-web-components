@@ -64,7 +64,7 @@ const BlueTemplate = () => html`
     'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg'
   )}
 `;
-export const BlueNavBar = BlueTemplate.bind({});
+export const BlueNavbar = BlueTemplate.bind({});
 
 const setNavbar = (workingAvatar: boolean, id: string, logoUrl = '') => {
   const tag = document.createElement('script');
