@@ -264,6 +264,23 @@
     --modus-gray-light
   );
 
+  // NavBar - Blue Variant
+  --modus-navbar-blue-bg: var(--modus-blue-dark);
+  --modus-navbar-blue-icon-color: var(--modus-white);
+
+  // Hover
+  --modus-navbar-blue-icon-hover-bg: var(--modus-blue-light);
+  --modus-navbar-blue-icon-hover-border-color: #019aeb;
+  --modus-navbar-blue-icon-hover-color: var(--modus-white);
+
+  // Active
+  --modus-navbar-blue-icon-active-bg: #019aeb;
+  --modus-navbar-blue-icon-active-color: var(--modus-white);
+
+  // Profile
+  --modus-navbar-blue-profile-icon-initials-color: var(--modus-blue-dark);
+  --modus-navbar-blue-profile-icon-active-border-color: #019aeb;
+
   // Pagination
   --modus-pagination-color: var(--modus-body-color);
   --modus-pagination-chevron-color: var(--modus-gray-6);

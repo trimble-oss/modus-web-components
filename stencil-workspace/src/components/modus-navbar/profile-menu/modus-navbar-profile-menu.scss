@@ -51,6 +51,16 @@
     }
   }
 
+  &.profile-menu-blue {
+    .user {
+      .avatar,
+      .initials {
+        background-color: $modus-navbar-blue-icon-color;
+        color: $modus-navbar-blue-profile-icon-initials-color;
+      }
+    }
+  }
+
   .links {
     font-size: $rem-14px;
     margin-bottom: $rem-12px;

@@ -72,6 +72,9 @@ export class ModusNavbar {
   /** (optional) Help URL. */
   @Prop() helpUrl: string;
 
+  /** (optional) Color variants for NavBar. */
+  @Prop() variant: 'default' | 'blue' = 'default';
+
   /** An event that fires when the apps menu opens. */
   @Event() appsMenuOpen: EventEmitter<void>;
 
@@ -260,15 +263,18 @@ export class ModusNavbar {
 
   helpMenuClickHandler(event: MouseEvent): void {
     event.preventDefault();
-    window.open(this.helpUrl, '_blank');
+    if (this.helpUrl) window.open(this.helpUrl, '_blank');
     this.helpOpen.emit();
   }
 
   render(): unknown {
     const direction = this.reverse ? 'reverse' : '';
     const shadow = this.showShadow ? 'shadow' : '';
+    const variant = `${
+      this.variant === 'default' ? '' : 'nav-' + this.variant
+    }`;
     return (
-      <nav class={`${direction} ${shadow}`}>
+      <nav class={`${direction} ${shadow} ${variant}`}>
         <div class={`left ${direction}`}>
           {this.showMainMenu && (
             <div class="navbar-button main-menu">
@@ -316,6 +322,7 @@ export class ModusNavbar {
                 <IconNotifications
                   size="24"
                   onClick={(event) => this.notificationsMenuClickHandler(event)}
+                  pressed={this.notificationsMenuVisible}
                 />
               </span>
               {this.notificationsMenuVisible && (
@@ -388,6 +395,7 @@ export class ModusNavbar {
                 links={this.profileMenuOptions?.links}
                 reverse={this.reverse}
                 username={this.profileMenuOptions?.username}
+                variant={this.variant}
               />
             )}
           </div>
