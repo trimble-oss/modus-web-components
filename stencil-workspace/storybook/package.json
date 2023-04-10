@@ -9,7 +9,7 @@
     "@storybook/addon-docs": "^6.5.15",
     "@storybook/addon-postcss": "^2.0.0",
     "@storybook/addons": "^6.5.15",
-    "@storybook/components": "^6.5.15",
+    "@storybook/components": "^7.0.2",
     "@storybook/theming": "^6.5.15",
     "@types/mdx": "^2.0.4",
     "lit-html": "^2.7.0",
