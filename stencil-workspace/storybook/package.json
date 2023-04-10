@@ -22,7 +22,7 @@
     "@storybook/addon-a11y": "^6.5.15",
     "@storybook/addon-actions": "^6.5.15",
     "@storybook/addon-essentials": "^6.5.15",
-    "@storybook/addon-links": "^6.5.15",
+    "@storybook/addon-links": "^7.0.2",
     "@storybook/web-components": "^6.5.15",
     "babel-loader": "8.2.5",
     "postcss": "^8.4.21",
