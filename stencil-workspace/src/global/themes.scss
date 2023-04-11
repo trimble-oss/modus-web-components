@@ -734,10 +734,6 @@
   --modus-list-item-disabled-color: var(--modus-group-item-disabled-color);
 }
 
-@mixin modus-tooltip {
-  --modus-tooltip-bg: var(--modus-gray-7);
-}
-
 // Components
 modus-accordion-item {
   --modus-accordion-item-bg: var(--modus-body-bg);
@@ -964,10 +960,6 @@ modus-tree-view-item {
   --modus-tree-view-item-drag-error-border-color: var(--modus-red);
 
   @include modus-checkbox;
-}
-
-modus-tooltip {
-
 }
 
 modus-side-navigation {
