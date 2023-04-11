@@ -336,6 +336,7 @@
 
   // Tooltips
   --modus-tooltip-bg: var(--modus-gray-7);
+  --modus-tooltip-color: var(--modus-white);
 
   // Side Navigation
   --modus-side-navigation-bg: var(--modus-body-bg);
@@ -642,7 +643,8 @@
   --modus-table-readonly-color: var(--modus-gray-2);
 
   // Tooltip
-  --modus-tooltip-bg: var(--modus-gray-4);
+  --modus-tooltip-bg: var(--modus-gray-0);
+  --modus-tooltip-color: var(--modus-trimble-gray);
 
   // Side Navigation
   --modus-side-navigation-bg: var(--modus-gray-11);
@@ -734,7 +736,6 @@
 
 @mixin modus-tooltip {
   --modus-tooltip-bg: var(--modus-gray-7);
-  --modus-tooltip-color: var(--modus-white);
 }
 
 // Components
@@ -966,7 +967,7 @@ modus-tree-view-item {
 }
 
 modus-tooltip {
-  --modus-tooltip-color: var(--modus-white);
+
 }
 
 modus-side-navigation {
