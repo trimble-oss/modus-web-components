@@ -2,6 +2,9 @@
   "version": "0.2",
   "words": [
     "abled",
+    "ampm",
+    "ARROWDOWN",
+    "ARROWUP",
     "borderless",
     "checkmark",
     "Cpath",
@@ -23,10 +26,10 @@
     "packagr",
     "Pendo",
     "progressbar",
+    "Qube",
     "SAMEORIGIN",
     "sbdocs",
     "sonarqube",
-    "Qube",
     "styleguide",
     "stylelint",
     "subdir",
@@ -34,14 +37,18 @@
     "Toolshown",
     "trimble",
     "valuenow",
-    "yxxx",
-    "ARROWUP",
-    "ARROWDOWN",
-    "ampm"
+    "xdescribe",
+    "yxxx"
   ],
-  "flagWords": ["hte"],
+  "flagWords": [
+    "hte"
+  ],
   "language": "en-US",
   "allowCompoundWords": true,
-  "ignorePaths": [".cspell.json", "CODEOWNERS", "modus-variables.scss"],
+  "ignorePaths": [
+    ".cspell.json",
+    "CODEOWNERS",
+    "modus-variables.scss"
+  ],
   "useGitignore": true
 }

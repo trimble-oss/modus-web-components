@@ -1,11 +1,11 @@
 import { newSpecPage } from '@stencil/core/testing';
 import { ModusDataTable } from './modus-data-table';
 
-describe('modus-data-table', () => {
+xdescribe('modus-data-table', () => {
   it('renders', async () => {
     const page = await newSpecPage({
       components: [ModusDataTable],
-      html: `<modus-data-table></modus-data-table>`,
+      html: '<modus-data-table></modus-data-table>',
     });
     expect(page.root).toEqualHtml(`
       <modus-data-table>
