@@ -3,20 +3,22 @@
 table {
   border: $rem-1px $modus-table-border-color solid;
   border-collapse: collapse;
-  width: 100%;
   font-family: $primary-font;
   font-size: $rem-14px;
+  width: 100%;
 
   thead {
     tr {
       background-color: $modus-table-header-bg;
       color: $modus-table-header-color;
+
       // height: 3rem;
 
       th {
         // border: $rem-1px $modus-table-border-color solid;
         // padding: 0.25rem 1rem;
         font-weight: $font-weight-semi-bold;
+
         // min-height: 3rem;
 
         can-sort {
@@ -35,6 +37,10 @@ table {
         // border: $rem-1px $modus-table-border-color solid;
         // min-height: 3rem;
         // padding: 0.25rem 1rem;
+
+        &.text-align-right {
+          text-align: right;
+        }
       }
 
       &.enable-hover {
@@ -57,10 +63,6 @@ table {
 
       &.text-align-center {
         text-align: center;
-      }
-
-      &.text-align-right {
-        text-align: right;
       }
     }
   }
