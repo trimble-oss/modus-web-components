@@ -1,4 +1,8 @@
-import { Component, Prop, h } from '@stencil/core';
+import {
+  Component,
+  Prop,
+  h, // eslint-disable-line @typescript-eslint/no-unused-vars
+} from '@stencil/core';
 import {
   ColumnDef,
   Table,
@@ -20,7 +24,7 @@ export class ModusDataTable {
   @Prop({ mutable: true }) columnHeaders!: ModusDataTableColumn[];
 
   /* (required) To display data in the table. */
-  @Prop({ mutable: true }) data!: any[];
+  @Prop({ mutable: true }) data!: unknown[];
 
   /* (optional) To enable hover on table rows. */
   @Prop() hover = false;
@@ -31,15 +35,15 @@ export class ModusDataTable {
     cellBorderless: false,
   };
 
-  options: TableOptionsResolved<any> = {
+  options: TableOptionsResolved<unknown> = {
     data: this.data,
-    columns: this.columnHeaders as ColumnDef<any>[],
+    columns: this.columnHeaders as ColumnDef<unknown>[],
     state: {
       columnPinning: {},
     },
     getCoreRowModel: getCoreRowModel(),
-  } as TableOptionsResolved<any>;
-  table: Table<any> = createTable(this.options);
+  } as TableOptionsResolved<unknown>;
+  table: Table<unknown> = createTable(this.options);
 
   columnDataTypeEnum = ColumnDataType;
 
@@ -60,18 +64,11 @@ export class ModusDataTable {
                   <th
                     key={header.id}
                     colSpan={header.colSpan}
-                    class={`${
+                    class={
                       index < lengthOfHeaderGroups - 1
                         ? 'text-align-center'
                         : ''
-                    } ${
-                      header.column.columnDef['dataType'] ===
-                        this.columnDataTypeEnum.Integer ||
-                      header.column.columnDef.id ===
-                        header.column.columnDef['dataType']
-                        ? 'text-align-right'
-                        : ''
-                    }`}>
+                    }>
                     {header.isPlaceholder
                       ? null
                       : header.column.columnDef.header}
@@ -82,36 +79,31 @@ export class ModusDataTable {
           ))}
         </thead>
         <tbody>
-          {this.table
-            .getRowModel()
-            .rows.slice(0, 10)
-            .map((row) => {
-              return (
-                <tr key={row.id} class={this.hover ? 'enable-hover' : ''}>
-                  {row.getVisibleCells().map((cell) => {
-                    return (
-                      <td
-                        key={cell.id}
-                        class={
-                          cell.column.columnDef['dataType'] ===
-                            this.columnDataTypeEnum.Integer ||
-                          cell.column.columnDef['dataType'] ===
-                            this.columnDataTypeEnum.Currency
-                            ? 'text-align-right'
-                            : ''
-                        }>
-                        {cell.column.columnDef['dataType'] !==
-                        this.columnDataTypeEnum.Date
-                          ? cell.renderValue()
-                          : new Date(
-                              String(cell.renderValue())
-                            ).toLocaleString()}
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
+          {this.table.getRowModel().rows.map((row) => {
+            return (
+              <tr key={row.id} class={this.hover ? 'enable-hover' : ''}>
+                {row.getVisibleCells().map((cell) => {
+                  return (
+                    <td
+                      key={cell.id}
+                      class={
+                        cell.column.columnDef['dataType'] ===
+                          this.columnDataTypeEnum.Integer ||
+                        cell.column.columnDef['dataType'] ===
+                          this.columnDataTypeEnum.Currency
+                          ? 'text-align-right'
+                          : ''
+                      }>
+                      {cell.column.columnDef['dataType'] !==
+                      this.columnDataTypeEnum.Date
+                        ? cell.renderValue()
+                        : new Date(String(cell.renderValue())).toLocaleString()}
+                    </td>
+                  );
+                })}
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     );
