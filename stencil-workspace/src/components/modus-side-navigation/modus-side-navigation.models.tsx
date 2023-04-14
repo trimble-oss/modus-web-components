@@ -1,6 +1,6 @@
 import { ModusSideNavigationItemCustomEvent } from '../../components';
 
-export type ModusSideNavigationItemInfo = {
+export interface ModusSideNavigationItemInfo {
   id: string;
   menuIcon?: string;
   label: string;
@@ -11,15 +11,8 @@ export type ModusSideNavigationItemInfo = {
   onSideNavItemClicked?: (
     event: ModusSideNavigationItemCustomEvent<{ id: string; selected: boolean }>
   ) => void;
-};
+}
 
-export type ModusSideNavItemSelectedDetails = {
-  id: string;
-  selected: boolean;
-};
-
-export type ModusSideNavigationLevelInfo = ModusSideNavigationItemInfo & {
-  // className?: string;
-  // isActive?: boolean;
-  slidePosition?: 'left' | 'center' | 'right';
+export type ModusSideNavItemLevelInfo = ModusSideNavigationItemInfo & {
+  levelPosition?: 'left' | 'center' | 'right';
 };
