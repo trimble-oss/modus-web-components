@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 import { FunctionalComponent, h } from '@stencil/core';
-import { ModusSideNavigationItemInfo } from './modus-side-navigation.types';
+import { ModusSideNavigationItemInfo } from './modus-side-navigation.models';
 
 export const ModusSideNavigationTree: FunctionalComponent<{
   data: ModusSideNavigationItemInfo[];
