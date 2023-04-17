@@ -24,63 +24,1429 @@
   const modusDataTable = document.querySelector('modus-data-table');
   modusDataTable.hover = true;
   modusDataTable.data = [
-    {
-      age: 40,
-      firstName: 'Gordon',
-      lastName: 'Lemke',
-      progress: 97,
-      status: 'single',
-      subRows: undefined,
-      visits: 434,
-      createdAt: "2002-11-21T12:48:51.739Z"
-    },
-    {
-      firstName: 'Elliott',
-      lastName: 'Bosco',
-      age: 21,
-      visits: 348,
-      progress: 60,
-      status: 'complicated',
-      createdAt: "2012-02-08T12:14:22.776Z"
-    },
-    {
-      firstName: 'Agnes',
-      lastName: 'Breitenberg',
-      age: 34,
-      visits: 639,
-      progress: 84,
-      status: 'single',
-      createdAt: "1995-04-07T07:24:57.577Z"
-    },
-    {
-      firstName: 'Nicolette',
-      lastName: 'Stamm',
-      age: 13,
-      visits: 518,
-      progress: 28,
-      status: 'relationship',
-      createdAt: "2009-07-28T14:29:51.505Z"
-    },
-    {
-      firstName: 'Anjali',
-      lastName: 'Ratke',
-      age: 22,
-      visits: 585,
-      progress: 7,
-      status: 'single',
-      createdAt: "2000-09-10T12:45:15.824Z"
-    },
-    {
-      firstName: 'Kamryn',
-      lastName: 'Gerlach',
-      age: 23,
-      visits: 488,
-      progress: 71,
-      status: 'single',
-      createdAt: "2003-10-25T20:58:20.233Z"
-    },
-  ];
-
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Elliott',
+    lastName: 'Bosco',
+    age: 21,
+    visits: 348,
+    progress: 60,
+    status: 'complicated',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Agnes',
+    lastName: 'Breitenberg',
+    age: 34,
+    visits: 639,
+    progress: 84,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Nicolette',
+    lastName: 'Stamm',
+    age: 13,
+    visits: 518,
+    progress: 28,
+    status: 'relationship',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Anjali',
+    lastName: 'Ratke',
+    age: 22,
+    visits: 585,
+    progress: 7,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Kamryn',
+    lastName: 'Gerlach',
+    age: 23,
+    visits: 488,
+    progress: 71,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Elliott',
+    lastName: 'Bosco',
+    age: 21,
+    visits: 348,
+    progress: 60,
+    status: 'complicated',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Agnes',
+    lastName: 'Breitenberg',
+    age: 34,
+    visits: 639,
+    progress: 84,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Nicolette',
+    lastName: 'Stamm',
+    age: 13,
+    visits: 518,
+    progress: 28,
+    status: 'relationship',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Anjali',
+    lastName: 'Ratke',
+    age: 22,
+    visits: 585,
+    progress: 7,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Kamryn',
+    lastName: 'Gerlach',
+    age: 23,
+    visits: 488,
+    progress: 71,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Elliott',
+    lastName: 'Bosco',
+    age: 21,
+    visits: 348,
+    progress: 60,
+    status: 'complicated',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Agnes',
+    lastName: 'Breitenberg',
+    age: 34,
+    visits: 639,
+    progress: 84,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Nicolette',
+    lastName: 'Stamm',
+    age: 13,
+    visits: 518,
+    progress: 28,
+    status: 'relationship',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Anjali',
+    lastName: 'Ratke',
+    age: 22,
+    visits: 585,
+    progress: 7,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Kamryn',
+    lastName: 'Gerlach',
+    age: 23,
+    visits: 488,
+    progress: 71,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Elliott',
+    lastName: 'Bosco',
+    age: 21,
+    visits: 348,
+    progress: 60,
+    status: 'complicated',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Anjali',
+    lastName: 'Ratke',
+    age: 22,
+    visits: 585,
+    progress: 7,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Kamryn',
+    lastName: 'Gerlach',
+    age: 23,
+    visits: 488,
+    progress: 71,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Elliott',
+    lastName: 'Bosco',
+    age: 21,
+    visits: 348,
+    progress: 60,
+    status: 'complicated',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Anjali',
+    lastName: 'Ratke',
+    age: 22,
+    visits: 585,
+    progress: 7,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Elliott',
+    lastName: 'Bosco',
+    age: 21,
+    visits: 348,
+    progress: 60,
+    status: 'complicated',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Agnes',
+    lastName: 'Breitenberg',
+    age: 34,
+    visits: 639,
+    progress: 84,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Nicolette',
+    lastName: 'Stamm',
+    age: 13,
+    visits: 518,
+    progress: 28,
+    status: 'relationship',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Anjali',
+    lastName: 'Ratke',
+    age: 22,
+    visits: 585,
+    progress: 7,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Kamryn',
+    lastName: 'Gerlach',
+    age: 23,
+    visits: 488,
+    progress: 71,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Elliott',
+    lastName: 'Bosco',
+    age: 21,
+    visits: 348,
+    progress: 60,
+    status: 'complicated',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Agnes',
+    lastName: 'Breitenberg',
+    age: 34,
+    visits: 639,
+    progress: 84,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Nicolette',
+    lastName: 'Stamm',
+    age: 13,
+    visits: 518,
+    progress: 28,
+    status: 'relationship',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Anjali',
+    lastName: 'Ratke',
+    age: 22,
+    visits: 585,
+    progress: 7,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Kamryn',
+    lastName: 'Gerlach',
+    age: 23,
+    visits: 488,
+    progress: 71,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Elliott',
+    lastName: 'Bosco',
+    age: 21,
+    visits: 348,
+    progress: 60,
+    status: 'complicated',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Agnes',
+    lastName: 'Breitenberg',
+    age: 34,
+    visits: 639,
+    progress: 84,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Nicolette',
+    lastName: 'Stamm',
+    age: 13,
+    visits: 518,
+    progress: 28,
+    status: 'relationship',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Elliott',
+    lastName: 'Bosco',
+    age: 21,
+    visits: 348,
+    progress: 60,
+    status: 'complicated',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Agnes',
+    lastName: 'Breitenberg',
+    age: 34,
+    visits: 639,
+    progress: 84,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Nicolette',
+    lastName: 'Stamm',
+    age: 13,
+    visits: 518,
+    progress: 28,
+    status: 'relationship',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Anjali',
+    lastName: 'Ratke',
+    age: 22,
+    visits: 585,
+    progress: 7,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Kamryn',
+    lastName: 'Gerlach',
+    age: 23,
+    visits: 488,
+    progress: 71,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Elliott',
+    lastName: 'Bosco',
+    age: 21,
+    visits: 348,
+    progress: 60,
+    status: 'complicated',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Agnes',
+    lastName: 'Breitenberg',
+    age: 34,
+    visits: 639,
+    progress: 84,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Nicolette',
+    lastName: 'Stamm',
+    age: 13,
+    visits: 518,
+    progress: 28,
+    status: 'relationship',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Anjali',
+    lastName: 'Ratke',
+    age: 22,
+    visits: 585,
+    progress: 7,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Kamryn',
+    lastName: 'Gerlach',
+    age: 23,
+    visits: 488,
+    progress: 71,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Elliott',
+    lastName: 'Bosco',
+    age: 21,
+    visits: 348,
+    progress: 60,
+    status: 'complicated',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Agnes',
+    lastName: 'Breitenberg',
+    age: 34,
+    visits: 639,
+    progress: 84,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Nicolette',
+    lastName: 'Stamm',
+    age: 13,
+    visits: 518,
+    progress: 28,
+    status: 'relationship',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Elliott',
+    lastName: 'Bosco',
+    age: 21,
+    visits: 348,
+    progress: 60,
+    status: 'complicated',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Agnes',
+    lastName: 'Breitenberg',
+    age: 34,
+    visits: 639,
+    progress: 84,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Nicolette',
+    lastName: 'Stamm',
+    age: 13,
+    visits: 518,
+    progress: 28,
+    status: 'relationship',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Anjali',
+    lastName: 'Ratke',
+    age: 22,
+    visits: 585,
+    progress: 7,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Kamryn',
+    lastName: 'Gerlach',
+    age: 23,
+    visits: 488,
+    progress: 71,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Elliott',
+    lastName: 'Bosco',
+    age: 21,
+    visits: 348,
+    progress: 60,
+    status: 'complicated',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Agnes',
+    lastName: 'Breitenberg',
+    age: 34,
+    visits: 639,
+    progress: 84,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Nicolette',
+    lastName: 'Stamm',
+    age: 13,
+    visits: 518,
+    progress: 28,
+    status: 'relationship',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Anjali',
+    lastName: 'Ratke',
+    age: 22,
+    visits: 585,
+    progress: 7,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Kamryn',
+    lastName: 'Gerlach',
+    age: 23,
+    visits: 488,
+    progress: 71,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Elliott',
+    lastName: 'Bosco',
+    age: 21,
+    visits: 348,
+    progress: 60,
+    status: 'complicated',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Agnes',
+    lastName: 'Breitenberg',
+    age: 34,
+    visits: 639,
+    progress: 84,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Nicolette',
+    lastName: 'Stamm',
+    age: 13,
+    visits: 518,
+    progress: 28,
+    status: 'relationship',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Elliott',
+    lastName: 'Bosco',
+    age: 21,
+    visits: 348,
+    progress: 60,
+    status: 'complicated',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Agnes',
+    lastName: 'Breitenberg',
+    age: 34,
+    visits: 639,
+    progress: 84,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Nicolette',
+    lastName: 'Stamm',
+    age: 13,
+    visits: 518,
+    progress: 28,
+    status: 'relationship',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Anjali',
+    lastName: 'Ratke',
+    age: 22,
+    visits: 585,
+    progress: 7,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Kamryn',
+    lastName: 'Gerlach',
+    age: 23,
+    visits: 488,
+    progress: 71,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Elliott',
+    lastName: 'Bosco',
+    age: 21,
+    visits: 348,
+    progress: 60,
+    status: 'complicated',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Agnes',
+    lastName: 'Breitenberg',
+    age: 34,
+    visits: 639,
+    progress: 84,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Nicolette',
+    lastName: 'Stamm',
+    age: 13,
+    visits: 518,
+    progress: 28,
+    status: 'relationship',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Anjali',
+    lastName: 'Ratke',
+    age: 22,
+    visits: 585,
+    progress: 7,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Kamryn',
+    lastName: 'Gerlach',
+    age: 23,
+    visits: 488,
+    progress: 71,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Elliott',
+    lastName: 'Bosco',
+    age: 21,
+    visits: 348,
+    progress: 60,
+    status: 'complicated',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Agnes',
+    lastName: 'Breitenberg',
+    age: 34,
+    visits: 639,
+    progress: 84,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Nicolette',
+    lastName: 'Stamm',
+    age: 13,
+    visits: 518,
+    progress: 28,
+    status: 'relationship',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Kamryn',
+    lastName: 'Gerlach',
+    age: 23,
+    visits: 488,
+    progress: 71,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Elliott',
+    lastName: 'Bosco',
+    age: 21,
+    visits: 348,
+    progress: 60,
+    status: 'complicated',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Anjali',
+    lastName: 'Ratke',
+    age: 22,
+    visits: 585,
+    progress: 7,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Kamryn',
+    lastName: 'Gerlach',
+    age: 23,
+    visits: 488,
+    progress: 71,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Elliott',
+    lastName: 'Bosco',
+    age: 21,
+    visits: 348,
+    progress: 60,
+    status: 'complicated',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Agnes',
+    lastName: 'Breitenberg',
+    age: 34,
+    visits: 639,
+    progress: 84,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Nicolette',
+    lastName: 'Stamm',
+    age: 13,
+    visits: 518,
+    progress: 28,
+    status: 'relationship',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Anjali',
+    lastName: 'Ratke',
+    age: 22,
+    visits: 585,
+    progress: 7,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Kamryn',
+    lastName: 'Gerlach',
+    age: 23,
+    visits: 488,
+    progress: 71,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Elliott',
+    lastName: 'Bosco',
+    age: 21,
+    visits: 348,
+    progress: 60,
+    status: 'complicated',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Agnes',
+    lastName: 'Breitenberg',
+    age: 34,
+    visits: 639,
+    progress: 84,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Nicolette',
+    lastName: 'Stamm',
+    age: 13,
+    visits: 518,
+    progress: 28,
+    status: 'relationship',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Anjali',
+    lastName: 'Ratke',
+    age: 22,
+    visits: 585,
+    progress: 7,
+    status: 'single',
+    createdAt: "2002-11-21T12:48:51.739Z"
+  },
+  {
+    firstName: 'Kamryn',
+    lastName: 'Gerlach',
+    age: 23,
+    visits: 488,
+    progress: 71,
+    status: 'single',
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+  },
+  {
+    firstName: 'Elliott',
+    lastName: 'Bosco',
+    age: 21,
+    visits: 348,
+    progress: 60,
+    status: 'complicated',
+  },
+  {
+    firstName: 'Agnes',
+    lastName: 'Breitenberg',
+    age: 34,
+    visits: 639,
+    progress: 84,
+    status: 'single',
+  },
+  {
+    firstName: 'Nicolette',
+    lastName: 'Stamm',
+    age: 13,
+    visits: 518,
+    progress: 28,
+    status: 'relationship',
+  },
+  {
+    firstName: 'Anjali',
+    lastName: 'Ratke',
+    age: 22,
+    visits: 585,
+    progress: 7,
+    status: 'single',
+  },
+  {
+    firstName: 'Kamryn',
+    lastName: 'Gerlach',
+    age: 23,
+    visits: 488,
+    progress: 71,
+    status: 'single',
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+  },
+  {
+    firstName: 'Elliott',
+    lastName: 'Bosco',
+    age: 21,
+    visits: 348,
+    progress: 60,
+    status: 'complicated',
+  },
+  {
+    firstName: 'Agnes',
+    lastName: 'Breitenberg',
+    age: 34,
+    visits: 639,
+    progress: 84,
+    status: 'single',
+  },
+  {
+    firstName: 'Nicolette',
+    lastName: 'Stamm',
+    age: 13,
+    visits: 518,
+    progress: 28,
+    status: 'relationship',
+  },
+  {
+    firstName: 'Anjali',
+    lastName: 'Ratke',
+    age: 22,
+    visits: 585,
+    progress: 7,
+    status: 'single',
+  },
+  {
+    firstName: 'Kamryn',
+    lastName: 'Gerlach',
+    age: 23,
+    visits: 488,
+    progress: 71,
+    status: 'single',
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+  },
+  {
+    firstName: 'Elliott',
+    lastName: 'Bosco',
+    age: 21,
+    visits: 348,
+    progress: 60,
+    status: 'complicated',
+  },
+  {
+    firstName: 'Agnes',
+    lastName: 'Breitenberg',
+    age: 34,
+    visits: 639,
+    progress: 84,
+    status: 'single',
+  },
+  {
+    firstName: 'Nicolette',
+    lastName: 'Stamm',
+    age: 13,
+    visits: 518,
+    progress: 28,
+    status: 'relationship',
+  },
+  {
+    firstName: 'Anjali',
+    lastName: 'Ratke',
+    age: 22,
+    visits: 585,
+    progress: 7,
+    status: 'single',
+  },
+  {
+    firstName: 'Kamryn',
+    lastName: 'Gerlach',
+    age: 23,
+    visits: 488,
+    progress: 71,
+    status: 'single',
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+  },
+  {
+    firstName: 'Elliott',
+    lastName: 'Bosco',
+    age: 21,
+    visits: 348,
+    progress: 60,
+    status: 'complicated',
+  },
+  {
+    firstName: 'Agnes',
+    lastName: 'Breitenberg',
+    age: 34,
+    visits: 639,
+    progress: 84,
+    status: 'single',
+  },
+  {
+    firstName: 'Nicolette',
+    lastName: 'Stamm',
+    age: 13,
+    visits: 518,
+    progress: 28,
+    status: 'relationship',
+  },
+  {
+    firstName: 'Anjali',
+    lastName: 'Ratke',
+    age: 22,
+    visits: 585,
+    progress: 7,
+    status: 'single',
+  },
+  {
+    firstName: 'Kamryn',
+    lastName: 'Gerlach',
+    age: 23,
+    visits: 488,
+    progress: 71,
+    status: 'single',
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+  },
+  {
+    firstName: 'Elliott',
+    lastName: 'Bosco',
+    age: 21,
+    visits: 348,
+    progress: 60,
+    status: 'complicated',
+  },
+  {
+    firstName: 'Agnes',
+    lastName: 'Breitenberg',
+    age: 34,
+    visits: 639,
+    progress: 84,
+    status: 'single',
+  },
+  {
+    firstName: 'Nicolette',
+    lastName: 'Stamm',
+    age: 13,
+    visits: 518,
+    progress: 28,
+    status: 'relationship',
+  },
+  {
+    firstName: 'Anjali',
+    lastName: 'Ratke',
+    age: 22,
+    visits: 585,
+    progress: 7,
+    status: 'single',
+  },
+  {
+    firstName: 'Kamryn',
+    lastName: 'Gerlach',
+    age: 23,
+    visits: 488,
+    progress: 71,
+    status: 'single',
+  },
+  {
+    age: 40,
+    firstName: 'Gordon',
+    lastName: 'Lemke',
+    progress: 97,
+    status: 'single',
+    subRows: undefined,
+    visits: 434,
+  },
+];
   modusDataTable.columnHeaders = [
     {
       header: 'Name',

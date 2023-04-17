@@ -280,6 +280,7 @@ export namespace Components {
          */
         "displayOptions"?: ModusTableDisplayOptions;
         "hover": boolean;
+        "pageCount": number;
     }
     interface ModusDateInput {
         /**
@@ -1873,6 +1874,7 @@ declare namespace LocalJSX {
          */
         "displayOptions"?: ModusTableDisplayOptions;
         "hover"?: boolean;
+        "pageCount"?: number;
     }
     interface ModusDateInput {
         /**
