@@ -6,11 +6,10 @@
     "build-storybook": "build-storybook -o ./dist"
   },
   "dependencies": {
-    "@storybook/addon-docs": "^6.5.15",
-    "@storybook/addon-postcss": "^2.0.0",
-    "@storybook/addons": "^6.5.15",
-    "@storybook/components": "^6.5.15",
-    "@storybook/theming": "^6.5.15",
+    "@storybook/addon-docs": "^6.5.16",
+    "@storybook/addons": "^6.5.16",
+    "@storybook/components": "^6.5.16",
+    "@storybook/theming": "^6.5.16",
     "@types/mdx": "^2.0.4",
     "lit-html": "^2.7.2",
     "react": "17.0.2",
@@ -19,11 +18,12 @@
   "devDependencies": {
     "@babel/core": "^7.21.0",
     "@babel/preset-react": "^7.18.6",
-    "@storybook/addon-a11y": "^6.5.15",
-    "@storybook/addon-actions": "^6.5.15",
-    "@storybook/addon-essentials": "^6.5.15",
-    "@storybook/addon-links": "^6.5.15",
-    "@storybook/web-components": "^6.5.15",
+    "@storybook/addon-a11y": "^6.5.16",
+    "@storybook/addon-actions": "^6.5.16",
+    "@storybook/addon-essentials": "^6.5.16",
+    "@storybook/addon-links": "^6.5.16",
+    "@storybook/addon-styling": "^0.3.2",
+    "@storybook/web-components": "^6.5.16",
     "babel-loader": "8.2.5",
     "postcss": "^8.4.22",
     "storybook-dark-mode": "^3.0.0"
