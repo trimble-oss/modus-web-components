@@ -264,6 +264,23 @@
     --modus-gray-light
   );
 
+  // NavBar - Blue Variant
+  --modus-navbar-blue-bg: var(--modus-blue-dark);
+  --modus-navbar-blue-icon-color: var(--modus-white);
+
+  // Hover
+  --modus-navbar-blue-icon-hover-bg: var(--modus-blue-light);
+  --modus-navbar-blue-icon-hover-border-color: #019aeb;
+  --modus-navbar-blue-icon-hover-color: var(--modus-white);
+
+  // Active
+  --modus-navbar-blue-icon-active-bg: #019aeb;
+  --modus-navbar-blue-icon-active-color: var(--modus-white);
+
+  // Profile
+  --modus-navbar-blue-profile-icon-initials-color: var(--modus-blue-dark);
+  --modus-navbar-blue-profile-icon-active-border-color: #019aeb;
+
   // Pagination
   --modus-pagination-color: var(--modus-body-color);
   --modus-pagination-chevron-color: var(--modus-gray-6);
@@ -333,6 +350,10 @@
   --modus-table-edit-border-color: var(--modus-highlight-blue-color);
   --modus-table-readonly-bg: var(--modus-gray-0);
   --modus-table-readonly-color: var(--modus-table-color);
+
+  // Tooltips
+  --modus-tooltip-bg: var(--modus-gray-7);
+  --modus-tooltip-color: var(--modus-white);
 
   // Side Navigation
   --modus-side-navigation-bg: var(--modus-body-bg);
@@ -638,6 +659,10 @@
   --modus-table-readonly-bg: var(--modus-table-bg);
   --modus-table-readonly-color: var(--modus-gray-2);
 
+  // Tooltip
+  --modus-tooltip-bg: var(--modus-gray-0);
+  --modus-tooltip-color: var(--modus-trimble-gray);
+
   // Side Navigation
   --modus-side-navigation-bg: var(--modus-gray-11);
   --modus-side-navigation-item-hover-bg: var(--modus-gray-8);
@@ -724,11 +749,6 @@
 
   // Disabled
   --modus-list-item-disabled-color: var(--modus-group-item-disabled-color);
-}
-
-@mixin modus-tooltip {
-  --modus-tooltip-bg: var(--modus-gray-7);
-  --modus-tooltip-color: var(--modus-white);
 }
 
 // Components
@@ -863,7 +883,6 @@ modus-data-table {
   @include modus-badge;
   @include modus-checkbox;
   @include modus-list-item;
-  @include modus-tooltip;
 }
 
 modus-file-dropzone {
@@ -957,10 +976,6 @@ modus-tree-view-item {
   --modus-tree-view-item-drag-error-border-color: var(--modus-red);
 
   @include modus-checkbox;
-}
-
-modus-tooltip {
-  @include modus-tooltip;
 }
 
 modus-side-navigation {

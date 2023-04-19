@@ -25,6 +25,18 @@ describe('modus-navbar', () => {
     expect(element).not.toHaveClass('shadow');
   });
 
+  it('renders changes to variant', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-navbar></modus-navbar>');
+    const component = await page.find('modus-navbar');
+
+    component.setProperty('variant', 'blue');
+    await page.waitForChanges();
+    const element = await page.find('modus-navbar >>> nav');
+    expect(element).toHaveClass('nav-blue');
+  });
+
   it('emits appsMenuOpen when apps menu opens', async () => {
     const page = await newE2EPage();
     await page.setContent('<modus-navbar show-apps-menu></modus-navbar>');

@@ -14,6 +14,7 @@ import { ModusNavbarProfileMenuLink } from "./components/modus-navbar/profile-me
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { ModusNavbarProfileMenuLink as ModusNavbarProfileMenuLink1 } from "./components/modus-navbar/profile-menu/modus-navbar-profile-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
+import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
 import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.types";
 import { ModusTableCellLink, ModusTableDisplayOptions, ModusTableRowAction, ModusTableRowActionClickEvent, ModusTableSelectionOptions, ModusTableSortEvent, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-table/modus-table.models";
 import { Tab } from "./components/modus-tabs/modus-tabs";
@@ -593,6 +594,10 @@ export namespace Components {
           * (optional) Whether to show a shadow under the navbar.
          */
         "showShadow": boolean;
+        /**
+          * (optional) Color variants for NavBar.
+         */
+        "variant": 'default' | 'blue';
     }
     interface ModusNavbarAppsMenu {
         "apps": ModusNavbarApp[];
@@ -610,6 +615,7 @@ export namespace Components {
         "links": ModusNavbarProfileMenuLink[];
         "reverse": boolean;
         "username": string;
+        "variant": 'default' | 'blue';
     }
     interface ModusNumberInput {
         /**
@@ -2264,6 +2270,10 @@ declare namespace LocalJSX {
           * (optional) Whether to show a shadow under the navbar.
          */
         "showShadow"?: boolean;
+        /**
+          * (optional) Color variants for NavBar.
+         */
+        "variant"?: 'default' | 'blue';
     }
     interface ModusNavbarAppsMenu {
         "apps"?: ModusNavbarApp[];
@@ -2284,6 +2294,7 @@ declare namespace LocalJSX {
         "onSignOutClick"?: (event: ModusNavbarProfileMenuCustomEvent<MouseEvent>) => void;
         "reverse"?: boolean;
         "username"?: string;
+        "variant"?: 'default' | 'blue';
     }
     interface ModusNumberInput {
         /**

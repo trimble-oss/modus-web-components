@@ -15,6 +15,7 @@
 | `links`     | --           |             | `ModusNavbarProfileMenuLink[]` | `undefined` |
 | `reverse`   | `reverse`    |             | `boolean`                      | `undefined` |
 | `username`  | `username`   |             | `string`                       | `undefined` |
+| `variant`   | `variant`    |             | `"blue" \| "default"`          | `'default'` |
 
 
 ## Events
