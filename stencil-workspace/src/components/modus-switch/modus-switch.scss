@@ -18,10 +18,13 @@
     .slider {
       background-color: $modus-switch-bg;
       border-radius: $rem-16px;
+      bottom: 0;
       cursor: pointer;
       height: $rem-14px;
-      inset: 0;
+      left: 0;
       position: absolute;
+      right: 0;
+      top: 0;
       width: 1.875rem;
     }
 
