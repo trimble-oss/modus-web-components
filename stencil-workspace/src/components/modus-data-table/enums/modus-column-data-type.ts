@@ -1,4 +1,4 @@
-export enum ColumnDataType {
+export enum ModusColumnDataType {
   Text = 'text',
   Integer = 'integer',
   Currency = 'currency',
