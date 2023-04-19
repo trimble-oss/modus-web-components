@@ -21,8 +21,49 @@ table {
 
         // min-height: 3rem;
 
-        can-sort {
-          cursor: pointer;
+        .can-sort {
+          align-items: center;
+          display: flex;
+          justify-content: space-between;
+
+          .sort-icon-containor {
+            cursor: pointer;
+            padding: 2px 2px 0;
+
+            .sort-icons {
+              svg {
+                fill: $modus-table-header-color;
+              }
+
+              &:focus {
+                outline-style: auto;
+              }
+
+              &:focus:not(:focus-visible) {
+                outline-style: none;
+              }
+            }
+
+            .disabled {
+              opacity: 0.5;
+            }
+
+            .hidden {
+              visibility: hidden;
+            }
+
+            &:focus {
+              .hidden {
+                visibility: visible;
+              }
+            }
+          }
+
+          &:hover {
+            .hidden {
+              visibility: visible;
+            }
+          }
         }
       }
     }
