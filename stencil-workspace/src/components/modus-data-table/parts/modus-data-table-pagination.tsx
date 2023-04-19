@@ -7,12 +7,12 @@ import { Table } from '@tanstack/table-core';
 interface ModusDataTablePaginationProps {
   table: Table<unknown>;
   totalCount: number;
-  pageSize: number[];
+  pageSizeList: number[];
 }
 
 export const ModusDataTablePagination: FunctionalComponent<
   ModusDataTablePaginationProps
-> = ({table, totalCount, pageSize}) => {
+> = ({ table, totalCount, pageSizeList }) => {
   return (
     <div>
       <span class="pager">
@@ -44,7 +44,7 @@ export const ModusDataTablePagination: FunctionalComponent<
             const target = e.target as EventTarget & HTMLInputElement;
             table.setPageSize(Number(target.value));
           }}>
-          {pageSize.map((size) => (
+          {pageSizeList?.map((size) => (
             <option key={size} value={size} selected={size === 10}>
               {size}
             </option>
