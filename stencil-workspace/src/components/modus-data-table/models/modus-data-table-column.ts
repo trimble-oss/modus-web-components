@@ -1,9 +1,10 @@
-import { ColumnDataType } from '../enums/modus-column-data-type';
+import { ModusColumnDataType } from '../enums/modus-column-data-type';
 
 export interface ModusDataTableColumn {
   header: string;
   accessorKey?: string;
   id: string;
   columns?: ModusDataTableColumn[];
-  dataType: ColumnDataType;
+  dataType: ModusColumnDataType;
+  enableSorting?: boolean;
 }
