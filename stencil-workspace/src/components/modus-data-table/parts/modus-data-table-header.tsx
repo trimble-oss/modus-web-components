@@ -4,6 +4,7 @@ import {
 } from '@stencil/core';
 import { Header } from '@tanstack/table-core';
 import { ModusDataTableHeaderSort } from './modus-data-table-header-sort';
+import { ModusDataTableColumnResizingHandler } from './modus-data-table-column-resizing-handler';
 
 interface ModusDataTableHeaderProps {
   header: Header<unknown, unknown>;
@@ -22,9 +23,13 @@ export const ModusDataTableHeader: FunctionalComponent<
     <th
       key={props.header.id}
       colSpan={props.header.colSpan}
-      class={
-        props.index < props.lengthOfHeaderGroups - 1 && 'text-align-center'
-      }>
+      class={`
+        ${
+          props.index < props.lengthOfHeaderGroups - 1 && 'text-align-center'
+        }
+        ${props.header.column.getIsResizing() ? 'is-resizing' : ''}
+      `}
+      style={{ width: `${props.header.getSize()}px` }}>
       {props.header.isPlaceholder ? null : (
         <div class={props.header.column.getCanSort() && 'can-sort'}>
           <span aria-label={props.header.column.columnDef.header}>
@@ -38,6 +43,7 @@ export const ModusDataTableHeader: FunctionalComponent<
           )}
         </div>
       )}
+      <ModusDataTableColumnResizingHandler header={props.header} />
     </th>
   );
 };

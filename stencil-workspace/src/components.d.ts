@@ -289,6 +289,7 @@ export namespace Components {
         /**
           * (Optional) To enable row hover in table.
          */
+        "enableColumnResizing": boolean;
         "hover": boolean;
         /**
           * (Optional) To display sort icon on hover.
@@ -1908,6 +1909,7 @@ declare namespace LocalJSX {
         /**
           * (Optional) To enable row hover in table.
          */
+        "enableColumnResizing"?: boolean;
         "hover"?: boolean;
         /**
           * Emits event on sort change
