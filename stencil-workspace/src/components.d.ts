@@ -280,7 +280,7 @@ export namespace Components {
          */
         "displayOptions"?: ModusDataTableDisplayOptions;
         "hover": boolean;
-        "isPagination": boolean;
+        "pagination": boolean;
     }
     interface ModusDateInput {
         /**
@@ -1874,7 +1874,7 @@ declare namespace LocalJSX {
          */
         "displayOptions"?: ModusDataTableDisplayOptions;
         "hover"?: boolean;
-        "isPagination"?: boolean;
+        "pagination"?: boolean;
     }
     interface ModusDateInput {
         /**

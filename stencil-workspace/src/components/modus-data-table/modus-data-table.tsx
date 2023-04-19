@@ -1,21 +1,24 @@
 import {
-  Component, Host, Prop, State,
+  Component,
+  Host,
+  Prop,
+  State,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import {
   ColumnDef,
+  PaginationState,
   Table,
   TableOptionsResolved,
   Updater,
   createTable,
   getCoreRowModel,
-  getPaginationRowModel
+  getPaginationRowModel,
 } from '@tanstack/table-core';
 import { ModusDataTableColumn, ModusDataTableDisplayOptions } from './models';
 import { ModusDataTableCell } from './parts/modus-data-table-cell';
 import { ModusDataTableHeader } from './parts/modus-data-table-header';
 import { ModusDataTablePagination } from './parts/modus-data-table-pagination';
-import { PaginationState } from './models/modus-data-table-pagination-option';
 
 @Component({
   tag: 'modus-data-table',
@@ -33,7 +36,7 @@ export class ModusDataTable {
   @Prop() hover = false;
 
   /* (optional) To enable hover on table rows. */
-  @Prop() isPagination: boolean;
+  @Prop() pagination: boolean;
 
   /** Options for data table display. */
   @Prop() displayOptions?: ModusDataTableDisplayOptions = {
@@ -41,52 +44,40 @@ export class ModusDataTable {
     cellBorderless: false,
   };
 
-  /** Pagination block start */
   @State() paginationState: PaginationState = {
     pageIndex: 0,
-    pageSize: 10,
-    pageCount: 1,
+    pageSize: 10
   };
-
-  setPagination(updater: Updater<PaginationState>) {
-    this.paginationState =
-      typeof updater === 'function' ? updater(this.paginationState) : updater;
-    const { pageIndex, pageSize } = this.paginationState;
-    const rows = this.data.slice(pageIndex * pageSize, (pageIndex + 1) * pageSize);
-    const pageCount = Math.ceil(this.data.length / pageSize);
-    this.options.data = rows;
-    this.paginationState.pageCount = pageCount;
-    this.table = createTable(this.options);
-  }
-  /** Pagination block end */
 
   options: TableOptionsResolved<unknown> = {
     data: this.data,
     columns: this.columnHeaders as ColumnDef<unknown>[],
     state: {
-      columnPinning: {},
-      pagination: this.paginationState,
+      pagination: this.paginationState
     },
-    manualPagination: true,
-    onPaginationChange: (updater: Updater<PaginationState>) =>
-      this.setPagination(updater),
+    onPaginationChange: (updater: PaginationState) => this.setPagination(updater),
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    onStateChange: () => {},
+    onStateChange: () => { },
     renderFallbackValue: null,
   };
+  table: Table<unknown> = createTable(this.options);
 
   componentWillLoad() {
-    if (this.isPagination) {
-      this.options.data = this.data.slice(0, this.paginationState.pageSize);
-      this.table = this.table = createTable(this.options);
-      const pageCount = Math.ceil(this.data.length / this.paginationState.pageSize);
-      this.paginationState.pageCount = pageCount;
-    }
+    this.table.setOptions((prev) => ({
+      ...prev,
+      state: {
+        ...prev.state,
+        ...this.table.initialState,
+      },
+    }));
   }
 
-  table: Table<unknown> = createTable(this.options);
+  setPagination(updater: Updater<PaginationState>): void {
+    this.paginationState = updater instanceof Function ? updater(this.paginationState) : updater;
+    this.table.options.state.pagination = this.paginationState;
+  }
 
   render() {
     const lengthOfHeaderGroups: number = this.table.getHeaderGroups().length;
@@ -126,11 +117,10 @@ export class ModusDataTable {
           </tbody>
         </table>
         <br />
-        {this.isPagination && (
+        {this.pagination && (
           <ModusDataTablePagination
             table={this.table}
-            paginationState={this.paginationState}
-            dataLength={this.data.length}
+            totalCount={this.data.length}
           />
         )}
       </Host>
