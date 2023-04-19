@@ -7,31 +7,32 @@ import { Table } from '@tanstack/table-core';
 interface ModusDataTablePaginationProps {
   table: Table<unknown>;
   totalCount: number;
+  pageSize: number[];
 }
 
 export const ModusDataTablePagination: FunctionalComponent<
   ModusDataTablePaginationProps
-> = (props: ModusDataTablePaginationProps) => {
+> = ({table, totalCount, pageSize}) => {
   return (
     <div>
       <span class="pager">
         <modus-pagination
           active-page="1"
-          max-page={props.table.getPageCount()}
+          max-page={table.getPageCount()}
           min-page="1"
           onPageChange={(event) =>
-            props.table.setPageIndex(event.detail - 1)
+            table.setPageIndex(event.detail - 1)
           }></modus-pagination>
       </span>
       <span>
         <div class="pager-text">
           Showing result{' '}
           <span>
-            {props.table.getState().pagination.pageIndex +
+            {table.getState().pagination.pageIndex +
               1 +
               '-' +
-              props.table.getState().pagination.pageSize}{' '}
-            of {props.totalCount}
+              table.getState().pagination.pageSize}{' '}
+            of {totalCount}
           </span>
         </div>
       </span>
@@ -41,11 +42,11 @@ export const ModusDataTablePagination: FunctionalComponent<
           class="page-view"
           onChange={(e) => {
             const target = e.target as EventTarget & HTMLInputElement;
-            props.table.setPageSize(Number(target.value));
+            table.setPageSize(Number(target.value));
           }}>
-          {[10, 20, 30, 40, 50].map((pageSize) => (
-            <option key={pageSize} value={pageSize} selected={pageSize === 10}>
-              {pageSize}
+          {pageSize.map((size) => (
+            <option key={size} value={size} selected={size === 10}>
+              {size}
             </option>
           ))}
         </select>

@@ -35,8 +35,11 @@ export class ModusDataTable {
   /* (optional) To enable hover on table rows. */
   @Prop() hover = false;
 
-  /* (optional) To enable hover on table rows. */
-  @Prop() pagination: boolean;
+  /* (optional) To enable pagination for the table. */
+  @Prop() pagination : boolean;
+
+  /* (optional) To set pagesize for the pagination. */
+  @Prop() pageSize: number[];
 
   /** Options for data table display. */
   @Prop() displayOptions?: ModusDataTableDisplayOptions = {
@@ -121,6 +124,7 @@ export class ModusDataTable {
           <ModusDataTablePagination
             table={this.table}
             totalCount={this.data.length}
+            pageSize={this.pageSize}
           />
         )}
       </Host>
