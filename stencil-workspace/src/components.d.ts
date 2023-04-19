@@ -7,8 +7,7 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
 import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
-import { ModusDataTableColumn } from "./components/modus-data-table/models/modus-data-table-column";
-import { ModusTableCellLink, ModusTableDisplayOptions, ModusTableRowAction, ModusTableRowActionClickEvent, ModusTableSelectionOptions, ModusTableSortEvent, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-table/modus-table.models";
+import { ModusDataTableColumn, ModusDataTableDisplayOptions, ModusDataTableSortingState } from "./components/modus-data-table/models";
 import { DateInputEventData, DateInputType } from "./components/modus-date-picker/utils/modus-date-picker.types";
 import { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { ModusNavbarProfileMenuLink } from "./components/modus-navbar/profile-menu/modus-navbar-profile-menu";
@@ -17,6 +16,7 @@ import { ModusNavbarProfileMenuLink as ModusNavbarProfileMenuLink1 } from "./com
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
 import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.types";
+import { ModusTableCellLink, ModusTableDisplayOptions, ModusTableRowAction, ModusTableRowActionClickEvent, ModusTableSelectionOptions, ModusTableSortEvent, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-table/modus-table.models";
 import { Tab } from "./components/modus-tabs/modus-tabs";
 import { TimeInputEventData } from "./components/modus-time-picker/modus-time-picker.types";
 import { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
@@ -274,13 +274,30 @@ export namespace Components {
         "value": string;
     }
     interface ModusDataTable {
-        "columnHeaders": ModusDataTableColumn[];
+        /**
+          * (Required) To display headers in the table.
+         */
+        "columns": ModusDataTableColumn[];
+        /**
+          * (Required) To display data in the table.
+         */
         "data": unknown[];
         /**
-          * Options for data table display.
+          * (Optional) To control display options of table.
          */
-        "displayOptions"?: ModusTableDisplayOptions;
+        "displayOptions"?: ModusDataTableDisplayOptions;
+        /**
+          * (Optional) To enable row hover in table.
+         */
         "hover": boolean;
+        /**
+          * (Optional) To display sort icon on hover.
+         */
+        "showSortIconOnHover": boolean;
+        /**
+          * (Optional) To sort data in table.
+         */
+        "sort": boolean;
     }
     interface ModusDateInput {
         /**
@@ -1192,6 +1209,10 @@ export interface ModusChipCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusChipElement;
 }
+export interface ModusDataTableCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusDataTableElement;
+}
 export interface ModusDateInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusDateInputElement;
@@ -1872,13 +1893,34 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface ModusDataTable {
-        "columnHeaders": ModusDataTableColumn[];
+        /**
+          * (Required) To display headers in the table.
+         */
+        "columns": ModusDataTableColumn[];
+        /**
+          * (Required) To display data in the table.
+         */
         "data": unknown[];
         /**
-          * Options for data table display.
+          * (Optional) To control display options of table.
          */
-        "displayOptions"?: ModusTableDisplayOptions;
+        "displayOptions"?: ModusDataTableDisplayOptions;
+        /**
+          * (Optional) To enable row hover in table.
+         */
         "hover"?: boolean;
+        /**
+          * Emits event on sort change
+         */
+        "onSorting"?: (event: ModusDataTableCustomEvent<ModusDataTableSortingState>) => void;
+        /**
+          * (Optional) To display sort icon on hover.
+         */
+        "showSortIconOnHover"?: boolean;
+        /**
+          * (Optional) To sort data in table.
+         */
+        "sort"?: boolean;
     }
     interface ModusDateInput {
         /**

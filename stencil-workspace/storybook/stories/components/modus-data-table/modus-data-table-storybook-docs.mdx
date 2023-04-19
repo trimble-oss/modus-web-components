@@ -6,19 +6,27 @@ import { Story } from '@storybook/addon-docs';
 
 ---
 
-[Modus Data Table](https://modus.trimble.com/components/tables/) web components are wrappers around the HTML table element.
-They organize information in a way that’s easy to scan, so that users can look for patterns and insights.
-They are referenced using the `<modus-data-table>` custom HTML element.
-
----
+[Modus Data Table](https://modus.trimble.com/components/tables/) web components are wrappers around the HTML table element. Modus Data Table is reusable and customizable UI element that can be used to display data in a tabular format. It has functionality like sorting, pagination, and column resizing.
 
 ### Default
 
-<Story id="components-data-table--default" height={'250px'} />
+<Story id="components-data-table--default" height={'340px'} />
+
+### Hover
+
+<Story id="components-data-table--hover" height={'350px'} />
+
+### BorderLess
+
+<Story id="components-data-table--border-less" height={'350px'} />
+
+### Sorting
+
+<Story id="components-data-table--sorting" height={'350px'} />
 
 ```html
 <div style="width: 500px">
-  <modus-data-table />
+  <modus-data-table hover="false" sort="false" />
 </div>
 <script>
   document.querySelector('modus-data-table').columnHeaders = [
@@ -95,3 +103,20 @@ They are referenced using the `<modus-data-table>` custom HTML element.
   ];
 </script>
 ```
+
+### Properties
+
+| Property              | Attribute             | Description                                     | Type                     | Default     |
+| --------------------- | --------------------- | ----------------------------------------------- | ------------------------ | ----------- |
+| `columns`             | `columns`             | (required) To display headers in the table.     | `ModusDataTableColumn[]` | `undefined` |
+| `data`                | `data`                | (required) To display data in the table.        | `Array`                  | `undefined` |
+| `hover`               | `hover`               | (optional) To enable row hover in table.        | `boolean`                | `false`     |
+| `sort`                | `sort`                | (optional) To sort data in table.               | `boolean`                | `false`     |
+| `showSortIconOnHover` | `showSortIconOnHover` | (optional) To display sort icon on hover.       | `boolean`                | `false`     |
+| `displayOptions`      | `displayOptions`      | (optional) To control display options of table. | `boolean`                | `false`     |
+
+### DOM Events
+
+| Name      | Description                         | Emits                             |
+| --------- | ----------------------------------- | --------------------------------- |
+| `sorting` | An event that fires on sort change. | `[{ id: string, desc: boolean }]` |
