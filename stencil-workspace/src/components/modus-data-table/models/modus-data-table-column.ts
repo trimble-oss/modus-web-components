@@ -1,4 +1,4 @@
-import { ColumnDataType } from '../enums/column-data-type';
+import { ColumnDataType } from '../enums/modus-column-data-type';
 
 export interface ModusDataTableColumn {
   header: string;

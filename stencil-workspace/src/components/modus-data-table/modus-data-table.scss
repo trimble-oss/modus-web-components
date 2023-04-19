@@ -37,6 +37,10 @@ table {
         // border: $rem-1px $modus-table-border-color solid;
         // min-height: 3rem;
         // padding: 0.25rem 1rem;
+
+        &.text-align-right {
+          text-align: right;
+        }
       }
 
       &.enable-hover {
@@ -59,10 +63,6 @@ table {
 
       &.text-align-center {
         text-align: center;
-      }
-
-      &.text-align-right {
-        text-align: right;
       }
     }
   }

@@ -274,7 +274,7 @@ export namespace Components {
     }
     interface ModusDataTable {
         "columnHeaders": ModusDataTableColumn[];
-        "data": any[];
+        "data": unknown[];
         /**
           * Options for data table display.
          */
@@ -1867,7 +1867,7 @@ declare namespace LocalJSX {
     }
     interface ModusDataTable {
         "columnHeaders": ModusDataTableColumn[];
-        "data": any[];
+        "data": unknown[];
         /**
           * Options for data table display.
          */
