@@ -77,6 +77,7 @@ export class ModusDataTable {
         sorting: this.sortState,
       },
       enableSorting: this.sort,
+      sortDescFirst: false,      // To-Do, this is work around to sort descending by default.
       onSortingChange: (updater: Updater<ModusDataTableSortingState>) =>
         this.setSorting(updater),
       getCoreRowModel: getCoreRowModel(),
