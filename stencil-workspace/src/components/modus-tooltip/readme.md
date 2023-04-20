@@ -20,12 +20,14 @@
 
  - [modus-data-table](../modus-data-table)
  - [modus-side-navigation-item](../modus-side-navigation/modus-side-navigation-item)
+ - [modus-table](../modus-table)
 
 ### Graph
 ```mermaid
 graph TD;
   modus-data-table --> modus-tooltip
   modus-side-navigation-item --> modus-tooltip
+  modus-table --> modus-tooltip
   style modus-tooltip fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

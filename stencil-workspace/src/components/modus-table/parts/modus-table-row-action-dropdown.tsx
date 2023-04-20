@@ -1,16 +1,16 @@
 // eslint-disable-next-line
 import { FunctionalComponent, h } from '@stencil/core';
 import { IconMap } from '../../icons/IconMap';
-import { ModusDataTableRowAction } from '../modus-data-table.models';
+import { ModusTableRowAction } from '../modus-table.models';
 
 interface Props {
-  actions: ModusDataTableRowAction[];
+  actions: ModusTableRowAction[];
   animateDropdown: boolean;
   onRowActionClick: (actionId: string, rowId: string) => void;
   rowId: string;
 }
 
-export const ModusDataTableRowActionDropdown: FunctionalComponent<Props> = (props: Props) => {
+export const ModusTableRowActionDropdown: FunctionalComponent<Props> = (props: Props) => {
   return (
     <modus-dropdown toggle-element-id={`dropdownToggle-${props.rowId}`} animate-list={props.animateDropdown} customPlacement={{left: -194}}>
       <div class="row-action" id={`dropdownToggle-${props.rowId}`} slot="dropdownToggle">
