@@ -25,6 +25,7 @@ button {
     color: $modus-btn-disabled-color;
     cursor: default;
     opacity: 0.3;
+    pointer-events: none;
 
     :not(.style-borderless) {
       border-color: $modus-btn-disabled-border-color;
