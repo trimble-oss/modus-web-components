@@ -197,6 +197,9 @@ const DefaultTemplate = ({
 export const Default = DefaultTemplate.bind({});
 Default.args = {
   ...defaultArgs,
+  format: 'mmm dd, yyyy',
+  allowedCharsRegex: '.',
+  helperText: 'mmm dd, yyyy',
   ...{ label: 'Single Date' },
 };
 
