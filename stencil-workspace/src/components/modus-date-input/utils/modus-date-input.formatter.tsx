@@ -3,6 +3,7 @@ import {
   token,
   Tokens,
   tokenType,
+  TokenParser,
 } from './modus-date-input.tokens';
 
 export const ISO_DATE_FORMAT =
@@ -29,7 +30,9 @@ export default class DateInputFormatter {
     this._fillerDate = this.getFillerDate(fillerDateString);
   }
 
-  /** Format time input while typing */
+  /**
+   * Note: Auto formatting is not used yet due to the challenges in handling formats like 'm' and 'd' where the user can input single or double-digit
+   */
   autoFormatInput(val: string, autoFormat: boolean) {
     if (!val || !autoFormat) return val;
 
@@ -76,7 +79,7 @@ export default class DateInputFormatter {
     return [`^${regexParts.join('')}$`, dtTokens, separators];
   }
 
-  /** Format value which is ISO 8601 date format to the display format */
+  /** Format value in ISO 8601 date format to the display format */
   formatDisplayString(val: string): string | null {
     const regex = new RegExp(ISO_DATE_FORMAT);
     const parse = regex.exec(val);
@@ -91,9 +94,10 @@ export default class DateInputFormatter {
 
       let output = this._displayFormat;
       this._dateTokens.forEach(({ tokenString }, key) => {
+        const formatting = TokenFormatting[tokenString];
         output = output.replace(
           tokenString,
-          TokenFormatting[tokenString](
+          formatting(
             parts[key],
             key === 'year' ? this._fillerDate.getFullYear() : null
           )
@@ -107,30 +111,35 @@ export default class DateInputFormatter {
   }
 
   /** Parse display string to ISO 8601 date format YYYY-MM-DD */
-  parseDisplayString(val: string): string {
+  parseDisplayString(val: string): string | null {
     if (this._dateRegExp && val) {
-      const regexObj = new RegExp(this._dateRegExp);
-      const parsed = regexObj.exec(val);
-      if (parsed) {
+      const regexObj = new RegExp(this._dateRegExp, 'i');
+      const output = regexObj.exec(val);
+      if (output) {
         // parsed[0] always contains the whole string
-        const yearIndex = this._dateTokens.get('year')?.index + 1;
-        const monthIndex = this._dateTokens.get('month')?.index + 1;
-        const dateIndex = this._dateTokens.get('date')?.index + 1;
+        output.shift();
+        const monthToken = this._dateTokens.get('month');
+        const dateToken = this._dateTokens.get('date');
+        const yearToken = this._dateTokens.get('year');
 
-        const month = monthIndex
-          ? parseFloat(parsed[monthIndex])
+        const month = monthToken
+          ? TokenParser[monthToken.tokenString](output[monthToken.index])
           : this._fillerDate.getMonth() + 1;
-        const date = dateIndex
-          ? parseFloat(parsed[dateIndex])
+
+        const date = dateToken
+          ? TokenParser[dateToken.tokenString](output[dateToken.index])
           : this._fillerDate.getDate();
-        const year = yearIndex
-          ? parseFloat(parsed[yearIndex])
+
+        const year = yearToken
+          ? TokenParser[yearToken.tokenString](output[yearToken.index])
           : this._fillerDate.getFullYear();
 
-        return `${TokenFormatting.yyyy(
+        const isoDateString = `${TokenFormatting.yyyy(
           year,
           this._fillerDate.getFullYear()
         )}-${TokenFormatting.mm(month)}-${TokenFormatting.dd(date)}`;
+
+        return Date.parse(isoDateString) ? isoDateString : null;
       }
     }
     return null;
