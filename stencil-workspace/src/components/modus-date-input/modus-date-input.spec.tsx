@@ -17,7 +17,7 @@ describe('modus-date-input', () => {
              </label>
            </div>
            <div class="input-container medium">
-             <input id="date-input" inputmode="text" maxlength="10" tabindex="0" type="text">
+             <input id="date-input" tabindex="0" type="text">
            </div>
            <div class="sub-text">
            </div>

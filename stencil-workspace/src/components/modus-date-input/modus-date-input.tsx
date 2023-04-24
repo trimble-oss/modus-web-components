@@ -122,7 +122,6 @@ export class ModusDateInput {
   private _dateInput: HTMLInputElement;
   private _formatter: DateInputFormatter;
   private _isEditing: boolean;
-  readonly _maxLength = 10;
 
   // TODO: Auto formatting for single tokens 'm' and 'd' is tricky because user can input double digits
   private autoFormat = false;
@@ -183,10 +182,7 @@ export class ModusDateInput {
 
     const inputString = (event.currentTarget as HTMLInputElement)?.value;
 
-    this._dateDisplay = this._formatter.autoFormatInput(
-      inputString,
-      this.autoFormat
-    );
+    this._dateDisplay = inputString;
     this.value = this._formatter.parseDisplayString(this._dateDisplay);
   }
 
@@ -249,7 +245,6 @@ export class ModusDateInput {
             class={{ 'has-right-icon': this.showCalendarIcon }}
             disabled={this.disabled}
             id="date-input"
-            inputmode="text"
             onBlur={() => this.handleBlur()}
             onInput={(event) => this.handleOnInput(event)}
             onKeyPress={(e) => this.handleInputKeyPress(e)}
@@ -258,7 +253,6 @@ export class ModusDateInput {
             ref={(el) => (this._dateInput = el as HTMLInputElement)}
             tabIndex={0}
             type="text"
-            maxLength={this._maxLength}
             value={this._dateDisplay}
           />
           {this.showCalendarIcon && (
