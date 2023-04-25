@@ -1,0 +1,52 @@
+@import './modus-list-item.vars';
+
+li {
+  align-items: center;
+  background-color: $modus-list-item-bg;
+  border: 1px solid $modus-list-item-border-color;
+  color: $modus-list-item-color;
+  display: flex;
+  fill: $modus-list-item-color;
+  font-family: $primary-font;
+  font-size: $rem-16px;
+  min-height: $list-group-item-height;
+  padding: 0 $rem-16px;
+
+  .slot {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .icon-check {
+    margin-left: auto;
+  }
+
+  &:hover:not(.disabled) {
+    background-color: $modus-list-item-hover-bg;
+    border: 1px solid $modus-list-item-border-color;
+    color: $modus-list-item-color;
+    fill: $modus-list-item-color;
+  }
+
+  &.small {
+    font-size: $rem-12px;
+    min-height: $list-group-item-height-sm;
+  }
+
+  &.large {
+    min-height: $list-group-item-height-lg;
+  }
+
+  &.disabled {
+    color: $modus-list-item-disabled-color;
+    fill: $modus-list-item-disabled-color;
+  }
+
+  &.selected {
+    background-color: $modus-list-item-selected-bg;
+    border: 1px solid $modus-list-item-selected-border-color;
+    color: $modus-list-item-color;
+    fill: $modus-list-item-color;
+  }
+}

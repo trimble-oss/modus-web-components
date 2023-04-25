@@ -1,0 +1,45 @@
+@import './modus-breadcrumb.vars';
+
+nav {
+  font-family: $primary-font;
+  font-size: $rem-14px;
+  position: relative;
+
+  ol {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: $rem-10px 0;
+
+    li {
+      .crumb {
+        a {
+          color: $modus-breadcrumb-item-color;
+          cursor: pointer;
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+
+          &:active {
+            color: $modus-breadcrumb-item-active-color;
+            text-decoration: none;
+          }
+        }
+
+        .divider {
+          color: $modus-breadcrumb-divider-color;
+          cursor: default;
+          padding: 0 $rem-8px;
+        }
+      }
+
+      .last-crumb {
+        color: $modus-breadcrumb-item-active-color;
+      }
+    }
+  }
+}

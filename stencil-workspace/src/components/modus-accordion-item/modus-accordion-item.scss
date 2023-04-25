@@ -1,0 +1,85 @@
+@import './modus-accordion-item.vars';
+
+.accordion-item {
+  background-color: $modus-accordion-item-bg;
+  border-bottom: $rem-1px solid $modus-accordion-item-border-color;
+  color: $modus-accordion-item-color;
+  display: flex;
+  flex-direction: column;
+  font-family: $primary-font;
+  position: relative;
+
+  .header {
+    align-items: center;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: $rem-16px;
+    font-weight: $font-weight-semi-bold;
+    height: 48px;
+
+    &.disabled {
+      cursor: auto;
+      opacity: 0.4;
+    }
+
+    &.expanded {
+      color: $modus-accordion-item-header-expand-color;
+    }
+
+    &:hover:not(.disabled) {
+      background-color: $modus-accordion-item-header-hover-bg;
+    }
+
+    &.small {
+      font-size: $rem-14px;
+      height: 32px;
+    }
+
+    .title {
+      padding-left: $rem-4px;
+    }
+
+    .chevron-container {
+      align-items: center;
+      display: flex;
+      margin-left: auto;
+      transition: transform 0.2s ease-in-out;
+
+      &.reverse {
+        transform: rotate(-180deg);
+      }
+
+      .icon-chevron-up-thick,
+      .icon-chevron-down-thick {
+        path {
+          fill: $modus-accordion-item-chevron-color;
+        }
+      }
+    }
+  }
+
+  .body {
+    overflow: hidden;
+
+    .body-content {
+      font-size: $rem-14px;
+      padding: $rem-16px $rem-8px;
+    }
+
+    &.collapse:not(.show) {
+      display: none;
+    }
+
+    &.collapsing {
+      height: 0;
+      position: relative;
+      transition: all 0.35s ease-out;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      &.collapsing {
+        transition: none;
+      }
+    }
+  }
+}

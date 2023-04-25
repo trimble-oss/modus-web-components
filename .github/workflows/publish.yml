@@ -1,10 +1,16 @@
-name: Create and publish NPM package
+name: Create and publish npm package
 on:
   release:
     types: [ published ]
+permissions:  # added using https://github.com/step-security/secure-workflows
+  contents: read
+
 jobs:
   publish:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./stencil-workspace
     permissions:
       contents: read
       packages: write
@@ -21,11 +27,11 @@ jobs:
         run: npm ci
       - name: Run Stencil build
         run: npm run build
-      - name: Set NPM Registry Auth Token
+      - name: Set npm Registry Auth Token
         run: npm set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TRIMBLE_OSS_AUTOMATION_TOKEN }}
-      - name: Publish NPM Package Publicly
+      - name: Publish npm Package Publicly
         run: npm publish
       - name: Set GitHub Registry Auth Token
         run: npm set //npm.pkg.github.com/:_authToken ${{ secrets.GITHUB_TOKEN }}
-      - name: Publish NPM Package to GitHub Registry
+      - name: Publish npm Package to GitHub Registry
         run: npm publish --access public --ignore-scripts --@trimble-oss:registry='https://npm.pkg.github.com'

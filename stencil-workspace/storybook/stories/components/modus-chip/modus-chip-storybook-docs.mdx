@@ -1,0 +1,92 @@
+import { Anchor } from '@storybook/addon-docs';
+
+# Chip
+
+---
+
+[Modus Chip](https://modus.trimble.com/components/chips/) web components are referenced using the `<modus-chip>` custom HTML element.
+
+<Anchor storyId="components-chip--default" />
+
+### Default
+
+<modus-chip image-url="https://randomuser.me/api/portraits/lego/1.jpg" show-close value="Bryan"></modus-chip>
+<modus-chip has-error image-url="https://randomuser.me/api/portraits/lego/1.jpg" show-close value="Bryan"></modus-chip>
+<modus-chip disabled image-url="https://randomuser.me/api/portraits/lego/1.jpg" show-close value="Bryan"></modus-chip>
+
+<Anchor storyId="components-chip--outline" />
+
+### Outline
+
+<modus-chip image-url="https://randomuser.me/api/portraits/lego/1.jpg" show-close chip-style="outline" value="Bryan"></modus-chip>
+<modus-chip has-error image-url="https://randomuser.me/api/portraits/lego/1.jpg" show-close chip-style="outline" value="Bryan"></modus-chip>
+<modus-chip disabled image-url="https://randomuser.me/api/portraits/lego/1.jpg" show-close chip-style="outline" value="Bryan"></modus-chip>
+
+### Checkmark, Small
+
+<modus-chip show-checkmark size="small" value="Pets OK"></modus-chip>
+
+```html
+<modus-chip
+  image-url="https://example.com/image.jpg"
+  show-close
+  value="Bryan"></modus-chip>
+<modus-chip
+  has-error
+  image-url="https://example.com/image.jpg"
+  show-close
+  value="Bryan"></modus-chip>
+<modus-chip
+  disabled
+  image-url="https://example.com/image.jpg"
+  show-close
+  value="Bryan"></modus-chip>
+
+<modus-chip
+  image-url="https://example.com/image.jpg"
+  show-close
+  chip-style="outline"
+  value="Bryan"></modus-chip>
+<modus-chip
+  has-error
+  image-url="https://example.com/image.jpg"
+  show-close
+  chip-style="outline"
+  value="Bryan"></modus-chip>
+<modus-chip
+  disabled
+  image-url="https://example.com/image.jpg"
+  show-close
+  chip-style="outline"
+  value="Bryan"></modus-chip>
+
+<modus-chip show-checkmark size="small" value="Pets OK"></modus-chip>
+```
+
+### Properties
+
+| Name           | Description                    | Type    | Options            | Default Value | Required |
+| -------------- | ------------------------------ | ------- | ------------------ | ------------- | -------- |
+| aria-label     | The chip's aria-label          | string  |                    |               |          |
+| chip-style     | The chip's style               | string  | 'outline', 'solid' | 'solid'       |          |
+| disabled       | Whether the chip is disabled   | boolean |                    | false         |          |
+| has-error      | Whether the chip has an error  | boolean |                    | false         |          |
+| image-url      | The chip's image url           | string  |                    |               |          |
+| show-checkmark | Whether to show the checkmark  | boolean |                    | false         |          |
+| show-close     | Whether to show the close icon | boolean |                    | false         |          |
+| size           | The chip's size                | string  | 'medium', 'small'  | 'medium'      |          |
+| value          | The chip's value               | string  |                    |               |          |
+
+### DOM Events
+
+| Name       | Description               | Emits                     |
+| ---------- | ------------------------- | ------------------------- |
+| chipClick  | Fires on chip click       | KeyboardEvent, MouseEvent |
+| closeClick | Fires on close icon click | KeyboardEvent, MouseEvent |
+
+### Accessibility
+
+- Chip gets an `aria-label` provided by the `aria-label` property input.
+- Chip gets an `aria-disabled` set to whether Chip is disabled.
+- When Chip has focus, **Enter** emits the `chipClick` event.
+- When Chip has focus, **Escape** emits the `closeClick` event.

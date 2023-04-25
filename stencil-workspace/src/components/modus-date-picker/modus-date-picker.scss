@@ -1,0 +1,212 @@
+@import './modus-date-picker.vars';
+
+.modus-date-picker {
+  display: inline-flex;
+  flex-direction: column;
+  font-family: $primary-font;
+  position: relative;
+  width: 100%;
+
+  .date-inputs {
+    display: grid;
+    grid-gap: 0.5rem;
+    grid-template-columns: auto auto;
+  }
+
+  button {
+    background: 0;
+    border: 0;
+    cursor: pointer;
+    display: inline-flex;
+    margin: 0;
+    padding: 0;
+  }
+
+  .label-container {
+    display: flex;
+
+    label {
+      color: $modus-input-label-color;
+      font-size: $rem-12px;
+      margin-bottom: $rem-4px;
+    }
+  }
+
+  .calendar-container {
+    background-color: $modus-date-picker-calendar-body-bg;
+    box-shadow: 0 0 4px #00000029;
+    display: flex;
+    flex-direction: column;
+    font-family: $primary-font;
+    margin-top: 0.15rem;
+    position: absolute;
+    z-index: 1;
+
+    .calendar-header {
+      align-items: center;
+      background-color: $modus-date-picker-calendar-header-bg;
+      color: $modus-date-picker-calendar-header-color;
+      display: flex;
+      font: normal normal 600 16px/22px $primary-font;
+      height: 40px;
+      justify-content: space-around;
+      letter-spacing: 0;
+      opacity: 1;
+      text-align: center;
+      width: 100%;
+
+      svg path {
+        fill: $modus-date-picker-calendar-header-color;
+      }
+
+      .title {
+        align-items: center;
+        display: inline-flex;
+        justify-content: center;
+      }
+
+      .calendar-title:focus + .year-icons,
+      .calendar-title:hover + .year-icons,
+      .calendar-title:active + .year-icons,
+      .year-icons:hover,
+      .year-icons:focus,
+      .year-icons:focus-within {
+        opacity: 1 !important;
+      }
+
+      .year-icons {
+        display: inline-flex;
+        flex-direction: column;
+        margin-left: 0.5rem;
+        opacity: 0;
+
+        button:active {
+          opacity: 0.5;
+        }
+
+        button:first-child {
+          transform: rotate(180deg) scaleX(-1);
+        }
+
+        svg {
+          padding: 0.125rem;
+        }
+      }
+    }
+
+    .calendar-body {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      font-size: $rem-14px;
+      justify-content: center;
+      padding: $rem-16px;
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        text-align: center;
+
+        .grid-item {
+          align-items: center;
+          display: flex;
+          height: 32px;
+          justify-content: center;
+          width: 32px;
+        }
+      }
+
+      .calendar-days-week {
+        color: $modus-date-picker-calendar-day-week-color;
+        font: normal normal bold 14px/19px $primary-font;
+        letter-spacing: 0;
+        opacity: 1;
+        text-align: center;
+      }
+
+      .calendar-day {
+        color: $modus-date-picker-calendar-day-color;
+        font: normal normal normal 14px/19px $primary-font;
+        letter-spacing: 0;
+        opacity: 1;
+        text-align: center;
+
+        &:hover {
+          background: $modus-date-picker-calendar-day-hover-bg 0% 0% no-repeat
+            padding-box !important;
+          border-radius: 16px;
+        }
+
+        &.current-day {
+          background: $modus-date-picker-calendar-body-bg 0% 0% no-repeat
+            padding-box;
+          border: 2px solid $modus-date-picker-calendar-day-current-border-color;
+          border-radius: 16px;
+        }
+
+        &.selected {
+          background: $modus-date-picker-calendar-day-selected-bg 0% 0%
+            no-repeat padding-box;
+          border-radius: 16px;
+          color: $modus-date-picker-calendar-day-selected-color;
+
+          &.start::after,
+          &.end::after {
+            background-color: $modus-date-picker-calendar-day-selected-range-bg;
+            content: '';
+            height: 32px;
+            position: absolute;
+            width: 32px;
+            z-index: -1;
+          }
+
+          &.start::after {
+            border-radius: 50% 0 0 50% !important;
+          }
+
+          &.end::after {
+            border-radius: 0 50% 50% 0 !important;
+          }
+        }
+
+        &.disabled {
+          opacity: $modus-date-picker-calendar-day-disabled-opacity;
+        }
+
+        &.range-selected {
+          background: $modus-date-picker-calendar-day-selected-range-bg 0% 0%
+            no-repeat padding-box;
+
+          &:hover::before,
+          &.current-day::before {
+            background: $modus-date-picker-calendar-day-selected-range-bg 0% 0%
+              no-repeat padding-box;
+            content: '';
+            height: 32px;
+            position: absolute;
+            width: 32px;
+            z-index: -1;
+          }
+        }
+      }
+
+      .calendar-month {
+        position: absolute;
+
+        &.invalid-date-range {
+          .start::after,
+          .end::after {
+            opacity: 0;
+          }
+        }
+      }
+
+      .calendar-month-container {
+        display: flex;
+        height: 160px;
+        justify-content: center;
+        position: relative;
+      }
+    }
+  }
+}

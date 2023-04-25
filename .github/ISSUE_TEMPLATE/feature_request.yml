@@ -1,0 +1,66 @@
+name: Feature request
+description: Suggest new or updated features to include in Modus Web Components.
+title: 'Suggest a new feature'
+body:
+  - type: checkboxes
+    attributes:
+      label: Prerequisites
+      description: Take a couple minutes to help our maintainers work faster.
+      options:
+        - label: I have [searched](https://github.com/trimble-oss/modus-web-components/issues?q=is%3Aissue) for duplicate or closed feature requests
+          required: true
+        - label: I have read the [contributing guidelines](https://github.com/trimble-oss/modus-web-components/blob/main/CONTRIBUTING.md)
+          required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: Provide detailed information for what we should add, including relevant links to prior art, screenshots, or live demos whenever possible.
+    validations:
+      required: true
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation and context
+      description: Tell us why this change is needed or helpful, and what problems it may help solve.
+    validations:
+      required: false
+  - type: dropdown
+    id: package
+    attributes:
+      label: Which npm package?
+      multiple: true
+      options:
+        - '@trimble-oss/modus-web-components'
+        - '@trimble-oss/modus-angular-components'
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      multiple: true
+      options:
+        - High
+        - Medium
+        - Low
+    validations:
+      required: true
+  - type: input
+    id: product
+    attributes:
+      label: What is the product name the feature is requested for?
+    validations:
+      required: true
+  - type: input
+    id: team
+    attributes:
+      label: What is the team name the product belongs to?
+    validations:
+      required: true
+  - type: input
+    id: division
+    attributes:
+      label: What is the division name the team belongs to?
+    validations:
+      required: true

@@ -1,0 +1,66 @@
+import { Story } from '@storybook/addon-docs';
+
+# Tabs
+
+---
+
+[Modus Tabs](https://modus.trimble.com/components/tabs/) web components are referenced using the `<modus-tabs>` custom HTML element.
+
+A new TypeScript typing has been provided named Tab defined as:
+
+```ts
+{
+  active?: boolean;
+  id: string;
+  label: string;
+}
+```
+
+### Default
+
+<Story id="components-tabs--default" height={'125px'} />
+
+### Small
+
+<Story id="components-tabs--small" height={'125px'} />
+
+```html
+<modus-tabs></modus-tabs>
+<modus-tabs size="small"></modus-tabs>
+
+<script>
+  const modusTabs = document.querySelector('modus-tabs');
+  modusTabs.tabs = [
+    {
+      id: 0,
+      label: 'Tab 1',
+    },
+    {
+      active: true,
+      id: 1,
+      label: 'Tab 2',
+    },
+  ];
+</script>
+```
+
+### Properties
+
+| Name         | Description          | Type      | Options           | Default Value | Required |
+| ------------ | -------------------- | --------- | ----------------- | ------------- | -------- |
+| `tabs`       | The tabs' tabs       | `Tab[]`   |                   |               | ✔        |
+| `aria-label` | The tabs' aria-label | `string`  |                   |               |          |
+| `size`       | The tabs' size       | `string`  | 'medium', 'small' | 'medium'      |          |
+| `full-width` | The tabs' width      | `boolean` | true, false       | false         |          |
+
+### DOM Events
+
+| Name        | Description         | Emits           |
+| ----------- | ------------------- | --------------- |
+| `tabChange` | Fires on tab change | The current tab |
+
+### Accessibility
+
+- Tabs gets an `aria-label` provided by the `aria-label` property input.
+- When a Tab has focus, **Enter** activates the Tab, and emits the `tabChange` event.
+- Set `full-width` on `true` for Tab component in order to make it resizable inside a parent.

@@ -1,0 +1,46 @@
+:host {
+  font-family: $primary-font;
+  position: relative;
+
+  .dropdown:hover {
+    cursor: pointer;
+  }
+
+  .dropdown-list {
+    border-radius: $rem-2px;
+    display: none;
+    max-height: 200px;
+    max-width: 300px;
+    opacity: 1;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: absolute;
+    transition: opacity 0.2s ease-in-out;
+    z-index: 1;
+
+    &.animate-list {
+      display: block;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    &.visible {
+      display: block;
+      opacity: 1;
+      visibility: visible;
+    }
+
+    &.top {
+      bottom: 0;
+    }
+
+    &.right {
+      top: 0;
+    }
+
+    &.left {
+      right: 0;
+      top: 0;
+    }
+  }
+}

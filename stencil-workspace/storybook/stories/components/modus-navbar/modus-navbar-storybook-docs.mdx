@@ -1,0 +1,237 @@
+import { Story } from '@storybook/addon-docs';
+
+# Navbar
+
+---
+
+[Modus Navbar](https://modus.trimble.com/components/navbar/) web components are the header of all Trimble applications. They are referenced using the `<modus-navbar>` custom HTML element.
+
+This component utilizes the slot element, allowing you to render your own HTML in the help and notification menus.
+
+#### Implementation Details
+
+- The only required navigation items are the product logo and the user menu. The rest are hidden by default.
+- If a profile menu avatarUrl is provided it will take rendering preference over initials.
+  - If the provided avatarUrl fails to load, initials will be used as a fallback.
+
+### Default
+
+<Story id="components-navbar--default" />
+
+```html
+<modus-navbar
+  id="working"
+  show-apps-menu
+  show-help
+  show-main-menu
+  show-notifications>
+  <div slot="main" style="height:300px;">Render your own main menu.</div>
+  <div slot="notifications">Render your own notifications.</div>
+</modus-navbar>
+
+<script>
+  const element = document.querySelector('modus-navbar');
+  element.apps = [
+    {
+      description: [
+        {
+          description: 'The One Trimble Design System',
+          logoUrl: 'https://modus.trimble.com/favicon.svg',
+          name: 'Trimble Modus',
+          url: 'https://modus.trimble.com/',
+        },
+      ],
+      logoUrl: '',
+      name: '',
+      url: '',
+      category: '',
+      showCategory: false,
+    },
+  ];
+  element.productLogoOptions = {
+    height: 24,
+    url: 'https://modus.trimble.com/img/trimble-logo.svg',
+  };
+  element.profileMenuOptions = {
+    avatarUrl: '...',
+    email: 'modus_user@trimble.com',
+    initials: 'MU',
+    username: 'Modus User',
+  };
+</script>
+```
+
+### Failed Avatar (Initials Fallback)
+
+<Story id="components-navbar--failed-avatar" />
+
+```html
+<modus-navbar
+  id="broken"
+  show-apps-menu
+  show-help
+  show-main-menu
+  show-notifications>
+  <div slot="main" style="height:300px;">Render your own main menu.</div>
+  <div slot="notifications">Render your own notifications.</div>
+</modus-navbar>
+
+<script>
+  const element = document.querySelector('modus-navbar');
+  element.apps = [
+    {
+      description: [
+        {
+          description: 'The One Trimble Design System',
+          logoUrl: 'https://modus.trimble.com/favicon.svg',
+          name: 'Trimble Modus',
+          url: 'https://modus.trimble.com/',
+        },
+      ],
+      logoUrl: '',
+      name: '',
+      url: '',
+      category: '',
+      showCategory: false,
+    },
+  ];
+  element.productLogoOptions = {
+    height: 24,
+    url: 'https://modus.trimble.com/img/trimble-logo.svg',
+  };
+  element.profileMenuOptions = {
+    avatarUrl: 'broken-link',
+    email: 'modus_user@trimble.com',
+    initials: 'MU',
+    username: 'Modus User',
+  };
+</script>
+```
+
+### Blue Navbar
+
+Use the `variant` prop to choose a blue background navbar.
+
+<Story id="components-navbar--blue-navbar" />
+
+```html
+<modus-navbar
+  id="blue-theme"
+  show-apps-menu
+  show-help
+  show-main-menu
+  show-notifications
+  variant="blue">
+  <div slot="main" style="height:300px;">Render your own main menu.</div>
+  <div slot="notifications">Render your own notifications.</div>
+</modus-navbar>
+
+<script>
+  const element = document.querySelector('modus-navbar');
+  element.apps = [
+    {
+      description: [
+        {
+          description: 'The One Trimble Design System',
+          logoUrl: 'https://modus.trimble.com/favicon.svg',
+          name: 'Trimble Modus',
+          url: 'https://modus.trimble.com/',
+        },
+      ],
+      logoUrl: '',
+      name: '',
+      url: '',
+      category: '',
+      showCategory: false,
+    },
+  ];
+  element.productLogoOptions = {
+    height: 24,
+    url: 'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
+  };
+  element.profileMenuOptions = {
+    avatarUrl: 'broken-link',
+    email: 'modus_user@trimble.com',
+    initials: 'MU',
+    username: 'Modus User',
+  };
+</script>
+```
+
+### Types
+
+```ts
+interface ModusNavbarApp {
+  description?: string;
+  logoUrl: string;
+  name: string;
+  url: string;
+  category: string;
+  showCategory: boolean;
+}
+
+interface ModusNavbarProfileMenuLink {
+  display: string;
+  id: string;
+}
+```
+
+### Properties
+
+| Property               | Attribute                | Description                                                      | Type                                                                                                                 | Default     |
+| ---------------------- | ------------------------ | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | ----------- |
+| `apps`                 | --                       | (optional) The apps to render in the apps menu.                  | `ModusNavbarApp[]`                                                                                                   | `undefined` |
+| `helpUrl`              | `help-url`               | (optional) Help URL.                                             | `string`                                                                                                             | `undefined` |
+| `productLogoOptions`   | --                       | (required) Product logo options.                                 | `{ height?: string; url: string; }`                                                                                  | `undefined` |
+| `profileMenuOptions`   | --                       | (required) Profile menu options.                                 | `{ avatarUrl?: string; email?: string; initials?: string; links?: ModusNavbarProfileMenuLink[]; username: string; }` | `undefined` |
+| `reverse`              | `reverse`                | (optional) Whether to display the navbar items in reverse order. | `boolean`                                                                                                            | `undefined` |
+| `showAppsMenu`         | `show-apps-menu`         | (optional) Whether to show the apps menu.                        | `boolean`                                                                                                            | `undefined` |
+| `showHelp`             | `show-help`              | (optional) Whether to show help.                                 | `boolean`                                                                                                            | `undefined` |
+| `showMainMenu`         | `show-main-menu`         | (optional) Whether to show the main menu.                        | `boolean`                                                                                                            | `undefined` |
+| `showNotifications`    | `show-notifications`     | (optional) Whether to show notifications.                        | `boolean`                                                                                                            | `undefined` |
+| `showPendoPlaceholder` | `show-pendo-placeholder` | (optional) Whether to show the placeholder for Pendo.            | `boolean`                                                                                                            | `undefined` |
+| `showSearch`           | `show-search`            | (optional) Whether to show search.                               | `boolean`                                                                                                            | `undefined` |
+| `showShadow`           | `show-shadow`            | (optional) Whether to show a shadow under the navbar.            | `boolean`                                                                                                            | `undefined` |
+| `variant`              | `variant`                | (optional) Color variants for NavBar.                            | `"blue" \| "default"`                                                                                                | `'default'` |
+
+### DOM Events
+
+| Event                     | Description                                            | Type                          |
+| ------------------------- | ------------------------------------------------------ | ----------------------------- | ------------ |
+| `appsMenuAppOpen`         | An event that fires when an apps menu app opens.       | `CustomEvent<ModusNavbarApp>` |
+| `appsMenuOpen`            | An event that fires when the apps menu opens.          | `CustomEvent<void>`           |
+| `helpOpen`                | An event that fires when the help link opens.          | `CustomEvent<void>`           |
+| `mainMenuClick`           | An event that fires on main menu click.                | `CustomEvent<KeyboardEvent    | MouseEvent>` |
+| `notificationsMenuOpen`   | An event that fires when the notifications menu opens. | `CustomEvent<void>`           |
+| `productLogoClick`        | An event that fires on product logo click.             | `CustomEvent<MouseEvent>`     |
+| `profileMenuLinkClick`    | An event that fires on profile menu link click.        | `CustomEvent<string>`         |
+| `profileMenuOpen`         | An event that fires when the profile menu opens.       | `CustomEvent<void>`           |
+| `profileMenuSignOutClick` | An event that fires on profile menu sign out click.    | `CustomEvent<MouseEvent>`     |
+
+### Methods
+
+<section>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Returns</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>hideMainMenu</td>
+        <td>Hides the main menu</td>
+        <td>void</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+### Accessibility
+
+- When Main Menu has focus, **Enter** toggles it.
+- When Notifications Menu has focus, **Enter** toggles it.
+- When Apps Menu has focus, **Enter** toggles it.
+- When User Menu has focus, **Enter** toggles it.

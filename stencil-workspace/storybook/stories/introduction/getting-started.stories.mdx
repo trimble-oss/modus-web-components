@@ -1,0 +1,82 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta
+  title="Introduction/Getting Started"
+  parameters={{
+    previewTabs: {
+      canvas: {
+        hidden: true,
+      },
+    },
+    options: {
+      isToolshown: false,
+    },
+    viewMode: 'docs',
+  }}
+/>
+
+# Getting Started
+
+The Modus Web Components package is hosted publicly through the [npm package registry](https://www.npmjs.com/package/@trimble-oss/modus-web-components). To consume this package, you'll need to have the [npm CLI](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) installed.
+
+## Installation
+
+1. From the root of your application, run the command:
+
+```bash
+npm install @trimble-oss/modus-web-components --save
+```
+
+2. Make sure Open Sans, and Google Material Icons are available browser resources in your application:
+
+```html
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=fallback"
+  rel="stylesheet" />
+<link
+  href="https://fonts.googleapis.com/icon?family=Material+Icons&display=block"
+  rel="stylesheet" />
+```
+
+3. The package exposes the `defineCustomElements()` method which will define every component in the bundle. It does not run automatically, so you must import it and execute it yourself. We recommend you do this near the root of your application like so:
+
+```javascript
+import { defineCustomElements } from '@trimble-oss/modus-web-components/loader';
+
+defineCustomElements();
+```
+
+- You can now reference the Modus Web Components like any other standard HTML element:
+
+```html
+<modus-alert message="You've installed Modus Web Components!" type="success" />
+```
+
+## Dark Mode
+
+By default, `light` theme is applied on the components without any additional CSS. Inorder to enable `dark` theme you need to reference the `./node_modules/@trimble-oss/modus-web-components/dist/modus-web-components/modus-web-components.css` CSS file. Themes can be toggled globally on the `<html>, <body>` elements, or on specific components using `data-mwc-theme` attribute.
+
+<modus-button color="primary" data-mwc-theme="light">Primary</modus-button>
+
+```html
+<modus-button color="primary" data-mwc-theme="light">Primary</modus-button>
+```
+
+<modus-button color="primary" data-mwc-theme="dark">Primary</modus-button>
+
+```html
+<modus-button color="primary" data-mwc-theme="dark">Primary</modus-button>
+```
+
+## Recommendations
+
+- Abstract away from 3rd party libraries. Consider wrapping each Modus Web Component in a component native to your application.
+
+## GitHub
+
+<img src={'github.svg'} height={'20'} width={'20'} alt="GitHub Icon" /> <a
+  href="https://github.com/trimble-oss/modus-web-components"
+  target="_blank">
+  Modus Web Component Library (built on Stencil)
+</a>

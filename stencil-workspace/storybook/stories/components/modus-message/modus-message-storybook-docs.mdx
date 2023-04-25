@@ -1,0 +1,37 @@
+import { Anchor } from '@storybook/addon-docs';
+
+# Message
+
+---
+
+[Modus Message](https://modus.trimble.com/components/messages/) web components are referenced using the `<modus-message>` custom HTML element.
+
+<Anchor storyId="components-message--default" />
+
+### Default
+
+<modus-message type="info">Info message.</modus-message>
+
+<Anchor storyId="components-message--question" />
+
+### Question
+
+<modus-message type="question">Question message?</modus-message>
+
+```html
+<modus-message type="info">Info message.</modus-message>
+<modus-message type="question">Question message?</modus-message>
+```
+
+### Properties
+
+| Property    | Attribute    | Description                          | Type                 | Default     |
+| ----------- | ------------ | ------------------------------------ | -------------------- | ----------- |
+| `ariaLabel` | `aria-label` | (optional) The message's aria-label. | `string`             | `undefined` |
+| `icon`      | `icon`       | (optional) The message's icon.       | `string`             | `undefined` |
+| `type`      | `type`       | (optional) The message's type.       | `"info", "question"` | `'info'`    |
+
+### Accessibility
+
+- Message has `role` of `note`.
+- Message gets an `aria-label` provided by the `aria-label` property input.

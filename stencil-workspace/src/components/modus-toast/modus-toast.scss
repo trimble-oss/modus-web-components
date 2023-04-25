@@ -1,0 +1,62 @@
+@import './modus-toast.vars';
+
+.modus-toast {
+  align-items: center;
+  background-color: $modus-toast-bg;
+  border: $rem-1px solid $modus-toast-border-color;
+  border-radius: $rem-2px;
+  box-shadow: 0 0 8px rgba(36, 35, 45, 0.3);
+  color: $modus-toast-color;
+  display: flex;
+  flex-direction: row;
+  font-family: $primary-font;
+  font-size: $rem-14px;
+  height: 2.6875rem;
+  padding: 0 $rem-16px;
+
+  .icon {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    min-width: $rem-18px;
+  }
+
+  .text {
+    margin: 0 $rem-8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .close {
+    margin-left: auto;
+
+    &:hover svg path {
+      opacity: 0.5;
+    }
+  }
+
+  @each $color, $value in $modus-toast-variants {
+    &.#{$color} {
+      background-color: var(--modus-toast-#{$color}-bg, map-get($value, 'bg'));
+      border-color: var(--modus-toast-#{$color}-border-color, map-get($value, 'border-color'));
+      color: var(--modus-toast-#{$color}-color, if(map-get($value, 'color') == null, $modus-toast-color, map-get($value, 'color')));
+
+      .close {
+        svg path {
+          fill: var(--modus-toast-#{$color}-close-btn-color, if(map-get($value, 'close-button') == null, $modus-toast-close-btn-color, map-get($value, 'close-button')));
+        }
+      }
+
+      @if $color == 'dark' {
+        svg:not(.icon-close) path {
+          fill: var(--modus-toast-#{$color}-color, if(map-get($value, 'color') == null, $modus-toast-color, map-get($value, 'color')));
+        }
+      } @else {
+        svg:not(.icon-close) path {
+          fill: var(--modus-toast-#{$color}-border-color, map-get($value, 'border-color'));
+        }
+      }
+    }
+  }
+}

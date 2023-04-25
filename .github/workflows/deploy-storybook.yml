@@ -5,6 +5,9 @@ on:
 jobs:
   deploy-storybook:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./stencil-workspace
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -12,7 +15,7 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v3
         with:
-          node-version: '14.x'
+          node-version: '16.x'
 
       - name: Full Build
         run: npm run full
@@ -20,7 +23,7 @@ jobs:
       - name: Deploy Storybook to Netlify
         uses: netlify/actions/cli@master
         with:
-          args: deploy --dir=storybook/dist --prod
+          args: deploy --dir=stencil-workspace/storybook/dist --prod
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}

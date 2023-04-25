@@ -1,0 +1,209 @@
+# Number Input
+
+---
+
+[Modus Number Input](https://modus.trimble.com/components/inputs/) web components are wrappers around native `<input type="number">` elements. They are referenced using the `<modus-number-input>` custom HTML element.
+
+This component is compatible with Angular reactive forms. This can be achieved through the implementation of a simple directive.
+
+### Default
+
+<modus-number-input label="Number Input Demo 1" placeholder="Placeholder" required="true"></modus-number-input><br />
+<modus-number-input disabled="true" label="Number Input Demo 2" placeholder="Placeholder" required="true"></modus-number-input><br />
+<modus-number-input helper-text="Helper demo" label="Number Input Demo 3" placeholder="Placeholder"></modus-number-input><br />
+<modus-number-input error-text="Error demo" label="Number Input Demo 4" placeholder="Placeholder"></modus-number-input><br />
+<modus-number-input valid-text="Valid demo" label="Number Input Demo 5" placeholder="Placeholder"></modus-number-input><br />
+<modus-number-input label="Text Input Demo 6" placeholder="Placeholder" size="large" value="100"></modus-number-input>
+
+```html
+<modus-number-input
+  label="Number Input Demo 1"
+  placeholder="Placeholder"
+  required="true"></modus-number-input>
+<modus-number-input
+  disabled="true"
+  label="Number Input Demo 2"
+  placeholder="Placeholder"
+  required="true"></modus-number-input>
+<modus-number-input
+  helper-text="Helper demo"
+  label="Number Input Demo 3"
+  placeholder="Placeholder"></modus-number-input>
+<modus-number-input
+  error-text="Error demo"
+  label="Number Input Demo 4"
+  placeholder="Placeholder"></modus-number-input>
+<modus-number-input
+  valid-text="Valid demo"
+  label="Number Input Demo 5"
+  placeholder="Placeholder"></modus-number-input>
+<modus-number-input
+  label="Text Input Demo 6"
+  placeholder="Placeholder"
+  size="large"
+  value="100"></modus-number-input>
+```
+
+### Properties
+
+<section>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Options</th>
+        <th>Default Value</th>
+        <th>Required</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>aria-label</td>
+        <td>The input's aria-label</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>disabled</td>
+        <td>Whether the input is disabled</td>
+        <td>boolean</td>
+        <td></td>
+        <td>false</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>error-text</td>
+        <td>The input's error state text</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>helper-text</td>
+        <td>The input's helper text displayed below the input</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>label</td>
+        <td>The input's label</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>max-value</td>
+        <td>The input's maximum value</td>
+        <td>number</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>min-value</td>
+        <td>The input's minimum value</td>
+        <td>number</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>placeholder</td>
+        <td>The input's placeholder text</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>read-only</td>
+        <td>Whether the input's content is read-only</td>
+        <td>boolean</td>
+        <td></td>
+        <td>false</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>required</td>
+        <td>Whether the input is required</td>
+        <td>boolean</td>
+        <td></td>
+        <td>false</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>size</td>
+        <td>The input's size</td>
+        <td>string</td>
+        <td>'medium', 'large'</td>
+        <td>'medium'</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>step</td>
+        <td>The input's step</td>
+        <td>number</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>valid-text</td>
+        <td>The input's valid state text</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>value</td>
+        <td>The input's value</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+### DOM Events
+
+<section>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Emits</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>valueChange</td>
+        <td>Fires on input value change</td>
+        <td>string</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+### Accessibility
+
+- Number Input gets an `aria-label` provided by the `aria-label` property input.
+- Number Input gets an `aria-disabled` set to whether Number Input is disabled.
+- Number Input gets an `aria-placeholder` provided by the `placeholder` property input.
+- Number Input gets an `aria-invalid` set to whether Number Input is invalid.
+- Number Input gets an `aria-readonly` set to whether Number Input is readonly.
+- Number Input gets an `aria-required` set to whether Number Input is required.
+- Number Input gets a `aria-valuemax` provided by the `max-value` property input.
+- Number Input gets a `aria-valuemin` provided by the `min-value` property input.
+- Number Input gets a `aria-valuenow` set to Number Input's current value.

@@ -1,0 +1,33 @@
+@import './modus-progress-bar.vars';
+
+.modus-progress-bar {
+  display: flex;
+  font-family: $primary-font;
+  height: $rem-16px;
+  outline: $rem-1px solid $modus-progress-border-color;
+  width: 100%;
+
+  &.default-background-color {
+    background-color: $modus-progress-bg;
+  }
+
+  .progress {
+    display: flex;
+    font-size: $rem-12px;
+    justify-content: center;
+    overflow: hidden;
+    transition: width 0.6s ease;
+
+    &.default-color {
+      background-color: $modus-progress-bar-bg;
+    }
+
+    &.default-text-color {
+      color: $col_white;
+    }
+  }
+
+  &.compact {
+    height: $rem-8px;
+  }
+}

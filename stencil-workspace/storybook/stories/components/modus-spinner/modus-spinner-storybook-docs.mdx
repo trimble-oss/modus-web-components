@@ -1,0 +1,44 @@
+# Spinner
+
+---
+
+[Modus Spinner](https://modus.trimble.com/components/spinners/) web components indicate progress by showing a loading state. They are referenced using the `<modus-spinner>` custom HTML element.
+
+### Default
+
+<modus-spinner></modus-spinner>
+
+<modus-spinner color="secondary"></modus-spinner>
+
+<modus-spinner color="tertiary"></modus-spinner>
+
+<modus-button color="primary" disabled>
+  <modus-spinner color="white" size=".5rem"></modus-spinner>
+  &nbsp;Loading...
+</modus-button>
+
+```html
+<!-- Spinner -->
+<modus-spinner></modus-spinner>
+
+<modus-spinner color="secondary"></modus-spinner>
+
+<modus-spinner color="tertiary"></modus-spinner>
+
+<!-- Render in another element with different color and size -->
+<modus-button color="primary" disabled>
+  <modus-spinner color="white" size=".5rem"></modus-spinner>
+  &nbsp;Loading...
+</modus-button>
+```
+
+### Properties
+
+| Name    | Description                                                                                                     | Type     | Options | Default Value | Required |
+| ------- | --------------------------------------------------------------------------------------------------------------- | -------- | ------- | ------------- | -------- |
+| `color` | The color of the spinner. It can be a custom color or one of the variants - `primary`, `secondary`, `tertiary`. | `string` |         | `primary`     |          |
+| `size`  | The size of the spinner                                                                                         | `string` |         | `2rem`        |          |
+
+### Accessibility
+
+- Spinner has an `aria-busy` attribute that is set to `true`.

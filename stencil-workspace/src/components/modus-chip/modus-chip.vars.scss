@@ -1,0 +1,52 @@
+// Default Start
+$modus-chip-bg: var(--modus-chip-bg, #cbcdd6) !default;
+$modus-chip-color: var(--modus-chip-color, #353a40) !default;
+$modus-chip-disabled-opacity: var(--modus-chip-disabled-opacity, 0.3) !default;
+
+// Hover
+$modus-chip-hover-bg: var(--modus-chip-hover-bg, #e0e1e9) !default;
+$modus-chip-hover-color: $modus-chip-color;
+
+// Active
+$modus-chip-active-bg: var(--modus-chip-active-bg, #217cbb4d) !default;
+$modus-chip-active-color: var(--modus-chip-active-color, #252a2e) !default;
+
+// Error
+$modus-chip-error-bg: var(--modus-chip-error-bg, #fbd4d7) !default;
+$modus-chip-error-color: var(--modus-chip-error-color, #ab1f26) !default;
+
+// Error Active
+$modus-chip-error-active-bg: var(--modus-chip-error-active-bg, #adaeb6) !default;
+$modus-chip-error-active-border-color: var(--modus-chip-error-active-border-color, #adaeb6) !default;
+$modus-chip-error-active-color: var(--modus-chip-error-active-color, #000) !default;
+
+// Default End
+
+// Outline Start
+$modus-chip-outline-border-color: var(--modus-chip-outline-border-color, #90939f) !default;
+$modus-chip-outline-color: var(--modus-chip-outline-color, #353a40) !default;
+$modus-chip-outline-disabled-opacity: var(--modus-chip-outline-disabled-opacity, 0.3) !default;
+
+// Hover
+$modus-chip-outline-hover-bg: var(--modus-chip-outline-hover-bg, #e0e1e9) !default;
+$modus-chip-outline-hover-border-color: var(--modus-chip-outline-hover-border-color, #90939f) !default;
+$modus-chip-outline-hover-color: var(--modus-chip-outline-hover-color, #585c65) !default;
+
+// Active
+$modus-chip-outline-active-bg: var(--modus-chip-outline-active-bg, #dcedf9) !default;
+$modus-chip-outline-active-border-color: var(--modus-chip-outline-active-border-color, #217cbb) !default;
+$modus-chip-outline-active-color: var(--modus-chip-outline-active-color, #252a2e) !default;
+
+// Error
+$modus-chip-outline-error-bg: var(--modus-chip-outline-error-bg, #fbd4d7) !default;
+$modus-chip-outline-error-border-color: var(--modus-chip-outline-error-border-color, #ab1f26) !default;
+$modus-chip-outline-error-color: var(--modus-chip-outline-error-color, #ab1f26) !default;
+
+// Error Active
+$modus-chip-outline-error-active-bg: var(--modus-chip-outline-error-active-bg, #d3d5dc) !default;
+$modus-chip-outline-error-active-border-color: var(--modus-chip-outline-error-active-border-color, #7a7b80) !default;
+$modus-chip-outline-error-active-color: var(--modus-chip-outline-error-active-color, #252a2e) !default;
+
+// Outline End
+
+// Close icon

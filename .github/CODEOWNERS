@@ -1,0 +1,14 @@
+# CODEOWNERS
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+## Folders
+
+*                    @trimble-oss/mwc-review
+
+## File Types
+
+.cspell.json              @coliff
+*.css                     @coliff
+*.html                    @coliff
+*.scss                    @coliff
+staticwebapp.config.json  @coliff

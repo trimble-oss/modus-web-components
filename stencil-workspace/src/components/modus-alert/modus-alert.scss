@@ -1,0 +1,128 @@
+@import './modus-alert.vars';
+
+div.alert {
+  align-items: center;
+  border: 1px solid;
+  border-left-width: $alert-left-border-width;
+  border-radius: 2px;
+  display: flex;
+  font-family: $primary-font;
+  height: 56px;
+  padding: 0 $rem-16px;
+  position: relative;
+
+  &.type-error {
+    background-color: $modus-alert-danger-bg;
+    border-color: $modus-alert-danger-border-color;
+    color: $modus-alert-danger-color;
+
+    .icon-check-circle,
+    .icon-error,
+    .icon-info,
+    .icon-warning {
+      path {
+        fill: $modus-alert-danger-color;
+      }
+    }
+  }
+
+  &.type-info {
+    background-color: $modus-alert-primary-bg;
+    border-color: $modus-alert-primary-border-color;
+    color: $modus-alert-primary-color;
+
+    .icon-check-circle,
+    .icon-error,
+    .icon-info,
+    .icon-warning {
+      path {
+        fill: $modus-alert-primary-color;
+      }
+    }
+  }
+
+  &.type-info-gray {
+    background-color: $modus-alert-secondary-bg;
+    border-color: $modus-alert-secondary-border-color;
+    color: $modus-alert-secondary-color;
+
+    .icon-check-circle,
+    .icon-error,
+    .icon-info,
+    .icon-warning {
+      path {
+        fill: $modus-alert-secondary-color;
+      }
+    }
+  }
+
+  &.type-info-gray-dark {
+    background-color: $modus-alert-dark-bg;
+    border-color: $modus-alert-dark-border-color;
+    color: $modus-alert-dark-color;
+
+    .icon-check-circle,
+    .icon-error,
+    .icon-info,
+    .icon-warning {
+      path {
+        fill: $modus-alert-dark-color;
+      }
+    }
+  }
+
+  &.type-success {
+    background-color: $modus-alert-success-bg;
+    border-color: $modus-alert-success-border-color;
+    color: $modus-alert-success-color;
+
+    .icon-check-circle,
+    .icon-error,
+    .icon-info,
+    .icon-warning {
+      path {
+        fill: $modus-alert-success-color;
+      }
+    }
+  }
+
+  &.type-warning {
+    background-color: $modus-alert-warning-bg;
+    border-color: $modus-alert-warning-border-color;
+    color: $modus-alert-warning-color;
+
+    .icon-check-circle,
+    .icon-error,
+    .icon-info,
+    .icon-warning {
+      path {
+        fill: $modus-alert-warning-color;
+      }
+    }
+  }
+
+  .message {
+    font-size: $rem-14px;
+    font-weight: $alert-font-weight;
+  }
+
+  .icon-check-circle,
+  .icon-error,
+  .icon-info,
+  .icon-warning {
+    margin-right: 8px;
+  }
+
+  .icon-close {
+    cursor: pointer;
+    margin-left: auto;
+
+    path {
+      fill: $modus-alert-close-color;
+    }
+
+    &:hover {
+      opacity: $modus-alert-close-hover-opacity;
+    }
+  }
+}

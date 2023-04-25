@@ -1,0 +1,118 @@
+@import './modus-number-input.vars';
+
+.modus-number-input {
+  display: inline-flex;
+  flex-direction: column;
+  font-family: $primary-font;
+  width: 100%;
+
+  label {
+    color: $modus-input-label-color;
+    font-size: $rem-12px;
+    margin-bottom: $rem-4px;
+
+    span {
+      color: $modus-input-bottom-line-color;
+      margin: $rem-4px;
+    }
+  }
+
+  .label-container {
+    align-items: baseline;
+    display: flex;
+
+    .required {
+      color: $modus-input-validation-error-color;
+      margin-left: $rem-4px;
+    }
+  }
+
+  .input-container {
+    align-items: center;
+    background-color: $modus-input-bg;
+    border: $rem-1px solid $modus-input-border-color;
+    border-bottom-color: $modus-input-bottom-line-color;
+    display: flex;
+    flex-direction: row;
+    height: 32px;
+
+    input {
+      background-color: transparent;
+      border: none;
+      color: $modus-input-color;
+      outline: 0;
+      padding: 0 $rem-8px;
+      width: 100%;
+
+      &::placeholder {
+        color: $modus-input-hint-text-color;
+      }
+    }
+
+    &:focus-within,
+    &.error,
+    &.valid {
+      border-bottom-width: $rem-2px;
+      height: 31px; // Counteract bottom border width.
+    }
+
+    &:focus-within {
+      border-bottom-color: $modus-input-bottom-line-active-color;
+    }
+
+    &.error {
+      border-bottom-color: $modus-input-validation-error-color;
+    }
+
+    &.valid {
+      border-bottom-color: $modus-input-validation-success-color;
+    }
+
+    &.large {
+      height: 48px;
+
+      input {
+        font-size: $rem-14px;
+        height: 47px;
+      }
+
+      &:focus-within,
+      &.error,
+      &.valid {
+        height: 47px; // Counteract bottom border width.
+      }
+    }
+  }
+
+  .sub-text {
+    font-size: $rem-10px;
+    margin-top: $rem-4px;
+
+    &.helper {
+      color: $modus-input-label-color;
+    }
+
+    &.error {
+      color: $modus-input-validation-error-color;
+    }
+
+    &.valid {
+      color: $modus-input-validation-success-color;
+    }
+  }
+
+  &.disabled {
+    pointer-events: none;
+
+    .input-container {
+      background-color: $modus-input-disabled-bg;
+      border: $rem-1px solid $modus-input-disabled-border-color;
+      border-bottom-color: $modus-input-disabled-bottom-line-color;
+
+      input {
+        background-color: transparent;
+        color: $modus-input-disabled-color;
+      }
+    }
+  }
+}

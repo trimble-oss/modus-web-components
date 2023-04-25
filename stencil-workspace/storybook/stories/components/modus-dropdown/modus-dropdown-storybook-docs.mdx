@@ -1,0 +1,58 @@
+# Dropdown
+
+---
+
+[Modus Dropdown](https://modus.trimble.com/components/dropdowns/) web components are wrappers around 2 elements rendered in HTML slot elements. The dropdown links a toggle element to a list element. Clicking the toggle element shows/hides the list element. While clicking the list element or anywhere else on the page hides the list element. They are referenced using the `<modus-dropdown>` custom HTML element.
+
+#### Implementation Details
+
+- The toggle-element-id property is required and must match the id of the element you expect to toggle the list.
+- 2 slots are provided named 'dropdownToggle' and 'dropdownList'.
+- The dropdownList slot was built to work with the `<modus-list>` and `<modus-list-item>` elements. The item size property should be set to 'condensed'.
+- The list will show 5 condensed items before adding a vertical scroll.
+
+### Default
+
+<modus-dropdown toggle-element-id="toggleElement">
+  <modus-button id="toggleElement" slot="dropdownToggle">
+    Dropdown
+  </modus-button>
+  <modus-list slot="dropdownList">
+    <modus-list-item size="condensed">Item 1</modus-list-item>
+    <modus-list-item size="condensed">Item 2</modus-list-item>
+    <modus-list-item size="condensed">Item 3</modus-list-item>
+  </modus-list>
+</modus-dropdown>
+
+```html
+<modus-dropdown toggle-element-id="toggleElement">
+  <modus-button id="toggleElement" slot="dropdownToggle">Dropdown</modus-button>
+  <modus-list slot="dropdownList">
+    <modus-list-item size="condensed">Item 1</modus-list-item>
+    <modus-list-item size="condensed">Item 2</modus-list-item>
+    <modus-list-item size="condensed">Item 3</modus-list-item>
+  </modus-list>
+</modus-dropdown>
+```
+
+### Properties
+
+| Property          | Attribute           | Description                                                                                      | Type                                                                | Default     |
+| ----------------- | ------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------- | ----------- |
+| `animateList`     | `animate-list`      | Whether to apply list opening animation.                                                         | `boolean`                                                           | `false`     |
+| `ariaLabel`       | `aria-label`        | (optional) The dropdown's aria-label.                                                            | `string`                                                            | `undefined` |
+| `customPlacement` | --                  | (optional) Determines custom dropdown placement offset.                                          | `{ top?: number; right?: number; bottom?: number; left?: number; }` | `undefined` |
+| `disabled`        | `disabled`          | (optional) Disables the dropdown.                                                                | `boolean`                                                           | `undefined` |
+| `placement`       | `placement`         | (optional) The placement of the dropdown in related to the toggleElement.                        | `"bottom", "left", "right", "top"`                                  | `'bottom'`  |
+| `toggleElementId` | `toggle-element-id` | (required) The element id that the list renders near and that triggers the toggling of the list. | `string`                                                            | `undefined` |
+
+### Events
+
+| Event           | Description                            | Type               |
+| --------------- | -------------------------------------- | ------------------ |
+| `dropdownClose` | An event that fires on dropdown close. | `CustomEvent<any>` |
+
+### Accessibility
+
+- Dropdown has `role` of `listbox`.
+- When the Dropdown Toggle has focus, **Enter** toggles the dropdown.

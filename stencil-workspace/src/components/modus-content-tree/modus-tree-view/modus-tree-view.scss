@@ -1,0 +1,42 @@
+@import './../modus-tree-view-item.vars';
+
+.drag-content {
+  cursor: grabbing !important;
+  left: 0;
+  opacity: 0.9;
+  position: fixed;
+  top: 0;
+  z-index: 99999;
+
+  &.drop-allow {
+    outline: 2px dashed $modus-tree-view-item-drag-allow !important;
+  }
+
+  &.drop-block {
+    outline: 2px dashed $modus-tree-view-item-drag-error !important;
+  }
+
+  .tree-item {
+    align-items: center;
+    background-color: $modus-tree-view-item-bg;
+    border: $rem-1px solid $modus-tree-view-item-border-color;
+    color: $modus-tree-view-item-color;
+    display: flex;
+    font-family: $primary-font;
+    font-size: $rem-16px;
+    min-height: $list-group-item-height;
+    width: 100%;
+
+    .icon-slot {
+      visibility: hidden;
+    }
+  }
+}
+
+:host {
+  display: block;
+}
+
+ul {
+  padding: 0;
+}

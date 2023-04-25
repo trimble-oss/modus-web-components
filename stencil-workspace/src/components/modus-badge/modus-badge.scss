@@ -1,0 +1,98 @@
+@import './modus-badge.vars';
+
+div.badge {
+  align-items: center;
+  background-color: $modus-badge-primary-bg;
+  border-radius: 2px;
+  color: $modus-badge-primary-color;
+  display: inline-flex;
+  font-family: $primary-font;
+  font-size: $rem-12px;
+  font-weight: $badge-font-weight;
+  height: 20px;
+  padding: 0 8px;
+  position: relative;
+
+  &.color-danger {
+    background-color: $modus-badge-danger-bg;
+    color: $modus-badge-danger-color;
+  }
+
+  &.color-dark {
+    background-color: $modus-badge-dark-bg;
+    color: $modus-badge-dark-color;
+  }
+
+  &.color-secondary {
+    background-color: $modus-badge-secondary-bg;
+    color: $modus-badge-secondary-color;
+  }
+
+  &.color-success {
+    background-color: $modus-badge-success-bg;
+    color: $modus-badge-success-color;
+  }
+
+  &.color-tertiary {
+    background-color: $modus-badge-tertiary-bg;
+    color: $modus-badge-tertiary-color;
+  }
+
+  &.color-warning {
+    background-color: $modus-badge-warning-bg;
+    color: $modus-badge-warning-color;
+  }
+
+  &.type-text {
+    background-color: unset;
+    color: $modus-badge-text-primary;
+
+    &.color-danger {
+      color: $modus-badge-text-danger;
+    }
+
+    &.color-dark {
+      color: $modus-badge-text-dark;
+    }
+
+    &.color-secondary {
+      color: $modus-badge-text-secondary;
+    }
+
+    &.color-success {
+      color: $modus-badge-text-success;
+    }
+
+    &.color-tertiary {
+      color: $modus-badge-text-tertiary;
+    }
+
+    &.color-warning {
+      color: $modus-badge-text-warning;
+    }
+  }
+
+  &.type-counter {
+    border-radius: 20px;
+  }
+
+  &.size-small {
+    font-size: $rem-10px;
+    height: 14px;
+    padding: 0 4px;
+
+    &.type-counter {
+      border-radius: 14px;
+    }
+  }
+
+  &.size-large {
+    font-size: $rem-16px;
+    height: 28px;
+    padding: 0 12px;
+
+    &.type-counter {
+      border-radius: 28px;
+    }
+  }
+}

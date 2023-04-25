@@ -1,0 +1,254 @@
+import { Story } from '@storybook/addon-docs';
+
+# Data Table
+
+<modus-alert type="warning" message="This component is under construction!"></modus-alert>
+
+---
+
+[Modus Data Table](https://modus.trimble.com/components/tables/) web components are wrappers around the HTML table element.
+They organize information in a way that’s easy to scan, so that users can look for patterns and insights.
+They are referenced using the `<modus-data-table>` custom HTML element.
+
+## Overview
+
+- [Implementation Details](#implementation-details)
+- [Inputs](#inputs)
+- [Sorting](#sorting)
+- [Selection](#selection)
+- [Display](#display)
+- [Row Actions](#row-actions)
+- [Cell Types](#cell-types)
+- [Types](#types)
+- [Properties](#properties)
+- [Events](#events)
+
+---
+
+### Default
+
+<Story id="components-data-table--default" height={'250px'} />
+
+```html
+<div style="width: 500px">
+  <modus-data-table />
+</div>
+<script>
+  document.querySelector('modus-data-table').columns = [
+    'Name',
+    'Age',
+    'Contacted',
+  ];
+  document.querySelector('modus-data-table').data = [
+    ['John', 25, false],
+    ['Jane', 26, false],
+    ['Joe', 27, true],
+  ];
+</script>
+```
+
+### Implementation Details
+
+- The table `columns` property accepts an array of strings, or an array of objects.
+  - Defining the columns with objects allows you to define extra properties on the column/column cells.
+- The table `data` property accepts either a 2D array of primitive types (`string`, `number`, or `boolean`) or an array of objects.
+  - Note: the objects in `data` get their property names mapped to each column `id`.
+- The table needs a unique `id` for each column that maps to each cell in that column. If it is not provided, the table will generate a unique id for each column.
+
+### Inputs
+
+Refer to the **Default** example above to see how to define simple `columns` and `data` in the table.
+
+To define columns and data in the table _using objects_:
+
+```html
+<modus-data-table />
+<script>
+  document.querySelector('modus-data-table').columns = [
+    { display: 'Name', id: 'name', width: '50%' },
+    { display: 'Age', id: 'age', align: 'right' },
+    { display: 'Contacted', id: 'contacted' },
+  ];
+
+  const john = { name: 'John', age: 25, contacted: false };
+  const jane = { name: 'Jane', age: 26, contacted: false };
+  const joe = { name: 'Joe', age: 27, contacted: true };
+  document.querySelector('modus-data-table').data = [john, jane, joe];
+</script>
+```
+
+### Sorting
+
+- The table uses a tri-state for its sorting:
+  - `none`: no sorting is applied
+  - `asc`: ascending sort
+  - `desc`: descending sort
+- The table sorting options can be set with the optional `sortOptions` property. The property accepts a `ModusTableSortOptions` object.
+  - The object defines whether the table can be sorted on header click, and if the sort is done on the client or server-side.
+- If the table is sortable, it will output the `sort` event on header click. This event's detail is a `ModusDataTableSortEvent` object.
+- If the table's `serverSide` sort option is `false`, it will sort the columns on the client-side. Otherwise, it is up to the consumer to update the table's `data` property with the sorted data.
+
+### Selection
+
+- The `TRow` object has two optional properties that are used for selection:
+  - `_id`: The row's unique id. Output in the event detail on row selection.
+  - `_selected`: Whether the row is selected. You can set this to change selection state with code.
+- The `selectionOptions` property accepts a `ModusTableSelectionOptions` object.
+  - The options define whether the table rows can be selected, and if the selection uses a checkbox column.
+- When a selection changes, the `selection` event fires detailing the currently selected rows' IDs.
+
+### Display
+
+- The table's display can be configured with the `displayOptions` prop. The property accepts a `ModusTableDisplayOptions` object:
+  - `borderless`: Whether the table has a border. Defaults to true.
+  - `cellBorderless`: Whether the table cells have a border. Default to true.
+  - `rowStripe`: Whether the table rows have a stripe. Defaults to false.
+  - `size`: The table's size. Defaults to 'large'.
+
+### Row Actions
+
+- The table's `rowActions` can be set to give each table row a context menu.
+- When a row action is clicked, a `ModusDataTableRowActionClickEvent` is fired with the relevant `actionId`, and `rowId`.
+  - Each row action takes an `_id` (which will be emitted in the event detail), and a `display` object that sets the `text` and optional `icon`.
+    ```ts
+    document.querySelector('modus-data-table').rowActions = [
+      {
+        _id: '0',
+        display: {
+          text: 'Delete',
+          icon: 'delete',
+        },
+      },
+      {
+        _id: '1',
+        display: {
+          text: 'Edit',
+        },
+      },
+    ];
+    ```
+
+### Cell Types
+
+- The Data Table accepts `number`, `string`, `booleans`, `ModusDataTableCellBadge` and `ModusDataTableCellLink` as data.
+  - `ModusDataTableCellBadge` displays a Modus Badge in the center of the cell. You must pass `badge` as the data's `_type` property. This cell type accepts all properties to configure a Modus Badge (see Types below).
+    ```ts
+    const data = [
+      { badgeColumnId: { _type: 'badge', text: 'Some badge text' } },
+    ];
+    ```
+  - `ModusDataTableCellLink` displays a Link in the cell. You must pass `link` as the data's `_type` property, similarly to the badge above. This cell type accepts `display` and `url` (see Types below).
+    ```ts
+    const data = [
+      {
+        linkColumnId: {
+          _type: 'link',
+          display: 'Some link text',
+          url: 'https://www.google.com',
+        },
+      },
+    ];
+    ```
+
+### Types
+
+```ts
+type TCell =
+  | number
+  | string
+  | boolean
+  | ModusDataTableCellBadge
+  | ModusDataTableCellLink;
+type TRow = {
+  [key: string]: TCell;
+} & {
+  _id?: string;
+  _selected?: boolean;
+};
+
+interface TColumn {
+  align?: 'left' | 'right';
+  display: string;
+  id?: string;
+  readonly?: boolean;
+  width?: string;
+}
+
+interface ModusDataTableCellBadge {
+  _type: 'badge'; // Used internally to identify the type of cell. Does not set the badge's type.
+  color?:
+    | 'danger'
+    | 'dark'
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'tertiary'
+    | 'warning';
+  text: string;
+  type?: 'counter' | 'default' | 'text';
+}
+
+interface ModusDataTableCellLink {
+  _type: 'link';
+  display: string;
+  url: string;
+}
+
+interface ModusDataTableSort {
+  columnId: string;
+  direction: 'asc' | 'desc' | 'none';
+}
+
+interface ModusDataTableSortEvent extends ModusDataTableSort {}
+interface ModusDataTableRowActionClickEvent {
+  actionId: string;
+  rowId: string;
+}
+
+interface ModusDataTableDisplayOptions {
+  animateRowActionsDropdown?: boolean;
+  borderless?: boolean;
+  cellBorderless?: boolean;
+  rowStripe?: boolean;
+  size?: 'small' | 'large';
+}
+
+interface ModusDataTableRowAction {
+  _id: string;
+  display: {
+    icon?: string;
+    text: string;
+  };
+}
+
+interface ModusTableSelectionOptions {
+  canSelect: boolean;
+  checkboxSelection: boolean;
+}
+
+interface ModusTableSortOptions {
+  canSort: boolean;
+  serverSide: boolean;
+}
+```
+
+### Properties
+
+| Property               | Attribute | Description                                | Type                           | Default                                                                                                         |
+| ---------------------- | --------- | ------------------------------------------ | ------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| `columns` _(required)_ | --        |                                            | `TColumn[], string[]`          | `undefined`                                                                                                     |
+| `data` _(required)_    | --        |                                            | `TCell[][], TRow[]`            | `undefined`                                                                                                     |
+| `displayOptions`       | --        | Options for data table display.            | `ModusDataTableDisplayOptions` | `{ animateRowActionsDropdown: false, borderless: true, cellBorderless: true, rowStripe: false, size: 'large' }` |
+| `rowActions`           | --        | Actions that can be performed on each row. | `ModusDataTableRowAction[]`    | `[]`                                                                                                            |
+| `selectionOptions`     | --        | Options for data table item selection.     | `ModusTableSelectionOptions`   | `{ canSelect: false, checkboxSelection: false, }`                                                               |
+| `sortOptions`          | --        | Options for data table column sort.        | `ModusTableSortOptions`        | `{ canSort: false, serverSide: false, }`                                                                        |
+
+### Events
+
+| Event            | Description                                       | Type                                                |
+| ---------------- | ------------------------------------------------- | --------------------------------------------------- |
+| `cellLinkClick`  | An event that fires on cell link click.           | `CustomEvent<ModusDataTableCellLink>`               |
+| `rowActionClick` | An event that fires when a row action is clicked. | `CustomEvent<{ actionId: string; rowId: string; }>` |
+| `rowDoubleClick` | An event that fires on row double click.          | `CustomEvent<string>`                               |
+| `selection`      | An event that fires on selection change.          | `CustomEvent<string[]>`                             |
+| `sort`           | An event that fires on column sort.               | `CustomEvent<ModusDataTableSortEvent>`              |

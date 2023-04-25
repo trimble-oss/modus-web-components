@@ -1,0 +1,19 @@
+$modus-tree-view-item-selected-indicator: var(--modus-tree-view-item-selected-indicator-color, #217cbb) !default;
+$modus-tree-view-item-drag-allow: var(--modus-tree-view-item-drag-border-color, #217cbb) !default;
+$modus-tree-view-item-drag-error: var(--modus-tree-view-item-drag-error-border-color, #da212c) !default;
+
+// Content Tree
+$modus-tree-view-item-bg: var(--modus-tree-view-item-bg, #fff) !default;
+$modus-tree-view-item-border-color: var(--modus-tree-view-item-border-color, #e0e1e9) !default;
+$modus-tree-view-item-color: var(--modus-tree-view-item-color, #252a2e) !default;
+$modus-tree-view-item-chevron-color: var(--modus-chevron-color, #90939f) !default;
+
+// Hover
+$modus-tree-view-item-hover-bg: var(--modus-tree-view-item-hover-bg, #e0e1e9) !default;
+
+// Selected
+$modus-tree-view-item-selected-bg: var(--modus-tree-view-item-selected-bg, #dcedf9) !default;
+$modus-tree-view-item-selected-border-color: var(--modus-tree-view-item-selected-border-color, #dcedf9) !default;
+
+// Disabled
+$modus-tree-view-item-disabled-color: var(--modus-tree-view-item-disabled-color, #252a2e4d) !default;

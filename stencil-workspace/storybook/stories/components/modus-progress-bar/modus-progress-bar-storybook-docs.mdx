@@ -1,0 +1,64 @@
+# Progress Bar
+
+---
+
+[Modus Progress Bar](https://modus.trimble.com/components/progress-bars/) web components display the completion progress of a task. They are referenced using the `<modus-progress-bar>` custom HTML element.
+
+### Default
+
+<div>
+  <modus-progress-bar
+    value="3"
+    max-value="4"
+    min-value="0"
+    text="75%"></modus-progress-bar>
+</div>
+
+<Anchor storyId="components-progress-bar--default" />
+
+### Compact
+
+<div>
+  <modus-progress-bar
+    value="3"
+    max-value="4"
+    min-value="0"
+    size="compact"></modus-progress-bar>
+</div>
+
+<Anchor storyId="components-progress-bar--compact" />
+
+```html
+<modus-progress-bar
+  value="3"
+  max-value="4"
+  min-value="0"
+  text="75%"></modus-progress-bar>
+<modus-progress-bar
+  value="3"
+  max-value="4"
+  min-value="0"
+  size="compact"></modus-progress-bar>
+```
+
+### Properties
+
+| Name               | Description                   | Type                   | Options | Default Value                | Required |
+| ------------------ | ----------------------------- | ---------------------- | ------- | ---------------------------- | -------- |
+| `aria-label`       | The progress bar's aria-label | `string`               |         |                              |          |
+| `background-color` | The bar's background color    | `string`               |         | `#FFFFFF` (Trimble White)    |          |
+| `color`            | The bar's color               | `string`               |         | `#005F9E` (Trimble Blue Mid) |          |
+| `max-value`        | The maximum value             | `number`               |         | 100                          |          |
+| `min-value `       | The minimum value             | `number`               |         | 0                            |          |
+| `size`             | The size of the bar           | `'default'`, `'small'` |         | `default`                    |          |
+| `text`             | The text displayed on the bar | `string`               |         |                              |          |
+| `text-color`       | The text color                | `string`               |         | `#FFFFFF` (Trimble White)    |          |
+| `value`            | The progress value            | `number`               |         | 0                            |          |
+
+### Accessibility
+
+- Progress Bar has `role` of `progressbar`.
+- Progress Bar gets an `aria-label` provided by the `aria-label` property input.
+- Progress Bar gets an `aria-maxvalue` provided by the `max-value` property input.
+- Progress Bar gets an `aria-minvalue` provided by the `min-value` property input.
+- Progress Bar gets an `aria-valuenow` set to the current value.

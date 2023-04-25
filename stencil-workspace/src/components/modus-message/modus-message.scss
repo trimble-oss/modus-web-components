@@ -1,0 +1,34 @@
+@import './modus-message.vars';
+
+.modus-message {
+  align-items: center;
+  border-radius: $rem-2px;
+  display: flex;
+  font-family: $primary-font;
+  font-size: $rem-14px;
+  padding: $rem-8px;
+
+  .icon {
+    align-items: center;
+    display: flex;
+    margin-right: $rem-8px;
+  }
+
+  &.info {
+    background-color: $modus-message-info-bg;
+    color: $modus-message-info-color;
+
+    svg path {
+      fill: $modus-message-info-color !important;
+    }
+  }
+
+  &.question {
+    background-color: $modus-message-question-bg;
+    color: $modus-message-question-color;
+
+    svg path {
+      fill: $modus-message-question-color !important;
+    }
+  }
+}

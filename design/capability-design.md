@@ -4,7 +4,7 @@ This document breaks the site into front-end capabilities. By breaking an applic
 
 Capability based design requires less knowledge up front about individual features. Instead it focuses on providing solutions for more general front-end questions. A sample of these types of questions are...
 
-- How large will the application be? 
+- How large will the application be?
 - How many teams will be contributing?
 - How important is performance?
 - How much front-end experience does the development team have?
@@ -42,7 +42,7 @@ This project provides Trimble Modus Elements as a web component library. Web com
 
 **Data** N/A
 
-**3rd Party Libraries** All 3rd party libraries are retrieved via NPM. The `npm audit` command will be run to discover package vulnerabilities.
+**3rd Party Libraries** All 3rd party libraries are retrieved via npm. The `npm audit` command will be run to discover package vulnerabilities.
 
 **Testing** Possibly white source but likely just `npm audit` to start with.
 
@@ -76,7 +76,7 @@ This project provides Trimble Modus Elements as a web component library. Web com
 
 ### Manage State
 
-**Patterns** Stencil provides a built in state management pattern called the state decorator.
+**Patterns** Stencil provides a built-in state management pattern called the state decorator.
 
 **Technology** Stencil
 
@@ -96,9 +96,9 @@ This project provides Trimble Modus Elements as a web component library. Web com
 
 ### Manage 3rd Party Libraries & Frameworks
 
-**Patterns** for retrieving 3rd party libraries are package registry (NPM or Yarn), CDN, and forking. NPM is preferred for larger libraries or those needed by the IDE during development. Forking is highly discouraged as it leaves all future maintenance and security concerns on us.
+**Patterns** for retrieving 3rd party libraries are package registry (npm or Yarn), CDN, and forking. npm is preferred for larger libraries or those needed by the IDE during development. Forking is highly discouraged as it leaves all future maintenance and security concerns on us.
 
-*NPM Packages*
+*npm Packages*
 
 - eslint
 - @stencil/core
@@ -112,7 +112,7 @@ This project provides Trimble Modus Elements as a web component library. Web com
 
 *CDN Resources*
 
-- 
+-
 
 ------
 
@@ -124,7 +124,7 @@ This project provides Trimble Modus Elements as a web component library. Web com
 
 **SEO (Search Engine Optimization)** N/A
 
-**Publishing** The primary method of distribution will be an NPM package but a CDN is also a good idea. Published packages will follow semantic versioning rules.
+**Publishing** The primary method of distribution will be an npm package but a CDN is also a good idea. Published packages will follow semantic versioning rules.
 
 ------
 
@@ -132,15 +132,15 @@ This project provides Trimble Modus Elements as a web component library. Web com
 
 **Documentation** The README at the project root will describe the project, tech, and all of the Modus web components. Stencil will auto generate individual component markdown documentation based on the comments in each component. This documentation can be copied and pasted into the README to provide complete library documentation.
 
-**Enforcing Best Practices** Follow the Stencil docs. Implement eslint and run it as part of the build.
+**Enforcing Best Practices** Follow the Stencil docs. Implement ESLint and run it as part of the build.
 
-**Maintaining Performance Standards** The QA team can enable automated lighthouse tests and thresholds through puppetlabs.
+**Maintaining Performance Standards** The QA team can enable automated Lighthouse tests and thresholds through Puppet.
 
 **Implementing Telemetry** N/A
 
 **Unit Testing** Jest will be used for unit testing. Follow the Stencil docs for best practices.
 
-**End to End Testing** Jest will be used for end to end testing. Follow the Stencil docs for best practices.
+**End to End Testing** Jest will be used for end-to-end testing. Follow the Stencil docs for best practices.
 
 ------
 

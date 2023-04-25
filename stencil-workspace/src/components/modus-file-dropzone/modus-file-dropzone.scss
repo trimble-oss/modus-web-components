@@ -1,0 +1,80 @@
+@import './modus-file-dropzone.vars';
+
+.modus-file-dropzone {
+  color: $modus-file-upload-dropzone-label;
+  display: flex;
+  flex-direction: column;
+  font-family: $primary-font;
+
+  input {
+    display: none;
+  }
+
+  .header {
+    align-items: start;
+    display: flex;
+    flex-direction: column;
+
+    label {
+      font-size: $h1-font-size;
+      font-weight: $font-weight-semi-bold;
+      margin-bottom: $rem-8px;
+    }
+
+    span {
+      margin-bottom: $rem-8px;
+    }
+  }
+
+  .dropzone {
+    align-items: center;
+    background-color: $modus-file-upload-dropzone-bg;
+    border: $rem-1px dashed $modus-file-upload-dropzone-border-color;
+    border-radius: $rem-4px;
+    color: $modus-file-upload-dropzone-color;
+    display: flex;
+    flex-direction: column;
+    font-weight: $font-weight-semi-bold;
+    justify-content: center;
+    padding: $rem-12px $rem-16px;
+
+    .browse {
+      color: $modus-file-upload-dropzone-browse-color;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    &.highlight {
+      background-color: $modus-file-upload-dropzone-highlight-bg;
+      border-color: $modus-file-upload-dropzone-highlight-border-color;
+      color: $modus-file-upload-dropzone-highlight-color;
+
+      svg {
+        fill: $modus-file-upload-dropzone-highlight-color;
+      }
+    }
+
+    &.error {
+      background-color: $modus-file-upload-dropzone-error-bg;
+      border-color: $modus-file-upload-dropzone-error-border-color;
+      color: $modus-file-upload-dropzone-error-color;
+
+      svg {
+        fill: $modus-file-upload-dropzone-error-color;
+      }
+    }
+
+    .error-messages {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+    }
+
+    svg {
+      fill: $modus-file-upload-dropzone-color;
+      margin-bottom: $rem-4px;
+    }
+  }
+}
