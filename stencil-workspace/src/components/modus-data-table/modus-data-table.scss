@@ -81,13 +81,16 @@ table {
 
 .pager{
   float: right;
-  padding: 0 10px 10px 0;
+  padding-bottom: 10px;
 }
 
 .pager-text{
   color: $modus-table-pagination-color;
   float: right;
-  padding: 8px 5px 0 10px;
+  font-family: $primary-font;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 6px 5px 0 10px;
 }
 
 .page-view{
@@ -96,7 +99,10 @@ table {
 
 .page-view-text{
     color: $modus-table-pagination-color;
-}
+    font-family: $primary-font;
+    font-size: 14px;
+    font-weight: 400;
+  }
 
 // table {
 //   border: $rem-1px $modus-table-border-color solid;

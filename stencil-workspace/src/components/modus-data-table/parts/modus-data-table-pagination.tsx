@@ -17,9 +17,9 @@ export const ModusDataTablePagination: FunctionalComponent<
     <div>
       <span class="pager">
         <modus-pagination
-          active-page="1"
+          active-page={1}
           max-page={table.getPageCount()}
-          min-page="1"
+          min-page={1}
           onPageChange={(event) =>
             table.setPageIndex(event.detail - 1)
           }></modus-pagination>
@@ -37,7 +37,7 @@ export const ModusDataTablePagination: FunctionalComponent<
         </div>
       </span>
       <span class="page-view-text">
-        Page View{' '}
+        View{' '}
         <select
           class="page-view"
           onChange={(e) => {

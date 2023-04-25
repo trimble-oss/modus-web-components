@@ -36,10 +36,10 @@ export class ModusDataTable {
   @Prop() hover = false;
 
   /* (optional) To enable pagination for the table. */
-  @Prop() pagination : boolean;
+  @Prop() pagination: boolean;
 
   /* (optional) To set pagesize for the pagination. */
-  @Prop() pageSizeList: number[];
+  @Prop() pageSizeList: number[] = [];
 
   /** Options for data table display. */
   @Prop() displayOptions?: ModusDataTableDisplayOptions = {
