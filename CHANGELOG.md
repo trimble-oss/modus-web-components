@@ -9,7 +9,6 @@ View all releases at: <https://github.com/trimble-oss/modus-web-components/relea
 ### Fixed
 
 - Switch transition animation reduced to 0.1s
-
 ### Added
 
 - Added format option to the Modus Date Input component.

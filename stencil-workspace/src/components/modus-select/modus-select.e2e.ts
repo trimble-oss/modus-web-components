@@ -137,4 +137,28 @@ describe('modus-select', () => {
     expect(valueChange).toHaveReceivedEvent();
     expect(valueChange).toHaveReceivedEventDetail(options[0]);
   });
+  
+  it('emits valueChange event on enter', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-select></modus-select>');
+
+    const options = [ { display: 'Some value' } ];
+    const select = await page.find('modus-select');
+    select.setProperty('options', options);
+    select.setProperty('optionsDisplayProp', 'display');
+    select.setProperty('value', options[0]);
+    await page.waitForChanges();
+
+    const valueChange = await page.spyOnEvent('valueChange');
+    const element = await page.find('modus-select >>> button');
+
+    await element.click();
+    await page.waitForChanges();
+    const item = await page.find('modus-select >>> .dropdown-list-item');
+    item.press('Enter');
+    await page.waitForChanges();
+
+    expect(valueChange).toHaveReceivedEvent();
+    expect(valueChange).toHaveReceivedEventDetail(options[0]);
+  });
 });
