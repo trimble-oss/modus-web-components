@@ -82,8 +82,7 @@ export class ModusSelect {
         this.activeItemIndex = this.activeItemIndex - 1 > 0 ? this.activeItemIndex - 1 : 0;
         break;
       case 'Enter':
-        this.value = this.options[this.activeItemIndex];
-        this.activeItemIndex = 0;
+        this.handleItemSelect(this.options[this.activeItemIndex]);
         break;
       case 'Tab':
         this.hideDropdown();
