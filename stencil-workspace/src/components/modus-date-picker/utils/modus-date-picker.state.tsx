@@ -1,6 +1,6 @@
 import { ISO_DATE_FORMAT } from '../../modus-date-input/utils/modus-date-input.formatter';
 
-export class DateInputInfo {
+export default class ModusDatePickerState {
   private element: HTMLModusDateInputElement;
   private date: Date | null;
   private isOpen = false;

@@ -31,11 +31,11 @@
 
 ## Events
 
-| Event                 | Description                                      | Type                                                                        |
-| --------------------- | ------------------------------------------------ | --------------------------------------------------------------------------- |
-| `calendarIconClicked` | An event that fires on calendar icon click.      | `CustomEvent<{ value: string; type: DateInputType; inputString: string; }>` |
-| `dateInputBlur`       | An event that fires on input value out of focus. | `CustomEvent<{ value: string; type: DateInputType; inputString: string; }>` |
-| `valueChange`         | An event that fires on input value change.       | `CustomEvent<{ value: string; type: DateInputType; inputString: string; }>` |
+| Event                 | Description                                      | Type                                      |
+| --------------------- | ------------------------------------------------ | ----------------------------------------- |
+| `calendarIconClicked` | An event that fires on calendar icon click.      | `CustomEvent<ModusDateInputEventDetails>` |
+| `dateInputBlur`       | An event that fires on input value out of focus. | `CustomEvent<ModusDateInputEventDetails>` |
+| `valueChange`         | An event that fires on input value change.       | `CustomEvent<ModusDateInputEventDetails>` |
 
 
 ## Methods

@@ -13,11 +13,11 @@ const MONTH_NAMES = [
   'December',
 ];
 
-export default class Calendar {
+export default class ModusDatePickerCalendar {
   private currentDate: Date;
   private currentMonthDates: Array<Date>;
 
-  constructor(calendar?: Calendar) {
+  constructor(calendar?: ModusDatePickerCalendar) {
     if (calendar) {
       this.gotoDate(
         calendar.currentDate.getFullYear(),
@@ -41,7 +41,7 @@ export default class Calendar {
     return this.currentMonthDates;
   }
 
-  addMonthOffset(offset: number): Calendar {
+  addMonthOffset(offset: number): ModusDatePickerCalendar {
     this.gotoDate(
       this.currentDate.getFullYear(),
       this.currentDate.getMonth() + offset
@@ -49,7 +49,7 @@ export default class Calendar {
     return this;
   }
 
-  addYearOffset(offset: number): Calendar {
+  addYearOffset(offset: number): ModusDatePickerCalendar {
     this.gotoDate(
       this.currentDate.getFullYear() + offset,
       this.currentDate.getMonth()
@@ -62,7 +62,7 @@ export default class Calendar {
     this.calculateDates();
   }
 
-  getDaysOfWeek (locale: string, firstDayOfWeek = 0)  {
+  getDaysOfWeek(locale: string, firstDayOfWeek = 0) {
     /**
      * Nov 1st, 2020 starts on a Sunday,
      * assumes weeks start on Sunday,
@@ -80,7 +80,7 @@ export default class Calendar {
       const currentDate = new Date(startDate);
       currentDate.setDate(currentDate.getDate() + i);
       const d = intl.format(currentDate);
-      daysOfWeek.push(d.toUpperCase().startsWith('SA')? d: d.slice(0,2) );
+      daysOfWeek.push(d.toUpperCase().startsWith('SA') ? d : d.slice(0, 2));
     }
 
     return daysOfWeek;
