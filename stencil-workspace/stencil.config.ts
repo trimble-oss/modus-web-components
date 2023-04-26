@@ -17,6 +17,10 @@ export const config: Config = {
       type: 'dist-custom-elements',
     },
     {
+      type: 'docs-vscode',
+      file: 'dist/vscode.html-custom-data.json',
+    },
+    {
       type: 'docs-readme',
       footer: '',
     },
