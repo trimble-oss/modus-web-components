@@ -8,57 +8,62 @@ This component is compatible with Angular reactive forms. This can be achieved t
 
 ### Default
 
-<modus-text-input label="Text Input Demo 1" placeholder="Placeholder" include-search-icon required></modus-text-input>
-<modus-text-input label="Text Input Demo 2" include-search-icon disabled></modus-text-input>
-<modus-text-input label="Text Input Demo 3" placeholder="Placeholder" value="Value" helper-text="Helper Demo" include-search-icon required></modus-text-input>
-<modus-text-input label="Text Input Demo 4" placeholder="Placeholder" value="Value" error-text="Error Demo" include-search-icon></modus-text-input>
-<modus-text-input label="Text Input Demo 5" placeholder="Placeholder" value="Value" valid-text="Valid Demo" include-search-icon></modus-text-input>
-<modus-text-input label="Text Input Demo 6" placeholder="Placeholder" value="Value" size="large" include-search-icon></modus-text-input>
-<modus-text-input label="Text Input Demo 7" placeholder="Placeholder" value="Value" clearable="true"></modus-text-input>
-<modus-text-input label="Text Input Demo Password" placeholder="Password" type="password"></modus-text-input>
+<modus-text-input label="Text Input (Search Icon)" placeholder="Placeholder" include-search-icon required></modus-text-input>
+
+<modus-text-input label="Text Input (Search Icon & Disabled)" include-search-icon disabled></modus-text-input>
+
+<modus-text-input label="Text Input (Search Icon & Helper Text)" placeholder="Placeholder" value="Value" helper-text="Helper Demo" include-search-icon required></modus-text-input>
+
+<modus-text-input label="Text Input (Error)" placeholder="Placeholder" value="Value" error-text="Error Demo"></modus-text-input>
+
+<modus-text-input label="Text Input (Valid)" placeholder="Placeholder" value="Value" valid-text="Valid Demo"></modus-text-input>
+
+<modus-text-input label="Text Input (Large & Helper Text)" placeholder="Placeholder" value="Value" size="large" helper-text="Your username must be 8-20 characters long, contain letters and numbers, and must not contain spaces"></modus-text-input>
+
+<modus-text-input label="Text Input (Clearable)" placeholder="Placeholder" value="Value" clearable="true"></modus-text-input>
+
+<modus-text-input label="Text Input (Password)" placeholder="Password" type="password"></modus-text-input>
 
 ```html
 <modus-text-input
-  label="Text Input Demo 1"
+  label="Text Input (Search Icon)"
   placeholder="Placeholder"
   include-search-icon
   required></modus-text-input>
 <modus-text-input
-  label="Text Input Demo 2"
+  label="Text Input (Search Icon & Disabled)"
   include-search-icon
   disabled></modus-text-input>
 <modus-text-input
-  label="Text Input Demo 3"
+  label="Text Input (Search Icon & Helper Text)"
   placeholder="Placeholder"
   value="Value"
   helper-text="Helper Demo"
   include-search-icon
   required></modus-text-input>
 <modus-text-input
-  label="Text Input Demo 4"
+  label="Text Input (Error)"
   placeholder="Placeholder"
   value="Value"
-  error-text="Error Demo"
-  include-search-icon></modus-text-input>
+  error-text="Error Demo"></modus-text-input>
 <modus-text-input
-  label="Text Input Demo 5"
+  label="Text Input (Valid)"
   placeholder="Placeholder"
   value="Value"
-  valid-text="Valid Demo"
-  include-search-icon></modus-text-input>
+  valid-text="Valid Demo"></modus-text-input>
 <modus-text-input
-  label="Text Input Demo 6"
+  label="Text Input (Large & Helper Text)"
   placeholder="Placeholder"
   value="Value"
   size="large"
-  include-search-icon></modus-text-input>
+  helper-text="Your username must be 8-20 characters long, contain letters and numbers, and must not contain spaces"></modus-text-input>
 <modus-text-input
-  label="Text Input Demo 7"
+  label="Text Input (Clearable)"
   placeholder="Placeholder"
   value="Value"
   clearable="true"></modus-text-input>
 <modus-text-input
-  label="Text Input Demo Password"
+  label="Text Input (Password)"
   placeholder="Password"
   type="password"></modus-text-input>
 ```
