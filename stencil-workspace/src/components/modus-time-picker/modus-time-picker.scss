@@ -113,11 +113,12 @@
   }
 
   .sub-text {
-    font-size: $rem-10px;
+    font-size: $rem-11px;
     margin-top: $rem-4px;
 
     &.helper {
       color: $modus-input-label-color;
+      font-weight: 600;
     }
 
     &.error {
