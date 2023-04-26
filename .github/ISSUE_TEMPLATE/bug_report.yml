@@ -28,7 +28,7 @@ body:
       label: Reduced test cases
       description: Include links [reduced test case](https://css-tricks.com/reduced-test-cases/) links or suggested fixes using a online code editor.
     validations:
-      required: true
+      required: false
   - type: dropdown
     id: os
     attributes:

@@ -324,20 +324,20 @@ export class ModusDataTable {
   }
 }
 
-import type { DateInputEventData as IModusDateInputDateInputEventData } from '@trimble-oss/modus-web-components';
+import type { ModusDateInputEventDetails as IModusDateInputModusDateInputEventDetails } from '@trimble-oss/modus-web-components';
 export declare interface ModusDateInput extends Components.ModusDateInput {
   /**
    * An event that fires on calendar icon click. 
    */
-  calendarIconClicked: EventEmitter<CustomEvent<IModusDateInputDateInputEventData>>;
+  calendarIconClicked: EventEmitter<CustomEvent<IModusDateInputModusDateInputEventDetails>>;
   /**
    * An event that fires on input value out of focus. 
    */
-  dateInputBlur: EventEmitter<CustomEvent<IModusDateInputDateInputEventData>>;
+  dateInputBlur: EventEmitter<CustomEvent<IModusDateInputModusDateInputEventDetails>>;
   /**
    * An event that fires on input value change. 
    */
-  valueChange: EventEmitter<CustomEvent<IModusDateInputDateInputEventData>>;
+  valueChange: EventEmitter<CustomEvent<IModusDateInputModusDateInputEventDetails>>;
 
 }
 

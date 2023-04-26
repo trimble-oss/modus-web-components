@@ -7,9 +7,9 @@ import {
   Listen,
 } from '@stencil/core';
 import { IconMap } from '../icons/IconMap';
-import Calendar from './utils/modus-date-picker.calendar';
-import { DateInputInfo } from './utils/modus-date-picker.state';
-import { DateInputEvent } from './utils/modus-date-picker.types';
+import ModusDatePickerCalendar from './utils/modus-date-picker.calendar';
+import ModusDatePickerState from './utils/modus-date-picker.state';
+import { ModusDateInputEventDetails } from '../modus-date-input/utils/modus-date-input.models';
 
 @Component({
   tag: 'modus-date-picker',
@@ -28,17 +28,17 @@ export class ModusDatePicker {
   @State() _showCalendar = false;
   @State() _showYearArrows = false;
 
-  private _calendar: Calendar;
-  private _dateInputs: { [key: string]: DateInputInfo } = {};
+  private _calendar: ModusDatePickerCalendar;
+  private _dateInputs: { [key: string]: ModusDatePickerState } = {};
   private _locale = 'default';
 
   componentWillLoad() {
-    this._calendar = new Calendar();
+    this._calendar = new ModusDatePickerCalendar();
   }
 
   /** Handlers */
   @Listen('calendarIconClicked')
-  handleCalendarIconClick(event: DateInputEvent) {
+  handleCalendarIconClick(event: CustomEvent<ModusDateInputEventDetails>) {
     const { type } = event.detail;
 
     Object.keys(this._dateInputs).forEach((d) =>
@@ -65,7 +65,7 @@ export class ModusDatePicker {
   }
 
   @Listen('valueChange')
-  handleDateInputValue(event: DateInputEvent): void {
+  handleDateInputValue(event: CustomEvent<ModusDateInputEventDetails>): void {
     const { type } = event.detail;
     this._dateInputs[type].refresh();
     if (this._showCalendar) {
@@ -88,7 +88,7 @@ export class ModusDatePicker {
     ) as unknown as HTMLModusDateInputElement[];
 
     dates?.forEach((d) => {
-      this._dateInputs[d.type] = new DateInputInfo(d);
+      this._dateInputs[d.type] = new ModusDatePickerState(d);
     });
   }
 
@@ -284,7 +284,7 @@ export class ModusDatePicker {
           <span
             tabIndex={0}
             class="calendar-title"
-            aria-label="Calendar title"
+            aria-label="ModusCalendar title"
             role="title">
             {`${this._calendar?.month} ${this._calendar?.year}`}
           </span>
