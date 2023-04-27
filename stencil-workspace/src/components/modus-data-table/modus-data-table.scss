@@ -120,6 +120,33 @@ table {
   }
 }
 
+.pager{
+  float: right;
+  padding-bottom: $rem-10px;
+}
+
+.pager-text{
+  color: $modus-table-pagination-color;
+  float: right;
+  font-family: $primary-font;
+  font-size: $rem-14px;
+  font-weight: 400;
+  padding: $rem-6px $rem-5px 0 $rem-10px;
+}
+
+.page-view{
+  background-color: $modus-page-view-select-bg;
+  color: $modus-page-view-select-color;
+  margin-top: $rem-8px;
+}
+
+.page-view-text{
+    color: $modus-table-pagination-color;
+    font-family: $primary-font;
+    font-size: $rem-14px;
+    font-weight: 400;
+  }
+
 // table {
 //   border: $rem-1px $modus-table-border-color solid;
 //   border-collapse: collapse;
