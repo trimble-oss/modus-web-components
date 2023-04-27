@@ -1,4 +1,4 @@
-export type TCell = number | string | boolean | ModusDataTableCellBadge | ModusDataTableCellLink;
+export type TCell = number | string | boolean | ModusTableCellBadge | ModusTableCellLink;
 
 export type TRow = {
   [key: string]: TCell;
@@ -7,28 +7,28 @@ export type TRow = {
   _selected?: boolean;
 };
 
-export interface ModusDataTableCellBadge {
+export interface ModusTableCellBadge {
   _type: 'badge'; // Used internally to identify the type of cell. Does not set the badge's type.
   color?: 'danger' | 'dark' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning';
   text: string;
   type?: 'counter' | 'default' | 'text';
 }
 
-export interface ModusDataTableCellLink {
+export interface ModusTableCellLink {
   _type: 'link';
   display: string;
   url: string;
 }
 
-export interface ModusDataTableSort {
+export interface ModusTableSort {
   columnId: string;
   direction: 'asc' | 'desc' | 'none';
 }
 
 // eslint-disable-next-line
-export interface ModusDataTableSortEvent extends ModusDataTableSort {}
+export interface ModusTableSortEvent extends ModusTableSort {}
 
-export interface ModusDataTableRowActionClickEvent {
+export interface ModusTableRowActionClickEvent {
   actionId: string,
   rowId: string
 }
@@ -41,7 +41,7 @@ export interface TColumn {
   width?: string;
 }
 
-export interface ModusDataTableDisplayOptions {
+export interface ModusTableDisplayOptions {
   animateRowActionsDropdown?: boolean;
   borderless?: boolean;
   cellBorderless?: boolean;
@@ -49,7 +49,7 @@ export interface ModusDataTableDisplayOptions {
   size?: 'small' | 'large';
 }
 
-export interface ModusDataTableRowAction {
+export interface ModusTableRowAction {
   _id: string;
   display: {
     icon?: string;

@@ -5,3 +5,5 @@ export { ModusNavbarProfileMenuLink } from './components/modus-navbar/profile-me
 export * from './components/modus-data-table/modus-data-table.models';
 export { ModusAutocompleteOption } from './components/modus-autocomplete/modus-autocomplete';
 export { ModusSideNavigationItemInfo } from './components/modus-side-navigation/modus-side-navigation.models';
+export { ModusColumnDataType } from './components/modus-data-table/enums/modus-column-data-type';
+export * from './components/modus-data-table/models';
