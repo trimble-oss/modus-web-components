@@ -10,7 +10,7 @@
     "@storybook/addons": "^6.5.16",
     "@storybook/components": "^6.5.16",
     "@storybook/theming": "^6.5.16",
-    "@types/mdx": "^2.0.4",
+    "@types/mdx": "^2.0.5",
     "lit-html": "^2.7.2",
     "react": "17.0.2",
     "react-dom": "17.0.2"
