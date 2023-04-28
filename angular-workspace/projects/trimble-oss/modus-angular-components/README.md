@@ -2,7 +2,7 @@
 
 ## About
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.0
+This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.1
 The components in this library were programmatically generated using the [StencilJS](https://stenciljs.com/) [Angular Framework Integration](https://stenciljs.com/docs/angular).
 
 ## Installation
@@ -22,7 +22,7 @@ The components in this library were programmatically generated using the [Stenci
 
 - Use a modus button in your `app.component.html`
 
-  ```angular2html
+  ```html
    <modus-button color="danger" [disabled]="false" (click)="onClick()">Cancel</modus-button>
   ```
 

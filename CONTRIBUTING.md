@@ -22,7 +22,7 @@
 - Node (>= v14)
 - npm CLI (>= v7)
 
-_We recommend using [NVM](https://github.com/nvm-sh/nvm). It is a great tool for switching between Node versions_
+_We recommend using [nvm](https://github.com/nvm-sh/nvm). It is a great tool for switching between Node versions_
 
 ## Getting Started
 
@@ -175,8 +175,7 @@ You can add the following code to the test file to pause the test at a specific 
 
 ## Changelog
 
-The CHANGELOG is a file that contains a curated list of chronological entries for each version of the project.
-This will enable users to quickly see precise changes between each release or version of a project.
+The release notes can be viewed on the [GitHub Releases](https://github.com/trimble-oss/modus-web-components/releases) page.
 
 ### Semantic Versioning
 
