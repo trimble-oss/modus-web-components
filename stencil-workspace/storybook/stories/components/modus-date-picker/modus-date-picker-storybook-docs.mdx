@@ -29,10 +29,10 @@ Default validation can also be disabled and use the props `errorText`, `invalid`
 
 ```html
 <modus-date-input
-  helper-text="mm/dd/yyyy"
+  helper-text="mmm dd, yyyy"
   label="Single date"
   allowed-chars-regex="[\d\/]"
-  format="mm/dd/yyyy"
+  format="mmm dd, yyyy"
   value="2022-12-22"></modus-date-input>
 ```
 
@@ -128,11 +128,11 @@ Each character as shown in the table below can be used for representing the date
 
 ### DOM Events
 
-| Name                  | Description                                      | Emits                                  |
-| --------------------- | ------------------------------------------------ | -------------------------------------- |
-| `calendarIconClicked` | An event that fires on calendar icon click.      | `{ date: Date; type: DateInputType; }` |
-| `dateInputBlur`       | An event that fires on input value out of focus. | `{ date: Date; type: DateInputType; }` |
-| `valueChange`         | An event that fires on input value change.       | `{ date: Date; type: DateInputType; }` |
+| Event                 | Description                                      | Type                                      |
+| --------------------- | ------------------------------------------------ | ----------------------------------------- |
+| `calendarIconClicked` | An event that fires on calendar icon click.      | `CustomEvent<ModusDateInputEventDetails>` |
+| `dateInputBlur`       | An event that fires on input value out of focus. | `CustomEvent<ModusDateInputEventDetails>` |
+| `valueChange`         | An event that fires on input value change.       | `CustomEvent<ModusDateInputEventDetails>` |
 
 ### Methods
 

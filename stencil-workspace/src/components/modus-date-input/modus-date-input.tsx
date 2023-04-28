@@ -10,11 +10,11 @@ import {
   State,
 } from '@stencil/core';
 import { IconMap } from '../icons/IconMap';
-import {
-  DateInputEventData,
-  DateInputType,
-} from '../modus-date-picker/utils/modus-date-picker.types';
 import DateInputFormatter from './utils/modus-date-input.formatter';
+import {
+  ModusDateInputEventDetails,
+  ModusDateInputType,
+} from './utils/modus-date-input.models';
 
 @Component({
   tag: 'modus-date-input',
@@ -85,7 +85,7 @@ export class ModusDateInput {
   @Prop() size: 'medium' | 'large' = 'medium';
 
   /** (optional) Denotes what type of date and the types are 'start','end','single'. Required when using `modus-date-picker`. */
-  @Prop() type: DateInputType = 'single';
+  @Prop() type: ModusDateInputType = 'single';
 
   /** (optional) The input's valid state text. */
   @Prop() validText: string;
@@ -106,13 +106,13 @@ export class ModusDateInput {
   }
 
   /** An event that fires on calendar icon click. */
-  @Event() calendarIconClicked: EventEmitter<DateInputEventData>;
+  @Event() calendarIconClicked: EventEmitter<ModusDateInputEventDetails>;
 
   /** An event that fires on input value out of focus. */
-  @Event() dateInputBlur: EventEmitter<DateInputEventData>;
+  @Event() dateInputBlur: EventEmitter<ModusDateInputEventDetails>;
 
   /** An event that fires on input value change. */
-  @Event() valueChange: EventEmitter<DateInputEventData>;
+  @Event() valueChange: EventEmitter<ModusDateInputEventDetails>;
 
   private classBySize: Map<string, string> = new Map([
     ['medium', 'medium'],

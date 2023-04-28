@@ -53,9 +53,24 @@ defineCustomElements();
 <modus-alert message="You've installed Modus Web Components!" type="success" />
 ```
 
+## VS Code Code Completion
+
+Modus Web Components ships with a file called `vscode.html-custom-data.json` that can be used to describe it's custom elements to Visual Studio Code. This enables code completion for Modus Web Components (also known as "code hinting" or "IntelliSense"). To enable it, you need to tell VS Code where the file is.
+
+1. Install Modus Web Components locally
+2. If it doesn't already exist, create a folder called `.vscode` at the root of your project
+3. If it doesn't already exist, create a file inside that folder called `settings.json`
+4. Add the following to the file
+
+{
+  "html.customData": ["./node_modules/@trimble-oss/modus-web-components/dist/vscode.html-custom-data.json"]
+}
+
+If `settings.json` already exists, add the above line to the root of the object. Note that you may need to restart VS Code for the changes to take affect.
+
 ## Dark Mode
 
-By default, `light` theme is applied on the components without any additional CSS. Inorder to enable `dark` theme you need to reference the `./node_modules/@trimble-oss/modus-web-components/dist/modus-web-components/modus-web-components.css` CSS file. Themes can be toggled globally on the `<html>, <body>` elements, or on specific components using `data-mwc-theme` attribute.
+By default, `light` theme is applied on the components without any additional CSS. In order to enable `dark` theme you need to reference the `./node_modules/@trimble-oss/modus-web-components/dist/modus-web-components/modus-web-components.css` CSS file. Themes can be toggled globally on the `<html>, <body>` elements, or on specific components using `data-mwc-theme` attribute.
 
 <modus-button color="primary" data-mwc-theme="light">Primary</modus-button>
 

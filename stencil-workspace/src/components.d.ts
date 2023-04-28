@@ -8,7 +8,7 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
 import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSortEvent, ModusTableSelectionOptions, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
-import { DateInputEventData, DateInputType } from "./components/modus-date-picker/utils/modus-date-picker.types";
+import { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
 import { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { ModusNavbarProfileMenuLink } from "./components/modus-navbar/profile-menu/modus-navbar-profile-menu";
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
@@ -359,7 +359,7 @@ export namespace Components {
         /**
           * (optional) Denotes what type of date and the types are 'start','end','single'. Required when using `modus-date-picker`.
          */
-        "type": DateInputType;
+        "type": ModusDateInputType;
         /**
           * (optional) The input's valid state text.
          */
@@ -1937,15 +1937,15 @@ declare namespace LocalJSX {
         /**
           * An event that fires on calendar icon click.
          */
-        "onCalendarIconClicked"?: (event: ModusDateInputCustomEvent<DateInputEventData>) => void;
+        "onCalendarIconClicked"?: (event: ModusDateInputCustomEvent<ModusDateInputEventDetails>) => void;
         /**
           * An event that fires on input value out of focus.
          */
-        "onDateInputBlur"?: (event: ModusDateInputCustomEvent<DateInputEventData>) => void;
+        "onDateInputBlur"?: (event: ModusDateInputCustomEvent<ModusDateInputEventDetails>) => void;
         /**
           * An event that fires on input value change.
          */
-        "onValueChange"?: (event: ModusDateInputCustomEvent<DateInputEventData>) => void;
+        "onValueChange"?: (event: ModusDateInputCustomEvent<ModusDateInputEventDetails>) => void;
         /**
           * (optional) The input's placeholder text.
          */
@@ -1969,7 +1969,7 @@ declare namespace LocalJSX {
         /**
           * (optional) Denotes what type of date and the types are 'start','end','single'. Required when using `modus-date-picker`.
          */
-        "type"?: DateInputType;
+        "type"?: ModusDateInputType;
         /**
           * (optional) The input's valid state text.
          */
