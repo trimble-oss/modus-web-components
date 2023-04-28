@@ -16,7 +16,7 @@ import { ModusNavbarProfileMenuLink as ModusNavbarProfileMenuLink1 } from "./com
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
 import { Tab } from "./components/modus-tabs/modus-tabs";
-import { TimeInputEventData } from "./components/modus-time-picker/modus-time-picker.types";
+import { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
 import { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export namespace Components {
     interface ModusAccordion {
@@ -2732,11 +2732,11 @@ declare namespace LocalJSX {
         /**
           * An event that fires on input value out of focus.
          */
-        "onTimeInputBlur"?: (event: ModusTimePickerCustomEvent<TimeInputEventData>) => void;
+        "onTimeInputBlur"?: (event: ModusTimePickerCustomEvent<ModusTimePickerEventDetails>) => void;
         /**
           * An event that fires on input value change.
          */
-        "onValueChange"?: (event: ModusTimePickerCustomEvent<TimeInputEventData>) => void;
+        "onValueChange"?: (event: ModusTimePickerCustomEvent<ModusTimePickerEventDetails>) => void;
         /**
           * (optional) The input's placeholder text.
          */

@@ -10,7 +10,7 @@ import {
   State,
 } from '@stencil/core';
 import TimeInputFormatter from './modus-time-picker.formatter';
-import { TimeInputEventData } from './modus-time-picker.types';
+import { ModusTimePickerEventDetails } from './modus-time-picker.models';
 
 /**
  * @slot timeZone - Slot for a Time Zone dropdown
@@ -95,10 +95,10 @@ export class ModusTimePicker {
   }
 
   /** An event that fires on input value out of focus. */
-  @Event() timeInputBlur: EventEmitter<TimeInputEventData>;
+  @Event() timeInputBlur: EventEmitter<ModusTimePickerEventDetails>;
 
   /** An event that fires on input value change. */
-  @Event() valueChange: EventEmitter<TimeInputEventData>;
+  @Event() valueChange: EventEmitter<ModusTimePickerEventDetails>;
 
   readonly classBySize: Map<string, string> = new Map([
     ['medium', 'medium'],

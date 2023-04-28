@@ -1041,16 +1041,16 @@ export class ModusTextInput {
   }
 }
 
-import type { TimeInputEventData as IModusTimePickerTimeInputEventData } from '@trimble-oss/modus-web-components';
+import type { ModusTimePickerEventDetails as IModusTimePickerModusTimePickerEventDetails } from '@trimble-oss/modus-web-components';
 export declare interface ModusTimePicker extends Components.ModusTimePicker {
   /**
    * An event that fires on input value out of focus. 
    */
-  timeInputBlur: EventEmitter<CustomEvent<IModusTimePickerTimeInputEventData>>;
+  timeInputBlur: EventEmitter<CustomEvent<IModusTimePickerModusTimePickerEventDetails>>;
   /**
    * An event that fires on input value change. 
    */
-  valueChange: EventEmitter<CustomEvent<IModusTimePickerTimeInputEventData>>;
+  valueChange: EventEmitter<CustomEvent<IModusTimePickerModusTimePickerEventDetails>>;
 
 }
 

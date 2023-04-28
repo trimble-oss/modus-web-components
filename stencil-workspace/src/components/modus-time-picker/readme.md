@@ -31,10 +31,10 @@
 
 ## Events
 
-| Event           | Description                                      | Type                                                   |
-| --------------- | ------------------------------------------------ | ------------------------------------------------------ |
-| `timeInputBlur` | An event that fires on input value out of focus. | `CustomEvent<{ value: string; inputString: string; }>` |
-| `valueChange`   | An event that fires on input value change.       | `CustomEvent<{ value: string; inputString: string; }>` |
+| Event           | Description                                      | Type                                       |
+| --------------- | ------------------------------------------------ | ------------------------------------------ |
+| `timeInputBlur` | An event that fires on input value out of focus. | `CustomEvent<ModusTimePickerEventDetails>` |
+| `valueChange`   | An event that fires on input value change.       | `CustomEvent<ModusTimePickerEventDetails>` |
 
 
 ## Methods
