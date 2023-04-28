@@ -16,6 +16,7 @@ import { IconSearch } from '../icons/icon-search';
 import { ModusNavbarApp } from './apps-menu/modus-navbar-apps-menu';
 import { IconHelp } from '../icons/icon-help';
 import { ModusNavbarProfileMenuLink } from './profile-menu/modus-navbar-profile-menu';
+import { IconAdd } from '../icons/icon-add';
 
 /**
  * @slot main - Renders custom main menu content
@@ -48,6 +49,9 @@ export class ModusNavbar {
   /** (optional) Whether to display the navbar items in reverse order. */
   @Prop() reverse: boolean;
 
+  /** (optional) Whether to show add. */
+  @Prop() showAdd: boolean;
+
   /** (optional) Whether to show the apps menu. */
   @Prop() showAppsMenu: boolean;
 
@@ -74,6 +78,9 @@ export class ModusNavbar {
 
   /** (optional) Color variants for NavBar. */
   @Prop() variant: 'default' | 'blue' = 'default';
+
+  /** An event that fires when the add menu opens. */
+  @Event() addMenuOpen: EventEmitter<void>;
 
   /** An event that fires when the apps menu opens. */
   @Event() appsMenuOpen: EventEmitter<void>;
@@ -107,12 +114,14 @@ export class ModusNavbar {
     this.mainMenuVisible = false;
   }
 
+  @State() addMenuVisible: boolean;
   @State() appsMenuVisible: boolean;
   @State() mainMenuVisible: boolean;
   @State() notificationsMenuVisible: boolean;
   @State() profileMenuVisible: boolean;
   @State() slots: string[] = [];
 
+  readonly SLOT_ADD = 'add';
   readonly SLOT_MAIN = 'main';
   readonly SLOT_NOTIFICATIONS = 'notifications';
 
@@ -156,6 +165,28 @@ export class ModusNavbar {
       this.slots?.length !== slotNames.length ||
       this.slots?.filter((s) => !slotNames.includes(s)).length;
     if (isUpdated) this.slots = [...slotNames];
+  }
+
+  addMenuClickHandler(event: MouseEvent): void {
+    event.preventDefault();
+    this.addMenuToggle();
+  }
+
+  addMenuKeydownHandler(event: KeyboardEvent): void {
+    if (event.code !== 'Enter') {
+      return;
+    }
+    this.addMenuToggle();
+  }
+
+  addMenuToggle(): void {
+    if (this.addMenuVisible) {
+      this.addMenuVisible = false;
+    } else {
+      this.hideMenus();
+      this.addMenuVisible = true;
+      this.addMenuOpen.emit();
+    }
   }
 
   appsMenuClickHandler(event: MouseEvent): void {
@@ -255,6 +286,7 @@ export class ModusNavbar {
   }
 
   private hideMenus(): void {
+    this.addMenuVisible = false;
     this.appsMenuVisible = false;
     this.mainMenuVisible = false;
     this.notificationsMenuVisible = false;
@@ -270,137 +302,154 @@ export class ModusNavbar {
   render(): unknown {
     const direction = this.reverse ? 'reverse' : '';
     const shadow = this.showShadow ? 'shadow' : '';
-    const variant = `${
-      this.variant === 'default' ? '' : 'nav-' + this.variant
-    }`;
+    const variant = `${this.variant === 'default' ? '' : 'nav-' + this.variant
+      }`;
     return (
-      <nav class={`${direction} ${shadow} ${variant}`}>
-        <div class={`left ${direction}`}>
-          {this.showMainMenu && (
-            <div class="navbar-button main-menu">
-              <span
-                class="navbar-button-icon"
-                onKeyDown={(event) => this.mainMenuKeydownHandler(event)}
-                tabIndex={0}>
-                <IconMenu
-                  size="24"
-                  pressed={this.mainMenuVisible}
-                  onClick={(event) => this.mainMenuClickHandler(event)}
-                />
-              </span>
-              {this.mainMenuVisible && (
-                <modus-navbar-main-menu>
-                  <slot name={this.SLOT_MAIN}></slot>
-                </modus-navbar-main-menu>
-              )}
-            </div>
-          )}
-          <img
-            class="product-logo"
-            height={this.productLogoOptions?.height ?? '24'}
-            src={this.productLogoOptions?.url}
-            alt="Modus navbar product logo"
-            onClick={(event) => this.productLogoClick.emit(event)}
-          />
-        </div>
-        <div class={`right ${direction}`}>
-          {this.showSearch && (
-            <div class="navbar-button search">
-              <span class="navbar-button-icon">
-                <IconSearch size="24" />
-              </span>
-            </div>
-          )}
-          {this.showNotifications && (
-            <div class="navbar-button" data-test-id="notifications-menu">
-              <span
-                class="navbar-button-icon"
-                onKeyDown={(event) =>
-                  this.notificationsMenuKeydownHandler(event)
-                }
-                tabIndex={0}>
-                <IconNotifications
-                  size="24"
-                  onClick={(event) => this.notificationsMenuClickHandler(event)}
-                  pressed={this.notificationsMenuVisible}
-                />
-              </span>
-              {this.notificationsMenuVisible && (
-                <modus-navbar-notifications-menu reverse={this.reverse}>
-                  <slot name={this.SLOT_NOTIFICATIONS}></slot>
-                </modus-navbar-notifications-menu>
-              )}
-            </div>
-          )}
-          {this.showPendoPlaceholder && <div class={'pendo-placeholder'} />}
-          {this.showHelp && (
-            <div class="navbar-button" data-test-id="help-menu">
-              <span class="navbar-button-icon">
-                <IconHelp
-                  size="24"
-                  onClick={(event) => this.helpMenuClickHandler(event)}
-                />
-              </span>
-            </div>
-          )}
-          {this.showAppsMenu && (
-            <div class="navbar-button" data-test-id="apps-menu">
-              <span
-                class="navbar-button-icon"
-                onKeyDown={(event) => this.appsMenuKeydownHandler(event)}
-                tabIndex={0}>
-                <IconApps
-                  size="24"
-                  pressed={this.appsMenuVisible}
-                  onClick={(event) => this.appsMenuClickHandler(event)}
-                />
-              </span>
-              {this.appsMenuVisible && (
-                <modus-navbar-apps-menu
-                  apps={this.apps}
-                  reverse={this.reverse}
-                  onAppOpen={(event) => this.handleAppsMenuAppOpen(event)}
-                />
-              )}
-            </div>
-          )}
-          <div class="profile-menu">
-            {this.profileMenuOptions?.avatarUrl ? (
-              <img
-                class="avatar"
-                height="32"
-                src={this.profileMenuOptions?.avatarUrl}
-                alt="Modus navbar profile menu avatar"
-                onClick={(event) => this.profileMenuClickHandler(event)}
-                onKeyDown={(event) => this.profileMenuKeydownHandler(event)}
-                tabIndex={0}
-                ref={(el) =>
-                  (this.profileAvatarElement = el as HTMLImageElement)
-                }
-              />
-            ) : (
-              <span
-                class="initials"
-                onClick={(event) => this.profileMenuClickHandler(event)}
-                onKeyDown={(event) => this.profileMenuKeydownHandler(event)}
-                tabIndex={0}>
-                {this.profileMenuOptions?.initials}
-              </span>
+        <nav class={`${direction} ${shadow} ${variant}`}>
+          <div class={`left ${direction}`}>
+            {this.showMainMenu && (
+              <div class="navbar-button main-menu">
+                <span
+                  class="navbar-button-icon"
+                  onKeyDown={(event) => this.mainMenuKeydownHandler(event)}
+                  tabIndex={0}>
+                  <IconMenu
+                    size="24"
+                    pressed={this.mainMenuVisible}
+                    onClick={(event) => this.mainMenuClickHandler(event)}
+                  />
+                </span>
+                {this.mainMenuVisible && (
+                  <modus-navbar-main-menu>
+                    <slot name={this.SLOT_MAIN}></slot>
+                  </modus-navbar-main-menu>
+                )}
+              </div>
             )}
-            {this.profileMenuVisible && (
-              <modus-navbar-profile-menu
-                avatar-url={this.profileMenuOptions?.avatarUrl}
-                email={this.profileMenuOptions?.email}
-                initials={this.profileMenuOptions?.initials}
-                links={this.profileMenuOptions?.links}
-                reverse={this.reverse}
-                username={this.profileMenuOptions?.username}
-                variant={this.variant}
-              />
-            )}
+            <img
+              class="product-logo"
+              height={this.productLogoOptions?.height ?? '24'}
+              src={this.productLogoOptions?.url}
+              alt="Modus navbar product logo"
+              onClick={(event) => this.productLogoClick.emit(event)}
+            />
           </div>
-        </div>
-      </nav>
+          <div class={`right ${direction}`}>
+            {this.showSearch && (
+              <div class="navbar-button search">
+                <span class="navbar-button-icon">
+                  <IconSearch size="24" />
+                </span>
+              </div>
+            )}
+            {this.showNotifications && (
+              <div class="navbar-button" data-test-id="notifications-menu">
+                <span
+                  class="navbar-button-icon"
+                  onKeyDown={(event) =>
+                    this.notificationsMenuKeydownHandler(event)
+                  }
+                  tabIndex={0}>
+                  <IconNotifications
+                    size="24"
+                    onClick={(event) => this.notificationsMenuClickHandler(event)}
+                    pressed={this.notificationsMenuVisible}
+                  />
+                </span>
+                {this.notificationsMenuVisible && (
+                  <modus-navbar-notifications-menu reverse={this.reverse}>
+                    <slot name={this.SLOT_NOTIFICATIONS}></slot>
+                  </modus-navbar-notifications-menu>
+                )}
+              </div>
+            )}
+            {this.showPendoPlaceholder && <div class={'pendo-placeholder'} />}
+            {this.showAdd && (
+              <div class="navbar-button" data-test-id="add-menu">
+                <span class="navbar-button-icon"  
+                  onKeyDown={(event) => this.addMenuKeydownHandler(event)}
+                  tabIndex={0}>
+                  <IconAdd
+                    size="24"
+                    onClick={(event) => this.addMenuClickHandler(event)}
+                    pressed={this.addMenuVisible}
+                  />
+                </span>
+                {this.addMenuVisible && (
+                  <modus-navbar-add-menu reverse={this.reverse}>
+                    <slot name={this.SLOT_ADD}></slot>
+                  </modus-navbar-add-menu>
+                )}
+              </div>
+            )}
+            {this.showHelp && (
+              <div class="navbar-button" data-test-id="help-menu">
+                <span class="navbar-button-icon">
+                  <IconHelp
+                    size="24"
+                    onClick={(event) => this.helpMenuClickHandler(event)}
+                  />
+                </span>
+              </div>
+            )}
+            {this.showAppsMenu && (
+              <div class="navbar-button" data-test-id="apps-menu">
+                <span
+                  class="navbar-button-icon"
+                  onKeyDown={(event) => this.appsMenuKeydownHandler(event)}
+                  tabIndex={0}>
+                  <IconApps
+                    size="24"
+                    pressed={this.appsMenuVisible}
+                    onClick={(event) => this.appsMenuClickHandler(event)}
+                  />
+                </span>
+                {this.appsMenuVisible && (
+                  <modus-navbar-apps-menu
+                    apps={this.apps}
+                    reverse={this.reverse}
+                    onAppOpen={(event) => this.handleAppsMenuAppOpen(event)}
+                  />
+                )}
+              </div>
+            )}
+            <div class="profile-menu">
+              {this.profileMenuOptions?.avatarUrl ? (
+                <img
+                  class="avatar"
+                  height="32"
+                  src={this.profileMenuOptions?.avatarUrl}
+                  alt="Modus navbar profile menu avatar"
+                  onClick={(event) => this.profileMenuClickHandler(event)}
+                  onKeyDown={(event) => this.profileMenuKeydownHandler(event)}
+                  tabIndex={0}
+                  ref={(el) =>
+                    (this.profileAvatarElement = el as HTMLImageElement)
+                  }
+                />
+              ) : (
+                <span
+                  class="initials"
+                  onClick={(event) => this.profileMenuClickHandler(event)}
+                  onKeyDown={(event) => this.profileMenuKeydownHandler(event)}
+                  tabIndex={0}>
+                  {this.profileMenuOptions?.initials}
+                </span>
+              )}
+              {this.profileMenuVisible && (
+                <modus-navbar-profile-menu
+                  avatar-url={this.profileMenuOptions?.avatarUrl}
+                  email={this.profileMenuOptions?.email}
+                  initials={this.profileMenuOptions?.initials}
+                  links={this.profileMenuOptions?.links}
+                  reverse={this.reverse}
+                  username={this.profileMenuOptions?.username}
+                  variant={this.variant}
+                />
+              )}
+            </div>
+          </div>
+        </nav>
     );
   }
 }

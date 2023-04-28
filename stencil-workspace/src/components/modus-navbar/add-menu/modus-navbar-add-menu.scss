@@ -1,0 +1,18 @@
+@import './../modus-navbar.vars';
+
+.add-menu {
+  @include custom-navbar-menu;
+
+  cursor: default;
+  width: max-content;
+
+  &.reverse {
+    left: 0;
+  }
+
+  .title {
+    font-size: $rem-18px;
+    font-weight: $font-weight-semi-bold;
+    margin-bottom: $rem-8px;
+  }
+}

@@ -4,6 +4,16 @@ import { html } from 'lit-html';
 
 export default {
   title: 'Components/Navbar',
+  argTypes: {
+    showAdd: {
+      name: 'show-add',
+      description: 'Toggle the plus button',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      },
+    },
+  },
   parameters: {
     docs: {
       inlineStories: true,
@@ -13,50 +23,60 @@ export default {
       isToolshown: true,
     },
     controls: {
-      disabled: true,
+      expanded: true,
+      sort: 'alpha',
     },
     viewMode: 'docs',
   },
 };
 
-const Template = () => html`
+const Template = ({ showAdd }) => html`
   <modus-navbar
     id="working"
     show-apps-menu
     show-help
     show-main-menu
-    show-notifications>
+    show-notifications
+    show-add=${showAdd}>
     <div slot="main" style="height:300px;">Render your own main menu.</div>
     <div slot="notifications">Render your own notifications.</div>
+    <div slot="add">Render your own list.</div>
   </modus-navbar>
   ${setNavbar(true, '#working')}
 `;
 export const Default = Template.bind({});
 
-const FailedToLoadAvatarTemplate = () => html`
+Default.args = { showAdd: false };
+
+const FailedToLoadAvatarTemplate = ({ showAdd }) => html`
   <modus-navbar
     id="broken"
     show-apps-menu
     show-help
     show-main-menu
-    show-notifications>
+    show-notifications
+    show-add=${showAdd}>
     <div slot="main" style="height:300px;">Render your own main menu.</div>
     <div slot="notifications">Render your own notifications.</div>
+    <div slot="add">Render your own list.</div>
   </modus-navbar>
   ${setNavbar(false, '#broken')}
 `;
 export const FailedAvatar = FailedToLoadAvatarTemplate.bind({});
+FailedAvatar.args = { showAdd: false };
 
-const BlueTemplate = () => html`
+const BlueTemplate = ({ showAdd }) => html`
   <modus-navbar
     id="blue-theme"
     show-apps-menu
     show-help
     show-main-menu
     show-notifications
+    show-add=${showAdd}
     variant="blue">
     <div slot="main" style="height:300px;">Render your own main menu.</div>
     <div slot="notifications">Render your own notifications.</div>
+    <div slot="add">Render your own list.</div>
   </modus-navbar>
   ${setNavbar(
     false,
@@ -65,6 +85,7 @@ const BlueTemplate = () => html`
   )}
 `;
 export const BlueNavbar = BlueTemplate.bind({});
+BlueNavbar.args = { showAdd: false };
 
 const setNavbar = (workingAvatar: boolean, id: string, logoUrl = '') => {
   const tag = document.createElement('script');

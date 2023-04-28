@@ -559,6 +559,10 @@ export namespace Components {
          */
         "reverse": boolean;
         /**
+          * (optional) Whether to show add.
+         */
+        "showAdd": boolean;
+        /**
           * (optional) Whether to show the apps menu.
          */
         "showAppsMenu": boolean;
@@ -590,6 +594,9 @@ export namespace Components {
           * (optional) Color variants for NavBar.
          */
         "variant": 'default' | 'blue';
+    }
+    interface ModusNavbarAddMenu {
+        "reverse": boolean;
     }
     interface ModusNavbarAppsMenu {
         "apps": ModusNavbarApp[];
@@ -1390,6 +1397,12 @@ declare global {
         prototype: HTMLModusNavbarElement;
         new (): HTMLModusNavbarElement;
     };
+    interface HTMLModusNavbarAddMenuElement extends Components.ModusNavbarAddMenu, HTMLStencilElement {
+    }
+    var HTMLModusNavbarAddMenuElement: {
+        prototype: HTMLModusNavbarAddMenuElement;
+        new (): HTMLModusNavbarAddMenuElement;
+    };
     interface HTMLModusNavbarAppsMenuElement extends Components.ModusNavbarAppsMenu, HTMLStencilElement {
     }
     var HTMLModusNavbarAppsMenuElement: {
@@ -1537,6 +1550,7 @@ declare global {
         "modus-message": HTMLModusMessageElement;
         "modus-modal": HTMLModusModalElement;
         "modus-navbar": HTMLModusNavbarElement;
+        "modus-navbar-add-menu": HTMLModusNavbarAddMenuElement;
         "modus-navbar-apps-menu": HTMLModusNavbarAppsMenuElement;
         "modus-navbar-main-menu": HTMLModusNavbarMainMenuElement;
         "modus-navbar-notifications-menu": HTMLModusNavbarNotificationsMenuElement;
@@ -2160,6 +2174,10 @@ declare namespace LocalJSX {
          */
         "helpUrl"?: string;
         /**
+          * An event that fires when the add menu opens.
+         */
+        "onAddMenuOpen"?: (event: ModusNavbarCustomEvent<void>) => void;
+        /**
           * An event that fires when an apps menu app opens.
          */
         "onAppsMenuAppOpen"?: (event: ModusNavbarCustomEvent<ModusNavbarApp>) => void;
@@ -2214,6 +2232,10 @@ declare namespace LocalJSX {
          */
         "reverse"?: boolean;
         /**
+          * (optional) Whether to show add.
+         */
+        "showAdd"?: boolean;
+        /**
           * (optional) Whether to show the apps menu.
          */
         "showAppsMenu"?: boolean;
@@ -2245,6 +2267,9 @@ declare namespace LocalJSX {
           * (optional) Color variants for NavBar.
          */
         "variant"?: 'default' | 'blue';
+    }
+    interface ModusNavbarAddMenu {
+        "reverse"?: boolean;
     }
     interface ModusNavbarAppsMenu {
         "apps"?: ModusNavbarApp[];
@@ -2894,6 +2919,7 @@ declare namespace LocalJSX {
         "modus-message": ModusMessage;
         "modus-modal": ModusModal;
         "modus-navbar": ModusNavbar;
+        "modus-navbar-add-menu": ModusNavbarAddMenu;
         "modus-navbar-apps-menu": ModusNavbarAppsMenu;
         "modus-navbar-main-menu": ModusNavbarMainMenu;
         "modus-navbar-notifications-menu": ModusNavbarNotificationsMenu;
@@ -2941,6 +2967,7 @@ declare module "@stencil/core" {
             "modus-message": LocalJSX.ModusMessage & JSXBase.HTMLAttributes<HTMLModusMessageElement>;
             "modus-modal": LocalJSX.ModusModal & JSXBase.HTMLAttributes<HTMLModusModalElement>;
             "modus-navbar": LocalJSX.ModusNavbar & JSXBase.HTMLAttributes<HTMLModusNavbarElement>;
+            "modus-navbar-add-menu": LocalJSX.ModusNavbarAddMenu & JSXBase.HTMLAttributes<HTMLModusNavbarAddMenuElement>;
             "modus-navbar-apps-menu": LocalJSX.ModusNavbarAppsMenu & JSXBase.HTMLAttributes<HTMLModusNavbarAppsMenuElement>;
             "modus-navbar-main-menu": LocalJSX.ModusNavbarMainMenu & JSXBase.HTMLAttributes<HTMLModusNavbarMainMenuElement>;
             "modus-navbar-notifications-menu": LocalJSX.ModusNavbarNotificationsMenu & JSXBase.HTMLAttributes<HTMLModusNavbarNotificationsMenuElement>;

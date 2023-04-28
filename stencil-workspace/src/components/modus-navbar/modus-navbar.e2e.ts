@@ -114,4 +114,31 @@ describe('modus-navbar', () => {
     await page.waitForChanges();
     expect(profileMenuOpen).toHaveReceivedEventTimes(1);
   });
+
+  it('emits addMenuOpen', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-navbar show-add></modus-navbar>');
+
+    const addMenuOpen = await page.spyOnEvent('addMenuOpen');
+    await page.waitForChanges();
+    const addMenuButton = await page.find('modus-navbar >>> [data-test-id="add-menu"]');
+    await addMenuButton.click({ clickCount: 2 });
+    await page.waitForChanges();
+    expect(addMenuOpen).toHaveReceivedEventTimes(1);
+  });
+
+
+  it('on clicking add button should open menu', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-navbar show-add><div slot="add" data-test-id="add-menu-slot">Content</div></modus-navbar>');
+    await page.waitForChanges();
+
+    const addMenuButton = await page.find('modus-navbar >>> [data-test-id="add-menu"]');
+    await addMenuButton.click({ clickCount: 1 });
+    await page.waitForChanges();
+
+    const slotElement = await page.find('modus-navbar >>> modus-navbar-add-menu');
+    const isVisible = await slotElement.isVisible();
+    expect(isVisible).toBe(true);
+  });
 });

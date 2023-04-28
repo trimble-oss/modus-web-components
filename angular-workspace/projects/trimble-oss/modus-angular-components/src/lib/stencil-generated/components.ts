@@ -551,6 +551,10 @@ export class ModusModal {
 import type { ModusNavbarApp as IModusNavbarModusNavbarApp } from '@trimble-oss/modus-web-components';
 export declare interface ModusNavbar extends Components.ModusNavbar {
   /**
+   * An event that fires when the add menu opens. 
+   */
+  addMenuOpen: EventEmitter<CustomEvent<void>>;
+  /**
    * An event that fires when the apps menu opens. 
    */
   appsMenuOpen: EventEmitter<CustomEvent<void>>;
@@ -591,21 +595,42 @@ export declare interface ModusNavbar extends Components.ModusNavbar {
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['apps', 'helpUrl', 'productLogoOptions', 'profileMenuOptions', 'reverse', 'showAppsMenu', 'showHelp', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showSearch', 'showShadow', 'variant'],
+  inputs: ['apps', 'helpUrl', 'productLogoOptions', 'profileMenuOptions', 'reverse', 'showAdd', 'showAppsMenu', 'showHelp', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showSearch', 'showShadow', 'variant'],
   methods: ['hideMainMenu']
 })
 @Component({
   selector: 'modus-navbar',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['apps', 'helpUrl', 'productLogoOptions', 'profileMenuOptions', 'reverse', 'showAppsMenu', 'showHelp', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showSearch', 'showShadow', 'variant']
+  inputs: ['apps', 'helpUrl', 'productLogoOptions', 'profileMenuOptions', 'reverse', 'showAdd', 'showAppsMenu', 'showHelp', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showSearch', 'showShadow', 'variant']
 })
 export class ModusNavbar {
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['appsMenuOpen', 'appsMenuAppOpen', 'helpOpen', 'mainMenuClick', 'notificationsMenuOpen', 'productLogoClick', 'profileMenuLinkClick', 'profileMenuOpen', 'profileMenuSignOutClick']);
+    proxyOutputs(this, this.el, ['addMenuOpen', 'appsMenuOpen', 'appsMenuAppOpen', 'helpOpen', 'mainMenuClick', 'notificationsMenuOpen', 'productLogoClick', 'profileMenuLinkClick', 'profileMenuOpen', 'profileMenuSignOutClick']);
+  }
+}
+
+
+export declare interface ModusNavbarAddMenu extends Components.ModusNavbarAddMenu {}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['reverse']
+})
+@Component({
+  selector: 'modus-navbar-add-menu',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['reverse']
+})
+export class ModusNavbarAddMenu {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
   }
 }
 

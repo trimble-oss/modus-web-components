@@ -22,6 +22,7 @@ export const DIRECTIVES = [
   d.ModusMessage,
   d.ModusModal,
   d.ModusNavbar,
+  d.ModusNavbarAddMenu,
   d.ModusNavbarAppsMenu,
   d.ModusNavbarMainMenu,
   d.ModusNavbarNotificationsMenu,

@@ -14,6 +14,7 @@
 | `productLogoOptions`   | --                       | (required) Product logo options.                                 | `{ height?: string; url: string; }`                                                                                  | `undefined` |
 | `profileMenuOptions`   | --                       | (required) Profile menu options.                                 | `{ avatarUrl?: string; email?: string; initials?: string; links?: ModusNavbarProfileMenuLink[]; username: string; }` | `undefined` |
 | `reverse`              | `reverse`                | (optional) Whether to display the navbar items in reverse order. | `boolean`                                                                                                            | `undefined` |
+| `showAdd`              | `show-add`               | (optional) Whether to show add.                                  | `boolean`                                                                                                            | `undefined` |
 | `showAppsMenu`         | `show-apps-menu`         | (optional) Whether to show the apps menu.                        | `boolean`                                                                                                            | `undefined` |
 | `showHelp`             | `show-help`              | (optional) Whether to show help.                                 | `boolean`                                                                                                            | `undefined` |
 | `showMainMenu`         | `show-main-menu`         | (optional) Whether to show the main menu.                        | `boolean`                                                                                                            | `undefined` |
@@ -28,6 +29,7 @@
 
 | Event                     | Description                                            | Type                                       |
 | ------------------------- | ------------------------------------------------------ | ------------------------------------------ |
+| `addMenuOpen`             | An event that fires when the add menu opens.           | `CustomEvent<void>`                        |
 | `appsMenuAppOpen`         | An event that fires when an apps menu app opens.       | `CustomEvent<ModusNavbarApp>`              |
 | `appsMenuOpen`            | An event that fires when the apps menu opens.          | `CustomEvent<void>`                        |
 | `helpOpen`                | An event that fires when the help link opens.          | `CustomEvent<void>`                        |
@@ -66,6 +68,7 @@ Type: `Promise<void>`
 
 - [modus-navbar-main-menu](main-menu)
 - [modus-navbar-notifications-menu](notifications-menu)
+- [modus-navbar-add-menu](add-menu)
 - [modus-navbar-apps-menu](apps-menu)
 - [modus-navbar-profile-menu](profile-menu)
 
@@ -74,6 +77,7 @@ Type: `Promise<void>`
 graph TD;
   modus-navbar --> modus-navbar-main-menu
   modus-navbar --> modus-navbar-notifications-menu
+  modus-navbar --> modus-navbar-add-menu
   modus-navbar --> modus-navbar-apps-menu
   modus-navbar --> modus-navbar-profile-menu
   style modus-navbar fill:#f9f,stroke:#333,stroke-width:4px

@@ -19,7 +19,8 @@ nav {
   .icon-notifications,
   .icon-help,
   .icon-apps,
-  .icon-menu {
+  .icon-menu,
+  .icon-add {
     border-radius: $rem-2px;
     padding: $rem-12px;
 
@@ -153,7 +154,8 @@ nav {
     .icon-notifications,
     .icon-help,
     .icon-apps,
-    .icon-menu {
+    .icon-menu,
+    .icon-add {
       path {
         fill: $modus-navbar-blue-icon-color;
       }

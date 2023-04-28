@@ -28,6 +28,7 @@ export const ModusListItem = /*@__PURE__*/createReactComponent<JSX.ModusListItem
 export const ModusMessage = /*@__PURE__*/createReactComponent<JSX.ModusMessage, HTMLModusMessageElement>('modus-message');
 export const ModusModal = /*@__PURE__*/createReactComponent<JSX.ModusModal, HTMLModusModalElement>('modus-modal');
 export const ModusNavbar = /*@__PURE__*/createReactComponent<JSX.ModusNavbar, HTMLModusNavbarElement>('modus-navbar');
+export const ModusNavbarAddMenu = /*@__PURE__*/createReactComponent<JSX.ModusNavbarAddMenu, HTMLModusNavbarAddMenuElement>('modus-navbar-add-menu');
 export const ModusNavbarAppsMenu = /*@__PURE__*/createReactComponent<JSX.ModusNavbarAppsMenu, HTMLModusNavbarAppsMenuElement>('modus-navbar-apps-menu');
 export const ModusNavbarMainMenu = /*@__PURE__*/createReactComponent<JSX.ModusNavbarMainMenu, HTMLModusNavbarMainMenuElement>('modus-navbar-main-menu');
 export const ModusNavbarNotificationsMenu = /*@__PURE__*/createReactComponent<JSX.ModusNavbarNotificationsMenu, HTMLModusNavbarNotificationsMenuElement>('modus-navbar-notifications-menu');
