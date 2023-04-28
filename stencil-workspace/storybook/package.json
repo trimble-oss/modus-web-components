@@ -25,7 +25,7 @@
     "@storybook/addon-styling": "^0.3.2",
     "@storybook/web-components": "^6.5.16",
     "babel-loader": "8.2.5",
-    "postcss": "^8.4.22",
+    "postcss": "^8.4.23",
     "storybook-dark-mode": "^3.0.0"
   },
   "engines": {
