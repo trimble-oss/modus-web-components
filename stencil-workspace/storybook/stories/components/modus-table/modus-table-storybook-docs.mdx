@@ -2,7 +2,7 @@ import { Story } from '@storybook/addon-docs';
 
 # Table
 
-<modus-alert type="warning" message="This component is under construction!"></modus-alert>
+<modus-alert type="warning" message="This component will be deprecated very soon! Please use Modus Data Table for displaying data in rows and columns."></modus-alert>
 
 ---
 
@@ -34,11 +34,7 @@ They are referenced using the `<modus-table>` custom HTML element.
   <modus-table />
 </div>
 <script>
-  document.querySelector('modus-table').columns = [
-    'Name',
-    'Age',
-    'Contacted',
-  ];
+  document.querySelector('modus-table').columns = ['Name', 'Age', 'Contacted'];
   document.querySelector('modus-table').data = [
     ['John', 25, false],
     ['Jane', 26, false],
@@ -234,21 +230,21 @@ interface ModusTableSortOptions {
 
 ### Properties
 
-| Property               | Attribute | Description                                | Type                           | Default                                                                                                         |
-| ---------------------- | --------- | ------------------------------------------ | ------------------------------ | --------------------------------------------------------------------------------------------------------------- |
-| `columns` _(required)_ | --        |                                            | `TColumn[], string[]`          | `undefined`                                                                                                     |
-| `data` _(required)_    | --        |                                            | `TCell[][], TRow[]`            | `undefined`                                                                                                     |
-| `displayOptions`       | --        | Options for table display.            | `ModusTableDisplayOptions` | `{ animateRowActionsDropdown: false, borderless: true, cellBorderless: true, rowStripe: false, size: 'large' }` |
-| `rowActions`           | --        | Actions that can be performed on each row. | `ModusTableRowAction[]`    | `[]`                                                                                                            |
-| `selectionOptions`     | --        | Options for table item selection.     | `ModusTableSelectionOptions`   | `{ canSelect: false, checkboxSelection: false, }`                                                               |
-| `sortOptions`          | --        | Options for table column sort.        | `ModusTableSortOptions`        | `{ canSort: false, serverSide: false, }`                                                                        |
+| Property               | Attribute | Description                                | Type                         | Default                                                                                                         |
+| ---------------------- | --------- | ------------------------------------------ | ---------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `columns` _(required)_ | --        |                                            | `TColumn[], string[]`        | `undefined`                                                                                                     |
+| `data` _(required)_    | --        |                                            | `TCell[][], TRow[]`          | `undefined`                                                                                                     |
+| `displayOptions`       | --        | Options for table display.                 | `ModusTableDisplayOptions`   | `{ animateRowActionsDropdown: false, borderless: true, cellBorderless: true, rowStripe: false, size: 'large' }` |
+| `rowActions`           | --        | Actions that can be performed on each row. | `ModusTableRowAction[]`      | `[]`                                                                                                            |
+| `selectionOptions`     | --        | Options for table item selection.          | `ModusTableSelectionOptions` | `{ canSelect: false, checkboxSelection: false, }`                                                               |
+| `sortOptions`          | --        | Options for table column sort.             | `ModusTableSortOptions`      | `{ canSort: false, serverSide: false, }`                                                                        |
 
 ### Events
 
 | Event            | Description                                       | Type                                                |
 | ---------------- | ------------------------------------------------- | --------------------------------------------------- |
-| `cellLinkClick`  | An event that fires on cell link click.           | `CustomEvent<ModusTableCellLink>`               |
+| `cellLinkClick`  | An event that fires on cell link click.           | `CustomEvent<ModusTableCellLink>`                   |
 | `rowActionClick` | An event that fires when a row action is clicked. | `CustomEvent<{ actionId: string; rowId: string; }>` |
 | `rowDoubleClick` | An event that fires on row double click.          | `CustomEvent<string>`                               |
 | `selection`      | An event that fires on selection change.          | `CustomEvent<string[]>`                             |
-| `sort`           | An event that fires on column sort.               | `CustomEvent<ModusTableSortEvent>`              |
+| `sort`           | An event that fires on column sort.               | `CustomEvent<ModusTableSortEvent>`                  |
