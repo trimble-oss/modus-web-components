@@ -7,10 +7,16 @@ import { Story } from '@storybook/addon-docs';
 ---
 
 [Modus Data Table](https://modus.trimble.com/components/tables/) web components are wrappers around the HTML table element. Modus Data Table is reusable and customizable UI element that can be used to display data in a tabular format. It has functionality like sorting, pagination, and column resizing.
+They are referenced using the `<modus-data-table>` custom HTML element.
+
+## Overview
+
+- [Implementation Details](#implementation-details)
+- [Pagenation](#pagination)
 
 ### Default
 
-<Story id="components-data-table--default" height={'340px'} />
+<Story id="components-data-table--default" height={'350px'} />
 
 ### Hover
 
@@ -108,6 +114,14 @@ import { Story } from '@storybook/addon-docs';
 </script>
 ```
 
+### Implementation Details
+
+### Pagination
+ - Pagination allows users to navigate between pages. In `modus-data-table`, `modus-pagination` component is used to navigate between pages.
+ - If `pagination` prop in the modus data table is true pagination will be enabled.
+ - In modus data table There are two props available for pagination one is `pagination` and other is `pageSizeList`. 
+    - if pagination is true pagination will be enabled. By default it is false. pagesizelist takes an  array. it will take number as an array to display pageSize in data table.
+
 ### Properties
 
 | Property              | Attribute             | Description                                     | Type                     | Default     |
@@ -126,3 +140,8 @@ import { Story } from '@storybook/addon-docs';
 | Name      | Description                         | Emits                             |
 | --------- | ----------------------------------- | --------------------------------- |
 | `sorting` | An event that fires on sort change. | `[{ id: string, desc: boolean }]` |
+
+### Accessibility
+
+- Pages of a data table come into focus when the tab key is pushed. And when you press the enter key, that page appears.
+- On pressing of tab key it display the dropdown and when enter key is pressed, it displayed the data with that number of rows.
