@@ -15,7 +15,8 @@ table {
       // height: 3rem;
 
       th {
-        // border: $rem-1px $modus-table-border-color solid;
+          border: $rem-1px $modus-table-header-border-color solid;
+
         // padding: 0.25rem 1rem;
         font-weight: $font-weight-semi-bold;
 
