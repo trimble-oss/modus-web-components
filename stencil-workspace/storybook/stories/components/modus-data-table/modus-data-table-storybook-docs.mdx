@@ -6,21 +6,52 @@ import { Story } from '@storybook/addon-docs';
 
 ---
 
-[Modus Data Table](https://modus.trimble.com/components/tables/) web components are wrappers around the HTML table element. Modus Data Table is reusable and customizable UI element that can be used to display data in a tabular format. It has functionality like sorting, pagination, and column resizing.
+[Modus Data Table](https://modus.trimble.com/components/tables/) web components are wrappers around the HTML table element. Modus Data Table is reusable and customizable UI element that can be used to display data in a tabular format. They are referenced using the `<modus-data-table>` custom HTML element.
+
+## Overview
+
+- [Default](#default)
+- [Hover](#hover)
+- [Borderless](#borderless)
+- [Sorting](#sorting)
+- [Properties](#properties)
+- [Events](#events)
+- [Accessibility](#accessibility)
+
+---
 
 ### Default
+
+Basic table that outputs data in tabular format after accepting `data` and `column` as input.
 
 <Story id="components-data-table--default" height={'340px'} />
 
 ### Hover
 
+This displays the highlighted row where the cursor is currently located.
+
+- Hover is disable by default, set `hover` to `true` to enable hover.
+
 <Story id="components-data-table--hover" height={'350px'} />
 
-### BorderLess
+### Borderless
+
+Table has two views one with border and another is borderless.
+
+- Table with a border is shown by default. There are two options under `displayOptions`: `borderless` and `cellborderless`.
+- To eliminate the outer table border, set `borderless` to `true`.
+- Set `cellborderless` to `true` remove the innter table border i.e. for the border for cells.
 
 <Story id="components-data-table--border-less" height={'350px'} />
 
 ### Sorting
+
+Users can arrange data in a table by sorting it in either ascending or descending order. The sort icon will be visible when enabled.
+
+- Sorting is disabled by default. The way to activate it is to set `sort` to `true`.
+- Every column has sorting turned on by default. Setting `enableSorting` `true` or `false` for a certain column will enable or disable it.
+- When enabled, the sort icon's initial click will sort in ascending order, while its second click will sort in descending order.
+- Set `showSortIconOnHover` to `true` to enable sort on hover as well.
 
 <Story id="components-data-table--sorting" height={'350px'} />
 
@@ -29,7 +60,7 @@ import { Story } from '@storybook/addon-docs';
   <modus-data-table hover="false" sort="false" />
 </div>
 <script>
-  document.querySelector('modus-data-table').columnHeaders = [
+  document.querySelector('modus-data-table').columns = [
     {
       header: 'First Name',
       accessorKey: 'firstName',
@@ -115,8 +146,16 @@ import { Story } from '@storybook/addon-docs';
 | `showSortIconOnHover` | `showSortIconOnHover` | (optional) To display sort icon on hover.       | `boolean`                | `false`     |
 | `displayOptions`      | `displayOptions`      | (optional) To control display options of table. | `boolean`                | `false`     |
 
-### DOM Events
+### Events
 
 | Name      | Description                         | Emits                             |
 | --------- | ----------------------------------- | --------------------------------- |
 | `sorting` | An event that fires on sort change. | `[{ id: string, desc: boolean }]` |
+
+### Accessibility
+
+Users can use keyboard navigation to perfor different action.
+
+| Name    | Description                                                                                                           |
+| ------- | --------------------------------------------------------------------------------------------------------------------- |
+| Sorting | The `tab` key is used for navigating between the sort icons, while the `enter` key is used to interact with the icon. |
