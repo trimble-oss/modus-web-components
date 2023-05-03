@@ -11,8 +11,7 @@ They are referenced using the `<modus-data-table>` custom HTML element.
 
 ## Overview
 
-- [Implementation Details](#implementation-details)
-- [Pagenation](#pagination)
+- [Pagination](#pagination)
 
 ### Default
 
@@ -31,6 +30,9 @@ They are referenced using the `<modus-data-table>` custom HTML element.
 <Story id="components-data-table--sorting" height={'350px'} />
 
 ### Pagination
+
+ - Modus Data Table uses `modus-pagination` component to navigate between pages.
+ - Pagination can be enabled using the `pagination` prop. The `pageSizeList` takes an array for page size options.
 
 <Story id="components-data-table--pagination" height={'500px'} />
 
@@ -114,14 +116,6 @@ They are referenced using the `<modus-data-table>` custom HTML element.
 </script>
 ```
 
-### Implementation Details
-
-### Pagination
- - Pagination allows users to navigate between pages. In `modus-data-table`, `modus-pagination` component is used to navigate between pages.
- - If `pagination` prop in the modus data table is true pagination will be enabled.
- - In modus data table There are two props available for pagination one is `pagination` and other is `pageSizeList`. 
-    - if pagination is true pagination will be enabled. By default it is false. pagesizelist takes an  array. it will take number as an array to display pageSize in data table.
-
 ### Properties
 
 | Property              | Attribute             | Description                                     | Type                     | Default     |
@@ -143,5 +137,5 @@ They are referenced using the `<modus-data-table>` custom HTML element.
 
 ### Accessibility
 
-- Pages of a data table come into focus when the tab key is pushed. And when you press the enter key, that page appears.
-- On pressing of tab key it display the dropdown and when enter key is pressed, it displayed the data with that number of rows.
+- Users can change page size and page number using keyboard navigation. 
+- The Tab key brings focus to an element and the Enter key is used to perform an action like selecting a page size and page number.
