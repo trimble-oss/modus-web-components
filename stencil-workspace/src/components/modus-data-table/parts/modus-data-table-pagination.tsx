@@ -15,6 +15,21 @@ export const ModusDataTablePagination: FunctionalComponent<
 > = ({ table, totalCount, pageSizeList }) => {
   return (
     <div>
+      <span class="page-view-text">
+        Page View{' '}
+        <select
+          class="page-view"
+          onChange={(e) => {
+            const target = e.target as EventTarget & HTMLInputElement;
+            table.setPageSize(Number(target.value));
+          }}>
+          {pageSizeList?.map((size) => (
+            <option key={size} value={size} selected={size === pageSizeList[0]}>
+              {size}
+            </option>
+          ))}
+        </select>
+      </span>  
       <span class="pager">
         <modus-pagination
           active-page={1}
@@ -35,22 +50,7 @@ export const ModusDataTablePagination: FunctionalComponent<
             of {totalCount}
           </span>
         </div>
-      </span>
-      <span class="page-view-text">
-        Page View{' '}
-        <select
-          class="page-view"
-          onChange={(e) => {
-            const target = e.target as EventTarget & HTMLInputElement;
-            table.setPageSize(Number(target.value));
-          }}>
-          {pageSizeList?.map((size) => (
-            <option key={size} value={size} selected={size === pageSizeList[0]}>
-              {size}
-            </option>
-          ))}
-        </select>
-      </span>
+      </span>  
     </div>
   );
 };
