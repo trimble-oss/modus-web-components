@@ -8,9 +8,9 @@ The components in this library were programmatically generated using the [Stenci
 ## Installation
 
 - Install the Modus Angular Components Library and its Modus Web Component dependency
-  `npm install @trimble-oss/modus-web-components @trimble-oss/modus-angular-components --save`
+  `npm install @trimble-oss/modus-angular-components --save`
 
-- Add the following snippet to your `main.ts` (or any any module)
+- Add the following snippet to your `main.ts` (or any main module)
 
   ```typescript
   import { defineCustomElements } from '@trimble-oss/modus-web-components/loader';
@@ -18,17 +18,28 @@ The components in this library were programmatically generated using the [Stenci
   defineCustomElements();
   ```
 
+- Add the following snippet to your `app.module.ts` (or any app module)
+
+  ```typescript
+  import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
+  @NgModule({
+    ...
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  })
+  ```
+
 ## Example Usage
 
 - Use a modus button in your `app.component.html`
 
   ```html
-   <modus-button color="danger" [disabled]="false" (click)="onClick()">Cancel</modus-button>
+  <modus-button color="primary" [disabled]="false">Modus Button</modus-button>
   ```
 
 ## Contributing
 
-To contribute to the Modus Angular Components library please see the Modus Web Components contributing readme
+To contribute to the Modus Angular Components library please see the [Modus Web Components](https://www.npmjs.com/package/@trimble-oss/modus-web-components) [contributing guidelines](https://github.com/trimble-oss/modus-web-components/blob/main/CONTRIBUTING.md).
 
 ## Build
 
