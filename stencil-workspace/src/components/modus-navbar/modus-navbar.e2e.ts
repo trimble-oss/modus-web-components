@@ -114,4 +114,25 @@ describe('modus-navbar', () => {
     await page.waitForChanges();
     expect(profileMenuOpen).toHaveReceivedEventTimes(1);
   });
+
+  it('should show tooltip on over of search button', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<modus-navbar show-search search-label="Search"></modus-navbar>'
+    );
+
+    await page.waitForChanges();
+
+    const tooltip = await page.find('modus-navbar >>> :first-child');
+    const tooltipText = await tooltip.find('modus-tooltip >>> .text');
+    expect(await tooltipText.isVisible()).toBe(false);
+
+    await tooltip
+      .find('modus-tooltip >>> .modus-tooltip')
+      .then((e) => e.hover());
+    await page.waitForChanges();
+
+    expect(await tooltipText.isVisible()).toBe(true);
+    expect(tooltipText.innerText).toBe('Search');
+  });
 });

@@ -14,6 +14,7 @@
 | `productLogoOptions`   | --                       | (required) Product logo options.                                 | `{ height?: string; url: string; }`                                                                                  | `undefined` |
 | `profileMenuOptions`   | --                       | (required) Profile menu options.                                 | `{ avatarUrl?: string; email?: string; initials?: string; links?: ModusNavbarProfileMenuLink[]; username: string; }` | `undefined` |
 | `reverse`              | `reverse`                | (optional) Whether to display the navbar items in reverse order. | `boolean`                                                                                                            | `undefined` |
+| `searchLabel`          | `search-label`           | (optional) Search tooltip label.                                 | `string`                                                                                                             | `undefined` |
 | `showAppsMenu`         | `show-apps-menu`         | (optional) Whether to show the apps menu.                        | `boolean`                                                                                                            | `undefined` |
 | `showHelp`             | `show-help`              | (optional) Whether to show help.                                 | `boolean`                                                                                                            | `undefined` |
 | `showMainMenu`         | `show-main-menu`         | (optional) Whether to show the main menu.                        | `boolean`                                                                                                            | `undefined` |
@@ -65,6 +66,7 @@ Type: `Promise<void>`
 ### Depends on
 
 - [modus-navbar-main-menu](main-menu)
+- [modus-tooltip](../modus-tooltip)
 - [modus-navbar-notifications-menu](notifications-menu)
 - [modus-navbar-apps-menu](apps-menu)
 - [modus-navbar-profile-menu](profile-menu)
@@ -73,6 +75,7 @@ Type: `Promise<void>`
 ```mermaid
 graph TD;
   modus-navbar --> modus-navbar-main-menu
+  modus-navbar --> modus-tooltip
   modus-navbar --> modus-navbar-notifications-menu
   modus-navbar --> modus-navbar-apps-menu
   modus-navbar --> modus-navbar-profile-menu
