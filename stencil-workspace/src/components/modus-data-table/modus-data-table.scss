@@ -1,4 +1,4 @@
-@import './modus-data-table.vars';
+@import "./modus-data-table.vars";
 
 table {
   border: $rem-1px $modus-table-border-color solid;
@@ -12,15 +12,21 @@ table {
       background-color: $modus-table-header-bg;
       color: $modus-table-header-color;
 
-      // height: 3rem;
-
       th {
-          border: $rem-1px $modus-table-header-border-color solid;
-
-        // padding: 0.25rem 1rem;
+        border: $rem-1px $modus-table-header-border-color solid;
         font-weight: $font-weight-semi-bold;
+        position: relative;
 
-        // min-height: 3rem;
+        .can-resize {
+          cursor: e-resize;
+          height: 100%;
+          position: absolute;
+          right: 0;
+          top: 0;
+          touch-action: none;
+          user-select: none;
+          width: 3px;
+        }
 
         .can-sort {
           align-items: center;
@@ -73,12 +79,10 @@ table {
   tbody {
     tr {
       background-color: $modus-table-body-bg;
-      color: modus-table-header-color;
+      color: $modus-table-header-color;
 
       td {
-         border: $rem-1px $modus-table-header-border-color solid;
-        // min-height: 3rem;
-        // padding: 0.25rem 1rem;
+        border: $rem-1px $modus-table-header-border-color solid;
 
         &.text-align-right {
           text-align: right;
@@ -99,9 +103,17 @@ table {
     th,
     td {
       border: $rem-1px $modus-table-border-color solid;
+      box-sizing: border-box;
       min-height: 3rem;
+      overflow: hidden;
       padding: 0.25rem 1rem;
       text-align: left;
+      text-overflow: ellipsis;
+      word-wrap: no-wrap;
+
+      &.active-resize {
+        border-right: 2px solid $modus-table-column-resizing-border-color;
+      }
 
       &.text-align-center {
         text-align: center;
@@ -120,238 +132,3 @@ table {
     }
   }
 }
-
-// table {
-//   border: $rem-1px $modus-table-border-color solid;
-//   border-collapse: collapse;
-//   width: 100%;
-
-//   th {
-//     background-color: $modus-table-header-bg;
-//     border: $rem-1px $modus-table-header-border-color solid;
-//     color: $modus-table-header-color;
-//     font-size: $rem-14px;
-//     font-weight: $font-weight-semi-bold;
-//     min-height: 3rem;
-
-//     &.can-sort {
-//       cursor: pointer;
-//     }
-
-//     .column-header {
-//       display: flex;
-//       flex-direction: row;
-//       height: $rem-20px;
-//       justify-content: center;
-//       padding: 0 $rem-8px;
-
-//       &.align-left,
-//       &.align-right {
-//         justify-content: space-between;
-//       }
-
-//       &.align-center {
-//         justify-content: center;
-//       }
-
-//       .icon-container {
-//         align-items: center;
-//         display: flex;
-//         height: $rem-16px;
-//         justify-content: center;
-
-//         .sort-icon {
-//           border-radius: $rem-4px;
-//           display: flex;
-//           padding: $rem-4px;
-
-//           &:hover {
-//             background-color: $modus-btn-icon-only-dark-hover-bg;
-
-//             svg path {
-//               fill: $modus-btn-icon-only-dark-hover-color;
-//             }
-//           }
-
-//           &:active {
-//             background-color: $modus-btn-icon-only-dark-active-bg;
-
-//             svg path {
-//               fill: $modus-btn-icon-only-dark-active-color;
-//             }
-//           }
-
-//           svg path {
-//             fill: $modus-btn-icon-only-dark-color;
-//           }
-//         }
-//       }
-//     }
-//   }
-
-//   tr {
-//     color: $modus-table-color;
-//     font-size: $rem-14px;
-//     height: 3rem;
-
-//     td {
-//       background-color: $modus-table-bg;
-//       border: $rem-1px $modus-table-border-color solid;
-//       padding: 0 $rem-8px;
-
-//       &.align-center {
-//         text-align: center;
-
-//         div {
-//           display: flex;
-//           height: 100%;
-//           justify-content: center;
-//           width: 100%;
-//         }
-//       }
-
-//       &.align-left {
-//         text-align: left;
-//       }
-
-//       &.align-right {
-//         text-align: right;
-//       }
-
-//       &.readonly {
-//         background-color: $modus-table-readonly-bg;
-//         color: $modus-table-readonly-color;
-//       }
-
-//       &.selected {
-//         background-color: $modus-table-selected-bg;
-//       }
-
-//       .cell-link {
-//         color: $modus-link-color;
-//         cursor: pointer;
-//         display: inline-block;
-//         font-weight: $font-weight-semi-bold;
-
-//         &:hover {
-//           text-decoration: underline;
-//         }
-//       }
-
-//       .cell-badge {
-//         align-items: center;
-//         display: flex;
-//         justify-content: center;
-//       }
-//     }
-//   }
-
-//   &.borderless {
-//     border: none !important;
-//   }
-
-//   &.cell-borderless {
-//     th,
-//     td {
-//       border: none !important;
-//     }
-//   }
-
-//   &.row-stripe {
-//     tr {
-//       border-bottom: $rem-1px $modus-table-border-color solid;
-//     }
-//   }
-
-//   &.size-small {
-//     th,
-//     tr {
-//       height: 2rem;
-//     }
-//   }
-// }
-
-// /* Modus Data Table Row Action Dropdown */
-// modus-dropdown {
-//   .row-action {
-//     border-radius: 50%;
-//     cursor: pointer;
-//     padding: $rem-2px;
-//     transition: background-color 0.15s ease-in-out;
-
-//     svg {
-//       fill: $modus-btn-icon-only-dark-color;
-//     }
-
-//     &:hover {
-//       background-color: $modus-btn-icon-only-dark-hover-bg;
-
-//       svg path {
-//         fill: $modus-btn-icon-only-dark-hover-color;
-//       }
-//     }
-
-//     &:active {
-//       background-color: $modus-btn-icon-only-dark-active-bg;
-
-//       svg path {
-//         fill: $modus-btn-icon-only-dark-active-color;
-//       }
-//     }
-//   }
-
-//   .list-container {
-//     left: 84px;
-//     position: relative;
-//     top: -6px;
-
-//     .items-container {
-//       display: inline-block;
-//       position: fixed;
-//       width: 200px;
-
-//       .action-item {
-//         height: $rem-24px;
-//         padding: $rem-8px;
-//         text-align: left;
-//         user-select: none;
-//         width: 200px;
-
-//         .action-item-content {
-//           align-items: center;
-//           background-color: $modus-list-item-bg;
-//           border: $rem-1px solid $modus-list-item-border-color;
-//           color: $modus-list-item-color;
-//           display: flex;
-//           height: $rem-24px;
-//           justify-content: flex-start;
-//           overflow: hidden;
-//           padding: $rem-8px $rem-16px;
-
-//           svg {
-//             margin-right: $rem-8px;
-
-//             path {
-//               fill: $modus-btn-icon-only-dark-color;
-//             }
-//           }
-
-//           .display-text {
-//             display: block;
-//             font-size: $rem-16px;
-//             overflow: hidden;
-//             text-overflow: ellipsis;
-//             white-space: nowrap;
-//             width: 100%;
-//           }
-//         }
-
-//         &:hover {
-//           .action-item-content {
-//             background-color: $modus-list-item-hover-bg;
-//           }
-//         }
-//       }
-//     }
-//   }
-// }

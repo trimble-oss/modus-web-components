@@ -1,6 +1,6 @@
 import { Story } from '@storybook/addon-docs';
 
-# Table
+# Data Table
 
 <modus-alert type="warning" message="This component is under construction!"></modus-alert>
 
@@ -14,6 +14,7 @@ import { Story } from '@storybook/addon-docs';
 - [Hover](#hover)
 - [Borderless](#borderless)
 - [Sorting](#sorting)
+- [Column Resize](#column-resize)
 - [Properties](#properties)
 - [Events](#events)
 - [Accessibility](#accessibility)
@@ -26,37 +27,8 @@ Basic table that outputs data in tabular format after accepting `data` and `colu
 
 <Story id="components-data-table--default" height={'340px'} />
 
-### Hover
-
-This displays the highlighted row where the cursor is currently located.
-
-- Hover is disable by default, set `hover` to `true` to enable hover.
-
-<Story id="components-data-table--hover" height={'350px'} />
-
-### Borderless
-
-Table has two views one with border and another is borderless.
-
-- Table with a border is shown by default. There are two options under `displayOptions`: `borderless` and `cellborderless`.
-- To eliminate the outer table border, set `borderless` to `true`.
-- Set `cellborderless` to `true` remove the innter table border i.e. for the border for cells.
-
-<Story id="components-data-table--border-less" height={'350px'} />
-
-### Sorting
-
-Users can arrange data in a table by sorting it in either ascending or descending order. The sort icon will be visible when enabled.
-
-- Sorting is disabled by default. The way to activate it is to set `sort` to `true`.
-- Every column has sorting turned on by default. Setting `enableSorting` `true` or `false` for a certain column will enable or disable it.
-- When enabled, the sort icon's initial click will sort in ascending order, while its second click will sort in descending order.
-- Set `showSortIconOnHover` to `true` to enable sort on hover as well.
-
-<Story id="components-data-table--sorting" height={'350px'} />
-
 ```html
-<div style="width: 500px">
+<div style="width: 800px">
   <modus-data-table hover="false" sort="false" />
 </div>
 <script>
@@ -133,6 +105,122 @@ Users can arrange data in a table by sorting it in either ascending or descendin
     },
   ];
 </script>
+</html>
+```
+
+### Hover
+
+This displays the highlighted row where the cursor is currently located.
+
+- Hover is disable by default, set `hover` to `true` to enable hover.
+
+<Story id="components-data-table--hover" height={'350px'} />
+
+### Borderless
+
+Table has two views one with border and another is borderless.
+
+- Table with a border is shown by default. There are two options under `displayOptions`: `borderless` and `cellborderless`.
+- To eliminate the outer table border, set `borderless` to `true`.
+- Set `cellborderless` to `true` remove the innter table border i.e. for the border for cells.
+
+<Story id="components-data-table--borderless" height={'350px'} />
+
+### Sorting
+
+Users can arrange data in a table by sorting it in either ascending or descending order. The sort icon will be visible when enabled.
+
+- Sorting is disabled by default. The way to activate it is to set `sort` to `true`.
+- Every column has sorting turned on by default. Setting `enableSorting` `true` or `false` for a certain column will enable or disable it.
+- When enabled, the sort icon's initial click will sort in ascending order, while its second click will sort in descending order.
+- Set `showSortIconOnHover` to `true` to enable sort on hover as well.
+
+<Story id="components-data-table--sorting" height={'350px'} />
+
+### Column Resize
+
+The column sizing feature allows users to dynamically change the width of all columns by dragging the column headers. When hovering above the dividing line between two columns, there is a visual indicator that shows the column is adjustable.
+
+### Note:
+
+- By default, a column can be resized with table responsiveness and other columns will be adjusted to fit within the confines of the table.
+- By setting `fullWidth` to false, the table will get a fixed size by calculating the sum of the sizes of all columns and resizing a column will not impact others.
+- Optionally you can specify the width of each column using `size`, `minSize` and `maxSize` to limit the resizing of a column to a specific value.
+
+<Story id="components-data-table--column-resize" height={'350px'} />
+
+```html
+<div style="width: 800px">
+   <modus-data-table column-resize="true" full-width="false" />
+</div>
+ <script>
+    document.querySelector('modus-data-table').columns = [
+      {
+        header: 'First Name',
+        accessorKey: 'firstName',
+        id: 'first-name',
+        dataType: 'text',
+        size: 120,
+      },
+      {
+        header: 'Last Name',
+        accessorKey: 'lastName',
+        id: 'last-name',
+        dataType: 'text',
+        size: 120,
+      },
+      {
+        header: 'Age',
+        accessorKey: 'age',
+        id: 'age',
+        dataType: 'integer',
+        size: 55,
+      },
+      {
+        header: 'Visits',
+        accessorKey: 'visits',
+        id: 'visits',
+        dataType: 'integer',
+        maxSize: 80,
+        minSize: 80,
+        enableResizing: false,
+      },
+      {
+        header: 'Status',
+        accessorKey: 'status',
+        id: 'status',
+        dataType: 'text',
+      },
+      {
+        header: 'Profile Progress',
+        accessorKey: 'progress',
+        id: 'progress',
+        dataType: 'integer',
+        minSize: 100,
+      },
+      {
+        header: 'Created At',
+        accessorKey: 'createdAt',
+        id: 'createdAt',
+        dataType: 'date',
+        size: 124,
+        minSize: 100,
+      },
+    ];
+    document.querySelector('modus-data-table').data = [
+      {
+        firstName: 'Gordon',
+        lastName: 'Lemke',
+        age: 40,
+        visits: 434,
+        progress: 97,
+        status: 'single',
+        createdAt: '2002-11-21T12:48:51.739Z',
+      },
+      ...
+    ];
+  </script>
+</html>
 ```
 
 ### Properties
@@ -145,6 +233,8 @@ Users can arrange data in a table by sorting it in either ascending or descendin
 | `sort`                | `sort`                | (optional) To sort data in table.               | `boolean`                | `false`     |
 | `showSortIconOnHover` | `showSortIconOnHover` | (optional) To display sort icon on hover.       | `boolean`                | `false`     |
 | `displayOptions`      | `displayOptions`      | (optional) To control display options of table. | `boolean`                | `false`     |
+| `columnResize`        | `column-resize`       | (optional) To enable column resizing of table.  | `boolean`                | `false`     |
+| `fullWidth`           | `full-width`          | (optional) To manage table width.               | `boolean`                | `true`      |
 
 ### Events
 
@@ -154,7 +244,7 @@ Users can arrange data in a table by sorting it in either ascending or descendin
 
 ### Accessibility
 
-Users can use keyboard navigation to perfor different action.
+Users can use keyboard navigation to perform different action.
 
 | Name    | Description                                                                                                           |
 | ------- | --------------------------------------------------------------------------------------------------------------------- |

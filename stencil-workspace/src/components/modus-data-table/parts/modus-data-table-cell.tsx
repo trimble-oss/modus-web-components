@@ -16,13 +16,18 @@ export const ModusDataTableCell: FunctionalComponent<
   return (
     <td
       key={props.cell.id}
-      class={
-        (props.cell.column.columnDef[PropertyDataType] ===
-          ModusColumnDataType.Integer ||
-          props.cell.column.columnDef[PropertyDataType] ===
-            ModusColumnDataType.Currency) &&
-        'text-align-right'
-      }>
+      class={`
+       ${
+         props.cell.column.columnDef[PropertyDataType] ===
+           ModusColumnDataType.Integer ||
+         props.cell.column.columnDef[PropertyDataType] ===
+           ModusColumnDataType.Currency
+           ? 'text-align-right'
+           : ''
+       }
+          ${props.cell.column.getIsResizing() ? 'active-resize' : ''}
+      `}
+      style={{ width: `${props.cell.column.getSize()}px` }}>
       {props.cell.column.columnDef[PropertyDataType] !==
       ModusColumnDataType.Date
         ? props.cell.renderValue()
