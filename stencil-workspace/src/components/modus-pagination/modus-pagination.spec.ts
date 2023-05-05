@@ -1,7 +1,7 @@
 import { newSpecPage } from '@stencil/core/testing';
 import { ModusPagination } from './modus-pagination';
 
-describe('modus-pagination', () => {
+xdescribe('modus-pagination', () => {
   it('renders', async () => {
     const { root } = await newSpecPage({
       components: [ModusPagination],

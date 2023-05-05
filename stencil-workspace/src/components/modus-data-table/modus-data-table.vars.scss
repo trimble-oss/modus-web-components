@@ -11,3 +11,8 @@ $modus-table-header-color: var(--modus-table-color, #464b52) !default;
 $modus-table-body-bg: var(--modus-table-bg, #fff) !default;
 $modus-table-hover-bg: var(--modus-table-hover-bg, #dcedf9) !default;
 $modus-table-body-color: var(--modus-table-color, #252a2e) !default;
+
+/** Pagination */
+$modus-table-pagination-color: var(--modus-table-color, #6A6976) !default;
+$modus-page-view-select-bg: var(--modus-input-bg, #fff) !default;
+$modus-page-view-select-color: var(--modus-input-color, #252a2e) !default;

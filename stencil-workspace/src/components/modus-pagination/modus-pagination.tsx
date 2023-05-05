@@ -59,7 +59,7 @@ export class ModusPagination {
     const ellipsis = '...';
 
     // Always show the first page.
-    pages.push(this.minPage);
+    this.maxPage > 1 && pages.push(this.minPage);
 
     if (this.maxPage - this.minPage < 7) {
       // No need for ellipsis for 7 pages - push all of them.
@@ -119,7 +119,7 @@ export class ModusPagination {
     return (
       <nav aria-label={this.ariaLabel} class={`${this.classBySize.get(this.size)}`}>
         <ol>
-          {this.maxPage - this.minPage >= 7 &&
+          {
             <li
               class={`${this.activePage != this.minPage ? 'hoverable' : 'disabled'}`}
               onClick={() => this.handleChevronClick('back')}
@@ -127,14 +127,22 @@ export class ModusPagination {
               tabIndex={0}>
               <IconChevronLeftThick size={this.chevronSizeBySize.get(this.size)} />
             </li>}
-          {this.pages.map(page => {
-            return (
-              <li class={`${page === this.activePage ? 'active' : ''} ${!isNaN(+page) ? 'hoverable' : ''}`} onClick={() => this.handlePageClick(+page)}>
-                {page}
-              </li>
-            );
-          })}
-          {this.maxPage - this.minPage >= 7 &&
+            {this.pages.map(page => {
+          return (
+            <li
+              class={`${page === this.activePage ? 'active' : ''} ${!isNaN(+page) ? 'hoverable' : ''}`}
+              onClick={() => this.handlePageClick(+page)}
+              onKeyDown={(event) => {
+                if (event.code === 'Enter') {
+                  this.handlePageClick(+page);
+                }
+              }}
+              tabIndex={0}>
+              {page}
+            </li>
+          );
+        })}
+          {
             <li
               class={`${this.activePage != this.maxPage ? 'hoverable' : 'disabled'}`}
               onClick={() => this.handleChevronClick('forward')}
