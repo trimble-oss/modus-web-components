@@ -48,6 +48,9 @@ export class ModusNavbar {
   /** (optional) Whether to display the navbar items in reverse order. */
   @Prop() reverse: boolean;
 
+  /** (optional) Search tooltip label. */
+  @Prop() searchLabel: string;
+
   /** (optional) Whether to show the apps menu. */
   @Prop() showAppsMenu: boolean;
 
@@ -307,7 +310,9 @@ export class ModusNavbar {
           {this.showSearch && (
             <div class="navbar-button search">
               <span class="navbar-button-icon">
-                <IconSearch size="24" />
+                <modus-tooltip text={this.searchLabel} position="bottom">
+                  <IconSearch size="24" />
+                </modus-tooltip>
               </span>
             </div>
           )}

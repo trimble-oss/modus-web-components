@@ -559,6 +559,10 @@ export namespace Components {
          */
         "reverse": boolean;
         /**
+          * (optional) Search tooltip label.
+         */
+        "searchLabel": string;
+        /**
           * (optional) Whether to show the apps menu.
          */
         "showAppsMenu": boolean;
@@ -2213,6 +2217,10 @@ declare namespace LocalJSX {
           * (optional) Whether to display the navbar items in reverse order.
          */
         "reverse"?: boolean;
+        /**
+          * (optional) Search tooltip label.
+         */
+        "searchLabel"?: string;
         /**
           * (optional) Whether to show the apps menu.
          */
