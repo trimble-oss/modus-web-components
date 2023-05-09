@@ -20,7 +20,7 @@ table {
     .column-header {
       display: flex;
       flex-direction: row;
-      height: $rem-20px;
+      min-height: $rem-20px;
       justify-content: center;
       padding: 0 $rem-8px;
 

@@ -165,13 +165,11 @@ You can add the following code to the test file to pause the test at a specific 
 5. If the library is going to require a version bump for release, bump the version in `package.json` and run `npm i` after. If a release is not needed at this point, don't worry about this step.
 6. If there is any change to the library's API, update the Storybook documentation under `./storybook/stories`.
    - To run the Storybook site, `cd` into the directory and run `npm run storybook`. The library build will need to be up to date. The changes to the site will be deployed upon the PR merge to `main`.
-7. Update the `CHANGELOG.md` with notes on your changes.
-   - For more information about how to update the changelog, refer to the detailed section in the readme.
-8. Once all of your changes have been made, squash your commits down to a singular commit with a relevant message.
+7. Once all of your changes have been made, squash your commits down to a singular commit with a relevant message.
    - If you prefer to do this with a GUI, GitHub Desktop has a [great squashing feature](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/managing-commits/squashing-commits).
-9. Submit your PR with your branch as the `head`, and the `@trimble-oss/modus-web-components` `main` branch as the `base`.
+8. Submit your PR with your branch as the `head`, and the `@trimble-oss/modus-web-components` `main` branch as the `base`.
    - Don't forget to link your relevant issue in the PR description.
-10. Rebase and Merge the PR upon approval.
+9. Rebase and Merge the PR upon approval.
 
 ## Changelog
 
