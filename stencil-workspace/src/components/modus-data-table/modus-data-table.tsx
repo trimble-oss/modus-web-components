@@ -11,11 +11,15 @@ import {
 import {
   ColumnDef,
   Table,
+  PaginationState,
   TableOptionsResolved,
-  Updater,
   createTable,
   getCoreRowModel,
   getSortedRowModel,
+  ColumnSizingState,
+  Updater,
+  ColumnSizingInfoState,
+  getPaginationRowModel,
 } from '@tanstack/table-core';
 import {
   ModusDataTableColumn,
@@ -24,6 +28,7 @@ import {
 } from './models';
 import { ModusDataTableCell } from './parts/modus-data-table-cell';
 import { ModusDataTableHeader } from './parts/modus-data-table-header';
+import { ModusDataTablePagination } from './parts/modus-data-table-pagination';
 
 @Component({
   tag: 'modus-data-table',
@@ -45,12 +50,23 @@ export class ModusDataTable {
 
   /** (Optional) To enable row hover in table. */
   @Prop() hover = false;
+  /* (optional) To manage column resizing */
+  @Prop() columnResize = false;
+
+  /* (optional) To manage table resizing */
+  @Prop() fullWidth = true;
 
   /** (Optional) To sort data in table. */
   @Prop() sort = false;
 
   /** (Optional) To display sort icon on hover. */
   @Prop() showSortIconOnHover = false;
+
+  /* (optional) To enable pagination for the table. */
+  @Prop() pagination: boolean;
+
+  /* (optional) To set pagesize for the pagination. */
+  @Prop() pageSizeList: number[] = [10,20,50];
 
   /** (Optional) To control display options of table. */
   @Prop() displayOptions?: ModusDataTableDisplayOptions = {
@@ -59,10 +75,20 @@ export class ModusDataTable {
   };
 
   /** Emits event on sort change */
-  @Event() sorting: EventEmitter<ModusDataTableSortingState>;
+  @Event() onSort: EventEmitter<ModusDataTableSortingState>;
 
-  @State() sortState: ModusDataTableSortingState = [];
+  /** Column resizing starts */
+  @State() columnSizing: ColumnSizingState = {};
+  @State() columnSizingInfo: ColumnSizingInfoState =
+    {} as ColumnSizingInfoState;
+  /** Column resizing ends */
+
+  @State() sorting: ModusDataTableSortingState = [];
   @State() table: Table<unknown>;
+  @State() paginationState: PaginationState = {
+    pageIndex: 0,
+    pageSize: this.pageSizeList[0],
+  };
 
   componentWillLoad(): void {
     this.initializeTable();
@@ -74,30 +100,60 @@ export class ModusDataTable {
       columns: (this.columns as ColumnDef<unknown>[]) ?? [],
       state: {
         columnPinning: {},
-        sorting: this.sortState,
+        sorting: this.sorting,
+        columnSizing: {},
+        columnSizingInfo: {} as ColumnSizingInfoState,
       },
       enableSorting: this.sort,
-      sortDescFirst: false,      // To-Do, this is work around to sort descending by default.
+      columnResizeMode: 'onChange',
+      enableColumnResizing: this.columnResize,
       onSortingChange: (updater: Updater<ModusDataTableSortingState>) =>
         this.setSorting(updater),
+      onPaginationChange: (updater: PaginationState) => this.setPagination(updater),
       getCoreRowModel: getCoreRowModel(),
+      getPaginationRowModel: getPaginationRowModel(),
       getSortedRowModel: getSortedRowModel(),
+      onColumnSizingChange: (updater: Updater<ColumnSizingState>) =>
+        this.updatingState(updater, 'columnSizing'),
+      onColumnSizingInfoChange: (updater: Updater<ColumnSizingInfoState>) =>
+        this.updatingState(updater, 'columnSizingInfo'),
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       onStateChange: () => {},
       renderFallbackValue: null,
     };
     this.table = createTable(options);
+
+    this.table.setOptions((prev) => ({
+      ...prev,
+      state: {
+        ...prev.state,
+        ...this.table.initialState,
+        pagination: { ...this.paginationState, pageSize: this.pageSizeList[0] },
+      },      
+    }));
+  }
+
+  private updatingState(updater: Updater<unknown>, key: string) {
+    this[key] = updater instanceof Function ? updater(this[key]) : updater;
+    this.table.options.state[key] = this[key];
   }
 
   setSorting(updater: Updater<ModusDataTableSortingState>): void {
-    this.sortState =
-      updater instanceof Function ? updater(this.sortState) : updater;
-    this.table.options.state.sorting = this.sortState;
-    this.sorting.emit(this.sortState);
+    this.updatingState(updater, 'sorting');
+    this.onSort.emit(this.sorting);
+  }
+
+  setPagination(updater: Updater<PaginationState>): void {
+    this.paginationState = updater instanceof Function ? updater(this.paginationState) : updater;
+    this.table.options.state.pagination = this.paginationState;
   }
 
   render(): void {
     const lengthOfHeaderGroups: number = this.table.getHeaderGroups().length;
+    const tableStyle = this.fullWidth
+      ? { width: '100%' }
+      : { width: `${this.table.getTotalSize()}px`, tableLayout: 'fixed'};
+
     const className = `
       ${this.displayOptions.borderless && 'borderless'}
       ${this.displayOptions.cellBorderless && 'cell-borderless'}
@@ -105,7 +161,7 @@ export class ModusDataTable {
 
     return (
       <Host>
-        <table class={className}>
+        <table class={className} style={tableStyle}>
           <thead>
             {this.table.getHeaderGroups()?.map((headerGroup, index) => (
               <tr key={headerGroup.id}>
@@ -134,6 +190,14 @@ export class ModusDataTable {
             })}
           </tbody>
         </table>
+        <br />
+        {this.pagination && (
+          <ModusDataTablePagination
+            table={this.table}
+            totalCount={this.data.length}
+            pageSizeList={this.pageSizeList}
+          />
+        )}
       </Host>
     );
   }

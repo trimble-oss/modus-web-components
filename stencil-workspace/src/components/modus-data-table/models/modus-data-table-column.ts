@@ -7,4 +7,8 @@ export interface ModusDataTableColumn {
   columns?: ModusDataTableColumn[];
   dataType: ModusColumnDataType;
   enableSorting?: boolean;
+  enableResizing?: boolean;
+  size?: number,
+  minSize?: number,
+  maxSize?: number
 }
