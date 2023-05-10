@@ -198,12 +198,12 @@ export class ModusSideNavigation {
   }
 
   @Watch('expanded')
-  handleExpandedChange(isExpanded) {
+  handleExpandedChange(expand) {
     const toggleNavItems = () => {
-      Object.values(this._children).forEach((c) => (c.expanded = isExpanded));
+      Object.values(this._children).forEach((c) => (c.expanded = expand));
     };
     const adjustTargetContent = () => {
-      this.setTargetContentMargin(isExpanded, this.mode, this.targetContent);
+      this.setTargetContentMargin(expand, this.mode, this.targetContent);
     };
 
     const emitExpandedEvent = () => {
@@ -216,7 +216,7 @@ export class ModusSideNavigation {
 
     // Trigger Animation if the current level has a heading
     if (levelHeading) {
-      if (isExpanded) {
+      if (expand) {
         levelHeading.classList.remove('collapse');
         levelHeading.classList.add('collapsing');
         levelHeading.style.height = '0';
@@ -242,9 +242,9 @@ export class ModusSideNavigation {
 
         // Timeout to reset collapsing class
         this._timeout = setTimeout(() => {
-          levelHeading.classList.add('collapse');
           levelHeading.classList.remove('show');
           levelHeading.classList.remove('collapsing');
+          levelHeading.classList.add('collapse');
 
           clearTimeout(this._timeout);
           emitExpandedEvent();
