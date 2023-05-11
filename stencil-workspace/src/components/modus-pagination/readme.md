@@ -23,6 +23,19 @@
 | `pageChange` | An event that fires on page change. | `CustomEvent<number>` |
 
 
+## Dependencies
+
+### Used by
+
+ - [modus-data-table](../modus-data-table)
+
+### Graph
+```mermaid
+graph TD;
+  modus-data-table --> modus-pagination
+  style modus-pagination fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 

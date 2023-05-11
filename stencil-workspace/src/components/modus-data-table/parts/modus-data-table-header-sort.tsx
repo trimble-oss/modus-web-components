@@ -50,21 +50,22 @@ function sortOnKeyDown(
 
 export const ModusDataTableHeaderSort: FunctionalComponent<
   ModusDataTableHeaderSortProps
-> = (props: ModusDataTableHeaderSortProps) => {
+> = ({ column, showSortIconOnHover }) => {
   return (
-    <modus-tooltip text={showSortingStatus(props.column)} position="bottom">
+    <modus-tooltip text={showSortingStatus(column)} position="bottom">
       {
         <span
           tabindex="0"
-          aria-label={showSortingStatus(props.column)}
-          onClick={props.column.getToggleSortingHandler()}
-          onKeyDown={(event) => sortOnKeyDown(props.column, event)}
+          aria-label={showSortingStatus(column)}
+          role="button"
+          onClick={column.getToggleSortingHandler()}
+          onKeyDown={(event) => sortOnKeyDown(column, event)}
           class="sort-icon-containor">
           <span
-            class={`sort-icons ${!props.column.getIsSorted() && 'disabled'} ${
-              props.showSortIconOnHover && 'hidden'
+            class={`sort-icons ${!column.getIsSorted() && 'disabled'} ${
+              showSortIconOnHover && 'hidden'
             }`}>
-            {props.column.getIsSorted() === 'asc' ? (
+            {column.getIsSorted() === 'asc' ? (
               <IconSortAZ size={'16'} />
             ) : (
               <IconSortZA size={'16'} />

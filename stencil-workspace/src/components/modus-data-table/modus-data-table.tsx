@@ -3,23 +3,26 @@ import {
   Event,
   EventEmitter,
   Host,
+  Method,
   Prop,
   State,
   Watch,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import {
+  Column,
   ColumnDef,
-  Table,
+  ColumnSizingInfoState,
+  ColumnSizingState,
+  HeaderGroup,
   PaginationState,
+  Table,
   TableOptionsResolved,
+  Updater,
   createTable,
   getCoreRowModel,
-  getSortedRowModel,
-  ColumnSizingState,
-  Updater,
-  ColumnSizingInfoState,
   getPaginationRowModel,
+  getSortedRowModel
 } from '@tanstack/table-core';
 import {
   ModusDataTableColumn,
@@ -29,7 +32,11 @@ import {
 import { ModusDataTableCell } from './parts/modus-data-table-cell';
 import { ModusDataTableHeader } from './parts/modus-data-table-header';
 import { ModusDataTablePagination } from './parts/modus-data-table-pagination';
+import { ModusDataTableSummaryRow } from './parts/modus-data-table-summary-row';
 
+/**
+ * @slot customFooter - Slot for custom footer.
+ */
 @Component({
   tag: 'modus-data-table',
   styleUrl: 'modus-data-table.scss',
@@ -50,6 +57,7 @@ export class ModusDataTable {
 
   /** (Optional) To enable row hover in table. */
   @Prop() hover = false;
+
   /* (optional) To manage column resizing */
   @Prop() columnResize = false;
 
@@ -66,7 +74,10 @@ export class ModusDataTable {
   @Prop() pagination: boolean;
 
   /* (optional) To set pagesize for the pagination. */
-  @Prop() pageSizeList: number[] = [10,20,50];
+  @Prop() pageSizeList: number[] = [10, 20, 50];
+
+  /** (Optional) To display summary row. */
+  @Prop() summaryRow = false;
 
   /** (Optional) To control display options of table. */
   @Prop() displayOptions?: ModusDataTableDisplayOptions = {
@@ -75,7 +86,7 @@ export class ModusDataTable {
   };
 
   /** Emits event on sort change */
-  @Event() onSort: EventEmitter<ModusDataTableSortingState>;
+  @Event() sortChange: EventEmitter<ModusDataTableSortingState>;
 
   /** Column resizing starts */
   @State() columnSizing: ColumnSizingState = {};
@@ -94,6 +105,9 @@ export class ModusDataTable {
     this.initializeTable();
   }
 
+  /**
+   * Creates a table with some set of options.
+   */
   initializeTable(): void {
     const options: TableOptionsResolved<unknown> = {
       data: this.data ?? [],
@@ -107,9 +121,11 @@ export class ModusDataTable {
       enableSorting: this.sort,
       columnResizeMode: 'onChange',
       enableColumnResizing: this.columnResize,
+      sortDescFirst: false, // To-Do, workaround to prevent sort descending on certain columns, e.g. numeric.
       onSortingChange: (updater: Updater<ModusDataTableSortingState>) =>
         this.setSorting(updater),
-      onPaginationChange: (updater: PaginationState) => this.setPagination(updater),
+      onPaginationChange: (updater: PaginationState) =>
+        this.setPagination(updater),
       getCoreRowModel: getCoreRowModel(),
       getPaginationRowModel: getPaginationRowModel(),
       getSortedRowModel: getSortedRowModel(),
@@ -129,7 +145,7 @@ export class ModusDataTable {
         ...prev.state,
         ...this.table.initialState,
         pagination: { ...this.paginationState, pageSize: this.pageSizeList[0] },
-      },      
+      },
     }));
   }
 
@@ -140,20 +156,42 @@ export class ModusDataTable {
 
   setSorting(updater: Updater<ModusDataTableSortingState>): void {
     this.updatingState(updater, 'sorting');
-    this.onSort.emit(this.sorting);
+    this.sortChange.emit(this.sorting);
   }
 
   setPagination(updater: Updater<PaginationState>): void {
-    this.paginationState = updater instanceof Function ? updater(this.paginationState) : updater;
+    this.paginationState =
+      updater instanceof Function ? updater(this.paginationState) : updater;
     this.table.options.state.pagination = this.paginationState;
+  }
+
+  /**
+   * Returns data of a column.
+   * @param accessorKey : Column name as key.
+   * @returns : Column data as Array or empty array.
+   */
+  @Method()
+  async getColumnData(accessorKey: string): Promise<unknown[]> {
+    const columns: Column<unknown, unknown>[] = this.table.getAllLeafColumns();
+
+    let rowData: unknown[] = [];
+    for (let i = 0; i < columns.length; i++) {
+      if (columns[i].columnDef['accessorKey'] === accessorKey) {
+        rowData = this.table.options.data.map((row) => row[accessorKey]);
+        break;
+      }
+    }
+    return rowData;
   }
 
   render(): void {
     const lengthOfHeaderGroups: number = this.table.getHeaderGroups().length;
     const tableStyle = this.fullWidth
       ? { width: '100%' }
-      : { width: `${this.table.getTotalSize()}px`, tableLayout: 'fixed'};
+      : { width: `${this.table.getTotalSize()}px`, tableLayout: 'fixed' };
 
+    const headerGroups: HeaderGroup<unknown>[] = this.table.getHeaderGroups();
+    const footerGroups: HeaderGroup<unknown>[] = this.table.getFooterGroups();
     const className = `
       ${this.displayOptions.borderless && 'borderless'}
       ${this.displayOptions.cellBorderless && 'cell-borderless'}
@@ -163,14 +201,13 @@ export class ModusDataTable {
       <Host>
         <table class={className} style={tableStyle}>
           <thead>
-            {this.table.getHeaderGroups()?.map((headerGroup, index) => (
+            {headerGroups?.map((headerGroup, index) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers?.map((header) => {
                   return (
                     <ModusDataTableHeader
                       header={header}
-                      index={index}
-                      lengthOfHeaderGroups={lengthOfHeaderGroups}
+                      isNestedParentHeader={index < lengthOfHeaderGroups - 1}
                       showSortIconOnHover={this.showSortIconOnHover}
                     />
                   );
@@ -182,15 +219,23 @@ export class ModusDataTable {
             {this.table.getRowModel()?.rows.map((row) => {
               return (
                 <tr key={row.id} class={this.hover && 'enable-hover'}>
-                  {row.getVisibleCells()?.map((cell) => {
+                  {row.getAllCells()?.map((cell) => {
                     return <ModusDataTableCell cell={cell} />;
                   })}
                 </tr>
               );
             })}
           </tbody>
+          {this.summaryRow ? (
+            <ModusDataTableSummaryRow
+              footerGroups={[footerGroups[0]]}
+              tableData={this.data}
+            />
+          ) : (
+            ''
+          )}
         </table>
-        <br />
+        <slot name="customFooter"></slot>
         {this.pagination && (
           <ModusDataTablePagination
             table={this.table}

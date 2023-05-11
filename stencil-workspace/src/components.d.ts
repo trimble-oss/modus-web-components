@@ -8,6 +8,7 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
 import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 import { ModusDataTableColumn, ModusDataTableDisplayOptions, ModusDataTableSortingState } from "./components/modus-data-table/models";
+import { Column } from "@tanstack/table-core";
 import { DateInputEventData, DateInputType } from "./components/modus-date-picker/utils/modus-date-picker.types";
 import { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { ModusNavbarProfileMenuLink } from "./components/modus-navbar/profile-menu/modus-navbar-profile-menu";
@@ -273,6 +274,7 @@ export namespace Components {
         "value": string;
     }
     interface ModusDataTable {
+        "columnResize": boolean;
         /**
           * (Required) To display headers in the table.
          */
@@ -285,10 +287,19 @@ export namespace Components {
           * (Optional) To control display options of table.
          */
         "displayOptions"?: ModusDataTableDisplayOptions;
+        "fullWidth": boolean;
+        /**
+          * Returns data of a column.
+          * @param accessorKey : Column name as key.
+          * @returns : Column data as Array or empty array.
+         */
+        "getColumnData": (accessorKey: string) => Promise<unknown[]>;
         /**
           * (Optional) To enable row hover in table.
          */
         "hover": boolean;
+        "pageSizeList": number[];
+        "pagination": boolean;
         /**
           * (Optional) To display sort icon on hover.
          */
@@ -297,6 +308,10 @@ export namespace Components {
           * (Optional) To sort data in table.
          */
         "sort": boolean;
+        /**
+          * (Optional) To display summary row.
+         */
+        "summaryRow": boolean;
     }
     interface ModusDateInput {
         /**
@@ -1892,6 +1907,7 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface ModusDataTable {
+        "columnResize"?: boolean;
         /**
           * (Required) To display headers in the table.
          */
@@ -1904,6 +1920,7 @@ declare namespace LocalJSX {
           * (Optional) To control display options of table.
          */
         "displayOptions"?: ModusDataTableDisplayOptions;
+        "fullWidth"?: boolean;
         /**
           * (Optional) To enable row hover in table.
          */
@@ -1911,7 +1928,9 @@ declare namespace LocalJSX {
         /**
           * Emits event on sort change
          */
-        "onSorting"?: (event: ModusDataTableCustomEvent<ModusDataTableSortingState>) => void;
+        "onSortChange"?: (event: ModusDataTableCustomEvent<ModusDataTableSortingState>) => void;
+        "pageSizeList"?: number[];
+        "pagination"?: boolean;
         /**
           * (Optional) To display sort icon on hover.
          */
@@ -1920,6 +1939,10 @@ declare namespace LocalJSX {
           * (Optional) To sort data in table.
          */
         "sort"?: boolean;
+        /**
+          * (Optional) To display summary row.
+         */
+        "summaryRow"?: boolean;
     }
     interface ModusDateInput {
         /**

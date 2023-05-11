@@ -8,8 +8,7 @@ import { ModusDataTableColumnResizingHandler } from './modus-data-table-column-r
 
 interface ModusDataTableHeaderProps {
   header: Header<unknown, unknown>;
-  index: number;
-  lengthOfHeaderGroups: number;
+  isNestedParentHeader: boolean;
   showSortIconOnHover: boolean;
 }
 
@@ -18,32 +17,33 @@ interface ModusDataTableHeaderProps {
  */
 export const ModusDataTableHeader: FunctionalComponent<
   ModusDataTableHeaderProps
-> = (props: ModusDataTableHeaderProps) => {
+> = ({ header, isNestedParentHeader, showSortIconOnHover }) => {
   return (
     <th
-      key={props.header.id}
-      colSpan={props.header.colSpan}
+      key={header.id}
+      colSpan={header.colSpan}
       class={`
-        ${props.index < props.lengthOfHeaderGroups - 1 && 'text-align-center'}
-        ${props.header.column.getIsResizing() ? 'active-resize' : ''}
+        ${isNestedParentHeader ? 'text-align-center' : ''}
+        ${header.column.getIsResizing() ? 'active-resize' : ''}
       `}
-      style={{ width: `${props.header.getSize()}px` }}>
-      {props.header.isPlaceholder ? null : (
-        <div class={props.header.column.getCanSort() && 'can-sort'}>
-          <span aria-label={props.header.column.columnDef.header}>
-            {props.header.column.columnDef.header}
-          </span>
-          {props.header.column.getCanSort() && (
+      style={{ width: `${header.getSize()}px` }}
+      aria-label={header.column.columnDef.header}
+      role="columnheader"
+      scope="col">
+      {header.isPlaceholder ? null : ( // header.isPlaceholder is Required for nested column headers to display empty cell
+        <div class={header.column.getCanSort() && 'can-sort'}>
+          <span>{header.column.columnDef.header}</span>
+          {header.column.getCanSort() && (
             <ModusDataTableHeaderSort
-              column={props.header.column}
-              showSortIconOnHover={props.showSortIconOnHover}
+              column={header.column}
+              showSortIconOnHover={showSortIconOnHover}
             />
           )}
         </div>
       )}
       <ModusDataTableColumnResizingHandler
-        column={props.header.column}
-        getResizeHandler={props.header.getResizeHandler}
+        column={header.column}
+        getResizeHandler={header.getResizeHandler}
       />
     </th>
   );
