@@ -283,26 +283,27 @@ export declare interface ModusDataTable extends Components.ModusDataTable {
   /**
    * Emits event on sort change 
    */
-  sorting: EventEmitter<CustomEvent<IModusDataTableModusDataTableSortingState>>;
+  sortChange: EventEmitter<CustomEvent<IModusDataTableModusDataTableSortingState>>;
 
 }
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['columns', 'data', 'displayOptions', 'hover', 'showSortIconOnHover', 'sort']
+  inputs: ['columnResize', 'columns', 'data', 'displayOptions', 'fullWidth', 'hover', 'pageSizeList', 'pagination', 'showSortIconOnHover', 'sort', 'summaryRow'],
+  methods: ['getColumnData']
 })
 @Component({
   selector: 'modus-data-table',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['columns', 'data', 'displayOptions', 'hover', 'showSortIconOnHover', 'sort']
+  inputs: ['columnResize', 'columns', 'data', 'displayOptions', 'fullWidth', 'hover', 'pageSizeList', 'pagination', 'showSortIconOnHover', 'sort', 'summaryRow']
 })
 export class ModusDataTable {
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['sorting']);
+    proxyOutputs(this, this.el, ['sortChange']);
   }
 }
 

@@ -25,7 +25,7 @@ table {
           top: 0;
           touch-action: none;
           user-select: none;
-          width: 3px;
+          width: $rem-3px;
         }
 
         .can-sort {
@@ -35,7 +35,7 @@ table {
 
           .sort-icon-containor {
             cursor: pointer;
-            padding: 2px 2px 0;
+            padding: $rem-2px $rem-2px 0;
 
             .sort-icons {
               svg {
@@ -97,6 +97,22 @@ table {
     }
   }
 
+  tfoot {
+    tr {
+      &.summary-row {
+        td {
+          background-color: $modus-table-header-bg;
+          border: none;
+          font-weight: 700;
+
+          &.text-align-right {
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+
   tr {
     height: 3rem;
 
@@ -107,8 +123,9 @@ table {
       min-height: 3rem;
       padding: 0.25rem 1rem;
       text-align: left;
+
       &.active-resize {
-        border-right: 2px solid $modus-table-column-resizing-border-color;
+        border-right: $rem-2px solid $modus-table-column-resizing-border-color;
       }
 
       &.text-align-center {
@@ -135,29 +152,31 @@ table {
   }
 }
 
-.pager {
-  float: right;
-  padding-bottom: $rem-10px;
-}
-
-.pager-text {
-  color: $modus-table-pagination-color;
-  float: right;
-  font-family: $primary-font;
-  font-size: $rem-14px;
-  font-weight: 400;
-  padding: $rem-6px $rem-5px 0 $rem-10px;
-}
-
-.page-view {
-  background-color: $modus-page-view-select-bg;
-  color: $modus-page-view-select-color;
-  margin-top: $rem-8px;
-}
-
-.page-view-text {
+.pagination-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
   color: $modus-table-pagination-color;
   font-family: $primary-font;
   font-size: $rem-14px;
   font-weight: 400;
+  margin-top: $rem-24px;
+
+  .items-per-page {
+    select {
+      background-color: $modus-page-view-select-bg;
+      color: $modus-page-view-select-color;
+    }
+  }
+
+  .pagination-and-count {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .total-count {
+      margin-right: $rem-5px;
+    }
+  }
 }
