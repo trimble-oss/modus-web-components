@@ -17,7 +17,15 @@ table {
         font-weight: $font-weight-semi-bold;
         position: relative;
 
+        .resize-handle:focus-visible {
+          border-right: 2px solid $modus-table-header-color;
+        }
+
         .can-resize {
+          &:focus-visible {
+            outline: none
+          }
+
           cursor: e-resize;
           height: 100%;
           position: absolute;
@@ -153,14 +161,14 @@ table {
 }
 
 .pagination-container {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
   color: $modus-table-pagination-color;
+  display: flex;
+  flex-wrap: wrap;
   font-family: $primary-font;
   font-size: $rem-14px;
   font-weight: 400;
+  justify-content: space-between;
   margin-top: $rem-24px;
 
   .items-per-page {
@@ -171,8 +179,8 @@ table {
   }
 
   .pagination-and-count {
-    display: flex;
     align-items: center;
+    display: flex;
     flex-wrap: wrap;
 
     .total-count {

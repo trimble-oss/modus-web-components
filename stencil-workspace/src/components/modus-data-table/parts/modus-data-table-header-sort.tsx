@@ -42,7 +42,7 @@ function sortOnKeyDown(
   column: Column<unknown, unknown>,
   event: KeyboardEvent
 ): void {
-  if (event.key === EnterKey) {
+  if (event.key.toLowerCase() === EnterKey) {
     column.toggleSorting();
     event.preventDefault();
   }
