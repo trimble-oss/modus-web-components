@@ -3,6 +3,7 @@ import {
   Event,
   EventEmitter,
   Host,
+  Listen,
   Method,
   Prop,
   State,
@@ -22,7 +23,7 @@ import {
   createTable,
   getCoreRowModel,
   getPaginationRowModel,
-  getSortedRowModel
+  getSortedRowModel,
 } from '@tanstack/table-core';
 import {
   ModusDataTableColumn,
@@ -100,6 +101,22 @@ export class ModusDataTable {
     pageIndex: 0,
     pageSize: this.pageSizeList[0],
   };
+
+  @Listen('click', { target: 'document' })
+  documentClickHandler(event: MouseEvent): void {
+    if (event.defaultPrevented) {
+      return;
+    }
+    // Deactivating the column resizing mode if other click events happened
+    this.table.setColumnSizingInfo({
+      startOffset: null,
+      startSize: null,
+      deltaOffset: null,
+      deltaPercentage: null,
+      isResizingColumn: null,
+      columnSizingStart: [],
+    });
+  }
 
   componentWillLoad(): void {
     this.initializeTable();
@@ -206,6 +223,7 @@ export class ModusDataTable {
                 {headerGroup.headers?.map((header) => {
                   return (
                     <ModusDataTableHeader
+                      table={this.table}
                       header={header}
                       isNestedParentHeader={index < lengthOfHeaderGroups - 1}
                       showSortIconOnHover={this.showSortIconOnHover}

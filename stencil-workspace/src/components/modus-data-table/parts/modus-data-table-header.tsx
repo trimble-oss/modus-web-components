@@ -2,11 +2,12 @@ import {
   FunctionalComponent,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
-import { Header } from '@tanstack/table-core';
+import { Header, Table } from '@tanstack/table-core';
 import { ModusDataTableHeaderSort } from './modus-data-table-header-sort';
 import { ModusDataTableColumnResizingHandler } from './modus-data-table-column-resizing-handler';
 
 interface ModusDataTableHeaderProps {
+  table: Table<unknown>;
   header: Header<unknown, unknown>;
   isNestedParentHeader: boolean;
   showSortIconOnHover: boolean;
@@ -17,7 +18,7 @@ interface ModusDataTableHeaderProps {
  */
 export const ModusDataTableHeader: FunctionalComponent<
   ModusDataTableHeaderProps
-> = ({ header, isNestedParentHeader, showSortIconOnHover }) => {
+> = ({ table, header, isNestedParentHeader, showSortIconOnHover }) => {
   return (
     <th
       key={header.id}
@@ -42,8 +43,8 @@ export const ModusDataTableHeader: FunctionalComponent<
         </div>
       )}
       <ModusDataTableColumnResizingHandler
-        column={header.column}
-        getResizeHandler={header.getResizeHandler}
+        table={table}
+        header={header}
       />
     </th>
   );
