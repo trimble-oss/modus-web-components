@@ -1,4 +1,4 @@
-name: google-chat-notify
+name: Google Chat Notification
 on:
   pull_request:
     types: [opened, reopened, closed]
@@ -9,6 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Google Chat Notification
-      uses: CommonMarvel/google-chat-notification@v1.2.1
+      uses: trimble-oss/gh-actions/google-chat-notification@main
       with:
         url: ${{ secrets.GOOGLE_CHAT_WEBHOOK }}
