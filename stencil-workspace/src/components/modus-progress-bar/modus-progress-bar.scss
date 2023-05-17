@@ -27,7 +27,11 @@
     }
   }
 
-  &.compact {
+  &.small {
     height: $rem-8px;
+  }
+
+  &.compact {
+    height: $rem-4px;
   }
 }

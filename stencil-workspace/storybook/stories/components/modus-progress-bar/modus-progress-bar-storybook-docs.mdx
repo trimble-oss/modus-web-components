@@ -16,6 +16,18 @@
 
 <Anchor storyId="components-progress-bar--default" />
 
+### Small
+
+<div>
+  <modus-progress-bar
+    value="3"
+    max-value="4"
+    min-value="0"
+    size="small"></modus-progress-bar>
+</div>
+
+<Anchor storyId="components-progress-bar--small" />
+
 ### Compact
 
 <div>
@@ -38,22 +50,27 @@
   value="3"
   max-value="4"
   min-value="0"
+  size="small"></modus-progress-bar>
+<modus-progress-bar
+  value="3"
+  max-value="4"
+  min-value="0"
   size="compact"></modus-progress-bar>
 ```
 
 ### Properties
 
-| Name               | Description                   | Type                   | Options | Default Value                | Required |
-| ------------------ | ----------------------------- | ---------------------- | ------- | ---------------------------- | -------- |
-| `aria-label`       | The progress bar's aria-label | `string`               |         |                              |          |
-| `background-color` | The bar's background color    | `string`               |         | `#FFFFFF` (Trimble White)    |          |
-| `color`            | The bar's color               | `string`               |         | `#005F9E` (Trimble Blue Mid) |          |
-| `max-value`        | The maximum value             | `number`               |         | 100                          |          |
-| `min-value `       | The minimum value             | `number`               |         | 0                            |          |
-| `size`             | The size of the bar           | `'default'`, `'small'` |         | `default`                    |          |
-| `text`             | The text displayed on the bar | `string`               |         |                              |          |
-| `text-color`       | The text color                | `string`               |         | `#FFFFFF` (Trimble White)    |          |
-| `value`            | The progress value            | `number`               |         | 0                            |          |
+| Name               | Description                   | Type                                | Default Value                | Required |
+| ------------------ | ----------------------------- | ----------------------------------- | ---------------------------- | -------- |
+| `aria-label`       | The progress bar's aria-label | `string`                            |                              |          |
+| `background-color` | The bar's background color    | `string`                            | `#FFFFFF` (Trimble White)    |          |
+| `color`            | The bar's color               | `string`                            | `#005F9E` (Trimble Blue Mid) |          |
+| `max-value`        | The maximum value             | `number`                            | `100`                        |          |
+| `min-value `       | The minimum value             | `number`                            | `0`                          |          |
+| `size`             | The size of the bar           | `'default'`, `'small'`, `'compact'` | `default`                    |          |
+| `text`             | The text displayed on the bar | `string`                            |                              |          |
+| `text-color`       | The text color                | `string`                            | `#FFFFFF` (Trimble White)    |          |
+| `value`            | The progress value            | `number`                            | `0`                          |          |
 
 ### Accessibility
 

@@ -710,7 +710,7 @@ export namespace Components {
         /**
           * (optional) The progress bar's size.
          */
-        "size": 'default' | 'compact';
+        "size": 'default' | 'small' | 'compact';
         /**
           * (optional) The text displayed on the progress bar.
          */
@@ -1115,7 +1115,7 @@ export namespace Components {
          */
         "checkedItems": string[];
         /**
-          * (optional) Disable usage of `tab` key to focus elements inside a tree view. Use `Arrow Up/Down` for focussing an tree item and `Shift + Arrow Right` for focussing a checkbox inside the item.
+          * (optional) Disable usage of `tab` key to focus elements inside a tree view. Use `Arrow Up/Down` for focussing a tree item and `Shift + Arrow Right` for focussing a checkbox inside the item.
          */
         "disableTabbing": boolean;
         /**
@@ -2399,7 +2399,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The progress bar's size.
          */
-        "size"?: 'default' | 'compact';
+        "size"?: 'default' | 'small' | 'compact';
         /**
           * (optional) The text displayed on the progress bar.
          */
@@ -2849,7 +2849,7 @@ declare namespace LocalJSX {
          */
         "checkedItems"?: string[];
         /**
-          * (optional) Disable usage of `tab` key to focus elements inside a tree view. Use `Arrow Up/Down` for focussing an tree item and `Shift + Arrow Right` for focussing a checkbox inside the item.
+          * (optional) Disable usage of `tab` key to focus elements inside a tree view. Use `Arrow Up/Down` for focussing a tree item and `Shift + Arrow Right` for focussing a checkbox inside the item.
          */
         "disableTabbing"?: boolean;
         /**

@@ -6,7 +6,6 @@ import { Component, Prop, h, Host } from '@stencil/core';
   styleUrl: 'modus-progress-bar.scss',
   shadow: true,
 })
-
 export class ModusProgressBar {
   /** (optional) The progress bar's aria-label. */
   @Prop() ariaLabel: string | null;
@@ -24,7 +23,7 @@ export class ModusProgressBar {
   @Prop() minValue = 0;
 
   /** (optional) The progress bar's size. */
-  @Prop() size: 'default' | 'compact' = 'default';
+  @Prop() size: 'default' | 'small' | 'compact' = 'default';
 
   /** (optional) The text displayed on the progress bar. */
   @Prop() text: string;
@@ -37,14 +36,19 @@ export class ModusProgressBar {
 
   classBySize: Map<string, string> = new Map([
     ['default', 'default'],
+    ['small', 'small'],
     ['compact', 'compact'],
   ]);
 
-  getProgressStyle(percentage: number): { backgroundColor: string, color: string, width: string } {
+  getProgressStyle(percentage: number): {
+    backgroundColor: string;
+    color: string;
+    width: string;
+  } {
     const progressStyle = {
       backgroundColor: this.color,
       color: this.textColor,
-      width: `${percentage}%`
+      width: `${percentage}%`,
     };
 
     return progressStyle;
@@ -52,15 +56,18 @@ export class ModusProgressBar {
 
   getProgressBarStyle(): { backgroundColor: string } {
     const progressBarStyle = {
-      backgroundColor: this.backgroundColor
+      backgroundColor: this.backgroundColor,
     };
 
     return progressBarStyle;
   }
 
   render(): unknown {
-    const percentage = (this.value - this.minValue) / (this.maxValue - this.minValue) * 100;
-    const progressBarBackgroundColorClass = this.backgroundColor ? '' : 'default-background-color';
+    const percentage =
+      ((this.value - this.minValue) / (this.maxValue - this.minValue)) * 100;
+    const progressBarBackgroundColorClass = this.backgroundColor
+      ? ''
+      : 'default-background-color';
     const progressColorClass = this.color ? '' : 'default-color';
     const progressTextColor = this.textColor ? '' : 'default-text-color';
     const progressBarClass = `
@@ -77,9 +84,7 @@ export class ModusProgressBar {
         aria-valuemin={this.minValue}
         aria-valuenow={this.value}
         role="progressbar">
-        <div
-          class={progressBarClass}
-          style={this.getProgressBarStyle()}>
+        <div class={progressBarClass} style={this.getProgressBarStyle()}>
           <div class={progressClass} style={this.getProgressStyle(percentage)}>
             {this.size === 'default' && this.text}
           </div>

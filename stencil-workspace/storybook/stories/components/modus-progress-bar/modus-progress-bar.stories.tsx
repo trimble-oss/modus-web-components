@@ -42,10 +42,14 @@ export default {
       },
     },
     size: {
+      control: {
+        options: ['default', 'small', 'compact'],
+        type: 'select',
+      },
       description: "The progress bar's size",
       table: {
         defaultValue: { summary: 'default' },
-        type: { summary: 'string' },
+        type: { summary: `'default' | 'small' | 'compact'` },
       },
     },
     text: {
@@ -113,6 +117,19 @@ Default.args = {
   minValue: 0,
   size: 'default',
   text: 'Some progress!',
+  textColor: '',
+  value: 50,
+};
+
+export const Small = Template.bind({});
+Small.args = {
+  ariaLabel: 'progress bar',
+  backgroundColor: '',
+  color: '',
+  maxValue: 100,
+  minValue: 0,
+  size: 'small',
+  text: '',
   textColor: '',
   value: 50,
 };
