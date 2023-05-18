@@ -34,6 +34,7 @@ import { ModusDataTableCell } from './parts/modus-data-table-cell';
 import { ModusDataTableHeader } from './parts/modus-data-table-header';
 import { ModusDataTablePagination } from './parts/modus-data-table-pagination';
 import { ModusDataTableSummaryRow } from './parts/modus-data-table-summary-row';
+import { DefaultPageSizes } from './constants/constants';
 
 /**
  * @slot customFooter - Slot for custom footer.
@@ -75,7 +76,7 @@ export class ModusDataTable {
   @Prop() pagination: boolean;
 
   /* (optional) To set pagesize for the pagination. */
-  @Prop() pageSizeList: number[] = [10, 20, 50];
+  @Prop() pageSizeList: number[] = DefaultPageSizes;
 
   /** (Optional) To display summary row. */
   @Prop() summaryRow = false;
@@ -144,7 +145,7 @@ export class ModusDataTable {
       onPaginationChange: (updater: PaginationState) =>
         this.setPagination(updater),
       getCoreRowModel: getCoreRowModel(),
-      getPaginationRowModel: getPaginationRowModel(),
+      getPaginationRowModel: this.pagination && getPaginationRowModel(),
       getSortedRowModel: getSortedRowModel(),
       onColumnSizingChange: (updater: Updater<ColumnSizingState>) =>
         this.updatingState(updater, 'columnSizing'),
@@ -155,15 +156,19 @@ export class ModusDataTable {
       renderFallbackValue: null,
     };
     this.table = createTable(options);
-
-    this.table.setOptions((prev) => ({
-      ...prev,
-      state: {
-        ...prev.state,
-        ...this.table.initialState,
-        pagination: { ...this.paginationState, pageSize: this.pageSizeList[0] },
-      },
-    }));
+    if (this.pagination) {
+      this.table.setOptions((prev) => ({
+        ...prev,
+        state: {
+          ...prev.state,
+          ...this.table.initialState,
+          pagination: {
+            ...this.paginationState,
+            pageSize: this.pageSizeList[0],
+          },
+        },
+      }));
+    }
   }
 
   private updatingState(updater: Updater<unknown>, key: string) {
