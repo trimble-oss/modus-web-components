@@ -2,7 +2,8 @@
 
 article {
   background-color: $modus-card-bg;
-  border: $rem-1px solid $modus-card-border-color;
+  border: $rem-1px solid;
+  border-color: transparent;
   border-radius: $rem-2px;
   color: $modus-card-color;
   font-family: $primary-font;
@@ -14,6 +15,6 @@ article {
   }
 
   &.card-border {
-    border: $rem-1px solid $modus-card-shadow-color;
+    border-color: $modus-card-border-color;
   }
 }
