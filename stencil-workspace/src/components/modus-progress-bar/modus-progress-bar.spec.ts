@@ -44,6 +44,9 @@ describe('modus-progress-bar', () => {
     let className = modusProgress.classBySize.get(modusProgress.size);
     expect(className).toEqual('default');
 
+    className = modusProgress.classBySize.get('small');
+    expect(className).toEqual('small');
+
     className = modusProgress.classBySize.get('compact');
     expect(className).toEqual('compact');
   });
