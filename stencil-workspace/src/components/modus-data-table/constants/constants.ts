@@ -4,6 +4,7 @@ export const SortAscending = 'Sort Ascending';
 export const SortDescending = 'Sort Descending';
 export const PropertyDataType = 'dataType';
 export const PropertyShowTotal = 'showTotal';
+export const DefaultPageSizes = [10, 20, 50];
 
 // Keyboard key constants starts
 export const EnterKey = 'enter';
