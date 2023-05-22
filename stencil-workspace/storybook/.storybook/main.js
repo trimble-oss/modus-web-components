@@ -7,9 +7,17 @@ module.exports = {
   "addons": [
     "@storybook/addon-a11y",
     "@storybook/addon-links",
-    "@storybook/addon-docs",
     "@storybook/addon-essentials",
+    "@storybook/addon-storysource",
     "storybook-dark-mode",
+     {
+      name: '@storybook/addon-docs',
+      options: {
+        sourceLoaderOptions: {
+          injectStoryParameters: true,
+        },
+      },
+    },
     {
       name: "@storybook/addon-styling",
       options: {

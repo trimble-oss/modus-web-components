@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@storybook/addon-docs": "^6.5.16",
+    "@storybook/addon-storysource": "^6.5.16",
     "@storybook/addons": "^6.5.16",
     "@storybook/components": "^6.5.16",
     "@storybook/theming": "^6.5.16",
