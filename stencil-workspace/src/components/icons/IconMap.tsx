@@ -43,6 +43,7 @@ export interface IconProps {
   color?: string;
   onClick?: () => void;
   size?: string;
+  id?: string;
 }
 
 interface IconMapProps extends IconProps {

@@ -7,7 +7,7 @@ export default {
   argTypes: {
     activePage: {
       name: 'active-page',
-      description: "The pagination's active page",
+      description: 'The pagination\'s active page',
       table: {
         type: { summary: 'number' },
       },
@@ -15,14 +15,14 @@ export default {
     },
     ariaLabel: {
       name: 'aria-label',
-      description: "The pagination's aria-label",
+      description: 'The pagination\'s aria-label',
       table: {
         type: { summary: 'string' },
       },
     },
     maxPage: {
       name: 'max-page',
-      description: "The pagination's maximum page",
+      description: 'The pagination\'s maximum page',
       table: {
         type: { summary: 'number' },
       },
@@ -30,11 +30,19 @@ export default {
     },
     minPage: {
       name: 'min-page',
-      description: "The pagination's minimum page",
+      description: 'The pagination\'s minimum page',
       table: {
         type: { summary: 'number' },
       },
       type: { required: true },
+    },
+    showPagesDropdowns: {
+      name: 'showPagesDropdowns',
+      description: 'The pagination\'s dropdown',
+      table: {
+        type: { summary: 'boolean' },
+      },
+      type: { required: false },
     },
     size: {
       control: {
@@ -43,8 +51,8 @@ export default {
       },
       description: 'The size of the pagination',
       table: {
-        defaultValue: { summary: `'medium'` },
-        type: { summary: `'small' | 'medium' | 'large'` },
+        defaultValue: { summary: '\'medium\'' },
+        type: { summary: '\'small\' | \'medium\' | \'large\'' },
       },
     },
   },
@@ -132,4 +140,32 @@ Small.args = {
   maxPage: '100',
   minPage: '1',
   size: 'small',
+};
+
+export const PaginationDropDown = ({
+  activePage,
+  ariaLabel,
+  maxPage,
+  minPage,
+  showPagesDropdowns,
+  size,
+}) => html`
+  <div style="position: relative; top: 140px;">
+    <modus-pagination
+      active-page=${activePage}
+      aria-label=${ariaLabel}
+      max-page=${maxPage}
+      min-page=${minPage}
+      show-pages-dropdowns=${showPagesDropdowns}
+      size=${size}>
+    </modus-pagination>
+  </div>
+`;
+PaginationDropDown.args = {
+  activePage: '1',
+  ariaLabel: '',
+  maxPage: '100',
+  minPage: '1',
+  showPagesDropdowns: true,
+  size: 'medium',
 };

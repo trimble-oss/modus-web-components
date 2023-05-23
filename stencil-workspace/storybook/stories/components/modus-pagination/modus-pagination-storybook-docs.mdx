@@ -24,6 +24,11 @@ import { Anchor } from '@storybook/addon-docs';
 
 <modus-pagination active-page="8" max-page="32" min-page="1" size="small"></modus-pagination>
 
+### Pagination Dropdown
+
+<modus-pagination active-page="8" max-page="32" min-page="1" size="medium" top={'150px'} showPagesDropdowns="true"></modus-pagination>
+
+
 ```html
 <modus-pagination
   active-page="8"
@@ -101,6 +106,14 @@ import { Anchor } from '@storybook/addon-docs';
         <td>string</td>
         <td>'small', 'medium', 'large'</td>
         <td>'medium'</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>showPagesDropdowns</td>
+        <td>The pagination dropdown</td>
+        <td>boolean</td>
+        <td></td>
+        <td>false</td>
         <td></td>
       </tr>
     </tbody>
