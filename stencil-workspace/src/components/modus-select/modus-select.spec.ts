@@ -19,7 +19,7 @@ describe('modus-select', () => {
                   <path d="M0 0.5L4.60606 5.5L9.21212 0.5H0Z" fill="#6A6976"></path>
                 </svg>
               </button>
-              <div class='dropdown-list hidden medium'></div>
+              <div class='dropdown-list hidden menu-medium'></div>
             </div>
           </div>
         </mock:shadow-root>
@@ -79,5 +79,10 @@ describe('modus-select', () => {
   it('should default with no value', async () => {
     const modusSelect = new ModusSelect();
     expect(modusSelect.value).toBeFalsy();
+  });
+
+  it('should default to medium dropdown menu size', async () => {
+    const modusSelect = new ModusSelect();
+    expect(modusSelect.menuSize).toEqual('medium');
   });
 });
