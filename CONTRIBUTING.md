@@ -156,6 +156,11 @@ This will open Chrome dev tools for debugging, and run only the Autocomplete e2e
 You can add the following code to the test file to pause the test at a specific point while it's running in Chrome dev tools:
 `page.evaluate(() => { debugger; });`
 
+## Considerations
+
+When submitting or reviewing contributions to the Modus Web Components library (MWC), it is important to keep code quality in mind.
+Check out the [Considerations](CONSIDERATIONS.md) doc for more information.
+
 ## Making Changes and Submitting a PR
 
 1. Before working on an issue, the repository should be forked with intent to contribute to the parent repository.
@@ -185,23 +190,6 @@ Given a version number [MAJOR.MINOR.PATCH], increment the following:
 3. Patch: to make backwards compatible bug fixes.
    Example: Version 1.0.0 has a function added in accordance with a minor version update. The new version will be 1.1.0.
    See: [semver.org](https://semver.org/spec/v2.0.0.html).
-
-### Guidelines
-
-- Each version has an entry and release date.
-- Entries are ordered from newest to oldest.
-- Entries contain updates relevant to an end user and may not reflect every commit.
-
-### Update Types
-
-Each changelog entry will include one or more update types relevant to each change:
-
-- Added: New features.
-- Changed: Changes in functionality.
-- Deprecated: For soon to be removed features.
-- Removed: For removed features.
-- Fixed: For bug Fixes.
-- Security: For vulnerabilities.
 
 ## Releasing Framework Outputs
 
