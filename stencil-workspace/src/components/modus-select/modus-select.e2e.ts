@@ -102,9 +102,9 @@ describe('modus-select', () => {
 
     await page.setContent('<modus-select></modus-select>');
 
-    const options = [ { display: 'Some value' } ];
+    const options = [{ display: 'Some value' }];
     const select = await page.find('modus-select');
-    select.setProperty('options', options)
+    select.setProperty('options', options);
     select.setProperty('optionsDisplayProp', 'display');
     select.setProperty('value', options[0]);
     await page.waitForChanges();
@@ -113,20 +113,41 @@ describe('modus-select', () => {
     expect(await button.getProperty('textContent')).toEqual(options[0].display);
   });
 
+  it('renders changes to menuSize', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-select></modus-select>');
+    const options = [{ display: 'Some value' }];
+    const select = await page.find('modus-select');
+    select.setProperty('options', options);
+    await page.waitForChanges();
+
+    const dropdown = await page.find('modus-select >>> .dropdown-list');
+    expect(dropdown).toHaveClass('menu-medium');
+    let computedStyle = await dropdown.getComputedStyle();
+    expect(computedStyle['max-height']).toEqual('240px');
+
+    select.setProperty('menuSize', 'small');
+    await page.waitForChanges();
+
+    expect(dropdown).toHaveClass('menu-small');
+    computedStyle = await dropdown.getComputedStyle();
+    expect(computedStyle['max-height']).toEqual('140px');
+  });
+
   it('emits valueChange event', async () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-select></modus-select>');
 
-    const options = [ { display: 'Some value' } ];
+    const options = [{ display: 'Some value' }];
     const select = await page.find('modus-select');
-    select.setProperty('options', options)
+    select.setProperty('options', options);
     select.setProperty('optionsDisplayProp', 'display');
     select.setProperty('value', options[0]);
     await page.waitForChanges();
 
     const valueChange = await page.spyOnEvent('valueChange');
-    const element = await page.find('modus-select >>> button')
+    const element = await page.find('modus-select >>> button');
 
     await element.click();
     await page.waitForChanges();
@@ -137,12 +158,12 @@ describe('modus-select', () => {
     expect(valueChange).toHaveReceivedEvent();
     expect(valueChange).toHaveReceivedEventDetail(options[0]);
   });
-  
+
   it('emits valueChange event on enter', async () => {
     const page = await newE2EPage();
     await page.setContent('<modus-select></modus-select>');
 
-    const options = [ { display: 'Some value' } ];
+    const options = [{ display: 'Some value' }];
     const select = await page.find('modus-select');
     select.setProperty('options', options);
     select.setProperty('optionsDisplayProp', 'display');

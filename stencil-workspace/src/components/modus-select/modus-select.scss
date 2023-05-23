@@ -85,6 +85,7 @@
       background-color: $modus-input-bg;
       border: 1px solid $modus-input-border-color;
       display: none;
+      overflow-y: auto;
       position: absolute;
       top: 2.125rem;
       width: 100%;
@@ -96,6 +97,18 @@
 
       &.large {
         top: 3.125rem;
+      }
+
+      &.menu-small {
+        max-height: 140px;
+      }
+
+      &.menu-medium {
+        max-height: 240px;
+      }
+
+      &.menu-large {
+        max-height: 400px;
       }
 
       .dropdown-list-item {
