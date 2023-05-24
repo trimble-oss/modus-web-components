@@ -5,6 +5,7 @@ import {
 import { Cell } from '@tanstack/table-core';
 import { ModusColumnDataType } from '../enums/modus-column-data-type';
 import { PropertyDataType } from '../constants/constants';
+import { cellFormatter } from './modus-data-table-cell-formatter';
 
 interface ModusDataTableCellProps {
   cell: Cell<unknown, unknown>;
@@ -12,26 +13,20 @@ interface ModusDataTableCellProps {
 
 export const ModusDataTableCell: FunctionalComponent<
   ModusDataTableCellProps
-> = (props: ModusDataTableCellProps) => {
+> = ({ cell }) => {
   return (
     <td
-      key={props.cell.id}
+      key={cell.id}
       class={`
        ${
-         props.cell.column.columnDef[PropertyDataType] ===
-           ModusColumnDataType.Integer ||
-         props.cell.column.columnDef[PropertyDataType] ===
-           ModusColumnDataType.Currency
+         cell.column.columnDef[PropertyDataType] === ModusColumnDataType.Integer
            ? 'text-align-right'
            : ''
        }
-          ${props.cell.column.getIsResizing() ? 'active-resize' : ''}
+          ${cell.column.getIsResizing() ? 'active-resize' : ''}
       `}
-      style={{ width: `${props.cell.column.getSize()}px` }}>
-      {props.cell.column.columnDef[PropertyDataType] !==
-      ModusColumnDataType.Date
-        ? props.cell.renderValue()
-        : new Date(String(props.cell.renderValue()))?.toLocaleString()}
+      style={{ width: `${cell.column.getSize()}px` }}>
+      {cellFormatter(cell.column.columnDef.cell, cell.getContext())}
     </td>
   );
 };

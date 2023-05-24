@@ -278,7 +278,7 @@ export namespace Components {
         /**
           * (Required) To display headers in the table.
          */
-        "columns": ModusDataTableColumn[];
+        "columns": ModusDataTableColumn<unknown>[];
         /**
           * (Required) To display data in the table.
          */
@@ -1911,7 +1911,7 @@ declare namespace LocalJSX {
         /**
           * (Required) To display headers in the table.
          */
-        "columns": ModusDataTableColumn[];
+        "columns": ModusDataTableColumn<unknown>[];
         /**
           * (Required) To display data in the table.
          */
