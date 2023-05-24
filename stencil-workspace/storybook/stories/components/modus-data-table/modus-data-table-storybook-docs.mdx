@@ -14,6 +14,7 @@ import { Story } from '@storybook/addon-docs';
 - [Hover](#hover)
 - [Borderless](#borderless)
 - [Sorting](#sorting)
+- [Value Formatter](#value-formatter)
 - [Column Resize](#column-resize)
 - [Pagination](#pagination)
 - [Summary Row](#summary-row)
@@ -142,6 +143,42 @@ Users can arrange data in a table by sorting it in either ascending or descendin
 
 <Story id="components-data-table--sorting" height={'350px'} />
 
+### Value Formatter
+
+User can take the data of a cell and apply any string-based formatting logic.
+
+- Need to use `cell` property in the `columns` array and `cell.getValue()` will provide the cell data.
+
+```
+  e.g. for currency formatting `cell: (props) => formatCurrency(props.cell.getValue())`
+  function formatCurrency(value) {
+    return '$' + formatNumber(value);
+  }
+
+  e.g. for decimal number formatting `cell: (props) =>formatNumber(props.cell.getValue())`
+  function formatNumber(value) {
+    return Number(value)
+    .toFixed(2)
+    .replace(/\d(?=(\d{3})+\.)/g, '$&,');
+  }
+
+  e.g. for date formatting `cell: (props) => formatDate(props.cell.getValue())`
+  function formatDate(value) {
+    const date = new Date(value);
+    return (
+      (date.getMonth() > 8 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1)) +
+      '/' +
+      (date.getDate() > 9 ? date.getDate() : '0' + date.getDate()) +
+      '/' +
+      date.getFullYear()
+    );
+  }
+
+  NOTE: One can use their own custom functions to format data as per their requirements.
+```
+
+<Story id="components-data-table--value-formatter" height={'350px'} />
+
 ### Column Resize
 
 The column sizing feature allows users to dynamically change the width of all columns by dragging the column headers. When hovering above the dividing line between two columns, there is a visual indicator that shows the column is adjustable.
@@ -257,7 +294,6 @@ interface interface ModusDataTableColumn {
   accessorKey: string;
   dataType: ModusColumnDataType;
   id?: string;
-  columns?: ModusDataTableColumn[];
   footer?: string;
   enableSorting?: boolean;
   enableResizing?: boolean;
@@ -265,16 +301,6 @@ interface interface ModusDataTableColumn {
   minSize?: number,
   maxSize?: number
   showTotal?: boolean;
-}
-
-enum ModusColumnDataType {
-  Text = 'text',
-  Integer = 'integer',
-  Currency = 'currency',
-  Percent = 'percent',
-  Decimal = 'decimal',
-  Date = 'date',
-  Dropdown = 'dropdown',
 }
 ```
 

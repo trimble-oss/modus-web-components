@@ -45,7 +45,7 @@ import { ModusDataTableSummaryRow } from './parts/modus-data-table-summary-row';
 })
 export class ModusDataTable {
   /** (Required) To display headers in the table. */
-  @Prop({ mutable: true }) columns!: ModusDataTableColumn[];
+  @Prop({ mutable: true }) columns!: ModusDataTableColumn<unknown>[];
   @Watch('columns') updateColumsOnChange() {
     this.table.options.columns = this.columns;
   }

@@ -34,11 +34,10 @@ export const ModusDataTableSummaryRow: FunctionalComponent<
             <td
               key={header.id}
               class={
-                (header.column.columnDef[PropertyDataType] ===
-                  ModusColumnDataType.Integer ||
-                  header.column.columnDef[PropertyDataType] ===
-                    ModusColumnDataType.Currency) &&
-                'text-align-right'
+                header.column.columnDef[PropertyDataType] ===
+                ModusColumnDataType.Integer
+                  ? 'text-align-right'
+                  : ''
               }>
               {header.column.columnDef[PropertyShowTotal]
                 ? calculateSum(tableData, header)
