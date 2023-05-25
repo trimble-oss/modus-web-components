@@ -2,8 +2,6 @@ name: Google Chat Notification
 on:
   pull_request:
     types: [opened, reopened, closed]
-  pull_request_review_comment:
-    types: [created]
 jobs:
   notify:
     runs-on: ubuntu-latest
