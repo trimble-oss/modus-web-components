@@ -18,10 +18,10 @@ export class ModusDropdown {
 
   /** (optional) Determines custom dropdown placement offset. */
   @Prop() customPlacement: {
-    top?: number,
-    right?: number,
-    bottom?: number,
-    left?: number
+    top?: number;
+    right?: number;
+    bottom?: number;
+    left?: number;
   };
 
   /** (optional) Disables the dropdown. */
@@ -48,13 +48,17 @@ export class ModusDropdown {
 
   componentDidRender(): void {
     this.toggleElement = this.el.querySelector(`#${this.toggleElementId}`);
-    if (!this.toggleElement) { throw Error('matching element not found for toggle-element-id'); }
+    if (!this.toggleElement) {
+      throw Error('matching element not found for toggle-element-id');
+    }
   }
 
   @Listen('click', { target: 'document' })
   documentClickHandler(event: MouseEvent): void {
     // Close the dropdown when click is outside the current element.
-    if (event.defaultPrevented || (event.target as HTMLElement).closest(`#${this.toggleElementId}`)) { return; }
+    if (event.defaultPrevented || (event.target as HTMLElement).closest(`#${this.toggleElementId}`)) {
+      return;
+    }
 
     this.visible = false;
     this.dropdownClose.emit();
@@ -78,20 +82,24 @@ export class ModusDropdown {
   }
 
   render(): unknown {
-    const listContainerClass = `dropdown-list ${this.visible ? 'visible' : 'hidden'} ${this.animateList ? 'animate-list' : ''} ${this.classByPlacement.get(this.placement)}`;
+    const listContainerClass = `dropdown-list ${this.visible ? 'visible' : 'hidden'} ${
+      this.animateList ? 'animate-list' : ''
+    } ${this.classByPlacement.get(this.placement)}`;
     const left = this.placement === 'right' ? `${this.toggleElement?.offsetWidth}px` : 'unset';
     const width = `${this.toggleElement?.offsetWidth ? this.toggleElement?.offsetWidth : 0}px`;
 
     return (
-      <div aria-label={this.ariaLabel} class="dropdown" role="listbox" onClick={event => this.handleDropdownClick(event)}>
+      <div aria-label={this.ariaLabel} class="dropdown" role="listbox" onClick={(event) => this.handleDropdownClick(event)}>
         <slot name="dropdownToggle" />
-        <div class={listContainerClass} style={{
-          top: this.customPlacement?.top ? `${this.customPlacement?.top}px` : '',
-          right: this.customPlacement?.right ? `${this.customPlacement?.right}px` : '',
-          left:  this.customPlacement?.left ? `${this.customPlacement?.left}px` : left,
-          bottom: this.customPlacement?.bottom ? `${this.customPlacement?.bottom}px` : '',
-          'min-width': width
-        }}>
+        <div
+          class={listContainerClass}
+          style={{
+            top: this.customPlacement?.top ? `${this.customPlacement?.top}px` : '',
+            right: this.customPlacement?.right ? `${this.customPlacement?.right}px` : '',
+            left: this.customPlacement?.left ? `${this.customPlacement?.left}px` : left,
+            bottom: this.customPlacement?.bottom ? `${this.customPlacement?.bottom}px` : '',
+            'min-width': width,
+          }}>
           <slot name="dropdownList" />
         </div>
       </div>

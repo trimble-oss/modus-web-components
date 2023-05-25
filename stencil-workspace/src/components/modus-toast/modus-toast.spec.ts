@@ -51,9 +51,9 @@ describe('modus-toast', () => {
     expect(className).toEqual('success');
 
     className = toast.classByType.get('tertiary');
-    expect(className).toEqual('tertiary')
+    expect(className).toEqual('tertiary');
 
     className = toast.classByType.get('warning');
-    expect(className).toEqual('warning')
+    expect(className).toEqual('warning');
   });
 });

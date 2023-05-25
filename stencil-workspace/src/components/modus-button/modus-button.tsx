@@ -58,7 +58,9 @@ export class ModusButton {
   }
 
   render(): unknown {
-    const className = `${this.classBySize.get(this.size)} ${this.classByColor.get(this.color)} ${this.classByButtonStyle.get(this.buttonStyle)}`;
+    const className = `${this.classBySize.get(this.size)} ${this.classByColor.get(this.color)} ${this.classByButtonStyle.get(
+      this.buttonStyle
+    )}`;
 
     return (
       <button

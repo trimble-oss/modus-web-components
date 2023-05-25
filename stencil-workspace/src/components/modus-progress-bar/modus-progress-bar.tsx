@@ -63,11 +63,8 @@ export class ModusProgressBar {
   }
 
   render(): unknown {
-    const percentage =
-      ((this.value - this.minValue) / (this.maxValue - this.minValue)) * 100;
-    const progressBarBackgroundColorClass = this.backgroundColor
-      ? ''
-      : 'default-background-color';
+    const percentage = ((this.value - this.minValue) / (this.maxValue - this.minValue)) * 100;
+    const progressBarBackgroundColorClass = this.backgroundColor ? '' : 'default-background-color';
     const progressColorClass = this.color ? '' : 'default-color';
     const progressTextColor = this.textColor ? '' : 'default-text-color';
     const progressBarClass = `

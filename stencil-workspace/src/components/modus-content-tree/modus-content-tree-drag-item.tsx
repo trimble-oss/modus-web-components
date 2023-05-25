@@ -2,7 +2,9 @@
 import { FunctionalComponent, h } from '@stencil/core';
 import { TreeViewItemDragState } from './modus-content-tree.types';
 
-export const ModusContentTreeDragItem: FunctionalComponent<{ draggingState: TreeViewItemDragState }> = ({ draggingState }) => {
+export const ModusContentTreeDragItem: FunctionalComponent<{ draggingState: TreeViewItemDragState }> = ({
+  draggingState,
+}) => {
   if (!draggingState) return null;
 
   const { width, height, translation, dragContent, validTarget, targetId } = draggingState;

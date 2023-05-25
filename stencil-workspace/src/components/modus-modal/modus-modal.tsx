@@ -105,12 +105,21 @@ export class ModusModal {
           </div>
           <div class="footer">
             {this.secondaryButtonText && (
-              <modus-button button-style="outline" color="secondary" ariaLabel={this.secondaryButtonAriaLabel} onClick={() => this.secondaryButtonClick.emit()} onKeyDown={(event) => this.handlePrimaryKeydown(event)}>
+              <modus-button
+                button-style="outline"
+                color="secondary"
+                ariaLabel={this.secondaryButtonAriaLabel}
+                onClick={() => this.secondaryButtonClick.emit()}
+                onKeyDown={(event) => this.handlePrimaryKeydown(event)}>
                 {this.secondaryButtonText}
               </modus-button>
             )}
             {this.primaryButtonText && (
-              <modus-button color="primary" ariaLabel={this.primaryButtonAriaLabel} onClick={() => this.primaryButtonClick.emit()} onKeyDown={(event) => this.handleSecondaryKeydown(event)}>
+              <modus-button
+                color="primary"
+                ariaLabel={this.primaryButtonAriaLabel}
+                onClick={() => this.primaryButtonClick.emit()}
+                onKeyDown={(event) => this.handleSecondaryKeydown(event)}>
                 {this.primaryButtonText}
               </modus-button>
             )}

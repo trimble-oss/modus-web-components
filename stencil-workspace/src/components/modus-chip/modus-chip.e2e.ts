@@ -137,7 +137,7 @@ describe('modus-chip', () => {
 
     await page.setContent('<modus-chip></modus-chip>');
     const chipClick = await page.spyOnEvent('chipClick');
-    const shadowContainer = await page.find('modus-chip >>> .modus-chip')
+    const shadowContainer = await page.find('modus-chip >>> .modus-chip');
     await page.waitForChanges();
 
     await shadowContainer.click();
@@ -151,7 +151,7 @@ describe('modus-chip', () => {
     await page.setContent('<modus-chip show-close></modus-chip>');
     const closeClick = await page.spyOnEvent('closeClick');
     const chipClick = await page.spyOnEvent('chipClick');
-    const shadowCloseIcon = await page.find('modus-chip >>> .icon-remove')
+    const shadowCloseIcon = await page.find('modus-chip >>> .icon-remove');
     await page.waitForChanges();
 
     await shadowCloseIcon.click();

@@ -5,64 +5,31 @@ $modus-table-color: var(--modus-table-color, #464b52) !default;
 
 // Header
 $modus-table-header-bg: var(--modus-table-header-bg, #f1f1f6) !default;
-$modus-table-header-border-color: var(
-  --modus-table-header-border-color,
-  #b7b9c3
-) !default;
+$modus-table-header-border-color: var(--modus-table-header-border-color, #b7b9c3) !default;
 $modus-table-header-color: var(--modus-table-header-color, #464b52) !default;
 
 // Body
 $modus-table-hover-bg: var(--modus-table-hover-bg, #dcedf9) !default;
-$modus-table-hover-border-color: var(
-  --modus-table-hover-border-color,
-  #b7b9c3
-) !default;
+$modus-table-hover-border-color: var(--modus-table-hover-border-color, #b7b9c3) !default;
 $modus-table-selected-bg: var(--modus-table-selected-bg, #dcedf9) !default;
-$modus-table-selected-border-color: var(
-  --modus-table-selected-border-color,
-  #dcedf9
-) !default;
-$modus-table-edit-border-color: var(
-  --modus-table-edit-border-color,
-  #dcedf9
-) !default;
+$modus-table-selected-border-color: var(--modus-table-selected-border-color, #dcedf9) !default;
+$modus-table-edit-border-color: var(--modus-table-edit-border-color, #dcedf9) !default;
 $modus-table-readonly-bg: var(--modus-table-readonly-bg, #e0e1e9) !default;
-$modus-table-readonly-color: var(
-  --modus-table-readonly-color,
-  #464b52
-) !default;
+$modus-table-readonly-color: var(--modus-table-readonly-color, #464b52) !default;
 
 // Cell link
 $modus-link-color: var(--modus-link-color, #217cbb) !default;
 
 // Icons
-$modus-btn-icon-only-dark-color: var(
-  --modus-btn-icon-only-dark-color,
-  #252a2e
-) !default;
-$modus-btn-icon-only-dark-hover-bg: var(
-  --modus-btn-icon-only-dark-hover-bg,
-  #e0e1e9
-) !default;
-$modus-btn-icon-only-dark-hover-color: var(
-  --modus-btn-icon-only-dark-hover-color,
-  #353a40
-) !default;
-$modus-btn-icon-only-dark-active-bg: var(
-  --modus-btn-icon-only-dark-active-bg,
-  #cbcdd6
-) !default;
-$modus-btn-icon-only-dark-active-color: var(
-  --modus-btn-icon-only-dark-active-color,
-  #2b2a37
-) !default;
+$modus-btn-icon-only-dark-color: var(--modus-btn-icon-only-dark-color, #252a2e) !default;
+$modus-btn-icon-only-dark-hover-bg: var(--modus-btn-icon-only-dark-hover-bg, #e0e1e9) !default;
+$modus-btn-icon-only-dark-hover-color: var(--modus-btn-icon-only-dark-hover-color, #353a40) !default;
+$modus-btn-icon-only-dark-active-bg: var(--modus-btn-icon-only-dark-active-bg, #cbcdd6) !default;
+$modus-btn-icon-only-dark-active-color: var(--modus-btn-icon-only-dark-active-color, #2b2a37) !default;
 
 // Action items
 $modus-list-item-bg: var(--modus-list-item-bg, #fff) !default;
-$modus-list-item-border-color: var(
-  --modus-list-item-border-color,
-  #e0e1e9
-) !default;
+$modus-list-item-border-color: var(--modus-list-item-border-color, #e0e1e9) !default;
 $modus-list-item-color: var(--modus-list-item-color, #252a2e) !default;
 
 // Hover

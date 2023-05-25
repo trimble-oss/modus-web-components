@@ -8,9 +8,7 @@ interface IconProps {
   pressed?: boolean;
 }
 
-export const IconNotifications: FunctionalComponent<IconProps> = (
-  props: IconProps
-) => (
+export const IconNotifications: FunctionalComponent<IconProps> = (props: IconProps) => (
   <svg
     class={`icon-notifications ${props.pressed ? 'pressed' : ''}`}
     height={props.size ?? 16}

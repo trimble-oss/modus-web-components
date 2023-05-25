@@ -1,13 +1,6 @@
-import {
-  TokenFormatting,
-  token,
-  Tokens,
-  tokenType,
-  TokenParser,
-} from './modus-date-input.tokens';
+import { TokenFormatting, token, Tokens, tokenType, TokenParser } from './modus-date-input.tokens';
 
-export const ISO_DATE_FORMAT =
-  /^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|0?[1-9]|[12][0-9])$/;
+export const ISO_DATE_FORMAT = /^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|0?[1-9]|[12][0-9])$/;
 
 type dateTokens = Map<tokenType, { index: number; tokenString: token }>;
 type tokenSeparators = Map<number, string>;
@@ -95,13 +88,7 @@ export default class DateInputFormatter {
       let output = this._displayFormat;
       this._dateTokens.forEach(({ tokenString }, key) => {
         const formatting = TokenFormatting[tokenString];
-        output = output.replace(
-          tokenString,
-          formatting(
-            parts[key],
-            key === 'year' ? this._fillerDate.getFullYear() : null
-          )
-        );
+        output = output.replace(tokenString, formatting(parts[key], key === 'year' ? this._fillerDate.getFullYear() : null));
       });
 
       return output;
@@ -126,18 +113,15 @@ export default class DateInputFormatter {
           ? TokenParser[monthToken.tokenString](output[monthToken.index])
           : this._fillerDate.getMonth() + 1;
 
-        const date = dateToken
-          ? TokenParser[dateToken.tokenString](output[dateToken.index])
-          : this._fillerDate.getDate();
+        const date = dateToken ? TokenParser[dateToken.tokenString](output[dateToken.index]) : this._fillerDate.getDate();
 
         const year = yearToken
           ? TokenParser[yearToken.tokenString](output[yearToken.index])
           : this._fillerDate.getFullYear();
 
-        const isoDateString = `${TokenFormatting.yyyy(
-          year,
-          this._fillerDate.getFullYear()
-        )}-${TokenFormatting.mm(month)}-${TokenFormatting.dd(date)}`;
+        const isoDateString = `${TokenFormatting.yyyy(year, this._fillerDate.getFullYear())}-${TokenFormatting.mm(
+          month
+        )}-${TokenFormatting.dd(date)}`;
 
         return Date.parse(isoDateString) ? isoDateString : null;
       }
@@ -153,15 +137,7 @@ export default class DateInputFormatter {
     const parse = regex.exec(val);
     if (parse) {
       parse.shift();
-      return new Date(
-        parseFloat(parse[0]),
-        parseFloat(parse[1]),
-        parseFloat(parse[2]),
-        0,
-        0,
-        0,
-        0
-      );
+      return new Date(parseFloat(parse[0]), parseFloat(parse[1]), parseFloat(parse[2]), 0, 0, 0, 0);
     } else {
       return new Date(new Date().getFullYear(), 0, 1, 0, 0, 0, 0);
     }

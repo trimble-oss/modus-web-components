@@ -30,12 +30,16 @@ export class ModusListItem {
   ]);
 
   render(): unknown {
-    const containerClass = `${this.classBySize.get(this.size)} ${this.disabled ? 'disabled' : ''} ${this.selected ? 'selected' : ''}`;
+    const containerClass = `${this.classBySize.get(this.size)} ${this.disabled ? 'disabled' : ''} ${
+      this.selected ? 'selected' : ''
+    }`;
     const iconSize = this.size === 'condensed' ? '18' : '22';
 
     return (
-      <li class={containerClass} onClick={() => !this.disabled ? this.itemClick.emit() : null}>
-        <span class="slot"><slot /></span>
+      <li class={containerClass} onClick={() => (!this.disabled ? this.itemClick.emit() : null)}>
+        <span class="slot">
+          <slot />
+        </span>
         {this.selected && <IconCheck size={iconSize} />}
       </li>
     );

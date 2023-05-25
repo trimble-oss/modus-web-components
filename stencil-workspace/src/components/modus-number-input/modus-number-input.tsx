@@ -54,7 +54,7 @@ export class ModusNumberInput {
 
   classBySize: Map<string, string> = new Map([
     ['medium', 'medium'],
-    ['large', 'large']
+    ['large', 'large'],
   ]);
   numberInput: HTMLInputElement;
 
@@ -75,7 +75,9 @@ export class ModusNumberInput {
 
   render(): unknown {
     const className = `modus-number-input ${this.disabled ? 'disabled' : ''}`;
-    const inputContainerClassName = `input-container ${this.errorText ? 'error' : this.validText ? 'valid' : ''} ${this.classBySize.get(this.size)}`;
+    const inputContainerClassName = `input-container ${
+      this.errorText ? 'error' : this.validText ? 'valid' : ''
+    } ${this.classBySize.get(this.size)}`;
 
     return (
       <div
@@ -89,12 +91,12 @@ export class ModusNumberInput {
         aria-valuemin={this.minValue}
         aria-valuenow={this.value}
         class={className}>
-        {this.label || this.required
-         ? <div class="label-container">
-            {this.label ? <label>{this.label}</label> : null}{this.required ? <span class="required">*</span> : null}
-           </div>
-         : null
-        }
+        {this.label || this.required ? (
+          <div class="label-container">
+            {this.label ? <label>{this.label}</label> : null}
+            {this.required ? <span class="required">*</span> : null}
+          </div>
+        ) : null}
         <div class={inputContainerClassName}>
           <input
             disabled={this.disabled}
@@ -103,19 +105,19 @@ export class ModusNumberInput {
             onInput={() => this.handleOnInput()}
             placeholder={this.placeholder}
             readonly={this.readOnly}
-            ref={(el) => this.numberInput = el as HTMLInputElement}
+            ref={(el) => (this.numberInput = el as HTMLInputElement)}
             step={this.step}
             tabIndex={0}
             type="number"
-            value={this.value}>
-          </input>
+            value={this.value}></input>
         </div>
-        {
-          this.errorText ? <label class="sub-text error">{this.errorText}</label> :
-          this.validText ? <label class="sub-text valid">{this.validText}</label> :
-          this.helperText ? <label class="sub-text helper">{this.helperText}</label> :
-          null
-        }
+        {this.errorText ? (
+          <label class="sub-text error">{this.errorText}</label>
+        ) : this.validText ? (
+          <label class="sub-text valid">{this.validText}</label>
+        ) : this.helperText ? (
+          <label class="sub-text helper">{this.helperText}</label>
+        ) : null}
       </div>
     );
   }

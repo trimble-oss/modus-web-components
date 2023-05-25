@@ -21,7 +21,7 @@ describe('modus-radio-group', () => {
     const radioButtons = [
       { id: '1', label: 'Option 1' },
       { id: '2', label: 'Option 2' },
-      { id: '3', label: 'Option 3' }
+      { id: '3', label: 'Option 3' },
     ];
     component.setProperty('radioButtons', radioButtons);
     await page.waitForChanges();
@@ -37,7 +37,7 @@ describe('modus-radio-group', () => {
     const radioButtons = [
       { id: '1', label: 'Option 1' },
       { id: '2', label: 'Option 2', checked: true },
-      { id: '3', label: 'Option 3' }
+      { id: '3', label: 'Option 3' },
     ];
     component.setProperty('radioButtons', radioButtons);
     component.setProperty('name', 'Some group');
@@ -55,9 +55,7 @@ describe('modus-radio-group', () => {
 
     await page.setContent('<modus-radio-group></modus-radio-group>');
     let component = await page.find('modus-radio-group');
-    let radioButtons: RadioButton[] = [
-      { id: '1', label: 'Option 1' }
-    ];
+    let radioButtons: RadioButton[] = [{ id: '1', label: 'Option 1' }];
     component.setProperty('radioButtons', radioButtons);
     await page.waitForChanges();
 
@@ -65,9 +63,7 @@ describe('modus-radio-group', () => {
     expect(await inputs[0].getProperty('checked')).toBeFalsy();
     expect(await inputs[0].getProperty('disabled')).toBeFalsy();
 
-    radioButtons = [
-      { id: '2', label: 'Option 2', checked: true, disabled: true }
-    ];
+    radioButtons = [{ id: '2', label: 'Option 2', checked: true, disabled: true }];
     component.setProperty('radioButtons', radioButtons);
     await page.waitForChanges();
 
@@ -83,7 +79,7 @@ describe('modus-radio-group', () => {
     let component = await page.find('modus-radio-group');
     let radioButtons: RadioButton[] = [
       { id: '1', label: 'Option 1', checked: true },
-      { id: '2', label: 'Option 2' }
+      { id: '2', label: 'Option 2' },
     ];
     component.setProperty('radioButtons', radioButtons);
     await page.waitForChanges();
@@ -106,7 +102,7 @@ describe('modus-radio-group', () => {
     const radioButtons = [
       { id: '1', label: 'Option 1' },
       { id: '2', label: 'Option 2', checked: true },
-      { id: '3', label: 'Option 3' }
+      { id: '3', label: 'Option 3' },
     ];
     component.setProperty('radioButtons', radioButtons);
     await page.waitForChanges();

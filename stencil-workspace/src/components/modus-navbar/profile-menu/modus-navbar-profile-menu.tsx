@@ -25,13 +25,10 @@ export class ModusNavbarProfileMenu {
 
   render(): unknown {
     const direction = this.reverse ? 'reverse' : '';
-    const variant =
-      this.variant === 'default' ? '' : `profile-menu-${this.variant}`;
+    const variant = this.variant === 'default' ? '' : `profile-menu-${this.variant}`;
 
     return (
-      <div
-        class={`profile-menu ${direction} ${variant}`}
-        onClick={(event) => event.preventDefault()}>
+      <div class={`profile-menu ${direction} ${variant}`} onClick={(event) => event.preventDefault()}>
         <div class="user">
           {this.avatarUrl ? (
             <img class="avatar" src={this.avatarUrl} alt="Avatar" />

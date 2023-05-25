@@ -263,5 +263,4 @@ describe('modus-date-input', () => {
     const errorText = await page.find('modus-date-input >>> .sub-text > label');
     expect(errorText.innerHTML).toEqual('Invalid date');
   });
-
 });

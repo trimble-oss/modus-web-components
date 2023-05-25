@@ -23,14 +23,8 @@ $menu-border-color: var(--modus-border-color, #cbcdd6) !default;
 $modus-navbar-bg: var(--modus-navbar-bg, $col_white) !default;
 $modus-navbar-brand-logo-filter: var(--modus-navbar-brand-logo-filter);
 $modus-navbar-icon-color: var(--modus-navbar-icon-color, #252a2e) !default;
-$modus-navbar-profile-icon-initials-color: var(
-  --modus-navbar-profile-icon-initials-color,
-  #fff
-) !default;
-$modus-navbar-profile-icon-active-border-color: var(
-  --modus-navbar-profile-icon-active-border-color,
-  #d6d5db
-) !default;
+$modus-navbar-profile-icon-initials-color: var(--modus-navbar-profile-icon-initials-color, #fff) !default;
+$modus-navbar-profile-icon-active-border-color: var(--modus-navbar-profile-icon-active-border-color, #d6d5db) !default;
 $modus-navbar-profile-menu-sign-out-background-color: var(
   --modus-navbar-profile-menu-sign-out-background-color,
   #f1f1f6
@@ -38,61 +32,28 @@ $modus-navbar-profile-menu-sign-out-background-color: var(
 $modus-navbar-profile-menu-sign-out-color: var(--modus-blue, #0063a3) !default;
 
 // Hover
-$modus-navbar-icon-hover-bg: var(
-  --modus-navbar-icon-hover-bg,
-  #e0e1e9
-) !default;
-$modus-navbar-icon-hover-color: var(
-  --modus-navbar-icon-hover-color,
-  #3c444a
-) !default;
+$modus-navbar-icon-hover-bg: var(--modus-navbar-icon-hover-bg, #e0e1e9) !default;
+$modus-navbar-icon-hover-color: var(--modus-navbar-icon-hover-color, #3c444a) !default;
 
 // Active
-$modus-navbar-icon-active-bg: var(
-  --modus-navbar-icon-active-bg,
-  #cbcdd6
-) !default;
-$modus-navbar-icon-active-color: var(
-  --modus-navbar-icon-active-color,
-  #0e1012
-) !default;
+$modus-navbar-icon-active-bg: var(--modus-navbar-icon-active-bg, #cbcdd6) !default;
+$modus-navbar-icon-active-color: var(--modus-navbar-icon-active-color, #0e1012) !default;
 
 // NavBar - Blue Varaint
 $modus-navbar-blue-bg: var(--modus-navbar-blue-bg, #0e416c) !default;
-$modus-navbar-blue-icon-color: var(
-  --modus-navbar-blue-icon-color,
-  $col_white
-) !default;
+$modus-navbar-blue-icon-color: var(--modus-navbar-blue-icon-color, $col_white) !default;
 
 // Hover
-$modus-navbar-blue-icon-hover-bg: var(
-  --modus-navbar-blue-icon-hover-bg,
-  #217cbb
-) !default;
-$modus-navbar-blue-icon-hover-color: var(
-  --modus-navbar-blue-icon-hover-color,
-  $col_white
-) !default;
-$modus-navbar-blue-icon-hover-border-color: var(
-  --modus-navbar-blue-icon-hover-border-color,
-  #019aeb
-) !default;
+$modus-navbar-blue-icon-hover-bg: var(--modus-navbar-blue-icon-hover-bg, #217cbb) !default;
+$modus-navbar-blue-icon-hover-color: var(--modus-navbar-blue-icon-hover-color, $col_white) !default;
+$modus-navbar-blue-icon-hover-border-color: var(--modus-navbar-blue-icon-hover-border-color, #019aeb) !default;
 
 // Active
-$modus-navbar-blue-icon-active-bg: var(
-  --modus-navbar-blue-icon-active-bg,
-  #019aeb
-) !default;
-$modus-navbar-blue-icon-active-color: var(
-  --modus-navbar-blue-icon-active-color,
-  $col_white
-) !default;
+$modus-navbar-blue-icon-active-bg: var(--modus-navbar-blue-icon-active-bg, #019aeb) !default;
+$modus-navbar-blue-icon-active-color: var(--modus-navbar-blue-icon-active-color, $col_white) !default;
 
 // Profile Menu
-$modus-navbar-blue-profile-icon-initials-color: var(
-  --modus-navbar-blue-profile-icon-initials-color,
-  #0e416c
-) !default;
+$modus-navbar-blue-profile-icon-initials-color: var(--modus-navbar-blue-profile-icon-initials-color, #0e416c) !default;
 $modus-navbar-blue-profile-icon-active-border-color: var(
   --modus-navbar-blue-profile-icon-active-border-color,
   #019aeb

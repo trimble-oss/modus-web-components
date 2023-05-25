@@ -24,7 +24,7 @@ export class ModusRadioGroup {
   @Event() buttonClick: EventEmitter<string>;
 
   componentWillLoad(): void {
-    this.radioButtons.forEach(radioButton => {
+    this.radioButtons.forEach((radioButton) => {
       this.checkedId = radioButton.checked ? radioButton.id : this.checkedId;
     });
   }
@@ -35,7 +35,9 @@ export class ModusRadioGroup {
   }
 
   private handleButtonKeydown(event: KeyboardEvent, id: string) {
-    if (event.code !== 'Enter') { return; }
+    if (event.code !== 'Enter') {
+      return;
+    }
 
     this.handleButtonClick(id);
   }
@@ -43,7 +45,7 @@ export class ModusRadioGroup {
   @Watch('checkedId')
   private setCheckedIdAndUpdateRadioButtons(id: string): void {
     this.checkedId = id;
-    this.radioButtons.forEach(radioButton => {
+    this.radioButtons.forEach((radioButton) => {
       radioButton.checked = radioButton.id === this.checkedId;
     });
   }

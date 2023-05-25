@@ -50,314 +50,84 @@ interface IconMapProps extends IconProps {
   imageOptions?: { [key: string]: string };
 }
 
-export const IconMap: FunctionalComponent<IconMapProps> = (
-  props: IconMapProps
-) => {
+export const IconMap: FunctionalComponent<IconMapProps> = (props: IconMapProps) => {
   switch (props.icon) {
     case 'add':
-      return (
-        <IconAdd
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconAdd color={props.color} onClick={props.onClick} size={props.size} />;
     case 'apps':
-      return (
-        <IconApps
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconApps color={props.color} onClick={props.onClick} size={props.size} />;
     case 'calendar':
-      return (
-        <IconCalendar
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconCalendar color={props.color} onClick={props.onClick} size={props.size} />;
     case 'cancel':
-      return (
-        <IconCancel
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconCancel color={props.color} onClick={props.onClick} size={props.size} />;
     case 'check':
-      return (
-        <IconCheck
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconCheck color={props.color} onClick={props.onClick} size={props.size} />;
     case 'check-circle':
-      return (
-        <IconCheckCircle
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconCheckCircle color={props.color} onClick={props.onClick} size={props.size} />;
     case 'check-circle-outline':
-      return (
-        <IconCheckCircleOutline
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconCheckCircleOutline color={props.color} onClick={props.onClick} size={props.size} />;
     case 'chevron-down-thick':
-      return (
-        <IconChevronDownThick
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconChevronDownThick color={props.color} onClick={props.onClick} size={props.size} />;
     case 'chevron-left-thick':
-      return (
-        <IconChevronLeftThick
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconChevronLeftThick color={props.color} onClick={props.onClick} size={props.size} />;
     case 'chevron-right-thick':
-      return (
-        <IconChevronRightThick
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconChevronRightThick color={props.color} onClick={props.onClick} size={props.size} />;
     case 'chevron-up-thick':
-      return (
-        <IconChevronUpThick
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconChevronUpThick color={props.color} onClick={props.onClick} size={props.size} />;
     case 'close':
-      return (
-        <IconClose
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconClose color={props.color} onClick={props.onClick} size={props.size} />;
     case 'collapse-all':
-      return (
-        <IconCollapseAll
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconCollapseAll color={props.color} onClick={props.onClick} size={props.size} />;
     case 'copy':
-      return (
-        <IconCopy
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconCopy color={props.color} onClick={props.onClick} size={props.size} />;
     case 'delete':
-      return (
-        <IconDelete
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconDelete color={props.color} onClick={props.onClick} size={props.size} />;
     case 'drag':
-      return (
-        <IconDrag
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconDrag color={props.color} onClick={props.onClick} size={props.size} />;
     case 'edit':
-      return (
-        <IconEdit
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconEdit color={props.color} onClick={props.onClick} size={props.size} />;
     case 'error':
-      return (
-        <IconError
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconError color={props.color} onClick={props.onClick} size={props.size} />;
     case 'expand-all':
-      return (
-        <IconExpandAll
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconExpandAll color={props.color} onClick={props.onClick} size={props.size} />;
     case 'folder':
-      return (
-        <IconFolder
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconFolder color={props.color} onClick={props.onClick} size={props.size} />;
     case 'help':
-      return (
-        <IconHelp
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconHelp color={props.color} onClick={props.onClick} size={props.size} />;
     case 'indeterminate':
-      return (
-        <IconIndeterminate
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconIndeterminate color={props.color} onClick={props.onClick} size={props.size} />;
     case 'info':
-      return (
-        <IconInfo
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconInfo color={props.color} onClick={props.onClick} size={props.size} />;
     case 'info-outline':
-      return (
-        <IconInfoOutline
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconInfoOutline color={props.color} onClick={props.onClick} size={props.size} />;
     case 'menu':
-      return (
-        <IconMenu
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconMenu color={props.color} onClick={props.onClick} size={props.size} />;
     case 'notifications':
-      return (
-        <IconNotifications
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconNotifications color={props.color} onClick={props.onClick} size={props.size} />;
     case 'remove':
-      return (
-        <IconRemove
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconRemove color={props.color} onClick={props.onClick} size={props.size} />;
     case 'search':
-      return (
-        <IconSearch
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconSearch color={props.color} onClick={props.onClick} size={props.size} />;
     case 'sort-a-z':
-      return (
-        <IconSortAZ
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconSortAZ color={props.color} onClick={props.onClick} size={props.size} />;
     case 'sort-z-a':
-      return (
-        <IconSortZA
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconSortZA color={props.color} onClick={props.onClick} size={props.size} />;
     case 'triangle-down':
-      return (
-        <IconTriangleDown
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconTriangleDown color={props.color} onClick={props.onClick} size={props.size} />;
     case 'triangle-left':
-      return (
-        <IconTriangleLeft
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconTriangleLeft color={props.color} onClick={props.onClick} size={props.size} />;
     case 'upload-cloud':
-      return (
-        <IconUploadCloud
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconUploadCloud color={props.color} onClick={props.onClick} size={props.size} />;
     case 'vertical-ellipsis':
-      return (
-        <IconVerticalEllipsis
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconVerticalEllipsis color={props.color} onClick={props.onClick} size={props.size} />;
     case 'warning':
-      return (
-        <IconWarning
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconWarning color={props.color} onClick={props.onClick} size={props.size} />;
     case 'warning-outline':
-      return (
-        <IconWarningOutline
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconWarningOutline color={props.color} onClick={props.onClick} size={props.size} />;
     case 'visibility':
-      return (
-        <IconVisibility
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconVisibility color={props.color} onClick={props.onClick} size={props.size} />;
     case 'visibility-off':
-      return (
-        <IconVisibilityOff
-          color={props.color}
-          onClick={props.onClick}
-          size={props.size}
-        />
-      );
+      return <IconVisibilityOff color={props.color} onClick={props.onClick} size={props.size} />;
     default:
       return <img src={props.icon} {...(props.imageOptions || {})} />;
   }

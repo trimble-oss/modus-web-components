@@ -17,7 +17,10 @@ describe('modus-autocomplete', () => {
     const element = await page.find('modus-autocomplete');
     expect(element).toHaveClass('hydrated');
 
-    element.setProperty('options', [{ id: 1, value: 'Test 1' }, { id: 2, value: 'Test 2' }]);
+    element.setProperty('options', [
+      { id: 1, value: 'Test 1' },
+      { id: 2, value: 'Test 2' },
+    ]);
     await page.waitForChanges();
 
     const textInput = await page.find('modus-autocomplete >>> modus-text-input');

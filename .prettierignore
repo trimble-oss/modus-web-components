@@ -6,3 +6,8 @@
 
 dist/*
 www/*
+
+*.stories.tsx
+*.mdx
+stencil-workspace/**/readme.md
+stencil-workspace/src/components.d.ts

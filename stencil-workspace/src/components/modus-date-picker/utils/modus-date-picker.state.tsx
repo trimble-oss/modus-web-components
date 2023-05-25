@@ -7,10 +7,7 @@ export default class ModusDatePickerState {
 
   constructor(el: HTMLModusDateInputElement) {
     this.element = el;
-    this.element.showCalendarIcon =
-      this.element.showCalendarIcon?.toString().toUpperCase() !== 'FALSE'
-        ? true
-        : false;
+    this.element.showCalendarIcon = this.element.showCalendarIcon?.toString().toUpperCase() !== 'FALSE' ? true : false;
     this.refresh();
   }
 

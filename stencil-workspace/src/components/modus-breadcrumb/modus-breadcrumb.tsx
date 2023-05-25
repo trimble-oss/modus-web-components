@@ -29,9 +29,7 @@ export class ModusBreadcrumb {
             <li key={crumb.id}>
               {index < this.crumbs.length - 1 ? (
                 <span class="crumb">
-                  <a onClick={() => this.crumbClick.emit(crumb)}>
-                    {crumb.display}
-                  </a>
+                  <a onClick={() => this.crumbClick.emit(crumb)}>{crumb.display}</a>
                   <span class="divider">{'>'}</span>
                 </span>
               ) : (

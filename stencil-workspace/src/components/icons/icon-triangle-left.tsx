@@ -7,9 +7,7 @@ interface IconProps {
   size?: string;
 }
 
-export const IconTriangleLeft: FunctionalComponent<IconProps> = (
-  props: IconProps
-) => (
+export const IconTriangleLeft: FunctionalComponent<IconProps> = (props: IconProps) => (
   <svg
     class="icon-triangle-left"
     height={props.size ?? 16}

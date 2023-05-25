@@ -6,7 +6,6 @@ import { Component, h, Prop } from '@stencil/core';
   styleUrl: 'modus-accordion.scss',
   shadow: true,
 })
-
 export class ModusAccordion {
   /** (optional) The accordion's aria-label. */
   @Prop() ariaLabel: string | null;

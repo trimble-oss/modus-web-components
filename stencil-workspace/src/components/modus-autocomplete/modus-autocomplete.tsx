@@ -177,9 +177,7 @@ export class ModusAutocomplete {
       return;
     }
 
-    this.customOptions = slotted
-      .assignedNodes()
-      .filter((node) => node.nodeName !== '#text');
+    this.customOptions = slotted.assignedNodes().filter((node) => node.nodeName !== '#text');
 
     if (!search || search.length === 0) {
       this.visibleCustomOptions = this.customOptions;
@@ -187,10 +185,7 @@ export class ModusAutocomplete {
     }
 
     this.visibleCustomOptions = this.customOptions?.filter((o: any) => {
-      return o
-        .getAttribute(DATA_SEARCH_VALUE)
-        .toLowerCase()
-        .includes(search.toLowerCase());
+      return o.getAttribute(DATA_SEARCH_VALUE).toLowerCase().includes(search.toLowerCase());
     });
     this.containsSlottedElements = this.customOptions.length > 0;
   };
@@ -201,17 +196,15 @@ export class ModusAutocomplete {
       return;
     }
 
-    this.visibleOptions = (this.options as ModusAutocompleteOption[])?.filter(
-      (o: ModusAutocompleteOption) => {
-        return o.value.toLowerCase().includes(search.toLowerCase());
-      }
-    );
+    this.visibleOptions = (this.options as ModusAutocompleteOption[])?.filter((o: ModusAutocompleteOption) => {
+      return o.value.toLowerCase().includes(search.toLowerCase());
+    });
   };
 
   // Do not display the slot for the custom options. We use this hidden slot to reference the slot's children.
   CustomOptionsSlot = () => (
     <div style={{ display: 'none' }}>
-      <slot onSlotchange={() => this.updateVisibleCustomOptions(this.value)}/>
+      <slot onSlotchange={() => this.updateVisibleCustomOptions(this.value)} />
     </div>
   );
 
@@ -221,9 +214,7 @@ export class ModusAutocomplete {
       errorText={this.hasFocus ? '' : this.errorText}
       includeSearchIcon={this.includeSearchIcon}
       label={this.label}
-      onValueChange={(searchEvent: CustomEvent<string>) =>
-        this.handleTextInputValueChange(searchEvent)
-      }
+      onValueChange={(searchEvent: CustomEvent<string>) => this.handleTextInputValueChange(searchEvent)}
       placeholder={this.placeholder}
       required={this.required}
       size={this.size}
@@ -243,14 +234,14 @@ export class ModusAutocomplete {
         class={classes}
         onFocusin={() => (this.hasFocus = true)}>
         {this.TextInput()}
-        <div class="options-container" style={{ maxHeight: this.dropdownMaxHeight, zIndex: this.dropdownZIndex, overflowY: 'auto' }}>
+        <div
+          class="options-container"
+          style={{ maxHeight: this.dropdownMaxHeight, zIndex: this.dropdownZIndex, overflowY: 'auto' }}>
           <ul>
             {this.displayOptions() &&
               this.visibleOptions?.map((option) => {
                 return (
-                  <li
-                    class="text-option"
-                    onClick={() => this.handleOptionClick(option)}>
+                  <li class="text-option" onClick={() => this.handleOptionClick(option)}>
                     {option.value}
                   </li>
                 );
@@ -264,12 +255,7 @@ export class ModusAutocomplete {
                 />
               ))}
           </ul>
-          {this.displayNoResults() && (
-            <NoResultsFound
-              text={this.noResultsFoundText}
-              subtext={this.noResultsFoundSubtext}
-            />
-          )}
+          {this.displayNoResults() && <NoResultsFound text={this.noResultsFoundText} subtext={this.noResultsFoundSubtext} />}
         </div>
         {this.CustomOptionsSlot()}
       </div>
@@ -279,8 +265,8 @@ export class ModusAutocomplete {
 
 const NoResultsFound = (props: { text: string; subtext: string }) => (
   <div class="no-results">
-    <div style={{display: 'flex'}}>
-      <IconSearch size="28px"/>
+    <div style={{ display: 'flex' }}>
+      <IconSearch size="28px" />
       <div class="message">{props.text}</div>
     </div>
     <div class="subtext">{props.subtext}</div>

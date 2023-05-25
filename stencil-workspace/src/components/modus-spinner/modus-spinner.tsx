@@ -23,8 +23,20 @@ export class ModusSpinner {
     ['warning', '#e49325'],
   ]);
   render(): unknown {
-    const borderColor = this.variants.has(this.color) ? `var(--modus-${this.color}, ${this.variants.get(this.color)})` : this.color;
+    const borderColor = this.variants.has(this.color)
+      ? `var(--modus-${this.color}, ${this.variants.get(this.color)})`
+      : this.color;
 
-    return <div aria-busy="true" class="spinner" style={{ 'border-color': borderColor, 'border-right-color': 'transparent', height: this.size, width: this.size }}></div>;
+    return (
+      <div
+        aria-busy="true"
+        class="spinner"
+        style={{
+          'border-color': borderColor,
+          'border-right-color': 'transparent',
+          height: this.size,
+          width: this.size,
+        }}></div>
+    );
   }
 }

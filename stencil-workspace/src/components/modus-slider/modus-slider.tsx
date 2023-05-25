@@ -63,7 +63,8 @@ export class ModusSlider {
           onChange={(event) => this.handleOnChange(event)}
           onInput={(event) => this.handleOnInput(event)}
           type="range"
-          value={this.value} />
+          value={this.value}
+        />
       </div>
     );
   }

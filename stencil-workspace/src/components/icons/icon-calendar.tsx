@@ -8,9 +8,7 @@ interface IconProps {
   pressed?: boolean;
 }
 
-export const IconCalendar: FunctionalComponent<IconProps> = (
-  props: IconProps
-) => (
+export const IconCalendar: FunctionalComponent<IconProps> = (props: IconProps) => (
   <svg
     class={props.pressed ? 'icon-calendar pressed' : 'icon-calendar'}
     height={props.size ?? 16}

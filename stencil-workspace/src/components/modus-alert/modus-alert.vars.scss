@@ -8,44 +8,20 @@ $modus-alert-warning-bg: var(--modus-alert-warning-bg, #fff) !default;
 
 // Text color
 $modus-alert-primary-color: var(--modus-alert-primary-color, #0063a3) !default;
-$modus-alert-secondary-color: var(
-  --modus-alert-secondary-color,
-  #6a6e79
-) !default;
+$modus-alert-secondary-color: var(--modus-alert-secondary-color, #6a6e79) !default;
 $modus-alert-dark-color: var(--modus-alert-dark-color, #252a2e) !default;
 $modus-alert-success-color: var(--modus-alert-success-color, #006638) !default;
 $modus-alert-danger-color: var(--modus-alert-danger-color, #da212c) !default;
 $modus-alert-warning-color: var(--modus-alert-warning-color, #252a2e) !default;
 
 // Border color
-$modus-alert-primary-border-color: var(
-  --modus-alert-primary-border-color,
-  #0063a3
-) !default;
-$modus-alert-secondary-border-color: var(
-  --modus-alert-secondary-border-color,
-  #6a6e79
-) !default;
-$modus-alert-dark-border-color: var(
-  --modus-alert-dark-border-color,
-  #464b52
-) !default;
-$modus-alert-success-border-color: var(
-  --modus-alert-success-border-color,
-  #006638
-) !default;
-$modus-alert-danger-border-color: var(
-  --modus-alert-danger-border-color,
-  #da212c
-) !default;
-$modus-alert-warning-border-color: var(
-  --modus-alert-warning-border-color,
-  #e49325
-) !default;
+$modus-alert-primary-border-color: var(--modus-alert-primary-border-color, #0063a3) !default;
+$modus-alert-secondary-border-color: var(--modus-alert-secondary-border-color, #6a6e79) !default;
+$modus-alert-dark-border-color: var(--modus-alert-dark-border-color, #464b52) !default;
+$modus-alert-success-border-color: var(--modus-alert-success-border-color, #006638) !default;
+$modus-alert-danger-border-color: var(--modus-alert-danger-border-color, #da212c) !default;
+$modus-alert-warning-border-color: var(--modus-alert-warning-border-color, #e49325) !default;
 
 // Close button
 $modus-alert-close-color: var(--modus-alert-close-color, #252a2e) !default;
-$modus-alert-close-hover-opacity: var(
-  --modus-alert-close-hover-opacity,
-  0.5
-) !default;
+$modus-alert-close-hover-opacity: var(--modus-alert-close-hover-opacity, 0.5) !default;

@@ -29,7 +29,15 @@ export class ModusMessage {
 
     return (
       <div aria-label={this.ariaLabel} class={className} role="note">
-        <span class="icon">{this.icon ? <IconMap icon={this.icon} size="18" /> : this.type === 'info' ? <IconInfo size="18" /> : this.type === 'question' ? <IconHelp size="18" /> : null}</span>
+        <span class="icon">
+          {this.icon ? (
+            <IconMap icon={this.icon} size="18" />
+          ) : this.type === 'info' ? (
+            <IconInfo size="18" />
+          ) : this.type === 'question' ? (
+            <IconHelp size="18" />
+          ) : null}
+        </span>
         <span class="message">
           <slot />
         </span>

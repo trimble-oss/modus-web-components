@@ -7,9 +7,7 @@ interface IconProps {
   size?: string;
 }
 
-export const IconChevronLeftThick: FunctionalComponent<IconProps> = (
-  props: IconProps
-) => (
+export const IconChevronLeftThick: FunctionalComponent<IconProps> = (props: IconProps) => (
   <svg
     class="icon-chevron-left-thick"
     height={props.size ?? 16}

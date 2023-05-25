@@ -1,45 +1,18 @@
 $modus-input-bg: var(--modus-input-bg, #fff) !default;
 $modus-input-color: var(--modus-input-color, #252a2e) !default;
 $modus-input-border-color: var(--modus-input-border-color, #e0e1e9) !default;
-$modus-input-bottom-line-color: var(
-  --modus-input-bottom-line-color,
-  #6a6e79
-) !default;
-$modus-input-bottom-line-active-color: var(
-  --modus-input-bottom-line-active-color,
-  #217cbb
-) !default;
-$modus-input-calendar-icon-color: var(
-  --modus-date-input-calendar-icon-color,
-  #6a6e79
-);
-$modus-input-hint-text-color: var(
-  --modus-input-hint-text-color,
-  #a3a6b1
-) !default;
+$modus-input-bottom-line-color: var(--modus-input-bottom-line-color, #6a6e79) !default;
+$modus-input-bottom-line-active-color: var(--modus-input-bottom-line-active-color, #217cbb) !default;
+$modus-input-calendar-icon-color: var(--modus-date-input-calendar-icon-color, #6a6e79);
+$modus-input-hint-text-color: var(--modus-input-hint-text-color, #a3a6b1) !default;
 $modus-input-label-color: var(--modus-input-label-color, #464b52) !default;
 
 // Validation
-$modus-input-validation-success-color: var(
-  --modus-input-validation-success-color,
-  #006638
-) !default;
-$modus-input-validation-error-color: var(
-  --modus-input-validation-error-color,
-  #da212c
-) !default;
+$modus-input-validation-success-color: var(--modus-input-validation-success-color, #006638) !default;
+$modus-input-validation-error-color: var(--modus-input-validation-error-color, #da212c) !default;
 
 // Disabled
 $modus-input-disabled-bg: var(--modus-input-disabled-bg, #e0e1e9) !default;
-$modus-input-disabled-border-color: var(
-  --modus-input-disabled-border-color,
-  #e0e1e9
-) !default;
-$modus-input-disabled-bottom-line-color: var(
-  --modus-input-disabled-bottom-line-color,
-  #a3a6b1
-) !default;
-$modus-input-disabled-color: var(
-  --modus-input-disabled-color,
-  #a3a6b1
-) !default;
+$modus-input-disabled-border-color: var(--modus-input-disabled-border-color, #e0e1e9) !default;
+$modus-input-disabled-bottom-line-color: var(--modus-input-disabled-bottom-line-color, #a3a6b1) !default;
+$modus-input-disabled-color: var(--modus-input-disabled-color, #a3a6b1) !default;

@@ -7,9 +7,7 @@ interface IconProps {
   size?: string;
 }
 
-export const IconVisibilityOff: FunctionalComponent<IconProps> = (
-  props: IconProps
-) => (
+export const IconVisibilityOff: FunctionalComponent<IconProps> = (props: IconProps) => (
   <svg
     class="visibility-off"
     width={props.size ?? 16}

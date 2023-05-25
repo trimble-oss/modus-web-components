@@ -100,7 +100,9 @@ export class ModusFileDropzone {
   };
 
   onDragOver = (event: DragEvent): void => {
-    if (this.error) { return; }
+    if (this.error) {
+      return;
+    }
 
     this.fileDraggedOver = true;
     event.preventDefault();
@@ -145,9 +147,11 @@ export class ModusFileDropzone {
     }
 
     // Raise error if the max file name length has been exceeded.
-    if (this.dropzoneFiles.some(file => file.name.length > this.maxFileNameLength)) {
+    if (this.dropzoneFiles.some((file) => file.name.length > this.maxFileNameLength)) {
       this.error = 'maxFileNameLength';
-      this.errorMessageTop = `File name exceeds length limit: ${this.dropzoneFiles.find(file => file.name.length > this.maxFileNameLength).name}`;
+      this.errorMessageTop = `File name exceeds length limit: ${
+        this.dropzoneFiles.find((file) => file.name.length > this.maxFileNameLength).name
+      }`;
       return;
     }
 
@@ -172,8 +176,9 @@ export class ModusFileDropzone {
           <input
             onChange={this.onFileChange}
             multiple={this.multiple}
-            ref={(el) => this.fileInput = el as HTMLInputElement}
-            type="file" />
+            ref={(el) => (this.fileInput = el as HTMLInputElement)}
+            type="file"
+          />
           <div class="header">
             <label>{this.label}</label>
             <span>{this.description}</span>
@@ -183,25 +188,32 @@ export class ModusFileDropzone {
             onDragLeave={(e) => this.onDragLeave(e)}
             onDragOver={(e) => this.onDragOver(e)}
             onDrop={(e) => this.onDrop(e)}
-            style={{height: this.dropzoneHeight, width: this.dropzoneWidth}}
+            style={{ height: this.dropzoneHeight, width: this.dropzoneWidth }}
             tabIndex={0}>
             {this.includeStateIcon && (this.error ? <IconCancel size={'36'} /> : <IconUploadCloud size={'36'} />)}
-            {!this.error &&
+            {!this.error && (
               <div>
                 Drag files here
-                {!this.fileDraggedOver &&
-                  <span> or
-                  <span class="browse" onClick={this.openBrowse}> browse</span> to upload
-                </span>
-                }.
+                {!this.fileDraggedOver && (
+                  <span>
+                    {' '}
+                    or
+                    <span class="browse" onClick={this.openBrowse}>
+                      {' '}
+                      browse
+                    </span>{' '}
+                    to upload
+                  </span>
+                )}
+                .
               </div>
-            }
-            {this.error &&
+            )}
+            {this.error && (
               <div class="error-messages">
                 {this.errorMessageTop && <span>{this.errorMessageTop}</span>}
                 {this.errorMessageBottom && <span>{this.errorMessageBottom}</span>}
               </div>
-            }
+            )}
           </div>
         </div>
       </Host>

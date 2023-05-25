@@ -96,9 +96,7 @@ export class ModusTreeViewItem {
     const showDefault = !this.slots.has(name) && defaultContent;
     return (
       <div {...props} class={`${className || ''} ${display ? '' : 'd-none'}`}>
-        <slot
-          name={name}
-          onSlotchange={() => this.handleDefaultSlotChange()}></slot>
+        <slot name={name} onSlotchange={() => this.handleDefaultSlotChange()}></slot>
         {showDefault && defaultContent}
       </div>
     );
@@ -142,9 +140,7 @@ export class ModusTreeViewItem {
   }
 
   getChildrenIds(): string[] {
-    return Array.from(
-      this.element.children as unknown as HTMLModusTreeViewItemElement[]
-    )
+    return Array.from(this.element.children as unknown as HTMLModusTreeViewItemElement[])
       .map((i) => i.nodeId)
       .filter((i) => i);
   }
@@ -169,9 +165,7 @@ export class ModusTreeViewItem {
   }
 
   handleDefaultSlotChange(): void {
-    const slotElements = this.element.querySelectorAll(
-      '[slot]'
-    ) as unknown as HTMLSlotElement[];
+    const slotElements = this.element.querySelectorAll('[slot]') as unknown as HTMLSlotElement[];
     const newSlots: Map<string, boolean> = new Map();
 
     // look for icon/label slot added/removed
@@ -273,23 +267,17 @@ export class ModusTreeViewItem {
     const newChildren = this.getChildrenIds();
     const isUpdated =
       this.childrenIds && newChildren
-        ? this.childrenIds.length !==
-          newChildren.filter((c) => this.childrenIds.includes(c)).length
+        ? this.childrenIds.length !== newChildren.filter((c) => this.childrenIds.includes(c)).length
         : this.childrenIds?.length !== newChildren?.length;
 
     if (this.options) {
-      const { onItemUpdate, multiCheckboxSelection, onCheckboxSelection } =
-        this.options;
+      const { onItemUpdate, multiCheckboxSelection, onCheckboxSelection } = this.options;
 
       // sync root
       onItemUpdate({ nodeId: this.nodeId, children: [...newChildren] });
 
       // sync the checkboxes if there is any child added/removed
-      if (
-        this.childrenIds?.length &&
-        this.childrenIds.length !== newChildren?.length &&
-        multiCheckboxSelection
-      ) {
+      if (this.childrenIds?.length && this.childrenIds.length !== newChildren?.length && multiCheckboxSelection) {
         onCheckboxSelection(this.nodeId, true);
       }
     }
@@ -395,19 +383,11 @@ export class ModusTreeViewItem {
     };
     const sizeClass = `${this.classBySize.get(size || 'standard')}`;
     const tabIndex: string | number = isDisabled ? -1 : this.tabIndexValue;
-    const treeItemClass = `tree-item ${
-      selected ? 'selected' : ''
-    } ${sizeClass} ${isDisabled ? 'disabled' : ''} `;
-    const treeItemChildrenClass = `tree-item-group ${sizeClass} ${
-      expanded ? 'expanded' : ''
-    }`;
+    const treeItemClass = `tree-item ${selected ? 'selected' : ''} ${sizeClass} ${isDisabled ? 'disabled' : ''} `;
+    const treeItemChildrenClass = `tree-item-group ${sizeClass} ${expanded ? 'expanded' : ''}`;
 
     return (
-      <li
-        {...ariaControls}
-        class={`tree-item-container${
-          selectionIndicator ? ' selected-indicator' : ''
-        }`}>
+      <li {...ariaControls} class={`tree-item-container${selectionIndicator ? ' selected-indicator' : ''}`}>
         <div
           class={treeItemClass}
           onFocus={() => this.handleFocus()}
@@ -416,24 +396,18 @@ export class ModusTreeViewItem {
           ref={(el) => this.handleRefItemContent(el)}
           tabindex={tabIndex}>
           <this.CustomSlot
-            className={`icon-slot drag-icon${
-              !this.draggableItem ? ' hidden' : ''
-            }`}
+            className={`icon-slot drag-icon${!this.draggableItem ? ' hidden' : ''}`}
             defaultContent={<IconMap icon="drag" />}
             name={this.SLOT_DRAG_ICON}
             onMouseDown={(e) => this.handleDrag(e)}
           />
-          <div
-            aria-disabled="true"
-            style={{ paddingLeft: `${(level - 1) * 0.5}rem` }}>
+          <div aria-disabled="true" style={{ paddingLeft: `${(level - 1) * 0.5}rem` }}>
             {/* used for level indentation purpose */}
           </div>
           <div
             class={`icon-slot${!expandable ? ' hidden' : ''}`}
             onClick={(e) => this.handleExpandToggle(e)}
-            onKeyDown={(e) =>
-              this.handleDefaultKeyDown(e, () => this.handleExpandToggle(e))
-            }
+            onKeyDown={(e) => this.handleDefaultKeyDown(e, () => this.handleExpandToggle(e))}
             tabindex={expandable ? tabIndex : -1}>
             <this.CustomSlot
               className="inline-flex rotate-right"
@@ -456,21 +430,13 @@ export class ModusTreeViewItem {
                 disabled={isDisabled}
                 indeterminate={indeterminate}
                 onClick={(e) => this.handleCheckboxClick(e)}
-                onKeyDown={(e) =>
-                  this.handleDefaultKeyDown(e, () =>
-                    this.handleCheckboxClick(e)
-                  )
-                }
+                onKeyDown={(e) => this.handleDefaultKeyDown(e, () => this.handleCheckboxClick(e))}
                 ref={(el) => (this.refCheckbox = el)}
                 tabIndexValue={tabIndex}></modus-checkbox>
             </div>
           )}
 
-          <this.CustomSlot
-            className="icon-slot"
-            name={this.SLOT_ITEM_ICON}
-            display={this.slots.has(this.SLOT_ITEM_ICON)}
-          />
+          <this.CustomSlot className="icon-slot" name={this.SLOT_ITEM_ICON} display={this.slots.has(this.SLOT_ITEM_ICON)} />
           <div role="heading" aria-level={level} class="label-slot">
             <this.CustomSlot
               role="button"
@@ -485,9 +451,7 @@ export class ModusTreeViewItem {
                     value={this.label}
                     onClick={(e) => this.handleLabelInputClick(e)}
                     onBlur={() => this.handleLabelInputBlur()}
-                    onKeyDown={(e) =>
-                      this.handleLabelInputKeyDown(e)
-                    }></modus-text-input>
+                    onKeyDown={(e) => this.handleLabelInputKeyDown(e)}></modus-text-input>
                 ) : (
                   this.label
                 )

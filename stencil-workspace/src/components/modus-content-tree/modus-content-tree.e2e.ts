@@ -1,7 +1,6 @@
 import { newE2EPage } from '@stencil/core/testing';
 
 describe('modus-tree-view-item', () => {
-
   // verify renders
   it('renders tree root', async () => {
     const page = await newE2EPage();
@@ -28,11 +27,11 @@ describe('modus-tree-view-item', () => {
       </modus-tree-view-item>
     </modus-tree-view>`);
 
-  const root = await page.find('modus-tree-view');
-  expect(root).toHaveClass('hydrated');
+    const root = await page.find('modus-tree-view');
+    expect(root).toHaveClass('hydrated');
 
-  const item = await page.find('modus-tree-view-item');
-  expect(item).toHaveClass('hydrated');
+    const item = await page.find('modus-tree-view-item');
+    expect(item).toHaveClass('hydrated');
   });
 
   // verify props
@@ -45,13 +44,13 @@ describe('modus-tree-view-item', () => {
       </modus-tree-view-item>
     </modus-tree-view>`);
 
-  const component = await page.find('modus-tree-view-item');
-  const element = await page.find('modus-tree-view-item >>> li > div.tree-item');
-  expect(element).not.toHaveClass('disabled');
+    const component = await page.find('modus-tree-view-item');
+    const element = await page.find('modus-tree-view-item >>> li > div.tree-item');
+    expect(element).not.toHaveClass('disabled');
 
-  component.setProperty('disabled', 'true');
-  await page.waitForChanges();
-  expect(element).toHaveClass('disabled');
+    component.setProperty('disabled', 'true');
+    await page.waitForChanges();
+    expect(element).toHaveClass('disabled');
   });
 
   it('renders changes to the size prop at the root level', async () => {
@@ -86,13 +85,12 @@ describe('modus-tree-view-item', () => {
     component.setProperty('checkboxSelection', true);
     await page.waitForChanges();
 
-    const parentNodeCheckbox = await page.find('modus-tree-view-item[node-id=\'1\'] >>> modus-checkbox');
+    const parentNodeCheckbox = await page.find("modus-tree-view-item[node-id='1'] >>> modus-checkbox");
     expect(parentNodeCheckbox).toBeTruthy();
 
-    const childNodeCheckbox = await page.find('modus-tree-view-item[node-id=\'2\'] >>> modus-checkbox');
+    const childNodeCheckbox = await page.find("modus-tree-view-item[node-id='2'] >>> modus-checkbox");
     expect(childNodeCheckbox).toBeTruthy();
   });
-
 
   it('renders changes to the selectedItems prop at the root level', async () => {
     const page = await newE2EPage();
@@ -184,12 +182,12 @@ describe('modus-tree-view-item', () => {
       </modus-tree-view-item>
     </modus-tree-view>`);
 
-    const rightChevron = await page.find('modus-tree-view-item[node-id=\'1\'] >>> .rotate-right .icon-chevron-down-thick');
+    const rightChevron = await page.find("modus-tree-view-item[node-id='1'] >>> .rotate-right .icon-chevron-down-thick");
     expect(rightChevron).toBeTruthy();
 
     await rightChevron.click();
 
-    const downChevron = await page.find('modus-tree-view-item[node-id=\'1\'] >>> .icon-chevron-down-thick');
+    const downChevron = await page.find("modus-tree-view-item[node-id='1'] >>> .icon-chevron-down-thick");
     expect(downChevron).toBeTruthy();
   });
 
@@ -226,10 +224,10 @@ describe('modus-tree-view-item', () => {
       <modus-tree-view-item node-id="2" label="Node two">
       </modus-tree-view-item>
     </modus-tree-view>`);
-    const item1 = await page.find('modus-tree-view-item[node-id=\'1\']');
-    const element1 = await page.find('modus-tree-view-item[node-id=\'1\'] >>> li > div.tree-item');
-    const item2 = await page.find('modus-tree-view-item[node-id=\'2\']');
-    const element2 = await page.find('modus-tree-view-item[node-id=\'2\'] >>> li > div.tree-item');
+    const item1 = await page.find("modus-tree-view-item[node-id='1']");
+    const element1 = await page.find("modus-tree-view-item[node-id='1'] >>> li > div.tree-item");
+    const item2 = await page.find("modus-tree-view-item[node-id='2']");
+    const element2 = await page.find("modus-tree-view-item[node-id='2'] >>> li > div.tree-item");
 
     expect(element1).not.toHaveClass('selected');
     expect(element2).not.toHaveClass('selected');
@@ -254,13 +252,13 @@ describe('modus-tree-view-item', () => {
     </modus-tree-view>`);
 
     const root = await page.find('modus-tree-view');
-    const element1 = await page.find('modus-tree-view-item[node-id=\'1\'] >>> li > div.tree-item');
-    const element2 = await page.find('modus-tree-view-item[node-id=\'2\'] >>> li > div.tree-item');
+    const element1 = await page.find("modus-tree-view-item[node-id='1'] >>> li > div.tree-item");
+    const element2 = await page.find("modus-tree-view-item[node-id='2'] >>> li > div.tree-item");
 
     expect(element1).not.toHaveClass('selected');
     expect(element2).not.toHaveClass('selected');
 
-    root.setProperty('selectedItems', ['1','2']);
+    root.setProperty('selectedItems', ['1', '2']);
     await page.waitForChanges();
 
     expect(element1).toHaveClass('selected');
@@ -283,7 +281,7 @@ describe('modus-tree-view-item', () => {
     const root = await page.find('modus-tree-view');
     await page.waitForChanges();
 
-    const parentNodeCheckbox = await page.find('modus-tree-view-item[node-id=\'1\'] >>> modus-checkbox');
+    const parentNodeCheckbox = await page.find("modus-tree-view-item[node-id='1'] >>> modus-checkbox");
     await parentNodeCheckbox.click();
 
     await page.waitForChanges();
@@ -311,9 +309,9 @@ describe('modus-tree-view-item', () => {
     const root = await page.find('modus-tree-view');
     await page.waitForChanges();
     // node one
-    const nodeOneCheckbox = await page.find('modus-tree-view-item[node-id=\'1\'] >>> modus-checkbox');
+    const nodeOneCheckbox = await page.find("modus-tree-view-item[node-id='1'] >>> modus-checkbox");
     // node two
-    const nodeTwoCheckbox = await page.find('modus-tree-view-item[node-id=\'3\'] >>> modus-checkbox');
+    const nodeTwoCheckbox = await page.find("modus-tree-view-item[node-id='3'] >>> modus-checkbox");
 
     // click node one checkbox
     await nodeOneCheckbox.click();
@@ -347,7 +345,7 @@ describe('modus-tree-view-item', () => {
     await page.waitForChanges();
 
     // check child1
-    const childNodeCb = await page.find('modus-tree-view-item[node-id=\'2\'] >>> modus-checkbox');
+    const childNodeCb = await page.find("modus-tree-view-item[node-id='2'] >>> modus-checkbox");
     await childNodeCb.click();
     await page.waitForChanges();
 
@@ -355,7 +353,7 @@ describe('modus-tree-view-item', () => {
     expect(await root.getProperty('checkedItems')).not.toContain('1');
 
     // check child2
-    const childNode2Cb = await page.find('modus-tree-view-item[node-id=\'3\'] >>> modus-checkbox');
+    const childNode2Cb = await page.find("modus-tree-view-item[node-id='3'] >>> modus-checkbox");
     await childNode2Cb.click();
     await page.waitForChanges();
 
@@ -393,7 +391,7 @@ describe('modus-tree-view-item', () => {
     </modus-tree-view>`);
 
     const itemExpandToggle = await page.spyOnEvent('itemExpandToggle');
-    const rightChevron = await page.find('modus-tree-view-item[node-id=\'1\'] >>> .rotate-right .icon-chevron-down-thick');
+    const rightChevron = await page.find("modus-tree-view-item[node-id='1'] >>> .rotate-right .icon-chevron-down-thick");
     expect(rightChevron).toBeTruthy();
 
     await rightChevron.click();
@@ -414,11 +412,10 @@ describe('modus-tree-view-item', () => {
     const checkboxClick = await page.spyOnEvent('checkboxClick');
     await page.waitForChanges();
 
-    const checkbox = await page.find('modus-tree-view-item[node-id=\'1\'] >>> modus-checkbox');
+    const checkbox = await page.find("modus-tree-view-item[node-id='1'] >>> modus-checkbox");
     await checkbox.click();
     await page.waitForChanges();
 
     expect(checkboxClick).toHaveReceivedEvent();
   });
-
 });

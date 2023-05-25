@@ -90,9 +90,9 @@ export class ModusSideNavigationItem {
   }
 
   render() {
-    const classes = `side-nav-item${this.expanded ? ' expanded' : ''}${
-      this.selected ? ' selected' : ''
-    }${this.disabled ? ' disabled' : ''}`;
+    const classes = `side-nav-item${this.expanded ? ' expanded' : ''}${this.selected ? ' selected' : ''}${
+      this.disabled ? ' disabled' : ''
+    }`;
     const menuIconTooltip = this.expanded || this.disabled ? null : this.label;
 
     return (
@@ -107,25 +107,16 @@ export class ModusSideNavigationItem {
         aria-label={this.label}
         aria-current={this.selected ? 'true' : null}
         onFocus={() => this.sideNavItemFocus.emit({ id: this.element.id })}>
-        <div
-          class="menu-icon"
-          onClick={() => this.sideNavItemFocus.emit({ id: this.element.id })}>
+        <div class="menu-icon" onClick={() => this.sideNavItemFocus.emit({ id: this.element.id })}>
           <modus-tooltip text={menuIconTooltip} position="right">
             <slot name="menu-icon"></slot>
-            {this.menuIcon && (
-              <IconMap
-                icon={this.menuIcon}
-                aria-label={this.label}
-                size="24"></IconMap>
-            )}
+            {this.menuIcon && <IconMap icon={this.menuIcon} aria-label={this.label} size="24"></IconMap>}
           </modus-tooltip>
         </div>
 
         {this.expanded && <div class="menu-text">{this.label}</div>}
 
-        <div class="level-icon">
-          {this.showExpandIcon && <IconMap icon="chevron-right-thick" />}
-        </div>
+        <div class="level-icon">{this.showExpandIcon && <IconMap icon="chevron-right-thick" />}</div>
       </li>
     );
   }

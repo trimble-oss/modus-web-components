@@ -68,9 +68,7 @@ export class ModusAccordionItem {
       // Triggers transition
       this.accordionBodyRef.style.height = `${this.accordionBodyRef.scrollHeight}px`;
     } else {
-      this.accordionBodyRef.style.height = `${
-        this.accordionBodyRef.getBoundingClientRect().height
-      }px`;
+      this.accordionBodyRef.style.height = `${this.accordionBodyRef.getBoundingClientRect().height}px`;
       this.reflow(this.accordionBodyRef);
 
       this.accordionBodyRef.classList.add('collapsing');
@@ -110,9 +108,7 @@ export class ModusAccordionItem {
     const sizeClass = `${this.classBySize.get(this.size)}`;
     const disabledClass = `${this.disabled ? 'disabled' : ''}`;
     const expandedClass = `${this.expanded ? 'expanded' : ''}`;
-    const bodyClass = `body ${sizeClass} collapse${
-      this.expanded ? ' show' : ''
-    }`;
+    const bodyClass = `body ${sizeClass} collapse${this.expanded ? ' show' : ''}`;
     const headerClass = `header ${sizeClass} ${disabledClass} ${expandedClass}`;
 
     return (

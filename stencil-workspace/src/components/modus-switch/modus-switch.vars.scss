@@ -1,19 +1,10 @@
 $modus-switch-bg: var(--modus-switch-bg, #90939f) !default;
 $modus-switch-border-color: var(--modus-switch-border-color, #90939f) !default;
-$modus-switch-disabled-opacity: var(
-  --modus-check-input-disabled-opacity,
-  0.3
-) !default;
+$modus-switch-disabled-opacity: var(--modus-check-input-disabled-opacity, 0.3) !default;
 $modus-switch-label-color: var(--modus-switch-label-color, #464b52) !default;
 
 // Hover state
-$modus-switch-hover-border-color: var(
-  --modus-switch-hover-border-color,
-  #217cbb
-) !default;
+$modus-switch-hover-border-color: var(--modus-switch-hover-border-color, #217cbb) !default;
 
 // Checked state
-$modus-switch-selected-border-color: var(
-  --modus-switch-selected-border-color,
-  #217cbb
-) !default;
+$modus-switch-selected-border-color: var(--modus-switch-selected-border-color, #217cbb) !default;

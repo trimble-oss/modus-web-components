@@ -34,8 +34,8 @@ export class ModusCard {
         class={`${this.showShadowOnHover ? 'shadow' : ''} ${this.showCardBorder ? 'card-border' : ''}  `}
         aria-label={this.ariaLabel}
         style={{
-          'height': this.height,
-          'width': this.width,
+          height: this.height,
+          width: this.width,
           'background-color': this.backgroundColor,
           'border-radius': this.borderRadius,
         }}>

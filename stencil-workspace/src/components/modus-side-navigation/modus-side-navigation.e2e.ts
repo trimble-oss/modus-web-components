@@ -40,11 +40,14 @@ describe('modus-side-navigation', () => {
   </modus-side-navigation>`);
 
     const component = await page.find('modus-side-navigation');
-    component.setProperty('data', [{
-      id:'test',
-      menuIcon: 'data:image/svg+xml, %3Csvg slot=\'menu-icon\' xmlns=\'http://www.w3.org/2000/svg\' fill=\'currentColor\' height=\'24\' width=\'24\' viewBox=\'0 0 32 32\'%3E%3Cpath d=\'M30 25h-1v-9a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v9h-2V5a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v20h-2V12a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v13H3a1 1 0 1 0 0 2h27a1 1 0 1 0 0-2zM6 25V13h3v12H6zm9 0V6h3v19h-3zm9 0v-8h3v8h-3z\' /%3E%3C/svg%3E',
-      label: 'test label'
-    }]);
+    component.setProperty('data', [
+      {
+        id: 'test',
+        menuIcon:
+          "data:image/svg+xml, %3Csvg slot='menu-icon' xmlns='http://www.w3.org/2000/svg' fill='currentColor' height='24' width='24' viewBox='0 0 32 32'%3E%3Cpath d='M30 25h-1v-9a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v9h-2V5a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v20h-2V12a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v13H3a1 1 0 1 0 0 2h27a1 1 0 1 0 0-2zM6 25V13h3v12H6zm9 0V6h3v19h-3zm9 0v-8h3v8h-3z' /%3E%3C/svg%3E",
+        label: 'test label',
+      },
+    ]);
     await page.waitForChanges();
 
     const sideNavItem = await page.find('modus-side-navigation >>> modus-side-navigation-item');
@@ -73,24 +76,24 @@ describe('modus-side-navigation', () => {
     </modus-side-navigation-item>
   </modus-side-navigation>`);
 
-  const component = await page.find('modus-side-navigation');
-  const element = await page.find('modus-side-navigation-item >>> li');
-  let computedStyle = await element.getComputedStyle();
-  expect(computedStyle['width']).toEqual('64px');
+    const component = await page.find('modus-side-navigation');
+    const element = await page.find('modus-side-navigation-item >>> li');
+    let computedStyle = await element.getComputedStyle();
+    expect(computedStyle['width']).toEqual('64px');
 
-  component.setProperty('expanded', 'true');
-  await page.waitForChanges();
-  await new Promise((r) => setTimeout(r, 300));
+    component.setProperty('expanded', 'true');
+    await page.waitForChanges();
+    await new Promise((r) => setTimeout(r, 300));
 
-  computedStyle = await element.getComputedStyle();
-  expect(computedStyle['width']).toEqual('256px');
+    computedStyle = await element.getComputedStyle();
+    expect(computedStyle['width']).toEqual('256px');
 
-  component.setProperty('maxWidth', '300px');
-  await page.waitForChanges();
-  await new Promise((r) => setTimeout(r, 300));
+    component.setProperty('maxWidth', '300px');
+    await page.waitForChanges();
+    await new Promise((r) => setTimeout(r, 300));
 
-  computedStyle = await element.getComputedStyle();
-  expect(computedStyle['width']).toEqual('300px');
+    computedStyle = await element.getComputedStyle();
+    expect(computedStyle['width']).toEqual('300px');
   });
 
   it('renders changes to mode prop', async () => {
@@ -149,7 +152,6 @@ describe('modus-side-navigation', () => {
     expect(expandEvent).toHaveReceivedEvent();
     expect(expandEvent).toHaveReceivedEventDetail(true);
   });
-
 });
 
 // Modus side navigation item
@@ -301,14 +303,19 @@ describe('modus-side-navigation-item', () => {
 
     // Test a svg url
     const component = await page.find('modus-side-navigation-item');
-    component.setProperty('menuIcon', 'data:image/svg+xml, %3Csvg slot=\'menu-icon\' xmlns=\'http://www.w3.org/2000/svg\' fill=\'currentColor\' height=\'24\' width=\'24\' viewBox=\'0 0 32 32\'%3E%3Cpath d=\'M30 25h-1v-9a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v9h-2V5a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v20h-2V12a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v13H3a1 1 0 1 0 0 2h27a1 1 0 1 0 0-2zM6 25V13h3v12H6zm9 0V6h3v19h-3zm9 0v-8h3v8h-3z\' /%3E%3C/svg%3E');
+    component.setProperty(
+      'menuIcon',
+      "data:image/svg+xml, %3Csvg slot='menu-icon' xmlns='http://www.w3.org/2000/svg' fill='currentColor' height='24' width='24' viewBox='0 0 32 32'%3E%3Cpath d='M30 25h-1v-9a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v9h-2V5a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v20h-2V12a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v13H3a1 1 0 1 0 0 2h27a1 1 0 1 0 0-2zM6 25V13h3v12H6zm9 0V6h3v19h-3zm9 0v-8h3v8h-3z' /%3E%3C/svg%3E"
+    );
     await page.waitForChanges();
 
     let element = await page.find('modus-side-navigation-item >>> img ');
     expect(element).toBeTruthy();
 
     const prop = await element.getProperty('src');
-    expect(prop).toEqual('data:image/svg+xml, %3Csvg slot=\'menu-icon\' xmlns=\'http://www.w3.org/2000/svg\' fill=\'currentColor\' height=\'24\' width=\'24\' viewBox=\'0 0 32 32\'%3E%3Cpath d=\'M30 25h-1v-9a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v9h-2V5a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v20h-2V12a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v13H3a1 1 0 1 0 0 2h27a1 1 0 1 0 0-2zM6 25V13h3v12H6zm9 0V6h3v19h-3zm9 0v-8h3v8h-3z\' /%3E%3C/svg%3E');
+    expect(prop).toEqual(
+      "data:image/svg+xml, %3Csvg slot='menu-icon' xmlns='http://www.w3.org/2000/svg' fill='currentColor' height='24' width='24' viewBox='0 0 32 32'%3E%3Cpath d='M30 25h-1v-9a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v9h-2V5a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v20h-2V12a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v13H3a1 1 0 1 0 0 2h27a1 1 0 1 0 0-2zM6 25V13h3v12H6zm9 0V6h3v19h-3zm9 0v-8h3v8h-3z' /%3E%3C/svg%3E"
+    );
 
     // Test a built-in icon
     component.setProperty('menuIcon', 'add');
@@ -342,4 +349,3 @@ describe('modus-side-navigation-item', () => {
     expect(focusEvent).toHaveReceivedEvent();
   });
 });
-

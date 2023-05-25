@@ -99,7 +99,6 @@ describe('modus-text-input', () => {
     expect(searchIcon).not.toBeNull();
   });
 
-
   it('renders changes to inputmode', async () => {
     const page = await newE2EPage();
 
@@ -164,7 +163,6 @@ describe('modus-text-input', () => {
     const input = await page.find('modus-text-input >>> input');
     expect(input.getAttribute('type')).toEqual('password');
   });
-
 
   it('renders changes to includePasswordTextToggle', async () => {
     const page = await newE2EPage();
