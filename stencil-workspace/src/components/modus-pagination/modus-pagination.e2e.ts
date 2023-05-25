@@ -12,7 +12,9 @@ describe('modus-pagination', () => {
   it('renders changes to size', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<modus-pagination min-page="0" max-page="100" active-page="40" size="small"></modus-pagination>');
+    await page.setContent(
+      '<modus-pagination min-page="0" max-page="100" active-page="40" size="small"></modus-pagination>'
+    );
     const element = await page.find('modus-pagination');
     let nav = await page.find('modus-pagination >>> nav');
     expect(nav).toHaveClass('small');
@@ -23,10 +25,45 @@ describe('modus-pagination', () => {
     expect(nav).toHaveClass('medium');
   });
 
+  it('renders changes to prevNextTextButton', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(
+      '<modus-pagination min-page="0" max-page="100" active-page="40" size="small"></modus-pagination>'
+    );
+    const element = await page.find('modus-pagination');
+    let prevText = await page.find(
+      'modus-pagination >>> [data-test-id="prev-button-text"]'
+    );
+    let nextText = await page.find(
+      'modus-pagination >>> [data-test-id="next-button-text"]'
+    );
+
+    expect(prevText).toBeNull();
+    expect(nextText).toBeNull();
+
+    await element.setProperty('prevPageButtonText', 'Prev');
+    await element.setProperty('nextPageButtonText', 'Next');
+
+    await page.waitForChanges();
+
+    prevText = await page.find(
+      'modus-pagination >>> [data-test-id="prev-button-text"]'
+    );
+    nextText = await page.find(
+      'modus-pagination >>> [data-test-id="next-button-text"]'
+    );
+
+    expect(prevText.textContent).toEqual('Prev');
+    expect(nextText.textContent).toEqual('Next');
+  });
+
   it('emits pageChange on page click', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<modus-pagination min-page="0" max-page="100" active-page="40"></modus-pagination>');
+    await page.setContent(
+      '<modus-pagination min-page="0" max-page="100" active-page="40"></modus-pagination>'
+    );
     const pageChange = await page.spyOnEvent('pageChange');
     const element = await page.find('modus-pagination >>> li.active + li');
 
@@ -38,7 +75,9 @@ describe('modus-pagination', () => {
   it('emits pageChange on chevron click', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<modus-pagination min-page="0" max-page="100" active-page="40"></modus-pagination>');
+    await page.setContent(
+      '<modus-pagination min-page="0" max-page="100" active-page="40"></modus-pagination>'
+    );
     const pageChange = await page.spyOnEvent('pageChange');
     const leftChevron = await page.find('modus-pagination >>> li:first-child');
 
@@ -56,7 +95,9 @@ describe('modus-pagination', () => {
   it('emits pageChange on active-page modification', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<modus-pagination min-page="0" max-page="100" active-page="40"></modus-pagination>');
+    await page.setContent(
+      '<modus-pagination min-page="0" max-page="100" active-page="40"></modus-pagination>'
+    );
     const pageChange = await page.spyOnEvent('pageChange');
     const element = await page.find('modus-pagination');
 
@@ -68,7 +109,9 @@ describe('modus-pagination', () => {
   it('disables chevron control on minPage', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<modus-pagination min-page="1" active-page="1" max-page="100"></modus-pagination>');
+    await page.setContent(
+      '<modus-pagination min-page="1" active-page="1" max-page="100"></modus-pagination>'
+    );
     const element = await page.find('modus-pagination >>> li.disabled');
     expect(element).not.toBeNull();
   });
@@ -76,7 +119,9 @@ describe('modus-pagination', () => {
   it('disables chevron control on maxPage', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<modus-pagination min-page="1" active-page="100" max-page="100"></modus-pagination>');
+    await page.setContent(
+      '<modus-pagination min-page="1" active-page="100" max-page="100"></modus-pagination>'
+    );
     const element = await page.find('modus-pagination >>> li.disabled');
     expect(element).not.toBeNull();
   });
