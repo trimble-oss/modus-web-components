@@ -33,7 +33,7 @@
     "lint": "npm run lint-js && npm run lint-css",
     "lint-js": "eslint src/** --no-error-on-unmatched-pattern",
     "lint-css": "stylelint src/**/*.scss --fix",
-    "prettier": "prettier --write storybook/stories/**/*.*",
+    "prettier": "prettier --write storybook/stories/**/*.* src/**/*.*",
     "full": "npm ci && npm run lint && npm run build && npm run test && npm run ci-storybook",
     "ci-storybook": "cd storybook && npm ci && npm run build-storybook",
     "start-storybook": "npm run build && cd storybook && npm run storybook"
@@ -54,7 +54,7 @@
     "eslint-plugin-storybook": "^0.6.12",
     "jest": "^27.0.3",
     "jest-cli": "^27.5.1",
-    "prettier": "^2.8.7",
+    "prettier": "2.8.8",
     "puppeteer": "^19.11.1",
     "puppeteer-core": "^19.7.2",
     "stylelint": "15.5.0",
