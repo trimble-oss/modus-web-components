@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 import {
   Component,
   Event,
@@ -8,8 +7,9 @@ import {
   State,
   Watch,
 } from '@stencil/core';
-import { IconChevronLeftThick } from '../icons/icon-chevron-left-thick';
+import { PaginationDirection } from './enums/pagination-direction.enum';
 import { IconChevronRightThick } from '../icons/icon-chevron-right-thick';
+import { IconChevronLeftThick } from '../icons/icon-chevron-left-thick';
 
 @Component({
   tag: 'modus-pagination',
@@ -22,7 +22,6 @@ export class ModusPagination {
 
   /* The active page. */
   @Prop({ mutable: true }) activePage: number;
-
   @Watch('activePage')
   activePageWatch(newValue: number, oldValue: number) {
     if (newValue !== oldValue) {
@@ -30,6 +29,9 @@ export class ModusPagination {
       this.pageChange.emit(newValue);
     }
   }
+
+  /* The maximum page value. */
+  @Prop() maxPage: number;
 
   /**
    * Checks and updates maxPage value on change of items per page.
@@ -41,11 +43,14 @@ export class ModusPagination {
     }
   }
 
-  /* The maximum page value. */
-  @Prop() maxPage: number;
-
   /* The minimum page value. */
   @Prop() minPage: number;
+
+  /** Weather to display text or previous icon. */
+  @Prop() prevPageButtonText: string;
+
+  /** Weather to display text or next icon. */
+  @Prop() nextPageButtonText: string;
 
   /* The pagination's size. */
   @Prop() size: 'large' | 'medium' | 'small' = 'medium';
@@ -107,28 +112,35 @@ export class ModusPagination {
     this.pages = pages;
   }
 
-  handleChevronClick(way: 'back' | 'forward'): void {
-    if (way === 'back' && this.activePage != this.minPage) {
+  handlePageChange(direction: PaginationDirection): void {
+    if (
+      direction === PaginationDirection.Previous &&
+      this.activePage !== this.minPage
+    ) {
       this.activePage--;
-    } else if (way === 'forward' && this.activePage != this.maxPage) {
+    } else if (
+      direction === PaginationDirection.Next &&
+      this.activePage !== this.maxPage
+    ) {
       this.activePage++;
     }
   }
 
-  handleKeydownBack(event: KeyboardEvent): void {
-    if (event.code !== 'Enter') {
-      return;
+  handleOnArrowsKeydown(
+    event: KeyboardEvent,
+    direction: PaginationDirection
+  ): void {
+    if (event.key.toLowerCase() === 'enter') {
+      this.handlePageChange(direction);
+      event.preventDefault();
     }
-
-    this.handleChevronClick('back');
   }
 
-  handleKeydownForward(event: KeyboardEvent): void {
-    if (event.code !== 'Enter') {
-      return;
+  handleOnPageNumbersKeydown(event: KeyboardEvent, page: number): void {
+    if (event.key.toLowerCase() === 'enter') {
+      this.handlePageClick(page);
+      event.preventDefault();
     }
-
-    this.handleChevronClick('forward');
   }
 
   handlePageClick(page: number): void {
@@ -138,24 +150,44 @@ export class ModusPagination {
   }
 
   render(): unknown {
+    const previousPageControl = (
+      <li
+        class={`${this.activePage != this.minPage ? 'hoverable' : 'disabled'}`}
+        onClick={() => this.handlePageChange(PaginationDirection.Previous)}
+        onKeyDown={(event) =>
+          this.handleOnArrowsKeydown(event, PaginationDirection.Previous)
+        }
+        tabIndex={0}>
+        {this.prevPageButtonText ? (
+          <span data-test-id="prev-button-text">{this.prevPageButtonText}</span>
+        ) : (
+          <IconChevronLeftThick size={this.chevronSizeBySize.get(this.size)} />
+        )}
+      </li>
+    );
+
+    const nextPageControl = (
+      <li
+        class={`${this.activePage != this.maxPage ? 'hoverable' : 'disabled'}`}
+        onClick={() => this.handlePageChange(PaginationDirection.Next)}
+        onKeyDown={(event) =>
+          this.handleOnArrowsKeydown(event, PaginationDirection.Next)
+        }
+        tabIndex={0}>
+        {this.nextPageButtonText ? (
+          <span data-test-id="next-button-text">{this.nextPageButtonText}</span>
+        ) : (
+          <IconChevronRightThick size={this.chevronSizeBySize.get(this.size)} />
+        )}
+      </li>
+    );
+
     return (
       <nav
         aria-label={this.ariaLabel}
         class={`${this.classBySize.get(this.size)}`}>
         <ol>
-          {
-            <li
-              class={`${
-                this.activePage != this.minPage ? 'hoverable' : 'disabled'
-              }`}
-              onClick={() => this.handleChevronClick('back')}
-              onKeyDown={(event) => this.handleKeydownBack(event)}
-              tabIndex={0}>
-              <IconChevronLeftThick
-                size={this.chevronSizeBySize.get(this.size)}
-              />
-            </li>
-          }
+          {previousPageControl}
           {this.pages.map((page) => {
             return (
               <li
@@ -163,29 +195,15 @@ export class ModusPagination {
                   !isNaN(+page) ? 'hoverable' : ''
                 }`}
                 onClick={() => this.handlePageClick(+page)}
-                onKeyDown={(event) => {
-                  if (event.code === 'Enter') {
-                    this.handlePageClick(+page);
-                  }
-                }}
+                onKeyDown={(event: KeyboardEvent) =>
+                  this.handleOnPageNumbersKeydown(event, +page)
+                }
                 tabIndex={0}>
                 {page}
               </li>
             );
           })}
-          {
-            <li
-              class={`${
-                this.activePage != this.maxPage ? 'hoverable' : 'disabled'
-              }`}
-              onClick={() => this.handleChevronClick('forward')}
-              onKeyDown={(event) => this.handleKeydownForward(event)}
-              tabIndex={0}>
-              <IconChevronRightThick
-                size={this.chevronSizeBySize.get(this.size)}
-              />
-            </li>
-          }
+          {nextPageControl}
         </ol>
       </nav>
     );
