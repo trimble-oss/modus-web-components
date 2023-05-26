@@ -1,10 +1,7 @@
 $modus-toast-bg: var(--modus-toast-bg, $col_white) !default;
 $modus-toast-border-color: var(--modus-toast-border-color, #252a2e4d) !default;
 $modus-toast-color: var(--modus-toast-color, #252a2e) !default;
-$modus-toast-close-btn-color: var(
-  --modus-toast-close-btn-color,
-  #252a2e
-) !default;
+$modus-toast-close-btn-color: var(--modus-toast-close-btn-color, #252a2e) !default;
 $modus-toast-colors: map-remove($theme-colors, 'yellow');
 $modus-toast-variants: (
   'primary': (

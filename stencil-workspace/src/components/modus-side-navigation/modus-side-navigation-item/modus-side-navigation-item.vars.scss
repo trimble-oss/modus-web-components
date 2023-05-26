@@ -1,54 +1,21 @@
-$modus-side-navigation-item-bg: var(
-  --modus-side-navigation-item-bg,
-  #fff
-) !default;
-$modus-side-navigation-item-color: var(
-  --modus-side-navigation-item-color,
-  #252a2e
-) !default;
-$modus-side-navigation-item-icon-color: var(
-  --modus-side-navigation-item-icon-color,
-  #252a2e
-) !default;
-$modus-side-navigation-item-chevron-color: var(
-  --modus-side-navigation-item-chevron-color,
-  #252a2e
-) !default;
+$modus-side-navigation-item-bg: var(--modus-side-navigation-item-bg, #fff) !default;
+$modus-side-navigation-item-color: var(--modus-side-navigation-item-color, #252a2e) !default;
+$modus-side-navigation-item-icon-color: var(--modus-side-navigation-item-icon-color, #252a2e) !default;
+$modus-side-navigation-item-chevron-color: var(--modus-side-navigation-item-chevron-color, #252a2e) !default;
 
 // Hover
-$modus-side-navigation-item-hover-bg: var(
-  --modus-side-navigation-item-hover-bg,
-  #e0e1e9
-) !default;
+$modus-side-navigation-item-hover-bg: var(--modus-side-navigation-item-hover-bg, #e0e1e9) !default;
 
 // Active
-$modus-side-navigation-item-active-bg: var(
-  --modus-side-navigation-item-active-bg,
-  #217cbb
-) !default;
-$modus-side-navigation-item-active-border-color: var(
-  --modus-side-navigation-item-active-border-color,
-  #217cbb
-) !default;
-$modus-side-navigation-item-active-color: var(
-  --modus-side-navigation-item-active-color,
-  #fff
-) !default;
-$modus-side-navigation-item-icon-active-color: var(
-  --modus-side-navigation-item-icon-active-color,
-  #fff
-) !default;
+$modus-side-navigation-item-active-bg: var(--modus-side-navigation-item-active-bg, #217cbb) !default;
+$modus-side-navigation-item-active-border-color: var(--modus-side-navigation-item-active-border-color, #217cbb) !default;
+$modus-side-navigation-item-active-color: var(--modus-side-navigation-item-active-color, #fff) !default;
+$modus-side-navigation-item-icon-active-color: var(--modus-side-navigation-item-icon-active-color, #fff) !default;
 
 // Disabled
-$modus-side-navigation-item-disabled-opacity: var(
-  --modus-side-navigation-item-disabled-opacity,
-  0.3
-) !default;
-$modus-side-navigation-item-icon-filter: var(
-  --modus-side-navigation-item-icon-filter
-) !default;
+$modus-side-navigation-item-disabled-opacity: var(--modus-side-navigation-item-disabled-opacity, 0.3) !default;
+$modus-side-navigation-item-icon-filter: var(--modus-side-navigation-item-icon-filter) !default;
 $modus-side-navigation-item-icon-active-filter: var(
   --modus-side-navigation-item-icon-active-filter,
-  invert(95%) sepia(100%) saturate(0%) hue-rotate(151deg) brightness(104%)
-    contrast(105%)
+  invert(95%) sepia(100%) saturate(0%) hue-rotate(151deg) brightness(104%) contrast(105%)
 ) !default;

@@ -41,9 +41,7 @@ export class ModusDatePicker {
   handleCalendarIconClick(event: CustomEvent<ModusDateInputEventDetails>) {
     const { type } = event.detail;
 
-    Object.keys(this._dateInputs).forEach((d) =>
-      this._dateInputs[d].toggleCalendar(d === type ? null : false)
-    );
+    Object.keys(this._dateInputs).forEach((d) => this._dateInputs[d].toggleCalendar(d === type ? null : false));
 
     this.toggleCalendar();
     if (this._showCalendar) {
@@ -54,10 +52,7 @@ export class ModusDatePicker {
 
   @Listen('click', { target: 'document' })
   handleClickOutside(event: MouseEvent): void {
-    if (
-      this.element.contains(event.target as HTMLElement) ||
-      event.defaultPrevented
-    ) {
+    if (this.element.contains(event.target as HTMLElement) || event.defaultPrevented) {
       return;
     }
     // Collapse when clicked outside
@@ -76,16 +71,11 @@ export class ModusDatePicker {
 
   @Listen('dateInputBlur')
   handleDateInputBlur(): void {
-    this.applyDateRangeRules(
-      this._dateInputs['start']?.getDate(),
-      this._dateInputs['end']?.getDate()
-    );
+    this.applyDateRangeRules(this._dateInputs['start']?.getDate(), this._dateInputs['end']?.getDate());
   }
 
   handleSlotChange(): void {
-    const dates = Array.from(
-      this.element.querySelectorAll('modus-date-input')
-    ) as unknown as HTMLModusDateInputElement[];
+    const dates = Array.from(this.element.querySelectorAll('modus-date-input')) as unknown as HTMLModusDateInputElement[];
 
     dates?.forEach((d) => {
       this._dateInputs[d.type] = new ModusDatePickerState(d);
@@ -144,19 +134,11 @@ export class ModusDatePicker {
     this._forceUpdate = { ...this._forceUpdate };
   }
 
-  findDatePositionsInARange(
-    date: Date,
-    startDate: Date,
-    endDate: Date
-  ): { [key: string]: boolean } {
+  findDatePositionsInARange(date: Date, startDate: Date, endDate: Date): { [key: string]: boolean } {
     return {
       start: startDate && this.compare(date, startDate) === 0,
       end: endDate && this.compare(date, endDate) === 0,
-      'in-range':
-        startDate &&
-        endDate &&
-        this.compare(date, startDate) > 0 &&
-        this.compare(date, endDate) < 0,
+      'in-range': startDate && endDate && this.compare(date, startDate) > 0 && this.compare(date, endDate) < 0,
     };
   }
 
@@ -169,13 +151,10 @@ export class ModusDatePicker {
     this._calendar.gotoDate(date.getFullYear(), date.getMonth());
   }
 
-  isInvalidDateRange = (startDate, endDate) =>
-    this.compare(endDate, startDate) < 0;
+  isInvalidDateRange = (startDate, endDate) => this.compare(endDate, startDate) < 0;
 
   pickCalendarDate(date: Date) {
-    const currentDateOpen = Object.keys(this._dateInputs).find((d) =>
-      this._dateInputs[d].isCalendarOpen()
-    );
+    const currentDateOpen = Object.keys(this._dateInputs).find((d) => this._dateInputs[d].isCalendarOpen());
     this._dateInputs[currentDateOpen].setDate(date);
     this.toggleCalendar(false);
   }
@@ -193,9 +172,7 @@ export class ModusDatePicker {
         });
       }
     } else {
-      this._showCalendar = !!Object.values(this._dateInputs).find((dt) =>
-        dt.isCalendarOpen()
-      );
+      this._showCalendar = !!Object.values(this._dateInputs).find((dt) => dt.isCalendarOpen());
     }
   }
 
@@ -223,19 +200,13 @@ export class ModusDatePicker {
                 return null;
               }
 
-              const positions = this.findDatePositionsInARange(
-                date,
-                startDate,
-                endDate
-              );
+              const positions = this.findDatePositionsInARange(date, startDate, endDate);
 
               const isStartDate = positions['start'];
               const isEndDate = positions['end'];
               const isToday = this.compare(date, today) === 0;
-              const isSingleDateSelected =
-                singleDate && this.compare(date, singleDate) === 0;
-              const isSelected =
-                isStartDate || isEndDate || isSingleDateSelected;
+              const isSingleDateSelected = singleDate && this.compare(date, singleDate) === 0;
+              const isSelected = isStartDate || isEndDate || isSingleDateSelected;
               const isInRange = !isSelected ? positions['in-range'] : false;
 
               // Only for the last date in the calendar
@@ -274,41 +245,24 @@ export class ModusDatePicker {
   private renderCalendarHeader() {
     return (
       <div class="calendar-header">
-        <button
-          aria-label="Previous Month"
-          onClick={() => this.addMonthOffset(-1)}>
+        <button aria-label="Previous Month" onClick={() => this.addMonthOffset(-1)}>
           <IconMap icon="chevron-left-thick"></IconMap>
         </button>
 
         <div class="title">
-          <span
-            tabIndex={0}
-            class="calendar-title"
-            aria-label="ModusCalendar title"
-            role="title">
+          <span tabIndex={0} class="calendar-title" aria-label="ModusCalendar title" role="title">
             {`${this._calendar?.month} ${this._calendar?.year}`}
           </span>
           <div class="year-icons">
-            <button
-              tabIndex={0}
-              aria-label="Previous Year"
-              onClick={() => this.addYearOffset(1)}
-              class="year-up">
+            <button tabIndex={0} aria-label="Previous Year" onClick={() => this.addYearOffset(1)} class="year-up">
               <IconMap icon="triangle-down" size="8"></IconMap>
             </button>
-            <button
-              tabIndex={0}
-              aria-label="Next Year"
-              onClick={() => this.addYearOffset(-1)}
-              class="year-down">
+            <button tabIndex={0} aria-label="Next Year" onClick={() => this.addYearOffset(-1)} class="year-down">
               <IconMap size="8" icon="triangle-down"></IconMap>
             </button>
           </div>
         </div>
-        <button
-          tabIndex={0}
-          aria-label="Next Month"
-          onClick={() => this.addMonthOffset(1)}>
+        <button tabIndex={0} aria-label="Next Month" onClick={() => this.addMonthOffset(1)}>
           <IconMap icon="chevron-right-thick"></IconMap>
         </button>
       </div>
@@ -318,11 +272,7 @@ export class ModusDatePicker {
   render() {
     return (
       <div class="modus-date-picker">
-        {this.label ? (
-          <div class={'label-container'}>
-            {this.label ? <label>{this.label}</label> : null}
-          </div>
-        ) : null}
+        {this.label ? <div class={'label-container'}>{this.label ? <label>{this.label}</label> : null}</div> : null}
         <div class="date-inputs">
           <slot onSlotchange={() => this.handleSlotChange()}></slot>
         </div>

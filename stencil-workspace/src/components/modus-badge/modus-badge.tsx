@@ -42,7 +42,9 @@ export class ModusBadge {
   ]);
 
   render(): unknown {
-    const className = `badge ${this.classByColor.get(this.color)} ${this.classBySize.get(this.size)} ${this.classByType.get(this.type)}`;
+    const className = `badge ${this.classByColor.get(this.color)} ${this.classBySize.get(this.size)} ${this.classByType.get(
+      this.type
+    )}`;
 
     return (
       <div aria-label={this.ariaLabel} class={className} role="status">

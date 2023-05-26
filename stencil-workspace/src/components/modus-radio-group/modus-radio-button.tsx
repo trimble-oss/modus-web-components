@@ -25,16 +25,9 @@ export const ModusRadioButton: FunctionalComponent<ModusRadioButtonProps> = (pro
     onKeyDown={(event) => props.handleKeydown(event, props.id)}
     tabIndex={0}>
     <div class="radio">
-      <input
-        checked={props.checked}
-        disabled={props.disabled}
-        name={props.name}
-        type="radio">
-      </input>
+      <input checked={props.checked} disabled={props.disabled} name={props.name} type="radio"></input>
       <span class="checkmark"></span>
-      <label>
-        {props.label}
-      </label>
+      <label>{props.label}</label>
     </div>
   </div>
 );

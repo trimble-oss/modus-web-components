@@ -29,8 +29,8 @@ export interface ModusDataTableSort {
 export interface ModusDataTableSortEvent extends ModusDataTableSort {}
 
 export interface ModusDataTableRowActionClickEvent {
-  actionId: string,
-  rowId: string
+  actionId: string;
+  rowId: string;
 }
 
 export interface TColumn {

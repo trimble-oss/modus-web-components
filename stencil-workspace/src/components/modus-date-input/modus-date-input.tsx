@@ -11,10 +11,7 @@ import {
 } from '@stencil/core';
 import { IconMap } from '../icons/IconMap';
 import DateInputFormatter from './utils/modus-date-input.formatter';
-import {
-  ModusDateInputEventDetails,
-  ModusDateInputType,
-} from './utils/modus-date-input.models';
+import { ModusDateInputEventDetails, ModusDateInputType } from './utils/modus-date-input.models';
 
 @Component({
   tag: 'modus-date-input',
@@ -229,16 +226,14 @@ export class ModusDateInput {
         class={className}>
         {this.label || this.required ? (
           <div class="label-container">
-            {this.label ? (
-              <label htmlFor="date-input">{this.label}</label>
-            ) : null}
+            {this.label ? <label htmlFor="date-input">{this.label}</label> : null}
             {this.required ? <span class="required">*</span> : null}
           </div>
         ) : null}
         <div
-          class={`input-container ${
-            this.errorText ? 'error' : this.validText ? 'valid' : ''
-          } ${this.classBySize.get(this.size)}`}>
+          class={`input-container ${this.errorText ? 'error' : this.validText ? 'valid' : ''} ${this.classBySize.get(
+            this.size
+          )}`}>
           <input
             aria-placeholder={this.placeholder}
             autofocus={this.autoFocusInput}
@@ -259,9 +254,7 @@ export class ModusDateInput {
             <span
               class="icons"
               tabIndex={0}
-              onKeyDown={(e) =>
-                this.handleDefaultKeyDown(e, () => this.handleCalendarClick())
-              }
+              onKeyDown={(e) => this.handleDefaultKeyDown(e, () => this.handleCalendarClick())}
               onClick={() => this.handleCalendarClick()}
               role="button"
               aria-label="Open calendar">

@@ -221,9 +221,7 @@
 
   // Highlight
   --modus-file-upload-dropzone-highlight-bg: var(--modus-highlight-blue-bg);
-  --modus-file-upload-dropzone-highlight-color: var(
-    --modus-highlight-blue-color
-  );
+  --modus-file-upload-dropzone-highlight-color: var(--modus-highlight-blue-color);
 
   // Error
   --modus-file-upload-dropzone-error-bg: #fbd4d780;
@@ -260,9 +258,7 @@
   // Profile
   --modus-navbar-profile-icon-initials-color: var(--modus-white);
   --modus-navbar-profile-icon-active-border-color: #d6d5db;
-  --modus-navbar-profile-menu-sign-out-background-color: var(
-    --modus-gray-light
-  );
+  --modus-navbar-profile-menu-sign-out-background-color: var(--modus-gray-light);
 
   // NavBar - Blue Variant
   --modus-navbar-blue-bg: var(--modus-blue-dark);
@@ -360,9 +356,7 @@
   --modus-side-navigation-item-hover-bg: var(--modus-gray-0);
   --modus-side-navigation-item-active-bg: var(--modus-highlight-blue-color);
   --modus-side-navigation-item-disabled-opacity: 0.3;
-  --modus-side-navigation-item-chevron-color: var(
-    --modus-side-navigation-item-color
-  );
+  --modus-side-navigation-item-chevron-color: var(--modus-side-navigation-item-color);
 
   // Date picker
   --modus-date-input-calendar-icon-color: var(--modus-input-helper-icon-color);
@@ -372,12 +366,8 @@
   --modus-date-picker-calendar-day-week-color: #363545;
   --modus-date-picker-calendar-day-color: var(--modus-gray-10);
   --modus-date-picker-calendar-day-hover-bg: var(--modus-gray-0);
-  --modus-date-picker-calendar-day-current-border-color: var(
-    --modus-highlight-blue-color
-  );
-  --modus-date-picker-calendar-day-selected-bg: var(
-    --modus-highlight-blue-color
-  );
+  --modus-date-picker-calendar-day-current-border-color: var(--modus-highlight-blue-color);
+  --modus-date-picker-calendar-day-selected-bg: var(--modus-highlight-blue-color);
   --modus-date-picker-calendar-day-selected-color: var(--modus-white);
   --modus-date-picker-calendar-day-selected-range-bg: var(--modus-blue-pale);
   --modus-date-picker-calendar-day-disabled-opacity: 0.3;
@@ -544,16 +534,12 @@
 
   // Highlight
   --modus-file-upload-dropzone-highlight-bg: #019aeb33;
-  --modus-file-upload-dropzone-highlight-color: var(
-    --modus-file-upload-dropzone-color
-  );
+  --modus-file-upload-dropzone-highlight-color: var(--modus-file-upload-dropzone-color);
 
   // Error
   --modus-file-upload-dropzone-error-bg: #da212c33;
   --modus-file-upload-dropzone-error-border-color: var(--modus-red);
-  --modus-file-upload-dropzone-error-color: var(
-    --modus-file-upload-dropzone-color
-  );
+  --modus-file-upload-dropzone-error-color: var(--modus-file-upload-dropzone-color);
 
   // Message
   // Type - Info
@@ -667,11 +653,9 @@
   --modus-side-navigation-bg: var(--modus-gray-11);
   --modus-side-navigation-item-hover-bg: var(--modus-gray-8);
   --modus-side-navigation-item-active-bg: #019aeb4d;
-  --modus-side-navigation-item-active-border-color: var(
-    --modus-highlight-blue-color
-  );
-  --modus-side-navigation-item-icon-filter: invert(95%) sepia(100%) saturate(0%)
-    hue-rotate(151deg) brightness(104%) contrast(105%);
+  --modus-side-navigation-item-active-border-color: var(--modus-highlight-blue-color);
+  --modus-side-navigation-item-icon-filter: invert(95%) sepia(100%) saturate(0%) hue-rotate(151deg) brightness(104%)
+    contrast(105%);
   --modus-side-navigation-item-disabled-opacity: 0.4;
   --modus-side-navigation-item-chevron-color: var(--modus-gray-5);
 
@@ -682,12 +666,8 @@
   --modus-date-picker-calendar-day-week-color: var(--modus-white);
   --modus-date-picker-calendar-day-color: var(--modus-white);
   --modus-date-picker-calendar-day-hover-bg: var(--modus-gray-8);
-  --modus-date-picker-calendar-day-current-border-color: var(
-    --modus-highlight-blue-color
-  );
-  --modus-date-picker-calendar-day-selected-bg: var(
-    --modus-highlight-blue-color
-  );
+  --modus-date-picker-calendar-day-current-border-color: var(--modus-highlight-blue-color);
+  --modus-date-picker-calendar-day-selected-bg: var(--modus-highlight-blue-color);
   --modus-date-picker-calendar-day-selected-range-bg: #019aeb4d;
 
   // Autocomplete
@@ -722,15 +702,9 @@
   --modus-checkbox-border-color: var(--modus-check-input-border-color);
   --modus-checkbox-disabled-opacity: var(--modus-check-input-disabled-opacity);
   --modus-checkbox-label-color: var(--modus-check-input-label-color);
-  --modus-checkbox-hover-border-color: var(
-    --modus-check-input-active-border-color
-  );
-  --modus-checkbox-selected-border-color: var(
-    --modus-check-input-active-border-color
-  );
-  --modus-checkbox-indeterminate-border-color: var(
-    --modus-check-input-active-border-color
-  );
+  --modus-checkbox-hover-border-color: var(--modus-check-input-active-border-color);
+  --modus-checkbox-selected-border-color: var(--modus-check-input-active-border-color);
+  --modus-checkbox-indeterminate-border-color: var(--modus-check-input-active-border-color);
 }
 
 @mixin modus-list-item {
@@ -743,9 +717,7 @@
 
   // Selected
   --modus-list-item-selected-bg: var(--modus-group-item-selected-bg);
-  --modus-list-item-selected-border-color: var(
-    --modus-group-item-selected-border-color
-  );
+  --modus-list-item-selected-border-color: var(--modus-group-item-selected-border-color);
 
   // Disabled
   --modus-list-item-disabled-color: var(--modus-group-item-disabled-color);
@@ -888,9 +860,7 @@ modus-data-table {
 modus-file-dropzone {
   --modus-file-upload-dropzone-border-color: var(--modus-gray-6);
   --modus-file-upload-dropzone-browse-color: var(--modus-trimble-blue);
-  --modus-file-upload-dropzone-highlight-border-color: var(
-    --modus-highlight-blue-color
-  );
+  --modus-file-upload-dropzone-highlight-border-color: var(--modus-highlight-blue-color);
 }
 
 modus-list-item {
@@ -919,12 +889,8 @@ modus-radio-group {
   --modus-radio-btn-border-color: var(--modus-check-input-border-color);
   --modus-radio-btn-disabled-opacity: var(--modus-check-input-disabled-opacity);
   --modus-radio-btn-label-color: var(--modus-check-input-label-color);
-  --modus-radio-btn-hover-border-color: var(
-    --modus-check-input-active-border-color
-  );
-  --modus-radio-btn-selected-border-color: var(
-    --modus-check-input-active-border-color
-  );
+  --modus-radio-btn-hover-border-color: var(--modus-check-input-active-border-color);
+  --modus-radio-btn-selected-border-color: var(--modus-check-input-active-border-color);
 }
 
 modus-slider {
@@ -937,12 +903,8 @@ modus-switch {
   --modus-switch-border-color: var(--modus-check-input-border-color);
   --modus-switch-disabled-opacity: var(--modus-check-input-disabled-opacity);
   --modus-switch-label-color: var(--modus-check-input-label-color);
-  --modus-switch-hover-border-color: var(
-    --modus-check-input-active-border-color
-  );
-  --modus-switch-selected-border-color: var(
-    --modus-check-input-active-border-color
-  );
+  --modus-switch-hover-border-color: var(--modus-check-input-active-border-color);
+  --modus-switch-selected-border-color: var(--modus-check-input-active-border-color);
 }
 
 modus-tabs {
@@ -961,17 +923,13 @@ modus-tree-view-item {
 
   // Selected
   --modus-tree-view-item-selected-bg: var(--modus-group-item-selected-bg);
-  --modus-tree-view-item-selected-border-color: var(
-    --modus-group-item-selected-border-color
-  );
+  --modus-tree-view-item-selected-border-color: var(--modus-group-item-selected-border-color);
 
   // Disabled
   --modus-tree-view-item-disabled-color: var(--modus-group-item-disabled-color);
 
   // Indicator
-  --modus-tree-view-item-selected-indicator-color: var(
-    --modus-highlight-blue-color
-  );
+  --modus-tree-view-item-selected-indicator-color: var(--modus-highlight-blue-color);
   --modus-tree-view-item-drag-border-color: var(--modus-highlight-blue-color);
   --modus-tree-view-item-drag-error-border-color: var(--modus-red);
 
@@ -983,12 +941,8 @@ modus-side-navigation {
   --modus-side-navigation-item-bg: var(--modus-side-navigation-bg);
   --modus-side-navigation-item-color: var(--modus-body-color);
   --modus-side-navigation-item-active-color: var(--modus-white);
-  --modus-side-navigation-item-icon-color: var(
-    --modus-side-navigation-item-color
-  );
-  --modus-side-navigation-item-icon-active-color: var(
-    --modus-side-navigation-item-active-color
-  );
-  --modus-side-navigation-item-icon-active-filter: invert(95%) sepia(100%)
-    saturate(0%) hue-rotate(151deg) brightness(104%) contrast(105%);
+  --modus-side-navigation-item-icon-color: var(--modus-side-navigation-item-color);
+  --modus-side-navigation-item-icon-active-color: var(--modus-side-navigation-item-active-color);
+  --modus-side-navigation-item-icon-active-filter: invert(95%) sepia(100%) saturate(0%) hue-rotate(151deg) brightness(104%)
+    contrast(105%);
 }

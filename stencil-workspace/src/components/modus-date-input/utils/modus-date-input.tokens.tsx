@@ -76,14 +76,10 @@ export const TokenParser: parsers = {
   m: defaultParser,
   mm: defaultParser,
   mmm: function (val: string): number {
-    return (
-      monthsShort.findIndex((m) => m.toUpperCase() === val?.toUpperCase()) + 1
-    );
+    return monthsShort.findIndex((m) => m.toUpperCase() === val?.toUpperCase()) + 1;
   },
   mmmm: function (val: string): number {
-    return (
-      monthsFull.findIndex((m) => m.toUpperCase() === val?.toUpperCase()) + 1
-    );
+    return monthsFull.findIndex((m) => m.toUpperCase() === val?.toUpperCase()) + 1;
   },
   d: defaultParser,
   dd: defaultParser,

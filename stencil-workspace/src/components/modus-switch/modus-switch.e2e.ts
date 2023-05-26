@@ -59,7 +59,7 @@ describe('modus-switch', () => {
 
     await page.setContent('<modus-switch></modus-switch>');
     const switchClick = await page.spyOnEvent('switchClick');
-    const element = await page.find('modus-switch >>> .modus-switch')
+    const element = await page.find('modus-switch >>> .modus-switch');
     await page.waitForChanges();
 
     await element.click();
@@ -72,7 +72,7 @@ describe('modus-switch', () => {
 
     await page.setContent('<modus-switch disabled></modus-switch>');
     const switchClick = await page.spyOnEvent('switchClick');
-    const element = await page.find('modus-switch >>> .modus-switch')
+    const element = await page.find('modus-switch >>> .modus-switch');
     await page.waitForChanges();
 
     await element.click();
@@ -85,7 +85,7 @@ describe('modus-switch', () => {
 
     await page.setContent('<modus-switch></modus-switch>');
     const modusSwitch = await page.find('modus-switch');
-    const element = await page.find('modus-switch >>> .modus-switch')
+    const element = await page.find('modus-switch >>> .modus-switch');
     await page.waitForChanges();
 
     await element.click();

@@ -194,8 +194,7 @@ nav {
       }
 
       > :first-child:active {
-        outline: $rem-4px solid
-          $modus-navbar-blue-profile-icon-active-border-color;
+        outline: $rem-4px solid $modus-navbar-blue-profile-icon-active-border-color;
       }
     }
   }

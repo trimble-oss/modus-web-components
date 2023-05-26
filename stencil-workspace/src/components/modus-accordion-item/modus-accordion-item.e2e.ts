@@ -79,8 +79,6 @@ describe('modus-accordion-item', () => {
     expect(closed).toHaveReceivedEvent();
   });
 
-
-
   it('emits opened event on header click', async () => {
     const page = await newE2EPage();
 

@@ -78,19 +78,19 @@ describe('modus-pagination', () => {
     modusPagination.minPage = 1;
     modusPagination.maxPage = 100;
     modusPagination.setPages();
-    let ellipsis = modusPagination.pages.filter(page => page === '...');
+    let ellipsis = modusPagination.pages.filter((page) => page === '...');
     expect(ellipsis.length).toEqual(1);
 
     // One of the last 4 pages are selected.
     modusPagination.activePage = 100;
     modusPagination.setPages();
-    ellipsis = modusPagination.pages.filter(page => page === '...');
+    ellipsis = modusPagination.pages.filter((page) => page === '...');
     expect(ellipsis.length).toEqual(1);
 
     // One of the middle pages are selected.
     modusPagination.activePage = 50;
     modusPagination.setPages();
-    ellipsis = modusPagination.pages.filter(page => page === '...');
+    ellipsis = modusPagination.pages.filter((page) => page === '...');
     expect(ellipsis.length).toEqual(2);
 
     // There are only 7 pages.
@@ -98,7 +98,7 @@ describe('modus-pagination', () => {
     modusPagination.minPage = 1;
     modusPagination.maxPage = 7;
     modusPagination.setPages();
-    ellipsis = modusPagination.pages.filter(page => page === '...');
+    ellipsis = modusPagination.pages.filter((page) => page === '...');
     expect(ellipsis.length).toEqual(0);
   });
 });

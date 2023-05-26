@@ -64,18 +64,11 @@ export default class TimeInputFormatter {
   }
 
   /** Validate key pressed */
-  keyIsValidTimeCharacter(
-    key: string,
-    allowedKeysRegexInput: RegExp | string = null
-  ): boolean {
+  keyIsValidTimeCharacter(key: string, allowedKeysRegexInput: RegExp | string = null): boolean {
     const allowedKeysRegex =
       allowedKeysRegexInput != null
         ? new RegExp(allowedKeysRegexInput)
-        : new RegExp(
-            this.hasAmPm
-              ? TIME_12_HOUR_CLOCK_ALLOWED_CHARS_REGEX
-              : TIME_24_HOUR_CLOCK_ALLOWED_CHARS_REGEX
-          );
+        : new RegExp(this.hasAmPm ? TIME_12_HOUR_CLOCK_ALLOWED_CHARS_REGEX : TIME_24_HOUR_CLOCK_ALLOWED_CHARS_REGEX);
     if (allowedKeysRegex.test(key)) {
       return true;
     }
@@ -86,10 +79,7 @@ export default class TimeInputFormatter {
   parseTimeDisplay(val: string): string | null {
     if (!val) return null;
 
-    const parse = this.processTimeRegex(
-      val,
-      this.hasAmPm ? TIME_12_HOUR_CLOCK_REGEX : TIME_24_HOUR_CLOCK_REGEX
-    );
+    const parse = this.processTimeRegex(val, this.hasAmPm ? TIME_12_HOUR_CLOCK_REGEX : TIME_24_HOUR_CLOCK_REGEX);
 
     if (parse) {
       if (this.hasAmPm) {
@@ -107,11 +97,7 @@ export default class TimeInputFormatter {
   }
 
   // Local functions
-  private create24HourTimeString(
-    hours: number,
-    minutes: number,
-    ampm: string
-  ): string | null {
+  private create24HourTimeString(hours: number, minutes: number, ampm: string): string | null {
     let editedHours = hours;
 
     // Subtract 12 hours for 12:00 AM or midnight to 12:59 AM
@@ -128,10 +114,7 @@ export default class TimeInputFormatter {
     return null;
   }
 
-  private create12HourTimeString(
-    hours: number,
-    minutes: number
-  ): string | null {
+  private create12HourTimeString(hours: number, minutes: number): string | null {
     let ampm = 'AM';
     let editedHours = hours;
 

@@ -1,7 +1,19 @@
 // eslint-disable-next-line
 import { Component, Event, EventEmitter, h, Prop, State, Watch } from '@stencil/core';
 import { ModusDataTableUtilities } from './modus-data-table.utilities';
-import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSort, ModusDataTableSortEvent, ModusTableSelectionOptions, ModusTableSortOptions, TCell, TColumn, TRow } from './modus-data-table.models';
+import {
+  ModusDataTableCellLink,
+  ModusDataTableDisplayOptions,
+  ModusDataTableRowAction,
+  ModusDataTableRowActionClickEvent,
+  ModusDataTableSort,
+  ModusDataTableSortEvent,
+  ModusTableSelectionOptions,
+  ModusTableSortOptions,
+  TCell,
+  TColumn,
+  TRow,
+} from './modus-data-table.models';
 import { ModusDataTableHeader } from './parts/modus-data-table-header';
 import { ModusDataTableCellLinkPart } from './parts/modus-data-table-cell-link-part';
 import { ModusDataTableCellBadgePart } from './parts/modus-data-table-cell-badge-part';
@@ -28,7 +40,7 @@ export class ModusDataTable {
     borderless: true,
     cellBorderless: true,
     rowStripe: false,
-    size: 'large'
+    size: 'large',
   };
 
   /** Actions that can be performed on each row. */
@@ -64,7 +76,7 @@ export class ModusDataTable {
   @State() allSelected = false;
   @State() sortState: ModusDataTableSort = {
     columnId: '',
-    direction: 'none'
+    direction: 'none',
   };
 
   classBySize: Map<string, string> = new Map([
@@ -107,7 +119,9 @@ export class ModusDataTable {
   }
 
   handleColumnHeaderClick(columnId: string): void {
-    if (!this.sortOptions.canSort) { return; }
+    if (!this.sortOptions.canSort) {
+      return;
+    }
 
     if (columnId === this.sortState.columnId) {
       this.sortState = {
@@ -128,14 +142,15 @@ export class ModusDataTable {
     });
 
     if (!this.sortOptions.serverSide) {
-      this.data = this.sortState.direction === 'none'
-        ? this.originalData.map((originalRow: TRow) => {
-          return {
-            ...originalRow,
-            _selected: (this.data as TRow[]).find((dataRow: TRow) => dataRow._id === originalRow._id)._selected
-          };
-        })
-        : ModusDataTableUtilities.sortData(this.data as TRow[], this.sortState.columnId, this.sortState.direction);
+      this.data =
+        this.sortState.direction === 'none'
+          ? this.originalData.map((originalRow: TRow) => {
+              return {
+                ...originalRow,
+                _selected: (this.data as TRow[]).find((dataRow: TRow) => dataRow._id === originalRow._id)._selected,
+              };
+            })
+          : ModusDataTableUtilities.sortData(this.data as TRow[], this.sortState.columnId, this.sortState.direction);
 
       this.updateAllSelected();
     }
@@ -153,7 +168,9 @@ export class ModusDataTable {
   }
 
   handleRowClick(rowId: string): void {
-    if (!this.selectionOptions.canSelect || this.selectionOptions.checkboxSelection) { return; }
+    if (!this.selectionOptions.canSelect || this.selectionOptions.checkboxSelection) {
+      return;
+    }
 
     this.data = this.data.map((row) => {
       return {
@@ -195,12 +212,20 @@ export class ModusDataTable {
             {this.selectionOptions.canSelect && this.selectionOptions.checkboxSelection && (
               <th>
                 <div class="column-header align-center">
-                  <modus-checkbox checked={this.allSelected} onCheckboxClick={(e) => this.handleHeaderCheckboxClick(e.detail)} />
+                  <modus-checkbox
+                    checked={this.allSelected}
+                    onCheckboxClick={(e) => this.handleHeaderCheckboxClick(e.detail)}
+                  />
                 </div>
               </th>
             )}
             {(this.columns as TColumn[])?.map((column: TColumn) => (
-              <ModusDataTableHeader column={column} onColumnHeaderClick={(id: string) => this.handleColumnHeaderClick(id)} sortOptions={this.sortOptions} sortState={this.sortState} />
+              <ModusDataTableHeader
+                column={column}
+                onColumnHeaderClick={(id: string) => this.handleColumnHeaderClick(id)}
+                sortOptions={this.sortOptions}
+                sortState={this.sortState}
+              />
             ))}
             {!!this.rowActions.length && <th />}
           </tr>
@@ -209,7 +234,10 @@ export class ModusDataTable {
           {this.data?.map((row) => (
             <tr onClick={() => this.handleRowClick(row._id)} onDblClick={() => this.handleRowDoubleClick(row._id)}>
               {this.selectionOptions.canSelect && this.selectionOptions.checkboxSelection && (
-                <td class={`align-center ${row._selected ? 'selected' : ''}`} onClick={(e) => e.stopPropagation()} onDblClick={(e) => e.stopPropagation()}>
+                <td
+                  class={`align-center ${row._selected ? 'selected' : ''}`}
+                  onClick={(e) => e.stopPropagation()}
+                  onDblClick={(e) => e.stopPropagation()}>
                   <div>
                     <modus-checkbox checked={row._selected} onCheckboxClick={() => this.handleCheckboxClick(row._id)} />
                   </div>
@@ -217,18 +245,27 @@ export class ModusDataTable {
               )}
               {(this.columns as TColumn[])?.map((column: TColumn) => (
                 <td class={`align-${column.align} ${column.readonly ? 'readonly' : ''} ${row._selected ? 'selected' : ''}`}>
-                  {row[column.id]?._type === 'link' && <ModusDataTableCellLinkPart link={row[column.id]} onLinkClick={() => this.cellLinkClick.emit(row[column.id])} />}
+                  {row[column.id]?._type === 'link' && (
+                    <ModusDataTableCellLinkPart
+                      link={row[column.id]}
+                      onLinkClick={() => this.cellLinkClick.emit(row[column.id])}
+                    />
+                  )}
                   {row[column.id]?._type === 'badge' && <ModusDataTableCellBadgePart badge={row[column.id]} />}
                   {!row[column.id]?._type && row[column.id]?.toString()}
                 </td>
               ))}
               {!!this.rowActions.length && (
-                <td class={`align-center ${row._selected ? 'selected' : ''}`} onClick={(e) => e.stopPropagation()} onDblClick={(e) => e.stopPropagation()}>
+                <td
+                  class={`align-center ${row._selected ? 'selected' : ''}`}
+                  onClick={(e) => e.stopPropagation()}
+                  onDblClick={(e) => e.stopPropagation()}>
                   <ModusDataTableRowActionDropdown
                     actions={this.rowActions}
                     animateDropdown={this.displayOptions.animateRowActionsDropdown}
                     onRowActionClick={(actionId, rowId) => this.rowActionClick.emit({ actionId, rowId })}
-                    rowId={row._id} />
+                    rowId={row._id}
+                  />
                 </td>
               )}
             </tr>

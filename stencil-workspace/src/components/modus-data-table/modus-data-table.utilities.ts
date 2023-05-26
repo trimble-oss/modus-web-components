@@ -8,13 +8,15 @@ export class ModusDataTableUtilities {
         display: column.display ?? column,
         id: column.id ?? column.display?.toLocaleLowerCase() ?? column.toLocaleLowerCase(),
         readonly: column.readonly ?? false,
-        width: column.width ?? ''
+        width: column.width ?? '',
       };
     });
   }
 
   static convertToTRows(data: TCell[][] | TRow[], columns: string[] | TColumn[]): TRow[] {
-    if (data?.length && !Array.isArray(data[0])) { return data as TRow[]; }
+    if (data?.length && !Array.isArray(data[0])) {
+      return data as TRow[];
+    }
 
     return data?.map((row) => {
       const tRows = {
@@ -35,11 +37,15 @@ export class ModusDataTableUtilities {
     if (direction === 'asc') {
       return dataCopy.sort((row1, row2) => {
         if (row1[columnId]['_type'] === 'badge') {
-          return (row1[columnId] as ModusDataTableCellBadge).text > (row2[columnId] as ModusDataTableCellBadge).text ? 1 : -1;
+          return (row1[columnId] as ModusDataTableCellBadge).text > (row2[columnId] as ModusDataTableCellBadge).text
+            ? 1
+            : -1;
         }
 
         if (row1[columnId]['_type'] === 'link') {
-          return (row1[columnId] as ModusDataTableCellLink).display > (row2[columnId] as ModusDataTableCellLink).display ? 1 : -1;
+          return (row1[columnId] as ModusDataTableCellLink).display > (row2[columnId] as ModusDataTableCellLink).display
+            ? 1
+            : -1;
         }
 
         return row1[columnId] > row2[columnId] ? 1 : -1;
@@ -47,11 +53,15 @@ export class ModusDataTableUtilities {
     } else {
       return dataCopy.sort((row1, row2) => {
         if (row1[columnId]['_type'] === 'badge') {
-          return (row1[columnId] as ModusDataTableCellBadge).text > (row2[columnId] as ModusDataTableCellBadge).text ? -1 : 1;
+          return (row1[columnId] as ModusDataTableCellBadge).text > (row2[columnId] as ModusDataTableCellBadge).text
+            ? -1
+            : 1;
         }
 
         if (row1[columnId]['_type'] === 'link') {
-          return (row1[columnId] as ModusDataTableCellLink).display > (row2[columnId] as ModusDataTableCellLink).display ? -1 : 1;
+          return (row1[columnId] as ModusDataTableCellLink).display > (row2[columnId] as ModusDataTableCellLink).display
+            ? -1
+            : 1;
         }
 
         return row1[columnId] > row2[columnId] ? -1 : 1;

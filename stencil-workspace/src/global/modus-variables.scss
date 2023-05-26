@@ -12,7 +12,8 @@ $enable-deprecation-messages: false;
 
 // Fonts and Icons
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
-$primary-font: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !default;
+$primary-font: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+  sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !default;
 $icon-font-classes: '.modus-icon', '.modus-icons' !default;
 $icon-font-families: 'modus-icon', 'modus-icons' !default;
 

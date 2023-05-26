@@ -9,7 +9,6 @@ describe('modus-time-picker', () => {
     expect(element).toHaveClass('hydrated');
   });
 
-
   it('renders changes to disabled', async () => {
     const page = await newE2EPage();
 
@@ -157,7 +156,6 @@ describe('modus-time-picker', () => {
     const errorLabel = await page.find('modus-time-picker >>> label.error');
     expect(errorLabel).toBeNull();
   });
-
 
   // Verifies 12 hour clock as input
   it('renders changes to ampm', async () => {

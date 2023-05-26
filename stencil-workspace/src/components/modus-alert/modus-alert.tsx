@@ -42,7 +42,9 @@ export class ModusAlert {
   elementKeyupHandler(event: KeyboardEvent): void {
     switch (event.code) {
       case 'Escape':
-        if (!this.dismissible) { return; }
+        if (!this.dismissible) {
+          return;
+        }
 
         this.dismissClick.emit();
         break;

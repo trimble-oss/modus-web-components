@@ -31,9 +31,9 @@ export class ModusNavbarAppsMenu {
 
     return (
       <div class={`apps-menu ${direction}`} onClick={(event) => event.preventDefault()}>
-        {this.apps?.map((app) =>
+        {this.apps?.map((app) => (
           <div class="app-div">
-            {app.showCategory? <div class="category">{app.category}</div> : null}
+            {app.showCategory ? <div class="category">{app.category}</div> : null}
             <div class="app" onClick={() => this.clickAppHandler(app)}>
               <img src={app.logoUrl} />
               <div class="right">
@@ -42,7 +42,7 @@ export class ModusNavbarAppsMenu {
               </div>
             </div>
           </div>
-        )}
+        ))}
       </div>
     );
   }

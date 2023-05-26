@@ -11,8 +11,8 @@ button {
   justify-content: center;
   padding: 0;
   position: relative;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
   user-select: none;
   white-space: nowrap;
 
@@ -90,26 +90,14 @@ button {
 
       // Hover state
       &.color-#{$color}:hover:not([disabled]) {
-        background-color: var(
-          --modus-btn-#{$color}-hover-bg,
-          map-get($btn-hover-colors, $color)
-        );
-        border-color: var(
-          --modus-btn-#{$color}-hover-bg,
-          map-get($btn-hover-colors, $color)
-        );
+        background-color: var(--modus-btn-#{$color}-hover-bg, map-get($btn-hover-colors, $color));
+        border-color: var(--modus-btn-#{$color}-hover-bg, map-get($btn-hover-colors, $color));
       }
 
       // Active state
       &.color-#{$color}:active:not([disabled]) {
-        background-color: var(
-          --modus-btn-#{$color}-active-bg,
-          map-get($btn-active-colors, $color)
-        );
-        border-color: var(
-          --modus-btn-#{$color}-active-bg,
-          map-get($btn-active-colors, $color)
-        );
+        background-color: var(--modus-btn-#{$color}-active-bg, map-get($btn-active-colors, $color));
+        border-color: var(--modus-btn-#{$color}-active-bg, map-get($btn-active-colors, $color));
       }
     }
   }
@@ -133,15 +121,9 @@ button {
 
       // Hover state
       &.color-#{$alias}:hover:not([disabled]) {
-        $btn-color: var(
-          --modus-btn-outline-#{$color}-hover-color,
-          map-get($btn-outline-hover, $color, 'color')
-        );
+        $btn-color: var(--modus-btn-outline-#{$color}-hover-color, map-get($btn-outline-hover, $color, 'color'));
 
-        background-color: var(
-          --modus-btn-outline-#{$color}-hover-bg,
-          map-get($btn-outline-hover, $color, 'bg')
-        );
+        background-color: var(--modus-btn-outline-#{$color}-hover-bg, map-get($btn-outline-hover, $color, 'bg'));
         border-color: $btn-color;
         color: $btn-color;
         fill: $btn-color;
@@ -149,15 +131,9 @@ button {
 
       // Active state
       &.color-#{$alias}:active:not([disabled]) {
-        $btn-color: var(
-          --modus-btn-outline-#{$color}-active-color,
-          map-get($btn-outline-active, $color, 'color')
-        );
+        $btn-color: var(--modus-btn-outline-#{$color}-active-color, map-get($btn-outline-active, $color, 'color'));
 
-        background-color: var(
-          --modus-btn-outline-#{$color}-active-bg,
-          map-get($btn-outline-active, $color, 'bg')
-        );
+        background-color: var(--modus-btn-outline-#{$color}-active-bg, map-get($btn-outline-active, $color, 'bg'));
         border-color: $btn-color;
         color: $btn-color;
         fill: $btn-color;

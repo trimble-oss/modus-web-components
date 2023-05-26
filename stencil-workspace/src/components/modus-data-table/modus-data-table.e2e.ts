@@ -338,7 +338,11 @@ describe('modus-data-table', () => {
   it('should fire selection with correct item', async () => {
     const component = await page.find('modus-data-table');
     component.setProperty('columns', [{ display: 'Col1' }]);
-    component.setProperty('data', [{ _id: '2', col1: 'Val2' }, { _id: '3', col1: 'Val3' }, { _id: '1', col1: 'Val1' }]);
+    component.setProperty('data', [
+      { _id: '2', col1: 'Val2' },
+      { _id: '3', col1: 'Val3' },
+      { _id: '1', col1: 'Val1' },
+    ]);
     component.setProperty('selectionOptions', { canSelect: true });
     await page.waitForChanges();
 
@@ -355,7 +359,11 @@ describe('modus-data-table', () => {
   it('should fire selection with correct items', async () => {
     const component = await page.find('modus-data-table');
     component.setProperty('columns', [{ display: 'Col1' }]);
-    component.setProperty('data', [{ _id: '2', col1: 'Val2' }, { _id: '3', col1: 'Val3' }, { _id: '1', col1: 'Val1' }]);
+    component.setProperty('data', [
+      { _id: '2', col1: 'Val2' },
+      { _id: '3', col1: 'Val3' },
+      { _id: '1', col1: 'Val1' },
+    ]);
     component.setProperty('selectionOptions', { canSelect: true });
     await page.waitForChanges();
 
@@ -378,7 +386,11 @@ describe('modus-data-table', () => {
   it('should fire selection with correct items when deselecting', async () => {
     const component = await page.find('modus-data-table');
     component.setProperty('columns', [{ display: 'Col1' }]);
-    component.setProperty('data', [{ _id: '2', col1: 'Val2' }, { _id: '3', col1: 'Val3' }, { _id: '1', col1: 'Val1' }]);
+    component.setProperty('data', [
+      { _id: '2', col1: 'Val2' },
+      { _id: '3', col1: 'Val3' },
+      { _id: '1', col1: 'Val1' },
+    ]);
     component.setProperty('selectionOptions', { canSelect: true });
     await page.waitForChanges();
 
@@ -405,7 +417,11 @@ describe('modus-data-table', () => {
   it('should fire selection with correct items when checking checkbox', async () => {
     const component = await page.find('modus-data-table');
     component.setProperty('columns', [{ display: 'Col1' }]);
-    component.setProperty('data', [{ _id: '2', col1: 'Val2' }, { _id: '3', col1: 'Val3' }, { _id: '1', col1: 'Val1' }]);
+    component.setProperty('data', [
+      { _id: '2', col1: 'Val2' },
+      { _id: '3', col1: 'Val3' },
+      { _id: '1', col1: 'Val1' },
+    ]);
     component.setProperty('selectionOptions', { canSelect: true, checkboxSelection: true });
     await page.waitForChanges();
 
@@ -423,7 +439,11 @@ describe('modus-data-table', () => {
   it('should fire selection with correct items when checking multiple checkboxes', async () => {
     const component = await page.find('modus-data-table');
     component.setProperty('columns', [{ display: 'Col1' }]);
-    component.setProperty('data', [{ _id: '2', col1: 'Val2' }, { _id: '3', col1: 'Val3' }, { _id: '1', col1: 'Val1' }]);
+    component.setProperty('data', [
+      { _id: '2', col1: 'Val2' },
+      { _id: '3', col1: 'Val3' },
+      { _id: '1', col1: 'Val1' },
+    ]);
     component.setProperty('selectionOptions', { canSelect: true, checkboxSelection: true });
     await page.waitForChanges();
 
@@ -445,7 +465,11 @@ describe('modus-data-table', () => {
   it('should fire selection with correct items when unchecking checkbox', async () => {
     const component = await page.find('modus-data-table');
     component.setProperty('columns', [{ display: 'Col1' }]);
-    component.setProperty('data', [{ _id: '2', col1: 'Val2' }, { _id: '3', col1: 'Val3' }, { _id: '1', col1: 'Val1' }]);
+    component.setProperty('data', [
+      { _id: '2', col1: 'Val2' },
+      { _id: '3', col1: 'Val3' },
+      { _id: '1', col1: 'Val1' },
+    ]);
     component.setProperty('selectionOptions', { canSelect: true, checkboxSelection: true });
     await page.waitForChanges();
 
@@ -471,7 +495,11 @@ describe('modus-data-table', () => {
   it('should not render checkbox is checkboxSelection is false', async () => {
     const component = await page.find('modus-data-table');
     component.setProperty('columns', [{ display: 'Col1' }]);
-    component.setProperty('data', [{ _id: '2', col1: 'Val2' }, { _id: '3', col1: 'Val3' }, { _id: '1', col1: 'Val1' }]);
+    component.setProperty('data', [
+      { _id: '2', col1: 'Val2' },
+      { _id: '3', col1: 'Val3' },
+      { _id: '1', col1: 'Val1' },
+    ]);
     component.setProperty('selectionOptions', { canSelect: true, checkboxSelection: false });
     await page.waitForChanges();
 
@@ -482,7 +510,11 @@ describe('modus-data-table', () => {
   it('should fire selection when select all is checked', async () => {
     const component = await page.find('modus-data-table');
     component.setProperty('columns', [{ display: 'Col1' }]);
-    component.setProperty('data', [{ _id: '2', col1: 'Val2' }, { _id: '3', col1: 'Val3' }, { _id: '1', col1: 'Val1' }]);
+    component.setProperty('data', [
+      { _id: '2', col1: 'Val2' },
+      { _id: '3', col1: 'Val3' },
+      { _id: '1', col1: 'Val1' },
+    ]);
     component.setProperty('selectionOptions', { canSelect: true, checkboxSelection: true });
     await page.waitForChanges();
 
@@ -500,7 +532,11 @@ describe('modus-data-table', () => {
   it('should fire selection when select all is unchecked', async () => {
     const component = await page.find('modus-data-table');
     component.setProperty('columns', [{ display: 'Col1' }]);
-    component.setProperty('data', [{ _id: '2', col1: 'Val2' }, { _id: '3', col1: 'Val3' }, { _id: '1', col1: 'Val1' }]);
+    component.setProperty('data', [
+      { _id: '2', col1: 'Val2' },
+      { _id: '3', col1: 'Val3' },
+      { _id: '1', col1: 'Val1' },
+    ]);
     component.setProperty('selectionOptions', { canSelect: true, checkboxSelection: true });
     await page.waitForChanges();
 
@@ -521,7 +557,11 @@ describe('modus-data-table', () => {
   it('should update select all checkbox when all rows become checked', async () => {
     const component = await page.find('modus-data-table');
     component.setProperty('columns', [{ display: 'Col1' }]);
-    component.setProperty('data', [{ _id: '2', col1: 'Val2' }, { _id: '3', col1: 'Val3' }, { _id: '1', col1: 'Val1' }]);
+    component.setProperty('data', [
+      { _id: '2', col1: 'Val2' },
+      { _id: '3', col1: 'Val3' },
+      { _id: '1', col1: 'Val1' },
+    ]);
     component.setProperty('selectionOptions', { canSelect: true, checkboxSelection: true });
     await page.waitForChanges();
 
@@ -543,7 +583,11 @@ describe('modus-data-table', () => {
   it('should update select all checkbox when a row becomes unchecked', async () => {
     const component = await page.find('modus-data-table');
     component.setProperty('columns', [{ display: 'Col1' }]);
-    component.setProperty('data', [{ _id: '2', col1: 'Val2' }, { _id: '3', col1: 'Val3' }, { _id: '1', col1: 'Val1' }]);
+    component.setProperty('data', [
+      { _id: '2', col1: 'Val2' },
+      { _id: '3', col1: 'Val3' },
+      { _id: '1', col1: 'Val1' },
+    ]);
     component.setProperty('selectionOptions', { canSelect: true, checkboxSelection: true });
     await page.waitForChanges();
 
@@ -568,7 +612,11 @@ describe('modus-data-table', () => {
   it('should select all rows when select all checkbox is checked', async () => {
     const component = await page.find('modus-data-table');
     component.setProperty('columns', [{ display: 'Col1' }]);
-    component.setProperty('data', [{ _id: '2', col1: 'Val2' }, { _id: '3', col1: 'Val3' }, { _id: '1', col1: 'Val1' }]);
+    component.setProperty('data', [
+      { _id: '2', col1: 'Val2' },
+      { _id: '3', col1: 'Val3' },
+      { _id: '1', col1: 'Val1' },
+    ]);
     component.setProperty('selectionOptions', { canSelect: true, checkboxSelection: true });
     await page.waitForChanges();
 
@@ -585,7 +633,11 @@ describe('modus-data-table', () => {
   it('should unselect all rows when select all checkbox is unchecked', async () => {
     const component = await page.find('modus-data-table');
     component.setProperty('columns', [{ display: 'Col1' }]);
-    component.setProperty('data', [{ _id: '2', col1: 'Val2' }, { _id: '3', col1: 'Val3' }, { _id: '1', col1: 'Val1' }]);
+    component.setProperty('data', [
+      { _id: '2', col1: 'Val2' },
+      { _id: '3', col1: 'Val3' },
+      { _id: '1', col1: 'Val1' },
+    ]);
     component.setProperty('selectionOptions', { canSelect: true, checkboxSelection: true });
     await page.waitForChanges();
 
@@ -608,7 +660,11 @@ describe('modus-data-table', () => {
   it('should fire rowDoubleClick with correct id', async () => {
     const component = await page.find('modus-data-table');
     component.setProperty('columns', [{ display: 'Col1' }]);
-    component.setProperty('data', [{ _id: '2', col1: 'Val2' }, { _id: '3', col1: 'Val3' }, { _id: '1', col1: 'Val1' }]);
+    component.setProperty('data', [
+      { _id: '2', col1: 'Val2' },
+      { _id: '3', col1: 'Val3' },
+      { _id: '1', col1: 'Val1' },
+    ]);
     component.setProperty('selectionOptions', { canSelect: true });
     await page.waitForChanges();
 
@@ -672,7 +728,7 @@ describe('modus-data-table', () => {
     component.setProperty('displayOptions', {
       borderless: false,
       cellBorderless: false,
-      rowStripe: true
+      rowStripe: true,
     });
     await page.waitForChanges();
     borderless = await page.find('modus-data-table >>> .borderless');
@@ -690,7 +746,7 @@ describe('modus-data-table', () => {
     component.setProperty('data', [
       { link: { display: 'Link C', url: 'https://example.com', _type: 'link' } },
       { link: { display: 'Link A', url: 'https://example.com', _type: 'link' } },
-      { link: { display: 'Link B', url: 'https://example.com', _type: 'link' } }
+      { link: { display: 'Link B', url: 'https://example.com', _type: 'link' } },
     ]);
 
     await page.waitForChanges();
@@ -736,7 +792,7 @@ describe('modus-data-table', () => {
     component.setProperty('data', [
       { badge: { text: 'Badge C', _type: 'badge' } },
       { badge: { text: 'Badge A', _type: 'badge' } },
-      { badge: { text: 'Badge B', _type: 'badge' } }
+      { badge: { text: 'Badge B', _type: 'badge' } },
     ]);
 
     await page.waitForChanges();
@@ -779,13 +835,15 @@ describe('modus-data-table', () => {
     const component = await page.find('modus-data-table');
     component.setProperty('columns', ['Name', 'Age']);
     component.setProperty('data', [{ name: 'Josh', age: 25 }]);
-    component.setProperty('rowActions', [{
-      _id: 'delete',
-      display: {
-        text: 'Delete',
-        icon: 'delete'
-      }
-    }]);
+    component.setProperty('rowActions', [
+      {
+        _id: 'delete',
+        display: {
+          text: 'Delete',
+          icon: 'delete',
+        },
+      },
+    ]);
     await page.waitForChanges();
 
     const rowAction = await page.find('modus-data-table >>> .action-item');
@@ -796,13 +854,15 @@ describe('modus-data-table', () => {
     const component = await page.find('modus-data-table');
     component.setProperty('columns', ['Name', 'Age']);
     component.setProperty('data', [{ _id: 'josh', name: 'Josh', age: 25 }]);
-    component.setProperty('rowActions', [{
-      _id: 'delete',
-      display: {
-        text: 'Delete',
-        icon: 'delete'
-      }
-    }]);
+    component.setProperty('rowActions', [
+      {
+        _id: 'delete',
+        display: {
+          text: 'Delete',
+          icon: 'delete',
+        },
+      },
+    ]);
     await page.waitForChanges();
 
     const rowActionClick = await page.spyOnEvent('rowActionClick');

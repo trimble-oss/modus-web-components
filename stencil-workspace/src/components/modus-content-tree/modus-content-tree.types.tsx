@@ -15,21 +15,11 @@ export type TreeViewItemOptions = {
   onChildTreeItemsChange?: (item: HTMLElement) => string[];
   onItemAdd?: (ele: HTMLElement) => void;
   onItemDelete?: (itemId: string) => void;
-  onItemSelection?: (
-    itemId: string,
-    event?: KeyboardEvent | MouseEvent
-  ) => void;
+  onItemSelection?: (itemId: string, event?: KeyboardEvent | MouseEvent) => void;
   onItemExpandToggle?: (itemId: string) => void;
   onItemFocus?: (itemId: string) => void;
-  onItemDrag?: (
-    itemId: string,
-    dragContent: HTMLElement,
-    e: MouseEvent
-  ) => void;
-  onItemUpdate?: (
-    newValue: TreeViewItemInfo,
-    oldValue?: TreeViewItemInfo
-  ) => void;
+  onItemDrag?: (itemId: string, dragContent: HTMLElement, e: MouseEvent) => void;
+  onItemUpdate?: (newValue: TreeViewItemInfo, oldValue?: TreeViewItemInfo) => void;
   size?: string;
 };
 

@@ -7,7 +7,9 @@ interface ModusDataTableCellLinkProps {
   onLinkClick: (link: ModusDataTableCellLink) => void;
 }
 
-export const ModusDataTableCellLinkPart: FunctionalComponent<ModusDataTableCellLinkProps> = (props: ModusDataTableCellLinkProps) => {
+export const ModusDataTableCellLinkPart: FunctionalComponent<ModusDataTableCellLinkProps> = (
+  props: ModusDataTableCellLinkProps
+) => {
   return (
     <div class="cell-link" onClick={() => props.onLinkClick(props.link)}>
       {props.link.display}

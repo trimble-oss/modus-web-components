@@ -12,10 +12,7 @@ import {
 import { ModusSideNavigationItemCustomEvent as ModusSideNavItemEvent } from '../../components';
 import { IconChevronLeftThick } from '../icons/icon-chevron-left-thick';
 import { ModusSideNavigationTree } from './modus-side-navigation-tree';
-import {
-  ModusSideNavigationItemInfo,
-  ModusSideNavItemLevelInfo,
-} from './modus-side-navigation.models';
+import { ModusSideNavigationItemInfo, ModusSideNavItemLevelInfo } from './modus-side-navigation.models';
 
 @Component({
   tag: 'modus-side-navigation',
@@ -74,11 +71,7 @@ export class ModusSideNavigation {
 
   @Listen('click', { target: 'document' })
   documentClickHandler(event: MouseEvent): void {
-    if (
-      this.element.contains(event.target as HTMLElement) ||
-      event.defaultPrevented
-    )
-      return;
+    if (this.element.contains(event.target as HTMLElement) || event.defaultPrevented) return;
 
     // Collapse when clicked outside
     this.expanded = false;
@@ -86,8 +79,7 @@ export class ModusSideNavigation {
 
   getNextLevel(id: string) {
     if (this._navigationLevels?.length) {
-      const existingLevelItems =
-        this._navigationLevels[this._navigationLevels.length - 1].children;
+      const existingLevelItems = this._navigationLevels[this._navigationLevels.length - 1].children;
 
       return existingLevelItems?.find((i) => i.id === id);
     }
@@ -126,8 +118,7 @@ export class ModusSideNavigation {
   }
 
   gotoPreviousLevel(): boolean {
-    if (!this._navigationLevels?.length || this._navigationLevels?.length === 1)
-      return false;
+    if (!this._navigationLevels?.length || this._navigationLevels?.length === 1) return false;
     const levels = [...this._navigationLevels];
 
     // Animation for sliding levels
@@ -159,8 +150,7 @@ export class ModusSideNavigation {
   @Listen('_sideNavItemAdded')
   handleItemAdded(event: ModusSideNavItemEvent<HTMLElement>) {
     if (event.detail?.id) {
-      this._children[event.detail.id] =
-        event.detail as HTMLModusSideNavigationItemElement;
+      this._children[event.detail.id] = event.detail as HTMLModusSideNavigationItemElement;
       this._children[event.detail.id].expanded = this.expanded;
     }
     this.itemChanged(event);
@@ -180,9 +170,7 @@ export class ModusSideNavigation {
   }
 
   @Listen('sideNavItemClicked')
-  handleItemClick(
-    event: ModusSideNavItemEvent<{ id: string; selected: boolean }>
-  ) {
+  handleItemClick(event: ModusSideNavItemEvent<{ id: string; selected: boolean }>) {
     if (!this.gotoNextLevel(event.detail.id)) {
       if (this._itemSelected) {
         this._children[this._itemSelected].selected = false;
@@ -210,9 +198,7 @@ export class ModusSideNavigation {
       this.sideNavExpand?.emit(this.expanded);
     };
 
-    const levelHeading = this._levelsContainerRef?.querySelector(
-      '.side-nav-level.center .level-heading'
-    ) as HTMLElement;
+    const levelHeading = this._levelsContainerRef?.querySelector('.side-nav-level.center .level-heading') as HTMLElement;
 
     // Trigger Animation if the current level has a heading
     if (levelHeading) {
@@ -234,9 +220,7 @@ export class ModusSideNavigation {
         adjustTargetContent();
       } else {
         toggleNavItems();
-        levelHeading.style.height = `${
-          levelHeading.getBoundingClientRect().height
-        }px`;
+        levelHeading.style.height = `${levelHeading.getBoundingClientRect().height}px`;
         this.reflow(levelHeading);
         levelHeading.classList.add('collapsing');
 
@@ -299,17 +283,15 @@ export class ModusSideNavigation {
         break;
       case 'ARROWDOWN':
         // eslint-disable-next-line no-case-declarations
-        const nextItem: HTMLModusSideNavigationItemElement = this._children[
-          this._itemInFocus
-        ]?.nextElementSibling as HTMLModusSideNavigationItemElement;
+        const nextItem: HTMLModusSideNavigationItemElement = this._children[this._itemInFocus]
+          ?.nextElementSibling as HTMLModusSideNavigationItemElement;
 
         nextItem?.focusItem();
         preventDefault = true;
         break;
       case 'ARROWUP':
         // eslint-disable-next-line no-case-declarations
-        const prevItem = this._children[this._itemInFocus]
-          ?.previousElementSibling as HTMLModusSideNavigationItemElement;
+        const prevItem = this._children[this._itemInFocus]?.previousElementSibling as HTMLModusSideNavigationItemElement;
 
         prevItem?.focusItem();
         preventDefault = true;
@@ -367,8 +349,7 @@ export class ModusSideNavigation {
   setTargetContentMargin(isExpanded: boolean, mode: string, target: string) {
     const content = document.querySelector(target) as HTMLElement;
     if (content) {
-      content.style.marginLeft =
-        isExpanded && mode === 'push' ? this.maxWidth : this._minWidth;
+      content.style.marginLeft = isExpanded && mode === 'push' ? this.maxWidth : this._minWidth;
     }
   }
 
@@ -408,10 +389,7 @@ export class ModusSideNavigation {
                       : {})}>
                     <p>
                       <IconChevronLeftThick size="10" />
-                      <a
-                        tabIndex={0}
-                        onClick={(e) => this.handleBackClick(e)}
-                        onKeyDown={(e) => this.handleBackClick(e)}>
+                      <a tabIndex={0} onClick={(e) => this.handleBackClick(e)} onKeyDown={(e) => this.handleBackClick(e)}>
                         Back
                       </a>
                     </p>
@@ -424,9 +402,7 @@ export class ModusSideNavigation {
                     <ModusSideNavigationTree
                       data={level.children}
                       itemSelected={this._itemSelected}
-                      tabIndex={
-                        level.levelPosition === 'center' ? undefined : -1
-                      }></ModusSideNavigationTree>
+                      tabIndex={level.levelPosition === 'center' ? undefined : -1}></ModusSideNavigationTree>
                   </ul>
                 </div>
               </div>

@@ -97,10 +97,21 @@ export class ModusChip {
     `;
 
     return (
-      <div aria-disabled={this.disabled ? 'true' : undefined} aria-label={this.ariaLabel} class={chipClass} onClick={this.disabled ? null : (event) => this.onChipClick(event)} tabIndex={0}>
-        {this.imageUrl ? <img src={this.imageUrl} alt="" /> : this.showCheckmark ? <IconCheck size={'24'}></IconCheck> : null}
+      <div
+        aria-disabled={this.disabled ? 'true' : undefined}
+        aria-label={this.ariaLabel}
+        class={chipClass}
+        onClick={this.disabled ? null : (event) => this.onChipClick(event)}
+        tabIndex={0}>
+        {this.imageUrl ? (
+          <img src={this.imageUrl} alt="" />
+        ) : this.showCheckmark ? (
+          <IconCheck size={'24'}></IconCheck>
+        ) : null}
         <span>{this.value}</span>
-        {this.showClose ? <IconRemove onClick={this.disabled ? null : (event) => this.onCloseClick(event)} size={'24'}></IconRemove> : null}
+        {this.showClose ? (
+          <IconRemove onClick={this.disabled ? null : (event) => this.onCloseClick(event)} size={'24'}></IconRemove>
+        ) : null}
       </div>
     );
   }

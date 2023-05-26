@@ -59,42 +59,60 @@ describe('modus-autocomplete', () => {
     `);
   });
 
-  it('should get the correct class by size', async() => {
+  it('should get the correct class by size', async () => {
     const modusAutocomplete = new ModusAutocomplete();
     expect(modusAutocomplete.classBySize.get('medium')).toEqual('medium');
     expect(modusAutocomplete.classBySize.get('large')).toEqual('large');
   });
 
-  it('should convert options to ModusAutocompleteOption[]', async() => {
+  it('should convert options to ModusAutocompleteOption[]', async () => {
     const modusAutocomplete = new ModusAutocomplete();
     modusAutocomplete.options = ['Option 1', 'Option 2'];
     modusAutocomplete.convertOptions();
-    expect(modusAutocomplete.options).toEqual([{ id: 'Option 1', value: 'Option 1' }, { id: 'Option 2', value: 'Option 2' }]);
+    expect(modusAutocomplete.options).toEqual([
+      { id: 'Option 1', value: 'Option 1' },
+      { id: 'Option 2', value: 'Option 2' },
+    ]);
   });
 
-  it('should accept ModusAutocompleteOption[] as options before conversion', async() => {
+  it('should accept ModusAutocompleteOption[] as options before conversion', async () => {
     const modusAutocomplete = new ModusAutocomplete();
-    modusAutocomplete.options = [{ id: 'Option 1', value: 'Option 1' }, { id: 'Option 2', value: 'Option 2' }];
+    modusAutocomplete.options = [
+      { id: 'Option 1', value: 'Option 1' },
+      { id: 'Option 2', value: 'Option 2' },
+    ];
     modusAutocomplete.convertOptions();
-    expect(modusAutocomplete.options).toEqual([{ id: 'Option 1', value: 'Option 1' }, { id: 'Option 2', value: 'Option 2' }]);
+    expect(modusAutocomplete.options).toEqual([
+      { id: 'Option 1', value: 'Option 1' },
+      { id: 'Option 2', value: 'Option 2' },
+    ]);
   });
 
-  it('should update visible options on search change', async() => {
+  it('should update visible options on search change', async () => {
     const modusAutocomplete = new ModusAutocomplete();
-    modusAutocomplete.options = [{ id: 'Option 1', value: 'Option 1' }, { id: 'Option 2', value: 'Option 2' }];
+    modusAutocomplete.options = [
+      { id: 'Option 1', value: 'Option 1' },
+      { id: 'Option 2', value: 'Option 2' },
+    ];
     modusAutocomplete.handleSearchChange('Option 1');
     expect(modusAutocomplete.visibleOptions).toEqual([{ id: 'Option 1', value: 'Option 1' }]);
   });
 
-  it('should show all options on empty search', async() => {
+  it('should show all options on empty search', async () => {
     const modusAutocomplete = new ModusAutocomplete();
-    modusAutocomplete.options = [{ id: 'Option 1', value: 'Option 1' }, { id: 'Option 2', value: 'Option 2' }];
+    modusAutocomplete.options = [
+      { id: 'Option 1', value: 'Option 1' },
+      { id: 'Option 2', value: 'Option 2' },
+    ];
     modusAutocomplete.visibleOptions = [{ id: 'Option 1', value: 'Option 1' }];
     modusAutocomplete.handleSearchChange('');
-    expect(modusAutocomplete.visibleOptions).toEqual([{ id: 'Option 1', value: 'Option 1' }, { id: 'Option 2', value: 'Option 2' }]);
+    expect(modusAutocomplete.visibleOptions).toEqual([
+      { id: 'Option 1', value: 'Option 1' },
+      { id: 'Option 2', value: 'Option 2' },
+    ]);
   });
 
-  it('should display no results when there are no regular or custom results', async() => {
+  it('should display no results when there are no regular or custom results', async () => {
     const modusAutocomplete = new ModusAutocomplete();
     modusAutocomplete.showNoResultsFoundMessage = true;
     modusAutocomplete.hasFocus = true;
@@ -105,7 +123,7 @@ describe('modus-autocomplete', () => {
     expect(modusAutocomplete.displayNoResults()).toEqual(true);
   });
 
-  it('should display options', async() => {
+  it('should display options', async () => {
     const modusAutocomplete = new ModusAutocomplete();
     modusAutocomplete.disabled = false;
     modusAutocomplete.hasFocus = true;

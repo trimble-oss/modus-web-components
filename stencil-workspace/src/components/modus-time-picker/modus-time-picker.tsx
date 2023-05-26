@@ -149,19 +149,13 @@ export class ModusTimePicker {
     this._isEditing = true;
 
     const inputString = (event.currentTarget as HTMLInputElement)?.value;
-    this._timeDisplay = this._formatter.autoFormatTimeInput(
-      inputString,
-      this.autoFormat
-    );
+    this._timeDisplay = this._formatter.autoFormatTimeInput(inputString, this.autoFormat);
     this.value = this._formatter.parseTimeDisplay(this._timeDisplay);
   }
 
   handleInputKeyPress(event: KeyboardEvent): boolean {
     const key = event.key;
-    const keyIsValid = this._formatter.keyIsValidTimeCharacter(
-      key,
-      this.allowedCharsRegex
-    );
+    const keyIsValid = this._formatter.keyIsValidTimeCharacter(key, this.allowedCharsRegex);
     if (!keyIsValid) {
       event.preventDefault();
     }
@@ -247,22 +241,18 @@ export class ModusTimePicker {
   render() {
     const ariaControls = this.getAriaControls();
     return (
-      <div
-        {...ariaControls}
-        class={{ 'modus-time-picker': true, disabled: this.disabled }}>
+      <div {...ariaControls} class={{ 'modus-time-picker': true, disabled: this.disabled }}>
         <div class="time-input-wrapper">
           {this.label || this.required ? (
             <div class={'label-container'}>
-              {this.label ? (
-                <label htmlFor="time-input">{this.label}</label>
-              ) : null}
+              {this.label ? <label htmlFor="time-input">{this.label}</label> : null}
               {this.required ? <span class="required">*</span> : null}
             </div>
           ) : null}
           <div
-            class={`input-container ${
-              this.errorText ? 'error' : this.validText ? 'valid' : ''
-            } ${this.classBySize.get(this.size)}`}>
+            class={`input-container ${this.errorText ? 'error' : this.validText ? 'valid' : ''} ${this.classBySize.get(
+              this.size
+            )}`}>
             {this.renderTimeInput()}
           </div>
           {this.renderSubText()}

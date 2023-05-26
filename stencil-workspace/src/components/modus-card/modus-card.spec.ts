@@ -35,18 +35,17 @@ describe('modus-card', () => {
     `);
   });
 
-    it('should have flag "showCardBorder" set on true as default', async () => {
-      const modusCard = new ModusCard();
-      const flag = modusCard.showCardBorder;
+  it('should have flag "showCardBorder" set on true as default', async () => {
+    const modusCard = new ModusCard();
+    const flag = modusCard.showCardBorder;
 
-      expect(flag.toString()).toEqual('true');
-    });
-  
-   it('should have flag "showShadowOnHover" set on true as default', async () => {
-     const modusCard = new ModusCard();
-     const flag = modusCard.showShadowOnHover;
+    expect(flag.toString()).toEqual('true');
+  });
 
-     expect(flag.toString()).toEqual('true');
-   });
-  
+  it('should have flag "showShadowOnHover" set on true as default', async () => {
+    const modusCard = new ModusCard();
+    const flag = modusCard.showShadowOnHover;
+
+    expect(flag.toString()).toEqual('true');
+  });
 });

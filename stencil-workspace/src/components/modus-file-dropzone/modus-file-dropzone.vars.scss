@@ -11,7 +11,10 @@ $modus-file-upload-dropzone-label: var(--modus-body-color, $col_trimble_gray) !d
 
 // Highlight
 $modus-file-upload-dropzone-highlight-bg: var(--modus-file-upload-dropzone-highlight-bg, #dcedf9) !default;
-$modus-file-upload-dropzone-highlight-border-color: var(--modus-file-upload-dropzone-highlight-border-color, #0063a3) !default;
+$modus-file-upload-dropzone-highlight-border-color: var(
+  --modus-file-upload-dropzone-highlight-border-color,
+  #0063a3
+) !default;
 $modus-file-upload-dropzone-highlight-color: var(--modus-file-upload-dropzone-highlight-color, #0063a3) !default;
 
 // Error

@@ -8,9 +8,7 @@ export interface ModusSideNavigationItemInfo {
   selected?: boolean;
   options?: Map<string, string>;
   children?: ModusSideNavigationItemInfo[];
-  onSideNavItemClicked?: (
-    event: ModusSideNavigationItemCustomEvent<{ id: string; selected: boolean }>
-  ) => void;
+  onSideNavItemClicked?: (event: ModusSideNavigationItemCustomEvent<{ id: string; selected: boolean }>) => void;
 }
 
 export type ModusSideNavItemLevelInfo = ModusSideNavigationItemInfo & {

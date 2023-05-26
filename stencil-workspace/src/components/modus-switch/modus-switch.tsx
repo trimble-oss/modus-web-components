@@ -43,7 +43,9 @@ export class ModusSwitch {
   }
 
   handleSwitchClick(): void {
-    if (this.disabled) { return; }
+    if (this.disabled) {
+      return;
+    }
 
     this.updateChecked();
     this.switchClick.emit(this.checked);
@@ -61,7 +63,7 @@ export class ModusSwitch {
     return (
       <div class={containerClassName} onClick={() => this.handleSwitchClick()} tabIndex={0}>
         <div class={switchClassName}>
-            <span class="slider"></span>
+          <span class="slider"></span>
         </div>
         <input
           aria-checked={this.checked}
@@ -69,10 +71,9 @@ export class ModusSwitch {
           aria-label={this.ariaLabel}
           checked={this.checked}
           disabled={this.disabled}
-          ref={(el) => this.checkboxInput = el as HTMLInputElement}
+          ref={(el) => (this.checkboxInput = el as HTMLInputElement)}
           role="switch"
-          type="checkbox">
-        </input>
+          type="checkbox"></input>
         {this.label ? <label>{this.label}</label> : null}
       </div>
     );

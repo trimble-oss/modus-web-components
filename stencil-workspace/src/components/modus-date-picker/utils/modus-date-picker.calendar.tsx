@@ -19,10 +19,7 @@ export default class ModusDatePickerCalendar {
 
   constructor(calendar?: ModusDatePickerCalendar) {
     if (calendar) {
-      this.gotoDate(
-        calendar.currentDate.getFullYear(),
-        calendar.currentDate.getMonth()
-      );
+      this.gotoDate(calendar.currentDate.getFullYear(), calendar.currentDate.getMonth());
     } else {
       const today = new Date();
       this.gotoDate(today.getFullYear(), today.getMonth());
@@ -42,18 +39,12 @@ export default class ModusDatePickerCalendar {
   }
 
   addMonthOffset(offset: number): ModusDatePickerCalendar {
-    this.gotoDate(
-      this.currentDate.getFullYear(),
-      this.currentDate.getMonth() + offset
-    );
+    this.gotoDate(this.currentDate.getFullYear(), this.currentDate.getMonth() + offset);
     return this;
   }
 
   addYearOffset(offset: number): ModusDatePickerCalendar {
-    this.gotoDate(
-      this.currentDate.getFullYear() + offset,
-      this.currentDate.getMonth()
-    );
+    this.gotoDate(this.currentDate.getFullYear() + offset, this.currentDate.getMonth());
     return this;
   }
 

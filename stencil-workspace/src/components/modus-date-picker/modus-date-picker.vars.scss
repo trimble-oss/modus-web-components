@@ -1,45 +1,15 @@
 $modus-input-label-color: var(--modus-input-label-color, #464b52) !default;
-$modus-date-picker-calendar-header-bg: var(
-  --modus-date-picker-calendar-header-bg,
-  #0063a3
-) !default;
-$modus-date-picker-calendar-header-color: var(
-  --modus-date-picker-calendar-header-color,
-  #fff
-) !default;
-$modus-date-picker-calendar-body-bg: var(
-  --modus-date-picker-calendar-body-bg,
-  #fff
-) !default;
-$modus-date-picker-calendar-day-week-color: var(
-  --modus-date-picker-calendar-day-week-color,
-  #363545
-) !default;
-$modus-date-picker-calendar-day-color: var(
-  --modus-date-picker-calendar-day-color,
-  #252a2e
-) !default;
-$modus-date-picker-calendar-day-hover-bg: var(
-  --modus-date-picker-calendar-day-hover-bg,
-  #e0e1e9
-) !default;
+$modus-date-picker-calendar-header-bg: var(--modus-date-picker-calendar-header-bg, #0063a3) !default;
+$modus-date-picker-calendar-header-color: var(--modus-date-picker-calendar-header-color, #fff) !default;
+$modus-date-picker-calendar-body-bg: var(--modus-date-picker-calendar-body-bg, #fff) !default;
+$modus-date-picker-calendar-day-week-color: var(--modus-date-picker-calendar-day-week-color, #363545) !default;
+$modus-date-picker-calendar-day-color: var(--modus-date-picker-calendar-day-color, #252a2e) !default;
+$modus-date-picker-calendar-day-hover-bg: var(--modus-date-picker-calendar-day-hover-bg, #e0e1e9) !default;
 $modus-date-picker-calendar-day-current-border-color: var(
   --modus-date-picker-calendar-day-current-border-color,
   #217cbb
 ) !default;
-$modus-date-picker-calendar-day-selected-bg: var(
-  --modus-date-picker-calendar-day-selected-bg,
-  #217cbb
-) !default;
-$modus-date-picker-calendar-day-selected-color: var(
-  --modus-date-picker-calendar-day-selected-color,
-  #fff
-) !default;
-$modus-date-picker-calendar-day-selected-range-bg: var(
-  --modus-date-picker-calendar-day-selected-range-bg,
-  #dcedf9
-) !default;
-$modus-date-picker-calendar-day-disabled-opacity: var(
-  --modus-date-picker-calendar-day-disabled-opacity,
-  0.3
-) !default;
+$modus-date-picker-calendar-day-selected-bg: var(--modus-date-picker-calendar-day-selected-bg, #217cbb) !default;
+$modus-date-picker-calendar-day-selected-color: var(--modus-date-picker-calendar-day-selected-color, #fff) !default;
+$modus-date-picker-calendar-day-selected-range-bg: var(--modus-date-picker-calendar-day-selected-range-bg, #dcedf9) !default;
+$modus-date-picker-calendar-day-disabled-opacity: var(--modus-date-picker-calendar-day-disabled-opacity, 0.3) !default;

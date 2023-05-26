@@ -36,14 +36,7 @@ export class ModusTextInput {
   @Prop() includePasswordTextToggle = true;
 
   /** (optional) The input's inputmode. */
-  @Prop() inputmode:
-    | 'decimal'
-    | 'email'
-    | 'numeric'
-    | 'search'
-    | 'tel'
-    | 'text'
-    | 'url';
+  @Prop() inputmode: 'decimal' | 'email' | 'numeric' | 'search' | 'tel' | 'text' | 'url';
 
   /** (optional) The input's label. */
   @Prop() label: string;
@@ -113,8 +106,7 @@ export class ModusTextInput {
       this.textInput.type = 'password';
       this.buttonTogglePassword.setAttribute(
         'aria-label',
-        'Show password as plain text. ' +
-          'Warning: this will display your password on the screen.'
+        'Show password as plain text. ' + 'Warning: this will display your password on the screen.'
       );
     }
   }
@@ -122,13 +114,8 @@ export class ModusTextInput {
   render(): unknown {
     const className = `modus-text-input ${this.disabled ? 'disabled' : ''}`;
     const isPassword = this.type === 'password';
-    const showPasswordToggle = !!(
-      this.includePasswordTextToggle &&
-      isPassword &&
-      this.value?.length
-    );
-    const showClearIcon =
-      (isPassword && !this.includePasswordTextToggle) || !isPassword;
+    const showPasswordToggle = !!(this.includePasswordTextToggle && isPassword && this.value?.length);
+    const showClearIcon = (isPassword && !this.includePasswordTextToggle) || !isPassword;
 
     return (
       <div
@@ -145,16 +132,14 @@ export class ModusTextInput {
           </div>
         ) : null}
         <div
-          class={`input-container ${
-            this.errorText ? 'error' : this.validText ? 'valid' : ''
-          } ${this.classBySize.get(this.size)}`}
+          class={`input-container ${this.errorText ? 'error' : this.validText ? 'valid' : ''} ${this.classBySize.get(
+            this.size
+          )}`}
           onClick={() => this.textInput.focus()}>
           {this.includeSearchIcon ? <IconSearch size="16" /> : null}
           <input
             aria-placeholder={this.placeholder}
-            class={`${this.includeSearchIcon ? 'has-left-icon' : ''} ${
-              this.clearable ? 'has-right-icon' : ''
-            }`}
+            class={`${this.includeSearchIcon ? 'has-left-icon' : ''} ${this.clearable ? 'has-right-icon' : ''}`}
             disabled={this.disabled}
             inputmode={this.inputmode}
             maxlength={this.maxLength}

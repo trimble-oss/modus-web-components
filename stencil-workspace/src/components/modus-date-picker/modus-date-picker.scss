@@ -132,21 +132,18 @@
         text-align: center;
 
         &:hover {
-          background: $modus-date-picker-calendar-day-hover-bg 0% 0% no-repeat
-            padding-box !important;
+          background: $modus-date-picker-calendar-day-hover-bg 0% 0% no-repeat padding-box !important;
           border-radius: 16px;
         }
 
         &.current-day {
-          background: $modus-date-picker-calendar-body-bg 0% 0% no-repeat
-            padding-box;
+          background: $modus-date-picker-calendar-body-bg 0% 0% no-repeat padding-box;
           border: 2px solid $modus-date-picker-calendar-day-current-border-color;
           border-radius: 16px;
         }
 
         &.selected {
-          background: $modus-date-picker-calendar-day-selected-bg 0% 0%
-            no-repeat padding-box;
+          background: $modus-date-picker-calendar-day-selected-bg 0% 0% no-repeat padding-box;
           border-radius: 16px;
           color: $modus-date-picker-calendar-day-selected-color;
 
@@ -174,13 +171,11 @@
         }
 
         &.range-selected {
-          background: $modus-date-picker-calendar-day-selected-range-bg 0% 0%
-            no-repeat padding-box;
+          background: $modus-date-picker-calendar-day-selected-range-bg 0% 0% no-repeat padding-box;
 
           &:hover::before,
           &.current-day::before {
-            background: $modus-date-picker-calendar-day-selected-range-bg 0% 0%
-              no-repeat padding-box;
+            background: $modus-date-picker-calendar-day-selected-range-bg 0% 0% no-repeat padding-box;
             content: '';
             height: 32px;
             position: absolute;

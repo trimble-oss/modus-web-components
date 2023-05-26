@@ -8,12 +8,7 @@ import {
   State,
   Watch,
 } from '@stencil/core';
-import {
-  TreeViewItemOptions,
-  TreeViewItemInfo,
-  TreeViewItemDragState,
-  Position,
-} from '../modus-content-tree.types';
+import { TreeViewItemOptions, TreeViewItemInfo, TreeViewItemDragState, Position } from '../modus-content-tree.types';
 import { ModusContentTreeDragItem } from '../modus-content-tree-drag-item';
 
 @Component({
@@ -73,21 +68,14 @@ export class ModusTreeView {
 
   @Listen('click', { target: 'document' })
   handleDocumentClick(event: MouseEvent): void {
-    if (
-      this.element.contains(event.target as HTMLElement) ||
-      event.defaultPrevented
-    )
-      return;
+    if (this.element.contains(event.target as HTMLElement) || event.defaultPrevented) return;
 
     // Clear focus
     this.focusItem = null;
   }
 
   @Watch('itemDragState')
-  handleItemDragState(
-    newValue: TreeViewItemDragState,
-    oldValue: TreeViewItemDragState
-  ) {
+  handleItemDragState(newValue: TreeViewItemDragState, oldValue: TreeViewItemDragState) {
     if (oldValue && newValue && oldValue.itemId === newValue.itemId) return;
     if (newValue) {
       document.addEventListener('mousemove', this.onMouseMove);
@@ -98,11 +86,7 @@ export class ModusTreeView {
     }
   }
 
-  handleItemDragStart(
-    itemId: string,
-    dragContent: HTMLElement,
-    event: MouseEvent
-  ) {
+  handleItemDragStart(itemId: string, dragContent: HTMLElement, event: MouseEvent) {
     const { clientX, clientY, currentTarget } = event;
     const parent = (currentTarget as HTMLElement)?.parentElement;
     this.clearItemDropState();
@@ -160,11 +144,9 @@ export class ModusTreeView {
     if (dropItemId && validTarget && dropItemId !== targetId) {
       const { parentId, element } = this.items[targetId];
       if (element) {
-        const insertAtParent = (this.items[parentId]?.element ||
-          this.element) as HTMLElement;
+        const insertAtParent = (this.items[parentId]?.element || this.element) as HTMLElement;
         const insertBefore = element as unknown as HTMLElement;
-        const insertElement = this.items[this.itemDragState.itemId]
-          .element as unknown as HTMLElement;
+        const insertElement = this.items[this.itemDragState.itemId].element as unknown as HTMLElement;
 
         insertAtParent.insertBefore(insertElement, insertBefore);
       }
@@ -194,9 +176,7 @@ export class ModusTreeView {
   }
 
   handleTreeSlotChange() {
-    const childrenAtRoot = Array.from(
-      this.element.children as unknown as HTMLModusTreeViewItemElement[]
-    )
+    const childrenAtRoot = Array.from(this.element.children as unknown as HTMLModusTreeViewItemElement[])
       .map((i) => i.nodeId)
       .filter((i) => i);
 
@@ -229,11 +209,8 @@ export class ModusTreeView {
     const treeItem = ele as unknown as HTMLModusTreeViewItemElement;
     const parent = ele.parentNode;
     if (treeItem.nodeId) {
-      const { children: siblings, nodeId: parentId } =
-        parent as unknown as HTMLModusTreeViewItemElement;
-      const index = Array.from(
-        siblings as unknown as HTMLModusTreeViewItemElement[]
-      )
+      const { children: siblings, nodeId: parentId } = parent as unknown as HTMLModusTreeViewItemElement;
+      const index = Array.from(siblings as unknown as HTMLModusTreeViewItemElement[])
         .filter((i) => i.nodeId)
         .indexOf(treeItem);
       const level = this.getLevel(parentId) + 1;
@@ -275,8 +252,7 @@ export class ModusTreeView {
 
       // remove from API
       const removeFromAPI = (array) => {
-        if (array.find((i) => deletedItems.includes(i)))
-          return array.filter((i) => !deletedItems.includes(i));
+        if (array.find((i) => deletedItems.includes(i))) return array.filter((i) => !deletedItems.includes(i));
         return array;
       };
       this.checkedItems = removeFromAPI(this.checkedItems);
@@ -295,10 +271,7 @@ export class ModusTreeView {
       .map((c) => this.items[c])
       .sort((a, b) => a.index - b.index)
       .reduce((r, c) => {
-        r.push(
-          c.nodeId,
-          ...(recursive ? this.getChildrenIds(c.nodeId, recursive) : [])
-        );
+        r.push(c.nodeId, ...(recursive ? this.getChildrenIds(c.nodeId, recursive) : []));
         return r;
       }, []);
   }
@@ -379,10 +352,7 @@ export class ModusTreeView {
 
     // get previous item, if expanded get its last child
     let curr = siblings[index - 1];
-    while (
-      this.isItemExpanded(curr) &&
-      this.getNavigableChildrenIds(curr).length > 0
-    ) {
+    while (this.isItemExpanded(curr) && this.getNavigableChildrenIds(curr).length > 0) {
       curr = this.getNavigableChildrenIds(curr).pop();
     }
 
@@ -407,8 +377,7 @@ export class ModusTreeView {
       showSelectionIndicator: (id) => this.showSelectionIndicator(id),
 
       onItemSelection: (id, e) => this.handleItemSelection(id, e),
-      onCheckboxSelection: (id, syncOnly) =>
-        this.handleCheckboxSelection(id, syncOnly),
+      onCheckboxSelection: (id, syncOnly) => this.handleCheckboxSelection(id, syncOnly),
       onItemExpandToggle: (id) => this.handleItemExpand(id),
       onItemFocus: (id) => this.handleItemFocus(id),
       onItemAdd: (ele) => this.addItem(ele),
@@ -442,10 +411,7 @@ export class ModusTreeView {
 
         if (currentChecked) {
           newCheckedItems.push(currentId, ...descendants);
-        } else
-          newCheckedItems = newCheckedItems
-            .filter((i) => i !== currentId)
-            .filter((i) => !descendants.includes(i));
+        } else newCheckedItems = newCheckedItems.filter((i) => i !== currentId).filter((i) => !descendants.includes(i));
 
         itemsToSync.push(...descendants);
       }
@@ -498,15 +464,9 @@ export class ModusTreeView {
     current.focusItem();
   }
 
-  handleItemSelection(
-    itemId: string,
-    event?: KeyboardEvent | MouseEvent
-  ): void {
+  handleItemSelection(itemId: string, event?: KeyboardEvent | MouseEvent): void {
     if (this.items[itemId].disabled) return;
-    const allowMultipleSelection =
-      this.multiSelection &&
-      event &&
-      (event.shiftKey || event.ctrlKey || event.metaKey);
+    const allowMultipleSelection = this.multiSelection && event && (event.shiftKey || event.ctrlKey || event.metaKey);
     const isSelected = !this.isItemSelected(itemId);
 
     const oldItems = [...this.selectedItems];
@@ -547,19 +507,12 @@ export class ModusTreeView {
         break;
       case 'ARROWDOWN':
         // eslint-disable-next-line no-case-declarations
-        const nextItem = this.focusItem
-          ? this.getNextNavigableItem(this.focusItem)
-          : this.getFirstItem();
+        const nextItem = this.focusItem ? this.getNextNavigableItem(this.focusItem) : this.getFirstItem();
 
         // Multi-Selection
-        if (
-          this.multiSelection &&
-          event.shiftKey &&
-          this.isItemSelected(this.focusItem)
-        ) {
+        if (this.multiSelection && event.shiftKey && this.isItemSelected(this.focusItem)) {
           // deselect if going back to the selected node
-          if (this.isItemSelected(nextItem))
-            this.handleItemSelection(this.focusItem, event);
+          if (this.isItemSelected(nextItem)) this.handleItemSelection(this.focusItem, event);
           else this.handleItemSelection(nextItem, event);
         }
 
@@ -568,19 +521,12 @@ export class ModusTreeView {
         break;
       case 'ARROWUP':
         // eslint-disable-next-line no-case-declarations
-        const prevItem = this.focusItem
-          ? this.getPrevNavigableItem(this.focusItem)
-          : this.getLastItem();
+        const prevItem = this.focusItem ? this.getPrevNavigableItem(this.focusItem) : this.getLastItem();
 
         // Multi-Selection
-        if (
-          this.multiSelection &&
-          event.shiftKey &&
-          this.isItemSelected(this.focusItem)
-        ) {
+        if (this.multiSelection && event.shiftKey && this.isItemSelected(this.focusItem)) {
           // deselect if going back to the selected node
-          if (this.isItemSelected(prevItem))
-            this.handleItemSelection(this.focusItem, event);
+          if (this.isItemSelected(prevItem)) this.handleItemSelection(this.focusItem, event);
           else this.handleItemSelection(prevItem, event);
         }
 
@@ -655,10 +601,7 @@ export class ModusTreeView {
   showSelectionIndicator(itemId: string): boolean {
     return (
       this.isItemSelected(itemId) ||
-      (!this.isItemExpanded(itemId) &&
-        Boolean(
-          this.getChildrenIds(itemId, true).find((i) => this.isItemSelected(i))
-        ))
+      (!this.isItemExpanded(itemId) && Boolean(this.getChildrenIds(itemId, true).find((i) => this.isItemSelected(i))))
     );
   }
 
@@ -688,14 +631,10 @@ export class ModusTreeView {
   render(): HTMLUListElement {
     return (
       <Host>
-        <ul
-          role="tree"
-          tabindex={this.disableTabbing ? 0 : null}
-          onKeyDown={(e) => this.handleKeyDown(e)}>
+        <ul role="tree" tabindex={this.disableTabbing ? 0 : null} onKeyDown={(e) => this.handleKeyDown(e)}>
           <slot onSlotchange={() => this.handleTreeSlotChange()} />
         </ul>
-        <ModusContentTreeDragItem
-          draggingState={this.itemDragState}></ModusContentTreeDragItem>
+        <ModusContentTreeDragItem draggingState={this.itemDragState}></ModusContentTreeDragItem>
       </Host>
     );
   }

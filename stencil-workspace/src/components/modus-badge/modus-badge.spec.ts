@@ -35,7 +35,7 @@ describe('modus-badge', () => {
     `);
   });
 
-  it('should get the correct class by color', async() => {
+  it('should get the correct class by color', async () => {
     const modusBadge = new ModusBadge();
     let className = modusBadge.classByColor.get(modusBadge.color);
     expect(className).toEqual('color-primary');
@@ -59,7 +59,7 @@ describe('modus-badge', () => {
     expect(className).toEqual('color-warning');
   });
 
-  it('should get the correct class by size', async() => {
+  it('should get the correct class by size', async () => {
     const modusBadge = new ModusBadge();
     let className = modusBadge.classBySize.get(modusBadge.size);
     expect(className).toEqual('size-medium');
@@ -71,7 +71,7 @@ describe('modus-badge', () => {
     expect(className).toEqual('size-large');
   });
 
-  it('should get the correct class by type', async() => {
+  it('should get the correct class by type', async () => {
     const modusBadge = new ModusBadge();
     let className = modusBadge.classByType.get(modusBadge.type);
     expect(className).toEqual('type-default');

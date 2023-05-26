@@ -70,6 +70,6 @@ describe('modus-slider', () => {
     slider.setProperty('value', 50);
     await page.waitForChanges();
 
-    expect(await slider.getProperty('value')).toEqual("50");
+    expect(await slider.getProperty('value')).toEqual('50');
   });
 });

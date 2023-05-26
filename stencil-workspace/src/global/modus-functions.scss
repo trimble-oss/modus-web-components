@@ -1,10 +1,10 @@
 // Modus functions
 
-@function ui-color($key: "main-background") {
+@function ui-color($key: 'main-background') {
   @return map-get($ui-colors, $key);
 }
 
-@function trimble-gray($key: "white") {
+@function trimble-gray($key: 'white') {
   @return map-get($trimble-grays, $key);
 }
 

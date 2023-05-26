@@ -54,13 +54,15 @@ describe('modus-navbar', () => {
     await page.setContent('<modus-navbar show-apps-menu></modus-navbar>');
     await page.waitForChanges();
     const navbar = await page.find('modus-navbar');
-    navbar.setProperty('apps', [{
-      logoUrl: '',
-      name: 'App 1',
-      url: '',
-      category: '',
-      showCategory: false
-    }])
+    navbar.setProperty('apps', [
+      {
+        logoUrl: '',
+        name: 'App 1',
+        url: '',
+        category: '',
+        showCategory: false,
+      },
+    ]);
     await page.waitForChanges();
     const appsMenuAppOpen = await page.spyOnEvent('appsMenuAppOpen');
     const appsMenu = await page.find('modus-navbar >>> [data-test-id="apps-menu"]');
@@ -75,7 +77,7 @@ describe('modus-navbar', () => {
       name: 'App 1',
       url: '',
       category: '',
-      showCategory: false
+      showCategory: false,
     });
   });
 
@@ -117,9 +119,7 @@ describe('modus-navbar', () => {
 
   it('should show tooltip on over of search button', async () => {
     const page = await newE2EPage();
-    await page.setContent(
-      '<modus-navbar show-search search-label="Search"></modus-navbar>'
-    );
+    await page.setContent('<modus-navbar show-search search-label="Search"></modus-navbar>');
 
     await page.waitForChanges();
 
@@ -127,9 +127,7 @@ describe('modus-navbar', () => {
     const tooltipText = await tooltip.find('modus-tooltip >>> .text');
     expect(await tooltipText.isVisible()).toBe(false);
 
-    await tooltip
-      .find('modus-tooltip >>> .modus-tooltip')
-      .then((e) => e.hover());
+    await tooltip.find('modus-tooltip >>> .modus-tooltip').then((e) => e.hover());
     await page.waitForChanges();
 
     expect(await tooltipText.isVisible()).toBe(true);

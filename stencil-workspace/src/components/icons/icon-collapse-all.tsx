@@ -2,9 +2,7 @@
 import { FunctionalComponent, h } from '@stencil/core';
 import { IconProps } from './IconMap';
 
-export const IconCollapseAll: FunctionalComponent<IconProps> = (
-  props: IconProps
-) => (
+export const IconCollapseAll: FunctionalComponent<IconProps> = (props: IconProps) => (
   <svg
     class="icon-collapse-all"
     height={props.size ?? 16}

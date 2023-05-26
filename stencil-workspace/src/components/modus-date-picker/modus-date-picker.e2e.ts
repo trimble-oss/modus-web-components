@@ -1,7 +1,18 @@
 import { newE2EPage } from '@stencil/core/testing';
 
-const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
-'July', 'August', 'September', 'October', 'November', 'December'
+const monthNames = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
 ];
 
 describe('modus-date-picker', () => {
@@ -15,7 +26,9 @@ describe('modus-date-picker', () => {
 
   it('renders changes to label prop', async () => {
     const page = await newE2EPage();
-    await page.setContent('<modus-date-picker><modus-date-input  label="Single Date"></modus-date-input></modus-date-picker>');
+    await page.setContent(
+      '<modus-date-picker><modus-date-input  label="Single Date"></modus-date-input></modus-date-picker>'
+    );
 
     const component = await page.find('modus-date-picker');
     component.setProperty('label', 'Test');
