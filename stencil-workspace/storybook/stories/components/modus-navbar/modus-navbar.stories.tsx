@@ -20,13 +20,8 @@ export default {
 };
 
 const Template = () => html`
-  <modus-navbar
-    id="working"
-    show-apps-menu
-    show-help
-    show-main-menu
-    show-notifications>
-    <div slot="main" style="height:300px;">Render your own main menu.</div>
+  <modus-navbar id="working" show-apps-menu show-help show-main-menu show-notifications>
+    <div slot="main">Render your own main menu.</div>
     <div slot="notifications">Render your own notifications.</div>
   </modus-navbar>
   ${setNavbar(true, '#working')}
@@ -34,13 +29,8 @@ const Template = () => html`
 export const Default = Template.bind({});
 
 const FailedToLoadAvatarTemplate = () => html`
-  <modus-navbar
-    id="broken"
-    show-apps-menu
-    show-help
-    show-main-menu
-    show-notifications>
-    <div slot="main" style="height:300px;">Render your own main menu.</div>
+  <modus-navbar id="broken" show-apps-menu show-help show-main-menu show-notifications>
+    <div slot="main">Render your own main menu.</div>
     <div slot="notifications">Render your own notifications.</div>
   </modus-navbar>
   ${setNavbar(false, '#broken')}
@@ -48,21 +38,11 @@ const FailedToLoadAvatarTemplate = () => html`
 export const FailedAvatar = FailedToLoadAvatarTemplate.bind({});
 
 const BlueTemplate = () => html`
-  <modus-navbar
-    id="blue-theme"
-    show-apps-menu
-    show-help
-    show-main-menu
-    show-notifications
-    variant="blue">
-    <div slot="main" style="height:300px;">Render your own main menu.</div>
+  <modus-navbar id="blue-theme" show-apps-menu show-help show-main-menu show-notifications variant="blue">
+    <div slot="main">Render your own main menu.</div>
     <div slot="notifications">Render your own notifications.</div>
   </modus-navbar>
-  ${setNavbar(
-    false,
-    '#blue-theme',
-    'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg'
-  )}
+  ${setNavbar(false, '#blue-theme', 'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg')}
 `;
 export const BlueNavbar = BlueTemplate.bind({});
 
