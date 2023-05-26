@@ -40,10 +40,10 @@ const setSelects = () => {
   const tag = document.createElement('script');
   tag.innerHTML = `
     const modusSelect = document.querySelector('#select-demo-1');
-    modusSelect.options = [ { display: 'Option 1' }, { display: 'Option 2' }, { display: 'Option 3' } ];
+    const options = [ { display: 'Option 1' }, { display: 'Option 2' }, { display: 'Option 3' }, { display: 'Option 4' }, { display: 'Option 5' }, { display: 'Option 6' }, { display: 'Option 7' }, { display: 'Option 8' }, { display: 'Option 9' }, { display: 'Option 10' }, { display: 'Option 11' }, { display: 'Option 12' }, { display: 'Option 13' }, { display: 'Option 14' }, { display: 'Option 15' }, { display: 'Option 16' }, { display: 'Option 17' } ];
+    modusSelect.options = options;
 
     const modusSelect2 = document.querySelector('#select-demo-2');
-    const options = [ { display: 'Option 1' }, { display: 'Option 2' }, { display: 'Option 3' } ];
     modusSelect2.options = options;
     modusSelect2.value = options[1]
   `;
