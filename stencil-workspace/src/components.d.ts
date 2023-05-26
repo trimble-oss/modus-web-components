@@ -298,6 +298,10 @@ export namespace Components {
           * (Optional) To enable row hover in table.
          */
         "hover": boolean;
+        /**
+          * (Optional) To display expanded rows.
+         */
+        "isExpand": boolean;
         "pageSizeList": number[];
         "pagination": boolean;
         /**
@@ -694,6 +698,14 @@ export namespace Components {
         "ariaLabel": string | null;
         "maxPage": number;
         "minPage": number;
+        /**
+          * Weather to display text or next icon.
+         */
+        "nextPageButtonText": string;
+        /**
+          * Weather to display text or previous icon.
+         */
+        "prevPageButtonText": string;
         "size": 'large' | 'medium' | 'small';
     }
     interface ModusProgressBar {
@@ -1926,6 +1938,10 @@ declare namespace LocalJSX {
          */
         "hover"?: boolean;
         /**
+          * (Optional) To display expanded rows.
+         */
+        "isExpand"?: boolean;
+        /**
           * Emits event on sort change
          */
         "onSortChange"?: (event: ModusDataTableCustomEvent<ModusDataTableSortingState>) => void;
@@ -2386,9 +2402,17 @@ declare namespace LocalJSX {
         "maxPage"?: number;
         "minPage"?: number;
         /**
+          * Weather to display text or next icon.
+         */
+        "nextPageButtonText"?: string;
+        /**
           * An event that fires on page change.
          */
         "onPageChange"?: (event: ModusPaginationCustomEvent<number>) => void;
+        /**
+          * Weather to display text or previous icon.
+         */
+        "prevPageButtonText"?: string;
         "size"?: 'large' | 'medium' | 'small';
     }
     interface ModusProgressBar {

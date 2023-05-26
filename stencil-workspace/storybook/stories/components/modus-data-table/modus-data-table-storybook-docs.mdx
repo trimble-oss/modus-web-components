@@ -18,6 +18,7 @@ import { Story } from '@storybook/addon-docs';
 - [Column Resize](#column-resize)
 - [Pagination](#pagination)
 - [Summary Row](#summary-row)
+- [Expandable Rows](#expandable-ows)
 - [Types](#types)
 - [Accessibility](#accessibility)
 - [Properties](#properties)
@@ -286,6 +287,12 @@ User can opt for this summary row, which can be used as footer or a row to view 
 
 <Story id="components-data-table--summary-row" height={'480px'} />
 
+### Expandable Rows
+
+User can opt for this expanding rows.
+
+<Story id="components-data-table--expandable-rows" height={'480px'} />
+
 ### Types
 
 ```ts
@@ -315,19 +322,20 @@ Users can use keyboard navigation to perform different actions.
 
 ### Properties
 
-| Property              | Attribute                 | Description                                                           | Type                     | Default      |
-| --------------------- | ------------------------- | --------------------------------------------------------------------- | ------------------------ | ------------ |
-| `columns`             | `columns`                 | (required) To display headers in the table.                           | `ModusDataTableColumn[]` | `undefined`  |
-| `data`                | `data`                    | (required) To display data in the table.                              | `Array`                  | `undefined`  |
-| `hover`               | `hover`                   | (optional) To enable row hover in table.                              | `boolean`                | `false`      |
-| `sort`                | `sort`                    | (optional) To sort data in table.                                     | `boolean`                | `false`      |
-| `showSortIconOnHover` | `show-sort-icon-on-hover` | (optional) To display sort icon on hover.                             | `boolean`                | `false`      |
-| `displayOptions`      | `display-options`         | (optional) To control display options of table.                       | `boolean`                | `false`      |
-| `pagination`          | `pagination`              | (optional) To enable pagination of table.                             | `boolean`                | `false`      |
-| `pageSizeList`        | `page-size-list`          | (optional) To display page size options of table.                     | `Array`                  | `[10,20,50]` |
-| `columnResize`        | `column-resize`           | (optional) To enable column resizing of table.                        | `boolean`                | `false`      |
-| `fullWidth`           | `full-width`              | (optional) To manage table width.                                     | `boolean`                | `true`       |
-| `summaryRow`          | `summary-row`             | (optional) To display summary row in table. Is used to display total. | `boolean`                | `false`      |
+| Property              | Attribute                 | Description                                                                     | Type                     | Default      |
+| --------------------- | ------------------------- | ------------------------------------------------------------------------------- | ------------------------ | ------------ |
+| `columns`             | `columns`                 | (required) To display headers in the table.                                     | `ModusDataTableColumn[]` | `undefined`  |
+| `data`                | `data`                    | (required) To display data in the table.                                        | `Array`                  | `undefined`  |
+| `hover`               | `hover`                   | (optional) To enable row hover in table.                                        | `boolean`                | `false`      |
+| `sort`                | `sort`                    | (optional) To sort data in table.                                               | `boolean`                | `false`      |
+| `showSortIconOnHover` | `show-sort-icon-on-hover` | (optional) To display sort icon on hover.                                       | `boolean`                | `false`      |
+| `displayOptions`      | `display-options`         | (optional) To control display options of table.                                 | `boolean`                | `false`      |
+| `pagination`          | `pagination`              | (optional) To enable pagination of table.                                       | `boolean`                | `false`      |
+| `pageSizeList`        | `page-size-list`          | (optional) To display page size options of table.                               | `Array`                  | `[10,20,50]` |
+| `columnResize`        | `column-resize`           | (optional) To enable column resizing of table.                                  | `boolean`                | `false`      |
+| `fullWidth`           | `full-width`              | (optional) To manage table width.                                               | `boolean`                | `true`       |
+| `summaryRow`          | `summary-row`             | (optional) To display summary row in table. Which can be used to display total. | `boolean`                | `false`      |
+| `isExpand`            | `is-expand`               | (optional) To display expandable rows in table.                                 | `boolean`                | `false`      |
 
 ### Events
 

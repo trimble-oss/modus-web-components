@@ -289,14 +289,14 @@ export declare interface ModusDataTable extends Components.ModusDataTable {
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['columnResize', 'columns', 'data', 'displayOptions', 'fullWidth', 'hover', 'pageSizeList', 'pagination', 'showSortIconOnHover', 'sort', 'summaryRow'],
+  inputs: ['columnResize', 'columns', 'data', 'displayOptions', 'fullWidth', 'hover', 'isExpand', 'pageSizeList', 'pagination', 'showSortIconOnHover', 'sort', 'summaryRow'],
   methods: ['getColumnData']
 })
 @Component({
   selector: 'modus-data-table',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['columnResize', 'columns', 'data', 'displayOptions', 'fullWidth', 'hover', 'pageSizeList', 'pagination', 'showSortIconOnHover', 'sort', 'summaryRow']
+  inputs: ['columnResize', 'columns', 'data', 'displayOptions', 'fullWidth', 'hover', 'isExpand', 'pageSizeList', 'pagination', 'showSortIconOnHover', 'sort', 'summaryRow']
 })
 export class ModusDataTable {
   protected el: HTMLElement;
@@ -731,13 +731,13 @@ export declare interface ModusPagination extends Components.ModusPagination {
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['activePage', 'ariaLabel', 'maxPage', 'minPage', 'size']
+  inputs: ['activePage', 'ariaLabel', 'maxPage', 'minPage', 'nextPageButtonText', 'prevPageButtonText', 'size']
 })
 @Component({
   selector: 'modus-pagination',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['activePage', 'ariaLabel', 'maxPage', 'minPage', 'size']
+  inputs: ['activePage', 'ariaLabel', 'maxPage', 'minPage', 'nextPageButtonText', 'prevPageButtonText', 'size']
 })
 export class ModusPagination {
   protected el: HTMLElement;

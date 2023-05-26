@@ -15,12 +15,16 @@ function calculateSum(
   tableData: unknown[],
   header: Header<unknown, unknown>
 ): number | string {
-  let sum = 0;
-  tableData.map(
-    (rowData) =>
-      (sum += Number(rowData[header.column.columnDef['accessorKey']]))
-  );
-  return !isNaN(sum) ? sum : '';
+  const sum = tableData.reduce(function recur(sum, child) {
+    return (
+      sum +
+      (child['total'] = (child['subRows'] ?? []).reduce(
+        recur,
+        child[header.column.columnDef['accessorKey']]
+      ))
+    );
+  }, 0);
+  return !isNaN(Number(sum)) ? Number(sum) : '';
 }
 
 export const ModusDataTableSummaryRow: FunctionalComponent<

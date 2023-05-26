@@ -13,3 +13,10 @@ export const ArrowLeftKey = 'arrowleft';
 export const ArrowRightKey = 'arrowright';
 export const SpaceKey = ' ';
 // Keyboard key constants ends
+
+export const ExpandColumn = {
+  header: '',
+  dataType: null,
+  id: 'expand-column',
+  size: 100,
+};

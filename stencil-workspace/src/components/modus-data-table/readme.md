@@ -15,7 +15,8 @@
 | `displayOptions`       | --                        | (Optional) To control display options of table. | `ModusDataTableDisplayOptions`             | `{     borderless: false,     cellBorderless: false,   }` |
 | `fullWidth`            | `full-width`              |                                                 | `boolean`                                  | `true`                                                    |
 | `hover`                | `hover`                   | (Optional) To enable row hover in table.        | `boolean`                                  | `false`                                                   |
-| `pageSizeList`         | --                        |                                                 | `number[]`                                 | `[10, 20, 50]`                                            |
+| `isExpand`             | `is-expand`               | (Optional) To display expanded rows.            | `boolean`                                  | `false`                                                   |
+| `pageSizeList`         | --                        |                                                 | `number[]`                                 | `DefaultPageSizes`                                        |
 | `pagination`           | `pagination`              |                                                 | `boolean`                                  | `undefined`                                               |
 | `showSortIconOnHover`  | `show-sort-icon-on-hover` | (Optional) To display sort icon on hover.       | `boolean`                                  | `false`                                                   |
 | `sort`                 | `sort`                    | (Optional) To sort data in table.               | `boolean`                                  | `false`                                                   |

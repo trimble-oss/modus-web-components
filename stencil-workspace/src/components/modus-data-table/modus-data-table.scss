@@ -23,7 +23,7 @@ table {
 
         .can-resize {
           &:focus-visible {
-            outline: none
+            outline: none;
           }
 
           cursor: e-resize;
@@ -94,6 +94,19 @@ table {
 
         &.text-align-right {
           text-align: right;
+        }
+
+        &.expand {
+          span {
+            align-items: flex-end;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+
+            svg {
+              fill: $modus-table-row-expand-collaps-icon;
+            }
+          }
         }
       }
 

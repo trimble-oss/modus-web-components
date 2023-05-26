@@ -7,13 +7,15 @@
 
 ## Properties
 
-| Property     | Attribute     | Description | Type                             | Default     |
-| ------------ | ------------- | ----------- | -------------------------------- | ----------- |
-| `activePage` | `active-page` |             | `number`                         | `undefined` |
-| `ariaLabel`  | `aria-label`  |             | `string`                         | `undefined` |
-| `maxPage`    | `max-page`    |             | `number`                         | `undefined` |
-| `minPage`    | `min-page`    |             | `number`                         | `undefined` |
-| `size`       | `size`        |             | `"large" \| "medium" \| "small"` | `'medium'`  |
+| Property             | Attribute               | Description                               | Type                             | Default     |
+| -------------------- | ----------------------- | ----------------------------------------- | -------------------------------- | ----------- |
+| `activePage`         | `active-page`           |                                           | `number`                         | `undefined` |
+| `ariaLabel`          | `aria-label`            |                                           | `string`                         | `undefined` |
+| `maxPage`            | `max-page`              |                                           | `number`                         | `undefined` |
+| `minPage`            | `min-page`              |                                           | `number`                         | `undefined` |
+| `nextPageButtonText` | `next-page-button-text` | Weather to display text or next icon.     | `string`                         | `undefined` |
+| `prevPageButtonText` | `prev-page-button-text` | Weather to display text or previous icon. | `string`                         | `undefined` |
+| `size`               | `size`                  |                                           | `"large" \| "medium" \| "small"` | `'medium'`  |
 
 
 ## Events

@@ -15,6 +15,7 @@ import {
   ColumnDef,
   ColumnSizingInfoState,
   ColumnSizingState,
+  ExpandedState,
   HeaderGroup,
   PaginationState,
   Table,
@@ -22,9 +23,11 @@ import {
   Updater,
   createTable,
   getCoreRowModel,
+  getExpandedRowModel,
   getPaginationRowModel,
   getSortedRowModel,
 } from '@tanstack/table-core';
+import { ExpandColumn } from './constants/constants';
 import {
   ModusDataTableColumn,
   ModusDataTableDisplayOptions,
@@ -81,6 +84,9 @@ export class ModusDataTable {
   /** (Optional) To display summary row. */
   @Prop() summaryRow = false;
 
+  /** (Optional) To display expanded rows. */
+  @Prop() isExpand = false;
+
   /** (Optional) To control display options of table. */
   @Prop() displayOptions?: ModusDataTableDisplayOptions = {
     borderless: false,
@@ -97,6 +103,7 @@ export class ModusDataTable {
   /** Column resizing ends */
 
   @State() sorting: ModusDataTableSortingState = [];
+  @State() expanded: ExpandedState;
   @State() table: Table<unknown>;
   @State() paginationState: PaginationState = {
     pageIndex: 0,
@@ -127,14 +134,25 @@ export class ModusDataTable {
    * Creates a table with some set of options.
    */
   initializeTable(): void {
+    if (this.isExpand) {
+      this.columns[0].id !== ExpandColumn.id
+        ? this.columns.splice(
+            0,
+            0,
+            ExpandColumn as ModusDataTableColumn<unknown>
+          )
+        : '';
+    }
+
     const options: TableOptionsResolved<unknown> = {
       data: this.data ?? [],
       columns: (this.columns as ColumnDef<unknown>[]) ?? [],
       state: {
         columnPinning: {},
-        sorting: this.sorting,
         columnSizing: {},
         columnSizingInfo: {} as ColumnSizingInfoState,
+        expanded: this.expanded,
+        sorting: this.sorting,
       },
       enableSorting: this.sort,
       columnResizeMode: 'onChange',
@@ -147,10 +165,14 @@ export class ModusDataTable {
       getCoreRowModel: getCoreRowModel(),
       getPaginationRowModel: this.pagination && getPaginationRowModel(),
       getSortedRowModel: getSortedRowModel(),
+      onExpandedChange: (updater: Updater<ExpandedState>) =>
+        this.updatingState(updater, 'expanded'),
       onColumnSizingChange: (updater: Updater<ColumnSizingState>) =>
         this.updatingState(updater, 'columnSizing'),
       onColumnSizingInfoChange: (updater: Updater<ColumnSizingInfoState>) =>
         this.updatingState(updater, 'columnSizingInfo'),
+      getExpandedRowModel: getExpandedRowModel(),
+      getSubRows: (row) => row['subRows'],
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       onStateChange: () => {},
       renderFallbackValue: null,
@@ -243,7 +265,7 @@ export class ModusDataTable {
               return (
                 <tr key={row.id} class={this.hover && 'enable-hover'}>
                   {row.getAllCells()?.map((cell) => {
-                    return <ModusDataTableCell cell={cell} />;
+                    return <ModusDataTableCell cell={cell} row={row} />;
                   })}
                 </tr>
               );

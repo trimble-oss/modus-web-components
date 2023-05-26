@@ -276,3 +276,29 @@ const summaryRowTable = () => {
     `;
   return tag;
 };
+
+export const ExpandableRows = () => html`
+  <div style="width: 950px">
+    <modus-data-table
+      hover="true"
+      sort="true"
+      column-resize="true"
+      pagination="false"
+      show-sort-icon-hover="true"
+      is-expand="true"
+      summary-row="false" />
+  </div>
+  <div style="width: 950px">
+    <modus-data-table column-resize="true" full-width="false" />
+  </div>
+  ${expandableRowsTable()}
+`;
+
+const expandableRowsTable = () => {
+  const tag = document.createElement('script');
+  tag.innerHTML = `
+  document.querySelector('modus-data-table').columns = [ { "header":"First Name", "accessorKey":"firstName", "id":"first-name", "dataType":"text", "footer":"Total" }, { "header":"Last Name", "accessorKey":"lastName", "id":"last-name", "dataType":"text" }, { "header":"Age", "accessorKey":"age", "id":"age", "dataType":"integer" }, { "header":"Visits", "accessorKey":"visits", "id":"visits", "dataType":"integer", "showTotal":true }, { "header":"Status", "accessorKey":"status", "id":"status", "dataType":"text" }, { "header":"Profile Progress", "accessorKey":"progress", "id":"progress", "dataType":"integer" } ];
+  document.querySelector('modus-data-table').data =[ { firstName: 'Frederick', lastName: 'Cummerata', age: 33, visits: 970, progress: 42, status: 'complicated', subRows: [ { firstName: 'Emile', lastName: 'Koelpin', age: 22, visits: 924, progress: 75, status: 'single', }, { firstName: 'Brandt', lastName: 'Stark', age: 9, visits: 850, progress: 22, status: 'single', }, { firstName: 'Leola', lastName: 'Reichel', age: 12, visits: 496, progress: 72, status: 'relationship', subRows: [ { firstName: 'Angelica', lastName: 'Kautzer', age: 25, visits: 96, progress: 81, status: 'complicated', }, { firstName: 'Amari', lastName: 'Walter', age: 18, visits: 559, progress: 45, status: 'complicated', }, ], }, { firstName: 'Sabryna', lastName: 'Nolan', age: 9, visits: 596, progress: 61, status: 'single', }, ], }, { firstName: 'Moriah', lastName: 'Smith', age: 13, visits: 459, progress: 42, status: 'complicated', subRows: [ { firstName: 'Freddie', lastName: 'Bernhard', age: 38, visits: 519, progress: 27, status: 'complicated', }, { firstName: 'Meagan', lastName: 'Brekke', age: 23, visits: 344, progress: 8, status: 'relationship', }, { firstName: 'Alfreda', lastName: 'Fadel', age: 19, visits: 555, progress: 72, status: 'relationship', subRows: [ { firstName: 'Monserrate', lastName: 'Smitham', age: 32, visits: 438, progress: 58, status: 'single', }, ], }, ], }, ];
+  `;
+  return tag;
+};
