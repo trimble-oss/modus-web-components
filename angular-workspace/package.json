@@ -1,6 +1,7 @@
 {
   "name": "angular-workspace",
   "version": "0.0.0-1",
+  "private": true,
   "scripts": {
     "ng": "ng",
     "start:test-harness": "ng run test-harness:serve",
@@ -8,7 +9,6 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "^14.1.1",
     "@angular/common": "^14.1.1",
@@ -36,5 +36,8 @@
     "karma-jasmine-html-reporter": "~1.7.0",
     "ng-packagr": "^14.1.0",
     "typescript": "~4.6.2"
+  },
+  "engines": {
+    "node": ">=14.15.0"
   }
 }
