@@ -1,0 +1,51 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta
+  title="Miscellaneous/Upgrade Guide"
+  parameters={{
+    previewTabs: {
+      canvas: {
+        hidden: true,
+      },
+    },
+    options: {
+      isToolshown: false,
+    },
+    viewMode: 'docs',
+  }}
+/>
+
+# Upgrade Guide
+
+This guide will help you upgrade from one version of the library to the next. It outlines the information about any
+breaking changes or deprecations that might affect your existing codebase, and provides the necessary upgrade steps to
+resolve them.
+
+<details>
+  <summary>v0.0.1 ⟶ v0.0.2</summary>
+
+  # Breaking Changes
+
+  ## ❌ Some Feature
+  Name and interface update to the `example` input.
+
+  #### Upgrade Steps
+  To fix this feature you must update the name of the input from `example` to `another-name`.
+
+  ## ❌ Another Feature
+  Details about the feature.
+
+  #### Upgrade Steps
+  To fix this feature you must update the name of the input from `oldName` to `newName`.
+
+  # Deprecations
+
+  ## ⚠️ Old Feature
+  Description of the deprecated feature and reasons for deprecation. It is recommended to use the alternative
+  `newFeature` feature.
+
+  ## ⚠️ Old Method
+  Description of the deprecated method and reasons for deprecation. It is recommended to use the new method `newMethod`
+  for better functionality and performance.
+</details>
+
