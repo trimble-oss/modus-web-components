@@ -102,6 +102,23 @@ describe('modus-chip', () => {
     expect(shadowIconRemove).not.toBeNull();
   });
 
+  it('renders changes to close icon', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-chip></modus-chip>');
+    const chip = await page.find('modus-chip');
+    chip.setProperty('showClose', 'true');
+    await page.waitForChanges();
+    expect(await chip.getProperty('closeIcon')).toBe('remove');
+
+    chip.setProperty('closeIcon', 'close');
+    await page.waitForChanges();
+    expect(await chip.getProperty('closeIcon')).toBe('close');
+
+    const shadowIconClose = await page.find('modus-chip >>> .icon-close');
+    expect(shadowIconClose).not.toBeNull();
+  });
+
   it('renders changes to size', async () => {
     const page = await newE2EPage();
 

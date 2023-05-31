@@ -24,6 +24,18 @@ export default {
         type: { summary: `'solid' | 'outline'` },
       },
     },
+    closeIcon: {
+      name: 'close-icon',
+      control: {
+        options: ['remove', 'close'],
+        type: 'select',
+      },
+      description: 'The close icon of the chip',
+      table: {
+        defaultValue: { summary: `'remove'` },
+        type: { summary: `'remove' | 'close'` },
+      },
+    },
     disabled: {
       description: 'Whether the chip is disabled',
       table: {
@@ -97,6 +109,7 @@ export default {
 export const Default = ({
   ariaLabel,
   chipStyle,
+  closeIcon,
   disabled,
   hasError,
   imageUrl,
@@ -108,6 +121,7 @@ export const Default = ({
   <modus-chip
     aria-label=${ariaLabel}
     chip-style=${chipStyle}
+    close-icon=${closeIcon}
     disabled=${disabled}
     has-error=${hasError}
     image-url=${imageUrl}
@@ -120,6 +134,7 @@ export const Default = ({
 Default.args = {
   ariaLabel: '',
   chipStyle: 'solid',
+  closeIcon: 'remove',
   disabled: false,
   hasError: false,
   imageUrl: 'https://randomuser.me/api/portraits/lego/1.jpg',
@@ -132,6 +147,7 @@ Default.args = {
 export const Outline = ({
   ariaLabel,
   chipStyle,
+  closeIcon,
   disabled,
   hasError,
   imageUrl,
@@ -143,6 +159,7 @@ export const Outline = ({
   <modus-chip
     aria-label=${ariaLabel}
     chip-style=${chipStyle}
+    close-icon=${closeIcon}
     disabled=${disabled}
     has-error=${hasError}
     image-url=${imageUrl}
@@ -155,6 +172,7 @@ export const Outline = ({
 Outline.args = {
   ariaLabel: '',
   chipStyle: 'outline',
+  closeIcon: 'remove',
   disabled: false,
   hasError: false,
   imageUrl: 'https://randomuser.me/api/portraits/lego/1.jpg',

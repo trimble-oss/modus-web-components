@@ -11,6 +11,7 @@
 | --------------- | ---------------- | ------------------------------------------ | ---------------------- | ----------- |
 | `ariaLabel`     | `aria-label`     | (optional) The chip's aria-label.          | `string`               | `undefined` |
 | `chipStyle`     | `chip-style`     | (optional) The chip's style.               | `"outline" \| "solid"` | `'solid'`   |
+| `closeIcon`     | `close-icon`     | (optional) The chip's close icon.          | `"close" \| "remove"`  | `'remove'`  |
 | `disabled`      | `disabled`       | (optional) Whether the chip is disabled.   | `boolean`              | `false`     |
 | `hasError`      | `has-error`      | (optional) Whether the chip has an error.  | `boolean`              | `false`     |
 | `imageUrl`      | `image-url`      | (optional) The image's url.                | `string`               | `undefined` |

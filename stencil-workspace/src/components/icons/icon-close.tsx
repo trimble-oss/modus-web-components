@@ -3,7 +3,7 @@ import { FunctionalComponent, h } from '@stencil/core';
 
 interface IconProps {
   color?: string;
-  onClick?: () => void;
+  onClick?: (event: MouseEvent) => void;
   size?: string;
 }
 
@@ -12,7 +12,7 @@ export const IconClose: FunctionalComponent<IconProps> = (props: IconProps) => (
     class="icon-close"
     height={props.size ?? 16}
     width={props.size ?? 16}
-    onClick={props.onClick ? () => props.onClick() : null}
+    onClick={props.onClick ? (event) => props.onClick(event) : null}
     viewBox="0 0 24 24"
     fill="none"
     xmlns="http://www.w3.org/2000/svg">

@@ -2,6 +2,7 @@
 import { Component, Prop, h, EventEmitter, Event, Listen } from '@stencil/core';
 import { IconRemove } from '../icons/icon-remove';
 import { IconCheck } from '../icons/icon-check';
+import { IconClose } from '../icons/icon-close';
 
 @Component({
   tag: 'modus-chip',
@@ -14,6 +15,9 @@ export class ModusChip {
 
   /** (optional) The chip's style. */
   @Prop() chipStyle: 'outline' | 'solid' = 'solid';
+
+  /** (optional) The chip's close icon. */
+  @Prop() closeIcon: 'close' | 'remove' = 'remove';
 
   /** (optional) Whether the chip is disabled. */
   @Prop() disabled = false;
@@ -109,9 +113,12 @@ export class ModusChip {
           <IconCheck size={'24'}></IconCheck>
         ) : null}
         <span>{this.value}</span>
-        {this.showClose ? (
-          <IconRemove onClick={this.disabled ? null : (event) => this.onCloseClick(event)} size={'24'}></IconRemove>
-        ) : null}
+        {this.showClose ?
+          this.closeIcon == 'remove'? (
+            <IconRemove onClick={this.disabled ? null : (event) => this.onCloseClick(event)} size={'24'}></IconRemove>
+          ): (
+            <IconClose onClick={this.disabled ? null : (event) => this.onCloseClick(event)} size={'24'}></IconClose>
+          ) : null}
       </div>
     );
   }

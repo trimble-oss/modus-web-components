@@ -251,6 +251,10 @@ export namespace Components {
          */
         "chipStyle": 'outline' | 'solid';
         /**
+          * (optional) The chip's close icon.
+         */
+        "closeIcon": 'close' | 'remove';
+        /**
           * (optional) Whether the chip is disabled.
          */
         "disabled": boolean;
@@ -1851,6 +1855,10 @@ declare namespace LocalJSX {
           * (optional) The chip's style.
          */
         "chipStyle"?: 'outline' | 'solid';
+        /**
+          * (optional) The chip's close icon.
+         */
+        "closeIcon"?: 'close' | 'remove';
         /**
           * (optional) Whether the chip is disabled.
          */

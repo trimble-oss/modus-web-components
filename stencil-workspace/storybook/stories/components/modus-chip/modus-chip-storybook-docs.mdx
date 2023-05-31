@@ -26,6 +26,10 @@ import { Anchor } from '@storybook/addon-docs';
 
 <modus-chip show-checkmark size="small" value="Pets OK"></modus-chip>
 
+### Close Icon
+
+<modus-chip show-checkmark show-close close-icon="close" value="Bryan"></modus-chip>
+
 ```html
 <modus-chip
   image-url="https://example.com/image.jpg"
@@ -61,6 +65,8 @@ import { Anchor } from '@storybook/addon-docs';
   value="Bryan"></modus-chip>
 
 <modus-chip show-checkmark size="small" value="Pets OK"></modus-chip>
+
+<modus-chip show-checkmark show-close close-icon="close" value="Bryan"></modus-chip>
 ```
 
 ### Properties
@@ -69,6 +75,7 @@ import { Anchor } from '@storybook/addon-docs';
 | -------------- | ------------------------------ | ------- | ------------------ | ------------- | -------- |
 | aria-label     | The chip's aria-label          | string  |                    |               |          |
 | chip-style     | The chip's style               | string  | 'outline', 'solid' | 'solid'       |          |
+| close-icon     | The chip's close icon          | string  | 'close', 'remove'  | 'remove'      |          |
 | disabled       | Whether the chip is disabled   | boolean |                    | false         |          |
 | has-error      | Whether the chip has an error  | boolean |                    | false         |          |
 | image-url      | The chip's image url           | string  |                    |               |          |

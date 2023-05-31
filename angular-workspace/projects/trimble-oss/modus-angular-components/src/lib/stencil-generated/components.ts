@@ -262,13 +262,13 @@ export declare interface ModusChip extends Components.ModusChip {
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['ariaLabel', 'chipStyle', 'disabled', 'hasError', 'imageUrl', 'showCheckmark', 'showClose', 'size', 'value']
+  inputs: ['ariaLabel', 'chipStyle', 'closeIcon', 'disabled', 'hasError', 'imageUrl', 'showCheckmark', 'showClose', 'size', 'value']
 })
 @Component({
   selector: 'modus-chip',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['ariaLabel', 'chipStyle', 'disabled', 'hasError', 'imageUrl', 'showCheckmark', 'showClose', 'size', 'value']
+  inputs: ['ariaLabel', 'chipStyle', 'closeIcon', 'disabled', 'hasError', 'imageUrl', 'showCheckmark', 'showClose', 'size', 'value']
 })
 export class ModusChip {
   protected el: HTMLElement;
