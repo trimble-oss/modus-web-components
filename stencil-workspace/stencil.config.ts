@@ -8,6 +8,7 @@ import angularValueAccessorBindings from './angular-value-accessor-bindings';
 
 export const config: Config = {
   namespace: 'modus-web-components',
+  sourceMap: false,
   outputTargets: [
     {
       type: 'dist',
@@ -15,6 +16,7 @@ export const config: Config = {
     },
     {
       type: 'dist-custom-elements',
+      generateTypeDeclarations: false,
     },
     {
       type: 'docs-vscode',
@@ -30,8 +32,10 @@ export const config: Config = {
     },
     angularOutputTarget({
       componentCorePackage: '@trimble-oss/modus-web-components',
-      directivesProxyFile: '../angular-workspace/projects/trimble-oss/modus-angular-components/src/lib/stencil-generated/components.ts',
-      directivesArrayFile: '../angular-workspace/projects/trimble-oss/modus-angular-components/src/lib/stencil-generated/index.ts',
+      directivesProxyFile:
+        '../angular-workspace/projects/trimble-oss/modus-angular-components/src/lib/stencil-generated/components.ts',
+      directivesArrayFile:
+        '../angular-workspace/projects/trimble-oss/modus-angular-components/src/lib/stencil-generated/index.ts',
       valueAccessorConfigs: angularValueAccessorBindings,
     }),
     react({
