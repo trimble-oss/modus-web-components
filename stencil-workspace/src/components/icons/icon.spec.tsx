@@ -32,6 +32,7 @@ describe('icon-triangle-down', () => {
   });
 });
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 function renderFunctionalComponentToSpecPage<T extends {}>(componentConstructor: FunctionalComponent<T>): Promise<SpecPage> {
   return newSpecPage({
     components: [],
