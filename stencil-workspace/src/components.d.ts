@@ -396,10 +396,10 @@ export namespace Components {
           * (optional) Determines custom dropdown placement offset.
          */
         "customPlacement": {
-    top?: number,
-    right?: number,
-    bottom?: number,
-    left?: number
+    top?: number;
+    right?: number;
+    bottom?: number;
+    left?: number;
   };
         /**
           * (optional) Disables the dropdown.
@@ -945,13 +945,7 @@ export namespace Components {
         /**
           * (optional) The input's inputmode.
          */
-        "inputmode": | 'decimal'
-    | 'email'
-    | 'numeric'
-    | 'search'
-    | 'tel'
-    | 'text'
-    | 'url';
+        "inputmode": 'decimal' | 'email' | 'numeric' | 'search' | 'tel' | 'text' | 'url';
         /**
           * (optional) The input's label.
          */
@@ -1087,13 +1081,7 @@ export namespace Components {
         /**
           * (optional) The toasts' type.
          */
-        "type": | 'danger'
-    | 'dark'
-    | 'default'
-    | 'primary'
-    | 'secondary'
-    | 'success'
-    | 'warning';
+        "type": 'danger' | 'dark' | 'default' | 'primary' | 'secondary' | 'success' | 'warning';
     }
     interface ModusTooltip {
         /**
@@ -2033,10 +2021,10 @@ declare namespace LocalJSX {
           * (optional) Determines custom dropdown placement offset.
          */
         "customPlacement"?: {
-    top?: number,
-    right?: number,
-    bottom?: number,
-    left?: number
+    top?: number;
+    right?: number;
+    bottom?: number;
+    left?: number;
   };
         /**
           * (optional) Disables the dropdown.
@@ -2671,13 +2659,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The input's inputmode.
          */
-        "inputmode"?: | 'decimal'
-    | 'email'
-    | 'numeric'
-    | 'search'
-    | 'tel'
-    | 'text'
-    | 'url';
+        "inputmode"?: 'decimal' | 'email' | 'numeric' | 'search' | 'tel' | 'text' | 'url';
         /**
           * (optional) The input's label.
          */
@@ -2825,13 +2807,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The toasts' type.
          */
-        "type"?: | 'danger'
-    | 'dark'
-    | 'default'
-    | 'primary'
-    | 'secondary'
-    | 'success'
-    | 'warning';
+        "type"?: 'danger' | 'dark' | 'default' | 'primary' | 'secondary' | 'success' | 'warning';
     }
     interface ModusTooltip {
         /**
