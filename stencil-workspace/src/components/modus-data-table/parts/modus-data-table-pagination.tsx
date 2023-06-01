@@ -3,6 +3,7 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Table } from '@tanstack/table-core';
+import { PageView, ShowResult } from '../constants/constants';
 
 interface ModusDataTablePaginationProps {
   table: Table<unknown>;
@@ -16,7 +17,7 @@ export const ModusDataTablePagination: FunctionalComponent<
   return (
     <div class="pagination-container">
       <span class="items-per-page">
-        <span>Page View </span>
+        <span>{PageView}</span>
         <select
           onChange={(event) => {
             const target = event.target as EventTarget & HTMLInputElement;
@@ -31,12 +32,16 @@ export const ModusDataTablePagination: FunctionalComponent<
       </span>
       <span class="pagination-and-count">
         <span class="total-count">
-          <span>Showing result </span>
+          <span>{ShowResult}</span>
           <span>
-            {table.getState().pagination.pageIndex +
-              1 +
-              '-' +
-              table.getState().pagination.pageSize}{' '}
+            {table.getState().pagination.pageIndex *
+              table.getState().pagination.pageSize +
+              1}
+            -
+            {table.getState().pagination.pageIndex + 1 === table.getPageCount()
+              ? totalCount
+              : (table.getState().pagination.pageIndex + 1) *
+                table.getState().pagination.pageSize}{' '}
             of {totalCount}
           </span>
         </span>

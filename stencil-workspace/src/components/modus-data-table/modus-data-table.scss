@@ -23,7 +23,7 @@ table {
 
         .can-resize {
           &:focus-visible {
-            outline: none
+            outline: none;
           }
 
           cursor: e-resize;
@@ -176,6 +176,10 @@ table {
       background-color: $modus-page-view-select-bg;
       color: $modus-page-view-select-color;
     }
+
+    span {
+      margin-right: $rem-5px;
+    }
   }
 
   .pagination-and-count {
@@ -185,6 +189,10 @@ table {
 
     .total-count {
       margin-right: $rem-5px;
+
+      span {
+        margin-right: $rem-5px;
+      }
     }
   }
 }

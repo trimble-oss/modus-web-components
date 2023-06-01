@@ -46,11 +46,11 @@ export class ModusPagination {
   /* The minimum page value. */
   @Prop() minPage: number;
 
-  /** Weather to display text or previous icon. */
-  @Prop() prevPageButtonText: string;
+  /* The previous page button text. If not set, an icon control will be used. */
+  @Prop() prevPageButtonText?: string;
 
-  /** Weather to display text or next icon. */
-  @Prop() nextPageButtonText: string;
+  /* The next page button text. If not set, an icon control will be used. */
+  @Prop() nextPageButtonText?: string;
 
   /* The pagination's size. */
   @Prop() size: 'large' | 'medium' | 'small' = 'medium';
@@ -189,6 +189,13 @@ export class ModusPagination {
         <ol>
           {previousPageControl}
           {this.pages.map((page) => {
+            if (page === '...') {
+              return (
+                <li class={`${!isNaN(+page) ? 'hoverable' : ''}`} tabIndex={-1}>
+                  {page}
+                </li>
+              );
+            }
             return (
               <li
                 class={`${page === this.activePage ? 'active' : ''} ${
