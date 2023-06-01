@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@trimble-oss/modus-react-components": "0.1.42-1702",
+    "@trimble-oss/modus-react-components": "0.1.42-17",
     "@types/node": "^16.11.26",
     "@types/react": "^17.0.40",
     "@types/react-dom": "^17.0.13",

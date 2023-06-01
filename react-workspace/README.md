@@ -1,4 +1,4 @@
-# AngularWorkspace
+# React Workspace
 
 This project was generated for React [v17.0.2](https://github.com/facebook/react/blob/main/CHANGELOG.md#1702-march-22-2021).
 
