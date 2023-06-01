@@ -65,12 +65,18 @@ export class ModusDataTable {
 
   /* (optional) To manage column resizing */
   @Prop() columnResize = false;
+  @Watch('columnResize') updateColumnResize() {
+    this.table.options.enableColumnResizing = this.columnResize;
+  }
 
   /* (optional) To manage table resizing */
   @Prop() fullWidth = true;
 
   /** (Optional) To sort data in table. */
   @Prop() sort = false;
+  @Watch('sort') updateSort() {
+    this.table.options.enableSorting = this.sort;
+  }
 
   /** (Optional) To display sort icon on hover. */
   @Prop() showSortIconOnHover = false;
