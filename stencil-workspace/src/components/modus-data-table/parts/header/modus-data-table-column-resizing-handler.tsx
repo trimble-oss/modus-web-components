@@ -2,14 +2,19 @@ import {
   FunctionalComponent,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
-import { Column, ColumnSizingInfoState, Header, Table } from '@tanstack/table-core';
+import {
+  Column,
+  ColumnSizingInfoState,
+  Header,
+  Table,
+} from '@tanstack/table-core';
 import {
   ArrowLeftKey,
   ArrowRightKey,
   EnterKey,
   SpaceKey,
   TabKey,
-} from '../constants/constants';
+} from '../../constants/constants';
 
 interface ModusDataTableColumnResizingHandlerProps {
   table: Table<unknown>;
@@ -28,11 +33,7 @@ function columnResizingOnKeyDown(
   column: Column<unknown, unknown>
 ): void {
   const eventKey = event.key.toLowerCase();
-  if (
-    eventKey === EnterKey ||
-    eventKey === SpaceKey ||
-    eventKey === TabKey
-  ) {
+  if (eventKey === EnterKey || eventKey === SpaceKey || eventKey === TabKey) {
     const columnSizingInfo: ColumnSizingInfoState = {
       startOffset: null,
       startSize: null,

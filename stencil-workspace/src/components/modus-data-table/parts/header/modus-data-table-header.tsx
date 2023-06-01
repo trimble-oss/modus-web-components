@@ -42,10 +42,7 @@ export const ModusDataTableHeader: FunctionalComponent<
           )}
         </div>
       )}
-      <ModusDataTableColumnResizingHandler
-        table={table}
-        header={header}
-      />
+      <ModusDataTableColumnResizingHandler table={table} header={header} />
     </th>
   );
 };

@@ -133,7 +133,7 @@ table {
       text-align: left;
 
       &.active-resize {
-        border-right: $rem-2px solid $modus-table-column-resizing-border-color;
+        border-right: $rem-2px solid $modus-primary-color;
       }
 
       &.text-align-center {
