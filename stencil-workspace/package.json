@@ -42,7 +42,7 @@
     "@stencil/core": "^3.3.0"
   },
   "devDependencies": {
-    "@stencil/angular-output-target": "^0.5.0",
+    "@stencil/angular-output-target": "^0.7.0",
     "@stencil/postcss": "^2.1.0",
     "@stencil/react-output-target": "^0.5.0",
     "@stencil/sass": "^2.0.4",
