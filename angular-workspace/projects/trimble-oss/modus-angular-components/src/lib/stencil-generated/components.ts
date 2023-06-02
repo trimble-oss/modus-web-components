@@ -253,14 +253,14 @@ export declare interface ModusCheckbox extends Components.ModusCheckbox {
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'chipStyle', 'disabled', 'hasError', 'imageUrl', 'showCheckmark', 'showClose', 'size', 'value']
+  inputs: ['ariaLabel', 'chipStyle', 'closeIcon', 'disabled', 'hasError', 'imageUrl', 'showCheckmark', 'showClose', 'size', 'value']
 })
 @Component({
   selector: 'modus-chip',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['ariaLabel', 'chipStyle', 'disabled', 'hasError', 'imageUrl', 'showCheckmark', 'showClose', 'size', 'value'],
+  inputs: ['ariaLabel', 'chipStyle', 'closeIcon', 'disabled', 'hasError', 'imageUrl', 'showCheckmark', 'showClose', 'size', 'value'],
 })
 export class ModusChip {
   protected el: HTMLElement;
