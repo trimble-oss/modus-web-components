@@ -29,15 +29,18 @@ import {
   ModusDataTableColumn,
   ModusDataTableDisplayOptions,
   ModusDataTableSortingState,
+  ModusDataTablePanelOptions,
 } from './models';
 import { ModusDataTableCell } from './parts/modus-data-table-cell';
-import { ModusDataTableHeader } from './parts/modus-data-table-header';
 import { ModusDataTablePagination } from './parts/modus-data-table-pagination';
 import { ModusDataTableSummaryRow } from './parts/modus-data-table-summary-row';
 import { DefaultPageSizes } from './constants/constants';
+import { ModusDataTableHeader } from './parts/header/modus-data-table-header';
 
 /**
  * @slot customFooter - Slot for custom footer.
+ * @slot panelGroupLeft - Slot for modus data table panel left section.
+ * @slot panelGroupRight - Slot for modus data table panel right section.
  */
 @Component({
   tag: 'modus-data-table',
@@ -81,6 +84,9 @@ export class ModusDataTable {
   /** (Optional) To display summary row. */
   @Prop() summaryRow = false;
 
+  /** (Optional) To display a panel options, which allows access to table operations like hiding columns. */
+  @Prop() panelOptions: ModusDataTablePanelOptions | null = null;
+
   /** (Optional) To control display options of table. */
   @Prop() displayOptions?: ModusDataTableDisplayOptions = {
     borderless: false,
@@ -90,11 +96,13 @@ export class ModusDataTable {
   /** Emits event on sort change */
   @Event() sortChange: EventEmitter<ModusDataTableSortingState>;
 
-  /** Column resizing starts */
+  /**
+   * ColumnSizing has info about width of the column
+   * whereas ColumnSizingInfo has the detailed info about resizing of the column
+   */
   @State() columnSizing: ColumnSizingState = {};
   @State() columnSizingInfo: ColumnSizingInfoState =
     {} as ColumnSizingInfoState;
-  /** Column resizing ends */
 
   @State() sorting: ModusDataTableSortingState = [];
   @State() table: Table<unknown>;
@@ -221,6 +229,19 @@ export class ModusDataTable {
 
     return (
       <Host>
+        {this.panelOptions && (
+          <modus-data-table-panel
+            table={this.table}
+            panelOptions={this.panelOptions}>
+            <div slot="left-section">
+              <slot name="panelGroupLeft"></slot>
+            </div>
+            <div slot="right-section">
+              <slot name="panelGroupRight"></slot>
+            </div>
+          </modus-data-table-panel>
+        )}
+
         <table class={className} style={tableStyle}>
           <thead>
             {headerGroups?.map((headerGroup, index) => (

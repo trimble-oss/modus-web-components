@@ -3,15 +3,15 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Column } from '@tanstack/table-core';
-import { IconSortAZ } from '../../icons/icon-sort-a-z';
-import { IconSortZA } from '../../icons/icon-sort-z-a';
+import { IconSortAZ } from '../../../icons/icon-sort-a-z';
+import { IconSortZA } from '../../../icons/icon-sort-z-a';
 import {
   EnterKey,
   SortAscending,
   SortDescending,
   SortedAscending,
   SortedDescending,
-} from '../constants/constants';
+} from '../../constants/constants';
 
 interface ModusDataTableHeaderSortProps {
   column: Column<unknown, unknown>;
