@@ -18,6 +18,19 @@ import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/
 import { Tab } from "./components/modus-tabs/modus-tabs";
 import { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
 import { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
+export { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
+export { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
+export { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSortEvent, ModusTableSelectionOptions, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
+export { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
+export { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
+export { ModusNavbarProfileMenuLink } from "./components/modus-navbar/profile-menu/modus-navbar-profile-menu";
+export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
+export { ModusNavbarProfileMenuLink as ModusNavbarProfileMenuLink1 } from "./components/modus-navbar/profile-menu/modus-navbar-profile-menu";
+export { RadioButton } from "./components/modus-radio-group/modus-radio-button";
+export { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
+export { Tab } from "./components/modus-tabs/modus-tabs";
+export { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
+export { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export namespace Components {
     interface ModusAccordion {
         /**
@@ -604,7 +617,7 @@ export namespace Components {
         "variant": 'default' | 'blue';
     }
     interface ModusNavbarAppsMenu {
-        "apps": ModusNavbarApp[];
+        "apps": ModusNavbarApp1[];
         "reverse": boolean;
     }
     interface ModusNavbarMainMenu {
@@ -616,7 +629,7 @@ export namespace Components {
         "avatarUrl": string;
         "email": string;
         "initials": string;
-        "links": ModusNavbarProfileMenuLink[];
+        "links": ModusNavbarProfileMenuLink1[];
         "reverse": boolean;
         "username": string;
         "variant": 'default' | 'blue';
@@ -2274,8 +2287,8 @@ declare namespace LocalJSX {
         "variant"?: 'default' | 'blue';
     }
     interface ModusNavbarAppsMenu {
-        "apps"?: ModusNavbarApp[];
-        "onAppOpen"?: (event: ModusNavbarAppsMenuCustomEvent<ModusNavbarApp>) => void;
+        "apps"?: ModusNavbarApp1[];
+        "onAppOpen"?: (event: ModusNavbarAppsMenuCustomEvent<ModusNavbarApp1>) => void;
         "reverse"?: boolean;
     }
     interface ModusNavbarMainMenu {
@@ -2287,7 +2300,7 @@ declare namespace LocalJSX {
         "avatarUrl"?: string;
         "email"?: string;
         "initials"?: string;
-        "links"?: ModusNavbarProfileMenuLink[];
+        "links"?: ModusNavbarProfileMenuLink1[];
         "onLinkClick"?: (event: ModusNavbarProfileMenuCustomEvent<string>) => void;
         "onSignOutClick"?: (event: ModusNavbarProfileMenuCustomEvent<MouseEvent>) => void;
         "reverse"?: boolean;
