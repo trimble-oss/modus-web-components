@@ -7,14 +7,14 @@
 
 ## Properties
 
-| Property               | Attribute | Description                                | Type                           | Default                                                                                                                               |
-| ---------------------- | --------- | ------------------------------------------ | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `columns` _(required)_ | --        |                                            | `TColumn[] \| string[]`        | `undefined`                                                                                                                           |
-| `data` _(required)_    | --        |                                            | `TCell[][] \| TRow[]`          | `undefined`                                                                                                                           |
-| `displayOptions`       | --        | Options for data table display.            | `ModusDataTableDisplayOptions` | `{     animateRowActionsDropdown: false,     borderless: true,     cellBorderless: true,     rowStripe: false,     size: 'large'   }` |
-| `rowActions`           | --        | Actions that can be performed on each row. | `ModusDataTableRowAction[]`    | `[]`                                                                                                                                  |
-| `selectionOptions`     | --        | Options for data table item selection.     | `ModusTableSelectionOptions`   | `{     canSelect: false,     checkboxSelection: false,   }`                                                                           |
-| `sortOptions`          | --        | Options for data table column sort.        | `ModusTableSortOptions`        | `{     canSort: false,     serverSide: false,   }`                                                                                    |
+| Property               | Attribute | Description                                | Type                           | Default                                                                                                                                |
+| ---------------------- | --------- | ------------------------------------------ | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `columns` _(required)_ | --        |                                            | `TColumn[] \| string[]`        | `undefined`                                                                                                                            |
+| `data` _(required)_    | --        |                                            | `TCell[][] \| TRow[]`          | `undefined`                                                                                                                            |
+| `displayOptions`       | --        | Options for data table display.            | `ModusDataTableDisplayOptions` | `{     animateRowActionsDropdown: false,     borderless: true,     cellBorderless: true,     rowStripe: false,     size: 'large',   }` |
+| `rowActions`           | --        | Actions that can be performed on each row. | `ModusDataTableRowAction[]`    | `[]`                                                                                                                                   |
+| `selectionOptions`     | --        | Options for data table item selection.     | `ModusTableSelectionOptions`   | `{     canSelect: false,     checkboxSelection: false,   }`                                                                            |
+| `sortOptions`          | --        | Options for data table column sort.        | `ModusTableSortOptions`        | `{     canSort: false,     serverSide: false,   }`                                                                                     |
 
 
 ## Events

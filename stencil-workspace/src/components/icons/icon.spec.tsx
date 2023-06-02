@@ -1,11 +1,12 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { h, Component, FunctionalComponent } from '@stencil/core';
-import { newSpecPage, SpecPage } from '@stencil/core/testing';
+import { h, FunctionalComponent } from '@stencil/core';
 import { IconTriangleDown } from './icon-triangle-down';
+import { SpecPage } from '@stencil/core/internal';
+import { newSpecPage } from '@stencil/core/testing';
 
 describe('icon-triangle-down', () => {
   it('should render', async () => {
-    const page = await renderFunctionalComponentToSpecPage(() => <IconTriangleDown />);
+    const page = await renderFunctionalComponentToSpecPage(<IconTriangleDown />);
 
     expect(page.root).toEqualHtml(`
       <svg class="icon-triangle-down" height="16" width="16" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -15,7 +16,7 @@ describe('icon-triangle-down', () => {
   });
 
   it('should render correct size', async () => {
-    const page = await renderFunctionalComponentToSpecPage(() => <IconTriangleDown size="12" />);
+    const page = await renderFunctionalComponentToSpecPage(<IconTriangleDown size="12" />);
 
     expect(page.root).toEqualHtml(`
       <svg class="icon-triangle-down" height="12" width="12" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -25,21 +26,16 @@ describe('icon-triangle-down', () => {
   });
 
   it('should not have onClick by default', async () => {
-    const page = await renderFunctionalComponentToSpecPage(() => <IconTriangleDown />);
+    const page = await renderFunctionalComponentToSpecPage(<IconTriangleDown />);
 
     expect(page.root).not.toContain('onClick');
   });
 });
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-function renderFunctionalComponentToSpecPage<T extends {}>(
-  componentConstructor: () => FunctionalComponent<T>
-): Promise<SpecPage> {
-  @Component({ tag: 'test-component' })
-  class TestComponent {}
-
+function renderFunctionalComponentToSpecPage<T extends {}>(componentConstructor: FunctionalComponent<T>): Promise<SpecPage> {
   return newSpecPage({
-    components: [TestComponent],
-    template: componentConstructor,
+    components: [],
+    template: () => componentConstructor,
   });
 }
