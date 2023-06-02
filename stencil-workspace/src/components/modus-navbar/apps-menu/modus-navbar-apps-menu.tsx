@@ -6,8 +6,8 @@ export interface ModusNavbarApp {
   logoUrl: string;
   name: string;
   url: string;
-  category: string;
-  showCategory: boolean;
+  category?: string;
+  showCategory?: boolean;
 }
 
 @Component({
