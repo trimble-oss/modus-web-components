@@ -117,7 +117,7 @@ export class ModusChip {
           this.closeIcon == 'remove'? (
             <IconRemove onClick={this.disabled ? null : (event) => this.onCloseClick(event)} size={'24'}></IconRemove>
           ): (
-            <IconClose onClick={this.disabled ? null : (event) => this.onCloseClick(event)} size={'24'}></IconClose>
+            <IconClose onClick={this.disabled ? null : (event) => this.onCloseClick(event)} size={'18'}></IconClose>
           ) : null}
       </div>
     );
