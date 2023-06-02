@@ -39,12 +39,12 @@
     "start-storybook": "npm run build && cd storybook && npm run storybook"
   },
   "dependencies": {
-    "@stencil/core": "^2.22.3"
+    "@stencil/core": "^3.3.0"
   },
   "devDependencies": {
-    "@stencil/angular-output-target": "^0.4.0",
+    "@stencil/angular-output-target": "^0.5.0",
     "@stencil/postcss": "^2.1.0",
-    "@stencil/react-output-target": "^0.3.1",
+    "@stencil/react-output-target": "^0.4.0",
     "@stencil/sass": "^2.0.4",
     "@types/jest": "^27.5.1",
     "@typescript-eslint/eslint-plugin": "^5.59.0",

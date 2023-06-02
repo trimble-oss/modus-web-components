@@ -1,5 +1,5 @@
 import { newE2EPage } from '@stencil/core/testing';
-import { RadioButton } from './modus-radio-group';
+import { RadioButton } from './modus-radio-button';
 
 describe('modus-radio-group', () => {
   it('renders', async () => {
