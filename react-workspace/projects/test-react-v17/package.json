@@ -1,6 +1,7 @@
 {
-  "name": "react-tester",
+  "name": "test-react-v17",
   "version": "0.1.0",
+  "description": "Test application for Modus React Component Library for React v17",
   "private": true,
   "dependencies": {
     "@trimble-oss/modus-react-components": "0.1.42-17",
@@ -34,7 +35,9 @@
     ]
   },
   "devDependencies": {
-    "react-scripts": "^5.0.0",
-    "source-map-loader": "^4.0.1"
+    "react-scripts": "^5.0.1"
+  },
+  "overrides": {
+    "nth-check": "^2.0.1"
   }
 }
