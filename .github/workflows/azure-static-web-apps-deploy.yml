@@ -44,6 +44,8 @@ jobs:
           app_location: "/stencil-workspace/storybook/dist/" # App source code path
           api_location: "" # Api source code path - optional
           output_location: "/stencil-workspace/storybook/dist/" # Built app content directory - optional
+        env:
+          skip_deploy_on_missing_secrets: true
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
