@@ -111,38 +111,40 @@ nav {
       position: relative;
       width: 40px;
 
-      img.avatar {
-        background-color: $modus-navbar-icon-color;
-        border-radius: 50%;
-        height: 32px;
-        width: 32px;
-      }
+      modus-tooltip {
+        img.avatar {
+          background-color: $modus-navbar-icon-color;
+          border-radius: 50%;
+          height: 32px;
+          width: 32px;
+        }
 
-      .initials {
-        align-items: center;
-        background-color: $modus-navbar-icon-color;
-        border-radius: 50%;
-        color: $modus-navbar-profile-icon-initials-color;
-        display: flex;
-        font-size: $rem-14px;
-        font-weight: $font-weight-semi-bold;
-        height: 32px;
-        justify-content: center;
-        user-select: none;
-        width: 32px;
-      }
+        .initials {
+          align-items: center;
+          background-color: $modus-navbar-icon-color;
+          border-radius: 50%;
+          color: $modus-navbar-profile-icon-initials-color;
+          display: flex;
+          font-size: $rem-14px;
+          font-weight: $font-weight-semi-bold;
+          height: 32px;
+          justify-content: center;
+          user-select: none;
+          width: 32px;
+        }
 
-      > :first-child:hover,
-      > :first-child:focus {
-        border: $rem-4px solid $modus-navbar-icon-color;
-      }
+        > :first-child:hover,
+        > :first-child:focus {
+          border: $rem-4px solid $modus-navbar-icon-color;
+        }
 
-      > :first-child:active {
-        outline: $rem-4px solid $modus-navbar-profile-icon-active-border-color;
-      }
+        > :first-child:active {
+          outline: $rem-4px solid $modus-navbar-profile-icon-active-border-color;
+        }
 
-      &:hover {
-        cursor: pointer;
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
   }
@@ -179,22 +181,24 @@ nav {
     }
 
     .profile-menu {
-      img.avatar,
-      .initials {
-        background-color: $modus-navbar-blue-icon-color;
-      }
+      modus-tooltip {
+        img.avatar,
+        .initials {
+          background-color: $modus-navbar-blue-icon-color;
+        }
 
-      .initials {
-        color: $modus-navbar-blue-profile-icon-initials-color;
-      }
+        .initials {
+          color: $modus-navbar-blue-profile-icon-initials-color;
+        }
 
-      > :first-child:hover,
-      > :first-child:focus {
-        border-color: $modus-navbar-blue-icon-color;
-      }
+        > :first-child:hover,
+        > :first-child:focus {
+          border-color: $modus-navbar-blue-icon-color;
+        }
 
-      > :first-child:active {
-        outline: $rem-4px solid $modus-navbar-blue-profile-icon-active-border-color;
+        > :first-child:active {
+          outline: $rem-4px solid $modus-navbar-blue-profile-icon-active-border-color;
+        }
       }
     }
   }

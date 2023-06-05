@@ -10,9 +10,8 @@ import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSortEvent, ModusTableSelectionOptions, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 import { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
 import { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
-import { ModusNavbarProfileMenuLink } from "./components/modus-navbar/profile-menu/modus-navbar-profile-menu";
+import { ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
-import { ModusNavbarProfileMenuLink as ModusNavbarProfileMenuLink1 } from "./components/modus-navbar/profile-menu/modus-navbar-profile-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
 import { Tab } from "./components/modus-tabs/modus-tabs";
@@ -23,9 +22,8 @@ export { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 export { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSortEvent, ModusTableSelectionOptions, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 export { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
 export { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
-export { ModusNavbarProfileMenuLink } from "./components/modus-navbar/profile-menu/modus-navbar-profile-menu";
+export { ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
 export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
-export { ModusNavbarProfileMenuLink as ModusNavbarProfileMenuLink1 } from "./components/modus-navbar/profile-menu/modus-navbar-profile-menu";
 export { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 export { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
 export { Tab } from "./components/modus-tabs/modus-tabs";
@@ -568,21 +566,15 @@ export namespace Components {
         /**
           * (required) Profile menu options.
          */
-        "profileMenuOptions": {
-    avatarUrl?: string;
-    email?: string;
-    initials?: string;
-    links?: ModusNavbarProfileMenuLink[];
-    username: string;
-  };
+        "profileMenuOptions": ModusProfileMenuOptions;
         /**
           * (optional) Whether to display the navbar items in reverse order.
          */
         "reverse": boolean;
         /**
-          * (optional) Search tooltip label.
+          * (optional) Search tooltip.
          */
-        "searchLabel": string;
+        "searchTooltip": ModusNavbarTooltip;
         /**
           * (optional) Whether to show the apps menu.
          */
@@ -629,7 +621,7 @@ export namespace Components {
         "avatarUrl": string;
         "email": string;
         "initials": string;
-        "links": ModusNavbarProfileMenuLink1[];
+        "links": ModusNavbarProfileMenuLink[];
         "reverse": boolean;
         "username": string;
         "variant": 'default' | 'blue';
@@ -1101,6 +1093,10 @@ export namespace Components {
           * (optional) The tooltip's aria-label.
          */
         "ariaLabel": string | null;
+        /**
+          * Hide the tooltip
+         */
+        "disabled": boolean;
         /**
           * (optional) The tooltip's position relative to its content.
          */
@@ -2238,21 +2234,15 @@ declare namespace LocalJSX {
         /**
           * (required) Profile menu options.
          */
-        "profileMenuOptions"?: {
-    avatarUrl?: string;
-    email?: string;
-    initials?: string;
-    links?: ModusNavbarProfileMenuLink[];
-    username: string;
-  };
+        "profileMenuOptions"?: ModusProfileMenuOptions;
         /**
           * (optional) Whether to display the navbar items in reverse order.
          */
         "reverse"?: boolean;
         /**
-          * (optional) Search tooltip label.
+          * (optional) Search tooltip.
          */
-        "searchLabel"?: string;
+        "searchTooltip"?: ModusNavbarTooltip;
         /**
           * (optional) Whether to show the apps menu.
          */
@@ -2300,7 +2290,7 @@ declare namespace LocalJSX {
         "avatarUrl"?: string;
         "email"?: string;
         "initials"?: string;
-        "links"?: ModusNavbarProfileMenuLink1[];
+        "links"?: ModusNavbarProfileMenuLink[];
         "onLinkClick"?: (event: ModusNavbarProfileMenuCustomEvent<string>) => void;
         "onSignOutClick"?: (event: ModusNavbarProfileMenuCustomEvent<MouseEvent>) => void;
         "reverse"?: boolean;
@@ -2827,6 +2817,10 @@ declare namespace LocalJSX {
           * (optional) The tooltip's aria-label.
          */
         "ariaLabel"?: string | null;
+        /**
+          * Hide the tooltip
+         */
+        "disabled"?: boolean;
         /**
           * (optional) The tooltip's position relative to its content.
          */
