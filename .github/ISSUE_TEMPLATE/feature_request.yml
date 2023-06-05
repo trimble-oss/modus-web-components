@@ -9,7 +9,7 @@ body:
       options:
         - label: I have [searched](https://github.com/trimble-oss/modus-web-components/issues?q=is%3Aissue) for duplicate or closed feature requests
           required: true
-        - label: I have read the [contributing guidelines](https://github.com/trimble-oss/modus-web-components/blob/main/CONTRIBUTING.md)
+        - label: I have read the [Modus style guidelines](https://modus.trimble.com/components/web/introduction/)
           required: true
   - type: textarea
     id: proposal
@@ -23,16 +23,15 @@ body:
     attributes:
       label: Motivation and context
       description: Tell us why this change is needed or helpful, and what problems it may help solve.
-    validations:
-      required: false
   - type: dropdown
     id: package
     attributes:
-      label: Which npm package?
+      label: What is the issue regarding ?
       multiple: true
       options:
         - '@trimble-oss/modus-web-components'
         - '@trimble-oss/modus-angular-components'
+        - Modus Web Components Website (Storybook)
     validations:
       required: true
   - type: dropdown
@@ -49,18 +48,26 @@ body:
   - type: input
     id: product
     attributes:
-      label: What is the product name the feature is requested for?
+      label: What product/project are you using Modus Components for ?
     validations:
       required: true
   - type: input
     id: team
     attributes:
-      label: What is the team name the product belongs to?
+      label: What is your team/division name ?
     validations:
       required: true
-  - type: input
-    id: division
+  - type: dropdown
+    id: contribution
     attributes:
-      label: What is the division name the team belongs to?
-    validations:
-      required: true
+      label: Are you willing to contribute ?
+      multiple: false
+      options:
+        - 'Yes'
+        - 'No'
+        - 'Maybe'
+  - type: input
+    id: inProduction
+    attributes:
+      label: Are you using Modus Web Components in production ?
+      placeholder: 'If yes, please feel free to share with us the app URL (optional).'

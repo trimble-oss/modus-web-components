@@ -43,9 +43,7 @@ This component utilizes the slot element, allowing you to render your own HTML i
       ],
       logoUrl: '',
       name: '',
-      url: '',
-      category: '',
-      showCategory: false,
+      url: ''
     },
   ];
   element.productLogoOptions = {
@@ -90,9 +88,7 @@ This component utilizes the slot element, allowing you to render your own HTML i
       ],
       logoUrl: '',
       name: '',
-      url: '',
-      category: '',
-      showCategory: false,
+      url: ''
     },
   ];
   element.productLogoOptions = {
@@ -140,9 +136,7 @@ Use the `variant` prop to choose a blue background navbar.
       ],
       logoUrl: '',
       name: '',
-      url: '',
-      category: '',
-      showCategory: false,
+      url: ''
     },
   ];
   element.productLogoOptions = {
@@ -166,8 +160,8 @@ interface ModusNavbarApp {
   logoUrl: string;
   name: string;
   url: string;
-  category: string;
-  showCategory: boolean;
+  category?: string;
+  showCategory?: boolean;
 }
 
 interface ModusNavbarProfileMenuLink {
