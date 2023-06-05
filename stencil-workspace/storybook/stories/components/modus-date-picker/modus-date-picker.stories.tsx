@@ -212,7 +212,6 @@ const DateRangeTemplate = ({
   errorText,
   format,
   helperText,
-  label,
   placeholder,
   readOnly,
   required,
