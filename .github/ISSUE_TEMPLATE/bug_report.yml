@@ -11,8 +11,6 @@ body:
       options:
         - label: I have [searched](https://github.com/trimble-oss/modus-web-components/issues?q=is%3Aissue) for duplicate or closed issues
           required: true
-        - label: I have validated any HTML to avoid common problems
-          required: true
         - label: I have read the [contributing guidelines](https://github.com/trimble-oss/modus-web-components/blob/main/CONTRIBUTING.md)
           required: true
   - type: textarea
@@ -27,8 +25,6 @@ body:
     attributes:
       label: Reduced test cases
       description: Include links [reduced test case](https://css-tricks.com/reduced-test-cases/) links or suggested fixes using a online code editor.
-    validations:
-      required: false
   - type: dropdown
     id: os
     attributes:
@@ -40,8 +36,6 @@ body:
         - Android
         - iOS
         - Linux
-    validations:
-      required: false
   - type: dropdown
     id: browser
     attributes:
@@ -56,20 +50,19 @@ body:
   - type: dropdown
     id: package
     attributes:
-      label: Which npm package?
+      label: What is the issue regarding ?
       multiple: true
       options:
         - '@trimble-oss/modus-web-components'
         - '@trimble-oss/modus-angular-components'
+        - Modus Web Components Website (Storybook)
     validations:
-      required: false
+      required: true
   - type: input
     id: version
     attributes:
-      label: What version of npm package are you using?
+      label: What version of npm package are you using ?
       placeholder: 'e.g., v0.0.1'
-    validations:
-      required: false
   - type: dropdown
     id: priority
     attributes:
@@ -84,12 +77,26 @@ body:
   - type: input
     id: product
     attributes:
-      label: What product/project are you using Modus Components for?
+      label: What product/project are you using Modus Components for ?
     validations:
       required: true
   - type: input
     id: team
     attributes:
-      label: What is your team/division name?
+      label: What is your team/division name ?
     validations:
       required: true
+  - type: dropdown
+    id: contribution
+    attributes:
+      label: Are you willing to contribute ?
+      multiple: false
+      options:
+        - 'Yes'
+        - 'No'
+        - 'Maybe'
+  - type: input
+    id: inProduction
+    attributes:
+      label: Are you using Modus Web Components in production ?
+      placeholder: 'If yes, please feel free to share with us the app URL (optional).'
