@@ -57,8 +57,8 @@ body:
       label: What is your team/division name ?
     validations:
       required: true
-  - type: input
-    id: team
+  - type: dropdown
+    id: contribution
     attributes:
       label: Are you willing to contribute ?
       multiple: false
@@ -67,7 +67,7 @@ body:
         - 'No'
         - 'Maybe'
   - type: input
-    id: team
+    id: inProduction
     attributes:
       label: Are you using Modus Web Components in production ?
       placeholder: 'If yes, please feel free to share with us the app URL (optional).'
