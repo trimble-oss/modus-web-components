@@ -69,9 +69,14 @@ export class ModusCheckbox {
         class={className}
         onClick={() => {
           this.handleCheckboxClick();
-        }}
-        tabIndex={tabIndexValue}>
-        <div class={`${this.checked || this.indeterminate ? 'checkbox blue-background checked' : 'checkbox'} ${this.disabled ? 'disabled' : ''}`}>
+        }}>
+        <div
+          tabIndex={tabIndexValue}
+          class={`${
+            this.checked || this.indeterminate
+              ? 'checkbox blue-background checked'
+              : 'checkbox'
+          } ${this.disabled ? 'disabled' : ''}`}>
           {this.indeterminate ? (
             <div class={'checkmark checked'}>
               <IconIndeterminate color="#FFFFFF" size="24" />
@@ -90,7 +95,9 @@ export class ModusCheckbox {
           disabled={this.disabled}
           ref={(el) => (this.checkboxInput = el as HTMLInputElement)}
           type="checkbox"></input>
-        {this.label ? <label class={this.disabled ? 'disabled' : null}>{this.label}</label> : null}
+        {this.label ? (
+          <label class={this.disabled ? 'disabled' : null}>{this.label}</label>
+        ) : null}
       </div>
     );
   }
