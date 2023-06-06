@@ -270,20 +270,21 @@ export class ModusNavbar {
     const direction = this.reverse ? 'reverse' : '';
     const shadow = this.showShadow ? 'shadow' : '';
     const variant = `${this.variant === 'default' ? '' : 'nav-' + this.variant}`;
+
     return (
       <nav class={`${direction} ${shadow} ${variant}`}>
         <div class={`left ${direction}`}>
           {this.showMainMenu && (
-            <div class="navbar-button main-menu">
+            <div class="navbar-button main-menu-button">
               <span class="navbar-button-icon" onKeyDown={(event) => this.mainMenuKeydownHandler(event)} tabIndex={0}>
                 <IconMenu size="24" pressed={this.mainMenuVisible} onClick={(event) => this.mainMenuClickHandler(event)} />
               </span>
-              {this.mainMenuVisible && (
-                <modus-navbar-main-menu>
-                  <slot name={this.SLOT_MAIN}></slot>
-                </modus-navbar-main-menu>
-              )}
             </div>
+          )}
+          {this.mainMenuVisible && (
+            <modus-navbar-main-menu>
+              <slot name={this.SLOT_MAIN}></slot>
+            </modus-navbar-main-menu>
           )}
           <img
             class="product-logo"
