@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { Component, h, Prop, State, Element } from '@stencil/core';
+import { Component, h, Prop, State } from '@stencil/core';
 import { ContainerLayout, DOM_OBSERVER_CONFIG, INITIAL_CONTAINER_LAYOUT } from './modus-navbar-main-menu.models';
 
 @Component({
@@ -8,8 +8,6 @@ import { ContainerLayout, DOM_OBSERVER_CONFIG, INITIAL_CONTAINER_LAYOUT } from '
   shadow: true,
 })
 export class ModusNavbarMainMenu {
-  @Element() element: HTMLModusNavbarMainMenuElement;
-
   @Prop() navbarId: string;
 
   @State() containerLayout: ContainerLayout = INITIAL_CONTAINER_LAYOUT;
@@ -58,14 +56,10 @@ export class ModusNavbarMainMenu {
     const maxContainerHeight = window.innerHeight - navbarRect.bottom;
     const containerHeight = Math.min(maxContainerHeight, window.innerHeight);
 
-    const navbarIsInline = false;
-    const containerTop = navbarIsInline ? navbarRect.bottom + window.pageYOffset : navbarRect.bottom;
-    const containerLeft = navbarIsInline ? navbarRect.left + window.pageXOffset : navbarRect.left;
-
     this.containerLayout = {
       ...this.containerLayout,
-      top: `${containerTop}px`,
-      left: `${containerLeft}px`,
+      top: `${navbarRect.bottom}px`,
+      left: `${navbarRect.left}px`,
       height: `${containerHeight}px`,
     };
   };
