@@ -1,0 +1,48 @@
+[data-mwc-theme="light"] {
+  --theme-bg-color: #fff;
+  --theme-color: #252a2e;
+}
+
+[data-mwc-theme="dark"] {
+  --theme-bg-color: #252a2e;
+  --theme-color: #f1f1f6;
+}
+
+body{
+  color: var(--theme-color) !important;
+  background-color: var(--theme-bg-color) !important;
+}
+
+.grid{
+  display: grid;
+  grid-template-columns: auto;
+  grid-gap: 10px;
+  padding: 10px;
+}
+
+.grid-row{
+  display: grid;
+  grid-auto-flow:column;
+  width:fit-content;
+  grid-column-gap: 10px;
+}
+
+.w-50{
+  width:50%;
+}
+
+
+h3{
+  color:white;
+  width:100%;
+  background: #0e416c;
+  padding: 10px;
+}
+
+.theme-toggle-switch{
+  width: 60%;
+  display: flex;
+  justify-content: right;
+  position: sticky;
+  top:10px;
+}

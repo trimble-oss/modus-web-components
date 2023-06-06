@@ -15,13 +15,15 @@ import { Meta } from '@storybook/addon-docs';
   }}
 />
 
-# Angular Components
+# Modus Angular Components
 
 <modus-alert message="Modus Angular Components are available now !"></modus-alert>
 
-We highly recommend to use the [Modus Angular Components](https://www.npmjs.com/package/@trimble-oss/modus-angular-components) library for Angular based projects. The components are programmatically generated using the [StencilJS](https://stenciljs.com/) [Angular Framework Integration](https://stenciljs.com/docs/angular). Please check out the [instructions](https://www.npmjs.com/package/@trimble-oss/modus-angular-components) on how to use the library.
+We highly recommend to use the [Modus Angular Components](https://www.npmjs.com/package/@trimble-oss/modus-angular-components) library for Angular based projects. The components are programmatically generated using the [Stencil](https://stenciljs.com/) [Angular Framework Integration](https://stenciljs.com/docs/angular). Please check out the [instructions](https://www.npmjs.com/package/@trimble-oss/modus-angular-components) on how to use the library.
 
 ## Modus Web Components in a Angular project
+
+Optionally you can choose to consume the [Modus Web Components](https://www.npmjs.com/package/@trimble-oss/modus-web-components) directly in your Angular application instead of [Modus Angular Components](https://www.npmjs.com/package/@trimble-oss/modus-angular-components) by following the below steps.
 
 Angular has built-in support for web components and custom elements. Working with web components in Angular is straightforward, they work with the same template API we are familiar with.
 
@@ -50,7 +52,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 ### Wrapping Components
 
-Optionally you can wrap Modus Web Components in corresponding Angular components within your application.
+When using Modus Web Components directly, it is recommended to wrap it in corresponding Angular components within your application.
 This will abstract away from the library dependency, allowing more flexibility for you and your application in the future.
 Each part of the component is able to be abstracted, leaving you with an Angular-native component.
 

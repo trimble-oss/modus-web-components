@@ -207,7 +207,15 @@ Before releasing any of the framework outputs, the targeted version of the Modus
 
 ### React
 
-1. Update `./react-workspace/package.json`'s dependency on the Modus Web Components library to the targeted version.
+1. Update `./react-workspace/package.json`'s:
+   1. Dependency on the Modus Web Components library to the targeted version
+   2. The package's version to reflect the targeted version
 2. From the `./react-workspace` directory, run `npm i`.
 3. From the `./react-workspace` directory, run `npm run build`.
 4. From the `./react-workspace` directory, run `npm publish`.
+
+As an alternative to publish, this can be also consumed in a local react application using `npm link` or generate a tarball file using `npm pack`.
+
+#### Recommended
+
+Import the React library in `./react-workspace/projects/test-react-v17` for testing the components locally, refer to `src/App.tsx` file for more details on how to test the components.
