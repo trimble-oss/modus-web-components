@@ -5,12 +5,11 @@
 
   border-radius: 0 0 $rem_2px $rem_2px;
   border-top: none;
+  box-sizing: border-box;
   clip-path: inset(0 -10px -10px -10px);
   cursor: default;
-  left: 0;
   max-width: 616px;
   min-width: 248px;
   padding: 0;
-  top: 52px;
   width: max-content;
 }
