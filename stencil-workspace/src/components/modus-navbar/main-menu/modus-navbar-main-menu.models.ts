@@ -5,13 +5,13 @@ export interface ContainerLayout {
   height: string;
 }
 
-export const INITIAL_CONTAINER_LAYOUT: ContainerLayout = {
+export const INITIAL_CONTAINER_LAYOUT: ContainerLayout = Object.freeze({
   position: 'fixed',
   top: '0px',
   left: '0px',
   height: '0px',
-};
+});
 
-export const DOM_OBSERVER_CONFIG: MutationObserverInit = {
+export const DOM_OBSERVER_CONFIG: MutationObserverInit = Object.freeze({
   childList: true,
-};
+});
