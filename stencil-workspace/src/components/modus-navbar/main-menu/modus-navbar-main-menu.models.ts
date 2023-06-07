@@ -5,7 +5,7 @@ export interface ContainerLayout {
   height: string;
 }
 
-export const INITIAL_CONTAINER_LAYOUT: ContainerLayout = Object.freeze({
+export const DEFAULT_CONTAINER_LAYOUT: ContainerLayout = Object.freeze({
   position: 'fixed',
   top: '0px',
   left: '0px',

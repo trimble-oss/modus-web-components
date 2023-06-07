@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 import { Component, h, Prop, State } from '@stencil/core';
-import { ContainerLayout, DOM_OBSERVER_CONFIG, INITIAL_CONTAINER_LAYOUT } from './modus-navbar-main-menu.models';
+import { ContainerLayout, DOM_OBSERVER_CONFIG, DEFAULT_CONTAINER_LAYOUT } from './modus-navbar-main-menu.models';
 
 @Component({
   tag: 'modus-navbar-main-menu',
@@ -10,7 +10,7 @@ import { ContainerLayout, DOM_OBSERVER_CONFIG, INITIAL_CONTAINER_LAYOUT } from '
 export class ModusNavbarMainMenu {
   @Prop() navbarId: string;
 
-  @State() containerLayout: ContainerLayout = INITIAL_CONTAINER_LAYOUT;
+  @State() containerLayout: ContainerLayout = DEFAULT_CONTAINER_LAYOUT;
 
   private observer: MutationObserver | null = null;
 
@@ -53,8 +53,8 @@ export class ModusNavbarMainMenu {
       return;
     }
 
-    const maxContainerHeight = window.innerHeight - navbarRect.bottom;
-    const containerHeight = Math.min(maxContainerHeight, window.innerHeight);
+    const availableHeight = window.innerHeight - navbarRect.bottom;
+    const containerHeight = Math.min(availableHeight, window.innerHeight);
 
     this.containerLayout = {
       ...this.containerLayout,
