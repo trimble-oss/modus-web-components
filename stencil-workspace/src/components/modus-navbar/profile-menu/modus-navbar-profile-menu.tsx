@@ -1,11 +1,6 @@
 // eslint-disable-next-line
 import { Component, Prop, h, Event, EventEmitter } from '@stencil/core';
-
-export interface ModusNavbarProfileMenuLink {
-  display: string;
-  id: string;
-}
-
+import { ModusNavbarProfileMenuLink } from '../modus-navbar.models';
 @Component({
   tag: 'modus-navbar-profile-menu',
   styleUrl: 'modus-navbar-profile-menu.scss',

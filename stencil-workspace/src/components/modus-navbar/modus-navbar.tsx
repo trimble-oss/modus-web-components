@@ -15,7 +15,7 @@ import { IconApps } from '../icons/icon-apps';
 import { IconSearch } from '../icons/icon-search';
 import { ModusNavbarApp } from './apps-menu/modus-navbar-apps-menu';
 import { IconHelp } from '../icons/icon-help';
-import { ModusNavbarProfileMenuLink } from './profile-menu/modus-navbar-profile-menu';
+import { ModusNavbarTooltip, ModusProfileMenuOptions } from './modus-navbar.models';
 
 /**
  * @slot main - Renders custom main menu content
@@ -37,19 +37,13 @@ export class ModusNavbar {
   @Prop() productLogoOptions: { height?: string; url: string };
 
   /** (required) Profile menu options. */
-  @Prop({ mutable: true }) profileMenuOptions: {
-    avatarUrl?: string;
-    email?: string;
-    initials?: string;
-    links?: ModusNavbarProfileMenuLink[];
-    username: string;
-  };
+  @Prop({ mutable: true }) profileMenuOptions: ModusProfileMenuOptions;
 
   /** (optional) Whether to display the navbar items in reverse order. */
   @Prop() reverse: boolean;
 
-  /** (optional) Search tooltip label. */
-  @Prop() searchLabel: string;
+  /** (optional) Search tooltip. */
+  @Prop() searchTooltip: ModusNavbarTooltip;
 
   /** (optional) Whether to show the apps menu. */
   @Prop() showAppsMenu: boolean;
@@ -297,7 +291,10 @@ export class ModusNavbar {
           {this.showSearch && (
             <div class="navbar-button search">
               <span class="navbar-button-icon">
-                <modus-tooltip text={this.searchLabel} position="bottom">
+                <modus-tooltip
+                  text={this.searchTooltip?.text}
+                  aria-label={this.searchTooltip?.ariaLabel}
+                  position="bottom">
                   <IconSearch size="24" />
                 </modus-tooltip>
               </span>
@@ -345,26 +342,32 @@ export class ModusNavbar {
             </div>
           )}
           <div class="profile-menu">
-            {this.profileMenuOptions?.avatarUrl ? (
-              <img
-                class="avatar"
-                height="32"
-                src={this.profileMenuOptions?.avatarUrl}
-                alt="Modus navbar profile menu avatar"
-                onClick={(event) => this.profileMenuClickHandler(event)}
-                onKeyDown={(event) => this.profileMenuKeydownHandler(event)}
-                tabIndex={0}
-                ref={(el) => (this.profileAvatarElement = el as HTMLImageElement)}
-              />
-            ) : (
-              <span
-                class="initials"
-                onClick={(event) => this.profileMenuClickHandler(event)}
-                onKeyDown={(event) => this.profileMenuKeydownHandler(event)}
-                tabIndex={0}>
-                {this.profileMenuOptions?.initials}
-              </span>
-            )}
+            <modus-tooltip
+              text={this.profileMenuOptions?.tooltip?.text}
+              aria-label={this.profileMenuOptions?.tooltip?.ariaLabel}
+              disabled={this.profileMenuVisible}
+              position="bottom">
+              {this.profileMenuOptions?.avatarUrl ? (
+                <img
+                  class="avatar"
+                  height="32"
+                  src={this.profileMenuOptions?.avatarUrl}
+                  alt="Modus navbar profile menu avatar"
+                  onClick={(event) => this.profileMenuClickHandler(event)}
+                  onKeyDown={(event) => this.profileMenuKeydownHandler(event)}
+                  tabIndex={0}
+                  ref={(el) => (this.profileAvatarElement = el as HTMLImageElement)}
+                />
+              ) : (
+                <span
+                  class="initials"
+                  onClick={(event) => this.profileMenuClickHandler(event)}
+                  onKeyDown={(event) => this.profileMenuKeydownHandler(event)}
+                  tabIndex={0}>
+                  {this.profileMenuOptions?.initials}
+                </span>
+              )}
+            </modus-tooltip>
             {this.profileMenuVisible && (
               <modus-navbar-profile-menu
                 avatar-url={this.profileMenuOptions?.avatarUrl}

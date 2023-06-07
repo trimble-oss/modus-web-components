@@ -16,12 +16,16 @@ export class ModusTooltip {
   /** The tooltip's text. */
   @Prop() text: string;
 
+  /** Hide the tooltip */
+  @Prop() disabled: boolean;
+
   render(): unknown {
     const className = `modus-tooltip ${this.position}`;
+    const showTooltip = !this.disabled && this.text;
     return (
       <div class={className}>
         <slot />
-        {this.text && (
+        {showTooltip && (
           <div aria-label={this.ariaLabel} class={'text'} role="tooltip">
             {this.text}
           </div>
