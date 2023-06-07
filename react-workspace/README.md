@@ -1,35 +1,22 @@
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/84749026/148590605-2eb2a27d-4a7e-4e62-909f-ad8c0e72cd79.png" alt="Modus Web Components" />
-</p>
+# Modus React Components
 
-<p align="center">
-  <a href="https://modus-web-components.trimble.com/" target="_blank">
-    <img src="https://cdn.jsdelivr.net/gh/storybookjs/brand@master/badge/badge-storybook.svg" alt/>
-  </a>
-  <a href="https://www.npmjs.com/package/@trimble-oss/modus-web-components">
-    <img src="https://img.shields.io/github/package-json/v/trimble-oss/modus-web-components?color=blue&filename=stencil-workspace%2Fpackage.json" alt/>
-  </a>
-  <a href="https://github.com/trimble-oss/modus-web-components/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/trimble-oss/modus-web-components?color=lightblue" alt/>
-  </a>
-</p>
+## About
 
-The [Trimble Modus Design System](https://modus.trimble.com/) describes the UX that Trimble wants to provide in its UI across its many applications. The benefits of using Modus include rapid prototyping, development efficiency, and UX consistency.
+This is a React wrapper library for [Modus Web Components](https://www.npmjs.com/package/@trimble-oss/modus-web-components) and the components were programmatically generated using the [Stencil](https://stenciljs.com/) for React [v17.0.2](https://github.com/facebook/react/blob/main/CHANGELOG.md#1702-march-22-2021).
 
-Modus Web Components are reusable, encapsulated UI elements that are framework agnostic (can be implemented in any site). The modus-web-components library was built using the latest UX specs from Figma. Releases follow the [semantic versioning 2.0.0](https://semver.org/) spec.
+## Installation
 
-# Looking for documentation?
+Install the Modus React Components Library and its Modus Web Component dependency
+`npm install @trimble-oss/modus-react-components --save`
 
-You can check out <https://modus-web-components.trimble.com> for the library's latest Storybook documentation.
+## Example Usage
 
-# Installing Modus Web Components
+- Use a Modus Button in your `App.tsx`
 
-Check out the [Getting Started page](https://modus-web-components.trimble.com/?path=/docs/introduction-getting-started--page).
+  ```html
+  <ModusButton color="primary">Primary Button</ModusButton>
+  ```
 
-# Contributing
+## Contributing
 
-Curious about contributing? We've got a [contributing guide](https://github.com/trimble-oss/modus-web-components/blob/main/CONTRIBUTING.md) to help get you going.
-
-# Contributors
-
-Thanks to all of [our contributors](https://github.com/trimble-oss/modus-web-components/graphs/contributors)!
+To contribute to the Modus React Components library please see the Modus Web Components [contributing guidelines](https://github.com/trimble-oss/modus-web-components/blob/main/CONTRIBUTING.md) and how to generate [Modus React components](https://github.com/trimble-oss/modus-web-components/blob/main/CONTRIBUTING.md#react).

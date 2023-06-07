@@ -15,14 +15,22 @@ import { Meta } from '@storybook/addon-docs';
   }}
 />
 
-# React Integration
+# Modus React Components
 
-## Installation
+<modus-alert message="Modus React Components are available now !"></modus-alert>
+
+We highly recommend to use the [Modus React Components](https://www.npmjs.com/package/@trimble-oss/modus-react-components) library for React based projects. The components are programmatically generated using the [Stencil](https://stenciljs.com/) for React [v17.0.2](https://github.com/facebook/react/blob/main/CHANGELOG.md#1702-march-22-2021). Please check out the [instructions](https://www.npmjs.com/package/@trimble-oss/modus-react-components) on how to use the library.
+
+## Modus Web Components in a React project
+
+Optionally you can choose to consume the [Modus Web Components](https://www.npmjs.com/package/@trimble-oss/modus-web-components) directly in your React application instead of [Modus React Components](https://www.npmjs.com/package/@trimble-oss/modus-react-components) by following the below steps.
+
+### Installation
 
 If you haven't viewed the [Getting Started](/docs/introduction-getting-started--page) page yet, go ahead and give that a look.
 In your React application, import and execute `defineCustomElements()` in the index file.
 
-## Intrinsic Elements
+### Intrinsic Elements
 
 In your `src` folder, you will need to add a new file, `intrinsic.d.ts`, which will declare interfaces for the Modus Web Components so that errors aren't thrown when unknown element names are provided in the markup:
 
@@ -38,9 +46,9 @@ In your `src` folder, you will need to add a new file, `intrinsic.d.ts`, which w
 
 > You only need to define the components you are referencing.
 
-## Wrapping Components
+### Wrapping Components
 
-A strong suggestion we have is to wrap Modus Web Components in corresponding React components within your application.
+When using Modus Web Components directly, it is recommended to wrap it in corresponding React components within your application.
 This will abstract away from the library dependency, allowing more flexibility for you and your application in the future.
 Each part of the component is able to be abstracted, leaving you with a React component.
 

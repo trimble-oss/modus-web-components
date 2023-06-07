@@ -1,0 +1,43 @@
+{
+  "name": "test-react-v17",
+  "version": "0.1.0",
+  "description": "Test application for Modus React Component Library for React v17",
+  "private": true,
+  "dependencies": {
+    "@trimble-oss/modus-react-components": "0.1.43-17",
+    "@types/node": "^16.11.26",
+    "@types/react": "^17.0.40",
+    "@types/react-dom": "^17.0.13",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "typescript": "^4.6.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "react-scripts": "^5.0.1"
+  },
+  "overrides": {
+    "nth-check": "^2.0.1"
+  }
+}
