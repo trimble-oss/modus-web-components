@@ -273,7 +273,7 @@ export class ModusNavbar {
         <nav class={`${direction} ${shadow} ${variant}`}>
           <div class={`left ${direction}`}>
             {this.showMainMenu && (
-              <div class="navbar-button main-menu">
+              <div class="navbar-button main-menu-button">
                 <span class="navbar-button-icon" onKeyDown={(event) => this.mainMenuKeydownHandler(event)} tabIndex={0}>
                   <IconMenu size="24" pressed={this.mainMenuVisible} onClick={(event) => this.mainMenuClickHandler(event)} />
                 </span>
