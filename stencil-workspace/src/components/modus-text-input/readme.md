@@ -25,6 +25,7 @@
 | `readOnly`                  | `read-only`                    | (optional) Whether the input's content is read-only           | `boolean`                                                                   | `undefined` |
 | `required`                  | `required`                     | (optional) Whether the input is required.                     | `boolean`                                                                   | `undefined` |
 | `size`                      | `size`                         | (optional) The input's size.                                  | `"large" \| "medium"`                                                       | `'medium'`  |
+| `textAlign`                 | `text-align`                   | (optional) Set text alignment for the input.                  | `"left" \| "right"`                                                         | `'left'`    |
 | `type`                      | `type`                         | (optional) The input's type.                                  | `"password" \| "text"`                                                      | `'text'`    |
 | `validText`                 | `valid-text`                   | (optional) The input's valid state text.                      | `string`                                                                    | `undefined` |
 | `value`                     | `value`                        | (optional) The input's value.                                 | `string`                                                                    | `undefined` |

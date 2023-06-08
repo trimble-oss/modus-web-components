@@ -96,6 +96,21 @@ describe('modus-number-input', () => {
     expect(label.textContent).toEqual('Hello Label');
   });
 
+  it('renders changes to textAlign', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-number-input></modus-number-input>');
+    await page.waitForChanges();
+
+    const modusNumberInput = await page.find('modus-number-input');
+    expect(await page.find('modus-number-input >>> input')).toHaveClass('text-align-left');
+
+    modusNumberInput.setProperty('textAlign', 'right');
+    await page.waitForChanges();
+
+    expect(await page.find('modus-number-input >>> input')).toHaveClass('text-align-right');
+  });
+
   it('renders changes to placeholder', async () => {
     const page = await newE2EPage();
 

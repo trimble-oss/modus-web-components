@@ -44,6 +44,10 @@
       padding: 0 $rem-8px;
       width: 100%;
 
+      &.text-align-right {
+        text-align: right;
+      }
+
       &::placeholder {
         color: $modus-input-hint-text-color;
       }

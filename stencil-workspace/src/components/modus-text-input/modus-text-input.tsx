@@ -59,6 +59,9 @@ export class ModusTextInput {
   /** (optional) The input's size. */
   @Prop() size: 'medium' | 'large' = 'medium';
 
+  /** (optional) Set text alignment for the input. */
+  @Prop() textAlign: 'left' | 'right' = 'left';
+
   /** (optional) The input's type. */
   @Prop() type: 'text' | 'password' = 'text';
 
@@ -116,6 +119,10 @@ export class ModusTextInput {
     const isPassword = this.type === 'password';
     const showPasswordToggle = !!(this.includePasswordTextToggle && isPassword && this.value?.length);
     const showClearIcon = (isPassword && !this.includePasswordTextToggle) || !isPassword;
+    const textAlign = `text-align-${this.textAlign}`;
+    const inputClassName = `${this.includeSearchIcon ? 'has-left-icon' : ''} ${
+      this.clearable ? 'has-right-icon' : ''
+    } ${textAlign}`;
 
     return (
       <div
@@ -139,7 +146,7 @@ export class ModusTextInput {
           {this.includeSearchIcon ? <IconSearch size="16" /> : null}
           <input
             aria-placeholder={this.placeholder}
-            class={`${this.includeSearchIcon ? 'has-left-icon' : ''} ${this.clearable ? 'has-right-icon' : ''}`}
+            class={inputClassName}
             disabled={this.disabled}
             inputmode={this.inputmode}
             maxlength={this.maxLength}

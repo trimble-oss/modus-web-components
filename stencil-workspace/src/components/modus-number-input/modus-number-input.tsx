@@ -43,6 +43,9 @@ export class ModusNumberInput {
   /** (optional) The input's step. */
   @Prop() step: number;
 
+  /** (optional) Set text alignment for the number input. */
+  @Prop() textAlign: 'left' | 'right' = 'left';
+
   /** (optional) The input's valid state text. */
   @Prop() validText: string;
 
@@ -78,6 +81,7 @@ export class ModusNumberInput {
     const inputContainerClassName = `input-container ${
       this.errorText ? 'error' : this.validText ? 'valid' : ''
     } ${this.classBySize.get(this.size)}`;
+    const textAlign = `text-align-${this.textAlign}`;
 
     return (
       <div
@@ -99,6 +103,7 @@ export class ModusNumberInput {
         ) : null}
         <div class={inputContainerClassName}>
           <input
+            class={`${textAlign}`}
             disabled={this.disabled}
             max={this.maxValue}
             min={this.minValue}

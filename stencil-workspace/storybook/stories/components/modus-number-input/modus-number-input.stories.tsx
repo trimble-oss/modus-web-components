@@ -91,6 +91,24 @@ export default {
         type: { summary: 'number' },
       },
     },
+    textAlign: {
+      name: 'text-align',
+      control: {
+        options: [
+          'left',
+          'right'
+        ],
+        type: 'select',
+      },
+      description: 'text alignment for the number input.',
+      table: {
+        defaultValue: { summary: "'left'" },
+        type: {
+          summary:
+            "'left' | 'right'",
+        },
+      },
+    },
     validText: {
       name: 'valid-text',
       description: "The number input's valid text",
@@ -132,6 +150,7 @@ const Template = ({
   required,
   size,
   step,
+  textAlign,
   validText,
   value,
 }) => html`
@@ -148,6 +167,7 @@ const Template = ({
     required=${required}
     size=${size}
     step=${step}
+    text-align=${textAlign}
     valid-text=${validText}
     value=${value}></modus-number-input>
 `;
@@ -166,6 +186,7 @@ Default.args = {
   required: false,
   size: 'medium',
   step: 1,
+  textAlign: 'left',
   validText: '',
   value: 100,
 };

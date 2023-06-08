@@ -21,6 +21,7 @@
 | `required`    | `required`    | (optional) Whether the input is required.                     | `boolean`             | `undefined` |
 | `size`        | `size`        | (optional) The input's size.                                  | `"large" \| "medium"` | `'medium'`  |
 | `step`        | `step`        | (optional) The input's step.                                  | `number`              | `undefined` |
+| `textAlign`   | `text-align`  | (optional) Set text alignment for the number input.           | `"left" \| "right"`   | `'left'`    |
 | `validText`   | `valid-text`  | (optional) The input's valid state text.                      | `string`              | `undefined` |
 | `value`       | `value`       | (optional) The input's value.                                 | `string`              | `undefined` |
 
