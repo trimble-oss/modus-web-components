@@ -1,6 +1,12 @@
-// eslint-disable-next-line
-import { Component, Element, Event, EventEmitter, h, Listen, Prop, State } from '@stencil/core';
-import { IconTriangleDown } from '../icons/icon-triangle-down';
+import {
+  Component,
+  Event,
+  EventEmitter,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  h,
+  JSX,
+  Prop,
+} from '@stencil/core';
 import { createGuid } from '../../utils/utils';
 
 @Component({
@@ -9,9 +15,6 @@ import { createGuid } from '../../utils/utils';
   shadow: true,
 })
 export class ModusSelect {
-  /** (optional) Whether the input gets focus automatically on page load. */
-  // @Prop() autofocus: boolean;
-
   /** (optional) The select's aria-label. */
   @Prop() ariaLabel: string | null;
 
@@ -26,9 +29,6 @@ export class ModusSelect {
 
   /** (optional) The input label. */
   @Prop() label: string;
-
-  /** (optional) The number of visible options in a drop-down list. */
-  // @Prop() numberOfOptions = 5;
 
   /** The options for the dropdown list. */
   @Prop() options: unknown[] = [];
@@ -46,124 +46,95 @@ export class ModusSelect {
   @Prop() validText: string;
 
   /** (optional) The input value. */
-  @Prop() value: unknown;
+  @Prop({ mutable: true }) value: unknown;
 
   /** An event that fires on input value change. */
   @Event() valueChange: EventEmitter<unknown>;
-
-  @Element() el: HTMLElement;
-
-  @State() activeItemIndex = 0;
-
-  @State() visible: boolean;
 
   classBySize: Map<string, string> = new Map([
     ['medium', 'medium'],
     ['large', 'large'],
   ]);
 
-  @Listen('click', { target: 'document' })
-  documentClickHandler(event: MouseEvent): void {
-    // Close the select when click is outside the current element.
-    if (event.defaultPrevented || (event.target as HTMLElement).closest('modus-select')) {
-      return;
-    }
-
-    this.hideDropdown();
-  }
-
-  @Listen('keydown')
-  elementKeydownHandler(event: KeyboardEvent): void {
-    if (!this.visible || this.el.shadowRoot.activeElement.tagName !== 'BUTTON') {
-      return;
-    }
-
-    switch (event.key) {
-      case 'ArrowDown':
-        this.activeItemIndex = this.activeItemIndex + 1 < this.options.length ? this.activeItemIndex + 1 : this.activeItemIndex;
-        break;
-      case 'ArrowUp':
-        this.activeItemIndex = this.activeItemIndex - 1 > 0 ? this.activeItemIndex - 1 : 0;
-        break;
-      case 'Enter':
-        this.value = this.options[this.activeItemIndex];
-        this.activeItemIndex = 0;
-        break;
-      case 'Tab':
-        this.hideDropdown();
-        break;
-    }
-  }
-
-  handleButtonClick(): void {
-    if (this.visible) {
-      this.hideDropdown();
-    } else {
-      this.showDropdown();
-    }
-  }
-
   handleItemSelect(option: unknown): void {
-    this.value = option;
     this.valueChange.emit(option);
-    this.hideDropdown();
-    (this.el.shadowRoot.querySelector('button') as HTMLElement).focus();
+    this.value = option;
+  }
+  handleSelectChange(event: Event) {
+    const target = event.target as HTMLSelectElement;
+    const selectedValue = target.value;
+    this.handleItemSelect(selectedValue);
   }
 
-  hideDropdown(): void {
-    this.visible = false;
-    this.activeItemIndex = 0;
-  }
-
-  showDropdown(): void {
-    this.visible = true;
-
-    const activeOptionIndex = this.options?.findIndex((option) => option === this.value);
-    if (activeOptionIndex > -1) {
-      this.activeItemIndex = activeOptionIndex;
+  renderSubText(): JSX.Element | null {
+    if (this.errorText) {
+      return <label class="sub-text error">{this.errorText}</label>;
+    } else if (this.validText) {
+      return <label class="sub-text valid">{this.validText}</label>;
+    } else if (this.helperText) {
+      return <label class="sub-text helper">{this.helperText}</label>;
     }
+
+    return null;
+  }
+
+  renderLabel(): JSX.Element | null {
+    return this.label || this.required ? (
+      <div class="label-container">
+        {this.label ? <label>{this.label}</label> : null}
+        {this.required ? <span class="required">*</span> : null}
+      </div>
+    ) : null;
+  }
+
+  renderOptions(): unknown {
+    return this.options?.map((option) => (
+      <option
+        value={option[this.optionsDisplayProp]}
+        key={createGuid()}
+        selected={
+          this.value &&
+          (typeof option[this.optionsDisplayProp] === 'number'
+            ? Number(option[this.optionsDisplayProp]) === Number(this.value)
+            : option[this.optionsDisplayProp] === this.value)
+        }>
+        {option[this.optionsDisplayProp]}
+      </option>
+    ));
   }
 
   render(): unknown {
-    const buttonClass = `${this.classBySize.get(this.size)} ${this.errorText ? 'error' : this.validText ? 'valid' : ''}`;
-    const dropdownListClass = `dropdown-list ${this.visible ? 'visible' : 'hidden'} ${this.classBySize.get(this.size)}`;
-    const inputContainerClass = `input-container ${this.visible ? 'dropdown-visible' : ''}`;
+    const selectClass = `${this.classBySize.get(this.size)} ${
+      this.errorText
+        ? 'error'
+        : this.validText
+        ? 'valid'
+        : this.disabled
+        ? 'disabled'
+        : ''
+    }`;
 
     return (
-      <div role="listbox" aria-disabled={this.disabled ? 'true' : undefined} aria-label={this.ariaLabel} aria-required={this.required} class={this.disabled ? 'disabled' : undefined}>
-        {this.label || this.required ? (
-          <div class={'label-container'}>
-            {this.label ? <label>{this.label}</label> : null}
-            {this.required ? <span class="required">*</span> : null}
-          </div>
-        ) : null}
-        <div class={inputContainerClass}>
-          <button class={buttonClass} disabled={this.disabled} onClick={() => this.handleButtonClick()} type="button" aria-invalid={!!this.errorText}>
-            <div class="dropdown-text">{this.value ? this.value[this.optionsDisplayProp] : null}</div>
-            <IconTriangleDown size={'12'} />
-          </button>
-          <div class={dropdownListClass}>
-            {this.options.map((option, index) => (
-              <div
-                role="option"
-                aria-selected={index === this.activeItemIndex}
-                aria-label={option[this.optionsDisplayProp]}
-                class={`dropdown-list-item ${index === this.activeItemIndex ? 'active' : ''}`}
-                key={createGuid()}
-                onClick={() => this.handleItemSelect(option)}
-                onMouseEnter={() => (this.activeItemIndex = index)}>
-                {option[this.optionsDisplayProp]}
-              </div>
-            ))}
-          </div>
-        </div>
-        {this.errorText ? (
-          <label class="sub-text error">{this.errorText}</label>
-        ) : this.validText ? (
-          <label class="sub-text valid">{this.validText}</label>
-        ) : this.helperText ? (
-          <label class="sub-text helper">{this.helperText}</label>
-        ) : null}
+      <div
+        aria-disabled={this.disabled ? 'true' : undefined}
+        aria-label={this.ariaLabel}
+        aria-required={this.required}
+        class={this.disabled ? 'disabled' : undefined}>
+        {this.renderLabel()}
+        <span class="input-container">
+          <select
+            disabled={this.disabled}
+            class={selectClass}
+            aria-label={this.ariaLabel}
+            onChange={(event) => {
+              this.handleSelectChange(event);
+            }}
+            aria-invalid={!!this.errorText}
+            aria-required={this.required}>
+            {this.renderOptions()}
+          </select>
+          {this.renderSubText()}
+        </span>
       </div>
     );
   }
