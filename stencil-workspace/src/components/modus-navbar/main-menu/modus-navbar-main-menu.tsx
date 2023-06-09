@@ -65,12 +65,7 @@ export class ModusNavbarMainMenu {
   };
 
   render(): unknown {
-    const positionStyle = {
-      position: this.containerLayout.position,
-      height: this.containerLayout.height,
-      top: this.containerLayout.top,
-      left: this.containerLayout.left,
-    };
+    const positionStyle = { ...this.containerLayout };
 
     return (
       <div class="main-menu" style={positionStyle} onClick={(event) => event.preventDefault()}>
