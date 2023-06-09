@@ -984,7 +984,7 @@ export namespace Components {
          */
         "size": 'medium' | 'large';
         /**
-          * (optional) Set text alignment for the input.
+          * (optional) The input's text alignment.
          */
         "textAlign": 'left' | 'right';
         /**
@@ -2708,7 +2708,7 @@ declare namespace LocalJSX {
          */
         "size"?: 'medium' | 'large';
         /**
-          * (optional) Set text alignment for the input.
+          * (optional) The input's text alignment.
          */
         "textAlign"?: 'left' | 'right';
         /**

@@ -59,7 +59,7 @@ export class ModusTextInput {
   /** (optional) The input's size. */
   @Prop() size: 'medium' | 'large' = 'medium';
 
-  /** (optional) Set text alignment for the input. */
+  /** (optional) The input's text alignment. */
   @Prop() textAlign: 'left' | 'right' = 'left';
 
   /** (optional) The input's type. */
@@ -115,14 +115,24 @@ export class ModusTextInput {
   }
 
   render(): unknown {
-    const className = `modus-text-input ${this.disabled ? 'disabled' : ''}`;
+    const containerClassNames = `modus-text-input ${this.disabled ? 'disabled' : ''}`;
     const isPassword = this.type === 'password';
     const showPasswordToggle = !!(this.includePasswordTextToggle && isPassword && this.value?.length);
     const showClearIcon = (isPassword && !this.includePasswordTextToggle) || !isPassword;
-    const textAlign = `text-align-${this.textAlign}`;
-    const inputClassName = `${this.includeSearchIcon ? 'has-left-icon' : ''} ${
-      this.clearable ? 'has-right-icon' : ''
-    } ${textAlign}`;
+
+    const buildTextInputClassNames = (): string => {
+      const classNames = [];
+
+      if (this.includeSearchIcon) {
+        classNames.push('has-left-icon');
+      }
+      if (this.clearable) {
+        classNames.push('has-right-icon');
+      }
+      classNames.push(`text-align-${this.textAlign}`);
+
+      return classNames.join(' ');
+    };
 
     return (
       <div
@@ -131,7 +141,7 @@ export class ModusTextInput {
         aria-label={this.ariaLabel}
         aria-readonly={this.readOnly}
         aria-required={this.required}
-        class={className}>
+        class={containerClassNames}>
         {this.label || this.required ? (
           <div class={'label-container'}>
             {this.label ? <label>{this.label}</label> : null}
@@ -146,7 +156,7 @@ export class ModusTextInput {
           {this.includeSearchIcon ? <IconSearch size="16" /> : null}
           <input
             aria-placeholder={this.placeholder}
-            class={inputClassName}
+            class={buildTextInputClassNames()}
             disabled={this.disabled}
             inputmode={this.inputmode}
             maxlength={this.maxLength}
@@ -170,14 +180,11 @@ export class ModusTextInput {
               <IconVisibilityOff size="16" />
             </div>
           )}
-          {showClearIcon &&
-            (this.clearable && !this.readOnly && !!this.value ? (
-              <span class="icons clear" role="button" aria-label="Clear entry">
-                <IconClose onClick={() => this.handleClear()} size="16" />
-              </span>
-            ) : (
-              <span class="icons hidden"></span>
-            ))}
+          {showClearIcon && this.clearable && !this.readOnly && !!this.value && (
+            <span class="icons clear" role="button" aria-label="Clear entry">
+              <IconClose onClick={() => this.handleClear()} size="16" />
+            </span>
+          )}
         </div>
         {this.errorText ? (
           <label class="sub-text error">{this.errorText}</label>

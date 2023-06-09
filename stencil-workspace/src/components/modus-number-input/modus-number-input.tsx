@@ -43,7 +43,7 @@ export class ModusNumberInput {
   /** (optional) The input's step. */
   @Prop() step: number;
 
-  /** (optional) Set text alignment for the number input. */
+  /** (optional) The input's text alignment. */
   @Prop() textAlign: 'left' | 'right' = 'left';
 
   /** (optional) The input's valid state text. */
