@@ -10,6 +10,7 @@
 | Property    | Attribute    | Description                                                | Type                                     | Default     |
 | ----------- | ------------ | ---------------------------------------------------------- | ---------------------------------------- | ----------- |
 | `ariaLabel` | `aria-label` | (optional) The tooltip's aria-label.                       | `string`                                 | `undefined` |
+| `disabled`  | `disabled`   | Hide the tooltip                                           | `boolean`                                | `undefined` |
 | `position`  | `position`   | (optional) The tooltip's position relative to its content. | `"bottom" \| "left" \| "right" \| "top"` | `'top'`     |
 | `text`      | `text`       | The tooltip's text.                                        | `string`                                 | `undefined` |
 

@@ -29,11 +29,28 @@ describe('modus-tooltip', () => {
 
     await page.setContent('<modus-tooltip></modus-tooltip>');
     const component = await page.find('modus-tooltip');
-    let element = await page.find('modus-tooltip >>> .modus-tooltip');
+    const element = await page.find('modus-tooltip >>> .modus-tooltip');
     expect(element).toHaveClass('top');
 
     component.setProperty('position', 'bottom');
     await page.waitForChanges();
     expect(element).toHaveClass('bottom');
+  });
+
+
+  it('tooltip should show or hide if disabled prop set', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-tooltip text="Hello"></modus-tooltip>');
+    const tooltip = await page.find('modus-tooltip');
+
+    tooltip.setProperty('disabled', false);
+    await page.waitForChanges();
+    let text = await page.find('modus-tooltip >>> .text');
+    expect(text.textContent).toEqual('Hello');
+
+    tooltip.setProperty('disabled', true);
+    await page.waitForChanges();
+    text = await page.find('modus-tooltip >>> .text');
+    expect(text).toEqual(null);
   });
 });

@@ -16,7 +16,9 @@ describe('modus-navbar', () => {
             </div>
             <div class="right">
               <div class="profile-menu">
-                <span class="initials" tabindex="0"></span>
+                <modus-tooltip position="bottom">
+                    <span class="initials" tabindex="0"></span>
+                </modus-tooltip>
               </div>
             </div>
           </nav>
