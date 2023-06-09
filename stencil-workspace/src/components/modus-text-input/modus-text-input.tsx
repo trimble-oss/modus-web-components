@@ -176,7 +176,7 @@ export class ModusTextInput {
                 <IconClose onClick={() => this.handleClear()} size="16" />
               </span>
             ) : (
-              <span class="icons"></span>
+              <span class="icons hidden"></span>
             ))}
         </div>
         {this.errorText ? (

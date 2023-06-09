@@ -68,6 +68,7 @@
       }
 
       &.text-align-right {
+        padding-right: 0;
         text-align: right;
       }
 
@@ -92,6 +93,10 @@
         &:hover svg path {
           opacity: 0.75;
         }
+      }
+
+      &.hidden {
+        width: $rem-8px;
       }
     }
 
