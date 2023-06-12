@@ -676,7 +676,7 @@ export namespace Components {
          */
         "step": number;
         /**
-          * (optional) Set text alignment for the number input.
+          * (optional) The input's text alignment.
          */
         "textAlign": 'left' | 'right';
         /**
@@ -2359,7 +2359,7 @@ declare namespace LocalJSX {
          */
         "step"?: number;
         /**
-          * (optional) Set text alignment for the number input.
+          * (optional) The input's text alignment.
          */
         "textAlign"?: 'left' | 'right';
         /**

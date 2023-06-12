@@ -115,10 +115,10 @@ export class ModusTextInput {
   }
 
   render(): unknown {
-    const containerClassNames = `modus-text-input ${this.disabled ? 'disabled' : ''}`;
     const isPassword = this.type === 'password';
     const showPasswordToggle = !!(this.includePasswordTextToggle && isPassword && this.value?.length);
-    const showClearIcon = (isPassword && !this.includePasswordTextToggle) || !isPassword;
+    const isToggleablePassword = isPassword && this.includePasswordTextToggle;
+    const showClearIcon = !isToggleablePassword && this.clearable && !this.readOnly && !!this.value;
 
     const buildTextInputClassNames = (): string => {
       const classNames = [];
@@ -126,10 +126,21 @@ export class ModusTextInput {
       if (this.includeSearchIcon) {
         classNames.push('has-left-icon');
       }
-      if (this.clearable) {
+      if (showClearIcon) {
         classNames.push('has-right-icon');
       }
       classNames.push(`text-align-${this.textAlign}`);
+
+      return classNames.join(' ');
+    };
+
+    const buildContainerClassNames = (): string => {
+      const classNames = [];
+      classNames.push('modus-text-input');
+
+      if (this.disabled) {
+        classNames.push('disabled');
+      }
 
       return classNames.join(' ');
     };
@@ -141,7 +152,7 @@ export class ModusTextInput {
         aria-label={this.ariaLabel}
         aria-readonly={this.readOnly}
         aria-required={this.required}
-        class={containerClassNames}>
+        class={buildContainerClassNames()}>
         {this.label || this.required ? (
           <div class={'label-container'}>
             {this.label ? <label>{this.label}</label> : null}
@@ -180,7 +191,7 @@ export class ModusTextInput {
               <IconVisibilityOff size="16" />
             </div>
           )}
-          {showClearIcon && this.clearable && !this.readOnly && !!this.value && (
+          {showClearIcon && (
             <span class="icons clear" role="button" aria-label="Clear entry">
               <IconClose onClick={() => this.handleClear()} size="16" />
             </span>
