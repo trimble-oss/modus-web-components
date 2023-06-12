@@ -41,6 +41,8 @@ export class ModusModal {
   /** An event that fires on secondary button click.  */
   @Event() secondaryButtonClick: EventEmitter;
 
+  ignoreOverlayClick = false;
+
   @Method()
   async close(): Promise<void> {
     this.visible = false;
@@ -60,8 +62,14 @@ export class ModusModal {
   @State()
   visible: boolean;
 
+  handleModalContentMouseDown(): void {
+    // If Mouse was dragged off from the Modal content, ignore mouse up on overlay preventing Modal to close
+    this.ignoreOverlayClick = true;
+  }
+
   handleOverlayClick(event: MouseEvent): void {
-    if (!(event.target as HTMLElement).classList.contains('overlay')) {
+    if (this.ignoreOverlayClick || !(event.target as HTMLElement).classList.contains('overlay')) {
+      this.ignoreOverlayClick = false;
       return;
     }
 
@@ -93,7 +101,7 @@ export class ModusModal {
         onClick={(event) => this.handleOverlayClick(event)}
         role="dialog"
         style={{ zIndex: this.zIndex }}>
-        <div class="content">
+        <div class="content" onMouseDown={() => this.handleModalContentMouseDown()}>
           <div class="header">
             {this.headerText}
             <div role="button" aria-label="Close" onClick={() => this.close()}>

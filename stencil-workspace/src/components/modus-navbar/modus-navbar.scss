@@ -45,7 +45,7 @@ nav {
     }
   }
 
-  .main-menu {
+  .main-menu-button {
     padding: 0 $rem-8px;
   }
 
@@ -75,6 +75,7 @@ nav {
       filter: $modus-navbar-brand-logo-filter;
       max-height: 32px;
       padding: 0 $rem-8px;
+      user-select: none;
     }
   }
 

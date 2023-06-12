@@ -613,6 +613,7 @@ export namespace Components {
         "reverse": boolean;
     }
     interface ModusNavbarMainMenu {
+        "navbarId": string;
     }
     interface ModusNavbarNotificationsMenu {
         "reverse": boolean;
@@ -2290,6 +2291,7 @@ declare namespace LocalJSX {
         "reverse"?: boolean;
     }
     interface ModusNavbarMainMenu {
+        "navbarId"?: string;
     }
     interface ModusNavbarNotificationsMenu {
         "reverse"?: boolean;

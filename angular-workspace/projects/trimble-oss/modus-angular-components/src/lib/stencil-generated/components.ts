@@ -654,13 +654,14 @@ export declare interface ModusNavbarAppsMenu extends Components.ModusNavbarAppsM
 
 
 @ProxyCmp({
+  inputs: ['navbarId']
 })
 @Component({
   selector: 'modus-navbar-main-menu',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: [],
+  inputs: ['navbarId'],
 })
 export class ModusNavbarMainMenu {
   protected el: HTMLElement;
