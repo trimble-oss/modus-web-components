@@ -207,6 +207,21 @@ describe('modus-text-input', () => {
     expect(await input.getProperty('autofocus')).toBeTruthy();
   });
 
+  it('renders changes to textAlign', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-text-input></modus-text-input>');
+    await page.waitForChanges();
+
+    const modusTextInput = await page.find('modus-text-input');
+    expect(await page.find('modus-text-input >>> input')).toHaveClass('text-align-left');
+
+    modusTextInput.setProperty('textAlign', 'right');
+    await page.waitForChanges();
+
+    expect(await page.find('modus-text-input >>> input')).toHaveClass('text-align-right');
+  });
+
   it('should clear on handleClear', async () => {
     const page = await newE2EPage();
 

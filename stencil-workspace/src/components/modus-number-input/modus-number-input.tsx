@@ -43,6 +43,9 @@ export class ModusNumberInput {
   /** (optional) The input's step. */
   @Prop() step: number;
 
+  /** (optional) The input's text alignment. */
+  @Prop() textAlign: 'left' | 'right' = 'left';
+
   /** (optional) The input's valid state text. */
   @Prop() validText: string;
 
@@ -74,10 +77,33 @@ export class ModusNumberInput {
   }
 
   render(): unknown {
-    const className = `modus-number-input ${this.disabled ? 'disabled' : ''}`;
-    const inputContainerClassName = `input-container ${
-      this.errorText ? 'error' : this.validText ? 'valid' : ''
-    } ${this.classBySize.get(this.size)}`;
+    const textAlignClassName = `text-align-${this.textAlign}`;
+    const buildContainerClassNames = (): string => {
+      const classNames = [];
+      classNames.push('modus-number-input');
+
+      if (this.disabled) {
+        classNames.push('disabled');
+      }
+
+      return classNames.join(' ');
+    };
+
+    const buildInputContainerClassNames = (): string => {
+      const classNames = [];
+
+      classNames.push('input-container');
+      classNames.push(this.classBySize.get(this.size));
+
+      if (this.errorText) {
+        classNames.push('error');
+      }
+      if (this.validText) {
+        classNames.push('valid');
+      }
+
+      return classNames.join(' ');
+    };
 
     return (
       <div
@@ -90,15 +116,16 @@ export class ModusNumberInput {
         aria-valuemax={this.maxValue}
         aria-valuemin={this.minValue}
         aria-valuenow={this.value}
-        class={className}>
+        class={buildContainerClassNames()}>
         {this.label || this.required ? (
           <div class="label-container">
             {this.label ? <label>{this.label}</label> : null}
             {this.required ? <span class="required">*</span> : null}
           </div>
         ) : null}
-        <div class={inputContainerClassName}>
+        <div class={buildInputContainerClassNames()}>
           <input
+            class={textAlignClassName}
             disabled={this.disabled}
             max={this.maxValue}
             min={this.minValue}

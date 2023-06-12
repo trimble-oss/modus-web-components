@@ -136,6 +136,24 @@ export default {
         type: { summary: "'medium' | 'large'" },
       },
     },
+    textAlign: {
+      name: 'text-align',
+      control: {
+        options: [
+          'left',
+          'right'
+        ],
+        type: 'select',
+      },
+      description: 'text alignment for the input.',
+      table: {
+        defaultValue: { summary: "'left'" },
+        type: {
+          summary:
+            "'left' | 'right'",
+        },
+      },
+    },
     type: {
       control: {
         options: ['text', 'password'],
@@ -192,6 +210,7 @@ const Template = ({
   readOnly,
   required,
   size,
+  textAlign,
   type,
   validText,
   value,
@@ -213,6 +232,7 @@ const Template = ({
     read-only=${readOnly}
     required=${required}
     size=${size}
+    text-align=${textAlign}
     type=${type}
     valid-text=${validText}
     value=${value}></modus-text-input>
@@ -236,6 +256,7 @@ Default.args = {
   readOnly: false,
   required: false,
   size: 'medium',
+  textAlign: 'left',
   type: 'text',
   validText: '',
   value: 'Hello, text input!',

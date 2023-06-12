@@ -677,6 +677,10 @@ export namespace Components {
          */
         "step": number;
         /**
+          * (optional) The input's text alignment.
+         */
+        "textAlign": 'left' | 'right';
+        /**
           * (optional) The input's valid state text.
          */
         "validText": string;
@@ -980,6 +984,10 @@ export namespace Components {
           * (optional) The input's size.
          */
         "size": 'medium' | 'large';
+        /**
+          * (optional) The input's text alignment.
+         */
+        "textAlign": 'left' | 'right';
         /**
           * (optional) The input's type.
          */
@@ -2353,6 +2361,10 @@ declare namespace LocalJSX {
          */
         "step"?: number;
         /**
+          * (optional) The input's text alignment.
+         */
+        "textAlign"?: 'left' | 'right';
+        /**
           * (optional) The input's valid state text.
          */
         "validText"?: string;
@@ -2697,6 +2709,10 @@ declare namespace LocalJSX {
           * (optional) The input's size.
          */
         "size"?: 'medium' | 'large';
+        /**
+          * (optional) The input's text alignment.
+         */
+        "textAlign"?: 'left' | 'right';
         /**
           * (optional) The input's type.
          */
