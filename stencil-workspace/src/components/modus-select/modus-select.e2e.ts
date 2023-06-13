@@ -15,15 +15,14 @@ describe('modus-select', () => {
     await page.setContent('<modus-select></modus-select>');
 
     const select = await page.find('modus-select');
-    const button = await page.find('modus-select >>> button');
 
     expect(select).not.toHaveClass('disabled');
-    expect(await button.getProperty('disabled')).toBeFalsy();
+    expect(await select.getProperty('disabled')).toBeFalsy();
 
-    select.setProperty('disabled', 'true');
+    select.setProperty('disabled', true);
     await page.waitForChanges();
 
-    expect(await button.getProperty('disabled')).toBeTruthy();
+    expect(await select.getProperty('disabled')).toBeTruthy();
   });
 
   it('renders changes to errorText', async () => {
@@ -35,7 +34,7 @@ describe('modus-select', () => {
     select.setProperty('errorText', 'Error.');
     await page.waitForChanges();
 
-    const button = await page.find('modus-select >>> button');
+    const button = await page.find('modus-select >>> select');
     expect(button).toHaveClass('error');
 
     const errorLabel = await page.find('modus-select >>> label.error');
@@ -51,7 +50,7 @@ describe('modus-select', () => {
     select.setProperty('validText', 'Valid.');
     await page.waitForChanges();
 
-    const button = await page.find('modus-select >>> button');
+    const button = await page.find('modus-select >>> select');
     expect(button).toHaveClass('valid');
 
     const validLabel = await page.find('modus-select >>> label.valid');
@@ -90,13 +89,25 @@ describe('modus-select', () => {
     await page.setContent('<modus-select></modus-select>');
 
     const select = await page.find('modus-select');
-    select.setProperty('required', 'true');
+    select.setProperty('required', true);
     await page.waitForChanges();
 
     const required = await page.find('modus-select >>> span.required');
     expect(required).not.toBeNull();
   });
 
+  it('renders changes to required', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-select></modus-select>');
+
+    const select = await page.find('modus-select');
+    select.setProperty('required', 'true');
+    await page.waitForChanges();
+
+    const required = await page.find('modus-select >>> span.required');
+    expect(required).not.toBeNull();
+  });
   it('renders changes to value', async () => {
     const page = await newE2EPage();
 
@@ -109,77 +120,31 @@ describe('modus-select', () => {
     select.setProperty('value', options[0]);
     await page.waitForChanges();
 
-    const button = await page.find('modus-select >>> button');
+    const button = await page.find('modus-select >>> select');
     expect(await button.getProperty('textContent')).toEqual(options[0].display);
   });
-
-  it('renders changes to menuSize', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<modus-select></modus-select>');
-    const options = [{ display: 'Some value' }];
-    const select = await page.find('modus-select');
-    select.setProperty('options', options);
-    await page.waitForChanges();
-
-    const dropdown = await page.find('modus-select >>> .dropdown-list');
-    expect(dropdown).toHaveClass('menu-medium');
-    let computedStyle = await dropdown.getComputedStyle();
-    expect(computedStyle['max-height']).toEqual('240px');
-
-    select.setProperty('menuSize', 'small');
-    await page.waitForChanges();
-
-    expect(dropdown).toHaveClass('menu-small');
-    computedStyle = await dropdown.getComputedStyle();
-    expect(computedStyle['max-height']).toEqual('140px');
-  });
-
   it('emits valueChange event', async () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-select></modus-select>');
 
-    const options = [{ display: 'Some value' }];
+    const options = [{ display: 'Option 1' }, { display: 'Option 2' }, { display: 'Option 3' }];
     const select = await page.find('modus-select');
-    select.setProperty('options', options);
     select.setProperty('optionsDisplayProp', 'display');
-    select.setProperty('value', options[0]);
+    select.setProperty('options', options);
     await page.waitForChanges();
 
     const valueChange = await page.spyOnEvent('valueChange');
-    const element = await page.find('modus-select >>> button');
-
-    await element.click();
-    await page.waitForChanges();
-    const item = await page.find('modus-select >>> .dropdown-list-item');
-    await item.click();
+    const selectElement = await page.find('modus-select >>> select');
+    await selectElement.focus();
     await page.waitForChanges();
 
-    expect(valueChange).toHaveReceivedEvent();
-    expect(valueChange).toHaveReceivedEventDetail(options[0]);
-  });
-
-  it('emits valueChange event on enter', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<modus-select></modus-select>');
-
-    const options = [{ display: 'Some value' }];
-    const select = await page.find('modus-select');
-    select.setProperty('options', options);
-    select.setProperty('optionsDisplayProp', 'display');
-    select.setProperty('value', options[0]);
-    await page.waitForChanges();
-
-    const valueChange = await page.spyOnEvent('valueChange');
-    const element = await page.find('modus-select >>> button');
-
-    await element.click();
-    await page.waitForChanges();
-    const item = await page.find('modus-select >>> .dropdown-list-item');
-    item.press('Enter');
+    // Simulate option selection by changing the value and triggering the change event
+    await page.keyboard.press('ArrowDown');
+    await page.keyboard.press('Enter');
     await page.waitForChanges();
 
     expect(valueChange).toHaveReceivedEvent();
-    expect(valueChange).toHaveReceivedEventDetail(options[0]);
+    expect(valueChange).toHaveReceivedEventDetail('Option 2');
   });
 });

@@ -27,19 +27,30 @@
       cursor: pointer;
     }
 
-    button {
+    select {
       align-items: center;
       background-color: $modus-input-bg;
       border: solid $rem-1px $modus-input-border-color;
       border-bottom-color: $modus-input-bottom-line-color;
+      color: $modus-select-color;
       display: flex;
-      height: $btn_height;
-      padding: 0;
+      font-family: $primary-font;
+      font-size: $rem-12px;
+      height: $rem-32px;
+      padding-left: $rem-10px;
       position: relative;
       width: 100%;
 
+      &.disabled {
+        background-color: $modus-input-disabled-bg;
+      }
+
       &:hover {
         cursor: pointer;
+      }
+
+      &:focus {
+        outline: none;
       }
 
       &:focus-within {
@@ -49,7 +60,7 @@
 
       &.large {
         font-size: $rem-14px;
-        height: 3rem;
+        height: $rem-48px;
       }
 
       &.error {
@@ -61,85 +72,15 @@
         border-bottom-color: $modus-input-validation-success-color;
         border-bottom-width: $rem-2px;
       }
-
-      .dropdown-text {
-        color: $modus-input-color;
-        font-size: $rem-14px;
-        overflow-x: hidden;
-        padding-left: $rem-8px;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-
-      .icon-triangle-down {
-        margin-left: auto;
-        padding: 0 $rem-8px;
-
-        svg path {
-          fill: $modus-input-helper-icon-color;
-        }
-      }
-    }
-
-    .dropdown-list {
-      background-color: $modus-input-bg;
-      border: 1px solid $modus-input-border-color;
-      display: none;
-      overflow-y: auto;
-      position: absolute;
-      top: 2.125rem;
-      width: 100%;
-      z-index: 1;
-
-      &.visible {
-        display: block;
-      }
-
-      &.large {
-        top: 3.125rem;
-      }
-
-      &.menu-small {
-        max-height: 140px;
-      }
-
-      &.menu-medium {
-        max-height: 240px;
-      }
-
-      &.menu-large {
-        max-height: 400px;
-      }
-
-      .dropdown-list-item {
-        align-items: center;
-        color: $modus-input-color;
-        display: flex;
-        font-size: $rem-12px;
-        height: $rem-20px;
-        overflow: hidden;
-        padding-left: $rem-8px;
-        white-space: nowrap;
-
-        &.active {
-          background-color: $modus-select-item-selected-bg;
-          outline: 1px solid $modus-select-item-selected-bg;
-        }
-
-        &:hover {
-          background-color: $modus-select-item-hover-bg;
-        }
-      }
     }
   }
 
   .sub-text {
-    font-size: $rem-11px;
+    font-size: $rem-12px;
     margin-top: $rem-4px;
 
     &.helper {
       color: $modus-input-label-color;
-      font-weight: 600;
     }
 
     &.error {
@@ -148,35 +89,6 @@
 
     &.valid {
       color: $modus-input-validation-success-color;
-    }
-  }
-
-  .disabled {
-    pointer-events: none;
-
-    .input-container {
-      background-color: $modus-input-disabled-bg;
-
-      button {
-        background-color: $modus-input-disabled-bg;
-        border: $rem-1px solid $modus-input-disabled-border-color;
-        border-bottom-color: $modus-input-disabled-bottom-line-color;
-
-        .dropdown-text {
-          color: $modus-input-disabled-color;
-        }
-      }
-
-      svg path {
-        fill: $modus-input-disabled-color;
-      }
-
-      input {
-        background-color: transparent;
-        border-radius: 0;
-        color: $modus-input-disabled-color;
-        height: 100%;
-      }
     }
   }
 }
