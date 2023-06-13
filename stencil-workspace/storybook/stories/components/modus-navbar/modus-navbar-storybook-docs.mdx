@@ -47,8 +47,11 @@ This component utilizes the slot element, allowing you to render your own HTML i
     },
   ];
   element.productLogoOptions = {
-    height: 24,
-    url: 'https://modus.trimble.com/img/trimble-logo.svg',
+    primary: {
+      url: 'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
+      height: 24,
+    },
+    secondary: { url: 'https://modus.trimble.com/favicon.svg', height: 24 },
   };
   element.profileMenuOptions = {
     avatarUrl: '...',
@@ -92,8 +95,11 @@ This component utilizes the slot element, allowing you to render your own HTML i
     },
   ];
   element.productLogoOptions = {
-    height: 24,
-    url: 'https://modus.trimble.com/img/trimble-logo.svg',
+    primary: {
+      url: 'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
+      height: 24,
+    },
+    secondary: { url: 'https://modus.trimble.com/favicon.svg', height: 24 },
   };
   element.profileMenuOptions = {
     avatarUrl: 'broken-link',
@@ -140,8 +146,11 @@ Use the `variant` prop to choose a blue background navbar.
     },
   ];
   element.productLogoOptions = {
-    height: 24,
-    url: 'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
+    primary: {
+      url: 'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
+      height: 24,
+    },
+    secondary: { url: 'https://modus.trimble.com/favicon.svg', height: 24 },
   };
   element.profileMenuOptions = {
     avatarUrl: 'broken-link',
@@ -169,6 +178,16 @@ interface ModusNavbarProfileMenuLink {
   id: string;
 }
 
+interface ModusNavbarLogo {
+  url: string;
+  height?: string;
+}
+
+interface ModusNavbarLogoOptions {
+  primary?: ModusNavbarLogo;
+  secondary?: ModusNavbarLogo;
+}
+
 interface ModusNavbarTooltip {
     text: string;
     ariaLabel?: string;
@@ -190,7 +209,7 @@ interface ModusProfileMenuOptions {
 | ----------------------- | -------------------------- | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | ----------- |
 | `apps`                  | --                         | (optional) The apps to render in the apps menu.                  | `ModusNavbarApp[]`                                                                                                   | `undefined` |
 | `helpUrl`               | `help-url`                 | (optional) Help URL.                                             | `string`                                                                                                             | `undefined` |
-| `productLogoOptions`    | --                         | (required) Product logo options.                                 | `{ height?: string; url: string; }`                                                                                  | `undefined` |
+| `productLogoOptions`    | --                         | (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels.          | `ModusNavbarLogoOptions`  | `undefined` |
 | `profileMenuOptions`    | --                         | (required) Profile menu options.                                 | `ModusProfileMenuOptions`                                                                                            | `undefined` |
 | `reverse`               | `reverse`                  | (optional) Whether to display the navbar items in reverse order. | `boolean`                                                                                                            | `undefined` |
 | `searchTooltip    `     | --                         | (optional) Tooltip for search menu.                              | `ModusNavbarTooltip`                                                                                                 | `undefined` |

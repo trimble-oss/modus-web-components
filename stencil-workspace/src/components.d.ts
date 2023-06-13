@@ -10,7 +10,7 @@ import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSortEvent, ModusTableSelectionOptions, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 import { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
 import { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
-import { ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
+import { ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
@@ -22,7 +22,7 @@ export { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 export { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSortEvent, ModusTableSelectionOptions, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 export { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
 export { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
-export { ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
+export { ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
 export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 export { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 export { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
@@ -560,9 +560,9 @@ export namespace Components {
         "helpUrl": string;
         "hideMainMenu": () => Promise<void>;
         /**
-          * (required) Product logo options.
+          * (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels.
          */
-        "productLogoOptions": { height?: string; url: string };
+        "productLogoOptions": ModusNavbarLogoOptions;
         /**
           * (required) Profile menu options.
          */
@@ -773,10 +773,6 @@ export namespace Components {
           * (optional) The input label.
          */
         "label": string;
-        /**
-          * The select's dropdown menu size.
-         */
-        "menuSize": 'small' | 'medium' | 'large';
         /**
           * The options for the dropdown list.
          */
@@ -2237,9 +2233,9 @@ declare namespace LocalJSX {
          */
         "onProfileMenuSignOutClick"?: (event: ModusNavbarCustomEvent<MouseEvent>) => void;
         /**
-          * (required) Product logo options.
+          * (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels.
          */
-        "productLogoOptions"?: { height?: string; url: string };
+        "productLogoOptions"?: ModusNavbarLogoOptions;
         /**
           * (required) Profile menu options.
          */
@@ -2465,10 +2461,6 @@ declare namespace LocalJSX {
           * (optional) The input label.
          */
         "label"?: string;
-        /**
-          * The select's dropdown menu size.
-         */
-        "menuSize"?: 'small' | 'medium' | 'large';
         /**
           * An event that fires on input value change.
          */

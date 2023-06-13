@@ -14,3 +14,12 @@ export interface ModusProfileMenuOptions {
   username: string;
   tooltip?: ModusNavbarTooltip;
 }
+export interface ModusNavbarLogo {
+  url: string;
+  height?: string;
+}
+
+export interface ModusNavbarLogoOptions {
+  primary?: ModusNavbarLogo;
+  secondary?: ModusNavbarLogo;
+}

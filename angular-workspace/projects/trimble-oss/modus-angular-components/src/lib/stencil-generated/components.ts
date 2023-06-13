@@ -832,14 +832,14 @@ export declare interface ModusRadioGroup extends Components.ModusRadioGroup {
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'disabled', 'errorText', 'helperText', 'label', 'menuSize', 'options', 'optionsDisplayProp', 'required', 'size', 'validText', 'value']
+  inputs: ['ariaLabel', 'disabled', 'errorText', 'helperText', 'label', 'options', 'optionsDisplayProp', 'required', 'size', 'validText', 'value']
 })
 @Component({
   selector: 'modus-select',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['ariaLabel', 'disabled', 'errorText', 'helperText', 'label', 'menuSize', 'options', 'optionsDisplayProp', 'required', 'size', 'validText', 'value'],
+  inputs: ['ariaLabel', 'disabled', 'errorText', 'helperText', 'label', 'options', 'optionsDisplayProp', 'required', 'size', 'validText', 'value'],
 })
 export class ModusSelect {
   protected el: HTMLElement;
