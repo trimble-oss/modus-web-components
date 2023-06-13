@@ -175,6 +175,7 @@
   --modus-check-input-label-color: var(--modus-input-label-color);
   --modus-check-input-hover-border-color: var(--modus-highlight-blue-color);
   --modus-check-input-active-border-color: var(--modus-highlight-blue-color);
+  --modus-check-input-focus-box-shadow-color: #217fbb57;
 
   // Card
   --modus-card-bg: var(--modus-white);
@@ -480,6 +481,7 @@
   --modus-check-input-label-color: var(--modus-input-label-color);
   --modus-check-input-hover-border-color: var(--modus-highlight-blue-color);
   --modus-check-input-active-border-color: var(--modus-highlight-blue-color);
+  --modus-check-input-focus-box-shadow-color: #019aeb66;
 
   // Card
   --modus-card-bg: var(--modus-gray-9);
@@ -705,6 +707,7 @@
   --modus-checkbox-hover-border-color: var(--modus-check-input-active-border-color);
   --modus-checkbox-selected-border-color: var(--modus-check-input-active-border-color);
   --modus-checkbox-indeterminate-border-color: var(--modus-check-input-active-border-color);
+  --modus-checkbox-focus-box-shadow-color: var(--modus-check-input-focus-box-shadow-color);
 }
 
 @mixin modus-list-item {
