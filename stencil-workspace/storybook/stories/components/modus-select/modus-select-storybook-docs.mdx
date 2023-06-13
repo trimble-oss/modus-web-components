@@ -10,14 +10,26 @@ This component is compatible with Angular reactive forms. This can be achieved t
 
 ### Default
 
-<Story id="user-inputs-select--default" height={'325px'} />
+<Story id="user-inputs-select--default" height={'380px'} />
 
 ```html
 <!-- Without preset value -->
-<modus-select id="select-demo-1" label="Select Demo 1" options-display-prop="display"></modus-select>
+<modus-select
+  id="select-demo-1"
+  label="Select Demo 1"
+  options-display-prop="display"></modus-select>
 <script>
   const modusSelect = document.querySelector('#select-demo-1');
-  modusSelect.options = [{ display: 'Option 1' }, { display: 'Option 2' }, { display: 'Option 3' }];
+  modusSelect.options = [
+    { display: 'Option 1' },
+    { display: 'Option 2' },
+    { display: 'Option 3' },
+  ];
+  const handleChange = (event) => {
+      const selectedValue = event.detail;
+      event.target.value = selectedValue;
+    };
+  modusSelect.addEventListener('valueChange', handleChange)
 </script>
 
 <!-- Disabled with helper text and preset value -->
@@ -29,7 +41,11 @@ This component is compatible with Angular reactive forms. This can be achieved t
   options-display-prop="display"></modus-select>
 <script>
   const modusSelect = document.querySelector('#select-demo-2');
-  const options = [{ display: 'Option 1' }, { display: 'Option 2' }, { display: 'Option 3' }];
+  const options = [
+    { display: 'Option 1' },
+    { display: 'Option 2' },
+    { display: 'Option 3' },
+  ];
   modusSelect.options = options;
   modusSelect.value = options[1];
 </script>
@@ -39,24 +55,45 @@ This component is compatible with Angular reactive forms. This can be achieved t
 
 <!-- Valid -->
 <modus-select label="Select Demo 4" valid-text="Valid demo"></modus-select>
+
+<!-- 'Large select -->
+<modus-select
+  id="select-demo-5"
+  label="Select Demo 5"
+  size="large"
+  options-display-prop="display"></modus-select>
+<script>
+  const modusSelect = document.querySelector('#select-demo-5');
+  modusSelect.options = [
+    { display: 'Option 1' },
+    { display: 'Option 2' },
+    { display: 'Option 3' },
+  ];
+  modusSelect.options = options;
+  modusSelect.value = options[1];
+  const handleChange = (event) => {
+      const selectedValue = event.detail;
+      event.target.value = selectedValue;
+    };
+  modusSelect.addEventListener('valueChange', handleChange)
+</script>
 ```
 
-### Properties
+## Properties
 
-| Property             | Attribute              | Description                                          | Type                                 | Default     |
-| -------------------- | ---------------------- | ---------------------------------------------------- | ------------------------------------ | ----------- |
-| `ariaLabel`          | `aria-label`           | (optional) The select's aria-label.                  | `string`                             | `undefined` |
-| `disabled`           | `disabled`             | (optional) Whether the input is disabled.            | `boolean`                            | `undefined` |
-| `menuSize`           | `menu-size`            | The select's dropdown menu size.                     | `"large"    , "medium"    , "small"` | `'medium'`  |
-| `errorText`          | `error-text`           | (optional) The input's error text.                   | `string`                             | `undefined` |
-| `helperText`         | `helper-text`          | (optional) The input's helper text.                  | `string`                             | `undefined` |
-| `label`              | `label`                | (optional) The input label.                          | `string`                             | `undefined` |
-| `options`            | --                     | The options for the dropdown list.                   | `unknown[]`                          | `[]`        |
-| `optionsDisplayProp` | `options-display-prop` | The options property to render in the dropdown list. | `string`                             | `undefined` |
-| `required`           | `required`             | (optional) Whether the input is required.            | `boolean`                            | `undefined` |
-| `size`               | `size`                 | (optional) The input's size.                         | `"large"    , "medium"`              | `'medium'`  |
-| `validText`          | `valid-text`           | (optional) The input's valid text.                   | `string`                             | `undefined` |
-| `value`              | --                     | (optional) The input value.                          | `unknown`                            | `undefined` |
+| Property             | Attribute              | Description                                          | Type                  | Default     |
+| -------------------- | ---------------------- | ---------------------------------------------------- | --------------------- | ----------- |
+| `ariaLabel`          | `aria-label`           | (optional) The select's aria-label.                  | `string`              | `undefined` |
+| `disabled`           | `disabled`             | (optional) Whether the input is disabled.            | `boolean`             | `undefined` |
+| `errorText`          | `error-text`           | (optional) The input's error text.                   | `string`              | `undefined` |
+| `helperText`         | `helper-text`          | (optional) The input's helper text.                  | `string`              | `undefined` |
+| `label`              | `label`                | (optional) The input label.                          | `string`              | `undefined` |
+| `options`            | --                     | The options for the dropdown list.                   | `unknown[]`           | `[]`        |
+| `optionsDisplayProp` | `options-display-prop` | The options property to render in the dropdown list. | `string`              | `undefined` |
+| `required`           | `required`             | (optional) Whether the input is required.            | `boolean`             | `undefined` |
+| `size`               | `size`                 | (optional) The input's size.                         | `"large" | "medium"`  | `'medium'`  |
+| `validText`          | `valid-text`           | (optional) The input's valid text.                   | `string`              | `undefined` |
+| `value`              | --                     | (optional) The input value.                          | `unknown`             | `undefined` |
 
 ### DOM Events
 
@@ -74,7 +111,6 @@ This component is compatible with Angular reactive forms. This can be achieved t
   - **Enter** opens the option list.
   - **ArrowUp**, **ArrowDown** navigate the list.
   - **Enter** selects an item from the list.
-  - **Space** closes the open list without selecting an item.
 - Select Items get:
   - An `aria-label` set to the display value.
   - An `aria-selected` set to whether the item is selected.

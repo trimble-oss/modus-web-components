@@ -8,19 +8,14 @@ describe('modus-select', () => {
       html: `
         <modus-select></modus-select>`,
     });
+
     expect(root).toEqualHtml(`
       <modus-select>
         <mock:shadow-root>
-          <div role="listbox">
-            <div class='input-container'>
-              <button class='medium' type="button">
-                <div class="dropdown-text"></div>
-                <svg class="icon-triangle-down" fill="none" height="12" viewBox="0 0 10 6" width="12" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M0 0.5L4.60606 5.5L9.21212 0.5H0Z" fill="#6A6976"></path>
-                </svg>
-              </button>
-              <div class='dropdown-list hidden menu-medium'></div>
-            </div>
+          <div>
+            <span class="input-container">
+              <select class="medium"></select>
+            </span>
           </div>
         </mock:shadow-root>
       </modus-select>
@@ -79,10 +74,5 @@ describe('modus-select', () => {
   it('should default with no value', async () => {
     const modusSelect = new ModusSelect();
     expect(modusSelect.value).toBeFalsy();
-  });
-
-  it('should default to medium dropdown menu size', async () => {
-    const modusSelect = new ModusSelect();
-    expect(modusSelect.menuSize).toEqual('medium');
   });
 });
