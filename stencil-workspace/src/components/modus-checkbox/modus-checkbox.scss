@@ -29,6 +29,12 @@
     transition: background-color 0.15s ease-in-out;
     width: $rem-16px;
 
+    &:focus,
+    &:focus-visible {
+      box-shadow: 0 0 0 0.2rem $modus-checkbox-focus-box-shadow-color;
+      outline: 0;
+    }
+
     &.blue-background {
       background-color: $modus-checkbox-selected-border-color !important;
       border: $rem-2px solid $modus-checkbox-selected-border-color !important;
