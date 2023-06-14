@@ -37,7 +37,7 @@ export class ModusNavbar {
   @Prop() apps: ModusNavbarApp[];
 
   /** (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels. */
-  @Prop() productLogoOptions: ModusNavbarLogoOptions;
+  @Prop() logoOptions: ModusNavbarLogoOptions;
 
   /** (required) Profile menu options. */
   @Prop({ mutable: true }) profileMenuOptions: ModusProfileMenuOptions;
@@ -285,8 +285,8 @@ export class ModusNavbar {
                 <slot name={this.SLOT_MAIN}></slot>
               </modus-navbar-main-menu>
             )}
-            {this.productLogoOptions && (<ModusNavbarProductLogo
-              logos={this.productLogoOptions}
+            {this.logoOptions && (<ModusNavbarProductLogo
+              logos={this.logoOptions}
               onClick={(event) => this.productLogoClick.emit(event)} />
             )}
           </div>

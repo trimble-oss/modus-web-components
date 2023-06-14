@@ -123,8 +123,10 @@ A basic Modus Side Navigation with only item selection and keyboard navigation f
 </div>
 
 <script>
-  document.querySelector('#navbar').productLogoOptions = {
-    url: 'https://modus.trimble.com/img/trimble-logo.svg',
+  document.querySelector('#navbar').logoOptions = {
+    primary: {
+      url: 'https://modus.trimble.com/img/trimble-logo.svg',
+    },
   };
   document.querySelector('#navbar').profileMenuOptions = {
     avatarUrl: 'broken-link',
@@ -225,8 +227,10 @@ Modus side navigation uses CSS variables for theming ex:`--modus-side-navigation
 </div>
 
 <script>
-  document.querySelector('#navbar').productLogoOptions = {
-    url: 'https://modus.trimble.com/img/trimble-logo.svg',
+  document.querySelector('#navbar').logoOptions = {
+    primary: {
+      url: 'https://modus.trimble.com/img/trimble-logo.svg',
+    },
   };
   document.querySelector('#navbar').profileMenuOptions = {
     avatarUrl: 'broken-link',
