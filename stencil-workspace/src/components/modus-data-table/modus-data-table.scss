@@ -180,13 +180,11 @@ modus-dropdown {
   }
 
   .list-container {
-    left: 84px;
     position: relative;
-    top: -6px;
 
     .items-container {
       display: inline-block;
-      position: fixed;
+      position: sticky;
       width: 200px;
 
       .action-item {
