@@ -152,7 +152,7 @@ describe('modus-navbar', () => {
     await page.waitForChanges();
 
     const navbar = await page.find('modus-navbar');
-    navbar.setProperty('productLogoOptions', {
+    navbar.setProperty('logoOptions', {
       primary: {
         url: 'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
         height: 24,
@@ -178,7 +178,7 @@ describe('modus-navbar', () => {
     await page.waitForChanges();
 
     const navbar = await page.find('modus-navbar');
-    navbar.setProperty('productLogoOptions', {
+    navbar.setProperty('logoOptions', {
       primary: {
         url: 'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
         height: 24,
@@ -277,7 +277,7 @@ describe('modus-navbar', () => {
     await page.waitForChanges();
 
     const navbar = await page.find('modus-navbar');
-    navbar.setProperty('productLogoOptions', {
+    navbar.setProperty('logoOptions', {
       primary: {
         url: 'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
         height: 24,
@@ -307,7 +307,7 @@ describe('modus-navbar', () => {
     await page.waitForChanges();
 
     const navbar = await page.find('modus-navbar');
-    navbar.setProperty('productLogoOptions', {
+    navbar.setProperty('logoOptions', {
       secondary: {
         url: 'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
         height: 24,
@@ -328,7 +328,7 @@ describe('modus-navbar', () => {
     expect(await secondaryLogo.isVisible()).toBe(true);
   });
 
-  it('should not render primary and secondary logo in all screen when productLogoOptions not set', async () => {
+  it('should not render primary and secondary logo in all screen when logoOptions not set', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<modus-navbar></modus-navbar>'

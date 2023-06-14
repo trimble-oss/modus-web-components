@@ -562,7 +562,7 @@ export namespace Components {
         /**
           * (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels.
          */
-        "productLogoOptions": ModusNavbarLogoOptions;
+        "logoOptions": ModusNavbarLogoOptions;
         /**
           * (required) Profile menu options.
          */
@@ -2197,6 +2197,10 @@ declare namespace LocalJSX {
          */
         "helpUrl"?: string;
         /**
+          * (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels.
+         */
+        "logoOptions"?: ModusNavbarLogoOptions;
+        /**
           * An event that fires when an apps menu app opens.
          */
         "onAppsMenuAppOpen"?: (event: ModusNavbarCustomEvent<ModusNavbarApp>) => void;
@@ -2232,10 +2236,6 @@ declare namespace LocalJSX {
           * An event that fires on profile menu sign out click.
          */
         "onProfileMenuSignOutClick"?: (event: ModusNavbarCustomEvent<MouseEvent>) => void;
-        /**
-          * (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels.
-         */
-        "productLogoOptions"?: ModusNavbarLogoOptions;
         /**
           * (required) Profile menu options.
          */

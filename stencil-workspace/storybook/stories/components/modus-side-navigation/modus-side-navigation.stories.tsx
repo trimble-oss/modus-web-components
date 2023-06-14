@@ -199,7 +199,11 @@ const helpers = (containerId) => {
   // Workaround end
 
 
-  getRoot().querySelector('#navbar').productLogoOptions = { url: 'https://modus.trimble.com/img/trimble-logo.svg' };
+  getRoot().querySelector('#navbar').logoOptions = {
+    primary: {
+      url: 'https://modus.trimble.com/img/trimble-logo.svg',
+    },
+  };
   getRoot().querySelector('#navbar').profileMenuOptions = {
     avatarUrl: 'broken-link',
     email: 'modus_user@trimble.com',

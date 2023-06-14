@@ -563,7 +563,7 @@ export declare interface ModusModal extends Components.ModusModal {
 
 
 @ProxyCmp({
-  inputs: ['apps', 'helpUrl', 'productLogoOptions', 'profileMenuOptions', 'reverse', 'searchTooltip', 'showAppsMenu', 'showHelp', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showSearch', 'showShadow', 'variant'],
+  inputs: ['apps', 'helpUrl', 'logoOptions', 'profileMenuOptions', 'reverse', 'searchTooltip', 'showAppsMenu', 'showHelp', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showSearch', 'showShadow', 'variant'],
   methods: ['hideMainMenu']
 })
 @Component({
@@ -571,7 +571,7 @@ export declare interface ModusModal extends Components.ModusModal {
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['apps', 'helpUrl', 'productLogoOptions', 'profileMenuOptions', 'reverse', 'searchTooltip', 'showAppsMenu', 'showHelp', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showSearch', 'showShadow', 'variant'],
+  inputs: ['apps', 'helpUrl', 'logoOptions', 'profileMenuOptions', 'reverse', 'searchTooltip', 'showAppsMenu', 'showHelp', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showSearch', 'showShadow', 'variant'],
 })
 export class ModusNavbar {
   protected el: HTMLElement;

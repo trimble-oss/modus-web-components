@@ -111,7 +111,7 @@ const setNavbar = (
         document.querySelector('${id}').apps = [
           { description: 'The One Trimble Design System', logoUrl: 'https://modus.trimble.com/favicon.svg', name: 'Trimble Modus', url: 'https://modus.trimble.com/' }
         ];
-        document.querySelector('${id}').productLogoOptions = { 
+        document.querySelector('${id}').logoOptions = { 
           primary:{url: '${logoUrl || 'https://modus.trimble.com/img/trimble-logo.svg'
     }'}, 
           secondary:{url: '${iconUrl || 'https://modus.trimble.com/favicon.svg'
