@@ -16,7 +16,8 @@ import { IconApps } from '../icons/icon-apps';
 import { IconSearch } from '../icons/icon-search';
 import { ModusNavbarApp } from './apps-menu/modus-navbar-apps-menu';
 import { IconHelp } from '../icons/icon-help';
-import { ModusNavbarTooltip, ModusProfileMenuOptions } from './modus-navbar.models';
+import { ModusNavbarTooltip, ModusProfileMenuOptions, ModusNavbarLogoOptions } from './modus-navbar.models';
+import { ModusNavbarProductLogo } from './product-logo/modus-navbar-product-logo';
 import { createGuid } from '../../utils/utils';
 
 /**
@@ -35,8 +36,8 @@ export class ModusNavbar {
   /** (optional) The apps to render in the apps menu. */
   @Prop() apps: ModusNavbarApp[];
 
-  /** (required) Product logo options. */
-  @Prop() productLogoOptions: { height?: string; url: string };
+  /** (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels. */
+  @Prop() productLogoOptions: ModusNavbarLogoOptions;
 
   /** (required) Profile menu options. */
   @Prop({ mutable: true }) profileMenuOptions: ModusProfileMenuOptions;
@@ -284,13 +285,10 @@ export class ModusNavbar {
                 <slot name={this.SLOT_MAIN}></slot>
               </modus-navbar-main-menu>
             )}
-            <img
-              class="product-logo"
-              height={this.productLogoOptions?.height ?? '24'}
-              src={this.productLogoOptions?.url}
-              alt="Modus navbar product logo"
-              onClick={(event) => this.productLogoClick.emit(event)}
-            />
+            {this.productLogoOptions && (<ModusNavbarProductLogo
+              logos={this.productLogoOptions}
+              onClick={(event) => this.productLogoClick.emit(event)} />
+            )}
           </div>
           <div class={`right ${direction}`}>
             {this.showSearch && (

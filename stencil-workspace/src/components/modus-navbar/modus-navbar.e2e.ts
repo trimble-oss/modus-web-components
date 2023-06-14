@@ -124,6 +124,7 @@ describe('modus-navbar', () => {
 
     await page.waitForChanges();
 
+    const searchIcon = await page.find('modus-navbar >>> .search');
     const navbar = await page.find('modus-navbar');
     navbar.setProperty('searchTooltip', { text: 'Search' });
     await page.waitForChanges();
@@ -132,11 +133,66 @@ describe('modus-navbar', () => {
     const tooltipText = await tooltip.find('modus-tooltip >>> .text');
     expect(await tooltipText.isVisible()).toBe(false);
 
-    await tooltip.find('modus-tooltip >>> .modus-tooltip').then((e) => e.hover());
+    await searchIcon
+      .find('modus-tooltip >>> .modus-tooltip')
+      .then((e) => e.hover());
     await page.waitForChanges();
 
     expect(await tooltipText.isVisible()).toBe(true);
     expect(tooltipText.innerText).toBe('Search');
+  });
+
+  it('should show small logo (icon) when screen size <= 576px', async () => {
+    const page = await newE2EPage();
+    await page.setViewport({ width: 300, height: 640 });
+    await page.setContent(
+      '<modus-navbar></modus-navbar>'
+    );
+
+    await page.waitForChanges();
+
+    const navbar = await page.find('modus-navbar');
+    navbar.setProperty('productLogoOptions', {
+      primary: {
+        url: 'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
+        height: 24,
+      },
+      secondary: { url: 'https://modus.trimble.com/favicon.svg', height: 24 },
+    });
+
+    await page.waitForChanges();
+
+    const productLogo = await page.find('modus-navbar >>> .product-logo-primary');
+    const productIcon = await page.find('modus-navbar >>> .product-logo-secondary');
+
+    expect(await productIcon.isVisible()).toBe(true);
+    expect(await productLogo.isVisible()).toBe(false);
+  });
+
+  it('should show big logo when screen size > 576px', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<modus-navbar></modus-navbar>'
+    );
+
+    await page.waitForChanges();
+
+    const navbar = await page.find('modus-navbar');
+    navbar.setProperty('productLogoOptions', {
+      primary: {
+        url: 'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
+        height: 24,
+      },
+      secondary: { url: 'https://modus.trimble.com/favicon.svg', height: 24 },
+    });
+
+    await page.waitForChanges();
+
+    const productLogo = await page.find('modus-navbar >>> .product-logo-primary');
+    const productIcon = await page.find('modus-navbar >>> .product-logo-secondary');
+
+    expect(await productIcon.isVisible()).toBe(false);
+    expect(await productLogo.isVisible()).toBe(true);
   });
 
   it('should show tooltip on hover of profile menu', async () => {
@@ -210,5 +266,80 @@ describe('modus-navbar', () => {
 
     expect(await profileMenu.isVisible()).toBe(true);
     expect(await tooltipText.isVisible()).toBe(false);
+  });
+
+  it('should render primary logo in all screen when secondary logo not provided', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<modus-navbar></modus-navbar>'
+    );
+
+    await page.waitForChanges();
+
+    const navbar = await page.find('modus-navbar');
+    navbar.setProperty('productLogoOptions', {
+      primary: {
+        url: 'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
+        height: 24,
+      }
+    });
+
+    await page.waitForChanges();
+
+    const primaryLogo = await page.find('modus-navbar >>> [data-test-id="primary-logo"]');
+    const secondaryLogo = await page.find('modus-navbar >>> [data-test-id="secondary-logo"]');
+
+    expect(await secondaryLogo).toBeFalsy();
+    expect(await primaryLogo.isVisible()).toBe(true);
+
+    await page.setViewport({ width: 300, height: 640 });
+
+    expect(await secondaryLogo).toBeFalsy();
+    expect(await primaryLogo.isVisible()).toBe(true);
+  });
+
+  it('should render secondary logo in all screen when primary logo not provided', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<modus-navbar></modus-navbar>'
+    );
+
+    await page.waitForChanges();
+
+    const navbar = await page.find('modus-navbar');
+    navbar.setProperty('productLogoOptions', {
+      secondary: {
+        url: 'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
+        height: 24,
+      }
+    });
+
+    await page.waitForChanges();
+
+    const primaryLogo = await page.find('modus-navbar >>> [data-test-id="primary-logo"]');
+    const secondaryLogo = await page.find('modus-navbar >>> [data-test-id="secondary-logo"]');
+
+    expect(await primaryLogo).toBeFalsy();
+    expect(await secondaryLogo.isVisible()).toBe(true);
+
+    await page.setViewport({ width: 300, height: 640 });
+
+    expect(await primaryLogo).toBeFalsy();
+    expect(await secondaryLogo.isVisible()).toBe(true);
+  });
+
+  it('should not render primary and secondary logo in all screen when productLogoOptions not set', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<modus-navbar></modus-navbar>'
+    );
+
+    await page.waitForChanges();
+
+    const primaryLogo = await page.find('modus-navbar >>> [data-test-id="primary-logo"]');
+    const secondaryLogo = await page.find('modus-navbar >>> [data-test-id="secondary-logo"]');
+
+    expect(await primaryLogo).toBeFalsy();
+    expect(await secondaryLogo).toBeFalsy();
   });
 });

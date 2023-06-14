@@ -71,11 +71,15 @@ nav {
       flex-direction: row-reverse;
     }
 
-    img.product-logo {
+    img.product-logo-primary {
       filter: $modus-navbar-brand-logo-filter;
       max-height: 32px;
       padding: 0 $rem-8px;
       user-select: none;
+    }
+
+    img.product-logo-secondary{
+      filter: $modus-navbar-brand-logo-filter;
     }
   }
 
@@ -200,6 +204,22 @@ nav {
         > :first-child:active {
           outline: $rem-4px solid $modus-navbar-blue-profile-icon-active-border-color;
         }
+      }
+    }
+  }
+
+  .product-logo {
+    user-select: none;
+
+    @media screen and (width > 576px) {
+      .product-logo-secondary {
+        display: none;
+      }
+    }
+
+    @media screen and (width <=576px) {
+      .product-logo-primary {
+        display: none;
       }
     }
   }

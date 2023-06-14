@@ -11,4 +11,6 @@ export {
   ModusNavbarTooltip,
   ModusNavbarProfileMenuLink,
   ModusProfileMenuOptions,
+  ModusNavbarLogo, 
+  ModusNavbarLogoOptions
 } from './components/modus-navbar/modus-navbar.models';
