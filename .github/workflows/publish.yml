@@ -1,13 +1,14 @@
 name: Create and publish npm package
 on:
   release:
-    types: [ published ]
-permissions:  # added using https://github.com/step-security/secure-workflows
+    types: [published]
+permissions:
   contents: read
 
 jobs:
   publish:
     runs-on: ubuntu-latest
+    if: github.repository == 'trimble-oss/modus-web-components'
     defaults:
       run:
         working-directory: ./stencil-workspace
