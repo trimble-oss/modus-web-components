@@ -1,12 +1,13 @@
 name: Create and publish React npm package
 on:
   workflow_dispatch:
-permissions:  # added using https://github.com/step-security/secure-workflows
+permissions:
   contents: read
 
 jobs:
   publish_react:
     runs-on: ubuntu-latest
+    if: github.repository == 'trimble-oss/modus-web-components'
     defaults:
       run:
         working-directory: ./react-workspace

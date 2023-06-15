@@ -1,0 +1,18 @@
+name: 'Issue Labeler'
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    if: ${{ github.actor != 'coliff' || github.actor != 'egunther39' || github.actor != 'enowak1031' || github.actor != 'msankaran0712' || github.actor != 'soniakaukonen' }}
+    steps:
+      - uses: github/issue-labeler@v3.1
+        with:
+          configuration-path: .github/issue-labeler.yml
+          enable-versioned-regex: 0

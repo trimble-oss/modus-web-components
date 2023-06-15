@@ -1,0 +1,3 @@
+# Add 'external-request' label to any issue that gets opened by someone outside the organization
+external-request:
+  - '/.*/'
