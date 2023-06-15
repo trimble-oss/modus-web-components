@@ -20,6 +20,7 @@ import {
   Table,
   TableOptionsResolved,
   Updater,
+  VisibilityState,
   createTable,
   getCoreRowModel,
   getPaginationRowModel,
@@ -93,6 +94,9 @@ export class ModusDataTable {
   /** (Optional) To display a panel options, which allows access to table operations like hiding columns. */
   @Prop() panelOptions: ModusDataTablePanelOptions | null = null;
 
+  /** (Optional) To display table panel. */
+  @Prop() showTablePanel = false;
+
   /** (Optional) To control display options of table. */
   @Prop() displayOptions?: ModusDataTableDisplayOptions = {
     borderless: false,
@@ -116,6 +120,7 @@ export class ModusDataTable {
     pageIndex: 0,
     pageSize: this.pageSizeList[0],
   };
+  @State() columnVisibility: VisibilityState = {};
 
   @Listen('click', { target: 'document' })
   documentClickHandler(event: MouseEvent): void {
@@ -149,10 +154,12 @@ export class ModusDataTable {
         sorting: this.sorting,
         columnSizing: {},
         columnSizingInfo: {} as ColumnSizingInfoState,
+        columnVisibility: {},
       },
       enableSorting: this.sort,
       columnResizeMode: 'onChange',
       enableColumnResizing: this.columnResize,
+      enableHiding: !!this.panelOptions?.columnsVisibility,
       sortDescFirst: false, // To-Do, workaround to prevent sort descending on certain columns, e.g. numeric.
       onSortingChange: (updater: Updater<ModusDataTableSortingState>) =>
         this.setSorting(updater),
@@ -165,6 +172,8 @@ export class ModusDataTable {
         this.updatingState(updater, 'columnSizing'),
       onColumnSizingInfoChange: (updater: Updater<ColumnSizingInfoState>) =>
         this.updatingState(updater, 'columnSizingInfo'),
+      onColumnVisibilityChange: (updater: Updater<VisibilityState>) =>
+        this.updatingState(updater, 'columnVisibility'),
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       onStateChange: () => {},
       renderFallbackValue: null,
@@ -220,6 +229,23 @@ export class ModusDataTable {
     return rowData;
   }
 
+  /**
+   * Toggle the table column visibility
+   * @param columnId Column id
+   * @param show Boolean value decides to visibility of column
+   */
+  @Method()
+  async toggleColumnVisibility(
+    columnId: string,
+    show: boolean
+  ): Promise<void> {
+    this.table.getAllLeafColumns().forEach((column) => {
+      if (column.id === columnId) {
+        column.toggleVisibility(show);
+      }
+    });
+  }
+
   render(): void {
     const lengthOfHeaderGroups: number = this.table.getHeaderGroups().length;
     const tableStyle = this.fullWidth
@@ -235,10 +261,10 @@ export class ModusDataTable {
 
     return (
       <Host>
-        {this.panelOptions && (
+        {this.showTablePanel && this.panelOptions && (
           <modus-data-table-panel
             table={this.table}
-            panelOptions={this.panelOptions}>
+            options={this.panelOptions}>
             <div slot="left-section">
               <slot name="panelGroupLeft"></slot>
             </div>
@@ -269,7 +295,7 @@ export class ModusDataTable {
             {this.table.getRowModel()?.rows.map((row) => {
               return (
                 <tr key={row.id} class={this.hover && 'enable-hover'}>
-                  {row.getAllCells()?.map((cell) => {
+                  {row.getVisibleCells()?.map((cell) => {
                     return <ModusDataTableCell cell={cell} />;
                   })}
                 </tr>

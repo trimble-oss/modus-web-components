@@ -1,0 +1,23 @@
+@import '../../../modus-data-table.vars';
+
+.columns-visibility-menu {
+    .column-visibility-header {
+        color: $modus-primary-color;
+        font-size: $rem-14px;
+        font-weight: 700;
+        line-height: 18px;
+        padding-bottom: 5px;
+    }
+
+    .column-visibility-item {
+        padding: 5px 5px 5px 0;
+
+        &:last-child {
+            padding: 5px 5px 15px 0;
+        }
+    }
+}
+
+modus-button {
+    padding: 12px 0 0 12px;
+}

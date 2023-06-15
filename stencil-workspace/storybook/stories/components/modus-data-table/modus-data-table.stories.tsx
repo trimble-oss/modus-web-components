@@ -96,6 +96,16 @@ export default {
       },
       type: { required: false },
     },
+    showTablePanel: {
+      name: 'show-table-panel',
+      description: 'Enables the table panel.',
+      control: 'boolean',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      },
+      type: { required: false },
+    },
     panelOptions: {
       name: 'panel-options',
       description:
@@ -367,6 +377,7 @@ export const ColumnVisibility = ({
   pagination,
   showSortIconOnHover,
   summaryRow,
+  showTablePanel
 }) => html`
   <div style="width: 950px">
     <modus-data-table
@@ -375,7 +386,8 @@ export const ColumnVisibility = ({
       column-resize="${columnResize}"
       pagination="${pagination}"
       show-sort-icon-on-hover="${showSortIconOnHover}"
-      summary-row="${summaryRow}" />
+      summary-row="${summaryRow}"
+      show-table-panel="${showTablePanel}" />
   </div>
   ${columnVisibility()}
 `;
@@ -386,14 +398,15 @@ ColumnVisibility.args = {
   pagination: true,
   showSortIconOnHover: true,
   summaryRow: false,
+  showTablePanel: true
 };
 const columnVisibility = () => {
   const tag = document.createElement('script');
   tag.innerHTML = `
   document.querySelector('modus-data-table').panelOptions = {
-    columnVisibility: {
+    columnsVisibility: {
       title: '',
-      disabledColumns: ['first-name']
+      requiredColumns: ['first-name']
     }
   };
     document.querySelector('modus-data-table').columns = [{ header: 'First Name', accessorKey: 'firstName', id: 'first-name', dataType: 'text', footer: 'Total' }, { header: 'Last Name', accessorKey: 'lastName', id: 'last-name', dataType: 'text', }, { header: 'Age', accessorKey: 'age', id: 'age', dataType: 'integer' }, { header: 'Visits', accessorKey: 'visits', id: 'visits', dataType: 'integer', showTotal: true }, { header: 'Status', accessorKey: 'status', id: 'status', dataType: 'text' }, { header: 'Profile Progress', accessorKey: 'progress', id: 'progress', dataType: 'integer', showTotal: true}];

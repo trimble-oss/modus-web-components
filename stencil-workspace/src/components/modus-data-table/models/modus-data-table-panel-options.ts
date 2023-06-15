@@ -1,5 +1,5 @@
-import { ModusDataTableColumnVisibility } from './modus-data-table-column-visibility';
+import { ModusDataTableColumnsVisibilityOptions } from './modus-data-table-columns-visibility-options';
 
 export interface ModusDataTablePanelOptions {
-  columnVisibility?: ModusDataTableColumnVisibility;
+  columnsVisibility?: ModusDataTableColumnsVisibilityOptions;
 }
