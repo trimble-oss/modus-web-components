@@ -86,13 +86,13 @@ export class ModusCheckbox {
         class={className}
         onClick={() => {
           this.handleCheckboxClick();
-        }}
-        ref={(el) => (this.checkboxContainer = el)}>
+        }}>
         <div
           tabindex={tabIndexValue}
           class={`${this.checked || this.indeterminate ? 'checkbox blue-background checked' : 'checkbox'} ${
             this.disabled ? 'disabled' : ''
-          }`}>
+          }`}
+          ref={(el) => (this.checkboxContainer = el)}>
           {this.indeterminate ? (
             <div class={'checkmark checked'}>
               <IconIndeterminate color="#FFFFFF" size="24" />
