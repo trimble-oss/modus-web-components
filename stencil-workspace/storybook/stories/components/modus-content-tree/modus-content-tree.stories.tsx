@@ -15,7 +15,7 @@ export default {
     disableTabbing: {
       name: 'disable-tabbing',
       description:
-        'Disables tabbing inside a tree view. Use `Arrow Up/Down` for focussing a tree item and `Shift + Arrow Right` for focussing a checkbox inside the item.',
+        'Disables tabbing inside a tree view. Use `Arrow Up/Down` for focusing a tree item and `Shift + Arrow Right` for focusing a checkbox inside the item.',
       table: {
         type: { summary: 'boolean' },
       },
