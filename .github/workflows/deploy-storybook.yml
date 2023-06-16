@@ -1,10 +1,11 @@
 name: Storybook Deployment
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 jobs:
   deploy-storybook:
     runs-on: ubuntu-latest
+    if: github.repository == 'trimble-oss/modus-web-components'
     defaults:
       run:
         working-directory: ./stencil-workspace

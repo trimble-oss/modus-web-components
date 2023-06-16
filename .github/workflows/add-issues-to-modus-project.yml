@@ -9,6 +9,7 @@ jobs:
   add-to-project:
     name: Add issue to project
     runs-on: ubuntu-latest
+    if: github.repository == 'trimble-oss/modus-web-components'
     steps:
       - uses: actions/add-to-project@main
         with:

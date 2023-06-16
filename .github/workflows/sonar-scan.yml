@@ -12,6 +12,7 @@ jobs:
   scan:
     name: Sonar Scan Runner
     runs-on: ubuntu-latest
+    if: github.repository == 'trimble-oss/modus-web-components'
     permissions:
       contents: read
 
