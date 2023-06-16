@@ -1,5 +1,5 @@
 import { Table } from '@tanstack/table-core';
-import { KEYBOARD_LEFT, KEYBOARD_RIGHT, KEYBOARD_ENTER, KEYBOARD_ESCAPE, KEYBOARD_TAB } from '../constants/constants';
+import { KEYBOARD_LEFT, KEYBOARD_RIGHT, KEYBOARD_ENTER, KEYBOARD_ESCAPE, KEYBOARD_TAB } from '../modus-table.constants';
 import ColumnDragState from '../models/column-drag-state.model';
 
 export class TableHeaderDragDrop {

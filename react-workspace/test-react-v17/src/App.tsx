@@ -48,6 +48,7 @@ function App() {
         <ModusReactExamples.Switch />
         <ModusReactExamples.TextInput />
         <ModusReactExamples.TimePicker />
+        <ModusReactExamples.Table />
       </div>
     </>
   );

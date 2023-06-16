@@ -309,6 +309,42 @@ export default {
       },
       type: { required: false },
     },
+    maxHeight: {
+      name: 'maxHeight',
+      description: 'To display a vertical scrollbar when the height is exceeded.',
+      control: 'string',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'string' },
+      },
+      type: { required: false },
+    },
+    maxWidth: {
+      name: 'maxWidth',
+      description: 'To display a horizontal scrollbar when the width is exceeded.',
+      control: 'string',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'string' },
+      },
+      type: { required: false },
+    },
+    pageSizeList: {
+      name: 'toolbarOptions',
+      description: 'To set page size options for the pagination.',
+      table: {
+        type: { summary: 'number[]' },
+      },
+      type: { required: false },
+    },
+    rowSelectionOptions: {
+      name: 'toolbarOptions',
+      description: 'To control multiple row selection.',
+      table: {
+        type: { summary: 'ModusTableRowSelectionOptions' },
+      },
+      type: { required: false },
+    },
   },
 
   parameters: {
