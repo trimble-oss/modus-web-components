@@ -5,7 +5,7 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Table } from '@tanstack/table-core';
-import ModusTableToolbarOptions from '../../../models/modus-table-toolbar-options';
+import { ModusTableToolbarOptions } from '../../../models/modus-table.models';
 @Component({
   tag: 'modus-table-toolbar',
   styleUrl: './modus-table-toolbar.scss',

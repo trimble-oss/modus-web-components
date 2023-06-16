@@ -151,23 +151,26 @@ Users can arrange data in a table by sorting it in either ascending or descendin
 
 User can take the data of a cell and apply any string-based formatting logic.
 
-- Need to use `cell` property in the `columns` array and `cell.getValue()` will provide the cell data.
+- Need to pass a custom formatter function that returns a string, to the `cell` property on the `columns` array, example, `cell: (props) => formatCurrency(props)`.
 
 ```javascript
-  // e.g. for currency formatting `cell: (props) => formatCurrency(props.cell.getValue())`
-  function formatCurrency(value) {
+  // e.g. for currency formatting `cell: (props) => formatCurrency(props)`
+  function formatCurrency(props) {
+    const value = props.cell.getValue();
     return '$' + formatNumber(value);
   }
 
-  // e.g. for decimal number formatting `cell: (props) =>formatNumber(props.cell.getValue())`
-  function formatNumber(value) {
+  // e.g. for decimal number formatting `cell: (props) =>formatNumber(props)`
+  function formatNumber(props) {
+    const value = props.cell.getValue();
     return Number(value)
     .toFixed(2)
     .replace(/\d(?=(\d{3})+\.)/g, '$&,');
   }
 
-  // e.g. for date formatting `cell: (props) => formatDate(props.cell.getValue())`
-  function formatDate(value) {
+  // e.g. for date formatting `cell: (props) => formatDate(props)`
+  function formatDate(props) {
+    const value = props.cell.getValue();
     const date = new Date(value);
     return (
       (date.getMonth() > 8 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1)) +

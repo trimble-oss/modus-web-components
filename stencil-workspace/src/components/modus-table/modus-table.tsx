@@ -31,20 +31,22 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
 } from '@tanstack/table-core';
-import { PAGINATION_DEFAULT_SIZES } from './constants/constants';
-import { ModusTableSortingState } from './models';
+import { PAGINATION_DEFAULT_SIZES } from './modus-table.constants';
+import { ModusTableSortingState } from './models/modus-table.models';
 import ColumnDragState from './models/column-drag-state.model';
-import ModusTableCellLink from './models/modus-table-cell-link';
-import ModusTableColumn from './models/modus-table-column';
-import ModusTableDisplayOptions from './models/modus-table-display-options';
-import ModusTableToolbarOptions from './models/modus-table-toolbar-options';
+import {
+  ModusTableColumn,
+  ModusTableCellLink,
+  ModusTableDisplayOptions,
+  ModusTableToolbarOptions,
+  ModusTableRowSelectionOptions as RowSelectionOptions,
+} from './models/modus-table.models';
 import { ModusTableCell } from './parts/cell/modus-table-cell';
 import { ModusTableHeader } from './parts/header/modus-table-header';
 import { ModusTableColumnDropIndicator, ModusTableColumnDragItem } from './parts/modus-table-drag-item';
 import { ModusTablePagination } from './parts/modus-table-pagination';
 import { ModusTableSummaryRow } from './parts/modus-table-summary-row';
 import { TableHeaderDragDrop } from './utilities/table-header-drag-drop.utility';
-import RowSelectionOptions from './models/modus-table-row-selection-options';
 import { JSX } from '@stencil/core/internal';
 
 /**
@@ -60,9 +62,9 @@ import { JSX } from '@stencil/core/internal';
 export class ModusTable {
   /** (Required) To display headers in the table. */
   @Prop({ mutable: true }) columns!: ModusTableColumn<unknown>[];
-  @Watch('columns') onChangeOfColumns() {
+  @Watch('columns') onChangeOfColumns(newVal: ModusTableColumn<unknown>[]) {
     if (this.table) {
-      this.table.options.columns = this.columns;
+      this.table.options.columns = (newVal as ColumnDef<unknown>[]) ?? [];
     }
   }
 
