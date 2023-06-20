@@ -12,6 +12,12 @@ export default {
         type: { summary: 'string' },
       },
     },
+    disabled: {
+      description: "Hide the tooltip",
+      table: {
+        type: { summary: 'boolean' },
+      },
+    },
     position: {
       control: {
         options: ['bottom', 'left', 'right', 'top'],
@@ -45,17 +51,20 @@ export default {
 export const Default = ({
   ariaLabel,
   position,
-  text
+  text,
+  disabled
 }) => html`
   <modus-tooltip
     aria-label=${ariaLabel}
     position=${position}
-    text=${text}>
+    text=${text}
+    disabled=${disabled}>
     <modus-button>Button</modus-button>
   </modus-tooltip>
 `;
 Default.args = {
   ariaLabel: '',
   position: 'bottom',
-  text: 'Tooltip text...'
+  text: 'Tooltip text...',
+  disabled: false
 };
