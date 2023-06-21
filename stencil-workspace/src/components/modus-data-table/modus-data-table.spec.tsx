@@ -1,21 +1,23 @@
 import { newSpecPage } from '@stencil/core/testing';
 import { ModusDataTable } from './modus-data-table';
 
-xdescribe('modus-data-table', () => {
+describe('modus-data-table', () => {
   it('renders', async () => {
-    const page = await newSpecPage({
+    const { root } = await newSpecPage({
       components: [ModusDataTable],
       html: '<modus-data-table></modus-data-table>',
     });
-    expect(page.root).toEqualHtml(`
+    expect(root).toEqualHtml(`
       <modus-data-table>
         <mock:shadow-root>
-          <table class="borderless cell-borderless">
+          <table  class="false" style="width: 100%">
             <thead>
-              <tr></tr>
+              <tr>
+              </tr>
             </thead>
             <tbody></tbody>
           </table>
+          <slot name="customFooter"></slot>
         </mock:shadow-root>
       </modus-data-table>
     `);
