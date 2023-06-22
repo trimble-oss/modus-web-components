@@ -5,7 +5,13 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Table } from '@tanstack/table-core';
-import { TabKey } from '../../../constants/constants';
+import {
+  ArrowDown,
+  ArrowUp,
+  EnterKey,
+  SpaceKey,
+  TabKey,
+} from '../../../constants/constants';
 import { ModusDataTableColumnsVisibilityOptions } from '../../../models';
 import { JSX } from '@stencil/core/internal';
 
@@ -29,6 +35,8 @@ export class ModusDataTableColumnsVisibility {
 
   @State() columnsVisibilityState: Map<string, boolean> = new Map();
 
+  private refItemContent: HTMLElement[] = [];
+
   applyColumnsVisibility() {
     this.table.getAllLeafColumns().forEach((column) => {
       if (this.columnsVisibilityState.has(column.id)) {
@@ -42,7 +50,6 @@ export class ModusDataTableColumnsVisibility {
   closeDropdown() {
     this.columnsVisibilityState = new Map();
     this.toggleDropdown(!this.showDropdown);
-
     this.menuIconContainerRef.focus();
   }
 
@@ -52,12 +59,93 @@ export class ModusDataTableColumnsVisibility {
     }
   }
 
+  /**
+   * Handling columns dropdown keyboard(arrowUp/arrowDown) navigation
+   * @param event keyboard event
+   * @param columnIndex column index
+   */
+  handleColumnItemKeyDown(event: KeyboardEvent, columnIndex: number): void {
+    let currentRefItemIndex: number;
+    const recursiveTillAnotherFocusItem = (refItemIndex, isIncrement) => {
+      this.refItemContent[refItemIndex]
+        ? this.refItemContent[refItemIndex].focus()
+        : recursiveTillAnotherFocusItem(
+            isIncrement ? refItemIndex + 1 : refItemIndex - 1,
+            isIncrement
+          );
+    };
+
+    const eventKey = event.key.toLowerCase();
+    if (eventKey === EnterKey || eventKey === SpaceKey) {
+      this.toggleColumnVisibility(columnIndex);
+    } else if (eventKey === ArrowDown) {
+      currentRefItemIndex =
+        columnIndex + 1 < this.refItemContent.length
+          ? columnIndex + 1
+          : this.refItemContent.length - 1;
+      recursiveTillAnotherFocusItem(currentRefItemIndex, true);
+      event.preventDefault();
+    } else if (eventKey === ArrowUp) {
+      currentRefItemIndex = columnIndex - 1 >= 0 ? columnIndex - 1 : 0;
+      recursiveTillAnotherFocusItem(currentRefItemIndex, false);
+      event.preventDefault();
+    }
+  }
+
+  /**
+   * Adding column item refs(not disabled)
+   */
+  handleRefColumnItemContent(
+    el: HTMLDivElement,
+    i: number,
+    requiredColumn: boolean
+  ) {
+    if (!requiredColumn) {
+      this.refItemContent[i] = el;
+    }
+  }
+
+  private toggleColumnVisibility(columnIndex: number) {
+    const shadowRootChildren: HTMLCollection = this.refItemContent[columnIndex]
+      .children[0].shadowRoot.children as HTMLCollection;
+    const modusCheckboxElement: HTMLElement = shadowRootChildren[
+      shadowRootChildren.length - 1
+    ] as HTMLElement;
+
+    modusCheckboxElement.click();
+  }
+
+  /**
+   * Returns true if the column is required column
+   */
+  private checkIfRequiredColumn(columnId: string): boolean {
+    return this.columnsVisibility?.requiredColumns?.includes(columnId);
+  }
+
   renderColumnsChecklist(): JSX.Element | null {
+    const columnVisibilityItemControls = (columnId, columnIndex) => {
+      return {
+        key: columnId,
+        tabIndex: this.checkIfRequiredColumn(columnId) ? -1 : 0,
+        ref: (el) => {
+          this.handleRefColumnItemContent(
+            el,
+            columnIndex,
+            this.checkIfRequiredColumn(columnId)
+          );
+        },
+        onClick: () => this.toggleColumnVisibility(columnIndex),
+        onKeyDown: (event) => this.handleColumnItemKeyDown(event, columnIndex),
+      };
+    };
+
     return (
       this.showDropdown &&
-      this.table.getAllLeafColumns().map((column) => {
+      this.table.getAllLeafColumns().map((column, index) => {
         return (
-          <div key={column.id} class="column-visibility-item">
+          <div
+            {...columnVisibilityItemControls(column.id, index)}
+            class="column-visibility-item">
             <modus-checkbox
               ariaLabel={column.columnDef.header as string}
               label={column.columnDef.header as string}
@@ -67,7 +155,8 @@ export class ModusDataTableColumnsVisibility {
               }
               disabled={this.columnsVisibility?.requiredColumns?.includes(
                 column.id
-              )}></modus-checkbox>
+              )}
+              stopPropagation></modus-checkbox>
           </div>
         );
       })
@@ -76,7 +165,7 @@ export class ModusDataTableColumnsVisibility {
 
   renderCancelApplyButtons(): JSX.Element | null {
     return (
-      <div>
+      <div class="column-visibility-buttons-container">
         <modus-button
           size="small"
           buttonStyle="outline"

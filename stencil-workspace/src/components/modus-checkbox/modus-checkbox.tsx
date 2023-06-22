@@ -27,16 +27,19 @@ export class ModusCheckbox {
   /** An event that fires on checkbox click. */
   @Event() checkboxClick: EventEmitter<boolean>;
 
+  /** (optional) If you wish to prevent the propagation of your event, you may opt for this. */
+  @Prop() stopPropagation = false;
+
   checkboxInput: HTMLInputElement;
 
   @Listen('keydown')
   elementKeydownHandler(event: KeyboardEvent): void {
     switch (event.code) {
       case 'Enter':
-        this.handleCheckboxClick();
+        this.handleCheckboxClick(event);
         break;
       case 'Space':
-        this.handleCheckboxClick();
+        this.handleCheckboxClick(event);
         break;
     }
   }
@@ -45,13 +48,18 @@ export class ModusCheckbox {
     this.checkboxInput.indeterminate = this.indeterminate;
   }
 
-  handleCheckboxClick(): void {
+  handleCheckboxClick(event: MouseEvent | KeyboardEvent): void {
     if (this.disabled) {
       return;
     }
 
     this.updateChecked();
     this.checkboxClick.emit(this.checked);
+
+    if (this.stopPropagation) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
   }
 
   updateChecked(): void {
@@ -67,11 +75,16 @@ export class ModusCheckbox {
     return (
       <div
         class={className}
-        onClick={() => {
-          this.handleCheckboxClick();
+        onClick={(event: MouseEvent) => {
+          this.handleCheckboxClick(event);
         }}
         tabIndex={tabIndexValue}>
-        <div class={`${this.checked || this.indeterminate ? 'checkbox blue-background checked' : 'checkbox'} ${this.disabled ? 'disabled' : ''}`}>
+        <div
+          class={`${
+            this.checked || this.indeterminate
+              ? 'checkbox blue-background checked'
+              : 'checkbox'
+          } ${this.disabled ? 'disabled' : ''}`}>
           {this.indeterminate ? (
             <div class={'checkmark checked'}>
               <IconIndeterminate color="#FFFFFF" size="24" />
@@ -90,7 +103,9 @@ export class ModusCheckbox {
           disabled={this.disabled}
           ref={(el) => (this.checkboxInput = el as HTMLInputElement)}
           type="checkbox"></input>
-        {this.label ? <label class={this.disabled ? 'disabled' : null}>{this.label}</label> : null}
+        {this.label ? (
+          <label class={this.disabled ? 'disabled' : null}>{this.label}</label>
+        ) : null}
       </div>
     );
   }

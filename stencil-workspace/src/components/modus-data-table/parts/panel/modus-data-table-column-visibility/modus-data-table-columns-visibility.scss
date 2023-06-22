@@ -6,15 +6,26 @@
         font-size: $rem-14px;
         font-weight: 700;
         line-height: 18px;
-        padding-bottom: 5px;
+        margin: 12px;
+        margin-bottom: 5px;
     }
 
     .column-visibility-item {
-        padding: 5px 5px 5px 0;
+        padding: 5px 5px 5px 12px;
+
+        &:focus,
+        &:hover {
+            background: $modus-menu-dropdown-item-hover-bg;
+            outline: none;
+        }
 
         &:last-child {
-            padding: 5px 5px 15px 0;
+            margin-bottom: 10px;
         }
+    }
+
+    .column-visibility-buttons-container {
+        margin-bottom: 12px;
     }
 }
 

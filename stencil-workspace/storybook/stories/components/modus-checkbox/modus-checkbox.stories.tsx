@@ -39,6 +39,13 @@ export default {
         type: { summary: 'string' },
       },
     },
+    stopPropagation: {
+      name: 'stop-propagation',
+      description: "It should stop propagating the event further.",
+      table: {
+        type: { summary: 'boolean' },
+      },
+    },
   },
   parameters: {
     actions: {

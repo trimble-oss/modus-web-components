@@ -3,8 +3,8 @@ import {
   Prop,
   Listen,
   State,
-  h,
-  Element, // eslint-disable-line @typescript-eslint/no-unused-vars
+  h, // eslint-disable-line @typescript-eslint/no-unused-vars
+  Element,
 } from '@stencil/core';
 import { IconHorizontalEllipsis } from '../../../../icons/icon-horizontal-ellipsis';
 import { EnterKey, EscapeKey, SpaceKey } from '../../../constants/constants';
@@ -40,7 +40,7 @@ export class ModusDataTableDropdownMenu {
       this.show = false;
     }
 
-    // Another logic to handle click outside 
+    // Another logic to handle click outside
     // TODO: decide it to keep it if works
     // if (
     //     this.element.contains(event.target as HTMLElement) ||
@@ -53,7 +53,7 @@ export class ModusDataTableDropdownMenu {
   }
 
   menuIconContainerRef: HTMLDivElement;
-  
+
   handleIconKeyDown(event: KeyboardEvent) {
     const eventKey = event.key.toLowerCase();
     if (eventKey === EnterKey || eventKey === SpaceKey) {
@@ -81,7 +81,7 @@ export class ModusDataTableDropdownMenu {
           class="dropdown-menu-icon"
           onClick={() => (this.show = !this.show)}
           onKeyDown={(event) => this.handleIconKeyDown(event)}
-          ref={(el) => (this.menuIconContainerRef = el as HTMLInputElement)}>
+          ref={(el) => (this.menuIconContainerRef = el as HTMLDivElement)}>
           <IconHorizontalEllipsis size="20" />
         </div>
         <div
