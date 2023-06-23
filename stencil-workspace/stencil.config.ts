@@ -40,7 +40,12 @@ export const config: Config = {
     }),
     react({
       componentCorePackage: '@trimble-oss/modus-web-components',
-      proxiesFile: '../react-workspace/src/components/stencil-generated/index.ts',
+      proxiesFile: '../react-workspace/react-17/src/components/stencil-generated/index.ts',
+      includeDefineCustomElements: true,
+    }),
+    react({
+      componentCorePackage: '@trimble-oss/modus-web-components',
+      proxiesFile: '../react-workspace/react-18/src/components/stencil-generated/index.ts',
       includeDefineCustomElements: true,
     }),
   ],

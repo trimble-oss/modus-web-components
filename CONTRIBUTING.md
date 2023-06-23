@@ -207,15 +207,18 @@ Before releasing any of the framework outputs, the targeted version of the Modus
 
 ### React
 
-1. Update `./react-workspace/package.json`'s:
+The React component integration can be found under the `./react-workspace` directory.
+Each version of React has a library `react-17` and a test harness app `test-react-v17`
+
+1. Update `./react-workspace/react-<version-number>`:
    1. Dependency on the Modus Web Components library to the targeted version
    2. The package's version to reflect the targeted version
-2. From the `./react-workspace` directory, run `npm i`.
-3. From the `./react-workspace` directory, run `npm run build`.
-4. From the `./react-workspace` directory, run `npm publish`.
+2. From the `./react-workspace/react-<version-number>` directory, run `npm i`.
+3. From the `./react-workspace/react-<version-number>` directory, run `npm run build`.
+4. From the `./react-workspace/react-<version-number>` directory, run `npm publish`.
 
 As an alternative to publish, this can be also consumed in a local react application using `npm link` or generate a tarball file using `npm pack`.
 
 #### Recommended
 
-Import the React library in `./react-workspace/projects/test-react-v17` for testing the components locally, refer to `src/App.tsx` file for more details on how to test the components.
+Import the React library in `./react-workspace/test-react-v<version-number>` for testing the components locally, refer to `src/App.tsx` file for more details on how to test the components.

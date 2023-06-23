@@ -1,16 +1,23 @@
 name: Create and publish React npm package
 on:
   workflow_dispatch:
+    inputs:
+      reactVersion:
+        required: true
+        type: choice
+        options:
+          - "17"
+          - "18"
+        description: The version of react you want to build
 permissions:
   contents: read
-
 jobs:
   publish_react:
     runs-on: ubuntu-latest
     if: github.repository == 'trimble-oss/modus-web-components'
     defaults:
       run:
-        working-directory: ./react-workspace
+        working-directory: ./react-workspace/react-${{ github.event.inputs.reactVersion }}
     permissions:
       contents: read
       packages: write
@@ -25,10 +32,10 @@ jobs:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
 
-      - name: Install React project dependencies
+      - name: Install React ${{ github.event.inputs.reactVersion }}
         run: npm ci
 
-      - name: Build React project
+      - name: Build React ${{ github.event.inputs.reactVersion }}
         run: npm run build
 
       - name: Set npm Registry Auth Token
