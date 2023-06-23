@@ -28,12 +28,12 @@
 
 ### Used by
 
- - [modus-data-table](../modus-data-table)
+ - [modus-table](../modus-table)
 
 ### Graph
 ```mermaid
 graph TD;
-  modus-data-table --> modus-dropdown
+  modus-table --> modus-dropdown
   style modus-dropdown fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
