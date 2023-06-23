@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "allowUnreachableCode": false,
+    "declaration": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "removeComments": false,
+    "outDir": "./dist",
+    "lib": ["dom", "es2015"],
+    "module": "es2015",
+    "moduleResolution": "node",
+    "target": "es2015",
+    "skipLibCheck": true,
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true,
+    "declarationDir": "./dist/types"
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ],
+  "exclude": ["node_modules", "**/*.spec.ts", "**/__tests__/**"],
+  "compileOnSave": false,
+  "buildOnSave": false
+}
