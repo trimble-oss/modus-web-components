@@ -40,8 +40,8 @@ body.sb-show-main,
 .sbdocs-li,
 .sbdocs-p,
 .sbdocs-ul {
-  color: var(--theme-color) !important;
   background-color: var(--theme-bg-color) !important;
+  color: var(--theme-color) !important;
 }
 
 .sbdocs-h1 + h2:not(.sbdocs-h2),
@@ -59,10 +59,10 @@ hr {
 }
 
 .sbdocs-table thead tr th {
-  color: var(--theme-color);
   background-color: var(--theme-sbdocs-table-head-bg-color);
   border: 1px solid var(--theme-sbdocs-table-border-color);
   border-bottom-width: 2px;
+  color: var(--theme-color);
   font-weight: 600;
   text-align: left;
 }
@@ -126,6 +126,10 @@ code {
   background-image: url("/trimble-logo.svg");
   background-position: center;
   background-repeat: no-repeat;
+}
+
+body.dark .sidebar-header a[title="Storybook"] {
+  filter: invert(1) brightness(999%) saturate(0);
 }
 
 .sidebar-header a[title="Storybook"] svg {
