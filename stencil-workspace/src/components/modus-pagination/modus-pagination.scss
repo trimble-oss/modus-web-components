@@ -57,7 +57,7 @@ nav {
     ol li {
       font-size: $rem-12px;
       height: $rem-24px;
-      width: $rem-24px;
+      padding: 0 $rem-8px;
     }
   }
 
@@ -67,7 +67,7 @@ nav {
     ol li {
       font-size: $rem-14px;
       height: 2rem;
-      width: 2rem;
+      padding: 0 $rem-12px;
     }
   }
 
@@ -77,7 +77,7 @@ nav {
     ol li {
       font-size: $rem-20px;
       height: 3rem;
-      width: 3rem;
+      padding: 0 $rem-24px;
     }
   }
 }
