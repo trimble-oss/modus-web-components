@@ -57,6 +57,29 @@ describe('modus-pagination', () => {
     expect(pages.length).toEqual(6);
   });
 
+  it('renders changes to prevNextTextButton', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-pagination min-page="0" max-page="100" active-page="40" size="small"></modus-pagination>');
+    const element = await page.find('modus-pagination');
+    let prevText = await page.find('modus-pagination >>> [data-test-id="prev-button-text"]');
+    let nextText = await page.find('modus-pagination >>> [data-test-id="next-button-text"]');
+
+    expect(prevText).toBeNull();
+    expect(nextText).toBeNull();
+
+    await element.setProperty('prevPageButtonText', 'Prev');
+    await element.setProperty('nextPageButtonText', 'Next');
+
+    await page.waitForChanges();
+
+    prevText = await page.find('modus-pagination >>> [data-test-id="prev-button-text"]');
+    nextText = await page.find('modus-pagination >>> [data-test-id="next-button-text"]');
+
+    expect(prevText.textContent).toEqual('Prev');
+    expect(nextText.textContent).toEqual('Next');
+  });
+
   it('emits pageChange on page click', async () => {
     const page = await newE2EPage();
 
