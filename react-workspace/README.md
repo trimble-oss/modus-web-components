@@ -2,7 +2,7 @@
 
 ## About
 
-This is a React wrapper library for [Modus Web Components](https://www.npmjs.com/package/@trimble-oss/modus-web-components) and the components were programmatically generated using the [Stencil](https://stenciljs.com/) for React [v17.0.2](https://github.com/facebook/react/blob/main/CHANGELOG.md#1702-march-22-2021).
+This is a React wrapper library for [Modus Web Components](https://www.npmjs.com/package/@trimble-oss/modus-web-components) and the components were programmatically generated using the [Stencil](https://stenciljs.com/docs/react) for React Integration [v17.0.2](https://github.com/facebook/react/blob/main/CHANGELOG.md#1702-march-22-2021).
 
 ## Installation
 
