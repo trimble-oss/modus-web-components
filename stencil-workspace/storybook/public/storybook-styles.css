@@ -81,8 +81,8 @@ hr {
 }
 
 .docblock-source {
-  color: var(--theme-docblock-source-color) !important;
   background-color: var(--theme-docblock-source-bg-color) !important;
+  color: var(--theme-docblock-source-color) !important;
 }
 
 [data-mwc-theme="dark"] .docblock-source pre span,
@@ -117,7 +117,17 @@ pre .os-content {
 }
 
 code {
-  color: var(--theme-code-color) !important;
   background-color: var(--theme-code-bg-color) !important;
   border-color: var(--theme-code-border-color) !important;
+  color: var(--theme-code-color) !important;
+}
+
+.sidebar-header a[title="Storybook"] {
+  background-image: url("/trimble-logo.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.sidebar-header a[title="Storybook"] svg {
+  opacity: 0;
 }
