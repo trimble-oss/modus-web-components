@@ -13,3 +13,5 @@ export {
   ModusNavbarLogo,
   ModusNavbarLogoOptions,
 } from './components/modus-navbar/modus-navbar.models';
+export * from './components/modus-table/models';
+export * from './components/modus-table/enums';

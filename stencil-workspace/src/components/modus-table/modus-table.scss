@@ -92,6 +92,23 @@ table {
       td {
         border: $rem-1px $modus-table-header-border-color solid;
 
+        .cell-link {
+          color: $modus-link-color;
+          cursor: pointer;
+          display: inline-block;
+          font-weight: $font-weight-semi-bold;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
+        .cell-badge {
+          align-items: center;
+          display: flex;
+          justify-content: center;
+        }
+
         &.text-align-right {
           text-align: right;
         }

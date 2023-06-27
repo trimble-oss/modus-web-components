@@ -15,6 +15,7 @@ import { Story } from '@storybook/addon-docs';
 - [Borderless](#borderless)
 - [Sorting](#sorting)
 - [Value Formatter](#value-formatter)
+- [Cell Renderer](#cell-renderer)
 - [Column Resize](#column-resize)
 - [Pagination](#pagination)
 - [Summary Row](#summary-row)
@@ -178,7 +179,11 @@ User can take the data of a cell and apply any string-based formatting logic.
   NOTE: One can use their own custom functions to format data as per their requirements.
 ```
 
-<Story id="components-table--value-formatter" height={'350px'} />
+<Story id="components-table--value-formatter" height={'370px'} />
+
+### Cell Renderer
+
+<Story id="components-table--cell-renderer" height={'370px'} />
 
 ### Column Resize
 
@@ -339,18 +344,54 @@ Users can control the visibility of columns in one place using `panelOptions`. B
 ### Types
 
 ```ts
-interface interface ModusTableColumn {
+interface ModusTableColumn {
   header: string;
   accessorKey: string;
-  dataType: ModusColumnDataType;
+  dataType: ModusTableColumnDataType;
   id?: string;
+  cell?: ColumnDefTemplate<CellContext<TData, TValue>>;
   footer?: string;
   enableSorting?: boolean;
   enableResizing?: boolean;
-  size?: number,
-  minSize?: number,
-  maxSize?: number
+  size?: number;
+  minSize?: number;
+  maxSize?: number;
   showTotal?: boolean;
+}
+
+enum ModusColumnDataType {
+  Text = 'text',
+  Integer = 'integer',
+  Boolean = 'boolean',
+  Link = 'link',
+  Badge = 'badge',
+}
+
+interface ModusTableLink {
+  display: string;
+  url: string;
+}
+
+interface ModusTableBadge {
+  color?: ModusTableBadgeColor;
+  text: string;
+  type?: ModusTableBadgeType;
+}
+
+enum ModusTableBadgeColor {
+  Danger = 'danger',
+  Dark = 'dark',
+  Primary = 'primary',
+  Secondary = 'secondary',
+  Success = 'success',
+  Tertiary = 'tertiary',
+  Warning = 'warning',
+}
+
+enum ModusTableBadgeType {
+  Counter = 'counter',
+  Default = 'default',
+  Text = 'text',
 }
 
 interface ModusTableColumnVisibility {
@@ -375,36 +416,37 @@ Users can use keyboard navigation to perform different actions.
 
 ### Properties
 
-| Property              | Attribute                 | Description                                                                                                 | Type                          | Default      |
-| --------------------- | ------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------- | ------------ |
-| `columns`             | `columns`                 | (required) To display headers in the table.                                                                 | `ModusTableColumn[]`      | `undefined`  |
-| `data`                | `data`                    | (required) To display data in the table.                                                                    | `Array`                       | `undefined`  |
-| `hover`               | `hover`                   | (optional) To enable row hover in table.                                                                    | `boolean`                     | `false`      |
-| `sort`                | `sort`                    | (optional) To sort data in table.                                                                           | `boolean`                     | `false`      |
-| `showSortIconOnHover` | `show-sort-icon-on-hover` | (optional) To display sort icon on hover.                                                                   | `boolean`                     | `false`      |
-| `displayOptions`      | `display-options`         | (optional) To control display options of table.                                                             | `boolean`                     | `false`      |
-| `pagination`          | `pagination`              | (optional) To enable pagination of table.                                                                   | `boolean`                     | `false`      |
-| `pageSizeList`        | `page-size-list`          | (optional) To display page size options of table.                                                           | `Array`                       | `[10,20,50]` |
-| `columnResize`        | `column-resize`           | (optional) To enable column resizing of table.                                                              | `boolean`                     | `false`      |
-| `summaryRow`          | `summary-row`             | (optional) To display summary row in table. Is used to display total.                                       | `boolean`                     | `false`      |
-| `fullWidth`           | `full-width`              | (optional) To manage table width.                                                                           | `boolean`                     | `true`       |
-| `panelOptions`        | `panel-options`           | (Optional) To display a panel above the table, which allows access to table operations like hiding columns. | `ModusTablePanelOptions`  | `null`       |
+| Property              | Attribute                 | Description                                                                                                 | Type                     | Default      |
+| --------------------- | ------------------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------ | ------------ |
+| `columns`             | `columns`                 | (required) To display headers in the table.                                                                 | `ModusTableColumn[]`     | `undefined`  |
+| `data`                | `data`                    | (required) To display data in the table.                                                                    | `Array`                  | `undefined`  |
+| `hover`               | `hover`                   | (optional) To enable row hover in table.                                                                    | `boolean`                | `false`      |
+| `sort`                | `sort`                    | (optional) To sort data in table.                                                                           | `boolean`                | `false`      |
+| `showSortIconOnHover` | `show-sort-icon-on-hover` | (optional) To display sort icon on hover.                                                                   | `boolean`                | `false`      |
+| `displayOptions`      | `display-options`         | (optional) To control display options of table.                                                             | `boolean`                | `false`      |
+| `pagination`          | `pagination`              | (optional) To enable pagination of table.                                                                   | `boolean`                | `false`      |
+| `pageSizeList`        | `page-size-list`          | (optional) To display page size options of table.                                                           | `Array`                  | `[10,20,50]` |
+| `columnResize`        | `column-resize`           | (optional) To enable column resizing of table.                                                              | `boolean`                | `false`      |
+| `summaryRow`          | `summary-row`             | (optional) To display summary row in table. Is used to display total.                                       | `boolean`                | `false`      |
+| `fullWidth`           | `full-width`              | (optional) To manage table width.                                                                           | `boolean`                | `true`       |
+| `panelOptions`        | `panel-options`           | (Optional) To display a panel above the table, which allows access to table operations like hiding columns. | `ModusTablePanelOptions` | `null`       |
 
 ### Events
 
-| Name         | Description                         | Emits                             |
-| ------------ | ----------------------------------- | --------------------------------- |
-| `sortChange` | An event that fires on sort change. | `[{ id: string, desc: boolean }]` |
+| Name         | Description                               | Emits                                |
+| ------------ | ----------------------------------------- | ------------------------------------ |
+| `sortChange` | An event that fires on sort change.       | `[{ id: string, desc: boolean }]`    |
+| `linkClick`  | An event that fires on click of the link. | `[{ display: string, url: string }]` |
 
 ### Slot
 
 Users can use this to provide custom elements.
 
-| Name                 | Description                                                                                  |
-| -------------------- | -------------------------------------------------------------------------------------------- |
-| `customFooter`       | To view a custom footer `slot` with name `customFooter` can be used.                         |
-| `panelGroupLeft`     | To add content to the panel's left section, `slot` with name `panelGroupLeft` can be used.   |
-| `panelGroupRight`    | To add content to the panel's right section, `slot` with name `panelGroupRight` can be used. |
+| Name              | Description                                                                                  |
+| ----------------- | -------------------------------------------------------------------------------------------- |
+| `customFooter`    | To view a custom footer `slot` with name `customFooter` can be used.                         |
+| `panelGroupLeft`  | To add content to the panel's left section, `slot` with name `panelGroupLeft` can be used.   |
+| `panelGroupRight` | To add content to the panel's right section, `slot` with name `panelGroupRight` can be used. |
 
 ### Methods
 

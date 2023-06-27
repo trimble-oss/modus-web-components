@@ -30,8 +30,9 @@ import {
   ModusTableDisplayOptions,
   ModusTableSortingState,
   ModusTablePanelOptions,
+  ModusTableLink,
 } from './models';
-import { ModusTableCell } from './parts/modus-table-cell';
+import { ModusTableCell } from './parts/cell/modus-table-cell';
 import { ModusTablePagination } from './parts/modus-table-pagination';
 import { ModusTableSummaryRow } from './parts/modus-table-summary-row';
 import { DefaultPageSizes } from './constants/constants';
@@ -102,13 +103,15 @@ export class ModusTable {
   /** Emits event on sort change */
   @Event() sortChange: EventEmitter<ModusTableSortingState>;
 
+  /** Emits the link that was clicked */
+  @Event() linkClick: EventEmitter<ModusTableLink>;
+
   /**
    * ColumnSizing has info about width of the column
    * whereas ColumnSizingInfo has the detailed info about resizing of the column
    */
   @State() columnSizing: ColumnSizingState = {};
-  @State() columnSizingInfo: ColumnSizingInfoState =
-    {} as ColumnSizingInfoState;
+  @State() columnSizingInfo: ColumnSizingInfoState = {} as ColumnSizingInfoState;
 
   @State() sorting: ModusTableSortingState = [];
   @State() table: Table<unknown>;
@@ -154,17 +157,13 @@ export class ModusTable {
       columnResizeMode: 'onChange',
       enableColumnResizing: this.columnResize,
       sortDescFirst: false, // To-Do, workaround to prevent sort descending on certain columns, e.g. numeric.
-      onSortingChange: (updater: Updater<ModusTableSortingState>) =>
-        this.setSorting(updater),
-      onPaginationChange: (updater: PaginationState) =>
-        this.setPagination(updater),
+      onSortingChange: (updater: Updater<ModusTableSortingState>) => this.setSorting(updater),
+      onPaginationChange: (updater: PaginationState) => this.setPagination(updater),
       getCoreRowModel: getCoreRowModel(),
       getPaginationRowModel: this.pagination && getPaginationRowModel(),
       getSortedRowModel: getSortedRowModel(),
-      onColumnSizingChange: (updater: Updater<ColumnSizingState>) =>
-        this.updatingState(updater, 'columnSizing'),
-      onColumnSizingInfoChange: (updater: Updater<ColumnSizingInfoState>) =>
-        this.updatingState(updater, 'columnSizingInfo'),
+      onColumnSizingChange: (updater: Updater<ColumnSizingState>) => this.updatingState(updater, 'columnSizing'),
+      onColumnSizingInfoChange: (updater: Updater<ColumnSizingInfoState>) => this.updatingState(updater, 'columnSizingInfo'),
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       onStateChange: () => {},
       renderFallbackValue: null,
@@ -196,8 +195,7 @@ export class ModusTable {
   }
 
   setPagination(updater: Updater<PaginationState>): void {
-    this.paginationState =
-      updater instanceof Function ? updater(this.paginationState) : updater;
+    this.paginationState = updater instanceof Function ? updater(this.paginationState) : updater;
     this.table.options.state.pagination = this.paginationState;
   }
 
@@ -236,9 +234,7 @@ export class ModusTable {
     return (
       <Host>
         {this.panelOptions && (
-          <modus-table-panel
-            table={this.table}
-            panelOptions={this.panelOptions}>
+          <modus-table-panel table={this.table} panelOptions={this.panelOptions}>
             <div slot="left-section">
               <slot name="panelGroupLeft"></slot>
             </div>
@@ -270,28 +266,24 @@ export class ModusTable {
               return (
                 <tr key={row.id} class={this.hover && 'enable-hover'}>
                   {row.getAllCells()?.map((cell) => {
-                    return <ModusTableCell cell={cell} />;
+                    return (
+                      <ModusTableCell
+                        cell={cell}
+                        onLinkClick={(link: ModusTableLink) => {
+                          this.linkClick.emit(link);
+                        }}
+                      />
+                    );
                   })}
                 </tr>
               );
             })}
           </tbody>
-          {this.summaryRow ? (
-            <ModusTableSummaryRow
-              footerGroups={[footerGroups[0]]}
-              tableData={this.data}
-            />
-          ) : (
-            ''
-          )}
+          {this.summaryRow ? <ModusTableSummaryRow footerGroups={[footerGroups[0]]} tableData={this.data} /> : ''}
         </table>
         <slot name="customFooter"></slot>
         {this.pagination && (
-          <ModusTablePagination
-            table={this.table}
-            totalCount={this.data.length}
-            pageSizeList={this.pageSizeList}
-          />
+          <ModusTablePagination table={this.table} totalCount={this.data.length} pageSizeList={this.pageSizeList} />
         )}
       </Host>
     );

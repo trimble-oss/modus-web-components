@@ -47,8 +47,7 @@ export default {
     },
     showSortIconOnHover: {
       name: 'show-sort-icon-on-hover',
-      description:
-        'Enables sort for table columns and sort icon appears when you hover over a column header',
+      description: 'Enables sort for table columns and sort icon appears when you hover over a column header',
       control: 'boolean',
       table: {
         defaultValue: { summary: false },
@@ -98,8 +97,7 @@ export default {
     },
     panelOptions: {
       name: 'panel-options',
-      description:
-        'To display a panel options, which allows access to table operations like hiding columns.',
+      description: 'To display a panel options, which allows access to table operations like hiding columns.',
       control: false, // The object-based controls are not rendering, making the control false.
       table: {
         type: { summary: 'ModusTablePanelOptions' },
@@ -183,10 +181,7 @@ const borderlessTable = () => {
 
 export const Sorting = ({ hover, sort, showSortIconOnHover }) => html`
   <div style="width: 950px">
-    <modus-table
-      hover="${hover}"
-      sort="${sort}"
-      show-sort-icon-on-hover="${showSortIconOnHover}" />
+    <modus-table hover="${hover}" sort="${sort}" show-sort-icon-on-hover="${showSortIconOnHover}" />
   </div>
   ${sortingTable()}
 `;
@@ -206,14 +201,7 @@ const sortingTable = () => {
   return tag;
 };
 
-export const ValueFormatter = ({
-  hover,
-  sort,
-  columnResize,
-  pagination,
-  showSortIconOnHover,
-  summaryRow,
-}) => html`
+export const ValueFormatter = ({ hover, sort, columnResize, pagination, showSortIconOnHover, summaryRow }) => html`
   <div style="width: 950px">
     <modus-table
       hover="${hover}"
@@ -247,13 +235,43 @@ const valueFormatterTable = () => {
   return tag;
 };
 
-export const ColumnResize = ({ hover, sort, columnResize, fullWidth }) => html`
+export const CellRenderer = ({ hover, sort, columnResize, pagination, showSortIconOnHover, summaryRow }) => html`
   <div style="width: 950px">
     <modus-table
       hover="${hover}"
       sort="${sort}"
       column-resize="${columnResize}"
-      full-width="${fullWidth}" />
+      pagination="${pagination}"
+      show-sort-icon-on-hover="${showSortIconOnHover}"
+      summary-row="${summaryRow}" />
+  </div>
+  <div style="width: 950px">
+    <modus-table column-resize="true" full-width="false" />
+  </div>
+  ${CellRendererTable()}
+`;
+CellRenderer.args = {
+  hover: true,
+  sort: true,
+  columnResize: false,
+  pagination: false,
+  showSortIconOnHover: true,
+  summaryRow: false,
+};
+
+const CellRendererTable = () => {
+  const tag = document.createElement('script');
+  tag.innerHTML = `
+   document.querySelector('modus-table').columns = [{ header: 'First Name', accessorKey: 'firstName', id: 'first-name', dataType: 'text', }, { header: 'Last Name', accessorKey: 'lastName', id: 'last-name', dataType: 'text', }, { header: 'Age', accessorKey: 'age', id: 'age', dataType: 'integer', }, { header: 'Visits', accessorKey: 'visits', id: 'visits', dataType: 'badge', }, { header: 'LinkedIn', accessorKey: 'linkedIn', id: 'linked-in', dataType: 'link', }, { header: 'Profile Progress', accessorKey: 'progress', id: 'progress', dataType: 'integer', }];
+
+   document.querySelector('modus-table').data = [{ firstName: 'Chaim', lastName: 'Lubowitz', age: 30, visits: { text: '33', }, progress: 99, linkedIn: { display: 'Click me 1', url: 'https://in.linkedin.com', }, }, { firstName: 'Vicky', lastName: 'Lehner', age: 2, visits: { text: '41', }, progress: 36, linkedIn: { display: 'Click me 2', url: 'https://in.linkedin.com', }, }, { firstName: 'Nellie', lastName: 'Leuschke', age: 15, visits: { text: '88', }, progress: 68, linkedIn: { display: 'Click me 3', url: 'https://in.linkedin.com', }, }, { firstName: 'Judy', lastName: 'Ritchie', age: 3, visits: { _type: 'link', display: 'Click me 4', url: 'https://in.linkedin.com', }, progress: 10, linkedIn: { _type: 'badge', text: '90', }, }, { firstName: 'Hertha', lastName: 'Bradtke', age: 19, visits: { text: '56', }, progress: 87, linkedIn: { display: 'Click me 5', url: 'https://in.linkedin.com', }, }];
+  `;
+  return tag;
+};
+
+export const ColumnResize = ({ hover, sort, columnResize, fullWidth }) => html`
+  <div style="width: 950px">
+    <modus-table hover="${hover}" sort="${sort}" column-resize="${columnResize}" full-width="${fullWidth}" />
   </div>
   ${columnResizeTable()}
 `;
@@ -298,11 +316,7 @@ const columnResizeTable = () => {
 
 export const Pagination = ({ hover, sort, columnResize, pagination }) => html`
   <div style="width: 950px">
-    <modus-table
-      hover="${hover}"
-      sort="${sort}"
-      column-resize="${columnResize}"
-      pagination="${pagination}" />
+    <modus-table hover="${hover}" sort="${sort}" column-resize="${columnResize}" pagination="${pagination}" />
   </div>
   ${paginationTable()}
 `;
@@ -316,19 +330,12 @@ Pagination.args = {
 const paginationTable = () => {
   const tag = document.createElement('script');
   tag.innerHTML = `
-    document.querySelector('modus-table').columns = [{ header: 'First Name', accessorKey: 'firstName', id: 'first-name', dataType: 'text', }, { header: 'Last Name', accessorKey: 'lastName', id: 'last-name', dataType: 'text', }, { header: 'Age', accessorKey: 'age', id: 'age', dataType: 'integer' }, { header: 'Visits', accessorKey: 'visits', id: 'visits', dataType: 'integer', }, { header: 'Status', accessorKey: 'status', id: 'status', dataType: 'text' }, { header: 'Profile Progress', accessorKey: 'progress', id: 'progress', dataType: 'integer', }];    
+    document.querySelector('modus-table').columns = [{ header: 'First Name', accessorKey: 'firstName', id: 'first-name', dataType: 'text', }, { header: 'Last Name', accessorKey: 'lastName', id: 'last-name', dataType: 'text', }, { header: 'Age', accessorKey: 'age', id: 'age', dataType: 'integer' }, { header: 'Visits', accessorKey: 'visits', id: 'visits', dataType: 'integer', }, { header: 'Status', accessorKey: 'status', id: 'status', dataType: 'text' }, { header: 'Profile Progress', accessorKey: 'progress', id: 'progress', dataType: 'integer', }];
     document.querySelector('modus-table').pageSizeList = [5,10,20,50,100]; ${BulkTableData}`;
   return tag;
 };
 
-export const SummaryRow = ({
-  hover,
-  sort,
-  columnResize,
-  pagination,
-  showSortIconOnHover,
-  summaryRow,
-}) => html`
+export const SummaryRow = ({ hover, sort, columnResize, pagination, showSortIconOnHover, summaryRow }) => html`
   <div style="width: 950px">
     <modus-table
       hover="${hover}"
@@ -360,14 +367,7 @@ const summaryRowTable = () => {
   return tag;
 };
 
-export const ColumnVisibility = ({
-  hover,
-  sort,
-  columnResize,
-  pagination,
-  showSortIconOnHover,
-  summaryRow,
-}) => html`
+export const ColumnVisibility = ({ hover, sort, columnResize, pagination, showSortIconOnHover, summaryRow }) => html`
   <div style="width: 950px">
     <modus-table
       hover="${hover}"

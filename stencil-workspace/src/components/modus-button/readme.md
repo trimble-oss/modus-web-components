@@ -28,11 +28,13 @@
 ### Used by
 
  - [modus-modal](../modus-modal)
+ - [modus-table-panel](../modus-table/parts/panel/modus-table-panel)
 
 ### Graph
 ```mermaid
 graph TD;
   modus-modal --> modus-button
+  modus-table-panel --> modus-button
   style modus-button fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
