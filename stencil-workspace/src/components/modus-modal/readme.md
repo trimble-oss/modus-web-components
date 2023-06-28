@@ -7,15 +7,17 @@
 
 ## Properties
 
-| Property                   | Attribute                     | Description                                         | Type     | Default     |
-| -------------------------- | ----------------------------- | --------------------------------------------------- | -------- | ----------- |
-| `ariaLabel`                | `aria-label`                  | (optional) The modal's aria-label.                  | `string` | `undefined` |
-| `headerText`               | `header-text`                 | (optional) The modal's primary button text.         | `string` | `undefined` |
-| `primaryButtonAriaLabel`   | `primary-button-aria-label`   | (optional) The modal's primary button aria-label.   | `string` | `undefined` |
-| `primaryButtonText`        | `primary-button-text`         | (optional) The modal's primary button text.         | `string` | `undefined` |
-| `secondaryButtonAriaLabel` | `secondary-button-aria-label` | (optional) The modal's secondary button aria-label. | `string` | `undefined` |
-| `secondaryButtonText`      | `secondary-button-text`       | (optional) The modal's secondary button text.       | `string` | `undefined` |
-| `zIndex`                   | `z-index`                     | (optional) The modal's z-index.                     | `string` | `'1'`       |
+| Property                   | Attribute                     | Description                                         | Type      | Default     |
+| -------------------------- | ----------------------------- | --------------------------------------------------- | --------- | ----------- |
+| `ariaLabel`                | `aria-label`                  | (optional) The modal's aria-label.                  | `string`  | `undefined` |
+| `headerText`               | `header-text`                 | (optional) The modal's primary button text.         | `string`  | `undefined` |
+| `primaryButtonAriaLabel`   | `primary-button-aria-label`   | (optional) The modal's primary button aria-label.   | `string`  | `undefined` |
+| `primaryButtonDisabled`    | `primary-button-disabled`     | (optional) Disable primary button.                  | `boolean` | `undefined` |
+| `primaryButtonText`        | `primary-button-text`         | (optional) The modal's primary button text.         | `string`  | `undefined` |
+| `secondaryButtonAriaLabel` | `secondary-button-aria-label` | (optional) The modal's secondary button aria-label. | `string`  | `undefined` |
+| `secondaryButtonDisabled`  | `secondary-button-disabled`   | (optional) Disable secondary button.                | `boolean` | `undefined` |
+| `secondaryButtonText`      | `secondary-button-text`       | (optional) The modal's secondary button text.       | `string`  | `undefined` |
+| `zIndex`                   | `z-index`                     | (optional) The modal's z-index.                     | `string`  | `'1'`       |
 
 
 ## Events

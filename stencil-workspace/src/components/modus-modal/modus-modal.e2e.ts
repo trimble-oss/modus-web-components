@@ -49,6 +49,36 @@ describe('modus-modal', () => {
     expect(element.innerText).toContain('New Text');
   });
 
+  it('renders changes to primaryButtonDisabled', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-modal primary-button-text="Primary Text"></modus-modal>');
+
+    const element = await page.find('modus-modal >>> modus-button');
+    expect(await element.getProperty('disabled')).toBeFalsy();
+
+    const component = await page.find('modus-modal');
+    component.setProperty('primaryButtonDisabled', true);
+    await page.waitForChanges();
+
+    expect(await element.getProperty('disabled')).toBeTruthy();
+  });
+
+  it('renders changes to secondaryButtonDisabled', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-modal secondary-button-text="Secondary Text"></modus-modal>');
+
+    const element = await page.find('modus-modal >>> modus-button');
+    expect(await element.getProperty('disabled')).toBeFalsy();
+
+    const component = await page.find('modus-modal');
+    component.setProperty('secondaryButtonDisabled', true);
+    await page.waitForChanges();
+
+    expect(await element.getProperty('disabled')).toBeTruthy();
+  });
+
   it('does not render buttons if text is not specified', async () => {
     const page = await newE2EPage();
 
