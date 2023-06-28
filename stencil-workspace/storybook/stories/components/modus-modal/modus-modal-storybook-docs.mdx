@@ -173,3 +173,5 @@ This component utilizes the slot element, allowing you to render your own HTML i
 - Modal gets `aria-hidden` set to whether Modal is closed.
 - When Primary button has focus, **Enter** emits `primaryButtonClick` event.
 - When Secondary button has focus, **Enter** emits `secondaryButtonClick` event.
+- When the Modal is open, tabbing can be performed only on the focussable elements inside Modal. Note: Pressing `Shift` + `Tab` on Modal Header cannot go back to Modal Footer.
+- Pressing `Escape` key closes the Modal and emits `close` event.

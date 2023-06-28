@@ -533,6 +533,10 @@ export namespace Components {
          */
         "primaryButtonAriaLabel": string | null;
         /**
+          * (optional) Disable primary button.
+         */
+        "primaryButtonDisabled": boolean;
+        /**
           * (optional) The modal's primary button text.
          */
         "primaryButtonText": string;
@@ -540,6 +544,10 @@ export namespace Components {
           * (optional) The modal's secondary button aria-label.
          */
         "secondaryButtonAriaLabel": string | null;
+        /**
+          * (optional) Disable secondary button.
+         */
+        "secondaryButtonDisabled": boolean;
         /**
           * (optional) The modal's secondary button text.
          */
@@ -2202,6 +2210,10 @@ declare namespace LocalJSX {
          */
         "primaryButtonAriaLabel"?: string | null;
         /**
+          * (optional) Disable primary button.
+         */
+        "primaryButtonDisabled"?: boolean;
+        /**
           * (optional) The modal's primary button text.
          */
         "primaryButtonText"?: string;
@@ -2209,6 +2221,10 @@ declare namespace LocalJSX {
           * (optional) The modal's secondary button aria-label.
          */
         "secondaryButtonAriaLabel"?: string | null;
+        /**
+          * (optional) Disable secondary button.
+         */
+        "secondaryButtonDisabled"?: boolean;
         /**
           * (optional) The modal's secondary button text.
          */
