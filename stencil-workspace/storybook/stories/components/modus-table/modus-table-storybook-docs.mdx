@@ -184,15 +184,15 @@ User can take the data of a cell and apply any string-based formatting logic.
 
 The column sizing feature allows users to dynamically change the width of all columns by dragging the column headers. When hovering above the dividing line between two columns, there is a visual indicator that shows the column is adjustable.
 
-- By default, a column can be resized with table responsiveness and other columns will be adjusted to fit within the confines of the table.
-- By setting `fullWidth` to false, the table will get a fixed size by calculating the sum of the sizes of all columns and resizing a column will not impact others.
+- By default, the table will get a fixed size by calculating the sum of the sizes of all columns and resizing a column will not impact others.
+- By setting `fullWidth` to true,  a column can be resized with table responsiveness and other columns will be adjusted to fit within the confines of the table.
 - Optionally you can specify the width of each column using `size`, `minSize` and `maxSize` to limit the resizing of a column to a specific value.
 
 <Story id="components-table--column-resize" height={'350px'} />
 
 ```html
 <div style="width: 950px">
-   <modus-table column-resize="true" full-width="false" />
+   <modus-table column-resize="true" />
 </div>
  <script>
     document.querySelector('modus-table').columns = [
@@ -377,7 +377,7 @@ Users can use keyboard navigation to perform different actions.
 
 | Property              | Attribute                 | Description                                                                                                 | Type                          | Default      |
 | --------------------- | ------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------- | ------------ |
-| `columns`             | `columns`                 | (required) To display headers in the table.                                                                 | `ModusTableColumn[]`      | `undefined`  |
+| `columns`             | `columns`                 | (required) To display headers in the table.                                                                 | `ModusTableColumn[]`          | `undefined`  |
 | `data`                | `data`                    | (required) To display data in the table.                                                                    | `Array`                       | `undefined`  |
 | `hover`               | `hover`                   | (optional) To enable row hover in table.                                                                    | `boolean`                     | `false`      |
 | `sort`                | `sort`                    | (optional) To sort data in table.                                                                           | `boolean`                     | `false`      |
@@ -387,8 +387,8 @@ Users can use keyboard navigation to perform different actions.
 | `pageSizeList`        | `page-size-list`          | (optional) To display page size options of table.                                                           | `Array`                       | `[10,20,50]` |
 | `columnResize`        | `column-resize`           | (optional) To enable column resizing of table.                                                              | `boolean`                     | `false`      |
 | `summaryRow`          | `summary-row`             | (optional) To display summary row in table. Is used to display total.                                       | `boolean`                     | `false`      |
-| `fullWidth`           | `full-width`              | (optional) To manage table width.                                                                           | `boolean`                     | `true`       |
-| `panelOptions`        | `panel-options`           | (Optional) To display a panel above the table, which allows access to table operations like hiding columns. | `ModusTablePanelOptions`  | `null`       |
+| `fullWidth`           | `full-width`              | (optional) To manage table width.                                                                           | `boolean`                     | `false`      |
+| `panelOptions`        | `panel-options`           | (Optional) To display a panel above the table, which allows access to table operations like hiding columns. | `ModusTablePanelOptions`      | `null`       |
 
 ### Events
 
