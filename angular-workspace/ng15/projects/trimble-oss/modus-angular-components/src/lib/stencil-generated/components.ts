@@ -522,7 +522,7 @@ export declare interface ModusMessage extends Components.ModusMessage {}
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'headerText', 'primaryButtonAriaLabel', 'primaryButtonText', 'secondaryButtonAriaLabel', 'secondaryButtonText', 'zIndex'],
+  inputs: ['ariaLabel', 'headerText', 'primaryButtonAriaLabel', 'primaryButtonDisabled', 'primaryButtonText', 'secondaryButtonAriaLabel', 'secondaryButtonDisabled', 'secondaryButtonText', 'zIndex'],
   methods: ['close', 'open']
 })
 @Component({
@@ -530,7 +530,7 @@ export declare interface ModusMessage extends Components.ModusMessage {}
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['ariaLabel', 'headerText', 'primaryButtonAriaLabel', 'primaryButtonText', 'secondaryButtonAriaLabel', 'secondaryButtonText', 'zIndex'],
+  inputs: ['ariaLabel', 'headerText', 'primaryButtonAriaLabel', 'primaryButtonDisabled', 'primaryButtonText', 'secondaryButtonAriaLabel', 'secondaryButtonDisabled', 'secondaryButtonText', 'zIndex'],
 })
 export class ModusModal {
   protected el: HTMLElement;
