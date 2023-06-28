@@ -289,7 +289,7 @@ User can opt for this summary row, which can be used as footer or a row to view 
 
 ### Column Visibility
 
-Users can control the visibility of columns in one place using `panelOptions`. By setting a value, a panel is added above the table with a meatball icon at the right corner, and clicking on it shows a dropdown menu with columns for selection. Additionally, users can use `slot='panelGroupLeft'` and `slot='panelGroupRight'` to add custom content to the panel.
+A table panel is used to perform operations like hiding/showing the columns. The panel is enabled by `showTablePanel` and is shown above the table. By setting `panelOptions.columnsVisibility` a meatball icon appears at the right corner, and clicking on it shows a dropdown menu with columns for selection. Additionally, users can use `slot='panelGroupLeft'` and `slot='panelGroupRight'` to add custom content to the panel.
 
 <Story id="components-table--column-visibility" height={'480px'} />
 
@@ -300,13 +300,14 @@ Users can control the visibility of columns in one place using `panelOptions`. B
       sort="true"
       column-resize="true"
       pagination="true"
-      show-sort-icon-hover="true" />
+      show-sort-icon-hover="true"
+      show-table-panel="true" />
 </div>
  <script>
     document.querySelector('modus-table').panelOptions = {
-        columnVisibility: {
+        columnsVisibility: {
           title: '',
-          disabledColumns: ['first-name']
+          requiredColumns: ['first-name']
         }
       };
     document.querySelector('modus-table').columns = [
@@ -353,13 +354,13 @@ interface interface ModusTableColumn {
   showTotal?: boolean;
 }
 
-interface ModusTableColumnVisibility {
+interface ModusTableColumnsVisibilityOptions {
   title: string;
-  disabledColumns?: string[];
+  requiredColumns?: string[];
 }
 
 interface ModusTablePanelOptions {
-  columnVisibility?: ModusTableColumnVisibility;
+  columnsVisibility?: ModusTableColumnsVisibilityOptions;
 }
 ```
 
@@ -367,11 +368,12 @@ interface ModusTablePanelOptions {
 
 Users can use keyboard navigation to perform different actions.
 
-| Name          | Description                                                                                                                                                                                                                                                                      |
-| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Sorting       | The `tab` key is used for navigating between the sort icons, while the `enter` key is used to interact with the icon.                                                                                                                                                            |
-| Pagination    | Users can change page size and page number using keyboard navigation. The Tab key brings focus to an element and the Enter key is used to perform an action like selecting a page size and page number.                                                                          |
-| Column Resize | Users can select the column for resizing by using the `Tab` key. and by pressing the `Spacebar` or `Enter` key to enable the column resize for the seleted column. To resize, use the `left`/`right` keys. When the `Enter` or `Spacebar` key is pressed, its position is saved. |
+| Name              | Description                                                                                                                                                                                                                                                                                                            |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Sorting           | The `tab` key is used for navigating between the sort icons, while the `enter` key is used to interact with the icon.                                                                                                                                                                                                  |
+| Pagination        | Users can change page size and page number using keyboard navigation. The Tab key brings focus to an element and the Enter key is used to perform an action like selecting a page size and page number.                                                                                                                |
+| Column Resize     | Users can select the column for resizing by using the `Tab` key. and by pressing the `Spacebar` or `Enter` key to enable the column resize for the selected column. To resize, use the `left`/`right` keys. When the `Enter` or `Spacebar` key is pressed, its position is saved.                                      |
+| Column Visibility | The meatball icon buttom will get focus by using the `Tab` key. By pressing `Enter or Spacebar`, a dropdown will be opened; press the `Escape` key to close the dropdown. Using `Tab or Shift+Tab` / `ArrowUp or ArrowDown`, column checkboxes/items can get focus to change state by pressing the `Enter or Spacebar`.|
 
 ### Properties
 
@@ -388,6 +390,7 @@ Users can use keyboard navigation to perform different actions.
 | `columnResize`        | `column-resize`           | (optional) To enable column resizing of table.                                                              | `boolean`                     | `false`      |
 | `summaryRow`          | `summary-row`             | (optional) To display summary row in table. Is used to display total.                                       | `boolean`                     | `false`      |
 | `fullWidth`           | `full-width`              | (optional) To manage table width.                                                                           | `boolean`                     | `true`       |
+| `showTablePanel`      | `show-table-panel`        | (optional) To display table panel. Is used to display panel options.                                        | `boolean`                     | `false`      |
 | `panelOptions`        | `panel-options`           | (Optional) To display a panel above the table, which allows access to table operations like hiding columns. | `ModusTablePanelOptions`  | `null`       |
 
 ### Events
@@ -408,6 +411,7 @@ Users can use this to provide custom elements.
 
 ### Methods
 
-| Method name     | Description                       | Parameter             | Return               |
-| --------------- | --------------------------------- | --------------------- | -------------------- |
-| `getColumnData` | Gets data of a perticular column. | `accessorKey: string` | `Promise<unknown[]>` |
+| Method name              | Description                                | Parameter                           | Return               |
+| ------------------------ | ------------------------------------------ | ----------------------------------- | -------------------- |
+| `getColumnData`          | Gets data of a perticular column.          | `accessorKey: string`               | `Promise<unknown[]>` |
+| `toggleColumnVisibility` | Decides the Data table column visibility.  | `columnId: string`, `show: boolean` | `Promise<void>`      |

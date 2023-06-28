@@ -13,5 +13,8 @@ export const EnterKey = 'enter';
 export const TabKey = 'tab';
 export const ArrowLeftKey = 'arrowleft';
 export const ArrowRightKey = 'arrowright';
+export const ArrowUp = 'arrowup';
+export const ArrowDown = 'arrowdown';
 export const SpaceKey = ' ';
+export const EscapeKey = 'escape';
 // Keyboard key constants ends
