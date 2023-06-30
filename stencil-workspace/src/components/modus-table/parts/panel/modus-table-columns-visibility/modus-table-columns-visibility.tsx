@@ -118,7 +118,7 @@ export class ModusTableColumnsVisibility {
     };
 
     return (
-      this.showDropdown &&
+      // this.showDropdown &&
       this.table.getAllLeafColumns().map((column, index) => {
         return (
           <div {...columnVisibilityItemControls(column.id, index)} class="column-visibility-item">
