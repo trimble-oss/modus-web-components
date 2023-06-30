@@ -1,0 +1,35 @@
+@import '../../../modus-table.vars';
+
+.dropdown-menu-container {
+  display: inline-block;
+  padding-left: 12px;
+  position: relative;
+
+  .dropdown-menu-icon {
+    border-radius: 3px;
+    cursor: pointer;
+    display: flex;
+    padding: 4px;
+
+    &:hover {
+      background: $modus-menu-dropdown-hover-bg;
+    }
+  }
+
+  .dropdown-menu {
+    background-color: $modus-menu-dropdown-bg;
+    border: 1px solid $modus-menu-dropdown-border-color;
+    box-shadow: 0 0 4px $modus-menu-dropdown-box-shadow;
+    font-family: $primary-font;
+    position: absolute;
+    right: 0;
+    top: 28px;
+    display: none;
+    width: 240px;
+    z-index: 99;
+
+    &.visible {
+      display: block;
+    }
+  }
+}
