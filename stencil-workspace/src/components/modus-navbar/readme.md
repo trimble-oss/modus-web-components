@@ -10,6 +10,7 @@
 | Property               | Attribute                | Description                                                                                                                                                                             | Type                      | Default     |
 | ---------------------- | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- | ----------- |
 | `apps`                 | --                       | (optional) The apps to render in the apps menu.                                                                                                                                         | `ModusNavbarApp[]`        | `undefined` |
+| `buttons`              | --                       | (optional) The buttons to render in the Navbar.                                                                                                                                         | `ModusNavbarButton[]`     | `undefined` |
 | `helpUrl`              | `help-url`               | (optional) Help URL.                                                                                                                                                                    | `string`                  | `undefined` |
 | `logoOptions`          | --                       | (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels. | `ModusNavbarLogoOptions`  | `undefined` |
 | `profileMenuOptions`   | --                       | (required) Profile menu options.                                                                                                                                                        | `ModusProfileMenuOptions` | `undefined` |
@@ -70,6 +71,8 @@ Type: `Promise<void>`
 - [modus-navbar-notifications-menu](notifications-menu)
 - [modus-navbar-apps-menu](apps-menu)
 - [modus-navbar-profile-menu](profile-menu)
+- [modus-dropdown](../modus-dropdown)
+- [modus-navbar-button-menu](button-menu)
 
 ### Graph
 ```mermaid
@@ -79,6 +82,8 @@ graph TD;
   modus-navbar --> modus-navbar-notifications-menu
   modus-navbar --> modus-navbar-apps-menu
   modus-navbar --> modus-navbar-profile-menu
+  modus-navbar --> modus-dropdown
+  modus-navbar --> modus-navbar-button-menu
   style modus-navbar fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

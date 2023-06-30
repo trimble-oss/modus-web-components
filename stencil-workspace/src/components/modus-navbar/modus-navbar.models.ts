@@ -23,3 +23,10 @@ export interface ModusNavbarLogoOptions {
   primary?: ModusNavbarLogo;
   secondary?: ModusNavbarLogo;
 }
+
+export interface ModusNavbarButton {
+  id: string;
+  tooltip: ModusNavbarTooltip;
+  icon: string;
+  orderIndex: number;
+}

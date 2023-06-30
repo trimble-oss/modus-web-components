@@ -19,7 +19,8 @@ nav {
   .icon-notifications,
   .icon-help,
   .icon-apps,
-  .icon-menu {
+  .icon-menu,
+  .icon-button svg {
     border-radius: $rem-2px;
     padding: $rem-12px;
 
@@ -57,9 +58,14 @@ nav {
     }
 
     .navbar-button-icon,
+    .icon-button,
     modus-tooltip {
       display: flex;
     }
+  }
+
+  .navbar-button-list {
+    display: flex;
   }
 
   .left {
@@ -78,7 +84,7 @@ nav {
       user-select: none;
     }
 
-    img.product-logo-secondary{
+    img.product-logo-secondary {
       filter: $modus-navbar-brand-logo-filter;
     }
   }
@@ -161,7 +167,8 @@ nav {
     .icon-notifications,
     .icon-help,
     .icon-apps,
-    .icon-menu {
+    .icon-menu,
+    .icon-button svg {
       path {
         fill: $modus-navbar-blue-icon-color;
       }
