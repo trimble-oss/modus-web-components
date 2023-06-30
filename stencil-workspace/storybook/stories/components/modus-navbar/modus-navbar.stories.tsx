@@ -12,6 +12,13 @@ export default {
         type: { summary: 'object' }
       },
     },
+    buttons: {
+      name: 'buttons',
+      description: 'To add icon buttons dynamically to the Navbar, create an array of ModusNavbarButton.',
+      table: {
+        type: { summary: 'object' }
+      },
+    }
   },
   parameters: {
     docs: {
@@ -21,22 +28,22 @@ export default {
     options: {
       isToolshown: true,
     },
-    controls: { expanded: false, sort: 'requiredFirst' },
+    controls: { expanded: true, sort: 'requiredFirst' },
     viewMode: 'docs',
   },
 };
 
-const Template = ({ profileMenuOptions }) => html`
+const Template = ({ profileMenuOptions, buttons }) => html`
   <modus-navbar
     id="working"
     show-apps-menu
     show-help
-    show-main-menu
-    show-notifications>
+    show-main-menu>
     <div slot="main" style="height:300px;">Render your own main menu.</div>
-    <div slot="notifications">Render your own notifications.</div>
+    <div slot="addMenu">Render your own add menu.</div>
+    <div slot="notificationMenu">Render your own notification menu.</div>
   </modus-navbar>
-  ${setNavbar(true, '#working', profileMenuOptions)}
+  ${setNavbar(true, '#working', profileMenuOptions, '', '', buttons)}
 `;
 export const Default = Template.bind({});
 Default.args = {
@@ -44,10 +51,14 @@ Default.args = {
     email: 'modus_user@trimble.com',
     initials: 'MU',
     username: 'Modus User',
-  }
+  },
+  buttons: [
+    { id: 'addMenu', icon: 'add' },
+    { id: 'notificationMenu', icon: 'notifications' }
+  ]
 };
 
-const FailedToLoadAvatarTemplate = ({ profileMenuOptions }) => html`
+const FailedToLoadAvatarTemplate = ({ profileMenuOptions, buttons }) => html`
   <modus-navbar
     id="broken"
     show-apps-menu
@@ -57,7 +68,7 @@ const FailedToLoadAvatarTemplate = ({ profileMenuOptions }) => html`
     <div slot="main" style="height:300px;">Render your own main menu.</div>
     <div slot="notifications">Render your own notifications.</div>
   </modus-navbar>
-  ${setNavbar(false, '#broken', profileMenuOptions)}
+  ${setNavbar(false, '#broken', profileMenuOptions, '', '', buttons)}
 `;
 export const FailedAvatar = FailedToLoadAvatarTemplate.bind({});
 FailedAvatar.args = {
@@ -65,9 +76,10 @@ FailedAvatar.args = {
     email: 'modus_user@trimble.com',
     initials: 'MU',
     username: 'Modus User',
-  }
+  },
+  buttons: []
 };
-const BlueTemplate = ({ profileMenuOptions }) => html`
+const BlueTemplate = ({ profileMenuOptions, buttons }) => html`
   <modus-navbar
     id="blue-theme"
     show-apps-menu
@@ -83,7 +95,8 @@ const BlueTemplate = ({ profileMenuOptions }) => html`
   '#blue-theme',
   profileMenuOptions,
   'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
-  'https://modus-bootstrap.trimble.com/img/trimble-icon-rev.svg'
+  'https://modus-bootstrap.trimble.com/img/trimble-icon-rev.svg',
+  buttons
 )}
 `;
 export const BlueNavbar = BlueTemplate.bind({});
@@ -92,7 +105,8 @@ BlueNavbar.args = {
     email: 'modus_user@trimble.com',
     initials: 'MU',
     username: 'Modus User',
-  }
+  },
+  buttons: []
 };
 
 const setNavbar = (
@@ -100,7 +114,8 @@ const setNavbar = (
   id: string,
   profileMenuOptions,
   logoUrl = '',
-  iconUrl = ''
+  iconUrl = '',
+  buttons
 ) => {
   const tag = document.createElement('script');
   profileMenuOptions.avatarUrl = workingAvatar
@@ -122,6 +137,7 @@ const setNavbar = (
           text: '${profileMenuOptions?.tooltip?.text || ''}',
           ariaLabel: '${profileMenuOptions?.tooltip?.ariaLabel}',
         };
+        document.querySelector('${id}').buttons = ${JSON.stringify(buttons)};
   `;
 
   return tag;

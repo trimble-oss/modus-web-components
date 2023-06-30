@@ -16,6 +16,60 @@
 
   </head>
   <body>
-    <!-- Test components here -->
+   
+<modus-navbar
+id="working"
+variant="blue"
+show-notifications>
+<div slot="main" style="height:300px;">Render your own main menu.</div>
+<div slot="notifications">Render your own notifications.</div>
+</modus-navbar>
+
+<script>
+const element = document.querySelector('modus-navbar');
+element.apps = [
+  {
+    description: [
+      {
+        description: 'The One Trimble Design System',
+        logoUrl: 'https://modus.trimble.com/favicon.svg',
+        name: 'Trimble Modus',
+        url: 'https://modus.trimble.com/',
+      },
+    ],
+    logoUrl: '',
+    name: '',
+    url: ''
+  },
+];
+element.logoOptions = {
+  primary: {
+    url: 'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
+    height: 24,
+  },
+  secondary: { url: 'https://modus.trimble.com/favicon.svg', height: 24 },
+};
+element.profileMenuOptions = {
+  avatarUrl: '...',
+  email: 'modus_user@trimble.com',
+  initials: 'MU',
+  username: 'Modus User',
+};
+element.buttons = [
+  {
+    id: 'main',
+    icon: 'add',
+    orderIndex: 0,
+    tooltip: {
+      text: 'add'
+    }
+  },
+  {
+    id: 'notifications',
+    icon: 'notifications',
+    orderIndex: 1
+  },
+]
+</script>
   </body>
 </html>

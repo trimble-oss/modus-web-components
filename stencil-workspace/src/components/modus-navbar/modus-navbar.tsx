@@ -16,9 +16,10 @@ import { IconApps } from '../icons/icon-apps';
 import { IconSearch } from '../icons/icon-search';
 import { ModusNavbarApp } from './apps-menu/modus-navbar-apps-menu';
 import { IconHelp } from '../icons/icon-help';
-import { ModusNavbarTooltip, ModusProfileMenuOptions, ModusNavbarLogoOptions } from './modus-navbar.models';
+import { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarTooltip, ModusProfileMenuOptions, } from './modus-navbar.models';
 import { ModusNavbarProductLogo } from './product-logo/modus-navbar-product-logo';
 import { createGuid } from '../../utils/utils';
+import { ModusNavbarButtonList } from './button-list/modus-navbar-button-list';
 
 /**
  * @slot main - Renders custom main menu content
@@ -35,6 +36,9 @@ export class ModusNavbar {
 
   /** (optional) The apps to render in the apps menu. */
   @Prop() apps: ModusNavbarApp[];
+
+  /** (optional) The buttons to render in the Navbar. */
+  @Prop({ mutable: true }) buttons: ModusNavbarButton[];
 
   /** (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels. */
   @Prop() logoOptions: ModusNavbarLogoOptions;
@@ -113,6 +117,7 @@ export class ModusNavbar {
   @State() profileMenuVisible: boolean;
   @State() slots: string[] = [];
   @State() componentId = createGuid();
+  @State() openButtonMenuId: string;
 
   readonly SLOT_MAIN = 'main';
   readonly SLOT_NOTIFICATIONS = 'notifications';
@@ -256,6 +261,7 @@ export class ModusNavbar {
     this.mainMenuVisible = false;
     this.notificationsMenuVisible = false;
     this.profileMenuVisible = false;
+    this.openButtonMenuId = undefined;
   }
 
   helpMenuClickHandler(event: MouseEvent): void {
@@ -264,10 +270,22 @@ export class ModusNavbar {
     this.helpOpen.emit();
   }
 
+  buttonMenuClickHandler(event, button): void {
+    event.preventDefault();
+    if (this.openButtonMenuId == button.id) {
+      this.hideMenus();
+    }
+    else {
+      this.hideMenus();
+      this.openButtonMenuId = button.id;
+    }
+  }
+
   render(): unknown {
     const direction = this.reverse ? 'reverse' : '';
     const shadow = this.showShadow ? 'shadow' : '';
     const variant = `${this.variant === 'default' ? '' : 'nav-' + this.variant}`;
+    const sortedButtonList = this.buttons?.sort((a, b) => (a.orderIndex) - (b.orderIndex));
 
     return (
       <Host id={this.componentId}>
@@ -303,6 +321,10 @@ export class ModusNavbar {
                 </span>
               </div>
             )}
+            <ModusNavbarButtonList
+              buttons={sortedButtonList} reverse={this.reverse} openButtonMenuId={this.openButtonMenuId}
+              onClick={(event, button) => this.buttonMenuClickHandler(event, button)}>
+            </ModusNavbarButtonList>
             {this.showNotifications && (
               <div class="navbar-button" data-test-id="notifications-menu">
                 <span
