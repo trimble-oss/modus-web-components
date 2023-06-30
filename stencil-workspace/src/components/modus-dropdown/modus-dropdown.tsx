@@ -45,6 +45,7 @@ export class ModusDropdown {
     ['left', 'left'],
   ]);
   toggleElement: HTMLElement;
+  dropdownToggleClicked = false;
 
   componentDidRender(): void {
     this.toggleElement = this.el.querySelector(`#${this.toggleElementId}`);
@@ -56,28 +57,29 @@ export class ModusDropdown {
   @Listen('click', { target: 'document' })
   documentClickHandler(event: MouseEvent): void {
     // Close the dropdown when click is outside the current element.
-    if (event.defaultPrevented || (event.target as HTMLElement).closest(`#${this.toggleElementId}`)) {
+    if (this.dropdownToggleClicked || (event.target as HTMLElement).closest(`#${this.toggleElementId}`)) {
+      // Reset dropdown toggle click
+      this.dropdownToggleClicked = false;
       return;
     }
 
-    this.visible = false;
-    this.dropdownClose.emit();
+    if (this.visible) {
+      this.visible = false;
+      this.dropdownClose.emit();
+    }
   }
 
   handleDropdownClick(event: MouseEvent): void {
-    if (!event.defaultPrevented) {
-      document.body.click(); // Simulate document click to handle closing other dropdowns.
-      if ((event.target as HTMLElement).closest(`#${this.toggleElementId}`)) {
-        this.visible = !this.visible;
-      } else {
-        this.visible = false;
-      }
+    if ((event.target as HTMLElement).closest(`#${this.toggleElementId}`)) {
+      this.visible = !this.visible;
+    } else {
+      this.visible = false;
+    }
 
-      if (!this.visible) {
-        this.dropdownClose.emit();
-      }
-
-      event.preventDefault();
+    if (!this.visible) {
+      this.dropdownClose.emit();
+    } else {
+      this.dropdownToggleClicked = true;
     }
   }
 

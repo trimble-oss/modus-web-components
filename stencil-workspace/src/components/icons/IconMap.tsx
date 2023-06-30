@@ -41,8 +41,9 @@ import { IconVisibilityOff } from './icon-visibility-off';
 
 export interface IconProps {
   color?: string;
-  onClick?: () => void;
+  onClick?: (event?) => void;
   size?: string;
+  pressed?: boolean;
 }
 
 interface IconMapProps extends IconProps {
@@ -53,7 +54,7 @@ interface IconMapProps extends IconProps {
 export const IconMap: FunctionalComponent<IconMapProps> = (props: IconMapProps) => {
   switch (props.icon) {
     case 'add':
-      return <IconAdd color={props.color} onClick={props.onClick} size={props.size} />;
+      return <IconAdd color={props.color} onClick={props.onClick} size={props.size} pressed={props.pressed} />;
     case 'apps':
       return <IconApps color={props.color} onClick={props.onClick} size={props.size} />;
     case 'calendar':
@@ -103,7 +104,7 @@ export const IconMap: FunctionalComponent<IconMapProps> = (props: IconMapProps) 
     case 'menu':
       return <IconMenu color={props.color} onClick={props.onClick} size={props.size} />;
     case 'notifications':
-      return <IconNotifications color={props.color} onClick={props.onClick} size={props.size} />;
+      return <IconNotifications color={props.color} onClick={props.onClick} size={props.size} pressed={props.pressed}/>;
     case 'remove':
       return <IconRemove color={props.color} onClick={props.onClick} size={props.size} />;
     case 'search':

@@ -10,7 +10,7 @@ import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSortEvent, ModusTableSelectionOptions, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 import { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
 import { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
-import { ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
+import { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
@@ -22,7 +22,7 @@ export { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 export { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSortEvent, ModusTableSelectionOptions, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 export { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
 export { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
-export { ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
+export { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
 export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 export { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 export { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
@@ -555,6 +555,10 @@ export namespace Components {
          */
         "apps": ModusNavbarApp[];
         /**
+          * (optional) The buttons to render in the Navbar.
+         */
+        "buttons": ModusNavbarButton[];
+        /**
           * (optional) Help URL.
          */
         "helpUrl": string;
@@ -610,6 +614,9 @@ export namespace Components {
     }
     interface ModusNavbarAppsMenu {
         "apps": ModusNavbarApp1[];
+        "reverse": boolean;
+    }
+    interface ModusNavbarButtonMenu {
         "reverse": boolean;
     }
     interface ModusNavbarMainMenu {
@@ -1429,6 +1436,12 @@ declare global {
         prototype: HTMLModusNavbarAppsMenuElement;
         new (): HTMLModusNavbarAppsMenuElement;
     };
+    interface HTMLModusNavbarButtonMenuElement extends Components.ModusNavbarButtonMenu, HTMLStencilElement {
+    }
+    var HTMLModusNavbarButtonMenuElement: {
+        prototype: HTMLModusNavbarButtonMenuElement;
+        new (): HTMLModusNavbarButtonMenuElement;
+    };
     interface HTMLModusNavbarMainMenuElement extends Components.ModusNavbarMainMenu, HTMLStencilElement {
     }
     var HTMLModusNavbarMainMenuElement: {
@@ -1571,6 +1584,7 @@ declare global {
         "modus-modal": HTMLModusModalElement;
         "modus-navbar": HTMLModusNavbarElement;
         "modus-navbar-apps-menu": HTMLModusNavbarAppsMenuElement;
+        "modus-navbar-button-menu": HTMLModusNavbarButtonMenuElement;
         "modus-navbar-main-menu": HTMLModusNavbarMainMenuElement;
         "modus-navbar-notifications-menu": HTMLModusNavbarNotificationsMenuElement;
         "modus-navbar-profile-menu": HTMLModusNavbarProfileMenuElement;
@@ -2193,6 +2207,10 @@ declare namespace LocalJSX {
          */
         "apps"?: ModusNavbarApp[];
         /**
+          * (optional) The buttons to render in the Navbar.
+         */
+        "buttons"?: ModusNavbarButton[];
+        /**
           * (optional) Help URL.
          */
         "helpUrl"?: string;
@@ -2284,6 +2302,9 @@ declare namespace LocalJSX {
     interface ModusNavbarAppsMenu {
         "apps"?: ModusNavbarApp1[];
         "onAppOpen"?: (event: ModusNavbarAppsMenuCustomEvent<ModusNavbarApp1>) => void;
+        "reverse"?: boolean;
+    }
+    interface ModusNavbarButtonMenu {
         "reverse"?: boolean;
     }
     interface ModusNavbarMainMenu {
@@ -2939,6 +2960,7 @@ declare namespace LocalJSX {
         "modus-modal": ModusModal;
         "modus-navbar": ModusNavbar;
         "modus-navbar-apps-menu": ModusNavbarAppsMenu;
+        "modus-navbar-button-menu": ModusNavbarButtonMenu;
         "modus-navbar-main-menu": ModusNavbarMainMenu;
         "modus-navbar-notifications-menu": ModusNavbarNotificationsMenu;
         "modus-navbar-profile-menu": ModusNavbarProfileMenu;
@@ -2986,6 +3008,7 @@ declare module "@stencil/core" {
             "modus-modal": LocalJSX.ModusModal & JSXBase.HTMLAttributes<HTMLModusModalElement>;
             "modus-navbar": LocalJSX.ModusNavbar & JSXBase.HTMLAttributes<HTMLModusNavbarElement>;
             "modus-navbar-apps-menu": LocalJSX.ModusNavbarAppsMenu & JSXBase.HTMLAttributes<HTMLModusNavbarAppsMenuElement>;
+            "modus-navbar-button-menu": LocalJSX.ModusNavbarButtonMenu & JSXBase.HTMLAttributes<HTMLModusNavbarButtonMenuElement>;
             "modus-navbar-main-menu": LocalJSX.ModusNavbarMainMenu & JSXBase.HTMLAttributes<HTMLModusNavbarMainMenuElement>;
             "modus-navbar-notifications-menu": LocalJSX.ModusNavbarNotificationsMenu & JSXBase.HTMLAttributes<HTMLModusNavbarNotificationsMenuElement>;
             "modus-navbar-profile-menu": LocalJSX.ModusNavbarProfileMenu & JSXBase.HTMLAttributes<HTMLModusNavbarProfileMenuElement>;
