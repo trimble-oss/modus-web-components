@@ -7,19 +7,21 @@
 
 ## Properties
 
-| Property               | Attribute                 | Description                                     | Type                                       | Default                                                   |
-| ---------------------- | ------------------------- | ----------------------------------------------- | ------------------------------------------ | --------------------------------------------------------- |
-| `columnResize`         | `column-resize`           |                                                 | `boolean`                                  | `false`                                                   |
-| `columns` _(required)_ | --                        | (Required) To display headers in the table.     | `ModusDataTableColumn<unknown, unknown>[]` | `undefined`                                               |
-| `data` _(required)_    | --                        | (Required) To display data in the table.        | `unknown[]`                                | `undefined`                                               |
-| `displayOptions`       | --                        | (Optional) To control display options of table. | `ModusDataTableDisplayOptions`             | `{     borderless: false,     cellBorderless: false,   }` |
-| `fullWidth`            | `full-width`              |                                                 | `boolean`                                  | `true`                                                    |
-| `hover`                | `hover`                   | (Optional) To enable row hover in table.        | `boolean`                                  | `false`                                                   |
-| `pageSizeList`         | --                        |                                                 | `number[]`                                 | `[10, 20, 50]`                                            |
-| `pagination`           | `pagination`              |                                                 | `boolean`                                  | `undefined`                                               |
-| `showSortIconOnHover`  | `show-sort-icon-on-hover` | (Optional) To display sort icon on hover.       | `boolean`                                  | `false`                                                   |
-| `sort`                 | `sort`                    | (Optional) To sort data in table.               | `boolean`                                  | `false`                                                   |
-| `summaryRow`           | `summary-row`             | (Optional) To display summary row.              | `boolean`                                  | `false`                                                   |
+| Property               | Attribute                 | Description                                                                                         | Type                                   | Default                                                   |
+| ---------------------- | ------------------------- | --------------------------------------------------------------------------------------------------- | -------------------------------------- | --------------------------------------------------------- |
+| `columnReorder`        | `column-reorder`          | (Optional) To allow column reordering.                                                              | `boolean`                              | `false`                                                   |
+| `columnResize`         | `column-resize`           |                                                                                                     | `boolean`                              | `false`                                                   |
+| `columns` _(required)_ | --                        | (Required) To display headers in the table.                                                         | `ModusTableColumn<unknown, unknown>[]` | `undefined`                                               |
+| `data` _(required)_    | --                        | (Required) To display data in the table.                                                            | `unknown[]`                            | `undefined`                                               |
+| `displayOptions`       | --                        | (Optional) To control display options of table.                                                     | `ModusTableDisplayOptions`             | `{     borderless: false,     cellBorderless: false,   }` |
+| `fullWidth`            | `full-width`              |                                                                                                     | `boolean`                              | `true`                                                    |
+| `hover`                | `hover`                   | (Optional) To enable row hover in table.                                                            | `boolean`                              | `false`                                                   |
+| `pageSizeList`         | --                        |                                                                                                     | `number[]`                             | `DefaultPageSizes`                                        |
+| `pagination`           | `pagination`              |                                                                                                     | `boolean`                              | `undefined`                                               |
+| `panelOptions`         | --                        | (Optional) To display a panel options, which allows access to table operations like hiding columns. | `ModusTablePanelOptions`               | `null`                                                    |
+| `showSortIconOnHover`  | `show-sort-icon-on-hover` | (Optional) To display sort icon on hover.                                                           | `boolean`                              | `false`                                                   |
+| `sort`                 | `sort`                    | (Optional) To sort data in table.                                                                   | `boolean`                              | `false`                                                   |
+| `summaryRow`           | `summary-row`             | (Optional) To display summary row.                                                                  | `boolean`                              | `false`                                                   |
 
 
 ## Events
@@ -44,24 +46,30 @@ Type: `Promise<unknown[]>`
 
 ## Slots
 
-| Slot             | Description             |
-| ---------------- | ----------------------- |
-| `"customFooter"` | Slot for custom footer. |
+| Slot                | Description                                    |
+| ------------------- | ---------------------------------------------- |
+| `"customFooter"`    | Slot for custom footer.                        |
+| `"panelGroupLeft"`  | Slot for modus data table panel left section.  |
+| `"panelGroupRight"` | Slot for modus data table panel right section. |
 
 
 ## Dependencies
 
 ### Depends on
 
-- [modus-tooltip](../modus-tooltip)
+- [modus-table-panel](./parts/panel/modus-table-panel)
 - [modus-pagination](../modus-pagination)
+- [modus-tooltip](../modus-tooltip)
 
 ### Graph
 ```mermaid
 graph TD;
-  modus-data-table --> modus-tooltip
-  modus-data-table --> modus-pagination
-  style modus-data-table fill:#f9f,stroke:#333,stroke-width:4px
+  modus-table --> modus-table-panel
+  modus-table --> modus-pagination
+  modus-table --> modus-tooltip
+  modus-table-panel --> modus-checkbox
+  modus-table-panel --> modus-button
+  style modus-table fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

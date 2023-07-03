@@ -13,6 +13,7 @@ import {
 import {
   Column,
   ColumnDef,
+  ColumnOrderState,
   ColumnSizingInfoState,
   ColumnSizingState,
   HeaderGroup,
@@ -25,17 +26,14 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
 } from '@tanstack/table-core';
-import {
-  ModusTableColumn,
-  ModusTableDisplayOptions,
-  ModusTableSortingState,
-  ModusTablePanelOptions,
-} from './models';
+import { ModusTableColumn, ModusTableDisplayOptions, ModusTableSortingState, ModusTablePanelOptions } from './models';
 import { ModusTableCell } from './parts/modus-table-cell';
 import { ModusTablePagination } from './parts/modus-table-pagination';
 import { ModusTableSummaryRow } from './parts/modus-table-summary-row';
 import { DefaultPageSizes } from './constants/constants';
 import { ModusTableHeader } from './parts/header/modus-table-header';
+import { ColumnDragState } from './models/column-drag-state.model';
+import { ModusTableDragItem } from './parts/modus-table-drag-item';
 
 /**
  * @slot customFooter - Slot for custom footer.
@@ -99,6 +97,12 @@ export class ModusTable {
     cellBorderless: false,
   };
 
+  /** (Optional) To allow column reordering. */
+  @Prop() columnReorder = false;
+  @Watch('columnReorder') updateColumnReorder() {
+    this.table.options.state.columnOrder = this.columnOrder;
+  }
+
   /** Emits event on sort change */
   @Event() sortChange: EventEmitter<ModusTableSortingState>;
 
@@ -107,8 +111,7 @@ export class ModusTable {
    * whereas ColumnSizingInfo has the detailed info about resizing of the column
    */
   @State() columnSizing: ColumnSizingState = {};
-  @State() columnSizingInfo: ColumnSizingInfoState =
-    {} as ColumnSizingInfoState;
+  @State() columnSizingInfo: ColumnSizingInfoState = {} as ColumnSizingInfoState;
 
   @State() sorting: ModusTableSortingState = [];
   @State() table: Table<unknown>;
@@ -116,6 +119,9 @@ export class ModusTable {
     pageIndex: 0,
     pageSize: this.pageSizeList[0],
   };
+
+  @State() columnOrder: string[] = [];
+  @State() itemDragState: ColumnDragState;
 
   @Listen('click', { target: 'document' })
   documentClickHandler(event: MouseEvent): void {
@@ -133,7 +139,133 @@ export class ModusTable {
     });
   }
 
+  /**    Column reorder drag and drop code    */
+  private onMouseMove = (event: MouseEvent) => this.handleDragOver(event);
+  private onMouseUp = () => this.handleDrop();
+  private tableHeaderRowRef: HTMLTableRowElement;
+  private headersList: NodeListOf<ChildNode>;
+  private columnResizeEnabled = false;
+
+  @Watch('itemDragState')
+  handleItemDragState(newValue: string, oldValue: string) {
+    if (oldValue && newValue && oldValue === newValue) return;
+    if (newValue) {
+      document.addEventListener('mousemove', this.onMouseMove);
+      document.addEventListener('mouseup', this.onMouseUp);
+    } else {
+      document.removeEventListener('mousemove', this.onMouseMove);
+      document.removeEventListener('mouseup', this.onMouseUp);
+    }
+  }
+
+  /**
+   * This function determines if an object is in a drop zone or not while dragging it.
+   * @param x x-cordinate
+   * @param y y-cordinate
+   * @returns Drop zone element
+   */
+  getItemWithinBounds(x: number, y: number): HTMLElement {
+    const node = Object.values(this.headersList).find((content: HTMLElement) => {
+      const rect = content?.getBoundingClientRect();
+      if (rect) {
+        const inVerticalBounds = y >= rect.top && y <= rect.bottom;
+        const inHorizontalBounds = x >= rect.left && x <= rect.right;
+        return inVerticalBounds && inHorizontalBounds;
+      }
+      return false;
+    });
+    return node as HTMLElement;
+  }
+
+  /**
+   * Is invoked on drag start, sets itemDragState item.
+   */
+  handleDragStart(event: MouseEvent, draggedColumnId: string, elementRef: HTMLTableHeaderCellElement): void {
+    event.preventDefault();
+    if (this.columnReorder && !this.columnResizeEnabled) {
+      this.headersList = this.tableHeaderRowRef.childNodes; // List of table headers.
+
+      const dragContent: HTMLElement = elementRef.cloneNode(true) as HTMLElement;
+      const { clientX, clientY, currentTarget } = event;
+      const self: HTMLElement = currentTarget as HTMLElement;
+      this.clearItemDropState();
+      this.itemDragState = {
+        dragContent,
+        translation: { x: clientX, y: clientY },
+        draggedColumnId: draggedColumnId,
+        width: `${self?.offsetWidth}px`,
+        height: `${self?.offsetHeight}px`,
+      };
+    }
+  }
+
+  /**
+   * When being dragged over, the function get the element's id if the element is inside the boundaries.
+   * ItemDragState is updated following receipt of the id.
+   */
+  handleDragOver(event: MouseEvent): void {
+    if (!this.itemDragState) return;
+    const { clientX, clientY } = event;
+    const translation = {
+      x: clientX,
+      y: clientY,
+    };
+
+    const node: HTMLElement = this.getItemWithinBounds(clientX, clientY);
+    let newDragState: ColumnDragState = {
+      ...this.clearItemDropState(),
+      translation,
+    };
+    if (node?.id && node.id !== newDragState.draggedColumnId) {
+      newDragState = { ...newDragState, targetId: node.id };
+      node.classList.add('drop-allow');
+    }
+
+    this.itemDragState = { ...newDragState };
+  }
+
+  /**
+   * Reorders columns when dropped in drop zone.
+   */
+  handleDrop(): void {
+    if (!this.itemDragState) return;
+    const dropItemId = this.itemDragState.targetId;
+    const draggedColumnId = this.itemDragState.draggedColumnId;
+    const newColumnOrder = [...this.columnOrder];
+
+    // Logic for column reordering.
+    if (dropItemId) {
+      newColumnOrder.splice(
+        newColumnOrder.indexOf(dropItemId),
+        0,
+        newColumnOrder.splice(newColumnOrder.indexOf(draggedColumnId), 1)[0] as string
+      );
+      this.columnOrder = [...newColumnOrder];
+      this.table.options.state.columnOrder = newColumnOrder;
+    }
+
+    this.clearItemDropState();
+    this.itemDragState = null;
+  }
+
+  /**
+   * Removed drop related class if present.
+   */
+  clearItemDropState(): ColumnDragState {
+    if (!this.itemDragState) return null;
+    const { targetId, ...rest } = this.itemDragState;
+    if (targetId) {
+      this.headersList.forEach((element: HTMLElement) => {
+        if (element.id === targetId) {
+          element.classList.remove('drop-allow');
+        }
+      });
+    }
+    return { ...rest, targetId: null };
+  }
+
   componentWillLoad(): void {
+    this.columnOrder = this.columns.map((column) => column.id as string); // Sets column order
     this.initializeTable();
   }
 
@@ -149,23 +281,23 @@ export class ModusTable {
         sorting: this.sorting,
         columnSizing: {},
         columnSizingInfo: {} as ColumnSizingInfoState,
+        columnOrder: this.columnReorder ? this.columnOrder : [],
       },
       enableSorting: this.sort,
       columnResizeMode: 'onChange',
       enableColumnResizing: this.columnResize,
       sortDescFirst: false, // To-Do, workaround to prevent sort descending on certain columns, e.g. numeric.
-      onSortingChange: (updater: Updater<ModusTableSortingState>) =>
-        this.setSorting(updater),
-      onPaginationChange: (updater: PaginationState) =>
-        this.setPagination(updater),
+      onSortingChange: (updater: Updater<ModusTableSortingState>) => this.setSorting(updater),
+      onPaginationChange: (updater: PaginationState) => this.setPagination(updater),
       getCoreRowModel: getCoreRowModel(),
       getPaginationRowModel: this.pagination && getPaginationRowModel(),
       getSortedRowModel: getSortedRowModel(),
-      onColumnSizingChange: (updater: Updater<ColumnSizingState>) =>
-        this.updatingState(updater, 'columnSizing'),
-      onColumnSizingInfoChange: (updater: Updater<ColumnSizingInfoState>) =>
-        this.updatingState(updater, 'columnSizingInfo'),
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      onColumnSizingChange: (updater: Updater<ColumnSizingState>) => this.updatingState(updater, 'columnSizing'),
+      onColumnSizingInfoChange: (updater: Updater<ColumnSizingInfoState>) => {
+        this.updatingState(updater, 'columnSizingInfo');
+        this.columnResizeEnabled = !this.columnSizingInfo.isResizingColumn ? false : true;
+      },
+      onColumnOrderChange: (updater: Updater<ColumnOrderState>) => this.updatingState(updater, 'columnOrder'), // eslint-disable-next-line @typescript-eslint/no-empty-function
       onStateChange: () => {},
       renderFallbackValue: null,
     };
@@ -196,8 +328,7 @@ export class ModusTable {
   }
 
   setPagination(updater: Updater<PaginationState>): void {
-    this.paginationState =
-      updater instanceof Function ? updater(this.paginationState) : updater;
+    this.paginationState = updater instanceof Function ? updater(this.paginationState) : updater;
     this.table.options.state.pagination = this.paginationState;
   }
 
@@ -236,9 +367,7 @@ export class ModusTable {
     return (
       <Host>
         {this.panelOptions && (
-          <modus-table-panel
-            table={this.table}
-            panelOptions={this.panelOptions}>
+          <modus-table-panel table={this.table} panelOptions={this.panelOptions}>
             <div slot="left-section">
               <slot name="panelGroupLeft"></slot>
             </div>
@@ -251,7 +380,7 @@ export class ModusTable {
         <table class={className} style={tableStyle}>
           <thead>
             {headerGroups?.map((headerGroup, index) => (
-              <tr key={headerGroup.id}>
+              <tr key={headerGroup.id} ref={(element: HTMLTableRowElement) => (this.tableHeaderRowRef = element)}>
                 {headerGroup.headers?.map((header) => {
                   return (
                     <ModusTableHeader
@@ -259,6 +388,13 @@ export class ModusTable {
                       header={header}
                       isNestedParentHeader={index < lengthOfHeaderGroups - 1}
                       showSortIconOnHover={this.showSortIconOnHover}
+                      columnReorder={this.columnReorder}
+                      columnResizeEnabled={this.columnResizeEnabled}
+                      handleDragStart={(event: MouseEvent, id: string, elementRef: HTMLTableHeaderCellElement) =>
+                        this.handleDragStart(event, id, elementRef)
+                      }
+                      onMouseEnterResize={() => (this.columnResizeEnabled = true)}
+                      onMouseLeaveResize={() => (this.columnResizeEnabled = false)}
                     />
                   );
                 })}
@@ -276,23 +412,14 @@ export class ModusTable {
               );
             })}
           </tbody>
-          {this.summaryRow ? (
-            <ModusTableSummaryRow
-              footerGroups={[footerGroups[0]]}
-              tableData={this.data}
-            />
-          ) : (
-            ''
-          )}
+          {this.summaryRow ? <ModusTableSummaryRow footerGroups={[footerGroups[0]]} tableData={this.data} /> : ''}
         </table>
         <slot name="customFooter"></slot>
         {this.pagination && (
-          <ModusTablePagination
-            table={this.table}
-            totalCount={this.data.length}
-            pageSizeList={this.pageSizeList}
-          />
+          <ModusTablePagination table={this.table} totalCount={this.data.length} pageSizeList={this.pageSizeList} />
         )}
+
+        <ModusTableDragItem draggingState={this.itemDragState}></ModusTableDragItem>
       </Host>
     );
   }

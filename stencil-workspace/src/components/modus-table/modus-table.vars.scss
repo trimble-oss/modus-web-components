@@ -7,20 +7,24 @@ $modus-table-border-color: var(--modus-table-border-color, #b7b9c3) !default;
 /** Header */
 $modus-table-header-bg: var(--modus-table-header-bg, #f1f1f6) !default;
 $modus-table-header-border-color: var(--modus-table-header-border-color, #b7b9c3) !default;
-$modus-table-header-color: var(--modus-table-color, #464b52) !default;
+$modus-table-header-color: var(--modus-table-header-color, #464b52) !default;
 
 /** Body */
 $modus-table-body-bg: var(--modus-table-bg, #fff) !default;
 $modus-table-hover-bg: var(--modus-table-hover-bg, #dcedf9) !default;
-$modus-table-body-color: var(--modus-table-color, #252a2e) !default;
+$modus-table-body-color: var(--modus-table-body-color, #252a2e) !default;
 
 /** Pagination */
-$modus-table-pagination-color: var(--modus-table-color, #6A6976) !default;
+$modus-table-pagination-color: var(--modus-table-color, #6a6976) !default;
 $modus-page-view-select-bg: var(--modus-input-bg, #fff) !default;
-$modus-page-view-select-color: var(--modus-input-color, #252a2e) !default;
+$modus-page-view-select-color: var(--modus-table-body-color, #252a2e) !default;
 
 /** Menu dropdown */
 $modus-menu-dropdown-border-color: var(--modus-group-item-border-color, #e0e1e9) !default;
-$modus-menu-dropdown-bg: var( --modus-group-item-bg, #fff) !default;
+$modus-menu-dropdown-bg: var(--modus-group-item-bg, #fff) !default;
 $modus-menu-dropdown-box-shadow: var(--modus-card-shadow-color, #3635454d) !default;
 $modus-menu-dropdown-hover-bg: var(--modus-group-item-hover-bg, #e0e1e9) !default;
+
+/** Drag Header*/
+$modus-data-table-drag-header-bg: var(--modus-table-bg, #fff) !default;
+$modus-table-header-drop-color: var(--modus-table-header-drop-color, #019aeb) !default;

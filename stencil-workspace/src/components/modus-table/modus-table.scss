@@ -21,21 +21,6 @@ table {
           border-right: 2px solid $modus-table-header-color;
         }
 
-        .can-resize {
-          &:focus-visible {
-            outline: none;
-          }
-
-          cursor: e-resize;
-          height: 100%;
-          position: absolute;
-          right: 0;
-          top: 0;
-          touch-action: none;
-          user-select: none;
-          width: $rem-3px;
-        }
-
         .can-sort {
           align-items: center;
           display: flex;
@@ -80,6 +65,65 @@ table {
             }
           }
         }
+
+        .icon-arrow-down,
+        .icon-arrow-up {
+          display: none;
+        }
+
+        .can-resize {
+          &:focus-visible {
+            outline: none;
+          }
+
+          cursor: e-resize;
+          height: 100%;
+          position: absolute;
+          right: 0;
+          top: 0;
+          touch-action: none;
+          user-select: none;
+          width: $rem-3px;
+        }
+
+        &.can-reorder {
+          &:hover {
+            cursor: grab;
+          }
+
+          &:active {
+            cursor: grabbing;
+          }
+        }
+
+        &.drop-allow {
+          svg {
+            fill: $modus-table-header-drop-color;
+            display: block;
+          }
+
+          .icon-arrow-down {
+            position: absolute;
+            top: -14px;
+            left: -8.3px;
+          }
+
+          .icon-arrow-up {
+            position: absolute;
+            bottom: -14px;
+            left: -8.3px;
+          }
+        }
+
+        &.show-resize-cursor {
+          cursor: e-resize;
+
+          .can-sort {
+            .sort-icon-containor {
+              cursor: e-resize;
+            }
+          }
+        }
       }
     }
   }
@@ -87,7 +131,7 @@ table {
   tbody {
     tr {
       background-color: $modus-table-body-bg;
-      color: $modus-table-header-color;
+      color: $modus-table-body-color;
 
       td {
         border: $rem-1px $modus-table-header-border-color solid;
@@ -194,5 +238,34 @@ table {
         margin-right: $rem-5px;
       }
     }
+  }
+}
+
+.drag-content {
+  cursor: grabbing !important;
+  opacity: 0.75;
+  position: fixed;
+  top: 0;
+  left: 0;
+  border: $rem-1px $modus-table-header-border-color solid;
+  background: $modus-data-table-drag-header-bg;
+  display: flex;
+  z-index: 9;
+
+  th {
+    padding: 0.25rem 1rem;
+    text-align: left;
+    align-self: center;
+    font-family: $primary-font;
+    font-weight: $font-weight-semi-bold;
+
+    div {
+      font-size: $rem-14px;
+    }
+  }
+
+  .sort-icon-containor,
+  svg {
+    display: none;
   }
 }

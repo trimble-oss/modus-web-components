@@ -14,22 +14,11 @@ import { ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip,
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-import { ModusTableCellLink, ModusTableDisplayOptions, ModusTableRowAction, ModusTableRowActionClickEvent, ModusTableSelectionOptions, ModusTableSortEvent, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-table/modus-table.models";
+import { ModusTableColumn, ModusTableDisplayOptions, ModusTablePanelOptions, ModusTableSortingState } from "./components/modus-table/models";
+import { Column, Table } from "@tanstack/table-core";
 import { Tab } from "./components/modus-tabs/modus-tabs";
 import { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
 import { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
-export { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
-export { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
-export { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSortEvent, ModusTableSelectionOptions, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
-export { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
-export { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
-export { ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
-export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
-export { RadioButton } from "./components/modus-radio-group/modus-radio-button";
-export { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-export { Tab } from "./components/modus-tabs/modus-tabs";
-export { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
-export { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export namespace Components {
     interface ModusAccordion {
         /**
@@ -292,44 +281,24 @@ export namespace Components {
         "value": string;
     }
     interface ModusDataTable {
-        "columnResize": boolean;
+        "columns": string[] | TColumn[];
+        "data": TCell[][] | TRow[];
         /**
-          * (Required) To display headers in the table.
-         */
-        "columns": ModusDataTableColumn<unknown>[];
-        /**
-          * (Required) To display data in the table.
-         */
-        "data": unknown[];
-        /**
-          * (Optional) To control display options of table.
+          * Options for data table display.
          */
         "displayOptions"?: ModusDataTableDisplayOptions;
-        "fullWidth": boolean;
         /**
-          * Returns data of a column.
-          * @param accessorKey : Column name as key.
-          * @returns : Column data as Array or empty array.
+          * Actions that can be performed on each row.
          */
-        "getColumnData": (accessorKey: string) => Promise<unknown[]>;
+        "rowActions"?: ModusDataTableRowAction[];
         /**
-          * (Optional) To enable row hover in table.
+          * Options for data table item selection.
          */
-        "hover": boolean;
-        "pageSizeList": number[];
-        "pagination": boolean;
+        "selectionOptions"?: ModusTableSelectionOptions;
         /**
-          * (Optional) To display sort icon on hover.
+          * Options for data table column sort.
          */
-        "showSortIconOnHover": boolean;
-        /**
-          * (Optional) To sort data in table.
-         */
-        "sort": boolean;
-        /**
-          * (Optional) To display summary row.
-         */
-        "summaryRow": boolean;
+        "sortOptions"?: ModusTableSortOptions;
     }
     interface ModusDateInput {
         /**
@@ -630,7 +599,7 @@ export namespace Components {
         "variant": 'default' | 'blue';
     }
     interface ModusNavbarAppsMenu {
-        "apps": ModusNavbarApp1[];
+        "apps": ModusNavbarApp[];
         "reverse": boolean;
     }
     interface ModusNavbarMainMenu {
@@ -715,6 +684,8 @@ export namespace Components {
         "ariaLabel": string | null;
         "maxPage": number;
         "minPage": number;
+        "nextPageButtonText"?: string;
+        "prevPageButtonText"?: string;
         "size": 'large' | 'medium' | 'small';
     }
     interface ModusProgressBar {
@@ -924,24 +895,62 @@ export namespace Components {
         "label": string;
     }
     interface ModusTable {
-        "columns": string[] | TColumn[];
-        "data": TCell[][] | TRow[];
         /**
-          * Options for data table display.
+          * (Optional) To allow column reordering.
+         */
+        "columnReorder": boolean;
+        "columnResize": boolean;
+        /**
+          * (Required) To display headers in the table.
+         */
+        "columns": ModusTableColumn<unknown>[];
+        /**
+          * (Required) To display data in the table.
+         */
+        "data": unknown[];
+        /**
+          * (Optional) To control display options of table.
          */
         "displayOptions"?: ModusTableDisplayOptions;
+        "fullWidth": boolean;
         /**
-          * Actions that can be performed on each row.
+          * Returns data of a column.
+          * @param accessorKey : Column name as key.
+          * @returns : Column data as Array or empty array.
          */
-        "rowActions"?: ModusTableRowAction[];
+        "getColumnData": (accessorKey: string) => Promise<unknown[]>;
         /**
-          * Options for data table item selection.
+          * (Optional) To enable row hover in table.
          */
-        "selectionOptions"?: ModusTableSelectionOptions;
+        "hover": boolean;
+        "pageSizeList": number[];
+        "pagination": boolean;
         /**
-          * Options for data table column sort.
+          * (Optional) To display a panel options, which allows access to table operations like hiding columns.
          */
-        "sortOptions"?: ModusTableSortOptions;
+        "panelOptions": ModusTablePanelOptions | null;
+        /**
+          * (Optional) To display sort icon on hover.
+         */
+        "showSortIconOnHover": boolean;
+        /**
+          * (Optional) To sort data in table.
+         */
+        "sort": boolean;
+        /**
+          * (Optional) To display summary row.
+         */
+        "summaryRow": boolean;
+    }
+    interface ModusTablePanel {
+        /**
+          * (Optional) To display a panel options, which allows access to table operations like hiding columns.
+         */
+        "panelOptions": ModusTablePanelOptions;
+        /**
+          * Table data.
+         */
+        "table": Table<unknown>;
     }
     interface ModusTabs {
         "ariaLabel": string | null;
@@ -1558,6 +1567,12 @@ declare global {
         prototype: HTMLModusTableElement;
         new (): HTMLModusTableElement;
     };
+    interface HTMLModusTablePanelElement extends Components.ModusTablePanel, HTMLStencilElement {
+    }
+    var HTMLModusTablePanelElement: {
+        prototype: HTMLModusTablePanelElement;
+        new (): HTMLModusTablePanelElement;
+    };
     interface HTMLModusTabsElement extends Components.ModusTabs, HTMLStencilElement {
     }
     var HTMLModusTabsElement: {
@@ -1636,6 +1651,7 @@ declare global {
         "modus-spinner": HTMLModusSpinnerElement;
         "modus-switch": HTMLModusSwitchElement;
         "modus-table": HTMLModusTableElement;
+        "modus-table-panel": HTMLModusTablePanelElement;
         "modus-tabs": HTMLModusTabsElement;
         "modus-text-input": HTMLModusTextInputElement;
         "modus-time-picker": HTMLModusTimePickerElement;
@@ -1943,42 +1959,44 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface ModusDataTable {
-        "columnResize"?: boolean;
+        "columns": string[] | TColumn[];
+        "data": TCell[][] | TRow[];
         /**
-          * (Required) To display headers in the table.
-         */
-        "columns": ModusDataTableColumn<unknown>[];
-        /**
-          * (Required) To display data in the table.
-         */
-        "data": unknown[];
-        /**
-          * (Optional) To control display options of table.
+          * Options for data table display.
          */
         "displayOptions"?: ModusDataTableDisplayOptions;
-        "fullWidth"?: boolean;
         /**
-          * (Optional) To enable row hover in table.
+          * An event that fires on cell link click.
          */
-        "hover"?: boolean;
+        "onCellLinkClick"?: (event: ModusDataTableCustomEvent<ModusDataTableCellLink>) => void;
         /**
-          * Emits event on sort change
+          * An event that fires when a row action is clicked.
          */
-        "onSortChange"?: (event: ModusDataTableCustomEvent<ModusDataTableSortingState>) => void;
-        "pageSizeList"?: number[];
-        "pagination"?: boolean;
+        "onRowActionClick"?: (event: ModusDataTableCustomEvent<ModusDataTableRowActionClickEvent>) => void;
         /**
-          * (Optional) To display sort icon on hover.
+          * An event that fires on row double click.
          */
-        "showSortIconOnHover"?: boolean;
+        "onRowDoubleClick"?: (event: ModusDataTableCustomEvent<string>) => void;
         /**
-          * (Optional) To sort data in table.
+          * An event that fires on selection change.
          */
-        "sort"?: boolean;
+        "onSelection"?: (event: ModusDataTableCustomEvent<string[]>) => void;
         /**
-          * (Optional) To display summary row.
+          * An event that fires on column sort.
          */
-        "summaryRow"?: boolean;
+        "onSort"?: (event: ModusDataTableCustomEvent<ModusDataTableSortEvent>) => void;
+        /**
+          * Actions that can be performed on each row.
+         */
+        "rowActions"?: ModusDataTableRowAction[];
+        /**
+          * Options for data table item selection.
+         */
+        "selectionOptions"?: ModusTableSelectionOptions;
+        /**
+          * Options for data table column sort.
+         */
+        "sortOptions"?: ModusTableSortOptions;
     }
     interface ModusDateInput {
         /**
@@ -2332,8 +2350,8 @@ declare namespace LocalJSX {
         "variant"?: 'default' | 'blue';
     }
     interface ModusNavbarAppsMenu {
-        "apps"?: ModusNavbarApp1[];
-        "onAppOpen"?: (event: ModusNavbarAppsMenuCustomEvent<ModusNavbarApp1>) => void;
+        "apps"?: ModusNavbarApp[];
+        "onAppOpen"?: (event: ModusNavbarAppsMenuCustomEvent<ModusNavbarApp>) => void;
         "reverse"?: boolean;
     }
     interface ModusNavbarMainMenu {
@@ -2424,10 +2442,12 @@ declare namespace LocalJSX {
         "ariaLabel"?: string | null;
         "maxPage"?: number;
         "minPage"?: number;
+        "nextPageButtonText"?: string;
         /**
           * An event that fires on page change.
          */
         "onPageChange"?: (event: ModusPaginationCustomEvent<number>) => void;
+        "prevPageButtonText"?: string;
         "size"?: 'large' | 'medium' | 'small';
     }
     interface ModusProgressBar {
@@ -2670,44 +2690,60 @@ declare namespace LocalJSX {
         "onSwitchClick"?: (event: ModusSwitchCustomEvent<boolean>) => void;
     }
     interface ModusTable {
-        "columns": string[] | TColumn[];
-        "data": TCell[][] | TRow[];
         /**
-          * Options for data table display.
+          * (Optional) To allow column reordering.
+         */
+        "columnReorder"?: boolean;
+        "columnResize"?: boolean;
+        /**
+          * (Required) To display headers in the table.
+         */
+        "columns": ModusTableColumn<unknown>[];
+        /**
+          * (Required) To display data in the table.
+         */
+        "data": unknown[];
+        /**
+          * (Optional) To control display options of table.
          */
         "displayOptions"?: ModusTableDisplayOptions;
+        "fullWidth"?: boolean;
         /**
-          * An event that fires on cell link click.
+          * (Optional) To enable row hover in table.
          */
-        "onCellLinkClick"?: (event: ModusTableCustomEvent<ModusTableCellLink>) => void;
+        "hover"?: boolean;
         /**
-          * An event that fires when a row action is clicked.
+          * Emits event on sort change
          */
-        "onRowActionClick"?: (event: ModusTableCustomEvent<ModusTableRowActionClickEvent>) => void;
+        "onSortChange"?: (event: ModusTableCustomEvent<ModusTableSortingState>) => void;
+        "pageSizeList"?: number[];
+        "pagination"?: boolean;
         /**
-          * An event that fires on row double click.
+          * (Optional) To display a panel options, which allows access to table operations like hiding columns.
          */
-        "onRowDoubleClick"?: (event: ModusTableCustomEvent<string>) => void;
+        "panelOptions"?: ModusTablePanelOptions | null;
         /**
-          * An event that fires on selection change.
+          * (Optional) To display sort icon on hover.
          */
-        "onSelection"?: (event: ModusTableCustomEvent<string[]>) => void;
+        "showSortIconOnHover"?: boolean;
         /**
-          * An event that fires on column sort.
+          * (Optional) To sort data in table.
          */
-        "onSort"?: (event: ModusTableCustomEvent<ModusTableSortEvent>) => void;
+        "sort"?: boolean;
         /**
-          * Actions that can be performed on each row.
+          * (Optional) To display summary row.
          */
-        "rowActions"?: ModusTableRowAction[];
+        "summaryRow"?: boolean;
+    }
+    interface ModusTablePanel {
         /**
-          * Options for data table item selection.
+          * (Optional) To display a panel options, which allows access to table operations like hiding columns.
          */
-        "selectionOptions"?: ModusTableSelectionOptions;
+        "panelOptions"?: ModusTablePanelOptions;
         /**
-          * Options for data table column sort.
+          * Table data.
          */
-        "sortOptions"?: ModusTableSortOptions;
+        "table"?: Table<unknown>;
     }
     interface ModusTabs {
         "ariaLabel"?: string | null;
@@ -3043,6 +3079,7 @@ declare namespace LocalJSX {
         "modus-spinner": ModusSpinner;
         "modus-switch": ModusSwitch;
         "modus-table": ModusTable;
+        "modus-table-panel": ModusTablePanel;
         "modus-tabs": ModusTabs;
         "modus-text-input": ModusTextInput;
         "modus-time-picker": ModusTimePicker;
@@ -3091,6 +3128,7 @@ declare module "@stencil/core" {
             "modus-spinner": LocalJSX.ModusSpinner & JSXBase.HTMLAttributes<HTMLModusSpinnerElement>;
             "modus-switch": LocalJSX.ModusSwitch & JSXBase.HTMLAttributes<HTMLModusSwitchElement>;
             "modus-table": LocalJSX.ModusTable & JSXBase.HTMLAttributes<HTMLModusTableElement>;
+            "modus-table-panel": LocalJSX.ModusTablePanel & JSXBase.HTMLAttributes<HTMLModusTablePanelElement>;
             "modus-tabs": LocalJSX.ModusTabs & JSXBase.HTMLAttributes<HTMLModusTabsElement>;
             "modus-text-input": LocalJSX.ModusTextInput & JSXBase.HTMLAttributes<HTMLModusTextInputElement>;
             "modus-time-picker": LocalJSX.ModusTimePicker & JSXBase.HTMLAttributes<HTMLModusTimePickerElement>;
