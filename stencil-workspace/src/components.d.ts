@@ -559,6 +559,10 @@ export namespace Components {
          */
         "buttons": ModusNavbarButton[];
         /**
+          * (optional) Whether to show search overlay or not.
+         */
+        "enableSearchOverlay": boolean;
+        /**
           * (optional) Help URL.
          */
         "helpUrl": string;
@@ -633,6 +637,8 @@ export namespace Components {
         "reverse": boolean;
         "username": string;
         "variant": 'default' | 'blue';
+    }
+    interface ModusNavbarSearchOverlay {
     }
     interface ModusNumberInput {
         /**
@@ -1257,6 +1263,10 @@ export interface ModusNavbarProfileMenuCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusNavbarProfileMenuElement;
 }
+export interface ModusNavbarSearchOverlayCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusNavbarSearchOverlayElement;
+}
 export interface ModusNumberInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusNumberInputElement;
@@ -1460,6 +1470,12 @@ declare global {
         prototype: HTMLModusNavbarProfileMenuElement;
         new (): HTMLModusNavbarProfileMenuElement;
     };
+    interface HTMLModusNavbarSearchOverlayElement extends Components.ModusNavbarSearchOverlay, HTMLStencilElement {
+    }
+    var HTMLModusNavbarSearchOverlayElement: {
+        prototype: HTMLModusNavbarSearchOverlayElement;
+        new (): HTMLModusNavbarSearchOverlayElement;
+    };
     interface HTMLModusNumberInputElement extends Components.ModusNumberInput, HTMLStencilElement {
     }
     var HTMLModusNumberInputElement: {
@@ -1588,6 +1604,7 @@ declare global {
         "modus-navbar-main-menu": HTMLModusNavbarMainMenuElement;
         "modus-navbar-notifications-menu": HTMLModusNavbarNotificationsMenuElement;
         "modus-navbar-profile-menu": HTMLModusNavbarProfileMenuElement;
+        "modus-navbar-search-overlay": HTMLModusNavbarSearchOverlayElement;
         "modus-number-input": HTMLModusNumberInputElement;
         "modus-pagination": HTMLModusPaginationElement;
         "modus-progress-bar": HTMLModusProgressBarElement;
@@ -2211,6 +2228,10 @@ declare namespace LocalJSX {
          */
         "buttons"?: ModusNavbarButton[];
         /**
+          * (optional) Whether to show search overlay or not.
+         */
+        "enableSearchOverlay"?: boolean;
+        /**
           * (optional) Help URL.
          */
         "helpUrl"?: string;
@@ -2254,6 +2275,14 @@ declare namespace LocalJSX {
           * An event that fires on profile menu sign out click.
          */
         "onProfileMenuSignOutClick"?: (event: ModusNavbarCustomEvent<MouseEvent>) => void;
+        /**
+          * An event that fires on search value change.
+         */
+        "onSearchChange"?: (event: ModusNavbarCustomEvent<string>) => void;
+        /**
+          * An event that fires on search button click.
+         */
+        "onSearchMenuClick"?: (event: ModusNavbarCustomEvent<void>) => void;
         /**
           * (required) Profile menu options.
          */
@@ -2323,6 +2352,16 @@ declare namespace LocalJSX {
         "reverse"?: boolean;
         "username"?: string;
         "variant"?: 'default' | 'blue';
+    }
+    interface ModusNavbarSearchOverlay {
+        /**
+          * An event that fires on clicking on close button of search overlay
+         */
+        "onClose"?: (event: ModusNavbarSearchOverlayCustomEvent<void>) => void;
+        /**
+          * An event that fires on search value change.
+         */
+        "onSearch"?: (event: ModusNavbarSearchOverlayCustomEvent<string>) => void;
     }
     interface ModusNumberInput {
         /**
@@ -2964,6 +3003,7 @@ declare namespace LocalJSX {
         "modus-navbar-main-menu": ModusNavbarMainMenu;
         "modus-navbar-notifications-menu": ModusNavbarNotificationsMenu;
         "modus-navbar-profile-menu": ModusNavbarProfileMenu;
+        "modus-navbar-search-overlay": ModusNavbarSearchOverlay;
         "modus-number-input": ModusNumberInput;
         "modus-pagination": ModusPagination;
         "modus-progress-bar": ModusProgressBar;
@@ -3012,6 +3052,7 @@ declare module "@stencil/core" {
             "modus-navbar-main-menu": LocalJSX.ModusNavbarMainMenu & JSXBase.HTMLAttributes<HTMLModusNavbarMainMenuElement>;
             "modus-navbar-notifications-menu": LocalJSX.ModusNavbarNotificationsMenu & JSXBase.HTMLAttributes<HTMLModusNavbarNotificationsMenuElement>;
             "modus-navbar-profile-menu": LocalJSX.ModusNavbarProfileMenu & JSXBase.HTMLAttributes<HTMLModusNavbarProfileMenuElement>;
+            "modus-navbar-search-overlay": LocalJSX.ModusNavbarSearchOverlay & JSXBase.HTMLAttributes<HTMLModusNavbarSearchOverlayElement>;
             "modus-number-input": LocalJSX.ModusNumberInput & JSXBase.HTMLAttributes<HTMLModusNumberInputElement>;
             "modus-pagination": LocalJSX.ModusPagination & JSXBase.HTMLAttributes<HTMLModusPaginationElement>;
             "modus-progress-bar": LocalJSX.ModusProgressBar & JSXBase.HTMLAttributes<HTMLModusProgressBarElement>;

@@ -5,11 +5,12 @@ interface IconProps {
   color?: string;
   onClick?: (event: MouseEvent) => void;
   size?: string;
+  pressed?: boolean;
 }
 
 export const IconSearch: FunctionalComponent<IconProps> = (props: IconProps) => (
   <svg
-    class="icon-search"
+    class={`icon-search ${props.pressed ? 'pressed' : ''}`}
     width={props.size ?? '14'}
     height={props.size ?? 14}
     onClick={props.onClick ? (event) => props.onClick(event) : null}

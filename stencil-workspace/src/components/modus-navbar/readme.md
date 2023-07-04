@@ -11,6 +11,7 @@
 | ---------------------- | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- | ----------- |
 | `apps`                 | --                       | (optional) The apps to render in the apps menu.                                                                                                                                         | `ModusNavbarApp[]`        | `undefined` |
 | `buttons`              | --                       | (optional) The buttons to render in the Navbar.                                                                                                                                         | `ModusNavbarButton[]`     | `undefined` |
+| `enableSearchOverlay`  | `enable-search-overlay`  | (optional) Whether to show search overlay or not.                                                                                                                                       | `boolean`                 | `undefined` |
 | `helpUrl`              | `help-url`               | (optional) Help URL.                                                                                                                                                                    | `string`                  | `undefined` |
 | `logoOptions`          | --                       | (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels. | `ModusNavbarLogoOptions`  | `undefined` |
 | `profileMenuOptions`   | --                       | (required) Profile menu options.                                                                                                                                                        | `ModusProfileMenuOptions` | `undefined` |
@@ -39,6 +40,8 @@
 | `profileMenuLinkClick`    | An event that fires on profile menu link click.        | `CustomEvent<string>`                      |
 | `profileMenuOpen`         | An event that fires when the profile menu opens.       | `CustomEvent<void>`                        |
 | `profileMenuSignOutClick` | An event that fires on profile menu sign out click.    | `CustomEvent<MouseEvent>`                  |
+| `searchChange`            | An event that fires on search value change.            | `CustomEvent<string>`                      |
+| `searchMenuClick`         | An event that fires on search button click.            | `CustomEvent<void>`                        |
 
 
 ## Methods
@@ -66,6 +69,7 @@ Type: `Promise<void>`
 
 ### Depends on
 
+- [modus-navbar-search-overlay](search-overlay)
 - [modus-navbar-main-menu](main-menu)
 - [modus-tooltip](../modus-tooltip)
 - [modus-navbar-notifications-menu](notifications-menu)
@@ -77,6 +81,7 @@ Type: `Promise<void>`
 ### Graph
 ```mermaid
 graph TD;
+  modus-navbar --> modus-navbar-search-overlay
   modus-navbar --> modus-navbar-main-menu
   modus-navbar --> modus-tooltip
   modus-navbar --> modus-navbar-notifications-menu
@@ -84,6 +89,7 @@ graph TD;
   modus-navbar --> modus-navbar-profile-menu
   modus-navbar --> modus-dropdown
   modus-navbar --> modus-navbar-button-menu
+  modus-navbar-search-overlay --> modus-text-input
   style modus-navbar fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

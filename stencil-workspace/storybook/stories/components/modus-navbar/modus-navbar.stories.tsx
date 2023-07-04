@@ -5,6 +5,22 @@ import { html } from 'lit-html';
 export default {
   title: 'Components/Navbar',
   argTypes: {
+    enableSearchOverlay: {
+      name: 'enable-search-overlay',
+      description: 'Whether to show search overlay or not.',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      }
+    },
+    showSearch: {
+      name: 'show-search',
+      description: 'Toggle the search button',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      }
+    },
     profileMenuOptions: {
       name: 'profileMenuOptions',
       description: 'Set the options for profile menu',
@@ -29,13 +45,18 @@ export default {
       isToolshown: true,
     },
     controls: { expanded: true, sort: 'requiredFirst' },
+    actions: {
+      handles: ['searchMenuClick'],
+    },
     viewMode: 'docs',
   },
 };
 
-const Template = ({ profileMenuOptions, buttons }) => html`
+const Template = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay }) => html`
   <modus-navbar
     id="working"
+    enable-search-overlay=${enableSearchOverlay}
+    show-search=${showSearch}
     show-apps-menu
     show-help
     show-main-menu>
@@ -55,19 +76,23 @@ Default.args = {
   buttons: [
     { id: 'addMenu', icon: 'add' },
     { id: 'notificationMenu', icon: 'notifications' }
-  ]
+  ],
+  showSearch: false,
+  enableSearchOverlay: false
 };
 
-const FailedToLoadAvatarTemplate = ({ profileMenuOptions, buttons }) => html`
+const FailedToLoadAvatarTemplate = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay }) => html`
   <modus-navbar
-    id="broken"
-    show-apps-menu
-    show-help
-    show-main-menu
-    show-notifications>
-    <div slot="main" style="height:300px;">Render your own main menu.</div>
-    <div slot="notifications">Render your own notifications.</div>
-  </modus-navbar>
+id="broken"
+enable-search-overlay=${enableSearchOverlay}
+show-search=${showSearch}
+show-apps-menu
+show-help
+show-main-menu
+show-notifications>
+       <div slot="main" style="height:300px;">Render your own main menu.</div>
+        <div slot="notifications">Render your own notifications.</div>
+  </modus-navbar >
   ${setNavbar(false, '#broken', profileMenuOptions, '', '', buttons)}
 `;
 export const FailedAvatar = FailedToLoadAvatarTemplate.bind({});
@@ -77,24 +102,29 @@ FailedAvatar.args = {
     initials: 'MU',
     username: 'Modus User',
   },
-  buttons: []
+  buttons: [],
+  showSearch: false,
+  enableSearchOverlay: false
 };
-const BlueTemplate = ({ profileMenuOptions, buttons }) => html`
+const BlueTemplate = ({ profileMenuOptions, buttons,showSearch, enableSearchOverlay }) => html`
   <modus-navbar
-    id="blue-theme"
-    show-apps-menu
-    show-help
-    show-main-menu
-    show-notifications
-    variant="blue">
-    <div slot="main" style="height:300px;">Render your own main menu.</div>
-    <div slot="notifications">Render your own notifications.</div>
+id="blue-theme"
+enable-search-overlay=${enableSearchOverlay}
+show-search=${showSearch}
+show-apps-menu
+show-help
+show-main-menu
+show-notifications
+variant="blue">
+      <div slot="main" style="height:300px;">Render your own main menu.</div>
+      <div slot="notifications">Render your own notifications.</div>
   </modus-navbar>
-  ${setNavbar(
-  false,
-  '#blue-theme',
-  profileMenuOptions,
-  'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
+  ${
+  setNavbar(
+    false,
+    '#blue-theme',
+    profileMenuOptions,
+    'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
   'https://modus-bootstrap.trimble.com/img/trimble-icon-rev.svg',
   buttons
 )}
@@ -106,7 +136,9 @@ BlueNavbar.args = {
     initials: 'MU',
     username: 'Modus User',
   },
-  buttons: []
+  buttons: [],
+  showSearch: false,
+  enableSearchOverlay: false
 };
 
 const setNavbar = (
@@ -123,14 +155,16 @@ const setNavbar = (
     : 'broken-link';
 
   tag.innerHTML = `
-        document.querySelector('${id}').apps = [
-          { description: 'The One Trimble Design System', logoUrl: 'https://modus.trimble.com/favicon.svg', name: 'Trimble Modus', url: 'https://modus.trimble.com/' }
-        ];
-        document.querySelector('${id}').logoOptions = { 
-          primary:{url: '${logoUrl || 'https://modus.trimble.com/img/trimble-logo.svg'
+document.querySelector('${id}').apps = [
+  { description: 'The One Trimble Design System', logoUrl: 'https://modus.trimble.com/favicon.svg', name: 'Trimble Modus', url: 'https://modus.trimble.com/' }
+];
+document.querySelector('${id}').logoOptions = {
+  primary: {
+    url: '${logoUrl || 'https://modus.trimble.com/img/trimble-logo.svg'
     }'}, 
-          secondary:{url: '${iconUrl || 'https://modus.trimble.com/favicon.svg'
-    }'} 
+          secondary:{
+  url: '${iconUrl || 'https://modus.trimble.com/favicon.svg'
+    } '} 
         };
         document.querySelector('${id}').profileMenuOptions = ${JSON.stringify(profileMenuOptions)};
         document.querySelector('${id}').profileMenuTooltip = {
@@ -140,5 +174,5 @@ const setNavbar = (
         document.querySelector('${id}').buttons = ${JSON.stringify(buttons)};
   `;
 
-  return tag;
+return tag;
 };
