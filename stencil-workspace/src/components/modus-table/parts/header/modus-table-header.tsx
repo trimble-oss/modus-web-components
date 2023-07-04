@@ -16,9 +16,12 @@ interface ModusTableHeaderProps {
 /**
  * Modus Table Header
  */
-export const ModusTableHeader: FunctionalComponent<
-  ModusTableHeaderProps
-> = ({ table, header, isNestedParentHeader, showSortIconOnHover }) => {
+export const ModusTableHeader: FunctionalComponent<ModusTableHeaderProps> = ({
+  table,
+  header,
+  isNestedParentHeader,
+  showSortIconOnHover,
+}) => {
   return (
     <th
       key={header.id}
@@ -27,7 +30,11 @@ export const ModusTableHeader: FunctionalComponent<
         ${isNestedParentHeader ? 'text-align-center' : ''}
         ${header.column.getIsResizing() ? 'active-resize' : ''}
       `}
-      style={{ width: `${header.getSize()}px` }}
+      // The column sizing indicator (blue border right line) is left with a white shadow after being resized.
+      // It appears to have been incorrectly rendered.
+      // So deducting a minute amount from the width of the header column in order to render the component
+      // and the view is thus unaffected by this fix.
+      style={{ width: `${header.column.getIsResizing() ? header.getSize() : header.getSize() - 0.001}px` }}
       aria-label={header.column.columnDef.header}
       role="columnheader"
       scope="col">
@@ -35,10 +42,7 @@ export const ModusTableHeader: FunctionalComponent<
         <div class={header.column.getCanSort() && 'can-sort'}>
           <span>{header.column.columnDef.header}</span>
           {header.column.getCanSort() && (
-            <ModusTableHeaderSort
-              column={header.column}
-              showSortIconOnHover={showSortIconOnHover}
-            />
+            <ModusTableHeaderSort column={header.column} showSortIconOnHover={showSortIconOnHover} />
           )}
         </div>
       )}
