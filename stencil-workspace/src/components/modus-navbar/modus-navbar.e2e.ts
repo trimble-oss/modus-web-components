@@ -142,6 +142,64 @@ describe('modus-navbar', () => {
     expect(tooltipText.innerText).toBe('Search');
   });
 
+  it('should show searchoverlay on search button click', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-navbar show-search></modus-navbar>');
+    await page.waitForChanges();
+
+    const navbar = await page.find('modus-navbar');
+    navbar.setProperty('enableSearchOverlay', true);
+    await page.waitForChanges();
+
+    const searchButton = await page.find('modus-navbar >>> [data-test-id="search-menu"]');
+    await searchButton.click();
+
+    await page.waitForChanges();
+
+    const searchBox = await page.find('modus-navbar >>> modus-navbar-search-overlay');
+    expect(searchBox).toBeTruthy();
+  });
+
+  it('should hide searchoverlay on close button click', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-navbar show-search></modus-navbar>');
+    await page.waitForChanges();
+
+    const navbar = await page.find('modus-navbar');
+    navbar.setProperty('enableSearchOverlay', true);
+    await page.waitForChanges();
+
+    const searchButton = await page.find('modus-navbar >>> [data-test-id="search-menu"]');
+    await searchButton.click();
+    await page.waitForChanges();
+
+    let searchBox = await page.find('modus-navbar >>> modus-navbar-search-overlay');
+    expect(searchBox).toBeTruthy();
+
+    const closeButton = await page.find('modus-navbar >>> [data-test-id="close-button"]');
+    await closeButton.click();
+    await page.waitForChanges();
+
+    searchBox = await page.find('modus-navbar >>> modus-navbar-search-overlay');
+    expect(searchBox).toBeFalsy();
+  });
+
+  it('should search button emit event when enableSearchOverlay set to false', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-navbar show-search></modus-navbar>');
+    await page.waitForChanges();
+
+    const searchMenuClick = await page.spyOnEvent('searchMenuClick');
+    await page.waitForChanges();
+
+    const searchButton = await page.find('modus-navbar >>> [data-test-id="search-menu"]');
+    await searchButton.click();
+    await page.waitForChanges();
+
+    expect(searchMenuClick).toHaveReceivedEventTimes(1);
+  
+  });
+
   it('should show small logo (icon) when screen size <= 576px', async () => {
     const page = await newE2EPage();
     await page.setViewport({ width: 300, height: 640 });

@@ -563,7 +563,7 @@ export declare interface ModusModal extends Components.ModusModal {
 
 
 @ProxyCmp({
-  inputs: ['apps', 'buttons', 'helpUrl', 'logoOptions', 'profileMenuOptions', 'reverse', 'searchTooltip', 'showAppsMenu', 'showHelp', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showSearch', 'showShadow', 'variant'],
+  inputs: ['apps', 'buttons', 'enableSearchOverlay', 'helpUrl', 'logoOptions', 'profileMenuOptions', 'reverse', 'searchTooltip', 'showAppsMenu', 'showHelp', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showSearch', 'showShadow', 'variant'],
   methods: ['hideMainMenu']
 })
 @Component({
@@ -571,14 +571,14 @@ export declare interface ModusModal extends Components.ModusModal {
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['apps', 'buttons', 'helpUrl', 'logoOptions', 'profileMenuOptions', 'reverse', 'searchTooltip', 'showAppsMenu', 'showHelp', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showSearch', 'showShadow', 'variant'],
+  inputs: ['apps', 'buttons', 'enableSearchOverlay', 'helpUrl', 'logoOptions', 'profileMenuOptions', 'reverse', 'searchTooltip', 'showAppsMenu', 'showHelp', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showSearch', 'showShadow', 'variant'],
 })
 export class ModusNavbar {
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['appsMenuOpen', 'appsMenuAppOpen', 'helpOpen', 'mainMenuClick', 'notificationsMenuOpen', 'productLogoClick', 'profileMenuLinkClick', 'profileMenuOpen', 'profileMenuSignOutClick']);
+    proxyOutputs(this, this.el, ['appsMenuOpen', 'appsMenuAppOpen', 'helpOpen', 'mainMenuClick', 'notificationsMenuOpen', 'productLogoClick', 'profileMenuLinkClick', 'profileMenuOpen', 'profileMenuSignOutClick', 'searchChange', 'searchMenuClick']);
   }
 }
 
@@ -622,6 +622,14 @@ export declare interface ModusNavbar extends Components.ModusNavbar {
    * An event that fires on profile menu sign out click.
    */
   profileMenuSignOutClick: EventEmitter<CustomEvent<MouseEvent>>;
+  /**
+   * An event that fires on search value change.
+   */
+  searchChange: EventEmitter<CustomEvent<string>>;
+  /**
+   * An event that fires on search button click.
+   */
+  searchMenuClick: EventEmitter<CustomEvent<void>>;
 }
 
 
@@ -744,6 +752,37 @@ export declare interface ModusNavbarProfileMenu extends Components.ModusNavbarPr
   linkClick: EventEmitter<CustomEvent<string>>;
 
   signOutClick: EventEmitter<CustomEvent<MouseEvent>>;
+}
+
+
+@ProxyCmp({
+})
+@Component({
+  selector: 'modus-navbar-search-overlay',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: [],
+})
+export class ModusNavbarSearchOverlay {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['close', 'search']);
+  }
+}
+
+
+export declare interface ModusNavbarSearchOverlay extends Components.ModusNavbarSearchOverlay {
+  /**
+   * An event that fires on clicking on close button of search overlay
+   */
+  close: EventEmitter<CustomEvent<void>>;
+  /**
+   * An event that fires on search value change.
+   */
+  search: EventEmitter<CustomEvent<string>>;
 }
 
 

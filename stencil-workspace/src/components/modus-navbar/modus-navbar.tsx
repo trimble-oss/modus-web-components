@@ -9,6 +9,7 @@ import {
   Method,
   Element,
   Host,
+  Fragment,
 } from '@stencil/core';
 import { IconMenu } from '../icons/icon-menu';
 import { IconNotifications } from '../icons/icon-notifications';
@@ -39,6 +40,9 @@ export class ModusNavbar {
 
   /** (optional) The buttons to render in the Navbar. */
   @Prop({ mutable: true }) buttons: ModusNavbarButton[];
+
+  /** (optional) Whether to show search overlay or not. */
+  @Prop() enableSearchOverlay: boolean;
 
   /** (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels. */
   @Prop() logoOptions: ModusNavbarLogoOptions;
@@ -106,6 +110,12 @@ export class ModusNavbar {
   /** An event that fires on profile menu sign out click. */
   @Event() profileMenuSignOutClick: EventEmitter<MouseEvent>;
 
+  /** An event that fires on search value change. */
+  @Event() searchChange: EventEmitter<string>;
+
+  /** An event that fires on search button click. */
+  @Event() searchMenuClick: EventEmitter<void>;
+
   @Method()
   async hideMainMenu() {
     this.mainMenuVisible = false;
@@ -117,12 +127,14 @@ export class ModusNavbar {
   @State() profileMenuVisible: boolean;
   @State() slots: string[] = [];
   @State() componentId = createGuid();
+  @State() searchOverlayVisible: boolean;
   @State() openButtonMenuId: string;
 
   readonly SLOT_MAIN = 'main';
   readonly SLOT_NOTIFICATIONS = 'notifications';
 
   profileAvatarElement: HTMLImageElement;
+  searchButton: HTMLElement;
 
   @Listen('click', { target: 'document' })
   documentClickHandler(event: MouseEvent): void {
@@ -270,6 +282,34 @@ export class ModusNavbar {
     this.helpOpen.emit();
   }
 
+  searchMenuClickHandler(event: MouseEvent) {
+    event.preventDefault();
+    if (this.enableSearchOverlay) {
+      this.searchOverlayVisible = true;
+    } else {
+      this.searchMenuClick.emit();
+    }
+  }
+
+  searchMenuKeydownHandler(event: KeyboardEvent): void {
+    if (event.code !== 'Enter') {
+      return;
+    }
+
+    if (this.enableSearchOverlay) {
+      this.searchOverlayVisible = true;
+    } else {
+      this.searchMenuClick.emit();
+    }
+  }
+
+  searchOverlayCloseEventHandler(): void {
+    this.searchOverlayVisible = false;
+    setTimeout(() => {
+      this.searchButton?.focus();
+    }, 100);
+  }
+
   buttonMenuClickHandler(event, button): void {
     event.preventDefault();
     if (this.openButtonMenuId == button.id) {
@@ -287,125 +327,141 @@ export class ModusNavbar {
     const variant = `${this.variant === 'default' ? '' : 'nav-' + this.variant}`;
     const sortedButtonList = this.buttons?.sort((a, b) => (a.orderIndex) - (b.orderIndex));
 
+    const overlay = this.searchOverlayVisible &&
+      <modus-navbar-search-overlay
+        class="overlay"
+        onClose={() => this.searchOverlayCloseEventHandler()}
+        onSearch={(event) => this.searchChange.emit(event.detail)}>
+      </modus-navbar-search-overlay>;
+
     return (
       <Host id={this.componentId}>
         <nav class={`${direction} ${shadow} ${variant}`}>
-          <div class={`left ${direction}`}>
-            {this.showMainMenu && (
-              <div class="navbar-button main-menu-button">
-                <span class="navbar-button-icon" onKeyDown={(event) => this.mainMenuKeydownHandler(event)} tabIndex={0}>
-                  <IconMenu size="24" pressed={this.mainMenuVisible} onClick={(event) => this.mainMenuClickHandler(event)} />
-                </span>
-              </div>
-            )}
-            {this.mainMenuVisible && (
-              <modus-navbar-main-menu navbarId={this.componentId}>
-                <slot name={this.SLOT_MAIN}></slot>
-              </modus-navbar-main-menu>
-            )}
-            {this.logoOptions && (<ModusNavbarProductLogo
-              logos={this.logoOptions}
-              onClick={(event) => this.productLogoClick.emit(event)} />
-            )}
-          </div>
-          <div class={`right ${direction}`}>
-            {this.showSearch && (
-              <div class="navbar-button search">
-                <span class="navbar-button-icon">
-                  <modus-tooltip
-                    text={this.searchTooltip?.text}
-                    aria-label={this.searchTooltip?.ariaLabel}
-                    position="bottom">
-                    <IconSearch size="24" />
-                  </modus-tooltip>
-                </span>
-              </div>
-            )}
-            <ModusNavbarButtonList
-              buttons={sortedButtonList} reverse={this.reverse} openButtonMenuId={this.openButtonMenuId}
-              onClick={(event, button) => this.buttonMenuClickHandler(event, button)}>
-            </ModusNavbarButtonList>
-            {this.showNotifications && (
-              <div class="navbar-button" data-test-id="notifications-menu">
-                <span
-                  class="navbar-button-icon"
-                  onKeyDown={(event) => this.notificationsMenuKeydownHandler(event)}
-                  tabIndex={0}>
-                  <IconNotifications
-                    size="24"
-                    onClick={(event) => this.notificationsMenuClickHandler(event)}
-                    pressed={this.notificationsMenuVisible}
-                  />
-                </span>
-                {this.notificationsMenuVisible && (
-                  <modus-navbar-notifications-menu reverse={this.reverse}>
-                    <slot name={this.SLOT_NOTIFICATIONS}></slot>
-                  </modus-navbar-notifications-menu>
-                )}
-              </div>
-            )}
-            {this.showPendoPlaceholder && <div class={'pendo-placeholder'} />}
-            {this.showHelp && (
-              <div class="navbar-button" data-test-id="help-menu">
-                <span class="navbar-button-icon">
-                  <IconHelp size="24" onClick={(event) => this.helpMenuClickHandler(event)} />
-                </span>
-              </div>
-            )}
-            {this.showAppsMenu && (
-              <div class="navbar-button" data-test-id="apps-menu">
-                <span class="navbar-button-icon" onKeyDown={(event) => this.appsMenuKeydownHandler(event)} tabIndex={0}>
-                  <IconApps size="24" pressed={this.appsMenuVisible} onClick={(event) => this.appsMenuClickHandler(event)} />
-                </span>
-                {this.appsMenuVisible && (
-                  <modus-navbar-apps-menu
-                    apps={this.apps}
-                    reverse={this.reverse}
-                    onAppOpen={(event) => this.handleAppsMenuAppOpen(event)}
-                  />
-                )}
-              </div>
-            )}
-            <div class="profile-menu">
-              <modus-tooltip
-                text={this.profileMenuOptions?.tooltip?.text}
-                aria-label={this.profileMenuOptions?.tooltip?.ariaLabel}
-                disabled={this.profileMenuVisible}
-                position="bottom">
-                {this.profileMenuOptions?.avatarUrl ? (
-                  <img
-                    class="avatar"
-                    height="32"
-                    src={this.profileMenuOptions?.avatarUrl}
-                    alt="Modus navbar profile menu avatar"
-                    onClick={(event) => this.profileMenuClickHandler(event)}
-                    onKeyDown={(event) => this.profileMenuKeydownHandler(event)}
-                    tabIndex={0}
-                    ref={(el) => (this.profileAvatarElement = el as HTMLImageElement)}
-                  />
-                ) : (
-                  <span
-                    class="initials"
-                    onClick={(event) => this.profileMenuClickHandler(event)}
-                    onKeyDown={(event) => this.profileMenuKeydownHandler(event)}
-                    tabIndex={0}>
-                    {this.profileMenuOptions?.initials}
+          {!this.searchOverlayVisible && <Fragment>
+            <div class={`left ${direction}`}>
+              {this.showMainMenu && (
+                <div class="navbar-button main-menu-button">
+                  <span class="navbar-button-icon" onKeyDown={(event) => this.mainMenuKeydownHandler(event)} tabIndex={0}>
+                    <IconMenu size="24" pressed={this.mainMenuVisible} onClick={(event) => this.mainMenuClickHandler(event)} />
                   </span>
-                )}
-              </modus-tooltip>
-              {this.profileMenuVisible && (
-                <modus-navbar-profile-menu
-                  avatar-url={this.profileMenuOptions?.avatarUrl}
-                  email={this.profileMenuOptions?.email}
-                  initials={this.profileMenuOptions?.initials}
-                  links={this.profileMenuOptions?.links}
-                  reverse={this.reverse}
-                  username={this.profileMenuOptions?.username}
-                  variant={this.variant}
-                />
+                </div>
+              )}
+              {this.mainMenuVisible && (
+                <modus-navbar-main-menu navbarId={this.componentId}>
+                  <slot name={this.SLOT_MAIN}></slot>
+                </modus-navbar-main-menu>
+              )}
+              {this.logoOptions && (<ModusNavbarProductLogo
+                logos={this.logoOptions}
+                onClick={(event) => this.productLogoClick.emit(event)} />
               )}
             </div>
-          </div>
+            <div class={`right ${direction}`}>
+              {this.showSearch && (
+                <div class="navbar-button search" data-test-id="search-menu">
+                  <span class="navbar-button-icon"
+                    onKeyDown={(event) => this.searchMenuKeydownHandler(event)}
+                    tabIndex={0} id="search-button"
+                    ref={el => this.searchButton = el as HTMLElement}>
+                    <modus-tooltip
+                      text={this.searchTooltip?.text}
+                      aria-label={this.searchTooltip?.ariaLabel}
+                      position="bottom">
+                      <IconSearch
+                        size="24"
+                        onClick={(event) => this.searchMenuClickHandler(event)}
+                        pressed={this.searchOverlayVisible} />
+                    </modus-tooltip>
+                  </span>
+                </div>
+              )}
+              <ModusNavbarButtonList
+                buttons={sortedButtonList} reverse={this.reverse} openButtonMenuId={this.openButtonMenuId}
+                onClick={(event, button) => this.buttonMenuClickHandler(event, button)}>
+              </ModusNavbarButtonList>
+              {this.showNotifications && (
+                <div class="navbar-button" data-test-id="notifications-menu">
+                  <span
+                    class="navbar-button-icon"
+                    onKeyDown={(event) => this.notificationsMenuKeydownHandler(event)}
+                    tabIndex={0}>
+                    <IconNotifications
+                      size="24"
+                      onClick={(event) => this.notificationsMenuClickHandler(event)}
+                      pressed={this.notificationsMenuVisible}
+                    />
+                  </span>
+                  {this.notificationsMenuVisible && (
+                    <modus-navbar-notifications-menu reverse={this.reverse}>
+                      <slot name={this.SLOT_NOTIFICATIONS}></slot>
+                    </modus-navbar-notifications-menu>
+                  )}
+                </div>
+              )}
+              {this.showPendoPlaceholder && <div class={'pendo-placeholder'} />}
+              {this.showHelp && (
+                <div class="navbar-button" data-test-id="help-menu">
+                  <span class="navbar-button-icon">
+                    <IconHelp size="24" onClick={(event) => this.helpMenuClickHandler(event)} />
+                  </span>
+                </div>
+              )}
+              {this.showAppsMenu && (
+                <div class="navbar-button" data-test-id="apps-menu">
+                  <span class="navbar-button-icon" onKeyDown={(event) => this.appsMenuKeydownHandler(event)} tabIndex={0}>
+                    <IconApps size="24" pressed={this.appsMenuVisible} onClick={(event) => this.appsMenuClickHandler(event)} />
+                  </span>
+                  {this.appsMenuVisible && (
+                    <modus-navbar-apps-menu
+                      apps={this.apps}
+                      reverse={this.reverse}
+                      onAppOpen={(event) => this.handleAppsMenuAppOpen(event)}
+                    />
+                  )}
+                </div>
+              )}
+              <div class="profile-menu">
+                <modus-tooltip
+                  text={this.profileMenuOptions?.tooltip?.text}
+                  aria-label={this.profileMenuOptions?.tooltip?.ariaLabel}
+                  disabled={this.profileMenuVisible}
+                  position="bottom">
+                  {this.profileMenuOptions?.avatarUrl ? (
+                    <img
+                      class="avatar"
+                      height="32"
+                      src={this.profileMenuOptions?.avatarUrl}
+                      alt="Modus navbar profile menu avatar"
+                      onClick={(event) => this.profileMenuClickHandler(event)}
+                      onKeyDown={(event) => this.profileMenuKeydownHandler(event)}
+                      tabIndex={0}
+                      ref={(el) => (this.profileAvatarElement = el as HTMLImageElement)}
+                    />
+                  ) : (
+                    <span
+                      class="initials"
+                      onClick={(event) => this.profileMenuClickHandler(event)}
+                      onKeyDown={(event) => this.profileMenuKeydownHandler(event)}
+                      tabIndex={0}>
+                      {this.profileMenuOptions?.initials}
+                    </span>
+                  )}
+                </modus-tooltip>
+                {this.profileMenuVisible && (
+                  <modus-navbar-profile-menu
+                    avatar-url={this.profileMenuOptions?.avatarUrl}
+                    email={this.profileMenuOptions?.email}
+                    initials={this.profileMenuOptions?.initials}
+                    links={this.profileMenuOptions?.links}
+                    reverse={this.reverse}
+                    username={this.profileMenuOptions?.username}
+                    variant={this.variant}
+                  />
+                )}
+              </div>
+            </div>
+          </Fragment>}
+          {overlay}
         </nav>
       </Host>
     );

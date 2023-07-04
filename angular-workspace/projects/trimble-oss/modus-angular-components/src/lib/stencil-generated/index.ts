@@ -27,6 +27,7 @@ export const DIRECTIVES = [
   d.ModusNavbarMainMenu,
   d.ModusNavbarNotificationsMenu,
   d.ModusNavbarProfileMenu,
+  d.ModusNavbarSearchOverlay,
   d.ModusNumberInput,
   d.ModusPagination,
   d.ModusProgressBar,

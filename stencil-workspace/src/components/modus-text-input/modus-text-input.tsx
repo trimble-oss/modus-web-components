@@ -134,7 +134,6 @@ export class ModusTextInput {
         classNames.push('has-right-icon');
       }
       classNames.push(`text-align-${this.textAlign}`);
-
       return classNames.join(' ');
     };
 
@@ -164,9 +163,8 @@ export class ModusTextInput {
           </div>
         ) : null}
         <div
-          class={`input-container ${this.errorText ? 'error' : this.validText ? 'valid' : ''} ${this.classBySize.get(
-            this.size
-          )}`}
+          class={`input-container ${this.errorText ? 'error' : this.validText ? 'valid' : ''
+            } ${this.classBySize.get(this.size)}`}
           onClick={() => this.textInput.focus()}>
           {this.includeSearchIcon ? <IconSearch size="16" /> : null}
           <input

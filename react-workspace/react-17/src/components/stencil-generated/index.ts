@@ -33,6 +33,7 @@ export const ModusNavbarButtonMenu = /*@__PURE__*/createReactComponent<JSX.Modus
 export const ModusNavbarMainMenu = /*@__PURE__*/createReactComponent<JSX.ModusNavbarMainMenu, HTMLModusNavbarMainMenuElement>('modus-navbar-main-menu');
 export const ModusNavbarNotificationsMenu = /*@__PURE__*/createReactComponent<JSX.ModusNavbarNotificationsMenu, HTMLModusNavbarNotificationsMenuElement>('modus-navbar-notifications-menu');
 export const ModusNavbarProfileMenu = /*@__PURE__*/createReactComponent<JSX.ModusNavbarProfileMenu, HTMLModusNavbarProfileMenuElement>('modus-navbar-profile-menu');
+export const ModusNavbarSearchOverlay = /*@__PURE__*/createReactComponent<JSX.ModusNavbarSearchOverlay, HTMLModusNavbarSearchOverlayElement>('modus-navbar-search-overlay');
 export const ModusNumberInput = /*@__PURE__*/createReactComponent<JSX.ModusNumberInput, HTMLModusNumberInputElement>('modus-number-input');
 export const ModusPagination = /*@__PURE__*/createReactComponent<JSX.ModusPagination, HTMLModusPaginationElement>('modus-pagination');
 export const ModusProgressBar = /*@__PURE__*/createReactComponent<JSX.ModusProgressBar, HTMLModusProgressBarElement>('modus-progress-bar');

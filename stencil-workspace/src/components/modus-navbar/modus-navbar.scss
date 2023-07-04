@@ -20,6 +20,7 @@ nav {
   .icon-help,
   .icon-apps,
   .icon-menu,
+  .icon-close,
   .icon-button svg {
     border-radius: $rem-2px;
     padding: $rem-12px;
@@ -68,15 +69,26 @@ nav {
     display: flex;
   }
 
+  .right,
   .left {
     align-items: center;
     display: inline-flex;
     height: 100%;
 
+    &.expand {
+      display: none;
+    }
+
+    &.collapse {
+      display: inline-flex;
+    }
+
     &.reverse {
       flex-direction: row-reverse;
     }
+  }
 
+  .left {
     img.product-logo-primary {
       filter: $modus-navbar-brand-logo-filter;
       max-height: 32px;
@@ -90,14 +102,9 @@ nav {
   }
 
   .right {
-    align-items: center;
-    display: inline-flex;
-    height: 100%;
     margin-left: auto;
-    padding: 0 $rem-16px;
 
     &.reverse {
-      flex-direction: row-reverse;
       margin-left: 0;
       margin-right: auto;
     }
@@ -160,6 +167,10 @@ nav {
     }
   }
 
+  .overlay {
+    width: 100%;
+  }
+
   &.nav-blue {
     background-color: $modus-navbar-blue-bg;
 
@@ -168,6 +179,7 @@ nav {
     .icon-help,
     .icon-apps,
     .icon-menu,
+    .icon-close,
     .icon-button svg {
       path {
         fill: $modus-navbar-blue-icon-color;
