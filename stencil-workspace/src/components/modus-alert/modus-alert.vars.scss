@@ -14,6 +14,14 @@ $modus-alert-success-color: var(--modus-alert-success-color, #006638) !default;
 $modus-alert-danger-color: var(--modus-alert-danger-color, #da212c) !default;
 $modus-alert-warning-color: var(--modus-alert-warning-color, #252a2e) !default;
 
+// link color
+$modus-alert-primary-link-color: var(--modus-alert-primary-link-color, #003b61) !default;
+$modus-alert-secondary-link-color: var(--modus-alert-secondary-link-color, #4b4e56) !default;
+$modus-alert-dark-link-color: var(--modus-alert-dark-link-color, #070809) !default;
+$modus-alert-success-link-color: var(--modus-alert-success-link-color, #002414) !default;
+$modus-alert-danger-link-color: var(--modus-alert-danger-link-color, #a01820) !default;
+$modus-alert-warning-link-color: var(--modus-alert-warning-link-color, #b16f16) !default;
+
 // Border color
 $modus-alert-primary-border-color: var(--modus-alert-primary-border-color, #0063a3) !default;
 $modus-alert-secondary-border-color: var(--modus-alert-secondary-border-color, #6a6e79) !default;

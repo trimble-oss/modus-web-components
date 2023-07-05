@@ -11,7 +11,9 @@ describe('modus-alert', () => {
       <modus-alert type='none'>
         <mock:shadow-root>
           <div class='alert undefined' role="alert" tabindex="0">
-            <div class='message'></div>
+            <div class='message'>
+            <slot></slot>
+            </div>
           </div>
         </mock:shadow-root>
       </modus-alert>

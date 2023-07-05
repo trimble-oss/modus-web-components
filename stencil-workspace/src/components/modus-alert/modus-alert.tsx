@@ -61,7 +61,11 @@ export class ModusAlert {
         {this.infoTypes.includes(this.type) ? <IconInfo size={iconSize} /> : null}
         {this.type === 'success' ? <IconCheckCircle size={iconSize} /> : null}
         {this.type === 'warning' ? <IconWarning size={iconSize} /> : null}
-        <div class="message">{this.message}</div>
+        <div class="message">
+          {this.message}
+          <slot></slot>
+        </div>
+
         {this.dismissible ? <IconClose size="18" onClick={() => this.dismissClick.emit()} /> : null}
       </div>
     );

@@ -103,7 +103,7 @@ hr {
   opacity: 0.8;
 }
 
-body .sbdocs a {
+body .sbdocs-a {
   color: var(--theme-sbdocs-link-color) !important;
 }
 

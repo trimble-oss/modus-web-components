@@ -16,6 +16,13 @@ div.alert {
     border-color: $modus-alert-danger-border-color;
     color: $modus-alert-danger-color;
 
+    // Note - ::slotted targets only the first level elements. Although nested text nodes are receiving the styles, the nested anchor links are not functioning properly.
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/::slotted
+    // https://stackoverflow.com/questions/61626493/slotted-css-selector-for-nested-children-in-shadowdom-slot
+    ::slotted(a) {
+      color: $modus-alert-danger-link-color;
+    }
+
     .icon-check-circle,
     .icon-error,
     .icon-info,
@@ -30,6 +37,10 @@ div.alert {
     background-color: $modus-alert-primary-bg;
     border-color: $modus-alert-primary-border-color;
     color: $modus-alert-primary-color;
+
+    ::slotted(a) {
+      color: $modus-alert-primary-link-color;
+    }
 
     .icon-check-circle,
     .icon-error,
@@ -46,6 +57,10 @@ div.alert {
     border-color: $modus-alert-secondary-border-color;
     color: $modus-alert-secondary-color;
 
+    ::slotted(a) {
+      color: $modus-alert-secondary-link-color;
+    }
+
     .icon-check-circle,
     .icon-error,
     .icon-info,
@@ -60,6 +75,10 @@ div.alert {
     background-color: $modus-alert-dark-bg;
     border-color: $modus-alert-dark-border-color;
     color: $modus-alert-dark-color;
+
+    ::slotted(a) {
+      color: $modus-alert-dark-link-color;
+    }
 
     .icon-check-circle,
     .icon-error,
@@ -76,6 +95,10 @@ div.alert {
     border-color: $modus-alert-success-border-color;
     color: $modus-alert-success-color;
 
+    ::slotted(a) {
+      color: $modus-alert-success-link-color;
+    }
+
     .icon-check-circle,
     .icon-error,
     .icon-info,
@@ -90,6 +113,10 @@ div.alert {
     background-color: $modus-alert-warning-bg;
     border-color: $modus-alert-warning-border-color;
     color: $modus-alert-warning-color;
+
+    ::slotted(a) {
+      color: $modus-alert-warning-link-color;
+    }
 
     .icon-check-circle,
     .icon-error,

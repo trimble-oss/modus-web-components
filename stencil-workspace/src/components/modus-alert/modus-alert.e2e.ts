@@ -28,12 +28,12 @@ describe('modus-alert', () => {
 
     await page.setContent('<modus-alert message="Hello"></modus-alert>');
     const component = await page.find('modus-alert');
-    let element = await page.find('modus-alert >>> div.message');
-    expect(element.innerHTML).toEqual('Hello');
+    const element = await page.find('modus-alert >>> div.message');
+    expect(element.innerHTML).toContain('Hello');
 
     component.setProperty('message', 'Hello world!');
     await page.waitForChanges();
-    expect(element.innerHTML).toEqual('Hello world!');
+    expect(element.innerHTML).toContain('Hello world!');
   });
 
   it('renders changes to the type prop', async () => {
@@ -41,7 +41,7 @@ describe('modus-alert', () => {
 
     await page.setContent('<modus-alert></modus-alert>');
     const component = await page.find('modus-alert');
-    let element = await page.find('modus-alert >>> div.alert');
+    const element = await page.find('modus-alert >>> div.alert');
     expect(element).toHaveClass('type-info');
 
     component.setProperty('type', 'error');

@@ -81,6 +81,7 @@ Default.args = {
   type: 'info',
 };
 
+
 export const Dismissible = Template.bind({});
 Dismissible.args = {
   ariaLabel: '',
@@ -127,4 +128,24 @@ Warning.args = {
   dismissible: false,
   message: 'Warning alert',
   type: 'warning',
+};
+
+
+const TemplateWithLink = ({ ariaLabel, dismissible, message, type }) =>
+  html`
+    <modus-alert
+      ariaLabel=${ariaLabel}
+      dismissible=${dismissible}
+      message=${message}
+      type=${type}>
+      This is a info alert with <a href="#" class="alert-link">an example link</a>
+    </modus-alert>
+  `;
+
+export const WithLink = TemplateWithLink.bind({});
+WithLink.args = {
+  ariaLabel: '',
+  dismissible: false,
+  type: 'info',
+  message: null,
 };
