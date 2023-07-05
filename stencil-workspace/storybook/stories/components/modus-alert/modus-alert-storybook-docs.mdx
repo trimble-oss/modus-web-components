@@ -1,4 +1,4 @@
-import { Anchor } from '@storybook/addon-docs';
+import { Anchor, Story } from '@storybook/addon-docs';
 
 # Alert
 
@@ -48,6 +48,15 @@ import { Anchor } from '@storybook/addon-docs';
 
 <modus-alert message="Warning alert" type="warning"></modus-alert>
 
+<Anchor storyId="components-alert--with-link" />
+
+### Alert with Link
+
+By using the `slot`, it is possible to add a link in the message. Note: To color the inner nested anchor tags, it is recommended to use CSS variables such as `--modus-alert-<variant>-link-color`, due to the limitations of `slot` elements.
+
+
+<Story id="components-alert--with-link" />
+
 ```html
 <modus-alert message="Info alert (default)"></modus-alert>
 <modus-alert dismissible message="Dismissible alert"></modus-alert>
@@ -56,6 +65,9 @@ import { Anchor } from '@storybook/addon-docs';
 <modus-alert message="Info gray dark alert" type="info-gray-dark"></modus-alert>
 <modus-alert message="Success alert" type="success"></modus-alert>
 <modus-alert message="Warning alert" type="warning"></modus-alert>
+<modus-alert type="info">
+  This is a info alert with <a href="#" class="alert-link">an example link</a>
+</modus-alert>
 ```
 
 ### Properties
