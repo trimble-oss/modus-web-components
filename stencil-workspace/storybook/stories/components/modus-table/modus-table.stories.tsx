@@ -96,6 +96,16 @@ export default {
       },
       type: { required: false },
     },
+    showTablePanel: {
+      name: 'show-table-panel',
+      description: 'Enables the table panel.',
+      control: 'boolean',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      },
+      type: { required: false },
+    },
     panelOptions: {
       name: 'panel-options',
       description:
@@ -479,7 +489,8 @@ export const ColumnVisibility = ({
   pagination,
   showSortIconOnHover,
   summaryRow,
-  fullWidth
+  fullWidth,
+  showTablePanel
 }) => html`
   <div style="width: 950px">
     <modus-table
@@ -489,7 +500,8 @@ export const ColumnVisibility = ({
       pagination="${pagination}"
       show-sort-icon-on-hover="${showSortIconOnHover}"
       summary-row="${summaryRow}"
-      full-width="${fullWidth}" />
+      full-width="${fullWidth}"
+      show-table-panel="${showTablePanel}" />
   </div>
   ${columnVisibility()}
 `;
@@ -500,18 +512,19 @@ ColumnVisibility.args = {
   pagination: true,
   showSortIconOnHover: true,
   summaryRow: false,
-  fullWidth: false
+  fullWidth: false,
+  showTablePanel: true
 };
 const columnVisibility = () => {
   const tag = document.createElement('script');
   tag.innerHTML = `
   document.querySelector('modus-table').panelOptions = {
-    columnVisibility: {
+    columnsVisibility: {
       title: '',
-      disabledColumns: ['first-name']
+      requiredColumns: ['age', 'visits']
     }
   };
-    document.querySelector('modus-table').columns = [{ header: 'First Name', accessorKey: 'firstName', id: 'first-name', dataType: 'text', footer: 'Total' }, { header: 'Last Name', accessorKey: 'lastName', id: 'last-name', dataType: 'text', }, { header: 'Age', accessorKey: 'age', id: 'age', dataType: 'integer',showTotal: true }, { header: 'Visits', accessorKey: 'visits', id: 'visits', dataType: 'integer', showTotal: true }, { header: 'Status', accessorKey: 'status', id: 'status', dataType: 'text' }, { header: 'Profile Progress', accessorKey: 'progress', id: 'progress', dataType: 'integer', showTotal: true}];
-    document.querySelector('modus-table').pageSizeList = [5,10,20,50,100]; ${BulkTableData}`;
+  document.querySelector('modus-table').columns = [{header: 'First Name',accessorKey: 'firstName',id: 'first-name',dataType: 'text', footer: 'Total',size: 150,minSize: 80},{header: 'Last Name',accessorKey: 'lastName',id: 'last-name',dataType: 'text',size: 150,minSize: 80},{header: 'Age',accessorKey: 'age',id: 'age',dataType: 'integer',showTotal: true, size: 100,minSize: 60},{header: 'Visits',accessorKey: 'visits',id: 'visits',dataType: 'integer',maxSize: 150,minSize: 80,enableResizing: false,},{header: 'Status',accessorKey: 'status',id: 'status',dataType: 'text' ,minSize: 80},{header: 'Profile Progress',accessorKey: 'progress',id: 'progress',dataType: 'integer', showTotal: true, minSize: 100},];
+  document.querySelector('modus-table').pageSizeList = [5,10,20,50,100]; ${BulkTableData}`;
   return tag;
 };
