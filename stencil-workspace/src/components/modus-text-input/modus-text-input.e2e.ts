@@ -125,6 +125,22 @@ describe('modus-text-input', () => {
     expect(label.textContent).toEqual('Hello Label');
   });
 
+  it('renders changes to value', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-text-input></modus-text-input>');
+
+    const textInput = await page.find('modus-text-input');
+    const input = await page.find('modus-text-input >>> input');
+    expect(await textInput.getProperty('value')).toBeFalsy();
+    expect(await input.getProperty('value')).toBeFalsy();
+
+    textInput.setProperty('value', 'am changed');
+    await page.waitForChanges();
+    expect(await textInput.getProperty('value')).toEqual('am changed');
+    expect(await input.getProperty('value')).toEqual('am changed');
+  });
+
   it('renders changes to placeholder', async () => {
     const page = await newE2EPage();
 
