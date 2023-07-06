@@ -900,6 +900,10 @@ modus-data-table {
   @include modus-list-item;
 }
 
+modus-table {
+  @include modus-checkbox;
+}
+
 modus-file-dropzone {
   --modus-file-upload-dropzone-border-color: var(--modus-gray-6);
   --modus-file-upload-dropzone-browse-color: var(--modus-trimble-blue);

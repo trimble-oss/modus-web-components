@@ -37,6 +37,9 @@ export class ModusCheckbox {
   /** An event that fires on checkbox click. */
   @Event() checkboxClick: EventEmitter<boolean>;
 
+  /** (optional) If you wish to prevent the propagation of your event, you may opt for this. */
+  @Prop() stopPropagation: boolean;
+
   checkboxInput: HTMLInputElement;
   checkboxContainer: HTMLDivElement;
 
@@ -44,10 +47,10 @@ export class ModusCheckbox {
   elementKeydownHandler(event: KeyboardEvent): void {
     switch (event.code) {
       case 'Enter':
-        this.handleCheckboxClick();
+        this.handleCheckboxClick(event);
         break;
       case 'Space':
-        this.handleCheckboxClick();
+        this.handleCheckboxClick(event);
         break;
     }
   }
@@ -62,13 +65,18 @@ export class ModusCheckbox {
     this.checkboxInput.indeterminate = this.indeterminate;
   }
 
-  handleCheckboxClick(): void {
+  handleCheckboxClick(event: MouseEvent | KeyboardEvent): void {
     if (this.disabled) {
       return;
     }
 
     this.updateChecked();
     this.checkboxClick.emit(this.checked);
+
+    if (this.stopPropagation) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
   }
 
   updateChecked(): void {
@@ -84,8 +92,8 @@ export class ModusCheckbox {
     return (
       <div
         class={className}
-        onClick={() => {
-          this.handleCheckboxClick();
+        onClick={(event: MouseEvent) => {
+          this.handleCheckboxClick(event);
         }}>
         <div
           tabindex={tabIndexValue}
