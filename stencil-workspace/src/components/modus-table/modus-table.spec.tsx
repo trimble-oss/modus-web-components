@@ -10,7 +10,7 @@ describe('modus-table', () => {
     expect(root).toEqualHtml(`
       <modus-table>
         <mock:shadow-root>
-          <table class="false" style="width: 100%">
+          <table class="false" style="width: 0px; table-layout: fixed">
             <thead>
               <tr>
               </tr>
