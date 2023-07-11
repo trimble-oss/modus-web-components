@@ -67,6 +67,25 @@ describe('modus-table', () => {
     expect(row[0].textContent).toBe(MockData[0].mockColumnOne);
   });
 
+  it('Display hover on rows when hover is enabled', async () => {
+    page = await newE2EPage();
+
+    await page.setContent('<modus-table />');
+    const component = await page.find('modus-table');
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    component.setProperty('hover', false);
+
+    await page.waitForChanges();
+    let hover = await page.find('modus-table >>> .enable-hover');
+    expect(hover).toBeNull();
+
+    component.setProperty('hover', true);
+    await page.waitForChanges();
+    hover = await page.find('modus-table >>> .enable-hover');
+    expect(hover).not.toBeNull();
+  });
+
   it('Renders with sort icon when sort is enabled', async () => {
     page = await newE2EPage();
 
@@ -265,7 +284,7 @@ describe('modus-table', () => {
     expect(paginationContainer.textContent.startsWith('Page View')).toBeTruthy();
   });
 
-  it('Display showing result data when pagination enabled', async () => {
+  it('Display total pages count when pagination enabled', async () => {
     page = await newE2EPage();
     await page.setContent('<modus-table />');
 
@@ -282,8 +301,9 @@ describe('modus-table', () => {
     await page.waitForChanges();
 
     paginationContainer = await page.find('modus-table >>> .pagination-and-count > .total-count');
+    await page.waitForChanges();
     expect(paginationContainer).not.toBeNull();
-    expect(paginationContainer.textContent).toBe('Showing result1-2 of 2');
+    expect(paginationContainer.textContent).toContain('1-2 of 2');
   });
 
   it('Display items per page list when pageSizeList is enabled', async () => {
@@ -296,21 +316,19 @@ describe('modus-table', () => {
 
     component.setProperty('pagination', true);
     await page.waitForChanges();
+    const valueChange = await page.spyOnEvent('valueChange');
 
-    let options = await page.findAll('modus-table >>> .items-per-page option');
-    let optionsData = await Promise.all(options.map((option) => option.textContent));
-    expect(optionsData).toContain('10');
-    expect(optionsData).toContain('20');
-    expect(optionsData).toContain('50');
+    const select = await page.find('modus-table >>> .items-per-page > modus-select');
 
-    component.setProperty('pageSizeList', [7, 10, 15]);
+    // Note: Workaround for testing select options because of not able to penetrate the nested `modus-select` options
+    await select.click();
+
+    await page.keyboard.press('ArrowDown');
+    await page.keyboard.press('Enter');
     await page.waitForChanges();
 
-    options = await page.findAll('modus-table >>> .items-per-page option');
-    optionsData = await Promise.all(options.map((option) => option.textContent));
-    expect(optionsData).toContain('7');
-    expect(optionsData).toContain('10');
-    expect(optionsData).toContain('15');
+    expect(valueChange).toHaveReceivedEvent();
+    expect(valueChange).toHaveReceivedEventDetail('20');
   });
 
   it('Renders custom footer when summaryRow is true', async () => {
@@ -395,5 +413,24 @@ describe('modus-table', () => {
 
     expect(tableDataTexts[1]).toEqual('$330,160.00');
     expect(tableDataTexts[3]).toEqual('$900,293.00');
+  });
+
+  it('Renders column resizing when columnResize is enabled', async () => {
+    page = await newE2EPage();
+
+    await page.setContent('<modus-table />');
+    const component = await page.find('modus-table');
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    component.setProperty('columnResize', false);
+
+    await page.waitForChanges();
+    let resizeContainer = await page.find('modus-table >>> .can-resize');
+    expect(resizeContainer).toBeNull();
+
+    component.setProperty('columnResize', true);
+    await page.waitForChanges();
+    resizeContainer = await page.find('modus-table >>> .can-resize');
+    expect(resizeContainer).not.toBeNull();
   });
 });
