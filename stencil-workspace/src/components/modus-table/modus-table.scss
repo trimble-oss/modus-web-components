@@ -172,9 +172,12 @@ table {
   margin-top: $rem-24px;
 
   .items-per-page {
-    select {
-      background-color: $modus-page-view-select-bg;
-      color: $modus-page-view-select-color;
+    align-items: center;
+    display: flex;
+
+    modus-select {
+      margin-right: $rem-5px;
+      min-width: 60px; /* Prevent the select from shrinking */
     }
 
     span {
