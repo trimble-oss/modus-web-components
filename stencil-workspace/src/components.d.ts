@@ -268,6 +268,10 @@ export namespace Components {
          */
         "label": string;
         /**
+          * (optional) If you wish to prevent the propagation of your event, you may opt for this.
+         */
+        "stopPropagation": boolean;
+        /**
           * (optional) Tab Index for the checkbox
          */
         "tabIndexValue": string | number;
@@ -991,6 +995,10 @@ export namespace Components {
          */
         "showSortIconOnHover": boolean;
         /**
+          * (Optional) To display table panel.
+         */
+        "showTablePanel": boolean;
+        /**
           * (Optional) To sort data in table.
          */
         "sort": boolean;
@@ -998,12 +1006,18 @@ export namespace Components {
           * (Optional) To display summary row.
          */
         "summaryRow": boolean;
+        /**
+          * Toggle the table column visibility
+          * @param columnId Column id
+          * @param show Boolean value decides to visibility of column
+         */
+        "toggleColumnVisibility": (columnId: string, show: boolean) => Promise<void>;
     }
     interface ModusTablePanel {
         /**
-          * (Optional) To display a panel options, which allows access to table operations like hiding columns.
+          * (Optional) Table Panel options.
          */
-        "panelOptions": ModusTablePanelOptions;
+        "options": ModusTablePanelOptions;
         /**
           * Table data.
          */
@@ -1995,6 +2009,10 @@ declare namespace LocalJSX {
          */
         "onCheckboxClick"?: (event: ModusCheckboxCustomEvent<boolean>) => void;
         /**
+          * (optional) If you wish to prevent the propagation of your event, you may opt for this.
+         */
+        "stopPropagation"?: boolean;
+        /**
           * (optional) Tab Index for the checkbox
          */
         "tabIndexValue"?: string | number;
@@ -2855,6 +2873,10 @@ declare namespace LocalJSX {
          */
         "showSortIconOnHover"?: boolean;
         /**
+          * (Optional) To display table panel.
+         */
+        "showTablePanel"?: boolean;
+        /**
           * (Optional) To sort data in table.
          */
         "sort"?: boolean;
@@ -2865,9 +2887,9 @@ declare namespace LocalJSX {
     }
     interface ModusTablePanel {
         /**
-          * (Optional) To display a panel options, which allows access to table operations like hiding columns.
+          * (Optional) Table Panel options.
          */
-        "panelOptions"?: ModusTablePanelOptions;
+        "options"?: ModusTablePanelOptions;
         /**
           * Table data.
          */
