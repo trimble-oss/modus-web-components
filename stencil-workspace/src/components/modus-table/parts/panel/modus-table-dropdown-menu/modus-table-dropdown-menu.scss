@@ -20,11 +20,11 @@
     background-color: $modus-menu-dropdown-bg;
     border: 1px solid $modus-menu-dropdown-border-color;
     box-shadow: 0 0 4px $modus-menu-dropdown-box-shadow;
+    display: none;
     font-family: $primary-font;
     position: absolute;
     right: 0;
     top: 28px;
-    display: none;
     width: 240px;
     z-index: 99;
 
