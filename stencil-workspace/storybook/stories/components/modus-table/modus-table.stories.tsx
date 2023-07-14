@@ -2,7 +2,144 @@ import { html } from 'lit-html';
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-table-storybook-docs.mdx';
 
-const BulkTableData = `document.querySelector('modus-table').data = [{ age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Elliott', lastName: 'Bosco', age: 21, visits: 348, progress: 60, status: 'complicated', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Agnes', lastName: 'Breitenberg', age: 34, visits: 639, progress: 84, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Nicolette', lastName: 'Stamm', age: 13, visits: 518, progress: 28, status: 'relationship', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Anjali', lastName: 'Ratke', age: 22, visits: 585, progress: 7, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Kamryn', lastName: 'Gerlach', age: 23, visits: 488, progress: 71, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Elliott', lastName: 'Bosco', age: 21, visits: 348, progress: 60, status: 'complicated', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Agnes', lastName: 'Breitenberg', age: 34, visits: 639, progress: 84, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Nicolette', lastName: 'Stamm', age: 13, visits: 518, progress: 28, status: 'relationship', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Anjali', lastName: 'Ratke', age: 22, visits: 585, progress: 7, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Kamryn', lastName: 'Gerlach', age: 23, visits: 488, progress: 71, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Elliott', lastName: 'Bosco', age: 21, visits: 348, progress: 60, status: 'complicated', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Agnes', lastName: 'Breitenberg', age: 34, visits: 639, progress: 84, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Nicolette', lastName: 'Stamm', age: 13, visits: 518, progress: 28, status: 'relationship', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Anjali', lastName: 'Ratke', age: 22, visits: 585, progress: 7, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Kamryn', lastName: 'Gerlach', age: 23, visits: 488, progress: 71, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Elliott', lastName: 'Bosco', age: 21, visits: 348, progress: 60, status: 'complicated', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Anjali', lastName: 'Ratke', age: 22, visits: 585, progress: 7, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Kamryn', lastName: 'Gerlach', age: 23, visits: 488, progress: 71, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Elliott', lastName: 'Bosco', age: 21, visits: 348, progress: 60, status: 'complicated', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Anjali', lastName: 'Ratke', age: 22, visits: 585, progress: 7, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Elliott', lastName: 'Bosco', age: 21, visits: 348, progress: 60, status: 'complicated', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Agnes', lastName: 'Breitenberg', age: 34, visits: 639, progress: 84, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Nicolette', lastName: 'Stamm', age: 13, visits: 518, progress: 28, status: 'relationship', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Anjali', lastName: 'Ratke', age: 22, visits: 585, progress: 7, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Kamryn', lastName: 'Gerlach', age: 23, visits: 488, progress: 71, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Elliott', lastName: 'Bosco', age: 21, visits: 348, progress: 60, status: 'complicated', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Agnes', lastName: 'Breitenberg', age: 34, visits: 639, progress: 84, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Nicolette', lastName: 'Stamm', age: 13, visits: 518, progress: 28, status: 'relationship', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Anjali', lastName: 'Ratke', age: 22, visits: 585, progress: 7, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Kamryn', lastName: 'Gerlach', age: 23, visits: 488, progress: 71, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Elliott', lastName: 'Bosco', age: 21, visits: 348, progress: 60, status: 'complicated', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Agnes', lastName: 'Breitenberg', age: 34, visits: 639, progress: 84, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Nicolette', lastName: 'Stamm', age: 13, visits: 518, progress: 28, status: 'relationship', createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Elliott', lastName: 'Bosco', age: 21, visits: 348, progress: 60, status: 'complicated', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Agnes', lastName: 'Breitenberg', age: 34, visits: 639, progress: 84, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Nicolette', lastName: 'Stamm', age: 13, visits: 518, progress: 28, status: 'relationship', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Anjali', lastName: 'Ratke', age: 22, visits: 585, progress: 7, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Kamryn', lastName: 'Gerlach', age: 23, visits: 488, progress: 71, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Elliott', lastName: 'Bosco', age: 21, visits: 348, progress: 60, status: 'complicated', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Agnes', lastName: 'Breitenberg', age: 34, visits: 639, progress: 84, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Nicolette', lastName: 'Stamm', age: 13, visits: 518, progress: 28, status: 'relationship', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Anjali', lastName: 'Ratke', age: 22, visits: 585, progress: 7, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Kamryn', lastName: 'Gerlach', age: 23, visits: 488, progress: 71, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Elliott', lastName: 'Bosco', age: 21, visits: 348, progress: 60, status: 'complicated', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Agnes', lastName: 'Breitenberg', age: 34, visits: 639, progress: 84, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Nicolette', lastName: 'Stamm', age: 13, visits: 518, progress: 28, status: 'relationship', createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Elliott', lastName: 'Bosco', age: 21, visits: 348, progress: 60, status: 'complicated', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Agnes', lastName: 'Breitenberg', age: 34, visits: 639, progress: 84, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Nicolette', lastName: 'Stamm', age: 13, visits: 518, progress: 28, status: 'relationship', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Anjali', lastName: 'Ratke', age: 22, visits: 585, progress: 7, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Kamryn', lastName: 'Gerlach', age: 23, visits: 488, progress: 71, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Elliott', lastName: 'Bosco', age: 21, visits: 348, progress: 60, status: 'complicated', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Agnes', lastName: 'Breitenberg', age: 34, visits: 639, progress: 84, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Nicolette', lastName: 'Stamm', age: 13, visits: 518, progress: 28, status: 'relationship', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Anjali', lastName: 'Ratke', age: 22, visits: 585, progress: 7, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Kamryn', lastName: 'Gerlach', age: 23, visits: 488, progress: 71, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Elliott', lastName: 'Bosco', age: 21, visits: 348, progress: 60, status: 'complicated', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Agnes', lastName: 'Breitenberg', age: 34, visits: 639, progress: 84, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Nicolette', lastName: 'Stamm', age: 13, visits: 518, progress: 28, status: 'relationship', createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Elliott', lastName: 'Bosco', age: 21, visits: 348, progress: 60, status: 'complicated', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Agnes', lastName: 'Breitenberg', age: 34, visits: 639, progress: 84, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Nicolette', lastName: 'Stamm', age: 13, visits: 518, progress: 28, status: 'relationship', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Anjali', lastName: 'Ratke', age: 22, visits: 585, progress: 7, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Kamryn', lastName: 'Gerlach', age: 23, visits: 488, progress: 71, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Elliott', lastName: 'Bosco', age: 21, visits: 348, progress: 60, status: 'complicated', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Agnes', lastName: 'Breitenberg', age: 34, visits: 639, progress: 84, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Nicolette', lastName: 'Stamm', age: 13, visits: 518, progress: 28, status: 'relationship', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Anjali', lastName: 'Ratke', age: 22, visits: 585, progress: 7, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Kamryn', lastName: 'Gerlach', age: 23, visits: 488, progress: 71, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Elliott', lastName: 'Bosco', age: 21, visits: 348, progress: 60, status: 'complicated', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Agnes', lastName: 'Breitenberg', age: 34, visits: 639, progress: 84, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Nicolette', lastName: 'Stamm', age: 13, visits: 518, progress: 28, status: 'relationship', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Kamryn', lastName: 'Gerlach', age: 23, visits: 488, progress: 71, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Elliott', lastName: 'Bosco', age: 21, visits: 348, progress: 60, status: 'complicated', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Anjali', lastName: 'Ratke', age: 22, visits: 585, progress: 7, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Kamryn', lastName: 'Gerlach', age: 23, visits: 488, progress: 71, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Elliott', lastName: 'Bosco', age: 21, visits: 348, progress: 60, status: 'complicated', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Agnes', lastName: 'Breitenberg', age: 34, visits: 639, progress: 84, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Nicolette', lastName: 'Stamm', age: 13, visits: 518, progress: 28, status: 'relationship', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Anjali', lastName: 'Ratke', age: 22, visits: 585, progress: 7, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Kamryn', lastName: 'Gerlach', age: 23, visits: 488, progress: 71, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Elliott', lastName: 'Bosco', age: 21, visits: 348, progress: 60, status: 'complicated', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Agnes', lastName: 'Breitenberg', age: 34, visits: 639, progress: 84, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Nicolette', lastName: 'Stamm', age: 13, visits: 518, progress: 28, status: 'relationship', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Anjali', lastName: 'Ratke', age: 22, visits: 585, progress: 7, status: 'single', createdAt: "2002-11-21T12:48:51.739Z" }, { firstName: 'Kamryn', lastName: 'Gerlach', age: 23, visits: 488, progress: 71, status: 'single', }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, }, { firstName: 'Elliott', lastName: 'Bosco', age: 21, visits: 348, progress: 60, status: 'complicated', }, { firstName: 'Agnes', lastName: 'Breitenberg', age: 34, visits: 639, progress: 84, status: 'single', }, { firstName: 'Nicolette', lastName: 'Stamm', age: 13, visits: 518, progress: 28, status: 'relationship', }, { firstName: 'Anjali', lastName: 'Ratke', age: 22, visits: 585, progress: 7, status: 'single', }, { firstName: 'Kamryn', lastName: 'Gerlach', age: 23, visits: 488, progress: 71, status: 'single', }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, }, { firstName: 'Elliott', lastName: 'Bosco', age: 21, visits: 348, progress: 60, status: 'complicated', }, { firstName: 'Agnes', lastName: 'Breitenberg', age: 34, visits: 639, progress: 84, status: 'single', }, { firstName: 'Nicolette', lastName: 'Stamm', age: 13, visits: 518, progress: 28, status: 'relationship', }, { firstName: 'Anjali', lastName: 'Ratke', age: 22, visits: 585, progress: 7, status: 'single', }, { firstName: 'Kamryn', lastName: 'Gerlach', age: 23, visits: 488, progress: 71, status: 'single', }, { age: 40, firstName: 'Gordon', lastName: 'Lemke', progress: 97, status: 'single', subRows: undefined, visits: 434, }];`;
+// Helpers
+// for the data generator makeData function
+function range(len) {
+  const arr: number[] = []
+  for (let i = 0; i < len; i++) {
+    arr.push(i)
+  }
+  return arr
+}
+
+function newPerson() {
+  const rand = Math.random()
+  const namesIndex = Math.floor(rand * (Names.length - 1))
+  const firstName = Names[namesIndex].split(' ')[0]
+  const lastName = Names[namesIndex].split(' ')[1]
+  return {
+    firstName,
+    lastName,
+    age: Math.floor(rand * 30),
+    visits: Math.floor(rand * 100),
+    progress: Math.floor(rand * 100),
+    status: rand > 0.66 ? 'Verified' : rand > 0.33 ? 'Pending' : 'Rejected',
+  }
+}
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+function makeData(...lens): unknown {
+  const makeDataLevel = (depth = 0) => {
+    const len = lens[depth]
+    return range(len).map(() => {
+      return {
+        ...newPerson(),
+        subRows: lens[depth + 1] ? makeDataLevel(depth + 1) : undefined,
+      }
+    })
+  }
+
+  return makeDataLevel()
+}
+
+function initializeTable (columns, data, pageSizeList, panelOptions, displayOptions){
+  const tag = document.createElement('script');
+  tag.innerHTML = `
+  document.querySelector('modus-table').columns = ${JSON.stringify(columns)};  document.querySelector('modus-table').data = ${JSON.stringify(data)};
+  document.querySelector('modus-table').pageSizeList = ${JSON.stringify(pageSizeList)};
+  document.querySelector('modus-table').panelOptions = ${JSON.stringify(panelOptions)};
+  document.querySelector('modus-table').displayOptions = ${JSON.stringify(displayOptions)};
+  `;
+
+  return tag;
+}
+
+const Names = [
+  'Mickey Mouse',
+  'Bugs Bunny',
+  'Homer Simpson',
+  'Fred Flintstone',
+  'Sponge Bob',
+  'Daffy Duck',
+  'Charlie Brown',
+  'Scooby Doo',
+  'Tom Cat',
+  'Jerry Mouse',
+  'Mighty Mouse',
+  'Wile E Coyote',
+  'Tweety Bird',
+  'Pink Panther',
+  'Road Runner',
+  'Patrick Star',
+  'Roger Rabbit',
+  'Papa Smurf',
+  'Buzz Lightyear',
+]
+const DefaultColumns = [
+  {
+     "header":"First Name",
+     "accessorKey":"firstName",
+     "id":"first-name",
+     "dataType":"text",
+     "size":150,
+     "minSize":80,
+     "footer": "Total"
+  },
+  {
+     "header":"Last Name",
+     "accessorKey":"lastName",
+     "id":"last-name",
+     "dataType":"text",
+     "size":150,
+     "minSize":80
+  },
+  {
+     "header":"Age",
+     "accessorKey":"age",
+     "id":"age",
+     "dataType":"integer",
+     "size":100,
+     "minSize":60
+  },
+  {
+     "header":"Visits",
+     "accessorKey":"visits",
+     "id":"visits",
+     "dataType":"integer",
+     "maxSize":150,
+     "showTotal":true,
+     "minSize":80,
+  },
+  {
+     "header":"Status",
+     "accessorKey":"status",
+     "id":"status",
+     "dataType":"text",
+     "minSize":80
+  },
+  {
+     "header":"Profile Progress",
+     "accessorKey":"progress",
+     "id":"progress",
+     "dataType":"integer",
+     "minSize":100
+  }
+];
+
+const DefaultArgs = {
+  hover: false,
+  sort: false,
+  columnResize: false,
+  pagination: false,
+  showSortIconOnHover: false,
+  summaryRow: false,
+  fullWidth: false,
+  pageSizeList: [7,10,20],
+  showTablePanel: false,
+  columns: DefaultColumns,
+  data: makeData(5),
+  panelOptions: {},
+  displayOptions: {}
+};
 
 export default {
   title: 'Components/Table',
@@ -10,7 +147,6 @@ export default {
     columns: {
       name: 'columns',
       description: 'Table header columns',
-      control: false, // The object-based controls are not rendering, making the control false.
       table: {
         type: { summary: 'ModusTableColumn[]' },
       },
@@ -19,7 +155,6 @@ export default {
     data: {
       name: 'data',
       description: 'Table data',
-      control: false, // The object-based controls are not rendering, making the control false.
       table: {
         type: { summary: 'Data[]' },
       },
@@ -117,8 +252,8 @@ export default {
     },
     panelOptions: {
       name: 'panel-options',
-      description: 'To display a panel options, which allows access to table operations like hiding columns.',
-      control: false, // The object-based controls are not rendering, making the control false.
+      description:
+        'To display a panel options, which allows access to table operations like hiding columns.',
       table: {
         type: { summary: 'ModusTablePanelOptions' },
       },
@@ -141,7 +276,7 @@ export default {
   },
 };
 
-export const Default = ({
+const Template = ({
   hover,
   sort,
   columnResize,
@@ -150,398 +285,12 @@ export const Default = ({
   showSortIconOnHover,
   summaryRow,
   fullWidth,
-}) => html`
-  <div style="width: 950px">
-    <modus-table
-      hover="${hover}"
-      sort="${sort}"
-      column-resize="${columnResize}"
-      column-reorder="${columnReorder}"
-      pagination="${pagination}"
-      show-sort-icon-on-hover="${showSortIconOnHover}"
-      summary-row="${summaryRow}"
-      full-width="${fullWidth}" />
-  </div>
-  ${defaultTable()}
-`;
-Default.args = {
-  hover: false,
-  sort: false,
-  columnResize: false,
-  columnReorder: false,
-  pagination: false,
-  showSortIconOnHover: false,
-  summaryRow: false,
-  fullWidth: false,
-};
-
-// The <script> tag cannot be used in the MDX file, so we use this method to
-// set the table data for the default story.
-const defaultTable = () => {
-  const tag = document.createElement('script');
-  tag.innerHTML = `
-    document.querySelector('modus-table').columns = [{header: 'First Name',accessorKey: 'firstName',id: 'first-name',dataType: 'text', footer: 'Total',size: 150,minSize: 80},{header: 'Last Name',accessorKey: 'lastName',id: 'last-name',dataType: 'text',size: 150,minSize: 80},{header: 'Age',accessorKey: 'age',id: 'age',dataType: 'integer',showTotal: true, size: 100,minSize: 60},{header: 'Visits',accessorKey: 'visits',id: 'visits',dataType: 'integer',maxSize: 150,minSize: 80,enableResizing: false,},{header: 'Status',accessorKey: 'status',id: 'status',dataType: 'text' ,minSize: 80},{header: 'Profile Progress',accessorKey: 'progress',id: 'progress',dataType: 'integer', showTotal: true, minSize: 100},];
-    document.querySelector('modus-table').data = [{ firstName: 'Gordon', lastName: 'Lemke', age: 40, visits: 434, progress: 97, status: 'single', createdAt: '2002-11-21T12:48:51.739Z', }, { firstName: 'Elliott', lastName: 'Bosco', age: 21, visits: 348, progress: 60, status: 'complicated', createdAt: '2012-02-08T12:14:22.776Z', }, { firstName: 'Agnes', lastName: 'Breitenberg', age: 34, visits: 639, progress: 84, status: 'single', createdAt: '1995-04-07T07:24:57.577Z', }, { firstName: 'Nicolette', lastName: 'Stamm', age: 13, visits: 518, progress: 28, status: 'relationship', createdAt: '2009-07-28T14:29:51.505Z', }, { firstName: 'Anjali', lastName: 'Ratke', age: 22, visits: 585, progress: 7, status: 'single', createdAt: '2000-09-10T12:45:15.824Z', }];
-  `;
-  return tag;
-};
-
-export const Hover = ({
-  hover,
-  sort,
-  columnResize,
-  columnReorder,
-  pagination,
-  showSortIconOnHover,
-  summaryRow,
-  fullWidth,
-}) => html`
-  <div style="width: 950px">
-    <modus-table
-      hover="${hover}"
-      sort="${sort}"
-      column-resize="${columnResize}"
-      column-reorder="${columnReorder}"
-      pagination="${pagination}"
-      show-sort-icon-on-hover="${showSortIconOnHover}"
-      summary-row="${summaryRow}"
-      full-width="${fullWidth}" />
-  </div>
-  ${hoverTable()}
-`;
-Hover.args = {
-  hover: true,
-  sort: false,
-  columnResize: false,
-  columnReorder: false,
-  pagination: false,
-  showSortIconOnHover: false,
-  summaryRow: false,
-  fullWidth: false,
-};
-
-const hoverTable = () => {
-  const tag = document.createElement('script');
-  tag.innerHTML = `
-    document.querySelector('modus-table').columns = [{header: 'First Name',accessorKey: 'firstName',id: 'first-name',dataType: 'text', footer: 'Total',size: 150,minSize: 80},{header: 'Last Name',accessorKey: 'lastName',id: 'last-name',dataType: 'text',size: 150,minSize: 80},{header: 'Age',accessorKey: 'age',id: 'age',dataType: 'integer',showTotal: true, size: 100,minSize: 60},{header: 'Visits',accessorKey: 'visits',id: 'visits',dataType: 'integer',maxSize: 150,minSize: 80,enableResizing: false,},{header: 'Status',accessorKey: 'status',id: 'status',dataType: 'text' ,minSize: 80},{header: 'Profile Progress',accessorKey: 'progress',id: 'progress',dataType: 'integer', showTotal: true, minSize: 100},];
-    document.querySelector('modus-table').data = [{ firstName: 'Gordon', lastName: 'Lemke', age: 40, visits: 434, progress: 97, status: 'single', createdAt: '2002-11-21T12:48:51.739Z', }, { firstName: 'Elliott', lastName: 'Bosco', age: 21, visits: 348, progress: 60, status: 'complicated', createdAt: '2012-02-08T12:14:22.776Z', }, { firstName: 'Agnes', lastName: 'Breitenberg', age: 34, visits: 639, progress: 84, status: 'single', createdAt: '1995-04-07T07:24:57.577Z', }, { firstName: 'Nicolette', lastName: 'Stamm', age: 13, visits: 518, progress: 28, status: 'relationship', createdAt: '2009-07-28T14:29:51.505Z', }, { firstName: 'Anjali', lastName: 'Ratke', age: 22, visits: 585, progress: 7, status: 'single', createdAt: '2000-09-10T12:45:15.824Z', }];
-  `;
-  return tag;
-};
-
-export const Borderless = ({
-  hover,
-  sort,
-  columnResize,
-  columnReorder,
-  pagination,
-  showSortIconOnHover,
-  summaryRow,
-  fullWidth,
-}) => html`
-  <div style="width: 950px">
-    <modus-table
-      hover="${hover}"
-      sort="${sort}"
-      column-resize="${columnResize}"
-      column-reorder="${columnReorder}"
-      pagination="${pagination}"
-      show-sort-icon-on-hover="${showSortIconOnHover}"
-      summary-row="${summaryRow}"
-      full-width="${fullWidth}" />
-  </div>
-  ${borderlessTable()}
-`;
-Borderless.args = {
-  hover: true,
-  sort: false,
-  columnResize: false,
-  columnReorder: false,
-  pagination: false,
-  showSortIconOnHover: false,
-  summaryRow: false,
-  fullWidth: false,
-};
-
-const borderlessTable = () => {
-  const tag = document.createElement('script');
-  tag.innerHTML = `
-    document.querySelector('modus-table').columns = [{header: 'First Name',accessorKey: 'firstName',id: 'first-name',dataType: 'text', footer: 'Total',size: 150,minSize: 80},{header: 'Last Name',accessorKey: 'lastName',id: 'last-name',dataType: 'text',size: 150,minSize: 80},{header: 'Age',accessorKey: 'age',id: 'age',dataType: 'integer',showTotal: true, size: 100,minSize: 60},{header: 'Visits',accessorKey: 'visits',id: 'visits',dataType: 'integer',maxSize: 150,minSize: 80,enableResizing: false,},{header: 'Status',accessorKey: 'status',id: 'status',dataType: 'text' ,minSize: 80},{header: 'Profile Progress',accessorKey: 'progress',id: 'progress',dataType: 'integer', showTotal: true, minSize: 100},];
-    document.querySelector('modus-table').data = [{ firstName: 'Gordon', lastName: 'Lemke', age: 40, visits: 434, progress: 97, status: 'single', createdAt: '2002-11-21T12:48:51.739Z', }, { firstName: 'Elliott', lastName: 'Bosco', age: 21, visits: 348, progress: 60, status: 'complicated', createdAt: '2012-02-08T12:14:22.776Z', }, { firstName: 'Agnes', lastName: 'Breitenberg', age: 34, visits: 639, progress: 84, status: 'single', createdAt: '1995-04-07T07:24:57.577Z', }, { firstName: 'Nicolette', lastName: 'Stamm', age: 13, visits: 518, progress: 28, status: 'relationship', createdAt: '2009-07-28T14:29:51.505Z', }, { firstName: 'Anjali', lastName: 'Ratke', age: 22, visits: 585, progress: 7, status: 'single', createdAt: '2000-09-10T12:45:15.824Z', }];
-    document.querySelector('modus-table').displayOptions = { borderless: true, cellBorderless: true }
-  `;
-  return tag;
-};
-
-export const Sorting = ({
-  hover,
-  sort,
-  showSortIconOnHover,
-  columnResize,
-  columnReorder,
-  pagination,
-  summaryRow,
-  fullWidth,
-}) => html`
-  <div style="width: 950px">
-    <modus-table
-      hover="${hover}"
-      sort="${sort}"
-      show-sort-icon-on-hover="${showSortIconOnHover}"
-      column-resize="${columnResize}"
-      column-reorder="${columnReorder}"
-      pagination="${pagination}"
-      summary-row="${summaryRow}"
-      full-width="${fullWidth}" />
-  </div>
-  ${sortingTable()}
-`;
-Sorting.args = {
-  hover: true,
-  sort: true,
-  showSortIconOnHover: false,
-  columnResize: true,
-  columnReorder: false,
-  summaryRow: false,
-  pagination: false,
-  fullWidth: false,
-};
-
-const sortingTable = () => {
-  const tag = document.createElement('script');
-  tag.innerHTML = `
-    document.querySelector('modus-table').columns = [{header: 'First Name',accessorKey: 'firstName',id: 'first-name',dataType: 'text', footer: 'Total',size: 150,minSize: 80},{header: 'Last Name',accessorKey: 'lastName',id: 'last-name',dataType: 'text',size: 150,minSize: 80},{header: 'Age',accessorKey: 'age',id: 'age',dataType: 'integer',showTotal: true, size: 100,minSize: 60},{header: 'Visits',accessorKey: 'visits',id: 'visits',dataType: 'integer',maxSize: 150,minSize: 80,enableResizing: false,},{header: 'Status',accessorKey: 'status',id: 'status',dataType: 'text' ,minSize: 80},{header: 'Profile Progress',accessorKey: 'progress',id: 'progress',dataType: 'integer', showTotal: true, minSize: 100},];
-    document.querySelector('modus-table').data = [{ firstName: 'Gordon', lastName: 'Lemke', age: 40, visits: 434, progress: 97, status: 'single', createdAt: '2002-11-21T12:48:51.739Z', }, { firstName: 'Elliott', lastName: 'Bosco', age: 21, visits: 348, progress: 60, status: 'complicated', createdAt: '2012-02-08T12:14:22.776Z', }, { firstName: 'Agnes', lastName: 'Breitenberg', age: 34, visits: 639, progress: 84, status: 'single', createdAt: '1995-04-07T07:24:57.577Z', }, { firstName: 'Nicolette', lastName: 'Stamm', age: 13, visits: 518, progress: 28, status: 'relationship', createdAt: '2009-07-28T14:29:51.505Z', }, { firstName: 'Anjali', lastName: 'Ratke', age: 22, visits: 585, progress: 7, status: 'single', createdAt: '2000-09-10T12:45:15.824Z', }];
-    document.querySelector('modus-table').displayOptions = { borderless: false, cellBorderless: false }
-  `;
-  return tag;
-};
-
-export const ValueFormatter = ({
-  hover,
-  sort,
-  columnResize,
-  columnReorder,
-  pagination,
-  showSortIconOnHover,
-  summaryRow,
-  fullWidth,
-}) => html`
-  <div style="width: 950px">
-    <modus-table
-      hover="${hover}"
-      sort="${sort}"
-      column-resize="${columnResize}"
-      column-reorder="${columnReorder}"
-      pagination="${pagination}"
-      show-sort-icon-on-hover="${showSortIconOnHover}"
-      summary-row="${summaryRow}"
-      full-width="${fullWidth}" />
-  </div>
-  ${valueFormatterTable()}
-`;
-ValueFormatter.args = {
-  hover: true,
-  sort: true,
-  columnResize: false,
-  columnReorder: false,
-  pagination: false,
-  showSortIconOnHover: true,
-  summaryRow: false,
-  fullWidth: false,
-};
-
-const valueFormatterTable = () => {
-  const tag = document.createElement('script');
-  tag.innerHTML = `
-   document.querySelector('modus-table').columns = [{ header: 'First Name', accessorKey: 'firstName', id: 'first-name', dataType: 'text' , footer: 'Total', size: 150,minSize: 80}, { header: 'Last Name', accessorKey: 'lastName', id: 'last-name', dataType: 'text', size: 150,minSize: 80}, { header: 'Age', accessorKey: 'age', id: 'age', dataType: 'integer', showTotal: true, size: 100,minSize: 60 }, { header: 'Amount', accessorKey: 'amount', id: 'amount', dataType: 'integer',size: 150,minSize: 80, cell: (props) => { return '$' + Number(props.cell.getValue()).toFixed(2).replace(/\\d(?=(\\d{3})+\\.)/g, '$&,') }, }, { header: 'Status', accessorKey: 'status', id: 'status', dataType: 'text', minSize: 80}, { header: 'Profile Progress', accessorKey: 'progress', id: 'progress', dataType: 'integer',minSize: 100, cell: (props) => { return  Number(props.cell.getValue()).toFixed(2).replace(/\\d(?=(\\d{3})+\\.)/g, '$&,') }, }, { header: 'Created At', accessorKey: 'createdAt', id: 'createdAt', dataType: 'text', cell: (props) => { const date = new Date(props.cell.getValue()); return ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear(); }, }];
-   document.querySelector('modus-table').data = [{ "firstName": "Chaim", "lastName": "Lubowitz", "age": 30, "amount": 330160, "progress": 99, "status": "single", "createdAt": "2002-11-19T12:48:51.739Z" }, { "firstName": "Vicky", "lastName": "Lehner", "age": 2, "amount": 41900, "progress": 36, "status": "single", "createdAt": "2003-10-02T12:48:51.739Z" }, { "firstName": "Nellie", "lastName": "Leuschke", "age": 15, "amount": 883112, "progress": 68, "status": "single", "createdAt": "2004-09-21T12:48:51.739Z" }, { "firstName": "Judy", "lastName": "Ritchie", "age": 3, "amount": 900293, "progress": 10, "status": "relationship", "createdAt": "2005-08-11T12:48:51.739Z" }, { "firstName": "Hertha", "lastName": "Bradtke", "age": 19, "amount": 112116, "progress": 87, "status": "relationship", "createdAt": "2006-07-13T12:48:51.739Z" }];
-  `;
-  return tag;
-};
-
-export const ColumnResize = ({
-  hover,
-  sort,
-  columnResize,
-  columnReorder,
-  fullWidth,
-  showSortIconOnHover,
-  pagination,
-  summaryRow,
-}) => html`
-  <div style="width: 950px">
-    <modus-table
-      hover="${hover}"
-      sort="${sort}"
-      column-resize="${columnResize}"
-      full-width="${fullWidth}"
-      show-sort-icon-on-hover="${showSortIconOnHover}"
-      pagination="${pagination}"
-      column-reorder="${columnReorder}"
-      summary-row="${summaryRow}" />
-  </div>
-  ${columnResizeTable()}
-`;
-ColumnResize.args = {
-  hover: true,
-  sort: true,
-  columnResize: true,
-  columnReorder: false,
-  fullWidth: false,
-  showSortIconOnHover: false,
-  pagination: false,
-  summaryRow: false,
-};
-
-const columnResizeTable = () => {
-  const tag = document.createElement('script');
-  tag.innerHTML = `
-  document.querySelector('modus-table').columns = [{header: 'First Name',accessorKey: 'firstName',id: 'first-name',dataType: 'text',size: 150,minSize: 80},{header: 'Last Name',accessorKey: 'lastName',id: 'last-name',dataType: 'text',size: 150,minSize: 80},{header: 'Age',accessorKey: 'age',id: 'age',dataType: 'integer',size: 100,minSize: 60},{header: 'Visits',accessorKey: 'visits',id: 'visits',dataType: 'integer',maxSize: 150,minSize: 80,enableResizing: false,},{header: 'Status',accessorKey: 'status',id: 'status',dataType: 'text' ,minSize: 80},{header: 'Profile Progress',accessorKey: 'progress',id: 'progress',dataType: 'integer',minSize: 100},];
-  document.querySelector('modus-table').data = [{ firstName: 'Gordon', lastName: 'Lemke', age: 40, visits: 434, progress: 97, status: 'single', createdAt: '2002-11-21T12:48:51.739Z', }, { firstName: 'Elliott', lastName: 'Bosco', age: 21, visits: 348, progress: 60, status: 'complicated', createdAt: '2012-02-08T12:14:22.776Z', }, { firstName: 'Agnes', lastName: 'Breitenberg', age: 34, visits: 639, progress: 84, status: 'single', createdAt: '1995-04-07T07:24:57.577Z', }, { firstName: 'Nicolette', lastName: 'Stamm', age: 13, visits: 518, progress: 28, status: 'relationship', createdAt: '2009-07-28T14:29:51.505Z', }, { firstName: 'Anjali', lastName: 'Ratke', age: 22, visits: 585, progress: 7, status: 'single', createdAt: '2000-09-10T12:45:15.824Z', }, { "firstName": "Chaim", "lastName": "Lubowitz", "age": 30, "amount": 336, "progress": 99, "status": "single", }, { "firstName": "Vicky", "lastName": "Lehner", "age": 2, "amount": 419, "progress": 36, "status": "single", }, { "firstName": "Nellie", "lastName": "Leuschke", "age": 15, "amount": 883, "progress": 68, "status": "single", }];
-  `;
-  return tag;
-};
-
-export const ColumnReorder = ({
-  hover,
-  sort,
-  columnResize,
-  columnReorder,
-  fullWidth,
-  showSortIconOnHover,
-  pagination,
-  summaryRow,
-}) => html`
-  <div style="width: 950px">
-    <modus-table
-      hover="${hover}"
-      sort="${sort}"
-      column-resize="${columnResize}"
-      full-width="${fullWidth}"
-      show-sort-icon-on-hover="${showSortIconOnHover}"
-      pagination="${pagination}"
-      column-reorder="${columnReorder}"
-      summary-row="${summaryRow}" />
-  </div>
-  ${columnReorderTable()}
-`;
-
-ColumnReorder.args = {
-  hover: true,
-  sort: true,
-  columnResize: true,
-  columnReorder: true,
-  fullWidth: false,
-  showSortIconOnHover: false,
-  pagination: false,
-  summaryRow: false,
-};
-
-const columnReorderTable = () => {
-  const tag = document.createElement('script');
-  tag.innerHTML = `
-  document.querySelector('modus-table').columns = [{header: 'First Name',accessorKey: 'firstName',id: 'first-name',dataType: 'text',size: 150,minSize: 80},{header: 'Last Name',accessorKey: 'lastName',id: 'last-name',dataType: 'text',size: 150,minSize: 80},{header: 'Age',accessorKey: 'age',id: 'age',dataType: 'integer',size: 100,minSize: 60},{header: 'Visits',accessorKey: 'visits',id: 'visits',dataType: 'integer',maxSize: 150,minSize: 80,enableResizing: false,},{header: 'Status',accessorKey: 'status',id: 'status',dataType: 'text' ,minSize: 80},{header: 'Profile Progress',accessorKey: 'progress',id: 'progress',dataType: 'integer',minSize: 100},];
-  document.querySelector('modus-table').data = [{ firstName: 'Gordon', lastName: 'Lemke', age: 40, visits: 434, progress: 97, status: 'single', createdAt: '2002-11-21T12:48:51.739Z', }, { firstName: 'Elliott', lastName: 'Bosco', age: 21, visits: 348, progress: 60, status: 'complicated', createdAt: '2012-02-08T12:14:22.776Z', }, { firstName: 'Agnes', lastName: 'Breitenberg', age: 34, visits: 639, progress: 84, status: 'single', createdAt: '1995-04-07T07:24:57.577Z', }, { firstName: 'Nicolette', lastName: 'Stamm', age: 13, visits: 518, progress: 28, status: 'relationship', createdAt: '2009-07-28T14:29:51.505Z', }, { firstName: 'Anjali', lastName: 'Ratke', age: 22, visits: 585, progress: 7, status: 'single', createdAt: '2000-09-10T12:45:15.824Z', }, ];
-  `;
-  return tag;
-};
-
-export const Pagination = ({
-  hover,
-  sort,
-  columnResize,
-  columnReorder,
-  pagination,
-  showSortIconOnHover,
-  summaryRow,
-  fullWidth,
-}) => html`
-  <div style="width: 950px">
-    <modus-table
-      hover="${hover}"
-      sort="${sort}"
-      column-resize="${columnResize}"
-      column-reorder="${columnReorder}"
-      pagination="${pagination}"
-      show-sort-icon-on-hover="${showSortIconOnHover}"
-      summary-row="${summaryRow}"
-      full-width="${fullWidth}" />
-  </div>
-  ${paginationTable()}
-`;
-Pagination.args = {
-  hover: true,
-  sort: true,
-  columnResize: true,
-  columnReorder: true,
-  pagination: true,
-  showSortIconOnHover: false,
-  summaryRow: false,
-  fullWidth: false,
-};
-
-const paginationTable = () => {
-  const tag = document.createElement('script');
-  tag.innerHTML = `
-    document.querySelector('modus-table').columns = [{header: 'First Name',accessorKey: 'firstName',id: 'first-name',dataType: 'text', footer: 'Total',size: 150,minSize: 80},{header: 'Last Name',accessorKey: 'lastName',id: 'last-name',dataType: 'text',size: 150,minSize: 80},{header: 'Age',accessorKey: 'age',id: 'age',dataType: 'integer',showTotal: true, size: 100,minSize: 60},{header: 'Visits',accessorKey: 'visits',id: 'visits',dataType: 'integer',maxSize: 150,minSize: 80,enableResizing: false,},{header: 'Status',accessorKey: 'status',id: 'status',dataType: 'text' ,minSize: 80},{header: 'Profile Progress',accessorKey: 'progress',id: 'progress',dataType: 'integer', showTotal: true, minSize: 100},];
-    document.querySelector('modus-table').pageSizeList = [5,10,20,50,100]; ${BulkTableData}`;
-  return tag;
-};
-
-export const SummaryRow = ({
-  hover,
-  sort,
-  columnResize,
-  columnReorder,
-  pagination,
-  showSortIconOnHover,
-  summaryRow,
-  fullWidth,
-}) => html`
-  <div style="width: 950px">
-    <modus-table
-      hover="${hover}"
-      sort="${sort}"
-      column-resize="${columnResize}"
-      column-reorder="${columnReorder}"
-      pagination="${pagination}"
-      show-sort-icon-on-hover="${showSortIconOnHover}"
-      summary-row="${summaryRow}"
-      full-width="${fullWidth}" />
-  </div>
-  <div style="width: 950px"></div>
-  ${summaryRowTable()}
-`;
-SummaryRow.args = {
-  hover: true,
-  sort: true,
-  columnResize: true,
-  columnReorder: true,
-  pagination: true,
-  showSortIconOnHover: true,
-  summaryRow: true,
-  fullWidth: false,
-};
-
-const summaryRowTable = () => {
-  const tag = document.createElement('script');
-  tag.innerHTML = `
-    document.querySelector('modus-table').columns = [{header: 'First Name',accessorKey: 'firstName',id: 'first-name',dataType: 'text', footer: 'Total',size: 150,minSize: 80},{header: 'Last Name',accessorKey: 'lastName',id: 'last-name',dataType: 'text',size: 150,minSize: 80},{header: 'Age',accessorKey: 'age',id: 'age',dataType: 'integer',showTotal: true, size: 100,minSize: 60},{header: 'Visits',accessorKey: 'visits',id: 'visits',dataType: 'integer',maxSize: 150,minSize: 80,enableResizing: false,},{header: 'Status',accessorKey: 'status',id: 'status',dataType: 'text' ,minSize: 80},{header: 'Profile Progress',accessorKey: 'progress',id: 'progress',dataType: 'integer', showTotal: true, minSize: 100},];
-    document.querySelector('modus-table').pageSizeList = [5,10,20,50,100]; ${BulkTableData}`;
-  return tag;
-};
-
-export const ColumnVisibility = ({
-  hover,
-  sort,
-  columnResize,
-  columnReorder,
-  pagination,
-  showSortIconOnHover,
-  summaryRow,
-  fullWidth,
+  pageSizeList,
   showTablePanel,
+  columns,
+  data,
+  panelOptions,
+  displayOptions
 }) => html`
   <div style="width: 950px">
     <modus-table
@@ -555,29 +304,101 @@ export const ColumnVisibility = ({
       full-width="${fullWidth}"
       show-table-panel="${showTablePanel}" />
   </div>
-  ${columnVisibility()}
+  ${initializeTable(columns, data, pageSizeList, panelOptions, displayOptions)}
 `;
-ColumnVisibility.args = {
-  hover: true,
-  sort: true,
-  columnResize: true,
-  columnReorder: true,
-  pagination: true,
-  showSortIconOnHover: true,
+
+export const Default = Template.bind({});
+Default.args = DefaultArgs;
+
+export const Hover = Template.bind({});
+Hover.args = { ...DefaultArgs, hover: true
+};
+
+export const Borderless = Template.bind({});
+Borderless.args = { ...DefaultArgs, displayOptions: {
+  borderless: true,
+  cellBorderless: true
+}
+};
+
+export const Sorting = Template.bind({});
+Sorting.args = { ...DefaultArgs, sort: true
+};
+
+export const ValueFormatter = ({
+  hover,
+  sort,
+  columnResize,
+  pagination,
+  showSortIconOnHover,
+  summaryRow,
+  fullWidth,
+  pageSizeList,
+  showTablePanel,
+  panelOptions,
+  displayOptions
+}) => html`
+  <div style="width: 950px">
+    <modus-table
+    hover="${hover}"
+    sort="${sort}"
+    column-resize="${columnResize}"
+    pagination="${pagination}"
+    show-sort-icon-on-hover="${showSortIconOnHover}"
+    summary-row="${summaryRow}"
+    full-width="${fullWidth}"
+    show-table-panel="${showTablePanel}" />
+  </div>
+  ${valueFormatterTable(pageSizeList, panelOptions, displayOptions)}
+`;
+ValueFormatter.args = {
+  hover: false,
+  sort: false,
+  columnResize: false,
+  pagination: false,
+  showSortIconOnHover: false,
   summaryRow: false,
   fullWidth: false,
-  showTablePanel: true,
+  pageSizeList: [7,10,20],
+  showTablePanel: false,
+  panelOptions: {},
+  displayOptions: {}
 };
-const columnVisibility = () => {
+const valueFormatterTable = (pageSizeList, panelOptions, displayOptions) => {
   const tag = document.createElement('script');
   tag.innerHTML = `
-    document.querySelector('modus-table').panelOptions = {
-      columnsVisibility: {
-        title: '',
-        requiredColumns: ['age', 'visits']
-      }
-    };
-    document.querySelector('modus-table').columns = [{header: 'First Name',accessorKey: 'firstName',id: 'first-name',dataType: 'text', footer: 'Total',size: 150,minSize: 80},{header: 'Last Name',accessorKey: 'lastName',id: 'last-name',dataType: 'text',size: 150,minSize: 80},{header: 'Age',accessorKey: 'age',id: 'age',dataType: 'integer',showTotal: true, size: 100,minSize: 60},{header: 'Visits',accessorKey: 'visits',id: 'visits',dataType: 'integer',maxSize: 150,minSize: 80,enableResizing: false,},{header: 'Status',accessorKey: 'status',id: 'status',dataType: 'text' ,minSize: 80},{header: 'Profile Progress',accessorKey: 'progress',id: 'progress',dataType: 'integer', showTotal: true, minSize: 100},];
-    document.querySelector('modus-table').pageSizeList = [5,10,20,50,100]; ${BulkTableData}`;
+   document.querySelector('modus-table').columns = [{ header: 'First Name', accessorKey: 'firstName', id: 'first-name', dataType: 'text' , footer: 'Total', size: 150,minSize: 80}, { header: 'Last Name', accessorKey: 'lastName', id: 'last-name', dataType: 'text', size: 150,minSize: 80}, { header: 'Age', accessorKey: 'age', id: 'age', dataType: 'integer', showTotal: true, size: 100,minSize: 60 }, { header: 'Amount', accessorKey: 'amount', id: 'amount', dataType: 'integer',size: 150,minSize: 80, cell: (props) => { return '$' + Number(props.cell.getValue()).toFixed(2).replace(/\\d(?=(\\d{3})+\\.)/g, '$&,') }, }, { header: 'Status', accessorKey: 'status', id: 'status', dataType: 'text', minSize: 80}, { header: 'Profile Progress', accessorKey: 'progress', id: 'progress', dataType: 'integer',minSize: 100, cell: (props) => { return  Number(props.cell.getValue()).toFixed(2).replace(/\\d(?=(\\d{3})+\\.)/g, '$&,') }, }, { header: 'Created At', accessorKey: 'createdAt', id: 'createdAt', dataType: 'text', cell: (props) => { const date = new Date(props.cell.getValue()); return ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear(); }, }];
+   document.querySelector('modus-table').data = [{ "firstName": "Chaim", "lastName": "Lubowitz", "age": 30, "amount": 330160, "progress": 99, "status": "single", "createdAt": "2002-11-19T12:48:51.739Z" }, { "firstName": "Vicky", "lastName": "Lehner", "age": 2, "amount": 41900, "progress": 36, "status": "single", "createdAt": "2003-10-02T12:48:51.739Z" }, { "firstName": "Nellie", "lastName": "Leuschke", "age": 15, "amount": 883112, "progress": 68, "status": "single", "createdAt": "2004-09-21T12:48:51.739Z" }, { "firstName": "Judy", "lastName": "Ritchie", "age": 3, "amount": 900293, "progress": 10, "status": "relationship", "createdAt": "2005-08-11T12:48:51.739Z" }, { "firstName": "Hertha", "lastName": "Bradtke", "age": 19, "amount": 112116, "progress": 87, "status": "relationship", "createdAt": "2006-07-13T12:48:51.739Z" }];
+
+   document.querySelector('modus-table').pageSizeList = ${JSON.stringify(pageSizeList)};
+  document.querySelector('modus-table').panelOptions = ${JSON.stringify(panelOptions)};
+  document.querySelector('modus-table').displayOptions = ${JSON.stringify(displayOptions)};
+  `;
   return tag;
 };
+
+export const ColumnResize = Template.bind({});
+ColumnResize.args = { ...DefaultArgs, columnResize: true
+};
+
+export const Pagination = Template.bind({});
+Pagination.args = { ...DefaultArgs, pagination: true,data: makeData(50), pageSizeList: [5, 10, 50]
+};
+
+export const SummaryRow = Template.bind({});
+SummaryRow.args = { ...DefaultArgs, summaryRow: true,
+};
+
+export const ColumnsVisibility = Template.bind({});
+ColumnsVisibility.args = { ...DefaultArgs, panelOptions: {
+  columnsVisibility: {
+    title: '',
+    requiredColumns: ['age', 'visits']
+  }
+}, showTablePanel: true
+};
+
+export const ColumnReorder = Template.bind({});
+ColumnReorder.args = { ...DefaultArgs, columnReorder: true,
+};
+
