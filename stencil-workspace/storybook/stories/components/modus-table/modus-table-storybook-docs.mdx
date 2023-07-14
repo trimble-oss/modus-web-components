@@ -16,6 +16,7 @@ import { Story } from '@storybook/addon-docs';
 - [Sorting](#sorting)
 - [Value Formatter](#value-formatter)
 - [Column Resize](#column-resize)
+- [Column Reorder](#column-reorder)
 - [Pagination](#pagination)
 - [Summary Row](#summary-row)
 - [Column Visibility](#column-visibility)
@@ -268,6 +269,14 @@ The column sizing feature allows users to dynamically change the width of all co
 </html>
 ```
 
+### Column Reorder
+
+Users can rearrange the column headers.
+
+- Column reorder is disabled by default. The way to activate it is to set `columnReorder` to `true`.
+
+<Story id="components-table--column-reorder" height={'350px'} />
+
 ### Pagination
 
 Pagination allows users to navigate between pages
@@ -375,20 +384,21 @@ Users can use keyboard navigation to perform different actions.
 
 ### Properties
 
-| Property              | Attribute                 | Description                                                                                                 | Type                          | Default      |
-| --------------------- | ------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------- | ------------ |
-| `columns`             | `columns`                 | (required) To display headers in the table.                                                                 | `ModusTableColumn[]`          | `undefined`  |
-| `data`                | `data`                    | (required) To display data in the table.                                                                    | `Array`                       | `undefined`  |
-| `hover`               | `hover`                   | (optional) To enable row hover in table.                                                                    | `boolean`                     | `false`      |
-| `sort`                | `sort`                    | (optional) To sort data in table.                                                                           | `boolean`                     | `false`      |
-| `showSortIconOnHover` | `show-sort-icon-on-hover` | (optional) To display sort icon on hover.                                                                   | `boolean`                     | `false`      |
-| `displayOptions`      | `display-options`         | (optional) To control display options of table.                                                             | `boolean`                     | `false`      |
-| `pagination`          | `pagination`              | (optional) To enable pagination of table.                                                                   | `boolean`                     | `false`      |
-| `pageSizeList`        | `page-size-list`          | (optional) To display page size options of table.                                                           | `Array`                       | `[10,20,50]` |
-| `columnResize`        | `column-resize`           | (optional) To enable column resizing of table.                                                              | `boolean`                     | `false`      |
-| `summaryRow`          | `summary-row`             | (optional) To display summary row in table. Is used to display total.                                       | `boolean`                     | `false`      |
-| `fullWidth`           | `full-width`              | (optional) To manage table width.                                                                           | `boolean`                     | `false`      |
-| `panelOptions`        | `panel-options`           | (Optional) To display a panel above the table, which allows access to table operations like hiding columns. | `ModusTablePanelOptions`      | `null`       |
+| Property              | Attribute                 | Description                                                                                                 | Type                     | Default      |
+| --------------------- | ------------------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------ | ------------ |
+| `columns`             | `columns`                 | (required) To display headers in the table.                                                                 | `ModusTableColumn[]`     | `undefined`  |
+| `data`                | `data`                    | (required) To display data in the table.                                                                    | `Array`                  | `undefined`  |
+| `hover`               | `hover`                   | (optional) To enable row hover in table.                                                                    | `boolean`                | `false`      |
+| `sort`                | `sort`                    | (optional) To sort data in table.                                                                           | `boolean`                | `false`      |
+| `showSortIconOnHover` | `show-sort-icon-on-hover` | (optional) To display sort icon on hover.                                                                   | `boolean`                | `false`      |
+| `displayOptions`      | `display-options`         | (optional) To control display options of table.                                                             | `boolean`                | `false`      |
+| `pagination`          | `pagination`              | (optional) To enable pagination of table.                                                                   | `boolean`                | `false`      |
+| `pageSizeList`        | `page-size-list`          | (optional) To display page size options of table.                                                           | `Array`                  | `[10,20,50]` |
+| `columnResize`        | `column-resize`           | (optional) To enable column resizing of table.                                                              | `boolean`                | `false`      |
+| `columnReorder`       | `column-reorder`          | (optional) To enable re-ordering of the table columns.                                                      | `boolean`                | `false`      |
+| `summaryRow`          | `summary-row`             | (optional) To display summary row in table. Is used to display total.                                       | `boolean`                | `false`      |
+| `fullWidth`           | `full-width`              | (optional) To manage table width.                                                                           | `boolean`                | `true`       |
+| `panelOptions`        | `panel-options`           | (Optional) To display a panel above the table, which allows access to table operations like hiding columns. | `ModusTablePanelOptions` | `null`       |
 
 ### Events
 
@@ -400,11 +410,11 @@ Users can use keyboard navigation to perform different actions.
 
 Users can use this to provide custom elements.
 
-| Name                 | Description                                                                                  |
-| -------------------- | -------------------------------------------------------------------------------------------- |
-| `customFooter`       | To view a custom footer `slot` with name `customFooter` can be used.                         |
-| `panelGroupLeft`     | To add content to the panel's left section, `slot` with name `panelGroupLeft` can be used.   |
-| `panelGroupRight`    | To add content to the panel's right section, `slot` with name `panelGroupRight` can be used. |
+| Name              | Description                                                                                  |
+| ----------------- | -------------------------------------------------------------------------------------------- |
+| `customFooter`    | To view a custom footer `slot` with name `customFooter` can be used.                         |
+| `panelGroupLeft`  | To add content to the panel's left section, `slot` with name `panelGroupLeft` can be used.   |
+| `panelGroupRight` | To add content to the panel's right section, `slot` with name `panelGroupRight` can be used. |
 
 ### Methods
 

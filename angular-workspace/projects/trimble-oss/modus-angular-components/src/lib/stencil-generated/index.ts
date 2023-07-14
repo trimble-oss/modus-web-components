@@ -37,6 +37,7 @@ export const DIRECTIVES = [
   d.ModusSpinner,
   d.ModusSwitch,
   d.ModusTable,
+  d.ModusTablePanel,
   d.ModusTabs,
   d.ModusTextInput,
   d.ModusTimePicker,

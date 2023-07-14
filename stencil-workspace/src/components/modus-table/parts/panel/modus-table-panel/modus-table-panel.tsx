@@ -17,6 +17,7 @@ import { ModusTablePanelOptions } from '../../../models';
 export class ModusTablePanel {
   /** Table data. */
   @Prop() table: Table<unknown>;
+
   /** (Optional) To display a panel options, which allows access to table operations like hiding columns. */
   @Prop() panelOptions: ModusTablePanelOptions;
 
@@ -27,11 +28,7 @@ export class ModusTablePanel {
   handleClickOutside(event: MouseEvent): void {
     // Closing the dropdown when click outside
     const withinBoundaries: EventTarget[] = event.composedPath();
-    if (
-      !withinBoundaries.find(
-        (item) => item['className'] === 'dropdown-menu-container'
-      )
-    ) {
+    if (!withinBoundaries.find((item) => item['className'] === 'dropdown-menu-container')) {
       this.showDropdownMenu = false;
     }
     event.preventDefault();
@@ -48,7 +45,7 @@ export class ModusTablePanel {
       <Host>
         <div class="table-panel">
           <div class="panel-section">
-          <slot name="left-section" />
+            <slot name="left-section" />
           </div>
           <div class="panel-section">
             <slot name="right-section" />

@@ -299,7 +299,7 @@ export class ModusDataTable {
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['sortChange']);
+    proxyOutputs(this, this.el, ['cellLinkClick', 'rowDoubleClick', 'selection', 'sort', 'rowActionClick']);
   }
 }
 
@@ -754,14 +754,14 @@ export declare interface ModusNumberInput extends Components.ModusNumberInput {
 
 
 @ProxyCmp({
-  inputs: ['activePage', 'ariaLabel', 'maxPage', 'minPage', 'size']
+  inputs: ['activePage', 'ariaLabel', 'maxPage', 'minPage', 'nextPageButtonText', 'prevPageButtonText', 'size']
 })
 @Component({
   selector: 'modus-pagination',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['activePage', 'ariaLabel', 'maxPage', 'minPage', 'size'],
+  inputs: ['activePage', 'ariaLabel', 'maxPage', 'minPage', 'nextPageButtonText', 'prevPageButtonText', 'size'],
 })
 export class ModusPagination {
   protected el: HTMLElement;
@@ -993,52 +993,6 @@ export class ModusSwitch {
   }
 }
 
-import type { ModusTableCellLink as IModusTableModusTableCellLink } from '@trimble-oss/modus-web-components';
-import type { ModusTableSortEvent as IModusTableModusTableSortEvent } from '@trimble-oss/modus-web-components';
-import type { ModusTableRowActionClickEvent as IModusTableModusTableRowActionClickEvent } from '@trimble-oss/modus-web-components';
-export declare interface ModusTable extends Components.ModusTable {
-  /**
-   * An event that fires on cell link click. 
-   */
-  cellLinkClick: EventEmitter<CustomEvent<IModusTableModusTableCellLink>>;
-  /**
-   * An event that fires on row double click. 
-   */
-  rowDoubleClick: EventEmitter<CustomEvent<string>>;
-  /**
-   * An event that fires on selection change. 
-   */
-  selection: EventEmitter<CustomEvent<string[]>>;
-  /**
-   * An event that fires on column sort. 
-   */
-  sort: EventEmitter<CustomEvent<IModusTableModusTableSortEvent>>;
-  /**
-   * An event that fires when a row action is clicked. 
-   */
-  rowActionClick: EventEmitter<CustomEvent<IModusTableModusTableRowActionClickEvent>>;
-
-}
-
-@ProxyCmp({
-  defineCustomElementFn: undefined,
-  inputs: ['columns', 'data', 'displayOptions', 'rowActions', 'selectionOptions', 'sortOptions']
-})
-@Component({
-  selector: 'modus-table',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '<ng-content></ng-content>',
-  inputs: ['columns', 'data', 'displayOptions', 'rowActions', 'selectionOptions', 'sortOptions']
-})
-export class ModusTable {
-  protected el: HTMLElement;
-  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
-    c.detach();
-    this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['cellLinkClick', 'rowDoubleClick', 'selection', 'sort', 'rowActionClick']);
-  }
-}
-
 
 export declare interface ModusSwitch extends Components.ModusSwitch {
   /**
@@ -1046,6 +1000,59 @@ export declare interface ModusSwitch extends Components.ModusSwitch {
    */
   switchClick: EventEmitter<CustomEvent<boolean>>;
 }
+
+
+@ProxyCmp({
+  inputs: ['columnReorder', 'columnResize', 'columns', 'data', 'displayOptions', 'fullWidth', 'hover', 'pageSizeList', 'pagination', 'panelOptions', 'showSortIconOnHover', 'sort', 'summaryRow'],
+  methods: ['getColumnData']
+})
+@Component({
+  selector: 'modus-table',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['columnReorder', 'columnResize', 'columns', 'data', 'displayOptions', 'fullWidth', 'hover', 'pageSizeList', 'pagination', 'panelOptions', 'showSortIconOnHover', 'sort', 'summaryRow'],
+})
+export class ModusTable {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['sortChange']);
+  }
+}
+
+
+import type { ModusTableSortingState as IModusTableModusTableSortingState } from '@trimble-oss/modus-web-components';
+
+export declare interface ModusTable extends Components.ModusTable {
+  /**
+   * Emits event on sort change
+   */
+  sortChange: EventEmitter<CustomEvent<IModusTableModusTableSortingState>>;
+}
+
+
+@ProxyCmp({
+  inputs: ['panelOptions', 'table']
+})
+@Component({
+  selector: 'modus-table-panel',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['panelOptions', 'table'],
+})
+export class ModusTablePanel {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
+export declare interface ModusTablePanel extends Components.ModusTablePanel {}
 
 
 @ProxyCmp({

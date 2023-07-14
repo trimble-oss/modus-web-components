@@ -43,6 +43,7 @@ export const ModusSlider = /*@__PURE__*/createReactComponent<JSX.ModusSlider, HT
 export const ModusSpinner = /*@__PURE__*/createReactComponent<JSX.ModusSpinner, HTMLModusSpinnerElement>('modus-spinner');
 export const ModusSwitch = /*@__PURE__*/createReactComponent<JSX.ModusSwitch, HTMLModusSwitchElement>('modus-switch');
 export const ModusTable = /*@__PURE__*/createReactComponent<JSX.ModusTable, HTMLModusTableElement>('modus-table');
+export const ModusTablePanel = /*@__PURE__*/createReactComponent<JSX.ModusTablePanel, HTMLModusTablePanelElement>('modus-table-panel');
 export const ModusTabs = /*@__PURE__*/createReactComponent<JSX.ModusTabs, HTMLModusTabsElement>('modus-tabs');
 export const ModusTextInput = /*@__PURE__*/createReactComponent<JSX.ModusTextInput, HTMLModusTextInputElement>('modus-text-input');
 export const ModusTimePicker = /*@__PURE__*/createReactComponent<JSX.ModusTimePicker, HTMLModusTimePickerElement>('modus-time-picker');
