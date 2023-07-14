@@ -16,6 +16,7 @@ import { Story } from '@storybook/addon-docs';
 - [Sorting](#sorting)
 - [Value Formatter](#value-formatter)
 - [Column Resize](#column-resize)
+- [Column Reorder](#column-reorder)
 - [Pagination](#pagination)
 - [Summary Row](#summary-row)
 - [Column Visibility](#column-visibility)
@@ -185,7 +186,7 @@ User can take the data of a cell and apply any string-based formatting logic.
 The column sizing feature allows users to dynamically change the width of all columns by dragging the column headers. When hovering above the dividing line between two columns, there is a visual indicator that shows the column is adjustable.
 
 - By default, the table will get a fixed size by calculating the sum of the sizes of all columns and resizing a column will not impact others.
-- By setting `fullWidth` to true,  a column can be resized with table responsiveness and other columns will be adjusted to fit within the confines of the table.
+- By setting `fullWidth` to true, a column can be resized with table responsiveness and other columns will be adjusted to fit within the confines of the table.
 - Optionally you can specify the width of each column using `size`, `minSize` and `maxSize` to limit the resizing of a column to a specific value.
 
 <Story id="components-table--column-resize" height={'350px'} />
@@ -267,6 +268,14 @@ The column sizing feature allows users to dynamically change the width of all co
   </script>
 </html>
 ```
+
+### Column Reorder
+
+Users can rearrange the column headers.
+
+- Column reorder is disabled by default. The way to activate it is to set `columnReorder` to `true`.
+
+<Story id="components-table--column-reorder" height={'350px'} />
 
 ### Pagination
 
@@ -368,30 +377,32 @@ interface ModusTablePanelOptions {
 
 Users can use keyboard navigation to perform different actions.
 
-| Name              | Description                                                                                                                                                                                                                                                                                                            |
-| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Sorting           | The `tab` key is used for navigating between the sort icons, while the `enter` key is used to interact with the icon.                                                                                                                                                                                                  |
-| Pagination        | Users can change page size and page number using keyboard navigation. The Tab key brings focus to an element and the Enter key is used to perform an action like selecting a page size and page number.                                                                                                                |
-| Column Resize     | Users can select the column for resizing by using the `Tab` key. and by pressing the `Spacebar` or `Enter` key to enable the column resize for the selected column. To resize, use the `left`/`right` keys. When the `Enter` or `Spacebar` key is pressed, its position is saved.                                      |
-| Column Visibility | The meatball icon buttom will get focus by using the `Tab` key. By pressing `Enter or Spacebar`, a dropdown will be opened; press the `Escape` key to close the dropdown. Using `Tab or Shift+Tab` / `ArrowUp or ArrowDown`, column checkboxes/items can get focus to change state by pressing the `Enter or Spacebar`.|
+| Name              | Description                                                                                                                                                                                                                                                                                                             |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Sorting           | The `tab` key is used for navigating between the sort icons, while the `enter` key is used to interact with the icon.                                                                                                                                                                                                   |
+| Pagination        | Users can change page size and page number using keyboard navigation. The Tab key brings focus to an element and the Enter key is used to perform an action like selecting a page size and page number.                                                                                                                 |
+| Column Resize     | Users can select the column for resizing by using the `Tab` key. and by pressing the `Spacebar` or `Enter` key to enable the column resize for the selected column. To resize, use the `left`/`right` keys. When the `Enter` or `Spacebar` key is pressed, its position is saved.                                       |
+| Column Reorder    | Users can navigated to the column to be reorder by using the `Tab` key. By pressing `Enter` key selects the column header, to move to the desired location user can use `left`/`right` keys and the column can be dropped by `Enter` key.                                                                               |
+| Column Visibility | The meatball icon buttom will get focus by using the `Tab` key. By pressing `Enter or Spacebar`, a dropdown will be opened; press the `Escape` key to close the dropdown. Using `Tab or Shift+Tab` / `ArrowUp or ArrowDown`, column checkboxes/items can get focus to change state by pressing the `Enter or Spacebar`. |
 
 ### Properties
 
-| Property              | Attribute                 | Description                                                                                                 | Type                          | Default      |
-| --------------------- | ------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------- | ------------ |
-| `columns`             | `columns`                 | (required) To display headers in the table.                                                                 | `ModusTableColumn[]`          | `undefined`  |
-| `data`                | `data`                    | (required) To display data in the table.                                                                    | `Array`                       | `undefined`  |
-| `hover`               | `hover`                   | (optional) To enable row hover in table.                                                                    | `boolean`                     | `false`      |
-| `sort`                | `sort`                    | (optional) To sort data in table.                                                                           | `boolean`                     | `false`      |
-| `showSortIconOnHover` | `show-sort-icon-on-hover` | (optional) To display sort icon on hover.                                                                   | `boolean`                     | `false`      |
-| `displayOptions`      | `display-options`         | (optional) To control display options of table.                                                             | `boolean`                     | `false`      |
-| `pagination`          | `pagination`              | (optional) To enable pagination of table.                                                                   | `boolean`                     | `false`      |
-| `pageSizeList`        | `page-size-list`          | (optional) To display page size options of table.                                                           | `Array`                       | `[10,20,50]` |
-| `columnResize`        | `column-resize`           | (optional) To enable column resizing of table.                                                              | `boolean`                     | `false`      |
-| `summaryRow`          | `summary-row`             | (optional) To display summary row in table. Is used to display total.                                       | `boolean`                     | `false`      |
-| `fullWidth`           | `full-width`              | (optional) To manage table width.                                                                           | `boolean`                     | `false`      |
-| `showTablePanel`      | `show-table-panel`        | (optional) To display table panel. Is used to display panel options.                                        | `boolean`                     | `false`      |
-| `panelOptions`        | `panel-options`           | (Optional) To display a panel above the table, which allows access to table operations like hiding columns. | `ModusTablePanelOptions`      | `null`       |
+| Property              | Attribute                 | Description                                                                                                 | Type                     | Default      |
+| --------------------- | ------------------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------ | ------------ |
+| `columns`             | `columns`                 | (required) To display headers in the table.                                                                 | `ModusTableColumn[]`     | `undefined`  |
+| `data`                | `data`                    | (required) To display data in the table.                                                                    | `Array`                  | `undefined`  |
+| `hover`               | `hover`                   | (optional) To enable row hover in table.                                                                    | `boolean`                | `false`      |
+| `sort`                | `sort`                    | (optional) To sort data in table.                                                                           | `boolean`                | `false`      |
+| `showSortIconOnHover` | `show-sort-icon-on-hover` | (optional) To display sort icon on hover.                                                                   | `boolean`                | `false`      |
+| `displayOptions`      | `display-options`         | (optional) To control display options of table.                                                             | `boolean`                | `false`      |
+| `pagination`          | `pagination`              | (optional) To enable pagination of table.                                                                   | `boolean`                | `false`      |
+| `pageSizeList`        | `page-size-list`          | (optional) To display page size options of table.                                                           | `Array`                  | `[10,20,50]` |
+| `columnResize`        | `column-resize`           | (optional) To enable column resizing of table.                                                              | `boolean`                | `false`      |
+| `columnReorder`       | `column-reorder`          | (optional) To enable re-ordering of the table columns.                                                      | `boolean`                | `false`      |
+| `summaryRow`          | `summary-row`             | (optional) To display summary row in table. Is used to display total.                                       | `boolean`                | `false`      |
+| `fullWidth`           | `full-width`              | (optional) To manage table width.                                                                           | `boolean`                | `false`      |
+| `showTablePanel`      | `show-table-panel`        | (optional) To display table panel. Is used to display panel options.                                        | `boolean`                | `false`      |
+| `panelOptions`        | `panel-options`           | (Optional) To display a panel above the table, which allows access to table operations like hiding columns. | `ModusTablePanelOptions` | `null`       |
 
 ### Events
 
@@ -403,15 +414,15 @@ Users can use keyboard navigation to perform different actions.
 
 Users can use this to provide custom elements.
 
-| Name                 | Description                                                                                  |
-| -------------------- | -------------------------------------------------------------------------------------------- |
-| `customFooter`       | To view a custom footer `slot` with name `customFooter` can be used.                         |
-| `panelGroupLeft`     | To add content to the panel's left section, `slot` with name `panelGroupLeft` can be used.   |
-| `panelGroupRight`    | To add content to the panel's right section, `slot` with name `panelGroupRight` can be used. |
+| Name              | Description                                                                                  |
+| ----------------- | -------------------------------------------------------------------------------------------- |
+| `customFooter`    | To view a custom footer `slot` with name `customFooter` can be used.                         |
+| `panelGroupLeft`  | To add content to the panel's left section, `slot` with name `panelGroupLeft` can be used.   |
+| `panelGroupRight` | To add content to the panel's right section, `slot` with name `panelGroupRight` can be used. |
 
 ### Methods
 
-| Method name              | Description                                | Parameter                           | Return               |
-| ------------------------ | ------------------------------------------ | ----------------------------------- | -------------------- |
-| `getColumnData`          | Gets data of a perticular column.          | `accessorKey: string`               | `Promise<unknown[]>` |
-| `toggleColumnVisibility` | Decides the Data table column visibility.  | `columnId: string`, `show: boolean` | `Promise<void>`      |
+| Method name              | Description                               | Parameter                           | Return               |
+| ------------------------ | ----------------------------------------- | ----------------------------------- | -------------------- |
+| `getColumnData`          | Gets data of a perticular column.         | `accessorKey: string`               | `Promise<unknown[]>` |
+| `toggleColumnVisibility` | Decides the Data table column visibility. | `columnId: string`, `show: boolean` | `Promise<void>`      |
