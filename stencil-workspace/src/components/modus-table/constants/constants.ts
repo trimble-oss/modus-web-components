@@ -5,7 +5,6 @@ export const SortDescending = 'Sort Descending';
 export const PropertyDataType = 'dataType';
 export const PropertyShowTotal = 'showTotal';
 export const DefaultPageSizes = [10, 20, 30];
-
 export const PageView = 'Page View';
 export const ShowResult = 'Showing result';
 

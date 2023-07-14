@@ -13,6 +13,7 @@ import {
 import {
   Column,
   ColumnDef,
+  ColumnOrderState,
   ColumnSizingInfoState,
   ColumnSizingState,
   HeaderGroup,
@@ -32,6 +33,9 @@ import { ModusTablePagination } from './parts/modus-table-pagination';
 import { ModusTableSummaryRow } from './parts/modus-table-summary-row';
 import { DefaultPageSizes } from './constants/constants';
 import { ModusTableHeader } from './parts/header/modus-table-header';
+import { ColumnDragState } from './models/column-drag-state.model';
+import { DragAndDrop } from './utilities/drag-and-drop.utility';
+import { ModusTableDragItem } from './parts/modus-table-drag-item';
 
 /**
  * @slot customFooter - Slot for custom footer.
@@ -98,6 +102,12 @@ export class ModusTable {
     cellBorderless: false,
   };
 
+  /** (Optional) To allow column reordering. */
+  @Prop() columnReorder = false;
+  @Watch('columnReorder') updateColumnReorder() {
+    this.table.options.state.columnOrder = this.columnOrder;
+  }
+
   /** Emits event on sort change */
   @Event() sortChange: EventEmitter<ModusTableSortingState>;
 
@@ -115,6 +125,18 @@ export class ModusTable {
     pageSize: this.pageSizeList[0],
   };
   @State() columnVisibility: VisibilityState = {};
+  @State() columnOrder: string[] = [];
+  @State() itemDragState: ColumnDragState;
+  @State() dragAndDropObj: DragAndDrop = new DragAndDrop();
+
+  /** Column reorder variables start */
+  private tableHeaderRowRef: HTMLTableRowElement;
+  private headersList: NodeListOf<ChildNode>;
+  private columnResizeEnabled = false;
+  private onMouseMove = (event: MouseEvent) => this.handleDragOver(event);
+  private onKeyDown = (event: KeyboardEvent) => this.handleKeyDown(event);
+  private onMouseUp = () => this.handleDrop();
+  /** Column reorder variables end */
 
   @Listen('click', { target: 'document' })
   documentClickHandler(event: MouseEvent): void {
@@ -132,7 +154,76 @@ export class ModusTable {
     });
   }
 
+  @Watch('itemDragState')
+  handleItemDragState(newValue: string, oldValue: string) {
+    if (oldValue && newValue && oldValue === newValue && this.columnReorder) return;
+    if (newValue) {
+      document.addEventListener('mousemove', this.onMouseMove);
+      document.addEventListener('mouseup', this.onMouseUp);
+      document.addEventListener('keydown', this.onKeyDown);
+    } else {
+      document.removeEventListener('mousemove', this.onMouseMove);
+      document.removeEventListener('mouseup', this.onMouseUp);
+      document.removeEventListener('keydown', this.onKeyDown);
+    }
+  }
+
+  handleDragStart(
+    event: MouseEvent | KeyboardEvent,
+    draggedColumnId: string,
+    elementRef: HTMLTableHeaderCellElement,
+    throughMouse: boolean
+  ) {
+    if (
+      this.columnReorder &&
+      !this.columnResizeEnabled &&
+      !this.itemDragState?.targetId && // On Enter click two functions are called handleDragStart and handleKeyDown, if targetId is present we ignore handleDragStart.
+      this.itemDragState?.draggedColumnId !== draggedColumnId // If same item is selected we don't update itemDragState.
+    ) {
+      this.itemDragState = null;
+      this.dragAndDropObj.setValues(
+        this.columnOrder,
+        this.columnReorder,
+        this.columnResizeEnabled,
+        this.tableHeaderRowRef,
+        this.headersList,
+        this.table,
+        this.itemDragState
+      );
+      this.dragAndDropObj.handleDragStart(event, draggedColumnId, elementRef, throughMouse);
+      /**
+       * SetTimeout
+       * If we select another header, after selecting a header for reorder creates an issue(Both selection using keyboard). When tab key is used this issue will not occur.
+       * Which displays both the headers in the ModusTableDragItem component, as we are using appendChild.
+       * To resolved this issue we have used setTimeout to delay the updating of dragContent is itemDragState.
+       * The same issue can be reproduced when a header is selected using keyboard and then one clicks on another header using mouse.
+       */
+      setTimeout(() => {
+        this.itemDragState = { ...this.dragAndDropObj.itemDragState };
+      }, 10);
+    }
+  }
+
+  handleDragOver(event: MouseEvent): void {
+    this.dragAndDropObj.handleDragOver(event);
+    this.itemDragState = this.dragAndDropObj.itemDragState;
+  }
+
+  handleKeyDown(event: KeyboardEvent): void {
+    this.itemDragState = null;
+    this.dragAndDropObj.handleKeyDown(event);
+    this.columnOrder = this.dragAndDropObj.columnOrder;
+    this.itemDragState = this.dragAndDropObj.itemDragState;
+  }
+
+  handleDrop(): void {
+    this.dragAndDropObj.handleDrop();
+    this.columnOrder = this.dragAndDropObj.columnOrder;
+    this.itemDragState = null;
+  }
+
   componentWillLoad(): void {
+    this.columnOrder = this.columns?.map((column) => column.id as string); // Sets column order
     this.initializeTable();
   }
 
@@ -145,10 +236,11 @@ export class ModusTable {
       columns: (this.columns as ColumnDef<unknown>[]) ?? [],
       state: {
         columnPinning: {},
-        sorting: this.sorting,
         columnSizing: {},
         columnSizingInfo: {} as ColumnSizingInfoState,
         columnVisibility: {},
+        columnOrder: this.columnReorder ? this.columnOrder : [],
+        sorting: this.sorting,
       },
       enableSorting: this.sort,
       columnResizeMode: 'onChange',
@@ -161,8 +253,12 @@ export class ModusTable {
       getPaginationRowModel: this.pagination && getPaginationRowModel(),
       getSortedRowModel: getSortedRowModel(),
       onColumnSizingChange: (updater: Updater<ColumnSizingState>) => this.updatingState(updater, 'columnSizing'),
-      onColumnSizingInfoChange: (updater: Updater<ColumnSizingInfoState>) => this.updatingState(updater, 'columnSizingInfo'),
+      onColumnSizingInfoChange: (updater: Updater<ColumnSizingInfoState>) => {
+        this.updatingState(updater, 'columnSizingInfo');
+        this.columnResizeEnabled = !this.columnSizingInfo.isResizingColumn ? false : true;
+      },
       onColumnVisibilityChange: (updater: Updater<VisibilityState>) => this.updatingState(updater, 'columnVisibility'),
+      onColumnOrderChange: (updater: Updater<ColumnOrderState>) => this.updatingState(updater, 'columnOrder'),
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       onStateChange: () => {},
       renderFallbackValue: null,
@@ -260,7 +356,7 @@ export class ModusTable {
         <table class={className} style={tableStyle}>
           <thead>
             {headerGroups?.map((headerGroup, index) => (
-              <tr key={headerGroup.id}>
+              <tr key={headerGroup.id} ref={(element: HTMLTableRowElement) => (this.tableHeaderRowRef = element)}>
                 {headerGroup.headers?.map((header) => {
                   return (
                     <ModusTableHeader
@@ -268,6 +364,16 @@ export class ModusTable {
                       header={header}
                       isNestedParentHeader={index < lengthOfHeaderGroups - 1}
                       showSortIconOnHover={this.showSortIconOnHover}
+                      columnReorder={this.columnReorder}
+                      columnResizeEnabled={this.columnResizeEnabled}
+                      handleDragStart={(event: MouseEvent, id: string, elementRef: HTMLTableHeaderCellElement) =>
+                        this.handleDragStart(event, id, elementRef, true)
+                      }
+                      handleKeyboardStart={(event: KeyboardEvent, id: string, elementRef: HTMLTableHeaderCellElement) =>
+                        this.handleDragStart(event, id, elementRef, false)
+                      }
+                      onMouseEnterResize={() => (this.columnResizeEnabled = true)}
+                      onMouseLeaveResize={() => (this.columnResizeEnabled = false)}
                     />
                   );
                 })}
@@ -278,7 +384,7 @@ export class ModusTable {
             {this.table.getRowModel()?.rows.map((row) => {
               return (
                 <tr key={row.id} class={this.hover && 'enable-hover'}>
-                  {row.getVisibleCells()?.map((cell) => {
+                  {row.getAllCells()?.map((cell) => {
                     return <ModusTableCell cell={cell} />;
                   })}
                 </tr>
@@ -291,6 +397,8 @@ export class ModusTable {
         {this.pagination && (
           <ModusTablePagination table={this.table} totalCount={this.data.length} pageSizeList={this.pageSizeList} />
         )}
+
+        <ModusTableDragItem draggingState={this.itemDragState}></ModusTableDragItem>
       </Host>
     );
   }

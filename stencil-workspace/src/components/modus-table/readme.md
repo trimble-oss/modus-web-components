@@ -9,6 +9,7 @@
 
 | Property               | Attribute                 | Description                                                                                         | Type                                   | Default                                                   |
 | ---------------------- | ------------------------- | --------------------------------------------------------------------------------------------------- | -------------------------------------- | --------------------------------------------------------- |
+| `columnReorder`        | `column-reorder`          | (Optional) To allow column reordering.                                                              | `boolean`                              | `false`                                                   |
 | `columnResize`         | `column-resize`           |                                                                                                     | `boolean`                              | `false`                                                   |
 | `columns` _(required)_ | --                        | (Required) To display headers in the table.                                                         | `ModusTableColumn<unknown, unknown>[]` | `undefined`                                               |
 | `data` _(required)_    | --                        | (Required) To display data in the table.                                                            | `unknown[]`                            | `undefined`                                               |
