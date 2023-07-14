@@ -9,6 +9,7 @@
   --modus-blue: #0063a3;
   --modus-blue-light: #217cbb;
   --modus-blue-pale: #dcedf9;
+  --modus-blue-4: #019aeb;
 
   // Gray progression
   --modus-gray-10: #171c1e;
@@ -360,6 +361,8 @@
 
   // Header
   --modus-table-header-bg: var(--modus-gray-light);
+  --modus-table-header-color: var(--modus-gray-8);
+  --modus-table-header-drop-color: var(--modus-blue-4);
 
   // Body
   --modus-table-hover-bg: var(--modus-blue-pale);
@@ -369,6 +372,7 @@
   --modus-table-edit-border-color: var(--modus-highlight-blue-color);
   --modus-table-readonly-bg: var(--modus-gray-0);
   --modus-table-readonly-color: var(--modus-table-color);
+  --modus-table-body-color: var(--modus-gray-10);
 
   // Tooltips
   --modus-tooltip-bg: var(--modus-gray-7);
@@ -691,6 +695,7 @@
   --modus-table-edit-border-color: var(--modus-highlight-blue-color);
   --modus-table-readonly-bg: var(--modus-table-bg);
   --modus-table-readonly-color: var(--modus-gray-2);
+  --modus-table-body-color: var(--modus-white);
 
   // Tooltip
   --modus-tooltip-bg: var(--modus-gray-0);
