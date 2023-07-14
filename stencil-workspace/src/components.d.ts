@@ -926,6 +926,10 @@ export namespace Components {
         "label": string;
     }
     interface ModusTable {
+        /**
+          * (Optional) To allow column reordering.
+         */
+        "columnReorder": boolean;
         "columnResize": boolean;
         /**
           * (Required) To display headers in the table.
@@ -2815,6 +2819,10 @@ declare namespace LocalJSX {
         "onSwitchClick"?: (event: ModusSwitchCustomEvent<boolean>) => void;
     }
     interface ModusTable {
+        /**
+          * (Optional) To allow column reordering.
+         */
+        "columnReorder"?: boolean;
         "columnResize"?: boolean;
         /**
           * (Required) To display headers in the table.

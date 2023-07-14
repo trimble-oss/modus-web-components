@@ -15,25 +15,11 @@ table {
       th {
         border: $rem-1px $modus-table-header-border-color solid;
         font-weight: $font-weight-semi-bold;
+        overflow: hidden;
         position: relative;
 
         .resize-handle:focus-visible {
           border-right: 2px solid $modus-table-header-color;
-        }
-
-        .can-resize {
-          &:focus-visible {
-            outline: none;
-          }
-
-          cursor: e-resize;
-          height: 100%;
-          position: absolute;
-          right: 0;
-          top: 0;
-          touch-action: none;
-          user-select: none;
-          width: $rem-3px;
         }
 
         .can-sort {
@@ -80,6 +66,72 @@ table {
             }
           }
         }
+
+        .icon-arrow-down,
+        .icon-arrow-up {
+          display: none;
+        }
+
+        .can-resize {
+          &:focus-visible {
+            outline: none;
+          }
+
+          cursor: e-resize;
+          height: 100%;
+          position: absolute;
+          right: 0;
+          top: 0;
+          touch-action: none;
+          user-select: none;
+          width: $rem-3px;
+        }
+
+        &.can-reorder {
+          &:hover {
+            cursor: grab;
+          }
+
+          &:active {
+            cursor: grabbing;
+          }
+        }
+
+        &.drop-allow {
+          overflow: visible;
+
+          svg {
+            display: block;
+            fill: $modus-table-header-drop-color;
+          }
+
+          .icon-arrow-down {
+            left: -8.3px;
+            position: absolute;
+            top: -14px;
+          }
+
+          .icon-arrow-up {
+            bottom: -14px;
+            left: -8.3px;
+            position: absolute;
+          }
+        }
+
+        &.show-resize-cursor {
+          cursor: e-resize;
+
+          .can-sort {
+            .sort-icon-containor {
+              cursor: e-resize;
+            }
+          }
+        }
+
+        &:has(modus-tooltip:hover) {
+          // On hover of child, parent overflow property is changed.
+          overflow: visible;
+        }
       }
     }
   }
@@ -87,7 +139,7 @@ table {
   tbody {
     tr {
       background-color: $modus-table-body-bg;
-      color: $modus-table-header-color;
+      color: $modus-table-body-color;
 
       td {
         border: $rem-1px $modus-table-header-border-color solid;
@@ -197,5 +249,34 @@ table {
         margin-right: $rem-5px;
       }
     }
+  }
+}
+
+.drag-content {
+  background: $modus-data-table-drag-header-bg;
+  border: $rem-1px $modus-table-header-border-color solid;
+  cursor: grabbing !important;
+  display: flex;
+  left: 0;
+  opacity: 0.75;
+  position: fixed;
+  top: 0;
+  z-index: 9;
+
+  th {
+    align-self: center;
+    font-family: $primary-font;
+    font-weight: $font-weight-semi-bold;
+    padding: 0.25rem 1rem;
+    text-align: left;
+
+    div {
+      font-size: $rem-14px;
+    }
+  }
+
+  .sort-icon-containor,
+  svg {
+    display: none;
   }
 }
