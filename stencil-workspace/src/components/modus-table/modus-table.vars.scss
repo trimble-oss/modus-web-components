@@ -25,3 +25,7 @@ $modus-menu-dropdown-bg: var(--modus-group-item-bg, #fff) !default;
 $modus-menu-dropdown-box-shadow: var(--modus-card-shadow-color, #3635454d) !default;
 $modus-menu-dropdown-hover-bg: var(--modus-group-item-hover-bg, #e0e1e9) !default;
 $modus-menu-dropdown-item-hover-bg: var(--modus-group-item-hover-bg, #e0e1e9) !default;
+
+/** Scrollbar */
+$modus-table-scrollbar-thumb-color: var(--modus-table-scrollbar-thumb-color, #6a6e79) !default;
+$modus-table-scrollbar-track-color: var(--modus-table-scrollbar-track-color, #b7b9c3) !default;

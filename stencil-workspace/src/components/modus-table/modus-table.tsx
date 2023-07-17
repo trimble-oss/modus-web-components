@@ -66,7 +66,7 @@ export class ModusTable {
   }
 
   /* (optional) To manage table resizing */
-  @Prop() fullWidth = false;
+  @Prop() fullWidth = true;
 
   /** (Optional) To sort data in table. */
   @Prop() sort = false;
@@ -97,6 +97,8 @@ export class ModusTable {
     borderless: false,
     cellBorderless: false,
   };
+  /** (Optional) To control scrollbar height of table. */
+  @Prop() scrollbarHeight: string;
 
   /** Emits event on sort change */
   @Event() sortChange: EventEmitter<ModusTableSortingState>;
@@ -236,7 +238,6 @@ export class ModusTable {
     const tableStyle = this.fullWidth
       ? { width: '100%' }
       : { width: `${this.table.getTotalSize()}px`, tableLayout: 'fixed' };
-
     const headerGroups: HeaderGroup<unknown>[] = this.table.getHeaderGroups();
     const footerGroups: HeaderGroup<unknown>[] = this.table.getFooterGroups();
     const className = `
@@ -256,37 +257,38 @@ export class ModusTable {
             </div>
           </modus-table-panel>
         )}
-
-        <table class={className} style={tableStyle}>
-          <thead>
-            {headerGroups?.map((headerGroup, index) => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers?.map((header) => {
-                  return (
-                    <ModusTableHeader
-                      table={this.table}
-                      header={header}
-                      isNestedParentHeader={index < lengthOfHeaderGroups - 1}
-                      showSortIconOnHover={this.showSortIconOnHover}
-                    />
-                  );
-                })}
-              </tr>
-            ))}
-          </thead>
-          <tbody>
-            {this.table.getRowModel()?.rows.map((row) => {
-              return (
-                <tr key={row.id} class={this.hover && 'enable-hover'}>
-                  {row.getVisibleCells()?.map((cell) => {
-                    return <ModusTableCell cell={cell} />;
+        <div class="table-container" style={{ maxHeight: this.scrollbarHeight }}>
+          <table class={className} style={tableStyle}>
+            <thead>
+              {headerGroups?.map((headerGroup, index) => (
+                <tr key={headerGroup.id}>
+                  {headerGroup.headers?.map((header) => {
+                    return (
+                      <ModusTableHeader
+                        table={this.table}
+                        header={header}
+                        isNestedParentHeader={index < lengthOfHeaderGroups - 1}
+                        showSortIconOnHover={this.showSortIconOnHover}
+                      />
+                    );
                   })}
                 </tr>
-              );
-            })}
-          </tbody>
-          {this.summaryRow ? <ModusTableSummaryRow footerGroups={[footerGroups[0]]} tableData={this.data} /> : ''}
-        </table>
+              ))}
+            </thead>
+            <tbody>
+              {this.table.getRowModel()?.rows.map((row) => {
+                return (
+                  <tr key={row.id} class={this.hover && 'enable-hover'}>
+                    {row.getVisibleCells()?.map((cell) => {
+                      return <ModusTableCell cell={cell} />;
+                    })}
+                  </tr>
+                );
+              })}
+            </tbody>
+            {this.summaryRow ? <ModusTableSummaryRow footerGroups={[footerGroups[0]]} tableData={this.data} /> : ''}
+          </table>
+        </div>
         <slot name="customFooter"></slot>
         {this.pagination && (
           <ModusTablePagination table={this.table} totalCount={this.data.length} pageSizeList={this.pageSizeList} />

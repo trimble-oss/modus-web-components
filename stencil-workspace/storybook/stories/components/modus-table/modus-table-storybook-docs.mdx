@@ -19,6 +19,7 @@ import { Story } from '@storybook/addon-docs';
 - [Pagination](#pagination)
 - [Summary Row](#summary-row)
 - [Column Visibility](#column-visibility)
+- [Scrollbar](#scrollbar)
 - [Types](#types)
 - [Accessibility](#accessibility)
 - [Properties](#properties)
@@ -293,6 +294,12 @@ A table panel is used to perform operations like hiding/showing the columns. The
 
 <Story id="components-table--column-visibility" height={'480px'} />
 
+### Scrollbar
+
+Scrollbar is used to perform operations like scrolling through the content of a scrollable container, when it exceeds the available space.
+
+<Story id="components-table--scrollbar" height={'480px'} />
+
 ```html
 <div style="width: 950px">
    <modus-table
@@ -392,6 +399,7 @@ Users can use keyboard navigation to perform different actions.
 | `fullWidth`           | `full-width`              | (optional) To manage table width.                                                                           | `boolean`                     | `false`      |
 | `showTablePanel`      | `show-table-panel`        | (optional) To display table panel. Is used to display panel options.                                        | `boolean`                     | `false`      |
 | `panelOptions`        | `panel-options`           | (Optional) To display a panel above the table, which allows access to table operations like hiding columns. | `ModusTablePanelOptions`      | `null`       |
+| `scrollbarHeight`     | `scrollbar-height`        | (Optional) (Optional) To control scrollbar height of table.                                                 | `string`                      | `undefined`  |
 
 ### Events
 

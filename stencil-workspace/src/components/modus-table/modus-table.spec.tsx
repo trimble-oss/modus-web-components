@@ -9,16 +9,17 @@ describe('modus-table', () => {
     });
     expect(root).toEqualHtml(`
       <modus-table>
-        <mock:shadow-root>
-          <table class="false" style="width: 0px; table-layout: fixed">
-            <thead>
-              <tr>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-          <slot name="customFooter"></slot>
-        </mock:shadow-root>
+      <mock:shadow-root>
+      <div class="table-container">
+        <table class="false" style="width: 100%;">
+          <thead>
+            <tr></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <slot name="customFooter"></slot>
+    </mock:shadow-root>
       </modus-table>
     `);
   });

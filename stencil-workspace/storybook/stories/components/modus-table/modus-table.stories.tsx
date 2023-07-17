@@ -528,3 +528,51 @@ const columnVisibility = () => {
   document.querySelector('modus-table').pageSizeList = [5,10,20,50,100]; ${BulkTableData}`;
   return tag;
 };
+
+export const Scrollbar = ({
+  hover,
+  sort,
+  columnResize,
+  pagination,
+  showSortIconOnHover,
+  summaryRow,
+  fullWidth,
+  showTablePanel
+}) => html`
+  <div style="width: 950px">
+    <modus-table
+      hover="${hover}"
+      sort="${sort}"
+      column-resize="${columnResize}"
+      pagination="${pagination}"
+      show-sort-icon-on-hover="${showSortIconOnHover}"
+      summary-row="${summaryRow}"
+      full-width="${fullWidth}"
+      show-table-panel="${showTablePanel}" />
+  </div>
+  ${scrollbar()}
+`;
+Scrollbar.args = {
+  hover: true,
+  sort: true,
+  columnResize: true,
+  pagination: true,
+  showSortIconOnHover: true,
+  summaryRow: false,
+  fullWidth: false,
+  showTablePanel: true
+};
+const scrollbar = () => {
+  const tag = document.createElement('script');
+  tag.innerHTML = `
+  document.querySelector('modus-table').panelOptions = {
+    columnsVisibility: {
+      title: '',
+      requiredColumns: ['age', 'visits']
+    }
+  };
+  document.querySelector('modus-table').scrollbarStyle = {maxHeight:'450px', maxWidth: '700px'};
+  document.querySelector('modus-table').columns = [{header: 'First Name',accessorKey: 'firstName',id: 'first-name',dataType: 'text', footer: 'Total',size: 150,minSize: 80},{header: 'Last Name',accessorKey: 'lastName',id: 'last-name',dataType: 'text',size: 150,minSize: 80},{header: 'Age',accessorKey: 'age',id: 'age',dataType: 'integer',showTotal: true, size: 100,minSize: 60},{header: 'Visits',accessorKey: 'visits',id: 'visits',dataType: 'integer',maxSize: 150,minSize: 80,enableResizing: false,},{header: 'Status',accessorKey: 'status',id: 'status',dataType: 'text' ,minSize: 80},{header: 'Profile Progress',accessorKey: 'progress',id: 'progress',dataType: 'integer', showTotal: true, minSize: 100},];
+  document.querySelector('modus-table').pageSizeList = [5,10,20,50,100]; ${BulkTableData}`;
+  return tag;
+};
