@@ -336,6 +336,7 @@ export const ValueFormatter = ({
   fullWidth,
   pageSizeList,
   showTablePanel,
+  columnReorder,
   panelOptions,
   displayOptions
 }) => html`
@@ -348,6 +349,7 @@ export const ValueFormatter = ({
     show-sort-icon-on-hover="${showSortIconOnHover}"
     summary-row="${summaryRow}"
     full-width="${fullWidth}"
+    column-reorder="${columnReorder}"
     show-table-panel="${showTablePanel}" />
   </div>
   ${valueFormatterTable(pageSizeList, panelOptions, displayOptions)}
