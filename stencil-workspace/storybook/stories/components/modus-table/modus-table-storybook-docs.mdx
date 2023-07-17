@@ -363,10 +363,6 @@ interface interface ModusTableColumn {
   showTotal?: boolean;
 }
 
-interface ModusTablePanelOptions {
-  columnsVisibility?: ModusTableColumnsVisibilityOptions;
-}
-
 interface ModusTableColumnsVisibilityOptions {
   title: string;
   requiredColumns?: string[];
@@ -377,6 +373,9 @@ interface ModusTableDisplayOptions {
   cellBorderless?: boolean;
 }
 
+interface ModusTablePanelOptions {
+  columnsVisibility?: ModusTableColumnsVisibilityOptions;
+}
 ```
 
 ### Accessibility
