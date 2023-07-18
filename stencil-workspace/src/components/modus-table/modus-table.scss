@@ -16,6 +16,7 @@ table {
         border: $rem-1px $modus-table-header-border-color solid;
         font-weight: $font-weight-semi-bold;
         overflow: hidden;
+        padding: $rem-8px $rem-8px $rem-8px $rem-16px;
         position: relative;
 
         .resize-handle:focus-visible {
