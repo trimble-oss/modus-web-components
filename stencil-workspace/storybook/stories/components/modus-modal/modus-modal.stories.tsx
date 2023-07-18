@@ -4,6 +4,71 @@ import { html } from 'lit-html';
 
 export default {
   title: 'Components/Modal',
+  argTypes: {
+    ariaLabel: {
+      name: 'aria-label',
+      description: "The modal's aria-label",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    headerText: {
+      name: 'headerText',
+      description: "The modal's primary button text",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    primaryButtonAriaLabel: {
+      name: 'primaryButtonAriaLabel',
+      description: "The modal's primary button aria-label",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    primaryButtonDisabled: {
+      name: 'primaryButtonDisabled',
+      description: "Disable primary button",
+      table: {
+        type: { summary: 'boolean' },
+      },
+    },
+    primaryButtonText: {
+      name: 'primaryButtonText',
+      description: "The modal's primary button text",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    secondaryButtonAriaLabel: {
+      name: 'secondaryButtonAriaLabel',
+      description: "The modal's secondary button aria-label",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    secondaryButtonDisabled: {
+      name: 'secondaryButtonDisabled',
+      description: "Disable secondary button",
+      table: {
+        type: { summary: 'boolean' },
+      },
+    },
+    secondaryButtonText: {
+      name: 'secondaryButtonText',
+      description: "The modal's secondary button text",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    zIndex: {
+      name: 'zIndex',
+      description: "The modal's z-index",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+  },
   parameters: {
     actions: {
       handles: ['closed'],
@@ -15,32 +80,50 @@ export default {
     options: {
       isToolshown: true,
     },
-    controls: {
-      disabled: true,
-    },
+    controls: { expanded: true, sort: 'requiredFirst' },
     viewMode: 'docs',
   },
 };
 
-const Template = () => html`
+const Template = ({ ariaLabel, headerText, primaryButtonAriaLabel,primaryButtonDisabled, primaryButtonText, secondaryButtonAriaLabel, secondaryButtonDisabled, secondaryButtonText, zIndex  }) => html`
   <modus-button id="btn-modal" color="primary">Open modal</modus-button>
   <modus-modal
-    header-text="Modal title"
-    primary-button-text="Save changes"
-    secondary-button-text="Sweet!"
-    primary-button-aria-label="Save changes"
-    secondary-button-aria-label="Sweet">
+  aria-label=${ariaLabel}
+  header-text=${headerText}
+  primary-button-aria-label=${primaryButtonAriaLabel}
+  primary-button-disabled=${primaryButtonDisabled}
+  primary-button-text=${primaryButtonText}
+  secondary-button-aria-label=${secondaryButtonAriaLabel}  secondary-button-disabled=${secondaryButtonDisabled}
+  secondary-button-text=${secondaryButtonText}
+  z-index=${zIndex}>
     <p>Woo-hoo, you're reading this text in a modal!</p>
   </modus-modal>
   ${setScript()}
 `;
 export const Default = Template.bind({});
+Default.args = {
+  ariaLabel: 'Modal',
+  headerText: 'Modal title',
+  primaryButtonAriaLabel: 'Save changes',
+  primaryButtonDisabled: false,
+  primaryButtonText: 'Save changes',
+  secondaryButtonAriaLabel: 'Sweet',
+  secondaryButtonDisabled: false,
+  secondaryButtonText: 'Sweet',
+  zIndex: '1' };
 
 const setScript = () => {
   const tag = document.createElement('script');
   tag.innerHTML = `
     document.querySelector('#btn-modal').addEventListener('buttonClick', () => {
       document.querySelector('modus-modal').open();
+    });
+
+    document.querySelector('modus-modal').addEventListener('closed', () => {
+      // Timeout is a workaround for Stencil Web Component not capturing the state updates quick enough when another component is immediately focussed
+      setTimeout(() => {
+        document.querySelector('#btn-modal').focusButton();
+      }, 100);
     });
   `;
 

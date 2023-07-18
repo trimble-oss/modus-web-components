@@ -174,7 +174,8 @@ export declare interface ModusBreadcrumb extends Components.ModusBreadcrumb {
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'buttonStyle', 'color', 'disabled', 'size']
+  inputs: ['ariaLabel', 'buttonStyle', 'color', 'disabled', 'size'],
+  methods: ['focusButton']
 })
 @Component({
   selector: 'modus-button',

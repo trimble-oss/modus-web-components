@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 import { Component, Element, Event, EventEmitter, h, JSX, Listen, Method, Prop, State } from '@stencil/core';
 import { IconClose } from '../icons/icon-close';
-import { FocusTrap, FocusTrapping } from './modus-focus-trapping.util';
+import { FocusWrap, ModalFocusWrapping } from './modal-focus-wrapping';
 
 @Component({
   tag: 'modus-modal',
@@ -55,10 +55,11 @@ export class ModusModal {
 
   // A hidden element used to find the end of the Modal to prevent tabbing in the background
   startTrapRef: HTMLElement;
-  focusTrapping: FocusTrapping;
+  focusWrapping: ModalFocusWrapping;
   modalContentRef: HTMLDivElement;
   tabbableNodes: HTMLElement[];
 
+  /** Closes the Modal */
   @Method()
   async close(): Promise<void> {
     this.visible = false;
@@ -67,6 +68,7 @@ export class ModusModal {
     return Promise.resolve();
   }
 
+  /** Opens the Modal */
   @Method()
   async open(): Promise<void> {
     this.visible = true;
@@ -75,8 +77,7 @@ export class ModusModal {
     return Promise.resolve();
   }
 
-  @State()
-  visible: boolean;
+  @State() visible: boolean;
 
   handleModalContentMouseDown(): void {
     // If Mouse was dragged off from the Modal content, ignore mouse up on overlay preventing Modal to close
@@ -97,40 +98,44 @@ export class ModusModal {
     this.close();
   }
 
-  handlePrimaryKeydown(event: KeyboardEvent): void {
+  handleEnterKeydown(event: KeyboardEvent, callback: () => void): void {
     switch (event.code) {
       case 'Enter':
-        this.primaryButtonClick.emit();
+        callback();
         break;
     }
   }
 
+  handleCloseKeydown(event: KeyboardEvent): void {
+    this.handleEnterKeydown(event, () => this.close());
+  }
+
+  handlePrimaryKeydown(event: KeyboardEvent): void {
+    this.handleEnterKeydown(event, () => this.primaryButtonClick.emit());
+  }
+
   handleSecondaryKeydown(event: KeyboardEvent): void {
-    switch (event.code) {
-      case 'Enter':
-        this.secondaryButtonClick.emit();
-        break;
-    }
+    this.handleEnterKeydown(event, () => this.secondaryButtonClick.emit());
   }
 
   componentDidRender() {
     if (this.modalContentRef && this.startTrapRef)
-      this.focusTrapping = new FocusTrapping(this.modalContentRef, this.startTrapRef);
+      this.focusWrapping = new ModalFocusWrapping(this.modalContentRef, this.startTrapRef);
   }
 
   renderModal(): JSX.Element[] {
     return (
       <div class="content" ref={(el) => (this.modalContentRef = el)} onMouseDown={() => this.handleModalContentMouseDown()}>
-        <FocusTrap
+        <FocusWrap
           id="startTrap"
           ref={(el) => (this.startTrapRef = el)}
-          onFocus={() => this.focusTrapping?.onStartTrapFocus()}></FocusTrap>
+          onFocus={() => this.focusWrapping?.onStartWrapFocus()}></FocusWrap>
         {this.renderModalHeader()}
         <div class="body">
           <slot />
         </div>
         {this.renderModalFooter()}
-        <FocusTrap id="endTrap" onFocus={() => this.focusTrapping?.onEndTrapFocus()}></FocusTrap>
+        <FocusWrap id="endTrap" onFocus={() => this.focusWrapping?.onEndWrapFocus()}></FocusWrap>
       </div>
     );
   }
@@ -139,7 +144,12 @@ export class ModusModal {
     return (
       <div class="header">
         {this.headerText}
-        <div role="button" tabindex={0} aria-label="Close" onClick={() => this.close()}>
+        <div
+          role="button"
+          tabindex={0}
+          aria-label="Close"
+          onClick={() => this.close()}
+          onKeyDown={(event) => this.handleCloseKeydown(event)}>
           <IconClose size="20" />
         </div>
       </div>

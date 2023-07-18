@@ -138,7 +138,7 @@ const TemplateWithLink = ({ ariaLabel, dismissible, message, type }) =>
       dismissible=${dismissible}
       message=${message}
       type=${type}>
-      This is a info alert with <a href="#" class="alert-link">an example link</a>
+      This is a info alert with <a href="#">an example link</a>
     </modus-alert>
   `;
 

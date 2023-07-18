@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { Component, Prop, h, Event, EventEmitter, Element, State, Listen } from '@stencil/core';
+import { Component, Prop, h, Event, EventEmitter, Element, State, Listen, Method } from '@stencil/core';
 
 @Component({
   tag: 'modus-button',
@@ -48,6 +48,15 @@ export class ModusButton {
     ['large', 'size-large'],
   ]);
 
+  buttonRef: HTMLButtonElement;
+
+  /** Focus the Button */
+  @Method()
+  async focusButton(): Promise<void> {
+    this.buttonRef?.focus();
+    return Promise.resolve();
+  }
+
   @Listen('keyup')
   elementKeyupHandler(event: KeyboardEvent): void {
     switch (event.code) {
@@ -74,7 +83,8 @@ export class ModusButton {
         onKeyUp={() => (this.pressed = false)}
         onMouseDown={() => (this.pressed = true)}
         onMouseUp={() => (this.pressed = false)}
-        role="button">
+        role="button"
+        ref={(el) => (this.buttonRef = el)}>
         <slot />
       </button>
     );
