@@ -39,6 +39,9 @@ export class ModusModal {
   /** (optional) The modal's z-index. */
   @Prop() zIndex = '1';
 
+  /** (optional) The modal's backdrop. Specify 'static' for a backdrop that doesn't close the modal when clicked outside the modal content */
+  @Prop() backdrop: 'default' | 'static' = 'default';
+
   /** An event that fires on modal close.  */
   @Event() closed: EventEmitter;
 
@@ -90,12 +93,16 @@ export class ModusModal {
   }
 
   handleOverlayClick(event: MouseEvent): void {
-    if (this.ignoreOverlayClick || !(event.target as HTMLElement).classList.contains('overlay')) {
-      this.ignoreOverlayClick = false;
-      return;
+    switch (this.backdrop) {
+      case 'static':
+        return;
+      case 'default':
+        if (this.ignoreOverlayClick || !(event.target as HTMLElement).classList.contains('overlay')) {
+          this.ignoreOverlayClick = false;
+          return;
+        }
+        this.close();
     }
-
-    this.close();
   }
 
   handleEnterKeydown(event: KeyboardEvent, callback: () => void): void {

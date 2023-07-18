@@ -527,6 +527,10 @@ export namespace Components {
          */
         "ariaLabel": string | null;
         /**
+          * (optional) The modal's backdrop. Specify 'static' for a backdrop that doesn't close the modal when clicked outside the modal content
+         */
+        "backdrop": 'default' | 'static';
+        /**
           * Closes the Modal
          */
         "close": () => Promise<void>;
@@ -2195,6 +2199,10 @@ declare namespace LocalJSX {
           * (optional) The modal's aria-label.
          */
         "ariaLabel"?: string | null;
+        /**
+          * (optional) The modal's backdrop. Specify 'static' for a backdrop that doesn't close the modal when clicked outside the modal content
+         */
+        "backdrop"?: 'default' | 'static';
         /**
           * (optional) The modal's primary button text.
          */
