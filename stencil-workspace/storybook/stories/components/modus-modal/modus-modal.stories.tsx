@@ -68,6 +68,13 @@ export default {
         type: { summary: 'string' },
       },
     },
+    backdrop: {
+      name: 'backdrop',
+      description: "The modal's backdrop",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
   },
   parameters: {
     actions: {
@@ -85,7 +92,7 @@ export default {
   },
 };
 
-const Template = ({ ariaLabel, headerText, primaryButtonAriaLabel,primaryButtonDisabled, primaryButtonText, secondaryButtonAriaLabel, secondaryButtonDisabled, secondaryButtonText, zIndex  }) => html`
+const Template = ({ ariaLabel, headerText, primaryButtonAriaLabel,primaryButtonDisabled, primaryButtonText, secondaryButtonAriaLabel, secondaryButtonDisabled, secondaryButtonText, zIndex, backdrop  }) => html`
   <modus-button id="btn-modal" color="primary">Open modal</modus-button>
   <modus-modal
   aria-label=${ariaLabel}
@@ -95,7 +102,8 @@ const Template = ({ ariaLabel, headerText, primaryButtonAriaLabel,primaryButtonD
   primary-button-text=${primaryButtonText}
   secondary-button-aria-label=${secondaryButtonAriaLabel}  secondary-button-disabled=${secondaryButtonDisabled}
   secondary-button-text=${secondaryButtonText}
-  z-index=${zIndex}>
+  z-index=${zIndex}
+  backdrop=${backdrop}>
     <p>Woo-hoo, you're reading this text in a modal!</p>
   </modus-modal>
   ${setScript()}
@@ -110,7 +118,8 @@ Default.args = {
   secondaryButtonAriaLabel: 'Sweet',
   secondaryButtonDisabled: false,
   secondaryButtonText: 'Sweet',
-  zIndex: '1' };
+  zIndex: '1',
+  backdrop: 'default'};
 
 const setScript = () => {
   const tag = document.createElement('script');

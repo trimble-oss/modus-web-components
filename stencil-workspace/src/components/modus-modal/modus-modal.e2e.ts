@@ -160,6 +160,42 @@ describe('modus-modal', () => {
     expect(closed).toHaveReceivedEvent();
   });
 
+  it('closes on overlay click when backdrop is default', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-modal secondary-button-text="Secondary Text" backdrop="default"></modus-modal>');
+    const modal = await page.find('modus-modal');
+    await modal.callMethod('open');
+    const closed = await page.spyOnEvent('closed');
+
+    // Was having trouble finding the modal's overlay, so click it through evaluate().
+    await page.evaluate(() => {
+      const overlay = document.querySelector('modus-modal').shadowRoot.querySelector('.overlay');
+      overlay.scrollIntoView({ block: 'center', inline: 'center' });
+      (overlay as HTMLElement).click();
+    });
+
+    await page.waitForChanges();
+    expect(closed).toHaveReceivedEvent();
+  });
+
+  it('does not closes on overlay click when backdrop is static', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-modal secondary-button-text="Secondary Text" backdrop="static"></modus-modal>');
+    const modal = await page.find('modus-modal');
+    await modal.callMethod('open');
+    const closed = await page.spyOnEvent('closed');
+
+    // Was having trouble finding the modal's overlay, so click it through evaluate().
+    await page.evaluate(() => {
+      const overlay = document.querySelector('modus-modal').shadowRoot.querySelector('.overlay');
+      overlay.scrollIntoView({ block: 'center', inline: 'center' });
+      (overlay as HTMLElement).click();
+    });
+
+    await page.waitForChanges();
+    expect(closed).not.toHaveReceivedEvent();
+  });
+
   it('has a default overlay background color', async () => {
     const page = await newE2EPage();
     await page.setContent('<modus-modal secondary-button-text="Secondary Text"></modus-modal>');
