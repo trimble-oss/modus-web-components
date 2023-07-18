@@ -52,7 +52,8 @@ import { Anchor, Story } from '@storybook/addon-docs';
 
 ### Alert with Link
 
-By using the `slot`, it is possible to add a link in the message. Note: To color the inner nested anchor tags, it is recommended to use CSS variables such as `--modus-alert-<variant>-link-color`, due to the limitations of `slot` elements.
+The `<modus-alert>` utilizes the slot element, allowing you to insert links in the alert message.
+Note: If anchor tags are nested, it is required to apply CSS variables  `--modus-alert-<variant>-link-color` on the link, due to the limitations of nested `slot` elements.
 
 
 <Story id="components-alert--with-link" />
@@ -66,7 +67,7 @@ By using the `slot`, it is possible to add a link in the message. Note: To color
 <modus-alert message="Success alert" type="success"></modus-alert>
 <modus-alert message="Warning alert" type="warning"></modus-alert>
 <modus-alert type="info">
-  This is a info alert with <a href="#" class="alert-link">an example link</a>
+  This is a info alert with <a href="#">an example link</a>
 </modus-alert>
 ```
 

@@ -23,6 +23,19 @@
 | `buttonClick` | (optional) An event that fires on button click. | `CustomEvent<any>` |
 
 
+## Methods
+
+### `focusButton() => Promise<void>`
+
+Focus the Button
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+
 ## Dependencies
 
 ### Used by

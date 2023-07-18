@@ -34,7 +34,7 @@
 
 ### `close() => Promise<void>`
 
-
+Closes the Modal
 
 #### Returns
 
@@ -44,7 +44,7 @@ Type: `Promise<void>`
 
 ### `open() => Promise<void>`
 
-
+Opens the Modal
 
 #### Returns
 

@@ -1,4 +1,7 @@
-import { FunctionalComponent, h } from '@stencil/core';
+import {
+  FunctionalComponent,
+  h, // eslint-disable-line @typescript-eslint/no-unused-vars
+} from '@stencil/core';
 
 // Inspired by https://github.com/focus-trap/tabbable
 const candidatesSelector = [
@@ -103,7 +106,7 @@ const getTabbableNodes = function (root: Element) {
     .concat(zeroTabIndexNodes);
 };
 
-export const FocusTrap: FunctionalComponent<{
+export const FocusWrap: FunctionalComponent<{
   id: string;
   ref?: (elm?: HTMLDivElement) => void;
   onFocus?: (e: Event) => void;
@@ -111,22 +114,22 @@ export const FocusTrap: FunctionalComponent<{
   return <div id={id} ref={ref} tabindex="0" aria-hidden="true" onFocus={(e) => onFocus && onFocus(e)}></div>;
 };
 
-export class FocusTrapping {
+export class ModalFocusWrapping {
   private readonly tababbleNodes: HTMLElement[] = [];
-  private readonly startTrap: HTMLElement;
+  private readonly startWrap: HTMLElement;
 
-  constructor(root: HTMLDivElement, startTrap: HTMLElement) {
+  constructor(root: HTMLDivElement, startWrap: HTMLElement) {
     if (root) this.tababbleNodes = getTabbableNodes(root);
-    this.startTrap = startTrap;
+    this.startWrap = startWrap;
   }
 
-  onStartTrapFocus() {
+  onStartWrapFocus() {
     if (this.tababbleNodes?.length) {
       this.tababbleNodes[0].focus();
     }
   }
 
-  onEndTrapFocus() {
-    this.startTrap.focus();
+  onEndWrapFocus() {
+    this.startWrap.focus();
   }
 }

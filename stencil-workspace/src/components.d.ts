@@ -188,6 +188,10 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
+          * Focus the Button
+         */
+        "focusButton": () => Promise<void>;
+        /**
           * (optional) The size of the button.
          */
         "size": 'small' | 'medium' | 'large';
@@ -522,11 +526,17 @@ export namespace Components {
           * (optional) The modal's aria-label.
          */
         "ariaLabel": string | null;
+        /**
+          * Closes the Modal
+         */
         "close": () => Promise<void>;
         /**
           * (optional) The modal's primary button text.
          */
         "headerText": string;
+        /**
+          * Opens the Modal
+         */
         "open": () => Promise<void>;
         /**
           * (optional) The modal's primary button aria-label.
