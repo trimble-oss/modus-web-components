@@ -26,7 +26,7 @@ export interface ModusNavbarLogoOptions {
 
 export interface ModusNavbarButton {
   id: string;
-  tooltip: ModusNavbarTooltip;
+  tooltip?: ModusNavbarTooltip;
   icon: string;
   orderIndex: number;
 }
