@@ -1,5 +1,5 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "$schema": "../node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -57,13 +57,8 @@
             "polyfills": "projects/test-harness/src/polyfills.ts",
             "tsConfig": "projects/test-harness/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "projects/test-harness/src/favicon.ico",
-              "projects/test-harness/src/assets"
-            ],
-            "styles": [
-              "projects/test-harness/src/styles.scss"
-            ],
+            "assets": ["projects/test-harness/src/favicon.ico", "projects/test-harness/src/assets"],
+            "styles": ["projects/test-harness/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -125,13 +120,8 @@
             "tsConfig": "projects/test-harness/tsconfig.spec.json",
             "karmaConfig": "projects/test-harness/karma.conf.js",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "projects/test-harness/src/favicon.ico",
-              "projects/test-harness/src/assets"
-            ],
-            "styles": [
-              "projects/test-harness/src/styles.scss"
-            ],
+            "assets": ["projects/test-harness/src/favicon.ico", "projects/test-harness/src/assets"],
+            "styles": ["projects/test-harness/src/styles.scss"],
             "scripts": []
           }
         }

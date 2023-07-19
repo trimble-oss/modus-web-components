@@ -197,13 +197,15 @@ Before releasing any of the framework outputs, the targeted version of the Modus
 
 ### Angular
 
-1. Update `./angular-workspace/projects/trimble-oss/modus-angular-components/package.json`'s:
+The Angular component integration can be found under the `./angular-workspace` directory.
+
+1. Update `./angular-workspace/ng-<version-number>/projects/trimble-oss/modus-angular-components/package.json`'s:
    1. Dependency on the Modus Web Components library to the targeted version
    2. The package's version to reflect the targeted version
-2. From the `./angular-workspace/projects/trimble-oss/modus-angular-components` directory, run `npm i`.
+2. From the `./angular-workspace/ng-<version-number>/projects/trimble-oss/modus-angular-components` directory, run `npm i`.
 3. From the `./angular-workspace` directory, run `npm i`.
 4. From the `./angular-workspace` directory, run `npm run build`.
-5. From the newly generated `./angular-workspace/dist/trimble-oss/modus-angular-components` directory, run `npm publish`.
+5. From the newly generated `./angular-workspace/ng-<version-number>/dist/trimble-oss/modus-angular-components` directory, run `npm publish`.
 
 ### React
 
