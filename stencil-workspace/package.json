@@ -1,6 +1,6 @@
 {
   "name": "@trimble-oss/modus-web-components",
-  "version": "0.1.46",
+  "version": "0.1.47",
   "description": "Trimble Modus Web Component Library",
   "homepage": "https://modus-web-components.trimble.com/",
   "bugs": {
@@ -50,14 +50,14 @@
     "@typescript-eslint/eslint-plugin": "^5.59.0",
     "@typescript-eslint/parser": "^5.58.0",
     "autoprefixer": "^10.4.14",
-    "eslint": "^8.44.0",
+    "eslint": "^8.45.0",
     "eslint-plugin-storybook": "^0.6.12",
     "jest": "^27.0.3",
     "jest-cli": "^27.5.1",
     "prettier": "2.8.8",
     "puppeteer": "^19.11.1",
     "puppeteer-core": "^19.7.2",
-    "stylelint": "15.10.1",
+    "stylelint": "15.10.2",
     "stylelint-config-standard-scss": "10.0.0",
     "stylelint-order": "6.0.3",
     "typescript": "^4.9.5"
