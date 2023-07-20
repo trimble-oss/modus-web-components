@@ -2,7 +2,7 @@
 
 ## About
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.1
+This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.9
 The components in this library were programmatically generated using the [StencilJS](https://stenciljs.com/) [Angular Framework Integration](https://stenciljs.com/docs/angular).
 
 ## Installation
@@ -45,10 +45,10 @@ To contribute to the Modus Angular Components library please see the [Modus Web 
 
 To rebuild the Modus Angular Components you need to perform the following steps:
 
-- from the `./stencil-workspace` project directory run the following:
+- from the `./stencil-workspace/ng15` project directory run the following:
   `npm run build`
 
-- From the `./angular-workspace` project directory run
+- From the `./angular-workspace/ng15` project directory run
   `npm run build`
 
 ## Debugging Locally
