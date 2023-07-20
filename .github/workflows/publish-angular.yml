@@ -1,0 +1,56 @@
+name: Create and publish Angular npm package
+on:
+  workflow_dispatch:
+    inputs:
+      angularVersion:
+        required: true
+        type: choice
+        options:
+          - '14'
+          - '15'
+        description: The version of Angular you want to build
+
+permissions:
+  contents: read
+
+jobs:
+  publish_angular:
+    runs-on: ubuntu-latest
+    if: github.repository == 'trimble-oss/modus-web-components'
+    defaults:
+      run:
+        working-directory: ./angular-workspace/ng${{ github.event.inputs.angularVersion }}
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Setup Node, build, and publish to the npm, and GitHub registries
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install Angular ${{ github.event.inputs.angularVersion }}
+        run: npm ci
+
+      - name: Build Angular ${{ github.event.inputs.angularVersion }}
+        run: npm run build
+
+      - name: Change directory
+        run: cd dist/trimble-oss/modus-angular-components
+
+      - name: Set npm Registry Auth Token
+        run: npm set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TRIMBLE_OSS_AUTOMATION_TOKEN }}
+
+      - name: Publish Angular npm Package Publicly
+        run: npm publish --access public
+
+      - name: Set GitHub Registry Auth Token
+        run: npm set //npm.pkg.github.com/:_authToken ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish Angular npm Package to GitHub Registry
+        run: npm publish --access public --ignore-scripts --@trimble-oss:registry='https://npm.pkg.github.com'

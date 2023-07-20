@@ -45,10 +45,10 @@ To contribute to the Modus Angular Components library please see the [Modus Web 
 
 To rebuild the Modus Angular Components you need to perform the following steps:
 
-- from the `./stencil-workspace` project directory run the following:
+- from the `./stencil-workspace/ng14` project directory run the following:
   `npm run build`
 
-- From the `./angular-workspace` project directory run
+- From the `./angular-workspace/ng14` project directory run
   `npm run build`
 
 ## Debugging Locally
