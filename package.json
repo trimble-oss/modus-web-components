@@ -1,0 +1,23 @@
+{
+  "name": "modus-web-components",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Modus Web Components Monorepo",
+  "homepage": "https://modus-web-components.trimble.com/",
+  "bugs": {
+    "url": "https://github.com/trimble-oss/modus-web-components/issues/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/trimble-oss/modus-web-components"
+  },
+  "license": "MIT",
+  "author": "Trimble Inc",
+  "scripts": {
+    "prettier": "npx prettier --write \"**/*.*\"",
+    "update-mwc-dependants": "cd angular-workspace/ng14/projects/trimble-oss/modus-angular-components && ncu -u --dep peer @trimble-oss* && npm i && cd ../../../../ng15/projects/trimble-oss/modus-angular-components && ncu -u --dep peer @trimble-oss* && npm i && cd ../../../../../react-workspace/react-17 && ncu -u @trimble-oss* && npm i && cd ../react-18 && ncu -u @trimble-oss* && npm i"
+  },
+  "engines": {
+    "node": ">=14.20.0"
+  }
+}
