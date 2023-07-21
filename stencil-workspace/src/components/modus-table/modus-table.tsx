@@ -16,6 +16,7 @@ import {
   ColumnOrderState,
   ColumnSizingInfoState,
   ColumnSizingState,
+  ExpandedState,
   HeaderGroup,
   PaginationState,
   Table,
@@ -24,18 +25,19 @@ import {
   VisibilityState,
   createTable,
   getCoreRowModel,
+  getExpandedRowModel,
   getPaginationRowModel,
   getSortedRowModel,
 } from '@tanstack/table-core';
 import { ModusTableColumn, ModusTableDisplayOptions, ModusTableSortingState, ModusTablePanelOptions } from './models';
-import { ModusTableCell } from './parts/modus-table-cell';
 import { ModusTablePagination } from './parts/modus-table-pagination';
 import { ModusTableSummaryRow } from './parts/modus-table-summary-row';
 import { DefaultPageSizes } from './constants/constants';
 import { ModusTableHeader } from './parts/header/modus-table-header';
 import { ColumnDragState } from './models/column-drag-state.model';
-import { DragAndDrop } from './utilities/drag-and-drop.utility';
+import { TableHeaderDragDrop } from './utilities/table-header-drag-drop.utility';
 import { ModusTableDragItem } from './parts/modus-table-drag-item';
+import { ModusTableCell } from './parts/cell/modus-table-cell';
 
 /**
  * @slot customFooter - Slot for custom footer.
@@ -50,14 +52,18 @@ import { ModusTableDragItem } from './parts/modus-table-drag-item';
 export class ModusTable {
   /** (Required) To display headers in the table. */
   @Prop({ mutable: true }) columns!: ModusTableColumn<unknown>[];
-  @Watch('columns') updateColumsOnChange() {
-    this.table.options.columns = this.columns;
+  @Watch('columns') onChangeOfColumns() {
+    if (this.table) {
+      this.table.options.columns = this.columns;
+    }
   }
 
   /** (Required) To display data in the table. */
   @Prop({ mutable: true }) data!: unknown[];
-  @Watch('data') updateDataOnChange() {
-    this.table.options.data = this.data;
+  @Watch('data') onChangeOfData() {
+    if (this.table) {
+      this.table.options.data = this.data;
+    }
   }
 
   /** (Optional) To enable row hover in table. */
@@ -92,6 +98,9 @@ export class ModusTable {
 
   /** (Optional) To display a panel options, which allows access to table operations like hiding columns. */
   @Prop() panelOptions: ModusTablePanelOptions | null = null;
+  @Watch('panelOptions') onChangePanelOptions() {
+    this.onChangeOfRowsExpandable();
+  }
 
   /** (Optional) To display table panel. */
   @Prop() showTablePanel = false;
@@ -108,6 +117,20 @@ export class ModusTable {
     this.table.options.state.columnOrder = this.columnOrder;
   }
 
+  /** (Optional) To display expanded rows. */
+  @Prop() rowsExpandable = false;
+  @Watch('rowsExpandable') onChangeOfRowsExpandable() {
+    if (this.rowsExpandable) {
+      this.frozenColumns.push(this.columnOrder[0]);
+    }
+    if (this.panelOptions?.columnsVisibility) {
+      this.panelOptions.columnsVisibility.requiredColumns = [
+        ...this.panelOptions.columnsVisibility.requiredColumns,
+        ...this.frozenColumns,
+      ];
+    }
+  }
+
   /** Emits event on sort change */
   @Event() sortChange: EventEmitter<ModusTableSortingState>;
 
@@ -117,7 +140,7 @@ export class ModusTable {
    */
   @State() columnSizing: ColumnSizingState = {};
   @State() columnSizingInfo: ColumnSizingInfoState = {} as ColumnSizingInfoState;
-
+  @State() expanded: ExpandedState;
   @State() sorting: ModusTableSortingState = [];
   @State() table: Table<unknown>;
   @State() paginationState: PaginationState = {
@@ -127,11 +150,11 @@ export class ModusTable {
   @State() columnVisibility: VisibilityState = {};
   @State() columnOrder: string[] = [];
   @State() itemDragState: ColumnDragState;
-  @State() dragAndDropObj: DragAndDrop = new DragAndDrop();
+  @State() dragAndDropObj: TableHeaderDragDrop = new TableHeaderDragDrop();
 
+  private frozenColumns: string[] = [];
   /** Column reorder variables start */
   private tableHeaderRowRef: HTMLTableRowElement;
-  private headersList: NodeListOf<ChildNode>;
   private columnResizeEnabled = false;
   private onMouseMove = (event: MouseEvent) => this.handleDragOver(event);
   private onKeyDown = (event: KeyboardEvent) => this.handleKeyDown(event);
@@ -180,15 +203,20 @@ export class ModusTable {
       !this.itemDragState?.targetId && // On Enter click two functions are called handleDragStart and handleKeyDown, if targetId is present we ignore handleDragStart.
       this.itemDragState?.draggedColumnId !== draggedColumnId // If same item is selected we don't update itemDragState.
     ) {
+      console.log(this.frozenColumns);
+
+      if (this.frozenColumns.includes(draggedColumnId)) {
+        return;
+      }
       this.itemDragState = null;
       this.dragAndDropObj.setValues(
         this.columnOrder,
         this.columnReorder,
         this.columnResizeEnabled,
         this.tableHeaderRowRef,
-        this.headersList,
         this.table,
-        this.itemDragState
+        this.itemDragState,
+        this.frozenColumns
       );
       this.dragAndDropObj.handleDragStart(event, draggedColumnId, elementRef, throughMouse);
       /**
@@ -224,6 +252,7 @@ export class ModusTable {
 
   componentWillLoad(): void {
     this.columnOrder = this.columns?.map((column) => column.id as string); // Sets column order
+    this.onChangeOfRowsExpandable();
     this.initializeTable();
   }
 
@@ -240,6 +269,7 @@ export class ModusTable {
         columnSizingInfo: {} as ColumnSizingInfoState,
         columnVisibility: {},
         columnOrder: this.columnReorder ? this.columnOrder : [],
+        expanded: this.expanded,
         sorting: this.sorting,
       },
       enableSorting: this.sort,
@@ -247,6 +277,7 @@ export class ModusTable {
       enableColumnResizing: this.columnResize,
       enableHiding: !!this.panelOptions?.columnsVisibility,
       sortDescFirst: false, // To-Do, workaround to prevent sort descending on certain columns, e.g. numeric.
+      onExpandedChange: (updater: Updater<ExpandedState>) => this.updatingState(updater, 'expanded'),
       onSortingChange: (updater: Updater<ModusTableSortingState>) => this.setSorting(updater),
       onPaginationChange: (updater: PaginationState) => this.setPagination(updater),
       getCoreRowModel: getCoreRowModel(),
@@ -259,6 +290,8 @@ export class ModusTable {
       },
       onColumnVisibilityChange: (updater: Updater<VisibilityState>) => this.updatingState(updater, 'columnVisibility'),
       onColumnOrderChange: (updater: Updater<ColumnOrderState>) => this.updatingState(updater, 'columnOrder'),
+      getExpandedRowModel: getExpandedRowModel(),
+      getSubRows: (row) => row['subRows'],
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       onStateChange: () => {},
       renderFallbackValue: null,
@@ -366,6 +399,7 @@ export class ModusTable {
                       showSortIconOnHover={this.showSortIconOnHover}
                       columnReorder={this.columnReorder}
                       columnResizeEnabled={this.columnResizeEnabled}
+                      frozenColumns={this.frozenColumns}
                       handleDragStart={(event: MouseEvent, id: string, elementRef: HTMLTableHeaderCellElement) =>
                         this.handleDragStart(event, id, elementRef, true)
                       }
@@ -384,8 +418,10 @@ export class ModusTable {
             {this.table.getRowModel()?.rows.map((row) => {
               return (
                 <tr key={row.id} class={this.hover && 'enable-hover'}>
-                  {row.getAllCells()?.map((cell) => {
-                    return <ModusTableCell cell={cell} />;
+                  {row.getAllCells()?.map((cell, cellIndex) => {
+                    return (
+                      <ModusTableCell cell={cell} row={row} cellIndex={cellIndex} rowsExpandable={this.rowsExpandable} />
+                    );
                   })}
                 </tr>
               );

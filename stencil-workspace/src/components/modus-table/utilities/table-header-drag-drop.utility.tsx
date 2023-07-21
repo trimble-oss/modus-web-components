@@ -2,31 +2,32 @@ import { Table } from '@tanstack/table-core';
 import { ArrowLeftKey, ArrowRightKey, EnterKey, EscapeKey, TabKey } from '../constants/constants';
 import { ColumnDragState } from '../models/column-drag-state.model';
 
-export class DragAndDrop {
+export class TableHeaderDragDrop {
   columnOrder: string[] = [];
   columnReorder = false;
   columnResizeEnabled = false;
   tableHeaderRowRef: HTMLTableRowElement;
-  headersList: NodeListOf<ChildNode>;
+  headersList: HTMLElement[];
   table: Table<unknown>;
   itemDragState: ColumnDragState;
+  frozenColumns: string[];
 
   setValues(
     columnOrder: string[],
     columnReorder: boolean,
     columnResizeEnabled: boolean,
     tableHeaderRowRef: HTMLTableRowElement,
-    headersList: NodeListOf<ChildNode>,
     table: Table<unknown>,
-    itemDragState: ColumnDragState
+    itemDragState: ColumnDragState,
+    frozenColumns: string[]
   ) {
     this.columnOrder = columnOrder;
     this.columnReorder = columnReorder;
     this.columnResizeEnabled = columnResizeEnabled;
     this.tableHeaderRowRef = tableHeaderRowRef;
-    this.headersList = headersList;
     this.table = table;
     this.itemDragState = itemDragState;
+    this.frozenColumns = frozenColumns;
   }
 
   /**
@@ -39,7 +40,13 @@ export class DragAndDrop {
     elementRef: HTMLTableHeaderCellElement,
     throughMouse: boolean
   ): void {
-    this.headersList = this.tableHeaderRowRef.childNodes; // List of table headers.
+    this.headersList = [].slice.call(this.tableHeaderRowRef.childNodes); // List of table headers.
+    this.frozenColumns.forEach((frozenColumn) => {
+      const index = this.headersList.findIndex((header) => header.id === frozenColumn);
+      if (index > -1) {
+        this.headersList.splice(index, 1);
+      }
+    });
     this.clearItemDropState();
     this.itemDragState = null;
 

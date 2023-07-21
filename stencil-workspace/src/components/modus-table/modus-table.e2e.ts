@@ -50,7 +50,7 @@ describe('modus-table', () => {
     await page.waitForChanges();
     header = await page.findAll('modus-table >>> th');
     expect(header.length).toBeGreaterThan(0);
-    // expect(header[0].textContent).toBe(MockColumns[0].header);
+    expect(header[0].textContent).toBe(`${MockColumns[0].header} `);
   });
 
   it('Renders changes to data prop', async () => {
@@ -303,7 +303,7 @@ describe('modus-table', () => {
     paginationContainer = await page.find('modus-table >>> .pagination-and-count > .total-count');
     await page.waitForChanges();
     expect(paginationContainer).not.toBeNull();
-    expect(paginationContainer.textContent).toContain('1-2 of 2');
+    expect(paginationContainer.textContent).toContain('Showing result1-2of2 ');
   });
 
   it('Display items per page list when pageSizeList is enabled', async () => {

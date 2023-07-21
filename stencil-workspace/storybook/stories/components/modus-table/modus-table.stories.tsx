@@ -44,7 +44,8 @@ function makeData(...lens): unknown {
 function initializeTable (columns, data, pageSizeList, panelOptions, displayOptions){
   const tag = document.createElement('script');
   tag.innerHTML = `
-  document.querySelector('modus-table').columns = ${JSON.stringify(columns)};  document.querySelector('modus-table').data = ${JSON.stringify(data)};
+  document.querySelector('modus-table').columns = ${JSON.stringify(columns)};
+  document.querySelector('modus-table').data = ${JSON.stringify(data)};
   document.querySelector('modus-table').pageSizeList = ${JSON.stringify(pageSizeList)};
   document.querySelector('modus-table').panelOptions = ${JSON.stringify(panelOptions)};
   document.querySelector('modus-table').displayOptions = ${JSON.stringify(displayOptions)};
@@ -139,7 +140,8 @@ const DefaultArgs = {
   columns: DefaultColumns,
   data: makeData(5),
   panelOptions: {},
-  displayOptions: {}
+  displayOptions: {},
+  rowsExpandable: false,
 };
 
 export default {
@@ -260,6 +262,16 @@ export default {
       },
       type: { required: false },
     },
+    rowsExpandable: {
+      name: 'rows-expandable',
+      description: 'Enables expanded rows.',
+      control: 'boolean',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      },
+      type: { required: false },
+    },
   },
   parameters: {
     actions: {
@@ -291,7 +303,8 @@ const Template = ({
   columns,
   data,
   panelOptions,
-  displayOptions
+  displayOptions,
+  rowsExpandable
 }) => html`
   <div style="width: 950px">
     <modus-table
@@ -303,7 +316,8 @@ const Template = ({
       show-sort-icon-on-hover="${showSortIconOnHover}"
       summary-row="${summaryRow}"
       full-width="${fullWidth}"
-      show-table-panel="${showTablePanel}" />
+      show-table-panel="${showTablePanel}"
+      rows-expandable="${rowsExpandable}" />
   </div>
   ${initializeTable(columns, data, pageSizeList, panelOptions, displayOptions)}
 `;
@@ -406,3 +420,5 @@ export const ColumnReorder = Template.bind({});
 ColumnReorder.args = { ...DefaultArgs, columnReorder: true,
 };
 
+export const ExpandableRows = Template.bind({});
+ExpandableRows.args = { ...DefaultArgs, rowsExpandable: true, data: makeData(7, 4, 3, 2, 1), fullWidth: true };
