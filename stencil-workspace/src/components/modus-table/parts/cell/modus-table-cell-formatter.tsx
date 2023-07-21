@@ -10,7 +10,7 @@ export type Renderable<TProps> = any | FunctionalComponent<TProps>;
 /**
  * Cell formatter enables formatting of a cell value.
  */
-export function cellFormatter<TProps extends object>(
+export function CellFormatter<TProps extends object>(
   Comp: Renderable<TProps>,
   props: TProps
 ): unknown | JSX.Element {

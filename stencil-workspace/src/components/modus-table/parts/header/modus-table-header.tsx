@@ -16,6 +16,7 @@ interface ModusTableHeaderProps {
   showSortIconOnHover: boolean;
   columnReorder: boolean;
   columnResizeEnabled: boolean;
+  frozenColumns: string[];
   handleDragStart: (event: MouseEvent, id: string, elementRef: HTMLTableHeaderCellElement) => void;
   handleKeyboardStart: (event: KeyboardEvent, id: string, elementRef: HTMLTableHeaderCellElement) => void;
   onMouseEnterResize: () => void;
@@ -32,13 +33,13 @@ export const ModusTableHeader: FunctionalComponent<ModusTableHeaderProps> = ({
   showSortIconOnHover,
   columnReorder,
   columnResizeEnabled,
+  frozenColumns,
   handleDragStart,
   handleKeyboardStart,
   onMouseEnterResize,
   onMouseLeaveResize,
 }) => {
   let elementRef: HTMLTableHeaderCellElement;
-  console.log(columnResizeEnabled);
 
   return (
     <th
@@ -47,7 +48,7 @@ export const ModusTableHeader: FunctionalComponent<ModusTableHeaderProps> = ({
       colSpan={header.colSpan}
       class={`
         ${isNestedParentHeader ? 'text-align-center' : ''}
-        ${!columnResizeEnabled && columnReorder ? 'can-reorder' : ''}
+        ${!columnResizeEnabled && columnReorder ? (frozenColumns.includes(header.id) ? '' : 'can-reorder') : ''}
         ${columnResizeEnabled ? 'show-resize-cursor' : ''}
         ${header.column.getIsResizing() ? 'active-resize' : ''}
       `}
@@ -76,12 +77,16 @@ export const ModusTableHeader: FunctionalComponent<ModusTableHeaderProps> = ({
         </div>
       )}
       {/** Column resizing handler */}
-      <ModusTableColumnResizingHandler
-        table={table}
-        header={header}
-        onMouseEnter={() => onMouseEnterResize()}
-        onMouseLeave={() => onMouseLeaveResize()}
-      />
+      {frozenColumns.includes(header.id) ? (
+        ''
+      ) : (
+        <ModusTableColumnResizingHandler
+          table={table}
+          header={header}
+          onMouseEnter={() => onMouseEnterResize()}
+          onMouseLeave={() => onMouseLeaveResize()}
+        />
+      )}
       {/** Icons for column reorder  */}
       <IconArrowDown size={'16'} />
       <IconArrowUp size={'16'} />

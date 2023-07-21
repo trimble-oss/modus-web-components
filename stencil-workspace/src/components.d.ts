@@ -961,6 +961,10 @@ export namespace Components {
          */
         "panelOptions": ModusTablePanelOptions | null;
         /**
+          * (Optional) To display expanded rows.
+         */
+        "rowsExpandable": boolean;
+        /**
           * (Optional) To display sort icon on hover.
          */
         "showSortIconOnHover": boolean;
@@ -2851,6 +2855,10 @@ declare namespace LocalJSX {
           * (Optional) To display a panel options, which allows access to table operations like hiding columns.
          */
         "panelOptions"?: ModusTablePanelOptions | null;
+        /**
+          * (Optional) To display expanded rows.
+         */
+        "rowsExpandable"?: boolean;
         /**
           * (Optional) To display sort icon on hover.
          */
