@@ -32,13 +32,17 @@ export const ModusTablePagination: FunctionalComponent<ModusTablePaginationProps
       <div class="pagination-and-count">
         <div class="total-count">
           <span>{ShowResult}</span>
+          <span>{table.getState().pagination.pageIndex * table.getState().pagination.pageSize + 1}</span>
+          <span>-</span>
           <span>
-            {table.getState().pagination.pageIndex * table.getState().pagination.pageSize + 1}-
             {table.getState().pagination.pageIndex + 1 === table.getPageCount()
-              ? totalCount
-              : (table.getState().pagination.pageIndex + 1) * table.getState().pagination.pageSize}{' '}
-            of {totalCount}
+              ? table.options.paginateExpandedRows
+                ? table.getExpandedRowModel().rows.length
+                : totalCount
+              : (table.getState().pagination.pageIndex + 1) * table.getState().pagination.pageSize}
           </span>
+          <span>of</span>
+          <span>{table.options.paginateExpandedRows ? table.getExpandedRowModel().rows.length : totalCount}</span>{' '}
         </div>
         <modus-pagination
           active-page={1}
