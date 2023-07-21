@@ -145,8 +145,24 @@ table {
       td {
         border: $rem-1px $modus-table-header-border-color solid;
 
-        &.text-align-right {
-          text-align: right;
+        .table-cell {
+          align-items: center;
+          display: flex;
+
+          &.text-align-right {
+            justify-content: flex-end;
+          }
+
+          .expand {
+            cursor: pointer;
+            display: flex;
+          }
+
+          .cell-content {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-wrap: nowrap;
+          }
         }
       }
 
@@ -193,12 +209,6 @@ table {
         text-align: center;
       }
     }
-
-    td {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      word-wrap: no-wrap;
-    }
   }
 
   &.borderless {
@@ -230,7 +240,9 @@ table {
 
     modus-select {
       margin-right: $rem-5px;
-      min-width: 60px; /* Prevent the select from shrinking */
+      min-width: 60px;
+
+      /* Prevent the select from shrinking */
     }
 
     span {
@@ -248,6 +260,10 @@ table {
 
       span {
         margin-right: $rem-5px;
+
+        &:last-child {
+          margin: 0;
+        }
       }
     }
   }

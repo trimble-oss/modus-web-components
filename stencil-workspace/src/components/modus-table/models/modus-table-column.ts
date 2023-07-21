@@ -6,7 +6,6 @@ export interface ModusTableColumn<TData extends RowData, TValue = unknown> {
   accessorKey: string;
   dataType: ModusColumnDataType;
   id?: string;
-  // columns?: ModusTableColumn[]; //To support in the future
   cell?: ColumnDefTemplate<CellContext<TData, TValue>>;
   footer?: string;
   enableSorting?: boolean;
@@ -15,4 +14,5 @@ export interface ModusTableColumn<TData extends RowData, TValue = unknown> {
   minSize?: number;
   maxSize?: number;
   showTotal?: boolean;
+  subRows?: ModusTableColumn<TData, TValue>[];
 }
