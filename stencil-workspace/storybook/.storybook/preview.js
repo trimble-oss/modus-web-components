@@ -40,7 +40,7 @@ export const parameters = {
     storySort: {
       order: [
         'Introduction',
-        ['Welcome', 'Getting Started'],
+        ['Welcome', 'Getting Started', 'Contributing'],
         'Components',
         'User Inputs',
         'Framework Integrations'
