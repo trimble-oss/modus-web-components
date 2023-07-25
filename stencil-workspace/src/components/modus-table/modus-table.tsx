@@ -267,7 +267,7 @@ export class ModusTable {
         columnPinning: {},
         columnSizing: {},
         columnSizingInfo: {} as ColumnSizingInfoState,
-        columnVisibility: {},
+        columnVisibility: this.columnVisibility,
         columnOrder: this.columnReorder ? this.columnOrder : [],
         expanded: this.expanded,
         sorting: this.sorting,
@@ -361,6 +361,9 @@ export class ModusTable {
   }
 
   render(): void {
+    console.log(this.table.getHeaderGroups());
+    console.log(this.table.getRowModel());
+
     const lengthOfHeaderGroups: number = this.table.getHeaderGroups().length;
     const tableStyle = this.fullWidth
       ? { width: '100%' }
@@ -418,7 +421,7 @@ export class ModusTable {
             {this.table.getRowModel()?.rows.map((row) => {
               return (
                 <tr key={row.id} class={this.hover && 'enable-hover'}>
-                  {row.getAllCells()?.map((cell, cellIndex) => {
+                  {row.getVisibleCells()?.map((cell, cellIndex) => {
                     return (
                       <ModusTableCell cell={cell} row={row} cellIndex={cellIndex} rowsExpandable={this.rowsExpandable} />
                     );
