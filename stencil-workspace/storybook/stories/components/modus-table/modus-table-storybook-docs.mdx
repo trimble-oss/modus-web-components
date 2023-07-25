@@ -37,9 +37,9 @@ Basic table that outputs data in tabular format after accepting `data` and `colu
 <Story id="components-table--default" height={'350px'} />
 
 ```html
-<div style="width: 950px">
-  <modus-table hover="false" sort="false" />
-</div>
+  <div style="width: 950px">
+    <modus-table hover="false" sort="false" />
+  </div>
 <script>
   document.querySelector('modus-table').columns = [
     {
@@ -421,6 +421,8 @@ Users can use keyboard navigation to perform different actions.
 | `showTablePanel`      | `show-table-panel`        | (optional) To display table panel. Is used to display panel options.                                        | `boolean`                | `false`      |
 | `panelOptions`        | `panel-options`           | (Optional) To display a panel above the table, which allows access to table operations like hiding columns. | `ModusTablePanelOptions` | `null`       |
 | `rowsExpandable`      | `rows-expandable`         | (Optional) To display `subRows` data of a row. .                                                            | `boolean`                | 'false'      |
+| `maxHeight`           | `max-height`              | (Optional) To display a vertical scrollbar when the height is exceeded.                                     | `string`                 | `null`       |
+| `maxWidth`            | `max-width`               | (Optional) To display a horizontal scrollbar when the width is exceeded.                                    | `string`                 | `null`       |
 
 ### Events
 

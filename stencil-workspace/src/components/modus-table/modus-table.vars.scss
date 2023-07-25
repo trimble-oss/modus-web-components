@@ -29,3 +29,7 @@ $modus-menu-dropdown-item-hover-bg: var(--modus-group-item-hover-bg, #e0e1e9) !d
 /** Drag Header */
 $modus-data-table-drag-header-bg: var(--modus-table-bg, #fff) !default;
 $modus-table-header-drop-color: var(--modus-table-header-drop-color, #019aeb) !default;
+
+/** Scrollbar */
+$modus-table-scrollbar-thumb-color: var(--modus-table-scrollbar-thumb-color, #6a6e79) !default;
+$modus-table-scrollbar-track-color: var(--modus-table-scrollbar-track-color, #b7b9c3) !default;

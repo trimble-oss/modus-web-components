@@ -130,6 +130,11 @@ export class ModusTable {
       ];
     }
   }
+  /** (Optional) To display a vertical scrollbar when the height is exceeded. */
+  @Prop() maxHeight: string;
+
+  /** (Optional) To display a horizontal scrollbar when the width is exceeded. */
+  @Prop() maxWidth: string;
 
   /** Emits event on sort change */
   @Event() sortChange: EventEmitter<ModusTableSortingState>;
@@ -267,7 +272,7 @@ export class ModusTable {
         columnPinning: {},
         columnSizing: {},
         columnSizingInfo: {} as ColumnSizingInfoState,
-        columnVisibility: {},
+        columnVisibility: this.columnVisibility,
         columnOrder: this.columnReorder ? this.columnOrder : [],
         expanded: this.expanded,
         sorting: this.sorting,
@@ -362,79 +367,94 @@ export class ModusTable {
 
   render(): void {
     const lengthOfHeaderGroups: number = this.table.getHeaderGroups().length;
+    const totalSize = this.table.getTotalSize();
     const tableStyle = this.fullWidth
       ? { width: '100%' }
-      : { width: `${this.table.getTotalSize()}px`, tableLayout: 'fixed' };
-
+      : totalSize > 0
+      ? { width: `${totalSize}px`, tableLayout: 'fixed' }
+      : { tableLayout: 'fixed' };
+    const borderlessTableStyle = this.displayOptions && this.displayOptions.borderless && { border: 'none' };
     const headerGroups: HeaderGroup<unknown>[] = this.table.getHeaderGroups();
     const footerGroups: HeaderGroup<unknown>[] = this.table.getFooterGroups();
     const className = `
-      ${this.displayOptions.borderless && 'borderless'}
-      ${this.displayOptions.cellBorderless && 'cell-borderless'}
-    `;
+  ${this.displayOptions && this.displayOptions.borderless ? 'borderless' : ''}
+  ${this.displayOptions && this.displayOptions.cellBorderless ? 'cell-borderless' : ''}
+`;
 
     return (
       <Host>
-        {this.showTablePanel && this.panelOptions && (
-          <modus-table-panel table={this.table} options={this.panelOptions}>
-            <div slot="left-section">
-              <slot name="panelGroupLeft"></slot>
-            </div>
-            <div slot="right-section">
-              <slot name="panelGroupRight"></slot>
-            </div>
-          </modus-table-panel>
-        )}
+        <div style={{ maxWidth: this.maxWidth }}>
+          {this.showTablePanel && this.panelOptions && (
+            <modus-table-panel table={this.table} options={this.panelOptions}>
+              <div slot="left-section">
+                <slot name="panelGroupLeft"></slot>
+              </div>
+              <div slot="right-section">
+                <slot name="panelGroupRight"></slot>
+              </div>
+            </modus-table-panel>
+          )}
 
-        <table class={className} style={tableStyle}>
-          <thead>
-            {headerGroups?.map((headerGroup, index) => (
-              <tr key={headerGroup.id} ref={(element: HTMLTableRowElement) => (this.tableHeaderRowRef = element)}>
-                {headerGroup.headers?.map((header) => {
+          <div class="table-container" style={{ maxHeight: this.maxHeight, ...borderlessTableStyle }}>
+            <table class={className} style={tableStyle}>
+              <thead>
+                {headerGroups?.map((headerGroup, index) => (
+                  <tr key={headerGroup.id} ref={(element: HTMLTableRowElement) => (this.tableHeaderRowRef = element)}>
+                    {headerGroup.headers?.map((header) => {
+                      return (
+                        <ModusTableHeader
+                          table={this.table}
+                          header={header}
+                          isNestedParentHeader={index < lengthOfHeaderGroups - 1}
+                          showSortIconOnHover={this.showSortIconOnHover}
+                          columnReorder={this.columnReorder}
+                          columnResizeEnabled={this.columnResizeEnabled}
+                          frozenColumns={this.frozenColumns}
+                          handleDragStart={(event: MouseEvent, id: string, elementRef: HTMLTableHeaderCellElement) =>
+                            this.handleDragStart(event, id, elementRef, true)
+                          }
+                          handleKeyboardStart={(event: KeyboardEvent, id: string, elementRef: HTMLTableHeaderCellElement) =>
+                            this.handleDragStart(event, id, elementRef, false)
+                          }
+                          onMouseEnterResize={() => (this.columnResizeEnabled = true)}
+                          onMouseLeaveResize={() => (this.columnResizeEnabled = false)}
+                        />
+                      );
+                    })}
+                  </tr>
+                ))}
+              </thead>
+              <tbody>
+                {this.table.getRowModel()?.rows.map((row) => {
                   return (
-                    <ModusTableHeader
-                      table={this.table}
-                      header={header}
-                      isNestedParentHeader={index < lengthOfHeaderGroups - 1}
-                      showSortIconOnHover={this.showSortIconOnHover}
-                      columnReorder={this.columnReorder}
-                      columnResizeEnabled={this.columnResizeEnabled}
-                      frozenColumns={this.frozenColumns}
-                      handleDragStart={(event: MouseEvent, id: string, elementRef: HTMLTableHeaderCellElement) =>
-                        this.handleDragStart(event, id, elementRef, true)
-                      }
-                      handleKeyboardStart={(event: KeyboardEvent, id: string, elementRef: HTMLTableHeaderCellElement) =>
-                        this.handleDragStart(event, id, elementRef, false)
-                      }
-                      onMouseEnterResize={() => (this.columnResizeEnabled = true)}
-                      onMouseLeaveResize={() => (this.columnResizeEnabled = false)}
-                    />
+                    <tr key={row.id} class={this.hover && 'enable-hover'}>
+                      {row.getVisibleCells()?.map((cell, cellIndex) => {
+                        return (
+                          <ModusTableCell cell={cell} row={row} cellIndex={cellIndex} rowsExpandable={this.rowsExpandable} />
+                        );
+                      })}
+                    </tr>
                   );
                 })}
-              </tr>
-            ))}
-          </thead>
-          <tbody>
-            {this.table.getRowModel()?.rows.map((row) => {
-              return (
-                <tr key={row.id} class={this.hover && 'enable-hover'}>
-                  {row.getAllCells()?.map((cell, cellIndex) => {
-                    return (
-                      <ModusTableCell cell={cell} row={row} cellIndex={cellIndex} rowsExpandable={this.rowsExpandable} />
-                    );
-                  })}
-                </tr>
-              );
-            })}
-          </tbody>
-          {this.summaryRow ? <ModusTableSummaryRow footerGroups={[footerGroups[0]]} tableData={this.data} /> : ''}
-        </table>
-        <slot name="customFooter"></slot>
-        {this.pagination && (
-          <ModusTablePagination table={this.table} totalCount={this.data.length} pageSizeList={this.pageSizeList} />
-        )}
+              </tbody>
+              {this.summaryRow ? (
+                <ModusTableSummaryRow
+                  footerGroups={[footerGroups[0]]}
+                  tableData={this.data}
+                  borderlessOptions={this.displayOptions}
+                />
+              ) : (
+                ''
+              )}
+            </table>
+          </div>
+          <slot name="customFooter"></slot>
+          {this.pagination && (
+            <ModusTablePagination table={this.table} totalCount={this.data.length} pageSizeList={this.pageSizeList} />
+          )}
 
-        <ModusTableDragItem draggingState={this.itemDragState}></ModusTableDragItem>
+          <ModusTableDragItem draggingState={this.itemDragState}></ModusTableDragItem>
+        </div>
       </Host>
     );
   }
