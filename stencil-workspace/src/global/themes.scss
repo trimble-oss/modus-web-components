@@ -350,6 +350,10 @@
   --modus-table-header-color: var(--modus-gray-8);
   --modus-table-header-drop-color: var(--modus-blue-4);
 
+  // Scrollbar
+  --modus-table-scrollbar-thumb-color: var(--modus-gray-6);
+  --modus-table-scrollbar-track-color: var(--modus-gray-2);
+
   // Body
   --modus-table-hover-bg: var(--modus-blue-pale);
   --modus-table-hover-border-color: var(--modus-table-border-color);
@@ -657,6 +661,10 @@
   --modus-table-header-bg: var(--modus-gray-8);
   --modus-table-header-border-color: var(--modus-gray-6);
   --modus-table-header-color: var(--modus-gray-0);
+
+  // Scrollbar
+  --modus-table-scrollbar-thumb-color: var(--modus-gray-6);
+  --modus-table-scrollbar-track-color: var(--modus-gray-2);
 
   // Body
   --modus-table-hover-bg: #464b52;
