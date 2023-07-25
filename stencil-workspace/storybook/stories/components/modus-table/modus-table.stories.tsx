@@ -12,6 +12,10 @@ function range(len) {
   return arr
 }
 
+function randomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min) + min);
+}
+
 function newPerson() {
   const rand = Math.random()
   const namesIndex = Math.floor(rand * (Names.length - 1))
@@ -24,6 +28,8 @@ function newPerson() {
     visits: Math.floor(rand * 100),
     progress: Math.floor(rand * 100),
     status: rand > 0.66 ? 'Verified' : rand > 0.33 ? 'Pending' : 'Rejected',
+    income: randomNumber(1000,1000000),
+    createdAt: new Date(randomNumber(1990, 2020), randomNumber(0, 11), randomNumber(1, 30)).toDateString()
   }
 }
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -98,7 +104,7 @@ const DefaultColumns = [
      "accessorKey":"age",
      "id":"age",
      "dataType":"integer",
-     "size":100,
+     "size":80,
      "minSize":60
   },
   {
@@ -106,7 +112,7 @@ const DefaultColumns = [
      "accessorKey":"visits",
      "id":"visits",
      "dataType":"integer",
-     "maxSize":150,
+     "maxSize":80,
      "showTotal":true,
      "minSize":80,
   },
@@ -123,6 +129,22 @@ const DefaultColumns = [
      "id":"progress",
      "dataType":"integer",
      "minSize":100
+  },
+  {
+     "header":"Income",
+     "accessorKey":"income",
+     "id":"income",
+     "dataType":"integer",
+     "size":100,
+     "minSize":100
+  },
+  {
+     "header":"Created At",
+     "accessorKey":"createdAt",
+     "id":"createdAt",
+     "dataType":"string",
+     "size":150,
+     "minSize":150
   }
 ];
 
@@ -142,6 +164,8 @@ const DefaultArgs = {
   panelOptions: {},
   displayOptions: {},
   rowsExpandable: false,
+  maxHeight: '',
+  maxWidth: ''
 };
 
 export default {
@@ -304,7 +328,9 @@ const Template = ({
   data,
   panelOptions,
   displayOptions,
-  rowsExpandable
+  rowsExpandable,
+  maxHeight,
+  maxWidth
 }) => html`
   <div style="width: 950px">
     <modus-table
@@ -317,7 +343,9 @@ const Template = ({
       summary-row="${summaryRow}"
       full-width="${fullWidth}"
       show-table-panel="${showTablePanel}"
-      rows-expandable="${rowsExpandable}" />
+      rows-expandable="${rowsExpandable}"
+      max-height="${maxHeight}"
+      max-width="${maxWidth}"/>
   </div>
   ${initializeTable(columns, data, pageSizeList, panelOptions, displayOptions)}
 `;
@@ -352,7 +380,9 @@ export const ValueFormatter = ({
   showTablePanel,
   columnReorder,
   panelOptions,
-  displayOptions
+  displayOptions,
+  maxHeight,
+  maxWidth
 }) => html`
   <div style="width: 950px">
     <modus-table
@@ -364,7 +394,9 @@ export const ValueFormatter = ({
     summary-row="${summaryRow}"
     full-width="${fullWidth}"
     column-reorder="${columnReorder}"
-    show-table-panel="${showTablePanel}" />
+    show-table-panel="${showTablePanel}"
+    max-height="${maxHeight}"
+    max-width="${maxWidth}"/>
   </div>
   ${valueFormatterTable(pageSizeList, panelOptions, displayOptions)}
 `;
@@ -380,7 +412,9 @@ ValueFormatter.args = {
   pageSizeList: [7,10,20],
   showTablePanel: false,
   panelOptions: {},
-  displayOptions: {}
+  displayOptions: {},
+  maxHeight: '',
+  maxWidth: ''
 };
 const valueFormatterTable = (pageSizeList, panelOptions, displayOptions) => {
   const tag = document.createElement('script');
