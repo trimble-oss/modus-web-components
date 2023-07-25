@@ -1,19 +1,41 @@
 @import './modus-table.vars';
 
-table {
+.table-container {
   border: $rem-1px $modus-table-border-color solid;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    height: 0.75em;
+    width: 0.75em;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: $modus-table-scrollbar-track-color;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $modus-table-scrollbar-thumb-color;
+    border-radius: 0.25em;
+  }
+}
+
+table {
   border-collapse: collapse;
   font-family: $primary-font;
   font-size: $rem-14px;
   width: 100%;
 
   thead {
+    position: sticky;
+    top: 0;
+
     tr {
       background-color: $modus-table-header-bg;
+      box-shadow: inset 0 -0.5px 0 $modus-table-header-border-color;
       color: $modus-table-header-color;
 
       th {
-        border: $rem-1px $modus-table-header-border-color solid;
+        border-right: $rem-1px $modus-table-header-border-color solid;
         font-weight: $font-weight-semi-bold;
         overflow: hidden;
         padding: $rem-8px $rem-8px $rem-8px $rem-16px;
@@ -138,12 +160,24 @@ table {
   }
 
   tbody {
+    tr:first-child {
+      td {
+        border-top: none;
+      }
+    }
+
+    tr:last-child {
+      td {
+        border-bottom: none;
+      }
+    }
+
     tr {
       background-color: $modus-table-body-bg;
       color: $modus-table-body-color;
 
       td {
-        border: $rem-1px $modus-table-header-border-color solid;
+        border-top: $rem-1px $modus-table-header-border-color solid;
 
         .table-cell {
           align-items: center;
@@ -177,6 +211,10 @@ table {
   tfoot {
     tr {
       &.summary-row {
+        bottom: 0;
+        box-shadow: 1px -1px $modus-table-header-border-color;
+        position: sticky;
+
         td {
           background-color: $modus-table-header-bg;
           border: none;
@@ -195,14 +233,15 @@ table {
 
     th,
     td {
-      border: $rem-1px $modus-table-border-color solid;
+      border-right: $rem-1px $modus-table-border-color solid;
       box-sizing: border-box;
       min-height: 3rem;
       padding: 0.25rem 1rem;
       text-align: left;
 
       &.active-resize {
-        border-right: $rem-2px solid $modus-primary-color;
+        // box-shadow: inset -2px 0 0 $modus-primary-color;
+        border-right: 2px $modus-primary-color solid;
       }
 
       &.text-align-center {
@@ -219,6 +258,10 @@ table {
     th,
     td {
       border: none;
+    }
+
+    tr {
+      box-shadow: none;
     }
   }
 }
