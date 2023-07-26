@@ -6,8 +6,8 @@ import {
 } from '@stencil/core';
 import { Table } from '@tanstack/table-core';
 import { ArrowDown, ArrowUp, EnterKey, SpaceKey, TabKey } from '../../../constants/constants';
-import { ModusTableColumnsVisibilityOptions } from '../../../models';
 import { JSX } from '@stencil/core/internal';
+import ModusTableColumnsVisibilityOptions from '../../../models/modus-table-columns-visibility-options';
 
 @Component({
   tag: 'modus-table-columns-visibility',
