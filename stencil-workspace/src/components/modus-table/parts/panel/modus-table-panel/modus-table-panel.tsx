@@ -5,7 +5,7 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Table } from '@tanstack/table-core';
-import { ModusTablePanelOptions } from '../../../models';
+import ModusTablePanelOptions from '../../../models/modus-table-panel-options';
 @Component({
   tag: 'modus-table-panel',
   styleUrl: './modus-table-panel.scss',

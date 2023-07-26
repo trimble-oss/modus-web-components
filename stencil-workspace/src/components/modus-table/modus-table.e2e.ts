@@ -50,7 +50,7 @@ describe('modus-table', () => {
     await page.waitForChanges();
     header = await page.findAll('modus-table >>> th');
     expect(header.length).toBeGreaterThan(0);
-    expect(header[0].textContent).toBe(`${MockColumns[0].header} `);
+    expect(header[0].textContent).toBe(MockColumns[0].header);
   });
 
   it('Renders changes to data prop', async () => {

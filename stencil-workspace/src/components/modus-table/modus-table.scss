@@ -90,11 +90,6 @@ table {
           }
         }
 
-        .icon-arrow-down,
-        .icon-arrow-up {
-          display: none;
-        }
-
         .can-resize {
           &:focus-visible {
             outline: none;
@@ -117,27 +112,6 @@ table {
 
           &:active {
             cursor: grabbing;
-          }
-        }
-
-        &.drop-allow {
-          overflow: visible;
-
-          svg {
-            display: block;
-            fill: $modus-table-header-drop-color;
-          }
-
-          .icon-arrow-down {
-            left: -8.3px;
-            position: absolute;
-            top: -14px;
-          }
-
-          .icon-arrow-up {
-            bottom: -14px;
-            left: -8.3px;
-            position: absolute;
           }
         }
 
@@ -338,5 +312,19 @@ table {
   .sort-icon-containor,
   svg {
     display: none;
+  }
+}
+
+.drop-allow-arrows {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  left: 0;
+  position: fixed;
+  top: -1px;
+  z-index: 9;
+
+  svg {
+    fill: $modus-table-header-drop-color;
   }
 }

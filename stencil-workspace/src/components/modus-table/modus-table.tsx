@@ -29,15 +29,18 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
 } from '@tanstack/table-core';
-import { ModusTableColumn, ModusTableDisplayOptions, ModusTableSortingState, ModusTablePanelOptions } from './models';
+import { DefaultPageSizes } from './constants/constants';
+import { ModusTableCell } from './parts/cell/modus-table-cell';
+import { ModusTableHeader } from './parts/header/modus-table-header';
+import { ModusTableDragArrows, ModusTableDragItem } from './parts/modus-table-drag-item';
 import { ModusTablePagination } from './parts/modus-table-pagination';
 import { ModusTableSummaryRow } from './parts/modus-table-summary-row';
-import { DefaultPageSizes } from './constants/constants';
-import { ModusTableHeader } from './parts/header/modus-table-header';
-import { ColumnDragState } from './models/column-drag-state.model';
 import { TableHeaderDragDrop } from './utilities/table-header-drag-drop.utility';
-import { ModusTableDragItem } from './parts/modus-table-drag-item';
-import { ModusTableCell } from './parts/cell/modus-table-cell';
+import ModusTableColumn from './models/modus-table-column';
+import ModusTablePanelOptions from './models/modus-table-panel-options';
+import ModusTableDisplayOptions from './models/modus-table-display-options';
+import ColumnDragState from './models/column-drag-state.model';
+import { ModusTableSortingState } from './models';
 
 /**
  * @slot customFooter - Slot for custom footer.
@@ -208,8 +211,6 @@ export class ModusTable {
       !this.itemDragState?.targetId && // On Enter click two functions are called handleDragStart and handleKeyDown, if targetId is present we ignore handleDragStart.
       this.itemDragState?.draggedColumnId !== draggedColumnId // If same item is selected we don't update itemDragState.
     ) {
-      console.log(this.frozenColumns);
-
       if (this.frozenColumns.includes(draggedColumnId)) {
         return;
       }
@@ -454,6 +455,7 @@ export class ModusTable {
           )}
 
           <ModusTableDragItem draggingState={this.itemDragState}></ModusTableDragItem>
+          <ModusTableDragArrows arrowsPosition={this.itemDragState?.arrowsPosition}></ModusTableDragArrows>
         </div>
       </Host>
     );

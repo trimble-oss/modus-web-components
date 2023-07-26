@@ -1,7 +1,7 @@
 import { CellContext, ColumnDefTemplate, RowData } from '@tanstack/table-core';
 import { ModusColumnDataType } from '../enums/modus-column-data-type';
 
-export interface ModusTableColumn<TData extends RowData, TValue = unknown> {
+export default interface ModusTableColumn<TData extends RowData, TValue = unknown> {
   header: string;
   accessorKey: string;
   dataType: ModusColumnDataType;
