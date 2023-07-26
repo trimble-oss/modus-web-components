@@ -9,7 +9,7 @@ import {
 import { IconHorizontalEllipsis } from '../../../../icons/icon-horizontal-ellipsis';
 import { EnterKey, EscapeKey, SpaceKey } from '../../../constants/constants';
 import { Table } from '@tanstack/table-core';
-import { ModusTablePanelOptions } from '../../../models';
+import ModusTablePanelOptions from '../../../models/modus-table-panel-options';
 
 @Component({
   tag: 'modus-table-dropdown-menu',

@@ -16,6 +16,8 @@
 | `displayOptions`       | --                        | (Optional) To control display options of table.                                                     | `ModusTableDisplayOptions`             | `{     borderless: false,     cellBorderless: false,   }` |
 | `fullWidth`            | `full-width`              |                                                                                                     | `boolean`                              | `false`                                                   |
 | `hover`                | `hover`                   | (Optional) To enable row hover in table.                                                            | `boolean`                              | `false`                                                   |
+| `maxHeight`            | `max-height`              | (Optional) To display a vertical scrollbar when the height is exceeded.                             | `string`                               | `undefined`                                               |
+| `maxWidth`             | `max-width`               | (Optional) To display a horizontal scrollbar when the width is exceeded.                            | `string`                               | `undefined`                                               |
 | `pageSizeList`         | --                        |                                                                                                     | `number[]`                             | `DefaultPageSizes`                                        |
 | `pagination`           | `pagination`              |                                                                                                     | `boolean`                              | `undefined`                                               |
 | `panelOptions`         | --                        | (Optional) To display a panel options, which allows access to table operations like hiding columns. | `ModusTablePanelOptions`               | `null`                                                    |
@@ -70,17 +72,17 @@ Type: `Promise<void>`
 ### Depends on
 
 - [modus-table-panel](./parts/panel/modus-table-panel)
+- [modus-tooltip](../modus-tooltip)
 - [modus-select](../modus-select)
 - [modus-pagination](../modus-pagination)
-- [modus-tooltip](../modus-tooltip)
 
 ### Graph
 ```mermaid
 graph TD;
   modus-table --> modus-table-panel
+  modus-table --> modus-tooltip
   modus-table --> modus-select
   modus-table --> modus-pagination
-  modus-table --> modus-tooltip
   modus-table-panel --> modus-table-dropdown-menu
   modus-table-dropdown-menu --> modus-table-columns-visibility
   modus-table-columns-visibility --> modus-checkbox

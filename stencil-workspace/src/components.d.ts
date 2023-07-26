@@ -14,7 +14,7 @@ import { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, 
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-import { ModusTableColumn, ModusTableDisplayOptions, ModusTablePanelOptions, ModusTableSortingState } from "./components/modus-table/models";
+import { ModusTableColumn, ModusTableColumnsVisibilityOptions, ModusTableDisplayOptions, ModusTablePanelOptions, ModusTableSortingState } from "./components/modus-table/models";
 import { Column, Table } from "@tanstack/table-core";
 import { Tab } from "./components/modus-tabs/modus-tabs";
 import { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
@@ -28,7 +28,7 @@ export { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, 
 export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 export { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 export { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-export { ModusTableColumn, ModusTableDisplayOptions, ModusTablePanelOptions, ModusTableSortingState } from "./components/modus-table/models";
+export { ModusTableColumn, ModusTableColumnsVisibilityOptions, ModusTableDisplayOptions, ModusTablePanelOptions, ModusTableSortingState } from "./components/modus-table/models";
 export { Column, Table } from "@tanstack/table-core";
 export { Tab } from "./components/modus-tabs/modus-tabs";
 export { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
@@ -995,10 +995,6 @@ export namespace Components {
          */
         "panelOptions": ModusTablePanelOptions | null;
         /**
-          * (Optional) To display expanded rows.
-         */
-        "rowsExpandable": boolean;
-        /**
           * (Optional) To display sort icon on hover.
          */
         "showSortIconOnHover": boolean;
@@ -1020,6 +1016,29 @@ export namespace Components {
           * @param show Boolean value decides to visibility of column
          */
         "toggleColumnVisibility": (columnId: string, show: boolean) => Promise<void>;
+    }
+    interface ModusTableColumnsVisibility {
+        /**
+          * Column visibility options
+         */
+        "columnsVisibility": ModusTableColumnsVisibilityOptions;
+        "menuIconContainerRef": HTMLDivElement;
+        "showDropdown": boolean;
+        /**
+          * Table data.
+         */
+        "table": Table<unknown>;
+        "toggleDropdown": (show: boolean) => void;
+    }
+    interface ModusTableDropdownMenu {
+        /**
+          * dropdown menu options.
+         */
+        "options": ModusTablePanelOptions;
+        /**
+          * Table data.
+         */
+        "table": Table<unknown>;
     }
     interface ModusTablePanel {
         /**
@@ -1662,6 +1681,18 @@ declare global {
         prototype: HTMLModusTableElement;
         new (): HTMLModusTableElement;
     };
+    interface HTMLModusTableColumnsVisibilityElement extends Components.ModusTableColumnsVisibility, HTMLStencilElement {
+    }
+    var HTMLModusTableColumnsVisibilityElement: {
+        prototype: HTMLModusTableColumnsVisibilityElement;
+        new (): HTMLModusTableColumnsVisibilityElement;
+    };
+    interface HTMLModusTableDropdownMenuElement extends Components.ModusTableDropdownMenu, HTMLStencilElement {
+    }
+    var HTMLModusTableDropdownMenuElement: {
+        prototype: HTMLModusTableDropdownMenuElement;
+        new (): HTMLModusTableDropdownMenuElement;
+    };
     interface HTMLModusTablePanelElement extends Components.ModusTablePanel, HTMLStencilElement {
     }
     var HTMLModusTablePanelElement: {
@@ -1748,6 +1779,8 @@ declare global {
         "modus-spinner": HTMLModusSpinnerElement;
         "modus-switch": HTMLModusSwitchElement;
         "modus-table": HTMLModusTableElement;
+        "modus-table-columns-visibility": HTMLModusTableColumnsVisibilityElement;
+        "modus-table-dropdown-menu": HTMLModusTableDropdownMenuElement;
         "modus-table-panel": HTMLModusTablePanelElement;
         "modus-tabs": HTMLModusTabsElement;
         "modus-text-input": HTMLModusTextInputElement;
@@ -2881,10 +2914,6 @@ declare namespace LocalJSX {
          */
         "panelOptions"?: ModusTablePanelOptions | null;
         /**
-          * (Optional) To display expanded rows.
-         */
-        "rowsExpandable"?: boolean;
-        /**
           * (Optional) To display sort icon on hover.
          */
         "showSortIconOnHover"?: boolean;
@@ -2900,6 +2929,29 @@ declare namespace LocalJSX {
           * (Optional) To display summary row.
          */
         "summaryRow"?: boolean;
+    }
+    interface ModusTableColumnsVisibility {
+        /**
+          * Column visibility options
+         */
+        "columnsVisibility"?: ModusTableColumnsVisibilityOptions;
+        "menuIconContainerRef"?: HTMLDivElement;
+        "showDropdown"?: boolean;
+        /**
+          * Table data.
+         */
+        "table"?: Table<unknown>;
+        "toggleDropdown"?: (show: boolean) => void;
+    }
+    interface ModusTableDropdownMenu {
+        /**
+          * dropdown menu options.
+         */
+        "options"?: ModusTablePanelOptions;
+        /**
+          * Table data.
+         */
+        "table"?: Table<unknown>;
     }
     interface ModusTablePanel {
         /**
@@ -3247,6 +3299,8 @@ declare namespace LocalJSX {
         "modus-spinner": ModusSpinner;
         "modus-switch": ModusSwitch;
         "modus-table": ModusTable;
+        "modus-table-columns-visibility": ModusTableColumnsVisibility;
+        "modus-table-dropdown-menu": ModusTableDropdownMenu;
         "modus-table-panel": ModusTablePanel;
         "modus-tabs": ModusTabs;
         "modus-text-input": ModusTextInput;
@@ -3298,6 +3352,8 @@ declare module "@stencil/core" {
             "modus-spinner": LocalJSX.ModusSpinner & JSXBase.HTMLAttributes<HTMLModusSpinnerElement>;
             "modus-switch": LocalJSX.ModusSwitch & JSXBase.HTMLAttributes<HTMLModusSwitchElement>;
             "modus-table": LocalJSX.ModusTable & JSXBase.HTMLAttributes<HTMLModusTableElement>;
+            "modus-table-columns-visibility": LocalJSX.ModusTableColumnsVisibility & JSXBase.HTMLAttributes<HTMLModusTableColumnsVisibilityElement>;
+            "modus-table-dropdown-menu": LocalJSX.ModusTableDropdownMenu & JSXBase.HTMLAttributes<HTMLModusTableDropdownMenuElement>;
             "modus-table-panel": LocalJSX.ModusTablePanel & JSXBase.HTMLAttributes<HTMLModusTablePanelElement>;
             "modus-tabs": LocalJSX.ModusTabs & JSXBase.HTMLAttributes<HTMLModusTabsElement>;
             "modus-text-input": LocalJSX.ModusTextInput & JSXBase.HTMLAttributes<HTMLModusTextInputElement>;

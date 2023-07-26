@@ -1,11 +1,12 @@
-import { DragPosition } from './drag-position.model';
+import Position from "./position.model";
 
-export interface ColumnDragState {
+export default interface ColumnDragState {
   draggedColumnId: string;
   dragContent: HTMLElement;
   targetId?: string;
-  translation?: DragPosition;
+  translation?: Position;
   width?: string;
   height?: string;
   throughMouse: boolean;
+  arrowsPosition?: Position;
 }

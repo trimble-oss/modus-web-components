@@ -5,7 +5,7 @@ import {
 import { Header, HeaderGroup } from '@tanstack/table-core';
 import { PropertyDataType, PropertyShowTotal } from '../constants/constants';
 import { ModusColumnDataType } from '../enums/modus-column-data-type';
-import { ModusTableDisplayOptions } from '../models';
+import ModusTableDisplayOptions from '../models/modus-table-display-options';
 
 interface ModusTableSummaryRowProps {
   footerGroups: HeaderGroup<unknown>[];

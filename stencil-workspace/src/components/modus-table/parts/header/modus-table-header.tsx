@@ -3,11 +3,9 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Header, Table } from '@tanstack/table-core';
-import { ModusTableHeaderSort } from './modus-table-header-sort';
-import { ModusTableColumnResizingHandler } from './modus-table-column-resizing-handler';
-import { IconArrowDown } from '../../../icons/icon-arrow-down';
-import { IconArrowUp } from '../../../icons/icon-arrow-up';
 import { EnterKey } from '../../constants/constants';
+import { ModusTableColumnResizingHandler } from './modus-table-column-resizing-handler';
+import { ModusTableHeaderSort } from './modus-table-header-sort';
 
 interface ModusTableHeaderProps {
   table: Table<unknown>;
@@ -87,9 +85,6 @@ export const ModusTableHeader: FunctionalComponent<ModusTableHeaderProps> = ({
           onMouseLeave={() => onMouseLeaveResize()}
         />
       )}
-      {/** Icons for column reorder  */}
-      <IconArrowDown size={'16'} />
-      <IconArrowUp size={'16'} />
     </th>
   );
 };

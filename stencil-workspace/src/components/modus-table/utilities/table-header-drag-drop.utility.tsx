@@ -1,6 +1,6 @@
 import { Table } from '@tanstack/table-core';
 import { ArrowLeftKey, ArrowRightKey, EnterKey, EscapeKey, TabKey } from '../constants/constants';
-import { ColumnDragState } from '../models/column-drag-state.model';
+import ColumnDragState from '../models/column-drag-state.model';
 
 export class TableHeaderDragDrop {
   columnOrder: string[] = [];
@@ -47,7 +47,6 @@ export class TableHeaderDragDrop {
         this.headersList.splice(index, 1);
       }
     });
-    this.clearItemDropState();
     this.itemDragState = null;
 
     const dragContent: HTMLElement = elementRef.cloneNode(true) as HTMLElement;
@@ -96,13 +95,13 @@ export class TableHeaderDragDrop {
     if (event.key.toLowerCase() === ArrowRightKey || event.key.toLowerCase() === ArrowLeftKey) {
       clientX = event.key.toLowerCase() === ArrowRightKey ? clientX + 5 : clientX - 5;
       this.updateNodeAndDragState(clientX, clientY);
+      event.preventDefault();
       // Drop Item
     } else if (event.key.toLowerCase() === EnterKey && this.itemDragState?.targetId) {
       this.handleDrop();
       return;
       // Exit on Escape Or Tab
     } else if (event.key.toLowerCase() === EscapeKey || event.key.toLowerCase() === TabKey) {
-      this.clearItemDropState();
       this.itemDragState = null;
       return;
     }
@@ -121,13 +120,14 @@ export class TableHeaderDragDrop {
     };
     const node: HTMLElement = this.getItemWithinBounds(clientX, clientY);
     let newDragState: ColumnDragState = {
-      ...this.clearItemDropState(),
+      ...this.itemDragState,
       translation,
     };
 
     if (node?.id && node.id !== newDragState.draggedColumnId) {
-      newDragState = { ...newDragState, targetId: node.id };
-      node.classList.add('drop-allow');
+      newDragState = { ...newDragState, targetId: node.id, arrowsPosition: node.getBoundingClientRect() };
+    } else {
+      newDragState = { ...newDragState, arrowsPosition: null };
     }
     this.itemDragState = { ...newDragState };
   }
@@ -152,24 +152,7 @@ export class TableHeaderDragDrop {
       this.table.options.state.columnOrder = newColumnOrder;
     }
 
-    this.clearItemDropState();
     this.itemDragState = null;
-  }
-
-  /**
-   * Removes drop related class if present.
-   */
-  clearItemDropState(): ColumnDragState {
-    if (!this.itemDragState) return null;
-    const { targetId, ...rest } = this.itemDragState;
-    if (targetId) {
-      this.headersList.forEach((element: HTMLElement) => {
-        if (element.id === targetId) {
-          element.classList.remove('drop-allow');
-        }
-      });
-    }
-    return { ...rest, targetId: null };
   }
 
   /**
