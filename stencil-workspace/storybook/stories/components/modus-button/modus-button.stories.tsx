@@ -26,13 +26,13 @@ export default {
     },
     color: {
       control: {
-        options: ['danger', 'primary', 'secondary', 'tertiary'],
+        options: ['danger', 'primary', 'secondary', 'tertiary', 'dark'],
         type: 'select',
       },
-      description: 'The color of the button',
+      description: 'The color of the button. Note: `dark` is supported only on icon-only buttons.',
       table: {
         defaultValue: { summary: `'primary'` },
-        type: { summary: `'danger' | 'primary' | 'secondary' | 'tertiary'` },
+        type: { summary: `'danger' | 'primary' | 'secondary' | 'tertiary' | 'dark'` },
       },
     },
     disabled: {
@@ -51,6 +51,27 @@ export default {
       table: {
         defaultValue: { summary: `'medium'` },
         type: { summary: `'small' | 'medium' | 'large'` },
+      },
+    },
+    iconOnly: {
+      name: 'icon-only',
+      description: "Takes the icon name and renders an icon-only button",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    leftIcon: {
+      name: 'left-icon',
+      description: "Takes the icon name and shows the icon aligned to the left of the button text",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    rightIcon: {
+      name: 'right-icon',
+      description: "Takes the icon name and shows the icon aligned to the right of the button text",
+      table: {
+        type: { summary: 'string' },
       },
     },
   },
@@ -74,13 +95,16 @@ export const Default = ({
   color,
   disabled,
   size,
+  leftIcon,
+  rightIcon,
+  iconOnly
 }) => html`
   <modus-button
     aria-label=${ariaLabel}
     button-style=${buttonStyle}
     color=${color}
     disabled=${disabled}
-    size=${size}>
+    size=${size} left-icon=${leftIcon} right-icon=${rightIcon} iconOnly=${iconOnly}>
     Default
   </modus-button>
 `;
@@ -98,13 +122,16 @@ export const Borderless = ({
   color,
   disabled,
   size,
+  leftIcon,
+  rightIcon,
+  iconOnly
 }) => html`
   <modus-button
     aria-label=${ariaLabel}
     button-style=${buttonStyle}
     color=${color}
     disabled=${disabled}
-    size=${size}>
+    size=${size} left-icon=${leftIcon} right-icon=${rightIcon} iconOnly=${iconOnly}>
     Borderless
   </modus-button>
 `;
@@ -122,13 +149,16 @@ export const Outline = ({
   color,
   disabled,
   size,
+  leftIcon,
+  rightIcon,
+  iconOnly
 }) => html`
   <modus-button
     aria-label=${ariaLabel}
     button-style=${buttonStyle}
     color=${color}
     disabled=${disabled}
-    size=${size}>
+    size=${size} left-icon=${leftIcon} right-icon=${rightIcon} iconOnly=${iconOnly}>
     Outline
   </modus-button>
 `;
@@ -138,4 +168,59 @@ Outline.args = {
   color: 'default',
   disabled: false,
   size: 'medium',
+};
+
+export const IconWithText = ({
+  ariaLabel,
+  buttonStyle,
+  color,
+  disabled,
+  size,
+  leftIcon,
+  rightIcon,
+  iconOnly
+}) => html`
+  <modus-button
+    aria-label=${ariaLabel}
+    button-style=${buttonStyle}
+    color=${color}
+    disabled=${disabled}
+    size=${size} left-icon=${leftIcon} right-icon=${rightIcon} iconOnly=${iconOnly}>
+    Default
+  </modus-button>
+`;
+IconWithText.args = {
+  ariaLabel: '',
+  buttonStyle: 'fill',
+  color: 'primary',
+  disabled: false,
+  size: 'medium',
+  leftIcon: 'notifications'
+};
+
+export const IconOnly = ({
+  ariaLabel,
+  buttonStyle,
+  color,
+  disabled,
+  size,
+  leftIcon,
+  rightIcon,
+  iconOnly
+}) => html`
+  <modus-button
+    aria-label=${ariaLabel}
+    button-style=${buttonStyle}
+    color=${color}
+    disabled=${disabled}
+    size=${size} left-icon=${leftIcon} right-icon=${rightIcon} icon-only=${iconOnly}>
+  </modus-button>
+`;
+IconOnly.args = {
+  ariaLabel: '',
+  buttonStyle: 'borderless',
+  color: 'dark',
+  disabled: false,
+  size: 'large',
+  iconOnly: 'notifications'
 };

@@ -180,9 +180,9 @@ export namespace Components {
          */
         "buttonStyle": 'borderless' | 'fill' | 'outline';
         /**
-          * (optional) The color of the button.
+          * (optional) The color of the button. Note: `dark` is supported only on icon-only buttons.
          */
-        "color": 'danger' | 'primary' | 'secondary' | 'tertiary';
+        "color": 'danger' | 'primary' | 'secondary' | 'tertiary' | 'dark';
         /**
           * (optional) Disables the button.
          */
@@ -191,6 +191,18 @@ export namespace Components {
           * Focus the Button
          */
         "focusButton": () => Promise<void>;
+        /**
+          * (optional) Takes the icon name and renders an icon-only button.
+         */
+        "iconOnly": string;
+        /**
+          * (optional) Takes the icon name and shows the icon aligned to the left of the button text.
+         */
+        "leftIcon": string;
+        /**
+          * (optional) Takes the icon name and shows the icon aligned to the right of the button text.
+         */
+        "rightIcon": string;
         /**
           * (optional) The size of the button.
          */
@@ -1817,17 +1829,29 @@ declare namespace LocalJSX {
          */
         "buttonStyle"?: 'borderless' | 'fill' | 'outline';
         /**
-          * (optional) The color of the button.
+          * (optional) The color of the button. Note: `dark` is supported only on icon-only buttons.
          */
-        "color"?: 'danger' | 'primary' | 'secondary' | 'tertiary';
+        "color"?: 'danger' | 'primary' | 'secondary' | 'tertiary' | 'dark';
         /**
           * (optional) Disables the button.
          */
         "disabled"?: boolean;
         /**
+          * (optional) Takes the icon name and renders an icon-only button.
+         */
+        "iconOnly"?: string;
+        /**
+          * (optional) Takes the icon name and shows the icon aligned to the left of the button text.
+         */
+        "leftIcon"?: string;
+        /**
           * (optional) An event that fires on button click.
          */
         "onButtonClick"?: (event: ModusButtonCustomEvent<any>) => void;
+        /**
+          * (optional) Takes the icon name and shows the icon aligned to the right of the button text.
+         */
+        "rightIcon"?: string;
         /**
           * (optional) The size of the button.
          */

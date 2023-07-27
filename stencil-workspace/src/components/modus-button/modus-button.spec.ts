@@ -11,7 +11,9 @@ describe('modus-button', () => {
       <modus-button>
         <mock:shadow-root>
           <button class="size-medium color-primary style-fill" role="button">
-            <slot></slot>
+            <span class="label">
+               <slot></slot>
+            </span>
           </button>
         </mock:shadow-root>
       </modus-button>
@@ -27,10 +29,28 @@ describe('modus-button', () => {
       <modus-button>
         <mock:shadow-root>
           <button class="size-medium color-primary style-fill" role="button">
-            <slot></slot>
+            <span class="label">
+                <slot></slot>
+            </span>
           </button>
         </mock:shadow-root>
         Button
+      </modus-button>
+    `);
+  });
+
+  it('renders icon only', async () => {
+    const { root } = await newSpecPage({
+      components: [ModusButton],
+      html: `<modus-button icon-only="add"></modus-button>`,
+    });
+    expect(root).toEqualHtml(`
+      <modus-button icon-only="add">
+        <mock:shadow-root>
+          <button class="size-medium color-primary style-fill icon-only" role="button">
+            <span class="icon"><svg class="icon-add" height="16" width="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19,13H13v6H11V13H5V11h6V5h2v6h6Z" fill="#6A6976"></path></svg></span>
+          </button>
+        </mock:shadow-root>
       </modus-button>
     `);
   });
@@ -63,6 +83,9 @@ describe('modus-button', () => {
 
     className = modusButton.classByColor.get('tertiary');
     expect(className).toEqual('color-tertiary');
+
+    className = modusButton.classByColor.get('dark');
+    expect(className).toEqual('color-dark');
   });
 
   it('should get the correct class by size', async () => {

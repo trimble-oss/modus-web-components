@@ -9,8 +9,16 @@ This component utilizes the slot element, allowing you to render your own HTML i
 
 #### Implementation Details
 
-- Outline buttons only support 'primary' and 'secondary' colors.
-- Borderless buttons only support a single color.
+For Text Buttons and Icon with Text Buttons,
+- Solid buttons supports all the given colors except `dark`.
+- Outline buttons only support `primary` and `secondary` colors.
+- Borderless buttons only support `primary` color.
+
+For Icon only Buttons,
+- Solid buttons supports all the given colors except `dark` and `danger`.
+- Outline buttons only support `primary` and `secondary` colors.
+- Borderless buttons only support `dark` and `secondary` colors.
+
 
 <Anchor storyId="components-button--default" />
 
@@ -39,6 +47,9 @@ This component utilizes the slot element, allowing you to render your own HTML i
 <modus-button button-style="outline" color="primary">Outline</modus-button>
 <modus-button button-style="outline" color="secondary">Outline</modus-button>
 
+
+
+
 ```html
 <modus-button color="primary">Primary</modus-button>
 <modus-button color="secondary">Secondary</modus-button>
@@ -56,85 +67,75 @@ This component utilizes the slot element, allowing you to render your own HTML i
 <modus-button button-style="outline" color="secondary">Outline</modus-button>
 ```
 
+<Anchor storyId="components-button--icon-with-text" />
+
+### Icon with Text Button
+
+<modus-button size="small" left-icon="notifications" >Primary</modus-button>
+<modus-button color="secondary" right-icon="notifications">Secondary</modus-button>
+<modus-button size="large" left-icon="notifications" color="tertiary"  right-icon="notifications">Tertiary</modus-button>
+<modus-button size="large" left-icon="add" color="danger"  right-icon="remove">Danger</modus-button>
+
+<Anchor storyId="components-button--icon-only" />
+
+### Icon Only Button
+
+#### Solid
+
+<modus-button size="small" color="primary" icon-only="notifications"></modus-button>
+<modus-button color="secondary" icon-only="notifications"></modus-button>
+<modus-button size="large" color="tertiary" icon-only="notifications"></modus-button>
+
+#### Outline
+
+<modus-button button-style="outline" color="primary" icon-only="notifications"></modus-button>
+<modus-button button-style="outline" color="secondary" icon-only="notifications"></modus-button>
+
+#### Borderless
+
+<modus-button button-style="borderless" color="dark" icon-only="notifications"></modus-button>
+<modus-button button-style="borderless" color="secondary" icon-only="notifications"></modus-button>
+
+```html
+<!-- Icon with Text Buttons -->
+<modus-button size="small" left-icon="notifications" >Primary</modus-button>
+<modus-button color="secondary" right-icon="notifications">Secondary</modus-button>
+<modus-button size="large" left-icon="notifications" color="tertiary"  right-icon="notifications">Tertiary</modus-button>
+<modus-button size="large" left-icon="add" color="danger"  right-icon="remove">Danger</modus-button>
+
+<!-- Icon only Buttons - Default(Fill) -->
+<modus-button size="small" color="primary" icon-only="notifications"></modus-button>
+<modus-button color="secondary" icon-only="notifications"></modus-button>
+<modus-button size="large" color="tertiary" icon-only="notifications"></modus-button>
+
+<!-- Icon only Buttons - Outline -->
+<modus-button button-style="outline" color="primary" icon-only="notifications"></modus-button>
+<modus-button button-style="outline" color="secondary" icon-only="notifications"></modus-button>
+
+<!-- Icon only Buttons - Borderless -->
+<modus-button button-style="borderless" color="dark" icon-only="notifications"></modus-button>
+<modus-button button-style="borderless" color="secondary" icon-only="notifications"></modus-button>
+```
+
 ### Properties
 
-<section>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Type</th>
-        <th>Options</th>
-        <th>Default Value</th>
-        <th>Required</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>aria-label</td>
-        <td>The button's aria-label</td>
-        <td>string</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>button-style</td>
-        <td>The style of the button</td>
-        <td>string</td>
-        <td>'borderless', 'fill', 'outline'</td>
-        <td>'fill'</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>color</td>
-        <td>The color of the button</td>
-        <td>string</td>
-        <td>'danger', 'primary', 'secondary', 'tertiary'</td>
-        <td>'primary'</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>disabled</td>
-        <td>Disables the button</td>
-        <td>boolean</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>size</td>
-        <td>The size of the button</td>
-        <td>string</td>
-        <td>'small', 'medium', 'large'</td>
-        <td>'medium'</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+| Property      | Attribute      | Description                                                                              | Type                                                           | Default     |
+| ------------- | -------------- | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------- | ----------- |
+| `ariaLabel`   | `aria-label`   | (optional) The button's aria-label.                                                      | `string`                                                       | `undefined` |
+| `buttonStyle` | `button-style` | (optional) The style of the button                                                       | `"borderless" , "fill" , "outline"`                          | `'fill'`    |
+| `color`       | `color`        | (optional) The color of the button. Note: `dark` is supported only on icon-only buttons. | `"danger" , "dark" , "primary" , "secondary" , "tertiary"` | `'primary'` |
+| `disabled`    | `disabled`     | (optional) Disables the button.                                                          | `boolean`                                                      | `undefined` |
+| `iconOnly`    | `icon-only`    | (optional) Takes the icon name and renders an icon-only button.                          | `string`                                                       | `undefined` |
+| `leftIcon`    | `left-icon`    | (optional) Takes the icon name and shows the icon aligned to the left of the button text.                        | `string`                                                       | `undefined` |
+| `rightIcon`   | `right-icon`   | (optional) Takes the icon name and shows the icon aligned to the right of the button text.                       | `string`                                                       | `undefined` |
+| `size`        | `size`         | (optional) The size of the button.                                                       | `"large" , "medium" , "small"`                               | `'medium'`  |
+
 
 ### DOM Events
 
-<section>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Emits</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>buttonClick</td>
-        <td>Fires on button click</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+| Event         | Description                                     | Type               |
+| ------------- | ----------------------------------------------- | ------------------ |
+| `buttonClick` | (optional) An event that fires on button click. | `CustomEvent<any>` |
 
 ### Methods
 

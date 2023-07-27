@@ -1,5 +1,12 @@
 @import './modus-button.vars';
 
+:host {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  width: auto;
+}
+
 button {
   align-items: center;
   border: $rem-1px solid transparent;
@@ -14,7 +21,16 @@ button {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
     box-shadow 0.15s ease-in-out;
   user-select: none;
+  vertical-align: middle;
   white-space: nowrap;
+  width: 100%;
+
+  .icon {
+    align-items: center;
+    display: flex;
+    flex: 0 0 auto;
+    pointer-events: none;
+  }
 
   &:hover {
     cursor: pointer;
@@ -33,27 +49,83 @@ button {
   }
 
   &.size-small {
-    font-size: 12px;
     height: 24px;
     padding: 0 8px;
+
+    .label {
+      font-size: $rem-12px;
+      padding: 0 4px;
+    }
+
+    .icon svg {
+      height: 16px;
+      width: 16px;
+    }
+
+    &.icon-only {
+      height: 32px;
+      padding: 0 4px;
+
+      .icon svg {
+        height: 24px;
+        width: 24px;
+      }
+    }
   }
 
   &.size-medium {
-    font-size: 14px;
     height: 32px;
-    padding: 0 16px;
+    padding: 0 8px;
+
+    .label {
+      font-size: $rem-14px;
+      padding: 0 8px;
+    }
+
+    .icon svg {
+      height: 24px;
+      width: 24px;
+    }
+
+    &.icon-only {
+      height: 40px;
+      padding: 0 8px;
+
+      .icon svg {
+        height: 24px;
+        width: 24px;
+      }
+    }
   }
 
   &.size-large {
-    font-size: 16px;
     height: 48px;
-    padding: 0 24px;
+    padding: 0 12px;
+
+    .label {
+      font-size: $rem-16px;
+      padding: 0 8px;
+    }
+
+    .icon svg {
+      height: 24px;
+      width: 24px;
+    }
+
+    &.icon-only {
+      height: 48px;
+      padding: 0 8px;
+
+      .icon svg {
+        height: 32px;
+        width: 32px;
+      }
+    }
   }
 
-  &.style-borderless {
+  &.style-borderless:not(.icon-only) {
     background-color: $modus-btn-borderless-bg;
     color: $modus-btn-borderless-color;
-    fill: $modus-btn-borderless-color !important;
 
     svg path {
       fill: $modus-btn-borderless-color !important;
@@ -62,13 +134,59 @@ button {
     &:hover:not([disabled]) {
       background-color: $modus-btn-borderless-hover-bg;
       color: $modus-btn-borderless-hover-color;
-      fill: $modus-btn-borderless-hover-color;
+
+      svg path {
+        fill: $modus-btn-borderless-hover-color;
+      }
     }
 
     &:active:not([disabled]) {
       background-color: $modus-btn-borderless-active-bg;
       color: $modus-btn-borderless-active-color;
-      fill: $modus-btn-borderless-active-color;
+
+      svg path {
+        fill: $modus-btn-borderless-active-color;
+      }
+    }
+  }
+
+  &.style-borderless.icon-only {
+    background: transparent;
+
+    @each $color, $value in $btn-icon-only-theme-colors {
+      &.color-#{$color} {
+        $btn-color: var(--modus-btn-icon-only-#{$color}-color, $value);
+
+        color: $btn-color;
+
+        svg path {
+          fill: $btn-color;
+        }
+      }
+
+      // Hover state
+      &.color-#{$color}:hover:not([disabled]) {
+        $btn-color: var(--modus-btn-icon-only-#{$color}-hover-color, map-get($btn-icon-only-hover, $color, 'color'));
+
+        background-color: var(--modus-btn-icon-only-#{$color}-hover-bg, map-get($btn-icon-only-hover, $color, 'bg'));
+        color: $btn-color;
+
+        svg path {
+          fill: $btn-color;
+        }
+      }
+
+      // Active state
+      &.color-#{$color}:active:not([disabled]) {
+        $btn-color: var(--modus-btn-icon-only-#{$color}-active-color, map-get($btn-icon-only-active, $color, 'color'));
+
+        background-color: var(--modus-btn-icon-only-#{$color}-active-bg, map-get($btn-icon-only-active, $color, 'bg'));
+        color: $btn-color;
+
+        svg path {
+          fill: $btn-color;
+        }
+      }
     }
   }
 
@@ -85,7 +203,10 @@ button {
         background-color: var(--modus-btn-#{$color}-bg, $value);
         border-color: var(--modus-btn-#{$color}-border-color, $value);
         color: var(--modus-btn-#{$color}-color, $default-text-color);
-        fill: var(--modus-btn-#{$color}-color, $default-text-color);
+
+        svg path {
+          fill: var(--modus-btn-#{$color}-color, $default-text-color);
+        }
       }
 
       // Hover state
@@ -116,7 +237,10 @@ button {
         background-color: var(--modus-btn-outline-#{$color}-bg, transparent);
         border-color: $btn-color;
         color: $btn-color;
-        fill: $btn-color;
+
+        svg path {
+          fill: $btn-color;
+        }
       }
 
       // Hover state
@@ -126,7 +250,10 @@ button {
         background-color: var(--modus-btn-outline-#{$color}-hover-bg, map-get($btn-outline-hover, $color, 'bg'));
         border-color: $btn-color;
         color: $btn-color;
-        fill: $btn-color;
+
+        svg path {
+          fill: $btn-color;
+        }
       }
 
       // Active state
@@ -136,7 +263,10 @@ button {
         background-color: var(--modus-btn-outline-#{$color}-active-bg, map-get($btn-outline-active, $color, 'bg'));
         border-color: $btn-color;
         color: $btn-color;
-        fill: $btn-color;
+
+        svg path {
+          fill: $btn-color;
+        }
       }
     }
   }
