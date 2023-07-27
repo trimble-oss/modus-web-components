@@ -1,5 +1,7 @@
 // eslint-disable-next-line
-import { Component, Prop, h, Event, EventEmitter, Element, State, Listen, Method } from '@stencil/core';
+import { Component, Prop, h, Event, EventEmitter, Element, State, Listen, Method, Fragment } from '@stencil/core';
+import { IconMap } from '../icons/IconMap';
+import { JSX } from '@stencil/core/internal';
 
 @Component({
   tag: 'modus-button',
@@ -13,14 +15,26 @@ export class ModusButton {
   /** (optional) The style of the button */
   @Prop() buttonStyle: 'borderless' | 'fill' | 'outline' = 'fill';
 
-  /** (optional) The color of the button. */
-  @Prop() color: 'danger' | 'primary' | 'secondary' | 'tertiary' = 'primary';
+  /** (optional) The color of the button. Note: `dark` is supported only on icon-only buttons. */
+  @Prop() color: 'danger' | 'primary' | 'secondary' | 'tertiary' | 'dark' = 'primary';
 
   /** (optional) Disables the button. */
   @Prop() disabled: boolean;
 
+  /** (optional) Takes the icon name and renders an icon-only button. */
+  @Prop() iconOnly: string;
+
+  /** (optional) Takes the icon name and shows the icon aligned to the left of the button text. */
+  @Prop() leftIcon: string;
+
+  /** (optional) Takes the icon name and shows the icon aligned to the right of the button text. */
+  @Prop() rightIcon: string;
+
   /** (optional) The size of the button. */
   @Prop() size: 'small' | 'medium' | 'large' = 'medium';
+
+  /** (optional) Shows a caret icon right side of the button. */
+  // @Prop() showCaret: boolean;
 
   /** (optional) An event that fires on button click. */
   @Event() buttonClick: EventEmitter;
@@ -40,6 +54,7 @@ export class ModusButton {
     ['primary', 'color-primary'],
     ['secondary', 'color-secondary'],
     ['tertiary', 'color-tertiary'],
+    ['dark', 'color-dark'],
   ]);
 
   classBySize: Map<string, string> = new Map([
@@ -66,10 +81,39 @@ export class ModusButton {
     }
   }
 
+  renderIconWithText(): JSX.Element {
+    return (
+      <Fragment>
+        {this.leftIcon && (
+          <span class="icon left-icon">
+            <IconMap icon={this.leftIcon}></IconMap>
+          </span>
+        )}
+        <span class="label">
+          <slot />
+        </span>
+
+        {this.rightIcon && (
+          <span class="icon right-icon">
+            <IconMap icon={this.rightIcon}></IconMap>
+          </span>
+        )}
+      </Fragment>
+    );
+  }
+
+  renderIconOnly(): JSX.Element {
+    return (
+      <span class="icon">
+        <IconMap icon={this.iconOnly}></IconMap>
+      </span>
+    );
+  }
+
   render(): unknown {
     const className = `${this.classBySize.get(this.size)} ${this.classByColor.get(this.color)} ${this.classByButtonStyle.get(
       this.buttonStyle
-    )}`;
+    )} ${this.iconOnly ? 'icon-only' : ''}`;
 
     return (
       <button
@@ -85,7 +129,7 @@ export class ModusButton {
         onMouseUp={() => (this.pressed = false)}
         role="button"
         ref={(el) => (this.buttonRef = el)}>
-        <slot />
+        {this.iconOnly ? this.renderIconOnly() : this.renderIconWithText()}
       </button>
     );
   }

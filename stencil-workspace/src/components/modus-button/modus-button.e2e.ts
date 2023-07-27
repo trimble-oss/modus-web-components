@@ -35,6 +35,54 @@ describe('modus-button', () => {
     expect(element).toHaveClass('color-primary');
   });
 
+  it('renders changes to the iconOnly prop', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-button></modus-button>');
+    await page.waitForChanges();
+
+    const component = await page.find('modus-button');
+    const element = await page.find('modus-button >>> button');
+    expect(element).not.toHaveClass('icon-only');
+
+    component.setProperty('iconOnly', 'add');
+    await page.waitForChanges();
+    const icon = await page.find('modus-button >>> .icon-add');
+    expect(icon).toBeTruthy();
+  });
+
+  it('renders changes to the leftIcon prop', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-button></modus-button>');
+    await page.waitForChanges();
+
+    const component = await page.find('modus-button');
+    let icon = await page.find('modus-button >>> .left-icon');
+    expect(icon).toBeFalsy();
+
+    component.setProperty('leftIcon', 'add');
+    await page.waitForChanges();
+    icon = await page.find('modus-button >>> .left-icon');
+    expect(icon).toBeTruthy();
+  });
+
+  it('renders changes to the rightIcon prop', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-button></modus-button>');
+    await page.waitForChanges();
+
+    const component = await page.find('modus-button');
+    let icon = await page.find('modus-button >>> .right-icon');
+    expect(icon).toBeFalsy();
+
+    component.setProperty('rightIcon', 'add');
+    await page.waitForChanges();
+    icon = await page.find('modus-button >>> .right-icon');
+    expect(icon).toBeTruthy();
+  });
+
   it('renders changes to the disabled prop', async () => {
     const page = await newE2EPage();
 

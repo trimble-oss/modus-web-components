@@ -152,11 +152,19 @@
   --modus-btn-text-primary-active-color: var(--modus-trimble-blue-dark);
 
   // Icon only Button
+  // Dark
   --modus-btn-icon-only-dark-color: var(--modus-dark);
   --modus-btn-icon-only-dark-hover-bg: var(--modus-gray-0);
-  --modus-btn-icon-only-dark-hover-color: var(--modus-gray-9);
+  --modus-btn-icon-only-dark-hover-color: var(--modus-dark);
   --modus-btn-icon-only-dark-active-bg: var(--modus-gray-1);
-  --modus-btn-icon-only-dark-active-color: #2b2a37;
+  --modus-btn-icon-only-dark-active-color: var(--modus-dark);
+
+  // Secondary
+  --modus-btn-icon-only-secondary-color: var(--modus-secondary);
+  --modus-btn-icon-only-secondary-hover-bg: var(--modus-gray-0);
+  --modus-btn-icon-only-secondary-hover-color: var(--modus-secondary);
+  --modus-btn-icon-only-secondary-active-bg: var(--modus-gray-1);
+  --modus-btn-icon-only-secondary-active-color: var(--modus-gray-10);
 
   // Input
   --modus-input-bg: var(--modus-white);
@@ -469,11 +477,19 @@
   --modus-btn-text-primary-active-color: var(--modus-primary);
 
   // Icon only Button
-  --modus-btn-icon-only-dark-color: var(--modus-gray-light);
+  // Dark
+  --modus-btn-icon-only-dark-color: var(--modus-white);
   --modus-btn-icon-only-dark-hover-bg: var(--modus-gray-4);
   --modus-btn-icon-only-dark-hover-color: var(--modus-white);
   --modus-btn-icon-only-dark-active-bg: var(--modus-gray-6);
   --modus-btn-icon-only-dark-active-color: var(--modus-white);
+
+  // Secondary
+  --modus-btn-icon-only-secondary-color: var(--modus-gray-4);
+  --modus-btn-icon-only-secondary-hover-bg: var(--modus-gray-1);
+  --modus-btn-icon-only-secondary-hover-color: var(--modus-gray-5);
+  --modus-btn-icon-only-secondary-active-bg: var(--modus-gray-4);
+  --modus-btn-icon-only-secondary-active-color: var(--modus-gray-9);
 
   // Input
   --modus-input-bg: var(--modus-gray-10);

@@ -1,5 +1,10 @@
 // Default theme colors
-$btn-theme-colors: map-remove($theme-colors, 'success', 'warning', 'yellow', 'dark');
+$btn-theme-colors: (
+  'primary': map-get($theme-colors, 'primary'),
+  'secondary': map-get($theme-colors, 'secondary'),
+  'tertiary': map-get($theme-colors, 'tertiary'),
+  'danger': map-get($theme-colors, 'danger'),
+);
 $btn-hover-colors: (
   'primary': #0082d6,
   'secondary': #838793,
@@ -13,8 +18,11 @@ $btn-active-colors: (
   'danger': #c41e28,
 );
 
-// Outline
-$btn-outline-theme-colors: map-remove($theme-colors, 'success', 'warning', 'yellow', 'secondary', 'tertiary', 'danger');
+// Default Outline
+$btn-outline-theme-colors: (
+  'primary': map-get($theme-colors, 'primary'),
+  'dark': map-get($theme-colors, 'dark'),
+);
 $btn-outline-hover: (
   'primary': (
     'bg': rgba(0, 99, 163, 0.15),
@@ -36,7 +44,7 @@ $btn-outline-active: (
   ),
 );
 
-// Borderless
+// Default Borderless
 $modus-btn-borderless-bg: var(--modus-btn-text-primary-bg, transparent) !default;
 $modus-btn-borderless-color: var(--modus-btn-text-primary-color, map-get($theme-colors, 'primary')) !default;
 
@@ -76,3 +84,29 @@ $modus-btn-borderless-active-color: var(
 $modus-btn-disabled-color: var(--modus-btn-disabled-color) !default;
 $modus-btn-disabled-bg: var(--modus-btn-disabled-bg) !default;
 $modus-btn-disabled-border-color: var(--modus-btn-disabled-border-color) !default;
+
+// Default Icon-only
+$btn-icon-only-theme-colors: (
+  'dark': map-get($theme-colors, 'dark'),
+  'secondary': map-get($theme-colors, 'secondary'),
+);
+$btn-icon-only-hover: (
+  'secondary': (
+    'bg': #e0e1e9,
+    'color': map-get($theme-colors, 'secondary'),
+  ),
+  'dark': (
+    'bg': #e0e1e9,
+    'color': map-get($theme-colors, 'dark'),
+  ),
+);
+$btn-icon-only-active: (
+  'secondary': (
+    'bg': #cbcdd6,
+    'color': map-get($theme-colors, 'dark'),
+  ),
+  'dark': (
+    'bg': #cbcdd6,
+    'color': map-get($theme-colors, 'dark'),
+  ),
+);
