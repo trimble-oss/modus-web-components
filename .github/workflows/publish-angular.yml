@@ -8,6 +8,7 @@ on:
         options:
           - '14'
           - '15'
+          - '16'
         description: The version of Angular you want to build
 
 permissions:
@@ -39,6 +40,12 @@ jobs:
 
       - name: Build Angular ${{ github.event.inputs.angularVersion }}
         run: npm run build
+
+      - name: Change directory
+        run: cd projects/trimble-oss/modus-angular-components
+
+      - name: npm install
+        run: npm i
 
       - name: Change directory
         run: cd dist/trimble-oss/modus-angular-components
