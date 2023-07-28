@@ -15,9 +15,9 @@
   "author": "Trimble Inc",
   "scripts": {
     "prettier": "npx prettier --write \"**/*.*\"",
-    "update-mwc-dependants": "cd angular-workspace/ng14/projects/trimble-oss/modus-angular-components && ncu -u --dep peer @trimble-oss* && npm i && cd ../../../../ng15/projects/trimble-oss/modus-angular-components && ncu -u --dep peer @trimble-oss* && npm i && cd ../../../../../react-workspace/react-17 && ncu -u @trimble-oss* && npm i && cd ../react-18 && ncu -u @trimble-oss* && npm i"
+    "update-mwc-dependants": "cd angular-workspace/ng14/projects/trimble-oss/modus-angular-components && ncu -u --dep peer @trimble-oss* && npm i && cd ../../../../ng15/projects/trimble-oss/modus-angular-components && ncu -u --dep peer @trimble-oss* && npm i && cd ../../../../ng16/projects/trimble-oss/modus-angular-components && ncu -u --dep peer @trimble-oss* && npm i && cd ../../../../../react-workspace/react-17 && ncu -u @trimble-oss* && npm i && cd ../react-18 && ncu -u @trimble-oss* && npm i"
   },
   "engines": {
-    "node": ">=14.20.0"
+    "node": ">=16.14.0"
   }
 }
