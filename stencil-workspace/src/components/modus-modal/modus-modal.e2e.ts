@@ -118,6 +118,46 @@ describe('modus-modal', () => {
     expect(secondaryButtonClick).toHaveReceivedEvent();
   });
 
+  it('should not emit primaryButtonClick on click when disabled', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-modal primary-button-text="Primary Text"></modus-modal>');
+    const modal = await page.find('modus-modal');
+    await modal.callMethod('open');
+    await page.waitForChanges();
+    const element = await page.find('modus-modal >>> modus-button');
+    const primaryButtonClick = await page.spyOnEvent('primaryButtonClick');
+
+    modal.setProperty('primaryButtonDisabled', true);
+    await page.waitForChanges();
+
+    expect(await element.getProperty('disabled')).toBeTruthy();
+
+    await element.click();
+    await page.waitForChanges();
+    expect(primaryButtonClick).not.toHaveReceivedEvent();
+  });
+
+  it('should not emit secondaryButtonClick on click when disabled', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-modal secondary-button-text="Secondary Text"></modus-modal>');
+    const modal = await page.find('modus-modal');
+    await modal.callMethod('open');
+    await page.waitForChanges();
+    const element = await page.find('modus-modal >>> modus-button');
+    const secondaryButtonClick = await page.spyOnEvent('secondaryButtonClick');
+
+    modal.setProperty('secondaryButtonDisabled', true);
+    await page.waitForChanges();
+
+    expect(await element.getProperty('disabled')).toBeTruthy();
+
+    await element.click();
+    await page.waitForChanges();
+    expect(secondaryButtonClick).not.toHaveReceivedEvent();
+  });
+
   it('emits opened on open call', async () => {
     const page = await newE2EPage();
 

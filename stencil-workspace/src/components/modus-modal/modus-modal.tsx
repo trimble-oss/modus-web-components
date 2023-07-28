@@ -172,7 +172,7 @@ export class ModusModal {
             button-style="outline"
             color="secondary"
             ariaLabel={this.secondaryButtonAriaLabel}
-            onClick={() => this.secondaryButtonClick.emit()}
+            onButtonClick={() => this.secondaryButtonClick.emit()}
             onKeyDown={(event) => this.handlePrimaryKeydown(event)}>
             {this.secondaryButtonText}
           </modus-button>
@@ -182,7 +182,7 @@ export class ModusModal {
             disabled={this.primaryButtonDisabled}
             color="primary"
             ariaLabel={this.primaryButtonAriaLabel}
-            onClick={() => this.primaryButtonClick.emit()}
+            onButtonClick={() => this.primaryButtonClick.emit()}
             onKeyDown={(event) => this.handleSecondaryKeydown(event)}>
             {this.primaryButtonText}
           </modus-button>

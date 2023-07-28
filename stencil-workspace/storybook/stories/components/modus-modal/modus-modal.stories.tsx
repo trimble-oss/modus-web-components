@@ -78,7 +78,7 @@ export default {
   },
   parameters: {
     actions: {
-      handles: ['closed'],
+      handles: ['closed', 'primaryButtonClick', 'secondaryButtonClick'],
     },
     docs: {
       inlineStories: false,
