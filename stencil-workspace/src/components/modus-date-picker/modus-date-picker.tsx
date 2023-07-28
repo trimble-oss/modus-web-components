@@ -62,6 +62,9 @@ export class ModusDatePicker {
   @Listen('valueChange')
   handleDateInputValue(event: CustomEvent<ModusDateInputEventDetails>): void {
     const { type } = event.detail;
+
+    if (!this._dateInputs[type]) return;
+
     this._dateInputs[type].refresh();
     if (this._showCalendar) {
       this.gotoDateBeingPicked(this._dateInputs[type].getDate());
