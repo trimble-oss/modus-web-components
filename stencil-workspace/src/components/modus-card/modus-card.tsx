@@ -16,9 +16,6 @@ export class ModusCard {
   /** (optional) The width of the card. */
   @Prop() width = '240px';
 
-  /** (optional) The color of the card. */
-  @Prop() backgroundColor: string;
-
   /** (optional) The border radius of the card. */
   @Prop() borderRadius: string;
 
@@ -36,7 +33,6 @@ export class ModusCard {
         style={{
           height: this.height,
           width: this.width,
-          'background-color': this.backgroundColor,
           'border-radius': this.borderRadius,
         }}>
         <slot />
