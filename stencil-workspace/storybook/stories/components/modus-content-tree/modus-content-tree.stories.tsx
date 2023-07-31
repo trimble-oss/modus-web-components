@@ -35,12 +35,17 @@ export default {
       },
     },
     size: {
+      control: {
+        options: ['condensed', 'standard', 'large'],
+        type: 'select',
+      },
       name: 'size',
       description: 'The default size of all tree items.',
       table: {
-        type: { summary: 'string' },
+        defaultValue: { summary: `'standard'` },
+        type: { summary: `'condensed' | 'standard' | 'large' ` },
       },
-    },
+    }
   },
   parameters: {
     docs: {
@@ -89,8 +94,19 @@ const Template = ({
   </modus-tree-view>
 `;
 
-const SlotIconTemplate = () => html`
-  <modus-tree-view style="width:400px;">
+const SlotIconTemplate = ({
+  checkboxSelection,
+  multiCheckboxSelection,
+  multiSelection,
+  disableTabbing,
+  size,
+}) => html`
+  <modus-tree-view style="width:400px;"
+  checkbox-selection=${checkboxSelection ? 'true' : 'false'}
+  disable-tabbing=${disableTabbing ? 'true' : 'false'}
+  multi-checkbox-selection=${multiCheckboxSelection ? 'true' : 'false'}
+  multi-selection=${multiSelection ? 'true' : 'false'}
+  size=${size}>
     <modus-tree-view-item node-Id="1" label="Inbox">
       <svg
         slot="itemIcon"
@@ -115,25 +131,33 @@ Default.args = {
   checkboxSelection: false,
   disableTabbing: false,
   multiCheckboxSelection: false,
-  multiSelection: true,
+  multiSelection: false,
   size: 'standard',
 };
 
 export const WithIcon = SlotIconTemplate.bind({});
+WithIcon.args = {...Default.args,
+};
 
 // export const Borderless = Template.bind({});
 
 export const Condensed = Template.bind({});
-Condensed.args = { checkboxSelection: true, size: 'condensed' };
+Condensed.args = { ...Default.args, checkboxSelection: true, size: 'condensed' };
 
 export const MultiSelection = Template.bind({});
-MultiSelection.args = {
+MultiSelection.args = {...Default.args,
   multiSelection: true,
   checkboxSelection: true,
   multiCheckboxSelection: true,
 };
 
-const ActionBarTemplate = () => html`
+const ActionBarTemplate = ({
+  checkboxSelection,
+  multiCheckboxSelection,
+  multiSelection,
+  disableTabbing,
+  size,
+}) => html`
   <div
     id="tree-with-action-bar"
     style="display: flex; flex-direction: column; width: 400px;">
@@ -270,7 +294,11 @@ const ActionBarTemplate = () => html`
         </svg>
       </modus-button>
     </div>
-    <modus-tree-view>
+    <modus-tree-view checkbox-selection=${checkboxSelection ? 'true' : 'false'}
+    disable-tabbing=${disableTabbing ? 'true' : 'false'}
+    multi-checkbox-selection=${multiCheckboxSelection ? 'true' : 'false'}
+    multi-selection=${multiSelection ? 'true' : 'false'}
+    size=${size}>
       <modus-tree-view-item node-Id="1" label="Inbox">
         <modus-tree-view-item
           node-Id="2"
@@ -439,8 +467,16 @@ const ActionBarScript = () => {
 };
 
 export const CustomActionBar = ActionBarTemplate.bind({});
+CustomActionBar.args = {...Default.args,
+};
 
-const FilterTemplate = () => html`
+const FilterTemplate = ({
+  checkboxSelection,
+  multiCheckboxSelection,
+  multiSelection,
+  disableTabbing,
+  size,
+}) => html`
   <div
     id="tree-with-filter"
     style="display: flex; flex-direction: column; width: 400px;">
@@ -450,7 +486,11 @@ const FilterTemplate = () => html`
       placeholder="Search"
       disabled="true"
       include-search-icon></modus-text-input>
-    <modus-tree-view>
+    <modus-tree-view checkbox-selection=${checkboxSelection ? 'true' : 'false'}
+    disable-tabbing=${disableTabbing ? 'true' : 'false'}
+    multi-checkbox-selection=${multiCheckboxSelection ? 'true' : 'false'}
+    multi-selection=${multiSelection ? 'true' : 'false'}
+    size=${size}>
       <modus-tree-view-item node-Id="1">
         <div slot="label">Inbox</div>
         <modus-tree-view-item node-Id="2">
@@ -548,3 +588,6 @@ const FilterScript = () => {
 };
 
 export const CustomFilter = FilterTemplate.bind({});
+CustomFilter.args = {...Default.args,
+};
+

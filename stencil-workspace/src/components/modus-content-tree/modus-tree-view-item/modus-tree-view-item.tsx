@@ -12,6 +12,7 @@ import {
 } from '@stencil/core';
 import { IconMap } from '../../icons/IconMap';
 import { TreeViewItemOptions } from '../modus-content-tree.types';
+import { TREE_ITEM_SIZE_CLASS } from '../modus-content-tree.constants';
 
 /**
  * @slot collapseIcon - Slot for custom collapse icon
@@ -68,11 +69,6 @@ export class ModusTreeViewItem {
   @State() forceUpdate = {};
   @State() slots: Map<string, boolean> = new Map();
 
-  private classBySize: Map<string, string> = new Map([
-    ['condensed', 'small'],
-    ['standard', 'standard'],
-    ['large', 'large'],
-  ]);
   private refItemContent: HTMLDivElement;
   private refLabelInput: HTMLModusTextInputElement;
   private refCheckbox: HTMLModusCheckboxElement;
@@ -381,7 +377,7 @@ export class ModusTreeViewItem {
       ...(expandable ? { 'aria-expanded': expanded ? 'true' : 'false' } : {}),
       role: 'treeitem',
     };
-    const sizeClass = `${this.classBySize.get(size || 'standard')}`;
+    const sizeClass = `${TREE_ITEM_SIZE_CLASS.get(size || 'standard')}`;
     const tabIndex: string | number = isDisabled ? -1 : this.tabIndexValue;
     const treeItemClass = `tree-item ${selected ? 'selected' : ''} ${sizeClass} ${isDisabled ? 'disabled' : ''} `;
     const treeItemChildrenClass = `tree-item-group ${sizeClass} ${expanded ? 'expanded' : ''}`;
