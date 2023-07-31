@@ -202,10 +202,6 @@ export namespace Components {
          */
         "ariaLabel": string | null;
         /**
-          * (optional) The color of the card.
-         */
-        "backgroundColor": string;
-        /**
           * (optional) The border radius of the card.
          */
         "borderRadius": string;
@@ -1842,10 +1838,6 @@ declare namespace LocalJSX {
           * (optional) The card's aria-label.
          */
         "ariaLabel"?: string | null;
-        /**
-          * (optional) The color of the card.
-         */
-        "backgroundColor"?: string;
         /**
           * (optional) The border radius of the card.
          */

@@ -203,14 +203,14 @@ export declare interface ModusButton extends Components.ModusButton {
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'backgroundColor', 'borderRadius', 'height', 'showCardBorder', 'showShadowOnHover', 'width']
+  inputs: ['ariaLabel', 'borderRadius', 'height', 'showCardBorder', 'showShadowOnHover', 'width']
 })
 @Component({
   selector: 'modus-card',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['ariaLabel', 'backgroundColor', 'borderRadius', 'height', 'showCardBorder', 'showShadowOnHover', 'width'],
+  inputs: ['ariaLabel', 'borderRadius', 'height', 'showCardBorder', 'showShadowOnHover', 'width'],
 })
 export class ModusCard {
   protected el: HTMLElement;

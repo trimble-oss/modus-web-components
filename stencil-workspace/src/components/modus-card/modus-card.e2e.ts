@@ -65,21 +65,6 @@ describe('modus-card', () => {
     expect(computedStyle['borderRadius']).toEqual('10px');
   });
 
-  it('renders changes to the backgroundColor prop', async () => {
-    const page = await newE2EPage();
-
-    await page.setContent('<modus-card></modus-card>');
-    const component = await page.find('modus-card');
-    const element = await page.find('modus-card >>> article');
-    let computedStyle = await element.getComputedStyle();
-    expect(computedStyle['backgroundColor']).toEqual('rgb(255, 255, 255)');
-
-    component.setProperty('backgroundColor', 'red');
-    await page.waitForChanges();
-    computedStyle = await element.getComputedStyle();
-    expect(computedStyle['backgroundColor']).toEqual('rgb(255, 0, 0)');
-  });
-
   it('should remove class "shadow" when showShadowOnHover flag is set on "false"', async () => {
     const page = await newE2EPage();
 
