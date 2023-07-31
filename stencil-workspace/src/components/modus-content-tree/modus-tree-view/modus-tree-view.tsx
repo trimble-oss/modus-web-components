@@ -89,11 +89,12 @@ export class ModusTreeView {
   handleItemDragStart(itemId: string, dragContent: HTMLElement, event: MouseEvent) {
     const { clientX, clientY, currentTarget } = event;
     const parent = (currentTarget as HTMLElement)?.parentElement;
+    const initialDragPosition = { x: clientX, y: clientY };
     this.clearItemDropState();
     this.itemDragState = {
       dragContent,
-      origin: { x: clientX, y: clientY },
-      translation: this.INITIAL_DRAG_POSITION,
+      origin: initialDragPosition,
+      translation: initialDragPosition,
       itemId,
       width: `${parent?.offsetWidth}px`,
       height: `${parent?.offsetHeight}px`,

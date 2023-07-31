@@ -8,14 +8,6 @@
   top: 0;
   z-index: 99999;
 
-  &.drop-allow {
-    outline: 2px dashed $modus-tree-view-item-drag-allow !important;
-  }
-
-  &.drop-block {
-    outline: 2px dashed $modus-tree-view-item-drag-error !important;
-  }
-
   .tree-item {
     align-items: center;
     background-color: $modus-tree-view-item-bg;
@@ -24,12 +16,29 @@
     display: flex;
     font-family: $primary-font;
     font-size: $rem-16px;
-    min-height: $list-group-item-height;
+    height: $list-group-item-height;
     width: 100%;
 
     .icon-slot {
       visibility: hidden;
     }
+
+    &.large {
+      height: $list-group-item-height-lg;
+    }
+
+    &.small {
+      font-size: $rem-12px;
+      height: $list-group-item-height-sm;
+    }
+  }
+
+  &.drop-allow .tree-item {
+    border: 2px dashed $modus-tree-view-item-drag-allow !important;
+  }
+
+  &.drop-block .tree-item {
+    border: 2px dashed $modus-tree-view-item-drag-error !important;
   }
 }
 
