@@ -19,6 +19,7 @@ import {
   ExpandedState,
   HeaderGroup,
   PaginationState,
+  Row,
   Table,
   TableOptionsResolved,
   Updater,
@@ -27,20 +28,21 @@ import {
   getCoreRowModel,
   getExpandedRowModel,
   getPaginationRowModel,
-  getSortedRowModel,
+  getSortedRowModel
 } from '@tanstack/table-core';
 import { DefaultPageSizes } from './constants/constants';
+import { ModusTableSortingState } from './models';
+import ColumnDragState from './models/column-drag-state.model';
+import ModusTableCellLink from './models/modus-table-cell-link';
+import ModusTableColumn from './models/modus-table-column';
+import ModusTableDisplayOptions from './models/modus-table-display-options';
+import ModusTablePanelOptions from './models/modus-table-panel-options';
 import { ModusTableCell } from './parts/cell/modus-table-cell';
 import { ModusTableHeader } from './parts/header/modus-table-header';
 import { ModusTableDragArrows, ModusTableDragItem } from './parts/modus-table-drag-item';
 import { ModusTablePagination } from './parts/modus-table-pagination';
 import { ModusTableSummaryRow } from './parts/modus-table-summary-row';
 import { TableHeaderDragDrop } from './utilities/table-header-drag-drop.utility';
-import ModusTableColumn from './models/modus-table-column';
-import ModusTablePanelOptions from './models/modus-table-panel-options';
-import ModusTableDisplayOptions from './models/modus-table-display-options';
-import ColumnDragState from './models/column-drag-state.model';
-import { ModusTableSortingState } from './models';
 
 /**
  * @slot customFooter - Slot for custom footer.
@@ -141,6 +143,9 @@ export class ModusTable {
 
   /** Emits event on sort change */
   @Event() sortChange: EventEmitter<ModusTableSortingState>;
+
+  /** Emits the link that was clicked */
+  @Event() cellLinkClick: EventEmitter<ModusTableCellLink>;
 
   /**
    * ColumnSizing has info about width of the column
@@ -279,6 +284,13 @@ export class ModusTable {
         sorting: this.sorting,
       },
       enableSorting: this.sort,
+      sortingFns: {
+        sortForHyperlink: (rowA: Row<unknown>, rowB: Row<unknown>, columnId: string): number => {
+          const valA = rowA.getValue(columnId)['display'] ?? rowA.getValue(columnId);
+          const valB = rowB.getValue(columnId)['display'] ?? rowB.getValue(columnId);
+          return valA > valB ? 1 : -1;
+        },
+      },
       columnResizeMode: 'onChange',
       enableColumnResizing: this.columnResize,
       enableHiding: !!this.panelOptions?.columnsVisibility,
@@ -431,7 +443,13 @@ export class ModusTable {
                     <tr key={row.id} class={this.hover && 'enable-hover'}>
                       {row.getVisibleCells()?.map((cell, cellIndex) => {
                         return (
-                          <ModusTableCell cell={cell} row={row} cellIndex={cellIndex} rowsExpandable={this.rowsExpandable} />
+                          <ModusTableCell
+                            cell={cell}
+                            row={row}
+                            cellIndex={cellIndex}
+                            rowsExpandable={this.rowsExpandable}
+                            onLinkClick={(link: ModusTableCellLink) => this.cellLinkClick.emit(link)}
+                          />
                         );
                       })}
                     </tr>

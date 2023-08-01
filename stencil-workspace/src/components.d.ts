@@ -2862,6 +2862,10 @@ declare namespace LocalJSX {
          */
         "maxWidth"?: string;
         /**
+          * Emits the link that was clicked
+         */
+        "onCellLinkClick"?: (event: ModusTableCustomEvent<ModusTableCellLink>) => void;
+        /**
           * Emits event on sort change
          */
         "onSortChange"?: (event: ModusTableCustomEvent<ModusTableSortingState>) => void;

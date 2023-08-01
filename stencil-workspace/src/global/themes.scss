@@ -159,6 +159,9 @@
   --modus-btn-icon-only-dark-active-bg: var(--modus-gray-1);
   --modus-btn-icon-only-dark-active-color: #2b2a37;
 
+  // Icon
+  --modus-icon-colour: var(--modus-gray-10);
+
   // Input
   --modus-input-bg: var(--modus-white);
   --modus-input-color: var(--modus-gray-8);
@@ -363,6 +366,7 @@
   --modus-table-readonly-bg: var(--modus-gray-0);
   --modus-table-readonly-color: var(--modus-table-color);
   --modus-table-body-color: var(--modus-gray-10);
+  --modus-table-cell-link-colour: var(--modus-link-color);
 
   // Tooltips
   --modus-tooltip-bg: var(--modus-gray-7);
@@ -482,6 +486,9 @@
   --modus-btn-icon-only-dark-hover-color: var(--modus-white);
   --modus-btn-icon-only-dark-active-bg: var(--modus-gray-6);
   --modus-btn-icon-only-dark-active-color: var(--modus-white);
+
+  // Icon
+  --modus-icon-colour: var(--modus-gray-light);
 
   // Input
   --modus-input-bg: var(--modus-gray-10);
@@ -654,7 +661,7 @@
 
   // Table
   --modus-table-bg: var(--modus-gray-11);
-  --modus-table-border-color: var(--modus-gray-8);
+  --modus-table-border-color: var(--modus-gray-6);
   --modus-table-color: var(--modus-white);
 
   // Header
@@ -675,6 +682,7 @@
   --modus-table-readonly-bg: var(--modus-table-bg);
   --modus-table-readonly-color: var(--modus-gray-2);
   --modus-table-body-color: var(--modus-white);
+  --modus-table-cell-link-colour: var(--modus-blue-4);
 
   // Tooltip
   --modus-tooltip-bg: var(--modus-gray-0);

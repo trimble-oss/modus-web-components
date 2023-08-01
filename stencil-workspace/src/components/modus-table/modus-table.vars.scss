@@ -6,7 +6,6 @@ $modus-table-border-color: var(--modus-table-border-color, #b7b9c3) !default;
 
 /** Header */
 $modus-table-header-bg: var(--modus-table-header-bg, #f1f1f6) !default;
-$modus-table-header-border-color: var(--modus-table-header-border-color, #b7b9c3) !default;
 $modus-table-header-color: var(--modus-table-header-color, #464b52) !default;
 
 /** Body */
@@ -25,6 +24,7 @@ $modus-menu-dropdown-bg: var(--modus-group-item-bg, #fff) !default;
 $modus-menu-dropdown-box-shadow: var(--modus-card-shadow-color, #3635454d) !default;
 $modus-menu-dropdown-hover-bg: var(--modus-group-item-hover-bg, #e0e1e9) !default;
 $modus-menu-dropdown-item-hover-bg: var(--modus-group-item-hover-bg, #e0e1e9) !default;
+$modus-icon-colour: var(--modus-icon-colour, #252a2e) !default;
 
 /** Drag Header */
 $modus-data-table-drag-header-bg: var(--modus-table-bg, #fff) !default;
@@ -33,3 +33,6 @@ $modus-table-header-drop-color: var(--modus-table-header-drop-color, #019aeb) !d
 /** Scrollbar */
 $modus-table-scrollbar-thumb-color: var(--modus-table-scrollbar-thumb-color, #6a6e79) !default;
 $modus-table-scrollbar-track-color: var(--modus-table-scrollbar-track-color, #b7b9c3) !default;
+
+/** Cell link */
+$modus-table-cell-link-colour: var(--modus-table-cell-link-colour, #217cbb) !default;

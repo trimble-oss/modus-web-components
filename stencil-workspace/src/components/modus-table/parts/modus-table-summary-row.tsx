@@ -4,7 +4,7 @@ import {
 } from '@stencil/core';
 import { Header, HeaderGroup } from '@tanstack/table-core';
 import { PropertyDataType, PropertyShowTotal } from '../constants/constants';
-import { ModusColumnDataType } from '../enums/modus-column-data-type';
+import { ModusTableColumnDataType } from '../enums';
 import ModusTableDisplayOptions from '../models/modus-table-display-options';
 
 interface ModusTableSummaryRowProps {
@@ -32,7 +32,9 @@ export const ModusTableSummaryRow: FunctionalComponent<ModusTableSummaryRowProps
           {group.headers.map((header) => (
             <td
               key={header.id}
-              class={header.column.columnDef[PropertyDataType] === ModusColumnDataType.Integer ? 'text-align-right' : ''}>
+              class={
+                header.column.columnDef[PropertyDataType] === ModusTableColumnDataType.Integer ? 'text-align-right' : ''
+              }>
               {header.column.columnDef[PropertyShowTotal] ? calculateSum(tableData, header) : header.column.columnDef.footer}
             </td>
           ))}
