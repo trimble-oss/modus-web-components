@@ -30,9 +30,10 @@
 
 ## Events
 
-| Event        | Description                | Type                        |
-| ------------ | -------------------------- | --------------------------- |
-| `sortChange` | Emits event on sort change | `CustomEvent<ColumnSort[]>` |
+| Event           | Description                     | Type                              |
+| --------------- | ------------------------------- | --------------------------------- |
+| `cellLinkClick` | Emits the link that was clicked | `CustomEvent<ModusTableCellLink>` |
+| `sortChange`    | Emits event on sort change      | `CustomEvent<ColumnSort[]>`       |
 
 
 ## Methods

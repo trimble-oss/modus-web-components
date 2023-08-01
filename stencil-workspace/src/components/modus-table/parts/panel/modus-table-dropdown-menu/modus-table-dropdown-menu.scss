@@ -11,6 +11,10 @@
     display: flex;
     padding: 4px;
 
+    svg {
+      fill: $modus-icon-colour;
+    }
+
     &:hover {
       background: $modus-menu-dropdown-hover-bg;
     }

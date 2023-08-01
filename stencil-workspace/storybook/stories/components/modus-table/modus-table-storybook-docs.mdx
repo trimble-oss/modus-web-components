@@ -15,6 +15,7 @@ import { Story } from '@storybook/addon-docs';
 - [Borderless](#borderless)
 - [Sorting](#sorting)
 - [Value Formatter](#value-formatter)
+- [Hyperlink](#hyperlink)
 - [Column Resize](#column-resize)
 - [Column Reorder](#column-reorder)
 - [Pagination](#pagination)
@@ -181,6 +182,16 @@ User can take the data of a cell and apply any string-based formatting logic.
 ```
 
 <Story id="components-table--value-formatter" height={'350px'} />
+
+### Hyperlink
+
+User can display hyperlink in a table column.
+
+- Pass the data in `ModusTableCellLink` format and specify `ModusTableColumnDataType.Link` as the column type.
+- `_type: ModusTableColumnDataType.Link` is used to override the column data type in order to display a hyperlink only in a specific cell and not on the entire column.
+- As a link is an object, the default sorting is ineffective. We must pass `sortingFn:'sortForHyperlink'` along with the column information in order to sort a column with the `ModusTableCellLink` datatype or if '\_type' is used to override the datatype.
+
+<Story id="components-table--hyperlink" height={'350px'} />
 
 ### Column Resize
 
@@ -362,16 +373,24 @@ User can expand rows to display as child/sub row data.
 interface interface ModusTableColumn {
   header: string;
   accessorKey: string;
-  dataType: ModusColumnDataType;
+  dataType: ModusTableColumnDataType;
   id?: string;
+  cell?: ColumnDefTemplate;
   footer?: string;
   enableSorting?: boolean;
   enableResizing?: boolean;
-  size?: number,
-  minSize?: number,
-  maxSize?: number
+  size?: number;
+  minSize?: number;
+  maxSize?: number;
   showTotal?: boolean;
   subRows?: ModusTableColumn[];
+  sortingFn?: SortingFnOption;
+}
+
+interface ModusTableCellLink {
+  display: string;
+  url: string;
+  _type?: ModusTableColumnDataType.Link // Is used to override the column data type.
 }
 
 interface ModusTablePanelOptions {
@@ -386,6 +405,12 @@ interface ModusTableColumnsVisibilityOptions {
 interface ModusTableDisplayOptions {
   borderless?: boolean;
   cellBorderless?: boolean;
+}
+
+enum ModusTableColumnDataType {
+  Text = 'text',
+  Integer = 'integer',
+  Link = 'link',
 }
 
 ```
@@ -426,9 +451,10 @@ Users can use keyboard navigation to perform different actions.
 
 ### Events
 
-| Name         | Description                         | Emits                             |
-| ------------ | ----------------------------------- | --------------------------------- |
-| `sortChange` | An event that fires on sort change. | `[{ id: string, desc: boolean }]` |
+| Name            | Description                               | Emits                                                    |
+| --------------- | ----------------------------------------- | -------------------------------------------------------- |
+| `sortChange`    | An event that fires on sort change.       | `[{ id: string, desc: boolean }]`                        |
+| `cellLinkClick` | An event that fires on click of the link. | `{ display: string, url: string } as ModusTableCellLink` |
 
 ### Slot
 

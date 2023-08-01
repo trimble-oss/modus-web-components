@@ -3,20 +3,27 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Cell, Row } from '@tanstack/table-core';
-import { IconChevronDownThick } from '../../../icons/icon-chevron-down-thick';
-import { IconChevronUpThick } from '../../../icons/icon-chevron-up-thick';
 import { PropertyDataType } from '../../constants/constants';
-import { ModusColumnDataType } from '../../enums/modus-column-data-type';
-import { CellFormatter } from './modus-table-cell-formatter';
+import { ModusTableColumnDataType } from '../../enums/modus-table-column-data-type';
+import ModusTableCellLink from '../../models/modus-table-cell-link';
+import { ModusTableCellContent } from './modus-table-cell-content';
+import { ModusTableCellExpandIcons } from './modus-table-cell-expand-icons';
 
 interface ModusTableCellProps {
   cell: Cell<unknown, unknown>;
   row: Row<unknown>;
   cellIndex: number;
   rowsExpandable: boolean;
+  onLinkClick: (link: ModusTableCellLink) => void;
 }
 
-export const ModusTableCell: FunctionalComponent<ModusTableCellProps> = ({ cell, row, cellIndex, rowsExpandable }) => {
+export const ModusTableCell: FunctionalComponent<ModusTableCellProps> = ({
+  cell,
+  row,
+  cellIndex,
+  rowsExpandable,
+  onLinkClick,
+}) => {
   return (
     <td
       key={cell.id}
@@ -26,27 +33,21 @@ export const ModusTableCell: FunctionalComponent<ModusTableCellProps> = ({ cell,
       style={{ width: `${cell.column.getSize()}px` }}>
       <div
         class={`table-cell ${
-          cell.column.columnDef[PropertyDataType] === ModusColumnDataType.Integer ? 'text-align-right' : ''
+          cell.column.columnDef[PropertyDataType] === ModusTableColumnDataType.Integer ? 'text-align-right' : ''
         }`}>
-        {rowsExpandable ? (
-          <span
-            class="expand"
-            style={{ paddingLeft: `${cellIndex === 0 ? row.depth * 2 : 0}rem` }}
-            onClick={row.getToggleExpandedHandler()}>
-            {cellIndex === 0 && row.getCanExpand() ? (
-              row.getIsExpanded() ? (
-                <IconChevronUpThick size={'24'} />
-              ) : (
-                <IconChevronDownThick size={'24'} />
-              )
-            ) : (
-              ''
-            )}
-          </span>
-        ) : (
-          ''
-        )}
-        <span class="cell-content">{CellFormatter(cell.column.columnDef.cell, cell.getContext())}</span>
+        {
+          /** Expand or collaps icon */
+          rowsExpandable ? <ModusTableCellExpandIcons cellIndex={cellIndex} row={row} /> : ''
+        }
+        {
+          /** Cell content */
+          <ModusTableCellContent
+            cell={cell}
+            onLinkClick={(link: ModusTableCellLink) => {
+              onLinkClick(link);
+            }}
+          />
+        }
       </div>
     </td>
   );

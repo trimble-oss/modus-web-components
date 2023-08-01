@@ -1084,7 +1084,7 @@ export class ModusTable {
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['sortChange']);
+    proxyOutputs(this, this.el, ['sortChange', 'cellLinkClick']);
   }
 }
 
@@ -1096,6 +1096,10 @@ export declare interface ModusTable extends Components.ModusTable {
    * Emits event on sort change
    */
   sortChange: EventEmitter<CustomEvent<IModusTableModusTableSortingState>>;
+  /**
+   * Emits the link that was clicked
+   */
+  cellLinkClick: EventEmitter<CustomEvent<ModusTableCellLink>>;
 }
 
 
