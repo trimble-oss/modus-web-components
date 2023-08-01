@@ -1,10 +1,10 @@
-import { CellContext, ColumnDefTemplate, RowData } from '@tanstack/table-core';
-import { ModusColumnDataType } from '../enums/modus-column-data-type';
+import { CellContext, ColumnDefTemplate, RowData, SortingFnOption } from '@tanstack/table-core';
+import { ModusTableColumnDataType } from '../enums';
 
 export default interface ModusTableColumn<TData extends RowData, TValue = unknown> {
   header: string;
   accessorKey: string;
-  dataType: ModusColumnDataType;
+  dataType: ModusTableColumnDataType;
   id?: string;
   cell?: ColumnDefTemplate<CellContext<TData, TValue>>;
   footer?: string;
@@ -15,4 +15,5 @@ export default interface ModusTableColumn<TData extends RowData, TValue = unknow
   maxSize?: number;
   showTotal?: boolean;
   subRows?: ModusTableColumn<TData, TValue>[];
+  sortingFn?: SortingFnOption<TData>;
 }

@@ -10,19 +10,14 @@ export type Renderable<TProps> = any | FunctionalComponent<TProps>;
 /**
  * Cell formatter enables formatting of a cell value.
  */
-export function CellFormatter<TProps extends object>(
-  Comp: Renderable<TProps>,
-  props: TProps
-): unknown | JSX.Element {
+export function CellFormatter<TProps extends object>(Comp: Renderable<TProps>, props: TProps): unknown | JSX.Element {
   return !Comp ? null : isFunction<TProps>(Comp) ? <Comp {...props} /> : Comp;
 }
 
 /**
  * Checks if the input for cell formatter is a function object.
  */
-function isFunction<TProps>(
-  component: Renderable<TProps>
-): component is FunctionalComponent<TProps> {
+function isFunction<TProps>(component: Renderable<TProps>): component is FunctionalComponent<TProps> {
   return isClassComponent(component) || typeof component === 'function';
 }
 
