@@ -5,11 +5,11 @@ import docs from './modus-table-storybook-docs.mdx';
 // Helpers
 // for the data generator makeData function
 function range(len) {
-  const arr: number[] = []
+  const arr: number[] = [];
   for (let i = 0; i < len; i++) {
-    arr.push(i)
+    arr.push(i);
   }
-  return arr
+  return arr;
 }
 
 function randomNumber(min, max) {
@@ -17,37 +17,36 @@ function randomNumber(min, max) {
 }
 
 function newPerson() {
-  const rand = Math.random()
-  const namesIndex = Math.floor(rand * (Names.length - 1))
-  const firstName = Names[namesIndex].split(' ')[0]
-  const lastName = Names[namesIndex].split(' ')[1]
+  const namesIndex = randomNumber(0, 17);
+  const firstName = Names[namesIndex].split(' ')[0];
+  const lastName = Names[namesIndex].split(' ')[1];
   return {
     firstName,
     lastName,
-    age: Math.floor(rand * 30),
-    visits: Math.floor(rand * 100),
-    progress: Math.floor(rand * 100),
-    status: rand > 0.66 ? 'Verified' : rand > 0.33 ? 'Pending' : 'Rejected',
-    income: randomNumber(1000,1000000),
-    createdAt: new Date(randomNumber(1990, 2020), randomNumber(0, 11), randomNumber(1, 30)).toDateString()
-  }
+    age: randomNumber(20, 80) * 30,
+    visits: randomNumber(1, 100) * 100,
+    progress: randomNumber(1, 100) * 100,
+    status: randomNumber(1, 100) > 66 ? 'Verified' : randomNumber(0, 100) > 33 ? 'Pending' : 'Rejected',
+    income: randomNumber(1000, 1000000),
+    createdAt: new Date(randomNumber(1990, 2020), randomNumber(0, 11), randomNumber(1, 30)).toDateString(),
+  };
 }
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-function makeData(...lens): unknown {
+function makeData(...lens): object[] {
   const makeDataLevel = (depth = 0) => {
-    const len = lens[depth]
+    const len = lens[depth];
     return range(len).map(() => {
       return {
         ...newPerson(),
         subRows: lens[depth + 1] ? makeDataLevel(depth + 1) : undefined,
-      }
-    })
-  }
+      };
+    });
+  };
 
-  return makeDataLevel()
+  return makeDataLevel();
 }
 
-function initializeTable (columns, data, pageSizeList, panelOptions, displayOptions){
+function initializeTable(columns, data, pageSizeList, panelOptions, displayOptions) {
   const tag = document.createElement('script');
   tag.innerHTML = `
   document.querySelector('modus-table').columns = ${JSON.stringify(columns)};
@@ -80,73 +79,83 @@ const Names = [
   'Roger Rabbit',
   'Papa Smurf',
   'Buzz Lightyear',
-]
+];
 const DefaultColumns = [
   {
-     "header":"First Name",
-     "accessorKey":"firstName",
-     "id":"first-name",
-     "dataType":"text",
-     "size":150,
-     "minSize":80,
-     "footer": "Total"
+    header: 'First Name',
+    accessorKey: 'firstName',
+    id: 'first-name',
+    dataType: 'text',
+    size: 150,
+    minSize: 80,
+    footer: 'Total',
   },
   {
-     "header":"Last Name",
-     "accessorKey":"lastName",
-     "id":"last-name",
-     "dataType":"text",
-     "size":150,
-     "minSize":80
+    header: 'Last Name',
+    accessorKey: 'lastName',
+    id: 'last-name',
+    dataType: 'text',
+    size: 150,
+    minSize: 80,
   },
   {
-     "header":"Age",
-     "accessorKey":"age",
-     "id":"age",
-     "dataType":"integer",
-     "size":80,
-     "minSize":60
+    header: 'Age',
+    accessorKey: 'age',
+    id: 'age',
+    dataType: 'integer',
+    size: 80,
+    minSize: 60,
   },
   {
-     "header":"Visits",
-     "accessorKey":"visits",
-     "id":"visits",
-     "dataType":"integer",
-     "maxSize":80,
-     "showTotal":true,
-     "minSize":80,
+    header: 'Visits',
+    accessorKey: 'visits',
+    id: 'visits',
+    dataType: 'integer',
+    maxSize: 80,
+    showTotal: true,
+    minSize: 80,
   },
   {
-     "header":"Status",
-     "accessorKey":"status",
-     "id":"status",
-     "dataType":"text",
-     "minSize":80
+    header: 'Status',
+    accessorKey: 'status',
+    id: 'status',
+    dataType: 'text',
+    minSize: 80,
   },
   {
-     "header":"Profile Progress",
-     "accessorKey":"progress",
-     "id":"progress",
-     "dataType":"integer",
-     "minSize":100
+    header: 'Profile Progress',
+    accessorKey: 'progress',
+    id: 'progress',
+    dataType: 'integer',
+    minSize: 100,
   },
   {
-     "header":"Income",
-     "accessorKey":"income",
-     "id":"income",
-     "dataType":"integer",
-     "size":100,
-     "minSize":100
+    header: 'Income',
+    accessorKey: 'income',
+    id: 'income',
+    dataType: 'integer',
+    size: 100,
+    minSize: 100,
   },
   {
-     "header":"Created At",
-     "accessorKey":"createdAt",
-     "id":"createdAt",
-     "dataType":"string",
-     "size":150,
-     "minSize":150
-  }
+    header: 'Created At',
+    accessorKey: 'createdAt',
+    id: 'createdAt',
+    dataType: 'string',
+    size: 150,
+    minSize: 150,
+  },
 ];
+
+const emailColumn = {
+  header: 'Email',
+  accessorKey: 'email',
+  id: 'email',
+  dataType: 'link',
+  size: 230,
+  minSize: 80,
+  sortingFn: 'sortForHyperlink'
+};
 
 const DefaultArgs = {
   hover: false,
@@ -157,7 +166,7 @@ const DefaultArgs = {
   showSortIconOnHover: false,
   summaryRow: false,
   fullWidth: false,
-  pageSizeList: [7,10,20],
+  pageSizeList: [7, 10, 20],
   showTablePanel: false,
   columns: DefaultColumns,
   data: makeData(5),
@@ -165,7 +174,7 @@ const DefaultArgs = {
   displayOptions: {},
   rowsExpandable: false,
   maxHeight: '',
-  maxWidth: ''
+  maxWidth: '',
 };
 
 export default {
@@ -279,8 +288,7 @@ export default {
     },
     panelOptions: {
       name: 'panel-options',
-      description:
-        'To display a panel options, which allows access to table operations like hiding columns.',
+      description: 'To display a panel options, which allows access to table operations like hiding columns.',
       table: {
         type: { summary: 'ModusTablePanelOptions' },
       },
@@ -299,7 +307,7 @@ export default {
   },
   parameters: {
     actions: {
-      handles: ['sortChange'],
+      handles: ['sortChange', 'cellLinkClick'],
     },
     controls: { expanded: true, sort: 'requiredFirst' },
     docs: {
@@ -330,7 +338,7 @@ const Template = ({
   displayOptions,
   rowsExpandable,
   maxHeight,
-  maxWidth
+  maxWidth,
 }) => html`
   <div style="width: 950px">
     <modus-table
@@ -345,7 +353,7 @@ const Template = ({
       show-table-panel="${showTablePanel}"
       rows-expandable="${rowsExpandable}"
       max-height="${maxHeight}"
-      max-width="${maxWidth}"/>
+      max-width="${maxWidth}" />
   </div>
   ${initializeTable(columns, data, pageSizeList, panelOptions, displayOptions)}
 `;
@@ -354,19 +362,19 @@ export const Default = Template.bind({});
 Default.args = DefaultArgs;
 
 export const Hover = Template.bind({});
-Hover.args = { ...DefaultArgs, hover: true
-};
+Hover.args = { ...DefaultArgs, hover: true };
 
 export const Borderless = Template.bind({});
-Borderless.args = { ...DefaultArgs, displayOptions: {
-  borderless: true,
-  cellBorderless: true
-}
+Borderless.args = {
+  ...DefaultArgs,
+  displayOptions: {
+    borderless: true,
+    cellBorderless: true,
+  },
 };
 
 export const Sorting = Template.bind({});
-Sorting.args = { ...DefaultArgs, sort: true
-};
+Sorting.args = { ...DefaultArgs, sort: true };
 
 export const ValueFormatter = ({
   hover,
@@ -382,21 +390,21 @@ export const ValueFormatter = ({
   panelOptions,
   displayOptions,
   maxHeight,
-  maxWidth
+  maxWidth,
 }) => html`
   <div style="width: 950px">
     <modus-table
-    hover="${hover}"
-    sort="${sort}"
-    column-resize="${columnResize}"
-    pagination="${pagination}"
-    show-sort-icon-on-hover="${showSortIconOnHover}"
-    summary-row="${summaryRow}"
-    full-width="${fullWidth}"
-    column-reorder="${columnReorder}"
-    show-table-panel="${showTablePanel}"
-    max-height="${maxHeight}"
-    max-width="${maxWidth}"/>
+      hover="${hover}"
+      sort="${sort}"
+      column-resize="${columnResize}"
+      pagination="${pagination}"
+      show-sort-icon-on-hover="${showSortIconOnHover}"
+      summary-row="${summaryRow}"
+      full-width="${fullWidth}"
+      column-reorder="${columnReorder}"
+      show-table-panel="${showTablePanel}"
+      max-height="${maxHeight}"
+      max-width="${maxWidth}" />
   </div>
   ${valueFormatterTable(pageSizeList, panelOptions, displayOptions)}
 `;
@@ -409,12 +417,12 @@ ValueFormatter.args = {
   showSortIconOnHover: false,
   summaryRow: false,
   fullWidth: false,
-  pageSizeList: [7,10,20],
+  pageSizeList: [7, 10, 20],
   showTablePanel: false,
   panelOptions: {},
   displayOptions: {},
   maxHeight: '',
-  maxWidth: ''
+  maxWidth: '',
 };
 const valueFormatterTable = (pageSizeList, panelOptions, displayOptions) => {
   const tag = document.createElement('script');
@@ -429,30 +437,39 @@ const valueFormatterTable = (pageSizeList, panelOptions, displayOptions) => {
   return tag;
 };
 
+export const Hyperlink = Template.bind({});
+const HyperlinkColumns = [...DefaultColumns];
+HyperlinkColumns.splice(2, 1, emailColumn);
+const HyperlinkData = makeData(5).map((rowData: object) => {
+  const email: string = `${rowData['firstName']}${rowData['lastName']}@gmail.com`.toLowerCase();
+  rowData['email'] = { display: email, url: email };
+  return rowData;
+});
+Hyperlink.args = { ...DefaultArgs, columns: HyperlinkColumns, data: HyperlinkData };
+
 export const ColumnResize = Template.bind({});
-ColumnResize.args = { ...DefaultArgs, columnResize: true
-};
+ColumnResize.args = { ...DefaultArgs, columnResize: true };
 
 export const Pagination = Template.bind({});
-Pagination.args = { ...DefaultArgs, pagination: true,data: makeData(50), pageSizeList: [5, 10, 50]
-};
+Pagination.args = { ...DefaultArgs, pagination: true, data: makeData(50), pageSizeList: [5, 10, 50] };
 
 export const SummaryRow = Template.bind({});
-SummaryRow.args = { ...DefaultArgs, summaryRow: true,
-};
+SummaryRow.args = { ...DefaultArgs, summaryRow: true };
 
-export const ColumnsVisibility = Template.bind({});
-ColumnsVisibility.args = { ...DefaultArgs, panelOptions: {
-  columnsVisibility: {
-    title: '',
-    requiredColumns: ['age', 'visits']
-  }
-}, showTablePanel: true
+export const ColumnVisibility = Template.bind({});
+ColumnVisibility.args = {
+  ...DefaultArgs,
+  panelOptions: {
+    columnsVisibility: {
+      title: '',
+      requiredColumns: ['age', 'visits'],
+    },
+  },
+  showTablePanel: true,
 };
 
 export const ColumnReorder = Template.bind({});
-ColumnReorder.args = { ...DefaultArgs, columnReorder: true,
-};
+ColumnReorder.args = { ...DefaultArgs, columnReorder: true };
 
 export const ExpandableRows = Template.bind({});
 ExpandableRows.args = { ...DefaultArgs, rowsExpandable: true, data: makeData(7, 4, 3, 2, 1), fullWidth: true };

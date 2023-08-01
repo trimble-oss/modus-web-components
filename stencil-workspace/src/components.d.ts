@@ -14,7 +14,7 @@ import { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, 
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-import { ModusTableColumn, ModusTableColumnsVisibilityOptions, ModusTableDisplayOptions, ModusTablePanelOptions, ModusTableSortingState } from "./components/modus-table/models";
+import { ModusTableSortingState } from "./components/modus-table/models";
 import { Column, Table } from "@tanstack/table-core";
 import { Tab } from "./components/modus-tabs/modus-tabs";
 import { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
@@ -28,7 +28,7 @@ export { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, 
 export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 export { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 export { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-export { ModusTableColumn, ModusTableColumnsVisibilityOptions, ModusTableDisplayOptions, ModusTablePanelOptions, ModusTableSortingState } from "./components/modus-table/models";
+export { ModusTableSortingState } from "./components/modus-table/models";
 export { Column, Table } from "@tanstack/table-core";
 export { Tab } from "./components/modus-tabs/modus-tabs";
 export { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
@@ -988,12 +988,24 @@ export namespace Components {
           * (Optional) To enable row hover in table.
          */
         "hover": boolean;
+        /**
+          * (Optional) To display a vertical scrollbar when the height is exceeded.
+         */
+        "maxHeight": string;
+        /**
+          * (Optional) To display a horizontal scrollbar when the width is exceeded.
+         */
+        "maxWidth": string;
         "pageSizeList": number[];
         "pagination": boolean;
         /**
           * (Optional) To display a panel options, which allows access to table operations like hiding columns.
          */
         "panelOptions": ModusTablePanelOptions | null;
+        /**
+          * (Optional) To display expanded rows.
+         */
+        "rowsExpandable": boolean;
         /**
           * (Optional) To display sort icon on hover.
          */
@@ -2904,6 +2916,18 @@ declare namespace LocalJSX {
          */
         "hover"?: boolean;
         /**
+          * (Optional) To display a vertical scrollbar when the height is exceeded.
+         */
+        "maxHeight"?: string;
+        /**
+          * (Optional) To display a horizontal scrollbar when the width is exceeded.
+         */
+        "maxWidth"?: string;
+        /**
+          * Emits the link that was clicked
+         */
+        "onCellLinkClick"?: (event: ModusTableCustomEvent<ModusTableCellLink>) => void;
+        /**
           * Emits event on sort change
          */
         "onSortChange"?: (event: ModusTableCustomEvent<ModusTableSortingState>) => void;
@@ -2913,6 +2937,10 @@ declare namespace LocalJSX {
           * (Optional) To display a panel options, which allows access to table operations like hiding columns.
          */
         "panelOptions"?: ModusTablePanelOptions | null;
+        /**
+          * (Optional) To display expanded rows.
+         */
+        "rowsExpandable"?: boolean;
         /**
           * (Optional) To display sort icon on hover.
          */

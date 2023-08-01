@@ -31,11 +31,11 @@ table {
 
     tr {
       background-color: $modus-table-header-bg;
-      box-shadow: inset 0 -0.5px 0 $modus-table-header-border-color;
+      box-shadow: inset 0 -0.5px 0 $modus-table-border-color;
       color: $modus-table-header-color;
 
       th {
-        border-right: $rem-1px $modus-table-header-border-color solid;
+        border-right: $rem-1px $modus-table-border-color solid;
         font-weight: $font-weight-semi-bold;
         overflow: hidden;
         padding: $rem-8px $rem-8px $rem-8px $rem-16px;
@@ -151,11 +151,24 @@ table {
       color: $modus-table-body-color;
 
       td {
-        border-top: $rem-1px $modus-table-header-border-color solid;
+        border-top: $rem-1px $modus-table-border-color solid;
 
         .table-cell {
           align-items: center;
           display: flex;
+
+          .cell-link {
+            color: $modus-table-cell-link-colour;
+            cursor: pointer;
+            font-weight: $font-weight-semi-bold;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-wrap: nowrap;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
 
           &.text-align-right {
             justify-content: flex-end;
@@ -186,7 +199,7 @@ table {
     tr {
       &.summary-row {
         bottom: 0;
-        box-shadow: 1px -1px $modus-table-header-border-color;
+        box-shadow: 1px -1px $modus-table-border-color;
         position: sticky;
 
         td {
@@ -214,7 +227,6 @@ table {
       text-align: left;
 
       &.active-resize {
-        // box-shadow: inset -2px 0 0 $modus-primary-color;
         border-right: 2px $modus-primary-color solid;
       }
 
@@ -288,7 +300,7 @@ table {
 
 .drag-content {
   background: $modus-data-table-drag-header-bg;
-  border: $rem-1px $modus-table-header-border-color solid;
+  border: $rem-1px $modus-table-border-color solid;
   cursor: grabbing !important;
   display: flex;
   left: 0;
