@@ -34,7 +34,7 @@ export class ModusButton {
   @Prop() size: 'small' | 'medium' | 'large' = 'medium';
 
   /** (optional) Shows a caret icon right side of the button. */
-  // @Prop() showCaret: boolean;
+  @Prop() showCaret: boolean;
 
   /** (optional) An event that fires on button click. */
   @Event() buttonClick: EventEmitter;
@@ -93,7 +93,7 @@ export class ModusButton {
           <slot />
         </span>
 
-        {this.rightIcon && (
+        {this.rightIcon && !this.showCaret && (
           <span class="icon right-icon">
             <IconMap icon={this.rightIcon}></IconMap>
           </span>
@@ -113,7 +113,7 @@ export class ModusButton {
   render(): unknown {
     const className = `${this.classBySize.get(this.size)} ${this.classByColor.get(this.color)} ${this.classByButtonStyle.get(
       this.buttonStyle
-    )} ${this.iconOnly ? 'icon-only' : ''}`;
+    )} ${this.iconOnly ? 'icon-only' : ''} ${this.showCaret ? 'has-caret' : ''}`;
 
     return (
       <button
@@ -130,6 +130,7 @@ export class ModusButton {
         role="button"
         ref={(el) => (this.buttonRef = el)}>
         {this.iconOnly ? this.renderIconOnly() : this.renderIconWithText()}
+        {this.showCaret && <IconMap size="24" icon="caret-down"></IconMap>}
       </button>
     );
   }

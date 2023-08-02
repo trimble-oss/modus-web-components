@@ -204,6 +204,10 @@ export namespace Components {
          */
         "rightIcon": string;
         /**
+          * (optional) Shows a caret icon right side of the button.
+         */
+        "showCaret": boolean;
+        /**
           * (optional) The size of the button.
          */
         "size": 'small' | 'medium' | 'large';
@@ -1852,6 +1856,10 @@ declare namespace LocalJSX {
           * (optional) Takes the icon name and shows the icon aligned to the right of the button text.
          */
         "rightIcon"?: string;
+        /**
+          * (optional) Shows a caret icon right side of the button.
+         */
+        "showCaret"?: boolean;
         /**
           * (optional) The size of the button.
          */

@@ -4,6 +4,7 @@ import { IconAdd } from './icon-add';
 import { IconApps } from './icon-apps';
 import { IconCalendar } from './icon-calendar';
 import { IconCancel } from './icon-cancel';
+import { IconCaretDown } from './icon-caret-down';
 import { IconCheck } from './icon-check';
 import { IconCheckCircle } from './icon-check-circle';
 import { IconCheckCircleOutline } from './icon-check-circle-outline';
@@ -61,6 +62,8 @@ export const IconMap: FunctionalComponent<IconMapProps> = (props: IconMapProps) 
       return <IconCalendar color={props.color} onClick={props.onClick} size={props.size} />;
     case 'cancel':
       return <IconCancel color={props.color} onClick={props.onClick} size={props.size} />;
+    case 'caret-down':
+      return <IconCaretDown color={props.color} onClick={props.onClick} size={props.size} />;
     case 'check':
       return <IconCheck color={props.color} onClick={props.onClick} size={props.size} />;
     case 'check-circle':
@@ -104,7 +107,7 @@ export const IconMap: FunctionalComponent<IconMapProps> = (props: IconMapProps) 
     case 'menu':
       return <IconMenu color={props.color} onClick={props.onClick} size={props.size} />;
     case 'notifications':
-      return <IconNotifications color={props.color} onClick={props.onClick} size={props.size} pressed={props.pressed}/>;
+      return <IconNotifications color={props.color} onClick={props.onClick} size={props.size} pressed={props.pressed} />;
     case 'remove':
       return <IconRemove color={props.color} onClick={props.onClick} size={props.size} />;
     case 'search':
