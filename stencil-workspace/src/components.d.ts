@@ -180,9 +180,9 @@ export namespace Components {
          */
         "buttonStyle": 'borderless' | 'fill' | 'outline';
         /**
-          * (optional) The color of the button. Note: `dark` is supported only on icon-only buttons.
+          * (optional) The color of the button
          */
-        "color": 'danger' | 'primary' | 'secondary' | 'tertiary' | 'dark';
+        "color": 'danger' | 'primary' | 'secondary' | 'tertiary';
         /**
           * (optional) Disables the button.
          */
@@ -1829,9 +1829,9 @@ declare namespace LocalJSX {
          */
         "buttonStyle"?: 'borderless' | 'fill' | 'outline';
         /**
-          * (optional) The color of the button. Note: `dark` is supported only on icon-only buttons.
+          * (optional) The color of the button
          */
-        "color"?: 'danger' | 'primary' | 'secondary' | 'tertiary' | 'dark';
+        "color"?: 'danger' | 'primary' | 'secondary' | 'tertiary';
         /**
           * (optional) Disables the button.
          */
