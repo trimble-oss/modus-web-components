@@ -17,7 +17,7 @@ For Text Buttons and Icon with Text Buttons,
 For Icon only Buttons,
 - Solid buttons supports all the given colors except `danger`.
 - Outline buttons only support `primary` and `secondary` colors.
-- Borderless buttons only support `primary`, `secondary` and `tertiary` colors.
+- Borderless buttons supports all the given colors except `danger`.
 
 
 <Anchor storyId="components-button--default" />
@@ -34,6 +34,13 @@ For Icon only Buttons,
 <modus-button size="small" color="primary">Small</modus-button>
 <modus-button size="large" color="primary">Large</modus-button>
 
+### Loading Button
+
+<modus-button color="primary" disabled>
+  <modus-spinner color="white" size=".5rem"></modus-spinner>
+  &nbsp;Loading...
+</modus-button>
+
 <Anchor storyId="components-button--borderless" />
 
 ### Borderless
@@ -48,8 +55,6 @@ For Icon only Buttons,
 <modus-button button-style="outline" color="secondary">Outline</modus-button>
 
 
-
-
 ```html
 <modus-button color="primary">Primary</modus-button>
 <modus-button color="secondary">Secondary</modus-button>
@@ -60,6 +65,11 @@ For Icon only Buttons,
 
 <modus-button size="small" color="primary">Small</modus-button>
 <modus-button size="large" color="primary">Large</modus-button>
+
+<modus-button color="primary" disabled>
+  <modus-spinner color="white" size=".5rem"></modus-spinner>
+  &nbsp;Loading...
+</modus-button>
 
 <modus-button button-style="borderless">Borderless</modus-button>
 
@@ -119,19 +129,34 @@ For Icon only Buttons,
 <modus-button button-style="borderless" color="tertiary" icon-only="notifications"></modus-button>
 ```
 
+<Anchor storyId="components-button--with-caret" />
+
+### With Caret Icon
+
+Users can choose to show a caret icon at the right side of the button using  `show-caret`. Note: Only one icon should be added to the right position, which means if `show-caret` is `true`, `right-icon` will not be effective.
+
+<modus-button color="primary" show-caret="true">Primary</modus-button>
+<modus-button color="secondary" button-style="borderless"  icon-only="notifications" show-caret="true"></modus-button>
+
+
+```html
+<modus-button color="primary" show-caret="true">Primary</modus-button>
+<modus-button color="secondary" button-style="borderless"  icon-only="notifications" show-caret="true"></modus-button>
+```
+
 ### Properties
 
-| Property      | Attribute      | Description                                                                              | Type                                                           | Default     |
-| ------------- | -------------- | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------- | ----------- |
-| `ariaLabel`   | `aria-label`   | (optional) The button's aria-label.                                                      | `string`                                                       | `undefined` |
-| `buttonStyle` | `button-style` | (optional) The style of the button                                                       | `"borderless" , "fill" , "outline"`                          | `'fill'`    |
-| `color`       | `color`        | (optional) The color of the button. | `"danger" , "primary" , "secondary" , "tertiary"` | `'primary'` |
-| `disabled`    | `disabled`     | (optional) Disables the button.                                                          | `boolean`                                                      | `undefined` |
-| `iconOnly`    | `icon-only`    | (optional) Takes the icon name and renders an icon-only button.                          | `string`                                                       | `undefined` |
-| `leftIcon`    | `left-icon`    | (optional) Takes the icon name and shows the icon aligned to the left of the button text.                        | `string`                                                       | `undefined` |
-| `rightIcon`   | `right-icon`   | (optional) Takes the icon name and shows the icon aligned to the right of the button text.                       | `string`                                                       | `undefined` |
-| `size`        | `size`         | (optional) The size of the button.                                                       | `"large" , "medium" , "small"`                               | `'medium'`  |
-
+| Property      | Attribute      | Description                                                                                | Type                                                 | Default     |
+| ------------- | -------------- | ------------------------------------------------------------------------------------------ | ---------------------------------------------------- | ----------- |
+| `ariaLabel`   | `aria-label`   | (optional) The button's aria-label.                                                        | `string`                                             | `undefined` |
+| `buttonStyle` | `button-style` | (optional) The style of the button                                                         | `"borderless" , "fill" , "outline"`                | `'fill'`    |
+| `color`       | `color`        | (optional) The color of the button                                                         | `"danger" ,"primary" , "secondary" , "tertiary"` | `'primary'` |
+| `disabled`    | `disabled`     | (optional) Disables the button.                                                            | `boolean`                                            | `undefined` |
+| `iconOnly`    | `icon-only`    | (optional) Takes the icon name and renders an icon-only button.                            | `string`                                             | `undefined` |
+| `leftIcon`    | `left-icon`    | (optional) Takes the icon name and shows the icon aligned to the left of the button text.  | `string`                                             | `undefined` |
+| `rightIcon`   | `right-icon`   | (optional) Takes the icon name and shows the icon aligned to the right of the button text. | `string`                                             | `undefined` |
+| `showCaret`   | `show-caret`   | (optional) Shows a caret icon right side of the button.                                    | `boolean`                                            | `undefined` |
+| `size`        | `size`         | (optional) The size of the button.                                                         | `"large" ,"medium" , "small"`                     | `'medium'`  |
 
 ### DOM Events
 

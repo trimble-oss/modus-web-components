@@ -83,6 +83,41 @@ describe('modus-button', () => {
     expect(icon).toBeTruthy();
   });
 
+  it('renders changes to the showCaret prop', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-button></modus-button>');
+    await page.waitForChanges();
+
+    const component = await page.find('modus-button');
+    let icon = await page.find('modus-button >>> .icon-caret-down');
+    expect(icon).toBeFalsy();
+
+    component.setProperty('showCaret', true);
+    await page.waitForChanges();
+    icon = await page.find('modus-button >>> .icon-caret-down');
+    expect(icon).toBeTruthy();
+  });
+
+  it('should not render right icon when caret icon is visible', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-button right-icon="add"></modus-button>');
+    await page.waitForChanges();
+
+    const component = await page.find('modus-button');
+    await page.waitForChanges();
+    let icon = await page.find('modus-button >>> .right-icon');
+    expect(icon).toBeTruthy();
+
+    component.setProperty('showCaret', true);
+    await page.waitForChanges();
+    icon = await page.find('modus-button >>> .icon-caret-down');
+    expect(icon).toBeTruthy();
+    icon = await page.find('modus-button >>> .right-icon');
+    expect(icon).toBeFalsy();
+  });
+
   it('renders changes to the disabled prop', async () => {
     const page = await newE2EPage();
 

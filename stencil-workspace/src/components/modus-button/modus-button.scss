@@ -64,11 +64,19 @@ button {
 
     &.icon-only {
       height: 32px;
-      padding: 0 4px;
+      padding: 0;
 
-      .icon svg {
-        height: 24px;
-        width: 24px;
+      &.has-caret {
+        padding: 0 4px;
+      }
+
+      .icon {
+        padding: 0 4px;
+
+        svg {
+          height: 24px;
+          width: 24px;
+        }
       }
     }
   }
@@ -89,11 +97,19 @@ button {
 
     &.icon-only {
       height: 40px;
-      padding: 0 8px;
+      padding: 0;
 
-      .icon svg {
-        height: 24px;
-        width: 24px;
+      &.has-caret {
+        padding: 0 4px;
+      }
+
+      .icon {
+        padding: 0 8px;
+
+        svg {
+          height: 24px;
+          width: 24px;
+        }
       }
     }
   }
@@ -114,11 +130,19 @@ button {
 
     &.icon-only {
       height: 48px;
-      padding: 0 8px;
+      padding: 0;
 
-      .icon svg {
-        height: 32px;
-        width: 32px;
+      &.has-caret {
+        padding: 0 8px 0 4px;
+      }
+
+      .icon {
+        padding: 0 8px;
+
+        svg {
+          height: 32px;
+          width: 32px;
+        }
       }
     }
   }

@@ -16,6 +16,7 @@
 | `iconOnly`    | `icon-only`    | (optional) Takes the icon name and renders an icon-only button.                            | `string`                                             | `undefined` |
 | `leftIcon`    | `left-icon`    | (optional) Takes the icon name and shows the icon aligned to the left of the button text.  | `string`                                             | `undefined` |
 | `rightIcon`   | `right-icon`   | (optional) Takes the icon name and shows the icon aligned to the right of the button text. | `string`                                             | `undefined` |
+| `showCaret`   | `show-caret`   | (optional) Shows a caret icon right side of the button.                                    | `boolean`                                            | `undefined` |
 | `size`        | `size`         | (optional) The size of the button.                                                         | `"large" \| "medium" \| "small"`                     | `'medium'`  |
 
 

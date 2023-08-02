@@ -53,6 +53,13 @@ export default {
         type: { summary: `'small' | 'medium' | 'large'` },
       },
     },
+    showCaret: {
+      description: 'Shows a caret icon right side of the button',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      },
+    },
     iconOnly: {
       name: 'icon-only',
       description: "Takes the icon name and renders an icon-only button",
@@ -89,7 +96,7 @@ export default {
   },
 };
 
-export const Default = ({
+const DefaultTemplate = ({
   ariaLabel,
   buttonStyle,
   color,
@@ -97,130 +104,65 @@ export const Default = ({
   size,
   leftIcon,
   rightIcon,
-  iconOnly
+  iconOnly,
+  showCaret,
+  label
 }) => html`
   <modus-button
     aria-label=${ariaLabel}
     button-style=${buttonStyle}
     color=${color}
     disabled=${disabled}
-    size=${size} left-icon=${leftIcon} right-icon=${rightIcon} iconOnly=${iconOnly}>
-    Default
+    size=${size} left-icon=${leftIcon} right-icon=${rightIcon} icon-only=${iconOnly} show-caret=${showCaret}>
+    ${label}
   </modus-button>
 `;
-Default.args = {
+
+const DefaultTemplateArgs = {
   ariaLabel: '',
   buttonStyle: 'fill',
   color: 'primary',
   disabled: false,
   size: 'medium',
+  leftIcon: '',
+  rightIcon: '',
+  iconOnly: '',
+  showCaret: false,
+  label: 'Default'
 };
 
-export const Borderless = ({
-  ariaLabel,
-  buttonStyle,
-  color,
-  disabled,
-  size,
-  leftIcon,
-  rightIcon,
-  iconOnly
-}) => html`
-  <modus-button
-    aria-label=${ariaLabel}
-    button-style=${buttonStyle}
-    color=${color}
-    disabled=${disabled}
-    size=${size} left-icon=${leftIcon} right-icon=${rightIcon} iconOnly=${iconOnly}>
-    Borderless
-  </modus-button>
-`;
-Borderless.args = {
-  ariaLabel: '',
-  buttonStyle: 'borderless',
-  color: 'default',
-  disabled: false,
-  size: 'medium',
+
+export const Default = DefaultTemplate.bind({});
+Default.args = { ...DefaultTemplateArgs
 };
 
-export const Outline = ({
-  ariaLabel,
-  buttonStyle,
-  color,
-  disabled,
-  size,
-  leftIcon,
-  rightIcon,
-  iconOnly
-}) => html`
-  <modus-button
-    aria-label=${ariaLabel}
-    button-style=${buttonStyle}
-    color=${color}
-    disabled=${disabled}
-    size=${size} left-icon=${leftIcon} right-icon=${rightIcon} iconOnly=${iconOnly}>
-    Outline
-  </modus-button>
-`;
-Outline.args = {
-  ariaLabel: '',
-  buttonStyle: 'outline',
-  color: 'default',
-  disabled: false,
-  size: 'medium',
+export const Borderless = DefaultTemplate.bind({});
+Borderless.args = {...DefaultTemplateArgs,
+  buttonStyle: 'borderless', label: 'Borderless',
 };
 
-export const IconWithText = ({
-  ariaLabel,
-  buttonStyle,
-  color,
-  disabled,
-  size,
-  leftIcon,
-  rightIcon,
-  iconOnly
-}) => html`
-  <modus-button
-    aria-label=${ariaLabel}
-    button-style=${buttonStyle}
-    color=${color}
-    disabled=${disabled}
-    size=${size} left-icon=${leftIcon} right-icon=${rightIcon} iconOnly=${iconOnly}>
-    Default
-  </modus-button>
-`;
-IconWithText.args = {
-  ariaLabel: '',
-  buttonStyle: 'fill',
-  color: 'primary',
-  disabled: false,
-  size: 'medium',
+export const Outline = DefaultTemplate.bind({});
+Outline.args = {...DefaultTemplateArgs,
+  buttonStyle: 'outline', label: 'Outline',
+};
+
+export const IconWithText = DefaultTemplate.bind({});
+IconWithText.args = {...DefaultTemplateArgs,  label: 'Default',
   leftIcon: 'notifications'
 };
 
-export const IconOnly = ({
-  ariaLabel,
-  buttonStyle,
-  color,
-  disabled,
-  size,
-  leftIcon,
-  rightIcon,
-  iconOnly
-}) => html`
-  <modus-button
-    aria-label=${ariaLabel}
-    button-style=${buttonStyle}
-    color=${color}
-    disabled=${disabled}
-    size=${size} left-icon=${leftIcon} right-icon=${rightIcon} icon-only=${iconOnly}>
-  </modus-button>
-`;
-IconOnly.args = {
-  ariaLabel: '',
-  buttonStyle: 'borderless',
-  color: 'secondary',
-  disabled: false,
-  size: 'large',
-  iconOnly: 'notifications'
+export const IconOnly = DefaultTemplate.bind({});
+IconOnly.args = {...DefaultTemplateArgs,  label: '', buttonStyle: 'borderless',
+color: 'secondary',
+size: 'large',
+iconOnly: 'notifications',
+showCaret: false
 };
+
+export const WithCaret = DefaultTemplate.bind({});
+WithCaret.args = {...DefaultTemplateArgs,  label: 'Primary',
+color: 'primary',
+disabled: false,
+showCaret: true
+};
+
