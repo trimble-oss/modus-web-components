@@ -21,14 +21,14 @@ $btn-active-colors: (
 // Default Outline
 $btn-outline-theme-colors: (
   'primary': map-get($theme-colors, 'primary'),
-  'dark': map-get($theme-colors, 'dark'),
+  'secondary': $col_trimble_gray,
 );
 $btn-outline-hover: (
   'primary': (
     'bg': rgba(0, 99, 163, 0.15),
     'color': #0082d6,
   ),
-  'dark': (
+  'secondary': (
     'bg': rgba(33, 42, 50, 0.15),
     'color': #3c444a,
   ),
@@ -38,7 +38,7 @@ $btn-outline-active: (
     'bg': rgba(0, 99, 163, 0.2),
     'color': #00548a,
   ),
-  'dark': (
+  'secondary': (
     'bg': rgba(33, 42, 50, 0.2),
     'color': #1a1d20,
   ),
@@ -87,26 +87,35 @@ $modus-btn-disabled-border-color: var(--modus-btn-disabled-border-color) !defaul
 
 // Default Icon-only
 $btn-icon-only-theme-colors: (
-  'dark': map-get($theme-colors, 'dark'),
-  'secondary': map-get($theme-colors, 'secondary'),
+  'primary': map-get($theme-colors, 'primary'),
+  'secondary': $col_trimble_gray,
+  'tertiary': $col_gray_6,
 );
 $btn-icon-only-hover: (
   'secondary': (
     'bg': #e0e1e9,
-    'color': map-get($theme-colors, 'secondary'),
+    'color': $col_gray_6,
   ),
-  'dark': (
+  'tertiary': (
     'bg': #e0e1e9,
-    'color': map-get($theme-colors, 'dark'),
+    'color': $col_trimble_gray,
+  ),
+  'primary': (
+    'bg': #dcedf9,
+    'color': #217cbb,
   ),
 );
 $btn-icon-only-active: (
+  'tertiary': (
+    'bg': #cbcdd6,
+    'color': $col_trimble_gray,
+  ),
   'secondary': (
     'bg': #cbcdd6,
-    'color': map-get($theme-colors, 'dark'),
+    'color': $col_trimble_gray,
   ),
-  'dark': (
-    'bg': #cbcdd6,
-    'color': map-get($theme-colors, 'dark'),
+  'primary': (
+    'bg': rgba(0, 99, 163, 0.18),
+    'color': #004f83,
   ),
 );

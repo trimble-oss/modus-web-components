@@ -10,14 +10,14 @@ This component utilizes the slot element, allowing you to render your own HTML i
 #### Implementation Details
 
 For Text Buttons and Icon with Text Buttons,
-- Solid buttons supports all the given colors except `dark`.
+- Solid buttons supports all the given colors.
 - Outline buttons only support `primary` and `secondary` colors.
 - Borderless buttons only support `primary` color.
 
 For Icon only Buttons,
-- Solid buttons supports all the given colors except `dark` and `danger`.
+- Solid buttons supports all the given colors except `danger`.
 - Outline buttons only support `primary` and `secondary` colors.
-- Borderless buttons only support `dark` and `secondary` colors.
+- Borderless buttons only support `primary`, `secondary` and `tertiary` colors.
 
 
 <Anchor storyId="components-button--default" />
@@ -93,8 +93,9 @@ For Icon only Buttons,
 
 #### Borderless
 
-<modus-button button-style="borderless" color="dark" icon-only="notifications"></modus-button>
+<modus-button button-style="borderless" color="primary" icon-only="notifications"></modus-button>
 <modus-button button-style="borderless" color="secondary" icon-only="notifications"></modus-button>
+<modus-button button-style="borderless" color="tertiary" icon-only="notifications"></modus-button>
 
 ```html
 <!-- Icon with Text Buttons -->
@@ -113,8 +114,9 @@ For Icon only Buttons,
 <modus-button button-style="outline" color="secondary" icon-only="notifications"></modus-button>
 
 <!-- Icon only Buttons - Borderless -->
-<modus-button button-style="borderless" color="dark" icon-only="notifications"></modus-button>
+<modus-button button-style="borderless" color="primary" icon-only="notifications"></modus-button>
 <modus-button button-style="borderless" color="secondary" icon-only="notifications"></modus-button>
+<modus-button button-style="borderless" color="tertiary" icon-only="notifications"></modus-button>
 ```
 
 ### Properties
@@ -123,7 +125,7 @@ For Icon only Buttons,
 | ------------- | -------------- | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------- | ----------- |
 | `ariaLabel`   | `aria-label`   | (optional) The button's aria-label.                                                      | `string`                                                       | `undefined` |
 | `buttonStyle` | `button-style` | (optional) The style of the button                                                       | `"borderless" , "fill" , "outline"`                          | `'fill'`    |
-| `color`       | `color`        | (optional) The color of the button. Note: `dark` is supported only on icon-only buttons. | `"danger" , "dark" , "primary" , "secondary" , "tertiary"` | `'primary'` |
+| `color`       | `color`        | (optional) The color of the button. | `"danger" , "primary" , "secondary" , "tertiary"` | `'primary'` |
 | `disabled`    | `disabled`     | (optional) Disables the button.                                                          | `boolean`                                                      | `undefined` |
 | `iconOnly`    | `icon-only`    | (optional) Takes the icon name and renders an icon-only button.                          | `string`                                                       | `undefined` |
 | `leftIcon`    | `left-icon`    | (optional) Takes the icon name and shows the icon aligned to the left of the button text.                        | `string`                                                       | `undefined` |

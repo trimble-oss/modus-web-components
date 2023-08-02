@@ -26,13 +26,13 @@ export default {
     },
     color: {
       control: {
-        options: ['danger', 'primary', 'secondary', 'tertiary', 'dark'],
+        options: ['danger', 'primary', 'secondary', 'tertiary'],
         type: 'select',
       },
-      description: 'The color of the button. Note: `dark` is supported only on icon-only buttons.',
+      description: 'The color of the button',
       table: {
         defaultValue: { summary: `'primary'` },
-        type: { summary: `'danger' | 'primary' | 'secondary' | 'tertiary' | 'dark'` },
+        type: { summary: `'danger' | 'primary' | 'secondary' | 'tertiary'` },
       },
     },
     disabled: {
@@ -219,7 +219,7 @@ export const IconOnly = ({
 IconOnly.args = {
   ariaLabel: '',
   buttonStyle: 'borderless',
-  color: 'dark',
+  color: 'secondary',
   disabled: false,
   size: 'large',
   iconOnly: 'notifications'

@@ -137,12 +137,12 @@
   --modus-btn-outline-primary-active-bg: #cce0ed;
   --modus-btn-outline-primary-active-color: var(--modus-trimble-blue-dark);
 
-  // Dark Outline
-  --modus-btn-outline-dark-color: var(--modus-dark);
-  --modus-btn-outline-dark-hover-bg: var(--modus-gray-0);
-  --modus-btn-outline-dark-hover-color: var(--modus-gray-9);
-  --modus-btn-outline-dark-active-bg: var(--modus-gray-1);
-  --modus-btn-outline-dark-active-color: var(--modus-dark);
+  // Secondary Outline
+  --modus-btn-outline-secondary-color: var(--modus-gray-10);
+  --modus-btn-outline-secondary-hover-bg: var(--modus-gray-0);
+  --modus-btn-outline-secondary-hover-color: var(--modus-gray-9);
+  --modus-btn-outline-secondary-active-bg: var(--modus-gray-1);
+  --modus-btn-outline-secondary-active-color: var(--modus-gray-10);
 
   // Text only Button variant
   // Primary
@@ -152,19 +152,26 @@
   --modus-btn-text-primary-active-color: var(--modus-trimble-blue-dark);
 
   // Icon only Button
-  // Dark
-  --modus-btn-icon-only-dark-color: var(--modus-dark);
-  --modus-btn-icon-only-dark-hover-bg: var(--modus-gray-0);
-  --modus-btn-icon-only-dark-hover-color: var(--modus-dark);
-  --modus-btn-icon-only-dark-active-bg: var(--modus-gray-1);
-  --modus-btn-icon-only-dark-active-color: var(--modus-dark);
+  // Primary
+  --modus-btn-icon-only-primary-color: var(--modus-primary);
+  --modus-btn-icon-only-primary-hover-bg: var(--modus-blue-pale);
+  --modus-btn-icon-only-primary-hover-color: var(--modus-blue-light);
+  --modus-btn-icon-only-primary-active-bg: rgba(0, 99, 163, 0.18);
+  --modus-btn-icon-only-primary-active-color: var(--modus-blue-dark);
 
   // Secondary
-  --modus-btn-icon-only-secondary-color: var(--modus-secondary);
+  --modus-btn-icon-only-secondary-color: var(--modus-gray-10);
   --modus-btn-icon-only-secondary-hover-bg: var(--modus-gray-0);
-  --modus-btn-icon-only-secondary-hover-color: var(--modus-secondary);
+  --modus-btn-icon-only-secondary-hover-color: var(--modus-gray-10);
   --modus-btn-icon-only-secondary-active-bg: var(--modus-gray-1);
   --modus-btn-icon-only-secondary-active-color: var(--modus-gray-10);
+
+  // Tertiary
+  --modus-btn-icon-only-tertiary-color: var(--modus-gray-6);
+  --modus-btn-icon-only-tertiary-hover-bg: var(--modus-gray-0);
+  --modus-btn-icon-only-tertiary-hover-color: var(--modus-gray-6);
+  --modus-btn-icon-only-tertiary-active-bg: var(--modus-gray-1);
+  --modus-btn-icon-only-tertiary-active-color: var(--modus-gray-10);
 
   // Input
   --modus-input-bg: var(--modus-white);
@@ -462,12 +469,12 @@
   --modus-btn-outline-primary-active-bg: #019aeb4c;
   --modus-btn-outline-primary-active-color: var(--modus-primary);
 
-  // Dark Outline
-  --modus-btn-outline-dark-color: var(--modus-gray-1);
-  --modus-btn-outline-dark-hover-bg: #cbcdd61f;
-  --modus-btn-outline-dark-hover-color: var(--modus-gray-1);
-  --modus-btn-outline-dark-active-bg: #cbcdd64d;
-  --modus-btn-outline-dark-active-color: var(--modus-gray-1);
+  // Secondary Outline
+  --modus-btn-outline-secondary-color: var(--modus-gray-1);
+  --modus-btn-outline-secondary-hover-bg: #cbcdd61f;
+  --modus-btn-outline-secondary-hover-color: var(--modus-gray-1);
+  --modus-btn-outline-secondary-active-bg: #cbcdd64d;
+  --modus-btn-outline-secondary-active-color: var(--modus-gray-1);
 
   // Text only Button
   // Primary
@@ -477,19 +484,26 @@
   --modus-btn-text-primary-active-color: var(--modus-primary);
 
   // Icon only Button
-  // Dark
-  --modus-btn-icon-only-dark-color: var(--modus-white);
-  --modus-btn-icon-only-dark-hover-bg: var(--modus-gray-4);
-  --modus-btn-icon-only-dark-hover-color: var(--modus-white);
-  --modus-btn-icon-only-dark-active-bg: var(--modus-gray-6);
-  --modus-btn-icon-only-dark-active-color: var(--modus-white);
+  // Primary
+  --modus-btn-icon-only-primary-color: var(--modus-blue);
+  --modus-btn-icon-only-primary-hover-bg: rgba(1, 154, 235, 0.12);
+  --modus-btn-icon-only-primary-hover-color: var(--modus-blue);
+  --modus-btn-icon-only-primary-active-bg: rgba(1, 154, 235, 0.3);
+  --modus-btn-icon-only-primary-active-color: var(--modus-blue);
 
   // Secondary
-  --modus-btn-icon-only-secondary-color: var(--modus-gray-4);
-  --modus-btn-icon-only-secondary-hover-bg: var(--modus-gray-1);
-  --modus-btn-icon-only-secondary-hover-color: var(--modus-gray-5);
-  --modus-btn-icon-only-secondary-active-bg: var(--modus-gray-4);
-  --modus-btn-icon-only-secondary-active-color: var(--modus-gray-9);
+  --modus-btn-icon-only-secondary-color: var(--modus-white);
+  --modus-btn-icon-only-secondary-hover-bg: var(--modus-gray-4);
+  --modus-btn-icon-only-secondary-hover-color: var(--modus-white);
+  --modus-btn-icon-only-secondary-active-bg: var(--modus-gray-6);
+  --modus-btn-icon-only-secondary-active-color: var(--modus-white);
+
+  // Tertiary
+  --modus-btn-icon-only-tertiary-color: var(--modus-gray-4);
+  --modus-btn-icon-only-tertiary-hover-bg: var(--modus-gray-1);
+  --modus-btn-icon-only-tertiary-hover-color: var(--modus-gray-5);
+  --modus-btn-icon-only-tertiary-active-bg: var(--modus-gray-4);
+  --modus-btn-icon-only-tertiary-active-color: var(--modus-gray-9);
 
   // Input
   --modus-input-bg: var(--modus-gray-10);
@@ -784,7 +798,7 @@ modus-breadcrumb {
 }
 
 $btn-theme-colors: 'primary', 'secondary', 'tertiary', 'danger';
-$btn-outline-variants: 'primary', 'dark';
+$btn-outline-variants: 'primary', 'secondary';
 
 modus-button[disabled] {
   --modus-btn-disabled-color: ;
@@ -832,12 +846,7 @@ modus-button[disabled] {
 }
 
 @each $color in $btn-outline-variants {
-  $alias: $color;
-
-  @if $color == 'dark' {
-    $alias: 'secondary';
-  }
-  modus-button[button-style='outline'][color='#{$alias}'] {
+  modus-button[button-style='outline'][color='#{$color}'] {
     @include button-variant('outline', $color);
   }
 }

@@ -15,8 +15,8 @@ export class ModusButton {
   /** (optional) The style of the button */
   @Prop() buttonStyle: 'borderless' | 'fill' | 'outline' = 'fill';
 
-  /** (optional) The color of the button. Note: `dark` is supported only on icon-only buttons. */
-  @Prop() color: 'danger' | 'primary' | 'secondary' | 'tertiary' | 'dark' = 'primary';
+  /** (optional) The color of the button */
+  @Prop() color: 'danger' | 'primary' | 'secondary' | 'tertiary' = 'primary';
 
   /** (optional) Disables the button. */
   @Prop() disabled: boolean;
@@ -54,7 +54,6 @@ export class ModusButton {
     ['primary', 'color-primary'],
     ['secondary', 'color-secondary'],
     ['tertiary', 'color-tertiary'],
-    ['dark', 'color-dark'],
   ]);
 
   classBySize: Map<string, string> = new Map([
