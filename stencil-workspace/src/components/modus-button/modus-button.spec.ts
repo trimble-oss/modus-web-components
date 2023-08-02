@@ -83,6 +83,9 @@ describe('modus-button', () => {
 
     className = modusButton.classByColor.get('tertiary');
     expect(className).toEqual('color-tertiary');
+
+    className = modusButton.classByColor.get('dark');
+    expect(className).toEqual('color-dark');
   });
 
   it('should get the correct class by size', async () => {
