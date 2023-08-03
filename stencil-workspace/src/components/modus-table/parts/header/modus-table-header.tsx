@@ -44,9 +44,17 @@ export const ModusTableHeader: FunctionalComponent<ModusTableHeaderProps> = ({
       tabindex={`${!columnResizeEnabled && columnReorder ? '0' : ''}`}
       key={header.id}
       colSpan={header.colSpan}
+      /**
+       * isNestedParentHeader: If parent in nested headers, `text-align: center` will be applied.
+       * frozenColumns.includes(header.id): Checks if the header is to be frozen or not.
+       * columnReorder && !frozenColumns.includes(header.id) && !columnResizeEnabled: Allows column reorder when column in not frozen and column resize is not active/underway.
+       * columnResizeEnabled: If column resize is active, resize curser is displayed.
+       * header.column.getIsResizing(): When a column resize is active/underway.
+       */
       class={`
         ${isNestedParentHeader ? 'text-align-center' : ''}
-        ${!columnResizeEnabled && columnReorder ? (frozenColumns.includes(header.id) ? '' : 'can-reorder') : ''}
+        ${frozenColumns.includes(header.id) ? 'sticky-left' : ''}
+        ${columnReorder && !frozenColumns.includes(header.id) && !columnResizeEnabled ? 'can-reorder' : ''}
         ${columnResizeEnabled ? 'show-resize-cursor' : ''}
         ${header.column.getIsResizing() ? 'active-resize' : ''}
       `}
