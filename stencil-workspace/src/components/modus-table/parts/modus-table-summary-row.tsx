@@ -11,6 +11,7 @@ interface ModusTableSummaryRowProps {
   footerGroups: HeaderGroup<unknown>[];
   tableData: unknown[];
   borderlessOptions: ModusTableDisplayOptions;
+  frozenColumns: string[];
 }
 
 function calculateSum(tableData: unknown[], header: Header<unknown, unknown>): number | string {
@@ -23,6 +24,7 @@ export const ModusTableSummaryRow: FunctionalComponent<ModusTableSummaryRowProps
   footerGroups,
   tableData,
   borderlessOptions,
+  frozenColumns,
 }) => {
   const borderLessTableStyle = (borderlessOptions?.cellBorderless || borderlessOptions?.borderless) && { boxShadow: 'none' };
   return (
@@ -32,9 +34,10 @@ export const ModusTableSummaryRow: FunctionalComponent<ModusTableSummaryRowProps
           {group.headers.map((header) => (
             <td
               key={header.id}
-              class={
-                header.column.columnDef[PropertyDataType] === ModusTableColumnDataType.Integer ? 'text-align-right' : ''
-              }>
+              class={`
+                ${frozenColumns.includes(header.id) ? 'sticky-left' : ''}
+                ${header.column.columnDef[PropertyDataType] === ModusTableColumnDataType.Integer ? 'text-align-right' : ''}
+              `}>
               {header.column.columnDef[PropertyShowTotal] ? calculateSum(tableData, header) : header.column.columnDef.footer}
             </td>
           ))}

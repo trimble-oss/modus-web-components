@@ -28,7 +28,7 @@ import {
   getCoreRowModel,
   getExpandedRowModel,
   getPaginationRowModel,
-  getSortedRowModel
+  getSortedRowModel,
 } from '@tanstack/table-core';
 import { DefaultPageSizes } from './constants/constants';
 import { ModusTableSortingState } from './models';
@@ -104,6 +104,9 @@ export class ModusTable {
   /** (Optional) To display a panel options, which allows access to table operations like hiding columns. */
   @Prop() panelOptions: ModusTablePanelOptions | null = null;
   @Watch('panelOptions') onChangePanelOptions() {
+    if (this.table) {
+      this.table.options.enableHiding = !!this.panelOptions?.columnsVisibility;
+    }
     this.onChangeOfRowsExpandable();
   }
 
@@ -165,7 +168,7 @@ export class ModusTable {
   @State() itemDragState: ColumnDragState;
   @State() dragAndDropObj: TableHeaderDragDrop = new TableHeaderDragDrop();
 
-  private frozenColumns: string[] = [];
+  private frozenColumns: string[] = []; // Columns will remain on the left and be unable to resize, reorganize, or modify their visibility.
   /** Column reorder variables start */
   private tableHeaderRowRef: HTMLTableRowElement;
   private columnResizeEnabled = false;
@@ -448,6 +451,7 @@ export class ModusTable {
                             row={row}
                             cellIndex={cellIndex}
                             rowsExpandable={this.rowsExpandable}
+                            frozenColumns={this.frozenColumns}
                             onLinkClick={(link: ModusTableCellLink) => this.cellLinkClick.emit(link)}
                           />
                         );
@@ -461,6 +465,7 @@ export class ModusTable {
                   footerGroups={[footerGroups[0]]}
                   tableData={this.data}
                   borderlessOptions={this.displayOptions}
+                  frozenColumns={this.frozenColumns}
                 />
               ) : (
                 ''
