@@ -185,7 +185,7 @@ const Template = ({
 const defaultArgs = {
   ampm: false,
   autoFormat: false,
-  ariaLabel: '',
+  ariaLabel: 'Time Input',
   autoFocusInput: true,
   disableValidation: false,
   disabled: false,

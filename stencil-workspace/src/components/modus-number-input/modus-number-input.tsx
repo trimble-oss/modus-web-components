@@ -106,17 +106,7 @@ export class ModusNumberInput {
     };
 
     return (
-      <div
-        aria-disabled={this.disabled ? 'true' : undefined}
-        aria-label={this.ariaLabel}
-        aria-placeholder={this.placeholder}
-        aria-invalid={!!this.errorText}
-        aria-readonly={this.readOnly}
-        aria-required={this.required}
-        aria-valuemax={this.maxValue}
-        aria-valuemin={this.minValue}
-        aria-valuenow={this.value}
-        class={buildContainerClassNames()}>
+      <div class={buildContainerClassNames()}>
         {this.label || this.required ? (
           <div class="label-container">
             {this.label ? <label>{this.label}</label> : null}
@@ -125,6 +115,15 @@ export class ModusNumberInput {
         ) : null}
         <div class={buildInputContainerClassNames()}>
           <input
+            aria-disabled={this.disabled ? 'true' : undefined}
+            aria-label={this.ariaLabel}
+            aria-placeholder={this.placeholder}
+            aria-invalid={!!this.errorText}
+            aria-readonly={this.readOnly}
+            aria-required={this.required}
+            aria-valuemax={this.maxValue}
+            aria-valuemin={this.minValue}
+            aria-valuenow={this.value}
             class={textAlignClassName}
             disabled={this.disabled}
             max={this.maxValue}
