@@ -15,7 +15,7 @@ nav {
     fill: $modus-pagination-chevron-color;
   }
 
-  ol {
+  ul {
     align-items: center;
     display: flex;
     flex-direction: row;
@@ -54,7 +54,7 @@ nav {
   &.small {
     height: $rem-24px;
 
-    ol li {
+    li {
       font-size: $rem-12px;
       height: $rem-24px;
       width: $rem-24px;
@@ -64,7 +64,7 @@ nav {
   &.medium {
     height: 2rem;
 
-    ol li {
+    ul li {
       font-size: $rem-14px;
       height: 2rem;
       width: 2rem;
@@ -74,7 +74,7 @@ nav {
   &.large {
     height: 3rem;
 
-    ol li {
+    ul li {
       font-size: $rem-20px;
       height: 3rem;
       width: 3rem;
