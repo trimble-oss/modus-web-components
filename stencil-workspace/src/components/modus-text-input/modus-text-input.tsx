@@ -149,13 +149,7 @@ export class ModusTextInput {
     };
 
     return (
-      <div
-        aria-disabled={this.disabled ? 'true' : undefined}
-        aria-invalid={!!this.errorText}
-        aria-label={this.ariaLabel}
-        aria-readonly={this.readOnly}
-        aria-required={this.required}
-        class={buildContainerClassNames()}>
+      <div class={buildContainerClassNames()}>
         {this.label || this.required ? (
           <div class={'label-container'}>
             {this.label ? <label>{this.label}</label> : null}
@@ -163,11 +157,17 @@ export class ModusTextInput {
           </div>
         ) : null}
         <div
-          class={`input-container ${this.errorText ? 'error' : this.validText ? 'valid' : ''
-            } ${this.classBySize.get(this.size)}`}
+          class={`input-container ${this.errorText ? 'error' : this.validText ? 'valid' : ''} ${this.classBySize.get(
+            this.size
+          )}`}
           onClick={() => this.textInput.focus()}>
           {this.includeSearchIcon ? <IconSearch size="16" /> : null}
           <input
+            aria-disabled={this.disabled ? 'true' : undefined}
+            aria-invalid={!!this.errorText}
+            aria-label={this.ariaLabel}
+            aria-readonly={this.readOnly}
+            aria-required={this.required}
             aria-placeholder={this.placeholder}
             class={buildTextInputClassNames()}
             disabled={this.disabled}

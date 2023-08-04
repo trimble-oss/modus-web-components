@@ -111,14 +111,11 @@ export class ModusSelect {
       this.errorText ? 'error' : this.validText ? 'valid' : this.disabled ? 'disabled' : ''
     }`;
     return (
-      <div
-        aria-disabled={this.disabled ? 'true' : undefined}
-        aria-label={this.ariaLabel}
-        aria-required={this.required}
-        class={this.disabled ? 'disabled' : undefined}>
+      <div class={this.disabled ? 'disabled' : undefined}>
         {this.renderLabel()}
         <span class="input-container">
           <select
+            aria-disabled={this.disabled ? 'true' : undefined}
             disabled={this.disabled}
             class={selectClass}
             aria-label={this.ariaLabel}

@@ -206,8 +206,10 @@ export class ModusTimePicker {
 
   // Renderers
   private renderTimeInput() {
+    const ariaControls = this.getAriaControls();
     return (
       <input
+        {...ariaControls}
         id="time-input"
         aria-label={this.label ? null : this.ariaLabel}
         aria-placeholder={this.placeholder}
@@ -239,9 +241,8 @@ export class ModusTimePicker {
   }
 
   render() {
-    const ariaControls = this.getAriaControls();
     return (
-      <div {...ariaControls} class={{ 'modus-time-picker': true, disabled: this.disabled }}>
+      <div class={{ 'modus-time-picker': true, disabled: this.disabled }}>
         <div class="time-input-wrapper">
           {this.label || this.required ? (
             <div class={'label-container'}>

@@ -217,13 +217,7 @@ export class ModusDateInput {
   render() {
     const className = `modus-date-input ${this.disabled ? 'disabled' : ''}`;
     return (
-      <div
-        aria-disabled={this.disabled ? 'true' : undefined}
-        aria-invalid={!!this.errorText}
-        aria-label={this.ariaLabel}
-        aria-readonly={this.readOnly}
-        aria-required={this.required}
-        class={className}>
+      <div class={className}>
         {this.label || this.required ? (
           <div class="label-container">
             {this.label ? <label htmlFor="date-input">{this.label}</label> : null}
@@ -235,6 +229,11 @@ export class ModusDateInput {
             this.size
           )}`}>
           <input
+            aria-disabled={this.disabled ? 'true' : undefined}
+            aria-invalid={!!this.errorText}
+            aria-label={this.ariaLabel}
+            aria-readonly={this.readOnly}
+            aria-required={this.required}
             aria-placeholder={this.placeholder}
             autofocus={this.autoFocusInput}
             class={{ 'has-right-icon': this.showCalendarIcon }}
