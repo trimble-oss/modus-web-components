@@ -11,8 +11,8 @@ describe('modus-pagination', () => {
     <modus-pagination>
         <mock:shadow-root>
           <nav class="medium">
-            <ol>
-              <li class="active"></li>
+            <ul>
+              <li  aria-current="page" class="active"></li>
               <li>
                 ...
               </li>
@@ -28,8 +28,8 @@ describe('modus-pagination', () => {
               <li>
                 ...
               </li>
-              <li class="active"></li>
-            </ol>
+              <li aria-current="page" class="active"></li>
+            </ul>
           </nav>
         </mock:shadow-root>
       </modus-pagination>

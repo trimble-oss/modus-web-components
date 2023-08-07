@@ -122,20 +122,23 @@ export class ModusPagination {
   render(): unknown {
     return (
       <nav aria-label={this.ariaLabel} class={`${this.classBySize.get(this.size)}`}>
-        <ol>
+        <ul>
           {this.maxPage - this.minPage >= 7 && (
             <li
               class={`${this.activePage != this.minPage ? 'hoverable' : 'disabled'}`}
               onClick={() => this.handleChevronClick('back')}
               onKeyDown={(event) => this.handleKeydownBack(event)}
-              tabIndex={0}>
+              tabIndex={0}
+              aria-label="Previous">
               <IconChevronLeftThick size={this.chevronSizeBySize.get(this.size)} />
             </li>
           )}
           {this.pages.map((page) => {
+            const isCurrentPage = page === this.activePage;
             return (
               <li
-                class={`${page === this.activePage ? 'active' : ''} ${!isNaN(+page) ? 'hoverable' : ''}`}
+                aria-current={isCurrentPage ? 'page' : null}
+                class={`${isCurrentPage ? 'active' : ''} ${!isNaN(+page) ? 'hoverable' : ''}`}
                 onClick={() => this.handlePageClick(+page)}>
                 {page}
               </li>
@@ -146,11 +149,12 @@ export class ModusPagination {
               class={`${this.activePage != this.maxPage ? 'hoverable' : 'disabled'}`}
               onClick={() => this.handleChevronClick('forward')}
               onKeyDown={(event) => this.handleKeydownForward(event)}
-              tabIndex={0}>
+              tabIndex={0}
+              aria-label="Next">
               <IconChevronRightThick size={this.chevronSizeBySize.get(this.size)} />
             </li>
           )}
-        </ol>
+        </ul>
       </nav>
     );
   }
