@@ -170,10 +170,8 @@ export class ModusTimePicker {
 
   getAriaControls(): { [key: string]: boolean | string } {
     return {
-      'aria-disabled': this.disabled ? 'true' : undefined,
       'aria-invalid': !!this.errorText,
       'aria-label': this.ariaLabel,
-      'aria-readonly': this.readOnly,
       'aria-required': this.required,
     };
   }

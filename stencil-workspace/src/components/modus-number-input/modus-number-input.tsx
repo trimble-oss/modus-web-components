@@ -115,12 +115,9 @@ export class ModusNumberInput {
         ) : null}
         <div class={buildInputContainerClassNames()}>
           <input
-            aria-disabled={this.disabled ? 'true' : undefined}
             aria-label={this.ariaLabel}
-            aria-placeholder={this.placeholder}
             aria-invalid={!!this.errorText}
-            aria-readonly={this.readOnly}
-            aria-required={this.required}
+            aria-required={this.required?.toString()}
             aria-valuemax={this.maxValue}
             aria-valuemin={this.minValue}
             aria-valuenow={this.value}

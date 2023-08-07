@@ -229,12 +229,9 @@ export class ModusDateInput {
             this.size
           )}`}>
           <input
-            aria-disabled={this.disabled ? 'true' : undefined}
             aria-invalid={!!this.errorText}
             aria-label={this.ariaLabel}
-            aria-readonly={this.readOnly}
-            aria-required={this.required}
-            aria-placeholder={this.placeholder}
+            aria-required={this.required?.toString()}
             autofocus={this.autoFocusInput}
             class={{ 'has-right-icon': this.showCalendarIcon }}
             disabled={this.disabled}

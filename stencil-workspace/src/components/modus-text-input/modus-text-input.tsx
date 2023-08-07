@@ -163,12 +163,9 @@ export class ModusTextInput {
           onClick={() => this.textInput.focus()}>
           {this.includeSearchIcon ? <IconSearch size="16" /> : null}
           <input
-            aria-disabled={this.disabled ? 'true' : undefined}
             aria-invalid={!!this.errorText}
             aria-label={this.ariaLabel}
-            aria-readonly={this.readOnly}
-            aria-required={this.required}
-            aria-placeholder={this.placeholder}
+            aria-required={this.required?.toString()}
             class={buildTextInputClassNames()}
             disabled={this.disabled}
             inputmode={this.inputmode}
@@ -186,6 +183,7 @@ export class ModusTextInput {
           {showPasswordToggle && (
             <div
               class="icons toggle-password"
+              role="button"
               aria-label="Show password as plain text. Warning: this will display your password on the screen."
               ref={(el) => (this.buttonTogglePassword = el as HTMLDivElement)}
               onClick={() => this.handleTogglePassword()}>

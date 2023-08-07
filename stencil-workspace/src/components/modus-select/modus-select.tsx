@@ -115,7 +115,6 @@ export class ModusSelect {
         {this.renderLabel()}
         <span class="input-container">
           <select
-            aria-disabled={this.disabled ? 'true' : undefined}
             disabled={this.disabled}
             class={selectClass}
             aria-label={this.ariaLabel}
@@ -123,7 +122,7 @@ export class ModusSelect {
               this.handleSelectChange(event);
             }}
             aria-invalid={!!this.errorText}
-            aria-required={this.required}>
+            aria-required={this.required?.toString()}>
             {this.renderOptions()}
           </select>
           {this.renderSubText()}
