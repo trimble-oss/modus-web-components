@@ -11,8 +11,7 @@
   --modus-blue-pale: #dcedf9;
 
   // Gray progression
-  --modus-gray-11: #171c1e;
-  --modus-gray-10: #252a2e;
+  --modus-gray-10: #171c1e;
   --modus-gray-9: #353a40;
   --modus-gray-8: #464b52;
   --modus-gray-7: #585c65;
@@ -47,7 +46,7 @@
   --modus-trimble-blue: var(--modus-blue);
   --modus-trimble-blue-dark: #004f83;
   --modus-trimble-yellow: var(--modus-yellow);
-  --modus-trimble-gray: var(--modus-gray-10);
+  --modus-trimble-gray: #252a2e;
   --modus-trimble-green: #349c44;
   --modus-trimble-red: #b44e2a;
 
@@ -55,14 +54,14 @@
   --modus-primary: var(--modus-blue);
   --modus-secondary: var(--modus-gray-6);
   --modus-tertiary: var(--modus-gray-1);
-  --modus-dark: var(--modus-gray-10);
+  --modus-dark: var(--modus-trimble-gray);
   --modus-success: var(--modus-green-dark);
   --modus-danger: var(--modus-red);
   --modus-warning: var(--modus-yellow-dark);
 
   // Body
   --modus-body-bg: var(--modus-white);
-  --modus-body-color: var(--modus-gray-10);
+  --modus-body-color: var(--modus-trimble-gray);
   --modus-border-color: var(--modus-gray-1);
   --modus-backdrop-bg: #252a2ebf;
   --modus-chevron-color: var(--modus-gray-6);
@@ -88,7 +87,7 @@
   --modus-alert-dark-color: var(--modus-dark);
   --modus-alert-success-color: var(--modus-success);
   --modus-alert-danger-color: var(--modus-danger);
-  --modus-alert-warning-color: var(--modus-gray-10);
+  --modus-alert-warning-color: var(--modus-trimble-gray);
 
   // Links
   --modus-alert-primary-link-color: #003b61;
@@ -101,7 +100,7 @@
   // Border
   --modus-alert-primary-border-color: var(--modus-primary);
   --modus-alert-secondary-border-color: var(--modus-gray-6);
-  --modus-alert-dark-border-color: var(--modus-gray-10);
+  --modus-alert-dark-border-color: var(--modus-trimble-gray);
   --modus-alert-success-border-color: var(--modus-success);
   --modus-alert-danger-border-color: var(--modus-danger);
   --modus-alert-warning-border-color: var(--modus-warning);
@@ -109,10 +108,10 @@
   // Badge
   --modus-badge-primary-color: var(--modus-white);
   --modus-badge-secondary-color: var(--modus-white);
-  --modus-badge-tertiary-color: var(--modus-gray-10);
+  --modus-badge-tertiary-color: var(--modus-trimble-gray);
   --modus-badge-dark-color: var(--modus-white);
   --modus-badge-success-color: var(--modus-white);
-  --modus-badge-warning-color: var(--modus-gray-10);
+  --modus-badge-warning-color: var(--modus-trimble-gray);
   --modus-badge-danger-color: var(--modus-white);
 
   // Text only Badge
@@ -138,11 +137,11 @@
   --modus-btn-outline-primary-active-color: var(--modus-trimble-blue-dark);
 
   // Secondary Outline
-  --modus-btn-outline-secondary-color: var(--modus-gray-10);
+  --modus-btn-outline-secondary-color: var(--modus-trimble-gray);
   --modus-btn-outline-secondary-hover-bg: var(--modus-gray-0);
   --modus-btn-outline-secondary-hover-color: var(--modus-gray-9);
   --modus-btn-outline-secondary-active-bg: var(--modus-gray-1);
-  --modus-btn-outline-secondary-active-color: var(--modus-gray-10);
+  --modus-btn-outline-secondary-active-color: var(--modus-trimble-gray);
 
   // Text only Button variant
   // Primary
@@ -160,18 +159,18 @@
   --modus-btn-icon-only-primary-active-color: var(--modus-blue-dark);
 
   // Secondary
-  --modus-btn-icon-only-secondary-color: var(--modus-gray-10);
+  --modus-btn-icon-only-secondary-color: var(--modus-trimble-gray);
   --modus-btn-icon-only-secondary-hover-bg: var(--modus-gray-0);
-  --modus-btn-icon-only-secondary-hover-color: var(--modus-gray-10);
+  --modus-btn-icon-only-secondary-hover-color: var(--modus-trimble-gray);
   --modus-btn-icon-only-secondary-active-bg: var(--modus-gray-1);
-  --modus-btn-icon-only-secondary-active-color: var(--modus-gray-10);
+  --modus-btn-icon-only-secondary-active-color: var(--modus-trimble-gray);
 
   // Tertiary
   --modus-btn-icon-only-tertiary-color: var(--modus-gray-6);
   --modus-btn-icon-only-tertiary-hover-bg: var(--modus-gray-0);
   --modus-btn-icon-only-tertiary-hover-color: var(--modus-gray-6);
   --modus-btn-icon-only-tertiary-active-bg: var(--modus-gray-1);
-  --modus-btn-icon-only-tertiary-active-color: var(--modus-gray-10);
+  --modus-btn-icon-only-tertiary-active-color: var(--modus-trimble-gray);
 
   // Input
   --modus-input-bg: var(--modus-white);
@@ -208,7 +207,7 @@
   // Chip
   // Active
   --modus-chip-active-bg: #217cbb4d;
-  --modus-chip-active-color: var(--modus-gray-10);
+  --modus-chip-active-color: var(--modus-trimble-gray);
 
   // Disabled
   --modus-chip-disabled-opacity: 0.3;
@@ -225,13 +224,13 @@
   // Active
   --modus-chip-outline-active-bg: var(--modus-blue-pale);
   --modus-chip-outline-active-border-color: var(--modus-highlight-blue-color);
-  --modus-chip-outline-active-color: var(--modus-gray-10);
+  --modus-chip-outline-active-color: var(--modus-trimble-gray);
 
   // Used in content tree, list, dropdown list items
   --modus-group-item-bg: var(--modus-white);
   --modus-group-item-border-color: var(--modus-gray-0);
-  --modus-group-item-color: var(--modus-gray-10);
-  --modus-group-item-disabled-color: #252a2e4d;
+  --modus-group-item-color: var(--modus-trimble-gray);
+  --modus-group-item-disabled-color: var(--modus-gray-2);
 
   // Hover
   --modus-group-item-hover-bg: var(--modus-gray-0);
@@ -259,7 +258,7 @@
 
   // Type - Question
   --modus-message-question-bg: var(--modus-gray-light);
-  --modus-message-question-color: var(--modus-gray-10);
+  --modus-message-question-color: var(--modus-trimble-gray);
 
   // Modal
   --modus-modal-bg: var(--modus-white);
@@ -334,7 +333,7 @@
 
   // Secondary
   --modus-toast-secondary-bg: var(--modus-tertiary);
-  --modus-toast-secondary-border-color: var(--modus-gray-10);
+  --modus-toast-secondary-border-color: var(--modus-trimble-gray);
 
   // Dark
   --modus-toast-dark-bg: var(--modus-dark);
@@ -388,7 +387,7 @@
   --modus-date-picker-calendar-header-color: var(--modus-white);
   --modus-date-picker-calendar-body-bg: var(--modus-white);
   --modus-date-picker-calendar-day-week-color: #363545;
-  --modus-date-picker-calendar-day-color: var(--modus-gray-10);
+  --modus-date-picker-calendar-day-color: var(--modus-trimble-gray);
   --modus-date-picker-calendar-day-hover-bg: var(--modus-gray-0);
   --modus-date-picker-calendar-day-current-border-color: var(--modus-highlight-blue-color);
   --modus-date-picker-calendar-day-selected-bg: var(--modus-highlight-blue-color);
@@ -409,10 +408,10 @@
   --modus-primary: var(--modus-blue);
   --modus-success: var(--modus-green);
   --modus-warning: var(--modus-yellow);
-  --modus-dark: var(--modus-gray-11);
+  --modus-dark: var(--modus-gray-10);
 
   // Body
-  --modus-body-bg: var(--modus-gray-10);
+  --modus-body-bg: var(--modus-trimble-gray);
   --modus-body-color: var(--modus-white);
   --modus-border-color: var(--modus-gray-6);
   --modus-backdrop-bg: #000000bf;
@@ -506,7 +505,7 @@
   --modus-btn-icon-only-tertiary-active-color: var(--modus-gray-9);
 
   // Input
-  --modus-input-bg: var(--modus-gray-10);
+  --modus-input-bg: var(--modus-trimble-gray);
   --modus-input-color: var(--modus-body-color);
   --modus-input-border-color: var(--modus-gray-8);
   --modus-input-bottom-line-active-color: var(--modus-highlight-blue-color);
@@ -531,7 +530,7 @@
 
   // Card
   --modus-card-bg: var(--modus-gray-9);
-  --modus-card-border-color: var(--modus-gray-10);
+  --modus-card-border-color: var(--modus-trimble-gray);
   --modus-card-shadow-color: #171c1ecc;
 
   // Chip
@@ -604,7 +603,7 @@
   --modus-modal-divider-color: var(--modus-gray-6);
 
   // Navbar
-  --modus-navbar-bg: var(--modus-gray-11);
+  --modus-navbar-bg: var(--modus-gray-10);
   --modus-navbar-brand-logo-filter: brightness(9999%) saturate(0);
   --modus-navbar-icon-color: var(--modus-body-color);
 
@@ -675,7 +674,7 @@
   --modus-toast-warning-border-color: var(--modus-warning);
 
   // Table
-  --modus-table-bg: var(--modus-gray-11);
+  --modus-table-bg: var(--modus-gray-10);
   --modus-table-border-color: var(--modus-gray-8);
   --modus-table-color: var(--modus-white);
 
@@ -698,7 +697,7 @@
   --modus-tooltip-color: var(--modus-trimble-gray);
 
   // Side Navigation
-  --modus-side-navigation-bg: var(--modus-gray-11);
+  --modus-side-navigation-bg: var(--modus-gray-10);
   --modus-side-navigation-item-hover-bg: var(--modus-gray-8);
   --modus-side-navigation-item-active-bg: #019aeb4d;
   --modus-side-navigation-item-active-border-color: var(--modus-highlight-blue-color);
@@ -710,7 +709,7 @@
   // Date picker
   --modus-date-input-calendar-icon-color: var(--modus-gray-5);
   --modus-date-picker-calendar-header-bg: var(--modus-blue-dark);
-  --modus-date-picker-calendar-body-bg: var(--modus-gray-11);
+  --modus-date-picker-calendar-body-bg: var(--modus-gray-10);
   --modus-date-picker-calendar-day-week-color: var(--modus-white);
   --modus-date-picker-calendar-day-color: var(--modus-white);
   --modus-date-picker-calendar-day-hover-bg: var(--modus-gray-8);
@@ -821,7 +820,7 @@ modus-button[disabled] {
     --modus-btn-#{$color}-border-color: var(--modus-#{$color});
 
     @if $color == 'tertiary' {
-      --modus-btn-#{$color}-color: var(--modus-gray-10);
+      --modus-btn-#{$color}-color: var(--modus-trimble-gray);
     } @else {
       --modus-btn-#{$color}-color: var(--modus-white);
     }
