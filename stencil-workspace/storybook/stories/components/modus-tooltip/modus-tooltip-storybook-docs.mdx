@@ -4,6 +4,7 @@
 
 [Modus Tooltip](https://modus.trimble.com/components/tooltips/) web components display the completion progress of a task. They are referenced using the `<modus-tooltip>` custom HTML element.
 This component utilizes the slot element, allowing you to wrap anything with a tooltip.
+Note: The tooltip can automatically flip the direction if there isn't enough space to position the tooltip in that direction. If the placement set to `bottom`, it will change the placement to `top` when no space. As soon as enough space is detected, the placement will be reverted to the originally defined one.
 
 ### Default
 
@@ -24,7 +25,7 @@ This component utilizes the slot element, allowing you to wrap anything with a t
 | `aria-label`    | The tooltip's aria-label                                  |           |                                  |               |          |
 | `disabled`      | (optional) Hide the tooltip                               | `boolean` |                                  | false         |          |
 | `text`          | The tooltip's text                                        | `string`  |                                  |               |          |
-| `position`      | The tooltip's position relative to the item it's wrapping | `string`  | 'bottom', 'left', 'right', 'top' | 'top'         |          |
+| `position`      | The tooltip's position relative to the item it's wrapping | `string`  | 'bottom', 'left', 'right', 'top', 'auto' | 'top'         |          |
 
 ### Accessibility
 

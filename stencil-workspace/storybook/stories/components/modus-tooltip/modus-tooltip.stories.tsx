@@ -20,13 +20,13 @@ export default {
     },
     position: {
       control: {
-        options: ['bottom', 'left', 'right', 'top'],
+        options: ['bottom', 'left', 'right', 'top', 'auto'],
         type: 'select',
       },
       description: "The tooltip's position relative to the item it's wrapping",
       table: {
         defaultValue: { summary: `'top'` },
-        type: { summary: `'bottom' | 'left' | 'right' | 'top'` },
+        type: { summary: `'bottom' | 'left' | 'right' | 'top' | 'auto` },
       },
     },
     text: {

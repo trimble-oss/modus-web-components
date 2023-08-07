@@ -107,12 +107,12 @@ export class ModusSideNavigationItem {
         aria-label={this.label}
         aria-current={this.selected ? 'true' : null}
         onFocus={() => this.sideNavItemFocus.emit({ id: this.element.id })}>
-        <div class="menu-icon" onClick={() => this.sideNavItemFocus.emit({ id: this.element.id })}>
-          <modus-tooltip text={menuIconTooltip} position="right">
+        <modus-tooltip text={menuIconTooltip} position="right">
+          <div class="menu-icon" onClick={() => this.sideNavItemFocus.emit({ id: this.element.id })}>
             <slot name="menu-icon"></slot>
             {this.menuIcon && <IconMap icon={this.menuIcon} aria-label={this.label} size="24"></IconMap>}
-          </modus-tooltip>
-        </div>
+          </div>
+        </modus-tooltip>
 
         {this.expanded && <div class="menu-text">{this.label}</div>}
 

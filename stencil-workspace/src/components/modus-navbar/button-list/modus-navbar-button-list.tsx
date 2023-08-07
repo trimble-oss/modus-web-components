@@ -8,7 +8,7 @@ import { ModusNavbarButton } from '../modus-navbar.models';
 export const ModusNavbarButtonList: FunctionalComponent<{
   buttons: ModusNavbarButton[];
   reverse: boolean;
-  onClick?: (event: MouseEvent, button: ModusNavbarButton) => void;
+  onClick?: (event: MouseEvent | KeyboardEvent, button: ModusNavbarButton) => void;
   openButtonMenuId: string;
 }> = ({ buttons, reverse, onClick, openButtonMenuId }) => {
   const navbarButtons = buttons || [];
@@ -17,13 +17,13 @@ export const ModusNavbarButtonList: FunctionalComponent<{
     <div onClick={(event) => onClick(event, button)}>
       <modus-dropdown toggle-element-id={'navbar-button-' + index}>
         <div class="navbar-button" id={'navbar-button-' + index} slot="dropdownToggle">
-          <span class="navbar-button-icon" tabIndex={0}>
-            <modus-tooltip text={button.tooltip?.text} position="bottom">
+          <modus-tooltip text={button.tooltip?.text} position="bottom">
+            <span class="navbar-button-icon" tabIndex={0}>
               <div class="icon-button">
                 <IconMap icon={button.icon} size="24" pressed={openButtonMenuId === button.id} />
               </div>
-            </modus-tooltip>
-          </span>
+            </span>
+          </modus-tooltip>
         </div>
         {!button.hideMenu && (
           <modus-navbar-button-menu slot="dropdownList" reverse={reverse}>

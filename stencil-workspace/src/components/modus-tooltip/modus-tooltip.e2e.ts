@@ -14,29 +14,33 @@ describe('modus-tooltip', () => {
 
     await page.setContent('<modus-tooltip text="Hello"></modus-tooltip>');
 
-    let text = await page.find('modus-tooltip >>> .text');
+    let text = await page.find('modus-tooltip >>> .tooltip');
     expect(text.textContent).toEqual('Hello');
 
     const tooltip = await page.find('modus-tooltip');
     tooltip.setProperty('text', 'Something else');
     await page.waitForChanges();
-    text = await page.find('modus-tooltip >>> .text');
+    text = await page.find('modus-tooltip >>> .tooltip');
     expect(text.textContent).toEqual('Something else');
   });
 
   it('renders changes to the position', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<modus-tooltip></modus-tooltip>');
+    await page.setContent(`
+    <modus-tooltip text="Tooltip text...">
+          <modus-button>Button</modus-button>
+        </modus-tooltip>
+    `);
     const component = await page.find('modus-tooltip');
-    const element = await page.find('modus-tooltip >>> .modus-tooltip');
-    expect(element).toHaveClass('top');
+    let element = await page.find('modus-tooltip >>> .tooltip');
+    expect(element.getAttribute('data-popper-placement')).toEqual('top');
 
     component.setProperty('position', 'bottom');
     await page.waitForChanges();
-    expect(element).toHaveClass('bottom');
+    element = await page.find('modus-tooltip >>> .tooltip');
+    expect(element.getAttribute('data-popper-placement')).toEqual('bottom');
   });
-
 
   it('tooltip should show or hide if disabled prop set', async () => {
     const page = await newE2EPage();
@@ -45,12 +49,12 @@ describe('modus-tooltip', () => {
 
     tooltip.setProperty('disabled', false);
     await page.waitForChanges();
-    let text = await page.find('modus-tooltip >>> .text');
+    let text = await page.find('modus-tooltip >>> .tooltip');
     expect(text.textContent).toEqual('Hello');
 
     tooltip.setProperty('disabled', true);
     await page.waitForChanges();
-    text = await page.find('modus-tooltip >>> .text');
+    text = await page.find('modus-tooltip >>> .tooltip');
     expect(text).toEqual(null);
   });
 });

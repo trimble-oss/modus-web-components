@@ -75,8 +75,16 @@ Default.args = {
     username: 'Modus User',
   },
   buttons: [
-    { id: 'addMenu', icon: 'add' },
-    { id: 'notificationMenu', icon: 'notifications' },
+    { id: 'addMenu', icon: 'add',
+      tooltip: {
+        text: "Add"
+      }
+    },
+    { id: 'notificationMenu', icon: 'notifications',
+      tooltip: {
+        text: "Notifications"
+      }
+    }
   ],
   showSearch: false,
   enableSearchOverlay: false,
@@ -160,9 +168,11 @@ document.querySelector('${id}').apps = [
 ];
 document.querySelector('${id}').logoOptions = {
   primary: {
-    url: '${logoUrl || 'https://modus.trimble.com/img/trimble-logo.svg'}'},
+    url: '${logoUrl || 'https://modus.trimble.com/img/trimble-logo.svg'
+    }'},
           secondary:{
-  url: '${iconUrl || 'https://modus.trimble.com/favicon.svg'} '}
+  url: '${iconUrl || 'https://modus.trimble.com/favicon.svg'
+    } '}
         };
         document.querySelector('${id}').profileMenuOptions = ${JSON.stringify(profileMenuOptions)};
         document.querySelector('${id}').profileMenuTooltip = {
