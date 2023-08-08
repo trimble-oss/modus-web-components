@@ -174,7 +174,7 @@ const Template = ({
 
 export const Default = Template.bind({});
 Default.args = {
-  ariaLabel: '',
+  ariaLabel: 'Number Input',
   disabled: false,
   errorText: '',
   helperText: '',

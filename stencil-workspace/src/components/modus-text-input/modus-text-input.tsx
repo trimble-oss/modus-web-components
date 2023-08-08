@@ -149,13 +149,7 @@ export class ModusTextInput {
     };
 
     return (
-      <div
-        aria-disabled={this.disabled ? 'true' : undefined}
-        aria-invalid={!!this.errorText}
-        aria-label={this.ariaLabel}
-        aria-readonly={this.readOnly}
-        aria-required={this.required}
-        class={buildContainerClassNames()}>
+      <div class={buildContainerClassNames()}>
         {this.label || this.required ? (
           <div class={'label-container'}>
             {this.label ? <label>{this.label}</label> : null}
@@ -163,12 +157,15 @@ export class ModusTextInput {
           </div>
         ) : null}
         <div
-          class={`input-container ${this.errorText ? 'error' : this.validText ? 'valid' : ''
-            } ${this.classBySize.get(this.size)}`}
+          class={`input-container ${this.errorText ? 'error' : this.validText ? 'valid' : ''} ${this.classBySize.get(
+            this.size
+          )}`}
           onClick={() => this.textInput.focus()}>
           {this.includeSearchIcon ? <IconSearch size="16" /> : null}
           <input
-            aria-placeholder={this.placeholder}
+            aria-invalid={!!this.errorText}
+            aria-label={this.ariaLabel}
+            aria-required={this.required?.toString()}
             class={buildTextInputClassNames()}
             disabled={this.disabled}
             inputmode={this.inputmode}
@@ -186,6 +183,7 @@ export class ModusTextInput {
           {showPasswordToggle && (
             <div
               class="icons toggle-password"
+              role="button"
               aria-label="Show password as plain text. Warning: this will display your password on the screen."
               ref={(el) => (this.buttonTogglePassword = el as HTMLDivElement)}
               onClick={() => this.handleTogglePassword()}>

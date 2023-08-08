@@ -240,7 +240,7 @@ const Template = ({
 
 export const Default = Template.bind({});
 Default.args = {
-  ariaLabel: '',
+  ariaLabel: 'Text Input',
   autoFocusInput: true,
   clearable: false,
   disabled: false,
