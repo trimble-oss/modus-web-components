@@ -579,7 +579,7 @@ export class ModusNavbar {
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['appsMenuOpen', 'appsMenuAppOpen', 'helpOpen', 'mainMenuClick', 'notificationsMenuOpen', 'productLogoClick', 'profileMenuLinkClick', 'profileMenuOpen', 'profileMenuSignOutClick', 'searchChange', 'searchMenuClick']);
+    proxyOutputs(this, this.el, ['appsMenuOpen', 'appsMenuAppOpen', 'buttonClick', 'helpOpen', 'mainMenuClick', 'notificationsMenuOpen', 'productLogoClick', 'profileMenuLinkClick', 'profileMenuOpen', 'profileMenuSignOutClick', 'searchChange', 'searchMenuClick']);
   }
 }
 
@@ -595,6 +595,10 @@ export declare interface ModusNavbar extends Components.ModusNavbar {
    * An event that fires when an apps menu app opens.
    */
   appsMenuAppOpen: EventEmitter<CustomEvent<IModusNavbarModusNavbarApp>>;
+  /**
+   * An event that fires when a button in the custom button list is clicked.
+   */
+  buttonClick: EventEmitter<CustomEvent<string>>;
   /**
    * An event that fires when the help link opens.
    */
