@@ -1,6 +1,7 @@
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-navbar-storybook-docs.mdx';
 import { html } from 'lit-html';
+import { ModusNavbarButton } from '../../../../src/components/modus-navbar/modus-navbar.models';
 
 export default {
   title: 'Components/Navbar',
@@ -11,7 +12,7 @@ export default {
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },
-      }
+      },
     },
     showSearch: {
       name: 'show-search',
@@ -19,34 +20,34 @@ export default {
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },
-      }
+      },
     },
     profileMenuOptions: {
       name: 'profileMenuOptions',
       description: 'Set the options for profile menu',
       table: {
-        type: { summary: 'object' }
+        type: { summary: 'object' },
       },
     },
     buttons: {
       name: 'buttons',
       description: 'To add icon buttons dynamically to the Navbar, create an array of ModusNavbarButton.',
       table: {
-        type: { summary: 'object' }
+        type: { summary: 'object' },
       },
-    }
+    },
   },
   parameters: {
+    actions: {
+      handles: ['searchMenuClick', 'buttonClick'],
+    },
+    controls: { expanded: true, sort: 'requiredFirst' },
     docs: {
       page: docs,
       inlineStories: true,
     },
     options: {
       isToolshown: true,
-    },
-    controls: { expanded: true, sort: 'requiredFirst' },
-    actions: {
-      handles: ['searchMenuClick'],
     },
     viewMode: 'docs',
   },
@@ -75,24 +76,24 @@ Default.args = {
   },
   buttons: [
     { id: 'addMenu', icon: 'add' },
-    { id: 'notificationMenu', icon: 'notifications' }
+    { id: 'notificationMenu', icon: 'notifications' },
   ],
   showSearch: false,
-  enableSearchOverlay: false
+  enableSearchOverlay: false,
 };
 
 const FailedToLoadAvatarTemplate = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay }) => html`
   <modus-navbar
-id="broken"
-enable-search-overlay=${enableSearchOverlay}
-show-search=${showSearch}
-show-apps-menu
-show-help
-show-main-menu
-show-notifications>
-       <div slot="main" style="height:300px;">Render your own main menu.</div>
-        <div slot="notifications">Render your own notifications.</div>
-  </modus-navbar >
+    id="broken"
+    enable-search-overlay=${enableSearchOverlay}
+    show-search=${showSearch}
+    show-apps-menu
+    show-help
+    show-main-menu
+    show-notifications>
+    <div slot="main" style="height:300px;">Render your own main menu.</div>
+    <div slot="notifications">Render your own notifications.</div>
+  </modus-navbar>
   ${setNavbar(false, '#broken', profileMenuOptions, '', '', buttons)}
 `;
 export const FailedAvatar = FailedToLoadAvatarTemplate.bind({});
@@ -104,30 +105,29 @@ FailedAvatar.args = {
   },
   buttons: [],
   showSearch: false,
-  enableSearchOverlay: false
+  enableSearchOverlay: false,
 };
-const BlueTemplate = ({ profileMenuOptions, buttons,showSearch, enableSearchOverlay }) => html`
+const BlueTemplate = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay }) => html`
   <modus-navbar
-id="blue-theme"
-enable-search-overlay=${enableSearchOverlay}
-show-search=${showSearch}
-show-apps-menu
-show-help
-show-main-menu
-show-notifications
-variant="blue">
-      <div slot="main" style="height:300px;">Render your own main menu.</div>
-      <div slot="notifications">Render your own notifications.</div>
+    id="blue-theme"
+    enable-search-overlay=${enableSearchOverlay}
+    show-search=${showSearch}
+    show-apps-menu
+    show-help
+    show-main-menu
+    show-notifications
+    variant="blue">
+    <div slot="main" style="height:300px;">Render your own main menu.</div>
+    <div slot="notifications">Render your own notifications.</div>
   </modus-navbar>
-  ${
-  setNavbar(
+  ${setNavbar(
     false,
     '#blue-theme',
     profileMenuOptions,
     'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
-  'https://modus-bootstrap.trimble.com/img/trimble-icon-rev.svg',
-  buttons
-)}
+    'https://modus-bootstrap.trimble.com/img/trimble-icon-rev.svg',
+    buttons
+  )}
 `;
 export const BlueNavbar = BlueTemplate.bind({});
 BlueNavbar.args = {
@@ -138,7 +138,7 @@ BlueNavbar.args = {
   },
   buttons: [],
   showSearch: false,
-  enableSearchOverlay: false
+  enableSearchOverlay: false,
 };
 
 const setNavbar = (
@@ -147,7 +147,7 @@ const setNavbar = (
   profileMenuOptions,
   logoUrl = '',
   iconUrl = '',
-  buttons
+  buttons: ModusNavbarButton[]
 ) => {
   const tag = document.createElement('script');
   profileMenuOptions.avatarUrl = workingAvatar
@@ -160,11 +160,9 @@ document.querySelector('${id}').apps = [
 ];
 document.querySelector('${id}').logoOptions = {
   primary: {
-    url: '${logoUrl || 'https://modus.trimble.com/img/trimble-logo.svg'
-    }'}, 
+    url: '${logoUrl || 'https://modus.trimble.com/img/trimble-logo.svg'}'},
           secondary:{
-  url: '${iconUrl || 'https://modus.trimble.com/favicon.svg'
-    } '} 
+  url: '${iconUrl || 'https://modus.trimble.com/favicon.svg'} '}
         };
         document.querySelector('${id}').profileMenuOptions = ${JSON.stringify(profileMenuOptions)};
         document.querySelector('${id}').profileMenuTooltip = {
@@ -174,5 +172,5 @@ document.querySelector('${id}').logoOptions = {
         document.querySelector('${id}').buttons = ${JSON.stringify(buttons)};
   `;
 
-return tag;
+  return tag;
 };

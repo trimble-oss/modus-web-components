@@ -2306,6 +2306,10 @@ declare namespace LocalJSX {
          */
         "onAppsMenuOpen"?: (event: ModusNavbarCustomEvent<void>) => void;
         /**
+          * An event that fires when a button in the custom button list is clicked.
+         */
+        "onButtonClick"?: (event: ModusNavbarCustomEvent<string>) => void;
+        /**
           * An event that fires when the help link opens.
          */
         "onHelpOpen"?: (event: ModusNavbarCustomEvent<void>) => void;

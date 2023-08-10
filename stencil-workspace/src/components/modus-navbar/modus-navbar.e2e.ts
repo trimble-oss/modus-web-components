@@ -1,4 +1,5 @@
 import { newE2EPage } from '@stencil/core/testing';
+import { ModusNavbarButton } from './modus-navbar.models';
 
 describe('modus-navbar', () => {
   it('renders', async () => {
@@ -81,6 +82,30 @@ describe('modus-navbar', () => {
     });
   });
 
+  it('emits buttonClick when a button in the custom button list is clicked', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-navbar></modus-navbar>');
+    const buttonClickEvent = await page.spyOnEvent('buttonClick');
+    const navbar = await page.find('modus-navbar');
+
+    const buttons: ModusNavbarButton[] = [
+      {
+        id: 'custom-button-id',
+        icon: 'moon',
+        orderIndex: 0,
+      },
+    ];
+    navbar.setProperty('buttons', buttons);
+
+    await page.waitForChanges();
+
+    const renderedButton = await page.find('modus-navbar >>> .navbar-button');
+    await renderedButton.click({ count: 2 });
+
+    expect(buttonClickEvent).toHaveReceivedEventTimes(2);
+    expect(buttonClickEvent).toHaveReceivedEventDetail('custom-button-id');
+  });
+
   it('emits notificationsMenuOpen', async () => {
     const page = await newE2EPage();
     await page.setContent('<modus-navbar show-notifications></modus-navbar>');
@@ -133,9 +158,7 @@ describe('modus-navbar', () => {
     const tooltipText = await tooltip.find('modus-tooltip >>> .text');
     expect(await tooltipText.isVisible()).toBe(false);
 
-    await searchIcon
-      .find('modus-tooltip >>> .modus-tooltip')
-      .then((e) => e.hover());
+    await searchIcon.find('modus-tooltip >>> .modus-tooltip').then((e) => e.hover());
     await page.waitForChanges();
 
     expect(await tooltipText.isVisible()).toBe(true);
@@ -197,15 +220,12 @@ describe('modus-navbar', () => {
     await page.waitForChanges();
 
     expect(searchMenuClick).toHaveReceivedEventTimes(1);
-  
   });
 
   it('should show small logo (icon) when screen size <= 576px', async () => {
     const page = await newE2EPage();
     await page.setViewport({ width: 300, height: 640 });
-    await page.setContent(
-      '<modus-navbar></modus-navbar>'
-    );
+    await page.setContent('<modus-navbar></modus-navbar>');
 
     await page.waitForChanges();
 
@@ -229,9 +249,7 @@ describe('modus-navbar', () => {
 
   it('should show big logo when screen size > 576px', async () => {
     const page = await newE2EPage();
-    await page.setContent(
-      '<modus-navbar></modus-navbar>'
-    );
+    await page.setContent('<modus-navbar></modus-navbar>');
 
     await page.waitForChanges();
 
@@ -328,9 +346,7 @@ describe('modus-navbar', () => {
 
   it('should render primary logo in all screen when secondary logo not provided', async () => {
     const page = await newE2EPage();
-    await page.setContent(
-      '<modus-navbar></modus-navbar>'
-    );
+    await page.setContent('<modus-navbar></modus-navbar>');
 
     await page.waitForChanges();
 
@@ -339,7 +355,7 @@ describe('modus-navbar', () => {
       primary: {
         url: 'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
         height: 24,
-      }
+      },
     });
 
     await page.waitForChanges();
@@ -358,9 +374,7 @@ describe('modus-navbar', () => {
 
   it('should render secondary logo in all screen when primary logo not provided', async () => {
     const page = await newE2EPage();
-    await page.setContent(
-      '<modus-navbar></modus-navbar>'
-    );
+    await page.setContent('<modus-navbar></modus-navbar>');
 
     await page.waitForChanges();
 
@@ -369,7 +383,7 @@ describe('modus-navbar', () => {
       secondary: {
         url: 'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
         height: 24,
-      }
+      },
     });
 
     await page.waitForChanges();
@@ -388,9 +402,7 @@ describe('modus-navbar', () => {
 
   it('should not render primary and secondary logo in all screen when logoOptions not set', async () => {
     const page = await newE2EPage();
-    await page.setContent(
-      '<modus-navbar></modus-navbar>'
-    );
+    await page.setContent('<modus-navbar></modus-navbar>');
 
     await page.waitForChanges();
 
