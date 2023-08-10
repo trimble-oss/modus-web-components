@@ -31,8 +31,12 @@
   .close {
     margin-left: auto;
 
-    &:hover svg path {
-      opacity: 0.5;
+    &:hover svg {
+      cursor: pointer;
+
+      path {
+        opacity: 0.5;
+      }
     }
   }
 
