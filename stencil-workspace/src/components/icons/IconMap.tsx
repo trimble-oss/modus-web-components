@@ -39,6 +39,8 @@ import { IconDelete } from './icon-delete';
 import { IconVerticalEllipsis } from './icon-vertical-ellipsis';
 import { IconVisibility } from './icon-visibility';
 import { IconVisibilityOff } from './icon-visibility-off';
+import { IconMoon } from './icon-moon';
+import { IconSun } from './icon-sun';
 
 export interface IconProps {
   color?: string;
@@ -106,6 +108,8 @@ export const IconMap: FunctionalComponent<IconMapProps> = (props: IconMapProps) 
       return <IconInfoOutline color={props.color} onClick={props.onClick} size={props.size} />;
     case 'menu':
       return <IconMenu color={props.color} onClick={props.onClick} size={props.size} />;
+    case 'moon':
+      return <IconMoon color={props.color} onClick={props.onClick} size={props.size} />;
     case 'notifications':
       return <IconNotifications color={props.color} onClick={props.onClick} size={props.size} pressed={props.pressed} />;
     case 'remove':
@@ -116,6 +120,8 @@ export const IconMap: FunctionalComponent<IconMapProps> = (props: IconMapProps) 
       return <IconSortAZ color={props.color} onClick={props.onClick} size={props.size} />;
     case 'sort-z-a':
       return <IconSortZA color={props.color} onClick={props.onClick} size={props.size} />;
+    case 'sun':
+      return <IconSun color={props.color} onClick={props.onClick} size={props.size} />;
     case 'triangle-down':
       return <IconTriangleDown color={props.color} onClick={props.onClick} size={props.size} />;
     case 'triangle-left':
