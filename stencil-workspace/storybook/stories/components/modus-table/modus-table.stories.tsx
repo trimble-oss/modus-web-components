@@ -473,3 +473,20 @@ ColumnReorder.args = { ...DefaultArgs, columnReorder: true };
 
 export const ExpandableRows = Template.bind({});
 ExpandableRows.args = { ...DefaultArgs, rowsExpandable: true, data: makeData(7, 4, 3, 2, 1), fullWidth: true };
+
+export const LargeDataset = Template.bind({});
+const largeDatasetColumns = [...DefaultColumns];
+largeDatasetColumns.splice(2, 1, emailColumn);
+const largeDatasetData = makeData(10000, 2).map((rowData: object) => {
+  const email: string = `${rowData['firstName']}${rowData['lastName']}@gmail.com`.toLowerCase();
+  rowData['email'] = { display: email, url: email };
+  return rowData;
+});
+
+LargeDataset.args = { ...DefaultArgs, columns: largeDatasetColumns, data: largeDatasetData, pagination: true, pageSizeList: [5, 10, 50], sort: true , hover: true, rowsExpandable: true, summaryRow: true , columnResize: true,   panelOptions: {
+  columnsVisibility: {
+    title: '',
+    requiredColumns: ['age', 'visits'],
+  },
+},
+showTablePanel: true, columnReorder: true  };
