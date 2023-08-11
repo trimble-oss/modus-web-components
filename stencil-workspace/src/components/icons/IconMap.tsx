@@ -24,6 +24,7 @@ import { IconInfo } from './icon-info';
 import { IconInfoOutline } from './icon-info-outline';
 import { IconMenu } from './icon-menu';
 import { IconNotifications } from './icon-notifications';
+import { IconRefresh } from './icon-refresh';
 import { IconRemove } from './icon-remove';
 import { IconSearch } from './icon-search';
 import { IconSortAZ } from './icon-sort-a-z';
@@ -108,6 +109,8 @@ export const IconMap: FunctionalComponent<IconMapProps> = (props: IconMapProps) 
       return <IconMenu color={props.color} onClick={props.onClick} size={props.size} />;
     case 'notifications':
       return <IconNotifications color={props.color} onClick={props.onClick} size={props.size} pressed={props.pressed} />;
+    case 'refresh':
+      return <IconRefresh color={props.color} onClick={props.onClick} size={props.size} />;
     case 'remove':
       return <IconRemove color={props.color} onClick={props.onClick} size={props.size} />;
     case 'search':
