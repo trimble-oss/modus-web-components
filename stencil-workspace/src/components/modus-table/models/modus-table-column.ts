@@ -16,4 +16,5 @@ export default interface ModusTableColumn<TData extends RowData, TValue = unknow
   showTotal?: boolean;
   subRows?: ModusTableColumn<TData, TValue>[];
   sortingFn?: SortingFnOption<TData>;
+  editable?: boolean;
 }

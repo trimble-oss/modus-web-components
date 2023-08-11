@@ -4,12 +4,12 @@ import {
 } from '@stencil/core';
 import ModusTableCellLink from '../../models/modus-table-cell-link';
 
-interface ModusTableCellLinkProps {
+interface ModusTableCellLinkElementProps {
   link: ModusTableCellLink;
   onLinkClick: (link: ModusTableCellLink) => void;
 }
 
-export const ModusTableCellLinkElement: FunctionalComponent<ModusTableCellLinkProps> = ({ link, onLinkClick }) => {
+export const ModusTableCellLinkElement: FunctionalComponent<ModusTableCellLinkElementProps> = ({ link, onLinkClick }) => {
   return (
     <div class="cell-link" onClick={() => onLinkClick(link)}>
       {link.display}

@@ -16,6 +16,7 @@ import { Story } from '@storybook/addon-docs';
 - [Sorting](#sorting)
 - [Value Formatter](#value-formatter)
 - [Hyperlink](#hyperlink)
+- [Inline Edit](#inline-edit)
 - [Column Resize](#column-resize)
 - [Column Reorder](#column-reorder)
 - [Pagination](#pagination)
@@ -192,6 +193,14 @@ User can display hyperlink in a table column.
 - As a link is an object, the default sorting is ineffective. We must pass `sortingFn:'sortForHyperlink'` along with the column information in order to sort a column with the `ModusTableCellLink` datatype or if '\_type' is used to override the datatype.
 
 <Story id="components-table--hyperlink" height={'350px'} />
+
+### Inline Edit
+
+User can edit a table cell.
+
+- To make a specific column or all columns editable, set the value of the `editable` property to `true` in the `columns` array.
+
+<Story id="components-table--inline-edit" height={'350px'} />
 
 ### Column Resize
 
@@ -385,6 +394,7 @@ interface interface ModusTableColumn {
   showTotal?: boolean;
   subRows?: ModusTableColumn[];
   sortingFn?: SortingFnOption;
+   editable?: boolean;
 }
 
 interface ModusTableCellLink {

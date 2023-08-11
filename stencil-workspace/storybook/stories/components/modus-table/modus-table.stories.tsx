@@ -154,7 +154,7 @@ const emailColumn = {
   dataType: 'link',
   size: 230,
   minSize: 80,
-  sortingFn: 'sortForHyperlink'
+  sortingFn: 'sortForHyperlink',
 };
 
 const DefaultArgs = {
@@ -427,10 +427,10 @@ ValueFormatter.args = {
 const valueFormatterTable = (pageSizeList, panelOptions, displayOptions) => {
   const tag = document.createElement('script');
   tag.innerHTML = `
-   document.querySelector('modus-table').columns = [{ header: 'First Name', accessorKey: 'firstName', id: 'first-name', dataType: 'text' , footer: 'Total', size: 150,minSize: 80}, { header: 'Last Name', accessorKey: 'lastName', id: 'last-name', dataType: 'text', size: 150,minSize: 80}, { header: 'Age', accessorKey: 'age', id: 'age', dataType: 'integer', showTotal: true, size: 100,minSize: 60 }, { header: 'Amount', accessorKey: 'amount', id: 'amount', dataType: 'integer',size: 150,minSize: 80, cell: (props) => { return '$' + Number(props.cell.getValue()).toFixed(2).replace(/\\d(?=(\\d{3})+\\.)/g, '$&,') }, }, { header: 'Status', accessorKey: 'status', id: 'status', dataType: 'text', minSize: 80}, { header: 'Profile Progress', accessorKey: 'progress', id: 'progress', dataType: 'integer',minSize: 100, cell: (props) => { return  Number(props.cell.getValue()).toFixed(2).replace(/\\d(?=(\\d{3})+\\.)/g, '$&,') }, }, { header: 'Created At', accessorKey: 'createdAt', id: 'createdAt', dataType: 'text', cell: (props) => { const date = new Date(props.cell.getValue()); return ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear(); }, }];
+   document.querySelector('modus-table').columns = [{ header: 'First Name', accessorKey: 'firstName', id: 'first-name', dataType: 'text' , footer: 'Total', size: 150,minSize: 80}, { header: 'Last Name', accessorKey: 'lastName', id: 'last-name', dataType: 'text', size: 150,minSize: 80}, { header: 'Age', accessorKey: 'age', id: 'age', dataType: 'integer', showTotal: true, size: 100,minSize: 60 }, { header: 'Amount', accessorKey: 'amount', id: 'amount', dataType: 'integer',size: 150,minSize: 80, editable: true, cell: (props) => { return '$' + Number(props.cell.getValue()).toFixed(2).replace(/\\d(?=(\\d{3})+\\.)/g, '$&,') }, }, { header: 'Status', accessorKey: 'status', id: 'status', dataType: 'text', minSize: 80}, { header: 'Profile Progress', accessorKey: 'progress', id: 'progress', dataType: 'integer',minSize: 100, cell: (props) => { return  Number(props.cell.getValue()).toFixed(2).replace(/\\d(?=(\\d{3})+\\.)/g, '$&,') }, }, { header: 'Created At', accessorKey: 'createdAt', id: 'createdAt', dataType: 'text', cell: (props) => { const date = new Date(props.cell.getValue()); return ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear(); }, }];
    document.querySelector('modus-table').data = [{ "firstName": "Chaim", "lastName": "Lubowitz", "age": 30, "amount": 330160, "progress": 99, "status": "single", "createdAt": "2002-11-19T12:48:51.739Z" }, { "firstName": "Vicky", "lastName": "Lehner", "age": 2, "amount": 41900, "progress": 36, "status": "single", "createdAt": "2003-10-02T12:48:51.739Z" }, { "firstName": "Nellie", "lastName": "Leuschke", "age": 15, "amount": 883112, "progress": 68, "status": "single", "createdAt": "2004-09-21T12:48:51.739Z" }, { "firstName": "Judy", "lastName": "Ritchie", "age": 3, "amount": 900293, "progress": 10, "status": "relationship", "createdAt": "2005-08-11T12:48:51.739Z" }, { "firstName": "Hertha", "lastName": "Bradtke", "age": 19, "amount": 112116, "progress": 87, "status": "relationship", "createdAt": "2006-07-13T12:48:51.739Z" }];
 
-   document.querySelector('modus-table').pageSizeList = ${JSON.stringify(pageSizeList)};
+  document.querySelector('modus-table').pageSizeList = ${JSON.stringify(pageSizeList)};
   document.querySelector('modus-table').panelOptions = ${JSON.stringify(panelOptions)};
   document.querySelector('modus-table').displayOptions = ${JSON.stringify(displayOptions)};
   `;
@@ -446,6 +446,11 @@ const HyperlinkData = makeData(5).map((rowData: object) => {
   return rowData;
 });
 Hyperlink.args = { ...DefaultArgs, columns: HyperlinkColumns, data: HyperlinkData };
+
+const InlineEditColumns = JSON.parse(JSON.stringify(DefaultColumns));
+InlineEditColumns.forEach((column) => (column['editable'] = true));
+export const InlineEdit = Template.bind({});
+InlineEdit.args = { ...DefaultArgs, columns: InlineEditColumns };
 
 export const ColumnResize = Template.bind({});
 ColumnResize.args = { ...DefaultArgs, columnResize: true };
@@ -482,11 +487,27 @@ const largeDatasetData = makeData(10000, 2).map((rowData: object) => {
   rowData['email'] = { display: email, url: email };
   return rowData;
 });
+largeDatasetColumns[0]['editable'] = true;
+largeDatasetColumns[1]['editable'] = true;
+largeDatasetColumns[3]['editable'] = true;
 
-LargeDataset.args = { ...DefaultArgs, columns: largeDatasetColumns, data: largeDatasetData, pagination: true, pageSizeList: [5, 10, 50], sort: true , hover: true, rowsExpandable: true, summaryRow: true , columnResize: true,   panelOptions: {
-  columnsVisibility: {
-    title: '',
-    requiredColumns: ['age', 'visits'],
+LargeDataset.args = {
+  ...DefaultArgs,
+  columns: largeDatasetColumns,
+  data: largeDatasetData,
+  pagination: true,
+  pageSizeList: [5, 10, 50],
+  sort: true,
+  hover: true,
+  rowsExpandable: true,
+  summaryRow: true,
+  columnResize: true,
+  panelOptions: {
+    columnsVisibility: {
+      title: '',
+      requiredColumns: ['age', 'visits'],
+    },
   },
-},
-showTablePanel: true, columnReorder: true  };
+  showTablePanel: true,
+  columnReorder: true,
+};

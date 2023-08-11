@@ -33,6 +33,7 @@
 | Event           | Description                     | Type                              |
 | --------------- | ------------------------------- | --------------------------------- |
 | `cellLinkClick` | Emits the link that was clicked | `CustomEvent<ModusTableCellLink>` |
+| `rowUpdated`    | Emits updated row data          | `CustomEvent<unknown>`            |
 | `sortChange`    | Emits event on sort change      | `CustomEvent<ColumnSort[]>`       |
 
 

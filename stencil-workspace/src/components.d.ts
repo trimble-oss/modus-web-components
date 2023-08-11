@@ -2866,6 +2866,10 @@ declare namespace LocalJSX {
          */
         "onCellLinkClick"?: (event: ModusTableCustomEvent<ModusTableCellLink>) => void;
         /**
+          * Emits updated row data
+         */
+        "onRowUpdated"?: (event: ModusTableCustomEvent<unknown>) => void;
+        /**
           * Emits event on sort change
          */
         "onSortChange"?: (event: ModusTableCustomEvent<ModusTableSortingState>) => void;

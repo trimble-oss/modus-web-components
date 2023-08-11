@@ -155,12 +155,32 @@ table {
         background-color: $modus-table-body-bg;
         border-top: $rem-1px $modus-table-border-color solid;
 
+        &.edit-mode {
+          border: $rem-2px $modus-table-cell-border-color solid;
+          display: flex;
+          padding: 0;
+
+          input {
+            background-color: inherit;
+            border: none;
+            color: inherit;
+            font: inherit;
+            outline: none;
+            padding: 0.25rem 1rem;
+            width: 100%;
+
+            &.text-align-right {
+              text-align: right;
+            }
+          }
+        }
+
         .table-cell {
           align-items: center;
           display: flex;
 
           .cell-link {
-            color: $modus-table-cell-link-colour;
+            color: $modus-table-cell-link-color;
             cursor: pointer;
             font-weight: $font-weight-semi-bold;
             overflow: hidden;
@@ -177,8 +197,11 @@ table {
           }
 
           .expand {
-            cursor: pointer;
             display: flex;
+
+            span {
+              cursor: pointer;
+            }
           }
 
           .cell-content {
@@ -240,10 +263,10 @@ table {
       }
 
       &.sticky-left {
+        border-right: $rem-2px $modus-table-border-color solid;
         left: 0;
         position: sticky;
         z-index: 1;
-        border-right: $rem-2px $modus-table-border-color solid;
       }
     }
   }

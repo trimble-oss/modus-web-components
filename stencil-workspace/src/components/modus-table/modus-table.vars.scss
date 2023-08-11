@@ -34,5 +34,6 @@ $modus-table-header-drop-color: var(--modus-table-header-drop-color, #019aeb) !d
 $modus-table-scrollbar-thumb-color: var(--modus-table-scrollbar-thumb-color, #6a6e79) !default;
 $modus-table-scrollbar-track-color: var(--modus-table-scrollbar-track-color, #b7b9c3) !default;
 
-/** Cell link */
-$modus-table-cell-link-colour: var(--modus-table-cell-link-colour, #217cbb) !default;
+/** Cell */
+$modus-table-cell-link-color: var(--modus-table-cell-link-colour, #217cbb) !default;
+$modus-table-cell-border-color: var(--modus-table-cell-border-colour, #217cbb) !default;

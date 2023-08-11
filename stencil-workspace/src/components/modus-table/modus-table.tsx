@@ -150,6 +150,9 @@ export class ModusTable {
   /** Emits the link that was clicked */
   @Event() cellLinkClick: EventEmitter<ModusTableCellLink>;
 
+  /** Emits updated row data */
+  @Event() rowUpdated: EventEmitter<unknown>;
+
   /**
    * ColumnSizing has info about width of the column
    * whereas ColumnSizingInfo has the detailed info about resizing of the column
@@ -316,6 +319,19 @@ export class ModusTable {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       onStateChange: () => {},
       renderFallbackValue: null,
+      meta: {
+        updateData: (rowIndex: number, columnId: string, value: string) => {
+          this.setData((old) => {
+            const newData = [...old];
+            newData[rowIndex] = {
+              ...newData[rowIndex],
+              [columnId]: value,
+            };
+            this.rowUpdated.emit(newData);
+            return newData;
+          });
+        },
+      },
     };
     this.table = createTable(options);
     if (this.pagination) {
@@ -336,6 +352,11 @@ export class ModusTable {
   private updatingState(updater: Updater<unknown>, key: string) {
     this[key] = updater instanceof Function ? updater(this[key]) : updater;
     this.table.options.state[key] = this[key];
+  }
+
+  private setData(updater: Updater<unknown>) {
+    this.data = updater instanceof Function ? updater(this.data) : updater;
+    this.table.options.data = this.data;
   }
 
   setSorting(updater: Updater<ModusTableSortingState>): void {
@@ -381,6 +402,8 @@ export class ModusTable {
     });
   }
 
+  @State() tableBodyEl: HTMLElement;
+
   render(): void {
     const lengthOfHeaderGroups: number = this.table.getHeaderGroups().length;
     const totalSize = this.table.getTotalSize();
@@ -393,9 +416,9 @@ export class ModusTable {
     const headerGroups: HeaderGroup<unknown>[] = this.table.getHeaderGroups();
     const footerGroups: HeaderGroup<unknown>[] = this.table.getFooterGroups();
     const className = `
-  ${this.displayOptions && this.displayOptions.borderless ? 'borderless' : ''}
-  ${this.displayOptions && this.displayOptions.cellBorderless ? 'cell-borderless' : ''}
-`;
+      ${this.displayOptions && this.displayOptions.borderless ? 'borderless' : ''}
+      ${this.displayOptions && this.displayOptions.cellBorderless ? 'cell-borderless' : ''}
+    `;
 
     return (
       <Host>
@@ -440,18 +463,21 @@ export class ModusTable {
                   </tr>
                 ))}
               </thead>
-              <tbody>
-                {this.table.getRowModel()?.rows.map((row) => {
+              <tbody ref={(ref: HTMLElement) => (this.tableBodyEl = ref)}>
+                {this.table.getRowModel()?.rows.map((row, rowIndex) => {
                   return (
                     <tr key={row.id} class={this.hover && 'enable-hover'}>
                       {row.getVisibleCells()?.map((cell, cellIndex) => {
                         return (
                           <ModusTableCell
-                            cell={cell}
                             row={row}
+                            rowIndex={rowIndex}
+                            cell={cell}
                             cellIndex={cellIndex}
                             rowsExpandable={this.rowsExpandable}
                             frozenColumns={this.frozenColumns}
+                            table={this.table}
+                            tableBodyEl={this.tableBodyEl}
                             onLinkClick={(link: ModusTableCellLink) => this.cellLinkClick.emit(link)}
                           />
                         );
