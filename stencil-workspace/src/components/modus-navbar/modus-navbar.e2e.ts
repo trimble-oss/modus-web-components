@@ -38,6 +38,36 @@ describe('modus-navbar', () => {
     expect(element).toHaveClass('nav-blue');
   });
 
+  it('hides custom button menu when hideMenu is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-navbar></modus-navbar>');
+    const navbar = await page.find('modus-navbar');
+
+    const buttons: ModusNavbarButton[] = [
+      {
+        id: 'with-menu',
+        icon: 'moon',
+        orderIndex: 0,
+        hideMenu: false,
+      },
+      {
+        id: 'without-menu',
+        icon: 'moon',
+        orderIndex: 1,
+        hideMenu: true,
+      },
+    ];
+    navbar.setProperty('buttons', buttons);
+
+    await page.waitForChanges();
+
+    const withMenu = await page.find('modus-navbar >>> slot[name="with-menu"]');
+    expect(withMenu).not.toBeNull();
+
+    const withoutMenu = await page.find('modus-navbar >>> slot[name="without-menu"]');
+    expect(withoutMenu).toBeNull();
+  });
+
   it('emits appsMenuOpen when apps menu opens', async () => {
     const page = await newE2EPage();
     await page.setContent('<modus-navbar show-apps-menu></modus-navbar>');

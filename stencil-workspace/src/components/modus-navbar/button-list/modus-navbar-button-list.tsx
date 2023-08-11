@@ -25,11 +25,11 @@ export const ModusNavbarButtonList: FunctionalComponent<{
             </modus-tooltip>
           </span>
         </div>
-        {
+        {!button.hideMenu && (
           <modus-navbar-button-menu slot="dropdownList" reverse={reverse}>
             <slot name={button.id}></slot>
           </modus-navbar-button-menu>
-        }
+        )}
       </modus-dropdown>
     </div>
   ));
