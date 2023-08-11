@@ -207,9 +207,9 @@ export class ModusPagination {
     return (
       <nav aria-label={this.ariaLabel} class={`${this.classBySize.get(this.size)}`}>
         <ul>
-          {this.renderPreviousPageControl}
-          {this.renderPageNumbers}
-          {this.renderNextPageControl}
+          {this.renderPreviousPageControl()}
+          {this.renderPageNumbers()}
+          {this.renderNextPageControl()}
         </ul>
       </nav>
     );

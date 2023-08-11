@@ -11,38 +11,28 @@ describe('modus-pagination', () => {
     expect(root).toEqualHtml(`
   <modus-pagination>
     <mock:shadow-root>
-      <nav class="medium">
-        <ul>
-          <li class="disabled" tabindex="0">
-            <svg class="icon-chevron-left-thick" fill="currentColor" height="20" viewBox="0 0 32 32" width="20" xmlns="http://www.w3.org/2000/svg">
-              <path d="M21.753 28.06A2.483 2.483 0 0 0 22.864 26c0-.523-.165-1.024-.476-1.45l-.026-.035-.028-.032L14.941 16l7.393-8.483.028-.032.026-.035c.311-.426.476-.927.476-1.45 0-.823-.415-1.593-1.112-2.06-1.135-.76-2.704-.501-3.519.574l-8.572 9.974-.026.03-.024.032a2.445 2.445 0 0 0 0 2.9l.024.032.026.03 8.572 9.974c.816 1.075 2.384 1.335 3.52.574z" fill="#6A6976"></path>
+    <nav class="medium">
+      <ul>
+          <li aria-label="Previous" class="disabled" tabindex="0">
+            <svg class="icon-chevron-left-thick" height="20" width="20" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 32 32">
+                <path d="M21.753 28.06A2.483 2.483 0 0 0 22.864 26c0-.523-.165-1.024-.476-1.45l-.026-.035-.028-.032L14.941 16l7.393-8.483.028-.032.026-.035c.311-.426.476-.927.476-1.45 0-.823-.415-1.593-1.112-2.06-1.135-.76-2.704-.501-3.519.574l-8.572 9.974-.026.03-.024.032a2.445 2.445 0 0 0 0 2.9l.024.032.026.03 8.572 9.974c.816 1.075 2.384 1.335 3.52.574z" fill="#6A6976"></path>
             </svg>
           </li>
-          <li tabindex="-1">
-            ...
-          </li>
-          <li tabindex="0">
-            NaN
-          </li>
-          <li tabindex="0">
-            NaN
-          </li>
-          <li tabindex="0">
-            NaN
-          </li>
-          <li tabindex="-1">
-            ...
-          </li>
-          <li class="active" tabindex="0"></li>
-          <li class="disabled" tabindex="0">
-            <svg class="icon-chevron-right-thick" fill="currentColor" height="20" viewBox="0 0 32 32" width="20" xmlns="http://www.w3.org/2000/svg">
-              <g>
-                <path d="m13.767 27.486 8.572-9.974.026-.03.023-.032a2.444 2.444 0 0 0 0-2.9l-.023-.032-.026-.03-8.572-9.974c-.815-1.075-2.384-1.335-3.52-.574A2.482 2.482 0 0 0 9.136 6c0 .523.164 1.024.476 1.45l.025.035.028.032L17.058 16l-7.392 8.483-.028.032-.026.034A2.442 2.442 0 0 0 9.136 26c0 .823.415 1.594 1.111 2.06 1.136.762 2.704.502 3.52-.573z" fill="#6A6976"></path>
-              </g>
+          <li class="" tabindex="-1">...</li>
+          <li class="" tabindex="0">NaN</li>
+          <li class="" tabindex="0">NaN</li>
+          <li class="" tabindex="0">NaN</li>
+          <li class="" tabindex="-1">...</li>
+          <li aria-current="page" class="active" tabindex="0"></li>
+          <li aria-label="Next" class="disabled" tabindex="0">
+            <svg class="icon-chevron-right-thick" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="20" width="20" viewBox="0 0 32 32">
+                <g>
+                  <path d="m13.767 27.486 8.572-9.974.026-.03.023-.032a2.444 2.444 0 0 0 0-2.9l-.023-.032-.026-.03-8.572-9.974c-.815-1.075-2.384-1.335-3.52-.574A2.482 2.482 0 0 0 9.136 6c0 .523.164 1.024.476 1.45l.025.035.028.032L17.058 16l-7.392 8.483-.028.032-.026.034A2.442 2.442 0 0 0 9.136 26c0 .823.415 1.594 1.111 2.06 1.136.762 2.704.502 3.52-.573z" fill="#6A6976"></path>
+                </g>
             </svg>
           </li>
-        </ul>
-      </nav>
+      </ul>
+    </nav>
     </mock:shadow-root>
   </modus-pagination>
 `);
