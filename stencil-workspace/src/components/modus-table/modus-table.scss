@@ -240,10 +240,10 @@ table {
       }
 
       &.sticky-left {
+        border-right: $rem-2px $modus-table-border-color solid;
         left: 0;
         position: sticky;
         z-index: 1;
-        border-right: $rem-2px $modus-table-border-color solid;
       }
     }
   }
