@@ -16,15 +16,14 @@ export default {
       disabled: true,
     },
     viewMode: 'docs',
+    actions: {
+      handles: ['valueChange'],
+    },
   },
 };
 
 const Template = () => html`
-  <modus-select
-    id="select-demo-1"
-    label="Select Demo 1"
-    aria-label="select"
-    options-display-prop="display"></modus-select>
+  <modus-select id="select-demo-1" label="Select Demo 1" aria-label="select" options-display-prop="display"></modus-select>
   <modus-select
     disabled
     helper-text="Helper demo"
@@ -32,46 +31,39 @@ const Template = () => html`
     id="select-demo-2"
     label="Select Demo 2"
     options-display-prop="display"></modus-select>
+  <modus-select error-text="Error demo" aria-label="select" label="Select Demo 3"></modus-select>
+  <modus-select label="Select Demo 4" aria-label="select" valid-text="Valid demo"></modus-select>
   <modus-select
-    error-text="Error demo"
-    aria-label="select"
-    label="Select Demo 3"></modus-select>
-  <modus-select
-    label="Select Demo 4"
-    aria-label="select"
-    valid-text="Valid demo"></modus-select>
-    <modus-select
     id="select-demo-5"
     label="Select Demo 5"
     size="large"
     aria-label="select"
     options-display-prop="display"></modus-select>
   ${setSelects()}
-  `;
+`;
 
 export const Default = Template.bind({});
 
 const setSelects = () => {
   const tag = document.createElement('script');
   tag.innerHTML = `
-    const modusSelect = document.querySelector('#select-demo-1');
-    modusSelect.options = [ { display: 'Option 1' }, { display: 'Option 2' }, { display: 'Option 3' } ];
+      const options = [
+        { display: 'Option 1' },
+        { display: 'Option 2' },
+        { display: 'Option 3' },
+      ];
 
-    const modusSelect2 = document.querySelector('#select-demo-2');
-    const options = [ { display: 'Option 1' }, { display: 'Option 2' }, { display: 'Option 3' } ];
-    modusSelect2.options = options;
-    modusSelect2.value = options[1]
+      const select1 = document.querySelector('#select-demo-1');
+      select1.options = options;
+      select1.value = options[0];
 
-    const modusSelect3 = document.querySelector('#select-demo-5');
-    const options3 = [ { display: 'Option 1' }, { display: 'Option 2' }, { display: 'Option 3' } ];
-    modusSelect3.options = options3;
-    modusSelect3.value = options3[1]
+      const select2 = document.querySelector('#select-demo-2');
+      select2.options = options;
+      select2.value = options[1];
 
-    const handleChange = (event) => {
-      const selectedValue = event.detail;
-      event.target.value = selectedValue;
-    };
-    modusSelect.addEventListener('valueChange', handleChange)
+      const select5 = document.querySelector('#select-demo-5');
+      select5.options = options;
+      select5.value = options[2];
   `;
 
   return tag;
