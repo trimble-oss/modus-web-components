@@ -108,6 +108,7 @@ describe('modus-select', () => {
     const required = await page.find('modus-select >>> span.required');
     expect(required).not.toBeNull();
   });
+
   it('renders changes to value', async () => {
     const page = await newE2EPage();
 
@@ -123,18 +124,19 @@ describe('modus-select', () => {
     const button = await page.find('modus-select >>> select');
     expect(await button.getProperty('textContent')).toEqual(options[0].display);
   });
+
   it('emits valueChange event', async () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-select></modus-select>');
 
-    const options = [{ display: 'Option 1' }, { display: 'Option 2' }, { display: 'Option 3' }];
+    const options = [{ display: 'Option 0' }, { display: 'Option 1 - Select me!' }, { display: 'Option 2' }];
     const select = await page.find('modus-select');
     select.setProperty('optionsDisplayProp', 'display');
     select.setProperty('options', options);
     await page.waitForChanges();
 
-    const valueChange = await page.spyOnEvent('valueChange');
+    const valueChangeSpy = await page.spyOnEvent('valueChange');
     const selectElement = await page.find('modus-select >>> select');
     await selectElement.focus();
     await page.waitForChanges();
@@ -144,7 +146,7 @@ describe('modus-select', () => {
     await page.keyboard.press('Enter');
     await page.waitForChanges();
 
-    expect(valueChange).toHaveReceivedEvent();
-    expect(valueChange).toHaveReceivedEventDetail('Option 2');
+    expect(valueChangeSpy).toHaveReceivedEvent();
+    expect(valueChangeSpy).toHaveReceivedEventDetail(options[1]);
   });
 });
