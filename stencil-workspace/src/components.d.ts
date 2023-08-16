@@ -940,6 +940,10 @@ export namespace Components {
          */
         "data": unknown[];
         /**
+          * (Optional) Date format, by default is set to mm/dd/yyyy.
+         */
+        "dateFormat": string;
+        /**
           * (Optional) To control display options of table.
          */
         "displayOptions"?: ModusTableDisplayOptions;
@@ -984,6 +988,10 @@ export namespace Components {
           * (Optional) To sort data in table.
          */
         "sort": boolean;
+        /**
+          * (Optional) To sort decending or ascending.
+         */
+        "sortDescFirst": boolean;
         /**
           * (Optional) To display summary row.
          */
@@ -2845,6 +2853,10 @@ declare namespace LocalJSX {
          */
         "data": unknown[];
         /**
+          * (Optional) Date format, by default is set to mm/dd/yyyy.
+         */
+        "dateFormat"?: string;
+        /**
           * (Optional) To control display options of table.
          */
         "displayOptions"?: ModusTableDisplayOptions;
@@ -2895,6 +2907,10 @@ declare namespace LocalJSX {
           * (Optional) To sort data in table.
          */
         "sort"?: boolean;
+        /**
+          * (Optional) To sort decending or ascending.
+         */
+        "sortDescFirst"?: boolean;
         /**
           * (Optional) To display summary row.
          */

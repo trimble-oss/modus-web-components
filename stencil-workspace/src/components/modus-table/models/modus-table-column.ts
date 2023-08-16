@@ -1,5 +1,6 @@
 import { CellContext, ColumnDefTemplate, RowData, SortingFnOption } from '@tanstack/table-core';
 import { ModusTableColumnDataType } from '../enums';
+import { ModusTableCellEditType } from '../enums/modus-table-cell-edit-type';
 
 export default interface ModusTableColumn<TData extends RowData, TValue = unknown> {
   header: string;
@@ -17,4 +18,8 @@ export default interface ModusTableColumn<TData extends RowData, TValue = unknow
   subRows?: ModusTableColumn<TData, TValue>[];
   sortingFn?: SortingFnOption<TData>;
   editable?: boolean;
+  editType?: ModusTableCellEditType;
+  dropdownValues?: unknown[];
+  autocompleteValues?: string[];
+  dateFormat?: string;
 }

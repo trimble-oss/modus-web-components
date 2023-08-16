@@ -18,5 +18,71 @@
 
 <body>
   <!-- Test components here -->
+  <modus-table></modus-table>
 </body>
+
+<script>
+  const modusDataTable = document.querySelector('modus-table');
+  modusDataTable.hover = true;
+  modusDataTable.columnReorder = true;
+  modusDataTable.data = [
+    {
+      age: 40,
+      firstName: 'Gordon',
+      lastName: 'Lemke',
+      city: 'Chennai',
+      status: 'single',
+      subRows: undefined,
+      visits: 434,
+    },
+    {
+      age: 40,
+      firstName: 'Gordon',
+      lastName: 'Lemke',
+      city: 'Mumbai',
+      status: 'single',
+      subRows: undefined,
+      visits: 434,
+    },
+    {
+      firstName: 'Elliott',
+      lastName: 'Bosco',
+      age: 21,
+      visits: 348,
+      city: 'Hyderabad',
+      status: 'complicated',
+    },
+    {
+      firstName: 'Agnes',
+      lastName: 'Breitenberg',
+      age: 34,
+      visits: 639,
+      city: 'Bangalore',
+      status: 'single',
+    },
+    {
+      firstName: 'Nicolette',
+      lastName: 'Stamm',
+      age: 13,
+      visits: 518,
+      city: 'Pune',
+      status: 'relationship',
+    }
+  ];
+
+  modusDataTable.columns = [
+    { header: 'First Name', accessorKey: 'firstName', id: 'first-name', dataType: 'text', },
+    { header: 'Last Name', accessorKey: 'lastName', id: 'last-name', dataType: 'text', editable: true },
+    { header: 'Age', accessorKey: 'age', id: 'age', dataType: 'integer', editable: true },
+    { header: 'DOB', accessorKey: 'dob', id: 'dob', dataType: 'date', dateFormat: 'mm/dd/yyyy', editable: true },
+    {
+      header: 'Status', accessorKey: 'status', id: 'status', dataType: 'text', editable: true, editType: 'dropdown', dropdownValues: [{ display: 'single' }, { display: 'relationship' }, { display: 'complicated' },]
+    },
+    {
+      header: 'City', accessorKey: 'city', id: 'city', dataType: 'string', editable: true, editType: 'autocomplete', autocompleteValues: ['Mumbai', 'Chennai', 'Kolkata', 'Bangalore', 'Hyderabad', 'Pune', 'Ahmedabad', 'Surat', 'Visakhapatnam']
+    },
+
+  ];
+</script>
+
 </html>

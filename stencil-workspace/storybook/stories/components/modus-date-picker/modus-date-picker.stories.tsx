@@ -151,7 +151,7 @@ const defaultArgs = {
   placeholder: '',
   readOnly: false,
   required: false,
-  showCalendarIcon: false,
+  showCalendarIcon: true,
   size: 'medium',
   validText: '',
   value: '2022-12-22',

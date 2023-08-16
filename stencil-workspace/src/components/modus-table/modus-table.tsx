@@ -144,6 +144,12 @@ export class ModusTable {
   /** (Optional) To display a horizontal scrollbar when the width is exceeded. */
   @Prop() maxWidth: string;
 
+  /** (Optional) To sort decending or ascending. */
+  @Prop() sortDescFirst = false;
+
+  /** (Optional) Date format, by default is set to mm/dd/yyyy. */
+  @Prop() dateFormat = 'mm/dd/yyyy';
+
   /** Emits event on sort change */
   @Event() sortChange: EventEmitter<ModusTableSortingState>;
 
@@ -292,15 +298,32 @@ export class ModusTable {
       enableSorting: this.sort,
       sortingFns: {
         sortForHyperlink: (rowA: Row<unknown>, rowB: Row<unknown>, columnId: string): number => {
-          const valA = rowA.getValue(columnId)['display'] ?? rowA.getValue(columnId);
-          const valB = rowB.getValue(columnId)['display'] ?? rowB.getValue(columnId);
-          return valA > valB ? 1 : -1;
+          const valA = rowA.getValue(columnId)?.['display'] ?? rowA.getValue(columnId);
+          const valB = rowB.getValue(columnId)?.['display'] ?? rowB.getValue(columnId);
+
+          // If valA is null, undefined or empty
+          if (!valA) {
+            return 1;
+          }
+
+          // If valB is null, undefined or empty
+          if (!valB) {
+            return -1;
+          }
+
+          // if descending
+          if (this.sortDescFirst) {
+            return valA < valB ? 1 : -1;
+          }
+
+          // if ascending
+          return valA < valB ? -1 : 1;
         },
       },
       columnResizeMode: 'onChange',
       enableColumnResizing: this.columnResize,
       enableHiding: !!this.panelOptions?.columnsVisibility,
-      sortDescFirst: false, // To-Do, workaround to prevent sort descending on certain columns, e.g. numeric.
+      sortDescFirst: this.sortDescFirst, // To-Do, workaround to prevent sort descending on certain columns, e.g. numeric.
       onExpandedChange: (updater: Updater<ExpandedState>) => this.updatingState(updater, 'expanded'),
       onSortingChange: (updater: Updater<ModusTableSortingState>) => this.setSorting(updater),
       onPaginationChange: (updater: PaginationState) => this.setPagination(updater),

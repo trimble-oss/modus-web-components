@@ -7,6 +7,8 @@ export const PropertyShowTotal = 'showTotal';
 export const DefaultPageSizes = [10, 20, 30];
 export const PageView = 'Page View';
 export const ShowResult = 'Showing result';
+export const EditType = 'editType';
+export const DateFormat = 'dateFormat';
 
 // Keyboard key constants starts
 export const EnterKey = 'enter';

@@ -32,8 +32,17 @@ interface ModusTableCellProps {
 /**
  * Updates the cell data/value and sets the focus back to cell.
  */
-function updateCellValue(table, rowIndex: number, columnId: string, newValue: string | number, cellEl: HTMLElement) {
-  table.options.meta?.updateData(rowIndex, columnId, newValue);
+function updateCellValue(
+  table,
+  rowIndex: number,
+  columnId: string,
+  newValue: string | number,
+  value: string | number,
+  cellEl: HTMLElement
+) {
+  if (newValue !== value) {
+    table.options.meta?.updateData(rowIndex, columnId, newValue);
+  }
   cellEl?.focus();
 }
 
@@ -129,7 +138,14 @@ export const ModusTableCell: FunctionalComponent<ModusTableCellProps> = ({
           cell={cell}
           onValueChange={(newValue) => {
             cell['editMode'] = false;
-            updateCellValue(table, row.index, cell.column.columnDef['accessorKey'], newValue, cellEl);
+            updateCellValue(
+              table,
+              row.index,
+              cell.column.columnDef['accessorKey'],
+              newValue,
+              cell.getValue() as string | number,
+              cellEl
+            );
           }}
         />
       ) : (

@@ -51,6 +51,19 @@ Type: `Promise<void>`
 
 
 
+## Dependencies
+
+### Used by
+
+ - [modus-table](../modus-table)
+
+### Graph
+```mermaid
+graph TD;
+  modus-table --> modus-date-input
+  style modus-date-input fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 

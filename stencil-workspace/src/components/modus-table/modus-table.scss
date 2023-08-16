@@ -157,20 +157,29 @@ table {
 
         &.edit-mode {
           border: $rem-2px $modus-table-cell-border-color solid;
-          display: flex;
           padding: 0;
 
-          input {
-            background-color: inherit;
-            border: none;
-            color: inherit;
-            font: inherit;
-            outline: none;
-            padding: 0.25rem 1rem;
-            width: 100%;
+          div {
+            input {
+              background-color: inherit;
+              border: none;
+              color: inherit;
+              font: inherit;
+              outline: none;
+              padding: 0.25rem 1rem;
+              width: calc(100% - 2rem); // 100% - (padding-left + padding-right)
 
-            &.text-align-right {
-              text-align: right;
+              &.text-align-right {
+                text-align: right;
+              }
+            }
+
+            modus-select,
+            modus-autocomplete,
+            modus-date-picker {
+              background-color: inherit;
+              color: inherit;
+              outline: none;
             }
           }
         }
