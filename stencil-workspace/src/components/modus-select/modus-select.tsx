@@ -45,11 +45,11 @@ export class ModusSelect {
     this.internalValue = newValue;
   }
 
-  /** The input value state. */
-  @State() internalValue: unknown;
-
   /** An event that fires on input value change. */
   @Event() valueChange: EventEmitter<unknown>;
+
+  @State() internalValue: unknown;
+  @State() optionIdMap: Map<string, unknown> = new Map();
 
   classBySize: Map<string, string> = new Map([
     ['medium', 'medium'],
@@ -60,14 +60,15 @@ export class ModusSelect {
     this.internalValue = this.value;
   }
 
-  handleItemSelect(option: unknown): void {
+  handleOptionSelect(option: unknown): void {
     this.valueChange.emit(option);
   }
 
   handleSelectChange(event: Event): void {
     const target = event.target as HTMLSelectElement;
-    const selectedValue = target.value;
-    this.handleItemSelect(selectedValue);
+    const selectedId = target.value;
+    const option = this.optionIdMap.get(selectedId);
+    this.handleOptionSelect(option);
   }
 
   renderSubText(): JSX.Element | null {
@@ -91,19 +92,15 @@ export class ModusSelect {
   }
 
   renderOptions(): JSX.Element[] {
-    return this.options?.map((option) => (
-      <option
-        value={option[this.optionsDisplayProp]}
-        key={createGuid()}
-        selected={
-          this.internalValue &&
-          (typeof option[this.optionsDisplayProp] === 'number'
-            ? Number(option[this.optionsDisplayProp]) === Number(this.internalValue)
-            : option[this.optionsDisplayProp] === this.internalValue)
-        }>
-        {option[this.optionsDisplayProp]}
-      </option>
-    ));
+    return this.options?.map((option) => {
+      const optionId = createGuid();
+      this.optionIdMap.set(optionId, option);
+      return (
+        <option value={optionId} key={optionId} selected={option === this.internalValue}>
+          {option[this.optionsDisplayProp]}
+        </option>
+      );
+    });
   }
 
   render(): unknown {
