@@ -42,6 +42,8 @@ import { IconVisibility } from './icon-visibility';
 import { IconVisibilityOff } from './icon-visibility-off';
 import { IconMoon } from './icon-moon';
 import { IconSun } from './icon-sun';
+import { IconDownloadLine } from './icon-download-line';
+import { IconTune } from './icon-tune';
 
 export interface IconProps {
   color?: string;
@@ -89,6 +91,8 @@ export const IconMap: FunctionalComponent<IconMapProps> = (props: IconMapProps) 
       return <IconCopy color={props.color} onClick={props.onClick} size={props.size} />;
     case 'delete':
       return <IconDelete color={props.color} onClick={props.onClick} size={props.size} />;
+    case 'download-line':
+      return <IconDownloadLine color={props.color} onClick={props.onClick} size={props.size} />;
     case 'drag':
       return <IconDrag color={props.color} onClick={props.onClick} size={props.size} />;
     case 'edit':
@@ -129,6 +133,8 @@ export const IconMap: FunctionalComponent<IconMapProps> = (props: IconMapProps) 
       return <IconTriangleDown color={props.color} onClick={props.onClick} size={props.size} />;
     case 'triangle-left':
       return <IconTriangleLeft color={props.color} onClick={props.onClick} size={props.size} />;
+    case 'tune':
+      return <IconTune color={props.color} onClick={props.onClick} size={props.size} />;
     case 'upload-cloud':
       return <IconUploadCloud color={props.color} onClick={props.onClick} size={props.size} />;
     case 'vertical-ellipsis':
