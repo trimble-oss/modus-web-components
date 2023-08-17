@@ -22,6 +22,7 @@ import { Story } from '@storybook/addon-docs';
 - [Summary Row](#summary-row)
 - [Column Visibility](#column-visibility)
 - [Expandable Rows](#Expandable-rows)
+- [checkbox Row Selection](#checkbox-row-selection)
 - [Types](#types)
 - [Accessibility](#accessibility)
 - [Properties](#properties)
@@ -367,6 +368,16 @@ User can expand rows to display as child/sub row data.
 
 <Story id="components-table--expandable-rows" height={'480px'} />
 
+### checkbox Row Selection
+
+To select rows, users can use the checkbox provided on each row. Normally, the Modus Table permits selecting only one row at a time, but this can be modified to allow multiple selections by using 'rowSelectionOptions' option.
+There are two options under `rowSelectionOptions`: `multiple` and `subRowSelection`.
+
+  - To enable multiple row selection, set `multiple` to `true`.
+  - Sub-rows will also be selected when the value of the'subRowSelection' is set to 'true'.
+
+<Story id="components-table--checkbox-row-selection" height={'480px'} />
+
 ### Types
 
 ```ts
@@ -429,32 +440,35 @@ Users can use keyboard navigation to perform different actions.
 
 ### Properties
 
-| Property              | Attribute                 | Description                                                                                                 | Type                     | Default      |
-| --------------------- | ------------------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------ | ------------ |
-| `columns`             | `columns`                 | (required) To display headers in the table.                                                                 | `ModusTableColumn[]`     | `undefined`  |
-| `data`                | `data`                    | (required) To display data in the table.                                                                    | `Array`                  | `undefined`  |
-| `hover`               | `hover`                   | (optional) To enable row hover in table.                                                                    | `boolean`                | `false`      |
-| `sort`                | `sort`                    | (optional) To sort data in table.                                                                           | `boolean`                | `false`      |
-| `showSortIconOnHover` | `show-sort-icon-on-hover` | (optional) To display sort icon on hover.                                                                   | `boolean`                | `false`      |
-| `displayOptions`      | `display-options`         | (optional) To control display options of table.                                                             | `boolean`                | `false`      |
-| `pagination`          | `pagination`              | (optional) To enable pagination of table.                                                                   | `boolean`                | `false`      |
-| `pageSizeList`        | `page-size-list`          | (optional) To display page size options of table.                                                           | `Array`                  | `[10,20,50]` |
-| `columnResize`        | `column-resize`           | (optional) To enable column resizing of table.                                                              | `boolean`                | `false`      |
-| `columnReorder`       | `column-reorder`          | (optional) To enable re-ordering of the table columns.                                                      | `boolean`                | `false`      |
-| `summaryRow`          | `summary-row`             | (optional) To display summary row in table. Is used to display total.                                       | `boolean`                | `false`      |
-| `fullWidth`           | `full-width`              | (optional) To manage table width.                                                                           | `boolean`                | `false`      |
-| `showTablePanel`      | `show-table-panel`        | (optional) To display table panel. Is used to display panel options.                                        | `boolean`                | `false`      |
-| `panelOptions`        | `panel-options`           | (Optional) To display a panel above the table, which allows access to table operations like hiding columns. | `ModusTablePanelOptions` | `null`       |
-| `rowsExpandable`      | `rows-expandable`         | (Optional) To display `subRows` data of a row. .                                                            | `boolean`                | 'false'      |
-| `maxHeight`           | `max-height`              | (Optional) To display a vertical scrollbar when the height is exceeded.                                     | `string`                 | `null`       |
-| `maxWidth`            | `max-width`               | (Optional) To display a horizontal scrollbar when the width is exceeded.                                    | `string`                 | `null`       |
+| Property                  | Attribute                   | Description                                                                                                 | Type                     | Default      |
+| ---------------------     | -------------------------   | ----------------------------------------------------------------------------------------------------------- | ------------------------ | ------------ |
+| `columns`                 | `columns`                   | (required) To display headers in the table.                                                                 | `ModusTableColumn[]`     | `undefined`  |
+| `data`                    | `data`                      | (required) To display data in the table.                                                                    | `Array`                  | `undefined`  |
+| `hover`                   | `hover`                     | (optional) To enable row hover in table.                                                                    | `boolean`                | `false`      |
+| `sort`                    | `sort`                      | (optional) To sort data in table.                                                                           | `boolean`                | `false`      |
+| `showSortIconOnHover`     | `show-sort-icon-on-hover`   | (optional) To display sort icon on hover.                                                                   | `boolean`                | `false`      |
+| `displayOptions`          | `display-options`           | (optional) To control display options of table.                                                             | `boolean`                | `false`      |
+| `pagination`              | `pagination`                | (optional) To enable pagination of table.                                                                   | `boolean`                | `false`      |
+| `pageSizeList`            | `page-size-list`            | (optional) To display page size options of table.                                                           | `Array`                  | `[10,20,50]` |
+| `columnResize`            | `column-resize`             | (optional) To enable column resizing of table.                                                              | `boolean`                | `false`      |
+| `columnReorder`           | `column-reorder`            | (optional) To enable re-ordering of the table columns.                                                      | `boolean`                | `false`      |
+| `summaryRow`              | `summary-row`               | (optional) To display summary row in table. Is used to display total.                                       | `boolean`                | `false`      |
+| `fullWidth`               | `full-width`                | (optional) To manage table width.                                                                           | `boolean`                | `false`      |
+| `showTablePanel`          | `show-table-panel`          | (optional) To display table panel. Is used to display panel options.                                        | `boolean`                | `false`      |
+| `panelOptions`            | `panel-options`             | (Optional) To display a panel above the table, which allows access to table operations like hiding columns. | `ModusTablePanelOptions` | `null`       |
+| `rowsExpandable`          | `rows-expandable`           | (Optional) To display `subRows` data of a row. .                                                            | `boolean`                | 'false'      |
+| `maxHeight`               | `max-height`                | (Optional) To display a vertical scrollbar when the height is exceeded.                                     | `string`                 | `null`       |
+| `maxWidth`                | `max-width`                 | (Optional) To display a horizontal scrollbar when the width is exceeded.                                    | `string`                 | `null`       |
+| `rowSelection`            | `row-selection`             | (Optional) To display checkbox.                                                                             | `boolean`                | `false`      |
+| `rowSelectionOptions`     | `checkbox-selection-options`| (Optional) To control multiple row selection.                                                               | `boolean`                | `false`      |
 
 ### Events
 
-| Name            | Description                               | Emits                                                    |
-| --------------- | ----------------------------------------- | -------------------------------------------------------- |
-| `sortChange`    | An event that fires on sort change.       | `[{ id: string, desc: boolean }]`                        |
-| `cellLinkClick` | An event that fires on click of the link. | `{ display: string, url: string } as ModusTableCellLink` |
+| Name                 | Description                                  | Emits                                                    |
+| ---------------      | -----------------------------------------    | -------------------------------------------------------- |
+| `sortChange`         | An event that fires on sort change.          | `[{ id: string, desc: boolean }]`                        |
+| `cellLinkClick`      | An event that fires on click of the link.    | `{ display: string, url: string } as ModusTableCellLink` |
+| `rowSelectionChange` | Event details contains the row(s) selected   | `[{}]`                                           |
 
 ### Slot
 

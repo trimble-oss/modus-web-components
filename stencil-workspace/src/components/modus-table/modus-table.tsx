@@ -21,6 +21,7 @@ import {
   PaginationState,
   Row,
   Table,
+  RowSelectionState,
   TableOptionsResolved,
   Updater,
   VisibilityState,
@@ -43,6 +44,7 @@ import { ModusTableDragArrows, ModusTableDragItem } from './parts/modus-table-dr
 import { ModusTablePagination } from './parts/modus-table-pagination';
 import { ModusTableSummaryRow } from './parts/modus-table-summary-row';
 import { TableHeaderDragDrop } from './utilities/table-header-drag-drop.utility';
+import RowSelectionOptions from './models/checkbox-options';
 
 /**
  * @slot customFooter - Slot for custom footer.
@@ -119,6 +121,21 @@ export class ModusTable {
     cellBorderless: false,
   };
 
+  /** (Optional) To display checkbox. */
+  @Prop() rowSelection = false;
+
+  /** (Optional) To control multiple row selection. */
+  @Prop() rowSelectionOptions: RowSelectionOptions = {
+    multiple: false,
+    subRowSelection: false,
+  };
+  @Watch('rowSelectionOptions') onRowSelectionOptionsChange(newVal: RowSelectionOptions, oldVal: RowSelectionOptions) {
+    if (newVal.multiple !== oldVal.multiple || newVal.subRowSelection !== oldVal.subRowSelection) {
+      this.rowSelectionOptions.multiple = newVal.multiple;
+      this.rowSelectionOptions.subRowSelection = newVal.subRowSelection;
+    }
+  }
+
   /** (Optional) To allow column reordering. */
   @Prop() columnReorder = false;
   @Watch('columnReorder') updateColumnReorder() {
@@ -144,8 +161,10 @@ export class ModusTable {
   /** (Optional) To display a horizontal scrollbar when the width is exceeded. */
   @Prop() maxWidth: string;
 
-  /** Emits event on sort change */
   @Event() sortChange: EventEmitter<ModusTableSortingState>;
+
+  /** Event details contains the row(s) selected */
+  @Event() rowSelectionChange: EventEmitter<unknown>;
 
   /** Emits the link that was clicked */
   @Event() cellLinkClick: EventEmitter<ModusTableCellLink>;
@@ -167,6 +186,7 @@ export class ModusTable {
   @State() columnOrder: string[] = [];
   @State() itemDragState: ColumnDragState;
   @State() dragAndDropObj: TableHeaderDragDrop = new TableHeaderDragDrop();
+  @State() rowSelectionState: RowSelectionState = {};
 
   private frozenColumns: string[] = []; // Columns will remain on the left and be unable to resize, reorganize, or modify their visibility.
   /** Column reorder variables start */
@@ -274,6 +294,7 @@ export class ModusTable {
    * Creates a table with some set of options.
    */
   initializeTable(): void {
+    const { multiple, subRowSelection } = this.rowSelectionOptions;
     const options: TableOptionsResolved<unknown> = {
       data: this.data ?? [],
       columns: (this.columns as ColumnDef<unknown>[]) ?? [],
@@ -285,7 +306,11 @@ export class ModusTable {
         columnOrder: this.columnReorder ? this.columnOrder : [],
         expanded: this.expanded,
         sorting: this.sorting,
+        rowSelection: this.rowSelectionState,
       },
+      enableRowSelection: this.rowSelection,
+      enableMultiRowSelection: multiple,
+      enableSubRowSelection: multiple && subRowSelection,
       enableSorting: this.sort,
       sortingFns: {
         sortForHyperlink: (rowA: Row<unknown>, rowB: Row<unknown>, columnId: string): number => {
@@ -301,6 +326,7 @@ export class ModusTable {
       onExpandedChange: (updater: Updater<ExpandedState>) => this.updatingState(updater, 'expanded'),
       onSortingChange: (updater: Updater<ModusTableSortingState>) => this.setSorting(updater),
       onPaginationChange: (updater: PaginationState) => this.setPagination(updater),
+      onRowSelectionChange: (updater: Updater<RowSelectionState>) => this.setRowSelection(updater),
       getCoreRowModel: getCoreRowModel(),
       getPaginationRowModel: this.pagination && getPaginationRowModel(),
       getSortedRowModel: getSortedRowModel(),
@@ -347,6 +373,11 @@ export class ModusTable {
     this.paginationState = updater instanceof Function ? updater(this.paginationState) : updater;
     this.table.options.state.pagination = this.paginationState;
   }
+  setRowSelection(updater: Updater<unknown>): void {
+    this.rowSelectionState = typeof updater === 'function' ? updater(this.rowSelectionState) : updater;
+    this.table.options.state.rowSelection = this.rowSelectionState;
+    this.rowSelectionChange.emit(this.table.getSelectedRowModel().flatRows.map((row) => row.original));
+  }
 
   /**
    * Returns data of a column.
@@ -382,13 +413,10 @@ export class ModusTable {
   }
 
   render(): void {
+    const { multiple } = this.rowSelectionOptions;
     const lengthOfHeaderGroups: number = this.table.getHeaderGroups().length;
     const totalSize = this.table.getTotalSize();
-    const tableStyle = this.fullWidth
-      ? { width: '100%' }
-      : totalSize > 0
-      ? { width: `${totalSize}px`, tableLayout: 'fixed' }
-      : { tableLayout: 'fixed' };
+    const tableStyle = this.fullWidth ? { width: '100%' } : totalSize > 0 ? { width: `${totalSize}px` } : {};
     const borderlessTableStyle = this.displayOptions && this.displayOptions.borderless && { border: 'none' };
     const headerGroups: HeaderGroup<unknown>[] = this.table.getHeaderGroups();
     const footerGroups: HeaderGroup<unknown>[] = this.table.getFooterGroups();
@@ -416,6 +444,16 @@ export class ModusTable {
               <thead>
                 {headerGroups?.map((headerGroup, index) => (
                   <tr key={headerGroup.id} ref={(element: HTMLTableRowElement) => (this.tableHeaderRowRef = element)}>
+                    {this.rowSelection && (
+                      <th class="header-row-checkbox sticky-left">
+                        {multiple && (
+                          <modus-checkbox
+                            checked={this.table.getIsAllRowsSelected()}
+                            indeterminate={this.table.getIsSomeRowsSelected()}
+                            onCheckboxClick={this.table.getToggleAllRowsSelectedHandler()}></modus-checkbox>
+                        )}
+                      </th>
+                    )}
                     {headerGroup.headers?.map((header) => {
                       return (
                         <ModusTableHeader
@@ -426,6 +464,7 @@ export class ModusTable {
                           columnReorder={this.columnReorder}
                           columnResizeEnabled={this.columnResizeEnabled}
                           frozenColumns={this.frozenColumns}
+                          rowSelection={this.rowSelection}
                           handleDragStart={(event: MouseEvent, id: string, elementRef: HTMLTableHeaderCellElement) =>
                             this.handleDragStart(event, id, elementRef, true)
                           }
@@ -444,6 +483,14 @@ export class ModusTable {
                 {this.table.getRowModel()?.rows.map((row) => {
                   return (
                     <tr key={row.id} class={this.hover && 'enable-hover'}>
+                      {this.rowSelection && (
+                        <td class="body-row-checkbox sticky-left" style={{ top: !this.fullWidth && '53px' }}>
+                          <modus-checkbox
+                            checked={row.getIsSelected()}
+                            indeterminate={multiple && row.getIsSomeSelected()}
+                            onCheckboxClick={() => row.toggleSelected()}></modus-checkbox>
+                        </td>
+                      )}
                       {row.getVisibleCells()?.map((cell, cellIndex) => {
                         return (
                           <ModusTableCell
@@ -452,6 +499,7 @@ export class ModusTable {
                             cellIndex={cellIndex}
                             rowsExpandable={this.rowsExpandable}
                             frozenColumns={this.frozenColumns}
+                            rowSelection={this.rowSelection}
                             onLinkClick={(link: ModusTableCellLink) => this.cellLinkClick.emit(link)}
                           />
                         );
@@ -466,6 +514,7 @@ export class ModusTable {
                   tableData={this.data}
                   borderlessOptions={this.displayOptions}
                   frozenColumns={this.frozenColumns}
+                  rowSelection={this.rowSelection}
                 />
               ) : (
                 ''

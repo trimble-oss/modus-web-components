@@ -46,7 +46,7 @@ function makeData(...lens): object[] {
   return makeDataLevel();
 }
 
-function initializeTable(columns, data, pageSizeList, panelOptions, displayOptions) {
+function initializeTable(columns, data, pageSizeList, panelOptions, displayOptions, rowSelectionOptions) {
   const tag = document.createElement('script');
   tag.innerHTML = `
   document.querySelector('modus-table').columns = ${JSON.stringify(columns)};
@@ -54,6 +54,7 @@ function initializeTable(columns, data, pageSizeList, panelOptions, displayOptio
   document.querySelector('modus-table').pageSizeList = ${JSON.stringify(pageSizeList)};
   document.querySelector('modus-table').panelOptions = ${JSON.stringify(panelOptions)};
   document.querySelector('modus-table').displayOptions = ${JSON.stringify(displayOptions)};
+  document.querySelector('modus-table').rowSelectionOptions = ${JSON.stringify(rowSelectionOptions)};
   `;
 
   return tag;
@@ -175,6 +176,8 @@ const DefaultArgs = {
   rowsExpandable: false,
   maxHeight: '',
   maxWidth: '',
+  rowSelection: false,
+  rowSelectionOptions: {},
 };
 
 export default {
@@ -217,7 +220,7 @@ export default {
       type: { required: false },
     },
     showSortIconOnHover: {
-      name: 'show-sort-icon-on-hover',
+      name: 'showSortIconOnHover',
       description: 'Enables sort for table columns and sort icon appears when you hover over a column header',
       control: 'boolean',
       table: {
@@ -227,7 +230,7 @@ export default {
       type: { required: false },
     },
     summaryRow: {
-      name: 'summary-row',
+      name: 'summaryRow',
       description: 'Enables a summary row as footer',
       control: 'boolean',
       table: {
@@ -247,7 +250,7 @@ export default {
       type: { required: false },
     },
     columnResize: {
-      name: 'column-resize',
+      name: 'columnResize',
       description: 'Enables the column resizing for table',
       control: 'boolean',
       table: {
@@ -257,7 +260,7 @@ export default {
       type: { required: false },
     },
     columnReorder: {
-      name: 'column-reorder',
+      name: 'columnReorder',
       description: 'Enables the column reordering for table',
       control: 'boolean',
       table: {
@@ -267,7 +270,7 @@ export default {
       type: { required: false },
     },
     fullWidth: {
-      name: 'full-width',
+      name: 'fullWidth',
       description: 'Manage table width.',
       control: 'boolean',
       table: {
@@ -277,7 +280,7 @@ export default {
       type: { required: false },
     },
     showTablePanel: {
-      name: 'show-table-panel',
+      name: 'showTablePanel',
       description: 'Enables the table panel.',
       control: 'boolean',
       table: {
@@ -287,7 +290,7 @@ export default {
       type: { required: false },
     },
     panelOptions: {
-      name: 'panel-options',
+      name: 'panelOptions',
       description: 'To display a panel options, which allows access to table operations like hiding columns.',
       table: {
         type: { summary: 'ModusTablePanelOptions' },
@@ -295,8 +298,18 @@ export default {
       type: { required: false },
     },
     rowsExpandable: {
-      name: 'rows-expandable',
+      name: 'rowsExpandable',
       description: 'Enables expanded rows.',
+      control: 'boolean',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      },
+      type: { required: false },
+    },
+    rowSelection: {
+      name: 'rowSelection',
+      description: 'Enables row selection.',
       control: 'boolean',
       table: {
         defaultValue: { summary: false },
@@ -307,7 +320,7 @@ export default {
   },
   parameters: {
     actions: {
-      handles: ['sortChange', 'cellLinkClick'],
+      handles: ['sortChange', 'cellLinkClick', 'rowSelectionChange'],
     },
     controls: { expanded: true, sort: 'requiredFirst' },
     docs: {
@@ -339,6 +352,8 @@ const Template = ({
   rowsExpandable,
   maxHeight,
   maxWidth,
+  rowSelection,
+  rowSelectionOptions
 }) => html`
   <div style="width: 950px">
     <modus-table
@@ -353,9 +368,10 @@ const Template = ({
       show-table-panel="${showTablePanel}"
       rows-expandable="${rowsExpandable}"
       max-height="${maxHeight}"
-      max-width="${maxWidth}" />
+      max-width="${maxWidth}"
+      row-selection="${rowSelection}" />
   </div>
-  ${initializeTable(columns, data, pageSizeList, panelOptions, displayOptions)}
+  ${initializeTable(columns, data, pageSizeList, panelOptions, displayOptions, rowSelectionOptions)}
 `;
 
 export const Default = Template.bind({});
@@ -391,6 +407,8 @@ export const ValueFormatter = ({
   displayOptions,
   maxHeight,
   maxWidth,
+  rowSelection,
+  rowSelectionOptions
 }) => html`
   <div style="width: 950px">
     <modus-table
@@ -404,9 +422,10 @@ export const ValueFormatter = ({
       column-reorder="${columnReorder}"
       show-table-panel="${showTablePanel}"
       max-height="${maxHeight}"
-      max-width="${maxWidth}" />
+      max-width="${maxWidth}"
+      row-selection="${rowSelection}" />
   </div>
-  ${valueFormatterTable(pageSizeList, panelOptions, displayOptions)}
+  ${valueFormatterTable(pageSizeList, panelOptions, displayOptions, rowSelectionOptions)}
 `;
 ValueFormatter.args = {
   hover: false,
@@ -423,8 +442,10 @@ ValueFormatter.args = {
   displayOptions: {},
   maxHeight: '',
   maxWidth: '',
+  rowSelection: false,
+  rowSelectionOptions: {}
 };
-const valueFormatterTable = (pageSizeList, panelOptions, displayOptions) => {
+const valueFormatterTable = (pageSizeList, panelOptions, displayOptions, rowSelectionOptions) => {
   const tag = document.createElement('script');
   tag.innerHTML = `
    document.querySelector('modus-table').columns = [{ header: 'First Name', accessorKey: 'firstName', id: 'first-name', dataType: 'text' , footer: 'Total', size: 150,minSize: 80}, { header: 'Last Name', accessorKey: 'lastName', id: 'last-name', dataType: 'text', size: 150,minSize: 80}, { header: 'Age', accessorKey: 'age', id: 'age', dataType: 'integer', showTotal: true, size: 100,minSize: 60 }, { header: 'Amount', accessorKey: 'amount', id: 'amount', dataType: 'integer',size: 150,minSize: 80, cell: (props) => { return '$' + Number(props.cell.getValue()).toFixed(2).replace(/\\d(?=(\\d{3})+\\.)/g, '$&,') }, }, { header: 'Status', accessorKey: 'status', id: 'status', dataType: 'text', minSize: 80}, { header: 'Profile Progress', accessorKey: 'progress', id: 'progress', dataType: 'integer',minSize: 100, cell: (props) => { return  Number(props.cell.getValue()).toFixed(2).replace(/\\d(?=(\\d{3})+\\.)/g, '$&,') }, }, { header: 'Created At', accessorKey: 'createdAt', id: 'createdAt', dataType: 'text', cell: (props) => { const date = new Date(props.cell.getValue()); return ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear(); }, }];
@@ -433,6 +454,7 @@ const valueFormatterTable = (pageSizeList, panelOptions, displayOptions) => {
    document.querySelector('modus-table').pageSizeList = ${JSON.stringify(pageSizeList)};
   document.querySelector('modus-table').panelOptions = ${JSON.stringify(panelOptions)};
   document.querySelector('modus-table').displayOptions = ${JSON.stringify(displayOptions)};
+  document.querySelector('modus-table').rowSelectionOptions = ${JSON.stringify(rowSelectionOptions)};
   `;
   return tag;
 };
@@ -474,6 +496,14 @@ ColumnReorder.args = { ...DefaultArgs, columnReorder: true };
 export const ExpandableRows = Template.bind({});
 ExpandableRows.args = { ...DefaultArgs, rowsExpandable: true, data: makeData(7, 4, 3, 2, 1), fullWidth: true };
 
+export const CheckboxRowSelection = Template.bind({});
+CheckboxRowSelection.args = {
+  ...DefaultArgs, rowSelection: true, rowSelectionOptions: {
+    multiple: true,
+    subRowSelection: true
+  }, data: makeData(7)
+};
+
 export const LargeDataset = Template.bind({});
 const largeDatasetColumns = [...DefaultColumns];
 largeDatasetColumns.splice(2, 1, emailColumn);
@@ -483,10 +513,17 @@ const largeDatasetData = makeData(10000, 2).map((rowData: object) => {
   return rowData;
 });
 
-LargeDataset.args = { ...DefaultArgs, columns: largeDatasetColumns, data: largeDatasetData, pagination: true, pageSizeList: [5, 10, 50], sort: true , hover: true, rowsExpandable: true, summaryRow: true , columnResize: true,   panelOptions: {
-  columnsVisibility: {
-    title: '',
-    requiredColumns: ['age', 'visits'],
+LargeDataset.args = {
+  ...DefaultArgs, columns: largeDatasetColumns, data: largeDatasetData, pagination: true, pageSizeList: [5, 10, 50], sort: true, hover: true, rowsExpandable: true, summaryRow: true, columnResize: true, panelOptions: {
+    columnsVisibility: {
+      title: '',
+      requiredColumns: ['age', 'visits'],
+    },
   },
-},
-showTablePanel: true, columnReorder: true  };
+  rowSelection: true, rowSelectionOptions: {
+    multiple: true,
+    subRowSelection: true
+  },
+  showTablePanel: true, columnReorder: true
+};
+

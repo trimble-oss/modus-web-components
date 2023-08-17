@@ -15,6 +15,7 @@ interface ModusTableHeaderProps {
   columnReorder: boolean;
   columnResizeEnabled: boolean;
   frozenColumns: string[];
+  rowSelection: boolean;
   handleDragStart: (event: MouseEvent, id: string, elementRef: HTMLTableHeaderCellElement) => void;
   handleKeyboardStart: (event: KeyboardEvent, id: string, elementRef: HTMLTableHeaderCellElement) => void;
   onMouseEnterResize: () => void;
@@ -32,6 +33,7 @@ export const ModusTableHeader: FunctionalComponent<ModusTableHeaderProps> = ({
   columnReorder,
   columnResizeEnabled,
   frozenColumns,
+  rowSelection,
   handleDragStart,
   handleKeyboardStart,
   onMouseEnterResize,
@@ -58,7 +60,10 @@ export const ModusTableHeader: FunctionalComponent<ModusTableHeaderProps> = ({
         ${columnResizeEnabled ? 'show-resize-cursor' : ''}
         ${header.column.getIsResizing() ? 'active-resize' : ''}
       `}
-      style={{ width: `${header.getSize()}px` }}
+      style={{
+        width: `${header.getSize()}px`,
+        left: frozenColumns.includes(header.id) && rowSelection && '48px',
+      }}
       aria-label={header.column.columnDef.header}
       role="columnheader"
       scope="col"
