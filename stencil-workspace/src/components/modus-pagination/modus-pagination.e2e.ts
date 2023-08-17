@@ -23,6 +23,40 @@ describe('modus-pagination', () => {
     expect(nav).toHaveClass('medium');
   });
 
+  it('renders changes to min page', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-pagination min-page="1" max-page="5" active-page="1"></modus-pagination>');
+    await page.waitForChanges();
+
+    let pages = await page.findAll('modus-pagination >>> li');
+    expect(pages.length).toEqual(5);
+
+    const element = await page.find('modus-pagination');
+    element.setAttribute('min-page', 2);
+    await page.waitForChanges();
+
+    pages = await page.findAll('modus-pagination >>> li');
+    expect(pages.length).toEqual(4);
+  });
+
+  it('renders changes to max page', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-pagination min-page="1" max-page="5" active-page="1"></modus-pagination>');
+    await page.waitForChanges();
+
+    let pages = await page.findAll('modus-pagination >>> li');
+    expect(pages.length).toEqual(5);
+
+    const element = await page.find('modus-pagination');
+    element.setAttribute('max-page', 6);
+    await page.waitForChanges();
+
+    pages = await page.findAll('modus-pagination >>> li');
+    expect(pages.length).toEqual(6);
+  });
+
   it('emits pageChange on page click', async () => {
     const page = await newE2EPage();
 

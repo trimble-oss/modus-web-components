@@ -14,11 +14,9 @@ export class ModusPagination {
 
   /* The active page. */
   @Prop({ mutable: true }) activePage: number;
-
   @Watch('activePage')
   activePageWatch(newValue: number, oldValue: number) {
     if (newValue !== oldValue) {
-      this.setPages();
       this.pageChange.emit(newValue);
     }
   }
@@ -38,6 +36,10 @@ export class ModusPagination {
   @State() pages: (number | string)[];
 
   constructor() {
+    this.setPages();
+  }
+
+  componentWillRender(): void {
     this.setPages();
   }
 
