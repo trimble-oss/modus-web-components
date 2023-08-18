@@ -83,7 +83,7 @@ export class ModusAutocomplete {
   @Prop() size: 'medium' | 'large' = 'medium';
 
   /** The autocomplete's search value. */
-  @Prop() value: string;
+  @Prop({ mutable: true }) value: string;
 
   /** An event that fires when a dropdown option is selected. Emits the option id. */
   @Event() optionSelected: EventEmitter<string>;

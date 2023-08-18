@@ -28,6 +28,7 @@ function newPerson() {
     progress: randomNumber(1, 100) * 100,
     status: randomNumber(1, 100) > 66 ? 'Verified' : randomNumber(0, 100) > 33 ? 'Pending' : 'Rejected',
     income: randomNumber(1000, 1000000),
+    city: Cities[randomNumber(0, 6)],
     createdAt: new Date(randomNumber(1990, 2020), randomNumber(0, 11), randomNumber(1, 30)).toDateString(),
   };
 }
@@ -55,7 +56,6 @@ function initializeTable(columns, data, pageSizeList, panelOptions, displayOptio
   document.querySelector('modus-table').panelOptions = ${JSON.stringify(panelOptions)};
   document.querySelector('modus-table').displayOptions = ${JSON.stringify(displayOptions)};
   `;
-
   return tag;
 }
 
@@ -80,7 +80,10 @@ const Names = [
   'Papa Smurf',
   'Buzz Lightyear',
 ];
-const DefaultColumns = [
+
+const Cities = ['Austin', 'New York', 'Seattle', 'Chicago', 'Denver', 'Los Angeles', 'New Orleans'];
+
+const DefaultColumns: object[] = [
   {
     header: 'First Name',
     accessorKey: 'firstName',
@@ -138,6 +141,13 @@ const DefaultColumns = [
     minSize: 100,
   },
   {
+    header: 'City',
+    accessorKey: 'city',
+    id: 'city',
+    dataType: 'text',
+    minSize: 80,
+  },
+  {
     header: 'Created At',
     accessorKey: 'createdAt',
     id: 'createdAt',
@@ -154,7 +164,7 @@ const emailColumn = {
   dataType: 'link',
   size: 230,
   minSize: 80,
-  sortingFn: 'sortForHyperlink'
+  sortingFn: 'sortForHyperlink',
 };
 
 const DefaultArgs = {
@@ -447,6 +457,25 @@ const HyperlinkData = makeData(5).map((rowData: object) => {
 });
 Hyperlink.args = { ...DefaultArgs, columns: HyperlinkColumns, data: HyperlinkData };
 
+const InlineEditColumns = JSON.parse(JSON.stringify(DefaultColumns));
+InlineEditColumns[1] = { editable: true, ...InlineEditColumns[1] };
+InlineEditColumns[2] = { editable: true, ...InlineEditColumns[2] };
+InlineEditColumns[4] = {
+  editable: true,
+  editType: 'dropdown',
+  dropdownValues: [{ display: 'Verified' }, { display: 'Pending' }, { display: 'Rejected' }],
+  ...InlineEditColumns[4],
+};
+InlineEditColumns[7] = {
+  editable: true,
+  editType: 'autocomplete',
+  autocompleteValues: [...Cities],
+  ...InlineEditColumns[7],
+};
+
+export const InlineEdit = Template.bind({});
+InlineEdit.args = { ...DefaultArgs, columns: InlineEditColumns };
+
 export const ColumnResize = Template.bind({});
 ColumnResize.args = { ...DefaultArgs, columnResize: true };
 
@@ -482,11 +511,38 @@ const largeDatasetData = makeData(10000, 2).map((rowData: object) => {
   rowData['email'] = { display: email, url: email };
   return rowData;
 });
+largeDatasetColumns[1] = { editable: true, ...largeDatasetColumns[1] };
+largeDatasetColumns[2] = { editable: true, ...largeDatasetColumns[2] };
+largeDatasetColumns[5] = {
+  editable: true,
+  editType: 'dropdown',
+  dropdownValues: [{ display: 'Verified' }, { display: 'Pending' }, { display: 'Rejected' }],
+  ...largeDatasetColumns[5],
+};
+largeDatasetColumns[7] = {
+  editable: true,
+  editType: 'autocomplete',
+  autocompleteValues: [...Cities],
+  ...largeDatasetColumns[7],
+};
 
-LargeDataset.args = { ...DefaultArgs, columns: largeDatasetColumns, data: largeDatasetData, pagination: true, pageSizeList: [5, 10, 50], sort: true , hover: true, rowsExpandable: true, summaryRow: true , columnResize: true,   panelOptions: {
-  columnsVisibility: {
-    title: '',
-    requiredColumns: ['age', 'visits'],
+LargeDataset.args = {
+  ...DefaultArgs,
+  columns: largeDatasetColumns,
+  data: largeDatasetData,
+  pagination: true,
+  pageSizeList: [5, 10, 50],
+  sort: true,
+  hover: true,
+  rowsExpandable: true,
+  summaryRow: true,
+  columnResize: true,
+  panelOptions: {
+    columnsVisibility: {
+      title: '',
+      requiredColumns: ['age', 'visits'],
+    },
   },
-},
-showTablePanel: true, columnReorder: true  };
+  showTablePanel: true,
+  columnReorder: true,
+};

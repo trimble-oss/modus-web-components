@@ -4,9 +4,9 @@ import {
   State,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
-import { Table } from '@tanstack/table-core';
-import { ArrowDown, ArrowUp, EnterKey, SpaceKey, TabKey } from '../../../constants/constants';
 import { JSX } from '@stencil/core/internal';
+import { Table } from '@tanstack/table-core';
+import { ArrowDownKey, ArrowUpKey, EnterKey, SpaceKey, TabKey } from '../../../constants/constants';
 import ModusTableColumnsVisibilityOptions from '../../../models/modus-table-columns-visibility-options';
 
 @Component({
@@ -69,11 +69,11 @@ export class ModusTableColumnsVisibility {
     const eventKey = event.key.toLowerCase();
     if (eventKey === EnterKey || eventKey === SpaceKey) {
       this.toggleColumnVisibility(columnIndex);
-    } else if (eventKey === ArrowDown) {
+    } else if (eventKey === ArrowDownKey) {
       currentRefItemIndex = columnIndex + 1 < this.refItemContent.length ? columnIndex + 1 : this.refItemContent.length - 1;
       recursiveTillAnotherFocusItem(currentRefItemIndex, true);
       event.preventDefault();
-    } else if (eventKey === ArrowUp) {
+    } else if (eventKey === ArrowUpKey) {
       currentRefItemIndex = columnIndex - 1 >= 0 ? columnIndex - 1 : 0;
       recursiveTillAnotherFocusItem(currentRefItemIndex, false);
       event.preventDefault();

@@ -155,12 +155,48 @@ table {
         background-color: $modus-table-body-bg;
         border-top: $rem-1px $modus-table-border-color solid;
 
+        &.edit-mode {
+          border: $rem-2px $modus-table-cell-border-color solid;
+          padding: 0;
+
+          div {
+            align-items: center;
+            display: flex;
+
+            input {
+              background-color: inherit;
+              border: none;
+              color: inherit;
+              font: inherit;
+              outline: none;
+              padding: 0.25rem 1rem;
+              width: calc(100% - 2rem); // 100% - (padding-left + padding-right)
+
+              &.text-align-right {
+                text-align: right;
+              }
+            }
+
+            modus-select,
+            modus-autocomplete,
+            modus-date-picker {
+              background-color: inherit;
+              color: inherit;
+              outline: none;
+              width: 100%;
+            }
+          }
+        }
+
         .table-cell {
           align-items: center;
           display: flex;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          text-wrap: nowrap;
 
           .cell-link {
-            color: $modus-table-cell-link-colour;
+            color: $modus-table-cell-link-color;
             cursor: pointer;
             font-weight: $font-weight-semi-bold;
             overflow: hidden;
@@ -177,8 +213,11 @@ table {
           }
 
           .expand {
-            cursor: pointer;
             display: flex;
+
+            span {
+              cursor: pointer;
+            }
           }
 
           .cell-content {
@@ -231,10 +270,6 @@ table {
       padding: 0.25rem 1rem;
       text-align: left;
 
-      &.active-resize {
-        border-right: 2px $modus-primary-color solid;
-      }
-
       &.text-align-center {
         text-align: center;
       }
@@ -244,6 +279,10 @@ table {
         left: 0;
         position: sticky;
         z-index: 1;
+      }
+
+      &.active-resize {
+        border-right: $rem-2px $modus-primary-color solid;
       }
     }
   }

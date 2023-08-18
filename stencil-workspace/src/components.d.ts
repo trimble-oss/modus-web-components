@@ -974,6 +974,10 @@ export namespace Components {
          */
         "data": unknown[];
         /**
+          * (Optional) Date format, by default is set to mm/dd/yyyy.
+         */
+        "dateFormat": string;
+        /**
           * (Optional) To control display options of table.
          */
         "displayOptions"?: ModusTableDisplayOptions;
@@ -1018,6 +1022,10 @@ export namespace Components {
           * (Optional) To sort data in table.
          */
         "sort": boolean;
+        /**
+          * (Optional) To sort decending or ascending.
+         */
+        "sortDescFirst": boolean;
         /**
           * (Optional) To display summary row.
          */
@@ -2907,6 +2915,10 @@ declare namespace LocalJSX {
          */
         "data": unknown[];
         /**
+          * (Optional) Date format, by default is set to mm/dd/yyyy.
+         */
+        "dateFormat"?: string;
+        /**
           * (Optional) To control display options of table.
          */
         "displayOptions"?: ModusTableDisplayOptions;
@@ -2927,6 +2939,10 @@ declare namespace LocalJSX {
           * Emits the link that was clicked
          */
         "onCellLinkClick"?: (event: ModusTableCustomEvent<ModusTableCellLink>) => void;
+        /**
+          * Emits updated row data
+         */
+        "onRowUpdated"?: (event: ModusTableCustomEvent<unknown>) => void;
         /**
           * Emits event on sort change
          */
@@ -2953,6 +2969,10 @@ declare namespace LocalJSX {
           * (Optional) To sort data in table.
          */
         "sort"?: boolean;
+        /**
+          * (Optional) To sort decending or ascending.
+         */
+        "sortDescFirst"?: boolean;
         /**
           * (Optional) To display summary row.
          */

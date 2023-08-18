@@ -1069,7 +1069,7 @@ export declare interface ModusSwitch extends Components.ModusSwitch {
 
 
 @ProxyCmp({
-  inputs: ['columnReorder', 'columnResize', 'columns', 'data', 'displayOptions', 'fullWidth', 'hover', 'maxHeight', 'maxWidth', 'pageSizeList', 'pagination', 'panelOptions', 'rowsExpandable', 'showSortIconOnHover', 'showTablePanel', 'sort', 'summaryRow'],
+  inputs: ['columnReorder', 'columnResize', 'columns', 'data', 'dateFormat', 'displayOptions', 'fullWidth', 'hover', 'maxHeight', 'maxWidth', 'pageSizeList', 'pagination', 'panelOptions', 'rowsExpandable', 'showSortIconOnHover', 'showTablePanel', 'sort', 'sortDescFirst', 'summaryRow'],
   methods: ['getColumnData', 'toggleColumnVisibility']
 })
 @Component({
@@ -1077,14 +1077,14 @@ export declare interface ModusSwitch extends Components.ModusSwitch {
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['columnReorder', 'columnResize', 'columns', 'data', 'displayOptions', 'fullWidth', 'hover', 'maxHeight', 'maxWidth', 'pageSizeList', 'pagination', 'panelOptions', 'rowsExpandable', 'showSortIconOnHover', 'showTablePanel', 'sort', 'summaryRow'],
+  inputs: ['columnReorder', 'columnResize', 'columns', 'data', 'dateFormat', 'displayOptions', 'fullWidth', 'hover', 'maxHeight', 'maxWidth', 'pageSizeList', 'pagination', 'panelOptions', 'rowsExpandable', 'showSortIconOnHover', 'showTablePanel', 'sort', 'sortDescFirst', 'summaryRow'],
 })
 export class ModusTable {
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['sortChange', 'cellLinkClick']);
+    proxyOutputs(this, this.el, ['sortChange', 'cellLinkClick', 'rowUpdated']);
   }
 }
 
@@ -1100,6 +1100,10 @@ export declare interface ModusTable extends Components.ModusTable {
    * Emits the link that was clicked
    */
   cellLinkClick: EventEmitter<CustomEvent<ModusTableCellLink>>;
+  /**
+   * Emits updated row data
+   */
+  rowUpdated: EventEmitter<CustomEvent<unknown>>;
 }
 
 

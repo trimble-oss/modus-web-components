@@ -144,11 +144,20 @@ export class ModusTable {
   /** (Optional) To display a horizontal scrollbar when the width is exceeded. */
   @Prop() maxWidth: string;
 
+  /** (Optional) To sort decending or ascending. */
+  @Prop() sortDescFirst = false;
+
+  /** (Optional) Date format, by default is set to mm/dd/yyyy. */
+  @Prop() dateFormat = 'mm/dd/yyyy';
+
   /** Emits event on sort change */
   @Event() sortChange: EventEmitter<ModusTableSortingState>;
 
   /** Emits the link that was clicked */
   @Event() cellLinkClick: EventEmitter<ModusTableCellLink>;
+
+  /** Emits updated row data */
+  @Event() rowUpdated: EventEmitter<unknown>;
 
   /**
    * ColumnSizing has info about width of the column
@@ -167,6 +176,7 @@ export class ModusTable {
   @State() columnOrder: string[] = [];
   @State() itemDragState: ColumnDragState;
   @State() dragAndDropObj: TableHeaderDragDrop = new TableHeaderDragDrop();
+  @State() tableBodyEl: HTMLElement;
 
   private frozenColumns: string[] = []; // Columns will remain on the left and be unable to resize, reorganize, or modify their visibility.
   /** Column reorder variables start */
@@ -289,15 +299,32 @@ export class ModusTable {
       enableSorting: this.sort,
       sortingFns: {
         sortForHyperlink: (rowA: Row<unknown>, rowB: Row<unknown>, columnId: string): number => {
-          const valA = rowA.getValue(columnId)['display'] ?? rowA.getValue(columnId);
-          const valB = rowB.getValue(columnId)['display'] ?? rowB.getValue(columnId);
-          return valA > valB ? 1 : -1;
+          const valA = rowA.getValue(columnId)?.['display'] ?? rowA.getValue(columnId);
+          const valB = rowB.getValue(columnId)?.['display'] ?? rowB.getValue(columnId);
+
+          // If valA is null, undefined or empty
+          if (!valA) {
+            return 1;
+          }
+
+          // If valB is null, undefined or empty
+          if (!valB) {
+            return -1;
+          }
+
+          // if descending
+          if (this.sortDescFirst) {
+            return valA < valB ? 1 : -1;
+          }
+
+          // if ascending
+          return valA < valB ? -1 : 1;
         },
       },
       columnResizeMode: 'onChange',
       enableColumnResizing: this.columnResize,
       enableHiding: !!this.panelOptions?.columnsVisibility,
-      sortDescFirst: false, // To-Do, workaround to prevent sort descending on certain columns, e.g. numeric.
+      sortDescFirst: this.sortDescFirst, // To-Do, workaround to prevent sort descending on certain columns, e.g. numeric.
       onExpandedChange: (updater: Updater<ExpandedState>) => this.updatingState(updater, 'expanded'),
       onSortingChange: (updater: Updater<ModusTableSortingState>) => this.setSorting(updater),
       onPaginationChange: (updater: PaginationState) => this.setPagination(updater),
@@ -316,6 +343,33 @@ export class ModusTable {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       onStateChange: () => {},
       renderFallbackValue: null,
+      meta: {
+        updateData: (rowId: string, columnId: string, value: string) => {
+          this.setData((old) => {
+            const newData = [...old];
+            // rowId is a string of IDs for row with nested information.
+            const idArray: number[] = rowId.split('.')?.map((id) => parseInt(id));
+            const rowIndex = idArray[0];
+
+            // If data is edited in parent row.
+            if (idArray.length === 1) {
+              newData[rowIndex][columnId] = value;
+            }
+            // If data is edited in nth child row
+            else {
+              let nthChildRowData = newData[rowIndex];
+              let i = 1;
+              while (i < idArray.length) {
+                nthChildRowData = nthChildRowData.subRows[idArray[i]];
+                i++;
+              }
+              nthChildRowData[columnId] = value;
+            }
+            this.rowUpdated.emit(newData[rowIndex]);
+            return newData;
+          });
+        },
+      },
     };
     this.table = createTable(options);
     if (this.pagination) {
@@ -331,6 +385,11 @@ export class ModusTable {
         },
       }));
     }
+  }
+
+  private setData(updater: Updater<unknown>) {
+    this.data = updater instanceof Function ? updater(this.data) : updater;
+    this.table.options.data = this.data;
   }
 
   private updatingState(updater: Updater<unknown>, key: string) {
@@ -440,18 +499,21 @@ export class ModusTable {
                   </tr>
                 ))}
               </thead>
-              <tbody>
-                {this.table.getRowModel()?.rows.map((row) => {
+              <tbody ref={(ref: HTMLElement) => (this.tableBodyEl = ref)}>
+                {this.table.getRowModel()?.rows.map((row, rowIndex) => {
                   return (
                     <tr key={row.id} class={this.hover && 'enable-hover'}>
                       {row.getVisibleCells()?.map((cell, cellIndex) => {
                         return (
                           <ModusTableCell
-                            cell={cell}
                             row={row}
+                            rowIndex={rowIndex}
+                            cell={cell}
                             cellIndex={cellIndex}
                             rowsExpandable={this.rowsExpandable}
                             frozenColumns={this.frozenColumns}
+                            table={this.table}
+                            tableBodyEl={this.tableBodyEl}
                             onLinkClick={(link: ModusTableCellLink) => this.cellLinkClick.emit(link)}
                           />
                         );

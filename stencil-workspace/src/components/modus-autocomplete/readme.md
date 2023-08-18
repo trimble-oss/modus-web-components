@@ -38,6 +38,10 @@
 
 ## Dependencies
 
+### Used by
+
+ - [modus-table](../modus-table)
+
 ### Depends on
 
 - [modus-text-input](../modus-text-input)
@@ -46,6 +50,7 @@
 ```mermaid
 graph TD;
   modus-autocomplete --> modus-text-input
+  modus-table --> modus-autocomplete
   style modus-autocomplete fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

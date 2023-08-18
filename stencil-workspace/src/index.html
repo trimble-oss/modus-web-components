@@ -9,152 +9,80 @@
   <script type="module" src="/build/modus-web-components.esm.js"></script>
   <script nomodule src="/build/modus-web-components.js"></script>
 
-    <!--Manually load Modus font-family-->
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
-    <link rel="stylesheet" src="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" />
-  </head>
+  <link rel="stylesheet" href="/build/modus-web-components.css" />
 
-  <body>
-    <modus-table hover="false" sort="false" column-resize="false" column-reorder="false" pagination="true" show-sort-icon-on-hover="false" summary-row="false" full-width="false" show-table-panel="false" rows-expandable="false" max-height="" max-width="" class="hydrated">
-    </modus-table>
+  <!--Manually load Modus font-family-->
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+  <link rel="stylesheet" src="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" />
+</head>
 
-    <script>
-      function range(len) {
-        const arr = [];
-        for (let i = 0; i < len; i++) {
-          arr.push(i);
-        }
-        return arr;
+<body>
+  <!-- Test components here -->
+  <modus-table></modus-table>
+</body>
+
+<script>
+  const modusDataTable = document.querySelector('modus-table');
+  modusDataTable.hover = true;
+  modusDataTable.columnReorder = true;
+  modusDataTable.data = [
+    {
+      age: 40,
+      firstName: 'Gordon',
+      lastName: 'Lemke',
+      city: 'Chennai',
+      status: 'single',
+      subRows: undefined,
+      visits: 434,
+    },
+    {
+      age: 40,
+      firstName: 'Gordon',
+      lastName: 'Lemke',
+      city: 'Mumbai',
+      status: 'single',
+      subRows: undefined,
+      visits: 434,
+    },
+    {
+      firstName: 'Elliott',
+      lastName: 'Bosco',
+      age: 21,
+      visits: 348,
+      city: 'Hyderabad',
+      status: 'complicated',
+    },
+    {
+      firstName: 'Agnes',
+      lastName: 'Breitenberg',
+      age: 34,
+      visits: 639,
+      city: 'Bangalore',
+      status: 'single',
+    },
+    {
+      firstName: 'Nicolette',
+      lastName: 'Stamm',
+      age: 13,
+      visits: 518,
+      city: 'Pune',
+      status: 'relationship',
     }
+  ];
 
-    function randomNumber(min, max) {
-      return Math.floor(Math.random() * (max - min) + min);
-    }
+  modusDataTable.columns = [
+    { header: 'First Name', accessorKey: 'firstName', id: 'first-name', dataType: 'text', },
+    { header: 'Last Name', accessorKey: 'lastName', id: 'last-name', dataType: 'text', editable: true },
+    { header: 'Age', accessorKey: 'age', id: 'age', dataType: 'integer', editable: true },
+    { header: 'DOB', accessorKey: 'dob', id: 'dob', dataType: 'date', dateFormat: 'mm/dd/yyyy', editable: true },
+    {
+      header: 'Status', accessorKey: 'status', id: 'status', dataType: 'text', editable: true, editType: 'dropdown', dropdownValues: [{ display: 'single' }, { display: 'relationship' }, { display: 'complicated' },]
+    },
+    {
+      header: 'City', accessorKey: 'city', id: 'city', dataType: 'string', editable: true, editType: 'autocomplete', autocompleteValues: ['Austin', 'New York', 'Seattle', 'Chicago', 'Denver', 'Los Angeles', 'New Orleans']
+    },
 
-    function newPerson() {
-      const namesIndex = randomNumber(0, 17);
-      const firstName = Names[namesIndex].split(' ')[0];
-      const lastName = Names[namesIndex].split(' ')[1];
-      return {
-        firstName,
-        lastName,
-        age: randomNumber(20, 80) * 30,
-        visits: randomNumber(1, 100) * 100,
-        progress: randomNumber(1, 100) * 100,
-        status: randomNumber(1, 100) > 66 ? 'Verified' : randomNumber(0, 100) > 33 ? 'Pending' : 'Rejected',
-        income: randomNumber(1000, 1000000),
-        createdAt: new Date(randomNumber(1990, 2020), randomNumber(0, 11), randomNumber(1, 30)).toDateString(),
-      };
-    }
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-    function makeData(...lens) {
-      const makeDataLevel = (depth = 0) => {
-        const len = lens[depth];
-        return range(len).map(() => {
-          return {
-            ...newPerson(),
-            subRows: lens[depth + 1] ? makeDataLevel(depth + 1) : undefined,
-          };
-        });
-      };
-
-      return makeDataLevel();
-    }
-
-    const Names = [
-      'Mickey Mouse',
-      'Bugs Bunny',
-      'Homer Simpson',
-      'Fred Flintstone',
-      'Sponge Bob',
-      'Daffy Duck',
-      'Charlie Brown',
-      'Scooby Doo',
-      'Tom Cat',
-      'Jerry Mouse',
-      'Mighty Mouse',
-      'Wile E Coyote',
-      'Tweety Bird',
-      'Pink Panther',
-      'Road Runner',
-      'Patrick Star',
-      'Roger Rabbit',
-      'Papa Smurf',
-      'Buzz Lightyear',
-    ];
-    const DefaultColumns = [
-      {
-        header: 'First Name',
-        accessorKey: 'firstName',
-        id: 'first-name',
-        dataType: 'text',
-        size: 150,
-        minSize: 80,
-        footer: 'Total',
-      },
-      {
-        header: 'Last Name',
-        accessorKey: 'lastName',
-        id: 'last-name',
-        dataType: 'text',
-        size: 150,
-        minSize: 80,
-      },
-      {
-        header: 'Age',
-        accessorKey: 'age',
-        id: 'age',
-        dataType: 'integer',
-        size: 80,
-        minSize: 60,
-      },
-      {
-        header: 'Visits',
-        accessorKey: 'visits',
-        id: 'visits',
-        dataType: 'integer',
-        maxSize: 80,
-        showTotal: true,
-        minSize: 80,
-      },
-      {
-        header: 'Status',
-        accessorKey: 'status',
-        id: 'status',
-        dataType: 'text',
-        minSize: 80,
-      },
-      {
-        header: 'Profile Progress',
-        accessorKey: 'progress',
-        id: 'progress',
-        dataType: 'integer',
-        minSize: 100,
-      },
-      {
-        header: 'Income',
-        accessorKey: 'income',
-        id: 'income',
-        dataType: 'integer',
-        size: 100,
-        minSize: 100,
-      },
-      {
-        header: 'Created At',
-        accessorKey: 'createdAt',
-        id: 'createdAt',
-        dataType: 'string',
-        size: 150,
-        minSize: 150,
-      },
-    ];
-
-
-    document.querySelector('modus-table').columns = DefaultColumns;
-      document.querySelector('modus-table').data = makeData(2005);
-      document.querySelector('modus-table').pageSizeList = [7, 10, 20];
-
-     </script>
- </body>
+  ];
+</script>
 
 </html>

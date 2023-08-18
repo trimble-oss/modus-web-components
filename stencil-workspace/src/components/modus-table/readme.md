@@ -13,6 +13,7 @@
 | `columnResize`         | `column-resize`           |                                                                                                     | `boolean`                              | `false`                                                   |
 | `columns` _(required)_ | --                        | (Required) To display headers in the table.                                                         | `ModusTableColumn<unknown, unknown>[]` | `undefined`                                               |
 | `data` _(required)_    | --                        | (Required) To display data in the table.                                                            | `unknown[]`                            | `undefined`                                               |
+| `dateFormat`           | `date-format`             | (Optional) Date format, by default is set to mm/dd/yyyy.                                            | `string`                               | `'mm/dd/yyyy'`                                            |
 | `displayOptions`       | --                        | (Optional) To control display options of table.                                                     | `ModusTableDisplayOptions`             | `{     borderless: false,     cellBorderless: false,   }` |
 | `fullWidth`            | `full-width`              |                                                                                                     | `boolean`                              | `false`                                                   |
 | `hover`                | `hover`                   | (Optional) To enable row hover in table.                                                            | `boolean`                              | `false`                                                   |
@@ -25,6 +26,7 @@
 | `showSortIconOnHover`  | `show-sort-icon-on-hover` | (Optional) To display sort icon on hover.                                                           | `boolean`                              | `false`                                                   |
 | `showTablePanel`       | `show-table-panel`        | (Optional) To display table panel.                                                                  | `boolean`                              | `false`                                                   |
 | `sort`                 | `sort`                    | (Optional) To sort data in table.                                                                   | `boolean`                              | `false`                                                   |
+| `sortDescFirst`        | `sort-desc-first`         | (Optional) To sort decending or ascending.                                                          | `boolean`                              | `false`                                                   |
 | `summaryRow`           | `summary-row`             | (Optional) To display summary row.                                                                  | `boolean`                              | `false`                                                   |
 
 
@@ -33,6 +35,7 @@
 | Event           | Description                     | Type                              |
 | --------------- | ------------------------------- | --------------------------------- |
 | `cellLinkClick` | Emits the link that was clicked | `CustomEvent<ModusTableCellLink>` |
+| `rowUpdated`    | Emits updated row data          | `CustomEvent<unknown>`            |
 | `sortChange`    | Emits event on sort change      | `CustomEvent<ColumnSort[]>`       |
 
 
@@ -73,21 +76,28 @@ Type: `Promise<void>`
 ### Depends on
 
 - [modus-table-panel](./parts/panel/modus-table-panel)
-- [modus-tooltip](../modus-tooltip)
 - [modus-select](../modus-select)
+- [modus-autocomplete](../modus-autocomplete)
+- [modus-date-picker](../modus-date-picker)
+- [modus-date-input](../modus-date-input)
+- [modus-tooltip](../modus-tooltip)
 - [modus-pagination](../modus-pagination)
 
 ### Graph
 ```mermaid
 graph TD;
   modus-table --> modus-table-panel
-  modus-table --> modus-tooltip
   modus-table --> modus-select
+  modus-table --> modus-autocomplete
+  modus-table --> modus-date-picker
+  modus-table --> modus-date-input
+  modus-table --> modus-tooltip
   modus-table --> modus-pagination
   modus-table-panel --> modus-table-dropdown-menu
   modus-table-dropdown-menu --> modus-table-columns-visibility
   modus-table-columns-visibility --> modus-checkbox
   modus-table-columns-visibility --> modus-button
+  modus-autocomplete --> modus-text-input
   style modus-table fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
