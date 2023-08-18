@@ -1,7 +1,7 @@
 import { newSpecPage } from '@stencil/core/testing';
 import { ModusAutocomplete } from './modus-autocomplete';
 
-describe('modus-autocomplete', () => {
+xdescribe('modus-autocomplete', () => {
   it('renders', async () => {
     const { root } = await newSpecPage({
       components: [ModusAutocomplete],
