@@ -48,7 +48,10 @@ export const ModusTableSummaryRow: FunctionalComponent<ModusTableSummaryRowProps
               class={`
                 ${frozenColumns.includes(header.id) ? 'sticky-left' : ''}
                 ${header.column.columnDef[PropertyDataType] === ModusTableColumnDataType.Integer ? 'text-align-right' : ''}
-              `}>
+              `}
+              style={{
+                left: frozenColumns.includes(header.id) && rowSelection && '47px',
+              }}>
               {header.column.columnDef[PropertyShowTotal] ? calculateSum(tableData, header) : header.column.columnDef.footer}
             </td>
           ))}

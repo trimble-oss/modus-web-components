@@ -447,7 +447,7 @@ export class ModusTable {
                 {headerGroups?.map((headerGroup, index) => (
                   <tr key={headerGroup.id} ref={(element: HTMLTableRowElement) => (this.tableHeaderRowRef = element)}>
                     {this.rowSelection && (
-                      <th class="header-row-checkbox sticky-left">
+                      <th class="row-checkbox sticky-left">
                         {multiple && (
                           <modus-checkbox
                             checked={this.table.getIsAllRowsSelected()}
@@ -486,7 +486,7 @@ export class ModusTable {
                   return (
                     <tr key={row.id} class={this.hover && 'enable-hover'}>
                       {this.rowSelection && (
-                        <td class="body-row-checkbox sticky-left" style={{ top: !this.fullWidth && '53px' }}>
+                        <td class="row-checkbox sticky-left">
                           <modus-checkbox
                             checked={row.getIsSelected()}
                             indeterminate={multiple && row.getIsSomeSelected()}

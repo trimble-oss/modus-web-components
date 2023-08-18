@@ -37,7 +37,7 @@ export const ModusTableCell: FunctionalComponent<ModusTableCellProps> = ({
       `}
       style={{
         width: `${cell.column.getSize()}px`,
-        left: frozenColumns.includes(cell.column.id) && rowSelection && '48px',
+        left: frozenColumns.includes(cell.column.id) && rowSelection && '47px',
       }}>
       <div
         class={`table-cell wrap-text${

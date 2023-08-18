@@ -26,6 +26,15 @@ table {
   font-size: $rem-14px;
   width: 100%;
 
+  th,
+  td {
+    &.row-checkbox {
+      padding: 0.5rem !important;
+      width: 46px;
+      box-sizing: border-box;
+    }
+  }
+
   thead {
     position: sticky;
     top: 0;
@@ -43,14 +52,14 @@ table {
         padding: $rem-8px $rem-8px $rem-8px $rem-16px;
         position: relative;
 
-        &.header-row-checkbox {
-          box-shadow: none;
-          min-width: $rem-32px;
-          padding: 0 $rem-6px 0 $rem-8px;
-          top: 0;
-          width: 37px;
-          z-index: 2;
-        }
+        // &.header-row-checkbox {
+        //   box-shadow: none;
+        //   min-width: $rem-32px;
+        //   padding: 0 $rem-6px 0 $rem-8px;
+        //   top: 0;
+        //   width: 37px;
+        //   z-index: 2;
+        // }
 
         .resize-handle:focus-visible {
           border-right: 2px solid $modus-table-header-color;
@@ -200,16 +209,16 @@ table {
           }
         }
 
-        &.body-row-checkbox {
-          padding: 0 $rem-6px 0 $rem-8px;
-          top: $rem-48px;
-          width: 37px;
-          z-index: 2;
+        // &.body-row-checkbox {
+        //   padding: 0 $rem-6px 0 $rem-8px;
+        //   top: $rem-48px;
+        //   width: 37px;
+        //   z-index: 2;
 
-          &:first-child {
-            border-top: $rem-1px $modus-table-border-color solid; /* Remove the top border from all but the first checkbox-column */
-          }
-        }
+        //   &:first-child {
+        //     border-top: $rem-1px $modus-table-border-color solid; /* Remove the top border from all but the first checkbox-column */
+        //   }
+        // }
       }
 
       &.enable-hover {
@@ -225,6 +234,7 @@ table {
   tfoot {
     tr {
       &.summary-row {
+        background-color: $modus-table-header-bg;
         bottom: 0;
         box-shadow: 1px -1px $modus-table-border-color;
         position: sticky;

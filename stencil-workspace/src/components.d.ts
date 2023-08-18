@@ -17,6 +17,7 @@ import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/
 import { ModusTableSortingState } from "./components/modus-table/models";
 import { Column, Table } from "@tanstack/table-core";
 import { Tab } from "./components/modus-tabs/modus-tabs";
+import { ModusAutocompleteOption as ModusAutocompleteOption1 } from "./components/modus-autocomplete/modus-autocomplete";
 import { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
 import { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
@@ -31,6 +32,7 @@ export { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/
 export { ModusTableSortingState } from "./components/modus-table/models";
 export { Column, Table } from "@tanstack/table-core";
 export { Tab } from "./components/modus-tabs/modus-tabs";
+export { ModusAutocompleteOption as ModusAutocompleteOption1 } from "./components/modus-autocomplete/modus-autocomplete";
 export { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
 export { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export namespace Components {
@@ -109,6 +111,10 @@ export namespace Components {
           * The autocomplete's label.
          */
         "label": string;
+        /**
+          * To enable multiple selection.
+         */
+        "multiple": boolean;
         /**
           * The autocomplete's no results sub-text.
          */
@@ -1144,6 +1150,7 @@ export namespace Components {
           * (optional) Whether the input is required.
          */
         "required": boolean;
+        "selectedOptions": ModusAutocompleteOption1[];
         /**
           * (optional) The input's size.
          */
@@ -1899,6 +1906,10 @@ declare namespace LocalJSX {
           * The autocomplete's label.
          */
         "label"?: string;
+        /**
+          * To enable multiple selection.
+         */
+        "multiple"?: boolean;
         /**
           * The autocomplete's no results sub-text.
          */
@@ -3089,6 +3100,7 @@ declare namespace LocalJSX {
           * (optional) Whether the input is required.
          */
         "required"?: boolean;
+        "selectedOptions"?: ModusAutocompleteOption1[];
         /**
           * (optional) The input's size.
          */

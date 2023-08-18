@@ -62,7 +62,7 @@ export const ModusTableHeader: FunctionalComponent<ModusTableHeaderProps> = ({
       `}
       style={{
         width: `${header.getSize()}px`,
-        left: frozenColumns.includes(header.id) && rowSelection && '48px',
+        left: frozenColumns.includes(header.id) && rowSelection && '47px',
       }}
       aria-label={header.column.columnDef.header}
       role="columnheader"

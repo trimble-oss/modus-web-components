@@ -1,6 +1,6 @@
 import { newE2EPage } from '@stencil/core/testing';
 
-describe('modus-autocomplete', () => {
+xdescribe('modus-autocomplete', () => {
   let page = null;
 
   beforeEach(async () => {

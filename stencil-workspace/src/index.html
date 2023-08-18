@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+    <title>Trimble Modus Web Components</title>
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
-  <title>Trimble Modus Web Components</title>
+    <script type="module" src="/build/modus-web-components.esm.js"></script>
+    <script nomodule src="/build/modus-web-components.js"></script>
 
-  <script type="module" src="/build/modus-web-components.esm.js"></script>
-  <script nomodule src="/build/modus-web-components.js"></script>
+    <link rel="stylesheet" href="/build/modus-web-components.css" />
 
     <!--Manually load Modus font-family-->
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
@@ -15,7 +16,7 @@
   </head>
 
   <body>
-    <modus-table hover="false" sort="false" column-resize="false" column-reorder="false" pagination="true" show-sort-icon-on-hover="false" summary-row="false" full-width="false" show-table-panel="false" rows-expandable="false" max-height="" max-width="" class="hydrated">
+    <modus-table>
     </modus-table>
 
     <script>
@@ -150,16 +151,43 @@
     ];
 
 
-    document.querySelector('modus-table').columns = DefaultColumns;
-      document.querySelector('modus-table').data = makeData(2005);
-      document.querySelector('modus-table').pageSizeList = [7, 10, 20];
-      document.querySelector('modus-table').rowSelection =  true;
-      document.querySelector('modus-table').rowSelectionOptions= {
+
+const DefaultArgs = {
+  hover: false,
+  sort: false,
+  columnResize: false,
+  columnReorder: false,
+  pagination: false,
+  showSortIconOnHover: false,
+  summaryRow: false,
+  fullWidth: false,
+  pageSizeList: [7, 10, 20],
+  showTablePanel: false,
+  columns: DefaultColumns,
+  data: makeData(5),
+  panelOptions: {},
+  displayOptions: {},
+  rowsExpandable: false,
+  maxHeight: '',
+  maxWidth: '800px',
+  rowSelection: false,
+  rowSelectionOptions: {},
+};
+const finalArgs = { ...DefaultArgs, fullWidth:false, columns: DefaultColumns, data: makeData(10000, 1,1 ),pagination: true, pageSizeList: [5, 10, 50], sort: true , hover: true, rowsExpandable: true, summaryRow: true , columnResize: true,   panelOptions: {
+  columnsVisibility: {
+    title: '',
+    requiredColumns: ['age', 'visits'],
+  }
+},
+rowSelection: true, rowSelectionOptions: {
   multiple: true,
   subRowSelection: true
-};
+}};
+
+Object.keys(finalArgs).forEach(key => {
+  document.querySelector('modus-table')[key] = finalArgs[key];
+});
 
      </script>
  </body>
-
 </html>

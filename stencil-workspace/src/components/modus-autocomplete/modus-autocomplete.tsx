@@ -10,6 +10,7 @@ import {
   Listen,
   Element,
   Watch,
+  Host,
 } from '@stencil/core';
 import { IconSearch } from '../icons/icon-search';
 
@@ -85,6 +86,9 @@ export class ModusAutocomplete {
   /** The autocomplete's search value. */
   @Prop() value: string;
 
+  /** To enable multiple selection. */
+  @Prop() multiple = true;
+
   /** An event that fires when a dropdown option is selected. Emits the option id. */
   @Event() optionSelected: EventEmitter<string>;
 
@@ -96,7 +100,7 @@ export class ModusAutocomplete {
   @State() visibleOptions: ModusAutocompleteOption[] = [];
   @State() customOptions: Array<any> = [];
   @State() visibleCustomOptions: Array<any> = [];
-
+  @State() selectedOptions: ModusAutocompleteOption[] = [];
   componentWillLoad(): void {
     this.convertOptions();
 
@@ -152,9 +156,24 @@ export class ModusAutocomplete {
   };
 
   handleOptionClick = (option: ModusAutocompleteOption) => {
-    this.handleSearchChange(option.value);
-    this.hasFocus = false;
-    this.optionSelected.emit(option.id);
+    // Check if the multiple prop is true
+    if (this.multiple) {
+      // If it is true, add the selected option to the selectedOptions array
+      const isSelected = this.selectedOptions.some((selectedOption) => selectedOption.id === option.id);
+
+      if (!isSelected) {
+        // Option is not selected, add it
+        this.selectedOptions = [...this.selectedOptions, option];
+      }
+    } else {
+      // If it is false, clear the value and emit the optionSelected event
+      this.handleSearchChange('');
+      this.hasFocus = false;
+      this.selectedOptions = [...this.selectedOptions, option];
+      this.optionSelected.emit(option.id);
+      // Clear the value to reset the input
+      this.value = '';
+    }
   };
 
   handleSearchChange = (search: string) => {
@@ -208,6 +227,11 @@ export class ModusAutocomplete {
     </div>
   );
 
+  handleClearAllClick() {
+    this.selectedOptions = [];
+    this.hasFocus = false;
+  }
+
   TextInput = () => (
     <modus-text-input
       clearable={this.clearable}
@@ -219,46 +243,54 @@ export class ModusAutocomplete {
       required={this.required}
       size={this.size}
       value={this.value}
+      selectedOptions={this.selectedOptions}
     />
   );
 
   render(): unknown {
     const classes = `autocomplete ${this.classBySize.get(this.size)}`;
     return (
-      <div
-        aria-disabled={this.disabled ? 'true' : undefined}
-        aria-invalid={!!this.errorText}
-        aria-label={this.ariaLabel}
-        aria-readonly={this.readOnly}
-        aria-required={this.required}
-        class={classes}
-        onFocusin={() => (this.hasFocus = true)}>
-        {this.TextInput()}
-        <div
-          class="options-container"
-          style={{ maxHeight: this.dropdownMaxHeight, zIndex: this.dropdownZIndex, overflowY: 'auto' }}>
-          <ul>
-            {this.displayOptions() &&
-              this.visibleOptions?.map((option) => {
-                return (
-                  <li class="text-option" onClick={() => this.handleOptionClick(option)}>
-                    {option.value}
-                  </li>
-                );
-              })}
-            {this.displayOptions() &&
-              this.visibleCustomOptions?.map((option) => (
-                <li
-                  class="custom-option"
-                  onClick={() => this.handleCustomOptionClick(option)}
-                  innerHTML={option.outerHTML}
-                />
-              ))}
-          </ul>
-          {this.displayNoResults() && <NoResultsFound text={this.noResultsFoundText} subtext={this.noResultsFoundSubtext} />}
+      <Host>
+        <div class="clear-button" style={{ color: '#217cbb', cursor: 'pointer' }} onClick={() => this.handleClearAllClick()}>
+          Clear All
         </div>
-        {this.CustomOptionsSlot()}
-      </div>
+        <div
+          aria-disabled={this.disabled ? 'true' : undefined}
+          aria-invalid={!!this.errorText}
+          aria-label={this.ariaLabel}
+          aria-readonly={this.readOnly}
+          aria-required={this.required}
+          class={classes}
+          onFocusin={() => (this.hasFocus = true)}>
+          {this.TextInput()}
+          <div
+            class="options-container"
+            style={{ maxHeight: this.dropdownMaxHeight, zIndex: this.dropdownZIndex, overflowY: 'auto' }}>
+            <ul>
+              {this.displayOptions() &&
+                this.visibleOptions?.map((option) => {
+                  return (
+                    <li class="text-option" onClick={() => this.handleOptionClick(option)}>
+                      {option.value}
+                    </li>
+                  );
+                })}
+              {this.displayOptions() &&
+                this.visibleCustomOptions?.map((option) => (
+                  <li
+                    class="custom-option"
+                    onClick={() => this.handleCustomOptionClick(option)}
+                    innerHTML={option.outerHTML}
+                  />
+                ))}
+            </ul>
+            {this.displayNoResults() && (
+              <NoResultsFound text={this.noResultsFoundText} subtext={this.noResultsFoundSubtext} />
+            )}
+          </div>
+          {this.CustomOptionsSlot()}
+        </div>
+      </Host>
     );
   }
 }
