@@ -1,9 +1,10 @@
 // eslint-disable-next-line
-import { Component, Event, EventEmitter, h, Method, Prop, Watch } from '@stencil/core';
+import { Component, Event, EventEmitter, h, JSX, Method, Prop, Watch } from '@stencil/core';
 import { IconSearch } from '../icons/icon-search';
 import { IconClose } from '../icons/icon-close';
 import { IconVisibility } from '../icons/icon-visibility';
 import { IconVisibilityOff } from '../icons/icon-visibility-off';
+import { ModusAutocompleteOption } from '../modus-autocomplete/modus-autocomplete';
 
 @Component({
   tag: 'modus-text-input',
@@ -67,7 +68,7 @@ export class ModusTextInput {
 
   /** (optional) The input's valid state text. */
   @Prop() validText: string;
-
+  @Prop() selectedOptions: ModusAutocompleteOption[] = [];
   /** (optional) The input's value. */
   @Prop() value: string;
   @Watch('value')
@@ -116,6 +117,23 @@ export class ModusTextInput {
         'Show password as plain text. ' + 'Warning: this will display your password on the screen.'
       );
     }
+  }
+  handleChipClose(index: number) {
+    this.selectedOptions.splice(index, 1);
+    this.selectedOptions = [...this.selectedOptions];
+  }
+
+  renderSelectedOptionChips(): JSX.Element[] {
+    return this.selectedOptions?.map((selectedOption, index) => (
+      <modus-chip
+        style={{ marginRight: '4px' }}
+        key={selectedOption.id}
+        value={selectedOption.value}
+        show-close
+        onCloseClick={() => this.handleChipClose(index)}>
+        {selectedOption.value}
+      </modus-chip>
+    ));
   }
 
   render(): unknown {
@@ -180,6 +198,7 @@ export class ModusTextInput {
             value={this.value}
             autofocus={this.autoFocusInput}
           />
+          {this.renderSelectedOptionChips()}
           {showPasswordToggle && (
             <div
               class="icons toggle-password"
