@@ -43,6 +43,15 @@ table {
         padding: $rem-8px $rem-8px $rem-8px $rem-16px;
         position: relative;
 
+        &.header-row-checkbox {
+          box-shadow: none;
+          min-width: $rem-32px;
+          padding: 0 $rem-6px 0 $rem-8px;
+          top: 0;
+          width: 37px;
+          z-index: 2;
+        }
+
         .resize-handle:focus-visible {
           border-right: 2px solid $modus-table-header-color;
         }
@@ -190,6 +199,17 @@ table {
             text-wrap: nowrap;
           }
         }
+
+        &.body-row-checkbox {
+          padding: 0 $rem-6px 0 $rem-8px;
+          top: $rem-48px;
+          width: 37px;
+          z-index: 2;
+
+          &:first-child {
+            border-top: $rem-1px $modus-table-border-color solid; /* Remove the top border from all but the first checkbox-column */
+          }
+        }
       }
 
       &.enable-hover {
@@ -208,7 +228,7 @@ table {
         bottom: 0;
         box-shadow: 1px -1px $modus-table-border-color;
         position: sticky;
-        z-index: 1;
+        z-index: 2;
 
         td {
           background-color: $modus-table-header-bg;
@@ -229,7 +249,11 @@ table {
     th,
     td {
       border-right: $rem-1px $modus-table-border-color solid;
-      box-sizing: border-box;
+
+      /* The box-sizing property is set to border-box to include padding and border in the element's total width.
+      However, in the context of setting the width for the row selection column, the border-box property is causing issues.
+      If removing this property doesn't negatively impact the table's layout, it can be safely removed. */
+      // box-sizing: border-box;
       min-height: 3rem;
       padding: 0.25rem 1rem;
       text-align: left;

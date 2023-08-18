@@ -1003,6 +1003,14 @@ export namespace Components {
          */
         "panelOptions": ModusTablePanelOptions | null;
         /**
+          * (Optional) To display checkbox.
+         */
+        "rowSelection": boolean;
+        /**
+          * (Optional) To control multiple row selection.
+         */
+        "rowSelectionOptions": RowSelectionOptions;
+        /**
           * (Optional) To display expanded rows.
          */
         "rowsExpandable": boolean;
@@ -2928,6 +2936,10 @@ declare namespace LocalJSX {
          */
         "onCellLinkClick"?: (event: ModusTableCustomEvent<ModusTableCellLink>) => void;
         /**
+          * Event details contains the row(s) selected
+         */
+        "onRowSelectionChange"?: (event: ModusTableCustomEvent<unknown>) => void;
+        /**
           * Emits event on sort change
          */
         "onSortChange"?: (event: ModusTableCustomEvent<ModusTableSortingState>) => void;
@@ -2937,6 +2949,14 @@ declare namespace LocalJSX {
           * (Optional) To display a panel options, which allows access to table operations like hiding columns.
          */
         "panelOptions"?: ModusTablePanelOptions | null;
+        /**
+          * (Optional) To display checkbox.
+         */
+        "rowSelection"?: boolean;
+        /**
+          * (Optional) To control multiple row selection.
+         */
+        "rowSelectionOptions"?: RowSelectionOptions;
         /**
           * (Optional) To display expanded rows.
          */

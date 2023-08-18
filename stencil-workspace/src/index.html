@@ -153,6 +153,11 @@
     document.querySelector('modus-table').columns = DefaultColumns;
       document.querySelector('modus-table').data = makeData(2005);
       document.querySelector('modus-table').pageSizeList = [7, 10, 20];
+      document.querySelector('modus-table').rowSelection =  true;
+      document.querySelector('modus-table').rowSelectionOptions= {
+  multiple: true,
+  subRowSelection: true
+};
 
      </script>
  </body>

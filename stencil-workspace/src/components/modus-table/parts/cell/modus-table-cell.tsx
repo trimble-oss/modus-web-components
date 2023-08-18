@@ -15,6 +15,7 @@ interface ModusTableCellProps {
   cellIndex: number;
   rowsExpandable: boolean;
   frozenColumns: string[];
+  rowSelection: boolean;
   onLinkClick: (link: ModusTableCellLink) => void;
 }
 
@@ -24,6 +25,7 @@ export const ModusTableCell: FunctionalComponent<ModusTableCellProps> = ({
   cellIndex,
   rowsExpandable,
   frozenColumns,
+  rowSelection,
   onLinkClick,
 }) => {
   return (
@@ -33,7 +35,10 @@ export const ModusTableCell: FunctionalComponent<ModusTableCellProps> = ({
           ${frozenColumns.includes(cell.column.id) ? 'sticky-left' : ''}
           ${cell.column.getIsResizing() ? 'active-resize' : ''}
       `}
-      style={{ width: `${cell.column.getSize()}px` }}>
+      style={{
+        width: `${cell.column.getSize()}px`,
+        left: frozenColumns.includes(cell.column.id) && rowSelection && '48px',
+      }}>
       <div
         class={`table-cell wrap-text${
           cell.column.columnDef[PropertyDataType] === ModusTableColumnDataType.Integer ? 'text-align-right' : ''

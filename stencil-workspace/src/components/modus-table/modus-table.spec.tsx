@@ -12,7 +12,7 @@ describe('modus-table', () => {
       <mock:shadow-root>
         <div>
           <div class="table-container">
-            <table style="table-layout: fixed;">
+            <table>
               <thead>
                 <tr></tr>
               </thead>
