@@ -151,6 +151,12 @@ table {
     tr {
       color: $modus-table-body-color;
 
+      .wrap-text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-wrap: nowrap;
+      }
+
       td {
         background-color: $modus-table-body-bg;
         border-top: $rem-1px $modus-table-border-color solid;
@@ -163,9 +169,6 @@ table {
             color: $modus-table-cell-link-colour;
             cursor: pointer;
             font-weight: $font-weight-semi-bold;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            text-wrap: nowrap;
 
             &:hover {
               text-decoration: underline;

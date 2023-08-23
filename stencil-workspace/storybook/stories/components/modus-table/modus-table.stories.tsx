@@ -20,14 +20,15 @@ function newPerson() {
   const namesIndex = randomNumber(0, 17);
   const firstName = Names[namesIndex].split(' ')[0];
   const lastName = Names[namesIndex].split(' ')[1];
+  const email: string = `${firstName}${lastName}@gmail.com`.toLowerCase();
   return {
     firstName,
     lastName,
     age: randomNumber(20, 80) * 30,
     visits: randomNumber(1, 100) * 100,
+    email:{ display: email, url: email },
     progress: randomNumber(1, 100) * 100,
     status: randomNumber(1, 100) > 66 ? 'Verified' : randomNumber(0, 100) > 33 ? 'Pending' : 'Rejected',
-    income: randomNumber(1000, 1000000),
     createdAt: new Date(randomNumber(1990, 2020), randomNumber(0, 11), randomNumber(1, 30)).toDateString(),
   };
 }
@@ -116,6 +117,14 @@ const DefaultColumns = [
     minSize: 80,
   },
   {
+    header: 'Email',
+    accessorKey: 'email',
+    id: 'email',
+    dataType: 'link',
+    size: 230,
+    minSize: 80,
+    sortingFn: 'sortForHyperlink'},
+  {
     header: 'Status',
     accessorKey: 'status',
     id: 'status',
@@ -130,14 +139,6 @@ const DefaultColumns = [
     minSize: 100,
   },
   {
-    header: 'Income',
-    accessorKey: 'income',
-    id: 'income',
-    dataType: 'integer',
-    size: 100,
-    minSize: 100,
-  },
-  {
     header: 'Created At',
     accessorKey: 'createdAt',
     id: 'createdAt',
@@ -147,15 +148,6 @@ const DefaultColumns = [
   },
 ];
 
-const emailColumn = {
-  header: 'Email',
-  accessorKey: 'email',
-  id: 'email',
-  dataType: 'link',
-  size: 230,
-  minSize: 80,
-  sortingFn: 'sortForHyperlink'
-};
 
 const DefaultArgs = {
   hover: false,
@@ -438,14 +430,7 @@ const valueFormatterTable = (pageSizeList, panelOptions, displayOptions) => {
 };
 
 export const Hyperlink = Template.bind({});
-const HyperlinkColumns = [...DefaultColumns];
-HyperlinkColumns.splice(2, 1, emailColumn);
-const HyperlinkData = makeData(5).map((rowData: object) => {
-  const email: string = `${rowData['firstName']}${rowData['lastName']}@gmail.com`.toLowerCase();
-  rowData['email'] = { display: email, url: email };
-  return rowData;
-});
-Hyperlink.args = { ...DefaultArgs, columns: HyperlinkColumns, data: HyperlinkData };
+Hyperlink.args = { ...DefaultArgs, columns: DefaultColumns, data: makeData(7) };
 
 export const ColumnResize = Template.bind({});
 ColumnResize.args = { ...DefaultArgs, columnResize: true };
@@ -475,15 +460,8 @@ export const ExpandableRows = Template.bind({});
 ExpandableRows.args = { ...DefaultArgs, rowsExpandable: true, data: makeData(7, 4, 3, 2, 1), fullWidth: true };
 
 export const LargeDataset = Template.bind({});
-const largeDatasetColumns = [...DefaultColumns];
-largeDatasetColumns.splice(2, 1, emailColumn);
-const largeDatasetData = makeData(10000, 2).map((rowData: object) => {
-  const email: string = `${rowData['firstName']}${rowData['lastName']}@gmail.com`.toLowerCase();
-  rowData['email'] = { display: email, url: email };
-  return rowData;
-});
 
-LargeDataset.args = { ...DefaultArgs, columns: largeDatasetColumns, data: largeDatasetData, pagination: true, pageSizeList: [5, 10, 50], sort: true , hover: true, rowsExpandable: true, summaryRow: true , columnResize: true,   panelOptions: {
+LargeDataset.args = { ...DefaultArgs, columns: DefaultColumns, data: makeData(10000, 1,1 ),pagination: true, pageSizeList: [5, 10, 50], sort: true , hover: true, rowsExpandable: true, summaryRow: true , columnResize: true,   panelOptions: {
   columnsVisibility: {
     title: '',
     requiredColumns: ['age', 'visits'],

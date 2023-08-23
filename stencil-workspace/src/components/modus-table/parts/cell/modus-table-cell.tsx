@@ -35,7 +35,7 @@ export const ModusTableCell: FunctionalComponent<ModusTableCellProps> = ({
       `}
       style={{ width: `${cell.column.getSize()}px` }}>
       <div
-        class={`table-cell ${
+        class={`table-cell wrap-text${
           cell.column.columnDef[PropertyDataType] === ModusTableColumnDataType.Integer ? 'text-align-right' : ''
         }`}>
         {

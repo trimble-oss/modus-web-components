@@ -83,16 +83,12 @@ export const ModusTableHeader: FunctionalComponent<ModusTableHeaderProps> = ({
         </div>
       )}
       {/** Column resizing handler */}
-      {frozenColumns.includes(header.id) ? (
-        ''
-      ) : (
-        <ModusTableColumnResizingHandler
-          table={table}
-          header={header}
-          onMouseEnter={() => onMouseEnterResize()}
-          onMouseLeave={() => onMouseLeaveResize()}
-        />
-      )}
+      <ModusTableColumnResizingHandler
+        table={table}
+        header={header}
+        onMouseEnter={() => onMouseEnterResize()}
+        onMouseLeave={() => onMouseLeaveResize()}
+      />
     </th>
   );
 };
