@@ -21,7 +21,8 @@ export class ModusNavbarAppsMenu {
 
   @Event() appOpen: EventEmitter<ModusNavbarApp>;
 
-  clickAppHandler(app: ModusNavbarApp): void {
+  clickAppHandler(event: MouseEvent, app: ModusNavbarApp): void {
+    event.preventDefault();
     window.open(app.url, '_blank');
     this.appOpen.emit(app);
   }
@@ -34,13 +35,13 @@ export class ModusNavbarAppsMenu {
         {this.apps?.map((app) => (
           <div class="app-div">
             {app.showCategory ? <div class="category">{app.category}</div> : null}
-            <div class="app" onClick={() => this.clickAppHandler(app)}>
+            <a class="app" href={app.url} onClick={(event) => this.clickAppHandler(event, app)}>
               <img src={app.logoUrl} />
               <div class="right">
                 <div class="name">{app.name}</div>
                 {app.description ? <div class="description">{app.description}</div> : null}
               </div>
-            </div>
+            </a>
           </div>
         ))}
       </div>
