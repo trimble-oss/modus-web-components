@@ -11,7 +11,7 @@ interface ModusTableCellLinkProps {
 
 export const ModusTableCellLinkElement: FunctionalComponent<ModusTableCellLinkProps> = ({ link, onLinkClick }) => {
   return (
-    <div class="cell-link" onClick={() => onLinkClick(link)}>
+    <div class="cell-link wrap-text" onClick={() => onLinkClick(link)}>
       {link.display}
     </div>
   );
