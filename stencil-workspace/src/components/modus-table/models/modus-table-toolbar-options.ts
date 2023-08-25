@@ -1,5 +1,5 @@
 import ModusTableColumnsVisibilityOptions from './modus-table-columns-visibility-options';
 
-export default interface ModusTablePanelOptions {
+export default interface ModusTableToolbarOptions {
   columnsVisibility?: ModusTableColumnsVisibilityOptions;
 }

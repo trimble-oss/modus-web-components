@@ -5,7 +5,7 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Table } from '@tanstack/table-core';
-import { ArrowDown, ArrowUp, EnterKey, SpaceKey, TabKey } from '../../../constants/constants';
+import { KEYBOARD_DOWN, KEYBOARD_UP, KEYBOARD_ENTER, KEYBOARD_SPACE, KEYBOARD_TAB } from '../../../constants/constants';
 import { JSX } from '@stencil/core/internal';
 import ModusTableColumnsVisibilityOptions from '../../../models/modus-table-columns-visibility-options';
 
@@ -48,7 +48,7 @@ export class ModusTableColumnsVisibility {
   }
 
   handleApplyKeyDown(event: KeyboardEvent): void {
-    if (event.key.toLowerCase() === TabKey && !event.shiftKey) {
+    if (event.key.toLowerCase() === KEYBOARD_TAB && !event.shiftKey) {
       this.toggleDropdown(false);
     }
   }
@@ -67,13 +67,13 @@ export class ModusTableColumnsVisibility {
     };
 
     const eventKey = event.key.toLowerCase();
-    if (eventKey === EnterKey || eventKey === SpaceKey) {
+    if (eventKey === KEYBOARD_ENTER || eventKey === KEYBOARD_SPACE) {
       this.toggleColumnVisibility(columnIndex);
-    } else if (eventKey === ArrowDown) {
+    } else if (eventKey === KEYBOARD_DOWN) {
       currentRefItemIndex = columnIndex + 1 < this.refItemContent.length ? columnIndex + 1 : this.refItemContent.length - 1;
       recursiveTillAnotherFocusItem(currentRefItemIndex, true);
       event.preventDefault();
-    } else if (eventKey === ArrowUp) {
+    } else if (eventKey === KEYBOARD_UP) {
       currentRefItemIndex = columnIndex - 1 >= 0 ? columnIndex - 1 : 0;
       recursiveTillAnotherFocusItem(currentRefItemIndex, false);
       event.preventDefault();

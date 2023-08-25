@@ -19,6 +19,10 @@
   }
 }
 
+.borderless {
+  border: none !important;
+}
+
 table {
   border-collapse: separate; // Sticky table cells lose their border when used with `border-collapse:collapse`.
   border-spacing: 0; // Set `border-collapse: separate` and `border-spacing: 0` to resolve the problem metion in above line.
@@ -26,19 +30,58 @@ table {
   font-size: $rem-14px;
   width: 100%;
 
+  &.cell-borderless {
+    th,
+    td,
+    tr {
+      border: none;
+      box-shadow: none;
+    }
+  }
+
   th,
   td {
+    box-sizing: border-box;
+
     &.row-checkbox {
       padding: 0.5rem !important;
       width: 46px;
-      box-sizing: border-box;
     }
+  }
+
+  th.row-checkbox + th.sticky-left,
+  td.row-checkbox + td.sticky-left {
+    left: 46.25px;
   }
 
   thead {
     position: sticky;
     top: 0;
     z-index: 2;
+
+    &.show-resize-cursor {
+      th {
+        cursor: e-resize;
+
+        .can-sort {
+          .sort-icon-container {
+            cursor: e-resize;
+          }
+        }
+      }
+    }
+
+    &.show-column-reorder-cursor:not(.show-resize-cursor) {
+      th:not(.sticky-left) {
+        &:hover {
+          cursor: grab;
+        }
+
+        &:active {
+          cursor: grabbing;
+        }
+      }
+    }
 
     tr {
       color: $modus-table-header-color;
@@ -52,29 +95,16 @@ table {
         padding: $rem-8px $rem-8px $rem-8px $rem-16px;
         position: relative;
 
-        // &.header-row-checkbox {
-        //   box-shadow: none;
-        //   min-width: $rem-32px;
-        //   padding: 0 $rem-6px 0 $rem-8px;
-        //   top: 0;
-        //   width: 37px;
-        //   z-index: 2;
-        // }
-
-        .resize-handle:focus-visible {
-          border-right: 2px solid $modus-table-header-color;
-        }
-
         .can-sort {
           align-items: center;
           display: flex;
           justify-content: space-between;
 
-          .sort-icon-containor {
+          .sort-icon-container {
             cursor: pointer;
             padding: $rem-2px $rem-2px 0;
 
-            .sort-icons {
+            .sort-icon {
               svg {
                 fill: $modus-table-header-color;
               }
@@ -110,7 +140,7 @@ table {
           }
         }
 
-        .can-resize {
+        .resize-handle {
           &:focus-visible {
             outline: none;
           }
@@ -125,23 +155,9 @@ table {
           width: $rem-3px;
         }
 
-        &.can-reorder {
-          &:hover {
-            cursor: grab;
-          }
-
-          &:active {
-            cursor: grabbing;
-          }
-        }
-
-        &.show-resize-cursor {
-          cursor: e-resize;
-
-          .can-sort {
-            .sort-icon-containor {
-              cursor: e-resize;
-            }
+        &:not(.active-resize) {
+          .resize-handle:focus-visible {
+            border-right: 2px solid $modus-table-header-color;
           }
         }
 
@@ -201,24 +217,7 @@ table {
             cursor: pointer;
             display: flex;
           }
-
-          .cell-content {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            text-wrap: nowrap;
-          }
         }
-
-        // &.body-row-checkbox {
-        //   padding: 0 $rem-6px 0 $rem-8px;
-        //   top: $rem-48px;
-        //   width: 37px;
-        //   z-index: 2;
-
-        //   &:first-child {
-        //     border-top: $rem-1px $modus-table-border-color solid; /* Remove the top border from all but the first checkbox-column */
-        //   }
-        // }
       }
 
       &.enable-hover {
@@ -269,7 +268,7 @@ table {
       text-align: left;
 
       &.active-resize {
-        border-right: 2px $modus-primary-color solid;
+        border-right: 2px $modus-primary-color solid !important;
       }
 
       &.text-align-center {
@@ -283,20 +282,14 @@ table {
         z-index: 1;
       }
     }
-  }
 
-  &.borderless {
-    border: none !important;
-  }
+    &.row-selected {
+      background-color: $modus-table-selected-bg;
 
-  &.cell-borderless {
-    th,
-    td {
-      border: none;
-    }
-
-    tr {
-      box-shadow: none;
+      th,
+      td {
+        background-color: $modus-table-selected-bg;
+      }
     }
   }
 }
@@ -370,7 +363,7 @@ table {
     }
   }
 
-  .sort-icon-containor,
+  .sort-icon-container,
   svg {
     display: none;
   }

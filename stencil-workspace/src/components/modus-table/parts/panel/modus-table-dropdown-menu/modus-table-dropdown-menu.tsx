@@ -7,9 +7,9 @@ import {
   Element,
 } from '@stencil/core';
 import { IconHorizontalEllipsis } from '../../../../icons/icon-horizontal-ellipsis';
-import { EnterKey, EscapeKey, SpaceKey } from '../../../constants/constants';
+import { KEYBOARD_ENTER, KEYBOARD_ESCAPE, KEYBOARD_SPACE } from '../../../constants/constants';
 import { Table } from '@tanstack/table-core';
-import ModusTablePanelOptions from '../../../models/modus-table-panel-options';
+import ModusTableToolbarOptions from '../../../models/modus-table-toolbar-options';
 
 @Component({
   tag: 'modus-table-dropdown-menu',
@@ -23,7 +23,7 @@ export class ModusTableDropdownMenu {
   @Prop() table: Table<unknown>;
 
   /** dropdown menu options. */
-  @Prop() options: ModusTablePanelOptions;
+  @Prop() options: ModusTableToolbarOptions;
 
   /** Dropdown visibility state */
   @State() show = false;
@@ -35,34 +35,23 @@ export class ModusTableDropdownMenu {
     if (!withinBoundaries.find((item) => item['className'] === 'dropdown-menu-container')) {
       this.show = false;
     }
-
-    // Another logic to handle click outside
-    // TODO: decide it to keep it if works
-    // if (
-    //     this.element.contains(event.target as HTMLElement) ||
-    //     event.defaultPrevented
-    //   ) {
-    //     return;
-    //   }
-    //   // Collapse when clicked outside
-    //    this.show = false;
   }
 
   menuIconContainerRef: HTMLDivElement;
 
   handleIconKeyDown(event: KeyboardEvent) {
     const eventKey = event.key.toLowerCase();
-    if (eventKey === EnterKey || eventKey === SpaceKey) {
+    if (eventKey === KEYBOARD_ENTER || eventKey === KEYBOARD_SPACE) {
       this.show = true;
       event.preventDefault();
-    } else if (eventKey === EscapeKey) {
+    } else if (eventKey === KEYBOARD_ESCAPE) {
       this.show = false;
       event.preventDefault();
     }
   }
 
   handleDropdownKeyDown(event: KeyboardEvent) {
-    if (event.key.toLowerCase() === EscapeKey) {
+    if (event.key.toLowerCase() === KEYBOARD_ESCAPE) {
       this.show = false;
       this.menuIconContainerRef.focus();
       event.preventDefault();

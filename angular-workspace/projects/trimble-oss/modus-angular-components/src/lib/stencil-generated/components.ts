@@ -1069,7 +1069,7 @@ export declare interface ModusSwitch extends Components.ModusSwitch {
 
 
 @ProxyCmp({
-  inputs: ['columnReorder', 'columnResize', 'columns', 'data', 'displayOptions', 'fullWidth', 'hover', 'maxHeight', 'maxWidth', 'pageSizeList', 'pagination', 'panelOptions', 'rowsExpandable', 'showSortIconOnHover', 'showTablePanel', 'sort', 'summaryRow'],
+  inputs: ['columnReorder', 'columnResize', 'columns', 'data', 'displayOptions', 'fullWidth', 'hover', 'maxHeight', 'maxWidth', 'pageSizeList', 'pagination', 'rowSelection', 'rowSelectionOptions', 'rowsExpandable', 'showSortIconOnHover', 'sort', 'summaryRow', 'toolbar', 'toolbarOptions'],
   methods: ['getColumnData', 'toggleColumnVisibility']
 })
 @Component({
@@ -1077,14 +1077,14 @@ export declare interface ModusSwitch extends Components.ModusSwitch {
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['columnReorder', 'columnResize', 'columns', 'data', 'displayOptions', 'fullWidth', 'hover', 'maxHeight', 'maxWidth', 'pageSizeList', 'pagination', 'panelOptions', 'rowsExpandable', 'showSortIconOnHover', 'showTablePanel', 'sort', 'summaryRow'],
+  inputs: ['columnReorder', 'columnResize', 'columns', 'data', 'displayOptions', 'fullWidth', 'hover', 'maxHeight', 'maxWidth', 'pageSizeList', 'pagination', 'rowSelection', 'rowSelectionOptions', 'rowsExpandable', 'showSortIconOnHover', 'sort', 'summaryRow', 'toolbar', 'toolbarOptions'],
 })
 export class ModusTable {
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['sortChange', 'cellLinkClick']);
+    proxyOutputs(this, this.el, ['sortChange', 'rowSelectionChange', 'cellLinkClick']);
   }
 }
 
@@ -1096,6 +1096,10 @@ export declare interface ModusTable extends Components.ModusTable {
    * Emits event on sort change
    */
   sortChange: EventEmitter<CustomEvent<IModusTableModusTableSortingState>>;
+  /**
+   * Event details contains the row(s) selected
+   */
+  rowSelectionChange: EventEmitter<CustomEvent<unknown>>;
   /**
    * Emits the link that was clicked
    */
@@ -1151,13 +1155,13 @@ export declare interface ModusTableDropdownMenu extends Components.ModusTableDro
   inputs: ['options', 'table']
 })
 @Component({
-  selector: 'modus-table-panel',
+  selector: 'modus-table-toolbar',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
   inputs: ['options', 'table'],
 })
-export class ModusTablePanel {
+export class ModusTableToolbar {
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
@@ -1166,7 +1170,7 @@ export class ModusTablePanel {
 }
 
 
-export declare interface ModusTablePanel extends Components.ModusTablePanel {}
+export declare interface ModusTableToolbar extends Components.ModusTableToolbar {}
 
 
 @ProxyCmp({

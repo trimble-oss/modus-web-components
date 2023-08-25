@@ -3,7 +3,7 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Header, Table } from '@tanstack/table-core';
-import { EnterKey } from '../../constants/constants';
+import { KEYBOARD_ENTER } from '../../constants/constants';
 import { ModusTableColumnResizingHandler } from './modus-table-column-resizing-handler';
 import { ModusTableHeaderSort } from './modus-table-header-sort';
 
@@ -13,11 +13,14 @@ interface ModusTableHeaderProps {
   isNestedParentHeader: boolean;
   showSortIconOnHover: boolean;
   columnReorder: boolean;
-  columnResizeEnabled: boolean;
+  isColumnResizing: boolean;
   frozenColumns: string[];
-  rowSelection: boolean;
-  handleDragStart: (event: MouseEvent, id: string, elementRef: HTMLTableHeaderCellElement) => void;
-  handleKeyboardStart: (event: KeyboardEvent, id: string, elementRef: HTMLTableHeaderCellElement) => void;
+  onDragStart: (
+    event: MouseEvent | KeyboardEvent,
+    id: string,
+    elementRef: HTMLTableCellElement,
+    mouseInteracted: boolean
+  ) => void;
   onMouseEnterResize: () => void;
   onMouseLeaveResize: () => void;
 }
@@ -31,69 +34,67 @@ export const ModusTableHeader: FunctionalComponent<ModusTableHeaderProps> = ({
   isNestedParentHeader,
   showSortIconOnHover,
   columnReorder,
-  columnResizeEnabled,
+  isColumnResizing,
   frozenColumns,
-  rowSelection,
-  handleDragStart,
-  handleKeyboardStart,
+  onDragStart,
   onMouseEnterResize,
   onMouseLeaveResize,
 }) => {
-  let elementRef: HTMLTableHeaderCellElement;
+  let elementRef: HTMLTableCellElement;
+  const { column, id, colSpan, isPlaceholder, getSize } = header;
 
   return (
     <th
-      tabindex={`${!columnResizeEnabled && columnReorder ? '0' : ''}`}
-      key={header.id}
-      colSpan={header.colSpan}
+      tabindex={`${!isColumnResizing && columnReorder ? '0' : ''}`}
+      key={id}
+      colSpan={colSpan}
       /**
        * isNestedParentHeader: If parent in nested headers, `text-align: center` will be applied.
        * frozenColumns.includes(header.id): Checks if the header is to be frozen or not.
-       * columnReorder && !frozenColumns.includes(header.id) && !columnResizeEnabled: Allows column reorder when column in not frozen and column resize is not active/underway.
-       * columnResizeEnabled: If column resize is active, resize curser is displayed.
+       * columnReorder && !frozenColumns.includes(header.id) && !isColumnResizing: Allows column reorder when column in not frozen and column resize is not active/underway.
+       * isColumnResizing: If column resize is active, resize curser is displayed.
        * header.column.getIsResizing(): When a column resize is active/underway.
        */
       class={`
         ${isNestedParentHeader ? 'text-align-center' : ''}
-        ${frozenColumns.includes(header.id) ? 'sticky-left' : ''}
-        ${columnReorder && !frozenColumns.includes(header.id) && !columnResizeEnabled ? 'can-reorder' : ''}
-        ${columnResizeEnabled ? 'show-resize-cursor' : ''}
-        ${header.column.getIsResizing() ? 'active-resize' : ''}
+        ${frozenColumns.includes(id) ? 'sticky-left' : ''}
+        ${column.getIsResizing() ? 'active-resize' : ''}
       `}
       style={{
-        width: `${header.getSize()}px`,
-        left: frozenColumns.includes(header.id) && rowSelection && '47px',
+        width: `${getSize()}px`,
       }}
-      aria-label={header.column.columnDef.header}
+      aria-label={column.columnDef.header}
       role="columnheader"
       scope="col"
-      id={header.id}
-      ref={(element: HTMLTableHeaderCellElement) => (elementRef = element)}
-      onMouseDown={(event: MouseEvent) => handleDragStart(event, header.id, elementRef)}
+      id={id}
+      ref={(element: HTMLTableCellElement) => (elementRef = element)}
+      onMouseDown={(event: MouseEvent) => onDragStart(event, id, elementRef, true)}
       onKeyDown={(event: KeyboardEvent) => {
-        if (event.key.toLowerCase() === EnterKey) {
-          handleKeyboardStart(event, header.id, elementRef);
+        if (event.key.toLowerCase() === KEYBOARD_ENTER) {
+          onDragStart(event, id, elementRef, false);
         }
       }}>
-      {header.isPlaceholder ? null : ( // header.isPlaceholder is Required for nested column headers to display empty cell
-        <div class={header.column.getCanSort() && 'can-sort'}>
-          <span>{header.column.columnDef.header}</span>
-          {header.column.getCanSort() && (
+      {isPlaceholder ? null : ( // header.isPlaceholder is Required for nested column headers to display empty cell
+        <div class={column.getCanSort() && 'can-sort'}>
+          <span>{column.columnDef.header}</span>
+          {column.getCanSort() && (
             <ModusTableHeaderSort
-              column={header.column}
+              column={column}
               showSortIconOnHover={showSortIconOnHover}
-              columnResizeEnabled={columnResizeEnabled}
+              isColumnResizing={isColumnResizing}
             />
           )}
         </div>
       )}
       {/** Column resizing handler */}
-      <ModusTableColumnResizingHandler
-        table={table}
-        header={header}
-        onMouseEnter={() => onMouseEnterResize()}
-        onMouseLeave={() => onMouseLeaveResize()}
-      />
+      {column.getCanResize() ? (
+        <ModusTableColumnResizingHandler
+          table={table}
+          header={header}
+          onMouseEnter={() => onMouseEnterResize()}
+          onMouseLeave={() => onMouseLeaveResize()}
+        />
+      ) : null}
     </th>
   );
 };

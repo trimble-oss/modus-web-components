@@ -11,7 +11,7 @@ interface ModusTableCellExpandIconsProps {
   row: Row<unknown>;
 }
 
-export const ModusTableCellExpandIcons: FunctionalComponent<ModusTableCellExpandIconsProps> = ({ cellIndex, row }) => {
+const ModusTableCellExpandIcons: FunctionalComponent<ModusTableCellExpandIconsProps> = ({ cellIndex, row }) => {
   return (
     <span
       class="expand"
@@ -29,3 +29,5 @@ export const ModusTableCellExpandIcons: FunctionalComponent<ModusTableCellExpand
     </span>
   );
 };
+
+export default ModusTableCellExpandIcons;

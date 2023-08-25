@@ -31,25 +31,26 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
 } from '@tanstack/table-core';
-import { DefaultPageSizes } from './constants/constants';
+import { PAGINATION_DEFAULT_SIZES } from './constants/constants';
 import { ModusTableSortingState } from './models';
 import ColumnDragState from './models/column-drag-state.model';
 import ModusTableCellLink from './models/modus-table-cell-link';
 import ModusTableColumn from './models/modus-table-column';
 import ModusTableDisplayOptions from './models/modus-table-display-options';
-import ModusTablePanelOptions from './models/modus-table-panel-options';
+import ModusTableToolbarOptions from './models/modus-table-toolbar-options';
 import { ModusTableCell } from './parts/cell/modus-table-cell';
 import { ModusTableHeader } from './parts/header/modus-table-header';
-import { ModusTableDragArrows, ModusTableDragItem } from './parts/modus-table-drag-item';
+import { ModusTableColumnDropIndicator, ModusTableColumnDragItem } from './parts/modus-table-drag-item';
 import { ModusTablePagination } from './parts/modus-table-pagination';
 import { ModusTableSummaryRow } from './parts/modus-table-summary-row';
 import { TableHeaderDragDrop } from './utilities/table-header-drag-drop.utility';
-import RowSelectionOptions from './models/row-selection-options';
+import RowSelectionOptions from './models/modus-table-row-selection-options';
+import { JSX } from '@stencil/core/internal';
 
 /**
  * @slot customFooter - Slot for custom footer.
- * @slot panelGroupLeft - Slot for modus data table panel left section.
- * @slot panelGroupRight - Slot for modus data table panel right section.
+ * @slot groupLeft - Slot for custom toolbar options added to the left.
+ * @slot groupRight - Slot for custom toolbar options added to the right.
  */
 @Component({
   tag: 'modus-table',
@@ -98,22 +99,22 @@ export class ModusTable {
   @Prop() pagination: boolean;
 
   /* (optional) To set pagesize for the pagination. */
-  @Prop() pageSizeList: number[] = DefaultPageSizes;
+  @Prop() pageSizeList: number[] = PAGINATION_DEFAULT_SIZES;
 
   /** (Optional) To display summary row. */
   @Prop() summaryRow = false;
 
-  /** (Optional) To display a panel options, which allows access to table operations like hiding columns. */
-  @Prop() panelOptions: ModusTablePanelOptions | null = null;
-  @Watch('panelOptions') onChangePanelOptions() {
+  /** (Optional) To display a toolbar, which allows access to table operations like hiding columns. */
+  @Prop() toolbarOptions: ModusTableToolbarOptions | null = null;
+  @Watch('toolbarOptions') onChangePanelOptions() {
     if (this.table) {
-      this.table.options.enableHiding = !!this.panelOptions?.columnsVisibility;
+      this.table.options.enableHiding = !!this.toolbarOptions?.columnsVisibility;
     }
     this.onChangeOfRowsExpandable();
   }
 
-  /** (Optional) To display table panel. */
-  @Prop() showTablePanel = false;
+  /** (Optional) To display a toolbar for the table. */
+  @Prop() toolbar = false;
 
   /** (Optional) To control display options of table. */
   @Prop() displayOptions?: ModusTableDisplayOptions = {
@@ -148,9 +149,9 @@ export class ModusTable {
     if (this.rowsExpandable) {
       this.frozenColumns.push(this.columnOrder[0]);
     }
-    if (this.panelOptions?.columnsVisibility) {
-      this.panelOptions.columnsVisibility.requiredColumns = [
-        ...this.panelOptions.columnsVisibility.requiredColumns,
+    if (this.toolbarOptions?.columnsVisibility) {
+      this.toolbarOptions.columnsVisibility.requiredColumns = [
+        ...this.toolbarOptions.columnsVisibility.requiredColumns,
         ...this.frozenColumns,
       ];
     }
@@ -192,7 +193,7 @@ export class ModusTable {
   private frozenColumns: string[] = []; // Columns will remain on the left and be unable to resize, reorganize, or modify their visibility.
   /** Column reorder variables start */
   private tableHeaderRowRef: HTMLTableRowElement;
-  private columnResizeEnabled = false;
+  private isColumnResizing = false;
   private onMouseMove = (event: MouseEvent) => this.handleDragOver(event);
   private onKeyDown = (event: KeyboardEvent) => this.handleKeyDown(event);
   private onMouseUp = () => this.handleDrop();
@@ -231,13 +232,13 @@ export class ModusTable {
   handleDragStart(
     event: MouseEvent | KeyboardEvent,
     draggedColumnId: string,
-    elementRef: HTMLTableHeaderCellElement,
-    throughMouse: boolean
+    elementRef: HTMLTableCellElement,
+    mouseInteracted: boolean
   ) {
     if (
       this.columnReorder &&
-      !this.columnResizeEnabled &&
-      !this.itemDragState?.targetId && // On Enter click two functions are called handleDragStart and handleKeyDown, if targetId is present we ignore handleDragStart.
+      !this.isColumnResizing &&
+      !this.itemDragState?.dropColumnId && // On Enter key press, two functions are called handleDragStart and handleKeyDown, if dropColumnId is present we ignore handleDragStart.
       this.itemDragState?.draggedColumnId !== draggedColumnId // If same item is selected we don't update itemDragState.
     ) {
       if (this.frozenColumns.includes(draggedColumnId)) {
@@ -247,13 +248,13 @@ export class ModusTable {
       this.dragAndDropObj.setValues(
         this.columnOrder,
         this.columnReorder,
-        this.columnResizeEnabled,
+        this.isColumnResizing,
         this.tableHeaderRowRef,
         this.table,
         this.itemDragState,
         this.frozenColumns
       );
-      this.dragAndDropObj.handleDragStart(event, draggedColumnId, elementRef, throughMouse);
+      this.dragAndDropObj.handleDragStart(event, draggedColumnId, elementRef, mouseInteracted);
       /**
        * SetTimeout
        * If we select another header, after selecting a header for reorder creates an issue(Both selection using keyboard). When tab key is used this issue will not occur.
@@ -322,7 +323,7 @@ export class ModusTable {
       },
       columnResizeMode: 'onChange',
       enableColumnResizing: this.columnResize,
-      enableHiding: !!this.panelOptions?.columnsVisibility,
+      enableHiding: !!this.toolbarOptions?.columnsVisibility,
       sortDescFirst: false, // To-Do, workaround to prevent sort descending on certain columns, e.g. numeric.
       onExpandedChange: (updater: Updater<ExpandedState>) => this.updatingState(updater, 'expanded'),
       onSortingChange: (updater: Updater<ModusTableSortingState>) => this.setSorting(updater),
@@ -334,7 +335,7 @@ export class ModusTable {
       onColumnSizingChange: (updater: Updater<ColumnSizingState>) => this.updatingState(updater, 'columnSizing'),
       onColumnSizingInfoChange: (updater: Updater<ColumnSizingInfoState>) => {
         this.updatingState(updater, 'columnSizingInfo');
-        this.columnResizeEnabled = !this.columnSizingInfo.isResizingColumn ? false : true;
+        this.isColumnResizing = !this.columnSizingInfo.isResizingColumn ? false : true;
       },
       onColumnVisibilityChange: (updater: Updater<VisibilityState>) => this.updatingState(updater, 'columnVisibility'),
       onColumnOrderChange: (updater: Updater<ColumnOrderState>) => this.updatingState(updater, 'columnOrder'),
@@ -414,122 +415,145 @@ export class ModusTable {
     });
   }
 
+  renderTableBody(multipleRowSelection: boolean): JSX.Element | null {
+    return (
+      <tbody>
+        {this.table.getRowModel()?.rows.map((row) => {
+          const isChecked = row.getIsSelected() && (row.subRows?.length ? row.getIsAllSubRowsSelected() : true);
+          return (
+            <tr key={row.id} class={{ 'enable-hover': this.hover, 'row-selected': isChecked }}>
+              {this.rowSelection && (
+                <td class="row-checkbox sticky-left">
+                  <modus-checkbox
+                    checked={isChecked}
+                    indeterminate={multipleRowSelection && row.getIsSomeSelected()}
+                    onCheckboxClick={() => row.toggleSelected()}></modus-checkbox>
+                </td>
+              )}
+              {row.getVisibleCells()?.map((cell, cellIndex) => {
+                return (
+                  <ModusTableCell
+                    cell={cell}
+                    row={row}
+                    cellIndex={cellIndex}
+                    rowsExpandable={this.rowsExpandable}
+                    frozenColumns={this.frozenColumns}
+                    onLinkClick={(link: ModusTableCellLink) => this.cellLinkClick.emit(link)}
+                  />
+                );
+              })}
+            </tr>
+          );
+        })}
+      </tbody>
+    );
+  }
+
+  renderTableHeader(multipleRowSelection: boolean): JSX.Element | null {
+    const tableHeadClass = { 'show-resize-cursor': this.isColumnResizing, 'show-column-reorder-cursor': this.columnReorder };
+    const headerGroups: HeaderGroup<unknown>[] = this.table.getHeaderGroups();
+
+    return (
+      <thead class={tableHeadClass}>
+        {headerGroups?.map((headerGroup, index) => (
+          <tr key={headerGroup.id} ref={(element: HTMLTableRowElement) => (this.tableHeaderRowRef = element)}>
+            {this.rowSelection && (
+              <th class="row-checkbox sticky-left">
+                {multipleRowSelection && (
+                  <modus-checkbox
+                    checked={this.table.getIsAllRowsSelected()}
+                    indeterminate={this.table.getIsSomeRowsSelected()}
+                    onCheckboxClick={this.table.getToggleAllRowsSelectedHandler()}></modus-checkbox>
+                )}
+              </th>
+            )}
+            {headerGroup.headers?.map((header) => {
+              return (
+                <ModusTableHeader
+                  table={this.table}
+                  header={header}
+                  isNestedParentHeader={index < headerGroups.length - 1}
+                  showSortIconOnHover={this.showSortIconOnHover}
+                  columnReorder={this.columnReorder}
+                  isColumnResizing={this.isColumnResizing}
+                  frozenColumns={this.frozenColumns}
+                  onDragStart={(
+                    event: MouseEvent | KeyboardEvent,
+                    id: string,
+                    elementRef: HTMLTableCellElement,
+                    mouseInteracted: boolean
+                  ) => this.handleDragStart(event, id, elementRef, mouseInteracted)}
+                  onMouseEnterResize={() => (this.isColumnResizing = true)}
+                  onMouseLeaveResize={() => (this.isColumnResizing = false)}
+                />
+              );
+            })}
+          </tr>
+        ))}
+      </thead>
+    );
+  }
+
+  renderTableFooter(): JSX.Element | null {
+    const footerGroups: HeaderGroup<unknown>[] = this.table.getFooterGroups();
+    return this.summaryRow ? (
+      <ModusTableSummaryRow
+        footerGroups={[footerGroups[0]]}
+        tableData={this.data}
+        borderlessOptions={this.displayOptions}
+        frozenColumns={this.frozenColumns}
+        rowSelection={this.rowSelection}
+      />
+    ) : null;
+  }
+
   render(): void {
     const { multiple } = this.rowSelectionOptions;
-    const lengthOfHeaderGroups: number = this.table.getHeaderGroups().length;
     const totalSize = this.table.getTotalSize();
-    const tableStyle = this.fullWidth ? { width: '100%' } : totalSize > 0 ? { width: `${totalSize}px` } : {};
-    const borderlessTableStyle = this.displayOptions && this.displayOptions.borderless && { border: 'none' };
-    const headerGroups: HeaderGroup<unknown>[] = this.table.getHeaderGroups();
-    const footerGroups: HeaderGroup<unknown>[] = this.table.getFooterGroups();
-    const className = `
-  ${this.displayOptions && this.displayOptions.borderless ? 'borderless' : ''}
-  ${this.displayOptions && this.displayOptions.cellBorderless ? 'cell-borderless' : ''}
-`;
+
+    const tableContainerClass = {
+      'table-container': true,
+      borderless: this.displayOptions?.borderless,
+    };
+
+    const tableMainClass = {
+      borderless: this.displayOptions?.borderless,
+      'cell-borderless': this.displayOptions?.cellBorderless,
+    };
+
+    const tableStyle = this.fullWidth
+      ? { width: '100%' }
+      : totalSize > 0
+      ? { width: `${totalSize}px`, tableLayout: 'fixed' }
+      : { tableLayout: 'fixed' };
 
     return (
       <Host>
         <div style={{ maxWidth: this.maxWidth }}>
-          {this.showTablePanel && this.panelOptions && (
-            <modus-table-panel table={this.table} options={this.panelOptions}>
-              <div slot="left-section">
-                <slot name="panelGroupLeft"></slot>
+          {this.toolbar && this.toolbarOptions && (
+            <modus-table-toolbar table={this.table} options={this.toolbarOptions}>
+              <div slot="group-left">
+                <slot name="groupLeft"></slot>
               </div>
-              <div slot="right-section">
-                <slot name="panelGroupRight"></slot>
+              <div slot="group-right">
+                <slot name="groupRight"></slot>
               </div>
-            </modus-table-panel>
+            </modus-table-toolbar>
           )}
 
-          <div class="table-container" style={{ maxHeight: this.maxHeight, ...borderlessTableStyle }}>
-            <table class={className} style={tableStyle}>
-              <thead>
-                {headerGroups?.map((headerGroup, index) => (
-                  <tr key={headerGroup.id} ref={(element: HTMLTableRowElement) => (this.tableHeaderRowRef = element)}>
-                    {this.rowSelection && (
-                      <th class="row-checkbox sticky-left">
-                        {multiple && (
-                          <modus-checkbox
-                            checked={this.table.getIsAllRowsSelected()}
-                            indeterminate={this.table.getIsSomeRowsSelected()}
-                            onCheckboxClick={this.table.getToggleAllRowsSelectedHandler()}></modus-checkbox>
-                        )}
-                      </th>
-                    )}
-                    {headerGroup.headers?.map((header) => {
-                      return (
-                        <ModusTableHeader
-                          table={this.table}
-                          header={header}
-                          isNestedParentHeader={index < lengthOfHeaderGroups - 1}
-                          showSortIconOnHover={this.showSortIconOnHover}
-                          columnReorder={this.columnReorder}
-                          columnResizeEnabled={this.columnResizeEnabled}
-                          frozenColumns={this.frozenColumns}
-                          rowSelection={this.rowSelection}
-                          handleDragStart={(event: MouseEvent, id: string, elementRef: HTMLTableHeaderCellElement) =>
-                            this.handleDragStart(event, id, elementRef, true)
-                          }
-                          handleKeyboardStart={(event: KeyboardEvent, id: string, elementRef: HTMLTableHeaderCellElement) =>
-                            this.handleDragStart(event, id, elementRef, false)
-                          }
-                          onMouseEnterResize={() => (this.columnResizeEnabled = true)}
-                          onMouseLeaveResize={() => (this.columnResizeEnabled = false)}
-                        />
-                      );
-                    })}
-                  </tr>
-                ))}
-              </thead>
-              <tbody>
-                {this.table.getRowModel()?.rows.map((row) => {
-                  return (
-                    <tr key={row.id} class={this.hover && 'enable-hover'}>
-                      {this.rowSelection && (
-                        <td class="row-checkbox sticky-left">
-                          <modus-checkbox
-                            checked={row.getIsSelected()}
-                            indeterminate={multiple && row.getIsSomeSelected()}
-                            onCheckboxClick={() => row.toggleSelected()}></modus-checkbox>
-                        </td>
-                      )}
-                      {row.getVisibleCells()?.map((cell, cellIndex) => {
-                        return (
-                          <ModusTableCell
-                            cell={cell}
-                            row={row}
-                            cellIndex={cellIndex}
-                            rowsExpandable={this.rowsExpandable}
-                            frozenColumns={this.frozenColumns}
-                            rowSelection={this.rowSelection}
-                            onLinkClick={(link: ModusTableCellLink) => this.cellLinkClick.emit(link)}
-                          />
-                        );
-                      })}
-                    </tr>
-                  );
-                })}
-              </tbody>
-              {this.summaryRow ? (
-                <ModusTableSummaryRow
-                  footerGroups={[footerGroups[0]]}
-                  tableData={this.data}
-                  borderlessOptions={this.displayOptions}
-                  frozenColumns={this.frozenColumns}
-                  rowSelection={this.rowSelection}
-                />
-              ) : (
-                ''
-              )}
+          <div class={tableContainerClass} style={{ maxHeight: this.maxHeight }}>
+            <table class={tableMainClass} style={tableStyle}>
+              {this.renderTableHeader(multiple)}
+              {this.renderTableBody(multiple)}
+              {this.renderTableFooter()}
             </table>
           </div>
-          <slot name="customFooter"></slot>
+          <slot name="customFooter" />
           {this.pagination && (
             <ModusTablePagination table={this.table} totalCount={this.data.length} pageSizeList={this.pageSizeList} />
           )}
-
-          <ModusTableDragItem draggingState={this.itemDragState}></ModusTableDragItem>
-          <ModusTableDragArrows arrowsPosition={this.itemDragState?.arrowsPosition}></ModusTableDragArrows>
+          <ModusTableColumnDragItem draggingState={this.itemDragState} />
+          <ModusTableColumnDropIndicator position={this.itemDragState?.dropIndicator} />
         </div>
       </Host>
     );

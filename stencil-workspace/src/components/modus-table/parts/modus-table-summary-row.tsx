@@ -3,9 +3,14 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { HeaderGroup } from '@tanstack/table-core';
-import { PropertyDataType, PropertyShowTotal } from '../constants/constants';
 import { ModusTableColumnDataType } from '../enums';
 import ModusTableDisplayOptions from '../models/modus-table-display-options';
+import {
+  COLUMN_DEF_DATATYPE_KEY,
+  COLUMN_DEF_SHOWTOTAL,
+  COLUMN_DEF_ROW_SELECTION_ID,
+  COLUMN_DEF_ROW_SELECTION_CSS,
+} from '../constants/constants';
 
 interface ModusTableSummaryRowProps {
   footerGroups: HeaderGroup<unknown>[];
@@ -15,7 +20,7 @@ interface ModusTableSummaryRowProps {
   rowSelection: boolean;
 }
 
-function calculateSum(tableData: unknown[], header): number | string {
+function calculateTotal(tableData: unknown[], header): number | string {
   let sum = 0;
   tableData.map((rowData) => (sum += Number(rowData[header.column.columnDef['accessorKey']])));
   return !isNaN(sum) ? sum : '';
@@ -28,31 +33,29 @@ export const ModusTableSummaryRow: FunctionalComponent<ModusTableSummaryRowProps
   frozenColumns,
   rowSelection,
 }) => {
-  const checkboxColumn = rowSelection
-    ? { headers: [{ id: 'checkbox', column: { columnDef: { footer: '' } } }] }
-    : { headers: [] };
-
-  const updatedFooterGroups = footerGroups.map((group) => ({
-    ...group,
-    headers: [...checkboxColumn.headers, ...group.headers],
-  }));
-
   const borderLessTableStyle = (borderlessOptions?.cellBorderless || borderlessOptions?.borderless) && { boxShadow: 'none' };
   return (
     <tfoot>
-      {updatedFooterGroups.map((group) => (
+      {footerGroups.map((group) => (
         <tr class="summary-row" style={borderLessTableStyle}>
+          {rowSelection && (
+            <td id={COLUMN_DEF_ROW_SELECTION_ID} key={COLUMN_DEF_ROW_SELECTION_ID} class={COLUMN_DEF_ROW_SELECTION_CSS}></td>
+          )}
           {group.headers.map((header) => (
             <td
+              id={header.id}
               key={header.id}
               class={`
                 ${frozenColumns.includes(header.id) ? 'sticky-left' : ''}
-                ${header.column.columnDef[PropertyDataType] === ModusTableColumnDataType.Integer ? 'text-align-right' : ''}
-              `}
-              style={{
-                left: frozenColumns.includes(header.id) && rowSelection && '47px',
-              }}>
-              {header.column.columnDef[PropertyShowTotal] ? calculateSum(tableData, header) : header.column.columnDef.footer}
+                ${
+                  header.column.columnDef[COLUMN_DEF_DATATYPE_KEY] === ModusTableColumnDataType.Integer
+                    ? 'text-align-right'
+                    : ''
+                }
+              `}>
+              {header.column.columnDef[COLUMN_DEF_SHOWTOTAL]
+                ? calculateTotal(tableData, header)
+                : header.column.columnDef.footer}
             </td>
           ))}
         </tr>

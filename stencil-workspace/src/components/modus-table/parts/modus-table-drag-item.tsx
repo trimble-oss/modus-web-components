@@ -7,7 +7,7 @@ import { IconArrowUp } from '../../icons/icon-arrow-up';
 import Position from '../models/position.model';
 import ColumnDragState from '../models/column-drag-state.model';
 
-export const ModusTableDragItem: FunctionalComponent<{
+export const ModusTableColumnDragItem: FunctionalComponent<{
   draggingState: ColumnDragState;
 }> = ({ draggingState }) => {
   if (!draggingState) return null;
@@ -23,12 +23,12 @@ export const ModusTableDragItem: FunctionalComponent<{
   return <div style={{ ...dragContainerStyle }} ref={(el) => el && el.appendChild(dragContent)} class="drag-content"></div>;
 };
 
-export const ModusTableDragArrows: FunctionalComponent<{
-  arrowsPosition: Position;
-}> = ({ arrowsPosition }) => {
-  if (!arrowsPosition) return null;
+export const ModusTableColumnDropIndicator: FunctionalComponent<{
+  position: Position;
+}> = ({ position }) => {
+  if (!position) return null;
 
-  const { x, y, height } = arrowsPosition;
+  const { x, y, height } = position;
   const dragContainerStyle = {
     height: `${height + 27}px`,
     transform: `translate(calc(${x - 8}px), calc(${y - 13}px ))`,
