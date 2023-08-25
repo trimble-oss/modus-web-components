@@ -18,6 +18,7 @@
   }
 
   .app {
+    box-sizing: border-box;
     border-color: $menu-border-color;
     border-radius: $rem-2px;
     color: $menu-color;
