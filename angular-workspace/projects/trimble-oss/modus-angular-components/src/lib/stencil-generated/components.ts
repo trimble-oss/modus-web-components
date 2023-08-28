@@ -452,6 +452,32 @@ export declare interface ModusFileDropzone extends Components.ModusFileDropzone 
 
 
 @ProxyCmp({
+  inputs: ['color', 'icon', 'size']
+})
+@Component({
+  selector: 'modus-icon',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['color', 'icon', 'size'],
+})
+export class ModusIcon {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['iconClick']);
+  }
+}
+
+
+export declare interface ModusIcon extends Components.ModusIcon {
+
+  iconClick: EventEmitter<CustomEvent<any>>;
+}
+
+
+@ProxyCmp({
 })
 @Component({
   selector: 'modus-list',

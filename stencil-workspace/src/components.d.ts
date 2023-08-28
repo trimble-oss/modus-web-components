@@ -499,6 +499,11 @@ export namespace Components {
          */
         "removeFile": (fileName: string) => Promise<void>;
     }
+    interface ModusIcon {
+        "color"?: string;
+        "icon": string | null;
+        "size"?: string;
+    }
     interface ModusList {
     }
     interface ModusListItem {
@@ -1277,6 +1282,10 @@ export interface ModusFileDropzoneCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusFileDropzoneElement;
 }
+export interface ModusIconCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusIconElement;
+}
 export interface ModusListItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusListItemElement;
@@ -1443,6 +1452,12 @@ declare global {
     var HTMLModusFileDropzoneElement: {
         prototype: HTMLModusFileDropzoneElement;
         new (): HTMLModusFileDropzoneElement;
+    };
+    interface HTMLModusIconElement extends Components.ModusIcon, HTMLStencilElement {
+    }
+    var HTMLModusIconElement: {
+        prototype: HTMLModusIconElement;
+        new (): HTMLModusIconElement;
     };
     interface HTMLModusListElement extends Components.ModusList, HTMLStencilElement {
     }
@@ -1628,6 +1643,7 @@ declare global {
         "modus-date-picker": HTMLModusDatePickerElement;
         "modus-dropdown": HTMLModusDropdownElement;
         "modus-file-dropzone": HTMLModusFileDropzoneElement;
+        "modus-icon": HTMLModusIconElement;
         "modus-list": HTMLModusListElement;
         "modus-list-item": HTMLModusListItemElement;
         "modus-message": HTMLModusMessageElement;
@@ -2179,6 +2195,12 @@ declare namespace LocalJSX {
           * An event that fires when files have been added or removed, regardless of whether they're valid.
          */
         "onFiles"?: (event: ModusFileDropzoneCustomEvent<[File[], string | null]>) => void;
+    }
+    interface ModusIcon {
+        "color"?: string;
+        "icon"?: string | null;
+        "onIconClick"?: (event: ModusIconCustomEvent<any>) => void;
+        "size"?: string;
     }
     interface ModusList {
     }
@@ -3055,6 +3077,7 @@ declare namespace LocalJSX {
         "modus-date-picker": ModusDatePicker;
         "modus-dropdown": ModusDropdown;
         "modus-file-dropzone": ModusFileDropzone;
+        "modus-icon": ModusIcon;
         "modus-list": ModusList;
         "modus-list-item": ModusListItem;
         "modus-message": ModusMessage;
@@ -3104,6 +3127,7 @@ declare module "@stencil/core" {
             "modus-date-picker": LocalJSX.ModusDatePicker & JSXBase.HTMLAttributes<HTMLModusDatePickerElement>;
             "modus-dropdown": LocalJSX.ModusDropdown & JSXBase.HTMLAttributes<HTMLModusDropdownElement>;
             "modus-file-dropzone": LocalJSX.ModusFileDropzone & JSXBase.HTMLAttributes<HTMLModusFileDropzoneElement>;
+            "modus-icon": LocalJSX.ModusIcon & JSXBase.HTMLAttributes<HTMLModusIconElement>;
             "modus-list": LocalJSX.ModusList & JSXBase.HTMLAttributes<HTMLModusListElement>;
             "modus-list-item": LocalJSX.ModusListItem & JSXBase.HTMLAttributes<HTMLModusListItemElement>;
             "modus-message": LocalJSX.ModusMessage & JSXBase.HTMLAttributes<HTMLModusMessageElement>;
