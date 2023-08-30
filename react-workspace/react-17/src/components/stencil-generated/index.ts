@@ -23,6 +23,7 @@ export const ModusDateInput = /*@__PURE__*/createReactComponent<JSX.ModusDateInp
 export const ModusDatePicker = /*@__PURE__*/createReactComponent<JSX.ModusDatePicker, HTMLModusDatePickerElement>('modus-date-picker');
 export const ModusDropdown = /*@__PURE__*/createReactComponent<JSX.ModusDropdown, HTMLModusDropdownElement>('modus-dropdown');
 export const ModusFileDropzone = /*@__PURE__*/createReactComponent<JSX.ModusFileDropzone, HTMLModusFileDropzoneElement>('modus-file-dropzone');
+export const ModusKebab = /*@__PURE__*/createReactComponent<JSX.ModusKebab, HTMLModusKebabElement>('modus-kebab');
 export const ModusList = /*@__PURE__*/createReactComponent<JSX.ModusList, HTMLModusListElement>('modus-list');
 export const ModusListItem = /*@__PURE__*/createReactComponent<JSX.ModusListItem, HTMLModusListItemElement>('modus-list-item');
 export const ModusMessage = /*@__PURE__*/createReactComponent<JSX.ModusMessage, HTMLModusMessageElement>('modus-message');

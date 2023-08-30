@@ -17,6 +17,7 @@ export const DIRECTIVES = [
   d.ModusDatePicker,
   d.ModusDropdown,
   d.ModusFileDropzone,
+  d.ModusKebab,
   d.ModusList,
   d.ModusListItem,
   d.ModusMessage,

@@ -22,6 +22,19 @@
 | `itemClick` | An event that fires on list item click | `CustomEvent<any>` |
 
 
+## Dependencies
+
+### Used by
+
+ - [modus-kebab](../modus-kebab)
+
+### Graph
+```mermaid
+graph TD;
+  modus-kebab --> modus-list-item
+  style modus-list-item fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 

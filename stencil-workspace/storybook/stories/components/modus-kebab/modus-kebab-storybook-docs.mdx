@@ -1,0 +1,48 @@
+import { Story } from '@storybook/addon-docs';
+
+# Kebab
+
+---
+
+[Modus Kebab](https://modus.trimble.com/components/dropdowns/) It's a button under which an icon is being rendered, if we click on it a menu appears.. They are referenced using the `<modus-kebab>` custom HTML element.
+
+#### Implementation Details
+- The kebab menu list slot was built to work with the `<modus-list>` and `<modus-list-item>` elements. The item size property is set to 'condensed'.
+- The list will show 5 condensed items before adding a vertical scroll.
+- We have to define the options what the kebab is going to be displaying with their callbacks functions to be triggered when they're clicked
+
+### Default
+<Story id="components-kebab--default" height={'150px'} />
+
+```html
+<modus-kebab />
+
+<script>
+  const kebabMenu = document.querySelector('modus-kebab');
+  kebabMenu.options = [
+    {
+        name: 'Hello modus',
+        func: ()=>{ alert('hello modus')}
+    },
+    {
+        name: 'hello world',
+        func: ()=>{ alert('hello world')}
+    }
+  ];
+</script>
+```
+
+### Properties
+
+| Property          | Attribute           | Description                                                                                      | Type                                                                | Default     |
+| ----------------- | ------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------- | ----------- |
+| `ariaLabel`       | `aria-label`        | (optional) The kebab's aria-label.                                                               | `string`                                                            | `undefined` |
+| `options`         | --                  | Determines the list of the kebab menu items names and callbacks                                  | `{ name: string; disabled?: boolean; func: () => void; }`           | `undefined` |
+| `position`        | `position`          | (optional) The position of the kebab menu list in related to the toggleElement.                  | `"left", "right"                                                    | `undefined` |
+
+
+### Accessibility
+- Kebab has `role` of `menu`.
+- When the Kebab Toggle has focus, **Enter** toggles the Kebab 
+- After toggles the kebab you can **Tab** to navigate through the menu items 
+- Select an item by pressing **Enter** or **Space** key.
