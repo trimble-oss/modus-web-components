@@ -7,7 +7,9 @@ import { Component, h, Prop } from '@stencil/core';
   shadow: true,
 })
 export class ModusList {
+  /** (optional) make the list fixed */
   @Prop() fixed : boolean;
+
   render(): unknown {
     return (
       <ul class={`${this.fixed && 'fixed'}`}>
