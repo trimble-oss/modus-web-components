@@ -1,0 +1,112 @@
+@import './../modus-navbar.vars';
+
+.profile-menu {
+  @include custom-navbar-menu;
+
+  align-items: center;
+  cursor: default;
+  max-width: 19rem;
+  padding: 0;
+  width: fit-content;
+
+  .user {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding: $rem-20px $rem-20px 0 $rem-20px;
+
+    .avatar,
+    .initials {
+      background-color: $modus-navbar-icon-color;
+      border-radius: 50%;
+      height: 6rem;
+      margin: 0 $rem-16px $rem-20px 0;
+      user-select: none;
+      width: 6rem;
+    }
+
+    .initials {
+      align-items: center;
+      color: $modus-navbar-profile-icon-initials-color;
+      display: flex;
+      font-size: $rem-24px;
+      font-weight: $font-weight-semi-bold;
+      justify-content: center;
+    }
+
+    .username {
+      font-size: $rem-16px;
+      font-weight: $font-weight-semi-bold;
+      max-width: 10rem;
+      overflow-wrap: break-word;
+      padding: 0 $rem-4px;
+    }
+
+    .email {
+      font-size: $rem-12px;
+      margin-bottom: $rem-16px;
+      max-width: 10rem;
+      overflow-wrap: break-word;
+      padding: 0 $rem-4px;
+    }
+  }
+
+  &.profile-menu-blue {
+    .user {
+      .avatar,
+      .initials {
+        background-color: #b7b9c3;
+        color: $modus-navbar-blue-profile-icon-initials-color;
+      }
+    }
+  }
+
+  .links {
+    font-size: $rem-14px;
+    margin-bottom: $rem-12px;
+    max-width: 19rem;
+    user-select: none;
+    width: 100%;
+
+    .link {
+      cursor: pointer;
+      overflow: hidden;
+      padding: $rem-10px $rem-20px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      @media (hover: hover) {
+        &:hover {
+          background-color: $modus-navbar-icon-hover-bg;
+        }
+      }
+
+      &:active {
+        background-color: $modus-navbar-icon-active-bg;
+      }
+    }
+  }
+
+  .sign-out {
+    background-color: $modus-navbar-profile-menu-sign-out-background-color;
+    user-select: none;
+    width: 100%;
+
+    div {
+      color: $modus-navbar-profile-menu-sign-out-color;
+      cursor: pointer;
+      font-size: $rem-14px;
+      padding: $rem-10px $rem-20px;
+
+      @media (hover: hover) {
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  &.reverse {
+    left: 0;
+  }
+}

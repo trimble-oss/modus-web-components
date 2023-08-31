@@ -1,0 +1,15 @@
+@import './../modus-navbar.vars';
+
+.main-menu {
+  @include custom-navbar-menu;
+
+  border-radius: 0 0 $rem_2px $rem_2px;
+  border-top: none;
+  box-sizing: border-box;
+  clip-path: inset(0 -10px -10px -10px);
+  cursor: default;
+  max-width: 616px;
+  min-width: 248px;
+  padding: 0;
+  width: max-content;
+}
