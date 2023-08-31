@@ -44,13 +44,11 @@ Type: `Promise<void>`
 
 ### Used by
 
- - [modus-kebab](../modus-kebab)
  - [modus-modal](../modus-modal)
 
 ### Graph
 ```mermaid
 graph TD;
-  modus-kebab --> modus-button
   modus-modal --> modus-button
   style modus-button fill:#f9f,stroke:#333,stroke-width:4px
 ```
