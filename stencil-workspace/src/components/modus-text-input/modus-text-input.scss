@@ -224,11 +224,11 @@
     padding-right: calc(1.5em + 0.75rem);
   }
 
-  input[type='password']+.toggle-password>svg.visibility {
+  input[type='password'] + .toggle-password > svg.visibility {
     display: inline;
   }
 
-  input[type='text']+.toggle-password>svg.visibility-off {
+  input[type='text'] + .toggle-password > svg.visibility-off {
     display: inline;
   }
 }

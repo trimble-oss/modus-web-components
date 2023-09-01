@@ -199,18 +199,20 @@ export class ModusDatePicker {
               'calendar-month grid': true,
               'invalid-date-range': this.isInvalidDateRange(startDate, endDate),
             }}>
-            {
-              blankDatesArr && blankDatesArr.length > 0 && blankDatesArr.map(() => {
-                return <button
-                  class={{
-                    'calendar-day grid-item': false,
-                    'disabled': true
-                  }}
-                  tabIndex={-1}>
-                  &nbsp;
-                </button>
-              })
-            }
+            {blankDatesArr &&
+              blankDatesArr.length > 0 &&
+              blankDatesArr.map(() => {
+                return (
+                  <button
+                    class={{
+                      'calendar-day grid-item': false,
+                      disabled: true,
+                    }}
+                    tabIndex={-1}>
+                    &nbsp;
+                  </button>
+                );
+              })}
             {this._calendar.dates.map((date, index) => {
               if (!date) {
                 return null;

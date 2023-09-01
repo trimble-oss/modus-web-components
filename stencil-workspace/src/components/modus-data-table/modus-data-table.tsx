@@ -202,9 +202,7 @@ export class ModusDataTable {
       <table class={className}>
         <colgroup>
           {this.selectionOptions.canSelect && this.selectionOptions.checkboxSelection && <col style={{ width: '34px' }} />}
-          {(this.columns as TColumn[])?.map((column: TColumn) => (
-            <col style={{ width: column.width }} />
-          ))}
+          {(this.columns as TColumn[])?.map((column: TColumn) => <col style={{ width: column.width }} />)}
           {!!this.rowActions.length && <col style={{ width: '34px' }} />}
         </colgroup>
         <thead>

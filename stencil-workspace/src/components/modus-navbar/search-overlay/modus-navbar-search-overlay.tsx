@@ -4,7 +4,7 @@ import {
   EventEmitter,
   Host,
   Element,
-  h // eslint-disable-line @typescript-eslint/no-unused-vars 
+  h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { IconClose } from '../../icons/icon-close';
 
@@ -37,8 +37,7 @@ export class ModusNavbarSearchOverlay {
               size="large"
               onValueChange={(event: CustomEvent<string>) => this.search.emit(event.detail)}
               include-search-icon
-              ref={el => this.modusTextInput = el as HTMLModusTextInputElement}
-            ></modus-text-input>
+              ref={(el) => (this.modusTextInput = el as HTMLModusTextInputElement)}></modus-text-input>
           </div>
           <div class="navbar-button" data-test-id="close-button">
             <span

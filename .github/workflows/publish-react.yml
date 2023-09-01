@@ -6,8 +6,8 @@ on:
         required: true
         type: choice
         options:
-          - "17"
-          - "18"
+          - '17'
+          - '18'
         description: The version of react you want to build
 permissions:
   contents: read
