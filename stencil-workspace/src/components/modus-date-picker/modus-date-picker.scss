@@ -20,6 +20,10 @@
     display: inline-flex;
     margin: 0;
     padding: 0;
+    
+    &.disabled {
+      cursor: default;
+    }
   }
 
   .label-container {
@@ -198,7 +202,7 @@
 
       .calendar-month-container {
         display: flex;
-        height: 160px;
+        height: 180px;//Need to be adjusted to make it flexible based on child grid container height. Due to absolute position of the child we were not able to mark it as auto.
         justify-content: center;
         position: relative;
       }
