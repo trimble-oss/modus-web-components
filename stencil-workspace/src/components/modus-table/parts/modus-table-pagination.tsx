@@ -3,7 +3,7 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Table } from '@tanstack/table-core';
-import { PageView, ShowResult } from '../constants/constants';
+import { PAGINATION_PAGEVIEW_TEXT, PAGINATION_SUMMARY_TEXT } from '../constants/constants';
 
 interface ModusTablePaginationProps {
   table: Table<unknown>;
@@ -26,12 +26,12 @@ export const ModusTablePagination: FunctionalComponent<ModusTablePaginationProps
   return (
     <div class="pagination-container">
       <div class="items-per-page">
-        <span>{PageView}</span>
+        <span>{PAGINATION_PAGEVIEW_TEXT}</span>
         <modus-select options-display-prop="display" options={optionsList} onValueChange={handleChange}></modus-select>
       </div>
       <div class="pagination-and-count">
         <div class="total-count">
-          <span>{ShowResult}</span>
+          <span>{PAGINATION_SUMMARY_TEXT}</span>
           <span>{table.getState().pagination.pageIndex * table.getState().pagination.pageSize + 1}</span>
           <span>-</span>
           <span>

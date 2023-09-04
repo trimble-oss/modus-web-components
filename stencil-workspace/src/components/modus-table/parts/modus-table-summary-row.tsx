@@ -2,19 +2,25 @@ import {
   FunctionalComponent,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
-import { Header, HeaderGroup } from '@tanstack/table-core';
-import { PropertyDataType, PropertyShowTotal } from '../constants/constants';
+import { HeaderGroup } from '@tanstack/table-core';
 import { ModusTableColumnDataType } from '../enums';
 import ModusTableDisplayOptions from '../models/modus-table-display-options';
+import {
+  COLUMN_DEF_DATATYPE_KEY,
+  COLUMN_DEF_SHOWTOTAL,
+  COLUMN_DEF_ROW_SELECTION_ID,
+  COLUMN_DEF_ROW_SELECTION_CSS,
+} from '../constants/constants';
 
 interface ModusTableSummaryRowProps {
   footerGroups: HeaderGroup<unknown>[];
   tableData: unknown[];
   borderlessOptions: ModusTableDisplayOptions;
   frozenColumns: string[];
+  rowSelection: boolean;
 }
 
-function calculateSum(tableData: unknown[], header: Header<unknown, unknown>): number | string {
+function calculateTotal(tableData: unknown[], header): number | string {
   let sum = 0;
   tableData.map((rowData) => (sum += Number(rowData[header.column.columnDef['accessorKey']])));
   return !isNaN(sum) ? sum : '';
@@ -25,20 +31,31 @@ export const ModusTableSummaryRow: FunctionalComponent<ModusTableSummaryRowProps
   tableData,
   borderlessOptions,
   frozenColumns,
+  rowSelection,
 }) => {
   const borderLessTableStyle = (borderlessOptions?.cellBorderless || borderlessOptions?.borderless) && { boxShadow: 'none' };
   return (
     <tfoot>
       {footerGroups.map((group) => (
         <tr class="summary-row" style={borderLessTableStyle}>
+          {rowSelection && (
+            <td id={COLUMN_DEF_ROW_SELECTION_ID} key={COLUMN_DEF_ROW_SELECTION_ID} class={COLUMN_DEF_ROW_SELECTION_CSS}></td>
+          )}
           {group.headers.map((header) => (
             <td
+              id={header.id}
               key={header.id}
               class={`
                 ${frozenColumns.includes(header.id) ? 'sticky-left' : ''}
-                ${header.column.columnDef[PropertyDataType] === ModusTableColumnDataType.Integer ? 'text-align-right' : ''}
+                ${
+                  header.column.columnDef[COLUMN_DEF_DATATYPE_KEY] === ModusTableColumnDataType.Integer
+                    ? 'text-align-right'
+                    : ''
+                }
               `}>
-              {header.column.columnDef[PropertyShowTotal] ? calculateSum(tableData, header) : header.column.columnDef.footer}
+              {header.column.columnDef[COLUMN_DEF_SHOWTOTAL]
+                ? calculateTotal(tableData, header)
+                : header.column.columnDef.footer}
             </td>
           ))}
         </tr>

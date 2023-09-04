@@ -2,8 +2,6 @@ import { Story } from '@storybook/addon-docs';
 
 # Table
 
-<modus-alert type="warning" message="This component is under construction!"></modus-alert>
-
 ---
 
 [Modus Table](https://modus.trimble.com/components/tables/) web components are wrappers around the HTML table element. Modus Table is reusable and customizable UI element that can be used to display data in a tabular format. They are referenced using the `<modus-table>` custom HTML element.
@@ -22,12 +20,14 @@ import { Story } from '@storybook/addon-docs';
 - [Summary Row](#summary-row)
 - [Column Visibility](#column-visibility)
 - [Expandable Rows](#Expandable-rows)
+- [Checkbox Row Selection](#checkbox-row-selection)
 - [Types](#types)
 - [Accessibility](#accessibility)
 - [Properties](#properties)
 - [Events](#events)
 - [Slot](#slot)
 - [Methods](#methods)
+- [Upcoming features](#upcoming-features-)
 
 ---
 
@@ -310,7 +310,7 @@ User can opt for this summary row, which can be used as footer or a row to view 
 
 ### Column Visibility
 
-A table panel is used to perform operations like hiding/showing the columns. The panel is enabled by `showTablePanel` and is shown above the table. By setting `panelOptions.columnsVisibility` a meatball icon appears at the right corner, and clicking on it shows a dropdown menu with columns for selection. Additionally, users can use `slot='panelGroupLeft'` and `slot='panelGroupRight'` to add custom content to the panel.
+A toolbar is used to perform operations like hiding/showing the columns. It is enabled by `toolbar` and is shown above the table. By setting `toolbarOptions.columnsVisibility` a meatball icon appears at the right corner, and clicking on it shows a dropdown menu with columns for selection. Additionally, users can use `slot='groupLeft'` and `slot='groupRight'` to add custom content to the toolbar.
 
 <Story id="components-table--column-visibility" height={'480px'} />
 
@@ -322,10 +322,10 @@ A table panel is used to perform operations like hiding/showing the columns. The
       column-resize="true"
       pagination="true"
       show-sort-icon-hover="true"
-      show-table-panel="true" />
+      toolbar="true" />
 </div>
  <script>
-    document.querySelector('modus-table').panelOptions = {
+    document.querySelector('modus-table').toolbarOptions = {
         columnsVisibility: {
           title: '',
           requiredColumns: ['first-name']
@@ -362,10 +362,19 @@ A table panel is used to perform operations like hiding/showing the columns. The
 
 User can expand rows to display as child/sub row data.
 
-- Expandable row is disabled by default. Set `rows-expandable` to `true` to enable it.
+- Expandable row is disabled by default. Set `rowsExpandable` to `true` to enable it.
 - Pass data to `subRows` property in `columns`.
 
 <Story id="components-table--expandable-rows" height={'480px'} />
+
+### Checkbox Row Selection
+
+To select rows, users can use the checkbox provided on each row. Normally, the Modus Table permits selecting only one row at a time, but this can be modified to allow multiple selections by using `rowSelectionOptions` option.
+
+  - To enable multiple row selection, set `multiple` to `true`.
+  - Sub-rows will also be selected if the parent is selected by setting `subRowSelection` to `true`.
+
+<Story id="components-table--checkbox-row-selection" height={'480px'} />
 
 ### Types
 
@@ -393,7 +402,7 @@ interface ModusTableCellLink {
   _type?: ModusTableColumnDataType.Link // Is used to override the column data type.
 }
 
-interface ModusTablePanelOptions {
+interface ModusTableToolbarOptions {
   columnsVisibility?: ModusTableColumnsVisibilityOptions;
 }
 
@@ -429,42 +438,45 @@ Users can use keyboard navigation to perform different actions.
 
 ### Properties
 
-| Property              | Attribute                 | Description                                                                                                 | Type                     | Default      |
-| --------------------- | ------------------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------ | ------------ |
-| `columns`             | `columns`                 | (required) To display headers in the table.                                                                 | `ModusTableColumn[]`     | `undefined`  |
-| `data`                | `data`                    | (required) To display data in the table.                                                                    | `Array`                  | `undefined`  |
-| `hover`               | `hover`                   | (optional) To enable row hover in table.                                                                    | `boolean`                | `false`      |
-| `sort`                | `sort`                    | (optional) To sort data in table.                                                                           | `boolean`                | `false`      |
-| `showSortIconOnHover` | `show-sort-icon-on-hover` | (optional) To display sort icon on hover.                                                                   | `boolean`                | `false`      |
-| `displayOptions`      | `display-options`         | (optional) To control display options of table.                                                             | `boolean`                | `false`      |
-| `pagination`          | `pagination`              | (optional) To enable pagination of table.                                                                   | `boolean`                | `false`      |
-| `pageSizeList`        | `page-size-list`          | (optional) To display page size options of table.                                                           | `Array`                  | `[10,20,50]` |
-| `columnResize`        | `column-resize`           | (optional) To enable column resizing of table.                                                              | `boolean`                | `false`      |
-| `columnReorder`       | `column-reorder`          | (optional) To enable re-ordering of the table columns.                                                      | `boolean`                | `false`      |
-| `summaryRow`          | `summary-row`             | (optional) To display summary row in table. Is used to display total.                                       | `boolean`                | `false`      |
-| `fullWidth`           | `full-width`              | (optional) To manage table width.                                                                           | `boolean`                | `false`      |
-| `showTablePanel`      | `show-table-panel`        | (optional) To display table panel. Is used to display panel options.                                        | `boolean`                | `false`      |
-| `panelOptions`        | `panel-options`           | (Optional) To display a panel above the table, which allows access to table operations like hiding columns. | `ModusTablePanelOptions` | `null`       |
-| `rowsExpandable`      | `rows-expandable`         | (Optional) To display `subRows` data of a row. .                                                            | `boolean`                | 'false'      |
-| `maxHeight`           | `max-height`              | (Optional) To display a vertical scrollbar when the height is exceeded.                                     | `string`                 | `null`       |
-| `maxWidth`            | `max-width`               | (Optional) To display a horizontal scrollbar when the width is exceeded.                                    | `string`                 | `null`       |
+| Property               | Attribute                 | Description                                                                                   | Type                                   | Default                                                   |
+| ---------------------- | ------------------------- | --------------------------------------------------------------------------------------------- | -------------------------------------- | --------------------------------------------------------- |
+| `columnReorder`        | `column-reorder`          | (Optional) To allow column reordering.                                                        | `boolean`                              | `false`                                                   |
+| `columnResize`         | `column-resize`           |                                                                                               | `boolean`                              | `false`                                                   |
+| `columns` _(required)_ | --                        | (Required) To display headers in the table.                                                   | `ModusTableColumn<unknown, unknown>[]` | `undefined`                                               |
+| `data` _(required)_    | --                        | (Required) To display data in the table.                                                      | `unknown[]`                            | `undefined`                                               |
+| `displayOptions`       | --                        | (Optional) To control display options of table.                                               | `ModusTableDisplayOptions`             | `{     borderless: false,     cellBorderless: false,   }` |
+| `fullWidth`            | `full-width`              |                                                                                               | `boolean`                              | `false`                                                   |
+| `hover`                | `hover`                   | (Optional) To enable row hover in table.                                                      | `boolean`                              | `false`                                                   |
+| `maxHeight`            | `max-height`              | (Optional) To display a vertical scrollbar when the height is exceeded.                       | `string`                               | `undefined`                                               |
+| `maxWidth`             | `max-width`               | (Optional) To display a horizontal scrollbar when the width is exceeded.                      | `string`                               | `undefined`                                               |
+| `pageSizeList`         | --                        |                                                                                               | `number[]`                             | `PAGINATION_DEFAULT_SIZES`                                |
+| `pagination`           | `pagination`              |                                                                                               | `boolean`                              | `undefined`                                               |
+| `rowSelection`         | `row-selection`           | (Optional) To display checkbox.                                                               | `boolean`                              | `false`                                                   |
+| `rowSelectionOptions`  | --                        | (Optional) To control multiple row selection.                                                 | `ModusTableRowSelectionOptions`        | `{     multiple: false,     subRowSelection: false,   }`  |
+| `rowsExpandable`       | `rows-expandable`         | (Optional) To display expanded rows.                                                          | `boolean`                              | `false`                                                   |
+| `showSortIconOnHover`  | `show-sort-icon-on-hover` | (Optional) To display sort icon on hover.                                                     | `boolean`                              | `false`                                                   |
+| `sort`                 | `sort`                    | (Optional) To sort data in table.                                                             | `boolean`                              | `false`                                                   |
+| `summaryRow`           | `summary-row`             | (Optional) To display summary row.                                                            | `boolean`                              | `false`                                                   |
+| `toolbar`              | `toolbar`                 | (Optional) To display a toolbar for the table.                                                | `boolean`                              | `false`                                                   |
+| `toolbarOptions`       | --                        | (Optional) To display a toolbar, which allows access to table operations like hiding columns. | `ModusTableToolbarOptions`             | `null`                                                    |
 
 ### Events
 
-| Name            | Description                               | Emits                                                    |
-| --------------- | ----------------------------------------- | -------------------------------------------------------- |
-| `sortChange`    | An event that fires on sort change.       | `[{ id: string, desc: boolean }]`                        |
-| `cellLinkClick` | An event that fires on click of the link. | `{ display: string, url: string } as ModusTableCellLink` |
+| Event                | Description                                | Type                              |
+| -------------------- | ------------------------------------------ | --------------------------------- |
+| `cellLinkClick`      | Emits the link that was clicked            | `CustomEvent<ModusTableCellLink>` |
+| `rowSelectionChange` | Event details contains the row(s) selected | `CustomEvent<unknown>`            |
+| `sortChange`         | Emits event on sort change                 | `CustomEvent<ColumnSort[]>`       |
 
 ### Slot
 
 Users can use this to provide custom elements.
 
-| Name              | Description                                                                                  |
-| ----------------- | -------------------------------------------------------------------------------------------- |
-| `customFooter`    | To view a custom footer `slot` with name `customFooter` can be used.                         |
-| `panelGroupLeft`  | To add content to the panel's left section, `slot` with name `panelGroupLeft` can be used.   |
-| `panelGroupRight` | To add content to the panel's right section, `slot` with name `panelGroupRight` can be used. |
+| Slot             | Description                                         |
+| ---------------- | --------------------------------------------------- |
+| `"customFooter"` | Slot for custom footer.                             |
+| `"groupLeft"`    | Slot for custom toolbar options added to the left.  |
+| `"groupRight"`   | Slot for custom toolbar options added to the right. |
 
 ### Methods
 
@@ -472,3 +484,13 @@ Users can use this to provide custom elements.
 | ------------------------ | ----------------------------------------- | ----------------------------------- | -------------------- |
 | `getColumnData`          | Gets data of a perticular column.         | `accessorKey: string`               | `Promise<unknown[]>` |
 | `toggleColumnVisibility` | Decides the Data table column visibility. | `columnId: string`, `show: boolean` | `Promise<void>`      |
+
+## Upcoming features 🚧
+
+There are still additional features that we plan to implement. Some of them:
+
+- Inline Editing
+- Column Filtering
+- Save Filter Preferences
+
+You can also refer to the [Table Roadmap](https://github.com/orgs/trimble-oss/projects/16/views/19) to track the development status for the above features and some known [issues](https://github.com/trimble-oss/modus-web-components/issues?q=is%3Aopen+is%3Aissue+label%3AQA+label%3Atable).

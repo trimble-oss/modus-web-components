@@ -1,20 +1,23 @@
-export const SortedAscending = 'Sorted Ascending';
-export const SortedDescending = 'Sorted Descending';
-export const SortAscending = 'Sort Ascending';
-export const SortDescending = 'Sort Descending';
-export const PropertyDataType = 'dataType';
-export const PropertyShowTotal = 'showTotal';
-export const DefaultPageSizes = [10, 20, 30];
-export const PageView = 'Page View';
-export const ShowResult = 'Showing result';
+export const SORTED_ASCENDING = 'Sorted Ascending';
+export const SORTED_DESCENDING = 'Sorted Descending';
+export const SORT_ASCENDING = 'Sort Ascending';
+export const SORT_DESCENDING = 'Sort Descending';
 
-// Keyboard key constants starts
-export const EnterKey = 'enter';
-export const TabKey = 'tab';
-export const ArrowLeftKey = 'arrowleft';
-export const ArrowRightKey = 'arrowright';
-export const ArrowUp = 'arrowup';
-export const ArrowDown = 'arrowdown';
-export const SpaceKey = ' ';
-export const EscapeKey = 'escape';
-// Keyboard key constants ends
+export const COLUMN_DEF_DATATYPE_KEY = 'dataType';
+export const COLUMN_DEF_SHOWTOTAL = 'showTotal';
+export const COLUMN_DEF_ROW_SELECTION_ID = 'row-checkbox';
+export const COLUMN_DEF_ROW_SELECTION_CSS = 'row-checkbox';
+
+export const PAGINATION_DEFAULT_SIZES = [10, 20, 30];
+export const PAGINATION_PAGEVIEW_TEXT = 'Page View';
+export const PAGINATION_SUMMARY_TEXT = 'Showing result';
+
+// Keyboard key constants
+export const KEYBOARD_ENTER = 'enter';
+export const KEYBOARD_TAB = 'tab';
+export const KEYBOARD_LEFT = 'arrowleft';
+export const KEYBOARD_RIGHT = 'arrowright';
+export const KEYBOARD_UP = 'arrowup';
+export const KEYBOARD_DOWN = 'arrowdown';
+export const KEYBOARD_SPACE = ' ';
+export const KEYBOARD_ESCAPE = 'escape';
