@@ -452,14 +452,13 @@ export declare interface ModusFileDropzone extends Components.ModusFileDropzone 
 
 
 @ProxyCmp({
-  inputs: ['fixed']
 })
 @Component({
   selector: 'modus-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['fixed'],
+  inputs: [],
 })
 export class ModusList {
   protected el: HTMLElement;

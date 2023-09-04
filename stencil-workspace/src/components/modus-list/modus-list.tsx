@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { Component, h, Prop } from '@stencil/core';
+import { Component, h } from '@stencil/core';
 
 @Component({
   tag: 'modus-list',
@@ -7,12 +7,9 @@ import { Component, h, Prop } from '@stencil/core';
   shadow: true,
 })
 export class ModusList {
-  /** (optional) make the list fixed */
-  @Prop() fixed : boolean;
-
   render(): unknown {
     return (
-      <ul class={`${this.fixed && 'fixed'}`}>
+      <ul part="list-items">
         <slot />
       </ul>
     );

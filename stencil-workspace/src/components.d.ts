@@ -500,7 +500,6 @@ export namespace Components {
         "removeFile": (fileName: string) => Promise<void>;
     }
     interface ModusList {
-        "fixed": boolean;
     }
     interface ModusListItem {
         /**
@@ -2182,7 +2181,6 @@ declare namespace LocalJSX {
         "onFiles"?: (event: ModusFileDropzoneCustomEvent<[File[], string | null]>) => void;
     }
     interface ModusList {
-        "fixed"?: boolean;
     }
     interface ModusListItem {
         /**
