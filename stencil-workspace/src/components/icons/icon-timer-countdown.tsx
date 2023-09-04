@@ -2,9 +2,9 @@
 import { FunctionalComponent, h } from '@stencil/core';
 import { IconProps } from './IconMap';
 
-export const IconCountdownTimer: FunctionalComponent<IconProps> = (props: IconProps) => (
+export const IconTimerCountdown: FunctionalComponent<IconProps> = (props: IconProps) => (
   <svg
-    class={`icon-countdown-timer ${props.pressed ? 'pressed' : ''}`}
+    class={`icon-timer-countdown ${props.pressed ? 'pressed' : ''}`}
     height={props.size ?? 16}
     width={props.size ?? 16}
     onClick={props.onClick ? (event) => props.onClick(event) : null}

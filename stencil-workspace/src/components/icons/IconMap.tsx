@@ -44,7 +44,7 @@ import { IconMoon } from './icon-moon';
 import { IconSun } from './icon-sun';
 import { IconDownloadLine } from './icon-download-line';
 import { IconTune } from './icon-tune';
-import { IconCountdownTimer } from './icon-countdown-timer';
+import { IconTimerCountdown } from './icon-timer-countdown';
 
 export interface IconProps {
   color?: string;
@@ -91,7 +91,7 @@ export const IconMap: FunctionalComponent<IconMapProps> = (props: IconMapProps) 
     case 'copy':
       return <IconCopy color={props.color} onClick={props.onClick} size={props.size} />;
     case 'timer-countdown':
-      return <IconCountdownTimer color={props.color} onClick={props.onClick} size={props.size} />;
+      return <IconTimerCountdown color={props.color} onClick={props.onClick} size={props.size} />;
     case 'delete':
       return <IconDelete color={props.color} onClick={props.onClick} size={props.size} />;
     case 'download-line':
