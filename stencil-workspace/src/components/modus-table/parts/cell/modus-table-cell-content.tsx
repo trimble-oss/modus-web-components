@@ -3,7 +3,7 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Cell } from '@tanstack/table-core';
-import { PropertyDataType } from '../../constants/constants';
+import { COLUMN_DEF_DATATYPE_KEY } from '../../constants/constants';
 import { ModusTableColumnDataType } from '../../enums';
 import ModusTableCellLink from '../../models/modus-table-cell-link';
 import { CellFormatter } from './modus-table-cell-formatter';
@@ -24,14 +24,15 @@ function getCellType(cellType: ModusTableColumnDataType, columnType: ModusTableC
   return cellType ?? columnType;
 }
 
-export const ModusTableCellContent: FunctionalComponent<ModusTableCellContentProps> = ({ cell, onLinkClick }) => {
+const ModusTableCellContent: FunctionalComponent<ModusTableCellContentProps> = ({ cell, onLinkClick }) => {
+  const cellValue = cell.getValue();
   return (
-    <span class="cell-content">
-      {cell.getValue() ? (
+    <span class="wrap-text">
+      {cellValue ? (
         /** Link */
-        getCellType(cell.getValue()['_type'], cell.column.columnDef[PropertyDataType]) === ModusTableColumnDataType.Link ? (
+        getCellType(cellValue['_type'], cell.column.columnDef[COLUMN_DEF_DATATYPE_KEY]) === ModusTableColumnDataType.Link ? (
           <ModusTableCellLinkElement
-            link={cell.getValue() as ModusTableCellLink}
+            link={cellValue as ModusTableCellLink}
             onLinkClick={(link: ModusTableCellLink) => {
               onLinkClick(link);
             }}
@@ -46,3 +47,5 @@ export const ModusTableCellContent: FunctionalComponent<ModusTableCellContentPro
     </span>
   );
 };
+
+export default ModusTableCellContent;

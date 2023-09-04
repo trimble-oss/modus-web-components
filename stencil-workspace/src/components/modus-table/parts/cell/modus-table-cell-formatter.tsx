@@ -1,3 +1,5 @@
+// Code taken from - https://github.com/TanStack/table/blob/main/packages/react-table/src/index.tsx
+
 import {
   FunctionalComponent,
   JSX,
@@ -30,5 +32,3 @@ function isClassComponent<TProps>(component: Renderable<TProps>) {
     })()
   );
 }
-
-// Note: Url for this code - https://github.com/TanStack/table/blob/main/packages/react-table/src/index.tsx

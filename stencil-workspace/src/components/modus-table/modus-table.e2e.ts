@@ -136,7 +136,7 @@ describe('modus-table', () => {
     await page.waitForChanges();
     const sortEvent = await page.spyOnEvent('sortChange');
 
-    const header = await page.find('modus-table >>> .sort-icons');
+    const header = await page.find('modus-table >>> .sort-icon');
     await header.click();
     await header.click();
 
@@ -160,7 +160,7 @@ describe('modus-table', () => {
 
     expect(dataTestIdValue).toBe('iconSortZA');
 
-    const header = await page.find('modus-table >>> .sort-icons');
+    const header = await page.find('modus-table >>> .sort-icon');
     await header.click();
     await page.waitForChanges();
     iconSortAZ = await page.find('modus-table >>> svg');
@@ -177,7 +177,7 @@ describe('modus-table', () => {
     await page.waitForChanges();
     const sortEvent = await page.spyOnEvent('sortChange');
 
-    const header = await page.find('modus-table >>> .sort-icons');
+    const header = await page.find('modus-table >>> .sort-icon');
     await header.click();
 
     let tableData = await page.findAll('modus-table >>> td');
@@ -227,14 +227,14 @@ describe('modus-table', () => {
     expect(tooltip).not.toBeNull();
     expect(tooltipText).toEqual('Sort Ascending');
 
-    let header = await page.find('modus-table >>> .sort-icons');
+    let header = await page.find('modus-table >>> .sort-icon');
     await header.click();
     await page.waitForChanges();
     tooltip = await sortContainer.find('modus-tooltip');
     tooltipText = await tooltip.getProperty('text');
     expect(tooltipText).toEqual('Sorted Ascending');
 
-    header = await page.find('modus-table >>> .sort-icons');
+    header = await page.find('modus-table >>> .sort-icon');
     await header.click();
     await page.waitForChanges();
     tooltip = await sortContainer.find('modus-tooltip');
@@ -425,12 +425,12 @@ describe('modus-table', () => {
     component.setProperty('columnResize', false);
 
     await page.waitForChanges();
-    let resizeContainer = await page.find('modus-table >>> .can-resize');
+    let resizeContainer = await page.find('modus-table >>> .resize-handle');
     expect(resizeContainer).toBeNull();
 
     component.setProperty('columnResize', true);
     await page.waitForChanges();
-    resizeContainer = await page.find('modus-table >>> .can-resize');
+    resizeContainer = await page.find('modus-table >>> .resize-handle');
     expect(resizeContainer).not.toBeNull();
   });
 });

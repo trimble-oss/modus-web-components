@@ -5,10 +5,10 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Table } from '@tanstack/table-core';
-import ModusTablePanelOptions from '../../../models/modus-table-panel-options';
+import ModusTableToolbarOptions from '../../../models/modus-table-toolbar-options';
 @Component({
-  tag: 'modus-table-panel',
-  styleUrl: './modus-table-panel.scss',
+  tag: 'modus-table-toolbar',
+  styleUrl: './modus-table-toolbar.scss',
   shadow: true,
 })
 export class ModusTablePanel {
@@ -16,17 +16,17 @@ export class ModusTablePanel {
   @Prop() table: Table<unknown>;
 
   /** (Optional) Table Panel options. */
-  @Prop() options: ModusTablePanelOptions;
+  @Prop() options: ModusTableToolbarOptions;
 
   render(): void {
     return (
       <Host>
-        <div class="table-panel">
-          <div class="panel-section">
-            <slot name="left-section" />
+        <div class="table-toolbar">
+          <div class="section">
+            <slot name="group-left" />
           </div>
-          <div class="panel-section">
-            <slot name="right-section" />
+          <div class="section">
+            <slot name="group-right" />
             {<modus-table-dropdown-menu table={this.table} options={this.options} />}
           </div>
         </div>

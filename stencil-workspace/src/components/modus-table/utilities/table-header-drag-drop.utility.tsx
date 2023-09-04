@@ -1,5 +1,5 @@
 import { Table } from '@tanstack/table-core';
-import { ArrowLeftKey, ArrowRightKey, EnterKey, EscapeKey, TabKey } from '../constants/constants';
+import { KEYBOARD_LEFT, KEYBOARD_RIGHT, KEYBOARD_ENTER, KEYBOARD_ESCAPE, KEYBOARD_TAB } from '../constants/constants';
 import ColumnDragState from '../models/column-drag-state.model';
 
 export class TableHeaderDragDrop {
@@ -38,7 +38,7 @@ export class TableHeaderDragDrop {
     event: MouseEvent | KeyboardEvent,
     draggedColumnId: string,
     elementRef: HTMLTableHeaderCellElement,
-    throughMouse: boolean
+    mouseInteracted: boolean
   ): void {
     this.headersList = [].slice.call(this.tableHeaderRowRef.childNodes); // List of table headers.
     this.frozenColumns.forEach((frozenColumn) => {
@@ -52,7 +52,7 @@ export class TableHeaderDragDrop {
     const dragContent: HTMLElement = elementRef.cloneNode(true) as HTMLElement;
     let clientX: number, clientY: number;
     const currentTarget = event.currentTarget;
-    if (throughMouse) {
+    if (mouseInteracted) {
       // For MouseEvent
       clientX = event['clientX'];
       clientY = event['clientY'];
@@ -70,7 +70,7 @@ export class TableHeaderDragDrop {
       draggedColumnId: draggedColumnId,
       width: `${self?.offsetWidth}px`,
       height: `${self?.offsetHeight}px`,
-      throughMouse,
+      mouseInteracted,
     };
   }
 
@@ -79,7 +79,7 @@ export class TableHeaderDragDrop {
    * ItemDragState is updated following receipt of the id.
    */
   handleDragOver(event: MouseEvent): void {
-    if (!this.itemDragState || !this.itemDragState?.throughMouse) return;
+    if (!this.itemDragState || !this.itemDragState?.mouseInteracted) return;
     const { clientX, clientY } = event;
     this.updateNodeAndDragState(clientX, clientY);
   }
@@ -88,20 +88,20 @@ export class TableHeaderDragDrop {
    * Enabled use to move drag item left or right and calls handleDrop on drop.
    */
   handleKeyDown(event: KeyboardEvent): void {
-    if (!this.itemDragState || this.itemDragState?.throughMouse) return;
+    if (!this.itemDragState || this.itemDragState?.mouseInteracted) return;
     let clientX = this.itemDragState.translation.x;
     const clientY = this.itemDragState.translation.y;
     // Move right or left
-    if (event.key.toLowerCase() === ArrowRightKey || event.key.toLowerCase() === ArrowLeftKey) {
-      clientX = event.key.toLowerCase() === ArrowRightKey ? clientX + 5 : clientX - 5;
+    if (event.key.toLowerCase() === KEYBOARD_RIGHT || event.key.toLowerCase() === KEYBOARD_LEFT) {
+      clientX = event.key.toLowerCase() === KEYBOARD_RIGHT ? clientX + 5 : clientX - 5;
       this.updateNodeAndDragState(clientX, clientY);
       event.preventDefault();
       // Drop Item
-    } else if (event.key.toLowerCase() === EnterKey && this.itemDragState?.targetId) {
+    } else if (event.key.toLowerCase() === KEYBOARD_ENTER && this.itemDragState?.dropColumnId) {
       this.handleDrop();
       return;
       // Exit on Escape Or Tab
-    } else if (event.key.toLowerCase() === EscapeKey || event.key.toLowerCase() === TabKey) {
+    } else if (event.key.toLowerCase() === KEYBOARD_ESCAPE || event.key.toLowerCase() === KEYBOARD_TAB) {
       this.itemDragState = null;
       return;
     }
@@ -125,9 +125,9 @@ export class TableHeaderDragDrop {
     };
 
     if (node?.id && node.id !== newDragState.draggedColumnId) {
-      newDragState = { ...newDragState, targetId: node.id, arrowsPosition: node.getBoundingClientRect() };
+      newDragState = { ...newDragState, dropColumnId: node.id, dropIndicator: node.getBoundingClientRect() };
     } else {
-      newDragState = { ...newDragState, arrowsPosition: null };
+      newDragState = { ...newDragState, dropIndicator: null };
     }
     this.itemDragState = { ...newDragState };
   }
@@ -137,7 +137,7 @@ export class TableHeaderDragDrop {
    */
   handleDrop(): void {
     if (!this.itemDragState) return;
-    const dropItemId = this.itemDragState.targetId;
+    const dropItemId = this.itemDragState.dropColumnId;
     const draggedColumnId = this.itemDragState.draggedColumnId;
     const newColumnOrder = [...this.columnOrder];
 

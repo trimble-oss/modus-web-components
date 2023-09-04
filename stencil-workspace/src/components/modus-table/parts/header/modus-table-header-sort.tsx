@@ -5,12 +5,18 @@ import {
 import { Column } from '@tanstack/table-core';
 import { IconSortAZ } from '../../../icons/icon-sort-a-z';
 import { IconSortZA } from '../../../icons/icon-sort-z-a';
-import { EnterKey, SortAscending, SortDescending, SortedAscending, SortedDescending } from '../../constants/constants';
+import {
+  KEYBOARD_ENTER,
+  SORT_ASCENDING,
+  SORT_DESCENDING,
+  SORTED_ASCENDING,
+  SORTED_DESCENDING,
+} from '../../constants/constants';
 
 interface ModusTableHeaderSortProps {
   column: Column<unknown, unknown>;
   showSortIconOnHover: boolean;
-  columnResizeEnabled: boolean;
+  isColumnResizing: boolean;
 }
 
 /**
@@ -18,16 +24,16 @@ interface ModusTableHeaderSortProps {
  * @param column Data related to the perticular column.
  * @returns Active sort or sort that will occur.
  */
-function showSortingStatus(column: Column<unknown, unknown>, columnResizeEnabled: boolean): string {
-  return columnResizeEnabled
+function showSortingStatus(column: Column<unknown, unknown>, isColumnResizing: boolean): string {
+  return isColumnResizing
     ? '' // When column resize is enabled, we don't show the tooltip.
     : column.getIsSorted() === 'asc'
-    ? SortedAscending
+    ? SORTED_ASCENDING
     : column.getIsSorted() === 'desc'
-    ? SortedDescending
+    ? SORTED_DESCENDING
     : column.getNextSortingOrder() === 'asc'
-    ? SortAscending
-    : SortDescending;
+    ? SORT_ASCENDING
+    : SORT_DESCENDING;
 }
 
 /**
@@ -36,7 +42,7 @@ function showSortingStatus(column: Column<unknown, unknown>, columnResizeEnabled
  * @param event Keyboard event.
  */
 function sortOnKeyDown(column: Column<unknown, unknown>, event: KeyboardEvent): void {
-  if (event.key.toLowerCase() === EnterKey) {
+  if (event.key.toLowerCase() === KEYBOARD_ENTER) {
     column.toggleSorting();
     event.preventDefault();
   }
@@ -46,21 +52,21 @@ function sortOnKeyDown(column: Column<unknown, unknown>, event: KeyboardEvent): 
 export const ModusTableHeaderSort: FunctionalComponent<ModusTableHeaderSortProps> = ({
   column,
   showSortIconOnHover,
-  columnResizeEnabled,
+  isColumnResizing,
 }) => {
   return (
-    <modus-tooltip text={showSortingStatus(column, columnResizeEnabled)} position="bottom">
+    <modus-tooltip text={showSortingStatus(column, isColumnResizing)} position="bottom">
       {
         <span
           tabindex="0"
-          aria-label={showSortingStatus(column, columnResizeEnabled)}
+          aria-label={showSortingStatus(column, isColumnResizing)}
           role="button"
           onClick={column.getToggleSortingHandler()}
           onKeyDown={(event) => sortOnKeyDown(column, event)}
           onMouseDown={(event: MouseEvent) => event.stopPropagation()}
-          class="sort-icon-containor">
+          class="sort-icon-container">
           <span
-            class={`sort-icons
+            class={`sort-icon
               ${!column.getIsSorted() && 'disabled'}
               ${showSortIconOnHover ? 'hidden' : ''}
             `}>

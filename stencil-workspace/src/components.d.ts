@@ -999,9 +999,13 @@ export namespace Components {
         "pageSizeList": number[];
         "pagination": boolean;
         /**
-          * (Optional) To display a panel options, which allows access to table operations like hiding columns.
+          * (Optional) To display checkbox.
          */
-        "panelOptions": ModusTablePanelOptions | null;
+        "rowSelection": boolean;
+        /**
+          * (Optional) To control multiple row selection.
+         */
+        "rowSelectionOptions": RowSelectionOptions;
         /**
           * (Optional) To display expanded rows.
          */
@@ -1010,10 +1014,6 @@ export namespace Components {
           * (Optional) To display sort icon on hover.
          */
         "showSortIconOnHover": boolean;
-        /**
-          * (Optional) To display table panel.
-         */
-        "showTablePanel": boolean;
         /**
           * (Optional) To sort data in table.
          */
@@ -1028,6 +1028,14 @@ export namespace Components {
           * @param show Boolean value decides to visibility of column
          */
         "toggleColumnVisibility": (columnId: string, show: boolean) => Promise<void>;
+        /**
+          * (Optional) To display a toolbar for the table.
+         */
+        "toolbar": boolean;
+        /**
+          * (Optional) To display a toolbar, which allows access to table operations like hiding columns.
+         */
+        "toolbarOptions": ModusTableToolbarOptions | null;
     }
     interface ModusTableColumnsVisibility {
         /**
@@ -1046,17 +1054,17 @@ export namespace Components {
         /**
           * dropdown menu options.
          */
-        "options": ModusTablePanelOptions;
+        "options": ModusTableToolbarOptions;
         /**
           * Table data.
          */
         "table": Table<unknown>;
     }
-    interface ModusTablePanel {
+    interface ModusTableToolbar {
         /**
           * (Optional) Table Panel options.
          */
-        "options": ModusTablePanelOptions;
+        "options": ModusTableToolbarOptions;
         /**
           * Table data.
          */
@@ -1705,11 +1713,11 @@ declare global {
         prototype: HTMLModusTableDropdownMenuElement;
         new (): HTMLModusTableDropdownMenuElement;
     };
-    interface HTMLModusTablePanelElement extends Components.ModusTablePanel, HTMLStencilElement {
+    interface HTMLModusTableToolbarElement extends Components.ModusTableToolbar, HTMLStencilElement {
     }
-    var HTMLModusTablePanelElement: {
-        prototype: HTMLModusTablePanelElement;
-        new (): HTMLModusTablePanelElement;
+    var HTMLModusTableToolbarElement: {
+        prototype: HTMLModusTableToolbarElement;
+        new (): HTMLModusTableToolbarElement;
     };
     interface HTMLModusTabsElement extends Components.ModusTabs, HTMLStencilElement {
     }
@@ -1793,7 +1801,7 @@ declare global {
         "modus-table": HTMLModusTableElement;
         "modus-table-columns-visibility": HTMLModusTableColumnsVisibilityElement;
         "modus-table-dropdown-menu": HTMLModusTableDropdownMenuElement;
-        "modus-table-panel": HTMLModusTablePanelElement;
+        "modus-table-toolbar": HTMLModusTableToolbarElement;
         "modus-tabs": HTMLModusTabsElement;
         "modus-text-input": HTMLModusTextInputElement;
         "modus-time-picker": HTMLModusTimePickerElement;
@@ -2928,15 +2936,23 @@ declare namespace LocalJSX {
          */
         "onCellLinkClick"?: (event: ModusTableCustomEvent<ModusTableCellLink>) => void;
         /**
+          * Event details contains the row(s) selected
+         */
+        "onRowSelectionChange"?: (event: ModusTableCustomEvent<unknown>) => void;
+        /**
           * Emits event on sort change
          */
         "onSortChange"?: (event: ModusTableCustomEvent<ModusTableSortingState>) => void;
         "pageSizeList"?: number[];
         "pagination"?: boolean;
         /**
-          * (Optional) To display a panel options, which allows access to table operations like hiding columns.
+          * (Optional) To display checkbox.
          */
-        "panelOptions"?: ModusTablePanelOptions | null;
+        "rowSelection"?: boolean;
+        /**
+          * (Optional) To control multiple row selection.
+         */
+        "rowSelectionOptions"?: RowSelectionOptions;
         /**
           * (Optional) To display expanded rows.
          */
@@ -2946,10 +2962,6 @@ declare namespace LocalJSX {
          */
         "showSortIconOnHover"?: boolean;
         /**
-          * (Optional) To display table panel.
-         */
-        "showTablePanel"?: boolean;
-        /**
           * (Optional) To sort data in table.
          */
         "sort"?: boolean;
@@ -2957,6 +2969,14 @@ declare namespace LocalJSX {
           * (Optional) To display summary row.
          */
         "summaryRow"?: boolean;
+        /**
+          * (Optional) To display a toolbar for the table.
+         */
+        "toolbar"?: boolean;
+        /**
+          * (Optional) To display a toolbar, which allows access to table operations like hiding columns.
+         */
+        "toolbarOptions"?: ModusTableToolbarOptions | null;
     }
     interface ModusTableColumnsVisibility {
         /**
@@ -2975,17 +2995,17 @@ declare namespace LocalJSX {
         /**
           * dropdown menu options.
          */
-        "options"?: ModusTablePanelOptions;
+        "options"?: ModusTableToolbarOptions;
         /**
           * Table data.
          */
         "table"?: Table<unknown>;
     }
-    interface ModusTablePanel {
+    interface ModusTableToolbar {
         /**
           * (Optional) Table Panel options.
          */
-        "options"?: ModusTablePanelOptions;
+        "options"?: ModusTableToolbarOptions;
         /**
           * Table data.
          */
@@ -3329,7 +3349,7 @@ declare namespace LocalJSX {
         "modus-table": ModusTable;
         "modus-table-columns-visibility": ModusTableColumnsVisibility;
         "modus-table-dropdown-menu": ModusTableDropdownMenu;
-        "modus-table-panel": ModusTablePanel;
+        "modus-table-toolbar": ModusTableToolbar;
         "modus-tabs": ModusTabs;
         "modus-text-input": ModusTextInput;
         "modus-time-picker": ModusTimePicker;
@@ -3382,7 +3402,7 @@ declare module "@stencil/core" {
             "modus-table": LocalJSX.ModusTable & JSXBase.HTMLAttributes<HTMLModusTableElement>;
             "modus-table-columns-visibility": LocalJSX.ModusTableColumnsVisibility & JSXBase.HTMLAttributes<HTMLModusTableColumnsVisibilityElement>;
             "modus-table-dropdown-menu": LocalJSX.ModusTableDropdownMenu & JSXBase.HTMLAttributes<HTMLModusTableDropdownMenuElement>;
-            "modus-table-panel": LocalJSX.ModusTablePanel & JSXBase.HTMLAttributes<HTMLModusTablePanelElement>;
+            "modus-table-toolbar": LocalJSX.ModusTableToolbar & JSXBase.HTMLAttributes<HTMLModusTableToolbarElement>;
             "modus-tabs": LocalJSX.ModusTabs & JSXBase.HTMLAttributes<HTMLModusTabsElement>;
             "modus-text-input": LocalJSX.ModusTextInput & JSXBase.HTMLAttributes<HTMLModusTextInputElement>;
             "modus-time-picker": LocalJSX.ModusTimePicker & JSXBase.HTMLAttributes<HTMLModusTimePickerElement>;
