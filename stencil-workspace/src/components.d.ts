@@ -500,9 +500,18 @@ export namespace Components {
         "removeFile": (fileName: string) => Promise<void>;
     }
     interface ModusIcon {
+        /**
+          * (optional) The color of the Icon
+         */
         "color"?: string;
+        /**
+          * The name of the icon
+         */
         "icon": string | null;
-        "size"?: string;
+        /**
+          * (optional) The size of the Icon
+         */
+        "size"?: string | '16';
     }
     interface ModusList {
     }
@@ -2197,10 +2206,22 @@ declare namespace LocalJSX {
         "onFiles"?: (event: ModusFileDropzoneCustomEvent<[File[], string | null]>) => void;
     }
     interface ModusIcon {
+        /**
+          * (optional) The color of the Icon
+         */
         "color"?: string;
+        /**
+          * The name of the icon
+         */
         "icon"?: string | null;
+        /**
+          * (optional) The click handler function
+         */
         "onIconClick"?: (event: ModusIconCustomEvent<any>) => void;
-        "size"?: string;
+        /**
+          * (optional) The size of the Icon
+         */
+        "size"?: string | '16';
     }
     interface ModusList {
     }

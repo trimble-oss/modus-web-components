@@ -472,7 +472,9 @@ export class ModusIcon {
 
 
 export declare interface ModusIcon extends Components.ModusIcon {
-
+  /**
+   * (optional) The click handler function
+   */
   iconClick: EventEmitter<CustomEvent<any>>;
 }
 

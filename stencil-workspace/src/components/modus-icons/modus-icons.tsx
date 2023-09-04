@@ -7,12 +7,16 @@ import { IconMap } from '../icons/IconMap';
   shadow: true,
 })
 export class ModusIcon {
+   /** The name of the icon */
   @Prop() icon: string | null;
 
+   /** (optional) The click handler function */
   @Event() iconClick?: EventEmitter;
 
-  @Prop() size?: string;
+   /** (optional) The size of the Icon */
+  @Prop() size?: string | '16'; 
 
+   /** (optional) The color of the Icon */
   @Prop() color?: string;
 
   onClick(event: MouseEvent): void {
