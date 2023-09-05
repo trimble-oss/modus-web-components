@@ -14,6 +14,8 @@ import { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, 
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
+import { ModusTableSortingState } from "./components/modus-table/models";
+import { Column, Table } from "@tanstack/table-core";
 import { Tab } from "./components/modus-tabs/modus-tabs";
 import { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
 import { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
@@ -26,6 +28,8 @@ export { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, 
 export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 export { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 export { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
+export { ModusTableSortingState } from "./components/modus-table/models";
+export { Column, Table } from "@tanstack/table-core";
 export { Tab } from "./components/modus-tabs/modus-tabs";
 export { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
 export { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
@@ -263,6 +267,10 @@ export namespace Components {
           * (optional) The checkbox label.
          */
         "label": string;
+        /**
+          * (optional) If you wish to prevent the propagation of your event, you may opt for this.
+         */
+        "stopPropagation": boolean;
         /**
           * (optional) Tab Index for the checkbox
          */
@@ -741,6 +749,8 @@ export namespace Components {
         "ariaLabel": string | null;
         "maxPage": number;
         "minPage": number;
+        "nextPageButtonText"?: string;
+        "prevPageButtonText"?: string;
         "size": 'large' | 'medium' | 'small';
     }
     interface ModusProgressBar {
@@ -948,6 +958,117 @@ export namespace Components {
           * (optional) The switch label.
          */
         "label": string;
+    }
+    interface ModusTable {
+        /**
+          * (Optional) To allow column reordering.
+         */
+        "columnReorder": boolean;
+        "columnResize": boolean;
+        /**
+          * (Required) To display headers in the table.
+         */
+        "columns": ModusTableColumn<unknown>[];
+        /**
+          * (Required) To display data in the table.
+         */
+        "data": unknown[];
+        /**
+          * (Optional) To control display options of table.
+         */
+        "displayOptions"?: ModusTableDisplayOptions;
+        "fullWidth": boolean;
+        /**
+          * Returns data of a column.
+          * @param accessorKey : Column name as key.
+          * @returns : Column data as Array or empty array.
+         */
+        "getColumnData": (accessorKey: string) => Promise<unknown[]>;
+        /**
+          * (Optional) To enable row hover in table.
+         */
+        "hover": boolean;
+        /**
+          * (Optional) To display a vertical scrollbar when the height is exceeded.
+         */
+        "maxHeight": string;
+        /**
+          * (Optional) To display a horizontal scrollbar when the width is exceeded.
+         */
+        "maxWidth": string;
+        "pageSizeList": number[];
+        "pagination": boolean;
+        /**
+          * (Optional) To display checkbox.
+         */
+        "rowSelection": boolean;
+        /**
+          * (Optional) To control multiple row selection.
+         */
+        "rowSelectionOptions": RowSelectionOptions;
+        /**
+          * (Optional) To display expanded rows.
+         */
+        "rowsExpandable": boolean;
+        /**
+          * (Optional) To display sort icon on hover.
+         */
+        "showSortIconOnHover": boolean;
+        /**
+          * (Optional) To sort data in table.
+         */
+        "sort": boolean;
+        /**
+          * (Optional) To display summary row.
+         */
+        "summaryRow": boolean;
+        /**
+          * Toggle the table column visibility
+          * @param columnId Column id
+          * @param show Boolean value decides to visibility of column
+         */
+        "toggleColumnVisibility": (columnId: string, show: boolean) => Promise<void>;
+        /**
+          * (Optional) To display a toolbar for the table.
+         */
+        "toolbar": boolean;
+        /**
+          * (Optional) To display a toolbar, which allows access to table operations like hiding columns.
+         */
+        "toolbarOptions": ModusTableToolbarOptions | null;
+    }
+    interface ModusTableColumnsVisibility {
+        /**
+          * Column visibility options
+         */
+        "columnsVisibility": ModusTableColumnsVisibilityOptions;
+        "menuIconContainerRef": HTMLDivElement;
+        "showDropdown": boolean;
+        /**
+          * Table data.
+         */
+        "table": Table<unknown>;
+        "toggleDropdown": (show: boolean) => void;
+    }
+    interface ModusTableDropdownMenu {
+        /**
+          * dropdown menu options.
+         */
+        "options": ModusTableToolbarOptions;
+        /**
+          * Table data.
+         */
+        "table": Table<unknown>;
+    }
+    interface ModusTableToolbar {
+        /**
+          * (Optional) Table Panel options.
+         */
+        "options": ModusTableToolbarOptions;
+        /**
+          * Table data.
+         */
+        "table": Table<unknown>;
     }
     interface ModusTabs {
         "ariaLabel": string | null;
@@ -1333,6 +1454,10 @@ export interface ModusSwitchCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusSwitchElement;
 }
+export interface ModusTableCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusTableElement;
+}
 export interface ModusTabsCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusTabsElement;
@@ -1570,6 +1695,30 @@ declare global {
         prototype: HTMLModusSwitchElement;
         new (): HTMLModusSwitchElement;
     };
+    interface HTMLModusTableElement extends Components.ModusTable, HTMLStencilElement {
+    }
+    var HTMLModusTableElement: {
+        prototype: HTMLModusTableElement;
+        new (): HTMLModusTableElement;
+    };
+    interface HTMLModusTableColumnsVisibilityElement extends Components.ModusTableColumnsVisibility, HTMLStencilElement {
+    }
+    var HTMLModusTableColumnsVisibilityElement: {
+        prototype: HTMLModusTableColumnsVisibilityElement;
+        new (): HTMLModusTableColumnsVisibilityElement;
+    };
+    interface HTMLModusTableDropdownMenuElement extends Components.ModusTableDropdownMenu, HTMLStencilElement {
+    }
+    var HTMLModusTableDropdownMenuElement: {
+        prototype: HTMLModusTableDropdownMenuElement;
+        new (): HTMLModusTableDropdownMenuElement;
+    };
+    interface HTMLModusTableToolbarElement extends Components.ModusTableToolbar, HTMLStencilElement {
+    }
+    var HTMLModusTableToolbarElement: {
+        prototype: HTMLModusTableToolbarElement;
+        new (): HTMLModusTableToolbarElement;
+    };
     interface HTMLModusTabsElement extends Components.ModusTabs, HTMLStencilElement {
     }
     var HTMLModusTabsElement: {
@@ -1649,6 +1798,10 @@ declare global {
         "modus-slider": HTMLModusSliderElement;
         "modus-spinner": HTMLModusSpinnerElement;
         "modus-switch": HTMLModusSwitchElement;
+        "modus-table": HTMLModusTableElement;
+        "modus-table-columns-visibility": HTMLModusTableColumnsVisibilityElement;
+        "modus-table-dropdown-menu": HTMLModusTableDropdownMenuElement;
+        "modus-table-toolbar": HTMLModusTableToolbarElement;
         "modus-tabs": HTMLModusTabsElement;
         "modus-text-input": HTMLModusTextInputElement;
         "modus-time-picker": HTMLModusTimePickerElement;
@@ -1916,6 +2069,10 @@ declare namespace LocalJSX {
           * An event that fires on checkbox click.
          */
         "onCheckboxClick"?: (event: ModusCheckboxCustomEvent<boolean>) => void;
+        /**
+          * (optional) If you wish to prevent the propagation of your event, you may opt for this.
+         */
+        "stopPropagation"?: boolean;
         /**
           * (optional) Tab Index for the checkbox
          */
@@ -2496,10 +2653,12 @@ declare namespace LocalJSX {
         "ariaLabel"?: string | null;
         "maxPage"?: number;
         "minPage"?: number;
+        "nextPageButtonText"?: string;
         /**
           * An event that fires on page change.
          */
         "onPageChange"?: (event: ModusPaginationCustomEvent<number>) => void;
+        "prevPageButtonText"?: string;
         "size"?: 'large' | 'medium' | 'small';
     }
     interface ModusProgressBar {
@@ -2740,6 +2899,117 @@ declare namespace LocalJSX {
           * An event that fires on switch click.
          */
         "onSwitchClick"?: (event: ModusSwitchCustomEvent<boolean>) => void;
+    }
+    interface ModusTable {
+        /**
+          * (Optional) To allow column reordering.
+         */
+        "columnReorder"?: boolean;
+        "columnResize"?: boolean;
+        /**
+          * (Required) To display headers in the table.
+         */
+        "columns": ModusTableColumn<unknown>[];
+        /**
+          * (Required) To display data in the table.
+         */
+        "data": unknown[];
+        /**
+          * (Optional) To control display options of table.
+         */
+        "displayOptions"?: ModusTableDisplayOptions;
+        "fullWidth"?: boolean;
+        /**
+          * (Optional) To enable row hover in table.
+         */
+        "hover"?: boolean;
+        /**
+          * (Optional) To display a vertical scrollbar when the height is exceeded.
+         */
+        "maxHeight"?: string;
+        /**
+          * (Optional) To display a horizontal scrollbar when the width is exceeded.
+         */
+        "maxWidth"?: string;
+        /**
+          * Emits the link that was clicked
+         */
+        "onCellLinkClick"?: (event: ModusTableCustomEvent<ModusTableCellLink>) => void;
+        /**
+          * Event details contains the row(s) selected
+         */
+        "onRowSelectionChange"?: (event: ModusTableCustomEvent<unknown>) => void;
+        /**
+          * Emits event on sort change
+         */
+        "onSortChange"?: (event: ModusTableCustomEvent<ModusTableSortingState>) => void;
+        "pageSizeList"?: number[];
+        "pagination"?: boolean;
+        /**
+          * (Optional) To display checkbox.
+         */
+        "rowSelection"?: boolean;
+        /**
+          * (Optional) To control multiple row selection.
+         */
+        "rowSelectionOptions"?: RowSelectionOptions;
+        /**
+          * (Optional) To display expanded rows.
+         */
+        "rowsExpandable"?: boolean;
+        /**
+          * (Optional) To display sort icon on hover.
+         */
+        "showSortIconOnHover"?: boolean;
+        /**
+          * (Optional) To sort data in table.
+         */
+        "sort"?: boolean;
+        /**
+          * (Optional) To display summary row.
+         */
+        "summaryRow"?: boolean;
+        /**
+          * (Optional) To display a toolbar for the table.
+         */
+        "toolbar"?: boolean;
+        /**
+          * (Optional) To display a toolbar, which allows access to table operations like hiding columns.
+         */
+        "toolbarOptions"?: ModusTableToolbarOptions | null;
+    }
+    interface ModusTableColumnsVisibility {
+        /**
+          * Column visibility options
+         */
+        "columnsVisibility"?: ModusTableColumnsVisibilityOptions;
+        "menuIconContainerRef"?: HTMLDivElement;
+        "showDropdown"?: boolean;
+        /**
+          * Table data.
+         */
+        "table"?: Table<unknown>;
+        "toggleDropdown"?: (show: boolean) => void;
+    }
+    interface ModusTableDropdownMenu {
+        /**
+          * dropdown menu options.
+         */
+        "options"?: ModusTableToolbarOptions;
+        /**
+          * Table data.
+         */
+        "table"?: Table<unknown>;
+    }
+    interface ModusTableToolbar {
+        /**
+          * (Optional) Table Panel options.
+         */
+        "options"?: ModusTableToolbarOptions;
+        /**
+          * Table data.
+         */
+        "table"?: Table<unknown>;
     }
     interface ModusTabs {
         "ariaLabel"?: string | null;
@@ -3076,6 +3346,10 @@ declare namespace LocalJSX {
         "modus-slider": ModusSlider;
         "modus-spinner": ModusSpinner;
         "modus-switch": ModusSwitch;
+        "modus-table": ModusTable;
+        "modus-table-columns-visibility": ModusTableColumnsVisibility;
+        "modus-table-dropdown-menu": ModusTableDropdownMenu;
+        "modus-table-toolbar": ModusTableToolbar;
         "modus-tabs": ModusTabs;
         "modus-text-input": ModusTextInput;
         "modus-time-picker": ModusTimePicker;
@@ -3125,6 +3399,10 @@ declare module "@stencil/core" {
             "modus-slider": LocalJSX.ModusSlider & JSXBase.HTMLAttributes<HTMLModusSliderElement>;
             "modus-spinner": LocalJSX.ModusSpinner & JSXBase.HTMLAttributes<HTMLModusSpinnerElement>;
             "modus-switch": LocalJSX.ModusSwitch & JSXBase.HTMLAttributes<HTMLModusSwitchElement>;
+            "modus-table": LocalJSX.ModusTable & JSXBase.HTMLAttributes<HTMLModusTableElement>;
+            "modus-table-columns-visibility": LocalJSX.ModusTableColumnsVisibility & JSXBase.HTMLAttributes<HTMLModusTableColumnsVisibilityElement>;
+            "modus-table-dropdown-menu": LocalJSX.ModusTableDropdownMenu & JSXBase.HTMLAttributes<HTMLModusTableDropdownMenuElement>;
+            "modus-table-toolbar": LocalJSX.ModusTableToolbar & JSXBase.HTMLAttributes<HTMLModusTableToolbarElement>;
             "modus-tabs": LocalJSX.ModusTabs & JSXBase.HTMLAttributes<HTMLModusTabsElement>;
             "modus-text-input": LocalJSX.ModusTextInput & JSXBase.HTMLAttributes<HTMLModusTextInputElement>;
             "modus-time-picker": LocalJSX.ModusTimePicker & JSXBase.HTMLAttributes<HTMLModusTimePickerElement>;

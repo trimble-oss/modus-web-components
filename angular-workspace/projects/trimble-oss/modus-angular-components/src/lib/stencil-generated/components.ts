@@ -6,8 +6,9 @@ import { ProxyCmp, proxyOutputs } from './angular-component-lib/utils';
 
 import { Components } from '@trimble-oss/modus-web-components';
 
+
 @ProxyCmp({
-  inputs: ['ariaLabel'],
+  inputs: ['ariaLabel']
 })
 @Component({
   selector: 'modus-accordion',
@@ -24,10 +25,12 @@ export class ModusAccordion {
   }
 }
 
+
 export declare interface ModusAccordion extends Components.ModusAccordion {}
 
+
 @ProxyCmp({
-  inputs: ['disabled', 'expanded', 'headerText', 'size'],
+  inputs: ['disabled', 'expanded', 'headerText', 'size']
 })
 @Component({
   selector: 'modus-accordion-item',
@@ -45,6 +48,7 @@ export class ModusAccordionItem {
   }
 }
 
+
 export declare interface ModusAccordionItem extends Components.ModusAccordionItem {
   /**
    * An event that fires on every accordion close.
@@ -56,8 +60,9 @@ export declare interface ModusAccordionItem extends Components.ModusAccordionIte
   opened: EventEmitter<CustomEvent<any>>;
 }
 
+
 @ProxyCmp({
-  inputs: ['ariaLabel', 'dismissible', 'message', 'type'],
+  inputs: ['ariaLabel', 'dismissible', 'message', 'type']
 })
 @Component({
   selector: 'modus-alert',
@@ -75,6 +80,7 @@ export class ModusAlert {
   }
 }
 
+
 export declare interface ModusAlert extends Components.ModusAlert {
   /**
    * An event that fires when the alert is dismissed
@@ -82,51 +88,16 @@ export declare interface ModusAlert extends Components.ModusAlert {
   dismissClick: EventEmitter<CustomEvent<any>>;
 }
 
+
 @ProxyCmp({
-  inputs: [
-    'ariaLabel',
-    'clearable',
-    'disabled',
-    'dropdownMaxHeight',
-    'dropdownZIndex',
-    'errorText',
-    'includeSearchIcon',
-    'label',
-    'noResultsFoundSubtext',
-    'noResultsFoundText',
-    'options',
-    'placeholder',
-    'readOnly',
-    'required',
-    'showNoResultsFoundMessage',
-    'size',
-    'value',
-  ],
+  inputs: ['ariaLabel', 'clearable', 'disabled', 'dropdownMaxHeight', 'dropdownZIndex', 'errorText', 'includeSearchIcon', 'label', 'noResultsFoundSubtext', 'noResultsFoundText', 'options', 'placeholder', 'readOnly', 'required', 'showNoResultsFoundMessage', 'size', 'value']
 })
 @Component({
   selector: 'modus-autocomplete',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: [
-    'ariaLabel',
-    'clearable',
-    'disabled',
-    'dropdownMaxHeight',
-    'dropdownZIndex',
-    'errorText',
-    'includeSearchIcon',
-    'label',
-    'noResultsFoundSubtext',
-    'noResultsFoundText',
-    'options',
-    'placeholder',
-    'readOnly',
-    'required',
-    'showNoResultsFoundMessage',
-    'size',
-    'value',
-  ],
+  inputs: ['ariaLabel', 'clearable', 'disabled', 'dropdownMaxHeight', 'dropdownZIndex', 'errorText', 'includeSearchIcon', 'label', 'noResultsFoundSubtext', 'noResultsFoundText', 'options', 'placeholder', 'readOnly', 'required', 'showNoResultsFoundMessage', 'size', 'value'],
 })
 export class ModusAutocomplete {
   protected el: HTMLElement;
@@ -136,6 +107,7 @@ export class ModusAutocomplete {
     proxyOutputs(this, this.el, ['optionSelected', 'valueChange']);
   }
 }
+
 
 export declare interface ModusAutocomplete extends Components.ModusAutocomplete {
   /**
@@ -148,8 +120,9 @@ export declare interface ModusAutocomplete extends Components.ModusAutocomplete 
   valueChange: EventEmitter<CustomEvent<string>>;
 }
 
+
 @ProxyCmp({
-  inputs: ['ariaLabel', 'color', 'size', 'type'],
+  inputs: ['ariaLabel', 'color', 'size', 'type']
 })
 @Component({
   selector: 'modus-badge',
@@ -166,10 +139,12 @@ export class ModusBadge {
   }
 }
 
+
 export declare interface ModusBadge extends Components.ModusBadge {}
 
+
 @ProxyCmp({
-  inputs: ['ariaLabel', 'crumbs'],
+  inputs: ['ariaLabel', 'crumbs']
 })
 @Component({
   selector: 'modus-breadcrumb',
@@ -187,6 +162,7 @@ export class ModusBreadcrumb {
   }
 }
 
+
 import type { Crumb as IModusBreadcrumbCrumb } from '@trimble-oss/modus-web-components';
 
 export declare interface ModusBreadcrumb extends Components.ModusBreadcrumb {
@@ -196,9 +172,10 @@ export declare interface ModusBreadcrumb extends Components.ModusBreadcrumb {
   crumbClick: EventEmitter<CustomEvent<IModusBreadcrumbCrumb>>;
 }
 
+
 @ProxyCmp({
   inputs: ['ariaLabel', 'buttonStyle', 'color', 'disabled', 'iconOnly', 'leftIcon', 'rightIcon', 'showCaret', 'size'],
-  methods: ['focusButton'],
+  methods: ['focusButton']
 })
 @Component({
   selector: 'modus-button',
@@ -216,6 +193,7 @@ export class ModusButton {
   }
 }
 
+
 export declare interface ModusButton extends Components.ModusButton {
   /**
    * (optional) An event that fires on button click.
@@ -223,8 +201,9 @@ export declare interface ModusButton extends Components.ModusButton {
   buttonClick: EventEmitter<CustomEvent<any>>;
 }
 
+
 @ProxyCmp({
-  inputs: ['ariaLabel', 'borderRadius', 'height', 'showCardBorder', 'showShadowOnHover', 'width'],
+  inputs: ['ariaLabel', 'borderRadius', 'height', 'showCardBorder', 'showShadowOnHover', 'width']
 })
 @Component({
   selector: 'modus-card',
@@ -241,18 +220,20 @@ export class ModusCard {
   }
 }
 
+
 export declare interface ModusCard extends Components.ModusCard {}
 
+
 @ProxyCmp({
-  inputs: ['ariaLabel', 'checked', 'disabled', 'indeterminate', 'label', 'tabIndexValue'],
-  methods: ['focusCheckbox'],
+  inputs: ['ariaLabel', 'checked', 'disabled', 'indeterminate', 'label', 'stopPropagation', 'tabIndexValue'],
+  methods: ['focusCheckbox']
 })
 @Component({
   selector: 'modus-checkbox',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['ariaLabel', 'checked', 'disabled', 'indeterminate', 'label', 'tabIndexValue'],
+  inputs: ['ariaLabel', 'checked', 'disabled', 'indeterminate', 'label', 'stopPropagation', 'tabIndexValue'],
 })
 export class ModusCheckbox {
   protected el: HTMLElement;
@@ -263,6 +244,7 @@ export class ModusCheckbox {
   }
 }
 
+
 export declare interface ModusCheckbox extends Components.ModusCheckbox {
   /**
    * An event that fires on checkbox click.
@@ -270,8 +252,9 @@ export declare interface ModusCheckbox extends Components.ModusCheckbox {
   checkboxClick: EventEmitter<CustomEvent<boolean>>;
 }
 
+
 @ProxyCmp({
-  inputs: ['ariaLabel', 'chipStyle', 'disabled', 'hasError', 'imageUrl', 'showCheckmark', 'showClose', 'size', 'value'],
+  inputs: ['ariaLabel', 'chipStyle', 'disabled', 'hasError', 'imageUrl', 'showCheckmark', 'showClose', 'size', 'value']
 })
 @Component({
   selector: 'modus-chip',
@@ -289,6 +272,7 @@ export class ModusChip {
   }
 }
 
+
 export declare interface ModusChip extends Components.ModusChip {
   /**
    * An event that fires on chip click.
@@ -300,8 +284,9 @@ export declare interface ModusChip extends Components.ModusChip {
   closeClick: EventEmitter<CustomEvent<any>>;
 }
 
+
 @ProxyCmp({
-  inputs: ['columns', 'data', 'displayOptions', 'rowActions', 'selectionOptions', 'sortOptions'],
+  inputs: ['columns', 'data', 'displayOptions', 'rowActions', 'selectionOptions', 'sortOptions']
 })
 @Component({
   selector: 'modus-data-table',
@@ -318,6 +303,7 @@ export class ModusDataTable {
     proxyOutputs(this, this.el, ['cellLinkClick', 'rowDoubleClick', 'selection', 'sort', 'rowActionClick']);
   }
 }
+
 
 import type { ModusDataTableCellLink as IModusDataTableModusDataTableCellLink } from '@trimble-oss/modus-web-components';
 import type { ModusDataTableSortEvent as IModusDataTableModusDataTableSortEvent } from '@trimble-oss/modus-web-components';
@@ -346,54 +332,17 @@ export declare interface ModusDataTable extends Components.ModusDataTable {
   rowActionClick: EventEmitter<CustomEvent<IModusDataTableModusDataTableRowActionClickEvent>>;
 }
 
+
 @ProxyCmp({
-  inputs: [
-    'allowedCharsRegex',
-    'ariaLabel',
-    'autoFocusInput',
-    'disableValidation',
-    'disabled',
-    'errorText',
-    'fillerDate',
-    'format',
-    'helperText',
-    'label',
-    'placeholder',
-    'readOnly',
-    'required',
-    'showCalendarIcon',
-    'size',
-    'type',
-    'validText',
-    'value',
-  ],
-  methods: ['focusInput'],
+  inputs: ['allowedCharsRegex', 'ariaLabel', 'autoFocusInput', 'disableValidation', 'disabled', 'errorText', 'fillerDate', 'format', 'helperText', 'label', 'placeholder', 'readOnly', 'required', 'showCalendarIcon', 'size', 'type', 'validText', 'value'],
+  methods: ['focusInput']
 })
 @Component({
   selector: 'modus-date-input',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: [
-    'allowedCharsRegex',
-    'ariaLabel',
-    'autoFocusInput',
-    'disableValidation',
-    'disabled',
-    'errorText',
-    'fillerDate',
-    'format',
-    'helperText',
-    'label',
-    'placeholder',
-    'readOnly',
-    'required',
-    'showCalendarIcon',
-    'size',
-    'type',
-    'validText',
-    'value',
-  ],
+  inputs: ['allowedCharsRegex', 'ariaLabel', 'autoFocusInput', 'disableValidation', 'disabled', 'errorText', 'fillerDate', 'format', 'helperText', 'label', 'placeholder', 'readOnly', 'required', 'showCalendarIcon', 'size', 'type', 'validText', 'value'],
 })
 export class ModusDateInput {
   protected el: HTMLElement;
@@ -403,6 +352,7 @@ export class ModusDateInput {
     proxyOutputs(this, this.el, ['calendarIconClicked', 'dateInputBlur', 'valueChange']);
   }
 }
+
 
 import type { ModusDateInputEventDetails as IModusDateInputModusDateInputEventDetails } from '@trimble-oss/modus-web-components';
 
@@ -421,8 +371,9 @@ export declare interface ModusDateInput extends Components.ModusDateInput {
   valueChange: EventEmitter<CustomEvent<IModusDateInputModusDateInputEventDetails>>;
 }
 
+
 @ProxyCmp({
-  inputs: ['label'],
+  inputs: ['label']
 })
 @Component({
   selector: 'modus-date-picker',
@@ -439,10 +390,12 @@ export class ModusDatePicker {
   }
 }
 
+
 export declare interface ModusDatePicker extends Components.ModusDatePicker {}
 
+
 @ProxyCmp({
-  inputs: ['animateList', 'ariaLabel', 'customPlacement', 'disabled', 'placement', 'toggleElementId'],
+  inputs: ['animateList', 'ariaLabel', 'customPlacement', 'disabled', 'placement', 'toggleElementId']
 })
 @Component({
   selector: 'modus-dropdown',
@@ -460,6 +413,7 @@ export class ModusDropdown {
   }
 }
 
+
 export declare interface ModusDropdown extends Components.ModusDropdown {
   /**
    * An event that fires on dropdown close.
@@ -467,38 +421,17 @@ export declare interface ModusDropdown extends Components.ModusDropdown {
   dropdownClose: EventEmitter<CustomEvent<any>>;
 }
 
+
 @ProxyCmp({
-  inputs: [
-    'ariaLabel',
-    'description',
-    'dropzoneHeight',
-    'dropzoneWidth',
-    'includeStateIcon',
-    'label',
-    'maxFileCount',
-    'maxFileNameLength',
-    'maxTotalFileSizeBytes',
-    'multiple',
-  ],
-  methods: ['addFile', 'getError', 'getFiles', 'removeFile'],
+  inputs: ['ariaLabel', 'description', 'dropzoneHeight', 'dropzoneWidth', 'includeStateIcon', 'label', 'maxFileCount', 'maxFileNameLength', 'maxTotalFileSizeBytes', 'multiple'],
+  methods: ['addFile', 'getError', 'getFiles', 'removeFile']
 })
 @Component({
   selector: 'modus-file-dropzone',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: [
-    'ariaLabel',
-    'description',
-    'dropzoneHeight',
-    'dropzoneWidth',
-    'includeStateIcon',
-    'label',
-    'maxFileCount',
-    'maxFileNameLength',
-    'maxTotalFileSizeBytes',
-    'multiple',
-  ],
+  inputs: ['ariaLabel', 'description', 'dropzoneHeight', 'dropzoneWidth', 'includeStateIcon', 'label', 'maxFileCount', 'maxFileNameLength', 'maxTotalFileSizeBytes', 'multiple'],
 })
 export class ModusFileDropzone {
   protected el: HTMLElement;
@@ -509,6 +442,7 @@ export class ModusFileDropzone {
   }
 }
 
+
 export declare interface ModusFileDropzone extends Components.ModusFileDropzone {
   /**
    * An event that fires when files have been added or removed, regardless of whether they're valid.
@@ -516,7 +450,9 @@ export declare interface ModusFileDropzone extends Components.ModusFileDropzone 
   files: EventEmitter<CustomEvent<[File[], string | null]>>;
 }
 
-@ProxyCmp({})
+
+@ProxyCmp({
+})
 @Component({
   selector: 'modus-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -532,10 +468,12 @@ export class ModusList {
   }
 }
 
+
 export declare interface ModusList extends Components.ModusList {}
 
+
 @ProxyCmp({
-  inputs: ['disabled', 'selected', 'size', 'type'],
+  inputs: ['disabled', 'selected', 'size', 'type']
 })
 @Component({
   selector: 'modus-list-item',
@@ -553,6 +491,7 @@ export class ModusListItem {
   }
 }
 
+
 export declare interface ModusListItem extends Components.ModusListItem {
   /**
    * An event that fires on list item click
@@ -560,8 +499,9 @@ export declare interface ModusListItem extends Components.ModusListItem {
   itemClick: EventEmitter<CustomEvent<any>>;
 }
 
+
 @ProxyCmp({
-  inputs: ['ariaLabel', 'icon', 'type'],
+  inputs: ['ariaLabel', 'icon', 'type']
 })
 @Component({
   selector: 'modus-message',
@@ -578,40 +518,20 @@ export class ModusMessage {
   }
 }
 
+
 export declare interface ModusMessage extends Components.ModusMessage {}
 
+
 @ProxyCmp({
-  inputs: [
-    'ariaLabel',
-    'backdrop',
-    'headerText',
-    'primaryButtonAriaLabel',
-    'primaryButtonDisabled',
-    'primaryButtonText',
-    'secondaryButtonAriaLabel',
-    'secondaryButtonDisabled',
-    'secondaryButtonText',
-    'zIndex',
-  ],
-  methods: ['close', 'open'],
+  inputs: ['ariaLabel', 'backdrop', 'headerText', 'primaryButtonAriaLabel', 'primaryButtonDisabled', 'primaryButtonText', 'secondaryButtonAriaLabel', 'secondaryButtonDisabled', 'secondaryButtonText', 'zIndex'],
+  methods: ['close', 'open']
 })
 @Component({
   selector: 'modus-modal',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: [
-    'ariaLabel',
-    'backdrop',
-    'headerText',
-    'primaryButtonAriaLabel',
-    'primaryButtonDisabled',
-    'primaryButtonText',
-    'secondaryButtonAriaLabel',
-    'secondaryButtonDisabled',
-    'secondaryButtonText',
-    'zIndex',
-  ],
+  inputs: ['ariaLabel', 'backdrop', 'headerText', 'primaryButtonAriaLabel', 'primaryButtonDisabled', 'primaryButtonText', 'secondaryButtonAriaLabel', 'secondaryButtonDisabled', 'secondaryButtonText', 'zIndex'],
 })
 export class ModusModal {
   protected el: HTMLElement;
@@ -621,6 +541,7 @@ export class ModusModal {
     proxyOutputs(this, this.el, ['closed', 'opened', 'primaryButtonClick', 'secondaryButtonClick']);
   }
 }
+
 
 export declare interface ModusModal extends Components.ModusModal {
   /**
@@ -641,72 +562,27 @@ export declare interface ModusModal extends Components.ModusModal {
   secondaryButtonClick: EventEmitter<CustomEvent<any>>;
 }
 
+
 @ProxyCmp({
-  inputs: [
-    'apps',
-    'buttons',
-    'enableSearchOverlay',
-    'helpUrl',
-    'logoOptions',
-    'profileMenuOptions',
-    'reverse',
-    'searchTooltip',
-    'showAppsMenu',
-    'showHelp',
-    'showMainMenu',
-    'showNotifications',
-    'showPendoPlaceholder',
-    'showSearch',
-    'showShadow',
-    'variant',
-  ],
-  methods: ['hideMainMenu'],
+  inputs: ['apps', 'buttons', 'enableSearchOverlay', 'helpUrl', 'logoOptions', 'profileMenuOptions', 'reverse', 'searchTooltip', 'showAppsMenu', 'showHelp', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showSearch', 'showShadow', 'variant'],
+  methods: ['hideMainMenu']
 })
 @Component({
   selector: 'modus-navbar',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: [
-    'apps',
-    'buttons',
-    'enableSearchOverlay',
-    'helpUrl',
-    'logoOptions',
-    'profileMenuOptions',
-    'reverse',
-    'searchTooltip',
-    'showAppsMenu',
-    'showHelp',
-    'showMainMenu',
-    'showNotifications',
-    'showPendoPlaceholder',
-    'showSearch',
-    'showShadow',
-    'variant',
-  ],
+  inputs: ['apps', 'buttons', 'enableSearchOverlay', 'helpUrl', 'logoOptions', 'profileMenuOptions', 'reverse', 'searchTooltip', 'showAppsMenu', 'showHelp', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showSearch', 'showShadow', 'variant'],
 })
 export class ModusNavbar {
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, [
-      'appsMenuOpen',
-      'appsMenuAppOpen',
-      'buttonClick',
-      'helpOpen',
-      'mainMenuClick',
-      'notificationsMenuOpen',
-      'productLogoClick',
-      'profileMenuLinkClick',
-      'profileMenuOpen',
-      'profileMenuSignOutClick',
-      'searchChange',
-      'searchMenuClick',
-    ]);
+    proxyOutputs(this, this.el, ['appsMenuOpen', 'appsMenuAppOpen', 'buttonClick', 'helpOpen', 'mainMenuClick', 'notificationsMenuOpen', 'productLogoClick', 'profileMenuLinkClick', 'profileMenuOpen', 'profileMenuSignOutClick', 'searchChange', 'searchMenuClick']);
   }
 }
+
 
 import type { ModusNavbarApp as IModusNavbarModusNavbarApp } from '@trimble-oss/modus-web-components';
 
@@ -761,8 +637,9 @@ export declare interface ModusNavbar extends Components.ModusNavbar {
   searchMenuClick: EventEmitter<CustomEvent<void>>;
 }
 
+
 @ProxyCmp({
-  inputs: ['apps', 'reverse'],
+  inputs: ['apps', 'reverse']
 })
 @Component({
   selector: 'modus-navbar-apps-menu',
@@ -780,14 +657,17 @@ export class ModusNavbarAppsMenu {
   }
 }
 
+
 import type { ModusNavbarApp as IModusNavbarAppsMenuModusNavbarApp } from '@trimble-oss/modus-web-components';
 
 export declare interface ModusNavbarAppsMenu extends Components.ModusNavbarAppsMenu {
+
   appOpen: EventEmitter<CustomEvent<IModusNavbarAppsMenuModusNavbarApp>>;
 }
 
+
 @ProxyCmp({
-  inputs: ['reverse'],
+  inputs: ['reverse']
 })
 @Component({
   selector: 'modus-navbar-button-menu',
@@ -804,10 +684,12 @@ export class ModusNavbarButtonMenu {
   }
 }
 
+
 export declare interface ModusNavbarButtonMenu extends Components.ModusNavbarButtonMenu {}
 
+
 @ProxyCmp({
-  inputs: ['navbarId'],
+  inputs: ['navbarId']
 })
 @Component({
   selector: 'modus-navbar-main-menu',
@@ -824,10 +706,12 @@ export class ModusNavbarMainMenu {
   }
 }
 
+
 export declare interface ModusNavbarMainMenu extends Components.ModusNavbarMainMenu {}
 
+
 @ProxyCmp({
-  inputs: ['reverse'],
+  inputs: ['reverse']
 })
 @Component({
   selector: 'modus-navbar-notifications-menu',
@@ -844,10 +728,12 @@ export class ModusNavbarNotificationsMenu {
   }
 }
 
+
 export declare interface ModusNavbarNotificationsMenu extends Components.ModusNavbarNotificationsMenu {}
 
+
 @ProxyCmp({
-  inputs: ['avatarUrl', 'email', 'initials', 'links', 'reverse', 'username', 'variant'],
+  inputs: ['avatarUrl', 'email', 'initials', 'links', 'reverse', 'username', 'variant']
 })
 @Component({
   selector: 'modus-navbar-profile-menu',
@@ -865,13 +751,17 @@ export class ModusNavbarProfileMenu {
   }
 }
 
+
 export declare interface ModusNavbarProfileMenu extends Components.ModusNavbarProfileMenu {
+
   linkClick: EventEmitter<CustomEvent<string>>;
 
   signOutClick: EventEmitter<CustomEvent<MouseEvent>>;
 }
 
-@ProxyCmp({})
+
+@ProxyCmp({
+})
 @Component({
   selector: 'modus-navbar-search-overlay',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -888,6 +778,7 @@ export class ModusNavbarSearchOverlay {
   }
 }
 
+
 export declare interface ModusNavbarSearchOverlay extends Components.ModusNavbarSearchOverlay {
   /**
    * An event that fires on clicking on close button of search overlay
@@ -899,47 +790,16 @@ export declare interface ModusNavbarSearchOverlay extends Components.ModusNavbar
   search: EventEmitter<CustomEvent<string>>;
 }
 
+
 @ProxyCmp({
-  inputs: [
-    'ariaLabel',
-    'disabled',
-    'errorText',
-    'helperText',
-    'label',
-    'maxValue',
-    'minValue',
-    'placeholder',
-    'readOnly',
-    'required',
-    'size',
-    'step',
-    'textAlign',
-    'validText',
-    'value',
-  ],
+  inputs: ['ariaLabel', 'disabled', 'errorText', 'helperText', 'label', 'maxValue', 'minValue', 'placeholder', 'readOnly', 'required', 'size', 'step', 'textAlign', 'validText', 'value']
 })
 @Component({
   selector: 'modus-number-input',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: [
-    'ariaLabel',
-    'disabled',
-    'errorText',
-    'helperText',
-    'label',
-    'maxValue',
-    'minValue',
-    'placeholder',
-    'readOnly',
-    'required',
-    'size',
-    'step',
-    'textAlign',
-    'validText',
-    'value',
-  ],
+  inputs: ['ariaLabel', 'disabled', 'errorText', 'helperText', 'label', 'maxValue', 'minValue', 'placeholder', 'readOnly', 'required', 'size', 'step', 'textAlign', 'validText', 'value'],
 })
 export class ModusNumberInput {
   protected el: HTMLElement;
@@ -950,6 +810,7 @@ export class ModusNumberInput {
   }
 }
 
+
 export declare interface ModusNumberInput extends Components.ModusNumberInput {
   /**
    * An event that fires on input value change.
@@ -957,15 +818,16 @@ export declare interface ModusNumberInput extends Components.ModusNumberInput {
   valueChange: EventEmitter<CustomEvent<string>>;
 }
 
+
 @ProxyCmp({
-  inputs: ['activePage', 'ariaLabel', 'maxPage', 'minPage', 'size'],
+  inputs: ['activePage', 'ariaLabel', 'maxPage', 'minPage', 'nextPageButtonText', 'prevPageButtonText', 'size']
 })
 @Component({
   selector: 'modus-pagination',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['activePage', 'ariaLabel', 'maxPage', 'minPage', 'size'],
+  inputs: ['activePage', 'ariaLabel', 'maxPage', 'minPage', 'nextPageButtonText', 'prevPageButtonText', 'size'],
 })
 export class ModusPagination {
   protected el: HTMLElement;
@@ -976,6 +838,7 @@ export class ModusPagination {
   }
 }
 
+
 export declare interface ModusPagination extends Components.ModusPagination {
   /**
    * An event that fires on page change.
@@ -983,8 +846,9 @@ export declare interface ModusPagination extends Components.ModusPagination {
   pageChange: EventEmitter<CustomEvent<number>>;
 }
 
+
 @ProxyCmp({
-  inputs: ['ariaLabel', 'backgroundColor', 'color', 'maxValue', 'minValue', 'size', 'text', 'textColor', 'value'],
+  inputs: ['ariaLabel', 'backgroundColor', 'color', 'maxValue', 'minValue', 'size', 'text', 'textColor', 'value']
 })
 @Component({
   selector: 'modus-progress-bar',
@@ -1001,10 +865,12 @@ export class ModusProgressBar {
   }
 }
 
+
 export declare interface ModusProgressBar extends Components.ModusProgressBar {}
 
+
 @ProxyCmp({
-  inputs: ['ariaLabel', 'checkedId', 'name', 'radioButtons'],
+  inputs: ['ariaLabel', 'checkedId', 'name', 'radioButtons']
 })
 @Component({
   selector: 'modus-radio-group',
@@ -1022,6 +888,7 @@ export class ModusRadioGroup {
   }
 }
 
+
 export declare interface ModusRadioGroup extends Components.ModusRadioGroup {
   /**
    * Fires on radio button click.
@@ -1029,39 +896,16 @@ export declare interface ModusRadioGroup extends Components.ModusRadioGroup {
   buttonClick: EventEmitter<CustomEvent<string>>;
 }
 
+
 @ProxyCmp({
-  inputs: [
-    'ariaLabel',
-    'disabled',
-    'errorText',
-    'helperText',
-    'label',
-    'options',
-    'optionsDisplayProp',
-    'required',
-    'size',
-    'validText',
-    'value',
-  ],
+  inputs: ['ariaLabel', 'disabled', 'errorText', 'helperText', 'label', 'options', 'optionsDisplayProp', 'required', 'size', 'validText', 'value']
 })
 @Component({
   selector: 'modus-select',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: [
-    'ariaLabel',
-    'disabled',
-    'errorText',
-    'helperText',
-    'label',
-    'options',
-    'optionsDisplayProp',
-    'required',
-    'size',
-    'validText',
-    'value',
-  ],
+  inputs: ['ariaLabel', 'disabled', 'errorText', 'helperText', 'label', 'options', 'optionsDisplayProp', 'required', 'size', 'validText', 'value'],
 })
 export class ModusSelect {
   protected el: HTMLElement;
@@ -1072,6 +916,7 @@ export class ModusSelect {
   }
 }
 
+
 export declare interface ModusSelect extends Components.ModusSelect {
   /**
    * An event that fires on input value change.
@@ -1079,8 +924,9 @@ export declare interface ModusSelect extends Components.ModusSelect {
   valueChange: EventEmitter<CustomEvent<unknown>>;
 }
 
+
 @ProxyCmp({
-  inputs: ['data', 'expanded', 'maxWidth', 'mode', 'targetContent'],
+  inputs: ['data', 'expanded', 'maxWidth', 'mode', 'targetContent']
 })
 @Component({
   selector: 'modus-side-navigation',
@@ -1098,6 +944,7 @@ export class ModusSideNavigation {
   }
 }
 
+
 export declare interface ModusSideNavigation extends Components.ModusSideNavigation {
   /**
    * An event that fires on side navigation panel collapse & expand.
@@ -1105,9 +952,10 @@ export declare interface ModusSideNavigation extends Components.ModusSideNavigat
   sideNavExpand: EventEmitter<CustomEvent<boolean>>;
 }
 
+
 @ProxyCmp({
   inputs: ['disableSelection', 'disabled', 'label', 'menuIcon', 'selected', 'showExpandIcon'],
-  methods: ['focusItem'],
+  methods: ['focusItem']
 })
 @Component({
   selector: 'modus-side-navigation-item',
@@ -1125,6 +973,7 @@ export class ModusSideNavigationItem {
   }
 }
 
+
 export declare interface ModusSideNavigationItem extends Components.ModusSideNavigationItem {
   /**
    * An event that fires when mouse click or `Enter` key press on an item.
@@ -1136,8 +985,9 @@ export declare interface ModusSideNavigationItem extends Components.ModusSideNav
   sideNavItemFocus: EventEmitter<CustomEvent<{ id: string }>>;
 }
 
+
 @ProxyCmp({
-  inputs: ['ariaLabel', 'disabled', 'label', 'maxValue', 'minValue', 'value'],
+  inputs: ['ariaLabel', 'disabled', 'label', 'maxValue', 'minValue', 'value']
 })
 @Component({
   selector: 'modus-slider',
@@ -1155,6 +1005,7 @@ export class ModusSlider {
   }
 }
 
+
 export declare interface ModusSlider extends Components.ModusSlider {
   /**
    * An event that fires on slider value change.
@@ -1166,8 +1017,9 @@ export declare interface ModusSlider extends Components.ModusSlider {
   valueInput: EventEmitter<CustomEvent<string>>;
 }
 
+
 @ProxyCmp({
-  inputs: ['color', 'size'],
+  inputs: ['color', 'size']
 })
 @Component({
   selector: 'modus-spinner',
@@ -1184,10 +1036,12 @@ export class ModusSpinner {
   }
 }
 
+
 export declare interface ModusSpinner extends Components.ModusSpinner {}
 
+
 @ProxyCmp({
-  inputs: ['ariaLabel', 'checked', 'disabled', 'label'],
+  inputs: ['ariaLabel', 'checked', 'disabled', 'label']
 })
 @Component({
   selector: 'modus-switch',
@@ -1205,6 +1059,7 @@ export class ModusSwitch {
   }
 }
 
+
 export declare interface ModusSwitch extends Components.ModusSwitch {
   /**
    * An event that fires on switch click.
@@ -1212,8 +1067,114 @@ export declare interface ModusSwitch extends Components.ModusSwitch {
   switchClick: EventEmitter<CustomEvent<boolean>>;
 }
 
+
 @ProxyCmp({
-  inputs: ['ariaLabel', 'fullWidth', 'size', 'tabs'],
+  inputs: ['columnReorder', 'columnResize', 'columns', 'data', 'displayOptions', 'fullWidth', 'hover', 'maxHeight', 'maxWidth', 'pageSizeList', 'pagination', 'rowSelection', 'rowSelectionOptions', 'rowsExpandable', 'showSortIconOnHover', 'sort', 'summaryRow', 'toolbar', 'toolbarOptions'],
+  methods: ['getColumnData', 'toggleColumnVisibility']
+})
+@Component({
+  selector: 'modus-table',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['columnReorder', 'columnResize', 'columns', 'data', 'displayOptions', 'fullWidth', 'hover', 'maxHeight', 'maxWidth', 'pageSizeList', 'pagination', 'rowSelection', 'rowSelectionOptions', 'rowsExpandable', 'showSortIconOnHover', 'sort', 'summaryRow', 'toolbar', 'toolbarOptions'],
+})
+export class ModusTable {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['sortChange', 'rowSelectionChange', 'cellLinkClick']);
+  }
+}
+
+
+import type { ModusTableSortingState as IModusTableModusTableSortingState } from '@trimble-oss/modus-web-components';
+
+export declare interface ModusTable extends Components.ModusTable {
+  /**
+   * Emits event on sort change
+   */
+  sortChange: EventEmitter<CustomEvent<IModusTableModusTableSortingState>>;
+  /**
+   * Event details contains the row(s) selected
+   */
+  rowSelectionChange: EventEmitter<CustomEvent<unknown>>;
+  /**
+   * Emits the link that was clicked
+   */
+  cellLinkClick: EventEmitter<CustomEvent<ModusTableCellLink>>;
+}
+
+
+@ProxyCmp({
+  inputs: ['columnsVisibility', 'menuIconContainerRef', 'showDropdown', 'table', 'toggleDropdown']
+})
+@Component({
+  selector: 'modus-table-columns-visibility',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['columnsVisibility', 'menuIconContainerRef', 'showDropdown', 'table', 'toggleDropdown'],
+})
+export class ModusTableColumnsVisibility {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
+export declare interface ModusTableColumnsVisibility extends Components.ModusTableColumnsVisibility {}
+
+
+@ProxyCmp({
+  inputs: ['options', 'table']
+})
+@Component({
+  selector: 'modus-table-dropdown-menu',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['options', 'table'],
+})
+export class ModusTableDropdownMenu {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
+export declare interface ModusTableDropdownMenu extends Components.ModusTableDropdownMenu {}
+
+
+@ProxyCmp({
+  inputs: ['options', 'table']
+})
+@Component({
+  selector: 'modus-table-toolbar',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['options', 'table'],
+})
+export class ModusTableToolbar {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
+export declare interface ModusTableToolbar extends Components.ModusTableToolbar {}
+
+
+@ProxyCmp({
+  inputs: ['ariaLabel', 'fullWidth', 'size', 'tabs']
 })
 @Component({
   selector: 'modus-tabs',
@@ -1231,6 +1192,7 @@ export class ModusTabs {
   }
 }
 
+
 export declare interface ModusTabs extends Components.ModusTabs {
   /**
    * An event that fires on tab change.
@@ -1238,58 +1200,17 @@ export declare interface ModusTabs extends Components.ModusTabs {
   tabChange: EventEmitter<CustomEvent<string>>;
 }
 
+
 @ProxyCmp({
-  inputs: [
-    'ariaLabel',
-    'autoFocusInput',
-    'clearable',
-    'disabled',
-    'errorText',
-    'helperText',
-    'includePasswordTextToggle',
-    'includeSearchIcon',
-    'inputmode',
-    'label',
-    'maxLength',
-    'minLength',
-    'placeholder',
-    'readOnly',
-    'required',
-    'size',
-    'textAlign',
-    'type',
-    'validText',
-    'value',
-  ],
-  methods: ['focusInput'],
+  inputs: ['ariaLabel', 'autoFocusInput', 'clearable', 'disabled', 'errorText', 'helperText', 'includePasswordTextToggle', 'includeSearchIcon', 'inputmode', 'label', 'maxLength', 'minLength', 'placeholder', 'readOnly', 'required', 'size', 'textAlign', 'type', 'validText', 'value'],
+  methods: ['focusInput']
 })
 @Component({
   selector: 'modus-text-input',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: [
-    'ariaLabel',
-    'autoFocusInput',
-    'clearable',
-    'disabled',
-    'errorText',
-    'helperText',
-    'includePasswordTextToggle',
-    'includeSearchIcon',
-    'inputmode',
-    'label',
-    'maxLength',
-    'minLength',
-    'placeholder',
-    'readOnly',
-    'required',
-    'size',
-    'textAlign',
-    'type',
-    'validText',
-    'value',
-  ],
+  inputs: ['ariaLabel', 'autoFocusInput', 'clearable', 'disabled', 'errorText', 'helperText', 'includePasswordTextToggle', 'includeSearchIcon', 'inputmode', 'label', 'maxLength', 'minLength', 'placeholder', 'readOnly', 'required', 'size', 'textAlign', 'type', 'validText', 'value'],
 })
 export class ModusTextInput {
   protected el: HTMLElement;
@@ -1300,6 +1221,7 @@ export class ModusTextInput {
   }
 }
 
+
 export declare interface ModusTextInput extends Components.ModusTextInput {
   /**
    * An event that fires on input value change.
@@ -1307,54 +1229,17 @@ export declare interface ModusTextInput extends Components.ModusTextInput {
   valueChange: EventEmitter<CustomEvent<string>>;
 }
 
+
 @ProxyCmp({
-  inputs: [
-    'allowedCharsRegex',
-    'ampm',
-    'ariaLabel',
-    'autoFocusInput',
-    'autoFormat',
-    'disableValidation',
-    'disabled',
-    'errorText',
-    'helperText',
-    'label',
-    'max',
-    'min',
-    'placeholder',
-    'readOnly',
-    'required',
-    'size',
-    'validText',
-    'value',
-  ],
-  methods: ['focusInput'],
+  inputs: ['allowedCharsRegex', 'ampm', 'ariaLabel', 'autoFocusInput', 'autoFormat', 'disableValidation', 'disabled', 'errorText', 'helperText', 'label', 'max', 'min', 'placeholder', 'readOnly', 'required', 'size', 'validText', 'value'],
+  methods: ['focusInput']
 })
 @Component({
   selector: 'modus-time-picker',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: [
-    'allowedCharsRegex',
-    'ampm',
-    'ariaLabel',
-    'autoFocusInput',
-    'autoFormat',
-    'disableValidation',
-    'disabled',
-    'errorText',
-    'helperText',
-    'label',
-    'max',
-    'min',
-    'placeholder',
-    'readOnly',
-    'required',
-    'size',
-    'validText',
-    'value',
-  ],
+  inputs: ['allowedCharsRegex', 'ampm', 'ariaLabel', 'autoFocusInput', 'autoFormat', 'disableValidation', 'disabled', 'errorText', 'helperText', 'label', 'max', 'min', 'placeholder', 'readOnly', 'required', 'size', 'validText', 'value'],
 })
 export class ModusTimePicker {
   protected el: HTMLElement;
@@ -1364,6 +1249,7 @@ export class ModusTimePicker {
     proxyOutputs(this, this.el, ['timeInputBlur', 'valueChange']);
   }
 }
+
 
 import type { ModusTimePickerEventDetails as IModusTimePickerModusTimePickerEventDetails } from '@trimble-oss/modus-web-components';
 
@@ -1378,8 +1264,9 @@ export declare interface ModusTimePicker extends Components.ModusTimePicker {
   valueChange: EventEmitter<CustomEvent<IModusTimePickerModusTimePickerEventDetails>>;
 }
 
+
 @ProxyCmp({
-  inputs: ['ariaLabel', 'dismissible', 'showIcon', 'type'],
+  inputs: ['ariaLabel', 'dismissible', 'showIcon', 'type']
 })
 @Component({
   selector: 'modus-toast',
@@ -1397,6 +1284,7 @@ export class ModusToast {
   }
 }
 
+
 export declare interface ModusToast extends Components.ModusToast {
   /**
    * An event that fires when the toast is dismissed
@@ -1404,8 +1292,9 @@ export declare interface ModusToast extends Components.ModusToast {
   dismissClick: EventEmitter<CustomEvent<any>>;
 }
 
+
 @ProxyCmp({
-  inputs: ['ariaLabel', 'disabled', 'position', 'text'],
+  inputs: ['ariaLabel', 'disabled', 'position', 'text']
 })
 @Component({
   selector: 'modus-tooltip',
@@ -1422,35 +1311,19 @@ export class ModusTooltip {
   }
 }
 
+
 export declare interface ModusTooltip extends Components.ModusTooltip {}
 
+
 @ProxyCmp({
-  inputs: [
-    'checkboxSelection',
-    'checkedItems',
-    'disableTabbing',
-    'expandedItems',
-    'multiCheckboxSelection',
-    'multiSelection',
-    'selectedItems',
-    'size',
-  ],
+  inputs: ['checkboxSelection', 'checkedItems', 'disableTabbing', 'expandedItems', 'multiCheckboxSelection', 'multiSelection', 'selectedItems', 'size']
 })
 @Component({
   selector: 'modus-tree-view',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: [
-    'checkboxSelection',
-    'checkedItems',
-    'disableTabbing',
-    'expandedItems',
-    'multiCheckboxSelection',
-    'multiSelection',
-    'selectedItems',
-    'size',
-  ],
+  inputs: ['checkboxSelection', 'checkedItems', 'disableTabbing', 'expandedItems', 'multiCheckboxSelection', 'multiSelection', 'selectedItems', 'size'],
 })
 export class ModusTreeView {
   protected el: HTMLElement;
@@ -1460,11 +1333,13 @@ export class ModusTreeView {
   }
 }
 
+
 export declare interface ModusTreeView extends Components.ModusTreeView {}
+
 
 @ProxyCmp({
   inputs: ['disabled', 'draggableItem', 'droppableItem', 'editable', 'label', 'nodeId', 'tabIndexValue'],
-  methods: ['focusItem', 'focusCheckbox'],
+  methods: ['focusItem', 'focusCheckbox']
 })
 @Component({
   selector: 'modus-tree-view-item',
@@ -1482,6 +1357,7 @@ export class ModusTreeViewItem {
   }
 }
 
+
 export declare interface ModusTreeViewItem extends Components.ModusTreeViewItem {
   /**
    * An event that fires on tree item checkbox click
@@ -1496,3 +1372,5 @@ export declare interface ModusTreeViewItem extends Components.ModusTreeViewItem 
    */
   itemExpandToggle: EventEmitter<CustomEvent<boolean>>;
 }
+
+

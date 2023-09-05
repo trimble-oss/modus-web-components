@@ -29,6 +29,19 @@
 | `valueChange` | An event that fires on input value change. | `CustomEvent<unknown>` |
 
 
+## Dependencies
+
+### Used by
+
+ - [modus-table](../modus-table)
+
+### Graph
+```mermaid
+graph TD;
+  modus-table --> modus-select
+  style modus-select fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 
