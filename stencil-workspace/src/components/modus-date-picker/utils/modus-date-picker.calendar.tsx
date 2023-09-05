@@ -34,6 +34,14 @@ export default class ModusDatePickerCalendar {
     return MONTH_NAMES[this.currentDate.getMonth()];
   }
 
+  get selectedYear(): number {
+    return this.currentDate.getFullYear();
+  }
+
+  get selectedMonth(): number {
+    return this.currentDate.getMonth();
+  }
+
   get dates(): Array<Date> {
     return this.currentMonthDates;
   }

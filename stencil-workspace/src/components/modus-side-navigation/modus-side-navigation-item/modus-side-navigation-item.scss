@@ -13,7 +13,12 @@
   fill: $modus-side-navigation-item-icon-color;
   height: 3rem;
   position: relative;
-  transition: top, left, height, width, opacity 0.2s ease-out 0s;
+  transition:
+    top,
+    left,
+    height,
+    width,
+    opacity 0.2s ease-out 0s;
   z-index: 1030;
 
   svg path {
@@ -70,7 +75,12 @@
   }
 
   &.expanded {
-    transition: top, left, height, width, opacity 0.25s ease-in 0s;
+    transition:
+      top,
+      left,
+      height,
+      width,
+      opacity 0.25s ease-in 0s;
 
     .level-icon {
       height: 1.5rem;

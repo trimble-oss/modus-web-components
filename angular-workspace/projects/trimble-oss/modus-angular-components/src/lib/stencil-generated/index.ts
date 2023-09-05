@@ -1,4 +1,3 @@
-
 import * as d from './components';
 
 export const DIRECTIVES = [
@@ -44,5 +43,5 @@ export const DIRECTIVES = [
   d.ModusToast,
   d.ModusTooltip,
   d.ModusTreeView,
-  d.ModusTreeViewItem
+  d.ModusTreeViewItem,
 ];

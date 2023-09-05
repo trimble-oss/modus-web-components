@@ -62,7 +62,12 @@ const Template = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay
     show-help
     show-main-menu>
     <div slot="main" style="height:300px;">Render your own main menu.</div>
-    <div slot="addMenu">Render your own add menu.</div>
+
+      <modus-list slot="addMenu">
+        <modus-list-item>Menu Item 1</modus-list-item>
+        <modus-list-item>Menu Item 2</modus-list-item>
+      </modus-list>
+
     <div slot="notificationMenu">Render your own notification menu.</div>
   </modus-navbar>
   ${setNavbar(true, '#working', profileMenuOptions, '', '', buttons)}
@@ -155,6 +160,7 @@ const setNavbar = (
     : 'broken-link';
 
   tag.innerHTML = `
+document.querySelectorAll('modus-list-item').forEach(i => i.style.setProperty('--modus-list-item-border-color', 'transparent'));
 document.querySelector('${id}').apps = [
   { description: 'The One Trimble Design System', logoUrl: 'https://modus.trimble.com/favicon.svg', name: 'Trimble Modus', url: 'https://modus.trimble.com/' }
 ];

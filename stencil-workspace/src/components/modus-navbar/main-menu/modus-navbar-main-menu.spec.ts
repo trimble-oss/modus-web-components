@@ -72,4 +72,4 @@ describe('modus-navbar-main-menu', () => {
 const createMockNavbar = (bottomPx: number, leftPx: number) =>
   ({
     getBoundingClientRect: jest.fn(() => ({ bottom: bottomPx, left: leftPx })),
-  } as unknown as HTMLElement);
+  }) as unknown as HTMLElement;
