@@ -47,7 +47,7 @@ import { ModusTableColumnDropIndicator, ModusTableColumnDragItem } from './parts
 import { ModusTablePagination } from './parts/modus-table-pagination';
 import { ModusTableSummaryRow } from './parts/modus-table-summary-row';
 import { TableHeaderDragDrop } from './utilities/table-header-drag-drop.utility';
-import { JSX } from '@stencil/core/internal';
+import { Fragment, JSX } from '@stencil/core/internal';
 
 /**
  * @slot customFooter - Slot for custom footer.
@@ -193,13 +193,14 @@ export class ModusTable {
   @State() rowSelectionState: RowSelectionState = {};
 
   private frozenColumns: string[] = []; // Columns will remain on the left and be unable to resize, reorganize, or modify their visibility.
-  /** Column reorder variables start */
-  private tableHeaderRowRef: HTMLTableRowElement;
   private isColumnResizing = false;
+  private tableRef: HTMLTableElement = null;
+  private tableHeaderRowRef: HTMLTableRowElement;
+  private fillerColumnRef: HTMLModusTableFillerColumnElement = null;
+
   private onMouseMove = (event: MouseEvent) => this.handleDragOver(event);
   private onKeyDown = (event: KeyboardEvent) => this.handleKeyDown(event);
   private onMouseUp = () => this.handleDrop();
-  /** Column reorder variables end */
 
   @Listen('click', { target: 'document' })
   documentClickHandler(event: MouseEvent): void {
@@ -294,6 +295,10 @@ export class ModusTable {
     this.initializeTable();
   }
 
+  componentDidLoad(): void {
+    this.initializeFillerColumn();
+  }
+
   /**
    * Creates a table with some set of options.
    */
@@ -363,6 +368,12 @@ export class ModusTable {
     }
   }
 
+  initializeFillerColumn(): void {
+    if (this.fillerColumnRef && this.tableRef) {
+      this.fillerColumnRef.targetTable = this.tableRef;
+    }
+  }
+
   private updatingState(updater: Updater<unknown>, key: string) {
     this[key] = updater instanceof Function ? updater(this[key]) : updater;
     this.table.options.state[key] = this[key];
@@ -415,6 +426,68 @@ export class ModusTable {
         column.toggleVisibility(show);
       }
     });
+  }
+
+  renderToolBar(): JSX.Element | null {
+    return (
+      this.toolbar &&
+      this.toolbarOptions && (
+        <modus-table-toolbar table={this.table} options={this.toolbarOptions}>
+          <div slot="group-left">
+            <slot name="groupLeft"></slot>
+          </div>
+          <div slot="group-right">
+            <slot name="groupRight"></slot>
+          </div>
+        </modus-table-toolbar>
+      )
+    );
+  }
+
+  renderMain(): JSX.Element | null {
+    const { borderless, cellBorderless } = this.displayOptions || {};
+    const tableContainerClass = {
+      'table-container': true,
+      borderless: borderless,
+    };
+
+    return (
+      <Fragment>
+        <div class={tableContainerClass} style={{ maxHeight: this.maxHeight }}>
+          {this.renderTable()}
+
+          <modus-table-filler-column
+            summary-row={this.summaryRow}
+            cell-borderless={cellBorderless}
+            ref={(el) => (this.fillerColumnRef = el)}></modus-table-filler-column>
+        </div>
+        <slot name="customFooter" />
+      </Fragment>
+    );
+  }
+
+  renderTable(): JSX.Element | null {
+    const { multiple } = this.rowSelectionOptions;
+    const totalSize = this.table.getTotalSize();
+
+    const tableMainClass = {
+      borderless: this.displayOptions?.borderless,
+      'cell-borderless': this.displayOptions?.cellBorderless,
+    };
+
+    const tableStyle = this.fullWidth
+      ? { width: '100%' }
+      : totalSize > 0
+      ? { width: `${totalSize}px`, tableLayout: 'fixed' }
+      : { tableLayout: 'fixed' };
+
+    return (
+      <table data-test-id="main-table" class={tableMainClass} style={tableStyle} ref={(el) => (this.tableRef = el)}>
+        {this.renderTableHeader(multiple)}
+        {this.renderTableBody(multiple)}
+        {this.renderTableFooter()}
+      </table>
+    );
   }
 
   renderTableBody(multipleRowSelection: boolean): JSX.Element | null {
@@ -502,58 +575,27 @@ export class ModusTable {
       <ModusTableSummaryRow
         footerGroups={[footerGroups[0]]}
         tableData={this.data}
-        borderlessOptions={this.displayOptions}
         frozenColumns={this.frozenColumns}
         rowSelection={this.rowSelection}
       />
     ) : null;
   }
 
+  renderPagination(): JSX.Element | null {
+    return (
+      this.pagination && (
+        <ModusTablePagination table={this.table} totalCount={this.data.length} pageSizeList={this.pageSizeList} />
+      )
+    );
+  }
+
   render(): void {
-    const { multiple } = this.rowSelectionOptions;
-    const totalSize = this.table.getTotalSize();
-
-    const tableContainerClass = {
-      'table-container': true,
-      borderless: this.displayOptions?.borderless,
-    };
-
-    const tableMainClass = {
-      borderless: this.displayOptions?.borderless,
-      'cell-borderless': this.displayOptions?.cellBorderless,
-    };
-
-    const tableStyle = this.fullWidth
-      ? { width: '100%' }
-      : totalSize > 0
-      ? { width: `${totalSize}px`, tableLayout: 'fixed' }
-      : { tableLayout: 'fixed' };
-
     return (
       <Host>
         <div style={{ maxWidth: this.maxWidth }}>
-          {this.toolbar && this.toolbarOptions && (
-            <modus-table-toolbar table={this.table} options={this.toolbarOptions}>
-              <div slot="group-left">
-                <slot name="groupLeft"></slot>
-              </div>
-              <div slot="group-right">
-                <slot name="groupRight"></slot>
-              </div>
-            </modus-table-toolbar>
-          )}
-
-          <div class={tableContainerClass} style={{ maxHeight: this.maxHeight }}>
-            <table class={tableMainClass} style={tableStyle}>
-              {this.renderTableHeader(multiple)}
-              {this.renderTableBody(multiple)}
-              {this.renderTableFooter()}
-            </table>
-          </div>
-          <slot name="customFooter" />
-          {this.pagination && (
-            <ModusTablePagination table={this.table} totalCount={this.data.length} pageSizeList={this.pageSizeList} />
-          )}
+          {this.renderToolBar()}
+          {this.renderMain()}
+          {this.renderPagination()}
           <ModusTableColumnDragItem draggingState={this.itemDragState} />
           <ModusTableColumnDropIndicator position={this.itemDragState?.dropIndicator} />
         </div>
