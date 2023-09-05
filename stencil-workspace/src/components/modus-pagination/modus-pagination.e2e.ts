@@ -30,14 +30,14 @@ describe('modus-pagination', () => {
     await page.waitForChanges();
 
     let pages = await page.findAll('modus-pagination >>> li');
-    expect(pages.length).toEqual(7);
+    expect(pages.length).toEqual(5);
 
     const element = await page.find('modus-pagination');
     element.setAttribute('min-page', 2);
     await page.waitForChanges();
 
     pages = await page.findAll('modus-pagination >>> li');
-    expect(pages.length).toEqual(6);
+    expect(pages.length).toEqual(4);
   });
 
   it('renders changes to max page', async () => {
@@ -46,15 +46,15 @@ describe('modus-pagination', () => {
     await page.setContent('<modus-pagination min-page="1" max-page="5" active-page="1"></modus-pagination>');
     await page.waitForChanges();
 
-    const pages = await page.findAll('modus-pagination >>> li');
-    expect(pages.length).toEqual(7);
+    let pages = await page.findAll('modus-pagination >>> li');
+    expect(pages.length).toEqual(5);
 
-    // const element = await page.find('modus-pagination');
-    // element.setAttribute('max-page', 6);
-    // await page.waitForChanges();
+    const element = await page.find('modus-pagination');
+    element.setAttribute('max-page', 6);
+    await page.waitForChanges();
 
-    // pages = await page.findAll('modus-pagination >>> li');
-    // expect(pages.length).toEqual(8);
+    pages = await page.findAll('modus-pagination >>> li');
+    expect(pages.length).toEqual(6);
   });
 
   it('renders changes to prevNextTextButton', async () => {

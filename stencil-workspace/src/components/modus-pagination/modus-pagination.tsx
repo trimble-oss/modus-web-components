@@ -136,35 +136,39 @@ export class ModusPagination {
 
   renderPreviousPageControl(): JSX.Element[] {
     return (
-      <li
-        aria-label="Previous"
-        class={`${this.activePage != this.minPage ? 'hoverable' : 'disabled'}`}
-        onClick={() => this.handleChevronClick(PaginationDirection.Previous)}
-        onKeyDown={(event) => this.handleChevronKeydown(event, PaginationDirection.Previous)}
-        tabIndex={0}>
-        {this.prevPageButtonText ? (
-          <span data-test-id="prev-button-text">{this.prevPageButtonText}</span>
-        ) : (
-          <IconChevronLeftThick size={this.chevronSizeBySize.get(this.size)} />
-        )}
-      </li>
+      this.maxPage - this.minPage >= 7 && (
+        <li
+          aria-label="Previous"
+          class={`${this.activePage != this.minPage ? 'hoverable' : 'disabled'}`}
+          onClick={() => this.handleChevronClick(PaginationDirection.Previous)}
+          onKeyDown={(event) => this.handleChevronKeydown(event, PaginationDirection.Previous)}
+          tabIndex={0}>
+          {this.prevPageButtonText ? (
+            <span data-test-id="prev-button-text">{this.prevPageButtonText}</span>
+          ) : (
+            <IconChevronLeftThick size={this.chevronSizeBySize.get(this.size)} />
+          )}
+        </li>
+      )
     );
   }
 
   renderNextPageControl(): JSX.Element[] {
     return (
-      <li
-        aria-label="Next"
-        class={`${this.activePage != this.maxPage ? 'hoverable' : 'disabled'}`}
-        onClick={() => this.handleChevronClick(PaginationDirection.Next)}
-        onKeyDown={(event) => this.handleChevronKeydown(event, PaginationDirection.Next)}
-        tabIndex={0}>
-        {this.nextPageButtonText ? (
-          <span data-test-id="next-button-text">{this.nextPageButtonText}</span>
-        ) : (
-          <IconChevronRightThick size={this.chevronSizeBySize.get(this.size)} />
-        )}
-      </li>
+      this.maxPage - this.minPage >= 7 && (
+        <li
+          aria-label="Next"
+          class={`${this.activePage != this.maxPage ? 'hoverable' : 'disabled'}`}
+          onClick={() => this.handleChevronClick(PaginationDirection.Next)}
+          onKeyDown={(event) => this.handleChevronKeydown(event, PaginationDirection.Next)}
+          tabIndex={0}>
+          {this.nextPageButtonText ? (
+            <span data-test-id="next-button-text">{this.nextPageButtonText}</span>
+          ) : (
+            <IconChevronRightThick size={this.chevronSizeBySize.get(this.size)} />
+          )}
+        </li>
+      )
     );
   }
 
