@@ -328,7 +328,7 @@ describe('modus-table', () => {
     await page.waitForChanges();
 
     expect(valueChange).toHaveReceivedEvent();
-    expect(valueChange).toHaveReceivedEventDetail('20');
+    expect(valueChange).toHaveReceivedEventDetail({ display: 20 });
   });
 
   it('Renders custom footer when summaryRow is true', async () => {

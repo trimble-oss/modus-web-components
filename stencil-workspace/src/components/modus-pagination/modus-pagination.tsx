@@ -33,16 +33,6 @@ export class ModusPagination {
   /* The maximum page value. */
   @Prop() maxPage: number;
 
-  /**
-   * Checks and updates maxPage value on change of items per page.
-   */
-  @Watch('maxPage')
-  maxPageWatch(newValue: number, oldValue: number) {
-    if (newValue !== oldValue) {
-      this.setPages();
-    }
-  }
-
   /* The minimum page value. */
   @Prop() minPage: number;
 
@@ -116,7 +106,7 @@ export class ModusPagination {
     this.pages = pages;
   }
 
-  handlePageChange(direction: PaginationDirection): void {
+  handleChevronClick(direction: PaginationDirection): void {
     if (direction === PaginationDirection.Previous && this.activePage !== this.minPage) {
       this.activePage--;
     } else if (direction === PaginationDirection.Next && this.activePage !== this.maxPage) {
@@ -124,14 +114,14 @@ export class ModusPagination {
     }
   }
 
-  handleOnArrowsKeydown(event: KeyboardEvent, direction: PaginationDirection): void {
+  handleChevronKeydown(event: KeyboardEvent, direction: PaginationDirection): void {
     if (event.key.toLowerCase() === 'enter') {
-      this.handlePageChange(direction);
+      this.handleChevronClick(direction);
       event.preventDefault();
     }
   }
 
-  handleOnPageNumbersKeydown(event: KeyboardEvent, page: number): void {
+  handlePageKeydown(event: KeyboardEvent, page: number): void {
     if (event.key.toLowerCase() === 'enter') {
       this.handlePageClick(page);
       event.preventDefault();
@@ -149,8 +139,8 @@ export class ModusPagination {
       <li
         aria-label="Previous"
         class={`${this.activePage != this.minPage ? 'hoverable' : 'disabled'}`}
-        onClick={() => this.handlePageChange(PaginationDirection.Previous)}
-        onKeyDown={(event) => this.handleOnArrowsKeydown(event, PaginationDirection.Previous)}
+        onClick={() => this.handleChevronClick(PaginationDirection.Previous)}
+        onKeyDown={(event) => this.handleChevronKeydown(event, PaginationDirection.Previous)}
         tabIndex={0}>
         {this.prevPageButtonText ? (
           <span data-test-id="prev-button-text">{this.prevPageButtonText}</span>
@@ -166,8 +156,8 @@ export class ModusPagination {
       <li
         aria-label="Next"
         class={`${this.activePage != this.maxPage ? 'hoverable' : 'disabled'}`}
-        onClick={() => this.handlePageChange(PaginationDirection.Next)}
-        onKeyDown={(event) => this.handleOnArrowsKeydown(event, PaginationDirection.Next)}
+        onClick={() => this.handleChevronClick(PaginationDirection.Next)}
+        onKeyDown={(event) => this.handleChevronKeydown(event, PaginationDirection.Next)}
         tabIndex={0}>
         {this.nextPageButtonText ? (
           <span data-test-id="next-button-text">{this.nextPageButtonText}</span>
@@ -195,7 +185,7 @@ export class ModusPagination {
           aria-current={isCurrentPage ? 'page' : null}
           class={`${page === this.activePage ? 'active' : ''} ${!isNaN(+page) ? 'hoverable' : ''}`}
           onClick={() => this.handlePageClick(+page)}
-          onKeyDown={(event: KeyboardEvent) => this.handleOnPageNumbersKeydown(event, +page)}
+          onKeyDown={(event: KeyboardEvent) => this.handlePageKeydown(event, +page)}
           tabIndex={0}>
           {page}
         </li>

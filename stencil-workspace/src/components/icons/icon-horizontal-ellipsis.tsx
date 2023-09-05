@@ -7,9 +7,7 @@ interface IconProps {
   size?: string;
 }
 
-export const IconHorizontalEllipsis: FunctionalComponent<IconProps> = (
-  props: IconProps
-) => (
+export const IconHorizontalEllipsis: FunctionalComponent<IconProps> = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={props.size ?? 16}

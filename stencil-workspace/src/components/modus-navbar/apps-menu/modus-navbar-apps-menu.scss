@@ -18,9 +18,9 @@
   }
 
   .app {
-    box-sizing: border-box;
     border-color: $menu-border-color;
     border-radius: $rem-2px;
+    box-sizing: border-box;
     color: $menu-color;
     cursor: default;
     display: flex;
