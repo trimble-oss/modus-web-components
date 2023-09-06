@@ -178,13 +178,14 @@ export class ModusDatePicker {
       this._showCalendar = !!Object.values(this._dateInputs).find((dt) => dt.isCalendarOpen());
     }
   }
-
   private renderCalendarBody() {
     const today = new Date();
     const startDate = this._dateInputs['start']?.getDate();
     const endDate = this._dateInputs['end']?.getDate();
     const singleDate = this._dateInputs['single']?.getDate();
-
+    //Get day of the week and prepare blank cells to render the calendar dates properly
+    const firstDay = new Date(this._calendar.selectedYear, this._calendar.selectedMonth)?.getDay();
+    const blankDatesArr = new Array(firstDay).fill(0);
     return (
       <div class="calendar-body">
         <div class="calendar-days-week grid">
@@ -198,13 +199,26 @@ export class ModusDatePicker {
               'calendar-month grid': true,
               'invalid-date-range': this.isInvalidDateRange(startDate, endDate),
             }}>
+            {blankDatesArr &&
+              blankDatesArr.length > 0 &&
+              blankDatesArr.map(() => {
+                return (
+                  <button
+                    class={{
+                      'calendar-day grid-item': false,
+                      disabled: true,
+                    }}
+                    tabIndex={-1}>
+                    &nbsp;
+                  </button>
+                );
+              })}
             {this._calendar.dates.map((date, index) => {
               if (!date) {
                 return null;
               }
 
               const positions = this.findDatePositionsInARange(date, startDate, endDate);
-
               const isStartDate = positions['start'];
               const isEndDate = positions['end'];
               const isToday = this.compare(date, today) === 0;

@@ -27,7 +27,10 @@ div.modus-radio-group {
       border-radius: 50%;
       height: $rem-14px;
       position: absolute;
-      transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      transition:
+        background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out,
+        box-shadow 0.15s ease-in-out;
       width: $rem-14px;
     }
 
