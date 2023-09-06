@@ -1,3 +1,4 @@
+
 import * as d from './components';
 
 export const DIRECTIVES = [
@@ -37,11 +38,15 @@ export const DIRECTIVES = [
   d.ModusSlider,
   d.ModusSpinner,
   d.ModusSwitch,
+  d.ModusTable,
+  d.ModusTableColumnsVisibility,
+  d.ModusTableDropdownMenu,
+  d.ModusTableToolbar,
   d.ModusTabs,
   d.ModusTextInput,
   d.ModusTimePicker,
   d.ModusToast,
   d.ModusTooltip,
   d.ModusTreeView,
-  d.ModusTreeViewItem,
+  d.ModusTreeViewItem
 ];

@@ -36,6 +36,22 @@ export default {
       },
       type: { required: true },
     },
+    prevPageButtonText: {
+      name: 'prev-page-button-text',
+      description: "The previous page button text. If not set, an icon control will be used.",
+      table: {
+        type: { summary: 'string' },
+      },
+      type: { required: false },
+    },
+    nextPageButtonText: {
+      name: 'next-page-button-text',
+      description: "The next page button text. If not set, an icon control will be used.",
+      table: {
+        type: { summary: 'string' },
+      },
+      type: { required: false },
+    },
     size: {
       control: {
         options: ['small', 'medium', 'large'],
@@ -67,6 +83,8 @@ export const Default = ({
   ariaLabel,
   maxPage,
   minPage,
+  prevPageButtonText,
+  nextPageButtonText,
   size,
 }) => html`
   <modus-pagination
@@ -74,6 +92,8 @@ export const Default = ({
     aria-label=${ariaLabel}
     max-page=${maxPage}
     min-page=${minPage}
+    prev-page-button-text=${prevPageButtonText}
+    next-page-button-text=${nextPageButtonText}
     size=${size}>
     Default
   </modus-pagination>
@@ -83,6 +103,8 @@ Default.args = {
   ariaLabel: '',
   maxPage: '100',
   minPage: '1',
+  prevPageButtonText: '',
+  nextPageButtonText: '',
   size: 'medium',
 };
 
@@ -91,6 +113,8 @@ export const Large = ({
   ariaLabel,
   maxPage,
   minPage,
+  prevPageButtonText,
+  nextPageButtonText,
   size,
 }) => html`
   <modus-pagination
@@ -98,6 +122,8 @@ export const Large = ({
     aria-label=${ariaLabel}
     max-page=${maxPage}
     min-page=${minPage}
+    prev-page-button-text=${prevPageButtonText}
+    next-page-button-text=${nextPageButtonText}
     size=${size}>
     Large
   </modus-pagination>
@@ -107,6 +133,8 @@ Large.args = {
   ariaLabel: '',
   maxPage: '100',
   minPage: '1',
+  prevPageButtonText: '',
+  nextPageButtonText: '',
   size: 'large',
 };
 
@@ -115,6 +143,8 @@ export const Small = ({
   ariaLabel,
   maxPage,
   minPage,
+  prevPageButtonText,
+  nextPageButtonText,
   size,
 }) => html`
   <modus-pagination
@@ -122,6 +152,8 @@ export const Small = ({
     aria-label=${ariaLabel}
     max-page=${maxPage}
     min-page=${minPage}
+    prev-page-button-text=${prevPageButtonText}
+    next-page-button-text=${nextPageButtonText}
     size=${size}>
     Small
   </modus-pagination>
@@ -131,5 +163,36 @@ Small.args = {
   ariaLabel: '',
   maxPage: '100',
   minPage: '1',
+  prevPageButtonText: '',
+  nextPageButtonText: '',
   size: 'small',
+};
+
+export const PrevNextTextButton = ({
+  activePage,
+  ariaLabel,
+  maxPage,
+  minPage,
+  prevPageButtonText,
+  nextPageButtonText,
+  size,
+}) => html`
+  <modus-pagination
+    active-page=${activePage}
+    aria-label=${ariaLabel}
+    max-page=${maxPage}
+    min-page=${minPage}
+    prev-page-button-text=${prevPageButtonText}
+    next-page-button-text=${nextPageButtonText}
+    size=${size}>
+  </modus-pagination>
+`;
+PrevNextTextButton.args = {
+  activePage: '4',
+  ariaLabel: '',
+  maxPage: '100',
+  minPage: '1',
+  prevPageButtonText: 'Prev',
+  nextPageButtonText: 'Next',
+  size: 'medium',
 };
