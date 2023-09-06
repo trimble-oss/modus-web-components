@@ -17,7 +17,7 @@ export class ModusIcon {
   @Prop() size?: string = '16'; 
 
    /** (optional) The color of the Icon */
-  @Prop() color?: string = '#6A6976';
+  @Prop() color?: string;
 
   onClick(event: MouseEvent): void {
     if (event.defaultPrevented) {
