@@ -36,9 +36,6 @@ export default {
     docs: {
       page: docs,
     },
-    actions: {
-      handles: ['buttonClick'],
-    },
     options: {
       isToolshown: true,
     },
