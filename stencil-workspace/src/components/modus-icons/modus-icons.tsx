@@ -8,16 +8,16 @@ import { IconMap } from '../icons/IconMap';
 })
 export class ModusIcon {
    /** The name of the icon */
-  @Prop() icon: string | null;
+  @Prop() name: string | null;
 
    /** (optional) The click handler function */
   @Event() iconClick?: EventEmitter;
 
    /** (optional) The size of the Icon */
-  @Prop() size?: string | '16'; 
+  @Prop() size?: string = '16'; 
 
    /** (optional) The color of the Icon */
-  @Prop() color?: string;
+  @Prop() color?: string = '#6A6976';
 
   onClick(event: MouseEvent): void {
     if (event.defaultPrevented) {
@@ -26,6 +26,6 @@ export class ModusIcon {
     this.iconClick.emit(event);
   }
   render(): unknown {
-    return <IconMap icon={this.icon} onClick={this.onClick} size={this.size} color={this.color} />;
+    return <IconMap icon={this.name} onClick={this.onClick} size={this.size} color={this.color} />;
   }
 }

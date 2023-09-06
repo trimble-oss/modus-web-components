@@ -452,14 +452,14 @@ export declare interface ModusFileDropzone extends Components.ModusFileDropzone 
 
 
 @ProxyCmp({
-  inputs: ['color', 'icon', 'size']
+  inputs: ['color', 'name', 'size']
 })
 @Component({
   selector: 'modus-icon',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['color', 'icon', 'size'],
+  inputs: ['color', 'name', 'size'],
 })
 export class ModusIcon {
   protected el: HTMLElement;

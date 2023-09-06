@@ -11,7 +11,7 @@ export const IconTune: FunctionalComponent<IconProps> = (props: IconProps) => (
   <svg
     class="icon-tune"
     xmlns="http://www.w3.org/2000/svg"
-    fill={props.color ?? 'currentColor'}
+    fill={props.color ?? '#6A6976'}
     height={props.size ?? 16}
     width={props.size ?? 16}
     onClick={props.onClick}

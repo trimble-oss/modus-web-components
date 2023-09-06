@@ -507,11 +507,11 @@ export namespace Components {
         /**
           * The name of the icon
          */
-        "icon": string | null;
+        "name": string | null;
         /**
           * (optional) The size of the Icon
          */
-        "size"?: string | '16';
+        "size"?: string;
     }
     interface ModusList {
     }
@@ -2213,7 +2213,7 @@ declare namespace LocalJSX {
         /**
           * The name of the icon
          */
-        "icon"?: string | null;
+        "name"?: string | null;
         /**
           * (optional) The click handler function
          */
@@ -2221,7 +2221,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The size of the Icon
          */
-        "size"?: string | '16';
+        "size"?: string;
     }
     interface ModusList {
     }
