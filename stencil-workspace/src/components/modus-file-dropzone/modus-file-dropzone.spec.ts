@@ -17,7 +17,7 @@ describe('modus-file-dropzone', () => {
               <span></span>
             </div>
             <div class="dropzone null" tabindex="0">
-              <svg class="modus-icon" fill="#6A6976" height="36" viewBox="0 0 32 32" width="36" xmlns="http://www.w3.org/2000/svg">
+              <svg class="modus-icon" fill="currentColor" height="36" viewBox="0 0 32 32" width="36" xmlns="http://www.w3.org/2000/svg">
                 <g>
                   <g>
                     <path d="M23,14a8.9688,8.9688,0,0,1,6.4447,2.7311A7.0022,7.0022,0,0,0,22.42,7.02,8,8,0,0,0,7.05,9.07,6.0031,6.0031,0,0,0,8,21h6.2318A9.01,9.01,0,0,1,23,14Z"></path>

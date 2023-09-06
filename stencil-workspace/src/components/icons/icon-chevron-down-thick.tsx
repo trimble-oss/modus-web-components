@@ -11,7 +11,7 @@ export const IconChevronDownThick: FunctionalComponent<IconProps> = (props: Icon
   <svg
     class="icon-chevron-down-thick"
     xmlns="http://www.w3.org/2000/svg"
-    fill={props.color ?? '#6A6976'}
+    fill={props.color ?? 'currentColor'}
     height={props.size ?? 16}
     width={props.size ?? 16}
     onClick={props.onClick}

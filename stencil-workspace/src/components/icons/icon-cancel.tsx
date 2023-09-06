@@ -12,7 +12,7 @@ export const IconCancel: FunctionalComponent<IconProps> = (props: IconProps) => 
     xmlns="http://www.w3.org/2000/svg"
     width={props.size ?? 16}
     height={props.size ?? 16}
-    fill={props.color ?? '#6A6976'}
+    fill={props.color ?? 'currentColor'}
     class="modus-icon"
     onClick={props.onClick}
     viewBox="0 0 32 32">
