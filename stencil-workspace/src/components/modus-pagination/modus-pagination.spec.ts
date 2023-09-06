@@ -1,39 +1,28 @@
 import { newSpecPage } from '@stencil/core/testing';
 import { ModusPagination } from './modus-pagination';
+import { PaginationDirection } from './enums/pagination-direction.enum';
 
 describe('modus-pagination', () => {
   it('renders', async () => {
     const { root } = await newSpecPage({
       components: [ModusPagination],
-      html: '<modus-pagination></modus-pagination>',
+      html: '<modus-pagination min-page="1" max-page="5" active-page="1"></modus-pagination>',
     });
     expect(root).toEqualHtml(`
-    <modus-pagination>
-        <mock:shadow-root>
-          <nav class="medium">
-            <ul>
-              <li  aria-current="page" class="active"></li>
-              <li>
-                ...
-              </li>
-              <li>
-                NaN
-              </li>
-              <li>
-                NaN
-              </li>
-              <li>
-                NaN
-              </li>
-              <li>
-                ...
-              </li>
-              <li aria-current="page" class="active"></li>
-            </ul>
-          </nav>
-        </mock:shadow-root>
-      </modus-pagination>
-    `);
+  <modus-pagination min-page="1" max-page="5" active-page="1">
+    <mock:shadow-root>
+    <nav class="medium">
+      <ul>
+          <li aria-current="page" class="active hoverable" tabindex="0">1</li>
+          <li class="hoverable" tabindex="0">2</li>
+          <li class="hoverable" tabindex="0">3</li>
+          <li class="hoverable" tabindex="0">4</li>
+          <li class="hoverable" tabindex="0">5</li>
+      </ul>
+    </nav>
+    </mock:shadow-root>
+  </modus-pagination>
+`);
   });
 
   it('should get the correct class by size', async () => {
@@ -63,10 +52,12 @@ describe('modus-pagination', () => {
   it('should handle chevron click', async () => {
     const modusPagination = new ModusPagination();
 
+    const keyboardEvent = new KeyboardEvent('keydown', { key: 'Enter' });
+
     modusPagination.activePage = 1;
-    modusPagination.handleChevronClick('back');
+    modusPagination.handleChevronKeydown(keyboardEvent, PaginationDirection.Previous);
     expect(modusPagination.activePage).toEqual(0);
-    modusPagination.handleChevronClick('forward');
+    modusPagination.handleChevronKeydown(keyboardEvent, PaginationDirection.Next);
     expect(modusPagination.activePage).toEqual(1);
   });
 
