@@ -12,7 +12,7 @@ export const IconVisibilityOff: FunctionalComponent<IconProps> = (props: IconPro
     class="visibility-off"
     width={props.size ?? 16}
     height={props.size ?? 16}
-    fill={props.color ?? '#252a2e'}
+    fill={props.color ?? 'currentColor'}
     onClick={props.onClick ? () => props.onClick() : null}
     viewBox="0 0 24 24"
     xmlns="http://www.w3.org/2000/svg">

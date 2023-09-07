@@ -10,9 +10,9 @@ interface IconProps {
 export const IconSortZA: FunctionalComponent<IconProps> = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width={props.size}
-    height={props.size}
-    fill={props.color}
+    width={props.size ?? 16}
+    height={props.size ?? 16}
+    fill={props.color ?? 'currentColor'}
     onClick={props.onClick}
     data-test-id="iconSortZA"
     viewBox="0 0 32 32">

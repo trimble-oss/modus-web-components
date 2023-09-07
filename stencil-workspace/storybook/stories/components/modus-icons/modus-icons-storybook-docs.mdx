@@ -1,0 +1,33 @@
+# Icons
+
+---
+
+[Modus Icon](https://modus-icons.trimble.com/modus-solid/) Modus Icon component is a wrapper for icons that are replicated from https://modus-icons.trimble.com. It is referenced using the `<modus-icon>` custom HTML element.
+
+### Default
+
+<modus-icon name="sun" color="black" size="50"></modus-icon>
+<modus-icon name="sun" color="black" size="40"></modus-icon>
+<modus-icon name="sun" color="black" size="25"></modus-icon>
+<modus-icon name="sun" color="black" size="15"></modus-icon>
+
+```html
+<modus-icon name="sun" color="black" size="50"></modus-icon>
+<modus-icon name="sun" color="black" size="40"></modus-icon>
+<modus-icon name="sun" color="black" size="25"></modus-icon>
+<modus-icon name="sun" color="black" size="15"></modus-icon>
+```
+
+### Properties
+
+| Property | Attribute | Description                      | Type     | Default     |
+| -------- | --------- | -------------------------------- | -------- | ----------- |
+| `color`  | `color`   | (optional) The color of the Icon | `string` | `undefined` |
+| `name`   | `name`    | The name of the icon             | `string` | `undefined` |
+| `size`   | `size`    | (optional) The size of the Icon  | `string` | `'16'`      |
+
+### DOM Events
+
+| Name     | Description                      | Emits |
+| -------- | -------------------------------- | ----- |
+| `onClick`| Fires when the icon is clicked   |       |
