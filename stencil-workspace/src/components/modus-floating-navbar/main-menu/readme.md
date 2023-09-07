@@ -1,4 +1,4 @@
-# modus-navbar-main-menu
+# modus-floating-navbar-main-menu
 
 
 
@@ -16,13 +16,13 @@
 
 ### Used by
 
- - [modus-navbar](..)
+ - [modus-floating-navbar](..)
 
 ### Graph
 ```mermaid
 graph TD;
-  modus-navbar --> modus-navbar-main-menu
-  style modus-navbar-main-menu fill:#f9f,stroke:#333,stroke-width:4px
+  modus-floating-navbar --> modus-floating-navbar-main-menu
+  style modus-floating-navbar-main-menu fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

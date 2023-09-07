@@ -1,5 +1,5 @@
 // Menu
-@mixin custom-navbar-menu {
+@mixin custom-floating-navbar-menu {
   background-color: var(--modus-body-bg, $col_white);
   border: $rem-1px solid var(--modus-border-color, #cbcdd6);
   border-radius: $rem_2px;

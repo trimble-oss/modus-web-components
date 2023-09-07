@@ -1,7 +1,7 @@
-@import './../modus-navbar.vars';
+@import './../modus-floating-navbar.vars';
 
 .apps-menu {
-  @include custom-navbar-menu;
+  @include custom-floating-navbar-menu;
 
   align-items: flex-start;
   cursor: default;

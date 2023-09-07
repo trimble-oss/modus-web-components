@@ -2,11 +2,11 @@
 import { Component, h, Prop } from '@stencil/core';
 
 @Component({
-  tag: 'modus-navbar-notifications-menu',
-  styleUrl: 'modus-navbar-notifications-menu.scss',
+  tag: 'modus-floating-navbar-notifications-menu',
+  styleUrl: 'modus-floating-navbar-notifications-menu.scss',
   shadow: true,
 })
-export class ModusNavbarNotificationsMenu {
+export class ModusFloatingNavbarNotificationsMenu {
   @Prop() reverse: boolean;
 
   render(): unknown {

@@ -1,0 +1,13 @@
+@import './../modus-floating-navbar.vars';
+
+.button-menu {
+  @include custom-floating-navbar-menu;
+
+  cursor: default;
+  top: 0;
+  width: max-content;
+
+  &.reverse {
+    left: 0;
+  }
+}

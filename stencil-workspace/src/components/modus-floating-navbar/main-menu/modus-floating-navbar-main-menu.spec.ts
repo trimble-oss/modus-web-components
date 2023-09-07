@@ -1,6 +1,6 @@
 import { newSpecPage } from '@stencil/core/testing';
-import { ModusNavbarMainMenu } from './modus-navbar-main-menu';
-import { DEFAULT_CONTAINER_LAYOUT } from './modus-navbar-main-menu.models';
+import { ModusFloatingNavbarMainMenu } from './modus-floating-navbar-main-menu';
+import { DEFAULT_CONTAINER_LAYOUT } from './modus-floating-navbar-main-menu.models';
 
 describe('modus-navbar-main-menu', () => {
   beforeAll(() => {
@@ -20,8 +20,8 @@ describe('modus-navbar-main-menu', () => {
 
   it('renders', async () => {
     const { root } = await newSpecPage({
-      components: [ModusNavbarMainMenu],
-      html: '<modus-navbar-main-menu></modus-navbar-main-menu>',
+      components: [ModusFloatingNavbarMainMenu],
+      html: '<modus-floating-navbar-main-menu></modus-floating-navbar-main-menu>',
     });
 
     const mainMenuElement: HTMLModusNavbarMainMenuElement = root.shadowRoot.querySelector('div.main-menu');
@@ -30,7 +30,7 @@ describe('modus-navbar-main-menu', () => {
   });
 
   it('should not update container layout when navbar does not exist', () => {
-    const mainMenu = new ModusNavbarMainMenu();
+    const mainMenu = new ModusFloatingNavbarMainMenu();
     mainMenu.navbarId = 'non-existing-navbar';
 
     mainMenu.updateContainerLayout();
@@ -44,7 +44,7 @@ describe('modus-navbar-main-menu', () => {
     const mockNavbar = createMockNavbar(navbarBottomPx, navbarLeftPx);
     jest.spyOn(global.document, 'getElementById').mockReturnValue(mockNavbar);
 
-    const mainMenu = new ModusNavbarMainMenu();
+    const mainMenu = new ModusFloatingNavbarMainMenu();
     mainMenu.updateContainerLayout();
 
     expect(window.scrollY).toBe(0);
@@ -59,7 +59,7 @@ describe('modus-navbar-main-menu', () => {
     const mockNavbar = createMockNavbar(navbarBottomPx, navbarLeftPx);
     jest.spyOn(global.document, 'getElementById').mockReturnValue(mockNavbar);
 
-    const mainMenu = new ModusNavbarMainMenu();
+    const mainMenu = new ModusFloatingNavbarMainMenu();
     mainMenu.updateContainerLayout();
 
     expect(window.scrollY).toBe(0);

@@ -1,16 +1,16 @@
 // eslint-disable-next-line
 import { Component, Prop, h, Event, EventEmitter } from '@stencil/core';
-import { ModusNavbarProfileMenuLink } from '../modus-navbar.models';
+import { ModusFloatingNavbarProfileMenuLink } from '../modus-floating-navbar.models';
 @Component({
-  tag: 'modus-navbar-profile-menu',
-  styleUrl: 'modus-navbar-profile-menu.scss',
+  tag: 'modus-floating-navbar-profile-menu',
+  styleUrl: 'modus-floating-navbar-profile-menu.scss',
   shadow: true,
 })
-export class ModusNavbarProfileMenu {
+export class ModusFloatingNavbarProfileMenu {
   @Prop() avatarUrl: string;
   @Prop() email: string;
   @Prop() initials: string;
-  @Prop() links: ModusNavbarProfileMenuLink[];
+  @Prop() links: ModusFloatingNavbarProfileMenuLink[];
   @Prop() reverse: boolean;
   @Prop() username: string;
   @Prop() variant: 'default' | 'blue' = 'default';

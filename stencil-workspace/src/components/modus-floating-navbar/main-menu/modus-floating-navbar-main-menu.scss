@@ -1,7 +1,7 @@
-@import './../modus-navbar.vars';
+@import './../modus-floating-navbar.vars';
 
 .main-menu {
-  @include custom-navbar-menu;
+  @include custom-floating-navbar-menu;
 
   border-radius: 0 0 $rem_2px $rem_2px;
   border-top: none;

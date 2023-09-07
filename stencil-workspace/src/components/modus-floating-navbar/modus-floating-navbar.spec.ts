@@ -1,11 +1,11 @@
 import { newSpecPage } from '@stencil/core/testing';
-import { ModusNavbar } from './modus-navbar';
+import { ModusFloatingNavbar } from './modus-floating-navbar';
 
 describe('modus-navbar', () => {
   it('renders', async () => {
     const { root } = await newSpecPage({
-      components: [ModusNavbar],
-      html: '<modus-navbar></modus-navbar>',
+      components: [ModusFloatingNavbar],
+      html: '<modus-floating-navbar></modus-floating-navbar>',
     });
 
     const navElement = root.shadowRoot.querySelector('nav');

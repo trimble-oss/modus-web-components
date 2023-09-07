@@ -1,7 +1,7 @@
-@import './../modus-navbar.vars';
+@import './../modus-floating-navbar.vars';
 
 .notifications-menu {
-  @include custom-navbar-menu;
+  @include custom-floating-navbar-menu;
 
   cursor: default;
   width: max-content;

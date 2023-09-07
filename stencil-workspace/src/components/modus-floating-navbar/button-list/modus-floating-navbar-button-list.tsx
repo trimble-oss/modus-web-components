@@ -3,12 +3,12 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { IconMap } from '../../icons/IconMap';
-import { ModusNavbarButton } from '../modus-navbar.models';
+import { ModusFloatingNavbarButton } from '../modus-floating-navbar.models';
 
-export const ModusNavbarButtonList: FunctionalComponent<{
-  buttons: ModusNavbarButton[];
+export const ModusFloatingNavbarButtonList: FunctionalComponent<{
+  buttons: ModusFloatingNavbarButton[];
   reverse: boolean;
-  onClick?: (event: MouseEvent, button: ModusNavbarButton) => void;
+  onClick?: (event: MouseEvent, button: ModusFloatingNavbarButton) => void;
   openButtonMenuId: string;
 }> = ({ buttons, reverse, onClick, openButtonMenuId }) => {
   const navbarButtons = buttons || [];

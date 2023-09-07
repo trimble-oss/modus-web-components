@@ -1,13 +1,13 @@
 // eslint-disable-next-line
 import { Component, h, Prop, State } from '@stencil/core';
-import { ContainerLayout, DOM_OBSERVER_CONFIG, DEFAULT_CONTAINER_LAYOUT } from './modus-navbar-main-menu.models';
+import { ContainerLayout, DOM_OBSERVER_CONFIG, DEFAULT_CONTAINER_LAYOUT } from './modus-floating-navbar-main-menu.models';
 
 @Component({
-  tag: 'modus-navbar-main-menu',
-  styleUrl: 'modus-navbar-main-menu.scss',
+  tag: 'modus-floating-navbar-main-menu',
+  styleUrl: 'modus-floating-navbar-main-menu.scss',
   shadow: true,
 })
-export class ModusNavbarMainMenu {
+export class ModusFloatingNavbarMainMenu {
   @Prop() navbarId: string;
 
   @State() containerLayout: ContainerLayout = DEFAULT_CONTAINER_LAYOUT;

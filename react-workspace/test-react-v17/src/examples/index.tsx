@@ -9,6 +9,7 @@ export { default as ContentTree } from './ModusContentTreeExamples';
 export { default as DataTable } from './ModusDataTableExamples';
 export { default as Dropdown } from './ModusDropdownExamples';
 export { default as FileDropZone } from './ModusFileDropZoneExamples';
+export { default as FloatingNavbar } from './ModusFloatingNavbarExamples';
 export { default as List } from './ModusListExamples';
 export { default as Message } from './ModusMessageExamples';
 export { default as Modal } from './ModusModalExamples';

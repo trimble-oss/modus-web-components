@@ -894,6 +894,237 @@ export declare interface ModusNavbarSearchOverlay extends Components.ModusNavbar
   search: EventEmitter<CustomEvent<string>>;
 }
 
+@Component({
+  selector: 'modus-floating-navbar',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: [
+    'apps',
+    'buttons',
+    'enableSearchOverlay',
+    'helpUrl',
+    'logoOptions',
+    'profileMenuOptions',
+    'reverse',
+    'searchTooltip',
+    'showAppsMenu',
+    'showHelp',
+    'showMainMenu',
+    'showNotifications',
+    'showPendoPlaceholder',
+    'showSearch',
+    'showShadow',
+    'variant',
+  ],
+})
+export class ModusFloatingNavbar {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, [
+      'appsMenuOpen',
+      'appsMenuAppOpen',
+      'helpOpen',
+      'mainMenuClick',
+      'notificationsMenuOpen',
+      'productLogoClick',
+      'profileMenuLinkClick',
+      'profileMenuOpen',
+      'profileMenuSignOutClick',
+      'searchChange',
+      'searchMenuClick',
+    ]);
+  }
+}
+
+import type { ModusFloatingNavbarApp as IModusFloatingNavbarModusNavbarApp } from '@trimble-oss/modus-web-components';
+
+export declare interface ModusFloatingNavbar extends Components.ModusFloatingNavbar {
+  /**
+   * An event that fires when the apps menu opens.
+   */
+  appsMenuOpen: EventEmitter<CustomEvent<void>>;
+  /**
+   * An event that fires when an apps menu app opens.
+   */
+  appsMenuAppOpen: EventEmitter<CustomEvent<IModusFloatingNavbarModusNavbarApp>>;
+  /**
+   * An event that fires when the help link opens.
+   */
+  helpOpen: EventEmitter<CustomEvent<void>>;
+  /**
+   * An event that fires on main menu click.
+   */
+  mainMenuClick: EventEmitter<CustomEvent<KeyboardEvent | MouseEvent>>;
+  /**
+   * An event that fires when the notifications menu opens.
+   */
+  notificationsMenuOpen: EventEmitter<CustomEvent<void>>;
+  /**
+   * An event that fires on product logo click.
+   */
+  productLogoClick: EventEmitter<CustomEvent<MouseEvent>>;
+  /**
+   * An event that fires on profile menu link click.
+   */
+  profileMenuLinkClick: EventEmitter<CustomEvent<string>>;
+  /**
+   * An event that fires when the profile menu opens.
+   */
+  profileMenuOpen: EventEmitter<CustomEvent<void>>;
+  /**
+   * An event that fires on profile menu sign out click.
+   */
+  profileMenuSignOutClick: EventEmitter<CustomEvent<MouseEvent>>;
+  /**
+   * An event that fires on search value change.
+   */
+  searchChange: EventEmitter<CustomEvent<string>>;
+  /**
+   * An event that fires on search button click.
+   */
+  searchMenuClick: EventEmitter<CustomEvent<void>>;
+}
+
+@ProxyCmp({
+  inputs: ['apps', 'reverse'],
+})
+@Component({
+  selector: 'modus-floating-navbar-apps-menu',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['apps', 'reverse'],
+})
+export class ModusFloatingNavbarAppsMenu {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['appOpen']);
+  }
+}
+
+import type { ModusFloatingNavbarApp as IModusFloatingNavbarAppsMenuModusNavbarApp } from '@trimble-oss/modus-web-components';
+
+export declare interface ModusFloatingNavbarAppsMenu extends Components.ModusFloatingNavbarAppsMenu {
+  appOpen: EventEmitter<CustomEvent<IModusFloatingNavbarAppsMenuModusNavbarApp>>;
+}
+
+@ProxyCmp({
+  inputs: ['reverse'],
+})
+@Component({
+  selector: 'modus-floating-navbar-button-menu',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['reverse'],
+})
+export class ModusFloatingNavbarButtonMenu {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+export declare interface ModusFloatingNavbarButtonMenu extends Components.ModusFloatingNavbarButtonMenu {}
+
+@ProxyCmp({
+  inputs: ['navbarId'],
+})
+@Component({
+  selector: 'modus-floating-navbar-main-menu',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['navbarId'],
+})
+export class ModusFloatingNavbarMainMenu {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+export declare interface ModusFloatingNavbarMainMenu extends Components.ModusFloatingNavbarMainMenu {}
+
+@ProxyCmp({
+  inputs: ['reverse'],
+})
+@Component({
+  selector: 'modus-floating-navbar-notifications-menu',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['reverse'],
+})
+export class ModusFloatingNavbarNotificationsMenu {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+export declare interface ModusFloatingNavbarNotificationsMenu extends Components.ModusFloatingNavbarNotificationsMenu {}
+
+@ProxyCmp({
+  inputs: ['avatarUrl', 'email', 'initials', 'links', 'reverse', 'username', 'variant'],
+})
+@Component({
+  selector: 'modus-floating-navbar-profile-menu',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['avatarUrl', 'email', 'initials', 'links', 'reverse', 'username', 'variant'],
+})
+export class ModusFloatingNavbarProfileMenu {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['linkClick', 'signOutClick']);
+  }
+}
+
+export declare interface ModusFloatingNavbarProfileMenu extends Components.ModusFloatingNavbarProfileMenu {
+  linkClick: EventEmitter<CustomEvent<string>>;
+
+  signOutClick: EventEmitter<CustomEvent<MouseEvent>>;
+}
+
+@ProxyCmp({})
+@Component({
+  selector: 'modus-floating-navbar-search-overlay',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: [],
+})
+export class ModusFloatingNavbarSearchOverlay {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['close', 'search']);
+  }
+}
+
+export declare interface ModusFloatingNavbarSearchOverlay extends Components.ModusFloatingNavbarSearchOverlay {
+  /**
+   * An event that fires on clicking on close button of search overlay
+   */
+  close: EventEmitter<CustomEvent<void>>;
+  /**
+   * An event that fires on search value change.
+   */
+  search: EventEmitter<CustomEvent<string>>;
+}
 @ProxyCmp({
   inputs: [
     'ariaLabel',

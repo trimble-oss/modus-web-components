@@ -1,4 +1,4 @@
-# modus-navbar-search-overlay
+# modus-floating-navbar-search-overlay
 
 
 
@@ -17,7 +17,7 @@
 
 ### Used by
 
- - [modus-navbar](..)
+ - [modus-floating-navbar](..)
 
 ### Depends on
 
@@ -26,9 +26,9 @@
 ### Graph
 ```mermaid
 graph TD;
-  modus-navbar-search-overlay --> modus-text-input
-  modus-navbar --> modus-navbar-search-overlay
-  style modus-navbar-search-overlay fill:#f9f,stroke:#333,stroke-width:4px
+  modus-floating-navbar-search-overlay --> modus-text-input
+  modus-floating-navbar --> modus-floating-navbar-search-overlay
+  style modus-floating-navbar-search-overlay fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

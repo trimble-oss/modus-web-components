@@ -1,4 +1,4 @@
-# modus-navbar-notifications-menu
+# modus-floating-navbar-notifications-menu
 
 
 
@@ -16,13 +16,13 @@
 
 ### Used by
 
- - [modus-navbar](..)
+ - [modus-floating-navbar](..)
 
 ### Graph
 ```mermaid
 graph TD;
-  modus-navbar --> modus-navbar-notifications-menu
-  style modus-navbar-notifications-menu fill:#f9f,stroke:#333,stroke-width:4px
+  modus-floating-navbar --> modus-floating-navbar-notifications-menu
+  style modus-floating-navbar-notifications-menu fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

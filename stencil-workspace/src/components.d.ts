@@ -9,6 +9,9 @@ import { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-a
 import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSortEvent, ModusTableSelectionOptions, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 import { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
+import { ModusFloatingNavbarApp } from "./components/modus-floating-navbar/apps-menu/modus-floating-navbar-apps-menu";
+import { ModusFloatingNavbarButton, ModusFloatingNavbarLogoOptions, ModusFloatingNavbarProfileMenuLink, ModusFloatingNavbarTooltip, ModusFloatingProfileMenuOptions } from "./components/modus-floating-navbar/modus-floating-navbar.models";
+import { ModusFloatingNavbarApp as ModusFloatingNavbarApp1 } from "./components/modus-floating-navbar/apps-menu/modus-floating-navbar-apps-menu";
 import { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
@@ -21,6 +24,9 @@ export { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-a
 export { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 export { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSortEvent, ModusTableSelectionOptions, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 export { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
+export { ModusFloatingNavbarApp } from "./components/modus-floating-navbar/apps-menu/modus-floating-navbar-apps-menu";
+export { ModusFloatingNavbarButton, ModusFloatingNavbarLogoOptions, ModusFloatingNavbarProfileMenuLink, ModusFloatingNavbarTooltip, ModusFloatingProfileMenuOptions } from "./components/modus-floating-navbar/modus-floating-navbar.models";
+export { ModusFloatingNavbarApp as ModusFloatingNavbarApp1 } from "./components/modus-floating-navbar/apps-menu/modus-floating-navbar-apps-menu";
 export { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 export { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
 export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
@@ -498,6 +504,97 @@ export namespace Components {
           * Remove a file from the dropzone.
          */
         "removeFile": (fileName: string) => Promise<void>;
+    }
+    interface ModusFloatingNavbar {
+        /**
+          * (optional) The apps to render in the apps menu.
+         */
+        "apps": ModusFloatingNavbarApp[];
+        /**
+          * (optional) The buttons to render in the Navbar.
+         */
+        "buttons": ModusFloatingNavbarButton[];
+        /**
+          * (optional) Whether to show search overlay or not.
+         */
+        "enableSearchOverlay": boolean;
+        /**
+          * (optional) Help URL.
+         */
+        "helpUrl": string;
+        "hideMainMenu": () => Promise<void>;
+        /**
+          * (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels.
+         */
+        "logoOptions": ModusFloatingNavbarLogoOptions;
+        /**
+          * (required) Profile menu options.
+         */
+        "profileMenuOptions": ModusFloatingProfileMenuOptions;
+        /**
+          * (optional) Whether to display the navbar items in reverse order.
+         */
+        "reverse": boolean;
+        /**
+          * (optional) Search tooltip.
+         */
+        "searchTooltip": ModusFloatingNavbarTooltip;
+        /**
+          * (optional) Whether to show the apps menu.
+         */
+        "showAppsMenu": boolean;
+        /**
+          * (optional) Whether to show help.
+         */
+        "showHelp": boolean;
+        /**
+          * (optional) Whether to show the main menu.
+         */
+        "showMainMenu": boolean;
+        /**
+          * (optional) Whether to show notifications.
+         */
+        "showNotifications": boolean;
+        /**
+          * (optional) Whether to show the placeholder for Pendo.
+         */
+        "showPendoPlaceholder": boolean;
+        /**
+          * (optional) Whether to show search.
+         */
+        "showSearch": boolean;
+        /**
+          * (optional) Whether to show a shadow under the navbar.
+         */
+        "showShadow": boolean;
+        /**
+          * (optional) Color variants for NavBar.
+         */
+        "variant": 'default' | 'blue';
+    }
+    interface ModusFloatingNavbarAppsMenu {
+        "apps": ModusFloatingNavbarApp1[];
+        "reverse": boolean;
+    }
+    interface ModusFloatingNavbarButtonMenu {
+        "reverse": boolean;
+    }
+    interface ModusFloatingNavbarMainMenu {
+        "navbarId": string;
+    }
+    interface ModusFloatingNavbarNotificationsMenu {
+        "reverse": boolean;
+    }
+    interface ModusFloatingNavbarProfileMenu {
+        "avatarUrl": string;
+        "email": string;
+        "initials": string;
+        "links": ModusFloatingNavbarProfileMenuLink[];
+        "reverse": boolean;
+        "username": string;
+        "variant": 'default' | 'blue';
+    }
+    interface ModusFloatingNavbarSearchOverlay {
     }
     interface ModusList {
     }
@@ -1277,6 +1374,22 @@ export interface ModusFileDropzoneCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusFileDropzoneElement;
 }
+export interface ModusFloatingNavbarCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusFloatingNavbarElement;
+}
+export interface ModusFloatingNavbarAppsMenuCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusFloatingNavbarAppsMenuElement;
+}
+export interface ModusFloatingNavbarProfileMenuCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusFloatingNavbarProfileMenuElement;
+}
+export interface ModusFloatingNavbarSearchOverlayCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusFloatingNavbarSearchOverlayElement;
+}
 export interface ModusListItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusListItemElement;
@@ -1443,6 +1556,48 @@ declare global {
     var HTMLModusFileDropzoneElement: {
         prototype: HTMLModusFileDropzoneElement;
         new (): HTMLModusFileDropzoneElement;
+    };
+    interface HTMLModusFloatingNavbarElement extends Components.ModusFloatingNavbar, HTMLStencilElement {
+    }
+    var HTMLModusFloatingNavbarElement: {
+        prototype: HTMLModusFloatingNavbarElement;
+        new (): HTMLModusFloatingNavbarElement;
+    };
+    interface HTMLModusFloatingNavbarAppsMenuElement extends Components.ModusFloatingNavbarAppsMenu, HTMLStencilElement {
+    }
+    var HTMLModusFloatingNavbarAppsMenuElement: {
+        prototype: HTMLModusFloatingNavbarAppsMenuElement;
+        new (): HTMLModusFloatingNavbarAppsMenuElement;
+    };
+    interface HTMLModusFloatingNavbarButtonMenuElement extends Components.ModusFloatingNavbarButtonMenu, HTMLStencilElement {
+    }
+    var HTMLModusFloatingNavbarButtonMenuElement: {
+        prototype: HTMLModusFloatingNavbarButtonMenuElement;
+        new (): HTMLModusFloatingNavbarButtonMenuElement;
+    };
+    interface HTMLModusFloatingNavbarMainMenuElement extends Components.ModusFloatingNavbarMainMenu, HTMLStencilElement {
+    }
+    var HTMLModusFloatingNavbarMainMenuElement: {
+        prototype: HTMLModusFloatingNavbarMainMenuElement;
+        new (): HTMLModusFloatingNavbarMainMenuElement;
+    };
+    interface HTMLModusFloatingNavbarNotificationsMenuElement extends Components.ModusFloatingNavbarNotificationsMenu, HTMLStencilElement {
+    }
+    var HTMLModusFloatingNavbarNotificationsMenuElement: {
+        prototype: HTMLModusFloatingNavbarNotificationsMenuElement;
+        new (): HTMLModusFloatingNavbarNotificationsMenuElement;
+    };
+    interface HTMLModusFloatingNavbarProfileMenuElement extends Components.ModusFloatingNavbarProfileMenu, HTMLStencilElement {
+    }
+    var HTMLModusFloatingNavbarProfileMenuElement: {
+        prototype: HTMLModusFloatingNavbarProfileMenuElement;
+        new (): HTMLModusFloatingNavbarProfileMenuElement;
+    };
+    interface HTMLModusFloatingNavbarSearchOverlayElement extends Components.ModusFloatingNavbarSearchOverlay, HTMLStencilElement {
+    }
+    var HTMLModusFloatingNavbarSearchOverlayElement: {
+        prototype: HTMLModusFloatingNavbarSearchOverlayElement;
+        new (): HTMLModusFloatingNavbarSearchOverlayElement;
     };
     interface HTMLModusListElement extends Components.ModusList, HTMLStencilElement {
     }
@@ -1628,6 +1783,13 @@ declare global {
         "modus-date-picker": HTMLModusDatePickerElement;
         "modus-dropdown": HTMLModusDropdownElement;
         "modus-file-dropzone": HTMLModusFileDropzoneElement;
+        "modus-floating-navbar": HTMLModusFloatingNavbarElement;
+        "modus-floating-navbar-apps-menu": HTMLModusFloatingNavbarAppsMenuElement;
+        "modus-floating-navbar-button-menu": HTMLModusFloatingNavbarButtonMenuElement;
+        "modus-floating-navbar-main-menu": HTMLModusFloatingNavbarMainMenuElement;
+        "modus-floating-navbar-notifications-menu": HTMLModusFloatingNavbarNotificationsMenuElement;
+        "modus-floating-navbar-profile-menu": HTMLModusFloatingNavbarProfileMenuElement;
+        "modus-floating-navbar-search-overlay": HTMLModusFloatingNavbarSearchOverlayElement;
         "modus-list": HTMLModusListElement;
         "modus-list-item": HTMLModusListItemElement;
         "modus-message": HTMLModusMessageElement;
@@ -2179,6 +2341,155 @@ declare namespace LocalJSX {
           * An event that fires when files have been added or removed, regardless of whether they're valid.
          */
         "onFiles"?: (event: ModusFileDropzoneCustomEvent<[File[], string | null]>) => void;
+    }
+    interface ModusFloatingNavbar {
+        /**
+          * (optional) The apps to render in the apps menu.
+         */
+        "apps"?: ModusFloatingNavbarApp[];
+        /**
+          * (optional) The buttons to render in the Navbar.
+         */
+        "buttons"?: ModusFloatingNavbarButton[];
+        /**
+          * (optional) Whether to show search overlay or not.
+         */
+        "enableSearchOverlay"?: boolean;
+        /**
+          * (optional) Help URL.
+         */
+        "helpUrl"?: string;
+        /**
+          * (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels.
+         */
+        "logoOptions"?: ModusFloatingNavbarLogoOptions;
+        /**
+          * An event that fires when an apps menu app opens.
+         */
+        "onAppsMenuAppOpen"?: (event: ModusFloatingNavbarCustomEvent<ModusFloatingNavbarApp>) => void;
+        /**
+          * An event that fires when the apps menu opens.
+         */
+        "onAppsMenuOpen"?: (event: ModusFloatingNavbarCustomEvent<void>) => void;
+        /**
+          * An event that fires when a button in the custom button list is clicked.
+         */
+        "onButtonClick"?: (event: ModusFloatingNavbarCustomEvent<string>) => void;
+        /**
+          * An event that fires when the help link opens.
+         */
+        "onHelpOpen"?: (event: ModusFloatingNavbarCustomEvent<void>) => void;
+        /**
+          * An event that fires on main menu click.
+         */
+        "onMainMenuClick"?: (event: ModusFloatingNavbarCustomEvent<KeyboardEvent | MouseEvent>) => void;
+        /**
+          * An event that fires when the notifications menu opens.
+         */
+        "onNotificationsMenuOpen"?: (event: ModusFloatingNavbarCustomEvent<void>) => void;
+        /**
+          * An event that fires on product logo click.
+         */
+        "onProductLogoClick"?: (event: ModusFloatingNavbarCustomEvent<MouseEvent>) => void;
+        /**
+          * An event that fires on profile menu link click.
+         */
+        "onProfileMenuLinkClick"?: (event: ModusFloatingNavbarCustomEvent<string>) => void;
+        /**
+          * An event that fires when the profile menu opens.
+         */
+        "onProfileMenuOpen"?: (event: ModusFloatingNavbarCustomEvent<void>) => void;
+        /**
+          * An event that fires on profile menu sign out click.
+         */
+        "onProfileMenuSignOutClick"?: (event: ModusFloatingNavbarCustomEvent<MouseEvent>) => void;
+        /**
+          * An event that fires on search value change.
+         */
+        "onSearchChange"?: (event: ModusFloatingNavbarCustomEvent<string>) => void;
+        /**
+          * An event that fires on search button click.
+         */
+        "onSearchMenuClick"?: (event: ModusFloatingNavbarCustomEvent<void>) => void;
+        /**
+          * (required) Profile menu options.
+         */
+        "profileMenuOptions"?: ModusFloatingProfileMenuOptions;
+        /**
+          * (optional) Whether to display the navbar items in reverse order.
+         */
+        "reverse"?: boolean;
+        /**
+          * (optional) Search tooltip.
+         */
+        "searchTooltip"?: ModusFloatingNavbarTooltip;
+        /**
+          * (optional) Whether to show the apps menu.
+         */
+        "showAppsMenu"?: boolean;
+        /**
+          * (optional) Whether to show help.
+         */
+        "showHelp"?: boolean;
+        /**
+          * (optional) Whether to show the main menu.
+         */
+        "showMainMenu"?: boolean;
+        /**
+          * (optional) Whether to show notifications.
+         */
+        "showNotifications"?: boolean;
+        /**
+          * (optional) Whether to show the placeholder for Pendo.
+         */
+        "showPendoPlaceholder"?: boolean;
+        /**
+          * (optional) Whether to show search.
+         */
+        "showSearch"?: boolean;
+        /**
+          * (optional) Whether to show a shadow under the navbar.
+         */
+        "showShadow"?: boolean;
+        /**
+          * (optional) Color variants for NavBar.
+         */
+        "variant"?: 'default' | 'blue';
+    }
+    interface ModusFloatingNavbarAppsMenu {
+        "apps"?: ModusFloatingNavbarApp1[];
+        "onAppOpen"?: (event: ModusFloatingNavbarAppsMenuCustomEvent<ModusFloatingNavbarApp1>) => void;
+        "reverse"?: boolean;
+    }
+    interface ModusFloatingNavbarButtonMenu {
+        "reverse"?: boolean;
+    }
+    interface ModusFloatingNavbarMainMenu {
+        "navbarId"?: string;
+    }
+    interface ModusFloatingNavbarNotificationsMenu {
+        "reverse"?: boolean;
+    }
+    interface ModusFloatingNavbarProfileMenu {
+        "avatarUrl"?: string;
+        "email"?: string;
+        "initials"?: string;
+        "links"?: ModusFloatingNavbarProfileMenuLink[];
+        "onLinkClick"?: (event: ModusFloatingNavbarProfileMenuCustomEvent<string>) => void;
+        "onSignOutClick"?: (event: ModusFloatingNavbarProfileMenuCustomEvent<MouseEvent>) => void;
+        "reverse"?: boolean;
+        "username"?: string;
+        "variant"?: 'default' | 'blue';
+    }
+    interface ModusFloatingNavbarSearchOverlay {
+        /**
+          * An event that fires on clicking on close button of search overlay
+         */
+        "onClose"?: (event: ModusFloatingNavbarSearchOverlayCustomEvent<void>) => void;
+        /**
+          * An event that fires on search value change.
+         */
+        "onSearch"?: (event: ModusFloatingNavbarSearchOverlayCustomEvent<string>) => void;
     }
     interface ModusList {
     }
@@ -3055,6 +3366,13 @@ declare namespace LocalJSX {
         "modus-date-picker": ModusDatePicker;
         "modus-dropdown": ModusDropdown;
         "modus-file-dropzone": ModusFileDropzone;
+        "modus-floating-navbar": ModusFloatingNavbar;
+        "modus-floating-navbar-apps-menu": ModusFloatingNavbarAppsMenu;
+        "modus-floating-navbar-button-menu": ModusFloatingNavbarButtonMenu;
+        "modus-floating-navbar-main-menu": ModusFloatingNavbarMainMenu;
+        "modus-floating-navbar-notifications-menu": ModusFloatingNavbarNotificationsMenu;
+        "modus-floating-navbar-profile-menu": ModusFloatingNavbarProfileMenu;
+        "modus-floating-navbar-search-overlay": ModusFloatingNavbarSearchOverlay;
         "modus-list": ModusList;
         "modus-list-item": ModusListItem;
         "modus-message": ModusMessage;
@@ -3104,6 +3422,13 @@ declare module "@stencil/core" {
             "modus-date-picker": LocalJSX.ModusDatePicker & JSXBase.HTMLAttributes<HTMLModusDatePickerElement>;
             "modus-dropdown": LocalJSX.ModusDropdown & JSXBase.HTMLAttributes<HTMLModusDropdownElement>;
             "modus-file-dropzone": LocalJSX.ModusFileDropzone & JSXBase.HTMLAttributes<HTMLModusFileDropzoneElement>;
+            "modus-floating-navbar": LocalJSX.ModusFloatingNavbar & JSXBase.HTMLAttributes<HTMLModusFloatingNavbarElement>;
+            "modus-floating-navbar-apps-menu": LocalJSX.ModusFloatingNavbarAppsMenu & JSXBase.HTMLAttributes<HTMLModusFloatingNavbarAppsMenuElement>;
+            "modus-floating-navbar-button-menu": LocalJSX.ModusFloatingNavbarButtonMenu & JSXBase.HTMLAttributes<HTMLModusFloatingNavbarButtonMenuElement>;
+            "modus-floating-navbar-main-menu": LocalJSX.ModusFloatingNavbarMainMenu & JSXBase.HTMLAttributes<HTMLModusFloatingNavbarMainMenuElement>;
+            "modus-floating-navbar-notifications-menu": LocalJSX.ModusFloatingNavbarNotificationsMenu & JSXBase.HTMLAttributes<HTMLModusFloatingNavbarNotificationsMenuElement>;
+            "modus-floating-navbar-profile-menu": LocalJSX.ModusFloatingNavbarProfileMenu & JSXBase.HTMLAttributes<HTMLModusFloatingNavbarProfileMenuElement>;
+            "modus-floating-navbar-search-overlay": LocalJSX.ModusFloatingNavbarSearchOverlay & JSXBase.HTMLAttributes<HTMLModusFloatingNavbarSearchOverlayElement>;
             "modus-list": LocalJSX.ModusList & JSXBase.HTMLAttributes<HTMLModusListElement>;
             "modus-list-item": LocalJSX.ModusListItem & JSXBase.HTMLAttributes<HTMLModusListItemElement>;
             "modus-message": LocalJSX.ModusMessage & JSXBase.HTMLAttributes<HTMLModusMessageElement>;

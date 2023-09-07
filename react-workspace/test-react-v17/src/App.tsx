@@ -27,6 +27,7 @@ function App() {
         <ModusReactExamples.DataTable />
         <ModusReactExamples.Dropdown />
         <ModusReactExamples.FileDropZone />
+        <ModusReactExamples.FloatingNavbar />
         <ModusReactExamples.List />
         <ModusReactExamples.Message />
         <ModusReactExamples.Modal />

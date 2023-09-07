@@ -1,4 +1,3 @@
-
 import * as d from './components';
 
 export const DIRECTIVES = [
@@ -17,6 +16,13 @@ export const DIRECTIVES = [
   d.ModusDatePicker,
   d.ModusDropdown,
   d.ModusFileDropzone,
+  d.ModusFloatingNavbar,
+  d.ModusFloatingNavbarAppsMenu,
+  d.ModusFloatingNavbarButtonMenu,
+  d.ModusFloatingNavbarMainMenu,
+  d.ModusFloatingNavbarNotificationsMenu,
+  d.ModusFloatingNavbarProfileMenu,
+  d.ModusFloatingNavbarSearchOverlay,
   d.ModusList,
   d.ModusListItem,
   d.ModusMessage,
@@ -44,5 +50,5 @@ export const DIRECTIVES = [
   d.ModusToast,
   d.ModusTooltip,
   d.ModusTreeView,
-  d.ModusTreeViewItem
+  d.ModusTreeViewItem,
 ];

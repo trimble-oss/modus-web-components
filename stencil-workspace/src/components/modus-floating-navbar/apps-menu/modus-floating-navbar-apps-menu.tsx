@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 import { Component, Prop, h, EventEmitter, Event } from '@stencil/core';
 
-export interface ModusNavbarApp {
+export interface ModusFloatingNavbarApp {
   description?: string;
   logoUrl: string;
   name: string;
@@ -11,17 +11,17 @@ export interface ModusNavbarApp {
 }
 
 @Component({
-  tag: 'modus-navbar-apps-menu',
-  styleUrl: 'modus-navbar-apps-menu.scss',
+  tag: 'modus-floating-navbar-apps-menu',
+  styleUrl: 'modus-floating-navbar-apps-menu.scss',
   shadow: true,
 })
-export class ModusNavbarAppsMenu {
-  @Prop() apps: ModusNavbarApp[];
+export class ModusFloatingNavbarAppsMenu {
+  @Prop() apps: ModusFloatingNavbarApp[];
   @Prop() reverse: boolean;
 
-  @Event() appOpen: EventEmitter<ModusNavbarApp>;
+  @Event() appOpen: EventEmitter<ModusFloatingNavbarApp>;
 
-  clickAppHandler(event: MouseEvent, app: ModusNavbarApp): void {
+  clickAppHandler(event: MouseEvent, app: ModusFloatingNavbarApp): void {
     event.preventDefault();
     window.open(app.url, '_blank');
     this.appOpen.emit(app);

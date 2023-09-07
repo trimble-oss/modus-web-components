@@ -1,4 +1,4 @@
-# modus-navbar-apps-menu
+# modus-floating-navbar-apps-menu
 
 
 
@@ -7,30 +7,30 @@
 
 ## Properties
 
-| Property  | Attribute | Description | Type               | Default     |
-| --------- | --------- | ----------- | ------------------ | ----------- |
-| `apps`    | --        |             | `ModusNavbarApp[]` | `undefined` |
-| `reverse` | `reverse` |             | `boolean`          | `undefined` |
+| Property  | Attribute | Description | Type                       | Default     |
+| --------- | --------- | ----------- | -------------------------- | ----------- |
+| `apps`    | --        |             | `ModusFloatingNavbarApp[]` | `undefined` |
+| `reverse` | `reverse` |             | `boolean`                  | `undefined` |
 
 
 ## Events
 
-| Event     | Description | Type                          |
-| --------- | ----------- | ----------------------------- |
-| `appOpen` |             | `CustomEvent<ModusNavbarApp>` |
+| Event     | Description | Type                                  |
+| --------- | ----------- | ------------------------------------- |
+| `appOpen` |             | `CustomEvent<ModusFloatingNavbarApp>` |
 
 
 ## Dependencies
 
 ### Used by
 
- - [modus-navbar](..)
+ - [modus-floating-navbar](..)
 
 ### Graph
 ```mermaid
 graph TD;
-  modus-navbar --> modus-navbar-apps-menu
-  style modus-navbar-apps-menu fill:#f9f,stroke:#333,stroke-width:4px
+  modus-floating-navbar --> modus-floating-navbar-apps-menu
+  style modus-floating-navbar-apps-menu fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

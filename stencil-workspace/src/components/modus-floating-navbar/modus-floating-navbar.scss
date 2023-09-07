@@ -1,0 +1,259 @@
+@import './modus-floating-navbar.vars';
+
+nav {
+  align-items: center;
+  display: flex;
+  font-family: $primary-font;
+  height: 56px;
+  pointer-events: none;
+
+  &.reverse {
+    flex-direction: row-reverse;
+  }
+
+  &.shadow {
+    box-shadow: $box-shadow;
+  }
+
+  .icon-search,
+  .icon-notifications,
+  .icon-help,
+  .icon-apps,
+  .icon-menu,
+  .icon-close,
+  .icon-button svg {
+    border-radius: $rem-2px;
+    padding: $rem-12px;
+
+    path {
+      fill: $modus-navbar-icon-color;
+    }
+
+    &:hover:not(.pressed) {
+      background-color: $modus-navbar-icon-hover-bg;
+
+      path {
+        fill: $modus-navbar-icon-hover-color;
+      }
+    }
+
+    &:active,
+    &.pressed {
+      background-color: $modus-navbar-icon-active-bg;
+
+      path {
+        fill: $modus-navbar-icon-active-color;
+      }
+    }
+  }
+
+  .main-menu-button {
+    padding: 0 $rem-8px;
+  }
+
+  .right-button {
+    padding-left: $rem-8px;
+  }
+
+  .navbar-button {
+    position: relative;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    .navbar-button-icon,
+    .icon-button,
+    modus-tooltip {
+      display: flex;
+    }
+  }
+
+  .navbar-button-list {
+    display: flex;
+  }
+
+  .right,
+  .left {
+    align-items: center;
+    display: inline-flex;
+    height: 100%;
+    pointer-events: all;
+
+    .main-floating-navbar,
+    .utility-floting-navbar {
+      align-items: inherit;
+      background-color: $modus-navbar-bg;
+      border-radius: $rem-4px;
+      display: inherit;
+      height: inherit;
+    }
+
+    &.expand {
+      display: none;
+    }
+
+    &.collapse {
+      display: inline-flex;
+    }
+
+    &.reverse {
+      flex-direction: row-reverse;
+    }
+  }
+
+  .left {
+    img.product-logo-primary {
+      filter: $modus-navbar-brand-logo-filter;
+      max-height: 32px;
+      padding: 0 $rem-8px;
+      user-select: none;
+    }
+
+    img.product-logo-secondary {
+      filter: $modus-navbar-brand-logo-filter;
+    }
+  }
+
+  .right {
+    margin-left: auto;
+
+    &.reverse {
+      margin-left: 0;
+      margin-right: auto;
+    }
+
+    .search {
+      align-items: center;
+      display: inline-flex;
+    }
+
+    .pendo-placeholder {
+      height: 40px;
+      width: 40px;
+    }
+
+    .profile-menu {
+      align-items: center;
+      cursor: default;
+      display: inline-flex;
+      height: 40px;
+      justify-content: center;
+      margin: 0 $rem-8px;
+      position: relative;
+      width: 40px;
+
+      modus-tooltip {
+        img.avatar {
+          background-color: $modus-navbar-icon-color;
+          border-radius: 50%;
+          height: 32px;
+          width: 32px;
+        }
+
+        .initials {
+          align-items: center;
+          background-color: $modus-navbar-icon-color;
+          border-radius: 50%;
+          color: $modus-navbar-profile-icon-initials-color;
+          display: flex;
+          font-size: $rem-14px;
+          font-weight: $font-weight-semi-bold;
+          height: 32px;
+          justify-content: center;
+          user-select: none;
+          width: 32px;
+        }
+
+        > :first-child:hover,
+        > :first-child:focus {
+          border: $rem-4px solid $modus-navbar-icon-color;
+        }
+
+        > :first-child:active {
+          outline: $rem-4px solid $modus-navbar-profile-icon-active-border-color;
+        }
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .overlay {
+    width: 100%;
+  }
+
+  &.nav-blue {
+    background-color: $modus-navbar-blue-bg;
+
+    .icon-search,
+    .icon-notifications,
+    .icon-help,
+    .icon-apps,
+    .icon-menu,
+    .icon-close,
+    .icon-button svg {
+      path {
+        fill: $modus-navbar-blue-icon-color;
+      }
+
+      &:hover:not(.pressed) {
+        background-color: $modus-navbar-blue-icon-hover-bg;
+        outline: $rem-1px solid $modus-navbar-blue-icon-hover-border-color;
+
+        path {
+          fill: $modus-navbar-blue-icon-hover-color;
+        }
+      }
+
+      &:active,
+      &.pressed {
+        background-color: $modus-navbar-blue-icon-active-bg;
+
+        path {
+          fill: $modus-navbar-blue-icon-active-color;
+        }
+      }
+    }
+
+    .profile-menu {
+      modus-tooltip {
+        img.avatar,
+        .initials {
+          background-color: $modus-navbar-blue-icon-color;
+        }
+
+        .initials {
+          color: $modus-navbar-blue-profile-icon-initials-color;
+        }
+
+        > :first-child:hover,
+        > :first-child:focus {
+          border-color: $modus-navbar-blue-icon-color;
+        }
+
+        > :first-child:active {
+          outline: $rem-4px solid $modus-navbar-blue-profile-icon-active-border-color;
+        }
+      }
+    }
+  }
+
+  .product-logo {
+    user-select: none;
+
+    @media screen and (width > 576px) {
+      .product-logo-secondary {
+        display: none;
+      }
+    }
+
+    @media screen and (width <=576px) {
+      .product-logo-primary {
+        display: none;
+      }
+    }
+  }
+}

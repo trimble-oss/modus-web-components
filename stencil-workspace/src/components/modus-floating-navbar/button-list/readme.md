@@ -1,4 +1,4 @@
-# modus-navbar-button-list
+# modus-floating-navbar-button-list
 
 
 
@@ -7,9 +7,9 @@
 
 ## Properties
 
-| Property  | Attribute | Description                                     | Type                  | Default     |
-| --------- | --------- | ----------------------------------------------- | --------------------- | ----------- |
-| `buttons` | --        | (optional) The buttons to render in the Navbar. | `ModusNavbarButton[]` | `undefined` |
+| Property  | Attribute | Description                                     | Type                          | Default     |
+| --------- | --------- | ----------------------------------------------- | ----------------------------- | ----------- |
+| `buttons` | --        | (optional) The buttons to render in the Navbar. | `ModusFloatingNavbarButton[]` | `undefined` |
 
 
 ## Events
@@ -23,18 +23,18 @@
 
 ### Used by
 
- - [modus-navbar](..)
+ - [modus-floating-navbar](..)
 
 ### Depends on
 
-- [modus-navbar-button](../button)
+- [modus-floating-navbar-button](../button)
 
 ### Graph
 ```mermaid
 graph TD;
-  modus-navbar-button-list --> modus-navbar-button
+  modus-floating-navbar-button-list --> modus-navbar-button
   modus-navbar-button --> modus-tooltip
-  modus-navbar --> modus-navbar-button-list
+  modus-floating-navbar --> modus-floating-navbar-button-list
   style modus-navbar-button-list fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
