@@ -1145,6 +1145,7 @@ export declare interface ModusFloatingNavbarSearchOverlay extends Components.Mod
 }
 
 @ProxyCmp({
+@ProxyCmp({
   inputs: [
     'ariaLabel',
     'disabled',

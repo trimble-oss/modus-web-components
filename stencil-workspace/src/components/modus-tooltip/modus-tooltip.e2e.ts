@@ -37,7 +37,6 @@ describe('modus-tooltip', () => {
     expect(element).toHaveClass('bottom');
   });
 
-
   it('tooltip should show or hide if disabled prop set', async () => {
     const page = await newE2EPage();
     await page.setContent('<modus-tooltip text="Hello"></modus-tooltip>');

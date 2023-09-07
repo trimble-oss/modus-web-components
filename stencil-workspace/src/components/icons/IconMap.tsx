@@ -44,6 +44,9 @@ import { IconMoon } from './icon-moon';
 import { IconSun } from './icon-sun';
 import { IconDownloadLine } from './icon-download-line';
 import { IconTune } from './icon-tune';
+import { IconChevronDoubleUp } from './icon-chevron-double-up';
+import { IconChevronDoubleDown } from './icon-chevron-double-down';
+import { IconTimerCountdown } from './icon-timer-countdown';
 
 export interface IconProps {
   color?: string;
@@ -83,12 +86,18 @@ export const IconMap: FunctionalComponent<IconMapProps> = (props: IconMapProps) 
       return <IconChevronRightThick color={props.color} onClick={props.onClick} size={props.size} />;
     case 'chevron-up-thick':
       return <IconChevronUpThick color={props.color} onClick={props.onClick} size={props.size} />;
+    case 'chevron-double-up':
+      return <IconChevronDoubleUp color={props.color} onClick={props.onClick} size={props.size} />;
+    case 'chevron-double-down':
+      return <IconChevronDoubleDown color={props.color} onClick={props.onClick} size={props.size} />;
     case 'close':
       return <IconClose color={props.color} onClick={props.onClick} size={props.size} />;
     case 'collapse-all':
       return <IconCollapseAll color={props.color} onClick={props.onClick} size={props.size} />;
     case 'copy':
       return <IconCopy color={props.color} onClick={props.onClick} size={props.size} />;
+    case 'timer-countdown':
+      return <IconTimerCountdown color={props.color} onClick={props.onClick} size={props.size} />;
     case 'delete':
       return <IconDelete color={props.color} onClick={props.onClick} size={props.size} />;
     case 'download-line':

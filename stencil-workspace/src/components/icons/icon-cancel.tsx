@@ -10,9 +10,9 @@ interface IconProps {
 export const IconCancel: FunctionalComponent<IconProps> = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width={props.size}
-    height={props.size}
-    fill={props.color}
+    width={props.size ?? 16}
+    height={props.size ?? 16}
+    fill={props.color ?? 'currentColor'}
     class="modus-icon"
     onClick={props.onClick}
     viewBox="0 0 32 32">

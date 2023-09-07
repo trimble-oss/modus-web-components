@@ -9,7 +9,7 @@ import { Component, h } from '@stencil/core';
 export class ModusList {
   render(): unknown {
     return (
-      <ul>
+      <ul part="list-items">
         <slot />
       </ul>
     );

@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.actor != 'dependabot[bot]' }}
     steps:
-    - name: Google Chat Notification
-      uses: trimble-oss/gh-actions/google-chat-notification@main
-      with:
-        url: ${{ secrets.GOOGLE_CHAT_WEBHOOK }}
+      - name: Google Chat Notification
+        uses: trimble-oss/gh-actions/google-chat-notification@main
+        with:
+          url: ${{ secrets.GOOGLE_CHAT_WEBHOOK }}

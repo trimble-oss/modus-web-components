@@ -9,6 +9,7 @@
   --modus-blue: #0063a3;
   --modus-blue-light: #217cbb;
   --modus-blue-pale: #dcedf9;
+  --modus-blue-4: #019aeb;
 
   // Gray progression
   --modus-gray-10: #171c1e;
@@ -171,6 +172,9 @@
   --modus-btn-icon-only-tertiary-hover-color: var(--modus-gray-6);
   --modus-btn-icon-only-tertiary-active-bg: var(--modus-gray-1);
   --modus-btn-icon-only-tertiary-active-color: var(--modus-trimble-gray);
+
+  // Icon
+  --modus-icon-colour: var(--modus-gray-10);
 
   // Input
   --modus-input-bg: var(--modus-white);
@@ -360,6 +364,12 @@
 
   // Header
   --modus-table-header-bg: var(--modus-gray-light);
+  --modus-table-header-color: var(--modus-gray-8);
+  --modus-table-header-drop-color: var(--modus-blue-4);
+
+  // Scrollbar
+  --modus-table-scrollbar-thumb-color: var(--modus-gray-6);
+  --modus-table-scrollbar-track-color: var(--modus-gray-2);
 
   // Body
   --modus-table-hover-bg: var(--modus-blue-pale);
@@ -369,6 +379,8 @@
   --modus-table-edit-border-color: var(--modus-highlight-blue-color);
   --modus-table-readonly-bg: var(--modus-gray-0);
   --modus-table-readonly-color: var(--modus-table-color);
+  --modus-table-body-color: var(--modus-gray-10);
+  --modus-table-cell-link-colour: var(--modus-link-color);
 
   // Tooltips
   --modus-tooltip-bg: var(--modus-gray-7);
@@ -503,6 +515,9 @@
   --modus-btn-icon-only-tertiary-hover-color: var(--modus-gray-5);
   --modus-btn-icon-only-tertiary-active-bg: var(--modus-gray-4);
   --modus-btn-icon-only-tertiary-active-color: var(--modus-gray-9);
+
+  // Icon
+  --modus-icon-colour: var(--modus-gray-light);
 
   // Input
   --modus-input-bg: var(--modus-trimble-gray);
@@ -675,22 +690,28 @@
 
   // Table
   --modus-table-bg: var(--modus-gray-10);
-  --modus-table-border-color: var(--modus-gray-8);
+  --modus-table-border-color: var(--modus-gray-6);
   --modus-table-color: var(--modus-white);
 
   // Header
   --modus-table-header-bg: var(--modus-gray-8);
-  --modus-table-header-border-color: var(--modus-gray-7);
+  --modus-table-header-border-color: var(--modus-gray-6);
   --modus-table-header-color: var(--modus-gray-0);
 
+  // Scrollbar
+  --modus-table-scrollbar-thumb-color: var(--modus-gray-6);
+  --modus-table-scrollbar-track-color: var(--modus-gray-2);
+
   // Body
-  --modus-table-hover-bg: #019aeb4c;
+  --modus-table-hover-bg: #464b52;
   --modus-table-hover-border-color: var(--modus-gray-6);
   --modus-table-selected-bg: #019aeb4d;
   --modus-table-selected-border-color: var(--modus-highlight-blue-color);
   --modus-table-edit-border-color: var(--modus-highlight-blue-color);
   --modus-table-readonly-bg: var(--modus-table-bg);
   --modus-table-readonly-color: var(--modus-gray-2);
+  --modus-table-body-color: var(--modus-white);
+  --modus-table-cell-link-colour: var(--modus-blue-4);
 
   // Tooltip
   --modus-tooltip-bg: var(--modus-gray-0);
@@ -898,6 +919,10 @@ modus-data-table {
   @include modus-badge;
   @include modus-checkbox;
   @include modus-list-item;
+}
+
+modus-table {
+  @include modus-checkbox;
 }
 
 modus-file-dropzone {

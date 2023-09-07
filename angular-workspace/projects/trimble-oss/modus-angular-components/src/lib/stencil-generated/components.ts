@@ -244,7 +244,7 @@ export class ModusCard {
 export declare interface ModusCard extends Components.ModusCard {}
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'checked', 'disabled', 'indeterminate', 'label', 'tabIndexValue'],
+  inputs: ['ariaLabel', 'checked', 'disabled', 'indeterminate', 'label', 'stopPropagation', 'tabIndexValue'],
   methods: ['focusCheckbox'],
 })
 @Component({
@@ -252,7 +252,7 @@ export declare interface ModusCard extends Components.ModusCard {}
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['ariaLabel', 'checked', 'disabled', 'indeterminate', 'label', 'tabIndexValue'],
+  inputs: ['ariaLabel', 'checked', 'disabled', 'indeterminate', 'label', 'stopPropagation', 'tabIndexValue'],
 })
 export class ModusCheckbox {
   protected el: HTMLElement;
@@ -1216,14 +1216,14 @@ export declare interface ModusNumberInput extends Components.ModusNumberInput {
 }
 
 @ProxyCmp({
-  inputs: ['activePage', 'ariaLabel', 'maxPage', 'minPage', 'size'],
+  inputs: ['activePage', 'ariaLabel', 'maxPage', 'minPage', 'nextPageButtonText', 'prevPageButtonText', 'size'],
 })
 @Component({
   selector: 'modus-pagination',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['activePage', 'ariaLabel', 'maxPage', 'minPage', 'size'],
+  inputs: ['activePage', 'ariaLabel', 'maxPage', 'minPage', 'nextPageButtonText', 'prevPageButtonText', 'size'],
 })
 export class ModusPagination {
   protected el: HTMLElement;
@@ -1469,6 +1469,143 @@ export declare interface ModusSwitch extends Components.ModusSwitch {
    */
   switchClick: EventEmitter<CustomEvent<boolean>>;
 }
+
+@ProxyCmp({
+  inputs: [
+    'columnReorder',
+    'columnResize',
+    'columns',
+    'data',
+    'displayOptions',
+    'fullWidth',
+    'hover',
+    'maxHeight',
+    'maxWidth',
+    'pageSizeList',
+    'pagination',
+    'rowSelection',
+    'rowSelectionOptions',
+    'rowsExpandable',
+    'showSortIconOnHover',
+    'sort',
+    'summaryRow',
+    'toolbar',
+    'toolbarOptions',
+  ],
+  methods: ['getColumnData', 'toggleColumnVisibility'],
+})
+@Component({
+  selector: 'modus-table',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: [
+    'columnReorder',
+    'columnResize',
+    'columns',
+    'data',
+    'displayOptions',
+    'fullWidth',
+    'hover',
+    'maxHeight',
+    'maxWidth',
+    'pageSizeList',
+    'pagination',
+    'rowSelection',
+    'rowSelectionOptions',
+    'rowsExpandable',
+    'showSortIconOnHover',
+    'sort',
+    'summaryRow',
+    'toolbar',
+    'toolbarOptions',
+  ],
+})
+export class ModusTable {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['sortChange', 'rowSelectionChange', 'cellLinkClick']);
+  }
+}
+
+import type { ModusTableSortingState as IModusTableModusTableSortingState } from '@trimble-oss/modus-web-components';
+
+export declare interface ModusTable extends Components.ModusTable {
+  /**
+   * Emits event on sort change
+   */
+  sortChange: EventEmitter<CustomEvent<IModusTableModusTableSortingState>>;
+  /**
+   * Event details contains the row(s) selected
+   */
+  rowSelectionChange: EventEmitter<CustomEvent<unknown>>;
+  /**
+   * Emits the link that was clicked
+   */
+  cellLinkClick: EventEmitter<CustomEvent<ModusTableCellLink>>;
+}
+
+@ProxyCmp({
+  inputs: ['columnsVisibility', 'menuIconContainerRef', 'showDropdown', 'table', 'toggleDropdown'],
+})
+@Component({
+  selector: 'modus-table-columns-visibility',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['columnsVisibility', 'menuIconContainerRef', 'showDropdown', 'table', 'toggleDropdown'],
+})
+export class ModusTableColumnsVisibility {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+export declare interface ModusTableColumnsVisibility extends Components.ModusTableColumnsVisibility {}
+
+@ProxyCmp({
+  inputs: ['options', 'table'],
+})
+@Component({
+  selector: 'modus-table-dropdown-menu',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['options', 'table'],
+})
+export class ModusTableDropdownMenu {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+export declare interface ModusTableDropdownMenu extends Components.ModusTableDropdownMenu {}
+
+@ProxyCmp({
+  inputs: ['options', 'table'],
+})
+@Component({
+  selector: 'modus-table-toolbar',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['options', 'table'],
+})
+export class ModusTableToolbar {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+export declare interface ModusTableToolbar extends Components.ModusTableToolbar {}
 
 @ProxyCmp({
   inputs: ['ariaLabel', 'fullWidth', 'size', 'tabs'],
