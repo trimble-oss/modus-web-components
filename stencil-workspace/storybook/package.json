@@ -10,7 +10,6 @@
     "@storybook/addons": "^6.5.16",
     "@storybook/components": "^6.5.16",
     "@storybook/theming": "^6.5.16",
-    "@trimble-oss/modus-angular-components": "^0.1.48-ng14",
     "@types/mdx": "^2.0.4",
     "lit-html": "^2.7.2",
     "react": "17.0.2",
