@@ -3,7 +3,6 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { HeaderGroup } from '@tanstack/table-core';
-import { ModusTableDisplayOptions } from '../models/modus-table.models';
 import {
   COLUMN_DEF_DATATYPE_KEY,
   COLUMN_DEF_SHOWTOTAL,
@@ -15,7 +14,6 @@ import {
 interface ModusTableSummaryRowProps {
   footerGroups: HeaderGroup<unknown>[];
   tableData: unknown[];
-  borderlessOptions: ModusTableDisplayOptions;
   frozenColumns: string[];
   rowSelection: boolean;
 }
@@ -29,15 +27,13 @@ function calculateTotal(tableData: unknown[], header): number | string {
 export const ModusTableSummaryRow: FunctionalComponent<ModusTableSummaryRowProps> = ({
   footerGroups,
   tableData,
-  borderlessOptions,
   frozenColumns,
   rowSelection,
 }) => {
-  const borderLessTableStyle = (borderlessOptions?.cellBorderless || borderlessOptions?.borderless) && { boxShadow: 'none' };
   return (
     <tfoot>
       {footerGroups.map((group) => (
-        <tr class="summary-row" style={borderLessTableStyle}>
+        <tr class="summary-row">
           {rowSelection && (
             <td id={COLUMN_DEF_ROW_SELECTION_ID} key={COLUMN_DEF_ROW_SELECTION_ID} class={COLUMN_DEF_ROW_SELECTION_CSS}></td>
           )}

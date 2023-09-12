@@ -43,26 +43,26 @@ describe('modus-table', () => {
 
   it('Renders changes to column prop', async () => {
     const component = await page.find('modus-table');
-    let header = await page.findAll('modus-table >>> th');
+    let header = await page.findAll('modus-table >>> [data-test-id="main-table"] th');
     expect(header.length).toBe(0);
 
     component.setProperty('columns', MockColumns);
     await page.waitForChanges();
-    header = await page.findAll('modus-table >>> th');
+    header = await page.findAll('modus-table >>> [data-test-id="main-table"] th');
     expect(header.length).toBeGreaterThan(0);
     expect(header[0].textContent).toBe(MockColumns[0].header);
   });
 
   it('Renders changes to data prop', async () => {
     const component = await page.find('modus-table');
-    let row = await page.findAll('modus-table >>> td');
+    let row = await page.findAll('modus-table >>> [data-test-id="main-table"] td');
     expect(row.length).toBe(0);
 
     component.setProperty('columns', MockColumns);
     component.setProperty('data', MockData);
 
     await page.waitForChanges();
-    row = await page.findAll('modus-table >>> td');
+    row = await page.findAll('modus-table >>> [data-test-id="main-table"] td');
     expect(row.length).toBeGreaterThan(0);
     expect(row[0].textContent).toBe(MockData[0].mockColumnOne);
   });
@@ -341,7 +341,7 @@ describe('modus-table', () => {
     component.setProperty('data', MockData);
     component.setProperty('summaryRow', false);
     await page.waitForChanges();
-    let footerContainer = await page.find('modus-table >>> summary-row');
+    let footerContainer = await page.find('modus-table >>> [data-test-id="main-table"] .summary-row');
     expect(footerContainer).toBeNull();
 
     component.setProperty('summaryRow', true);

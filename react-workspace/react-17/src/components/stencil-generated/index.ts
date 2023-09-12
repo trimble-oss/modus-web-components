@@ -48,6 +48,7 @@ export const ModusSwitch = /*@__PURE__*/createReactComponent<JSX.ModusSwitch, HT
 export const ModusTable = /*@__PURE__*/createReactComponent<JSX.ModusTable, HTMLModusTableElement>('modus-table');
 export const ModusTableColumnsVisibility = /*@__PURE__*/createReactComponent<JSX.ModusTableColumnsVisibility, HTMLModusTableColumnsVisibilityElement>('modus-table-columns-visibility');
 export const ModusTableDropdownMenu = /*@__PURE__*/createReactComponent<JSX.ModusTableDropdownMenu, HTMLModusTableDropdownMenuElement>('modus-table-dropdown-menu');
+export const ModusTableFillerColumn = /*@__PURE__*/createReactComponent<JSX.ModusTableFillerColumn, HTMLModusTableFillerColumnElement>('modus-table-filler-column');
 export const ModusTableToolbar = /*@__PURE__*/createReactComponent<JSX.ModusTableToolbar, HTMLModusTableToolbarElement>('modus-table-toolbar');
 export const ModusTabs = /*@__PURE__*/createReactComponent<JSX.ModusTabs, HTMLModusTabsElement>('modus-tabs');
 export const ModusTextInput = /*@__PURE__*/createReactComponent<JSX.ModusTextInput, HTMLModusTextInputElement>('modus-text-input');

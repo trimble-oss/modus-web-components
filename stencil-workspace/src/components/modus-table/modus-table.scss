@@ -2,6 +2,7 @@
 
 .table-container {
   border: $rem-1px $modus-table-border-color solid;
+  display: flex;
   overflow: auto;
 
   &::-webkit-scrollbar {
@@ -34,8 +35,8 @@ table {
     th,
     td,
     tr {
-      border: none;
-      box-shadow: none;
+      border: none !important;
+      box-shadow: none !important;
     }
   }
 
@@ -292,6 +293,10 @@ table {
       }
     }
   }
+}
+
+modus-table-filler-column {
+  width: 100%;
 }
 
 .pagination-container {
