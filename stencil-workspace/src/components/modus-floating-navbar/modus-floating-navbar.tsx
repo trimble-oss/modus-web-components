@@ -348,11 +348,11 @@ export class ModusFloatingNavbar {
 
     return (
       <Host id={this.componentId}>
-        <nav class={`${direction} ${shadow} ${variant}`}>
+        <nav class={`${direction} ${shadow}`}>
           {!this.searchOverlayVisible && (
             <Fragment>
               <div class={`left ${direction}`}>
-                <div class={'main-floating-navbar'}>
+                <div class={`main-floating-navbar ${variant}`}>
                   {this.showMainMenu && (
                     <div class="navbar-button main-menu-button">
                       <span
@@ -383,7 +383,7 @@ export class ModusFloatingNavbar {
               </div>
               <div class={`right ${direction}`}>
                 <slot name={this.SLOT_RIGHT}></slot>
-                <div class={'utility-floting-navbar'}>
+                <div class={`utility-floting-navbar ${variant}`}>
                   {this.showSearch && (
                     <div class="navbar-button right-button search" data-test-id="search-menu">
                       <span

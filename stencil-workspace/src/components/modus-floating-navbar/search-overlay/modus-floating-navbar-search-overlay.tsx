@@ -12,7 +12,7 @@ import { IconClose } from '../../icons/icon-close';
   tag: 'modus-floating-navbar-search-overlay',
   styleUrl: 'modus-floating-navbar-search-overlay.scss',
 })
-export class ModusNavbarSearchOverlay {
+export class ModusFloatingNavbarSearchOverlay {
   @Element() element: HTMLElement;
 
   /** An event that fires on clicking on close button of search overlay */

@@ -87,6 +87,62 @@ nav {
       border-radius: $rem-4px;
       display: inherit;
       height: inherit;
+
+      &.nav-blue {
+        background-color: $modus-navbar-blue-bg;
+    
+        .icon-search,
+        .icon-notifications,
+        .icon-help,
+        .icon-apps,
+        .icon-menu,
+        .icon-close,
+        .icon-button svg {
+          path {
+            fill: $modus-navbar-blue-icon-color;
+          }
+    
+          &:hover:not(.pressed) {
+            background-color: $modus-navbar-blue-icon-hover-bg;
+            outline: $rem-1px solid $modus-navbar-blue-icon-hover-border-color;
+    
+            path {
+              fill: $modus-navbar-blue-icon-hover-color;
+            }
+          }
+    
+          &:active,
+          &.pressed {
+            background-color: $modus-navbar-blue-icon-active-bg;
+    
+            path {
+              fill: $modus-navbar-blue-icon-active-color;
+            }
+          }
+        }
+    
+        .profile-menu {
+          modus-tooltip {
+            img.avatar,
+            .initials {
+              background-color: $modus-navbar-blue-icon-color;
+            }
+    
+            .initials {
+              color: $modus-navbar-blue-profile-icon-initials-color;
+            }
+    
+            > :first-child:hover,
+            > :first-child:focus {
+              border-color: $modus-navbar-blue-icon-color;
+            }
+    
+            > :first-child:active {
+              outline: $rem-4px solid $modus-navbar-blue-profile-icon-active-border-color;
+            }
+          }
+        }
+      }
     }
 
     &.expand {
@@ -183,62 +239,6 @@ nav {
 
   .overlay {
     width: 100%;
-  }
-
-  &.nav-blue {
-    background-color: $modus-navbar-blue-bg;
-
-    .icon-search,
-    .icon-notifications,
-    .icon-help,
-    .icon-apps,
-    .icon-menu,
-    .icon-close,
-    .icon-button svg {
-      path {
-        fill: $modus-navbar-blue-icon-color;
-      }
-
-      &:hover:not(.pressed) {
-        background-color: $modus-navbar-blue-icon-hover-bg;
-        outline: $rem-1px solid $modus-navbar-blue-icon-hover-border-color;
-
-        path {
-          fill: $modus-navbar-blue-icon-hover-color;
-        }
-      }
-
-      &:active,
-      &.pressed {
-        background-color: $modus-navbar-blue-icon-active-bg;
-
-        path {
-          fill: $modus-navbar-blue-icon-active-color;
-        }
-      }
-    }
-
-    .profile-menu {
-      modus-tooltip {
-        img.avatar,
-        .initials {
-          background-color: $modus-navbar-blue-icon-color;
-        }
-
-        .initials {
-          color: $modus-navbar-blue-profile-icon-initials-color;
-        }
-
-        > :first-child:hover,
-        > :first-child:focus {
-          border-color: $modus-navbar-blue-icon-color;
-        }
-
-        > :first-child:active {
-          outline: $rem-4px solid $modus-navbar-blue-profile-icon-active-border-color;
-        }
-      }
-    }
   }
 
   .product-logo {

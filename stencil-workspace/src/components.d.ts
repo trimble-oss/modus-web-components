@@ -605,18 +605,18 @@ export namespace Components {
     interface ModusFloatingNavbarSearchOverlay {
     }
     interface ModusIcon {
-      /**
-        * (optional) The color of the Icon
-       */
-      "color"?: string;
-      /**
-        * The name of the icon
-       */
-      "name": string | null;
-      /**
-        * (optional) The size of the Icon
-       */
-      "size"?: string;
+        /**
+          * (optional) The color of the Icon
+         */
+        "color"?: string;
+        /**
+          * The name of the icon
+         */
+        "name": string | null;
+        /**
+          * (optional) The size of the Icon
+         */
+        "size"?: string;
     }
     interface ModusList {
     }
@@ -1524,7 +1524,7 @@ export interface ModusFloatingNavbarProfileMenuCustomEvent<T> extends CustomEven
 export interface ModusFloatingNavbarSearchOverlayCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusFloatingNavbarSearchOverlayElement;
-  }
+}
 export interface ModusIconCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusIconElement;
