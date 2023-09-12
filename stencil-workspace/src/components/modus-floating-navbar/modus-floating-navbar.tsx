@@ -352,7 +352,7 @@ export class ModusFloatingNavbar {
           {!this.searchOverlayVisible && (
             <Fragment>
               <div class={`left ${direction}`}>
-                <div class={`main-floating-navbar ${variant}`}>
+                <div class={`main-floating-navbar ${variant}`} data-test-id="left-navbar">
                   {this.showMainMenu && (
                     <div class="navbar-button main-menu-button">
                       <span
@@ -383,7 +383,7 @@ export class ModusFloatingNavbar {
               </div>
               <div class={`right ${direction}`}>
                 <slot name={this.SLOT_RIGHT}></slot>
-                <div class={`utility-floting-navbar ${variant}`}>
+                <div class={`utility-floting-navbar ${variant}`} data-test-id="right-navbar">
                   {this.showSearch && (
                     <div class="navbar-button right-button search" data-test-id="search-menu">
                       <span

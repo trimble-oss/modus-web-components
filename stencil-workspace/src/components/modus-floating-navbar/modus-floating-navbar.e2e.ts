@@ -34,8 +34,12 @@ describe('modus-floating-navbar', () => {
 
     component.setProperty('variant', 'blue');
     await page.waitForChanges();
-    const element = await page.find('modus-floating-navbar >>> nav');
-    expect(element).toHaveClass('nav-blue');
+
+    const leftNavbar = await page.find('modus-floating-navbar >>> [data-test-id="left-navbar"]');
+    expect(leftNavbar).toHaveClass('nav-blue');
+
+    const rightNavbar = await page.find('modus-floating-navbar >>> [data-test-id="right-navbar"]');
+    expect(rightNavbar).toHaveClass('nav-blue');
   });
 
   it('hides custom button menu when hideMenu is true', async () => {
