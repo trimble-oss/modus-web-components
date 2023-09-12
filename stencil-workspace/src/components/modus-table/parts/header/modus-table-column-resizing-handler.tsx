@@ -10,7 +10,7 @@ import {
   KEYBOARD_ESCAPE,
   KEYBOARD_SPACE,
   KEYBOARD_TAB,
-} from '../../constants/constants';
+} from '../../modus-table.constants';
 
 interface ModusTableColumnResizingHandlerProps {
   table: Table<unknown>;

@@ -31,3 +31,4 @@ export { default as Select } from './ModusSelectExamples';
 export { default as Switch } from './ModusSwitchExamples';
 export { default as TextInput } from './ModusTextInputExamples';
 export { default as TimePicker } from './ModusTimePickerExamples';
+export { default as Table } from './ModusTableExamples';

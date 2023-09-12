@@ -3,7 +3,7 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Header, Table } from '@tanstack/table-core';
-import { KEYBOARD_ENTER } from '../../constants/constants';
+import { KEYBOARD_ENTER } from '../../modus-table.constants';
 import { ModusTableColumnResizingHandler } from './modus-table-column-resizing-handler';
 import { ModusTableHeaderSort } from './modus-table-header-sort';
 

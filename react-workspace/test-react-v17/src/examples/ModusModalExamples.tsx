@@ -1,6 +1,8 @@
 import { ModusButton, ModusModal } from '@trimble-oss/modus-react-components';
+import { useRef } from 'react';
 
 export default function ModusModalExamples() {
+  const ref = useRef<HTMLModusModalElement>(null);
   return (
     <>
       <h3>Modal</h3>
@@ -8,15 +10,17 @@ export default function ModusModalExamples() {
         id="btn-modal"
         color="primary"
         onButtonClick={(e) => {
-          const modal = document.querySelector('#modal1');
+          const modal = ref.current;
           if (modal) {
-            (modal as HTMLModusModalElement).open();
+            modal.open();
+            modal.primaryButtonDisabled = true;
           }
         }}>
         Open modal
       </ModusButton>
       <ModusModal
         id="modal1"
+        ref={ref}
         header-text="Modal title"
         primary-button-text="Save changes"
         secondary-button-text="Sweet!"

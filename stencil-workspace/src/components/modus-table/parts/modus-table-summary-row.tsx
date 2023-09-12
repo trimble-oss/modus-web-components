@@ -3,19 +3,17 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { HeaderGroup } from '@tanstack/table-core';
-import { ModusTableColumnDataType } from '../enums';
-import ModusTableDisplayOptions from '../models/modus-table-display-options';
 import {
   COLUMN_DEF_DATATYPE_KEY,
   COLUMN_DEF_SHOWTOTAL,
   COLUMN_DEF_ROW_SELECTION_ID,
   COLUMN_DEF_ROW_SELECTION_CSS,
-} from '../constants/constants';
+  COLUMN_DEF_DATATYPE_INTEGER,
+} from '../modus-table.constants';
 
 interface ModusTableSummaryRowProps {
   footerGroups: HeaderGroup<unknown>[];
   tableData: unknown[];
-  borderlessOptions: ModusTableDisplayOptions;
   frozenColumns: string[];
   rowSelection: boolean;
 }
@@ -29,15 +27,13 @@ function calculateTotal(tableData: unknown[], header): number | string {
 export const ModusTableSummaryRow: FunctionalComponent<ModusTableSummaryRowProps> = ({
   footerGroups,
   tableData,
-  borderlessOptions,
   frozenColumns,
   rowSelection,
 }) => {
-  const borderLessTableStyle = (borderlessOptions?.cellBorderless || borderlessOptions?.borderless) && { boxShadow: 'none' };
   return (
     <tfoot>
       {footerGroups.map((group) => (
-        <tr class="summary-row" style={borderLessTableStyle}>
+        <tr class="summary-row">
           {rowSelection && (
             <td id={COLUMN_DEF_ROW_SELECTION_ID} key={COLUMN_DEF_ROW_SELECTION_ID} class={COLUMN_DEF_ROW_SELECTION_CSS}></td>
           )}
@@ -47,11 +43,7 @@ export const ModusTableSummaryRow: FunctionalComponent<ModusTableSummaryRowProps
               key={header.id}
               class={`
                 ${frozenColumns.includes(header.id) ? 'sticky-left' : ''}
-                ${
-                  header.column.columnDef[COLUMN_DEF_DATATYPE_KEY] === ModusTableColumnDataType.Integer
-                    ? 'text-align-right'
-                    : ''
-                }
+                ${header.column.columnDef[COLUMN_DEF_DATATYPE_KEY] === COLUMN_DEF_DATATYPE_INTEGER ? 'text-align-right' : ''}
               `}>
               {header.column.columnDef[COLUMN_DEF_SHOWTOTAL]
                 ? calculateTotal(tableData, header)
