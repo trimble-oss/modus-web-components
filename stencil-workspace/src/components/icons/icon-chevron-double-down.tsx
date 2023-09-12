@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 import { FunctionalComponent, h } from '@stencil/core';
-import { IconProps } from './IconMap'
+import { IconProps } from './IconMap';
 
 export const IconChevronDoubleDown: FunctionalComponent<IconProps> = (props: IconProps) => (
   <svg

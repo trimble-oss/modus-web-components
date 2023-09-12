@@ -3,9 +3,8 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Cell, Row } from '@tanstack/table-core';
-import { COLUMN_DEF_DATATYPE_KEY } from '../../constants/constants';
-import { ModusTableColumnDataType } from '../../enums/modus-table-column-data-type';
-import ModusTableCellLink from '../../models/modus-table-cell-link';
+import { COLUMN_DEF_DATATYPE_INTEGER, COLUMN_DEF_DATATYPE_KEY } from '../../modus-table.constants';
+import { ModusTableCellLink } from '../../models/modus-table.models';
 import ModusTableCellContent from './modus-table-cell-content';
 import ModusTableCellExpandIcons from './modus-table-cell-expand-icons';
 
@@ -39,7 +38,7 @@ export const ModusTableCell: FunctionalComponent<ModusTableCellProps> = ({
       }}>
       <div
         class={`table-cell wrap-text${
-          column.columnDef[COLUMN_DEF_DATATYPE_KEY] === ModusTableColumnDataType.Integer ? 'text-align-right' : ''
+          column.columnDef[COLUMN_DEF_DATATYPE_KEY] === COLUMN_DEF_DATATYPE_INTEGER ? 'text-align-right' : ''
         }`}>
         {
           /** Expand or collaps icon */

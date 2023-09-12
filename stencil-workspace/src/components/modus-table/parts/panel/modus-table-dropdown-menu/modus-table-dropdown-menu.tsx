@@ -7,9 +7,9 @@ import {
   Element,
 } from '@stencil/core';
 import { IconHorizontalEllipsis } from '../../../../icons/icon-horizontal-ellipsis';
-import { KEYBOARD_ENTER, KEYBOARD_ESCAPE, KEYBOARD_SPACE } from '../../../constants/constants';
+import { KEYBOARD_ENTER, KEYBOARD_ESCAPE, KEYBOARD_SPACE } from '../../../modus-table.constants';
 import { Table } from '@tanstack/table-core';
-import ModusTableToolbarOptions from '../../../models/modus-table-toolbar-options';
+import { ModusTableToolbarOptions } from '../../../models/modus-table.models';
 
 @Component({
   tag: 'modus-table-dropdown-menu',
