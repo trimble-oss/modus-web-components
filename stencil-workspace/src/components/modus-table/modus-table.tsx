@@ -39,7 +39,7 @@ import {
   ModusTableCellLink,
   ModusTableDisplayOptions,
   ModusTableToolbarOptions,
-  ModusTableRowSelectionOptions as RowSelectionOptions,
+  ModusTableRowSelectionOptions,
 } from './models/modus-table.models';
 import { ModusTableCell } from './parts/cell/modus-table-cell';
 import { ModusTableHeader } from './parts/header/modus-table-header';
@@ -128,11 +128,14 @@ export class ModusTable {
   @Prop() rowSelection = false;
 
   /** (Optional) To control multiple row selection. */
-  @Prop() rowSelectionOptions: RowSelectionOptions = {
+  @Prop() rowSelectionOptions: ModusTableRowSelectionOptions = {
     multiple: false,
     subRowSelection: false,
   };
-  @Watch('rowSelectionOptions') onRowSelectionOptionsChange(newVal: RowSelectionOptions, oldVal: RowSelectionOptions) {
+  @Watch('rowSelectionOptions') onRowSelectionOptionsChange(
+    newVal: ModusTableRowSelectionOptions,
+    oldVal: ModusTableRowSelectionOptions
+  ) {
     if (newVal.multiple !== oldVal.multiple || newVal.subRowSelection !== oldVal.subRowSelection) {
       this.rowSelectionOptions.multiple = newVal.multiple;
       this.rowSelectionOptions.subRowSelection = newVal.subRowSelection;
