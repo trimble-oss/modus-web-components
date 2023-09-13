@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "modus-angular-components-test-0.1.55-ng14": {
+    "modus-angular-components-test-0.2.0-ng14": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/modus-angular-components-test-0.1.55-ng14",
+            "outputPath": "dist/modus-angular-components-test-0.2.0-ng14",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -59,10 +59,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "modus-angular-components-test-0.1.55-ng14:build:production"
+              "browserTarget": "modus-angular-components-test-0.2.0-ng14:build:production"
             },
             "development": {
-              "browserTarget": "modus-angular-components-test-0.1.55-ng14:build:development"
+              "browserTarget": "modus-angular-components-test-0.2.0-ng14:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -70,7 +70,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "modus-angular-components-test-0.1.55-ng14:build"
+            "browserTarget": "modus-angular-components-test-0.2.0-ng14:build"
           }
         },
         "test": {
