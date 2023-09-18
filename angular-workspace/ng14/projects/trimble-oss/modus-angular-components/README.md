@@ -21,11 +21,11 @@ The components in this library were programmatically generated using the [Stenci
 - Add the following snippet to your `app.module.ts` (or any app module)
 
   ```typescript
-  import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+  import { ModusAngularComponentsModule } from '@trimble-oss/modus-angular-components';
 
   @NgModule({
     ...
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    schemas: [ModusAngularComponentsModule]
   })
   ```
 

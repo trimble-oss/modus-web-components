@@ -11,7 +11,7 @@ import {
   SORT_DESCENDING,
   SORTED_ASCENDING,
   SORTED_DESCENDING,
-} from '../../constants/constants';
+} from '../../modus-table.constants';
 
 interface ModusTableHeaderSortProps {
   column: Column<unknown, unknown>;

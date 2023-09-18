@@ -75,8 +75,9 @@ Type: `Promise<void>`
 
 ### Depends on
 
-- [modus-checkbox](../modus-checkbox)
 - [modus-table-toolbar](./parts/panel/modus-table-toolbar)
+- [modus-table-filler-column](./parts/fillerColumn)
+- [modus-checkbox](../modus-checkbox)
 - [modus-tooltip](../modus-tooltip)
 - [modus-select](../modus-select)
 - [modus-pagination](../modus-pagination)
@@ -84,8 +85,9 @@ Type: `Promise<void>`
 ### Graph
 ```mermaid
 graph TD;
-  modus-table --> modus-checkbox
   modus-table --> modus-table-toolbar
+  modus-table --> modus-table-filler-column
+  modus-table --> modus-checkbox
   modus-table --> modus-tooltip
   modus-table --> modus-select
   modus-table --> modus-pagination

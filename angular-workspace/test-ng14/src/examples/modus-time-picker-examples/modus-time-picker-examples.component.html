@@ -1,0 +1,32 @@
+<h3>Time Picker</h3>
+<modus-time-picker
+  label="Time (Default)"
+  placeholder="23:39"
+  helper-text="hh:mm"></modus-time-picker>
+  <modus-time-picker
+  label="Time (12 Hour Format)"
+  ampm="true"
+  value="23:39"
+  placeholder="12:00 AM"
+  helper-text="hh:mm AM/PM"></modus-time-picker>
+  <modus-time-picker
+  ampm="true"
+  auto-format="true"
+  helper-text="hh:mm AM/PM"
+  label="Time (Auto Format)"
+  max-length="10"
+  placeholder="12:00 AM"></modus-time-picker>
+  <modus-time-picker
+  helper-text="hh:mm"
+  label="Time (Time Picker with Time Zone)"
+  max-length="10"
+  auto-format="true"
+  value="23:39">
+  <div style="width: 300px;padding-left: 0.5rem;" slot="timeZone">
+    <modus-select
+      id="timezone"
+      label="Time Zone"
+      aria-label="Time Zone"
+      options-display-prop="display" [options]="options"></modus-select>
+  </div>
+</modus-time-picker>

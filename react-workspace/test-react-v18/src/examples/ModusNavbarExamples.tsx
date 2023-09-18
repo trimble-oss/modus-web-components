@@ -11,12 +11,24 @@ export default function ModusNavbarExamples() {
       showCategory: false,
     },
   ];
-  const productLogoOptions = { url: 'https://modus.trimble.com/img/trimble-logo.svg' };
+
+  const logoOptions = {
+    primary: {
+      url: 'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
+      height: '24',
+    },
+    secondary: { url: 'https://modus.trimble.com/favicon.svg', height: '24' },
+  };
   const profileMenuOptions = {
     email: 'modus_user@trimble.com',
     initials: 'MU',
     username: 'Modus User',
   };
+
+  const buttons = [
+    { id: 'addMenu', icon: 'add', tooltip: { text: '' }, orderIndex: 1 },
+    { id: 'notificationMenu', icon: 'notifications', tooltip: { text: '' }, orderIndex: 1 },
+  ];
 
   return (
     <>
@@ -30,14 +42,15 @@ export default function ModusNavbarExamples() {
         show-apps-menu
         show-help
         show-main-menu
-        show-notifications
         apps={appMenuOptions}
-        productLogoOptions={productLogoOptions}
-        profileMenuOptions={profileMenuOptions}>
+        logoOptions={logoOptions}
+        profileMenuOptions={profileMenuOptions}
+        buttons={buttons}>
         <div slot="main" style={{ height: '300px' }}>
           Render your own main menu.
         </div>
-        <div slot="notifications">Render your own notifications.</div>
+        <div slot="notificationMenu">Render your own notification menu.</div>
+        <div slot="addMenu">Render your own add menu.</div>
       </ModusNavbar>
     </>
   );

@@ -12,12 +12,13 @@ describe('modus-table', () => {
       <mock:shadow-root>
         <div>
           <div class="table-container">
-            <table style="table-layout: fixed;">
+            <table data-test-id="main-table" style="table-layout: fixed;">
               <thead>
                 <tr></tr>
               </thead>
               <tbody></tbody>
             </table>
+            <modus-table-filler-column></modus-table-filler-column>
           </div>
           <slot name="customFooter"></slot>
         </div>

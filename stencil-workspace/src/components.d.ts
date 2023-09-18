@@ -7,28 +7,28 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
 import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
-import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSortEvent, ModusTableSelectionOptions, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
+import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 import { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
 import { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-import { ModusTableSortingState } from "./components/modus-table/models";
+import { ModusTableCellLink, ModusTableColumn, ModusTableColumnsVisibilityOptions, ModusTableDisplayOptions, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 import { Column, Table } from "@tanstack/table-core";
 import { Tab } from "./components/modus-tabs/modus-tabs";
 import { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
 import { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
 export { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
-export { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSortEvent, ModusTableSelectionOptions, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
+export { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 export { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
 export { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 export { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
 export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 export { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 export { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-export { ModusTableSortingState } from "./components/modus-table/models";
+export { ModusTableCellLink, ModusTableColumn, ModusTableColumnsVisibilityOptions, ModusTableDisplayOptions, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 export { Column, Table } from "@tanstack/table-core";
 export { Tab } from "./components/modus-tabs/modus-tabs";
 export { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
@@ -328,11 +328,11 @@ export namespace Components {
         /**
           * Options for data table item selection.
          */
-        "selectionOptions"?: ModusTableSelectionOptions;
+        "selectionOptions"?: ModusDataTableSelectionOptions;
         /**
           * Options for data table column sort.
          */
-        "sortOptions"?: ModusTableSortOptions;
+        "sortOptions"?: ModusDataTableSortOptions;
     }
     interface ModusDateInput {
         /**
@@ -1019,7 +1019,7 @@ export namespace Components {
         /**
           * (Optional) To control multiple row selection.
          */
-        "rowSelectionOptions": RowSelectionOptions;
+        "rowSelectionOptions": ModusTableRowSelectionOptions;
         /**
           * (Optional) To display expanded rows.
          */
@@ -1073,6 +1073,14 @@ export namespace Components {
           * Table data.
          */
         "table": Table<unknown>;
+    }
+    /**
+     * ModusFillerColumn is to fill empty space within a table or grid when the content in other columns is not wide enough to occupy the entire available width
+     */
+    interface ModusTableFillerColumn {
+        "cellBorderless": boolean;
+        "summaryRow": boolean;
+        "targetTable"?: HTMLTableElement;
     }
     interface ModusTableToolbar {
         /**
@@ -1737,6 +1745,15 @@ declare global {
         prototype: HTMLModusTableDropdownMenuElement;
         new (): HTMLModusTableDropdownMenuElement;
     };
+    /**
+     * ModusFillerColumn is to fill empty space within a table or grid when the content in other columns is not wide enough to occupy the entire available width
+     */
+    interface HTMLModusTableFillerColumnElement extends Components.ModusTableFillerColumn, HTMLStencilElement {
+    }
+    var HTMLModusTableFillerColumnElement: {
+        prototype: HTMLModusTableFillerColumnElement;
+        new (): HTMLModusTableFillerColumnElement;
+    };
     interface HTMLModusTableToolbarElement extends Components.ModusTableToolbar, HTMLStencilElement {
     }
     var HTMLModusTableToolbarElement: {
@@ -1826,6 +1843,7 @@ declare global {
         "modus-table": HTMLModusTableElement;
         "modus-table-columns-visibility": HTMLModusTableColumnsVisibilityElement;
         "modus-table-dropdown-menu": HTMLModusTableDropdownMenuElement;
+        "modus-table-filler-column": HTMLModusTableFillerColumnElement;
         "modus-table-toolbar": HTMLModusTableToolbarElement;
         "modus-tabs": HTMLModusTabsElement;
         "modus-text-input": HTMLModusTextInputElement;
@@ -2183,11 +2201,11 @@ declare namespace LocalJSX {
         /**
           * Options for data table item selection.
          */
-        "selectionOptions"?: ModusTableSelectionOptions;
+        "selectionOptions"?: ModusDataTableSelectionOptions;
         /**
           * Options for data table column sort.
          */
-        "sortOptions"?: ModusTableSortOptions;
+        "sortOptions"?: ModusDataTableSortOptions;
     }
     interface ModusDateInput {
         /**
@@ -2995,7 +3013,7 @@ declare namespace LocalJSX {
         /**
           * (Optional) To control multiple row selection.
          */
-        "rowSelectionOptions"?: RowSelectionOptions;
+        "rowSelectionOptions"?: ModusTableRowSelectionOptions;
         /**
           * (Optional) To display expanded rows.
          */
@@ -3043,6 +3061,14 @@ declare namespace LocalJSX {
           * Table data.
          */
         "table"?: Table<unknown>;
+    }
+    /**
+     * ModusFillerColumn is to fill empty space within a table or grid when the content in other columns is not wide enough to occupy the entire available width
+     */
+    interface ModusTableFillerColumn {
+        "cellBorderless"?: boolean;
+        "summaryRow"?: boolean;
+        "targetTable"?: HTMLTableElement;
     }
     interface ModusTableToolbar {
         /**
@@ -3393,6 +3419,7 @@ declare namespace LocalJSX {
         "modus-table": ModusTable;
         "modus-table-columns-visibility": ModusTableColumnsVisibility;
         "modus-table-dropdown-menu": ModusTableDropdownMenu;
+        "modus-table-filler-column": ModusTableFillerColumn;
         "modus-table-toolbar": ModusTableToolbar;
         "modus-tabs": ModusTabs;
         "modus-text-input": ModusTextInput;
@@ -3447,6 +3474,10 @@ declare module "@stencil/core" {
             "modus-table": LocalJSX.ModusTable & JSXBase.HTMLAttributes<HTMLModusTableElement>;
             "modus-table-columns-visibility": LocalJSX.ModusTableColumnsVisibility & JSXBase.HTMLAttributes<HTMLModusTableColumnsVisibilityElement>;
             "modus-table-dropdown-menu": LocalJSX.ModusTableDropdownMenu & JSXBase.HTMLAttributes<HTMLModusTableDropdownMenuElement>;
+            /**
+             * ModusFillerColumn is to fill empty space within a table or grid when the content in other columns is not wide enough to occupy the entire available width
+             */
+            "modus-table-filler-column": LocalJSX.ModusTableFillerColumn & JSXBase.HTMLAttributes<HTMLModusTableFillerColumnElement>;
             "modus-table-toolbar": LocalJSX.ModusTableToolbar & JSXBase.HTMLAttributes<HTMLModusTableToolbarElement>;
             "modus-tabs": LocalJSX.ModusTabs & JSXBase.HTMLAttributes<HTMLModusTabsElement>;
             "modus-text-input": LocalJSX.ModusTextInput & JSXBase.HTMLAttributes<HTMLModusTextInputElement>;

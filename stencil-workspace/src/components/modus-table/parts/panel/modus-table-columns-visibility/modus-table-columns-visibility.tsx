@@ -5,9 +5,9 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Table } from '@tanstack/table-core';
-import { KEYBOARD_DOWN, KEYBOARD_UP, KEYBOARD_ENTER, KEYBOARD_SPACE, KEYBOARD_TAB } from '../../../constants/constants';
+import { KEYBOARD_DOWN, KEYBOARD_UP, KEYBOARD_ENTER, KEYBOARD_SPACE, KEYBOARD_TAB } from '../../../modus-table.constants';
 import { JSX } from '@stencil/core/internal';
-import ModusTableColumnsVisibilityOptions from '../../../models/modus-table-columns-visibility-options';
+import { ModusTableColumnsVisibilityOptions } from '../../../models/modus-table.models';
 
 @Component({
   tag: 'modus-table-columns-visibility',

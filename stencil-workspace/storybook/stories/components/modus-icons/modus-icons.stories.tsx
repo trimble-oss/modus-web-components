@@ -40,6 +40,7 @@ const iconNames = [
   'sort-a-z',
   'sort-z-a',
   'sun',
+  'timer-countdown',
   'triangle-down',
   'triangle-left',
   'tune',
@@ -100,15 +101,15 @@ const StyledIcon = `
   flex-direction:column;
   width: 100px;
   align-items: center;
-  padding: 10px; 
-  outline: 1px dashed; 
+  padding: 10px;
+  outline: 1px dashed;
   justify-content: space-between;
 `
 
 const StyledContent = `
-  display: flex; 
-  flex-wrap: wrap; 
-  gap:10px; 
+  display: flex;
+  flex-wrap: wrap;
+  gap:10px;
   flex-direction:row;
 `;
 

@@ -2,7 +2,7 @@ import {
   FunctionalComponent,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
-import ModusTableCellLink from '../../models/modus-table-cell-link';
+import { ModusTableCellLink } from '../../models/modus-table.models';
 
 interface ModusTableCellLinkProps {
   link: ModusTableCellLink;
