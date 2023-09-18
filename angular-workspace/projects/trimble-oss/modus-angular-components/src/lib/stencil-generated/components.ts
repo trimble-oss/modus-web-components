@@ -334,7 +334,7 @@ export declare interface ModusDataTable extends Components.ModusDataTable {
 
 
 @ProxyCmp({
-  inputs: ['allowedCharsRegex', 'ariaLabel', 'autoFocusInput', 'disableValidation', 'disabled', 'errorText', 'fillerDate', 'format', 'helperText', 'label', 'placeholder', 'readOnly', 'required', 'showCalendarIcon', 'size', 'type', 'validText', 'value'],
+  inputs: ['allowedCharsRegex', 'altFormats', 'ariaLabel', 'autoFocusInput', 'disableValidation', 'disabled', 'errorText', 'fillerDate', 'format', 'helperText', 'label', 'placeholder', 'readOnly', 'required', 'showCalendarIcon', 'size', 'type', 'validText', 'value'],
   methods: ['focusInput']
 })
 @Component({
@@ -342,7 +342,7 @@ export declare interface ModusDataTable extends Components.ModusDataTable {
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['allowedCharsRegex', 'ariaLabel', 'autoFocusInput', 'disableValidation', 'disabled', 'errorText', 'fillerDate', 'format', 'helperText', 'label', 'placeholder', 'readOnly', 'required', 'showCalendarIcon', 'size', 'type', 'validText', 'value'],
+  inputs: ['allowedCharsRegex', 'altFormats', 'ariaLabel', 'autoFocusInput', 'disableValidation', 'disabled', 'errorText', 'fillerDate', 'format', 'helperText', 'label', 'placeholder', 'readOnly', 'required', 'showCalendarIcon', 'size', 'type', 'validText', 'value'],
 })
 export class ModusDateInput {
   protected el: HTMLElement;
@@ -448,6 +448,34 @@ export declare interface ModusFileDropzone extends Components.ModusFileDropzone 
    * An event that fires when files have been added or removed, regardless of whether they're valid.
    */
   files: EventEmitter<CustomEvent<[File[], string | null]>>;
+}
+
+
+@ProxyCmp({
+  inputs: ['color', 'name', 'size']
+})
+@Component({
+  selector: 'modus-icon',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['color', 'name', 'size'],
+})
+export class ModusIcon {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['iconClick']);
+  }
+}
+
+
+export declare interface ModusIcon extends Components.ModusIcon {
+  /**
+   * (optional) The click handler function
+   */
+  iconClick: EventEmitter<CustomEvent<any>>;
 }
 
 

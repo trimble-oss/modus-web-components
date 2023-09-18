@@ -60,6 +60,21 @@ export class ModusDateInput {
     this.handleValueChange(this.value);
   }
 
+  /**
+   * Alternative formats string for the date input split by | separator.
+   * Use 'm','mm' for month, 'd','dd' for date and 'yy','yyyy' for year with any separator that is not a regular expression. */
+  @Prop() altFormats: string;
+  @Watch('altFormats')
+  handleAltFormatsChange(altFormats: string): void {
+    if (!altFormats) {
+      return;
+    }
+
+    this._altFormatters = altFormats.split('|')
+      .filter(Boolean)
+      .map(format => new DateInputFormatter(this.fillerDate, format));
+  }
+
   /** (optional) Custom helper text displayed below the input. */
   @Prop() helperText;
 
@@ -117,7 +132,9 @@ export class ModusDateInput {
   ]);
 
   private _dateInput: HTMLInputElement;
+  private _dateInputId = `date-input-${Math.random().toString().slice(2, 7)}`;
   private _formatter: DateInputFormatter;
+  private _altFormatters: DateInputFormatter[] = [];
   private _isEditing: boolean;
 
   // TODO: Auto formatting for single tokens 'm' and 'd' is tricky because user can input double digits
@@ -127,6 +144,7 @@ export class ModusDateInput {
 
   componentWillLoad() {
     this.handleFormatChange(this.format);
+    this.handleAltFormatsChange(this.altFormats);
     this._dateDisplay = this._formatter.formatDisplayString(this.value);
     this.setDefaultAllowedKeysRegex(this.autoFormat);
   }
@@ -181,6 +199,22 @@ export class ModusDateInput {
 
     this._dateDisplay = inputString;
     this.value = this._formatter.parseDisplayString(this._dateDisplay);
+
+    if (this.value) {
+      this._dateDisplay = this._formatter.formatDisplayString(this.value);
+      return;
+    }
+
+    // if there is no value for the default format, check the alternative formats
+    for (const formatter of this._altFormatters) {
+      const result = formatter.parseDisplayString(inputString);
+
+      if (result) {
+        this._dateDisplay = this._formatter.formatDisplayString(result);
+        this.value = result;
+        return;
+      }
+    }
   }
 
   // Helpers
@@ -220,7 +254,7 @@ export class ModusDateInput {
       <div class={className}>
         {this.label || this.required ? (
           <div class="label-container">
-            {this.label ? <label htmlFor="date-input">{this.label}</label> : null}
+            {this.label ? <label htmlFor={this._dateInputId}>{this.label}</label> : null}
             {this.required ? <span class="required">*</span> : null}
           </div>
         ) : null}
@@ -235,7 +269,7 @@ export class ModusDateInput {
             autofocus={this.autoFocusInput}
             class={{ 'has-right-icon': this.showCalendarIcon }}
             disabled={this.disabled}
-            id="date-input"
+            id={this._dateInputId}
             onBlur={() => this.handleBlur()}
             onInput={(event) => this.handleOnInput(event)}
             onKeyPress={(e) => this.handleInputKeyPress(e)}
