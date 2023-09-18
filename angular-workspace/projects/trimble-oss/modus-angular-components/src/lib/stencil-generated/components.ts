@@ -1118,6 +1118,7 @@ export class ModusTable {
 
 
 import type { ModusTableSortingState as IModusTableModusTableSortingState } from '@trimble-oss/modus-web-components';
+import type { ModusTableCellLink as IModusTableModusTableCellLink } from '@trimble-oss/modus-web-components';
 
 export declare interface ModusTable extends Components.ModusTable {
   /**
@@ -1131,7 +1132,7 @@ export declare interface ModusTable extends Components.ModusTable {
   /**
    * Emits the link that was clicked
    */
-  cellLinkClick: EventEmitter<CustomEvent<ModusTableCellLink>>;
+  cellLinkClick: EventEmitter<CustomEvent<IModusTableModusTableCellLink>>;
 }
 
 
@@ -1177,6 +1178,28 @@ export class ModusTableDropdownMenu {
 
 
 export declare interface ModusTableDropdownMenu extends Components.ModusTableDropdownMenu {}
+
+
+@ProxyCmp({
+  inputs: ['cellBorderless', 'summaryRow', 'targetTable']
+})
+@Component({
+  selector: 'modus-table-filler-column',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['cellBorderless', 'summaryRow', 'targetTable'],
+})
+export class ModusTableFillerColumn {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
+export declare interface ModusTableFillerColumn extends Components.ModusTableFillerColumn {}
 
 
 @ProxyCmp({

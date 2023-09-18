@@ -83,7 +83,7 @@ To define columns and data in the table _using objects_:
   - `none`: no sorting is applied
   - `asc`: ascending sort
   - `desc`: descending sort
-- The table sorting options can be set with the optional `sortOptions` property. The property accepts a `ModusTableSortOptions` object.
+- The table sorting options can be set with the optional `sortOptions` property. The property accepts a `ModusDataTableSortOptions` object.
   - The object defines whether the table can be sorted on header click, and if the sort is done on the client or server-side.
 - If the table is sortable, it will output the `sort` event on header click. This event's detail is a `ModusDataTableSortEvent` object.
 - If the table's `serverSide` sort option is `false`, it will sort the columns on the client-side. Otherwise, it is up to the consumer to update the table's `data` property with the sorted data.
@@ -93,13 +93,13 @@ To define columns and data in the table _using objects_:
 - The `TRow` object has two optional properties that are used for selection:
   - `_id`: The row's unique id. Output in the event detail on row selection.
   - `_selected`: Whether the row is selected. You can set this to change selection state with code.
-- The `selectionOptions` property accepts a `ModusTableSelectionOptions` object.
+- The `selectionOptions` property accepts a `ModusDataTableSelectionOptions` object.
   - The options define whether the table rows can be selected, and if the selection uses a checkbox column.
 - When a selection changes, the `selection` event fires detailing the currently selected rows' IDs.
 
 ### Display
 
-- The table's display can be configured with the `displayOptions` prop. The property accepts a `ModusTableDisplayOptions` object:
+- The table's display can be configured with the `displayOptions` prop. The property accepts a `ModusDataTableDisplayOptions` object:
   - `borderless`: Whether the table has a border. Defaults to true.
   - `cellBorderless`: Whether the table cells have a border. Default to true.
   - `rowStripe`: Whether the table rows have a stripe. Defaults to false.
@@ -221,12 +221,12 @@ interface ModusDataTableRowAction {
   };
 }
 
-interface ModusTableSelectionOptions {
+interface ModusDataTableSelectionOptions {
   canSelect: boolean;
   checkboxSelection: boolean;
 }
 
-interface ModusTableSortOptions {
+interface ModusDataTableSortOptions {
   canSort: boolean;
   serverSide: boolean;
 }
@@ -240,8 +240,8 @@ interface ModusTableSortOptions {
 | `data` _(required)_    | --        |                                            | `TCell[][], TRow[]`            | `undefined`                                                                                                     |
 | `displayOptions`       | --        | Options for data table display.            | `ModusDataTableDisplayOptions` | `{ animateRowActionsDropdown: false, borderless: true, cellBorderless: true, rowStripe: false, size: 'large' }` |
 | `rowActions`           | --        | Actions that can be performed on each row. | `ModusDataTableRowAction[]`    | `[]`                                                                                                            |
-| `selectionOptions`     | --        | Options for data table item selection.     | `ModusTableSelectionOptions`   | `{ canSelect: false, checkboxSelection: false, }`                                                               |
-| `sortOptions`          | --        | Options for data table column sort.        | `ModusTableSortOptions`        | `{ canSort: false, serverSide: false, }`                                                                        |
+| `selectionOptions`     | --        | Options for data table item selection.     | `ModusDataTableSelectionOptions`   | `{ canSelect: false, checkboxSelection: false, }`                                                               |
+| `sortOptions`          | --        | Options for data table column sort.        | `ModusDataTableSortOptions`        | `{ canSort: false, serverSide: false, }`                                                                        |
 
 ### Events
 
