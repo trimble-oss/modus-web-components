@@ -380,7 +380,8 @@
   --modus-table-readonly-bg: var(--modus-gray-0);
   --modus-table-readonly-color: var(--modus-table-color);
   --modus-table-body-color: var(--modus-gray-10);
-  --modus-table-cell-link-colour: var(--modus-link-color);
+  --modus-table-cell-link-color: var(--modus-link-color);
+  --modus-table-cell-border-color: var(--modus-link-color);
 
   // Tooltips
   --modus-tooltip-bg: var(--modus-gray-7);
@@ -711,7 +712,8 @@
   --modus-table-readonly-bg: var(--modus-table-bg);
   --modus-table-readonly-color: var(--modus-gray-2);
   --modus-table-body-color: var(--modus-white);
-  --modus-table-cell-link-colour: var(--modus-blue-4);
+  --modus-table-cell-link-color: var(--modus-blue-4);
+  --modus-table-cell-border-color: var(--modus-blue-4);
 
   // Tooltip
   --modus-tooltip-bg: var(--modus-gray-0);

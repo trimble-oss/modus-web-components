@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Component, Event, EventEmitter, h, JSX, Prop, State, Watch } from '@stencil/core';
+import { Component, Event, EventEmitter, h, JSX, Method, Prop, State, Watch } from '@stencil/core';
 import { createGuid } from '../../utils/utils';
 
 @Component({
@@ -48,13 +48,24 @@ export class ModusSelect {
   /** An event that fires on input value change. */
   @Event() valueChange: EventEmitter<unknown>;
 
+  /** An event that fires on input blur. */
+  @Event() inputBlur: EventEmitter<FocusEvent>;
+
   @State() internalValue: unknown;
   @State() optionIdMap: Map<string, unknown> = new Map();
+
+  selectInput: HTMLSelectElement;
 
   classBySize: Map<string, string> = new Map([
     ['medium', 'medium'],
     ['large', 'large'],
   ]);
+
+  /** Focus the input. */
+  @Method()
+  async focusInput(): Promise<void> {
+    this.selectInput.focus();
+  }
 
   connectedCallback(): void {
     this.internalValue = this.value;
@@ -112,9 +123,12 @@ export class ModusSelect {
         {this.renderLabel()}
         <span class="input-container">
           <select
+            part="input"
+            ref={(el) => (this.selectInput = el)}
             disabled={this.disabled}
             class={selectClass}
             aria-label={this.ariaLabel}
+            onBlur={(e) => this.inputBlur.emit(e)}
             onChange={(event) => {
               this.handleSelectChange(event);
             }}

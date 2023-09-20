@@ -1112,27 +1112,56 @@ export class ModusTable {
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['sortChange', 'rowSelectionChange', 'cellLinkClick']);
+    proxyOutputs(this, this.el, ['cellLinkClick', 'columnOrderChange', 'columnSizingChange', 'columnVisibilityChange', 'rowExpanded', 'rowSelectionChange', 'rowUpdated', 'sortChange', 'paginationChange']);
   }
 }
 
 
-import type { ModusTableSortingState as IModusTableModusTableSortingState } from '@trimble-oss/modus-web-components';
 import type { ModusTableCellLink as IModusTableModusTableCellLink } from '@trimble-oss/modus-web-components';
+import type { ModusTableColumnOrderState as IModusTableModusTableColumnOrderState } from '@trimble-oss/modus-web-components';
+import type { ModusTableColumnSizingState as IModusTableModusTableColumnSizingState } from '@trimble-oss/modus-web-components';
+import type { ModusTableColumnVisibilityState as IModusTableModusTableColumnVisibilityState } from '@trimble-oss/modus-web-components';
+import type { ModusTableExpandedState as IModusTableModusTableExpandedState } from '@trimble-oss/modus-web-components';
+import type { ModusTableSortingState as IModusTableModusTableSortingState } from '@trimble-oss/modus-web-components';
+import type { ModusTablePaginationState as IModusTableModusTablePaginationState } from '@trimble-oss/modus-web-components';
 
 export declare interface ModusTable extends Components.ModusTable {
-  /**
-   * Emits event on sort change
-   */
-  sortChange: EventEmitter<CustomEvent<IModusTableModusTableSortingState>>;
-  /**
-   * Event details contains the row(s) selected
-   */
-  rowSelectionChange: EventEmitter<CustomEvent<unknown>>;
   /**
    * Emits the link that was clicked
    */
   cellLinkClick: EventEmitter<CustomEvent<IModusTableModusTableCellLink>>;
+  /**
+   * Emits columns in the updated order
+   */
+  columnOrderChange: EventEmitter<CustomEvent<IModusTableModusTableColumnOrderState>>;
+  /**
+   * Emits latest column size
+   */
+  columnSizingChange: EventEmitter<CustomEvent<IModusTableModusTableColumnSizingState>>;
+  /**
+   * Emits visibility state of each column
+   */
+  columnVisibilityChange: EventEmitter<CustomEvent<IModusTableModusTableColumnVisibilityState>>;
+  /**
+   * Emits expanded state of the columns
+   */
+  rowExpanded: EventEmitter<CustomEvent<IModusTableModusTableExpandedState>>;
+  /**
+   * Emits rows selected
+   */
+  rowSelectionChange: EventEmitter<CustomEvent<unknown>>;
+  /**
+   * Emits edited row data
+   */
+  rowUpdated: EventEmitter<CustomEvent<unknown>>;
+  /**
+   * Emits column sort order
+   */
+  sortChange: EventEmitter<CustomEvent<IModusTableModusTableSortingState>>;
+  /**
+   * Emits selected page index and size
+   */
+  paginationChange: EventEmitter<CustomEvent<IModusTableModusTablePaginationState>>;
 }
 
 

@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { Component, Event, EventEmitter, h, Prop, Watch } from '@stencil/core';
+import { Component, Event, EventEmitter, h, Method, Prop, Watch } from '@stencil/core';
 
 @Component({
   tag: 'modus-number-input',
@@ -66,6 +66,12 @@ export class ModusNumberInput {
     this.valueChange.emit(this.value);
   }
 
+  /** Focus the input. */
+  @Method()
+  async focusInput(): Promise<void> {
+    this.numberInput.focus();
+  }
+
   @Watch('value')
   watchValue(newValue: string, oldValue: string): void {
     if (isNaN(+newValue)) {
@@ -113,7 +119,7 @@ export class ModusNumberInput {
             {this.required ? <span class="required">*</span> : null}
           </div>
         ) : null}
-        <div class={buildInputContainerClassNames()}>
+        <div class={buildInputContainerClassNames()} part="input-container">
           <input
             aria-label={this.ariaLabel}
             aria-invalid={!!this.errorText}

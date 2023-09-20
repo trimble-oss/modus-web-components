@@ -5,9 +5,9 @@ import {
 import { Header, Table } from '@tanstack/table-core';
 import { KEYBOARD_ENTER } from '../../modus-table.constants';
 import { ModusTableColumnResizingHandler } from './modus-table-column-resizing-handler';
-import { ModusTableHeaderSort } from './modus-table-header-sort';
+import { ModusTableColumnSortIcon } from './modus-table-column-sort-icon';
 
-interface ModusTableHeaderProps {
+interface ModusTableColumnHeaderProps {
   table: Table<unknown>;
   header: Header<unknown, unknown>;
   isNestedParentHeader: boolean;
@@ -28,7 +28,7 @@ interface ModusTableHeaderProps {
 /**
  * Modus Table Header
  */
-export const ModusTableHeader: FunctionalComponent<ModusTableHeaderProps> = ({
+export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderProps> = ({
   table,
   header,
   isNestedParentHeader,
@@ -78,7 +78,7 @@ export const ModusTableHeader: FunctionalComponent<ModusTableHeaderProps> = ({
         <div class={column.getCanSort() && 'can-sort'}>
           <span>{column.columnDef.header}</span>
           {column.getCanSort() && (
-            <ModusTableHeaderSort
+            <ModusTableColumnSortIcon
               column={column}
               showSortIconOnHover={showSortIconOnHover}
               isColumnResizing={isColumnResizing}

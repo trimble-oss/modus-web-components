@@ -1,3 +1,23 @@
-.d-none {
-  display: none;
+@import '../../modus-table.vars';
+
+modus-table-filler-column {
+  .d-none {
+    display: none;
+  }
+
+  table:not(.cell-borderless) {
+    td,
+    th {
+      &:last-child {
+        border-right: none;
+      }
+    }
+
+    tbody td,
+    thead th {
+      &:first-child {
+        border-left: $rem-1px $modus-table-border-color solid !important;
+      }
+    }
+  }
 }

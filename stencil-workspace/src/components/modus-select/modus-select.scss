@@ -72,6 +72,11 @@
         border-bottom-color: $modus-input-validation-success-color;
         border-bottom-width: $rem-2px;
       }
+
+      &.fit-parent {
+        border: none;
+        height: inherit;
+      }
     }
   }
 

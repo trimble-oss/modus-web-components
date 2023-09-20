@@ -29,6 +29,7 @@ table {
   border-spacing: 0; // Set `border-collapse: separate` and `border-spacing: 0` to resolve the problem metion in above line.
   font-family: $primary-font;
   font-size: $rem-14px;
+  height: fit-content;
   width: 100%;
 
   &.cell-borderless {
@@ -47,6 +48,10 @@ table {
     &.row-checkbox {
       padding: 0.5rem !important;
       width: 46px;
+    }
+
+    &:last-child {
+      border-right: none;
     }
   }
 
@@ -196,12 +201,45 @@ table {
         background-color: $modus-table-body-bg;
         border-top: $rem-1px $modus-table-border-color solid;
 
-        .table-cell {
+        &.edit-mode {
+          box-sizing: border-box;
+          border: $rem-2px $modus-table-cell-border-color solid;
+          padding: 0;
+
+          div {
+            box-sizing: border-box;
+
+            input {
+              background-color: inherit;
+              border: none;
+              color: inherit;
+              font: inherit;
+              outline: none;
+              padding: 0.25rem 1rem;
+              width: calc(100% - 2rem); // 100% - (padding-left + padding-right)
+
+              &.text-align-right {
+                text-align: right;
+              }
+            }
+
+            modus-select,
+            modus-autocomplete,
+            modus-date-picker {
+              background-color: inherit;
+              color: inherit;
+              outline: none;
+              width: 100%;
+            }
+          }
+        }
+
+        .cell-content {
           align-items: center;
           display: flex;
 
           .cell-link {
-            color: $modus-table-cell-link-colour;
+            color: $modus-table-cell-link-color;
             cursor: pointer;
             font-weight: $font-weight-semi-bold;
 
@@ -215,15 +253,18 @@ table {
           }
 
           .expand {
-            cursor: pointer;
             display: flex;
+
+            span {
+              cursor: pointer;
+            }
           }
         }
       }
 
       &.enable-hover {
         &:hover {
-          td {
+          td:not(.edit-mode) {
             background-color: $modus-table-hover-bg;
           }
         }
@@ -268,10 +309,6 @@ table {
       padding: 0.25rem 1rem;
       text-align: left;
 
-      &.active-resize {
-        border-right: 2px $modus-primary-color solid !important;
-      }
-
       &.text-align-center {
         text-align: center;
       }
@@ -281,6 +318,10 @@ table {
         left: 0;
         position: sticky;
         z-index: 1;
+      }
+
+      &.active-resize {
+        border-right: 2px $modus-primary-color solid !important;
       }
     }
 

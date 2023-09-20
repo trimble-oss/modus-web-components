@@ -6,17 +6,18 @@ export class TableHeaderDragDrop {
   columnOrder: string[] = [];
   columnReorder = false;
   columnResizeEnabled = false;
-  tableHeaderRowRef: HTMLTableRowElement;
+  container: HTMLElement;
   headersList: HTMLElement[];
   table: Table<unknown>;
   itemDragState: ColumnDragState;
   frozenColumns: string[];
+  tableHeaderRowEl: HTMLElement;
 
   setValues(
     columnOrder: string[],
     columnReorder: boolean,
     columnResizeEnabled: boolean,
-    tableHeaderRowRef: HTMLTableRowElement,
+    container: HTMLElement,
     table: Table<unknown>,
     itemDragState: ColumnDragState,
     frozenColumns: string[]
@@ -24,7 +25,7 @@ export class TableHeaderDragDrop {
     this.columnOrder = columnOrder;
     this.columnReorder = columnReorder;
     this.columnResizeEnabled = columnResizeEnabled;
-    this.tableHeaderRowRef = tableHeaderRowRef;
+    this.tableHeaderRowEl = container.shadowRoot.querySelector('thead tr');
     this.table = table;
     this.itemDragState = itemDragState;
     this.frozenColumns = frozenColumns;
@@ -40,7 +41,7 @@ export class TableHeaderDragDrop {
     elementRef: HTMLTableHeaderCellElement,
     mouseInteracted: boolean
   ): void {
-    this.headersList = [].slice.call(this.tableHeaderRowRef.childNodes); // List of table headers.
+    this.headersList = [].slice.call(this.tableHeaderRowEl.childNodes); // List of table headers.
     this.frozenColumns.forEach((frozenColumn) => {
       const index = this.headersList.findIndex((header) => header.id === frozenColumn);
       if (index > -1) {

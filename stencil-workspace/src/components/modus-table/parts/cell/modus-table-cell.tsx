@@ -2,58 +2,41 @@ import {
   FunctionalComponent,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
-import { Cell, Row } from '@tanstack/table-core';
-import { COLUMN_DEF_DATATYPE_INTEGER, COLUMN_DEF_DATATYPE_KEY } from '../../modus-table.constants';
-import { ModusTableCellLink } from '../../models/modus-table.models';
-import ModusTableCellContent from './modus-table-cell-content';
-import ModusTableCellExpandIcons from './modus-table-cell-expand-icons';
+import { Cell } from '@tanstack/table-core';
+import { ModusTableCellLink, ModusTableDataUpdaterProps } from '../../models/modus-table.models';
+import RowActions from '../../models/row-actions.model';
 
 interface ModusTableCellProps {
   cell: Cell<unknown, unknown>;
-  row: Row<unknown>;
   cellIndex: number;
-  rowsExpandable: boolean;
-  frozenColumns: string[];
-  onLinkClick: (link: ModusTableCellLink) => void;
+  rowActions: RowActions;
+  linkClick: (link: ModusTableCellLink) => void;
+  valueChange: (props: ModusTableDataUpdaterProps) => void;
 }
 
 export const ModusTableCell: FunctionalComponent<ModusTableCellProps> = ({
   cell,
-  row,
   cellIndex,
-  rowsExpandable,
-  frozenColumns,
-  onLinkClick,
+  rowActions,
+  valueChange,
+  linkClick,
 }) => {
-  const { id, column } = cell;
+  const { id } = cell;
   return (
     <td
       key={id}
+      tabindex={0}
       class={`
-          ${frozenColumns.includes(column.id) ? 'sticky-left' : ''}
-          ${column.getIsResizing() ? 'active-resize' : ''}
-      `}
-      style={{
-        width: `${column.getSize()}px`,
-      }}>
-      <div
-        class={`table-cell wrap-text${
-          column.columnDef[COLUMN_DEF_DATATYPE_KEY] === COLUMN_DEF_DATATYPE_INTEGER ? 'text-align-right' : ''
-        }`}>
-        {
-          /** Expand or collaps icon */
-          rowsExpandable ? <ModusTableCellExpandIcons cellIndex={cellIndex} row={row} /> : ''
-        }
-        {
-          /** Cell content */
-          <ModusTableCellContent
-            cell={cell}
-            onLinkClick={(link: ModusTableCellLink) => {
-              onLinkClick(link);
-            }}
-          />
-        }
-      </div>
+      ${rowActions ? 'sticky-left' : ''}
+      ${cell.column.getIsResizing() ? 'active-resize' : ''}
+  `}
+      style={{ width: `${cell.column.getSize()}px` }}>
+      <modus-table-cell-main
+        cell={cell}
+        cellIndex={cellIndex}
+        rowActions={rowActions}
+        valueChange={valueChange}
+        linkClick={linkClick}></modus-table-cell-main>
     </td>
   );
 };
