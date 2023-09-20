@@ -18,7 +18,7 @@ describe('modus-date-input', () => {
                Single Date
              </label>
            </div>
-           <div class="input-container medium">
+           <div class="input-container medium" part="input-container">
              <input id="${inputId}" tabindex="0" type="text">
            </div>
            <div class="sub-text">
