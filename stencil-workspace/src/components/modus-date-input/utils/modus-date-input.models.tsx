@@ -5,3 +5,8 @@ export interface ModusDateInputEventDetails {
   type: ModusDateInputType;
   inputString: string;
 }
+
+export interface ModusDateInputCalendarIconClickedEvent extends ModusDateInputEventDetails{
+  min?: Date;
+  max?: Date;
+}

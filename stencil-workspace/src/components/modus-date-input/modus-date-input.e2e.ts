@@ -263,4 +263,50 @@ describe('modus-date-input', () => {
     const errorText = await page.find('modus-date-input >>> .sub-text > label');
     expect(errorText.innerHTML).toEqual('Invalid date');
   });
+
+  it('checks invalid max date validation', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-date-input
+        show-calendar-icon="true"
+        format="mmm d, yyyy"
+        max="2023-01-02"></modus-date-input>`);
+    await page.waitForChanges();
+
+    const input = await page.find('modus-date-input >>> input');
+
+    await input.type('Jan 3, 2023', { delay: 20 });
+    await page.waitForChanges();
+
+    const calendar = await page.find('modus-date-input >>> .icon-calendar');
+    await calendar.click();
+    await page.waitForChanges();
+
+    const errorText = await page.find('modus-date-input >>> .sub-text > label');
+    expect(errorText.innerHTML).toEqual('The entered date is greater than the maximum value Jan 2, 2023');
+  });
+
+  it('checks invalid min date validation', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-date-input
+        show-calendar-icon="true"
+        format="mmm d, yyyy"
+        min="2023-01-02"></modus-date-input>`);
+    await page.waitForChanges();
+
+    const input = await page.find('modus-date-input >>> input');
+
+    await input.type('Dec 23, 2022', { delay: 20 });
+    await page.waitForChanges();
+
+    const calendar = await page.find('modus-date-input >>> .icon-calendar');
+    await calendar.click();
+    await page.waitForChanges();
+
+    const errorText = await page.find('modus-date-input >>> .sub-text > label');
+    expect(errorText.innerHTML).toEqual('The entered date is less than the minimum value Jan 2, 2023');
+  });
 });

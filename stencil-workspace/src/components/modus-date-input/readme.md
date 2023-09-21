@@ -19,6 +19,8 @@
 | `format`            | `format`              | Format string for the date input. Default 'mm/dd/yyyy'. Use 'm','mm' for month, 'd','dd' for date and 'yy','yyyy' for year with any separator that is not a regular expression.                                   | `string`                       | `'mm/dd/yyyy'` |
 | `helperText`        | `helper-text`         | (optional) Custom helper text displayed below the input.                                                                                                                                                          | `any`                          | `undefined`    |
 | `label`             | `label`               | (optional) The input's label.                                                                                                                                                                                     | `string`                       | `undefined`    |
+| `max`               | `max`                 | (optional) The maximum date allowed. The date is formatted according to ISO8601 'yyyy-mm-dd'.                                                                                                                     | `string`                       | `undefined`    |
+| `min`               | `min`                 | (optional) The minimum date allowed. The date is formatted according to ISO8601 'yyyy-mm-dd'.                                                                                                                     | `string`                       | `undefined`    |
 | `placeholder`       | `placeholder`         | (optional) The input's placeholder text.                                                                                                                                                                          | `string`                       | `undefined`    |
 | `readOnly`          | `read-only`           | (optional) Whether the input's content is read-only                                                                                                                                                               | `boolean`                      | `undefined`    |
 | `required`          | `required`            | (optional) Whether the input is required.                                                                                                                                                                         | `boolean`                      | `undefined`    |
@@ -31,11 +33,11 @@
 
 ## Events
 
-| Event                 | Description                                      | Type                                      |
-| --------------------- | ------------------------------------------------ | ----------------------------------------- |
-| `calendarIconClicked` | An event that fires on calendar icon click.      | `CustomEvent<ModusDateInputEventDetails>` |
-| `dateInputBlur`       | An event that fires on input value out of focus. | `CustomEvent<ModusDateInputEventDetails>` |
-| `valueChange`         | An event that fires on input value change.       | `CustomEvent<ModusDateInputEventDetails>` |
+| Event                 | Description                                      | Type                                                  |
+| --------------------- | ------------------------------------------------ | ----------------------------------------------------- |
+| `calendarIconClicked` | An event that fires on calendar icon click.      | `CustomEvent<ModusDateInputCalendarIconClickedEvent>` |
+| `dateInputBlur`       | An event that fires on input value out of focus. | `CustomEvent<ModusDateInputEventDetails>`             |
+| `valueChange`         | An event that fires on input value change.       | `CustomEvent<ModusDateInputEventDetails>`             |
 
 
 ## Methods
@@ -43,6 +45,16 @@
 ### `focusInput() => Promise<void>`
 
 Focus the input.
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+### `validate() => Promise<void>`
+
+Validate the input.
 
 #### Returns
 

@@ -8,7 +8,7 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
 import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
-import { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
+import { ModusDateInputCalendarIconClickedEvent, ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
 import { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
@@ -22,7 +22,7 @@ import { TreeViewItemOptions } from "./components/modus-content-tree/modus-conte
 export { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
 export { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 export { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
-export { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
+export { ModusDateInputCalendarIconClickedEvent, ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
 export { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 export { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
 export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
@@ -380,6 +380,14 @@ export namespace Components {
          */
         "label": string;
         /**
+          * (optional) The maximum date allowed. The date is formatted according to ISO8601 'yyyy-mm-dd'.
+         */
+        "max": string;
+        /**
+          * (optional) The minimum date allowed. The date is formatted according to ISO8601 'yyyy-mm-dd'.
+         */
+        "min": string;
+        /**
           * (optional) The input's placeholder text.
          */
         "placeholder": string;
@@ -407,6 +415,10 @@ export namespace Components {
           * (optional) The input's valid state text.
          */
         "validText": string;
+        /**
+          * Validate the input.
+         */
+        "validate": () => Promise<void>;
         /**
           * (optional) A string representing the date entered in the input. The date is formatted according to ISO8601 'yyyy-mm-dd'. The displayed date format will differ from the 'value'.
          */
@@ -2249,9 +2261,17 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
+          * (optional) The maximum date allowed. The date is formatted according to ISO8601 'yyyy-mm-dd'.
+         */
+        "max"?: string;
+        /**
+          * (optional) The minimum date allowed. The date is formatted according to ISO8601 'yyyy-mm-dd'.
+         */
+        "min"?: string;
+        /**
           * An event that fires on calendar icon click.
          */
-        "onCalendarIconClicked"?: (event: ModusDateInputCustomEvent<ModusDateInputEventDetails>) => void;
+        "onCalendarIconClicked"?: (event: ModusDateInputCustomEvent<ModusDateInputCalendarIconClickedEvent>) => void;
         /**
           * An event that fires on input value out of focus.
          */

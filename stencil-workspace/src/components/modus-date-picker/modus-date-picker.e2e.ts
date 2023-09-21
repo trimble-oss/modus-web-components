@@ -232,4 +232,35 @@ describe('modus-date-picker', () => {
     const errorText = await page.find('modus-date-input[type="start"] >>> .sub-text > label');
     expect(errorText.innerHTML).toEqual('Invalid date range');
   });
+
+  it('checks invalid min max validations', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+    <modus-date-picker>
+      <modus-date-input format="mmm d, yyyy" show-calendar-icon="true" type="start" label="Start Date" min="2023-02-17">
+      </modus-date-input>
+      <modus-date-input format="mmm d, yyyy" show-calendar-icon="true" type="end" label="End Date" max="2023-04-22">
+      </modus-date-input>
+    </modus-date-picker>`);
+
+    const startDateInput = await page.find('modus-date-input[type="start"] >>> input');
+    const endDateInput = await page.find('modus-date-input[type="end"] >>> input');
+
+    // invalid date range validation
+    await startDateInput.type('Feb 15, 2023', { delay: 20 });
+    await page.waitForChanges();
+    await endDateInput.type('Jun 6, 2023', { delay: 20 });
+    await page.waitForChanges();
+
+    // trigger a blur event for validation to happen
+    const calendar = await page.find('modus-date-input[type="start"] >>> .icon-calendar');
+    await calendar.click();
+    await page.waitForChanges();
+
+    const errorTextStart = await page.find('modus-date-input[type="start"] >>> .sub-text > label');
+    const errorTextEnd = await page.find('modus-date-input[type="end"] >>> .sub-text > label');
+
+    expect(errorTextStart.innerHTML).toEqual('The entered date is less than the minimum value Feb 17, 2023');
+    expect(errorTextEnd.innerHTML).toEqual('The entered date is greater than the maximum value Apr 22, 2023');
+  });
 });

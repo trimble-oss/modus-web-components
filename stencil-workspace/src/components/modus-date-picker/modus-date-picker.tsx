@@ -9,7 +9,10 @@ import {
 import { IconMap } from '../icons/IconMap';
 import ModusDatePickerCalendar from './utils/modus-date-picker.calendar';
 import ModusDatePickerState from './utils/modus-date-picker.state';
-import { ModusDateInputEventDetails } from '../modus-date-input/utils/modus-date-input.models';
+import {
+  ModusDateInputCalendarIconClickedEvent,
+  ModusDateInputEventDetails,
+} from '../modus-date-input/utils/modus-date-input.models';
 
 @Component({
   tag: 'modus-date-picker',
@@ -31,6 +34,9 @@ export class ModusDatePicker {
   private _calendar: ModusDatePickerCalendar;
   private _dateInputs: { [key: string]: ModusDatePickerState } = {};
   private _locale = 'default';
+  /** Min and Max dates for the date picker */
+  private _min: Date;
+  private _max: Date;
 
   componentWillLoad() {
     this._calendar = new ModusDatePickerCalendar();
@@ -38,9 +44,11 @@ export class ModusDatePicker {
 
   /** Handlers */
   @Listen('calendarIconClicked')
-  handleCalendarIconClick(event: CustomEvent<ModusDateInputEventDetails>) {
-    const { type } = event.detail;
+  handleCalendarIconClick(event: CustomEvent<ModusDateInputCalendarIconClickedEvent>) {
+    const { type, min, max } = event.detail;
 
+    this._min = min;
+    this._max = max;
     Object.keys(this._dateInputs).forEach((d) => this._dateInputs[d].toggleCalendar(d === type ? null : false));
 
     this.toggleCalendar();
@@ -166,6 +174,24 @@ export class ModusDatePicker {
     this._showYearArrows = show;
   }
 
+  private validateMinMax(date: Date): boolean {
+    let isValid = true;
+
+    if (!date) {
+      return isValid;
+    }
+
+    if (this._min) {
+      isValid = date >= this._min;
+    }
+
+    if (isValid && this._max) {
+      isValid = date <= this._max;
+    }
+
+    return isValid;
+  }
+
   toggleCalendar(val: boolean = null): void {
     if (val !== null) {
       this._showCalendar = val;
@@ -225,6 +251,7 @@ export class ModusDatePicker {
               const isSingleDateSelected = singleDate && this.compare(date, singleDate) === 0;
               const isSelected = isStartDate || isEndDate || isSingleDateSelected;
               const isInRange = !isSelected ? positions['in-range'] : false;
+              const isDisabled = !this.validateMinMax(date);
 
               // Only for the last date in the calendar
               const onBlurEvent =
@@ -241,11 +268,13 @@ export class ModusDatePicker {
                   class={{
                     'calendar-day grid-item': true,
                     selected: isSelected,
+                    disabled: isDisabled,
                     start: isStartDate && !isEndDate,
                     end: isEndDate && !isStartDate,
                     'current-day': isToday,
                     'range-selected': isInRange,
                   }}
+                  disabled={isDisabled}
                   tabIndex={0}
                   onClick={() => this.pickCalendarDate(date)}
                   {...onBlurEvent}>

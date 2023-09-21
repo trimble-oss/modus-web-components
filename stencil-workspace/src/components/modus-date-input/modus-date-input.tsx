@@ -11,7 +11,11 @@ import {
 } from '@stencil/core';
 import { IconMap } from '../icons/IconMap';
 import DateInputFormatter from './utils/modus-date-input.formatter';
-import { ModusDateInputEventDetails, ModusDateInputType } from './utils/modus-date-input.models';
+import {
+  ModusDateInputCalendarIconClickedEvent,
+  ModusDateInputEventDetails,
+  ModusDateInputType,
+} from './utils/modus-date-input.models';
 
 @Component({
   tag: 'modus-date-input',
@@ -87,6 +91,12 @@ export class ModusDateInput {
   /** (optional) The input's valid state text. */
   @Prop() validText: string;
 
+  /** (optional) The minimum date allowed. The date is formatted according to ISO8601 'yyyy-mm-dd'. */
+  @Prop() min: string;
+
+  /** (optional) The maximum date allowed. The date is formatted according to ISO8601 'yyyy-mm-dd'. */
+  @Prop() max: string;
+
   /** (optional) A string representing the date entered in the input. The date is formatted according to ISO8601 'yyyy-mm-dd'. The displayed date format will differ from the 'value'. */
   @Prop({ mutable: true }) value: string;
   @Watch('value')
@@ -103,7 +113,7 @@ export class ModusDateInput {
   }
 
   /** An event that fires on calendar icon click. */
-  @Event() calendarIconClicked: EventEmitter<ModusDateInputEventDetails>;
+  @Event() calendarIconClicked: EventEmitter<ModusDateInputCalendarIconClickedEvent>;
 
   /** An event that fires on input value out of focus. */
   @Event() dateInputBlur: EventEmitter<ModusDateInputEventDetails>;
@@ -138,12 +148,20 @@ export class ModusDateInput {
     this._dateInput.focus();
   }
 
+  /** Validate the input. */
+  @Method()
+  async validate(): Promise<void> {
+    this.validateInput(this._dateDisplay);
+  }
+
   /** Handlers */
   handleCalendarClick(): void {
     this.calendarIconClicked.emit({
       value: this.value,
       type: this.type,
       inputString: this._dateDisplay,
+      min: this._formatter.parseIsoToDate(this.min),
+      max: this._formatter.parseIsoToDate(this.max),
     });
   }
 
@@ -192,10 +210,8 @@ export class ModusDateInput {
     if (!this.allowedCharsRegex) return true;
 
     const dateCharacterRegex = new RegExp(this.allowedCharsRegex);
-    if (dateCharacterRegex.test(key)) {
-      return true;
-    }
-    return false;
+
+    return dateCharacterRegex.test(key);
   }
 
   setDefaultAllowedKeysRegex(autoFormat: boolean) {
@@ -208,10 +224,30 @@ export class ModusDateInput {
     if (this.disableValidation) return;
 
     if (!inputString) {
-      if (this.required) this.errorText = 'Required';
-      else this.clearValidation();
-    } else if (!this.value) this.errorText = 'Invalid date';
-    else this.clearValidation();
+      if (this.required) {
+        this.errorText = 'Required';
+      } else {
+        this.clearValidation();
+      }
+    } else if (!this.value) {
+      this.errorText = 'Invalid date';
+    } else {
+      this.validateMinMax();
+    }
+  }
+
+  private validateMinMax(): void {
+    const min = this._formatter.parseIsoToDate(this.min);
+    const max = this._formatter.parseIsoToDate(this.max);
+    const value = this._formatter.parseIsoToDate(this.value);
+
+    if (min && min > value) {
+      this.errorText = `The entered date is less than the minimum value ${this._formatter.formatDisplayString(this.min)}`;
+    } else if (max && max < value) {
+      this.errorText = `The entered date is greater than the maximum value ${this._formatter.formatDisplayString(this.max)}`;
+    } else {
+      this.clearValidation();
+    }
   }
 
   render() {

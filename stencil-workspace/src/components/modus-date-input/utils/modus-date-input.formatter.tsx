@@ -133,13 +133,21 @@ export default class DateInputFormatter {
    * Filler date is used as fillers for parts not in the display format when constructing a full date string,
    * ex: 'yyyy-mm' format doesn't have a date part, hence the date is picked from filler  */
   getFillerDate(val: string): Date {
+    return this.parseIsoToDate(val) ||
+      new Date(new Date().getFullYear(), 0, 1, 0, 0, 0, 0);
+  }
+
+  parseIsoToDate(val: string): Date {
+    if (!val) {
+      return null;
+    }
     const regex = new RegExp(ISO_DATE_FORMAT);
     const parse = regex.exec(val);
     if (parse) {
       parse.shift();
-      return new Date(parseFloat(parse[0]), parseFloat(parse[1]), parseFloat(parse[2]), 0, 0, 0, 0);
-    } else {
-      return new Date(new Date().getFullYear(), 0, 1, 0, 0, 0, 0);
+      return new Date(parseFloat(parse[0]), parseFloat(parse[1]) - 1, parseFloat(parse[2]));
     }
+
+    return null;
   }
 }

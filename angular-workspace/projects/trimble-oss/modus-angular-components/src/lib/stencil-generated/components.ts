@@ -334,15 +334,15 @@ export declare interface ModusDataTable extends Components.ModusDataTable {
 
 
 @ProxyCmp({
-  inputs: ['allowedCharsRegex', 'ariaLabel', 'autoFocusInput', 'disableValidation', 'disabled', 'errorText', 'fillerDate', 'format', 'helperText', 'label', 'placeholder', 'readOnly', 'required', 'showCalendarIcon', 'size', 'type', 'validText', 'value'],
-  methods: ['focusInput']
+  inputs: ['allowedCharsRegex', 'ariaLabel', 'autoFocusInput', 'disableValidation', 'disabled', 'errorText', 'fillerDate', 'format', 'helperText', 'label', 'max', 'min', 'placeholder', 'readOnly', 'required', 'showCalendarIcon', 'size', 'type', 'validText', 'value'],
+  methods: ['focusInput', 'validate']
 })
 @Component({
   selector: 'modus-date-input',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['allowedCharsRegex', 'ariaLabel', 'autoFocusInput', 'disableValidation', 'disabled', 'errorText', 'fillerDate', 'format', 'helperText', 'label', 'placeholder', 'readOnly', 'required', 'showCalendarIcon', 'size', 'type', 'validText', 'value'],
+  inputs: ['allowedCharsRegex', 'ariaLabel', 'autoFocusInput', 'disableValidation', 'disabled', 'errorText', 'fillerDate', 'format', 'helperText', 'label', 'max', 'min', 'placeholder', 'readOnly', 'required', 'showCalendarIcon', 'size', 'type', 'validText', 'value'],
 })
 export class ModusDateInput {
   protected el: HTMLElement;
@@ -354,13 +354,14 @@ export class ModusDateInput {
 }
 
 
+import type { ModusDateInputCalendarIconClickedEvent as IModusDateInputModusDateInputCalendarIconClickedEvent } from '@trimble-oss/modus-web-components';
 import type { ModusDateInputEventDetails as IModusDateInputModusDateInputEventDetails } from '@trimble-oss/modus-web-components';
 
 export declare interface ModusDateInput extends Components.ModusDateInput {
   /**
    * An event that fires on calendar icon click.
    */
-  calendarIconClicked: EventEmitter<CustomEvent<IModusDateInputModusDateInputEventDetails>>;
+  calendarIconClicked: EventEmitter<CustomEvent<IModusDateInputModusDateInputCalendarIconClickedEvent>>;
   /**
    * An event that fires on input value out of focus.
    */

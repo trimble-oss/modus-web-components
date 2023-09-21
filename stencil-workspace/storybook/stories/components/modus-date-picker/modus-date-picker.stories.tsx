@@ -69,6 +69,18 @@ export default {
         type: { summary: 'string' },
       },
     },
+    max: {
+      description: "The maximum date allowed. The input string should be ISO8601 'yyyy-mm-dd'.",
+      table: {
+        type: { summary: 'string' },
+      }
+    },
+    min: {
+      description: "The minimum date allowed. The input string should be ISO8601 'yyyy-mm-dd'.",
+      table: {
+        type: { summary: 'string' },
+      }
+    },
     placeholder: {
       description: "The input's placeholder text",
       table: {
@@ -148,6 +160,8 @@ const defaultArgs = {
   format: 'mm/dd/yyyy',
   helperText: 'mm/dd/yyyy',
   label: 'Date',
+  min: '',
+  max: '',
   placeholder: '',
   readOnly: false,
   required: false,
@@ -167,6 +181,8 @@ const DefaultTemplate = ({
   format,
   helperText,
   label,
+  min,
+  max,
   placeholder,
   readOnly,
   required,
@@ -185,6 +201,8 @@ const DefaultTemplate = ({
     format=${format}
     helper-text=${helperText}
     label=${label}
+    min=${min}
+    max=${max}
     placeholder=${placeholder}
     read-only=${readOnly}
     required=${required}
@@ -211,6 +229,8 @@ const DateRangeTemplate = ({
   disabled,
   errorText,
   format,
+  min,
+  max,
   helperText,
   placeholder,
   readOnly,
@@ -229,6 +249,8 @@ const DateRangeTemplate = ({
       disabled=${disabled}
       error-text=${errorText}
       format=${format}
+      min=${min}
+      max=${max}
       helper-text=${helperText}
       type="start"
       label="Start"
@@ -248,6 +270,8 @@ const DateRangeTemplate = ({
       disabled=${disabled}
       error-text=${errorText}
       format=${format}
+      min=${min}
+      max=${max}
       helper-text=${helperText}
       type="end"
       label="End"
@@ -269,4 +293,59 @@ DateRange.args = {
     helperText: 'dd-mm-yyyy',
     allowedCharsRegex: '[\\d-]',
   },
+};
+
+const DefaultWithPickerTemplate = ({
+    ariaLabel,
+    allowedCharsRegex,
+    autoFocusInput,
+    disableValidation,
+    disabled,
+    errorText,
+    format,
+    helperText,
+    label,
+    min,
+    max,
+    placeholder,
+    readOnly,
+    required,
+    showCalendarIcon,
+    size,
+    validText,
+    value,
+  }) => html`
+  <modus-date-picker>
+    <modus-date-input
+      allowed-chars-regex=${allowedCharsRegex}
+      aria-label=${ariaLabel}
+      auto-focus-input=${autoFocusInput}
+      disable-validation=${disableValidation}
+      disabled=${disabled}
+      error-text=${errorText}
+      format=${format}
+      helper-text=${helperText}
+      label=${label}
+      min=${min}
+      max=${max}
+      placeholder=${placeholder}
+      read-only=${readOnly}
+      required=${required}
+      size=${size}
+      show-calendar-icon=${showCalendarIcon}
+      valid-text=${validText}
+      value=${value}></modus-date-input>
+  </modus-date-picker>
+`;
+
+export const DefaultWithPicker = DefaultWithPickerTemplate.bind({});
+DefaultWithPicker.args = {
+  ...defaultArgs,
+  showCalendarIcon: true,
+  min: '2022-12-02',
+  max: '2022-12-30',
+  format: 'mmm dd, yyyy',
+  allowedCharsRegex: '.',
+  helperText: 'mmm dd, yyyy',
+  label: 'Single Date',
 };
