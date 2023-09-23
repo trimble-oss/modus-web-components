@@ -47,6 +47,7 @@ import { IconTune } from './icon-tune';
 import { IconChevronDoubleUp } from './icon-chevron-double-up';
 import { IconChevronDoubleDown } from './icon-chevron-double-down';
 import { IconTimerCountdown } from './icon-timer-countdown';
+import { IconCaretUp } from './icon-caret-up';
 
 export interface IconProps {
   color?: string;
@@ -72,6 +73,8 @@ export const IconMap: FunctionalComponent<IconMapProps> = (props: IconMapProps) 
       return <IconCancel color={props.color} onClick={props.onClick} size={props.size} />;
     case 'caret-down':
       return <IconCaretDown color={props.color} onClick={props.onClick} size={props.size} />;
+    case 'caret-up':
+      return <IconCaretUp color={props.color} onClick={props.onClick} size={props.size} />;
     case 'check':
       return <IconCheck color={props.color} onClick={props.onClick} size={props.size} />;
     case 'check-circle':
