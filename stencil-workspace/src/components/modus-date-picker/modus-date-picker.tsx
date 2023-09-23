@@ -300,11 +300,11 @@ export class ModusDatePicker {
             {`${this._calendar?.month} ${this._calendar?.year}`}
           </span>
           <div class="year-icons">
-            <button tabIndex={0} aria-label="Previous Year" onClick={() => this.addYearOffset(1)} class="year-up">
-              <IconMap icon="triangle-down" size="8"></IconMap>
+            <button tabIndex={0} aria-label="Next Year" onClick={() => this.addYearOffset(1)} class="year-up">
+              <IconMap icon="caret-up" size="16"></IconMap>
             </button>
-            <button tabIndex={0} aria-label="Next Year" onClick={() => this.addYearOffset(-1)} class="year-down">
-              <IconMap size="8" icon="triangle-down"></IconMap>
+            <button tabIndex={0} aria-label="Previous Year" onClick={() => this.addYearOffset(-1)} class="year-down">
+              <IconMap size="16" icon="caret-down"></IconMap>
             </button>
           </div>
         </div>

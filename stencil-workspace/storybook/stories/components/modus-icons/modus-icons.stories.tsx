@@ -8,6 +8,7 @@ const iconNames = [
   'calendar',
   'cancel',
   'caret-down',
+  'caret-up',
   'check',
   'check-circle',
   'check-circle-outline',
