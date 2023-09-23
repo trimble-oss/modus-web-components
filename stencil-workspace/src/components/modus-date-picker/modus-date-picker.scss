@@ -87,14 +87,6 @@
         button:active {
           opacity: 0.5;
         }
-
-        button:first-child {
-          transform: rotate(180deg) scaleX(-1);
-        }
-
-        svg {
-          padding: 0.125rem;
-        }
       }
     }
 
