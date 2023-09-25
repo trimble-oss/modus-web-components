@@ -71,6 +71,7 @@ export class ModusDateInput {
     }
 
     this._altFormatters = altFormats.split('|')
+      .map(format => format.trim())
       .filter(Boolean)
       .map(format => new DateInputFormatter(this.fillerDate, format));
   }
@@ -173,6 +174,7 @@ export class ModusDateInput {
   handleBlur(): void {
     this._isEditing = false;
 
+    this.checkAltFormats();
     this.validateInput(this._dateDisplay);
     this.dateInputBlur.emit({
       value: this.value,
@@ -187,6 +189,10 @@ export class ModusDateInput {
       event.preventDefault();
     }
 
+    if (event.key.toLowerCase() === 'enter') {
+      this.handleBlur();
+    }
+
     return keyIsValid;
   }
 
@@ -199,15 +205,22 @@ export class ModusDateInput {
 
     this._dateDisplay = inputString;
     this.value = this._formatter.parseDisplayString(this._dateDisplay);
+  }
 
+  // Helpers
+  clearValidation(): void {
+    this.errorText = null;
+  }
+
+  /** Check if the input string matches any of the alternative formats. */
+  checkAltFormats(): string {
     if (this.value) {
-      this._dateDisplay = this._formatter.formatDisplayString(this.value);
       return;
     }
 
     // if there is no value for the default format, check the alternative formats
     for (const formatter of this._altFormatters) {
-      const result = formatter.parseDisplayString(inputString);
+      const result = formatter.parseDisplayString(this._dateDisplay);
 
       if (result) {
         this._dateDisplay = this._formatter.formatDisplayString(result);
@@ -215,11 +228,6 @@ export class ModusDateInput {
         return;
       }
     }
-  }
-
-  // Helpers
-  clearValidation(): void {
-    this.errorText = null;
   }
 
   keyIsValidDateCharacter(key: string): boolean {
