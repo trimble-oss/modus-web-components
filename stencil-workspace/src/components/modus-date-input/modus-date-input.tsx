@@ -156,12 +156,16 @@ export class ModusDateInput {
 
   /** Handlers */
   handleCalendarClick(): void {
+    const messages = this.getMinMaxValidationMessage();
+
     this.calendarIconClicked.emit({
       value: this.value,
       type: this.type,
       inputString: this._dateDisplay,
       min: this._formatter.parseIsoToDate(this.min),
       max: this._formatter.parseIsoToDate(this.max),
+      minMessage: messages.min,
+      maxMessage: messages.max,
     });
   }
 
@@ -240,14 +244,32 @@ export class ModusDateInput {
     const min = this._formatter.parseIsoToDate(this.min);
     const max = this._formatter.parseIsoToDate(this.max);
     const value = this._formatter.parseIsoToDate(this.value);
+    const messages = this.getMinMaxValidationMessage();
 
     if (min && min > value) {
-      this.errorText = `The entered date is less than the minimum value ${this._formatter.formatDisplayString(this.min)}`;
+      this.errorText = messages.min;
     } else if (max && max < value) {
-      this.errorText = `The entered date is greater than the maximum value ${this._formatter.formatDisplayString(this.max)}`;
+      this.errorText = messages.max
     } else {
       this.clearValidation();
     }
+  }
+
+  private getMinMaxValidationMessage(): { min: string; max: string } {
+    const result = { min: '', max: '' };
+    const min = this._formatter.parseIsoToDate(this.min);
+    const max = this._formatter.parseIsoToDate(this.max);
+
+    if (min) {
+      min.setUTCDate(min.getDate() - 1);
+      result.min = `Select a date after ${this._formatter.formatDisplayString(min.toISOString())}`;
+    }
+    if (max) {
+      max.setUTCDate(max.getDate() + 1);
+      result.max = `Select a date before ${this._formatter.formatDisplayString(max.toISOString())}`;
+    }
+
+    return result;
   }
 
   render() {

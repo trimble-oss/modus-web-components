@@ -260,7 +260,7 @@ describe('modus-date-picker', () => {
     const errorTextStart = await page.find('modus-date-input[type="start"] >>> .sub-text > label');
     const errorTextEnd = await page.find('modus-date-input[type="end"] >>> .sub-text > label');
 
-    expect(errorTextStart.innerHTML).toEqual('The entered date is less than the minimum value Feb 17, 2023');
-    expect(errorTextEnd.innerHTML).toEqual('The entered date is greater than the maximum value Apr 22, 2023');
+    expect(errorTextStart.innerHTML).toEqual('Select a date after Feb 16, 2023');
+    expect(errorTextEnd.innerHTML).toEqual('Select a date before Apr 23, 2023');
   });
 });

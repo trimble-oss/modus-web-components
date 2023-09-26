@@ -284,7 +284,7 @@ describe('modus-date-input', () => {
     await page.waitForChanges();
 
     const errorText = await page.find('modus-date-input >>> .sub-text > label');
-    expect(errorText.innerHTML).toEqual('The entered date is greater than the maximum value Jan 2, 2023');
+    expect(errorText.innerHTML).toEqual('Select a date before Jan 3, 2023');
   });
 
   it('checks invalid min date validation', async () => {
@@ -307,6 +307,6 @@ describe('modus-date-input', () => {
     await page.waitForChanges();
 
     const errorText = await page.find('modus-date-input >>> .sub-text > label');
-    expect(errorText.innerHTML).toEqual('The entered date is less than the minimum value Jan 2, 2023');
+    expect(errorText.innerHTML).toEqual('Select a date after Jan 1, 2023');
   });
 });

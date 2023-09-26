@@ -24,6 +24,7 @@ export default class ModusDatePickerState {
 
       this.element.value = `${year}-${month}-${date}`;
       this.element.focusInput();
+      this.element.validate();
       this.date = val;
     }
   }
