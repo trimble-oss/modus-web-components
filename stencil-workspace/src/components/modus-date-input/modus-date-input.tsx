@@ -189,11 +189,13 @@ export class ModusDateInput {
       event.preventDefault();
     }
 
+    return keyIsValid;
+  }
+
+  handleInputKeyDown(event: KeyboardEvent): void {
     if (event.key.toLowerCase() === 'enter') {
       this.handleBlur();
     }
-
-    return keyIsValid;
   }
 
   handleOnInput(event: Event): void {
@@ -281,6 +283,7 @@ export class ModusDateInput {
             onBlur={() => this.handleBlur()}
             onInput={(event) => this.handleOnInput(event)}
             onKeyPress={(e) => this.handleInputKeyPress(e)}
+            onKeyDown={(e) => this.handleInputKeyDown(e)}
             placeholder={this.placeholder}
             readonly={this.readOnly}
             ref={(el) => (this._dateInput = el as HTMLInputElement)}
