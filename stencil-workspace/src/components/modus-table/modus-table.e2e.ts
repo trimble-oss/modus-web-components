@@ -28,6 +28,61 @@ const MockData = [
   },
 ];
 
+const MockOverflowMenuActions = [
+  {
+    _id: 'edit',
+    display: {
+      icon: 'edit',
+      text: 'Edit',
+    },
+  },
+  {
+    _id: 'delete',
+    display: {
+      icon: 'delete',
+      text: 'Delete',
+    },
+  },
+];
+
+const MockRowActions = [
+  {
+    _id: 'edit',
+    display: {
+      icon: 'edit',
+      text: 'Edit',
+    },
+  },
+  {
+    _id: 'delete',
+    display: {
+      icon: 'delete',
+      text: 'Delete',
+    },
+  },
+  {
+    _id: '3',
+    display: {
+      icon: 'delete',
+      text: '3',
+    },
+  },
+  {
+    _id: '4',
+    display: {
+      icon: 'delete',
+      text: '4',
+    },
+  },
+  {
+    _id: '5',
+    display: {
+      icon: 'delete',
+      text: '5',
+    },
+  },
+];
+
 describe('modus-table', () => {
   let page: E2EPage;
 
@@ -432,5 +487,41 @@ describe('modus-table', () => {
     await page.waitForChanges();
     resizeContainer = await page.find('modus-table >>> .resize-handle');
     expect(resizeContainer).not.toBeNull();
+  });
+
+  it('Renders overflow menu', async () => {
+    page = await newE2EPage();
+    await page.setContent('<modus-table />');
+
+    const component = await page.find('modus-table');
+
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    component.setProperty('overflowMenuActions', MockOverflowMenuActions);
+    await page.waitForChanges();
+
+    let overflowMenu = await page.find('modus-table >>> .overflow-menu');
+    expect(overflowMenu).not.toBeNull();
+    overflowMenu.click();
+    await page.waitForChanges();
+
+    let dropdownMenu = await page.find('modus-table >>> .dropdownMenu');
+    expect(dropdownMenu).not.toBeNull();
+  });
+
+  it('Renders a maximum of 4 row actions', async () => {
+    page = await newE2EPage();
+    await page.setContent('<modus-table />');
+
+    const component = await page.find('modus-table');
+
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    component.setProperty('rowActions', MockRowActions);
+    await page.waitForChanges();
+
+    let rowActions = await page.findAll('modus-table >>> .row-action');
+    console.log(rowActions);
+    expect(rowActions.length).toBe(8);
   });
 });

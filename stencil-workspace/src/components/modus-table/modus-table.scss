@@ -387,3 +387,96 @@ modus-table-filler-column {
     fill: $modus-table-header-drop-color;
   }
 }
+
+/* Modus Row Menu */
+.row-menu {
+  display: inherit;
+}
+
+.row-action {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  height: 20px;
+  justify-content: center;
+  padding: $rem-2px;
+  transition: background-color 0.15s ease-in-out;
+  width: 20px;
+
+  svg {
+    fill: $modus-btn-icon-only-dark-color;
+  }
+
+  &:hover {
+    background-color: $modus-btn-icon-only-dark-hover-bg;
+
+    svg {
+      fill: $modus-btn-icon-only-dark-hover-color;
+    }
+  }
+
+  &:active {
+    background-color: $modus-btn-icon-only-dark-active-bg;
+
+    svg {
+      fill: $modus-btn-icon-only-dark-active-color;
+    }
+  }
+}
+
+.list-container {
+  position: absolute;
+  z-index: 1;
+
+  .items-container {
+    display: inline-block;
+    position: sticky;
+    width: 200px;
+
+    .action-item {
+      height: $rem-24px;
+      padding: $rem-8px;
+      text-align: left;
+      user-select: none;
+      width: 200px;
+      overflow: visible;
+
+      .action-item-content {
+        align-items: center;
+        background-color: $modus-list-item-bg;
+        border: $rem-1px solid $modus-list-item-border-color;
+        color: $modus-list-item-color;
+        cursor: pointer;
+        display: flex;
+        height: $rem-24px;
+        justify-content: flex-start;
+        overflow: hidden;
+        padding: $rem-8px $rem-16px;
+        width: 100%;
+
+        svg {
+          margin-right: $rem-8px;
+
+          path {
+            fill: $modus-btn-icon-only-dark-color;
+          }
+        }
+
+        .display-text {
+          display: block;
+          font-size: $rem-16px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          width: 100%;
+        }
+      }
+
+      &:hover {
+        .action-item-content {
+          background-color: $modus-list-item-hover-bg;
+        }
+      }
+    }
+  }
+}

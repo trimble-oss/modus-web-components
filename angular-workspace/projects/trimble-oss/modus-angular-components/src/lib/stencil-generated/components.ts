@@ -1097,7 +1097,7 @@ export declare interface ModusSwitch extends Components.ModusSwitch {
 
 
 @ProxyCmp({
-  inputs: ['columnReorder', 'columnResize', 'columns', 'data', 'displayOptions', 'fullWidth', 'hover', 'maxHeight', 'maxWidth', 'pageSizeList', 'pagination', 'rowSelection', 'rowSelectionOptions', 'rowsExpandable', 'showSortIconOnHover', 'sort', 'summaryRow', 'toolbar', 'toolbarOptions'],
+  inputs: ['columnReorder', 'columnResize', 'columns', 'data', 'displayOptions', 'fullWidth', 'hover', 'maxHeight', 'maxWidth', 'overflowMenuActions', 'pageSizeList', 'pagination', 'rowActions', 'rowSelection', 'rowSelectionOptions', 'rowsExpandable', 'showSortIconOnHover', 'sort', 'summaryRow', 'toolbar', 'toolbarOptions'],
   methods: ['getColumnData', 'toggleColumnVisibility']
 })
 @Component({
@@ -1105,20 +1105,21 @@ export declare interface ModusSwitch extends Components.ModusSwitch {
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['columnReorder', 'columnResize', 'columns', 'data', 'displayOptions', 'fullWidth', 'hover', 'maxHeight', 'maxWidth', 'pageSizeList', 'pagination', 'rowSelection', 'rowSelectionOptions', 'rowsExpandable', 'showSortIconOnHover', 'sort', 'summaryRow', 'toolbar', 'toolbarOptions'],
+  inputs: ['columnReorder', 'columnResize', 'columns', 'data', 'displayOptions', 'fullWidth', 'hover', 'maxHeight', 'maxWidth', 'overflowMenuActions', 'pageSizeList', 'pagination', 'rowActions', 'rowSelection', 'rowSelectionOptions', 'rowsExpandable', 'showSortIconOnHover', 'sort', 'summaryRow', 'toolbar', 'toolbarOptions'],
 })
 export class ModusTable {
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['sortChange', 'rowSelectionChange', 'cellLinkClick']);
+    proxyOutputs(this, this.el, ['sortChange', 'rowSelectionChange', 'cellLinkClick', 'rowActionClick', 'overflowMenuActionClick']);
   }
 }
 
 
 import type { ModusTableSortingState as IModusTableModusTableSortingState } from '@trimble-oss/modus-web-components';
 import type { ModusTableCellLink as IModusTableModusTableCellLink } from '@trimble-oss/modus-web-components';
+import type { ModusTableRowActionClickEvent as IModusTableModusTableRowActionClickEvent } from '@trimble-oss/modus-web-components';
 
 export declare interface ModusTable extends Components.ModusTable {
   /**
@@ -1133,6 +1134,14 @@ export declare interface ModusTable extends Components.ModusTable {
    * Emits the link that was clicked
    */
   cellLinkClick: EventEmitter<CustomEvent<IModusTableModusTableCellLink>>;
+  /**
+   * An event that fires when a row action is clicked.
+   */
+  rowActionClick: EventEmitter<CustomEvent<IModusTableModusTableRowActionClickEvent>>;
+  /**
+   * An event that fires when a overflow menu action is clicked.
+   */
+  overflowMenuActionClick: EventEmitter<CustomEvent<IModusTableModusTableRowActionClickEvent>>;
 }
 
 

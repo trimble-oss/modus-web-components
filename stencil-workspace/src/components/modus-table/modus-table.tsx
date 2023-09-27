@@ -32,7 +32,7 @@ import {
   getSortedRowModel,
 } from '@tanstack/table-core';
 import { PAGINATION_DEFAULT_SIZES } from './modus-table.constants';
-import { ModusTableSortingState } from './models/modus-table.models';
+import { ModusTableRowAction, ModusTableRowActionClickEvent, ModusTableSortingState } from './models/modus-table.models';
 import ColumnDragState from './models/column-drag-state.model';
 import {
   ModusTableColumn,
@@ -113,6 +113,8 @@ export class ModusTable {
       this.table.options.enableHiding = !!this.toolbarOptions?.columnsVisibility;
     }
     this.onChangeOfRowsExpandable();
+    this.onChangeOfRowActions();
+    this.onChangeOfOverflowMenuActions();
   }
 
   /** (Optional) To display a toolbar for the table. */
@@ -167,6 +169,34 @@ export class ModusTable {
   /** (Optional) To display a horizontal scrollbar when the width is exceeded. */
   @Prop() maxWidth: string;
 
+  /** (Optional) Actions that can be performed on each row. A maximum of 4 icons will be shown, including overflow menu and expand icons. */
+  @Prop() rowActions?: ModusTableRowAction[] = [];
+  @Watch('rowActions') onChangeOfRowActions() {
+    if (this.rowActions.length > 0) {
+      this.frozenColumns.push(this.columnOrder[0]);
+    }
+    if (this.toolbarOptions?.columnsVisibility) {
+      this.toolbarOptions.columnsVisibility.requiredColumns = [
+        ...this.toolbarOptions.columnsVisibility.requiredColumns,
+        ...this.frozenColumns,
+      ];
+    }
+  }
+
+  /** (Optional) Dropdown menu with actions for each row. */
+  @Prop() overflowMenuActions?: ModusTableRowAction[] = [];
+  @Watch('overflowMenuActions') onChangeOfOverflowMenuActions() {
+    if (this.overflowMenuActions.length > 0) {
+      this.frozenColumns.push(this.columnOrder[0]);
+    }
+    if (this.toolbarOptions?.columnsVisibility) {
+      this.toolbarOptions.columnsVisibility.requiredColumns = [
+        ...this.toolbarOptions.columnsVisibility.requiredColumns,
+        ...this.frozenColumns,
+      ];
+    }
+  }
+
   /** Emits event on sort change */
   @Event() sortChange: EventEmitter<ModusTableSortingState>;
 
@@ -175,6 +205,12 @@ export class ModusTable {
 
   /** Emits the link that was clicked */
   @Event() cellLinkClick: EventEmitter<ModusTableCellLink>;
+
+  /** An event that fires when a row action is clicked. */
+  @Event() rowActionClick: EventEmitter<ModusTableRowActionClickEvent>;
+
+  /** An event that fires when a overflow menu action is clicked. */
+  @Event() overflowMenuActionClick: EventEmitter<ModusTableRowActionClickEvent>;
 
   /**
    * ColumnSizing has info about width of the column
@@ -194,6 +230,9 @@ export class ModusTable {
   @State() itemDragState: ColumnDragState;
   @State() dragAndDropObj: TableHeaderDragDrop = new TableHeaderDragDrop();
   @State() rowSelectionState: RowSelectionState = {};
+  @State() dropdownRowId?: string = null;
+  @State() dropdownX = 0;
+  @State() dropdownY = 0;
 
   private frozenColumns: string[] = []; // Columns will remain on the left and be unable to resize, reorganize, or modify their visibility.
   private isColumnResizing = false;
@@ -295,6 +334,8 @@ export class ModusTable {
   componentWillLoad(): void {
     this.columnOrder = this.columns?.map((column) => column.id as string); // Sets column order
     this.onChangeOfRowsExpandable();
+    this.onChangeOfRowActions();
+    this.onChangeOfOverflowMenuActions();
     this.initializeTable();
   }
 
@@ -458,13 +499,13 @@ export class ModusTable {
       <Fragment>
         <div class={tableContainerClass} style={{ maxHeight: this.maxHeight }}>
           {this.renderTable()}
-
           <modus-table-filler-column
             summary-row={this.summaryRow}
             cell-borderless={cellBorderless}
             ref={(el) => (this.fillerColumnRef = el)}></modus-table-filler-column>
         </div>
         <slot name="customFooter" />
+        {this.renderDropdownMenu(this.dropdownRowId)}
       </Fragment>
     );
   }
@@ -494,6 +535,10 @@ export class ModusTable {
   }
 
   renderTableBody(multipleRowSelection: boolean): JSX.Element | null {
+    let maximumNumberOfActions = 4;
+    if (this.overflowMenuActions.length > 0) maximumNumberOfActions -= 1;
+    if (this.rowsExpandable) maximumNumberOfActions -= 1;
+    const rowActions = this.rowActions.slice(0, maximumNumberOfActions);
     return (
       <tbody>
         {this.table.getRowModel()?.rows.map((row) => {
@@ -516,7 +561,16 @@ export class ModusTable {
                     cellIndex={cellIndex}
                     rowsExpandable={this.rowsExpandable}
                     frozenColumns={this.frozenColumns}
+                    isChecked={isChecked}
+                    showOverflowMenu={this.overflowMenuActions.length > 0}
                     onLinkClick={(link: ModusTableCellLink) => this.cellLinkClick.emit(link)}
+                    rowActions={rowActions}
+                    rowActionClick={(actionId: string, rowId: string) => this.rowActionClick.emit({ actionId, rowId })}
+                    overFlowMenuClick={(x: number, y: number) => {
+                      this.dropdownX = x;
+                      this.dropdownY = y + 12;
+                      this.dropdownRowId = this.dropdownRowId == row.id ? null : row.id;
+                    }}
                   />
                 );
               })}
@@ -582,6 +636,34 @@ export class ModusTable {
         rowSelection={this.rowSelection}
       />
     ) : null;
+  }
+
+  renderDropdownMenu(id?: string): JSX.Element | null {
+    document.addEventListener('click', (e) => {
+      if (Math.abs(e.x - this.dropdownX) > 12 || Math.abs(e.y - this.dropdownY) > 12) this.dropdownRowId = null;
+    });
+    return (
+      <div
+        id={`dropdown-${id}`}
+        class="dropdownMenu"
+        style={{ top: `${this.dropdownY}px`, left: `${this.dropdownX}px`, position: 'absolute' }}>
+        {this.table.getRowModel()?.rows.filter((row) => row.id == id).map((row) => (
+            <div class="list-container" id={row.id}>
+              <div class="items-container">
+                {this.overflowMenuActions.filter(action => !row.original["_excludedActions"]?.includes(action._id)).map((action) => (
+                  <div
+                    class="action-item"
+                    onClick={() => this.overflowMenuActionClick.emit({ actionId: action._id, rowId: row.id })}>
+                    <div class="action-item-content">
+                      <div class="display-text">{action.display.text}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+      </div>
+    );
   }
 
   renderPagination(): JSX.Element | null {

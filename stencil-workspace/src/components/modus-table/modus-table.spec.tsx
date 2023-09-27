@@ -21,6 +21,7 @@ describe('modus-table', () => {
             <modus-table-filler-column></modus-table-filler-column>
           </div>
           <slot name="customFooter"></slot>
+          <div class="dropdownMenu" id="dropdown-null" style="top: 0px; left: 0px; position: absolute;"></div>
         </div>
       </mock:shadow-root>
     </modus-table>

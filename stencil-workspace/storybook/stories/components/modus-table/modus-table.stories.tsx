@@ -149,6 +149,22 @@ const DefaultColumns = [
   },
 ];
 
+const defaultActions = [
+  {
+    _id: 'edit',
+    display: {
+      icon: 'edit',
+      text: 'Edit'
+    }
+  },
+  {
+    _id: 'delete',
+    display: {
+      icon: 'delete',
+      text: 'Delete'
+    }
+  }
+]
 
 const DefaultArgs = {
   hover: false,
@@ -169,7 +185,7 @@ const DefaultArgs = {
   maxHeight: '',
   maxWidth: '',
   rowSelection: false,
-  rowSelectionOptions: {},
+  rowSelectionOptions: {}
 };
 
 export default {
@@ -345,11 +361,27 @@ export default {
       },
       type: { required: false },
     },
+    rowActions: {
+      name: 'rowActions',
+      description: 'To set action icons to the row.',
+      table: {
+        type: { summary: 'ModusTableRowAction[]' },
+      },
+      type: { required: false },
+    },
+    overflowMenuActions: {
+      name: 'overflowMenuActions',
+      description: 'To set an overflow menu with actions to the row.',
+      table: {
+        type: { summary: 'ModusTableRowAction[]' },
+      },
+      type: { required: false },
+    }
   },
 
   parameters: {
     actions: {
-      handles: ['sortChange', 'cellLinkClick', 'rowSelectionChange'],
+      handles: ['sortChange', 'cellLinkClick', 'rowSelectionChange', 'rowActionClick', 'overflowMenuActionClick'],
     },
     controls: { expanded: true, sort: 'requiredFirst' },
     docs: {
@@ -525,6 +557,12 @@ CheckboxRowSelection.args = {
     subRowSelection: true
   }, data: makeData(7)
 };
+
+export const RowActions = Template.bind({});
+RowActions.args = { ...DefaultArgs, rowActions: defaultActions };
+
+export const OverflowMenu = Template.bind({});
+OverflowMenu.args = { ...DefaultArgs, overflowMenuActions: defaultActions };
 
 export const LargeDataset = Template.bind({});
 

@@ -14,7 +14,7 @@ import { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, 
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-import { ModusTableCellLink, ModusTableColumn, ModusTableColumnsVisibilityOptions, ModusTableDisplayOptions, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+import { ModusTableCellLink, ModusTableColumn, ModusTableColumnsVisibilityOptions, ModusTableDisplayOptions, ModusTableRowAction, ModusTableRowActionClickEvent, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 import { Column, Table } from "@tanstack/table-core";
 import { Tab } from "./components/modus-tabs/modus-tabs";
 import { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
@@ -28,7 +28,7 @@ export { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, 
 export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 export { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 export { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-export { ModusTableCellLink, ModusTableColumn, ModusTableColumnsVisibilityOptions, ModusTableDisplayOptions, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+export { ModusTableCellLink, ModusTableColumn, ModusTableColumnsVisibilityOptions, ModusTableDisplayOptions, ModusTableRowAction, ModusTableRowActionClickEvent, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 export { Column, Table } from "@tanstack/table-core";
 export { Tab } from "./components/modus-tabs/modus-tabs";
 export { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
@@ -1010,8 +1010,16 @@ export namespace Components {
           * (Optional) To display a horizontal scrollbar when the width is exceeded.
          */
         "maxWidth": string;
+        /**
+          * (Optional) Dropdown menu with actions for each row.
+         */
+        "overflowMenuActions"?: ModusTableRowAction[];
         "pageSizeList": number[];
         "pagination": boolean;
+        /**
+          * (Optional) Actions that can be performed on each row. A maximum of 4 icons will be shown, including overflow menu and expand icons.
+         */
+        "rowActions"?: ModusTableRowAction[];
         /**
           * (Optional) To display checkbox.
          */
@@ -2997,6 +3005,14 @@ declare namespace LocalJSX {
          */
         "onCellLinkClick"?: (event: ModusTableCustomEvent<ModusTableCellLink>) => void;
         /**
+          * An event that fires when a overflow menu action is clicked.
+         */
+        "onOverflowMenuActionClick"?: (event: ModusTableCustomEvent<ModusTableRowActionClickEvent>) => void;
+        /**
+          * An event that fires when a row action is clicked.
+         */
+        "onRowActionClick"?: (event: ModusTableCustomEvent<ModusTableRowActionClickEvent>) => void;
+        /**
           * Event details contains the row(s) selected
          */
         "onRowSelectionChange"?: (event: ModusTableCustomEvent<unknown>) => void;
@@ -3004,8 +3020,16 @@ declare namespace LocalJSX {
           * Emits event on sort change
          */
         "onSortChange"?: (event: ModusTableCustomEvent<ModusTableSortingState>) => void;
+        /**
+          * (Optional) Dropdown menu with actions for each row.
+         */
+        "overflowMenuActions"?: ModusTableRowAction[];
         "pageSizeList"?: number[];
         "pagination"?: boolean;
+        /**
+          * (Optional) Actions that can be performed on each row. A maximum of 4 icons will be shown, including overflow menu and expand icons.
+         */
+        "rowActions"?: ModusTableRowAction[];
         /**
           * (Optional) To display checkbox.
          */
