@@ -340,6 +340,10 @@ export namespace Components {
          */
         "allowedCharsRegex": RegExp | string;
         /**
+          * Alternative formats string for the date input split by | separator. Use 'm','mm' for month, 'd','dd' for date and 'yy','yyyy' for year with any separator that is not a regular expression.
+         */
+        "altFormats": string;
+        /**
           * (optional) The input's aria-label.
          */
         "ariaLabel": string | null;
@@ -2212,6 +2216,10 @@ declare namespace LocalJSX {
           * (optional) Regular expression to allow characters while typing the input.
          */
         "allowedCharsRegex"?: RegExp | string;
+        /**
+          * Alternative formats string for the date input split by | separator. Use 'm','mm' for month, 'd','dd' for date and 'yy','yyyy' for year with any separator that is not a regular expression.
+         */
+        "altFormats"?: string;
         /**
           * (optional) The input's aria-label.
          */
