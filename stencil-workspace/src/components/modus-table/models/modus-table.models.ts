@@ -54,3 +54,16 @@ export interface ModusTableCellLink {
   url: string;
   _type?: typeof COLUMN_DEF_DATATYPE_LINK;
 }
+
+export interface ModusTableRowAction {
+  _id: string;
+  display: {
+    icon?: string;
+    text: string;
+  };
+}
+
+export interface ModusTableRowActionClickEvent {
+  actionId: string;
+  rowId: string;
+}

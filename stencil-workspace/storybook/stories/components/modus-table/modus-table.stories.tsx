@@ -345,11 +345,43 @@ export default {
       },
       type: { required: false },
     },
+    rowActions: [
+      {
+        _id: 'edit',
+        display: {
+          icon: 'edit',
+          text: 'Edit'
+        }
+      },
+      {
+        _id: 'delete',
+        display: {
+          icon: 'delete',
+          text: 'Delete'
+        }
+      }
+    ],
+    overflowMenuActions: [
+      {
+        _id: 'edit',
+        display: {
+          icon: 'edit',
+          text: 'Edit'
+        }
+      },
+      {
+        _id: 'delete',
+        display: {
+          icon: 'delete',
+          text: 'Delete'
+        }
+      }
+    ]
   },
 
   parameters: {
     actions: {
-      handles: ['sortChange', 'cellLinkClick', 'rowSelectionChange'],
+      handles: ['sortChange', 'cellLinkClick', 'rowSelectionChange', 'rowActionClick', 'overflowMenuActionClick'],
     },
     controls: { expanded: true, sort: 'requiredFirst' },
     docs: {
@@ -382,7 +414,9 @@ const Template = ({
   maxHeight,
   maxWidth,
   rowSelection,
-  rowSelectionOptions
+  rowSelectionOptions,
+  rowActions,
+  overflowMenuActions
 }) => html`
   <div style="width: 950px">
     <modus-table
@@ -398,7 +432,9 @@ const Template = ({
       rows-expandable="${rowsExpandable}"
       max-height="${maxHeight}"
       max-width="${maxWidth}"
-      row-selection="${rowSelection}" />
+      row-selection="${rowSelection}"
+      row-actions="${rowActions}"
+      overflow-menu-actions="${overflowMenuActions}" />
   </div>
   ${initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions)}
 `;
