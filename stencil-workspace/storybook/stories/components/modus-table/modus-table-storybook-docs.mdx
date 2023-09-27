@@ -20,6 +20,8 @@ import { Story } from '@storybook/addon-docs';
 - [Summary Row](#summary-row)
 - [Column Visibility](#column-visibility)
 - [Expandable Rows](#Expandable-rows)
+- [Row Actions](#row-actions)
+- [Overflow Menu](#overflow-menu)
 - [Checkbox Row Selection](#checkbox-row-selection)
 - [Types](#types)
 - [Accessibility](#accessibility)
@@ -369,6 +371,22 @@ User can expand rows to display as child/sub row data.
 - Pass data to `subRows` property in `columns`.
 
 <Story id="components-table--expandable-rows" height={'480px'} />
+
+### Row Actions
+
+User can add up to 4 actions to the beggining of the rows with `rowActions`.
+
+- Set `_excludedActions` with an array of action ids that should not be displayed for specific rows in `data`.
+
+<Story id="components-table--row-actions" height={'350px'} />
+
+### Overflow Menu
+
+User can add an overflow menu to the beggining of the rows with `overflowMenuActions`.
+
+- Set `_excludedActions` with an array of action ids that should not be displayed for specific rows in `data`.
+
+<Story id="components-table--overflow-menu" height={'350px'} />
 
 ### Checkbox Row Selection
 

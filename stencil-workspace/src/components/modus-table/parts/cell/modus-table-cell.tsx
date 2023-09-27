@@ -63,7 +63,7 @@ export const ModusTableCell: FunctionalComponent<ModusTableCellProps> = ({
         {
           /** Row menu */
           cellIndex == 0 && (
-            <div class="row-menu" style={{ width: `${iconsWidth}px` }}>
+            <div class="row-menu" style={{ width: `${iconsWidth}px`, paddingRight: '4px' }}>   
               <ModusTableRowActions
                 actions={rowActions.filter((action) => !row.original["_excludedActions"]?.includes(action._id))}
                 onRowActionClick={rowActionClick}

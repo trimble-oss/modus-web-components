@@ -47,7 +47,7 @@ function makeData(...lens): object[] {
   return makeDataLevel();
 }
 
-function initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions) {
+function initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions, overflowMenuActions) {
   const tag = document.createElement('script');
   tag.innerHTML = `
   document.querySelector('modus-table').columns = ${JSON.stringify(columns)};
@@ -56,6 +56,8 @@ function initializeTable(columns, data, pageSizeList, toolbarOptions, displayOpt
   document.querySelector('modus-table').toolbarOptions = ${JSON.stringify(toolbarOptions)};
   document.querySelector('modus-table').displayOptions = ${JSON.stringify(displayOptions)};
   document.querySelector('modus-table').rowSelectionOptions = ${JSON.stringify(rowSelectionOptions)};
+  document.querySelector('modus-table').rowActions = ${JSON.stringify(rowActions)};
+  document.querySelector('modus-table').overflowMenuActions = ${JSON.stringify(overflowMenuActions)};
   `;
 
   return tag;
@@ -414,7 +416,9 @@ const Template = ({
   maxHeight,
   maxWidth,
   rowSelection,
-  rowSelectionOptions
+  rowSelectionOptions,
+  rowActions,
+  overflowMenuActions
 }) => html`
   <div style="width: 950px">
     <modus-table
@@ -432,7 +436,7 @@ const Template = ({
       max-width="${maxWidth}"
       row-selection="${rowSelection}" />
   </div>
-  ${initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions)}
+  ${initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions, overflowMenuActions)}
 `;
 
 export const Default = Template.bind({});

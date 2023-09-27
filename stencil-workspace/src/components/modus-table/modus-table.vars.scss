@@ -21,6 +21,7 @@ $modus-page-view-select-bg: var(--modus-input-bg, #fff) !default;
 $modus-page-view-select-color: var(--modus-table-body-color, #252a2e) !default;
 
 /** Menu dropdown */
+$modus-table-menu-item-selected-bg: var(--modus-table-header-bg, --modus-gray-8) !default;
 $modus-menu-dropdown-border-color: var(--modus-group-item-border-color, #e0e1e9) !default;
 $modus-menu-dropdown-bg: var(--modus-group-item-bg, #fff) !default;
 $modus-menu-dropdown-box-shadow: var(--modus-card-shadow-color, #3635454d) !default;
@@ -40,11 +41,9 @@ $modus-table-scrollbar-track-color: var(--modus-table-scrollbar-track-color, #b7
 $modus-table-cell-link-colour: var(--modus-table-cell-link-colour, #217cbb) !default;
 
 // Icons
-$modus-btn-icon-only-dark-color: var(--modus-btn-icon-only-dark-color, #252a2e) !default;
-$modus-btn-icon-only-dark-hover-bg: var(--modus-btn-icon-only-dark-hover-bg, #e0e1e9) !default;
-$modus-btn-icon-only-dark-hover-color: var(--modus-btn-icon-only-dark-hover-color, #353a40) !default;
-$modus-btn-icon-only-dark-active-bg: var(--modus-btn-icon-only-dark-active-bg, #cbcdd6) !default;
-$modus-btn-icon-only-dark-active-color: var(--modus-btn-icon-only-dark-active-color, #2b2a37) !default;
+$modus-table-icon-hover-bg: var(--modus-table-icon-hover-bg, #dcedf9) !default;
+$modus-table-icon-active-bg: var(--modus-table-icon-active-bg, rgba(0, 99, 163, 0.18)) !default;
+
 
 // Action items
 $modus-list-item-bg: var(--modus-list-item-bg, #fff) !default;
