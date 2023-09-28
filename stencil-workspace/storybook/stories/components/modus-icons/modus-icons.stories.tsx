@@ -36,6 +36,7 @@ const iconNames = [
   'info-outline',
   'menu',
   'moon',
+  'pencil',
   'notifications',
   'refresh',
   'remove',
