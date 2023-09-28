@@ -95,7 +95,6 @@
     &.error,
     &.valid {
       border-bottom-width: $rem-2px;
-      height: 1.9375rem; // Counteract bottom border width.
     }
 
     &:focus-within {
@@ -128,18 +127,15 @@
       input {
         font-size: $rem-14px;
       }
-
-      &:focus-within,
-      &.error,
-      &.valid {
-        height: 2.9375rem; // Counteract bottom border width.
-      }
     }
   }
 
   .sub-text {
     font-size: $rem-11px;
-    margin-top: $rem-4px;
+
+    &:has(label) {
+      margin-top: $rem-4px;
+    }
 
     .helper {
       color: $modus-input-label-color;

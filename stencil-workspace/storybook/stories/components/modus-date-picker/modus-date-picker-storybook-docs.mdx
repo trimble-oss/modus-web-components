@@ -38,9 +38,12 @@ Default validation can also be disabled and use the props `errorText`, `invalid`
 
 A custom date format can be set using the prop `format` as shown in the example. The displayed date format will differ from the actual `value` because the `value` is always parsed to ISO8601 'yyyy-mm-dd'.
 
+If you want to support a few alternative date formats then you can set the prop `alt-formats` with a few formats separated by a `|` symbol separator. If you input a valid date for any of the alternative formats then it will be accepted by the component and converted to the main format specified in the `format` prop.
+
 <modus-date-input label="Formatted date"
   helper-text="yyyy-mm"
   format="yyyy-mm"
+  alt-formats="yyyy mmm|yy.mm"
   value="2022-12-22"></modus-date-input>
 
 ```html
@@ -49,6 +52,7 @@ A custom date format can be set using the prop `format` as shown in the example.
   helper-text="yyyy-mm"
   allowed-chars-regex="[\d-]"
   format="yyyy-mm"
+  alt-formats="yyyy mmm|yy.mm"
   value="2022-12-22"></modus-date-input>
 ```
 
