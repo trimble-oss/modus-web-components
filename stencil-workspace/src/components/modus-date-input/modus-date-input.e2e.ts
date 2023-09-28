@@ -263,4 +263,26 @@ describe('modus-date-input', () => {
     const errorText = await page.find('modus-date-input >>> .sub-text > label');
     expect(errorText.innerHTML).toEqual('Invalid date');
   });
+
+  it('converts date of alternative format to the main one', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-date-input
+        format="mmm d, yyyy"
+        show-calendar-icon="true"
+        alt-formats="mm-dd-yy"></modus-date-input>`);
+    await page.waitForChanges();
+
+    const input = await page.find('modus-date-input >>> input');
+
+    await input.type('01-03-23', { delay: 20 });
+    await page.waitForChanges();
+
+    const calendar = await page.find('modus-date-input >>> .icon-calendar');
+    await calendar.click();
+    await page.waitForChanges();
+
+    expect(await input.getProperty('value')).toEqual('Jan 3, 2023');
+  });
 });

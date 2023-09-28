@@ -1,9 +1,9 @@
 // Default theme colors
 $btn-theme-colors: (
-  'primary': map-get($theme-colors, 'primary'),
-  'secondary': map-get($theme-colors, 'secondary'),
-  'tertiary': map-get($theme-colors, 'tertiary'),
-  'danger': map-get($theme-colors, 'danger'),
+  'primary': #0063a3,
+  'secondary': #6a6e79,
+  'tertiary': #cbcdd6,
+  'danger': #da212c,
 );
 $btn-hover-colors: (
   'primary': #0082d6,
@@ -20,7 +20,7 @@ $btn-active-colors: (
 
 // Default Outline
 $btn-outline-theme-colors: (
-  'primary': map-get($theme-colors, 'primary'),
+  'primary': #0063a3,
   'secondary': $col_trimble_gray,
 );
 $btn-outline-hover: (
@@ -46,7 +46,7 @@ $btn-outline-active: (
 
 // Default Borderless
 $modus-btn-borderless-bg: var(--modus-btn-text-primary-bg, transparent) !default;
-$modus-btn-borderless-color: var(--modus-btn-text-primary-color, map-get($theme-colors, 'primary')) !default;
+$modus-btn-borderless-color: var(--modus-btn-text-primary-color, #0063a3) !default;
 
 // Hover
 $btn-borderless-hover: (
@@ -87,7 +87,7 @@ $modus-btn-disabled-border-color: var(--modus-btn-disabled-border-color) !defaul
 
 // Default Icon-only
 $btn-icon-only-theme-colors: (
-  'primary': map-get($theme-colors, 'primary'),
+  'primary': #0063a3,
   'secondary': $col_trimble_gray,
   'tertiary': $col_gray_6,
 );
