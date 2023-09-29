@@ -203,7 +203,7 @@ export class ModusDataTable {
         <colgroup>
           {this.selectionOptions.canSelect && this.selectionOptions.checkboxSelection && <col style={{ width: '34px' }} />}
           {(this.columns as TColumn[])?.map((column: TColumn) => <col style={{ width: column.width }} />)}
-          {!!this.rowActions.length && <col style={{ width: '34px' }} />}
+          {!!this.rowActions?.length && <col style={{ width: '34px' }} />}
         </colgroup>
         <thead>
           <tr>
@@ -225,7 +225,7 @@ export class ModusDataTable {
                 sortState={this.sortState}
               />
             ))}
-            {!!this.rowActions.length && <th />}
+            {!!this.rowActions?.length && <th />}
           </tr>
         </thead>
         <tbody>
@@ -253,7 +253,7 @@ export class ModusDataTable {
                   {!row[column.id]?._type && row[column.id]?.toString()}
                 </td>
               ))}
-              {!!this.rowActions.length && (
+              {!!this.rowActions?.length && (
                 <td
                   class={`align-center ${row._selected ? 'selected' : ''}`}
                   onClick={(e) => e.stopPropagation()}

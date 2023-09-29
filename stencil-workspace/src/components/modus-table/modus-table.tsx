@@ -536,9 +536,9 @@ export class ModusTable {
 
   renderTableBody(multipleRowSelection: boolean): JSX.Element | null {
     let maximumNumberOfActions = 4;
-    if (this.overflowMenuActions.length > 0) maximumNumberOfActions -= 1;
+    if (this.overflowMenuActions?.length > 0) maximumNumberOfActions -= 1;
     if (this.rowsExpandable) maximumNumberOfActions -= 1;
-    const rowActions = this.rowActions.slice(0, maximumNumberOfActions);
+    const rowActions = this.rowActions?.slice(0, maximumNumberOfActions);
     return (
       <tbody>
         {this.table.getRowModel()?.rows.map((row) => {
@@ -562,7 +562,7 @@ export class ModusTable {
                     rowsExpandable={this.rowsExpandable}
                     frozenColumns={this.frozenColumns}
                     isChecked={isChecked}
-                    showOverflowMenu={this.overflowMenuActions.length > 0}
+                    showOverflowMenu={this.overflowMenuActions?.length > 0}
                     onLinkClick={(link: ModusTableCellLink) => this.cellLinkClick.emit(link)}
                     rowActions={rowActions}
                     rowActionClick={(actionId: string, rowId: string) => this.rowActionClick.emit({ actionId, rowId })}

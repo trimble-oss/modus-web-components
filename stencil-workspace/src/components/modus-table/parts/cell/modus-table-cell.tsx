@@ -40,7 +40,7 @@ export const ModusTableCell: FunctionalComponent<ModusTableCellProps> = ({
   let iconsWidth = 0;
   if (cellIndex == 0) {
     if (showOverflowMenu) iconsWidth += 24;
-    iconsWidth += 24 * rowActions.length;
+    iconsWidth += 24 * rowActions?.length;
   }
   return (
     <td
@@ -65,7 +65,7 @@ export const ModusTableCell: FunctionalComponent<ModusTableCellProps> = ({
           cellIndex == 0 && (
             <div class="row-menu" style={{ width: `${iconsWidth}px`, paddingRight: '4px' }}>   
               <ModusTableRowActions
-                actions={rowActions.filter((action) => !row.original["_excludedActions"]?.includes(action._id))}
+                actions={rowActions?.filter((action) => !row.original["_excludedActions"]?.includes(action._id))}
                 onRowActionClick={rowActionClick}
                 rowId={row.id}
                 showOverflowMenu={showOverflowMenu}

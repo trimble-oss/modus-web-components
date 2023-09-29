@@ -15,7 +15,7 @@ interface Props {
 export const ModusTableRowActions: FunctionalComponent<Props> = (props: Props) => {
   return (
     <Fragment>
-      {typeof props.onRowActionClick == 'function' &&
+      {typeof props.onRowActionClick == 'function' && props.actions?.length > 0 &&
         props.actions.map((action) => (
           <div
             class={`row-action ${props.isChecked ? 'row-selected' : ''}`}
@@ -23,13 +23,13 @@ export const ModusTableRowActions: FunctionalComponent<Props> = (props: Props) =
             <IconMap icon={action.display.icon} size="16" /> 
           </div>
         ))}
-      {props.showOverflowMenu && (
+      {props.showOverflowMenu && typeof props.onRowActionClick == 'function' && 
         <div
           class={`row-action overflow-menu ${props.isChecked ? 'row-selected' : ''}`}
           onClick={(e) => props.overFlowMenuClick(e.x, e.y)}>
           <IconMap icon="vertical-ellipsis" size="24" />
         </div>
-      )}
+      }
     </Fragment>
   );
 };
