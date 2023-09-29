@@ -9,6 +9,7 @@ import { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-a
 import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 import { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
+import { ModusModalButtons } from "./components/modus-modal/modus-modal";
 import { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
@@ -23,6 +24,7 @@ export { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-a
 export { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 export { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 export { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
+export { ModusModalButtons } from "./components/modus-modal/modus-modal";
 export { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 export { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
 export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
@@ -569,6 +571,10 @@ export namespace Components {
          */
         "backdrop": 'default' | 'static';
         /**
+          * The modal button to render.
+         */
+        "buttons": ModusModalButtons;
+        /**
           * Closes the Modal
          */
         "close": () => Promise<void>;
@@ -580,30 +586,6 @@ export namespace Components {
           * Opens the Modal
          */
         "open": () => Promise<void>;
-        /**
-          * (optional) The modal's primary button aria-label.
-         */
-        "primaryButtonAriaLabel": string | null;
-        /**
-          * (optional) Disable primary button.
-         */
-        "primaryButtonDisabled": boolean;
-        /**
-          * (optional) The modal's primary button text.
-         */
-        "primaryButtonText": string;
-        /**
-          * (optional) The modal's secondary button aria-label.
-         */
-        "secondaryButtonAriaLabel": string | null;
-        /**
-          * (optional) Disable secondary button.
-         */
-        "secondaryButtonDisabled": boolean;
-        /**
-          * (optional) The modal's secondary button text.
-         */
-        "secondaryButtonText": string;
         /**
           * (optional) The modal's z-index.
          */
@@ -2454,6 +2436,10 @@ declare namespace LocalJSX {
          */
         "backdrop"?: 'default' | 'static';
         /**
+          * The modal button to render.
+         */
+        "buttons"?: ModusModalButtons;
+        /**
           * (optional) The modal's primary button text.
          */
         "headerText"?: string;
@@ -2466,6 +2452,10 @@ declare namespace LocalJSX {
          */
         "onOpened"?: (event: ModusModalCustomEvent<any>) => void;
         /**
+          * An event that fires on outline button click.
+         */
+        "onOutlineButtonClick"?: (event: ModusModalCustomEvent<any>) => void;
+        /**
           * An event that fires on primary button click.
          */
         "onPrimaryButtonClick"?: (event: ModusModalCustomEvent<any>) => void;
@@ -2473,30 +2463,6 @@ declare namespace LocalJSX {
           * An event that fires on secondary button click.
          */
         "onSecondaryButtonClick"?: (event: ModusModalCustomEvent<any>) => void;
-        /**
-          * (optional) The modal's primary button aria-label.
-         */
-        "primaryButtonAriaLabel"?: string | null;
-        /**
-          * (optional) Disable primary button.
-         */
-        "primaryButtonDisabled"?: boolean;
-        /**
-          * (optional) The modal's primary button text.
-         */
-        "primaryButtonText"?: string;
-        /**
-          * (optional) The modal's secondary button aria-label.
-         */
-        "secondaryButtonAriaLabel"?: string | null;
-        /**
-          * (optional) Disable secondary button.
-         */
-        "secondaryButtonDisabled"?: boolean;
-        /**
-          * (optional) The modal's secondary button text.
-         */
-        "secondaryButtonText"?: string;
         /**
           * (optional) The modal's z-index.
          */

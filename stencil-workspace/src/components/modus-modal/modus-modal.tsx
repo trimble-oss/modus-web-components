@@ -2,19 +2,18 @@
 import { Component, Element, Event, EventEmitter, h, JSX, Listen, Method, Prop, State } from '@stencil/core';
 import { IconClose } from '../icons/icon-close';
 import { FocusWrap, ModalFocusWrapping } from './modal-focus-wrapping';
-export interface ModusModalButtons{
-  primary?:ModusModalButton;
-  secondary ?:ModusModalButton;
-  outline ?:ModusModalButton;
-
+export interface ModusModalButtons {
+  primary?: ModusModalButton;
+  secondary?: ModusModalButton;
+  outline?: ModusModalButton;
 }
-interface ModusModalButton{
+interface ModusModalButton {
   /** (optional) The modal's  button text. */
-  text ?: string;
+  text?: string;
   /** (optional) The modal's  button aria-label. */
-  ariaLabel?:string;
+  ariaLabel?: string;
   /** (optional) Disable  button. */
-  disabled?:boolean;
+  disabled?: boolean;
 }
 
 @Component({
@@ -183,7 +182,7 @@ export class ModusModal {
             {this.buttons.outline.text}
           </modus-button>
         )}
-        {this.buttons && this.buttons.secondary  && (
+        {this.buttons && this.buttons.secondary && (
           <modus-button
             disabled={this.buttons.secondary.disabled}
             color="secondary"

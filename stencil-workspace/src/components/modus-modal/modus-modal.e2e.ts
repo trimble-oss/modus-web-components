@@ -1,5 +1,5 @@
-import {newE2EPage} from '@stencil/core/testing';
-import {ModusModalButtons} from './modus-modal';
+import { newE2EPage } from '@stencil/core/testing';
+import { ModusModalButtons } from './modus-modal';
 
 describe('modus-modal', () => {
   it('renders', async () => {
@@ -30,8 +30,8 @@ describe('modus-modal', () => {
     let buttons: ModusModalButtons = {
       primary: {
         text: 'Primary Text',
-        ariaLabel: 'Primary Text'
-      }
+        ariaLabel: 'Primary Text',
+      },
     };
     await page.waitForChanges();
     component.setProperty('buttons', buttons);
@@ -48,8 +48,8 @@ describe('modus-modal', () => {
     let buttons: ModusModalButtons = {
       secondary: {
         text: 'Secondary Text',
-        ariaLabel: 'Secondary Text'
-      }
+        ariaLabel: 'Secondary Text',
+      },
     };
     await page.waitForChanges();
     component.setProperty('buttons', buttons);
@@ -66,8 +66,8 @@ describe('modus-modal', () => {
     let buttons: ModusModalButtons = {
       secondary: {
         text: 'Outline Text',
-        ariaLabel: 'Outline Text'
-      }
+        ariaLabel: 'Outline Text',
+      },
     };
     await page.waitForChanges();
     component.setProperty('buttons', buttons);
@@ -84,8 +84,8 @@ describe('modus-modal', () => {
       primary: {
         text: 'Primary Text',
         ariaLabel: 'Primary Text',
-        disabled: true
-      }
+        disabled: true,
+      },
     };
     await page.waitForChanges();
     component.setProperty('button', button);
@@ -102,8 +102,8 @@ describe('modus-modal', () => {
       secondary: {
         text: 'secondary',
         ariaLabel: 'secondary',
-        disabled: true
-      }
+        disabled: true,
+      },
     };
     await page.waitForChanges();
     component.setProperty('button', button);
@@ -120,8 +120,8 @@ describe('modus-modal', () => {
       secondary: {
         text: 'Outline Text',
         ariaLabel: 'Outline Text',
-        disabled: true
-      }
+        disabled: true,
+      },
     };
     await page.waitForChanges();
     component.setProperty('button', button);
@@ -147,8 +147,8 @@ describe('modus-modal', () => {
     let button: ModusModalButtons = {
       primary: {
         text: 'primary',
-        ariaLabel: 'primary'
-      }
+        ariaLabel: 'primary',
+      },
     };
     modal.setProperty('button', button);
     await page.waitForChanges();
@@ -185,8 +185,8 @@ describe('modus-modal', () => {
       primary: {
         text: 'primary',
         ariaLabel: 'primary',
-        disabled: true
-      }
+        disabled: true,
+      },
     };
     await page.waitForChanges();
     modal.setProperty('button', button);
@@ -211,8 +211,8 @@ describe('modus-modal', () => {
       secondary: {
         text: 'secondary',
         ariaLabel: 'secondary',
-        disabled: true
-      }
+        disabled: true,
+      },
     };
     await page.waitForChanges();
     modal.setProperty('button', button);
@@ -249,8 +249,8 @@ describe('modus-modal', () => {
       secondary: {
         text: 'Outline Text',
         ariaLabel: 'outline Text',
-        disabled: true
-      }
+        disabled: true,
+      },
     };
     await page.waitForChanges();
     modal.setProperty('button', button);
@@ -288,7 +288,7 @@ describe('modus-modal', () => {
     // Was having trouble finding the modal's overlay, so click it through evaluate().
     await page.evaluate(() => {
       const overlay = document.querySelector('modus-modal').shadowRoot.querySelector('.overlay');
-      overlay.scrollIntoView({block: 'center', inline: 'center'});
+      overlay.scrollIntoView({ block: 'center', inline: 'center' });
       (overlay as HTMLElement).click();
     });
 
@@ -306,7 +306,7 @@ describe('modus-modal', () => {
     // Was having trouble finding the modal's overlay, so click it through evaluate().
     await page.evaluate(() => {
       const overlay = document.querySelector('modus-modal').shadowRoot.querySelector('.overlay');
-      overlay.scrollIntoView({block: 'center', inline: 'center'});
+      overlay.scrollIntoView({ block: 'center', inline: 'center' });
       (overlay as HTMLElement).click();
     });
 
@@ -324,7 +324,7 @@ describe('modus-modal', () => {
     // Was having trouble finding the modal's overlay, so click it through evaluate().
     await page.evaluate(() => {
       const overlay = document.querySelector('modus-modal').shadowRoot.querySelector('.overlay');
-      overlay.scrollIntoView({block: 'center', inline: 'center'});
+      overlay.scrollIntoView({ block: 'center', inline: 'center' });
       (overlay as HTMLElement).click();
     });
 
@@ -342,7 +342,7 @@ describe('modus-modal', () => {
 
     const backgroundColor = await page.evaluate(async (): Promise<string> => {
       const overlay = document.querySelector('modus-modal').shadowRoot.querySelector('.overlay');
-      overlay.scrollIntoView({block: 'center', inline: 'center'});
+      overlay.scrollIntoView({ block: 'center', inline: 'center' });
 
       const styles = window.getComputedStyle(overlay);
       return styles.backgroundColor;
