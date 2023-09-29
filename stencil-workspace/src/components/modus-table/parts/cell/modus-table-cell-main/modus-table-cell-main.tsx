@@ -1,6 +1,9 @@
-import { Element, State, Watch } from '@stencil/core';
-import { Host } from '@stencil/core';
 import {
+  JSX,
+  Host,
+  Element,
+  State,
+  Watch,
   Component,
   Prop,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
@@ -21,8 +24,7 @@ import {
   COLUMN_DEF_DATATYPE_LINK,
 } from '../../../modus-table.constants';
 import ModusTableCellExpandIcons from '../modus-table-cell-expand-icons';
-import NavigateCell from '../../../utilities/table-cell-navigation.utitlity';
-import { JSX } from '@stencil/core/internal';
+import NavigateCell from '../../../utilities/table-cell-navigation.utility';
 import { CellFormatter } from '../../../utilities/table-cell-formatter.utility';
 import { ModusTableCellLinkElement } from '../modus-table-cell-link-element';
 import RowActions from '../../../models/row-actions.model';
@@ -52,7 +54,7 @@ export class ModusTableCellMain {
   readonly cellEditableKey = 'cellEditable';
   readonly accessorKey = 'accessorKey';
 
-  componentDidLoad() {
+  connectedCallback() {
     this.cellEl = this.el.parentElement;
     this.cellEl.addEventListener('click', this.onClick);
     this.cellEl.addEventListener('keydown', this.onKeyDown);

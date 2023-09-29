@@ -5,30 +5,40 @@
 <!-- Auto Generated Below -->
 
 
-## Overview
-
-ModusFillerColumn is to fill empty space within a table or grid when the content in other columns is not wide enough to occupy the entire available width
-
 ## Properties
 
-| Property         | Attribute         | Description | Type               | Default     |
-| ---------------- | ----------------- | ----------- | ------------------ | ----------- |
-| `cellBorderless` | `cell-borderless` |             | `boolean`          | `undefined` |
-| `summaryRow`     | `summary-row`     |             | `boolean`          | `undefined` |
-| `targetTable`    | --                |             | `HTMLTableElement` | `undefined` |
+| Property      | Attribute    | Description | Type                                          | Default     |
+| ------------- | ------------ | ----------- | --------------------------------------------- | ----------- |
+| `cell`        | --           |             | `Cell<unknown, unknown>`                      | `undefined` |
+| `cellIndex`   | `cell-index` |             | `number`                                      | `undefined` |
+| `linkClick`   | --           |             | `(link: ModusTableCellLink) => void`          | `undefined` |
+| `rowActions`  | --           |             | `RowActions`                                  | `undefined` |
+| `valueChange` | --           |             | `(props: ModusTableDataUpdaterProps) => void` | `undefined` |
 
 
 ## Dependencies
 
 ### Used by
 
- - [modus-table](../..)
+ - [modus-table](../../..)
+
+### Depends on
+
+- [modus-table-cell-editor](../modus-table-cell-editor)
 
 ### Graph
 ```mermaid
 graph TD;
-  modus-table --> modus-table-filler-column
-  style modus-table-filler-column fill:#f9f,stroke:#333,stroke-width:4px
+  modus-table-cell-main --> modus-table-cell-editor
+  modus-table-cell-editor --> modus-number-input
+  modus-table-cell-editor --> modus-text-input
+  modus-table-cell-editor --> modus-select
+  modus-table-cell-editor --> modus-date-picker
+  modus-table-cell-editor --> modus-date-input
+  modus-table-cell-editor --> modus-autocomplete
+  modus-autocomplete --> modus-text-input
+  modus-table --> modus-table-cell-main
+  style modus-table-cell-main fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

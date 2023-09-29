@@ -202,8 +202,8 @@ table {
         border-top: $rem-1px $modus-table-border-color solid;
 
         &.edit-mode {
-          box-sizing: border-box;
           border: $rem-2px $modus-table-cell-border-color solid;
+          box-sizing: border-box;
           padding: 0;
 
           div {

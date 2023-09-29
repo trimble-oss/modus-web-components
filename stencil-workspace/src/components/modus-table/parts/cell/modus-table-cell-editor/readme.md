@@ -5,30 +5,43 @@
 <!-- Auto Generated Below -->
 
 
-## Overview
-
-ModusFillerColumn is to fill empty space within a table or grid when the content in other columns is not wide enough to occupy the entire available width
-
 ## Properties
 
-| Property         | Attribute         | Description | Type               | Default     |
-| ---------------- | ----------------- | ----------- | ------------------ | ----------- |
-| `cellBorderless` | `cell-borderless` |             | `boolean`          | `undefined` |
-| `summaryRow`     | `summary-row`     |             | `boolean`          | `undefined` |
-| `targetTable`    | --                |             | `HTMLTableElement` | `undefined` |
+| Property       | Attribute | Description | Type                                             | Default     |
+| -------------- | --------- | ----------- | ------------------------------------------------ | ----------- |
+| `args`         | --        |             | `{ format: string; } \| { options: unknown[]; }` | `undefined` |
+| `type`         | `type`    |             | `string`                                         | `undefined` |
+| `value`        | `value`   |             | `string`                                         | `undefined` |
+| `valueEntered` | --        |             | `(newValue: string, oldValue: string) => void`   | `undefined` |
 
 
 ## Dependencies
 
 ### Used by
 
- - [modus-table](../..)
+ - [modus-table-cell-main](../modus-table-cell-main)
+
+### Depends on
+
+- [modus-number-input](../../../../modus-number-input)
+- [modus-text-input](../../../../modus-text-input)
+- [modus-select](../../../../modus-select)
+- [modus-date-picker](../../../../modus-date-picker)
+- [modus-date-input](../../../../modus-date-input)
+- [modus-autocomplete](../../../../modus-autocomplete)
 
 ### Graph
 ```mermaid
 graph TD;
-  modus-table --> modus-table-filler-column
-  style modus-table-filler-column fill:#f9f,stroke:#333,stroke-width:4px
+  modus-table-cell-editor --> modus-number-input
+  modus-table-cell-editor --> modus-text-input
+  modus-table-cell-editor --> modus-select
+  modus-table-cell-editor --> modus-date-picker
+  modus-table-cell-editor --> modus-date-input
+  modus-table-cell-editor --> modus-autocomplete
+  modus-autocomplete --> modus-text-input
+  modus-table-cell-main --> modus-table-cell-editor
+  style modus-table-cell-editor fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

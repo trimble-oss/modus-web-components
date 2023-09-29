@@ -820,7 +820,8 @@ export declare interface ModusNavbarSearchOverlay extends Components.ModusNavbar
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'disabled', 'errorText', 'helperText', 'label', 'maxValue', 'minValue', 'placeholder', 'readOnly', 'required', 'size', 'step', 'textAlign', 'validText', 'value']
+  inputs: ['ariaLabel', 'disabled', 'errorText', 'helperText', 'label', 'maxValue', 'minValue', 'placeholder', 'readOnly', 'required', 'size', 'step', 'textAlign', 'validText', 'value'],
+  methods: ['focusInput']
 })
 @Component({
   selector: 'modus-number-input',
@@ -926,7 +927,8 @@ export declare interface ModusRadioGroup extends Components.ModusRadioGroup {
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'disabled', 'errorText', 'helperText', 'label', 'options', 'optionsDisplayProp', 'required', 'size', 'validText', 'value']
+  inputs: ['ariaLabel', 'disabled', 'errorText', 'helperText', 'label', 'options', 'optionsDisplayProp', 'required', 'size', 'validText', 'value'],
+  methods: ['focusInput']
 })
 @Component({
   selector: 'modus-select',
@@ -940,7 +942,7 @@ export class ModusSelect {
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['valueChange']);
+    proxyOutputs(this, this.el, ['valueChange', 'inputBlur']);
   }
 }
 
@@ -950,6 +952,10 @@ export declare interface ModusSelect extends Components.ModusSelect {
    * An event that fires on input value change.
    */
   valueChange: EventEmitter<CustomEvent<unknown>>;
+  /**
+   * An event that fires on input blur.
+   */
+  inputBlur: EventEmitter<CustomEvent<FocusEvent>>;
 }
 
 
@@ -1166,6 +1172,50 @@ export declare interface ModusTable extends Components.ModusTable {
 
 
 @ProxyCmp({
+  inputs: ['args', 'type', 'value', 'valueEntered']
+})
+@Component({
+  selector: 'modus-table-cell-editor',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['args', 'type', 'value', 'valueEntered'],
+})
+export class ModusTableCellEditor {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
+export declare interface ModusTableCellEditor extends Components.ModusTableCellEditor {}
+
+
+@ProxyCmp({
+  inputs: ['cell', 'cellIndex', 'linkClick', 'rowActions', 'valueChange']
+})
+@Component({
+  selector: 'modus-table-cell-main',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['cell', 'cellIndex', 'linkClick', 'rowActions', 'valueChange'],
+})
+export class ModusTableCellMain {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
+export declare interface ModusTableCellMain extends Components.ModusTableCellMain {}
+
+
+@ProxyCmp({
   inputs: ['columnsVisibility', 'menuIconContainerRef', 'showDropdown', 'table', 'toggleDropdown']
 })
 @Component({
@@ -1210,14 +1260,14 @@ export declare interface ModusTableDropdownMenu extends Components.ModusTableDro
 
 
 @ProxyCmp({
-  inputs: ['cellBorderless', 'summaryRow', 'targetTable']
+  inputs: ['cellBorderless', 'container', 'summaryRow']
 })
 @Component({
   selector: 'modus-table-filler-column',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['cellBorderless', 'summaryRow', 'targetTable'],
+  inputs: ['cellBorderless', 'container', 'summaryRow'],
 })
 export class ModusTableFillerColumn {
   protected el: HTMLElement;

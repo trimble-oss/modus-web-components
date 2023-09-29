@@ -3,7 +3,7 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Row } from '@tanstack/table-core';
-import NavigateCell from '../../utilities/table-cell-navigation.utitlity';
+import NavigateCell from '../../utilities/table-cell-navigation.utility';
 
 interface ModusTableCellCheckboxProps {
   rowSelection: boolean;

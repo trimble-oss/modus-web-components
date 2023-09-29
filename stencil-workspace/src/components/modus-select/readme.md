@@ -24,9 +24,30 @@
 
 ## Events
 
-| Event         | Description                                | Type                   |
-| ------------- | ------------------------------------------ | ---------------------- |
-| `valueChange` | An event that fires on input value change. | `CustomEvent<unknown>` |
+| Event         | Description                                | Type                      |
+| ------------- | ------------------------------------------ | ------------------------- |
+| `inputBlur`   | An event that fires on input blur.         | `CustomEvent<FocusEvent>` |
+| `valueChange` | An event that fires on input value change. | `CustomEvent<unknown>`    |
+
+
+## Methods
+
+### `focusInput() => Promise<void>`
+
+Focus the input.
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+
+## Shadow Parts
+
+| Part      | Description |
+| --------- | ----------- |
+| `"input"` |             |
 
 
 ## Dependencies
@@ -34,11 +55,13 @@
 ### Used by
 
  - [modus-table](../modus-table)
+ - [modus-table-cell-editor](../modus-table/parts/cell/modus-table-cell-editor)
 
 ### Graph
 ```mermaid
 graph TD;
   modus-table --> modus-select
+  modus-table-cell-editor --> modus-select
   style modus-select fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

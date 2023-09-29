@@ -91,6 +91,7 @@ const DefaultColumns = [
     size: 150,
     minSize: 80,
     footer: 'Total',
+    cellEditable:true,
   },
   {
     header: 'Last Name',
@@ -99,6 +100,7 @@ const DefaultColumns = [
     dataType: 'text',
     size: 150,
     minSize: 80,
+    cellEditable:true,
   },
   {
     header: 'Age',
@@ -107,6 +109,7 @@ const DefaultColumns = [
     dataType: 'integer',
     size: 80,
     minSize: 60,
+    cellEditable:true,
   },
   {
     header: 'Visits',
@@ -116,6 +119,7 @@ const DefaultColumns = [
     maxSize: 80,
     showTotal: true,
     minSize: 80,
+    cellEditable:true,
   },
   {
     header: 'Email',
@@ -131,6 +135,15 @@ const DefaultColumns = [
     id: 'status',
     dataType: 'text',
     minSize: 80,
+    cellEditable:true,
+    cellEditorType: 'dropdown',
+    cellEditorArgs: {
+      options:[
+      { display: 'Verified' },
+      { display: 'Pending' },
+      { display: 'Rejected' },
+      ]
+    },
   },
   {
     header: 'Profile Progress',
@@ -138,6 +151,7 @@ const DefaultColumns = [
     id: 'progress',
     dataType: 'integer',
     minSize: 100,
+    cellEditable:true,
   },
   {
     header: 'Created At',
@@ -349,7 +363,7 @@ export default {
 
   parameters: {
     actions: {
-      handles: ['sortChange', 'cellLinkClick', 'rowSelectionChange'],
+      handles: ['cellLinkClick', 'columnOrderChange', 'columnSizingChange', 'columnVisibilityChange', 'paginationChange', 'rowExpanded', 'rowSelectionChange', 'rowUpdated', 'sortChange'],
     },
     controls: { expanded: true, sort: 'requiredFirst' },
     docs: {

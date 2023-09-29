@@ -382,12 +382,35 @@ To select rows, users can use the checkbox provided on each row. Normally, the M
 ### Types
 
 ```ts
-interface interface ModusTableColumn {
+type ModusTableRowData = RowData;
+type ModusTableSortingState = SortingState;
+type ModusTableExpandedState = ExpandedState;
+type ModusTablePaginationState = PaginationState;
+type ModusTableColumnSizingState = ColumnSizingState;
+type ModusTableColumnVisibilityState = VisibilityState;
+type ModusTableColumnOrderState = ColumnOrderState;
+type ModusTableCellData = CellContext<unknown, unknown>;
+type ModusTableColumnDataType =
+  | typeof COLUMN_DEF_DATATYPE_TEXT
+  | typeof COLUMN_DEF_DATATYPE_INTEGER
+  | typeof COLUMN_DEF_DATATYPE_LINK;
+type ModusTableCellEditorType = typeof CELL_EDIT_TYPE_DROPDOWN;
+type ModusTableCellDateEditorArgs = { format: string };
+type ModusTableCellDropdownEditorArgs = { options: unknown[] };
+type ModusTableCellEditorArgs = ModusTableCellDropdownEditorArgs | ModusTableCellDateEditorArgs;
+type ModusTableDataUpdaterProps = { rowId: string; accessorKey: string; newValue: string; oldValue?: string };
+type ModusTableSortingFunction<TData extends RowData> = SortingFnOption<TData> | 'sortForHyperlink';
+
+interface ModusTableRowSelectionOptions {
+  multiple?: boolean;
+  subRowSelection?: boolean;
+}
+interface ModusTableColumn<TData extends RowData, TValue = unknown> {
   header: string;
   accessorKey: string;
   dataType: ModusTableColumnDataType;
   id?: string;
-  cell?: ColumnDefTemplate;
+  cell?: ColumnDefTemplate<ModusTableCellData>;
   footer?: string;
   enableSorting?: boolean;
   enableResizing?: boolean;
@@ -395,14 +418,16 @@ interface interface ModusTableColumn {
   minSize?: number;
   maxSize?: number;
   showTotal?: boolean;
-  subRows?: ModusTableColumn[];
-  sortingFn?: SortingFnOption;
+  subRows?: ModusTableColumn<TData, TValue>[];
+  sortingFn?: ModusTableSortingFunction<TData>;
+  cellEditable?: boolean;
+  cellEditorType?: ModusTableCellEditorType;
+  cellEditorArgs?: ModusTableCellEditorArgs;
 }
 
-interface ModusTableCellLink {
-  display: string;
-  url: string;
-  _type?: ModusTableColumnDataType.Link // Is used to override the column data type.
+interface ModusTableDisplayOptions {
+  borderless?: boolean;
+  cellBorderless?: boolean;
 }
 
 interface ModusTableToolbarOptions {
@@ -414,15 +439,10 @@ interface ModusTableColumnsVisibilityOptions {
   requiredColumns?: string[];
 }
 
-interface ModusTableDisplayOptions {
-  borderless?: boolean;
-  cellBorderless?: boolean;
-}
-
-enum ModusTableColumnDataType {
-  Text = 'text',
-  Integer = 'integer',
-  Link = 'link',
+interface ModusTableCellLink {
+  display: string;
+  url: string;
+  _type?: typeof COLUMN_DEF_DATATYPE_LINK;
 }
 
 ```
@@ -465,11 +485,17 @@ Users can use keyboard navigation to perform different actions.
 
 ### Events
 
-| Event                | Description                                | Type                              |
-| -------------------- | ------------------------------------------ | --------------------------------- |
-| `cellLinkClick`      | Emits the link that was clicked            | `CustomEvent<ModusTableCellLink>` |
-| `rowSelectionChange` | Event details contains the row(s) selected | `CustomEvent<unknown>`            |
-| `sortChange`         | Emits event on sort change                 | `CustomEvent<ColumnSort[]>`       |
+| Event                    | Description                           | Type                                                |
+| ------------------------ | ------------------------------------- | --------------------------------------------------- |
+| `cellLinkClick`          | Emits the link that was clicked       | `CustomEvent<ModusTableCellLink>`                   |
+| `columnOrderChange`      | Emits columns in the updated order    | `CustomEvent<string[]>`                             |
+| `columnSizingChange`     | Emits latest column size              | `CustomEvent<{ [x: string]: number; }>`             |
+| `columnVisibilityChange` | Emits visibility state of each column | `CustomEvent<{ [x: string]: boolean; }>`            |
+| `paginationChange`       | Emits selected page index and size    | `CustomEvent<PaginationState>`                      |
+| `rowExpanded`            | Emits expanded state of the columns   | `CustomEvent<boolean \| { [x: string]: boolean; }>` |
+| `rowSelectionChange`     | Emits rows selected                   | `CustomEvent<unknown>`                              |
+| `rowUpdated`             | Emits edited row data                 | `CustomEvent<unknown>`                              |
+| `sortChange`             | Emits column sort order               | `CustomEvent<ColumnSort[]>`                         |
 
 ### Slot
 

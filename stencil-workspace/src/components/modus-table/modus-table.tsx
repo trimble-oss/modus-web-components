@@ -8,6 +8,9 @@ import {
   Prop,
   State,
   Watch,
+  Element,
+  Fragment,
+  JSX,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import {
@@ -57,7 +60,6 @@ import { ModusTableColumnDropIndicator, ModusTableColumnDragItem } from './parts
 import { ModusTablePagination } from './parts/modus-table-pagination';
 import { ModusTableFooter } from './parts/modus-table-footer';
 import { TableHeaderDragDrop } from './utilities/table-header-drag-drop.utility';
-import { Element, Fragment, JSX } from '@stencil/core/internal';
 import ModusTableCore from './modus-table.core';
 import ModusTableState from './models/modus-table-state.model';
 import { ModusTableHeader } from './parts/modus-table-header';
@@ -230,6 +232,48 @@ export class ModusTable {
   private onKeyDown = (event: KeyboardEvent) => this.handleKeyDown(event);
   private onMouseUp = () => this.handleDrop();
 
+  componentWillLoad(): void {
+    this.setTableState({ columnOrder: this.columns?.map((column) => column.id as string) });
+    this.onRowsExpandableChange();
+    this.initializeTable();
+  }
+
+  /**
+   * Returns data of a column.
+   * @param accessorKey : Column name as key.
+   * @returns : Column data as Array or empty array.
+   */
+  @Method()
+  async getColumnData(accessorKey: string): Promise<unknown[]> {
+    const columns: Column<unknown, unknown>[] = this.tableCore.getTableInstance().getAllLeafColumns();
+
+    let rowData: unknown[] = [];
+    for (let i = 0; i < columns.length; i++) {
+      if (columns[i].columnDef['accessorKey'] === accessorKey) {
+        rowData = this.tableCore.getTableInstance().options.data.map((row) => row[accessorKey]);
+        break;
+      }
+    }
+    return rowData;
+  }
+
+  /**
+   * Toggle the table column visibility
+   * @param columnId Column id
+   * @param show Boolean value decides to visibility of column
+   */
+  @Method()
+  async toggleColumnVisibility(columnId: string, show: boolean): Promise<void> {
+    this.tableCore
+      .getTableInstance()
+      .getAllLeafColumns()
+      .forEach((column) => {
+        if (column.id === columnId) {
+          column.toggleVisibility(show);
+        }
+      });
+  }
+
   @Listen('click', { target: 'document' })
   documentClickHandler(event: MouseEvent): void {
     if (event.defaultPrevented) {
@@ -307,15 +351,14 @@ export class ModusTable {
   handleKeyDown(event: KeyboardEvent): void {
     this.itemDragState = null;
     this.dragAndDropObj.handleKeyDown(event);
-
     this.setTableState({ columnOrder: this.dragAndDropObj.columnOrder });
-
     this.itemDragState = this.dragAndDropObj.itemDragState;
   }
 
   handleDrop(): void {
     this.dragAndDropObj.handleDrop();
     this.setTableState({ columnOrder: this.dragAndDropObj.columnOrder });
+    this.columnOrderChange.emit(this.dragAndDropObj.columnOrder);
     this.itemDragState = null;
   }
 
@@ -325,16 +368,17 @@ export class ModusTable {
       const newData = [...old];
       // rowId is a string of IDs for row with nested information.
       const idArray: number[] = rowId.split('.')?.map((id) => parseInt(id));
-      const rowIndex = idArray[0];
-      newData[rowIndex][accessorKey] = newValue;
+
+      if (idArray.length === 1) {
+        newData[idArray[0]][accessorKey] = newValue;
+      } else if (idArray.length === 2) {
+        newData[idArray[0]]['subRows'][idArray[1]][accessorKey] = newValue;
+      } else if (idArray.length === 3) {
+        newData[idArray[0]]['subRows'][idArray[1]]['subRows'][idArray[2]][accessorKey] = newValue;
+      }
+
       return newData;
     });
-  }
-
-  componentWillLoad(): void {
-    this.setTableState({ columnOrder: this.columns?.map((column) => column.id as string) });
-    this.onRowsExpandableChange();
-    this.initializeTable();
   }
 
   initializeTable(): void {
@@ -361,8 +405,9 @@ export class ModusTable {
       setColumnSizingInfo: (updater: Updater<ColumnSizingInfoState>) => this.updateColumnSizingInfo(updater),
       setColumnVisibility: (updater: Updater<VisibilityState>) =>
         this.updateTableCore(updater, COLUMN_VISIBILITY_STATE_KEY, this.columnVisibilityChange),
-      setColumnOrder: (updater: Updater<ColumnOrderState>) =>
-        this.updateTableCore(updater, COLUMN_ORDER_STATE_KEY, this.columnOrderChange),
+      setColumnOrder: (updater: Updater<ColumnOrderState>) => {
+        this.updateTableCore(updater, COLUMN_ORDER_STATE_KEY);
+      },
     });
   }
 
@@ -401,42 +446,6 @@ export class ModusTable {
   updateColumnSizingInfo(updater: Updater<ColumnSizingInfoState>): void {
     this.updateTableCore(updater, COLUMN_SIZING_INFO_STATE_KEY);
     this.isColumnResizing = !this.tableState.columnSizingInfo.isResizingColumn ? false : true;
-  }
-
-  /**
-   * Returns data of a column.
-   * @param accessorKey : Column name as key.
-   * @returns : Column data as Array or empty array.
-   */
-  @Method()
-  async getColumnData(accessorKey: string): Promise<unknown[]> {
-    const columns: Column<unknown, unknown>[] = this.tableCore.getTableInstance().getAllLeafColumns();
-
-    let rowData: unknown[] = [];
-    for (let i = 0; i < columns.length; i++) {
-      if (columns[i].columnDef['accessorKey'] === accessorKey) {
-        rowData = this.tableCore.getTableInstance().options.data.map((row) => row[accessorKey]);
-        break;
-      }
-    }
-    return rowData;
-  }
-
-  /**
-   * Toggle the table column visibility
-   * @param columnId Column id
-   * @param show Boolean value decides to visibility of column
-   */
-  @Method()
-  async toggleColumnVisibility(columnId: string, show: boolean): Promise<void> {
-    this.tableCore
-      .getTableInstance()
-      .getAllLeafColumns()
-      .forEach((column) => {
-        if (column.id === columnId) {
-          column.toggleVisibility(show);
-        }
-      });
   }
 
   renderToolBar(table: Table<unknown>): JSX.Element | null {
