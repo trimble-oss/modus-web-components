@@ -172,7 +172,7 @@ export class ModusTable {
   /** (Optional) Actions that can be performed on each row. A maximum of 4 icons will be shown, including overflow menu and expand icons. */
   @Prop() rowActions?: ModusTableRowAction[] = [];
   @Watch('rowActions') onChangeOfRowActions() {
-    if (this.rowActions.length > 0) {
+    if (this.rowActions?.length > 0) {
       this.frozenColumns.push(this.columnOrder[0]);
     }
     if (this.toolbarOptions?.columnsVisibility) {
@@ -186,7 +186,7 @@ export class ModusTable {
   /** (Optional) Dropdown menu with actions for each row. */
   @Prop() overflowMenuActions?: ModusTableRowAction[] = [];
   @Watch('overflowMenuActions') onChangeOfOverflowMenuActions() {
-    if (this.overflowMenuActions.length > 0) {
+    if (this.overflowMenuActions?.length > 0) {
       this.frozenColumns.push(this.columnOrder[0]);
     }
     if (this.toolbarOptions?.columnsVisibility) {

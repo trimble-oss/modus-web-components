@@ -478,8 +478,10 @@ Users can use keyboard navigation to perform different actions.
 | `hover`                | `hover`                   | (Optional) To enable row hover in table.                                                                                            | `boolean`                              | `false`                                                   |
 | `maxHeight`            | `max-height`              | (Optional) To display a vertical scrollbar when the height is exceeded.                                                             | `string`                               | `undefined`                                               |
 | `maxWidth`             | `max-width`               | (Optional) To display a horizontal scrollbar when the width is exceeded.                                                            | `string`                               | `undefined`                                               |
+| `overflowMenuActions`  | --                        | (Optional) Dropdown menu with actions for each row.                                                                                 | `ModusTableRowAction[]`                | `[]`                                                      |
 | `pageSizeList`         | --                        |                                                                                                                                     | `number[]`                             | `PAGINATION_DEFAULT_SIZES`                                |
 | `pagination`           | `pagination`              |                                                                                                                                     | `boolean`                              | `undefined`                                               |
+| `rowActions`           | --                        | (Optional) Actions that can be performed on each row. A maximum of 4 icons will be shown, including overflow menu and expand icons. | `ModusTableRowAction[]`                | `[]`                                                      |
 | `rowSelection`         | `row-selection`           | (Optional) To display checkbox.                                                                                                     | `boolean`                              | `false`                                                   |
 | `rowSelectionOptions`  | --                        | (Optional) To control multiple row selection.                                                                                       | `ModusTableRowSelectionOptions`        | `{     multiple: false,     subRowSelection: false,   }`  |
 | `rowsExpandable`       | `rows-expandable`         | (Optional) To display expanded rows.                                                                                                | `boolean`                              | `false`                                                   |
@@ -488,18 +490,16 @@ Users can use keyboard navigation to perform different actions.
 | `summaryRow`           | `summary-row`             | (Optional) To display summary row.                                                                                                  | `boolean`                              | `false`                                                   |
 | `toolbar`              | `toolbar`                 | (Optional) To display a toolbar for the table.                                                                                      | `boolean`                              | `false`                                                   |
 | `toolbarOptions`       | --                        | (Optional) To display a toolbar, which allows access to table operations like hiding columns.                                       | `ModusTableToolbarOptions`             | `null`                                                    |
-| `rowActions`           | --                        | (Optional) Actions that can be performed on each row. A maximum of 4 icons will be shown, including overflow menu and expand icons. | `ModusTableRowAction[]`                | `[]`                                                      |
-| `overflowMenuActions`  | --                        | (Optional) Dropdown menu with actions for each row.                                                                                 | `ModusTableRowAction[]`                | `[]`                                                      |
 
 ### Events
 
 | Event                         | Description                                                 | Type                                         |
 | ----------------------------- | ----------------------------------------------------------- | -------------------------------------------- |
 | `cellLinkClick`               | Emits the link that was clicked                             | `CustomEvent<ModusTableCellLink>`            |
+| `overflowMenuActionClick`     | An event that fires when a overflow menu action is clicked. | `CustomEvent<ModusTableRowActionClickEvent>` |
+| `rowActionClick`              | An event that fires when a row action is clicked.           | `CustomEvent<ModusTableRowActionClickEvent>` |
 | `rowSelectionChange`          | Event details contains the row(s) selected                  | `CustomEvent<unknown>`                       |
 | `sortChange`                  | Emits event on sort change                                  | `CustomEvent<ColumnSort[]>`                  |
-| `rowActionClick`              | An event that fires when a row action is clicked.           | `CustomEvent<ModusTableRowActionClickEvent>` |
-| `overflowMenuActionClick`     | An event that fires when a overflow menu action is clicked. | `CustomEvent<ModusTableRowActionClickEvent>` |
 
 ### Slot
 
