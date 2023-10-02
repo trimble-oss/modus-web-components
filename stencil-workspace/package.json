@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "@stencil/core": "^3.3.0",
-    "@tanstack/table-core": "^8.8.5"
+    "@tanstack/table-core": "^8.10.3"
   },
   "devDependencies": {
     "@stencil/angular-output-target": "^0.7.1",
