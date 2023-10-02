@@ -1,5 +1,6 @@
 import { newE2EPage } from '@stencil/core/testing';
-import { ModusModalButtons } from './modus-modal';
+import {ModusModalButtons} from "./modus-button";
+
 
 describe('modus-modal', () => {
   it('renders', async () => {

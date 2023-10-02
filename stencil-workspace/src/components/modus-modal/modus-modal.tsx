@@ -2,19 +2,7 @@
 import { Component, Element, Event, EventEmitter, h, JSX, Listen, Method, Prop, State } from '@stencil/core';
 import { IconClose } from '../icons/icon-close';
 import { FocusWrap, ModalFocusWrapping } from './modal-focus-wrapping';
-export interface ModusModalButtons {
-  primary?: ModusModalButton;
-  secondary?: ModusModalButton;
-  outline?: ModusModalButton;
-}
-interface ModusModalButton {
-  /** (optional) The modal's  button text. */
-  text?: string;
-  /** (optional) The modal's  button aria-label. */
-  ariaLabel?: string;
-  /** (optional) Disable  button. */
-  disabled?: boolean;
-}
+import {ModusModalButtons} from "./modus-button";
 
 @Component({
   tag: 'modus-modal',
@@ -27,6 +15,9 @@ export class ModusModal {
 
   /** (optional) The modal's aria-label. */
   @Prop() ariaLabel: string | null;
+
+  /** The modal's footer buttons. */
+  @Prop({ mutable: true }) buttons: ModusModalButtons;
 
   /** (optional) The modal's primary button text. */
   @Prop() headerText: string;
@@ -51,9 +42,6 @@ export class ModusModal {
 
   /** An event that fires on outline button click.  */
   @Event() outlineButtonClick: EventEmitter;
-
-  /** The modal button to render. */
-  @Prop({ mutable: true }) buttons: ModusModalButtons;
 
   ignoreOverlayClick = false;
 
@@ -118,16 +106,8 @@ export class ModusModal {
     this.handleEnterKeydown(event, () => this.close());
   }
 
-  handlePrimaryKeydown(event: KeyboardEvent): void {
-    this.handleEnterKeydown(event, () => this.primaryButtonClick.emit());
-  }
-
-  handleSecondaryKeydown(event: KeyboardEvent): void {
-    this.handleEnterKeydown(event, () => this.secondaryButtonClick.emit());
-  }
-
-  handleOutlineKeydown(event: KeyboardEvent): void {
-    this.handleEnterKeydown(event, () => this.outlineButtonClick.emit());
+  handleButtonKeyDown(event: KeyboardEvent, callback: () => void): void {
+    this.handleEnterKeydown(event, callback);
   }
 
   componentDidRender() {
@@ -169,39 +149,31 @@ export class ModusModal {
   }
 
   renderModalFooter(): JSX.Element[] {
+    const buttonEvents: Record<keyof ModusModalButtons, EventEmitter> = {
+      outline: this.outlineButtonClick,
+      secondary: this.secondaryButtonClick,
+      primary: this.primaryButtonClick,
+    };
+
     return (
       <div class="footer">
-        {this.buttons && this.buttons.outline && (
-          <modus-button
-            disabled={this.buttons.outline.disabled}
-            color="secondary"
-            button-style="outline"
-            ariaLabel={this.buttons.outline.ariaLabel}
-            onButtonClick={() => this.outlineButtonClick.emit()}
-            onKeyDown={(event) => this.handleSecondaryKeydown(event)}>
-            {this.buttons.outline.text}
-          </modus-button>
-        )}
-        {this.buttons && this.buttons.secondary && (
-          <modus-button
-            disabled={this.buttons.secondary.disabled}
-            color="secondary"
-            ariaLabel={this.buttons.secondary.ariaLabel}
-            onButtonClick={() => this.secondaryButtonClick.emit()}
-            onKeyDown={(event) => this.handlePrimaryKeydown(event)}>
-            {this.buttons.secondary.text}
-          </modus-button>
-        )}
-        {this.buttons && this.buttons.primary && (
-          <modus-button
-            disabled={this.buttons.primary.disabled}
-            color="primary"
-            ariaLabel={this.buttons.primary.ariaLabel}
-            onButtonClick={() => this.primaryButtonClick.emit()}
-            onKeyDown={(event) => this.handleOutlineKeydown(event)}>
-            {this.buttons.primary.text}
-          </modus-button>
-        )}
+        {Object.keys(buttonEvents).map((key: keyof ModusModalButtons) => {
+          const button = this.buttons[key];
+          if (button?.text) {
+            const eventEmitter = () => buttonEvents[key].emit();
+            return (
+              <modus-button
+                disabled={button.disabled}
+                color={key === 'outline' ? 'secondary' : key}
+                button-style={key === 'outline' ? 'outline' : 'fill'}
+                ariaLabel={button.ariaLabel}
+                onButtonClick={eventEmitter}
+                onKeyDown={(event) => this.handleButtonKeyDown(event, eventEmitter)}>
+                {button.text}
+              </modus-button>
+            );
+          }
+        })}
       </div>
     );
   }
