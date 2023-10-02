@@ -8,6 +8,7 @@ import { ModusTableCellLink, ModusTableRowAction } from '../../models/modus-tabl
 import ModusTableCellContent from './modus-table-cell-content';
 import ModusTableCellExpandIcons from './modus-table-cell-expand-icons';
 import { ModusTableRowActions } from '../modus-table-row-actions';
+import { ModusTableOverflowMenu } from '../modus-table-overflow-menu';
 
 interface ModusTableCellProps {
   cell: Cell<unknown, unknown>;
@@ -68,9 +69,13 @@ export const ModusTableCell: FunctionalComponent<ModusTableCellProps> = ({
                 actions={rowActions?.filter((action) => !row.original["_excludedActions"]?.includes(action._id))}
                 onRowActionClick={rowActionClick}
                 rowId={row.id}
-                showOverflowMenu={showOverflowMenu}
-                overFlowMenuClick={overFlowMenuClick}
                 isChecked={isChecked}
+              />
+              <ModusTableOverflowMenu 
+                showOverflowMenu={showOverflowMenu} 
+                rowId={row.id} 
+                isChecked={isChecked}
+                overFlowMenuClick={overFlowMenuClick}
               />
             </div>
           )
