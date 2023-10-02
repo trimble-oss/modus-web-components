@@ -403,6 +403,10 @@ modus-table-filler-column {
   transition: background-color 0.15s ease-in-out;
   width: 20px;
 
+  svg {
+    fill: $modus-table-body-color;
+  }
+
   &:hover {
     background-color: $modus-table-icon-hover-bg;
   }
@@ -444,6 +448,7 @@ modus-table-filler-column {
 
         svg {
           margin-right: $rem-8px;
+          fill: $modus-table-body-color;
         }
 
         .display-text {
