@@ -1,5 +1,5 @@
 import { newE2EPage } from '@stencil/core/testing';
-import {ModusModalButtons} from "./modus-button";
+import {ModusModalButtons} from "./modus-modal-button";
 
 
 describe('modus-modal', () => {
@@ -16,7 +16,7 @@ describe('modus-modal', () => {
 
     await page.setContent('<modus-modal header-text="Header Text"></modus-modal>');
     const component = await page.find('modus-modal');
-    const element = await page.find('modus-modal >>> div.header');
+    const element = await page.find('modus-modal >>> header');
     expect(element.innerText).toContain('Header Text');
 
     component.setProperty('headerText', 'New Text');

@@ -2,7 +2,7 @@
 import { Component, Element, Event, EventEmitter, h, JSX, Listen, Method, Prop, State } from '@stencil/core';
 import { IconClose } from '../icons/icon-close';
 import { FocusWrap, ModalFocusWrapping } from './modal-focus-wrapping';
-import {ModusModalButtons} from "./modus-button";
+import {ModusModalButtons} from "./modus-modal-button";
 
 @Component({
   tag: 'modus-modal',
