@@ -15,3 +15,4 @@ export {
   ModusNavbarButton,
 } from './components/modus-navbar/modus-navbar.models';
 export * from './components/modus-table/models/modus-table.models';
+export * from './components/modus-modal/modus-modal.models';

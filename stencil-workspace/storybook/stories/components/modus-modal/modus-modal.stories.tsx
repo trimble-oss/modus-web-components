@@ -61,6 +61,27 @@ export default {
         type: { summary: 'string' },
       },
     },
+    outlineButtonAriaLabel: {
+      name: 'outlineButtonAriaLabel',
+      description: "The modal's outline button aria-label",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    outlineButtonDisabled: {
+      name: 'outlineButtonDisabled',
+      description: "Disable outline button",
+      table: {
+        type: { summary: 'boolean' },
+      },
+    },
+    outlineButtonText: {
+      name: 'outlineButtonText',
+      description: "The modal's outline button text",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
     zIndex: {
       name: 'zIndex',
       description: "The modal's z-index",
@@ -78,7 +99,7 @@ export default {
   },
   parameters: {
     actions: {
-      handles: ['closed', 'primaryButtonClick', 'secondaryButtonClick'],
+      handles: ['closed', 'primaryButtonClick', 'secondaryButtonClick','outlineButtonClick'],
     },
     docs: {
       inlineStories: false,
@@ -92,7 +113,7 @@ export default {
   },
 };
 
-const Template = ({ ariaLabel, headerText, primaryButtonAriaLabel,primaryButtonDisabled, primaryButtonText, secondaryButtonAriaLabel, secondaryButtonDisabled, secondaryButtonText, zIndex, backdrop  }) => html`
+const Template = ({ ariaLabel, headerText, primaryButtonAriaLabel,primaryButtonDisabled, primaryButtonText, secondaryButtonAriaLabel, secondaryButtonDisabled, secondaryButtonText,outlineButtonAriaLabel, outlineButtonDisabled, outlineButtonText, zIndex, backdrop  }) => html`
   <modus-button id="btn-modal" color="primary">Open modal</modus-button>
   <modus-modal
   aria-label=${ariaLabel}
@@ -102,6 +123,8 @@ const Template = ({ ariaLabel, headerText, primaryButtonAriaLabel,primaryButtonD
   primary-button-text=${primaryButtonText}
   secondary-button-aria-label=${secondaryButtonAriaLabel}  secondary-button-disabled=${secondaryButtonDisabled}
   secondary-button-text=${secondaryButtonText}
+  outline-button-aria-label=${outlineButtonAriaLabel}  outline-button-disabled=${outlineButtonDisabled}
+  outline-button-text=${outlineButtonText}
   z-index=${zIndex}
   backdrop=${backdrop}>
     <p>Woo-hoo, you're reading this text in a modal!</p>
@@ -118,6 +141,9 @@ Default.args = {
   secondaryButtonAriaLabel: 'Sweet',
   secondaryButtonDisabled: false,
   secondaryButtonText: 'Sweet',
+  outlineButtonAriaLabel: 'Okay',
+  outlineButtonDisabled: false,
+  outlineButtonText: 'Okay',
   zIndex: '1',
   backdrop: 'default'};
 
