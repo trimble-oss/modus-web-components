@@ -19,7 +19,8 @@ This component utilizes the slot element, allowing you to render your own HTML i
   primary-button-text="Save changes"
   secondary-button-text="Sweet!"
   primary-button-aria-label="Save changes"
-  secondary-button-aria-label="Sweet">
+  secondary-button-aria-label="Sweet"
+  outline-button-aria-label="Okay">>
   <p>Woo-hoo, you're reading this text in a modal!</p>
 </modus-modal>
 
@@ -49,7 +50,10 @@ This component utilizes the slot element, allowing you to render your own HTML i
 | `primaryButtonText`        | `primary-button-text`         | (optional) The modal's primary button text.                                                                                                               | `string`                        | `undefined` |
 | `secondaryButtonAriaLabel` | `secondary-button-aria-label` | (optional) The modal's secondary button aria-label.                                                                                                       | `string`                        | `undefined` |
 | `secondaryButtonDisabled`  | `secondary-button-disabled`   | (optional) Disable secondary button.                                                                                                                      | `boolean`                       | `undefined` |
-| `secondaryButtonText`      | `secondary-button-text`       | (optional) The modal's secondary button text.                                                                                                             | `string`                        | `undefined` |
+| `secondaryButtonText`      | `secondary-button-text`       | (optional) The modal's secondary button text.
+| `outlineButtonAriaLabel`   | `outline-button-aria-label`   | (optional) The modal's outline button aria-label.                                                                                                       | `string`                        | `undefined` |
+| `outlineButtonDisabled`    | `outline-button-disabled`     | (optional) Disable outline button.                                                                                                                      | `boolean`                       | `undefined` |
+| `outlineButtonText`        | `outline-button-text`         | (optional) The modal's outline button text.                                                                                                             | `string`                        | `undefined` |
 | `zIndex`                   | `z-index`                     | (optional) The modal's z-index.                                                                                                                           | `string`                        | `'1'`       |
 
 
@@ -61,6 +65,7 @@ This component utilizes the slot element, allowing you to render your own HTML i
 | `opened`               | An event that fires on modal open.             | `CustomEvent<any>` |
 | `primaryButtonClick`   | An event that fires on primary button click.   | `CustomEvent<any>` |
 | `secondaryButtonClick` | An event that fires on secondary button click. | `CustomEvent<any>` |
+| `outlineButtonClick`   | An event that fires on outline button click.   | `CustomEvent<any>` |
 
 
 ### Methods
@@ -76,5 +81,6 @@ This component utilizes the slot element, allowing you to render your own HTML i
 - Modal gets `aria-hidden` set to whether Modal is closed.
 - When Primary button has focus, **Enter** emits `primaryButtonClick` event.
 - When Secondary button has focus, **Enter** emits `secondaryButtonClick` event.
+- When Outline button has focus, **Enter** emits `outlineButtonClick` event.
 - When the Modal is open, tabbing can be performed only on the focussable elements inside Modal. Note: Pressing `Shift` + `Tab` on Modal Header cannot go back to Modal Footer.
 - Pressing `Escape` key closes the Modal and emits `close` event.
