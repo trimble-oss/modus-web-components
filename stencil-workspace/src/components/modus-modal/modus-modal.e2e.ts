@@ -1,6 +1,5 @@
 import { newE2EPage } from '@stencil/core/testing';
-import {ModusModalButtons} from "./modus-modal-button";
-
+import { ModusModalButtons } from './modus-modal.models';
 
 describe('modus-modal', () => {
   it('renders', async () => {
@@ -16,7 +15,7 @@ describe('modus-modal', () => {
 
     await page.setContent('<modus-modal header-text="Header Text"></modus-modal>');
     const component = await page.find('modus-modal');
-    const element = await page.find('modus-modal >>> header');
+    const element = await page.find('modus-modal >>> div.header');
     expect(element.innerText).toContain('Header Text');
 
     component.setProperty('headerText', 'New Text');
@@ -27,8 +26,8 @@ describe('modus-modal', () => {
   it('renders changes to primaryButtonText', async () => {
     const page = await newE2EPage();
     await page.setContent('<modus-modal></modus-modal>');
-    let component = await page.find('modus-modal');
-    let buttons: ModusModalButtons = {
+    const component = await page.find('modus-modal');
+    const buttons: ModusModalButtons = {
       primary: {
         text: 'Primary Text',
         ariaLabel: 'Primary Text',
@@ -37,7 +36,7 @@ describe('modus-modal', () => {
     await page.waitForChanges();
     component.setProperty('buttons', buttons);
     await page.waitForChanges();
-    let element = await page.find('modus-modal >>> div >>>buttons');
+    const element = await page.find('modus-modal >>> div >>> buttons');
     expect(element.innerText).toContain('Primary');
   });
 
@@ -45,8 +44,8 @@ describe('modus-modal', () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-modal></modus-modal>');
-    let component = await page.find('modus-modal');
-    let buttons: ModusModalButtons = {
+    const component = await page.find('modus-modal');
+    const buttons: ModusModalButtons = {
       secondary: {
         text: 'Secondary Text',
         ariaLabel: 'Secondary Text',
@@ -55,7 +54,7 @@ describe('modus-modal', () => {
     await page.waitForChanges();
     component.setProperty('buttons', buttons);
     await page.waitForChanges();
-    let element = await page.find('modus-modal >>> div >>>buttons');
+    const element = await page.find('modus-modal >>> div >>> buttons');
     expect(element.innerText).toContain('Secondary Text');
   });
 
@@ -63,8 +62,8 @@ describe('modus-modal', () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-modal></modus-modal>');
-    let component = await page.find('modus-modal');
-    let buttons: ModusModalButtons = {
+    const component = await page.find('modus-modal');
+    const buttons: ModusModalButtons = {
       secondary: {
         text: 'Outline Text',
         ariaLabel: 'Outline Text',
@@ -73,15 +72,15 @@ describe('modus-modal', () => {
     await page.waitForChanges();
     component.setProperty('buttons', buttons);
     await page.waitForChanges();
-    let element = await page.find('modus-modal >>> div >>>buttons');
+    const element = await page.find('modus-modal >>> div >>>buttons');
     expect(element.innerText).toContain('Outline Text');
   });
 
   it('renders changes to primaryButtonDisabled', async () => {
     const page = await newE2EPage();
     await page.setContent('<modus-modal></modus-modal>');
-    let component = await page.find('modus-modal');
-    let button: ModusModalButtons = {
+    const component = await page.find('modus-modal');
+    const button: ModusModalButtons = {
       primary: {
         text: 'Primary Text',
         ariaLabel: 'Primary Text',
@@ -91,15 +90,15 @@ describe('modus-modal', () => {
     await page.waitForChanges();
     component.setProperty('button', button);
     await page.waitForChanges();
-    let element = await page.find('modus-modal >>> div >>>button');
+    const element = await page.find('modus-modal >>> div >>>button');
     expect(element.getProperty('disabled')).toBeTruthy();
   });
 
   it('renders changes to secondaryButtonDisabled', async () => {
     const page = await newE2EPage();
     await page.setContent('<modus-modal></modus-modal>');
-    let component = await page.find('modus-modal');
-    let button: ModusModalButtons = {
+    const component = await page.find('modus-modal');
+    const button: ModusModalButtons = {
       secondary: {
         text: 'secondary',
         ariaLabel: 'secondary',
@@ -109,15 +108,15 @@ describe('modus-modal', () => {
     await page.waitForChanges();
     component.setProperty('button', button);
     await page.waitForChanges();
-    let element = await page.find('modus-modal >>> div >>>button');
+    const element = await page.find('modus-modal >>> div >>>button');
     expect(element.getProperty('disabled')).toBeTruthy();
   });
 
   it('renders changes to outlineButtonDisabled', async () => {
     const page = await newE2EPage();
     await page.setContent('<modus-modal></modus-modal>');
-    let component = await page.find('modus-modal');
-    let button: ModusModalButtons = {
+    const component = await page.find('modus-modal');
+    const button: ModusModalButtons = {
       secondary: {
         text: 'Outline Text',
         ariaLabel: 'Outline Text',
@@ -127,7 +126,7 @@ describe('modus-modal', () => {
     await page.waitForChanges();
     component.setProperty('button', button);
     await page.waitForChanges();
-    let element = await page.find('modus-modal >>> div >>>button');
+    const element = await page.find('modus-modal >>> div >>>button');
     expect(element.getProperty('disabled')).toBeTruthy();
   });
 
@@ -144,35 +143,69 @@ describe('modus-modal', () => {
     const page = await newE2EPage();
     await page.setContent('<modus-modal></modus-modal>');
     const modal = await page.find('modus-modal');
-    await modal.callMethod('open');
-    let button: ModusModalButtons = {
+    const primaryButtonClick = await page.spyOnEvent('primaryButtonClick');
+    const buttons: ModusModalButtons = {
       primary: {
         text: 'primary',
         ariaLabel: 'primary',
       },
     };
-    modal.setProperty('button', button);
+    modal.setProperty('buttons', buttons);
     await page.waitForChanges();
-    const element = await page.find('modus-modal >>> div >>> button');
-    const primaryButtonClick = await page.spyOnEvent('primaryButtonClick');
+
+    await modal.callMethod('open');
+
+    const element = await page.find('modus-modal >>> modus-button');
     await element.click();
     await page.waitForChanges();
+
     expect(primaryButtonClick).toHaveReceivedEvent();
   });
 
   it('emits secondaryButtonClick on click', async () => {
     const page = await newE2EPage();
-
-    await page.setContent('<modus-modal secondary-button-text="Secondary Text"></modus-modal>');
+    await page.setContent('<modus-modal ></modus-modal>');
     const modal = await page.find('modus-modal');
+    const secondaryButtonClick = await page.spyOnEvent('secondaryButtonClick');
+    const buttons: ModusModalButtons = {
+      secondary: {
+        text: 'secondary',
+        ariaLabel: 'secondary',
+      },
+    };
+    modal.setProperty('buttons', buttons);
+    await page.waitForChanges();
+
     await modal.callMethod('open');
     await page.waitForChanges();
-    const element = await page.find('modus-modal >>> modus-button');
-    const secondaryButtonClick = await page.spyOnEvent('secondaryButtonClick');
 
+    const element = await page.find('modus-modal >>> modus-button');
     await element.click();
     await page.waitForChanges();
     expect(secondaryButtonClick).toHaveReceivedEvent();
+  });
+
+  it('emits outlineButtonClick on click', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-modal ></modus-modal>');
+    const modal = await page.find('modus-modal');
+    const outlineButtonClick = await page.spyOnEvent('outlineButtonClick');
+    const buttons: ModusModalButtons = {
+      outline: {
+        text: 'outline',
+        ariaLabel: 'outline',
+      },
+    };
+    modal.setProperty('buttons', buttons);
+    await page.waitForChanges();
+
+    await modal.callMethod('open');
+    await page.waitForChanges();
+
+    const element = await page.find('modus-modal >>> modus-button');
+    await element.click();
+    await page.waitForChanges();
+    expect(outlineButtonClick).toHaveReceivedEvent();
   });
 
   it('should not emit primaryButtonClick on click when disabled', async () => {
@@ -180,19 +213,19 @@ describe('modus-modal', () => {
 
     await page.setContent('<modus-modal></modus-modal>');
     const modal = await page.find('modus-modal');
-    await modal.callMethod('open');
-    await page.waitForChanges();
-    let button: ModusModalButtons = {
+    const primaryButtonClick = await page.spyOnEvent('primaryButtonClick');
+    const buttons: ModusModalButtons = {
       primary: {
         text: 'primary',
         ariaLabel: 'primary',
         disabled: true,
       },
     };
+    modal.setProperty('buttons', buttons);
     await page.waitForChanges();
-    modal.setProperty('button', button);
-    const element = await page.find('modus-modal >>> div >>>button');
-    const primaryButtonClick = await page.spyOnEvent('primaryButtonClick');
+
+    await modal.callMethod('open');
+    const element = await page.find('modus-modal >>> modus-button');
     await page.waitForChanges();
     expect(element.getProperty('disabled')).toBeTruthy();
 
@@ -206,19 +239,20 @@ describe('modus-modal', () => {
 
     await page.setContent('<modus-modal></modus-modal>');
     const modal = await page.find('modus-modal');
-    await modal.callMethod('open');
-    await page.waitForChanges();
-    let button: ModusModalButtons = {
+    const secondaryButtonClick = await page.spyOnEvent('secondaryButtonClick');
+    const buttons: ModusModalButtons = {
       secondary: {
         text: 'secondary',
         ariaLabel: 'secondary',
         disabled: true,
       },
     };
+    modal.setProperty('buttons', buttons);
     await page.waitForChanges();
-    modal.setProperty('button', button);
-    const element = await page.find('modus-modal >>> div >>>button');
-    const secondaryButtonClick = await page.spyOnEvent('secondaryButtonClick');
+
+    await modal.callMethod('open');
+    await page.waitForChanges();
+    const element = await page.find('modus-modal >>> modus-button');
     await page.waitForChanges();
 
     expect(element.getProperty('disabled')).toBeTruthy();
@@ -226,6 +260,34 @@ describe('modus-modal', () => {
     await element.click();
     await page.waitForChanges();
     expect(secondaryButtonClick).not.toHaveReceivedEvent();
+  });
+
+  it('should not emit outlineButtonClick on click when disabled', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-modal></modus-modal>');
+    const modal = await page.find('modus-modal');
+    const outlineButtonClick = await page.spyOnEvent('outlineButtonClick');
+    const buttons: ModusModalButtons = {
+      outline: {
+        text: 'outline',
+        ariaLabel: 'outline',
+        disabled: true,
+      },
+    };
+    modal.setProperty('buttons', buttons);
+    await page.waitForChanges();
+
+    await modal.callMethod('open');
+    await page.waitForChanges();
+    const element = await page.find('modus-modal >>> modus-button');
+    await page.waitForChanges();
+
+    expect(element.getProperty('disabled')).toBeTruthy();
+
+    await element.click();
+    await page.waitForChanges();
+    expect(outlineButtonClick).not.toHaveReceivedEvent();
   });
 
   it('emits opened on open call', async () => {
@@ -246,7 +308,7 @@ describe('modus-modal', () => {
     const modal = await page.find('modus-modal');
     await modal.callMethod('open');
     await page.waitForChanges();
-    let button: ModusModalButtons = {
+    const button: ModusModalButtons = {
       secondary: {
         text: 'Outline Text',
         ariaLabel: 'outline Text',

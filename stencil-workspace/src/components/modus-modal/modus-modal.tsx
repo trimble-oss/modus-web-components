@@ -2,7 +2,7 @@
 import { Component, Element, Event, EventEmitter, h, JSX, Listen, Method, Prop, State } from '@stencil/core';
 import { IconClose } from '../icons/icon-close';
 import { FocusWrap, ModalFocusWrapping } from './modal-focus-wrapping';
-import {ModusModalButtons} from "./modus-modal-button";
+import { ModusModalButtons } from './modus-modal.models';
 
 @Component({
   tag: 'modus-modal',
@@ -157,23 +157,24 @@ export class ModusModal {
 
     return (
       <div class="footer">
-        {Object.keys(buttonEvents).map((key: keyof ModusModalButtons) => {
-          const button = this.buttons[key];
-          if (button?.text) {
-            const eventEmitter = () => buttonEvents[key].emit();
-            return (
-              <modus-button
-                disabled={button.disabled}
-                color={key === 'outline' ? 'secondary' : key}
-                button-style={key === 'outline' ? 'outline' : 'fill'}
-                ariaLabel={button.ariaLabel}
-                onButtonClick={eventEmitter}
-                onKeyDown={(event) => this.handleButtonKeyDown(event, eventEmitter)}>
-                {button.text}
-              </modus-button>
-            );
-          }
-        })}
+        {this.buttons &&
+          Object.keys(buttonEvents).map((key: keyof ModusModalButtons) => {
+            const button = this.buttons[key];
+            if (button?.text) {
+              const eventEmitter = () => buttonEvents[key].emit();
+              return (
+                <modus-button
+                  disabled={button.disabled}
+                  color={key === 'outline' ? 'secondary' : key}
+                  button-style={key === 'outline' ? 'outline' : 'fill'}
+                  ariaLabel={button.ariaLabel}
+                  onButtonClick={eventEmitter}
+                  onKeyDown={(event) => this.handleButtonKeyDown(event, eventEmitter)}>
+                  {button.text}
+                </modus-button>
+              );
+            }
+          })}
       </div>
     );
   }
