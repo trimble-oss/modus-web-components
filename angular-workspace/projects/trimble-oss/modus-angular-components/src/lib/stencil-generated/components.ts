@@ -551,7 +551,7 @@ export declare interface ModusMessage extends Components.ModusMessage {}
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'backdrop', 'headerText', 'primaryButtonAriaLabel', 'primaryButtonDisabled', 'primaryButtonText', 'secondaryButtonAriaLabel', 'secondaryButtonDisabled', 'secondaryButtonText', 'zIndex'],
+  inputs: ['ariaLabel', 'backdrop', 'buttons', 'headerText', 'zIndex'],
   methods: ['close', 'open']
 })
 @Component({
@@ -559,14 +559,14 @@ export declare interface ModusMessage extends Components.ModusMessage {}
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['ariaLabel', 'backdrop', 'headerText', 'primaryButtonAriaLabel', 'primaryButtonDisabled', 'primaryButtonText', 'secondaryButtonAriaLabel', 'secondaryButtonDisabled', 'secondaryButtonText', 'zIndex'],
+  inputs: ['ariaLabel', 'backdrop', 'buttons', 'headerText', 'zIndex'],
 })
 export class ModusModal {
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['closed', 'opened', 'primaryButtonClick', 'secondaryButtonClick']);
+    proxyOutputs(this, this.el, ['closed', 'opened', 'primaryButtonClick', 'secondaryButtonClick', 'outlineButtonClick']);
   }
 }
 
@@ -588,6 +588,10 @@ export declare interface ModusModal extends Components.ModusModal {
    * An event that fires on secondary button click.
    */
   secondaryButtonClick: EventEmitter<CustomEvent<any>>;
+  /**
+   * An event that fires on outline button click.
+   */
+  outlineButtonClick: EventEmitter<CustomEvent<any>>;
 }
 
 
