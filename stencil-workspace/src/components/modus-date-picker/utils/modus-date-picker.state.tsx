@@ -19,8 +19,8 @@ export default class ModusDatePickerState {
     // Converting to ISO8601 'yyyy-mm-dd' format
     if (Number(val)) {
       const year = val.getFullYear();
-      const month = val.getMonth() + 1; // Zero based number system for months
-      const date = val.getDate();
+      const month = (val.getMonth() + 1).toString().padStart(2, '0'); // Zero based number system for months
+      const date = val.getDate().toString().padStart(2, '0');
 
       this.element.value = `${year}-${month}-${date}`;
       this.element.focusInput();
