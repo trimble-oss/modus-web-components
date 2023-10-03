@@ -11,7 +11,7 @@
 | ------------ | ------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ----------------------- | ----------- |
 | `ariaLabel`  | `aria-label`  | (optional) The modal's aria-label.                                                                                                   | `string`                | `undefined` |
 | `backdrop`   | `backdrop`    | (optional) The modal's backdrop. Specify 'static' for a backdrop that doesn't close the modal when clicked outside the modal content | `"default" \| "static"` | `'default'` |
-| `buttons`    | --            | The modal button to render.                                                                                                          | `ModusModalButtons`     | `undefined` |
+| `buttons`    | --            | The modal's footer buttons.                                                                                                          | `ModusModalButtons`     | `undefined` |
 | `headerText` | `header-text` | (optional) The modal's primary button text.                                                                                          | `string`                | `undefined` |
 | `zIndex`     | `z-index`     | (optional) The modal's z-index.                                                                                                      | `string`                | `'1'`       |
 
