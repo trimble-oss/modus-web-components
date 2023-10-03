@@ -263,4 +263,30 @@ describe('modus-date-picker', () => {
     expect(errorTextStart.innerHTML).toEqual('Select a date after Feb 16, 2023');
     expect(errorTextEnd.innerHTML).toEqual('Select a date before Apr 23, 2023');
   });
+
+  it('checks disabled dates', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+    <modus-date-picker>
+      <modus-date-input
+        format="mmm d, yyyy"
+        show-calendar-icon="true"
+        label="Enter a date"
+        min="2023-02-07"
+        max="2023-02-22"
+        value="2023-02-15">
+      </modus-date-input>
+    </modus-date-picker>`);
+
+    const calendar = await page.find('modus-date-input >>> .icon-calendar');
+    await calendar.click();
+    await page.waitForChanges();
+
+    const disabledDates = await page.findAll('modus-date-picker >>> .calendar-body .calendar-day.disabled');
+
+    expect(disabledDates.some(element => element.innerHTML === '6')).toEqual(true);
+    expect(disabledDates.some(element => element.innerHTML === '7')).toEqual(false);
+    expect(disabledDates.some(element => element.innerHTML === '22')).toEqual(false);
+    expect(disabledDates.some(element => element.innerHTML === '23')).toEqual(true);
+  });
 });

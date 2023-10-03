@@ -378,7 +378,7 @@ export namespace Components {
         /**
           * (optional) Custom helper text displayed below the input.
          */
-        "helperText": any;
+        "helperText": string;
         /**
           * (optional) The input's label.
          */
@@ -424,7 +424,7 @@ export namespace Components {
          */
         "validate": () => Promise<void>;
         /**
-          * (optional) A string representing the date entered in the input. The date is formatted according to ISO8601 'yyyy-mm-dd'. The displayed date format will differ from the 'value'.
+          * (optional) A string representing the date entered to the input. The date is formatted according to ISO8601 'yyyy-mm-dd'. The displayed date format will differ from the 'value'.
          */
         "value": string;
     }
@@ -2263,7 +2263,7 @@ declare namespace LocalJSX {
         /**
           * (optional) Custom helper text displayed below the input.
          */
-        "helperText"?: any;
+        "helperText"?: string;
         /**
           * (optional) The input's label.
          */
@@ -2317,7 +2317,7 @@ declare namespace LocalJSX {
          */
         "validText"?: string;
         /**
-          * (optional) A string representing the date entered in the input. The date is formatted according to ISO8601 'yyyy-mm-dd'. The displayed date format will differ from the 'value'.
+          * (optional) A string representing the date entered to the input. The date is formatted according to ISO8601 'yyyy-mm-dd'. The displayed date format will differ from the 'value'.
          */
         "value"?: string;
     }

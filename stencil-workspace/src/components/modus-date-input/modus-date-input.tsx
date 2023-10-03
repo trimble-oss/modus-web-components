@@ -81,7 +81,7 @@ export class ModusDateInput {
   }
 
   /** (optional) Custom helper text displayed below the input. */
-  @Prop() helperText;
+  @Prop() helperText: string;
 
   /** (optional) The input's label. */
   @Prop() label: string;
@@ -113,7 +113,7 @@ export class ModusDateInput {
   /** (optional) The maximum date allowed. The date is formatted according to ISO8601 'yyyy-mm-dd'. */
   @Prop() max: string;
 
-  /** (optional) A string representing the date entered in the input. The date is formatted according to ISO8601 'yyyy-mm-dd'. The displayed date format will differ from the 'value'. */
+  /** (optional) A string representing the date entered to the input. The date is formatted according to ISO8601 'yyyy-mm-dd'. The displayed date format will differ from the 'value'. */
   @Prop({ mutable: true }) value: string;
   @Watch('value')
   handleValueChange(val: string): void {
@@ -175,16 +175,12 @@ export class ModusDateInput {
 
   /** Handlers */
   handleCalendarClick(): void {
-    const messages = this.getMinMaxValidationMessage();
-
     this.calendarIconClicked.emit({
       value: this.value,
       type: this.type,
       inputString: this._dateDisplay,
       min: this._formatter.parseIsoToDate(this.min),
       max: this._formatter.parseIsoToDate(this.max),
-      minMessage: messages.min,
-      maxMessage: messages.max,
     });
   }
 

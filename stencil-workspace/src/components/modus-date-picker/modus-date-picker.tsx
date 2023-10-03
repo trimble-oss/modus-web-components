@@ -37,8 +37,6 @@ export class ModusDatePicker {
   /** Min and Max dates for the date picker */
   private _max: Date;
   private _min: Date;
-  private _maxMessage: string;
-  private _minMessage: string;
 
   componentWillLoad() {
     this._calendar = new ModusDatePickerCalendar();
@@ -47,12 +45,10 @@ export class ModusDatePicker {
   /** Handlers */
   @Listen('calendarIconClicked')
   handleCalendarIconClick(event: CustomEvent<ModusDateInputCalendarIconClickedEvent>) {
-    const { type, min, max, maxMessage, minMessage } = event.detail;
+    const { type, min, max } = event.detail;
 
     this._min = min;
     this._max = max;
-    this._maxMessage = maxMessage;
-    this._minMessage = minMessage;
 
     Object.keys(this._dateInputs).forEach((d) => this._dateInputs[d].toggleCalendar(d === type ? null : false));
 
@@ -179,19 +175,19 @@ export class ModusDatePicker {
     this._showYearArrows = show;
   }
 
-  private validateMinMax(date: Date): string {
+  private validateMinMax(date: Date): boolean {
     if (!date) {
-      return '';
+      return false;
     }
 
     if (this._min && this.compare(date, this._min) < 0) {
-      return this._minMessage;
+      return false;
     }
     if (this._max && this.compare(date, this._max) > 0) {
-      return this._maxMessage;
+      return false;
     }
 
-    return '';
+    return true;
   }
 
   toggleCalendar(val: boolean = null): void {
@@ -253,8 +249,7 @@ export class ModusDatePicker {
               const isSingleDateSelected = singleDate && this.compare(date, singleDate) === 0;
               const isSelected = isStartDate || isEndDate || isSingleDateSelected;
               const isInRange = !isSelected ? positions['in-range'] : false;
-              const minMaxMessage = this.validateMinMax(date);
-              const isDateDisabled = !!minMaxMessage;
+              const isDateDisabled = !this.validateMinMax(date);
 
               // Only for the last date in the calendar
               const onBlurEvent =
@@ -267,24 +262,22 @@ export class ModusDatePicker {
                   : {};
 
               return (
-                <modus-tooltip text={minMaxMessage} disabled={!isDateDisabled}>
-                  <button
-                    class={{
-                      'calendar-day grid-item': true,
-                      selected: isSelected,
-                      disabled: isDateDisabled,
-                      start: isStartDate && !isEndDate,
-                      end: isEndDate && !isStartDate,
-                      'current-day': isToday,
-                      'range-selected': isInRange,
-                    }}
-                    disabled={isDateDisabled}
-                    tabIndex={0}
-                    onClick={() => this.pickCalendarDate(date)}
-                    {...onBlurEvent}>
-                    {date.getDate()}
-                  </button>
-                </modus-tooltip>
+                <button
+                  class={{
+                    'calendar-day grid-item': true,
+                    selected: isSelected,
+                    disabled: isDateDisabled,
+                    start: isStartDate && !isEndDate,
+                    end: isEndDate && !isStartDate,
+                    'current-day': isToday,
+                    'range-selected': isInRange,
+                  }}
+                  disabled={isDateDisabled}
+                  tabIndex={0}
+                  onClick={() => this.pickCalendarDate(date)}
+                  {...onBlurEvent}>
+                  {date.getDate()}
+                </button>
               );
             })}
           </div>
