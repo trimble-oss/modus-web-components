@@ -59,7 +59,7 @@ export interface ModusTableRowAction {
   id: string;
   icon: string;
   label: string;
-  isVisible: (row: Row<unknown>) => boolean | boolean;
+  isVisible: (row: Row<unknown>) => boolean;
 }
 
 export interface ModusTableRowActionClickEvent {

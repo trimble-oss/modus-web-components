@@ -7,7 +7,7 @@ import { COLUMN_DEF_DATATYPE_INTEGER, COLUMN_DEF_DATATYPE_KEY } from '../../modu
 import { ModusTableCellLink, ModusTableRowAction } from '../../models/modus-table.models';
 import ModusTableCellContent from './modus-table-cell-content';
 import ModusTableCellExpandIcons from './modus-table-cell-expand-icons';
-import { ModusTableRowActions } from '../modus-table-row-actions';
+import { ModusTableRowActions } from '../row/modus-table-row-actions';
 import { ModusTableOverflowMenuCustomEvent } from '../../../../components';
 
 interface ModusTableCellProps {
@@ -75,7 +75,6 @@ export const ModusTableCell: FunctionalComponent<ModusTableCellProps> = ({
                 showOverflowMenu={showOverflowMenu}
                 rowId={row.id}
                 isChecked={isChecked}
-                onActionClick={rowActionClick}
                 overflowActions={rowActions}  
                 onOverflowClick={overflowMenuClick}            
               />

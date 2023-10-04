@@ -153,18 +153,49 @@ const DefaultColumns = [
 
 const defaultActions = [
   {
-    _id: 'edit',
-    display: {
-      icon: 'edit',
-      text: 'Edit'
-    }
+    id: 'edit',
+    icon: 'edit',
+    label: 'Edit',
+    isVisible: true
   },
   {
-    _id: 'delete',
-    display: {
-      icon: 'delete',
-      text: 'Delete'
-    }
+    id: 'delete',
+    icon: 'delete',
+    label: 'Delete',
+    isVisible: true
+  }
+]
+
+const overflowActions = [
+  {
+    id: 'edit',
+    icon: 'edit',
+    label: 'Edit',
+    isVisible: true
+  },
+  {
+    id: 'delete',
+    icon: 'delete',
+    label: 'Delete',
+    isVisible: true
+  },
+  {
+    id: '3',
+    icon: 'cancel',
+    label: 'Cancel',
+    isVisible: true
+  },
+  {
+    id: '4',
+    icon: 'calendar',
+    label: 'Calendar',
+    isVisible: true
+  },
+  {
+    id: '5',
+    icon: 'check',
+    label: 'Check',
+    isVisible: true
   }
 ]
 
@@ -370,20 +401,12 @@ export default {
         type: { summary: 'ModusTableRowAction[]' },
       },
       type: { required: false },
-    },
-    overflowMenuActions: {
-      name: 'overflowMenuActions',
-      description: 'To set an overflow menu with actions to the row.',
-      table: {
-        type: { summary: 'ModusTableRowAction[]' },
-      },
-      type: { required: false },
     }
   },
 
   parameters: {
     actions: {
-      handles: ['sortChange', 'cellLinkClick', 'rowSelectionChange', 'rowActionClick', 'overflowMenuActionClick'],
+      handles: ['sortChange', 'cellLinkClick', 'rowSelectionChange', 'rowActionClick'],
     },
     controls: { expanded: true, sort: 'requiredFirst' },
     docs: {
@@ -566,7 +589,7 @@ export const RowActions = Template.bind({});
 RowActions.args = { ...DefaultArgs, rowActions: defaultActions };
 
 export const OverflowMenu = Template.bind({});
-OverflowMenu.args = { ...DefaultArgs, overflowMenuActions: defaultActions };
+OverflowMenu.args = { ...DefaultArgs, rowActions: defaultActions };
 
 export const LargeDataset = Template.bind({});
 

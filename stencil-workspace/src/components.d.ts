@@ -1092,7 +1092,6 @@ export namespace Components {
     }
     interface ModusTableOverflowMenu {
         "isChecked": boolean;
-        "onActionClick"?: (actionId: string, rowId: string) => void;
         "overflowActions": ModusTableRowAction[];
         "rowId": string;
         "showOverflowMenu": boolean;
@@ -3110,7 +3109,6 @@ declare namespace LocalJSX {
     }
     interface ModusTableOverflowMenu {
         "isChecked"?: boolean;
-        "onActionClick"?: (actionId: string, rowId: string) => void;
         "onOverflowClick"?: (event: ModusTableOverflowMenuCustomEvent<MouseEvent>) => void;
         "overflowActions"?: ModusTableRowAction[];
         "rowId"?: string;

@@ -1,0 +1,27 @@
+@import '../../modus-table.vars.scss';
+
+.overflow-menu {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  height: 20px;
+  justify-content: center;
+  padding: $rem-2px;
+  transition: background-color 0.15s ease-in-out;
+  width: 20px;
+
+  svg {
+    fill: $modus-table-body-color;
+  }
+
+  &:hover {
+    background-color: $modus-table-icon-hover-bg;
+  }
+
+  &:active {
+    background-color: $modus-table-icon-active-bg;
+  }
+}
+svg {
+  fill: $modus-table-body-color;
+}

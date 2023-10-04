@@ -188,7 +188,6 @@ export class ModusTable {
     if (this.rowActions?.length > this.maximumNumberOfActions) {
       this.overflowActions = this.rowActions.slice(this.maximumNumberOfActions - 1);
     }
-    console.log(this.overflowActions)
   }
 
   /** Emits event on sort change */
@@ -533,15 +532,16 @@ export class ModusTable {
   }
 
   renderTableBody(multipleRowSelection: boolean): JSX.Element | null {
-    let rowActions: ModusTableRowAction[]
-    if (this.rowActions?.length > this.maximumNumberOfActions) {
-      rowActions = this.rowActions.slice(0, this.maximumNumberOfActions - 1);
-    } else {
-      rowActions = this.rowActions
-    }
     return (
       <tbody>
         {this.table.getRowModel()?.rows.map((row) => {
+          const filteredActions = this.rowActions.filter(action => action.isVisible(row))
+          let rowActions: ModusTableRowAction[] = filteredActions
+          let overflowActions: ModusTableRowAction[] = []
+          if (filteredActions.length > this.maximumNumberOfActions) {
+            rowActions = filteredActions.slice(0, this.maximumNumberOfActions - 1);
+            overflowActions = filteredActions.slice(this.maximumNumberOfActions - 1);
+          }
           const isChecked = row.getIsSelected() && (row.subRows?.length ? row.getIsAllSubRowsSelected() : true);
           return (
             <tr key={row.id} class={{ 'enable-hover': this.hover, 'row-selected': isChecked }}>
@@ -562,7 +562,7 @@ export class ModusTable {
                     rowsExpandable={this.rowsExpandable}
                     frozenColumns={this.frozenColumns}
                     isChecked={isChecked}
-                    showOverflowMenu={this.overflowActions.length>0}
+                    showOverflowMenu={overflowActions.length>0}
                     onLinkClick={(link: ModusTableCellLink) => this.cellLinkClick.emit(link)}
                     rowActions={rowActions}
                     rowActionClick={(actionId: string, rowId: string) => this.rowActionClick.emit({ actionId, rowId })}
