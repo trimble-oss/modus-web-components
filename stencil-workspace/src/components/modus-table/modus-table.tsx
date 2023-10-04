@@ -225,6 +225,7 @@ export class ModusTable {
   @State() overflowVisible: string = null;
   @State() overflowActions: ModusTableRowAction[] = [];
   @State() maximumNumberOfActions: number = 4;
+  @State() overflowElement?: HTMLModusTableOverflowMenuElement = null
 
   private frozenColumns: string[] = []; // Columns will remain on the left and be unable to resize, reorganize, or modify their visibility.
   private isColumnResizing = false;
@@ -565,9 +566,12 @@ export class ModusTable {
                     onLinkClick={(link: ModusTableCellLink) => this.cellLinkClick.emit(link)}
                     rowActions={rowActions}
                     rowActionClick={(actionId: string, rowId: string) => this.rowActionClick.emit({ actionId, rowId })}
-                    overflowMenuClick={() => {
+                    overflowMenuClick={(e) => {
+                      this.overflowElement = e.target
                       this.overflowRowId = this.overflowRowId == row.id ? null : row.id;
+                      this.overflowRowId = row.id;
                     }}
+                    
                   />
                 );
               })}
@@ -636,33 +640,38 @@ export class ModusTable {
   }
 
   renderDropdownMenu(): JSX.Element | null {
-    return (
-      <Fragment>
-        {this.overflowRowId && 
-          <div
-          id={`overflow-menu-${this.overflowRowId}`}
-          class="dropdownMenu"
-          // style={{ top: `${this.dropdownY}px`, left: `${this.dropdownX}px`, position: 'absolute' }}
-          >
-          {this.table.getRowModel()?.rows.filter((row) => row.id == this.overflowRowId).map((row) => (
-              <div class="list-container" >
-                <div class="items-container">
-                  {this.overflowActions.map((action) => (
-                    <div
-                      class="action-item"
-                      onClick={() => this.rowActionClick.emit({ actionId: action.id, rowId: row.id })}>
-                      <div class="action-item-content">
-                        <div class="display-text">{action.label}</div>
+    if (this.overflowElement) {
+      const parent = this.overflowElement.offsetParent as HTMLElement
+      const top = parent.offsetTop 
+      const left = parent.offsetLeft + 108
+      return (
+        <Fragment>
+          {this.overflowRowId && 
+            <div
+            id={`overflow-menu-${this.overflowRowId}`}
+            class="dropdownMenu"
+            style={{ top: `${top}px`, left: `${left}px`, position: 'absolute' }}
+            >
+            {this.table.getRowModel()?.rows.filter((row) => row.id == this.overflowRowId).map((row) => (
+                <div class="list-container" >
+                  <div class="items-container">
+                    {this.overflowActions.map((action) => (
+                      <div
+                        class="action-item"
+                        onClick={() => this.rowActionClick.emit({ actionId: action.id, rowId: row.id })}>
+                        <div class="action-item-content">
+                          <div class="display-text">{action.label}</div>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
-        </div>
-      }
-    </Fragment>
-    );
+              ))}
+          </div>
+        }
+      </Fragment>
+      );
+    }
   }
 
   renderPagination(): JSX.Element | null {

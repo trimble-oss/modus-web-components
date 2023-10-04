@@ -1090,6 +1090,13 @@ export namespace Components {
         "summaryRow": boolean;
         "targetTable"?: HTMLTableElement;
     }
+    interface ModusTableOverflowMenu {
+        "isChecked": boolean;
+        "onActionClick"?: (actionId: string, rowId: string) => void;
+        "overflowActions": ModusTableRowAction[];
+        "rowId": string;
+        "showOverflowMenu": boolean;
+    }
     interface ModusTableToolbar {
         /**
           * (Optional) Table Panel options.
@@ -1492,6 +1499,10 @@ export interface ModusTableCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusTableElement;
 }
+export interface ModusTableOverflowMenuCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusTableOverflowMenuElement;
+}
 export interface ModusTabsCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusTabsElement;
@@ -1762,6 +1773,12 @@ declare global {
         prototype: HTMLModusTableFillerColumnElement;
         new (): HTMLModusTableFillerColumnElement;
     };
+    interface HTMLModusTableOverflowMenuElement extends Components.ModusTableOverflowMenu, HTMLStencilElement {
+    }
+    var HTMLModusTableOverflowMenuElement: {
+        prototype: HTMLModusTableOverflowMenuElement;
+        new (): HTMLModusTableOverflowMenuElement;
+    };
     interface HTMLModusTableToolbarElement extends Components.ModusTableToolbar, HTMLStencilElement {
     }
     var HTMLModusTableToolbarElement: {
@@ -1852,6 +1869,7 @@ declare global {
         "modus-table-columns-visibility": HTMLModusTableColumnsVisibilityElement;
         "modus-table-dropdown-menu": HTMLModusTableDropdownMenuElement;
         "modus-table-filler-column": HTMLModusTableFillerColumnElement;
+        "modus-table-overflow-menu": HTMLModusTableOverflowMenuElement;
         "modus-table-toolbar": HTMLModusTableToolbarElement;
         "modus-tabs": HTMLModusTabsElement;
         "modus-text-input": HTMLModusTextInputElement;
@@ -3090,6 +3108,14 @@ declare namespace LocalJSX {
         "summaryRow"?: boolean;
         "targetTable"?: HTMLTableElement;
     }
+    interface ModusTableOverflowMenu {
+        "isChecked"?: boolean;
+        "onActionClick"?: (actionId: string, rowId: string) => void;
+        "onOverflowClick"?: (event: ModusTableOverflowMenuCustomEvent<MouseEvent>) => void;
+        "overflowActions"?: ModusTableRowAction[];
+        "rowId"?: string;
+        "showOverflowMenu"?: boolean;
+    }
     interface ModusTableToolbar {
         /**
           * (Optional) Table Panel options.
@@ -3440,6 +3466,7 @@ declare namespace LocalJSX {
         "modus-table-columns-visibility": ModusTableColumnsVisibility;
         "modus-table-dropdown-menu": ModusTableDropdownMenu;
         "modus-table-filler-column": ModusTableFillerColumn;
+        "modus-table-overflow-menu": ModusTableOverflowMenu;
         "modus-table-toolbar": ModusTableToolbar;
         "modus-tabs": ModusTabs;
         "modus-text-input": ModusTextInput;
@@ -3498,6 +3525,7 @@ declare module "@stencil/core" {
              * ModusFillerColumn is to fill empty space within a table or grid when the content in other columns is not wide enough to occupy the entire available width
              */
             "modus-table-filler-column": LocalJSX.ModusTableFillerColumn & JSXBase.HTMLAttributes<HTMLModusTableFillerColumnElement>;
+            "modus-table-overflow-menu": LocalJSX.ModusTableOverflowMenu & JSXBase.HTMLAttributes<HTMLModusTableOverflowMenuElement>;
             "modus-table-toolbar": LocalJSX.ModusTableToolbar & JSXBase.HTMLAttributes<HTMLModusTableToolbarElement>;
             "modus-tabs": LocalJSX.ModusTabs & JSXBase.HTMLAttributes<HTMLModusTabsElement>;
             "modus-text-input": LocalJSX.ModusTextInput & JSXBase.HTMLAttributes<HTMLModusTextInputElement>;

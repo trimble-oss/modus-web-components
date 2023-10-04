@@ -8,7 +8,7 @@ import { ModusTableCellLink, ModusTableRowAction } from '../../models/modus-tabl
 import ModusTableCellContent from './modus-table-cell-content';
 import ModusTableCellExpandIcons from './modus-table-cell-expand-icons';
 import { ModusTableRowActions } from '../modus-table-row-actions';
-import { ModusTableOverflowMenu } from '../modus-table-overflow-menu';
+import { ModusTableOverflowMenuCustomEvent } from '../../../../components';
 
 interface ModusTableCellProps {
   cell: Cell<unknown, unknown>;
@@ -20,7 +20,7 @@ interface ModusTableCellProps {
   frozenColumns: string[];
   rowActions: ModusTableRowAction[];
   rowActionClick?: (action: string, rowId: string) => void;
-  overflowMenuClick?: (rowId: string) => void;
+  overflowMenuClick?: (event: ModusTableOverflowMenuCustomEvent<MouseEvent>) => void; 
   onLinkClick: (link: ModusTableCellLink) => void;
 }
 
@@ -71,13 +71,13 @@ export const ModusTableCell: FunctionalComponent<ModusTableCellProps> = ({
                 rowId={row.id}
                 isChecked={isChecked}
               />
-              <ModusTableOverflowMenu
+              <modus-table-overflow-menu
                 showOverflowMenu={showOverflowMenu}
                 rowId={row.id}
                 isChecked={isChecked}
-                overflowMenuClick={overflowMenuClick} 
                 onActionClick={rowActionClick}
-                overflowActions={rowActions}              
+                overflowActions={rowActions}  
+                onOverflowClick={overflowMenuClick}            
               />
             </div>
           )
