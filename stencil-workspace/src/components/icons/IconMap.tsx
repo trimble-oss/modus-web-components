@@ -166,7 +166,7 @@ export const IconMap: FunctionalComponent<IconMapProps> = (props: IconMapProps) 
       return <IconHistory color={props.color} onClick={props.onClick} size={props.size} />;
     case 'export':
       return <IconExport color={props.color} onClick={props.onClick} size={props.size} />;
-    case 'pencil': 
+    case 'pencil':
       return <IconPencil color={props.color} onClick={props.onClick} size={props.size} />;
     default:
       return <img src={props.icon} {...(props.imageOptions || {})} />;
