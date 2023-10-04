@@ -1,21 +1,26 @@
 // eslint-disable-next-line
 import { Fragment, FunctionalComponent, h } from '@stencil/core';
 import { IconMap } from '../../icons/IconMap';
+import { ModusTableRowAction } from '../models/modus-table.models';
 
 interface Props {
   showOverflowMenu: boolean;
-  overFlowMenuClick?: (x: number, y: number) => void;
+  overflowMenuClick?: (rowId: string) => void;
+  onActionClick?: (actionId: string, rowId: string) => void;
+  overflowActions: ModusTableRowAction[];
   rowId: string;
   isChecked: boolean;
 }
 
 export const ModusTableOverflowMenu: FunctionalComponent<Props> = (props: Props) => {
+  // document.addEventListener("click", (e) => console.log(e))
   return (
     <Fragment>
-      {props.showOverflowMenu && typeof props.overFlowMenuClick == 'function' && 
+      {props.showOverflowMenu && 
         <div
           class={`row-action overflow-menu ${props.isChecked ? 'row-selected' : ''}`}
-          onClick={(e) => props.overFlowMenuClick(e.x, e.y)}>
+          id={`row-${props.rowId}`}
+          onClick={() => props.overflowMenuClick(props.rowId)}>
           <IconMap icon="vertical-ellipsis" size="24" />
         </div>
       }

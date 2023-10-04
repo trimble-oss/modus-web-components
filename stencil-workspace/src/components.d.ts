@@ -1014,10 +1014,6 @@ export namespace Components {
           * (Optional) To display a horizontal scrollbar when the width is exceeded.
          */
         "maxWidth": string;
-        /**
-          * (Optional) Dropdown menu with actions for each row.
-         */
-        "overflowMenuActions"?: ModusTableRowAction[];
         "pageSizeList": number[];
         "pagination": boolean;
         /**
@@ -3013,10 +3009,6 @@ declare namespace LocalJSX {
          */
         "onCellLinkClick"?: (event: ModusTableCustomEvent<ModusTableCellLink>) => void;
         /**
-          * An event that fires when a overflow menu action is clicked.
-         */
-        "onOverflowMenuActionClick"?: (event: ModusTableCustomEvent<ModusTableRowActionClickEvent>) => void;
-        /**
           * An event that fires when a row action is clicked.
          */
         "onRowActionClick"?: (event: ModusTableCustomEvent<ModusTableRowActionClickEvent>) => void;
@@ -3028,10 +3020,6 @@ declare namespace LocalJSX {
           * Emits event on sort change
          */
         "onSortChange"?: (event: ModusTableCustomEvent<ModusTableSortingState>) => void;
-        /**
-          * (Optional) Dropdown menu with actions for each row.
-         */
-        "overflowMenuActions"?: ModusTableRowAction[];
         "pageSizeList"?: number[];
         "pagination"?: boolean;
         /**

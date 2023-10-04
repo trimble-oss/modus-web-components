@@ -20,7 +20,7 @@ interface ModusTableCellProps {
   frozenColumns: string[];
   rowActions: ModusTableRowAction[];
   rowActionClick?: (action: string, rowId: string) => void;
-  overFlowMenuClick?: (x: number, y: number) => void;
+  overflowMenuClick?: (rowId: string) => void;
   onLinkClick: (link: ModusTableCellLink) => void;
 }
 
@@ -34,7 +34,7 @@ export const ModusTableCell: FunctionalComponent<ModusTableCellProps> = ({
   frozenColumns,
   rowActions,
   rowActionClick,
-  overFlowMenuClick,
+  overflowMenuClick,
   onLinkClick,
 }) => {
   const { id, column } = cell;
@@ -66,16 +66,18 @@ export const ModusTableCell: FunctionalComponent<ModusTableCellProps> = ({
           cellIndex == 0 && (
             <div class="row-menu" style={{ width: `${iconsWidth}px`, paddingRight: '4px' }}>   
               <ModusTableRowActions
-                actions={rowActions?.filter((action) => !row.original["_excludedActions"]?.includes(action._id))}
+                actions={rowActions}
                 onRowActionClick={rowActionClick}
                 rowId={row.id}
                 isChecked={isChecked}
               />
-              <ModusTableOverflowMenu 
-                showOverflowMenu={showOverflowMenu} 
-                rowId={row.id} 
+              <ModusTableOverflowMenu
+                showOverflowMenu={showOverflowMenu}
+                rowId={row.id}
                 isChecked={isChecked}
-                overFlowMenuClick={overFlowMenuClick}
+                overflowMenuClick={overflowMenuClick} 
+                onActionClick={rowActionClick}
+                overflowActions={rowActions}              
               />
             </div>
           )

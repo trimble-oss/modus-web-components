@@ -17,8 +17,8 @@ export const ModusTableRowActions: FunctionalComponent<Props> = (props: Props) =
         props.actions.map((action) => (
           <div
             class={`row-action ${props.isChecked ? 'row-selected' : ''}`}
-            onClick={() => props.onRowActionClick(action._id, props.rowId)}>
-            <IconMap icon={action.display.icon} size="16" /> 
+            onClick={() => props.onRowActionClick(action.id, props.rowId)}>
+            <IconMap icon={action.icon} size="16" /> 
           </div>
         ))}
     </Fragment>

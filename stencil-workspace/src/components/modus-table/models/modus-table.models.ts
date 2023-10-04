@@ -1,4 +1,4 @@
-import { CellContext, ColumnDefTemplate, RowData, SortingFnOption, SortingState } from '@tanstack/table-core';
+import { CellContext, ColumnDefTemplate, Row, RowData, SortingFnOption, SortingState } from '@tanstack/table-core';
 import { COLUMN_DEF_DATATYPE_INTEGER, COLUMN_DEF_DATATYPE_LINK, COLUMN_DEF_DATATYPE_TEXT } from '../modus-table.constants';
 
 export type ModusTableRowData = RowData;
@@ -56,11 +56,10 @@ export interface ModusTableCellLink {
 }
 
 export interface ModusTableRowAction {
-  _id: string;
-  display: {
-    icon?: string;
-    text: string;
-  };
+  id: string;
+  icon: string;
+  label: string;
+  isVisible: (row: Row<unknown>) => boolean | boolean;
 }
 
 export interface ModusTableRowActionClickEvent {
