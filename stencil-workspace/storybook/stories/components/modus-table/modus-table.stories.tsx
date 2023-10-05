@@ -156,13 +156,13 @@ const defaultActions = [
     id: 'edit',
     icon: 'edit',
     label: 'Edit',
-    isVisible: true
+    isVisible: () => true
   },
   {
     id: 'delete',
     icon: 'delete',
     label: 'Delete',
-    isVisible: true
+    isVisible: () => true
   }
 ]
 
@@ -171,31 +171,31 @@ const overflowActions = [
     id: 'edit',
     icon: 'edit',
     label: 'Edit',
-    isVisible: true
+    isVisible: () => true
   },
   {
     id: 'delete',
     icon: 'delete',
     label: 'Delete',
-    isVisible: true
+    isVisible: () => true
   },
   {
     id: '3',
     icon: 'cancel',
     label: 'Cancel',
-    isVisible: true
+    isVisible: () => true
   },
   {
     id: '4',
     icon: 'calendar',
     label: 'Calendar',
-    isVisible: true
+    isVisible: () => true
   },
   {
     id: '5',
     icon: 'check',
     label: 'Check',
-    isVisible: true
+    isVisible: () => true
   }
 ]
 

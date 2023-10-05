@@ -1,4 +1,5 @@
 import { E2EPage, newE2EPage } from '@stencil/core/testing';
+import { ModusTableRowAction } from './models/modus-table.models';
 
 const MockColumns = [
   {
@@ -28,59 +29,37 @@ const MockData = [
   },
 ];
 
-const MockOverflowMenuActions = [
+const MockRowActions: ModusTableRowAction[] = [
   {
-    _id: 'edit',
-    display: {
-      icon: 'edit',
-      text: 'Edit',
-    },
+    id: 'edit',
+    icon: 'edit',
+    label: 'Edit',
+    isVisible: () => true
   },
   {
-    _id: 'delete',
-    display: {
-      icon: 'delete',
-      text: 'Delete',
-    },
-  },
-];
-
-const MockRowActions = [
-  {
-    _id: 'edit',
-    display: {
-      icon: 'edit',
-      text: 'Edit',
-    },
+    id: 'delete',
+    icon: 'delete',
+    label: 'Delete',
+    isVisible: () => true
   },
   {
-    _id: 'delete',
-    display: {
-      icon: 'delete',
-      text: 'Delete',
-    },
+    id: '3',
+    icon: 'cancel',
+    label: 'Cancel',
+    isVisible: () => true
   },
   {
-    _id: '3',
-    display: {
-      icon: 'delete',
-      text: '3',
-    },
+    id: '4',
+    icon: 'calendar',
+    label: 'Calendar',
+    isVisible: () => true
   },
   {
-    _id: '4',
-    display: {
-      icon: 'delete',
-      text: '4',
-    },
-  },
-  {
-    _id: '5',
-    display: {
-      icon: 'delete',
-      text: '5',
-    },
-  },
+    id: '5',
+    icon: 'check',
+    label: 'Check',
+    isVisible: () => true
+  }
 ];
 
 describe('modus-table', () => {
@@ -489,27 +468,7 @@ describe('modus-table', () => {
     expect(resizeContainer).not.toBeNull();
   });
 
-  it('Renders overflow menu', async () => {
-    page = await newE2EPage();
-    await page.setContent('<modus-table />');
-
-    const component = await page.find('modus-table');
-
-    component.setProperty('columns', MockColumns);
-    component.setProperty('data', MockData);
-    component.setProperty('overflowMenuActions', MockOverflowMenuActions);
-    await page.waitForChanges();
-
-    let overflowMenu = await page.find('modus-table >>> .overflow-menu');
-    expect(overflowMenu).not.toBeNull();
-    overflowMenu.click();
-    await page.waitForChanges();
-
-    let dropdownMenu = await page.find('modus-table >>> .dropdownMenu');
-    expect(dropdownMenu).not.toBeNull();
-  });
-
-  it('Renders a maximum of 4 row actions', async () => {
+  it('Renders a maximum of 3 row actions with overflow menu', async () => {
     page = await newE2EPage();
     await page.setContent('<modus-table />');
 
@@ -519,9 +478,16 @@ describe('modus-table', () => {
     component.setProperty('data', MockData);
     component.setProperty('rowActions', MockRowActions);
     await page.waitForChanges();
-
+    
     let rowActions = await page.findAll('modus-table >>> .row-action');
-    console.log(rowActions);
-    expect(rowActions.length).toBe(8);
+    expect(rowActions.length).toBe(3*MockData.length);
+
+    let overflowMenu = await page.find('modus-table >>> .overflow-menu');
+    expect(overflowMenu).not.toBeNull();
+    overflowMenu.click();
+    await page.waitForChanges();
+
+    let dropdownMenu = await page.find('modus-table >>> .dropdown-menu');
+    expect(dropdownMenu).not.toBeNull();
   });
 });

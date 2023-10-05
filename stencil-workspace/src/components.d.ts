@@ -1019,7 +1019,7 @@ export namespace Components {
         /**
           * (Optional) Actions that can be performed on each row. A maximum of 4 icons will be shown, including overflow menu and expand icons.
          */
-        "rowActions"?: ModusTableRowAction[];
+        "rowActions": ModusTableRowAction[];
         /**
           * (Optional) To display checkbox.
          */

@@ -376,15 +376,13 @@ User can expand rows to display as child/sub row data.
 
 User can add up to 4 actions to the beggining of the rows with `rowActions`.
 
-- Set `_excludedActions` with an array of action ids that should not be displayed for specific rows in `data`.
+- Set the action's `isVisible: (row) => boolean` to false to hide the action for specific rows.
 
 <Story id="components-table--row-actions" height={'350px'} />
 
 ### Overflow Menu
 
-User can add an overflow menu to the beggining of the rows with `overflowMenuActions`.
-
-- Set `_excludedActions` with an array of action ids that should not be displayed for specific rows in `data`.
+A maximum of 4 icons are shown in the cell. When this limit is exceeded, the remaining actions are shown in an overflow menu.
 
 <Story id="components-table--overflow-menu" height={'350px'} />
 
@@ -447,7 +445,7 @@ interface ModusTableRowAction {
   id: string;
   icon: string;
   label: string;
-  isVisible: (row: Row<unknown>) => boolean | boolean;
+  isVisible: (row: Row<unknown>) => boolean;
 }
 
 ```

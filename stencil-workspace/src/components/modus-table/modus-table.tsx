@@ -173,9 +173,9 @@ export class ModusTable {
   @Prop() maxWidth: string;
 
   /** (Optional) Actions that can be performed on each row. A maximum of 4 icons will be shown, including overflow menu and expand icons. */
-  @Prop() rowActions?: ModusTableRowAction[] = [];
+  @Prop() rowActions: ModusTableRowAction[] = [];
   @Watch('rowActions') onChangeOfRowActions() {
-    if (this.rowActions?.length > 0) {
+    if (this.rowActions.length > 0) {
       this.frozenColumns.push(this.columnOrder[0]);
     }
     if (this.toolbarOptions?.columnsVisibility) {
@@ -185,7 +185,7 @@ export class ModusTable {
       ];
     }
     this.maximumNumberOfActions = this.rowsExpandable ? 3 : 4;
-    if (this.rowActions?.length > this.maximumNumberOfActions) {
+    if (this.rowActions.length > this.maximumNumberOfActions) {
       this.overflowActions = this.rowActions.slice(this.maximumNumberOfActions - 1);
     }
   }
@@ -649,7 +649,7 @@ export class ModusTable {
           {this.overflowRowId && 
             <div
             id={`overflow-menu-${this.overflowRowId}`}
-            class="dropdownMenu"
+            class="dropdown-menu"
             style={{ top: `${top}px`, left: `${left}px`, position: 'absolute' }}
             >
             {this.table.getRowModel()?.rows.filter((row) => row.id == this.overflowRowId).map((row) => (
