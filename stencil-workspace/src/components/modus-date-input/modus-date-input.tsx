@@ -70,10 +70,11 @@ export class ModusDateInput {
       return;
     }
 
-    this._altFormatters = altFormats.split('|')
-      .map(format => format.trim())
+    this._altFormatters = altFormats
+      .split('|')
+      .map((format) => format.trim())
       .filter(Boolean)
-      .map(format => new DateInputFormatter(this.fillerDate, format));
+      .map((format) => new DateInputFormatter(this.fillerDate, format));
   }
 
   /** (optional) Custom helper text displayed below the input. */
