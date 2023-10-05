@@ -23,7 +23,7 @@ export class ModusDateInput {
 
   /** (optional) Regular expression to allow characters while typing the input.
    */
-  @Prop() allowedCharsRegex: RegExp | string;
+  @Prop({ mutable: true }) allowedCharsRegex: RegExp | string;
 
   /** (optional) The input's aria-label. */
   @Prop() ariaLabel: string | null;
@@ -206,7 +206,7 @@ export class ModusDateInput {
     const inputString = (event.currentTarget as HTMLInputElement)?.value;
 
     this._dateDisplay = inputString;
-    this.value = this._formatter.parseDisplayString(this._dateDisplay);
+    this.value = this._formatter.parseDisplayString(inputString.trim());
   }
 
   // Helpers
@@ -217,6 +217,7 @@ export class ModusDateInput {
   /** Check if the input string matches any of the alternative formats. */
   checkAltFormats(): string {
     if (this.value) {
+      this._dateDisplay = this._formatter.formatDisplayString(this.value);
       return;
     }
 
