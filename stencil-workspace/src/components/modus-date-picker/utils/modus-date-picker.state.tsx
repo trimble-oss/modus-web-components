@@ -1,13 +1,19 @@
 import { ISO_DATE_FORMAT } from '../../modus-date-input/utils/modus-date-input.formatter';
+import { pad } from '../../modus-date-input/utils/modus-date-input.tokens';
 
 export default class ModusDatePickerState {
   private element: HTMLModusDateInputElement;
   private date: Date | null;
   private isOpen = false;
+  /** Min and Max dates for the date picker */
+  private max: Date;
+  private min: Date;
 
   constructor(el: HTMLModusDateInputElement) {
     this.element = el;
-    this.element.showCalendarIcon = this.element.showCalendarIcon?.toString().toUpperCase() !== 'FALSE' ? true : false;
+    this.element.showCalendarIcon = this.element.showCalendarIcon?.toString().toUpperCase() !== 'FALSE';
+    this.max = this.parseDate(this.element.max);
+    this.min = this.parseDate(this.element.min);
     this.refresh();
   }
 
@@ -15,12 +21,20 @@ export default class ModusDatePickerState {
     return this.date;
   }
 
+  getMaxDateAllowed(): Date {
+    return this.max;
+  }
+
+  getMinDateAllowed(): Date {
+    return this.min;
+  }
+
   setDate(val: Date): void {
     // Converting to ISO8601 'yyyy-mm-dd' format
     if (Number(val)) {
       const year = val.getFullYear();
-      const month = val.getMonth() + 1; // Zero based number system for months
-      const date = val.getDate();
+      const month = pad(val.getMonth() + 1); // Zero based number system for months
+      const date = pad(val.getDate());
 
       this.element.value = `${year}-${month}-${date}`;
       this.element.focusInput();
@@ -39,15 +53,23 @@ export default class ModusDatePickerState {
   }
 
   refresh(): void {
+    this.date = this.parseDate(this.element.value);
+  }
+
+  parseDate(date: string): Date | null {
+    if (!date) {
+      return null;
+    }
+
     // Note: Modus Date Input component's value is always in 'yyyy-mm-dd' format
     const dateISORegex = new RegExp(ISO_DATE_FORMAT);
-    const parse = dateISORegex.exec(this.element.value);
+    const parse = dateISORegex.exec(date);
 
     if (parse) {
       // first element returns the whole date string
       parse.shift();
 
-      this.date = new Date(
+      return new Date(
         parseFloat(parse[0]),
         parseFloat(parse[1]) - 1, // Zero based number system for months
         parseFloat(parse[2]),
@@ -56,7 +78,9 @@ export default class ModusDatePickerState {
         0,
         0
       );
-    } else this.date = null;
+    }
+
+    return null;
   }
 
   toggleCalendar(val: boolean = null): void {

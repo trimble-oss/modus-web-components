@@ -34,11 +34,11 @@
 
 ## Events
 
-| Event                 | Description                                      | Type                                                  |
-| --------------------- | ------------------------------------------------ | ----------------------------------------------------- |
-| `calendarIconClicked` | An event that fires on calendar icon click.      | `CustomEvent<ModusDateInputCalendarIconClickedEvent>` |
-| `dateInputBlur`       | An event that fires on input value out of focus. | `CustomEvent<ModusDateInputEventDetails>`             |
-| `valueChange`         | An event that fires on input value change.       | `CustomEvent<ModusDateInputEventDetails>`             |
+| Event                 | Description                                      | Type                                      |
+| --------------------- | ------------------------------------------------ | ----------------------------------------- |
+| `calendarIconClicked` | An event that fires on calendar icon click.      | `CustomEvent<ModusDateInputEventDetails>` |
+| `dateInputBlur`       | An event that fires on input value out of focus. | `CustomEvent<ModusDateInputEventDetails>` |
+| `valueChange`         | An event that fires on input value change.       | `CustomEvent<ModusDateInputEventDetails>` |
 
 
 ## Methods

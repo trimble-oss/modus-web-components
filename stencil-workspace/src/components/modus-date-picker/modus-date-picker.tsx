@@ -10,7 +10,6 @@ import { IconMap } from '../icons/IconMap';
 import ModusDatePickerCalendar from './utils/modus-date-picker.calendar';
 import ModusDatePickerState from './utils/modus-date-picker.state';
 import {
-  ModusDateInputCalendarIconClickedEvent,
   ModusDateInputEventDetails,
 } from '../modus-date-input/utils/modus-date-input.models';
 
@@ -34,9 +33,10 @@ export class ModusDatePicker {
   private _calendar: ModusDatePickerCalendar;
   private _dateInputs: { [key: string]: ModusDatePickerState } = {};
   private _locale = 'default';
-  /** Min and Max dates for the date picker */
-  private _max: Date;
-  private _min: Date;
+
+  private get _currentInput(): ModusDatePickerState {
+    return Object.values(this._dateInputs).find((dt) => dt.isCalendarOpen());
+  }
 
   componentWillLoad() {
     this._calendar = new ModusDatePickerCalendar();
@@ -44,11 +44,8 @@ export class ModusDatePicker {
 
   /** Handlers */
   @Listen('calendarIconClicked')
-  handleCalendarIconClick(event: CustomEvent<ModusDateInputCalendarIconClickedEvent>) {
-    const { type, min, max } = event.detail;
-
-    this._min = min;
-    this._max = max;
+  handleCalendarIconClick(event: CustomEvent<ModusDateInputEventDetails>) {
+    const { type } = event.detail;
 
     Object.keys(this._dateInputs).forEach((d) => this._dateInputs[d].toggleCalendar(d === type ? null : false));
 
@@ -166,8 +163,7 @@ export class ModusDatePicker {
   isInvalidDateRange = (startDate, endDate) => this.compare(endDate, startDate) < 0;
 
   pickCalendarDate(date: Date) {
-    const currentDateOpen = Object.keys(this._dateInputs).find((d) => this._dateInputs[d].isCalendarOpen());
-    this._dateInputs[currentDateOpen].setDate(date);
+    this._currentInput.setDate(date);
     this.toggleCalendar(false);
   }
 
@@ -176,14 +172,17 @@ export class ModusDatePicker {
   }
 
   private validateMinMax(date: Date): boolean {
+    const max = this._currentInput?.getMaxDateAllowed();
+    const min = this._currentInput?.getMinDateAllowed();
+
     if (!date) {
       return false;
     }
 
-    if (this._min && this.compare(date, this._min) < 0) {
+    if (min && this.compare(date, min) < 0) {
       return false;
     }
-    if (this._max && this.compare(date, this._max) > 0) {
+    if (max && this.compare(date, max) > 0) {
       return false;
     }
 

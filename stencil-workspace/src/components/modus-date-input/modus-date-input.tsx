@@ -12,7 +12,6 @@ import {
 import { IconMap } from '../icons/IconMap';
 import DateInputFormatter from './utils/modus-date-input.formatter';
 import {
-  ModusDateInputCalendarIconClickedEvent,
   ModusDateInputEventDetails,
   ModusDateInputType,
 } from './utils/modus-date-input.models';
@@ -129,7 +128,7 @@ export class ModusDateInput {
   }
 
   /** An event that fires on calendar icon click. */
-  @Event() calendarIconClicked: EventEmitter<ModusDateInputCalendarIconClickedEvent>;
+  @Event() calendarIconClicked: EventEmitter<ModusDateInputEventDetails>;
 
   /** An event that fires on input value out of focus. */
   @Event() dateInputBlur: EventEmitter<ModusDateInputEventDetails>;
@@ -179,8 +178,6 @@ export class ModusDateInput {
       value: this.value,
       type: this.type,
       inputString: this._dateDisplay,
-      min: this._formatter.parseIsoToDate(this.min),
-      max: this._formatter.parseIsoToDate(this.max),
     });
   }
 
@@ -284,32 +281,16 @@ export class ModusDateInput {
     const min = this._formatter.parseIsoToDate(this.min);
     const max = this._formatter.parseIsoToDate(this.max);
     const value = this._formatter.parseIsoToDate(this.value);
-    const messages = this.getMinMaxValidationMessage();
 
     if (min && min > value) {
-      this.errorText = messages.min;
+      min.setUTCDate(min.getDate() - 1);
+      this.errorText = `Select a date after ${this._formatter.formatDisplayString(min.toISOString())}`;
     } else if (max && max < value) {
-      this.errorText = messages.max
+      max.setUTCDate(max.getDate() + 1);
+      this.errorText = `Select a date before ${this._formatter.formatDisplayString(max.toISOString())}`
     } else {
       this.clearValidation();
     }
-  }
-
-  private getMinMaxValidationMessage(): { min: string; max: string } {
-    const result = { min: '', max: '' };
-    const min = this._formatter.parseIsoToDate(this.min);
-    const max = this._formatter.parseIsoToDate(this.max);
-
-    if (min) {
-      min.setUTCDate(min.getDate() - 1);
-      result.min = `Select a date after ${this._formatter.formatDisplayString(min.toISOString())}`;
-    }
-    if (max) {
-      max.setUTCDate(max.getDate() + 1);
-      result.max = `Select a date before ${this._formatter.formatDisplayString(max.toISOString())}`;
-    }
-
-    return result;
   }
 
   render() {

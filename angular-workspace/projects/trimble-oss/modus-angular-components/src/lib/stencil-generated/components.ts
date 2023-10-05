@@ -354,14 +354,13 @@ export class ModusDateInput {
 }
 
 
-import type { ModusDateInputCalendarIconClickedEvent as IModusDateInputModusDateInputCalendarIconClickedEvent } from '@trimble-oss/modus-web-components';
 import type { ModusDateInputEventDetails as IModusDateInputModusDateInputEventDetails } from '@trimble-oss/modus-web-components';
 
 export declare interface ModusDateInput extends Components.ModusDateInput {
   /**
    * An event that fires on calendar icon click.
    */
-  calendarIconClicked: EventEmitter<CustomEvent<IModusDateInputModusDateInputCalendarIconClickedEvent>>;
+  calendarIconClicked: EventEmitter<CustomEvent<IModusDateInputModusDateInputEventDetails>>;
   /**
    * An event that fires on input value out of focus.
    */
