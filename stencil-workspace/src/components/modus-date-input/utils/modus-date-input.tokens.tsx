@@ -21,7 +21,7 @@ type tokens = { [k in token]: { regex: string; type: tokenType } };
 type formats = { [k in token]: (val: number, defaultValue?: number) => string };
 type parsers = { [k in token]: (val: string, defaultValue?: number) => number };
 
-export function pad(val: number): string {
+function pad(val: number): string {
   if (val < 10) return `0${val}`;
   return val.toString();
 }

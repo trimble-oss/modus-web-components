@@ -1,5 +1,4 @@
 import { ISO_DATE_FORMAT } from '../../modus-date-input/utils/modus-date-input.formatter';
-import { pad } from '../../modus-date-input/utils/modus-date-input.tokens';
 
 export default class ModusDatePickerState {
   private element: HTMLModusDateInputElement;
