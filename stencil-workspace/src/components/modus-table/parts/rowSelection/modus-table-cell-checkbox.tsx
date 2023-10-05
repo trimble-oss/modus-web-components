@@ -27,7 +27,15 @@ export const ModusTableCellCheckbox: FunctionalComponent<ModusTableCellCheckboxP
         tabIndex={0}
         ref={(el) => (cellEl = el)}
         onFocus={() => checkboxInput?.focusCheckbox()}
-        onKeyDown={(e: KeyboardEvent) => NavigateCell(e, false, cellEl, -1)}>
+        onKeyDown={(e: KeyboardEvent) =>
+          NavigateCell({
+            event: e,
+            isEditable: false,
+            exitEditing: false,
+            cellElement: cellEl,
+            cellIndex: -1,
+          })
+        }>
         <modus-checkbox
           ref={(el) => (checkboxInput = el)}
           checked={isChecked}

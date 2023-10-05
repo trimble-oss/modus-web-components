@@ -47,6 +47,7 @@ export class ModusTableCellMain {
   }
 
   private cellEl: HTMLElement;
+  private exitEditing: boolean;
   private onClick: () => void = () => this.handleClick();
   private onKeyDown: (e: KeyboardEvent) => void = (e: KeyboardEvent) => this.handleKeydown(e);
   private onBlur: (e: FocusEvent) => void = (e) => this.handleBlur(e);
@@ -101,7 +102,15 @@ export class ModusTableCellMain {
   };
 
   handleKeydown = (event: KeyboardEvent) => {
-    NavigateCell(event, this.cell.column.columnDef[this.cellEditableKey], this.cellEl, this.cellIndex);
+    debugger;
+    NavigateCell({
+      event,
+      isEditable: this.cell.column.columnDef[this.cellEditableKey],
+      exitEditing: this.exitEditing,
+      cellElement: this.cellEl,
+      cellIndex: this.cellIndex,
+    });
+    if (this.exitEditing) this.exitEditing = false;
   };
 
   handleCellValueChange(newValue: string, oldValue: string, rowId: string) {
@@ -109,9 +118,16 @@ export class ModusTableCellMain {
 
     if (newValue !== oldValue && this.valueChange) {
       this.valueChange({ rowId, accessorKey: this.cell.column.columnDef[this.accessorKey], newValue, oldValue });
+      console.log('handleCellValueChange', this.cellEl);
+      if (!this.exitEditing) this.cellEl?.focus();
     }
-    this.cellEl?.focus();
   }
+
+  handleExitEditing = () => {
+    debugger;
+    this.editMode = false;
+    this.exitEditing = true;
+  };
 
   renderCellValue(cellValue: unknown, row: Row<unknown>): JSX.Element[] {
     if (!cellValue) return null;
@@ -152,6 +168,7 @@ export class ModusTableCellMain {
             type={this.getEditorType()}
             args={this.getEditorArgs()}
             valueEntered={(newVal: string, oldVal: string) => this.handleCellValueChange(newVal, oldVal, row.id)}
+            exitEditing={this.handleExitEditing}
           />
         ) : (
           this.renderCellValue(cellValue, row)

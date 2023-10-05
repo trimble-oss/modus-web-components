@@ -416,14 +416,13 @@ export class ModusTable {
   }
 
   updateTableCore(updater: Updater<unknown>, key: string, event: EventEmitter<unknown> = null) {
-    //
-    const newState = { ...this.tableState };
-    newState[key] = this.tableCore.getState(updater, this.tableState[key]);
+    const newTableState = { ...this.tableState };
+    newTableState[key] = this.tableCore.getState(updater, this.tableState[key]);
 
     /**
-     * maintaining the state of the table in the component is necessary to re-render the table and be in consistent with the internal state of Tanstack table instance(this.tableCore).
+     * Maintaining a local state of the table is necessary for the component to re-render and stay consistent with the internal state of Tanstack table.
      */
-    this.setTableState(newState);
+    this.setTableState(newTableState);
     this.tableCore.setState(key, this.tableState[key]);
     if (event) event.emit(this.tableState[key]);
   }

@@ -1065,6 +1065,7 @@ export namespace Components {
     }
     interface ModusTableCellEditor {
         "args": ModusTableCellEditorArgs;
+        "exitEditing": () => void;
         "type": string;
         "value": string;
         "valueEntered": (newValue: string, oldValue: string) => void;
@@ -3112,6 +3113,7 @@ declare namespace LocalJSX {
     }
     interface ModusTableCellEditor {
         "args"?: ModusTableCellEditorArgs;
+        "exitEditing"?: () => void;
         "type"?: string;
         "value"?: string;
         "valueEntered"?: (newValue: string, oldValue: string) => void;
