@@ -1,5 +1,5 @@
 {
-  "name": "modus-angular-components-test-0.2.0-ng15",
+  "name": "modus-angular-components-test-0.3.0-ng15",
   "version": "0.1.0",
   "description": "Test application for Modus Angular Components Library for Angular 15",
   "scripts": {
@@ -19,7 +19,7 @@
     "@angular/platform-browser": "^15.2.9",
     "@angular/platform-browser-dynamic": "^15.2.9",
     "@angular/router": "^15.2.9",
-    "@trimble-oss/modus-angular-components": "^0.2.0-ng15",
+    "@trimble-oss/modus-angular-components": "^0.3.0-ng15",
     "rxjs": "~7.8.1",
     "tslib": "^2.5.3",
     "zone.js": "~0.12.0"
