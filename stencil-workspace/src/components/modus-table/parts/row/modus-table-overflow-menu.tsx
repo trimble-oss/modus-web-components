@@ -30,4 +30,4 @@ export class ModusTableOverflowMenu{
       </Fragment>
     );
   }
-};
+}

@@ -223,7 +223,7 @@ export class ModusTable {
   @State() overflowRowId?: string = null;
   @State() overflowVisible: string = null;
   @State() overflowActions: ModusTableRowAction[] = [];
-  @State() maximumNumberOfActions: number = 4;
+  @State() maximumNumberOfActions = 4;
   @State() overflowElement?: HTMLModusTableOverflowMenuElement = null
 
   private frozenColumns: string[] = []; // Columns will remain on the left and be unable to resize, reorganize, or modify their visibility.

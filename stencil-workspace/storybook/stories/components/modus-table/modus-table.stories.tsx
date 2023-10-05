@@ -589,7 +589,7 @@ export const RowActions = Template.bind({});
 RowActions.args = { ...DefaultArgs, rowActions: defaultActions };
 
 export const OverflowMenu = Template.bind({});
-OverflowMenu.args = { ...DefaultArgs, rowActions: defaultActions };
+OverflowMenu.args = { ...DefaultArgs, rowActions: overflowActions };
 
 export const LargeDataset = Template.bind({});
 
