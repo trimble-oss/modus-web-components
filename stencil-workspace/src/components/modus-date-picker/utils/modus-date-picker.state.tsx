@@ -71,11 +71,7 @@ export default class ModusDatePickerState {
       return new Date(
         parseFloat(parse[0]),
         parseFloat(parse[1]) - 1, // Zero based number system for months
-        parseFloat(parse[2]),
-        0,
-        0,
-        0,
-        0
+        parseFloat(parse[2])
       );
     }
 

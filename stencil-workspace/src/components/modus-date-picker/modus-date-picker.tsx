@@ -171,7 +171,7 @@ export class ModusDatePicker {
     this._showYearArrows = show;
   }
 
-  private validateMinMax(date: Date): boolean {
+  private isWithinCurrentMinMax(date: Date): boolean {
     const max = this._currentInput?.getMaxDateAllowed();
     const min = this._currentInput?.getMinDateAllowed();
 
@@ -248,7 +248,7 @@ export class ModusDatePicker {
               const isSingleDateSelected = singleDate && this.compare(date, singleDate) === 0;
               const isSelected = isStartDate || isEndDate || isSingleDateSelected;
               const isInRange = !isSelected ? positions['in-range'] : false;
-              const isDateDisabled = !this.validateMinMax(date);
+              const isDateDisabled = !this.isWithinCurrentMinMax(date);
 
               // Only for the last date in the calendar
               const onBlurEvent =
