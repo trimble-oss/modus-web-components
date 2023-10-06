@@ -174,7 +174,7 @@ export class ModusDateInput {
   handleBlur(): void {
     this._isEditing = false;
 
-    this.checkAltFormats();
+    this.updateDateFromAltFormats();
     this.validateInput(this._dateDisplay);
     this.dateInputBlur.emit({
       value: this.value,
@@ -215,7 +215,7 @@ export class ModusDateInput {
   }
 
   /** Check if the input string matches any of the alternative formats. */
-  checkAltFormats(): string {
+  updateDateFromAltFormats(): string {
     if (this.value) {
       this._dateDisplay = this._formatter.formatDisplayString(this.value);
       return;
