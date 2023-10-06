@@ -4,30 +4,24 @@ import {
   KEYBOARD_ESCAPE,
   KEYBOARD_LEFT,
   KEYBOARD_RIGHT,
-  KEYBOARD_TAB,
   KEYBOARD_UP,
 } from '../modus-table.constants';
 
-interface NavigateCellProps {
-  event: KeyboardEvent;
-  isEditable?: boolean;
-  exitEditing?: boolean;
+interface NavigateTableCellsProps {
+  key: string;
   cellElement: HTMLElement;
   cellIndex: number;
 }
-export default function NavigateCell(props: NavigateCellProps) {
-  const { event, isEditable, exitEditing, cellElement, cellIndex } = props;
+export default function NavigateTableCells(props: NavigateTableCellsProps) {
+  const { key, cellElement, cellIndex } = props;
   let newSelectCell: HTMLElement;
-  switch (event.key.toLowerCase()) {
+  switch (key?.toLowerCase()) {
     case KEYBOARD_ENTER: // Pressing Enter key makes cell editable.
-      if (isEditable) {
-        if (exitEditing) {
-          newSelectCell = (cellElement.parentElement.nextSibling as HTMLElement)?.children[cellIndex + 1] as HTMLElement;
-          if (newSelectCell) newSelectCell.focus();
-          else cellElement.focus();
-          console.log(newSelectCell);
-        } else cellElement.click();
-      }
+      newSelectCell = (cellElement.parentElement.nextSibling as HTMLElement)?.children[cellIndex + 1] as HTMLElement;
+
+      if (newSelectCell) newSelectCell.focus();
+      else cellElement.focus();
+
       break;
     case KEYBOARD_ESCAPE: // Pressing Escape key makes cell non-editable.
       cellElement.focus();

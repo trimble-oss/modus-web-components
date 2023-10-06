@@ -1065,10 +1065,10 @@ export namespace Components {
     }
     interface ModusTableCellEditor {
         "args": ModusTableCellEditorArgs;
-        "exitEditing": () => void;
+        "keyDown": (e: KeyboardEvent, newValue: string) => void;
         "type": string;
         "value": string;
-        "valueEntered": (newValue: string, oldValue: string) => void;
+        "valueChange": (newValue: string) => void;
     }
     interface ModusTableCellMain {
         "cell": Cell<unknown, unknown>;
@@ -3113,10 +3113,10 @@ declare namespace LocalJSX {
     }
     interface ModusTableCellEditor {
         "args"?: ModusTableCellEditorArgs;
-        "exitEditing"?: () => void;
+        "keyDown"?: (e: KeyboardEvent, newValue: string) => void;
         "type"?: string;
         "value"?: string;
-        "valueEntered"?: (newValue: string, oldValue: string) => void;
+        "valueChange"?: (newValue: string) => void;
     }
     interface ModusTableCellMain {
         "cell"?: Cell<unknown, unknown>;

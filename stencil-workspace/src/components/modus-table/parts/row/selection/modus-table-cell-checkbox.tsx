@@ -3,7 +3,7 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Row } from '@tanstack/table-core';
-import NavigateCell from '../../utilities/table-cell-navigation.utility';
+import NavigateTableCells from '../../../utilities/table-cell-navigation.utility';
 
 interface ModusTableCellCheckboxProps {
   rowSelection: boolean;
@@ -28,10 +28,8 @@ export const ModusTableCellCheckbox: FunctionalComponent<ModusTableCellCheckboxP
         ref={(el) => (cellEl = el)}
         onFocus={() => checkboxInput?.focusCheckbox()}
         onKeyDown={(e: KeyboardEvent) =>
-          NavigateCell({
-            event: e,
-            isEditable: false,
-            exitEditing: false,
+          NavigateTableCells({
+            key: e.key,
             cellElement: cellEl,
             cellIndex: -1,
           })

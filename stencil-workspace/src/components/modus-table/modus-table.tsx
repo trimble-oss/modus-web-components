@@ -56,7 +56,7 @@ import {
   ModusTableToolbarOptions,
   ModusTableRowSelectionOptions,
 } from './models/modus-table.models';
-import { ModusTableColumnDropIndicator, ModusTableColumnDragItem } from './parts/modus-table-drag-item';
+import { ModusTableColumnDropIndicator, ModusTableColumnDragItem } from './parts/columnHeader/modus-table-column-drag-item';
 import { ModusTablePagination } from './parts/modus-table-pagination';
 import { ModusTableFooter } from './parts/modus-table-footer';
 import { TableHeaderDragDrop } from './utilities/table-header-drag-drop.utility';

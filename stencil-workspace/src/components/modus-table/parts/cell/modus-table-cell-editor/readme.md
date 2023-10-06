@@ -7,12 +7,13 @@
 
 ## Properties
 
-| Property       | Attribute | Description | Type                                             | Default     |
-| -------------- | --------- | ----------- | ------------------------------------------------ | ----------- |
-| `args`         | --        |             | `{ format: string; } \| { options: unknown[]; }` | `undefined` |
-| `type`         | `type`    |             | `string`                                         | `undefined` |
-| `value`        | `value`   |             | `string`                                         | `undefined` |
-| `valueEntered` | --        |             | `(newValue: string, oldValue: string) => void`   | `undefined` |
+| Property      | Attribute | Description | Type                                             | Default     |
+| ------------- | --------- | ----------- | ------------------------------------------------ | ----------- |
+| `args`        | --        |             | `{ format: string; } \| { options: unknown[]; }` | `undefined` |
+| `keyDown`     | --        |             | `(e: KeyboardEvent, newValue: string) => void`   | `undefined` |
+| `type`        | `type`    |             | `string`                                         | `undefined` |
+| `value`       | `value`   |             | `string`                                         | `undefined` |
+| `valueChange` | --        |             | `(newValue: string) => void`                     | `undefined` |
 
 
 ## Dependencies

@@ -4,7 +4,7 @@ import {
 } from '@stencil/core';
 import { HeaderGroup, Table } from '@tanstack/table-core';
 import { ModusTableColumnHeader } from './columnHeader/modus-table-column-header';
-import { ModusTableHeaderCheckbox } from './rowSelection/modus-table-header-checkbox';
+import { ModusTableHeaderCheckbox } from './row/selection/modus-table-header-checkbox';
 
 interface ModusTableHeaderProps {
   columnReorder: boolean;

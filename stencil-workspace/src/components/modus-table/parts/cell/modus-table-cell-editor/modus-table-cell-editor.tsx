@@ -4,7 +4,6 @@ import {
   CELL_EDIT_TYPE_AUTOCOMPLETE,
   CELL_EDIT_TYPE_DATE,
   CELL_EDIT_TYPE_DROPDOWN,
-  KEYBOARD_ESCAPE,
   CELL_EDIT_TYPE_TEXT,
   CELL_EDIT_TYPE_INT,
   KEYBOARD_UP,
@@ -27,8 +26,8 @@ export class ModusTableCellEditor {
   @Prop() args: ModusTableCellEditorArgs;
   @Prop() value: string;
   @Prop() type: string;
-  @Prop() valueEntered: (newValue: string, oldValue: string) => void;
-  @Prop() exitEditing: () => void;
+  @Prop() valueChange: (newValue: string) => void;
+  @Prop() keyDown: (e: KeyboardEvent, newValue: string) => void;
 
   private editedValue: string;
   private inputElement: HTMLElement;
@@ -42,16 +41,11 @@ export class ModusTableCellEditor {
   }
 
   handleBlur: () => void = () => {
-    console.log('handleBlur');
-    this.valueEntered(this.editedValue, this.value);
+    this.valueChange(this.editedValue);
   };
 
-  handleEnterOrEscape: (e: KeyboardEvent) => void = (event) => {
-    const code = event.key.toLowerCase();
-    if (code === KEYBOARD_ESCAPE || code === KEYBOARD_ENTER) {
-      this.exitEditing();
-    }
-    // event.stopPropagation();
+  handleKeyDown: (e: KeyboardEvent) => void = (e) => {
+    this.keyDown(e, this.editedValue);
   };
 
   getDefaultProps = (ariaLabel) => ({
@@ -76,7 +70,7 @@ export class ModusTableCellEditor {
         size="large"
         onBlur={this.handleBlur}
         onValueChange={(e: CustomEvent<string>) => (this.editedValue = e.detail)}
-        onKeyDown={(e) => handleArrowKeys(e, this.handleEnterOrEscape)}></modus-number-input>
+        onKeyDown={(e) => handleArrowKeys(e, this.handleKeyDown)}></modus-number-input>
     );
   }
 
@@ -87,7 +81,7 @@ export class ModusTableCellEditor {
         value={this.value}
         onValueChange={(e: CustomEvent<string>) => (this.editedValue = e.detail)}
         onBlur={this.handleBlur}
-        onKeyDown={this.handleEnterOrEscape}
+        onKeyDown={this.handleKeyDown}
         autoFocusInput
         size="large"></modus-text-input>
     );
@@ -97,6 +91,14 @@ export class ModusTableCellEditor {
     const valueKey = 'display';
     const options = (this.args as ModusTableCellDropdownEditorArgs)?.options || [];
     const selectedOption = options.find((option) => option[valueKey] === this.value);
+
+    function handleEnter(e: KeyboardEvent, callback: (e: KeyboardEvent) => void) {
+      const code = e.key.toLowerCase();
+      if (code === KEYBOARD_ENTER) {
+        e.stopPropagation();
+      } else callback(e);
+    }
+
     return (
       <div>
         <modus-select
@@ -106,7 +108,7 @@ export class ModusTableCellEditor {
           size="large"
           options={options}
           onInputBlur={this.handleBlur}
-          onKeyDown={this.handleEnterOrEscape}
+          onKeyDown={(e) => handleEnter(e, this.handleKeyDown)}
           onValueChange={(e: CustomEvent<unknown>) => {
             this.editedValue = e.detail[valueKey];
           }}></modus-select>
@@ -145,7 +147,7 @@ export class ModusTableCellEditor {
         // onInputBlur={this.handleBlur}
         onOptionSelected={(e: CustomEvent<string>) => {
           this.editedValue = e.detail;
-          this.valueEntered(this.editedValue, this.value);
+          this.valueChange(this.editedValue);
         }}
         // value={selectedOption}
         // onKeyDown={(e) => e.stopPropagation()}

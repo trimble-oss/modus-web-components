@@ -1172,14 +1172,14 @@ export declare interface ModusTable extends Components.ModusTable {
 
 
 @ProxyCmp({
-  inputs: ['args', 'type', 'value', 'valueEntered']
+  inputs: ['args', 'keyDown', 'type', 'value', 'valueChange']
 })
 @Component({
   selector: 'modus-table-cell-editor',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['args', 'type', 'value', 'valueEntered'],
+  inputs: ['args', 'keyDown', 'type', 'value', 'valueChange'],
 })
 export class ModusTableCellEditor {
   protected el: HTMLElement;

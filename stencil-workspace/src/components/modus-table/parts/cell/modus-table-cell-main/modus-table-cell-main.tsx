@@ -22,9 +22,11 @@ import {
   CELL_EDIT_TYPE_TEXT,
   COLUMN_DEF_CELL_EDITOR_ARGS_KEY,
   COLUMN_DEF_DATATYPE_LINK,
+  KEYBOARD_ENTER,
+  KEYBOARD_ESCAPE,
 } from '../../../modus-table.constants';
 import ModusTableCellExpandIcons from '../modus-table-cell-expand-icons';
-import NavigateCell from '../../../utilities/table-cell-navigation.utility';
+import NavigateTableCells from '../../../utilities/table-cell-navigation.utility';
 import { CellFormatter } from '../../../utilities/table-cell-formatter.utility';
 import { ModusTableCellLinkElement } from '../modus-table-cell-link-element';
 import RowActions from '../../../models/row-actions.model';
@@ -47,26 +49,25 @@ export class ModusTableCellMain {
   }
 
   private cellEl: HTMLElement;
-  private exitEditing: boolean;
-  private onClick: () => void = () => this.handleClick();
-  private onKeyDown: (e: KeyboardEvent) => void = (e: KeyboardEvent) => this.handleKeydown(e);
-  private onBlur: (e: FocusEvent) => void = (e) => this.handleBlur(e);
+  private onCellClick: () => void = () => this.handleCellClick();
+  private onCellKeyDown: (e: KeyboardEvent) => void = (e: KeyboardEvent) => this.handleCellKeydown(e);
+  private onCellBlur: (e: FocusEvent) => void = (e) => this.handleCellBlur(e);
 
   readonly cellEditableKey = 'cellEditable';
   readonly accessorKey = 'accessorKey';
 
   connectedCallback() {
     this.cellEl = this.el.parentElement;
-    this.cellEl.addEventListener('click', this.onClick);
-    this.cellEl.addEventListener('keydown', this.onKeyDown);
-    this.cellEl.addEventListener('blur', this.onBlur);
+    this.cellEl.addEventListener('click', this.onCellClick);
+    this.cellEl.addEventListener('keydown', this.onCellKeyDown);
+    this.cellEl.addEventListener('blur', this.onCellBlur);
   }
 
   disconnectedCallback() {
     if (this.cellEl) {
-      this.cellEl.removeEventListener('click', this.onClick);
-      this.cellEl.removeEventListener('keydown', this.onKeyDown);
-      this.cellEl.removeEventListener('blur', this.onBlur);
+      this.cellEl.removeEventListener('click', this.onCellClick);
+      this.cellEl.removeEventListener('keydown', this.onCellKeyDown);
+      this.cellEl.removeEventListener('blur', this.onCellBlur);
     }
   }
 
@@ -89,44 +90,57 @@ export class ModusTableCellMain {
     return this.cell.column.columnDef[COLUMN_DEF_CELL_EDITOR_ARGS_KEY];
   }
 
-  handleClick = () => {
+  handleCellClick = () => {
     if (this.cell.column.columnDef[this.cellEditableKey]) {
       this.editMode = true;
     }
   };
 
-  handleBlur = (event: FocusEvent) => {
+  handleCellBlur = (event: FocusEvent) => {
     if (!this.el.contains(event.relatedTarget as HTMLElement)) {
       this.editMode = false;
     }
   };
 
-  handleKeydown = (event: KeyboardEvent) => {
-    debugger;
-    NavigateCell({
-      event,
-      isEditable: this.cell.column.columnDef[this.cellEditableKey],
-      exitEditing: this.exitEditing,
-      cellElement: this.cellEl,
-      cellIndex: this.cellIndex,
-    });
-    if (this.exitEditing) this.exitEditing = false;
+  handleCellKeydown = (event: KeyboardEvent) => {
+    const key = event.key?.toLowerCase();
+    const isCellEditable = this.cell.column.columnDef[this.cellEditableKey];
+
+    if (isCellEditable && !this.editMode && key === KEYBOARD_ENTER) {
+      this.editMode = true;
+      event.stopPropagation();
+    } else {
+      NavigateTableCells({
+        key: event.key,
+        cellElement: this.cellEl,
+        cellIndex: this.cellIndex,
+      });
+    }
   };
 
-  handleCellValueChange(newValue: string, oldValue: string, rowId: string) {
-    this.editMode = false;
-
-    if (newValue !== oldValue && this.valueChange) {
+  handleCellEditorValueChange(newValue: string, oldValue: string, rowId: string) {
+    if (this.editMode && newValue !== oldValue && this.valueChange) {
       this.valueChange({ rowId, accessorKey: this.cell.column.columnDef[this.accessorKey], newValue, oldValue });
-      console.log('handleCellValueChange', this.cellEl);
-      if (!this.exitEditing) this.cellEl?.focus();
     }
+
+    this.editMode = false;
   }
 
-  handleExitEditing = () => {
-    debugger;
-    this.editMode = false;
-    this.exitEditing = true;
+  handleCellEditorKeyDown = (event: KeyboardEvent, newValue: string, oldValue: string, rowId: string) => {
+    const key = event.key?.toLowerCase();
+    if (key === KEYBOARD_ENTER) {
+      this.handleCellEditorValueChange(newValue, oldValue, rowId);
+      NavigateTableCells({
+        key: KEYBOARD_ENTER,
+        cellElement: this.cellEl,
+        cellIndex: this.cellIndex,
+      });
+    } else if (key === KEYBOARD_ESCAPE) {
+      this.editMode = false;
+      this.cellEl.focus();
+    } else return;
+
+    event.stopPropagation();
   };
 
   renderCellValue(cellValue: unknown, row: Row<unknown>): JSX.Element[] {
@@ -159,16 +173,20 @@ export class ModusTableCellMain {
 
   render(): void {
     const cellValue = this.cell.getValue();
+    const valueString = cellValue?.toString();
     const row = this.cell.row;
+
     return (
       <Host>
         {this.editMode ? (
           <modus-table-cell-editor
-            value={cellValue as string}
+            value={valueString}
             type={this.getEditorType()}
             args={this.getEditorArgs()}
-            valueEntered={(newVal: string, oldVal: string) => this.handleCellValueChange(newVal, oldVal, row.id)}
-            exitEditing={this.handleExitEditing}
+            valueChange={(newVal: string) => this.handleCellEditorValueChange(newVal, valueString, row.id)}
+            keyDown={(event: KeyboardEvent, newVal: string) =>
+              this.handleCellEditorKeyDown(event, newVal, valueString, row.id)
+            }
           />
         ) : (
           this.renderCellValue(cellValue, row)

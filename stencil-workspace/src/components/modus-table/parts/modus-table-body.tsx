@@ -5,7 +5,7 @@ import {
 import { Table } from '@tanstack/table-core';
 import { ModusTableDataUpdaterProps, ModusTableCellLink } from '../models/modus-table.models';
 import { ModusTableCell } from './cell/modus-table-cell';
-import { ModusTableCellCheckbox } from './rowSelection/modus-table-cell-checkbox';
+import { ModusTableCellCheckbox } from './row/selection/modus-table-cell-checkbox';
 import RowActions from '../models/row-actions.model';
 
 interface ModusTableBodyProps {
