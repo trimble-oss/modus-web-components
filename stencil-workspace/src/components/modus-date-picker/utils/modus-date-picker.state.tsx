@@ -46,10 +46,6 @@ export default class ModusDatePickerState {
     this.element.errorText = message;
   }
 
-  resetError(): void {
-    this.element.errorText = null;
-  }
-
   validateInput(): void {
     this.element.validate();
   }

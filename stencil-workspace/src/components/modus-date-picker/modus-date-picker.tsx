@@ -110,9 +110,7 @@ export class ModusDatePicker {
       this._dateInputs['start'].setError('Invalid date range');
       this._dateInputs['end'].setError();
     } else {
-      this._dateInputs['start'].resetError();
       this._dateInputs['start'].validateInput();
-      this._dateInputs['end'].resetError();
       this._dateInputs['end'].validateInput();
     }
   }
