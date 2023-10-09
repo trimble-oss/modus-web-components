@@ -36,8 +36,8 @@ export default class ModusDatePickerState {
       const date = val.getDate().toString().padStart(2, '0');
 
       this.element.value = `${year}-${month}-${date}`;
+      this.element.errorText = null;
       this.element.focusInput();
-      this.element.validate();
       this.date = val;
     }
   }
@@ -48,6 +48,9 @@ export default class ModusDatePickerState {
 
   resetError(): void {
     this.element.errorText = null;
+  }
+
+  validateInput(): void {
     this.element.validate();
   }
 
