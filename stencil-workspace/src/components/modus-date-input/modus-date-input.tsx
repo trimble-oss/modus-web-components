@@ -23,7 +23,7 @@ export class ModusDateInput {
 
   /** (optional) Regular expression to allow characters while typing the input.
    */
-  @Prop() allowedCharsRegex: RegExp | string;
+  @Prop({ mutable: true }) allowedCharsRegex: RegExp | string;
 
   /** (optional) The input's aria-label. */
   @Prop() ariaLabel: string | null;
@@ -70,10 +70,11 @@ export class ModusDateInput {
       return;
     }
 
-    this._altFormatters = altFormats.split('|')
-      .map(format => format.trim())
+    this._altFormatters = altFormats
+      .split('|')
+      .map((format) => format.trim())
       .filter(Boolean)
-      .map(format => new DateInputFormatter(this.fillerDate, format));
+      .map((format) => new DateInputFormatter(this.fillerDate, format));
   }
 
   /** (optional) Custom helper text displayed below the input. */
@@ -174,7 +175,7 @@ export class ModusDateInput {
   handleBlur(): void {
     this._isEditing = false;
 
-    this.checkAltFormats();
+    this.updateDateFromAltFormats();
     this.validateInput(this._dateDisplay);
     this.dateInputBlur.emit({
       value: this.value,
@@ -206,7 +207,7 @@ export class ModusDateInput {
     const inputString = (event.currentTarget as HTMLInputElement)?.value;
 
     this._dateDisplay = inputString;
-    this.value = this._formatter.parseDisplayString(this._dateDisplay);
+    this.value = this._formatter.parseDisplayString(inputString.trim());
   }
 
   // Helpers
@@ -215,8 +216,9 @@ export class ModusDateInput {
   }
 
   /** Check if the input string matches any of the alternative formats. */
-  checkAltFormats(): string {
+  updateDateFromAltFormats(): string {
     if (this.value) {
+      this._dateDisplay = this._formatter.formatDisplayString(this.value);
       return;
     }
 
