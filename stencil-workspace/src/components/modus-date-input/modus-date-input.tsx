@@ -174,6 +174,7 @@ export class ModusDateInput {
 
   handleBlur(): void {
     this._isEditing = false;
+    this._dateDisplay = this._dateDisplay.trim();
 
     this.updateDateFromAltFormats();
     this.validateInput(this._dateDisplay);
