@@ -307,4 +307,26 @@ describe('modus-date-input', () => {
 
     expect(await input.getProperty('value')).toEqual('May 05, 1988');
   });
+
+  it('accepts the date with a space and alternative format', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-date-input
+        format="mmm d, yyyy"
+        show-calendar-icon="true"
+        alt-formats="mm.dd.yy"></modus-date-input>`);
+    await page.waitForChanges();
+
+    const input = await page.find('modus-date-input >>> input');
+
+    await input.type('  08.21.12   ', { delay: 20 });
+    await page.waitForChanges();
+
+    const calendar = await page.find('modus-date-input >>> .icon-calendar');
+    await calendar.click();
+    await page.waitForChanges();
+
+    expect(await input.getProperty('value')).toEqual('Aug 21, 2012');
+  });
 });

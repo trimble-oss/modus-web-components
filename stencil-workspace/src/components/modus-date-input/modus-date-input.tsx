@@ -222,9 +222,11 @@ export class ModusDateInput {
       return;
     }
 
+    const displayDate = this._dateDisplay.trim();
+
     // if there is no value for the default format, check the alternative formats
     for (const formatter of this._altFormatters) {
-      const result = formatter.parseDisplayString(this._dateDisplay);
+      const result = formatter.parseDisplayString(displayDate);
 
       if (result) {
         this._dateDisplay = this._formatter.formatDisplayString(result);
