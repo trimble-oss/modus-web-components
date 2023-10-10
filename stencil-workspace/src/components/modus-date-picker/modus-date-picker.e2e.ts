@@ -232,4 +232,94 @@ describe('modus-date-picker', () => {
     const errorText = await page.find('modus-date-input[type="start"] >>> .sub-text > label');
     expect(errorText.innerHTML).toEqual('Invalid date range');
   });
+
+  it('checks invalid min max validations', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+    <modus-date-picker>
+      <modus-date-input format="mmm d, yyyy" show-calendar-icon="true" type="start" label="Start Date" min="2023-02-17">
+      </modus-date-input>
+      <modus-date-input format="mmm d, yyyy" show-calendar-icon="true" type="end" label="End Date" max="2023-04-22">
+      </modus-date-input>
+    </modus-date-picker>`);
+
+    const startDateInput = await page.find('modus-date-input[type="start"] >>> input');
+    const endDateInput = await page.find('modus-date-input[type="end"] >>> input');
+
+    // invalid date range validation
+    await startDateInput.type('Feb 15, 2023', { delay: 20 });
+    await page.waitForChanges();
+    await endDateInput.type('Jun 6, 2023', { delay: 20 });
+    await page.waitForChanges();
+
+    // trigger a blur event for validation to happen
+    const calendar = await page.find('modus-date-input[type="start"] >>> .icon-calendar');
+    await calendar.click();
+    await page.waitForChanges();
+
+    const errorTextStart = await page.find('modus-date-input[type="start"] >>> .sub-text > label');
+    const errorTextEnd = await page.find('modus-date-input[type="end"] >>> .sub-text > label');
+
+    expect(errorTextStart.innerHTML).toEqual('Select a date after Feb 16, 2023');
+    expect(errorTextEnd.innerHTML).toEqual('Select a date before Apr 23, 2023');
+  });
+
+  it('checks valid min max validations', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+    <modus-date-picker>
+      <modus-date-input format="mmm d, yyyy" show-calendar-icon="true" type="start" label="Start Date" min="2023-02-17">
+      </modus-date-input>
+      <modus-date-input format="mmm d, yyyy" show-calendar-icon="true" type="end" label="End Date" max="2023-04-22">
+      </modus-date-input>
+    </modus-date-picker>`);
+
+    const startDateInput = await page.find('modus-date-input[type="start"] >>> input');
+    const endDateInput = await page.find('modus-date-input[type="end"] >>> input');
+
+    // input min date
+    await startDateInput.type('Feb 17, 2023', { delay: 20 });
+    await page.waitForChanges();
+    // input max date
+    await endDateInput.type('Apr 22, 2023', { delay: 20 });
+    await page.waitForChanges();
+
+    // trigger a blur event for validation to happen
+    const calendar = await page.find('modus-date-input[type="start"] >>> .icon-calendar');
+    await calendar.click();
+    await page.waitForChanges();
+
+    const errorTextStart = await page.find('modus-date-input[type="start"] >>> .sub-text > label');
+    const errorTextEnd = await page.find('modus-date-input[type="end"] >>> .sub-text > label');
+
+    // there are no error texts since inputs accept the min and max dates
+    expect(errorTextStart).toBeFalsy();
+    expect(errorTextEnd).toBeFalsy();
+  });
+
+  it('checks disabled dates', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+    <modus-date-picker>
+      <modus-date-input
+        format="mmm d, yyyy"
+        show-calendar-icon="true"
+        label="Enter a date"
+        min="2023-02-07"
+        max="2023-02-22"
+        value="2023-02-15">
+      </modus-date-input>
+    </modus-date-picker>`);
+
+    const calendar = await page.find('modus-date-input >>> .icon-calendar');
+    await calendar.click();
+    await page.waitForChanges();
+
+    const disabledDates = await page.findAll('modus-date-picker >>> .calendar-body .calendar-day.disabled');
+
+    expect(disabledDates.some(element => element.innerHTML === '6')).toEqual(true);
+    expect(disabledDates.some(element => element.innerHTML === '7')).toEqual(false);
+    expect(disabledDates.some(element => element.innerHTML === '22')).toEqual(false);
+    expect(disabledDates.some(element => element.innerHTML === '23')).toEqual(true);
+  });
 });
