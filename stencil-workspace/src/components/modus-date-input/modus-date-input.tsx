@@ -11,7 +11,10 @@ import {
 } from '@stencil/core';
 import { IconMap } from '../icons/IconMap';
 import DateInputFormatter from './utils/modus-date-input.formatter';
-import { ModusDateInputEventDetails, ModusDateInputType } from './utils/modus-date-input.models';
+import {
+  ModusDateInputEventDetails,
+  ModusDateInputType,
+} from './utils/modus-date-input.models';
 
 @Component({
   tag: 'modus-date-input',
@@ -78,7 +81,7 @@ export class ModusDateInput {
   }
 
   /** (optional) Custom helper text displayed below the input. */
-  @Prop() helperText;
+  @Prop() helperText: string;
 
   /** (optional) The input's label. */
   @Prop() label: string;
@@ -104,7 +107,13 @@ export class ModusDateInput {
   /** (optional) The input's valid state text. */
   @Prop() validText: string;
 
-  /** (optional) A string representing the date entered in the input. The date is formatted according to ISO8601 'yyyy-mm-dd'. The displayed date format will differ from the 'value'. */
+  /** (optional) The minimum date allowed. The date is formatted according to ISO8601 'yyyy-mm-dd'. */
+  @Prop() min: string;
+
+  /** (optional) The maximum date allowed. The date is formatted according to ISO8601 'yyyy-mm-dd'. */
+  @Prop() max: string;
+
+  /** (optional) A string representing the date entered to the input. The date is formatted according to ISO8601 'yyyy-mm-dd'. The displayed date format will differ from the 'value'. */
   @Prop({ mutable: true }) value: string;
   @Watch('value')
   handleValueChange(val: string): void {
@@ -156,6 +165,12 @@ export class ModusDateInput {
   @Method()
   async focusInput(): Promise<void> {
     this._dateInput.focus();
+  }
+
+  /** Validate the input. */
+  @Method()
+  async validate(): Promise<void> {
+    this.validateInput(this._dateDisplay);
   }
 
   /** Handlers */
@@ -240,10 +255,8 @@ export class ModusDateInput {
     if (!this.allowedCharsRegex) return true;
 
     const dateCharacterRegex = new RegExp(this.allowedCharsRegex);
-    if (dateCharacterRegex.test(key)) {
-      return true;
-    }
-    return false;
+
+    return dateCharacterRegex.test(key);
   }
 
   setDefaultAllowedKeysRegex(autoFormat: boolean) {
@@ -256,10 +269,32 @@ export class ModusDateInput {
     if (this.disableValidation) return;
 
     if (!inputString) {
-      if (this.required) this.errorText = 'Required';
-      else this.clearValidation();
-    } else if (!this.value) this.errorText = 'Invalid date';
-    else this.clearValidation();
+      if (this.required) {
+        this.errorText = 'Required';
+      } else {
+        this.clearValidation();
+      }
+    } else if (!this.value) {
+      this.errorText = 'Invalid date';
+    } else {
+      this.validateMinMax();
+    }
+  }
+
+  private validateMinMax(): void {
+    const min = this._formatter.parseIsoToDate(this.min);
+    const max = this._formatter.parseIsoToDate(this.max);
+    const value = this._formatter.parseIsoToDate(this.value);
+
+    if (min && min > value) {
+      min.setUTCDate(min.getDate() - 1);
+      this.errorText = `Select a date after ${this._formatter.formatDisplayString(min.toISOString())}`;
+    } else if (max && max < value) {
+      max.setUTCDate(max.getDate() + 1);
+      this.errorText = `Select a date before ${this._formatter.formatDisplayString(max.toISOString())}`
+    } else {
+      this.clearValidation();
+    }
   }
 
   render() {
