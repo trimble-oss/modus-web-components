@@ -5,9 +5,10 @@ import {
 import { Header, Table } from '@tanstack/table-core';
 import { KEYBOARD_ENTER } from '../../modus-table.constants';
 import { ModusTableColumnResizingHandler } from './modus-table-column-resizing-handler';
-import { ModusTableHeaderSort } from './modus-table-header-sort';
+import { ModusTableColumnSortIcon } from './modus-table-column-sort-icon';
 
-interface ModusTableHeaderProps {
+interface ModusTableColumnHeaderProps {
+  id: string;
   table: Table<unknown>;
   header: Header<unknown, unknown>;
   isNestedParentHeader: boolean;
@@ -28,7 +29,8 @@ interface ModusTableHeaderProps {
 /**
  * Modus Table Header
  */
-export const ModusTableHeader: FunctionalComponent<ModusTableHeaderProps> = ({
+export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderProps> = ({
+  id,
   table,
   header,
   isNestedParentHeader,
@@ -41,7 +43,7 @@ export const ModusTableHeader: FunctionalComponent<ModusTableHeaderProps> = ({
   onMouseLeaveResize,
 }) => {
   let elementRef: HTMLTableCellElement;
-  const { column, id, colSpan, isPlaceholder, getSize } = header;
+  const { column, id: headerId, colSpan, isPlaceholder, getSize } = header;
 
   return (
     <th
@@ -57,7 +59,7 @@ export const ModusTableHeader: FunctionalComponent<ModusTableHeaderProps> = ({
        */
       class={`
         ${isNestedParentHeader ? 'text-align-center' : ''}
-        ${frozenColumns.includes(id) ? 'sticky-left' : ''}
+        ${frozenColumns.includes(headerId) ? 'sticky-left' : ''}
         ${column.getIsResizing() ? 'active-resize' : ''}
       `}
       style={{
@@ -68,17 +70,17 @@ export const ModusTableHeader: FunctionalComponent<ModusTableHeaderProps> = ({
       scope="col"
       id={id}
       ref={(element: HTMLTableCellElement) => (elementRef = element)}
-      onMouseDown={(event: MouseEvent) => onDragStart(event, id, elementRef, true)}
+      onMouseDown={(event: MouseEvent) => onDragStart(event, headerId, elementRef, true)}
       onKeyDown={(event: KeyboardEvent) => {
         if (event.key.toLowerCase() === KEYBOARD_ENTER) {
-          onDragStart(event, id, elementRef, false);
+          onDragStart(event, headerId, elementRef, false);
         }
       }}>
       {isPlaceholder ? null : ( // header.isPlaceholder is Required for nested column headers to display empty cell
         <div class={column.getCanSort() && 'can-sort'}>
           <span>{column.columnDef.header}</span>
           {column.getCanSort() && (
-            <ModusTableHeaderSort
+            <ModusTableColumnSortIcon
               column={column}
               showSortIconOnHover={showSortIconOnHover}
               isColumnResizing={isColumnResizing}

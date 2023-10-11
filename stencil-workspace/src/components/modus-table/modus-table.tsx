@@ -8,6 +8,9 @@ import {
   Prop,
   State,
   Watch,
+  Element,
+  Fragment,
+  JSX,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import {
@@ -19,20 +22,32 @@ import {
   ExpandedState,
   HeaderGroup,
   PaginationState,
-  Row,
   Table,
   RowSelectionState,
-  TableOptionsResolved,
   Updater,
   VisibilityState,
-  createTable,
-  getCoreRowModel,
-  getExpandedRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
+  SortingState,
 } from '@tanstack/table-core';
-import { PAGINATION_DEFAULT_SIZES } from './modus-table.constants';
-import { ModusTableSortingState } from './models/modus-table.models';
+import {
+  COLUMN_ORDER_STATE_KEY,
+  COLUMN_SIZING_INFO_STATE_KEY,
+  COLUMN_SIZING_STATE_KEY,
+  COLUMN_VISIBILITY_STATE_KEY,
+  EXPANDED_STATE_KEY,
+  PAGINATION_DEFAULT_SIZES,
+  PAGINATION_STATE_KEY,
+  ROW_SELECTION_STATE_KEY,
+  SORTING_STATE_KEY,
+} from './modus-table.constants';
+import {
+  ModusTableCellValueChange,
+  ModusTableColumnOrderState,
+  ModusTableColumnSizingState,
+  ModusTableColumnVisibilityState,
+  ModusTableExpandedState,
+  ModusTablePaginationState,
+  ModusTableSortingState,
+} from './models/modus-table.models';
 import ColumnDragState from './models/column-drag-state.model';
 import {
   ModusTableColumn,
@@ -41,13 +56,15 @@ import {
   ModusTableToolbarOptions,
   ModusTableRowSelectionOptions,
 } from './models/modus-table.models';
-import { ModusTableCell } from './parts/cell/modus-table-cell';
-import { ModusTableHeader } from './parts/header/modus-table-header';
-import { ModusTableColumnDropIndicator, ModusTableColumnDragItem } from './parts/modus-table-drag-item';
+import { ModusTableColumnDropIndicator, ModusTableColumnDragItem } from './parts/columnHeader/modus-table-column-drag-item';
 import { ModusTablePagination } from './parts/modus-table-pagination';
-import { ModusTableSummaryRow } from './parts/modus-table-summary-row';
+import { ModusTableFooter } from './parts/modus-table-footer';
 import { TableHeaderDragDrop } from './utilities/table-header-drag-drop.utility';
-import { Fragment, JSX } from '@stencil/core/internal';
+import ModusTableCore from './modus-table.core';
+import ModusTableState from './models/modus-table-state.model';
+import { ModusTableHeader } from './parts/modus-table-header';
+import { ModusTableBody, ModusTableCellEdited } from './parts/modus-table-body';
+import { createGuid } from '../../utils/utils';
 
 /**
  * @slot customFooter - Slot for custom footer.
@@ -60,69 +77,69 @@ import { Fragment, JSX } from '@stencil/core/internal';
   shadow: true,
 })
 export class ModusTable {
+  @Element() element: HTMLElement;
+
   /** (Required) To display headers in the table. */
   @Prop({ mutable: true }) columns!: ModusTableColumn<unknown>[];
-  @Watch('columns') onChangeOfColumns(newVal: ModusTableColumn<unknown>[]) {
-    if (this.table) {
-      this.table.options.columns = (newVal as ColumnDef<unknown>[]) ?? [];
-    }
+  @Watch('columns') onColumnsChange(newVal: ModusTableColumn<unknown>[]) {
+    this.tableCore?.setOptions('columns', (newVal as ColumnDef<unknown>[]) ?? []);
+  }
+
+  /* (optional) To manage column resizing */
+  @Prop() columnResize = false;
+  @Watch('columnResize') onColumnResizeChange(newVal: boolean) {
+    this.tableCore?.setOptions('enableColumnResizing', newVal);
+  }
+
+  /** (Optional) To allow column reordering. */
+  @Prop() columnReorder = false;
+  @Watch('columnReorder') onColumnReorderChange() {
+    this.tableCore.setState('columnOrder', this.tableState.columnOrder);
   }
 
   /** (Required) To display data in the table. */
   @Prop({ mutable: true }) data!: unknown[];
-  @Watch('data') onChangeOfData() {
-    if (this.table) {
-      this.table.options.data = this.data;
-    }
+  @Watch('data') onDataChange(newVal: unknown[]) {
+    this.tableCore?.setOptions('data', newVal);
   }
-
-  /** (Optional) To enable row hover in table. */
-  @Prop() hover = false;
-
-  /* (optional) To manage column resizing */
-  @Prop() columnResize = false;
-  @Watch('columnResize') updateColumnResize() {
-    this.table.options.enableColumnResizing = this.columnResize;
-  }
-
-  /* (optional) To manage table resizing */
-  @Prop() fullWidth = false;
-
-  /** (Optional) To sort data in table. */
-  @Prop() sort = false;
-  @Watch('sort') updateSort() {
-    this.table.options.enableSorting = this.sort;
-  }
-
-  /** (Optional) To display sort icon on hover. */
-  @Prop() showSortIconOnHover = false;
-
-  /* (optional) To enable pagination for the table. */
-  @Prop() pagination: boolean;
-
-  /* (optional) To set pagesize for the pagination. */
-  @Prop() pageSizeList: number[] = PAGINATION_DEFAULT_SIZES;
-
-  /** (Optional) To display summary row. */
-  @Prop() summaryRow = false;
-
-  /** (Optional) To display a toolbar, which allows access to table operations like hiding columns. */
-  @Prop() toolbarOptions: ModusTableToolbarOptions | null = null;
-  @Watch('toolbarOptions') onChangePanelOptions() {
-    if (this.table) {
-      this.table.options.enableHiding = !!this.toolbarOptions?.columnsVisibility;
-    }
-    this.onChangeOfRowsExpandable();
-  }
-
-  /** (Optional) To display a toolbar for the table. */
-  @Prop() toolbar = false;
 
   /** (Optional) To control display options of table. */
   @Prop() displayOptions?: ModusTableDisplayOptions = {
     borderless: false,
     cellBorderless: false,
   };
+
+  /** (Optional) To enable row hover in table. */
+  @Prop() hover = false;
+
+  /* (optional) To manage table resizing */
+  @Prop() fullWidth = false;
+
+  /** (Optional) To display a vertical scrollbar when the height is exceeded. */
+  @Prop() maxHeight: string;
+
+  /** (Optional) To display a horizontal scrollbar when the width is exceeded. */
+  @Prop() maxWidth: string;
+
+  /* (optional) To set pagesize for the pagination. */
+  @Prop() pageSizeList: number[] = PAGINATION_DEFAULT_SIZES;
+
+  /* (optional) To enable pagination for the table. */
+  @Prop() pagination: boolean;
+
+  /** (Optional) To display expanded rows. */
+  @Prop() rowsExpandable = false;
+  @Watch('rowsExpandable') onRowsExpandableChange() {
+    if (this.rowsExpandable) {
+      this.frozenColumns.push(this.tableState.columnOrder[0]);
+    }
+    if (this.toolbarOptions?.columnsVisibility) {
+      this.toolbarOptions.columnsVisibility.requiredColumns = [
+        ...this.toolbarOptions.columnsVisibility.requiredColumns,
+        ...this.frozenColumns,
+      ];
+    }
+  }
 
   /** (Optional) To display checkbox. */
   @Prop() rowSelection = false;
@@ -142,68 +159,123 @@ export class ModusTable {
     }
   }
 
-  /** (Optional) To allow column reordering. */
-  @Prop() columnReorder = false;
-  @Watch('columnReorder') updateColumnReorder() {
-    this.table.options.state.columnOrder = this.columnOrder;
+  /** (Optional) To display sort icon on hover. */
+  @Prop() showSortIconOnHover = false;
+
+  /** (Optional) To sort data in table. */
+  @Prop() sort = false;
+  @Watch('sort') onSortChange(newVal) {
+    this.tableCore?.setOptions('enableSorting', newVal);
   }
 
-  /** (Optional) To display expanded rows. */
-  @Prop() rowsExpandable = false;
-  @Watch('rowsExpandable') onChangeOfRowsExpandable() {
-    if (this.rowsExpandable) {
-      this.frozenColumns.push(this.columnOrder[0]);
-    }
-    if (this.toolbarOptions?.columnsVisibility) {
-      this.toolbarOptions.columnsVisibility.requiredColumns = [
-        ...this.toolbarOptions.columnsVisibility.requiredColumns,
-        ...this.frozenColumns,
-      ];
-    }
+  /** (Optional) To display summary row. */
+  @Prop() summaryRow = false;
+
+  /** (Optional) To display a toolbar for the table. */
+  @Prop() toolbar = false;
+
+  /** (Optional) To display a toolbar, which allows access to table operations like hiding columns. */
+  @Prop() toolbarOptions: ModusTableToolbarOptions | null = null;
+  @Watch('toolbarOptions') onToolbarOptionsChange(newVal: ModusTableToolbarOptions | null) {
+    this.tableCore?.setOptions('enableHiding', !!newVal?.columnsVisibility);
+    this.onRowsExpandableChange();
   }
-  /** (Optional) To display a vertical scrollbar when the height is exceeded. */
-  @Prop() maxHeight: string;
 
-  /** (Optional) To display a horizontal scrollbar when the width is exceeded. */
-  @Prop() maxWidth: string;
-
-  /** Emits event on sort change */
-  @Event() sortChange: EventEmitter<ModusTableSortingState>;
-
-  /** Event details contains the row(s) selected */
-  @Event() rowSelectionChange: EventEmitter<unknown>;
+  /** Emits the cell value that was edited */
+  @Event() cellValueChange: EventEmitter<ModusTableCellValueChange>;
 
   /** Emits the link that was clicked */
   @Event() cellLinkClick: EventEmitter<ModusTableCellLink>;
 
-  /**
-   * ColumnSizing has info about width of the column
-   * whereas ColumnSizingInfo has the detailed info about resizing of the column
-   */
-  @State() columnSizing: ColumnSizingState = {};
-  @State() columnSizingInfo: ColumnSizingInfoState = {} as ColumnSizingInfoState;
-  @State() expanded: ExpandedState;
-  @State() sorting: ModusTableSortingState = [];
-  @State() table: Table<unknown>;
-  @State() paginationState: PaginationState = {
-    pageIndex: 0,
-    pageSize: this.pageSizeList[0],
+  /** Emits columns in the updated order */
+  @Event() columnOrderChange: EventEmitter<ModusTableColumnOrderState>;
+
+  /** Emits latest column size */
+  @Event() columnSizingChange: EventEmitter<ModusTableColumnSizingState>;
+
+  /** Emits visibility state of each column */
+  @Event() columnVisibilityChange: EventEmitter<ModusTableColumnVisibilityState>;
+
+  /** Emits expanded state of the columns */
+  @Event() rowExpanded: EventEmitter<ModusTableExpandedState>;
+
+  /** Emits rows selected */
+  @Event() rowSelectionChange: EventEmitter<unknown>;
+
+  /** Emits column sort order */
+  @Event() sortChange: EventEmitter<ModusTableSortingState>;
+
+  /** Emits selected page index and size */
+  @Event() paginationChange: EventEmitter<ModusTablePaginationState>;
+
+  @State() tableState: ModusTableState = {
+    columnSizing: {},
+    columnSizingInfo: {} as ColumnSizingInfoState,
+    expanded: null,
+    sorting: [],
+    pagination: {
+      pageIndex: 0,
+      pageSize: this.pageSizeList[0],
+    },
+    columnVisibility: {},
+    columnOrder: [],
+    rowSelection: {},
   };
-  @State() columnVisibility: VisibilityState = {};
-  @State() columnOrder: string[] = [];
+
+  @State() tableCore: ModusTableCore;
   @State() itemDragState: ColumnDragState;
   @State() dragAndDropObj: TableHeaderDragDrop = new TableHeaderDragDrop();
-  @State() rowSelectionState: RowSelectionState = {};
 
-  private frozenColumns: string[] = []; // Columns will remain on the left and be unable to resize, reorganize, or modify their visibility.
+  private _id: string;
+  private frozenColumns: string[] = []; // Columns will remain on the left and be unable to reorder, or modify their visibility.
   private isColumnResizing = false;
-  private tableRef: HTMLTableElement = null;
-  private tableHeaderRowRef: HTMLTableRowElement;
-  private fillerColumnRef: HTMLModusTableFillerColumnElement = null;
 
   private onMouseMove = (event: MouseEvent) => this.handleDragOver(event);
   private onKeyDown = (event: KeyboardEvent) => this.handleKeyDown(event);
   private onMouseUp = () => this.handleDrop();
+
+  componentWillLoad(): void {
+    this._id = this.element.id || `modus-table-${createGuid()}`;
+    this.setTableState({ columnOrder: this.columns?.map((column) => column.id as string) });
+    this.onRowsExpandableChange();
+    this.initializeTable();
+  }
+
+  /**
+   * Returns data of a column.
+   * @param accessorKey : Column name as key.
+   * @returns : Column data as Array or empty array.
+   */
+  @Method()
+  async getColumnData(accessorKey: string): Promise<unknown[]> {
+    const columns: Column<unknown, unknown>[] = this.tableCore.getTableInstance().getAllLeafColumns();
+
+    let rowData: unknown[] = [];
+    for (let i = 0; i < columns.length; i++) {
+      if (columns[i].columnDef['accessorKey'] === accessorKey) {
+        rowData = this.tableCore.getTableInstance().options.data.map((row) => row[accessorKey]);
+        break;
+      }
+    }
+    return rowData;
+  }
+
+  /**
+   * Toggle the table column visibility
+   * @param columnId Column id
+   * @param show Boolean value decides to visibility of column
+   */
+  @Method()
+  async toggleColumnVisibility(columnId: string, show: boolean): Promise<void> {
+    this.tableCore
+      .getTableInstance()
+      .getAllLeafColumns()
+      .forEach((column) => {
+        if (column.id === columnId) {
+          column.toggleVisibility(show);
+        }
+      });
+  }
 
   @Listen('click', { target: 'document' })
   documentClickHandler(event: MouseEvent): void {
@@ -211,7 +283,7 @@ export class ModusTable {
       return;
     }
     // Deactivating the column resizing mode if other click events happened
-    this.table.setColumnSizingInfo({
+    this.tableCore.getTableInstance().setColumnSizingInfo({
       startOffset: null,
       startSize: null,
       deltaOffset: null,
@@ -252,11 +324,11 @@ export class ModusTable {
       }
       this.itemDragState = null;
       this.dragAndDropObj.setValues(
-        this.columnOrder,
+        this.tableState.columnOrder,
         this.columnReorder,
         this.isColumnResizing,
-        this.tableHeaderRowRef,
-        this.table,
+        this.element,
+        this.tableCore.getTableInstance(),
         this.itemDragState,
         this.frozenColumns
       );
@@ -282,160 +354,89 @@ export class ModusTable {
   handleKeyDown(event: KeyboardEvent): void {
     this.itemDragState = null;
     this.dragAndDropObj.handleKeyDown(event);
-    this.columnOrder = this.dragAndDropObj.columnOrder;
+    this.setTableState({ columnOrder: this.dragAndDropObj.columnOrder });
     this.itemDragState = this.dragAndDropObj.itemDragState;
   }
 
   handleDrop(): void {
     this.dragAndDropObj.handleDrop();
-    this.columnOrder = this.dragAndDropObj.columnOrder;
+    this.setTableState({ columnOrder: this.dragAndDropObj.columnOrder });
+    this.columnOrderChange.emit(this.dragAndDropObj.columnOrder);
     this.itemDragState = null;
   }
 
-  componentWillLoad(): void {
-    this.columnOrder = this.columns?.map((column) => column.id as string); // Sets column order
-    this.onChangeOfRowsExpandable();
-    this.initializeTable();
-  }
-
-  componentDidLoad(): void {
-    this.initializeFillerColumn();
-  }
-
-  /**
-   * Creates a table with some set of options.
-   */
   initializeTable(): void {
-    const { multiple, subRowSelection } = this.rowSelectionOptions;
-    const options: TableOptionsResolved<unknown> = {
+    this.tableCore = new ModusTableCore({
       data: this.data ?? [],
-      columns: (this.columns as ColumnDef<unknown>[]) ?? [],
-      state: {
-        columnPinning: {},
-        columnSizing: {},
-        columnSizingInfo: {} as ColumnSizingInfoState,
-        columnVisibility: this.columnVisibility,
-        columnOrder: this.columnReorder ? this.columnOrder : [],
-        expanded: this.expanded,
-        sorting: this.sorting,
-        rowSelection: this.rowSelectionState,
+      columns: this.columns,
+      columnResize: this.columnResize,
+      sort: this.sort,
+      pagination: this.pagination,
+      pageSizeList: this.pageSizeList,
+      rowSelection: this.rowSelection,
+      rowSelectionOptions: this.rowSelectionOptions,
+      columnOrder: this.columnReorder ? this.tableState.columnOrder : [],
+      toolbarOptions: this.toolbarOptions,
+
+      // setData: (updater: Updater<unknown[]>) => this.updateData(updater),
+      setExpanded: (updater: Updater<ExpandedState>) => this.updateTableCore(updater, EXPANDED_STATE_KEY, this.rowExpanded),
+      setSorting: (updater: Updater<SortingState>) => this.updateTableCore(updater, SORTING_STATE_KEY, this.sortChange),
+      setRowSelection: (updater: Updater<RowSelectionState>) => this.updateRowSelection(updater),
+      setPagination: (updater: Updater<PaginationState>) =>
+        this.updateTableCore(updater, PAGINATION_STATE_KEY, this.paginationChange),
+      setColumnSizing: (updater: Updater<ColumnSizingState>) =>
+        this.updateTableCore(updater, COLUMN_SIZING_STATE_KEY, this.columnSizingChange),
+      setColumnSizingInfo: (updater: Updater<ColumnSizingInfoState>) => this.updateColumnSizingInfo(updater),
+      setColumnVisibility: (updater: Updater<VisibilityState>) =>
+        this.updateTableCore(updater, COLUMN_VISIBILITY_STATE_KEY, this.columnVisibilityChange),
+      setColumnOrder: (updater: Updater<ColumnOrderState>) => {
+        this.updateTableCore(updater, COLUMN_ORDER_STATE_KEY);
       },
-      enableRowSelection: this.rowSelection,
-      enableMultiRowSelection: multiple,
-      enableSubRowSelection: multiple && subRowSelection,
-      enableSorting: this.sort,
-      sortingFns: {
-        sortForHyperlink: (rowA: Row<unknown>, rowB: Row<unknown>, columnId: string): number => {
-          const valA = rowA.getValue(columnId)['display'] ?? rowA.getValue(columnId);
-          const valB = rowB.getValue(columnId)['display'] ?? rowB.getValue(columnId);
-          return valA > valB ? 1 : -1;
-        },
-      },
-      columnResizeMode: 'onChange',
-      enableColumnResizing: this.columnResize,
-      enableHiding: !!this.toolbarOptions?.columnsVisibility,
-      sortDescFirst: false, // To-Do, workaround to prevent sort descending on certain columns, e.g. numeric.
-      onExpandedChange: (updater: Updater<ExpandedState>) => this.updatingState(updater, 'expanded'),
-      onSortingChange: (updater: Updater<ModusTableSortingState>) => this.setSorting(updater),
-      onRowSelectionChange: (updater: Updater<RowSelectionState>) => this.setRowSelection(updater),
-      onPaginationChange: (updater: PaginationState) => this.setPagination(updater),
-      getCoreRowModel: getCoreRowModel(),
-      getPaginationRowModel: this.pagination && getPaginationRowModel(),
-      getSortedRowModel: getSortedRowModel(),
-      onColumnSizingChange: (updater: Updater<ColumnSizingState>) => this.updatingState(updater, 'columnSizing'),
-      onColumnSizingInfoChange: (updater: Updater<ColumnSizingInfoState>) => {
-        this.updatingState(updater, 'columnSizingInfo');
-        this.isColumnResizing = !this.columnSizingInfo.isResizingColumn ? false : true;
-      },
-      onColumnVisibilityChange: (updater: Updater<VisibilityState>) => this.updatingState(updater, 'columnVisibility'),
-      onColumnOrderChange: (updater: Updater<ColumnOrderState>) => this.updatingState(updater, 'columnOrder'),
-      getExpandedRowModel: getExpandedRowModel(),
-      getSubRows: (row) => row['subRows'],
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
-      onStateChange: () => {},
-      renderFallbackValue: null,
-    };
-    this.table = createTable(options);
-    if (this.pagination) {
-      this.table.setOptions((prev) => ({
-        ...prev,
-        state: {
-          ...prev.state,
-          ...this.table.initialState,
-          pagination: {
-            ...this.paginationState,
-            pageSize: this.pageSizeList[0],
-          },
-        },
-      }));
-    }
-  }
-
-  initializeFillerColumn(): void {
-    if (this.fillerColumnRef && this.tableRef) {
-      this.fillerColumnRef.targetTable = this.tableRef;
-    }
-  }
-
-  private updatingState(updater: Updater<unknown>, key: string) {
-    this[key] = updater instanceof Function ? updater(this[key]) : updater;
-    this.table.options.state[key] = this[key];
-  }
-
-  setSorting(updater: Updater<ModusTableSortingState>): void {
-    this.updatingState(updater, 'sorting');
-    this.sortChange.emit(this.sorting);
-  }
-
-  setPagination(updater: Updater<PaginationState>): void {
-    this.paginationState = updater instanceof Function ? updater(this.paginationState) : updater;
-    this.table.options.state.pagination = this.paginationState;
-  }
-
-  setRowSelection(updater: Updater<unknown>): void {
-    this.rowSelectionState = typeof updater === 'function' ? updater(this.rowSelectionState) : updater;
-    this.table.options.state.rowSelection = this.rowSelectionState;
-    this.rowSelectionChange.emit(this.table.getSelectedRowModel().flatRows.map((row) => row.original));
-  }
-
-  /**
-   * Returns data of a column.
-   * @param accessorKey : Column name as key.
-   * @returns : Column data as Array or empty array.
-   */
-  @Method()
-  async getColumnData(accessorKey: string): Promise<unknown[]> {
-    const columns: Column<unknown, unknown>[] = this.table.getAllLeafColumns();
-
-    let rowData: unknown[] = [];
-    for (let i = 0; i < columns.length; i++) {
-      if (columns[i].columnDef['accessorKey'] === accessorKey) {
-        rowData = this.table.options.data.map((row) => row[accessorKey]);
-        break;
-      }
-    }
-    return rowData;
-  }
-
-  /**
-   * Toggle the table column visibility
-   * @param columnId Column id
-   * @param show Boolean value decides to visibility of column
-   */
-  @Method()
-  async toggleColumnVisibility(columnId: string, show: boolean): Promise<void> {
-    this.table.getAllLeafColumns().forEach((column) => {
-      if (column.id === columnId) {
-        column.toggleVisibility(show);
-      }
     });
   }
 
-  renderToolBar(): JSX.Element | null {
+  setTableState(state: ModusTableState): void {
+    this.tableState = { ...this.tableState, ...state };
+  }
+
+  updateTableCore(updater: Updater<unknown>, key: string, event: EventEmitter<unknown> = null) {
+    const newTableState = { ...this.tableState };
+    newTableState[key] = this.tableCore.getState(updater, this.tableState[key]);
+
+    /**
+     * Maintaining a local state of the table is necessary for the component to re-render and stay consistent with the internal state of Tanstack table.
+     */
+    this.setTableState(newTableState);
+    this.tableCore.setState(key, this.tableState[key]);
+    if (event) event.emit(this.tableState[key]);
+  }
+
+  updateData(updater: Updater<unknown>, context: ModusTableCellEdited): void {
+    this.data = this.tableCore.getState(updater, this.data) as unknown[];
+    this.tableCore.setState('data', this.data);
+    this.cellValueChange.emit({ ...context, data: this.data });
+  }
+
+  updateRowSelection(updater: Updater<unknown>): void {
+    this.updateTableCore(updater, ROW_SELECTION_STATE_KEY);
+    this.rowSelectionChange.emit(
+      this.tableCore
+        .getTableInstance()
+        .getSelectedRowModel()
+        .flatRows.map((row) => row.original)
+    );
+  }
+
+  updateColumnSizingInfo(updater: Updater<ColumnSizingInfoState>): void {
+    this.updateTableCore(updater, COLUMN_SIZING_INFO_STATE_KEY);
+    this.isColumnResizing = !this.tableState.columnSizingInfo.isResizingColumn ? false : true;
+  }
+
+  renderToolBar(table: Table<unknown>): JSX.Element | null {
     return (
       this.toolbar &&
       this.toolbarOptions && (
-        <modus-table-toolbar table={this.table} options={this.toolbarOptions}>
+        <modus-table-toolbar table={table} options={this.toolbarOptions}>
           <div slot="group-left">
             <slot name="groupLeft"></slot>
           </div>
@@ -447,7 +448,7 @@ export class ModusTable {
     );
   }
 
-  renderMain(): JSX.Element | null {
+  renderMain(table: Table<unknown>): JSX.Element | null {
     const { borderless, cellBorderless } = this.displayOptions || {};
     const tableContainerClass = {
       'table-container': true,
@@ -457,21 +458,23 @@ export class ModusTable {
     return (
       <Fragment>
         <div class={tableContainerClass} style={{ maxHeight: this.maxHeight }}>
-          {this.renderTable()}
+          {this.renderTable(table)}
 
-          <modus-table-filler-column
-            summary-row={this.summaryRow}
-            cell-borderless={cellBorderless}
-            ref={(el) => (this.fillerColumnRef = el)}></modus-table-filler-column>
+          {!this.fullWidth && (
+            <modus-table-filler-column
+              container={this.element}
+              summary-row={this.summaryRow}
+              cell-borderless={cellBorderless}></modus-table-filler-column>
+          )}
         </div>
         <slot name="customFooter" />
       </Fragment>
     );
   }
 
-  renderTable(): JSX.Element | null {
+  renderTable(table: Table<unknown>): JSX.Element | null {
     const { multiple } = this.rowSelectionOptions;
-    const totalSize = this.table.getTotalSize();
+    const totalSize = table.getTotalSize();
 
     const tableMainClass = {
       borderless: this.displayOptions?.borderless,
@@ -485,97 +488,60 @@ export class ModusTable {
       : { tableLayout: 'fixed' };
 
     return (
-      <table data-test-id="main-table" class={tableMainClass} style={tableStyle} ref={(el) => (this.tableRef = el)}>
-        {this.renderTableHeader(multiple)}
-        {this.renderTableBody(multiple)}
-        {this.renderTableFooter()}
+      <table data-test-id="main-table" class={tableMainClass} style={tableStyle}>
+        {this.renderTableHeader(table, multiple)}
+        {this.renderTableBody(table, multiple)}
+        {this.renderTableFooter(table)}
       </table>
     );
   }
 
-  renderTableBody(multipleRowSelection: boolean): JSX.Element | null {
+  renderTableHeader(table: Table<unknown>, multipleRowSelection: boolean): JSX.Element | null {
+    const setColumnResizing = (val: boolean) => (this.isColumnResizing = val);
+
+    const getColumnResizing = () => this.isColumnResizing;
+
+    const onDragStart = (
+      event: MouseEvent | KeyboardEvent,
+      id: string,
+      elementRef: HTMLTableCellElement,
+      mouseInteracted: boolean
+    ) => this.handleDragStart(event, id, elementRef, mouseInteracted);
+
     return (
-      <tbody>
-        {this.table.getRowModel()?.rows.map((row) => {
-          const isChecked = row.getIsSelected() && (row.subRows?.length ? row.getIsAllSubRowsSelected() : true);
-          return (
-            <tr key={row.id} class={{ 'enable-hover': this.hover, 'row-selected': isChecked }}>
-              {this.rowSelection && (
-                <td class="row-checkbox sticky-left">
-                  <modus-checkbox
-                    checked={isChecked}
-                    indeterminate={multipleRowSelection && row.getIsSomeSelected()}
-                    onCheckboxClick={() => row.toggleSelected()}></modus-checkbox>
-                </td>
-              )}
-              {row.getVisibleCells()?.map((cell, cellIndex) => {
-                return (
-                  <ModusTableCell
-                    cell={cell}
-                    row={row}
-                    cellIndex={cellIndex}
-                    rowsExpandable={this.rowsExpandable}
-                    frozenColumns={this.frozenColumns}
-                    onLinkClick={(link: ModusTableCellLink) => this.cellLinkClick.emit(link)}
-                  />
-                );
-              })}
-            </tr>
-          );
-        })}
-      </tbody>
+      <ModusTableHeader
+        componentId={this._id}
+        columnReorder={this.columnReorder}
+        frozenColumns={this.frozenColumns}
+        rowSelection={this.rowSelection}
+        showSortIconOnHover={this.showSortIconOnHover}
+        table={table}
+        multipleRowSelection={multipleRowSelection}
+        setColumnResizing={setColumnResizing}
+        getColumnResizing={getColumnResizing}
+        onDragStart={onDragStart}></ModusTableHeader>
     );
   }
 
-  renderTableHeader(multipleRowSelection: boolean): JSX.Element | null {
-    const tableHeadClass = { 'show-resize-cursor': this.isColumnResizing, 'show-column-reorder-cursor': this.columnReorder };
-    const headerGroups: HeaderGroup<unknown>[] = this.table.getHeaderGroups();
-
+  renderTableBody(table: Table<unknown>, multipleRowSelection: boolean): JSX.Element | null {
+    // Needed in the future to include overflow menu action
+    const rowActions = this.rowsExpandable && { expandable: this.rowsExpandable };
     return (
-      <thead class={tableHeadClass}>
-        {headerGroups?.map((headerGroup, index) => (
-          <tr key={headerGroup.id} ref={(element: HTMLTableRowElement) => (this.tableHeaderRowRef = element)}>
-            {this.rowSelection && (
-              <th class="row-checkbox sticky-left">
-                {multipleRowSelection && (
-                  <modus-checkbox
-                    checked={this.table.getIsAllRowsSelected()}
-                    indeterminate={this.table.getIsSomeRowsSelected()}
-                    onCheckboxClick={this.table.getToggleAllRowsSelectedHandler()}></modus-checkbox>
-                )}
-              </th>
-            )}
-            {headerGroup.headers?.map((header) => {
-              return (
-                <ModusTableHeader
-                  table={this.table}
-                  header={header}
-                  isNestedParentHeader={index < headerGroups.length - 1}
-                  showSortIconOnHover={this.showSortIconOnHover}
-                  columnReorder={this.columnReorder}
-                  isColumnResizing={this.isColumnResizing}
-                  frozenColumns={this.frozenColumns}
-                  onDragStart={(
-                    event: MouseEvent | KeyboardEvent,
-                    id: string,
-                    elementRef: HTMLTableCellElement,
-                    mouseInteracted: boolean
-                  ) => this.handleDragStart(event, id, elementRef, mouseInteracted)}
-                  onMouseEnterResize={() => (this.isColumnResizing = true)}
-                  onMouseLeaveResize={() => (this.isColumnResizing = false)}
-                />
-              );
-            })}
-          </tr>
-        ))}
-      </thead>
+      <ModusTableBody
+        table={table}
+        hover={this.hover}
+        rowSelection={this.rowSelection}
+        multipleRowSelection={multipleRowSelection}
+        rowActions={rowActions}
+        dataUpdater={this.updateData.bind(this)}
+        cellLinkClick={(link: ModusTableCellLink) => this.cellLinkClick.emit(link)}></ModusTableBody>
     );
   }
 
-  renderTableFooter(): JSX.Element | null {
-    const footerGroups: HeaderGroup<unknown>[] = this.table.getFooterGroups();
+  renderTableFooter(table: Table<unknown>): JSX.Element | null {
+    const footerGroups: HeaderGroup<unknown>[] = table.getFooterGroups();
     return this.summaryRow ? (
-      <ModusTableSummaryRow
+      <ModusTableFooter
         footerGroups={[footerGroups[0]]}
         tableData={this.data}
         frozenColumns={this.frozenColumns}
@@ -584,21 +550,22 @@ export class ModusTable {
     ) : null;
   }
 
-  renderPagination(): JSX.Element | null {
+  renderPagination(table: Table<unknown>): JSX.Element | null {
     return (
       this.pagination && (
-        <ModusTablePagination table={this.table} totalCount={this.data.length} pageSizeList={this.pageSizeList} />
+        <ModusTablePagination table={table} totalCount={this.data.length} pageSizeList={this.pageSizeList} />
       )
     );
   }
 
   render(): void {
+    const table = this.tableCore.getTableInstance();
     return (
-      <Host>
+      <Host id={this._id}>
         <div style={{ maxWidth: this.maxWidth }}>
-          {this.renderToolBar()}
-          {this.renderMain()}
-          {this.renderPagination()}
+          {this.renderToolBar(table)}
+          {this.renderMain(table)}
+          {this.renderPagination(table)}
           <ModusTableColumnDragItem draggingState={this.itemDragState} />
           <ModusTableColumnDropIndicator position={this.itemDragState?.dropIndicator} />
         </div>

@@ -3,7 +3,7 @@ import {
   Event,
   EventEmitter,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
-  JSX, // eslint-disable-line @typescript-eslint/no-unused-vars
+  JSX,
   Prop,
   State,
   Watch,

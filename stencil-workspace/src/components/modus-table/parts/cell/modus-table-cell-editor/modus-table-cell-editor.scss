@@ -1,0 +1,5 @@
+.editor::part(input-container),
+.editor::part(input) {
+  border: none !important;
+  height: calc(3rem - $rem-4px) !important;
+}

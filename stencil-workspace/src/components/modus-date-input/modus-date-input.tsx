@@ -310,7 +310,8 @@ export class ModusDateInput {
         <div
           class={`input-container ${this.errorText ? 'error' : this.validText ? 'valid' : ''} ${this.classBySize.get(
             this.size
-          )}`}>
+          )}`}
+          part="input-container">
           <input
             aria-invalid={!!this.errorText}
             aria-label={this.ariaLabel}

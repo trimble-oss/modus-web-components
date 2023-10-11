@@ -32,11 +32,17 @@
 
 ## Events
 
-| Event                | Description                                | Type                              |
-| -------------------- | ------------------------------------------ | --------------------------------- |
-| `cellLinkClick`      | Emits the link that was clicked            | `CustomEvent<ModusTableCellLink>` |
-| `rowSelectionChange` | Event details contains the row(s) selected | `CustomEvent<unknown>`            |
-| `sortChange`         | Emits event on sort change                 | `CustomEvent<ColumnSort[]>`       |
+| Event                    | Description                           | Type                                                |
+| ------------------------ | ------------------------------------- | --------------------------------------------------- |
+| `cellLinkClick`          | Emits the link that was clicked       | `CustomEvent<ModusTableCellLink>`                   |
+| `cellValueChange`        | Emits the cell value that was edited  | `CustomEvent<ModusTableCellValueChange>`            |
+| `columnOrderChange`      | Emits columns in the updated order    | `CustomEvent<string[]>`                             |
+| `columnSizingChange`     | Emits latest column size              | `CustomEvent<{ [x: string]: number; }>`             |
+| `columnVisibilityChange` | Emits visibility state of each column | `CustomEvent<{ [x: string]: boolean; }>`            |
+| `paginationChange`       | Emits selected page index and size    | `CustomEvent<PaginationState>`                      |
+| `rowExpanded`            | Emits expanded state of the columns   | `CustomEvent<boolean \| { [x: string]: boolean; }>` |
+| `rowSelectionChange`     | Emits rows selected                   | `CustomEvent<unknown>`                              |
+| `sortChange`             | Emits column sort order               | `CustomEvent<ColumnSort[]>`                         |
 
 
 ## Methods
@@ -77,24 +83,34 @@ Type: `Promise<void>`
 
 - [modus-table-toolbar](./parts/panel/modus-table-toolbar)
 - [modus-table-filler-column](./parts/fillerColumn)
-- [modus-checkbox](../modus-checkbox)
-- [modus-tooltip](../modus-tooltip)
 - [modus-select](../modus-select)
 - [modus-pagination](../modus-pagination)
+- [modus-tooltip](../modus-tooltip)
+- [modus-checkbox](../modus-checkbox)
+- [modus-table-cell-main](./parts/cell/modus-table-cell-main)
 
 ### Graph
 ```mermaid
 graph TD;
   modus-table --> modus-table-toolbar
   modus-table --> modus-table-filler-column
-  modus-table --> modus-checkbox
-  modus-table --> modus-tooltip
   modus-table --> modus-select
   modus-table --> modus-pagination
+  modus-table --> modus-tooltip
+  modus-table --> modus-checkbox
+  modus-table --> modus-table-cell-main
   modus-table-toolbar --> modus-table-dropdown-menu
   modus-table-dropdown-menu --> modus-table-columns-visibility
   modus-table-columns-visibility --> modus-checkbox
   modus-table-columns-visibility --> modus-button
+  modus-table-cell-main --> modus-table-cell-editor
+  modus-table-cell-editor --> modus-number-input
+  modus-table-cell-editor --> modus-text-input
+  modus-table-cell-editor --> modus-select
+  modus-table-cell-editor --> modus-date-picker
+  modus-table-cell-editor --> modus-date-input
+  modus-table-cell-editor --> modus-autocomplete
+  modus-autocomplete --> modus-text-input
   style modus-table fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
