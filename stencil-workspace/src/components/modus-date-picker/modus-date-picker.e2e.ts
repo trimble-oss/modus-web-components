@@ -322,4 +322,136 @@ describe('modus-date-picker', () => {
     expect(disabledDates.some(element => element.innerHTML === '22')).toEqual(false);
     expect(disabledDates.some(element => element.innerHTML === '23')).toEqual(true);
   });
+
+  it('if picked date is greater than max then open calendar on max date', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+    <modus-date-picker>
+      <modus-date-input
+        format="mmm d, yyyy"
+        show-calendar-icon="true"
+        label="Enter a date"
+        min="2021-01-07"
+        max="2021-02-15">
+      </modus-date-input>
+    </modus-date-picker>`);
+
+    const calendar = await page.find('modus-date-input >>> .icon-calendar');
+    await calendar.click();
+    await page.waitForChanges();
+
+    const calendarHeader = await page.find('modus-date-picker >>> .calendar-header .calendar-title');
+    const disabledDates = await page.findAll('modus-date-picker >>> .calendar-body .calendar-day.disabled');
+
+    expect(calendarHeader.innerHTML).toEqual('February 2021');
+    expect(disabledDates.some(element => element.innerHTML === '15')).toEqual(false);
+    expect(disabledDates.some(element => element.innerHTML === '16')).toEqual(true);
+
+    // close calendar
+    await calendar.click();
+    await page.waitForChanges();
+
+    const input = await page.find('modus-date-input >>> input');
+    await input.type('Feb 15, 2023', { delay: 20 });
+    await page.waitForChanges();
+
+    // open calendar again
+    await calendar.click();
+    await page.waitForChanges();
+
+    const calendarHeaderAfterChange = await page.find('modus-date-picker >>> .calendar-header .calendar-title');
+    expect(calendarHeaderAfterChange.innerHTML).toEqual('February 2021');
+  });
+
+  it('if picked date is less than min then open calendar on min date', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+    <modus-date-picker>
+      <modus-date-input
+        format="mmm d, yyyy"
+        show-calendar-icon="true"
+        label="Enter a date"
+        min="2023-01-07"
+        max="2024-02-15"
+        value="2022-02-15">
+      </modus-date-input>
+    </modus-date-picker>`);
+
+    const calendar = await page.find('modus-date-input >>> .icon-calendar');
+    await calendar.click();
+    await page.waitForChanges();
+
+    const calendarHeader = await page.find('modus-date-picker >>> .calendar-header .calendar-title');
+    const disabledDates = await page.findAll('modus-date-picker >>> .calendar-body .calendar-day.disabled');
+
+    expect(calendarHeader.innerHTML).toEqual('January 2023');
+    expect(disabledDates.some(element => element.innerHTML === '7')).toEqual(false);
+    expect(disabledDates.some(element => element.innerHTML === '6')).toEqual(true);
+  });
+
+  it('check when the picked date is between min/max', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+    <modus-date-picker>
+      <modus-date-input
+        format="mmm d, yyyy"
+        show-calendar-icon="true"
+        label="Enter a date"
+        min="2017-04-18"
+        max="2017-09-15"
+        value="2017-07-10">
+      </modus-date-input>
+    </modus-date-picker>`);
+
+    const calendar = await page.find('modus-date-input >>> .icon-calendar');
+    await calendar.click();
+    await page.waitForChanges();
+
+    const calendarHeader = await page.find('modus-date-picker >>> .calendar-header .calendar-title');
+    const disabledDates = await page.findAll('modus-date-picker >>> .calendar-body .calendar-day.disabled');
+
+    const errorText = await page.find('modus-date-input >>> .sub-text > label');
+
+    expect(calendarHeader.innerHTML).toEqual('July 2017');
+    expect(disabledDates.length).toEqual(0);
+    // there are no error text since the date is valid
+    expect(errorText).toBeFalsy();
+  });
+
+  it('check when the today/picked date is before/after the min-max range', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+    <modus-date-picker>
+      <modus-date-input
+        format="mmm d, yyyy"
+        show-calendar-icon="true"
+        label="Enter a date"
+        min="2010-11-28"
+        max="2011-09-16">
+      </modus-date-input>
+    </modus-date-picker>`);
+
+    const calendar = await page.find('modus-date-input >>> .icon-calendar');
+    await calendar.click();
+    await page.waitForChanges();
+
+    const calendarHeader = await page.find('modus-date-picker >>> .calendar-header .calendar-title');
+
+    expect(calendarHeader.innerHTML).toEqual('September 2011');
+
+    // close calendar
+    await calendar.click();
+    await page.waitForChanges();
+
+    const input = await page.find('modus-date-input >>> input');
+    await input.type('Feb 15, 2009', { delay: 20 });
+    await page.waitForChanges();
+
+    // open calendar again
+    await calendar.click();
+    await page.waitForChanges();
+
+    const calendarHeaderAfterChange = await page.find('modus-date-picker >>> .calendar-header .calendar-title');
+    expect(calendarHeaderAfterChange.innerHTML).toEqual('November 2010');
+  });
 });

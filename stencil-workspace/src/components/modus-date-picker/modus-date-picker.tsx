@@ -157,7 +157,22 @@ export class ModusDatePicker {
     }
 
     const date = pickedDate || new Date();
-    this._calendar.gotoDate(date.getFullYear(), date.getMonth());
+
+    // if picked date is out od min-max range - open calendar on closer available month to pick
+    if (this.isWithinCurrentMinMax(date)) {
+      this._calendar.gotoDate(date.getFullYear(), date.getMonth());
+      return;
+    }
+
+    const min = this._currentInput?.getMinDateAllowed();
+
+    if (this.compare(date, min) < 0) {
+      this._calendar.gotoDate(min.getFullYear(), min.getMonth());
+      return;
+    }
+
+    const max = this._currentInput?.getMaxDateAllowed();
+    this._calendar.gotoDate(max.getFullYear(), max.getMonth());
   }
 
   isInvalidDateRange = (startDate, endDate) => this.compare(endDate, startDate) < 0;
