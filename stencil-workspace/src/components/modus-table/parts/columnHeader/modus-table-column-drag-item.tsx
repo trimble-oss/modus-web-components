@@ -2,10 +2,10 @@ import {
   FunctionalComponent,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
-import { IconArrowDown } from '../../icons/icon-arrow-down';
-import { IconArrowUp } from '../../icons/icon-arrow-up';
-import Position from '../models/position.model';
-import ColumnDragState from '../models/column-drag-state.model';
+import { IconArrowDown } from '../../../icons/icon-arrow-down';
+import { IconArrowUp } from '../../../icons/icon-arrow-up';
+import Position from '../../models/position.model';
+import ColumnDragState from '../../models/column-drag-state.model';
 
 export const ModusTableColumnDragItem: FunctionalComponent<{
   draggingState: ColumnDragState;

@@ -40,6 +40,8 @@ export const DIRECTIVES = [
   d.ModusSpinner,
   d.ModusSwitch,
   d.ModusTable,
+  d.ModusTableCellEditor,
+  d.ModusTableCellMain,
   d.ModusTableColumnsVisibility,
   d.ModusTableDropdownMenu,
   d.ModusTableFillerColumn,
