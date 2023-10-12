@@ -69,13 +69,13 @@
     width: 100%;
 
     .link {
+      align-items: center;
       cursor: pointer;
       display: flex;
       overflow: hidden;
       padding: $rem-10px $rem-20px;
       text-overflow: ellipsis;
       white-space: nowrap;
-      width: 100%;
 
       .icon {
         align-items: center;
