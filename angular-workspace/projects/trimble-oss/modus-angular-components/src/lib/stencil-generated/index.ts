@@ -45,6 +45,8 @@ export const DIRECTIVES = [
   d.ModusTableColumnsVisibility,
   d.ModusTableDropdownMenu,
   d.ModusTableFillerColumn,
+  d.ModusTableRowActions,
+  d.ModusTableRowActionsMenu,
   d.ModusTableToolbar,
   d.ModusTabs,
   d.ModusTextInput,

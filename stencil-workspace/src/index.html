@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
-    <title>Trimble Modus Web Components</title>
 
-    <script type="module" src="/build/modus-web-components.esm.js"></script>
-    <script nomodule src="/build/modus-web-components.js"></script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+  <title>Trimble Modus Web Components</title>
 
-    <link rel="stylesheet" href="/build/modus-web-components.css" />
+  <script type="module" src="/build/modus-web-components.esm.js"></script>
+  <script nomodule src="/build/modus-web-components.js"></script>
+  <link rel="stylesheet" href="/build/modus-web-components.css" />
 
     <!--Manually load Modus font-family-->
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
@@ -16,6 +16,228 @@
   </head>
 
   <body>
-    <!-- Test components -->
+    <modus-table>
+    </modus-table>
+
+    <script>
+
+function range(len) {
+  const arr = [];
+  for (let i = 0; i < len; i++) {
+    arr.push(i);
+  }
+  return arr;
+}
+
+function randomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min) + min);
+}
+
+function newPerson() {
+  const namesIndex = randomNumber(0, 17);
+  const firstName = Names[namesIndex].split(' ')[0];
+  const lastName = Names[namesIndex].split(' ')[1];
+  const email= `${firstName}${lastName}@example.com`.toLowerCase();
+  return {
+    firstName,
+    lastName,
+    age: randomNumber(20, 80) * 30,
+    visits: randomNumber(1, 100) * 100,
+    email:{ display: email, url: email },
+    progress: randomNumber(1, 100) * 100,
+    status: randomNumber(1, 100) > 66 ? 'Verified' : randomNumber(0, 100) > 33 ? 'Pending' : 'Rejected',
+    createdAt: new Date(randomNumber(1990, 2020), randomNumber(0, 11), randomNumber(1, 30)).toDateString(),
+  };
+}
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+function makeData(...lens) {
+  const makeDataLevel = (depth = 0) => {
+    const len = lens[depth];
+    return range(len).map(() => {
+      return {
+        ...newPerson(),
+        subRows: lens[depth + 1] ? makeDataLevel(depth + 1) : undefined,
+      };
+    });
+  };
+
+  return makeDataLevel();
+}
+
+const Names = [
+  'Mickey Mouse',
+  'Bugs Bunny',
+  'Homer Simpson',
+  'Fred Flintstone',
+  'Sponge Bob',
+  'Daffy Duck',
+  'Charlie Brown',
+  'Scooby Doo',
+  'Tom Cat',
+  'Jerry Mouse',
+  'Mighty Mouse',
+  'Wile E Coyote',
+  'Tweety Bird',
+  'Pink Panther',
+  'Road Runner',
+  'Patrick Star',
+  'Roger Rabbit',
+  'Papa Smurf',
+  'Buzz Lightyear',
+];
+const DefaultColumns = [
+  {
+    header: 'First Name',
+    accessorKey: 'firstName',
+    id: 'first-name',
+    dataType: 'text',
+    size: 250,
+    // minSize: 150,
+    footer: 'Total',
+    cellEditable:true,
+  },
+  {
+    header: 'Last Name',
+    accessorKey: 'lastName',
+    id: 'last-name',
+    dataType: 'text',
+    size: 150,
+    minSize: 80,
+    cellEditable:true,
+  },
+  {
+    header: 'Age',
+    accessorKey: 'age',
+    id: 'age',
+    dataType: 'integer',
+    size: 80,
+    minSize: 60,
+    cellEditable:true,
+  },
+  {
+    header: 'Visits',
+    accessorKey: 'visits',
+    id: 'visits',
+    dataType: 'integer',
+    maxSize: 80,
+    showTotal: true,
+    minSize: 80,
+    cellEditable:true,
+  },
+  {
+    header: 'Email',
+    accessorKey: 'email',
+    id: 'email',
+    dataType: 'link',
+    size: 230,
+    minSize: 80,
+    sortingFn: 'sortForHyperlink'},
+  {
+    header: 'Status',
+    accessorKey: 'status',
+    id: 'status',
+    dataType: 'text',
+    minSize: 80,
+    cellEditable:true,
+    cellEditorType: 'dropdown',
+    cellEditorArgs: {
+      options:[
+      { display: 'Verified' },
+      { display: 'Pending' },
+      { display: 'Rejected' },
+      ]
+    },
+  },
+  {
+    header: 'Profile Progress',
+    accessorKey: 'progress',
+    id: 'progress',
+    dataType: 'integer',
+    minSize: 100,
+    cellEditable:true,
+  },
+  {
+    header: 'Created At',
+    accessorKey: 'createdAt',
+    id: 'createdAt',
+    dataType: 'string',
+    size: 150,
+    minSize: 150,
+  },
+];
+
+
+const DefaultArgs = {
+  hover: false,
+  sort: false,
+  columnResize: false,
+  columnReorder: false,
+  pagination: true,
+  showSortIconOnHover: false,
+  summaryRow: false,
+  fullWidth: false,
+  pageSizeList: [7, 10, 20],
+  toolbar: false,
+  columns: DefaultColumns,
+  data: makeData(5),
+  toolbarOptions: {},
+  displayOptions: {},
+  rowsExpandable: false,
+  maxHeight: '',
+  maxWidth: '800px',
+  rowSelection: false,
+  rowSelectionOptions: {},
+};
+
+const LargeDataSetArgs = { ...DefaultArgs, columns: DefaultColumns, data: makeData(10000, 1,1 ),pagination: true, pageSizeList: [5, 10, 50], sort: true , hover: true, rowsExpandable: true, summaryRow: true , columnReorder:true, columnResize: true, toolbar:true,  toolbarOptions: {
+  columnsVisibility: {
+    title: '',
+    requiredColumns: ['age', 'visits'],
+  }
+},
+rowSelection: true, rowSelectionOptions: {
+  multiple: true,
+  subRowSelection: true
+},
+rowActions:[
+  {
+    id: '1',
+    icon: 'notifications',
+    label: 'Delete',
+    isVisible: () => true,
+  },
+
+  {
+    id: '2',
+    icon: 'notifications',
+    label: 'Delete',
+    isVisible: () => true,
+  },
+
+  {
+    id: '3',
+    icon: 'notifications',
+    label: 'Delete',
+    isVisible: () => true,
+  },
+
+  {
+    id: '4',
+    icon: 'notifications',
+    label: 'Delete',
+    isVisible: () => true,
+  }
+]
+};
+
+
+Object.keys(LargeDataSetArgs).forEach((key) => {
+  const value = LargeDataSetArgs[key];
+  document.querySelector('modus-table')[key] = value;
+});
+
+document.querySelector('modus-table').addEventListener('rowActionClick', (e)=> console.log(e.detail) );
+     </script>
  </body>
+
 </html>

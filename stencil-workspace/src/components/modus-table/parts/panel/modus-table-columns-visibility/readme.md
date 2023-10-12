@@ -10,9 +10,9 @@
 | Property               | Attribute       | Description               | Type                                 | Default     |
 | ---------------------- | --------------- | ------------------------- | ------------------------------------ | ----------- |
 | `columnsVisibility`    | --              | Column visibility options | `ModusTableColumnsVisibilityOptions` | `undefined` |
+| `getColumnsFn`         | --              | Table data.               | `() => Column<unknown, unknown>[]`   | `undefined` |
 | `menuIconContainerRef` | --              |                           | `HTMLDivElement`                     | `undefined` |
 | `showDropdown`         | `show-dropdown` |                           | `boolean`                            | `undefined` |
-| `table`                | --              | Table data.               | `Table<unknown>`                     | `undefined` |
 | `toggleDropdown`       | --              |                           | `(show: boolean) => void`            | `undefined` |
 
 

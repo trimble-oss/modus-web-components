@@ -2,38 +2,24 @@ import {
   FunctionalComponent,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
-import { Table, Updater } from '@tanstack/table-core';
-import { ModusTableCellLink, ModusTableCellValueChange } from '../models/modus-table.models';
+import { ModusTableCellValueChange } from '../models/modus-table.models';
 import { ModusTableCell } from './cell/modus-table-cell';
 import { ModusTableCellCheckbox } from './row/selection/modus-table-cell-checkbox';
-import RowActions from '../models/row-actions.model';
 import { COLUMN_DEF_SUB_ROWS_KEY } from '../modus-table.constants';
+import TableContext from '../models/table-context.model';
 
 interface ModusTableBodyProps {
-  table: Table<unknown>;
-  hover: boolean;
-  multipleRowSelection: boolean;
-  rowSelection: boolean;
-  rowActions: RowActions;
-  dataUpdater: (updater: Updater<unknown>, context: ModusTableCellEdited) => void;
-  cellLinkClick: (link: ModusTableCellLink) => void;
+  context: TableContext;
 }
 
-export type ModusTableCellEdited = Omit<ModusTableCellValueChange, 'data'>;
+export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ context }) => {
+  const { hover, rowSelection, rowSelectionOptions, tableInstance: table, updateData } = context;
+  const multipleRowSelection = rowSelectionOptions?.multiple;
 
-export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({
-  table,
-  hover,
-  rowSelection,
-  multipleRowSelection,
-  rowActions,
-  dataUpdater,
-  cellLinkClick,
-}) => {
   // Note: This function supports only 3 levels of nested rows.
   function handleCellValueChange(props: ModusTableCellValueChange) {
     const { row, accessorKey, newValue } = props;
-    dataUpdater(
+    updateData(
       (old: unknown[]) => {
         const newData = [...old];
 
@@ -74,9 +60,9 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({
                 <ModusTableCell
                   cell={cell}
                   cellIndex={cellIndex}
-                  rowActions={cellIndex === 0 && rowActions ? rowActions : null}
+                  context={context}
+                  // rowActions={cellIndex === 0 && rowActions ? rowActions : null}
                   valueChange={handleCellValueChange}
-                  linkClick={cellLinkClick}
                 />
               );
             })}

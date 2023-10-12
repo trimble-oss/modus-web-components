@@ -317,9 +317,9 @@ describe('modus-date-picker', () => {
 
     const disabledDates = await page.findAll('modus-date-picker >>> .calendar-body .calendar-day.disabled');
 
-    expect(disabledDates.some(element => element.innerHTML === '6')).toEqual(true);
-    expect(disabledDates.some(element => element.innerHTML === '7')).toEqual(false);
-    expect(disabledDates.some(element => element.innerHTML === '22')).toEqual(false);
-    expect(disabledDates.some(element => element.innerHTML === '23')).toEqual(true);
+    expect(disabledDates.some((element) => element.innerHTML === '6')).toEqual(true);
+    expect(disabledDates.some((element) => element.innerHTML === '7')).toEqual(false);
+    expect(disabledDates.some((element) => element.innerHTML === '22')).toEqual(false);
+    expect(disabledDates.some((element) => element.innerHTML === '23')).toEqual(true);
   });
 });

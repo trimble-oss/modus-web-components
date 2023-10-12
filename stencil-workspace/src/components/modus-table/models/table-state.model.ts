@@ -8,7 +8,7 @@ import {
 } from '@tanstack/table-core';
 import { ModusTableSortingState } from './modus-table.models';
 
-type ModusTableState = {
+type TableState = {
   columnSizing?: ColumnSizingState; // ColumnSizing has info about width of the column
   columnSizingInfo?: ColumnSizingInfoState; // ColumnSizingInfo has the detailed info about resizing of the column
   expanded?: ExpandedState;
@@ -19,4 +19,4 @@ type ModusTableState = {
   rowSelection?: RowSelectionState;
 };
 
-export default ModusTableState;
+export default TableState;

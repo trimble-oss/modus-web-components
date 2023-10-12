@@ -1,0 +1,12 @@
+modus-table-row-actions-menu {
+  .row-actions-menu {
+    display: flex;
+    position: fixed;
+    top: -1px;
+    z-index: 9;
+  }
+
+  modus-list-item {
+    cursor: pointer;
+  }
+}

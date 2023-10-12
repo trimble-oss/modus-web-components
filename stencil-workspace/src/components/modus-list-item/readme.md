@@ -22,6 +22,19 @@
 | `itemClick` | An event that fires on list item click | `CustomEvent<any>` |
 
 
+## Dependencies
+
+### Used by
+
+ - [modus-table-row-actions-menu](../modus-table/parts/row/actions/modus-table-row-actions-menu)
+
+### Graph
+```mermaid
+graph TD;
+  modus-table-row-actions-menu --> modus-list-item
+  style modus-list-item fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 

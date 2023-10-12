@@ -253,11 +253,8 @@ table {
           }
 
           .expand {
+            cursor: pointer;
             display: flex;
-
-            span {
-              cursor: pointer;
-            }
           }
         }
       }
