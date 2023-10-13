@@ -11,10 +11,7 @@ import {
 } from '@stencil/core';
 import { IconMap } from '../icons/IconMap';
 import DateInputFormatter from './utils/modus-date-input.formatter';
-import {
-  ModusDateInputEventDetails,
-  ModusDateInputType,
-} from './utils/modus-date-input.models';
+import { ModusDateInputEventDetails, ModusDateInputType } from './utils/modus-date-input.models';
 
 @Component({
   tag: 'modus-date-input',
@@ -291,7 +288,7 @@ export class ModusDateInput {
       this.errorText = `Select a date after ${this._formatter.formatDisplayString(min.toISOString())}`;
     } else if (max && max < value) {
       max.setUTCDate(max.getDate() + 1);
-      this.errorText = `Select a date before ${this._formatter.formatDisplayString(max.toISOString())}`
+      this.errorText = `Select a date before ${this._formatter.formatDisplayString(max.toISOString())}`;
     } else {
       this.clearValidation();
     }

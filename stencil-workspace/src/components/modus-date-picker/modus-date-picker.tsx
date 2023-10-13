@@ -9,9 +9,7 @@ import {
 import { IconMap } from '../icons/IconMap';
 import ModusDatePickerCalendar from './utils/modus-date-picker.calendar';
 import ModusDatePickerState from './utils/modus-date-picker.state';
-import {
-  ModusDateInputEventDetails,
-} from '../modus-date-input/utils/modus-date-input.models';
+import { ModusDateInputEventDetails } from '../modus-date-input/utils/modus-date-input.models';
 
 @Component({
   tag: 'modus-date-picker',
