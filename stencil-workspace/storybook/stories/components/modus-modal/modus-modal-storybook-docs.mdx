@@ -36,6 +36,33 @@ This component utilizes the slot element, allowing you to render your own HTML i
     });
 </script>
 ```
+### Customizable footer
+
+<Story id="components-modal--default" height={'400px'} />
+
+```html
+<modus-button id="btn-modal" color="primary">Open modal</modus-button>
+<modus-modal
+  <p>Woo-hoo, you're reading this text in a modal!</p>
+   <div slot="footer">
+       <modus-button button-style="outline" color="secondary">Outline</modus-button>
+        <modus-button size="small" color="primary">Small</modus-button>
+   </div>
+</modus-modal>
+
+<script>
+    document.querySelector('#btn-modal').addEventListener('buttonClick', () => {
+      document.querySelector('modus-modal').open();
+    });
+
+    document.querySelector('modus-modal').addEventListener('closed', () => {
+      // Timeout is a workaround for Stencil Web Component not capturing the state updates quick enough when another component is immediately focussed
+      setTimeout(() => {
+        document.querySelector('#btn-modal').focusButton();
+      }, 100);
+    });
+</script>
+```
 
 ### Properties
 
@@ -78,3 +105,4 @@ This component utilizes the slot element, allowing you to render your own HTML i
 - When Secondary button has focus, **Enter** emits `secondaryButtonClick` event.
 - When the Modal is open, tabbing can be performed only on the focussable elements inside Modal. Note: Pressing `Shift` + `Tab` on Modal Header cannot go back to Modal Footer.
 - Pressing `Escape` key closes the Modal and emits `close` event.
+- To customize footer, slot option is provided and referenced by `slot='footer'`.

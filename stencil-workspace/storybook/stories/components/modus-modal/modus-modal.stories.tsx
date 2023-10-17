@@ -108,6 +108,18 @@ const Template = ({ ariaLabel, headerText, primaryButtonAriaLabel,primaryButtonD
   </modus-modal>
   ${setScript()}
 `;
+
+const customizableFooterTemplate = ({ }) => html`
+  <modus-button id="btn-modal" color="primary">Open modal</modus-button>
+  <modus-modal>
+    <p>Woo-hoo, you're reading this text in a modal!</p>
+    <div slot="footer">
+      <modus-button button-style="outline" color="secondary">Outline</modus-button>
+      <modus-button size="small" color="primary">Small</modus-button>
+    </div>
+  </modus-modal>
+  ${setScript()}
+`;
 export const Default = Template.bind({});
 Default.args = {
   ariaLabel: 'Modal',
@@ -121,6 +133,7 @@ Default.args = {
   zIndex: '1',
   backdrop: 'default'};
 
+export const customizableFooter = customizableFooterTemplate.bind({});
 const setScript = () => {
   const tag = document.createElement('script');
   tag.innerHTML = `

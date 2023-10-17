@@ -190,7 +190,7 @@ export class ModusModal {
             </modus-button>
           )}
         </div>
-        <slot name="footerButtons"></slot>
+        <slot name="footer"></slot>
       </Fragment>
     );
   }
