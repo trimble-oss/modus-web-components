@@ -2,6 +2,7 @@
 import { Component, Element, Event, EventEmitter, h, JSX, Listen, Method, Prop, State } from '@stencil/core';
 import { IconClose } from '../icons/icon-close';
 import { FocusWrap, ModalFocusWrapping } from './modal-focus-wrapping';
+import { Fragment } from '@stencil/core/internal';
 
 @Component({
   tag: 'modus-modal',
@@ -165,29 +166,32 @@ export class ModusModal {
 
   renderModalFooter(): JSX.Element[] {
     return (
-      <div class="footer">
-        {this.secondaryButtonText && (
-          <modus-button
-            disabled={this.secondaryButtonDisabled}
-            button-style="outline"
-            color="secondary"
-            ariaLabel={this.secondaryButtonAriaLabel}
-            onButtonClick={() => this.secondaryButtonClick.emit()}
-            onKeyDown={(event) => this.handlePrimaryKeydown(event)}>
-            {this.secondaryButtonText}
-          </modus-button>
-        )}
-        {this.primaryButtonText && (
-          <modus-button
-            disabled={this.primaryButtonDisabled}
-            color="primary"
-            ariaLabel={this.primaryButtonAriaLabel}
-            onButtonClick={() => this.primaryButtonClick.emit()}
-            onKeyDown={(event) => this.handleSecondaryKeydown(event)}>
-            {this.primaryButtonText}
-          </modus-button>
-        )}
-      </div>
+      <Fragment>
+        <div class="footer">
+          {this.secondaryButtonText && (
+            <modus-button
+              disabled={this.secondaryButtonDisabled}
+              button-style="outline"
+              color="secondary"
+              ariaLabel={this.secondaryButtonAriaLabel}
+              onButtonClick={() => this.secondaryButtonClick.emit()}
+              onKeyDown={(event) => this.handlePrimaryKeydown(event)}>
+              {this.secondaryButtonText}
+            </modus-button>
+          )}
+          {this.primaryButtonText && (
+            <modus-button
+              disabled={this.primaryButtonDisabled}
+              color="primary"
+              ariaLabel={this.primaryButtonAriaLabel}
+              onButtonClick={() => this.primaryButtonClick.emit()}
+              onKeyDown={(event) => this.handleSecondaryKeydown(event)}>
+              {this.primaryButtonText}
+            </modus-button>
+          )}
+        </div>
+        <slot name="footerButtons"></slot>
+      </Fragment>
     );
   }
 
