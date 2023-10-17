@@ -19,7 +19,7 @@
 
 ## Dependencies
 
-- Node (>= v14)
+- Node (>= v16)
 - npm CLI (>= v7)
 
 _We recommend using [nvm](https://github.com/nvm-sh/nvm). It is a great tool for switching between Node versions_
