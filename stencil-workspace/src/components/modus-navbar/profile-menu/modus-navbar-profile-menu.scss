@@ -62,7 +62,6 @@
   }
 
   .links {
-    font-size: $rem-14px;
     margin-bottom: $rem-12px;
     max-width: 19rem;
     user-select: none;
@@ -72,8 +71,10 @@
       align-items: center;
       cursor: pointer;
       display: flex;
+      font-size: $rem-16px;
+      min-height: $list-group-item-height;
       overflow: hidden;
-      padding: $rem-10px $rem-20px;
+      padding: 0 $rem-16px;
       text-overflow: ellipsis;
       white-space: nowrap;
 
@@ -81,7 +82,7 @@
         align-items: center;
         display: flex;
         justify-content: center;
-        padding-right: $rem-4px;
+        padding-right: $rem-8px;
 
         path {
           fill: $modus-navbar-icon-color;

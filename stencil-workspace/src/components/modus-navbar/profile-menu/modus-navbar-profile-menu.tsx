@@ -43,7 +43,7 @@ export class ModusNavbarProfileMenu {
                 <div class="link" onClick={() => this.linkClick.emit(link.id)}>
                   {link.icon && (
                     <div class="icon">
-                      <IconMap icon={link.icon} />
+                      <IconMap icon={link.icon} size="20" />
                     </div>
                   )}
                   {link.display}
