@@ -61,7 +61,6 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
                   cell={cell}
                   cellIndex={cellIndex}
                   context={context}
-                  // rowActions={cellIndex === 0 && rowActions ? rowActions : null}
                   valueChange={handleCellValueChange}
                 />
               );

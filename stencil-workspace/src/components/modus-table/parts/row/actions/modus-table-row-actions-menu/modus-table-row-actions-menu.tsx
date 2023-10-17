@@ -42,7 +42,7 @@ export class ModusTableRowActionsMenu {
       this.tableRow = row;
     }
 
-    event.stopImmediatePropagation();
+    // event.stopImmediatePropagation();
   }
 
   @Listen('click', { target: 'document' })
@@ -57,6 +57,13 @@ export class ModusTableRowActionsMenu {
   handleListItemClick(id: string): void {
     const { rowActionClick } = this.context;
     rowActionClick.emit({ actionId: id, row: this.tableRow });
+  }
+
+  handleListItemKeydown(e: KeyboardEvent): void {
+    if (e.key.toLowerCase() === 'escape') {
+      this.isMenuOpen = false;
+      e.preventDefault();
+    }
   }
 
   render(): void {
@@ -74,7 +81,7 @@ export class ModusTableRowActionsMenu {
             <modus-list class="hydrated">
               {this.overFlowMenu.map(({ label, id }) => {
                 return (
-                  <modus-list-item onItemClick={() => this.handleListItemClick(id)} class="hydrated">
+                  <modus-list-item onItemClick={() => this.handleListItemClick(id)} class="hydrated row-actions-menu-item" onKeyDown={e => this.handleListItemKeydown(e)} tabindex={0}>
                     {label}
                   </modus-list-item>
                 );
@@ -84,5 +91,11 @@ export class ModusTableRowActionsMenu {
         )}
       </Host>
     );
+  }
+
+  componentDidRender(): void {
+    if (this.isMenuOpen) {
+      (this.element.children.item(0)?.children.item(0)?.children.item(0) as HTMLElement)?.focus();
+    }
   }
 }

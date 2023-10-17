@@ -24,7 +24,7 @@ export class ModusTableRowActions {
 
   private overflowButtonRef: HTMLElement;
 
-  handleMoreButtonClick(e: MouseEvent, menu: ModusTableRowAction[]): void {
+  handleMoreButtonClick(e: Event, menu: ModusTableRowAction[]): void {
     const { left, top, height } = this.overflowButtonRef.getBoundingClientRect();
 
     this.overflowRowActions.emit({
@@ -35,10 +35,24 @@ export class ModusTableRowActions {
     e.stopImmediatePropagation();
   }
 
-  handleActionButtonClick(e: MouseEvent, actionId: string): void {
+  handleMoreButtonKeydown(e: KeyboardEvent, menu: ModusTableRowAction[]): void {
+    if (e.key.toLowerCase() === 'enter') {
+      this.handleMoreButtonClick(e, menu)
+      e.preventDefault();
+    }
+  }
+
+  handleActionButtonClick(e: Event, actionId: string): void {
     const { rowActionClick } = this.context;
     rowActionClick.emit({ actionId, row: this.row });
     e.stopImmediatePropagation();
+  }
+
+  handleActionButtonKeydown(e: KeyboardEvent, actionId: string): void {
+    if (e.key.toLowerCase() === 'enter') {
+      this.handleActionButtonClick(e, actionId)
+      e.preventDefault();
+    }
   }
 
   render(): void {
@@ -47,7 +61,7 @@ export class ModusTableRowActions {
     let overflowMenu: ModusTableRowAction[];
 
     if (rowActions) {
-      const sortedActions = rowActions.filter((a) => a.isVisible(this.row)).sort((a, b) => a.index - b.index);
+      const sortedActions = rowActions.filter((a) => a.isVisible === undefined || a.isVisible === null || a.isVisible(this.row)).sort((a, b) => a.index - b.index);
       const visibleLimit = rowsExpandable ? 2 : 3;
       actionButtons = sortedActions.splice(0, visibleLimit);
       overflowMenu = sortedActions;
@@ -59,11 +73,13 @@ export class ModusTableRowActions {
         {actionButtons?.map(({ icon, id }) => {
           return (
             <modus-button
+              class="row-actions"
               ref={(el) => (this.overflowButtonRef = el)}
               button-style="borderless"
               color="secondary"
               icon-only={icon}
               size="small"
+              onKeyDown={(e) => this.handleActionButtonKeydown(e, id)}
               onClick={(e) => this.handleActionButtonClick(e, id)}></modus-button>
           );
         })}
@@ -71,10 +87,12 @@ export class ModusTableRowActions {
         {overflowMenu?.length > 0 && (
           <Fragment>
             <modus-button
+              class="row-actions-menu-button"
               button-style="borderless"
               color="secondary"
               icon-only="vertical-ellipsis"
               size="small"
+              onKeyDown={(e) => this.handleMoreButtonKeydown(e, overflowMenu)}
               onClick={(e) => this.handleMoreButtonClick(e, overflowMenu)}></modus-button>
           </Fragment>
         )}

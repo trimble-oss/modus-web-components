@@ -1,9 +1,13 @@
+@import '../../../../modus-table.vars.scss';
+
 modus-table-row-actions-menu {
   .row-actions-menu {
     display: flex;
     position: fixed;
     top: -1px;
     z-index: 9;
+    background-color: $modus-table-body-bg;
+    box-shadow: 0 0 8px rgba(36,35,45,0.3);
   }
 
   modus-list-item {

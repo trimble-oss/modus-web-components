@@ -211,14 +211,14 @@ rowActions:[
     id: '2',
     icon: 'notifications',
     label: 'Delete',
-    isVisible: () => true,
+    isVisible: (row) => row.original['age'] > 1200,
   },
 
   {
     id: '3',
     icon: 'notifications',
     label: 'Delete',
-    isVisible: () => true,
+    isVisible: (row) => row.original['age'] > 1200,
   },
 
   {

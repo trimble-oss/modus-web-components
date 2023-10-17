@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { Component, Event, EventEmitter, Prop, h } from '@stencil/core';
+import { Component, Event, EventEmitter, Listen, Prop, h } from '@stencil/core';
 import { IconCheck } from '../icons/icon-check';
 
 @Component({
@@ -29,6 +29,13 @@ export class ModusListItem {
     ['large', 'large'],
   ]);
 
+  @Listen('keydown')
+  handleListItemKeydown(e: KeyboardEvent): void {
+    if (e.key.toLowerCase() === 'enter' && !this.disabled) {
+      this.itemClick.emit()
+    }
+  }
+
   render(): unknown {
     const containerClass = `${this.classBySize.get(this.size)} ${this.disabled ? 'disabled' : ''} ${
       this.selected ? 'selected' : ''
@@ -36,7 +43,7 @@ export class ModusListItem {
     const iconSize = this.size === 'condensed' ? '18' : '22';
 
     return (
-      <li class={containerClass} onClick={() => (!this.disabled ? this.itemClick.emit() : null)}>
+      <li class={containerClass} onClick={() => (!this.disabled ? this.itemClick.emit() : null)} onKeyDown={(e) => this.handleListItemKeydown(e)}>
         <span class="slot">
           <slot />
         </span>
