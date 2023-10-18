@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { Component, h, Element, Listen } from '@stencil/core';
+import { Component, h, Element } from '@stencil/core';
 
 @Component({
   tag: 'modus-list',
@@ -9,16 +9,25 @@ import { Component, h, Element, Listen } from '@stencil/core';
 export class ModusList {
   @Element() element: HTMLElement;
 
-  @Listen('keyDown', { target: 'document' })
   handleKeyDown(e: KeyboardEvent): void {
-    const itemsLength = this.element.children.length
-    if(e.key.toLowerCase() === 'arrowdown') {
+    const itemsLength = this.element.children.length;
+    if (e.key.toLowerCase() === 'arrowdown') {
       const index = Array.prototype.indexOf.call(this.element.children, e.target);
-      (this.element.children.item((index + 1) % itemsLength) as HTMLElement)?.focus();
+
+      let next = this.element.children.item((index + 1) % itemsLength) as HTMLModusListItemElement;
+      if (next.disabled) {
+        next = this.element.children.item((index + 2) % itemsLength) as HTMLModusListItemElement;
+      }
+      next?.focusItem();
     }
-    if(e.key.toLowerCase() === 'arrowup') {
+    if (e.key.toLowerCase() === 'arrowup') {
       const index = Array.prototype.indexOf.call(this.element.children, e.target);
-      (this.element.children.item((index - 1) % itemsLength) as HTMLElement)?.focus();
+
+      let prev = this.element.children.item((index - 1) % itemsLength) as HTMLModusListItemElement;
+      if (prev.disabled) {
+        prev = this.element.children.item((index - 2) % itemsLength) as HTMLModusListItemElement;
+      }
+      prev?.focusItem();
     }
   }
 

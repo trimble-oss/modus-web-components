@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { Component, Event, EventEmitter, Listen, Prop, h } from '@stencil/core';
+import { Component, Event, EventEmitter, Method, Prop, h } from '@stencil/core';
 import { IconCheck } from '../icons/icon-check';
 
 @Component({
@@ -23,16 +23,22 @@ export class ModusListItem {
   /** An event that fires on list item click */
   @Event() itemClick: EventEmitter;
 
+  listItemRef: HTMLLIElement;
+
+  @Method()
+  async focusItem(): Promise<void> {
+    this.listItemRef?.focus();
+  }
+
   classBySize: Map<string, string> = new Map([
     ['condensed', 'small'],
     ['standard', 'standard'],
     ['large', 'large'],
   ]);
 
-  @Listen('keydown')
-  handleListItemKeydown(e: KeyboardEvent): void {
+  handleKeydown(e: KeyboardEvent): void {
     if (e.key.toLowerCase() === 'enter' && !this.disabled) {
-      this.itemClick.emit()
+      this.itemClick.emit();
     }
   }
 
@@ -43,7 +49,12 @@ export class ModusListItem {
     const iconSize = this.size === 'condensed' ? '18' : '22';
 
     return (
-      <li class={containerClass} onClick={() => (!this.disabled ? this.itemClick.emit() : null)} onKeyDown={(e) => this.handleListItemKeydown(e)}>
+      <li
+        ref={(el) => (this.listItemRef = el)}
+        class={containerClass}
+        tabIndex={this.disabled ? -1 : 0}
+        onClick={() => (!this.disabled ? this.itemClick.emit() : null)}
+        onKeyDown={(e) => this.handleKeydown(e)}>
         <span class="slot">
           <slot />
         </span>

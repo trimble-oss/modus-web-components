@@ -546,6 +546,7 @@ export namespace Components {
           * (optional) Disables the list item
          */
         "disabled": boolean;
+        "focusItem": () => Promise<void>;
         /**
           * (optional) The selected state of the list item
          */
