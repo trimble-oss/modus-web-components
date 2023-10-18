@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import { Host, JSX, Component, Prop, h } from '@stencil/core';
 import {
   KEYBOARD_ENTER,
