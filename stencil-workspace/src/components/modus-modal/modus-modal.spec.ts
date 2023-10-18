@@ -30,7 +30,9 @@ describe('modus-modal', () => {
                 <div class="body">
                   <slot></slot>
                 </div>
-                <div class="footer"></div>
+                <div class="footer">
+                  <slot name="footerContent"></slot>
+                </div>
                 <div id="endTrap" tabindex="0" aria-hidden="true"></div>
             </div>
           </div>

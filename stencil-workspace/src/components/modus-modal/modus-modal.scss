@@ -62,15 +62,14 @@
     }
 
     .footer {
-      align-items: center;
       border-top: 1px solid $modus-modal-divider-color;
-      display: flex;
-      height: 64px;
-      justify-content: flex-end;
-      padding: 0 $rem-16px;
+      padding: $rem-20px $rem-16px;
 
-      modus-button:first-of-type {
-        margin: 0 $rem-8px;
+      &.has-buttons {
+        align-items: center;
+        display: flex;
+        gap: $rem-8px;
+        justify-content: flex-end;
       }
     }
   }

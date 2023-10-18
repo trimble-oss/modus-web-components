@@ -6,7 +6,9 @@ import { Story } from '@storybook/addon-docs';
 
 [Modus Dialog](https://modus.trimble.com/components/web/modals/) web components interrupt workflows when user interaction is required. They are referenced using the `<modus-modal>` custom HTML element.
 
-This component utilizes the slot element, allowing you to render your own HTML in the content portion of the modal.
+This modal component uses the slot element to render the content and the slot `footerContent` to render custom footer content.
+
+When designing a custom footer, it is highly recommended to use button progressions from, structural and color progression. Use only one button progression in a single product, for example, `primary` button should be followed by a `secondary` button or `tertiary` button not the outline buttons. For more guidelines refer to [Modus Styleguide](https://modus.trimble.com/components/web/modals/styles/).
 
 ### Default
 
@@ -36,18 +38,21 @@ This component utilizes the slot element, allowing you to render your own HTML i
     });
 </script>
 ```
-### Customizable footer
+### Custom footer
 
-<Story id="components-modal--default" height={'400px'} />
+<Story id="components-modal--custom-footer" height={'400px'} />
 
 ```html
 <modus-button id="btn-modal" color="primary">Open modal</modus-button>
-<modus-modal
-  <p>Woo-hoo, you're reading this text in a modal!</p>
-   <div slot="footer">
-       <modus-button button-style="outline" color="secondary">Outline</modus-button>
-        <modus-button size="small" color="primary">Small</modus-button>
-   </div>
+<modus-modal>
+    <p>A dialog or a modal is a window overlaid on the primary window. It interrupts the user and requires an action. It disables the main content until the user explicitly interacts with the modal dialog.</p>
+    <div style="align-items: center;
+    display: flex;
+    justify-content: flex-end; gap: 8px; height:100%;" slot="footerContent">
+      <modus-button color="tertiary">Cancel</modus-button>
+      <modus-button color="secondary">Check later</modus-button>
+      <modus-button color="primary">Approve</modus-button>
+    </div>
 </modus-modal>
 
 <script>
@@ -96,6 +101,12 @@ This component utilizes the slot element, allowing you to render your own HTML i
 | ------------ | --------------- | --------- | --------------- |
 | `close` | Closes the Modal |           | `Promise<void>` |
 | `open` | Opens the Modal |           | `Promise<void>` |
+
+### Slots
+
+| Slot              | Description                      |
+| ----------------- | -------------------------------- |
+| `"footerContent"` | Slot for a custom footer content |
 
 ### Accessibility
 

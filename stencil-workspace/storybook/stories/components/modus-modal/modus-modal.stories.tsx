@@ -78,7 +78,7 @@ export default {
   },
   parameters: {
     actions: {
-      handles: ['closed', 'primaryButtonClick', 'secondaryButtonClick'],
+      handles: ['closed', 'primaryButtonClick', 'secondaryButtonClick', 'buttonClick'],
     },
     docs: {
       inlineStories: false,
@@ -95,28 +95,16 @@ export default {
 const Template = ({ ariaLabel, headerText, primaryButtonAriaLabel,primaryButtonDisabled, primaryButtonText, secondaryButtonAriaLabel, secondaryButtonDisabled, secondaryButtonText, zIndex, backdrop  }) => html`
   <modus-button id="btn-modal" color="primary">Open modal</modus-button>
   <modus-modal
-  aria-label=${ariaLabel}
-  header-text=${headerText}
-  primary-button-aria-label=${primaryButtonAriaLabel}
-  primary-button-disabled=${primaryButtonDisabled}
-  primary-button-text=${primaryButtonText}
-  secondary-button-aria-label=${secondaryButtonAriaLabel}  secondary-button-disabled=${secondaryButtonDisabled}
-  secondary-button-text=${secondaryButtonText}
-  z-index=${zIndex}
-  backdrop=${backdrop}>
+    aria-label=${ariaLabel}
+    header-text=${headerText}
+    primary-button-aria-label=${primaryButtonAriaLabel}
+    primary-button-disabled=${primaryButtonDisabled}
+    primary-button-text=${primaryButtonText}
+    secondary-button-aria-label=${secondaryButtonAriaLabel}  secondary-button-disabled=${secondaryButtonDisabled}
+    secondary-button-text=${secondaryButtonText}
+    z-index=${zIndex}
+    backdrop=${backdrop}>
     <p>Woo-hoo, you're reading this text in a modal!</p>
-  </modus-modal>
-  ${setScript()}
-`;
-
-const customizableFooterTemplate = ({ }) => html`
-  <modus-button id="btn-modal" color="primary">Open modal</modus-button>
-  <modus-modal>
-    <p>Woo-hoo, you're reading this text in a modal!</p>
-    <div slot="footer">
-      <modus-button button-style="outline" color="secondary">Outline</modus-button>
-      <modus-button size="small" color="primary">Small</modus-button>
-    </div>
   </modus-modal>
   ${setScript()}
 `;
@@ -133,7 +121,31 @@ Default.args = {
   zIndex: '1',
   backdrop: 'default'};
 
-export const customizableFooter = customizableFooterTemplate.bind({});
+const CustomFooterTemplate = ({ ariaLabel, headerText, zIndex, backdrop  }) => html`
+  <modus-button id="btn-modal" color="primary">Open modal</modus-button>
+  <modus-modal
+  aria-label=${ariaLabel}
+  header-text=${headerText}
+  z-index=${zIndex}
+  backdrop=${backdrop}>
+    <p>A dialog or a modal is a window overlaid on the primary window. It interrupts the user and requires an action. It disables the main content until the user explicitly interacts with the modal dialog.</p>
+    <div style="align-items: center;
+    display: flex;
+    justify-content: flex-end; gap: 8px; height:100%;" slot="footerContent">
+      <modus-button color="tertiary">Cancel</modus-button>
+      <modus-button color="secondary">Check later</modus-button>
+      <modus-button color="primary">Approve</modus-button>
+    </div>
+  </modus-modal>
+  ${setScript()}
+`;
+export const CustomFooter = CustomFooterTemplate.bind({});
+CustomFooter.args = {
+  ariaLabel: 'Modal',
+  headerText: 'Modal title',
+  zIndex: '1',
+  backdrop: 'default'};
+
 const setScript = () => {
   const tag = document.createElement('script');
   tag.innerHTML = `

@@ -4,6 +4,9 @@ import { IconClose } from '../icons/icon-close';
 import { FocusWrap, ModalFocusWrapping } from './modal-focus-wrapping';
 import { Fragment } from '@stencil/core/internal';
 
+/**
+ * @slot footerContent - Slot for a custom footer content
+ */
 @Component({
   tag: 'modus-modal',
   styleUrl: 'modus-modal.scss',
@@ -167,7 +170,11 @@ export class ModusModal {
   renderModalFooter(): JSX.Element[] {
     return (
       <Fragment>
-        <div class="footer">
+        <div
+          class={{
+            footer: true,
+            'has-buttons': Boolean(this.primaryButtonText || this.secondaryButtonText),
+          }}>
           {this.secondaryButtonText && (
             <modus-button
               disabled={this.secondaryButtonDisabled}
@@ -189,8 +196,8 @@ export class ModusModal {
               {this.primaryButtonText}
             </modus-button>
           )}
+          <slot name="footerContent"></slot>
         </div>
-        <slot name="footer"></slot>
       </Fragment>
     );
   }
