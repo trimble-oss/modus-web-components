@@ -61,7 +61,7 @@ export class ModusTableRowActions {
     let overflowMenu: ModusTableRowAction[];
 
     if (rowActions) {
-      const sortedActions = rowActions.filter((a) => a.isVisible === undefined || a.isVisible === null || a.isVisible(this.row)).sort((a, b) => a.index - b.index);
+      const sortedActions = rowActions.sort((a, b) => a.index - b.index);
       const visibleLimit = rowsExpandable ? 2 : 3;
       actionButtons = sortedActions.splice(0, visibleLimit);
       overflowMenu = sortedActions;
@@ -70,7 +70,8 @@ export class ModusTableRowActions {
       <Host>
         {rowsExpandable && <ModusTableCellExpandIcons row={this.row} />}
 
-        {actionButtons?.map(({ icon, id }) => {
+        {actionButtons?.map(({ icon, id, isDisabled = () => false }) => {
+          const disabled = isDisabled(this.row);
           return (
             <modus-button
               class="row-actions"
@@ -79,6 +80,7 @@ export class ModusTableRowActions {
               color="secondary"
               icon-only={icon}
               size="small"
+              disabled={disabled}
               onKeyDown={(e) => this.handleActionButtonKeydown(e, id)}
               onClick={(e) => this.handleActionButtonClick(e, id)}></modus-button>
           );

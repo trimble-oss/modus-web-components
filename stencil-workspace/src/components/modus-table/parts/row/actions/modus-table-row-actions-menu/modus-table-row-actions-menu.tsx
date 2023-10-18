@@ -79,9 +79,10 @@ export class ModusTableRowActionsMenu {
         {this.isMenuOpen && (
           <div style={{ ...style }} class="row-actions-menu">
             <modus-list class="hydrated">
-              {this.overFlowMenu.map(({ label, id }) => {
+              {this.overFlowMenu.map(({ label, id, isDisabled = () => false }) => {
+                const disabled = isDisabled(this.tableRow)
                 return (
-                  <modus-list-item onItemClick={() => this.handleListItemClick(id)} class="hydrated row-actions-menu-item" onKeyDown={e => this.handleListItemKeydown(e)} tabindex={0}>
+                  <modus-list-item disabled={disabled} onItemClick={() => this.handleListItemClick(id)} class="hydrated row-actions-menu-item" onKeyDown={e => this.handleListItemKeydown(e)} tabindex={0}>
                     {label}
                   </modus-list-item>
                 );

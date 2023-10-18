@@ -203,29 +203,33 @@ rowActions:[
   {
     id: '1',
     icon: 'notifications',
-    label: 'Delete',
-    isVisible: () => true,
+    label: 'Notification',
+    index: 0,
+    isDisabled: () => false
   },
 
   {
     id: '2',
-    icon: 'notifications',
+    icon: 'delete',
     label: 'Delete',
-    isVisible: (row) => row.original['age'] > 1200,
+    index: 1,
+    isDisabled: () => false
   },
 
   {
     id: '3',
-    icon: 'notifications',
-    label: 'Delete',
-    isVisible: (row) => row.original['age'] > 1200,
+    icon: 'cancel',
+    label: 'Cancel',
+    index: 2,
+    isDisabled: () => false
   },
 
   {
     id: '4',
-    icon: 'notifications',
-    label: 'Delete',
-    isVisible: () => true,
+    index: 3,
+    icon: 'calendar',
+    label: 'Calendar',
+    isDisabled: () => false
   }
 ]
 };

@@ -444,7 +444,7 @@ describe('modus-table', () => {
         index: 0,
         icon: 'edit',
         label: 'Edit',
-        isVisible: () => true
+        isDisabled: () => true
       }
     ]
     const component = await page.find('modus-table');
@@ -468,35 +468,35 @@ describe('modus-table', () => {
         index: 0,
         icon: 'edit',
         label: 'Edit',
-        isVisible: () => true
+        isDisabled: () => false
       },
       {
         id: '2',
         index: 1,
         icon: 'edit',
         label: 'Edit',
-        isVisible: () => true
+        isDisabled: () => false
       },
       {
         id: '3',
         index: 2,
         icon: 'edit',
         label: 'Edit',
-        isVisible: () => true
+        isDisabled: () => false
       },
       {
         id: '4',
         index: 3,
         icon: 'edit',
         label: 'Edit',
-        isVisible: () => true
+        isDisabled: () => false
       },
       {
         id: '5',
         index: 4,
         icon: 'edit',
         label: 'Edit',
-        isVisible: () => true
+        isDisabled: () => false
       }
     ]
     const component = await page.find('modus-table');
