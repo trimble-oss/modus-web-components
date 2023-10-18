@@ -41,7 +41,7 @@ const iconNames = [
   'refresh',
   'remove',
   'search',
-  'sheild',
+  'shield',
   'sort-a-z',
   'sort-z-a',
   'sun',
