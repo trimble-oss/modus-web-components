@@ -5,22 +5,22 @@
 
   align-items: center;
   cursor: default;
-  max-width: 19rem;
+  width: 19rem;
   padding: 0;
-  width: fit-content;
 
   .user {
     align-items: center;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    padding: $rem-20px $rem-20px 0 $rem-20px;
+    padding: $rem-16px $rem-24px 0 $rem-24px;
 
     .avatar,
     .initials {
       background-color: $modus-navbar-icon-color;
       border-radius: 50%;
       height: 6rem;
-      margin: 0 $rem-16px $rem-20px 0;
+      margin-bottom: $rem-16px;
       user-select: none;
       width: 6rem;
     }
@@ -35,6 +35,9 @@
     }
 
     .username {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: $rem-16px;
       font-weight: $font-weight-semi-bold;
       max-width: 10rem;
@@ -43,6 +46,9 @@
     }
 
     .email {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: $rem-12px;
       margin-bottom: $rem-16px;
       max-width: 10rem;
@@ -66,39 +72,6 @@
     max-width: 19rem;
     user-select: none;
     width: 100%;
-
-    .link {
-      align-items: center;
-      cursor: pointer;
-      display: flex;
-      font-size: $rem-16px;
-      min-height: $list-group-item-height;
-      overflow: hidden;
-      padding: 0 $rem-16px;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-
-      .icon {
-        align-items: center;
-        display: flex;
-        justify-content: center;
-        padding-right: $rem-8px;
-
-        path {
-          fill: $modus-navbar-icon-color;
-        }
-      }
-
-      @media (hover: hover) {
-        &:hover {
-          background-color: $modus-navbar-icon-hover-bg;
-        }
-      }
-
-      &:active {
-        background-color: $modus-navbar-icon-active-bg;
-      }
-    }
   }
 
   .sign-out {
@@ -110,7 +83,7 @@
       color: $modus-navbar-profile-menu-sign-out-color;
       cursor: pointer;
       font-size: $rem-14px;
-      padding: $rem-10px $rem-20px;
+      padding: $rem-10px $rem-16px;
 
       @media (hover: hover) {
         &:hover {

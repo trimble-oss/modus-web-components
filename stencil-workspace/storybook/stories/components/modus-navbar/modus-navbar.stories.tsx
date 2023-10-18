@@ -87,7 +87,7 @@ Default.args = {
       {
         id: "link2",
         display: "Link 2",
-        icon: "add"
+        icon: "sun"
         }
     ]
   },

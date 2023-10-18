@@ -24,6 +24,12 @@ The `<modus-list-item>` utilizes the slot element, allowing you to render your o
   <modus-list-item selected size="large">
     Large & Selected
   </modus-list-item>
+  <modus-list-item borderless>
+    Borderless
+  </modus-list-item>
+  <modus-list-item type="icon" icon="moon">
+      Icon
+  </modus-list-item>
 </modus-list>
 
 ```html
@@ -37,6 +43,8 @@ The `<modus-list-item>` utilizes the slot element, allowing you to render your o
   <modus-list-item disabled>Disabled</modus-list-item>
   <modus-list-item size="large">Large</modus-list-item>
   <modus-list-item selected size="large">Large & Selected</modus-list-item>
+  <modus-list-item borderless>Borderless</modus-list-item>
+  <modus-list-item type="icon" icon="moon">Icon</modus-list-item>
 </modus-list>
 ```
 
@@ -57,10 +65,26 @@ The `<modus-list-item>` utilizes the slot element, allowing you to render your o
       </tr>
     </thead>
     <tbody>
+     <tr>
+        <td>borderless</td>
+        <td>Removes border from list item</td>
+        <td>boolean</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
       <tr>
         <td>disabled</td>
         <td>Disables the list item</td>
         <td>boolean</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>icon</td>
+        <td>Name of the icon to render</td>
+        <td>string</td>
         <td></td>
         <td></td>
         <td></td>
@@ -78,6 +102,14 @@ The `<modus-list-item>` utilizes the slot element, allowing you to render your o
         <td>The size of the list item</td>
         <td>string</td>
         <td>'condensed', 'large', 'standard'</td>
+        <td>'standard'</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Type</td>
+        <td>The type of list item to render</td>
+        <td>string</td>
+        <td>'standard', 'icon</td>
         <td>'standard'</td>
         <td></td>
       </tr>

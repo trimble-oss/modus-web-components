@@ -1016,3 +1016,11 @@ modus-side-navigation {
   --modus-side-navigation-item-icon-active-filter: invert(95%) sepia(100%) saturate(0%) hue-rotate(151deg) brightness(104%)
     contrast(105%);
 }
+
+modus-navbar {
+  @include modus-list-item;
+}
+
+modus-navbar-profile-menu {
+  @include modus-list-item;
+}

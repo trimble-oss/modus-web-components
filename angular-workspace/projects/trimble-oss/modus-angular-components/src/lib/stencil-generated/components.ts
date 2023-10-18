@@ -501,14 +501,14 @@ export declare interface ModusList extends Components.ModusList {}
 
 
 @ProxyCmp({
-  inputs: ['disabled', 'selected', 'size', 'type']
+  inputs: ['borderless', 'disabled', 'icon', 'selected', 'size', 'type']
 })
 @Component({
   selector: 'modus-list-item',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['disabled', 'selected', 'size', 'type'],
+  inputs: ['borderless', 'disabled', 'icon', 'selected', 'size', 'type'],
 })
 export class ModusListItem {
   protected el: HTMLElement;

@@ -12,6 +12,11 @@ li {
   min-height: $list-group-item-height;
   padding: 0 $rem-16px;
 
+  .icon {
+    display: flex;
+    margin-right: $rem-8px;
+  }
+
   .slot {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -20,6 +25,11 @@ li {
 
   .icon-check {
     margin-left: auto;
+  }
+
+  &.borderless,
+  &.borderless:hover:not(.disabled) {
+    border: none;
   }
 
   &:hover:not(.disabled) {

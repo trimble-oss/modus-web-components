@@ -543,9 +543,17 @@ export namespace Components {
     }
     interface ModusListItem {
         /**
+          * (optional) Whether the list item has a border or not
+         */
+        "borderless": boolean;
+        /**
           * (optional) Disables the list item
          */
         "disabled": boolean;
+        /**
+          * (optional) Name of the icon
+         */
+        "icon": string;
         /**
           * (optional) The selected state of the list item
          */
@@ -557,7 +565,7 @@ export namespace Components {
         /**
           * (optional) The type of list item
          */
-        "type": string;
+        "type": 'standard' | 'icon';
     }
     interface ModusMessage {
         /**
@@ -2468,9 +2476,17 @@ declare namespace LocalJSX {
     }
     interface ModusListItem {
         /**
+          * (optional) Whether the list item has a border or not
+         */
+        "borderless"?: boolean;
+        /**
           * (optional) Disables the list item
          */
         "disabled"?: boolean;
+        /**
+          * (optional) Name of the icon
+         */
+        "icon"?: string;
         /**
           * An event that fires on list item click
          */
@@ -2486,7 +2502,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The type of list item
          */
-        "type"?: string;
+        "type"?: 'standard' | 'icon';
     }
     interface ModusMessage {
         /**
