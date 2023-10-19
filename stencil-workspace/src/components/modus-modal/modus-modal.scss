@@ -33,7 +33,7 @@
     min-width: 300px;
     outline: 0;
 
-    .header {
+    header {
       align-items: center;
       border-bottom: 1px solid $modus-modal-divider-color;
       display: flex;
@@ -61,7 +61,7 @@
       padding: $rem-16px;
     }
 
-    .footer {
+    footer {
       border-top: 1px solid $modus-modal-divider-color;
       padding: $rem-20px $rem-16px;
 

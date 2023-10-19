@@ -153,7 +153,7 @@ export class ModusModal {
 
   renderModalHeader(): JSX.Element[] {
     return (
-      <div class="header">
+      <header>
         {this.headerText}
         <div
           role="button"
@@ -163,16 +163,15 @@ export class ModusModal {
           onKeyDown={(event) => this.handleCloseKeydown(event)}>
           <IconClose size="20" />
         </div>
-      </div>
+      </header>
     );
   }
 
   renderModalFooter(): JSX.Element[] {
     return (
       <Fragment>
-        <div
+        <footer
           class={{
-            footer: true,
             'has-buttons': Boolean(this.primaryButtonText || this.secondaryButtonText),
           }}>
           {this.secondaryButtonText && (
@@ -197,7 +196,7 @@ export class ModusModal {
             </modus-button>
           )}
           <slot name="footerContent"></slot>
-        </div>
+        </footer>
       </Fragment>
     );
   }
