@@ -14,7 +14,7 @@ describe('modus-modal', () => {
 
     await page.setContent('<modus-modal header-text="Header Text"></modus-modal>');
     const component = await page.find('modus-modal');
-    const element = await page.find('modus-modal >>> div.header');
+    const element = await page.find('modus-modal >>> div');
     expect(element.innerText).toContain('Header Text');
 
     component.setProperty('headerText', 'New Text');
