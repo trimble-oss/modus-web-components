@@ -8,19 +8,20 @@ import {
 } from '../modus-table.constants';
 
 interface NavigateTableCellsProps {
-  key: string;
+  eventKey: string;
   cellElement: HTMLElement;
-  cellIndex: number;
 }
 export default function NavigateTableCells(props: NavigateTableCellsProps) {
-  const { key, cellElement: cell, cellIndex: index } = props;
+  const { eventKey: key, cellElement: cell } = props;
   let nextCell: HTMLElement;
+
+  const row = cell.closest('tr') as HTMLTableRowElement;
+  const index = Array.prototype.indexOf.call(row.children, cell);
 
   switch (key?.toLowerCase()) {
     case KEYBOARD_ENTER:
     case KEYBOARD_DOWN: // Moves to down cell
-      nextCell = (cell.parentElement.nextSibling as HTMLElement)?.children[index + 1] as HTMLElement;
-
+      nextCell = (cell.parentElement.nextSibling as HTMLElement)?.children[index] as HTMLElement;
       if (nextCell) nextCell.focus();
       else cell.focus();
       break;
@@ -36,7 +37,7 @@ export default function NavigateTableCells(props: NavigateTableCellsProps) {
       nextCell?.focus();
       break;
     case KEYBOARD_UP: // Moves to up cell
-      nextCell = (cell.parentElement.previousSibling as HTMLElement)?.children[index + 1] as HTMLElement;
+      nextCell = (cell.parentElement.previousSibling as HTMLElement)?.children[index] as HTMLElement;
       nextCell?.focus();
       break;
   }

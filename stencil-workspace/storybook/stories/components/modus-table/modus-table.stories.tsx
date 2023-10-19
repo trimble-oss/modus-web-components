@@ -91,7 +91,6 @@ const DefaultColumns = [
     size: 150,
     minSize: 80,
     footer: 'Total',
-    cellEditable:true,
   },
   {
     header: 'Last Name',
@@ -100,7 +99,6 @@ const DefaultColumns = [
     dataType: 'text',
     size: 150,
     minSize: 80,
-    cellEditable:true,
   },
   {
     header: 'Age',
@@ -109,7 +107,6 @@ const DefaultColumns = [
     dataType: 'integer',
     size: 80,
     minSize: 60,
-    cellEditable:true,
   },
   {
     header: 'Visits',
@@ -119,7 +116,6 @@ const DefaultColumns = [
     maxSize: 80,
     showTotal: true,
     minSize: 80,
-    cellEditable:true,
   },
   {
     header: 'Email',
@@ -135,15 +131,6 @@ const DefaultColumns = [
     id: 'status',
     dataType: 'text',
     minSize: 80,
-    cellEditable:true,
-    cellEditorType: 'dropdown',
-    cellEditorArgs: {
-      options:[
-      { display: 'Verified' },
-      { display: 'Pending' },
-      { display: 'Rejected' },
-      ]
-    },
   },
   {
     header: 'Profile Progress',
@@ -151,7 +138,6 @@ const DefaultColumns = [
     id: 'progress',
     dataType: 'integer',
     minSize: 100,
-    cellEditable:true,
   },
   {
     header: 'Created At',
@@ -344,7 +330,7 @@ export default {
       type: { required: false },
     },
     pageSizeList: {
-      name: 'toolbarOptions',
+      name: 'pageSizeList',
       description: 'To set page size options for the pagination.',
       table: {
         type: { summary: 'number[]' },
@@ -352,7 +338,7 @@ export default {
       type: { required: false },
     },
     rowSelectionOptions: {
-      name: 'toolbarOptions',
+      name: 'rowSelectionOptions',
       description: 'To control multiple row selection.',
       table: {
         type: { summary: 'ModusTableRowSelectionOptions' },
@@ -540,9 +526,29 @@ CheckboxRowSelection.args = {
   }, data: makeData(7)
 };
 
+const editableColumns =DefaultColumns.map(col =>{
+  if(col.dataType === 'link') return col;
+
+  if(col.accessorKey === 'status'){
+    return {...col,  cellEditable:true,
+      cellEditorType: 'dropdown',
+      cellEditorArgs: {
+        options:[
+        { display: 'Verified' },
+        { display: 'Pending' },
+        { display: 'Rejected' },
+        ]
+      } };
+  }
+  else return {...col, cellEditable: true};
+});
+
+export const InlineEditing = Template.bind({});
+InlineEditing.args = { ...DefaultArgs, columns: editableColumns, data: makeData(7) };
+
 export const LargeDataset = Template.bind({});
 
-LargeDataset.args = { ...DefaultArgs, columns: DefaultColumns, data: makeData(10000, 1,1 ),pagination: true, pageSizeList: [5, 10, 50], sort: true , hover: true, rowsExpandable: true, summaryRow: true , columnReorder:true, columnResize: true, toolbar:true,  toolbarOptions: {
+LargeDataset.args = { ...DefaultArgs, columns: editableColumns, data: makeData(10000, 1,1 ),pagination: true, pageSizeList: [5, 10, 50], sort: true , hover: true, rowsExpandable: true, summaryRow: true , columnReorder:true, columnResize: true, toolbar:true,  toolbarOptions: {
   columnsVisibility: {
     title: '',
     requiredColumns: ['age', 'visits'],

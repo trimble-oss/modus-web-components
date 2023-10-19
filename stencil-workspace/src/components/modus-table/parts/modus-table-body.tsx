@@ -69,12 +69,11 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({
                 row={row}
                 isChecked={isChecked}></ModusTableCellCheckbox>
             )}
-            {getVisibleCells()?.map((cell, cellIndex) => {
+            {getVisibleCells()?.map((cell, index) => {
               return (
                 <ModusTableCell
                   cell={cell}
-                  cellIndex={cellIndex}
-                  rowActions={cellIndex === 0 && rowActions ? rowActions : null}
+                  rowActions={index === 0 && rowActions ? rowActions : null}
                   valueChange={handleCellValueChange}
                   linkClick={cellLinkClick}
                 />
