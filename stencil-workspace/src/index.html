@@ -205,7 +205,7 @@ rowActions:[
     icon: 'notifications',
     label: 'Notification',
     index: 0,
-    isDisabled: () => false
+    isDisabled: (row) => row.original.age > 1100
   },
 
   {
@@ -229,7 +229,7 @@ rowActions:[
     index: 3,
     icon: 'calendar',
     label: 'Calendar',
-    isDisabled: () => false
+    isDisabled: (row) => row.original.age > 1100
   }
 ]
 };

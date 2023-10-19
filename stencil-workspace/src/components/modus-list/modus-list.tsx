@@ -15,7 +15,7 @@ export class ModusList {
       const index = Array.prototype.indexOf.call(this.element.children, e.target);
 
       let next = this.element.children.item((index + 1) % itemsLength) as HTMLModusListItemElement;
-      if (next.disabled) {
+      while (next?.disabled) {
         next = this.element.children.item((index + 2) % itemsLength) as HTMLModusListItemElement;
       }
       next?.focusItem();
@@ -24,7 +24,7 @@ export class ModusList {
       const index = Array.prototype.indexOf.call(this.element.children, e.target);
 
       let prev = this.element.children.item((index - 1) % itemsLength) as HTMLModusListItemElement;
-      if (prev.disabled) {
+      while (prev?.disabled) {
         prev = this.element.children.item((index - 2) % itemsLength) as HTMLModusListItemElement;
       }
       prev?.focusItem();

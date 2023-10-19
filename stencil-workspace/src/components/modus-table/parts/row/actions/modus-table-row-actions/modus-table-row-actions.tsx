@@ -63,8 +63,8 @@ export class ModusTableRowActions {
     if (rowActions) {
       const sortedActions = rowActions.sort((a, b) => a.index - b.index);
       const visibleLimit = rowsExpandable ? 2 : 3;
-      actionButtons = sortedActions.splice(0, visibleLimit);
-      overflowMenu = sortedActions;
+      actionButtons = sortedActions.slice(0, visibleLimit);
+      overflowMenu = sortedActions.slice(visibleLimit);
     }
     return (
       <Host>
@@ -82,7 +82,7 @@ export class ModusTableRowActions {
               size="small"
               disabled={disabled}
               onKeyDown={(e) => this.handleActionButtonKeydown(e, id)}
-              onClick={(e) => this.handleActionButtonClick(e, id)}></modus-button>
+              onButtonClick={(e) => this.handleActionButtonClick(e, id)}></modus-button>
           );
         })}
 
