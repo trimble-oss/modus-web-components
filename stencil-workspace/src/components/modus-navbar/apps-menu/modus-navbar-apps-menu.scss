@@ -8,6 +8,7 @@
   max-height: 605px;
   overflow-y: auto;
   width: max-content;
+  background-color: $menu-bg;
 
   &.reverse {
     left: 0;
