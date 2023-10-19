@@ -37,7 +37,7 @@ export class ModusTableRowActions {
 
   handleMoreButtonKeydown(e: KeyboardEvent, menu: ModusTableRowAction[]): void {
     if (e.key.toLowerCase() === 'enter') {
-      this.handleMoreButtonClick(e, menu)
+      this.handleMoreButtonClick(e, menu);
       e.preventDefault();
     }
   }
@@ -50,7 +50,7 @@ export class ModusTableRowActions {
 
   handleActionButtonKeydown(e: KeyboardEvent, actionId: string): void {
     if (e.key.toLowerCase() === 'enter') {
-      this.handleActionButtonClick(e, actionId)
+      this.handleActionButtonClick(e, actionId);
       e.preventDefault();
     }
   }
@@ -82,7 +82,7 @@ export class ModusTableRowActions {
               size="small"
               disabled={disabled}
               onKeyDown={(e) => this.handleActionButtonKeydown(e, id)}
-              onButtonClick={(e) => this.handleActionButtonClick(e, id)}></modus-button>
+              onClick={(e) => !disabled ? this.handleActionButtonClick(e, id) : e.stopImmediatePropagation() }></modus-button>
           );
         })}
 

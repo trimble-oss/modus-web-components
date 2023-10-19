@@ -501,7 +501,8 @@ export declare interface ModusList extends Components.ModusList {}
 
 
 @ProxyCmp({
-  inputs: ['disabled', 'selected', 'size', 'type']
+  inputs: ['disabled', 'selected', 'size', 'type'],
+  methods: ['focusItem']
 })
 @Component({
   selector: 'modus-list-item',

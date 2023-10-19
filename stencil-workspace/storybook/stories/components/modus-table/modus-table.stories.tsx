@@ -47,7 +47,7 @@ function makeData(...lens): object[] {
   return makeDataLevel();
 }
 
-function initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions) {
+function initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions) {
   const tag = document.createElement('script');
   tag.innerHTML = `
   document.querySelector('modus-table').columns = ${JSON.stringify(columns)};
@@ -56,6 +56,7 @@ function initializeTable(columns, data, pageSizeList, toolbarOptions, displayOpt
   document.querySelector('modus-table').toolbarOptions = ${JSON.stringify(toolbarOptions)};
   document.querySelector('modus-table').displayOptions = ${JSON.stringify(displayOptions)};
   document.querySelector('modus-table').rowSelectionOptions = ${JSON.stringify(rowSelectionOptions)};
+  document.querySelector('modus-table').rowActions = ${JSON.stringify(rowActions)};
   `;
 
   return tag;
@@ -182,6 +183,7 @@ const DefaultArgs = {
   rowsExpandable: false,
   maxHeight: '',
   maxWidth: '',
+  rowActions: [],
   rowSelection: false,
   rowSelectionOptions: {},
 };
@@ -323,6 +325,14 @@ export default {
       },
       type: { required: false },
     },
+    rowActions: {
+      name: 'rowActions',
+      description: 'Control row actions.',
+      table: {
+        type: { summary: 'ModusTableRowAction[]' },
+      },
+      type: { required: false },
+    },
     maxHeight: {
       name: 'maxHeight',
       description: 'To display a vertical scrollbar when the height is exceeded.',
@@ -395,6 +405,7 @@ const Template = ({
   rowsExpandable,
   maxHeight,
   maxWidth,
+  rowActions,
   rowSelection,
   rowSelectionOptions
 }) => html`
@@ -414,7 +425,7 @@ const Template = ({
       max-width="${maxWidth}"
       row-selection="${rowSelection}" />
   </div>
-  ${initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions)}
+  ${initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions)}
 `;
 
 export const Default = Template.bind({});
@@ -552,4 +563,41 @@ rowSelection: true, rowSelectionOptions: {
   multiple: true,
   subRowSelection: true
 }
+};
+
+export const RowActions = Template.bind({});
+RowActions.args = {
+  ...DefaultArgs, rowActions:[
+    {
+      id: '1',
+      icon: 'notifications',
+      label: 'Notification',
+      index: 0,
+      isDisabled: (row) => row.original.age > 1100
+    },
+  
+    {
+      id: '2',
+      icon: 'delete',
+      label: 'Delete',
+      index: 1,
+      isDisabled: () => false
+    },
+  
+    {
+      id: '3',
+      icon: 'cancel',
+      label: 'Cancel',
+      index: 2,
+      isDisabled: () => false
+    },
+  
+    {
+      id: '4',
+      index: 3,
+      icon: 'calendar',
+      label: 'Calendar',
+      isDisabled: (row) => row.original.age > 1100
+    }
+  ], data: makeData(7), fullWidth: true
 };

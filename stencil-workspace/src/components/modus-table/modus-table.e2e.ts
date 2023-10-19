@@ -444,19 +444,19 @@ describe('modus-table', () => {
         index: 0,
         icon: 'edit',
         label: 'Edit',
-        isDisabled: () => true
-      }
-    ]
+        isDisabled: () => true,
+      },
+    ];
     const component = await page.find('modus-table');
     component.setProperty('rowActions', rowActionsMock);
     component.setProperty('columns', MockColumns);
     component.setProperty('data', MockData);
     await page.waitForChanges();
     const rowActions = await page.findAll('modus-table >>> modus-table-row-actions >>> .row-actions');
-    expect(rowActions).toHaveLength(MockData.length)
+    expect(rowActions).toHaveLength(MockData.length);
     const rowActionClick = await page.spyOnEvent('rowActionClick');
-    await rowActions[0].click()
-    expect(rowActionClick).toHaveReceivedEvent()
+    await rowActions[0].click();
+    expect(rowActionClick).toHaveReceivedEvent();
   });
 
   it('Displays row actions menu', async () => {
@@ -468,52 +468,52 @@ describe('modus-table', () => {
         index: 0,
         icon: 'edit',
         label: 'Edit',
-        isDisabled: () => false
+        isDisabled: () => false,
       },
       {
         id: '2',
         index: 1,
         icon: 'edit',
         label: 'Edit',
-        isDisabled: () => false
+        isDisabled: () => false,
       },
       {
         id: '3',
         index: 2,
         icon: 'edit',
         label: 'Edit',
-        isDisabled: () => false
+        isDisabled: () => false,
       },
       {
         id: '4',
         index: 3,
         icon: 'edit',
         label: 'Edit',
-        isDisabled: () => false
+        isDisabled: () => false,
       },
       {
         id: '5',
         index: 4,
         icon: 'edit',
         label: 'Edit',
-        isDisabled: () => false
-      }
-    ]
+        isDisabled: () => false,
+      },
+    ];
     const component = await page.find('modus-table');
     component.setProperty('columns', MockColumns);
     component.setProperty('data', MockData);
     component.setProperty('rowActions', rowActionsMock);
     await page.waitForChanges();
     const rowActionsMenuButton = await page.findAll('modus-table >>> modus-table-row-actions > .row-actions-menu-button');
-    expect(rowActionsMenuButton).toHaveLength(MockData.length)
+    expect(rowActionsMenuButton).toHaveLength(MockData.length);
     const rowActionsMenuButtonClick = await page.spyOnEvent('overflowRowActions');
-    await rowActionsMenuButton[0].click()
-    expect(rowActionsMenuButtonClick).toHaveReceivedEvent()
+    await rowActionsMenuButton[0].click();
+    expect(rowActionsMenuButtonClick).toHaveReceivedEvent();
     await page.waitForChanges();
     const rowActionsMenuItem = await page.findAll('modus-table >>> .row-actions-menu-item');
-    expect(rowActionsMenuItem).toHaveLength(2)
+    expect(rowActionsMenuItem).toHaveLength(2);
     const rowActionsMenuItemClick = await page.spyOnEvent('rowActionClick');
-    await rowActionsMenuItem[0].click()
-    expect(rowActionsMenuItemClick).toHaveReceivedEvent()
+    await rowActionsMenuItem[0].click();
+    expect(rowActionsMenuItemClick).toHaveReceivedEvent();
   });
 });

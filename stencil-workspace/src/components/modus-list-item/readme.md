@@ -22,6 +22,19 @@
 | `itemClick` | An event that fires on list item click | `CustomEvent<any>` |
 
 
+## Methods
+
+### `focusItem() => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+
 ## Dependencies
 
 ### Used by

@@ -21,6 +21,7 @@ import { Story } from '@storybook/addon-docs';
 - [Column Visibility](#column-visibility)
 - [Expandable Rows](#Expandable-rows)
 - [Checkbox Row Selection](#checkbox-row-selection)
+- [Row Actions](#row-actions)
 - [Inline Editing](#inline-editing)
 - [Types](#types)
 - [Accessibility](#accessibility)
@@ -380,6 +381,14 @@ To select rows, users can use the checkbox provided on each row. Normally, the M
 
 <Story id="components-table--checkbox-row-selection" height={'480px'} />
 
+### Row Actions
+
+Users can add actions to rows. These actions will be shown in the first column as icons. A maximum of 4 icons will be shown, including the expand icon for expandable rows, if there more actions are provided, an overflow menu will be shown with a list of the remaining actions displayed as their label.
+
+  - To disable actions for specific rows, use the isDisabled(row) method.
+
+<Story id="components-table--row-actions" height={'480px'} />
+
 ### Inline Editing
 
 To enable Cell Editing for a Column use the `cellEditable` property on the Column object. The component renders a text box by default based on column's `dataType`. To render a dropdown, use the `cellEditorType` property on the Column object. The `cellEditorArgs` property can be used to pass additional arguments to the editor. After editing a cell, the table automatically updates the `data` and emits a `cellValueChanged` event.
@@ -487,6 +496,14 @@ interface ModusTableRowSelectionOptions {
   multiple?: boolean;
   subRowSelection?: boolean;
 }
+
+interface ModusTableRowAction {
+  id: string;
+  icon?: string;
+  label?: string;
+  index: number;
+  isDisabled?: (row: unknown) => boolean;
+}
 ```
 
 ### Accessibility
@@ -518,6 +535,7 @@ Users can use keyboard navigation to perform different actions.
 | `maxWidth`             | `max-width`               | (Optional) To display a horizontal scrollbar when the width is exceeded.                      | `string`                               | `undefined`                                               |
 | `pageSizeList`         | --                        |                                                                                               | `number[]`                             | `PAGINATION_DEFAULT_SIZES`                                |
 | `pagination`           | `pagination`              |                                                                                               | `boolean`                              | `undefined`                                               |
+| `rowSelection`         | `row-actions`             | (Optional) To display row actions.                                                            | `ModusTableRowAction[]`                | `[]`                                                      |
 | `rowSelection`         | `row-selection`           | (Optional) To display checkbox.                                                               | `boolean`                              | `false`                                                   |
 | `rowSelectionOptions`  | --                        | (Optional) To control multiple row selection.                                                 | `ModusTableRowSelectionOptions`        | `{     multiple: false,     subRowSelection: false,   }`  |
 | `rowsExpandable`       | `rows-expandable`         | (Optional) To display expanded rows.                                                          | `boolean`                              | `false`                                                   |
@@ -537,10 +555,10 @@ Users can use keyboard navigation to perform different actions.
 | `columnSizingChange`     | Emits latest column size              | `CustomEvent<{ [x: string]: number; }>`             |
 | `columnVisibilityChange` | Emits visibility state of each column | `CustomEvent<{ [x: string]: boolean; }>`            |
 | `paginationChange`       | Emits selected page index and size    | `CustomEvent<PaginationState>`                      |
+| `rowActionClick`         | Emits the clicked action id and row   | `CustomEvent<{ actionId: string; row: unknown; }>`  |
 | `rowExpanded`            | Emits expanded state of the columns   | `CustomEvent<boolean \| { [x: string]: boolean; }>` |
 | `rowSelectionChange`     | Emits rows selected                   | `CustomEvent<unknown>`                              |
 | `sortChange`             | Emits column sort order               | `CustomEvent<ColumnSort[]>`                         |
-
 
 ### Slot
 
@@ -563,7 +581,6 @@ Users can use this to provide custom elements.
 
 There are still additional features that we plan to implement. Some of them:
 
-- Row Actions
 - Column Filtering
 - Save Filter Preferences
 
