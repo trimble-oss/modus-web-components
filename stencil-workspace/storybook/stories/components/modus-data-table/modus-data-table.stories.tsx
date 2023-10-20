@@ -33,11 +33,11 @@ export const Default = () => html`
   ${setDataTable()}
 `;
 
-export const Hodgepodge = () => html`
+export const RowActions = () => html`
   <div style="width: 800px">
     <modus-data-table />
   </div>
-  ${setDataTableHodgepodge()}
+  ${setDataTableRowActions()}
 `;
 
 // The <script> tag cannot be used in the MDX file, so we use this method to
@@ -52,7 +52,7 @@ const setDataTable = () => {
   return tag;
 };
 
-const setDataTableHodgepodge = () => {
+const setDataTableRowActions = () => {
   const tag = document.createElement('script');
   tag.innerHTML = `
     document.querySelector('modus-data-table').columns = [

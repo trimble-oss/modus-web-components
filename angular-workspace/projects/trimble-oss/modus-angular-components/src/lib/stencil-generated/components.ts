@@ -1195,14 +1195,14 @@ export declare interface ModusTableCellEditor extends Components.ModusTableCellE
 
 
 @ProxyCmp({
-  inputs: ['cell', 'cellIndex', 'linkClick', 'rowActions', 'valueChange']
+  inputs: ['cell', 'linkClick', 'rowActions', 'valueChange']
 })
 @Component({
   selector: 'modus-table-cell-main',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['cell', 'cellIndex', 'linkClick', 'rowActions', 'valueChange'],
+  inputs: ['cell', 'linkClick', 'rowActions', 'valueChange'],
 })
 export class ModusTableCellMain {
   protected el: HTMLElement;

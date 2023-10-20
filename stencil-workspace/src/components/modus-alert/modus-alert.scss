@@ -5,12 +5,12 @@ div.alert {
   border: 1px solid;
   border-left-width: $alert-left-border-width;
   border-radius: 2px;
+  box-sizing: border-box;
   display: flex;
   font-family: $primary-font;
   height: 56px;
   padding: $rem-16px;
   position: relative;
-  box-sizing: border-box;
 
   &.type-error {
     background-color: $modus-alert-danger-bg;
