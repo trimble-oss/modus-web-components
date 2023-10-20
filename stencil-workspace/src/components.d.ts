@@ -300,6 +300,10 @@ export namespace Components {
          */
         "imageUrl": string;
         /**
+          * (optional) Maximum width for the Chip's text and shows ellipsis when truncated
+         */
+        "maxWidth": string;
+        /**
           * (optional) Whether to show the checkmark.
          */
         "showCheckmark": boolean;
@@ -1342,7 +1346,7 @@ export namespace Components {
         /**
           * (optional) The tooltip's position relative to its content.
          */
-        "position": 'bottom' | 'left' | 'right' | 'top';
+        "position": ToolTipPlacement;
         /**
           * The tooltip's text.
          */
@@ -2203,6 +2207,10 @@ declare namespace LocalJSX {
           * (optional) The image's url.
          */
         "imageUrl"?: string;
+        /**
+          * (optional) Maximum width for the Chip's text and shows ellipsis when truncated
+         */
+        "maxWidth"?: string;
         /**
           * An event that fires on chip click.
          */
@@ -3417,7 +3425,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The tooltip's position relative to its content.
          */
-        "position"?: 'bottom' | 'left' | 'right' | 'top';
+        "position"?: ToolTipPlacement;
         /**
           * The tooltip's text.
          */
