@@ -3,7 +3,7 @@
 .notifications-menu {
   @include custom-navbar-menu;
 
-  background-color: $menu-bg;
+  background-color: $menu-background-color;
   cursor: default;
   width: max-content;
 

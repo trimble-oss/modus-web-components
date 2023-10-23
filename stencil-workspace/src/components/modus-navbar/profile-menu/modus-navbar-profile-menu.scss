@@ -4,10 +4,10 @@
   @include custom-navbar-menu;
 
   align-items: center;
+  background-color: $menu-background-color;
   cursor: default;
-  width: 19rem;
   padding: 0;
-  background-color: $menu-bg;
+  width: 19rem;
 
   .user {
     align-items: center;
@@ -36,21 +36,21 @@
     }
 
     .username {
-      display: flex;
       align-items: center;
-      justify-content: center;
+      display: flex;
       font-size: $rem-16px;
       font-weight: $font-weight-semi-bold;
+      justify-content: center;
       max-width: 10rem;
       overflow-wrap: break-word;
       padding: 0 $rem-4px;
     }
 
     .email {
-      display: flex;
       align-items: center;
-      justify-content: center;
+      display: flex;
       font-size: $rem-12px;
+      justify-content: center;
       margin-bottom: $rem-16px;
       max-width: 10rem;
       overflow-wrap: break-word;

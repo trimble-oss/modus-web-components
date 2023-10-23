@@ -3,7 +3,7 @@
 .main-menu {
   @include custom-navbar-menu;
 
-  background-color: $menu-bg;
+  background-color: $menu-background-color;
   border-radius: 0 0 $rem_2px $rem_2px;
   border-top: none;
   box-sizing: border-box;
