@@ -9,19 +9,12 @@ import { ModusTableCellEdited } from '../modus-table-body';
 
 interface ModusTableCellProps {
   cell: Cell<unknown, unknown>;
-  cellIndex: number;
   rowActions: RowActions;
   linkClick: (link: ModusTableCellLink) => void;
   valueChange: (props: ModusTableCellEdited) => void;
 }
 
-export const ModusTableCell: FunctionalComponent<ModusTableCellProps> = ({
-  cell,
-  cellIndex,
-  rowActions,
-  valueChange,
-  linkClick,
-}) => {
+export const ModusTableCell: FunctionalComponent<ModusTableCellProps> = ({ cell, rowActions, valueChange, linkClick }) => {
   const { id } = cell;
   return (
     <td
@@ -34,7 +27,6 @@ export const ModusTableCell: FunctionalComponent<ModusTableCellProps> = ({
       style={{ width: `${cell.column.getSize()}px` }}>
       <modus-table-cell-main
         cell={cell}
-        cellIndex={cellIndex}
         rowActions={rowActions}
         valueChange={valueChange}
         linkClick={linkClick}></modus-table-cell-main>

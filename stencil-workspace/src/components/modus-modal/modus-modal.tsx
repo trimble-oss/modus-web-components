@@ -2,7 +2,11 @@
 import { Component, Element, Event, EventEmitter, h, JSX, Listen, Method, Prop, State } from '@stencil/core';
 import { IconClose } from '../icons/icon-close';
 import { FocusWrap, ModalFocusWrapping } from './modal-focus-wrapping';
+import { Fragment } from '@stencil/core/internal';
 
+/**
+ * @slot footerContent - Slot for a custom footer content
+ */
 @Component({
   tag: 'modus-modal',
   styleUrl: 'modus-modal.scss',
@@ -149,7 +153,7 @@ export class ModusModal {
 
   renderModalHeader(): JSX.Element[] {
     return (
-      <div class="header">
+      <header>
         {this.headerText}
         <div
           role="button"
@@ -159,35 +163,41 @@ export class ModusModal {
           onKeyDown={(event) => this.handleCloseKeydown(event)}>
           <IconClose size="20" />
         </div>
-      </div>
+      </header>
     );
   }
 
   renderModalFooter(): JSX.Element[] {
     return (
-      <div class="footer">
-        {this.secondaryButtonText && (
-          <modus-button
-            disabled={this.secondaryButtonDisabled}
-            button-style="outline"
-            color="secondary"
-            ariaLabel={this.secondaryButtonAriaLabel}
-            onButtonClick={() => this.secondaryButtonClick.emit()}
-            onKeyDown={(event) => this.handlePrimaryKeydown(event)}>
-            {this.secondaryButtonText}
-          </modus-button>
-        )}
-        {this.primaryButtonText && (
-          <modus-button
-            disabled={this.primaryButtonDisabled}
-            color="primary"
-            ariaLabel={this.primaryButtonAriaLabel}
-            onButtonClick={() => this.primaryButtonClick.emit()}
-            onKeyDown={(event) => this.handleSecondaryKeydown(event)}>
-            {this.primaryButtonText}
-          </modus-button>
-        )}
-      </div>
+      <Fragment>
+        <footer
+          class={{
+            'has-buttons': Boolean(this.primaryButtonText || this.secondaryButtonText),
+          }}>
+          {this.secondaryButtonText && (
+            <modus-button
+              disabled={this.secondaryButtonDisabled}
+              button-style="outline"
+              color="secondary"
+              ariaLabel={this.secondaryButtonAriaLabel}
+              onButtonClick={() => this.secondaryButtonClick.emit()}
+              onKeyDown={(event) => this.handlePrimaryKeydown(event)}>
+              {this.secondaryButtonText}
+            </modus-button>
+          )}
+          {this.primaryButtonText && (
+            <modus-button
+              disabled={this.primaryButtonDisabled}
+              color="primary"
+              ariaLabel={this.primaryButtonAriaLabel}
+              onButtonClick={() => this.primaryButtonClick.emit()}
+              onKeyDown={(event) => this.handleSecondaryKeydown(event)}>
+              {this.primaryButtonText}
+            </modus-button>
+          )}
+          <slot name="footerContent"></slot>
+        </footer>
+      </Fragment>
     );
   }
 

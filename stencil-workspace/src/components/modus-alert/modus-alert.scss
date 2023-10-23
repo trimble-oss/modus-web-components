@@ -5,10 +5,11 @@ div.alert {
   border: 1px solid;
   border-left-width: $alert-left-border-width;
   border-radius: 2px;
+  box-sizing: border-box;
   display: flex;
   font-family: $primary-font;
   height: 56px;
-  padding: 0 $rem-16px;
+  padding: $rem-16px;
   position: relative;
 
   &.type-error {
@@ -140,16 +141,19 @@ div.alert {
     margin-right: 8px;
   }
 
-  .icon-close {
+  .icon-close-container {
     cursor: pointer;
+    display: inline-flex;
     margin-left: auto;
 
-    path {
-      fill: $modus-alert-close-color;
-    }
+    .icon-close {
+      path {
+        fill: $modus-alert-close-color;
+      }
 
-    &:hover {
-      opacity: $modus-alert-close-hover-opacity;
+      &:hover {
+        opacity: $modus-alert-close-hover-opacity;
+      }
     }
   }
 }

@@ -34,7 +34,6 @@ import { ModusTableCellEdited } from '../../modus-table-body';
 export class ModusTableCellMain {
   @Element() el: HTMLElement;
   @Prop() cell: Cell<unknown, unknown>;
-  @Prop() cellIndex: number;
   @Prop() rowActions: RowActions;
   @Prop() valueChange: (props: ModusTableCellEdited) => void;
   @Prop() linkClick: (link: ModusTableCellLink) => void;
@@ -108,9 +107,8 @@ export class ModusTableCellMain {
       event.stopPropagation();
     } else {
       NavigateTableCells({
-        key: event.key,
+        eventKey: event.key,
         cellElement: this.cellEl,
-        cellIndex: this.cellIndex,
       });
     }
   };
@@ -133,9 +131,8 @@ export class ModusTableCellMain {
     if (key === KEYBOARD_ENTER) {
       this.handleCellEditorValueChange(newValue, oldValue);
       NavigateTableCells({
-        key: KEYBOARD_ENTER,
+        eventKey: KEYBOARD_ENTER,
         cellElement: this.cellEl,
-        cellIndex: this.cellIndex,
       });
     } else if (key === KEYBOARD_ESCAPE) {
       this.editMode = false;

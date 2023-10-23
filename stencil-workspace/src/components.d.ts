@@ -1094,7 +1094,6 @@ export namespace Components {
     }
     interface ModusTableCellMain {
         "cell": Cell<unknown, unknown>;
-        "cellIndex": number;
         "linkClick": (link: ModusTableCellLink) => void;
         "rowActions": RowActions;
         "valueChange": (props: ModusTableCellEdited) => void;
@@ -3158,7 +3157,6 @@ declare namespace LocalJSX {
     }
     interface ModusTableCellMain {
         "cell"?: Cell<unknown, unknown>;
-        "cellIndex"?: number;
         "linkClick"?: (link: ModusTableCellLink) => void;
         "rowActions"?: RowActions;
         "valueChange"?: (props: ModusTableCellEdited) => void;
