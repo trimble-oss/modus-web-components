@@ -11,6 +11,7 @@ import { ModusTableRowAction } from '../../../../models/modus-table.models';
 import TableContext, { TableRowActionsMenuEvent } from '../../../../models/table-context.model';
 import Position from '../../../../models/position.model';
 import { Element } from '@stencil/core';
+import { Row } from '@tanstack/table-core';
 
 @Component({
   tag: 'modus-table-row-actions-menu',
@@ -28,14 +29,14 @@ export class ModusTableRowActionsMenu {
     }
   }
 
-  overFlowMenu: ModusTableRowAction[];
-  position: Position;
-  tableRow: unknown;
+  @State() overFlowMenu: ModusTableRowAction[];
+  @State() position: Position;
+  tableRow: Row<unknown>;
 
   @Listen('overflowRowActions', { target: 'document' })
   handleOverflowRowActions(event: CustomEvent<TableRowActionsMenuEvent>): void {
     const { items, position, row } = event.detail;
-    this.isMenuOpen = !this.isMenuOpen;
+    this.isMenuOpen = this.tableRow?.id === row.id ? false : true;
     if (this.isMenuOpen) {
       this.overFlowMenu = items;
       this.position = position;
@@ -56,7 +57,7 @@ export class ModusTableRowActionsMenu {
 
   handleListItemClick(id: string): void {
     const { rowActionClick } = this.context;
-    rowActionClick.emit({ actionId: id, row: this.tableRow });
+    rowActionClick.emit({ actionId: id, row: this.tableRow.original });
   }
 
   handleListItemKeydown(e: KeyboardEvent): void {
@@ -70,8 +71,9 @@ export class ModusTableRowActionsMenu {
     if (!(this.overFlowMenu?.length && this.position)) return null;
 
     const { x, y } = this.position;
+    // TODO: we need to remove the 33% offset, which is a hack to get the menu to align with the row
     const style = {
-      transform: `translate(calc(${x}px + 40%), calc(${y}px))`,
+      transform: `translate(calc(${x}px + 33%), calc(${y}px))`,
     };
 
     return (
@@ -80,7 +82,7 @@ export class ModusTableRowActionsMenu {
           <div style={{ ...style }} class="row-actions-menu">
             <modus-list class="hydrated">
               {this.overFlowMenu.map(({ label, id, isDisabled = () => false }) => {
-                const disabled = isDisabled(this.tableRow);
+                const disabled = isDisabled(this.tableRow?.original);
                 return (
                   <modus-list-item
                     disabled={disabled}

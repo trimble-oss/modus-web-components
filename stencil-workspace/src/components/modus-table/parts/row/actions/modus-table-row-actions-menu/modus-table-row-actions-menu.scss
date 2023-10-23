@@ -3,7 +3,8 @@
 modus-table-row-actions-menu {
   .row-actions-menu {
     background-color: $modus-table-body-bg;
-    box-shadow: 0 0 8px rgba(36, 35, 45, 0.3);
+    color: $modus-table-body-color;
+    box-shadow: 0 0 2px rgba(37, 42, 46, 0.3);
     display: flex;
     position: fixed;
     top: -1px;

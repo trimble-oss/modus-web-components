@@ -57,12 +57,7 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
             )}
             {getVisibleCells()?.map((cell, cellIndex) => {
               return (
-                <ModusTableCell
-                  cell={cell}
-                  cellIndex={cellIndex}
-                  context={context}
-                  valueChange={handleCellValueChange}
-                />
+                <ModusTableCell cell={cell} cellIndex={cellIndex} context={context} valueChange={handleCellValueChange} />
               );
             })}
           </tr>

@@ -15,14 +15,14 @@ import {
   ModusTableSortingState,
   ModusTablePaginationState,
 } from './modus-table.models';
-import { Table, Updater } from '@tanstack/table-core';
+import { Row, Table, Updater } from '@tanstack/table-core';
 import ModusTableCore from '../modus-table.core';
 import Position from './position.model';
 
 export interface TableRowActionsMenuEvent {
   items: ModusTableRowAction[];
   position: Position;
-  row: unknown;
+  row: Row<unknown>;
 }
 
 export type TableCellEdited = Omit<ModusTableCellValueChange, 'data'>;

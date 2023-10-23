@@ -15,6 +15,7 @@ const ModusTableCellExpandIcons: FunctionalComponent<ModusTableCellExpandIconsPr
   let expandEl: HTMLElement;
   return (
     <span
+      class="expand-icon-container"
       ref={(ref) => (expandEl = ref)}
       style={{ paddingLeft: `${row.depth * 2}rem` }}
       onClick={(e) => {
@@ -23,7 +24,7 @@ const ModusTableCellExpandIcons: FunctionalComponent<ModusTableCellExpandIconsPr
       }}>
       {row.getCanExpand() && (
         <span
-          class="expand"
+          class="expand-icon"
           tabIndex={0}
           onKeyDown={(event) => {
             if (event.key.toLowerCase() === KEYBOARD_ENTER || event.key.toLowerCase() === KEYBOARD_SPACE) {

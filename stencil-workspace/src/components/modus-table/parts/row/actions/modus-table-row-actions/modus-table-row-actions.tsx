@@ -44,7 +44,7 @@ export class ModusTableRowActions {
 
   handleActionButtonClick(e: Event, actionId: string): void {
     const { rowActionClick } = this.context;
-    rowActionClick.emit({ actionId, row: this.row });
+    rowActionClick.emit({ actionId, row: this.row.original });
     e.stopImmediatePropagation();
   }
 
@@ -71,7 +71,7 @@ export class ModusTableRowActions {
         {rowsExpandable && <ModusTableCellExpandIcons row={this.row} />}
 
         {actionButtons?.map(({ icon, id, isDisabled = () => false }) => {
-          const disabled = isDisabled(this.row);
+          const disabled = isDisabled(this.row.original);
           return (
             <modus-button
               class="row-actions"
@@ -82,7 +82,9 @@ export class ModusTableRowActions {
               size="small"
               disabled={disabled}
               onKeyDown={(e) => this.handleActionButtonKeydown(e, id)}
-              onClick={(e) => !disabled ? this.handleActionButtonClick(e, id) : e.stopImmediatePropagation() }></modus-button>
+              onClick={(e) =>
+                !disabled ? this.handleActionButtonClick(e, id) : e.stopImmediatePropagation()
+              }></modus-button>
           );
         })}
 

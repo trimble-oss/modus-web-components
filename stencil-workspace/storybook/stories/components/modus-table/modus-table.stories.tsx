@@ -373,7 +373,7 @@ export default {
 
   parameters: {
     actions: {
-      handles: ['cellValueChange','cellLinkClick', 'columnOrderChange', 'columnSizingChange', 'columnVisibilityChange', 'paginationChange', 'rowExpanded', 'rowSelectionChange', 'rowUpdated', 'sortChange'],
+      handles: ['cellValueChange','cellLinkClick', 'columnOrderChange', 'columnSizingChange', 'columnVisibilityChange', 'paginationChange', 'rowExpanded', 'rowSelectionChange', 'rowUpdated', 'sortChange', 'rowActionClick'],
     },
     controls: { expanded: true, sort: 'requiredFirst' },
     docs: {
@@ -570,34 +570,30 @@ RowActions.args = {
   ...DefaultArgs, rowActions:[
     {
       id: '1',
-      icon: 'notifications',
-      label: 'Notification',
+      icon: 'add',
+      label: 'Add',
       index: 0,
-      isDisabled: (row) => row.original.age > 1100
     },
-  
+
     {
       id: '2',
-      icon: 'delete',
-      label: 'Delete',
+      icon: 'calendar',
+      label: 'calendar',
       index: 1,
-      isDisabled: () => false
     },
-  
+
     {
       id: '3',
       icon: 'cancel',
       label: 'Cancel',
       index: 2,
-      isDisabled: () => false
     },
-  
+
     {
       id: '4',
       index: 3,
-      icon: 'calendar',
-      label: 'Calendar',
-      isDisabled: (row) => row.original.age > 1100
+      icon: 'delete',
+      label: 'Delete',
     }
   ], data: makeData(7), fullWidth: true
 };
