@@ -84,26 +84,6 @@ graph TD;
   style modus-date-input fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
-## Shadow Parts
-
-| Part                | Description |
-| ------------------- | ----------- |
-| `"input-container"` |             |
-
-
-## Dependencies
-
-### Used by
-
- - [modus-table-cell-editor](../modus-table/parts/cell/modus-table-cell-editor)
-
-### Graph
-```mermaid
-graph TD;
-  modus-table-cell-editor --> modus-date-input
-  style modus-date-input fill:#f9f,stroke:#333,stroke-width:4px
-```
-
 ----------------------------------------------
 
 

@@ -29,7 +29,7 @@ export { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, 
 export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 export { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 export { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-export { ManualPaginationOptions, ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTablePaginationState, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+export { ManualPaginationOptions, ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTablePaginationState, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 export { Cell, Column, Table } from "@tanstack/table-core";
 export { ModusTableCellEdited } from "./components/modus-table/parts/modus-table-body";
 export { Tab } from "./components/modus-tabs/modus-tabs";
