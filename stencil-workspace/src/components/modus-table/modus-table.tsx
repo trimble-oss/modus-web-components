@@ -568,7 +568,7 @@ export class ModusTable {
     }
     const defaultPaginationProps = {
       table,
-      totalCount: this.data.length,
+      totalCount: this.data?.length || 0,
       pageSizeList: this.pageSizeList
     }
     const paginationProps = {
