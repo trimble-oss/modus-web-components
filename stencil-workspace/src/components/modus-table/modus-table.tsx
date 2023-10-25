@@ -55,6 +55,7 @@ import {
   ModusTableDisplayOptions,
   ModusTableToolbarOptions,
   ModusTableRowSelectionOptions,
+  ManualPaginationOptions,
 } from './models/modus-table.models';
 import { ModusTableColumnDropIndicator, ModusTableColumnDragItem } from './parts/columnHeader/modus-table-column-drag-item';
 import { ModusTablePagination } from './parts/modus-table-pagination';
@@ -70,6 +71,7 @@ import { ModusTableBody } from './parts/modus-table-body';
  * @slot groupLeft - Slot for custom toolbar options added to the left.
  * @slot groupRight - Slot for custom toolbar options added to the right.
  */
+
 @Component({
   tag: 'modus-table',
   styleUrl: 'modus-table.scss',
@@ -142,6 +144,9 @@ export class ModusTable {
 
   /** (Optional) To display checkbox. */
   @Prop() rowSelection = false;
+
+  /** (Optional) To set modus-table in manual mode. */
+  @Prop() manualPaginationOptions: ManualPaginationOptions = {currentPageIndex:0, currentPageSize: 0, pageCount: 0};
 
   /** (Optional) To control multiple row selection. */
   @Prop() rowSelectionOptions: ModusTableRowSelectionOptions = {
@@ -393,7 +398,10 @@ export class ModusTable {
       rowSelectionOptions: this.rowSelectionOptions,
       columnOrder: this.columnReorder ? this.tableState.columnOrder : [],
       toolbarOptions: this.toolbarOptions,
-
+      ...(this.manualPaginationOptions) && { 
+        manualPagination: true, 
+        pageCount: this.manualPaginationOptions.pageCount,
+      },
       // setData: (updater: Updater<unknown[]>) => this.updateData(updater),
       setExpanded: (updater: Updater<ExpandedState>) => this.updateTableCore(updater, EXPANDED_STATE_KEY, this.rowExpanded),
       setSorting: (updater: Updater<SortingState>) => this.updateTableCore(updater, SORTING_STATE_KEY, this.sortChange),
@@ -563,11 +571,22 @@ export class ModusTable {
   }
 
   renderPagination(table: Table<unknown>): JSX.Element | null {
-    return (
-      this.pagination && (
-        <ModusTablePagination table={table} totalCount={this.data.length} pageSizeList={this.pageSizeList} />
-      )
-    );
+    const manualPaginationProps = {
+      table,
+      totalCount: this.manualPaginationOptions.pageCount,
+      currentPageSize: this.manualPaginationOptions.currentPageSize,
+      currentPageIndex: this.manualPaginationOptions.currentPageIndex,
+      pageSizeList: this.pageSizeList,
+    }
+    const defaultPaginationProps = {
+      table,
+      totalCount: this.data.length,
+      pageSizeList: this.pageSizeList
+    }
+    const paginationProps = {
+      ...(this.pagination && !this.manualPaginationOptions ? defaultPaginationProps : manualPaginationProps)
+    }
+    return (<ModusTablePagination {...paginationProps} />);
   }
 
   render(): void {

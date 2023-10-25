@@ -31,6 +31,8 @@ export interface TableCoreOptions {
   columnOrder: string[];
   toolbarOptions: ModusTableToolbarOptions | null;
   pageSizeList: number[];
+  manualPagination?: boolean;
+  pageCount?: number;
 
   setExpanded: (updater: Updater<ExpandedState>) => void;
   setSorting: (updater: Updater<SortingState>) => void;
@@ -40,7 +42,7 @@ export interface TableCoreOptions {
   setColumnSizingInfo: (updater: Updater<ColumnSizingInfoState>) => void;
   setColumnVisibility: (updater: Updater<VisibilityState>) => void;
   setColumnOrder: (updater: Updater<string[]>) => void;
-}
+} 
 
 export default class ModusTableCore {
   private tableCore: Table<unknown> = null;
@@ -65,6 +67,8 @@ export default class ModusTableCore {
       setColumnSizingInfo,
       setColumnVisibility,
       setColumnOrder,
+      manualPagination,
+      pageCount
     } = tableOptions;
     const { multiple, subRowSelection } = rowSelectionOptions;
     const options: TableOptionsResolved<unknown> = {
@@ -104,13 +108,17 @@ export default class ModusTableCore {
       onColumnVisibilityChange: setColumnVisibility,
       onColumnOrderChange: setColumnOrder,
       getCoreRowModel: getCoreRowModel(),
-      getPaginationRowModel: pagination && getPaginationRowModel(),
+      getPaginationRowModel: pagination && !manualPagination && getPaginationRowModel(),
       getSortedRowModel: getSortedRowModel(),
       getExpandedRowModel: getExpandedRowModel(),
       getSubRows: (row) => row['subRows'],
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       onStateChange: () => {},
       renderFallbackValue: null,
+      ...( manualPagination && pageCount && { 
+        manualPagination,
+        pageCount
+      })
     };
     this.tableCore = createTable(options);
   }

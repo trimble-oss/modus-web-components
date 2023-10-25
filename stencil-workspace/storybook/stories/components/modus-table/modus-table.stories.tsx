@@ -359,6 +359,14 @@ export default {
       },
       type: { required: false },
     },
+    manualPaginationOptions: {
+      name: 'paginationOptions',
+      description: 'To switch to manual pagiantion mode.',
+      table:{
+        type: { summary: 'ManualPaginationOptions'}
+      },
+      type: { required: false },
+    }
   },
 
   parameters: {
@@ -396,7 +404,8 @@ const Template = ({
   maxHeight,
   maxWidth,
   rowSelection,
-  rowSelectionOptions
+  rowSelectionOptions,
+  manualPagination
 }) => html`
   <div style="width: 950px">
     <modus-table
@@ -407,6 +416,7 @@ const Template = ({
       pagination="${pagination}"
       show-sort-icon-on-hover="${showSortIconOnHover}"
       summary-row="${summaryRow}"
+      manual-pagination="${manualPagination}"
       full-width="${fullWidth}"
       toolbar="${toolbar}"
       rows-expandable="${rowsExpandable}"
@@ -495,9 +505,9 @@ const valueFormatterTable = (pageSizeList, toolbarOptions, displayOptions, rowSe
    document.querySelector('modus-table').data = [{ "firstName": "Chaim", "lastName": "Lubowitz", "age": 30, "amount": 330160, "progress": 99, "status": "single", "createdAt": "2002-11-19T12:48:51.739Z" }, { "firstName": "Vicky", "lastName": "Lehner", "age": 2, "amount": 41900, "progress": 36, "status": "single", "createdAt": "2003-10-02T12:48:51.739Z" }, { "firstName": "Nellie", "lastName": "Leuschke", "age": 15, "amount": 883112, "progress": 68, "status": "single", "createdAt": "2004-09-21T12:48:51.739Z" }, { "firstName": "Judy", "lastName": "Ritchie", "age": 3, "amount": 900293, "progress": 10, "status": "relationship", "createdAt": "2005-08-11T12:48:51.739Z" }, { "firstName": "Hertha", "lastName": "Bradtke", "age": 19, "amount": 112116, "progress": 87, "status": "relationship", "createdAt": "2006-07-13T12:48:51.739Z" }];
 
    document.querySelector('modus-table').pageSizeList = ${JSON.stringify(pageSizeList)};
-  document.querySelector('modus-table').toolbarOptions = ${JSON.stringify(toolbarOptions)};
-  document.querySelector('modus-table').displayOptions = ${JSON.stringify(displayOptions)};
-  document.querySelector('modus-table').rowSelectionOptions = ${JSON.stringify(rowSelectionOptions)};
+   document.querySelector('modus-table').toolbarOptions = ${JSON.stringify(toolbarOptions)};
+   document.querySelector('modus-table').displayOptions = ${JSON.stringify(displayOptions)};
+   document.querySelector('modus-table').rowSelectionOptions = ${JSON.stringify(rowSelectionOptions)};
   `;
   return tag;
 };
@@ -553,3 +563,86 @@ rowSelection: true, rowSelectionOptions: {
   subRowSelection: true
 }
 };
+
+function initializeManualTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, manualPaginationOptions) {
+  const tag = document.createElement('script');
+  tag.innerHTML = `
+  document.querySelector('modus-table').columns = ${JSON.stringify(columns)};
+  document.querySelector('modus-table').data = ${JSON.stringify(data)};
+  document.querySelector('modus-table').pageSizeList = ${JSON.stringify(pageSizeList)};
+  document.querySelector('modus-table').toolbarOptions = ${JSON.stringify(toolbarOptions)};
+  document.querySelector('modus-table').displayOptions = ${JSON.stringify(displayOptions)};
+  document.querySelector('modus-table').rowSelectionOptions = ${JSON.stringify(rowSelectionOptions)};
+  document.querySelector('modus-table').manualPaginationOptions = ${JSON.stringify(manualPaginationOptions)};
+  `;
+  return tag;
+}
+
+const ManualPaginationTemplate = ({
+  hover,
+  sort,
+  columnResize,
+  columnReorder,
+  pagination,
+  showSortIconOnHover,
+  summaryRow,
+  fullWidth,
+  pageSizeList,
+  toolbar,
+  columns,
+  data,
+  toolbarOptions,
+  displayOptions,
+  rowsExpandable,
+  maxHeight,
+  maxWidth,
+  rowSelection,
+  rowSelectionOptions,
+  manualPaginationOptions,
+}) => html`
+  <div style="width: 950px">
+    <modus-table
+      hover="${hover}"
+      sort="${sort}"
+      column-resize="${columnResize}"
+      column-reorder="${columnReorder}"
+      pagination="${pagination}"
+      show-sort-icon-on-hover="${showSortIconOnHover}"
+      summary-row="${summaryRow}"
+      full-width="${fullWidth}"
+      toolbar="${toolbar}"
+      rows-expandable="${rowsExpandable}"
+      max-height="${maxHeight}"
+      max-width="${maxWidth}"
+      row-selection="${rowSelection}" />
+  </div>
+  ${initializeManualTable(columns,data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, manualPaginationOptions)}
+  ${paginationListening()}
+`;
+
+const TOTAL_RECORDS = 100;
+const paginationListening = () => {
+  const tag = document.createElement('script');
+  tag.innerHTML = `
+   var modusTableRef = document.querySelector('modus-table');
+
+   modusTableRef.addEventListener('paginationChange', (ev)=>{
+    modusTableRef.manualPaginationOptions.currentPageSize = ev.detail.pageSize;
+    modusTableRef.manualPaginationOptions.pageCount = Math.ceil(${TOTAL_RECORDS}/ev.detail.pageSize);
+    modusTableRef.manualPaginationOptions.currentPageIndex = ev.detail.pageIndex + 1;
+   });  
+  `;
+  return tag;
+};
+
+export const ManualPagination = ManualPaginationTemplate.bind({})
+
+ManualPagination.args = { 
+  ...DefaultArgs, 
+  pagination: true, 
+  manualPaginationOptions: {
+    currentPageIndex: 15, 
+    currentPageSize: 5, 
+    pageCount: Math.ceil(TOTAL_RECORDS/5)
+  },
+  data: makeData(15), pageSizeList: [ 5, 10, 50] };

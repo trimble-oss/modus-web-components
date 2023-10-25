@@ -17,6 +17,7 @@ import { Story } from '@storybook/addon-docs';
 - [Column Resize](#column-resize)
 - [Column Reorder](#column-reorder)
 - [Pagination](#pagination)
+- [ManualPagination](#manual-pagination)
 - [Summary Row](#summary-row)
 - [Column Visibility](#column-visibility)
 - [Expandable Rows](#Expandable-rows)
@@ -300,6 +301,18 @@ Pagination allows users to navigate between pages
 - Pagination can be enabled using the `pagination` prop. The `pageSizeList` takes an array for page size options.
 
 <Story id="components-table--pagination" height={'380px'} />
+
+### Manual Pagination
+
+Manual Pagination allows users to handle the pagination in a server side mode
+
+- Modus Table uses `modus-pagination` component to navigate between pages and based on the properties that we set initially we can handle the pagination from the server side.
+- Manual Pagination can be enabled using the `manualPaginationOptions` prop. 
+- The `currentPageIndex` takes a number to specify the current page number you want to show as selected from the server side
+- The `currentPageSize` takes a number to specify the current page view number to display how many records does the table going to show from the server side
+- The `pageCount` takes a number to specify the total of records in order to show the number of pages that will be displaying in the table
+
+<Story id="components-table--manual-pagination" height={'380px'} />
 
 ### Summary Row
 

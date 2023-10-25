@@ -19,6 +19,12 @@ import {
 
 export type ModusTableRowData = RowData;
 
+export interface ManualPaginationOptions {
+  currentPageIndex: number;
+  currentPageSize: number;
+  pageCount: number;
+}
+
 export interface ModusTableRowSelectionOptions {
   multiple?: boolean;
   subRowSelection?: boolean;

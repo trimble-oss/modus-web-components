@@ -9,18 +9,22 @@ interface ModusTablePaginationProps {
   table: Table<unknown>;
   totalCount: number;
   pageSizeList: number[];
+  currentPageSize?: number;
+  currentPageIndex?: number;
 }
 
 export const ModusTablePagination: FunctionalComponent<ModusTablePaginationProps> = ({
   table,
   totalCount,
   pageSizeList,
+  currentPageSize,
+  currentPageIndex,
 }) => {
   const optionsList = pageSizeList.map((option) => ({ display: option }));
   const { options, getState, getPageCount, getExpandedRowModel, setPageIndex, setPageSize } = table;
-  const { pageIndex, pageSize } = getState().pagination;
+  const { pageIndex, pageSize: paginationSize } = getState().pagination;
+  const pageSize =  (currentPageSize )? currentPageSize : paginationSize;
   const selectedPageSize = optionsList.find((l) => l.display === pageSize);
-
   const handleChange = (event) => {
     const selectedValue = event.detail;
     setPageSize(Number(selectedValue?.display));
@@ -52,7 +56,7 @@ export const ModusTablePagination: FunctionalComponent<ModusTablePaginationProps
           <span>{options.paginateExpandedRows ? getExpandedRowModel().rows.length : totalCount}</span>{' '}
         </div>
         <modus-pagination
-          active-page={1}
+          active-page={currentPageIndex ? currentPageIndex : 1}
           max-page={getPageCount()}
           min-page={1}
           onPageChange={(event) => setPageIndex(event.detail - 1)}></modus-pagination>
