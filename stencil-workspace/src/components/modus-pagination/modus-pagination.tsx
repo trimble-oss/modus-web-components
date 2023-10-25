@@ -2,8 +2,8 @@ import {
   Component,
   Event,
   EventEmitter,
-  h,
-  JSX, // eslint-disable-line @typescript-eslint/no-unused-vars
+  h, // eslint-disable-line @typescript-eslint/no-unused-vars
+  JSX,
   Prop,
   State,
   Watch,

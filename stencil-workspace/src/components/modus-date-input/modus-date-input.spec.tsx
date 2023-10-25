@@ -7,7 +7,7 @@ describe('modus-date-input', () => {
       components: [ModusDateInput],
       html: '<modus-date-input label="Single Date"></modus-date-input>',
     });
-    const inputId = page.root.shadowRoot.querySelector("input").getAttribute('id');
+    const inputId = page.root.shadowRoot.querySelector('input').getAttribute('id');
 
     expect(page.root).toEqualHtml(`
      <modus-date-input label="Single Date">
@@ -18,7 +18,7 @@ describe('modus-date-input', () => {
                Single Date
              </label>
            </div>
-           <div class="input-container medium">
+           <div class="input-container medium" part="input-container">
              <input id="${inputId}" tabindex="0" type="text">
            </div>
            <div class="sub-text">

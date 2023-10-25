@@ -51,12 +51,20 @@ Type: `Promise<void>`
 
 
 
+## Shadow Parts
+
+| Part                | Description |
+| ------------------- | ----------- |
+| `"input-container"` |             |
+
+
 ## Dependencies
 
 ### Used by
 
  - [modus-autocomplete](../modus-autocomplete)
  - [modus-navbar-search-overlay](../modus-navbar/search-overlay)
+ - [modus-table-cell-editor](../modus-table/parts/cell/modus-table-cell-editor)
  - [modus-tree-view-item](../modus-content-tree/modus-tree-view-item)
 
 ### Graph
@@ -64,6 +72,7 @@ Type: `Promise<void>`
 graph TD;
   modus-autocomplete --> modus-text-input
   modus-navbar-search-overlay --> modus-text-input
+  modus-table-cell-editor --> modus-text-input
   modus-tree-view-item --> modus-text-input
   style modus-text-input fill:#f9f,stroke:#333,stroke-width:4px
 ```

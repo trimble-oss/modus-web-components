@@ -46,163 +46,37 @@ This component is compatible with Angular reactive forms. This can be achieved t
 
 ### Properties
 
-<section>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Type</th>
-        <th>Options</th>
-        <th>Default Value</th>
-        <th>Required</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>aria-label</td>
-        <td>The input's aria-label</td>
-        <td>string</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>disabled</td>
-        <td>Whether the input is disabled</td>
-        <td>boolean</td>
-        <td></td>
-        <td>false</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>error-text</td>
-        <td>The input's error state text</td>
-        <td>string</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>helper-text</td>
-        <td>The input's helper text displayed below the input</td>
-        <td>string</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>label</td>
-        <td>The input's label</td>
-        <td>string</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>max-value</td>
-        <td>The input's maximum value</td>
-        <td>number</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>min-value</td>
-        <td>The input's minimum value</td>
-        <td>number</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>placeholder</td>
-        <td>The input's placeholder text</td>
-        <td>string</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>read-only</td>
-        <td>Whether the input's content is read-only</td>
-        <td>boolean</td>
-        <td></td>
-        <td>false</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>required</td>
-        <td>Whether the input is required</td>
-        <td>boolean</td>
-        <td></td>
-        <td>false</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>size</td>
-        <td>The input's size</td>
-        <td>string</td>
-        <td>'medium', 'large'</td>
-        <td>'medium'</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>step</td>
-        <td>The input's step</td>
-        <td>number</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>text-align</td>
-        <td>The input's text alignment.</td>
-        <td>string</td>
-        <td>'left', 'right'</td>
-        <td>'left'</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>valid-text</td>
-        <td>The input's valid state text</td>
-        <td>string</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>value</td>
-        <td>The input's value</td>
-        <td>string</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+| Property      | Attribute     | Description                                                   | Type                  | Default     |
+| ------------- | ------------- | ------------------------------------------------------------- | --------------------- | ----------- |
+| `ariaLabel`   | `aria-label`  | (optional) The input's aria-label.                            | `string`              | `undefined` |
+| `disabled`    | `disabled`    | (optional) Whether the input is disabled.                     | `boolean`             | `undefined` |
+| `errorText`   | `error-text`  | (optional) The input's error state text.                      | `string`              | `undefined` |
+| `helperText`  | `helper-text` | (optional) The input's helper text displayed below the input. | `string`              | `undefined` |
+| `label`       | `label`       | (optional) The input's label.                                 | `string`              | `undefined` |
+| `maxValue`    | `max-value`   | (optional) The input's maximum value.                         | `number`              | `undefined` |
+| `minValue`    | `min-value`   | (optional) The input's minimum value.                         | `number`              | `undefined` |
+| `placeholder` | `placeholder` | (optional) The input's placeholder text.                      | `string`              | `undefined` |
+| `readOnly`    | `read-only`   | (optional) Whether the input's content is read-only           | `boolean`             | `undefined` |
+| `required`    | `required`    | (optional) Whether the input is required.                     | `boolean`             | `undefined` |
+| `size`        | `size`        | (optional) The input's size.                                  | `"large" \| "medium"` | `'medium'`  |
+| `step`        | `step`        | (optional) The input's step.                                  | `number`              | `undefined` |
+| `textAlign`   | `text-align`  | (optional) The input's text alignment.                        | `"left" \| "right"`   | `'left'`    |
+| `validText`   | `valid-text`  | (optional) The input's valid state text.                      | `string`              | `undefined` |
+| `value`       | `value`       | (optional) The input's value.                                 | `string`              | `undefined` |
+
 
 ### DOM Events
 
-<section>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Emits</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>valueChange</td>
-        <td>Fires on input value change</td>
-        <td>string</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+| Event         | Description                                | Type                  |
+| ------------- | ------------------------------------------ | --------------------- |
+| `valueChange` | An event that fires on input value change. | `CustomEvent<string>` |
+
+### Methods
+
+| Method name  | Description     | Parameter | Return          |
+| ------------ | --------------- | --------- | --------------- |
+| `focusInput` | Focus the input |           | `Promise<void>` |
+
 
 ### Accessibility
 

@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'modus-file-dropzone-examples',
   template: `
-    <h3>File Uplaod Dropzone</h3>
+    <h3>File Upload Dropzone</h3>
     <modus-file-dropzone
       aria-Label="dropzone"
       description="File dropzone description"

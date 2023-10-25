@@ -330,7 +330,7 @@ export default {
       type: { required: false },
     },
     pageSizeList: {
-      name: 'toolbarOptions',
+      name: 'pageSizeList',
       description: 'To set page size options for the pagination.',
       table: {
         type: { summary: 'number[]' },
@@ -338,7 +338,7 @@ export default {
       type: { required: false },
     },
     rowSelectionOptions: {
-      name: 'toolbarOptions',
+      name: 'rowSelectionOptions',
       description: 'To control multiple row selection.',
       table: {
         type: { summary: 'ModusTableRowSelectionOptions' },
@@ -349,7 +349,7 @@ export default {
 
   parameters: {
     actions: {
-      handles: ['sortChange', 'cellLinkClick', 'rowSelectionChange'],
+      handles: ['cellValueChange','cellLinkClick', 'columnOrderChange', 'columnSizingChange', 'columnVisibilityChange', 'paginationChange', 'rowExpanded', 'rowSelectionChange', 'rowUpdated', 'sortChange'],
     },
     controls: { expanded: true, sort: 'requiredFirst' },
     docs: {
@@ -526,9 +526,29 @@ CheckboxRowSelection.args = {
   }, data: makeData(7)
 };
 
+const editableColumns =DefaultColumns.map(col =>{
+  if(col.dataType === 'link') return col;
+
+  if(col.accessorKey === 'status'){
+    return {...col,  cellEditable:true,
+      cellEditorType: 'dropdown',
+      cellEditorArgs: {
+        options:[
+        { display: 'Verified' },
+        { display: 'Pending' },
+        { display: 'Rejected' },
+        ]
+      } };
+  }
+  else return {...col, cellEditable: true};
+});
+
+export const InlineEditing = Template.bind({});
+InlineEditing.args = { ...DefaultArgs, columns: editableColumns, data: makeData(7) };
+
 export const LargeDataset = Template.bind({});
 
-LargeDataset.args = { ...DefaultArgs, columns: DefaultColumns, data: makeData(10000, 1,1 ),pagination: true, pageSizeList: [5, 10, 50], sort: true , hover: true, rowsExpandable: true, summaryRow: true , columnReorder:true, columnResize: true, toolbar:true,  toolbarOptions: {
+LargeDataset.args = { ...DefaultArgs, columns: editableColumns, data: makeData(10000, 1,1 ),pagination: true, pageSizeList: [5, 10, 50], sort: true , hover: true, rowsExpandable: true, summaryRow: true , columnReorder:true, columnResize: true, toolbar:true,  toolbarOptions: {
   columnsVisibility: {
     title: '',
     requiredColumns: ['age', 'visits'],

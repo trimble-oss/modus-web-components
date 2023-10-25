@@ -380,7 +380,8 @@
   --modus-table-readonly-bg: var(--modus-gray-0);
   --modus-table-readonly-color: var(--modus-table-color);
   --modus-table-body-color: var(--modus-gray-10);
-  --modus-table-cell-link-colour: var(--modus-link-color);
+  --modus-table-cell-link-color: var(--modus-link-color);
+  --modus-table-cell-border-color: var(--modus-link-color);
 
   // Tooltips
   --modus-tooltip-bg: var(--modus-gray-7);
@@ -429,6 +430,7 @@
   --modus-backdrop-bg: #000000bf;
   --modus-chevron-color: var(--modus-gray-5);
   --modus-highlight-blue-color: var(--modus-blue);
+  --modus-link-color: var(--modus-blue);
 
   // Accordion
   --modus-accordion-item-header-hover-bg: var(--modus-gray-8);
@@ -520,7 +522,7 @@
   --modus-icon-colour: var(--modus-gray-light);
 
   // Input
-  --modus-input-bg: var(--modus-trimble-gray);
+  --modus-input-bg: var(--modus-gray-10);
   --modus-input-color: var(--modus-body-color);
   --modus-input-border-color: var(--modus-gray-8);
   --modus-input-bottom-line-active-color: var(--modus-highlight-blue-color);
@@ -711,7 +713,8 @@
   --modus-table-readonly-bg: var(--modus-table-bg);
   --modus-table-readonly-color: var(--modus-gray-2);
   --modus-table-body-color: var(--modus-white);
-  --modus-table-cell-link-colour: var(--modus-blue-4);
+  --modus-table-cell-link-color: var(--modus-blue-4);
+  --modus-table-cell-border-color: var(--modus-blue-4);
 
   // Tooltip
   --modus-tooltip-bg: var(--modus-gray-0);

@@ -433,4 +433,169 @@ describe('modus-table', () => {
     resizeContainer = await page.find('modus-table >>> .resize-handle');
     expect(resizeContainer).not.toBeNull();
   });
+
+  it('Renders Hyperlinks in cell and emits cellLinkEvent', async () => {
+    page = await newE2EPage();
+
+    await page.setContent('<modus-table />');
+    const component = await page.find('modus-table');
+
+    const emailColumn = [
+      {
+        header: 'Email',
+        accessorKey: 'email',
+        id: 'email',
+        dataType: 'link',
+      },
+    ];
+    const emailData = { display: 'test', url: 'test@example.com' };
+    const cellLinkClickEvent = await page.spyOnEvent('cellLinkClick');
+
+    component.setProperty('columns', emailColumn);
+    component.setProperty('data', [{ email: emailData }]);
+    await page.waitForChanges();
+
+    const linkElement = await page.find('modus-table >>> .cell-link');
+    linkElement.click();
+    await page.waitForChanges();
+
+    expect(cellLinkClickEvent).toHaveReceivedEventDetail(emailData);
+
+    linkElement.focus();
+    await page.keyboard.press('Enter');
+    await page.waitForChanges();
+
+    expect(cellLinkClickEvent).toHaveReceivedEventDetail(emailData);
+  });
+
+  it('Performs keyboard navigation on cells with hyperlinks', async () => {
+    page = await newE2EPage();
+
+    await page.setContent('<modus-table />');
+    const component = await page.find('modus-table');
+
+    const emailColumns = [
+      {
+        header: 'email1',
+        accessorKey: 'email1',
+        id: 'email1',
+        dataType: 'link',
+        sortingFn: 'sortForHyperlink',
+      },
+      {
+        header: 'email2',
+        accessorKey: 'email2',
+        id: 'email2',
+        dataType: 'link',
+        sortingFn: 'sortForHyperlink',
+      },
+    ];
+    const data = [
+      {
+        email1: { display: 'row1cell1', url: 'row1cell1@example.com' },
+        email2: { display: 'row1cell2', url: 'row1cell2@example.com' },
+      },
+      {
+        email1: { display: 'row2cell1', url: 'row2cell1@example.com' },
+        email2: { display: 'row2cell2', url: 'row2cell2@example.com' },
+      },
+    ];
+    const cellLinkClickEvent = await page.spyOnEvent('cellLinkClick');
+
+    component.setProperty('columns', emailColumns);
+    component.setProperty('data', data);
+    await page.waitForChanges();
+
+    const linkElement = await page.find('modus-table >>> .cell-link');
+    linkElement.focus();
+    await page.waitForChanges();
+
+    expect(linkElement).toBeTruthy();
+    await page.keyboard.press('Enter');
+    await page.waitForChanges();
+
+    expect(cellLinkClickEvent).toHaveReceivedEventDetail({ display: 'row1cell1', url: 'row1cell1@example.com' });
+
+    // Press Right Arrow
+    await page.keyboard.press('ArrowRight');
+    await page.waitForChanges();
+    await page.keyboard.press('Tab');
+    await page.waitForChanges();
+    await page.keyboard.press('Enter');
+    await page.waitForChanges();
+
+    expect(cellLinkClickEvent).toHaveReceivedEventDetail({ display: 'row1cell2', url: 'row1cell2@example.com' });
+
+    // Press Down Arrow
+    await page.keyboard.press('ArrowDown');
+    await page.waitForChanges();
+    await page.keyboard.press('Tab');
+    await page.waitForChanges();
+    await page.keyboard.press('Enter');
+    await page.waitForChanges();
+
+    expect(cellLinkClickEvent).toHaveReceivedEventDetail({ display: 'row2cell2', url: 'row2cell2@example.com' });
+
+    // Press Left Arrow
+    await page.keyboard.press('ArrowLeft');
+    await page.waitForChanges();
+    await page.keyboard.press('Tab');
+    await page.waitForChanges();
+    await page.keyboard.press('Enter');
+    await page.waitForChanges();
+
+    expect(cellLinkClickEvent).toHaveReceivedEventDetail({ display: 'row2cell1', url: 'row2cell1@example.com' });
+
+    // Press Up Arrow
+    await page.keyboard.press('ArrowUp');
+    await page.waitForChanges();
+    await page.keyboard.press('Tab');
+    await page.waitForChanges();
+    await page.keyboard.press('Enter');
+    await page.waitForChanges();
+
+    expect(cellLinkClickEvent).toHaveReceivedEventDetail({ display: 'row1cell1', url: 'row1cell1@example.com' });
+  });
+
+  it('Performs keyboard navigation on rows with checkbox selection', async () => {
+    page = await newE2EPage();
+
+    await page.setContent('<modus-table />');
+    const component = await page.find('modus-table');
+
+    const rowSelectionChange = await page.spyOnEvent('rowSelectionChange');
+
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    component.setProperty('rowSelection', true);
+    component.setProperty('rowSelectionOptions', {
+      multiple: false,
+    });
+
+    await page.waitForChanges();
+
+    const cell = await page.find('modus-table >>> td');
+
+    expect(cell).toHaveClass('row-checkbox');
+    cell.focus();
+    await page.waitForChanges();
+
+    // Press Down Arrow
+    await page.keyboard.press('ArrowDown');
+    await page.waitForChanges();
+
+    await page.keyboard.press('Enter');
+    await page.waitForChanges();
+
+    expect(rowSelectionChange).toHaveReceivedEvent();
+
+    // Press Up Arrow
+    await page.keyboard.press('ArrowUp');
+    await page.waitForChanges();
+
+    await page.keyboard.press('Enter');
+    await page.waitForChanges();
+
+    expect(rowSelectionChange).toHaveReceivedEvent();
+  });
 });

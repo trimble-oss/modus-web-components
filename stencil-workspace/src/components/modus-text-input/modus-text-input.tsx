@@ -160,7 +160,8 @@ export class ModusTextInput {
           class={`input-container ${this.errorText ? 'error' : this.validText ? 'valid' : ''} ${this.classBySize.get(
             this.size
           )}`}
-          onClick={() => this.textInput.focus()}>
+          onClick={() => this.textInput.focus()}
+          part="input-container">
           {this.includeSearchIcon ? <IconSearch size="16" /> : null}
           <input
             aria-invalid={!!this.errorText}

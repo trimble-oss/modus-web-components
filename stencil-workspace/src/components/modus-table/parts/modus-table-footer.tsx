@@ -24,7 +24,7 @@ function calculateTotal(tableData: unknown[], header): number | string {
   return !isNaN(sum) ? sum : '';
 }
 
-export const ModusTableSummaryRow: FunctionalComponent<ModusTableSummaryRowProps> = ({
+export const ModusTableFooter: FunctionalComponent<ModusTableSummaryRowProps> = ({
   footerGroups,
   tableData,
   frozenColumns,

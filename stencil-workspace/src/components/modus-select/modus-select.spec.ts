@@ -14,7 +14,7 @@ describe('modus-select', () => {
         <mock:shadow-root>
           <div>
             <span class="input-container">
-              <select class="medium"></select>
+              <select class="medium" part="input"></select>
             </span>
           </div>
         </mock:shadow-root>

@@ -5,6 +5,9 @@ import { html } from 'lit-html';
 export default {
   title: 'Components/Tabs',
   parameters: {
+    actions: {
+      handles: ['tabChange'],
+    },
     docs: {
       inlineStories: false,
       page: docs,

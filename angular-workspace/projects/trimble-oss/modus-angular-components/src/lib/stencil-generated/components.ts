@@ -334,15 +334,15 @@ export declare interface ModusDataTable extends Components.ModusDataTable {
 
 
 @ProxyCmp({
-  inputs: ['allowedCharsRegex', 'altFormats', 'ariaLabel', 'autoFocusInput', 'disableValidation', 'disabled', 'errorText', 'fillerDate', 'format', 'helperText', 'label', 'placeholder', 'readOnly', 'required', 'showCalendarIcon', 'size', 'type', 'validText', 'value'],
-  methods: ['focusInput']
+  inputs: ['allowedCharsRegex', 'altFormats', 'ariaLabel', 'autoFocusInput', 'disableValidation', 'disabled', 'errorText', 'fillerDate', 'format', 'helperText', 'label', 'max', 'min', 'placeholder', 'readOnly', 'required', 'showCalendarIcon', 'size', 'type', 'validText', 'value'],
+  methods: ['focusInput', 'validate']
 })
 @Component({
   selector: 'modus-date-input',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['allowedCharsRegex', 'altFormats', 'ariaLabel', 'autoFocusInput', 'disableValidation', 'disabled', 'errorText', 'fillerDate', 'format', 'helperText', 'label', 'placeholder', 'readOnly', 'required', 'showCalendarIcon', 'size', 'type', 'validText', 'value'],
+  inputs: ['allowedCharsRegex', 'altFormats', 'ariaLabel', 'autoFocusInput', 'disableValidation', 'disabled', 'errorText', 'fillerDate', 'format', 'helperText', 'label', 'max', 'min', 'placeholder', 'readOnly', 'required', 'showCalendarIcon', 'size', 'type', 'validText', 'value'],
 })
 export class ModusDateInput {
   protected el: HTMLElement;
@@ -820,7 +820,8 @@ export declare interface ModusNavbarSearchOverlay extends Components.ModusNavbar
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'disabled', 'errorText', 'helperText', 'label', 'maxValue', 'minValue', 'placeholder', 'readOnly', 'required', 'size', 'step', 'textAlign', 'validText', 'value']
+  inputs: ['ariaLabel', 'disabled', 'errorText', 'helperText', 'label', 'maxValue', 'minValue', 'placeholder', 'readOnly', 'required', 'size', 'step', 'textAlign', 'validText', 'value'],
+  methods: ['focusInput']
 })
 @Component({
   selector: 'modus-number-input',
@@ -926,7 +927,8 @@ export declare interface ModusRadioGroup extends Components.ModusRadioGroup {
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'disabled', 'errorText', 'helperText', 'label', 'options', 'optionsDisplayProp', 'required', 'size', 'validText', 'value']
+  inputs: ['ariaLabel', 'disabled', 'errorText', 'helperText', 'label', 'options', 'optionsDisplayProp', 'required', 'size', 'validText', 'value'],
+  methods: ['focusInput']
 })
 @Component({
   selector: 'modus-select',
@@ -940,7 +942,7 @@ export class ModusSelect {
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['valueChange']);
+    proxyOutputs(this, this.el, ['valueChange', 'inputBlur']);
   }
 }
 
@@ -950,6 +952,10 @@ export declare interface ModusSelect extends Components.ModusSelect {
    * An event that fires on input value change.
    */
   valueChange: EventEmitter<CustomEvent<unknown>>;
+  /**
+   * An event that fires on input blur.
+   */
+  inputBlur: EventEmitter<CustomEvent<FocusEvent>>;
 }
 
 
@@ -1112,28 +1118,102 @@ export class ModusTable {
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['sortChange', 'rowSelectionChange', 'cellLinkClick']);
+    proxyOutputs(this, this.el, ['cellValueChange', 'cellLinkClick', 'columnOrderChange', 'columnSizingChange', 'columnVisibilityChange', 'rowExpanded', 'rowSelectionChange', 'sortChange', 'paginationChange']);
   }
 }
 
 
-import type { ModusTableSortingState as IModusTableModusTableSortingState } from '@trimble-oss/modus-web-components';
+import type { ModusTableCellValueChange as IModusTableModusTableCellValueChange } from '@trimble-oss/modus-web-components';
 import type { ModusTableCellLink as IModusTableModusTableCellLink } from '@trimble-oss/modus-web-components';
+import type { ModusTableColumnOrderState as IModusTableModusTableColumnOrderState } from '@trimble-oss/modus-web-components';
+import type { ModusTableColumnSizingState as IModusTableModusTableColumnSizingState } from '@trimble-oss/modus-web-components';
+import type { ModusTableColumnVisibilityState as IModusTableModusTableColumnVisibilityState } from '@trimble-oss/modus-web-components';
+import type { ModusTableExpandedState as IModusTableModusTableExpandedState } from '@trimble-oss/modus-web-components';
+import type { ModusTableSortingState as IModusTableModusTableSortingState } from '@trimble-oss/modus-web-components';
+import type { ModusTablePaginationState as IModusTableModusTablePaginationState } from '@trimble-oss/modus-web-components';
 
 export declare interface ModusTable extends Components.ModusTable {
   /**
-   * Emits event on sort change
+   * Emits the cell value that was edited
    */
-  sortChange: EventEmitter<CustomEvent<IModusTableModusTableSortingState>>;
-  /**
-   * Event details contains the row(s) selected
-   */
-  rowSelectionChange: EventEmitter<CustomEvent<unknown>>;
+  cellValueChange: EventEmitter<CustomEvent<IModusTableModusTableCellValueChange>>;
   /**
    * Emits the link that was clicked
    */
   cellLinkClick: EventEmitter<CustomEvent<IModusTableModusTableCellLink>>;
+  /**
+   * Emits columns in the updated order
+   */
+  columnOrderChange: EventEmitter<CustomEvent<IModusTableModusTableColumnOrderState>>;
+  /**
+   * Emits latest column size
+   */
+  columnSizingChange: EventEmitter<CustomEvent<IModusTableModusTableColumnSizingState>>;
+  /**
+   * Emits visibility state of each column
+   */
+  columnVisibilityChange: EventEmitter<CustomEvent<IModusTableModusTableColumnVisibilityState>>;
+  /**
+   * Emits expanded state of the columns
+   */
+  rowExpanded: EventEmitter<CustomEvent<IModusTableModusTableExpandedState>>;
+  /**
+   * Emits rows selected
+   */
+  rowSelectionChange: EventEmitter<CustomEvent<unknown>>;
+  /**
+   * Emits column sort order
+   */
+  sortChange: EventEmitter<CustomEvent<IModusTableModusTableSortingState>>;
+  /**
+   * Emits selected page index and size
+   */
+  paginationChange: EventEmitter<CustomEvent<IModusTableModusTablePaginationState>>;
 }
+
+
+@ProxyCmp({
+  inputs: ['args', 'keyDown', 'type', 'value', 'valueChange']
+})
+@Component({
+  selector: 'modus-table-cell-editor',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['args', 'keyDown', 'type', 'value', 'valueChange'],
+})
+export class ModusTableCellEditor {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
+export declare interface ModusTableCellEditor extends Components.ModusTableCellEditor {}
+
+
+@ProxyCmp({
+  inputs: ['cell', 'linkClick', 'rowActions', 'valueChange']
+})
+@Component({
+  selector: 'modus-table-cell-main',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['cell', 'linkClick', 'rowActions', 'valueChange'],
+})
+export class ModusTableCellMain {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
+export declare interface ModusTableCellMain extends Components.ModusTableCellMain {}
 
 
 @ProxyCmp({
@@ -1181,14 +1261,14 @@ export declare interface ModusTableDropdownMenu extends Components.ModusTableDro
 
 
 @ProxyCmp({
-  inputs: ['cellBorderless', 'summaryRow', 'targetTable']
+  inputs: ['cellBorderless', 'container', 'summaryRow']
 })
 @Component({
   selector: 'modus-table-filler-column',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['cellBorderless', 'summaryRow', 'targetTable'],
+  inputs: ['cellBorderless', 'container', 'summaryRow'],
 })
 export class ModusTableFillerColumn {
   protected el: HTMLElement;

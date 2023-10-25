@@ -50,6 +50,8 @@ import { IconTimerCountdown } from './icon-timer-countdown';
 import { IconCaretUp } from './icon-caret-up';
 import { IconExport } from './icon-export';
 import { IconHistory } from './icon-history';
+import { IconPencil } from './icon-pencil';
+import { IconShield } from './icon-shield';
 
 export interface IconProps {
   color?: string;
@@ -165,6 +167,10 @@ export const IconMap: FunctionalComponent<IconMapProps> = (props: IconMapProps) 
       return <IconHistory color={props.color} onClick={props.onClick} size={props.size} />;
     case 'export':
       return <IconExport color={props.color} onClick={props.onClick} size={props.size} />;
+    case 'pencil':
+      return <IconPencil color={props.color} onClick={props.onClick} size={props.size} />;
+    case 'shield':
+      return <IconShield color={props.color} onClick={props.onClick} size={props.size} />;
     default:
       return <img src={props.icon} {...(props.imageOptions || {})} />;
   }
