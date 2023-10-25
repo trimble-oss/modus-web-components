@@ -147,7 +147,7 @@ export class ModusTable {
   @Prop() rowSelection = false;
 
   /** (Optional) To set modus-table in manual mode. */
-  @Prop() manualPaginationOptions: ManualPaginationOptions = {currentPageIndex:0, currentPageSize: 0, pageCount: 0};
+  @Prop() manualPaginationOptions: ManualPaginationOptions;
 
   /** (Optional) To control multiple row selection. */
   @Prop() rowSelectionOptions: ModusTableRowSelectionOptions = {
@@ -559,23 +559,26 @@ export class ModusTable {
   }
 
   renderPagination(table: Table<unknown>): JSX.Element | null {
-    const manualPaginationProps = {
-      table,
-      totalCount: this.manualPaginationOptions.pageCount,
-      currentPageSize: this.manualPaginationOptions.currentPageSize,
-      currentPageIndex: this.manualPaginationOptions.currentPageIndex,
-      pageSizeList: this.pageSizeList,
-    }
-    const defaultPaginationProps = {
-      table,
-      totalCount: this.data?.length || 0,
-      pageSizeList: this.pageSizeList
-    }
+    const hasManualMode = this.pagination && this.manualPaginationOptions;
+
     const paginationProps = {
-      ...(this.pagination && !this.manualPaginationOptions ? defaultPaginationProps : manualPaginationProps)
+      ...(hasManualMode) && {
+        table,
+        totalCount: this.manualPaginationOptions?.pageCount || 0,
+        currentPageSize: this.manualPaginationOptions?.currentPageSize || 0,
+        currentPageIndex: this.manualPaginationOptions?.currentPageIndex || 0,
+        pageSizeList: this.pageSizeList,
+      },
+      ...(!hasManualMode) && {
+        table,
+        totalCount: this.data?.length || 0,
+        pageSizeList: this.pageSizeList
+      }
     }
-    return (<ModusTablePagination {...paginationProps} />);
+
+    return this.pagination && (<ModusTablePagination {...paginationProps} />);
   }
+
 
   render(): void {
     const table = this.tableCore.getTableInstance();
