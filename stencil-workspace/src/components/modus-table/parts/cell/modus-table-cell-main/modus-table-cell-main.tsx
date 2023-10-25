@@ -9,11 +9,7 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Cell, Row } from '@tanstack/table-core';
-import {
-  ModusTableCellEditorArgs,
-  ModusTableCellLink,
-  ModusTableDataUpdaterProps,
-} from '../../../models/modus-table.models';
+import { ModusTableCellEditorArgs, ModusTableCellLink } from '../../../models/modus-table.models';
 import {
   COLUMN_DEF_DATATYPE_KEY,
   COLUMN_DEF_DATATYPE_INTEGER,
@@ -30,6 +26,7 @@ import NavigateTableCells from '../../../utilities/table-cell-navigation.utility
 import { CellFormatter } from '../../../utilities/table-cell-formatter.utility';
 import { ModusTableCellLinkElement } from '../modus-table-cell-link-element';
 import RowActions from '../../../models/row-actions.model';
+import { ModusTableCellEdited } from '../../modus-table-body';
 
 @Component({
   tag: 'modus-table-cell-main',
@@ -37,9 +34,8 @@ import RowActions from '../../../models/row-actions.model';
 export class ModusTableCellMain {
   @Element() el: HTMLElement;
   @Prop() cell: Cell<unknown, unknown>;
-  @Prop() cellIndex: number;
   @Prop() rowActions: RowActions;
-  @Prop() valueChange: (props: ModusTableDataUpdaterProps) => void;
+  @Prop() valueChange: (props: ModusTableCellEdited) => void;
   @Prop() linkClick: (link: ModusTableCellLink) => void;
 
   @State() editMode: boolean;
@@ -111,29 +107,32 @@ export class ModusTableCellMain {
       event.stopPropagation();
     } else {
       NavigateTableCells({
-        key: event.key,
+        eventKey: event.key,
         cellElement: this.cellEl,
-        cellIndex: this.cellIndex,
       });
     }
   };
 
-  handleCellEditorValueChange(newValue: string, oldValue: string, rowId: string) {
+  handleCellEditorValueChange(newValue: string, oldValue: string) {
     if (this.editMode && newValue !== oldValue && this.valueChange) {
-      this.valueChange({ rowId, accessorKey: this.cell.column.columnDef[this.accessorKey], newValue, oldValue });
+      this.valueChange({
+        row: this.cell.row,
+        accessorKey: this.cell.column.columnDef[this.accessorKey],
+        newValue,
+        oldValue,
+      });
     }
 
     this.editMode = false;
   }
 
-  handleCellEditorKeyDown = (event: KeyboardEvent, newValue: string, oldValue: string, rowId: string) => {
+  handleCellEditorKeyDown = (event: KeyboardEvent, newValue: string, oldValue: string) => {
     const key = event.key?.toLowerCase();
     if (key === KEYBOARD_ENTER) {
-      this.handleCellEditorValueChange(newValue, oldValue, rowId);
+      this.handleCellEditorValueChange(newValue, oldValue);
       NavigateTableCells({
-        key: KEYBOARD_ENTER,
+        eventKey: KEYBOARD_ENTER,
         cellElement: this.cellEl,
-        cellIndex: this.cellIndex,
       });
     } else if (key === KEYBOARD_ESCAPE) {
       this.editMode = false;
@@ -183,10 +182,8 @@ export class ModusTableCellMain {
             value={valueString}
             type={this.getEditorType()}
             args={this.getEditorArgs()}
-            valueChange={(newVal: string) => this.handleCellEditorValueChange(newVal, valueString, row.id)}
-            keyDown={(event: KeyboardEvent, newVal: string) =>
-              this.handleCellEditorKeyDown(event, newVal, valueString, row.id)
-            }
+            valueChange={(newVal: string) => this.handleCellEditorValueChange(newVal, valueString)}
+            keyDown={(event: KeyboardEvent, newVal: string) => this.handleCellEditorKeyDown(event, newVal, valueString)}
           />
         ) : (
           this.renderCellValue(cellValue, row)

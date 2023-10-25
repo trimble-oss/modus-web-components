@@ -35,6 +35,7 @@ export const ModusTablePagination: FunctionalComponent<ModusTablePaginationProps
       <div class="items-per-page">
         <span>{PAGINATION_PAGEVIEW_TEXT}</span>
         <modus-select
+          ariaLabel="Select page size"
           options-display-prop="display"
           options={optionsList}
           onValueChange={handleChange}

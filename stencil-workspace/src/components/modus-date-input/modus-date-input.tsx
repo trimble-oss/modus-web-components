@@ -23,7 +23,7 @@ export class ModusDateInput {
 
   /** (optional) Regular expression to allow characters while typing the input.
    */
-  @Prop() allowedCharsRegex: RegExp | string;
+  @Prop({ mutable: true }) allowedCharsRegex: RegExp | string;
 
   /** (optional) The input's aria-label. */
   @Prop() ariaLabel: string | null;
@@ -78,7 +78,7 @@ export class ModusDateInput {
   }
 
   /** (optional) Custom helper text displayed below the input. */
-  @Prop() helperText;
+  @Prop() helperText: string;
 
   /** (optional) The input's label. */
   @Prop() label: string;
@@ -104,7 +104,13 @@ export class ModusDateInput {
   /** (optional) The input's valid state text. */
   @Prop() validText: string;
 
-  /** (optional) A string representing the date entered in the input. The date is formatted according to ISO8601 'yyyy-mm-dd'. The displayed date format will differ from the 'value'. */
+  /** (optional) The minimum date allowed. The date is formatted according to ISO8601 'yyyy-mm-dd'. */
+  @Prop() min: string;
+
+  /** (optional) The maximum date allowed. The date is formatted according to ISO8601 'yyyy-mm-dd'. */
+  @Prop() max: string;
+
+  /** (optional) A string representing the date entered to the input. The date is formatted according to ISO8601 'yyyy-mm-dd'. The displayed date format will differ from the 'value'. */
   @Prop({ mutable: true }) value: string;
   @Watch('value')
   handleValueChange(val: string): void {
@@ -158,6 +164,12 @@ export class ModusDateInput {
     this._dateInput.focus();
   }
 
+  /** Validate the input. */
+  @Method()
+  async validate(): Promise<void> {
+    this.validateInput(this._dateDisplay);
+  }
+
   /** Handlers */
   handleCalendarClick(): void {
     this.calendarIconClicked.emit({
@@ -175,7 +187,7 @@ export class ModusDateInput {
   handleBlur(): void {
     this._isEditing = false;
 
-    this.checkAltFormats();
+    this.updateDateFromAltFormats();
     this.validateInput(this._dateDisplay);
     this.dateInputBlur.emit({
       value: this.value,
@@ -207,7 +219,7 @@ export class ModusDateInput {
     const inputString = (event.currentTarget as HTMLInputElement)?.value;
 
     this._dateDisplay = inputString;
-    this.value = this._formatter.parseDisplayString(this._dateDisplay);
+    this.value = this._formatter.parseDisplayString(inputString.trim());
   }
 
   // Helpers
@@ -216,14 +228,17 @@ export class ModusDateInput {
   }
 
   /** Check if the input string matches any of the alternative formats. */
-  checkAltFormats(): string {
+  updateDateFromAltFormats(): string {
     if (this.value) {
+      this._dateDisplay = this._formatter.formatDisplayString(this.value);
       return;
     }
 
+    const displayDate = this._dateDisplay.trim();
+
     // if there is no value for the default format, check the alternative formats
     for (const formatter of this._altFormatters) {
-      const result = formatter.parseDisplayString(this._dateDisplay);
+      const result = formatter.parseDisplayString(displayDate);
 
       if (result) {
         this._dateDisplay = this._formatter.formatDisplayString(result);
@@ -237,10 +252,8 @@ export class ModusDateInput {
     if (!this.allowedCharsRegex) return true;
 
     const dateCharacterRegex = new RegExp(this.allowedCharsRegex);
-    if (dateCharacterRegex.test(key)) {
-      return true;
-    }
-    return false;
+
+    return dateCharacterRegex.test(key);
   }
 
   setDefaultAllowedKeysRegex(autoFormat: boolean) {
@@ -253,10 +266,32 @@ export class ModusDateInput {
     if (this.disableValidation) return;
 
     if (!inputString) {
-      if (this.required) this.errorText = 'Required';
-      else this.clearValidation();
-    } else if (!this.value) this.errorText = 'Invalid date';
-    else this.clearValidation();
+      if (this.required) {
+        this.errorText = 'Required';
+      } else {
+        this.clearValidation();
+      }
+    } else if (!this.value) {
+      this.errorText = 'Invalid date';
+    } else {
+      this.validateMinMax();
+    }
+  }
+
+  private validateMinMax(): void {
+    const min = this._formatter.parseIsoToDate(this.min);
+    const max = this._formatter.parseIsoToDate(this.max);
+    const value = this._formatter.parseIsoToDate(this.value);
+
+    if (min && min > value) {
+      min.setUTCDate(min.getDate() - 1);
+      this.errorText = `Select a date after ${this._formatter.formatDisplayString(min.toISOString())}`;
+    } else if (max && max < value) {
+      max.setUTCDate(max.getDate() + 1);
+      this.errorText = `Select a date before ${this._formatter.formatDisplayString(max.toISOString())}`;
+    } else {
+      this.clearValidation();
+    }
   }
 
   render() {

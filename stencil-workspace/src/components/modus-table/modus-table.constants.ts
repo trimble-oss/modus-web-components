@@ -4,6 +4,7 @@ export const SORT_ASCENDING = 'Sort Ascending';
 export const SORT_DESCENDING = 'Sort Descending';
 
 export const COLUMN_DEF_DATATYPE_KEY = 'dataType';
+export const COLUMN_DEF_SUB_ROWS_KEY = 'subRows';
 export const COLUMN_DEF_CELL_EDITOR_TYPE_KEY = 'cellEditorType';
 export const COLUMN_DEF_CELL_EDITOR_ARGS_KEY = 'cellEditorArgs';
 

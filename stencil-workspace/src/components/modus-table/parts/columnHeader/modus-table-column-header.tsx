@@ -8,6 +8,7 @@ import { ModusTableColumnResizingHandler } from './modus-table-column-resizing-h
 import { ModusTableColumnSortIcon } from './modus-table-column-sort-icon';
 
 interface ModusTableColumnHeaderProps {
+  id: string;
   table: Table<unknown>;
   header: Header<unknown, unknown>;
   isNestedParentHeader: boolean;
@@ -29,6 +30,7 @@ interface ModusTableColumnHeaderProps {
  * Modus Table Header
  */
 export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderProps> = ({
+  id,
   table,
   header,
   isNestedParentHeader,
@@ -41,7 +43,7 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
   onMouseLeaveResize,
 }) => {
   let elementRef: HTMLTableCellElement;
-  const { column, id, colSpan, isPlaceholder, getSize } = header;
+  const { column, id: headerId, colSpan, isPlaceholder, getSize } = header;
 
   return (
     <th
@@ -57,7 +59,7 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
        */
       class={`
         ${isNestedParentHeader ? 'text-align-center' : ''}
-        ${frozenColumns.includes(id) ? 'sticky-left' : ''}
+        ${frozenColumns.includes(headerId) ? 'sticky-left' : ''}
         ${column.getIsResizing() ? 'active-resize' : ''}
       `}
       style={{
@@ -68,10 +70,10 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
       scope="col"
       id={id}
       ref={(element: HTMLTableCellElement) => (elementRef = element)}
-      onMouseDown={(event: MouseEvent) => onDragStart(event, id, elementRef, true)}
+      onMouseDown={(event: MouseEvent) => onDragStart(event, headerId, elementRef, true)}
       onKeyDown={(event: KeyboardEvent) => {
         if (event.key.toLowerCase() === KEYBOARD_ENTER) {
-          onDragStart(event, id, elementRef, false);
+          onDragStart(event, headerId, elementRef, false);
         }
       }}>
       {isPlaceholder ? null : ( // header.isPlaceholder is Required for nested column headers to display empty cell

@@ -191,25 +191,16 @@ export class ModusFileDropzone {
             style={{ height: this.dropzoneHeight, width: this.dropzoneWidth }}
             tabIndex={0}>
             {this.includeStateIcon && (this.error ? <IconCancel size={'36'} /> : <IconUploadCloud size={'36'} />)}
-            {!this.error && (
-              <div>
-                Drag files here
-                {!this.fileDraggedOver && (
-                  <span>
-                    {' '}
-                    or
-                    <span class="browse" onClick={this.openBrowse}>
-                      {' '}
-                      browse
-                    </span>{' '}
-                    to upload
-                  </span>
-                )}
-                .
-              </div>
-            )}
+            {!this.error &&
+              (this.fileDraggedOver ? (
+                'Drag files here.'
+              ) : (
+                <div class="browse" onClick={this.openBrowse}>
+                  Drag files here or browse to upload.
+                </div>
+              ))}
             {this.error && (
-              <div class="error-messages">
+              <div class="error-messages" role="alert">
                 {this.errorMessageTop && <span>{this.errorMessageTop}</span>}
                 {this.errorMessageBottom && <span>{this.errorMessageBottom}</span>}
               </div>

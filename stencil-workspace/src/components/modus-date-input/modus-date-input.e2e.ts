@@ -285,4 +285,188 @@ describe('modus-date-input', () => {
 
     expect(await input.getProperty('value')).toEqual('Jan 3, 2023');
   });
+
+  it('accepts the date with a space', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-date-input
+        format="mmm dd, yyyy"
+        show-calendar-icon="true"
+        alt-formats="mmm d, yyyy"></modus-date-input>`);
+    await page.waitForChanges();
+
+    const input = await page.find('modus-date-input >>> input');
+
+    await input.type('  May 5, 1988   ', { delay: 20 });
+    await page.waitForChanges();
+
+    const calendar = await page.find('modus-date-input >>> .icon-calendar');
+    await calendar.click();
+    await page.waitForChanges();
+
+    expect(await input.getProperty('value')).toEqual('May 05, 1988');
+  });
+
+  it('accepts the date with a space and alternative format', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-date-input
+        format="mmm d, yyyy"
+        show-calendar-icon="true"
+        alt-formats="mm.dd.yy"></modus-date-input>`);
+    await page.waitForChanges();
+
+    const input = await page.find('modus-date-input >>> input');
+
+    await input.type('  08.21.12   ', { delay: 20 });
+    await page.waitForChanges();
+
+    const calendar = await page.find('modus-date-input >>> .icon-calendar');
+    await calendar.click();
+    await page.waitForChanges();
+
+    expect(await input.getProperty('value')).toEqual('Aug 21, 2012');
+  });
+
+  it('checks invalid max date validation', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-date-input
+        show-calendar-icon="true"
+        format="mmm d, yyyy"
+        max="2023-01-02"></modus-date-input>`);
+    await page.waitForChanges();
+
+    const input = await page.find('modus-date-input >>> input');
+
+    await input.type('Jan 3, 2023', { delay: 20 });
+    await page.waitForChanges();
+
+    const calendar = await page.find('modus-date-input >>> .icon-calendar');
+    await calendar.click();
+    await page.waitForChanges();
+
+    const errorText = await page.find('modus-date-input >>> .sub-text > label');
+    expect(errorText.innerHTML).toEqual('Select a date before Jan 3, 2023');
+  });
+
+  it('checks invalid min date validation', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-date-input
+        show-calendar-icon="true"
+        format="mmm d, yyyy"
+        min="2023-01-02"></modus-date-input>`);
+    await page.waitForChanges();
+
+    const input = await page.find('modus-date-input >>> input');
+
+    await input.type('Dec 23, 2022', { delay: 20 });
+    await page.waitForChanges();
+
+    const calendar = await page.find('modus-date-input >>> .icon-calendar');
+    await calendar.click();
+    await page.waitForChanges();
+
+    const errorText = await page.find('modus-date-input >>> .sub-text > label');
+    expect(errorText.innerHTML).toEqual('Select a date after Jan 1, 2023');
+  });
+
+  it('checks input accepts max date', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-date-input
+        show-calendar-icon="true"
+        format="mmm d, yyyy"
+        max="2023-01-02"></modus-date-input>`);
+    await page.waitForChanges();
+
+    const input = await page.find('modus-date-input >>> input');
+
+    await input.type('Jan 2, 2023', { delay: 20 });
+    await page.waitForChanges();
+
+    const calendar = await page.find('modus-date-input >>> .icon-calendar');
+    await calendar.click();
+    await page.waitForChanges();
+
+    const errorText = await page.find('modus-date-input >>> .sub-text > label');
+    expect(errorText).toBeFalsy();
+  });
+
+  it('checks input accepts min date', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-date-input
+        show-calendar-icon="true"
+        format="mmm d, yyyy"
+        min="2023-05-18"></modus-date-input>`);
+    await page.waitForChanges();
+
+    const input = await page.find('modus-date-input >>> input');
+
+    await input.type('May 18, 2023', { delay: 20 });
+    await page.waitForChanges();
+
+    const calendar = await page.find('modus-date-input >>> .icon-calendar');
+    await calendar.click();
+    await page.waitForChanges();
+
+    const errorText = await page.find('modus-date-input >>> .sub-text > label');
+    expect(errorText).toBeFalsy();
+  });
+
+  it('checks input accepts date when min equals max', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-date-input
+        show-calendar-icon="true"
+        format="mmm d, yyyy"
+        max="2017-07-30"
+        min="2017-07-30"></modus-date-input>`);
+    await page.waitForChanges();
+
+    const input = await page.find('modus-date-input >>> input');
+
+    await input.type('Jul 30, 2017', { delay: 20 });
+    await page.waitForChanges();
+
+    const calendar = await page.find('modus-date-input >>> .icon-calendar');
+    await calendar.click();
+    await page.waitForChanges();
+
+    const errorText = await page.find('modus-date-input >>> .sub-text > label');
+    expect(errorText).toBeFalsy();
+  });
+
+  it('checks input accepts date between min and max', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-date-input
+        show-calendar-icon="true"
+        format="mmm d, yyyy"
+        max="2021-11-26"
+        min="2017-07-30"></modus-date-input>`);
+    await page.waitForChanges();
+
+    const input = await page.find('modus-date-input >>> input');
+
+    await input.type('Mar 6, 2019', { delay: 20 });
+    await page.waitForChanges();
+
+    const calendar = await page.find('modus-date-input >>> .icon-calendar');
+    await calendar.click();
+    await page.waitForChanges();
+
+    const errorText = await page.find('modus-date-input >>> .sub-text > label');
+    expect(errorText).toBeFalsy();
+  });
 });

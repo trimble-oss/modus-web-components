@@ -19,6 +19,7 @@ import {
 } from '@tanstack/table-core';
 import { ModusTableColumn, ModusTableRowSelectionOptions, ModusTableToolbarOptions } from './models/modus-table.models';
 import { sortHyperlink } from './functions/sortingFunction';
+import { COLUMN_DEF_SUB_ROWS_KEY } from './modus-table.constants';
 
 export interface TableCoreOptions {
   data: unknown[];
@@ -42,7 +43,7 @@ export interface TableCoreOptions {
   setColumnSizingInfo: (updater: Updater<ColumnSizingInfoState>) => void;
   setColumnVisibility: (updater: Updater<VisibilityState>) => void;
   setColumnOrder: (updater: Updater<string[]>) => void;
-} 
+}
 
 export default class ModusTableCore {
   private tableCore: Table<unknown> = null;
@@ -108,10 +109,10 @@ export default class ModusTableCore {
       onColumnVisibilityChange: setColumnVisibility,
       onColumnOrderChange: setColumnOrder,
       getCoreRowModel: getCoreRowModel(),
-      getPaginationRowModel: pagination && !manualPagination && getPaginationRowModel(),
+      getPaginationRowModel: pagination && getPaginationRowModel(),
       getSortedRowModel: getSortedRowModel(),
       getExpandedRowModel: getExpandedRowModel(),
-      getSubRows: (row) => row['subRows'],
+      getSubRows: (row) => row[COLUMN_DEF_SUB_ROWS_KEY],
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       onStateChange: () => {},
       renderFallbackValue: null,

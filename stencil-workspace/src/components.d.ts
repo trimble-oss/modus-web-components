@@ -14,8 +14,9 @@ import { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, 
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-import { ManualPaginationOptions, ModusTableCellEditorArgs, ModusTableCellLink, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDataUpdaterProps, ModusTableDisplayOptions, ModusTableExpandedState, ModusTablePaginationState, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+import { ManualPaginationOptions, ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTablePaginationState, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 import { Cell, Column, Table } from "@tanstack/table-core";
+import { ModusTableCellEdited } from "./components/modus-table/parts/modus-table-body";
 import { Tab } from "./components/modus-tabs/modus-tabs";
 import { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
 import { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
@@ -28,8 +29,9 @@ export { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, 
 export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 export { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 export { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-export { ManualPaginationOptions, ModusTableCellEditorArgs, ModusTableCellLink, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDataUpdaterProps, ModusTableDisplayOptions, ModusTableExpandedState, ModusTablePaginationState, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+export { ManualPaginationOptions, ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTablePaginationState, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 export { Cell, Column, Table } from "@tanstack/table-core";
+export { ModusTableCellEdited } from "./components/modus-table/parts/modus-table-body";
 export { Tab } from "./components/modus-tabs/modus-tabs";
 export { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
 export { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
@@ -378,11 +380,19 @@ export namespace Components {
         /**
           * (optional) Custom helper text displayed below the input.
          */
-        "helperText": any;
+        "helperText": string;
         /**
           * (optional) The input's label.
          */
         "label": string;
+        /**
+          * (optional) The maximum date allowed. The date is formatted according to ISO8601 'yyyy-mm-dd'.
+         */
+        "max": string;
+        /**
+          * (optional) The minimum date allowed. The date is formatted according to ISO8601 'yyyy-mm-dd'.
+         */
+        "min": string;
         /**
           * (optional) The input's placeholder text.
          */
@@ -412,7 +422,11 @@ export namespace Components {
          */
         "validText": string;
         /**
-          * (optional) A string representing the date entered in the input. The date is formatted according to ISO8601 'yyyy-mm-dd'. The displayed date format will differ from the 'value'.
+          * Validate the input.
+         */
+        "validate": () => Promise<void>;
+        /**
+          * (optional) A string representing the date entered to the input. The date is formatted according to ISO8601 'yyyy-mm-dd'. The displayed date format will differ from the 'value'.
          */
         "value": string;
     }
@@ -1076,10 +1090,9 @@ export namespace Components {
     }
     interface ModusTableCellMain {
         "cell": Cell<unknown, unknown>;
-        "cellIndex": number;
         "linkClick": (link: ModusTableCellLink) => void;
         "rowActions": RowActions;
-        "valueChange": (props: ModusTableDataUpdaterProps) => void;
+        "valueChange": (props: ModusTableCellEdited) => void;
     }
     interface ModusTableColumnsVisibility {
         /**
@@ -2291,11 +2304,19 @@ declare namespace LocalJSX {
         /**
           * (optional) Custom helper text displayed below the input.
          */
-        "helperText"?: any;
+        "helperText"?: string;
         /**
           * (optional) The input's label.
          */
         "label"?: string;
+        /**
+          * (optional) The maximum date allowed. The date is formatted according to ISO8601 'yyyy-mm-dd'.
+         */
+        "max"?: string;
+        /**
+          * (optional) The minimum date allowed. The date is formatted according to ISO8601 'yyyy-mm-dd'.
+         */
+        "min"?: string;
         /**
           * An event that fires on calendar icon click.
          */
@@ -2337,7 +2358,7 @@ declare namespace LocalJSX {
          */
         "validText"?: string;
         /**
-          * (optional) A string representing the date entered in the input. The date is formatted according to ISO8601 'yyyy-mm-dd'. The displayed date format will differ from the 'value'.
+          * (optional) A string representing the date entered to the input. The date is formatted according to ISO8601 'yyyy-mm-dd'. The displayed date format will differ from the 'value'.
          */
         "value"?: string;
     }
@@ -3053,6 +3074,10 @@ declare namespace LocalJSX {
          */
         "onCellLinkClick"?: (event: ModusTableCustomEvent<ModusTableCellLink>) => void;
         /**
+          * Emits the cell value that was edited
+         */
+        "onCellValueChange"?: (event: ModusTableCustomEvent<ModusTableCellValueChange>) => void;
+        /**
           * Emits columns in the updated order
          */
         "onColumnOrderChange"?: (event: ModusTableCustomEvent<ModusTableColumnOrderState>) => void;
@@ -3076,10 +3101,6 @@ declare namespace LocalJSX {
           * Emits rows selected
          */
         "onRowSelectionChange"?: (event: ModusTableCustomEvent<unknown>) => void;
-        /**
-          * Emits edited row data
-         */
-        "onRowUpdated"?: (event: ModusTableCustomEvent<unknown>) => void;
         /**
           * Emits column sort order
          */
@@ -3128,10 +3149,9 @@ declare namespace LocalJSX {
     }
     interface ModusTableCellMain {
         "cell"?: Cell<unknown, unknown>;
-        "cellIndex"?: number;
         "linkClick"?: (link: ModusTableCellLink) => void;
         "rowActions"?: RowActions;
-        "valueChange"?: (props: ModusTableDataUpdaterProps) => void;
+        "valueChange"?: (props: ModusTableCellEdited) => void;
     }
     interface ModusTableColumnsVisibility {
         /**

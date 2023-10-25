@@ -40,10 +40,10 @@ import {
   SORTING_STATE_KEY,
 } from './modus-table.constants';
 import {
+  ModusTableCellValueChange,
   ModusTableColumnOrderState,
   ModusTableColumnSizingState,
   ModusTableColumnVisibilityState,
-  ModusTableDataUpdaterProps,
   ModusTableExpandedState,
   ModusTablePaginationState,
   ModusTableSortingState,
@@ -64,7 +64,8 @@ import { TableHeaderDragDrop } from './utilities/table-header-drag-drop.utility'
 import ModusTableCore from './modus-table.core';
 import ModusTableState from './models/modus-table-state.model';
 import { ModusTableHeader } from './parts/modus-table-header';
-import { ModusTableBody } from './parts/modus-table-body';
+import { ModusTableBody, ModusTableCellEdited } from './parts/modus-table-body';
+import { createGuid } from '../../utils/utils';
 
 /**
  * @slot customFooter - Slot for custom footer.
@@ -185,6 +186,9 @@ export class ModusTable {
     this.onRowsExpandableChange();
   }
 
+  /** Emits the cell value that was edited */
+  @Event() cellValueChange: EventEmitter<ModusTableCellValueChange>;
+
   /** Emits the link that was clicked */
   @Event() cellLinkClick: EventEmitter<ModusTableCellLink>;
 
@@ -202,9 +206,6 @@ export class ModusTable {
 
   /** Emits rows selected */
   @Event() rowSelectionChange: EventEmitter<unknown>;
-
-  /** Emits edited row data */
-  @Event() rowUpdated: EventEmitter<unknown>;
 
   /** Emits column sort order */
   @Event() sortChange: EventEmitter<ModusTableSortingState>;
@@ -230,6 +231,7 @@ export class ModusTable {
   @State() itemDragState: ColumnDragState;
   @State() dragAndDropObj: TableHeaderDragDrop = new TableHeaderDragDrop();
 
+  private _id: string;
   private frozenColumns: string[] = []; // Columns will remain on the left and be unable to reorder, or modify their visibility.
   private isColumnResizing = false;
 
@@ -238,6 +240,7 @@ export class ModusTable {
   private onMouseUp = () => this.handleDrop();
 
   componentWillLoad(): void {
+    this._id = this.element.id || `modus-table-${createGuid()}`;
     this.setTableState({ columnOrder: this.columns?.map((column) => column.id as string) });
     this.onRowsExpandableChange();
     this.initializeTable();
@@ -367,25 +370,6 @@ export class ModusTable {
     this.itemDragState = null;
   }
 
-  handleCellValueChange(props: ModusTableDataUpdaterProps) {
-    const { rowId, accessorKey, newValue } = props;
-    this.updateData((old: unknown[]) => {
-      const newData = [...old];
-      // rowId is a string of IDs for row with nested information.
-      const idArray: number[] = rowId.split('.')?.map((id) => parseInt(id));
-
-      if (idArray.length === 1) {
-        newData[idArray[0]][accessorKey] = newValue;
-      } else if (idArray.length === 2) {
-        newData[idArray[0]]['subRows'][idArray[1]][accessorKey] = newValue;
-      } else if (idArray.length === 3) {
-        newData[idArray[0]]['subRows'][idArray[1]]['subRows'][idArray[2]][accessorKey] = newValue;
-      }
-
-      return newData;
-    });
-  }
-
   initializeTable(): void {
     this.tableCore = new ModusTableCore({
       data: this.data ?? [],
@@ -435,9 +419,10 @@ export class ModusTable {
     if (event) event.emit(this.tableState[key]);
   }
 
-  updateData(updater: Updater<unknown>): void {
+  updateData(updater: Updater<unknown>, context: ModusTableCellEdited): void {
     this.data = this.tableCore.getState(updater, this.data) as unknown[];
     this.tableCore.setState('data', this.data);
+    this.cellValueChange.emit({ ...context, data: this.data });
   }
 
   updateRowSelection(updater: Updater<unknown>): void {
@@ -483,10 +468,12 @@ export class ModusTable {
         <div class={tableContainerClass} style={{ maxHeight: this.maxHeight }}>
           {this.renderTable(table)}
 
-          <modus-table-filler-column
-            container={this.element}
-            summary-row={this.summaryRow}
-            cell-borderless={cellBorderless}></modus-table-filler-column>
+          {!this.fullWidth && (
+            <modus-table-filler-column
+              container={this.element}
+              summary-row={this.summaryRow}
+              cell-borderless={cellBorderless}></modus-table-filler-column>
+          )}
         </div>
         <slot name="customFooter" />
       </Fragment>
@@ -531,6 +518,7 @@ export class ModusTable {
 
     return (
       <ModusTableHeader
+        componentId={this._id}
         columnReorder={this.columnReorder}
         frozenColumns={this.frozenColumns}
         rowSelection={this.rowSelection}
@@ -553,7 +541,7 @@ export class ModusTable {
         rowSelection={this.rowSelection}
         multipleRowSelection={multipleRowSelection}
         rowActions={rowActions}
-        cellValueChange={(props: ModusTableDataUpdaterProps) => this.handleCellValueChange(props)}
+        dataUpdater={this.updateData.bind(this)}
         cellLinkClick={(link: ModusTableCellLink) => this.cellLinkClick.emit(link)}></ModusTableBody>
     );
   }
@@ -592,7 +580,7 @@ export class ModusTable {
   render(): void {
     const table = this.tableCore.getTableInstance();
     return (
-      <Host>
+      <Host id={this._id}>
         <div style={{ maxWidth: this.maxWidth }}>
           {this.renderToolBar(table)}
           {this.renderMain(table)}

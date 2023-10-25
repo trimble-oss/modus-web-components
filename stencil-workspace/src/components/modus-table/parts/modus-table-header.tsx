@@ -7,6 +7,7 @@ import { ModusTableColumnHeader } from './columnHeader/modus-table-column-header
 import { ModusTableHeaderCheckbox } from './row/selection/modus-table-header-checkbox';
 
 interface ModusTableHeaderProps {
+  componentId: string;
   columnReorder: boolean;
   frozenColumns: string[];
   multipleRowSelection: boolean;
@@ -24,6 +25,7 @@ interface ModusTableHeaderProps {
 }
 
 export const ModusTableHeader: FunctionalComponent<ModusTableHeaderProps> = ({
+  componentId,
   columnReorder,
   frozenColumns,
   multipleRowSelection,
@@ -42,14 +44,14 @@ export const ModusTableHeader: FunctionalComponent<ModusTableHeaderProps> = ({
     <thead class={tableHeadClass}>
       {headerGroups?.map((headerGroup, index) => (
         <tr key={headerGroup.id}>
-          <ModusTableHeaderCheckbox
-            rowSelection={rowSelection}
-            table={table}
-            multipleRowSelection={multipleRowSelection}></ModusTableHeaderCheckbox>
-
+          {rowSelection && (
+            <ModusTableHeaderCheckbox table={table} multipleRowSelection={multipleRowSelection}></ModusTableHeaderCheckbox>
+          )}
           {headerGroup.headers?.map((header) => {
+            const id = `${componentId}-${header.id}`;
             return (
               <ModusTableColumnHeader
+                id={id}
                 table={table}
                 header={header}
                 isNestedParentHeader={index < headerGroups.length - 1}

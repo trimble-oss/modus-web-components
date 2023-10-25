@@ -18,25 +18,12 @@ import {
 } from '../modus-table.constants';
 
 export type ModusTableRowData = RowData;
-
-export interface ManualPaginationOptions {
-  currentPageIndex: number;
-  currentPageSize: number;
-  pageCount: number;
-}
-
-export interface ModusTableRowSelectionOptions {
-  multiple?: boolean;
-  subRowSelection?: boolean;
-}
-
 export type ModusTableSortingState = SortingState;
 export type ModusTableExpandedState = ExpandedState;
 export type ModusTablePaginationState = PaginationState;
 export type ModusTableColumnSizingState = ColumnSizingState;
 export type ModusTableColumnVisibilityState = VisibilityState;
 export type ModusTableColumnOrderState = ColumnOrderState;
-
 export type ModusTableCellData = CellContext<unknown, unknown>;
 
 // Avoided using enum because it causes issues at runtime
@@ -53,10 +40,13 @@ export type ModusTableCellDateEditorArgs = { format: string };
 export type ModusTableCellDropdownEditorArgs = { options: unknown[] };
 export type ModusTableCellEditorArgs = ModusTableCellDropdownEditorArgs | ModusTableCellDateEditorArgs;
 
-export type ModusTableDataUpdaterProps = { rowId: string; accessorKey: string; newValue: string; oldValue?: string };
-
 export type ModusTableSortingFunction<TData extends RowData> = SortingFnOption<TData> | 'sortForHyperlink';
 
+export interface ManualPaginationOptions {
+  currentPageIndex: number;
+  currentPageSize: number;
+  pageCount: number;
+}
 export interface ModusTableColumn<TData extends RowData, TValue = unknown> {
   header: string;
   accessorKey: string;
@@ -76,11 +66,6 @@ export interface ModusTableColumn<TData extends RowData, TValue = unknown> {
   cellEditable?: boolean;
   cellEditorType?: ModusTableCellEditorType;
   cellEditorArgs?: ModusTableCellEditorArgs;
-
-  // editType?: ModusTableCellEditorType;
-  // dropdownValues?: unknown[];
-  // autocompleteValues?: string[];
-  // dateFormat?: string;
 }
 
 export interface ModusTableDisplayOptions {
@@ -101,4 +86,17 @@ export interface ModusTableCellLink {
   display: string;
   url: string;
   _type?: typeof COLUMN_DEF_DATATYPE_LINK;
+}
+
+export interface ModusTableCellValueChange {
+  row: unknown;
+  accessorKey: string;
+  newValue: string;
+  oldValue?: string;
+  data: unknown[];
+}
+
+export interface ModusTableRowSelectionOptions {
+  multiple?: boolean;
+  subRowSelection?: boolean;
 }

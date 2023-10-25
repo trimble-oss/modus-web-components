@@ -334,15 +334,15 @@ export declare interface ModusDataTable extends Components.ModusDataTable {
 
 
 @ProxyCmp({
-  inputs: ['allowedCharsRegex', 'altFormats', 'ariaLabel', 'autoFocusInput', 'disableValidation', 'disabled', 'errorText', 'fillerDate', 'format', 'helperText', 'label', 'placeholder', 'readOnly', 'required', 'showCalendarIcon', 'size', 'type', 'validText', 'value'],
-  methods: ['focusInput']
+  inputs: ['allowedCharsRegex', 'altFormats', 'ariaLabel', 'autoFocusInput', 'disableValidation', 'disabled', 'errorText', 'fillerDate', 'format', 'helperText', 'label', 'max', 'min', 'placeholder', 'readOnly', 'required', 'showCalendarIcon', 'size', 'type', 'validText', 'value'],
+  methods: ['focusInput', 'validate']
 })
 @Component({
   selector: 'modus-date-input',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['allowedCharsRegex', 'altFormats', 'ariaLabel', 'autoFocusInput', 'disableValidation', 'disabled', 'errorText', 'fillerDate', 'format', 'helperText', 'label', 'placeholder', 'readOnly', 'required', 'showCalendarIcon', 'size', 'type', 'validText', 'value'],
+  inputs: ['allowedCharsRegex', 'altFormats', 'ariaLabel', 'autoFocusInput', 'disableValidation', 'disabled', 'errorText', 'fillerDate', 'format', 'helperText', 'label', 'max', 'min', 'placeholder', 'readOnly', 'required', 'showCalendarIcon', 'size', 'type', 'validText', 'value'],
 })
 export class ModusDateInput {
   protected el: HTMLElement;
@@ -1118,11 +1118,12 @@ export class ModusTable {
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['cellLinkClick', 'columnOrderChange', 'columnSizingChange', 'columnVisibilityChange', 'rowExpanded', 'rowSelectionChange', 'rowUpdated', 'sortChange', 'paginationChange']);
+    proxyOutputs(this, this.el, ['cellValueChange', 'cellLinkClick', 'columnOrderChange', 'columnSizingChange', 'columnVisibilityChange', 'rowExpanded', 'rowSelectionChange', 'sortChange', 'paginationChange']);
   }
 }
 
 
+import type { ModusTableCellValueChange as IModusTableModusTableCellValueChange } from '@trimble-oss/modus-web-components';
 import type { ModusTableCellLink as IModusTableModusTableCellLink } from '@trimble-oss/modus-web-components';
 import type { ModusTableColumnOrderState as IModusTableModusTableColumnOrderState } from '@trimble-oss/modus-web-components';
 import type { ModusTableColumnSizingState as IModusTableModusTableColumnSizingState } from '@trimble-oss/modus-web-components';
@@ -1132,6 +1133,10 @@ import type { ModusTableSortingState as IModusTableModusTableSortingState } from
 import type { ModusTablePaginationState as IModusTableModusTablePaginationState } from '@trimble-oss/modus-web-components';
 
 export declare interface ModusTable extends Components.ModusTable {
+  /**
+   * Emits the cell value that was edited
+   */
+  cellValueChange: EventEmitter<CustomEvent<IModusTableModusTableCellValueChange>>;
   /**
    * Emits the link that was clicked
    */
@@ -1156,10 +1161,6 @@ export declare interface ModusTable extends Components.ModusTable {
    * Emits rows selected
    */
   rowSelectionChange: EventEmitter<CustomEvent<unknown>>;
-  /**
-   * Emits edited row data
-   */
-  rowUpdated: EventEmitter<CustomEvent<unknown>>;
   /**
    * Emits column sort order
    */
@@ -1194,14 +1195,14 @@ export declare interface ModusTableCellEditor extends Components.ModusTableCellE
 
 
 @ProxyCmp({
-  inputs: ['cell', 'cellIndex', 'linkClick', 'rowActions', 'valueChange']
+  inputs: ['cell', 'linkClick', 'rowActions', 'valueChange']
 })
 @Component({
   selector: 'modus-table-cell-main',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['cell', 'cellIndex', 'linkClick', 'rowActions', 'valueChange'],
+  inputs: ['cell', 'linkClick', 'rowActions', 'valueChange'],
 })
 export class ModusTableCellMain {
   protected el: HTMLElement;

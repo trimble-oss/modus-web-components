@@ -13,7 +13,7 @@ describe('modus-modal', () => {
         <div class="modus-modal overlay hidden" role="dialog" style="z-index: 1;">
             <div class="content">
                 <div id="startTrap" tabindex="0" aria-hidden="true"></div>
-                <div class="header">
+                 <header>
                   <div role="button" tabindex="0" aria-label="Close">
                       <svg class="icon-close" height="20" width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0)">
@@ -26,11 +26,13 @@ describe('modus-modal', () => {
                         </defs>
                       </svg>
                   </div>
-                </div>
+                </header>
                 <div class="body">
                   <slot></slot>
                 </div>
-                <div class="footer"></div>
+                <footer>
+                  <slot name="footerContent"></slot>
+                </footer>
                 <div id="endTrap" tabindex="0" aria-hidden="true"></div>
             </div>
           </div>

@@ -1,0 +1,21 @@
+name: Comment on new Issue
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  issue-close-require:
+    permissions:
+      issues: write
+    runs-on: ubuntu-latest
+    if: ${{ github.actor != 'coliff' && github.actor != 'egunther39' && github.actor != 'enowak1031' && github.actor != 'msankaran0712' && github.actor != 'soniakaukonen' && github.repository == 'trimble-oss/modus-web-components' }}
+    steps:
+      - name: awaiting reply
+        uses: actions-cool/issues-helper@v3
+        with:
+          actions: "create-comment"
+          body: |
+            Hello @${{ github.event.issue.user.login }}! Thanks for opening an issue. The Modus core team will get back to you soon (usually within 24-hours) and provide guidance on how to proceed. Contributors are welcome to participate in the discussion and provide their input on how to best solve the issue, and even submit a PR if they want to.
+
+            Please wait until the issue is ready to be worked on before submitting a PR, or you can reach out to the core team if it is time bound. For trivial things, or bugs that don't change the expected behaviors and UI, you can go ahead and make a PR.

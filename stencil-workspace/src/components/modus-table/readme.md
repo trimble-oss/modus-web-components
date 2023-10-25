@@ -36,13 +36,13 @@
 | Event                    | Description                           | Type                                                |
 | ------------------------ | ------------------------------------- | --------------------------------------------------- |
 | `cellLinkClick`          | Emits the link that was clicked       | `CustomEvent<ModusTableCellLink>`                   |
+| `cellValueChange`        | Emits the cell value that was edited  | `CustomEvent<ModusTableCellValueChange>`            |
 | `columnOrderChange`      | Emits columns in the updated order    | `CustomEvent<string[]>`                             |
 | `columnSizingChange`     | Emits latest column size              | `CustomEvent<{ [x: string]: number; }>`             |
 | `columnVisibilityChange` | Emits visibility state of each column | `CustomEvent<{ [x: string]: boolean; }>`            |
 | `paginationChange`       | Emits selected page index and size    | `CustomEvent<PaginationState>`                      |
 | `rowExpanded`            | Emits expanded state of the columns   | `CustomEvent<boolean \| { [x: string]: boolean; }>` |
 | `rowSelectionChange`     | Emits rows selected                   | `CustomEvent<unknown>`                              |
-| `rowUpdated`             | Emits edited row data                 | `CustomEvent<unknown>`                              |
 | `sortChange`             | Emits column sort order               | `CustomEvent<ColumnSort[]>`                         |
 
 
