@@ -73,7 +73,7 @@ export class ModusTableRowActionsMenu {
     const { x, y } = this.position;
     // TODO: we need to remove the 33% offset, which is a hack to get the menu to align with the row
     const style = {
-      transform: `translate(calc(${x}px + 33%), calc(${y}px))`,
+      transform: `translate(calc(${x}px + 19.5px), calc(${y}px))`,
     };
 
     return (
