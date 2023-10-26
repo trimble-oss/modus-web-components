@@ -61,7 +61,7 @@ export class ModusTableRowActionsMenu {
   }
 
   handleListItemKeydown(e: KeyboardEvent): void {
-    if (e.key.toLowerCase() === 'escape') {
+    if (e.key.toLowerCase() === 'escape' || e.key.toLowerCase() === 'enter') {
       this.isMenuOpen = false;
       e.preventDefault();
     }
