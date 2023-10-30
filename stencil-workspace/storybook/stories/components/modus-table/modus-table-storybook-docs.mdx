@@ -17,7 +17,6 @@ import { Story } from '@storybook/addon-docs';
 - [Column Resize](#column-resize)
 - [Column Reorder](#column-reorder)
 - [Pagination](#pagination)
-- [ManualPagination](#manual-pagination)
 - [Summary Row](#summary-row)
 - [Column Visibility](#column-visibility)
 - [Expandable Rows](#Expandable-rows)
@@ -293,20 +292,6 @@ Pagination allows users to navigate between pages
 - Modus Table uses `modus-pagination` component to navigate between pages.
 - Pagination can be enabled using the `pagination` prop. The `pageSizeList` takes an array for page size options.
 
-<Story id="components-table--pagination" height={'380px'} />
-
-### Manual Pagination
-
-Manual Pagination allows users to handle pagination in server-side mode.
-
-- The Modus Table utilizes the `modus-pagination` component for navigating between pages. Based on the properties initially set, pagination can be managed from the server side.
-- Manual Pagination can be enabled using the `manualPaginationOptions` prop.
-- The `currentPageIndex` takes a number to specify the current page number, indicating which page should appear as selected from the server side.
-- The `currentPageSize` takes a number to specify the current page view number, determining how many records the table will display from the server side.
-- The `pageCount` takes a number to specify the total number of records, in order to display the corresponding number of pages in the table.
-
-<Story id="components-table--manual-pagination" height={'380px'} />
-
 ### Summary Row
 
 User can opt for this summary row, which can be used as footer or a row to view total of column data.
@@ -405,6 +390,7 @@ Refer to the [Accessibility](#accessibility) section for how to use keyboard for
 ### Types
 
 ```ts
+type Modus
 type ModusTableRowData = unknown | object | any[];
 type ModusTableSortingState = ColumnSort {
     id: string;
@@ -429,6 +415,12 @@ type ModusTableCellDropdownEditorArgs = { options: unknown[] };
 type ModusTableCellEditorArgs = ModusTableCellDropdownEditorArgs | ModusTableCellDateEditorArgs;
 type ModusTableDataUpdaterProps = { rowId: string; accessorKey: string; newValue: string; oldValue?: string };
 type ModusTableSortingFunction<TData extends RowData> = SortingFnOption<TData> | 'sortForHyperlink';
+
+interface ManualPaginationOptions {
+  currentPageIndex: number;
+  currentPageSize: number;
+  pageCount: number;
+}
 
 interface ModusTableColumn<TData extends RowData, TValue = unknown> {
   header: string;

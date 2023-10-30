@@ -150,7 +150,12 @@ export class ModusTable {
   @Prop() manualPaginationOptions: ManualPaginationOptions;
   @Watch('manualPaginationOptions') onManualPaginationOptionsChange(
     newVal: ManualPaginationOptions,
+    oldVal: ManualPaginationOptions,
   ){
+    if(newVal.pageCount !== oldVal.pageCount){
+      this.tableCore.setOptions('pageCount', newVal.pageCount)
+    }
+    
     this.manualPaginationOptions = { ...newVal }
   }
 

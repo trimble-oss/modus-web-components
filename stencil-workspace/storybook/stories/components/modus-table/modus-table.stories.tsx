@@ -514,9 +514,9 @@ ManualPagination.args = {
   manualPaginationOptions: {
     currentPageIndex: 15, 
     currentPageSize: 5, 
-    pageCount: Math.ceil(100/5)
+    pageCount: 2
   },
-  data: makeData(15), pageSizeList: [ 5, 10, 50] };
+  data: makeData(12), pageSizeList: [ 5, 10, 50] };
 
 export const SummaryRow = Template.bind({});
 SummaryRow.args = { ...DefaultArgs, summaryRow: true };
