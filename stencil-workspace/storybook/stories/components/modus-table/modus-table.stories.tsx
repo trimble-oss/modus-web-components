@@ -47,7 +47,7 @@ function makeData(...lens): object[] {
   return makeDataLevel();
 }
 
-function initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions) {
+function initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, manualPaginationOptions) {
   const tag = document.createElement('script');
   tag.innerHTML = `
   document.querySelector('modus-table').columns = ${JSON.stringify(columns)};
@@ -56,6 +56,7 @@ function initializeTable(columns, data, pageSizeList, toolbarOptions, displayOpt
   document.querySelector('modus-table').toolbarOptions = ${JSON.stringify(toolbarOptions)};
   document.querySelector('modus-table').displayOptions = ${JSON.stringify(displayOptions)};
   document.querySelector('modus-table').rowSelectionOptions = ${JSON.stringify(rowSelectionOptions)};
+  document.querySelector('modus-table').manualPaginationOptions = ${JSON.stringify(manualPaginationOptions)};
   `;
 
   return tag;
@@ -360,7 +361,7 @@ export default {
       type: { required: false },
     },
     manualPaginationOptions: {
-      name: 'paginationOptions',
+      name: 'manualPaginationOptions',
       description: 'To switch to manual pagiantion mode.',
       table:{
         type: { summary: 'ManualPaginationOptions'}
@@ -405,7 +406,7 @@ const Template = ({
   maxWidth,
   rowSelection,
   rowSelectionOptions,
-  manualPagination
+  manualPaginationOptions
 }) => html`
   <div style="width: 950px">
     <modus-table
@@ -416,7 +417,6 @@ const Template = ({
       pagination="${pagination}"
       show-sort-icon-on-hover="${showSortIconOnHover}"
       summary-row="${summaryRow}"
-      manual-pagination="${manualPagination}"
       full-width="${fullWidth}"
       toolbar="${toolbar}"
       rows-expandable="${rowsExpandable}"
@@ -424,7 +424,7 @@ const Template = ({
       max-width="${maxWidth}"
       row-selection="${rowSelection}" />
   </div>
-  ${initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions)}
+  ${initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, manualPaginationOptions)}
 `;
 
 export const Default = Template.bind({});
@@ -496,7 +496,7 @@ ValueFormatter.args = {
   maxHeight: '',
   maxWidth: '',
   rowSelection: false,
-  rowSelectionOptions: {}
+  rowSelectionOptions: {},
 };
 const valueFormatterTable = (pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions) => {
   const tag = document.createElement('script');
@@ -520,6 +520,17 @@ ColumnResize.args = { ...DefaultArgs, columnResize: true };
 
 export const Pagination = Template.bind({});
 Pagination.args = { ...DefaultArgs, pagination: true, data: makeData(50), pageSizeList: [5, 10, 50] };
+
+export const ManualPagination = Template.bind({})
+ManualPagination.args = { 
+  ...DefaultArgs, 
+  pagination: true, 
+  manualPaginationOptions: {
+    currentPageIndex: 15, 
+    currentPageSize: 5, 
+    pageCount: Math.ceil(100/5)
+  },
+  data: makeData(15), pageSizeList: [ 5, 10, 50] };
 
 export const SummaryRow = Template.bind({});
 SummaryRow.args = { ...DefaultArgs, summaryRow: true };
@@ -583,86 +594,3 @@ rowSelection: true, rowSelectionOptions: {
   subRowSelection: true
 }
 };
-
-function initializeManualTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, manualPaginationOptions) {
-  const tag = document.createElement('script');
-  tag.innerHTML = `
-  document.querySelector('modus-table').columns = ${JSON.stringify(columns)};
-  document.querySelector('modus-table').data = ${JSON.stringify(data)};
-  document.querySelector('modus-table').pageSizeList = ${JSON.stringify(pageSizeList)};
-  document.querySelector('modus-table').toolbarOptions = ${JSON.stringify(toolbarOptions)};
-  document.querySelector('modus-table').displayOptions = ${JSON.stringify(displayOptions)};
-  document.querySelector('modus-table').rowSelectionOptions = ${JSON.stringify(rowSelectionOptions)};
-  document.querySelector('modus-table').manualPaginationOptions = ${JSON.stringify(manualPaginationOptions)};
-  `;
-  return tag;
-}
-
-const ManualPaginationTemplate = ({
-  hover,
-  sort,
-  columnResize,
-  columnReorder,
-  pagination,
-  showSortIconOnHover,
-  summaryRow,
-  fullWidth,
-  pageSizeList,
-  toolbar,
-  columns,
-  data,
-  toolbarOptions,
-  displayOptions,
-  rowsExpandable,
-  maxHeight,
-  maxWidth,
-  rowSelection,
-  rowSelectionOptions,
-  manualPaginationOptions,
-}) => html`
-  <div style="width: 950px">
-    <modus-table
-      hover="${hover}"
-      sort="${sort}"
-      column-resize="${columnResize}"
-      column-reorder="${columnReorder}"
-      pagination="${pagination}"
-      show-sort-icon-on-hover="${showSortIconOnHover}"
-      summary-row="${summaryRow}"
-      full-width="${fullWidth}"
-      toolbar="${toolbar}"
-      rows-expandable="${rowsExpandable}"
-      max-height="${maxHeight}"
-      max-width="${maxWidth}"
-      row-selection="${rowSelection}" />
-  </div>
-  ${initializeManualTable(columns,data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, manualPaginationOptions)}
-  ${paginationListening()}
-`;
-
-const TOTAL_RECORDS = 100;
-const paginationListening = () => {
-  const tag = document.createElement('script');
-  tag.innerHTML = `
-   var modusTableRef = document.querySelector('modus-table');
-
-   modusTableRef.addEventListener('paginationChange', (ev)=>{
-    modusTableRef.manualPaginationOptions.currentPageSize = ev.detail.pageSize;
-    modusTableRef.manualPaginationOptions.pageCount = Math.ceil(${TOTAL_RECORDS}/ev.detail.pageSize);
-    modusTableRef.manualPaginationOptions.currentPageIndex = ev.detail.pageIndex + 1;
-   });  
-  `;
-  return tag;
-};
-
-export const ManualPagination = ManualPaginationTemplate.bind({})
-
-ManualPagination.args = { 
-  ...DefaultArgs, 
-  pagination: true, 
-  manualPaginationOptions: {
-    currentPageIndex: 15, 
-    currentPageSize: 5, 
-    pageCount: Math.ceil(TOTAL_RECORDS/5)
-  },
-  data: makeData(15), pageSizeList: [ 5, 10, 50] };

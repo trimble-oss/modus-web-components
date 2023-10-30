@@ -58,7 +58,7 @@ import {
   ManualPaginationOptions,
 } from './models/modus-table.models';
 import { ModusTableColumnDropIndicator, ModusTableColumnDragItem } from './parts/columnHeader/modus-table-column-drag-item';
-import { ModusTablePagination } from './parts/modus-table-pagination';
+import { ModusTablePagination, ModusTablePaginationProps } from './parts/modus-table-pagination';
 import { ModusTableFooter } from './parts/modus-table-footer';
 import { TableHeaderDragDrop } from './utilities/table-header-drag-drop.utility';
 import ModusTableCore from './modus-table.core';
@@ -148,6 +148,11 @@ export class ModusTable {
 
   /** (Optional) To set modus-table in manual mode. */
   @Prop() manualPaginationOptions: ManualPaginationOptions;
+  @Watch('manualPaginationOptions') onManualPaginationOptionsChange(
+    newVal: ManualPaginationOptions,
+  ){
+    this.manualPaginationOptions = { ...newVal }
+  }
 
   /** (Optional) To control multiple row selection. */
   @Prop() rowSelectionOptions: ModusTableRowSelectionOptions = {
@@ -559,22 +564,24 @@ export class ModusTable {
   }
 
   renderPagination(table: Table<unknown>): JSX.Element | null {
-    const hasManualMode = this.pagination && this.manualPaginationOptions;
-
-    const paginationProps = {
-      ...(hasManualMode) && {
-        table,
-        totalCount: this.manualPaginationOptions?.pageCount || 0,
-        currentPageSize: this.manualPaginationOptions?.currentPageSize || 0,
-        currentPageIndex: this.manualPaginationOptions?.currentPageIndex || 0,
-        pageSizeList: this.pageSizeList,
-      },
-      ...(!hasManualMode) && {
-        table,
-        totalCount: this.data?.length || 0,
-        pageSizeList: this.pageSizeList
-      }
+    if (!this.pagination) {
+      return null;
     }
+  
+    let paginationProps : ModusTablePaginationProps = {
+      table,
+      pageSizeList: this.pageSizeList,
+      totalCount: this.data.length ?? 0
+    };
+  
+    if (this.manualPaginationOptions) {
+      paginationProps = {
+        ...paginationProps,
+        totalCount: this.manualPaginationOptions.pageCount ?? 0,
+        currentPageSize: this.manualPaginationOptions.currentPageSize ?? 0,
+        currentPageIndex: this.manualPaginationOptions.currentPageIndex ?? 0,
+      };
+    } 
 
     return this.pagination && (<ModusTablePagination {...paginationProps} />);
   }
