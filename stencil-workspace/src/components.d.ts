@@ -14,7 +14,7 @@ import { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, 
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-import { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTablePaginationState, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+import { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTablePaginationState, ModusTableRowActions, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 import { Cell, Column, Table } from "@tanstack/table-core";
 import { ModusTableCellEdited } from "./components/modus-table/parts/modus-table-body";
 import { Tab } from "./components/modus-tabs/modus-tabs";
@@ -29,7 +29,7 @@ export { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, 
 export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 export { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 export { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-export { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTablePaginationState, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+export { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTablePaginationState, ModusTableRowActions, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 export { Cell, Column, Table } from "@tanstack/table-core";
 export { ModusTableCellEdited } from "./components/modus-table/parts/modus-table-body";
 export { Tab } from "./components/modus-tabs/modus-tabs";
@@ -1095,7 +1095,7 @@ export namespace Components {
     interface ModusTableCellMain {
         "cell": Cell<unknown, unknown>;
         "linkClick": (link: ModusTableCellLink) => void;
-        "rowActions": RowActions;
+        "rowActions": ModusTableRowActions;
         "valueChange": (props: ModusTableCellEdited) => void;
     }
     interface ModusTableColumnsVisibility {
@@ -3158,7 +3158,7 @@ declare namespace LocalJSX {
     interface ModusTableCellMain {
         "cell"?: Cell<unknown, unknown>;
         "linkClick"?: (link: ModusTableCellLink) => void;
-        "rowActions"?: RowActions;
+        "rowActions"?: ModusTableRowActions;
         "valueChange"?: (props: ModusTableCellEdited) => void;
     }
     interface ModusTableColumnsVisibility {

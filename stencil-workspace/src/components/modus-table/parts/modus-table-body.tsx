@@ -3,10 +3,9 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Table, Updater } from '@tanstack/table-core';
-import { ModusTableCellLink, ModusTableCellValueChange } from '../models/modus-table.models';
+import { ModusTableCellLink, ModusTableCellValueChange, ModusTableRowActions } from '../models/modus-table.models';
 import { ModusTableCell } from './cell/modus-table-cell';
 import { ModusTableCellCheckbox } from './row/selection/modus-table-cell-checkbox';
-import RowActions from '../models/row-actions.model';
 import { COLUMN_DEF_SUB_ROWS_KEY } from '../modus-table.constants';
 
 interface ModusTableBodyProps {
@@ -14,7 +13,7 @@ interface ModusTableBodyProps {
   hover: boolean;
   multipleRowSelection: boolean;
   rowSelection: boolean;
-  rowActions: RowActions;
+  rowActions: ModusTableRowActions;
   dataUpdater: (updater: Updater<unknown>, context: ModusTableCellEdited) => void;
   cellLinkClick: (link: ModusTableCellLink) => void;
 }

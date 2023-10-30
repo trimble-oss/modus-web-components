@@ -3,13 +3,12 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Cell } from '@tanstack/table-core';
-import { ModusTableCellLink } from '../../models/modus-table.models';
-import RowActions from '../../models/row-actions.model';
+import { ModusTableCellLink, ModusTableRowActions } from '../../models/modus-table.models';
 import { ModusTableCellEdited } from '../modus-table-body';
 
 interface ModusTableCellProps {
   cell: Cell<unknown, unknown>;
-  rowActions: RowActions;
+  rowActions: ModusTableRowActions;
   linkClick: (link: ModusTableCellLink) => void;
   valueChange: (props: ModusTableCellEdited) => void;
 }
