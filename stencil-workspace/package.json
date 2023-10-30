@@ -39,7 +39,7 @@
     "start-storybook": "npm run build && cd storybook && npm run storybook"
   },
   "dependencies": {
-    "@stencil/core": "^3.3.0",
+    "@stencil/core": "^4.6.0",
     "@tanstack/table-core": "^8.8.5"
   },
   "devDependencies": {
