@@ -82,6 +82,10 @@ export interface ModusTableColumnsVisibilityOptions {
   requiredColumns?: string[];
 }
 
+export interface ModusTableRowActions {
+  expandable: boolean;
+}
+
 export interface ModusTableCellLink {
   display: string;
   url: string;
