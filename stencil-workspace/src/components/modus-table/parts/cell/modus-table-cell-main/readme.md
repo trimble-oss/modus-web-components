@@ -7,13 +7,12 @@
 
 ## Properties
 
-| Property      | Attribute    | Description | Type                                    | Default     |
-| ------------- | ------------ | ----------- | --------------------------------------- | ----------- |
-| `cell`        | --           |             | `Cell<unknown, unknown>`                | `undefined` |
-| `cellIndex`   | `cell-index` |             | `number`                                | `undefined` |
-| `linkClick`   | --           |             | `(link: ModusTableCellLink) => void`    | `undefined` |
-| `rowActions`  | --           |             | `RowActions`                            | `undefined` |
-| `valueChange` | --           |             | `(props: ModusTableCellEdited) => void` | `undefined` |
+| Property      | Attribute | Description | Type                                    | Default     |
+| ------------- | --------- | ----------- | --------------------------------------- | ----------- |
+| `cell`        | --        |             | `Cell<unknown, unknown>`                | `undefined` |
+| `linkClick`   | --        |             | `(link: ModusTableCellLink) => void`    | `undefined` |
+| `rowActions`  | --        |             | `RowActions`                            | `undefined` |
+| `valueChange` | --        |             | `(props: ModusTableCellEdited) => void` | `undefined` |
 
 
 ## Dependencies

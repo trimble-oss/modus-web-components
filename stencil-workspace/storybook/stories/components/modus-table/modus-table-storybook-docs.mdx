@@ -125,7 +125,6 @@ This displays the highlighted row where the cursor is currently located.
 
 - Hover is disable by default, set `hover` to `true` to enable hover.
 
-<Story id="components-table--hover" height={'350px'} />
 
 ### Borderless
 
@@ -135,7 +134,6 @@ Table has two views one with border and another is borderless.
 - To eliminate the outer table border, set `borderless` to `true`.
 - Set `cellborderless` to `true` remove the innter table border i.e. for the border for cells.
 
-<Story id="components-table--borderless" height={'350px'} />
 
 ### Sorting
 
@@ -146,7 +144,6 @@ Users can arrange data in a table by sorting it in either ascending or descendin
 - When enabled, the sort icon's initial click will sort in ascending order, while its second click will sort in descending order.
 - Set `showSortIconOnHover` to `true` to enable sort on hover as well.
 
-<Story id="components-table--sorting" height={'350px'} />
 
 ### Value Formatter
 
@@ -185,7 +182,6 @@ User can take the data of a cell and apply any string-based formatting logic.
   // NOTE: One can use their own custom functions to format data as per their requirements.
 ```
 
-<Story id="components-table--value-formatter" height={'350px'} />
 
 ### Hyperlink
 
@@ -195,7 +191,6 @@ User can display hyperlink in a table column.
 - `_type: ModusTableColumnDataType.Link` is used to override the column data type in order to display a hyperlink only in a specific cell and not on the entire column.
 - As a link is an object, the default sorting is ineffective. We must pass `sortingFn:'sortForHyperlink'` along with the column information in order to sort a column with the `ModusTableCellLink` datatype or if '\_type' is used to override the datatype.
 
-<Story id="components-table--hyperlink" height={'350px'} />
 
 ### Column Resize
 
@@ -205,7 +200,6 @@ The column sizing feature allows users to dynamically change the width of all co
 - By setting `fullWidth` to true, a column can be resized with table responsiveness and other columns will be adjusted to fit within the confines of the table.
 - Optionally you can specify the width of each column using `size`, `minSize` and `maxSize` to limit the resizing of a column to a specific value.
 
-<Story id="components-table--column-resize" height={'350px'} />
 
 ```html
 <div style="width: 950px">
@@ -291,16 +285,12 @@ Users can rearrange the column headers.
 
 - Column reorder is disabled by default. The way to activate it is to set `columnReorder` to `true`.
 
-<Story id="components-table--column-reorder" height={'350px'} />
-
 ### Pagination
 
 Pagination allows users to navigate between pages
 
 - Modus Table uses `modus-pagination` component to navigate between pages.
 - Pagination can be enabled using the `pagination` prop. The `pageSizeList` takes an array for page size options.
-
-<Story id="components-table--pagination" height={'380px'} />
 
 ### Summary Row
 
@@ -310,13 +300,9 @@ User can opt for this summary row, which can be used as footer or a row to view 
 - Pass any text in `footer` property of `columns` to be display in the summary row.
 - Set `showTotal` as `true` in the `columns` array for the specific column to display the total value that column.
 
-<Story id="components-table--summary-row" height={'480px'} />
-
 ### Column Visibility
 
 A toolbar is used to perform operations like hiding/showing the columns. It is enabled by `toolbar` and is shown above the table. By setting `toolbarOptions.columnsVisibility` a meatball icon appears at the right corner, and clicking on it shows a dropdown menu with columns for selection. Additionally, users can use `slot='groupLeft'` and `slot='groupRight'` to add custom content to the toolbar.
-
-<Story id="components-table--column-visibility" height={'480px'} />
 
 ```html
 <div style="width: 950px">
@@ -369,16 +355,12 @@ User can expand rows to display as child/sub row data.
 - Expandable row is disabled by default. Set `rowsExpandable` to `true` to enable it.
 - Pass data to `subRows` property in `columns`.
 
-<Story id="components-table--expandable-rows" height={'480px'} />
-
 ### Checkbox Row Selection
 
 To select rows, users can use the checkbox provided on each row. Normally, the Modus Table permits selecting only one row at a time, but this can be modified to allow multiple selections by using `rowSelectionOptions` option.
 
   - To enable multiple row selection, set `multiple` to `true`.
   - Sub-rows will also be selected if the parent is selected by setting `subRowSelection` to `true`.
-
-<Story id="components-table--checkbox-row-selection" height={'480px'} />
 
 ### Inline Editing
 
@@ -404,8 +386,6 @@ Refer to the [Accessibility](#accessibility) section for how to use keyboard for
     },
   },
 ```
-
-<Story id="components-table--large-dataset" height={'480px'} />
 
 ### Types
 

@@ -56,7 +56,7 @@ export class ModusAlert {
     const iconSize = '24';
 
     return (
-      <div aria-label={this.ariaLabel} class={className} role="alert" tabIndex={0}>
+      <div aria-label={this.ariaLabel} class={className} role="alert">
         {this.type === 'error' ? <IconError size={iconSize} /> : null}
         {this.infoTypes.includes(this.type) ? <IconInfo size={iconSize} /> : null}
         {this.type === 'success' ? <IconCheckCircle size={iconSize} /> : null}
@@ -66,7 +66,15 @@ export class ModusAlert {
           <slot></slot>
         </div>
 
-        {this.dismissible ? <IconClose size="18" onClick={() => this.dismissClick.emit()} /> : null}
+        {this.dismissible ? (
+          <div
+            class="icon-close-container"
+            tabIndex={0}
+            onClick={() => this.dismissClick.emit()}
+            onKeyDown={(e) => e.key.toUpperCase() === 'ENTER' && this.dismissClick.emit()}>
+            <IconClose size="18" />
+          </div>
+        ) : null}
       </div>
     );
   }

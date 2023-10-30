@@ -120,7 +120,7 @@ export class ModusAccordionItem {
           class={headerClass}
           onClick={() => this.handleHeaderClick()}
           onKeyDown={(event) => this.handleKeydown(event)}
-          tabIndex={0}>
+          tabIndex={this.disabled ? -1 : 0}>
           <span class="title">{this.headerText}</span>
           {
             <div

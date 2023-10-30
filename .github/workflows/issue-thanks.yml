@@ -9,7 +9,7 @@ jobs:
     permissions:
       issues: write
     runs-on: ubuntu-latest
-    if: github.repository == 'coliff/gmail-avatars-chrome-extension'
+    if: ${{ github.actor != 'coliff' && github.actor != 'egunther39' && github.actor != 'enowak1031' && github.actor != 'msankaran0712' && github.actor != 'soniakaukonen' && github.repository == 'trimble-oss/modus-web-components' }}
     steps:
       - name: awaiting reply
         uses: actions-cool/issues-helper@v3

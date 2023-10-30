@@ -78,7 +78,7 @@ describe('modus-alert', () => {
 
     await page.setContent('<modus-alert dismissible></modus-alert>');
     const dismissClick = await page.spyOnEvent('dismissClick');
-    const element = await page.find('modus-alert >>> svg.icon-close');
+    const element = await page.find('modus-alert >>> .icon-close-container');
 
     await element.click();
     await page.waitForChanges();

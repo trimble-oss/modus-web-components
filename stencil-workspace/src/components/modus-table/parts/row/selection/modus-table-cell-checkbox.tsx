@@ -27,9 +27,8 @@ export const ModusTableCellCheckbox: FunctionalComponent<ModusTableCellCheckboxP
     }
 
     NavigateTableCells({
-      key: e.key,
+      eventKey: e.key,
       cellElement: cellEl,
-      cellIndex: -1,
     });
   }
   return (
