@@ -11,7 +11,7 @@
 | ------------- | --------- | ----------- | --------------------------------------- | ----------- |
 | `cell`        | --        |             | `Cell<unknown, unknown>`                | `undefined` |
 | `linkClick`   | --        |             | `(link: ModusTableCellLink) => void`    | `undefined` |
-| `rowActions`  | --        |             | `RowActions`                            | `undefined` |
+| `rowActions`  | --        |             | `ModusTableRowActions`                  | `undefined` |
 | `valueChange` | --        |             | `(props: ModusTableCellEdited) => void` | `undefined` |
 
 

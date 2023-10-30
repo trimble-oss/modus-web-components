@@ -22,6 +22,7 @@
     "listbox",
     "maxvalue",
     "minvalue",
+    "mnpcod",
     "Modernizr",
     "navs",
     "nosniff",
@@ -44,6 +45,7 @@
     "trimble",
     "tweety",
     "valuenow",
+    "xcuserstate",
     "yxxx"
   ],
   "language": "en-US",
