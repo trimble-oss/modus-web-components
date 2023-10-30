@@ -41,7 +41,7 @@ export class ModusListItem {
       this.selected ? 'selected' : ''
     } ${this.borderless ? 'borderless' : ''}`;
     const iconCheckSize = this.size === 'condensed' ? '18' : '22';
-    const iconSize = '24';
+    const iconSize = '16';
 
     return (
       <li class={containerClass} onClick={() => (!this.disabled ? this.itemClick.emit() : null)}>
