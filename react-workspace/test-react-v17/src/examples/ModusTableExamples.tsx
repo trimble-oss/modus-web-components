@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   ModusTableColumn,
-  ModusTableColumnDataType,
+  ModusTableColumnDataType, // eslint-disable-line
   ModusTableColumnsVisibilityOptions,
   ModusTableDisplayOptions,
   ModusTableRowSelectionOptions,
