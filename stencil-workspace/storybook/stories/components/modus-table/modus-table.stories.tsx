@@ -92,7 +92,6 @@ const DefaultColumns = [
     size: 150,
     minSize: 80,
     footer: 'Total',
-    cellEditable:true,
   },
   {
     header: 'Last Name',
@@ -101,7 +100,6 @@ const DefaultColumns = [
     dataType: 'text',
     size: 150,
     minSize: 80,
-    cellEditable:true,
   },
   {
     header: 'Age',
@@ -110,7 +108,6 @@ const DefaultColumns = [
     dataType: 'integer',
     size: 80,
     minSize: 60,
-    cellEditable:true,
   },
   {
     header: 'Visits',
@@ -120,7 +117,6 @@ const DefaultColumns = [
     maxSize: 80,
     showTotal: true,
     minSize: 80,
-    cellEditable:true,
   },
   {
     header: 'Email',
@@ -136,15 +132,6 @@ const DefaultColumns = [
     id: 'status',
     dataType: 'text',
     minSize: 80,
-    cellEditable:true,
-    cellEditorType: 'dropdown',
-    cellEditorArgs: {
-      options:[
-      { display: 'Verified' },
-      { display: 'Pending' },
-      { display: 'Rejected' },
-      ]
-    },
   },
   {
     header: 'Profile Progress',
@@ -152,7 +139,6 @@ const DefaultColumns = [
     id: 'progress',
     dataType: 'integer',
     minSize: 100,
-    cellEditable:true,
   },
   {
     header: 'Created At',
@@ -505,9 +491,9 @@ const valueFormatterTable = (pageSizeList, toolbarOptions, displayOptions, rowSe
    document.querySelector('modus-table').data = [{ "firstName": "Chaim", "lastName": "Lubowitz", "age": 30, "amount": 330160, "progress": 99, "status": "single", "createdAt": "2002-11-19T12:48:51.739Z" }, { "firstName": "Vicky", "lastName": "Lehner", "age": 2, "amount": 41900, "progress": 36, "status": "single", "createdAt": "2003-10-02T12:48:51.739Z" }, { "firstName": "Nellie", "lastName": "Leuschke", "age": 15, "amount": 883112, "progress": 68, "status": "single", "createdAt": "2004-09-21T12:48:51.739Z" }, { "firstName": "Judy", "lastName": "Ritchie", "age": 3, "amount": 900293, "progress": 10, "status": "relationship", "createdAt": "2005-08-11T12:48:51.739Z" }, { "firstName": "Hertha", "lastName": "Bradtke", "age": 19, "amount": 112116, "progress": 87, "status": "relationship", "createdAt": "2006-07-13T12:48:51.739Z" }];
 
    document.querySelector('modus-table').pageSizeList = ${JSON.stringify(pageSizeList)};
-   document.querySelector('modus-table').toolbarOptions = ${JSON.stringify(toolbarOptions)};
-   document.querySelector('modus-table').displayOptions = ${JSON.stringify(displayOptions)};
-   document.querySelector('modus-table').rowSelectionOptions = ${JSON.stringify(rowSelectionOptions)};
+  document.querySelector('modus-table').toolbarOptions = ${JSON.stringify(toolbarOptions)};
+  document.querySelector('modus-table').displayOptions = ${JSON.stringify(displayOptions)};
+  document.querySelector('modus-table').rowSelectionOptions = ${JSON.stringify(rowSelectionOptions)};
   `;
   return tag;
 };
