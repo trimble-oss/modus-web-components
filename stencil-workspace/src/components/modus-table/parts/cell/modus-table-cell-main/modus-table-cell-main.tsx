@@ -9,7 +9,7 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Cell, Row } from '@tanstack/table-core';
-import { ModusTableCellEditorArgs, ModusTableCellLink } from '../../../models/modus-table.models';
+import { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableRowActions } from '../../../models/modus-table.models';
 import {
   COLUMN_DEF_DATATYPE_KEY,
   COLUMN_DEF_DATATYPE_INTEGER,
@@ -25,7 +25,6 @@ import ModusTableCellExpandIcons from '../modus-table-cell-expand-icons';
 import NavigateTableCells from '../../../utilities/table-cell-navigation.utility';
 import { CellFormatter } from '../../../utilities/table-cell-formatter.utility';
 import { ModusTableCellLinkElement } from '../modus-table-cell-link-element';
-import RowActions from '../../../models/row-actions.model';
 import { ModusTableCellEdited } from '../../modus-table-body';
 
 @Component({
@@ -34,7 +33,7 @@ import { ModusTableCellEdited } from '../../modus-table-body';
 export class ModusTableCellMain {
   @Element() el: HTMLElement;
   @Prop() cell: Cell<unknown, unknown>;
-  @Prop() rowActions: RowActions;
+  @Prop() rowActions: ModusTableRowActions;
   @Prop() valueChange: (props: ModusTableCellEdited) => void;
   @Prop() linkClick: (link: ModusTableCellLink) => void;
 

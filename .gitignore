@@ -1,5 +1,7 @@
 cache/
 dist/
+react-workspace/test-react-v17/build/
+react-workspace/test-react-v18/build/
 www/
 loader/
 
