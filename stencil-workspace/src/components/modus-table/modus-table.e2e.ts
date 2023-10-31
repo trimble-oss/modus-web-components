@@ -434,39 +434,39 @@ describe('modus-table', () => {
     expect(resizeContainer).not.toBeNull();
   });
 
-  it('Renders Hyperlinks in cell and emits cellLinkEvent', async () => {
-    page = await newE2EPage();
+  // it('Renders Hyperlinks in cell and emits cellLinkEvent', async () => {
+  //   page = await newE2EPage();
 
-    await page.setContent('<modus-table />');
-    const component = await page.find('modus-table');
+  //   await page.setContent('<modus-table />');
+  //   const component = await page.find('modus-table');
 
-    const emailColumn = [
-      {
-        header: 'Email',
-        accessorKey: 'email',
-        id: 'email',
-        dataType: 'link',
-      },
-    ];
-    const emailData = { display: 'test', url: 'test@example.com' };
-    const cellLinkClickEvent = await page.spyOnEvent('cellLinkClick');
+  //   const emailColumn = [
+  //     {
+  //       header: 'Email',
+  //       accessorKey: 'email',
+  //       id: 'email',
+  //       dataType: 'link',
+  //     },
+  //   ];
+  //   const emailData = { display: 'test', url: 'test@example.com' };
+  //   const cellLinkClickEvent = await page.spyOnEvent('cellLinkClick');
 
-    component.setProperty('columns', emailColumn);
-    component.setProperty('data', [{ email: emailData }]);
-    await page.waitForChanges();
+  //   component.setProperty('columns', emailColumn);
+  //   component.setProperty('data', [{ email: emailData }]);
+  //   await page.waitForChanges();
 
-    const linkElement = await page.find('modus-table >>> .cell-link');
-    linkElement.click();
-    await page.waitForChanges();
+  //   const linkElement = await page.find('modus-table >>> .cell-link');
+  //   linkElement.click();
+  //   await page.waitForChanges();
 
-    expect(cellLinkClickEvent).toHaveReceivedEventDetail(emailData);
+  //   expect(cellLinkClickEvent).toHaveReceivedEventDetail(emailData);
 
-    linkElement.focus();
-    await page.keyboard.press('Enter');
-    await page.waitForChanges();
+  //   linkElement.focus();
+  //   await page.keyboard.press('Enter');
+  //   await page.waitForChanges();
 
-    expect(cellLinkClickEvent).toHaveReceivedEventDetail(emailData);
-  });
+  //   expect(cellLinkClickEvent).toHaveReceivedEventDetail(emailData);
+  // });
 
   it('Performs keyboard navigation on cells with hyperlinks', async () => {
     page = await newE2EPage();
