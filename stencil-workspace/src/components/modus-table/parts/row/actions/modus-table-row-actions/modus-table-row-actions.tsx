@@ -81,7 +81,7 @@ export class ModusTableRowActions {
               size="small"
               disabled={disabled}
               onKeyDown={(e) => this.handleActionButtonKeydown(e, id)}
-              onClick={(e) => (!disabled ? this.handleActionButtonClick(e, id) : e.preventDefault())}></modus-button>
+              onButtonClick={(e) => (!disabled ? this.handleActionButtonClick(e, id) : e.preventDefault())}></modus-button>
           );
         })}
 
@@ -95,7 +95,7 @@ export class ModusTableRowActions {
               icon-only="vertical-ellipsis"
               size="small"
               onKeyDown={(e) => this.handleMoreButtonKeydown(e, overflowMenu)}
-              onClick={(e) => this.handleMoreButtonClick(e, overflowMenu)}></modus-button>
+              onButtonClick={(e) => this.handleMoreButtonClick(e, overflowMenu)}></modus-button>
           </Fragment>
         )}
       </Host>

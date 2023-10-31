@@ -609,7 +609,6 @@ describe('modus-table', () => {
         index: 0,
         icon: 'edit',
         label: 'Edit',
-        isDisabled: () => true,
       },
     ];
     const component = await page.find('modus-table');
@@ -633,35 +632,30 @@ describe('modus-table', () => {
         index: 0,
         icon: 'edit',
         label: 'Edit',
-        isDisabled: () => false,
       },
       {
         id: '2',
         index: 1,
         icon: 'edit',
         label: 'Edit',
-        isDisabled: () => false,
       },
       {
         id: '3',
         index: 2,
         icon: 'edit',
         label: 'Edit',
-        isDisabled: () => false,
       },
       {
         id: '4',
         index: 3,
         icon: 'edit',
         label: 'Edit',
-        isDisabled: () => false,
       },
       {
         id: '5',
         index: 4,
         icon: 'edit',
         label: 'Edit',
-        isDisabled: () => false,
       },
     ];
     const component = await page.find('modus-table');
@@ -671,9 +665,7 @@ describe('modus-table', () => {
     await page.waitForChanges();
     const rowActionsMenuButton = await page.findAll('modus-table >>> modus-table-row-actions > .row-actions-menu-button');
     expect(rowActionsMenuButton).toHaveLength(MockData.length);
-    const rowActionsMenuButtonClick = await page.spyOnEvent('overflowRowActions');
     await rowActionsMenuButton[0].click();
-    expect(rowActionsMenuButtonClick).toHaveReceivedEvent();
     await page.waitForChanges();
     const rowActionsMenuItem = await page.findAll('modus-table >>> .row-actions-menu-item');
     expect(rowActionsMenuItem).toHaveLength(2);

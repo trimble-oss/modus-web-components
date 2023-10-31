@@ -79,7 +79,7 @@ export class ModusTableRowActionsMenu {
   }
 
   handleRowActionButtonClick({ detail: { actionId } }: CustomEvent<ModusTableRowActionClick>): void {
-    const rowActionButtonClicked = this.overFlowMenu.find((action) => action.id !== actionId);
+    const rowActionButtonClicked = this.overFlowMenu && this.overFlowMenu.find((action) => action.id !== actionId);
     if (rowActionButtonClicked) this.isMenuOpen = false;
   }
 
