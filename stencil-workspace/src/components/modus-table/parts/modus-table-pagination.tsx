@@ -2,20 +2,17 @@ import {
   FunctionalComponent,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
-import { Table } from '@tanstack/table-core';
 import { PAGINATION_PAGEVIEW_TEXT, PAGINATION_SUMMARY_TEXT } from '../modus-table.constants';
+import TableContext from '../models/table-context.model';
 
 interface ModusTablePaginationProps {
-  table: Table<unknown>;
-  totalCount: number;
-  pageSizeList: number[];
+  context: TableContext;
 }
 
 export const ModusTablePagination: FunctionalComponent<ModusTablePaginationProps> = ({
-  table,
-  totalCount,
-  pageSizeList,
+  context: { tableInstance: table, pageSizeList, data },
 }) => {
+  const totalCount = data.length;
   const optionsList = pageSizeList.map((option) => ({ display: option }));
   const { options, getState, getPageCount, getExpandedRowModel, setPageIndex, setPageSize } = table;
   const { pageIndex, pageSize } = getState().pagination;

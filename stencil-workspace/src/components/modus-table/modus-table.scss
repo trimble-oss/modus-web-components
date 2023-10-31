@@ -252,11 +252,12 @@ table {
             justify-content: flex-end;
           }
 
-          .expand {
-            display: flex;
+          .expand-icon-container {
+            width: 24px;
 
-            span {
+            .expand-icon {
               cursor: pointer;
+              display: flex;
             }
           }
         }

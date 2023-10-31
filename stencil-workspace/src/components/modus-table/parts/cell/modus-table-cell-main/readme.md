@@ -7,12 +7,13 @@
 
 ## Properties
 
-| Property      | Attribute | Description | Type                                    | Default     |
-| ------------- | --------- | ----------- | --------------------------------------- | ----------- |
-| `cell`        | --        |             | `Cell<unknown, unknown>`                | `undefined` |
-| `linkClick`   | --        |             | `(link: ModusTableCellLink) => void`    | `undefined` |
-| `rowActions`  | --        |             | `ModusTableRowActions`                  | `undefined` |
-| `valueChange` | --        |             | `(props: ModusTableCellEdited) => void` | `undefined` |
+| Property        | Attribute         | Description | Type                               | Default     |
+| --------------- | ----------------- | ----------- | ---------------------------------- | ----------- |
+| `cell`          | --                |             | `Cell<unknown, unknown>`           | `undefined` |
+| `cellIndex`     | `cell-index`      |             | `number`                           | `undefined` |
+| `context`       | --                |             | `TableContext`                     | `undefined` |
+| `hasRowActions` | `has-row-actions` |             | `boolean`                          | `undefined` |
+| `valueChange`   | --                |             | `(props: TableCellEdited) => void` | `undefined` |
 
 
 ## Dependencies
@@ -23,12 +24,15 @@
 
 ### Depends on
 
+- [modus-table-row-actions](../../row/actions/modus-table-row-actions)
 - [modus-table-cell-editor](../modus-table-cell-editor)
 
 ### Graph
 ```mermaid
 graph TD;
+  modus-table-cell-main --> modus-table-row-actions
   modus-table-cell-main --> modus-table-cell-editor
+  modus-table-row-actions --> modus-button
   modus-table-cell-editor --> modus-number-input
   modus-table-cell-editor --> modus-text-input
   modus-table-cell-editor --> modus-select
