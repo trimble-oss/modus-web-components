@@ -10,7 +10,6 @@
 | Property        | Attribute         | Description | Type                               | Default     |
 | --------------- | ----------------- | ----------- | ---------------------------------- | ----------- |
 | `cell`          | --                |             | `Cell<unknown, unknown>`           | `undefined` |
-| `cellIndex`     | `cell-index`      |             | `number`                           | `undefined` |
 | `context`       | --                |             | `TableContext`                     | `undefined` |
 | `hasRowActions` | `has-row-actions` |             | `boolean`                          | `undefined` |
 | `valueChange`   | --                |             | `(props: TableCellEdited) => void` | `undefined` |
