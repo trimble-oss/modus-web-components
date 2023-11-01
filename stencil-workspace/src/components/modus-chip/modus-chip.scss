@@ -7,8 +7,11 @@
   border-radius: $rem-16px;
   color: $modus-chip-color;
   cursor: pointer;
-  display: inline-flex;
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block !important;
   flex-direction: row;
+  text-overflow: ellipsis;
   font-family: $primary-font;
   height: 1.625rem;
   justify-content: center;
