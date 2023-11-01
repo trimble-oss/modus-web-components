@@ -70,7 +70,7 @@ export class ModusTableRowActions {
       <Host>
         {rowsExpandable && <ModusTableCellExpandIcons row={this.row} />}
 
-        {actionButtons?.map(({ icon, id, isDisabled = () => false }) => {
+        {actionButtons?.map(({ label, icon, id, isDisabled = () => false }) => {
           const disabled = isDisabled(this.row.original);
           return (
             <modus-button
@@ -79,9 +79,10 @@ export class ModusTableRowActions {
               color="secondary"
               icon-only={icon}
               size="small"
+              ariaLabel={label}
               disabled={disabled}
               onKeyDown={(e) => this.handleActionButtonKeydown(e, id)}
-              onButtonClick={(e) => (!disabled ? this.handleActionButtonClick(e, id) : e.preventDefault())}></modus-button>
+              onClick={(e) => (!disabled ? this.handleActionButtonClick(e, id) : e.preventDefault())}></modus-button>
           );
         })}
 
@@ -93,9 +94,10 @@ export class ModusTableRowActions {
               button-style="borderless"
               color="secondary"
               icon-only="vertical-ellipsis"
+              ariaLabel="overflow button"
               size="small"
               onKeyDown={(e) => this.handleMoreButtonKeydown(e, overflowMenu)}
-              onButtonClick={(e) => this.handleMoreButtonClick(e, overflowMenu)}></modus-button>
+              onClick={(e) => this.handleMoreButtonClick(e, overflowMenu)}></modus-button>
           </Fragment>
         )}
       </Host>

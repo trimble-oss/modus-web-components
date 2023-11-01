@@ -47,6 +47,15 @@ export class ModusTableRowActionsMenu {
   private onRowActionClick: (event: CustomEvent<ModusTableRowActionClick>) => void = (e) =>
     this.handleRowActionButtonClick(e);
   private onRowExpanded: (event: CustomEvent) => void = () => (this.isMenuOpen = false);
+  
+  componentDidRender(): void {
+    if (this.isMenuOpen) {
+      const firstItem = Array.from(this.element.querySelectorAll('modus-list-item'))?.find(
+        (el: HTMLModusListItemElement) => !el.disabled
+      );
+      firstItem?.focusItem();
+    }
+  }
 
   connectedCallback(): void {
     const { element } = this.context;
@@ -85,7 +94,6 @@ export class ModusTableRowActionsMenu {
 
   @Listen('click', { target: 'document' })
   handleClickOutside(event: MouseEvent): void {
-    console.log(event.target);
     if (!(this.element.contains(event.target as HTMLElement) || this.isOverflowIconClicked)) {
       this.isMenuOpen = false;
     }
@@ -113,7 +121,6 @@ export class ModusTableRowActionsMenu {
     const style = {
       transform: `translate(calc(${x}px - 8px), calc(${y}px))`,
     };
-
     return (
       <Host>
         {this.isMenuOpen && (
@@ -137,11 +144,5 @@ export class ModusTableRowActionsMenu {
         )}
       </Host>
     );
-  }
-
-  componentDidRender(): void {
-    if (this.isMenuOpen) {
-      (this.element.children.item(0)?.children.item(0)?.children.item(0) as HTMLElement)?.focus();
-    }
   }
 }
