@@ -1,7 +1,6 @@
 // eslint-disable-next-line
 import { Component, Event, EventEmitter, Prop, h } from '@stencil/core';
 import { IconCheck } from '../icons/icon-check';
-import { IconMap } from '../icons/IconMap';
 
 @Component({
   tag: 'modus-list-item',
@@ -15,9 +14,6 @@ export class ModusListItem {
   /** (optional) Disables the list item */
   @Prop() disabled: boolean;
 
-  /**(optional) Name of the icon */
-  @Prop() icon: string;
-
   /** (optional) The selected state of the list item */
   @Prop() selected: boolean;
 
@@ -25,7 +21,7 @@ export class ModusListItem {
   @Prop() size: 'condensed' | 'large' | 'standard' = 'standard';
 
   /** (optional) The type of list item */
-  @Prop() type: 'standard' | 'icon'; // Future support for 'checkbox' | 'icon' | 'menu' | 'standard' | 'switchLeft' | 'switchRight'
+  @Prop() type = 'standard'; // Future support for 'checkbox' | 'icon' | 'menu' | 'standard' | 'switchLeft' | 'switchRight'
 
   /** An event that fires on list item click */
   @Event() itemClick: EventEmitter;
@@ -40,16 +36,10 @@ export class ModusListItem {
     const containerClass = `${this.classBySize.get(this.size)} ${this.disabled ? 'disabled' : ''} ${
       this.selected ? 'selected' : ''
     } ${this.borderless ? 'borderless' : ''}`;
-    const iconCheckSize = this.size === 'condensed' ? '18' : '22';
-    const iconSize = '16';
+    const iconCheckSize = this.size === 'condensed' ? '16' : '24';
 
     return (
       <li class={containerClass} onClick={() => (!this.disabled ? this.itemClick.emit() : null)}>
-        {this.icon && (
-          <span class="icon">
-            <IconMap icon={this.icon} size={iconSize} />
-          </span>
-        )}
         <span class="slot">
           <slot />
         </span>

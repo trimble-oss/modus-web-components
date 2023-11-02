@@ -69,10 +69,24 @@
   }
 
   .links {
+    cursor: pointer;
     margin-bottom: $rem-12px;
     max-width: 19rem;
     user-select: none;
     width: 100%;
+
+    .link-item {
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .icon {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      margin-right: 8px;
+    }
   }
 
   .sign-out {

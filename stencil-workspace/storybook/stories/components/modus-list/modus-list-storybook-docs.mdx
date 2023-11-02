@@ -27,9 +27,6 @@ The `<modus-list-item>` utilizes the slot element, allowing you to render your o
   <modus-list-item borderless>
     Borderless
   </modus-list-item>
-  <modus-list-item type="icon" icon="moon">
-      Icon
-  </modus-list-item>
 </modus-list>
 
 ```html
@@ -44,7 +41,6 @@ The `<modus-list-item>` utilizes the slot element, allowing you to render your o
   <modus-list-item size="large">Large</modus-list-item>
   <modus-list-item selected size="large">Large & Selected</modus-list-item>
   <modus-list-item borderless>Borderless</modus-list-item>
-  <modus-list-item type="icon" icon="moon">Icon</modus-list-item>
 </modus-list>
 ```
 
@@ -52,70 +48,14 @@ The `<modus-list-item>` utilizes the slot element, allowing you to render your o
 
 ##### Modus List Item
 
-<section>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Type</th>
-        <th>Options</th>
-        <th>Default Value</th>
-        <th>Required</th>
-      </tr>
-    </thead>
-    <tbody>
-     <tr>
-        <td>borderless</td>
-        <td>Removes border from list item</td>
-        <td>boolean</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>disabled</td>
-        <td>Disables the list item</td>
-        <td>boolean</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>icon</td>
-        <td>Name of the icon to render</td>
-        <td>string</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>selected</td>
-        <td>Renders the list item selected</td>
-        <td>boolean</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>size</td>
-        <td>The size of the list item</td>
-        <td>string</td>
-        <td>'condensed', 'large', 'standard'</td>
-        <td>'standard'</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>Type</td>
-        <td>The type of list item to render</td>
-        <td>string</td>
-        <td>'standard', 'icon</td>
-        <td>'standard'</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+| Property     | Attribute    | Description                                          | Type                                   | Default      |
+| ------------ | ------------ | ---------------------------------------------------- | -------------------------------------- | ------------ |
+| `borderless` | `borderless` | (optional) Whether the list item has a border or not | `boolean`                              | `undefined`  |
+| `disabled`   | `disabled`   | (optional) Disables the list item                    | `boolean`                              | `undefined`  |
+| `selected`   | `selected`   | (optional) The selected state of the list item       | `boolean`                              | `undefined`  |
+| `size`       | `size`       | (optional) The size of list item                     | `"condensed", "large", "standard"` | `'standard'` |
+| `type`       | `type`       | (optional) The type of list item                     | `string`                               | `'standard'` |
+
 
 ### DOM Events
 

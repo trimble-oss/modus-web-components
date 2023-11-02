@@ -11,10 +11,9 @@
 | ------------ | ------------ | ---------------------------------------------------- | -------------------------------------- | ------------ |
 | `borderless` | `borderless` | (optional) Whether the list item has a border or not | `boolean`                              | `undefined`  |
 | `disabled`   | `disabled`   | (optional) Disables the list item                    | `boolean`                              | `undefined`  |
-| `icon`       | `icon`       | (optional) Name of the icon                          | `string`                               | `undefined`  |
 | `selected`   | `selected`   | (optional) The selected state of the list item       | `boolean`                              | `undefined`  |
 | `size`       | `size`       | (optional) The size of list item                     | `"condensed" \| "large" \| "standard"` | `'standard'` |
-| `type`       | `type`       | (optional) The type of list item                     | `"icon" \| "standard"`                 | `undefined`  |
+| `type`       | `type`       | (optional) The type of list item                     | `string`                               | `'standard'` |
 
 
 ## Events

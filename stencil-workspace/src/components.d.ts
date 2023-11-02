@@ -551,10 +551,6 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
-          * (optional) Name of the icon
-         */
-        "icon": string;
-        /**
           * (optional) The selected state of the list item
          */
         "selected": boolean;
@@ -565,7 +561,7 @@ export namespace Components {
         /**
           * (optional) The type of list item
          */
-        "type": 'standard' | 'icon';
+        "type": string;
     }
     interface ModusMessage {
         /**
@@ -2483,10 +2479,6 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
-          * (optional) Name of the icon
-         */
-        "icon"?: string;
-        /**
           * An event that fires on list item click
          */
         "onItemClick"?: (event: ModusListItemCustomEvent<any>) => void;
@@ -2501,7 +2493,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The type of list item
          */
-        "type"?: 'standard' | 'icon';
+        "type"?: string;
     }
     interface ModusMessage {
         /**

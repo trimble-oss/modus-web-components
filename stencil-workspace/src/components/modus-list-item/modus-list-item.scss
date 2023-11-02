@@ -12,11 +12,6 @@ li {
   min-height: $list-group-item-height;
   padding: 0 $rem-16px;
 
-  .icon {
-    display: flex;
-    margin-right: $rem-16px;
-  }
-
   .slot {
     overflow: hidden;
     text-overflow: ellipsis;
