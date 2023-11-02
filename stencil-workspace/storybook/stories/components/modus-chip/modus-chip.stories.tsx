@@ -79,6 +79,13 @@ export default {
         type: { summary: 'string' },
       },
     },
+    maxWidth: {
+      description: "The chip's div max-width",
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: '100px' },
+      },
+    }
   },
   parameters: {
     controls: { expanded: true },

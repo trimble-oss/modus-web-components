@@ -36,6 +36,9 @@ export class ModusChip {
   /** (optional) The chip's value. */
   @Prop() value: string;
 
+  /** (optional) The Chip's div max-width */
+  @Prop() maxWidth: string;
+
   /** An event that fires on chip click. */
   @Event() chipClick: EventEmitter;
 
@@ -95,14 +98,16 @@ export class ModusChip {
       ${!this.showCheckmark && !this.imageUrl ? 'no-left-icon' : null}
       ${!this.showClose ? 'no-right-icon' : null}
     `;
-
+    console.log(this.maxWidth);
+    const style = { 'max-width': this.maxWidth ?? undefined };
     return (
       <div
         aria-disabled={this.disabled ? 'true' : undefined}
         aria-label={this.ariaLabel}
         class={chipClass}
         onClick={this.disabled ? null : (event) => this.onChipClick(event)}
-        tabIndex={0}>
+        tabIndex={0}
+        {...style}>
         {this.imageUrl ? (
           <img src={this.imageUrl} alt="" />
         ) : this.showCheckmark ? (

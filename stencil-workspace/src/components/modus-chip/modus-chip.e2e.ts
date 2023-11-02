@@ -132,6 +132,23 @@ describe('modus-chip', () => {
     expect(await shadowValue.textContent).toEqual('Hello');
   });
 
+  it('renders changes to max-width', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-chip></modus-chip>');
+    const chip = await page.find('modus-chip');
+    expect(await chip.getProperty('maxWidth')).toBeFalsy();
+
+    chip.setProperty('maxWidth', '100px'); // Set the max-width property
+    await page.waitForChanges();
+    expect(await chip.getProperty('maxWidth')).toEqual('100px');
+
+    const shadowContainer = await page.find('modus-chip >>> .modus-chip');
+
+    const shadowValue = shadowContainer.getAttribute('max-width'); // Get the style property
+    expect(await shadowValue).toEqual('100px');
+  });
+
   it('emits chip click event on chip click', async () => {
     const page = await newE2EPage();
 
