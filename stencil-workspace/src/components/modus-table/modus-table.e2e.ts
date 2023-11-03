@@ -17,6 +17,12 @@ const MockColumns = [
   },
 ];
 
+const MockManualPagination = {
+  currentPageIndex: 2, 
+  currentPageSize: 10, 
+  pageCount: 15
+}
+
 const MockData = [
   {
     mockColumnOne: 'Mock Data One 1',
@@ -262,6 +268,35 @@ describe('modus-table', () => {
     expect(paginationContainer).not.toBeNull();
   });
 
+  it('Render manual pagination', async () => {
+    page = await newE2EPage();
+    await page.setContent('<modus-table />');
+
+    const component = await page.find('modus-table');
+
+    component.setProperty('columns', MockColumns);
+    component.setProperty('manualPaginationOptions', {});
+    component.setProperty('data', MockData);
+    component.setProperty('pagination', false);
+
+    await page.waitForChanges();
+    component.setProperty('pagination', true);
+    await page.waitForChanges();
+    component.setProperty('manualPaginationOptions', MockManualPagination);
+    await page.waitForChanges();
+    component.setProperty('pageSizeList', [5, 10, 50]);
+    await page.waitForChanges();
+
+    const pagination = await page.find(`modus-table >>> modus-pagination`)
+
+    await page.waitForChanges();
+ 
+    expect(await pagination.getAttribute('active-page')).toBeTruthy();
+    expect(await pagination.getAttribute('max-page')).toBeTruthy();
+    expect(await pagination.getAttribute('active-page')).toBe(`${MockManualPagination.currentPageIndex}`);
+    expect(await pagination.getAttribute('max-page')).toBe(`${MockManualPagination.pageCount}`);
+
+  });
   it('Display page view when pagination is enabled', async () => {
     page = await newE2EPage();
     await page.setContent('<modus-table />');
