@@ -73,7 +73,7 @@ function initializeTable(
   var TOTAL_RECORDS = ${totalRecords};
 
   modusTable.addEventListener(
-    "paginationChange",async (ev)=> {
+    "paginationChange", (ev)=> {
      
       var dataBySize = {
         5: ${JSON.stringify(makeData(5))},
@@ -81,15 +81,14 @@ function initializeTable(
         50:  ${JSON.stringify(makeData(50))},
       }
 
+
       if(!!modusTable.manualPaginationOptions){
         modusTable.data = dataBySize[ev.detail.pageSize]
-
          modusTable.manualPaginationOptions = {
             currentPageIndex : ev.detail.pageIndex + 1,
             currentPageSize : ev.detail.pageSize,
             pageCount: Math.ceil( TOTAL_RECORDS / ev.detail.pageSize)
          }
-
       }
    })
   `;
