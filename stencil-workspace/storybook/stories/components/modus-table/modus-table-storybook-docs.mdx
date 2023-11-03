@@ -292,6 +292,18 @@ Pagination allows users to navigate between pages
 - Modus Table uses `modus-pagination` component to navigate between pages.
 - Pagination can be enabled using the `pagination` prop. The `pageSizeList` takes an array for page size options.
 
+### Manual Pagination
+
+Manual Pagination allows users to handle pagination in server-side mode.
+
+- The Modus Table utilizes the `modus-pagination` component for navigating between pages. Based on the properties initially set, pagination can be managed from the server side.
+- Manual Pagination can be enabled using the `manualPaginationOptions` prop.
+- The `currentPageIndex` takes a number to specify the current page number, indicating which page should appear as selected from the server side.
+- The `currentPageSize` takes a number to specify the current page view number, determining how many records the table will display from the server side.
+- The `pageCount` takes a number to specify the total number of records, in order to display the corresponding number of pages in the table.
+
+<Story id="components-table--manual-pagination" height={'380px'} />
+
 ### Summary Row
 
 User can opt for this summary row, which can be used as footer or a row to view total of column data.

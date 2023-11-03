@@ -26,7 +26,7 @@ function newPerson() {
     lastName,
     age: randomNumber(20, 80) * 30,
     visits: randomNumber(1, 100) * 100,
-    email:{ display: email, url: email },
+    email: { display: email, url: email },
     progress: randomNumber(1, 100) * 100,
     status: randomNumber(1, 100) > 66 ? 'Verified' : randomNumber(0, 100) > 33 ? 'Pending' : 'Rejected',
     createdAt: new Date(randomNumber(1990, 2020), randomNumber(0, 11), randomNumber(1, 30)).toDateString(),
@@ -47,16 +47,51 @@ function makeData(...lens): object[] {
   return makeDataLevel();
 }
 
-function initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, manualPaginationOptions) {
+function initializeTable(
+  columns,
+  data,
+  pageSizeList,
+  toolbarOptions,
+  displayOptions,
+  rowSelectionOptions,
+  manualPaginationOptions,
+  totalRecords
+) {
   const tag = document.createElement('script');
   tag.innerHTML = `
-  document.querySelector('modus-table').columns = ${JSON.stringify(columns)};
-  document.querySelector('modus-table').data = ${JSON.stringify(data)};
-  document.querySelector('modus-table').pageSizeList = ${JSON.stringify(pageSizeList)};
-  document.querySelector('modus-table').toolbarOptions = ${JSON.stringify(toolbarOptions)};
-  document.querySelector('modus-table').displayOptions = ${JSON.stringify(displayOptions)};
-  document.querySelector('modus-table').rowSelectionOptions = ${JSON.stringify(rowSelectionOptions)};
-  document.querySelector('modus-table').manualPaginationOptions = ${JSON.stringify(manualPaginationOptions)};
+ var modusTable = document.querySelector('modus-table')  
+  
+  modusTable.columns = ${JSON.stringify(columns)};
+  modusTable.data = ${JSON.stringify(data)};
+  modusTable.pageSizeList = ${JSON.stringify(pageSizeList)};
+  modusTable.toolbarOptions = ${JSON.stringify(toolbarOptions)};
+  modusTable.displayOptions = ${JSON.stringify(displayOptions)};
+  modusTable.rowSelectionOptions = ${JSON.stringify(rowSelectionOptions)};
+  modusTable.manualPaginationOptions = ${JSON.stringify(manualPaginationOptions)};
+
+
+  var TOTAL_RECORDS = ${totalRecords};
+
+  modusTable.addEventListener(
+    "paginationChange",async (ev)=> {
+     
+      var dataBySize = {
+        5: ${JSON.stringify(makeData(5))},
+        10: ${JSON.stringify(makeData(10))},
+        50:  ${JSON.stringify(makeData(50))},
+      }
+
+      if(!!modusTable.manualPaginationOptions){
+        modusTable.data = dataBySize[ev.detail.pageSize]
+
+         modusTable.manualPaginationOptions = {
+            currentPageIndex : ev.detail.pageIndex + 1,
+            currentPageSize : ev.detail.pageSize,
+            pageCount: Math.ceil( TOTAL_RECORDS / ev.detail.pageSize)
+         }
+
+      }
+   })
   `;
 
   return tag;
@@ -125,7 +160,8 @@ const DefaultColumns = [
     dataType: 'link',
     size: 230,
     minSize: 80,
-    sortingFn: 'sortForHyperlink'},
+    sortingFn: 'sortForHyperlink',
+  },
   {
     header: 'Status',
     accessorKey: 'status',
@@ -149,7 +185,6 @@ const DefaultColumns = [
     minSize: 150,
   },
 ];
-
 
 const DefaultArgs = {
   hover: false,
@@ -348,17 +383,28 @@ export default {
     },
     manualPaginationOptions: {
       name: 'manualPaginationOptions',
-      description: 'To switch to manual pagiantion mode.',
-      table:{
-        type: { summary: 'ManualPaginationOptions'}
+      description: 'To switch to manual pagination mode.',
+      table: {
+        type: { summary: 'ManualPaginationOptions' },
       },
       type: { required: false },
-    }
+    },
   },
 
   parameters: {
     actions: {
-      handles: ['cellValueChange','cellLinkClick', 'columnOrderChange', 'columnSizingChange', 'columnVisibilityChange', 'paginationChange', 'rowExpanded', 'rowSelectionChange', 'rowUpdated', 'sortChange'],
+      handles: [
+        'cellValueChange',
+        'cellLinkClick',
+        'columnOrderChange',
+        'columnSizingChange',
+        'columnVisibilityChange',
+        'paginationChange',
+        'rowExpanded',
+        'rowSelectionChange',
+        'rowUpdated',
+        'sortChange',
+      ],
     },
     controls: { expanded: true, sort: 'requiredFirst' },
     docs: {
@@ -392,7 +438,8 @@ const Template = ({
   maxWidth,
   rowSelection,
   rowSelectionOptions,
-  manualPaginationOptions
+  manualPaginationOptions,
+  totalRecords,
 }) => html`
   <div style="width: 950px">
     <modus-table
@@ -410,7 +457,15 @@ const Template = ({
       max-width="${maxWidth}"
       row-selection="${rowSelection}" />
   </div>
-  ${initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, manualPaginationOptions)}
+  ${initializeTable(
+    columns,
+    data,
+    pageSizeList,
+    toolbarOptions,
+    displayOptions,
+    rowSelectionOptions,
+    manualPaginationOptions,
+  )}
 `;
 
 export const Default = Template.bind({});
@@ -447,7 +502,7 @@ export const ValueFormatter = ({
   maxHeight,
   maxWidth,
   rowSelection,
-  rowSelectionOptions
+  rowSelectionOptions,
 }) => html`
   <div style="width: 950px">
     <modus-table
@@ -491,9 +546,10 @@ const valueFormatterTable = (pageSizeList, toolbarOptions, displayOptions, rowSe
    document.querySelector('modus-table').data = [{ "firstName": "Chaim", "lastName": "Lubowitz", "age": 30, "amount": 330160, "progress": 99, "status": "single", "createdAt": "2002-11-19T12:48:51.739Z" }, { "firstName": "Vicky", "lastName": "Lehner", "age": 2, "amount": 41900, "progress": 36, "status": "single", "createdAt": "2003-10-02T12:48:51.739Z" }, { "firstName": "Nellie", "lastName": "Leuschke", "age": 15, "amount": 883112, "progress": 68, "status": "single", "createdAt": "2004-09-21T12:48:51.739Z" }, { "firstName": "Judy", "lastName": "Ritchie", "age": 3, "amount": 900293, "progress": 10, "status": "relationship", "createdAt": "2005-08-11T12:48:51.739Z" }, { "firstName": "Hertha", "lastName": "Bradtke", "age": 19, "amount": 112116, "progress": 87, "status": "relationship", "createdAt": "2006-07-13T12:48:51.739Z" }];
 
    document.querySelector('modus-table').pageSizeList = ${JSON.stringify(pageSizeList)};
-  document.querySelector('modus-table').toolbarOptions = ${JSON.stringify(toolbarOptions)};
-  document.querySelector('modus-table').displayOptions = ${JSON.stringify(displayOptions)};
-  document.querySelector('modus-table').rowSelectionOptions = ${JSON.stringify(rowSelectionOptions)};
+   document.querySelector('modus-table').toolbarOptions = ${JSON.stringify(toolbarOptions)};
+   document.querySelector('modus-table').displayOptions = ${JSON.stringify(displayOptions)};
+   document.querySelector('modus-table').rowSelectionOptions = ${JSON.stringify(rowSelectionOptions)};
+   
   `;
   return tag;
 };
@@ -507,16 +563,20 @@ ColumnResize.args = { ...DefaultArgs, columnResize: true };
 export const Pagination = Template.bind({});
 Pagination.args = { ...DefaultArgs, pagination: true, data: makeData(50), pageSizeList: [5, 10, 50] };
 
-export const ManualPagination = Template.bind({})
-ManualPagination.args = { 
-  ...DefaultArgs, 
-  pagination: true, 
+export const ManualPagination = Template.bind({});
+
+ManualPagination.args = {
+  ...DefaultArgs,
+  pagination: true,
+  totalRecords: 100, //Server Side Total of records
   manualPaginationOptions: {
-    currentPageIndex: 15, 
-    currentPageSize: 5, 
-    pageCount: 2
+    currentPageIndex: 1,
+    currentPageSize: 5,
+    pageCount: 20,
   },
-  data: makeData(12), pageSizeList: [ 5, 10, 50] };
+  data: makeData(5),
+  pageSizeList: [5, 10, 50],
+};
 
 export const SummaryRow = Template.bind({});
 SummaryRow.args = { ...DefaultArgs, summaryRow: true };
@@ -541,27 +601,28 @@ ExpandableRows.args = { ...DefaultArgs, rowsExpandable: true, data: makeData(7, 
 
 export const CheckboxRowSelection = Template.bind({});
 CheckboxRowSelection.args = {
-  ...DefaultArgs, rowSelection: true, rowSelectionOptions: {
+  ...DefaultArgs,
+  rowSelection: true,
+  rowSelectionOptions: {
     multiple: true,
-    subRowSelection: true
-  }, data: makeData(7)
+    subRowSelection: true,
+  },
+  data: makeData(7),
 };
 
-const editableColumns =DefaultColumns.map(col =>{
-  if(col.dataType === 'link') return col;
+const editableColumns = DefaultColumns.map((col) => {
+  if (col.dataType === 'link') return col;
 
-  if(col.accessorKey === 'status'){
-    return {...col,  cellEditable:true,
+  if (col.accessorKey === 'status') {
+    return {
+      ...col,
+      cellEditable: true,
       cellEditorType: 'dropdown',
       cellEditorArgs: {
-        options:[
-        { display: 'Verified' },
-        { display: 'Pending' },
-        { display: 'Rejected' },
-        ]
-      } };
-  }
-  else return {...col, cellEditable: true};
+        options: [{ display: 'Verified' }, { display: 'Pending' }, { display: 'Rejected' }],
+      },
+    };
+  } else return { ...col, cellEditable: true };
 });
 
 export const InlineEditing = Template.bind({});
@@ -569,14 +630,28 @@ InlineEditing.args = { ...DefaultArgs, columns: editableColumns, data: makeData(
 
 export const LargeDataset = Template.bind({});
 
-LargeDataset.args = { ...DefaultArgs, columns: editableColumns, data: makeData(10000, 1,1 ),pagination: true, pageSizeList: [5, 10, 50], sort: true , hover: true, rowsExpandable: true, summaryRow: true , columnReorder:true, columnResize: true, toolbar:true,  toolbarOptions: {
-  columnsVisibility: {
-    title: '',
-    requiredColumns: ['age', 'visits'],
-  }
-},
-rowSelection: true, rowSelectionOptions: {
-  multiple: true,
-  subRowSelection: true
-}
+LargeDataset.args = {
+  ...DefaultArgs,
+  columns: editableColumns,
+  data: makeData(10000, 1, 1),
+  pagination: true,
+  pageSizeList: [5, 10, 50],
+  sort: true,
+  hover: true,
+  rowsExpandable: true,
+  summaryRow: true,
+  columnReorder: true,
+  columnResize: true,
+  toolbar: true,
+  toolbarOptions: {
+    columnsVisibility: {
+      title: '',
+      requiredColumns: ['age', 'visits'],
+    },
+  },
+  rowSelection: true,
+  rowSelectionOptions: {
+    multiple: true,
+    subRowSelection: true,
+  },
 };
