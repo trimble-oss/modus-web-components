@@ -464,6 +464,7 @@ const Template = ({
     displayOptions,
     rowSelectionOptions,
     manualPaginationOptions,
+    totalRecords
   )}
 `;
 
