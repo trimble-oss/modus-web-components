@@ -8,11 +8,11 @@
   color: $modus-chip-color;
   cursor: pointer;
   display: inline-flex;
-  max-width: 2px;
   flex-direction: row;
   font-family: $primary-font;
   height: 1.625rem;
   justify-content: center;
+  max-width: 2px;
   padding: $rem-2px $rem-4px;
   vertical-align: middle;
 
@@ -25,8 +25,8 @@
 
     span {
       background-color: aquamarine;
-      text-overflow: ellipsis;
       font-size: $rem-12px;
+      text-overflow: ellipsis;
     }
 
     img {

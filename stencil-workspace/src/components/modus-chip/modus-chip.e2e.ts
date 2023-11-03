@@ -146,7 +146,7 @@ describe('modus-chip', () => {
     const shadowContainer = await page.find('modus-chip >>> .modus-chip');
 
     const shadowValue = shadowContainer.getAttribute('max-width'); // Get the style property
-    expect(await shadowValue).toEqual('100px');
+    expect(shadowValue).toEqual('100px');
   });
 
   it('emits chip click event on chip click', async () => {
