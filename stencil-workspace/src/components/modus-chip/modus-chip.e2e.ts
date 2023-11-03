@@ -143,10 +143,10 @@ describe('modus-chip', () => {
     await page.waitForChanges();
     expect(await chip.getProperty('maxWidth')).toEqual('100px');
 
-    const shadowContainer = await page.find('modus-chip >>> .modus-chip');
+    const element = await page.find('modus-chip >>> span');
 
-    const shadowValue = shadowContainer.getAttribute('max-width'); // Get the style property
-    expect(shadowValue).toEqual('100px');
+    const computedStyle = await element.getComputedStyle();
+    expect(computedStyle['maxWidth']).toEqual('100px');
   });
 
   it('emits chip click event on chip click', async () => {
