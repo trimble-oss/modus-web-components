@@ -2,21 +2,6 @@ import { newSpecPage } from '@stencil/core/testing';
 import { ModusNavbarProfileMenu } from './modus-navbar-profile-menu';
 
 describe('modus-navbar-profile-menu', () => {
-  beforeAll(() => {
-    class MutationObserverMock {
-      observe() {}
-      disconnect() {}
-      takeRecords() {
-        return [];
-      }
-    }
-    global.MutationObserver = MutationObserverMock;
-  });
-
-  afterAll(() => {
-    delete global.MutationObserver;
-  });
-
   it('renders', async () => {
     const { root } = await newSpecPage({
       components: [ModusNavbarProfileMenu],
