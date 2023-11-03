@@ -252,11 +252,12 @@ table {
             justify-content: flex-end;
           }
 
-          .expand {
-            display: flex;
+          .expand-icon-container {
+            width: 24px;
 
-            span {
+            .expand-icon {
               cursor: pointer;
+              display: flex;
             }
           }
         }
@@ -333,6 +334,13 @@ table {
         background-color: $modus-table-selected-bg;
       }
     }
+  }
+
+  .sticky-right {
+    border-left: $rem-2px $modus-table-border-color solid;
+    position: sticky;
+    right: 0;
+    z-index: 1;
   }
 }
 

@@ -10,7 +10,7 @@ describe('modus-list-item', () => {
     expect(root).toEqualHtml(`
       <modus-list-item>
         <mock:shadow-root>
-          <li class='standard'>
+          <li class='standard' tabindex="0">
             <span class='slot'>
               <slot></slot>
             </span>
@@ -28,7 +28,7 @@ describe('modus-list-item', () => {
     expect(root).toEqualHtml(`
       <modus-list-item>
         <mock:shadow-root>
-          <li class='standard'>
+          <li class='standard' tabindex="0">
             <span class='slot'>
               <slot></slot>
             </span>

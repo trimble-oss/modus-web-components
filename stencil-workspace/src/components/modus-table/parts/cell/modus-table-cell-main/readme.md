@@ -7,12 +7,12 @@
 
 ## Properties
 
-| Property      | Attribute | Description | Type                                    | Default     |
-| ------------- | --------- | ----------- | --------------------------------------- | ----------- |
-| `cell`        | --        |             | `Cell<unknown, unknown>`                | `undefined` |
-| `linkClick`   | --        |             | `(link: ModusTableCellLink) => void`    | `undefined` |
-| `rowActions`  | --        |             | `ModusTableRowActions`                  | `undefined` |
-| `valueChange` | --        |             | `(props: ModusTableCellEdited) => void` | `undefined` |
+| Property            | Attribute             | Description | Type                               | Default     |
+| ------------------- | --------------------- | ----------- | ---------------------------------- | ----------- |
+| `cell`              | --                    |             | `Cell<unknown, unknown>`           | `undefined` |
+| `context`           | --                    |             | `TableContext`                     | `undefined` |
+| `hasRowsExpandable` | `has-rows-expandable` |             | `boolean`                          | `undefined` |
+| `valueChange`       | --                    |             | `(props: TableCellEdited) => void` | `undefined` |
 
 
 ## Dependencies

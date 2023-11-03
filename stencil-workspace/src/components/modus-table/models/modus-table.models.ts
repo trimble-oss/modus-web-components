@@ -48,6 +48,19 @@ export interface ManualPaginationOptions {
   pageCount: number;
   totalRecords: number;
 }
+export interface ModusTableRowAction {
+  id: string;
+  icon?: string;
+  label?: string;
+  index: number;
+  isDisabled?: (row: unknown) => boolean;
+}
+
+export interface ModusTableRowActionClick {
+  actionId: string;
+  row: unknown;
+}
+
 export interface ModusTableColumn<TData extends RowData, TValue = unknown> {
   header: string;
   accessorKey: string;
@@ -81,10 +94,6 @@ export interface ModusTableToolbarOptions {
 export interface ModusTableColumnsVisibilityOptions {
   title: string;
   requiredColumns?: string[];
-}
-
-export interface ModusTableRowActions {
-  expandable: boolean;
 }
 
 export interface ModusTableCellLink {

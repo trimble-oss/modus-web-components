@@ -55,6 +55,7 @@ function initializeTable(
   displayOptions,
   rowSelectionOptions,
   manualPaginationOptions,
+  rowActions
 ) {
   const tag = document.createElement('script');
   tag.innerHTML = `
@@ -72,7 +73,7 @@ function initializeTable(
     "paginationChange", (ev)=> {
       if(!!modusTable.manualPaginationOptions){
         const manualPaginationData = ${JSON.stringify([
-          ...data, 
+          ...data,
           ...makeData(manualPaginationOptions?.totalRecords).slice(data.length)
         ])};
         modusTable.data = manualPaginationData.slice(ev.detail.pageIndex * ev.detail.pageSize,
@@ -82,7 +83,10 @@ function initializeTable(
           currentPageSize : ev.detail.pageSize,
           pageCount: Math.ceil( manualPaginationData.length / ev.detail.pageSize),
           totalRecords: manualPaginationData.length
-        }
+        };
+
+
+        modusTable.rowActions = ${JSON.stringify(rowActions)};
       }
    })
 `;
@@ -197,6 +201,7 @@ const DefaultArgs = {
   rowsExpandable: false,
   maxHeight: '',
   maxWidth: '',
+  rowActions: [],
   rowSelection: false,
   rowSelectionOptions: {},
 };
@@ -338,6 +343,14 @@ export default {
       },
       type: { required: false },
     },
+    rowActions: {
+      name: 'rowActions',
+      description: 'Control row actions.',
+      table: {
+        type: { summary: 'ModusTableRowAction[]' },
+      },
+      type: { required: false },
+    },
     maxHeight: {
       name: 'maxHeight',
       description: 'To display a vertical scrollbar when the height is exceeded.',
@@ -386,18 +399,7 @@ export default {
 
   parameters: {
     actions: {
-      handles: [
-        'cellValueChange',
-        'cellLinkClick',
-        'columnOrderChange',
-        'columnSizingChange',
-        'columnVisibilityChange',
-        'paginationChange',
-        'rowExpanded',
-        'rowSelectionChange',
-        'rowUpdated',
-        'sortChange',
-      ],
+      handles: ['cellValueChange','cellLinkClick', 'columnOrderChange', 'columnSizingChange', 'columnVisibilityChange', 'paginationChange', 'rowExpanded', 'rowSelectionChange', 'rowUpdated', 'sortChange', 'rowActionClick'],
     },
     controls: { expanded: true, sort: 'requiredFirst' },
     docs: {
@@ -429,6 +431,7 @@ const Template = ({
   rowsExpandable,
   maxHeight,
   maxWidth,
+  rowActions,
   rowSelection,
   rowSelectionOptions,
   manualPaginationOptions,
@@ -456,7 +459,8 @@ const Template = ({
     toolbarOptions,
     displayOptions,
     rowSelectionOptions,
-    manualPaginationOptions
+    manualPaginationOptions,
+    rowActions
   )}
 `;
 
@@ -541,7 +545,7 @@ const valueFormatterTable = (pageSizeList, toolbarOptions, displayOptions, rowSe
    document.querySelector('modus-table').toolbarOptions = ${JSON.stringify(toolbarOptions)};
    document.querySelector('modus-table').displayOptions = ${JSON.stringify(displayOptions)};
    document.querySelector('modus-table').rowSelectionOptions = ${JSON.stringify(rowSelectionOptions)};
-   
+
   `;
   return tag;
 };
@@ -602,13 +606,10 @@ CheckboxRowSelection.args = {
   data: makeData(7),
 };
 
-const editableColumns = DefaultColumns.map((col) => {
-  if (col.dataType === 'link') return col;
-
-  if (col.accessorKey === 'status') {
-    return {
-      ...col,
-      cellEditable: true,
+const EditableColumns =DefaultColumns.map(col =>{
+  if(col.dataType === 'link') return col;
+  if(col.accessorKey === 'status'){
+    return {...col,  cellEditable:true,
       cellEditorType: 'dropdown',
       cellEditorArgs: {
         options: [{ display: 'Verified' }, { display: 'Pending' }, { display: 'Rejected' }],
@@ -616,34 +617,52 @@ const editableColumns = DefaultColumns.map((col) => {
     };
   } else return { ...col, cellEditable: true };
 });
-
 export const InlineEditing = Template.bind({});
-InlineEditing.args = { ...DefaultArgs, columns: editableColumns, data: makeData(7) };
+InlineEditing.args = { ...DefaultArgs, columns: EditableColumns, data: makeData(7) };
 
 export const LargeDataset = Template.bind({});
 
-LargeDataset.args = {
-  ...DefaultArgs,
-  columns: editableColumns,
-  data: makeData(10000, 1, 1),
-  pagination: true,
-  pageSizeList: [5, 10, 50],
-  sort: true,
-  hover: true,
-  rowsExpandable: true,
-  summaryRow: true,
-  columnReorder: true,
-  columnResize: true,
-  toolbar: true,
-  toolbarOptions: {
-    columnsVisibility: {
-      title: '',
-      requiredColumns: ['age', 'visits'],
+LargeDataset.args = { ...DefaultArgs, columns: EditableColumns, data: makeData(10000, 1,1 ),pagination: true, pageSizeList: [5, 10, 50], sort: true , hover: true, rowsExpandable: true, summaryRow: true , columnReorder:true, columnResize: true, toolbar:true,  toolbarOptions: {
+  columnsVisibility: {
+    title: '',
+    requiredColumns: ['age', 'visits'],
+  }
+},
+rowSelection: true, rowSelectionOptions: {
+  multiple: true,
+  subRowSelection: true
+}
+};
+
+export const RowActions = Template.bind({});
+RowActions.args = {
+  ...DefaultArgs, rowActions:[
+    {
+      id: '1',
+      icon: 'add',
+      label: 'Add',
+      index: 0,
     },
-  },
-  rowSelection: true,
-  rowSelectionOptions: {
-    multiple: true,
-    subRowSelection: true,
-  },
+
+    {
+      id: '2',
+      icon: 'calendar',
+      label: 'calendar',
+      index: 1,
+    },
+
+    {
+      id: '3',
+      icon: 'cancel',
+      label: 'Cancel',
+      index: 2,
+    },
+
+    {
+      id: '4',
+      index: 3,
+      icon: 'delete',
+      label: 'Delete',
+    }
+  ], data: makeData(7), fullWidth: true
 };
