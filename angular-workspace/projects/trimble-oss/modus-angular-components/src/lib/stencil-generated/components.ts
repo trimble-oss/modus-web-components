@@ -960,14 +960,14 @@ export declare interface ModusSelect extends Components.ModusSelect {
 
 
 @ProxyCmp({
-  inputs: ['data', 'expanded', 'maxWidth', 'mode', 'targetContent']
+  inputs: ['collapseOnClickOutside', 'data', 'expanded', 'maxWidth', 'mode', 'targetContent']
 })
 @Component({
   selector: 'modus-side-navigation',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['data', 'expanded', 'maxWidth', 'mode', 'targetContent'],
+  inputs: ['collapseOnClickOutside', 'data', 'expanded', 'maxWidth', 'mode', 'targetContent'],
 })
 export class ModusSideNavigation {
   protected el: HTMLElement;

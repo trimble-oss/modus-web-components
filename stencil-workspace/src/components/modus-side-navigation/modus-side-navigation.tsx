@@ -22,6 +22,9 @@ import { ModusSideNavigationItemInfo, ModusSideNavItemLevelInfo } from './modus-
 export class ModusSideNavigation {
   @Element() element: HTMLElement;
 
+  /** (optional) To choose whether to collapse the panel when clicked outside. */
+  @Prop() collapseOnClickOutside = true;
+
   /** (optional) Data property to create the items. */
   @Prop() data: ModusSideNavigationItemInfo[];
 
@@ -71,7 +74,7 @@ export class ModusSideNavigation {
 
   @Listen('click', { target: 'document' })
   documentClickHandler(event: MouseEvent): void {
-    if (this.element.contains(event.target as HTMLElement) || event.defaultPrevented) return;
+    if (!this.collapseOnClickOutside || this.element.contains(event.target as HTMLElement) || event.defaultPrevented) return;
 
     // Collapse when clicked outside
     this.expanded = false;

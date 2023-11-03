@@ -2,9 +2,7 @@
 import { FunctionalComponent, h } from '@stencil/core';
 import { IconProps } from './IconMap';
 
-export const IconShield: FunctionalComponent<IconProps> = (
-  props: IconProps
-) => (
+export const IconShield: FunctionalComponent<IconProps> = (props: IconProps) => (
   <svg
     class={`icon-shield ${props.pressed ? 'pressed' : ''}`}
     height={props.size ?? 16}
