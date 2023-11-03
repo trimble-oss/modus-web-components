@@ -2,7 +2,6 @@ import {
   FunctionalComponent,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
-import { HeaderGroup } from '@tanstack/table-core';
 import {
   COLUMN_DEF_DATATYPE_KEY,
   COLUMN_DEF_SHOWTOTAL,
@@ -10,12 +9,10 @@ import {
   COLUMN_DEF_ROW_SELECTION_CSS,
   COLUMN_DEF_DATATYPE_INTEGER,
 } from '../modus-table.constants';
+import TableContext from '../models/table-context.model';
 
 interface ModusTableSummaryRowProps {
-  footerGroups: HeaderGroup<unknown>[];
-  tableData: unknown[];
-  frozenColumns: string[];
-  rowSelection: boolean;
+  context: TableContext;
 }
 
 function calculateTotal(tableData: unknown[], header): number | string {
@@ -25,14 +22,16 @@ function calculateTotal(tableData: unknown[], header): number | string {
 }
 
 export const ModusTableFooter: FunctionalComponent<ModusTableSummaryRowProps> = ({
-  footerGroups,
-  tableData,
-  frozenColumns,
-  rowSelection,
+  context: {
+    tableInstance: { getFooterGroups },
+    data,
+    rowSelection,
+    frozenColumns,
+  },
 }) => {
   return (
     <tfoot>
-      {footerGroups.map((group) => (
+      {getFooterGroups().map((group) => (
         <tr class="summary-row">
           {rowSelection && (
             <td id={COLUMN_DEF_ROW_SELECTION_ID} key={COLUMN_DEF_ROW_SELECTION_ID} class={COLUMN_DEF_ROW_SELECTION_CSS}></td>
@@ -45,9 +44,7 @@ export const ModusTableFooter: FunctionalComponent<ModusTableSummaryRowProps> = 
                 ${frozenColumns.includes(header.id) ? 'sticky-left' : ''}
                 ${header.column.columnDef[COLUMN_DEF_DATATYPE_KEY] === COLUMN_DEF_DATATYPE_INTEGER ? 'text-align-right' : ''}
               `}>
-              {header.column.columnDef[COLUMN_DEF_SHOWTOTAL]
-                ? calculateTotal(tableData, header)
-                : header.column.columnDef.footer}
+              {header.column.columnDef[COLUMN_DEF_SHOWTOTAL] ? calculateTotal(data, header) : header.column.columnDef.footer}
             </td>
           ))}
         </tr>

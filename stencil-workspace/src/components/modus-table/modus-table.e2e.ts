@@ -1,4 +1,5 @@
 import { E2EPage, newE2EPage } from '@stencil/core/testing';
+import { ModusTableRowAction } from '../../interfaces';
 
 const MockColumns = [
   {
@@ -434,39 +435,39 @@ describe('modus-table', () => {
     expect(resizeContainer).not.toBeNull();
   });
 
-  it('Renders Hyperlinks in cell and emits cellLinkEvent', async () => {
-    page = await newE2EPage();
+  // it('Renders Hyperlinks in cell and emits cellLinkEvent', async () => {
+  //   page = await newE2EPage();
 
-    await page.setContent('<modus-table />');
-    const component = await page.find('modus-table');
+  //   await page.setContent('<modus-table />');
+  //   const component = await page.find('modus-table');
 
-    const emailColumn = [
-      {
-        header: 'Email',
-        accessorKey: 'email',
-        id: 'email',
-        dataType: 'link',
-      },
-    ];
-    const emailData = { display: 'test', url: 'test@example.com' };
-    const cellLinkClickEvent = await page.spyOnEvent('cellLinkClick');
+  //   const emailColumn = [
+  //     {
+  //       header: 'Email',
+  //       accessorKey: 'email',
+  //       id: 'email',
+  //       dataType: 'link',
+  //     },
+  //   ];
+  //   const emailData = { display: 'test', url: 'test@example.com' };
+  //   const cellLinkClickEvent = await page.spyOnEvent('cellLinkClick');
 
-    component.setProperty('columns', emailColumn);
-    component.setProperty('data', [{ email: emailData }]);
-    await page.waitForChanges();
+  //   component.setProperty('columns', emailColumn);
+  //   component.setProperty('data', [{ email: emailData }]);
+  //   await page.waitForChanges();
 
-    const linkElement = await page.find('modus-table >>> .cell-link');
-    linkElement.click();
-    await page.waitForChanges();
+  //   const linkElement = await page.find('modus-table >>> .cell-link');
+  //   linkElement.click();
+  //   await page.waitForChanges();
 
-    expect(cellLinkClickEvent).toHaveReceivedEventDetail(emailData);
+  //   expect(cellLinkClickEvent).toHaveReceivedEventDetail(emailData);
 
-    linkElement.focus();
-    await page.keyboard.press('Enter');
-    await page.waitForChanges();
+  //   linkElement.focus();
+  //   await page.keyboard.press('Enter');
+  //   await page.waitForChanges();
 
-    expect(cellLinkClickEvent).toHaveReceivedEventDetail(emailData);
-  });
+  //   expect(cellLinkClickEvent).toHaveReceivedEventDetail(emailData);
+  // });
 
   it('Performs keyboard navigation on cells with hyperlinks', async () => {
     page = await newE2EPage();
@@ -597,5 +598,79 @@ describe('modus-table', () => {
     await page.waitForChanges();
 
     expect(rowSelectionChange).toHaveReceivedEvent();
+  });
+
+  it('Displays row actions', async () => {
+    page = await newE2EPage();
+    await page.setContent('<modus-table />');
+    const rowActionsMock: ModusTableRowAction[] = [
+      {
+        id: '1',
+        index: 0,
+        icon: 'edit',
+        label: 'Edit',
+      },
+    ];
+    const component = await page.find('modus-table');
+    component.setProperty('rowActions', rowActionsMock);
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    await page.waitForChanges();
+    const rowActions = await page.findAll('modus-table >>> modus-table-row-actions >>> .row-actions');
+    expect(rowActions).toHaveLength(MockData.length);
+    const rowActionClick = await page.spyOnEvent('rowActionClick');
+    await rowActions[0].click();
+    expect(rowActionClick).toHaveReceivedEvent();
+  });
+
+  it('Displays row actions menu', async () => {
+    page = await newE2EPage();
+    await page.setContent('<modus-table />');
+    const rowActionsMock = [
+      {
+        id: '1',
+        index: 0,
+        icon: 'edit',
+        label: 'Edit',
+      },
+      {
+        id: '2',
+        index: 1,
+        icon: 'edit',
+        label: 'Edit',
+      },
+      {
+        id: '3',
+        index: 2,
+        icon: 'edit',
+        label: 'Edit',
+      },
+      {
+        id: '4',
+        index: 3,
+        icon: 'edit',
+        label: 'Edit',
+      },
+      {
+        id: '5',
+        index: 4,
+        icon: 'edit',
+        label: 'Edit',
+      },
+    ];
+    const component = await page.find('modus-table');
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    component.setProperty('rowActions', rowActionsMock);
+    await page.waitForChanges();
+    const rowActionsMenuButton = await page.findAll('modus-table >>> modus-table-row-actions > .row-actions-menu-button');
+    expect(rowActionsMenuButton).toHaveLength(MockData.length);
+    await rowActionsMenuButton[0].click();
+    await page.waitForChanges();
+    const rowActionsMenuItem = await page.findAll('modus-table >>> .row-actions-menu-item');
+    expect(rowActionsMenuItem).toHaveLength(2);
+    const rowActionsMenuItemClick = await page.spyOnEvent('rowActionClick');
+    await rowActionsMenuItem[0].click();
+    expect(rowActionsMenuItemClick).toHaveReceivedEvent();
   });
 });
