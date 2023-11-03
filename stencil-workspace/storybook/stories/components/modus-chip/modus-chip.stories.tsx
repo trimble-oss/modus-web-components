@@ -80,7 +80,7 @@ export default {
       },
     },
     maxWidth: {
-      description: "The chip's maximum width",
+      description: "Chip text's maximum width",
       table: {
         type: { summary: 'string' },
         defaultValue: { summary: '100px' },
