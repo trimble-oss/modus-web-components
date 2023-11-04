@@ -295,7 +295,6 @@ describe('modus-table', () => {
     expect(await pagination.getAttribute('max-page')).toBeTruthy();
     expect(await pagination.getAttribute('active-page')).toBe(`${MockManualPagination.currentPageIndex}`);
     expect(await pagination.getAttribute('max-page')).toBe(`${MockManualPagination.pageCount}`);
-
   });
   it('Display page view when pagination is enabled', async () => {
     page = await newE2EPage();

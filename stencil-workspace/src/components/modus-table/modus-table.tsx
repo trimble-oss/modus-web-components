@@ -148,6 +148,20 @@ export class ModusTable {
 
   /** (Optional) To set modus-table in manual mode. */
   @Prop() manualPaginationOptions: ManualPaginationOptions;
+  @Watch('manualPaginationOptions') onManualPaginationOptionsChange(
+    newVal: ManualPaginationOptions,
+    oldVal: ManualPaginationOptions,
+  ){
+    if(newVal.pageCount !== oldVal.pageCount ||
+       newVal.currentPageIndex !== oldVal.currentPageIndex ||
+       newVal.currentPageSize  !== oldVal.currentPageSize 
+      ){
+      this.tableCore.setOptions('pageCount', newVal.pageCount)
+      this.manualPaginationOptions = { ...newVal }
+    }
+    
+    
+  }
 
   /** (Optional) To control multiple row selection. */
   @Prop() rowSelectionOptions: ModusTableRowSelectionOptions = {
