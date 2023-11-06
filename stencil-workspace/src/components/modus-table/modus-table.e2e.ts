@@ -500,14 +500,11 @@ describe('modus-table', () => {
 
     //expect(cellLinkClickEvent).toHaveReceivedEventDetail(emailData);
 
-  //expect(cellLinkClickEvent).toHaveReceivedEventDetail(emailData);
-
-
-  //   linkElement.focus();
-  //   await page.keyboard.press('Enter');
-  //   await page.waitForChanges();
-
-  //   expect(cellLinkClickEvent).toHaveReceivedEventDetail(emailData);
+    //linkElement.focus();
+    //await page.keyboard.press('Enter');
+    //await page.waitForChanges();
+    
+    //expect(cellLinkClickEvent).toHaveReceivedEventDetail(emailData);
   // });
 
   it('Performs keyboard navigation on cells with hyperlinks', async () => {
