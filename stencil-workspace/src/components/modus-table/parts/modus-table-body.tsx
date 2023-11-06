@@ -13,7 +13,8 @@ interface ModusTableBodyProps {
 }
 
 export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ context }) => {
-  const { hover, rowSelection, rowSelectionOptions, tableInstance: table, updateData } = context;
+  const { hover, rowSelection, rowSelectionOptions, rowActions, tableInstance: table, updateData } = context;
+  const hasRowActions = rowActions?.length > 0;
   const multipleRowSelection = rowSelectionOptions?.multiple;
 
   // Note: This function supports only 3 levels of nested rows.
@@ -60,6 +61,11 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
                 <ModusTableCell cell={cell} cellIndex={cellIndex} context={context} valueChange={handleCellValueChange} />
               );
             })}
+            {hasRowActions && (
+              <td class="sticky-right">
+                <modus-table-row-actions row={row} context={context} />
+              </td>
+            )}
           </tr>
         );
       })}

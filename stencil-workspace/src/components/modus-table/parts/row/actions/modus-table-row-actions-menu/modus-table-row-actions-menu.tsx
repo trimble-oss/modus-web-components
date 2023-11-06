@@ -47,7 +47,7 @@ export class ModusTableRowActionsMenu {
   private onRowActionClick: (event: CustomEvent<ModusTableRowActionClick>) => void = (e) =>
     this.handleRowActionButtonClick(e);
   private onRowExpanded: (event: CustomEvent) => void = () => (this.isMenuOpen = false);
-  
+
   componentDidRender(): void {
     if (this.isMenuOpen) {
       const firstItem = Array.from(this.element.querySelectorAll('modus-list-item'))?.find(

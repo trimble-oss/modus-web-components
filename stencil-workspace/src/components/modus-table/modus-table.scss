@@ -335,6 +335,13 @@ table {
       }
     }
   }
+
+  .sticky-right {
+    border-left: $rem-2px $modus-table-border-color solid;
+    position: sticky;
+    right: 0;
+    z-index: 1;
+  }
 }
 
 modus-table-filler-column {

@@ -30,10 +30,12 @@ export const ModusTableHeader: FunctionalComponent<ModusTableHeaderProps> = ({
     columnReorder,
     rowSelection,
     componentId,
+    rowActions,
   } = context;
 
   const tableHeadClass = { 'show-resize-cursor': getColumnResizing(), 'show-column-reorder-cursor': columnReorder };
   const headerGroups: HeaderGroup<unknown>[] = getHeaderGroups();
+  const rowActionsLength = Math.min(Math.max(rowActions.length * 40, 90), 160);
 
   return (
     <thead class={tableHeadClass}>
@@ -54,6 +56,11 @@ export const ModusTableHeader: FunctionalComponent<ModusTableHeaderProps> = ({
               />
             );
           })}
+          {rowActions.length > 0 && (
+            <th class="sticky-right" style={{ width: `${rowActionsLength}px` }}>
+              Actions
+            </th>
+          )}
         </tr>
       ))}
     </thead>

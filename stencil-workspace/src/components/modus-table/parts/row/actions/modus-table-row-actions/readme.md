@@ -24,7 +24,7 @@
 
 ### Used by
 
- - [modus-table-cell-main](../../../cell/modus-table-cell-main)
+ - [modus-table](../../../..)
 
 ### Depends on
 
@@ -34,7 +34,7 @@
 ```mermaid
 graph TD;
   modus-table-row-actions --> modus-button
-  modus-table-cell-main --> modus-table-row-actions
+  modus-table --> modus-table-row-actions
   style modus-table-row-actions fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

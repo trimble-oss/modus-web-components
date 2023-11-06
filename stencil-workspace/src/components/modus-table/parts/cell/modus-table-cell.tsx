@@ -13,21 +13,21 @@ interface ModusTableCellProps {
 }
 
 export const ModusTableCell: FunctionalComponent<ModusTableCellProps> = ({ cell, cellIndex, context, valueChange }) => {
-  const { rowsExpandable, rowActions } = context;
-  const hasRowActions = cellIndex === 0 && (rowsExpandable || rowActions?.length > 0);
+  const { rowsExpandable, frozenColumns } = context;
+  const hasRowsExpandable = cellIndex === 0 && rowsExpandable;
   const { id } = cell;
   return (
     <td
       key={id}
       tabindex={0}
       class={`
-      ${hasRowActions ? 'sticky-left' : ''}
+      ${hasRowsExpandable || frozenColumns.includes(cell.column.id) ? 'sticky-left' : ''}
       ${cell.column.getIsResizing() ? 'active-resize' : ''}
   `}
       style={{ width: `${cell.column.getSize()}px` }}>
       <modus-table-cell-main
         cell={cell}
-        hasRowActions={hasRowActions}
+        hasRowsExpandable={hasRowsExpandable}
         context={context}
         valueChange={valueChange}></modus-table-cell-main>
     </td>

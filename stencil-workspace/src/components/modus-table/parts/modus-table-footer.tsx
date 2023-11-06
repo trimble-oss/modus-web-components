@@ -27,6 +27,7 @@ export const ModusTableFooter: FunctionalComponent<ModusTableSummaryRowProps> = 
     data,
     rowSelection,
     frozenColumns,
+    rowActions,
   },
 }) => {
   return (
@@ -47,6 +48,7 @@ export const ModusTableFooter: FunctionalComponent<ModusTableSummaryRowProps> = 
               {header.column.columnDef[COLUMN_DEF_SHOWTOTAL] ? calculateTotal(data, header) : header.column.columnDef.footer}
             </td>
           ))}
+          {rowActions.length > 0 && <td></td>}
         </tr>
       ))}
     </tfoot>

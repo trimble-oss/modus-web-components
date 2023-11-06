@@ -334,7 +334,7 @@ export class ModusTable {
   getRowActionsWithOverflow(): TableRowActionWithOverflow[] {
     if (this.rowActions) {
       const sortedActions = this.rowActions.sort((a, b) => a.index - b.index);
-      const visibleLimit = this.rowsExpandable ? 2 : 3;
+      const visibleLimit = sortedActions.length < 5 ? 4 : 3;
       const actionButtons = sortedActions.slice(0, visibleLimit);
       const overflowMenu = sortedActions.slice(visibleLimit).map((action) => ({ ...action, isOverflow: true }));
 

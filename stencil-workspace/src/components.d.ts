@@ -1092,7 +1092,7 @@ export namespace Components {
     interface ModusTableCellMain {
         "cell": Cell<unknown, unknown>;
         "context": TableContext;
-        "hasRowActions": boolean;
+        "hasRowsExpandable": boolean;
         "valueChange": (props: TableCellEdited) => void;
     }
     interface ModusTableColumnsVisibility {
@@ -3169,7 +3169,7 @@ declare namespace LocalJSX {
     interface ModusTableCellMain {
         "cell"?: Cell<unknown, unknown>;
         "context"?: TableContext;
-        "hasRowActions"?: boolean;
+        "hasRowsExpandable"?: boolean;
         "valueChange"?: (props: TableCellEdited) => void;
     }
     interface ModusTableColumnsVisibility {

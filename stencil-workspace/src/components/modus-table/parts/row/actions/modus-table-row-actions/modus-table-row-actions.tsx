@@ -10,7 +10,6 @@ import {
 import { Row } from '@tanstack/table-core';
 import { ModusTableRowAction } from '../../../../models/modus-table.models';
 import TableContext, { TableRowActionsMenuEvent } from '../../../../models/table-context.model';
-import ModusTableCellExpandIcons from '../../../cell/modus-table-cell-expand-icons';
 
 @Component({
   tag: 'modus-table-row-actions',
@@ -58,7 +57,7 @@ export class ModusTableRowActions {
   }
 
   render(): void {
-    const { rowActions, rowsExpandable } = this.context;
+    const { rowActions } = this.context;
     let actionButtons: ModusTableRowAction[];
     let overflowMenu: ModusTableRowAction[];
 
@@ -68,8 +67,6 @@ export class ModusTableRowActions {
     }
     return (
       <Host>
-        {rowsExpandable && <ModusTableCellExpandIcons row={this.row} />}
-
         {actionButtons?.map(({ label, icon, id, isDisabled = () => false }) => {
           const disabled = isDisabled(this.row.original);
           return (

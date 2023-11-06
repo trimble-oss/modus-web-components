@@ -25,6 +25,7 @@ import NavigateTableCells from '../../../utilities/table-cell-navigation.utility
 import { CellFormatter } from '../../../utilities/table-cell-formatter.utility';
 import { ModusTableCellLinkElement } from '../modus-table-cell-link-element';
 import TableContext, { TableCellEdited } from '../../../models/table-context.model';
+import ModusTableCellExpandIcons from '../modus-table-cell-expand-icons';
 
 @Component({
   tag: 'modus-table-cell-main',
@@ -33,7 +34,7 @@ export class ModusTableCellMain {
   @Element() el: HTMLElement;
   @Prop() cell: Cell<unknown, unknown>;
   @Prop() context: TableContext;
-  @Prop() hasRowActions: boolean;
+  @Prop() hasRowsExpandable: boolean;
   @Prop() valueChange: (props: TableCellEdited) => void;
 
   @State() editMode: boolean;
@@ -160,7 +161,7 @@ export class ModusTableCellMain {
 
     return (
       <div class={classes}>
-        {this.hasRowActions && <modus-table-row-actions context={this.context} row={row}></modus-table-row-actions>}
+        {this.hasRowsExpandable && <ModusTableCellExpandIcons row={row} />}
 
         <span class="wrap-text">
           {cellDataType === COLUMN_DEF_DATATYPE_LINK ? (
