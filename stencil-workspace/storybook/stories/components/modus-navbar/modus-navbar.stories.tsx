@@ -78,6 +78,18 @@ Default.args = {
     email: 'modus_user@trimble.com',
     initials: 'MU',
     username: 'Modus User',
+    links:[
+      {
+      id: "link1",
+      display: "Link 1",
+      icon: "moon"
+      },
+      {
+        id: "link2",
+        display: "Link 2",
+        icon: "sun"
+        }
+    ]
   },
   buttons: [
     { id: 'addMenu', icon: 'add' },
