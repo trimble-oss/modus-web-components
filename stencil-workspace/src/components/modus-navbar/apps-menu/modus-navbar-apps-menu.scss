@@ -4,6 +4,7 @@
   @include custom-navbar-menu;
 
   align-items: flex-start;
+  background-color: $menu-background-color;
   cursor: default;
   max-height: 605px;
   overflow-y: auto;

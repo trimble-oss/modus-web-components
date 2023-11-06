@@ -1,7 +1,7 @@
 // Menu
 @mixin custom-navbar-menu {
   background-color: var(--modus-body-bg, $col_white);
-  border: $rem-1px solid var(--modus-border-color, #cbcdd6);
+  border: $rem-1px solid var(--modus-navbar-popup-border-color, #cbcdd6);
   border-radius: $rem_2px;
   box-shadow: $box-shadow-lg;
   color: var(--modus-body-color, #252a2e);
@@ -15,9 +15,9 @@
   z-index: 100;
 }
 
-$menu-bg: var(--modus-body-bg, #fff) !default;
+$menu-background-color: var(--modus-navbar-popup-bg, #fff) !default;
 $menu-color: var(--modus-body-color, #252a2e) !default;
-$menu-border-color: var(--modus-border-color, #cbcdd6) !default;
+$menu-border-color: var(--modus-navbar-popup-border-color, #464b52) !default;
 
 // Navbar
 $modus-navbar-bg: var(--modus-navbar-bg, $col_white) !default;
