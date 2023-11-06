@@ -623,6 +623,8 @@
   --modus-navbar-bg: var(--modus-gray-10);
   --modus-navbar-brand-logo-filter: brightness(9999%) saturate(0);
   --modus-navbar-icon-color: var(--modus-body-color);
+  --modus-navbar-popup-bg: var(--modus-gray-10);
+  --modus-navbar-popup-border-color: var(--modus-gray-8);
 
   // Hover
   --modus-navbar-icon-hover-bg: var(--modus-gray-4);
@@ -635,7 +637,7 @@
   // Profile
   --modus-navbar-profile-icon-initials-color: #1a2022;
   --modus-navbar-profile-icon-active-border-color: var(--modus-gray-6);
-  --modus-navbar-profile-menu-sign-out-background-color: var(--modus-dark);
+  --modus-navbar-profile-menu-sign-out-background-color: var(--modus-gray-9);
 
   // Pagination
   --modus-pagination-color: var(--modus-gray-2);
@@ -1016,4 +1018,12 @@ modus-side-navigation {
   --modus-side-navigation-item-icon-active-color: var(--modus-side-navigation-item-active-color);
   --modus-side-navigation-item-icon-active-filter: invert(95%) sepia(100%) saturate(0%) hue-rotate(151deg) brightness(104%)
     contrast(105%);
+}
+
+modus-navbar {
+  @include modus-list-item;
+}
+
+modus-navbar-profile-menu {
+  @include modus-list-item;
 }

@@ -1,6 +1,7 @@
 export interface ModusNavbarProfileMenuLink {
   display: string;
   id: string;
+  icon?: string;
 }
 export interface ModusNavbarTooltip {
   text: string;
