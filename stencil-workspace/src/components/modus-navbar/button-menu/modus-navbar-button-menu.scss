@@ -3,6 +3,7 @@
 .button-menu {
   @include custom-navbar-menu;
 
+  background-color: $menu-background-color;
   cursor: default;
   top: 0;
   width: max-content;

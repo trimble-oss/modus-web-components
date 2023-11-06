@@ -543,6 +543,10 @@ export namespace Components {
     }
     interface ModusListItem {
         /**
+          * (optional) Whether the list item has a border or not
+         */
+        "borderless": boolean;
+        /**
           * (optional) Disables the list item
          */
         "disabled": boolean;
@@ -2466,6 +2470,10 @@ declare namespace LocalJSX {
     interface ModusList {
     }
     interface ModusListItem {
+        /**
+          * (optional) Whether the list item has a border or not
+         */
+        "borderless"?: boolean;
         /**
           * (optional) Disables the list item
          */
