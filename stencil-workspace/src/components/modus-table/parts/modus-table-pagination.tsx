@@ -9,6 +9,7 @@ export interface ModusTablePaginationProps {
   table: Table<unknown>;
   totalCount: number;
   pageSizeList: number[];
+  isManualPagination?: boolean;
   currentPageSize?: number;
   currentPageIndex?: number;
 }
@@ -19,6 +20,7 @@ export const ModusTablePagination: FunctionalComponent<ModusTablePaginationProps
   pageSizeList,
   currentPageSize,
   currentPageIndex,
+  isManualPagination,
 }) => {
   const optionsList = pageSizeList.map((option) => ({ display: option }));
   const { options, getState, getPageCount, getExpandedRowModel, setPageIndex, setPageSize } = table;
@@ -54,7 +56,7 @@ export const ModusTablePagination: FunctionalComponent<ModusTablePaginationProps
               : (pageIndex + 1) * pageSize}
           </span>
           <span>of</span>
-          <span>{options.paginateExpandedRows ? getExpandedRowModel().rows.length : totalCount}</span>{' '}
+          <span>{!isManualPagination && options.paginateExpandedRows ? getExpandedRowModel().rows.length : totalCount}</span>{' '}
         </div>
         <modus-pagination
           active-page={currentPageIndex ?? 1 }

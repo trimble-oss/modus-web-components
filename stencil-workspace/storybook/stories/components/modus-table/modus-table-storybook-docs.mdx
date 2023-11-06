@@ -300,7 +300,8 @@ Manual Pagination allows users to handle pagination in server-side mode.
 - Manual Pagination can be enabled using the `manualPaginationOptions` prop.
 - The `currentPageIndex` takes a number to specify the current page number, indicating which page should appear as selected from the server side.
 - The `currentPageSize` takes a number to specify the current page view number, determining how many records the table will display from the server side.
-- The `pageCount` takes a number to specify the total number of records, in order to display the corresponding number of pages in the table.
+- The `pageCount` takes a number to specify the total number of pages, in order to display the corresponding number of pages in the table.
+- The `totalRecords` takes a number to specify the total number of records, in order to display the total count results in the table.
 
 <Story id="components-table--manual-pagination" height={'380px'} />
 
@@ -432,6 +433,7 @@ interface ManualPaginationOptions {
   currentPageIndex: number;
   currentPageSize: number;
   pageCount: number;
+  totalRecords: number;
 }
 
 interface ModusTableColumn<TData extends RowData, TValue = unknown> {

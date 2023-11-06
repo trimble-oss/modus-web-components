@@ -55,12 +55,10 @@ function initializeTable(
   displayOptions,
   rowSelectionOptions,
   manualPaginationOptions,
-  totalRecords
 ) {
   const tag = document.createElement('script');
   tag.innerHTML = `
- var modusTable = document.querySelector('modus-table')  
-  
+  var modusTable = document.querySelector('modus-table')
   modusTable.columns = ${JSON.stringify(columns)};
   modusTable.data = ${JSON.stringify(data)};
   modusTable.pageSizeList = ${JSON.stringify(pageSizeList)};
@@ -69,29 +67,22 @@ function initializeTable(
   modusTable.rowSelectionOptions = ${JSON.stringify(rowSelectionOptions)};
   modusTable.manualPaginationOptions = ${JSON.stringify(manualPaginationOptions)};
 
-
-  var TOTAL_RECORDS = ${totalRecords};
+  var manualPaginationData = ${JSON.stringify(makeData(manualPaginationOptions.totalRecords))};
 
   modusTable.addEventListener(
     "paginationChange", (ev)=> {
-     
-      var dataBySize = {
-        5: ${JSON.stringify(makeData(5))},
-        10: ${JSON.stringify(makeData(10))},
-        50:  ${JSON.stringify(makeData(50))},
-      }
-
-
       if(!!modusTable.manualPaginationOptions){
-        modusTable.data = dataBySize[ev.detail.pageSize]
-         modusTable.manualPaginationOptions = {
-            currentPageIndex : ev.detail.pageIndex + 1,
-            currentPageSize : ev.detail.pageSize,
-            pageCount: Math.ceil( TOTAL_RECORDS / ev.detail.pageSize)
-         }
+        modusTable.data = manualPaginationData.slice(ev.detail.pageIndex * ev.detail.pageSize,
+                                                      (ev.detail.pageIndex + 1) * ev.detail.pageSize);
+        modusTable.manualPaginationOptions = {
+          currentPageIndex : ev.detail.pageIndex + 1,
+          currentPageSize : ev.detail.pageSize,
+          pageCount: Math.ceil( manualPaginationData.length / ev.detail.pageSize),
+          totalRecords: manualPaginationData.length
+        }
       }
    })
-  `;
+`;
 
   return tag;
 }
@@ -438,7 +429,6 @@ const Template = ({
   rowSelection,
   rowSelectionOptions,
   manualPaginationOptions,
-  totalRecords,
 }) => html`
   <div style="width: 950px">
     <modus-table
@@ -463,8 +453,7 @@ const Template = ({
     toolbarOptions,
     displayOptions,
     rowSelectionOptions,
-    manualPaginationOptions,
-    totalRecords
+    manualPaginationOptions
   )}
 `;
 
@@ -568,11 +557,11 @@ export const ManualPagination = Template.bind({});
 ManualPagination.args = {
   ...DefaultArgs,
   pagination: true,
-  totalRecords: 100, //Server Side Total of records
   manualPaginationOptions: {
     currentPageIndex: 1,
     currentPageSize: 5,
     pageCount: 20,
+    totalRecords: 100,
   },
   data: makeData(5),
   pageSizeList: [5, 10, 50],

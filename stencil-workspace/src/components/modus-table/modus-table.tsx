@@ -159,8 +159,6 @@ export class ModusTable {
       this.tableCore.setOptions('pageCount', newVal.pageCount)
       this.manualPaginationOptions = { ...newVal }
     }
-    
-    
   }
 
   /** (Optional) To control multiple row selection. */
@@ -586,7 +584,8 @@ export class ModusTable {
     if (this.manualPaginationOptions) {
       paginationProps = {
         ...paginationProps,
-        totalCount: this.manualPaginationOptions.pageCount ?? 0,
+        totalCount: this.manualPaginationOptions.totalRecords ?? 0,
+        isManualPagination: true,
         currentPageSize: this.manualPaginationOptions.currentPageSize ?? 0,
         currentPageIndex: this.manualPaginationOptions.currentPageIndex ?? 0,
       };

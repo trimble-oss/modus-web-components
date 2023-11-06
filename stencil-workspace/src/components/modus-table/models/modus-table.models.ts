@@ -46,6 +46,7 @@ export interface ManualPaginationOptions {
   currentPageIndex: number;
   currentPageSize: number;
   pageCount: number;
+  totalRecords: number;
 }
 export interface ModusTableColumn<TData extends RowData, TValue = unknown> {
   header: string;
