@@ -234,6 +234,7 @@ export class ModusDateInput {
       return;
     }
 
+    if (!this._dateDisplay) return;
     const displayDate = this._dateDisplay.trim();
 
     // if there is no value for the default format, check the alternative formats

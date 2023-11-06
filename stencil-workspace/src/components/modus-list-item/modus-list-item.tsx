@@ -8,6 +8,9 @@ import { IconCheck } from '../icons/icon-check';
   shadow: true,
 })
 export class ModusListItem {
+  /** (optional) Whether the list item has a border or not */
+  @Prop() borderless: boolean;
+
   /** (optional) Disables the list item */
   @Prop() disabled: boolean;
 
@@ -32,15 +35,15 @@ export class ModusListItem {
   render(): unknown {
     const containerClass = `${this.classBySize.get(this.size)} ${this.disabled ? 'disabled' : ''} ${
       this.selected ? 'selected' : ''
-    }`;
-    const iconSize = this.size === 'condensed' ? '18' : '22';
+    } ${this.borderless ? 'borderless' : ''}`;
+    const iconCheckSize = this.size === 'condensed' ? '16' : '24';
 
     return (
       <li class={containerClass} onClick={() => (!this.disabled ? this.itemClick.emit() : null)}>
         <span class="slot">
           <slot />
         </span>
-        {this.selected && <IconCheck size={iconSize} />}
+        {this.selected && <IconCheck size={iconCheckSize} />}
       </li>
     );
   }
