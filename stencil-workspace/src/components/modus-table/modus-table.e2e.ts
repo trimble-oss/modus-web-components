@@ -498,7 +498,9 @@ describe('modus-table', () => {
   //   linkElement.click();
   //   await page.waitForChanges();
 
-  //   expect(cellLinkClickEvent).toHaveReceivedEventDetail(emailData);
+
+  //expect(cellLinkClickEvent).toHaveReceivedEventDetail(emailData);
+
 
   //   linkElement.focus();
   //   await page.keyboard.press('Enter');
