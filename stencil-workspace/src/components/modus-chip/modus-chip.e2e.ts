@@ -159,4 +159,27 @@ describe('modus-chip', () => {
     expect(chipClick).not.toHaveReceivedEvent();
     expect(closeClick).toHaveReceivedEvent();
   });
+  it('renders IconCheck with size 16px when size is small', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-chip show-checkmark size="small"></modus-chip');
+    const shadowIconCheck = await page.find('modus-chip >>> .icon-check');
+    await page.waitForChanges();
+
+    const computedStyles = shadowIconCheck.getComputedStyle();
+    expect((await computedStyles).width).toBe('16px');
+    expect((await computedStyles).height).toBe('16px');
+  });
+
+  it('renders IconRemove with size 16px when size is small', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-chip show-close size="small"></modus-chip');
+    const shadowIconRemove = await page.find('modus-chip >>> .icon-remove');
+    await page.waitForChanges();
+
+    const computedStyles = shadowIconRemove.getComputedStyle();
+    expect((await computedStyles).width).toBe('16px');
+    expect((await computedStyles).height).toBe('16px');
+  });
 });
