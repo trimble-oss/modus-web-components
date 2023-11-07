@@ -52,6 +52,7 @@ export const ModusTableColumnsVisibility = /*@__PURE__*/createReactComponent<JSX
 export const ModusTableDropdownMenu = /*@__PURE__*/createReactComponent<JSX.ModusTableDropdownMenu, HTMLModusTableDropdownMenuElement>('modus-table-dropdown-menu');
 export const ModusTableFillerColumn = /*@__PURE__*/createReactComponent<JSX.ModusTableFillerColumn, HTMLModusTableFillerColumnElement>('modus-table-filler-column');
 export const ModusTableRowActions = /*@__PURE__*/createReactComponent<JSX.ModusTableRowActions, HTMLModusTableRowActionsElement>('modus-table-row-actions');
+export const ModusTableRowActionsCell = /*@__PURE__*/createReactComponent<JSX.ModusTableRowActionsCell, HTMLModusTableRowActionsCellElement>('modus-table-row-actions-cell');
 export const ModusTableRowActionsMenu = /*@__PURE__*/createReactComponent<JSX.ModusTableRowActionsMenu, HTMLModusTableRowActionsMenuElement>('modus-table-row-actions-menu');
 export const ModusTableToolbar = /*@__PURE__*/createReactComponent<JSX.ModusTableToolbar, HTMLModusTableToolbarElement>('modus-table-toolbar');
 export const ModusTabs = /*@__PURE__*/createReactComponent<JSX.ModusTabs, HTMLModusTabsElement>('modus-tabs');

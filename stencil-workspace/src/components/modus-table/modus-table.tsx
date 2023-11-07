@@ -130,11 +130,6 @@ export class ModusTable {
 
   /** (Optional) Actions that can be performed on each row. A maximum of 4 icons will be shown, including overflow menu and expand icons. */
   @Prop() rowActions: ModusTableRowAction[] = [];
-  @Watch('rowActions') onRowActionsChange(newVal: ModusTableRowAction[]) {
-    if (newVal?.length > 0) {
-      this.freezeColumn(this.tableState.columnOrder[0]);
-    }
-  }
 
   /** (Optional) To display expanded rows. */
   @Prop() rowsExpandable = false;
@@ -182,7 +177,6 @@ export class ModusTable {
   @Watch('toolbarOptions') onToolbarOptionsChange(newVal: ModusTableToolbarOptions | null) {
     this.tableCore?.setOptions('enableHiding', !!newVal?.columnsVisibility);
     this.onRowsExpandableChange(this.rowsExpandable);
-    this.onRowActionsChange(this.rowActions);
   }
 
   /** Emits the cell value that was edited */
@@ -261,7 +255,6 @@ export class ModusTable {
     this._id = this.element.id || `modus-table-${createGuid()}`;
     this.setTableState({ columnOrder: this.columns?.map((column) => column.id as string) });
     this.onRowsExpandableChange(this.rowsExpandable);
-    this.onRowActionsChange(this.rowActions);
     this.initializeTable();
   }
 
@@ -386,7 +379,6 @@ export class ModusTable {
       onColumnResizeChange: this.onColumnResizeChange,
       onColumnReorderChange: this.onColumnReorderChange,
       onDataChange: this.onDataChange,
-      onRowActionsChange: this.onRowActionsChange,
       onRowsExpandableChange: this.onRowsExpandableChange,
       onRowSelectionOptionsChange: this.onRowSelectionOptionsChange,
       onSortChange: this.onSortChange,

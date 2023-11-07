@@ -62,8 +62,9 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
               );
             })}
             {hasRowActions && (
-              <td class="sticky-right">
-                <modus-table-row-actions row={row} context={context} />
+              <td class="sticky-right" tabindex="0">
+                {/* <modus-table-row-actions row={row} context={context} /> */}
+                <modus-table-row-actions-cell row={row} context={context} />
               </td>
             )}
           </tr>

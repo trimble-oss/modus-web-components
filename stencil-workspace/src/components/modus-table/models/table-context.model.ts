@@ -111,7 +111,6 @@ export default interface TableContext {
   onColumnResizeChange: (newVal: boolean) => void;
   onColumnReorderChange: () => void;
   onDataChange: (newVal: unknown[]) => void;
-  onRowActionsChange: (newVal: ModusTableRowAction[]) => void;
   onRowsExpandableChange: (newVal: boolean) => void;
   onRowSelectionOptionsChange: (newVal: ModusTableRowSelectionOptions, oldVal: ModusTableRowSelectionOptions) => void;
   onSortChange: (newVal) => void;

@@ -1317,6 +1317,28 @@ export declare interface ModusTableRowActions extends Components.ModusTableRowAc
 
 
 @ProxyCmp({
+  inputs: ['context', 'row']
+})
+@Component({
+  selector: 'modus-table-row-actions-cell',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['context', 'row'],
+})
+export class ModusTableRowActionsCell {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
+export declare interface ModusTableRowActionsCell extends Components.ModusTableRowActionsCell {}
+
+
+@ProxyCmp({
   inputs: ['context']
 })
 @Component({

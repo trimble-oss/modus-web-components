@@ -1123,6 +1123,10 @@ export namespace Components {
         "context": TableContext;
         "row": Row<unknown>;
     }
+    interface ModusTableRowActionsCell {
+        "context": TableContext;
+        "row": Row<unknown>;
+    }
     interface ModusTableRowActionsMenu {
         "context": TableContext;
     }
@@ -1816,6 +1820,12 @@ declare global {
         prototype: HTMLModusTableRowActionsElement;
         new (): HTMLModusTableRowActionsElement;
     };
+    interface HTMLModusTableRowActionsCellElement extends Components.ModusTableRowActionsCell, HTMLStencilElement {
+    }
+    var HTMLModusTableRowActionsCellElement: {
+        prototype: HTMLModusTableRowActionsCellElement;
+        new (): HTMLModusTableRowActionsCellElement;
+    };
     interface HTMLModusTableRowActionsMenuElement extends Components.ModusTableRowActionsMenu, HTMLStencilElement {
     }
     var HTMLModusTableRowActionsMenuElement: {
@@ -1915,6 +1925,7 @@ declare global {
         "modus-table-dropdown-menu": HTMLModusTableDropdownMenuElement;
         "modus-table-filler-column": HTMLModusTableFillerColumnElement;
         "modus-table-row-actions": HTMLModusTableRowActionsElement;
+        "modus-table-row-actions-cell": HTMLModusTableRowActionsCellElement;
         "modus-table-row-actions-menu": HTMLModusTableRowActionsMenuElement;
         "modus-table-toolbar": HTMLModusTableToolbarElement;
         "modus-tabs": HTMLModusTabsElement;
@@ -3201,6 +3212,10 @@ declare namespace LocalJSX {
         "onOverflowRowActions"?: (event: ModusTableRowActionsCustomEvent<TableRowActionsMenuEvent>) => void;
         "row"?: Row<unknown>;
     }
+    interface ModusTableRowActionsCell {
+        "context"?: TableContext;
+        "row"?: Row<unknown>;
+    }
     interface ModusTableRowActionsMenu {
         "context"?: TableContext;
     }
@@ -3553,6 +3568,7 @@ declare namespace LocalJSX {
         "modus-table-dropdown-menu": ModusTableDropdownMenu;
         "modus-table-filler-column": ModusTableFillerColumn;
         "modus-table-row-actions": ModusTableRowActions;
+        "modus-table-row-actions-cell": ModusTableRowActionsCell;
         "modus-table-row-actions-menu": ModusTableRowActionsMenu;
         "modus-table-toolbar": ModusTableToolbar;
         "modus-tabs": ModusTabs;
@@ -3615,6 +3631,7 @@ declare module "@stencil/core" {
              */
             "modus-table-filler-column": LocalJSX.ModusTableFillerColumn & JSXBase.HTMLAttributes<HTMLModusTableFillerColumnElement>;
             "modus-table-row-actions": LocalJSX.ModusTableRowActions & JSXBase.HTMLAttributes<HTMLModusTableRowActionsElement>;
+            "modus-table-row-actions-cell": LocalJSX.ModusTableRowActionsCell & JSXBase.HTMLAttributes<HTMLModusTableRowActionsCellElement>;
             "modus-table-row-actions-menu": LocalJSX.ModusTableRowActionsMenu & JSXBase.HTMLAttributes<HTMLModusTableRowActionsMenuElement>;
             "modus-table-toolbar": LocalJSX.ModusTableToolbar & JSXBase.HTMLAttributes<HTMLModusTableToolbarElement>;
             "modus-tabs": LocalJSX.ModusTabs & JSXBase.HTMLAttributes<HTMLModusTabsElement>;

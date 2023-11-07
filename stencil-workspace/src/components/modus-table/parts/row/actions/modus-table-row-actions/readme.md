@@ -13,13 +13,6 @@
 | `row`     | --        |             | `Row<unknown>` | `undefined` |
 
 
-## Events
-
-| Event                | Description | Type                                    |
-| -------------------- | ----------- | --------------------------------------- |
-| `overflowRowActions` |             | `CustomEvent<TableRowActionsMenuEvent>` |
-
-
 ## Dependencies
 
 ### Used by
@@ -28,14 +21,15 @@
 
 ### Depends on
 
-- [modus-button](../../../../../modus-button)
+- [modus-table-row-actions](.)
 
 ### Graph
 ```mermaid
 graph TD;
+  modus-table-row-actions-cell --> modus-table-row-actions
   modus-table-row-actions --> modus-button
-  modus-table --> modus-table-row-actions
-  style modus-table-row-actions fill:#f9f,stroke:#333,stroke-width:4px
+  modus-table --> modus-table-row-actions-cell
+  style modus-table-row-actions-cell fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------
