@@ -1,0 +1,70 @@
+:host {
+  display: block;
+}
+
+.modus-upload-progress-container {
+  font-family: $primary-font;
+  width: 400px;
+  padding: 12px;
+  box-shadow: 0 0 4px #00000029;
+
+  .folder-upload-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .file-count {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .controls {
+    display: flex;
+    gap: 4px;
+  }
+
+  .controls > * {
+    cursor: pointer;
+  }
+
+  .controls {
+    span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 24px;
+      width: 24px;
+      border-radius: 4px;
+    }
+    span:active {
+      background-color: blue !important;
+    }
+
+    span:hover {
+      background-color: purple;
+    }
+  }
+
+  .folder-name {
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .current-progress {
+    margin-top: 4px;
+    font-weight: bold;
+  }
+
+  .progress-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    .progress {
+      flex-grow: 1;
+    }
+  }
+}

@@ -300,6 +300,10 @@ export namespace Components {
          */
         "imageUrl": string;
         /**
+          * (optional) Maximum width for the Chip's text and shows ellipsis when truncated
+         */
+        "maxWidth": string;
+        /**
           * (optional) Whether to show the checkmark.
          */
         "showCheckmark": boolean;
@@ -524,6 +528,14 @@ export namespace Components {
           * Remove a file from the dropzone.
          */
         "removeFile": (fileName: string) => Promise<void>;
+    }
+    interface ModusFileUploadProgress {
+        "backgroundColor": string;
+        "currentUploadProgress": number;
+        "currentUploadSize": string;
+        "filesUploaded": number;
+        "folderName": string;
+        "totalFiles": number;
     }
     interface ModusIcon {
         /**
@@ -1467,6 +1479,10 @@ export interface ModusFileDropzoneCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusFileDropzoneElement;
 }
+export interface ModusFileUploadProgressCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusFileUploadProgressElement;
+}
 export interface ModusIconCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusIconElement;
@@ -1641,6 +1657,12 @@ declare global {
     var HTMLModusFileDropzoneElement: {
         prototype: HTMLModusFileDropzoneElement;
         new (): HTMLModusFileDropzoneElement;
+    };
+    interface HTMLModusFileUploadProgressElement extends Components.ModusFileUploadProgress, HTMLStencilElement {
+    }
+    var HTMLModusFileUploadProgressElement: {
+        prototype: HTMLModusFileUploadProgressElement;
+        new (): HTMLModusFileUploadProgressElement;
     };
     interface HTMLModusIconElement extends Components.ModusIcon, HTMLStencilElement {
     }
@@ -1877,6 +1899,7 @@ declare global {
         "modus-date-picker": HTMLModusDatePickerElement;
         "modus-dropdown": HTMLModusDropdownElement;
         "modus-file-dropzone": HTMLModusFileDropzoneElement;
+        "modus-file-upload-progress": HTMLModusFileUploadProgressElement;
         "modus-icon": HTMLModusIconElement;
         "modus-list": HTMLModusListElement;
         "modus-list-item": HTMLModusListItemElement;
@@ -2204,6 +2227,10 @@ declare namespace LocalJSX {
          */
         "imageUrl"?: string;
         /**
+          * (optional) Maximum width for the Chip's text and shows ellipsis when truncated
+         */
+        "maxWidth"?: string;
+        /**
           * An event that fires on chip click.
          */
         "onChipClick"?: (event: ModusChipCustomEvent<any>) => void;
@@ -2452,6 +2479,16 @@ declare namespace LocalJSX {
           * An event that fires when files have been added or removed, regardless of whether they're valid.
          */
         "onFiles"?: (event: ModusFileDropzoneCustomEvent<[File[], string | null]>) => void;
+    }
+    interface ModusFileUploadProgress {
+        "backgroundColor"?: string;
+        "currentUploadProgress"?: number;
+        "currentUploadSize"?: string;
+        "filesUploaded"?: number;
+        "folderName"?: string;
+        "onOnCancelUpload"?: (event: ModusFileUploadProgressCustomEvent<any>) => void;
+        "onOnPauseUpload"?: (event: ModusFileUploadProgressCustomEvent<any>) => void;
+        "totalFiles"?: number;
     }
     interface ModusIcon {
         /**
@@ -3516,6 +3553,7 @@ declare namespace LocalJSX {
         "modus-date-picker": ModusDatePicker;
         "modus-dropdown": ModusDropdown;
         "modus-file-dropzone": ModusFileDropzone;
+        "modus-file-upload-progress": ModusFileUploadProgress;
         "modus-icon": ModusIcon;
         "modus-list": ModusList;
         "modus-list-item": ModusListItem;
@@ -3573,6 +3611,7 @@ declare module "@stencil/core" {
             "modus-date-picker": LocalJSX.ModusDatePicker & JSXBase.HTMLAttributes<HTMLModusDatePickerElement>;
             "modus-dropdown": LocalJSX.ModusDropdown & JSXBase.HTMLAttributes<HTMLModusDropdownElement>;
             "modus-file-dropzone": LocalJSX.ModusFileDropzone & JSXBase.HTMLAttributes<HTMLModusFileDropzoneElement>;
+            "modus-file-upload-progress": LocalJSX.ModusFileUploadProgress & JSXBase.HTMLAttributes<HTMLModusFileUploadProgressElement>;
             "modus-icon": LocalJSX.ModusIcon & JSXBase.HTMLAttributes<HTMLModusIconElement>;
             "modus-list": LocalJSX.ModusList & JSXBase.HTMLAttributes<HTMLModusListElement>;
             "modus-list-item": LocalJSX.ModusListItem & JSXBase.HTMLAttributes<HTMLModusListItemElement>;

@@ -52,6 +52,7 @@ import { IconExport } from './icon-export';
 import { IconHistory } from './icon-history';
 import { IconPencil } from './icon-pencil';
 import { IconShield } from './icon-shield';
+import { IconPause } from './icon-pause';
 
 export interface IconProps {
   color?: string;
@@ -131,6 +132,8 @@ export const IconMap: FunctionalComponent<IconMapProps> = (props: IconMapProps) 
       return <IconMenu color={props.color} onClick={props.onClick} size={props.size} />;
     case 'moon':
       return <IconMoon color={props.color} onClick={props.onClick} size={props.size} />;
+    case 'pause':
+      return <IconPause color={props.color} onClick={props.onClick} size={props.size} />;
     case 'notifications':
       return <IconNotifications color={props.color} onClick={props.onClick} size={props.size} pressed={props.pressed} />;
     case 'refresh':

@@ -1,21 +1,52 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
-    <title>Trimble Modus Web Components</title>
 
-    <script type="module" src="/build/modus-web-components.esm.js"></script>
-    <script nomodule src="/build/modus-web-components.js"></script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+  <title>Trimble Modus Web Components</title>
 
-    <link rel="stylesheet" href="/build/modus-web-components.css" />
+  <script type="module" src="/build/modus-web-components.esm.js"></script>
+  <script nomodule src="/build/modus-web-components.js"></script>
 
-    <!--Manually load Modus font-family-->
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
-    <link rel="stylesheet" src="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" />
-  </head>
+  <link rel="stylesheet" href="/build/modus-web-components.css" />
 
-  <body>
-    <!-- Test components -->
- </body>
+  <!--Manually load Modus font-family-->
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+  <link rel="stylesheet" src="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" />
+</head>
+
+<body>
+  <!-- Test components -->
+
+  <div style="background-color: #F1F1F6; width: 600px; height: 600px; padding: 20px; border-radius: 12px;">
+    <div style="margin-bottom: 10px;"> Folder upload ----------------</div>
+
+    <modus-file-upload-progress current-upload-size="32KB" folder-name="Trimble Drive" current-upload-progress="50"
+      files-uploaded="1" total-files="2">
+    </modus-file-upload-progress>
+
+    <div style="margin-bottom: 10px; margin-top: 20px">File upload ----------------</div>
+
+    <modus-file-upload-progress current-upload-size="32KB" folder-name="Trimble Drive" current-upload-progress="50"
+      files-uploaded="1" total-files="1">
+    </modus-file-upload-progress>
+
+    <div style="margin-bottom: 10px; margin-top: 20px">Folder upload - custom background ----------------</div>
+
+    <modus-file-upload-progress current-upload-size="32KB" background-color="#fff" folder-name="Trimble Drive"
+      current-upload-progress="50" files-uploaded="1" total-files="2">
+    </modus-file-upload-progress>
+
+    <div style="margin-bottom: 10px; margin-top: 20px">Folder upload - finished ----------------</div>
+
+    <modus-file-upload-progress current-upload-size="32KB" background-color="#fff" folder-name="Trimble Drive"
+      current-upload-progress="100" files-uploaded="2" total-files="2">
+    </modus-file-upload-progress>
+
+
+
+  </div>
+</body>
+
 </html>
