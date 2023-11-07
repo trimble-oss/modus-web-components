@@ -44,9 +44,13 @@
   }
 
   span {
+    display: inline-block;
     font-size: $rem-13px;
     font-weight: $chip-font-weight;
     margin: 0 $rem-4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   svg:not(.icon-remove) path {
