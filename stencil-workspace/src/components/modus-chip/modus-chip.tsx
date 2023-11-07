@@ -106,11 +106,11 @@ export class ModusChip {
         {this.imageUrl ? (
           <img src={this.imageUrl} alt="" />
         ) : this.showCheckmark ? (
-          <IconCheck size={'24'}></IconCheck>
+          <IconCheck size={'16'}></IconCheck>
         ) : null}
         <span>{this.value}</span>
         {this.showClose ? (
-          <IconRemove onClick={this.disabled ? null : (event) => this.onCloseClick(event)} size={'24'}></IconRemove>
+          <IconRemove onClick={this.disabled ? null : (event) => this.onCloseClick(event)} size={'16'}></IconRemove>
         ) : null}
       </div>
     );
