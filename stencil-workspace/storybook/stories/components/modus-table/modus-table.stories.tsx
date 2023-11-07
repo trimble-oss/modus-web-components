@@ -71,7 +71,10 @@ function initializeTable(
   modusTable.addEventListener(
     "paginationChange", (ev)=> {
       if(!!modusTable.manualPaginationOptions){
-        const manualPaginationData = ${JSON.stringify(makeData(manualPaginationOptions?.totalRecords))};
+        const manualPaginationData = ${JSON.stringify([
+          ...data, 
+          ...makeData(manualPaginationOptions?.totalRecords).slice(data.length)
+        ])};
         modusTable.data = manualPaginationData.slice(ev.detail.pageIndex * ev.detail.pageSize,
                                                       (ev.detail.pageIndex + 1) * ev.detail.pageSize);
         modusTable.manualPaginationOptions = {
