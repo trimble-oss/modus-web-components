@@ -901,6 +901,10 @@ export namespace Components {
     }
     interface ModusSideNavigation {
         /**
+          * (optional) To choose whether to collapse the panel when clicked outside.
+         */
+        "collapseOnClickOutside": boolean;
+        /**
           * (optional) Data property to create the items.
          */
         "data": ModusSideNavigationItemInfo[];
@@ -2910,6 +2914,10 @@ declare namespace LocalJSX {
         "value"?: unknown;
     }
     interface ModusSideNavigation {
+        /**
+          * (optional) To choose whether to collapse the panel when clicked outside.
+         */
+        "collapseOnClickOutside"?: boolean;
         /**
           * (optional) Data property to create the items.
          */
