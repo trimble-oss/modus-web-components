@@ -132,6 +132,23 @@ describe('modus-chip', () => {
     expect(await shadowValue.textContent).toEqual('Hello');
   });
 
+  it('renders changes to max-width', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-chip></modus-chip>');
+    const chip = await page.find('modus-chip');
+    expect(await chip.getProperty('maxWidth')).toBeFalsy();
+
+    chip.setProperty('maxWidth', '100px'); // Set the max-width property
+    await page.waitForChanges();
+    expect(await chip.getProperty('maxWidth')).toEqual('100px');
+
+    const element = await page.find('modus-chip >>> span');
+
+    const computedStyle = await element.getComputedStyle();
+    expect(computedStyle['maxWidth']).toEqual('100px');
+  });
+
   it('emits chip click event on chip click', async () => {
     const page = await newE2EPage();
 
@@ -158,5 +175,28 @@ describe('modus-chip', () => {
     await page.waitForChanges();
     expect(chipClick).not.toHaveReceivedEvent();
     expect(closeClick).toHaveReceivedEvent();
+  });
+  it('renders IconCheck with size 16px when size is small', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-chip show-checkmark size="small"></modus-chip');
+    const shadowIconCheck = await page.find('modus-chip >>> .icon-check');
+    await page.waitForChanges();
+
+    const computedStyles = shadowIconCheck.getComputedStyle();
+    expect((await computedStyles).width).toBe('16px');
+    expect((await computedStyles).height).toBe('16px');
+  });
+
+  it('renders IconRemove with size 16px when size is small', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-chip show-close size="small"></modus-chip');
+    const shadowIconRemove = await page.find('modus-chip >>> .icon-remove');
+    await page.waitForChanges();
+
+    const computedStyles = shadowIconRemove.getComputedStyle();
+    expect((await computedStyles).width).toBe('16px');
+    expect((await computedStyles).height).toBe('16px');
   });
 });
