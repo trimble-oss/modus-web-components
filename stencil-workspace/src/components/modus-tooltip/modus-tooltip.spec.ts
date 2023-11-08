@@ -10,10 +10,11 @@ describe('modus-tooltip', () => {
     expect(root).toEqualHtml(`
       <modus-tooltip text="message">
         <mock:shadow-root>
-          <div class="modus-tooltip top">
             <slot></slot>
-            <div class="text" role="tooltip">message</div>
-          </div>
+            <div class="tooltip" role="tooltip" tabindex="-1">
+              message
+              <div data-popper-arrow id="arrow"></div>
+            </div>
         </mock:shadow-root>
       </modus-tooltip>
     `);

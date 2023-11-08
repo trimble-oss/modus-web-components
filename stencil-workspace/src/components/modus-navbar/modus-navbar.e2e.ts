@@ -184,15 +184,17 @@ describe('modus-navbar', () => {
     navbar.setProperty('searchTooltip', { text: 'Search' });
     await page.waitForChanges();
 
-    const tooltip = await page.find('modus-navbar >>> :first-child');
-    const tooltipText = await tooltip.find('modus-tooltip >>> .text');
-    expect(await tooltipText.isVisible()).toBe(false);
+    const tooltip = await searchIcon.find('modus-tooltip >>> .tooltip');
+    expect(tooltip.getAttribute('data-show')).toBeNull();
 
-    await searchIcon.find('modus-tooltip >>> .modus-tooltip').then((e) => e.hover());
+    await searchIcon.hover();
     await page.waitForChanges();
 
-    expect(await tooltipText.isVisible()).toBe(true);
-    expect(tooltipText.innerText).toBe('Search');
+    await new Promise((r) => setTimeout(r, 500));
+    expect(tooltip.getAttribute('data-show')).not.toBeNull();
+
+    const tooltipText = await page.$eval('modus-navbar >>> modus-tooltip >>> .tooltip', (tooltip) => tooltip.textContent);
+    expect(tooltipText).toBe('Search');
   });
 
   it('should show searchoverlay on search button click', async () => {
@@ -301,7 +303,7 @@ describe('modus-navbar', () => {
     expect(await productLogo.isVisible()).toBe(true);
   });
 
-  it('should show tooltip on hover of profile menu', async () => {
+  it('should show tooltip on hover of profile menu and hide it when menu is open', async () => {
     const page = await newE2EPage();
     await page.setContent('<modus-navbar></modus-navbar>');
 
@@ -312,66 +314,22 @@ describe('modus-navbar', () => {
     await page.waitForChanges();
 
     const profileMenuButton = await page.find('modus-navbar >>> .profile-menu');
-    const tooltipText = await profileMenuButton.find('modus-tooltip >>> .text');
 
-    expect(await tooltipText.isVisible()).toBe(false);
+    const tooltip = await profileMenuButton.find('modus-tooltip >>> .tooltip');
+    expect(tooltip.getAttribute('data-show')).toBeNull();
 
-    await profileMenuButton.find('modus-tooltip >>> .modus-tooltip').then((e) => e.hover());
-
+    await profileMenuButton.hover();
     await page.waitForChanges();
 
-    expect(await tooltipText.isVisible()).toBe(true);
-    expect(tooltipText.innerText).toBe('Modus User');
-  });
+    await new Promise((r) => setTimeout(r, 500));
+    expect(tooltip.getAttribute('data-show')).not.toBeNull();
 
-  it('should hide tooltip on hovering over of profile menu', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<modus-navbar profile-menu-tooltip-text="Modus User"></modus-navbar>');
-
-    await page.waitForChanges();
-
-    const navbar = await page.find('modus-navbar');
-    navbar.setProperty('profileMenuOptions', { tooltip: { text: 'Modus User' } });
-    await page.waitForChanges();
-
-    const profileMenuButton = await page.find('modus-navbar >>> .profile-menu');
-    const tooltipText = await profileMenuButton.find('modus-tooltip >>> .text');
-
-    await profileMenuButton.find('modus-tooltip >>> .modus-tooltip').then((e) => e.hover());
-
-    await page.waitForChanges();
-
-    page.mouse.move(0, 0);
-
-    await page.waitForChanges();
-    expect(await tooltipText.isVisible()).toBe(false);
-  });
-
-  it('should hide tooltip while profile menu open', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<modus-navbar profile-menu-tooltip-text="Modus User"></modus-navbar>');
-
-    await page.waitForChanges();
-
-    const navbar = await page.find('modus-navbar');
-    navbar.setProperty('profileMenuOptions', { tooltip: { text: 'Modus User' } });
-    await page.waitForChanges();
-
-    const profileMenuButton = await page.find('modus-navbar >>> .profile-menu');
-    const tooltipText = await profileMenuButton.find('modus-tooltip >>> .text');
-
-    await profileMenuButton.find('modus-tooltip >>> .modus-tooltip').then((e) => e.hover());
-
-    await page.waitForChanges();
+    const tooltipText = await page.$eval('modus-navbar >>> modus-tooltip >>> .tooltip', (tooltip) => tooltip.textContent);
+    expect(tooltipText).toBe('Modus User');
 
     await profileMenuButton.click();
-
-    await page.waitForChanges();
-
-    const profileMenu = await page.find('modus-navbar >>> modus-navbar-profile-menu');
-
-    expect(await profileMenu.isVisible()).toBe(true);
-    expect(await tooltipText.isVisible()).toBe(false);
+    await new Promise((r) => setTimeout(r, 500));
+    expect(tooltip.getAttribute('data-show')).toBeNull();
   });
 
   it('should render primary logo in all screen when secondary logo not provided', async () => {

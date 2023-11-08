@@ -39,6 +39,7 @@
     "start-storybook": "npm run build && cd storybook && npm run storybook"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
     "@stencil/core": "^3.3.0",
     "@tanstack/table-core": "^8.8.5"
   },

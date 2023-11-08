@@ -1,7 +1,6 @@
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-navbar-storybook-docs.mdx';
 import { html } from 'lit-html';
-import { ModusNavbarButton } from '../../../../src/components/modus-navbar/modus-navbar.models';
 
 export default {
   title: 'Components/Navbar',
@@ -23,17 +22,17 @@ export default {
       },
     },
     profileMenuOptions: {
-      name: 'profileMenuOptions',
+      name: 'profile-menu-options',
       description: 'Set the options for profile menu',
       table: {
-        type: { summary: 'object' },
+        type: { summary: 'ModusProfileMenuOptions' },
       },
     },
     buttons: {
       name: 'buttons',
       description: 'To add icon buttons dynamically to the Navbar, create an array of ModusNavbarButton.',
       table: {
-        type: { summary: 'object' },
+        type: { summary: 'ModusNavbarButton[]' },
       },
     },
   },
@@ -59,7 +58,6 @@ const Template = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay
     enable-search-overlay=${enableSearchOverlay}
     show-search=${showSearch}
     show-apps-menu
-    show-help
     show-main-menu>
     <div slot="main" style="height:300px;">Render your own main menu.</div>
 
@@ -89,10 +87,17 @@ Default.args = {
         display: "Link 2",
         icon: "sun"
         }
-    ]
+    ],
+    tooltip: {
+      text: 'User Profile Menu',
+    }
   },
   buttons: [
-    { id: 'addMenu', icon: 'add' },
+    { id: 'addMenu', icon: 'add',
+      tooltip: {
+        text: 'Add',
+      }
+    },
     { id: 'notificationMenu', icon: 'notifications' },
   ],
   showSearch: false,
@@ -164,7 +169,7 @@ const setNavbar = (
   profileMenuOptions,
   logoUrl = '',
   iconUrl = '',
-  buttons: ModusNavbarButton[]
+  buttons: []
 ) => {
   const tag = document.createElement('script');
   profileMenuOptions.avatarUrl = workingAvatar
