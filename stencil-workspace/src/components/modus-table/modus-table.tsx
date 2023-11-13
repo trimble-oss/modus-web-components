@@ -253,7 +253,7 @@ export class ModusTable {
 
   componentWillLoad(): void {
     this._id = this.element.id || `modus-table-${createGuid()}`;
-    this.setTableState({ columnOrder: this.columns?.map((column) => column.id as string) });
+    this.setTableState({ columnOrder: this.columns?.map((column) => `${this._id}-${column.id}` as string) });
     this.onRowsExpandableChange();
     this.initializeTable();
   }
@@ -385,7 +385,7 @@ export class ModusTable {
   initializeTable(): void {
     this.tableCore = new ModusTableCore({
       data: this.data ?? [],
-      columns: this.columns,
+      columns: this.columns.map((col)=> ({ ...col, id: `${this._id}-${col.id}`})),
       columnResize: this.columnResize,
       sort: this.sort,
       pagination: this.pagination,
@@ -530,7 +530,6 @@ export class ModusTable {
 
     return (
       <ModusTableHeader
-        componentId={this._id}
         columnReorder={this.columnReorder}
         frozenColumns={this.frozenColumns}
         rowSelection={this.rowSelection}
