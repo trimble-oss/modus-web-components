@@ -14,7 +14,7 @@ import { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, 
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-import { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTablePaginationState, ModusTableRowActions, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+import { ManualPaginationOptions, ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTablePaginationState, ModusTableRowActions, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 import { Cell, Column, Table } from "@tanstack/table-core";
 import { ModusTableCellEdited } from "./components/modus-table/parts/modus-table-body";
 import { Tab } from "./components/modus-tabs/modus-tabs";
@@ -29,7 +29,7 @@ export { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, 
 export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 export { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 export { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-export { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTablePaginationState, ModusTableRowActions, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+export { ManualPaginationOptions, ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTablePaginationState, ModusTableRowActions, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 export { Cell, Column, Table } from "@tanstack/table-core";
 export { ModusTableCellEdited } from "./components/modus-table/parts/modus-table-body";
 export { Tab } from "./components/modus-tabs/modus-tabs";
@@ -299,6 +299,10 @@ export namespace Components {
           * (optional) The image's url.
          */
         "imageUrl": string;
+        /**
+          * (optional) Maximum width for the Chip's text and shows ellipsis when truncated
+         */
+        "maxWidth": string;
         /**
           * (optional) Whether to show the checkmark.
          */
@@ -1037,6 +1041,10 @@ export namespace Components {
          */
         "hover": boolean;
         /**
+          * (Optional) To set modus-table in manual mode.
+         */
+        "manualPaginationOptions": ManualPaginationOptions;
+        /**
           * (Optional) To display a vertical scrollbar when the height is exceeded.
          */
         "maxHeight": string;
@@ -1342,7 +1350,7 @@ export namespace Components {
         /**
           * (optional) The tooltip's position relative to its content.
          */
-        "position": 'bottom' | 'left' | 'right' | 'top';
+        "position": ToolTipPlacement;
         /**
           * The tooltip's text.
          */
@@ -2203,6 +2211,10 @@ declare namespace LocalJSX {
           * (optional) The image's url.
          */
         "imageUrl"?: string;
+        /**
+          * (optional) Maximum width for the Chip's text and shows ellipsis when truncated
+         */
+        "maxWidth"?: string;
         /**
           * An event that fires on chip click.
          */
@@ -3070,6 +3082,10 @@ declare namespace LocalJSX {
          */
         "hover"?: boolean;
         /**
+          * (Optional) To set modus-table in manual mode.
+         */
+        "manualPaginationOptions"?: ManualPaginationOptions;
+        /**
           * (Optional) To display a vertical scrollbar when the height is exceeded.
          */
         "maxHeight"?: string;
@@ -3417,7 +3433,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The tooltip's position relative to its content.
          */
-        "position"?: 'bottom' | 'left' | 'right' | 'top';
+        "position"?: ToolTipPlacement;
         /**
           * The tooltip's text.
          */

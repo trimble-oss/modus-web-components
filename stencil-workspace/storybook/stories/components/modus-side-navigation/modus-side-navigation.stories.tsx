@@ -370,6 +370,7 @@ const setJavascriptDataTemplate = (containerId) => {
         {
           id:'home-menu',
           menuIcon: "${homeIcon}",
+          disabled: true,
           label: 'Home page 1',
           children: [
             {

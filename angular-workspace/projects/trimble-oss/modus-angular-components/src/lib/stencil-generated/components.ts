@@ -254,14 +254,14 @@ export declare interface ModusCheckbox extends Components.ModusCheckbox {
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'chipStyle', 'disabled', 'hasError', 'imageUrl', 'showCheckmark', 'showClose', 'size', 'value']
+  inputs: ['ariaLabel', 'chipStyle', 'disabled', 'hasError', 'imageUrl', 'maxWidth', 'showCheckmark', 'showClose', 'size', 'value']
 })
 @Component({
   selector: 'modus-chip',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['ariaLabel', 'chipStyle', 'disabled', 'hasError', 'imageUrl', 'showCheckmark', 'showClose', 'size', 'value'],
+  inputs: ['ariaLabel', 'chipStyle', 'disabled', 'hasError', 'imageUrl', 'maxWidth', 'showCheckmark', 'showClose', 'size', 'value'],
 })
 export class ModusChip {
   protected el: HTMLElement;
@@ -1103,7 +1103,7 @@ export declare interface ModusSwitch extends Components.ModusSwitch {
 
 
 @ProxyCmp({
-  inputs: ['columnReorder', 'columnResize', 'columns', 'data', 'displayOptions', 'fullWidth', 'hover', 'maxHeight', 'maxWidth', 'pageSizeList', 'pagination', 'rowSelection', 'rowSelectionOptions', 'rowsExpandable', 'showSortIconOnHover', 'sort', 'summaryRow', 'toolbar', 'toolbarOptions'],
+  inputs: ['columnReorder', 'columnResize', 'columns', 'data', 'displayOptions', 'fullWidth', 'hover', 'manualPaginationOptions', 'maxHeight', 'maxWidth', 'pageSizeList', 'pagination', 'rowSelection', 'rowSelectionOptions', 'rowsExpandable', 'showSortIconOnHover', 'sort', 'summaryRow', 'toolbar', 'toolbarOptions'],
   methods: ['getColumnData', 'toggleColumnVisibility']
 })
 @Component({
@@ -1111,7 +1111,7 @@ export declare interface ModusSwitch extends Components.ModusSwitch {
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['columnReorder', 'columnResize', 'columns', 'data', 'displayOptions', 'fullWidth', 'hover', 'maxHeight', 'maxWidth', 'pageSizeList', 'pagination', 'rowSelection', 'rowSelectionOptions', 'rowsExpandable', 'showSortIconOnHover', 'sort', 'summaryRow', 'toolbar', 'toolbarOptions'],
+  inputs: ['columnReorder', 'columnResize', 'columns', 'data', 'displayOptions', 'fullWidth', 'hover', 'manualPaginationOptions', 'maxHeight', 'maxWidth', 'pageSizeList', 'pagination', 'rowSelection', 'rowSelectionOptions', 'rowsExpandable', 'showSortIconOnHover', 'sort', 'summaryRow', 'toolbar', 'toolbarOptions'],
 })
 export class ModusTable {
   protected el: HTMLElement;
