@@ -31,6 +31,11 @@ export class ModusTableColumnsVisibility {
 
   private refItemContent: HTMLElement[] = [];
 
+  componentWillLoad() {
+    // Initialize columns visibility state based on hiddenColumns
+    this.initializeVisibilityState();
+  }
+
   applyColumnsVisibility() {
     this.table.getAllLeafColumns().forEach((column) => {
       if (this.columnsVisibilityState.has(column.id)) {
@@ -87,6 +92,15 @@ export class ModusTableColumnsVisibility {
     if (!requiredColumn) {
       this.refItemContent[i] = el;
     }
+  }
+
+  private initializeVisibilityState() {
+    // Set the visibility state based on hiddenColumns prop
+    this.table.getAllLeafColumns().forEach((column) => {
+      if (this.columnsVisibility.hiddenColumns?.includes(column.id)) {
+        column.toggleVisibility(false);
+      }
+    });
   }
 
   private toggleColumnVisibility(columnIndex: number) {
