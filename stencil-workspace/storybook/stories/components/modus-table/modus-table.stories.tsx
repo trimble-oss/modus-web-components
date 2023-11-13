@@ -72,7 +72,7 @@ function initializeTable(
     "paginationChange", (ev)=> {
       if(!!modusTable.manualPaginationOptions){
         const manualPaginationData = ${JSON.stringify([
-          ...data, 
+          ...data,
           ...makeData(manualPaginationOptions?.totalRecords).slice(data.length)
         ])};
         modusTable.data = manualPaginationData.slice(ev.detail.pageIndex * ev.detail.pageSize,
@@ -541,7 +541,7 @@ const valueFormatterTable = (pageSizeList, toolbarOptions, displayOptions, rowSe
    document.querySelector('modus-table').toolbarOptions = ${JSON.stringify(toolbarOptions)};
    document.querySelector('modus-table').displayOptions = ${JSON.stringify(displayOptions)};
    document.querySelector('modus-table').rowSelectionOptions = ${JSON.stringify(rowSelectionOptions)};
-   
+
   `;
   return tag;
 };
@@ -580,6 +580,7 @@ ColumnVisibility.args = {
     columnsVisibility: {
       title: '',
       requiredColumns: ['age', 'visits'],
+      hiddenColumns: ['progress', 'createdAt'],
     },
   },
   toolbar: true,
