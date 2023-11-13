@@ -385,7 +385,7 @@ export class ModusTable {
   initializeTable(): void {
     this.tableCore = new ModusTableCore({
       data: this.data ?? [],
-      columns: this.columns.map((col)=> ({ ...col, id: `${this._id}-${col.id}`})),
+      columns: this.columns?.map((col)=> ({ ...col, id: `${this._id}-${col.id}`})) || [],
       columnResize: this.columnResize,
       sort: this.sort,
       pagination: this.pagination,
