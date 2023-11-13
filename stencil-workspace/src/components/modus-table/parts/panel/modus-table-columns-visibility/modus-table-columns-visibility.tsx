@@ -97,7 +97,10 @@ export class ModusTableColumnsVisibility {
   private initializeVisibilityState() {
     // Set the visibility state based on hiddenColumns prop
     this.table.getAllLeafColumns().forEach((column) => {
-      if (this.columnsVisibility.hiddenColumns?.includes(column.id)) {
+      const isRequired = this.columnsVisibility?.requiredColumns?.includes(column.id);
+      const isHidden = this.columnsVisibility?.hiddenColumns?.includes(column.id);
+
+      if (!isRequired && isHidden) {
         column.toggleVisibility(false);
       }
     });
