@@ -32,6 +32,8 @@ export interface TableCoreOptions {
   columnOrder: string[];
   toolbarOptions: ModusTableToolbarOptions | null;
   pageSizeList: number[];
+  manualPagination?: boolean;
+  pageCount?: number;
 
   setExpanded: (updater: Updater<ExpandedState>) => void;
   setSorting: (updater: Updater<SortingState>) => void;
@@ -58,6 +60,8 @@ export default class ModusTableCore {
       columnOrder,
       pageSizeList,
       toolbarOptions,
+      manualPagination,
+      pageCount,
       setExpanded,
       setSorting,
       setRowSelection,
@@ -96,6 +100,7 @@ export default class ModusTableCore {
       enableColumnResizing: columnResize,
       enableHiding: !!toolbarOptions?.columnsVisibility,
       sortDescFirst: false, // To-Do, workaround to prevent sort descending on certain columns, e.g. numeric.
+
       onExpandedChange: setExpanded,
       onSortingChange: setSorting,
       onRowSelectionChange: setRowSelection,
@@ -112,6 +117,11 @@ export default class ModusTableCore {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       onStateChange: () => {},
       renderFallbackValue: null,
+      ...(manualPagination &&
+        pageCount && {
+          manualPagination,
+          pageCount,
+        }),
     };
     this.tableCore = createTable(options);
   }

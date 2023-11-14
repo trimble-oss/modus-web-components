@@ -1,8 +1,14 @@
-import { Component, Element, Host, Prop, h } from '@stencil/core';
+import {
+  Component,
+  Element,
+  Host,
+  Prop,
+  h, // eslint-disable-line @typescript-eslint/no-unused-vars
+} from '@stencil/core';
 import { Row } from '@tanstack/table-core';
-import NavigateTableCells from '../../../../utilities/table-cell-navigation.utility';
-import { KEYBOARD_ENTER } from '../../../../modus-table.constants';
-import TableContext from '../../../../models/table-context.model';
+import NavigateTableCells from '../../../utilities/table-cell-navigation.utility';
+import { KEYBOARD_ENTER } from '../../../modus-table.constants';
+import TableContext from '../../../models/table-context.model';
 
 @Component({
   tag: 'modus-table-row-actions-cell',

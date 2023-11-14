@@ -43,6 +43,7 @@ import {
   ModusTableColumnSizingState,
   ModusTableColumnVisibilityState,
   ModusTableExpandedState,
+  ModusTableManualPaginationOptions,
   ModusTablePaginationState,
   ModusTableRowAction,
   ModusTableRowActionClick,
@@ -141,6 +142,22 @@ export class ModusTable {
 
   /** (Optional) To display checkbox. */
   @Prop() rowSelection = false;
+
+  /** (Optional) To enable manual pagination mode. When enabled, the table will not automatically paginate rows, instead will expect the current page index and other details to be passed. */
+  @Prop() manualPaginationOptions: ModusTableManualPaginationOptions;
+  @Watch('manualPaginationOptions') onManualPaginationOptionsChange(
+    newVal: ModusTableManualPaginationOptions,
+    oldVal: ModusTableManualPaginationOptions
+  ) {
+    if (
+      newVal.pageCount !== oldVal.pageCount ||
+      newVal.currentPageIndex !== oldVal.currentPageIndex ||
+      newVal.currentPageSize !== oldVal.currentPageSize
+    ) {
+      this.tableCore.setOptions('pageCount', newVal.pageCount);
+      this.manualPaginationOptions = { ...newVal };
+    }
+  }
 
   /** (Optional) To control multiple row selection. */
   @Prop() rowSelectionOptions: ModusTableRowSelectionOptions = {
@@ -346,6 +363,7 @@ export class ModusTable {
       hover: this.hover,
       pagination: this.pagination,
       pageSizeList: this.pageSizeList,
+      manualPaginationOptions: this.manualPaginationOptions,
       rowActions: this.getRowActionsWithOverflow(),
       rowSelection: this.rowSelection,
       rowSelectionOptions: this.rowSelectionOptions,
@@ -457,6 +475,11 @@ export class ModusTable {
       rowSelectionOptions: this.rowSelectionOptions,
       columnOrder: this.columnReorder ? this.tableState.columnOrder : [],
       toolbarOptions: this.toolbarOptions,
+
+      ...(this.manualPaginationOptions && {
+        manualPagination: true,
+        pageCount: this.manualPaginationOptions.pageCount,
+      }),
 
       // setData: (updater: Updater<unknown[]>) => this.updateData(updater),
       setExpanded: (updater: Updater<ExpandedState>) => this.updateTableCore(updater, EXPANDED_STATE_KEY, this.rowExpanded),

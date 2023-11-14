@@ -1,11 +1,11 @@
 import {
   Component,
-  h,
+  h, // eslint-disable-line @typescript-eslint/no-unused-vars
   State,
   Listen,
   Host,
   Watch,
-  Prop, // eslint-disable-line @typescript-eslint/no-unused-vars
+  Prop,
 } from '@stencil/core';
 import { ModusTableRowAction, ModusTableRowActionClick } from '../../../../models/modus-table.models';
 import TableContext, { TableRowActionsMenuEvent } from '../../../../models/table-context.model';

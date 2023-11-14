@@ -14,7 +14,7 @@ import { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, 
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-import { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+import { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 import { Cell, Column, Row } from "@tanstack/table-core";
 import { TableCellEdited, TableRowActionsMenuEvent } from "./components/modus-table/models/table-context.model";
 import { Tab } from "./components/modus-tabs/modus-tabs";
@@ -29,7 +29,7 @@ export { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, 
 export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 export { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 export { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-export { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+export { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 export { Cell, Column, Row } from "@tanstack/table-core";
 export { TableCellEdited, TableRowActionsMenuEvent } from "./components/modus-table/models/table-context.model";
 export { Tab } from "./components/modus-tabs/modus-tabs";
@@ -1041,6 +1041,10 @@ export namespace Components {
           * (Optional) To enable row hover in table.
          */
         "hover": boolean;
+        /**
+          * (Optional) To set modus-table in manual mode.
+         */
+        "manualPaginationOptions": ModusTableManualPaginationOptions;
         /**
           * (Optional) To display a vertical scrollbar when the height is exceeded.
          */
@@ -3107,6 +3111,10 @@ declare namespace LocalJSX {
           * (Optional) To enable row hover in table.
          */
         "hover"?: boolean;
+        /**
+          * (Optional) To set modus-table in manual mode.
+         */
+        "manualPaginationOptions"?: ModusTableManualPaginationOptions;
         /**
           * (Optional) To display a vertical scrollbar when the height is exceeded.
          */

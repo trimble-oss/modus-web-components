@@ -109,3 +109,10 @@ export interface ModusTableRowSelectionOptions {
   multiple?: boolean;
   subRowSelection?: boolean;
 }
+
+export interface ModusTableManualPaginationOptions {
+  currentPageIndex: number;
+  currentPageSize: number;
+  pageCount: number;
+  totalRecords: number;
+}

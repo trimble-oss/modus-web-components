@@ -14,6 +14,7 @@ import {
   ModusTableExpandedState,
   ModusTableSortingState,
   ModusTablePaginationState,
+  ModusTableManualPaginationOptions,
 } from './modus-table.models';
 import { Row, Table, Updater } from '@tanstack/table-core';
 import ModusTableCore from '../modus-table.core';
@@ -57,6 +58,8 @@ export default interface TableContext {
   pageSizeList: number[];
 
   pagination: boolean;
+
+  manualPaginationOptions: ModusTableManualPaginationOptions;
 
   rowActions: TableRowActionWithOverflow[];
 

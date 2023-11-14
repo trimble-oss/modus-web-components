@@ -29,6 +29,13 @@ const MockData = [
   },
 ];
 
+const MockManualPagination = {
+  currentPageIndex: 2,
+  currentPageSize: 10,
+  pageCount: 10,
+  totalRecords: 100,
+};
+
 describe('modus-table', () => {
   let page: E2EPage;
 
@@ -332,6 +339,38 @@ describe('modus-table', () => {
     expect(valueChange).toHaveReceivedEventDetail({ display: 20 });
   });
 
+  it('Render manual pagination', async () => {
+    page = await newE2EPage();
+    await page.setContent('<modus-table />');
+
+    const component = await page.find('modus-table');
+
+    component.setProperty('columns', MockColumns);
+    component.setProperty('manualPaginationOptions', {});
+    component.setProperty('data', MockData);
+    component.setProperty('pagination', false);
+
+    await page.waitForChanges();
+    component.setProperty('pagination', true);
+    await page.waitForChanges();
+    component.setProperty('manualPaginationOptions', MockManualPagination);
+    await page.waitForChanges();
+    component.setProperty('pageSizeList', [5, 10, 50]);
+    await page.waitForChanges();
+
+    const pagination = await page.find(`modus-table >>> modus-pagination`);
+    const paginationContainer = await page.find('modus-table >>> .pagination-and-count > .total-count');
+    await page.waitForChanges();
+
+    expect(await pagination.getAttribute('active-page')).toBeTruthy();
+    expect(await pagination.getAttribute('max-page')).toBeTruthy();
+    expect(await pagination.getAttribute('active-page')).toBe(`${MockManualPagination.currentPageIndex}`);
+    expect(await pagination.getAttribute('max-page')).toBe(`${MockManualPagination.pageCount}`);
+
+    expect(paginationContainer).not.toBeNull();
+    expect(paginationContainer.textContent).toContain('Showing result11-20of100');
+  });
+
   it('Renders custom footer when summaryRow is true', async () => {
     page = await newE2EPage();
     await page.setContent('<modus-table />');
@@ -435,39 +474,39 @@ describe('modus-table', () => {
     expect(resizeContainer).not.toBeNull();
   });
 
-  // it('Renders Hyperlinks in cell and emits cellLinkEvent', async () => {
-  //   page = await newE2EPage();
+  it('Renders Hyperlinks in cell and emits cellLinkEvent', async () => {
+    page = await newE2EPage();
 
-  //   await page.setContent('<modus-table />');
-  //   const component = await page.find('modus-table');
+    await page.setContent('<modus-table />');
+    const component = await page.find('modus-table');
 
-  //   const emailColumn = [
-  //     {
-  //       header: 'Email',
-  //       accessorKey: 'email',
-  //       id: 'email',
-  //       dataType: 'link',
-  //     },
-  //   ];
-  //   const emailData = { display: 'test', url: 'test@example.com' };
-  //   const cellLinkClickEvent = await page.spyOnEvent('cellLinkClick');
+    const emailColumn = [
+      {
+        header: 'Email',
+        accessorKey: 'email',
+        id: 'email',
+        dataType: 'link',
+      },
+    ];
+    const emailData = { display: 'test', url: 'test@example.com' };
+    const cellLinkClickEvent = await page.spyOnEvent('cellLinkClick');
 
-  //   component.setProperty('columns', emailColumn);
-  //   component.setProperty('data', [{ email: emailData }]);
-  //   await page.waitForChanges();
+    component.setProperty('columns', emailColumn);
+    component.setProperty('data', [{ email: emailData }]);
+    await page.waitForChanges();
 
-  //   const linkElement = await page.find('modus-table >>> .cell-link');
-  //   linkElement.click();
-  //   await page.waitForChanges();
+    const linkElement = await page.find('modus-table >>> .cell-link');
+    linkElement.click();
+    await page.waitForChanges();
 
-  //   expect(cellLinkClickEvent).toHaveReceivedEventDetail(emailData);
+    expect(cellLinkClickEvent).toHaveReceivedEventDetail(emailData);
 
-  //   linkElement.focus();
-  //   await page.keyboard.press('Enter');
-  //   await page.waitForChanges();
+    linkElement.focus();
+    await page.keyboard.press('Enter');
+    await page.waitForChanges();
 
-  //   expect(cellLinkClickEvent).toHaveReceivedEventDetail(emailData);
-  // });
+    expect(cellLinkClickEvent).toHaveReceivedEventDetail(emailData);
+  });
 
   it('Performs keyboard navigation on cells with hyperlinks', async () => {
     page = await newE2EPage();

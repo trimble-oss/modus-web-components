@@ -47,16 +47,37 @@ function makeData(...lens): object[] {
   return makeDataLevel();
 }
 
-function initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions) {
+function initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions, manualPaginationOptions) {
   const tag = document.createElement('script');
   tag.innerHTML = `
-  document.querySelector('modus-table').columns = ${JSON.stringify(columns)};
-  document.querySelector('modus-table').data = ${JSON.stringify(data)};
-  document.querySelector('modus-table').pageSizeList = ${JSON.stringify(pageSizeList)};
-  document.querySelector('modus-table').toolbarOptions = ${JSON.stringify(toolbarOptions)};
-  document.querySelector('modus-table').displayOptions = ${JSON.stringify(displayOptions)};
-  document.querySelector('modus-table').rowSelectionOptions = ${JSON.stringify(rowSelectionOptions)};
-  document.querySelector('modus-table').rowActions = ${JSON.stringify(rowActions)};
+  var modusTable = document.querySelector('modus-table')
+  modusTable.columns = ${JSON.stringify(columns)};
+  modusTable.data = ${JSON.stringify(data)};
+  modusTable.pageSizeList = ${JSON.stringify(pageSizeList)};
+  modusTable.toolbarOptions = ${JSON.stringify(toolbarOptions)};
+  modusTable.displayOptions = ${JSON.stringify(displayOptions)};
+  modusTable.rowSelectionOptions = ${JSON.stringify(rowSelectionOptions)};
+  modusTable.rowActions = ${JSON.stringify(rowActions)};
+  modusTable.manualPaginationOptions = ${JSON.stringify(manualPaginationOptions)};
+
+  modusTable.addEventListener(
+    "paginationChange", (ev)=> {
+      if(!!modusTable.manualPaginationOptions){
+        const manualPaginationData = ${JSON.stringify([
+          ...data,
+          ...makeData(manualPaginationOptions?.totalRecords).slice(data.length)
+        ])};
+        modusTable.data = manualPaginationData.slice(ev.detail.pageIndex * ev.detail.pageSize,
+                                                      (ev.detail.pageIndex + 1) * ev.detail.pageSize);
+        modusTable.manualPaginationOptions = {
+          currentPageIndex : ev.detail.pageIndex + 1,
+          currentPageSize : ev.detail.pageSize,
+          pageCount: Math.ceil( manualPaginationData.length / ev.detail.pageSize),
+          totalRecords: manualPaginationData.length
+        }
+      }
+   })
+
   `;
 
   return tag;
@@ -355,6 +376,14 @@ export default {
       },
       type: { required: false },
     },
+    manualPaginationOptions: {
+      name: 'manualPaginationOptions',
+      description: 'To switch to manual pagination mode.',
+      table: {
+        type: { summary: 'ManualPaginationOptions' },
+      },
+      type: { required: false },
+    },
   },
 
   parameters: {
@@ -393,7 +422,8 @@ const Template = ({
   maxWidth,
   rowActions,
   rowSelection,
-  rowSelectionOptions
+  rowSelectionOptions,
+  manualPaginationOptions
 }) => html`
   <div style="width: 950px">
     <modus-table
@@ -411,7 +441,7 @@ const Template = ({
       max-width="${maxWidth}"
       row-selection="${rowSelection}" />
   </div>
-  ${initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions)}
+  ${initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions, manualPaginationOptions)}
 `;
 
 export const Default = Template.bind({});
@@ -508,6 +538,21 @@ ColumnResize.args = { ...DefaultArgs, columnResize: true };
 export const Pagination = Template.bind({});
 Pagination.args = { ...DefaultArgs, pagination: true, data: makeData(50), pageSizeList: [5, 10, 50] };
 
+export const ManualPagination = Template.bind({});
+
+ManualPagination.args = {
+  ...DefaultArgs,
+  pagination: true,
+  manualPaginationOptions: {
+    currentPageIndex: 1,
+    currentPageSize: 5,
+    pageCount: 20,
+    totalRecords: 100,
+  },
+  data: makeData(5),
+  pageSizeList: [5, 10, 50],
+};
+
 export const SummaryRow = Template.bind({});
 SummaryRow.args = { ...DefaultArgs, summaryRow: true };
 
@@ -592,12 +637,18 @@ RowActions.args = {
       label: 'Cancel',
       index: 2,
     },
-
     {
       id: '4',
       index: 3,
+      icon: 'add',
+      label: 'Add',
+    },
+    {
+      id: '5',
+      index: 4,
       icon: 'delete',
       label: 'Delete',
     }
+
   ], data: makeData(7), fullWidth: true
 };
