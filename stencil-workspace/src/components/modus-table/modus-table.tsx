@@ -137,7 +137,7 @@ export class ModusTable {
     }
     if (this.toolbarOptions?.columnsVisibility) {
       this.toolbarOptions.columnsVisibility.requiredColumns = [
-        ...this.toolbarOptions.columnsVisibility.requiredColumns,
+        ...this.toolbarOptions.columnsVisibility.requiredColumns.map((col)=> this._id ? `${this._id}-${col}` : col),
         ...this.frozenColumns,
       ];
     }
