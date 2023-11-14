@@ -81,6 +81,7 @@ export interface ModusTableToolbarOptions {
 export interface ModusTableColumnsVisibilityOptions {
   title: string;
   requiredColumns?: string[];
+  hiddenColumns?: string[];
 }
 
 export interface ModusTableRowActions {

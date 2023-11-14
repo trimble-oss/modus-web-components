@@ -18,11 +18,11 @@ const MockColumns = [
 ];
 
 const MockManualPagination = {
-  currentPageIndex: 2, 
-  currentPageSize: 10, 
+  currentPageIndex: 2,
+  currentPageSize: 10,
   pageCount: 10,
-  totalRecords: 100
-}
+  totalRecords: 100,
+};
 
 const MockData = [
   {
@@ -288,18 +288,17 @@ describe('modus-table', () => {
     component.setProperty('pageSizeList', [5, 10, 50]);
     await page.waitForChanges();
 
-    const pagination = await page.find(`modus-table >>> modus-pagination`)
+    const pagination = await page.find(`modus-table >>> modus-pagination`);
     const paginationContainer = await page.find('modus-table >>> .pagination-and-count > .total-count');
     await page.waitForChanges();
- 
+
     expect(await pagination.getAttribute('active-page')).toBeTruthy();
     expect(await pagination.getAttribute('max-page')).toBeTruthy();
     expect(await pagination.getAttribute('active-page')).toBe(`${MockManualPagination.currentPageIndex}`);
     expect(await pagination.getAttribute('max-page')).toBe(`${MockManualPagination.pageCount}`);
-    
+
     expect(paginationContainer).not.toBeNull();
     expect(paginationContainer.textContent).toContain('Showing result11-20of100');
- 
   });
   it('Display page view when pagination is enabled', async () => {
     page = await newE2EPage();
@@ -473,6 +472,33 @@ describe('modus-table', () => {
     expect(resizeContainer).not.toBeNull();
   });
 
+  it('Renders column resizing when columnVisibility is enabled', async () => {
+    page = await newE2EPage();
+
+    await page.setContent('<modus-table />');
+    const component = await page.find('modus-table');
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    component.setProperty('toolbar', true);
+    component.setProperty('toolbarOptions', {
+      columnsVisibility: {
+        title: '',
+        requiredColumns: ['mock-column-one'],
+        hiddenColumns: ['mock-column-two'],
+      },
+    });
+
+    await page.waitForChanges();
+
+    // Check for the required column; it should be present.
+    const requiredColumn = await page.find(`modus-table >>> th[aria-label="Mock Column One"]`);
+    expect(requiredColumn).not.toBeNull();
+
+    // Check for the hidden column; it should NOT be present.
+    const hiddenColumn = await page.find(`modus-table >>> th[aria-label="Mock Column Two"]`);
+    expect(hiddenColumn).toBeNull();
+  });
+
   it('Renders Hyperlinks in cell and emits cellLinkEvent', async () => {
     page = await newE2EPage();
 
@@ -503,7 +529,7 @@ describe('modus-table', () => {
     linkElement.focus();
     await page.keyboard.press('Enter');
     await page.waitForChanges();
-    
+
     expect(cellLinkClickEvent).toHaveReceivedEventDetail(emailData);
   });
 

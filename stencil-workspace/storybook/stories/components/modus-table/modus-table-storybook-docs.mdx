@@ -332,7 +332,8 @@ A toolbar is used to perform operations like hiding/showing the columns. It is e
     document.querySelector('modus-table').toolbarOptions = {
         columnsVisibility: {
           title: '',
-          requiredColumns: ['first-name']
+          requiredColumns: ['first-name'],
+          hiddenColumns: ['last-name']
         }
       };
     document.querySelector('modus-table').columns = [
@@ -340,6 +341,14 @@ A toolbar is used to perform operations like hiding/showing the columns. It is e
         header: 'First Name',
         accessorKey: 'firstName',
         id: 'first-name',
+        dataType: 'text',
+        size: 150,
+        minSize: 80
+      },
+      {
+        header: 'Last Name',
+        accessorKey: 'lastName',
+        id: 'last-name',
         dataType: 'text',
         size: 150,
         minSize: 80
@@ -469,6 +478,7 @@ interface ModusTableToolbarOptions {
 interface ModusTableColumnsVisibilityOptions {
   title: string;
   requiredColumns?: string[];
+  hiddenColumns?: string[];
 }
 
 interface ModusTableCellLink {
