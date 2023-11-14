@@ -84,7 +84,8 @@ export class ModusTable {
   /** (Required) To display headers in the table. */
   @Prop({ mutable: true }) columns!: ModusTableColumn<unknown>[];
   @Watch('columns') onColumnsChange(newVal: ModusTableColumn<unknown>[]) {
-    this.tableCore?.setOptions('columns', (newVal as ColumnDef<unknown>[]) ?? []);
+    const columns = newVal.map((col)=> ({...col, id: this._id ? `${this._id}-${col.id}` : col }))
+    this.tableCore?.setOptions('columns', (columns as ColumnDef<unknown>[]) ?? []);
   }
 
   /* (optional) To manage column resizing */
