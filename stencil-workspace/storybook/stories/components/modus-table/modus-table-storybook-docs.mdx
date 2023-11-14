@@ -12,6 +12,7 @@ import { Story } from '@storybook/addon-docs';
 - [Hover](#hover)
 - [Borderless](#borderless)
 - [Sorting](#sorting)
+- [Manual Sorting](#manual-sorting)
 - [Value Formatter](#value-formatter)
 - [Hyperlink](#hyperlink)
 - [Column Resize](#column-resize)
@@ -145,6 +146,13 @@ Users can arrange data in a table by sorting it in either ascending or descendin
 - Every column has sorting turned on by default. Setting `enableSorting` `true` or `false` for a certain column will enable or disable it.
 - When enabled, the sort icon's initial click will sort in ascending order, while its second click will sort in descending order.
 - Set `showSortIconOnHover` to `true` to enable sort on hover as well.
+
+### Manual Sorting
+
+Manual Sorting allows users to handle sorting in server-side mode.
+
+- Manual Sorting can be enabled using the `manualSortingOptions` prop.
+- The `currentSortingState` represents how the data is sorted (column and direction).
 
 
 ### Value Formatter
@@ -512,6 +520,11 @@ interface ModusTableManualPaginationOptions {
   pageCount: number;
   totalRecords: number;
 }
+
+interface ModusTableManualSortingOptions {
+  currentSortingState: ModusTableSortingState
+}
+
 ```
 
 ### Accessibility

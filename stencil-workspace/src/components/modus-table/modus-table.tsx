@@ -38,6 +38,7 @@ import {
   SORTING_STATE_KEY,
 } from './modus-table.constants';
 import {
+  ModusTableManualSortingOptions,
   ModusTableCellValueChange,
   ModusTableColumnOrderState,
   ModusTableColumnSizingState,
@@ -156,6 +157,28 @@ export class ModusTable {
     ) {
       this.tableCore.setOptions('pageCount', newVal.pageCount);
       this.manualPaginationOptions = { ...newVal };
+    }
+  }
+
+  /** (Optional) To set modus-table in manual sorting mode. */
+  @Prop() manualSortingOptions: ModusTableManualSortingOptions;
+  @Watch('manualSortingOptions') onManualSortOptionsChange(
+    newVal: ModusTableManualSortingOptions,
+    oldVal: ModusTableManualSortingOptions
+  ) {
+    if (newVal?.currentSortingState.length === 0) {
+      if (oldVal && oldVal.currentSortingState.length > 0) {
+        this.tableCore.setOptions('manualPagination', true);
+        this.tableCore.setState('sorting', newVal.currentSortingState);
+        this.manualSortingOptions = { ...newVal };
+      }
+    } else if (
+      newVal?.currentSortingState[0]?.id !== oldVal?.currentSortingState[0]?.id ||
+      newVal?.currentSortingState[0]?.desc !== oldVal?.currentSortingState[0]?.desc
+    ) {
+      this.tableCore.setOptions('manualPagination', true);
+      this.tableCore.setState('sorting', newVal.currentSortingState);
+      this.manualSortingOptions = { ...newVal };
     }
   }
 
@@ -480,7 +503,10 @@ export class ModusTable {
         manualPagination: true,
         pageCount: this.manualPaginationOptions.pageCount,
       }),
-
+      ...(this.manualSortingOptions && {
+        manualSorting: true,
+        sortingState: this.manualSortingOptions.currentSortingState,
+      }),
       // setData: (updater: Updater<unknown[]>) => this.updateData(updater),
       setExpanded: (updater: Updater<ExpandedState>) => this.updateTableCore(updater, EXPANDED_STATE_KEY, this.rowExpanded),
       setSorting: (updater: Updater<SortingState>) => this.updateTableCore(updater, SORTING_STATE_KEY, this.sortChange),

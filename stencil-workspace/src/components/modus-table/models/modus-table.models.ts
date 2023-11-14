@@ -116,3 +116,7 @@ export interface ModusTableManualPaginationOptions {
   pageCount: number;
   totalRecords: number;
 }
+
+export interface ModusTableManualSortingOptions {
+  currentSortingState: ModusTableSortingState;
+}

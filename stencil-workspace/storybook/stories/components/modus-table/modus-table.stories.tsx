@@ -47,7 +47,7 @@ function makeData(...lens): object[] {
   return makeDataLevel();
 }
 
-function initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions, manualPaginationOptions) {
+function initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions, manualPaginationOptions, manualSortingOptions) {
   const tag = document.createElement('script');
   tag.innerHTML = `
   var modusTable = document.querySelector('modus-table')
@@ -59,26 +59,85 @@ function initializeTable(columns, data, pageSizeList, toolbarOptions, displayOpt
   modusTable.rowSelectionOptions = ${JSON.stringify(rowSelectionOptions)};
   modusTable.rowActions = ${JSON.stringify(rowActions)};
   modusTable.manualPaginationOptions = ${JSON.stringify(manualPaginationOptions)};
+  modusTable.manualSortingOptions = ${JSON.stringify(manualSortingOptions)};
+
+  if(!!modusTable.manualSortingOptions){
+    let currentData = modusTable.data;
+    const accessorKey = getAccessortKey(modusTable.columns, modusTable.manualSortingOptions.currentSortingState[0].id);
+    currentData.sort(compareValues(accessorKey, modusTable.manualSortingOptions.currentSortingState[0].desc));
+    if(!!modusTable.manualPaginationOptions){
+      modusTable.data = currentData.slice((modusTable.manualPaginationOptions.currentPageIndex - 1) * modusTable.manualPaginationOptions.currentPageSize,
+        modusTable.manualPaginationOptions.currentPageIndex * modusTable.manualPaginationOptions.currentPageSize);
+    } else {
+      modusTable.data = currentData;
+    }
+  }
+
+  function compareValues(key, desc) {
+    return function innerSort(a, b) {
+      if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+        // property doesn't exist on either object
+        return 0;
+      }
+      const varA = (typeof a[key] === 'string')
+        ? a[key].toUpperCase() : a[key];
+      const varB = (typeof b[key] === 'string')
+        ? b[key].toUpperCase() : b[key];
+      let comparison = 0;
+      if (varA > varB) {
+        comparison = 1;
+      } else if (varA < varB) {
+        comparison = -1;
+      }
+      return (
+        desc ? (comparison * -1) : comparison
+      );
+    };
+  }
+
+  function getAccessortKey(array, id){
+    return array.find((c) => c.id === id)?.accessorKey;
+  }
 
   modusTable.addEventListener(
     "paginationChange", (ev)=> {
       if(!!modusTable.manualPaginationOptions){
-        const manualPaginationData = ${JSON.stringify([
-          ...data,
-          ...makeData(manualPaginationOptions?.totalRecords).slice(data.length)
-        ])};
-        modusTable.data = manualPaginationData.slice(ev.detail.pageIndex * ev.detail.pageSize,
-                                                      (ev.detail.pageIndex + 1) * ev.detail.pageSize);
+        let currentData = ${JSON.stringify(data)};
         modusTable.manualPaginationOptions = {
           currentPageIndex : ev.detail.pageIndex + 1,
           currentPageSize : ev.detail.pageSize,
-          pageCount: Math.ceil( manualPaginationData.length / ev.detail.pageSize),
-          totalRecords: manualPaginationData.length
+          pageCount: Math.ceil( currentData.length / ev.detail.pageSize),
+          totalRecords: currentData.length
+        }
+        if(!!modusTable.manualSortingOptions && modusTable.manualSortingOptions.currentSortingState.length > 0){
+          const accessorKey = getAccessortKey(modusTable.columns, modusTable.manualSortingOptions.currentSortingState[0].id);
+          currentData.sort(compareValues(accessorKey, modusTable.manualSortingOptions.currentSortingState[0].desc));
+        }
+        modusTable.data = currentData.slice((modusTable.manualPaginationOptions.currentPageIndex - 1) * modusTable.manualPaginationOptions.currentPageSize,
+          modusTable.manualPaginationOptions.currentPageIndex * modusTable.manualPaginationOptions.currentPageSize);
+      }
+   });
+
+  modusTable.addEventListener(
+    "sortChange", (ev)=> {
+      if(!!modusTable.manualSortingOptions){
+        modusTable.manualSortingOptions = {
+          currentSortingState : ev.detail
+        };
+        let currentData = ${JSON.stringify(data)};
+        if(modusTable.manualSortingOptions.currentSortingState.length > 0) {
+          const accessorKey = getAccessortKey(modusTable.columns, modusTable.manualSortingOptions.currentSortingState[0].id);
+          currentData.sort(compareValues(accessorKey, modusTable.manualSortingOptions.currentSortingState[0].desc));
+        }
+        if(!!modusTable.manualPaginationOptions){
+          modusTable.data = currentData.slice((modusTable.manualPaginationOptions.currentPageIndex - 1) * modusTable.manualPaginationOptions.currentPageSize,
+            modusTable.manualPaginationOptions.currentPageIndex * modusTable.manualPaginationOptions.currentPageSize);
+        } else {
+          modusTable.data = currentData;
         }
       }
-   })
-
-  `;
+  });
+`;
 
   return tag;
 }
@@ -380,7 +439,15 @@ export default {
       name: 'manualPaginationOptions',
       description: 'To switch to manual pagination mode.',
       table: {
-        type: { summary: 'ManualPaginationOptions' },
+        type: { summary: 'ModusTableManualPaginationOptions' },
+      },
+      type: { required: false },
+    },
+    manualSortingOptions: {
+      name: 'manualSortingOptions',
+      description: 'To switch to manual sorting mode.',
+      table: {
+        type: { summary: 'ModusTableManualSortingOptions' },
       },
       type: { required: false },
     },
@@ -423,7 +490,8 @@ const Template = ({
   rowActions,
   rowSelection,
   rowSelectionOptions,
-  manualPaginationOptions
+  manualPaginationOptions,
+  manualSortingOptions
 }) => html`
   <div style="width: 950px">
     <modus-table
@@ -441,7 +509,7 @@ const Template = ({
       max-width="${maxWidth}"
       row-selection="${rowSelection}" />
   </div>
-  ${initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions, manualPaginationOptions)}
+  ${initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions, manualPaginationOptions, manualSortingOptions)}
 `;
 
 export const Default = Template.bind({});
@@ -461,6 +529,18 @@ Borderless.args = {
 
 export const Sorting = Template.bind({});
 Sorting.args = { ...DefaultArgs, sort: true };
+
+export const ManualSorting = Template.bind({});
+ManualSorting.args = {
+  ...DefaultArgs,
+  sort: true,
+  manualSortingOptions: {
+    currentSortingState: [{
+      id: 'first-name',
+      desc: false
+    }]
+  }
+};
 
 export const ValueFormatter = ({
   hover,
@@ -546,10 +626,9 @@ ManualPagination.args = {
   manualPaginationOptions: {
     currentPageIndex: 1,
     currentPageSize: 5,
-    pageCount: 20,
-    totalRecords: 100,
+    pageCount: DefaultArgs.data.length / 5,
+    totalRecords: DefaultArgs.data.length,
   },
-  data: makeData(5),
   pageSizeList: [5, 10, 50],
 };
 
