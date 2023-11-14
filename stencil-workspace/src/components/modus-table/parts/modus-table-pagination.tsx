@@ -2,31 +2,22 @@ import {
   FunctionalComponent,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
-import { Table } from '@tanstack/table-core';
 import { PAGINATION_PAGEVIEW_TEXT, PAGINATION_SUMMARY_TEXT } from '../modus-table.constants';
+import TableContext from '../models/table-context.model';
 
-export interface ModusTablePaginationProps {
-  table: Table<unknown>;
-  totalCount: number;
-  pageSizeList: number[];
-  isManualPagination?: boolean;
-  currentPageSize?: number;
-  currentPageIndex?: number;
+interface ModusTablePaginationProps {
+  context: TableContext;
 }
 
 export const ModusTablePagination: FunctionalComponent<ModusTablePaginationProps> = ({
-  table,
-  totalCount,
-  pageSizeList,
-  currentPageSize,
-  currentPageIndex,
-  isManualPagination,
+  context: { tableInstance: table, pageSizeList, data },
 }) => {
+  const totalCount = data.length;
   const optionsList = pageSizeList.map((option) => ({ display: option }));
   const { options, getState, getPageCount, getExpandedRowModel, setPageIndex, setPageSize } = table;
-  const { pageIndex, pageSize: paginationSize } = getState().pagination;
-  const pageSize =  currentPageSize ?? paginationSize;
+  const { pageIndex, pageSize } = getState().pagination;
   const selectedPageSize = optionsList.find((l) => l.display === pageSize);
+
   const handleChange = (event) => {
     const selectedValue = event.detail;
     setPageSize(Number(selectedValue?.display));
@@ -56,10 +47,10 @@ export const ModusTablePagination: FunctionalComponent<ModusTablePaginationProps
               : (pageIndex + 1) * pageSize}
           </span>
           <span>of</span>
-          <span>{!isManualPagination && options.paginateExpandedRows ? getExpandedRowModel().rows.length : totalCount}</span>{' '}
+          <span>{options.paginateExpandedRows ? getExpandedRowModel().rows.length : totalCount}</span>{' '}
         </div>
         <modus-pagination
-          active-page={currentPageIndex ?? 1 }
+          active-page={1}
           max-page={getPageCount()}
           min-page={1}
           onPageChange={(event) => setPageIndex(event.detail - 1)}></modus-pagination>

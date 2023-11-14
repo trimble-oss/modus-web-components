@@ -133,10 +133,7 @@ nav {
         img.avatar {
           background-color: $modus-navbar-icon-color;
           border-radius: 50%;
-          display: flex;
           height: 32px;
-          max-height: 32px;
-          max-width: 32px;
           width: 32px;
         }
 
@@ -150,8 +147,6 @@ nav {
           font-weight: $font-weight-semi-bold;
           height: 32px;
           justify-content: center;
-          max-height: 32px;
-          max-width: 32px;
           user-select: none;
           width: 32px;
         }

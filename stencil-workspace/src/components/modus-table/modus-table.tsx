@@ -20,9 +20,7 @@ import {
   ColumnSizingInfoState,
   ColumnSizingState,
   ExpandedState,
-  HeaderGroup,
   PaginationState,
-  Table,
   RowSelectionState,
   Updater,
   VisibilityState,
@@ -46,6 +44,8 @@ import {
   ModusTableColumnVisibilityState,
   ModusTableExpandedState,
   ModusTablePaginationState,
+  ModusTableRowAction,
+  ModusTableRowActionClick,
   ModusTableSortingState,
 } from './models/modus-table.models';
 import ColumnDragState from './models/column-drag-state.model';
@@ -55,16 +55,16 @@ import {
   ModusTableDisplayOptions,
   ModusTableToolbarOptions,
   ModusTableRowSelectionOptions,
-  ManualPaginationOptions,
 } from './models/modus-table.models';
 import { ModusTableColumnDropIndicator, ModusTableColumnDragItem } from './parts/columnHeader/modus-table-column-drag-item';
-import { ModusTablePagination, ModusTablePaginationProps } from './parts/modus-table-pagination';
+import { ModusTablePagination } from './parts/modus-table-pagination';
 import { ModusTableFooter } from './parts/modus-table-footer';
 import { TableHeaderDragDrop } from './utilities/table-header-drag-drop.utility';
 import ModusTableCore from './modus-table.core';
-import ModusTableState from './models/modus-table-state.model';
+import TableState from './models/table-state.model';
 import { ModusTableHeader } from './parts/modus-table-header';
-import { ModusTableBody, ModusTableCellEdited } from './parts/modus-table-body';
+import { ModusTableBody } from './parts/modus-table-body';
+import ModusTableContext, { TableCellEdited, TableRowActionWithOverflow } from './models/table-context.model';
 import { createGuid } from '../../utils/utils';
 
 /**
@@ -72,7 +72,6 @@ import { createGuid } from '../../utils/utils';
  * @slot groupLeft - Slot for custom toolbar options added to the left.
  * @slot groupRight - Slot for custom toolbar options added to the right.
  */
-
 @Component({
   tag: 'modus-table',
   styleUrl: 'modus-table.scss',
@@ -129,37 +128,19 @@ export class ModusTable {
   /* (optional) To enable pagination for the table. */
   @Prop() pagination: boolean;
 
+  /** (Optional) Actions that can be performed on each row. A maximum of 4 icons will be shown, including overflow menu and expand icons. */
+  @Prop() rowActions: ModusTableRowAction[] = [];
+
   /** (Optional) To display expanded rows. */
   @Prop() rowsExpandable = false;
-  @Watch('rowsExpandable') onRowsExpandableChange() {
-    if (this.rowsExpandable) {
-      this.frozenColumns.push(this.tableState.columnOrder[0]);
-    }
-    if (this.toolbarOptions?.columnsVisibility) {
-      this.toolbarOptions.columnsVisibility.requiredColumns = [
-        ...this.toolbarOptions.columnsVisibility.requiredColumns,
-        ...this.frozenColumns,
-      ];
+  @Watch('rowsExpandable') onRowsExpandableChange(newVal: boolean) {
+    if (newVal) {
+      this.freezeColumn(this.tableState.columnOrder[0]);
     }
   }
 
   /** (Optional) To display checkbox. */
   @Prop() rowSelection = false;
-
-  /** (Optional) To set modus-table in manual mode. */
-  @Prop() manualPaginationOptions: ManualPaginationOptions;
-  @Watch('manualPaginationOptions') onManualPaginationOptionsChange(
-    newVal: ManualPaginationOptions,
-    oldVal: ManualPaginationOptions,
-  ){
-    if(newVal.pageCount !== oldVal.pageCount ||
-       newVal.currentPageIndex !== oldVal.currentPageIndex ||
-       newVal.currentPageSize  !== oldVal.currentPageSize 
-      ){
-      this.tableCore.setOptions('pageCount', newVal.pageCount)
-      this.manualPaginationOptions = { ...newVal }
-    }
-  }
 
   /** (Optional) To control multiple row selection. */
   @Prop() rowSelectionOptions: ModusTableRowSelectionOptions = {
@@ -195,7 +176,7 @@ export class ModusTable {
   @Prop() toolbarOptions: ModusTableToolbarOptions | null = null;
   @Watch('toolbarOptions') onToolbarOptionsChange(newVal: ModusTableToolbarOptions | null) {
     this.tableCore?.setOptions('enableHiding', !!newVal?.columnsVisibility);
-    this.onRowsExpandableChange();
+    this.onRowsExpandableChange(this.rowsExpandable);
   }
 
   /** Emits the cell value that was edited */
@@ -213,6 +194,9 @@ export class ModusTable {
   /** Emits visibility state of each column */
   @Event() columnVisibilityChange: EventEmitter<ModusTableColumnVisibilityState>;
 
+  /** An event that fires when a row action is clicked. */
+  @Event() rowActionClick: EventEmitter<ModusTableRowActionClick>;
+
   /** Emits expanded state of the columns */
   @Event() rowExpanded: EventEmitter<ModusTableExpandedState>;
 
@@ -225,7 +209,24 @@ export class ModusTable {
   /** Emits selected page index and size */
   @Event() paginationChange: EventEmitter<ModusTablePaginationState>;
 
-  @State() tableState: ModusTableState = {
+  @State() itemDragState: ColumnDragState;
+  @Watch('itemDragState')
+  handleItemDragState(newValue: string, oldValue: string) {
+    if (oldValue && newValue && oldValue === newValue && this.columnReorder) return;
+    if (newValue) {
+      document.addEventListener('mousemove', this.onMouseMove);
+      document.addEventListener('mouseup', this.onMouseUp);
+      document.addEventListener('keydown', this.onKeyDown);
+    } else {
+      document.removeEventListener('mousemove', this.onMouseMove);
+      document.removeEventListener('mouseup', this.onMouseUp);
+      document.removeEventListener('keydown', this.onKeyDown);
+    }
+  }
+
+  @State() dragAndDropObj: TableHeaderDragDrop = new TableHeaderDragDrop();
+
+  @State() tableState: TableState = {
     columnSizing: {},
     columnSizingInfo: {} as ColumnSizingInfoState,
     expanded: null,
@@ -240,12 +241,11 @@ export class ModusTable {
   };
 
   @State() tableCore: ModusTableCore;
-  @State() itemDragState: ColumnDragState;
-  @State() dragAndDropObj: TableHeaderDragDrop = new TableHeaderDragDrop();
 
-  private _id: string;
-  private frozenColumns: string[] = []; // Columns will remain on the left and be unable to reorder, or modify their visibility.
+  private frozenColumns: string[] = [];
   private isColumnResizing = false;
+  private _id: string;
+  private _context: ModusTableContext;
 
   private onMouseMove = (event: MouseEvent) => this.handleDragOver(event);
   private onKeyDown = (event: KeyboardEvent) => this.handleKeyDown(event);
@@ -254,8 +254,12 @@ export class ModusTable {
   componentWillLoad(): void {
     this._id = this.element.id || `modus-table-${createGuid()}`;
     this.setTableState({ columnOrder: this.columns?.map((column) => column.id as string) });
-    this.onRowsExpandableChange();
+    this.onRowsExpandableChange(this.rowsExpandable);
     this.initializeTable();
+  }
+
+  componentWillRender(): void {
+    this._context = this.getTableContext();
   }
 
   /**
@@ -310,18 +314,77 @@ export class ModusTable {
     });
   }
 
-  @Watch('itemDragState')
-  handleItemDragState(newValue: string, oldValue: string) {
-    if (oldValue && newValue && oldValue === newValue && this.columnReorder) return;
-    if (newValue) {
-      document.addEventListener('mousemove', this.onMouseMove);
-      document.addEventListener('mouseup', this.onMouseUp);
-      document.addEventListener('keydown', this.onKeyDown);
-    } else {
-      document.removeEventListener('mousemove', this.onMouseMove);
-      document.removeEventListener('mouseup', this.onMouseUp);
-      document.removeEventListener('keydown', this.onKeyDown);
+  freezeColumn(columnId: string): void {
+    this.frozenColumns.push(columnId);
+    if (this.toolbarOptions?.columnsVisibility) {
+      this.toolbarOptions.columnsVisibility.requiredColumns = [
+        ...this.toolbarOptions.columnsVisibility.requiredColumns,
+        ...this.frozenColumns,
+      ];
     }
+  }
+
+  getRowActionsWithOverflow(): TableRowActionWithOverflow[] {
+    if (this.rowActions) {
+      const sortedActions = this.rowActions.sort((a, b) => a.index - b.index);
+      const visibleLimit = sortedActions.length < 5 ? 4 : 3;
+      const actionButtons = sortedActions.slice(0, visibleLimit);
+      const overflowMenu = sortedActions.slice(visibleLimit).map((action) => ({ ...action, isOverflow: true }));
+
+      return [...actionButtons, ...overflowMenu];
+    }
+
+    return null;
+  }
+
+  getTableContext(): ModusTableContext {
+    return {
+      element: this.element,
+      data: this.data,
+      sort: this.sort,
+      componentId: this._id,
+      hover: this.hover,
+      pagination: this.pagination,
+      pageSizeList: this.pageSizeList,
+      rowActions: this.getRowActionsWithOverflow(),
+      rowSelection: this.rowSelection,
+      rowSelectionOptions: this.rowSelectionOptions,
+      rowsExpandable: this.rowsExpandable,
+      columns: this.columns,
+      columnReorder: this.columnReorder,
+      columnResize: this.columnResize,
+      rowSelectionChange: this.rowSelectionChange,
+      rowExpanded: this.rowExpanded,
+      rowActionClick: this.rowActionClick,
+      sortChange: this.sortChange,
+      paginationChange: this.paginationChange,
+      columnSizingChange: this.columnSizingChange,
+      columnVisibilityChange: this.columnVisibilityChange,
+      columnOrderChange: this.columnOrderChange,
+      cellValueChange: this.cellValueChange,
+      cellLinkClick: this.cellLinkClick,
+      showSortIconOnHover: this.showSortIconOnHover,
+      displayOptions: this.displayOptions,
+      toolbarOptions: this.toolbarOptions,
+      toolbar: this.toolbar,
+      summaryRow: this.summaryRow,
+      fullWidth: this.fullWidth,
+      maxHeight: this.maxHeight,
+      maxWidth: this.maxWidth,
+      frozenColumns: this.frozenColumns,
+      isColumnResizing: this.isColumnResizing,
+      tableCore: this.tableCore,
+      tableInstance: this.tableCore.getTableInstance(),
+      onColumnsChange: this.onColumnsChange,
+      onColumnResizeChange: this.onColumnResizeChange,
+      onColumnReorderChange: this.onColumnReorderChange,
+      onDataChange: this.onDataChange,
+      onRowsExpandableChange: this.onRowsExpandableChange,
+      onRowSelectionOptionsChange: this.onRowSelectionOptionsChange,
+      onSortChange: this.onSortChange,
+      onToolbarOptionsChange: this.onToolbarOptionsChange,
+      updateData: this.updateData.bind(this),
+    };
   }
 
   handleDragStart(
@@ -394,10 +457,7 @@ export class ModusTable {
       rowSelectionOptions: this.rowSelectionOptions,
       columnOrder: this.columnReorder ? this.tableState.columnOrder : [],
       toolbarOptions: this.toolbarOptions,
-      ...(this.manualPaginationOptions) && { 
-        manualPagination: true, 
-        pageCount: this.manualPaginationOptions.pageCount,
-      },
+
       // setData: (updater: Updater<unknown[]>) => this.updateData(updater),
       setExpanded: (updater: Updater<ExpandedState>) => this.updateTableCore(updater, EXPANDED_STATE_KEY, this.rowExpanded),
       setSorting: (updater: Updater<SortingState>) => this.updateTableCore(updater, SORTING_STATE_KEY, this.sortChange),
@@ -415,7 +475,7 @@ export class ModusTable {
     });
   }
 
-  setTableState(state: ModusTableState): void {
+  setTableState(state: TableState): void {
     this.tableState = { ...this.tableState, ...state };
   }
 
@@ -431,7 +491,7 @@ export class ModusTable {
     if (event) event.emit(this.tableState[key]);
   }
 
-  updateData(updater: Updater<unknown>, context: ModusTableCellEdited): void {
+  updateData(updater: Updater<unknown>, context: TableCellEdited): void {
     this.data = this.tableCore.getState(updater, this.data) as unknown[];
     this.tableCore.setState('data', this.data);
     this.cellValueChange.emit({ ...context, data: this.data });
@@ -452,11 +512,11 @@ export class ModusTable {
     this.isColumnResizing = !this.tableState.columnSizingInfo.isResizingColumn ? false : true;
   }
 
-  renderToolBar(table: Table<unknown>): JSX.Element | null {
+  renderToolBar(): JSX.Element | null {
     return (
       this.toolbar &&
       this.toolbarOptions && (
-        <modus-table-toolbar table={table} options={this.toolbarOptions}>
+        <modus-table-toolbar context={this._context}>
           <div slot="group-left">
             <slot name="groupLeft"></slot>
           </div>
@@ -468,8 +528,10 @@ export class ModusTable {
     );
   }
 
-  renderMain(table: Table<unknown>): JSX.Element | null {
-    const { borderless, cellBorderless } = this.displayOptions || {};
+  renderMain(): JSX.Element | null {
+    const {
+      displayOptions: { borderless, cellBorderless },
+    } = this._context;
     const tableContainerClass = {
       'table-container': true,
       borderless: borderless,
@@ -478,7 +540,7 @@ export class ModusTable {
     return (
       <Fragment>
         <div class={tableContainerClass} style={{ maxHeight: this.maxHeight }}>
-          {this.renderTable(table)}
+          {this.renderTable()}
 
           {!this.fullWidth && (
             <modus-table-filler-column
@@ -492,9 +554,11 @@ export class ModusTable {
     );
   }
 
-  renderTable(table: Table<unknown>): JSX.Element | null {
-    const { multiple } = this.rowSelectionOptions;
-    const totalSize = table.getTotalSize();
+  renderTable(): JSX.Element | null {
+    const {
+      tableInstance: { getTotalSize },
+    } = this._context;
+    const totalSize = getTotalSize();
 
     const tableMainClass = {
       borderless: this.displayOptions?.borderless,
@@ -509,14 +573,14 @@ export class ModusTable {
 
     return (
       <table data-test-id="main-table" class={tableMainClass} style={tableStyle}>
-        {this.renderTableHeader(table, multiple)}
-        {this.renderTableBody(table, multiple)}
-        {this.renderTableFooter(table)}
+        {this.renderTableHeader()}
+        {this.renderTableBody()}
+        {this.renderTableFooter()}
       </table>
     );
   }
 
-  renderTableHeader(table: Table<unknown>, multipleRowSelection: boolean): JSX.Element | null {
+  renderTableHeader(): JSX.Element | null {
     const setColumnResizing = (val: boolean) => (this.isColumnResizing = val);
 
     const getColumnResizing = () => this.isColumnResizing;
@@ -530,81 +594,35 @@ export class ModusTable {
 
     return (
       <ModusTableHeader
-        componentId={this._id}
-        columnReorder={this.columnReorder}
-        frozenColumns={this.frozenColumns}
-        rowSelection={this.rowSelection}
-        showSortIconOnHover={this.showSortIconOnHover}
-        table={table}
-        multipleRowSelection={multipleRowSelection}
+        context={this._context}
         setColumnResizing={setColumnResizing}
         getColumnResizing={getColumnResizing}
         onDragStart={onDragStart}></ModusTableHeader>
     );
   }
 
-  renderTableBody(table: Table<unknown>, multipleRowSelection: boolean): JSX.Element | null {
-    // Needed in the future to include overflow menu action
-    const rowActions = this.rowsExpandable && { expandable: this.rowsExpandable };
-    return (
-      <ModusTableBody
-        table={table}
-        hover={this.hover}
-        rowSelection={this.rowSelection}
-        multipleRowSelection={multipleRowSelection}
-        rowActions={rowActions}
-        dataUpdater={this.updateData.bind(this)}
-        cellLinkClick={(link: ModusTableCellLink) => this.cellLinkClick.emit(link)}></ModusTableBody>
-    );
+  renderTableBody(): JSX.Element | null {
+    return <ModusTableBody context={this._context}></ModusTableBody>;
   }
 
-  renderTableFooter(table: Table<unknown>): JSX.Element | null {
-    const footerGroups: HeaderGroup<unknown>[] = table.getFooterGroups();
-    return this.summaryRow ? (
-      <ModusTableFooter
-        footerGroups={[footerGroups[0]]}
-        tableData={this.data}
-        frozenColumns={this.frozenColumns}
-        rowSelection={this.rowSelection}
-      />
-    ) : null;
+  renderTableFooter(): JSX.Element | null {
+    return this.summaryRow ? <ModusTableFooter context={this._context} /> : null;
   }
 
-  renderPagination(table: Table<unknown>): JSX.Element | null {
-    if (!this.pagination) {
-      return null;
-    }
-  
-    let paginationProps : ModusTablePaginationProps = {
-      table,
-      pageSizeList: this.pageSizeList,
-      totalCount: this.data.length ?? 0
-    };
-  
-    if (this.manualPaginationOptions) {
-      paginationProps = {
-        ...paginationProps,
-        totalCount: this.manualPaginationOptions.totalRecords ?? 0,
-        isManualPagination: true,
-        currentPageSize: this.manualPaginationOptions.currentPageSize ?? 0,
-        currentPageIndex: this.manualPaginationOptions.currentPageIndex ?? 0,
-      };
-    } 
-
-    return this.pagination && (<ModusTablePagination {...paginationProps} />);
+  renderPagination(): JSX.Element | null {
+    return this.pagination && <ModusTablePagination context={this._context} />;
   }
-
 
   render(): void {
-    const table = this.tableCore.getTableInstance();
     return (
       <Host id={this._id}>
         <div style={{ maxWidth: this.maxWidth }}>
-          {this.renderToolBar(table)}
-          {this.renderMain(table)}
-          {this.renderPagination(table)}
+          {this.renderToolBar()}
+          {this.renderMain()}
+          {this.renderPagination()}
           <ModusTableColumnDragItem draggingState={this.itemDragState} />
           <ModusTableColumnDropIndicator position={this.itemDragState?.dropIndicator} />
+          <modus-table-row-actions-menu context={this._context}></modus-table-row-actions-menu>
         </div>
       </Host>
     );

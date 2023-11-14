@@ -4,7 +4,7 @@ import { IconProps } from './IconMap';
 
 export const IconSun: FunctionalComponent<IconProps> = (props: IconProps) => (
   <svg
-    class="icon-sun"
+    class="icon-moon"
     height={props.size ?? 16}
     width={props.size ?? 16}
     onClick={props.onClick}
