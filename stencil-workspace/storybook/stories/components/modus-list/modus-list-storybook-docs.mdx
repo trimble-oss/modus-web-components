@@ -61,24 +61,17 @@ The `<modus-list-item>` utilizes the slot element, allowing you to render your o
 
 ##### Modus List Item
 
-<section>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Emits</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>itemClick</td>
-        <td>Fires on list item click</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+| Event       | Description                            | Type               |
+| ----------- | -------------------------------------- | ------------------ |
+| `itemClick` | An event that fires on list item click | `CustomEvent<any>` |
+
+### Methods
+
+##### Modus List Item
+
+| Method name  | Description                     | Parameter          | Return            |
+| ------------ | ------------------------------- | ------------------ | ----------------- | ----- |
+| `focusItem`    | Focus the list item      | `Promise<void>`       | `Promise<void>`   |
 
 ### Shadow Parts
 

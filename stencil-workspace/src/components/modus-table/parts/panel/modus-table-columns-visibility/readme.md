@@ -10,7 +10,7 @@
 | Property               | Attribute       | Description               | Type                                 | Default     |
 | ---------------------- | --------------- | ------------------------- | ------------------------------------ | ----------- |
 | `columnsVisibility`    | --              | Column visibility options | `ModusTableColumnsVisibilityOptions` | `undefined` |
-| `getColumnsFn`         | --              | Table data.               | `() => Column<unknown, unknown>[]`   | `undefined` |
+| `getAllLeafColumns`    | --              | Table data.               | `() => Column<unknown, unknown>[]`   | `undefined` |
 | `menuIconContainerRef` | --              |                           | `HTMLDivElement`                     | `undefined` |
 | `showDropdown`         | `show-dropdown` |                           | `boolean`                            | `undefined` |
 | `toggleDropdown`       | --              |                           | `(show: boolean) => void`            | `undefined` |

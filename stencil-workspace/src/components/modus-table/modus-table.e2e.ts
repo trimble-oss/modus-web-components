@@ -474,6 +474,33 @@ describe('modus-table', () => {
     expect(resizeContainer).not.toBeNull();
   });
 
+  it('Renders column resizing when columnVisibility is enabled', async () => {
+    page = await newE2EPage();
+
+    await page.setContent('<modus-table />');
+    const component = await page.find('modus-table');
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    component.setProperty('toolbar', true);
+    component.setProperty('toolbarOptions', {
+      columnsVisibility: {
+        title: '',
+        requiredColumns: ['mock-column-one'],
+        hiddenColumns: ['mock-column-two'],
+      },
+    });
+
+    await page.waitForChanges();
+
+    // Check for the required column; it should be present.
+    const requiredColumn = await page.find(`modus-table >>> th[aria-label="Mock Column One"]`);
+    expect(requiredColumn).not.toBeNull();
+
+    // Check for the hidden column; it should NOT be present.
+    const hiddenColumn = await page.find(`modus-table >>> th[aria-label="Mock Column Two"]`);
+    expect(hiddenColumn).toBeNull();
+  });
+
   it('Renders Hyperlinks in cell and emits cellLinkEvent', async () => {
     page = await newE2EPage();
 

@@ -563,6 +563,7 @@ ColumnVisibility.args = {
     columnsVisibility: {
       title: '',
       requiredColumns: ['age', 'visits'],
+      hiddenColumns: ['progress', 'createdAt'],
     },
   },
   toolbar: true,

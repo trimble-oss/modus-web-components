@@ -1223,14 +1223,14 @@ export declare interface ModusTableCellMain extends Components.ModusTableCellMai
 
 
 @ProxyCmp({
-  inputs: ['columnsVisibility', 'getColumnsFn', 'menuIconContainerRef', 'showDropdown', 'toggleDropdown']
+  inputs: ['columnsVisibility', 'getAllLeafColumns', 'menuIconContainerRef', 'showDropdown', 'toggleDropdown']
 })
 @Component({
   selector: 'modus-table-columns-visibility',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['columnsVisibility', 'getColumnsFn', 'menuIconContainerRef', 'showDropdown', 'toggleDropdown'],
+  inputs: ['columnsVisibility', 'getAllLeafColumns', 'menuIconContainerRef', 'showDropdown', 'toggleDropdown'],
 })
 export class ModusTableColumnsVisibility {
   protected el: HTMLElement;

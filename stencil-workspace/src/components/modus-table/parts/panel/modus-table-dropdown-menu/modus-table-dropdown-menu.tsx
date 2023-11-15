@@ -70,7 +70,7 @@ export class ModusTableDropdownMenu {
             onKeyDown={(event) => this.handleDropdownKeyDown(event)}
             class={`dropdown-menu ${this.show ? 'visible' : ''}`}>
             <modus-table-columns-visibility
-              getColumnsFn={getAllLeafColumns}
+              getAllLeafColumns={getAllLeafColumns}
               columnsVisibility={options?.columnsVisibility}
               showDropdown={this.show}
               menuIconContainerRef={this.menuIconContainerRef}

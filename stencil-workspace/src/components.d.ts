@@ -1042,7 +1042,7 @@ export namespace Components {
          */
         "hover": boolean;
         /**
-          * (Optional) To set modus-table in manual mode.
+          * (Optional) To enable manual pagination mode. When enabled, the table will not automatically paginate rows, instead will expect the current page index and other details to be passed.
          */
         "manualPaginationOptions": ModusTableManualPaginationOptions;
         /**
@@ -1119,7 +1119,7 @@ export namespace Components {
         /**
           * Table data.
          */
-        "getColumnsFn": () => Column<unknown, unknown>[];
+        "getAllLeafColumns": () => Column<unknown, unknown>[];
         "menuIconContainerRef": HTMLDivElement;
         "showDropdown": boolean;
         "toggleDropdown": (show: boolean) => void;
@@ -3112,7 +3112,7 @@ declare namespace LocalJSX {
          */
         "hover"?: boolean;
         /**
-          * (Optional) To set modus-table in manual mode.
+          * (Optional) To enable manual pagination mode. When enabled, the table will not automatically paginate rows, instead will expect the current page index and other details to be passed.
          */
         "manualPaginationOptions"?: ModusTableManualPaginationOptions;
         /**
@@ -3223,7 +3223,7 @@ declare namespace LocalJSX {
         /**
           * Table data.
          */
-        "getColumnsFn"?: () => Column<unknown, unknown>[];
+        "getAllLeafColumns"?: () => Column<unknown, unknown>[];
         "menuIconContainerRef"?: HTMLDivElement;
         "showDropdown"?: boolean;
         "toggleDropdown"?: (show: boolean) => void;
