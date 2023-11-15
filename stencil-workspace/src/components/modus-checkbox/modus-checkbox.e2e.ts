@@ -148,20 +148,21 @@ describe('modus-checkbox', () => {
     expect(await modusCheckbox.getProperty('indeterminate')).toBeFalsy();
     expect(await input.getProperty('indeterminate')).toBeFalsy();
   });
-  it('renders with small property', async () => {
+  it('renders with default size', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<modus-checkbox small></modus-checkbox>');
+    await page.setContent('<modus-checkbox></modus-checkbox>');
     const modusCheckbox = await page.find('modus-checkbox');
 
-    expect(await modusCheckbox.getProperty('small')).toBeTruthy();
+    expect(await modusCheckbox.getProperty('size')).toBe('default');
   });
-  it('renders with small label property', async () => {
+
+  it('renders with small size property', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<modus-checkbox small label="Small-label"></modus-checkbox>');
-    const label = await page.find('modus-checkbox >>> label');
+    await page.setContent('<modus-checkbox size="small"></modus-checkbox>');
+    const modusCheckbox = await page.find('modus-checkbox');
 
-    expect(label).toHaveClass('small');
+    expect(await modusCheckbox.getProperty('size')).toBe('small');
   });
 });
