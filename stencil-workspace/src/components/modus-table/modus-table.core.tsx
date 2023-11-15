@@ -105,7 +105,7 @@ export default class ModusTableCore {
       sortingFns: {
         sortForHyperlink: sortHyperlink,
       },
-      columnResizeMode: 'onEnd',
+      columnResizeMode: 'onChange',
       enableColumnResizing: columnResize,
       enableHiding: !!toolbarOptions?.columnsVisibility,
       sortDescFirst: false, // To-Do, workaround to prevent sort descending on certain columns, e.g. numeric.
