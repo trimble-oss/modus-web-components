@@ -283,7 +283,7 @@ const helpers = (containerId) => {
     },
   };
   getRoot().querySelector('#navbar').profileMenuOptions = {
-    avatarUrl: 'broken-link',
+    avatarUrl: 'https://avatar.example.com/broken-image-link.png',
     email: 'modus_user@trimble.com',
     initials: 'MU',
     username: 'Modus User',

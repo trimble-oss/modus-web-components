@@ -23,16 +23,31 @@
 | `itemClick` | An event that fires on list item click | `CustomEvent<any>` |
 
 
+## Methods
+
+### `focusItem() => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+
 ## Dependencies
 
 ### Used by
 
  - [modus-navbar-profile-menu](../modus-navbar/profile-menu)
+ - [modus-table-row-actions-menu](../modus-table/parts/row/actions/modus-table-row-actions-menu)
 
 ### Graph
 ```mermaid
 graph TD;
   modus-navbar-profile-menu --> modus-list-item
+  modus-table-row-actions-menu --> modus-list-item
   style modus-list-item fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

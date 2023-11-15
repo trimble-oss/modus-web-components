@@ -4,12 +4,10 @@ import {
   Listen,
   State,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
-  Element,
 } from '@stencil/core';
 import { IconHorizontalEllipsis } from '../../../../icons/icon-horizontal-ellipsis';
 import { KEYBOARD_ENTER, KEYBOARD_ESCAPE, KEYBOARD_SPACE } from '../../../modus-table.constants';
-import { Table } from '@tanstack/table-core';
-import { ModusTableToolbarOptions } from '../../../models/modus-table.models';
+import TableContext from '../../../models/table-context.model';
 
 @Component({
   tag: 'modus-table-dropdown-menu',
@@ -17,16 +15,12 @@ import { ModusTableToolbarOptions } from '../../../models/modus-table.models';
   shadow: true,
 })
 export class ModusTableDropdownMenu {
-  @Element() element: HTMLElement; // Remove if not utilized
-
-  /** Table data. */
-  @Prop() table: Table<unknown>;
-
-  /** dropdown menu options. */
-  @Prop() options: ModusTableToolbarOptions;
+  @Prop() context: TableContext;
 
   /** Dropdown visibility state */
   @State() show = false;
+
+  private menuIconContainerRef: HTMLDivElement;
 
   @Listen('click', { target: 'document' })
   handleClickOutside(event: MouseEvent): void {
@@ -36,8 +30,6 @@ export class ModusTableDropdownMenu {
       this.show = false;
     }
   }
-
-  menuIconContainerRef: HTMLDivElement;
 
   handleIconKeyDown(event: KeyboardEvent) {
     const eventKey = event.key.toLowerCase();
@@ -59,6 +51,10 @@ export class ModusTableDropdownMenu {
   }
 
   render(): void {
+    const {
+      tableInstance: { getAllLeafColumns },
+      toolbarOptions: options,
+    } = this.context;
     return (
       <div class="dropdown-menu-container">
         <div
@@ -69,15 +65,19 @@ export class ModusTableDropdownMenu {
           ref={(el) => (this.menuIconContainerRef = el as HTMLDivElement)}>
           <IconHorizontalEllipsis size="20" />
         </div>
-        <div onKeyDown={(event) => this.handleDropdownKeyDown(event)} class={`dropdown-menu ${this.show ? 'visible' : ''}`}>
-          <modus-table-columns-visibility
-            table={this.table}
-            columnsVisibility={this.options?.columnsVisibility}
-            showDropdown={this.show}
-            menuIconContainerRef={this.menuIconContainerRef}
-            toggleDropdown={(show: boolean) => (this.show = show)}
-          />
-        </div>
+        {options?.columnsVisibility && (
+          <div
+            onKeyDown={(event) => this.handleDropdownKeyDown(event)}
+            class={`dropdown-menu ${this.show ? 'visible' : ''}`}>
+            <modus-table-columns-visibility
+              getAllLeafColumns={getAllLeafColumns}
+              columnsVisibility={options?.columnsVisibility}
+              showDropdown={this.show}
+              menuIconContainerRef={this.menuIconContainerRef}
+              toggleDropdown={(show: boolean) => (this.show = show)}
+            />
+          </div>
+        )}
       </div>
     );
   }

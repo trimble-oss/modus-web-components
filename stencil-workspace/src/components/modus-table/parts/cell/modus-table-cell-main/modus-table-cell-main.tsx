@@ -8,8 +8,8 @@ import {
   Prop,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
-import { Cell, Row } from '@tanstack/table-core';
-import { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableRowActions } from '../../../models/modus-table.models';
+import { Cell } from '@tanstack/table-core';
+import { ModusTableCellEditorArgs, ModusTableCellLink } from '../../../models/modus-table.models';
 import {
   COLUMN_DEF_DATATYPE_KEY,
   COLUMN_DEF_DATATYPE_INTEGER,
@@ -21,11 +21,11 @@ import {
   KEYBOARD_ENTER,
   KEYBOARD_ESCAPE,
 } from '../../../modus-table.constants';
-import ModusTableCellExpandIcons from '../modus-table-cell-expand-icons';
 import NavigateTableCells from '../../../utilities/table-cell-navigation.utility';
 import { CellFormatter } from '../../../utilities/table-cell-formatter.utility';
 import { ModusTableCellLinkElement } from '../modus-table-cell-link-element';
-import { ModusTableCellEdited } from '../../modus-table-body';
+import TableContext, { TableCellEdited } from '../../../models/table-context.model';
+import ModusTableCellExpandIcons from '../modus-table-cell-expand-icons';
 
 @Component({
   tag: 'modus-table-cell-main',
@@ -33,9 +33,9 @@ import { ModusTableCellEdited } from '../../modus-table-body';
 export class ModusTableCellMain {
   @Element() el: HTMLElement;
   @Prop() cell: Cell<unknown, unknown>;
-  @Prop() rowActions: ModusTableRowActions;
-  @Prop() valueChange: (props: ModusTableCellEdited) => void;
-  @Prop() linkClick: (link: ModusTableCellLink) => void;
+  @Prop() context: TableContext;
+  @Prop() hasRowsExpandable: boolean;
+  @Prop() valueChange: (props: TableCellEdited) => void;
 
   @State() editMode: boolean;
   @Watch('editMode') onEditModeChange(newValue: boolean) {
@@ -44,7 +44,7 @@ export class ModusTableCellMain {
   }
 
   private cellEl: HTMLElement;
-  private onCellClick: () => void = () => this.handleCellClick();
+  private onCellClick: (e: MouseEvent) => void = (e) => this.handleCellClick(e);
   private onCellKeyDown: (e: KeyboardEvent) => void = (e: KeyboardEvent) => this.handleCellKeydown(e);
   private onCellBlur: (e: FocusEvent) => void = (e) => this.handleCellBlur(e);
 
@@ -85,7 +85,9 @@ export class ModusTableCellMain {
     return this.cell.column.columnDef[COLUMN_DEF_CELL_EDITOR_ARGS_KEY];
   }
 
-  handleCellClick = () => {
+  handleCellClick = (event: MouseEvent) => {
+    if (event.defaultPrevented) return;
+
     if (this.cell.column.columnDef[this.cellEditableKey]) {
       this.editMode = true;
     }
@@ -98,6 +100,8 @@ export class ModusTableCellMain {
   };
 
   handleCellKeydown = (event: KeyboardEvent) => {
+    if (event.defaultPrevented) return;
+
     const key = event.key?.toLowerCase();
     const isCellEditable = this.cell.column.columnDef[this.cellEditableKey];
 
@@ -141,24 +145,30 @@ export class ModusTableCellMain {
     event.stopPropagation();
   };
 
-  renderCellValue(cellValue: unknown, row: Row<unknown>): JSX.Element[] {
+  renderCellValue(): JSX.Element[] {
+    const { row, getValue } = this.cell;
+    const cellValue = getValue();
+
     if (!cellValue) return null;
 
+    const { cellLinkClick } = this.context;
     const cellDataType = cellValue['_type'] ?? this.cell.column.columnDef[COLUMN_DEF_DATATYPE_KEY];
     const classes = {
       'cell-content': true,
+      'wrap-text': true,
       'text-align-right': cellDataType === COLUMN_DEF_DATATYPE_INTEGER,
     };
 
     return (
       <div class={classes}>
-        {this.rowActions?.expandable && <ModusTableCellExpandIcons row={row} />}
+        {this.hasRowsExpandable && <ModusTableCellExpandIcons row={row} />}
+
         <span class="wrap-text">
           {cellDataType === COLUMN_DEF_DATATYPE_LINK ? (
             <ModusTableCellLinkElement
               link={cellValue as ModusTableCellLink}
               onLinkClick={(link: ModusTableCellLink) => {
-                this.linkClick(link);
+                cellLinkClick.emit(link);
               }}
             />
           ) : (
@@ -170,9 +180,7 @@ export class ModusTableCellMain {
   }
 
   render(): void {
-    const cellValue = this.cell.getValue();
-    const valueString = cellValue?.toString();
-    const row = this.cell.row;
+    const valueString = this.cell.getValue()?.toString();
 
     return (
       <Host>
@@ -185,7 +193,7 @@ export class ModusTableCellMain {
             keyDown={(event: KeyboardEvent, newVal: string) => this.handleCellEditorKeyDown(event, newVal, valueString)}
           />
         ) : (
-          this.renderCellValue(cellValue, row)
+          this.renderCellValue()
         )}
       </Host>
     );
