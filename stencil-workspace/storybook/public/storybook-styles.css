@@ -135,3 +135,7 @@ body.dark .sidebar-header a[title="Storybook"] {
 .sidebar-header a[title="Storybook"] svg {
   opacity: 0;
 }
+
+html:has(body.dark) {
+  color-scheme: dark;
+}
