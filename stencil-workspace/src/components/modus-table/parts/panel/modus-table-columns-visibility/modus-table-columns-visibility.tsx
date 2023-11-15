@@ -4,7 +4,7 @@ import {
   State,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
-import { Table } from '@tanstack/table-core';
+import { Column } from '@tanstack/table-core';
 import { KEYBOARD_DOWN, KEYBOARD_UP, KEYBOARD_ENTER, KEYBOARD_SPACE, KEYBOARD_TAB } from '../../../modus-table.constants';
 import { JSX } from '@stencil/core/internal';
 import { ModusTableColumnsVisibilityOptions } from '../../../models/modus-table.models';
@@ -16,7 +16,7 @@ import { ModusTableColumnsVisibilityOptions } from '../../../models/modus-table.
 })
 export class ModusTableColumnsVisibility {
   /** Table data. */
-  @Prop() table: Table<unknown>;
+  @Prop() getAllLeafColumns: () => Column<unknown, unknown>[];
 
   /** Column visibility options */
   @Prop() columnsVisibility: ModusTableColumnsVisibilityOptions;
@@ -37,7 +37,7 @@ export class ModusTableColumnsVisibility {
   }
 
   applyColumnsVisibility() {
-    this.table.getAllLeafColumns().forEach((column) => {
+    this.getAllLeafColumns().forEach((column) => {
       if (this.columnsVisibilityState.has(column.id)) {
         column.toggleVisibility(this.columnsVisibilityState.get(column.id));
       }
@@ -96,7 +96,7 @@ export class ModusTableColumnsVisibility {
 
   private initializeVisibilityState() {
     // Set the visibility state based on hiddenColumns prop
-    this.table.getAllLeafColumns().forEach((column) => {
+    this.getAllLeafColumns().forEach((column) => {
       const isRequired = this.columnsVisibility?.requiredColumns?.includes(column.id);
       const isHidden = this.columnsVisibility?.hiddenColumns?.includes(column.id);
 
@@ -134,7 +134,7 @@ export class ModusTableColumnsVisibility {
       };
     };
 
-    return this.table.getAllLeafColumns().map((column, index) => {
+    return this.getAllLeafColumns().map((column, index) => {
       return (
         <div {...columnVisibilityItemControls(column.id, index)} class="column-visibility-item">
           <modus-checkbox

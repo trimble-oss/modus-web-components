@@ -928,6 +928,7 @@ modus-data-table {
 
 modus-table {
   @include modus-checkbox;
+  @include modus-list-item;
 }
 
 modus-file-dropzone {
