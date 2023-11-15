@@ -12,7 +12,7 @@
   display: inline-flex;
   flex-direction: row;
   font-family: $primary-font;
-  font-size: $label-font-size;
+  font-size: $rem-16px;
   height: $rem-24px;
   text-align: center;
   white-space: nowrap;
@@ -29,10 +29,16 @@
     transition: background-color 0.15s ease-in-out;
     width: $rem-16px;
 
+    &.small {
+      height: $rem-12px;
+      width: $rem-12px;
+    }
+
     &:focus,
     &:focus-visible {
-      box-shadow: 0 0 0 0.2rem $modus-checkbox-focus-box-shadow-color;
-      outline: 0;
+      border: $rem-2px solid $modus-checkbox-selected-border-color !important;
+      box-shadow: 0 0 0 0.3rem $modus-checkbox-focus-box-shadow-color;
+      outline: $rem-2px solid white;
     }
 
     &.blue-background {
@@ -67,6 +73,10 @@
   label {
     align-items: center;
     display: flex;
+
+    &.small {
+      font-size: $rem-12px;
+    }
 
     &.disabled {
       opacity: 0.3;

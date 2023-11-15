@@ -52,6 +52,13 @@ export default {
         type: { summary: 'boolean' },
       },
     },
+    small: {
+      name: 'small',
+      description: "Whether the checkbox should be displayed in small size.",
+      table: {
+        type: { summary: 'boolean' },
+      },
+    },
   },
   parameters: {
     actions: {
@@ -74,6 +81,7 @@ const Template = ({
   indeterminate,
   label,
   tabIndexValue,
+  small
 }) => html`
   <modus-checkbox
     aria-label=${ariaLabel}
@@ -81,7 +89,8 @@ const Template = ({
     disabled=${disabled}
     indeterminate=${indeterminate}
     label=${label}
-    tab-index-value=${tabIndexValue}></modus-checkbox>
+    tab-index-value=${tabIndexValue}
+    small=${small}></modus-checkbox>
 `;
 
 export const Default = Template.bind({});
@@ -92,6 +101,7 @@ Default.args = {
   indeterminate: false,
   label: 'Checkbox',
   tabIndexValue: 0,
+  small:false,
 };
 
 export const Indeterminate = Template.bind({});
@@ -102,4 +112,5 @@ Indeterminate.args = {
   indeterminate: true,
   label: 'Checkbox',
   tabIndexValue: 0,
+  small:false,
 };

@@ -148,4 +148,20 @@ describe('modus-checkbox', () => {
     expect(await modusCheckbox.getProperty('indeterminate')).toBeFalsy();
     expect(await input.getProperty('indeterminate')).toBeFalsy();
   });
+  it('renders with small property', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-checkbox small></modus-checkbox>');
+    const modusCheckbox = await page.find('modus-checkbox');
+
+    expect(await modusCheckbox.getProperty('small')).toBeTruthy();
+  });
+  it('renders with small label property', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-checkbox small label="Small-label"></modus-checkbox>');
+    const label = await page.find('modus-checkbox >>> label');
+
+    expect(label).toHaveClass('small');
+  });
 });

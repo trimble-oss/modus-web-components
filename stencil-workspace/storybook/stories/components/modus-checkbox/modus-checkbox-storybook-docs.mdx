@@ -18,10 +18,19 @@ This component is compatible with Angular reactive forms. This can be achieved t
 <modus-checkbox disabled label="Checkbox"></modus-checkbox><br />
 <modus-checkbox checked disabled label="Checkbox"></modus-checkbox><br />
 
+### Small
+
+<modus-checkbox small></modus-checkbox><br />
+<modus-checkbox disabled small></modus-checkbox><br />
+<modus-checkbox label="Checkbox" small></modus-checkbox><br />
+<modus-checkbox disabled label="Checkbox" small></modus-checkbox><br />
+<modus-checkbox checked disabled label="Checkbox" small></modus-checkbox><br />
+
 <Anchor storyId="user-inputs-checkbox--indeterminate" />
 
 ### Indeterminate
 
+<modus-checkbox indeterminate small></modus-checkbox>
 <modus-checkbox indeterminate></modus-checkbox>
 
 ```html
@@ -30,6 +39,14 @@ This component is compatible with Angular reactive forms. This can be achieved t
 <modus-checkbox label="Checkbox"></modus-checkbox>
 <modus-checkbox disabled label="Checkbox"></modus-checkbox>
 <modus-checkbox checked disabled label="Checkbox"></modus-checkbox>
+
+<modus-checkbox small></modus-checkbox>
+<modus-checkbox disabled small></modus-checkbox>
+<modus-checkbox label="Checkbox" small></modus-checkbox>
+<modus-checkbox disabled label="Checkbox" small></modus-checkbox>
+<modus-checkbox checked disabled label="Checkbox" small></modus-checkbox>
+
+<modus-checkbox indeterminate small></modus-checkbox>
 <modus-checkbox indeterminate></modus-checkbox>
 ```
 
@@ -44,6 +61,7 @@ This component is compatible with Angular reactive forms. This can be achieved t
 | `label`           | `label`            | (optional) The checkbox label.                           | `string`           | `undefined` |
 | `tabIndexValue`   | `tab-index-value`  | (optional) Tab Index for the checkbox                    | `number \| string` | `0`         |
 | `stopPropagation` | `stop-propagation` | (optional) It should stop propagating the event further. | `boolean`          | `undefined` |
+| `small` | `small` | (optional) Whether the checkbox should be displayed in small size. | `boolean`          | `false` |
 
 ### DOM Events
 

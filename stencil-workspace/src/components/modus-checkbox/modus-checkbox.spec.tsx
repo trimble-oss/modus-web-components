@@ -39,4 +39,9 @@ describe('modus-checkbox', () => {
     const modusCheckbox = new ModusCheckbox();
     expect(modusCheckbox.label).toBeFalsy();
   });
+
+  it('should default to not small', async () => {
+    const modusCheckbox = new ModusCheckbox();
+    expect(modusCheckbox.small).toBeFalsy();
+  });
 });

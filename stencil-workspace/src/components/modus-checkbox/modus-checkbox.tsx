@@ -40,6 +40,9 @@ export class ModusCheckbox {
   /** (optional) If you wish to prevent the propagation of your event, you may opt for this. */
   @Prop() stopPropagation: boolean;
 
+  /** (optional) Whether the checkbox should be displayed in small size. */
+  @Prop() small: boolean;
+
   checkboxInput: HTMLInputElement;
   checkboxContainer: HTMLDivElement;
 
@@ -86,7 +89,7 @@ export class ModusCheckbox {
   }
 
   render(): unknown {
-    const className = 'modus-checkbox';
+    const className = `modus-checkbox`;
     const tabIndexValue = this.disabled ? -1 : this.tabIndexValue;
 
     return (
@@ -99,15 +102,16 @@ export class ModusCheckbox {
           tabindex={tabIndexValue}
           class={`${this.checked || this.indeterminate ? 'checkbox blue-background checked' : 'checkbox'} ${
             this.disabled ? 'disabled' : ''
-          }`}
+          } ${this.small ? 'small' : ''} `}
           ref={(el) => (this.checkboxContainer = el)}>
           {this.indeterminate ? (
             <div class={'checkmark checked'}>
-              <IconIndeterminate color="#FFFFFF" size="24" />
+              {' '}
+              <IconIndeterminate color="#FFFFFF" size={this.small ? '16' : '24'} />
             </div>
           ) : (
             <div class={this.checked ? 'checkmark checked' : 'checkmark'}>
-              <IconCheck color="#FFFFFF" size="24" />
+              <IconCheck color="#FFFFFF" size={this.small ? '16' : '24'} />
             </div>
           )}
         </div>
@@ -119,7 +123,9 @@ export class ModusCheckbox {
           disabled={this.disabled}
           ref={(el) => (this.checkboxInput = el as HTMLInputElement)}
           type="checkbox"></input>
-        {this.label ? <label class={this.disabled ? 'disabled' : null}>{this.label}</label> : null}
+        {this.label ? (
+          <label class={` ${this.disabled ? 'disabled' : ''} ${this.small ? 'small' : ''}`}>{this.label}</label>
+        ) : null}
       </div>
     );
   }

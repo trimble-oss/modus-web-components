@@ -14,6 +14,7 @@
 | `disabled`        | `disabled`         | (optional) Whether the checkbox is disabled.                                           | `boolean`          | `undefined` |
 | `indeterminate`   | `indeterminate`    | (optional) Whether the checkbox is indeterminate.                                      | `boolean`          | `undefined` |
 | `label`           | `label`            | (optional) The checkbox label.                                                         | `string`           | `undefined` |
+| `small`           | `small`            | (optional) Whether the checkbox should be displayed in small size.                     | `boolean`          | `undefined` |
 | `stopPropagation` | `stop-propagation` | (optional) If you wish to prevent the propagation of your event, you may opt for this. | `boolean`          | `undefined` |
 | `tabIndexValue`   | `tab-index-value`  | (optional) Tab Index for the checkbox                                                  | `number \| string` | `0`         |
 
