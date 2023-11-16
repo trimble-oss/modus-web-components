@@ -1,4 +1,4 @@
-import { Component, Prop, Watch, State, Event, EventEmitter } from '@stencil/core';
+import { Component, Prop, Watch, State, h, Event, EventEmitter } from '@stencil/core';
 import { IconMap } from '../icons/IconMap';
 import { MODUS_SENTIMENT_CONSTANTS, SMILEY_ICONS, THUMB_ICONS } from './modus-sentiment.constants';
 
