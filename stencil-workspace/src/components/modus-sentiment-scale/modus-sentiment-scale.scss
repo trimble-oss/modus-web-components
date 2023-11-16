@@ -1,0 +1,72 @@
+@import './modus-sentiment-scale.vars';
+
+:host {
+  display: block;
+}
+
+.sentiment-scale-container {
+  display: flex;
+
+  .smileys-container {
+    align-items: center;
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .thumbs-container {
+    align-items: center;
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+    padding: 12px;
+  }
+
+  .disabled {
+    opacity: 0.3;
+
+    svg {
+      &:hover {
+        path {
+          fill: revert-layer !important;
+        }
+      }
+    }
+
+    .active {
+      svg {
+        &:hover {
+          path {
+            fill: revert-layer !important;
+          }
+        }
+      }
+    }
+  }
+
+  .active {
+    svg {
+      &:hover {
+        path {
+          fill: #0063a3;
+        }
+      }
+    }
+  }
+
+  svg {
+    &:focus {
+      path {
+        fill: #0063a3;
+      }
+    }
+
+    &:hover {
+      path {
+        fill: #0063a3;
+      }
+    }
+  }
+}
