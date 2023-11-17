@@ -59,10 +59,12 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
       `}
       style={{
         width: `${getSize()}px`,
+       ...columnReorder && ({
         'user-select': 'none',
         '-webkit-user-select': 'none',
         '-khtml-user-select': 'none',
         '-moz-user-select': 'none'
+       }) 
       }}
       aria-label={column.columnDef.header}
       role="columnheader"
