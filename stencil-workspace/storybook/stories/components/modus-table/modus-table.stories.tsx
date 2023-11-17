@@ -79,10 +79,24 @@ function initializeTable(columns, data, pageSizeList, toolbarOptions, displayOpt
         // property doesn't exist on either object
         return 0;
       }
-      const varA = (typeof a[key] === 'string')
-        ? a[key].toUpperCase() : a[key];
-      const varB = (typeof b[key] === 'string')
-        ? b[key].toUpperCase() : b[key];
+      let varA = '';
+      let varB = '';
+
+      if (typeof a[key] === 'string'){
+        varA = a[key].toUpperCase();
+      } else if (typeof a[key] === 'object'){
+        varA = a[key].display;
+      } else {
+        varA = a[key];
+      }
+      if (typeof b[key] === 'string'){
+        varB = b[key].toUpperCase();
+      } else if (typeof b[key] === 'object'){
+        varB = b[key].display;
+      } else {
+        varB = b[key];
+      }
+
       let comparison = 0;
       if (varA > varB) {
         comparison = 1;
