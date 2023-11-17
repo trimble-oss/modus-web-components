@@ -59,6 +59,10 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
       `}
       style={{
         width: `${getSize()}px`,
+        'user-select': 'none',
+        '-webkit-user-select': 'none',
+        '-khtml-user-select': 'none',
+        '-moz-user-select': 'none'
       }}
       aria-label={column.columnDef.header}
       role="columnheader"
@@ -70,7 +74,8 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
         if (event.key.toLowerCase() === KEYBOARD_ENTER) {
           onDragStart(event, headerId, elementRef, false);
         }
-      }}>
+      }}
+      >
       {isPlaceholder ? null : ( // header.isPlaceholder is Required for nested column headers to display empty cell
         <div class={column.getCanSort() && 'can-sort'}>
           <span>{column.columnDef.header}</span>
