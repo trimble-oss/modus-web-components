@@ -62,7 +62,6 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
        ...columnReorder && ({
         'user-select': 'none',
         '-webkit-user-select': 'none',
-        '-khtml-user-select': 'none',
         '-moz-user-select': 'none'
        }) 
       }}
