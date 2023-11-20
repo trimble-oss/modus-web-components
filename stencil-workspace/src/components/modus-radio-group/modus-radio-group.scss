@@ -11,6 +11,7 @@ div.modus-radio-group {
 
 .modus-radio-button {
   display: inline-block;
+  outline: none;
 
   .radio {
     align-items: center;
@@ -69,6 +70,12 @@ div.modus-radio-group {
 
   &:hover .radio .checkmark {
     border-color: $modus-radio-btn-hover-border-color;
+  }
+
+  &:focus .radio .checkmark {
+    border-color: $modus-radio-btn-hover-border-color;
+    box-shadow: 0 0 0 0.2rem $modus-radio-btn-focus-box-shadow-color;
+    outline: 2px solid white;
   }
 
   &.disabled {

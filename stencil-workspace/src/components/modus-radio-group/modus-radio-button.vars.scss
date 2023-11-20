@@ -8,3 +8,6 @@ $modus-radio-btn-hover-border-color: var(--modus-radio-btn-hover-border-color, #
 
 // Checked state
 $modus-radio-btn-selected-border-color: var(--modus-radio-btn-selected-border-color, #217cbb) !default;
+
+// Focus state
+$modus-radio-btn-focus-box-shadow-color: var(--modus-checkbox-focus-box-shadow-color, rgba(#217cbb, 0.6)) !default;
