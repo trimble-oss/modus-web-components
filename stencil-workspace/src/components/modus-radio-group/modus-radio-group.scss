@@ -33,6 +33,11 @@ div.modus-radio-group {
         border-color 0.15s ease-in-out,
         box-shadow 0.15s ease-in-out;
       width: $rem-14px;
+
+      &.small {
+        height: $rem-10px;
+        width: $rem-10px;
+      }
     }
 
     .checkmark::after {
@@ -56,10 +61,22 @@ div.modus-radio-group {
       display: block;
     }
 
+    input:checked ~ .checkmark.small::after {
+      height: 0.405rem; // Specific size so that the check is centered.
+      left: $rem-2px;
+      top: $rem-2px;
+      width: 0.405rem;
+    }
+
     label {
       color: $modus-radio-btn-label-color;
       font-size: $rem-12px;
       margin-left: 1.625rem;
+
+      &.small {
+        font-size: $rem-10px;
+        margin-left: 1.25rem;
+      }
     }
   }
 

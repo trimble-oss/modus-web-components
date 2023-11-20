@@ -6,6 +6,7 @@ export interface RadioButton {
   disabled?: boolean;
   id: string;
   label: string;
+  size?: 'small' | 'default';
 }
 
 interface ModusRadioButtonProps {
@@ -16,18 +17,22 @@ interface ModusRadioButtonProps {
   id: string;
   label: string;
   name: string;
+  size?: 'small' | 'default';
 }
 
 export const ModusRadioButton: FunctionalComponent<ModusRadioButtonProps> = (props: ModusRadioButtonProps) => (
-  <div
-    class={`modus-radio-button ${props.disabled ? 'disabled' : ''}`}
-    onClick={() => props.handleButtonClick(props.id)}
-    onKeyDown={(event) => props.handleKeydown(event, props.id)}
-    tabIndex={0}>
-    <div class="radio">
-      <input checked={props.checked} disabled={props.disabled} name={props.name} type="radio"></input>
-      <span class="checkmark"></span>
-      <label>{props.label}</label>
+  console.log('props', props.size),
+  (
+    <div
+      class={`modus-radio-button ${props.disabled ? 'disabled' : ''}`}
+      onClick={() => props.handleButtonClick(props.id)}
+      onKeyDown={(event) => props.handleKeydown(event, props.id)}
+      tabIndex={0}>
+      <div class="radio">
+        <input checked={props.checked} disabled={props.disabled} name={props.name} type="radio"></input>
+        <span class={`checkmark ${props.size}`}></span>
+        <label class={`${props.size}`}>{props.label}</label>
+      </div>
     </div>
-  </div>
+  )
 );

@@ -20,6 +20,9 @@ export class ModusRadioGroup {
   /** The radio buttons to render. */
   @Prop({ mutable: true }) radioButtons: RadioButton[] = [];
 
+  /** (optional) The size of the radiobutton. */
+  @Prop() size?: 'small' | 'default' = 'default';
+
   /** Fires on radio button click. */
   @Event() buttonClick: EventEmitter<string>;
 
@@ -56,6 +59,7 @@ export class ModusRadioGroup {
         {this.radioButtons.map((radioButton) => {
           return (
             <ModusRadioButton
+              size={radioButton.size}
               checked={radioButton.checked}
               disabled={radioButton.disabled}
               label={radioButton.label}
