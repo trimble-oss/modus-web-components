@@ -31,12 +31,13 @@ const setRadioGroup = () => {
     document.querySelector('modus-radio-group').radioButtons = [
       {
         id: '0',
-        label: 'Radio 1'
+        label: 'Radio 1',
       },
       {
         checked: true,
         id: '1',
-        label: 'Radio 2'
+        label: 'Radio 2',
+        size:'small'
       },
       {
         id: '2',
