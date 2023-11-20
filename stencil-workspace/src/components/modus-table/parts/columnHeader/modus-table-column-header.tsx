@@ -56,14 +56,10 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
         ${isNestedParentHeader ? 'text-align-center' : ''}
         ${frozenColumns.includes(headerId) ? 'sticky-left' : ''}
         ${column.getIsResizing() ? 'active-resize' : ''}
+        ${columnReorder? '.hide-text-selection' : ''}
       `}
       style={{
         width: `${getSize()}px`,
-       ...columnReorder && ({
-        'user-select': 'none',
-        '-webkit-user-select': 'none',
-        '-moz-user-select': 'none'
-       }) 
       }}
       aria-label={column.columnDef.header}
       role="columnheader"
