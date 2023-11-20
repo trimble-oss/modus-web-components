@@ -36,6 +36,15 @@ const MockManualPagination = {
   totalRecords: 100,
 };
 
+const MockManualSorting = {
+  currentSortingState: [
+    {
+      id: 'mock-column-one',
+      desc: false,
+    },
+  ],
+};
+
 describe('modus-table', () => {
   let page: E2EPage;
 
@@ -248,6 +257,45 @@ describe('modus-table', () => {
     tooltip = await sortContainer.find('modus-tooltip');
     tooltipText = await tooltip.getProperty('text');
     expect(tooltipText).toEqual('Sorted Descending');
+  });
+
+  it('Renders with correct sort icon when manual sorting is enabled', async () => {
+    page = await newE2EPage();
+    await page.setContent('<modus-table />');
+
+    const component = await page.find('modus-table');
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    component.setProperty('sort', true);
+    component.setProperty('manualSortingOptions', MockManualSorting);
+    await page.waitForChanges();
+
+    const iconSortAZ = await page.find('modus-table >>> svg');
+    const dataTestId = iconSortAZ['__attributeMap']['__items'].find((item) => item['_name'] === 'data-test-id');
+    const dataTestIdValue = dataTestId && dataTestId['_value'];
+
+    expect(dataTestIdValue).toBe('iconSortAZ');
+  });
+
+  it('Check sort icon tooltip text for enabled manual sorting', async () => {
+    page = await newE2EPage();
+    await page.setContent('<modus-table />');
+
+    const component = await page.find('modus-table');
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    component.setProperty('sort', true);
+    component.setProperty('manualSortingOptions', MockManualSorting);
+    await page.waitForChanges();
+
+    const sortContainer = await page.find('modus-table >>> th');
+    expect(sortContainer).not.toBeNull();
+
+    const tooltip = await sortContainer.find('modus-tooltip');
+    const tooltipText = await tooltip.getProperty('text');
+
+    expect(tooltip).not.toBeNull();
+    expect(tooltipText).toEqual('Sorted Ascending');
   });
 
   it('Render pagination when pagination is enabled', async () => {
