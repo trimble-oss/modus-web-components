@@ -56,7 +56,7 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
         ${isNestedParentHeader ? 'text-align-center' : ''}
         ${frozenColumns.includes(headerId) ? 'sticky-left' : ''}
         ${column.getIsResizing() ? 'active-resize' : ''}
-        ${columnReorder? '.hide-text-selection' : ''}
+        ${columnReorder ? 'hide-text-selection' : ''}
       `}
       style={{
         width: `${getSize()}px`,
