@@ -17,7 +17,12 @@ import {
   SortingState,
   TableState,
 } from '@tanstack/table-core';
-import { ModusTableColumn, ModusTableRowSelectionOptions, ModusTableToolbarOptions } from './models/modus-table.models';
+import {
+  ModusTableColumn,
+  ModusTableRowSelectionOptions,
+  ModusTableSortingState,
+  ModusTableToolbarOptions,
+} from './models/modus-table.models';
 import { sortHyperlink } from './functions/sortingFunction';
 import { COLUMN_DEF_SUB_ROWS_KEY } from './modus-table.constants';
 
@@ -34,6 +39,8 @@ export interface TableCoreOptions {
   pageSizeList: number[];
   manualPagination?: boolean;
   pageCount?: number;
+  manualSorting?: boolean;
+  sortingState?: ModusTableSortingState;
 
   setExpanded: (updater: Updater<ExpandedState>) => void;
   setSorting: (updater: Updater<SortingState>) => void;
@@ -62,6 +69,8 @@ export default class ModusTableCore {
       toolbarOptions,
       manualPagination,
       pageCount,
+      manualSorting,
+      sortingState,
       setExpanded,
       setSorting,
       setRowSelection,
@@ -82,7 +91,7 @@ export default class ModusTableCore {
         columnVisibility: {},
         columnOrder: columnOrder,
         expanded: null,
-        sorting: [],
+        sorting: manualSorting ? sortingState : [],
         rowSelection: {},
         pagination: pagination && {
           pageIndex: 0,
@@ -122,7 +131,9 @@ export default class ModusTableCore {
           manualPagination,
           pageCount,
         }),
+      manualSorting: manualSorting,
     };
+
     this.tableCore = createTable(options);
   }
 
