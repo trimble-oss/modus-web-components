@@ -142,7 +142,7 @@ export namespace Components {
         /**
           * Whether to show autocomplete's options when focus.
          */
-        "showResultsOnFocus": boolean;
+        "showOptionsOnFocus": boolean;
         /**
           * The autocomplete's size.
          */
@@ -2088,7 +2088,7 @@ declare namespace LocalJSX {
         /**
           * Whether to show autocomplete's options when focus.
          */
-        "showResultsOnFocus"?: boolean;
+        "showOptionsOnFocus"?: boolean;
         /**
           * The autocomplete's size.
          */

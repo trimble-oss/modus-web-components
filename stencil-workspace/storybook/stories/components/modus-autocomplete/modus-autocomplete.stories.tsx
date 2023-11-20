@@ -159,7 +159,7 @@ export const Default = ({
                           readOnly,
                           required,
                           showNoResultsFoundMessage,
-                          showResultsOnFocus,
+                          showOptionsOnFocus,
                           size,
                           value }) => html`
   <div style="width: 600px">
@@ -179,7 +179,7 @@ export const Default = ({
       read-only=${readOnly}
       required=${required}
       show-no-results-found-message=${showNoResultsFoundMessage}
-      show-results-on-focus=${showResultsOnFocus}
+      show-options-on-focus=${showOptionsOnFocus}
       size=${size}
       value=${value}>
     </modus-autocomplete>
@@ -201,7 +201,7 @@ Default.args = {
   readOnly: false,
   required: false,
   showNoResultsFoundMessage: true,
-  showResultsOnFocus: false,
+  showOptionsOnFocus: false,
   size: 'medium',
   value: '',
 }

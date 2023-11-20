@@ -24,7 +24,7 @@
 | `readOnly`                  | `read-only`                     | Whether the autocomplete is read-only.             | `boolean`                               | `undefined`                                   |
 | `required`                  | `required`                      | Whether the autocomplete is required.              | `boolean`                               | `undefined`                                   |
 | `showNoResultsFoundMessage` | `show-no-results-found-message` | Whether to show the no results found message.      | `boolean`                               | `true`                                        |
-| `showResultsOnFocus`        | `show-results-on-focus`         | Whether to show autocomplete's options when focus. | `boolean`                               | `undefined`                                   |
+| `showOptionsOnFocus`        | `show-options-on-focus`         | Whether to show autocomplete's options when focus. | `boolean`                               | `undefined`                                   |
 | `size`                      | `size`                          | The autocomplete's size.                           | `"large" \| "medium"`                   | `'medium'`                                    |
 | `value`                     | `value`                         | The autocomplete's search value.                   | `string`                                | `undefined`                                   |
 

@@ -235,7 +235,7 @@ describe('modus-autocomplete', () => {
     expect(options.length).toEqual(1);
   });
 
-  it('should display options on focus when showResultsOnFocus prop is true', async () => {
+  it('should display options on focus when showOptionsOnFocus prop is true', async () => {
       const element = await page.find('modus-autocomplete');
       expect(element).toHaveClass('hydrated');
 
@@ -244,7 +244,7 @@ describe('modus-autocomplete', () => {
       { id: 2, value: 'Test 2' },
       ]);
 
-      element.setProperty('showResultsOnFocus', true);
+      element.setProperty('showOptionsOnFocus', true);
 
       await page.waitForChanges();
 

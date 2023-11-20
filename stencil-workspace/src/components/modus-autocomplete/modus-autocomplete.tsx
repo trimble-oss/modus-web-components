@@ -72,7 +72,7 @@ export class ModusAutocomplete {
   @Prop() placeholder: string;
 
   /** Whether to show autocomplete's options when focus. */
-  @Prop() showResultsOnFocus: boolean;
+  @Prop() showOptionsOnFocus: boolean;
 
   /** Whether the autocomplete is read-only. */
   @Prop() readOnly: boolean;
@@ -145,7 +145,10 @@ export class ModusAutocomplete {
     !this.visibleCustomOptions?.length &&
     this.value?.length > 0;
 
-  displayOptions = () =>  this.hasFocus && (this.showResultsOnFocus ? this.showResultsOnFocus : this.value?.length > 0 ) && !this.disabled;
+  displayOptions = () =>  {
+    const showOptions = (this.showOptionsOnFocus || this.value?.length > 0 );
+    return this.hasFocus && showOptions  && !this.disabled;
+  }
 
   handleCustomOptionClick = (option: any) => {
     const optionValue = option.getAttribute(DATA_SEARCH_VALUE);
