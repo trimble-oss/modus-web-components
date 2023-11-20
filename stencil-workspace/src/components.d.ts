@@ -140,6 +140,10 @@ export namespace Components {
          */
         "showNoResultsFoundMessage": boolean;
         /**
+          * Whether to show autocomplete's options when focus.
+         */
+        "showResultsOnFocus": boolean;
+        /**
           * The autocomplete's size.
          */
         "size": 'medium' | 'large';
@@ -2081,6 +2085,10 @@ declare namespace LocalJSX {
           * Whether to show the no results found message.
          */
         "showNoResultsFoundMessage"?: boolean;
+        /**
+          * Whether to show autocomplete's options when focus.
+         */
+        "showResultsOnFocus"?: boolean;
         /**
           * The autocomplete's size.
          */

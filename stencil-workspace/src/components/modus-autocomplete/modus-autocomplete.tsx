@@ -59,6 +59,7 @@ export class ModusAutocomplete {
   /** The autocomplete's no results sub-text. */
   @Prop() noResultsFoundSubtext = 'Check spelling or try a different keyword';
 
+
   /** The autocomplete's options. */
   @Prop({ mutable: true }) options: ModusAutocompleteOption[] | string[];
   @Watch('options')
@@ -69,6 +70,9 @@ export class ModusAutocomplete {
 
   /** The autocomplete's input placeholder. */
   @Prop() placeholder: string;
+
+  /** Whether to show autocomplete's options when focus. */
+  @Prop() showResultsOnFocus: boolean;
 
   /** Whether the autocomplete is read-only. */
   @Prop() readOnly: boolean;
@@ -141,7 +145,7 @@ export class ModusAutocomplete {
     !this.visibleCustomOptions?.length &&
     this.value?.length > 0;
 
-  displayOptions = () => this.hasFocus && this.value?.length > 0 && !this.disabled;
+  displayOptions = () =>  this.hasFocus && (this.showResultsOnFocus ? this.showResultsOnFocus : this.value?.length > 0 ) && !this.disabled;
 
   handleCustomOptionClick = (option: any) => {
     const optionValue = option.getAttribute(DATA_SEARCH_VALUE);
@@ -151,6 +155,11 @@ export class ModusAutocomplete {
     this.optionSelected.emit(optionId);
   };
 
+  handleOptionKeyPress = ( event: any, option: ModusAutocompleteOption ) => {
+    if(event.key === 'Enter'){
+      this.handleOptionClick(option)
+    }
+  }
   handleOptionClick = (option: ModusAutocompleteOption) => {
     this.handleSearchChange(option.value);
     this.hasFocus = false;
@@ -219,6 +228,7 @@ export class ModusAutocomplete {
       required={this.required}
       size={this.size}
       value={this.value}
+       
     />
   );
 
@@ -241,7 +251,10 @@ export class ModusAutocomplete {
             {this.displayOptions() &&
               this.visibleOptions?.map((option) => {
                 return (
-                  <li class="text-option" onClick={() => this.handleOptionClick(option)}>
+                  <li class="text-option" tabindex="0" 
+                    onClick={() => this.handleOptionClick(option)}
+                    onKeyPress={(ev) => this.handleOptionKeyPress(ev,option)}
+                  >
                     {option.value}
                   </li>
                 );
@@ -251,6 +264,7 @@ export class ModusAutocomplete {
                 <li
                   class="custom-option"
                   onClick={() => this.handleCustomOptionClick(option)}
+                  onKeyPress={(ev) => this.handleOptionKeyPress(ev,option)}
                   innerHTML={option.outerHTML}
                 />
               ))}
