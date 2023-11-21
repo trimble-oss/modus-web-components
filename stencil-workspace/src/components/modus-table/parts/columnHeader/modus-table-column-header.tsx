@@ -6,7 +6,7 @@ import { Header } from '@tanstack/table-core';
 import { KEYBOARD_ENTER } from '../../modus-table.constants';
 import { ModusTableColumnResizingHandler } from './modus-table-column-resizing-handler';
 import { ModusTableColumnSortIcon } from './modus-table-column-sort-icon';
-import TableContext from '../../models/table-context.model';
+import { TableContext } from '../../models/table-context.models';
 
 interface ModusTableColumnHeaderProps {
   context: TableContext;
@@ -56,6 +56,7 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
         ${isNestedParentHeader ? 'text-align-center' : ''}
         ${frozenColumns.includes(headerId) ? 'sticky-left' : ''}
         ${column.getIsResizing() ? 'active-resize' : ''}
+        ${columnReorder ? 'hide-text-selection' : ''}
       `}
       style={{
         width: `${getSize()}px`,
@@ -70,7 +71,8 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
         if (event.key.toLowerCase() === KEYBOARD_ENTER) {
           onDragStart(event, headerId, elementRef, false);
         }
-      }}>
+      }}
+      >
       {isPlaceholder ? null : ( // header.isPlaceholder is Required for nested column headers to display empty cell
         <div class={column.getCanSort() && 'can-sort'}>
           <span>{column.columnDef.header}</span>

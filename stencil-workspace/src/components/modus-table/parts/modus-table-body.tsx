@@ -6,7 +6,7 @@ import { ModusTableCellValueChange } from '../models/modus-table.models';
 import { ModusTableCell } from './cell/modus-table-cell';
 import { ModusTableCellCheckbox } from './row/selection/modus-table-cell-checkbox';
 import { COLUMN_DEF_SUB_ROWS_KEY } from '../modus-table.constants';
-import TableContext from '../models/table-context.model';
+import { TableContext } from '../models/table-context.models';
 
 interface ModusTableBodyProps {
   context: TableContext;
