@@ -32,6 +32,17 @@ export default {
         type: { summary: 'string' },
       },
     },
+    size: {
+      control: {
+        options: ['small', 'default'],
+        type: 'select',
+      },
+      description: 'The size of the button',
+      table: {
+        defaultValue: { summary: `'default'` },
+        type: { summary: `'small' | 'default'` },
+      },
+    },
   },
   parameters: {
     actions: {
@@ -47,13 +58,14 @@ export default {
   },
 };
 
-export const Default = ({ ariaLabel, checked, disabled, label }) =>
+export const Default = ({ ariaLabel, checked, disabled, label, size }) =>
   html`
     <modus-switch
       aria-label=${ariaLabel}
       checked=${checked}
       disabled=${disabled}
-      label=${label}>
+      label=${label}
+      size=${size}>
     </modus-switch>
   `;
 Default.args = {
@@ -61,15 +73,17 @@ Default.args = {
   checked: false,
   disabled: false,
   label: 'Default',
+  size: 'default',
 };
 
-export const Checked = ({ ariaLabel, checked, disabled, label }) =>
+export const Checked = ({ ariaLabel, checked, disabled, label, size }) =>
   html`
     <modus-switch
       aria-label=${ariaLabel}
       checked=${checked}
       disabled=${disabled}
-      label=${label}>
+      label=${label}
+      size=${size}>
     </modus-switch>
   `;
 Checked.args = {
@@ -77,15 +91,17 @@ Checked.args = {
   checked: true,
   disabled: false,
   label: 'Checked',
+  size: 'default',
 };
 
-export const Disabled = ({ ariaLabel, checked, disabled, label }) =>
+export const Disabled = ({ ariaLabel, checked, disabled, label, size }) =>
   html`
     <modus-switch
       aria-label=${ariaLabel}
       checked=${checked}
       disabled=${disabled}
-      label=${label}>
+      label=${label}
+      size=${size}>
     </modus-switch>
   `;
 Disabled.args = {
@@ -93,4 +109,5 @@ Disabled.args = {
   checked: false,
   disabled: true,
   label: 'Disabled',
+  size: 'default',
 };

@@ -6,6 +6,7 @@
   flex-direction: row;
   font-family: $primary-font;
   font-size: $rem-12px;
+  outline: none;
 
   .switch {
     background-color: $modus-switch-bg;
@@ -14,6 +15,11 @@
     height: $rem-14px;
     position: relative;
     width: 1.875rem;
+
+    &.small {
+      height: 12px;
+      width: 1.575rem;
+    }
 
     .slider {
       background-color: $modus-switch-bg;
@@ -24,6 +30,12 @@
       position: absolute;
       top: 0;
       width: 1.875rem;
+
+      &.small {
+        border-radius: 8px;
+        height: 12px;
+        width: 1.575rem;
+      }
     }
 
     .slider::before {
@@ -34,6 +46,11 @@
       position: absolute;
       transition: 0.1s;
       width: $rem-14px;
+    }
+
+    .slider.small::before {
+      height: 12px;
+      width: 12px;
     }
 
     &.checked {
@@ -47,6 +64,10 @@
       .slider::before {
         transform: translateX($rem-16px);
       }
+
+      .slider.small::before {
+        transform: translateX($rem-13px);
+      }
     }
 
     &:active .slider {
@@ -56,6 +77,11 @@
 
   &:hover .switch {
     border-color: $modus-switch-hover-border-color;
+  }
+
+  &:focus .switch {
+    box-shadow: 0 0 0 0.2rem $modus-switch-focus-box-shadow-color;
+    outline: 2px solid white;
   }
 
   input {
