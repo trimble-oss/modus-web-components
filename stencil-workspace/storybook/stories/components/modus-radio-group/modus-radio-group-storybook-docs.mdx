@@ -45,6 +45,35 @@ A new TypeScript typing has been provided named RadioButton defined as:
   ];
 </script>
 ```
+### Small
+
+<Story id="components-radio-group--small" height={'150px'} />
+
+```html
+<modus-radio-group checked-id="1" name="my-group-small"></modus-radio-group>
+
+<script>
+  const modusRadioGroup = document.querySelector('modus-radio-group');
+  modusRadioGroup.radioButtons = [
+    {
+      id: '0',
+      label: 'Radio 1',
+      size:'small'
+    },
+    {
+      id: '1',
+      checked: true,
+      label: 'Radio 2',
+      size:'small'
+    },
+    {
+      id: '2',
+      label: 'Radio 3',
+      size:'small'
+    },
+  ];
+</script>
+```
 
 ### Properties
 
