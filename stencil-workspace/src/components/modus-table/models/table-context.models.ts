@@ -2,7 +2,6 @@ import { EventEmitter } from '@stencil/core';
 import {
   ModusTableColumn,
   ModusTableDisplayOptions,
-  ModusTableRowAction,
   ModusTableRowSelectionOptions,
   ModusTableToolbarOptions,
   ModusTableCellValueChange,
@@ -16,25 +15,13 @@ import {
   ModusTablePaginationState,
   ModusTableManualPaginationOptions,
 } from './modus-table.models';
-import { Row, Table, Updater } from '@tanstack/table-core';
+import { Table, Updater } from '@tanstack/table-core';
 import ModusTableCore from '../modus-table.core';
-import Position from './position.model';
-
-export interface TableRowActionsMenuEvent {
-  componentId: string;
-  actions: ModusTableRowAction[];
-  position: Position;
-  row: Row<unknown>;
-  onClose: () => void;
-}
-
-export type TableRowActionWithOverflow = ModusTableRowAction & {
-  isOverflow?: boolean;
-};
+import { TableRowActionWithOverflow } from './table-row-actions.models';
 
 export type TableCellEdited = Omit<ModusTableCellValueChange, 'data'>;
 
-export default interface TableContext {
+export interface TableContext {
   element: HTMLElement;
 
   columns: ModusTableColumn<unknown>[];

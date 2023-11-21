@@ -2,7 +2,7 @@ import {
   FunctionalComponent,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
-import TableContext from '../../../models/table-context.model';
+import { TableContext } from '../../../models/table-context.models';
 
 interface ModusTableHeaderCheckboxProps {
   context: TableContext;
