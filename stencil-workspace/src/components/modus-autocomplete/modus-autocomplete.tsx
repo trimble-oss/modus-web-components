@@ -158,11 +158,16 @@ export class ModusAutocomplete {
     this.optionSelected.emit(optionId);
   };
 
-  handleOptionKeyPress = ( event: any, option: ModusAutocompleteOption ) => {
+  handleOptionKeyPress = ( event: any, option: any, isCustomOption = false ) => {
     if(event.key === 'Enter'){
-      this.handleOptionClick(option)
+      if(isCustomOption){
+        this.handleCustomOptionClick(option)
+      }else{
+        this.handleOptionClick(option)
+      }
     }
   }
+
   handleOptionClick = (option: ModusAutocompleteOption) => {
     this.handleSearchChange(option.value);
     this.hasFocus = false;
@@ -265,9 +270,9 @@ export class ModusAutocomplete {
             {this.displayOptions() &&
               this.visibleCustomOptions?.map((option) => (
                 <li
-                  class="custom-option"
+                  class="custom-option" tabindex="0"
                   onClick={() => this.handleCustomOptionClick(option)}
-                  onKeyPress={(ev) => this.handleOptionKeyPress(ev,option)}
+                  onKeyPress={(ev) => this.handleOptionKeyPress(ev,option, true)}
                   innerHTML={option.outerHTML}
                 />
               ))}
