@@ -5,7 +5,7 @@ import {
 import { HeaderGroup } from '@tanstack/table-core';
 import { ModusTableColumnHeader } from './columnHeader/modus-table-column-header';
 import { ModusTableHeaderCheckbox } from './row/selection/modus-table-header-checkbox';
-import TableContext from '../models/table-context.model';
+import { TableContext } from '../models/table-context.models';
 
 interface ModusTableHeaderProps {
   context: TableContext;

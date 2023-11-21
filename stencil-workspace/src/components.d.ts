@@ -16,9 +16,11 @@ import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
 import { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 import { Cell, Column, Row } from "@tanstack/table-core";
-import { TableCellEdited, TableRowActionsMenuEvent } from "./components/modus-table/models/table-context.model";
+import { TableCellEdited, TableContext } from "./components/modus-table/models/table-context.models";
+import { TableRowActionsMenuEvent } from "./components/modus-table/models/table-row-actions.models";
 import { Tab } from "./components/modus-tabs/modus-tabs";
 import { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
+import { ModusToolTipPlacement } from "./components/modus-tooltip/modus-tooltip.models";
 import { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
 export { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
@@ -31,9 +33,11 @@ export { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 export { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
 export { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 export { Cell, Column, Row } from "@tanstack/table-core";
-export { TableCellEdited, TableRowActionsMenuEvent } from "./components/modus-table/models/table-context.model";
+export { TableCellEdited, TableContext } from "./components/modus-table/models/table-context.models";
+export { TableRowActionsMenuEvent } from "./components/modus-table/models/table-row-actions.models";
 export { Tab } from "./components/modus-tabs/modus-tabs";
 export { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
+export { ModusToolTipPlacement } from "./components/modus-tooltip/modus-tooltip.models";
 export { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export namespace Components {
     interface ModusAccordion {
@@ -1363,7 +1367,7 @@ export namespace Components {
         /**
           * (optional) The tooltip's position relative to its content.
          */
-        "position": ToolTipPlacement;
+        "position": ModusToolTipPlacement;
         /**
           * The tooltip's text.
          */
@@ -3488,7 +3492,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The tooltip's position relative to its content.
          */
-        "position"?: ToolTipPlacement;
+        "position"?: ModusToolTipPlacement;
         /**
           * The tooltip's text.
          */

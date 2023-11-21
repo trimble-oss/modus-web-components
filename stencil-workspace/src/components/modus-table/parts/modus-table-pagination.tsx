@@ -3,7 +3,7 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { PAGINATION_PAGEVIEW_TEXT, PAGINATION_SUMMARY_TEXT } from '../modus-table.constants';
-import TableContext from '../models/table-context.model';
+import { TableContext } from '../models/table-context.models';
 
 interface ModusTablePaginationProps {
   context: TableContext;

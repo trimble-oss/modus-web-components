@@ -8,7 +8,7 @@ import {
 import { Row } from '@tanstack/table-core';
 import NavigateTableCells from '../../../utilities/table-cell-navigation.utility';
 import { KEYBOARD_ENTER } from '../../../modus-table.constants';
-import TableContext from '../../../models/table-context.model';
+import { TableContext } from '../../../models/table-context.models';
 
 @Component({
   tag: 'modus-table-row-actions-cell',

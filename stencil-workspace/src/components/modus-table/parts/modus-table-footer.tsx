@@ -9,7 +9,7 @@ import {
   COLUMN_DEF_ROW_SELECTION_CSS,
   COLUMN_DEF_DATATYPE_INTEGER,
 } from '../modus-table.constants';
-import TableContext from '../models/table-context.model';
+import { TableContext } from '../models/table-context.models';
 
 interface ModusTableSummaryRowProps {
   context: TableContext;

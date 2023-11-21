@@ -134,6 +134,11 @@
     }
   }
 
+  .input-container:has(input[readonly]) {
+    background-color: $modus-input-readonly-bg;
+    border-bottom-color: $modus-input-disabled-bottom-line-color;
+  }
+
   .sub-text {
     font-size: $rem-11px;
     margin-top: $rem-4px;

@@ -66,7 +66,8 @@ import ModusTableCore from './modus-table.core';
 import TableState from './models/table-state.model';
 import { ModusTableHeader } from './parts/modus-table-header';
 import { ModusTableBody } from './parts/modus-table-body';
-import ModusTableContext, { TableCellEdited, TableRowActionWithOverflow } from './models/table-context.model';
+import { TableContext, TableCellEdited } from './models/table-context.models';
+import { TableRowActionWithOverflow } from './models/table-row-actions.models';
 import { createGuid } from '../../utils/utils';
 
 /**
@@ -285,7 +286,7 @@ export class ModusTable {
   private frozenColumns: string[] = [];
   private isColumnResizing = false;
   private _id: string;
-  private _context: ModusTableContext;
+  private _context: TableContext;
 
   private onMouseMove = (event: MouseEvent) => this.handleDragOver(event);
   private onKeyDown = (event: KeyboardEvent) => this.handleKeyDown(event);
@@ -377,7 +378,7 @@ export class ModusTable {
     return null;
   }
 
-  getTableContext(): ModusTableContext {
+  getTableContext(): TableContext {
     return {
       element: this.element,
       data: this.data,
