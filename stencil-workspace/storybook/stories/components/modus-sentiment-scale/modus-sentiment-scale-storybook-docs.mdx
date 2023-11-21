@@ -1,0 +1,53 @@
+# Modus Sentiment Scale
+
+---
+
+The `modus-sentiment-scale` component provides a customizable sentiment scale that allows users to select a sentiment from a predefined set using icons. It supports both smiley and thumb icons.
+
+## Usage
+### Thumbs
+<modus-sentiment-scale icons-type="thumbs"></modus-sentiment-scale>
+```html
+<modus-sentiment-scale icons-type="thumbs"></modus-sentiment-scale>
+
+<script>
+  const sentimentScale = document.querySelector('modus-sentiment-scale');
+  sentimentScale.addEventListener('sentimentSelection', (event) => {
+    console.log('Sentiment selected:', event.detail);
+  });
+</script>
+```
+### Smileys
+<modus-sentiment-scale icons-type="smileys"></modus-sentiment-scale>
+```html
+<modus-sentiment-scale icons-type="smileys"></modus-sentiment-scale>
+
+<script>
+  const sentimentScale = document.querySelector('modus-sentiment-scale');
+  sentimentScale.addEventListener('sentimentSelection', (event) => {
+    console.log('Sentiment selected:', event.detail);
+  });
+</script>
+```
+
+| Property     | Attribute   | Description                                     | Type                                                  | Options                    | Default   | Required |
+| ------------ | ----------- | ----------------------------------------------- | ----------------------------------------------------- | -------------------------- | --------- | -------- |
+| `iconsType`  | `icons-type` | The type of icons to be displayed.               | `typeof SMILEY_ICONS \| typeof THUMB_ICONS`            | `SMILEY_ICONS`, `THUMB_ICONS` |           | Yes      |
+| `disabled`   | `disabled`   | (optional) Whether the sentiment scale is disabled. | `boolean`                                            |                           | `false`   |          |
+
+| States                | Description                                                  | Type                            |
+| --------------------- | ------------------------------------------------------------ | ------------------------------- |
+| `icons`               | Array of icon names to be displayed.                         | `string[]`                      |
+| `selectedIcon`        | The currently selected icon.                                 | `string`                        |
+| `sentimentScaleElement` | Reference to the `div` element containing the sentiment scale. | `HTMLDivElement`                |
+
+| Events               | Description                                 | Detail                    |
+| -------------------- | ------------------------------------------- | ------------------------- |
+| `sentimentSelection` | Fires when a sentiment is selected.         | The selected sentiment.   |
+
+| Methods                  | Description                                             | Parameters                           |
+| ------------------------ | ------------------------------------------------------- | ------------------------------------ |
+| `handleSentimentClick`   | Handles the click event on a sentiment icon.             | `selectedOutlineIcon: string`       |
+| `handleSentimentHover`   | Handles the hover event on a sentiment icon.             | `selectedOutlineIcon: string`       |
+| `getIconName`            | Retrieves the name of the selected sentiment icon.       | `icon: string`                      |
+| `getIconType`            | Retrieves the type of the sentiment icon (outlined/solid). | `icon: string`                      |
