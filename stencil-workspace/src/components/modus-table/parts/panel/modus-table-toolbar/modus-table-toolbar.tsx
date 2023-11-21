@@ -4,7 +4,7 @@ import {
   Prop,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
-import TableContext from '../../../models/table-context.model';
+import { TableContext } from '../../../models/table-context.models';
 @Component({
   tag: 'modus-table-toolbar',
   styleUrl: './modus-table-toolbar.scss',

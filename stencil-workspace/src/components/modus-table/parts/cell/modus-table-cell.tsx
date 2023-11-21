@@ -3,7 +3,7 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Cell } from '@tanstack/table-core';
-import TableContext, { TableCellEdited } from '../../models/table-context.model';
+import { TableContext, TableCellEdited } from '../../models/table-context.models';
 
 interface ModusTableCellProps {
   cell: Cell<unknown, unknown>;

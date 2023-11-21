@@ -7,7 +7,7 @@ import {
 } from '@stencil/core';
 import { IconHorizontalEllipsis } from '../../../../icons/icon-horizontal-ellipsis';
 import { KEYBOARD_ENTER, KEYBOARD_ESCAPE, KEYBOARD_SPACE } from '../../../modus-table.constants';
-import TableContext from '../../../models/table-context.model';
+import { TableContext } from '../../../models/table-context.models';
 
 @Component({
   tag: 'modus-table-dropdown-menu',

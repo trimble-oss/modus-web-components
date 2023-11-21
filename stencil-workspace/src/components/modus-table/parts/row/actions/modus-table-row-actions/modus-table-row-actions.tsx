@@ -9,7 +9,8 @@ import {
 } from '@stencil/core';
 import { Row } from '@tanstack/table-core';
 import { ModusTableRowAction } from '../../../../models/modus-table.models';
-import TableContext, { TableRowActionsMenuEvent } from '../../../../models/table-context.model';
+import { TableContext } from '../../../../models/table-context.models';
+import { TableRowActionsMenuEvent } from '../../../../models/table-row-actions.models';
 
 @Component({
   tag: 'modus-table-row-actions',

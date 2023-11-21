@@ -8,10 +8,11 @@ import {
   Prop,
 } from '@stencil/core';
 import { ModusTableRowAction, ModusTableRowActionClick } from '../../../../models/modus-table.models';
-import TableContext, { TableRowActionsMenuEvent } from '../../../../models/table-context.model';
+import { TableContext } from '../../../../models/table-context.models';
 import Position from '../../../../models/position.model';
 import { Element } from '@stencil/core';
 import { Row } from '@tanstack/table-core';
+import { TableRowActionsMenuEvent } from '../../../../models/table-row-actions.models';
 
 @Component({
   tag: 'modus-table-row-actions-menu',
