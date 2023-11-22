@@ -25,6 +25,7 @@ import {
   Updater,
   VisibilityState,
   SortingState,
+  Row,
 } from '@tanstack/table-core';
 import {
   COLUMN_ORDER_STATE_KEY,
@@ -49,6 +50,7 @@ import {
   ModusTableRowAction,
   ModusTableRowActionClick,
   ModusTableSortingState,
+  ModusTableRowWithId,
 } from './models/modus-table.models';
 import ColumnDragState from './models/column-drag-state.model';
 import {
@@ -220,6 +222,8 @@ export class ModusTable {
     this.onRowsExpandableChange(this.rowsExpandable);
   }
 
+  @Prop() preSelectedRows: string[];
+
   /** Emits the cell value that was edited */
   @Event() cellValueChange: EventEmitter<ModusTableCellValueChange>;
 
@@ -266,7 +270,6 @@ export class ModusTable {
   }
 
   @State() dragAndDropObj: TableHeaderDragDrop = new TableHeaderDragDrop();
-
   @State() tableState: TableState = {
     columnSizing: {},
     columnSizingInfo: {} as ColumnSizingInfoState,
@@ -294,7 +297,10 @@ export class ModusTable {
 
   componentWillLoad(): void {
     this._id = this.element.id || `modus-table-${createGuid()}`;
-    this.setTableState({ columnOrder: this.columns?.map((column) => column.id as string) });
+    this.setTableState({
+      columnOrder: this.columns?.map((column) => column.id as string),
+      rowSelection: this.getPreselectedState(),
+    });
     this.onRowsExpandableChange(this.rowsExpandable);
     this.initializeTable();
   }
@@ -365,6 +371,12 @@ export class ModusTable {
     }
   }
 
+  getRowId(originalRow: unknown, index: number, parent?: Row<unknown>): string {
+    if (Object.prototype.hasOwnProperty.call(originalRow, 'id')) return (originalRow as ModusTableRowWithId).id;
+    if (parent) return `${parent.id}.${index}`;
+    return `${index}`;
+  }
+
   getRowActionsWithOverflow(): TableRowActionWithOverflow[] {
     if (this.rowActions) {
       const sortedActions = this.rowActions.sort((a, b) => a.index - b.index);
@@ -425,6 +437,7 @@ export class ModusTable {
       onRowSelectionOptionsChange: this.onRowSelectionOptionsChange,
       onSortChange: this.onSortChange,
       onToolbarOptionsChange: this.onToolbarOptionsChange,
+      getRowId: this.getRowId,
       updateData: this.updateData.bind(this),
     };
   }
@@ -487,6 +500,12 @@ export class ModusTable {
     this.itemDragState = null;
   }
 
+  getPreselectedState(): RowSelectionState {
+    const selection = {};
+    this.preSelectedRows?.forEach((row) => (selection[row] = true));
+    return selection;
+  }
+
   initializeTable(): void {
     this.tableCore = new ModusTableCore({
       data: this.data ?? [],
@@ -499,6 +518,7 @@ export class ModusTable {
       rowSelectionOptions: this.rowSelectionOptions,
       columnOrder: this.columnReorder ? this.tableState.columnOrder : [],
       toolbarOptions: this.toolbarOptions,
+      preSelectedRows: this.getPreselectedState(),
 
       ...(this.manualPaginationOptions && {
         manualPagination: true,
@@ -508,6 +528,7 @@ export class ModusTable {
         manualSorting: true,
         sortingState: this.manualSortingOptions.currentSortingState,
       }),
+      getRowId: (originalRow: unknown, index: number, parent?: Row<unknown>) => this.getRowId(originalRow, index, parent),
       // setData: (updater: Updater<unknown[]>) => this.updateData(updater),
       setExpanded: (updater: Updater<ExpandedState>) => this.updateTableCore(updater, EXPANDED_STATE_KEY, this.rowExpanded),
       setSorting: (updater: Updater<SortingState>) => this.updateTableCore(updater, SORTING_STATE_KEY, this.sortChange),
@@ -532,7 +553,6 @@ export class ModusTable {
   updateTableCore(updater: Updater<unknown>, key: string, event: EventEmitter<unknown> = null) {
     const newTableState = { ...this.tableState };
     newTableState[key] = this.tableCore.getState(updater, this.tableState[key]);
-
     /**
      * Maintaining a local state of the table is necessary for the component to re-render and stay consistent with the internal state of Tanstack table.
      */

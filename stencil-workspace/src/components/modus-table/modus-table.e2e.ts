@@ -22,10 +22,12 @@ const MockData = [
   {
     mockColumnOne: 'Mock Data One 1',
     mockColumnTwo: 330160,
+    id: '0',
   },
   {
     mockColumnOne: 'Mock Data One 2',
     mockColumnTwo: 900293,
+    id: '1',
   },
 ];
 
