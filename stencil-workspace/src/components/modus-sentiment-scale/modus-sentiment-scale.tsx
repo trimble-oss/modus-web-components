@@ -16,7 +16,7 @@ export interface ModusSentimentScaleItem {
 })
 export class ModusSentimentScale {
   /** The type of icons to be displayed. */
-  @Prop() iconsType: typeof SMILEY_ICONS | typeof THUMB_ICONS;
+  @Prop() iconsType: typeof SMILEY_ICONS | typeof THUMB_ICONS = 'smileys';
   /** (optional) Whether the sentiment scale is disabled. */
   @Prop() disabled?: boolean = false;
 
@@ -24,9 +24,9 @@ export class ModusSentimentScale {
   watchIconTypeChange(iconType: string) {
     if (iconType) {
       if (iconType === MODUS_SENTIMENT_CONSTANTS.ICON_TYPES.THUMBS) {
-        this.icons = MODUS_SENTIMENT_CONSTANTS.ICON_KEY.THUMBS.OUTLINED;
+        this.icons = MODUS_SENTIMENT_CONSTANTS.ICON_KEY.THUMBS;
       } else if (iconType === MODUS_SENTIMENT_CONSTANTS.ICON_TYPES.SMILEYS) {
-        this.icons = MODUS_SENTIMENT_CONSTANTS.ICON_KEY.SMILEYS.OUTLINED;
+        this.icons = MODUS_SENTIMENT_CONSTANTS.ICON_KEY.SMILEYS;
       }
     }
   }
@@ -43,34 +43,26 @@ export class ModusSentimentScale {
 
   handleSentimentClick(selectedOutlineIcon: string) {
     if (!this.disabled) {
-      const selectedSentiment = this.getIconName(selectedOutlineIcon);
+      const selectedSentiment = selectedOutlineIcon;
       this.selectedIcon = selectedSentiment;
-      this.sentimentSelection.emit(selectedSentiment);
+      this.sentimentSelection.emit(this.getIconType(selectedOutlineIcon));
     }
   }
 
   handleSentimentHover(selectedOutlineIcon: string) {
-    console.log('selectedOutlineIcon', selectedOutlineIcon);
     this.sentimentScaleElement
       .querySelector('.icon-' + selectedOutlineIcon)
       ?.querySelector('svg')
       .focus();
   }
 
-  getIconName(icon: string) {
-    if (icon.includes('outlined')) {
-      return icon.replace('outlined', 'solid');
-    } else {
-      return null;
-    }
-  }
   getIconType(icon: string) {
     if (icon != null) {
-      if (icon.includes('outlined')) {
-        return icon.replace('outlined', '');
+      if (icon.includes('-outlined')) {
+        return icon.replace('-outlined', '');
       }
-      if (icon.includes('solid')) {
-        return icon.replace('solid', '');
+      if (icon.includes('-solid')) {
+        return icon.replace('-solid', '');
       }
     }
   }
@@ -81,7 +73,7 @@ export class ModusSentimentScale {
         {this.icons &&
           this.icons.map((buttonIcon: string) => {
             buttonIcon =
-              this.getIconType(buttonIcon) == this.getIconType(this.selectedIcon) ? this.selectedIcon : buttonIcon;
+              buttonIcon == this.getIconType(this.selectedIcon) ? buttonIcon + '-solid' : buttonIcon + '-outlined';
             return (
               <div
                 tabIndex={0}

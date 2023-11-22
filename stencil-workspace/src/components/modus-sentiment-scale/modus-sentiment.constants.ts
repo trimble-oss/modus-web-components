@@ -17,26 +17,14 @@ export const MODUS_SENTIMENT_CONSTANTS = {
     SMILEYS: 'smileys',
   },
   ICON_KEY: {
-    THUMBS: {
-      OUTLINED: ['thumbs-up-outlined', 'thumbs-down-outlined'],
-      SOLID: ['thumbs-up-solid', 'thumbs-down-solid'],
-    },
-    SMILEYS: {
-      OUTLINED: [
-        'smiley-dissatisfied-outlined',
-        'smiley-somewhat-dissatisfied-outlined',
-        'smiley-neutral-outlined',
-        'smiley-somewhat-satisfied-outlined',
-        'smiley-satisfied-outlined',
-      ],
-      SOLID: [
-        'smiley-dissatisfied-solid',
-        'smiley-somewhat-dissatisfied-solid',
-        'smiley-neutral-solid',
-        'smiley-somewhat-satisfied-solid',
-        'smiley-satisfied-solid',
-      ],
-    },
+    THUMBS: ['thumbs-up', 'thumbs-down'],
+    SMILEYS: [
+      'smiley-dissatisfied',
+      'smiley-somewhat-dissatisfied',
+      'smiley-neutral',
+      'smiley-somewhat-satisfied',
+      'smiley-satisfied',
+    ],
   },
   ICON_KEYS: {
     THUMBS: {
