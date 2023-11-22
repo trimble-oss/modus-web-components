@@ -1,6 +1,6 @@
 {
   "name": "@trimble-oss/modus-web-components",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Trimble Modus Web Component Library",
   "homepage": "https://modus-web-components.trimble.com/",
   "bugs": {
@@ -28,7 +28,7 @@
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e --silent",
     "test.watch": "stencil test --spec --e2e --silent --watchAll",
-    "test.debug": "stencil test --spec --e2e --watchAll --devtools -- modus-table.e2e.ts",
+    "test.debug": "stencil test --spec --e2e --watchAll --devtools -- {file name}",
     "generate": "stencil generate",
     "lint": "npm run lint-js && npm run lint-css && npm run prettier",
     "lint-js": "eslint src/** storybook/**/*.stories.tsx --no-error-on-unmatched-pattern",

@@ -47,7 +47,7 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
       {table.getRowModel()?.rows.map((row) => {
         const { getIsSelected, getIsAllSubRowsSelected, getVisibleCells, subRows, id } = row;
         const isChecked = getIsSelected() && (subRows?.length ? getIsAllSubRowsSelected() : true);
-        getIsSelected() && console.log(row);
+        
         return (
           <tr key={id} class={{ 'enable-hover': hover, 'row-selected': isChecked }}>
             {rowSelection && (
