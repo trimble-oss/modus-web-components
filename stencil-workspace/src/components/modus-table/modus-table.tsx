@@ -194,9 +194,10 @@ export class ModusTable {
     newVal: ModusTableRowSelectionOptions,
     oldVal: ModusTableRowSelectionOptions
   ) {
-    if (newVal.multiple !== oldVal.multiple || newVal.subRowSelection !== oldVal.subRowSelection) {
+    if (newVal.multiple !== oldVal.multiple || newVal.subRowSelection !== oldVal.subRowSelection || newVal.preSelectedRows !== oldVal.preSelectedRows) {
       this.rowSelectionOptions.multiple = newVal.multiple;
       this.rowSelectionOptions.subRowSelection = newVal.subRowSelection;
+      this.rowSelectionOptions.preSelectedRows = newVal.preSelectedRows;
     }
   }
 
@@ -221,8 +222,6 @@ export class ModusTable {
     this.tableCore?.setOptions('enableHiding', !!newVal?.columnsVisibility);
     this.onRowsExpandableChange(this.rowsExpandable);
   }
-
-  @Prop() preSelectedRows: string[];
 
   /** Emits the cell value that was edited */
   @Event() cellValueChange: EventEmitter<ModusTableCellValueChange>;
@@ -299,7 +298,7 @@ export class ModusTable {
     this._id = this.element.id || `modus-table-${createGuid()}`;
     this.setTableState({
       columnOrder: this.columns?.map((column) => column.id as string),
-      rowSelection: this.getPreselectedState(),
+      rowSelection: this.getPreselectedRowState(),
     });
     this.onRowsExpandableChange(this.rowsExpandable);
     this.initializeTable();
@@ -500,9 +499,9 @@ export class ModusTable {
     this.itemDragState = null;
   }
 
-  getPreselectedState(): RowSelectionState {
+  getPreselectedRowState(): RowSelectionState {
     const selection = {};
-    this.preSelectedRows?.forEach((row) => (selection[row] = true));
+    this.rowSelectionOptions.preSelectedRows?.forEach((row) => (selection[row] = true));
     return selection;
   }
 
@@ -518,7 +517,7 @@ export class ModusTable {
       rowSelectionOptions: this.rowSelectionOptions,
       columnOrder: this.columnReorder ? this.tableState.columnOrder : [],
       toolbarOptions: this.toolbarOptions,
-      preSelectedRows: this.getPreselectedState(),
+      preSelectedRows: this.getPreselectedRowState(),
 
       ...(this.manualPaginationOptions && {
         manualPagination: true,

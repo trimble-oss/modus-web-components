@@ -112,6 +112,7 @@ export interface ModusTableCellValueChange {
 export interface ModusTableRowSelectionOptions {
   multiple?: boolean;
   subRowSelection?: boolean;
+  preSelectedRows?: string[];
 }
 
 export interface ModusTableManualPaginationOptions {

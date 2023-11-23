@@ -1063,7 +1063,6 @@ export namespace Components {
         "maxWidth": string;
         "pageSizeList": number[];
         "pagination": boolean;
-        "preSelectedRows": string[];
         /**
           * (Optional) Actions that can be performed on each row. A maximum of 4 icons will be shown, including overflow menu and expand icons.
          */
@@ -3178,7 +3177,6 @@ declare namespace LocalJSX {
         "onSortChange"?: (event: ModusTableCustomEvent<ModusTableSortingState>) => void;
         "pageSizeList"?: number[];
         "pagination"?: boolean;
-        "preSelectedRows"?: string[];
         /**
           * (Optional) Actions that can be performed on each row. A maximum of 4 icons will be shown, including overflow menu and expand icons.
          */

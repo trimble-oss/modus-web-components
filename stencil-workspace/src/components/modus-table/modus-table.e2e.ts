@@ -22,12 +22,10 @@ const MockData = [
   {
     mockColumnOne: 'Mock Data One 1',
     mockColumnTwo: 330160,
-    id: '0',
   },
   {
     mockColumnOne: 'Mock Data One 2',
     mockColumnTwo: 900293,
-    id: '1',
   },
 ];
 
@@ -788,5 +786,25 @@ describe('modus-table', () => {
     const rowActionsMenuItemClick = await page.spyOnEvent('rowActionClick');
     await rowActionsMenuItem[0].click();
     expect(rowActionsMenuItemClick).toHaveReceivedEvent();
+  });
+
+  it('Renders pre selected rows checked', async () => {
+    page = await newE2EPage();
+
+    await page.setContent('<modus-table />');
+    const component = await page.find('modus-table');
+
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    component.setProperty('rowSelection', true);
+    component.setProperty('rowSelectionOptions', {
+      multiple: true,
+      preSelectedRows: ["0", "1"]
+    });
+
+    await page.waitForChanges();
+    const rowsSelected = await page.findAll('modus-table >>> row-selected');
+
+    expect(rowsSelected).toHaveLength(2);
   });
 });
