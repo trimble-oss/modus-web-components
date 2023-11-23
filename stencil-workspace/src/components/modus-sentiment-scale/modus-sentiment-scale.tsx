@@ -16,16 +16,16 @@ export interface ModusSentimentScaleItem {
 })
 export class ModusSentimentScale {
   /** The type of icons to be displayed. */
-  @Prop() iconsType: typeof SMILEY_ICONS | typeof THUMB_ICONS = 'smileys';
+  @Prop() type: typeof SMILEY_ICONS | typeof THUMB_ICONS = 'smileys';
   /** (optional) Whether the sentiment scale is disabled. */
   @Prop() disabled?: boolean = false;
 
-  @Watch('iconsType')
-  watchIconTypeChange(iconType: string) {
-    if (iconType) {
-      if (iconType === MODUS_SENTIMENT_CONSTANTS.ICON_TYPES.THUMBS) {
+  @Watch('type')
+  watchTypeChange(type: string) {
+    if (type) {
+      if (type === MODUS_SENTIMENT_CONSTANTS.ICON_TYPES.THUMBS) {
         this.icons = MODUS_SENTIMENT_CONSTANTS.ICON_KEY.THUMBS;
-      } else if (iconType === MODUS_SENTIMENT_CONSTANTS.ICON_TYPES.SMILEYS) {
+      } else if (type === MODUS_SENTIMENT_CONSTANTS.ICON_TYPES.SMILEYS) {
         this.icons = MODUS_SENTIMENT_CONSTANTS.ICON_KEY.SMILEYS;
       }
     }
@@ -38,14 +38,14 @@ export class ModusSentimentScale {
   @State() sentimentScaleElement: HTMLDivElement;
 
   componentWillLoad() {
-    this.watchIconTypeChange(this.iconsType);
+    this.watchTypeChange(this.type);
   }
 
   handleSentimentClick(selectedOutlineIcon: string) {
     if (!this.disabled) {
       const selectedSentiment = selectedOutlineIcon;
       this.selectedIcon = selectedSentiment;
-      this.sentimentSelection.emit(this.getIconType(selectedOutlineIcon));
+      this.sentimentSelection.emit(this.getType(selectedOutlineIcon));
     }
   }
 
@@ -56,7 +56,7 @@ export class ModusSentimentScale {
       .focus();
   }
 
-  getIconType(icon: string) {
+  getType(icon: string) {
     if (icon != null) {
       if (icon.includes('-outlined')) {
         return icon.replace('-outlined', '');
@@ -66,22 +66,29 @@ export class ModusSentimentScale {
       }
     }
   }
+  handleKeyDown(event: KeyboardEvent, id: string) {
+    if (event.code !== 'Enter') {
+      return;
+    }
+
+    this.handleSentimentClick(id);
+  }
 
   render() {
     return (
       <div class="sentiment-scale-container" ref={(el) => (this.sentimentScaleElement = el)}>
         {this.icons &&
           this.icons.map((buttonIcon: string) => {
-            buttonIcon =
-              buttonIcon == this.getIconType(this.selectedIcon) ? buttonIcon + '-solid' : buttonIcon + '-outlined';
+            buttonIcon = buttonIcon == this.getType(this.selectedIcon) ? buttonIcon + '-solid' : buttonIcon + '-outlined';
             return (
               <div
                 tabIndex={0}
-                class={`icon-container ${this.iconsType + '-container'} ${this.disabled ? ' disabled' : ''}`}
-                onClick={() => this.handleSentimentClick(buttonIcon)}>
+                class={`icon-container ${this.type + '-container'} ${this.disabled ? ' disabled' : ''}`}
+                onClick={() => this.handleSentimentClick(buttonIcon)}
+                onKeyDown={(event) => this.handleKeyDown(event, buttonIcon)}>
                 <IconMap
                   icon={buttonIcon}
-                  size={`${this.iconsType === MODUS_SENTIMENT_CONSTANTS.ICON_TYPES.THUMBS ? '56' : '24'}`}></IconMap>
+                  size={`${this.type === MODUS_SENTIMENT_CONSTANTS.ICON_TYPES.THUMBS ? '56' : '24'}`}></IconMap>
               </div>
             );
           })}
