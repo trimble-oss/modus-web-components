@@ -12,29 +12,29 @@
     background-color: $modus-switch-bg;
     border: $rem-2px $modus-switch-border-color solid;
     border-radius: $rem-16px;
-    height: $rem-14px;
+    height: $rem-20px;
     position: relative;
-    width: 1.875rem;
+    width: $rem-40px;
 
     &.small {
-      height: 12px;
-      width: 1.575rem;
+      height: $rem-16px;
+      width: $rem-30px;
     }
 
     .slider {
       background-color: $modus-switch-bg;
       border-radius: $rem-16px;
       cursor: pointer;
-      height: $rem-14px;
+      height: $rem-20px;
       inset: 0;
       position: absolute;
       top: 0;
-      width: 1.875rem;
+      width: $rem-40px;
 
       &.small {
         border-radius: 8px;
-        height: 12px;
-        width: 1.575rem;
+        height: $rem-16px;
+        width: $rem-30px;
       }
     }
 
@@ -42,15 +42,15 @@
       background-color: $col_white;
       border-radius: 50%;
       content: '';
-      height: $rem-14px;
+      height: $rem-20px;
       position: absolute;
       transition: 0.1s;
-      width: $rem-14px;
+      width: $rem-20px;
     }
 
     .slider.small::before {
-      height: 12px;
-      width: 12px;
+      height: $rem-16px;
+      width: $rem-16px;
     }
 
     &.checked {
@@ -62,11 +62,11 @@
       }
 
       .slider::before {
-        transform: translateX($rem-16px);
+        transform: translateX($rem-20px);
       }
 
       .slider.small::before {
-        transform: translateX($rem-13px);
+        transform: translateX($rem-14px);
       }
     }
 
