@@ -7,10 +7,10 @@
 
 ## Properties
 
-| Property    | Attribute    | Description                                         | Type                    | Default     |
-| ----------- | ------------ | --------------------------------------------------- | ----------------------- | ----------- |
-| `disabled`  | `disabled`   | (optional) Whether the sentiment scale is disabled. | `boolean`               | `false`     |
-| `iconsType` | `icons-type` | The type of icons to be displayed.                  | `"smileys" \| "thumbs"` | `'smileys'` |
+| Property   | Attribute  | Description                                         | Type                    | Default     |
+| ---------- | ---------- | --------------------------------------------------- | ----------------------- | ----------- |
+| `disabled` | `disabled` | (optional) Whether the sentiment scale is disabled. | `boolean`               | `false`     |
+| `type`     | `type`     | The type of icons to be displayed.                  | `"smileys" \| "thumbs"` | `'smileys'` |
 
 
 ## Events

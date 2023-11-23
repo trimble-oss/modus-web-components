@@ -57,19 +57,19 @@ describe('modus-sentiment-scale', () => {
     expect(await element.getProperty('disabled')).toBe(false);
   });
 
-  it('renders with default iconsType as "smileyIcons"', async () => {
+  it('renders with default type as "smileyIcons"', async () => {
     const page = await newE2EPage();
     await page.setContent('<modus-sentiment-scale></modus-sentiment-scale>');
 
     const element = await page.find('modus-sentiment-scale');
-    expect(await element.getProperty('iconsType')).toBe('smileys');
+    expect(await element.getProperty('type')).toBe('smileys');
   });
 
   it('renders with iconsType as "thumbIcons" when set', async () => {
     const page = await newE2EPage();
-    await page.setContent('<modus-sentiment-scale icons-type="thumbs"></modus-sentiment-scale>');
+    await page.setContent('<modus-sentiment-scale type="thumbs"></modus-sentiment-scale>');
 
     const element = await page.find('modus-sentiment-scale');
-    expect(await element.getProperty('iconsType')).toBe('thumbs');
+    expect(await element.getProperty('type')).toBe('thumbs');
   });
 });
