@@ -15,6 +15,8 @@ export interface ModusSentimentScaleItem {
   shadow: true,
 })
 export class ModusSentimentScale {
+  /** (optional) The input's aria-label. */
+  @Prop() ariaLabel: string | null;
   /** The type of icons to be displayed. */
   @Prop() type: typeof SMILEY_ICONS | typeof THUMB_ICONS = 'smileys';
   /** (optional) Whether the sentiment scale is disabled. */
@@ -79,9 +81,19 @@ export class ModusSentimentScale {
       <div class="sentiment-scale-container" ref={(el) => (this.sentimentScaleElement = el)}>
         {this.icons &&
           this.icons.map((buttonIcon: string) => {
-            buttonIcon = buttonIcon == this.getType(this.selectedIcon) ? buttonIcon + '-solid' : buttonIcon + '-outlined';
+            let ariaSelected = false;
+            if (buttonIcon == this.getType(this.selectedIcon)) {
+              ariaSelected = true;
+              buttonIcon = buttonIcon + '-solid';
+            } else {
+              ariaSelected = false;
+              buttonIcon = buttonIcon + '-outlined';
+            }
             return (
               <div
+                aria-label={this.getType(buttonIcon)}
+                aria-selected={ariaSelected}
+                role="button"
                 tabIndex={0}
                 class={`icon-container ${this.type + '-container'} ${this.disabled ? ' disabled' : ''}`}
                 onClick={() => this.handleSentimentClick(buttonIcon)}
