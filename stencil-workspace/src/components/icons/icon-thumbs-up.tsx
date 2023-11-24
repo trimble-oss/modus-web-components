@@ -7,11 +7,11 @@ interface IconProps {
   size?: string;
 }
 
-export const IconThumbsUpSolid: FunctionalComponent<IconProps> = (props: IconProps) => (
+export const IconThumbsUp: FunctionalComponent<IconProps> = (props: IconProps) => (
   <svg
-    class="icon-thumbs-up-solid"
-    width={props.size ?? '14'}
-    height={props.size ?? 14}
+    class="icon-thumbs-up"
+    width={props.size ?? '16'}
+    height={props.size ?? 16}
     onClick={props.onClick ? (event) => props.onClick(event) : null}
     viewBox="0 0 24 24"
     fill="none"

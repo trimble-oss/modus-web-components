@@ -3,7 +3,7 @@ import { newE2EPage } from '@stencil/core/testing';
 describe('modus-sentiment-scale', () => {
   it('renders with default values', async () => {
     const page = await newE2EPage();
-    await page.setContent('<modus-sentiment-scale icons-type="smileys"></modus-sentiment-scale>');
+    await page.setContent('<modus-sentiment-scale type="smileys"></modus-sentiment-scale>');
 
     const element = await page.find('modus-sentiment-scale');
     expect(element).toHaveClass('hydrated');
@@ -11,7 +11,7 @@ describe('modus-sentiment-scale', () => {
 
   it('renders with thumbs icons', async () => {
     const page = await newE2EPage();
-    await page.setContent('<modus-sentiment-scale icons-type="thumbs"></modus-sentiment-scale>');
+    await page.setContent('<modus-sentiment-scale type="thumbs"></modus-sentiment-scale>');
 
     const element = await page.find('modus-sentiment-scale');
     expect(element).toHaveClass('hydrated');
@@ -19,7 +19,7 @@ describe('modus-sentiment-scale', () => {
 
   it('emits sentimentSelection event on sentiment click', async () => {
     const page = await newE2EPage();
-    await page.setContent('<modus-sentiment-scale icons-type="smileys"></modus-sentiment-scale>');
+    await page.setContent('<modus-sentiment-scale type="smileys"></modus-sentiment-scale>');
 
     const sentimentSelection = await page.spyOnEvent('sentimentSelection');
     const element = await page.find('modus-sentiment-scale >>> .sentiment-scale-container .icon-container');
@@ -32,7 +32,7 @@ describe('modus-sentiment-scale', () => {
 
   it('does not emit sentimentSelection event on disabled sentiment click', async () => {
     const page = await newE2EPage();
-    await page.setContent('<modus-sentiment-scale icons-type="smileys" disabled></modus-sentiment-scale>');
+    await page.setContent('<modus-sentiment-scale type="smileys" disabled></modus-sentiment-scale>');
 
     const sentimentSelection = await page.spyOnEvent('sentimentSelection');
     const element = await page.find('modus-sentiment-scale >>> .sentiment-scale-container .icon-container');
@@ -65,7 +65,7 @@ describe('modus-sentiment-scale', () => {
     expect(await element.getProperty('type')).toBe('smileys');
   });
 
-  it('renders with iconsType as "thumbIcons" when set', async () => {
+  it('renders with type as "thumbIcons" when set', async () => {
     const page = await newE2EPage();
     await page.setContent('<modus-sentiment-scale type="thumbs"></modus-sentiment-scale>');
 

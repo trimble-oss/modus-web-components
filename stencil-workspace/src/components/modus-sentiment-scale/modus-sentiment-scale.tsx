@@ -25,9 +25,9 @@ export class ModusSentimentScale {
   @Watch('type')
   watchTypeChange(type: string) {
     if (type) {
-      if (type === MODUS_SENTIMENT_CONSTANTS.ICON_TYPES.THUMBS) {
+      if (type === THUMB_ICONS) {
         this.icons = MODUS_SENTIMENT_CONSTANTS.ICON_KEY.THUMBS;
-      } else if (type === MODUS_SENTIMENT_CONSTANTS.ICON_TYPES.SMILEYS) {
+      } else if (type === SMILEY_ICONS) {
         this.icons = MODUS_SENTIMENT_CONSTANTS.ICON_KEY.SMILEYS;
       }
     }
@@ -63,9 +63,6 @@ export class ModusSentimentScale {
       if (icon.includes('-outlined')) {
         return icon.replace('-outlined', '');
       }
-      if (icon.includes('-solid')) {
-        return icon.replace('-solid', '');
-      }
     }
   }
   handleKeyDown(event: KeyboardEvent, id: string) {
@@ -78,13 +75,12 @@ export class ModusSentimentScale {
 
   render() {
     return (
-      <div class="sentiment-scale-container" ref={(el) => (this.sentimentScaleElement = el)}>
+      <div class="sentiment-scale-container" role="group" ref={(el) => (this.sentimentScaleElement = el)}>
         {this.icons &&
           this.icons.map((buttonIcon: string) => {
             let ariaSelected = false;
             if (buttonIcon == this.getType(this.selectedIcon)) {
               ariaSelected = true;
-              buttonIcon = buttonIcon + '-solid';
             } else {
               ariaSelected = false;
               buttonIcon = buttonIcon + '-outlined';
@@ -98,9 +94,7 @@ export class ModusSentimentScale {
                 class={`icon-container ${this.type + '-container'} ${this.disabled ? ' disabled' : ''}`}
                 onClick={() => this.handleSentimentClick(buttonIcon)}
                 onKeyDown={(event) => this.handleKeyDown(event, buttonIcon)}>
-                <IconMap
-                  icon={buttonIcon}
-                  size={`${this.type === MODUS_SENTIMENT_CONSTANTS.ICON_TYPES.THUMBS ? '56' : '24'}`}></IconMap>
+                <IconMap icon={buttonIcon} size={`${this.type === THUMB_ICONS ? '56' : '24'}`}></IconMap>
               </div>
             );
           })}

@@ -7,6 +7,9 @@
 .sentiment-scale-container {
   display: flex;
 
+  .icon-container {
+    cursor: pointer
+  }
   .smileys-container {
     align-items: center;
     display: flex;
