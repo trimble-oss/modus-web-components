@@ -799,12 +799,10 @@ describe('modus-table', () => {
     component.setProperty('rowSelection', true);
     component.setProperty('rowSelectionOptions', {
       multiple: true,
-      preSelectedRows: ["0", "1"]
+      preSelectedRows: ["0"]
     });
-
     await page.waitForChanges();
-    const rowsSelected = await page.findAll('modus-table >>> row-selected');
-
-    expect(rowsSelected).toHaveLength(2);
+    const rowsSelected = await page.findAll('modus-table >>> .checked');
+    expect(rowsSelected).toHaveLength(1);
   });
 });

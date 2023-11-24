@@ -47,7 +47,7 @@ function makeData(...lens): object[] {
   return makeDataLevel();
 }
 
-function initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions, manualPaginationOptions, manualSortingOptions, preSelectedRows) {
+function initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions, manualPaginationOptions, manualSortingOptions) {
   const tag = document.createElement('script');
   tag.innerHTML = `
   var modusTable = document.querySelector('modus-table')
@@ -60,7 +60,6 @@ function initializeTable(columns, data, pageSizeList, toolbarOptions, displayOpt
   modusTable.rowActions = ${JSON.stringify(rowActions)};
   modusTable.manualPaginationOptions = ${JSON.stringify(manualPaginationOptions)};
   modusTable.manualSortingOptions = ${JSON.stringify(manualSortingOptions)};
-  modusTable.preSelectedRows = ${JSON.stringify(preSelectedRows)};
 
   if(!!modusTable.manualSortingOptions){
     let currentData = modusTable.data;
@@ -414,14 +413,6 @@ export default {
       },
       type: { required: false },
     },
-    preSelectedRows: {
-      name: 'preSelectedRows',
-      description: 'Control pre selected rows.',
-      table: {
-        type: { summary: 'string[]' },
-      },
-      type: { required: false },
-    },
     maxHeight: {
       name: 'maxHeight',
       description: 'To display a vertical scrollbar when the height is exceeded.',
@@ -514,8 +505,7 @@ const Template = ({
   rowSelection,
   rowSelectionOptions,
   manualPaginationOptions,
-  manualSortingOptions,
-  preSelectedRows
+  manualSortingOptions
 }) => html`
   <div style="width: 950px">
     <modus-table
@@ -533,7 +523,7 @@ const Template = ({
       max-width="${maxWidth}"
       row-selection="${rowSelection}" />
   </div>
-  ${initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions, manualPaginationOptions, manualSortingOptions, preSelectedRows)}
+  ${initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions, manualPaginationOptions, manualSortingOptions)}
 `;
 
 export const Default = Template.bind({});
@@ -680,9 +670,10 @@ ExpandableRows.args = { ...DefaultArgs, rowsExpandable: true, data: makeData(7, 
 
 export const CheckboxRowSelection = Template.bind({});
 CheckboxRowSelection.args = {
-  ...DefaultArgs, rowSelection: true, preSelectedRows:["0"], rowSelectionOptions: {
+  ...DefaultArgs, rowSelection: true, rowSelectionOptions: {
     multiple: true,
-    subRowSelection: true
+    subRowSelection: true,
+    preSelectedRows:["0"]
   }, data: makeData(7)
 };
 
