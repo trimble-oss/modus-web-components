@@ -6,7 +6,7 @@ export default {
   title: 'Components/Sentiment Scale',
   argTypes: {
     iconsType: {
-      name: 'icons-type',
+      name: 'type',
       control: {
         options: ['smileys', 'thumbs'],
         type: 'select',
@@ -38,7 +38,7 @@ export default {
 
 const Template = ({iconsType,
 disabled}) => html`
-<modus-sentiment-scale icons-type="${iconsType}" disabled="${disabled}"></modus-sentiment-scale>
+<modus-sentiment-scale type="${iconsType}" disabled="${disabled}"></modus-sentiment-scale>
 
 <script>
   const sentimentScale = document.querySelector('modus-sentiment-scale');

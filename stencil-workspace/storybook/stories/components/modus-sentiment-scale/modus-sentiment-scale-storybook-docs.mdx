@@ -6,9 +6,9 @@ The `modus-sentiment-scale` component provides a customizable sentiment scale th
 
 ## Usage
 ### Thumbs
-<modus-sentiment-scale icons-type="thumbs"></modus-sentiment-scale>
+<modus-sentiment-scale type="thumbs"></modus-sentiment-scale>
 ```html
-<modus-sentiment-scale icons-type="thumbs"></modus-sentiment-scale>
+<modus-sentiment-scale type="thumbs"></modus-sentiment-scale>
 
 <script>
   const sentimentScale = document.querySelector('modus-sentiment-scale');
@@ -18,9 +18,9 @@ The `modus-sentiment-scale` component provides a customizable sentiment scale th
 </script>
 ```
 ### Smileys
-<modus-sentiment-scale icons-type="smileys"></modus-sentiment-scale>
+<modus-sentiment-scale type="smileys"></modus-sentiment-scale>
 ```html
-<modus-sentiment-scale icons-type="smileys"></modus-sentiment-scale>
+<modus-sentiment-scale type="smileys"></modus-sentiment-scale>
 
 <script>
   const sentimentScale = document.querySelector('modus-sentiment-scale');
@@ -32,8 +32,13 @@ The `modus-sentiment-scale` component provides a customizable sentiment scale th
 
 | Property     | Attribute   | Description                                     | Type                                                  | Options                    | Default   | Required |
 | ------------ | ----------- | ----------------------------------------------- | ----------------------------------------------------- | -------------------------- | --------- | -------- |
-| `iconsType`  | `icons-type` | The type of icons to be displayed.               | `typeof SMILEY_ICONS \| typeof THUMB_ICONS`            | `SMILEY_ICONS`, `THUMB_ICONS` |           | Yes      |
+| `type`  | `type` | The type of icons to be displayed.               | `typeof SMILEY_ICONS \| typeof THUMB_ICONS`            | `smileys`, `thumbs` |           | Yes      |
 | `disabled`   | `disabled`   | (optional) Whether the sentiment scale is disabled. | `boolean`                                            |                           | `false`   |          |
+
+| Types               | Values                                 |
+| -------------------- | ------------------------------------------- |
+| smileys | 'thumbs-up', 'thumbs-down'    |
+| thumbs | 'smiley-satisfied', 'smiley-dissatisfied', 'smiley-somewhat-dissatisfied', 'smiley-neutral', 'smiley-somewhat-satisfied',    |
 
 | States                | Description                                                  | Type                            |
 | --------------------- | ------------------------------------------------------------ | ------------------------------- |

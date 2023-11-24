@@ -1,6 +1,11 @@
 import { Component, Prop, Watch, State, h, Event, EventEmitter } from '@stencil/core';
 import { IconMap } from '../icons/IconMap';
-import { MODUS_SENTIMENT_CONSTANTS, SMILEY_ICONS, THUMB_ICONS } from './modus-sentiment.constants';
+import {
+  SMILEY_ICONS,
+  THUMB_ICONS,
+  MODUS_SENTIMENT_CONSTANTS_THUMB,
+  MODUS_SENTIMENT_CONSTANTS_SMILEYS,
+} from './modus-sentiment.constants';
 
 export interface ModusSentimentScaleItem {
   key: string;
@@ -25,17 +30,18 @@ export class ModusSentimentScale {
   @Watch('type')
   watchTypeChange(type: string) {
     if (type) {
+      console.log('type', type);
       if (type === THUMB_ICONS) {
-        this.icons = MODUS_SENTIMENT_CONSTANTS.ICON_KEY.THUMBS;
+        this.labelMap = MODUS_SENTIMENT_CONSTANTS_THUMB;
       } else if (type === SMILEY_ICONS) {
-        this.icons = MODUS_SENTIMENT_CONSTANTS.ICON_KEY.SMILEYS;
+        this.labelMap = MODUS_SENTIMENT_CONSTANTS_SMILEYS;
       }
     }
   }
   /** An event that fires the selected sentiment. */
   @Event() sentimentSelection: EventEmitter;
 
-  @State() icons: string[];
+  @State() labelMap: Map<string, string>;
   @State() selectedIcon: string;
   @State() sentimentScaleElement: HTMLDivElement;
 
@@ -74,10 +80,11 @@ export class ModusSentimentScale {
   }
 
   render() {
+    const iconKeys = Array.from(this.labelMap.keys());
     return (
       <div class="sentiment-scale-container" role="group" ref={(el) => (this.sentimentScaleElement = el)}>
-        {this.icons &&
-          this.icons.map((buttonIcon: string) => {
+        {iconKeys &&
+          iconKeys.map((buttonIcon: string) => {
             let ariaSelected = false;
             if (buttonIcon == this.getType(this.selectedIcon)) {
               ariaSelected = true;
@@ -87,7 +94,7 @@ export class ModusSentimentScale {
             }
             return (
               <div
-                aria-label={this.getType(buttonIcon)}
+                aria-label={this.labelMap.get(buttonIcon)}
                 aria-selected={ariaSelected}
                 role="button"
                 tabIndex={0}
