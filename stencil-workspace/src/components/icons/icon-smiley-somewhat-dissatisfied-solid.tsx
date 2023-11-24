@@ -10,8 +10,8 @@ interface IconProps {
 export const IconSmileySomewhatDissatisfiedSolid: FunctionalComponent<IconProps> = (props: IconProps) => (
   <svg
     class="icon-smiley-somewhat-dissatistied-solid"
-    width={props.size ?? '14'}
-    height={props.size ?? 14}
+    width={props.size ?? '16'}
+    height={props.size ?? 16}
     onClick={props.onClick ? (event) => props.onClick(event) : null}
     viewBox="0 0 24 24"
     fill="none"
