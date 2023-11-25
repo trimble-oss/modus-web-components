@@ -27,7 +27,7 @@ describe('modus-sentiment-scale', () => {
     await element.click();
     await page.waitForChanges();
 
-    expect(sentimentSelection).toHaveReceivedEventDetail('smiley-satisfied');
+    expect(sentimentSelection).toHaveReceivedEventDetail('smiley-dissatisfied');
   });
 
   it('does not emit sentimentSelection event on disabled sentiment click', async () => {

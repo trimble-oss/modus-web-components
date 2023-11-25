@@ -7,9 +7,9 @@ export const MODUS_SENTIMENT_CONSTANTS_THUMB = new Map([
 ]);
 
 export const MODUS_SENTIMENT_CONSTANTS_SMILEYS = new Map([
-  ['smiley-satisfied', 'Smiley Satisfied'],
   ['smiley-dissatisfied', 'Smiley Dissatisfied'],
   ['smiley-somewhat-dissatisfied', 'Smiley Somewhat Dissatisfied'],
   ['smiley-neutral', 'Smiley Neutral'],
   ['smiley-somewhat-satisfied', 'Smiley Somewhat Satisfied'],
+  ['smiley-satisfied', 'Smiley Satisfied'],
 ]);
