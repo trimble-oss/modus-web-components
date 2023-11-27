@@ -13,7 +13,7 @@ import {
   SORTED_DESCENDING,
 } from '../../modus-table.constants';
 
-interface ModusTableHeaderSortProps {
+interface ModusTableColumnSortIconProps {
   column: Column<unknown, unknown>;
   showSortIconOnHover: boolean;
   isColumnResizing: boolean;
@@ -49,7 +49,7 @@ function sortOnKeyDown(column: Column<unknown, unknown>, event: KeyboardEvent): 
   event.stopPropagation();
 }
 
-export const ModusTableHeaderSort: FunctionalComponent<ModusTableHeaderSortProps> = ({
+export const ModusTableColumnSortIcon: FunctionalComponent<ModusTableColumnSortIconProps> = ({
   column,
   showSortIconOnHover,
   isColumnResizing,

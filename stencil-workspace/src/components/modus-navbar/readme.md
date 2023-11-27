@@ -91,6 +91,8 @@ graph TD;
   modus-navbar --> modus-dropdown
   modus-navbar --> modus-navbar-button-menu
   modus-navbar-search-overlay --> modus-text-input
+  modus-navbar-profile-menu --> modus-list
+  modus-navbar-profile-menu --> modus-list-item
   style modus-navbar fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

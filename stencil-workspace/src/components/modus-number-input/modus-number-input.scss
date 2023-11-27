@@ -79,6 +79,7 @@
       input {
         font-size: $rem-14px;
         height: 47px;
+        padding: 0 $rem-16px;
       }
 
       &:focus-within,
@@ -87,6 +88,11 @@
         height: 47px; // Counteract bottom border width.
       }
     }
+  }
+
+  .input-container:has(input[readonly]) {
+    background-color: $modus-input-readonly-bg;
+    border-bottom-color: $modus-input-disabled-bottom-line-color;
   }
 
   .sub-text {

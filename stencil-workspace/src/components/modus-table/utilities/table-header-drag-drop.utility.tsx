@@ -1,22 +1,30 @@
 import { Table } from '@tanstack/table-core';
-import { KEYBOARD_LEFT, KEYBOARD_RIGHT, KEYBOARD_ENTER, KEYBOARD_ESCAPE, KEYBOARD_TAB } from '../modus-table.constants';
+import {
+  KEYBOARD_LEFT,
+  KEYBOARD_RIGHT,
+  KEYBOARD_ENTER,
+  KEYBOARD_ESCAPE,
+  KEYBOARD_TAB,
+  HTML_ATTR_DATA_ACCESSOR_KEY,
+} from '../modus-table.constants';
 import ColumnDragState from '../models/column-drag-state.model';
 
 export class TableHeaderDragDrop {
   columnOrder: string[] = [];
   columnReorder = false;
   columnResizeEnabled = false;
-  tableHeaderRowRef: HTMLTableRowElement;
+  container: HTMLElement;
   headersList: HTMLElement[];
   table: Table<unknown>;
   itemDragState: ColumnDragState;
   frozenColumns: string[];
+  tableHeaderRowEl: HTMLElement;
 
   setValues(
     columnOrder: string[],
     columnReorder: boolean,
     columnResizeEnabled: boolean,
-    tableHeaderRowRef: HTMLTableRowElement,
+    container: HTMLElement,
     table: Table<unknown>,
     itemDragState: ColumnDragState,
     frozenColumns: string[]
@@ -24,7 +32,7 @@ export class TableHeaderDragDrop {
     this.columnOrder = columnOrder;
     this.columnReorder = columnReorder;
     this.columnResizeEnabled = columnResizeEnabled;
-    this.tableHeaderRowRef = tableHeaderRowRef;
+    this.tableHeaderRowEl = container.shadowRoot.querySelector('thead tr');
     this.table = table;
     this.itemDragState = itemDragState;
     this.frozenColumns = frozenColumns;
@@ -40,7 +48,7 @@ export class TableHeaderDragDrop {
     elementRef: HTMLTableHeaderCellElement,
     mouseInteracted: boolean
   ): void {
-    this.headersList = [].slice.call(this.tableHeaderRowRef.childNodes); // List of table headers.
+    this.headersList = [].slice.call(this.tableHeaderRowEl.childNodes); // List of table headers.
     this.frozenColumns.forEach((frozenColumn) => {
       const index = this.headersList.findIndex((header) => header.id === frozenColumn);
       if (index > -1) {
@@ -124,8 +132,9 @@ export class TableHeaderDragDrop {
       translation,
     };
 
-    if (node?.id && node.id !== newDragState.draggedColumnId) {
-      newDragState = { ...newDragState, dropColumnId: node.id, dropIndicator: node.getBoundingClientRect() };
+    const dropColumnId = node && node.getAttribute(HTML_ATTR_DATA_ACCESSOR_KEY);
+    if (dropColumnId && dropColumnId !== newDragState.draggedColumnId) {
+      newDragState = { ...newDragState, dropColumnId: dropColumnId, dropIndicator: node.getBoundingClientRect() };
     } else {
       newDragState = { ...newDragState, dropIndicator: null };
     }

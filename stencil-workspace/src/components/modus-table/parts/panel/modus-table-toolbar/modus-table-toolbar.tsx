@@ -4,8 +4,7 @@ import {
   Prop,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
-import { Table } from '@tanstack/table-core';
-import { ModusTableToolbarOptions } from '../../../models/modus-table.models';
+import { TableContext } from '../../../models/table-context.models';
 @Component({
   tag: 'modus-table-toolbar',
   styleUrl: './modus-table-toolbar.scss',
@@ -13,12 +12,10 @@ import { ModusTableToolbarOptions } from '../../../models/modus-table.models';
 })
 export class ModusTablePanel {
   /** Table data. */
-  @Prop() table: Table<unknown>;
-
-  /** (Optional) Table Panel options. */
-  @Prop() options: ModusTableToolbarOptions;
+  @Prop() context: TableContext;
 
   render(): void {
+    // const { tableInstance: table, toolbarOptions: options } = this.context;
     return (
       <Host>
         <div class="table-toolbar">
@@ -27,7 +24,7 @@ export class ModusTablePanel {
           </div>
           <div class="section">
             <slot name="group-right" />
-            {<modus-table-dropdown-menu table={this.table} options={this.options} />}
+            {<modus-table-dropdown-menu context={this.context} />}
           </div>
         </div>
       </Host>

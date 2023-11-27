@@ -11,10 +11,7 @@ import {
 } from '@stencil/core';
 import { IconMap } from '../icons/IconMap';
 import DateInputFormatter from './utils/modus-date-input.formatter';
-import {
-  ModusDateInputEventDetails,
-  ModusDateInputType,
-} from './utils/modus-date-input.models';
+import { ModusDateInputEventDetails, ModusDateInputType } from './utils/modus-date-input.models';
 
 @Component({
   tag: 'modus-date-input',
@@ -237,6 +234,7 @@ export class ModusDateInput {
       return;
     }
 
+    if (!this._dateDisplay) return;
     const displayDate = this._dateDisplay.trim();
 
     // if there is no value for the default format, check the alternative formats
@@ -291,7 +289,7 @@ export class ModusDateInput {
       this.errorText = `Select a date after ${this._formatter.formatDisplayString(min.toISOString())}`;
     } else if (max && max < value) {
       max.setUTCDate(max.getDate() + 1);
-      this.errorText = `Select a date before ${this._formatter.formatDisplayString(max.toISOString())}`
+      this.errorText = `Select a date before ${this._formatter.formatDisplayString(max.toISOString())}`;
     } else {
       this.clearValidation();
     }
@@ -310,7 +308,8 @@ export class ModusDateInput {
         <div
           class={`input-container ${this.errorText ? 'error' : this.validText ? 'valid' : ''} ${this.classBySize.get(
             this.size
-          )}`}>
+          )}`}
+          part="input-container">
           <input
             aria-invalid={!!this.errorText}
             aria-label={this.ariaLabel}

@@ -1,4 +1,4 @@
-import { State, Watch } from '@stencil/core';
+import { State } from '@stencil/core';
 import {
   Component,
   Prop,
@@ -17,17 +17,20 @@ export class ModusTableFillerColumn {
 
   @Prop() summaryRow: boolean;
 
-  @Prop() targetTable?: HTMLTableElement;
-  @Watch('targetTable') targetTableChange(): void {
+  @Prop() container?: HTMLElement;
+
+  @State() showFillerTable = false;
+  private targetTable: HTMLTableElement;
+  private fillerTableRef: HTMLTableElement;
+  private observer: ResizeObserver | null = null;
+
+  componentDidLoad(): void {
+    this.targetTable = this.container.shadowRoot.querySelector('table');
     if (this.targetTable) {
       this.updateContainerLayout();
       this.connectDOMObserver();
     }
   }
-
-  @State() showFillerTable = false;
-  private fillerTableRef: HTMLTableElement;
-  private observer: ResizeObserver | null = null;
 
   disconnectedCallback(): void {
     this.disconnectDOMObserver();
@@ -45,8 +48,8 @@ export class ModusTableFillerColumn {
   }
 
   updateContainerLayout = (): void => {
-    const tableWidth = this.targetTable?.getBoundingClientRect()?.width;
-    const parentWidth = this.targetTable?.parentElement?.getBoundingClientRect()?.width;
+    const tableWidth = this.targetTable.getBoundingClientRect()?.width;
+    const parentWidth = this.targetTable.parentElement?.getBoundingClientRect()?.width;
 
     this.showFillerTable = tableWidth < parentWidth;
     if (!this.showFillerTable) return;
@@ -70,6 +73,7 @@ export class ModusTableFillerColumn {
   render(): void {
     return (
       <table
+        id="table-filler-column"
         class={{ 'cell-borderless': this.cellBorderless, 'd-none': !this.showFillerTable }}
         ref={(el) => (this.fillerTableRef = el)}>
         <thead>

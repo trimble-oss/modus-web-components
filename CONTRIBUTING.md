@@ -19,7 +19,7 @@
 
 ## Dependencies
 
-- Node (>= v14)
+- Node (>= v16)
 - npm CLI (>= v7)
 
 _We recommend using [nvm](https://github.com/nvm-sh/nvm). It is a great tool for switching between Node versions_
@@ -157,7 +157,7 @@ Before running the `test.debug` script, make sure to add the file you want to de
 This will open Chrome dev tools for debugging, and run only the Autocomplete e2e tests.
 
 You can add the following code to the test file to pause the test at a specific point while it's running in Chrome dev tools:
-`page.evaluate(() => { debugger; });`
+`page.evaluate(() => {  });`
 
 ## Considerations
 

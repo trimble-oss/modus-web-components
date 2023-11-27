@@ -22,6 +22,11 @@ li {
     margin-left: auto;
   }
 
+  &.borderless,
+  &.borderless:hover:not(.disabled) {
+    border: none;
+  }
+
   &:hover:not(.disabled) {
     background-color: $modus-list-item-hover-bg;
     border: 1px solid $modus-list-item-border-color;
@@ -40,6 +45,7 @@ li {
 
   &.disabled {
     color: $modus-list-item-disabled-color;
+    cursor: default;
     fill: $modus-list-item-disabled-color;
   }
 

@@ -54,6 +54,13 @@ Type: `Promise<void>`
 
 
 
+## Slots
+
+| Slot              | Description                      |
+| ----------------- | -------------------------------- |
+| `"footerContent"` | Slot for a custom footer content |
+
+
 ## Dependencies
 
 ### Depends on

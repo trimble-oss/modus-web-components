@@ -14,10 +14,13 @@ import { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, 
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-import { ModusTableCellLink, ModusTableColumn, ModusTableColumnsVisibilityOptions, ModusTableDisplayOptions, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
-import { Column, Table } from "@tanstack/table-core";
+import { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+import { Cell, Column, Row } from "@tanstack/table-core";
+import { TableCellEdited, TableContext } from "./components/modus-table/models/table-context.models";
+import { TableRowActionsMenuEvent } from "./components/modus-table/models/table-row-actions.models";
 import { Tab } from "./components/modus-tabs/modus-tabs";
 import { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
+import { ModusToolTipPlacement } from "./components/modus-tooltip/modus-tooltip.models";
 import { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
 export { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
@@ -28,10 +31,13 @@ export { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, 
 export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 export { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 export { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-export { ModusTableCellLink, ModusTableColumn, ModusTableColumnsVisibilityOptions, ModusTableDisplayOptions, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
-export { Column, Table } from "@tanstack/table-core";
+export { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+export { Cell, Column, Row } from "@tanstack/table-core";
+export { TableCellEdited, TableContext } from "./components/modus-table/models/table-context.models";
+export { TableRowActionsMenuEvent } from "./components/modus-table/models/table-row-actions.models";
 export { Tab } from "./components/modus-tabs/modus-tabs";
 export { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
+export { ModusToolTipPlacement } from "./components/modus-tooltip/modus-tooltip.models";
 export { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export namespace Components {
     interface ModusAccordion {
@@ -298,6 +304,10 @@ export namespace Components {
          */
         "imageUrl": string;
         /**
+          * (optional) Maximum width for the Chip's text and shows ellipsis when truncated
+         */
+        "maxWidth": string;
+        /**
           * (optional) Whether to show the checkmark.
          */
         "showCheckmark": boolean;
@@ -541,9 +551,14 @@ export namespace Components {
     }
     interface ModusListItem {
         /**
+          * (optional) Whether the list item has a border or not
+         */
+        "borderless": boolean;
+        /**
           * (optional) Disables the list item
          */
         "disabled": boolean;
+        "focusItem": () => Promise<void>;
         /**
           * (optional) The selected state of the list item
          */
@@ -726,6 +741,10 @@ export namespace Components {
          */
         "errorText": string;
         /**
+          * Focus the input.
+         */
+        "focusInput": () => Promise<void>;
+        /**
           * (optional) The input's helper text displayed below the input.
          */
         "helperText": string;
@@ -853,6 +872,10 @@ export namespace Components {
          */
         "errorText": string;
         /**
+          * Focus the input.
+         */
+        "focusInput": () => Promise<void>;
+        /**
           * (optional) The input's helper text.
          */
         "helperText": string;
@@ -886,6 +909,10 @@ export namespace Components {
         "value": unknown;
     }
     interface ModusSideNavigation {
+        /**
+          * (optional) To choose whether to collapse the panel when clicked outside.
+         */
+        "collapseOnClickOutside": boolean;
         /**
           * (optional) Data property to create the items.
          */
@@ -1019,6 +1046,14 @@ export namespace Components {
          */
         "hover": boolean;
         /**
+          * (Optional) To enable manual pagination mode. When enabled, the table will not automatically paginate rows, instead will expect the current page index and other details to be passed.
+         */
+        "manualPaginationOptions": ModusTableManualPaginationOptions;
+        /**
+          * (Optional) To set modus-table in manual sorting mode.
+         */
+        "manualSortingOptions": ModusTableManualSortingOptions;
+        /**
           * (Optional) To display a vertical scrollbar when the height is exceeded.
          */
         "maxHeight": string;
@@ -1028,6 +1063,10 @@ export namespace Components {
         "maxWidth": string;
         "pageSizeList": number[];
         "pagination": boolean;
+        /**
+          * (Optional) Actions that can be performed on each row. A maximum of 4 icons will be shown, including overflow menu and expand icons.
+         */
+        "rowActions": ModusTableRowAction[];
         /**
           * (Optional) To display checkbox.
          */
@@ -1067,46 +1106,59 @@ export namespace Components {
          */
         "toolbarOptions": ModusTableToolbarOptions | null;
     }
+    interface ModusTableCellEditor {
+        "args": ModusTableCellEditorArgs;
+        "keyDown": (e: KeyboardEvent, newValue: string) => void;
+        "type": string;
+        "value": string;
+        "valueChange": (newValue: string) => void;
+    }
+    interface ModusTableCellMain {
+        "cell": Cell<unknown, unknown>;
+        "context": TableContext;
+        "hasRowsExpandable": boolean;
+        "valueChange": (props: TableCellEdited) => void;
+    }
     interface ModusTableColumnsVisibility {
         /**
           * Column visibility options
          */
         "columnsVisibility": ModusTableColumnsVisibilityOptions;
-        "menuIconContainerRef": HTMLDivElement;
-        "showDropdown": boolean;
         /**
           * Table data.
          */
-        "table": Table<unknown>;
+        "getAllLeafColumns": () => Column<unknown, unknown>[];
+        "menuIconContainerRef": HTMLDivElement;
+        "showDropdown": boolean;
         "toggleDropdown": (show: boolean) => void;
     }
     interface ModusTableDropdownMenu {
-        /**
-          * dropdown menu options.
-         */
-        "options": ModusTableToolbarOptions;
-        /**
-          * Table data.
-         */
-        "table": Table<unknown>;
+        "context": TableContext;
     }
     /**
      * ModusFillerColumn is to fill empty space within a table or grid when the content in other columns is not wide enough to occupy the entire available width
      */
     interface ModusTableFillerColumn {
         "cellBorderless": boolean;
+        "container"?: HTMLElement;
         "summaryRow": boolean;
-        "targetTable"?: HTMLTableElement;
+    }
+    interface ModusTableRowActions {
+        "context": TableContext;
+        "row": Row<unknown>;
+    }
+    interface ModusTableRowActionsCell {
+        "context": TableContext;
+        "row": Row<unknown>;
+    }
+    interface ModusTableRowActionsMenu {
+        "context": TableContext;
     }
     interface ModusTableToolbar {
         /**
-          * (Optional) Table Panel options.
-         */
-        "options": ModusTableToolbarOptions;
-        /**
           * Table data.
          */
-        "table": Table<unknown>;
+        "context": TableContext;
     }
     interface ModusTabs {
         "ariaLabel": string | null;
@@ -1311,7 +1363,7 @@ export namespace Components {
         /**
           * (optional) The tooltip's position relative to its content.
          */
-        "position": 'bottom' | 'left' | 'right' | 'top';
+        "position": ModusToolTipPlacement;
         /**
           * The tooltip's text.
          */
@@ -1499,6 +1551,10 @@ export interface ModusSwitchCustomEvent<T> extends CustomEvent<T> {
 export interface ModusTableCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusTableElement;
+}
+export interface ModusTableRowActionsCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusTableRowActionsElement;
 }
 export interface ModusTabsCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1749,6 +1805,18 @@ declare global {
         prototype: HTMLModusTableElement;
         new (): HTMLModusTableElement;
     };
+    interface HTMLModusTableCellEditorElement extends Components.ModusTableCellEditor, HTMLStencilElement {
+    }
+    var HTMLModusTableCellEditorElement: {
+        prototype: HTMLModusTableCellEditorElement;
+        new (): HTMLModusTableCellEditorElement;
+    };
+    interface HTMLModusTableCellMainElement extends Components.ModusTableCellMain, HTMLStencilElement {
+    }
+    var HTMLModusTableCellMainElement: {
+        prototype: HTMLModusTableCellMainElement;
+        new (): HTMLModusTableCellMainElement;
+    };
     interface HTMLModusTableColumnsVisibilityElement extends Components.ModusTableColumnsVisibility, HTMLStencilElement {
     }
     var HTMLModusTableColumnsVisibilityElement: {
@@ -1769,6 +1837,24 @@ declare global {
     var HTMLModusTableFillerColumnElement: {
         prototype: HTMLModusTableFillerColumnElement;
         new (): HTMLModusTableFillerColumnElement;
+    };
+    interface HTMLModusTableRowActionsElement extends Components.ModusTableRowActions, HTMLStencilElement {
+    }
+    var HTMLModusTableRowActionsElement: {
+        prototype: HTMLModusTableRowActionsElement;
+        new (): HTMLModusTableRowActionsElement;
+    };
+    interface HTMLModusTableRowActionsCellElement extends Components.ModusTableRowActionsCell, HTMLStencilElement {
+    }
+    var HTMLModusTableRowActionsCellElement: {
+        prototype: HTMLModusTableRowActionsCellElement;
+        new (): HTMLModusTableRowActionsCellElement;
+    };
+    interface HTMLModusTableRowActionsMenuElement extends Components.ModusTableRowActionsMenu, HTMLStencilElement {
+    }
+    var HTMLModusTableRowActionsMenuElement: {
+        prototype: HTMLModusTableRowActionsMenuElement;
+        new (): HTMLModusTableRowActionsMenuElement;
     };
     interface HTMLModusTableToolbarElement extends Components.ModusTableToolbar, HTMLStencilElement {
     }
@@ -1857,9 +1943,14 @@ declare global {
         "modus-spinner": HTMLModusSpinnerElement;
         "modus-switch": HTMLModusSwitchElement;
         "modus-table": HTMLModusTableElement;
+        "modus-table-cell-editor": HTMLModusTableCellEditorElement;
+        "modus-table-cell-main": HTMLModusTableCellMainElement;
         "modus-table-columns-visibility": HTMLModusTableColumnsVisibilityElement;
         "modus-table-dropdown-menu": HTMLModusTableDropdownMenuElement;
         "modus-table-filler-column": HTMLModusTableFillerColumnElement;
+        "modus-table-row-actions": HTMLModusTableRowActionsElement;
+        "modus-table-row-actions-cell": HTMLModusTableRowActionsCellElement;
+        "modus-table-row-actions-menu": HTMLModusTableRowActionsMenuElement;
         "modus-table-toolbar": HTMLModusTableToolbarElement;
         "modus-tabs": HTMLModusTabsElement;
         "modus-text-input": HTMLModusTextInputElement;
@@ -2159,6 +2250,10 @@ declare namespace LocalJSX {
          */
         "imageUrl"?: string;
         /**
+          * (optional) Maximum width for the Chip's text and shows ellipsis when truncated
+         */
+        "maxWidth"?: string;
+        /**
           * An event that fires on chip click.
          */
         "onChipClick"?: (event: ModusChipCustomEvent<any>) => void;
@@ -2429,6 +2524,10 @@ declare namespace LocalJSX {
     interface ModusList {
     }
     interface ModusListItem {
+        /**
+          * (optional) Whether the list item has a border or not
+         */
+        "borderless"?: boolean;
         /**
           * (optional) Disables the list item
          */
@@ -2832,6 +2931,10 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
+          * An event that fires on input blur.
+         */
+        "onInputBlur"?: (event: ModusSelectCustomEvent<FocusEvent>) => void;
+        /**
           * An event that fires on input value change.
          */
         "onValueChange"?: (event: ModusSelectCustomEvent<unknown>) => void;
@@ -2861,6 +2964,10 @@ declare namespace LocalJSX {
         "value"?: unknown;
     }
     interface ModusSideNavigation {
+        /**
+          * (optional) To choose whether to collapse the panel when clicked outside.
+         */
+        "collapseOnClickOutside"?: boolean;
         /**
           * (optional) Data property to create the items.
          */
@@ -3013,6 +3120,14 @@ declare namespace LocalJSX {
          */
         "hover"?: boolean;
         /**
+          * (Optional) To enable manual pagination mode. When enabled, the table will not automatically paginate rows, instead will expect the current page index and other details to be passed.
+         */
+        "manualPaginationOptions"?: ModusTableManualPaginationOptions;
+        /**
+          * (Optional) To set modus-table in manual sorting mode.
+         */
+        "manualSortingOptions"?: ModusTableManualSortingOptions;
+        /**
           * (Optional) To display a vertical scrollbar when the height is exceeded.
          */
         "maxHeight"?: string;
@@ -3025,15 +3140,47 @@ declare namespace LocalJSX {
          */
         "onCellLinkClick"?: (event: ModusTableCustomEvent<ModusTableCellLink>) => void;
         /**
-          * Event details contains the row(s) selected
+          * Emits the cell value that was edited
+         */
+        "onCellValueChange"?: (event: ModusTableCustomEvent<ModusTableCellValueChange>) => void;
+        /**
+          * Emits columns in the updated order
+         */
+        "onColumnOrderChange"?: (event: ModusTableCustomEvent<ModusTableColumnOrderState>) => void;
+        /**
+          * Emits latest column size
+         */
+        "onColumnSizingChange"?: (event: ModusTableCustomEvent<ModusTableColumnSizingState>) => void;
+        /**
+          * Emits visibility state of each column
+         */
+        "onColumnVisibilityChange"?: (event: ModusTableCustomEvent<ModusTableColumnVisibilityState>) => void;
+        /**
+          * Emits selected page index and size
+         */
+        "onPaginationChange"?: (event: ModusTableCustomEvent<ModusTablePaginationState>) => void;
+        /**
+          * An event that fires when a row action is clicked.
+         */
+        "onRowActionClick"?: (event: ModusTableCustomEvent<ModusTableRowActionClick>) => void;
+        /**
+          * Emits expanded state of the columns
+         */
+        "onRowExpanded"?: (event: ModusTableCustomEvent<ModusTableExpandedState>) => void;
+        /**
+          * Emits rows selected
          */
         "onRowSelectionChange"?: (event: ModusTableCustomEvent<unknown>) => void;
         /**
-          * Emits event on sort change
+          * Emits column sort order
          */
         "onSortChange"?: (event: ModusTableCustomEvent<ModusTableSortingState>) => void;
         "pageSizeList"?: number[];
         "pagination"?: boolean;
+        /**
+          * (Optional) Actions that can be performed on each row. A maximum of 4 icons will be shown, including overflow menu and expand icons.
+         */
+        "rowActions"?: ModusTableRowAction[];
         /**
           * (Optional) To display checkbox.
          */
@@ -3067,46 +3214,60 @@ declare namespace LocalJSX {
          */
         "toolbarOptions"?: ModusTableToolbarOptions | null;
     }
+    interface ModusTableCellEditor {
+        "args"?: ModusTableCellEditorArgs;
+        "keyDown"?: (e: KeyboardEvent, newValue: string) => void;
+        "type"?: string;
+        "value"?: string;
+        "valueChange"?: (newValue: string) => void;
+    }
+    interface ModusTableCellMain {
+        "cell"?: Cell<unknown, unknown>;
+        "context"?: TableContext;
+        "hasRowsExpandable"?: boolean;
+        "valueChange"?: (props: TableCellEdited) => void;
+    }
     interface ModusTableColumnsVisibility {
         /**
           * Column visibility options
          */
         "columnsVisibility"?: ModusTableColumnsVisibilityOptions;
-        "menuIconContainerRef"?: HTMLDivElement;
-        "showDropdown"?: boolean;
         /**
           * Table data.
          */
-        "table"?: Table<unknown>;
+        "getAllLeafColumns"?: () => Column<unknown, unknown>[];
+        "menuIconContainerRef"?: HTMLDivElement;
+        "showDropdown"?: boolean;
         "toggleDropdown"?: (show: boolean) => void;
     }
     interface ModusTableDropdownMenu {
-        /**
-          * dropdown menu options.
-         */
-        "options"?: ModusTableToolbarOptions;
-        /**
-          * Table data.
-         */
-        "table"?: Table<unknown>;
+        "context"?: TableContext;
     }
     /**
      * ModusFillerColumn is to fill empty space within a table or grid when the content in other columns is not wide enough to occupy the entire available width
      */
     interface ModusTableFillerColumn {
         "cellBorderless"?: boolean;
+        "container"?: HTMLElement;
         "summaryRow"?: boolean;
-        "targetTable"?: HTMLTableElement;
+    }
+    interface ModusTableRowActions {
+        "context"?: TableContext;
+        "onOverflowRowActions"?: (event: ModusTableRowActionsCustomEvent<TableRowActionsMenuEvent>) => void;
+        "row"?: Row<unknown>;
+    }
+    interface ModusTableRowActionsCell {
+        "context"?: TableContext;
+        "row"?: Row<unknown>;
+    }
+    interface ModusTableRowActionsMenu {
+        "context"?: TableContext;
     }
     interface ModusTableToolbar {
         /**
-          * (Optional) Table Panel options.
-         */
-        "options"?: ModusTableToolbarOptions;
-        /**
           * Table data.
          */
-        "table"?: Table<unknown>;
+        "context"?: TableContext;
     }
     interface ModusTabs {
         "ariaLabel"?: string | null;
@@ -3323,7 +3484,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The tooltip's position relative to its content.
          */
-        "position"?: 'bottom' | 'left' | 'right' | 'top';
+        "position"?: ModusToolTipPlacement;
         /**
           * The tooltip's text.
          */
@@ -3445,9 +3606,14 @@ declare namespace LocalJSX {
         "modus-spinner": ModusSpinner;
         "modus-switch": ModusSwitch;
         "modus-table": ModusTable;
+        "modus-table-cell-editor": ModusTableCellEditor;
+        "modus-table-cell-main": ModusTableCellMain;
         "modus-table-columns-visibility": ModusTableColumnsVisibility;
         "modus-table-dropdown-menu": ModusTableDropdownMenu;
         "modus-table-filler-column": ModusTableFillerColumn;
+        "modus-table-row-actions": ModusTableRowActions;
+        "modus-table-row-actions-cell": ModusTableRowActionsCell;
+        "modus-table-row-actions-menu": ModusTableRowActionsMenu;
         "modus-table-toolbar": ModusTableToolbar;
         "modus-tabs": ModusTabs;
         "modus-text-input": ModusTextInput;
@@ -3500,12 +3666,17 @@ declare module "@stencil/core" {
             "modus-spinner": LocalJSX.ModusSpinner & JSXBase.HTMLAttributes<HTMLModusSpinnerElement>;
             "modus-switch": LocalJSX.ModusSwitch & JSXBase.HTMLAttributes<HTMLModusSwitchElement>;
             "modus-table": LocalJSX.ModusTable & JSXBase.HTMLAttributes<HTMLModusTableElement>;
+            "modus-table-cell-editor": LocalJSX.ModusTableCellEditor & JSXBase.HTMLAttributes<HTMLModusTableCellEditorElement>;
+            "modus-table-cell-main": LocalJSX.ModusTableCellMain & JSXBase.HTMLAttributes<HTMLModusTableCellMainElement>;
             "modus-table-columns-visibility": LocalJSX.ModusTableColumnsVisibility & JSXBase.HTMLAttributes<HTMLModusTableColumnsVisibilityElement>;
             "modus-table-dropdown-menu": LocalJSX.ModusTableDropdownMenu & JSXBase.HTMLAttributes<HTMLModusTableDropdownMenuElement>;
             /**
              * ModusFillerColumn is to fill empty space within a table or grid when the content in other columns is not wide enough to occupy the entire available width
              */
             "modus-table-filler-column": LocalJSX.ModusTableFillerColumn & JSXBase.HTMLAttributes<HTMLModusTableFillerColumnElement>;
+            "modus-table-row-actions": LocalJSX.ModusTableRowActions & JSXBase.HTMLAttributes<HTMLModusTableRowActionsElement>;
+            "modus-table-row-actions-cell": LocalJSX.ModusTableRowActionsCell & JSXBase.HTMLAttributes<HTMLModusTableRowActionsCellElement>;
+            "modus-table-row-actions-menu": LocalJSX.ModusTableRowActionsMenu & JSXBase.HTMLAttributes<HTMLModusTableRowActionsMenuElement>;
             "modus-table-toolbar": LocalJSX.ModusTableToolbar & JSXBase.HTMLAttributes<HTMLModusTableToolbarElement>;
             "modus-tabs": LocalJSX.ModusTabs & JSXBase.HTMLAttributes<HTMLModusTabsElement>;
             "modus-text-input": LocalJSX.ModusTextInput & JSXBase.HTMLAttributes<HTMLModusTextInputElement>;

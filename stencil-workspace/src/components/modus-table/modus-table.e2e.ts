@@ -1,4 +1,5 @@
 import { E2EPage, newE2EPage } from '@stencil/core/testing';
+import { ModusTableRowAction } from '../../interfaces';
 
 const MockColumns = [
   {
@@ -27,6 +28,22 @@ const MockData = [
     mockColumnTwo: 900293,
   },
 ];
+
+const MockManualPagination = {
+  currentPageIndex: 2,
+  currentPageSize: 10,
+  pageCount: 10,
+  totalRecords: 100,
+};
+
+const MockManualSorting = {
+  currentSortingState: [
+    {
+      id: 'mock-column-one',
+      desc: false,
+    },
+  ],
+};
 
 describe('modus-table', () => {
   let page: E2EPage;
@@ -242,6 +259,45 @@ describe('modus-table', () => {
     expect(tooltipText).toEqual('Sorted Descending');
   });
 
+  it('Renders with correct sort icon when manual sorting is enabled', async () => {
+    page = await newE2EPage();
+    await page.setContent('<modus-table />');
+
+    const component = await page.find('modus-table');
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    component.setProperty('sort', true);
+    component.setProperty('manualSortingOptions', MockManualSorting);
+    await page.waitForChanges();
+
+    const iconSortAZ = await page.find('modus-table >>> svg');
+    const dataTestId = iconSortAZ['__attributeMap']['__items'].find((item) => item['_name'] === 'data-test-id');
+    const dataTestIdValue = dataTestId && dataTestId['_value'];
+
+    expect(dataTestIdValue).toBe('iconSortAZ');
+  });
+
+  it('Check sort icon tooltip text for enabled manual sorting', async () => {
+    page = await newE2EPage();
+    await page.setContent('<modus-table />');
+
+    const component = await page.find('modus-table');
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    component.setProperty('sort', true);
+    component.setProperty('manualSortingOptions', MockManualSorting);
+    await page.waitForChanges();
+
+    const sortContainer = await page.find('modus-table >>> th');
+    expect(sortContainer).not.toBeNull();
+
+    const tooltip = await sortContainer.find('modus-tooltip');
+    const tooltipText = await tooltip.getProperty('text');
+
+    expect(tooltip).not.toBeNull();
+    expect(tooltipText).toEqual('Sorted Ascending');
+  });
+
   it('Render pagination when pagination is enabled', async () => {
     page = await newE2EPage();
     await page.setContent('<modus-table />');
@@ -329,6 +385,38 @@ describe('modus-table', () => {
 
     expect(valueChange).toHaveReceivedEvent();
     expect(valueChange).toHaveReceivedEventDetail({ display: 20 });
+  });
+
+  it('Render manual pagination', async () => {
+    page = await newE2EPage();
+    await page.setContent('<modus-table />');
+
+    const component = await page.find('modus-table');
+
+    component.setProperty('columns', MockColumns);
+    component.setProperty('manualPaginationOptions', {});
+    component.setProperty('data', MockData);
+    component.setProperty('pagination', false);
+
+    await page.waitForChanges();
+    component.setProperty('pagination', true);
+    await page.waitForChanges();
+    component.setProperty('manualPaginationOptions', MockManualPagination);
+    await page.waitForChanges();
+    component.setProperty('pageSizeList', [5, 10, 50]);
+    await page.waitForChanges();
+
+    const pagination = await page.find(`modus-table >>> modus-pagination`);
+    const paginationContainer = await page.find('modus-table >>> .pagination-and-count > .total-count');
+    await page.waitForChanges();
+
+    expect(await pagination.getAttribute('active-page')).toBeTruthy();
+    expect(await pagination.getAttribute('max-page')).toBeTruthy();
+    expect(await pagination.getAttribute('active-page')).toBe(`${MockManualPagination.currentPageIndex}`);
+    expect(await pagination.getAttribute('max-page')).toBe(`${MockManualPagination.pageCount}`);
+
+    expect(paginationContainer).not.toBeNull();
+    expect(paginationContainer.textContent).toContain('Showing result11-20of100');
   });
 
   it('Renders custom footer when summaryRow is true', async () => {
@@ -432,5 +520,271 @@ describe('modus-table', () => {
     await page.waitForChanges();
     resizeContainer = await page.find('modus-table >>> .resize-handle');
     expect(resizeContainer).not.toBeNull();
+  });
+
+  it('Renders column resizing when columnVisibility is enabled', async () => {
+    page = await newE2EPage();
+
+    await page.setContent('<modus-table />');
+    const component = await page.find('modus-table');
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    component.setProperty('toolbar', true);
+    component.setProperty('toolbarOptions', {
+      columnsVisibility: {
+        title: '',
+        requiredColumns: ['mock-column-one'],
+        hiddenColumns: ['mock-column-two'],
+      },
+    });
+
+    await page.waitForChanges();
+
+    // Check for the required column; it should be present.
+    const requiredColumn = await page.find(`modus-table >>> th[aria-label="Mock Column One"]`);
+    expect(requiredColumn).not.toBeNull();
+
+    // Check for the hidden column; it should NOT be present.
+    const hiddenColumn = await page.find(`modus-table >>> th[aria-label="Mock Column Two"]`);
+    expect(hiddenColumn).toBeNull();
+  });
+
+  it('Renders Hyperlinks in cell and emits cellLinkEvent', async () => {
+    page = await newE2EPage();
+
+    await page.setContent('<modus-table />');
+    const component = await page.find('modus-table');
+
+    const emailColumn = [
+      {
+        header: 'Email',
+        accessorKey: 'email',
+        id: 'email',
+        dataType: 'link',
+      },
+    ];
+    const emailData = { display: 'test', url: 'test@example.com' };
+    const cellLinkClickEvent = await page.spyOnEvent('cellLinkClick');
+
+    component.setProperty('columns', emailColumn);
+    component.setProperty('data', [{ email: emailData }]);
+    await page.waitForChanges();
+
+    const linkElement = await page.find('modus-table >>> .cell-link');
+    linkElement.click();
+    await page.waitForChanges();
+
+    expect(cellLinkClickEvent).toHaveReceivedEventDetail(emailData);
+
+    linkElement.focus();
+    await page.keyboard.press('Enter');
+    await page.waitForChanges();
+
+    expect(cellLinkClickEvent).toHaveReceivedEventDetail(emailData);
+  });
+
+  it('Performs keyboard navigation on cells with hyperlinks', async () => {
+    page = await newE2EPage();
+
+    await page.setContent('<modus-table />');
+    const component = await page.find('modus-table');
+
+    const emailColumns = [
+      {
+        header: 'email1',
+        accessorKey: 'email1',
+        id: 'email1',
+        dataType: 'link',
+        sortingFn: 'sortForHyperlink',
+      },
+      {
+        header: 'email2',
+        accessorKey: 'email2',
+        id: 'email2',
+        dataType: 'link',
+        sortingFn: 'sortForHyperlink',
+      },
+    ];
+    const data = [
+      {
+        email1: { display: 'row1cell1', url: 'row1cell1@example.com' },
+        email2: { display: 'row1cell2', url: 'row1cell2@example.com' },
+      },
+      {
+        email1: { display: 'row2cell1', url: 'row2cell1@example.com' },
+        email2: { display: 'row2cell2', url: 'row2cell2@example.com' },
+      },
+    ];
+    const cellLinkClickEvent = await page.spyOnEvent('cellLinkClick');
+
+    component.setProperty('columns', emailColumns);
+    component.setProperty('data', data);
+    await page.waitForChanges();
+
+    const linkElement = await page.find('modus-table >>> .cell-link');
+    linkElement.focus();
+    await page.waitForChanges();
+
+    expect(linkElement).toBeTruthy();
+    await page.keyboard.press('Enter');
+    await page.waitForChanges();
+
+    expect(cellLinkClickEvent).toHaveReceivedEventDetail({ display: 'row1cell1', url: 'row1cell1@example.com' });
+
+    // Press Right Arrow
+    await page.keyboard.press('ArrowRight');
+    await page.waitForChanges();
+    await page.keyboard.press('Tab');
+    await page.waitForChanges();
+    await page.keyboard.press('Enter');
+    await page.waitForChanges();
+
+    expect(cellLinkClickEvent).toHaveReceivedEventDetail({ display: 'row1cell2', url: 'row1cell2@example.com' });
+
+    // Press Down Arrow
+    await page.keyboard.press('ArrowDown');
+    await page.waitForChanges();
+    await page.keyboard.press('Tab');
+    await page.waitForChanges();
+    await page.keyboard.press('Enter');
+    await page.waitForChanges();
+
+    expect(cellLinkClickEvent).toHaveReceivedEventDetail({ display: 'row2cell2', url: 'row2cell2@example.com' });
+
+    // Press Left Arrow
+    await page.keyboard.press('ArrowLeft');
+    await page.waitForChanges();
+    await page.keyboard.press('Tab');
+    await page.waitForChanges();
+    await page.keyboard.press('Enter');
+    await page.waitForChanges();
+
+    expect(cellLinkClickEvent).toHaveReceivedEventDetail({ display: 'row2cell1', url: 'row2cell1@example.com' });
+
+    // Press Up Arrow
+    await page.keyboard.press('ArrowUp');
+    await page.waitForChanges();
+    await page.keyboard.press('Tab');
+    await page.waitForChanges();
+    await page.keyboard.press('Enter');
+    await page.waitForChanges();
+
+    expect(cellLinkClickEvent).toHaveReceivedEventDetail({ display: 'row1cell1', url: 'row1cell1@example.com' });
+  });
+
+  it('Performs keyboard navigation on rows with checkbox selection', async () => {
+    page = await newE2EPage();
+
+    await page.setContent('<modus-table />');
+    const component = await page.find('modus-table');
+
+    const rowSelectionChange = await page.spyOnEvent('rowSelectionChange');
+
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    component.setProperty('rowSelection', true);
+    component.setProperty('rowSelectionOptions', {
+      multiple: false,
+    });
+
+    await page.waitForChanges();
+
+    const cell = await page.find('modus-table >>> td');
+
+    expect(cell).toHaveClass('row-checkbox');
+    cell.focus();
+    await page.waitForChanges();
+
+    // Press Down Arrow
+    await page.keyboard.press('ArrowDown');
+    await page.waitForChanges();
+
+    await page.keyboard.press('Enter');
+    await page.waitForChanges();
+
+    expect(rowSelectionChange).toHaveReceivedEvent();
+
+    // Press Up Arrow
+    await page.keyboard.press('ArrowUp');
+    await page.waitForChanges();
+
+    await page.keyboard.press('Enter');
+    await page.waitForChanges();
+
+    expect(rowSelectionChange).toHaveReceivedEvent();
+  });
+
+  it('Displays row actions', async () => {
+    page = await newE2EPage();
+    await page.setContent('<modus-table />');
+    const rowActionsMock: ModusTableRowAction[] = [
+      {
+        id: '1',
+        index: 0,
+        icon: 'edit',
+        label: 'Edit',
+      },
+    ];
+    const component = await page.find('modus-table');
+    component.setProperty('rowActions', rowActionsMock);
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    await page.waitForChanges();
+    const rowActions = await page.findAll('modus-table >>> modus-table-row-actions >>> .row-actions');
+    expect(rowActions).toHaveLength(MockData.length);
+    const rowActionClick = await page.spyOnEvent('rowActionClick');
+    await rowActions[0].click();
+    expect(rowActionClick).toHaveReceivedEvent();
+  });
+
+  it('Displays row actions menu', async () => {
+    page = await newE2EPage();
+    await page.setContent('<modus-table />');
+    const rowActionsMock = [
+      {
+        id: '1',
+        index: 0,
+        icon: 'edit',
+        label: 'Edit',
+      },
+      {
+        id: '2',
+        index: 1,
+        icon: 'edit',
+        label: 'Edit',
+      },
+      {
+        id: '3',
+        index: 2,
+        icon: 'edit',
+        label: 'Edit',
+      },
+      {
+        id: '4',
+        index: 3,
+        icon: 'edit',
+        label: 'Edit',
+      },
+      {
+        id: '5',
+        index: 4,
+        icon: 'edit',
+        label: 'Edit',
+      },
+    ];
+    const component = await page.find('modus-table');
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    component.setProperty('rowActions', rowActionsMock);
+    await page.waitForChanges();
+    const rowActionsMenuButton = await page.findAll('modus-table >>> modus-table-row-actions > .row-actions-menu-button');
+    expect(rowActionsMenuButton).toHaveLength(MockData.length);
+    await rowActionsMenuButton[0].click();
+    await page.waitForChanges();
+    const rowActionsMenuItem = await page.findAll('modus-table >>> .row-actions-menu-item');
+    expect(rowActionsMenuItem).toHaveLength(2);
+    const rowActionsMenuItemClick = await page.spyOnEvent('rowActionClick');
+    await rowActionsMenuItem[0].click();
+    expect(rowActionsMenuItemClick).toHaveReceivedEvent();
   });
 });

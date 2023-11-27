@@ -39,14 +39,18 @@
 
   img {
     border-radius: 50%;
-    height: $rem-24px;
-    width: $rem-24px;
+    height: $rem-16px;
+    width: $rem-16px;
   }
 
   span {
+    display: inline-block;
     font-size: $rem-13px;
     font-weight: $chip-font-weight;
     margin: 0 $rem-4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   svg:not(.icon-remove) path {

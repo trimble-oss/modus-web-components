@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { Component, Event, EventEmitter, Prop, h } from '@stencil/core';
+import { Component, Event, EventEmitter, Method, Prop, h } from '@stencil/core';
 import { IconCheck } from '../icons/icon-check';
 
 @Component({
@@ -8,6 +8,9 @@ import { IconCheck } from '../icons/icon-check';
   shadow: true,
 })
 export class ModusListItem {
+  /** (optional) Whether the list item has a border or not */
+  @Prop() borderless: boolean;
+
   /** (optional) Disables the list item */
   @Prop() disabled: boolean;
 
@@ -23,24 +26,42 @@ export class ModusListItem {
   /** An event that fires on list item click */
   @Event() itemClick: EventEmitter;
 
+  listItemRef: HTMLLIElement;
+
+  @Method()
+  async focusItem(): Promise<void> {
+    this.listItemRef?.focus();
+  }
+
   classBySize: Map<string, string> = new Map([
     ['condensed', 'small'],
     ['standard', 'standard'],
     ['large', 'large'],
   ]);
 
+  handleKeydown(e: KeyboardEvent): void {
+    if (e.key.toLowerCase() === 'enter' && !this.disabled) {
+      this.itemClick.emit();
+    }
+  }
+
   render(): unknown {
     const containerClass = `${this.classBySize.get(this.size)} ${this.disabled ? 'disabled' : ''} ${
       this.selected ? 'selected' : ''
-    }`;
-    const iconSize = this.size === 'condensed' ? '18' : '22';
+    } ${this.borderless ? 'borderless' : ''}`;
+    const iconCheckSize = this.size === 'condensed' ? '16' : '24';
 
     return (
-      <li class={containerClass} onClick={() => (!this.disabled ? this.itemClick.emit() : null)}>
+      <li
+        ref={(el) => (this.listItemRef = el)}
+        class={containerClass}
+        tabIndex={this.disabled ? -1 : 0}
+        onClick={() => (!this.disabled ? this.itemClick.emit() : null)}
+        onKeyDown={(e) => this.handleKeydown(e)}>
         <span class="slot">
           <slot />
         </span>
-        {this.selected && <IconCheck size={iconSize} />}
+        {this.selected && <IconCheck size={iconCheckSize} />}
       </li>
     );
   }

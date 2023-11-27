@@ -4,6 +4,59 @@ import { html } from 'lit-html';
 
 export default {
   title: 'Components/Side Navigation',
+  argTypes: {
+    collapseOnClickOutside: {
+      name: 'collapse-on-click-outside',
+      description: " To choose whether to collapse the panel when clicked outside",
+      table: {
+        type: { summary: 'boolean' },
+      },
+    },
+    data: {
+      description: 'Data property to create the side navigation items',
+      table: {
+        type: { summary: 'ModusSideNavigationItemInfo' },
+      },
+    },
+    maxWidth: {
+      name: 'max-width',
+      description: "Maximum width of the side navigation panel in an expanded state",
+      table: {
+        defaultValue: { summary: '256px' },
+        type: { summary: 'string' },
+      },
+    },
+    mode:
+    {
+      control: {
+        options: [
+          'overlay',
+          'push',
+        ],
+        type: 'select',
+      },
+      description: 'Mode to make side navigation either overlay or push the content for the selector specified in `targetContent`',
+      table: {
+        defaultValue: { summary: `'overlay'` },
+        type: {
+          summary: `'overlay' | 'push'`,
+        },
+      },
+    },
+    expanded: {
+      description: "The expanded state of side navigation panel and items",
+      table: {
+        type: { summary: 'boolean' },
+      },
+    },
+    targetContent: {
+      name: "target-content",
+      description: "Specify the selector for the page's content for which paddings and margins will be set by side navigation based on the `mode`",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+  },
   parameters: {
     docs: {
       page: docs,
@@ -11,14 +64,21 @@ export default {
     options: {
       isToolshown: true,
     },
-    controls: {
-      disabled: true,
+    actions: {
+      handles: ['sideNavExpand', 'sideNavItemClicked', 'mainMenuClick'],
     },
+    controls: { expanded: true, sort: 'requiredFirst' },
     viewMode: 'docs',
   },
 };
 
-const DefaultTemplate = () => html`
+const DefaultTemplate = ({
+  collapseOnClickOutside,
+  maxWidth,
+  mode,
+  expanded,
+  targetContent,
+}) => html`
   <div id="defaultTemplate">
     <div
       style="width: 100%;align-items: center;height: 56px;box-shadow: 0 0 2px var(--modus-secondary)!important; margin-top: 50px;">
@@ -35,9 +95,12 @@ const DefaultTemplate = () => html`
       id="container"
       style="display:flex; min-height:500px; overflow-y: auto; position: relative;box-shadow: 0 0 2px var(--modus-secondary)!important;">
       <modus-side-navigation
-        max-width="300px"
+        max-width=${maxWidth}
         id="sideNav"
-        target-content="#defaultTemplate #panelcontent">
+        collapse-on-click-outside=${collapseOnClickOutside}
+        mode=${mode}
+        expanded=${expanded}
+        target-content=${targetContent}>
         <modus-side-navigation-item id="home-menu" label="Home page">
           <svg
             slot="menu-icon"
@@ -121,8 +184,21 @@ const DefaultTemplate = () => html`
   ${setJavascriptDefaultTemplate('defaultTemplate')}
 `;
 export const Default = DefaultTemplate.bind({});
+Default.args = {
+  collapseOnClickOutside: true,
+  maxWidth: '300px',
+  mode: 'overlay',
+  expanded: false,
+  targetContent: '#defaultTemplate #panelcontent',
+};
 
-const SideNavigationWithDataTemplate = () => html`
+const SideNavigationWithDataTemplate = ({
+  collapseOnClickOutside,
+  maxWidth,
+  mode,
+  expanded,
+  targetContent,
+}) => html`
   <div id="dataTemplate">
     <modus-switch id="switch-theme" label="Enable blue theme"></modus-switch>
     <br />
@@ -144,10 +220,12 @@ const SideNavigationWithDataTemplate = () => html`
       id="container"
       style="display:flex; min-height:500px; overflow-y: auto; position: relative;box-shadow: 0 0 2px var(--modus-secondary)!important;">
       <modus-side-navigation
-        max-width="300px"
-        id="sideNav"
-        target-content="#dataTemplate #panelcontent"
-        mode="overlay">
+      max-width=${maxWidth}
+      id="sideNav"
+      collapse-on-click-outside=${collapseOnClickOutside}
+      mode=${mode}
+      expanded=${expanded}
+      target-content=${targetContent}>
       </modus-side-navigation>
 
       <div
@@ -205,7 +283,7 @@ const helpers = (containerId) => {
     },
   };
   getRoot().querySelector('#navbar').profileMenuOptions = {
-    avatarUrl: 'broken-link',
+    avatarUrl: 'https://avatar.example.com/broken-image-link.png',
     email: 'modus_user@trimble.com',
     initials: 'MU',
     username: 'Modus User',
@@ -292,6 +370,7 @@ const setJavascriptDataTemplate = (containerId) => {
         {
           id:'home-menu',
           menuIcon: "${homeIcon}",
+          disabled: true,
           label: 'Home page 1',
           children: [
             {

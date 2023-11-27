@@ -1,7 +1,6 @@
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-navbar-storybook-docs.mdx';
 import { html } from 'lit-html';
-import { ModusNavbarButton } from '../../../../src/components/modus-navbar/modus-navbar.models';
 
 export default {
   title: 'Components/Navbar',
@@ -23,17 +22,17 @@ export default {
       },
     },
     profileMenuOptions: {
-      name: 'profileMenuOptions',
+      name: 'profile-menu-options',
       description: 'Set the options for profile menu',
       table: {
-        type: { summary: 'object' },
+        type: { summary: 'ModusProfileMenuOptions' },
       },
     },
     buttons: {
       name: 'buttons',
       description: 'To add icon buttons dynamically to the Navbar, create an array of ModusNavbarButton.',
       table: {
-        type: { summary: 'object' },
+        type: { summary: 'ModusNavbarButton[]' },
       },
     },
   },
@@ -59,7 +58,6 @@ const Template = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay
     enable-search-overlay=${enableSearchOverlay}
     show-search=${showSearch}
     show-apps-menu
-    show-help
     show-main-menu>
     <div slot="main" style="height:300px;">Render your own main menu.</div>
 
@@ -78,9 +76,28 @@ Default.args = {
     email: 'modus_user@trimble.com',
     initials: 'MU',
     username: 'Modus User',
+    links:[
+      {
+      id: "link1",
+      display: "Link 1",
+      icon: "moon"
+      },
+      {
+        id: "link2",
+        display: "Link 2",
+        icon: "sun"
+        }
+    ],
+    tooltip: {
+      text: 'User Profile Menu',
+    }
   },
   buttons: [
-    { id: 'addMenu', icon: 'add' },
+    { id: 'addMenu', icon: 'add',
+      tooltip: {
+        text: 'Add',
+      }
+    },
     { id: 'notificationMenu', icon: 'notifications' },
   ],
   showSearch: false,
@@ -152,12 +169,12 @@ const setNavbar = (
   profileMenuOptions,
   logoUrl = '',
   iconUrl = '',
-  buttons: ModusNavbarButton[]
+  buttons: []
 ) => {
   const tag = document.createElement('script');
   profileMenuOptions.avatarUrl = workingAvatar
     ? 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0e738c17-7f3c-422e-8225-f8c782b08626/d9pordj-43d4aa59-54b0-46a1-a568-e36dd691cf27.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzBlNzM4YzE3LTdmM2MtNDIyZS04MjI1LWY4Yzc4MmIwODYyNlwvZDlwb3Jkai00M2Q0YWE1OS01NGIwLTQ2YTEtYTU2OC1lMzZkZDY5MWNmMjcucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.xvDk9KFIUAx0yAG3BPamDfRqmWUX6zwR4WVW40GjsoY'
-    : 'broken-link';
+    : 'https://avatar.example.com/broken-image-link.png';
 
   tag.innerHTML = `
 document.querySelectorAll('modus-list-item').forEach(i => i.style.setProperty('--modus-list-item-border-color', 'transparent'));

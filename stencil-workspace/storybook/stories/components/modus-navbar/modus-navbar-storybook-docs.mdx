@@ -55,6 +55,18 @@ This component utilizes the slot element, allowing you to render your own HTML i
     email: 'modus_user@trimble.com',
     initials: 'MU',
     username: 'Modus User',
+    links: [
+      {
+        id: "link1",
+        display: "Link 1",
+        icon: "moon"
+      },
+      {
+        id: "link2",
+        display: "Link 2",
+        icon: "sun"
+      }
+    ]
   };
   element.buttons = [
     { id:'addMenu', icon: 'add' },
@@ -96,7 +108,7 @@ This component utilizes the slot element, allowing you to render your own HTML i
     secondary: { url: 'https://modus.trimble.com/favicon.svg', height: 24 },
   };
   element.profileMenuOptions = {
-    avatarUrl: 'broken-link',
+    avatarUrl: 'https://avatar.example.com/broken-image-link.png',
     email: 'modus_user@trimble.com',
     initials: 'MU',
     username: 'Modus User',
@@ -140,7 +152,7 @@ Use the `variant` prop to choose a blue background navbar.
     secondary: { url: 'https://modus.trimble.com/favicon.svg', height: 24 },
   };
   element.profileMenuOptions = {
-    avatarUrl: 'broken-link',
+    avatarUrl: 'https://avatar.example.com/broken-image-link.png',
     email: 'modus_user@trimble.com',
     initials: 'MU',
     username: 'Modus User',
@@ -163,6 +175,7 @@ interface ModusNavbarApp {
 interface ModusNavbarProfileMenuLink {
   display: string;
   id: string;
+  icon?: string;
 }
 
 interface ModusNavbarLogo {

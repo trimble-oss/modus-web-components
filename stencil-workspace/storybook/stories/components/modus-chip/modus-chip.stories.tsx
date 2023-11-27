@@ -79,6 +79,13 @@ export default {
         type: { summary: 'string' },
       },
     },
+    maxWidth: {
+      description: "Chip text's maximum width",
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: '100px' },
+      },
+    }
   },
   parameters: {
     controls: { expanded: true },
@@ -104,6 +111,7 @@ export const Default = ({
   showClose,
   size,
   value,
+  maxWidth,
 }) => html`
   <modus-chip
     aria-label=${ariaLabel}
@@ -114,6 +122,7 @@ export const Default = ({
     show-checkmark=${showCheckmark}
     show-close=${showClose}
     size=${size}
+    max-width=${maxWidth}
     value=${value}>
   </modus-chip>
 `;
@@ -127,6 +136,7 @@ Default.args = {
   showClose: false,
   size: 'medium',
   value: 'Bryan',
+  maxWidth:'100px'
 };
 
 export const Outline = ({
@@ -139,6 +149,7 @@ export const Outline = ({
   showClose,
   size,
   value,
+  maxWidth,
 }) => html`
   <modus-chip
     aria-label=${ariaLabel}
@@ -149,7 +160,8 @@ export const Outline = ({
     show-checkmark=${showCheckmark}
     show-close=${showClose}
     size=${size}
-    value=${value}>
+    value=${value}
+    max-width=${maxWidth}>
   </modus-chip>
 `;
 Outline.args = {
@@ -162,4 +174,5 @@ Outline.args = {
   showClose: false,
   size: 'medium',
   value: 'Bryan',
+  maxWidth:'100px'
 };

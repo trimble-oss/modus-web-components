@@ -2,19 +2,17 @@ import {
   FunctionalComponent,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
-import { Header, Table } from '@tanstack/table-core';
+import { Header } from '@tanstack/table-core';
 import { KEYBOARD_ENTER } from '../../modus-table.constants';
 import { ModusTableColumnResizingHandler } from './modus-table-column-resizing-handler';
-import { ModusTableHeaderSort } from './modus-table-header-sort';
+import { ModusTableColumnSortIcon } from './modus-table-column-sort-icon';
+import { TableContext } from '../../models/table-context.models';
 
-interface ModusTableHeaderProps {
-  table: Table<unknown>;
+interface ModusTableColumnHeaderProps {
+  context: TableContext;
   header: Header<unknown, unknown>;
+  id: string;
   isNestedParentHeader: boolean;
-  showSortIconOnHover: boolean;
-  columnReorder: boolean;
-  isColumnResizing: boolean;
-  frozenColumns: string[];
   onDragStart: (
     event: MouseEvent | KeyboardEvent,
     id: string,
@@ -28,23 +26,22 @@ interface ModusTableHeaderProps {
 /**
  * Modus Table Header
  */
-export const ModusTableHeader: FunctionalComponent<ModusTableHeaderProps> = ({
-  table,
+export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderProps> = ({
+  id,
+  context,
   header,
   isNestedParentHeader,
-  showSortIconOnHover,
-  columnReorder,
-  isColumnResizing,
-  frozenColumns,
   onDragStart,
   onMouseEnterResize,
   onMouseLeaveResize,
 }) => {
   let elementRef: HTMLTableCellElement;
-  const { column, id, colSpan, isPlaceholder, getSize } = header;
+  const { tableInstance: table, isColumnResizing, columnReorder, frozenColumns, showSortIconOnHover } = context;
+  const { column, id: headerId, colSpan, isPlaceholder, getSize } = header;
 
   return (
     <th
+      data-accessor-key={headerId}
       tabindex={`${!isColumnResizing && columnReorder ? '0' : ''}`}
       key={id}
       colSpan={colSpan}
@@ -57,8 +54,9 @@ export const ModusTableHeader: FunctionalComponent<ModusTableHeaderProps> = ({
        */
       class={`
         ${isNestedParentHeader ? 'text-align-center' : ''}
-        ${frozenColumns.includes(id) ? 'sticky-left' : ''}
+        ${frozenColumns.includes(headerId) ? 'sticky-left' : ''}
         ${column.getIsResizing() ? 'active-resize' : ''}
+        ${columnReorder ? 'hide-text-selection' : ''}
       `}
       style={{
         width: `${getSize()}px`,
@@ -68,17 +66,18 @@ export const ModusTableHeader: FunctionalComponent<ModusTableHeaderProps> = ({
       scope="col"
       id={id}
       ref={(element: HTMLTableCellElement) => (elementRef = element)}
-      onMouseDown={(event: MouseEvent) => onDragStart(event, id, elementRef, true)}
+      onMouseDown={(event: MouseEvent) => onDragStart(event, headerId, elementRef, true)}
       onKeyDown={(event: KeyboardEvent) => {
         if (event.key.toLowerCase() === KEYBOARD_ENTER) {
-          onDragStart(event, id, elementRef, false);
+          onDragStart(event, headerId, elementRef, false);
         }
-      }}>
+      }}
+      >
       {isPlaceholder ? null : ( // header.isPlaceholder is Required for nested column headers to display empty cell
         <div class={column.getCanSort() && 'can-sort'}>
           <span>{column.columnDef.header}</span>
           {column.getCanSort() && (
-            <ModusTableHeaderSort
+            <ModusTableColumnSortIcon
               column={column}
               showSortIconOnHover={showSortIconOnHover}
               isColumnResizing={isColumnResizing}

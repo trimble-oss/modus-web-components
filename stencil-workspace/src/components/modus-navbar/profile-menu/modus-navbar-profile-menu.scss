@@ -4,23 +4,24 @@
   @include custom-navbar-menu;
 
   align-items: center;
+  background-color: $menu-background-color;
   cursor: default;
-  max-width: 19rem;
   padding: 0;
-  width: fit-content;
+  width: 19rem;
 
   .user {
     align-items: center;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    padding: $rem-20px $rem-20px 0 $rem-20px;
+    padding: $rem-16px $rem-24px 0 $rem-24px;
 
     .avatar,
     .initials {
       background-color: $modus-navbar-icon-color;
       border-radius: 50%;
       height: 6rem;
-      margin: 0 $rem-16px $rem-20px 0;
+      margin-bottom: $rem-16px;
       user-select: none;
       width: 6rem;
     }
@@ -35,15 +36,21 @@
     }
 
     .username {
+      align-items: center;
+      display: flex;
       font-size: $rem-16px;
       font-weight: $font-weight-semi-bold;
+      justify-content: center;
       max-width: 10rem;
       overflow-wrap: break-word;
       padding: 0 $rem-4px;
     }
 
     .email {
+      align-items: center;
+      display: flex;
       font-size: $rem-12px;
+      justify-content: center;
       margin-bottom: $rem-16px;
       max-width: 10rem;
       overflow-wrap: break-word;
@@ -62,28 +69,23 @@
   }
 
   .links {
-    font-size: $rem-14px;
+    cursor: pointer;
     margin-bottom: $rem-12px;
     max-width: 19rem;
     user-select: none;
     width: 100%;
 
-    .link {
-      cursor: pointer;
-      overflow: hidden;
-      padding: $rem-10px $rem-20px;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+    .link-item {
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+    }
 
-      @media (hover: hover) {
-        &:hover {
-          background-color: $modus-navbar-icon-hover-bg;
-        }
-      }
-
-      &:active {
-        background-color: $modus-navbar-icon-active-bg;
-      }
+    .icon {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      margin-right: $rem-16px;
     }
   }
 
@@ -96,7 +98,7 @@
       color: $modus-navbar-profile-menu-sign-out-color;
       cursor: pointer;
       font-size: $rem-14px;
-      padding: $rem-10px $rem-20px;
+      padding: $rem-10px $rem-16px;
 
       @media (hover: hover) {
         &:hover {

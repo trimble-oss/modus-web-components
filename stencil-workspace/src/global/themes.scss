@@ -380,7 +380,8 @@
   --modus-table-readonly-bg: var(--modus-gray-0);
   --modus-table-readonly-color: var(--modus-table-color);
   --modus-table-body-color: var(--modus-gray-10);
-  --modus-table-cell-link-colour: var(--modus-link-color);
+  --modus-table-cell-link-color: var(--modus-link-color);
+  --modus-table-cell-border-color: var(--modus-link-color);
 
   // Tooltips
   --modus-tooltip-bg: var(--modus-gray-7);
@@ -429,6 +430,7 @@
   --modus-backdrop-bg: #000000bf;
   --modus-chevron-color: var(--modus-gray-5);
   --modus-highlight-blue-color: var(--modus-blue);
+  --modus-link-color: var(--modus-blue);
 
   // Accordion
   --modus-accordion-item-header-hover-bg: var(--modus-gray-8);
@@ -520,7 +522,7 @@
   --modus-icon-colour: var(--modus-gray-light);
 
   // Input
-  --modus-input-bg: var(--modus-trimble-gray);
+  --modus-input-bg: var(--modus-gray-10);
   --modus-input-color: var(--modus-body-color);
   --modus-input-border-color: var(--modus-gray-8);
   --modus-input-bottom-line-active-color: var(--modus-highlight-blue-color);
@@ -534,6 +536,9 @@
   --modus-input-disabled-bottom-line-color: #90939f66;
   --modus-input-disabled-border-color: #464b5266;
   --modus-input-disabled-color: #7d808d66;
+
+  // Input read-only
+  --modus-input-readonly-bg: #353a40;
 
   // Checkbox and Radio button Inputs
   --modus-check-input-bg: transparent;
@@ -621,6 +626,8 @@
   --modus-navbar-bg: var(--modus-gray-10);
   --modus-navbar-brand-logo-filter: brightness(9999%) saturate(0);
   --modus-navbar-icon-color: var(--modus-body-color);
+  --modus-navbar-popup-bg: var(--modus-gray-10);
+  --modus-navbar-popup-border-color: var(--modus-gray-8);
 
   // Hover
   --modus-navbar-icon-hover-bg: var(--modus-gray-4);
@@ -633,7 +640,7 @@
   // Profile
   --modus-navbar-profile-icon-initials-color: #1a2022;
   --modus-navbar-profile-icon-active-border-color: var(--modus-gray-6);
-  --modus-navbar-profile-menu-sign-out-background-color: var(--modus-dark);
+  --modus-navbar-profile-menu-sign-out-background-color: var(--modus-gray-9);
 
   // Pagination
   --modus-pagination-color: var(--modus-gray-2);
@@ -711,7 +718,8 @@
   --modus-table-readonly-bg: var(--modus-table-bg);
   --modus-table-readonly-color: var(--modus-gray-2);
   --modus-table-body-color: var(--modus-white);
-  --modus-table-cell-link-colour: var(--modus-blue-4);
+  --modus-table-cell-link-color: var(--modus-blue-4);
+  --modus-table-cell-border-color: var(--modus-blue-4);
 
   // Tooltip
   --modus-tooltip-bg: var(--modus-gray-0);
@@ -923,6 +931,7 @@ modus-data-table {
 
 modus-table {
   @include modus-checkbox;
+  @include modus-list-item;
 }
 
 modus-file-dropzone {
@@ -1013,4 +1022,12 @@ modus-side-navigation {
   --modus-side-navigation-item-icon-active-color: var(--modus-side-navigation-item-active-color);
   --modus-side-navigation-item-icon-active-filter: invert(95%) sepia(100%) saturate(0%) hue-rotate(151deg) brightness(104%)
     contrast(105%);
+}
+
+modus-navbar {
+  @include modus-list-item;
+}
+
+modus-navbar-profile-menu {
+  @include modus-list-item;
 }
