@@ -394,7 +394,6 @@ describe('modus-table', () => {
     const component = await page.find('modus-table');
 
     component.setProperty('columns', MockColumns);
-    component.setProperty('manualPaginationOptions', {});
     component.setProperty('data', MockData);
     component.setProperty('pagination', false);
 

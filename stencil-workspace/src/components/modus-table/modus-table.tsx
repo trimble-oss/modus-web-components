@@ -152,9 +152,9 @@ export class ModusTable {
     oldVal: ModusTableManualPaginationOptions
   ) {
     if (
-      newVal.pageCount !== oldVal.pageCount ||
-      newVal.currentPageIndex !== oldVal.currentPageIndex ||
-      newVal.currentPageSize !== oldVal.currentPageSize
+      newVal?.pageCount !== oldVal?.pageCount ||
+      newVal?.currentPageIndex !== oldVal?.currentPageIndex ||
+      newVal?.currentPageSize !== oldVal?.currentPageSize
     ) {
       this.tableCore.setOptions('pageCount', newVal.pageCount);
       this.manualPaginationOptions = { ...newVal };
@@ -169,7 +169,7 @@ export class ModusTable {
   ) {
     if (newVal?.currentSortingState.length === 0) {
       if (oldVal && oldVal.currentSortingState.length > 0) {
-        this.tableCore.setOptions('manualPagination', true);
+        this.tableCore.setOptions('manualSorting', true);
         this.tableCore.setState('sorting', newVal.currentSortingState);
         this.manualSortingOptions = { ...newVal };
       }
@@ -177,7 +177,7 @@ export class ModusTable {
       newVal?.currentSortingState[0]?.id !== oldVal?.currentSortingState[0]?.id ||
       newVal?.currentSortingState[0]?.desc !== oldVal?.currentSortingState[0]?.desc
     ) {
-      this.tableCore.setOptions('manualPagination', true);
+      this.tableCore.setOptions('manualSorting', true);
       this.tableCore.setState('sorting', newVal.currentSortingState);
       this.manualSortingOptions = { ...newVal };
     }
