@@ -1,12 +1,12 @@
 // Default Start
-$modus-sentiment-bg: var(--modus-sentiment-bg, #cbcdd6) !default;
-$modus-sentiment-color: var(--modus-sentiment-color, #353a40) !default;
-$modus-sentiment-disabled-opacity: var(--modus-sentiment-disabled-opacity, 0.3) !default;
+$modus-sentiment-scale-bg: var(--modus-sentiment-scale-bg) !default;
 
 // Hover
-$modus-sentiment-hover-bg: var(--modus-sentiment-scale-smiley-hover-bg, #0063a3) !default;
-$modus-sentiment-hover-color: var(--modus-sentiment-hover-color, #019aeb) !default;
+$modus-sentiment-scale-hover-bg: var(--modus-sentiment-scale-hover-bg) !default;
 
 // Active
-$modus-sentiment-scale-active-bg: var(--modus-sentiment-scale-active-bg, #217cbb4d) !default;
-$modus-sentiment-scale-active-color: var(--modus-sentiment-scale-active-color, #019aeb) !default;
+$modus-sentiment-scale-selected-bg: var(--modus-sentiment-scale-selected-bg) !default;
+
+// Disabled
+$modus-sentiment-scale-disabled-color: var(--modus-sentiment-scale-disabled-color) !default;
+$modus-sentiment-scale-disabled-opacity: var(--modus-sentiment-scale-disabled-opacity) !default;

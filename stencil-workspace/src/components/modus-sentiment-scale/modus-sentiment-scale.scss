@@ -8,7 +8,12 @@
   display: flex;
 
   .icon-container {
+    color: $modus-sentiment-scale-bg;
     cursor: pointer;
+
+    &.selected {
+      color: $modus-sentiment-scale-selected-bg;
+    }
   }
 
   .smileys-container {
@@ -29,7 +34,7 @@
   }
 
   .disabled {
-    opacity: 0.3;
+    opacity: $modus-sentiment-scale-disabled-opacity;
 
     svg {
       &:hover {
@@ -54,7 +59,7 @@
     svg {
       &:hover {
         path {
-          fill: #0063a3;
+          fill: $modus-sentiment-scale-hover-bg;
         }
       }
     }
@@ -63,13 +68,13 @@
   svg {
     &:focus {
       path {
-        fill: #0063a3;
+        fill: $modus-sentiment-scale-hover-bg;
       }
     }
 
     &:hover {
       path {
-        fill: #0063a3;
+        fill: $modus-sentiment-scale-hover-bg;
       }
     }
   }

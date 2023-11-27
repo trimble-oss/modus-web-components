@@ -387,6 +387,12 @@
   --modus-tooltip-bg: var(--modus-gray-7);
   --modus-tooltip-color: var(--modus-white);
 
+  // Sentiment Scale
+  --modus-sentiment-scale-bg: #252a2e;
+  --modus-sentiment-scale-hover-bg: #0063a3;
+  --modus-sentiment-scale-selected-bg: #0063a3;
+  --modus-sentiment-scale-disabled-opacity: 0.3;
+
   // Side Navigation
   --modus-side-navigation-bg: var(--modus-body-bg);
   --modus-side-navigation-item-hover-bg: var(--modus-gray-0);
@@ -721,6 +727,12 @@
   // Tooltip
   --modus-tooltip-bg: var(--modus-gray-0);
   --modus-tooltip-color: var(--modus-trimble-gray);
+
+  // Sentiment Scale
+  --modus-sentiment-scale-bg: #90939f;
+  --modus-sentiment-scale-hover-bg: #019aeb;
+  --modus-sentiment-scale-selected-bg: #019aeb;
+  --modus-sentiment-scale-disabled-opacity: 0.3;
 
   // Side Navigation
   --modus-side-navigation-bg: var(--modus-gray-10);

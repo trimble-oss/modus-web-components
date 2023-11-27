@@ -86,6 +86,10 @@ export class ModusSentimentScale {
         {iconKeys &&
           iconKeys.map((buttonIcon: string) => {
             let ariaSelected = false;
+            const isIconSelected = buttonIcon === this.getType(this.selectedIcon);
+            const containerClass = `${this.type + '-container'} ${this.disabled ? ' disabled' : ''} ${
+              isIconSelected ? 'selected' : ''
+            }`;
             if (buttonIcon == this.getType(this.selectedIcon)) {
               ariaSelected = true;
             } else {
@@ -98,7 +102,7 @@ export class ModusSentimentScale {
                 aria-selected={ariaSelected}
                 role="button"
                 tabIndex={0}
-                class={`icon-container ${this.type + '-container'} ${this.disabled ? ' disabled' : ''}`}
+                class={`icon-container ${containerClass}`}
                 onClick={() => this.handleSentimentClick(buttonIcon)}
                 onKeyDown={(event) => this.handleKeyDown(event, buttonIcon)}>
                 <IconMap icon={buttonIcon} size={`${this.type === THUMB_ICONS ? '56' : '24'}`}></IconMap>
