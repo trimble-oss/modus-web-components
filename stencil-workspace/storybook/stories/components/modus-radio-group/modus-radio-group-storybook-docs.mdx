@@ -14,7 +14,6 @@ A new TypeScript typing has been provided named RadioButton defined as:
   disabled?: boolean;
   id: string;
   label: string;
-  size?: 'small' | 'default';
 }
 ```
 
@@ -36,7 +35,6 @@ A new TypeScript typing has been provided named RadioButton defined as:
       id: '1',
       checked: true,
       label: 'Radio 2',
-      size:'small'
     },
     {
       id: '2',
@@ -50,7 +48,7 @@ A new TypeScript typing has been provided named RadioButton defined as:
 <Story id="components-radio-group--small" height={'150px'} />
 
 ```html
-<modus-radio-group checked-id="1" name="my-group-small"></modus-radio-group>
+<modus-radio-group checked-id="1" size="small" name="my-group-small"></modus-radio-group>
 
 <script>
   const modusRadioGroup = document.querySelector('modus-radio-group');
@@ -58,18 +56,15 @@ A new TypeScript typing has been provided named RadioButton defined as:
     {
       id: '0',
       label: 'Radio 1',
-      size:'small'
     },
     {
       id: '1',
       checked: true,
       label: 'Radio 2',
-      size:'small'
     },
     {
       id: '2',
       label: 'Radio 3',
-      size:'small'
     },
   ];
 </script>

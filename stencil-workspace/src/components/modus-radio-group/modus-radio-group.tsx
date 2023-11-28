@@ -59,7 +59,7 @@ export class ModusRadioGroup {
         {this.radioButtons.map((radioButton) => {
           return (
             <ModusRadioButton
-              size={radioButton.size}
+              size={this.size}
               checked={radioButton.checked}
               disabled={radioButton.disabled}
               label={radioButton.label}

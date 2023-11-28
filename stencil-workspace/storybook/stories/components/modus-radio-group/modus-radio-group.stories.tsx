@@ -24,7 +24,7 @@ const Template = () => html`
   ${setRadioGroup()}
 `;
 const smallTemplate = () => html`
-  <modus-radio-group checked-id="1" name="my-group-small"></modus-radio-group>
+  <modus-radio-group checked-id="1" size="small" name="my-group-small"></modus-radio-group>
   ${setSmallRadioGroup()}
 `;
 export const Default = Template.bind({});
@@ -60,18 +60,15 @@ const setSmallRadioGroup = () => {
       {
         id: '0',
         label: 'Radio 1',
-        size:'small'
       },
       {
         checked: true,
         id: '1',
         label: 'Radio 2',
-        size:'small'
       },
       {
         id: '2',
         label: 'Radio 3',
-        size:'small'
       }
     ];
   `;

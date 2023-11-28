@@ -63,7 +63,7 @@ describe('modus-radio-group', () => {
     expect(await inputs[0].getProperty('checked')).toBeFalsy();
     expect(await inputs[0].getProperty('disabled')).toBeFalsy();
 
-    radioButtons = [{ id: '2', label: 'Option 2', checked: true, disabled: true, size: 'small' }];
+    radioButtons = [{ id: '2', label: 'Option 2', checked: true, disabled: true }];
     component.setProperty('radioButtons', radioButtons);
     await page.waitForChanges();
 
@@ -78,8 +78,8 @@ describe('modus-radio-group', () => {
     await page.setContent('<modus-radio-group></modus-radio-group>');
     const component = await page.find('modus-radio-group');
     const radioButtons: RadioButton[] = [
-      { id: '1', label: 'Option 1', checked: true, size: 'small' },
-      { id: '2', label: 'Option 2', size: 'default' },
+      { id: '1', label: 'Option 1', checked: true },
+      { id: '2', label: 'Option 2' },
     ];
     component.setProperty('radioButtons', radioButtons);
     await page.waitForChanges();
@@ -136,11 +136,11 @@ describe('modus-radio-group', () => {
   it('applies "small" size class if size prop is set to "small"', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<modus-radio-group></modus-radio-group>');
+    await page.setContent('<modus-radio-group size="small"></modus-radio-group>');
     const component = await page.find('modus-radio-group');
     const radioButtons: RadioButton[] = [
-      { id: '1', label: 'Option 1', checked: true, size: 'small' },
-      { id: '2', label: 'Option 2', size: 'default' },
+      { id: '1', label: 'Option 1', checked: true },
+      { id: '2', label: 'Option 2' },
     ];
     component.setProperty('radioButtons', radioButtons);
     await page.waitForChanges();
@@ -148,6 +148,6 @@ describe('modus-radio-group', () => {
     const elements = await page.findAll('modus-radio-group >>> .modus-radio-button .checkmark');
 
     expect(elements[0]).toHaveClass('small');
-    expect(elements[1]).not.toHaveClass('small');
+    expect(elements[1]).toHaveClass('small');
   });
 });
