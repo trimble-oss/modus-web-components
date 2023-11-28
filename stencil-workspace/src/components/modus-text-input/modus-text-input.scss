@@ -36,7 +36,9 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
-    height: 2rem;
+    height: auto;
+    max-lines: 4;
+    min-height: 2rem;
     margin: 0;
     padding: 0;
     position: relative;
@@ -49,15 +51,29 @@
         fill: $modus-input-helper-icon-color;
       }
     }
+    .chips-container {
+      display: flex;
+      width: 100%;
+      height: auto;
+      flex-wrap: wrap;
+      color: #fff;
+      border-radius: 0px;
+      margin: 0px;
+      padding: 0;
+
+      overflow: hidden;
+      modus-chip {
+        margin-right: 4px;
+      }
+    }
 
     input {
-      background-color: transparent;
-      border: none;
       color: $modus-input-color;
       font-size: $rem-12px;
+      flex: 1;
       outline: none;
       padding: 0 $rem-8px;
-      width: 100%;
+      border: none;
 
       &.has-left-icon {
         padding-left: 0;

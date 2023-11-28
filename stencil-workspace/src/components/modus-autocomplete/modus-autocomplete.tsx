@@ -29,6 +29,12 @@ const DATA_SEARCH_VALUE = 'data-search-value';
 export class ModusAutocomplete {
   @Element() el: HTMLElement;
 
+  /** An array to hold the selected chips. */
+  @State() selectedChips: string[] = [];
+
+  /** Add Chip while selecting. */
+  @Prop() addChip: boolean;
+
   /** The autocomplete's aria label. */
   @Prop() ariaLabel: string | null;
 
@@ -143,16 +149,29 @@ export class ModusAutocomplete {
 
   displayOptions = () => this.hasFocus && this.value?.length > 0 && !this.disabled;
 
+  addChipValue(value: string) {
+    // Emit an event to notify the parent to add a chip with the selected value
+    this.valueChange.emit(value);
+    this.selectedChips = [...this.selectedChips, value];
+  }
   handleCustomOptionClick = (option: any) => {
     const optionValue = option.getAttribute(DATA_SEARCH_VALUE);
     const optionId = option.getAttribute(DATA_ID);
-    this.handleSearchChange(optionValue);
+    if (this.addChip) {
+      this.addChipValue(optionValue);
+    } else {
+      this.handleSearchChange(optionValue);
+    }
     this.hasFocus = false;
     this.optionSelected.emit(optionId);
   };
 
   handleOptionClick = (option: ModusAutocompleteOption) => {
-    this.handleSearchChange(option.value);
+    if (this.addChip) {
+      this.addChipValue(option.value);
+    } else {
+      this.handleSearchChange(option.value);
+    }
     this.hasFocus = false;
     this.optionSelected.emit(option.id);
   };
@@ -210,6 +229,7 @@ export class ModusAutocomplete {
 
   TextInput = () => (
     <modus-text-input
+      selectedChips={this.selectedChips}
       clearable={this.clearable}
       errorText={this.hasFocus ? '' : this.errorText}
       includeSearchIcon={this.includeSearchIcon}
