@@ -30,9 +30,9 @@
     width: $rem-18px;
 
     &.small {
+      border-radius: 1.5px;
       height: $rem-12px;
       width: $rem-12px;
-      border-radius: 1.5px;
     }
 
     &:focus,
