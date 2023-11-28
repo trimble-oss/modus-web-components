@@ -107,11 +107,11 @@ export class ModusCheckbox {
           {this.indeterminate ? (
             <div class={'checkmark checked'}>
               {' '}
-              <IconIndeterminate color="#FFFFFF" size={this.size === 'small' ? '12' : '16'} />
+              <IconIndeterminate color="#FFFFFF" size={this.size === 'small' ? '16' : '26'} />
             </div>
           ) : (
             <div class={this.checked ? 'checkmark checked' : 'checkmark'}>
-              <IconCheck color="#FFFFFF" size={this.size === 'small' ? '12' : '16'} />
+              <IconCheck color="#FFFFFF" size={this.size === 'small' ? '16' : '26'} />
             </div>
           )}
         </div>
