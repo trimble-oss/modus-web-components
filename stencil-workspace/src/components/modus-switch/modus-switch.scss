@@ -5,7 +5,7 @@
   display: inline-flex;
   flex-direction: row;
   font-family: $primary-font;
-  font-size: $rem-12px;
+  font-size: $rem-14px;
   outline: none;
 
   .switch {
@@ -91,6 +91,10 @@
   label {
     color: $modus-switch-label-color;
     margin-left: $rem-8px;
+
+    &.small {
+      font-size: $rem-12px;
+    }
   }
 
   &.disabled {

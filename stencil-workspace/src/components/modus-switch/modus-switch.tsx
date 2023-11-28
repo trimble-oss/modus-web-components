@@ -77,7 +77,7 @@ export class ModusSwitch {
           ref={(el) => (this.checkboxInput = el as HTMLInputElement)}
           role="switch"
           type="checkbox"></input>
-        {this.label ? <label>{this.label}</label> : null}
+        {this.label ? <label class={`${this.size}` || ''}>{this.label}</label> : null}
       </div>
     );
   }
