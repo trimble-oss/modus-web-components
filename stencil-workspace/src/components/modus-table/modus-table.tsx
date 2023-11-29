@@ -157,6 +157,10 @@ export class ModusTable {
       newVal?.currentPageSize !== oldVal?.currentPageSize
     ) {
       this.tableCore?.setOptions('pageCount', newVal.pageCount);
+      this.tableCore?.setState('pagination', {
+        pageIndex: newVal.currentPageIndex - 1,
+        pageSize: newVal.currentPageSize
+      });
       this.manualPaginationOptions = { ...newVal };
     }
   }
