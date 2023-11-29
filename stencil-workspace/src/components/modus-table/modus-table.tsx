@@ -156,7 +156,7 @@ export class ModusTable {
       newVal?.currentPageIndex !== oldVal?.currentPageIndex ||
       newVal?.currentPageSize !== oldVal?.currentPageSize
     ) {
-      this.tableCore.setOptions('pageCount', newVal.pageCount);
+      this.tableCore?.setOptions('pageCount', newVal.pageCount);
       this.manualPaginationOptions = { ...newVal };
     }
   }
@@ -169,16 +169,16 @@ export class ModusTable {
   ) {
     if (newVal?.currentSortingState.length === 0) {
       if (oldVal && oldVal.currentSortingState.length > 0) {
-        this.tableCore.setOptions('manualSorting', true);
-        this.tableCore.setState('sorting', newVal.currentSortingState);
+        this.tableCore?.setOptions('manualSorting', true);
+        this.tableCore?.setState('sorting', newVal.currentSortingState);
         this.manualSortingOptions = { ...newVal };
       }
     } else if (
       newVal?.currentSortingState[0]?.id !== oldVal?.currentSortingState[0]?.id ||
       newVal?.currentSortingState[0]?.desc !== oldVal?.currentSortingState[0]?.desc
     ) {
-      this.tableCore.setOptions('manualSorting', true);
-      this.tableCore.setState('sorting', newVal.currentSortingState);
+      this.tableCore?.setOptions('manualSorting', true);
+      this.tableCore?.setState('sorting', newVal.currentSortingState);
       this.manualSortingOptions = { ...newVal };
     }
   }
