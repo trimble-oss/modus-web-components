@@ -13,7 +13,7 @@
   flex-direction: row;
   font-family: $primary-font;
   font-size: $rem-14px;
-  height: $rem-18px;
+  height: $rem-14px;
   text-align: center;
   white-space: nowrap;
 
@@ -23,16 +23,16 @@
     border: $rem-2px solid $modus-checkbox-border-color;
     border-radius: 1.75px;
     display: flex;
-    height: $rem-18px;
+    height: $rem-16px;
     justify-content: center;
     margin: 0 0.28rem;
     transition: background-color 0.15s ease-in-out;
-    width: $rem-18px;
+    width: $rem-16px;
 
     &.small {
       border-radius: 1.5px;
-      height: $rem-12px;
-      width: $rem-12px;
+      height: $rem-10px;
+      width: $rem-10px;
     }
 
     &:focus,
