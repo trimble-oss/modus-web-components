@@ -13,7 +13,7 @@ export default {
       },
    },
  disabled: {
-   description: 'Whether the chip is disabled',
+   description: 'Whether the sentiment-scale is disabled',
    table: {
      defaultValue: { summary: false },
      type: { summary: 'boolean' },

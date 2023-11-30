@@ -2,8 +2,8 @@ export const SMILEY_ICONS = 'smileys';
 export const THUMB_ICONS = 'thumbs';
 
 export const MODUS_SENTIMENT_CONSTANTS_THUMB = new Map([
-  ['thumbs-up', 'Thumbs Up'],
-  ['thumbs-down', 'Thumbs Down'],
+  ['thumbs-up', 'Helpful'],
+  ['thumbs-down', 'Not helpful'],
 ]);
 
 export const MODUS_SENTIMENT_CONSTANTS_SMILEYS = new Map([

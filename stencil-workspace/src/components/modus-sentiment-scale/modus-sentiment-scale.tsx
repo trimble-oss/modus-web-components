@@ -105,7 +105,7 @@ export class ModusSentimentScale {
                 class={`icon-container ${containerClass}`}
                 onClick={() => this.handleSentimentClick(buttonIcon)}
                 onKeyDown={(event) => this.handleKeyDown(event, buttonIcon)}>
-                <IconMap icon={buttonIcon} size={`${this.type === THUMB_ICONS ? '56' : '24'}`}></IconMap>
+                <IconMap icon={buttonIcon} size={`${this.type === THUMB_ICONS ? '32' : '24'}`}></IconMap>
               </div>
             );
           })}
