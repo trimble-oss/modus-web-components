@@ -20,12 +20,15 @@ import {
   COLUMN_DEF_DATATYPE_LINK,
   KEYBOARD_ENTER,
   KEYBOARD_ESCAPE,
+  COLUMN_DEF_DATATYPE_BADGE,
 } from '../../../modus-table.constants';
 import NavigateTableCells from '../../../utilities/table-cell-navigation.utility';
 import { CellFormatter } from '../../../utilities/table-cell-formatter.utility';
 import { ModusTableCellLinkElement } from '../modus-table-cell-link-element';
 import { TableContext, TableCellEdited } from '../../../models/table-context.models';
 import ModusTableCellExpandIcons from '../modus-table-cell-expand-icons';
+import { ModusDataTableCellBadge } from '../../../../modus-data-table/modus-data-table.models';
+import { ModusDataTableCellBadgePart } from '../../../../modus-data-table//parts/modus-data-table-cell-badge-part';
 
 @Component({
   tag: 'modus-table-cell-main',
@@ -159,21 +162,34 @@ export class ModusTableCellMain {
       'text-align-right': cellDataType === COLUMN_DEF_DATATYPE_INTEGER,
     };
 
-    return (
-      <div class={classes}>
-        {this.hasRowsExpandable && <ModusTableCellExpandIcons row={row} />}
 
-        <span class="wrap-text">
-          {cellDataType === COLUMN_DEF_DATATYPE_LINK ? (
-            <ModusTableCellLinkElement
+    const renderCell = () => {
+      if(cellDataType === COLUMN_DEF_DATATYPE_LINK) {
+        return (
+          <ModusTableCellLinkElement
               link={cellValue as ModusTableCellLink}
               onLinkClick={(link: ModusTableCellLink) => {
                 cellLinkClick.emit(link);
               }}
             />
-          ) : (
-            CellFormatter(this.cell.column.columnDef.cell, this.cell.getContext())
-          )}
+        )
+      } else if(cellDataType === COLUMN_DEF_DATATYPE_BADGE) {
+        return (
+          <ModusDataTableCellBadgePart
+            badge={cellValue as ModusDataTableCellBadge }
+          />
+        )
+      } else {
+        return CellFormatter(this.cell.column.columnDef.cell, this.cell.getContext())
+      }
+    }
+
+    return (
+      <div class={classes}>
+        {this.hasRowsExpandable && <ModusTableCellExpandIcons row={row} />}
+
+        <span class="wrap-text">
+          {renderCell()}
         </span>
       </div>
     );

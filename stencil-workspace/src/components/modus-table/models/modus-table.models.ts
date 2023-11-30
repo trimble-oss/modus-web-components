@@ -15,6 +15,7 @@ import {
   COLUMN_DEF_DATATYPE_LINK,
   COLUMN_DEF_DATATYPE_TEXT,
   CELL_EDIT_TYPE_DROPDOWN,
+  COLUMN_DEF_DATATYPE_BADGE,
 } from '../modus-table.constants';
 
 export type ModusTableRowData = RowData;
@@ -30,7 +31,8 @@ export type ModusTableCellData = CellContext<unknown, unknown>;
 export type ModusTableColumnDataType =
   | typeof COLUMN_DEF_DATATYPE_TEXT
   | typeof COLUMN_DEF_DATATYPE_INTEGER
-  | typeof COLUMN_DEF_DATATYPE_LINK;
+  | typeof COLUMN_DEF_DATATYPE_LINK
+  | typeof COLUMN_DEF_DATATYPE_BADGE;
 // | typeof COLUMN_DEF_DATATYPE_DATE;
 
 export type ModusTableCellEditorType = typeof CELL_EDIT_TYPE_DROPDOWN;

@@ -24,3 +24,8 @@ $modus-badge-text-dark: var(--modus-badge-text-dark, #252a2e) !default;
 $modus-badge-text-success: var(--modus-badge-text-success, #006638) !default;
 $modus-badge-text-danger: var(--modus-badge-text-danger, #da212c) !default;
 $modus-badge-text-warning: var(--modus-badge-text-warning, #e49325) !default;
+
+// Badge Spacing
+$modus-badge-space-padding: var(--parent-space-padding, 0 8px) !default;
+$modus-badge-space-width: var(--parent-space-width, unset) !default;
+$modus-badge-space-justify: var(--parent-space-justify, unset) !default;

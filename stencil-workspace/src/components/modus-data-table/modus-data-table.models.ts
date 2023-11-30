@@ -9,8 +9,10 @@ export type TRow = {
 
 export interface ModusDataTableCellBadge {
   _type: 'badge'; // Used internally to identify the type of cell. Does not set the badge's type.
-  color?: 'danger' | 'dark' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning';
   text: string;
+  ariaLabel?: string;
+  size?: 'small' | 'medium' | 'large';
+  color?: 'danger' | 'dark' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning';
   type?: 'counter' | 'default' | 'text';
 }
 
