@@ -20,6 +20,8 @@ export interface ModusSentimentScaleItem {
   shadow: true,
 })
 export class ModusSentimentScale {
+  /** (optional) Tab Index for the checkbox */
+  @Prop() tabIndexValue = 0;
   /** (optional) The input's aria-label. */
   @Prop() ariaLabel: string | null;
   /** The type of icons to be displayed. */
@@ -80,6 +82,7 @@ export class ModusSentimentScale {
   }
 
   render() {
+    const tabIndexValue = this.disabled ? -1 : this.tabIndexValue;
     const iconKeys = Array.from(this.labelMap.keys());
     return (
       <div class="sentiment-scale-container" role="group" ref={(el) => (this.sentimentScaleElement = el)}>
@@ -101,7 +104,7 @@ export class ModusSentimentScale {
                 aria-label={this.labelMap.get(buttonIcon)}
                 aria-selected={ariaSelected}
                 role="button"
-                tabIndex={0}
+                tabIndex={tabIndexValue}
                 class={`icon-container ${containerClass}`}
                 onClick={() => this.handleSentimentClick(buttonIcon)}
                 onKeyDown={(event) => this.handleKeyDown(event, buttonIcon)}>
