@@ -25,13 +25,13 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
         const newData = [...old];
 
         // rowId is a string of IDs for rows with nested information like subrows.
-        const idArray: number[] = []
-        let currentRow = row
-        while(currentRow) {
-          idArray.push(currentRow["index"])
-          currentRow = currentRow["parent"]
+        const idArray: number[] = [];
+        let currentRow = row;
+        while (currentRow) {
+          idArray.push(currentRow['index']);
+          currentRow = currentRow['parent'];
         }
-        idArray.reverse()
+        idArray.reverse();
 
         if (idArray.length === 1) {
           newData[idArray[0]][accessorKey] = newValue;
@@ -53,7 +53,7 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
       {table.getRowModel()?.rows.map((row) => {
         const { getIsSelected, getIsAllSubRowsSelected, getVisibleCells, subRows, id } = row;
         const isChecked = getIsSelected() && (subRows?.length ? getIsAllSubRowsSelected() : true);
-        
+
         return (
           <tr key={id} class={{ 'enable-hover': hover, 'row-selected': isChecked }}>
             {rowSelection && (
