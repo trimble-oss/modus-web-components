@@ -576,7 +576,10 @@ export class ModusTable {
       this.tableCore
         .getTableInstance()
         .getSelectedRowModel()
-        .flatRows.map((row) => row.original)
+        .flatRows.map((row) => {
+          row.original['id'] = row.id
+          return row.original
+        })
     );
   }
 
