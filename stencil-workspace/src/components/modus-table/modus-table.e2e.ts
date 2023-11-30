@@ -583,6 +583,38 @@ describe('modus-table', () => {
     expect(cellLinkClickEvent).toHaveReceivedEventDetail(emailData);
   });
 
+  it('Renders Badge in cell', async () => {
+    page = await newE2EPage();
+
+    await page.setContent('<modus-table />');
+    const component = await page.find('modus-table');
+
+    const statusColumn = [
+      {
+        header: 'Status',
+        accessorKey: 'status',
+        id: 'status',
+        dataType: 'badge',
+      },
+    ];
+    const statusData = { 
+        size: 'medium', 
+        type: 'counter',
+        text: 'Verfied',
+        color: 'success'
+     };
+
+    component.setProperty('columns', statusColumn);
+    component.setProperty('data', [{ status: statusData }]);
+    await page.waitForChanges();
+
+    const cell = await page.find('modus-table >>> td');
+    const cellValue = cell.textContent;
+    
+    expect(cellValue).toEqual(statusData.text);
+    
+  });
+
   it('Performs keyboard navigation on cells with hyperlinks', async () => {
     page = await newE2EPage();
 
