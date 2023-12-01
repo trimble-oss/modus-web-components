@@ -577,8 +577,8 @@ export class ModusTable {
         .getTableInstance()
         .getSelectedRowModel()
         .flatRows.map((row) => {
-          row.original['id'] = row.id
-          return row.original
+          row.original['id'] = row.id;
+          return row.original;
         })
     );
   }
@@ -644,8 +644,8 @@ export class ModusTable {
     const tableStyle = this.fullWidth
       ? { width: '100%' }
       : totalSize > 0
-      ? { width: `${totalSize}px`, tableLayout: 'fixed' }
-      : { tableLayout: 'fixed' };
+        ? { width: `${totalSize}px`, tableLayout: 'fixed' }
+        : { tableLayout: 'fixed' };
 
     return (
       <table data-test-id="main-table" class={tableMainClass} style={tableStyle}>
