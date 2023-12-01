@@ -8,6 +8,42 @@
     margin: 0;
     padding: 0;
   }
+  .chips-container {
+    align-items: center;
+    background-color: $modus-input-bg;
+    border: $rem-1px solid $modus-autocomplete-container-border-color;
+    border-bottom-color: $modus-autocomplete-container-bottom-line-color;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 32px;
+    margin: 0;
+    padding: 4px;
+    position: relative;
+    width: 100%;
+
+    .input {
+      flex: 1;
+      display: flex;
+      height: auto !important;
+      position: relative;
+      max-lines: 2;
+
+      &::part(input-container) {
+        border: none !important;
+      }
+    }
+
+    .icons-clear {
+      align-items: center;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 8px;
+    }
+  }
 
   .options-container {
     background-color: $modus-autocomplete-options-background-color;
@@ -32,6 +68,10 @@
       &:hover {
         background-color: $modus-autocomplete-options-hover-background-color;
       }
+
+      &:focus {
+        background-color: $modus-autocomplete-options-hover-background-color;
+      }
     }
 
     .custom-option {
@@ -39,6 +79,10 @@
       cursor: pointer;
 
       &:hover {
+        background-color: $modus-autocomplete-options-hover-background-color;
+      }
+
+      &:focus {
         background-color: $modus-autocomplete-options-hover-background-color;
       }
     }

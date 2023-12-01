@@ -12,6 +12,7 @@ import {
   Watch,
 } from '@stencil/core';
 import { IconSearch } from '../icons/icon-search';
+import { IconClose } from '../icons/icon-close';
 
 export interface ModusAutocompleteOption {
   id: string;
@@ -31,6 +32,9 @@ export class ModusAutocomplete {
 
   /** An array to hold the selected chips. */
   @State() selectedChips: string[] = [];
+
+  /** Whether to show autocomplete's options when focus. */
+  @Prop() showOptionsOnFocus: boolean;
 
   /** Add Chip while selecting. */
   @Prop() addChip: boolean;
@@ -54,7 +58,7 @@ export class ModusAutocomplete {
   @Prop() errorText: string;
 
   /** Whether the search icon is included. */
-  @Prop() includeSearchIcon = true;
+  @Prop() includeSearchIcon = false;
 
   /** The autocomplete's label. */
   @Prop() label: string;
@@ -147,12 +151,17 @@ export class ModusAutocomplete {
     !this.visibleCustomOptions?.length &&
     this.value?.length > 0;
 
-  displayOptions = () => this.hasFocus && this.value?.length > 0 && !this.disabled;
+  displayOptions = () => {
+    const showOptions = this.showOptionsOnFocus || this.value?.length > 0;
+    return this.hasFocus && showOptions && !this.disabled;
+  };
 
   addChipValue(value: string) {
     // Emit an event to notify the parent to add a chip with the selected value
+    //if (!this.selectedChips.includes(value)) {
     this.valueChange.emit(value);
     this.selectedChips = [...this.selectedChips, value];
+    //}
   }
   handleCustomOptionClick = (option: any) => {
     const optionValue = option.getAttribute(DATA_SEARCH_VALUE);
@@ -164,6 +173,22 @@ export class ModusAutocomplete {
     }
     this.hasFocus = false;
     this.optionSelected.emit(optionId);
+  };
+
+  handleClear(): void {
+    this.selectedChips = [];
+    this.value = null;
+    this.valueChange.emit(null);
+  }
+
+  handleOptionKeyPress = (event: any, option: any, isCustomOption = false) => {
+    if (event.key === 'Enter') {
+      if (isCustomOption) {
+        this.handleCustomOptionClick(option);
+      } else {
+        this.handleOptionClick(option);
+      }
+    }
   };
 
   handleOptionClick = (option: ModusAutocompleteOption) => {
@@ -183,6 +208,11 @@ export class ModusAutocomplete {
     this.value = search;
     this.valueChange.emit(search);
   };
+
+  handleCloseClick(chipValue: string) {
+    // Update the state to remove the chip with the specified value
+    this.selectedChips = this.selectedChips.filter((chip) => chip !== chipValue);
+  }
 
   handleTextInputValueChange = (event: CustomEvent<string>) => {
     // Cancel the modus-text-input's value change event or else it will bubble to consumer.
@@ -229,11 +259,10 @@ export class ModusAutocomplete {
 
   TextInput = () => (
     <modus-text-input
-      selectedChips={this.selectedChips}
-      clearable={this.clearable}
+      class="input"
+      clearable={false}
       errorText={this.hasFocus ? '' : this.errorText}
-      includeSearchIcon={this.includeSearchIcon}
-      label={this.label}
+      includeSearchIcon={false}
       onValueChange={(searchEvent: CustomEvent<string>) => this.handleTextInputValueChange(searchEvent)}
       placeholder={this.placeholder}
       required={this.required}
@@ -244,6 +273,8 @@ export class ModusAutocomplete {
 
   render(): unknown {
     const classes = `autocomplete ${this.classBySize.get(this.size)}`;
+    const showClearIcon = this.clearable && !this.readOnly && !!this.value;
+    console.log('showClearIcon', showClearIcon);
     return (
       <div
         aria-disabled={this.disabled ? 'true' : undefined}
@@ -253,7 +284,18 @@ export class ModusAutocomplete {
         aria-required={this.required}
         class={classes}
         onFocusin={() => (this.hasFocus = true)}>
-        {this.TextInput()}
+        <div class="chips-container">
+
+          {this.selectedChips.map((chip) => (
+            <modus-chip value={chip} size="medium" show-close onCloseClick={() => this.handleCloseClick(chip)}></modus-chip>
+          ))}
+          {this.TextInput()}
+          {showClearIcon && (
+            <span class="icons-clear" role="button" aria-label="Clear entry">
+              <IconClose onClick={() => this.handleClear()} size="16" />
+            </span>
+          )}
+        </div>
         <div
           class="options-container"
           style={{ maxHeight: this.dropdownMaxHeight, zIndex: this.dropdownZIndex, overflowY: 'auto' }}>
@@ -261,7 +303,11 @@ export class ModusAutocomplete {
             {this.displayOptions() &&
               this.visibleOptions?.map((option) => {
                 return (
-                  <li class="text-option" onClick={() => this.handleOptionClick(option)}>
+                  <li
+                    class="text-option"
+                    tabindex="0"
+                    onClick={() => this.handleOptionClick(option)}
+                    onKeyPress={(ev) => this.handleOptionKeyPress(ev, option)}>
                     {option.value}
                   </li>
                 );
@@ -270,7 +316,9 @@ export class ModusAutocomplete {
               this.visibleCustomOptions?.map((option) => (
                 <li
                   class="custom-option"
+                  tabindex="0"
                   onClick={() => this.handleCustomOptionClick(option)}
+                  onKeyPress={(ev) => this.handleOptionKeyPress(ev, option, true)}
                   innerHTML={option.outerHTML}
                 />
               ))}

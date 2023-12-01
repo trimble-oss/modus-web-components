@@ -11,9 +11,6 @@ import { IconVisibilityOff } from '../icons/icon-visibility-off';
   shadow: true,
 })
 export class ModusTextInput {
-  /** An array to hold the selected chips. */
-  @Prop() selectedChips: string[];
-
   /** (optional) The input's aria-label. */
   @Prop() ariaLabel: string | null;
 
@@ -136,9 +133,6 @@ export class ModusTextInput {
       if (showClearIcon) {
         classNames.push('has-right-icon');
       }
-      if (this.selectedChips && this.selectedChips.length) {
-        classNames.push('has-chips');
-      }
       classNames.push(`text-align-${this.textAlign}`);
       return classNames.join(' ');
     };
@@ -169,30 +163,24 @@ export class ModusTextInput {
           onClick={() => this.textInput.focus()}
           part="input-container">
           {this.includeSearchIcon ? <IconSearch size="16" /> : null}
-          <div class="chips-container">
-            {this.selectedChips.map((chip) => (
-              <modus-chip value={chip} size="small" show-close></modus-chip>
-            ))}
-
-            <input
-              aria-invalid={!!this.errorText}
-              aria-label={this.ariaLabel}
-              aria-required={this.required?.toString()}
-              class={buildTextInputClassNames()}
-              disabled={this.disabled}
-              inputmode={this.inputmode}
-              maxlength={this.maxLength}
-              minlength={this.minLength}
-              onInput={(event) => this.handleOnInput(event)}
-              placeholder={this.placeholder}
-              readonly={this.readOnly}
-              ref={(el) => (this.textInput = el as HTMLInputElement)}
-              tabIndex={0}
-              type={this.type}
-              value={this.value}
-              autofocus={this.autoFocusInput}
-            />
-          </div>
+          <input
+            aria-invalid={!!this.errorText}
+            aria-label={this.ariaLabel}
+            aria-required={this.required?.toString()}
+            class={buildTextInputClassNames()}
+            disabled={this.disabled}
+            inputmode={this.inputmode}
+            maxlength={this.maxLength}
+            minlength={this.minLength}
+            onInput={(event) => this.handleOnInput(event)}
+            placeholder={this.placeholder}
+            readonly={this.readOnly}
+            ref={(el) => (this.textInput = el as HTMLInputElement)}
+            tabIndex={0}
+            type={this.type}
+            value={this.value}
+            autofocus={this.autoFocusInput}
+          />
           {showPasswordToggle && (
             <div
               class="icons toggle-password"
