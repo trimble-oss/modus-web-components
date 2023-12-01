@@ -25,7 +25,13 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
         const newData = [...old];
 
         // rowId is a string of IDs for rows with nested information like subrows.
-        const idArray: number[] = row['id']?.split('.')?.map((id) => parseInt(id));
+        const idArray: number[] = [];
+        let currentRow = row;
+        while (currentRow) {
+          idArray.push(currentRow['index']);
+          currentRow = currentRow['parent'];
+        }
+        idArray.reverse();
 
         if (idArray.length === 1) {
           newData[idArray[0]][accessorKey] = newValue;
