@@ -19,7 +19,7 @@
 
   .label-container {
     align-items: baseline;
-    display: flex;
+    display: inline-block;
 
     .required {
       color: $modus-input-validation-error-color;
