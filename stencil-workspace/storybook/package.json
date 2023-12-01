@@ -20,7 +20,7 @@
     "@babel/core": "^7.22.1",
     "@babel/preset-react": "^7.22.15",
     "@storybook/addon-a11y": "^6.5.16",
-    "@storybook/addon-actions": "^6.5.16",
+    "@storybook/addon-actions": "^7.6.2",
     "@storybook/addon-essentials": "^6.5.16",
     "@storybook/addon-links": "^6.5.16",
     "@storybook/addon-styling": "^0.3.2",
