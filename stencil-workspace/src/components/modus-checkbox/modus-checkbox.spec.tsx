@@ -13,8 +13,8 @@ describe('modus-checkbox', () => {
           <div class="modus-checkbox">
             <div class="checkbox" tabindex="0">
               <div class="checkmark">
-                <svg class="icon-check" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                <path clip-rule="evenodd" d="M9 19c-.51 0-1.02-.2-1.41-.59l-3.5-3.5c-.78-.78-.78-2.05 0-2.83.78-.78 2.05-.78 2.83 0l2.09 2.09 8.09-8.09c.78-.78 2.05-.78 2.83 0 .78.78.78 2.05 0 2.83l-9.5 9.5c-.39.39-.9.59-1.41.59Z" fill="#FFFFFF" fill-rule="evenodd"></path>
+                <svg class="icon-check" fill="none" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+                <path clip-rule="evenodd" d="M9 18c-.26 0-.51-.1-.71-.29l-4-4A.996.996 0 1 1 5.7 12.3l3.29 3.29 9.29-9.29a.996.996 0 1 1 1.41 1.41l-10 10c-.2.2-.45.29-.71.29Z" fill="#FFFFFF" fill-rule="evenodd"></path>
                 </svg>
               </div>
             </div>

@@ -13,7 +13,7 @@
   flex-direction: row;
   font-family: $primary-font;
   font-size: $rem-14px;
-  height: $rem-14px;
+  height: $rem-12px;
   text-align: center;
   white-space: nowrap;
 
@@ -23,22 +23,22 @@
     border: $rem-2px solid $modus-checkbox-border-color;
     border-radius: 1.75px;
     display: flex;
-    height: $rem-16px;
+    height: $rem-14px;
     justify-content: center;
     margin: 0 0.28rem;
     transition: background-color 0.15s ease-in-out;
-    width: $rem-16px;
+    width: $rem-14px;
 
     &.small {
       border-radius: 1.5px;
-      height: $rem-10px;
-      width: $rem-10px;
+      height: $rem-8px;
+      width: $rem-8px;
     }
 
     &:focus,
     &:focus-visible {
       border: $rem-2px solid $modus-checkbox-selected-border-color !important;
-      box-shadow: 0 0 0 0.3rem $modus-checkbox-focus-box-shadow-color;
+      box-shadow: 0 0 0 0.2rem $modus-checkbox-focus-box-shadow-color !important;
       outline: $rem-2px solid white;
     }
 
