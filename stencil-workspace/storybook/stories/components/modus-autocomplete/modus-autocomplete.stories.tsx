@@ -124,6 +124,13 @@ export default {
       table: {
         type: { summary: 'string' },
       },
+    },
+    addChip: {
+      description: "Adds chips functionality to the autocomplete",
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      },
     }
   },
   parameters: {
@@ -283,6 +290,75 @@ const setAutocompleteWithOption = () => {
   return tag;
 };
 
+export const WithChips = ({
+  ariaLabel,
+  clearable,
+  disabled,
+  dropdownMaxHeight,
+  dropdownZIndex,
+  errorText,
+  includeSearchIcon,
+  label,
+  noResultsFoundText,
+  noResultsFoundSubtext,
+  placeholder,
+  readOnly,
+  required,
+  showNoResultsFoundMessage,
+  size,
+  value,
+ addChip }) => html`
+<div style="width: 600px">
+<modus-autocomplete
+id="autocomplete-with-chips"
+aria-label=${ariaLabel}
+clearable=${clearable}
+disabled=${disabled}
+dropdown-max-height=${dropdownMaxHeight}
+dropdown-z-index=${dropdownZIndex}
+error-text=${errorText}
+include-search-icon=${includeSearchIcon}
+label=${label}
+no-results-found-text=${noResultsFoundText}
+no-results-found-subtext=${noResultsFoundSubtext}
+placeholder=${placeholder}
+read-only=${readOnly}
+required=${required}
+show-no-results-found-message=${showNoResultsFoundMessage}
+size=${size}
+value=${value}
+add-chip=${addChip}>
+</modus-autocomplete>
+</div>
+${setAutocompleteWithChips()}
+`;
+WithChips.args = {
+ariaLabel: 'autocomplete',
+clearable: false,
+disabled: false,
+dropdownMaxHeight: '300px',
+dropdownZIndex: '1',
+errorText: '',
+includeSearchIcon: true,
+label: 'Autocomplete using option model',
+noResultsFoundText: 'No results found',
+noResultsFoundSubtext: 'Check spelling or try a different keyword',
+placeholder: 'Search...',
+readOnly: false,
+required: false,
+showNoResultsFoundMessage: true,
+size: 'medium',
+value: '',
+addChip: true
+}
+const setAutocompleteWithChips = () => {
+  const tag = document.createElement('script');
+  tag.innerHTML = `
+    document.querySelector('#autocomplete-with-chips').options = [{ id: '0', value: 'Apple' }, { id: '1', value: 'Banana' }, { id: '2', value: 'Orange' }];
+  `;
+
+  return tag;
+};
 export const WithCustomOption = ({
                                    ariaLabel,
                                    clearable,

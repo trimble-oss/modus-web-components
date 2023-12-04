@@ -157,11 +157,11 @@ export class ModusAutocomplete {
   };
 
   addChipValue(value: string) {
-    // Emit an event to notify the parent to add a chip with the selected value
-    //if (!this.selectedChips.includes(value)) {
-    this.valueChange.emit(value);
+    if (this.selectedChips.includes(value)) {
+      return;
+    }
     this.selectedChips = [...this.selectedChips, value];
-    //}
+    this.valueChange.emit(this.selectedChips.join(','));
   }
   handleCustomOptionClick = (option: any) => {
     const optionValue = option.getAttribute(DATA_SEARCH_VALUE);
@@ -210,8 +210,10 @@ export class ModusAutocomplete {
   };
 
   handleCloseClick(chipValue: string) {
-    // Update the state to remove the chip with the specified value
-    this.selectedChips = this.selectedChips.filter((chip) => chip !== chipValue);
+    if (this.selectedChips.length != 0) {
+      this.selectedChips = this.selectedChips.filter((chip) => chip !== chipValue);
+      this.valueChange.emit(this.selectedChips.join(','));
+    }
   }
 
   handleTextInputValueChange = (event: CustomEvent<string>) => {
@@ -274,7 +276,6 @@ export class ModusAutocomplete {
   render(): unknown {
     const classes = `autocomplete ${this.classBySize.get(this.size)}`;
     const showClearIcon = this.clearable && !this.readOnly && !!this.value;
-    console.log('showClearIcon', showClearIcon);
     return (
       <div
         aria-disabled={this.disabled ? 'true' : undefined}
@@ -285,7 +286,6 @@ export class ModusAutocomplete {
         class={classes}
         onFocusin={() => (this.hasFocus = true)}>
         <div class="chips-container">
-
           {this.selectedChips.map((chip) => (
             <modus-chip value={chip} size="medium" show-close onCloseClick={() => this.handleCloseClick(chip)}></modus-chip>
           ))}

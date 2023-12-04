@@ -11,7 +11,9 @@ describe('modus-autocomplete', () => {
     <modus-autocomplete>
       <mock:shadow-root>
         <div class="autocomplete medium">
-          <modus-text-input includesearchicon="" size="medium"></modus-text-input>
+          <div class="chips-container">
+            <modus-text-input class="input" size="medium"></modus-text-input>
+          </div>
           <div class="options-container" style="max-height: 300px; z-index: 1; overflow-y: auto;">
             <ul></ul>
           </div>
@@ -38,7 +40,9 @@ describe('modus-autocomplete', () => {
     <modus-autocomplete>
       <mock:shadow-root>
         <div class="autocomplete medium">
-          <modus-text-input includesearchicon="" size="medium"></modus-text-input>
+        <div class="chips-container">
+          <modus-text-input class="input" size="medium"></modus-text-input>
+          </div>
           <div class="options-container" style="max-height: 300px; z-index: 1; overflow-y: auto;">
             <ul></ul>
           </div>

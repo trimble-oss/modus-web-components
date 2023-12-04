@@ -123,6 +123,7 @@ graph TD;
   modus-table-cell-editor --> modus-date-input
   modus-table-cell-editor --> modus-autocomplete
   modus-autocomplete --> modus-text-input
+  modus-autocomplete --> modus-chip
   style modus-table fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
