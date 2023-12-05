@@ -38,8 +38,8 @@
     &:focus,
     &:focus-visible {
       border: $rem-2px solid $modus-checkbox-selected-border-color !important;
-      box-shadow: 0 0 0 0.2rem $modus-checkbox-focus-box-shadow-color !important;
-      outline: $rem-2px solid white;
+      outline: $rem-2px solid $modus-checkbox-focus-box-shadow-color !important;
+      outline-offset: 2px !important;
     }
 
     &.blue-background {
