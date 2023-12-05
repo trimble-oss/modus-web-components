@@ -71,8 +71,7 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
         if (event.key.toLowerCase() === KEYBOARD_ENTER) {
           onDragStart(event, headerId, elementRef, false);
         }
-      }}
-      >
+      }}>
       {isPlaceholder ? null : ( // header.isPlaceholder is Required for nested column headers to display empty cell
         <div class={column.getCanSort() && 'can-sort'}>
           <span>{column.columnDef.header}</span>
