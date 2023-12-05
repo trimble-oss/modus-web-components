@@ -11,12 +11,12 @@ div.modus-radio-group {
 
 .modus-radio-button {
   display: inline-block;
-  outline: none;
 
   .radio {
     align-items: center;
     display: inline-flex;
     height: 2rem;
+    outline: none;
 
     input {
       display: none;
@@ -33,10 +33,24 @@ div.modus-radio-group {
         border-color 0.15s ease-in-out,
         box-shadow 0.15s ease-in-out;
       width: $rem-14px;
+    }
 
-      &.small {
+    &.small {
+      .checkmark {
         height: $rem-10px;
         width: $rem-10px;
+      }
+
+      input:checked ~ .checkmark::after {
+        height: 0.405rem; // Specific size so that the check is centered.
+        left: $rem-2px;
+        top: $rem-2px;
+        width: 0.405rem;
+      }
+
+      label {
+        font-size: $rem-10px;
+        margin-left: 1.25rem;
       }
     }
 
@@ -61,38 +75,26 @@ div.modus-radio-group {
       display: block;
     }
 
-    input:checked ~ .checkmark.small::after {
-      height: 0.405rem; // Specific size so that the check is centered.
-      left: $rem-2px;
-      top: $rem-2px;
-      width: 0.405rem;
-    }
-
     label {
       color: $modus-radio-btn-label-color;
       font-size: $rem-12px;
       margin-left: 1.625rem;
-
-      &.small {
-        font-size: $rem-10px;
-        margin-left: 1.25rem;
-      }
     }
-  }
 
-  &:active .radio .checkmark {
-    background-color: $modus-radio-btn-selected-border-color;
-    border-color: $modus-radio-btn-selected-border-color;
-  }
+    &:active .checkmark {
+      background-color: $modus-radio-btn-selected-border-color;
+      border-color: $modus-radio-btn-selected-border-color;
+    }
 
-  &:hover .radio .checkmark {
-    border-color: $modus-radio-btn-hover-border-color;
-  }
+    &:hover .checkmark {
+      border-color: $modus-radio-btn-hover-border-color;
+    }
 
-  &:focus .radio .checkmark {
-    border-color: $modus-radio-btn-hover-border-color;
-    box-shadow: 0 0 0 0.2rem $modus-radio-btn-focus-box-shadow-color;
-    outline: 2px solid white;
+    &:focus .checkmark {
+      border-color: $modus-radio-btn-hover-border-color;
+      outline: $rem-2px solid $modus-radio-btn-focus-box-shadow-color;
+      outline-offset: $rem-2px;
+    }
   }
 
   &.disabled {

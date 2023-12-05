@@ -109,7 +109,7 @@ describe('modus-radio-group', () => {
 
     const buttonClick = await page.spyOnEvent('buttonClick');
 
-    const elements = await page.findAll('modus-radio-group >>> .modus-radio-button');
+    const elements = await page.findAll('modus-radio-group >>> .modus-radio-button .radio');
     await elements[0].click();
 
     expect(buttonClick).toHaveReceivedEvent();
@@ -145,7 +145,7 @@ describe('modus-radio-group', () => {
     component.setProperty('radioButtons', radioButtons);
     await page.waitForChanges();
 
-    const elements = await page.findAll('modus-radio-group >>> .modus-radio-button .checkmark');
+    const elements = await page.findAll('modus-radio-group >>> .modus-radio-button .radio');
 
     expect(elements[0]).toHaveClass('small');
     expect(elements[1]).toHaveClass('small');

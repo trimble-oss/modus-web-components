@@ -22,15 +22,15 @@ interface ModusRadioButtonProps {
 export const ModusRadioButton: FunctionalComponent<ModusRadioButtonProps> = (
   props: ModusRadioButtonProps & { size: 'small' | 'default' }
 ) => (
-  <div
-    class={`modus-radio-button ${props.disabled ? 'disabled' : ''}`}
-    onClick={() => props.handleButtonClick(props.id)}
-    onKeyDown={(event) => props.handleKeydown(event, props.id)}
-    tabIndex={0}>
-    <div class="radio">
+  <div class={`modus-radio-button ${props.disabled ? 'disabled' : ''}`}>
+    <div
+      class={`radio ${props.size}`}
+      tabIndex={0}
+      onClick={() => props.handleButtonClick(props.id)}
+      onKeyDown={(event) => props.handleKeydown(event, props.id)}>
       <input checked={props.checked} disabled={props.disabled} name={props.name} type="radio"></input>
-      <span class={`checkmark ${props.size}`}></span>
-      <label class={`${props.size}`}>{props.label}</label>
+      <span class={`checkmark`}></span>
+      <label>{props.label}</label>
     </div>
   </div>
 );
