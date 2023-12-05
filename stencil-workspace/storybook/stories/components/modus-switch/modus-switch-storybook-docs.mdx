@@ -6,11 +6,11 @@ import { Anchor } from '@storybook/addon-docs';
 
 [Modus Switch](https://modus.trimble.com/components/switches/) web components are referenced using the `<modus-switch>` custom HTML element.
 
-<Anchor storyId="components-switch--default" />
+<Anchor storyId="components-switch--medium" />
 
-### Default
+### Medium
 
-<modus-switch label="Default"></modus-switch>
+<modus-switch label="Medium"></modus-switch>
 
 <Anchor storyId="components-switch--checked" />
 
@@ -31,7 +31,7 @@ import { Anchor } from '@storybook/addon-docs';
 <modus-switch disabled label="Disabled"></modus-switch>
 
 ```html
-<modus-switch label="Default"></modus-switch>
+<modus-switch label="medium"></modus-switch>
 <modus-switch label="small" size="small"></modus-switch>
 <modus-switch checked label="Checked"></modus-switch>
 <modus-switch disabled label="Disabled"></modus-switch>
@@ -39,62 +39,15 @@ import { Anchor } from '@storybook/addon-docs';
 
 ### Properties
 
-<section>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Type</th>
-        <th>Options</th>
-        <th>Default Value</th>
-        <th>Required</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>aria-label</td>
-        <td>The switch's aria-label</td>
-        <td>string</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>checked</td>
-        <td>Whether the switch is checked</td>
-        <td>boolean</td>
-        <td></td>
-        <td>false</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>disabled</td>
-        <td>Whether the switch is disabled</td>
-        <td>boolean</td>
-        <td></td>
-        <td>false</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>label</td>
-        <td>The switch's label</td>
-        <td>string</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>size</td>
-        <td>The switch's size</td>
-        <td>string</td>
-        <td>"small","default"</td>
-        <td></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+## Properties
+
+| Property    | Attribute    | Description                                | Type                   | Default     |
+| ----------- | ------------ | ------------------------------------------ | ---------------------- | ----------- |
+| `ariaLabel` | `aria-label` | (optional) The switch's aria-label.        | `string`               | `undefined` |
+| `checked`   | `checked`    | (optional) Whether the switch is checked.  | `boolean`              | `undefined` |
+| `disabled`  | `disabled`   | (optional) Whether the switch is disabled. | `boolean`              | `undefined` |
+| `label`     | `label`      | (optional) The switch label.               | `string`               | `undefined` |
+| `size`      | `size`       | (optional) The size of the radiobutton.    | `"medium" , "small"` | `'medium'` |
 
 ### DOM Events
 

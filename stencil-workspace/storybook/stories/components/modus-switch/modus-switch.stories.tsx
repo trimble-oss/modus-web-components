@@ -34,13 +34,13 @@ export default {
     },
     size: {
       control: {
-        options: ['small', 'default'],
+        options: ['small', 'medium'],
         type: 'select',
       },
       description: 'The size of the button',
       table: {
-        defaultValue: { summary: `'default'` },
-        type: { summary: `'small' | 'default'` },
+        defaultValue: { summary: `'medium'` },
+        type: { summary: `'small' | 'medium'` },
       },
     },
   },
@@ -58,7 +58,7 @@ export default {
   },
 };
 
-export const Default = ({ ariaLabel, checked, disabled, label, size }) =>
+export const Medium = ({ ariaLabel, checked, disabled, label, size }) =>
   html`
     <modus-switch
       aria-label=${ariaLabel}
@@ -68,12 +68,12 @@ export const Default = ({ ariaLabel, checked, disabled, label, size }) =>
       size=${size}>
     </modus-switch>
   `;
-Default.args = {
+Medium.args = {
   ariaLabel: '',
   checked: false,
   disabled: false,
-  label: 'Default',
-  size: 'default',
+  label: 'Medium',
+  size: 'medium',
 };
 
 export const Checked = ({ ariaLabel, checked, disabled, label, size }) =>
@@ -91,7 +91,7 @@ Checked.args = {
   checked: true,
   disabled: false,
   label: 'Checked',
-  size: 'default',
+  size: 'medium',
 };
 
 export const Disabled = ({ ariaLabel, checked, disabled, label, size }) =>
@@ -109,5 +109,5 @@ Disabled.args = {
   checked: false,
   disabled: true,
   label: 'Disabled',
-  size: 'default',
+  size: 'medium',
 };

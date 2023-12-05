@@ -8,6 +8,32 @@
   font-size: $rem-14px;
   outline: none;
 
+  &.small {
+    .switch {
+      height: $rem-16px;
+      width: $rem-30px;
+
+      .slider {
+        border-radius: 8px;
+        height: $rem-16px;
+        width: $rem-30px;
+      }
+
+      .slider::before {
+        height: $rem-16px;
+        width: $rem-16px;
+      }
+
+      &.checked .slider::before {
+        transform: translateX($rem-14px);
+      }
+    }
+
+    .label {
+      font-size: $rem-12px;
+    }
+  }
+
   .switch {
     background-color: $modus-switch-bg;
     border: $rem-2px $modus-switch-border-color solid;
@@ -15,11 +41,6 @@
     height: $rem-20px;
     position: relative;
     width: $rem-40px;
-
-    &.small {
-      height: $rem-16px;
-      width: $rem-30px;
-    }
 
     .slider {
       background-color: $modus-switch-bg;
@@ -30,12 +51,6 @@
       position: absolute;
       top: 0;
       width: $rem-40px;
-
-      &.small {
-        border-radius: 8px;
-        height: $rem-16px;
-        width: $rem-30px;
-      }
     }
 
     .slider::before {
@@ -46,11 +61,6 @@
       position: absolute;
       transition: 0.1s;
       width: $rem-20px;
-    }
-
-    .slider.small::before {
-      height: $rem-16px;
-      width: $rem-16px;
     }
 
     &.checked {
@@ -64,10 +74,6 @@
       .slider::before {
         transform: translateX($rem-20px);
       }
-
-      .slider.small::before {
-        transform: translateX($rem-14px);
-      }
     }
 
     &:active .slider {
@@ -80,8 +86,8 @@
   }
 
   &:focus .switch {
-    box-shadow: 0 0 0 0.2rem $modus-switch-focus-box-shadow-color;
-    outline: 2px solid white;
+    outline: $rem-2px solid $modus-switch-focus-box-shadow-color;
+    outline-offset: $rem-2px;
   }
 
   input {
@@ -91,10 +97,6 @@
   label {
     color: $modus-switch-label-color;
     margin-left: $rem-8px;
-
-    &.small {
-      font-size: $rem-12px;
-    }
   }
 
   &.disabled {

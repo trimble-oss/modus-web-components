@@ -101,12 +101,12 @@ describe('modus-switch', () => {
     expect(await modusSwitch.getProperty('checked')).toBeFalsy();
     expect(await input.getProperty('checked')).toBeFalsy();
   });
-  it('renders with default size', async () => {
+  it('renders with medium size', async () => {
     const page = await newE2EPage();
     await page.setContent('<modus-switch></modus-switch>');
 
     const element = await page.find('modus-switch >>> .modus-switch');
-    expect(element).toHaveClass('default');
+    expect(element).toHaveClass('medium');
   });
 
   it('renders with small size', async () => {
