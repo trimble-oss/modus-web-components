@@ -50,7 +50,7 @@ function makeData(...lens): object[] {
 function initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions, manualPaginationOptions, manualSortingOptions) {
   const tag = document.createElement('script');
   tag.innerHTML = `
-  var modusTable = document.querySelector('modus-table')
+  var modusTable = document.querySelector('modus-table');
   modusTable.columns = ${JSON.stringify(columns)};
   modusTable.data = ${JSON.stringify(data)};
   modusTable.pageSizeList = ${JSON.stringify(pageSizeList)};
@@ -61,8 +61,9 @@ function initializeTable(columns, data, pageSizeList, toolbarOptions, displayOpt
   modusTable.manualPaginationOptions = ${JSON.stringify(manualPaginationOptions)};
   modusTable.manualSortingOptions = ${JSON.stringify(manualSortingOptions)};
 
+  var globalData = ${JSON.stringify(data)};
   if(!!modusTable.manualSortingOptions){
-    let currentData = modusTable.data;
+    let currentData = globalData;
     const accessorKey = getAccessortKey(modusTable.columns, modusTable.manualSortingOptions.currentSortingState[0].id);
     currentData.sort(compareValues(accessorKey, modusTable.manualSortingOptions.currentSortingState[0].desc));
     if(!!modusTable.manualPaginationOptions){
@@ -71,6 +72,11 @@ function initializeTable(columns, data, pageSizeList, toolbarOptions, displayOpt
     } else {
       modusTable.data = currentData;
     }
+  } else if(!!modusTable.manualPaginationOptions){
+    modusTable.data = globalData.slice((modusTable.manualPaginationOptions.currentPageIndex - 1) * modusTable.manualPaginationOptions.currentPageSize,
+      modusTable.manualPaginationOptions.currentPageIndex * modusTable.manualPaginationOptions.currentPageSize);
+  } else {
+    modusTable.data = globalData;
   }
 
   function compareValues(key, desc) {
@@ -633,15 +639,15 @@ export const Pagination = Template.bind({});
 Pagination.args = { ...DefaultArgs, pagination: true, data: makeData(50), pageSizeList: [5, 10, 50] };
 
 export const ManualPagination = Template.bind({});
-
 ManualPagination.args = {
   ...DefaultArgs,
   pagination: true,
+  data: makeData(50),
   manualPaginationOptions: {
     currentPageIndex: 1,
     currentPageSize: 5,
-    pageCount: DefaultArgs.data.length / 5,
-    totalRecords: DefaultArgs.data.length,
+    pageCount: 10,
+    totalRecords: 50,
   },
   pageSizeList: [5, 10, 50],
 };
@@ -672,8 +678,7 @@ export const CheckboxRowSelection = Template.bind({});
 CheckboxRowSelection.args = {
   ...DefaultArgs, rowSelection: true, rowSelectionOptions: {
     multiple: true,
-    subRowSelection: true,
-    preSelectedRows:["0"]
+    subRowSelection: true
   }, data: makeData(7)
 };
 
