@@ -41,7 +41,7 @@ export class ModusCheckbox {
   @Prop() stopPropagation: boolean;
 
   /** (optional) The size of the checkbox. */
-  @Prop() size: 'small' | 'default' = 'default';
+  @Prop() size: 'small' | 'medium' = 'medium';
 
   checkboxInput: HTMLInputElement;
   checkboxContainer: HTMLDivElement;

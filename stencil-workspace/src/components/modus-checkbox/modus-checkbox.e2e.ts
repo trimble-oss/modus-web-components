@@ -148,13 +148,13 @@ describe('modus-checkbox', () => {
     expect(await modusCheckbox.getProperty('indeterminate')).toBeFalsy();
     expect(await input.getProperty('indeterminate')).toBeFalsy();
   });
-  it('renders with default size', async () => {
+  it('renders with medium size', async () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-checkbox></modus-checkbox>');
     const modusCheckbox = await page.find('modus-checkbox');
 
-    expect(await modusCheckbox.getProperty('size')).toBe('default');
+    expect(await modusCheckbox.getProperty('size')).toBe('medium');
   });
 
   it('renders with small size property', async () => {

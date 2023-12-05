@@ -54,7 +54,7 @@ export default {
     },
     size: {
       control: {
-        options: ['small', 'default'],
+        options: ['small', 'medium'],
         type: 'select',
       },
     },
@@ -92,15 +92,15 @@ const Template = ({
     size=${size}></modus-checkbox>
 `;
 
-export const Default = Template.bind({});
-Default.args = {
+export const Medium = Template.bind({});
+Medium.args = {
   ariaLabel: '',
   checked: false,
   disabled: false,
   indeterminate: false,
   label: 'Checkbox',
   tabIndexValue: 0,
-  size:'default',
+  size:'medium',
 };
 
 export const Indeterminate = Template.bind({});
@@ -111,5 +111,5 @@ Indeterminate.args = {
   indeterminate: true,
   label: 'Checkbox',
   tabIndexValue: 0,
-  size:'default',
+  size:'medium',
 };
