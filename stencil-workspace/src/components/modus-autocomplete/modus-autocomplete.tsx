@@ -158,13 +158,18 @@ export class ModusAutocomplete {
     this.optionSelected.emit(optionId);
   };
 
+  handleInputBlur = () => {
+    this.hasFocus = false
+  }
+
   handleOptionKeyPress = ( event: any, option: any, isCustomOption = false ) => {
-    if(event.key === 'Enter'){
-      if(isCustomOption){
-        this.handleCustomOptionClick(option)
-      }else{
-        this.handleOptionClick(option)
-      }
+    if(event.key !== 'Enter'){
+      return
+    }
+    if(isCustomOption){
+      this.handleCustomOptionClick(option)
+    }else{
+      this.handleOptionClick(option)
     }
   }
 
@@ -236,7 +241,7 @@ export class ModusAutocomplete {
       required={this.required}
       size={this.size}
       value={this.value}
-       
+      onBlur={this.handleInputBlur}
     />
   );
 
