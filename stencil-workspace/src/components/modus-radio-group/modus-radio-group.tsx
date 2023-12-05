@@ -21,7 +21,7 @@ export class ModusRadioGroup {
   @Prop({ mutable: true }) radioButtons: RadioButton[] = [];
 
   /** (optional) The size of the radiobutton. */
-  @Prop() size?: 'small' | 'default' = 'default';
+  @Prop() size?: 'small' | 'medium' = 'medium';
 
   /** Fires on radio button click. */
   @Event() buttonClick: EventEmitter<string>;

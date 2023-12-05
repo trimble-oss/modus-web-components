@@ -16,11 +16,11 @@ interface ModusRadioButtonProps {
   id: string;
   label: string;
   name: string;
-  size: 'small' | 'default';
+  size: 'small' | 'medium';
 }
 
 export const ModusRadioButton: FunctionalComponent<ModusRadioButtonProps> = (
-  props: ModusRadioButtonProps & { size: 'small' | 'default' }
+  props: ModusRadioButtonProps & { size: 'small' | 'medium' }
 ) => (
   <div class={`modus-radio-button ${props.disabled ? 'disabled' : ''}`}>
     <div

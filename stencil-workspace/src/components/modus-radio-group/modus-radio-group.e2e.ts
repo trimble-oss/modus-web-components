@@ -115,7 +115,7 @@ describe('modus-radio-group', () => {
     expect(buttonClick).toHaveReceivedEvent();
     expect(buttonClick).toHaveReceivedEventDetail('1');
   });
-  it('defaults to "default" size if size prop is not set', async () => {
+  it('defaults to "medium" size if size prop is not set', async () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-radio-group></modus-radio-group>');
