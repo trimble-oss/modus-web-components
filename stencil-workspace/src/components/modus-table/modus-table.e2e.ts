@@ -600,7 +600,7 @@ describe('modus-table', () => {
     const statusData = { 
         size: 'medium', 
         type: 'counter',
-        text: 'Verfied',
+        text: 'Verified',
         color: 'success'
      };
 
