@@ -267,6 +267,7 @@ export class ModusAutocomplete {
                   <li class="text-option" tabindex="0" 
                     onClick={() => this.handleOptionClick(option)}
                     onKeyPress={(ev) => this.handleOptionKeyPress(ev,option)}
+                    onBlur={this.handleInputBlur}
                   >
                     {option.value}
                   </li>
