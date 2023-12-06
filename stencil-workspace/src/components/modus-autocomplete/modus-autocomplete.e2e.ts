@@ -236,26 +236,25 @@ describe('modus-autocomplete', () => {
   });
 
   it('should display options on focus when showOptionsOnFocus prop is true', async () => {
-      const element = await page.find('modus-autocomplete');
-      expect(element).toHaveClass('hydrated');
+    const element = await page.find('modus-autocomplete');
+    expect(element).toHaveClass('hydrated');
 
-      element.setProperty('options', [
+    element.setProperty('options', [
       { id: 1, value: 'Test 1' },
       { id: 2, value: 'Test 2' },
-      ]);
+    ]);
 
-      element.setProperty('showOptionsOnFocus', true);
+    element.setProperty('showOptionsOnFocus', true);
 
-      await page.waitForChanges();
+    await page.waitForChanges();
 
-      const textInput = await page.find('modus-autocomplete >>> modus-text-input');
-      await textInput.click();
+    const textInput = await page.find('modus-autocomplete >>> modus-text-input');
+    await textInput.click();
 
-      await page.waitForChanges();
+    await page.waitForChanges();
 
-      const options = await page.findAll('modus-autocomplete >>> .options-container li');
+    const options = await page.findAll('modus-autocomplete >>> .options-container li');
 
-      expect(options.length).toEqual(2);
-
-    });
+    expect(options.length).toEqual(2);
+  });
 });

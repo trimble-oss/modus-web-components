@@ -59,7 +59,6 @@ export class ModusAutocomplete {
   /** The autocomplete's no results sub-text. */
   @Prop() noResultsFoundSubtext = 'Check spelling or try a different keyword';
 
-
   /** The autocomplete's options. */
   @Prop({ mutable: true }) options: ModusAutocompleteOption[] | string[];
   @Watch('options')
@@ -145,10 +144,10 @@ export class ModusAutocomplete {
     !this.visibleCustomOptions?.length &&
     this.value?.length > 0;
 
-  displayOptions = () =>  {
-    const showOptions = (this.showOptionsOnFocus || this.value?.length > 0 );
-    return this.hasFocus && showOptions  && !this.disabled;
-  }
+  displayOptions = () => {
+    const showOptions = this.showOptionsOnFocus || this.value?.length > 0;
+    return this.hasFocus && showOptions && !this.disabled;
+  };
 
   handleCustomOptionClick = (option: any) => {
     const optionValue = option.getAttribute(DATA_SEARCH_VALUE);
@@ -159,19 +158,19 @@ export class ModusAutocomplete {
   };
 
   handleInputBlur = () => {
-    this.hasFocus = false
-  }
+    this.hasFocus = false;
+  };
 
-  handleOptionKeyPress = ( event: any, option: any, isCustomOption = false ) => {
-    if(event.key !== 'Enter'){
-      return
+  handleOptionKeyPress = (event: any, option: any, isCustomOption = false) => {
+    if (event.key !== 'Enter') {
+      return;
     }
-    if(isCustomOption){
-      this.handleCustomOptionClick(option)
-    }else{
-      this.handleOptionClick(option)
+    if (isCustomOption) {
+      this.handleCustomOptionClick(option);
+    } else {
+      this.handleOptionClick(option);
     }
-  }
+  };
 
   handleOptionClick = (option: ModusAutocompleteOption) => {
     this.handleSearchChange(option.value);
@@ -264,11 +263,12 @@ export class ModusAutocomplete {
             {this.displayOptions() &&
               this.visibleOptions?.map((option) => {
                 return (
-                  <li class="text-option" tabindex="0" 
+                  <li
+                    class="text-option"
+                    tabindex="0"
                     onClick={() => this.handleOptionClick(option)}
-                    onKeyPress={(ev) => this.handleOptionKeyPress(ev,option)}
-                    onBlur={this.handleInputBlur}
-                  >
+                    onKeyPress={(ev) => this.handleOptionKeyPress(ev, option)}
+                    onBlur={this.handleInputBlur}>
                     {option.value}
                   </li>
                 );
@@ -276,9 +276,10 @@ export class ModusAutocomplete {
             {this.displayOptions() &&
               this.visibleCustomOptions?.map((option) => (
                 <li
-                  class="custom-option" tabindex="0"
+                  class="custom-option"
+                  tabindex="0"
                   onClick={() => this.handleCustomOptionClick(option)}
-                  onKeyPress={(ev) => this.handleOptionKeyPress(ev,option, true)}
+                  onKeyPress={(ev) => this.handleOptionKeyPress(ev, option, true)}
                   innerHTML={option.outerHTML}
                 />
               ))}
