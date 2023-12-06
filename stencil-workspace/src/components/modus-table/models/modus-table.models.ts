@@ -57,6 +57,10 @@ export interface ModusTableRowActionClick {
   row: unknown;
 }
 
+export interface ModusTableRowWithId {
+  id: string;
+}
+
 export interface ModusTableColumn<TData extends RowData, TValue = unknown> {
   header: string;
   accessorKey: string;
@@ -110,6 +114,7 @@ export interface ModusTableCellValueChange {
 export interface ModusTableRowSelectionOptions {
   multiple?: boolean;
   subRowSelection?: boolean;
+  preSelectedRows?: string[];
 }
 
 export interface ModusTableManualPaginationOptions {

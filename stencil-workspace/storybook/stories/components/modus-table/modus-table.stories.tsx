@@ -714,7 +714,8 @@ export const CheckboxRowSelection = Template.bind({});
 CheckboxRowSelection.args = {
   ...DefaultArgs, rowSelection: true, rowSelectionOptions: {
     multiple: true,
-    subRowSelection: true
+    subRowSelection: true,
+    preSelectedRows:["0"]
   }, data: makeData(7)
 };
 
