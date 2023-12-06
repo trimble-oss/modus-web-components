@@ -5,31 +5,21 @@
 }
 
 .sentiment-scale-container {
+  color: $modus-sentiment-scale-bg;
+  cursor: pointer;
   display: flex;
+  flex-shrink: 0;
 
-  .icon-container {
-    color: $modus-sentiment-scale-bg;
-    cursor: pointer;
-
-    &.selected {
-      color: $modus-sentiment-scale-selected-bg;
-    }
+  .selected {
+    color: $modus-sentiment-scale-selected-bg;
   }
 
   .smileys-container {
-    align-items: center;
-    display: flex;
-    flex-shrink: 0;
-    justify-content: center;
     margin-left: 10px;
     margin-right: 10px;
   }
 
   .thumbs-container {
-    align-items: center;
-    display: flex;
-    flex-shrink: 0;
-    justify-content: center;
     padding: 12px;
   }
 
@@ -59,7 +49,7 @@
     svg {
       &:hover {
         path {
-          fill: $modus-sentiment-scale-hover-bg;
+          color: $modus-sentiment-scale-hover-bg;
         }
       }
     }
@@ -68,13 +58,13 @@
   svg {
     &:focus {
       path {
-        fill: $modus-sentiment-scale-hover-bg;
+        color: $modus-sentiment-scale-hover-bg;
       }
     }
 
     &:hover {
       path {
-        fill: $modus-sentiment-scale-hover-bg;
+        color: $modus-sentiment-scale-hover-bg;
       }
     }
   }

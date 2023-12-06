@@ -1,12 +1,12 @@
-export const SMILEY_ICONS = 'smileys';
-export const THUMB_ICONS = 'thumbs';
+export const SMILEY_SENTIMENT_TYPE = 'smileys';
+export const THUMB_SENTIMENT_TYPE = 'thumbs';
 
-export const MODUS_SENTIMENT_CONSTANTS_THUMB = new Map([
+export const THUMBS_TYPE_MAP = new Map([
   ['thumbs-up', 'Helpful'],
   ['thumbs-down', 'Not helpful'],
 ]);
 
-export const MODUS_SENTIMENT_CONSTANTS_SMILEYS = new Map([
+export const SMILEYS_TYPE_MAP = new Map([
   ['smiley-dissatisfied', 'Smiley Dissatisfied'],
   ['smiley-somewhat-dissatisfied', 'Smiley Somewhat Dissatisfied'],
   ['smiley-neutral', 'Smiley Neutral'],

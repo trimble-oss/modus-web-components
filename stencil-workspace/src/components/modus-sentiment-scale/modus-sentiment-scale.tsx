@@ -1,19 +1,7 @@
-import { Component, Prop, Watch, State, h, Event, EventEmitter } from '@stencil/core';
+import { Component, Prop, State, h, Event, EventEmitter } from '@stencil/core';
 import { IconMap } from '../icons/IconMap';
-import {
-  SMILEY_ICONS,
-  THUMB_ICONS,
-  MODUS_SENTIMENT_CONSTANTS_THUMB,
-  MODUS_SENTIMENT_CONSTANTS_SMILEYS,
-} from './modus-sentiment.constants';
-
-export interface ModusSentimentScaleItem {
-  key: string;
-  icon: string;
-  label: string;
-  order: number;
-}
-
+import { SMILEYS_TYPE_MAP, THUMBS_TYPE_MAP, THUMB_SENTIMENT_TYPE, SMILEY_SENTIMENT_TYPE } from './modus-sentiment.constants';
+import { ModusSentimentScaleType } from './modus-sentiment-scale.models';
 @Component({
   tag: 'modus-sentiment-scale',
   styleUrl: 'modus-sentiment-scale.scss',
@@ -22,59 +10,39 @@ export interface ModusSentimentScaleItem {
 export class ModusSentimentScale {
   /** (optional) Tab Index for the checkbox */
   @Prop() tabIndexValue = 0;
+
   /** (optional) The input's aria-label. */
   @Prop() ariaLabel: string | null;
+
   /** The type of icons to be displayed. */
-  @Prop() type: typeof SMILEY_ICONS | typeof THUMB_ICONS = 'smileys';
+  @Prop() type: ModusSentimentScaleType = 'smileys';
+
   /** (optional) Whether the sentiment scale is disabled. */
   @Prop() disabled?: boolean = false;
 
-  @Watch('type')
-  watchTypeChange(type: string) {
-    if (type) {
-      console.log('type', type);
-      if (type === THUMB_ICONS) {
-        this.labelMap = MODUS_SENTIMENT_CONSTANTS_THUMB;
-      } else if (type === SMILEY_ICONS) {
-        this.labelMap = MODUS_SENTIMENT_CONSTANTS_SMILEYS;
-      }
-    }
-  }
   /** An event that fires the selected sentiment. */
   @Event() sentimentSelection: EventEmitter;
 
-  @State() labelMap: Map<string, string>;
-  @State() selectedIcon: string;
-  @State() sentimentScaleElement: HTMLDivElement;
+  @State() selected: string;
 
-  componentWillLoad() {
-    this.watchTypeChange(this.type);
+  getSentimentScaleMap(): Map<string, string> {
+    if (this.type === THUMB_SENTIMENT_TYPE) {
+      return THUMBS_TYPE_MAP;
+    } else if (this.type === SMILEY_SENTIMENT_TYPE) {
+      return SMILEYS_TYPE_MAP;
+    }
+    return null;
   }
 
-  handleSentimentClick(selectedOutlineIcon: string) {
+  handleSentimentClick(selected: string) {
     if (!this.disabled) {
-      const selectedSentiment = selectedOutlineIcon;
-      this.selectedIcon = selectedSentiment;
-      this.sentimentSelection.emit(this.getType(selectedOutlineIcon));
+      this.selected = selected;
+      this.sentimentSelection.emit(selected);
     }
   }
 
-  handleSentimentHover(selectedOutlineIcon: string) {
-    this.sentimentScaleElement
-      .querySelector('.icon-' + selectedOutlineIcon)
-      ?.querySelector('svg')
-      .focus();
-  }
-
-  getType(icon: string) {
-    if (icon != null) {
-      if (icon.includes('-outlined')) {
-        return icon.replace('-outlined', '');
-      }
-    }
-  }
   handleKeyDown(event: KeyboardEvent, id: string) {
-    if (event.code !== 'Enter') {
+    if (event.code.toUpperCase() !== 'ENTER') {
       return;
     }
 
@@ -83,32 +51,31 @@ export class ModusSentimentScale {
 
   render() {
     const tabIndexValue = this.disabled ? -1 : this.tabIndexValue;
-    const iconKeys = Array.from(this.labelMap.keys());
+    const iconsMap = this.getSentimentScaleMap();
+
+    let containerClass = `${this.type + '-container'} ${this.disabled ? ' disabled' : ''}`;
     return (
-      <div class="sentiment-scale-container" role="group" ref={(el) => (this.sentimentScaleElement = el)}>
-        {iconKeys &&
-          iconKeys.map((buttonIcon: string) => {
-            let ariaSelected = false;
-            const isIconSelected = buttonIcon === this.getType(this.selectedIcon);
-            const containerClass = `${this.type + '-container'} ${this.disabled ? ' disabled' : ''} ${
-              isIconSelected ? 'selected' : ''
-            }`;
-            if (buttonIcon == this.getType(this.selectedIcon)) {
-              ariaSelected = true;
+      <div class="sentiment-scale-container" role="group">
+        {iconsMap &&
+          Array.from(iconsMap).map(([key, value]) => {
+            const isIconSelected = key === this.selected;
+            let iconName = key;
+            if (isIconSelected) {
+              containerClass = `${containerClass} selected`;
             } else {
-              ariaSelected = false;
-              buttonIcon = buttonIcon + '-outlined';
+              iconName = `${key}-outlined`;
+              containerClass = `${containerClass.replace('selected', '')} `;
             }
             return (
               <div
-                aria-label={this.labelMap.get(buttonIcon)}
-                aria-selected={ariaSelected}
+                aria-label={value}
+                aria-selected={isIconSelected}
                 role="button"
                 tabIndex={tabIndexValue}
-                class={`icon-container ${containerClass}`}
-                onClick={() => this.handleSentimentClick(buttonIcon)}
-                onKeyDown={(event) => this.handleKeyDown(event, buttonIcon)}>
-                <IconMap icon={buttonIcon} size={`${this.type === THUMB_ICONS ? '32' : '24'}`}></IconMap>
+                class={containerClass}
+                onClick={() => this.handleSentimentClick(key)}
+                onKeyDown={(event) => this.handleKeyDown(event, key)}>
+                <IconMap icon={iconName} size={`${this.type === THUMB_SENTIMENT_TYPE ? '32' : '24'}`}></IconMap>
               </div>
             );
           })}

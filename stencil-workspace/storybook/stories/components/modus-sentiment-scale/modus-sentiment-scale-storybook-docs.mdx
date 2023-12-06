@@ -2,7 +2,7 @@
 
 ---
 
-The `modus-sentiment-scale` component provides a customizable sentiment scale that allows users to select a sentiment from a predefined set using icons. It supports both smiley and thumb icons.
+The Modus Sentiment Scale component offers a configurable sentiment scale for users to choose a sentiment from predefined options. This component supports both smiley and thumb icon types. They are referenced using the <modus-sentiment-scale> custom HTML element. Users can navigate the sentiment scale using the Tab & Shift+Tab keys. Pressing the Enter key will toggle the selection.
 
 ## Usage
 ### Thumbs
@@ -40,19 +40,6 @@ The `modus-sentiment-scale` component provides a customizable sentiment scale th
 | smileys | 'thumbs-up', 'thumbs-down'    |
 | thumbs | 'smiley-satisfied', 'smiley-dissatisfied', 'smiley-somewhat-dissatisfied', 'smiley-neutral', 'smiley-somewhat-satisfied',    |
 
-| States                | Description                                                  | Type                            |
-| --------------------- | ------------------------------------------------------------ | ------------------------------- |
-| `icons`               | Array of icon names to be displayed.                         | `string[]`                      |
-| `selectedIcon`        | The currently selected icon.                                 | `string`                        |
-| `sentimentScaleElement` | Reference to the `div` element containing the sentiment scale. | `HTMLDivElement`                |
-
 | Events               | Description                                 | Detail                    |
 | -------------------- | ------------------------------------------- | ------------------------- |
 | `sentimentSelection` | Fires when a sentiment is selected.         | The selected sentiment.   |
-
-| Methods                  | Description                                             | Parameters                           |
-| ------------------------ | ------------------------------------------------------- | ------------------------------------ |
-| `handleSentimentClick`   | Handles the click event on a sentiment icon.             | `selectedOutlineIcon: string`       |
-| `handleSentimentHover`   | Handles the hover event on a sentiment icon.             | `selectedOutlineIcon: string`       |
-| `getIconName`            | Retrieves the name of the selected sentiment icon.       | `icon: string`                      |
-| `getIconType`            | Retrieves the type of the sentiment icon (outlined/solid). | `icon: string`                      |
