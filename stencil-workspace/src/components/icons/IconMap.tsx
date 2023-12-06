@@ -53,6 +53,7 @@ import { IconHistory } from './icon-history';
 import { IconPencil } from './icon-pencil';
 import { IconShield } from './icon-shield';
 import { IconPin } from './icon-pin';
+import { IconAccessibilityCircle } from './icon-accessibility-circle';
 
 export interface IconProps {
   color?: string;
@@ -68,6 +69,10 @@ interface IconMapProps extends IconProps {
 
 export const IconMap: FunctionalComponent<IconMapProps> = (props: IconMapProps) => {
   switch (props.icon) {
+    case 'accessibility-circle':
+      return (
+        <IconAccessibilityCircle color={props.color} onClick={props.onClick} size={props.size} pressed={props.pressed} />
+      );
     case 'add':
       return <IconAdd color={props.color} onClick={props.onClick} size={props.size} pressed={props.pressed} />;
     case 'apps':
