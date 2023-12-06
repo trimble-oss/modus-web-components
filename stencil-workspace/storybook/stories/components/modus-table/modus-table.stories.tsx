@@ -30,7 +30,7 @@ function newPerson() {
     progress: randomNumber(1, 100) * 100,
     status: randomNumber(1, 100) > 66 ? 'Verified' : randomNumber(0, 100) > 33 ? 'Pending' : 'Rejected',
     createdAt: new Date(randomNumber(1990, 2020), randomNumber(0, 11), randomNumber(1, 30)).toDateString(),
-    audience: Audiences[
+    priority: Priorities[
       randomNumber(1, 100) > 66 ? 'high':
       randomNumber(0, 100) > 33 ? 'medium'
       : 'low'
@@ -183,7 +183,7 @@ const Names = [
   'Buzz Lightyear',
 ];
 
-const Audiences = {
+const Priorities = {
   "high": {
     size: 'medium', type: 'counter',
     text: 'High',
@@ -656,9 +656,9 @@ Badge.args = {
   columns: [
     ...DefaultColumns.slice(0, DefaultColumns.length-2),
     {
-      header: 'Audience',
-      accessorKey: 'audience',
-      id: 'audience',
+      header: 'Priority',
+      accessorKey: 'priority',
+      id: 'priority',
       dataType: 'badge',
       maxSize: 100,
     },
