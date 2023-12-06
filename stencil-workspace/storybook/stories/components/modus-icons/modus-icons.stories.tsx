@@ -3,6 +3,7 @@ import docs from './modus-icons-storybook-docs.mdx';
 import { html } from 'lit-html';
 
 const iconNames = [
+  'accessibility-circle',
   'add',
   'apps',
   'calendar',
@@ -28,6 +29,7 @@ const iconNames = [
   'error',
   'export',
   'expand-all',
+  'file-bar-graph',
   'folder',
   'help',
   'history',
