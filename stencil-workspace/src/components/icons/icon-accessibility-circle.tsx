@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import { FunctionalComponent, h } from '@stencil/core';
 import { IconProps } from './IconMap';
 
