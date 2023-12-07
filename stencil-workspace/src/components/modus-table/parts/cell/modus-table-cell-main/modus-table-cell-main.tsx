@@ -25,7 +25,7 @@ import {
 import NavigateTableCells from '../../../utilities/table-cell-navigation.utility';
 import { CellFormatter } from '../../../utilities/table-cell-formatter.utility';
 import { ModusTableCellLinkElement } from '../modus-table-cell-link-element';
-import { ModusTableCellBadgeElement } from '../modus-table-cell-badge-element'
+import { ModusTableCellBadgeElement } from '../modus-table-cell-badge-element';
 import { TableContext, TableCellEdited } from '../../../models/table-context.models';
 import ModusTableCellExpandIcons from '../modus-table-cell-expand-icons';
 

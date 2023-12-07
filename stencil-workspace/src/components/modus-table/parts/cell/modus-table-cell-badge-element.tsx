@@ -12,15 +12,9 @@ interface ModusTableCellBadgeProps {
 export const ModusTableCellBadgeElement: FunctionalComponent<ModusTableCellBadgeProps> = ({ badge }) => {
   return (
     <div class="cell-badge">
-      <modus-badge
-        tabIndex={0}
-        color={badge.color}
-        size={badge.size}
-        type={badge.type}
-        ariaLabel={badge?.ariaLabel}
-        >
+      <modus-badge tabIndex={0} color={badge.color} size={badge.size} type={badge.type} ariaLabel={badge?.ariaLabel}>
         {badge.text}
       </modus-badge>
-  </div>
+    </div>
   );
 };

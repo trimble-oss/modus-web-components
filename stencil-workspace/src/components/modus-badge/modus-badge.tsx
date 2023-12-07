@@ -13,19 +13,18 @@ export type BadgeProperties = {
   styleUrl: 'modus-badge.scss',
   shadow: true,
 })
-
-export class ModusBadge  implements BadgeProperties{
+export class ModusBadge implements BadgeProperties {
   /** (optional) The badge's aria-label */
-  @Prop() ariaLabel: string | null;
+  @Prop() ariaLabel: BadgeProperties['ariaLabel'];
 
   /** (optional) The color of the badge */
-  @Prop() color: 'danger' | 'dark' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning' = 'primary';
+  @Prop() color: BadgeProperties['color'] = 'primary';
 
   /** (optional) The size of the badge */
-  @Prop() size: 'small' | 'medium' | 'large' = 'medium';
+  @Prop() size: BadgeProperties['size'] = 'medium';
 
   /** (optional) The type of the badge */
-  @Prop() type: 'counter' | 'default' | 'text' = 'default';
+  @Prop() type: BadgeProperties['type'] = 'default';
 
   classByColor: Map<string, string> = new Map([
     ['danger', 'color-danger'],
