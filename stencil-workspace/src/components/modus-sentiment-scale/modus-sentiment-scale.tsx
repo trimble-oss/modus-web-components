@@ -1,6 +1,11 @@
 import { Component, Prop, State, h, Event, EventEmitter } from '@stencil/core';
 import { IconMap } from '../icons/IconMap';
-import { SMILEYS_TYPE_MAP, THUMBS_TYPE_MAP, THUMB_SENTIMENT_TYPE, SMILEY_SENTIMENT_TYPE } from './modus-sentiment.constants';
+import {
+  SMILEYS_TYPE_MAP,
+  THUMBS_TYPE_MAP,
+  THUMB_SENTIMENT_TYPE,
+  SMILEY_SENTIMENT_TYPE,
+} from './modus-sentiment-scale.constants';
 import { ModusSentimentScaleType } from './modus-sentiment-scale.models';
 @Component({
   tag: 'modus-sentiment-scale',
