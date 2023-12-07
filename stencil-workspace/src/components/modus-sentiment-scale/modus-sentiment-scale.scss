@@ -15,11 +15,15 @@
   }
 
   .smileys-container {
-    padding: 10px;
+    display: flex;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 
   .thumbs-container {
-    padding: 10px;
+    display: flex;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 
   .disabled {

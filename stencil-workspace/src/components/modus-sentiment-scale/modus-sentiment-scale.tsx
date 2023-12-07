@@ -74,7 +74,7 @@ export class ModusSentimentScale {
             return (
               <div
                 aria-label={value}
-                aria-selected={isIconSelected}
+                aria-checked={isIconSelected.toString()}
                 role="button"
                 tabIndex={tabIndexValue}
                 class={containerClass}
