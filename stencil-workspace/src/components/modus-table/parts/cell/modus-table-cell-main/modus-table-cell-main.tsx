@@ -162,35 +162,28 @@ export class ModusTableCellMain {
       'text-align-right': cellDataType === COLUMN_DEF_DATATYPE_INTEGER,
     };
 
-
     const renderCell = () => {
-      if(cellDataType === COLUMN_DEF_DATATYPE_LINK) {
+      if (cellDataType === COLUMN_DEF_DATATYPE_LINK) {
         return (
           <ModusTableCellLinkElement
-              link={cellValue as ModusTableCellLink}
-              onLinkClick={(link: ModusTableCellLink) => {
-                cellLinkClick.emit(link);
-              }}
-            />
-        )
-      } else if(cellDataType === COLUMN_DEF_DATATYPE_BADGE) {
-        return (
-          <ModusDataTableCellBadgePart
-            badge={cellValue as ModusDataTableCellBadge }
+            link={cellValue as ModusTableCellLink}
+            onLinkClick={(link: ModusTableCellLink) => {
+              cellLinkClick.emit(link);
+            }}
           />
-        )
+        );
+      } else if (cellDataType === COLUMN_DEF_DATATYPE_BADGE) {
+        return <ModusDataTableCellBadgePart badge={cellValue as ModusDataTableCellBadge} />;
       } else {
-        return CellFormatter(this.cell.column.columnDef.cell, this.cell.getContext())
+        return CellFormatter(this.cell.column.columnDef.cell, this.cell.getContext());
       }
-    }
+    };
 
     return (
       <div class={classes}>
         {this.hasRowsExpandable && <ModusTableCellExpandIcons row={row} />}
 
-        <span class="wrap-text">
-          {renderCell()}
-        </span>
+        <span class="wrap-text">{renderCell()}</span>
       </div>
     );
   }

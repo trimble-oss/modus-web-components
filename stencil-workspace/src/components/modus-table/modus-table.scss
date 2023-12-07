@@ -248,16 +248,6 @@ table {
             }
           }
 
-          .wrap-text {
-            width: 100%;
-          }
-
-          .cell-badge {
-            --parent-space-padding: 0;
-            --parent-space-width: 100%;
-            --parent-space-justify: center;
-          }
-
           &.text-align-right {
             justify-content: flex-end;
           }

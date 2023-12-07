@@ -597,12 +597,12 @@ describe('modus-table', () => {
         dataType: 'badge',
       },
     ];
-    const statusData = { 
-        size: 'medium', 
-        type: 'counter',
-        text: 'Verified',
-        color: 'success'
-     };
+    const statusData = {
+      size: 'medium',
+      type: 'counter',
+      text: 'Verified',
+      color: 'success',
+    };
 
     component.setProperty('columns', statusColumn);
     component.setProperty('data', [{ status: statusData }]);
@@ -610,9 +610,8 @@ describe('modus-table', () => {
 
     const cell = await page.find('modus-table >>> td');
     const cellValue = cell.textContent;
-    
+
     expect(cellValue).toEqual(statusData.text);
-    
   });
 
   it('Performs keyboard navigation on cells with hyperlinks', async () => {

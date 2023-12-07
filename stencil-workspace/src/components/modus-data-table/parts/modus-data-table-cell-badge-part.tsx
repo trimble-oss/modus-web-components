@@ -15,8 +15,7 @@ export const ModusDataTableCellBadgePart: FunctionalComponent<Props> = (props: P
         color={props.badge.color}
         size={props.badge.size}
         type={props.badge.type}
-        ariaLabel={props.badge?.ariaLabel}
-        >
+        ariaLabel={props.badge?.ariaLabel}>
         {props.badge.text}
       </modus-badge>
     </div>

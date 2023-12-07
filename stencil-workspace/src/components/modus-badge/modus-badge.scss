@@ -10,9 +10,7 @@ div.badge {
   font-size: $rem-12px;
   font-weight: $badge-font-weight;
   height: 20px;
-  padding: $modus-badge-space-padding;
-  width: $modus-badge-space-width;
-  justify-content: $modus-badge-space-justify;
+  padding: 0 8px;
   position: relative;
 
   &.color-danger {
