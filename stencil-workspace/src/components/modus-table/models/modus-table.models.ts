@@ -10,6 +10,7 @@ import {
   SortingState,
   VisibilityState,
 } from '@tanstack/table-core';
+import { BadgeProperties } from '../../modus-badge/modus-badge';
 import {
   COLUMN_DEF_DATATYPE_INTEGER,
   COLUMN_DEF_DATATYPE_LINK,
@@ -103,11 +104,8 @@ export interface ModusTableCellLink {
   _type?: typeof COLUMN_DEF_DATATYPE_LINK;
 }
 
-export interface ModusTableCellBadge {
-  ariaLabel?: string | null;
-  color?: 'danger' | 'dark' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning';
-  size?: 'small' | 'medium' | 'large';
-  type?: 'counter' | 'default' | 'text';
+export interface ModusTableCellBadge extends BadgeProperties{
+  _type: 'badge';
   text: string;
 }
 

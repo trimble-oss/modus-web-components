@@ -1,12 +1,20 @@
 // eslint-disable-next-line
 import { Component, Prop, h } from '@stencil/core';
 
+export type BadgeProperties = {
+  ariaLabel?: string | null;
+  color?: 'danger' | 'dark' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning';
+  size?: 'small' | 'medium' | 'large';
+  type?: 'counter' | 'default' | 'text';
+};
+
 @Component({
   tag: 'modus-badge',
   styleUrl: 'modus-badge.scss',
   shadow: true,
 })
-export class ModusBadge {
+
+export class ModusBadge  implements BadgeProperties{
   /** (optional) The badge's aria-label */
   @Prop() ariaLabel: string | null;
 

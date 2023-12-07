@@ -583,13 +583,13 @@ interface ModusTableCellLink {
   _type?: typeof COLUMN_DEF_DATATYPE_LINK;
 }
 
-interface ModusDataTableCellBadge {
-  _type: 'badge'; // Used internally to identify the type of cell. Does not set the badge's type.
+export interface ModusTableCellBadge {
+  _type: string;
   text: string;
-  ariaLabel?: string;
-  size?: 'small' | 'medium' | 'large';
-  color?: 'danger' | 'dark' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning';
-  type?: 'counter' | 'default' | 'text';
+  ariaLabel?: string | null;
+  color?: string;
+  size?: string;
+  type?: string;
 }
 
 interface ModusDataTableCellBadge {
