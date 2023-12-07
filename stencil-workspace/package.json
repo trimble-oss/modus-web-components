@@ -31,9 +31,9 @@
     "test.debug": "stencil test --spec --e2e --watchAll --devtools -- {file name}",
     "generate": "stencil generate",
     "lint": "npm run lint-js && npm run lint-css && npm run prettier",
-    "lint-js": "eslint src/** storybook/**/*.stories.tsx --no-error-on-unmatched-pattern",
-    "lint-css": "stylelint src/**/*.scss --fix",
-    "prettier": "prettier --write storybook/stories/**/*.* src/**/*.* --config ../.prettierrc.json --ignore-path ../.prettierignore",
+    "lint-js": "eslint \"src/**\" \"storybook/**/*.stories.tsx\"",
+    "lint-css": "stylelint \"src/**/*.scss\" --fix",
+    "prettier": "prettier --write \"storybook/stories/**/*.*\" \"src/**/*.*\" --config ../.prettierrc.json --ignore-path ../.prettierignore",
     "full": "npm ci && npm run lint && npm run build && npm run test && npm run ci-storybook",
     "ci-storybook": "cd storybook && npm ci && npm run build-storybook",
     "start-storybook": "npm run build && cd storybook && npm run storybook"
