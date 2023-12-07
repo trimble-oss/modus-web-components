@@ -9,7 +9,7 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Cell } from '@tanstack/table-core';
-import { ModusTableCellEditorArgs, ModusTableCellLink } from '../../../models/modus-table.models';
+import { ModusTableCellBadge, ModusTableCellEditorArgs, ModusTableCellLink } from '../../../models/modus-table.models';
 import {
   COLUMN_DEF_DATATYPE_KEY,
   COLUMN_DEF_DATATYPE_INTEGER,
@@ -25,10 +25,9 @@ import {
 import NavigateTableCells from '../../../utilities/table-cell-navigation.utility';
 import { CellFormatter } from '../../../utilities/table-cell-formatter.utility';
 import { ModusTableCellLinkElement } from '../modus-table-cell-link-element';
+import { ModusTableCellBadgeElement } from '../modus-table-cell-badge-element'
 import { TableContext, TableCellEdited } from '../../../models/table-context.models';
 import ModusTableCellExpandIcons from '../modus-table-cell-expand-icons';
-import { ModusDataTableCellBadge } from '../../../../modus-data-table/modus-data-table.models';
-import { ModusDataTableCellBadgePart } from '../../../../modus-data-table//parts/modus-data-table-cell-badge-part';
 
 @Component({
   tag: 'modus-table-cell-main',
@@ -173,7 +172,7 @@ export class ModusTableCellMain {
           />
         );
       } else if (cellDataType === COLUMN_DEF_DATATYPE_BADGE) {
-        return <ModusDataTableCellBadgePart badge={cellValue as ModusDataTableCellBadge} />;
+        return <ModusTableCellBadgeElement badge={cellValue as ModusTableCellBadge} />;
       } else {
         return CellFormatter(this.cell.column.columnDef.cell, this.cell.getContext());
       }

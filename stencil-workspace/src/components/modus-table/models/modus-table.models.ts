@@ -103,6 +103,14 @@ export interface ModusTableCellLink {
   _type?: typeof COLUMN_DEF_DATATYPE_LINK;
 }
 
+export interface ModusTableCellBadge {
+  ariaLabel?: string | null;
+  color?: 'danger' | 'dark' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning';
+  size?: 'small' | 'medium' | 'large';
+  type?: 'counter' | 'default' | 'text';
+  text: string;
+}
+
 export interface ModusTableCellValueChange {
   row: unknown;
   accessorKey: string;
