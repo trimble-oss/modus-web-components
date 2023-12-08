@@ -411,6 +411,9 @@
   // Autocomplete
   --modus-autocomplete-no-results-message-color: var(--modus-gray-7);
   --modus-autocomplete-no-results-subtext-color: var(--modus-gray-4);
+
+  // Dropdown
+  --modus-dropdown-list-border-color: #cfcfd2;
 }
 
 [data-mwc-theme='dark'] {
@@ -746,6 +749,9 @@
   // Autocomplete
   --modus-autocomplete-no-results-message-color: var(--modus-gray-0);
   --modus-autocomplete-no-results-subtext-color: var(--modus-gray-4);
+
+  // Dropdown
+  --modus-dropdown-list-border-color: #2f2e2d;
 }
 
 // Mixins
