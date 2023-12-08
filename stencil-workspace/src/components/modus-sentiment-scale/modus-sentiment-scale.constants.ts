@@ -7,9 +7,9 @@ export const THUMBS_TYPE_MAP = new Map([
 ]);
 
 export const SMILEYS_TYPE_MAP = new Map([
-  ['smiley-dissatisfied', 'Smiley Dissatisfied'],
-  ['smiley-somewhat-dissatisfied', 'Smiley Somewhat Dissatisfied'],
-  ['smiley-neutral', 'Smiley Neutral'],
-  ['smiley-somewhat-satisfied', 'Smiley Somewhat Satisfied'],
-  ['smiley-satisfied', 'Smiley Satisfied'],
+  ['smiley-dissatisfied', 'Dissatisfied'],
+  ['smiley-somewhat-dissatisfied', 'Somewhat Dissatisfied'],
+  ['smiley-neutral', 'Neutral'],
+  ['smiley-somewhat-satisfied', 'Somewhat Satisfied'],
+  ['smiley-satisfied', 'Satisfied'],
 ]);
