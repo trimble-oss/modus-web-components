@@ -388,9 +388,9 @@
   --modus-tooltip-color: var(--modus-white);
 
   // Sentiment Scale
-  --modus-sentiment-scale-bg: #252a2e;
-  --modus-sentiment-scale-hover-bg: #0063a3;
-  --modus-sentiment-scale-selected-bg: #0063a3;
+  --modus-sentiment-scale-bg: var(--modus-trimble-gray);
+  --modus-sentiment-scale-hover-bg: var(--modus-blue);
+  --modus-sentiment-scale-selected-bg: var(--modus-blue);
   --modus-sentiment-scale-disabled-opacity: 0.3;
 
   // Side Navigation

@@ -13,9 +13,6 @@ import { ModusSentimentScaleType } from './modus-sentiment-scale.models';
   shadow: true,
 })
 export class ModusSentimentScale {
-  /** (optional) Tab Index for the checkbox */
-  @Prop() tabIndexValue = 0;
-
   /** (optional) The input's aria-label. */
   @Prop() ariaLabel: string | null;
 
@@ -55,7 +52,7 @@ export class ModusSentimentScale {
   }
 
   render() {
-    const tabIndexValue = this.disabled ? -1 : this.tabIndexValue;
+    const tabIndexValue = this.disabled ? -1 : 0;
     const iconsMap = this.getSentimentScaleMap();
 
     let containerClass = `${this.type + '-container'} ${this.disabled ? ' disabled' : ''}`;
@@ -74,7 +71,7 @@ export class ModusSentimentScale {
             return (
               <div
                 aria-label={value}
-                aria-checked={isIconSelected.toString()}
+                aria-selected={isIconSelected ? isIconSelected.toString() : undefined}
                 role="button"
                 tabIndex={tabIndexValue}
                 class={containerClass}
