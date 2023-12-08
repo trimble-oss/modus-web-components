@@ -26,7 +26,7 @@ const Template = () => html`
   <modus-list slot="dropdownList">
     <modus-list-item size="condensed" borderless>Item 1</modus-list-item>
     <modus-list-item size="condensed" borderless>Item 2</modus-list-item>
-    <modus-lis-item size="condensed" borderless>Item 3</modus-list-item>
+    <modus-list-item size="condensed" borderless>Item 3</modus-list-item>
   </modus-list>
   </modus-dropdown>
 `;
