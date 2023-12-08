@@ -1,6 +1,6 @@
 import { Row } from '@tanstack/table-core';
 
-export function sortHyperlink(rowA: Row<unknown>, rowB: Row<unknown>, columnId: string){
+export function sortHyperlink(rowA: Row<unknown>, rowB: Row<unknown>, columnId: string) {
   return sortByValue(rowA, rowB, columnId, 'display');
 }
 
@@ -24,4 +24,3 @@ function sortByValue(rowA: Row<unknown>, rowB: Row<unknown>, columnId: string, v
 
   return valA < valB ? -1 : 1;
 }
-
