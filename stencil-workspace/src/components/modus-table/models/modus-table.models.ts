@@ -10,11 +10,13 @@ import {
   SortingState,
   VisibilityState,
 } from '@tanstack/table-core';
+import { BadgeProperties } from '../../modus-badge/modus-badge';
 import {
   COLUMN_DEF_DATATYPE_INTEGER,
   COLUMN_DEF_DATATYPE_LINK,
   COLUMN_DEF_DATATYPE_TEXT,
   CELL_EDIT_TYPE_DROPDOWN,
+  COLUMN_DEF_DATATYPE_BADGE,
 } from '../modus-table.constants';
 
 export type ModusTableRowData = RowData;
@@ -30,7 +32,8 @@ export type ModusTableCellData = CellContext<unknown, unknown>;
 export type ModusTableColumnDataType =
   | typeof COLUMN_DEF_DATATYPE_TEXT
   | typeof COLUMN_DEF_DATATYPE_INTEGER
-  | typeof COLUMN_DEF_DATATYPE_LINK;
+  | typeof COLUMN_DEF_DATATYPE_LINK
+  | typeof COLUMN_DEF_DATATYPE_BADGE;
 // | typeof COLUMN_DEF_DATATYPE_DATE;
 
 export type ModusTableCellEditorType = typeof CELL_EDIT_TYPE_DROPDOWN;
@@ -40,7 +43,7 @@ export type ModusTableCellDateEditorArgs = { format: string };
 export type ModusTableCellDropdownEditorArgs = { options: unknown[] };
 export type ModusTableCellEditorArgs = ModusTableCellDropdownEditorArgs | ModusTableCellDateEditorArgs;
 
-export type ModusTableSortingFunction<TData extends RowData> = SortingFnOption<TData> | 'sortForHyperlink';
+export type ModusTableSortingFunction<TData extends RowData> = SortingFnOption<TData> | 'sortForHyperlink' | 'sortForBadge';
 
 export interface ModusTableRowAction {
   id: string;
@@ -99,6 +102,11 @@ export interface ModusTableCellLink {
   display: string;
   url: string;
   _type?: typeof COLUMN_DEF_DATATYPE_LINK;
+}
+
+export interface ModusTableCellBadge extends BadgeProperties {
+  text: string;
+  _type?: typeof COLUMN_DEF_DATATYPE_BADGE;
 }
 
 export interface ModusTableCellValueChange {
