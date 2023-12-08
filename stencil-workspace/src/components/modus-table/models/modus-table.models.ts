@@ -43,7 +43,7 @@ export type ModusTableCellDateEditorArgs = { format: string };
 export type ModusTableCellDropdownEditorArgs = { options: unknown[] };
 export type ModusTableCellEditorArgs = ModusTableCellDropdownEditorArgs | ModusTableCellDateEditorArgs;
 
-export type ModusTableSortingFunction<TData extends RowData> = SortingFnOption<TData> | 'sortForHyperlink';
+export type ModusTableSortingFunction<TData extends RowData> = SortingFnOption<TData> | 'sortForHyperlink' | 'sortForBadge';
 
 export interface ModusTableRowAction {
   id: string;
