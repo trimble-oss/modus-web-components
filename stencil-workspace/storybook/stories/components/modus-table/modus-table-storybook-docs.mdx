@@ -207,6 +207,7 @@ User can display hyperlink in a table column.
 User can display badge in a table column.
 
 - Pass the data in `ModusTableCellBadge` format and specify `ModusTableCellBadge.badge` as the column type.
+- As a link is an object, the default sorting is ineffective. We must pass `sortingFn:'sortForBadge'` along with the column information in order to sort a column with the `ModusTableCellBadge` datatype or if '\_type' is used to override the datatype.
 
 ```html
 <div style="width: 950px">
