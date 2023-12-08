@@ -16,3 +16,20 @@ export function sortHyperlink(rowA: Row<unknown>, rowB: Row<unknown>, columnId: 
 
   return valA < valB ? -1 : 1;
 }
+
+export function sortBadge(rowA: Row<unknown>, rowB: Row<unknown>, columnId: string): number {
+  const valA = rowA.getValue(columnId)?.['text'] ?? rowA.getValue(columnId);
+  const valB = rowB.getValue(columnId)?.['text'] ?? rowB.getValue(columnId);
+
+  // If valA is null, undefined or empty
+  if (!valA) {
+    return 1;
+  }
+
+  // If valB is null, undefined or empty
+  if (!valB) {
+    return -1;
+  }
+
+  return valA < valB ? -1 : 1;
+}

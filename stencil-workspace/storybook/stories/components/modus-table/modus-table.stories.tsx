@@ -185,7 +185,8 @@ const Names = [
 
 const Priorities = {
   "high": {
-    size: 'medium', type: 'counter',
+    size: 'medium', 
+    type: 'counter',
     text: 'High',
     color: 'success', 
   },
@@ -658,6 +659,7 @@ Badge.args = {
     {
       header: 'Priority',
       accessorKey: 'priority',
+      sortingFn: 'sortForBadge',
       id: 'priority',
       dataType: 'badge',
       maxSize: 100,
