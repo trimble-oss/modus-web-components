@@ -105,8 +105,8 @@ export interface ModusTableCellLink {
 }
 
 export interface ModusTableCellBadge extends BadgeProperties {
-  _type: 'badge';
   text: string;
+  _type?: typeof COLUMN_DEF_DATATYPE_BADGE;
 }
 
 export interface ModusTableCellValueChange {

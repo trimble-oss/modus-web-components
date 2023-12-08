@@ -1,6 +1,7 @@
 // eslint-disable-next-line
 import { FunctionalComponent, h } from '@stencil/core';
 import { ModusDataTableCellBadge } from '../modus-data-table.models';
+
 interface Props {
   badge: ModusDataTableCellBadge;
 }

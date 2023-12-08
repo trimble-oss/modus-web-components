@@ -206,7 +206,7 @@ User can display hyperlink in a table column.
 
 User can display badge in a table column.
 
-- Pass the data in `ModusDataTableCellBadge` format and specify `ModusTableColumnDataType.badge` as the column type.
+- Pass the data in `ModusTableCellBadge` format and specify `ModusTableCellBadge.badge` as the column type.
 
 ```html
 <div style="width: 950px">
@@ -583,21 +583,12 @@ interface ModusTableCellLink {
   _type?: typeof COLUMN_DEF_DATATYPE_LINK;
 }
 
-export interface ModusTableCellBadge {
+interface ModusTableCellBadge {
   _type: string;
   text: string;
   ariaLabel?: string | null;
   color?: string;
   size?: string;
-  type?: string;
-}
-
-interface ModusDataTableCellBadge {
-  _type: string;
-  text: string;
-  ariaLabel?: string;
-  size?: string;
-  color?: string;
   type?: string;
 }
 
