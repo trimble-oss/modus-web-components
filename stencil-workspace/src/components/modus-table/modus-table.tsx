@@ -161,7 +161,7 @@ export class ModusTable {
       this.tableCore?.setOptions('pageCount', newVal.pageCount);
       this.tableCore?.setState('pagination', {
         pageIndex: newVal.currentPageIndex - 1,
-        pageSize: newVal.currentPageSize
+        pageSize: newVal.currentPageSize,
       });
       this.manualPaginationOptions = { ...newVal };
     }
@@ -172,7 +172,7 @@ export class ModusTable {
   @Watch('manualSortingOptions') onManualSortOptionsChange(
     newVal: ModusTableManualSortingOptions,
     oldVal: ModusTableManualSortingOptions
-  )  {
+  ) {
     if (newVal?.currentSortingState.length === 0) {
       if (oldVal && oldVal.currentSortingState.length > 0) {
         this.tableCore?.setOptions('manualSorting', true);
