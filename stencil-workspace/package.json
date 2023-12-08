@@ -1,6 +1,6 @@
 {
   "name": "@trimble-oss/modus-web-components",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Trimble Modus Web Component Library",
   "homepage": "https://modus-web-components.trimble.com/",
   "bugs": {
@@ -31,9 +31,9 @@
     "test.debug": "stencil test --spec --e2e --watchAll --devtools -- {file name}",
     "generate": "stencil generate",
     "lint": "npm run lint-js && npm run lint-css && npm run prettier",
-    "lint-js": "eslint src/** storybook/**/*.stories.tsx --no-error-on-unmatched-pattern",
-    "lint-css": "stylelint src/**/*.scss --fix",
-    "prettier": "prettier --write storybook/stories/**/*.* src/**/*.* --config ../.prettierrc.json --ignore-path ../.prettierignore",
+    "lint-js": "eslint \"src/**\" \"storybook/**/*.stories.tsx\"",
+    "lint-css": "stylelint \"src/**/*.scss\" --fix",
+    "prettier": "prettier --write \"storybook/stories/**/*.*\" \"src/**/*.*\" --config ../.prettierrc.json --ignore-path ../.prettierignore",
     "full": "npm ci && npm run lint && npm run build && npm run test && npm run ci-storybook",
     "ci-storybook": "cd storybook && npm ci && npm run build-storybook",
     "start-storybook": "npm run build && cd storybook && npm run storybook"
@@ -52,7 +52,7 @@
     "@typescript-eslint/eslint-plugin": "^5.59.0",
     "@typescript-eslint/parser": "^5.58.0",
     "autoprefixer": "^10.4.16",
-    "eslint": "^8.52.0",
+    "eslint": "^8.55.0",
     "eslint-plugin-storybook": "^0.6.15",
     "jest": "^27.0.3",
     "jest-cli": "^27.5.1",

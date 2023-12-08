@@ -53,6 +53,8 @@ import { IconHistory } from './icon-history';
 import { IconPencil } from './icon-pencil';
 import { IconShield } from './icon-shield';
 import { IconPin } from './icon-pin';
+import { IconAccessibilityCircle } from './icon-accessibility-circle';
+import { IconFileBarGraph } from './icon-file-bar-graph';
 
 export interface IconProps {
   color?: string;
@@ -68,6 +70,10 @@ interface IconMapProps extends IconProps {
 
 export const IconMap: FunctionalComponent<IconMapProps> = (props: IconMapProps) => {
   switch (props.icon) {
+    case 'accessibility-circle':
+      return (
+        <IconAccessibilityCircle color={props.color} onClick={props.onClick} size={props.size} pressed={props.pressed} />
+      );
     case 'add':
       return <IconAdd color={props.color} onClick={props.onClick} size={props.size} pressed={props.pressed} />;
     case 'apps':
@@ -118,6 +124,8 @@ export const IconMap: FunctionalComponent<IconMapProps> = (props: IconMapProps) 
       return <IconError color={props.color} onClick={props.onClick} size={props.size} />;
     case 'expand-all':
       return <IconExpandAll color={props.color} onClick={props.onClick} size={props.size} />;
+    case 'file-bar-graph':
+      return <IconFileBarGraph color={props.color} onClick={props.onClick} size={props.size} />;
     case 'folder':
       return <IconFolder color={props.color} onClick={props.onClick} size={props.size} />;
     case 'help':
