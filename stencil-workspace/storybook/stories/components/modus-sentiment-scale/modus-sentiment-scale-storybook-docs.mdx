@@ -1,0 +1,50 @@
+# Modus Sentiment Scale
+
+---
+
+The Modus Sentiment Scale component offers a configurable sentiment scale for users to choose a sentiment from predefined options. This component supports both smiley and thumb icon types. They are referenced using the `<modus-sentiment-scale>` custom HTML element. Users can navigate the sentiment scale using the Tab & Shift+Tab keys. Pressing the Enter key will toggle the selection.
+
+## Usage
+### Thumbs
+<modus-sentiment-scale type="thumbs"></modus-sentiment-scale>
+```html
+<modus-sentiment-scale type="thumbs"></modus-sentiment-scale>
+
+<script>
+  const sentimentScale = document.querySelector('modus-sentiment-scale');
+  sentimentScale.addEventListener('sentimentSelection', (event) => {
+    console.log('Sentiment selected:', event.detail);
+  });
+</script>
+```
+### Smileys
+<modus-sentiment-scale type="smileys"></modus-sentiment-scale>
+```html
+<modus-sentiment-scale type="smileys"></modus-sentiment-scale>
+
+<script>
+  const sentimentScale = document.querySelector('modus-sentiment-scale');
+  sentimentScale.addEventListener('sentimentSelection', (event) => {
+    console.log('Sentiment selected:', event.detail);
+  });
+</script>
+```
+### Properties
+
+| Property     | Attribute   | Description                                     | Type                                                  | Options                    | Default   | Required |
+| ------------ | ----------- | ----------------------------------------------- | ----------------------------------------------------- | -------------------------- | --------- | -------- |
+| `type`  | `type` | The type of icons to be displayed.               | `typeof SMILEY_ICONS \| typeof THUMB_ICONS`            | `smileys`, `thumbs` |           | Yes      |
+| `disabled`   | `disabled`   | (optional) Whether the sentiment scale is disabled. | `boolean`                                            |                           | `false`   |          |
+
+### Types
+
+| Types               | Values                                 |
+| -------------------- | ------------------------------------------- |
+| smileys | 'thumbs-up', 'thumbs-down'    |
+| thumbs | 'smiley-satisfied', 'smiley-dissatisfied', 'smiley-somewhat-dissatisfied', 'smiley-neutral', 'smiley-somewhat-satisfied',    |
+
+### Events
+
+| Events               | Description                                 | Detail                    |
+| -------------------- | ------------------------------------------- | ------------------------- |
+| `sentimentSelection` | Fires when a sentiment is selected.         | The selected sentiment.   |

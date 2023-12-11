@@ -30,6 +30,11 @@ function newPerson() {
     progress: randomNumber(1, 100) * 100,
     status: randomNumber(1, 100) > 66 ? 'Verified' : randomNumber(0, 100) > 33 ? 'Pending' : 'Rejected',
     createdAt: new Date(randomNumber(1990, 2020), randomNumber(0, 11), randomNumber(1, 30)).toDateString(),
+    priority: Priorities[
+      randomNumber(1, 100) > 66 ? 'high':
+      randomNumber(0, 100) > 33 ? 'medium'
+      : 'low'
+    ],
   };
 }
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -183,6 +188,27 @@ const Names = [
   'Papa Smurf',
   'Buzz Lightyear',
 ];
+
+const Priorities = {
+  "high": {
+    size: 'medium', 
+    type: 'counter',
+    text: 'High',
+    color: 'success', 
+  },
+  "medium": {
+    size: 'medium', type: 'counter',
+    text: 'Medium',
+    color: 'warning'
+  },
+  "low": {
+    size: 'medium', type: 'counter',
+    text: 'Low',
+    color: 'danger'
+  }
+}
+
+
 const DefaultColumns = [
   {
     header: 'First Name',
@@ -231,7 +257,6 @@ const DefaultColumns = [
     accessorKey: 'status',
     id: 'status',
     dataType: 'text',
-    minSize: 80,
   },
   {
     header: 'Profile Progress',
@@ -631,6 +656,25 @@ const valueFormatterTable = (pageSizeList, toolbarOptions, displayOptions, rowSe
 
 export const Hyperlink = Template.bind({});
 Hyperlink.args = { ...DefaultArgs, columns: DefaultColumns, data: makeData(7) };
+
+export const Badge = Template.bind({});
+Badge.args = {
+  ...DefaultArgs,
+  columns: [
+    ...DefaultColumns.slice(0, DefaultColumns.length-2),
+    {
+      header: 'Priority',
+      accessorKey: 'priority',
+      sortingFn: 'sortForBadge',
+      id: 'priority',
+      dataType: 'badge',
+      maxSize: 100,
+    },
+    ...DefaultColumns.slice(DefaultColumns.length - 1)
+  ],
+  data: makeData(7)
+  
+}
 
 export const ColumnResize = Template.bind({});
 ColumnResize.args = { ...DefaultArgs, columnResize: true };
