@@ -25,7 +25,7 @@
     display: flex;
     height: $rem-14px;
     justify-content: center;
-    margin: 0 0.28rem;
+    margin-right: 8px;
     transition: background-color 0.15s ease-in-out;
     width: $rem-14px;
 
@@ -33,6 +33,7 @@
       border-radius: 1.5px;
       height: $rem-8px;
       width: $rem-8px;
+      margin-right: 4px;
     }
 
     &:focus,
