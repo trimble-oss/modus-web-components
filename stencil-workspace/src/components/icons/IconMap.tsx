@@ -52,6 +52,20 @@ import { IconExport } from './icon-export';
 import { IconHistory } from './icon-history';
 import { IconPencil } from './icon-pencil';
 import { IconShield } from './icon-shield';
+import { IconSmileySatisfiedOutline } from './icon-smiley-satisfied-outline';
+import { IconSmileySatisfied } from './icon-smiley-satisfied';
+import { IconSmileySomewhatSatisfiedOutline } from './icon-smiley-somewhat-satisfied-outline';
+import { IconSmileySomewhatSatisfied } from './icon-smiley-somewhat-satisfied';
+import { IconSmileyNeutralOutline } from './icon-smiley-neutral-outline';
+import { IconSmileyNeutral } from './icon-smiley-neutral';
+import { IconSmileySomewhatDissatisfiedOutline } from './icon-smiley-somewhat-dissatisfied-outline';
+import { IconSmileySomewhatDissatisfied } from './icon-smiley-somewhat-dissatisfied';
+import { IconSmileyDissatisfiedOutline } from './icon-smiley-dissatisfied-outline';
+import { IconSmileyDissatisfied } from './icon-smiley-dissatisfied';
+import { IconThumbsUpOutlined } from './icon-thumbs-up-outline';
+import { IconThumbsUp } from './icon-thumbs-up';
+import { IconThumbsDownOutlined } from './icon-thumbs-down-outlined';
+import { IconThumbsDown } from './icon-thumbs-down';
 import { IconPin } from './icon-pin';
 import { IconAccessibilityCircle } from './icon-accessibility-circle';
 import { IconFileBarGraph } from './icon-file-bar-graph';
@@ -182,6 +196,34 @@ export const IconMap: FunctionalComponent<IconMapProps> = (props: IconMapProps) 
       return <IconPencil color={props.color} onClick={props.onClick} size={props.size} />;
     case 'shield':
       return <IconShield color={props.color} onClick={props.onClick} size={props.size} />;
+    case 'smiley-satisfied-outlined':
+      return <IconSmileySatisfiedOutline color={props.color} onClick={props.onClick} size={props.size} />;
+    case 'smiley-satisfied':
+      return <IconSmileySatisfied color={props.color} onClick={props.onClick} size={props.size} />;
+    case 'smiley-somewhat-satisfied-outlined':
+      return <IconSmileySomewhatSatisfiedOutline color={props.color} onClick={props.onClick} size={props.size} />;
+    case 'smiley-somewhat-satisfied':
+      return <IconSmileySomewhatSatisfied color={props.color} onClick={props.onClick} size={props.size} />;
+    case 'smiley-neutral-outlined':
+      return <IconSmileyNeutralOutline color={props.color} onClick={props.onClick} size={props.size} />;
+    case 'smiley-neutral':
+      return <IconSmileyNeutral color={props.color} onClick={props.onClick} size={props.size} />;
+    case 'smiley-somewhat-dissatisfied-outlined':
+      return <IconSmileySomewhatDissatisfiedOutline color={props.color} onClick={props.onClick} size={props.size} />;
+    case 'smiley-somewhat-dissatisfied':
+      return <IconSmileySomewhatDissatisfied color={props.color} onClick={props.onClick} size={props.size} />;
+    case 'smiley-dissatisfied-outlined':
+      return <IconSmileyDissatisfiedOutline color={props.color} onClick={props.onClick} size={props.size} />;
+    case 'smiley-dissatisfied':
+      return <IconSmileyDissatisfied color={props.color} onClick={props.onClick} size={props.size} />;
+    case 'thumbs-up-outlined':
+      return <IconThumbsUpOutlined color={props.color} onClick={props.onClick} size={props.size} />;
+    case 'thumbs-up':
+      return <IconThumbsUp color={props.color} onClick={props.onClick} size={props.size} />;
+    case 'thumbs-down-outlined':
+      return <IconThumbsDownOutlined color={props.color} onClick={props.onClick} size={props.size} />;
+    case 'thumbs-down':
+      return <IconThumbsDown color={props.color} onClick={props.onClick} size={props.size} />;
     default:
       return <img src={props.icon} {...(props.imageOptions || {})} />;
   }
