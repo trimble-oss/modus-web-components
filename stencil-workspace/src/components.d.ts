@@ -6,6 +6,7 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
+import { BadgeProperties } from "./components/modus-badge/modus-badge";
 import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 import { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
@@ -23,6 +24,7 @@ import { ModusTimePickerEventDetails } from "./components/modus-time-picker/modu
 import { ModusToolTipPlacement } from "./components/modus-tooltip/modus-tooltip.models";
 import { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
+export { BadgeProperties } from "./components/modus-badge/modus-badge";
 export { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 export { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 export { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
@@ -160,19 +162,19 @@ export namespace Components {
         /**
           * (optional) The badge's aria-label
          */
-        "ariaLabel": string | null;
+        "ariaLabel": BadgeProperties['ariaLabel'];
         /**
           * (optional) The color of the badge
          */
-        "color": 'danger' | 'dark' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning';
+        "color": BadgeProperties['color'];
         /**
           * (optional) The size of the badge
          */
-        "size": 'small' | 'medium' | 'large';
+        "size": BadgeProperties['size'];
         /**
           * (optional) The type of the badge
          */
-        "type": 'counter' | 'default' | 'text';
+        "type": BadgeProperties['type'];
     }
     interface ModusBreadcrumb {
         /**
@@ -2106,19 +2108,19 @@ declare namespace LocalJSX {
         /**
           * (optional) The badge's aria-label
          */
-        "ariaLabel"?: string | null;
+        "ariaLabel"?: BadgeProperties['ariaLabel'];
         /**
           * (optional) The color of the badge
          */
-        "color"?: 'danger' | 'dark' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning';
+        "color"?: BadgeProperties['color'];
         /**
           * (optional) The size of the badge
          */
-        "size"?: 'small' | 'medium' | 'large';
+        "size"?: BadgeProperties['size'];
         /**
           * (optional) The type of the badge
          */
-        "type"?: 'counter' | 'default' | 'text';
+        "type"?: BadgeProperties['type'];
     }
     interface ModusBreadcrumb {
         /**

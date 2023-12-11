@@ -387,6 +387,12 @@
   --modus-tooltip-bg: var(--modus-gray-7);
   --modus-tooltip-color: var(--modus-white);
 
+  // Sentiment Scale
+  --modus-sentiment-scale-bg: var(--modus-trimble-gray);
+  --modus-sentiment-scale-hover-bg: var(--modus-blue);
+  --modus-sentiment-scale-selected-bg: var(--modus-blue);
+  --modus-sentiment-scale-disabled-opacity: 0.3;
+
   // Side Navigation
   --modus-side-navigation-bg: var(--modus-body-bg);
   --modus-side-navigation-item-hover-bg: var(--modus-gray-0);
@@ -724,6 +730,12 @@
   // Tooltip
   --modus-tooltip-bg: var(--modus-gray-0);
   --modus-tooltip-color: var(--modus-trimble-gray);
+
+  // Sentiment Scale
+  --modus-sentiment-scale-bg: var(--modus-gray-4);
+  --modus-sentiment-scale-hover-bg: var(--modus-blue-4);
+  --modus-sentiment-scale-selected-bg: var(--modus-blue-4);
+  --modus-sentiment-scale-disabled-opacity: 0.3;
 
   // Side Navigation
   --modus-side-navigation-bg: var(--modus-gray-10);
