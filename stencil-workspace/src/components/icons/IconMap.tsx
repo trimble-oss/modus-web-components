@@ -66,6 +66,9 @@ import { IconThumbsUpOutlined } from './icon-thumbs-up-outline';
 import { IconThumbsUp } from './icon-thumbs-up';
 import { IconThumbsDownOutlined } from './icon-thumbs-down-outlined';
 import { IconThumbsDown } from './icon-thumbs-down';
+import { IconPin } from './icon-pin';
+import { IconAccessibilityCircle } from './icon-accessibility-circle';
+import { IconFileBarGraph } from './icon-file-bar-graph';
 
 export interface IconProps {
   color?: string;
@@ -81,6 +84,10 @@ interface IconMapProps extends IconProps {
 
 export const IconMap: FunctionalComponent<IconMapProps> = (props: IconMapProps) => {
   switch (props.icon) {
+    case 'accessibility-circle':
+      return (
+        <IconAccessibilityCircle color={props.color} onClick={props.onClick} size={props.size} pressed={props.pressed} />
+      );
     case 'add':
       return <IconAdd color={props.color} onClick={props.onClick} size={props.size} pressed={props.pressed} />;
     case 'apps':
@@ -131,6 +138,8 @@ export const IconMap: FunctionalComponent<IconMapProps> = (props: IconMapProps) 
       return <IconError color={props.color} onClick={props.onClick} size={props.size} />;
     case 'expand-all':
       return <IconExpandAll color={props.color} onClick={props.onClick} size={props.size} />;
+    case 'file-bar-graph':
+      return <IconFileBarGraph color={props.color} onClick={props.onClick} size={props.size} />;
     case 'folder':
       return <IconFolder color={props.color} onClick={props.onClick} size={props.size} />;
     case 'help':
@@ -147,6 +156,8 @@ export const IconMap: FunctionalComponent<IconMapProps> = (props: IconMapProps) 
       return <IconMoon color={props.color} onClick={props.onClick} size={props.size} />;
     case 'notifications':
       return <IconNotifications color={props.color} onClick={props.onClick} size={props.size} pressed={props.pressed} />;
+    case 'pin':
+      return <IconPin color={props.color} onClick={props.onClick} size={props.size} pressed={props.pressed} />;
     case 'refresh':
       return <IconRefresh color={props.color} onClick={props.onClick} size={props.size} />;
     case 'remove':

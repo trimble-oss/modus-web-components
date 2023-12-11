@@ -29,12 +29,13 @@
     "npmjs",
     "packagr",
     "Pendo",
+    "popperjs",
     "progressbar",
     "pwsh",
     "Qube",
     "SAMEORIGIN",
-    "scooby",
     "sbdocs",
+    "scooby",
     "sonarqube",
     "styleguide",
     "stylelint",
@@ -50,6 +51,6 @@
   ],
   "language": "en-US",
   "allowCompoundWords": true,
-  "ignorePaths": [".cspell.json", ".github/CODEOWNERS", "modus-variables.scss"],
+  "ignorePaths": [".cspell.json", ".github/CODEOWNERS", "labeler.yml", "modus-variables.scss"],
   "useGitignore": true
 }

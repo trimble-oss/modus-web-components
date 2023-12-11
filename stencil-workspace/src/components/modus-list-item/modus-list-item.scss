@@ -45,6 +45,7 @@ li {
 
   &.disabled {
     color: $modus-list-item-disabled-color;
+    cursor: default;
     fill: $modus-list-item-disabled-color;
   }
 

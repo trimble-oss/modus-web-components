@@ -2,21 +2,20 @@ import {
   FunctionalComponent,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
-import { Table } from '@tanstack/table-core';
+import { TableContext } from '../../../models/table-context.models';
 
 interface ModusTableHeaderCheckboxProps {
-  multipleRowSelection: boolean;
-  table: Table<unknown>;
+  context: TableContext;
 }
 
-export const ModusTableHeaderCheckbox: FunctionalComponent<ModusTableHeaderCheckboxProps> = ({
-  multipleRowSelection,
-  table,
-}) => {
-  const { getIsAllRowsSelected, getIsSomeRowsSelected, getToggleAllRowsSelectedHandler } = table;
+export const ModusTableHeaderCheckbox: FunctionalComponent<ModusTableHeaderCheckboxProps> = ({ context }) => {
+  const {
+    tableInstance: { getIsAllRowsSelected, getIsSomeRowsSelected, getToggleAllRowsSelectedHandler },
+    rowSelectionOptions,
+  } = context;
   return (
     <th class="row-checkbox sticky-left">
-      {multipleRowSelection && (
+      {rowSelectionOptions?.multiple && (
         <modus-checkbox
           ariaLabel="Select all rows"
           checked={getIsAllRowsSelected()}

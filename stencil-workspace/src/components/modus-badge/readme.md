@@ -20,11 +20,13 @@
 ### Used by
 
  - [modus-data-table](../modus-data-table)
+ - [modus-table-cell-main](../modus-table/parts/cell/modus-table-cell-main)
 
 ### Graph
 ```mermaid
 graph TD;
   modus-data-table --> modus-badge
+  modus-table-cell-main --> modus-badge
   style modus-badge fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

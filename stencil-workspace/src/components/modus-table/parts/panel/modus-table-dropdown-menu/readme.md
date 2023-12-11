@@ -7,10 +7,9 @@
 
 ## Properties
 
-| Property  | Attribute | Description            | Type                       | Default     |
-| --------- | --------- | ---------------------- | -------------------------- | ----------- |
-| `options` | --        | dropdown menu options. | `ModusTableToolbarOptions` | `undefined` |
-| `table`   | --        | Table data.            | `Table<unknown>`           | `undefined` |
+| Property  | Attribute | Description | Type           | Default     |
+| --------- | --------- | ----------- | -------------- | ----------- |
+| `context` | --        |             | `TableContext` | `undefined` |
 
 
 ## Dependencies

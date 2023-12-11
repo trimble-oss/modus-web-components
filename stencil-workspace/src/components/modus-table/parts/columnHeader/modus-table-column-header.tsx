@@ -2,20 +2,17 @@ import {
   FunctionalComponent,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
-import { Header, Table } from '@tanstack/table-core';
+import { Header } from '@tanstack/table-core';
 import { KEYBOARD_ENTER } from '../../modus-table.constants';
 import { ModusTableColumnResizingHandler } from './modus-table-column-resizing-handler';
 import { ModusTableColumnSortIcon } from './modus-table-column-sort-icon';
+import { TableContext } from '../../models/table-context.models';
 
 interface ModusTableColumnHeaderProps {
-  id: string;
-  table: Table<unknown>;
+  context: TableContext;
   header: Header<unknown, unknown>;
+  id: string;
   isNestedParentHeader: boolean;
-  showSortIconOnHover: boolean;
-  columnReorder: boolean;
-  isColumnResizing: boolean;
-  frozenColumns: string[];
   onDragStart: (
     event: MouseEvent | KeyboardEvent,
     id: string,
@@ -31,22 +28,20 @@ interface ModusTableColumnHeaderProps {
  */
 export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderProps> = ({
   id,
-  table,
+  context,
   header,
   isNestedParentHeader,
-  showSortIconOnHover,
-  columnReorder,
-  isColumnResizing,
-  frozenColumns,
   onDragStart,
   onMouseEnterResize,
   onMouseLeaveResize,
 }) => {
   let elementRef: HTMLTableCellElement;
+  const { tableInstance: table, isColumnResizing, columnReorder, frozenColumns, showSortIconOnHover } = context;
   const { column, id: headerId, colSpan, isPlaceholder, getSize } = header;
 
   return (
     <th
+      data-accessor-key={headerId}
       tabindex={`${!isColumnResizing && columnReorder ? '0' : ''}`}
       key={id}
       colSpan={colSpan}
@@ -61,6 +56,7 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
         ${isNestedParentHeader ? 'text-align-center' : ''}
         ${frozenColumns.includes(headerId) ? 'sticky-left' : ''}
         ${column.getIsResizing() ? 'active-resize' : ''}
+        ${columnReorder ? 'hide-text-selection' : ''}
       `}
       style={{
         width: `${getSize()}px`,

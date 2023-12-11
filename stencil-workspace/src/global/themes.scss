@@ -543,6 +543,9 @@
   --modus-input-disabled-border-color: #464b5266;
   --modus-input-disabled-color: #7d808d66;
 
+  // Input read-only
+  --modus-input-readonly-bg: #353a40;
+
   // Checkbox and Radio button Inputs
   --modus-check-input-bg: transparent;
   --modus-check-input-disabled-opacity: 0.4;
@@ -940,6 +943,7 @@ modus-data-table {
 
 modus-table {
   @include modus-checkbox;
+  @include modus-list-item;
 }
 
 modus-file-dropzone {

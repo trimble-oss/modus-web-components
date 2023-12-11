@@ -16,9 +16,15 @@ import {
   getSortedRowModel,
   SortingState,
   TableState,
+  Row,
 } from '@tanstack/table-core';
-import { ModusTableColumn, ModusTableRowSelectionOptions, ModusTableToolbarOptions } from './models/modus-table.models';
-import { sortHyperlink } from './functions/sortingFunction';
+import {
+  ModusTableColumn,
+  ModusTableRowSelectionOptions,
+  ModusTableSortingState,
+  ModusTableToolbarOptions,
+} from './models/modus-table.models';
+import { sortHyperlink, sortBadge } from './functions/sortingFunction';
 import { COLUMN_DEF_SUB_ROWS_KEY } from './modus-table.constants';
 
 export interface TableCoreOptions {
@@ -34,7 +40,11 @@ export interface TableCoreOptions {
   pageSizeList: number[];
   manualPagination?: boolean;
   pageCount?: number;
+  manualSorting?: boolean;
+  sortingState?: ModusTableSortingState;
+  preSelectedRows?: RowSelectionState;
 
+  getRowId(originalRow: unknown, index: number, parent?: Row<unknown>): string;
   setExpanded: (updater: Updater<ExpandedState>) => void;
   setSorting: (updater: Updater<SortingState>) => void;
   setRowSelection: (updater: Updater<RowSelectionState>) => void;
@@ -55,11 +65,17 @@ export default class ModusTableCore {
       columnResize,
       sort,
       pagination,
+      preSelectedRows,
       rowSelection,
       rowSelectionOptions,
       columnOrder,
       pageSizeList,
       toolbarOptions,
+      manualPagination,
+      pageCount,
+      manualSorting,
+      sortingState,
+      getRowId,
       setExpanded,
       setSorting,
       setRowSelection,
@@ -68,8 +84,6 @@ export default class ModusTableCore {
       setColumnSizingInfo,
       setColumnVisibility,
       setColumnOrder,
-      manualPagination,
-      pageCount
     } = tableOptions;
     const { multiple, subRowSelection } = rowSelectionOptions;
     const options: TableOptionsResolved<unknown> = {
@@ -82,8 +96,8 @@ export default class ModusTableCore {
         columnVisibility: {},
         columnOrder: columnOrder,
         expanded: null,
-        sorting: [],
-        rowSelection: {},
+        sorting: manualSorting ? sortingState : [],
+        rowSelection: preSelectedRows,
         pagination: pagination && {
           pageIndex: 0,
           pageSize: pageSizeList[0],
@@ -95,11 +109,13 @@ export default class ModusTableCore {
       enableSorting: sort,
       sortingFns: {
         sortForHyperlink: sortHyperlink,
+        sortForBadge: sortBadge,
       },
       columnResizeMode: 'onChange',
       enableColumnResizing: columnResize,
       enableHiding: !!toolbarOptions?.columnsVisibility,
       sortDescFirst: false, // To-Do, workaround to prevent sort descending on certain columns, e.g. numeric.
+
       onExpandedChange: setExpanded,
       onSortingChange: setSorting,
       onRowSelectionChange: setRowSelection,
@@ -113,14 +129,18 @@ export default class ModusTableCore {
       getSortedRowModel: getSortedRowModel(),
       getExpandedRowModel: getExpandedRowModel(),
       getSubRows: (row) => row[COLUMN_DEF_SUB_ROWS_KEY],
+      getRowId: getRowId,
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       onStateChange: () => {},
       renderFallbackValue: null,
-      ...( manualPagination && pageCount && { 
-        manualPagination,
-        pageCount
-      })
+      ...(manualPagination &&
+        pageCount && {
+          manualPagination,
+          pageCount,
+        }),
+      manualSorting: manualSorting,
     };
+
     this.tableCore = createTable(options);
   }
 

@@ -3,32 +3,33 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Cell } from '@tanstack/table-core';
-import { ModusTableCellLink, ModusTableRowActions } from '../../models/modus-table.models';
-import { ModusTableCellEdited } from '../modus-table-body';
+import { TableContext, TableCellEdited } from '../../models/table-context.models';
 
 interface ModusTableCellProps {
   cell: Cell<unknown, unknown>;
-  rowActions: ModusTableRowActions;
-  linkClick: (link: ModusTableCellLink) => void;
-  valueChange: (props: ModusTableCellEdited) => void;
+  cellIndex: number;
+  context: TableContext;
+  valueChange: (props: TableCellEdited) => void;
 }
 
-export const ModusTableCell: FunctionalComponent<ModusTableCellProps> = ({ cell, rowActions, valueChange, linkClick }) => {
+export const ModusTableCell: FunctionalComponent<ModusTableCellProps> = ({ cell, cellIndex, context, valueChange }) => {
+  const { rowsExpandable, frozenColumns } = context;
+  const hasRowsExpandable = cellIndex === 0 && rowsExpandable;
   const { id } = cell;
   return (
     <td
       key={id}
       tabindex={0}
       class={`
-      ${rowActions ? 'sticky-left' : ''}
+      ${hasRowsExpandable || frozenColumns.includes(cell.column.id) ? 'sticky-left' : ''}
       ${cell.column.getIsResizing() ? 'active-resize' : ''}
   `}
       style={{ width: `${cell.column.getSize()}px` }}>
       <modus-table-cell-main
         cell={cell}
-        rowActions={rowActions}
-        valueChange={valueChange}
-        linkClick={linkClick}></modus-table-cell-main>
+        hasRowsExpandable={hasRowsExpandable}
+        context={context}
+        valueChange={valueChange}></modus-table-cell-main>
     </td>
   );
 };

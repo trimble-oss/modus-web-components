@@ -3,6 +3,8 @@ export const SORTED_DESCENDING = 'Sorted Descending';
 export const SORT_ASCENDING = 'Sort Ascending';
 export const SORT_DESCENDING = 'Sort Descending';
 
+export const HTML_ATTR_DATA_ACCESSOR_KEY = 'data-accessor-key';
+
 export const COLUMN_DEF_DATATYPE_KEY = 'dataType';
 export const COLUMN_DEF_SUB_ROWS_KEY = 'subRows';
 export const COLUMN_DEF_CELL_EDITOR_TYPE_KEY = 'cellEditorType';
@@ -16,6 +18,7 @@ export const COLUMN_DEF_DATATYPE_TEXT = 'text';
 export const COLUMN_DEF_DATATYPE_INTEGER = 'integer';
 export const COLUMN_DEF_DATATYPE_LINK = 'link';
 export const COLUMN_DEF_DATATYPE_DATE = 'date';
+export const COLUMN_DEF_DATATYPE_BADGE = 'badge';
 
 export const CELL_EDIT_TYPE_TEXT = COLUMN_DEF_DATATYPE_TEXT;
 export const CELL_EDIT_TYPE_INT = COLUMN_DEF_DATATYPE_INTEGER;

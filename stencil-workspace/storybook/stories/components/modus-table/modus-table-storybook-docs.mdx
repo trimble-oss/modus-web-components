@@ -12,8 +12,10 @@ import { Story } from '@storybook/addon-docs';
 - [Hover](#hover)
 - [Borderless](#borderless)
 - [Sorting](#sorting)
+- [Manual Sorting](#manual-sorting)
 - [Value Formatter](#value-formatter)
 - [Hyperlink](#hyperlink)
+- [Badge](#badge)
 - [Column Resize](#column-resize)
 - [Column Reorder](#column-reorder)
 - [Pagination](#pagination)
@@ -22,6 +24,7 @@ import { Story } from '@storybook/addon-docs';
 - [Column Visibility](#column-visibility)
 - [Expandable Rows](#Expandable-rows)
 - [Checkbox Row Selection](#checkbox-row-selection)
+- [Row Actions](#row-actions)
 - [Inline Editing](#inline-editing)
 - [Types](#types)
 - [Accessibility](#accessibility)
@@ -145,6 +148,13 @@ Users can arrange data in a table by sorting it in either ascending or descendin
 - When enabled, the sort icon's initial click will sort in ascending order, while its second click will sort in descending order.
 - Set `showSortIconOnHover` to `true` to enable sort on hover as well.
 
+### Manual Sorting
+
+Manual Sorting allows users to handle sorting in server-side mode.
+
+- Manual Sorting can be enabled using the `manualSortingOptions` prop.
+- The `currentSortingState` represents how the data is sorted (column and direction).
+
 
 ### Value Formatter
 
@@ -192,6 +202,95 @@ User can display hyperlink in a table column.
 - `_type: ModusTableColumnDataType.Link` is used to override the column data type in order to display a hyperlink only in a specific cell and not on the entire column.
 - As a link is an object, the default sorting is ineffective. We must pass `sortingFn:'sortForHyperlink'` along with the column information in order to sort a column with the `ModusTableCellLink` datatype or if '\_type' is used to override the datatype.
 
+### Badge
+
+User can display badge in a table column.
+
+- Pass the data in `ModusTableCellBadge` format and specify `ModusTableCellBadge.badge` as the column type.
+- As a badge is an object, the default sorting is ineffective. We must pass `sortingFn:'sortForBadge'` along with the column information in order to sort a column with the `ModusTableCellBadge` datatype or if '\_type' is used to override the datatype.
+
+```html
+<div style="width: 950px">
+   <modus-table column-resize="true" />
+</div>
+ <script>
+    document.querySelector('modus-table').columns = [
+      {
+        header: 'First Name',
+        accessorKey: 'firstName',
+        id: 'first-name',
+        dataType: 'text',
+        size: 150,
+        minSize: 80
+      },
+      {
+        header: 'Last Name',
+        accessorKey: 'lastName',
+        id: 'last-name',
+        dataType: 'text',
+        size: 150,
+        minSize: 80
+      },
+      {
+        header: 'Age',
+        accessorKey: 'age',
+        id: 'age',
+        dataType: 'integer',
+        size: 60,
+        minSize: 60
+      },
+      {
+        header: 'Visits',
+        accessorKey: 'visits',
+        id: 'visits',
+        dataType: 'integer',
+        maxSize: 80,
+        minSize: 80,
+        enableResizing: false,
+      },
+      {
+        header: 'Priority',
+        accessorKey: 'priority',
+        id: 'priority',
+        dataType: 'badge',
+        minSize: 80
+      },
+      {
+        header: 'Profile Progress',
+        accessorKey: 'progress',
+        id: 'progress',
+        dataType: 'integer',
+        minSize: 100,
+      },
+      {
+        header: 'Created At',
+        accessorKey: 'createdAt',
+        id: 'createdAt',
+        dataType: 'date',
+        size: 210,
+        minSize: 100,
+      },
+    ];
+    document.querySelector('modus-table').data = [
+      {
+        firstName: 'Gordon',
+        lastName: 'Lemke',
+        age: 40,
+        visits: 434,
+        progress: 97,
+        priority: {
+          size: 'medium', 
+          type: 'counter',
+          text: 'Low',
+          color: 'danger'
+        },
+        createdAt: '2002-11-21T12:48:51.739Z',
+      },
+      ...
+    ];
+  </script>
+</html>
+```
 
 ### Column Resize
 
@@ -295,16 +394,13 @@ Pagination allows users to navigate between pages
 
 ### Manual Pagination
 
-Manual Pagination allows users to handle pagination in server-side mode.
+Enabling manual pagination mode for a table allows users to manually paginate rows instead of having the table automatically paginate them. Users will need to pass details such as the current page index, page size, page count, and total record to paginate the rows. This feature is particularly useful when implementing server-side pagination.
 
-- The Modus Table utilizes the `modus-pagination` component for navigating between pages. Based on the properties initially set, pagination can be managed from the server side.
 - Manual Pagination can be enabled using the `manualPaginationOptions` prop.
 - The `currentPageIndex` takes a number to specify the current page number, indicating which page should appear as selected from the server side.
 - The `currentPageSize` takes a number to specify the current page view number, determining how many records the table will display from the server side.
 - The `pageCount` takes a number to specify the total number of pages, in order to display the corresponding number of pages in the table.
 - The `totalRecords` takes a number to specify the total number of records, in order to display the total count results in the table.
-
-<Story id="components-table--manual-pagination" height={'380px'} />
 
 ### Summary Row
 
@@ -332,7 +428,8 @@ A toolbar is used to perform operations like hiding/showing the columns. It is e
     document.querySelector('modus-table').toolbarOptions = {
         columnsVisibility: {
           title: '',
-          requiredColumns: ['first-name']
+          requiredColumns: ['first-name'],
+          hiddenColumns: ['last-name']
         }
       };
     document.querySelector('modus-table').columns = [
@@ -340,6 +437,14 @@ A toolbar is used to perform operations like hiding/showing the columns. It is e
         header: 'First Name',
         accessorKey: 'firstName',
         id: 'first-name',
+        dataType: 'text',
+        size: 150,
+        minSize: 80
+      },
+      {
+        header: 'Last Name',
+        accessorKey: 'lastName',
+        id: 'last-name',
         dataType: 'text',
         size: 150,
         minSize: 80
@@ -375,6 +480,7 @@ To select rows, users can use the checkbox provided on each row. Normally, the M
 
   - To enable multiple row selection, set `multiple` to `true`.
   - Sub-rows will also be selected if the parent is selected by setting `subRowSelection` to `true`.
+  - To load the table with pre selected rows, set preSelectedRows to a list of row ids. **Row ids default to the row index, but can also be set by passing an id value in data.**
 
 ### Inline Editing
 
@@ -401,10 +507,17 @@ Refer to the [Accessibility](#accessibility) section for how to use keyboard for
   },
 ```
 
+### Row Actions
+
+Users can add actions to rows. These actions will be shown in the first column as icons. A maximum of 4 icons will be shown, including the expand icon for expandable rows, if there more actions are provided, an overflow menu will be shown with a list of the remaining actions displayed as their label.
+
+  - Clicking a row action button will emit a rowActionClick with the action id and the row.
+  - To disable actions for specific rows, use the isDisabled(row) method.
+
+
 ### Types
 
 ```ts
-type Modus
 type ModusTableRowData = unknown | object | any[];
 type ModusTableSortingState = ColumnSort {
     id: string;
@@ -428,14 +541,7 @@ type ModusTableCellDateEditorArgs = { format: string };
 type ModusTableCellDropdownEditorArgs = { options: unknown[] };
 type ModusTableCellEditorArgs = ModusTableCellDropdownEditorArgs | ModusTableCellDateEditorArgs;
 type ModusTableDataUpdaterProps = { rowId: string; accessorKey: string; newValue: string; oldValue?: string };
-type ModusTableSortingFunction<TData extends RowData> = SortingFnOption<TData> | 'sortForHyperlink';
-
-interface ManualPaginationOptions {
-  currentPageIndex: number;
-  currentPageSize: number;
-  pageCount: number;
-  totalRecords: number;
-}
+type ModusTableSortingFunction<TData extends RowData> = SortingFnOption<TData> | 'sortForHyperlink' | 'sortForBadge';
 
 interface ModusTableColumn<TData extends RowData, TValue = unknown> {
   header: string;
@@ -469,12 +575,22 @@ interface ModusTableToolbarOptions {
 interface ModusTableColumnsVisibilityOptions {
   title: string;
   requiredColumns?: string[];
+  hiddenColumns?: string[];
 }
 
 interface ModusTableCellLink {
   display: string;
   url: string;
   _type?: typeof COLUMN_DEF_DATATYPE_LINK;
+}
+
+interface ModusTableCellBadge {
+  _type: string;
+  text: string;
+  ariaLabel?: string | null;
+  color?: string;
+  size?: string;
+  type?: string;
 }
 
 interface ModusTableCellValueChange {
@@ -489,6 +605,26 @@ interface ModusTableRowSelectionOptions {
   multiple?: boolean;
   subRowSelection?: boolean;
 }
+
+interface ModusTableRowAction {
+  id: string;
+  icon?: string;
+  label?: string;
+  index: number;
+  isDisabled?: (row: unknown) => boolean;
+}
+
+interface ModusTableManualPaginationOptions {
+  currentPageIndex: number;
+  currentPageSize: number;
+  pageCount: number;
+  totalRecords: number;
+}
+
+interface ModusTableManualSortingOptions {
+  currentSortingState: ModusTableSortingState
+}
+
 ```
 
 ### Accessibility
@@ -505,43 +641,48 @@ Users can use keyboard navigation to perform different actions.
 | Cell Navigation | Table cells can be navigated using keys like `Tab`, `Shift+Tab`, `ArrowUp`, and `ArrowDown`. Additionally, the `Tab` key can be used to focus on elements inside a cell. |
 | Inline Editing | When a cell is in focus, pressing the `Enter` key will activate the cell editor. The cell's value will be saved either when the focus shifts to another cell or when the `Enter` key is pressed again, which will also move the focus to the cell below in the same row. `Escape` key reverts the cell value to its original state and closes the editor. Note: Dropdown cell editor saves the value only when the cell loses focus.|
 
-### Properties
+## Properties
 
-| Property               | Attribute                 | Description                                                                                   | Type                                   | Default                                                   |
-| ---------------------- | ------------------------- | --------------------------------------------------------------------------------------------- | -------------------------------------- | --------------------------------------------------------- |
-| `columnReorder`        | `column-reorder`          | (Optional) To allow column reordering.                                                        | `boolean`                              | `false`                                                   |
-| `columnResize`         | `column-resize`           |                                                                                               | `boolean`                              | `false`                                                   |
-| `columns` _(required)_ | --                        | (Required) To display headers in the table.                                                   | `ModusTableColumn<unknown, unknown>[]` | `undefined`                                               |
-| `data` _(required)_    | --                        | (Required) To display data in the table.                                                      | `unknown[]`                            | `undefined`                                               |
-| `displayOptions`       | --                        | (Optional) To control display options of table.                                               | `ModusTableDisplayOptions`             | `{     borderless: false,     cellBorderless: false,   }` |
-| `fullWidth`            | `full-width`              |                                                                                               | `boolean`                              | `false`                                                   |
-| `hover`                | `hover`                   | (Optional) To enable row hover in table.                                                      | `boolean`                              | `false`                                                   |
-| `maxHeight`            | `max-height`              | (Optional) To display a vertical scrollbar when the height is exceeded.                       | `string`                               | `undefined`                                               |
-| `maxWidth`             | `max-width`               | (Optional) To display a horizontal scrollbar when the width is exceeded.                      | `string`                               | `undefined`                                               |
-| `pageSizeList`         | --                        |                                                                                               | `number[]`                             | `PAGINATION_DEFAULT_SIZES`                                |
-| `pagination`           | `pagination`              |                                                                                               | `boolean`                              | `undefined`                                               |
-| `rowSelection`         | `row-selection`           | (Optional) To display checkbox.                                                               | `boolean`                              | `false`                                                   |
-| `rowSelectionOptions`  | --                        | (Optional) To control multiple row selection.                                                 | `ModusTableRowSelectionOptions`        | `{     multiple: false,     subRowSelection: false,   }`  |
-| `rowsExpandable`       | `rows-expandable`         | (Optional) To display expanded rows.                                                          | `boolean`                              | `false`                                                   |
-| `showSortIconOnHover`  | `show-sort-icon-on-hover` | (Optional) To display sort icon on hover.                                                     | `boolean`                              | `false`                                                   |
-| `sort`                 | `sort`                    | (Optional) To sort data in table.                                                             | `boolean`                              | `false`                                                   |
-| `summaryRow`           | `summary-row`             | (Optional) To display summary row.                                                            | `boolean`                              | `false`                                                   |
-| `toolbar`              | `toolbar`                 | (Optional) To display a toolbar for the table.                                                | `boolean`                              | `false`                                                   |
-| `toolbarOptions`       | --                        | (Optional) To display a toolbar, which allows access to table operations like hiding columns. | `ModusTableToolbarOptions`             | `null`                                                    |
+| Property                  | Attribute                 | Description                                                                                                                                                                                   | Type                                   | Default                                                   |
+| ------------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  | -------------------------------------- | --------------------------------------------------------- |
+| `columnReorder`           | `column-reorder`          | (Optional) To allow column reordering.                                                                                                                                                        | `boolean`                              | `false`                                                   |
+| `columnResize`            | `column-resize`           |                                                                                                                                                                                               | `boolean`                              | `false`                                                   |
+| `columns` _(required)_    | --                        | (Required) To display headers in the table.                                                                                                                                                   | `ModusTableColumn<unknown, unknown>[]` | `undefined`                                               |
+| `data` _(required)_       | --                        | (Required) To display data in the table.                                                                                                                                                      | `unknown[]`                            | `undefined`                                               |
+| `displayOptions`          | --                        | (Optional) To control display options of table.                                                                                                                                               | `ModusTableDisplayOptions`             | `{     borderless: false,     cellBorderless: false,   }` |
+| `fullWidth`               | `full-width`              |                                                                                                                                                                                               | `boolean`                              | `false`                                                   |
+| `hover`                   | `hover`                   | (Optional) To enable row hover in table.                                                                                                                                                      | `boolean`                              | `false`                                                   |
+| `manualPaginationOptions` | --                        | (Optional) To enable manual pagination mode. When enabled, the table will not automatically paginate rows, instead will expect the current page index and other details to be passed.         | `ModusTableManualPaginationOptions`    | `undefined`                                               |
+| `manualSortingOptions`    | --                        | (Optional) To enable manual sorting mode. When enabled, the table will not automatically sort rows, instead will expect the current sorting state (sorted column and direction) to be passed. | `ModusTableManualSortingOptions`       | `undefined`                                               |
+| `maxHeight`               | `max-height`              | (Optional) To display a vertical scrollbar when the height is exceeded.                                                                                                                       | `string`                               | `undefined`                                               |
+| `maxWidth`                | `max-width`               | (Optional) To display a horizontal scrollbar when the width is exceeded.                                                                                                                      | `string`                               | `undefined`                                               |
+| `pageSizeList`            | --                        |                                                                                                                                                                                               | `number[]`                             | `PAGINATION_DEFAULT_SIZES`                                |
+| `pagination`              | `pagination`              |                                                                                                                                                                                               | `boolean`                              | `undefined`                                               |
+| `rowActions`              | --                        | (Optional) Actions that can be performed on each row. A maximum of 4 icons will be shown, including overflow menu and expand icons.                                                           | `ModusTableRowAction[]`                | `[]`                                                      |
+| `rowSelection`            | `row-selection`           | (Optional) To display checkbox.                                                                                                                                                               | `boolean`                              | `false`                                                   |
+| `rowSelectionOptions`     | --                        | (Optional) To control multiple row selection.                                                                                                                                                 | `ModusTableRowSelectionOptions`        | `{     multiple: false,     subRowSelection: false,   }`  |
+| `rowsExpandable`          | `rows-expandable`         | (Optional) To display expanded rows.                                                                                                                                                          | `boolean`                              | `false`                                                   |
+| `showSortIconOnHover`     | `show-sort-icon-on-hover` | (Optional) To display sort icon on hover.                                                                                                                                                     | `boolean`                              | `false`                                                   |
+| `sort`                    | `sort`                    | (Optional) To sort data in table.                                                                                                                                                             | `boolean`                              | `false`                                                   |
+| `summaryRow`              | `summary-row`             | (Optional) To display summary row.                                                                                                                                                            | `boolean`                              | `false`                                                   |
+| `toolbar`                 | `toolbar`                 | (Optional) To display a toolbar for the table.                                                                                                                                                | `boolean`                              | `false`                                                   |
+| `toolbarOptions`          | --                        | (Optional) To display a toolbar, which allows access to table operations like hiding columns.                                                                                                 | `ModusTableToolbarOptions`             | `null`                                                    |
 
-### Events
+## Events
 
-| Event                    | Description                           | Type                                                |
-| ------------------------ | ------------------------------------- | --------------------------------------------------- |
-| `cellLinkClick`          | Emits the link that was clicked       | `CustomEvent<ModusTableCellLink>`                   |
-| `cellValueChange`        | Emits the cell value that was edited  | `CustomEvent<ModusTableCellValueChange>`            |
-| `columnOrderChange`      | Emits columns in the updated order    | `CustomEvent<string[]>`                             |
-| `columnSizingChange`     | Emits latest column size              | `CustomEvent<{ [x: string]: number; }>`             |
-| `columnVisibilityChange` | Emits visibility state of each column | `CustomEvent<{ [x: string]: boolean; }>`            |
-| `paginationChange`       | Emits selected page index and size    | `CustomEvent<PaginationState>`                      |
-| `rowExpanded`            | Emits expanded state of the columns   | `CustomEvent<boolean \| { [x: string]: boolean; }>` |
-| `rowSelectionChange`     | Emits rows selected                   | `CustomEvent<unknown>`                              |
-| `sortChange`             | Emits column sort order               | `CustomEvent<ColumnSort[]>`                         |
+| Event                    | Description                                       | Type                                                |
+| ------------------------ | ------------------------------------------------- | --------------------------------------------------- |
+| `cellLinkClick`          | Emits the link that was clicked                   | `CustomEvent<ModusTableCellLink>`                   |
+| `cellValueChange`        | Emits the cell value that was edited              | `CustomEvent<ModusTableCellValueChange>`            |
+| `columnOrderChange`      | Emits columns in the updated order                | `CustomEvent<string[]>`                             |
+| `columnSizingChange`     | Emits latest column size                          | `CustomEvent<{ [x: string]: number; }>`             |
+| `columnVisibilityChange` | Emits visibility state of each column             | `CustomEvent<{ [x: string]: boolean; }>`            |
+| `paginationChange`       | Emits selected page index and size                | `CustomEvent<PaginationState>`                      |
+| `rowActionClick`         | An event that fires when a row action is clicked. | `CustomEvent<ModusTableRowActionClick>`             |
+| `rowExpanded`            | Emits expanded state of the columns               | `CustomEvent<boolean \| { [x: string]: boolean; }>` |
+| `rowSelectionChange`     | Emits rows selected                               | `CustomEvent<unknown>`                              |
+| `sortChange`             | Emits column sort order                           | `CustomEvent<ColumnSort[]>`                         |
+
 
 
 ### Slot
@@ -565,7 +706,6 @@ Users can use this to provide custom elements.
 
 There are still additional features that we plan to implement. Some of them:
 
-- Row Actions
 - Column Filtering
 - Save Filter Preferences
 
