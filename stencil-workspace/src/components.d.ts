@@ -853,6 +853,10 @@ export namespace Components {
           * The radio buttons to render.
          */
         "radioButtons": RadioButton[];
+        /**
+          * (optional) The size of the radiobutton.
+         */
+        "size"?: 'small' | 'medium';
     }
     interface ModusSelect {
         /**
@@ -2900,6 +2904,10 @@ declare namespace LocalJSX {
           * The radio buttons to render.
          */
         "radioButtons"?: RadioButton[];
+        /**
+          * (optional) The size of the radiobutton.
+         */
+        "size"?: 'small' | 'medium';
     }
     interface ModusSelect {
         /**
