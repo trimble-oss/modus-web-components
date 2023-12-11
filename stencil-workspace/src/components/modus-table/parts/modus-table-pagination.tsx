@@ -22,11 +22,12 @@ export const ModusTablePagination: FunctionalComponent<ModusTablePaginationProps
   let activePage = 1;
 
   if (manualPaginationOptions) {
-    const { totalRecords, currentPageSize } = manualPaginationOptions;
-    activePage = manualPaginationOptions?.currentPageIndex ?? activePage;
+    const { totalRecords, currentPageIndex, currentPageSize } = manualPaginationOptions;
+    const manualPageIndex = currentPageIndex ?? activePage;
+    activePage = manualPageIndex <= getPageCount() ? manualPageIndex : activePage;
     pageIndex = activePage - 1;
     pageSize = currentPageSize ?? 0;
-    totalCount = totalRecords ?? 0;
+    totalCount = totalRecords ?? getExpandedRowModel().rows.length;
   }
 
   const selectedPageSize = optionsList.find((l) => l.display === pageSize);

@@ -419,6 +419,41 @@ describe('modus-table', () => {
     expect(paginationContainer.textContent).toContain('Showing result11-20of100');
   });
 
+  it('renders manual pagination correctly even with wrong properties set', async () => {
+    page = await newE2EPage();
+    await page.setContent('<modus-table />');
+
+    const WithWrongMockManualPagination = {
+      currentPageIndex: undefined,
+      currentPageSize: undefined,
+      pageCount: undefined,
+      totalRecords: undefined,
+    };
+
+    const component = await page.find('modus-table');
+
+    component.setProperty('columns', MockColumns);
+    component.setProperty('manualPaginationOptions', {});
+    component.setProperty('data', MockData);
+    component.setProperty('pagination', false);
+
+    await page.waitForChanges();
+    component.setProperty('pagination', true);
+    await page.waitForChanges();
+    component.setProperty('manualPaginationOptions', WithWrongMockManualPagination);
+    await page.waitForChanges();
+    component.setProperty('pageSizeList', [5, 10, 50]);
+    await page.waitForChanges();
+
+    const pagination = await page.find(`modus-table >>> modus-pagination`);
+    const paginationContainer = await page.find('modus-table >>> .pagination-and-count > .total-count');
+    await page.waitForChanges();
+
+    expect(paginationContainer).not.toBeNull();
+    expect(paginationContainer.textContent).toContain('Showing result1-2of2');
+    expect(await pagination.getAttribute('active-page')).toBe('1');
+  });
+
   it('Renders custom footer when summaryRow is true', async () => {
     page = await newE2EPage();
     await page.setContent('<modus-table />');
