@@ -19,7 +19,7 @@ export const IconCheck: FunctionalComponent<IconProps> = (props: IconProps) => (
     <path
       fill-rule="evenodd"
       clip-rule="evenodd"
-      d="M9.08471 15.4676L5.29164 11.736L4 12.9978L9.08471 18L20 7.26174L18.7175 6L9.08471 15.4676Z"
+      d="M9 18c-.26 0-.51-.1-.71-.29l-4-4A.996.996 0 1 1 5.7 12.3l3.29 3.29 9.29-9.29a.996.996 0 1 1 1.41 1.41l-10 10c-.2.2-.45.29-.71.29Z"
       fill={props.color ?? '#6A6976'}
     />
   </svg>
