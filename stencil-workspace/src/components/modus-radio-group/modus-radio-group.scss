@@ -24,15 +24,15 @@ div.modus-radio-group {
 
     .checkmark {
       background-color: $modus-radio-btn-bg;
-      border: $rem-3px solid $modus-radio-btn-border-color;
+      border: $rem-2px solid $modus-radio-btn-border-color;
       border-radius: 50%;
-      height: $rem-14px;
+      height: $rem-12px;
       position: absolute;
       transition:
         background-color 0.15s ease-in-out,
         border-color 0.15s ease-in-out,
         box-shadow 0.15s ease-in-out;
-      width: $rem-14px;
+      width: $rem-12px;
     }
 
     &.small {
@@ -65,11 +65,11 @@ div.modus-radio-group {
       border-radius: 50%;
       content: '';
       display: none;
-      height: 0.6125rem; // Specific size so that the check is centered.
+      height: 0.45rem; // Specific size so that the check is centered.
       left: $rem-2px;
       position: absolute;
       top: $rem-2px;
-      width: 0.6125rem;
+      width: 0.45rem;
     }
 
     input:checked ~ .checkmark {
