@@ -153,18 +153,19 @@ export class ModusTable {
     newVal: ModusTableManualPaginationOptions,
     oldVal: ModusTableManualPaginationOptions
   ) {
-    if (
+    const hasUpdateValues =
       newVal?.pageCount !== oldVal?.pageCount ||
       newVal?.currentPageIndex !== oldVal?.currentPageIndex ||
-      newVal?.currentPageSize !== oldVal?.currentPageSize
-    ) {
+      newVal?.currentPageSize !== oldVal?.currentPageSize;
+
+    if (hasUpdateValues) {
       this.tableCore?.setOptions('pageCount', newVal.pageCount);
       this.tableCore?.setState('pagination', {
         pageIndex: newVal.currentPageIndex - 1,
         pageSize: newVal.currentPageSize,
       });
       this.manualPaginationOptions = { ...newVal };
-    } else {
+    } else if (Object.keys(newVal).length === 0 && Object.keys(oldVal).length === 0) {
       this.tableCore?.setOptions('manualPagination', false);
       this.initializeTable();
     }
@@ -554,8 +555,6 @@ export class ModusTable {
         this.updateTableCore(updater, COLUMN_ORDER_STATE_KEY);
       },
     });
-
-    console.log('tableCore=>', this.tableState);
   }
 
   setTableState(state: TableState): void {
