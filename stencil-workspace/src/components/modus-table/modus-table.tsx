@@ -164,6 +164,9 @@ export class ModusTable {
         pageSize: newVal.currentPageSize,
       });
       this.manualPaginationOptions = { ...newVal };
+    } else {
+      this.tableCore?.setOptions('manualPagination', false);
+      this.initializeTable();
     }
   }
 
@@ -512,6 +515,7 @@ export class ModusTable {
     this.rowSelectionOptions.preSelectedRows?.forEach((row) => (selection[row] = true));
     return selection;
   }
+  
 
   initializeTable(): void {
     this.tableCore = new ModusTableCore({
@@ -527,7 +531,7 @@ export class ModusTable {
       toolbarOptions: this.toolbarOptions,
       preSelectedRows: this.getPreselectedRowState(),
 
-      ...(this.manualPaginationOptions && {
+      ...(this.manualPaginationOptions &&  {
         manualPagination: true,
         pageCount: this.manualPaginationOptions.pageCount,
       }),
@@ -551,6 +555,8 @@ export class ModusTable {
         this.updateTableCore(updater, COLUMN_ORDER_STATE_KEY);
       },
     });
+
+    console.log('tableCore=>', this.tableState)
   }
 
   setTableState(state: TableState): void {
