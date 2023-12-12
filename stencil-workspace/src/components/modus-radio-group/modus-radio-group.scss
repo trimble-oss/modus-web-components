@@ -37,9 +37,9 @@ div.modus-radio-group {
 
     &.small {
       .checkmark {
+        border: $rem-2px solid $modus-radio-btn-border-color;
         height: $rem-10px;
         width: $rem-10px;
-        border: $rem-2px solid $modus-radio-btn-border-color;
       }
 
       input:checked ~ .checkmark::after {
@@ -48,9 +48,10 @@ div.modus-radio-group {
         top: 0.1rem;
         width: 0.405rem;
       }
+
       &:focus .checkmark {
-        outline: $rem-2px solid $modus-radio-btn-focus-box-shadow-color;
-        outline-offset: $rem-2px;
+        outline: $rem-2px solid $modus-radio-btn-focus-color;
+        outline-offset: $rem-1px;
       }
 
       label {
@@ -83,7 +84,7 @@ div.modus-radio-group {
     label {
       color: $modus-radio-btn-label-color;
       font-size: $rem-12px;
-      margin-left: 1.625rem;
+      margin-left: 1.925rem;
     }
 
     &:active .checkmark {
@@ -97,8 +98,8 @@ div.modus-radio-group {
 
     &:focus .checkmark {
       border-color: $modus-radio-btn-hover-border-color;
-      outline: $rem-3px solid $modus-radio-btn-focus-box-shadow-color;
-      outline-offset: $rem-3px;
+      outline: $rem-3px solid $modus-radio-btn-focus-color;
+      outline-offset: $rem-2px;
     }
   }
 
