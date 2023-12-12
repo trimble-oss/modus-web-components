@@ -348,6 +348,33 @@ table {
     right: 0;
     z-index: 1;
   }
+
+  &.density-relaxed {
+    tr {
+      height: 3rem;
+    }
+  }
+
+  &.density-comfortable {
+    tr {
+      height: 2rem;
+    }
+  }
+
+  &.density-compact {
+    tr {
+      height: 1.5rem;
+
+      td {
+        padding-top: 0.125rem;
+        padding-bottom: 0.125rem;
+
+        &.row-checkbox {
+          padding: 0.125rem 0.5rem !important;
+        }
+      }
+    }
+  }
 }
 
 modus-table-filler-column {

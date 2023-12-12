@@ -3,3 +3,17 @@
   border: none !important;
   height: calc(3rem - $rem-4px) !important;
 }
+
+table.density-comfortable {
+  .editor::part(input-container),
+  .editor::part(input) {
+    height: calc(2rem - $rem-4px) !important;
+  }
+}
+
+table.density-compact {
+  .editor::part(input-container),
+  .editor::part(input) {
+    height: calc(1.5rem - $rem-4px) !important;
+  }
+}
