@@ -7,12 +7,13 @@
 
 ## Properties
 
-| Property    | Attribute    | Description                                | Type      | Default     |
-| ----------- | ------------ | ------------------------------------------ | --------- | ----------- |
-| `ariaLabel` | `aria-label` | (optional) The switch's aria-label.        | `string`  | `undefined` |
-| `checked`   | `checked`    | (optional) Whether the switch is checked.  | `boolean` | `undefined` |
-| `disabled`  | `disabled`   | (optional) Whether the switch is disabled. | `boolean` | `undefined` |
-| `label`     | `label`      | (optional) The switch label.               | `string`  | `undefined` |
+| Property    | Attribute    | Description                                | Type                  | Default     |
+| ----------- | ------------ | ------------------------------------------ | --------------------- | ----------- |
+| `ariaLabel` | `aria-label` | (optional) The switch's aria-label.        | `string`              | `undefined` |
+| `checked`   | `checked`    | (optional) Whether the switch is checked.  | `boolean`             | `undefined` |
+| `disabled`  | `disabled`   | (optional) Whether the switch is disabled. | `boolean`             | `undefined` |
+| `label`     | `label`      | (optional) The switch label.               | `string`              | `undefined` |
+| `size`      | `size`       | (optional) The size of the radiobutton.    | `"medium" \| "small"` | `'medium'`  |
 
 
 ## Events

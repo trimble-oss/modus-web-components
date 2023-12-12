@@ -9,7 +9,7 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Cell } from '@tanstack/table-core';
-import { ModusTableCellEditorArgs, ModusTableCellLink } from '../../../models/modus-table.models';
+import { ModusTableCellBadge, ModusTableCellEditorArgs, ModusTableCellLink } from '../../../models/modus-table.models';
 import {
   COLUMN_DEF_DATATYPE_KEY,
   COLUMN_DEF_DATATYPE_INTEGER,
@@ -20,11 +20,13 @@ import {
   COLUMN_DEF_DATATYPE_LINK,
   KEYBOARD_ENTER,
   KEYBOARD_ESCAPE,
+  COLUMN_DEF_DATATYPE_BADGE,
 } from '../../../modus-table.constants';
 import NavigateTableCells from '../../../utilities/table-cell-navigation.utility';
 import { CellFormatter } from '../../../utilities/table-cell-formatter.utility';
 import { ModusTableCellLinkElement } from '../modus-table-cell-link-element';
-import TableContext, { TableCellEdited } from '../../../models/table-context.model';
+import { ModusTableCellBadgeElement } from '../modus-table-cell-badge-element';
+import { TableContext, TableCellEdited } from '../../../models/table-context.models';
 import ModusTableCellExpandIcons from '../modus-table-cell-expand-icons';
 
 @Component({
@@ -159,22 +161,28 @@ export class ModusTableCellMain {
       'text-align-right': cellDataType === COLUMN_DEF_DATATYPE_INTEGER,
     };
 
+    const renderCell = () => {
+      if (cellDataType === COLUMN_DEF_DATATYPE_LINK) {
+        return (
+          <ModusTableCellLinkElement
+            link={cellValue as ModusTableCellLink}
+            onLinkClick={(link: ModusTableCellLink) => {
+              cellLinkClick.emit(link);
+            }}
+          />
+        );
+      } else if (cellDataType === COLUMN_DEF_DATATYPE_BADGE) {
+        return <ModusTableCellBadgeElement badge={cellValue as ModusTableCellBadge} />;
+      } else {
+        return CellFormatter(this.cell.column.columnDef.cell, this.cell.getContext());
+      }
+    };
+
     return (
       <div class={classes}>
         {this.hasRowsExpandable && <ModusTableCellExpandIcons row={row} />}
 
-        <span class="wrap-text">
-          {cellDataType === COLUMN_DEF_DATATYPE_LINK ? (
-            <ModusTableCellLinkElement
-              link={cellValue as ModusTableCellLink}
-              onLinkClick={(link: ModusTableCellLink) => {
-                cellLinkClick.emit(link);
-              }}
-            />
-          ) : (
-            CellFormatter(this.cell.column.columnDef.cell, this.cell.getContext())
-          )}
-        </span>
+        <span class="wrap-text">{renderCell()}</span>
       </div>
     );
   }

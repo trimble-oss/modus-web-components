@@ -6,7 +6,7 @@ import { ModusTableCellValueChange } from '../models/modus-table.models';
 import { ModusTableCell } from './cell/modus-table-cell';
 import { ModusTableCellCheckbox } from './row/selection/modus-table-cell-checkbox';
 import { COLUMN_DEF_SUB_ROWS_KEY } from '../modus-table.constants';
-import TableContext from '../models/table-context.model';
+import { TableContext } from '../models/table-context.models';
 
 interface ModusTableBodyProps {
   context: TableContext;
@@ -25,7 +25,13 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
         const newData = [...old];
 
         // rowId is a string of IDs for rows with nested information like subrows.
-        const idArray: number[] = row['id']?.split('.')?.map((id) => parseInt(id));
+        const idArray: number[] = [];
+        let currentRow = row;
+        while (currentRow) {
+          idArray.push(currentRow['index']);
+          currentRow = currentRow['parent'];
+        }
+        idArray.reverse();
 
         if (idArray.length === 1) {
           newData[idArray[0]][accessorKey] = newValue;

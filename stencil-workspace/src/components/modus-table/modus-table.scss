@@ -321,6 +321,12 @@ table {
         z-index: 1;
       }
 
+      &.hide-text-selection {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
       &.active-resize {
         border-right: 2px $modus-primary-color solid !important;
       }

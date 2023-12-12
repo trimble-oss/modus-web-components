@@ -36,6 +36,15 @@ const MockManualPagination = {
   totalRecords: 100,
 };
 
+const MockManualSorting = {
+  currentSortingState: [
+    {
+      id: 'mock-column-one',
+      desc: false,
+    },
+  ],
+};
+
 describe('modus-table', () => {
   let page: E2EPage;
 
@@ -248,6 +257,45 @@ describe('modus-table', () => {
     tooltip = await sortContainer.find('modus-tooltip');
     tooltipText = await tooltip.getProperty('text');
     expect(tooltipText).toEqual('Sorted Descending');
+  });
+
+  it('Renders with correct sort icon when manual sorting is enabled', async () => {
+    page = await newE2EPage();
+    await page.setContent('<modus-table />');
+
+    const component = await page.find('modus-table');
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    component.setProperty('sort', true);
+    component.setProperty('manualSortingOptions', MockManualSorting);
+    await page.waitForChanges();
+
+    const iconSortAZ = await page.find('modus-table >>> svg');
+    const dataTestId = iconSortAZ['__attributeMap']['__items'].find((item) => item['_name'] === 'data-test-id');
+    const dataTestIdValue = dataTestId && dataTestId['_value'];
+
+    expect(dataTestIdValue).toBe('iconSortAZ');
+  });
+
+  it('Check sort icon tooltip text for enabled manual sorting', async () => {
+    page = await newE2EPage();
+    await page.setContent('<modus-table />');
+
+    const component = await page.find('modus-table');
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    component.setProperty('sort', true);
+    component.setProperty('manualSortingOptions', MockManualSorting);
+    await page.waitForChanges();
+
+    const sortContainer = await page.find('modus-table >>> th');
+    expect(sortContainer).not.toBeNull();
+
+    const tooltip = await sortContainer.find('modus-tooltip');
+    const tooltipText = await tooltip.getProperty('text');
+
+    expect(tooltip).not.toBeNull();
+    expect(tooltipText).toEqual('Sorted Ascending');
   });
 
   it('Render pagination when pagination is enabled', async () => {
@@ -535,6 +583,37 @@ describe('modus-table', () => {
     expect(cellLinkClickEvent).toHaveReceivedEventDetail(emailData);
   });
 
+  it('Renders Badge in cell', async () => {
+    page = await newE2EPage();
+
+    await page.setContent('<modus-table />');
+    const component = await page.find('modus-table');
+
+    const statusColumn = [
+      {
+        header: 'Status',
+        accessorKey: 'status',
+        id: 'status',
+        dataType: 'badge',
+      },
+    ];
+    const statusData = {
+      size: 'medium',
+      type: 'counter',
+      text: 'Verified',
+      color: 'success',
+    };
+
+    component.setProperty('columns', statusColumn);
+    component.setProperty('data', [{ status: statusData }]);
+    await page.waitForChanges();
+
+    const cell = await page.find('modus-table >>> td');
+    const cellValue = cell.textContent;
+
+    expect(cellValue).toEqual(statusData.text);
+  });
+
   it('Performs keyboard navigation on cells with hyperlinks', async () => {
     page = await newE2EPage();
 
@@ -637,6 +716,7 @@ describe('modus-table', () => {
     component.setProperty('rowSelection', true);
     component.setProperty('rowSelectionOptions', {
       multiple: false,
+      preSelectedRows: [],
     });
 
     await page.waitForChanges();
@@ -738,5 +818,32 @@ describe('modus-table', () => {
     const rowActionsMenuItemClick = await page.spyOnEvent('rowActionClick');
     await rowActionsMenuItem[0].click();
     expect(rowActionsMenuItemClick).toHaveReceivedEvent();
+  });
+
+  it('Renders pre selected rows checked', async () => {
+    page = await newE2EPage();
+
+    await page.setContent('<modus-table />');
+    const component = await page.find('modus-table');
+
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    component.setProperty('rowSelection', true);
+    component.setProperty('rowSelectionOptions', {
+      multiple: true,
+      preSelectedRows: ['0'],
+    });
+    await page.waitForChanges();
+    const rowsSelected = await page.findAll('modus-table >>> modus-checkbox');
+    for (let i = 1; i < rowsSelected.length; i++) {
+      const row = rowsSelected[i];
+      const isChecked = await row.getProperty('checked');
+      if (i === 1) {
+        expect(isChecked).toBeTruthy();
+      } else {
+        expect(isChecked).toBeFalsy();
+      }
+    }
+    expect(rowsSelected).toHaveLength(3);
   });
 });

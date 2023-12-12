@@ -10,7 +10,7 @@ describe('modus-switch', () => {
     expect(page.root).toEqualHtml(`
       <modus-switch>
         <mock:shadow-root>
-          <div class="modus-switch" tabindex="0">
+          <div class="medium modus-switch" tabindex="0">
             <div class="switch">
               <span class="slider"></span>
             </div>

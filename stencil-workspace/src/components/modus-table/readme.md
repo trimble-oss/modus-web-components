@@ -17,6 +17,7 @@
 | `fullWidth`               | `full-width`              |                                                                                                                                                                                       | `boolean`                              | `false`                                                   |
 | `hover`                   | `hover`                   | (Optional) To enable row hover in table.                                                                                                                                              | `boolean`                              | `false`                                                   |
 | `manualPaginationOptions` | --                        | (Optional) To enable manual pagination mode. When enabled, the table will not automatically paginate rows, instead will expect the current page index and other details to be passed. | `ModusTableManualPaginationOptions`    | `undefined`                                               |
+| `manualSortingOptions`    | --                        | (Optional) To set modus-table in manual sorting mode.                                                                                                                                 | `ModusTableManualSortingOptions`       | `undefined`                                               |
 | `maxHeight`               | `max-height`              | (Optional) To display a vertical scrollbar when the height is exceeded.                                                                                                               | `string`                               | `undefined`                                               |
 | `maxWidth`                | `max-width`               | (Optional) To display a horizontal scrollbar when the width is exceeded.                                                                                                              | `string`                               | `undefined`                                               |
 | `pageSizeList`            | --                        |                                                                                                                                                                                       | `number[]`                             | `PAGINATION_DEFAULT_SIZES`                                |
@@ -115,6 +116,7 @@ graph TD;
   modus-table-row-actions-cell --> modus-table-row-actions
   modus-table-row-actions --> modus-button
   modus-table-cell-main --> modus-table-cell-editor
+  modus-table-cell-main --> modus-badge
   modus-table-cell-editor --> modus-number-input
   modus-table-cell-editor --> modus-text-input
   modus-table-cell-editor --> modus-select

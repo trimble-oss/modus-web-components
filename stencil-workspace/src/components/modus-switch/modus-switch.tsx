@@ -19,6 +19,9 @@ export class ModusSwitch {
   /** (optional) The switch label. */
   @Prop() label: string;
 
+  /** (optional) The size of the radiobutton. */
+  @Prop() size?: 'small' | 'medium' = 'medium';
+
   /** An event that fires on switch click. */
   @Event() switchClick: EventEmitter<boolean>;
 
@@ -57,13 +60,13 @@ export class ModusSwitch {
   }
 
   render(): unknown {
-    const containerClassName = `modus-switch ${this.disabled ? 'disabled' : ''}`;
+    const containerClassName = `modus-switch ${this.disabled ? 'disabled' : ''} ${this.size}`;
     const switchClassName = `switch ${this.checked ? 'checked' : ''}`;
 
     return (
       <div class={containerClassName} onClick={() => this.handleSwitchClick()} tabIndex={0}>
         <div class={switchClassName}>
-          <span class="slider"></span>
+          <span class={`slider`}></span>
         </div>
         <input
           aria-checked={this.checked}

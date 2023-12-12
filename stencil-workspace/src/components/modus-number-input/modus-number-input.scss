@@ -19,7 +19,7 @@
 
   .label-container {
     align-items: baseline;
-    display: flex;
+    display: inline-block;
 
     .required {
       color: $modus-input-validation-error-color;
@@ -88,6 +88,11 @@
         height: 47px; // Counteract bottom border width.
       }
     }
+  }
+
+  .input-container:has(input[readonly]) {
+    background-color: $modus-input-readonly-bg;
+    border-bottom-color: $modus-input-disabled-bottom-line-color;
   }
 
   .sub-text {

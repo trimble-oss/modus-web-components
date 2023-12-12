@@ -32,6 +32,10 @@
       &:hover {
         background-color: $modus-autocomplete-options-hover-background-color;
       }
+
+      &:focus {
+        background-color: $modus-autocomplete-options-hover-background-color;
+      }
     }
 
     .custom-option {
@@ -39,6 +43,10 @@
       cursor: pointer;
 
       &:hover {
+        background-color: $modus-autocomplete-options-hover-background-color;
+      }
+
+      &:focus {
         background-color: $modus-autocomplete-options-hover-background-color;
       }
     }

@@ -1,8 +1,7 @@
 // eslint-disable-next-line
 import { Component, Element, Fragment, h, Prop, Watch } from '@stencil/core';
 import { createPopper, Instance } from '@popperjs/core';
-
-type ToolTipPlacement = 'bottom' | 'left' | 'right' | 'top' | 'auto';
+import { ModusToolTipPlacement } from './modus-tooltip.models';
 
 @Component({
   tag: 'modus-tooltip',
@@ -15,9 +14,9 @@ export class ModusTooltip {
   @Prop() ariaLabel: string | null;
 
   /** (optional) The tooltip's position relative to its content. */
-  @Prop() position: ToolTipPlacement = 'top';
+  @Prop() position: ModusToolTipPlacement = 'top';
   @Watch('position')
-  handlePositionChange(newValue: ToolTipPlacement) {
+  handlePositionChange(newValue: ModusToolTipPlacement) {
     if (this.popperInstance) {
       this.popperInstance.setOptions((options) => ({
         ...options,
@@ -65,7 +64,7 @@ export class ModusTooltip {
     this.cleanupPopper();
   }
 
-  initializePopper(position: ToolTipPlacement): void {
+  initializePopper(position: ModusToolTipPlacement): void {
     if (this.popperInstance) {
       this.cleanupPopper();
     }
