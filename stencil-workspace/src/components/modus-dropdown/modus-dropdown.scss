@@ -1,3 +1,5 @@
+@import './modus-dropdown.vars';
+
 :host {
   font-family: $primary-font;
   position: relative;
@@ -7,7 +9,9 @@
   }
 
   .dropdown-list {
-    border-radius: $rem-2px;
+    border: 1px solid $modus-dropdown-list-border-color;
+    border-collapse: collapse;
+    border-radius: $rem-1px !important;
     display: none;
     max-height: 200px;
     max-width: 300px;

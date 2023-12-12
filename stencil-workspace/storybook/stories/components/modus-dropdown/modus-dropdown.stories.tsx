@@ -22,14 +22,12 @@ export default {
 
 const Template = () => html`
   <modus-dropdown toggle-element-id="toggleElement">
-    <modus-button id="toggleElement" slot="dropdownToggle" show-caret="true"
-      >Dropdown</modus-button
-    >
-    <modus-list slot="dropdownList">
-      <modus-list-item size="condensed">Item 1</modus-list-item>
-      <modus-list-item size="condensed">Item 2</modus-list-item>
-      <modus-list-item size="condensed">Item 3</modus-list-item>
-    </modus-list>
+  <modus-button id="toggleElement" slot="dropdownToggle" show-caret="true">Dropdown</modus-button>
+  <modus-list slot="dropdownList">
+    <modus-list-item size="condensed" borderless>Item 1</modus-list-item>
+    <modus-list-item size="condensed" borderless>Item 2</modus-list-item>
+    <modus-list-item size="condensed" borderless>Item 3</modus-list-item>
+  </modus-list>
   </modus-dropdown>
 `;
 export const Default = Template.bind({});
