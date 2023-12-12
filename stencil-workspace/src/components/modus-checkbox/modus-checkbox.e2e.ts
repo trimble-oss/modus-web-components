@@ -148,4 +148,21 @@ describe('modus-checkbox', () => {
     expect(await modusCheckbox.getProperty('indeterminate')).toBeFalsy();
     expect(await input.getProperty('indeterminate')).toBeFalsy();
   });
+  it('renders with medium size', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-checkbox></modus-checkbox>');
+    const modusCheckbox = await page.find('modus-checkbox');
+
+    expect(await modusCheckbox.getProperty('size')).toBe('medium');
+  });
+
+  it('renders with small size property', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-checkbox size="small"></modus-checkbox>');
+    const modusCheckbox = await page.find('modus-checkbox');
+
+    expect(await modusCheckbox.getProperty('size')).toBe('small');
+  });
 });
