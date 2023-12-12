@@ -19,6 +19,7 @@ import { Cell, Column, Row } from "@tanstack/table-core";
 import { TableCellEdited, TableRowActionsMenuEvent } from "./components/modus-table/models/table-context.model";
 import { Tab } from "./components/modus-tabs/modus-tabs";
 import { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
+import { ModusToolbarButton, ModusToolbarTooltip } from "./components/modus-toolbar/modus-toolbar.models";
 import { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
 export { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
@@ -34,6 +35,7 @@ export { Cell, Column, Row } from "@tanstack/table-core";
 export { TableCellEdited, TableRowActionsMenuEvent } from "./components/modus-table/models/table-context.model";
 export { Tab } from "./components/modus-tabs/modus-tabs";
 export { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
+export { ModusToolbarButton, ModusToolbarTooltip } from "./components/modus-toolbar/modus-toolbar.models";
 export { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export namespace Components {
     interface ModusAccordion {
@@ -1343,6 +1345,33 @@ export namespace Components {
          */
         "type": 'danger' | 'dark' | 'default' | 'primary' | 'secondary' | 'success' | 'warning';
     }
+    interface ModusToolbar {
+        /**
+          * The buttons to render.
+         */
+        "buttons": ModusToolbarButton[];
+        /**
+          * (optional) The toolbar's layout.
+         */
+        "layout": 'horizontal' | 'vertical';
+        /**
+          * (optional) The style of the toolbar
+         */
+        "toolbarStyle": 'combined' | 'split';
+    }
+    interface ModusToolbarButton {
+        "active": boolean;
+        "buttonStyle": 'combined' | 'split';
+        /**
+          * (optional) Disables the button.
+         */
+        "disabled": boolean;
+        "divader": boolean;
+        "divaderLayout": 'horizontal' | 'vertical';
+        "iconSrc": string;
+        "textButton": string;
+        "tooltip": ModusToolbarTooltip;
+    }
     interface ModusTooltip {
         /**
           * (optional) The tooltip's aria-label.
@@ -1563,6 +1592,10 @@ export interface ModusTimePickerCustomEvent<T> extends CustomEvent<T> {
 export interface ModusToastCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusToastElement;
+}
+export interface ModusToolbarButtonCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusToolbarButtonElement;
 }
 export interface ModusTreeViewItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1878,6 +1911,18 @@ declare global {
         prototype: HTMLModusToastElement;
         new (): HTMLModusToastElement;
     };
+    interface HTMLModusToolbarElement extends Components.ModusToolbar, HTMLStencilElement {
+    }
+    var HTMLModusToolbarElement: {
+        prototype: HTMLModusToolbarElement;
+        new (): HTMLModusToolbarElement;
+    };
+    interface HTMLModusToolbarButtonElement extends Components.ModusToolbarButton, HTMLStencilElement {
+    }
+    var HTMLModusToolbarButtonElement: {
+        prototype: HTMLModusToolbarButtonElement;
+        new (): HTMLModusToolbarButtonElement;
+    };
     interface HTMLModusTooltipElement extends Components.ModusTooltip, HTMLStencilElement {
     }
     var HTMLModusTooltipElement: {
@@ -1948,6 +1993,8 @@ declare global {
         "modus-text-input": HTMLModusTextInputElement;
         "modus-time-picker": HTMLModusTimePickerElement;
         "modus-toast": HTMLModusToastElement;
+        "modus-toolbar": HTMLModusToolbarElement;
+        "modus-toolbar-button": HTMLModusToolbarButtonElement;
         "modus-tooltip": HTMLModusTooltipElement;
         "modus-tree-view": HTMLModusTreeViewElement;
         "modus-tree-view-item": HTMLModusTreeViewItemElement;
@@ -3460,6 +3507,34 @@ declare namespace LocalJSX {
          */
         "type"?: 'danger' | 'dark' | 'default' | 'primary' | 'secondary' | 'success' | 'warning';
     }
+    interface ModusToolbar {
+        /**
+          * The buttons to render.
+         */
+        "buttons"?: ModusToolbarButton[];
+        /**
+          * (optional) The toolbar's layout.
+         */
+        "layout"?: 'horizontal' | 'vertical';
+        /**
+          * (optional) The style of the toolbar
+         */
+        "toolbarStyle"?: 'combined' | 'split';
+    }
+    interface ModusToolbarButton {
+        "active"?: boolean;
+        "buttonStyle"?: 'combined' | 'split';
+        /**
+          * (optional) Disables the button.
+         */
+        "disabled"?: boolean;
+        "divader"?: boolean;
+        "divaderLayout"?: 'horizontal' | 'vertical';
+        "iconSrc"?: string;
+        "onButtonClick"?: (event: ModusToolbarButtonCustomEvent<any>) => void;
+        "textButton"?: string;
+        "tooltip"?: ModusToolbarTooltip;
+    }
     interface ModusTooltip {
         /**
           * (optional) The tooltip's aria-label.
@@ -3607,6 +3682,8 @@ declare namespace LocalJSX {
         "modus-text-input": ModusTextInput;
         "modus-time-picker": ModusTimePicker;
         "modus-toast": ModusToast;
+        "modus-toolbar": ModusToolbar;
+        "modus-toolbar-button": ModusToolbarButton;
         "modus-tooltip": ModusTooltip;
         "modus-tree-view": ModusTreeView;
         "modus-tree-view-item": ModusTreeViewItem;
@@ -3670,6 +3747,8 @@ declare module "@stencil/core" {
             "modus-text-input": LocalJSX.ModusTextInput & JSXBase.HTMLAttributes<HTMLModusTextInputElement>;
             "modus-time-picker": LocalJSX.ModusTimePicker & JSXBase.HTMLAttributes<HTMLModusTimePickerElement>;
             "modus-toast": LocalJSX.ModusToast & JSXBase.HTMLAttributes<HTMLModusToastElement>;
+            "modus-toolbar": LocalJSX.ModusToolbar & JSXBase.HTMLAttributes<HTMLModusToolbarElement>;
+            "modus-toolbar-button": LocalJSX.ModusToolbarButton & JSXBase.HTMLAttributes<HTMLModusToolbarButtonElement>;
             "modus-tooltip": LocalJSX.ModusTooltip & JSXBase.HTMLAttributes<HTMLModusTooltipElement>;
             "modus-tree-view": LocalJSX.ModusTreeView & JSXBase.HTMLAttributes<HTMLModusTreeViewElement>;
             "modus-tree-view-item": LocalJSX.ModusTreeViewItem & JSXBase.HTMLAttributes<HTMLModusTreeViewItemElement>;

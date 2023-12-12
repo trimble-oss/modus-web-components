@@ -17,5 +17,25 @@
 
   <body>
     <!-- Test components -->
- </body>
+    <modus-toolbar></modus-toolbar>
+    
+     
+    <script>
+      const modusToolbar = document.querySelector('modus-toolbar');
+      const buttons1 = [
+        {  textButton: 'test button'},
+        {  iconSrc: 'icon 2', divader: true},
+        {  iconSrc: 'icon 1', disabled: true},
+        {  iconSrc: 'icon 2', divader: true},
+        {  iconSrc: 'icon 1', divader: true},
+        {  iconSrc: 'icon 2', active: true},
+        ];
+      const style = "split"
+      const layout = 'horizontal'
+      modusToolbar.buttons = buttons1;
+      modusToolbar.toolbarStyle = style;
+      modusToolbar.layout = layout;
+    </script>
+
+  </body>
 </html>

@@ -1,0 +1,42 @@
+div {
+  width: fit-content;
+  border-radius: $rem-4px;
+  display: flex;
+  position: relative;
+  align-items: center;
+
+  &.layout-horizontal {
+    flex-direction: row;
+  }
+
+  &.layout-vertical {
+    flex-direction: column;
+  }
+
+  &.style-combined {
+    background-color: $col_gray_light;
+    box-shadow: $box-shadow-lg;
+
+    &.layout-horizontal {
+      border-right: $rem-4px solid $col_gray_light;
+    }
+
+    &.layout-vertical {
+      border-bottom: $rem-4px solid $col_gray_light;
+    }
+  }
+
+  modus-toolbar-button {
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+
+    &.layout-horizontal {
+      flex-direction: row;
+    }
+
+    &.layout-vertical {
+      flex-direction: column;
+    }
+  }
+}

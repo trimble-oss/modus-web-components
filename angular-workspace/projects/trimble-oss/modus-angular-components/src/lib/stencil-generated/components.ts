@@ -1503,6 +1503,54 @@ export declare interface ModusToast extends Components.ModusToast {
 
 
 @ProxyCmp({
+  inputs: ['buttons', 'layout', 'toolbarStyle']
+})
+@Component({
+  selector: 'modus-toolbar',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['buttons', 'layout', 'toolbarStyle'],
+})
+export class ModusToolbar {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
+export declare interface ModusToolbar extends Components.ModusToolbar {}
+
+
+@ProxyCmp({
+  inputs: ['active', 'buttonStyle', 'disabled', 'divader', 'divaderLayout', 'iconSrc', 'textButton', 'tooltip']
+})
+@Component({
+  selector: 'modus-toolbar-button',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['active', 'buttonStyle', 'disabled', 'divader', 'divaderLayout', 'iconSrc', 'textButton', 'tooltip'],
+})
+export class ModusToolbarButton {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['buttonClick']);
+  }
+}
+
+
+export declare interface ModusToolbarButton extends Components.ModusToolbarButton {
+
+  buttonClick: EventEmitter<CustomEvent<any>>;
+}
+
+
+@ProxyCmp({
   inputs: ['ariaLabel', 'disabled', 'position', 'text']
 })
 @Component({
