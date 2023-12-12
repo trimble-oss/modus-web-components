@@ -48,7 +48,7 @@ describe('modus-button', () => {
       <modus-button icon-only="add">
         <mock:shadow-root>
           <button class="size-medium color-primary style-fill icon-only" role="button">
-            <span class="icon"><svg class="icon-add" height="16" width="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19,13H13v6H11V13H5V11h6V5h2v6h6Z" fill="#6A6976"></path></svg></span>
+            <span class="icon"><svg class="icon-add" height="16" width="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M19,13H13v6H11V13H5V11h6V5h2v6h6Z"></path></svg></span>
           </button>
         </mock:shadow-root>
       </modus-button>

@@ -9,7 +9,7 @@ interface IconProps {
 
 export const IconVisibility: FunctionalComponent<IconProps> = (props: IconProps) => (
   <svg
-    class="visibility"
+    class="icon-visibility"
     width={props.size ?? 16}
     height={props.size ?? 16}
     fill={props.color ?? '#252a2e'}
