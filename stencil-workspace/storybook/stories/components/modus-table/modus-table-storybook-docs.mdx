@@ -15,6 +15,7 @@ import { Story } from '@storybook/addon-docs';
 - [Manual Sorting](#manual-sorting)
 - [Value Formatter](#value-formatter)
 - [Hyperlink](#hyperlink)
+- [Badge](#badge)
 - [Column Resize](#column-resize)
 - [Column Reorder](#column-reorder)
 - [Pagination](#pagination)
@@ -201,6 +202,95 @@ User can display hyperlink in a table column.
 - `_type: ModusTableColumnDataType.Link` is used to override the column data type in order to display a hyperlink only in a specific cell and not on the entire column.
 - As a link is an object, the default sorting is ineffective. We must pass `sortingFn:'sortForHyperlink'` along with the column information in order to sort a column with the `ModusTableCellLink` datatype or if '\_type' is used to override the datatype.
 
+### Badge
+
+User can display badge in a table column.
+
+- Pass the data in `ModusTableCellBadge` format and specify `ModusTableCellBadge.badge` as the column type.
+- As a badge is an object, the default sorting is ineffective. We must pass `sortingFn:'sortForBadge'` along with the column information in order to sort a column with the `ModusTableCellBadge` datatype or if '\_type' is used to override the datatype.
+
+```html
+<div style="width: 950px">
+   <modus-table column-resize="true" />
+</div>
+ <script>
+    document.querySelector('modus-table').columns = [
+      {
+        header: 'First Name',
+        accessorKey: 'firstName',
+        id: 'first-name',
+        dataType: 'text',
+        size: 150,
+        minSize: 80
+      },
+      {
+        header: 'Last Name',
+        accessorKey: 'lastName',
+        id: 'last-name',
+        dataType: 'text',
+        size: 150,
+        minSize: 80
+      },
+      {
+        header: 'Age',
+        accessorKey: 'age',
+        id: 'age',
+        dataType: 'integer',
+        size: 60,
+        minSize: 60
+      },
+      {
+        header: 'Visits',
+        accessorKey: 'visits',
+        id: 'visits',
+        dataType: 'integer',
+        maxSize: 80,
+        minSize: 80,
+        enableResizing: false,
+      },
+      {
+        header: 'Priority',
+        accessorKey: 'priority',
+        id: 'priority',
+        dataType: 'badge',
+        minSize: 80
+      },
+      {
+        header: 'Profile Progress',
+        accessorKey: 'progress',
+        id: 'progress',
+        dataType: 'integer',
+        minSize: 100,
+      },
+      {
+        header: 'Created At',
+        accessorKey: 'createdAt',
+        id: 'createdAt',
+        dataType: 'date',
+        size: 210,
+        minSize: 100,
+      },
+    ];
+    document.querySelector('modus-table').data = [
+      {
+        firstName: 'Gordon',
+        lastName: 'Lemke',
+        age: 40,
+        visits: 434,
+        progress: 97,
+        priority: {
+          size: 'medium',
+          type: 'counter',
+          text: 'Low',
+          color: 'danger'
+        },
+        createdAt: '2002-11-21T12:48:51.739Z',
+      },
+      ...
+    ];
+  </script>
+</html>
+```
 
 ### Column Resize
 
@@ -390,11 +480,12 @@ To select rows, users can use the checkbox provided on each row. Normally, the M
 
   - To enable multiple row selection, set `multiple` to `true`.
   - Sub-rows will also be selected if the parent is selected by setting `subRowSelection` to `true`.
+  - To load the table with pre selected rows, set preSelectedRows to a list of row ids. **Row ids default to the row index, but can also be set by passing an id value in data.**
 
 ### Inline Editing
 
 To enable Cell Editing for a Column use the `cellEditable` property on the Column object. The component renders a text box by default based on column's `dataType`. To render a dropdown, use the `cellEditorType` property on the Column object. The `cellEditorArgs` property can be used to pass additional arguments to the editor. After editing a cell, the table automatically updates the `data` and emits a `cellValueChanged` event.
-Note: If rows are nested, the table will be able to save the changes upto 2 levels of nested data.
+Note: If rows are nested, the table will be able to save the changes up to 2 levels of nested data.
 Refer to the [Accessibility](#accessibility) section for how to use keyboard for inline editing.
 
 ```javascript
@@ -450,7 +541,7 @@ type ModusTableCellDateEditorArgs = { format: string };
 type ModusTableCellDropdownEditorArgs = { options: unknown[] };
 type ModusTableCellEditorArgs = ModusTableCellDropdownEditorArgs | ModusTableCellDateEditorArgs;
 type ModusTableDataUpdaterProps = { rowId: string; accessorKey: string; newValue: string; oldValue?: string };
-type ModusTableSortingFunction<TData extends RowData> = SortingFnOption<TData> | 'sortForHyperlink';
+type ModusTableSortingFunction<TData extends RowData> = SortingFnOption<TData> | 'sortForHyperlink' | 'sortForBadge';
 
 interface ModusTableColumn<TData extends RowData, TValue = unknown> {
   header: string;
@@ -491,6 +582,15 @@ interface ModusTableCellLink {
   display: string;
   url: string;
   _type?: typeof COLUMN_DEF_DATATYPE_LINK;
+}
+
+interface ModusTableCellBadge {
+  _type: string;
+  text: string;
+  ariaLabel?: string | null;
+  color?: string;
+  size?: string;
+  type?: string;
 }
 
 interface ModusTableCellValueChange {

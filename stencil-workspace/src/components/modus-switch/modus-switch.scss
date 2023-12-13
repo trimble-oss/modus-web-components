@@ -5,35 +5,61 @@
   display: inline-flex;
   flex-direction: row;
   font-family: $primary-font;
-  font-size: $rem-12px;
+  font-size: $rem-14px;
+  outline: none;
+
+  &.small {
+    .switch {
+      height: $rem-12px;
+      width: $rem-26px;
+
+      .slider {
+        border-radius: 8px;
+        height: $rem-12px;
+        width: $rem-26px;
+      }
+
+      .slider::before {
+        height: $rem-12px;
+        width: $rem-12px;
+      }
+
+      &.checked .slider::before {
+        transform: translateX($rem-14px);
+      }
+    }
+    label {
+      font-size: $rem-12px;
+    }
+  }
 
   .switch {
     background-color: $modus-switch-bg;
     border: $rem-2px $modus-switch-border-color solid;
     border-radius: $rem-16px;
-    height: $rem-14px;
+    height: $rem-16px;
     position: relative;
-    width: 1.875rem;
+    width: $rem-36px;
 
     .slider {
       background-color: $modus-switch-bg;
       border-radius: $rem-16px;
       cursor: pointer;
-      height: $rem-14px;
+      height: $rem-16px;
       inset: 0;
       position: absolute;
       top: 0;
-      width: 1.875rem;
+      width: $rem-36px;
     }
 
     .slider::before {
       background-color: $col_white;
       border-radius: 50%;
       content: '';
-      height: $rem-14px;
+      height: $rem-16px;
       position: absolute;
       transition: 0.1s;
-      width: $rem-14px;
+      width: $rem-16px;
     }
 
     &.checked {
@@ -45,7 +71,7 @@
       }
 
       .slider::before {
-        transform: translateX($rem-16px);
+        transform: translateX($rem-20px);
       }
     }
 
@@ -58,6 +84,11 @@
     border-color: $modus-switch-hover-border-color;
   }
 
+  &:focus .switch {
+    outline: $rem-2px solid $modus-switch-focus-box-shadow-color;
+    outline-offset: $rem-2px;
+  }
+
   input {
     display: none;
   }
@@ -65,6 +96,7 @@
   label {
     color: $modus-switch-label-color;
     margin-left: $rem-8px;
+    margin-bottom: 0.01rem;
   }
 
   &.disabled {

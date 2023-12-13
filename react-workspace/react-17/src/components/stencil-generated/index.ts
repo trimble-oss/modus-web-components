@@ -40,6 +40,7 @@ export const ModusPagination = /*@__PURE__*/createReactComponent<JSX.ModusPagina
 export const ModusProgressBar = /*@__PURE__*/createReactComponent<JSX.ModusProgressBar, HTMLModusProgressBarElement>('modus-progress-bar');
 export const ModusRadioGroup = /*@__PURE__*/createReactComponent<JSX.ModusRadioGroup, HTMLModusRadioGroupElement>('modus-radio-group');
 export const ModusSelect = /*@__PURE__*/createReactComponent<JSX.ModusSelect, HTMLModusSelectElement>('modus-select');
+export const ModusSentimentScale = /*@__PURE__*/createReactComponent<JSX.ModusSentimentScale, HTMLModusSentimentScaleElement>('modus-sentiment-scale');
 export const ModusSideNavigation = /*@__PURE__*/createReactComponent<JSX.ModusSideNavigation, HTMLModusSideNavigationElement>('modus-side-navigation');
 export const ModusSideNavigationItem = /*@__PURE__*/createReactComponent<JSX.ModusSideNavigationItem, HTMLModusSideNavigationItemElement>('modus-side-navigation-item');
 export const ModusSlider = /*@__PURE__*/createReactComponent<JSX.ModusSlider, HTMLModusSliderElement>('modus-slider');

@@ -28,12 +28,12 @@ function showSortingStatus(column: Column<unknown, unknown>, isColumnResizing: b
   return isColumnResizing
     ? '' // When column resize is enabled, we don't show the tooltip.
     : column.getIsSorted() === 'asc'
-    ? SORTED_ASCENDING
-    : column.getIsSorted() === 'desc'
-    ? SORTED_DESCENDING
-    : column.getNextSortingOrder() === 'asc'
-    ? SORT_ASCENDING
-    : SORT_DESCENDING;
+      ? SORTED_ASCENDING
+      : column.getIsSorted() === 'desc'
+        ? SORTED_DESCENDING
+        : column.getNextSortingOrder() === 'asc'
+          ? SORT_ASCENDING
+          : SORT_DESCENDING;
 }
 
 /**

@@ -80,6 +80,9 @@ export class ModusAutocomplete {
   /** The autocomplete's input placeholder. */
   @Prop() placeholder: string;
 
+  /** Whether to show autocomplete's options when focus. */
+  @Prop() showOptionsOnFocus: boolean;
+
   /** Whether the autocomplete is read-only. */
   @Prop() readOnly: boolean;
 
@@ -175,21 +178,27 @@ export class ModusAutocomplete {
     this.optionSelected.emit(optionId);
   };
 
+  handleInputBlur = () => {
+    this.hasFocus = false;
+  };
+
+  handleOptionKeyPress = (event: any, option: any, isCustomOption = false) => {
+    if (event.key !== 'Enter') {
+      return;
+    }
+    if (isCustomOption) {
+      this.handleCustomOptionClick(option);
+    } else {
+      this.handleOptionClick(option);
+    }
+  };
+
   handleClear(): void {
     this.selectedChips = [];
     this.value = null;
     this.valueChange.emit(null);
   }
 
-  handleOptionKeyPress = (event: any, option: any, isCustomOption = false) => {
-    if (event.key === 'Enter') {
-      if (isCustomOption) {
-        this.handleCustomOptionClick(option);
-      } else {
-        this.handleOptionClick(option);
-      }
-    }
-  };
 
   handleOptionClick = (option: ModusAutocompleteOption) => {
     if (this.addChip) {
@@ -270,6 +279,7 @@ export class ModusAutocomplete {
       required={this.required}
       size={this.size}
       value={this.value}
+      onBlur={this.handleInputBlur}
     />
   );
 
@@ -307,7 +317,8 @@ export class ModusAutocomplete {
                     class="text-option"
                     tabindex="0"
                     onClick={() => this.handleOptionClick(option)}
-                    onKeyPress={(ev) => this.handleOptionKeyPress(ev, option)}>
+                    onKeyPress={(ev) => this.handleOptionKeyPress(ev, option)}
+                    onBlur={this.handleInputBlur}>
                     {option.value}
                   </li>
                 );
@@ -317,9 +328,11 @@ export class ModusAutocomplete {
                 <li
                   class="custom-option"
                   tabindex="0"
+                  tabindex="0"
                   onClick={() => this.handleCustomOptionClick(option)}
                   onKeyPress={(ev) => this.handleOptionKeyPress(ev, option, true)}
                   innerHTML={option.outerHTML}
+                  onBlur={this.handleInputBlur}
                 />
               ))}
           </ul>
