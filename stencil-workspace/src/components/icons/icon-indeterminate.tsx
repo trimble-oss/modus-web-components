@@ -12,7 +12,7 @@ export const IconIndeterminate: FunctionalComponent<IconProps> = (props: IconPro
     class="icon-indeterminate"
     width={props.size ?? 16}
     height={props.size ?? 16}
-    viewBox="-3 0 24 4"
+    viewBox={props.size == '12' ? '-1 -1 24 24' : '0 0 24 24'}
     onClick={props.onClick ? () => props.onClick() : null}
     fill={props.color ?? 'currentColor'}
     xmlns="http://www.w3.org/2000/svg">

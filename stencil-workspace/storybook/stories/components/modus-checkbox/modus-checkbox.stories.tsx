@@ -52,6 +52,12 @@ export default {
         type: { summary: 'boolean' },
       },
     },
+    size: {
+      control: {
+        options: ['small', 'medium'],
+        type: 'select',
+      },
+    },
   },
   parameters: {
     actions: {
@@ -74,6 +80,7 @@ const Template = ({
   indeterminate,
   label,
   tabIndexValue,
+  size
 }) => html`
   <modus-checkbox
     aria-label=${ariaLabel}
@@ -81,17 +88,19 @@ const Template = ({
     disabled=${disabled}
     indeterminate=${indeterminate}
     label=${label}
-    tab-index-value=${tabIndexValue}></modus-checkbox>
+    tab-index-value=${tabIndexValue}
+    size=${size}></modus-checkbox>
 `;
 
-export const Default = Template.bind({});
-Default.args = {
+export const Medium = Template.bind({});
+Medium.args = {
   ariaLabel: '',
   checked: false,
   disabled: false,
   indeterminate: false,
   label: 'Checkbox',
   tabIndexValue: 0,
+  size:'medium',
 };
 
 export const Indeterminate = Template.bind({});
@@ -102,4 +111,5 @@ Indeterminate.args = {
   indeterminate: true,
   label: 'Checkbox',
   tabIndexValue: 0,
+  size:'medium',
 };
