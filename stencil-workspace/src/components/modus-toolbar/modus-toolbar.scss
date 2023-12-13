@@ -1,9 +1,9 @@
 div {
-  width: fit-content;
+  align-items: center;
   border-radius: $rem-4px;
   display: flex;
   position: relative;
-  align-items: center;
+  width: fit-content;
 
   &.layout-horizontal {
     flex-direction: row;

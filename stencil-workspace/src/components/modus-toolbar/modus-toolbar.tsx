@@ -13,7 +13,7 @@ export class ModusToolbar {
   /** (optional) The toolbar's layout. */
   @Prop() layout: 'horizontal' | 'vertical' = 'horizontal';
 
-  /** (optional) The style of the toolbar */
+  /** (optional) The toolbar's style */
   @Prop() toolbarStyle: 'combined' | 'split' = 'combined';
 
   classByLayout: Map<string, string> = new Map([
@@ -42,7 +42,7 @@ export class ModusToolbar {
             tooltip={button.tooltip}
             divaderLayout={this.layout}
             buttonStyle={this.toolbarStyle}
-            onClick={button.onClick}></modus-toolbar-button>
+            buttonClick={button.onClick}></modus-toolbar-button>
         ))}
       </div>
     );

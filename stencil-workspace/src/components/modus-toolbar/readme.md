@@ -7,11 +7,11 @@
 
 ## Properties
 
-| Property       | Attribute       | Description                         | Type                         | Default        |
-| -------------- | --------------- | ----------------------------------- | ---------------------------- | -------------- |
-| `buttons`      | --              | The buttons to render.              | `ModusToolbarButton[]`       | `undefined`    |
-| `layout`       | `layout`        | (optional) The toolbar's layout.    | `"horizontal" \| "vertical"` | `'horizontal'` |
-| `toolbarStyle` | `toolbar-style` | (optional) The style of the toolbar | `"combined" \| "split"`      | `'combined'`   |
+| Property       | Attribute       | Description                      | Type                         | Default        |
+| -------------- | --------------- | -------------------------------- | ---------------------------- | -------------- |
+| `buttons`      | --              | The buttons to render.           | `ModusToolbarButton[]`       | `undefined`    |
+| `layout`       | `layout`        | (optional) The toolbar's layout. | `"horizontal" \| "vertical"` | `'horizontal'` |
+| `toolbarStyle` | `toolbar-style` | (optional) The toolbar's style   | `"combined" \| "split"`      | `'combined'`   |
 
 
 ## Dependencies

@@ -16,7 +16,7 @@ export class ModusToolbarButton {
   @Prop() tooltip: ModusToolbarTooltip;
   @Prop() divaderLayout: 'horizontal' | 'vertical';
   @Prop() buttonStyle: 'combined' | 'split';
-  @Event() onClick: () => void;
+  @Event() buttonClick: () => void;
 
   classByLayout: Map<string, string> = new Map([
     ['horizontal', 'layout-horizontal'],
@@ -31,14 +31,14 @@ export class ModusToolbarButton {
   render(): unknown {
     const layout = `${this.classByLayout.get(this.divaderLayout)}`;
     const buttonClass = `${this.classByStyle.get(this.buttonStyle)} ${this.classByLayout.get(this.divaderLayout)} ${
-      this.active ? 'activeButton' : ''
+      this.active ? 'active-button' : ''
     }`;
 
     return (
       <Fragment>
         {this.divader && this.buttonStyle === 'combined' && <div class={layout} />}
         <modus-tooltip text={this.tooltip.text} position={this.tooltip.position}>
-          <button class={buttonClass} disabled={this.disabled} onClick={() => (!this.disabled ? this.onClick : null)}>
+          <button class={buttonClass} disabled={this.disabled} onClick={() => (!this.disabled ? this.buttonClick : null)}>
             {this.iconSrc && <img src={this.iconSrc} />}
             {this.textButton}
           </button>

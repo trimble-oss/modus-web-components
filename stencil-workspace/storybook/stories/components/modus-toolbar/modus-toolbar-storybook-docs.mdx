@@ -1,0 +1,108 @@
+import { Anchor } from '@storybook/addon-docs';
+
+# Toolbar
+
+---
+
+[Modus Toolbar](https://modus.trimble.com/components/web/toolbar/) web components consists of a series of icon buttons occupying minimum workspace. They are referenced using the `<modus-toolbar>` custom HTML element.
+
+A new TypeScript typing has been provided named Buttton defined as:
+
+```ts
+{
+  onClick: () => void; // required.
+  tooltip: ModusToolbarTooltip; // required.
+  iconSrc?: string; // optional.
+  textButton?: string; // optional.
+  disabled?: boolean; // optional.
+  active?: boolean; // optional.
+  divader?: boolean; // optional.
+}
+```
+
+### Default
+
+<Story id="components-toolbar--default" />
+
+```html
+<modus-toolbar />
+
+<script>
+  const element = document.querySelector('modus-toolbar');
+  element.buttons = [
+    { tooltip: {
+      text: 'Text button',
+      position: 'bottom',
+      },
+    textButton: 'Text button',
+    },
+    { tooltip: {
+      text: 'Add',
+      position: 'bottom',
+      },
+    iconSrc: 'add', 
+    divader: true,
+    },
+    {  tooltip: {
+      text: 'Edit',
+      position: 'bottom',
+      },
+    iconSrc: 'edit', 
+    disabled: true,
+    },
+    {  tooltip: {
+      text: 'Refresh',
+      position: 'bottom',
+      },
+    iconSrc: 'refresh', 
+    active: true, 
+    divader: true,
+    }
+  ]
+</script>
+```
+
+### Vertical Split Toolbar
+
+<Story id="components-toolbar--vertical-split" />
+
+```html
+<modus-toolbar
+  layout="vertical"
+  toolbarStyle="split" />
+
+<script>
+  const element = document.querySelector('modus-toolbar');
+  element.buttons = [
+    { tooltip: {
+      text: 'Add',
+      position: 'bottom',
+      },
+    iconSrc: 'add', 
+    },
+    {  tooltip: {
+      text: 'Edit',
+      position: 'bottom',
+      },
+    iconSrc: 'edit', 
+    disabled: true,
+    },
+    {  tooltip: {
+      text: 'Refresh',
+      position: 'bottom',
+      },
+    iconSrc: 'refresh', 
+    active: true, 
+    }
+  ]
+</script>
+```
+
+### Properties
+
+| Name            | Description                         | Type                         | Default        |
+| --------------- | ----------------------------------- | ---------------------------- | -------------- |
+| `buttons`       | The buttons to render.              | `ModusToolbarButton[]`       | `undefined`    |
+| `layout`        | (optional) The toolbar's layout.    | `"horizontal" \| "vertical"` | `'horizontal'` |
+| `toolbar-style` | (optional) The style of the toolbar | `"combined" \| "split"`      | `'combined'`   |
+

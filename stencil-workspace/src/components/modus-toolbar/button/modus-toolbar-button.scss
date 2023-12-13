@@ -1,43 +1,43 @@
 div {
   background-color: $col_gray_0;
-  border-top: $rem-4px solid $col_gray_light;
   border-left: $rem-4px solid $col_gray_light;
+  border-top: $rem-4px solid $col_gray_light;
 
   &.layout-horizontal {
-    height: $rem-24px;
-    width: $rem-1px;
     border-bottom: $rem-4px solid $col_gray_light;
     border-right: 0;
+    height: $rem-24px;
+    width: $rem-1px;
   }
 
   &.layout-vertical {
+    border-bottom: 0;
+    border-right: $rem-4px solid $col_gray_light;
     height: $rem-1px;
     width: $rem-24px;
-    border-right: $rem-4px solid $col_gray_light;
-    border-bottom: 0;
   }
 }
 
 button {
   align-items: center;
+  background-color: $col_gray_light;
   cursor: default;
   display: inline-flex;
   font-family: $primary-font;
   font-weight: $btn-font-weight;
+  height: $rem-32px;
   justify-content: center;
+  min-width: $rem-32px;
+  padding: 0;
   position: relative;
   user-select: none;
   vertical-align: middle;
   white-space: nowrap;
   width: auto;
-  min-width: $rem-32px;
-  height: $rem-32px;
-  background-color: $col_gray_light;
-  padding: 0;
 
   &.style-margin {
-    border-radius: $rem-4px;
     border: $rem-4px solid $col_gray_light;
+    border-radius: $rem-4px;
     box-shadow: $box-shadow-lg;
 
     &.layout-horizontal {
@@ -50,8 +50,8 @@ button {
   }
 
   &.style-marginless {
-    border-top: $rem-4px solid $col_gray_light;
     border-left: $rem-4px solid $col_gray_light;
+    border-top: $rem-4px solid $col_gray_light;
 
     &.layout-horizontal {
       border-bottom: $rem-4px solid $col_gray_light;
@@ -59,21 +59,21 @@ button {
     }
 
     &.layout-vertical {
-      border-right: $rem-4px solid $col_gray_light;
       border-bottom: 0;
+      border-right: $rem-4px solid $col_gray_light;
     }
   }
 
   &:hover {
-    cursor: pointer;
     background-color: $col_gray_0;
+    cursor: pointer;
   }
 
   &:active {
     background-color: $col_gray_1;
   }
 
-  &.activeButton {
+  &.active-button {
     background-color: $col_gray_1;
   }
 
