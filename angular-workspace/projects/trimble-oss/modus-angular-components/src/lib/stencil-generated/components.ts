@@ -961,6 +961,34 @@ export declare interface ModusSelect extends Components.ModusSelect {
 
 
 @ProxyCmp({
+  inputs: ['ariaLabel', 'disabled', 'type']
+})
+@Component({
+  selector: 'modus-sentiment-scale',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['ariaLabel', 'disabled', 'type'],
+})
+export class ModusSentimentScale {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['sentimentSelection']);
+  }
+}
+
+
+export declare interface ModusSentimentScale extends Components.ModusSentimentScale {
+  /**
+   * An event that fires the selected sentiment.
+   */
+  sentimentSelection: EventEmitter<CustomEvent<any>>;
+}
+
+
+@ProxyCmp({
   inputs: ['collapseOnClickOutside', 'data', 'expanded', 'maxWidth', 'mode', 'targetContent']
 })
 @Component({
