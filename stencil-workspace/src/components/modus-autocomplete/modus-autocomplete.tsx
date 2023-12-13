@@ -80,9 +80,6 @@ export class ModusAutocomplete {
   /** The autocomplete's input placeholder. */
   @Prop() placeholder: string;
 
-  /** Whether to show autocomplete's options when focus. */
-  @Prop() showOptionsOnFocus: boolean;
-
   /** Whether the autocomplete is read-only. */
   @Prop() readOnly: boolean;
 
@@ -198,7 +195,6 @@ export class ModusAutocomplete {
     this.value = null;
     this.valueChange.emit(null);
   }
-
 
   handleOptionClick = (option: ModusAutocompleteOption) => {
     if (this.addChip) {
@@ -327,7 +323,6 @@ export class ModusAutocomplete {
               this.visibleCustomOptions?.map((option) => (
                 <li
                   class="custom-option"
-                  tabindex="0"
                   tabindex="0"
                   onClick={() => this.handleCustomOptionClick(option)}
                   onKeyPress={(ev) => this.handleOptionKeyPress(ev, option, true)}
