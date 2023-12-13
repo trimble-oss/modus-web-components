@@ -16,6 +16,10 @@ export const IconIndeterminate: FunctionalComponent<IconProps> = (props: IconPro
     onClick={props.onClick ? () => props.onClick() : null}
     fill={props.color ?? 'currentColor'}
     xmlns="http://www.w3.org/2000/svg">
-    <path d="M1 3V1H17V3H1Z" />
+    <path
+      d="M18.5 13.5h-13c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5h13c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5Z"
+      fill={props.color ?? '#6A6976'}
+      stroke={props.color ?? '#6A6976'}
+    />
   </svg>
 );
