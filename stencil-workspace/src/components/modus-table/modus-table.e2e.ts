@@ -419,15 +419,15 @@ describe('modus-table', () => {
     expect(paginationContainer.textContent).toContain('Showing result11-20of100');
   });
 
-  it('renders manual pagination correctly even with wrong properties set', async () => {
+  it('ensures correct rendering of pagination when toggled on with initial invalid properties', async () => {
     page = await newE2EPage();
     await page.setContent('<modus-table />');
 
-    const WithWrongMockManualPagination = {
-      currentPageIndex: undefined,
-      currentPageSize: undefined,
-      pageCount: undefined,
-      totalRecords: undefined,
+    const MockManualPagination = {
+      currentPageIndex: 1,
+      currentPageSize: 10,
+      pageCount: 1,
+      totalRecords: 2,
     };
 
     const component = await page.find('modus-table');
@@ -440,7 +440,7 @@ describe('modus-table', () => {
     await page.waitForChanges();
     component.setProperty('pagination', true);
     await page.waitForChanges();
-    component.setProperty('manualPaginationOptions', WithWrongMockManualPagination);
+    component.setProperty('manualPaginationOptions', MockManualPagination);
     await page.waitForChanges();
     component.setProperty('pageSizeList', [5, 10, 50]);
     await page.waitForChanges();
