@@ -13,6 +13,14 @@ export default {
         type: { summary: 'boolean' },
       },
     },
+    enableUserContent: {
+      name: 'enable-user-content',
+      description: 'Whether to show user content in the profile menu or not.',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      },
+    },
     showSearch: {
       name: 'show-search',
       description: 'Toggle the search button',
@@ -52,10 +60,11 @@ export default {
   },
 };
 
-const Template = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay }) => html`
+const Template = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay, enableUserContent }) => html`
   <modus-navbar
     id="working"
     enable-search-overlay=${enableSearchOverlay}
+    enable-user-content=${enableUserContent}
     show-search=${showSearch}
     show-apps-menu
     show-main-menu>
@@ -67,6 +76,7 @@ const Template = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay
       </modus-list>
 
     <div slot="notificationMenu">Render your own notification menu.</div>
+    <div slot="userCustomContent">Render your own custom content.</div>
   </modus-navbar>
   ${setNavbar(true, '#working', profileMenuOptions, '', '', buttons)}
 `;
@@ -76,24 +86,25 @@ Default.args = {
     email: 'modus_user@trimble.com',
     initials: 'MU',
     username: 'Modus User',
-    links:[
+    links: [
       {
-      id: "link1",
-      display: "Link 1",
-      icon: "moon"
+        id: "link1",
+        display: "Link 1",
+        icon: "moon"
       },
       {
         id: "link2",
         display: "Link 2",
         icon: "sun"
-        }
+      }
     ],
     tooltip: {
       text: 'User Profile Menu',
     }
   },
   buttons: [
-    { id: 'addMenu', icon: 'add',
+    {
+      id: 'addMenu', icon: 'add',
       tooltip: {
         text: 'Add',
       }
@@ -102,12 +113,14 @@ Default.args = {
   ],
   showSearch: false,
   enableSearchOverlay: false,
+  enableUserContent: true,
 };
 
-const FailedToLoadAvatarTemplate = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay }) => html`
+const FailedToLoadAvatarTemplate = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay, enableUserContent }) => html`
   <modus-navbar
     id="broken"
     enable-search-overlay=${enableSearchOverlay}
+    enable-user-content=${enableUserContent}
     show-search=${showSearch}
     show-apps-menu
     show-help
@@ -128,11 +141,13 @@ FailedAvatar.args = {
   buttons: [],
   showSearch: false,
   enableSearchOverlay: false,
+  enableUserContent: false,
 };
-const BlueTemplate = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay }) => html`
+const BlueTemplate = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay, enableUserContent }) => html`
   <modus-navbar
     id="blue-theme"
     enable-search-overlay=${enableSearchOverlay}
+    enable-user-content=${enableUserContent}
     show-search=${showSearch}
     show-apps-menu
     show-help
@@ -143,13 +158,13 @@ const BlueTemplate = ({ profileMenuOptions, buttons, showSearch, enableSearchOve
     <div slot="notifications">Render your own notifications.</div>
   </modus-navbar>
   ${setNavbar(
-    false,
-    '#blue-theme',
-    profileMenuOptions,
-    'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
-    'https://modus-bootstrap.trimble.com/img/trimble-icon-rev.svg',
-    buttons
-  )}
+  false,
+  '#blue-theme',
+  profileMenuOptions,
+  'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
+  'https://modus-bootstrap.trimble.com/img/trimble-icon-rev.svg',
+  buttons
+)}
 `;
 export const BlueNavbar = BlueTemplate.bind({});
 BlueNavbar.args = {
@@ -161,6 +176,7 @@ BlueNavbar.args = {
   buttons: [],
   showSearch: false,
   enableSearchOverlay: false,
+  enableUserContent: false,
 };
 
 const setNavbar = (

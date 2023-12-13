@@ -658,6 +658,10 @@ export namespace Components {
          */
         "enableSearchOverlay": boolean;
         /**
+          * (optional) Whether to show user content in the profile menu or not.
+         */
+        "enableUserContent": boolean;
+        /**
           * (optional) Help URL.
          */
         "helpUrl": string;
@@ -2671,6 +2675,10 @@ declare namespace LocalJSX {
           * (optional) Whether to show search overlay or not.
          */
         "enableSearchOverlay"?: boolean;
+        /**
+          * (optional) Whether to show user content in the profile menu or not.
+         */
+        "enableUserContent"?: boolean;
         /**
           * (optional) Help URL.
          */
