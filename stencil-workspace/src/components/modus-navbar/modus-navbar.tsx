@@ -116,7 +116,7 @@ export class ModusNavbar {
   @Event() profileMenuOpen: EventEmitter<void>;
 
   /** An event that fires on profile menu sign out click. */
-  @Event() profileMenuSignOutClick: EventEmitter<MouseEvent>;
+  @Event() profileMenuSignOutClick: EventEmitter<KeyboardEvent | MouseEvent>;
 
   /** An event that fires on search value change. */
   @Event() searchChange: EventEmitter<string>;
@@ -160,7 +160,7 @@ export class ModusNavbar {
   }
 
   @Listen('signOutClick')
-  signOutClickHandler(event: MouseEvent): void {
+  signOutClickHandler(event: MouseEvent | KeyboardEvent): void {
     this.profileMenuSignOutClick.emit(event);
   }
 
