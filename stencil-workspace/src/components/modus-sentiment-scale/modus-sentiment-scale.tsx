@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import { Component, Prop, State, h, Event, EventEmitter } from '@stencil/core';
 import { IconMap } from '../icons/IconMap';
 import {

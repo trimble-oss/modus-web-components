@@ -11,7 +11,7 @@ export const IconFolder: FunctionalComponent<IconProps> = (props: IconProps) => 
   <svg
     class="icon-folder"
     xmlns="http://www.w3.org/2000/svg"
-    fill="currentColor"
+    fill={props.color ?? 'currentColor'}
     height={props.size ?? 24}
     width={props.size ?? 24}
     viewBox="0 0 32 32">
