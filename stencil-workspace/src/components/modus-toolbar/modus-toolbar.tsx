@@ -8,7 +8,7 @@ import { ModusToolbarButton } from './modus-toolbar.models';
 })
 export class ModusToolbar {
   /** The buttons to render. */
-  @Prop() buttons: ModusToolbarButton[];
+  @Prop() buttons: ModusToolbarButton[] = [];
 
   /** (optional) The toolbar's layout. */
   @Prop() layout: 'horizontal' | 'vertical' = 'horizontal';

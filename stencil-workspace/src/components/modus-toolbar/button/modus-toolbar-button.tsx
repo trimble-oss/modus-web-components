@@ -37,7 +37,7 @@ export class ModusToolbarButton {
     return (
       <Fragment>
         {this.divader && this.buttonStyle === 'combined' && <div class={layout} />}
-        <modus-tooltip text={this.tooltip.text} position={this.tooltip.position}>
+        <modus-tooltip text={this.tooltip?.text} position={this.tooltip?.position}>
           <button class={buttonClass} disabled={this.disabled} onClick={() => (!this.disabled ? this.buttonClick : null)}>
             {this.iconSrc && <img src={this.iconSrc} />}
             {this.textButton}

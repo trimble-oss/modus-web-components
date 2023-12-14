@@ -5,45 +5,46 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { Cell, Column, Row } from "@tanstack/table-core";
 import { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
 import { BadgeProperties } from "./components/modus-badge/modus-badge";
 import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
-import { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 import { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
-import { ModusNavbarApp, ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
+import { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
+import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { ModusSentimentScaleType } from "./components/modus-sentiment-scale/modus-sentiment-scale.models";
 import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-import { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnVisibilityState, ModusTableColumnsVisibilityOptions, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+import { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+import { Cell, Column, Row } from "@tanstack/table-core";
 import { TableCellEdited, TableContext } from "./components/modus-table/models/table-context.models";
 import { TableRowActionsMenuEvent } from "./components/modus-table/models/table-row-actions.models";
 import { Tab } from "./components/modus-tabs/modus-tabs";
 import { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
-import { ModusToolbarTooltip } from "./components/modus-toolbar/modus-toolbar.models";
+import { ModusToolbarButton, ModusToolbarTooltip } from "./components/modus-toolbar/modus-toolbar.models";
 import { ModusToolTipPlacement } from "./components/modus-tooltip/modus-tooltip.models";
-export { Cell, Column, Row } from "@tanstack/table-core";
+import { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
 export { BadgeProperties } from "./components/modus-badge/modus-badge";
 export { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
-export { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 export { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
-export { ModusNavbarApp, ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
+export { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 export { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
+export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 export { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 export { ModusSentimentScaleType } from "./components/modus-sentiment-scale/modus-sentiment-scale.models";
 export { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-export { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnVisibilityState, ModusTableColumnsVisibilityOptions, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+export { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+export { Cell, Column, Row } from "@tanstack/table-core";
 export { TableCellEdited, TableContext } from "./components/modus-table/models/table-context.models";
 export { TableRowActionsMenuEvent } from "./components/modus-table/models/table-row-actions.models";
 export { Tab } from "./components/modus-tabs/modus-tabs";
 export { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
 export { ModusToolbarButton, ModusToolbarTooltip } from "./components/modus-toolbar/modus-toolbar.models";
 export { ModusToolTipPlacement } from "./components/modus-tooltip/modus-tooltip.models";
-export { LocalJSX as JSX };
+export { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export namespace Components {
     interface ModusAccordion {
         /**
@@ -282,6 +283,10 @@ export namespace Components {
           * (optional) The checkbox label.
          */
         "label": string;
+        /**
+          * (optional) The size of the checkbox.
+         */
+        "size": 'small' | 'medium';
         /**
           * (optional) If you wish to prevent the propagation of your event, you may opt for this.
          */
@@ -1038,6 +1043,10 @@ export namespace Components {
           * (optional) The switch label.
          */
         "label": string;
+        /**
+          * (optional) The size of the radiobutton.
+         */
+        "size"?: 'small' | 'medium';
     }
     interface ModusTable {
         /**
@@ -1384,16 +1393,13 @@ export namespace Components {
          */
         "layout": 'horizontal' | 'vertical';
         /**
-          * (optional) The style of the toolbar
+          * (optional) The toolbar's style
          */
         "toolbarStyle": 'combined' | 'split';
     }
     interface ModusToolbarButton {
         "active": boolean;
         "buttonStyle": 'combined' | 'split';
-        /**
-          * (optional) Disables the button.
-         */
         "disabled": boolean;
         "divader": boolean;
         "divaderLayout": 'horizontal' | 'vertical';
@@ -2303,6 +2309,10 @@ declare namespace LocalJSX {
          */
         "onCheckboxClick"?: (event: ModusCheckboxCustomEvent<boolean>) => void;
         /**
+          * (optional) The size of the checkbox.
+         */
+        "size"?: 'small' | 'medium';
+        /**
           * (optional) If you wish to prevent the propagation of your event, you may opt for this.
          */
         "stopPropagation"?: boolean;
@@ -3196,6 +3206,10 @@ declare namespace LocalJSX {
           * An event that fires on switch click.
          */
         "onSwitchClick"?: (event: ModusSwitchCustomEvent<boolean>) => void;
+        /**
+          * (optional) The size of the radiobutton.
+         */
+        "size"?: 'small' | 'medium';
     }
     interface ModusTable {
         /**
@@ -3583,16 +3597,13 @@ declare namespace LocalJSX {
          */
         "layout"?: 'horizontal' | 'vertical';
         /**
-          * (optional) The style of the toolbar
+          * (optional) The toolbar's style
          */
         "toolbarStyle"?: 'combined' | 'split';
     }
     interface ModusToolbarButton {
         "active"?: boolean;
         "buttonStyle"?: 'combined' | 'split';
-        /**
-          * (optional) Disables the button.
-         */
         "disabled"?: boolean;
         "divader"?: boolean;
         "divaderLayout"?: 'horizontal' | 'vertical';
@@ -3756,6 +3767,7 @@ declare namespace LocalJSX {
         "modus-tree-view-item": ModusTreeViewItem;
     }
 }
+export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
