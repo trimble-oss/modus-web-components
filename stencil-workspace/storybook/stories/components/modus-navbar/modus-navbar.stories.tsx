@@ -13,14 +13,6 @@ export default {
         type: { summary: 'boolean' },
       },
     },
-    enableUserContent: {
-      name: 'enable-user-content',
-      description: 'Whether to show user content in the profile menu or not.',
-      table: {
-        defaultValue: { summary: false },
-        type: { summary: 'boolean' },
-      },
-    },
     showSearch: {
       name: 'show-search',
       description: 'Toggle the search button',
@@ -60,11 +52,10 @@ export default {
   },
 };
 
-const Template = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay, enableUserContent }) => html`
+const Template = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay }) => html`
   <modus-navbar
     id="working"
     enable-search-overlay=${enableSearchOverlay}
-    enable-user-content=${enableUserContent}
     show-search=${showSearch}
     show-apps-menu
     show-main-menu>
@@ -76,7 +67,7 @@ const Template = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay
       </modus-list>
 
     <div slot="notificationMenu">Render your own notification menu.</div>
-    <div slot="userCustomContent">Render your own custom content.</div>
+    <div slot="profileMenu">Render your own profile menu content.</div>
   </modus-navbar>
   ${setNavbar(true, '#working', profileMenuOptions, '', '', buttons)}
 `;
@@ -113,14 +104,12 @@ Default.args = {
   ],
   showSearch: false,
   enableSearchOverlay: false,
-  enableUserContent: true,
 };
 
-const FailedToLoadAvatarTemplate = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay, enableUserContent }) => html`
+const FailedToLoadAvatarTemplate = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay }) => html`
   <modus-navbar
     id="broken"
     enable-search-overlay=${enableSearchOverlay}
-    enable-user-content=${enableUserContent}
     show-search=${showSearch}
     show-apps-menu
     show-help
@@ -141,13 +130,11 @@ FailedAvatar.args = {
   buttons: [],
   showSearch: false,
   enableSearchOverlay: false,
-  enableUserContent: false,
 };
-const BlueTemplate = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay, enableUserContent }) => html`
+const BlueTemplate = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay }) => html`
   <modus-navbar
     id="blue-theme"
     enable-search-overlay=${enableSearchOverlay}
-    enable-user-content=${enableUserContent}
     show-search=${showSearch}
     show-apps-menu
     show-help
@@ -176,7 +163,6 @@ BlueNavbar.args = {
   buttons: [],
   showSearch: false,
   enableSearchOverlay: false,
-  enableUserContent: false,
 };
 
 const setNavbar = (

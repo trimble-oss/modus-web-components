@@ -49,9 +49,6 @@ export class ModusNavbar {
   /** (optional) Whether to show search overlay or not. */
   @Prop() enableSearchOverlay: boolean;
 
-  /** (optional) Whether to show user content in the profile menu or not. */
-  @Prop() enableUserContent: boolean;
-
   /** (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels. */
   @Prop() logoOptions: ModusNavbarLogoOptions;
 
@@ -143,7 +140,7 @@ export class ModusNavbar {
 
   readonly SLOT_MAIN = 'main';
   readonly SLOT_NOTIFICATIONS = 'notifications';
-  readonly SLOT_USERCUSTOMCONTENT = 'userCustomContent';
+  readonly SLOT_PROFILE_MENU = 'profileMenu';
 
   profileAvatarElement: HTMLImageElement;
   searchButton: HTMLElement;
@@ -480,7 +477,7 @@ export class ModusNavbar {
                       reverse={this.reverse}
                       username={this.profileMenuOptions?.username}
                       variant={this.variant}>
-                      {this.enableUserContent && <slot name={this.SLOT_USERCUSTOMCONTENT}></slot>}
+                      {<slot name={this.SLOT_PROFILE_MENU}></slot>}
                     </modus-navbar-profile-menu>
                   )}
                 </div>

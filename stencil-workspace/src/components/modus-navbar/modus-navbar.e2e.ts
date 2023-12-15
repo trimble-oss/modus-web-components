@@ -401,40 +401,19 @@ describe('modus-navbar', () => {
     expect(await secondaryLogo).toBeFalsy();
   });
 
-  it('should render slot in profile menu when UserContent is enable', async () => {
+  it('should render slot in profile menu', async () => {
     const page = await newE2EPage();
-    await page.setContent('<modus-navbar></modus-navbar>');
-    await page.waitForChanges();
-
-    const navbar = await page.find('modus-navbar');
-    navbar.setProperty('enableUserContent', true);
+    await page.setContent(
+      '<modus-navbar><div slot="profileMenu">Render your own profile menu content.</div></modus-navbar>'
+    );
     await page.waitForChanges();
 
     const profileMenuButton = await page.find('modus-navbar >>> .profile-menu');
-
     await profileMenuButton.click();
     await page.waitForChanges();
 
-    const usercontent = await page.find('modus-navbar >>> slot[name="userCustomContent"]');
+    const usercontent = await page.find('modus-navbar >>> slot[name="profileMenu"]');
     expect(usercontent).not.toBeNull();
-  });
-
-  it('should not render slot in profile menu when UserContent is disable', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<modus-navbar></modus-navbar>');
-    await page.waitForChanges();
-
-    const navbar = await page.find('modus-navbar');
-    navbar.setProperty('enableUserContent', false);
-    await page.waitForChanges();
-
-    const profileMenuButton = await page.find('modus-navbar >>> .profile-menu');
-
-    await profileMenuButton.click();
-    await page.waitForChanges();
-
-    const usercontent = await page.find('modus-navbar >>> slot[name="userCustomContent"]');
-    expect(usercontent).toBeNull();
   });
 
   it('should trigger enter key event on signout button', async () => {
