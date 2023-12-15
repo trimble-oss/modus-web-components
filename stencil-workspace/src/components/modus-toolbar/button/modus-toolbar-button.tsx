@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { Component, Event, Fragment, Prop, h } from '@stencil/core';
+import { Component, Event, EventEmitter, Fragment, Prop, h } from '@stencil/core';
 import { ModusToolbarTooltip } from '../modus-toolbar.models';
 
 @Component({
@@ -16,7 +16,7 @@ export class ModusToolbarButton {
   @Prop() tooltip: ModusToolbarTooltip;
   @Prop() divaderLayout: 'horizontal' | 'vertical';
   @Prop() buttonStyle: 'combined' | 'split';
-  @Event() buttonClick: () => void;
+  @Event() buttonClick: EventEmitter;
 
   classByLayout: Map<string, string> = new Map([
     ['horizontal', 'layout-horizontal'],
@@ -38,7 +38,10 @@ export class ModusToolbarButton {
       <Fragment>
         {this.divader && this.buttonStyle === 'combined' && <div class={layout} />}
         <modus-tooltip text={this.tooltip?.text} position={this.tooltip?.position}>
-          <button class={buttonClass} disabled={this.disabled} onClick={() => (!this.disabled ? this.buttonClick : null)}>
+          <button
+            class={buttonClass}
+            disabled={this.disabled}
+            onClick={() => (!this.disabled ? this.buttonClick.emit() : null)}>
             {this.iconSrc && <img src={this.iconSrc} />}
             {this.textButton}
           </button>

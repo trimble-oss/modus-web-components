@@ -42,7 +42,7 @@ export class ModusToolbar {
             tooltip={button.tooltip}
             divaderLayout={this.layout}
             buttonStyle={this.toolbarStyle}
-            buttonClick={button.onClick}></modus-toolbar-button>
+            onButtonClick={button.onClick}></modus-toolbar-button>
         ))}
       </div>
     );
