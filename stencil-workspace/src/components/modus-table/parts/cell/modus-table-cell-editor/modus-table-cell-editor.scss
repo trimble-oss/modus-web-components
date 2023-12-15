@@ -1,19 +1,19 @@
 .editor::part(input-container),
 .editor::part(input) {
   border: none !important;
-  height: calc(3rem - $rem-4px) !important;
+  height: calc($rem-48px - $rem-4px) !important;
 }
 
 table.density-comfortable {
   .editor::part(input-container),
   .editor::part(input) {
-    height: calc(2rem - $rem-4px) !important;
+    height: calc($rem-32px - $rem-4px) !important;
   }
 }
 
 table.density-compact {
   .editor::part(input-container),
   .editor::part(input) {
-    height: calc(1.5rem - $rem-4px) !important;
+    height: calc($rem-24px - $rem-4px) !important;
   }
 }

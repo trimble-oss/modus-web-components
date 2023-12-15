@@ -350,27 +350,39 @@ table {
   }
 
   &.density-relaxed {
-    tr {
-      height: 3rem;
+    tbody {
+      tr {
+        height: $rem-48px;
+      }
     }
   }
 
   &.density-comfortable {
-    tr {
-      height: 2rem;
+    tbody {
+      tr {
+        height: $rem-32px;
+
+        td {
+          &.row-checkbox {
+            padding: $rem-2px $rem-8px !important;
+          }
+        }
+      }
     }
   }
 
   &.density-compact {
-    tr {
-      height: 1.5rem;
+    tbody {
+      tr {
+        height: $rem-24px;
 
-      td {
-        padding-top: 0.125rem;
-        padding-bottom: 0.125rem;
+        td {
+          padding-bottom: $rem-2px;
+          padding-top: $rem-2px;
 
-        &.row-checkbox {
-          padding: 0.125rem 0.5rem !important;
+          &.row-checkbox {
+            padding: $rem-2px $rem-8px !important;
+          }
         }
       }
     }
