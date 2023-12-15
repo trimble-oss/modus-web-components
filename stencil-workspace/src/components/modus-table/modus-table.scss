@@ -348,6 +348,45 @@ table {
     right: 0;
     z-index: 1;
   }
+
+  &.density-relaxed {
+    tbody {
+      tr {
+        height: $rem-48px;
+      }
+    }
+  }
+
+  &.density-comfortable {
+    tbody {
+      tr {
+        height: $rem-32px;
+
+        td {
+          &.row-checkbox {
+            padding: $rem-2px $rem-8px !important;
+          }
+        }
+      }
+    }
+  }
+
+  &.density-compact {
+    tbody {
+      tr {
+        height: $rem-24px;
+
+        td {
+          padding-bottom: $rem-2px;
+          padding-top: $rem-2px;
+
+          &.row-checkbox {
+            padding: $rem-2px $rem-8px !important;
+          }
+        }
+      }
+    }
+  }
 }
 
 modus-table-filler-column {

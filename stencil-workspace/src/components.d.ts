@@ -1053,6 +1053,10 @@ export namespace Components {
          */
         "data": unknown[];
         /**
+          * (optional) The density of the table.
+         */
+        "density": 'relaxed' | 'comfortable' | 'compact';
+        /**
           * (Optional) To control display options of table.
          */
         "displayOptions"?: ModusTableDisplayOptions;
@@ -3165,6 +3169,10 @@ declare namespace LocalJSX {
           * (Required) To display data in the table.
          */
         "data": unknown[];
+        /**
+          * (optional) The density of the table.
+         */
+        "density"?: 'relaxed' | 'comfortable' | 'compact';
         /**
           * (Optional) To control display options of table.
          */

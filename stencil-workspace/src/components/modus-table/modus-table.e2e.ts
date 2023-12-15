@@ -881,4 +881,17 @@ describe('modus-table', () => {
     }
     expect(rowsSelected).toHaveLength(3);
   });
+
+  it('Renders changes to the density prop', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-table></modus-table>');
+    const component = await page.find('modus-table');
+    const element = await page.find('modus-table >>> table');
+    expect(element).toHaveClass('density-relaxed');
+
+    component.setProperty('density', 'compact');
+    await page.waitForChanges();
+    expect(element).toHaveClass('density-compact');
+  });
 });

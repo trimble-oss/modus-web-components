@@ -109,6 +109,9 @@ export class ModusTable {
     this.tableCore?.setOptions('data', newVal);
   }
 
+  /** (optional) The density of the table. */
+  @Prop() density: 'relaxed' | 'comfortable' | 'compact' = 'relaxed';
+
   /** (Optional) To control display options of table. */
   @Prop() displayOptions?: ModusTableDisplayOptions = {
     borderless: false,
@@ -296,6 +299,12 @@ export class ModusTable {
   };
 
   @State() tableCore: ModusTableCore;
+
+  classByDensity: Map<string, string> = new Map([
+    ['relaxed', 'density-relaxed'],
+    ['comfortable', 'density-comfortable'],
+    ['compact', 'density-compact'],
+  ]);
 
   private frozenColumns: string[] = [];
   private isColumnResizing = false;
@@ -644,10 +653,11 @@ export class ModusTable {
     } = this._context;
     const totalSize = getTotalSize();
 
-    const tableMainClass = {
-      borderless: this.displayOptions?.borderless,
-      'cell-borderless': this.displayOptions?.cellBorderless,
-    };
+    const tableMainClass = `
+      ${this.displayOptions?.borderless ? 'borderless' : ''}
+      ${this.displayOptions?.cellBorderless ? 'cell-borderless' : ''}
+      ${this.classByDensity.get(this.density)}
+    `;
 
     const tableStyle = this.fullWidth
       ? { width: '100%' }

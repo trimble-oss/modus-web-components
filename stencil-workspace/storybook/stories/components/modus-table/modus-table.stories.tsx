@@ -191,10 +191,10 @@ const Names = [
 
 const Priorities = {
   "high": {
-    size: 'medium', 
+    size: 'medium',
     type: 'counter',
     text: 'High',
-    color: 'success', 
+    color: 'success',
   },
   "medium": {
     size: 'medium', type: 'counter',
@@ -388,6 +388,19 @@ export default {
       },
       type: { required: false },
     },
+    density: {
+      name: 'density',
+      description: 'Manage table density.',
+      control: {
+        options: ['relaxed', 'comfortable', 'compact'],
+        type: 'select',
+      },
+      table: {
+        defaultValue: { summary: `'relaxed'` },
+        type: { summary: `'relaxed', 'comfortable', 'compact'` },
+      },
+      type: { required: false },
+    },
     fullWidth: {
       name: 'fullWidth',
       description: 'Manage table width.',
@@ -536,7 +549,8 @@ const Template = ({
   rowSelection,
   rowSelectionOptions,
   manualPaginationOptions,
-  manualSortingOptions
+  manualSortingOptions,
+  density
 }) => html`
   <div style="width: 950px">
     <modus-table
@@ -544,6 +558,7 @@ const Template = ({
       sort="${sort}"
       column-resize="${columnResize}"
       column-reorder="${columnReorder}"
+      density="${density}"
       pagination="${pagination}"
       show-sort-icon-on-hover="${showSortIconOnHover}"
       summary-row="${summaryRow}"
@@ -603,13 +618,15 @@ export const ValueFormatter = ({
   maxHeight,
   maxWidth,
   rowSelection,
-  rowSelectionOptions
+  rowSelectionOptions,
+  density
 }) => html`
   <div style="width: 950px">
     <modus-table
       hover="${hover}"
       sort="${sort}"
       column-resize="${columnResize}"
+      density="${density}"
       pagination="${pagination}"
       show-sort-icon-on-hover="${showSortIconOnHover}"
       summary-row="${summaryRow}"
@@ -673,7 +690,7 @@ Badge.args = {
     ...DefaultColumns.slice(DefaultColumns.length - 1)
   ],
   data: makeData(7)
-  
+
 }
 
 export const ColumnResize = Template.bind({});
