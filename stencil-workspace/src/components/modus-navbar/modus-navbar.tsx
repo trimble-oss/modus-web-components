@@ -477,7 +477,7 @@ export class ModusNavbar {
                       reverse={this.reverse}
                       username={this.profileMenuOptions?.username}
                       variant={this.variant}>
-                      {<slot name={this.SLOT_PROFILE_MENU}></slot>}
+                      <slot name={this.SLOT_PROFILE_MENU}></slot>
                     </modus-navbar-profile-menu>
                   )}
                 </div>
