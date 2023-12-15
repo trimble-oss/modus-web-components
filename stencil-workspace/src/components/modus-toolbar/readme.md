@@ -9,7 +9,7 @@
 
 | Property       | Attribute       | Description                      | Type                         | Default        |
 | -------------- | --------------- | -------------------------------- | ---------------------------- | -------------- |
-| `buttons`      | --              | The buttons to render.           | `ModusToolbarButton[]`       | `undefined`    |
+| `buttons`      | --              | The buttons to render.           | `ModusToolbarButton[]`       | `[]`           |
 | `layout`       | `layout`        | (optional) The toolbar's layout. | `"horizontal" \| "vertical"` | `'horizontal'` |
 | `toolbarStyle` | `toolbar-style` | (optional) The toolbar's style   | `"combined" \| "split"`      | `'combined'`   |
 
