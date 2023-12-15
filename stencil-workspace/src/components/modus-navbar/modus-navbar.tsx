@@ -160,7 +160,7 @@ export class ModusNavbar {
   }
 
   @Listen('signOutClick')
-  signOutClickHandler(event: MouseEvent | KeyboardEvent): void {
+  signOutClickHandler(event: KeyboardEvent | MouseEvent): void {
     this.profileMenuSignOutClick.emit(event);
   }
 
