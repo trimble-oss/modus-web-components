@@ -153,13 +153,21 @@ export class ModusTable {
     newVal: ModusTableManualPaginationOptions,
     oldVal: ModusTableManualPaginationOptions
   ) {
-    if (
-      newVal.pageCount !== oldVal.pageCount ||
-      newVal.currentPageIndex !== oldVal.currentPageIndex ||
-      newVal.currentPageSize !== oldVal.currentPageSize
-    ) {
-      this.tableCore.setOptions('pageCount', newVal.pageCount);
+    const hasUpdateValues =
+      newVal?.pageCount !== oldVal?.pageCount ||
+      newVal?.currentPageIndex !== oldVal?.currentPageIndex ||
+      newVal?.currentPageSize !== oldVal?.currentPageSize;
+
+    if (hasUpdateValues) {
+      this.tableCore?.setOptions('pageCount', newVal.pageCount);
+      this.tableCore?.setState('pagination', {
+        pageIndex: newVal.currentPageIndex - 1,
+        pageSize: newVal.currentPageSize,
+      });
       this.manualPaginationOptions = { ...newVal };
+    } else if (Object.keys(newVal).length === 0 && Object.keys(oldVal).length === 0) {
+      this.tableCore?.setOptions('manualPagination', false);
+      this.initializeTable();
     }
   }
 
@@ -171,16 +179,16 @@ export class ModusTable {
   ) {
     if (newVal?.currentSortingState.length === 0) {
       if (oldVal && oldVal.currentSortingState.length > 0) {
-        this.tableCore.setOptions('manualPagination', true);
-        this.tableCore.setState('sorting', newVal.currentSortingState);
+        this.tableCore?.setOptions('manualSorting', true);
+        this.tableCore?.setState('sorting', newVal.currentSortingState);
         this.manualSortingOptions = { ...newVal };
       }
     } else if (
       newVal?.currentSortingState[0]?.id !== oldVal?.currentSortingState[0]?.id ||
       newVal?.currentSortingState[0]?.desc !== oldVal?.currentSortingState[0]?.desc
     ) {
-      this.tableCore.setOptions('manualPagination', true);
-      this.tableCore.setState('sorting', newVal.currentSortingState);
+      this.tableCore?.setOptions('manualSorting', true);
+      this.tableCore?.setState('sorting', newVal.currentSortingState);
       this.manualSortingOptions = { ...newVal };
     }
   }

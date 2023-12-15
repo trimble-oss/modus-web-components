@@ -13,18 +13,21 @@ export const ModusTablePagination: FunctionalComponent<ModusTablePaginationProps
   context: { tableInstance: table, pageSizeList, data, manualPaginationOptions },
 }) => {
   const { options, getState, getPageCount, getExpandedRowModel, setPageIndex, setPageSize } = table;
-  const { pageIndex, pageSize: pageSizeState } = getState().pagination;
+  const { pageIndex: pageIndexState, pageSize: pageSizeState } = getState().pagination;
   const optionsList = pageSizeList.map((option) => ({ display: option }));
 
   let pageSize = pageSizeState;
+  let pageIndex = pageIndexState;
   let totalCount = data.length ?? 0;
   let activePage = 1;
 
   if (manualPaginationOptions) {
-    const { totalRecords, currentPageSize } = manualPaginationOptions;
-    activePage = manualPaginationOptions?.currentPageIndex ?? activePage;
+    const { totalRecords, currentPageIndex, currentPageSize } = manualPaginationOptions;
+    const manualPageIndex = currentPageIndex ?? activePage;
+    activePage = manualPageIndex <= getPageCount() ? manualPageIndex : activePage;
+    pageIndex = activePage - 1;
     pageSize = currentPageSize ?? 0;
-    totalCount = totalRecords ?? 0;
+    totalCount = totalRecords ?? getExpandedRowModel().rows.length;
   }
 
   const selectedPageSize = optionsList.find((l) => l.display === pageSize);
@@ -52,7 +55,7 @@ export const ModusTablePagination: FunctionalComponent<ModusTablePaginationProps
           <span>-</span>
           <span>
             {pageIndex + 1 === getPageCount()
-              ? options.paginateExpandedRows
+              ? !manualPaginationOptions && options.paginateExpandedRows
                 ? getExpandedRowModel().rows.length
                 : totalCount
               : (pageIndex + 1) * pageSize}
