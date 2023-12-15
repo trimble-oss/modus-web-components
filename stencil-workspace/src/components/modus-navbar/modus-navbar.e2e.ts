@@ -401,6 +401,21 @@ describe('modus-navbar', () => {
     expect(await secondaryLogo).toBeFalsy();
   });
 
+  it('should render slot in profile menu', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<modus-navbar><div slot="profileMenu">Render your own profile menu content.</div></modus-navbar>'
+    );
+    await page.waitForChanges();
+
+    const profileMenuButton = await page.find('modus-navbar >>> .profile-menu');
+    await profileMenuButton.click();
+    await page.waitForChanges();
+
+    const usercontent = await page.find('modus-navbar >>> slot[name="profileMenu"]');
+    expect(usercontent).not.toBeNull();
+  });
+
   it('should trigger enter key event on signout button', async () => {
     const page = await newE2EPage();
 

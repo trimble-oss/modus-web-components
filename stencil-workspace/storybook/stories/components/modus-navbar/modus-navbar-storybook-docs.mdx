@@ -16,7 +16,7 @@ This component utilizes the slot element, allowing you to render your own HTML i
 - If `buttons` are provided, Navbar creates the icon buttons dynamically
   - The `slot` allows rendering custom HTML on button click by linking the slot name with button id.
 - If a `show-search` with `enable-search-overlay` set as true then search overly will open on search button click, if enable-search-overlay set to false then search button emit the event for client.
-
+- The `slot` allows rendering custom HTML by linking the slot name with `profileMenu` id under the links.
 
 ### Default
 
@@ -31,6 +31,7 @@ This component utilizes the slot element, allowing you to render your own HTML i
   <div slot="main" style="height:300px;">Render your own main menu.</div>
   <div slot="addMenu">Render your own add menu.</div>
   <div slot="notificationMenu">Render your own notification menu.</div>
+  <div slot="profileMenu">Render your own profile menu content.</div>
 </modus-navbar>
 
 <script>
