@@ -140,6 +140,7 @@ export class ModusNavbar {
 
   readonly SLOT_MAIN = 'main';
   readonly SLOT_NOTIFICATIONS = 'notifications';
+  readonly SLOT_PROFILE_MENU = 'profileMenu';
 
   profileAvatarElement: HTMLImageElement;
   searchButton: HTMLElement;
@@ -475,8 +476,9 @@ export class ModusNavbar {
                       links={this.profileMenuOptions?.links}
                       reverse={this.reverse}
                       username={this.profileMenuOptions?.username}
-                      variant={this.variant}
-                    />
+                      variant={this.variant}>
+                      <slot name={this.SLOT_PROFILE_MENU}></slot>
+                    </modus-navbar-profile-menu>
                   )}
                 </div>
               </div>

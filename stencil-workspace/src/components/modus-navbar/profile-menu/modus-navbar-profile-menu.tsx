@@ -62,6 +62,7 @@ export class ModusNavbarProfileMenu {
             })}
           </modus-list>
         ) : null}
+        <slot />
         <div
           class="sign-out"
           onClick={() => this.signOutClick.emit()}
