@@ -162,6 +162,7 @@ export class ModusAutocomplete {
     }
     this.selectedChips = [...this.selectedChips, value];
     this.valueChange.emit(this.selectedChips.join(','));
+    this.value = '';
   }
   handleCustomOptionClick = (option: any) => {
     const optionValue = option.getAttribute(DATA_SEARCH_VALUE);

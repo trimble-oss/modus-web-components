@@ -16,7 +16,7 @@
 | `dropdownMaxHeight`         | `dropdown-max-height`           | The autocomplete's dropdown's max height.          | `string`                                | `'300px'`                                     |
 | `dropdownZIndex`            | `dropdown-z-index`              | The autocomplete's dropdown z-index.               | `string`                                | `'1'`                                         |
 | `errorText`                 | `error-text`                    | The autocomplete's error text.                     | `string`                                | `undefined`                                   |
-| `includeSearchIcon`         | `include-search-icon`           | Whether the search icon is included.               | `boolean`                               | `true`                                        |
+| `includeSearchIcon`         | `include-search-icon`           | Whether the search icon is included.               | `boolean`                               | `false`                                       |
 | `label`                     | `label`                         | The autocomplete's label.                          | `string`                                | `undefined`                                   |
 | `noResultsFoundSubtext`     | `no-results-found-subtext`      | The autocomplete's no results sub-text.            | `string`                                | `'Check spelling or try a different keyword'` |
 | `noResultsFoundText`        | `no-results-found-text`         | The autocomplete's no results text.                | `string`                                | `'No results found'`                          |
