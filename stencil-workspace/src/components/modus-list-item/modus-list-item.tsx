@@ -20,6 +20,9 @@ export class ModusListItem {
   /** (optional) The size of list item */
   @Prop() size: 'condensed' | 'large' | 'standard' = 'standard';
 
+  /** (optional) Whether to show Subtext below the Slot content or not  */
+  @Prop() subText: string;
+
   /** (optional) The type of list item */
   @Prop() type = 'standard'; // Future support for 'checkbox' | 'icon' | 'menu' | 'standard' | 'switchLeft' | 'switchRight'
 
@@ -62,6 +65,7 @@ export class ModusListItem {
           <slot />
         </span>
         {this.selected && <IconCheck size={iconCheckSize} />}
+        {this.subText && <span class="sub-text">{this.subText}</span>}
       </li>
     );
   }

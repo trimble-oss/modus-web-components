@@ -576,6 +576,10 @@ export namespace Components {
          */
         "size": 'condensed' | 'large' | 'standard';
         /**
+          * (optional) Whether to show Subtext below the Slot content or not
+         */
+        "subText": string;
+        /**
           * (optional) The type of list item
          */
         "type": string;
@@ -2585,6 +2589,10 @@ declare namespace LocalJSX {
           * (optional) The size of list item
          */
         "size"?: 'condensed' | 'large' | 'standard';
+        /**
+          * (optional) Whether to show Subtext below the Slot content or not
+         */
+        "subText"?: string;
         /**
           * (optional) The type of list item
          */

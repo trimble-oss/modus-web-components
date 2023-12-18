@@ -7,6 +7,7 @@ li {
   color: $modus-list-item-color;
   display: flex;
   fill: $modus-list-item-color;
+  flex-wrap: wrap;
   font-family: $primary-font;
   font-size: $rem-16px;
   min-height: $list-group-item-height;
@@ -54,5 +55,10 @@ li {
     border: 1px solid $modus-list-item-selected-border-color;
     color: $modus-list-item-color;
     fill: $modus-list-item-color;
+  }
+
+  .sub-text {
+    flex-basis: 100%;
+    font-size: 12px;
   }
 }
