@@ -414,6 +414,8 @@
   --modus-date-picker-calendar-day-disabled-opacity: 0.3;
 
   // Autocomplete
+  --modus-autocomplete-bg: var(--modus-white);
+  --modus-autocomplete-label-color: var(--modus-gray-8);
   --modus-autocomplete-no-results-message-color: var(--modus-gray-7);
   --modus-autocomplete-no-results-subtext-color: var(--modus-gray-4);
 }
@@ -757,8 +759,11 @@
   --modus-date-picker-calendar-day-selected-range-bg: #019aeb4d;
 
   // Autocomplete
+  --modus-autocomplete-bg: var(--modus-gray-10);
+  --modus-autocomplete-label-color: var(--modus-gray-2);
   --modus-autocomplete-no-results-message-color: var(--modus-gray-0);
   --modus-autocomplete-no-results-subtext-color: var(--modus-gray-4);
+  --modus-autocomplete-validation-error-color: var(--modus-red);
 }
 
 // Mixins

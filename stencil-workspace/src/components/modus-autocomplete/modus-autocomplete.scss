@@ -9,8 +9,26 @@
     padding: 0;
   }
 
+  label {
+    color: $modus-autocomplete-label-color;
+    font-size: $rem-12px;
+    margin-bottom: $rem-4px;
+  }
+
+  .label-container {
+    display: inline-block;
+
+    .required {
+      bottom: $rem-1px;
+      color: $modus-autocomplete-validation-error-color;
+      margin-left: $rem-4px;
+      position: relative;
+    }
+  }
+
   .chips-container {
     align-items: center;
+    background-color: $modus-autocomplete-bg;
     border: $rem-1px solid $modus-autocomplete-container-border-color;
     border-bottom-color: $modus-autocomplete-container-bottom-line-color;
     box-sizing: border-box;

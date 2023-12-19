@@ -273,7 +273,6 @@ export class ModusAutocomplete {
       includeSearchIcon={false}
       onValueChange={(searchEvent: CustomEvent<string>) => this.handleTextInputValueChange(searchEvent)}
       placeholder={this.placeholder}
-      required={this.required}
       size={this.size}
       value={this.value}
       onBlur={this.handleInputBlur}
@@ -292,6 +291,12 @@ export class ModusAutocomplete {
         aria-required={this.required}
         class={classes}
         onFocusin={() => (this.hasFocus = true)}>
+        {this.label || this.required ? (
+          <div class={'label-container'}>
+            {this.label ? <label>{this.label}</label> : null}
+            {this.required ? <span class="required">*</span> : null}
+          </div>
+        ) : null}
         <div class="chips-container">
           {this.selectedChips.map((chip) => (
             <modus-chip value={chip} size="medium" show-close onCloseClick={() => this.handleCloseClick(chip)}></modus-chip>
