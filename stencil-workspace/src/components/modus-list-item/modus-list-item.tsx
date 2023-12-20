@@ -63,9 +63,9 @@ export class ModusListItem {
         onKeyDown={(e) => this.handleKeydown(e)}>
         <span class="slot">
           <slot />
+          {this.subText && <span class="sub-text">{this.subText}</span>}
         </span>
         {this.selected && <IconCheck size={iconCheckSize} />}
-        {this.subText && <span class="sub-text">{this.subText}</span>}
       </li>
     );
   }

@@ -7,13 +7,14 @@ li {
   color: $modus-list-item-color;
   display: flex;
   fill: $modus-list-item-color;
-  flex-wrap: wrap;
   font-family: $primary-font;
   font-size: $rem-16px;
   min-height: $list-group-item-height;
   padding: 0 $rem-16px;
 
   .slot {
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -40,6 +41,10 @@ li {
     min-height: $list-group-item-height-sm;
   }
 
+  &.standard {
+    font-size: $rem-14px;
+  }
+
   &.large {
     min-height: $list-group-item-height-lg;
   }
@@ -58,7 +63,6 @@ li {
   }
 
   .sub-text {
-    flex-basis: 100%;
-    font-size: 12px;
+    font-size: $rem-12px;
   }
 }
