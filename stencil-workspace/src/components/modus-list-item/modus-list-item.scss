@@ -8,19 +8,38 @@ li {
   display: flex;
   fill: $modus-list-item-color;
   font-family: $primary-font;
-  font-size: $rem-14px;
-  min-height: $list-group-item-height;
-  padding: 0 $rem-16px;
+  gap: $rem-16px;
+  min-height: $rem-40px;
+  padding: $rem-6px $rem-12px;
 
-  .slot {
+  .text-container {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
+    justify-content: center;
+    min-width: 0;
+  }
+
+  .slot,
+  .sub-text {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
+  .slot {
+    font-size: $rem-14px;
+    line-height: $rem-18px;
+  }
+
+  .sub-text {
+    display: block;
+    font-size: $rem-12px;
+    line-height: $rem-16px;
+  }
+
   .icon-check {
+    flex-shrink: 0;
     margin-left: auto;
   }
 
@@ -37,17 +56,24 @@ li {
   }
 
   &.small {
-    font-size: $rem-12px;
-    min-height: $list-group-item-height-sm;
-  }
+    gap: $rem-10px;
+    min-height: $rem-32px;
+    padding: $rem-4px $rem-10px;
 
-  &.standard {
-    font-size: $rem-14px;
+    .slot {
+      font-size: $rem-12px;
+      line-height: $rem-14px;
+    }
+
+    .sub-text {
+      font-size: $rem-10px;
+      line-height: $rem-12px;
+    }
   }
 
   &.large {
-    font-size: $rem-16px;
-    min-height: $list-group-item-height-lg;
+    min-height: $rem-48px;
+    padding: $rem-10px $rem-16px;
   }
 
   &.disabled {
@@ -61,9 +87,5 @@ li {
     border: 1px solid $modus-list-item-selected-border-color;
     color: $modus-list-item-color;
     fill: $modus-list-item-color;
-  }
-
-  .sub-text {
-    font-size: $rem-12px;
   }
 }

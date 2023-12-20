@@ -61,10 +61,12 @@ export class ModusListItem {
         tabIndex={this.disabled ? -1 : 0}
         onClick={() => (!this.disabled ? this.itemClick.emit() : null)}
         onKeyDown={(e) => this.handleKeydown(e)}>
-        <span class="slot">
-          <slot />
-          {this.subText && <span class="sub-text">{this.subText}</span>}
-        </span>
+        <div class="text-container">
+          <span class="slot">
+            <slot />
+            {this.subText && <span class="sub-text">{this.subText}</span>}
+          </span>
+        </div>
         {this.selected && <IconCheck size={iconCheckSize} />}
       </li>
     );
