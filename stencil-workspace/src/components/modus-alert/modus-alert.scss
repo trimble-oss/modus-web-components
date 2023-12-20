@@ -8,7 +8,7 @@ div.alert {
   box-sizing: border-box;
   display: flex;
   font-family: $primary-font;
-  height: 56px;
+  min-height: 56px;
   padding: $rem-16px;
   position: relative;
 

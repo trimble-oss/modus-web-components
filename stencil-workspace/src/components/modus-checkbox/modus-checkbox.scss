@@ -13,7 +13,8 @@
   flex-direction: row;
   font-family: $primary-font;
   font-size: $rem-14px;
-  height: $rem-12px;
+  height: $rem-24px;
+  margin: 0 0.28rem;
   text-align: center;
   white-space: nowrap;
 
@@ -25,7 +26,6 @@
     display: flex;
     height: $rem-14px;
     justify-content: center;
-    margin-right: 8px;
     transition: background-color 0.15s ease-in-out;
     width: $rem-14px;
 
@@ -75,9 +75,11 @@
   label {
     align-items: center;
     display: flex;
+    margin-left: $rem-8px;
 
     &.small {
       font-size: $rem-12px;
+      margin-left: $rem-4px;
     }
 
     &.disabled {

@@ -116,7 +116,7 @@ export class ModusNavbar {
   @Event() profileMenuOpen: EventEmitter<void>;
 
   /** An event that fires on profile menu sign out click. */
-  @Event() profileMenuSignOutClick: EventEmitter<MouseEvent>;
+  @Event() profileMenuSignOutClick: EventEmitter<KeyboardEvent | MouseEvent>;
 
   /** An event that fires on search value change. */
   @Event() searchChange: EventEmitter<string>;
@@ -140,6 +140,7 @@ export class ModusNavbar {
 
   readonly SLOT_MAIN = 'main';
   readonly SLOT_NOTIFICATIONS = 'notifications';
+  readonly SLOT_PROFILE_MENU = 'profileMenu';
 
   profileAvatarElement: HTMLImageElement;
   searchButton: HTMLElement;
@@ -160,7 +161,7 @@ export class ModusNavbar {
   }
 
   @Listen('signOutClick')
-  signOutClickHandler(event: MouseEvent): void {
+  signOutClickHandler(event: KeyboardEvent | MouseEvent): void {
     this.profileMenuSignOutClick.emit(event);
   }
 
@@ -417,7 +418,7 @@ export class ModusNavbar {
                 {this.showPendoPlaceholder && <div class={'pendo-placeholder'} />}
                 {this.showHelp && (
                   <div class="navbar-button" data-test-id="help-menu">
-                    <span class="navbar-button-icon">
+                    <span class="navbar-button-icon" tabIndex={0}>
                       <IconHelp size="24" onClick={(event) => this.helpMenuClickHandler(event)} />
                     </span>
                   </div>
@@ -475,8 +476,9 @@ export class ModusNavbar {
                       links={this.profileMenuOptions?.links}
                       reverse={this.reverse}
                       username={this.profileMenuOptions?.username}
-                      variant={this.variant}
-                    />
+                      variant={this.variant}>
+                      <slot name={this.SLOT_PROFILE_MENU}></slot>
+                    </modus-navbar-profile-menu>
                   )}
                 </div>
               </div>

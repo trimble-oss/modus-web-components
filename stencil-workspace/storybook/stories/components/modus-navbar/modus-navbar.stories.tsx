@@ -67,6 +67,7 @@ const Template = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay
       </modus-list>
 
     <div slot="notificationMenu">Render your own notification menu.</div>
+    <div slot="profileMenu">Render your own profile menu content.</div>
   </modus-navbar>
   ${setNavbar(true, '#working', profileMenuOptions, '', '', buttons)}
 `;
@@ -76,24 +77,25 @@ Default.args = {
     email: 'modus_user@trimble.com',
     initials: 'MU',
     username: 'Modus User',
-    links:[
+    links: [
       {
-      id: "link1",
-      display: "Link 1",
-      icon: "moon"
+        id: "link1",
+        display: "Link 1",
+        icon: "moon"
       },
       {
         id: "link2",
         display: "Link 2",
         icon: "sun"
-        }
+      }
     ],
     tooltip: {
       text: 'User Profile Menu',
     }
   },
   buttons: [
-    { id: 'addMenu', icon: 'add',
+    {
+      id: 'addMenu', icon: 'add',
       tooltip: {
         text: 'Add',
       }
@@ -143,13 +145,13 @@ const BlueTemplate = ({ profileMenuOptions, buttons, showSearch, enableSearchOve
     <div slot="notifications">Render your own notifications.</div>
   </modus-navbar>
   ${setNavbar(
-    false,
-    '#blue-theme',
-    profileMenuOptions,
-    'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
-    'https://modus-bootstrap.trimble.com/img/trimble-icon-rev.svg',
-    buttons
-  )}
+  false,
+  '#blue-theme',
+  profileMenuOptions,
+  'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
+  'https://modus-bootstrap.trimble.com/img/trimble-icon-rev.svg',
+  buttons
+)}
 `;
 export const BlueNavbar = BlueTemplate.bind({});
 BlueNavbar.args = {

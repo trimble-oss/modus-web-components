@@ -40,7 +40,7 @@
 | `productLogoClick`        | An event that fires on product logo click.                              | `CustomEvent<MouseEvent>`                  |
 | `profileMenuLinkClick`    | An event that fires on profile menu link click.                         | `CustomEvent<string>`                      |
 | `profileMenuOpen`         | An event that fires when the profile menu opens.                        | `CustomEvent<void>`                        |
-| `profileMenuSignOutClick` | An event that fires on profile menu sign out click.                     | `CustomEvent<MouseEvent>`                  |
+| `profileMenuSignOutClick` | An event that fires on profile menu sign out click.                     | `CustomEvent<KeyboardEvent \| MouseEvent>` |
 | `searchChange`            | An event that fires on search value change.                             | `CustomEvent<string>`                      |
 | `searchMenuClick`         | An event that fires on search button click.                             | `CustomEvent<void>`                        |
 
