@@ -17,5 +17,27 @@
 
   <body>
     <!-- Test components -->
+    <div>
+    <modus-radio-group checked-id="1" size="small" name="my-group"></modus-radio-group>
+    <modus-radio-group checked-id="1" size="default" name="my-group2"></modus-radio-group>
+    <script>
+      const modusRadioGroup = document.querySelector('modus-radio-group');
+      modusRadioGroup.radioButtons = [
+        {
+          id: '0',
+          label: 'Radio 2',
+        },
+        {
+          id: '1',
+          checked: true,
+          label: 'Radio 2',
+        },
+        {
+          id: '2',
+          label: 'Radio 3',
+        },
+      ];
+    </script>
+    </div>
  </body>
 </html>

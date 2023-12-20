@@ -210,9 +210,9 @@ export class ModusTable {
       newVal.subRowSelection !== oldVal.subRowSelection ||
       newVal.preSelectedRows !== oldVal.preSelectedRows
     ) {
-      this.tableCore.setOptions('enableMultiRowSelection', newVal.multiple);
-      this.tableCore.setState('rowSelection', newVal.preSelectedRows);
-      this.tableCore.setState('subRowSelection', newVal.subRowSelection);
+      this.tableCore?.setOptions('enableMultiRowSelection', newVal.multiple);
+      this.tableCore?.setState('rowSelection', newVal.preSelectedRows);
+      this.tableCore?.setState('subRowSelection', newVal.subRowSelection);
     }
   }
 

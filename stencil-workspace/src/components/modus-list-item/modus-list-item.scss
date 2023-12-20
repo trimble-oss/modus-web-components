@@ -8,7 +8,7 @@ li {
   display: flex;
   fill: $modus-list-item-color;
   font-family: $primary-font;
-  font-size: $rem-16px;
+  font-size: $rem-14px;
   min-height: $list-group-item-height;
   padding: 0 $rem-16px;
 
@@ -46,6 +46,7 @@ li {
   }
 
   &.large {
+    font-size: $rem-16px;
     min-height: $list-group-item-height-lg;
   }
 
