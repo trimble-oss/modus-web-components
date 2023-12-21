@@ -109,6 +109,9 @@ export class ModusTable {
     this.tableCore?.setOptions('data', newVal);
   }
 
+  /** (optional) The density of the table. */
+  @Prop() density: 'relaxed' | 'comfortable' | 'compact' = 'relaxed';
+
   /** (Optional) To control display options of table. */
   @Prop() displayOptions?: ModusTableDisplayOptions = {
     borderless: false,
@@ -153,13 +156,21 @@ export class ModusTable {
     newVal: ModusTableManualPaginationOptions,
     oldVal: ModusTableManualPaginationOptions
   ) {
-    if (
-      newVal.pageCount !== oldVal.pageCount ||
-      newVal.currentPageIndex !== oldVal.currentPageIndex ||
-      newVal.currentPageSize !== oldVal.currentPageSize
-    ) {
-      this.tableCore.setOptions('pageCount', newVal.pageCount);
+    const hasUpdateValues =
+      newVal?.pageCount !== oldVal?.pageCount ||
+      newVal?.currentPageIndex !== oldVal?.currentPageIndex ||
+      newVal?.currentPageSize !== oldVal?.currentPageSize;
+
+    if (hasUpdateValues) {
+      this.tableCore?.setOptions('pageCount', newVal.pageCount);
+      this.tableCore?.setState('pagination', {
+        pageIndex: newVal.currentPageIndex - 1,
+        pageSize: newVal.currentPageSize,
+      });
       this.manualPaginationOptions = { ...newVal };
+    } else if (Object.keys(newVal).length === 0 && Object.keys(oldVal).length === 0) {
+      this.tableCore?.setOptions('manualPagination', false);
+      this.initializeTable();
     }
   }
 
@@ -171,16 +182,16 @@ export class ModusTable {
   ) {
     if (newVal?.currentSortingState.length === 0) {
       if (oldVal && oldVal.currentSortingState.length > 0) {
-        this.tableCore.setOptions('manualPagination', true);
-        this.tableCore.setState('sorting', newVal.currentSortingState);
+        this.tableCore?.setOptions('manualSorting', true);
+        this.tableCore?.setState('sorting', newVal.currentSortingState);
         this.manualSortingOptions = { ...newVal };
       }
     } else if (
       newVal?.currentSortingState[0]?.id !== oldVal?.currentSortingState[0]?.id ||
       newVal?.currentSortingState[0]?.desc !== oldVal?.currentSortingState[0]?.desc
     ) {
-      this.tableCore.setOptions('manualPagination', true);
-      this.tableCore.setState('sorting', newVal.currentSortingState);
+      this.tableCore?.setOptions('manualSorting', true);
+      this.tableCore?.setState('sorting', newVal.currentSortingState);
       this.manualSortingOptions = { ...newVal };
     }
   }
@@ -199,9 +210,9 @@ export class ModusTable {
       newVal.subRowSelection !== oldVal.subRowSelection ||
       newVal.preSelectedRows !== oldVal.preSelectedRows
     ) {
-      this.tableCore.setOptions('enableMultiRowSelection', newVal.multiple);
-      this.tableCore.setState('rowSelection', newVal.preSelectedRows);
-      this.tableCore.setState('subRowSelection', newVal.subRowSelection);
+      this.tableCore?.setOptions('enableMultiRowSelection', newVal.multiple);
+      this.tableCore?.setState('rowSelection', newVal.preSelectedRows);
+      this.tableCore?.setState('subRowSelection', newVal.subRowSelection);
     }
   }
 
@@ -288,6 +299,12 @@ export class ModusTable {
   };
 
   @State() tableCore: ModusTableCore;
+
+  classByDensity: Map<string, string> = new Map([
+    ['relaxed', 'density-relaxed'],
+    ['comfortable', 'density-comfortable'],
+    ['compact', 'density-compact'],
+  ]);
 
   private frozenColumns: string[] = [];
   private isColumnResizing = false;
@@ -636,10 +653,11 @@ export class ModusTable {
     } = this._context;
     const totalSize = getTotalSize();
 
-    const tableMainClass = {
-      borderless: this.displayOptions?.borderless,
-      'cell-borderless': this.displayOptions?.cellBorderless,
-    };
+    const tableMainClass = `
+      ${this.displayOptions?.borderless ? 'borderless' : ''}
+      ${this.displayOptions?.cellBorderless ? 'cell-borderless' : ''}
+      ${this.classByDensity.get(this.density)}
+    `;
 
     const tableStyle = this.fullWidth
       ? { width: '100%' }

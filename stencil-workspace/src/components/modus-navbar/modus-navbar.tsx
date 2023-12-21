@@ -116,7 +116,7 @@ export class ModusNavbar {
   @Event() profileMenuOpen: EventEmitter<void>;
 
   /** An event that fires on profile menu sign out click. */
-  @Event() profileMenuSignOutClick: EventEmitter<MouseEvent>;
+  @Event() profileMenuSignOutClick: EventEmitter<KeyboardEvent | MouseEvent>;
 
   /** An event that fires on search value change. */
   @Event() searchChange: EventEmitter<string>;
@@ -140,6 +140,7 @@ export class ModusNavbar {
 
   readonly SLOT_MAIN = 'main';
   readonly SLOT_NOTIFICATIONS = 'notifications';
+  readonly SLOT_PROFILE_MENU = 'profileMenu';
 
   profileAvatarElement: HTMLImageElement;
   searchButton: HTMLElement;
@@ -160,7 +161,7 @@ export class ModusNavbar {
   }
 
   @Listen('signOutClick')
-  signOutClickHandler(event: MouseEvent): void {
+  signOutClickHandler(event: KeyboardEvent | MouseEvent): void {
     this.profileMenuSignOutClick.emit(event);
   }
 
@@ -371,23 +372,23 @@ export class ModusNavbar {
               <div class={`right ${direction}`}>
                 {this.showSearch && (
                   <div class="navbar-button search" data-test-id="search-menu">
-                    <span
-                      class="navbar-button-icon"
-                      onKeyDown={(event) => this.searchMenuKeydownHandler(event)}
-                      tabIndex={0}
-                      id="search-button"
-                      ref={(el) => (this.searchButton = el as HTMLElement)}>
-                      <modus-tooltip
-                        text={this.searchTooltip?.text}
-                        aria-label={this.searchTooltip?.ariaLabel}
-                        position="bottom">
+                    <modus-tooltip
+                      text={this.searchTooltip?.text}
+                      aria-label={this.searchTooltip?.ariaLabel}
+                      position="bottom">
+                      <span
+                        class="navbar-button-icon"
+                        onKeyDown={(event) => this.searchMenuKeydownHandler(event)}
+                        tabIndex={0}
+                        id="search-button"
+                        ref={(el) => (this.searchButton = el as HTMLElement)}>
                         <IconSearch
                           size="24"
                           onClick={(event) => this.searchMenuClickHandler(event)}
                           pressed={this.searchOverlayVisible}
                         />
-                      </modus-tooltip>
-                    </span>
+                      </span>
+                    </modus-tooltip>
                   </div>
                 )}
                 <ModusNavbarButtonList
@@ -417,7 +418,7 @@ export class ModusNavbar {
                 {this.showPendoPlaceholder && <div class={'pendo-placeholder'} />}
                 {this.showHelp && (
                   <div class="navbar-button" data-test-id="help-menu">
-                    <span class="navbar-button-icon">
+                    <span class="navbar-button-icon" tabIndex={0}>
                       <IconHelp size="24" onClick={(event) => this.helpMenuClickHandler(event)} />
                     </span>
                   </div>
@@ -475,8 +476,9 @@ export class ModusNavbar {
                       links={this.profileMenuOptions?.links}
                       reverse={this.reverse}
                       username={this.profileMenuOptions?.username}
-                      variant={this.variant}
-                    />
+                      variant={this.variant}>
+                      <slot name={this.SLOT_PROFILE_MENU}></slot>
+                    </modus-navbar-profile-menu>
                   )}
                 </div>
               </div>

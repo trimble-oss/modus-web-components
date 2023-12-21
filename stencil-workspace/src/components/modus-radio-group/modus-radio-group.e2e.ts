@@ -54,7 +54,7 @@ describe('modus-radio-group', () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-radio-group></modus-radio-group>');
-    let component = await page.find('modus-radio-group');
+    const component = await page.find('modus-radio-group');
     let radioButtons: RadioButton[] = [{ id: '1', label: 'Option 1' }];
     component.setProperty('radioButtons', radioButtons);
     await page.waitForChanges();
@@ -76,8 +76,8 @@ describe('modus-radio-group', () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-radio-group></modus-radio-group>');
-    let component = await page.find('modus-radio-group');
-    let radioButtons: RadioButton[] = [
+    const component = await page.find('modus-radio-group');
+    const radioButtons: RadioButton[] = [
       { id: '1', label: 'Option 1', checked: true },
       { id: '2', label: 'Option 2' },
     ];
@@ -109,10 +109,45 @@ describe('modus-radio-group', () => {
 
     const buttonClick = await page.spyOnEvent('buttonClick');
 
-    const elements = await page.findAll('modus-radio-group >>> .modus-radio-button');
+    const elements = await page.findAll('modus-radio-group >>> .modus-radio-button .radio');
     await elements[0].click();
 
     expect(buttonClick).toHaveReceivedEvent();
     expect(buttonClick).toHaveReceivedEventDetail('1');
+  });
+  it('defaults to "medium" size if size prop is not set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-radio-group></modus-radio-group>');
+    const component = await page.find('modus-radio-group');
+    const radioButtons: RadioButton[] = [
+      { id: '1', label: 'Option 1', checked: true },
+      { id: '2', label: 'Option 2' },
+    ];
+    component.setProperty('radioButtons', radioButtons);
+    await page.waitForChanges();
+
+    const elements = await page.findAll('modus-radio-group >>> .modus-radio-button .checkmark');
+
+    expect(elements[0]).not.toHaveClass('small');
+    expect(elements[1]).not.toHaveClass('small');
+  });
+
+  it('applies "small" size class if size prop is set to "small"', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-radio-group size="small"></modus-radio-group>');
+    const component = await page.find('modus-radio-group');
+    const radioButtons: RadioButton[] = [
+      { id: '1', label: 'Option 1', checked: true },
+      { id: '2', label: 'Option 2' },
+    ];
+    component.setProperty('radioButtons', radioButtons);
+    await page.waitForChanges();
+
+    const elements = await page.findAll('modus-radio-group >>> .modus-radio-button .radio');
+
+    expect(elements[0]).toHaveClass('small');
+    expect(elements[1]).toHaveClass('small');
   });
 });
