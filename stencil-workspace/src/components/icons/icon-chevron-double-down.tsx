@@ -4,7 +4,7 @@ import { IconProps } from './IconMap';
 
 export const IconChevronDoubleDown: FunctionalComponent<IconProps> = (props: IconProps) => (
   <svg
-    class="mi-outline mi-chevron-double-down"
+    class="icon-chevron-double-down"
     xmlns="http://www.w3.org/2000/svg"
     fill={props.color ?? 'currentColor'}
     height={props.size ?? 16}

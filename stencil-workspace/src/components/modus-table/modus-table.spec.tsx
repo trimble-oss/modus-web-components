@@ -12,4 +12,16 @@ describe('modus-table', () => {
 
     expect(table).toBeTruthy();
   });
+
+  it('should get the correct class by density', async () => {
+    const modusTable = new ModusTable();
+    let className = modusTable.classByDensity.get(modusTable.density);
+    expect(className).toEqual('density-relaxed');
+
+    className = modusTable.classByDensity.get('comfortable');
+    expect(className).toEqual('density-comfortable');
+
+    className = modusTable.classByDensity.get('compact');
+    expect(className).toEqual('density-compact');
+  });
 });

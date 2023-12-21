@@ -873,6 +873,10 @@ export namespace Components {
           * The radio buttons to render.
          */
         "radioButtons": RadioButton[];
+        /**
+          * (optional) The size of the radiobutton.
+         */
+        "size"?: 'small' | 'medium';
     }
     interface ModusSelect {
         /**
@@ -1064,6 +1068,10 @@ export namespace Components {
           * (Required) To display data in the table.
          */
         "data": unknown[];
+        /**
+          * (optional) The density of the table.
+         */
+        "density": 'relaxed' | 'comfortable' | 'compact';
         /**
           * (Optional) To control display options of table.
          */
@@ -2738,7 +2746,7 @@ declare namespace LocalJSX {
         /**
           * An event that fires on profile menu sign out click.
          */
-        "onProfileMenuSignOutClick"?: (event: ModusNavbarCustomEvent<MouseEvent>) => void;
+        "onProfileMenuSignOutClick"?: (event: ModusNavbarCustomEvent<KeyboardEvent | MouseEvent>) => void;
         /**
           * An event that fires on search value change.
          */
@@ -2965,6 +2973,10 @@ declare namespace LocalJSX {
           * The radio buttons to render.
          */
         "radioButtons"?: RadioButton[];
+        /**
+          * (optional) The size of the radiobutton.
+         */
+        "size"?: 'small' | 'medium';
     }
     interface ModusSelect {
         /**
@@ -3189,6 +3201,10 @@ declare namespace LocalJSX {
           * (Required) To display data in the table.
          */
         "data": unknown[];
+        /**
+          * (optional) The density of the table.
+         */
+        "density"?: 'relaxed' | 'comfortable' | 'compact';
         /**
           * (Optional) To control display options of table.
          */
