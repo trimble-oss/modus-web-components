@@ -12,7 +12,6 @@ describe('modus-autocomplete', () => {
     const element = await page.find('modus-autocomplete');
     expect(element).toHaveClass('hydrated');
   });
-
   it('should render changes to options prop', async () => {
     const element = await page.find('modus-autocomplete');
     expect(element).toHaveClass('hydrated');
@@ -256,5 +255,26 @@ describe('modus-autocomplete', () => {
     const options = await page.findAll('modus-autocomplete >>> .options-container li');
 
     expect(options.length).toEqual(2);
+  });
+
+  it('should display options on focus without close when disableCloseOnSelect prop is true', async () => {
+    const element = await page.find('modus-autocomplete');
+    expect(element).toHaveClass('hydrated');
+
+    const showOptions = [
+      { id: 1, value: 'Test 1' },
+      { id: 2, value: 'Test 2' },
+    ];
+
+    element.setProperty('options', showOptions);
+
+    element.setProperty('disableCloseOnSelect', true);
+
+    await page.waitForChanges();
+
+    const options = await page.findAll('modus-autocomplete >>> .options-container li');
+    expect(options.length).toEqual(2);
+
+    await page.waitForChanges();
   });
 });
