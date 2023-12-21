@@ -107,8 +107,8 @@ describe('modus-autocomplete', () => {
     modusAutocomplete.visibleOptions = [{ id: 'Option 1', value: 'Option 1' }];
     modusAutocomplete.handleSearchChange('');
     expect(modusAutocomplete.visibleOptions).toEqual([
-      { id: 'Option 1', value: 'Option 1' },
-      { id: 'Option 2', value: 'Option 2' },
+      { id: 'Option 1', value: 'Option 1', isSelected: false },
+      { id: 'Option 2', value: 'Option 2', isSelected: false },
     ]);
   });
 
