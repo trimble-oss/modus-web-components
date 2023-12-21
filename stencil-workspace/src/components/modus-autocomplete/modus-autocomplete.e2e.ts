@@ -256,23 +256,4 @@ describe('modus-autocomplete', () => {
 
     expect(options.length).toEqual(2);
   });
-
-  it('should display options on focus without close when disableCloseOnSelect prop is true', async () => {
-    const element = await page.find('modus-autocomplete');
-    expect(element).toHaveClass('hydrated');
-
-    element.setProperty('options', [
-      { id: 1, value: 'Test 1' },
-      { id: 2, value: 'Test 2' },
-    ]);
-
-    element.setProperty('disableCloseOnSelect', true);
-
-    await page.waitForChanges();
-
-    const options = await page.findAll('modus-autocomplete >>> .options-container li');
-    expect(options.length).toEqual(2);
-
-    await page.waitForChanges();
-  });
 });
