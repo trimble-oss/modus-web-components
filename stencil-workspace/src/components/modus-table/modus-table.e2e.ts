@@ -894,4 +894,21 @@ describe('modus-table', () => {
     await page.waitForChanges();
     expect(element).toHaveClass('density-compact');
   });
+
+  it('Sorting by default sort', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-table></modus-table>');
+    const component = await page.find('modus-table');
+    
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);    
+    component.setProperty('sort', true);
+    component.setProperty('defaultSort', {id: 'mock-column-two', desc: true});
+
+    await page.waitForChanges();
+    let tableData = await page.findAll('modus-table >>> td');
+    let firstItem = tableData[0].textContent;
+    expect(firstItem).toBe('Mock Data One 2');
+  });
 });
