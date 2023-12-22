@@ -26,6 +26,7 @@ import {
   VisibilityState,
   SortingState,
   Row,
+  ColumnSort,
 } from '@tanstack/table-core';
 import {
   COLUMN_ORDER_STATE_KEY,
@@ -236,6 +237,13 @@ export class ModusTable {
   @Watch('toolbarOptions') onToolbarOptionsChange(newVal: ModusTableToolbarOptions | null) {
     this.tableCore?.setOptions('enableHiding', !!newVal?.columnsVisibility);
     this.onRowsExpandableChange(this.rowsExpandable);
+  }
+
+  /** (Optional) To set the default sorting for the table. */
+  @Prop() defaultSort: ColumnSort;
+  @Watch('defaultSort') onDefaultSortChange(newVal: ColumnSort | null) {
+    console.log(newVal);
+    this.tableCore?.setState('sorting', [newVal]);
   }
 
   /** Emits the cell value that was edited */
@@ -539,6 +547,7 @@ export class ModusTable {
       columnOrder: this.columnReorder ? this.tableState.columnOrder : [],
       toolbarOptions: this.toolbarOptions,
       preSelectedRows: this.getPreselectedRowState(),
+      defaultSort: this.defaultSort,
 
       ...(this.manualPaginationOptions && {
         manualPagination: true,

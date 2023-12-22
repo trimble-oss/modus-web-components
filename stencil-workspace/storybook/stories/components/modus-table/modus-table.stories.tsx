@@ -52,7 +52,7 @@ function makeData(...lens): object[] {
   return makeDataLevel();
 }
 
-function initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions, manualPaginationOptions, manualSortingOptions) {
+function initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions, manualPaginationOptions, manualSortingOptions, defaultSort) {
   const tag = document.createElement('script');
   tag.innerHTML = `
   var modusTable = document.querySelector('modus-table');
@@ -65,6 +65,7 @@ function initializeTable(columns, data, pageSizeList, toolbarOptions, displayOpt
   modusTable.rowActions = ${JSON.stringify(rowActions)};
   modusTable.manualPaginationOptions = ${JSON.stringify(manualPaginationOptions)};
   modusTable.manualSortingOptions = ${JSON.stringify(manualSortingOptions)};
+  modusTable.defaultSort = ${JSON.stringify(defaultSort)};
 
   var globalData = ${JSON.stringify(data)};
   if(!!modusTable.manualSortingOptions){
@@ -509,6 +510,14 @@ export default {
       },
       type: { required: false },
     },
+    defaultSort : {
+      name: 'defaultSort',
+      description: 'To set the default sorting of the table',
+      table: {
+        type: { summary: 'ColumnSort' },
+      },
+      type: { required: false },
+    }
   },
 
   parameters: {
@@ -550,6 +559,7 @@ const Template = ({
   rowSelectionOptions,
   manualPaginationOptions,
   manualSortingOptions,
+  defaultSort,
   density
 }) => html`
   <div style="width: 950px">
@@ -569,7 +579,7 @@ const Template = ({
       max-width="${maxWidth}"
       row-selection="${rowSelection}" />
   </div>
-  ${initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions, manualPaginationOptions, manualSortingOptions)}
+  ${initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions, manualPaginationOptions, manualSortingOptions, defaultSort)}
 `;
 
 export const Default = Template.bind({});
