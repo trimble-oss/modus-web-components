@@ -52,7 +52,8 @@ function makeData(...lens): object[] {
   return makeDataLevel();
 }
 
-function initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions, manualPaginationOptions, manualSortingOptions, defaultSort) {
+function initializeTable(props) {
+  const {columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions, manualPaginationOptions, manualSortingOptions, defaultSort} = props
   const tag = document.createElement('script');
   tag.innerHTML = `
   var modusTable = document.querySelector('modus-table');
@@ -514,7 +515,7 @@ export default {
       name: 'defaultSort',
       description: 'To set the default sorting of the table',
       table: {
-        type: { summary: 'ColumnSort' },
+        type: { summary: 'ModusTableColumnSort' },
       },
       type: { required: false },
     }
@@ -579,7 +580,7 @@ const Template = ({
       max-width="${maxWidth}"
       row-selection="${rowSelection}" />
   </div>
-  ${initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions, manualPaginationOptions, manualSortingOptions, defaultSort)}
+  ${initializeTable({columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions, manualPaginationOptions, manualSortingOptions, defaultSort})}
 `;
 
 export const Default = Template.bind({});

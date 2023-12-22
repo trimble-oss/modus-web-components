@@ -26,7 +26,6 @@ import {
   VisibilityState,
   SortingState,
   Row,
-  ColumnSort,
 } from '@tanstack/table-core';
 import {
   COLUMN_ORDER_STATE_KEY,
@@ -52,6 +51,7 @@ import {
   ModusTableRowActionClick,
   ModusTableSortingState,
   ModusTableRowWithId,
+  ModusTableColumnSort,
 } from './models/modus-table.models';
 import ColumnDragState from './models/column-drag-state.model';
 import {
@@ -240,9 +240,11 @@ export class ModusTable {
   }
 
   /** (Optional) To set the default sorting for the table. */
-  @Prop() defaultSort: ColumnSort;
-  @Watch('defaultSort') onDefaultSortChange(newVal: ColumnSort | null) {
-    this.tableCore?.setState('sorting', [newVal]);
+  @Prop() defaultSort: ModusTableColumnSort;
+  @Watch('defaultSort') onDefaultSortChange(newVal: ModusTableColumnSort | null) {
+    if (!(this.manualSortingOptions?.currentSortingState?.length > 0)) {
+      this.tableCore?.setState('sorting', [newVal]);
+    }
   }
 
   /** Emits the cell value that was edited */

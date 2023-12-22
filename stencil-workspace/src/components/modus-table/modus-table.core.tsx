@@ -17,10 +17,10 @@ import {
   SortingState,
   TableState,
   Row,
-  ColumnSort,
 } from '@tanstack/table-core';
 import {
   ModusTableColumn,
+  ModusTableColumnSort,
   ModusTableRowSelectionOptions,
   ModusTableSortingState,
   ModusTableToolbarOptions,
@@ -44,7 +44,7 @@ export interface TableCoreOptions {
   manualSorting?: boolean;
   sortingState?: ModusTableSortingState;
   preSelectedRows?: RowSelectionState;
-  defaultSort?: ColumnSort;
+  defaultSort?: ModusTableColumnSort;
 
   getRowId(originalRow: unknown, index: number, parent?: Row<unknown>): string;
   setExpanded: (updater: Updater<ExpandedState>) => void;

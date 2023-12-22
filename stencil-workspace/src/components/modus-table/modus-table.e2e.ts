@@ -900,11 +900,11 @@ describe('modus-table', () => {
 
     await page.setContent('<modus-table></modus-table>');
     const component = await page.find('modus-table');
-    
+
     component.setProperty('columns', MockColumns);
-    component.setProperty('data', MockData);    
+    component.setProperty('data', MockData);
     component.setProperty('sort', true);
-    component.setProperty('defaultSort', {id: 'mock-column-two', desc: true});
+    component.setProperty('defaultSort', { id: 'mock-column-two', desc: true });
 
     await page.waitForChanges();
     let tableData = await page.findAll('modus-table >>> td');

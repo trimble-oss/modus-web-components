@@ -524,6 +524,10 @@ type ModusTableSortingState = ColumnSort {
     id: string;
     desc: boolean;
 }[];
+type ModusTableColumnSort {
+    id: string;
+    desc: boolean;
+};
 type ModusTableExpandedState = true | Record<string, boolean>;
 type ModusTablePaginationState = {
     pageIndex: number;
