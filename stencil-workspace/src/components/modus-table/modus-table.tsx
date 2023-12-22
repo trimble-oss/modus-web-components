@@ -200,6 +200,7 @@ export class ModusTable {
   @Prop() rowSelectionOptions: ModusTableRowSelectionOptions = {
     multiple: false,
     subRowSelection: false,
+    checkboxSize: 'medium',
   };
   @Watch('rowSelectionOptions') onRowSelectionOptionsChange(
     newVal: ModusTableRowSelectionOptions,
@@ -208,7 +209,8 @@ export class ModusTable {
     if (
       newVal.multiple !== oldVal.multiple ||
       newVal.subRowSelection !== oldVal.subRowSelection ||
-      newVal.preSelectedRows !== oldVal.preSelectedRows
+      newVal.preSelectedRows !== oldVal.preSelectedRows ||
+      newVal.checkboxSize !== oldVal.checkboxSize
     ) {
       this.tableCore?.setOptions('enableMultiRowSelection', newVal.multiple);
       this.tableCore?.setState('rowSelection', newVal.preSelectedRows);

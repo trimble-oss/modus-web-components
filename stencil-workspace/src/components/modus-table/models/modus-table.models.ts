@@ -121,6 +121,7 @@ export interface ModusTableRowSelectionOptions {
   multiple?: boolean;
   subRowSelection?: boolean;
   preSelectedRows?: string[];
+  checkboxSize: 'small' | 'medium';
 }
 
 export interface ModusTableManualPaginationOptions {

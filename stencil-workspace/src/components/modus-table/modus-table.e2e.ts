@@ -894,4 +894,27 @@ describe('modus-table', () => {
     await page.waitForChanges();
     expect(element).toHaveClass('density-compact');
   });
+
+  it('Renders small size checkboxes', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-table />');
+    const component = await page.find('modus-table');
+
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    component.setProperty('rowSelection', true);
+    component.setProperty('rowSelectionOptions', {
+      multiple: true,
+      preSelectedRows: ['0'],
+      checkboxSize: 'small',
+    });
+    await page.waitForChanges();
+    const rows = await page.findAll('modus-table >>> modus-checkbox');
+    expect(rows.length).toBeGreaterThan(0);
+    for (let i = 0; i < rows.length; i++) {
+      const size = await rows[i].getProperty('size');
+      expect(size).toBe('small');
+    }
+  });
 });

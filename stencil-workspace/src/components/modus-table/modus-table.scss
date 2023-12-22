@@ -48,6 +48,10 @@ table {
     &.row-checkbox {
       padding: 0.5rem !important;
       width: 46px;
+
+      &.small {
+        width: 38px;
+      }
     }
 
     &:last-child {
@@ -358,7 +362,8 @@ table {
   }
 
   &.density-comfortable {
-    tbody {
+    tbody,
+    tfoot {
       tr {
         height: $rem-32px;
 
@@ -372,7 +377,8 @@ table {
   }
 
   &.density-compact {
-    tbody {
+    tbody,
+    tfoot {
       tr {
         height: $rem-24px;
 

@@ -26,6 +26,7 @@ export const ModusTableFooter: FunctionalComponent<ModusTableSummaryRowProps> = 
     tableInstance: { getFooterGroups },
     data,
     rowSelection,
+    rowSelectionOptions,
     frozenColumns,
     rowActions,
   },
@@ -35,7 +36,10 @@ export const ModusTableFooter: FunctionalComponent<ModusTableSummaryRowProps> = 
       {getFooterGroups().map((group) => (
         <tr class="summary-row">
           {rowSelection && (
-            <td id={COLUMN_DEF_ROW_SELECTION_ID} key={COLUMN_DEF_ROW_SELECTION_ID} class={COLUMN_DEF_ROW_SELECTION_CSS}></td>
+            <td
+              id={COLUMN_DEF_ROW_SELECTION_ID}
+              key={COLUMN_DEF_ROW_SELECTION_ID}
+              class={COLUMN_DEF_ROW_SELECTION_CSS + ' ' + (rowSelectionOptions?.checkboxSize ?? '')}></td>
           )}
           {group.headers.map((header) => (
             <td

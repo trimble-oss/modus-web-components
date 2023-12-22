@@ -14,12 +14,13 @@ export const ModusTableHeaderCheckbox: FunctionalComponent<ModusTableHeaderCheck
     rowSelectionOptions,
   } = context;
   return (
-    <th class="row-checkbox sticky-left">
+    <th class={'row-checkbox sticky-left ' + (rowSelectionOptions?.checkboxSize ?? '')}>
       {rowSelectionOptions?.multiple && (
         <modus-checkbox
           ariaLabel="Select all rows"
           checked={getIsAllRowsSelected()}
           indeterminate={getIsSomeRowsSelected()}
+          size={rowSelectionOptions?.checkboxSize}
           onCheckboxClick={getToggleAllRowsSelectedHandler()}></modus-checkbox>
       )}
     </th>

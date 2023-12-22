@@ -481,6 +481,7 @@ To select rows, users can use the checkbox provided on each row. Normally, the M
   - To enable multiple row selection, set `multiple` to `true`.
   - Sub-rows will also be selected if the parent is selected by setting `subRowSelection` to `true`.
   - To load the table with pre selected rows, set preSelectedRows to a list of row ids. **Row ids default to the row index, but can also be set by passing an id value in data.**
+  - To use a different size for the checkboxes, set `checkboxSize` to `small`. Default: `medium`.
 
 ### Inline Editing
 
@@ -604,6 +605,8 @@ interface ModusTableCellValueChange {
 interface ModusTableRowSelectionOptions {
   multiple?: boolean;
   subRowSelection?: boolean;
+  preSelectedRows?: string[];
+  checkboxSize: 'small' | 'medium';
 }
 
 interface ModusTableRowAction {
