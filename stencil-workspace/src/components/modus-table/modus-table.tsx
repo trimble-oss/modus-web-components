@@ -242,7 +242,6 @@ export class ModusTable {
   /** (Optional) To set the default sorting for the table. */
   @Prop() defaultSort: ColumnSort;
   @Watch('defaultSort') onDefaultSortChange(newVal: ColumnSort | null) {
-    console.log(newVal);
     this.tableCore?.setState('sorting', [newVal]);
   }
 
