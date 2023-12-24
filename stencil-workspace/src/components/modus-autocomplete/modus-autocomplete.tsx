@@ -165,6 +165,7 @@ export class ModusAutocomplete {
       id: optionId,
       value: optionValue,
     });
+    this.optionSelected.emit(optionId);
     if (!this.disableCloseOnSelect) {
       this.updateVisibleCustomOptions(optionValue);
       this.hasFocus = false;
