@@ -655,7 +655,7 @@ export declare interface ModusNavbar extends Components.ModusNavbar {
   /**
    * An event that fires on profile menu sign out click.
    */
-   profileMenuSignOutClick: EventEmitter<CustomEvent<MouseEvent>>;
+  profileMenuSignOutClick: EventEmitter<CustomEvent<KeyboardEvent | MouseEvent>>;
   /**
    * An event that fires on search value change.
    */

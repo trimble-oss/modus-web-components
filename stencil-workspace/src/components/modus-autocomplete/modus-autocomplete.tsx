@@ -160,12 +160,14 @@ export class ModusAutocomplete {
     const optionValue = option.getAttribute(DATA_SEARCH_VALUE);
     const optionId = option.getAttribute(DATA_ID);
     this.value = optionValue;
+    this.valueChange.emit(optionValue);
     this.hasFocus = true;
     this.handleOptionSelection({
       id: optionId,
       value: optionValue,
     });
     this.optionSelected.emit(optionId);
+
     if (!this.disableCloseOnSelect) {
       this.updateVisibleCustomOptions(optionValue);
       this.hasFocus = false;
