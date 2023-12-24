@@ -103,6 +103,7 @@ export class ModusAutocomplete {
   @State() visibleOptions: ModusAutocompleteOption[] = [];
   @State() customOptions: Array<any> = [];
   @State() visibleCustomOptions: Array<any> = [];
+  @State() hasCustomOptions: boolean;
 
   componentWillLoad(): void {
     this.convertOptions();
@@ -115,6 +116,8 @@ export class ModusAutocomplete {
   }
 
   componentDidLoad(): void {
+    const slotted = this.el.children;
+    this.containsSlottedElements = slotted.length > 0;
     this.updateVisibleCustomOptions(this.value);
   }
 
@@ -149,27 +152,29 @@ export class ModusAutocomplete {
     this.value?.length > 0;
 
   displayOptions = () => {
-    const showOptions = this.showOptionsOnFocus || this.disableCloseOnSelect || this.value?.length >= 0;
+    const showOptions = this.showOptionsOnFocus || this.disableCloseOnSelect || this.value?.length > 0;
     return this.hasFocus && showOptions && !this.disabled;
   };
 
   handleCustomOptionClick = (option: any) => {
     const optionValue = option.getAttribute(DATA_SEARCH_VALUE);
     const optionId = option.getAttribute(DATA_ID);
-    this.handleSearchChange(optionValue);
-    this.hasFocus = false;
-    this.optionSelected.emit(optionId);
+    this.value = optionValue;
+    this.hasFocus = true;
     this.handleOptionSelection({
       id: optionId,
       value: optionValue,
     });
+    if (!this.disableCloseOnSelect) {
+      this.updateVisibleCustomOptions(optionValue);
+      this.hasFocus = false;
+    }
   };
 
   handleInputBlur = () => {
     if (!this.disableCloseOnSelect) {
       return;
     }
-    //this.showAllOptions();
     this.hasFocus = false;
   };
 
@@ -192,19 +197,19 @@ export class ModusAutocomplete {
   };
 
   handleSearchChange = (search: string) => {
-    this.updateVisibleOptions(search);
-
     if (!this.disableCloseOnSelect) {
       this.updateVisibleCustomOptions(search);
     }
-
+    this.updateVisibleOptions(search);
     this.value = search;
     this.valueChange.emit(search);
   };
 
   handleOptionSelection = (option: ModusAutocompleteOption) => {
     if (this.disableCloseOnSelect) {
-      this.visibleOptions.find((el) => el.id === option.id)['isSelected'] = true;
+      if (!this.containsSlottedElements) {
+        this.visibleOptions.find((el) => el.id === option.id)['isSelected'] = true;
+      }
       this.clearable = true;
       this.hasFocus = true;
     }
@@ -263,15 +268,16 @@ export class ModusAutocomplete {
   };
 
   handleFilterOptions = (search: string) => {
-    // if(this.visibleCustomOptions?.length > 0){
-    //   this.visibleOptions = (this.visibleCustomOptions as ModusAutocompleteOption[])?.filter((o: ModusAutocompleteOption) => {
-    //     return o.value.toLowerCase().includes(search.toLowerCase());
-    //   });
-    // }
-    if (search && search.length > 0)
+    if (search?.length >= 0 && this.containsSlottedElements) {
+      this.hasFocus = true;
+      this.updateVisibleCustomOptions(search);
+      return;
+    }
+    if (search?.length > 0 && !this.containsSlottedElements) {
       this.visibleOptions = (this.options as ModusAutocompleteOption[])?.filter((o: ModusAutocompleteOption) => {
         return o.value.toLowerCase().includes(search.toLowerCase());
       });
+    }
   };
 
   TextInput = () => (
@@ -293,8 +299,8 @@ export class ModusAutocomplete {
       value={this.value}
       onInput={() => this.handleFilterOptions(this.value)}
       onFocus={() => {
-        this.hasFocus = true;
-        if (this.disableCloseOnSelect && this.visibleOptions?.length > 0) {
+        if (this.disableCloseOnSelect || this.showOptionsOnFocus) {
+          this.hasFocus = true;
           if (this.visibleOptions?.length > 0) {
             const optionVisible = this.visibleOptions.find((op) => op.id === this.value);
             if (optionVisible) {

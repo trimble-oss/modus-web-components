@@ -48,7 +48,7 @@ export default {
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },
-      }
+      },
     },
     errorText: {
       name: 'error-text',
