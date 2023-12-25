@@ -117,7 +117,13 @@ export class ModusAutocomplete {
   componentDidLoad(): void {
     const slotted = this.el.children;
     this.containsSlottedElements = slotted?.length > 0;
-    this.updateVisibleCustomOptions(this.value);
+    if (this.containsSlottedElements) {
+      this.updateVisibleCustomOptions(this.value);
+    }
+  }
+
+  componentWillUpdate() {
+    console.log('this.visibleOptions=>', this.visibleOptions);
   }
 
   @Listen('click', { target: 'document' })
@@ -199,9 +205,9 @@ export class ModusAutocomplete {
   };
 
   handleSearchChange = (search: string) => {
-    if (!this.disableCloseOnSelect) {
-      this.updateVisibleCustomOptions(search);
-    }
+    // if (!this.disableCloseOnSelect) {
+    //   this.updateVisibleCustomOptions(search);
+    // }
     this.updateVisibleOptions(search);
     this.value = search;
     this.valueChange.emit(search);
