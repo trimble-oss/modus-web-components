@@ -104,7 +104,6 @@ export class ModusAutocomplete {
   @State() customOptions: Array<any> = [];
   @State() visibleCustomOptions: Array<any> = [];
 
-
   componentWillLoad(): void {
     this.convertOptions();
 
@@ -121,17 +120,15 @@ export class ModusAutocomplete {
     this.updateVisibleCustomOptions(this.value);
   }
   componentWillUpdate(): void {
-    if(!this.value){
-      if(this.containsSlottedElements){
-        console.log('AQUII->')
+    if (!this.value) {
+      if (this.containsSlottedElements) {
+        console.log('AQUII->');
         this.visibleCustomOptions = this.showAllCustomOptions();
         return;
       }
       this.showAllOptions();
     }
-   
   }
-
 
   @Listen('click', { target: 'document' })
   outsideElementClickHandler(event: MouseEvent): void {
@@ -240,7 +237,6 @@ export class ModusAutocomplete {
     this.customOptions = this.showAllCustomOptions();
 
     if (!search || search.length === 0) {
-      console.log('customOptions=>', this.customOptions)
       this.visibleCustomOptions = this.customOptions;
       return;
     }
@@ -285,7 +281,7 @@ export class ModusAutocomplete {
     }
 
     return slotted.assignedNodes().filter((node) => node.nodeName !== '#text');
-  }
+  };
 
   handleFilterOptions = (search: string) => {
     if (search?.length >= 0 && this.containsSlottedElements) {
