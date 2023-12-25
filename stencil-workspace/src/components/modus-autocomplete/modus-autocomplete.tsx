@@ -116,18 +116,8 @@ export class ModusAutocomplete {
 
   componentDidLoad(): void {
     const slotted = this.el.children;
-    this.containsSlottedElements = slotted.length > 0;
+    this.containsSlottedElements = slotted?.length > 0;
     this.updateVisibleCustomOptions(this.value);
-  }
-  componentWillUpdate(): void {
-    if (!this.value) {
-      if (this.containsSlottedElements) {
-        console.log('AQUII->');
-        this.visibleCustomOptions = this.showAllCustomOptions();
-        return;
-      }
-      this.showAllOptions();
-    }
   }
 
   @Listen('click', { target: 'document' })
@@ -341,6 +331,13 @@ export class ModusAutocomplete {
         class={classes}
         onFocusin={() => {
           this.hasFocus = true;
+          if (!this.value) {
+            if (this.containsSlottedElements) {
+              this.visibleCustomOptions = this.showAllCustomOptions();
+              return;
+            }
+            this.showAllOptions();
+          }
           if (this.disableCloseOnSelect) {
             const optionSelected = document.getElementById('isSelected');
             if (optionSelected) {
