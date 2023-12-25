@@ -205,9 +205,6 @@ export class ModusAutocomplete {
   };
 
   handleSearchChange = (search: string) => {
-    // if (!this.disableCloseOnSelect) {
-    //   this.updateVisibleCustomOptions(search);
-    // }
     this.updateVisibleOptions(search);
     this.value = search;
     this.valueChange.emit(search);
