@@ -103,7 +103,7 @@ export class ModusAutocomplete {
   @State() visibleOptions: ModusAutocompleteOption[] = [];
   @State() customOptions: Array<any> = [];
   @State() visibleCustomOptions: Array<any> = [];
-  @State() hasCustomOptions: boolean;
+
 
   componentWillLoad(): void {
     this.convertOptions();
@@ -120,6 +120,18 @@ export class ModusAutocomplete {
     this.containsSlottedElements = slotted.length > 0;
     this.updateVisibleCustomOptions(this.value);
   }
+  componentWillUpdate(): void {
+    if(!this.value){
+      if(this.containsSlottedElements){
+        console.log('AQUII->')
+        this.visibleCustomOptions = this.showAllCustomOptions();
+        return;
+      }
+      this.showAllOptions();
+    }
+   
+  }
+
 
   @Listen('click', { target: 'document' })
   outsideElementClickHandler(event: MouseEvent): void {
@@ -225,14 +237,10 @@ export class ModusAutocomplete {
   };
 
   updateVisibleCustomOptions = (search: string) => {
-    const slotted = this.el.shadowRoot?.querySelector('slot') as HTMLSlotElement;
-    if (!slotted || typeof slotted.assignedNodes !== 'function') {
-      return;
-    }
-
-    this.customOptions = slotted.assignedNodes().filter((node) => node.nodeName !== '#text');
+    this.customOptions = this.showAllCustomOptions();
 
     if (!search || search.length === 0) {
+      console.log('customOptions=>', this.customOptions)
       this.visibleCustomOptions = this.customOptions;
       return;
     }
@@ -269,6 +277,15 @@ export class ModusAutocomplete {
         return option;
       });
   };
+
+  showAllCustomOptions = () => {
+    const slotted = this.el.shadowRoot?.querySelector('slot') as HTMLSlotElement;
+    if (!slotted || typeof slotted.assignedNodes !== 'function') {
+      return;
+    }
+
+    return slotted.assignedNodes().filter((node) => node.nodeName !== '#text');
+  }
 
   handleFilterOptions = (search: string) => {
     if (search?.length >= 0 && this.containsSlottedElements) {
