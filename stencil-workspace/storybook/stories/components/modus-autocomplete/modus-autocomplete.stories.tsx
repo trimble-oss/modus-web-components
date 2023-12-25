@@ -208,6 +208,7 @@ Default.args = {
   ariaLabel: 'autocomplete',
   clearable: false,
   disabled: false,
+  disableCloseOnSelect: false,
   dropdownMaxHeight: '300px',
   dropdownZIndex: '1',
   errorText: '',
