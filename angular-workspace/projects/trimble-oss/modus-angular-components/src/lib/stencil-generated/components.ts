@@ -90,14 +90,14 @@ export declare interface ModusAlert extends Components.ModusAlert {
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'clearable', 'disableCloseOnSelect', 'disabled', 'dropdownMaxHeight', 'dropdownZIndex', 'errorText', 'includeSearchIcon', 'label', 'noResultsFoundSubtext', 'noResultsFoundText', 'options', 'placeholder', 'readOnly', 'required', 'showNoResultsFoundMessage', 'showOptionsOnFocus', 'size', 'value']
+  inputs: ['ariaLabel', 'clearable', 'disabled', 'dropdownMaxHeight', 'dropdownZIndex', 'errorText', 'includeSearchIcon', 'label', 'noResultsFoundSubtext', 'noResultsFoundText', 'options', 'placeholder', 'readOnly', 'required', 'showNoResultsFoundMessage', 'showOptionsOnFocus', 'size', 'value']
 })
 @Component({
   selector: 'modus-autocomplete',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['ariaLabel', 'clearable', 'disableCloseOnSelect', 'disabled', 'dropdownMaxHeight', 'dropdownZIndex', 'errorText', 'includeSearchIcon', 'label', 'noResultsFoundSubtext', 'noResultsFoundText', 'options', 'placeholder', 'readOnly', 'required', 'showNoResultsFoundMessage', 'showOptionsOnFocus', 'size', 'value'],
+  inputs: ['ariaLabel', 'clearable', 'disabled', 'dropdownMaxHeight', 'dropdownZIndex', 'errorText', 'includeSearchIcon', 'label', 'noResultsFoundSubtext', 'noResultsFoundText', 'options', 'placeholder', 'readOnly', 'required', 'showNoResultsFoundMessage', 'showOptionsOnFocus', 'size', 'value'],
 })
 export class ModusAutocomplete {
   protected el: HTMLElement;
@@ -225,7 +225,7 @@ export declare interface ModusCard extends Components.ModusCard {}
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'checked', 'disabled', 'indeterminate', 'label', 'size', 'stopPropagation', 'tabIndexValue'],
+  inputs: ['ariaLabel', 'checked', 'disabled', 'indeterminate', 'label', 'stopPropagation', 'tabIndexValue'],
   methods: ['focusCheckbox']
 })
 @Component({
@@ -233,7 +233,7 @@ export declare interface ModusCard extends Components.ModusCard {}
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['ariaLabel', 'checked', 'disabled', 'indeterminate', 'label', 'size', 'stopPropagation', 'tabIndexValue'],
+  inputs: ['ariaLabel', 'checked', 'disabled', 'indeterminate', 'label', 'stopPropagation', 'tabIndexValue'],
 })
 export class ModusCheckbox {
   protected el: HTMLElement;
@@ -655,7 +655,7 @@ export declare interface ModusNavbar extends Components.ModusNavbar {
   /**
    * An event that fires on profile menu sign out click.
    */
-  profileMenuSignOutClick: EventEmitter<CustomEvent<KeyboardEvent | MouseEvent>>;
+  profileMenuSignOutClick: EventEmitter<CustomEvent<MouseEvent>>;
   /**
    * An event that fires on search value change.
    */
@@ -1104,14 +1104,14 @@ export declare interface ModusSpinner extends Components.ModusSpinner {}
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'checked', 'disabled', 'label', 'size']
+  inputs: ['ariaLabel', 'checked', 'disabled', 'label']
 })
 @Component({
   selector: 'modus-switch',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['ariaLabel', 'checked', 'disabled', 'label', 'size'],
+  inputs: ['ariaLabel', 'checked', 'disabled', 'label'],
 })
 export class ModusSwitch {
   protected el: HTMLElement;
@@ -1609,5 +1609,3 @@ export declare interface ModusTreeViewItem extends Components.ModusTreeViewItem 
    */
   itemExpandToggle: EventEmitter<CustomEvent<boolean>>;
 }
-
-
