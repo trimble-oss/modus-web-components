@@ -122,10 +122,6 @@ export class ModusAutocomplete {
     }
   }
 
-  componentWillUpdate() {
-    console.log('this.visibleOptions=>', this.visibleOptions);
-  }
-
   @Listen('click', { target: 'document' })
   outsideElementClickHandler(event: MouseEvent): void {
     if (this.el !== event.target || !this.el.contains(event.target as Node)) {
