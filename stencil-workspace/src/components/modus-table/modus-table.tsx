@@ -152,25 +152,20 @@ export class ModusTable {
 
   /** (Optional) To enable manual pagination mode. When enabled, the table will not automatically paginate rows, instead will expect the current page index and other details to be passed. */
   @Prop() manualPaginationOptions: ModusTableManualPaginationOptions;
-  @Watch('manualPaginationOptions') onManualPaginationOptionsChange(
-    newVal: ModusTableManualPaginationOptions,
-    oldVal: ModusTableManualPaginationOptions
-  ) {
-    const hasUpdateValues =
-      newVal?.pageCount !== oldVal?.pageCount ||
-      newVal?.currentPageIndex !== oldVal?.currentPageIndex ||
-      newVal?.currentPageSize !== oldVal?.currentPageSize;
-
-    if (hasUpdateValues) {
+  @Watch('manualPaginationOptions') onManualPaginationOptionsChange(newVal: ModusTableManualPaginationOptions) {
+    if (Object.keys(newVal).length === 0) {
+      this.tableCore?.setOptions('manualPagination', false);
+      this.tableCore?.setState('pagination', {
+        pageIndex: 0,
+        pageSize: this.pageSizeList[0],
+      });
+    } else {
       this.tableCore?.setOptions('pageCount', newVal.pageCount);
+      this.tableCore?.setOptions('manualPagination', true);
       this.tableCore?.setState('pagination', {
         pageIndex: newVal.currentPageIndex - 1,
         pageSize: newVal.currentPageSize,
       });
-      this.manualPaginationOptions = { ...newVal };
-    } else if (Object.keys(newVal).length === 0 && Object.keys(oldVal).length === 0) {
-      this.tableCore?.setOptions('manualPagination', false);
-      this.initializeTable();
     }
   }
 
