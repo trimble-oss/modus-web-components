@@ -591,3 +591,62 @@ export const CustomFilter = FilterTemplate.bind({});
 CustomFilter.args = {...Default.args,
 };
 
+const SideTemplate = ({
+  checkboxSelection,
+  multiCheckboxSelection,
+  multiSelection,
+  disableTabbing,
+  size,
+}) => html`
+  <modus-tree-view
+    style="width:400px;"
+    checkbox-selection=${checkboxSelection ? 'true' : 'false'}
+    disable-tabbing=${disableTabbing ? 'true' : 'false'}
+    multi-checkbox-selection=${multiCheckboxSelection ? 'true' : 'false'}
+    multi-selection=${multiSelection ? 'true' : 'false'}
+    size=${size}>
+      <modus-tree-view-item node-id="1" label="Inbox" class="hydrated">
+        <div slot="groupRight">
+          <modus-dropdown 
+            class="kebab-menu"
+            toggle-element-id="toggleElement1" 
+            placement="bottom">
+            <modus-button 
+             id="toggleElement1"
+             color="transparent"
+             slot="dropdownToggle" 
+             size="small" 
+             icon-only="vertical-ellipsis"></modus-button>
+          <modus-list class="options" slot="dropdownList">
+            <modus-list-item size="condensed" tabindex="0"><modus-button button-style='borderless'>Edit</modus-button></modus-list-item>
+            <modus-list-item size="condensed" tabindex="0">Delete</modus-list-item>
+            <modus-list-item size="condensed" tabindex="0">Export</modus-list-item>
+            <modus-list-item size="condensed" tabindex="0">History</modus-list-item>
+          </modus-list>
+        </modus-dropdown>
+        </div>
+      </modus-tree-view-item>
+      <modus-tree-view-item
+        node-id="2"
+        class="hydrated">
+        <modus-button 
+        slot="label"
+        size="small">
+          Spam
+        </modus-button>
+        </div>
+        <div slot="groupRight">
+          Some Text
+        </div>
+      </modus-tree-view-item>
+    </modus-tree-view>
+`;
+
+export const WithSideContent = SideTemplate.bind({})
+WithSideContent.args = {
+  checkboxSelection: false,
+  disableTabbing: false,
+  multiCheckboxSelection: false,
+  multiSelection: false,
+  size: 'standard',
+};

@@ -79,6 +79,8 @@ export class ModusTreeViewItem {
   readonly SLOT_EXPAND_ICON = 'expandIcon';
   readonly SLOT_ITEM_ICON = 'itemIcon';
   readonly SLOT_LABEL = 'label';
+  readonly SLOT_GROUP_LEFT = 'groupLeft';
+  readonly SLOT_GROUP_RIGHT = 'groupRight'
 
   CustomSlot: FunctionalComponent<{
     name: string;
@@ -431,29 +433,44 @@ export class ModusTreeViewItem {
                 tabIndexValue={tabIndex}></modus-checkbox>
             </div>
           )}
-
-          <this.CustomSlot className="icon-slot" name={this.SLOT_ITEM_ICON} display={this.slots.has(this.SLOT_ITEM_ICON)} />
-          <div role="heading" aria-level={level} class="label-slot">
+          <div class="slot-container">
             <this.CustomSlot
-              role="button"
-              name={this.SLOT_LABEL}
-              defaultContent={
-                this.editable ? (
-                  <modus-text-input
-                    size={size == 'large' ? 'large' : 'medium'}
-                    autoFocusInput={true}
-                    tabindex={0}
-                    ref={(el) => (this.refLabelInput = el)}
-                    value={this.label}
-                    onClick={(e) => this.handleLabelInputClick(e)}
-                    onBlur={() => this.handleLabelInputBlur()}
-                    onKeyDown={(e) => this.handleLabelInputKeyDown(e)}></modus-text-input>
-                ) : (
-                  this.label
-                )
-              }></this.CustomSlot>
+              className="icon-slot"
+              name={this.SLOT_ITEM_ICON}
+              display={this.slots.has(this.SLOT_ITEM_ICON)}
+            />
+            
+            <div aria-level={level} class="group-left">
+              <this.CustomSlot name={this.SLOT_GROUP_LEFT} />
+            </div>
+
+            <div role="heading" aria-level={level} class="label-slot">
+              <this.CustomSlot
+                role="button"
+                name={this.SLOT_LABEL}
+                defaultContent={
+                  this.editable ? (
+                    <modus-text-input
+                      size={size == 'large' ? 'large' : 'medium'}
+                      autoFocusInput={true}
+                      tabindex={0}
+                      ref={(el) => (this.refLabelInput = el)}
+                      value={this.label}
+                      onClick={(e) => this.handleLabelInputClick(e)}
+                      onBlur={() => this.handleLabelInputBlur()}
+                      onKeyDown={(e) => this.handleLabelInputKeyDown(e)}></modus-text-input>
+                  ) : (
+                    this.label
+                  )
+                }></this.CustomSlot>
+            </div>
+            
+            <div aria-level={level} class="group-right">
+              <this.CustomSlot name={this.SLOT_GROUP_RIGHT} />
+            </div>
           </div>
         </div>
+
         <ul class={treeItemChildrenClass} role="tree">
           <slot onSlotchange={() => this.handleTreeSlotChange()} />
         </ul>

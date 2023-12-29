@@ -14,7 +14,7 @@ It is located on the left side of the screen and cannot be combined with Side Na
 - Clicking on collapse/expand button expands or collapse a tree view item and clicking on the node selects it.
 - By default multiple items selection is disabled. The prop `multi-selection` lets multiple items to be selected using `Shift + Up/Down arrow` and `Ctrl + click`.
 - Checkbox selection can be enabled using the prop `checkbox-selection` and to let multiple checkbox selection use the prop `multi-checkbox-selection`.
-- This component utilizes the slot element, allowing you to render custom expand icon, collapse icon, drag icon, item icon and the slot names are `expandIcon`, `collapseIcon`, `dragIcon`, `itemIcon`.
+- This component utilizes the slot element, allowing you to render custom expand icon, collapse icon, drag icon, item icon. The slot names are `expandIcon`, `collapseIcon`, `dragIcon`, `itemIcon`, also a slot to add a side content to the right in cases you want a label to the left and another content to the right.
 - By default `label` prop is used for displaying the node text. Custom label element can be added through the slot `label`.
 
 ### Default
@@ -631,6 +631,50 @@ It is located on the left side of the screen and cannot be combined with Side Na
 </script>
 ```
 
+### With side content
+
+<Story id="components-content-tree--with-side-content" />
+
+```html
+<modus-tree-view
+    style="width:400px;"
+    checkbox-selection="false"
+    disable-tabbing="false"
+    multi-checkbox-selection="false"
+    multi-selection="false"
+    size="starndard">
+      <modus-tree-view-item node-id="1" label="Inbox" class="hydrated">
+        <div slot="groupRight">
+          <modus-dropdown 
+            class="kebab-menu"
+            toggle-element-id="toggleElement1" 
+            placement="bottom">
+            <modus-button 
+             id="toggleElement1"
+             color="transparent"
+             slot="dropdownToggle" 
+             size="small" 
+             icon-only="vertical-ellipsis"></modus-button>
+          <modus-list class="options" slot="dropdownList">
+            <modus-list-item size="condensed" tabindex="0"><modus-button button-style='borderless'>Edit</modus-button></modus-list-item>
+            <modus-list-item size="condensed" tabindex="0">Delete</modus-list-item>
+            <modus-list-item size="condensed" tabindex="0">Export</modus-list-item>
+            <modus-list-item size="condensed" tabindex="0">History</modus-list-item>
+          </modus-list>
+        </modus-dropdown>
+        </div>
+      </modus-tree-view-item>
+      <modus-tree-view-item
+        node-id="2"
+        label="Spam"
+        class="hydrated">
+        <div slot="groupRight">
+          Some Text
+        </div>
+      </modus-tree-view-item>
+    </modus-tree-view>
+```
+
 ### Accessibility
 
 Every item and the elements such as drag icon, expand & collapse icon and the checkbox are accessible through keyboard. `Tab` key moves focus to the next focusable element and `Shift + Tab` moves focus to the previous focusable element. If `disableTabbing` is set `true`, tabbing inside the tree isn't allowed. Please refer to the next section for more details on keyboard interaction.
@@ -694,3 +738,17 @@ Every item and the elements such as drag icon, expand & collapse icon and the ch
 | --------------- | ------------------------------------- | --------- | --------------- |
 | `focusCheckbox` | Focus the checkbox inside a tree item |           | `Promise<void>` |
 | `focusItem`     | Focus the tree item                   |           | `Promise<void>` |
+
+### Slot
+
+This component utilizes the slot element for the following:
+
+| Slot             | Description                                 |
+| ---------------- | --------------------------------------------|
+| `label`          | Slot for label text.                        |
+| `groupLeft`      | Slot for custom content to the left.        |
+| `groupRight`     | Slot for custom content to the right.       |
+| `expandIcon`     | Slot for render custom expand icon.         |
+| `collapseIcon`   | Slot for render custom collapse icon.       |
+| `dragIcon`       | Slot for render custom drag icon.           |
+| `itemIcon`       | Slot for render custom item icon.           |
