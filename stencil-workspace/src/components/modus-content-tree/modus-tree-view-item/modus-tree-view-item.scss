@@ -53,24 +53,28 @@
     background-color: $modus-tree-view-item-hover-bg;
   }
 
-  .slot-container{
+  .slot-container {
     display: flex;
     justify-content: space-between;
-    width:100%;
+    width: 100%;
     padding-right: 8px;
-    .group-right{
-      width: 30%;
+    .group-left {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+    }
+    .group-right {
       display: flex;
       align-items: center;
       justify-content: flex-end;
+      width: 30%;
     }
     .icon-slot {
       align-items: center;
       display: flex;
       justify-content: center;
-     
+
       width: $rem-24px;
-     
 
       &.drag-icon {
         cursor: grab !important;

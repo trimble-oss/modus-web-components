@@ -80,7 +80,7 @@ export class ModusTreeViewItem {
   readonly SLOT_ITEM_ICON = 'itemIcon';
   readonly SLOT_LABEL = 'label';
   readonly SLOT_GROUP_LEFT = 'groupLeft';
-  readonly SLOT_GROUP_RIGHT = 'groupRight'
+  readonly SLOT_GROUP_RIGHT = 'groupRight';
 
   CustomSlot: FunctionalComponent<{
     name: string;
@@ -439,8 +439,8 @@ export class ModusTreeViewItem {
               name={this.SLOT_ITEM_ICON}
               display={this.slots.has(this.SLOT_ITEM_ICON)}
             />
-            
-            <div aria-level={level} class="group-left">
+
+            <div class="group-left">
               <this.CustomSlot name={this.SLOT_GROUP_LEFT} />
             </div>
 
@@ -464,8 +464,8 @@ export class ModusTreeViewItem {
                   )
                 }></this.CustomSlot>
             </div>
-            
-            <div aria-level={level} class="group-right">
+
+            <div class="group-right">
               <this.CustomSlot name={this.SLOT_GROUP_RIGHT} />
             </div>
           </div>

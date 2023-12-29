@@ -636,13 +636,13 @@ It is located on the left side of the screen and cannot be combined with Side Na
 <Story id="components-content-tree--with-side-content" />
 
 ```html
-<modus-tree-view
+ <modus-tree-view
     style="width:400px;"
     checkbox-selection="false"
     disable-tabbing="false"
     multi-checkbox-selection="false"
     multi-selection="false"
-    size="starndard">
+    size="standard">
       <modus-tree-view-item node-id="1" label="Inbox" class="hydrated">
         <div slot="groupRight">
           <modus-dropdown 
@@ -666,9 +666,15 @@ It is located on the left side of the screen and cannot be combined with Side Na
       </modus-tree-view-item>
       <modus-tree-view-item
         node-id="2"
-        label="Spam"
         class="hydrated">
-        <div slot="groupRight">
+        <div slot="groupLeft">
+          <modus-button 
+          color="white"
+          size="small">
+           Spam
+          </modus-button>
+        </div>
+        <div slot="groupRight" tabindex="0">
           Some Text
         </div>
       </modus-tree-view-item>

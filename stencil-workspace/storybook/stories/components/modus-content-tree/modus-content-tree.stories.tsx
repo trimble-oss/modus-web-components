@@ -629,13 +629,14 @@ const SideTemplate = ({
       <modus-tree-view-item
         node-id="2"
         class="hydrated">
-        <modus-button 
-        slot="label"
-        size="small">
-          Spam
-        </modus-button>
+        <div slot="groupLeft">
+          <modus-button 
+          color="white"
+          size="small">
+           Spam
+          </modus-button>
         </div>
-        <div slot="groupRight">
+        <div slot="groupRight" tabindex="0">
           Some Text
         </div>
       </modus-tree-view-item>

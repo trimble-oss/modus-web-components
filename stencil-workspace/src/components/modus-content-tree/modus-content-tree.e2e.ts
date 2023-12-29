@@ -34,6 +34,27 @@ describe('modus-tree-view-item', () => {
     expect(item).toHaveClass('hydrated');
   });
 
+  it('renders root with right content item', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+    <modus-tree-view>
+      <modus-tree-view-item node-Id="1" label="Node one">
+      <div slot="groupRight">some text</div>
+      </modus-tree-view-item>
+    </modus-tree-view>`);
+
+    const root = await page.find('modus-tree-view');
+    expect(root).toHaveClass('hydrated');
+
+    const item = await page.find('modus-tree-view-item');
+
+    expect(item).toHaveClass('hydrated');
+
+    const groupRight = await item.find('[slot="groupRight"]');
+
+    expect(groupRight.textContent).toBe('some text');
+  });
   // verify props
   it('renders changes to the disabled prop set at the item level', async () => {
     const page = await newE2EPage();
