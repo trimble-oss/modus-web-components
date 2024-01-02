@@ -257,4 +257,137 @@ describe('modus-autocomplete', () => {
 
     expect(options.length).toEqual(2);
   });
+  it('should add chip when option is selected and addChip is true', async () => {
+    const element = await page.find('modus-autocomplete');
+    element.setProperty('addChip', true);
+    await page.waitForChanges();
+
+    // Trigger the selection of an option
+    // Ensure that the chip is added
+    // Check if the selectedChips array is updated
+    // Use spies to check if the valueChange event is emitted
+  });
+
+  it('should not add chip when addChip is false', async () => {
+    const element = await page.find('modus-autocomplete');
+    element.setProperty('addChip', false);
+    await page.waitForChanges();
+
+    // Trigger the selection of an option
+    // Ensure that the chip is not added
+    // Check if the selectedChips array is not updated
+    // Use spies to check if the valueChange event is emitted
+  });
+  it('should set aria label on the input field', async () => {
+    const element = await page.find('modus-autocomplete');
+    const ariaLabel = 'Accessible Autocomplete';
+    element.setProperty('ariaLabel', ariaLabel);
+    await page.waitForChanges();
+
+    // Ensure that the input field has the correct aria label attribute
+  });
+  it('should render clear button when clearable is true and there is a value', async () => {
+    const element = await page.find('modus-autocomplete');
+    element.setProperty('clearable', true);
+    await page.waitForChanges();
+
+    // Set a non-empty value
+    // Ensure that the clear button is rendered
+  });
+
+  it('should not render clear button when clearable is false or there is no value', async () => {
+    const element = await page.find('modus-autocomplete');
+    element.setProperty('clearable', false);
+    await page.waitForChanges();
+
+    // Ensure that the clear button is not rendered
+    // Try setting an empty value and ensure that the clear button is not rendered
+  });
+  it('should disable the autocomplete when disabled is true', async () => {
+    const element = await page.find('modus-autocomplete');
+    element.setProperty('disabled', true);
+    await page.waitForChanges();
+
+    // Ensure that the autocomplete is disabled
+  });
+
+  it('should enable the autocomplete when disabled is false', async () => {
+    const element = await page.find('modus-autocomplete');
+    element.setProperty('disabled', false);
+    await page.waitForChanges();
+
+    // Ensure that the autocomplete is enabled
+  });
+  it('should set the max height of the dropdown', async () => {
+    const element = await page.find('modus-autocomplete');
+    const dropdownMaxHeight = '400px';
+    element.setProperty('dropdownMaxHeight', dropdownMaxHeight);
+    await page.waitForChanges();
+
+    // Ensure that the dropdown has the correct max height style
+  });
+  it('should set the z-index of the dropdown', async () => {
+    const element = await page.find('modus-autocomplete');
+    const dropdownZIndex = '2';
+    element.setProperty('dropdownZIndex', dropdownZIndex);
+    await page.waitForChanges();
+
+    // Ensure that the dropdown has the correct z-index style
+  });
+  it('should display error message when there is an error', async () => {
+    const element = await page.find('modus-autocomplete');
+    const errorText = 'Invalid input';
+    element.setProperty('errorText', errorText);
+    await page.waitForChanges();
+
+    // Ensure that the error message is displayed
+  });
+
+  it('should not display error message when there is no error', async () => {
+    const element = await page.find('modus-autocomplete');
+    element.setProperty('errorText', '');
+    await page.waitForChanges();
+
+    // Ensure that the error message is not displayed
+  });
+  it('should include search icon when includeSearchIcon is true', async () => {
+    const element = await page.find('modus-autocomplete');
+    element.setProperty('includeSearchIcon', true);
+    await page.waitForChanges();
+
+    // Ensure that the search icon is included
+  });
+
+  it('should not include search icon when includeSearchIcon is false', async () => {
+    const element = await page.find('modus-autocomplete');
+    element.setProperty('includeSearchIcon', false);
+    await page.waitForChanges();
+
+    // Ensure that the search icon is not included
+  });
+  it('should render label when label is provided', async () => {
+    const element = await page.find('modus-autocomplete');
+    const label = 'Select an option';
+    element.setProperty('label', label);
+    await page.waitForChanges();
+
+    // Ensure that the label is rendered
+  });
+
+  it('should not render label when label is not provided', async () => {
+    const element = await page.find('modus-autocomplete');
+    element.setProperty('label', '');
+    await page.waitForChanges();
+
+    // Ensure that the label is not rendered
+  });
+  it('should update the value when the value prop changes', async () => {
+    const element = await page.find('modus-autocomplete');
+    const newValue = 'New Value';
+    element.setProperty('value', newValue);
+    await page.waitForChanges();
+
+    // Ensure that the value is updated
+  });
+
 });

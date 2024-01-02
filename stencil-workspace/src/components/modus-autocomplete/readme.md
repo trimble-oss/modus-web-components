@@ -9,14 +9,14 @@
 
 | Property                    | Attribute                       | Description                                        | Type                                    | Default                                       |
 | --------------------------- | ------------------------------- | -------------------------------------------------- | --------------------------------------- | --------------------------------------------- |
-| `addChip`                   | `add-chip`                      | Add Chip while selecting.                          | `boolean`                               | `undefined`                                   |
+| `addChip`                   | `add-chip`                      | Whether to add a chip when an option is selected.  | `boolean`                               | `undefined`                                   |
 | `ariaLabel`                 | `aria-label`                    | The autocomplete's aria label.                     | `string`                                | `undefined`                                   |
 | `clearable`                 | `clearable`                     | Whether the input has a clear button.              | `boolean`                               | `false`                                       |
 | `disabled`                  | `disabled`                      | Whether the input is disabled.                     | `boolean`                               | `undefined`                                   |
 | `dropdownMaxHeight`         | `dropdown-max-height`           | The autocomplete's dropdown's max height.          | `string`                                | `'300px'`                                     |
 | `dropdownZIndex`            | `dropdown-z-index`              | The autocomplete's dropdown z-index.               | `string`                                | `'1'`                                         |
 | `errorText`                 | `error-text`                    | The autocomplete's error text.                     | `string`                                | `undefined`                                   |
-| `includeSearchIcon`         | `include-search-icon`           | Whether the search icon is included.               | `boolean`                               | `false`                                       |
+| `includeSearchIcon`         | `include-search-icon`           | Whether the search icon is included.               | `boolean`                               | `true`                                        |
 | `label`                     | `label`                         | The autocomplete's label.                          | `string`                                | `undefined`                                   |
 | `noResultsFoundSubtext`     | `no-results-found-subtext`      | The autocomplete's no results sub-text.            | `string`                                | `'Check spelling or try a different keyword'` |
 | `noResultsFoundText`        | `no-results-found-text`         | The autocomplete's no results text.                | `string`                                | `'No results found'`                          |

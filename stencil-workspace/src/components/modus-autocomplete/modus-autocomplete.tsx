@@ -28,15 +28,7 @@ const DATA_SEARCH_VALUE = 'data-search-value';
   shadow: true,
 })
 export class ModusAutocomplete {
-  @Element() el: HTMLElement;
-
-  /** An array to hold the selected chips. */
-  @State() selectedChips: string[] = [];
-
-  /** Whether to show autocomplete's options when focus. */
-  @Prop() showOptionsOnFocus: boolean;
-
-  /** Add Chip while selecting. */
+  /** Whether to add a chip when an option is selected. */
   @Prop() addChip: boolean;
 
   /** The autocomplete's aria label. */
@@ -57,8 +49,10 @@ export class ModusAutocomplete {
   /** The autocomplete's error text. */
   @Prop() errorText: string;
 
+  @Element() el: HTMLElement;
+
   /** Whether the search icon is included. */
-  @Prop() includeSearchIcon = false;
+  @Prop() includeSearchIcon = true;
 
   /** The autocomplete's label. */
   @Prop() label: string;
@@ -71,6 +65,13 @@ export class ModusAutocomplete {
 
   /** The autocomplete's options. */
   @Prop({ mutable: true }) options: ModusAutocompleteOption[] | string[];
+
+  /** An array to hold the selected chips. */
+  @State() selectedChips: string[] = [];
+
+  /** Whether to show autocomplete's options when focus. */
+  @Prop() showOptionsOnFocus: boolean;
+
   @Watch('options')
   watchOptions() {
     this.convertOptions();
@@ -298,6 +299,7 @@ export class ModusAutocomplete {
           </div>
         ) : null}
         <div class="chips-container">
+          {this.includeSearchIcon ? <IconSearch size="16" /> : null}
           {this.selectedChips.map((chip) => (
             <modus-chip value={chip} size="medium" show-close onCloseClick={() => this.handleCloseClick(chip)}></modus-chip>
           ))}

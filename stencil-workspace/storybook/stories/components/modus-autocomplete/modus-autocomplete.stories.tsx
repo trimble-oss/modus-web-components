@@ -134,7 +134,7 @@ export default {
       },
     },
     addChip: {
-      description: "Adds chips functionality to the autocomplete",
+      description: "Whether to add a chip when an option is selected",
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },
@@ -159,7 +159,7 @@ export default {
   },
 };
 
-export const Default = ({
+const Template = ({
                           ariaLabel,
                           clearable,
                           disabled,
@@ -176,7 +176,8 @@ export const Default = ({
                           showNoResultsFoundMessage,
                           showOptionsOnFocus,
                           size,
-                          value }) => html`
+                          value,
+                          addChip }) => html`
   <div style="width: 600px">
     <modus-autocomplete
       id="autocomplete-default"
@@ -196,12 +197,14 @@ export const Default = ({
       show-no-results-found-message=${showNoResultsFoundMessage}
       show-options-on-focus=${showOptionsOnFocus}
       size=${size}
-      value=${value}>
+      value=${value}
+      add-chip=${addChip}>
     </modus-autocomplete>
   </div>
   ${setAutocomplete()}
 `;
-Default.args = {
+const defaultArgs = {
+  addChip: false,
   ariaLabel: 'autocomplete',
   clearable: false,
   disabled: false,
@@ -220,9 +223,6 @@ Default.args = {
   size: 'medium',
   value: '',
 }
-
-// The <script> tag cannot be used in the MDX file, so we use this method to
-// set the data table data for the default story.
 const setAutocomplete = () => {
   const tag = document.createElement('script');
   tag.innerHTML = `
@@ -232,79 +232,16 @@ const setAutocomplete = () => {
   return tag;
 };
 
-export const WithOption = ({
-                             ariaLabel,
-                             clearable,
-                             disabled,
-                             dropdownMaxHeight,
-                             dropdownZIndex,
-                             errorText,
-                             includeSearchIcon,
-                             label,
-                             noResultsFoundText,
-                             noResultsFoundSubtext,
-                             placeholder,
-                             readOnly,
-                             required,
-                             showNoResultsFoundMessage,
-                             showOptionsOnFocus,
-                             size,
-                             value }) => html`
-  <div style="width: 600px">
-    <modus-autocomplete
-      id="autocomplete-with-option"
-      aria-label=${ariaLabel}
-      clearable=${clearable}
-      disabled=${disabled}
-      dropdown-max-height=${dropdownMaxHeight}
-      dropdown-z-index=${dropdownZIndex}
-      error-text=${errorText}
-      include-search-icon=${includeSearchIcon}
-      label=${label}
-      no-results-found-text=${noResultsFoundText}
-      no-results-found-subtext=${noResultsFoundSubtext}
-      placeholder=${placeholder}
-      read-only=${readOnly}
-      required=${required}
-      show-no-results-found-message=${showNoResultsFoundMessage}
-      show-options-on-focus=${showOptionsOnFocus}
-      size=${size}
-      value=${value}>
-    </modus-autocomplete>
-  </div>
-  ${setAutocompleteWithOption()}
-`;
-WithOption.args = {
-  ariaLabel: 'autocomplete',
-  clearable: false,
-  disabled: false,
-  dropdownMaxHeight: '300px',
-  dropdownZIndex: '1',
-  errorText: '',
-  includeSearchIcon: true,
-  label: 'Autocomplete using option model',
-  noResultsFoundText: 'No results found',
-  noResultsFoundSubtext: 'Check spelling or try a different keyword',
-  placeholder: 'Search...',
-  readOnly: false,
-  required: false,
-  showNoResultsFoundMessage: true,
-  showOptionsOnFocus: false,
-  size: 'medium',
-  value: '',
-}
-// The <script> tag cannot be used in the MDX file, so we use this method to
-// set the data table data for the default story.
-const setAutocompleteWithOption = () => {
-  const tag = document.createElement('script');
-  tag.innerHTML = `
-    document.querySelector('#autocomplete-with-option').options = [{ id: '0', value: 'Apple' }, { id: '1', value: 'Banana' }, { id: '2', value: 'Orange' }];
-  `;
+export const Default = Template.bind({});
+Default.args = defaultArgs;
 
-  return tag;
-};
+export const WithOption = Template.bind({});
+WithOption.args = {...defaultArgs,label: 'Autocomplete using option model',};
 
-export const WithChips = ({
+export const WithChips = Template.bind({});
+WithChips.args = {...defaultArgs,label: 'Autocomplete using chips', addChip: true};
+
+export const WithCustomOption = ({
   ariaLabel,
   clearable,
   disabled,
@@ -319,12 +256,12 @@ export const WithChips = ({
   readOnly,
   required,
   showNoResultsFoundMessage,
+  showOptionsOnFocus,
   size,
   value,
- addChip }) => html`
+  addChip }) => html`
 <div style="width: 600px">
 <modus-autocomplete
-id="autocomplete-with-chips"
 aria-label=${ariaLabel}
 clearable=${clearable}
 disabled=${disabled}
@@ -339,14 +276,23 @@ placeholder=${placeholder}
 read-only=${readOnly}
 required=${required}
 show-no-results-found-message=${showNoResultsFoundMessage}
+show-options-on-focus=${showOptionsOnFocus}
 size=${size}
 value=${value}
 add-chip=${addChip}>
+<li data-search-value="The Git Guru" data-id="1" style="padding: 8px">
+<div style="font-weight: bold">The Git Guru</div>
+<div style="font-size: 12px">Lead DevOps Engineer</div>
+</li>
+<li data-search-value="Bob the Builder" data-id="2" style="padding: 8px">
+<div style="font-weight: bold">Bob the Builder</div>
+<div style="font-size: 12px">Senior Construction Engineer</div>
+</li>
 </modus-autocomplete>
 </div>
-${setAutocompleteWithChips()}
 `;
-WithChips.args = {
+WithCustomOption.args = {
+  addChip:false,
 ariaLabel: 'autocomplete',
 clearable: false,
 disabled: false,
@@ -354,89 +300,14 @@ dropdownMaxHeight: '300px',
 dropdownZIndex: '1',
 errorText: '',
 includeSearchIcon: true,
-label: 'Autocomplete using option model',
+label: 'Employee Search',
 noResultsFoundText: 'No results found',
 noResultsFoundSubtext: 'Check spelling or try a different keyword',
 placeholder: 'Search...',
 readOnly: false,
 required: false,
 showNoResultsFoundMessage: true,
+showOptionsOnFocus: false,
 size: 'medium',
 value: '',
-addChip: true
-}
-const setAutocompleteWithChips = () => {
-  const tag = document.createElement('script');
-  tag.innerHTML = `
-    document.querySelector('#autocomplete-with-chips').options = [{ id: '0', value: 'Apple' }, { id: '1', value: 'Banana' }, { id: '2', value: 'Orange' }];
-  `;
-
-  return tag;
-};
-export const WithCustomOption = ({
-                                   ariaLabel,
-                                   clearable,
-                                   disabled,
-                                   dropdownMaxHeight,
-                                   dropdownZIndex,
-                                   errorText,
-                                   includeSearchIcon,
-                                   label,
-                                   noResultsFoundText,
-                                   noResultsFoundSubtext,
-                                   placeholder,
-                                   readOnly,
-                                   required,
-                                   showNoResultsFoundMessage,
-                                   showOptionsOnFocus,
-                                   size,
-                                   value }) => html`
-  <div style="width: 600px">
-    <modus-autocomplete
-      aria-label=${ariaLabel}
-      clearable=${clearable}
-      disabled=${disabled}
-      dropdown-max-height=${dropdownMaxHeight}
-      dropdown-z-index=${dropdownZIndex}
-      error-text=${errorText}
-      include-search-icon=${includeSearchIcon}
-      label=${label}
-      no-results-found-text=${noResultsFoundText}
-      no-results-found-subtext=${noResultsFoundSubtext}
-      placeholder=${placeholder}
-      read-only=${readOnly}
-      required=${required}
-      show-no-results-found-message=${showNoResultsFoundMessage}
-      show-options-on-focus=${showOptionsOnFocus}
-      size=${size}
-      value=${value}>
-      <li data-search-value="The Git Guru" data-id="1" style="padding: 8px">
-        <div style="font-weight: bold">The Git Guru</div>
-        <div style="font-size: 12px">Lead DevOps Engineer</div>
-      </li>
-      <li data-search-value="Bob the Builder" data-id="2" style="padding: 8px">
-        <div style="font-weight: bold">Bob the Builder</div>
-        <div style="font-size: 12px">Senior Construction Engineer</div>
-      </li>
-    </modus-autocomplete>
-  </div>
-`;
-WithCustomOption.args = {
-  ariaLabel: 'autocomplete',
-  clearable: false,
-  disabled: false,
-  dropdownMaxHeight: '300px',
-  dropdownZIndex: '1',
-  errorText: '',
-  includeSearchIcon: true,
-  label: 'Employee Search',
-  noResultsFoundText: 'No results found',
-  noResultsFoundSubtext: 'Check spelling or try a different keyword',
-  placeholder: 'Search...',
-  readOnly: false,
-  required: false,
-  showNoResultsFoundMessage: true,
-  showOptionsOnFocus: false,
-  size: 'medium',
-  value: '',
 }
