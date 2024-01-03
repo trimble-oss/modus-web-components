@@ -1,3 +1,4 @@
+
 import { newE2EPage } from '@stencil/core/testing';
 
 describe('modus-autocomplete', () => {
@@ -256,5 +257,18 @@ describe('modus-autocomplete', () => {
     const options = await page.findAll('modus-autocomplete >>> .options-container li');
 
     expect(options.length).toEqual(2);
+  });
+
+  it('ensures it renders changes to autocomplete', async () => {
+    const element = await page.find('modus-autocomplete');
+    expect(element).toHaveClass('hydrated');
+
+    element.setProperty('autocomplete', 'off');
+    await page.waitForChanges();
+
+    const textInput = await page.find('modus-autocomplete >>> modus-text-input');
+
+    const autocomplete = await textInput.getProperty('autocomplete');
+    expect(autocomplete).toEqual('off');
   });
 });

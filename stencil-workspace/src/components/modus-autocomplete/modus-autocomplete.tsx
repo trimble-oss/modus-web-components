@@ -32,6 +32,9 @@ export class ModusAutocomplete {
   /** The autocomplete's aria label. */
   @Prop() ariaLabel: string | null;
 
+  /** (optional) Sets autocomplete. */
+  @Prop() autocomplete: string | null;
+
   /** Whether the input has a clear button. */
   @Prop() clearable = false;
 
@@ -231,6 +234,7 @@ export class ModusAutocomplete {
 
   TextInput = () => (
     <modus-text-input
+      autocomplete={this.autocomplete}
       clearable={this.clearable}
       errorText={this.hasFocus ? '' : this.errorText}
       includeSearchIcon={this.includeSearchIcon}

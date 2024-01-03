@@ -10,6 +10,7 @@
 | Property                    | Attribute                       | Description                                        | Type                                    | Default                                       |
 | --------------------------- | ------------------------------- | -------------------------------------------------- | --------------------------------------- | --------------------------------------------- |
 | `ariaLabel`                 | `aria-label`                    | The autocomplete's aria label.                     | `string`                                | `undefined`                                   |
+| `autocomplete`              | `autocomplete`                  | (optional) Sets autocomplete.                      | `string`                                | `undefined`                                   |
 | `clearable`                 | `clearable`                     | Whether the input has a clear button.              | `boolean`                               | `false`                                       |
 | `disabled`                  | `disabled`                      | Whether the input is disabled.                     | `boolean`                               | `undefined`                                   |
 | `dropdownMaxHeight`         | `dropdown-max-height`           | The autocomplete's dropdown's max height.          | `string`                                | `'300px'`                                     |

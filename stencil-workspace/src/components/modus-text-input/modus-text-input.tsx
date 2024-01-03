@@ -14,6 +14,9 @@ export class ModusTextInput {
   /** (optional) The input's aria-label. */
   @Prop() ariaLabel: string | null;
 
+  /** (optional) Sets autocomplete on the input. */
+  @Prop() autocomplete: string | null;
+
   /** (optional) Sets autofocus on the input. */
   @Prop() autoFocusInput: boolean;
 
@@ -167,6 +170,7 @@ export class ModusTextInput {
             aria-invalid={!!this.errorText}
             aria-label={this.ariaLabel}
             aria-required={this.required?.toString()}
+            autocomplete={this.autocomplete}
             class={buildTextInputClassNames()}
             disabled={this.disabled}
             inputmode={this.inputmode}

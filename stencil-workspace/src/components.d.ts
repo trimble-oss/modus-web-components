@@ -92,6 +92,10 @@ export namespace Components {
          */
         "ariaLabel": string | null;
         /**
+          * (optional) Sets autocomplete.
+         */
+        "autocomplete": string | null;
+        /**
           * Whether the input has a clear button.
          */
         "clearable": boolean;
@@ -1217,6 +1221,10 @@ export namespace Components {
          */
         "autoFocusInput": boolean;
         /**
+          * (optional) Sets autocomplete on the input.
+         */
+        "autocomplete": string | null;
+        /**
           * (optional) Whether the input has a clear button.
          */
         "clearable": boolean;
@@ -2070,6 +2078,10 @@ declare namespace LocalJSX {
           * The autocomplete's aria label.
          */
         "ariaLabel"?: string | null;
+        /**
+          * (optional) Sets autocomplete.
+         */
+        "autocomplete"?: string | null;
         /**
           * Whether the input has a clear button.
          */
@@ -3378,6 +3390,10 @@ declare namespace LocalJSX {
           * (optional) Sets autofocus on the input.
          */
         "autoFocusInput"?: boolean;
+        /**
+          * (optional) Sets autocomplete on the input.
+         */
+        "autocomplete"?: string | null;
         /**
           * (optional) Whether the input has a clear button.
          */

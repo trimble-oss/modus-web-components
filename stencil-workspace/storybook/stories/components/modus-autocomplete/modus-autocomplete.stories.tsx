@@ -12,6 +12,13 @@ export default {
         type: { summary: 'string' },
       },
     },
+    autocomplete: {
+      name: 'autocomplete',
+      description: "The autocomplete's autocomplete",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
     clearable: {
       description: 'Whether the autocomplete is clearable',
       table: {
@@ -154,6 +161,7 @@ export default {
 
 export const Default = ({
                           ariaLabel,
+                          autocomplete,
                           clearable,
                           disabled,
                           dropdownMaxHeight,
@@ -174,6 +182,7 @@ export const Default = ({
     <modus-autocomplete
       id="autocomplete-default"
       aria-label=${ariaLabel}
+      autocomplete=${autocomplete}
       clearable=${clearable}
       disabled=${disabled}
       dropdown-max-height=${dropdownMaxHeight}
@@ -197,6 +206,7 @@ export const Default = ({
 Default.args = {
   ariaLabel: 'autocomplete',
   clearable: false,
+  autocomplete: '',
   disabled: false,
   dropdownMaxHeight: '300px',
   dropdownZIndex: '1',
@@ -227,6 +237,7 @@ const setAutocomplete = () => {
 
 export const WithOption = ({
                              ariaLabel,
+                             autocomplete,
                              clearable,
                              disabled,
                              dropdownMaxHeight,
@@ -247,6 +258,7 @@ export const WithOption = ({
     <modus-autocomplete
       id="autocomplete-with-option"
       aria-label=${ariaLabel}
+      autocomplete=${autocomplete}
       clearable=${clearable}
       disabled=${disabled}
       dropdown-max-height=${dropdownMaxHeight}
@@ -269,6 +281,7 @@ export const WithOption = ({
 `;
 WithOption.args = {
   ariaLabel: 'autocomplete',
+  autocomplete: '',
   clearable: false,
   disabled: false,
   dropdownMaxHeight: '300px',
@@ -299,6 +312,7 @@ const setAutocompleteWithOption = () => {
 
 export const WithCustomOption = ({
                                    ariaLabel,
+                                   autocomplete,
                                    clearable,
                                    disabled,
                                    dropdownMaxHeight,
@@ -318,6 +332,7 @@ export const WithCustomOption = ({
   <div style="width: 600px">
     <modus-autocomplete
       aria-label=${ariaLabel}
+      autocomplete=${autocomplete}
       clearable=${clearable}
       disabled=${disabled}
       dropdown-max-height=${dropdownMaxHeight}
@@ -347,6 +362,7 @@ export const WithCustomOption = ({
 `;
 WithCustomOption.args = {
   ariaLabel: 'autocomplete',
+  autocomplete: '',
   clearable: false,
   disabled: false,
   dropdownMaxHeight: '300px',
