@@ -87,7 +87,18 @@ export class ModusAutocomplete {
 
   /** The autocomplete's search value. */
   @Prop() value: string;
+  @Watch('value')
+  watchValue(newValue: string) {
+    if (newValue === '') {
+      this.updateVisibleOptions(newValue);
 
+      if (this.containsSlottedElements) {
+        this.updateVisibleCustomOptions(newValue);
+      }
+    }
+
+    this.handleNoResults(newValue);
+  }
   /** An event that fires when a dropdown option is selected. Emits the option id. */
   @Event() optionSelected: EventEmitter<string>;
 
@@ -96,6 +107,7 @@ export class ModusAutocomplete {
 
   @State() containsSlottedElements = false;
   @State() hasFocus = false;
+  @State() hasNoResults = false;
   @State() visibleOptions: ModusAutocompleteOption[] = [];
   @State() customOptions: Array<any> = [];
   @State() visibleCustomOptions: Array<any> = [];
@@ -137,16 +149,34 @@ export class ModusAutocomplete {
     }
   }
 
+  handleNoResults = (value: string) => {
+    let handleResults;
+    if (this.options?.length > 0) {
+      handleResults =
+        (this.options as ModusAutocompleteOption[]).filter((o: ModusAutocompleteOption) => {
+          return o.value.toLowerCase().includes(value.toLowerCase());
+        }).length > 0;
+    }
+    if (this.customOptions?.length > 0) {
+      handleResults =
+        this.customOptions.filter((o: any) => {
+          return o.getAttribute(DATA_SEARCH_VALUE).toLowerCase().includes(value.toLowerCase());
+        }).length > 0;
+    }
+    this.hasNoResults = !handleResults;
+  };
+
   displayNoResults = () =>
-    this.showNoResultsFoundMessage &&
-    this.hasFocus &&
-    !this.visibleOptions?.length &&
-    !this.visibleCustomOptions?.length &&
-    this.value?.length > 0;
+    (this.showNoResultsFoundMessage &&
+      this.hasFocus &&
+      !this.visibleOptions?.length &&
+      this.value?.length > 0 &&
+      this.hasNoResults) ||
+    (this.hasNoResults && this.visibleOptions?.length > 0);
 
   displayOptions = () => {
     const showOptions = this.showOptionsOnFocus || this.value?.length > 0;
-    return this.hasFocus && showOptions && !this.disabled;
+    return this.hasFocus && showOptions && !this.disabled && !this.hasNoResults;
   };
 
   handleCustomOptionClick = (option: any) => {
