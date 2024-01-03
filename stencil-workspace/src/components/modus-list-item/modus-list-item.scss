@@ -9,7 +9,7 @@ li {
   fill: $modus-list-item-color;
   font-family: $primary-font;
   gap: $rem-16px;
-  min-height: $rem-40px;
+  min-height: $rem-26px;
   padding: $rem-6px $rem-12px;
 
   .text-container {
@@ -20,22 +20,28 @@ li {
     min-width: 0;
   }
 
-  .slot,
-  .sub-text {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
   .slot {
     font-size: $rem-14px;
     line-height: $rem-18px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .sub-text {
     display: block;
     font-size: $rem-12px;
     line-height: $rem-16px;
+  }
+
+  .wrap {
+    word-wrap: break-word;
+  }
+
+  .no-wrap {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .icon-check {
@@ -57,7 +63,7 @@ li {
 
   &.small {
     gap: $rem-10px;
-    min-height: $rem-32px;
+    min-height: $rem-22px;
     padding: $rem-4px $rem-10px;
 
     .slot {
@@ -72,7 +78,7 @@ li {
   }
 
   &.large {
-    min-height: $rem-48px;
+    min-height: $rem-26px;
     padding: $rem-10px $rem-16px;
   }
 

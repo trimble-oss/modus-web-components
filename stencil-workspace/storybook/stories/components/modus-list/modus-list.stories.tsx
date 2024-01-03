@@ -11,6 +11,12 @@ export default {
         type: { summary: 'string' },
       },
     },
+    wrapSubText: {
+      description: 'Whether to wrap the sub text',
+      table: {
+        type: { summary: 'boolean' },
+      },
+    },
   },
   parameters: {
     docs: {
@@ -25,9 +31,9 @@ export default {
   },
 };
 
-const Template = ({ subText }) => html`
+const Template = ({ subText, wrapSubText }) => html`
   <modus-list>
-    <modus-list-item sub-text=${subText}>Default</modus-list-item>
+    <modus-list-item wrap-sub-text=${wrapSubText} sub-text=${subText}>Default</modus-list-item>
     <modus-list-item selected>Selected</modus-list-item>
     <modus-list-item disabled>Disabled</modus-list-item>
   </modus-list>
@@ -35,5 +41,6 @@ const Template = ({ subText }) => html`
 export const Default = Template.bind({});
 
 Default.args = {
-  subText: 'default'
-};
+  subText: 'default',
+  wrapSubText: true
+}

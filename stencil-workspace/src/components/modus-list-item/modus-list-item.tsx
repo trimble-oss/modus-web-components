@@ -23,6 +23,9 @@ export class ModusListItem {
   /** (optional) Whether to show Subtext below the Slot content or not  */
   @Prop() subText: string;
 
+  /** (optional) Whether to wrap the sub text. */
+  @Prop() wrapSubText: boolean;
+
   /** (optional) The type of list item */
   @Prop() type = 'standard'; // Future support for 'checkbox' | 'icon' | 'menu' | 'standard' | 'switchLeft' | 'switchRight'
 
@@ -64,8 +67,8 @@ export class ModusListItem {
         <div class="text-container">
           <span class="slot">
             <slot />
-            {this.subText && <span class="sub-text">{this.subText}</span>}
           </span>
+          {this.subText && <span class={'sub-text ' + (this.wrapSubText ? 'wrap' : 'no-wrap')}>{this.subText}</span>}
         </div>
         {this.selected && <IconCheck size={iconCheckSize} />}
       </li>
