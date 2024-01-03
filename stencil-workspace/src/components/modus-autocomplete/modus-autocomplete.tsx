@@ -270,7 +270,6 @@ export class ModusAutocomplete {
     <modus-text-input
       class="input"
       clearable={false}
-      errorText={this.hasFocus ? '' : this.errorText}
       includeSearchIcon={false}
       onValueChange={(searchEvent: CustomEvent<string>) => this.handleTextInputValueChange(searchEvent)}
       placeholder={this.placeholder}
@@ -309,6 +308,11 @@ export class ModusAutocomplete {
               <IconClose onClick={() => this.handleClear()} size="16" />
             </span>
           )}
+        </div>
+        <div class={'error'}>
+        {this.errorText ? (
+          <label class="sub-text error">{this.errorText}</label>
+        ) : null}
         </div>
         <div
           class="options-container"
