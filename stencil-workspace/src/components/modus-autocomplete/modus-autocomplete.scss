@@ -64,9 +64,11 @@
       transform: translateY(-50%);
     }
   }
+
   .error {
     color: $modus-autocomplete-validation-error-color;
   }
+
   .options-container {
     background-color: $modus-autocomplete-options-background-color;
     box-shadow: $box-shadow;

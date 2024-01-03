@@ -17,6 +17,7 @@ describe('modus-autocomplete', () => {
                   </svg>
             <modus-text-input class="input" size="medium"></modus-text-input>
           </div>
+          <div class="error"></div>
           <div class="options-container" style="max-height: 300px; z-index: 1; overflow-y: auto;">
             <ul></ul>
           </div>
@@ -49,6 +50,7 @@ describe('modus-autocomplete', () => {
                  </svg>
           <modus-text-input class="input" size="medium"></modus-text-input>
           </div>
+          <div class="error"></div>
           <div class="options-container" style="max-height: 300px; z-index: 1; overflow-y: auto;">
             <ul></ul>
           </div>

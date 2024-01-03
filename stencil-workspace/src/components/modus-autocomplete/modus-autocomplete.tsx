@@ -309,11 +309,7 @@ export class ModusAutocomplete {
             </span>
           )}
         </div>
-        <div class={'error'}>
-        {this.errorText ? (
-          <label class="sub-text error">{this.errorText}</label>
-        ) : null}
-        </div>
+        <div class={'error'}>{this.errorText ? <label class="sub-text error">{this.errorText}</label> : null}</div>
         <div
           class="options-container"
           style={{ maxHeight: this.dropdownMaxHeight, zIndex: this.dropdownZIndex, overflowY: 'auto' }}>

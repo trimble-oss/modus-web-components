@@ -389,5 +389,4 @@ describe('modus-autocomplete', () => {
 
     // Ensure that the value is updated
   });
-
 });
