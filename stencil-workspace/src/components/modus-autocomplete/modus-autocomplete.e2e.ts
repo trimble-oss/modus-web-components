@@ -263,7 +263,7 @@ describe('modus-autocomplete', () => {
     element.setProperty('options', ['Test 1', 'Test 2']);
     await page.waitForChanges();
 
-    const textInput = await page.find('modus-autocomplete >>> modus-text-input');
+    let textInput = await page.find('modus-autocomplete >>> modus-text-input');
     await textInput.click();
     await textInput.type('Test');
     await page.waitForChanges();
@@ -275,6 +275,9 @@ describe('modus-autocomplete', () => {
     element.setProperty('value', 'hello');
 
     await page.waitForChanges();
+
+    textInput = await page.find('modus-autocomplete >>> modus-text-input');
+    await textInput.click();
 
     const noResultsFoundMessage = await page.find('modus-autocomplete >>> .no-results');
     expect(noResultsFoundMessage.innerText.includes('No results found')).toBeTruthy();
