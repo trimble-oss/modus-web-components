@@ -167,21 +167,15 @@ export class ModusAutocomplete {
   };
 
   displayNoResults = () => {
-    
-    if(
-      this.showNoResultsFoundMessage &&
-      this.hasFocus &&
-      !this.visibleOptions?.length &&
-      this.value?.length > 0
-    ){
-      if(this.containsSlottedElements){
+    if (this.showNoResultsFoundMessage && this.hasFocus && !this.visibleOptions?.length && this.value?.length > 0) {
+      if (this.containsSlottedElements) {
         return this.hasNoResults;
       }
       return true;
     }
 
-    return (this.hasNoResults && this.visibleOptions?.length > 0 && this.hasFocus)
-  }
+    return this.hasNoResults && this.visibleOptions?.length > 0 && this.hasFocus;
+  };
 
   displayOptions = () => {
     const showOptions = this.showOptionsOnFocus || this.value?.length > 0;
