@@ -501,7 +501,7 @@ export declare interface ModusList extends Components.ModusList {}
 
 
 @ProxyCmp({
-  inputs: ['borderless', 'disabled', 'selected', 'size', 'subText', 'type'],
+  inputs: ['borderless', 'disabled', 'selected', 'size', 'subText', 'type', 'wrapSubText'],
   methods: ['focusItem']
 })
 @Component({
@@ -509,7 +509,7 @@ export declare interface ModusList extends Components.ModusList {}
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['borderless', 'disabled', 'selected', 'size', 'subText', 'type'],
+  inputs: ['borderless', 'disabled', 'selected', 'size', 'subText', 'type', 'wrapSubText'],
 })
 export class ModusListItem {
   protected el: HTMLElement;

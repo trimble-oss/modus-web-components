@@ -583,6 +583,10 @@ export namespace Components {
           * (optional) The type of list item
          */
         "type": string;
+        /**
+          * (optional) Whether to wrap the sub text.
+         */
+        "wrapSubText": true | false;
     }
     interface ModusMessage {
         /**
@@ -2601,6 +2605,10 @@ declare namespace LocalJSX {
           * (optional) The type of list item
          */
         "type"?: string;
+        /**
+          * (optional) Whether to wrap the sub text.
+         */
+        "wrapSubText"?: true | false;
     }
     interface ModusMessage {
         /**

@@ -24,7 +24,7 @@ export class ModusListItem {
   @Prop() subText: string;
 
   /** (optional) Whether to wrap the sub text. */
-  @Prop() wrapSubText: boolean;
+  @Prop() wrapSubText: true | false = true;
 
   /** (optional) The type of list item */
   @Prop() type = 'standard'; // Future support for 'checkbox' | 'icon' | 'menu' | 'standard' | 'switchLeft' | 'switchRight'

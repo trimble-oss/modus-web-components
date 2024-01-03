@@ -15,7 +15,7 @@
 | `size`        | `size`          | (optional) The size of list item                                 | `"condensed" \| "large" \| "standard"` | `'standard'` |
 | `subText`     | `sub-text`      | (optional) Whether to show Subtext below the Slot content or not | `string`                               | `undefined`  |
 | `type`        | `type`          | (optional) The type of list item                                 | `string`                               | `'standard'` |
-| `wrapSubText` | `wrap-sub-text` | (optional) Whether to wrap the sub text.                         | `boolean`                              | `undefined`  |
+| `wrapSubText` | `wrap-sub-text` | (optional) Whether to wrap the sub text.                         | `boolean`                              | `true`       |
 
 
 ## Events

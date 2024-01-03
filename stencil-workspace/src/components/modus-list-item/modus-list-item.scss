@@ -4,12 +4,14 @@ li {
   align-items: center;
   background-color: $modus-list-item-bg;
   border: 1px solid $modus-list-item-border-color;
+  box-sizing: border-box;
   color: $modus-list-item-color;
   display: flex;
   fill: $modus-list-item-color;
   font-family: $primary-font;
   gap: $rem-16px;
-  min-height: $rem-26px;
+  justify-content: space-between;
+  min-height: $rem-40px;
   padding: $rem-6px $rem-12px;
 
   .text-container {
@@ -63,7 +65,7 @@ li {
 
   &.small {
     gap: $rem-10px;
-    min-height: $rem-22px;
+    min-height: $rem-32px;
     padding: $rem-4px $rem-10px;
 
     .slot {
@@ -78,7 +80,7 @@ li {
   }
 
   &.large {
-    min-height: $rem-26px;
+    min-height: $rem-48px;
     padding: $rem-10px $rem-16px;
   }
 
