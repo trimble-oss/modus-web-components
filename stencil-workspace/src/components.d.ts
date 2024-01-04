@@ -16,7 +16,7 @@ import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/app
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { ModusSentimentScaleType } from "./components/modus-sentiment-scale/modus-sentiment-scale.models";
 import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-import { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+import { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnSort, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 import { Cell, Column, Row } from "@tanstack/table-core";
 import { TableCellEdited, TableContext } from "./components/modus-table/models/table-context.models";
 import { TableRowActionsMenuEvent } from "./components/modus-table/models/table-row-actions.models";
@@ -35,7 +35,7 @@ export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/app
 export { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 export { ModusSentimentScaleType } from "./components/modus-sentiment-scale/modus-sentiment-scale.models";
 export { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-export { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+export { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnSort, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 export { Cell, Column, Row } from "@tanstack/table-core";
 export { TableCellEdited, TableContext } from "./components/modus-table/models/table-context.models";
 export { TableRowActionsMenuEvent } from "./components/modus-table/models/table-row-actions.models";
@@ -1064,6 +1064,10 @@ export namespace Components {
           * (Required) To display data in the table.
          */
         "data": unknown[];
+        /**
+          * (Optional) To set the default sorting for the table.
+         */
+        "defaultSort": ModusTableColumnSort;
         /**
           * (optional) The density of the table.
          */
@@ -3193,6 +3197,10 @@ declare namespace LocalJSX {
           * (Required) To display data in the table.
          */
         "data": unknown[];
+        /**
+          * (Optional) To set the default sorting for the table.
+         */
+        "defaultSort"?: ModusTableColumnSort;
         /**
           * (optional) The density of the table.
          */
