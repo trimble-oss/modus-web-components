@@ -580,9 +580,17 @@ export namespace Components {
          */
         "size": 'condensed' | 'large' | 'standard';
         /**
+          * (optional) Whether to show Subtext below the Slot content or not
+         */
+        "subText": string;
+        /**
           * (optional) The type of list item
          */
         "type": string;
+        /**
+          * (optional) Whether to wrap the sub text.
+         */
+        "wrapSubText": true | false;
     }
     interface ModusMessage {
         /**
@@ -2606,9 +2614,17 @@ declare namespace LocalJSX {
          */
         "size"?: 'condensed' | 'large' | 'standard';
         /**
+          * (optional) Whether to show Subtext below the Slot content or not
+         */
+        "subText"?: string;
+        /**
           * (optional) The type of list item
          */
         "type"?: string;
+        /**
+          * (optional) Whether to wrap the sub text.
+         */
+        "wrapSubText"?: true | false;
     }
     interface ModusMessage {
         /**
