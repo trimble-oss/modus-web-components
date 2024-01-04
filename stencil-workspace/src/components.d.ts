@@ -282,6 +282,10 @@ export namespace Components {
          */
         "label": string;
         /**
+          * (optional) The size of the checkbox.
+         */
+        "size": 'small' | 'medium';
+        /**
           * (optional) If you wish to prevent the propagation of your event, you may opt for this.
          */
         "stopPropagation": boolean;
@@ -1049,6 +1053,10 @@ export namespace Components {
           * (optional) The switch label.
          */
         "label": string;
+        /**
+          * (optional) The size of the radiobutton.
+         */
+        "size"?: 'small' | 'medium';
     }
     interface ModusTable {
         /**
@@ -2273,6 +2281,10 @@ declare namespace LocalJSX {
          */
         "onCheckboxClick"?: (event: ModusCheckboxCustomEvent<boolean>) => void;
         /**
+          * (optional) The size of the checkbox.
+         */
+        "size"?: 'small' | 'medium';
+        /**
           * (optional) If you wish to prevent the propagation of your event, you may opt for this.
          */
         "stopPropagation"?: boolean;
@@ -2742,7 +2754,7 @@ declare namespace LocalJSX {
         /**
           * An event that fires on profile menu sign out click.
          */
-        "onProfileMenuSignOutClick"?: (event: ModusNavbarCustomEvent<MouseEvent>) => void;
+        "onProfileMenuSignOutClick"?: (event: ModusNavbarCustomEvent<KeyboardEvent | MouseEvent>) => void;
         /**
           * An event that fires on search value change.
          */
@@ -3178,6 +3190,10 @@ declare namespace LocalJSX {
           * An event that fires on switch click.
          */
         "onSwitchClick"?: (event: ModusSwitchCustomEvent<boolean>) => void;
+        /**
+          * (optional) The size of the radiobutton.
+         */
+        "size"?: 'small' | 'medium';
     }
     interface ModusTable {
         /**
