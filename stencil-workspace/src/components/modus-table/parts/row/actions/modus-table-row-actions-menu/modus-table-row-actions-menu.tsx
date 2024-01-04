@@ -120,7 +120,8 @@ export class ModusTableRowActionsMenu {
 
     const { x, y } = this.position;
     const style = {
-      transform: `translate(calc(${x}px - 8px), calc(${y}px))`,
+      transform: `translate(calc(${x}px - 40px), calc(${y}px))`,
+      right: `calc(${x}px)`
     };
     return (
       <Host>
@@ -131,6 +132,7 @@ export class ModusTableRowActionsMenu {
                 const disabled = isDisabled(this.tableRow?.original);
                 return (
                   <modus-list-item
+                    style={{minWidth: '140px'}}
                     disabled={disabled}
                     onItemClick={() => this.handleListItemClick(id)}
                     class="hydrated row-actions-menu-item"
