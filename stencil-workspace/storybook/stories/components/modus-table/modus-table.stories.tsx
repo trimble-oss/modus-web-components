@@ -741,7 +741,6 @@ CheckboxRowSelection.args = {
     multiple: true,
     subRowSelection: true,
     preSelectedRows:["0"],
-    checkboxSize: 'medium'
   }, data: makeData(7)
 };
 

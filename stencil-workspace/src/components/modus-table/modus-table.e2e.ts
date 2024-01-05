@@ -895,7 +895,7 @@ describe('modus-table', () => {
     expect(element).toHaveClass('density-compact');
   });
 
-  it('Renders small size checkboxes', async () => {
+  it('Renders small size checkboxes for compact density', async () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-table />');
@@ -907,8 +907,9 @@ describe('modus-table', () => {
     component.setProperty('rowSelectionOptions', {
       multiple: true,
       preSelectedRows: ['0'],
-      checkboxSize: 'small',
     });
+    component.setProperty('density', 'compact');
+
     await page.waitForChanges();
     const rows = await page.findAll('modus-table >>> modus-checkbox');
     expect(rows.length).toBeGreaterThan(0);

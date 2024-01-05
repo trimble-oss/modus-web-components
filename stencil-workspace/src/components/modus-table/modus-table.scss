@@ -362,8 +362,7 @@ table {
   }
 
   &.density-comfortable {
-    tbody,
-    tfoot {
+    tbody {
       tr {
         height: $rem-32px;
 
@@ -377,8 +376,7 @@ table {
   }
 
   &.density-compact {
-    tbody,
-    tfoot {
+    tbody {
       tr {
         height: $rem-24px;
 
