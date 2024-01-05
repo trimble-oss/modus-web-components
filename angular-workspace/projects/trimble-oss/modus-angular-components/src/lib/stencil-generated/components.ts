@@ -395,14 +395,14 @@ export declare interface ModusDatePicker extends Components.ModusDatePicker {}
 
 
 @ProxyCmp({
-  inputs: ['animateList', 'ariaLabel', 'customPlacement', 'disabled', 'placement', 'toggleElementId']
+  inputs: ['animateList', 'ariaLabel', 'customPlacement', 'disabled', 'placement', 'showDropdownListBorder', 'toggleElementId']
 })
 @Component({
   selector: 'modus-dropdown',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['animateList', 'ariaLabel', 'customPlacement', 'disabled', 'placement', 'toggleElementId'],
+  inputs: ['animateList', 'ariaLabel', 'customPlacement', 'disabled', 'placement', 'showDropdownListBorder', 'toggleElementId'],
 })
 export class ModusDropdown {
   protected el: HTMLElement;

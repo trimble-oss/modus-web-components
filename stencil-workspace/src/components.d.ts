@@ -483,6 +483,10 @@ export namespace Components {
          */
         "placement": 'top' | 'right' | 'bottom' | 'left';
         /**
+          * (optional) Whether to show the dropdown list's border.
+         */
+        "showDropdownListBorder": boolean;
+        /**
           * (required) The element id that the list renders near and that triggers the toggling of the list.
          */
         "toggleElementId": string;
@@ -2521,6 +2525,10 @@ declare namespace LocalJSX {
           * (optional) The placement of the dropdown in related to the toggleElement.
          */
         "placement"?: 'top' | 'right' | 'bottom' | 'left';
+        /**
+          * (optional) Whether to show the dropdown list's border.
+         */
+        "showDropdownListBorder"?: boolean;
         /**
           * (required) The element id that the list renders near and that triggers the toggling of the list.
          */
