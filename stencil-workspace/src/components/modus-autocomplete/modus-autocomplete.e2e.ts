@@ -257,9 +257,9 @@ describe('modus-autocomplete', () => {
 
     expect(options.length).toEqual(2);
   });
-  it('should add chip when option is selected and addChip is true', async () => {
+  it('should add chip when option is selected and multiple is true', async () => {
     const element = await page.find('modus-autocomplete');
-    element.setProperty('addChip', true);
+    element.setProperty('multiple', true);
     await page.waitForChanges();
 
     // Trigger the selection of an option
@@ -268,9 +268,9 @@ describe('modus-autocomplete', () => {
     // Use spies to check if the valueChange event is emitted
   });
 
-  it('should not add chip when addChip is false', async () => {
+  it('should not add chip when multiple is false', async () => {
     const element = await page.find('modus-autocomplete');
-    element.setProperty('addChip', false);
+    element.setProperty('multiple', false);
     await page.waitForChanges();
 
     // Trigger the selection of an option

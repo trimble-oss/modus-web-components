@@ -133,8 +133,8 @@ export default {
         type: { summary: 'string' },
       },
     },
-    addChip: {
-      description: "Whether to add a chip when an option is selected",
+    multiple: {
+      description: "When enabled, multiple options can be selected in the component. And selected options are shown as chips in the input",
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },
@@ -177,7 +177,7 @@ const Template = ({
                           showOptionsOnFocus,
                           size,
                           value,
-                          addChip }) => html`
+                          multiple }) => html`
   <div style="width: 600px">
     <modus-autocomplete
       id="autocomplete-default"
@@ -198,13 +198,13 @@ const Template = ({
       show-options-on-focus=${showOptionsOnFocus}
       size=${size}
       value=${value}
-      add-chip=${addChip}>
+      multiple=${multiple}>
     </modus-autocomplete>
   </div>
   ${setAutocomplete()}
 `;
 const defaultArgs = {
-  addChip: false,
+  multiple: false,
   ariaLabel: 'autocomplete',
   clearable: false,
   disabled: false,
@@ -239,7 +239,7 @@ export const WithOption = Template.bind({});
 WithOption.args = {...defaultArgs,label: 'Autocomplete using option model',};
 
 export const WithChips = Template.bind({});
-WithChips.args = {...defaultArgs,label: 'Autocomplete using chips', addChip: true};
+WithChips.args = {...defaultArgs,label: 'Autocomplete using chips', multiple: true};
 
 export const WithCustomOption = ({
   ariaLabel,
@@ -259,7 +259,7 @@ export const WithCustomOption = ({
   showOptionsOnFocus,
   size,
   value,
-  addChip }) => html`
+  multiple }) => html`
 <div style="width: 600px">
 <modus-autocomplete
 aria-label=${ariaLabel}
@@ -279,7 +279,7 @@ show-no-results-found-message=${showNoResultsFoundMessage}
 show-options-on-focus=${showOptionsOnFocus}
 size=${size}
 value=${value}
-add-chip=${addChip}>
+multiple=${multiple}>
 <li data-search-value="The Git Guru" data-id="1" style="padding: 8px">
 <div style="font-weight: bold">The Git Guru</div>
 <div style="font-size: 12px">Lead DevOps Engineer</div>
@@ -292,7 +292,7 @@ add-chip=${addChip}>
 </div>
 `;
 WithCustomOption.args = {
-  addChip:false,
+  multiple:false,
 ariaLabel: 'autocomplete',
 clearable: false,
 disabled: false,

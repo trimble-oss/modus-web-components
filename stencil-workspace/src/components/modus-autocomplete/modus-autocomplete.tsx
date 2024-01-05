@@ -28,8 +28,8 @@ const DATA_SEARCH_VALUE = 'data-search-value';
   shadow: true,
 })
 export class ModusAutocomplete {
-  /** Whether to add a chip when an option is selected. */
-  @Prop() addChip: boolean;
+  /** When enabled, multiple options can be selected in the component. And selected options are shown as chips in the input. */
+  @Prop() multiple: boolean;
 
   /** The autocomplete's aria label. */
   @Prop() ariaLabel: string | null;
@@ -168,7 +168,7 @@ export class ModusAutocomplete {
   handleCustomOptionClick = (option: any) => {
     const optionValue = option.getAttribute(DATA_SEARCH_VALUE);
     const optionId = option.getAttribute(DATA_ID);
-    if (this.addChip) {
+    if (this.multiple) {
       this.addChipValue(optionValue);
     } else {
       this.handleSearchChange(optionValue);
@@ -199,7 +199,7 @@ export class ModusAutocomplete {
   }
 
   handleOptionClick = (option: ModusAutocompleteOption) => {
-    if (this.addChip) {
+    if (this.multiple) {
       this.addChipValue(option.value);
     } else {
       this.handleSearchChange(option.value);
