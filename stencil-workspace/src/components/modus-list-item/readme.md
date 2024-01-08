@@ -7,13 +7,15 @@
 
 ## Properties
 
-| Property     | Attribute    | Description                                          | Type                                   | Default      |
-| ------------ | ------------ | ---------------------------------------------------- | -------------------------------------- | ------------ |
-| `borderless` | `borderless` | (optional) Whether the list item has a border or not | `boolean`                              | `undefined`  |
-| `disabled`   | `disabled`   | (optional) Disables the list item                    | `boolean`                              | `undefined`  |
-| `selected`   | `selected`   | (optional) The selected state of the list item       | `boolean`                              | `undefined`  |
-| `size`       | `size`       | (optional) The size of list item                     | `"condensed" \| "large" \| "standard"` | `'standard'` |
-| `type`       | `type`       | (optional) The type of list item                     | `string`                               | `'standard'` |
+| Property      | Attribute       | Description                                                      | Type                                   | Default      |
+| ------------- | --------------- | ---------------------------------------------------------------- | -------------------------------------- | ------------ |
+| `borderless`  | `borderless`    | (optional) Whether the list item has a border or not             | `boolean`                              | `undefined`  |
+| `disabled`    | `disabled`      | (optional) Disables the list item                                | `boolean`                              | `undefined`  |
+| `selected`    | `selected`      | (optional) The selected state of the list item                   | `boolean`                              | `undefined`  |
+| `size`        | `size`          | (optional) The size of list item                                 | `"condensed" \| "large" \| "standard"` | `'standard'` |
+| `subText`     | `sub-text`      | (optional) Whether to show Subtext below the Slot content or not | `string`                               | `undefined`  |
+| `type`        | `type`          | (optional) The type of list item                                 | `string`                               | `'standard'` |
+| `wrapSubText` | `wrap-sub-text` | (optional) Whether to wrap the sub text.                         | `boolean`                              | `true`       |
 
 
 ## Events

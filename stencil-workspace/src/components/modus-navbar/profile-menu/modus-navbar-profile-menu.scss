@@ -35,26 +35,27 @@
       justify-content: center;
     }
 
-    .username {
+    .user-details {
       align-items: center;
       display: flex;
-      font-size: $rem-16px;
-      font-weight: $font-weight-semi-bold;
+      flex-direction: column;
       justify-content: center;
-      max-width: 10rem;
-      overflow-wrap: break-word;
-      padding: 0 $rem-4px;
-    }
-
-    .email {
-      align-items: center;
-      display: flex;
-      font-size: $rem-12px;
-      justify-content: center;
+      max-width: 16rem;
       margin-bottom: $rem-16px;
-      max-width: 10rem;
-      overflow-wrap: break-word;
-      padding: 0 $rem-4px;
+
+      .username {
+        font-size: $rem-16px;
+        font-weight: $font-weight-semi-bold;
+        width: fit-content;
+        overflow-wrap: break-word;
+        text-align: center;
+      }
+
+      .email {
+        font-size: $rem-12px;
+        overflow-wrap: anywhere;
+        text-align: center;
+      }
     }
   }
 

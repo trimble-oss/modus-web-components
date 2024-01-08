@@ -13,7 +13,7 @@
 | `checkedId`    | `checked-id` | The ID of the checked radio button.     | `string`              | `undefined` |
 | `name`         | `name`       | The radio button group name.            | `string`              | `undefined` |
 | `radioButtons` | --           | The radio buttons to render.            | `RadioButton[]`       | `[]`        |
-| `size`         | `size`       | (optional) The size of the radiobutton. | `"medium" , "small"` | `'medium'`  |
+| `size`         | `size`       | (optional) The size of the radiobutton. | `"medium" \| "small"` | `'medium'`  |
 
 
 ## Events
