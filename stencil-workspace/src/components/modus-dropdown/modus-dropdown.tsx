@@ -30,6 +30,9 @@ export class ModusDropdown {
   /** (optional) The placement of the dropdown in related to the toggleElement. */
   @Prop() placement: 'top' | 'right' | 'bottom' | 'left' = 'bottom';
 
+  /** (optional) Whether to show the dropdown list's border. */
+  @Prop() showDropdownListBorder = true;
+
   /** (required) The element id that the list renders near and that triggers the toggling of the list. */
   @Prop() toggleElementId: string;
 
@@ -85,8 +88,8 @@ export class ModusDropdown {
 
   render(): unknown {
     const listContainerClass = `dropdown-list ${this.visible ? 'visible' : 'hidden'} ${
-      this.animateList ? 'animate-list' : ''
-    } ${this.classByPlacement.get(this.placement)}`;
+      this.showDropdownListBorder ? 'list-border' : ''
+    } ${this.animateList ? 'animate-list' : ''} ${this.classByPlacement.get(this.placement)}`;
     const left = this.placement === 'right' ? `${this.toggleElement?.offsetWidth}px` : 'unset';
     const width = `${this.toggleElement?.offsetWidth ? this.toggleElement?.offsetWidth : 0}px`;
 

@@ -20,6 +20,7 @@ import {
 } from '@tanstack/table-core';
 import {
   ModusTableColumn,
+  ModusTableColumnSort,
   ModusTableRowSelectionOptions,
   ModusTableSortingState,
   ModusTableToolbarOptions,
@@ -43,6 +44,7 @@ export interface TableCoreOptions {
   manualSorting?: boolean;
   sortingState?: ModusTableSortingState;
   preSelectedRows?: RowSelectionState;
+  defaultSort?: ModusTableColumnSort;
 
   getRowId(originalRow: unknown, index: number, parent?: Row<unknown>): string;
   setExpanded: (updater: Updater<ExpandedState>) => void;
@@ -75,6 +77,7 @@ export default class ModusTableCore {
       pageCount,
       manualSorting,
       sortingState,
+      defaultSort,
       getRowId,
       setExpanded,
       setSorting,
@@ -86,6 +89,7 @@ export default class ModusTableCore {
       setColumnOrder,
     } = tableOptions;
     const { multiple, subRowSelection } = rowSelectionOptions;
+    const defaultSortState = defaultSort ? [defaultSort] : [];
     const options: TableOptionsResolved<unknown> = {
       data: data ?? [],
       columns: (columns as ColumnDef<unknown>[]) ?? [],
@@ -96,7 +100,7 @@ export default class ModusTableCore {
         columnVisibility: {},
         columnOrder: columnOrder,
         expanded: null,
-        sorting: manualSorting ? sortingState : [],
+        sorting: manualSorting ? sortingState : defaultSortState,
         rowSelection: preSelectedRows,
         pagination: pagination && {
           pageIndex: 0,

@@ -35,6 +35,13 @@ export default {
         type: { summary: 'ModusNavbarButton[]' },
       },
     },
+    searchTooltip: {
+      name: 'search-tooltip ',
+      description: 'To add the search tooltip text and ariaLabel',
+      table: {
+        type: { summary: 'ModusNavbarTooltip' },
+      },
+    }
   },
   parameters: {
     actions: {
@@ -52,7 +59,7 @@ export default {
   },
 };
 
-const Template = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay }) => html`
+const Template = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay, searchTooltip }) => html`
   <modus-navbar
     id="working"
     enable-search-overlay=${enableSearchOverlay}
@@ -69,7 +76,7 @@ const Template = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay
     <div slot="notificationMenu">Render your own notification menu.</div>
     <div slot="profileMenu">Render your own profile menu content.</div>
   </modus-navbar>
-  ${setNavbar(true, '#working', profileMenuOptions, '', '', buttons)}
+  ${setNavbar(true, '#working', profileMenuOptions, '', '', buttons, searchTooltip)}
 `;
 export const Default = Template.bind({});
 Default.args = {
@@ -104,9 +111,10 @@ Default.args = {
   ],
   showSearch: false,
   enableSearchOverlay: false,
+  searchTooltip: undefined
 };
 
-const FailedToLoadAvatarTemplate = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay }) => html`
+const FailedToLoadAvatarTemplate = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay, searchTooltip }) => html`
   <modus-navbar
     id="broken"
     enable-search-overlay=${enableSearchOverlay}
@@ -118,7 +126,7 @@ const FailedToLoadAvatarTemplate = ({ profileMenuOptions, buttons, showSearch, e
     <div slot="main" style="height:300px;">Render your own main menu.</div>
     <div slot="notifications">Render your own notifications.</div>
   </modus-navbar>
-  ${setNavbar(false, '#broken', profileMenuOptions, '', '', buttons)}
+  ${setNavbar(false, '#broken', profileMenuOptions, '', '', buttons, searchTooltip)}
 `;
 export const FailedAvatar = FailedToLoadAvatarTemplate.bind({});
 FailedAvatar.args = {
@@ -130,8 +138,9 @@ FailedAvatar.args = {
   buttons: [],
   showSearch: false,
   enableSearchOverlay: false,
+  searchTooltip: undefined
 };
-const BlueTemplate = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay }) => html`
+const BlueTemplate = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay, searchTooltip }) => html`
   <modus-navbar
     id="blue-theme"
     enable-search-overlay=${enableSearchOverlay}
@@ -150,7 +159,8 @@ const BlueTemplate = ({ profileMenuOptions, buttons, showSearch, enableSearchOve
   profileMenuOptions,
   'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
   'https://modus-bootstrap.trimble.com/img/trimble-icon-rev.svg',
-  buttons
+  buttons,
+  searchTooltip
 )}
 `;
 export const BlueNavbar = BlueTemplate.bind({});
@@ -163,6 +173,7 @@ BlueNavbar.args = {
   buttons: [],
   showSearch: false,
   enableSearchOverlay: false,
+  searchTooltip: undefined
 };
 
 const setNavbar = (
@@ -171,7 +182,8 @@ const setNavbar = (
   profileMenuOptions,
   logoUrl = '',
   iconUrl = '',
-  buttons: []
+  buttons: [],
+  searchTooltip
 ) => {
   const tag = document.createElement('script');
   profileMenuOptions.avatarUrl = workingAvatar
@@ -195,6 +207,7 @@ document.querySelector('${id}').logoOptions = {
           ariaLabel: '${profileMenuOptions?.tooltip?.ariaLabel}',
         };
         document.querySelector('${id}').buttons = ${JSON.stringify(buttons)};
+        document.querySelector('${id}').searchTooltip = ${JSON.stringify(searchTooltip)};
   `;
 
   return tag;
