@@ -262,8 +262,8 @@ describe('modus-autocomplete', () => {
     expect(element).toHaveClass('hydrated');
 
     element.setProperty('options', [
-      { id: 1, value: 'Test 1'},
-      { id: 2, value: 'Test 2'},
+      { id: 1, value: 'Test 1' },
+      { id: 2, value: 'Test 2' },
     ]);
 
     element.setProperty('disableCloseOnSelect', true);

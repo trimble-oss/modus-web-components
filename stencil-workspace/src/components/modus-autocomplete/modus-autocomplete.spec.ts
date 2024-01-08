@@ -95,7 +95,7 @@ describe('modus-autocomplete', () => {
       { id: 'Option 2', value: 'Option 2' },
     ];
     modusAutocomplete.handleSearchChange('Option 1');
-    expect(modusAutocomplete.visibleOptions).toEqual([{ id: 'Option 1', value: 'Option 1'}]);
+    expect(modusAutocomplete.visibleOptions).toEqual([{ id: 'Option 1', value: 'Option 1' }]);
   });
 
   it('should show all options on empty search', async () => {
@@ -107,8 +107,8 @@ describe('modus-autocomplete', () => {
     modusAutocomplete.visibleOptions = [{ id: 'Option 1', value: 'Option 1' }];
     modusAutocomplete.handleSearchChange('');
     expect(modusAutocomplete.visibleOptions).toEqual([
-      { id: 'Option 1', value: 'Option 1'},
-      { id: 'Option 2', value: 'Option 2'},
+      { id: 'Option 1', value: 'Option 1' },
+      { id: 'Option 2', value: 'Option 2' },
     ]);
   });
 

@@ -196,7 +196,7 @@ export class ModusAutocomplete {
     this.handleSearchChange(option.value);
     this.hasFocus = false;
     this.optionSelected.emit(option.id);
-    
+
     if (this.disableCloseOnSelect) {
       this.clearable = true;
       this.hasFocus = true;
@@ -249,8 +249,7 @@ export class ModusAutocomplete {
   );
 
   showAllOptions = () => {
-    if (this.options && this.options.length > 0)
-      this.visibleOptions = (this.options as ModusAutocompleteOption[]);
+    if (this.options && this.options.length > 0) this.visibleOptions = this.options as ModusAutocompleteOption[];
   };
 
   showAllCustomOptions = () => {
