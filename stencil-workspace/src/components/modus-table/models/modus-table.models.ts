@@ -3,6 +3,7 @@ import {
   ColumnDefTemplate,
   ColumnOrderState,
   ColumnSizingState,
+  ColumnSort,
   ExpandedState,
   PaginationState,
   RowData,
@@ -133,3 +134,5 @@ export interface ModusTableManualPaginationOptions {
 export interface ModusTableManualSortingOptions {
   currentSortingState: ModusTableSortingState;
 }
+
+export type ModusTableColumnSort = ColumnSort;

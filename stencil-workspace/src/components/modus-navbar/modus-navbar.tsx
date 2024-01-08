@@ -372,23 +372,23 @@ export class ModusNavbar {
               <div class={`right ${direction}`}>
                 {this.showSearch && (
                   <div class="navbar-button search" data-test-id="search-menu">
-                    <span
-                      class="navbar-button-icon"
-                      onKeyDown={(event) => this.searchMenuKeydownHandler(event)}
-                      tabIndex={0}
-                      id="search-button"
-                      ref={(el) => (this.searchButton = el as HTMLElement)}>
-                      <modus-tooltip
-                        text={this.searchTooltip?.text}
-                        aria-label={this.searchTooltip?.ariaLabel}
-                        position="bottom">
+                    <modus-tooltip
+                      text={this.searchTooltip?.text}
+                      aria-label={this.searchTooltip?.ariaLabel}
+                      position="bottom">
+                      <span
+                        class="navbar-button-icon"
+                        onKeyDown={(event) => this.searchMenuKeydownHandler(event)}
+                        tabIndex={0}
+                        id="search-button"
+                        ref={(el) => (this.searchButton = el as HTMLElement)}>
                         <IconSearch
                           size="24"
                           onClick={(event) => this.searchMenuClickHandler(event)}
                           pressed={this.searchOverlayVisible}
                         />
-                      </modus-tooltip>
-                    </span>
+                      </span>
+                    </modus-tooltip>
                   </div>
                 )}
                 <ModusNavbarButtonList
