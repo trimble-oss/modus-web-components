@@ -210,6 +210,10 @@ export class ModusAutocomplete {
   };
 
   handleTextInputValueChange = (event: CustomEvent<string>) => {
+    if (this.disableCloseOnSelect) {
+      this.value = event.detail;
+      return;
+    }
     // Cancel the modus-text-input's value change event or else it will bubble to consumer.
     event.stopPropagation();
     this.handleSearchChange(event.detail);
@@ -274,6 +278,23 @@ export class ModusAutocomplete {
     }
   };
 
+  handleTextInputFocusChange = () => {
+    if (this.disableCloseOnSelect || this.showOptionsOnFocus) {
+      this.hasFocus = true;
+    }
+  }
+
+  handleOnFocusOptions = () => {
+      this.hasFocus = true;
+      if (!this.value) {
+        if (this.containsSlottedElements) {
+          this.visibleCustomOptions = this.showAllCustomOptions();
+          return;
+        }
+        this.showAllOptions();
+      }
+  }
+
   TextInput = () => (
     <modus-text-input
       clearable={this.clearable}
@@ -281,10 +302,6 @@ export class ModusAutocomplete {
       includeSearchIcon={this.includeSearchIcon}
       label={this.label}
       onValueChange={(searchEvent: CustomEvent<string>) => {
-        if (this.disableCloseOnSelect) {
-          this.value = searchEvent.detail;
-          return;
-        }
         this.handleTextInputValueChange(searchEvent);
       }}
       placeholder={this.placeholder}
@@ -292,11 +309,7 @@ export class ModusAutocomplete {
       size={this.size}
       value={this.value}
       onInput={() => this.handleFilterOptions(this.value)}
-      onFocus={() => {
-        if (this.disableCloseOnSelect || this.showOptionsOnFocus) {
-          this.hasFocus = true;
-        }
-      }}
+      onFocus={this.handleTextInputFocusChange}
       onBlur={this.handleInputBlur}
     />
   );
@@ -311,16 +324,7 @@ export class ModusAutocomplete {
         aria-readonly={this.readOnly}
         aria-required={this.required}
         class={classes}
-        onFocusin={() => {
-          this.hasFocus = true;
-          if (!this.value) {
-            if (this.containsSlottedElements) {
-              this.visibleCustomOptions = this.showAllCustomOptions();
-              return;
-            }
-            this.showAllOptions();
-          }
-        }}>
+        onFocusin={this.handleOnFocusOptions}>
         {this.TextInput()}
         <div
           class="options-container"
