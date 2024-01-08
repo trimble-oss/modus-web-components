@@ -308,4 +308,29 @@ describe('modus-autocomplete', () => {
     options = await page.findAll('modus-autocomplete >>> .options-container li');
     expect(options.length).toBe(2);
   });
+
+  it('should display selected option when value property change to a matching option', async () => {
+    const element = await page.find('modus-autocomplete');
+    element.setProperty('options', ['Test 1', 'Test 2']);
+    await page.waitForChanges();
+
+    const textInput = await page.find('modus-autocomplete >>> modus-text-input');
+    await textInput.click();
+    await textInput.type('Test 1');
+    await page.waitForChanges();
+
+    let options = await page.findAll('modus-autocomplete >>> .options-container li');
+
+    expect(options.length).toBe(1);
+
+    element.setProperty('value', 'Test 2');
+
+    await page.waitForChanges();
+
+    await textInput.click();
+ 
+    await page.waitForChanges();
+    options = await page.findAll('modus-autocomplete >>> .options-container li');
+    expect(options.length).toBe(1);
+  });
 });

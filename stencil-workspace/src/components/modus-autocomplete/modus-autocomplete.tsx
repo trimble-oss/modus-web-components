@@ -287,7 +287,11 @@ export class ModusAutocomplete {
         aria-readonly={this.readOnly}
         aria-required={this.required}
         class={classes}
-        onFocusin={() => (this.hasFocus = true)}>
+        onFocusin={() => {
+          this.hasFocus = true;
+          this.updateVisibleOptions(this.value);
+          this.updateVisibleCustomOptions(this.value)
+        }}>
         {this.TextInput()}
         <div
           class="options-container"
