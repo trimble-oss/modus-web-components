@@ -16,7 +16,6 @@ import { IconSearch } from '../icons/icon-search';
 export interface ModusAutocompleteOption {
   id: string;
   value: string;
-  isSelected?: boolean;
 }
 
 const DATA_ID = 'data-id';
@@ -163,10 +162,10 @@ export class ModusAutocomplete {
     this.value = optionValue;
     this.valueChange.emit(optionValue);
     this.hasFocus = true;
-    this.handleOptionSelection({
-      id: optionId,
-      value: optionValue,
-    });
+    if (this.disableCloseOnSelect) {
+      this.clearable = true;
+      this.hasFocus = true;
+    }
     this.optionSelected.emit(optionId);
 
     if (!this.disableCloseOnSelect) {
@@ -197,23 +196,17 @@ export class ModusAutocomplete {
     this.handleSearchChange(option.value);
     this.hasFocus = false;
     this.optionSelected.emit(option.id);
-    this.handleOptionSelection(option);
+    
+    if (this.disableCloseOnSelect) {
+      this.clearable = true;
+      this.hasFocus = true;
+    }
   };
 
   handleSearchChange = (search: string) => {
     this.updateVisibleOptions(search);
     this.value = search;
     this.valueChange.emit(search);
-  };
-
-  handleOptionSelection = (option: ModusAutocompleteOption) => {
-    if (this.disableCloseOnSelect) {
-      if (!this.containsSlottedElements) {
-        this.visibleOptions.find((el) => el.id === option.id)['isSelected'] = true;
-      }
-      this.clearable = true;
-      this.hasFocus = true;
-    }
   };
 
   handleTextInputValueChange = (event: CustomEvent<string>) => {
@@ -257,10 +250,7 @@ export class ModusAutocomplete {
 
   showAllOptions = () => {
     if (this.options && this.options.length > 0)
-      this.visibleOptions = (this.options as ModusAutocompleteOption[]).map((option) => {
-        option.isSelected = false;
-        return option;
-      });
+      this.visibleOptions = (this.options as ModusAutocompleteOption[]);
   };
 
   showAllCustomOptions = () => {
@@ -306,12 +296,6 @@ export class ModusAutocomplete {
       onFocus={() => {
         if (this.disableCloseOnSelect || this.showOptionsOnFocus) {
           this.hasFocus = true;
-          if (this.visibleOptions?.length > 0) {
-            const optionVisible = this.visibleOptions.find((op) => op.id === this.value);
-            if (optionVisible) {
-              optionVisible.isSelected = true;
-            }
-          }
         }
       }}
       onBlur={this.handleInputBlur}
@@ -337,12 +321,6 @@ export class ModusAutocomplete {
             }
             this.showAllOptions();
           }
-          if (this.disableCloseOnSelect) {
-            const optionSelected = document.getElementById('isSelected');
-            if (optionSelected) {
-              optionSelected.focus();
-            }
-          }
         }}>
         {this.TextInput()}
         <div
@@ -353,9 +331,6 @@ export class ModusAutocomplete {
               this.visibleOptions?.map((option) => {
                 return (
                   <li
-                    {...(this.disableCloseOnSelect && {
-                      id: `${option.isSelected ? 'selected' : ''}`,
-                    })}
                     class="text-option"
                     tabindex="0"
                     onClick={() => this.handleOptionClick(option)}
@@ -369,9 +344,6 @@ export class ModusAutocomplete {
               this.visibleCustomOptions?.map((option) => {
                 return (
                   <li
-                    {...(this.disableCloseOnSelect && {
-                      id: `${option.isSelected ? 'selected' : ''}`,
-                    })}
                     class="custom-option"
                     tabindex="0"
                     onClick={() => this.handleCustomOptionClick(option)}

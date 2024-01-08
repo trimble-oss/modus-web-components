@@ -33,8 +33,7 @@
         background-color: $modus-autocomplete-options-hover-background-color;
       }
 
-      &#selected,
-      :focus {
+      &:focus {
         background-color: $modus-autocomplete-options-hover-background-color;
       }
     }

@@ -262,8 +262,8 @@ describe('modus-autocomplete', () => {
     expect(element).toHaveClass('hydrated');
 
     element.setProperty('options', [
-      { id: 1, value: 'Test 1', isSelected: false },
-      { id: 2, value: 'Test 2', isSelected: false },
+      { id: 1, value: 'Test 1'},
+      { id: 2, value: 'Test 2'},
     ]);
 
     element.setProperty('disableCloseOnSelect', true);
@@ -279,7 +279,6 @@ describe('modus-autocomplete', () => {
 
     options[0].click();
     await page.waitForChanges();
-    expect(options[0]).toHaveProperty('id', 'selected');
     expect(options.length).toEqual(2);
   });
 
