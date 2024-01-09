@@ -51,6 +51,7 @@ import {
   ModusTableRowActionClick,
   ModusTableSortingState,
   ModusTableRowWithId,
+  ModusTableColumnSort,
 } from './models/modus-table.models';
 import ColumnDragState from './models/column-drag-state.model';
 import {
@@ -210,9 +211,9 @@ export class ModusTable {
       newVal.subRowSelection !== oldVal.subRowSelection ||
       newVal.preSelectedRows !== oldVal.preSelectedRows
     ) {
-      this.tableCore.setOptions('enableMultiRowSelection', newVal.multiple);
-      this.tableCore.setState('rowSelection', newVal.preSelectedRows);
-      this.tableCore.setState('subRowSelection', newVal.subRowSelection);
+      this.tableCore?.setOptions('enableMultiRowSelection', newVal.multiple);
+      this.tableCore?.setState('rowSelection', newVal.preSelectedRows);
+      this.tableCore?.setState('subRowSelection', newVal.subRowSelection);
     }
   }
 
@@ -236,6 +237,14 @@ export class ModusTable {
   @Watch('toolbarOptions') onToolbarOptionsChange(newVal: ModusTableToolbarOptions | null) {
     this.tableCore?.setOptions('enableHiding', !!newVal?.columnsVisibility);
     this.onRowsExpandableChange(this.rowsExpandable);
+  }
+
+  /** (Optional) To set the default sorting for the table. */
+  @Prop() defaultSort: ModusTableColumnSort;
+  @Watch('defaultSort') onDefaultSortChange(newVal: ModusTableColumnSort | null) {
+    if (!(this.manualSortingOptions?.currentSortingState?.length > 0)) {
+      this.tableCore?.setState('sorting', [newVal]);
+    }
   }
 
   /** Emits the cell value that was edited */
@@ -539,6 +548,7 @@ export class ModusTable {
       columnOrder: this.columnReorder ? this.tableState.columnOrder : [],
       toolbarOptions: this.toolbarOptions,
       preSelectedRows: this.getPreselectedRowState(),
+      defaultSort: this.defaultSort,
 
       ...(this.manualPaginationOptions && {
         manualPagination: true,

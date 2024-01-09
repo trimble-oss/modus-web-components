@@ -416,6 +416,9 @@
   // Autocomplete
   --modus-autocomplete-no-results-message-color: var(--modus-gray-7);
   --modus-autocomplete-no-results-subtext-color: var(--modus-gray-4);
+
+  // Radio Button
+  --modus-radio-btn-focus-color: #3db0ee;
 }
 
 [data-mwc-theme='dark'] {
@@ -759,6 +762,9 @@
   // Autocomplete
   --modus-autocomplete-no-results-message-color: var(--modus-gray-0);
   --modus-autocomplete-no-results-subtext-color: var(--modus-gray-4);
+
+  // Radio Button
+  --modus-radio-btn-focus-color: #0a7ebc;
 }
 
 // Mixins
