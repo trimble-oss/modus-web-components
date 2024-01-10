@@ -38,9 +38,6 @@ export class ModusAutocomplete {
   /** Whether the input is disabled. */
   @Prop() disabled: boolean;
 
-  /** Whether the autocomplete's options always display on select. */
-  @Prop() disableCloseOnSelect: boolean;
-
   /** The autocomplete's dropdown's max height. */
   @Prop() dropdownMaxHeight = '300px';
 
@@ -89,7 +86,14 @@ export class ModusAutocomplete {
   @Prop() size: 'medium' | 'large' = 'medium';
 
   /** The autocomplete's search value. */
-  @Prop() value: string;
+  @Prop({ mutable: true }) value: string;
+  @Watch('value')
+  onValueChange() {
+    if (this.hasFocus) {
+      this.updateVisibleOptions(this.value);
+      this.updateVisibleCustomOptions(this.value);
+    }
+  }
 
   /** An event that fires when a dropdown option is selected. Emits the option id. */
   @Event() optionSelected: EventEmitter<string>;
@@ -105,24 +109,14 @@ export class ModusAutocomplete {
 
   componentWillLoad(): void {
     this.convertOptions();
-
-    if (!this.value) {
-      this.visibleOptions = this.options as ModusAutocompleteOption[];
-    } else {
-      this.updateVisibleOptions(this.value);
-    }
   }
 
-  componentDidLoad(): void {
-    const slotted = this.el.children;
-    this.containsSlottedElements = slotted?.length > 0;
-    if (this.containsSlottedElements) {
-      this.updateVisibleCustomOptions(this.value);
-    }
-  }
-
-  @Listen('click', { target: 'document' })
+  @Listen('mousedown', { target: 'document' })
   outsideElementClickHandler(event: MouseEvent): void {
+    if (!this.hasFocus) {
+      return;
+    }
+
     if (this.el !== event.target || !this.el.contains(event.target as Node)) {
       this.hasFocus = false;
     }
@@ -152,27 +146,19 @@ export class ModusAutocomplete {
     this.value?.length > 0;
 
   displayOptions = () => {
-    const showOptions = this.showOptionsOnFocus || this.disableCloseOnSelect || this.value?.length > 0;
+    const showOptions = this.showOptionsOnFocus || this.value?.length > 0;
     return this.hasFocus && showOptions && !this.disabled;
   };
 
   handleCustomOptionClick = (option: any) => {
     const optionValue = option.getAttribute(DATA_SEARCH_VALUE);
     const optionId = option.getAttribute(DATA_ID);
-    this.hasFocus = false;
     this.handleSearchChange(optionValue);
-
-    if (this.disableCloseOnSelect) {
-      this.clearable = true;
-      this.hasFocus = true;
-    }
+    this.hasFocus = false;
     this.optionSelected.emit(optionId);
   };
 
   handleInputBlur = () => {
-    if (!this.disableCloseOnSelect) {
-      return;
-    }
     this.hasFocus = false;
   };
 
@@ -191,43 +177,34 @@ export class ModusAutocomplete {
     this.handleSearchChange(option.value);
     this.hasFocus = false;
     this.optionSelected.emit(option.id);
-
-    if (this.disableCloseOnSelect) {
-      this.clearable = true;
-      this.hasFocus = true;
-    }
   };
 
   handleSearchChange = (search: string) => {
+    this.updateVisibleOptions(search);
+    this.updateVisibleCustomOptions(search);
+
     this.value = search;
     this.valueChange.emit(search);
-
-    if (!this.containsSlottedElements) {
-      this.updateVisibleOptions(search);
-    }
-    if (!this.disableCloseOnSelect && this.containsSlottedElements) {
-      this.updateVisibleCustomOptions(search);
-    }
   };
 
   handleTextInputValueChange = (event: CustomEvent<string>) => {
-    if (this.disableCloseOnSelect) {
-      this.value = event.detail;
-      return;
-    }
     // Cancel the modus-text-input's value change event or else it will bubble to consumer.
     event.stopPropagation();
     this.handleSearchChange(event.detail);
   };
 
-  updateVisibleCustomOptions = (search: string) => {
-    if (!this.containsSlottedElements) {
+  updateVisibleCustomOptions = (search = '') => {
+    if (!this.hasFocus) {
+      return;
+    }
+    const slotted = this.el.shadowRoot?.querySelector('slot') as HTMLSlotElement;
+    if (!slotted || typeof slotted.assignedNodes !== 'function') {
       return;
     }
 
-    this.customOptions = this.showAllCustomOptions();
+    this.customOptions = slotted.assignedNodes().filter((node) => node.nodeName !== '#text');
 
-    if (!search || search.length === 0) {
+    if (search.length === 0) {
       this.visibleCustomOptions = this.customOptions;
       return;
     }
@@ -238,16 +215,21 @@ export class ModusAutocomplete {
     this.containsSlottedElements = this.customOptions.length > 0;
   };
 
-  updateVisibleOptions = (search: string) => {
-    const hasOptionSearched =
-      this.disableCloseOnSelect &&
-      (this.options?.map((option) => option.value.toLowerCase()) || []).includes(search.toLowerCase());
-    if (!search || search.length === 0 || hasOptionSearched) {
-      this.showAllOptions();
+  updateVisibleOptions = (search = '') => {
+    if (!this.hasFocus) {
       return;
     }
 
-    this.handleFilterOptions(search);
+    const isSearchEmpty = search.length === 0;
+
+    if (isSearchEmpty && !this.showOptionsOnFocus) {
+      this.visibleOptions = this.options as ModusAutocompleteOption[];
+      return;
+    }
+
+    this.visibleOptions = (this.options as ModusAutocompleteOption[])?.filter((o: ModusAutocompleteOption) => {
+      return o.value.toLowerCase().includes(search.toLowerCase());
+    });
   };
 
   // Do not display the slot for the custom options. We use this hidden slot to reference the slot's children.
@@ -256,49 +238,6 @@ export class ModusAutocomplete {
       <slot onSlotchange={() => this.updateVisibleCustomOptions(this.value)} />
     </div>
   );
-
-  showAllOptions = () => {
-    if (this.options && this.options.length > 0) this.visibleOptions = this.options as ModusAutocompleteOption[];
-  };
-
-  showAllCustomOptions = () => {
-    const slotted = this.el.shadowRoot?.querySelector('slot') as HTMLSlotElement;
-    if (!slotted || typeof slotted.assignedNodes !== 'function') {
-      return;
-    }
-
-    return slotted.assignedNodes().filter((node) => node.nodeName !== '#text');
-  };
-
-  handleFilterOptions = (search: string) => {
-    if (search?.length >= 0 && this.containsSlottedElements) {
-      this.hasFocus = true;
-      this.updateVisibleCustomOptions(search);
-      return;
-    }
-    if (search?.length > 0 && !this.containsSlottedElements) {
-      this.visibleOptions = (this.options as ModusAutocompleteOption[])?.filter((o: ModusAutocompleteOption) => {
-        return o.value.toLowerCase().includes(search.toLowerCase());
-      });
-    }
-  };
-
-  handleTextInputFocusChange = () => {
-    if (this.disableCloseOnSelect || this.showOptionsOnFocus) {
-      this.hasFocus = true;
-    }
-  };
-
-  handleOnFocusOptions = () => {
-    this.hasFocus = true;
-    if (!this.value) {
-      if (this.containsSlottedElements) {
-        this.visibleCustomOptions = this.showAllCustomOptions();
-        return;
-      }
-      this.showAllOptions();
-    }
-  };
 
   TextInput = () => (
     <modus-text-input
@@ -313,8 +252,6 @@ export class ModusAutocomplete {
       required={this.required}
       size={this.size}
       value={this.value}
-      onInput={() => this.handleFilterOptions(this.value)}
-      onFocus={this.handleTextInputFocusChange}
       onBlur={this.handleInputBlur}
     />
   );
@@ -329,7 +266,20 @@ export class ModusAutocomplete {
         aria-readonly={this.readOnly}
         aria-required={this.required}
         class={classes}
-        onFocusin={this.handleOnFocusOptions}>
+        onFocusin={() => {
+          if (this.hasFocus) {
+            return;
+          }
+
+          this.hasFocus = true;
+          this.updateVisibleOptions(this.value);
+          this.updateVisibleCustomOptions(this.value);
+        }}
+        onFocusout={() => {
+          if (this.hasFocus) {
+            this.hasFocus = false;
+          }
+        }}>
         {this.TextInput()}
         <div
           class="options-container"
@@ -342,25 +292,21 @@ export class ModusAutocomplete {
                     class="text-option"
                     tabindex="0"
                     onClick={() => this.handleOptionClick(option)}
-                    onKeyPress={(ev) => this.handleOptionKeyPress(ev, option)}
-                    onBlur={this.handleInputBlur}>
+                    onKeyPress={(ev) => this.handleOptionKeyPress(ev, option)}>
                     {option.value}
                   </li>
                 );
               })}
             {this.displayOptions() &&
-              this.visibleCustomOptions?.map((option) => {
-                return (
-                  <li
-                    class="custom-option"
-                    tabindex="0"
-                    onClick={() => this.handleCustomOptionClick(option)}
-                    onKeyPress={(ev) => this.handleOptionKeyPress(ev, option, true)}
-                    innerHTML={option.outerHTML}
-                    onBlur={this.handleInputBlur}
-                  />
-                );
-              })}
+              this.visibleCustomOptions?.map((option) => (
+                <li
+                  class="custom-option"
+                  tabindex="0"
+                  onClick={() => this.handleCustomOptionClick(option)}
+                  onKeyPress={(ev) => this.handleOptionKeyPress(ev, option, true)}
+                  innerHTML={option.outerHTML}
+                />
+              ))}
           </ul>
           {this.displayNoResults() && <NoResultsFound text={this.noResultsFoundText} subtext={this.noResultsFoundSubtext} />}
         </div>
