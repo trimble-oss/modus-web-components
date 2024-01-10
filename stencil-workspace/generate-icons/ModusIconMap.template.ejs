@@ -1,0 +1,32 @@
+/**********************************************************************
+    THIS IS AN AUTOMATICALLY GENERATED FILE, DO NOT EDIT DIRECTLY.
+***********************************************************************/
+
+// eslint-disable-next-line
+import { FunctionalComponent, h } from '@stencil/core';
+<%_ icons.forEach(function(icon) { _%>
+import { <%= icon.name %> } from './generated-icons/<%= icon.name %>';
+<%_ }); _%>
+
+export interface IconProps {
+    color?: string;
+    onClick?: (event?) => void;
+    size?: string;
+    pressed?: boolean;
+}
+
+interface ModusIconMapProps extends IconProps {
+    icon: string;
+    imageOptions?: { [key: string]: string };
+}
+
+export const ModusIconMap: FunctionalComponent<ModusIconMapProps> = (props: ModusIconMapProps) => {
+    switch (props.icon) {
+        <%_ icons.forEach(function(icon) { _%>
+        case '<%= icon.caseName %>':
+            return <<%= icon.name %> color={props.color} onClick={props.onClick} size={props.size} pressed={props.pressed} />;
+        <%_ }); _%>
+        default:
+            return <img src={props.icon} {...(props.imageOptions || {})} />;
+    }
+};

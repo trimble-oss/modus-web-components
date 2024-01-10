@@ -9,8 +9,8 @@ import {
   Watch,
 } from '@stencil/core';
 import { PaginationDirection } from './enums/pagination-direction.enum';
-import { IconChevronRightThick } from '../icons/icon-chevron-right-thick';
-import { IconChevronLeftThick } from '../icons/icon-chevron-left-thick';
+import { IconChevronRightThick } from '../../icons/svgs/icon-chevron-right-thick';
+import { IconChevronLeftThick } from '../../icons/svgs/icon-chevron-left-thick';
 
 @Component({
   tag: 'modus-pagination',

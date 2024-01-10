@@ -1,9 +1,9 @@
 // eslint-disable-next-line
 import { Component, Event, EventEmitter, h, Method, Prop, Watch } from '@stencil/core';
-import { IconSearch } from '../icons/icon-search';
-import { IconClose } from '../icons/icon-close';
-import { IconVisibility } from '../icons/icon-visibility';
-import { IconVisibilityOff } from '../icons/icon-visibility-off';
+import { IconSearch } from '../../icons/svgs/icon-search';
+import { IconVisibility } from '../../icons/svgs/icon-visibility';
+import { IconVisibilityOff } from '../../icons/svgs/icon-visibility-off';
+import { IconClose } from '../../icons/svgs/icon-close';
 
 @Component({
   tag: 'modus-text-input',

@@ -6,7 +6,7 @@ import {
   Element,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
-import { IconClose } from '../../icons/icon-close';
+import { IconClose } from '../../../icons/svgs/icon-close';
 
 @Component({
   tag: 'modus-navbar-search-overlay',
