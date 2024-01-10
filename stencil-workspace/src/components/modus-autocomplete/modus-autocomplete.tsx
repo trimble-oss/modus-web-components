@@ -159,19 +159,14 @@ export class ModusAutocomplete {
   handleCustomOptionClick = (option: any) => {
     const optionValue = option.getAttribute(DATA_SEARCH_VALUE);
     const optionId = option.getAttribute(DATA_ID);
-    this.value = optionValue;
-    this.valueChange.emit(optionValue);
-    this.hasFocus = true;
+    this.hasFocus = false;
+    this.handleSearchChange(optionValue);
+
     if (this.disableCloseOnSelect) {
       this.clearable = true;
       this.hasFocus = true;
     }
     this.optionSelected.emit(optionId);
-
-    if (!this.disableCloseOnSelect) {
-      this.updateVisibleCustomOptions(optionValue);
-      this.hasFocus = false;
-    }
   };
 
   handleInputBlur = () => {
@@ -204,9 +199,15 @@ export class ModusAutocomplete {
   };
 
   handleSearchChange = (search: string) => {
-    this.updateVisibleOptions(search);
     this.value = search;
     this.valueChange.emit(search);
+
+    if (!this.containsSlottedElements) {
+      this.updateVisibleOptions(search);
+    }
+    if (!this.disableCloseOnSelect && this.containsSlottedElements) {
+      this.updateVisibleCustomOptions(search);
+    }
   };
 
   handleTextInputValueChange = (event: CustomEvent<string>) => {
@@ -220,6 +221,10 @@ export class ModusAutocomplete {
   };
 
   updateVisibleCustomOptions = (search: string) => {
+    if (!this.containsSlottedElements) {
+      return;
+    }
+
     this.customOptions = this.showAllCustomOptions();
 
     if (!search || search.length === 0) {
@@ -282,18 +287,18 @@ export class ModusAutocomplete {
     if (this.disableCloseOnSelect || this.showOptionsOnFocus) {
       this.hasFocus = true;
     }
-  }
+  };
 
   handleOnFocusOptions = () => {
-      this.hasFocus = true;
-      if (!this.value) {
-        if (this.containsSlottedElements) {
-          this.visibleCustomOptions = this.showAllCustomOptions();
-          return;
-        }
-        this.showAllOptions();
+    this.hasFocus = true;
+    if (!this.value) {
+      if (this.containsSlottedElements) {
+        this.visibleCustomOptions = this.showAllCustomOptions();
+        return;
       }
-  }
+      this.showAllOptions();
+    }
+  };
 
   TextInput = () => (
     <modus-text-input
