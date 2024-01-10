@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { Component, Event, EventEmitter, h, Method, Prop, Watch } from '@stencil/core';
+import { Component, Event, EventEmitter, h, Method, Prop } from '@stencil/core';
 import { IconSearch } from '../icons/icon-search';
 import { IconClose } from '../icons/icon-close';
 import { IconVisibility } from '../icons/icon-visibility';

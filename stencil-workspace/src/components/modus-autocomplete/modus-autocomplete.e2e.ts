@@ -328,7 +328,7 @@ describe('modus-autocomplete', () => {
     await page.waitForChanges();
 
     await textInput.click();
- 
+
     await page.waitForChanges();
     options = await page.findAll('modus-autocomplete >>> .options-container li');
     expect(options.length).toBe(1);
