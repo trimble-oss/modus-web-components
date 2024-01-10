@@ -86,19 +86,15 @@ export class ModusAutocomplete {
   @Prop() size: 'medium' | 'large' = 'medium';
 
   /** The autocomplete's search value. */
-  @Prop() value: string;
+  @Prop({ mutable: true }) value: string;
   @Watch('value')
-  watchValue(newValue: string) {
-    if (newValue === '') {
-      this.updateVisibleOptions(newValue);
-
-      if (this.containsSlottedElements) {
-        this.updateVisibleCustomOptions(newValue);
-      }
+  onValueChange() {
+    if (this.hasFocus) {
+      this.updateVisibleOptions(this.value);
+      this.updateVisibleCustomOptions(this.value);
     }
-
-    this.handleNoResults(newValue);
   }
+
   /** An event that fires when a dropdown option is selected. Emits the option id. */
   @Event() optionSelected: EventEmitter<string>;
 
@@ -107,27 +103,20 @@ export class ModusAutocomplete {
 
   @State() containsSlottedElements = false;
   @State() hasFocus = false;
-  @State() hasNoResults = false;
   @State() visibleOptions: ModusAutocompleteOption[] = [];
   @State() customOptions: Array<any> = [];
   @State() visibleCustomOptions: Array<any> = [];
 
   componentWillLoad(): void {
     this.convertOptions();
-
-    if (!this.value) {
-      this.visibleOptions = this.options as ModusAutocompleteOption[];
-    } else {
-      this.updateVisibleOptions(this.value);
-    }
   }
 
-  componentDidLoad(): void {
-    this.updateVisibleCustomOptions(this.value);
-  }
-
-  @Listen('click', { target: 'document' })
+  @Listen('mousedown', { target: 'document' })
   outsideElementClickHandler(event: MouseEvent): void {
+    if (!this.hasFocus) {
+      return;
+    }
+
     if (this.el !== event.target || !this.el.contains(event.target as Node)) {
       this.hasFocus = false;
     }
@@ -149,37 +138,16 @@ export class ModusAutocomplete {
     }
   }
 
-  handleNoResults = (value: string) => {
-    let handleResults;
-    if (this.options?.length > 0) {
-      handleResults =
-        (this.options as ModusAutocompleteOption[]).filter((o: ModusAutocompleteOption) => {
-          return o.value.toLowerCase().includes(value.toLowerCase());
-        }).length > 0;
-    }
-    if (this.customOptions?.length > 0) {
-      handleResults =
-        this.customOptions.filter((o: any) => {
-          return o.getAttribute(DATA_SEARCH_VALUE).toLowerCase().includes(value.toLowerCase());
-        }).length > 0;
-    }
-    this.hasNoResults = !handleResults;
-  };
-
-  displayNoResults = () => {
-    if (this.showNoResultsFoundMessage && this.hasFocus && !this.visibleOptions?.length && this.value?.length > 0) {
-      if (this.containsSlottedElements) {
-        return this.hasNoResults;
-      }
-      return true;
-    }
-
-    return this.hasNoResults && this.visibleOptions?.length > 0 && this.hasFocus;
-  };
+  displayNoResults = () =>
+    this.showNoResultsFoundMessage &&
+    this.hasFocus &&
+    !this.visibleOptions?.length &&
+    !this.visibleCustomOptions?.length &&
+    this.value?.length > 0;
 
   displayOptions = () => {
     const showOptions = this.showOptionsOnFocus || this.value?.length > 0;
-    return this.hasFocus && showOptions && !this.disabled && !this.hasNoResults;
+    return this.hasFocus && showOptions && !this.disabled;
   };
 
   handleCustomOptionClick = (option: any) => {
@@ -225,7 +193,10 @@ export class ModusAutocomplete {
     this.handleSearchChange(event.detail);
   };
 
-  updateVisibleCustomOptions = (search: string) => {
+  updateVisibleCustomOptions = (search = '') => {
+    if (!this.hasFocus) {
+      return;
+    }
     const slotted = this.el.shadowRoot?.querySelector('slot') as HTMLSlotElement;
     if (!slotted || typeof slotted.assignedNodes !== 'function') {
       return;
@@ -233,7 +204,7 @@ export class ModusAutocomplete {
 
     this.customOptions = slotted.assignedNodes().filter((node) => node.nodeName !== '#text');
 
-    if (!search || search.length === 0) {
+    if (search.length === 0) {
       this.visibleCustomOptions = this.customOptions;
       return;
     }
@@ -244,8 +215,14 @@ export class ModusAutocomplete {
     this.containsSlottedElements = this.customOptions.length > 0;
   };
 
-  updateVisibleOptions = (search: string) => {
-    if (!search || search.length === 0) {
+  updateVisibleOptions = (search = '') => {
+    if (!this.hasFocus) {
+      return;
+    }
+
+    const isSearchEmpty = search.length === 0;
+
+    if (isSearchEmpty && !this.showOptionsOnFocus) {
       this.visibleOptions = this.options as ModusAutocompleteOption[];
       return;
     }
@@ -268,7 +245,9 @@ export class ModusAutocomplete {
       errorText={this.hasFocus ? '' : this.errorText}
       includeSearchIcon={this.includeSearchIcon}
       label={this.label}
-      onValueChange={(searchEvent: CustomEvent<string>) => this.handleTextInputValueChange(searchEvent)}
+      onValueChange={(searchEvent: CustomEvent<string>) => {
+        this.handleTextInputValueChange(searchEvent);
+      }}
       placeholder={this.placeholder}
       required={this.required}
       size={this.size}
@@ -288,9 +267,18 @@ export class ModusAutocomplete {
         aria-required={this.required}
         class={classes}
         onFocusin={() => {
+          if (this.hasFocus) {
+            return;
+          }
+
           this.hasFocus = true;
           this.updateVisibleOptions(this.value);
-          this.updateVisibleCustomOptions(this.value)
+          this.updateVisibleCustomOptions(this.value);
+        }}
+        onFocusout={() => {
+          if (this.hasFocus) {
+            this.hasFocus = false;
+          }
         }}>
         {this.TextInput()}
         <div
@@ -304,8 +292,7 @@ export class ModusAutocomplete {
                     class="text-option"
                     tabindex="0"
                     onClick={() => this.handleOptionClick(option)}
-                    onKeyPress={(ev) => this.handleOptionKeyPress(ev, option)}
-                    onBlur={this.handleInputBlur}>
+                    onKeyPress={(ev) => this.handleOptionKeyPress(ev, option)}>
                     {option.value}
                   </li>
                 );
@@ -318,7 +305,6 @@ export class ModusAutocomplete {
                   onClick={() => this.handleCustomOptionClick(option)}
                   onKeyPress={(ev) => this.handleOptionKeyPress(ev, option, true)}
                   innerHTML={option.outerHTML}
-                  onBlur={this.handleInputBlur}
                 />
               ))}
           </ul>

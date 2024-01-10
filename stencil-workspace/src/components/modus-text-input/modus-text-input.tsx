@@ -69,11 +69,7 @@ export class ModusTextInput {
   @Prop() validText: string;
 
   /** (optional) The input's value. */
-  @Prop() value: string;
-  @Watch('value')
-  watchValue(newValue: string): void {
-    this.value = newValue;
-  }
+  @Prop({ mutable: true }) value: string;
 
   /** An event that fires on input value change. */
   @Event() valueChange: EventEmitter<string>;
