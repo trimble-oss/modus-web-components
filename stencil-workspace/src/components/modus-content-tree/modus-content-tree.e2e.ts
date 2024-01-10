@@ -143,13 +143,13 @@ describe('modus-tree-view-item', () => {
     </modus-tree-view>`);
     const root = await page.find('modus-tree-view');
 
-    const rightChevron = await page.find('modus-tree-view-item >>> .rotate-right .icon-chevron-down-thick');
+    const rightChevron = await page.find('modus-tree-view-item >>> .rotate-right .icon-expand-more-bold');
     expect(rightChevron).toBeTruthy();
 
     root.setProperty('expandedItems', ['1']);
     await page.waitForChanges();
 
-    const downChevron = await page.find('modus-tree-view-item >>> .icon-chevron-down-thick');
+    const downChevron = await page.find('modus-tree-view-item >>> .icon-expand-more-bold');
     expect(downChevron).toBeTruthy();
   });
 
@@ -182,12 +182,12 @@ describe('modus-tree-view-item', () => {
       </modus-tree-view-item>
     </modus-tree-view>`);
 
-    const rightChevron = await page.find("modus-tree-view-item[node-id='1'] >>> .rotate-right .icon-chevron-down-thick");
+    const rightChevron = await page.find("modus-tree-view-item[node-id='1'] >>> .rotate-right .icon-expand-more-bold");
     expect(rightChevron).toBeTruthy();
 
     await rightChevron.click();
 
-    const downChevron = await page.find("modus-tree-view-item[node-id='1'] >>> .icon-chevron-down-thick");
+    const downChevron = await page.find("modus-tree-view-item[node-id='1'] >>> .icon-expand-more-bold");
     expect(downChevron).toBeTruthy();
   });
 
@@ -391,7 +391,7 @@ describe('modus-tree-view-item', () => {
     </modus-tree-view>`);
 
     const itemExpandToggle = await page.spyOnEvent('itemExpandToggle');
-    const rightChevron = await page.find("modus-tree-view-item[node-id='1'] >>> .rotate-right .icon-chevron-down-thick");
+    const rightChevron = await page.find("modus-tree-view-item[node-id='1'] >>> .rotate-right .icon-expand-more-bold");
     expect(rightChevron).toBeTruthy();
 
     await rightChevron.click();

@@ -1,11 +1,11 @@
 // eslint-disable-next-line
 import { Component, Event, EventEmitter, h, Prop } from '@stencil/core';
-import { IconInfo } from '../icons/icon-info';
-import { IconWarning } from '../icons/icon-warning';
-import { IconCheckCircle } from '../icons/icon-check-circle';
-import { IconError } from '../icons/icon-error';
-import { IconHelp } from '../icons/icon-help';
-import { IconClose } from '../icons/icon-close';
+import { IconError } from '../../icons/svgs/icon-error';
+import { IconWarning } from '../../icons/svgs/icon-warning';
+import { IconInfo } from '../../icons/svgs/icon-info';
+import { IconHelp } from '../../icons/svgs/icon-help';
+import { IconCheckCircle } from '../../icons/svgs/icon-check-circle';
+import { IconClose } from '../../icons/svgs/icon-close';
 
 @Component({
   tag: 'modus-toast',

@@ -11,7 +11,7 @@ import {
   Element,
   Watch,
 } from '@stencil/core';
-import { IconSearch } from '../icons/icon-search';
+import { IconSearch } from '../../icons/svgs/icon-search';
 
 export interface ModusAutocompleteOption {
   id: string;
