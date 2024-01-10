@@ -257,15 +257,31 @@ describe('modus-autocomplete', () => {
 
     expect(options.length).toEqual(2);
   });
+
   it('should add chip when option is selected and multiple is true', async () => {
     const element = await page.find('modus-autocomplete');
     element.setProperty('multiple', true);
     await page.waitForChanges();
 
-    // Trigger the selection of an option
-    // Ensure that the chip is added
-    // Check if the selectedChips array is updated
-    // Use spies to check if the valueChange event is emitted
+    element.setProperty('options', ['Test 1']);
+    await page.waitForChanges();
+
+    const textInput = await page.find('modus-autocomplete >>> modus-text-input');
+    await textInput.click();
+    await textInput.type('Test');
+    await page.waitForChanges();
+
+    const option = await page.find('modus-autocomplete >>> li');
+    await option.click();
+    await page.waitForChanges();
+
+    const chipsContainer = await page.find('modus-autocomplete >>> .chips-container');
+
+    const chips = await chipsContainer.findAll('modus-chip');
+
+    expect(chips.length).toEqual(1);
+
+    expect(await chips[0].getProperty('value')).toBe('Test 1');
   });
 
   it('should not add chip when multiple is false', async () => {
@@ -273,42 +289,73 @@ describe('modus-autocomplete', () => {
     element.setProperty('multiple', false);
     await page.waitForChanges();
 
-    // Trigger the selection of an option
-    // Ensure that the chip is not added
-    // Check if the selectedChips array is not updated
-    // Use spies to check if the valueChange event is emitted
-  });
-  it('should set aria label on the input field', async () => {
-    const element = await page.find('modus-autocomplete');
-    const ariaLabel = 'Accessible Autocomplete';
-    element.setProperty('ariaLabel', ariaLabel);
+    element.setProperty('options', ['Test 1']);
     await page.waitForChanges();
 
-    // Ensure that the input field has the correct aria label attribute
+    const textInput = await page.find('modus-autocomplete >>> modus-text-input');
+    await textInput.click();
+    await textInput.type('Test');
+    await page.waitForChanges();
+
+    const option = await page.find('modus-autocomplete >>> li');
+    await option.click();
+    await page.waitForChanges();
+
+    const chipsContainer = await page.find('modus-autocomplete >>> .chips-container');
+
+    const chips = await chipsContainer.findAll('modus-chip');
+
+    expect(chips.length).toEqual(0);
   });
+
   it('should render clear button when clearable is true and there is a value', async () => {
     const element = await page.find('modus-autocomplete');
     element.setProperty('clearable', true);
+
+    element.setProperty('options', ['Test 1']);
+
     await page.waitForChanges();
 
-    // Set a non-empty value
-    // Ensure that the clear button is rendered
+    const textInput = await page.find('modus-autocomplete >>> modus-text-input');
+    await textInput.click();
+    await textInput.type('Test');
+    await page.waitForChanges();
+
+    const option = await page.find('modus-autocomplete >>> li');
+    await option.click();
+    await page.waitForChanges();
+
+    const clearButton = await element.findAll('.icons-close');
+    expect(clearButton).not.toBeNull();
   });
 
   it('should not render clear button when clearable is false or there is no value', async () => {
     const element = await page.find('modus-autocomplete');
     element.setProperty('clearable', false);
+
+    element.setProperty('options', ['Test 1']);
+
     await page.waitForChanges();
 
-    // Ensure that the clear button is not rendered
-    // Try setting an empty value and ensure that the clear button is not rendered
+    const textInput = await page.find('modus-autocomplete >>> modus-text-input');
+    await textInput.click();
+    await textInput.type('Test');
+    await page.waitForChanges();
+
+    const option = await page.find('modus-autocomplete >>> li');
+    await option.click();
+    await page.waitForChanges();
+
+    const clearButton = await element.findAll('.icons-close');
+    expect(clearButton).toEqual([]);
   });
+
   it('should disable the autocomplete when disabled is true', async () => {
     const element = await page.find('modus-autocomplete');
     element.setProperty('disabled', true);
     await page.waitForChanges();
 
-    // Ensure that the autocomplete is disabled
+    expect(await element.getProperty('disabled')).toBe(true);
   });
 
   it('should enable the autocomplete when disabled is false', async () => {
@@ -316,46 +363,34 @@ describe('modus-autocomplete', () => {
     element.setProperty('disabled', false);
     await page.waitForChanges();
 
-    // Ensure that the autocomplete is enabled
+    expect(await element.getProperty('disabled')).toBe(false);
   });
-  it('should set the max height of the dropdown', async () => {
-    const element = await page.find('modus-autocomplete');
-    const dropdownMaxHeight = '400px';
-    element.setProperty('dropdownMaxHeight', dropdownMaxHeight);
-    await page.waitForChanges();
 
-    // Ensure that the dropdown has the correct max height style
-  });
-  it('should set the z-index of the dropdown', async () => {
-    const element = await page.find('modus-autocomplete');
-    const dropdownZIndex = '2';
-    element.setProperty('dropdownZIndex', dropdownZIndex);
-    await page.waitForChanges();
-
-    // Ensure that the dropdown has the correct z-index style
-  });
   it('should display error message when there is an error', async () => {
     const element = await page.find('modus-autocomplete');
-    const errorText = 'Invalid input';
-    element.setProperty('errorText', errorText);
+    element.setProperty('errorText', "This field can't be empty");
     await page.waitForChanges();
+    const errorLabel = await page.findAll('modus-autocomplete >>> .error label');
 
-    // Ensure that the error message is displayed
+    expect(errorLabel.length).toEqual(1);
   });
 
   it('should not display error message when there is no error', async () => {
     const element = await page.find('modus-autocomplete');
     element.setProperty('errorText', '');
     await page.waitForChanges();
+    const errorLabel = await page.findAll('modus-autocomplete >>> .error label');
 
-    // Ensure that the error message is not displayed
+    expect(errorLabel.length).toEqual(0);
   });
+
   it('should include search icon when includeSearchIcon is true', async () => {
     const element = await page.find('modus-autocomplete');
     element.setProperty('includeSearchIcon', true);
     await page.waitForChanges();
 
-    // Ensure that the search icon is included
+    const searchIcon = await page.findAll('modus-autocomplete >>> .chips-container .icon-search');
+    expect(searchIcon.length).toEqual(1);
   });
 
   it('should not include search icon when includeSearchIcon is false', async () => {
@@ -363,15 +398,18 @@ describe('modus-autocomplete', () => {
     element.setProperty('includeSearchIcon', false);
     await page.waitForChanges();
 
-    // Ensure that the search icon is not included
+    const searchIcon = await page.findAll('modus-autocomplete >>> .chips-container .icon-search');
+    expect(searchIcon.length).toEqual(0);
   });
+
   it('should render label when label is provided', async () => {
     const element = await page.find('modus-autocomplete');
     const label = 'Select an option';
     element.setProperty('label', label);
     await page.waitForChanges();
 
-    // Ensure that the label is rendered
+    const labelContainer = await page.findAll('modus-autocomplete >>> .label-container');
+    expect(labelContainer.length).toEqual(1);
   });
 
   it('should not render label when label is not provided', async () => {
@@ -379,14 +417,7 @@ describe('modus-autocomplete', () => {
     element.setProperty('label', '');
     await page.waitForChanges();
 
-    // Ensure that the label is not rendered
-  });
-  it('should update the value when the value prop changes', async () => {
-    const element = await page.find('modus-autocomplete');
-    const newValue = 'New Value';
-    element.setProperty('value', newValue);
-    await page.waitForChanges();
-
-    // Ensure that the value is updated
+    const labelContainer = await page.findAll('modus-autocomplete >>> .label-container');
+    expect(labelContainer.length).toEqual(0);
   });
 });

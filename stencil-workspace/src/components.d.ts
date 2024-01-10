@@ -120,6 +120,10 @@ export namespace Components {
          */
         "label": string;
         /**
+          * When enabled, multiple options can be selected in the component. And selected options are shown as chips in the input.
+         */
+        "multiple": boolean;
+        /**
           * The autocomplete's no results sub-text.
          */
         "noResultsFoundSubtext": string;
@@ -2114,6 +2118,10 @@ declare namespace LocalJSX {
           * The autocomplete's label.
          */
         "label"?: string;
+        /**
+          * When enabled, multiple options can be selected in the component. And selected options are shown as chips in the input.
+         */
+        "multiple"?: boolean;
         /**
           * The autocomplete's no results sub-text.
          */
