@@ -115,7 +115,7 @@ export class ModusAutocomplete {
   }
 
   @Listen('mousedown', { target: 'document' })
-  outsideElementClickHandler(event: MouseEvent): void {
+  onMouseDown(event: MouseEvent): void {
     if (!this.hasFocus) {
       return;
     }
@@ -157,15 +157,12 @@ export class ModusAutocomplete {
     const optionValue = option.getAttribute(DATA_SEARCH_VALUE);
     const optionId = option.getAttribute(DATA_ID);
     this.handleSearchChange(optionValue);
-    this.hasFocus = false;
-    if (this.disableCloseOnSelect) {
-      this.hasFocus = true;
-    }
+    this.hasFocus = this.disableCloseOnSelect;
     this.optionSelected.emit(optionId);
   };
 
   handleInputBlur = () => {
-    this.hasFocus = false;
+    this.hasFocus = this.disableCloseOnSelect;
   };
 
   handleOptionKeyPress = (event: any, option: any, isCustomOption = false) => {
@@ -181,11 +178,8 @@ export class ModusAutocomplete {
 
   handleOptionClick = (option: ModusAutocompleteOption) => {
     this.handleSearchChange(option.value);
-    this.hasFocus = false;
+    this.hasFocus = this.disableCloseOnSelect;
     this.optionSelected.emit(option.id);
-    if (this.disableCloseOnSelect) {
-      this.hasFocus = true;
-    }
   };
 
   handleSearchChange = (search: string) => {
@@ -288,10 +282,7 @@ export class ModusAutocomplete {
         }}
         onFocusout={() => {
           if (this.hasFocus) {
-            this.hasFocus = false;
-          }
-          if (this.disableCloseOnSelect) {
-            this.hasFocus = true;
+            this.hasFocus = this.disableCloseOnSelect;
           }
         }}>
         {this.TextInput()}
