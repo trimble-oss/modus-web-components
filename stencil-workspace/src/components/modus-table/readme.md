@@ -89,9 +89,8 @@ Type: `Promise<void>`
 
 - [modus-table-toolbar](./parts/panel/modus-table-toolbar)
 - [modus-table-filler-column](./parts/fillerColumn)
+- [modus-table-pagination](parts)
 - [modus-table-row-actions-menu](./parts/row/actions/modus-table-row-actions-menu)
-- [modus-select](../modus-select)
-- [modus-pagination](../modus-pagination)
 - [modus-tooltip](../modus-tooltip)
 - [modus-checkbox](../modus-checkbox)
 - [modus-table-row-actions-cell](./parts/row/actions)
@@ -102,9 +101,8 @@ Type: `Promise<void>`
 graph TD;
   modus-table --> modus-table-toolbar
   modus-table --> modus-table-filler-column
+  modus-table --> modus-table-pagination
   modus-table --> modus-table-row-actions-menu
-  modus-table --> modus-select
-  modus-table --> modus-pagination
   modus-table --> modus-tooltip
   modus-table --> modus-checkbox
   modus-table --> modus-table-row-actions-cell
@@ -113,6 +111,8 @@ graph TD;
   modus-table-dropdown-menu --> modus-table-columns-visibility
   modus-table-columns-visibility --> modus-checkbox
   modus-table-columns-visibility --> modus-button
+  modus-table-pagination --> modus-select
+  modus-table-pagination --> modus-pagination
   modus-table-row-actions-menu --> modus-list
   modus-table-row-actions-menu --> modus-list-item
   modus-table-row-actions-cell --> modus-table-row-actions

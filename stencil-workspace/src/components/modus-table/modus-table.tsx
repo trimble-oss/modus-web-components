@@ -62,7 +62,6 @@ import {
   ModusTableRowSelectionOptions,
 } from './models/modus-table.models';
 import { ModusTableColumnDropIndicator, ModusTableColumnDragItem } from './parts/columnHeader/modus-table-column-drag-item';
-import { ModusTablePagination } from './parts/modus-table-pagination';
 import { ModusTableFooter } from './parts/modus-table-footer';
 import { TableHeaderDragDrop } from './utilities/table-header-drag-drop.utility';
 import ModusTableCore from './modus-table.core';
@@ -714,7 +713,7 @@ export class ModusTable {
   }
 
   renderPagination(): JSX.Element | null {
-    return this.pagination && <ModusTablePagination context={this._context} />;
+    return this.pagination && <modus-table-pagination tableContext={this._context} />;
   }
 
   render(): void {

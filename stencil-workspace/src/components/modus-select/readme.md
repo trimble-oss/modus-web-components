@@ -54,14 +54,14 @@ Type: `Promise<void>`
 
 ### Used by
 
- - [modus-table](../modus-table)
  - [modus-table-cell-editor](../modus-table/parts/cell/modus-table-cell-editor)
+ - [modus-table-pagination](../modus-table/parts)
 
 ### Graph
 ```mermaid
 graph TD;
-  modus-table --> modus-select
   modus-table-cell-editor --> modus-select
+  modus-table-pagination --> modus-select
   style modus-select fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

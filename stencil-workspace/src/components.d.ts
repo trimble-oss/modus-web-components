@@ -1197,6 +1197,9 @@ export namespace Components {
         "container"?: HTMLElement;
         "summaryRow": boolean;
     }
+    interface ModusTablePagination {
+        "tableContext": TableContext;
+    }
     interface ModusTableRowActions {
         "context": TableContext;
         "row": Row<unknown>;
@@ -1902,6 +1905,12 @@ declare global {
         prototype: HTMLModusTableFillerColumnElement;
         new (): HTMLModusTableFillerColumnElement;
     };
+    interface HTMLModusTablePaginationElement extends Components.ModusTablePagination, HTMLStencilElement {
+    }
+    var HTMLModusTablePaginationElement: {
+        prototype: HTMLModusTablePaginationElement;
+        new (): HTMLModusTablePaginationElement;
+    };
     interface HTMLModusTableRowActionsElement extends Components.ModusTableRowActions, HTMLStencilElement {
     }
     var HTMLModusTableRowActionsElement: {
@@ -2013,6 +2022,7 @@ declare global {
         "modus-table-columns-visibility": HTMLModusTableColumnsVisibilityElement;
         "modus-table-dropdown-menu": HTMLModusTableDropdownMenuElement;
         "modus-table-filler-column": HTMLModusTableFillerColumnElement;
+        "modus-table-pagination": HTMLModusTablePaginationElement;
         "modus-table-row-actions": HTMLModusTableRowActionsElement;
         "modus-table-row-actions-cell": HTMLModusTableRowActionsCellElement;
         "modus-table-row-actions-menu": HTMLModusTableRowActionsMenuElement;
@@ -3370,6 +3380,9 @@ declare namespace LocalJSX {
         "container"?: HTMLElement;
         "summaryRow"?: boolean;
     }
+    interface ModusTablePagination {
+        "tableContext"?: TableContext;
+    }
     interface ModusTableRowActions {
         "context"?: TableContext;
         "onOverflowRowActions"?: (event: ModusTableRowActionsCustomEvent<TableRowActionsMenuEvent>) => void;
@@ -3731,6 +3744,7 @@ declare namespace LocalJSX {
         "modus-table-columns-visibility": ModusTableColumnsVisibility;
         "modus-table-dropdown-menu": ModusTableDropdownMenu;
         "modus-table-filler-column": ModusTableFillerColumn;
+        "modus-table-pagination": ModusTablePagination;
         "modus-table-row-actions": ModusTableRowActions;
         "modus-table-row-actions-cell": ModusTableRowActionsCell;
         "modus-table-row-actions-menu": ModusTableRowActionsMenu;
@@ -3795,6 +3809,7 @@ declare module "@stencil/core" {
              * ModusFillerColumn is to fill empty space within a table or grid when the content in other columns is not wide enough to occupy the entire available width
              */
             "modus-table-filler-column": LocalJSX.ModusTableFillerColumn & JSXBase.HTMLAttributes<HTMLModusTableFillerColumnElement>;
+            "modus-table-pagination": LocalJSX.ModusTablePagination & JSXBase.HTMLAttributes<HTMLModusTablePaginationElement>;
             "modus-table-row-actions": LocalJSX.ModusTableRowActions & JSXBase.HTMLAttributes<HTMLModusTableRowActionsElement>;
             "modus-table-row-actions-cell": LocalJSX.ModusTableRowActionsCell & JSXBase.HTMLAttributes<HTMLModusTableRowActionsCellElement>;
             "modus-table-row-actions-menu": LocalJSX.ModusTableRowActionsMenu & JSXBase.HTMLAttributes<HTMLModusTableRowActionsMenuElement>;

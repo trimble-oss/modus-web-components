@@ -1317,6 +1317,28 @@ export declare interface ModusTableFillerColumn extends Components.ModusTableFil
 
 
 @ProxyCmp({
+  inputs: ['tableContext']
+})
+@Component({
+  selector: 'modus-table-pagination',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['tableContext'],
+})
+export class ModusTablePagination {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
+export declare interface ModusTablePagination extends Components.ModusTablePagination {}
+
+
+@ProxyCmp({
   inputs: ['context', 'row']
 })
 @Component({

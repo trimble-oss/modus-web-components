@@ -29,12 +29,12 @@
 
 ### Used by
 
- - [modus-table](../modus-table)
+ - [modus-table-pagination](../modus-table/parts)
 
 ### Graph
 ```mermaid
 graph TD;
-  modus-table --> modus-pagination
+  modus-table-pagination --> modus-pagination
   style modus-pagination fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
