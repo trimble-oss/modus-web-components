@@ -160,7 +160,6 @@ export class ModusAutocomplete {
     this.hasFocus = false;
     if (this.disableCloseOnSelect) {
       this.hasFocus = true;
-      this.clearable = true;
     }
     this.optionSelected.emit(optionId);
   };
@@ -186,7 +185,6 @@ export class ModusAutocomplete {
     this.optionSelected.emit(option.id);
     if (this.disableCloseOnSelect) {
       this.hasFocus = true;
-      this.clearable = true;
     }
   };
 
