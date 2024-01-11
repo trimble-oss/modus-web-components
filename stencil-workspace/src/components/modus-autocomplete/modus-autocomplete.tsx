@@ -203,11 +203,10 @@ export class ModusAutocomplete {
   };
 
   updateVisibleCustomOptions = (search = '') => {
-    
     if (!this.hasFocus) {
       return;
     }
-    
+
     const slotted = this.el.shadowRoot?.querySelector('slot') as HTMLSlotElement;
     if (!slotted || typeof slotted.assignedNodes !== 'function') {
       return;
