@@ -200,7 +200,6 @@ export class ModusAutocomplete {
     if (!this.hasFocus) {
       return;
     }
-
     const slotted = this.el.shadowRoot?.querySelector('slot') as HTMLSlotElement;
     if (!slotted || typeof slotted.assignedNodes !== 'function') {
       return;
@@ -209,7 +208,7 @@ export class ModusAutocomplete {
     this.customOptions = slotted.assignedNodes().filter((node) => node.nodeName !== '#text');
 
     search = search || '';
-    if (search.length === 0) {
+    if (search.length === 0 || this.disableCloseOnSelect) {
       this.visibleCustomOptions = this.customOptions;
       return;
     }
@@ -227,7 +226,7 @@ export class ModusAutocomplete {
     search = search || '';
     const isSearchEmpty = search.length === 0;
 
-    if (isSearchEmpty && !this.showOptionsOnFocus) {
+    if (isSearchEmpty && !this.showOptionsOnFocus || this.disableCloseOnSelect) {
       this.visibleOptions = this.options as ModusAutocompleteOption[];
       return;
     }
