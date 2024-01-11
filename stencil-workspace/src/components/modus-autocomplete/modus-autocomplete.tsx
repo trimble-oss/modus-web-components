@@ -327,8 +327,8 @@ export class ModusAutocomplete {
           {this.selectedChips.map((chip) => (
             <modus-chip value={chip} size="medium" show-close onCloseClick={() => this.handleCloseClick(chip)}></modus-chip>
           ))}
-        {this.TextInput()}
-        {showClearIcon && (
+          {this.TextInput()}
+          {showClearIcon && (
             <span class="icons-clear" role="button" aria-label="Clear entry">
               <IconClose onClick={() => this.handleClear()} size="16" />
             </span>
