@@ -96,6 +96,10 @@ export namespace Components {
          */
         "clearable": boolean;
         /**
+          * Whether the autocomplete's options always display on select.
+         */
+        "disableCloseOnSelect": boolean;
+        /**
           * Whether the input is disabled.
          */
         "disabled": boolean;
@@ -2090,6 +2094,10 @@ declare namespace LocalJSX {
           * Whether the input has a clear button.
          */
         "clearable"?: boolean;
+        /**
+          * Whether the autocomplete's options always display on select.
+         */
+        "disableCloseOnSelect"?: boolean;
         /**
           * Whether the input is disabled.
          */
