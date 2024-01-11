@@ -258,6 +258,82 @@ describe('modus-autocomplete', () => {
     expect(options.length).toEqual(2);
   });
 
+  it('should display noResultsFoundText prop when value property change and not matching', async () => {
+    const element = await page.find('modus-autocomplete');
+    element.setProperty('options', ['Test 1', 'Test 2']);
+    await page.waitForChanges();
+
+    let textInput = await page.find('modus-autocomplete >>> modus-text-input');
+    await textInput.click();
+    await textInput.type('Test');
+    await page.waitForChanges();
+
+    const options = await page.findAll('modus-autocomplete >>> .options-container li');
+
+    await options[1].click();
+
+    element.setProperty('value', 'hello');
+
+    await page.waitForChanges();
+
+    textInput = await page.find('modus-autocomplete >>> modus-text-input');
+    await textInput.click();
+
+    const noResultsFoundMessage = await page.find('modus-autocomplete >>> .no-results');
+    expect(noResultsFoundMessage.innerText.includes('No results found')).toBeTruthy();
+  });
+
+  it('should display all options when value property change to empty value', async () => {
+    const element = await page.find('modus-autocomplete');
+    element.setProperty('options', ['Test 1', 'Test 2']);
+    await page.waitForChanges();
+
+    const textInput = await page.find('modus-autocomplete >>> modus-text-input');
+    await textInput.click();
+    await textInput.type('Test 1');
+    await page.waitForChanges();
+
+    let options = await page.findAll('modus-autocomplete >>> .options-container li');
+
+    expect(options.length).toBe(1);
+
+    element.setProperty('value', '');
+
+    await page.waitForChanges();
+
+    await textInput.click();
+
+    await textInput.type('T');
+    await page.waitForChanges();
+    options = await page.findAll('modus-autocomplete >>> .options-container li');
+    expect(options.length).toBe(2);
+  });
+
+  it('should display selected option when value property change to a matching option', async () => {
+    const element = await page.find('modus-autocomplete');
+    element.setProperty('options', ['Test 1', 'Test 2']);
+    await page.waitForChanges();
+
+    const textInput = await page.find('modus-autocomplete >>> modus-text-input');
+    await textInput.click();
+    await textInput.type('Test 1');
+    await page.waitForChanges();
+
+    let options = await page.findAll('modus-autocomplete >>> .options-container li');
+
+    expect(options.length).toBe(1);
+
+    element.setProperty('value', 'Test 2');
+
+    await page.waitForChanges();
+
+    await textInput.click();
+
+    await page.waitForChanges();
+    options = await page.findAll('modus-autocomplete >>> .options-container li');
+    expect(options.length).toBe(1);
+  });
+
   it('should add chip when option is selected and multiple is true', async () => {
     const element = await page.find('modus-autocomplete');
     element.setProperty('multiple', true);
