@@ -38,6 +38,9 @@ export class ModusAutocomplete {
   /** Whether the input is disabled. */
   @Prop() disabled: boolean;
 
+  /** Whether the autocomplete's options always display on select. */
+  @Prop() disableCloseOnSelect: boolean;
+
   /** The autocomplete's dropdown's max height. */
   @Prop() dropdownMaxHeight = '300px';
 
@@ -146,7 +149,7 @@ export class ModusAutocomplete {
     this.value?.length > 0;
 
   displayOptions = () => {
-    const showOptions = this.showOptionsOnFocus || this.value?.length > 0;
+    const showOptions = this.showOptionsOnFocus || this.value?.length > 0 || this.disableCloseOnSelect;
     return this.hasFocus && showOptions && !this.disabled;
   };
 
@@ -155,6 +158,10 @@ export class ModusAutocomplete {
     const optionId = option.getAttribute(DATA_ID);
     this.handleSearchChange(optionValue);
     this.hasFocus = false;
+    if (this.disableCloseOnSelect) {
+      this.hasFocus = true;
+      this.clearable = true;
+    }
     this.optionSelected.emit(optionId);
   };
 
@@ -177,6 +184,10 @@ export class ModusAutocomplete {
     this.handleSearchChange(option.value);
     this.hasFocus = false;
     this.optionSelected.emit(option.id);
+    if (this.disableCloseOnSelect) {
+      this.hasFocus = true;
+      this.clearable = true;
+    }
   };
 
   handleSearchChange = (search: string) => {
@@ -278,6 +289,9 @@ export class ModusAutocomplete {
         onFocusout={() => {
           if (this.hasFocus) {
             this.hasFocus = false;
+          }
+          if (this.disableCloseOnSelect) {
+            this.hasFocus = true;
           }
         }}>
         {this.TextInput()}
