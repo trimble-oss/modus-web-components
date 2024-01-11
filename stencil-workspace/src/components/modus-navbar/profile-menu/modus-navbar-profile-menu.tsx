@@ -39,7 +39,7 @@ export class ModusNavbarProfileMenu {
           ) : (
             <span class="initials">{this.initials}</span>
           )}
-          <div>
+          <div class="user-details">
             <div class="username">{this.username}</div>
             <div class="email">{this.email}</div>
           </div>
