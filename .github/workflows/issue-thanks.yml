@@ -9,12 +9,12 @@ jobs:
     permissions:
       issues: write
     runs-on: ubuntu-latest
-    if: ${{ github.actor != 'coliff' && github.actor != 'egunther39' && github.actor != 'enowak1031' && github.actor != 'msankaran0712' && github.actor != 'soniakaukonen' && github.repository == 'trimble-oss/modus-web-components' }}
+    if: ${{ github.actor != 'cjwinsor' && github.actor != 'coliff' && github.actor != 'egunther39' && github.actor != 'enowak1031' && github.actor != 'msankaran0712' && github.actor != 'rthanga1' && github.repository == 'trimble-oss/modus-web-components' }}
     steps:
       - name: awaiting reply
         uses: actions-cool/issues-helper@v3
         with:
-          actions: "create-comment"
+          actions: 'create-comment'
           body: |
             Hello @${{ github.event.issue.user.login }}! Thanks for opening an issue. The Modus core team will get back to you soon (usually within 24-hours) and provide guidance on how to proceed. Contributors are welcome to participate in the discussion and provide their input on how to best solve the issue, and even submit a PR if they want to.
 
