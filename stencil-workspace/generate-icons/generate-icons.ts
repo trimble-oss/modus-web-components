@@ -63,7 +63,8 @@ export async function generateIconComponentsAsync() {
 */
 async function generateModusIconMapAsync() {
   try {
-    const generatedIconFileNames = await fs.readdir(GENERATED_ICONS_OUTPUT_FOLDER);
+    const files = await fs.readdir(GENERATED_ICONS_OUTPUT_FOLDER);
+    const generatedIconFileNames = files.filter((file) => path.extname(file) === '.tsx');
     const modusIconMapFileContents = await buildModusIconMapFileContentsAsync(generatedIconFileNames);
     await fs.writeFile(MODUS_ICON_MAP_OUTPUT_PATH, modusIconMapFileContents);
   } catch (error) {
