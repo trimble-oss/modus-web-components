@@ -45,7 +45,7 @@ const MODUS_ICON_UTILITIES_TEMPLATE = path.join(__dirname, 'ModusIconUtilities.t
   Generate the individual Icon functional components containing the SVGs based on each icon
   within the modus-icons package.
 */
-export async function generateIconComponentsAsync() {
+async function generateIconComponentsAsync() {
   try {
     const nodeModuleSvgFileNames = await fs.readdir(NODE_MODULE_SVG_FOLDER);
     for (const nodeModuleSvgFileName of nodeModuleSvgFileNames) {
@@ -90,7 +90,7 @@ async function generateModusIconUtilitiesAsync() {
 //                       Helper functions
 ///////////////////////////////////////////////////////////////////
 
-export async function buildIconComponentFileContentsAsync(
+async function buildIconComponentFileContentsAsync(
   nodeModuleSvgFileName: string
 ): Promise<{ generatedFileContents: string; componentName: string }> {
   const nodeModuleBaseFileName = path.basename(nodeModuleSvgFileName, '.svg');
@@ -125,7 +125,7 @@ export async function buildIconComponentFileContentsAsync(
   }
 }
 
-export function buildModusIconMapFileContentsAsync(generatedIconComponentFileNames: string[]): Promise<string> {
+function buildModusIconMapFileContentsAsync(generatedIconComponentFileNames: string[]): Promise<string> {
   const icons = generatedIconComponentFileNames.map((iconFileName) => {
     const baseName = path.basename(iconFileName, '.tsx');
     const caseName = pascalCaseToSnakeCase(baseName).replace(/icon_/, '');
@@ -139,7 +139,7 @@ export function buildModusIconMapFileContentsAsync(generatedIconComponentFileNam
   return renderFileContents(MODUS_ICON_MAP_TEMPLATE, templateData);
 }
 
-export function buildIconUtilitiesFileContentsAsync(generatedIconComponentFileNames: string[]): Promise<string> {
+function buildIconUtilitiesFileContentsAsync(generatedIconComponentFileNames: string[]): Promise<string> {
   let iconNames = generatedIconComponentFileNames
     .filter((generatedSvgFileName) => path.extname(generatedSvgFileName) === '.tsx')
     .map(
