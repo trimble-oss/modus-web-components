@@ -42,7 +42,8 @@ const MODUS_ICON_UTILITIES_TEMPLATE = 'ModusIconUtilities.template.ejs';
 })();
 
 /*
-  Generate the individual Icon functional components containing the SVGs based on each icon within the modus-icons package.
+  Generate the individual Icon functional components containing the SVGs based on each icon
+  within the modus-icons package.
 */
 export async function generateIconComponentsAsync() {
   try {
@@ -58,7 +59,7 @@ export async function generateIconComponentsAsync() {
 
 /*
   Generate the ModusIconMap component based on the files that are generated in the
-  previous `generateSvgFiles()` function.
+  previous steps.
 */
 async function generateModusIconMapAsync() {
   try {
@@ -72,7 +73,7 @@ async function generateModusIconMapAsync() {
 
 /*
   Generate the array of icon names and the ModusIconName type based on the files
-  that are generated in the previous `generateSvgFiles()` function.
+  that are generated in the previous steps.
 */
 async function generateModusIconUtilitiesAsync() {
   try {
