@@ -28,6 +28,7 @@
         transform: translateX($rem-14px);
       }
     }
+
     label {
       font-size: $rem-12px;
     }
@@ -95,8 +96,8 @@
 
   label {
     color: $modus-switch-label-color;
-    margin-left: $rem-8px;
     margin-bottom: 0.01rem;
+    margin-left: $rem-8px;
   }
 
   &.disabled {

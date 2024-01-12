@@ -19,14 +19,14 @@ interface ModusIconUtilitiesTemplateData {
   iconNames: string[];
 }
 
-const NODE_MODULE_SVG_FOLDER = '../node_modules/@trimble-oss/modus-icons/dist/modus-solid/svg';
-const GENERATED_ICONS_OUTPUT_FOLDER = '../src/icons/generated-icons';
-const MODUS_ICON_UTIL_OUTPUT_PATH = '../src/icons/ModusIconUtilities.ts';
-const MODUS_ICON_MAP_OUTPUT_PATH = '../src/icons/ModusIconMap.tsx';
+const NODE_MODULE_SVG_FOLDER = path.join(__dirname, '../node_modules/@trimble-oss/modus-icons/dist/modus-solid/svg');
+const GENERATED_ICONS_OUTPUT_FOLDER = path.join(__dirname, '../src/icons/generated-icons');
+const MODUS_ICON_UTIL_OUTPUT_PATH = path.join(__dirname, '../src/icons/ModusIconUtilities.ts');
+const MODUS_ICON_MAP_OUTPUT_PATH = path.join(__dirname, '../src/icons/ModusIconMap.tsx');
 
-const ICON_FUNCTIONAL_COMPONENT_TEMPLATE = 'IconFunctionalComponent.template.ejs';
-const MODUS_ICON_MAP_TEMPLATE = 'ModusIconMap.template.ejs';
-const MODUS_ICON_UTILITIES_TEMPLATE = 'ModusIconUtilities.template.ejs';
+const ICON_FUNCTIONAL_COMPONENT_TEMPLATE = path.join(__dirname, 'IconFunctionalComponent.template.ejs');
+const MODUS_ICON_MAP_TEMPLATE = path.join(__dirname, 'ModusIconMap.template.ejs');
+const MODUS_ICON_UTILITIES_TEMPLATE = path.join(__dirname, 'ModusIconUtilities.template.ejs');
 
 (async function generateIcons() {
   console.log(colors.blue('Generating Modus Icons files...'));
@@ -110,9 +110,7 @@ export async function buildIconComponentFileContentsAsync(
     svgHtml,
   };
 
-  const templatePath = path.join(__dirname, ICON_FUNCTIONAL_COMPONENT_TEMPLATE);
-
-  const generatedFileContents = await renderFileContents(templatePath, templateData);
+  const generatedFileContents = await renderFileContents(ICON_FUNCTIONAL_COMPONENT_TEMPLATE, templateData);
 
   return { generatedFileContents, componentName };
 
@@ -137,9 +135,7 @@ export function buildModusIconMapFileContentsAsync(generatedIconComponentFileNam
     icons,
   };
 
-  const templatePath = path.join(__dirname, MODUS_ICON_MAP_TEMPLATE);
-
-  return renderFileContents(templatePath, templateData);
+  return renderFileContents(MODUS_ICON_MAP_TEMPLATE, templateData);
 }
 
 export function buildIconUtilitiesFileContentsAsync(generatedIconComponentFileNames: string[]): Promise<string> {
@@ -153,9 +149,7 @@ export function buildIconUtilitiesFileContentsAsync(generatedIconComponentFileNa
     iconNames,
   };
 
-  const templatePath = path.join(__dirname, MODUS_ICON_UTILITIES_TEMPLATE);
-
-  return renderFileContents(templatePath, templateData);
+  return renderFileContents(MODUS_ICON_UTILITIES_TEMPLATE, templateData);
 }
 
 async function renderFileContents(templatePath: string, templateData: any): Promise<string> {

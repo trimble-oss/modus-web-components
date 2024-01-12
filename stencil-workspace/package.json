@@ -37,7 +37,7 @@
     "full": "npm ci && npm run lint && npm run build && npm run test && npm run ci-storybook",
     "ci-storybook": "cd storybook && npm ci && npm run build-storybook",
     "start-storybook": "npm run build && cd storybook && npm run storybook",
-    "prebuild": "cd generate-icons && tsc generate-icons.ts && node generate-icons.js"
+    "prebuild": "tsc generate-icons/generate-icons.ts && node generate-icons/generate-icons.js"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
