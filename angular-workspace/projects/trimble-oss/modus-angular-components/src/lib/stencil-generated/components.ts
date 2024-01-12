@@ -90,14 +90,14 @@ export declare interface ModusAlert extends Components.ModusAlert {
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'clearable', 'disabled', 'dropdownMaxHeight', 'dropdownZIndex', 'errorText', 'includeSearchIcon', 'label', 'noResultsFoundSubtext', 'noResultsFoundText', 'options', 'placeholder', 'readOnly', 'required', 'showNoResultsFoundMessage', 'showOptionsOnFocus', 'size', 'value']
+  inputs: ['ariaLabel', 'clearable', 'disableCloseOnSelect', 'disabled', 'dropdownMaxHeight', 'dropdownZIndex', 'errorText', 'includeSearchIcon', 'label', 'noResultsFoundSubtext', 'noResultsFoundText', 'options', 'placeholder', 'readOnly', 'required', 'showNoResultsFoundMessage', 'showOptionsOnFocus', 'size', 'value']
 })
 @Component({
   selector: 'modus-autocomplete',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['ariaLabel', 'clearable', 'disabled', 'dropdownMaxHeight', 'dropdownZIndex', 'errorText', 'includeSearchIcon', 'label', 'noResultsFoundSubtext', 'noResultsFoundText', 'options', 'placeholder', 'readOnly', 'required', 'showNoResultsFoundMessage', 'showOptionsOnFocus', 'size', 'value'],
+  inputs: ['ariaLabel', 'clearable', 'disableCloseOnSelect', 'disabled', 'dropdownMaxHeight', 'dropdownZIndex', 'errorText', 'includeSearchIcon', 'label', 'noResultsFoundSubtext', 'noResultsFoundText', 'options', 'placeholder', 'readOnly', 'required', 'showNoResultsFoundMessage', 'showOptionsOnFocus', 'size', 'value'],
 })
 export class ModusAutocomplete {
   protected el: HTMLElement;
