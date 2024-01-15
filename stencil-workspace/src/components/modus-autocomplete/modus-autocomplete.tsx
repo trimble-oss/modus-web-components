@@ -92,9 +92,9 @@ export class ModusAutocomplete {
   @Prop({ mutable: true }) value: string;
   @Watch('value')
   onValueChange() {
-    if (this.hasFocus) {
-      this.updateVisibleOptions(this.value);
-      this.updateVisibleCustomOptions(this.value);
+    if (this.hasFocus && !this.disableCloseOnSelect) {
+      this.updateVisibleOptions(this.value, false);
+      this.updateVisibleCustomOptions(this.value, false);
     }
   }
 
@@ -156,7 +156,7 @@ export class ModusAutocomplete {
   handleCustomOptionClick = (option: any) => {
     const optionValue = option.getAttribute(DATA_SEARCH_VALUE);
     const optionId = option.getAttribute(DATA_ID);
-    this.handleSearchChange(optionValue);
+    this.handleSearchChange(optionValue, true);
     this.hasFocus = this.disableCloseOnSelect;
     this.optionSelected.emit(optionId);
   };
@@ -177,15 +177,14 @@ export class ModusAutocomplete {
   };
 
   handleOptionClick = (option: ModusAutocompleteOption) => {
-    this.handleSearchChange(option.value);
+    this.handleSearchChange(option.value, true);
     this.hasFocus = this.disableCloseOnSelect;
     this.optionSelected.emit(option.id);
   };
 
-  handleSearchChange = (search: string) => {
-    this.updateVisibleOptions(search);
-    this.updateVisibleCustomOptions(search);
-
+  handleSearchChange = (search: string, isClicked?: boolean) => {
+    this.updateVisibleOptions(search, isClicked);
+    this.updateVisibleCustomOptions(search, isClicked);
     this.value = search;
     this.valueChange.emit(search);
   };
@@ -193,10 +192,10 @@ export class ModusAutocomplete {
   handleTextInputValueChange = (event: CustomEvent<string>) => {
     // Cancel the modus-text-input's value change event or else it will bubble to consumer.
     event.stopPropagation();
-    this.handleSearchChange(event.detail);
+    this.handleSearchChange(event.detail, false);
   };
 
-  updateVisibleCustomOptions = (search = '') => {
+  updateVisibleCustomOptions = (search = '', isClicked?: boolean) => {
     if (!this.hasFocus) {
       return;
     }
@@ -208,7 +207,7 @@ export class ModusAutocomplete {
     this.customOptions = slotted.assignedNodes().filter((node) => node.nodeName !== '#text');
 
     search = search || '';
-    if (search.length === 0 || this.disableCloseOnSelect) {
+    if (search.length === 0 || (isClicked && this.disableCloseOnSelect)) {
       this.visibleCustomOptions = this.customOptions;
       return;
     }
@@ -219,14 +218,14 @@ export class ModusAutocomplete {
     this.containsSlottedElements = this.customOptions.length > 0;
   };
 
-  updateVisibleOptions = (search = '') => {
+  updateVisibleOptions = (search = '', isClicked?: boolean) => {
     if (!this.hasFocus) {
       return;
     }
     search = search || '';
     const isSearchEmpty = search.length === 0;
 
-    if (isSearchEmpty && !this.showOptionsOnFocus || this.disableCloseOnSelect) {
+    if ((isSearchEmpty && !this.showOptionsOnFocus) || (isClicked && this.disableCloseOnSelect)) {
       this.visibleOptions = this.options as ModusAutocompleteOption[];
       return;
     }
