@@ -42,6 +42,14 @@ export default {
         type: { summary: 'string' },
       },
     },
+    disableCloseOnSelect: {
+      name: 'disable-close-on-select',
+      description: 'Whether the autocomplete options always display on select',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      },
+    },
     errorText: {
       name: 'error-text',
       description: "The autocomplete's error text",
@@ -158,6 +166,7 @@ export const Default = ({
                           disabled,
                           dropdownMaxHeight,
                           dropdownZIndex,
+                          disableCloseOnSelect,
                           errorText,
                           includeSearchIcon,
                           label,
@@ -176,6 +185,7 @@ export const Default = ({
       aria-label=${ariaLabel}
       clearable=${clearable}
       disabled=${disabled}
+      disable-close-on-select=${disableCloseOnSelect}
       dropdown-max-height=${dropdownMaxHeight}
       dropdown-z-index=${dropdownZIndex}
       error-text=${errorText}
@@ -198,6 +208,7 @@ Default.args = {
   ariaLabel: 'autocomplete',
   clearable: false,
   disabled: false,
+  disableCloseOnSelect: false,
   dropdownMaxHeight: '300px',
   dropdownZIndex: '1',
   errorText: '',
@@ -231,6 +242,7 @@ export const WithOption = ({
                              disabled,
                              dropdownMaxHeight,
                              dropdownZIndex,
+                             disableCloseOnSelect,
                              errorText,
                              includeSearchIcon,
                              label,
@@ -251,6 +263,7 @@ export const WithOption = ({
       disabled=${disabled}
       dropdown-max-height=${dropdownMaxHeight}
       dropdown-z-index=${dropdownZIndex}
+      disable-close-on-select=${disableCloseOnSelect}
       error-text=${errorText}
       include-search-icon=${includeSearchIcon}
       label=${label}
@@ -273,6 +286,7 @@ WithOption.args = {
   disabled: false,
   dropdownMaxHeight: '300px',
   dropdownZIndex: '1',
+  disableCloseOnSelect: false,
   errorText: '',
   includeSearchIcon: true,
   label: 'Autocomplete using option model',
@@ -303,6 +317,7 @@ export const WithCustomOption = ({
                                    disabled,
                                    dropdownMaxHeight,
                                    dropdownZIndex,
+                                   disableCloseOnSelect,
                                    errorText,
                                    includeSearchIcon,
                                    label,
@@ -322,6 +337,7 @@ export const WithCustomOption = ({
       disabled=${disabled}
       dropdown-max-height=${dropdownMaxHeight}
       dropdown-z-index=${dropdownZIndex}
+      disable-close-on-select=${disableCloseOnSelect}
       error-text=${errorText}
       include-search-icon=${includeSearchIcon}
       label=${label}
@@ -351,6 +367,7 @@ WithCustomOption.args = {
   disabled: false,
   dropdownMaxHeight: '300px',
   dropdownZIndex: '1',
+  disableCloseOnSelect: false,
   errorText: '',
   includeSearchIcon: true,
   label: 'Employee Search',
