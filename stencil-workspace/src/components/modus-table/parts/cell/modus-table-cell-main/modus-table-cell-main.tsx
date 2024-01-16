@@ -40,6 +40,7 @@ export class ModusTableCellMain {
   @Prop() valueChange: (props: TableCellEdited) => void;
 
   @State() editMode: boolean;
+  @State() hasEllipsis: boolean;
   @Watch('editMode') onEditModeChange(newValue: boolean) {
     if (newValue) this.cellEl.classList.add('edit-mode');
     else this.cellEl.classList.remove('edit-mode');
@@ -59,7 +60,17 @@ export class ModusTableCellMain {
     this.cellEl.addEventListener('keydown', this.onCellKeyDown);
     this.cellEl.addEventListener('blur', this.onCellBlur);
   }
-
+  componentDidLoad() {
+    this.checkEllipsis();
+  }
+  checkEllipsis() {
+    const span = this.el.querySelector('span');
+    console.log(span);
+    if (span) {
+      const value = span.offsetWidth < span.scrollWidth;
+      this.hasEllipsis = value;
+    }
+  }
   disconnectedCallback() {
     if (this.cellEl) {
       this.cellEl.removeEventListener('click', this.onCellClick);
@@ -177,12 +188,17 @@ export class ModusTableCellMain {
         return CellFormatter(this.cell.column.columnDef.cell, this.cell.getContext());
       }
     };
-
+    this.checkEllipsis();
     return (
       <div class={classes}>
         {this.hasRowsExpandable && <ModusTableCellExpandIcons row={row} />}
-
-        <span class="wrap-text">{renderCell()}</span>
+        {this.hasEllipsis ? (
+          <modus-tooltip text={cellValue.toString()} position="top">
+            <span class="wrap-text">{renderCell()}</span>
+          </modus-tooltip>
+        ) : (
+          <span class="wrap-text">{renderCell()}</span>
+        )}{' '}
       </div>
     );
   }
