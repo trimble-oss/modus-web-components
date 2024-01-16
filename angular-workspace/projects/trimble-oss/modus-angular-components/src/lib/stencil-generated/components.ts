@@ -395,14 +395,14 @@ export declare interface ModusDatePicker extends Components.ModusDatePicker {}
 
 
 @ProxyCmp({
-  inputs: ['animateList', 'ariaLabel', 'customPlacement', 'disabled', 'placement', 'toggleElementId']
+  inputs: ['animateList', 'ariaLabel', 'customPlacement', 'disabled', 'placement', 'showDropdownListBorder', 'toggleElementId']
 })
 @Component({
   selector: 'modus-dropdown',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['animateList', 'ariaLabel', 'customPlacement', 'disabled', 'placement', 'toggleElementId'],
+  inputs: ['animateList', 'ariaLabel', 'customPlacement', 'disabled', 'placement', 'showDropdownListBorder', 'toggleElementId'],
 })
 export class ModusDropdown {
   protected el: HTMLElement;
@@ -501,7 +501,7 @@ export declare interface ModusList extends Components.ModusList {}
 
 
 @ProxyCmp({
-  inputs: ['borderless', 'disabled', 'selected', 'size', 'type'],
+  inputs: ['borderless', 'disabled', 'selected', 'size', 'subText', 'type', 'wrapSubText'],
   methods: ['focusItem']
 })
 @Component({
@@ -509,7 +509,7 @@ export declare interface ModusList extends Components.ModusList {}
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['borderless', 'disabled', 'selected', 'size', 'type'],
+  inputs: ['borderless', 'disabled', 'selected', 'size', 'subText', 'type', 'wrapSubText'],
 })
 export class ModusListItem {
   protected el: HTMLElement;
@@ -1132,7 +1132,7 @@ export declare interface ModusSwitch extends Components.ModusSwitch {
 
 
 @ProxyCmp({
-  inputs: ['columnReorder', 'columnResize', 'columns', 'data', 'density', 'displayOptions', 'fullWidth', 'hover', 'manualPaginationOptions', 'manualSortingOptions', 'maxHeight', 'maxWidth', 'pageSizeList', 'pagination', 'rowActions', 'rowSelection', 'rowSelectionOptions', 'rowsExpandable', 'showSortIconOnHover', 'sort', 'summaryRow', 'toolbar', 'toolbarOptions'],
+  inputs: ['columnReorder', 'columnResize', 'columns', 'data', 'defaultSort', 'density', 'displayOptions', 'fullWidth', 'hover', 'manualPaginationOptions', 'manualSortingOptions', 'maxHeight', 'maxWidth', 'pageSizeList', 'pagination', 'rowActions', 'rowSelection', 'rowSelectionOptions', 'rowsExpandable', 'showSortIconOnHover', 'sort', 'summaryRow', 'toolbar', 'toolbarOptions'],
   methods: ['getColumnData', 'toggleColumnVisibility']
 })
 @Component({
@@ -1140,7 +1140,7 @@ export declare interface ModusSwitch extends Components.ModusSwitch {
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['columnReorder', 'columnResize', 'columns', 'data', 'density', 'displayOptions', 'fullWidth', 'hover', 'manualPaginationOptions', 'manualSortingOptions', 'maxHeight', 'maxWidth', 'pageSizeList', 'pagination', 'rowActions', 'rowSelection', 'rowSelectionOptions', 'rowsExpandable', 'showSortIconOnHover', 'sort', 'summaryRow', 'toolbar', 'toolbarOptions'],
+  inputs: ['columnReorder', 'columnResize', 'columns', 'data', 'defaultSort', 'density', 'displayOptions', 'fullWidth', 'hover', 'manualPaginationOptions', 'manualSortingOptions', 'maxHeight', 'maxWidth', 'pageSizeList', 'pagination', 'rowActions', 'rowSelection', 'rowSelectionOptions', 'rowsExpandable', 'showSortIconOnHover', 'sort', 'summaryRow', 'toolbar', 'toolbarOptions'],
 })
 export class ModusTable {
   protected el: HTMLElement;
