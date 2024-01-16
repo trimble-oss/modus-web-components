@@ -63,7 +63,7 @@ table {
   thead {
     position: sticky;
     top: 0;
-    z-index: 2;
+    z-index: 0;
 
     &.show-resize-cursor {
       th {
@@ -167,7 +167,7 @@ table {
           }
         }
 
-        &:has(modus-tooltip:hover) {
+        &:has(modus-tooltip) {
           // On hover of child, parent overflow property is changed.
           overflow: visible;
         }
