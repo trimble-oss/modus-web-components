@@ -1,4 +1,3 @@
-
 import { newE2EPage } from '@stencil/core/testing';
 
 describe('modus-autocomplete', () => {
@@ -259,12 +258,9 @@ describe('modus-autocomplete', () => {
     expect(options.length).toEqual(2);
   });
 
-  it('ensures it renders changes to autocomplete', async () => {
+  it('should default text input autocomplete to off', async () => {
     const element = await page.find('modus-autocomplete');
     expect(element).toHaveClass('hydrated');
-
-    element.setProperty('autocomplete', 'off');
-    await page.waitForChanges();
 
     const textInput = await page.find('modus-autocomplete >>> modus-text-input');
 
