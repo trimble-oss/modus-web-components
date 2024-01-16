@@ -139,11 +139,11 @@ export const IconMap: FunctionalComponent<IconMapProps> = (props: IconMapProps) 
     case 'expand-all':
       return <IconExpandAll color={props.color} onClick={props.onClick} size={props.size} />;
     case 'file-bar-graph':
-      return <IconFileBarGraph color={props.color} onClick={props.onClick} size={props.size} />;
+      return <IconFileBarGraph color={props.color} onClick={props.onClick} size={props.size} pressed={props.pressed} />;
     case 'folder':
       return <IconFolder color={props.color} onClick={props.onClick} size={props.size} />;
     case 'help':
-      return <IconHelp color={props.color} onClick={props.onClick} size={props.size} />;
+      return <IconHelp color={props.color} onClick={props.onClick} size={props.size} pressed={props.pressed} />;
     case 'indeterminate':
       return <IconIndeterminate color={props.color} onClick={props.onClick} size={props.size} />;
     case 'info':

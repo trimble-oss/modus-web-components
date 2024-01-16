@@ -130,6 +130,7 @@ export class ModusNavbar {
   }
 
   @State() appsMenuVisible: boolean;
+  @State() helpMenuVisible: boolean;
   @State() mainMenuVisible: boolean;
   @State() notificationsMenuVisible: boolean;
   @State() profileMenuVisible: boolean;
@@ -279,6 +280,7 @@ export class ModusNavbar {
 
   private hideMenus(): void {
     this.appsMenuVisible = false;
+    this.helpMenuVisible = false;
     this.mainMenuVisible = false;
     this.notificationsMenuVisible = false;
     this.profileMenuVisible = false;
@@ -287,6 +289,12 @@ export class ModusNavbar {
 
   helpMenuClickHandler(event: MouseEvent): void {
     event.preventDefault();
+    if (this.helpMenuVisible) {
+      this.helpMenuVisible = false;
+    } else {
+      this.hideMenus();
+      this.helpMenuVisible = true;
+    }
     if (this.helpUrl) window.open(this.helpUrl, '_blank');
     this.helpOpen.emit();
   }
@@ -419,7 +427,11 @@ export class ModusNavbar {
                 {this.showHelp && (
                   <div class="navbar-button" data-test-id="help-menu">
                     <span class="navbar-button-icon" tabIndex={0}>
-                      <IconHelp size="24" onClick={(event) => this.helpMenuClickHandler(event)} />
+                      <IconHelp
+                        size="24"
+                        pressed={this.helpMenuVisible}
+                        onClick={(event) => this.helpMenuClickHandler(event)}
+                      />
                     </span>
                   </div>
                 )}

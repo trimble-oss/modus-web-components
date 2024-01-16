@@ -1,15 +1,10 @@
 // eslint-disable-next-line
 import { FunctionalComponent, h } from '@stencil/core';
-
-interface IconProps {
-  color?: string;
-  onClick?: (event: MouseEvent) => void;
-  size?: string;
-}
+import { IconProps } from './IconMap';
 
 export const IconHelp: FunctionalComponent<IconProps> = (props: IconProps) => (
   <svg
-    class="icon-help"
+    class={`icon-help ${props.pressed ? 'pressed' : ''}`}
     height={props.size ?? 16}
     width={props.size ?? 16}
     onClick={props.onClick ? (event) => props.onClick(event) : null}
