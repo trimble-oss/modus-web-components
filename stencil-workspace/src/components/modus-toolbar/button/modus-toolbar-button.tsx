@@ -10,11 +10,11 @@ import { ModusToolbarTooltip } from '../modus-toolbar.models';
 export class ModusToolbarButton {
   @Prop() active: boolean;
   @Prop() disabled: boolean;
-  @Prop() divader: boolean;
+  @Prop() divider: boolean;
   @Prop() iconSrc: string;
   @Prop() textButton: string;
   @Prop() tooltip: ModusToolbarTooltip;
-  @Prop() divaderLayout: 'horizontal' | 'vertical';
+  @Prop() dividerLayout: 'horizontal' | 'vertical';
   @Prop() buttonStyle: 'combined' | 'split';
   @Event() buttonClick: EventEmitter;
 
@@ -29,20 +29,28 @@ export class ModusToolbarButton {
   ]);
 
   render(): unknown {
-    const layout = `${this.classByLayout.get(this.divaderLayout)}`;
-    const buttonClass = `${this.classByStyle.get(this.buttonStyle)} ${this.classByLayout.get(this.divaderLayout)} ${
+    const layout = `${this.classByLayout.get(this.dividerLayout)}`;
+    const buttonClass = `${this.classByStyle.get(this.buttonStyle)} ${this.classByLayout.get(this.dividerLayout)} ${
       this.active ? 'active-button' : ''
     }`;
+    const iconClass = `${this.classByStyle.get(this.buttonStyle)} ${this.active ? 'active-button' : ''}`;
 
     return (
       <Fragment>
-        {this.divader && this.buttonStyle === 'combined' && <div class={layout} />}
+        {this.divider && this.buttonStyle === 'combined' && <div class={layout} />}
         <modus-tooltip text={this.tooltip?.text} position={this.tooltip?.position}>
           <button
             class={buttonClass}
             disabled={this.disabled}
             onClick={() => (!this.disabled ? this.buttonClick.emit() : null)}>
-            {this.iconSrc && <img src={this.iconSrc} />}
+            {this.iconSrc &&
+              (this.buttonStyle === 'split' ? (
+                <div class={iconClass}>
+                  <img src={this.iconSrc} />
+                </div>
+              ) : (
+                <img src={this.iconSrc} />
+              ))}
             {this.textButton}
           </button>
         </modus-tooltip>

@@ -12,8 +12,8 @@
 | `active`        | `active`         |             | `boolean`                    | `undefined` |
 | `buttonStyle`   | `button-style`   |             | `"combined" \| "split"`      | `undefined` |
 | `disabled`      | `disabled`       |             | `boolean`                    | `undefined` |
-| `divader`       | `divader`        |             | `boolean`                    | `undefined` |
-| `divaderLayout` | `divader-layout` |             | `"horizontal" \| "vertical"` | `undefined` |
+| `divider`       | `divider`        |             | `boolean`                    | `undefined` |
+| `dividerLayout` | `divider-layout` |             | `"horizontal" \| "vertical"` | `undefined` |
 | `iconSrc`       | `icon-src`       |             | `string`                     | `undefined` |
 | `textButton`    | `text-button`    |             | `string`                     | `undefined` |
 | `tooltip`       | --               |             | `ModusToolbarTooltip`        | `undefined` |

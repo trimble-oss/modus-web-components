@@ -18,11 +18,15 @@ div {
     box-shadow: $box-shadow-lg;
 
     &.layout-horizontal {
-      border-right: $rem-4px solid $col_gray_light;
+      padding: $rem-4px 0 $rem-4px 0;
+      border-left: $rem-4px solid $col_gray_light;
+      border-right: $rem-8px solid $col_gray_light;
     }
 
     &.layout-vertical {
-      border-bottom: $rem-4px solid $col_gray_light;
+      padding: 0 $rem-4px 0 $rem-4px;
+      border-top: $rem-4px solid $col_gray_light;
+      border-bottom: $rem-8px solid $col_gray_light;
     }
   }
 

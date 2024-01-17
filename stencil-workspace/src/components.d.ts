@@ -1429,8 +1429,8 @@ export namespace Components {
         "active": boolean;
         "buttonStyle": 'combined' | 'split';
         "disabled": boolean;
-        "divader": boolean;
-        "divaderLayout": 'horizontal' | 'vertical';
+        "divider": boolean;
+        "dividerLayout": 'horizontal' | 'vertical';
         "iconSrc": string;
         "textButton": string;
         "tooltip": ModusToolbarTooltip;
@@ -3661,8 +3661,8 @@ declare namespace LocalJSX {
         "active"?: boolean;
         "buttonStyle"?: 'combined' | 'split';
         "disabled"?: boolean;
-        "divader"?: boolean;
-        "divaderLayout"?: 'horizontal' | 'vertical';
+        "divider"?: boolean;
+        "dividerLayout"?: 'horizontal' | 'vertical';
         "iconSrc"?: string;
         "onButtonClick"?: (event: ModusToolbarButtonCustomEvent<any>) => void;
         "textButton"?: string;

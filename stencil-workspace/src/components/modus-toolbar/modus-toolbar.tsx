@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import { Component, Prop, h } from '@stencil/core';
 import { ModusToolbarButton } from './modus-toolbar.models';
 
@@ -36,11 +37,11 @@ export class ModusToolbar {
             class={className}
             active={button.active}
             disabled={button.disabled}
-            divader={button.divader}
+            divider={button.divider}
             iconSrc={button.iconSrc}
             textButton={button.textButton}
             tooltip={button.tooltip}
-            divaderLayout={this.layout}
+            dividerLayout={this.layout}
             buttonStyle={this.toolbarStyle}
             onButtonClick={button.onClick}></modus-toolbar-button>
         ))}

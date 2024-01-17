@@ -1,10 +1,8 @@
 div {
   background-color: $col_gray_0;
-  border-left: $rem-4px solid $col_gray_light;
-  border-top: $rem-4px solid $col_gray_light;
 
   &.layout-horizontal {
-    border-bottom: $rem-4px solid $col_gray_light;
+    border-left: $rem-4px solid $col_gray_light;
     border-right: 0;
     height: $rem-24px;
     width: $rem-1px;
@@ -12,7 +10,7 @@ div {
 
   &.layout-vertical {
     border-bottom: 0;
-    border-right: $rem-4px solid $col_gray_light;
+    border-top: $rem-4px solid $col_gray_light;
     height: $rem-1px;
     width: $rem-24px;
   }
@@ -25,10 +23,11 @@ button {
   display: inline-flex;
   font-family: $primary-font;
   font-weight: $btn-font-weight;
-  height: $rem-32px;
+  height: $rem-24px;
   justify-content: center;
-  min-width: $rem-32px;
-  padding: 0;
+  min-width: $rem-24px;
+  padding: 0 $rem-4px 0 $rem-4px;
+  border: 0;
   position: relative;
   user-select: none;
   vertical-align: middle;
@@ -36,9 +35,10 @@ button {
   width: auto;
 
   &.style-margin {
-    border: $rem-4px solid $col_gray_light;
     border-radius: $rem-4px;
     box-shadow: $box-shadow-lg;
+    height: $rem-32px;
+    min-width: $rem-32px;
 
     &.layout-horizontal {
       margin-left: $rem-4px;
@@ -50,31 +50,55 @@ button {
   }
 
   &.style-marginless {
-    border-left: $rem-4px solid $col_gray_light;
-    border-top: $rem-4px solid $col_gray_light;
+    border-radius: $rem-4px;
 
     &.layout-horizontal {
-      border-bottom: $rem-4px solid $col_gray_light;
-      border-right: 0;
+      margin-left: $rem-4px;
     }
 
     &.layout-vertical {
-      border-bottom: 0;
-      border-right: $rem-4px solid $col_gray_light;
+      margin-top: $rem-4px;
+    }
+
+    &:hover {
+      background-color: $col_gray_0;
+      cursor: pointer;
+    }
+
+    &:active {
+      background-color: $col_gray_1;
+    }
+
+    &.active-button {
+      background-color: $col_gray_1;
     }
   }
 
-  &:hover {
-    background-color: $col_gray_0;
-    cursor: pointer;
-  }
+  div {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $col_gray_light;
+    border-radius: $rem-2px;
 
-  &:active {
-    background-color: $col_gray_1;
-  }
+    &.style-margin {
+      height: $rem-24px;
+      min-width: $rem-24px;
+    }
 
-  &.active-button {
-    background-color: $col_gray_1;
+    &:hover {
+      background-color: $col_gray_0;
+      cursor: pointer;
+    }
+
+    &:active {
+      background-color: $col_gray_1;
+    }
+
+    &.active-button {
+      background-color: $col_gray_1;
+    }
   }
 
   &:disabled {

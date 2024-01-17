@@ -5,7 +5,7 @@ export interface ModusToolbarButton {
   textButton?: string;
   disabled?: boolean;
   active?: boolean;
-  divader?: boolean;
+  divider?: boolean;
 }
 
 export interface ModusToolbarTooltip {
