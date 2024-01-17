@@ -16,7 +16,7 @@ import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/app
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { ModusSentimentScaleType } from "./components/modus-sentiment-scale/modus-sentiment-scale.models";
 import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-import { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+import { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnSort, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 import { Cell, Column, Row } from "@tanstack/table-core";
 import { TableCellEdited, TableContext } from "./components/modus-table/models/table-context.models";
 import { TableRowActionsMenuEvent } from "./components/modus-table/models/table-row-actions.models";
@@ -35,7 +35,7 @@ export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/app
 export { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 export { ModusSentimentScaleType } from "./components/modus-sentiment-scale/modus-sentiment-scale.models";
 export { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-export { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+export { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnSort, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 export { Cell, Column, Row } from "@tanstack/table-core";
 export { TableCellEdited, TableContext } from "./components/modus-table/models/table-context.models";
 export { TableRowActionsMenuEvent } from "./components/modus-table/models/table-row-actions.models";
@@ -95,6 +95,10 @@ export namespace Components {
           * Whether the input has a clear button.
          */
         "clearable": boolean;
+        /**
+          * Whether the autocomplete's options always display on select.
+         */
+        "disableCloseOnSelect": boolean;
         /**
           * Whether the input is disabled.
          */
@@ -483,6 +487,10 @@ export namespace Components {
          */
         "placement": 'top' | 'right' | 'bottom' | 'left';
         /**
+          * (optional) Whether to show the dropdown list's border.
+         */
+        "showDropdownListBorder": boolean;
+        /**
           * (required) The element id that the list renders near and that triggers the toggling of the list.
          */
         "toggleElementId": string;
@@ -580,9 +588,17 @@ export namespace Components {
          */
         "size": 'condensed' | 'large' | 'standard';
         /**
+          * (optional) Whether to show Subtext below the Slot content or not
+         */
+        "subText": string;
+        /**
           * (optional) The type of list item
          */
         "type": string;
+        /**
+          * (optional) Whether to wrap the sub text.
+         */
+        "wrapSubText": true | false;
     }
     interface ModusMessage {
         /**
@@ -1064,6 +1080,10 @@ export namespace Components {
           * (Required) To display data in the table.
          */
         "data": unknown[];
+        /**
+          * (Optional) To set the default sorting for the table.
+         */
+        "defaultSort": ModusTableColumnSort;
         /**
           * (optional) The density of the table.
          */
@@ -2075,6 +2095,10 @@ declare namespace LocalJSX {
          */
         "clearable"?: boolean;
         /**
+          * Whether the autocomplete's options always display on select.
+         */
+        "disableCloseOnSelect"?: boolean;
+        /**
           * Whether the input is disabled.
          */
         "disabled"?: boolean;
@@ -2510,6 +2534,10 @@ declare namespace LocalJSX {
          */
         "placement"?: 'top' | 'right' | 'bottom' | 'left';
         /**
+          * (optional) Whether to show the dropdown list's border.
+         */
+        "showDropdownListBorder"?: boolean;
+        /**
           * (required) The element id that the list renders near and that triggers the toggling of the list.
          */
         "toggleElementId"?: string;
@@ -2602,9 +2630,17 @@ declare namespace LocalJSX {
          */
         "size"?: 'condensed' | 'large' | 'standard';
         /**
+          * (optional) Whether to show Subtext below the Slot content or not
+         */
+        "subText"?: string;
+        /**
           * (optional) The type of list item
          */
         "type"?: string;
+        /**
+          * (optional) Whether to wrap the sub text.
+         */
+        "wrapSubText"?: true | false;
     }
     interface ModusMessage {
         /**
@@ -3193,6 +3229,10 @@ declare namespace LocalJSX {
           * (Required) To display data in the table.
          */
         "data": unknown[];
+        /**
+          * (Optional) To set the default sorting for the table.
+         */
+        "defaultSort"?: ModusTableColumnSort;
         /**
           * (optional) The density of the table.
          */

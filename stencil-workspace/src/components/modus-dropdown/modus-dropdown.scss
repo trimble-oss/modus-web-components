@@ -9,7 +9,6 @@
   }
 
   .dropdown-list {
-    border: 1px solid $modus-dropdown-list-border-color;
     border-collapse: collapse;
     border-radius: $rem-1px !important;
     display: none;
@@ -33,6 +32,10 @@
       opacity: 1;
       overflow: visible;
       visibility: visible;
+    }
+
+    &.list-border {
+      border: 1px solid $modus-dropdown-list-border-color;
     }
 
     &.top {

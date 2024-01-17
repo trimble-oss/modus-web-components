@@ -147,6 +147,7 @@ Users can arrange data in a table by sorting it in either ascending or descendin
 - Every column has sorting turned on by default. Setting `enableSorting` `true` or `false` for a certain column will enable or disable it.
 - When enabled, the sort icon's initial click will sort in ascending order, while its second click will sort in descending order.
 - Set `showSortIconOnHover` to `true` to enable sort on hover as well.
+- A default sorting can be set by setting `defaultSort` with the column `id` and sorting direction.
 
 ### Manual Sorting
 
@@ -523,6 +524,10 @@ type ModusTableSortingState = ColumnSort {
     id: string;
     desc: boolean;
 }[];
+type ModusTableColumnSort {
+    id: string;
+    desc: boolean;
+};
 type ModusTableExpandedState = true | Record<string, boolean>;
 type ModusTablePaginationState = {
     pageIndex: number;
@@ -650,6 +655,7 @@ Users can use keyboard navigation to perform different actions.
 | `columnResize`            | `column-resize`           |                                                                                                                                                                                               | `boolean`                              | `false`                                                   |
 | `columns` _(required)_    | --                        | (Required) To display headers in the table.                                                                                                                                                   | `ModusTableColumn<unknown, unknown>[]` | `undefined`                                               |
 | `data` _(required)_       | --                        | (Required) To display data in the table.                                                                                                                                                      | `unknown[]`                            | `undefined`                                               |
+| `defaultSort`             | `default-sort`            | (Optional) To control the default column to be used to  sort the table.                                                                                                                       | `ModusTableColumnSort`                 | `undefined`                                               |
 | `density`                 | `density`                 | (Optional) To control the density in the table. This is the row height.                                                                                                                       | `"relaxed", "comfortable", "compact"`  | `"relaxed"`                                               |
 | `displayOptions`          | --                        | (Optional) To control display options of table.                                                                                                                                               | `ModusTableDisplayOptions`             | `{     borderless: false,     cellBorderless: false,   }` |
 | `fullWidth`               | `full-width`              |                                                                                                                                                                                               | `boolean`                              | `false`                                                   |

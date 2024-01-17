@@ -233,6 +233,8 @@ nav {
   }
 
   .product-logo {
+    display: flex;
+    justify-content: center;
     user-select: none;
 
     @media screen and (width > 576px) {

@@ -895,6 +895,23 @@ describe('modus-table', () => {
     expect(element).toHaveClass('density-compact');
   });
 
+  it('Sorting by default sort', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-table></modus-table>');
+    const component = await page.find('modus-table');
+
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    component.setProperty('sort', true);
+    component.setProperty('defaultSort', { id: 'mock-column-two', desc: true });
+
+    await page.waitForChanges();
+    const tableData = await page.findAll('modus-table >>> td');
+    const firstItem = tableData[0].textContent;
+    expect(firstItem).toBe('Mock Data One 2');
+  });
+
   it('Renders small size checkboxes for compact density', async () => {
     const page = await newE2EPage();
 
