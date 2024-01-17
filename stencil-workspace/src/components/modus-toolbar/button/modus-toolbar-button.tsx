@@ -1,5 +1,6 @@
 // eslint-disable-next-line
 import { Component, Event, EventEmitter, Fragment, Prop, h } from '@stencil/core';
+import { IconMap } from '../../icons/IconMap';
 import { ModusToolbarTooltip } from '../modus-toolbar.models';
 
 @Component({
@@ -46,10 +47,10 @@ export class ModusToolbarButton {
             {this.iconSrc &&
               (this.buttonStyle === 'split' ? (
                 <div class={iconClass}>
-                  <img src={this.iconSrc} />
+                  <IconMap icon={this.iconSrc} />
                 </div>
               ) : (
-                <img src={this.iconSrc} />
+                <IconMap icon={this.iconSrc} />
               ))}
             {this.textButton}
           </button>

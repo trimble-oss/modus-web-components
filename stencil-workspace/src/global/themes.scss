@@ -765,6 +765,12 @@
 
   // Radio Button
   --modus-radio-btn-focus-color: #0a7ebc;
+
+  // Toolbar
+  --modus-toolbar-bg: var(--modus-white);
+  --modus-toolbar-button-hover-bg: var(--modus-gray-0);
+  --modus-toolbar-button-active-bg: var(--modus-gray-1);
+  --modus-toolbar-divider-bg: var(--modus-gray-0);
 }
 
 // Mixins

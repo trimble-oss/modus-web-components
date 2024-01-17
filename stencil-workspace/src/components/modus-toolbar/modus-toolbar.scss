@@ -1,3 +1,5 @@
+@import './modus-toolbar.vars.scss';
+
 div {
   align-items: center;
   border-radius: $rem-4px;
@@ -14,19 +16,19 @@ div {
   }
 
   &.style-combined {
-    background-color: $col_gray_light;
+    background-color: $modus-toolbar-bg;
     box-shadow: $box-shadow-lg;
 
     &.layout-horizontal {
       padding: $rem-4px 0 $rem-4px 0;
-      border-left: $rem-4px solid $col_gray_light;
-      border-right: $rem-8px solid $col_gray_light;
+      border-left: $rem-4px solid $modus-toolbar-bg;
+      border-right: $rem-8px solid $modus-toolbar-bg;
     }
 
     &.layout-vertical {
       padding: 0 $rem-4px 0 $rem-4px;
-      border-top: $rem-4px solid $col_gray_light;
-      border-bottom: $rem-8px solid $col_gray_light;
+      border-top: $rem-4px solid $modus-toolbar-bg;
+      border-bottom: $rem-8px solid $modus-toolbar-bg;
     }
   }
 

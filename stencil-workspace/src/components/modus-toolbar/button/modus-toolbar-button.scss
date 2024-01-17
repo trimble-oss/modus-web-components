@@ -1,8 +1,10 @@
+@import '../modus-toolbar.vars.scss';
+
 div {
-  background-color: $col_gray_0;
+  background-color: $modus-toolbar-divider-bg;
 
   &.layout-horizontal {
-    border-left: $rem-4px solid $col_gray_light;
+    border-left: $rem-4px solid $modus-toolbar-bg;
     border-right: 0;
     height: $rem-24px;
     width: $rem-1px;
@@ -10,7 +12,7 @@ div {
 
   &.layout-vertical {
     border-bottom: 0;
-    border-top: $rem-4px solid $col_gray_light;
+    border-top: $rem-4px solid $modus-toolbar-bg;
     height: $rem-1px;
     width: $rem-24px;
   }
@@ -18,7 +20,7 @@ div {
 
 button {
   align-items: center;
-  background-color: $col_gray_light;
+  background-color: $modus-toolbar-bg;
   cursor: default;
   display: inline-flex;
   font-family: $primary-font;
@@ -61,16 +63,16 @@ button {
     }
 
     &:hover {
-      background-color: $col_gray_0;
+      background-color: $modus-toolbar-button-hover-bg;
       cursor: pointer;
     }
 
     &:active {
-      background-color: $col_gray_1;
+      background-color: $modus-toolbar-button-active-bg;
     }
 
     &.active-button {
-      background-color: $col_gray_1;
+      background-color: $modus-toolbar-button-active-bg;
     }
   }
 
@@ -79,7 +81,7 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: $col_gray_light;
+    background-color: $modus-toolbar-bg;
     border-radius: $rem-2px;
 
     &.style-margin {
@@ -88,16 +90,16 @@ button {
     }
 
     &:hover {
-      background-color: $col_gray_0;
+      background-color: $modus-toolbar-button-hover-bg;
       cursor: pointer;
     }
 
     &:active {
-      background-color: $col_gray_1;
+      background-color: $modus-toolbar-button-active-bg;
     }
 
     &.active-button {
-      background-color: $col_gray_1;
+      background-color: $modus-toolbar-button-active-bg;
     }
   }
 
