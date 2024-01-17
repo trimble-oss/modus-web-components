@@ -1237,6 +1237,10 @@ export namespace Components {
          */
         "autoFocusInput": boolean;
         /**
+          * (optional) Sets autocomplete on the input.
+         */
+        "autocomplete": string | null;
+        /**
           * (optional) Whether the input has a clear button.
          */
         "clearable": boolean;
@@ -3418,6 +3422,10 @@ declare namespace LocalJSX {
           * (optional) Sets autofocus on the input.
          */
         "autoFocusInput"?: boolean;
+        /**
+          * (optional) Sets autocomplete on the input.
+         */
+        "autocomplete"?: string | null;
         /**
           * (optional) Whether the input has a clear button.
          */
