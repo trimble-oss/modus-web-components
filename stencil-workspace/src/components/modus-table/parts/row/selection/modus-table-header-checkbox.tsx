@@ -14,7 +14,7 @@ export const ModusTableHeaderCheckbox: FunctionalComponent<ModusTableHeaderCheck
     rowSelectionOptions,
   } = context;
   return (
-    <th class="row-checkbox sticky-left">
+    <th class="row-checkbox sticky-left" style={{width:'30px'}}>
       {rowSelectionOptions?.multiple && (
         <modus-checkbox
           ariaLabel="Select all rows"

@@ -30,6 +30,7 @@ table {
   font-family: $primary-font;
   font-size: $rem-14px;
   height: fit-content;
+  table-layout: fixed;
   width: 100%;
 
   &.cell-borderless {
