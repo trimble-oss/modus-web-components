@@ -3,7 +3,6 @@
 .table-container {
   border: $rem-1px $modus-table-border-color solid;
   display: flex;
-  overflow: auto;
 
   &::-webkit-scrollbar {
     height: 0.75em;
