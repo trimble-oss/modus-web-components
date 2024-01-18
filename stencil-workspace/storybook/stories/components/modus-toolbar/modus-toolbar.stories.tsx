@@ -49,7 +49,7 @@ export default {
   },
 };
 
-const Template = ({buttons, layout, toolbarStyle}) => html`<modus-toolbar buttons=${buttons} layout=${layout} toolbarStyle=${toolbarStyle}></modus-toolbar>`;
+const Template = ({buttons, layout, toolbarStyle}) => html`<modus-toolbar .buttons=${buttons} .layout=${layout} .toolbarStyle=${toolbarStyle}></modus-toolbar>`;
 
 export const Default = Template.bind({});
 Default.args = {
@@ -84,23 +84,23 @@ Default.args = {
 };
 
 export const VerticalSplitToolbar = Template.bind({});
-Default.args = {
+VerticalSplitToolbar.args = {
     buttons: [
       { tooltip: {
           text: 'Add',
-          position: 'bottom',
+          position: 'right',
           },
       iconSrc: 'add',
       },
       {  tooltip: {
           text: 'Edit',
-          position: 'bottom',
+          position: 'right',
           },
       iconSrc: 'edit', disabled: true,
       },
       {  tooltip: {
           text: 'Refresh',
-          position: 'bottom',
+          position: 'right',
           },
       iconSrc: 'refresh', active: true,
       }

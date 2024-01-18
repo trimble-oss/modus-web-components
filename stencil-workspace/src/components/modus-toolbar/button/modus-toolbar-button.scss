@@ -1,4 +1,4 @@
-@import '../modus-toolbar.vars.scss';
+@import '../modus-toolbar.vars';
 
 div {
   background-color: $modus-toolbar-divider-bg;
@@ -21,6 +21,7 @@ div {
 button {
   align-items: center;
   background-color: $modus-toolbar-bg;
+  border: 0;
   cursor: default;
   display: inline-flex;
   font-family: $primary-font;
@@ -29,7 +30,6 @@ button {
   justify-content: center;
   min-width: $rem-24px;
   padding: 0 $rem-4px 0 $rem-4px;
-  border: 0;
   position: relative;
   user-select: none;
   vertical-align: middle;
@@ -77,12 +77,12 @@ button {
   }
 
   div {
-    position: relative;
-    display: flex;
     align-items: center;
-    justify-content: center;
     background-color: $modus-toolbar-bg;
     border-radius: $rem-2px;
+    display: flex;
+    justify-content: center;
+    position: relative;
 
     &.style-margin {
       height: $rem-24px;
