@@ -96,6 +96,10 @@ export namespace Components {
          */
         "clearable": boolean;
         /**
+          * Whether the autocomplete's options always display on select.
+         */
+        "disableCloseOnSelect": boolean;
+        /**
           * Whether the input is disabled.
          */
         "disabled": boolean;
@@ -1237,6 +1241,10 @@ export namespace Components {
          */
         "autoFocusInput": boolean;
         /**
+          * (optional) Sets autocomplete on the input.
+         */
+        "autocomplete": string | null;
+        /**
           * (optional) Whether the input has a clear button.
          */
         "clearable": boolean;
@@ -2094,6 +2102,10 @@ declare namespace LocalJSX {
           * Whether the input has a clear button.
          */
         "clearable"?: boolean;
+        /**
+          * Whether the autocomplete's options always display on select.
+         */
+        "disableCloseOnSelect"?: boolean;
         /**
           * Whether the input is disabled.
          */
@@ -3418,6 +3430,10 @@ declare namespace LocalJSX {
           * (optional) Sets autofocus on the input.
          */
         "autoFocusInput"?: boolean;
+        /**
+          * (optional) Sets autocomplete on the input.
+         */
+        "autocomplete"?: string | null;
         /**
           * (optional) Whether the input has a clear button.
          */

@@ -90,14 +90,14 @@ export declare interface ModusAlert extends Components.ModusAlert {
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'clearable', 'disabled', 'dropdownMaxHeight', 'dropdownZIndex', 'errorText', 'includeSearchIcon', 'label', 'multiple', 'noResultsFoundSubtext', 'noResultsFoundText', 'options', 'placeholder', 'readOnly', 'required', 'showNoResultsFoundMessage', 'showOptionsOnFocus', 'size', 'value']
+  inputs: ['ariaLabel', 'clearable', 'disableCloseOnSelect', 'disabled', 'dropdownMaxHeight', 'dropdownZIndex', 'errorText', 'includeSearchIcon', 'label', 'multiple', 'noResultsFoundSubtext', 'noResultsFoundText', 'options', 'placeholder', 'readOnly', 'required', 'showNoResultsFoundMessage', 'showOptionsOnFocus', 'size', 'value']
 })
 @Component({
   selector: 'modus-autocomplete',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['ariaLabel', 'clearable', 'disabled', 'dropdownMaxHeight', 'dropdownZIndex', 'errorText', 'includeSearchIcon', 'label', 'multiple', 'noResultsFoundSubtext', 'noResultsFoundText', 'options', 'placeholder', 'readOnly', 'required', 'showNoResultsFoundMessage', 'showOptionsOnFocus', 'size', 'value'],
+  inputs: ['ariaLabel', 'clearable', 'disableCloseOnSelect', 'disabled', 'dropdownMaxHeight', 'dropdownZIndex', 'errorText', 'includeSearchIcon', 'label', 'multiple', 'noResultsFoundSubtext', 'noResultsFoundText', 'options', 'placeholder', 'readOnly', 'required', 'showNoResultsFoundMessage', 'showOptionsOnFocus', 'size', 'value'],
 })
 export class ModusAutocomplete {
   protected el: HTMLElement;
@@ -1439,7 +1439,7 @@ export declare interface ModusTabs extends Components.ModusTabs {
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'autoFocusInput', 'clearable', 'disabled', 'errorText', 'helperText', 'includePasswordTextToggle', 'includeSearchIcon', 'inputmode', 'label', 'maxLength', 'minLength', 'placeholder', 'readOnly', 'required', 'size', 'textAlign', 'type', 'validText', 'value'],
+  inputs: ['ariaLabel', 'autoFocusInput', 'autocomplete', 'clearable', 'disabled', 'errorText', 'helperText', 'includePasswordTextToggle', 'includeSearchIcon', 'inputmode', 'label', 'maxLength', 'minLength', 'placeholder', 'readOnly', 'required', 'size', 'textAlign', 'type', 'validText', 'value'],
   methods: ['focusInput']
 })
 @Component({
@@ -1447,7 +1447,7 @@ export declare interface ModusTabs extends Components.ModusTabs {
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['ariaLabel', 'autoFocusInput', 'clearable', 'disabled', 'errorText', 'helperText', 'includePasswordTextToggle', 'includeSearchIcon', 'inputmode', 'label', 'maxLength', 'minLength', 'placeholder', 'readOnly', 'required', 'size', 'textAlign', 'type', 'validText', 'value'],
+  inputs: ['ariaLabel', 'autoFocusInput', 'autocomplete', 'clearable', 'disabled', 'errorText', 'helperText', 'includePasswordTextToggle', 'includeSearchIcon', 'inputmode', 'label', 'maxLength', 'minLength', 'placeholder', 'readOnly', 'required', 'size', 'textAlign', 'type', 'validText', 'value'],
 })
 export class ModusTextInput {
   protected el: HTMLElement;

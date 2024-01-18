@@ -423,6 +423,7 @@ export class ModusTable {
     return {
       element: this.element,
       data: this.data,
+      density: this.density,
       sort: this.sort,
       componentId: this._id,
       hover: this.hover,

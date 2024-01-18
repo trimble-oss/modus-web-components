@@ -40,6 +40,9 @@ export class ModusAutocomplete {
   /** Whether the input is disabled. */
   @Prop() disabled: boolean;
 
+  /** Whether the autocomplete's options always display on select. */
+  @Prop() disableCloseOnSelect: boolean;
+
   /** The autocomplete's dropdown's max height. */
   @Prop() dropdownMaxHeight = '300px';
 
@@ -120,7 +123,7 @@ export class ModusAutocomplete {
   }
 
   @Listen('mousedown', { target: 'document' })
-  outsideElementClickHandler(event: MouseEvent): void {
+  onMouseDown(event: MouseEvent): void {
     if (!this.hasFocus) {
       return;
     }
@@ -154,7 +157,7 @@ export class ModusAutocomplete {
     this.value?.length > 0;
 
   displayOptions = () => {
-    const showOptions = this.showOptionsOnFocus || this.value?.length > 0;
+    const showOptions = this.showOptionsOnFocus || this.value?.length > 0 || this.disableCloseOnSelect;
     return this.hasFocus && showOptions && !this.disabled;
   };
 
@@ -174,12 +177,12 @@ export class ModusAutocomplete {
     } else {
       this.handleSearchChange(optionValue);
     }
-    this.hasFocus = false;
+    this.hasFocus = this.disableCloseOnSelect;
     this.optionSelected.emit(optionId);
   };
 
   handleInputBlur = () => {
-    this.hasFocus = false;
+    this.hasFocus = this.disableCloseOnSelect;
   };
 
   handleOptionKeyPress = (event: any, option: any, isCustomOption = false) => {
@@ -205,7 +208,7 @@ export class ModusAutocomplete {
     } else {
       this.handleSearchChange(option.value);
     }
-    this.hasFocus = false;
+    this.hasFocus = this.disableCloseOnSelect;
     this.optionSelected.emit(option.id);
   };
 
@@ -241,7 +244,8 @@ export class ModusAutocomplete {
 
     this.customOptions = slotted.assignedNodes().filter((node) => node.nodeName !== '#text');
 
-    if (search.length === 0) {
+    search = search || '';
+    if (search.length === 0 || this.disableCloseOnSelect) {
       this.visibleCustomOptions = this.customOptions;
       return;
     }
@@ -256,10 +260,10 @@ export class ModusAutocomplete {
     if (!this.hasFocus) {
       return;
     }
-
+    search = search || '';
     const isSearchEmpty = search.length === 0;
 
-    if (isSearchEmpty && !this.showOptionsOnFocus) {
+    if ((isSearchEmpty && !this.showOptionsOnFocus) || this.disableCloseOnSelect) {
       this.visibleOptions = this.options as ModusAutocompleteOption[];
       return;
     }
@@ -279,10 +283,10 @@ export class ModusAutocomplete {
   TextInput = () => (
     <modus-text-input
       class="input"
+      autocomplete="off"
       clearable={this.clearable}
       errorText={this.hasFocus ? '' : this.errorText}
-      includeSearchIcon={this.includeSearchIcon}
-      label={this.label}
+      includeSearchIcon={false}
       onValueChange={(searchEvent: CustomEvent<string>) => this.handleTextInputValueChange(searchEvent)}
       placeholder={this.placeholder}
       size={this.size}
@@ -313,7 +317,7 @@ export class ModusAutocomplete {
         }}
         onFocusout={() => {
           if (this.hasFocus) {
-            this.hasFocus = false;
+            this.hasFocus = this.disableCloseOnSelect;
           }
         }}>
         {this.label || this.required ? (
