@@ -21,7 +21,7 @@ export class ModusSentimentScale {
   @Prop() type: ModusSentimentScaleType = 'smileys';
 
   /** (optional) Whether the sentiment scale is disabled. */
-  @Prop() disabled?: boolean = false;
+  @Prop() disabled?: boolean;
 
   /** An event that fires the selected sentiment. */
   @Event() sentimentSelection: EventEmitter;
