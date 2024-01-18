@@ -245,6 +245,7 @@ export class ModusAutocomplete {
 
   TextInput = () => (
     <modus-text-input
+      autocomplete="off"
       clearable={this.clearable}
       errorText={this.hasFocus ? '' : this.errorText}
       includeSearchIcon={this.includeSearchIcon}
