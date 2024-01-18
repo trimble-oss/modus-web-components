@@ -9,7 +9,7 @@ export const ModusNavbarProductLogo: FunctionalComponent<{
   const { primary, secondary } = logos || {};
 
   const handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key !== 'Enter' || event.key !== ' ') {
+    if (event.key !== 'Enter' && event.key !== ' ') {
       return;
     }
     if (onClick) {
