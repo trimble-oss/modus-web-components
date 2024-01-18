@@ -8,17 +8,17 @@ export const ModusNavbarProductLogo: FunctionalComponent<{
 }> = ({ logos, onClick }) => {
   const { primary, secondary } = logos || {};
 
-const logoKeydownHandler = (event: KeyboardEvent) => {
-  if (event.key !== 'Enter') {
-    return;
-  }
-  if (onClick) {
-    onClick(event);
-  }
-};
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key !== 'Enter' || event.key !== ' ') {
+      return;
+    }
+    if (onClick) {
+      onClick(event);
+    }
+  };
 
   return (
-    <div onClick={onClick} onKeyDown={logoKeydownHandler} tabindex="0" class="product-logo">
+    <div aria-label="Logo" onClick={onClick} onKeyDown={handleKeyDown} tabindex="0" role="button" class="product-logo">
       {primary && (
         <img
           class={secondary && 'product-logo-primary'}
