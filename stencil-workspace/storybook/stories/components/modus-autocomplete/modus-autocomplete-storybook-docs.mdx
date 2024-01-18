@@ -107,9 +107,11 @@ interface ModusAutocompleteOption {
 | `disabled`                  | `disabled`                      | Whether the input is disabled.                    | `boolean`                               | `undefined`                                   |
 | `dropdownMaxHeight`         | `dropdown-max-height`           | The autocomplete's dropdown's max height.         | `string`                                | `'300px'`                                     |
 | `dropdownZIndex`            | `dropdown-z-index`              | The autocomplete's dropdown z-index.              | `string`                                | `'1'`                                         |
+| `disableCloseOnSelect`      | `disable-close-on-select`       | Whether the autocomplete's options always display on select.  | `boolean`                               | `false`                                       |
 | `errorText`                 | `error-text`                    | The autocomplete's error text.                    | `string`                                | `undefined`                                   |
 | `includeSearchIcon`         | `include-search-icon`           | Whether the search icon is included.              | `boolean`                               | `true`                                        |
 | `label`                     | `label`                         | The autocomplete's label.                         | `string`                                | `undefined`                                   |
+| `multiple`                    | `multiple`                      | When enabled, multiple options can be selected in the component. And selected options are shown as chips in the input. | `boolean`                            | `false`                                       |
 | `noResultsFoundSubtext`     | `no-results-found-subtext`      | The autocomplete's no results sub-text.           | `string`                                | `'Check spelling or try a different keyword'` |
 | `noResultsFoundText`        | `no-results-found-text`         | The autocomplete's no results text.               | `string`                                | `'No results found'`                          |
 | `options`                   | --                              | The autocomplete's options.                       | `ModusAutocompleteOption[] | string[]`  | `undefined`                                   |
@@ -120,7 +122,6 @@ interface ModusAutocompleteOption {
 | `showOptionsOnFocus`        | `show-options-on-focus`         | Whether to show autocomplete's options when focus | `boolean`                               | `false`                                       |
 | `size`                      | `size`                          | The autocomplete's size.                          | `"large"  | "medium"`                   | `'medium'`                                    |
 | `value`                     | `value`                         | The autocomplete's search value.                  | `string`                                | `undefined`                                   |
-|`multiple`                    | `multiple`                      | When enabled, multiple options can be selected in the component. And selected options are shown as chips in the input. | `boolean`                            | `false`                                       |
 ### Events
 
 | Event            | Description                                                                  | Type                  |

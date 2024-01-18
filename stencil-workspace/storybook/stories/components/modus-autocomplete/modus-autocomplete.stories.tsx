@@ -42,6 +42,14 @@ export default {
         type: { summary: 'string' },
       },
     },
+    disableCloseOnSelect: {
+      name: 'disable-close-on-select',
+      description: 'Whether the autocomplete options always display on select',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      },
+    },
     errorText: {
       name: 'error-text',
       description: "The autocomplete's error text",
@@ -165,9 +173,11 @@ const Template = ({
                           disabled,
                           dropdownMaxHeight,
                           dropdownZIndex,
+                          disableCloseOnSelect,
                           errorText,
                           includeSearchIcon,
                           label,
+                          multiple,
                           noResultsFoundText,
                           noResultsFoundSubtext,
                           placeholder,
@@ -176,19 +186,20 @@ const Template = ({
                           showNoResultsFoundMessage,
                           showOptionsOnFocus,
                           size,
-                          value,
-                          multiple }) => html`
+                          value}) => html`
   <div style="width: 600px">
     <modus-autocomplete
       id="autocomplete-default"
       aria-label=${ariaLabel}
       clearable=${clearable}
       disabled=${disabled}
+      disable-close-on-select=${disableCloseOnSelect}
       dropdown-max-height=${dropdownMaxHeight}
       dropdown-z-index=${dropdownZIndex}
       error-text=${errorText}
       include-search-icon=${includeSearchIcon}
       label=${label}
+      multiple=${multiple}
       no-results-found-text=${noResultsFoundText}
       no-results-found-subtext=${noResultsFoundSubtext}
       placeholder=${placeholder}
@@ -197,22 +208,22 @@ const Template = ({
       show-no-results-found-message=${showNoResultsFoundMessage}
       show-options-on-focus=${showOptionsOnFocus}
       size=${size}
-      value=${value}
-      multiple=${multiple}>
+      value=${value}>
     </modus-autocomplete>
   </div>
   ${setAutocomplete()}
 `;
 const defaultArgs = {
-  multiple: false,
   ariaLabel: 'autocomplete',
   clearable: false,
   disabled: false,
+  disableCloseOnSelect: false,
   dropdownMaxHeight: '300px',
   dropdownZIndex: '1',
   errorText: '',
   includeSearchIcon: true,
   label: 'Default Autocomplete',
+  multiple: false,
   noResultsFoundText: 'No results found',
   noResultsFoundSubtext: 'Check spelling or try a different keyword',
   placeholder: 'Search...',
@@ -247,9 +258,11 @@ export const WithCustomOption = ({
   disabled,
   dropdownMaxHeight,
   dropdownZIndex,
+  disableCloseOnSelect,
   errorText,
   includeSearchIcon,
   label,
+  multiple,
   noResultsFoundText,
   noResultsFoundSubtext,
   placeholder,
@@ -258,8 +271,7 @@ export const WithCustomOption = ({
   showNoResultsFoundMessage,
   showOptionsOnFocus,
   size,
-  value,
-  multiple }) => html`
+  value}) => html`
 <div style="width: 600px">
 <modus-autocomplete
 aria-label=${ariaLabel}
@@ -267,9 +279,11 @@ clearable=${clearable}
 disabled=${disabled}
 dropdown-max-height=${dropdownMaxHeight}
 dropdown-z-index=${dropdownZIndex}
+disable-close-on-select=${disableCloseOnSelect}
 error-text=${errorText}
 include-search-icon=${includeSearchIcon}
 label=${label}
+multiple=${multiple}
 no-results-found-text=${noResultsFoundText}
 no-results-found-subtext=${noResultsFoundSubtext}
 placeholder=${placeholder}
@@ -278,8 +292,7 @@ required=${required}
 show-no-results-found-message=${showNoResultsFoundMessage}
 show-options-on-focus=${showOptionsOnFocus}
 size=${size}
-value=${value}
-multiple=${multiple}>
+value=${value}>
 <li data-search-value="The Git Guru" data-id="1" style="padding: 8px">
 <div style="font-weight: bold">The Git Guru</div>
 <div style="font-size: 12px">Lead DevOps Engineer</div>
@@ -292,15 +305,16 @@ multiple=${multiple}>
 </div>
 `;
 WithCustomOption.args = {
-  multiple:false,
 ariaLabel: 'autocomplete',
 clearable: false,
 disabled: false,
 dropdownMaxHeight: '300px',
 dropdownZIndex: '1',
+disableCloseOnSelect: false,
 errorText: '',
 includeSearchIcon: true,
 label: 'Employee Search',
+multiple:false,
 noResultsFoundText: 'No results found',
 noResultsFoundSubtext: 'Check spelling or try a different keyword',
 placeholder: 'Search...',
