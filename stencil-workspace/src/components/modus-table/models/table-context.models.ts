@@ -32,6 +32,8 @@ export interface TableContext {
 
   data: unknown[];
 
+  density: 'relaxed' | 'comfortable' | 'compact';
+
   displayOptions?: ModusTableDisplayOptions;
 
   hover: boolean;

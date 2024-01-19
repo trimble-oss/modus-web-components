@@ -12,6 +12,13 @@ export default {
         type: { summary: 'string' },
       },
     },
+    autocomplete: {
+      name: 'autocomplete',
+      description: "The text input's autocomplete",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
     autoFocusInput: {
       name: 'auto-focus-input',
       description: 'Sets autofocus for the input',
@@ -195,6 +202,7 @@ export default {
 
 const Template = ({
   ariaLabel,
+  autocomplete,
   autoFocusInput,
   clearable,
   disabled,
@@ -217,6 +225,7 @@ const Template = ({
 }) => html`
   <modus-text-input
     aria-label=${ariaLabel}
+    autocomplete=${autocomplete}
     auto-focus-input=${autoFocusInput}
     clearable=${clearable}
     disabled=${disabled}
@@ -241,6 +250,7 @@ const Template = ({
 export const Default = Template.bind({});
 Default.args = {
   ariaLabel: 'Text Input',
+  autocomplete: '',
   autoFocusInput: true,
   clearable: false,
   disabled: false,
