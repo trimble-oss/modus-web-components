@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { Component, Event, EventEmitter, h, Method, Prop, Watch } from '@stencil/core';
+import { Component, Event, EventEmitter, h, Method, Prop } from '@stencil/core';
 import { IconSearch } from '../icons/icon-search';
 import { IconClose } from '../icons/icon-close';
 import { IconVisibility } from '../icons/icon-visibility';
@@ -13,6 +13,9 @@ import { IconVisibilityOff } from '../icons/icon-visibility-off';
 export class ModusTextInput {
   /** (optional) The input's aria-label. */
   @Prop() ariaLabel: string | null;
+
+  /** (optional) Sets autocomplete on the input. */
+  @Prop() autocomplete: string | null;
 
   /** (optional) Sets autofocus on the input. */
   @Prop() autoFocusInput: boolean;
@@ -69,11 +72,7 @@ export class ModusTextInput {
   @Prop() validText: string;
 
   /** (optional) The input's value. */
-  @Prop() value: string;
-  @Watch('value')
-  watchValue(newValue: string): void {
-    this.value = newValue;
-  }
+  @Prop({ mutable: true }) value: string;
 
   /** An event that fires on input value change. */
   @Event() valueChange: EventEmitter<string>;
@@ -167,6 +166,7 @@ export class ModusTextInput {
             aria-invalid={!!this.errorText}
             aria-label={this.ariaLabel}
             aria-required={this.required?.toString()}
+            autocomplete={this.autocomplete}
             class={buildTextInputClassNames()}
             disabled={this.disabled}
             inputmode={this.inputmode}

@@ -6,6 +6,7 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
+import { BadgeProperties } from "./components/modus-badge/modus-badge";
 import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 import { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
@@ -13,8 +14,9 @@ import { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar
 import { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
+import { ModusSentimentScaleType } from "./components/modus-sentiment-scale/modus-sentiment-scale.models";
 import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-import { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+import { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnSort, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 import { Cell, Column, Row } from "@tanstack/table-core";
 import { TableCellEdited, TableContext } from "./components/modus-table/models/table-context.models";
 import { TableRowActionsMenuEvent } from "./components/modus-table/models/table-row-actions.models";
@@ -23,6 +25,7 @@ import { ModusTimePickerEventDetails } from "./components/modus-time-picker/modu
 import { ModusToolTipPlacement } from "./components/modus-tooltip/modus-tooltip.models";
 import { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
+export { BadgeProperties } from "./components/modus-badge/modus-badge";
 export { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 export { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 export { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
@@ -30,8 +33,9 @@ export { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar
 export { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
 export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 export { RadioButton } from "./components/modus-radio-group/modus-radio-button";
+export { ModusSentimentScaleType } from "./components/modus-sentiment-scale/modus-sentiment-scale.models";
 export { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-export { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+export { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnSort, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 export { Cell, Column, Row } from "@tanstack/table-core";
 export { TableCellEdited, TableContext } from "./components/modus-table/models/table-context.models";
 export { TableRowActionsMenuEvent } from "./components/modus-table/models/table-row-actions.models";
@@ -92,6 +96,10 @@ export namespace Components {
          */
         "clearable": boolean;
         /**
+          * Whether the autocomplete's options always display on select.
+         */
+        "disableCloseOnSelect": boolean;
+        /**
           * Whether the input is disabled.
          */
         "disabled": boolean;
@@ -144,6 +152,10 @@ export namespace Components {
          */
         "showNoResultsFoundMessage": boolean;
         /**
+          * Whether to show autocomplete's options when focus.
+         */
+        "showOptionsOnFocus": boolean;
+        /**
           * The autocomplete's size.
          */
         "size": 'medium' | 'large';
@@ -156,19 +168,19 @@ export namespace Components {
         /**
           * (optional) The badge's aria-label
          */
-        "ariaLabel": string | null;
+        "ariaLabel": BadgeProperties['ariaLabel'];
         /**
           * (optional) The color of the badge
          */
-        "color": 'danger' | 'dark' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning';
+        "color": BadgeProperties['color'];
         /**
           * (optional) The size of the badge
          */
-        "size": 'small' | 'medium' | 'large';
+        "size": BadgeProperties['size'];
         /**
           * (optional) The type of the badge
          */
-        "type": 'counter' | 'default' | 'text';
+        "type": BadgeProperties['type'];
     }
     interface ModusBreadcrumb {
         /**
@@ -273,6 +285,10 @@ export namespace Components {
           * (optional) The checkbox label.
          */
         "label": string;
+        /**
+          * (optional) The size of the checkbox.
+         */
+        "size": 'small' | 'medium';
         /**
           * (optional) If you wish to prevent the propagation of your event, you may opt for this.
          */
@@ -471,6 +487,10 @@ export namespace Components {
          */
         "placement": 'top' | 'right' | 'bottom' | 'left';
         /**
+          * (optional) Whether to show the dropdown list's border.
+         */
+        "showDropdownListBorder": boolean;
+        /**
           * (required) The element id that the list renders near and that triggers the toggling of the list.
          */
         "toggleElementId": string;
@@ -568,9 +588,17 @@ export namespace Components {
          */
         "size": 'condensed' | 'large' | 'standard';
         /**
+          * (optional) Whether to show Subtext below the Slot content or not
+         */
+        "subText": string;
+        /**
           * (optional) The type of list item
          */
         "type": string;
+        /**
+          * (optional) Whether to wrap the sub text.
+         */
+        "wrapSubText": true | false;
     }
     interface ModusMessage {
         /**
@@ -857,6 +885,10 @@ export namespace Components {
           * The radio buttons to render.
          */
         "radioButtons": RadioButton[];
+        /**
+          * (optional) The size of the radiobutton.
+         */
+        "size"?: 'small' | 'medium';
     }
     interface ModusSelect {
         /**
@@ -907,6 +939,20 @@ export namespace Components {
           * (optional) The input value.
          */
         "value": unknown;
+    }
+    interface ModusSentimentScale {
+        /**
+          * (optional) The input's aria-label.
+         */
+        "ariaLabel": string | null;
+        /**
+          * (optional) Whether the sentiment scale is disabled.
+         */
+        "disabled"?: boolean;
+        /**
+          * The type of icons to be displayed.
+         */
+        "type": ModusSentimentScaleType;
     }
     interface ModusSideNavigation {
         /**
@@ -1015,6 +1061,10 @@ export namespace Components {
           * (optional) The switch label.
          */
         "label": string;
+        /**
+          * (optional) The size of the radiobutton.
+         */
+        "size"?: 'small' | 'medium';
     }
     interface ModusTable {
         /**
@@ -1030,6 +1080,14 @@ export namespace Components {
           * (Required) To display data in the table.
          */
         "data": unknown[];
+        /**
+          * (Optional) To set the default sorting for the table.
+         */
+        "defaultSort": ModusTableColumnSort;
+        /**
+          * (optional) The density of the table.
+         */
+        "density": 'relaxed' | 'comfortable' | 'compact';
         /**
           * (Optional) To control display options of table.
          */
@@ -1178,6 +1236,10 @@ export namespace Components {
           * (optional) Sets autofocus on the input.
          */
         "autoFocusInput": boolean;
+        /**
+          * (optional) Sets autocomplete on the input.
+         */
+        "autocomplete": string | null;
         /**
           * (optional) Whether the input has a clear button.
          */
@@ -1532,6 +1594,10 @@ export interface ModusSelectCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusSelectElement;
 }
+export interface ModusSentimentScaleCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusSentimentScaleElement;
+}
 export interface ModusSideNavigationCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusSideNavigationElement;
@@ -1769,6 +1835,12 @@ declare global {
         prototype: HTMLModusSelectElement;
         new (): HTMLModusSelectElement;
     };
+    interface HTMLModusSentimentScaleElement extends Components.ModusSentimentScale, HTMLStencilElement {
+    }
+    var HTMLModusSentimentScaleElement: {
+        prototype: HTMLModusSentimentScaleElement;
+        new (): HTMLModusSentimentScaleElement;
+    };
     interface HTMLModusSideNavigationElement extends Components.ModusSideNavigation, HTMLStencilElement {
     }
     var HTMLModusSideNavigationElement: {
@@ -1937,6 +2009,7 @@ declare global {
         "modus-progress-bar": HTMLModusProgressBarElement;
         "modus-radio-group": HTMLModusRadioGroupElement;
         "modus-select": HTMLModusSelectElement;
+        "modus-sentiment-scale": HTMLModusSentimentScaleElement;
         "modus-side-navigation": HTMLModusSideNavigationElement;
         "modus-side-navigation-item": HTMLModusSideNavigationItemElement;
         "modus-slider": HTMLModusSliderElement;
@@ -2026,6 +2099,10 @@ declare namespace LocalJSX {
          */
         "clearable"?: boolean;
         /**
+          * Whether the autocomplete's options always display on select.
+         */
+        "disableCloseOnSelect"?: boolean;
+        /**
           * Whether the input is disabled.
          */
         "disabled"?: boolean;
@@ -2086,6 +2163,10 @@ declare namespace LocalJSX {
          */
         "showNoResultsFoundMessage"?: boolean;
         /**
+          * Whether to show autocomplete's options when focus.
+         */
+        "showOptionsOnFocus"?: boolean;
+        /**
           * The autocomplete's size.
          */
         "size"?: 'medium' | 'large';
@@ -2098,19 +2179,19 @@ declare namespace LocalJSX {
         /**
           * (optional) The badge's aria-label
          */
-        "ariaLabel"?: string | null;
+        "ariaLabel"?: BadgeProperties['ariaLabel'];
         /**
           * (optional) The color of the badge
          */
-        "color"?: 'danger' | 'dark' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning';
+        "color"?: BadgeProperties['color'];
         /**
           * (optional) The size of the badge
          */
-        "size"?: 'small' | 'medium' | 'large';
+        "size"?: BadgeProperties['size'];
         /**
           * (optional) The type of the badge
          */
-        "type"?: 'counter' | 'default' | 'text';
+        "type"?: BadgeProperties['type'];
     }
     interface ModusBreadcrumb {
         /**
@@ -2219,6 +2300,10 @@ declare namespace LocalJSX {
           * An event that fires on checkbox click.
          */
         "onCheckboxClick"?: (event: ModusCheckboxCustomEvent<boolean>) => void;
+        /**
+          * (optional) The size of the checkbox.
+         */
+        "size"?: 'small' | 'medium';
         /**
           * (optional) If you wish to prevent the propagation of your event, you may opt for this.
          */
@@ -2453,6 +2538,10 @@ declare namespace LocalJSX {
          */
         "placement"?: 'top' | 'right' | 'bottom' | 'left';
         /**
+          * (optional) Whether to show the dropdown list's border.
+         */
+        "showDropdownListBorder"?: boolean;
+        /**
           * (required) The element id that the list renders near and that triggers the toggling of the list.
          */
         "toggleElementId"?: string;
@@ -2545,9 +2634,17 @@ declare namespace LocalJSX {
          */
         "size"?: 'condensed' | 'large' | 'standard';
         /**
+          * (optional) Whether to show Subtext below the Slot content or not
+         */
+        "subText"?: string;
+        /**
           * (optional) The type of list item
          */
         "type"?: string;
+        /**
+          * (optional) Whether to wrap the sub text.
+         */
+        "wrapSubText"?: true | false;
     }
     interface ModusMessage {
         /**
@@ -2681,7 +2778,7 @@ declare namespace LocalJSX {
         /**
           * An event that fires on profile menu sign out click.
          */
-        "onProfileMenuSignOutClick"?: (event: ModusNavbarCustomEvent<MouseEvent>) => void;
+        "onProfileMenuSignOutClick"?: (event: ModusNavbarCustomEvent<KeyboardEvent | MouseEvent>) => void;
         /**
           * An event that fires on search value change.
          */
@@ -2908,6 +3005,10 @@ declare namespace LocalJSX {
           * The radio buttons to render.
          */
         "radioButtons"?: RadioButton[];
+        /**
+          * (optional) The size of the radiobutton.
+         */
+        "size"?: 'small' | 'medium';
     }
     interface ModusSelect {
         /**
@@ -2962,6 +3063,24 @@ declare namespace LocalJSX {
           * (optional) The input value.
          */
         "value"?: unknown;
+    }
+    interface ModusSentimentScale {
+        /**
+          * (optional) The input's aria-label.
+         */
+        "ariaLabel"?: string | null;
+        /**
+          * (optional) Whether the sentiment scale is disabled.
+         */
+        "disabled"?: boolean;
+        /**
+          * An event that fires the selected sentiment.
+         */
+        "onSentimentSelection"?: (event: ModusSentimentScaleCustomEvent<any>) => void;
+        /**
+          * The type of icons to be displayed.
+         */
+        "type"?: ModusSentimentScaleType;
     }
     interface ModusSideNavigation {
         /**
@@ -3095,6 +3214,10 @@ declare namespace LocalJSX {
           * An event that fires on switch click.
          */
         "onSwitchClick"?: (event: ModusSwitchCustomEvent<boolean>) => void;
+        /**
+          * (optional) The size of the radiobutton.
+         */
+        "size"?: 'small' | 'medium';
     }
     interface ModusTable {
         /**
@@ -3110,6 +3233,14 @@ declare namespace LocalJSX {
           * (Required) To display data in the table.
          */
         "data": unknown[];
+        /**
+          * (Optional) To set the default sorting for the table.
+         */
+        "defaultSort"?: ModusTableColumnSort;
+        /**
+          * (optional) The density of the table.
+         */
+        "density"?: 'relaxed' | 'comfortable' | 'compact';
         /**
           * (Optional) To control display options of table.
          */
@@ -3291,6 +3422,10 @@ declare namespace LocalJSX {
           * (optional) Sets autofocus on the input.
          */
         "autoFocusInput"?: boolean;
+        /**
+          * (optional) Sets autocomplete on the input.
+         */
+        "autocomplete"?: string | null;
         /**
           * (optional) Whether the input has a clear button.
          */
@@ -3600,6 +3735,7 @@ declare namespace LocalJSX {
         "modus-progress-bar": ModusProgressBar;
         "modus-radio-group": ModusRadioGroup;
         "modus-select": ModusSelect;
+        "modus-sentiment-scale": ModusSentimentScale;
         "modus-side-navigation": ModusSideNavigation;
         "modus-side-navigation-item": ModusSideNavigationItem;
         "modus-slider": ModusSlider;
@@ -3660,6 +3796,7 @@ declare module "@stencil/core" {
             "modus-progress-bar": LocalJSX.ModusProgressBar & JSXBase.HTMLAttributes<HTMLModusProgressBarElement>;
             "modus-radio-group": LocalJSX.ModusRadioGroup & JSXBase.HTMLAttributes<HTMLModusRadioGroupElement>;
             "modus-select": LocalJSX.ModusSelect & JSXBase.HTMLAttributes<HTMLModusSelectElement>;
+            "modus-sentiment-scale": LocalJSX.ModusSentimentScale & JSXBase.HTMLAttributes<HTMLModusSentimentScaleElement>;
             "modus-side-navigation": LocalJSX.ModusSideNavigation & JSXBase.HTMLAttributes<HTMLModusSideNavigationElement>;
             "modus-side-navigation-item": LocalJSX.ModusSideNavigationItem & JSXBase.HTMLAttributes<HTMLModusSideNavigationItemElement>;
             "modus-slider": LocalJSX.ModusSlider & JSXBase.HTMLAttributes<HTMLModusSliderElement>;

@@ -20,6 +20,13 @@ export class ModusNavbarProfileMenu {
   @Event() linkClick: EventEmitter<string>;
   @Event() signOutClick: EventEmitter<MouseEvent>;
 
+  signOutKeydownHandler(event: KeyboardEvent): void {
+    if (event.code !== 'Enter') {
+      return;
+    }
+    this.signOutClick.emit();
+  }
+
   render(): unknown {
     const direction = this.reverse ? 'reverse' : '';
     const variant = this.variant === 'default' ? '' : `profile-menu-${this.variant}`;
@@ -32,7 +39,7 @@ export class ModusNavbarProfileMenu {
           ) : (
             <span class="initials">{this.initials}</span>
           )}
-          <div>
+          <div class="user-details">
             <div class="username">{this.username}</div>
             <div class="email">{this.email}</div>
           </div>
@@ -55,7 +62,12 @@ export class ModusNavbarProfileMenu {
             })}
           </modus-list>
         ) : null}
-        <div class="sign-out" onClick={() => this.signOutClick.emit()}>
+        <slot />
+        <div
+          class="sign-out"
+          onClick={() => this.signOutClick.emit()}
+          onKeyDown={(event) => this.signOutKeydownHandler(event)}
+          tabIndex={0}>
           <div>Sign out</div>
         </div>
       </div>

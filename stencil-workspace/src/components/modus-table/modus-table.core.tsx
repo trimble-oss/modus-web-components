@@ -16,14 +16,16 @@ import {
   getSortedRowModel,
   SortingState,
   TableState,
+  Row,
 } from '@tanstack/table-core';
 import {
   ModusTableColumn,
+  ModusTableColumnSort,
   ModusTableRowSelectionOptions,
   ModusTableSortingState,
   ModusTableToolbarOptions,
 } from './models/modus-table.models';
-import { sortHyperlink } from './functions/sortingFunction';
+import { sortHyperlink, sortBadge } from './functions/sortingFunction';
 import { COLUMN_DEF_SUB_ROWS_KEY } from './modus-table.constants';
 
 export interface TableCoreOptions {
@@ -41,7 +43,10 @@ export interface TableCoreOptions {
   pageCount?: number;
   manualSorting?: boolean;
   sortingState?: ModusTableSortingState;
+  preSelectedRows?: RowSelectionState;
+  defaultSort?: ModusTableColumnSort;
 
+  getRowId(originalRow: unknown, index: number, parent?: Row<unknown>): string;
   setExpanded: (updater: Updater<ExpandedState>) => void;
   setSorting: (updater: Updater<SortingState>) => void;
   setRowSelection: (updater: Updater<RowSelectionState>) => void;
@@ -62,6 +67,7 @@ export default class ModusTableCore {
       columnResize,
       sort,
       pagination,
+      preSelectedRows,
       rowSelection,
       rowSelectionOptions,
       columnOrder,
@@ -71,6 +77,8 @@ export default class ModusTableCore {
       pageCount,
       manualSorting,
       sortingState,
+      defaultSort,
+      getRowId,
       setExpanded,
       setSorting,
       setRowSelection,
@@ -81,6 +89,7 @@ export default class ModusTableCore {
       setColumnOrder,
     } = tableOptions;
     const { multiple, subRowSelection } = rowSelectionOptions;
+    const defaultSortState = defaultSort ? [defaultSort] : [];
     const options: TableOptionsResolved<unknown> = {
       data: data ?? [],
       columns: (columns as ColumnDef<unknown>[]) ?? [],
@@ -91,8 +100,8 @@ export default class ModusTableCore {
         columnVisibility: {},
         columnOrder: columnOrder,
         expanded: null,
-        sorting: manualSorting ? sortingState : [],
-        rowSelection: {},
+        sorting: manualSorting ? sortingState : defaultSortState,
+        rowSelection: preSelectedRows,
         pagination: pagination && {
           pageIndex: 0,
           pageSize: pageSizeList[0],
@@ -104,6 +113,7 @@ export default class ModusTableCore {
       enableSorting: sort,
       sortingFns: {
         sortForHyperlink: sortHyperlink,
+        sortForBadge: sortBadge,
       },
       columnResizeMode: 'onChange',
       enableColumnResizing: columnResize,
@@ -123,6 +133,7 @@ export default class ModusTableCore {
       getSortedRowModel: getSortedRowModel(),
       getExpandedRowModel: getExpandedRowModel(),
       getSubRows: (row) => row[COLUMN_DEF_SUB_ROWS_KEY],
+      getRowId: getRowId,
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       onStateChange: () => {},
       renderFallbackValue: null,

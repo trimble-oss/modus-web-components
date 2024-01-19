@@ -12,8 +12,9 @@
   display: inline-flex;
   flex-direction: row;
   font-family: $primary-font;
-  font-size: $label-font-size;
+  font-size: $rem-14px;
   height: $rem-24px;
+  margin: 0 0.28rem;
   text-align: center;
   white-space: nowrap;
 
@@ -21,18 +22,24 @@
     align-items: center;
     background-color: $modus-checkbox-bg;
     border: $rem-2px solid $modus-checkbox-border-color;
-    border-radius: $rem-2px;
+    border-radius: 1.75px;
     display: flex;
-    height: $rem-16px;
+    height: $rem-14px;
     justify-content: center;
-    margin: 0 0.28rem;
     transition: background-color 0.15s ease-in-out;
-    width: $rem-16px;
+    width: $rem-14px;
+
+    &.small {
+      border-radius: 1.5px;
+      height: $rem-8px;
+      width: $rem-8px;
+    }
 
     &:focus,
     &:focus-visible {
-      box-shadow: 0 0 0 0.2rem $modus-checkbox-focus-box-shadow-color;
-      outline: 0;
+      border: $rem-2px solid $modus-checkbox-selected-border-color !important;
+      outline: $rem-2px solid $modus-checkbox-focus-box-shadow-color !important;
+      outline-offset: 2px !important;
     }
 
     &.blue-background {
@@ -67,6 +74,12 @@
   label {
     align-items: center;
     display: flex;
+    margin-left: $rem-8px;
+
+    &.small {
+      font-size: $rem-12px;
+      margin-left: $rem-4px;
+    }
 
     &.disabled {
       opacity: 0.3;

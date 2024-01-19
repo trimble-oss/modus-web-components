@@ -13,9 +13,13 @@ interface ModusTableBodyProps {
 }
 
 export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ context }) => {
-  const { hover, rowSelection, rowSelectionOptions, rowActions, tableInstance: table, updateData } = context;
+  const { density, hover, rowSelection, rowSelectionOptions, rowActions, tableInstance: table, updateData } = context;
   const hasRowActions = rowActions?.length > 0;
   const multipleRowSelection = rowSelectionOptions?.multiple;
+  let checkboxSize: 'medium' | 'small' = 'medium';
+  if(density === 'compact') {
+    checkboxSize = 'small';
+  }
 
   // Note: This function supports only 3 levels of nested rows.
   function handleCellValueChange(props: ModusTableCellValueChange) {
@@ -25,7 +29,13 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
         const newData = [...old];
 
         // rowId is a string of IDs for rows with nested information like subrows.
-        const idArray: number[] = row['id']?.split('.')?.map((id) => parseInt(id));
+        const idArray: number[] = [];
+        let currentRow = row;
+        while (currentRow) {
+          idArray.push(currentRow['index']);
+          currentRow = currentRow['parent'];
+        }
+        idArray.reverse();
 
         if (idArray.length === 1) {
           newData[idArray[0]][accessorKey] = newValue;
@@ -54,7 +64,8 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
               <ModusTableCellCheckbox
                 multipleRowSelection={multipleRowSelection}
                 row={row}
-                isChecked={isChecked}></ModusTableCellCheckbox>
+                isChecked={isChecked}
+                checkboxSize={checkboxSize}></ModusTableCellCheckbox>
             )}
             {getVisibleCells()?.map((cell, cellIndex) => {
               return (

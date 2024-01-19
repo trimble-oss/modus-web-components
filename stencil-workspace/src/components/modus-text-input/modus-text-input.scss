@@ -18,7 +18,7 @@
   }
 
   .label-container {
-    display: flex;
+    display: inline-block;
 
     .required {
       bottom: $rem-1px;

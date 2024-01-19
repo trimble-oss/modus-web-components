@@ -48,6 +48,10 @@ table {
     &.row-checkbox {
       padding: 0.5rem !important;
       width: 46px;
+
+      &.small {
+        width: 38px;
+      }
     }
 
     &:last-child {
@@ -322,9 +326,9 @@ table {
       }
 
       &.hide-text-selection {
-        user-select: none;
         -webkit-user-select: none;
         -moz-user-select: none;
+        user-select: none;
       }
 
       &.active-resize {
@@ -347,6 +351,45 @@ table {
     position: sticky;
     right: 0;
     z-index: 1;
+  }
+
+  &.density-relaxed {
+    tbody {
+      tr {
+        height: $rem-48px;
+      }
+    }
+  }
+
+  &.density-comfortable {
+    tbody {
+      tr {
+        height: $rem-32px;
+
+        td {
+          &.row-checkbox {
+            padding: $rem-2px $rem-8px !important;
+          }
+        }
+      }
+    }
+  }
+
+  &.density-compact {
+    tbody {
+      tr {
+        height: $rem-24px;
+
+        td {
+          padding-bottom: $rem-2px;
+          padding-top: $rem-2px;
+
+          &.row-checkbox {
+            padding: $rem-2px $rem-8px !important;
+          }
+        }
+      }
+    }
   }
 }
 

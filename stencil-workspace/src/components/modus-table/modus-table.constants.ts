@@ -18,6 +18,7 @@ export const COLUMN_DEF_DATATYPE_TEXT = 'text';
 export const COLUMN_DEF_DATATYPE_INTEGER = 'integer';
 export const COLUMN_DEF_DATATYPE_LINK = 'link';
 export const COLUMN_DEF_DATATYPE_DATE = 'date';
+export const COLUMN_DEF_DATATYPE_BADGE = 'badge';
 
 export const CELL_EDIT_TYPE_TEXT = COLUMN_DEF_DATATYPE_TEXT;
 export const CELL_EDIT_TYPE_INT = COLUMN_DEF_DATATYPE_INTEGER;

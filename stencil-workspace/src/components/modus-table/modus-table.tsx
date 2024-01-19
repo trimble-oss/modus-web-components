@@ -25,6 +25,7 @@ import {
   Updater,
   VisibilityState,
   SortingState,
+  Row,
 } from '@tanstack/table-core';
 import {
   COLUMN_ORDER_STATE_KEY,
@@ -49,6 +50,8 @@ import {
   ModusTableRowAction,
   ModusTableRowActionClick,
   ModusTableSortingState,
+  ModusTableRowWithId,
+  ModusTableColumnSort,
 } from './models/modus-table.models';
 import ColumnDragState from './models/column-drag-state.model';
 import {
@@ -107,6 +110,9 @@ export class ModusTable {
     this.tableCore?.setOptions('data', newVal);
   }
 
+  /** (optional) The density of the table. */
+  @Prop() density: 'relaxed' | 'comfortable' | 'compact' = 'relaxed';
+
   /** (Optional) To control display options of table. */
   @Prop() displayOptions?: ModusTableDisplayOptions = {
     borderless: false,
@@ -151,13 +157,21 @@ export class ModusTable {
     newVal: ModusTableManualPaginationOptions,
     oldVal: ModusTableManualPaginationOptions
   ) {
-    if (
-      newVal.pageCount !== oldVal.pageCount ||
-      newVal.currentPageIndex !== oldVal.currentPageIndex ||
-      newVal.currentPageSize !== oldVal.currentPageSize
-    ) {
-      this.tableCore.setOptions('pageCount', newVal.pageCount);
+    const hasUpdateValues =
+      newVal?.pageCount !== oldVal?.pageCount ||
+      newVal?.currentPageIndex !== oldVal?.currentPageIndex ||
+      newVal?.currentPageSize !== oldVal?.currentPageSize;
+
+    if (hasUpdateValues) {
+      this.tableCore?.setOptions('pageCount', newVal.pageCount);
+      this.tableCore?.setState('pagination', {
+        pageIndex: newVal.currentPageIndex - 1,
+        pageSize: newVal.currentPageSize,
+      });
       this.manualPaginationOptions = { ...newVal };
+    } else if (Object.keys(newVal).length === 0 && Object.keys(oldVal).length === 0) {
+      this.tableCore?.setOptions('manualPagination', false);
+      this.initializeTable();
     }
   }
 
@@ -169,16 +183,16 @@ export class ModusTable {
   ) {
     if (newVal?.currentSortingState.length === 0) {
       if (oldVal && oldVal.currentSortingState.length > 0) {
-        this.tableCore.setOptions('manualPagination', true);
-        this.tableCore.setState('sorting', newVal.currentSortingState);
+        this.tableCore?.setOptions('manualSorting', true);
+        this.tableCore?.setState('sorting', newVal.currentSortingState);
         this.manualSortingOptions = { ...newVal };
       }
     } else if (
       newVal?.currentSortingState[0]?.id !== oldVal?.currentSortingState[0]?.id ||
       newVal?.currentSortingState[0]?.desc !== oldVal?.currentSortingState[0]?.desc
     ) {
-      this.tableCore.setOptions('manualPagination', true);
-      this.tableCore.setState('sorting', newVal.currentSortingState);
+      this.tableCore?.setOptions('manualSorting', true);
+      this.tableCore?.setState('sorting', newVal.currentSortingState);
       this.manualSortingOptions = { ...newVal };
     }
   }
@@ -192,9 +206,14 @@ export class ModusTable {
     newVal: ModusTableRowSelectionOptions,
     oldVal: ModusTableRowSelectionOptions
   ) {
-    if (newVal.multiple !== oldVal.multiple || newVal.subRowSelection !== oldVal.subRowSelection) {
-      this.rowSelectionOptions.multiple = newVal.multiple;
-      this.rowSelectionOptions.subRowSelection = newVal.subRowSelection;
+    if (
+      newVal.multiple !== oldVal.multiple ||
+      newVal.subRowSelection !== oldVal.subRowSelection ||
+      newVal.preSelectedRows !== oldVal.preSelectedRows
+    ) {
+      this.tableCore?.setOptions('enableMultiRowSelection', newVal.multiple);
+      this.tableCore?.setState('rowSelection', newVal.preSelectedRows);
+      this.tableCore?.setState('subRowSelection', newVal.subRowSelection);
     }
   }
 
@@ -218,6 +237,14 @@ export class ModusTable {
   @Watch('toolbarOptions') onToolbarOptionsChange(newVal: ModusTableToolbarOptions | null) {
     this.tableCore?.setOptions('enableHiding', !!newVal?.columnsVisibility);
     this.onRowsExpandableChange(this.rowsExpandable);
+  }
+
+  /** (Optional) To set the default sorting for the table. */
+  @Prop() defaultSort: ModusTableColumnSort;
+  @Watch('defaultSort') onDefaultSortChange(newVal: ModusTableColumnSort | null) {
+    if (!(this.manualSortingOptions?.currentSortingState?.length > 0)) {
+      this.tableCore?.setState('sorting', [newVal]);
+    }
   }
 
   /** Emits the cell value that was edited */
@@ -266,7 +293,6 @@ export class ModusTable {
   }
 
   @State() dragAndDropObj: TableHeaderDragDrop = new TableHeaderDragDrop();
-
   @State() tableState: TableState = {
     columnSizing: {},
     columnSizingInfo: {} as ColumnSizingInfoState,
@@ -283,6 +309,12 @@ export class ModusTable {
 
   @State() tableCore: ModusTableCore;
 
+  classByDensity: Map<string, string> = new Map([
+    ['relaxed', 'density-relaxed'],
+    ['comfortable', 'density-comfortable'],
+    ['compact', 'density-compact'],
+  ]);
+
   private frozenColumns: string[] = [];
   private isColumnResizing = false;
   private _id: string;
@@ -294,7 +326,10 @@ export class ModusTable {
 
   componentWillLoad(): void {
     this._id = this.element.id || `modus-table-${createGuid()}`;
-    this.setTableState({ columnOrder: this.columns?.map((column) => column.id as string) });
+    this.setTableState({
+      columnOrder: this.columns?.map((column) => column.id as string),
+      rowSelection: this.getPreselectedRowState(),
+    });
     this.onRowsExpandableChange(this.rowsExpandable);
     this.initializeTable();
   }
@@ -365,6 +400,12 @@ export class ModusTable {
     }
   }
 
+  getRowId(originalRow: unknown, index: number, parent?: Row<unknown>): string {
+    if (Object.prototype.hasOwnProperty.call(originalRow, 'id')) return (originalRow as ModusTableRowWithId).id;
+    if (parent) return `${parent.id}.${index}`;
+    return `${index}`;
+  }
+
   getRowActionsWithOverflow(): TableRowActionWithOverflow[] {
     if (this.rowActions) {
       const sortedActions = this.rowActions.sort((a, b) => a.index - b.index);
@@ -382,6 +423,7 @@ export class ModusTable {
     return {
       element: this.element,
       data: this.data,
+      density: this.density,
       sort: this.sort,
       componentId: this._id,
       hover: this.hover,
@@ -425,6 +467,7 @@ export class ModusTable {
       onRowSelectionOptionsChange: this.onRowSelectionOptionsChange,
       onSortChange: this.onSortChange,
       onToolbarOptionsChange: this.onToolbarOptionsChange,
+      getRowId: this.getRowId,
       updateData: this.updateData.bind(this),
     };
   }
@@ -487,6 +530,12 @@ export class ModusTable {
     this.itemDragState = null;
   }
 
+  getPreselectedRowState(): RowSelectionState {
+    const selection = {};
+    this.rowSelectionOptions.preSelectedRows?.forEach((row) => (selection[row] = true));
+    return selection;
+  }
+
   initializeTable(): void {
     this.tableCore = new ModusTableCore({
       data: this.data ?? [],
@@ -499,6 +548,8 @@ export class ModusTable {
       rowSelectionOptions: this.rowSelectionOptions,
       columnOrder: this.columnReorder ? this.tableState.columnOrder : [],
       toolbarOptions: this.toolbarOptions,
+      preSelectedRows: this.getPreselectedRowState(),
+      defaultSort: this.defaultSort,
 
       ...(this.manualPaginationOptions && {
         manualPagination: true,
@@ -508,6 +559,7 @@ export class ModusTable {
         manualSorting: true,
         sortingState: this.manualSortingOptions.currentSortingState,
       }),
+      getRowId: (originalRow: unknown, index: number, parent?: Row<unknown>) => this.getRowId(originalRow, index, parent),
       // setData: (updater: Updater<unknown[]>) => this.updateData(updater),
       setExpanded: (updater: Updater<ExpandedState>) => this.updateTableCore(updater, EXPANDED_STATE_KEY, this.rowExpanded),
       setSorting: (updater: Updater<SortingState>) => this.updateTableCore(updater, SORTING_STATE_KEY, this.sortChange),
@@ -532,7 +584,6 @@ export class ModusTable {
   updateTableCore(updater: Updater<unknown>, key: string, event: EventEmitter<unknown> = null) {
     const newTableState = { ...this.tableState };
     newTableState[key] = this.tableCore.getState(updater, this.tableState[key]);
-
     /**
      * Maintaining a local state of the table is necessary for the component to re-render and stay consistent with the internal state of Tanstack table.
      */
@@ -553,7 +604,10 @@ export class ModusTable {
       this.tableCore
         .getTableInstance()
         .getSelectedRowModel()
-        .flatRows.map((row) => row.original)
+        .flatRows.map((row) => {
+          row.original['id'] = row.id;
+          return row.original;
+        })
     );
   }
 
@@ -610,16 +664,17 @@ export class ModusTable {
     } = this._context;
     const totalSize = getTotalSize();
 
-    const tableMainClass = {
-      borderless: this.displayOptions?.borderless,
-      'cell-borderless': this.displayOptions?.cellBorderless,
-    };
+    const tableMainClass = `
+      ${this.displayOptions?.borderless ? 'borderless' : ''}
+      ${this.displayOptions?.cellBorderless ? 'cell-borderless' : ''}
+      ${this.classByDensity.get(this.density)}
+    `;
 
     const tableStyle = this.fullWidth
       ? { width: '100%' }
       : totalSize > 0
-      ? { width: `${totalSize}px`, tableLayout: 'fixed' }
-      : { tableLayout: 'fixed' };
+        ? { width: `${totalSize}px`, tableLayout: 'fixed' }
+        : { tableLayout: 'fixed' };
 
     return (
       <table data-test-id="main-table" class={tableMainClass} style={tableStyle}>

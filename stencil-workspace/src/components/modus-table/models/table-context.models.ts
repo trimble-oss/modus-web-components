@@ -15,7 +15,7 @@ import {
   ModusTablePaginationState,
   ModusTableManualPaginationOptions,
 } from './modus-table.models';
-import { Table, Updater } from '@tanstack/table-core';
+import { Row, Table, Updater } from '@tanstack/table-core';
 import ModusTableCore from '../modus-table.core';
 import { TableRowActionWithOverflow } from './table-row-actions.models';
 
@@ -31,6 +31,8 @@ export interface TableContext {
   columnReorder: boolean;
 
   data: unknown[];
+
+  density: 'relaxed' | 'comfortable' | 'compact';
 
   displayOptions?: ModusTableDisplayOptions;
 
@@ -96,6 +98,7 @@ export interface TableContext {
 
   tableCore: ModusTableCore;
 
+  getRowId: (originalRow: unknown, index: number, parent?: Row<unknown>) => string;
   updateData: (updater: Updater<unknown>, context: TableCellEdited) => void;
   onColumnsChange: (newVal: ModusTableColumn<unknown>[]) => void;
   onColumnResizeChange: (newVal: boolean) => void;

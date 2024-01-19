@@ -42,6 +42,14 @@ export default {
         type: { summary: 'string' },
       },
     },
+    disableCloseOnSelect: {
+      name: 'disable-close-on-select',
+      description: 'Whether the autocomplete options always display on select',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      },
+    },
     errorText: {
       name: 'error-text',
       description: "The autocomplete's error text",
@@ -108,6 +116,14 @@ export default {
         type: { summary: 'boolean' },
       },
     },
+    showOptionsOnFocus: {
+      name: 'show-options-on-focus',
+      description: 'Whether to show autocomplete options when focus',
+      table: {
+        defaultValue: { summary: true },
+        type: { summary: 'boolean' },
+      }
+    },
     size: {
       control: {
         options: ['medium', 'large'],
@@ -150,6 +166,7 @@ export const Default = ({
                           disabled,
                           dropdownMaxHeight,
                           dropdownZIndex,
+                          disableCloseOnSelect,
                           errorText,
                           includeSearchIcon,
                           label,
@@ -159,6 +176,7 @@ export const Default = ({
                           readOnly,
                           required,
                           showNoResultsFoundMessage,
+                          showOptionsOnFocus,
                           size,
                           value }) => html`
   <div style="width: 600px">
@@ -167,6 +185,7 @@ export const Default = ({
       aria-label=${ariaLabel}
       clearable=${clearable}
       disabled=${disabled}
+      disable-close-on-select=${disableCloseOnSelect}
       dropdown-max-height=${dropdownMaxHeight}
       dropdown-z-index=${dropdownZIndex}
       error-text=${errorText}
@@ -178,6 +197,7 @@ export const Default = ({
       read-only=${readOnly}
       required=${required}
       show-no-results-found-message=${showNoResultsFoundMessage}
+      show-options-on-focus=${showOptionsOnFocus}
       size=${size}
       value=${value}>
     </modus-autocomplete>
@@ -188,6 +208,7 @@ Default.args = {
   ariaLabel: 'autocomplete',
   clearable: false,
   disabled: false,
+  disableCloseOnSelect: false,
   dropdownMaxHeight: '300px',
   dropdownZIndex: '1',
   errorText: '',
@@ -199,6 +220,7 @@ Default.args = {
   readOnly: false,
   required: false,
   showNoResultsFoundMessage: true,
+  showOptionsOnFocus: false,
   size: 'medium',
   value: '',
 }
@@ -220,6 +242,7 @@ export const WithOption = ({
                              disabled,
                              dropdownMaxHeight,
                              dropdownZIndex,
+                             disableCloseOnSelect,
                              errorText,
                              includeSearchIcon,
                              label,
@@ -229,6 +252,7 @@ export const WithOption = ({
                              readOnly,
                              required,
                              showNoResultsFoundMessage,
+                             showOptionsOnFocus,
                              size,
                              value }) => html`
   <div style="width: 600px">
@@ -239,6 +263,7 @@ export const WithOption = ({
       disabled=${disabled}
       dropdown-max-height=${dropdownMaxHeight}
       dropdown-z-index=${dropdownZIndex}
+      disable-close-on-select=${disableCloseOnSelect}
       error-text=${errorText}
       include-search-icon=${includeSearchIcon}
       label=${label}
@@ -248,6 +273,7 @@ export const WithOption = ({
       read-only=${readOnly}
       required=${required}
       show-no-results-found-message=${showNoResultsFoundMessage}
+      show-options-on-focus=${showOptionsOnFocus}
       size=${size}
       value=${value}>
     </modus-autocomplete>
@@ -260,6 +286,7 @@ WithOption.args = {
   disabled: false,
   dropdownMaxHeight: '300px',
   dropdownZIndex: '1',
+  disableCloseOnSelect: false,
   errorText: '',
   includeSearchIcon: true,
   label: 'Autocomplete using option model',
@@ -269,6 +296,7 @@ WithOption.args = {
   readOnly: false,
   required: false,
   showNoResultsFoundMessage: true,
+  showOptionsOnFocus: false,
   size: 'medium',
   value: '',
 }
@@ -289,6 +317,7 @@ export const WithCustomOption = ({
                                    disabled,
                                    dropdownMaxHeight,
                                    dropdownZIndex,
+                                   disableCloseOnSelect,
                                    errorText,
                                    includeSearchIcon,
                                    label,
@@ -298,6 +327,7 @@ export const WithCustomOption = ({
                                    readOnly,
                                    required,
                                    showNoResultsFoundMessage,
+                                   showOptionsOnFocus,
                                    size,
                                    value }) => html`
   <div style="width: 600px">
@@ -307,6 +337,7 @@ export const WithCustomOption = ({
       disabled=${disabled}
       dropdown-max-height=${dropdownMaxHeight}
       dropdown-z-index=${dropdownZIndex}
+      disable-close-on-select=${disableCloseOnSelect}
       error-text=${errorText}
       include-search-icon=${includeSearchIcon}
       label=${label}
@@ -316,6 +347,7 @@ export const WithCustomOption = ({
       read-only=${readOnly}
       required=${required}
       show-no-results-found-message=${showNoResultsFoundMessage}
+      show-options-on-focus=${showOptionsOnFocus}
       size=${size}
       value=${value}>
       <li data-search-value="The Git Guru" data-id="1" style="padding: 8px">
@@ -335,6 +367,7 @@ WithCustomOption.args = {
   disabled: false,
   dropdownMaxHeight: '300px',
   dropdownZIndex: '1',
+  disableCloseOnSelect: false,
   errorText: '',
   includeSearchIcon: true,
   label: 'Employee Search',
@@ -344,6 +377,7 @@ WithCustomOption.args = {
   readOnly: false,
   required: false,
   showNoResultsFoundMessage: true,
+  showOptionsOnFocus: false,
   size: 'medium',
   value: '',
 }

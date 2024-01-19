@@ -30,6 +30,11 @@ function newPerson() {
     progress: randomNumber(1, 100) * 100,
     status: randomNumber(1, 100) > 66 ? 'Verified' : randomNumber(0, 100) > 33 ? 'Pending' : 'Rejected',
     createdAt: new Date(randomNumber(1990, 2020), randomNumber(0, 11), randomNumber(1, 30)).toDateString(),
+    priority: Priorities[
+      randomNumber(1, 100) > 66 ? 'high':
+      randomNumber(0, 100) > 33 ? 'medium'
+      : 'low'
+    ],
   };
 }
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -47,10 +52,11 @@ function makeData(...lens): object[] {
   return makeDataLevel();
 }
 
-function initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions, manualPaginationOptions, manualSortingOptions) {
+function initializeTable(props) {
+  const {columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions, manualPaginationOptions, manualSortingOptions, defaultSort} = props
   const tag = document.createElement('script');
   tag.innerHTML = `
-  var modusTable = document.querySelector('modus-table')
+  var modusTable = document.querySelector('modus-table');
   modusTable.columns = ${JSON.stringify(columns)};
   modusTable.data = ${JSON.stringify(data)};
   modusTable.pageSizeList = ${JSON.stringify(pageSizeList)};
@@ -60,9 +66,11 @@ function initializeTable(columns, data, pageSizeList, toolbarOptions, displayOpt
   modusTable.rowActions = ${JSON.stringify(rowActions)};
   modusTable.manualPaginationOptions = ${JSON.stringify(manualPaginationOptions)};
   modusTable.manualSortingOptions = ${JSON.stringify(manualSortingOptions)};
+  modusTable.defaultSort = ${JSON.stringify(defaultSort)};
 
+  var globalData = ${JSON.stringify(data)};
   if(!!modusTable.manualSortingOptions){
-    let currentData = modusTable.data;
+    let currentData = globalData;
     const accessorKey = getAccessortKey(modusTable.columns, modusTable.manualSortingOptions.currentSortingState[0].id);
     currentData.sort(compareValues(accessorKey, modusTable.manualSortingOptions.currentSortingState[0].desc));
     if(!!modusTable.manualPaginationOptions){
@@ -71,6 +79,11 @@ function initializeTable(columns, data, pageSizeList, toolbarOptions, displayOpt
     } else {
       modusTable.data = currentData;
     }
+  } else if(!!modusTable.manualPaginationOptions){
+    modusTable.data = globalData.slice((modusTable.manualPaginationOptions.currentPageIndex - 1) * modusTable.manualPaginationOptions.currentPageSize,
+      modusTable.manualPaginationOptions.currentPageIndex * modusTable.manualPaginationOptions.currentPageSize);
+  } else {
+    modusTable.data = globalData;
   }
 
   function compareValues(key, desc) {
@@ -177,6 +190,27 @@ const Names = [
   'Papa Smurf',
   'Buzz Lightyear',
 ];
+
+const Priorities = {
+  "high": {
+    size: 'medium',
+    type: 'counter',
+    text: 'High',
+    color: 'success',
+  },
+  "medium": {
+    size: 'medium', type: 'counter',
+    text: 'Medium',
+    color: 'warning'
+  },
+  "low": {
+    size: 'medium', type: 'counter',
+    text: 'Low',
+    color: 'danger'
+  }
+}
+
+
 const DefaultColumns = [
   {
     header: 'First Name',
@@ -225,7 +259,6 @@ const DefaultColumns = [
     accessorKey: 'status',
     id: 'status',
     dataType: 'text',
-    minSize: 80,
   },
   {
     header: 'Profile Progress',
@@ -357,6 +390,19 @@ export default {
       },
       type: { required: false },
     },
+    density: {
+      name: 'density',
+      description: 'Manage table density.',
+      control: {
+        options: ['relaxed', 'comfortable', 'compact'],
+        type: 'select',
+      },
+      table: {
+        defaultValue: { summary: `'relaxed'` },
+        type: { summary: `'relaxed', 'comfortable', 'compact'` },
+      },
+      type: { required: false },
+    },
     fullWidth: {
       name: 'fullWidth',
       description: 'Manage table width.',
@@ -465,6 +511,14 @@ export default {
       },
       type: { required: false },
     },
+    defaultSort : {
+      name: 'defaultSort',
+      description: 'To set the default sorting of the table',
+      table: {
+        type: { summary: 'ModusTableColumnSort' },
+      },
+      type: { required: false },
+    }
   },
 
   parameters: {
@@ -505,7 +559,9 @@ const Template = ({
   rowSelection,
   rowSelectionOptions,
   manualPaginationOptions,
-  manualSortingOptions
+  manualSortingOptions,
+  defaultSort,
+  density
 }) => html`
   <div style="width: 950px">
     <modus-table
@@ -513,6 +569,7 @@ const Template = ({
       sort="${sort}"
       column-resize="${columnResize}"
       column-reorder="${columnReorder}"
+      density="${density}"
       pagination="${pagination}"
       show-sort-icon-on-hover="${showSortIconOnHover}"
       summary-row="${summaryRow}"
@@ -523,7 +580,7 @@ const Template = ({
       max-width="${maxWidth}"
       row-selection="${rowSelection}" />
   </div>
-  ${initializeTable(columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions, manualPaginationOptions, manualSortingOptions)}
+  ${initializeTable({columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions, manualPaginationOptions, manualSortingOptions, defaultSort})}
 `;
 
 export const Default = Template.bind({});
@@ -572,13 +629,15 @@ export const ValueFormatter = ({
   maxHeight,
   maxWidth,
   rowSelection,
-  rowSelectionOptions
+  rowSelectionOptions,
+  density
 }) => html`
   <div style="width: 950px">
     <modus-table
       hover="${hover}"
       sort="${sort}"
       column-resize="${columnResize}"
+      density="${density}"
       pagination="${pagination}"
       show-sort-icon-on-hover="${showSortIconOnHover}"
       summary-row="${summaryRow}"
@@ -626,6 +685,25 @@ const valueFormatterTable = (pageSizeList, toolbarOptions, displayOptions, rowSe
 export const Hyperlink = Template.bind({});
 Hyperlink.args = { ...DefaultArgs, columns: DefaultColumns, data: makeData(7) };
 
+export const Badge = Template.bind({});
+Badge.args = {
+  ...DefaultArgs,
+  columns: [
+    ...DefaultColumns.slice(0, DefaultColumns.length-2),
+    {
+      header: 'Priority',
+      accessorKey: 'priority',
+      sortingFn: 'sortForBadge',
+      id: 'priority',
+      dataType: 'badge',
+      maxSize: 100,
+    },
+    ...DefaultColumns.slice(DefaultColumns.length - 1)
+  ],
+  data: makeData(7)
+
+}
+
 export const ColumnResize = Template.bind({});
 ColumnResize.args = { ...DefaultArgs, columnResize: true };
 
@@ -633,15 +711,15 @@ export const Pagination = Template.bind({});
 Pagination.args = { ...DefaultArgs, pagination: true, data: makeData(50), pageSizeList: [5, 10, 50] };
 
 export const ManualPagination = Template.bind({});
-
 ManualPagination.args = {
   ...DefaultArgs,
   pagination: true,
+  data: makeData(50),
   manualPaginationOptions: {
     currentPageIndex: 1,
     currentPageSize: 5,
-    pageCount: DefaultArgs.data.length / 5,
-    totalRecords: DefaultArgs.data.length,
+    pageCount: 10,
+    totalRecords: 50,
   },
   pageSizeList: [5, 10, 50],
 };
@@ -672,7 +750,8 @@ export const CheckboxRowSelection = Template.bind({});
 CheckboxRowSelection.args = {
   ...DefaultArgs, rowSelection: true, rowSelectionOptions: {
     multiple: true,
-    subRowSelection: true
+    subRowSelection: true,
+    preSelectedRows:["0"],
   }, data: makeData(7)
 };
 

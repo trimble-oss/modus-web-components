@@ -201,7 +201,6 @@
   --modus-check-input-label-color: var(--modus-input-label-color);
   --modus-check-input-hover-border-color: var(--modus-highlight-blue-color);
   --modus-check-input-active-border-color: var(--modus-highlight-blue-color);
-  --modus-check-input-focus-box-shadow-color: #217fbb57;
 
   // Card
   --modus-card-bg: var(--modus-white);
@@ -387,6 +386,12 @@
   --modus-tooltip-bg: var(--modus-gray-7);
   --modus-tooltip-color: var(--modus-white);
 
+  // Sentiment Scale
+  --modus-sentiment-scale-bg: var(--modus-trimble-gray);
+  --modus-sentiment-scale-hover-bg: var(--modus-blue);
+  --modus-sentiment-scale-selected-bg: var(--modus-blue);
+  --modus-sentiment-scale-disabled-opacity: 0.3;
+
   // Side Navigation
   --modus-side-navigation-bg: var(--modus-body-bg);
   --modus-side-navigation-item-hover-bg: var(--modus-gray-0);
@@ -411,6 +416,9 @@
   // Autocomplete
   --modus-autocomplete-no-results-message-color: var(--modus-gray-7);
   --modus-autocomplete-no-results-subtext-color: var(--modus-gray-4);
+
+  // Radio Button
+  --modus-radio-btn-focus-color: #3db0ee;
 }
 
 [data-mwc-theme='dark'] {
@@ -546,7 +554,6 @@
   --modus-check-input-label-color: var(--modus-input-label-color);
   --modus-check-input-hover-border-color: var(--modus-highlight-blue-color);
   --modus-check-input-active-border-color: var(--modus-highlight-blue-color);
-  --modus-check-input-focus-box-shadow-color: #019aeb66;
 
   // Card
   --modus-card-bg: var(--modus-gray-9);
@@ -725,6 +732,12 @@
   --modus-tooltip-bg: var(--modus-gray-0);
   --modus-tooltip-color: var(--modus-trimble-gray);
 
+  // Sentiment Scale
+  --modus-sentiment-scale-bg: var(--modus-gray-4);
+  --modus-sentiment-scale-hover-bg: var(--modus-blue-4);
+  --modus-sentiment-scale-selected-bg: var(--modus-blue-4);
+  --modus-sentiment-scale-disabled-opacity: 0.3;
+
   // Side Navigation
   --modus-side-navigation-bg: var(--modus-gray-10);
   --modus-side-navigation-item-hover-bg: var(--modus-gray-8);
@@ -749,6 +762,9 @@
   // Autocomplete
   --modus-autocomplete-no-results-message-color: var(--modus-gray-0);
   --modus-autocomplete-no-results-subtext-color: var(--modus-gray-4);
+
+  // Radio Button
+  --modus-radio-btn-focus-color: #0a7ebc;
 }
 
 // Mixins
@@ -781,7 +797,7 @@
   --modus-checkbox-hover-border-color: var(--modus-check-input-active-border-color);
   --modus-checkbox-selected-border-color: var(--modus-check-input-active-border-color);
   --modus-checkbox-indeterminate-border-color: var(--modus-check-input-active-border-color);
-  --modus-checkbox-focus-box-shadow-color: var(--modus-check-input-focus-box-shadow-color);
+  --modus-checkbox-focus-box-shadow-color: var(--modus-blue-4);
 }
 
 @mixin modus-list-item {

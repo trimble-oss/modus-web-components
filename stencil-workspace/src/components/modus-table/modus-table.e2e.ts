@@ -419,6 +419,41 @@ describe('modus-table', () => {
     expect(paginationContainer.textContent).toContain('Showing result11-20of100');
   });
 
+  it('ensures correct rendering of pagination when toggled on with initial invalid properties', async () => {
+    page = await newE2EPage();
+    await page.setContent('<modus-table />');
+
+    const MockManualPagination = {
+      currentPageIndex: 1,
+      currentPageSize: 10,
+      pageCount: 1,
+      totalRecords: 2,
+    };
+
+    const component = await page.find('modus-table');
+
+    component.setProperty('columns', MockColumns);
+    component.setProperty('manualPaginationOptions', {});
+    component.setProperty('data', MockData);
+    component.setProperty('pagination', false);
+
+    await page.waitForChanges();
+    component.setProperty('pagination', true);
+    await page.waitForChanges();
+    component.setProperty('manualPaginationOptions', MockManualPagination);
+    await page.waitForChanges();
+    component.setProperty('pageSizeList', [5, 10, 50]);
+    await page.waitForChanges();
+
+    const pagination = await page.find(`modus-table >>> modus-pagination`);
+    const paginationContainer = await page.find('modus-table >>> .pagination-and-count > .total-count');
+    await page.waitForChanges();
+
+    expect(paginationContainer).not.toBeNull();
+    expect(paginationContainer.textContent).toContain('Showing result1-2of2');
+    expect(await pagination.getAttribute('active-page')).toBe('1');
+  });
+
   it('Renders custom footer when summaryRow is true', async () => {
     page = await newE2EPage();
     await page.setContent('<modus-table />');
@@ -583,6 +618,37 @@ describe('modus-table', () => {
     expect(cellLinkClickEvent).toHaveReceivedEventDetail(emailData);
   });
 
+  it('Renders Badge in cell', async () => {
+    page = await newE2EPage();
+
+    await page.setContent('<modus-table />');
+    const component = await page.find('modus-table');
+
+    const statusColumn = [
+      {
+        header: 'Status',
+        accessorKey: 'status',
+        id: 'status',
+        dataType: 'badge',
+      },
+    ];
+    const statusData = {
+      size: 'medium',
+      type: 'counter',
+      text: 'Verified',
+      color: 'success',
+    };
+
+    component.setProperty('columns', statusColumn);
+    component.setProperty('data', [{ status: statusData }]);
+    await page.waitForChanges();
+
+    const cell = await page.find('modus-table >>> td');
+    const cellValue = cell.textContent;
+
+    expect(cellValue).toEqual(statusData.text);
+  });
+
   it('Performs keyboard navigation on cells with hyperlinks', async () => {
     page = await newE2EPage();
 
@@ -685,6 +751,7 @@ describe('modus-table', () => {
     component.setProperty('rowSelection', true);
     component.setProperty('rowSelectionOptions', {
       multiple: false,
+      preSelectedRows: [],
     });
 
     await page.waitForChanges();
@@ -786,5 +853,86 @@ describe('modus-table', () => {
     const rowActionsMenuItemClick = await page.spyOnEvent('rowActionClick');
     await rowActionsMenuItem[0].click();
     expect(rowActionsMenuItemClick).toHaveReceivedEvent();
+  });
+
+  it('Renders pre selected rows checked', async () => {
+    page = await newE2EPage();
+
+    await page.setContent('<modus-table />');
+    const component = await page.find('modus-table');
+
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    component.setProperty('rowSelection', true);
+    component.setProperty('rowSelectionOptions', {
+      multiple: true,
+      preSelectedRows: ['0'],
+    });
+    await page.waitForChanges();
+    const rowsSelected = await page.findAll('modus-table >>> modus-checkbox');
+    for (let i = 1; i < rowsSelected.length; i++) {
+      const row = rowsSelected[i];
+      const isChecked = await row.getProperty('checked');
+      if (i === 1) {
+        expect(isChecked).toBeTruthy();
+      } else {
+        expect(isChecked).toBeFalsy();
+      }
+    }
+    expect(rowsSelected).toHaveLength(3);
+  });
+
+  it('Renders changes to the density prop', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-table></modus-table>');
+    const component = await page.find('modus-table');
+    const element = await page.find('modus-table >>> table');
+    expect(element).toHaveClass('density-relaxed');
+
+    component.setProperty('density', 'compact');
+    await page.waitForChanges();
+    expect(element).toHaveClass('density-compact');
+  });
+
+  it('Sorting by default sort', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-table></modus-table>');
+    const component = await page.find('modus-table');
+
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    component.setProperty('sort', true);
+    component.setProperty('defaultSort', { id: 'mock-column-two', desc: true });
+
+    await page.waitForChanges();
+    const tableData = await page.findAll('modus-table >>> td');
+    const firstItem = tableData[0].textContent;
+    expect(firstItem).toBe('Mock Data One 2');
+  });
+
+  it('Renders small size checkboxes for compact density', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-table />');
+    const component = await page.find('modus-table');
+
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    component.setProperty('rowSelection', true);
+    component.setProperty('rowSelectionOptions', {
+      multiple: true,
+      preSelectedRows: ['0'],
+    });
+    component.setProperty('density', 'compact');
+
+    await page.waitForChanges();
+    const rows = await page.findAll('modus-table >>> modus-checkbox');
+    expect(rows.length).toBeGreaterThan(0);
+    for (let i = 0; i < rows.length; i++) {
+      const size = await rows[i].getProperty('size');
+      expect(size).toBe('small');
+    }
   });
 });

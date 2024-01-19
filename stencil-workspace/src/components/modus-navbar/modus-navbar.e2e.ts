@@ -400,4 +400,43 @@ describe('modus-navbar', () => {
     expect(await primaryLogo).toBeFalsy();
     expect(await secondaryLogo).toBeFalsy();
   });
+
+  it('should render slot in profile menu', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<modus-navbar><div slot="profileMenu">Render your own profile menu content.</div></modus-navbar>'
+    );
+    await page.waitForChanges();
+
+    const profileMenuButton = await page.find('modus-navbar >>> .profile-menu');
+    await profileMenuButton.click();
+    await page.waitForChanges();
+
+    const usercontent = await page.find('modus-navbar >>> slot[name="profileMenu"]');
+    expect(usercontent).not.toBeNull();
+  });
+
+  it('should trigger enter key event on signout button', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-navbar></modus-navbar>');
+    await page.waitForChanges();
+
+    const navbar = await page.find('modus-navbar');
+    await page.waitForChanges();
+    const profileMenuSignOutClickEvent = await navbar.spyOnEvent('profileMenuSignOutClick');
+
+    const profileMenuButton = await page.find('modus-navbar >>> .profile-menu');
+    await profileMenuButton.click();
+    await page.waitForChanges();
+
+    const signout = await profileMenuButton.find('modus-navbar-profile-menu >>> .sign-out');
+    await signout.focus();
+    await page.waitForChanges();
+
+    await page.keyboard.press('Enter');
+    await page.waitForChanges();
+
+    expect(profileMenuSignOutClickEvent).toHaveReceivedEvent();
+  });
 });

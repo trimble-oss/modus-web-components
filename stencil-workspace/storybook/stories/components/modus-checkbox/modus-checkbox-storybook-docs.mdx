@@ -8,21 +8,26 @@ import { Anchor } from '@storybook/addon-docs';
 
 This component is compatible with Angular reactive forms. This can be achieved through the implementation of a simple directive.
 
-<Anchor storyId="user-inputs-checkbox--default" />
+<Anchor storyId="user-inputs-checkbox--medium" />
 
-### Default
+### Medium
 
 <modus-checkbox></modus-checkbox><br />
 <modus-checkbox disabled></modus-checkbox><br />
 <modus-checkbox label="Checkbox"></modus-checkbox><br />
 <modus-checkbox disabled label="Checkbox"></modus-checkbox><br />
 <modus-checkbox checked disabled label="Checkbox"></modus-checkbox><br />
-
-<Anchor storyId="user-inputs-checkbox--indeterminate" />
-
-### Indeterminate
-
 <modus-checkbox indeterminate></modus-checkbox>
+
+### Small
+
+<modus-checkbox size='small'></modus-checkbox><br />
+<modus-checkbox disabled size='small'></modus-checkbox><br />
+<modus-checkbox label="Checkbox" size='small'></modus-checkbox><br />
+<modus-checkbox disabled label="Checkbox" size='small'></modus-checkbox><br />
+<modus-checkbox checked disabled label="Checkbox" size='small'></modus-checkbox><br />
+<modus-checkbox indeterminate size='small'></modus-checkbox>
+
 
 ```html
 <modus-checkbox></modus-checkbox>
@@ -31,6 +36,14 @@ This component is compatible with Angular reactive forms. This can be achieved t
 <modus-checkbox disabled label="Checkbox"></modus-checkbox>
 <modus-checkbox checked disabled label="Checkbox"></modus-checkbox>
 <modus-checkbox indeterminate></modus-checkbox>
+
+<modus-checkbox size='small'></modus-checkbox>
+<modus-checkbox disabled size='small'></modus-checkbox>
+<modus-checkbox label="Checkbox" size='small'></modus-checkbox>
+<modus-checkbox disabled label="Checkbox" size='small'></modus-checkbox>
+<modus-checkbox checked disabled label="Checkbox" size='small'></modus-checkbox>
+<modus-checkbox indeterminate size='small'></modus-checkbox>
+
 ```
 
 ### Properties
@@ -44,6 +57,7 @@ This component is compatible with Angular reactive forms. This can be achieved t
 | `label`           | `label`            | (optional) The checkbox label.                           | `string`           | `undefined` |
 | `tabIndexValue`   | `tab-index-value`  | (optional) Tab Index for the checkbox                    | `number \| string` | `0`         |
 | `stopPropagation` | `stop-propagation` | (optional) It should stop propagating the event further. | `boolean`          | `undefined` |
+| `size` | `size` | (optional) The size of the checkbox. | `"small", "medium"'          | `'medium'` |
 
 ### DOM Events
 
