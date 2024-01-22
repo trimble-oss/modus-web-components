@@ -266,4 +266,17 @@ describe('modus-text-input', () => {
     await page.waitForChanges();
     expect(valueChange).toHaveReceivedEvent();
   });
+
+  it('ensures it renders changes to autocomplete', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-text-input></modus-text-input>');
+
+    const textInput = await page.find('modus-text-input');
+    textInput.setProperty('autocomplete', 'off');
+    await page.waitForChanges();
+
+    const input = await page.find('modus-text-input >>> input');
+    expect(await input.getProperty('autocomplete')).toEqual('off');
+  });
 });

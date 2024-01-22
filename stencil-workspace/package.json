@@ -1,6 +1,6 @@
 {
   "name": "@trimble-oss/modus-web-components",
-  "version": "0.11.0",
+  "version": "0.13.0",
   "description": "Trimble Modus Web Component Library",
   "homepage": "https://modus-web-components.trimble.com/",
   "bugs": {
@@ -41,7 +41,7 @@
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "@stencil/core": "^3.3.0",
-    "@tanstack/table-core": "^8.8.5"
+    "@tanstack/table-core": "^8.11.6"
   },
   "devDependencies": {
     "@stencil/angular-output-target": "^0.7.1",
@@ -52,16 +52,16 @@
     "@typescript-eslint/eslint-plugin": "^5.59.0",
     "@typescript-eslint/parser": "^5.58.0",
     "autoprefixer": "^10.4.16",
-    "eslint": "^8.55.0",
+    "eslint": "^8.56.0",
     "eslint-plugin-storybook": "^0.6.15",
     "jest": "^27.0.3",
     "jest-cli": "^27.5.1",
-    "prettier": "3.1.0",
+    "prettier": "3.1.1",
     "puppeteer": "^19.11.1",
-    "puppeteer-core": "^19.7.2",
+    "puppeteer-core": "^19.11.1",
     "stylelint": "15.11.0",
     "stylelint-config-standard-scss": "11.1.0",
-    "stylelint-order": "6.0.3",
+    "stylelint-order": "6.0.4",
     "typescript": "^4.9.5"
   },
   "engines": {
