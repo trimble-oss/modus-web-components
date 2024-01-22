@@ -35,7 +35,7 @@ export class ModusTableRowActionsMenu {
   @State() overFlowMenu: ModusTableRowAction[];
 
   @State() position: Position;
-  @State() menuWidth: number = 0; //A state to store the rowAction menu width
+  @State() menuWidth = 0; //A state to store the rowAction menu width
 
   private tableRow: Row<unknown>;
 
@@ -57,11 +57,11 @@ export class ModusTableRowActionsMenu {
       );
       firstItem?.focusItem();
 
-       // Calculate and set the rowAction menu width 
-       const menuElement = this.element.querySelector('.row-actions-menu') as HTMLElement;
-       if (menuElement) {
-         this.menuWidth = menuElement.offsetWidth;
-       }
+      // Calculate and set the rowAction menu width
+      const menuElement = this.element.querySelector('.row-actions-menu') as HTMLElement;
+      if (menuElement) {
+        this.menuWidth = menuElement.offsetWidth;
+      }
     }
   }
 
@@ -127,7 +127,7 @@ export class ModusTableRowActionsMenu {
 
     const { x, y } = this.position;
     const style = {
-      transform: `translate(calc(${x-this.menuWidth/(1.5)}px - 8px), calc(${y}px))`,
+      transform: `translate(calc(${x - this.menuWidth / 1.5}px - 8px), calc(${y}px))`,
     };
     return (
       <Host>
@@ -138,7 +138,7 @@ export class ModusTableRowActionsMenu {
                 const disabled = isDisabled(this.tableRow?.original);
                 return (
                   <modus-list-item
-                    style={{maxWidth:'155px'}}
+                    style={{ maxWidth: '155px' }}
                     disabled={disabled}
                     onItemClick={() => this.handleListItemClick(id)}
                     class="hydrated row-actions-menu-item"
