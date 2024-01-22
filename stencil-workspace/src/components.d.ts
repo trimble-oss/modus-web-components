@@ -1307,7 +1307,7 @@ export namespace Components {
         /**
           * (optional) The input's type.
          */
-        "type": 'text' | 'password';
+        "type": 'email' | 'password' | 'search' | 'text' | 'tel' | 'url';
         /**
           * (optional) The input's valid state text.
          */
@@ -3493,7 +3493,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The input's type.
          */
-        "type"?: 'text' | 'password';
+        "type"?: 'email' | 'password' | 'search' | 'text' | 'tel' | 'url';
         /**
           * (optional) The input's valid state text.
          */

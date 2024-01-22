@@ -66,7 +66,7 @@ export class ModusTextInput {
   @Prop() textAlign: 'left' | 'right' = 'left';
 
   /** (optional) The input's type. */
-  @Prop() type: 'text' | 'password' = 'text';
+  @Prop() type: 'email' | 'password' | 'search' | 'text' | 'tel' | 'url' = 'text';
 
   /** (optional) The input's valid state text. */
   @Prop() validText: string;

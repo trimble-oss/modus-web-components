@@ -163,13 +163,13 @@ export default {
     },
     type: {
       control: {
-        options: ['text', 'password'],
+        options: ['email', 'password', 'search', 'tel', 'text', 'url'],
         type: 'select',
       },
       description: 'The input type',
       table: {
         defaultValue: { summary: "'text'" },
-        type: { summary: "'text' | 'password'" },
+        type: { summary: "'email' | 'password' | 'search' | 'tel' | 'text' | 'url'" },
       },
     },
     validText: {
