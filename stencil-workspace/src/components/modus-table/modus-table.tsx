@@ -247,6 +247,9 @@ export class ModusTable {
     }
   }
 
+  /* (optional) To wrap text in the cell */
+  @Prop() wrapText = false;
+
   /** Emits the cell value that was edited */
   @Event() cellValueChange: EventEmitter<ModusTableCellValueChange>;
 
@@ -459,6 +462,7 @@ export class ModusTable {
       isColumnResizing: this.isColumnResizing,
       tableCore: this.tableCore,
       tableInstance: this.tableCore.getTableInstance(),
+      wrapText: this.wrapText,
       onColumnsChange: this.onColumnsChange,
       onColumnResizeChange: this.onColumnResizeChange,
       onColumnReorderChange: this.onColumnReorderChange,

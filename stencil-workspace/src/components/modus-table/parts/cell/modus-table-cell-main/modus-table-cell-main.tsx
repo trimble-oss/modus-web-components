@@ -153,11 +153,11 @@ export class ModusTableCellMain {
 
     if (!cellValue) return null;
 
-    const { cellLinkClick } = this.context;
+    const { cellLinkClick, wrapText } = this.context;
     const cellDataType = cellValue['_type'] ?? this.cell.column.columnDef[COLUMN_DEF_DATATYPE_KEY];
     const classes = {
       'cell-content': true,
-      'wrap-text': true,
+      'wrap-text': !wrapText,
       'text-align-right': cellDataType === COLUMN_DEF_DATATYPE_INTEGER,
     };
 

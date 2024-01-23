@@ -519,6 +519,16 @@ export default {
       },
       type: { required: false },
     }
+    ,
+    wrapText : {
+      name: 'wrapText',
+      description: 'To wrap text that overflows the cell',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      },
+      type: { required: false },
+    }
   },
 
   parameters: {
@@ -824,4 +834,12 @@ RowActions.args = {
     }
 
   ], data: makeData(7), fullWidth: true
+};
+
+export const WrapText = Template.bind({});
+WrapText.args = { ...DefaultArgs, data: [{
+    ...newPerson(),
+    lastName: 'This is an example of long text'
+  },
+  ...makeData(4)], wrapText: true
 };
