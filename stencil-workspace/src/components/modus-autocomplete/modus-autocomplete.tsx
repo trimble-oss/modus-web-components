@@ -158,7 +158,7 @@ export class ModusAutocomplete {
   handleCustomOptionClick = (option: any) => {
     const optionValue = option.getAttribute(DATA_SEARCH_VALUE);
     const optionId = option.getAttribute(DATA_ID);
-    this.disableFiltering = true;
+    this.disableFiltering = this.disableCloseOnSelect;
     this.handleSearchChange(optionValue);
     this.hasFocus = this.disableCloseOnSelect;
     this.optionSelected.emit(optionId);
@@ -169,7 +169,7 @@ export class ModusAutocomplete {
   };
 
   handleOptionKeyPress = (event: any, option: any, isCustomOption = false) => {
-    this.disableFiltering = false;
+    this.disableFiltering = !this.disableCloseOnSelect;
     if (event.key !== 'Enter') {
       return;
     }
@@ -182,7 +182,7 @@ export class ModusAutocomplete {
   };
 
   handleOptionClick = (option: ModusAutocompleteOption) => {
-    this.disableFiltering = true;
+    this.disableFiltering = this.disableCloseOnSelect;
     this.handleSearchChange(option.value);
     this.hasFocus = this.disableCloseOnSelect;
     this.optionSelected.emit(option.id);
@@ -198,7 +198,7 @@ export class ModusAutocomplete {
   handleTextInputValueChange = (event: CustomEvent<string>) => {
     // Cancel the modus-text-input's value change event or else it will bubble to consumer.
     event.stopPropagation();
-    this.disableFiltering = false;
+    this.disableFiltering = !this.disableCloseOnSelect;
     this.handleSearchChange(event.detail);
   };
 
