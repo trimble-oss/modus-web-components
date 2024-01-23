@@ -4,6 +4,7 @@ import {
   State,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
   Element,
+  Fragment,
   Event,
   EventEmitter,
   Method,
@@ -382,6 +383,12 @@ export class ModusTreeViewItem {
     const treeItemClass = `tree-item ${selected ? 'selected' : ''} ${sizeClass} ${isDisabled ? 'disabled' : ''} `;
     const treeItemChildrenClass = `tree-item-group ${sizeClass} ${expanded ? 'expanded' : ''}`;
 
+    const actions = [
+      { id: 'export', icon: 'export', label: 'Export' },
+      { id: 'history', icon: 'history', label: 'History' },
+      { id: 'edit', icon: 'pencil', label: 'Edit' },
+      { id: 'delete', icon: 'history', label: 'Delete' },
+    ];
     return (
       <li {...ariaControls} class={`tree-item-container${selectionIndicator ? ' selected-indicator' : ''}`}>
         <div
@@ -453,6 +460,7 @@ export class ModusTreeViewItem {
                 )
               }></this.CustomSlot>
           </div>
+          {actions && <modus-action-bar visible-item-count={3} actions={actions}></modus-action-bar>}
         </div>
         <ul class={treeItemChildrenClass} role="tree">
           <slot onSlotchange={() => this.handleTreeSlotChange()} />
