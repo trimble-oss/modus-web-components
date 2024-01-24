@@ -174,7 +174,6 @@ export class ModusAutocomplete {
       return;
     }
     if (isCustomOption) {
-     
       this.handleCustomOptionClick(option);
     } else {
       this.handleOptionClick(option);
