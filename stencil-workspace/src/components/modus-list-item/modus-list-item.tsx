@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 import { Component, Event, EventEmitter, Method, Prop, h } from '@stencil/core';
-import { IconCheck } from '../icons/icon-check';
+import { IconCheck } from '../../icons/svgs/icon-check';
 
 @Component({
   tag: 'modus-list-item',
