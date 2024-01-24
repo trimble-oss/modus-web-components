@@ -954,6 +954,9 @@ describe('modus-table', () => {
 
     await page.waitForChanges();
 
-    expect(component).toContain('This is an example of long text');
+    const tableData = await page.findAll('modus-table >>> td');
+    const firstItem = tableData[0].textContent;
+
+    expect(firstItem).toBe('This is an example of long text');
   });
 });

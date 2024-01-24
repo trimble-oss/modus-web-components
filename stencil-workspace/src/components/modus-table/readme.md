@@ -33,7 +33,7 @@
 | `summaryRow`              | `summary-row`             | (Optional) To display summary row.                                                                                                                                                    | `boolean`                                 | `false`                                                   |
 | `toolbar`                 | `toolbar`                 | (Optional) To display a toolbar for the table.                                                                                                                                        | `boolean`                                 | `false`                                                   |
 | `toolbarOptions`          | --                        | (Optional) To display a toolbar, which allows access to table operations like hiding columns.                                                                                         | `ModusTableToolbarOptions`                | `null`                                                    |
-| `wrapText`                | `wrap-text`               |                                                                                                                                                                                       | `boolean`                                 | `false`                                                   |
+| `wrapText`                | `wrap-text`               | (Optional) To wrap text that overflows the cell.                                                                                                                                      | `boolean`                                 | `false`                                                   |
 
 
 ## Events
