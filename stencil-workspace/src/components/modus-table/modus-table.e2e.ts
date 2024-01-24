@@ -935,4 +935,25 @@ describe('modus-table', () => {
       expect(size).toBe('small');
     }
   });
+
+  it('Should render long text with text wrap enabled', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-table />');
+    const component = await page.find('modus-table');
+
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', [
+      {
+        mockColumnOne: 'This is an example of long text',
+        mockColumnTwo: 10101,
+      },
+      ...MockData,
+    ]);
+    component.setProperty('wrapText', true);
+
+    await page.waitForChanges();
+
+    expect(component).toContain('This is an example of long text');
+  });
 });
