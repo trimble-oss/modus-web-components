@@ -55,6 +55,9 @@ export class ModusPagination {
   }
 
   componentWillRender(): void {
+    if (this.activePage === undefined || isNaN(this.activePage)) {
+      this.activePage = 1;
+    }
     this.setPages();
   }
 
