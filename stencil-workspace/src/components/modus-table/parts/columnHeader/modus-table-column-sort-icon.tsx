@@ -3,8 +3,8 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Column } from '@tanstack/table-core';
-import { IconSortAZ } from '../../../icons/icon-sort-a-z';
-import { IconSortZA } from '../../../icons/icon-sort-z-a';
+import { IconSortAZ } from '../../../../icons/svgs/icon-sort-a-z';
+import { IconSortZA } from '../../../../icons/svgs/icon-sort-z-a';
 import {
   KEYBOARD_ENTER,
   SORT_ASCENDING,

@@ -10,7 +10,7 @@ import {
   Watch,
   FunctionalComponent,
 } from '@stencil/core';
-import { IconMap } from '../../icons/IconMap';
+import { ModusIconMap } from '../../../icons/ModusIconMap';
 import { TreeViewItemOptions } from '../modus-content-tree.types';
 import { TREE_ITEM_SIZE_CLASS } from '../modus-content-tree.constants';
 
@@ -393,7 +393,7 @@ export class ModusTreeViewItem {
           tabindex={tabIndex}>
           <this.CustomSlot
             className={`icon-slot drag-icon${!this.draggableItem ? ' hidden' : ''}`}
-            defaultContent={<IconMap icon="drag" />}
+            defaultContent={<ModusIconMap icon="drag_indicator" />}
             name={this.SLOT_DRAG_ICON}
             onMouseDown={(e) => this.handleDrag(e)}
           />
@@ -407,13 +407,13 @@ export class ModusTreeViewItem {
             tabindex={expandable ? tabIndex : -1}>
             <this.CustomSlot
               className="inline-flex rotate-right"
-              defaultContent={<IconMap icon="chevron-down-thick" size="24" />}
+              defaultContent={<ModusIconMap icon="expand_more_bold" size="24" />}
               display={!expanded}
               name={this.SLOT_EXPAND_ICON}
             />
             <this.CustomSlot
               className="inline-flex"
-              defaultContent={<IconMap icon="chevron-down-thick" size="24" />}
+              defaultContent={<ModusIconMap icon="expand_more_bold" size="24" />}
               display={expanded}
               name={this.SLOT_COLLAPSE_ICON}
             />

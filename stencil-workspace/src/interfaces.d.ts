@@ -18,3 +18,4 @@ export * from './components/modus-table/models/modus-table.models';
 export { ModusSentimentScaleType } from './components/modus-sentiment-scale/modus-sentiment-scale.models';
 export * from './components/modus-table/models/table-context.models';
 export * from './components/modus-tooltip/modus-tooltip.models';
+export { ModusIconName } from './icons/ModusIconUtilities.ts';

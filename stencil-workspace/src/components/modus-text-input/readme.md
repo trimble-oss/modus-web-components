@@ -11,6 +11,7 @@
 | --------------------------- | ------------------------------ | ------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------- |
 | `ariaLabel`                 | `aria-label`                   | (optional) The input's aria-label.                            | `string`                                                                    | `undefined` |
 | `autoFocusInput`            | `auto-focus-input`             | (optional) Sets autofocus on the input.                       | `boolean`                                                                   | `undefined` |
+| `autocomplete`              | `autocomplete`                 | (optional) Sets autocomplete on the input.                    | `string`                                                                    | `undefined` |
 | `clearable`                 | `clearable`                    | (optional) Whether the input has a clear button.              | `boolean`                                                                   | `false`     |
 | `disabled`                  | `disabled`                     | (optional) Whether the input is disabled.                     | `boolean`                                                                   | `undefined` |
 | `errorText`                 | `error-text`                   | (optional) The input's error state text.                      | `string`                                                                    | `undefined` |
@@ -26,7 +27,7 @@
 | `required`                  | `required`                     | (optional) Whether the input is required.                     | `boolean`                                                                   | `undefined` |
 | `size`                      | `size`                         | (optional) The input's size.                                  | `"large" \| "medium"`                                                       | `'medium'`  |
 | `textAlign`                 | `text-align`                   | (optional) The input's text alignment.                        | `"left" \| "right"`                                                         | `'left'`    |
-| `type`                      | `type`                         | (optional) The input's type.                                  | `"password" \| "text"`                                                      | `'text'`    |
+| `type`                      | `type`                         | (optional) The input's type.                                  | `"email" \| "password" \| "search" \| "tel" \| "text" \| "url"`             | `'text'`    |
 | `validText`                 | `valid-text`                   | (optional) The input's valid state text.                      | `string`                                                                    | `undefined` |
 | `value`                     | `value`                        | (optional) The input's value.                                 | `string`                                                                    | `undefined` |
 

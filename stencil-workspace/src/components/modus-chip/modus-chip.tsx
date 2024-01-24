@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 import { Component, Prop, h, EventEmitter, Event, Listen } from '@stencil/core';
-import { IconRemove } from '../icons/icon-remove';
-import { IconCheck } from '../icons/icon-check';
+import { IconRemove } from '../../icons/svgs/icon-remove';
+import { IconCheck } from '../../icons/svgs/icon-check';
 
 @Component({
   tag: 'modus-chip',
