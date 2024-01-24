@@ -22,7 +22,7 @@ export class ModusPagination {
   @Prop() ariaLabel: string | null;
 
   /* The active page. */
-  @Prop({ mutable: true }) activePage: number;
+  @Prop({ mutable: true }) activePage = 1;
   @Watch('activePage')
   activePageWatch(newValue: number, oldValue: number) {
     if (newValue !== oldValue) {
@@ -55,6 +55,9 @@ export class ModusPagination {
   }
 
   componentWillRender(): void {
+    if (this.activePage === undefined || isNaN(this.activePage)) {
+      this.activePage = 1;
+    }
     this.setPages();
   }
 
