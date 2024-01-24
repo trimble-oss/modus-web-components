@@ -163,7 +163,9 @@ export class ModusDatePicker {
     const maxDate = this._currentInput?.getMaxDateAllowed();
 
     const targetDate = this.compare(date, minDate) < 0 ? minDate : maxDate;
-    this.pickCalendarDate(targetDate);
+
+    this.gotoDateBeingPicked(targetDate);
+    this.forceUpdate();
   }
 
   isInvalidDateRange = (startDate, endDate) => this.compare(endDate, startDate) < 0;
