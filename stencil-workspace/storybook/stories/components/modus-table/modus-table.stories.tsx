@@ -299,6 +299,7 @@ const DefaultArgs = {
   rowActions: [],
   rowSelection: false,
   rowSelectionOptions: {},
+  wrapText: false,
 };
 
 export default {
@@ -571,7 +572,8 @@ const Template = ({
   manualPaginationOptions,
   manualSortingOptions,
   defaultSort,
-  density
+  density,
+  wrapText
 }) => html`
   <div style="width: 950px">
     <modus-table
@@ -588,7 +590,8 @@ const Template = ({
       rows-expandable="${rowsExpandable}"
       max-height="${maxHeight}"
       max-width="${maxWidth}"
-      row-selection="${rowSelection}" />
+      row-selection="${rowSelection}"
+      wrap-text="${wrapText}" />
   </div>
   ${initializeTable({columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions, manualPaginationOptions, manualSortingOptions, defaultSort})}
 `;
@@ -640,7 +643,8 @@ export const ValueFormatter = ({
   maxWidth,
   rowSelection,
   rowSelectionOptions,
-  density
+  density,
+  wrapText
 }) => html`
   <div style="width: 950px">
     <modus-table
@@ -656,7 +660,8 @@ export const ValueFormatter = ({
       toolbar="${toolbar}"
       max-height="${maxHeight}"
       max-width="${maxWidth}"
-      row-selection="${rowSelection}" />
+      row-selection="${rowSelection}"
+      wrap-text="${wrapText}" />
   </div>
   ${valueFormatterTable(pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions)}
 `;
@@ -676,7 +681,8 @@ ValueFormatter.args = {
   maxHeight: '',
   maxWidth: '',
   rowSelection: false,
-  rowSelectionOptions: {}
+  rowSelectionOptions: {},
+  wrapText: false
 };
 const valueFormatterTable = (pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions) => {
   const tag = document.createElement('script');

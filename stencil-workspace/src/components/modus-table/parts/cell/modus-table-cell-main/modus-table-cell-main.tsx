@@ -157,7 +157,8 @@ export class ModusTableCellMain {
     const cellDataType = cellValue['_type'] ?? this.cell.column.columnDef[COLUMN_DEF_DATATYPE_KEY];
     const classes = {
       'cell-content': true,
-      'wrap-text': !wrapText,
+      'truncate-text': !wrapText,
+      'wrap-text': wrapText,
       'text-align-right': cellDataType === COLUMN_DEF_DATATYPE_INTEGER,
     };
 
@@ -166,6 +167,7 @@ export class ModusTableCellMain {
         return (
           <ModusTableCellLinkElement
             link={cellValue as ModusTableCellLink}
+            wrapText={wrapText}
             onLinkClick={(link: ModusTableCellLink) => {
               cellLinkClick.emit(link);
             }}
@@ -182,7 +184,7 @@ export class ModusTableCellMain {
       <div class={classes}>
         {this.hasRowsExpandable && <ModusTableCellExpandIcons row={row} />}
 
-        <span class="wrap-text">{renderCell()}</span>
+        <span class={wrapText ? 'wrap-text' : 'truncate-text'}>{renderCell()}</span>
       </div>
     );
   }

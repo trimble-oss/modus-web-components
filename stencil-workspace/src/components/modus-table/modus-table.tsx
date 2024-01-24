@@ -247,7 +247,7 @@ export class ModusTable {
     }
   }
 
-  /* (optional) To wrap text in the cell */
+  /** (Optional) To wrap text that overflows the cell. */
   @Prop() wrapText = false;
 
   /** Emits the cell value that was edited */

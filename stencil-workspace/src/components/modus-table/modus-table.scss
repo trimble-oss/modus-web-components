@@ -35,6 +35,7 @@ table {
   width: 100%;
 
   &.cell-borderless {
+
     th,
     td,
     tr {
@@ -61,8 +62,8 @@ table {
     }
   }
 
-  th.row-checkbox + th.sticky-left,
-  td.row-checkbox + td.sticky-left {
+  th.row-checkbox+th.sticky-left,
+  td.row-checkbox+td.sticky-left {
     left: 46.25px;
   }
 
@@ -197,10 +198,15 @@ table {
     tr {
       color: $modus-table-body-color;
 
-      .wrap-text {
+      .truncate-text {
         overflow: hidden;
         text-overflow: ellipsis;
         text-wrap: nowrap;
+      }
+
+      .wrap-text {
+        word-break: break-word;
+        overflow-wrap: break-word;
       }
 
       td {

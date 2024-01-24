@@ -1165,6 +1165,10 @@ export namespace Components {
           * (Optional) To display a toolbar, which allows access to table operations like hiding columns.
          */
         "toolbarOptions": ModusTableToolbarOptions | null;
+        /**
+          * (Optional) To wrap text that overflows the cell.
+         */
+        "wrapText": boolean;
     }
     interface ModusTableCellEditor {
         "args": ModusTableCellEditorArgs;
@@ -3346,6 +3350,10 @@ declare namespace LocalJSX {
           * (Optional) To display a toolbar, which allows access to table operations like hiding columns.
          */
         "toolbarOptions"?: ModusTableToolbarOptions | null;
+        /**
+          * (Optional) To wrap text that overflows the cell.
+         */
+        "wrapText"?: boolean;
     }
     interface ModusTableCellEditor {
         "args"?: ModusTableCellEditorArgs;
