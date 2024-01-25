@@ -7,15 +7,10 @@ import { KEYBOARD_ENTER, KEYBOARD_SPACE } from '../../modus-table.constants';
 
 interface ModusTableCellLinkProps {
   link: ModusTableCellLink;
-  wrapText?: boolean;
   onLinkClick: (link: ModusTableCellLink) => void;
 }
 
-export const ModusTableCellLinkElement: FunctionalComponent<ModusTableCellLinkProps> = ({
-  link,
-  wrapText = false,
-  onLinkClick,
-}) => {
+export const ModusTableCellLinkElement: FunctionalComponent<ModusTableCellLinkProps> = ({ link, onLinkClick }) => {
   function handleLinkKeyDown(e: KeyboardEvent) {
     const key = e.key.toLowerCase();
     if (key === KEYBOARD_ENTER || key === KEYBOARD_SPACE) {
@@ -25,11 +20,7 @@ export const ModusTableCellLinkElement: FunctionalComponent<ModusTableCellLinkPr
   }
 
   return (
-    <div
-      class={`cell-link ${wrapText ? 'wrap-text' : 'truncate-text'}`}
-      tabIndex={0}
-      onClick={() => onLinkClick(link)}
-      onKeyDown={handleLinkKeyDown}>
+    <div class="cell-link truncate-text" tabIndex={0} onClick={() => onLinkClick(link)} onKeyDown={handleLinkKeyDown}>
       {link.display}
     </div>
   );

@@ -167,7 +167,6 @@ export class ModusTableCellMain {
         return (
           <ModusTableCellLinkElement
             link={cellValue as ModusTableCellLink}
-            wrapText={wrapText}
             onLinkClick={(link: ModusTableCellLink) => {
               cellLinkClick.emit(link);
             }}
@@ -184,7 +183,12 @@ export class ModusTableCellMain {
       <div class={classes}>
         {this.hasRowsExpandable && <ModusTableCellExpandIcons row={row} />}
 
-        <span class={wrapText && cellDataType !== COLUMN_DEF_DATATYPE_BADGE ? 'wrap-text' : 'truncate-text'}>
+        <span
+          class={
+            wrapText && cellDataType !== COLUMN_DEF_DATATYPE_BADGE && cellDataType !== COLUMN_DEF_DATATYPE_LINK
+              ? 'wrap-text'
+              : 'truncate-text'
+          }>
           {renderCell()}
         </span>
       </div>
