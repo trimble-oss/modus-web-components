@@ -402,4 +402,61 @@ describe('modus-autocomplete', () => {
     await page.waitForChanges();
     expect(options.length).toEqual(2);
   });
+
+  it('should select the option by hitting Space', async () => {
+    const element = await page.find('modus-autocomplete');
+    expect(element).toHaveClass('hydrated');
+
+    element.setProperty('disableCloseOnSelect', true);
+    element.setProperty('options', [
+      { id: 1, value: 'Test 1' },
+      { id: 2, value: 'Test 2' },
+    ]);
+    await page.waitForChanges();
+
+    const optionSelected = await page.spyOnEvent('optionSelected');
+
+    const textInput = await page.find('modus-autocomplete >>> modus-text-input');
+    await textInput.click();
+
+    await page.waitForChanges();
+
+    let options = await page.findAll('modus-autocomplete >>> .options-container li');
+
+    await options[0].focus();
+    await page.waitForChanges();
+
+    await page.keyboard.press(' '); // Space
+    await page.waitForChanges();
+    expect(optionSelected).toHaveReceivedEvent();
+    expect(optionSelected).toHaveReceivedEventDetail(1);
+  });
+
+  it('should select the option by hitting Enter', async () => {
+    const element = await page.find('modus-autocomplete');
+    expect(element).toHaveClass('hydrated');
+
+    element.setProperty('disableCloseOnSelect', true);
+    element.setProperty('options', [
+      { id: 1, value: 'Test 1' },
+      { id: 2, value: 'Test 2' },
+    ]);
+    await page.waitForChanges();
+
+    const optionSelected = await page.spyOnEvent('optionSelected');
+
+    const textInput = await page.find('modus-autocomplete >>> modus-text-input');
+    await textInput.click();
+    await page.waitForChanges();
+
+    let options = await page.findAll('modus-autocomplete >>> .options-container li');
+
+    await options[1].focus();
+    await page.waitForChanges();
+
+    await page.keyboard.press('Enter');
+    await page.waitForChanges();
+    expect(optionSelected).toHaveReceivedEvent();
+    expect(optionSelected).toHaveReceivedEventDetail(2);
+  });
 });
