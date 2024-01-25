@@ -184,7 +184,9 @@ export class ModusTableCellMain {
       <div class={classes}>
         {this.hasRowsExpandable && <ModusTableCellExpandIcons row={row} />}
 
-        <span class={wrapText ? 'wrap-text' : 'truncate-text'}>{renderCell()}</span>
+        <span class={wrapText && cellDataType !== COLUMN_DEF_DATATYPE_BADGE ? 'wrap-text' : 'truncate-text'}>
+          {renderCell()}
+        </span>
       </div>
     );
   }
