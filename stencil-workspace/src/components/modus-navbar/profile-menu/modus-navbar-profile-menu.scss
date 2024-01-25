@@ -91,20 +91,26 @@
   }
 
   .sign-out {
+    align-items: center;
     background-color: $modus-navbar-profile-menu-sign-out-background-color;
+    color: $modus-navbar-profile-menu-sign-out-color;
+    cursor: pointer;
+    display: flex;
+    height: $rem-40px;
     user-select: none;
     width: 100%;
 
-    div {
-      color: $modus-navbar-profile-menu-sign-out-color;
-      cursor: pointer;
-      font-size: $rem-14px;
-      padding: $rem-10px $rem-16px;
+    .icon-sign-out {
+      padding: 0 $rem-16px 0 $rem-12px;
+    }
 
-      @media (hover: hover) {
-        &:hover {
-          text-decoration: underline;
-        }
+    .sign-out-text {
+      font-size: $rem-14px;
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        text-decoration: underline;
       }
     }
   }

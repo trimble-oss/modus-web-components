@@ -68,7 +68,8 @@ export class ModusNavbarProfileMenu {
           onClick={() => this.signOutClick.emit()}
           onKeyDown={(event) => this.signOutKeydownHandler(event)}
           tabIndex={0}>
-          <div>Sign out</div>
+          <ModusIconMap icon="sign_out" size="24" />
+          <div class="sign-out-text">Sign out</div>
         </div>
       </div>
     );

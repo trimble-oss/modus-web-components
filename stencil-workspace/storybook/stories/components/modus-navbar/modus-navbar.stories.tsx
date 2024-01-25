@@ -41,11 +41,11 @@ export default {
       table: {
         type: { summary: 'ModusNavbarTooltip' },
       },
-    }
+    },
   },
   parameters: {
     actions: {
-      handles: ['searchMenuClick', 'buttonClick', 'productLogoClick'],
+      handles: ['searchMenuClick', 'buttonClick', 'productLogoClick', 'signOutClick'],
     },
     controls: { expanded: true, sort: 'requiredFirst' },
     docs: {
@@ -68,10 +68,10 @@ const Template = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay
     show-main-menu>
     <div slot="main" style="height:300px;">Render your own main menu.</div>
 
-      <modus-list slot="addMenu">
-        <modus-list-item>Menu Item 1</modus-list-item>
-        <modus-list-item>Menu Item 2</modus-list-item>
-      </modus-list>
+    <modus-list slot="addMenu">
+      <modus-list-item>Menu Item 1</modus-list-item>
+      <modus-list-item>Menu Item 2</modus-list-item>
+    </modus-list>
 
     <div slot="notificationMenu">Render your own notification menu.</div>
     <div slot="profileMenu">Render your own profile menu content.</div>
@@ -86,32 +86,33 @@ Default.args = {
     username: 'Modus User',
     links: [
       {
-        id: "link1",
-        display: "Link 1",
-        icon: "moon"
+        id: 'link1',
+        display: 'Link 1',
+        icon: 'moon',
       },
       {
-        id: "link2",
-        display: "Link 2",
-        icon: "sun"
-      }
+        id: 'link2',
+        display: 'Link 2',
+        icon: 'sun',
+      },
     ],
     tooltip: {
       text: 'User Profile Menu',
-    }
+    },
   },
   buttons: [
     {
-      id: 'addMenu', icon: 'add',
+      id: 'addMenu',
+      icon: 'add',
       tooltip: {
         text: 'Add',
-      }
+      },
     },
     { id: 'notificationMenu', icon: 'notifications' },
   ],
   showSearch: false,
   enableSearchOverlay: false,
-  searchTooltip: undefined
+  searchTooltip: undefined,
 };
 
 const FailedToLoadAvatarTemplate = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay, searchTooltip }) => html`
@@ -138,7 +139,7 @@ FailedAvatar.args = {
   buttons: [],
   showSearch: false,
   enableSearchOverlay: false,
-  searchTooltip: undefined
+  searchTooltip: undefined,
 };
 const BlueTemplate = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay, searchTooltip }) => html`
   <modus-navbar
@@ -154,14 +155,14 @@ const BlueTemplate = ({ profileMenuOptions, buttons, showSearch, enableSearchOve
     <div slot="notifications">Render your own notifications.</div>
   </modus-navbar>
   ${setNavbar(
-  false,
-  '#blue-theme',
-  profileMenuOptions,
-  'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
-  'https://modus-bootstrap.trimble.com/img/trimble-icon-rev.svg',
-  buttons,
-  searchTooltip
-)}
+    false,
+    '#blue-theme',
+    profileMenuOptions,
+    'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
+    'https://modus-bootstrap.trimble.com/img/trimble-icon-rev.svg',
+    buttons,
+    searchTooltip
+  )}
 `;
 export const BlueNavbar = BlueTemplate.bind({});
 BlueNavbar.args = {
@@ -173,7 +174,7 @@ BlueNavbar.args = {
   buttons: [],
   showSearch: false,
   enableSearchOverlay: false,
-  searchTooltip: undefined
+  searchTooltip: undefined,
 };
 
 const setNavbar = (
