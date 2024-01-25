@@ -261,6 +261,7 @@ export class ModusAutocomplete {
       placeholder={this.placeholder}
       required={this.required}
       size={this.size}
+      type="search"
       value={this.value}
       onBlur={this.handleInputBlur}
     />
