@@ -11,8 +11,10 @@ import {
   Element,
   Watch,
 } from '@stencil/core';
-import { IconSearch } from '../icons/icon-search';
 import { IconClose } from '../icons/icon-close';
+
+import { IconSearch } from '../../icons/svgs/icon-search';
+
 
 export interface ModusAutocompleteOption {
   id: string;
@@ -100,7 +102,8 @@ export class ModusAutocomplete {
   @Prop({ mutable: true }) value: string;
   @Watch('value')
   onValueChange() {
-    if (this.hasFocus) {
+    if (this.hasFocus && !this.disableCloseOnSelect) {
+      this.disableFiltering = false;
       this.updateVisibleOptions(this.value);
       this.updateVisibleCustomOptions(this.value);
     }
@@ -117,6 +120,7 @@ export class ModusAutocomplete {
   @State() visibleOptions: ModusAutocompleteOption[] = [];
   @State() customOptions: Array<any> = [];
   @State() visibleCustomOptions: Array<any> = [];
+  @State() disableFiltering = false;
 
   componentWillLoad(): void {
     this.convertOptions();
@@ -172,20 +176,25 @@ export class ModusAutocomplete {
   handleCustomOptionClick = (option: any) => {
     const optionValue = option.getAttribute(DATA_SEARCH_VALUE);
     const optionId = option.getAttribute(DATA_ID);
+
     if (this.multiple) {
       this.addChipValue(optionValue);
     } else {
-      this.handleSearchChange(optionValue);
+      this.disableFiltering = this.disableCloseOnSelect;
+      this.handleSearchChange(optionValue);;
     }
+
+
     this.hasFocus = this.disableCloseOnSelect;
     this.optionSelected.emit(optionId);
   };
 
   handleInputBlur = () => {
-    this.hasFocus = this.disableCloseOnSelect;
+    this.hasFocus = !this.disableCloseOnSelect;
   };
 
   handleOptionKeyPress = (event: any, option: any, isCustomOption = false) => {
+    this.disableFiltering = !this.disableCloseOnSelect;
     if (event.key !== 'Enter') {
       return;
     }
@@ -203,11 +212,14 @@ export class ModusAutocomplete {
   }
 
   handleOptionClick = (option: ModusAutocompleteOption) => {
+
     if (this.multiple) {
       this.addChipValue(option.value);
     } else {
-      this.handleSearchChange(option.value);
+      this.disableFiltering = this.disableCloseOnSelect;
+      this.handleSearchChange(optionValue);;
     }
+
     this.hasFocus = this.disableCloseOnSelect;
     this.optionSelected.emit(option.id);
   };
@@ -215,7 +227,6 @@ export class ModusAutocomplete {
   handleSearchChange = (search: string) => {
     this.updateVisibleOptions(search);
     this.updateVisibleCustomOptions(search);
-
     this.value = search;
     this.valueChange.emit(search);
   };
@@ -230,6 +241,7 @@ export class ModusAutocomplete {
   handleTextInputValueChange = (event: CustomEvent<string>) => {
     // Cancel the modus-text-input's value change event or else it will bubble to consumer.
     event.stopPropagation();
+    this.disableFiltering = !this.disableCloseOnSelect;
     this.handleSearchChange(event.detail);
   };
 
@@ -245,7 +257,7 @@ export class ModusAutocomplete {
     this.customOptions = slotted.assignedNodes().filter((node) => node.nodeName !== '#text');
 
     search = search || '';
-    if (search.length === 0 || this.disableCloseOnSelect) {
+    if (search.length === 0 || (this.disableFiltering && this.disableCloseOnSelect)) {
       this.visibleCustomOptions = this.customOptions;
       return;
     }
@@ -263,7 +275,9 @@ export class ModusAutocomplete {
     search = search || '';
     const isSearchEmpty = search.length === 0;
 
-    if ((isSearchEmpty && !this.showOptionsOnFocus) || this.disableCloseOnSelect) {
+
+    if ((isSearchEmpty && !this.showOptionsOnFocus) || (this.disableFiltering && this.disableCloseOnSelect)) {
+
       this.visibleOptions = this.options as ModusAutocompleteOption[];
       return;
     }
@@ -290,6 +304,7 @@ export class ModusAutocomplete {
       onValueChange={(searchEvent: CustomEvent<string>) => this.handleTextInputValueChange(searchEvent)}
       placeholder={this.placeholder}
       size={this.size}
+      type="search"
       value={this.value}
       onBlur={this.handleInputBlur}
     />

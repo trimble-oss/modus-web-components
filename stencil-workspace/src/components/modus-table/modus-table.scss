@@ -4,6 +4,8 @@
   border: $rem-1px $modus-table-border-color solid;
   display: flex;
   overflow: auto;
+  position: relative;
+  z-index: 0;
 
   &::-webkit-scrollbar {
     height: 0.75em;
@@ -67,7 +69,7 @@ table {
   thead {
     position: sticky;
     top: 0;
-    z-index: 2;
+    z-index: 99;
 
     &.show-resize-cursor {
       th {
@@ -171,7 +173,7 @@ table {
           }
         }
 
-        &:has(modus-tooltip:hover) {
+        &:has(modus-tooltip) {
           // On hover of child, parent overflow property is changed.
           overflow: visible;
         }

@@ -2,7 +2,7 @@ import {
   FunctionalComponent,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
-import { IconMap } from '../../icons/IconMap';
+import { ModusIconMap } from '../../../icons/ModusIconMap';
 import { ModusNavbarButton } from '../modus-navbar.models';
 
 export const ModusNavbarButtonList: FunctionalComponent<{
@@ -20,7 +20,7 @@ export const ModusNavbarButtonList: FunctionalComponent<{
           <span class="navbar-button-icon" tabIndex={0}>
             <modus-tooltip text={button.tooltip?.text} position="bottom">
               <div class="icon-button">
-                <IconMap icon={button.icon} size="24" pressed={openButtonMenuId === button.id} />
+                <ModusIconMap icon={button.icon} size="24" pressed={openButtonMenuId === button.id} />
               </div>
             </modus-tooltip>
           </span>

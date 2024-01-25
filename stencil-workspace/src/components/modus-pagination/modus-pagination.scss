@@ -54,10 +54,16 @@ nav {
   &.small {
     height: $rem-24px;
 
-    li {
+    ul li {
       font-size: $rem-12px;
       height: $rem-24px;
       padding: 0 $rem-8px;
+    }
+
+    ul li[aria-label='Next'],
+    ul li[aria-label='Previous'] {
+      padding-left: $rem-4px;
+      padding-right: $rem-4px;
     }
   }
 
@@ -69,6 +75,12 @@ nav {
       height: 2rem;
       padding: 0 $rem-12px;
     }
+
+    ul li[aria-label='Next'],
+    ul li[aria-label='Previous'] {
+      padding-left: $rem-6px;
+      padding-right: $rem-6px;
+    }
   }
 
   &.large {
@@ -77,7 +89,13 @@ nav {
     ul li {
       font-size: $rem-20px;
       height: 3rem;
-      padding: 0 $rem-24px;
+      padding: 0 $rem-18px;
+    }
+
+    ul li[aria-label='Next'],
+    ul li[aria-label='Previous'] {
+      padding-left: $rem-12px;
+      padding-right: $rem-12px;
     }
   }
 }

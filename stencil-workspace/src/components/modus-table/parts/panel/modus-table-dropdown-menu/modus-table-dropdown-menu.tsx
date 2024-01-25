@@ -5,7 +5,7 @@ import {
   State,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
-import { IconHorizontalEllipsis } from '../../../../icons/icon-horizontal-ellipsis';
+import { IconHorizontalEllipsis } from '../../../../../icons/svgs/icon-horizontal-ellipsis';
 import { KEYBOARD_ENTER, KEYBOARD_ESCAPE, KEYBOARD_SPACE } from '../../../modus-table.constants';
 import { TableContext } from '../../../models/table-context.models';
 
