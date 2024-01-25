@@ -11,10 +11,9 @@ import {
   Element,
   Watch,
 } from '@stencil/core';
-import { IconClose } from '../icons/icon-close';
+import { IconClose } from '../../icons/svgs/icon-close';
 
 import { IconSearch } from '../../icons/svgs/icon-search';
-
 
 export interface ModusAutocompleteOption {
   id: string;
@@ -181,9 +180,8 @@ export class ModusAutocomplete {
       this.addChipValue(optionValue);
     } else {
       this.disableFiltering = this.disableCloseOnSelect;
-      this.handleSearchChange(optionValue);;
+      this.handleSearchChange(optionValue);
     }
-
 
     this.hasFocus = this.disableCloseOnSelect;
     this.optionSelected.emit(optionId);
@@ -212,12 +210,11 @@ export class ModusAutocomplete {
   }
 
   handleOptionClick = (option: ModusAutocompleteOption) => {
-
     if (this.multiple) {
       this.addChipValue(option.value);
     } else {
       this.disableFiltering = this.disableCloseOnSelect;
-      this.handleSearchChange(optionValue);;
+      this.handleSearchChange(option.value);
     }
 
     this.hasFocus = this.disableCloseOnSelect;
@@ -275,9 +272,7 @@ export class ModusAutocomplete {
     search = search || '';
     const isSearchEmpty = search.length === 0;
 
-
     if ((isSearchEmpty && !this.showOptionsOnFocus) || (this.disableFiltering && this.disableCloseOnSelect)) {
-
       this.visibleOptions = this.options as ModusAutocompleteOption[];
       return;
     }
