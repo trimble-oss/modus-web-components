@@ -1,6 +1,6 @@
 {
   "name": "@trimble-oss/modus-web-components",
-  "version": "0.12.0",
+  "version": "0.14.0",
   "description": "Trimble Modus Web Component Library",
   "homepage": "https://modus-web-components.trimble.com/",
   "bugs": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/trimble-oss/modus-web-components"
+    "url": "git+https://github.com/trimble-oss/modus-web-components.git"
   },
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
@@ -36,7 +36,8 @@
     "prettier": "prettier --write \"storybook/stories/**/*.*\" \"src/**/*.*\" --config ../.prettierrc.json --ignore-path ../.prettierignore",
     "full": "npm ci && npm run lint && npm run build && npm run test && npm run ci-storybook",
     "ci-storybook": "cd storybook && npm ci && npm run build-storybook",
-    "start-storybook": "npm run build && cd storybook && npm run storybook"
+    "start-storybook": "npm run build && cd storybook && npm run storybook",
+    "prebuild": "tsc generate-icons/generate-icons.ts && node generate-icons/generate-icons.js"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
@@ -48,17 +49,21 @@
     "@stencil/postcss": "^2.1.0",
     "@stencil/react-output-target": "^0.5.3",
     "@stencil/sass": "^2.0.4",
+    "@trimble-oss/modus-icons": "^1.8.0",
     "@types/jest": "^27.5.1",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
     "@typescript-eslint/parser": "^5.58.0",
     "autoprefixer": "^10.4.16",
+    "cheerio": "^1.0.0-rc.12",
+    "colors": "^1.4.0",
+    "ejs": "^3.1.9",
     "eslint": "^8.56.0",
     "eslint-plugin-storybook": "^0.6.15",
     "jest": "^27.0.3",
     "jest-cli": "^27.5.1",
     "prettier": "3.1.1",
     "puppeteer": "^19.11.1",
-    "puppeteer-core": "^19.7.2",
+    "puppeteer-core": "^19.11.1",
     "stylelint": "15.11.0",
     "stylelint-config-standard-scss": "11.1.0",
     "stylelint-order": "6.0.4",

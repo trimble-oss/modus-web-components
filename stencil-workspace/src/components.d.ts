@@ -10,6 +10,7 @@ import { BadgeProperties } from "./components/modus-badge/modus-badge";
 import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 import { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
+import { ModusIconName } from "./icons/ModusIconUtilities";
 import { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
@@ -29,6 +30,7 @@ export { BadgeProperties } from "./components/modus-badge/modus-badge";
 export { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 export { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 export { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
+export { ModusIconName } from "./icons/ModusIconUtilities";
 export { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 export { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
 export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
@@ -561,7 +563,7 @@ export namespace Components {
         /**
           * The name of the icon
          */
-        "name": string | null;
+        "name": ModusIconName | null;
         /**
           * (optional) The size of the Icon
          */
@@ -1307,7 +1309,7 @@ export namespace Components {
         /**
           * (optional) The input's type.
          */
-        "type": 'text' | 'password';
+        "type": 'email' | 'password' | 'search' | 'text' | 'tel' | 'url';
         /**
           * (optional) The input's valid state text.
          */
@@ -2600,7 +2602,7 @@ declare namespace LocalJSX {
         /**
           * The name of the icon
          */
-        "name"?: string | null;
+        "name"?: ModusIconName | null;
         /**
           * (optional) The click handler function
          */
@@ -3493,7 +3495,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The input's type.
          */
-        "type"?: 'text' | 'password';
+        "type"?: 'email' | 'password' | 'search' | 'text' | 'tel' | 'url';
         /**
           * (optional) The input's valid state text.
          */
