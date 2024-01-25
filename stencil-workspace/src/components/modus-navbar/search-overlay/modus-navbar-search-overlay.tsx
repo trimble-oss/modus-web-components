@@ -35,6 +35,7 @@ export class ModusNavbarSearchOverlay {
             <modus-text-input
               placeholder="Search"
               size="large"
+              clearable={true}
               onValueChange={(event: CustomEvent<string>) => this.search.emit(event.detail)}
               include-search-icon
               ref={(el) => (this.modusTextInput = el as HTMLModusTextInputElement)}></modus-text-input>

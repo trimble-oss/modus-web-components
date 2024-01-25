@@ -1,15 +1,8 @@
 name: Azure Static Web Apps CI/CD
 
 on:
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - '.vscode/**'
-      - 'angular-workspace/**'
-      - 'react-workspace/**'
   pull_request:
-    types: [opened, synchronize, reopened, closed]
+    types: [closed]
     branches:
       - main
 
