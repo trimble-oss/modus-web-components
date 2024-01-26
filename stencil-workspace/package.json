@@ -61,7 +61,7 @@
     "eslint-plugin-storybook": "^0.6.15",
     "jest": "^27.0.3",
     "jest-cli": "^27.5.1",
-    "prettier": "3.1.1",
+    "prettier": "3.2.4",
     "puppeteer": "^19.11.1",
     "puppeteer-core": "^19.11.1",
     "stylelint": "15.11.0",
