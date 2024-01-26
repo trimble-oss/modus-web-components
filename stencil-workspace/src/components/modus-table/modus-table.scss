@@ -344,6 +344,21 @@ table {
       }
     }
 
+    td.align-top {
+      vertical-align: top;
+    }
+
+    // density-relaxed
+    td.align-top {
+      padding-top: $rem-14px;
+      padding-bottom: $rem-14px;
+
+      &.row-checkbox {
+        padding-top: $rem-12px;
+        padding-bottom: $rem-12px;
+      }
+    }
+
     &.row-selected {
       background-color: $modus-table-selected-bg;
 
@@ -379,6 +394,16 @@ table {
             padding: $rem-2px $rem-8px !important;
           }
         }
+
+        td.align-top {
+          padding-top: $rem-6px;
+          padding-bottom: $rem-6px;
+
+          &.row-checkbox {
+            padding-top: $rem-4px;
+            padding-bottom: $rem-4px;
+          }
+        }
       }
     }
   }
@@ -394,6 +419,16 @@ table {
 
           &.row-checkbox {
             padding: $rem-2px $rem-8px !important;
+          }
+        }
+
+        td.align-top {
+          padding-bottom: $rem-2px;
+          padding-top: $rem-2px;
+
+          &.row-checkbox {
+            padding-top: 0;
+            padding-bottom: 0;
           }
         }
       }

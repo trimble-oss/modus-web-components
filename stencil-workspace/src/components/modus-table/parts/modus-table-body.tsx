@@ -13,7 +13,16 @@ interface ModusTableBodyProps {
 }
 
 export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ context }) => {
-  const { density, hover, rowSelection, rowSelectionOptions, rowActions, tableInstance: table, updateData } = context;
+  const {
+    density,
+    hover,
+    rowSelection,
+    rowSelectionOptions,
+    rowActions,
+    tableInstance: table,
+    updateData,
+    wrapText,
+  } = context;
   const hasRowActions = rowActions?.length > 0;
   const multipleRowSelection = rowSelectionOptions?.multiple;
   let checkboxSize: 'medium' | 'small' = 'medium';
@@ -62,6 +71,7 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
           <tr key={id} class={{ 'enable-hover': hover, 'row-selected': isChecked }}>
             {rowSelection && (
               <ModusTableCellCheckbox
+                alignTop={wrapText}
                 multipleRowSelection={multipleRowSelection}
                 row={row}
                 isChecked={isChecked}
@@ -73,7 +83,7 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
               );
             })}
             {hasRowActions && (
-              <td class="sticky-right" tabindex="0">
+              <td class={`sticky-right ${wrapText ? 'align-top' : ''}`} tabindex="0">
                 {/* <modus-table-row-actions row={row} context={context} /> */}
                 <modus-table-row-actions-cell row={row} context={context} />
               </td>
