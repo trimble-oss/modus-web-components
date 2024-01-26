@@ -346,10 +346,8 @@ table {
 
     td.align-top {
       vertical-align: top;
-    }
 
-    // density-relaxed
-    td.align-top {
+      // density-relaxed
       padding-top: $rem-14px;
       padding-bottom: $rem-14px;
 
