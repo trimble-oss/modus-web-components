@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 import { Component, Event, EventEmitter, Prop, h } from '@stencil/core';
-import { IconChevronDownThick } from '../icons/icon-chevron-down-thick';
+import { IconChevronDownThick } from '../../icons/svgs/icon-chevron-down-thick';
 
 @Component({
   tag: 'modus-accordion-item',

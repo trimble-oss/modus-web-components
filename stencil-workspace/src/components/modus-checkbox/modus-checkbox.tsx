@@ -7,8 +7,8 @@ import {
   Listen,
   Method,
 } from '@stencil/core';
-import { IconCheck } from '../icons/icon-check';
-import { IconIndeterminate } from '../icons/icon-indeterminate';
+import { IconCheck } from '../../icons/svgs/icon-check';
+import { IconIndeterminate } from '../../icons/svgs/icon-indeterminate';
 
 @Component({
   tag: 'modus-checkbox',

@@ -1,9 +1,9 @@
 // eslint-disable-next-line
 import { Component, Event, EventEmitter, h, Method, Prop } from '@stencil/core';
-import { IconSearch } from '../icons/icon-search';
-import { IconClose } from '../icons/icon-close';
-import { IconVisibility } from '../icons/icon-visibility';
-import { IconVisibilityOff } from '../icons/icon-visibility-off';
+import { IconSearch } from '../../icons/svgs/icon-search';
+import { IconClose } from '../../icons/svgs/icon-close';
+import { IconVisibility } from '../../icons/svgs/icon-visibility';
+import { IconVisibilityOff } from '../../icons/svgs/icon-visibility-off';
 
 @Component({
   tag: 'modus-text-input',
@@ -13,6 +13,9 @@ import { IconVisibilityOff } from '../icons/icon-visibility-off';
 export class ModusTextInput {
   /** (optional) The input's aria-label. */
   @Prop() ariaLabel: string | null;
+
+  /** (optional) Sets autocomplete on the input. */
+  @Prop() autocomplete: string | null;
 
   /** (optional) Sets autofocus on the input. */
   @Prop() autoFocusInput: boolean;
@@ -63,7 +66,7 @@ export class ModusTextInput {
   @Prop() textAlign: 'left' | 'right' = 'left';
 
   /** (optional) The input's type. */
-  @Prop() type: 'text' | 'password' = 'text';
+  @Prop() type: 'email' | 'password' | 'search' | 'text' | 'tel' | 'url' = 'text';
 
   /** (optional) The input's valid state text. */
   @Prop() validText: string;
@@ -163,6 +166,7 @@ export class ModusTextInput {
             aria-invalid={!!this.errorText}
             aria-label={this.ariaLabel}
             aria-required={this.required?.toString()}
+            autocomplete={this.autocomplete}
             class={buildTextInputClassNames()}
             disabled={this.disabled}
             inputmode={this.inputmode}

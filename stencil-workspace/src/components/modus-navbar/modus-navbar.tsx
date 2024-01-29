@@ -11,12 +11,12 @@ import {
   Host,
   Fragment,
 } from '@stencil/core';
-import { IconMenu } from '../icons/icon-menu';
-import { IconNotifications } from '../icons/icon-notifications';
-import { IconApps } from '../icons/icon-apps';
-import { IconSearch } from '../icons/icon-search';
+import { IconMenu } from '../../icons/svgs/icon-menu';
+import { IconNotifications } from '../../icons/svgs/icon-notifications';
+import { IconApps } from '../../icons/svgs/icon-apps';
+import { IconSearch } from '../../icons/svgs/icon-search';
 import { ModusNavbarApp } from './apps-menu/modus-navbar-apps-menu';
-import { IconHelp } from '../icons/icon-help';
+import { IconHelp } from '../../icons/svgs/icon-help';
 import {
   ModusNavbarButton,
   ModusNavbarLogoOptions,
