@@ -69,6 +69,8 @@ export class ModusAlert {
         {this.dismissible ? (
           <div
             class="icon-close-container"
+            aria-label="Dismiss alert"
+            role="button"
             tabIndex={0}
             onClick={() => this.dismissClick.emit()}
             onKeyDown={(e) => e.key.toUpperCase() === 'ENTER' && this.dismissClick.emit()}>
