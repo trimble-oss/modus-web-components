@@ -1,6 +1,7 @@
 // eslint-disable-next-line
 import { Component, Event, EventEmitter, Method, Prop, h } from '@stencil/core';
 import { IconCheck } from '../icons/icon-check';
+import { IconMap } from '../icons/IconMap';
 
 @Component({
   tag: 'modus-list-item',
@@ -16,6 +17,8 @@ export class ModusListItem {
 
   /** (optional) The selected state of the list item */
   @Prop() selected: boolean;
+
+  @Prop() leftIcon: string;
 
   /** (optional) The size of list item */
   @Prop() size: 'condensed' | 'large' | 'standard' = 'standard';
@@ -64,6 +67,11 @@ export class ModusListItem {
         tabIndex={this.disabled ? -1 : 0}
         onClick={() => (!this.disabled ? this.itemClick.emit() : null)}
         onKeyDown={(e) => this.handleKeydown(e)}>
+        {this.leftIcon && (
+          <span class="icon left-icon">
+            <IconMap icon={this.leftIcon} size="24"></IconMap>
+          </span>
+        )}
         <div class="text-container">
           <span class="slot">
             <slot />

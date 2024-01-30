@@ -1,6 +1,7 @@
 @import './../modus-tree-view-item.vars';
 
 .tree-item {
+  display: flex;
   align-items: center;
   background-color: $modus-tree-view-item-bg;
   border: $rem-1px solid $modus-tree-view-item-border-color;
@@ -12,6 +13,8 @@
   font-size: $rem-16px;
   min-height: $list-group-item-height;
   width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
 
   svg path {
     fill: $modus-tree-view-item-color;
@@ -123,6 +126,11 @@
   display: flex;
   flex-direction: column;
   position: relative;
+
+  .tree-item-wrapper{
+    display: flex;
+    align-items: center;
+  }
 
   &.selected-indicator::before {
     box-shadow: inset 0.3rem 0 0 0 $modus-tree-view-item-selected-indicator;

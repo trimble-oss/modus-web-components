@@ -1,0 +1,20 @@
+.modus-action-bar {
+    align-items: center;
+    display: flex;
+    gap: 0;
+  
+    .modus-button {
+      // Custom styles for buttons
+    }
+  
+    .overflow-menu {
+      display: none;
+      position: absolute; // z-index works on positioned elements (non-static)
+      z-index: 1000; // Assign a high z-index value
+      // other necessary styles...
+  
+      &.show {
+        display: block;
+      }
+    }
+  }

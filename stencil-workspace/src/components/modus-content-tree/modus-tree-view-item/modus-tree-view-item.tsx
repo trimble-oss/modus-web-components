@@ -60,6 +60,9 @@ export class ModusTreeViewItem {
   /** (optional) Tab Index for the tree item */
   @Prop({ mutable: true }) tabIndexValue: string | number = 0;
 
+  @Prop({ mutable: true }) actions: { id: string; icon: string; label: string, handleAction: ()=>void }[];
+  @Prop({ mutable: true }) visibleItemCount: number;
+
   /**
    * @internal
    */
@@ -68,6 +71,7 @@ export class ModusTreeViewItem {
   @State() childrenIds: string[];
   @State() forceUpdate = {};
   @State() slots: Map<string, boolean> = new Map();
+  @State() actionItems = [];
 
   private refItemContent: HTMLDivElement;
   private refLabelInput: HTMLModusTextInputElement;
@@ -79,8 +83,6 @@ export class ModusTreeViewItem {
   readonly SLOT_EXPAND_ICON = 'expandIcon';
   readonly SLOT_ITEM_ICON = 'itemIcon';
   readonly SLOT_LABEL = 'label';
-  readonly SLOT_GROUP_LEFT = 'groupLeft';
-  readonly SLOT_GROUP_RIGHT = 'groupRight';
 
   CustomSlot: FunctionalComponent<{
     name: string;
@@ -384,66 +386,69 @@ export class ModusTreeViewItem {
     const treeItemClass = `tree-item ${selected ? 'selected' : ''} ${sizeClass} ${isDisabled ? 'disabled' : ''} `;
     const treeItemChildrenClass = `tree-item-group ${sizeClass} ${expanded ? 'expanded' : ''}`;
 
+    // const actions = [
+    //   { id: 'export', icon: 'export', label: 'Export' },
+    //   { id: 'history', icon: 'history', label: 'History' },
+    //   { id: 'edit', icon: 'pencil', label: 'Edit' },
+    //   { id: 'delete', icon: 'history', label: 'Delete' },
+    // ];
     return (
       <li {...ariaControls} class={`tree-item-container${selectionIndicator ? ' selected-indicator' : ''}`}>
-        <div
-          class={treeItemClass}
-          onFocus={() => this.handleFocus()}
-          onClick={(e) => this.handleItemClick(e)}
-          onKeyDown={(e) => this.handleKeyDownTreeItem(e)}
-          ref={(el) => this.handleRefItemContent(el)}
-          tabindex={tabIndex}>
-          <this.CustomSlot
-            className={`icon-slot drag-icon${!this.draggableItem ? ' hidden' : ''}`}
-            defaultContent={<IconMap icon="drag" />}
-            name={this.SLOT_DRAG_ICON}
-            onMouseDown={(e) => this.handleDrag(e)}
-          />
-          <div aria-disabled="true" style={{ paddingLeft: `${(level - 1) * 0.5}rem` }}>
-            {/* used for level indentation purpose */}
-          </div>
+      
           <div
-            class={`icon-slot${!expandable ? ' hidden' : ''}`}
-            onClick={(e) => this.handleExpandToggle(e)}
-            onKeyDown={(e) => this.handleDefaultKeyDown(e, () => this.handleExpandToggle(e))}
-            tabindex={expandable ? tabIndex : -1}>
+            class={treeItemClass}
+            onFocus={() => this.handleFocus()}
+            onClick={(e) => this.handleItemClick(e)}
+            onKeyDown={(e) => this.handleKeyDownTreeItem(e)}
+            ref={(el) => this.handleRefItemContent(el)}
+            tabindex={tabIndex}>
+                <div class="tree-item-wrapper">
             <this.CustomSlot
-              className="inline-flex rotate-right"
-              defaultContent={<IconMap icon="chevron-down-thick" size="24" />}
-              display={!expanded}
-              name={this.SLOT_EXPAND_ICON}
+              className={`icon-slot drag-icon${!this.draggableItem ? ' hidden' : ''}`}
+              defaultContent={<IconMap icon="drag" />}
+              name={this.SLOT_DRAG_ICON}
+              onMouseDown={(e) => this.handleDrag(e)}
             />
-            <this.CustomSlot
-              className="inline-flex"
-              defaultContent={<IconMap icon="chevron-down-thick" size="24" />}
-              display={expanded}
-              name={this.SLOT_COLLAPSE_ICON}
-            />
-          </div>
-
-          {(checkboxSelection || multiCheckboxSelection) && (
-            <div class="icon-slot">
-              <modus-checkbox
-                checked={checked}
-                disabled={isDisabled}
-                indeterminate={indeterminate}
-                onClick={(e) => this.handleCheckboxClick(e)}
-                onKeyDown={(e) => this.handleDefaultKeyDown(e, () => this.handleCheckboxClick(e))}
-                ref={(el) => (this.refCheckbox = el)}
-                tabIndexValue={tabIndex}></modus-checkbox>
+            <div aria-disabled="true" style={{ paddingLeft: `${(level - 1) * 0.5}rem` }}>
+              {/* used for level indentation purpose */}
             </div>
-          )}
-          <div class="slot-container">
+            <div
+              class={`icon-slot${!expandable ? ' hidden' : ''}`}
+              onClick={(e) => this.handleExpandToggle(e)}
+              onKeyDown={(e) => this.handleDefaultKeyDown(e, () => this.handleExpandToggle(e))}
+              tabindex={expandable ? tabIndex : -1}>
+              <this.CustomSlot
+                className="inline-flex rotate-right"
+                defaultContent={<IconMap icon="chevron-down-thick" size="24" />}
+                display={!expanded}
+                name={this.SLOT_EXPAND_ICON}
+              />
+              <this.CustomSlot
+                className="inline-flex"
+                defaultContent={<IconMap icon="chevron-down-thick" size="24" />}
+                display={expanded}
+                name={this.SLOT_COLLAPSE_ICON}
+              />
+            </div>
+
+            {(checkboxSelection || multiCheckboxSelection) && (
+              <div class="icon-slot">
+                <modus-checkbox
+                  checked={checked}
+                  disabled={isDisabled}
+                  indeterminate={indeterminate}
+                  onClick={(e) => this.handleCheckboxClick(e)}
+                  onKeyDown={(e) => this.handleDefaultKeyDown(e, () => this.handleCheckboxClick(e))}
+                  ref={(el) => (this.refCheckbox = el)}
+                  tabIndexValue={tabIndex}></modus-checkbox>
+              </div>
+            )}
+
             <this.CustomSlot
               className="icon-slot"
               name={this.SLOT_ITEM_ICON}
               display={this.slots.has(this.SLOT_ITEM_ICON)}
             />
-
-            <div class="group-left">
-              <this.CustomSlot name={this.SLOT_GROUP_LEFT} />
-            </div>
-
             <div role="heading" aria-level={level} class="label-slot">
               <this.CustomSlot
                 role="button"
@@ -464,13 +469,9 @@ export class ModusTreeViewItem {
                   )
                 }></this.CustomSlot>
             </div>
-
-            <div class="group-right">
-              <this.CustomSlot name={this.SLOT_GROUP_RIGHT} />
             </div>
-          </div>
+          {this.actions?.length > 0 && <modus-action-bar visible-item-count={this.visibleItemCount || 1} actions={this.actions}></modus-action-bar>}      
         </div>
-
         <ul class={treeItemChildrenClass} role="tree">
           <slot onSlotchange={() => this.handleTreeSlotChange()} />
         </ul>

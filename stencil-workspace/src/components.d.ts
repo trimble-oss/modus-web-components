@@ -68,6 +68,20 @@ export namespace Components {
          */
         "size": 'condensed' | 'standard';
     }
+    interface ModusActionBar {
+        /**
+          * (optional) List of actions
+         */
+        "actions": { id: string; icon: string; label: string }[];
+        /**
+          * (optional) The size of the action items.
+         */
+        "size": 'small' | 'medium' | 'large';
+        /**
+          * (optional) Total number of icons to show
+         */
+        "visibleItemCount": number;
+    }
     interface ModusAlert {
         /**
           * (optional) The alert's aria-label.
@@ -579,6 +593,7 @@ export namespace Components {
          */
         "disabled": boolean;
         "focusItem": () => Promise<void>;
+        "leftIcon": string;
         /**
           * (optional) The selected state of the list item
          */
@@ -1462,6 +1477,7 @@ export namespace Components {
         "size": 'condensed' | 'large' | 'standard';
     }
     interface ModusTreeViewItem {
+        "actions": { id: string; icon: string; label: string, handleAction: ()=>void }[];
         /**
           * (optional) Disables the tree item
          */
@@ -1500,11 +1516,16 @@ export namespace Components {
          */
         "tabIndexValue": string | number;
         "updateComponent": () => Promise<void>;
+        "visibleItemCount": number;
     }
 }
 export interface ModusAccordionItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusAccordionItemElement;
+}
+export interface ModusActionBarCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusActionBarElement;
 }
 export interface ModusAlertCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1650,6 +1671,12 @@ declare global {
     var HTMLModusAccordionItemElement: {
         prototype: HTMLModusAccordionItemElement;
         new (): HTMLModusAccordionItemElement;
+    };
+    interface HTMLModusActionBarElement extends Components.ModusActionBar, HTMLStencilElement {
+    }
+    var HTMLModusActionBarElement: {
+        prototype: HTMLModusActionBarElement;
+        new (): HTMLModusActionBarElement;
     };
     interface HTMLModusAlertElement extends Components.ModusAlert, HTMLStencilElement {
     }
@@ -1975,6 +2002,7 @@ declare global {
     interface HTMLElementTagNameMap {
         "modus-accordion": HTMLModusAccordionElement;
         "modus-accordion-item": HTMLModusAccordionItemElement;
+        "modus-action-bar": HTMLModusActionBarElement;
         "modus-alert": HTMLModusAlertElement;
         "modus-autocomplete": HTMLModusAutocompleteElement;
         "modus-badge": HTMLModusBadgeElement;
@@ -2062,6 +2090,24 @@ declare namespace LocalJSX {
           * (optional) The size of accordion item.
          */
         "size"?: 'condensed' | 'standard';
+    }
+    interface ModusActionBar {
+        /**
+          * (optional) List of actions
+         */
+        "actions"?: { id: string; icon: string; label: string }[];
+        /**
+          * (optional) An event that fires on action item click.
+         */
+        "onActionBarClick"?: (event: ModusActionBarCustomEvent<any>) => void;
+        /**
+          * (optional) The size of the action items.
+         */
+        "size"?: 'small' | 'medium' | 'large';
+        /**
+          * (optional) Total number of icons to show
+         */
+        "visibleItemCount"?: number;
     }
     interface ModusAlert {
         /**
@@ -2617,6 +2663,7 @@ declare namespace LocalJSX {
           * (optional) Disables the list item
          */
         "disabled"?: boolean;
+        "leftIcon"?: string;
         /**
           * An event that fires on list item click
          */
@@ -3652,6 +3699,7 @@ declare namespace LocalJSX {
         "size"?: 'condensed' | 'large' | 'standard';
     }
     interface ModusTreeViewItem {
+        "actions"?: { id: string; icon: string; label: string, handleAction: ()=>void }[];
         /**
           * (optional) Disables the tree item
          */
@@ -3693,10 +3741,12 @@ declare namespace LocalJSX {
           * (optional) Tab Index for the tree item
          */
         "tabIndexValue"?: string | number;
+        "visibleItemCount"?: number;
     }
     interface IntrinsicElements {
         "modus-accordion": ModusAccordion;
         "modus-accordion-item": ModusAccordionItem;
+        "modus-action-bar": ModusActionBar;
         "modus-alert": ModusAlert;
         "modus-autocomplete": ModusAutocomplete;
         "modus-badge": ModusBadge;
@@ -3758,6 +3808,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "modus-accordion": LocalJSX.ModusAccordion & JSXBase.HTMLAttributes<HTMLModusAccordionElement>;
             "modus-accordion-item": LocalJSX.ModusAccordionItem & JSXBase.HTMLAttributes<HTMLModusAccordionItemElement>;
+            "modus-action-bar": LocalJSX.ModusActionBar & JSXBase.HTMLAttributes<HTMLModusActionBarElement>;
             "modus-alert": LocalJSX.ModusAlert & JSXBase.HTMLAttributes<HTMLModusAlertElement>;
             "modus-autocomplete": LocalJSX.ModusAutocomplete & JSXBase.HTMLAttributes<HTMLModusAutocompleteElement>;
             "modus-badge": LocalJSX.ModusBadge & JSXBase.HTMLAttributes<HTMLModusBadgeElement>;
