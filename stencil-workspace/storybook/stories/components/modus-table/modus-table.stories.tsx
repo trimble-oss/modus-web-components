@@ -284,6 +284,7 @@ const DefaultArgs = {
   columnResize: false,
   columnReorder: false,
   pagination: false,
+  showAlternateSortIcons: false,
   showSortIconOnHover: false,
   summaryRow: false,
   fullWidth: false,
@@ -333,6 +334,16 @@ export default {
     sort: {
       name: 'sort',
       description: 'Enables sort for table columns',
+      control: 'boolean',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      },
+      type: { required: false },
+    },
+    showAlternateSortIcons: {
+      name: 'showAlternateSortIcons',
+      description: 'Display up/down arrows instead of A-Z icon',
       control: 'boolean',
       table: {
         defaultValue: { summary: false },
@@ -543,6 +554,7 @@ const Template = ({
   columnResize,
   columnReorder,
   pagination,
+  showAlternateSortIcons,
   showSortIconOnHover,
   summaryRow,
   fullWidth,
@@ -571,6 +583,7 @@ const Template = ({
       column-reorder="${columnReorder}"
       density="${density}"
       pagination="${pagination}"
+      show-alternate-sort-icons="${showAlternateSortIcons}"
       show-sort-icon-on-hover="${showSortIconOnHover}"
       summary-row="${summaryRow}"
       full-width="${fullWidth}"
@@ -618,6 +631,7 @@ export const ValueFormatter = ({
   sort,
   columnResize,
   pagination,
+  showAlternateSortIcons,
   showSortIconOnHover,
   summaryRow,
   fullWidth,
@@ -639,6 +653,7 @@ export const ValueFormatter = ({
       column-resize="${columnResize}"
       density="${density}"
       pagination="${pagination}"
+      show-alternate-sort-icons="${showAlternateSortIcons}"
       show-sort-icon-on-hover="${showSortIconOnHover}"
       summary-row="${summaryRow}"
       full-width="${fullWidth}"
@@ -656,6 +671,7 @@ ValueFormatter.args = {
   columnResize: false,
   columnReorder: false,
   pagination: false,
+  showAlternateSortIcons: false,
   showSortIconOnHover: false,
   summaryRow: false,
   fullWidth: false,

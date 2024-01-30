@@ -58,6 +58,8 @@ export interface TableContext {
 
   rowSelectionOptions: ModusTableRowSelectionOptions;
 
+  showAlternateSortIcons: boolean;
+
   showSortIconOnHover: boolean;
 
   sort: boolean;

@@ -1140,6 +1140,10 @@ export namespace Components {
          */
         "rowsExpandable": boolean;
         /**
+          * (Optional) To display arrow up/down sort icons.
+         */
+        "showAlternateSortIcons": boolean;
+        /**
           * (Optional) To display sort icon on hover.
          */
         "showSortIconOnHover": boolean;
@@ -3326,6 +3330,10 @@ declare namespace LocalJSX {
           * (Optional) To display expanded rows.
          */
         "rowsExpandable"?: boolean;
+        /**
+          * (Optional) To display arrow up/down sort icons.
+         */
+        "showAlternateSortIcons"?: boolean;
         /**
           * (Optional) To display sort icon on hover.
          */

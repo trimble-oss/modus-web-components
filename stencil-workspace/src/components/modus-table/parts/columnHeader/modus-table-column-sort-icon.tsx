@@ -1,8 +1,11 @@
 import {
   FunctionalComponent,
+  JSX,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
-import { Column } from '@tanstack/table-core';
+import { Column, SortDirection } from '@tanstack/table-core';
+import { IconSortAZ } from '../../../../icons/svgs/icon-sort-a-z';
+import { IconSortZA } from '../../../../icons/svgs/icon-sort-z-a';
 import { IconSortArrowUp } from '../../../../icons/generated-icons/IconSortArrowUp';
 import { IconSortArrowDown } from '../../../../icons/generated-icons/IconSortArrowDown';
 import { IconUnsortedArrows } from '../../../../icons/generated-icons/IconUnsortedArrows';
@@ -16,8 +19,27 @@ import {
 
 interface ModusTableColumnSortIconProps {
   column: Column<unknown, unknown>;
+  showAlternateSortIcons: boolean;
   showSortIconOnHover: boolean;
   isColumnResizing: boolean;
+}
+
+/**
+ * Render the correct sort icon
+ * @param isSorted Is the column currently sorted
+ * @param showAlternateIcons Show alternate (arrow up/down) icons
+ * @returns Sort icon
+ */
+function renderSortIcon(isSorted: false | SortDirection, showAlternateIcons: boolean): JSX.Element {
+  if (isSorted === 'asc') {
+    return showAlternateIcons ? <IconSortArrowUp size={'16'} /> : <IconSortAZ size={'16'} />;
+  }
+
+  if (isSorted === 'desc') {
+    return showAlternateIcons ? <IconSortArrowDown size={'16'} /> : <IconSortZA size={'16'} />;
+  }
+
+  return showAlternateIcons ? <IconUnsortedArrows size={'16'} /> : <IconSortZA size={'16'} />;
 }
 
 /**
@@ -53,6 +75,7 @@ function sortOnKeyDown(column: Column<unknown, unknown>, event: KeyboardEvent): 
 export const ModusTableColumnSortIcon: FunctionalComponent<ModusTableColumnSortIconProps> = ({
   column,
   showSortIconOnHover,
+  showAlternateSortIcons,
   isColumnResizing,
 }) => {
   return (
@@ -71,13 +94,7 @@ export const ModusTableColumnSortIcon: FunctionalComponent<ModusTableColumnSortI
               ${!column.getIsSorted() && 'disabled'}
               ${showSortIconOnHover ? 'hidden' : ''}
             `}>
-            {column.getIsSorted() === false ? (
-              <IconUnsortedArrows size={'16'} />
-            ) : column.getIsSorted() === 'asc' ? (
-              <IconSortArrowUp size={'16'} />
-            ) : (
-              <IconSortArrowDown size={'16'} />
-            )}
+            {renderSortIcon(column.getIsSorted(), showAlternateSortIcons)}
           </span>
         </span>
       }

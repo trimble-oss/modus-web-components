@@ -217,6 +217,9 @@ export class ModusTable {
     }
   }
 
+  /** (Optional) To display arrow up/down sort icons. */
+  @Prop() showAlternateSortIcons = false;
+
   /** (Optional) To display sort icon on hover. */
   @Prop() showSortIconOnHover = false;
 
@@ -447,6 +450,7 @@ export class ModusTable {
       columnOrderChange: this.columnOrderChange,
       cellValueChange: this.cellValueChange,
       cellLinkClick: this.cellLinkClick,
+      showAlternateSortIcons: this.showAlternateSortIcons,
       showSortIconOnHover: this.showSortIconOnHover,
       displayOptions: this.displayOptions,
       toolbarOptions: this.toolbarOptions,
