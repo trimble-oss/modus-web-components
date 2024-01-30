@@ -186,6 +186,28 @@ describe('modus-table', () => {
     expect(dataTestIdValue).toBe('iconSortAZ');
   });
 
+  it('Renders with correct sort icon when alternate icons and sort is enabled', async () => {
+    page = await newE2EPage();
+    await page.setContent('<modus-table />');
+
+    const component = await page.find('modus-table');
+
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    component.setProperty('sort', true);
+    component.setProperty('showAlternateSortIcons', true);
+    await page.waitForChanges();
+
+    let arrowIcon = await page.find('modus-table >>> svg');
+    expect(arrowIcon).toHaveClass('icon-unsorted-arrows');
+
+    const header = await page.find('modus-table >>> .sort-icon');
+    await header.click();
+    await page.waitForChanges();
+    arrowIcon = await page.find('modus-table >>> svg');
+    expect(arrowIcon).toHaveClass('icon-sort-arrow-up');
+  });
+
   it('Should output sort data on sort icon click with sort enabled', async () => {
     const component = await page.find('modus-table');
     component.setProperty('columns', MockColumns);
