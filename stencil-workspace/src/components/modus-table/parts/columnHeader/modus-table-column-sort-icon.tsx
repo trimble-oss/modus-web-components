@@ -3,8 +3,9 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Column } from '@tanstack/table-core';
-import { IconSortAZ } from '../../../../icons/svgs/icon-sort-a-z';
-import { IconSortZA } from '../../../../icons/svgs/icon-sort-z-a';
+import { IconSortArrowUp } from '../../../../icons/generated-icons/IconSortArrowUp';
+import { IconSortArrowDown } from '../../../../icons/generated-icons/IconSortArrowDown';
+import { IconUnsortedArrows } from '../../../../icons/generated-icons/IconUnsortedArrows';
 import {
   KEYBOARD_ENTER,
   SORT_ASCENDING,
@@ -70,7 +71,13 @@ export const ModusTableColumnSortIcon: FunctionalComponent<ModusTableColumnSortI
               ${!column.getIsSorted() && 'disabled'}
               ${showSortIconOnHover ? 'hidden' : ''}
             `}>
-            {column.getIsSorted() === 'asc' ? <IconSortAZ size={'16'} /> : <IconSortZA size={'16'} />}
+            {column.getIsSorted() === false ? (
+              <IconUnsortedArrows size={'16'} />
+            ) : column.getIsSorted() === 'asc' ? (
+              <IconSortArrowUp size={'16'} />
+            ) : (
+              <IconSortArrowDown size={'16'} />
+            )}
           </span>
         </span>
       }

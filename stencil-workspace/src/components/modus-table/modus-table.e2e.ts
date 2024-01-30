@@ -171,19 +171,14 @@ describe('modus-table', () => {
     component.setProperty('sort', true);
     await page.waitForChanges();
 
-    let iconSortAZ = await page.find('modus-table >>> svg');
-    let dataTestId = iconSortAZ['__attributeMap']['__items'].find((item) => item['_name'] === 'data-test-id');
-    let dataTestIdValue = dataTestId && dataTestId['_value'];
-
-    expect(dataTestIdValue).toBe('iconSortZA');
+    const iconSortArrows = await page.find('modus-table >>> svg');
+    expect(iconSortArrows).toHaveClass('icon-unsorted-arrows');
 
     const header = await page.find('modus-table >>> .sort-icon');
     await header.click();
     await page.waitForChanges();
-    iconSortAZ = await page.find('modus-table >>> svg');
-    dataTestId = iconSortAZ['__attributeMap']['__items'].find((item) => item['_name'] === 'data-test-id');
-    dataTestIdValue = dataTestId && dataTestId['_value'];
-    expect(dataTestIdValue).toBe('iconSortAZ');
+    const iconSortAsc = await page.find('modus-table >>> svg');
+    expect(iconSortAsc).toHaveClass('icon-sort-arrow-up');
   });
 
   it('Should output sort data on sort icon click with sort enabled', async () => {
@@ -270,11 +265,8 @@ describe('modus-table', () => {
     component.setProperty('manualSortingOptions', MockManualSorting);
     await page.waitForChanges();
 
-    const iconSortAZ = await page.find('modus-table >>> svg');
-    const dataTestId = iconSortAZ['__attributeMap']['__items'].find((item) => item['_name'] === 'data-test-id');
-    const dataTestIdValue = dataTestId && dataTestId['_value'];
-
-    expect(dataTestIdValue).toBe('iconSortAZ');
+    const iconSortAsc = await page.find('modus-table >>> svg');
+    expect(iconSortAsc).toHaveClass('icon-sort-arrow-up');
   });
 
   it('Check sort icon tooltip text for enabled manual sorting', async () => {
