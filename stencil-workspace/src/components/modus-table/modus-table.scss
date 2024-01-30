@@ -35,7 +35,6 @@ table {
   width: 100%;
 
   &.cell-borderless {
-
     th,
     td,
     tr {
@@ -62,8 +61,8 @@ table {
     }
   }
 
-  th.row-checkbox+th.sticky-left,
-  td.row-checkbox+td.sticky-left {
+  th.row-checkbox + th.sticky-left,
+  td.row-checkbox + td.sticky-left {
     left: 46.25px;
   }
 
@@ -205,8 +204,8 @@ table {
       }
 
       .wrap-text {
-        word-break: break-word;
         overflow-wrap: break-word;
+        word-break: break-word;
       }
 
       td {
@@ -345,15 +344,15 @@ table {
     }
 
     td.align-top {
-      vertical-align: top;
+      padding-bottom: $rem-14px;
 
       // density-relaxed
       padding-top: $rem-14px;
-      padding-bottom: $rem-14px;
+      vertical-align: top;
 
       &.row-checkbox {
-        padding-top: $rem-12px;
         padding-bottom: $rem-12px;
+        padding-top: $rem-12px;
       }
     }
 
@@ -394,12 +393,12 @@ table {
         }
 
         td.align-top {
-          padding-top: $rem-6px;
           padding-bottom: $rem-6px;
+          padding-top: $rem-6px;
 
           &.row-checkbox {
-            padding-top: $rem-4px;
             padding-bottom: $rem-4px;
+            padding-top: $rem-4px;
           }
         }
       }
@@ -425,8 +424,8 @@ table {
           padding-top: $rem-2px;
 
           &.row-checkbox {
-            padding-top: 0;
             padding-bottom: 0;
+            padding-top: 0;
           }
         }
       }

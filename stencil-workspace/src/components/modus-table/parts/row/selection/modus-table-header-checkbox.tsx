@@ -12,10 +12,10 @@ export const ModusTableHeaderCheckbox: FunctionalComponent<ModusTableHeaderCheck
   const {
     tableInstance: { getIsAllRowsSelected, getIsSomeRowsSelected, getToggleAllRowsSelectedHandler },
     rowSelectionOptions,
-    density
+    density,
   } = context;
   let checkboxSize: 'medium' | 'small' = 'medium';
-  if(density === 'compact') {
+  if (density === 'compact') {
     checkboxSize = 'small';
   }
   return (
