@@ -12,6 +12,7 @@ import {
   Watch,
 } from '@stencil/core';
 import { IconSearch } from '../../icons/svgs/icon-search';
+import { generateElementId } from '../../utils/utils';
 
 export interface ModusAutocompleteOption {
   id: string;
@@ -111,7 +112,7 @@ export class ModusAutocomplete {
   @State() customOptions: Array<any> = [];
   @State() visibleCustomOptions: Array<any> = [];
   @State() disableFiltering = false;
-  private listId = `autocomplete-${Math.random().toString().slice(2, 7)}`;
+  private listId = generateElementId() + '_list';
 
   componentWillLoad(): void {
     this.convertOptions();
