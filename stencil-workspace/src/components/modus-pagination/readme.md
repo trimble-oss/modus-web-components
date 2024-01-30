@@ -9,7 +9,7 @@
 
 | Property             | Attribute               | Description | Type                             | Default     |
 | -------------------- | ----------------------- | ----------- | -------------------------------- | ----------- |
-| `activePage`         | `active-page`           |             | `number`                         | `undefined` |
+| `activePage`         | `active-page`           |             | `number`                         | `1`         |
 | `ariaLabel`          | `aria-label`            |             | `string`                         | `undefined` |
 | `maxPage`            | `max-page`              |             | `number`                         | `undefined` |
 | `minPage`            | `min-page`              |             | `number`                         | `undefined` |

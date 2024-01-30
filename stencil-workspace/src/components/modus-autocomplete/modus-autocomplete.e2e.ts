@@ -258,6 +258,16 @@ describe('modus-autocomplete', () => {
     expect(options.length).toEqual(2);
   });
 
+  it('should default text input autocomplete to off', async () => {
+    const element = await page.find('modus-autocomplete');
+    expect(element).toHaveClass('hydrated');
+
+    const textInput = await page.find('modus-autocomplete >>> modus-text-input');
+
+    const autocomplete = await textInput.getProperty('autocomplete');
+    expect(autocomplete).toEqual('off');
+  });
+
   it('should display noResultsFoundText prop when value property change and not matching', async () => {
     const element = await page.find('modus-autocomplete');
     element.setProperty('options', ['Test 1', 'Test 2']);

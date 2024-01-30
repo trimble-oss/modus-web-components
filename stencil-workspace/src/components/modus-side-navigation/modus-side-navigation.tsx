@@ -10,7 +10,7 @@ import {
   State,
 } from '@stencil/core';
 import { ModusSideNavigationItemCustomEvent as ModusSideNavItemEvent } from '../../components';
-import { IconChevronLeftThick } from '../icons/icon-chevron-left-thick';
+import { IconChevronLeftThick } from '../../icons/svgs/icon-chevron-left-thick';
 import { ModusSideNavigationTree } from './modus-side-navigation-tree';
 import { ModusSideNavigationItemInfo, ModusSideNavItemLevelInfo } from './modus-side-navigation.models';
 

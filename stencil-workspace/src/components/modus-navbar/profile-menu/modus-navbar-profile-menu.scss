@@ -40,15 +40,15 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      max-width: 16rem;
       margin-bottom: $rem-16px;
+      max-width: 16rem;
 
       .username {
         font-size: $rem-16px;
         font-weight: $font-weight-semi-bold;
-        width: fit-content;
         overflow-wrap: break-word;
         text-align: center;
+        width: fit-content;
       }
 
       .email {

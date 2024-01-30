@@ -2,8 +2,8 @@ import {
   FunctionalComponent,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
-import { IconChevronDownThick } from '../../../icons/icon-chevron-down-thick';
-import { IconChevronUpThick } from '../../../icons/icon-chevron-up-thick';
+import { IconChevronDownThick } from '../../../../icons/svgs/icon-chevron-down-thick';
+import { IconChevronUpThick } from '../../../../icons/svgs/icon-chevron-up-thick';
 import { Row } from '@tanstack/table-core';
 import { KEYBOARD_ENTER, KEYBOARD_SPACE } from '../../modus-table.constants';
 

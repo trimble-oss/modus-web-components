@@ -907,8 +907,32 @@ describe('modus-table', () => {
     component.setProperty('defaultSort', { id: 'mock-column-two', desc: true });
 
     await page.waitForChanges();
-    let tableData = await page.findAll('modus-table >>> td');
-    let firstItem = tableData[0].textContent;
+    const tableData = await page.findAll('modus-table >>> td');
+    const firstItem = tableData[0].textContent;
     expect(firstItem).toBe('Mock Data One 2');
+  });
+
+  it('Renders small size checkboxes for compact density', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-table />');
+    const component = await page.find('modus-table');
+
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    component.setProperty('rowSelection', true);
+    component.setProperty('rowSelectionOptions', {
+      multiple: true,
+      preSelectedRows: ['0'],
+    });
+    component.setProperty('density', 'compact');
+
+    await page.waitForChanges();
+    const rows = await page.findAll('modus-table >>> modus-checkbox');
+    expect(rows.length).toBeGreaterThan(0);
+    for (let i = 0; i < rows.length; i++) {
+      const size = await rows[i].getProperty('size');
+      expect(size).toBe('small');
+    }
   });
 });
