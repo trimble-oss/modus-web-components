@@ -12,6 +12,7 @@ import {
   Watch,
 } from '@stencil/core';
 import { IconSearch } from '../../icons/svgs/icon-search';
+import { generateElementId } from '../../utils/utils';
 
 export interface ModusAutocompleteOption {
   id: string;
@@ -111,6 +112,7 @@ export class ModusAutocomplete {
   @State() customOptions: Array<any> = [];
   @State() visibleCustomOptions: Array<any> = [];
   @State() disableFiltering = false;
+  private listId = generateElementId() + '_list';
 
   componentWillLoad(): void {
     this.convertOptions();
@@ -170,7 +172,8 @@ export class ModusAutocomplete {
 
   handleOptionKeyPress = (event: any, option: any, isCustomOption = false) => {
     this.disableFiltering = !this.disableCloseOnSelect;
-    if (event.key !== 'Enter') {
+    const allowedKeys = ['Enter', ' ']; // Hitting Enter or Space should select the option
+    if (!allowedKeys.includes(event.key)) {
       return;
     }
     if (isCustomOption) {
@@ -264,6 +267,10 @@ export class ModusAutocomplete {
       type="search"
       value={this.value}
       onBlur={this.handleInputBlur}
+      role="combobox"
+      aria-autocomplete="list"
+      aria-controls={this.listId}
+      aria-expanded={this.displayOptions()}
     />
   );
 
@@ -295,13 +302,14 @@ export class ModusAutocomplete {
         <div
           class="options-container"
           style={{ maxHeight: this.dropdownMaxHeight, zIndex: this.dropdownZIndex, overflowY: 'auto' }}>
-          <ul>
+          <ul id={this.listId} aria-label="options" role="listbox">
             {this.displayOptions() &&
               this.visibleOptions?.map((option) => {
                 return (
                   <li
                     class="text-option"
                     tabindex="0"
+                    role="option"
                     onClick={() => this.handleOptionClick(option)}
                     onKeyPress={(ev) => this.handleOptionKeyPress(ev, option)}>
                     {option.value}
@@ -313,6 +321,7 @@ export class ModusAutocomplete {
                 <li
                   class="custom-option"
                   tabindex="0"
+                  role="option"
                   onClick={() => this.handleCustomOptionClick(option)}
                   onKeyPress={(ev) => this.handleOptionKeyPress(ev, option, true)}
                   innerHTML={option.outerHTML}

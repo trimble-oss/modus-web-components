@@ -11,3 +11,8 @@ export function generateRandomNumber(): number {
   window.crypto.getRandomValues(array);
   return array[0];
 }
+
+let counter = 0;
+export function generateElementId(): string {
+  return `mwc_id_${counter++}`;
+}
