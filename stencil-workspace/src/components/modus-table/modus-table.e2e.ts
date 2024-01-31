@@ -912,6 +912,19 @@ describe('modus-table', () => {
     expect(firstItem).toBe('Mock Data One 2');
   });
 
+  it('should set table-layout to fixed when fullWidth', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-table></modus-table>');
+    const component = await page.find('modus-table');
+    await component.setProperty('fullWidth', true);
+
+    await page.waitForChanges();
+
+    const table = await page.find('modus-table >>> table');
+    const style = await table.getComputedStyle();
+    expect(style['table-layout']).toBe('fixed');
+  });
+
   it('Renders small size checkboxes for compact density', async () => {
     const page = await newE2EPage();
 

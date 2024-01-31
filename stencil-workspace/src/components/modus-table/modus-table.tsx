@@ -671,7 +671,7 @@ export class ModusTable {
     `;
 
     const tableStyle = this.fullWidth
-      ? { width: '100%' }
+      ? { width: '100%', tableLayout: 'fixed' }
       : totalSize > 0
         ? { width: `${totalSize}px`, tableLayout: 'fixed' }
         : { tableLayout: 'fixed' };
