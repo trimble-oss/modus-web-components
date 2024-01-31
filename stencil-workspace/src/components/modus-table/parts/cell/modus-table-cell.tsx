@@ -13,7 +13,7 @@ interface ModusTableCellProps {
 }
 
 export const ModusTableCell: FunctionalComponent<ModusTableCellProps> = ({ cell, cellIndex, context, valueChange }) => {
-  const { rowsExpandable, frozenColumns, wrapText } = context;
+  const { rowsExpandable, frozenColumns } = context;
   const hasRowsExpandable = cellIndex === 0 && rowsExpandable;
   const { id } = cell;
   return (
@@ -23,7 +23,6 @@ export const ModusTableCell: FunctionalComponent<ModusTableCellProps> = ({ cell,
       class={`
       ${hasRowsExpandable || frozenColumns.includes(cell.column.id) ? 'sticky-left' : ''}
       ${cell.column.getIsResizing() ? 'active-resize' : ''}
-      ${wrapText ? 'align-top' : ''}
   `}
       style={{ width: `${cell.column.getSize()}px` }}>
       <modus-table-cell-main

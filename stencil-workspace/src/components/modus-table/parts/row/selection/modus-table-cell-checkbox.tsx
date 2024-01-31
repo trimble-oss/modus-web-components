@@ -7,7 +7,6 @@ import NavigateTableCells from '../../../utilities/table-cell-navigation.utility
 import { KEYBOARD_ENTER } from '../../../modus-table.constants';
 
 interface ModusTableCellCheckboxProps {
-  alignTop?: boolean;
   isChecked: boolean;
   multipleRowSelection: boolean;
   row: Row<unknown>;
@@ -15,7 +14,6 @@ interface ModusTableCellCheckboxProps {
 }
 
 export const ModusTableCellCheckbox: FunctionalComponent<ModusTableCellCheckboxProps> = ({
-  alignTop = false,
   multipleRowSelection,
   row,
   isChecked,
@@ -37,7 +35,7 @@ export const ModusTableCellCheckbox: FunctionalComponent<ModusTableCellCheckboxP
   }
   return (
     <td
-      class={`row-checkbox sticky-left ${checkboxSize ?? ''} ${alignTop ? 'align-top' : ''}`}
+      class={'row-checkbox sticky-left ' + (checkboxSize ?? '')}
       tabIndex={0}
       ref={(el) => (cellEl = el)}
       onFocus={() => checkboxInput?.focusCheckbox()}

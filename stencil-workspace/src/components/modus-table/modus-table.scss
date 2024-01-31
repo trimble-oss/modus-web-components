@@ -48,7 +48,7 @@ table {
     box-sizing: border-box;
 
     &.row-checkbox {
-      padding: 0.5rem !important;
+      padding: 0.5rem;
       width: 46px;
 
       &.small {
@@ -212,6 +212,16 @@ table {
         background-color: $modus-table-body-bg;
         border-top: $rem-1px $modus-table-border-color solid;
 
+        // density-relaxed
+        padding-bottom: $rem-14px;
+        padding-top: $rem-14px;
+        vertical-align: top;
+
+        &.row-checkbox {
+          padding-bottom: $rem-12px;
+          padding-top: $rem-12px;
+        }
+
         &.edit-mode {
           border: $rem-2px $modus-table-cell-border-color solid;
           box-sizing: border-box;
@@ -343,19 +353,6 @@ table {
       }
     }
 
-    td.align-top {
-      padding-bottom: $rem-14px;
-
-      // density-relaxed
-      padding-top: $rem-14px;
-      vertical-align: top;
-
-      &.row-checkbox {
-        padding-bottom: $rem-12px;
-        padding-top: $rem-12px;
-      }
-    }
-
     &.row-selected {
       background-color: $modus-table-selected-bg;
 
@@ -387,18 +384,11 @@ table {
         height: $rem-32px;
 
         td {
-          &.row-checkbox {
-            padding: $rem-2px $rem-8px !important;
-          }
-        }
-
-        td.align-top {
           padding-bottom: $rem-6px;
           padding-top: $rem-6px;
 
           &.row-checkbox {
-            padding-bottom: $rem-4px;
-            padding-top: $rem-4px;
+            padding: $rem-4px $rem-8px;
           }
         }
       }
@@ -411,21 +401,11 @@ table {
         height: $rem-24px;
 
         td {
-          padding-bottom: $rem-2px;
-          padding-top: $rem-2px;
+          padding-bottom: $rem-4px;
+          padding-top: $rem-4px;
 
           &.row-checkbox {
-            padding: $rem-2px $rem-8px !important;
-          }
-        }
-
-        td.align-top {
-          padding-bottom: $rem-2px;
-          padding-top: $rem-2px;
-
-          &.row-checkbox {
-            padding-bottom: 0;
-            padding-top: 0;
+            padding: $rem-2px $rem-8px;
           }
         }
       }
