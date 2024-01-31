@@ -57,7 +57,7 @@ describe('modus-card', () => {
     const component = await page.find('modus-card');
     const element = await page.find('modus-card >>> article');
     let computedStyle = await element.getComputedStyle();
-    expect(computedStyle['borderRadius']).toEqual('2px');
+    expect(computedStyle['borderRadius']).toEqual('4px');
 
     component.setProperty('borderRadius', '10px');
     await page.waitForChanges();
