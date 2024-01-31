@@ -395,7 +395,6 @@ export class ModusTreeViewItem {
           onKeyDown={(e) => this.handleKeyDownTreeItem(e)}
           ref={(el) => this.handleRefItemContent(el)}
           tabindex={tabIndex}>
-          <div class="tree-item-wrapper">
             <this.CustomSlot
               className={`icon-slot drag-icon${!this.draggableItem ? ' hidden' : ''}`}
               defaultContent={<ModusIcon icon="drag" />}
@@ -462,7 +461,7 @@ export class ModusTreeViewItem {
                   )
                 }></this.CustomSlot>
             </div>
-          </div>
+        
           {this.actions?.length > 0 && (
             <modus-action-bar visible-item-count={this.visibleItemCount || 1} actions={this.actions}></modus-action-bar>
           )}
