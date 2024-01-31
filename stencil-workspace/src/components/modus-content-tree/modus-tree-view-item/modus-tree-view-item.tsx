@@ -124,7 +124,7 @@ export class ModusTreeViewItem {
   componentWillLoad() {
     this.itemAdded.emit(this.element);
     this.handleDefaultSlotChange();
-    this.parseMyArrayProp(this.actions);
+    // this.parseMyArrayProp(this.actions);
   }
 
   disconnectedCallback() {

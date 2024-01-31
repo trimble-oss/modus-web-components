@@ -1488,7 +1488,7 @@ export namespace Components {
         "size": 'condensed' | 'large' | 'standard';
     }
     interface ModusTreeViewItem {
-        "actions": { id: string; icon: string; label: string; }[];
+        "actions": { id: string; icon: string; label: string }[];
         /**
           * (optional) Disables the tree item
          */
@@ -1522,7 +1522,6 @@ export namespace Components {
           * (required) Unique tree item identifier
          */
         "nodeId": string;
-        "showActionBar": boolean;
         /**
           * (optional) Tab Index for the tree item
          */
@@ -3718,7 +3717,7 @@ declare namespace LocalJSX {
         "size"?: 'condensed' | 'large' | 'standard';
     }
     interface ModusTreeViewItem {
-        "actions"?: { id: string; icon: string; label: string; }[];
+        "actions"?: { id: string; icon: string; label: string }[];
         /**
           * (optional) Disables the tree item
          */
@@ -3756,7 +3755,6 @@ declare namespace LocalJSX {
           * An event that fires on tree item expand/collapse
          */
         "onItemExpandToggle"?: (event: ModusTreeViewItemCustomEvent<boolean>) => void;
-        "showActionBar"?: boolean;
         /**
           * (optional) Tab Index for the tree item
          */
