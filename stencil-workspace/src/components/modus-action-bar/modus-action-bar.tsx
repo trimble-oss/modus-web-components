@@ -1,12 +1,11 @@
 import { Component, Prop, State, h, Element, Listen, Event, EventEmitter } from '@stencil/core';
 import { createPopper, Instance } from '@popperjs/core';
 
-
 export interface ModusActionBarOptions {
-    id: string;
-    icon: string;
-    label: string;
-  }
+  id: string;
+  icon: string;
+  label: string;
+}
 
 @Component({
   tag: 'modus-action-bar',
@@ -97,9 +96,11 @@ export class ModusActionBar {
   }
 
   render() {
-    const visibleActions = this.actions.length > this.visibleItemCount ? this.actions.slice(0, this.visibleItemCount - 1) : this.actions;
-    const overflowActions = this.actions.length > this.visibleItemCount ? this.actions.slice(this.visibleItemCount - 1) : null;
-    
+    const visibleActions =
+      this.actions.length > this.visibleItemCount ? this.actions.slice(0, this.visibleItemCount - 1) : this.actions;
+    const overflowActions =
+      this.actions.length > this.visibleItemCount ? this.actions.slice(this.visibleItemCount - 1) : null;
+
     return (
       <div class="modus-action-bar">
         {visibleActions.map((action) => (

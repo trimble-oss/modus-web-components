@@ -395,73 +395,69 @@ export class ModusTreeViewItem {
           onKeyDown={(e) => this.handleKeyDownTreeItem(e)}
           ref={(el) => this.handleRefItemContent(el)}
           tabindex={tabIndex}>
+          <this.CustomSlot
+            className={`icon-slot drag-icon${!this.draggableItem ? ' hidden' : ''}`}
+            defaultContent={<ModusIcon icon="drag" />}
+            name={this.SLOT_DRAG_ICON}
+            onMouseDown={(e) => this.handleDrag(e)}
+          />
+          <div aria-disabled="true" style={{ paddingLeft: `${(level - 1) * 0.5}rem` }}>
+            {/* used for level indentation purpose */}
+          </div>
+          <div
+            class={`icon-slot${!expandable ? ' hidden' : ''}`}
+            onClick={(e) => this.handleExpandToggle(e)}
+            onKeyDown={(e) => this.handleDefaultKeyDown(e, () => this.handleExpandToggle(e))}
+            tabindex={expandable ? tabIndex : -1}>
             <this.CustomSlot
-              className={`icon-slot drag-icon${!this.draggableItem ? ' hidden' : ''}`}
-              defaultContent={<ModusIcon icon="drag" />}
-              name={this.SLOT_DRAG_ICON}
-              onMouseDown={(e) => this.handleDrag(e)}
+              className="inline-flex rotate-right"
+              defaultContent={<ModusIcon icon="chevron_down_thick" size="24" />}
+              display={!expanded}
+              name={this.SLOT_EXPAND_ICON}
             />
-            <div aria-disabled="true" style={{ paddingLeft: `${(level - 1) * 0.5}rem` }}>
-              {/* used for level indentation purpose */}
-            </div>
-            <div
-              class={`icon-slot${!expandable ? ' hidden' : ''}`}
-              onClick={(e) => this.handleExpandToggle(e)}
-              onKeyDown={(e) => this.handleDefaultKeyDown(e, () => this.handleExpandToggle(e))}
-              tabindex={expandable ? tabIndex : -1}>
-              <this.CustomSlot
-                className="inline-flex rotate-right"
-                defaultContent={<ModusIcon icon="chevron_down_thick" size="24" />}
-                display={!expanded}
-                name={this.SLOT_EXPAND_ICON}
-              />
-              <this.CustomSlot
-                className="inline-flex"
-                defaultContent={<ModusIcon icon="chevron_down_thick" size="24" />}
-                display={expanded}
-                name={this.SLOT_COLLAPSE_ICON}
-              />
-            </div>
-
-            {(checkboxSelection || multiCheckboxSelection) && (
-              <div class="icon-slot">
-                <modus-checkbox
-                  checked={checked}
-                  disabled={isDisabled}
-                  indeterminate={indeterminate}
-                  onClick={(e) => this.handleCheckboxClick(e)}
-                  onKeyDown={(e) => this.handleDefaultKeyDown(e, () => this.handleCheckboxClick(e))}
-                  ref={(el) => (this.refCheckbox = el)}
-                  tabIndexValue={tabIndex}></modus-checkbox>
-              </div>
-            )}
-
             <this.CustomSlot
-              className="icon-slot"
-              name={this.SLOT_ITEM_ICON}
-              display={this.slots.has(this.SLOT_ITEM_ICON)}
+              className="inline-flex"
+              defaultContent={<ModusIcon icon="chevron_down_thick" size="24" />}
+              display={expanded}
+              name={this.SLOT_COLLAPSE_ICON}
             />
-            <div role="heading" aria-level={level} class="label-slot">
-              <this.CustomSlot
-                role="button"
-                name={this.SLOT_LABEL}
-                defaultContent={
-                  this.editable ? (
-                    <modus-text-input
-                      size={size == 'large' ? 'large' : 'medium'}
-                      autoFocusInput={true}
-                      tabindex={0}
-                      ref={(el) => (this.refLabelInput = el)}
-                      value={this.label}
-                      onClick={(e) => this.handleLabelInputClick(e)}
-                      onBlur={() => this.handleLabelInputBlur()}
-                      onKeyDown={(e) => this.handleLabelInputKeyDown(e)}></modus-text-input>
-                  ) : (
-                    this.label
-                  )
-                }></this.CustomSlot>
+          </div>
+
+          {(checkboxSelection || multiCheckboxSelection) && (
+            <div class="icon-slot">
+              <modus-checkbox
+                checked={checked}
+                disabled={isDisabled}
+                indeterminate={indeterminate}
+                onClick={(e) => this.handleCheckboxClick(e)}
+                onKeyDown={(e) => this.handleDefaultKeyDown(e, () => this.handleCheckboxClick(e))}
+                ref={(el) => (this.refCheckbox = el)}
+                tabIndexValue={tabIndex}></modus-checkbox>
             </div>
-        
+          )}
+
+          <this.CustomSlot className="icon-slot" name={this.SLOT_ITEM_ICON} display={this.slots.has(this.SLOT_ITEM_ICON)} />
+          <div role="heading" aria-level={level} class="label-slot">
+            <this.CustomSlot
+              role="button"
+              name={this.SLOT_LABEL}
+              defaultContent={
+                this.editable ? (
+                  <modus-text-input
+                    size={size == 'large' ? 'large' : 'medium'}
+                    autoFocusInput={true}
+                    tabindex={0}
+                    ref={(el) => (this.refLabelInput = el)}
+                    value={this.label}
+                    onClick={(e) => this.handleLabelInputClick(e)}
+                    onBlur={() => this.handleLabelInputBlur()}
+                    onKeyDown={(e) => this.handleLabelInputKeyDown(e)}></modus-text-input>
+                ) : (
+                  this.label
+                )
+              }></this.CustomSlot>
+          </div>
+
           {this.actions?.length > 0 && (
             <modus-action-bar visible-item-count={this.visibleItemCount || 1} actions={this.actions}></modus-action-bar>
           )}
