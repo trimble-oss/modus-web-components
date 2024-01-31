@@ -418,4 +418,39 @@ describe('modus-tree-view-item', () => {
 
     expect(checkboxClick).toHaveReceivedEvent();
   });
+
+  it('should open action bar and select an option', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <modus-tree-view>
+        <modus-tree-view-item node-id="1" label="Test Node">
+       </modus-tree-view-item>
+      </modus-tree-view>
+    `);
+
+    const treeView = await page.find('modus-tree-view');
+    expect(treeView).not.toBeNull();
+
+    const treeViewItem = await page.find('modus-tree-view-item[node-id="1"]');
+    expect(treeViewItem).not.toBeNull();
+
+    await page.waitForChanges();
+
+    const actionBar = await page.find('modus-tree-view-item[node-id="1"] >>> modus-action-bar');
+    expect(actionBar).not.toBeNull();
+
+    await actionBar.click();
+    await page.waitForChanges();
+
+    const historyAction = await page.find('modus-tree-view-item[node-id="1"] >>> modus-action-bar >>> modus-list');
+
+    const test = historyAction.shadowRoot.querySelectorAll('modus-list-item');
+    expect(test[0]);
+
+    await page.waitForChanges();
+    expect(test[0].textContent).toBe('Export');
+    expect(test[1].textContent).toBe('History');
+    expect(test[2].textContent).toBe('Edit');
+    expect(test[3].textContent).toBe('Delete');
+  });
 });
