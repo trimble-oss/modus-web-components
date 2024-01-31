@@ -1,7 +1,15 @@
 import { newE2EPage } from '@stencil/core/testing';
 
+const MockActionBars  = [
+  { id: 'export', icon: 'export', label: 'Export' },
+  { id: 'history', icon: 'history', label: 'History' },
+  { id: 'edit', icon: 'pencil', label: 'Edit' },
+  { id: 'delete', icon: 'delete', label: 'Delete' },
+];
+
 describe('modus-tree-view-item', () => {
   // verify renders
+
   it('renders tree root', async () => {
     const page = await newE2EPage();
     await page.setContent('<modus-tree-view></modus-tree-view>');
@@ -423,18 +431,24 @@ describe('modus-tree-view-item', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <modus-tree-view>
-        <modus-tree-view-item node-id="1" label="Test Node">
+        <modus-tree-view-item node-id="1" label="Test Node" >
        </modus-tree-view-item>
       </modus-tree-view>
     `);
 
+    
     const treeView = await page.find('modus-tree-view');
     expect(treeView).not.toBeNull();
 
     const treeViewItem = await page.find('modus-tree-view-item[node-id="1"]');
+    await page.waitForChanges();
+    treeViewItem.setProperty('actions', []);
     expect(treeViewItem).not.toBeNull();
 
     await page.waitForChanges();
+    treeViewItem.setProperty('actions', MockActionBars);
+    treeViewItem.setProperty('showActionBar', true);
+    await page.waitForSelector('.klk')
 
     const actionBar = await page.find('modus-tree-view-item[node-id="1"] >>> modus-action-bar');
     expect(actionBar).not.toBeNull();

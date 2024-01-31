@@ -18,9 +18,8 @@ export class ModusListItem {
   /** (optional) The selected state of the list item */
   @Prop() selected: boolean;
 
-  /** (optional) Takes the icon name and shows the icon aligned to the left of the button text. */
-  @Prop() leftIcon: string;
-
+   /** (optional) Takes the icon name and shows the icon aligned to the left of the button text. */
+   @Prop() leftIcon: string;
   /** (optional) The size of list item */
   @Prop() size: 'condensed' | 'large' | 'standard' = 'standard';
 

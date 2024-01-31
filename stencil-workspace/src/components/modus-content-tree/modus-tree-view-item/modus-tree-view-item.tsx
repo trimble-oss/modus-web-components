@@ -10,7 +10,7 @@ import {
   Watch,
   FunctionalComponent,
 } from '@stencil/core';
-import { ModusIconMap as ModusIcon } from '../../../icons/ModusIconMap';
+import { ModusIconMap } from '../../../icons/ModusIconMap';
 import { TreeViewItemOptions } from '../modus-content-tree.types';
 import { TREE_ITEM_SIZE_CLASS } from '../modus-content-tree.constants';
 
@@ -36,6 +36,8 @@ export class ModusTreeViewItem {
   /** (optional) Disables the tree item */
   @Prop() disabled: boolean;
 
+  @Prop() showActionBar: boolean;
+
   /** (optional) Allows the item to be dragged across the tree */
   @Prop() draggableItem: boolean;
 
@@ -60,8 +62,13 @@ export class ModusTreeViewItem {
   /** (optional) Tab Index for the tree item */
   @Prop({ mutable: true }) tabIndexValue: string | number = 0;
 
-  @Prop({ mutable: true }) actions: { id: string; icon: string; label: string; handleAction: () => void }[];
+  @Prop({ mutable: true, reflect: true }) actions: { id: string; icon: string; label: string; }[];
+  @Watch('actions')
+  parseMyArrayProp(newValue) {
+    if (newValue) this.actionItems = JSON.parse(newValue);
+  }
   @Prop({ mutable: true }) visibleItemCount: number;
+
 
   /**
    * @internal
@@ -70,8 +77,8 @@ export class ModusTreeViewItem {
 
   @State() childrenIds: string[];
   @State() forceUpdate = {};
+  @State() actionItems: any[];
   @State() slots: Map<string, boolean> = new Map();
-  @State() actionItems = [];
 
   private refItemContent: HTMLDivElement;
   private refLabelInput: HTMLModusTextInputElement;
@@ -120,6 +127,7 @@ export class ModusTreeViewItem {
   componentWillLoad() {
     this.itemAdded.emit(this.element);
     this.handleDefaultSlotChange();
+    this.parseMyArrayProp(this.actions);
   }
 
   disconnectedCallback() {
@@ -397,7 +405,7 @@ export class ModusTreeViewItem {
           tabindex={tabIndex}>
           <this.CustomSlot
             className={`icon-slot drag-icon${!this.draggableItem ? ' hidden' : ''}`}
-            defaultContent={<ModusIcon icon="drag" />}
+            defaultContent={<ModusIconMap icon="drag_indicator" />}
             name={this.SLOT_DRAG_ICON}
             onMouseDown={(e) => this.handleDrag(e)}
           />
@@ -411,13 +419,13 @@ export class ModusTreeViewItem {
             tabindex={expandable ? tabIndex : -1}>
             <this.CustomSlot
               className="inline-flex rotate-right"
-              defaultContent={<ModusIcon icon="chevron_down_thick" size="24" />}
+              defaultContent={<ModusIconMap icon="expand_more_bold" size="24" />}
               display={!expanded}
               name={this.SLOT_EXPAND_ICON}
             />
             <this.CustomSlot
               className="inline-flex"
-              defaultContent={<ModusIcon icon="chevron_down_thick" size="24" />}
+              defaultContent={<ModusIconMap icon="expand_more_bold" size="24" />}
               display={expanded}
               name={this.SLOT_COLLAPSE_ICON}
             />
@@ -458,8 +466,8 @@ export class ModusTreeViewItem {
               }></this.CustomSlot>
           </div>
 
-          {this.actions?.length > 0 && (
-            <modus-action-bar visible-item-count={this.visibleItemCount || 1} actions={this.actions}></modus-action-bar>
+          {this.showActionBar && (
+            <modus-action-bar visible-item-count={this.visibleItemCount || 1} actions={this.actionItems}></modus-action-bar>
           )}
         </div>
         <ul class={treeItemChildrenClass} role="tree">
