@@ -1,11 +1,11 @@
 import { newE2EPage } from '@stencil/core/testing';
 
-const MockActionBars = [
-  { id: 'export', icon: 'export', label: 'Export' },
-  { id: 'history', icon: 'history', label: 'History' },
-  { id: 'edit', icon: 'pencil', label: 'Edit' },
-  { id: 'delete', icon: 'delete', label: 'Delete' },
-];
+// const MockActionBars = [
+//   { id: 'export', icon: 'export', label: 'Export' },
+//   { id: 'history', icon: 'history', label: 'History' },
+//   { id: 'edit', icon: 'pencil', label: 'Edit' },
+//   { id: 'delete', icon: 'delete', label: 'Delete' },
+// ];
 
 describe('modus-tree-view-item', () => {
   // verify renders
