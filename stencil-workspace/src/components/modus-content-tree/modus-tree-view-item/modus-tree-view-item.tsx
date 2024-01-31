@@ -36,8 +36,6 @@ export class ModusTreeViewItem {
   /** (optional) Disables the tree item */
   @Prop() disabled: boolean;
 
-  @Prop() showActionBar: boolean;
-
   /** (optional) Allows the item to be dragged across the tree */
   @Prop() draggableItem: boolean;
 
@@ -63,10 +61,10 @@ export class ModusTreeViewItem {
   @Prop({ mutable: true }) tabIndexValue: string | number = 0;
 
   @Prop({ mutable: true, reflect: true }) actions: { id: string; icon: string; label: string }[];
-  @Watch('actions')
-  parseMyArrayProp(newValue) {
-    if (newValue) this.actionItems = JSON.parse(newValue);
-  }
+  // @Watch('actions')
+  // parseMyArrayProp(newValue) {
+  //   if (newValue) this.actionItems = JSON.parse(newValue);
+  // }
   @Prop({ mutable: true }) visibleItemCount: number;
 
   /**
@@ -465,8 +463,8 @@ export class ModusTreeViewItem {
               }></this.CustomSlot>
           </div>
 
-          {this.showActionBar && (
-            <modus-action-bar visible-item-count={this.visibleItemCount || 1} actions={this.actionItems}></modus-action-bar>
+          {this.actions && (
+            <modus-action-bar visible-item-count={this.visibleItemCount || 1} actions={this.actions}></modus-action-bar>
           )}
         </div>
         <ul class={treeItemChildrenClass} role="tree">
