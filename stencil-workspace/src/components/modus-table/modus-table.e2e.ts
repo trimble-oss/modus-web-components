@@ -959,6 +959,7 @@ describe('modus-table', () => {
     const style = await spanData[0].getComputedStyle();
     expect(style['overflow']).toBe('hidden');
     expect(style['text-overflow']).toBe('ellipsis');
+    expect(style['white-space']).toBe('nowrap');
   });
 
   it('Should render long text with text wrap enabled', async () => {
