@@ -948,4 +948,56 @@ describe('modus-table', () => {
       expect(size).toBe('small');
     }
   });
+
+  it('Should truncate long text by default', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-table />');
+    const component = await page.find('modus-table');
+
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', [
+      {
+        mockColumnOne: 'This is an example of long text',
+        mockColumnTwo: 10101,
+      },
+      ...MockData,
+    ]);
+
+    await page.waitForChanges();
+
+    const spanData = await page.findAll('modus-table >>> tbody .truncate-text');
+    expect(spanData.length).toBeGreaterThan(0);
+
+    const style = await spanData[0].getComputedStyle();
+    expect(style['overflow']).toBe('hidden');
+    expect(style['text-overflow']).toBe('ellipsis');
+    expect(style['white-space']).toBe('nowrap');
+  });
+
+  it('Should render long text with text wrap enabled', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-table />');
+    const component = await page.find('modus-table');
+
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', [
+      {
+        mockColumnOne: 'This is an example of long text',
+        mockColumnTwo: 10101,
+      },
+      ...MockData,
+    ]);
+    component.setProperty('wrapText', true);
+
+    await page.waitForChanges();
+
+    const spanData = await page.findAll('modus-table >>> tbody .wrap-text');
+    expect(spanData.length).toBeGreaterThan(0);
+
+    const style = await spanData[0].getComputedStyle();
+    expect(style['overflow-wrap']).toBe('break-word');
+    expect(style['word-break']).toBe('break-word');
+  });
 });
