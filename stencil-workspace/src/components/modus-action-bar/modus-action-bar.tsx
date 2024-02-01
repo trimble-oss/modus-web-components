@@ -1,4 +1,13 @@
-import { Component, Prop, State, h, Element, Listen, Event, EventEmitter } from '@stencil/core';
+import { 
+  Component, 
+  Prop, 
+  State, 
+  h, // eslint-disable-line @typescript-eslint/no-unused-vars
+  Element, 
+  Listen, 
+  Event, 
+  EventEmitter 
+} from '@stencil/core';
 import { createPopper, Instance } from '@popperjs/core';
 
 export interface ModusActionBarOptions {

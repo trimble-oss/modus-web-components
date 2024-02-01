@@ -71,7 +71,6 @@ export class ModusTreeViewItem {
 
   @State() childrenIds: string[];
   @State() forceUpdate = {};
-  @State() actionItems: any[];
   @State() slots: Map<string, boolean> = new Map();
 
   private refItemContent: HTMLDivElement;
