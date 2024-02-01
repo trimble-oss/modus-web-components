@@ -64,7 +64,7 @@ export class ModusActionBar {
     const actionItemsChildren = this.el.querySelectorAll('modus-action-item');
 
     if (actionItemsChildren.length > 0) {
-      let actionItems = Array.from(actionItemsChildren);
+      const actionItems = Array.from(actionItemsChildren);
 
       this.actions = actionItems.map((item) => ({
         id: item.getAttribute('id'),
