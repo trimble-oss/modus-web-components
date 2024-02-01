@@ -4,6 +4,7 @@ import { IconProps } from '../ModusIconMap';
 
 export const IconVerticalEllipsis: FunctionalComponent<IconProps> = (props: IconProps) => (
   <svg
+  class="vertical_ellipsis"
     width={props.size ?? 16}
     height={props.size ?? 16}
     fill={props.color ?? '#6A6976'}

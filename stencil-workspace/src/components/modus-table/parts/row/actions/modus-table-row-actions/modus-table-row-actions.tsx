@@ -91,7 +91,7 @@ export class ModusTableRowActions {
               class="row-actions-menu-button"
               button-style="borderless"
               color="secondary"
-              icon-only="vertical-ellipsis"
+              icon-only="vertical_ellipsis"
               ariaLabel="overflow button"
               size="small"
               onKeyDown={(e) => this.handleMoreButtonKeydown(e, overflowMenu)}

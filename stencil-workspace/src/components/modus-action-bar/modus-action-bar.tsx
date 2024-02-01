@@ -52,12 +52,17 @@ export class ModusActionBar {
   }
 
   processChildren() {
-    const actionItems = Array.from(this.el.querySelectorAll('modus-action-item'));
-    this.actions = actionItems.map((item) => ({
-      id: item.getAttribute('id'),
-      icon: item.getAttribute('icon'),
-      label: item.textContent.trim(),
-    }));
+    const actionItemsChildren = this.el.querySelectorAll('modus-action-item');
+  
+    if(actionItemsChildren.length > 0){
+      let actionItems = Array.from(actionItemsChildren);
+      
+      this.actions = actionItems.map((item) => ({
+        id: item.getAttribute('id'),
+        icon: item.getAttribute('icon'),
+        label: item.textContent.trim(),
+      }));
+    }
   }
 
   initializePopper() {
@@ -121,7 +126,7 @@ export class ModusActionBar {
         {this.actions.length > this.visibleItemCount && (
           <modus-button
             ref={(el) => (this.overflowButtonElement = el)}
-            iconOnly="vertical-ellipsis"
+            iconOnly="vertical_ellipsis"
             buttonStyle="borderless"
             color="secondary"
             size={this.size}

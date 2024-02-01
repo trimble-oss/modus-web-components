@@ -60,11 +60,8 @@ export class ModusTreeViewItem {
   /** (optional) Tab Index for the tree item */
   @Prop({ mutable: true }) tabIndexValue: string | number = 0;
 
-  @Prop({ mutable: true, reflect: true }) actions: { id: string; icon: string; label: string }[];
-  // @Watch('actions')
-  // parseMyArrayProp(newValue) {
-  //   if (newValue) this.actionItems = JSON.parse(newValue);
-  // }
+  @Prop({ mutable: true }) actions!: { id: string; icon: string; label: string }[];
+
   @Prop({ mutable: true }) visibleItemCount: number;
 
   /**
@@ -124,7 +121,6 @@ export class ModusTreeViewItem {
   componentWillLoad() {
     this.itemAdded.emit(this.element);
     this.handleDefaultSlotChange();
-    // this.parseMyArrayProp(this.actions);
   }
 
   disconnectedCallback() {

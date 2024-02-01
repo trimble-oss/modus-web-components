@@ -3717,7 +3717,7 @@ declare namespace LocalJSX {
         "size"?: 'condensed' | 'large' | 'standard';
     }
     interface ModusTreeViewItem {
-        "actions"?: { id: string; icon: string; label: string }[];
+        "actions": { id: string; icon: string; label: string }[];
         /**
           * (optional) Disables the tree item
          */
