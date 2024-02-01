@@ -2,16 +2,11 @@ import {
   FunctionalComponent,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
-
-interface IconProps {
-  color?: string;
-  onClick?: () => void;
-  size?: string;
-}
+import { IconProps } from '../ModusIconMap';
 
 export const IconArrowUp: FunctionalComponent<IconProps> = (props: IconProps) => (
   <svg
-    class="icon-arrow-up"
+    class={`icon-arrow-up ${props.pressed ? 'pressed' : ''}`}
     data-test-id="iconArrowUp"
     fill={props.color ?? 'currentColor'}
     height={props.size ?? 16}

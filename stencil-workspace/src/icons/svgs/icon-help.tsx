@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 import { FunctionalComponent, h } from '@stencil/core';
-import { IconProps } from './IconMap';
+import { IconProps } from '../ModusIconMap';
 
 export const IconHelp: FunctionalComponent<IconProps> = (props: IconProps) => (
   <svg
