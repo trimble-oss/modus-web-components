@@ -200,7 +200,7 @@ table {
       .truncate-text {
         overflow: hidden;
         text-overflow: ellipsis;
-        text-wrap: nowrap;
+        white-space: nowrap;
       }
 
       .wrap-text {
