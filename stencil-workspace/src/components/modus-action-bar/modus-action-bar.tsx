@@ -53,10 +53,10 @@ export class ModusActionBar {
 
   processChildren() {
     const actionItemsChildren = this.el.querySelectorAll('modus-action-item');
-  
-    if(actionItemsChildren.length > 0){
+
+    if (actionItemsChildren.length > 0) {
       let actionItems = Array.from(actionItemsChildren);
-      
+
       this.actions = actionItems.map((item) => ({
         id: item.getAttribute('id'),
         icon: item.getAttribute('icon'),
