@@ -3,7 +3,7 @@ import docs from './modus-radio-group-storybook-docs.mdx';
 import { html } from 'lit-html';
 
 export default {
-  title: 'Components/Radio Group',
+  title: 'User Inputs/Radio Group',
   parameters: {
     docs: {
       inlineStories: false,

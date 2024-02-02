@@ -250,6 +250,9 @@ export class ModusTable {
     }
   }
 
+  /** (Optional) To wrap text that overflows the cell. */
+  @Prop() wrapText = false;
+
   /** Emits the cell value that was edited */
   @Event() cellValueChange: EventEmitter<ModusTableCellValueChange>;
 
@@ -463,6 +466,7 @@ export class ModusTable {
       isColumnResizing: this.isColumnResizing,
       tableCore: this.tableCore,
       tableInstance: this.tableCore.getTableInstance(),
+      wrapText: this.wrapText,
       onColumnsChange: this.onColumnsChange,
       onColumnResizeChange: this.onColumnResizeChange,
       onColumnReorderChange: this.onColumnReorderChange,
@@ -675,7 +679,7 @@ export class ModusTable {
     `;
 
     const tableStyle = this.fullWidth
-      ? { width: '100%' }
+      ? { width: '100%', tableLayout: 'fixed' }
       : totalSize > 0
         ? { width: `${totalSize}px`, tableLayout: 'fixed' }
         : { tableLayout: 'fixed' };

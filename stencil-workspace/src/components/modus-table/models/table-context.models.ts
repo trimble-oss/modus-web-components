@@ -100,6 +100,8 @@ export interface TableContext {
 
   tableCore: ModusTableCore;
 
+  wrapText: boolean;
+
   getRowId: (originalRow: unknown, index: number, parent?: Row<unknown>) => string;
   updateData: (updater: Updater<unknown>, context: TableCellEdited) => void;
   onColumnsChange: (newVal: ModusTableColumn<unknown>[]) => void;
