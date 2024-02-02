@@ -46,20 +46,21 @@ export default {
 };
 
 const StyledIcon = `
-  display:flex;
-  flex-direction:column;
-  width: 100px;
   align-items: center;
-  padding: 10px;
-  outline: 1px dashed;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
+  min-width: 100px;
+  outline: 1px dashed;
+  padding: 10px;
 `;
 
 const StyledContent = `
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
-  gap:10px;
-  flex-direction:row;
+  gap: 10px;
 `;
 
 const DefaultTemplateArgs = {
