@@ -19,7 +19,7 @@ import {
 
 interface ModusTableColumnSortIconProps {
   column: Column<unknown, unknown>;
-  showAlternateSortIcons: boolean;
+  sortIconStyle: 'alphabetical' | 'directional';
   showSortIconOnHover: boolean;
   isColumnResizing: boolean;
 }
@@ -30,16 +30,16 @@ interface ModusTableColumnSortIconProps {
  * @param showAlternateIcons Show alternate (arrow up/down) icons
  * @returns Sort icon
  */
-function renderSortIcon(isSorted: false | SortDirection, showAlternateIcons: boolean): JSX.Element {
+function renderSortIcon(isSorted: false | SortDirection, sortIconStyle: 'alphabetical' | 'directional'): JSX.Element {
   if (isSorted === 'asc') {
-    return showAlternateIcons ? <IconSortArrowUp size={'16'} /> : <IconSortAZ size={'16'} />;
+    return sortIconStyle === 'directional' ? <IconSortArrowUp size={'16'} /> : <IconSortAZ size={'16'} />;
   }
 
   if (isSorted === 'desc') {
-    return showAlternateIcons ? <IconSortArrowDown size={'16'} /> : <IconSortZA size={'16'} />;
+    return sortIconStyle === 'directional' ? <IconSortArrowDown size={'16'} /> : <IconSortZA size={'16'} />;
   }
 
-  return showAlternateIcons ? <IconUnsortedArrows size={'16'} /> : <IconSortZA size={'16'} />;
+  return sortIconStyle === 'directional' ? <IconUnsortedArrows size={'16'} /> : <IconSortZA size={'16'} />;
 }
 
 /**
@@ -74,8 +74,8 @@ function sortOnKeyDown(column: Column<unknown, unknown>, event: KeyboardEvent): 
 
 export const ModusTableColumnSortIcon: FunctionalComponent<ModusTableColumnSortIconProps> = ({
   column,
+  sortIconStyle,
   showSortIconOnHover,
-  showAlternateSortIcons,
   isColumnResizing,
 }) => {
   return (
@@ -94,7 +94,7 @@ export const ModusTableColumnSortIcon: FunctionalComponent<ModusTableColumnSortI
               ${!column.getIsSorted() && 'disabled'}
               ${showSortIconOnHover ? 'hidden' : ''}
             `}>
-            {renderSortIcon(column.getIsSorted(), showAlternateSortIcons)}
+            {renderSortIcon(column.getIsSorted(), sortIconStyle)}
           </span>
         </span>
       }

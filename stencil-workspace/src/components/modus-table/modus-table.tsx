@@ -217,9 +217,6 @@ export class ModusTable {
     }
   }
 
-  /** (Optional) To display arrow up/down sort icons. */
-  @Prop() showAlternateSortIcons = false;
-
   /** (Optional) To display sort icon on hover. */
   @Prop() showSortIconOnHover = false;
 
@@ -228,6 +225,9 @@ export class ModusTable {
   @Watch('sort') onSortChange(newVal) {
     this.tableCore?.setOptions('enableSorting', newVal);
   }
+
+  /** (Optional) To display a-z or arrow sort icons. */
+  @Prop() sortIconStyle: 'alphabetical' | 'directional' = 'alphabetical';
 
   /** (Optional) To display summary row. */
   @Prop() summaryRow = false;
@@ -431,6 +431,7 @@ export class ModusTable {
       data: this.data,
       density: this.density,
       sort: this.sort,
+      sortIconStyle: this.sortIconStyle,
       componentId: this._id,
       hover: this.hover,
       pagination: this.pagination,
@@ -453,7 +454,6 @@ export class ModusTable {
       columnOrderChange: this.columnOrderChange,
       cellValueChange: this.cellValueChange,
       cellLinkClick: this.cellLinkClick,
-      showAlternateSortIcons: this.showAlternateSortIcons,
       showSortIconOnHover: this.showSortIconOnHover,
       displayOptions: this.displayOptions,
       toolbarOptions: this.toolbarOptions,

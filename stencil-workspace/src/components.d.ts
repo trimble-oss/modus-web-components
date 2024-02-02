@@ -1140,10 +1140,6 @@ export namespace Components {
          */
         "rowsExpandable": boolean;
         /**
-          * (Optional) To display arrow up/down sort icons.
-         */
-        "showAlternateSortIcons": boolean;
-        /**
           * (Optional) To display sort icon on hover.
          */
         "showSortIconOnHover": boolean;
@@ -1151,6 +1147,10 @@ export namespace Components {
           * (Optional) To sort data in table.
          */
         "sort": boolean;
+        /**
+          * (Optional) To display a-z or arrow sort icons.
+         */
+        "sortIconStyle": 'alphabetical' | 'directional';
         /**
           * (Optional) To display summary row.
          */
@@ -3335,10 +3335,6 @@ declare namespace LocalJSX {
          */
         "rowsExpandable"?: boolean;
         /**
-          * (Optional) To display arrow up/down sort icons.
-         */
-        "showAlternateSortIcons"?: boolean;
-        /**
           * (Optional) To display sort icon on hover.
          */
         "showSortIconOnHover"?: boolean;
@@ -3346,6 +3342,10 @@ declare namespace LocalJSX {
           * (Optional) To sort data in table.
          */
         "sort"?: boolean;
+        /**
+          * (Optional) To display a-z or arrow sort icons.
+         */
+        "sortIconStyle"?: 'alphabetical' | 'directional';
         /**
           * (Optional) To display summary row.
          */

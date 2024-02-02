@@ -281,10 +281,10 @@ const DefaultColumns = [
 const DefaultArgs = {
   hover: false,
   sort: false,
+  sortIconStyle: 'alphabetical',
   columnResize: false,
   columnReorder: false,
   pagination: false,
-  showAlternateSortIcons: false,
   showSortIconOnHover: false,
   summaryRow: false,
   fullWidth: false,
@@ -342,13 +342,16 @@ export default {
       },
       type: { required: false },
     },
-    showAlternateSortIcons: {
-      name: 'showAlternateSortIcons',
-      description: 'Display up/down arrows instead of A-Z icon',
-      control: 'boolean',
+    sortIconStyle: {
+      name: 'sortIconStyle',
+      description: 'Display alphabetical or directional arrow icons when sort is enabled',
+      control: {
+        options: ['alphabetical', 'directional'],
+        type: 'select',
+      },
       table: {
-        defaultValue: { summary: false },
-        type: { summary: 'boolean' },
+        defaultValue: { summary: `'alphabetical'` },
+        type: { summary: `'alphabetical', 'directional'` },
       },
       type: { required: false },
     },
@@ -562,10 +565,10 @@ export default {
 const Template = ({
   hover,
   sort,
+  sortIconStyle,
   columnResize,
   columnReorder,
   pagination,
-  showAlternateSortIcons,
   showSortIconOnHover,
   summaryRow,
   fullWidth,
@@ -591,11 +594,11 @@ const Template = ({
     <modus-table
       hover="${hover}"
       sort="${sort}"
+      sort-icon-style="${sortIconStyle}"
       column-resize="${columnResize}"
       column-reorder="${columnReorder}"
       density="${density}"
       pagination="${pagination}"
-      show-alternate-sort-icons="${showAlternateSortIcons}"
       show-sort-icon-on-hover="${showSortIconOnHover}"
       summary-row="${summaryRow}"
       full-width="${fullWidth}"
@@ -642,9 +645,9 @@ ManualSorting.args = {
 export const ValueFormatter = ({
   hover,
   sort,
+  sortIconStyle,
   columnResize,
   pagination,
-  showAlternateSortIcons,
   showSortIconOnHover,
   summaryRow,
   fullWidth,
@@ -664,10 +667,10 @@ export const ValueFormatter = ({
     <modus-table
       hover="${hover}"
       sort="${sort}"
+      sort="${sortIconStyle}"
       column-resize="${columnResize}"
       density="${density}"
       pagination="${pagination}"
-      show-alternate-sort-icons="${showAlternateSortIcons}"
       show-sort-icon-on-hover="${showSortIconOnHover}"
       summary-row="${summaryRow}"
       full-width="${fullWidth}"
@@ -683,10 +686,10 @@ export const ValueFormatter = ({
 ValueFormatter.args = {
   hover: false,
   sort: false,
+  sortIconStyle: 'alphabetical',
   columnResize: false,
   columnReorder: false,
   pagination: false,
-  showAlternateSortIcons: false,
   showSortIconOnHover: false,
   summaryRow: false,
   fullWidth: false,

@@ -42,7 +42,7 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
     columnReorder,
     frozenColumns,
     showSortIconOnHover,
-    showAlternateSortIcons,
+    sortIconStyle,
   } = context;
   const { column, id: headerId, colSpan, isPlaceholder, getSize } = header;
 
@@ -85,8 +85,8 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
           {column.getCanSort() && (
             <ModusTableColumnSortIcon
               column={column}
+              sortIconStyle={sortIconStyle}
               showSortIconOnHover={showSortIconOnHover}
-              showAlternateSortIcons={showAlternateSortIcons}
               isColumnResizing={isColumnResizing}
             />
           )}

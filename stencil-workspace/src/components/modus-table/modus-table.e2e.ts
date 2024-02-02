@@ -186,7 +186,7 @@ describe('modus-table', () => {
     expect(dataTestIdValue).toBe('iconSortAZ');
   });
 
-  it('Renders with correct sort icon when alternate icons and sort is enabled', async () => {
+  it('Renders with correct sort icon when icon style provided and sort enabled', async () => {
     page = await newE2EPage();
     await page.setContent('<modus-table />');
 
@@ -195,7 +195,7 @@ describe('modus-table', () => {
     component.setProperty('columns', MockColumns);
     component.setProperty('data', MockData);
     component.setProperty('sort', true);
-    component.setProperty('showAlternateSortIcons', true);
+    component.setProperty('sortIconStyle', 'directional');
     await page.waitForChanges();
 
     let arrowIcon = await page.find('modus-table >>> svg');
