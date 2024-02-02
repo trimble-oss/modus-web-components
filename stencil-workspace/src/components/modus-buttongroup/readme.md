@@ -7,11 +7,14 @@
 
 ## Properties
 
-| Property        | Attribute        | Description                             | Type                       | Default                |
-| --------------- | ---------------- | --------------------------------------- | -------------------------- | ---------------------- |
-| `groupStyle`    | `group-style`    | (optional) The style of the button      | `"fill" \| "outline"`      | `FILL_STYLE`           |
-| `selectionType` | `selection-type` | (optional) The selection type of button | `"default" \| "single"`    | `DEFAULT_SELECT__TYPE` |
-| `variant`       | `variant`        | (optional) The color of the button      | `"primary" \| "secondary"` | `PRIMARY_VARIANT`      |
+| Property        | Attribute         | Description                             | Type                       | Default                |
+| --------------- | ----------------- | --------------------------------------- | -------------------------- | ---------------------- |
+| `ariaLabel`     | `aria-label`      | (optional) The button's aria-label.     | `string`                   | `undefined`            |
+| `disabled`      | `disabled`        | (optional) Disables the button.         | `boolean`                  | `undefined`            |
+| `groupStyle`    | `group-style`     | (optional) The style of the button      | `"fill" \| "outline"`      | `FILL_STYLE`           |
+| `selectionType` | `selection-type`  | (optional) The selection type of button | `"default" \| "single"`    | `DEFAULT_SELECT__TYPE` |
+| `tabIndexValue` | `tab-index-value` | (optional) Tab Index for the button     | `number`                   | `0`                    |
+| `variant`       | `variant`         | (optional) The color of the button      | `"primary" \| "secondary"` | `PRIMARY_VARIANT`      |
 
 
 ## Events

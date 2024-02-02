@@ -1,0 +1,182 @@
+import { Anchor } from '@storybook/addon-docs';
+
+# Button Group
+
+[Modus ButtonGroup](https://modus.trimble.com/components) web components provide a way to group buttons together. They are referenced using the `<modus-button-group>` custom HTML element.
+This component utilizes the `modus-button` element, allowing you to render your own HTML in the button group.
+
+
+
+## Default Selection
+### Group Style Fill
+
+#### Primary Variant
+
+<modus-button-group group-style="fill" selection-type="default" variant="primary">
+  <modus-button>Button 1</modus-button>
+  <modus-button>Button 2</modus-button>
+  <modus-button>Button 3</modus-button>
+</modus-button-group>
+
+#### Secondary Variant
+
+<modus-button-group group-style="fill" selection-type="default" variant="secondary">
+  <modus-button>Button 1</modus-button>
+  <modus-button>Button 2</modus-button>
+  <modus-button>Button 3</modus-button>
+</modus-button-group>
+
+### Group Style Outline
+
+#### Primary Variant
+
+<modus-button-group group-style="outline" selection-type="default" variant="primary">
+  <modus-button>Button 1</modus-button>
+  <modus-button>Button 2</modus-button>
+  <modus-button>Button 3</modus-button>
+</modus-button-group>
+
+#### Secondary Variant
+
+<modus-button-group group-style="outline" selection-type="default" variant="secondary">
+  <modus-button>Button 1</modus-button>
+  <modus-button>Button 2</modus-button>
+  <modus-button>Button 3</modus-button>
+</modus-button-group>
+
+## Single Selection
+
+### Group Style Fill
+#### Primary Variant
+
+<modus-button-group group-style="fill" selection-type="single" variant="primary">
+  <modus-button>Button 1</modus-button>
+  <modus-button>Button 2</modus-button>
+  <modus-button>Button 3</modus-button>
+</modus-button-group>
+
+#### Secondary Variant
+
+<modus-button-group group-style="fill" selection-type="single" variant="secondary">
+  <modus-button>Button 1</modus-button>
+  <modus-button>Button 2</modus-button>
+  <modus-button>Button 3</modus-button>
+</modus-button-group>
+
+### Group Style Outline
+#### Primary Variant
+
+<modus-button-group group-style="outline" selection-type="single" variant="primary">
+  <modus-button>Button 1</modus-button>
+  <modus-button>Button 2</modus-button>
+  <modus-button>Button 3</modus-button>
+</modus-button-group>
+
+#### Secondary Variant
+
+<modus-button-group group-style="outline" selection-type="single" variant="secondary">
+  <modus-button>Button 1</modus-button>
+  <modus-button>Button 2</modus-button>
+  <modus-button>Button 3</modus-button>
+</modus-button-group>
+
+```html
+<modus-button-group group-style="fill" selection-type="default" variant="primary">
+  <modus-button>Button 1</modus-button>
+  <modus-button>Button 2</modus-button>
+  <modus-button>Button 3</modus-button>
+</modus-button-group>
+
+<modus-button-group group-style="fill" selection-type="default" variant="primary">
+  <modus-button>Button 1</modus-button>
+  <modus-button>Button 2</modus-button>
+  <modus-button>Button 3</modus-button>
+</modus-button-group>
+
+<modus-button-group group-style="fill" selection-type="default" variant="secondary">
+  <modus-button>Button 1</modus-button>
+  <modus-button>Button 2</modus-button>
+  <modus-button>Button 3</modus-button>
+</modus-button-group>
+
+<modus-button-group group-style="outline" selection-type="default" variant="primary">
+  <modus-button>Button 1</modus-button>
+  <modus-button>Button 2</modus-button>
+  <modus-button>Button 3</modus-button>
+</modus-button-group>
+
+<modus-button-group group-style="outline" selection-type="default" variant="secondary">
+  <modus-button>Button 1</modus-button>
+  <modus-button>Button 2</modus-button>
+  <modus-button>Button 3</modus-button>
+</modus-button-group>
+
+<modus-button-group group-style="fill" selection-type="single" variant="primary">
+  <modus-button>Button 1</modus-button>
+  <modus-button>Button 2</modus-button>
+  <modus-button>Button 3</modus-button>
+</modus-button-group>
+
+<modus-button-group group-style="fill" selection-type="single" variant="secondary">
+  <modus-button>Button 1</modus-button>
+  <modus-button>Button 2</modus-button>
+  <modus-button>Button 3</modus-button>
+</modus-button-group>
+
+<modus-button-group group-style="outline" selection-type="single" variant="primary">
+  <modus-button>Button 1</modus-button>
+  <modus-button>Button 2</modus-button>
+  <modus-button>Button 3</modus-button>
+</modus-button-group>
+
+<modus-button-group group-style="outline" selection-type="single" variant="secondary">
+  <modus-button>Button 1</modus-button>
+  <modus-button>Button 2</modus-button>
+  <modus-button>Button 3</modus-button>
+</modus-button-group>
+
+```
+
+
+## Properties
+
+| Property        | Attribute        | Description                             | Type                       | Default                |
+| --------------- | ---------------- | --------------------------------------- | -------------------------- | ---------------------- |
+|`ariaLabel`      | `aria-label`     | (optional) The aria label of the button | `string`                   | `undefined`            |
+|`disabled`       | `disabled`       | (optional) The disabled state of button | `boolean`                  | `false`                |
+| `groupStyle`    | `group-style`    | (optional) The style of the button      | `"fill" , "outline"`      | `fill`           |
+| `selectionType` | `selection-type` | (optional) The selection type of button | `"default" , "single"`    | `default` |
+|`tabIndexValue`  | `tab-index-value`      | (optional) The tab index of the button  | `number`                   | `0`                    |
+| `variant`       | `variant`        | (optional) The color of the button      | `"primary" , "secondary"` | `primary`      |
+
+## Events
+
+| Event        | Description                                     | Type               |
+| ------------ | ----------------------------------------------- | ------------------ |
+| `groupClick` | (optional) An event that fires on button click. | `CustomEvent<any>` |
+
+
+
+### State
+
+| State              | Description                                                       | Type                       |
+| ------------------ | ----------------------------------------------------------------- | -------------------------- |
+| `buttonPosition`   | The position of the button within the button group               | `"left" , "center" , "right"` |
+| `pressedButtons`   | The set of currently pressed buttons within the button group     | `Set<number>`              |
+| `selectedIndex`    | The index of the currently selected button within the group      | `number`                   |
+
+### Methods
+
+| Method name  | Description     | Parameter | Return          |
+| ------------ | --------------- | --------- | --------------- |
+| `handleClick` | Handles button click events | `id: number` | `void` |
+
+### Accessibility
+- ButtonGroup gets an aria-checked set to whether the button is pressed.
+- ButtonGroup gets an aria-label provided by the aria-label property input.
+- ButtonGroup gets an aria-disabled set to whether ButtonGroup is disabled.
+- When ButtonGroup has focus, Space or Enter toggle it, and emit groupClick event.
+
+
+
+

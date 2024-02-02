@@ -21,8 +21,17 @@ import {
   shadow: true,
 })
 export class ModusButtonGroup {
+  /** (optional) The button's aria-label. */
+  @Prop() ariaLabel: string | null;
+
   /** (optional) The style of the button */
   @Prop() groupStyle: ButtonGroupStyle = FILL_STYLE;
+
+  /** (optional) Disables the button. */
+  @Prop() disabled: boolean;
+
+  /** (optional) Tab Index for the button */
+  @Prop({ mutable: true }) tabIndexValue = 0;
 
   /**(optional) The selection type of button */
   @Prop() selectionType: ButtonGroupSelectionType = DEFAULT_SELECT__TYPE;
@@ -37,14 +46,20 @@ export class ModusButtonGroup {
 
   @State() buttonPosition: ButtonGroupButtonPosition = CENTER_BUTTON_POSITION;
 
-  @State() pressedButtons: Set<number> = new Set();
-
   @State() selectedIndex = -1;
+
+  handleDefaultKeyDown(e, id) {
+    const code = e.code.toUpperCase();
+    if (code === 'ENTER' || code === 'SPACE') {
+      this.handleClick(id);
+    }
+  }
 
   private handleClick(id: number): void {
     this.selectedIndex = id;
     this.groupClick.emit(id);
   }
+
   renderButtons() {
     {
       return Array.from(this.host.children).map((child, id, items) => {
@@ -62,14 +77,20 @@ export class ModusButtonGroup {
           this.buttonPosition = null;
         }
         const className = `modus-button ${this.groupStyle == OUTLINE_STYLE ? OUTLINE_STYLE : ''}`;
+        const tabIndexValue = this.disabled ? -1 : this.tabIndexValue;
         return (
           <modus-button
-            tabIndex={0}
+            aria-disabled={this.disabled ? 'true' : undefined}
+            aria-label={this.ariaLabel}
+            aria-checked={this.selectionType == 'single' ? id == this.selectedIndex : ''}
             class={className}
+            disabled={this.disabled}
+            onClick={() => (!this.disabled ? this.handleClick(id) : null)}
+            tabIndex={tabIndexValue}
+            onKeyDown={(e) => this.handleDefaultKeyDown(e, id)}
             color={this.variant}
             button-position={this.buttonPosition}
             button-style={this.groupStyle}
-            onClick={() => this.handleClick(id)}
             toggleable={this.selectionType == 'single' ? id == this.selectedIndex : false}>
             {child.textContent}
           </modus-button>
