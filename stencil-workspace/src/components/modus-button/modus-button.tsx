@@ -36,6 +36,11 @@ export class ModusButton {
   /** (optional) Shows a caret icon right side of the button. */
   @Prop() showCaret: boolean;
 
+  /** (optional) Makes the button toggleable. */
+  @Prop() toggleable: boolean;
+
+  @Prop() buttonPosition: 'left' | 'right' | 'center';
+
   /** (optional) An event that fires on button click. */
   @Event() buttonClick: EventEmitter;
 
@@ -111,9 +116,11 @@ export class ModusButton {
   }
 
   render(): unknown {
-    const className = `${this.classBySize.get(this.size)} ${this.classByColor.get(this.color)} ${this.classByButtonStyle.get(
-      this.buttonStyle
-    )} ${this.iconOnly ? 'icon-only' : ''} ${this.showCaret ? 'has-caret' : ''}`;
+    const className = `${this.buttonPosition ? this.buttonPosition : ''} ${this.classBySize.get(
+      this.size
+    )} ${this.classByColor.get(this.color)} ${this.classByButtonStyle.get(this.buttonStyle)} ${
+      this.iconOnly ? 'icon-only' : ''
+    } ${this.showCaret ? 'has-caret' : ''} ${this.toggleable ? ' active' : ''}`;
 
     return (
       <button

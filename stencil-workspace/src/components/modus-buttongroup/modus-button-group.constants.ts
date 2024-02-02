@@ -1,0 +1,9 @@
+export const OUTLINE_STYLE = 'outline';
+export const FILL_STYLE = 'fill';
+export const PRIMARY_VARIANT = 'primary';
+export const SECONDARY_VARIANT = 'secondary';
+export const SINGLE_SELECT_TYPE = 'single';
+export const DEFAULT_SELECT__TYPE = 'default';
+export const LEFT_BUTTON_POSITION = 'left';
+export const RIGHT_BUTTON_POSITION = 'right';
+export const CENTER_BUTTON_POSITION = 'center';

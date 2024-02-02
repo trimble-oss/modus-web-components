@@ -1,0 +1,14 @@
+/* modus-button-group.scss */
+
+.modus-buttongroup {
+  display: flex;
+  width: fit-content;
+}
+
+.modus-button {
+  margin-right: 1px;
+
+  &.outline {
+    margin-right: 0;
+  }
+}
