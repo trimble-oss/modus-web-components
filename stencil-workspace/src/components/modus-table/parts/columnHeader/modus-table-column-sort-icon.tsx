@@ -27,7 +27,7 @@ interface ModusTableColumnSortIconProps {
 /**
  * Render the correct sort icon
  * @param isSorted Is the column currently sorted
- * @param showAlternateIcons Show alternate (arrow up/down) icons
+ * @param sortIconStyle Alphabetical or directional (arrow up/down) icons
  * @returns Sort icon
  */
 function renderSortIcon(isSorted: false | SortDirection, sortIconStyle: 'alphabetical' | 'directional'): JSX.Element {
