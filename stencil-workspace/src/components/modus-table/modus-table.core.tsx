@@ -45,6 +45,7 @@ export interface TableCoreOptions {
   sortingState?: ModusTableSortingState;
   preSelectedRows?: RowSelectionState;
   defaultSort?: ModusTableColumnSort;
+  wrapText?: boolean;
 
   getRowId(originalRow: unknown, index: number, parent?: Row<unknown>): string;
   setExpanded: (updater: Updater<ExpandedState>) => void;

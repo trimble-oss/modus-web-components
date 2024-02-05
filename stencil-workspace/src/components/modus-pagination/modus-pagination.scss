@@ -3,12 +3,11 @@
 nav {
   align-items: center;
   background-color: transparent;
-  border-radius: $rem-2px;
+  border-radius: $rem-4px;
   color: $modus-pagination-color;
   display: inline-flex;
   font-family: $primary-font;
   justify-content: center;
-  user-select: none;
   width: 100%;
 
   svg path {
@@ -24,11 +23,13 @@ nav {
 
     li {
       align-items: center;
+      border-radius: 4px;
       display: flex;
       flex-direction: row;
       justify-content: center;
       list-style-type: none;
       min-width: min-content;
+      user-select: none;
 
       &.active {
         background-color: $modus-pagination-active-bg;

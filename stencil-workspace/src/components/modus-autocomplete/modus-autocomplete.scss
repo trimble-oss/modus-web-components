@@ -77,6 +77,7 @@
 
   .options-container {
     background-color: $modus-autocomplete-options-background-color;
+    border-radius: 4px;
     box-shadow: $box-shadow;
     font-family: $primary-font;
     margin: 0;
@@ -120,6 +121,7 @@
     .no-results {
       align-items: center;
       border: 1px solid $modus-autocomplete-options-border-color;
+      border-radius: 4px;
       display: flex;
       flex-direction: column;
       height: 100px;

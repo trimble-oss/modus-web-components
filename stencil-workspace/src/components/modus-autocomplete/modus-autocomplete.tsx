@@ -14,6 +14,7 @@ import {
 import { IconClose } from '../../icons/svgs/icon-close';
 
 import { IconSearch } from '../../icons/svgs/icon-search';
+import { generateElementId } from '../../utils/utils';
 
 export interface ModusAutocompleteOption {
   id: string;
@@ -120,6 +121,8 @@ export class ModusAutocomplete {
   @State() customOptions: Array<any> = [];
   @State() visibleCustomOptions: Array<any> = [];
   @State() disableFiltering = false;
+  @State() focusItemIndex = 0;
+  private listId = generateElementId() + '_list';
 
   componentWillLoad(): void {
     this.convertOptions();
@@ -191,15 +194,43 @@ export class ModusAutocomplete {
     this.hasFocus = !this.disableCloseOnSelect;
   };
 
-  handleOptionKeyPress = (event: any, option: any, isCustomOption = false) => {
-    this.disableFiltering = !this.disableCloseOnSelect;
-    if (event.key !== 'Enter') {
-      return;
+  handleInputKeyDown = (event: KeyboardEvent) => {
+    if (event.defaultPrevented) {
+      return; // Do nothing if event already handled
     }
-    if (isCustomOption) {
-      this.handleCustomOptionClick(option);
-    } else {
-      this.handleOptionClick(option);
+    if (event.code.toUpperCase() === 'ARROWDOWN') {
+      if (this.displayOptions() && !this.displayNoResults()) {
+        this.focusItemIndex = 0;
+        this.focusOptionItem();
+      }
+    }
+  };
+
+  handleOptionKeyDown = (event: any, option: any, isCustomOption = false) => {
+    this.disableFiltering = !this.disableCloseOnSelect;
+
+    switch (event.key.toUpperCase()) {
+      case 'ENTER':
+      case ' ':
+        if (isCustomOption) {
+          this.handleCustomOptionClick(option);
+        } else {
+          this.handleOptionClick(option);
+        }
+        break;
+      case 'ARROWDOWN':
+        if (isCustomOption) {
+          this.handleArrowDown(this.visibleCustomOptions);
+        } else {
+          this.handleArrowDown(this.visibleOptions);
+        }
+        event.preventDefault();
+        break;
+      case 'ARROWUP':
+        this.handleArrowUp();
+        break;
+      default:
+        return;
     }
   };
 
@@ -219,6 +250,20 @@ export class ModusAutocomplete {
 
     this.hasFocus = this.disableCloseOnSelect;
     this.optionSelected.emit(option.id);
+  };
+
+  handleArrowDown = (options: any) => {
+    this.focusItemIndex = Math.min(options.length - 1, this.focusItemIndex + 1);
+    this.focusOptionItem();
+  };
+
+  handleArrowUp = () => {
+    this.focusItemIndex = Math.max(0, this.focusItemIndex - 1);
+    this.focusOptionItem();
+  };
+
+  focusOptionItem = () => {
+    (this.el.shadowRoot.querySelectorAll('[role="option"]')[this.focusItemIndex] as HTMLUListElement).focus();
   };
 
   handleSearchChange = (search: string) => {
@@ -302,6 +347,10 @@ export class ModusAutocomplete {
       type="search"
       value={this.value}
       onBlur={this.handleInputBlur}
+      role="combobox"
+      aria-autocomplete="list"
+      aria-controls={this.listId}
+      aria-expanded={this.displayOptions()}
     />
   );
 
@@ -329,7 +378,8 @@ export class ModusAutocomplete {
           if (this.hasFocus) {
             this.hasFocus = this.disableCloseOnSelect;
           }
-        }}>
+        }}
+        onKeyDown={(e) => this.handleInputKeyDown(e)}>
         {this.label || this.required ? (
           <div class={'label-container'}>
             {this.label ? <label>{this.label}</label> : null}
@@ -352,15 +402,16 @@ export class ModusAutocomplete {
         <div
           class="options-container"
           style={{ maxHeight: this.dropdownMaxHeight, zIndex: this.dropdownZIndex, overflowY: 'auto' }}>
-          <ul>
+          <ul id={this.listId} aria-label="options" role="listbox">
             {this.displayOptions() &&
               this.visibleOptions?.map((option) => {
                 return (
                   <li
                     class="text-option"
-                    tabindex="0"
+                    tabindex="-1"
+                    role="option"
                     onClick={() => this.handleOptionClick(option)}
-                    onKeyPress={(ev) => this.handleOptionKeyPress(ev, option)}>
+                    onKeyDown={(e) => this.handleOptionKeyDown(e, option)}>
                     {option.value}
                   </li>
                 );
@@ -369,9 +420,10 @@ export class ModusAutocomplete {
               this.visibleCustomOptions?.map((option) => (
                 <li
                   class="custom-option"
-                  tabindex="0"
+                  tabindex="-1"
+                  role="option"
                   onClick={() => this.handleCustomOptionClick(option)}
-                  onKeyPress={(ev) => this.handleOptionKeyPress(ev, option, true)}
+                  onKeyDown={(e) => this.handleOptionKeyDown(e, option, true)}
                   innerHTML={option.outerHTML}
                 />
               ))}

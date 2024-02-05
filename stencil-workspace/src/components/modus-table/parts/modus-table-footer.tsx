@@ -32,7 +32,7 @@ export const ModusTableFooter: FunctionalComponent<ModusTableSummaryRowProps> = 
   },
 }) => {
   let checkboxSize: 'medium' | 'small' = 'medium';
-  if(density === 'compact') {
+  if (density === 'compact') {
     checkboxSize = 'small';
   }
   return (

@@ -20,7 +20,7 @@ export const ModusTableCellLinkElement: FunctionalComponent<ModusTableCellLinkPr
   }
 
   return (
-    <div class="cell-link wrap-text" tabIndex={0} onClick={() => onLinkClick(link)} onKeyDown={handleLinkKeyDown}>
+    <div class="cell-link truncate-text" tabIndex={0} onClick={() => onLinkClick(link)} onKeyDown={handleLinkKeyDown}>
       {link.display}
     </div>
   );

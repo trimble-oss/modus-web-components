@@ -75,10 +75,10 @@ const Template = ({
 `;
 export const Default = Template.bind({});
 Default.args = {
-  ariaLabel: 'Card',
+  ariaLabel: '',
   height: '270px',
   width: '250px',
-  borderRadius: '2px',
+  borderRadius: '4px',
   showCardBorder: true,
   showShadowOnHover: true
 };
