@@ -54,15 +54,16 @@ export class ModusTabs {
   }
 
   render(): unknown {
-    const tabs = this.tabs.map((tab: Tab) => {
+    const tabs = this.tabs.map((tab: Tab, tabIndex: number) => {
       return (
         <div
+          id={`${tab.id}`}
           class={`tab ${tab.active ? 'active' : ''} ${this.classBySize.get(this.size)} ${
             this.fullWidth ? 'resizable' : ''
           } `}
           onClick={() => this.handleTabChange(tab.id)}
           onKeyDown={(event) => this.handleKeyDown(event, tab.id)}
-          tabIndex={0}>
+          tabIndex={tabIndex}>
           {tab.label}
         </div>
       );
