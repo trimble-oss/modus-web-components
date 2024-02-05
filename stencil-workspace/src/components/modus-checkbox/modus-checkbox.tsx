@@ -94,12 +94,15 @@ export class ModusCheckbox {
 
     return (
       <div
+        aria-checked={this.checked ? 'true' : 'false'}
+        aria-disabled={this.disabled ? 'true' : undefined}
+        aria-label={this.ariaLabel || undefined}
+        tabindex={tabIndexValue}
         class={className}
         onClick={(event: MouseEvent) => {
           this.handleCheckboxClick(event);
         }}>
         <div
-          tabindex={tabIndexValue}
           class={`${this.checked || this.indeterminate ? 'checkbox blue-background checked' : 'checkbox'} ${
             this.disabled ? 'disabled' : ''
           } ${this.size === 'small' ? 'small' : ''} `}
@@ -115,9 +118,6 @@ export class ModusCheckbox {
           )}
         </div>
         <input
-          aria-checked={this.checked ? 'true' : 'false'}
-          aria-disabled={this.disabled ? 'true' : undefined}
-          aria-label={this.ariaLabel || undefined}
           checked={this.checked}
           disabled={this.disabled}
           ref={(el) => (this.checkboxInput = el as HTMLInputElement)}
