@@ -155,19 +155,7 @@ export class ModusTableCellMain {
 
     const { cellLinkClick, wrapText } = this.context;
     const cellDataType = cellValue['_type'] ?? this.cell.column.columnDef[COLUMN_DEF_DATATYPE_KEY];
-
-    let wrap: boolean;
-    switch (cellDataType) {
-      case COLUMN_DEF_DATATYPE_BADGE:
-        wrap = false;
-        break;
-      case COLUMN_DEF_DATATYPE_LINK:
-        wrap = true;
-        break;
-      default:
-        wrap = wrapText;
-        break;
-    }
+    const wrap: boolean = cellDataType === COLUMN_DEF_DATATYPE_BADGE ? false : wrapText;
 
     const classes = {
       'cell-content': true,
