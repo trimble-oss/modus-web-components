@@ -197,7 +197,8 @@ table {
     tr {
       color: $modus-table-body-color;
 
-      .truncate-text {
+      .truncate-text,
+      .truncate-text .cell-link {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
