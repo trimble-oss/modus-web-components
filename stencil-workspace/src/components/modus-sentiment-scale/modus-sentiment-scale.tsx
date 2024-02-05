@@ -1,6 +1,5 @@
 // eslint-disable-next-line
 import { Component, Prop, State, h, Event, EventEmitter } from '@stencil/core';
-import { IconMap } from '../icons/IconMap';
 import {
   SMILEYS_TYPE_MAP,
   THUMBS_TYPE_MAP,
@@ -8,6 +7,8 @@ import {
   SMILEY_SENTIMENT_TYPE,
 } from './modus-sentiment-scale.constants';
 import { ModusSentimentScaleType } from './modus-sentiment-scale.models';
+import { SentimentIconMap } from './SentimentIconMap';
+
 @Component({
   tag: 'modus-sentiment-scale',
   styleUrl: 'modus-sentiment-scale.scss',
@@ -78,7 +79,7 @@ export class ModusSentimentScale {
                 class={containerClass}
                 onClick={() => this.handleSentimentClick(key)}
                 onKeyDown={(event) => this.handleKeyDown(event, key)}>
-                <IconMap icon={iconName} size={`${this.type === THUMB_SENTIMENT_TYPE ? '32' : '24'}`}></IconMap>
+                <SentimentIconMap icon={iconName} size={`${this.type === THUMB_SENTIMENT_TYPE ? '32' : '24'}`} />
               </div>
             );
           })}

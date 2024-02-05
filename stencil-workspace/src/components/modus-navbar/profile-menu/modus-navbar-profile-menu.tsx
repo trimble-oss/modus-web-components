@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 import { Component, Prop, h, Event, EventEmitter } from '@stencil/core';
 import { ModusNavbarProfileMenuLink } from '../modus-navbar.models';
-import { IconMap } from '../../icons/IconMap';
+import { ModusIconMap } from '../../../icons/ModusIconMap';
 
 @Component({
   tag: 'modus-navbar-profile-menu',
@@ -52,7 +52,7 @@ export class ModusNavbarProfileMenu {
                   <div class="link-item">
                     {link.icon && (
                       <div class="icon">
-                        <IconMap icon={link.icon} size="24" />
+                        <ModusIconMap icon={link.icon} size="24" />
                       </div>
                     )}
                     {link.display}

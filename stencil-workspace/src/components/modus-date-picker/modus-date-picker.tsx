@@ -6,7 +6,7 @@ import {
   Element,
   Listen,
 } from '@stencil/core';
-import { IconMap } from '../icons/IconMap';
+import { ModusIconMap } from '../../icons/ModusIconMap';
 import ModusDatePickerCalendar from './utils/modus-date-picker.calendar';
 import ModusDatePickerState from './utils/modus-date-picker.state';
 import { ModusDateInputEventDetails } from '../modus-date-input/utils/modus-date-input.models';
@@ -305,7 +305,7 @@ export class ModusDatePicker {
     return (
       <div class="calendar-header">
         <button aria-label="Previous Month" onClick={() => this.addMonthOffset(-1)}>
-          <IconMap icon="chevron-left-thick"></IconMap>
+          <ModusIconMap icon="chevron_left_bold"></ModusIconMap>
         </button>
 
         <div class="title">
@@ -314,15 +314,15 @@ export class ModusDatePicker {
           </span>
           <div class="year-icons">
             <button tabIndex={0} aria-label="Next Year" onClick={() => this.addYearOffset(1)} class="year-up">
-              <IconMap icon="caret-up" size="16"></IconMap>
+              <ModusIconMap icon="caret_up" size="16"></ModusIconMap>
             </button>
             <button tabIndex={0} aria-label="Previous Year" onClick={() => this.addYearOffset(-1)} class="year-down">
-              <IconMap size="16" icon="caret-down"></IconMap>
+              <ModusIconMap size="16" icon="caret_down"></ModusIconMap>
             </button>
           </div>
         </div>
         <button tabIndex={0} aria-label="Next Month" onClick={() => this.addMonthOffset(1)}>
-          <IconMap icon="chevron-right-thick"></IconMap>
+          <ModusIconMap icon="chevron_right_bold"></ModusIconMap>
         </button>
       </div>
     );

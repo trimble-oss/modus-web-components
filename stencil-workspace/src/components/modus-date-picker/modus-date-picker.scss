@@ -38,6 +38,7 @@
 
   .calendar-container {
     background-color: $modus-date-picker-calendar-body-bg;
+    border-radius: 4px;
     box-shadow: 0 0 4px #00000029;
     display: flex;
     flex-direction: column;
@@ -49,6 +50,8 @@
     .calendar-header {
       align-items: center;
       background-color: $modus-date-picker-calendar-header-bg;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
       color: $modus-date-picker-calendar-header-color;
       display: flex;
       font: normal normal 600 16px/22px $primary-font;
