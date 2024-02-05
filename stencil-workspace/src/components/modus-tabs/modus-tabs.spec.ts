@@ -32,7 +32,7 @@ describe('modus-button', () => {
     expect(flag.toString()).toEqual('false');
   });
 
-  it('should set the correct id, label and tabIndex for each tab base on tabs configuration', async () => {
+  it('should set the correct id and label for each tab base on tabs configuration', async () => {
     const page = await newSpecPage({
       components: [ModusTabs],
       html: '<modus-tabs></modus-tabs>',
@@ -57,8 +57,8 @@ describe('modus-button', () => {
       <modus-tabs>
         <mock:shadow-root>
           <div class="medium modus-tabs">
-            <div class="active medium tab" id="${tabs[0].id}" tabindex="0">${tabs[0].label}</div>
-            <div class="medium tab" id="${tabs[1].id}" tabindex="1">${tabs[1].label}</div>
+            <div class="active medium tab" id="${tabs[0].id}">${tabs[0].label}</div>
+            <div class="medium tab" id="${tabs[1].id}">${tabs[1].label}</div>
           </div>
         </mock:shadow-root>
       </modus-tabs>
