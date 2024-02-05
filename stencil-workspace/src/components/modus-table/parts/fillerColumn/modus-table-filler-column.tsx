@@ -55,18 +55,18 @@ export class ModusTableFillerColumn {
     if (!this.showFillerTable) return;
 
     if (this.fillerTableRef) {
-      this.fillerTableRef.querySelector('thead').style.height = `${this.targetTable
-        .querySelector('thead')
-        ?.getBoundingClientRect().height}px`;
+      this.fillerTableRef.querySelector('thead').style.height = `${
+        this.targetTable.querySelector('thead')?.getBoundingClientRect().height
+      }px`;
 
       if (this.summaryRow) {
-        this.fillerTableRef.querySelector('tfoot').style.height = `${this.targetTable
-          .querySelector('tfoot')
-          ?.getBoundingClientRect().height}px`;
+        this.fillerTableRef.querySelector('tfoot').style.height = `${
+          this.targetTable.querySelector('tfoot')?.getBoundingClientRect().height
+        }px`;
       }
-      this.fillerTableRef.querySelector('tbody').style.height = `${this.targetTable
-        .querySelector('tbody')
-        ?.getBoundingClientRect().height}px`;
+      this.fillerTableRef.querySelector('tbody').style.height = `${
+        this.targetTable.querySelector('tbody')?.getBoundingClientRect().height
+      }px`;
     }
   };
 
