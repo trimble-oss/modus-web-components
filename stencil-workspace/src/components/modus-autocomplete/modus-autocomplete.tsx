@@ -408,7 +408,7 @@ export class ModusAutocomplete {
                 return (
                   <li
                     class="text-option"
-                    tabindex="-1"
+                    tabindex={0}
                     role="option"
                     onClick={() => this.handleOptionClick(option)}
                     onKeyDown={(e) => this.handleOptionKeyDown(e, option)}>
@@ -420,7 +420,7 @@ export class ModusAutocomplete {
               this.visibleCustomOptions?.map((option) => (
                 <li
                   class="custom-option"
-                  tabindex="-1"
+                  tabindex={0}
                   role="option"
                   onClick={() => this.handleCustomOptionClick(option)}
                   onKeyDown={(e) => this.handleOptionKeyDown(e, option, true)}
