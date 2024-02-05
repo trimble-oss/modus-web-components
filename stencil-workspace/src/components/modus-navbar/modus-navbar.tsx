@@ -419,10 +419,7 @@ export class ModusNavbar {
                 {this.showHelp && (
                   <div class="navbar-button" data-test-id="help-menu">
                     <span class="navbar-button-icon" tabIndex={0}>
-                      <IconHelp
-                        size="24"
-                        onClick={(event) => this.helpMenuClickHandler(event)}
-                      />
+                      <IconHelp size="24" onClick={(event) => this.helpMenuClickHandler(event)} />
                     </span>
                   </div>
                 )}
