@@ -11,7 +11,7 @@ describe('modus-accordion-item', () => {
       <modus-accordion-item>
         <mock:shadow-root>
           <div class="accordion-item">
-            <div class="header standard" tabindex="0">
+            <div aria-expanded="false" class="header standard" role="button" tabindex="0">
               <span class="title"></span>
               <div class="chevron-container">
                 <svg class="icon-chevron-down-thick" fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -20,7 +20,7 @@ describe('modus-accordion-item', () => {
               </div>
             </div>
             <div class="body collapse standard">
-              <div class="body-content">
+            <div aria-controls="expanded-content-undefined" class="body collapse standard">
                 <slot></slot>
               </div>
             </div>
@@ -39,7 +39,7 @@ describe('modus-accordion-item', () => {
       <modus-accordion-item>
         <mock:shadow-root>
           <div class="accordion-item">
-            <div class="header standard" tabindex="0">
+            <div aria-expanded="false" class="header standard" role="button" tabindex="0">
               <span class="title"></span>
               <div class="chevron-container">
                 <svg class="icon-chevron-down-thick" fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -48,7 +48,7 @@ describe('modus-accordion-item', () => {
               </div>
             </div>
             <div class="body collapse standard">
-              <div class="body-content">
+            <div aria-controls="expanded-content-undefined" class="body collapse standard">
                 <slot></slot>
               </div>
             </div>

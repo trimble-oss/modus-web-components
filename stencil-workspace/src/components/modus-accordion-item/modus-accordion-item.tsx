@@ -110,7 +110,7 @@ export class ModusAccordionItem {
     const expandedClass = `${this.expanded ? 'expanded' : ''}`;
     const bodyClass = `body ${sizeClass} collapse${this.expanded ? ' show' : ''}`;
     const headerClass = `header ${sizeClass} ${disabledClass} ${expandedClass}`;
-    const expandedContentId = `expanded-content-${this.headerText.replace(/\s/g, '-')}`;
+    const expandedContentId = `expanded-content-${this.headerText}`;
     return (
       <div
         aria-disabled={this.disabled ? 'true' : undefined}
