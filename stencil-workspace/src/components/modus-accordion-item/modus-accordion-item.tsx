@@ -110,7 +110,7 @@ export class ModusAccordionItem {
     const expandedClass = `${this.expanded ? 'expanded' : ''}`;
     const bodyClass = `body ${sizeClass} collapse${this.expanded ? ' show' : ''}`;
     const headerClass = `header ${sizeClass} ${disabledClass} ${expandedClass}`;
-
+    const expandedContentId = `expanded-content-${this.headerText.replace(/\s/g, '-')}`;
     return (
       <div
         aria-disabled={this.disabled ? 'true' : undefined}
@@ -118,6 +118,8 @@ export class ModusAccordionItem {
         class="accordion-item">
         <div
           class={headerClass}
+          role="button"
+          aria-expanded={this.expanded ? 'true' : 'false'}
           onClick={() => this.handleHeaderClick()}
           onKeyDown={(event) => this.handleKeydown(event)}
           tabIndex={this.disabled ? -1 : 0}>
@@ -130,7 +132,7 @@ export class ModusAccordionItem {
             </div>
           }
         </div>
-        <div class={bodyClass} ref={(el) => (this.accordionBodyRef = el)}>
+        <div class={bodyClass} aria-controls={expandedContentId} ref={(el) => (this.accordionBodyRef = el)}>
           <div class="body-content">
             <slot />
           </div>
