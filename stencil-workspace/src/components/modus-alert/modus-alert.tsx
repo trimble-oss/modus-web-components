@@ -1,10 +1,10 @@
 // eslint-disable-next-line
 import { Component, Prop, h, Event, EventEmitter, Listen } from '@stencil/core';
-import { IconClose } from '../icons/icon-close';
-import { IconError } from '../icons/icon-error';
-import { IconWarning } from '../icons/icon-warning';
-import { IconCheckCircle } from '../icons/icon-check-circle';
-import { IconInfo } from '../icons/icon-info';
+import { IconCheckCircle } from '../../icons/svgs/icon-check-circle';
+import { IconError } from '../../icons/svgs/icon-error';
+import { IconInfo } from '../../icons/svgs/icon-info';
+import { IconWarning } from '../../icons/svgs/icon-warning';
+import { IconClose } from '../../icons/svgs/icon-close';
 
 @Component({
   tag: 'modus-alert',
@@ -69,6 +69,8 @@ export class ModusAlert {
         {this.dismissible ? (
           <div
             class="icon-close-container"
+            aria-label="Dismiss alert"
+            role="button"
             tabIndex={0}
             onClick={() => this.dismissClick.emit()}
             onKeyDown={(e) => e.key.toUpperCase() === 'ENTER' && this.dismissClick.emit()}>

@@ -46,12 +46,16 @@ describe('modus-button', () => {
     });
     expect(root).toEqualHtml(`
       <modus-button icon-only="add">
-        <mock:shadow-root>
-          <button class="size-medium color-primary style-fill icon-only" role="button">
-            <span class="icon"><svg class="icon-add" height="16" width="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M19,13H13v6H11V13H5V11h6V5h2v6h6Z"></path></svg></span>
-          </button>
-        </mock:shadow-root>
-      </modus-button>
+            <mock:shadow-root>
+              <button class="color-primary icon-only size-medium style-fill" role="button">
+                <span class="icon">
+                  <svg class="icon-add" fill="currentColor" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 11h-6V5c0-.55-.45-1-1-1s-1 .45-1 1v6H5c-.55 0-1 .45-1 1s.45 1 1 1h6v6c0 .55.45 1 1 1s1-.45 1-1v-6h6c.55 0 1-.45 1-1s-.45-1-1-1"></path>
+                  </svg>
+                </span>
+              </button>
+            </mock:shadow-root>
+          </modus-button>
     `);
   });
 

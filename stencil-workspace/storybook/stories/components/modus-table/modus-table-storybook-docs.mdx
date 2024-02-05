@@ -32,6 +32,7 @@ import { Story } from '@storybook/addon-docs';
 - [Events](#events)
 - [Slot](#slot)
 - [Methods](#methods)
+- [Text Wrapping](#text-wrapping)
 - [Upcoming features](#upcoming-features-)
 
 ---
@@ -675,6 +676,7 @@ Users can use keyboard navigation to perform different actions.
 | `summaryRow`              | `summary-row`             | (Optional) To display summary row.                                                                                                                                                            | `boolean`                              | `false`                                                   |
 | `toolbar`                 | `toolbar`                 | (Optional) To display a toolbar for the table.                                                                                                                                                | `boolean`                              | `false`                                                   |
 | `toolbarOptions`          | --                        | (Optional) To display a toolbar, which allows access to table operations like hiding columns.                                                                                                 | `ModusTableToolbarOptions`             | `null`                                                    |
+| `wrapText`                | `wrap-text`               | (Optional) To wrap text that overflows the cell.                                                                                                                                              | `boolean`                              | `false`                                                   |
 
 ## Events
 
@@ -709,6 +711,13 @@ Users can use this to provide custom elements.
 | ------------------------ | ----------------------------------------- | ----------------------------------- | -------------------- |
 | `getColumnData`          | Gets data of a perticular column.         | `accessorKey: string`               | `Promise<unknown[]>` |
 | `toggleColumnVisibility` | Decides the Data table column visibility. | `columnId: string`, `show: boolean` | `Promise<void>`      |
+
+### Text Wrapping
+
+This wraps overflowing text of table cell.
+
+- Text wrapping is disable by default, set `wrapText` to `true` to enable wrapping.
+
 
 ## Upcoming features 🚧
 

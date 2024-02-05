@@ -1,9 +1,9 @@
 // eslint-disable-next-line
 import { Component, Event, EventEmitter, h, Method, Prop } from '@stencil/core';
-import { IconSearch } from '../icons/icon-search';
-import { IconClose } from '../icons/icon-close';
-import { IconVisibility } from '../icons/icon-visibility';
-import { IconVisibilityOff } from '../icons/icon-visibility-off';
+import { IconSearch } from '../../icons/svgs/icon-search';
+import { IconClose } from '../../icons/svgs/icon-close';
+import { IconVisibility } from '../../icons/svgs/icon-visibility';
+import { IconVisibilityOff } from '../../icons/svgs/icon-visibility-off';
 
 @Component({
   tag: 'modus-text-input',
@@ -66,7 +66,7 @@ export class ModusTextInput {
   @Prop() textAlign: 'left' | 'right' = 'left';
 
   /** (optional) The input's type. */
-  @Prop() type: 'text' | 'password' = 'text';
+  @Prop() type: 'email' | 'password' | 'search' | 'text' | 'tel' | 'url' = 'text';
 
   /** (optional) The input's valid state text. */
   @Prop() validText: string;

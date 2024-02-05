@@ -7,7 +7,7 @@ import {
   EventEmitter,
   Method,
 } from '@stencil/core';
-import { IconMap } from '../../icons/IconMap';
+import { ModusIconMap } from '../../../icons/ModusIconMap';
 
 @Component({
   tag: 'modus-side-navigation-item',
@@ -110,12 +110,12 @@ export class ModusSideNavigationItem {
           onFocus={() => this.sideNavItemFocus.emit({ id: this.element.id })}>
           <div class="menu-icon" onClick={() => this.sideNavItemFocus.emit({ id: this.element.id })}>
             <slot name="menu-icon"></slot>
-            {this.menuIcon && <IconMap icon={this.menuIcon} aria-label={this.label} size="24"></IconMap>}
+            {this.menuIcon && <ModusIconMap icon={this.menuIcon} aria-label={this.label} size="24"></ModusIconMap>}
           </div>
 
           {this.expanded && <div class="menu-text">{this.label}</div>}
 
-          <div class="level-icon">{this.showExpandIcon && <IconMap icon="chevron-right-thick" />}</div>
+          <div class="level-icon">{this.showExpandIcon && <ModusIconMap icon="chevron_right_bold" />}</div>
         </li>
       </modus-tooltip>
     );

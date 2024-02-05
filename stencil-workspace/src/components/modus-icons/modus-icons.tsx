@@ -1,6 +1,7 @@
 // eslint-disable-next-line
 import { Component, h, Prop, Event, EventEmitter } from '@stencil/core';
-import { IconMap } from '../icons/IconMap';
+import { ModusIconMap } from '../../icons/ModusIconMap';
+import { ModusIconName } from '../../icons/ModusIconUtilities';
 
 @Component({
   tag: 'modus-icon',
@@ -8,7 +9,7 @@ import { IconMap } from '../icons/IconMap';
 })
 export class ModusIcon {
   /** The name of the icon */
-  @Prop() name: string | null;
+  @Prop() name: ModusIconName | null;
 
   /** (optional) The click handler function */
   @Event() iconClick?: EventEmitter;
@@ -26,6 +27,6 @@ export class ModusIcon {
     this.iconClick.emit(event);
   }
   render(): unknown {
-    return <IconMap icon={this.name} onClick={this.onClick} size={this.size} color={this.color} />;
+    return <ModusIconMap icon={this.name} onClick={this.onClick} size={this.size} color={this.color} />;
   }
 }
