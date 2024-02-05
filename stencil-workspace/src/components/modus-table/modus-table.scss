@@ -112,6 +112,10 @@ table {
           display: flex;
           justify-content: space-between;
 
+          .sorted {
+            font-weight: bold;
+          }
+
           .sort-icon-container {
             cursor: pointer;
             padding: $rem-2px $rem-2px 0;
