@@ -81,7 +81,7 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
       }}>
       {isPlaceholder ? null : ( // header.isPlaceholder is Required for nested column headers to display empty cell
         <div class={column.getCanSort() && 'can-sort'}>
-          <span>{column.columnDef.header}</span>
+          <span class={column.getCanSort() && column.getIsSorted() ? 'sorted' : ''}>{column.columnDef.header}</span>
           {column.getCanSort() && (
             <ModusTableColumnSortIcon
               column={column}

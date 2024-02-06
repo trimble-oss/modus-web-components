@@ -320,6 +320,30 @@ describe('modus-table', () => {
     expect(tooltipText).toEqual('Sorted Ascending');
   });
 
+  it('Displays bold header text when sorted', async () => {
+    page = await newE2EPage();
+    await page.setContent('<modus-table />');
+
+    const component = await page.find('modus-table');
+
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    component.setProperty('sort', true);
+    await page.waitForChanges();
+
+    let sortHeader = await page.find('modus-table >>> div.can-sort > span');
+    let style = await sortHeader.getComputedStyle();
+    expect(style['font-weight']).toBe('600');
+
+    const header = await page.find('modus-table >>> .sort-icon');
+    await header.click();
+    await page.waitForChanges();
+
+    sortHeader = await page.find('modus-table >>> div.can-sort > span');
+    style = await sortHeader.getComputedStyle();
+    expect(style['font-weight']).toBe('700');
+  });
+
   it('Render pagination when pagination is enabled', async () => {
     page = await newE2EPage();
     await page.setContent('<modus-table />');
