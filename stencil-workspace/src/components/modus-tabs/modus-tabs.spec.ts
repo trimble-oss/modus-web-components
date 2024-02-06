@@ -57,8 +57,8 @@ describe('modus-button', () => {
       <modus-tabs>
         <mock:shadow-root>
           <div class="medium modus-tabs">
-            <div class="active medium tab" id="${tabs[0].id}">${tabs[0].label}</div>
-            <div class="medium tab" id="${tabs[1].id}">${tabs[1].label}</div>
+            <div class="active medium tab" id="${tabs[0].id}" tabIndex="0">${tabs[0].label}</div>
+            <div class="medium tab" id="${tabs[1].id}" tabIndex="0">${tabs[1].label}</div>
           </div>
         </mock:shadow-root>
       </modus-tabs>

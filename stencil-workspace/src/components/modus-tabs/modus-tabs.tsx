@@ -62,7 +62,8 @@ export class ModusTabs {
             this.fullWidth ? 'resizable' : ''
           } `}
           onClick={() => this.handleTabChange(tab.id)}
-          onKeyDown={(event) => this.handleKeyDown(event, tab.id)}>
+          onKeyDown={(event) => this.handleKeyDown(event, tab.id)}
+          tabIndex={0}>
           {tab.label}
         </div>
       );
