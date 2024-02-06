@@ -155,10 +155,12 @@ export class ModusTableCellMain {
 
     const { cellLinkClick, wrapText } = this.context;
     const cellDataType = cellValue['_type'] ?? this.cell.column.columnDef[COLUMN_DEF_DATATYPE_KEY];
+    const wrap: boolean = cellDataType === COLUMN_DEF_DATATYPE_BADGE ? false : wrapText;
+
     const classes = {
       'cell-content': true,
-      'truncate-text': !wrapText,
-      'wrap-text': wrapText,
+      'truncate-text': !wrap,
+      'wrap-text': wrap,
       'text-align-right': cellDataType === COLUMN_DEF_DATATYPE_INTEGER,
     };
 
@@ -183,14 +185,7 @@ export class ModusTableCellMain {
       <div class={classes}>
         {this.hasRowsExpandable && <ModusTableCellExpandIcons row={row} />}
 
-        <span
-          class={
-            wrapText && cellDataType !== COLUMN_DEF_DATATYPE_BADGE && cellDataType !== COLUMN_DEF_DATATYPE_LINK
-              ? 'wrap-text'
-              : 'truncate-text'
-          }>
-          {renderCell()}
-        </span>
+        <span class={wrap ? 'wrap-text' : 'truncate-text'}>{renderCell()}</span>
       </div>
     );
   }

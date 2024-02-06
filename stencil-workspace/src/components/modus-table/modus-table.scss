@@ -112,6 +112,10 @@ table {
           display: flex;
           justify-content: space-between;
 
+          .sorted {
+            font-weight: bold;
+          }
+
           .sort-icon-container {
             cursor: pointer;
             padding: $rem-2px $rem-2px 0;
@@ -197,7 +201,8 @@ table {
     tr {
       color: $modus-table-body-color;
 
-      .truncate-text {
+      .truncate-text,
+      .truncate-text .cell-link {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
