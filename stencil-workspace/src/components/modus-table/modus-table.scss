@@ -74,7 +74,7 @@ table {
     &.show-resize-cursor {
       th {
         cursor: e-resize;
-
+        
         .can-sort {
           .sort-icon-container {
             cursor: e-resize;
@@ -97,7 +97,7 @@ table {
 
     tr {
       color: $modus-table-header-color;
-
+     
       th {
         background-color: $modus-table-header-bg;
         border-right: $rem-1px $modus-table-border-color solid;
@@ -106,7 +106,7 @@ table {
         overflow: hidden;
         padding: $rem-8px $rem-8px $rem-8px $rem-16px;
         position: relative;
-
+       
         .can-sort {
           align-items: center;
           display: flex;
@@ -165,6 +165,7 @@ table {
           touch-action: none;
           user-select: none;
           width: $rem-3px;
+          padding-right: 4px;
         }
 
         &:not(.active-resize) {
