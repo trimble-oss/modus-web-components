@@ -381,6 +381,12 @@ table {
         height: $rem-48px;
       }
     }
+
+    tfoot {
+      tr {
+        height: $rem-48px;
+      }
+    }
   }
 
   &.density-comfortable {
@@ -398,6 +404,12 @@ table {
         }
       }
     }
+
+    tfoot {
+      tr {
+        height: $rem-32px;
+      }
+    }
   }
 
   &.density-compact {
@@ -413,6 +425,12 @@ table {
             padding: $rem-2px $rem-8px;
           }
         }
+      }
+    }
+
+    tfoot {
+      tr {
+        height: $rem-24px;
       }
     }
   }
