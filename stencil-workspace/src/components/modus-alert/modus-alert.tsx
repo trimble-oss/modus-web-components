@@ -57,12 +57,10 @@ export class ModusAlert {
 
     return (
       <div aria-label={this.ariaLabel} class={className} role="alert">
-        <div class="icon">
-          {this.type === 'error' ? <IconError size={iconSize} /> : null}
-          {this.infoTypes.includes(this.type) ? <IconInfo size={iconSize} /> : null}
-          {this.type === 'success' ? <IconCheckCircle size={iconSize} /> : null}
-          {this.type === 'warning' ? <IconWarning size={iconSize} /> : null}
-        </div>
+        {this.type === 'error' ? <IconError size={iconSize} /> : null}
+        {this.infoTypes.includes(this.type) ? <IconInfo size={iconSize} /> : null}
+        {this.type === 'success' ? <IconCheckCircle size={iconSize} /> : null}
+        {this.type === 'warning' ? <IconWarning size={iconSize} /> : null}
         <div class="message">
           {this.message}
           <slot></slot>
