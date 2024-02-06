@@ -4,11 +4,7 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Column, SortDirection } from '@tanstack/table-core';
-import { IconSortAZ } from '../../../../icons/svgs/icon-sort-a-z';
-import { IconSortZA } from '../../../../icons/svgs/icon-sort-z-a';
-import { IconSortArrowUp } from '../../../../icons/generated-icons/IconSortArrowUp';
-import { IconSortArrowDown } from '../../../../icons/generated-icons/IconSortArrowDown';
-import { IconUnsortedArrows } from '../../../../icons/generated-icons/IconUnsortedArrows';
+import { ModusIconMap } from '../../../../icons/ModusIconMap';
 import {
   KEYBOARD_ENTER,
   SORT_ASCENDING,
@@ -24,22 +20,43 @@ interface ModusTableColumnSortIconProps {
   isColumnResizing: boolean;
 }
 
+const ICON_SIZE = '16';
+
 /**
- * Render the correct sort icon
- * @param isSorted Is the column currently sorted
- * @param sortIconStyle Alphabetical or directional (arrow up/down) icons
+ * Render sort icon based on direction and style
+ * @param direction Column sort direction
+ * @param style Alphabetical or directional (arrow up/down) icons
  * @returns Sort icon
  */
-function renderSortIcon(isSorted: false | SortDirection, sortIconStyle: 'alphabetical' | 'directional'): JSX.Element {
-  if (isSorted === 'asc') {
-    return sortIconStyle === 'directional' ? <IconSortArrowUp size={'16'} /> : <IconSortAZ size={'16'} />;
+function renderSortIcon(direction: false | SortDirection, style: 'alphabetical' | 'directional'): JSX.Element {
+  const icon = style === 'alphabetical' ? getAlphabeticalSortIcon(direction) : getDirectionalSortIcon(direction);
+  return <ModusIconMap icon={icon} size={ICON_SIZE}></ModusIconMap>;
+}
+
+/**
+ * Select directional icon based on direction
+ * @param direction Is the column currently sorted
+ * @returns string
+ */
+function getDirectionalSortIcon(direction: false | SortDirection): string {
+  if (!direction) {
+    return 'unsorted_arrows';
   }
 
-  if (isSorted === 'desc') {
-    return sortIconStyle === 'directional' ? <IconSortArrowDown size={'16'} /> : <IconSortZA size={'16'} />;
+  return direction === 'asc' ? 'sort_arrow_up' : 'sort_arrow_down';
+}
+
+/**
+ * Select alphabetical icon based on direction
+ * @param direction Is the column currently sorted
+ * @returns string
+ */
+function getAlphabeticalSortIcon(direction: false | SortDirection): string {
+  if (direction === 'asc') {
+    return 'sort_alpha_down';
   }
 
-  return sortIconStyle === 'directional' ? <IconUnsortedArrows size={'16'} /> : <IconSortZA size={'16'} />;
+  return 'sort_alpha_up';
 }
 
 /**
