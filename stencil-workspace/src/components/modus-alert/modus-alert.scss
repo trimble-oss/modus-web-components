@@ -129,6 +129,10 @@ div.alert {
     }
   }
 
+  .icon {
+    display: flex;
+  }
+
   .message {
     font-size: $rem-14px;
     font-weight: $alert-font-weight;
