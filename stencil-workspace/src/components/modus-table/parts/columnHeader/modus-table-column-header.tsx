@@ -36,7 +36,14 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
   onMouseLeaveResize,
 }) => {
   let elementRef: HTMLTableCellElement;
-  const { tableInstance: table, isColumnResizing, columnReorder, frozenColumns, showSortIconOnHover } = context;
+  const {
+    tableInstance: table,
+    isColumnResizing,
+    columnReorder,
+    frozenColumns,
+    showSortIconOnHover,
+    sortIconStyle,
+  } = context;
   const { column, id: headerId, colSpan, isPlaceholder, getSize } = header;
 
   return (
@@ -78,6 +85,7 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
           {column.getCanSort() && (
             <ModusTableColumnSortIcon
               column={column}
+              sortIconStyle={sortIconStyle}
               showSortIconOnHover={showSortIconOnHover}
               isColumnResizing={isColumnResizing}
             />
