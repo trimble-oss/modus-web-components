@@ -59,7 +59,11 @@ export class ModusSentimentScale {
 
     let containerClass = `${this.type + '-container'} ${this.disabled ? ' disabled' : ''}`;
     return (
-      <div class="sentiment-scale-container" role="group">
+      <div
+        class="sentiment-scale-container"
+        aria-disabled={this.disabled ? 'true' : 'false'}
+        aria-label={this.ariaLabel}
+        role="group">
         {iconsMap &&
           Array.from(iconsMap).map(([key, value]) => {
             const isIconSelected = key === this.selected;
@@ -79,7 +83,7 @@ export class ModusSentimentScale {
                 class={containerClass}
                 onClick={() => this.handleSentimentClick(key)}
                 onKeyDown={(event) => this.handleKeyDown(event, key)}>
-                <SentimentIconMap icon={iconName} size={`${this.type === THUMB_SENTIMENT_TYPE ? '32' : '24'}`} />
+                <SentimentIconMap icon={iconName} size={`${this.type === 'thumbs' ? '32' : '24'}`} />
               </div>
             );
           })}

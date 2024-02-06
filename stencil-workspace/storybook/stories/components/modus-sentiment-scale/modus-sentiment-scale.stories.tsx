@@ -5,6 +5,13 @@ import { html } from 'lit-html';
 export default {
   title: 'Components/Sentiment Scale',
   argTypes: {
+    ariaLabel: {
+      name: 'aria-label',
+      description: "The Sentiment Scale's aria-label",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
     iconsType: {
       name: 'type',
       control: {
@@ -36,9 +43,9 @@ export default {
   },
 };
 
-const Template = ({iconsType,
+const Template = ({ariaLabel,iconsType,
 disabled}) => html`
-<modus-sentiment-scale type="${iconsType}" disabled="${disabled}"></modus-sentiment-scale>
+<modus-sentiment-scale  aria-label=${ariaLabel} type="${iconsType}" disabled="${disabled}"></modus-sentiment-scale>
 
 <script>
   const sentimentScale = document.querySelector('modus-sentiment-scale');
@@ -49,8 +56,9 @@ disabled}) => html`
 `;
 export const Default = Template.bind({});
 Default.args = {
-  disabled: false,
+  ariaLabel: '',
   iconsType: 'smileys',
+  disabled: false,
 };
 
 
