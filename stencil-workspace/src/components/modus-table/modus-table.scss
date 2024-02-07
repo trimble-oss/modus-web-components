@@ -97,6 +97,7 @@ table {
 
     tr {
       color: $modus-table-header-color;
+      height: $rem-48px;
 
       th {
         background-color: $modus-table-header-bg;
@@ -104,8 +105,12 @@ table {
         box-shadow: inset 0 -0.5px 0 $modus-table-border-color;
         font-weight: $font-weight-semi-bold;
         overflow: hidden;
-        padding: $rem-8px $rem-8px $rem-8px $rem-16px;
+        padding: $rem-6px $rem-8px $rem-6px $rem-16px;
         position: relative;
+
+        &.row-checkbox {
+          padding: $rem-4px $rem-8px;
+        }
 
         .can-sort {
           align-items: center;
@@ -118,8 +123,7 @@ table {
 
           .sort-icon-container {
             cursor: pointer;
-            margin-left: 8px;
-            padding: $rem-2px $rem-2px 0;
+            padding: 0;
 
             .sort-icon {
               svg {
@@ -405,7 +409,7 @@ table {
     }
 
     tfoot {
-      tr {
+      .summary-row {
         height: $rem-48px;
       }
     }
@@ -449,7 +453,7 @@ table {
     }
 
     tfoot {
-      tr {
+      .summary-row {
         height: $rem-32px;
 
         td {
@@ -502,12 +506,12 @@ table {
     }
 
     tfoot {
-      tr {
-        height: $rem-24px;
+      .summary-row {
+        height: 24px;
 
         td {
-          padding-bottom: $rem-6px;
-          padding-top: $rem-6px;
+          padding-bottom: $rem-2px;
+          padding-top: $rem-2px;
 
           &.row-checkbox {
             padding: $rem-4px $rem-8px;
