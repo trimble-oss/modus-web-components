@@ -136,7 +136,7 @@ export class ModusAccordionItem {
             </div>
           }
         </div>
-        <div class={bodyClass} ref={(el) => (this.accordionBodyRef = el)}>
+        <div id={this.expandedContentId} class={bodyClass} ref={(el) => (this.accordionBodyRef = el)}>
           <div class="body-content">
             <slot />
           </div>

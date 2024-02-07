@@ -19,7 +19,7 @@ describe('modus-accordion-item', () => {
                 </svg>
               </div>
             </div>
-            <div class="body collapse standard">
+            <div id="mwc_id_0_accordion-item" class="body collapse standard">
               <div class="body-content">
                 <slot></slot>
               </div>
@@ -47,7 +47,7 @@ describe('modus-accordion-item', () => {
                 </svg>
               </div>
             </div>
-            <div class="body collapse standard">
+            <div id="mwc_id_1_accordion-item" class="body collapse standard">
               <div class="body-content">
                 <slot></slot>
               </div>
