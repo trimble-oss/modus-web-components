@@ -172,18 +172,35 @@ describe('modus-table', () => {
     await page.waitForChanges();
 
     let iconSortAZ = await page.find('modus-table >>> svg');
-    let dataTestId = iconSortAZ['__attributeMap']['__items'].find((item) => item['_name'] === 'data-test-id');
-    let dataTestIdValue = dataTestId && dataTestId['_value'];
-
-    expect(dataTestIdValue).toBe('iconSortZA');
+    expect(iconSortAZ).toHaveClass('icon-sort-alpha-up');
 
     const header = await page.find('modus-table >>> .sort-icon');
     await header.click();
     await page.waitForChanges();
     iconSortAZ = await page.find('modus-table >>> svg');
-    dataTestId = iconSortAZ['__attributeMap']['__items'].find((item) => item['_name'] === 'data-test-id');
-    dataTestIdValue = dataTestId && dataTestId['_value'];
-    expect(dataTestIdValue).toBe('iconSortAZ');
+    expect(iconSortAZ).toHaveClass('icon-sort-alpha-down');
+  });
+
+  it('Renders with correct sort icon when icon style provided and sort enabled', async () => {
+    page = await newE2EPage();
+    await page.setContent('<modus-table />');
+
+    const component = await page.find('modus-table');
+
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    component.setProperty('sort', true);
+    component.setProperty('sortIconStyle', 'directional');
+    await page.waitForChanges();
+
+    let arrowIcon = await page.find('modus-table >>> svg');
+    expect(arrowIcon).toHaveClass('icon-unsorted-arrows');
+
+    const header = await page.find('modus-table >>> .sort-icon');
+    await header.click();
+    await page.waitForChanges();
+    arrowIcon = await page.find('modus-table >>> svg');
+    expect(arrowIcon).toHaveClass('icon-sort-arrow-up');
   });
 
   it('Should output sort data on sort icon click with sort enabled', async () => {
@@ -271,10 +288,7 @@ describe('modus-table', () => {
     await page.waitForChanges();
 
     const iconSortAZ = await page.find('modus-table >>> svg');
-    const dataTestId = iconSortAZ['__attributeMap']['__items'].find((item) => item['_name'] === 'data-test-id');
-    const dataTestIdValue = dataTestId && dataTestId['_value'];
-
-    expect(dataTestIdValue).toBe('iconSortAZ');
+    expect(iconSortAZ).toHaveClass('icon-sort-alpha-down');
   });
 
   it('Check sort icon tooltip text for enabled manual sorting', async () => {
