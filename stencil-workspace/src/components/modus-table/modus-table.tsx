@@ -226,6 +226,9 @@ export class ModusTable {
     this.tableCore?.setOptions('enableSorting', newVal);
   }
 
+  /** (Optional) To display a-z or arrow sort icons. */
+  @Prop() sortIconStyle: 'alphabetical' | 'directional' = 'alphabetical';
+
   /** (Optional) To display summary row. */
   @Prop() summaryRow = false;
 
@@ -428,6 +431,7 @@ export class ModusTable {
       data: this.data,
       density: this.density,
       sort: this.sort,
+      sortIconStyle: this.sortIconStyle,
       componentId: this._id,
       hover: this.hover,
       pagination: this.pagination,
