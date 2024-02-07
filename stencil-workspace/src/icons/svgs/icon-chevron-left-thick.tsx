@@ -9,12 +9,12 @@ interface IconProps {
 
 export const IconChevronLeftThick: FunctionalComponent<IconProps> = (props: IconProps) => (
   <svg
-    class="icon-chevron-left-thick"
-    height={props.size ?? 16}
-    width={props.size ?? 16}
     xmlns="http://www.w3.org/2000/svg"
+    width={props.size ?? 16}
+    height={props.size ?? 16}
     fill={props.color ?? 'currentColor'}
-    viewBox="0 0 32 32">
-    <path d="M21.753 28.06A2.483 2.483 0 0 0 22.864 26c0-.523-.165-1.024-.476-1.45l-.026-.035-.028-.032L14.941 16l7.393-8.483.028-.032.026-.035c.311-.426.476-.927.476-1.45 0-.823-.415-1.593-1.112-2.06-1.135-.76-2.704-.501-3.519.574l-8.572 9.974-.026.03-.024.032a2.445 2.445 0 0 0 0 2.9l.024.032.026.03 8.572 9.974c.816 1.075 2.384 1.335 3.52.574z" />
+    class="mi-outline mi-chevron-left"
+    viewBox="0 0 24 24">
+    <path d="M14.71 6.71a.996.996 0 0 0-1.41 0L8.71 11.3a.996.996 0 0 0 0 1.41l4.59 4.59a.996.996 0 1 0 1.41-1.41L10.83 12l3.88-3.88c.39-.39.38-1.03 0-1.41" />
   </svg>
 );
