@@ -379,12 +379,15 @@ table {
     thead {
       tr {
         height: $rem-48px;
+
         th {
           padding-bottom: $rem-6px;
           padding-top: $rem-6px;
+
           &.row-checkbox {
             padding: $rem-4px $rem-8px;
           }
+
           .can-sort {
             .sort-icon-container {
               padding: 0;
@@ -393,6 +396,7 @@ table {
         }
       }
     }
+
     tbody {
       tr {
         height: $rem-48px;
@@ -418,6 +422,7 @@ table {
           &.row-checkbox {
             padding: $rem-4px $rem-8px;
           }
+
           .can-sort {
             .sort-icon-container {
               padding: 0;
@@ -426,6 +431,7 @@ table {
         }
       }
     }
+
     tbody {
       tr {
         height: $rem-32px;
@@ -469,6 +475,7 @@ table {
           &.row-checkbox {
             padding: $rem-2px $rem-8px;
           }
+
           .can-sort {
             .sort-icon-container {
               padding: 0;
@@ -477,6 +484,7 @@ table {
         }
       }
     }
+
     tbody {
       tr {
         height: $rem-24px;
@@ -497,16 +505,11 @@ table {
         height: $rem-24px;
 
         td {
+          padding-bottom: $rem-6px;
+          padding-top: $rem-6px;
+
           &.row-checkbox {
-            padding: $rem-2px $rem-8px;
-          }
-        }
-      }
-      tr {
-        &.summary-row {
-          td {
-            padding-bottom: 0 !important;
-            padding-top: 0 !important;
+            padding: $rem-4px $rem-8px;
           }
         }
       }
