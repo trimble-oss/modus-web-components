@@ -92,6 +92,7 @@ export default class ModusTableCore {
     const { multiple, subRowSelection } = rowSelectionOptions;
     const defaultSortState = defaultSort ? [defaultSort] : [];
     const options: TableOptionsResolved<unknown> = {
+      autoResetPageIndex: false,
       data: data ?? [],
       columns: (columns as ColumnDef<unknown>[]) ?? [],
       state: {
