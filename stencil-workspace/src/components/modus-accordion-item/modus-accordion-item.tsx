@@ -27,7 +27,7 @@ export class ModusAccordionItem {
   /** An event that fires on every accordion open.  */
   @Event() opened: EventEmitter;
 
-  private expandedContentId = 'accordion-item_' + generateElementId();
+  private expandedContentId = generateElementId() + '_accordion-item';
 
   classBySize: Map<string, string> = new Map([
     ['condensed', 'small'],
@@ -123,6 +123,7 @@ export class ModusAccordionItem {
           class={headerClass}
           role="button"
           aria-expanded={this.expanded ? 'true' : 'false'}
+          aria-controls={this.expandedContentId}
           onClick={() => this.handleHeaderClick()}
           onKeyDown={(event) => this.handleKeydown(event)}
           tabIndex={this.disabled ? -1 : 0}>
@@ -135,7 +136,7 @@ export class ModusAccordionItem {
             </div>
           }
         </div>
-        <div class={bodyClass} aria-controls={this.expandedContentId} ref={(el) => (this.accordionBodyRef = el)}>
+        <div class={bodyClass} ref={(el) => (this.accordionBodyRef = el)}>
           <div class="body-content">
             <slot />
           </div>
