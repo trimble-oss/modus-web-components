@@ -51,6 +51,7 @@ import {
   ModusTableRowActionClick,
   ModusTableSortingState,
   ModusTableRowWithId,
+  ModusTableColumnSort,
 } from './models/modus-table.models';
 import ColumnDragState from './models/column-drag-state.model';
 import {
@@ -220,6 +221,9 @@ export class ModusTable {
     this.tableCore?.setOptions('enableSorting', newVal);
   }
 
+  /** (Optional) To display a-z or arrow sort icons. */
+  @Prop() sortIconStyle: 'alphabetical' | 'directional' = 'alphabetical';
+
   /** (Optional) To display summary row. */
   @Prop() summaryRow = false;
 
@@ -232,6 +236,17 @@ export class ModusTable {
     this.tableCore?.setOptions('enableHiding', !!newVal?.columnsVisibility);
     this.onRowsExpandableChange(this.rowsExpandable);
   }
+
+  /** (Optional) To set the default sorting for the table. */
+  @Prop() defaultSort: ModusTableColumnSort;
+  @Watch('defaultSort') onDefaultSortChange(newVal: ModusTableColumnSort | null) {
+    if (!(this.manualSortingOptions?.currentSortingState?.length > 0)) {
+      this.tableCore?.setState('sorting', [newVal]);
+    }
+  }
+
+  /** (Optional) To wrap text that overflows the cell. */
+  @Prop() wrapText = false;
 
   /** Emits the cell value that was edited */
   @Event() cellValueChange: EventEmitter<ModusTableCellValueChange>;
@@ -409,7 +424,9 @@ export class ModusTable {
     return {
       element: this.element,
       data: this.data,
+      density: this.density,
       sort: this.sort,
+      sortIconStyle: this.sortIconStyle,
       componentId: this._id,
       hover: this.hover,
       pagination: this.pagination,
@@ -444,6 +461,7 @@ export class ModusTable {
       isColumnResizing: this.isColumnResizing,
       tableCore: this.tableCore,
       tableInstance: this.tableCore.getTableInstance(),
+      wrapText: this.wrapText,
       onColumnsChange: this.onColumnsChange,
       onColumnResizeChange: this.onColumnResizeChange,
       onColumnReorderChange: this.onColumnReorderChange,
@@ -534,6 +552,7 @@ export class ModusTable {
       columnOrder: this.columnReorder ? this.tableState.columnOrder : [],
       toolbarOptions: this.toolbarOptions,
       preSelectedRows: this.getPreselectedRowState(),
+      defaultSort: this.defaultSort,
 
       ...(this.manualPaginationOptions && {
         manualPagination: true,
@@ -655,7 +674,7 @@ export class ModusTable {
     `;
 
     const tableStyle = this.fullWidth
-      ? { width: '100%' }
+      ? { width: '100%', tableLayout: 'fixed' }
       : totalSize > 0
         ? { width: `${totalSize}px`, tableLayout: 'fixed' }
         : { tableLayout: 'fixed' };

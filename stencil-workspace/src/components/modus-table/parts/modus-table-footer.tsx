@@ -25,17 +25,25 @@ export const ModusTableFooter: FunctionalComponent<ModusTableSummaryRowProps> = 
   context: {
     tableInstance: { getFooterGroups },
     data,
+    density,
     rowSelection,
     frozenColumns,
     rowActions,
   },
 }) => {
+  let checkboxSize: 'medium' | 'small' = 'medium';
+  if (density === 'compact') {
+    checkboxSize = 'small';
+  }
   return (
     <tfoot>
       {getFooterGroups().map((group) => (
         <tr class="summary-row">
           {rowSelection && (
-            <td id={COLUMN_DEF_ROW_SELECTION_ID} key={COLUMN_DEF_ROW_SELECTION_ID} class={COLUMN_DEF_ROW_SELECTION_CSS}></td>
+            <td
+              id={COLUMN_DEF_ROW_SELECTION_ID}
+              key={COLUMN_DEF_ROW_SELECTION_ID}
+              class={COLUMN_DEF_ROW_SELECTION_CSS + ' ' + checkboxSize}></td>
           )}
           {group.headers.map((header) => (
             <td

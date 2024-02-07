@@ -1,6 +1,6 @@
 {
   "name": "@trimble-oss/modus-react-components",
-  "version": "0.10.0-react17",
+  "version": "0.15.0-react17",
   "description": "Trimble Modus React Component Library",
   "homepage": "https://modus-web-components.trimble.com/",
   "bugs": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/trimble-oss/modus-web-components"
+    "url": "git+https://github.com/trimble-oss/modus-web-components.git"
   },
   "license": "MIT",
   "sideEffects": false,
@@ -33,7 +33,7 @@
     ]
   },
   "dependencies": {
-    "@trimble-oss/modus-web-components": "0.10.0"
+    "@trimble-oss/modus-web-components": "0.15.0"
   },
   "devDependencies": {
     "@types/jest": "23.3.9",

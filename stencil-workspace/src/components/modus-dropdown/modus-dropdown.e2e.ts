@@ -49,6 +49,26 @@ describe('modus-dropdown', () => {
     expect(element).toHaveClass('top');
   });
 
+  it('renders changes to the showDropdownListBorder prop', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-dropdown toggle-element-id='toggle-id' show-dropdown-list-border="true">
+        <modus-button id='toggle-id'>Dropdown</modus-button>
+        <modus-list>
+          <modus-list-item>Item 1</modus-list-item>
+        </modus-list>
+      </modus-dropdown>
+    `);
+    const component = await page.find('modus-dropdown');
+    const element = await page.find('modus-dropdown >>> .dropdown-list');
+    expect(element).toHaveClass('list-border');
+
+    component.setProperty('showDropdownListBorder', 'false');
+    await page.waitForChanges();
+    expect(element).not.toHaveClass('list-border');
+  });
+
   it('renders changes to div.dropdown-list on toggle', async () => {
     const page = await newE2EPage();
 

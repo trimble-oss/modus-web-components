@@ -10,13 +10,14 @@ import { BadgeProperties } from "./components/modus-badge/modus-badge";
 import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 import { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
+import { ModusIconName } from "./icons/ModusIconUtilities";
 import { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { ModusSentimentScaleType } from "./components/modus-sentiment-scale/modus-sentiment-scale.models";
 import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-import { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+import { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnSort, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 import { Cell, Column, Row } from "@tanstack/table-core";
 import { TableCellEdited, TableContext } from "./components/modus-table/models/table-context.models";
 import { TableRowActionsMenuEvent } from "./components/modus-table/models/table-row-actions.models";
@@ -29,13 +30,14 @@ export { BadgeProperties } from "./components/modus-badge/modus-badge";
 export { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 export { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 export { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
+export { ModusIconName } from "./icons/ModusIconUtilities";
 export { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 export { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
 export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 export { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 export { ModusSentimentScaleType } from "./components/modus-sentiment-scale/modus-sentiment-scale.models";
 export { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-export { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+export { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnSort, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 export { Cell, Column, Row } from "@tanstack/table-core";
 export { TableCellEdited, TableContext } from "./components/modus-table/models/table-context.models";
 export { TableRowActionsMenuEvent } from "./components/modus-table/models/table-row-actions.models";
@@ -95,6 +97,10 @@ export namespace Components {
           * Whether the input has a clear button.
          */
         "clearable": boolean;
+        /**
+          * Whether the autocomplete's options always display on select.
+         */
+        "disableCloseOnSelect": boolean;
         /**
           * Whether the input is disabled.
          */
@@ -483,6 +489,10 @@ export namespace Components {
          */
         "placement": 'top' | 'right' | 'bottom' | 'left';
         /**
+          * (optional) Whether to show the dropdown list's border.
+         */
+        "showDropdownListBorder": boolean;
+        /**
           * (required) The element id that the list renders near and that triggers the toggling of the list.
          */
         "toggleElementId": string;
@@ -553,7 +563,7 @@ export namespace Components {
         /**
           * The name of the icon
          */
-        "name": string | null;
+        "name": ModusIconName | null;
         /**
           * (optional) The size of the Icon
          */
@@ -580,9 +590,17 @@ export namespace Components {
          */
         "size": 'condensed' | 'large' | 'standard';
         /**
+          * (optional) Whether to show Subtext below the Slot content or not
+         */
+        "subText": string;
+        /**
           * (optional) The type of list item
          */
         "type": string;
+        /**
+          * (optional) Whether to wrap the sub text.
+         */
+        "wrapSubText": true | false;
     }
     interface ModusMessage {
         /**
@@ -1065,6 +1083,10 @@ export namespace Components {
          */
         "data": unknown[];
         /**
+          * (Optional) To set the default sorting for the table.
+         */
+        "defaultSort": ModusTableColumnSort;
+        /**
           * (optional) The density of the table.
          */
         "density": 'relaxed' | 'comfortable' | 'compact';
@@ -1126,6 +1148,10 @@ export namespace Components {
          */
         "sort": boolean;
         /**
+          * (Optional) To display a-z or arrow sort icons.
+         */
+        "sortIconStyle": 'alphabetical' | 'directional';
+        /**
           * (Optional) To display summary row.
          */
         "summaryRow": boolean;
@@ -1143,6 +1169,10 @@ export namespace Components {
           * (Optional) To display a toolbar, which allows access to table operations like hiding columns.
          */
         "toolbarOptions": ModusTableToolbarOptions | null;
+        /**
+          * (Optional) To wrap text that overflows the cell.
+         */
+        "wrapText": boolean;
     }
     interface ModusTableCellEditor {
         "args": ModusTableCellEditorArgs;
@@ -1217,6 +1247,10 @@ export namespace Components {
          */
         "autoFocusInput": boolean;
         /**
+          * (optional) Sets autocomplete on the input.
+         */
+        "autocomplete": string | null;
+        /**
           * (optional) Whether the input has a clear button.
          */
         "clearable": boolean;
@@ -1283,7 +1317,7 @@ export namespace Components {
         /**
           * (optional) The input's type.
          */
-        "type": 'text' | 'password';
+        "type": 'email' | 'password' | 'search' | 'text' | 'tel' | 'url';
         /**
           * (optional) The input's valid state text.
          */
@@ -2075,6 +2109,10 @@ declare namespace LocalJSX {
          */
         "clearable"?: boolean;
         /**
+          * Whether the autocomplete's options always display on select.
+         */
+        "disableCloseOnSelect"?: boolean;
+        /**
           * Whether the input is disabled.
          */
         "disabled"?: boolean;
@@ -2510,6 +2548,10 @@ declare namespace LocalJSX {
          */
         "placement"?: 'top' | 'right' | 'bottom' | 'left';
         /**
+          * (optional) Whether to show the dropdown list's border.
+         */
+        "showDropdownListBorder"?: boolean;
+        /**
           * (required) The element id that the list renders near and that triggers the toggling of the list.
          */
         "toggleElementId"?: string;
@@ -2568,7 +2610,7 @@ declare namespace LocalJSX {
         /**
           * The name of the icon
          */
-        "name"?: string | null;
+        "name"?: ModusIconName | null;
         /**
           * (optional) The click handler function
          */
@@ -2602,9 +2644,17 @@ declare namespace LocalJSX {
          */
         "size"?: 'condensed' | 'large' | 'standard';
         /**
+          * (optional) Whether to show Subtext below the Slot content or not
+         */
+        "subText"?: string;
+        /**
           * (optional) The type of list item
          */
         "type"?: string;
+        /**
+          * (optional) Whether to wrap the sub text.
+         */
+        "wrapSubText"?: true | false;
     }
     interface ModusMessage {
         /**
@@ -3194,6 +3244,10 @@ declare namespace LocalJSX {
          */
         "data": unknown[];
         /**
+          * (Optional) To set the default sorting for the table.
+         */
+        "defaultSort"?: ModusTableColumnSort;
+        /**
           * (optional) The density of the table.
          */
         "density"?: 'relaxed' | 'comfortable' | 'compact';
@@ -3289,6 +3343,10 @@ declare namespace LocalJSX {
          */
         "sort"?: boolean;
         /**
+          * (Optional) To display a-z or arrow sort icons.
+         */
+        "sortIconStyle"?: 'alphabetical' | 'directional';
+        /**
           * (Optional) To display summary row.
          */
         "summaryRow"?: boolean;
@@ -3300,6 +3358,10 @@ declare namespace LocalJSX {
           * (Optional) To display a toolbar, which allows access to table operations like hiding columns.
          */
         "toolbarOptions"?: ModusTableToolbarOptions | null;
+        /**
+          * (Optional) To wrap text that overflows the cell.
+         */
+        "wrapText"?: boolean;
     }
     interface ModusTableCellEditor {
         "args"?: ModusTableCellEditorArgs;
@@ -3379,6 +3441,10 @@ declare namespace LocalJSX {
          */
         "autoFocusInput"?: boolean;
         /**
+          * (optional) Sets autocomplete on the input.
+         */
+        "autocomplete"?: string | null;
+        /**
           * (optional) Whether the input has a clear button.
          */
         "clearable"?: boolean;
@@ -3445,7 +3511,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The input's type.
          */
-        "type"?: 'text' | 'password';
+        "type"?: 'email' | 'password' | 'search' | 'text' | 'tel' | 'url';
         /**
           * (optional) The input's valid state text.
          */

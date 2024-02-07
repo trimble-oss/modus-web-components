@@ -32,6 +32,7 @@ import { Story } from '@storybook/addon-docs';
 - [Events](#events)
 - [Slot](#slot)
 - [Methods](#methods)
+- [Text Wrapping](#text-wrapping)
 - [Upcoming features](#upcoming-features-)
 
 ---
@@ -147,6 +148,7 @@ Users can arrange data in a table by sorting it in either ascending or descendin
 - Every column has sorting turned on by default. Setting `enableSorting` `true` or `false` for a certain column will enable or disable it.
 - When enabled, the sort icon's initial click will sort in ascending order, while its second click will sort in descending order.
 - Set `showSortIconOnHover` to `true` to enable sort on hover as well.
+- A default sorting can be set by setting `defaultSort` with the column `id` and sorting direction.
 
 ### Manual Sorting
 
@@ -523,6 +525,10 @@ type ModusTableSortingState = ColumnSort {
     id: string;
     desc: boolean;
 }[];
+type ModusTableColumnSort {
+    id: string;
+    desc: boolean;
+};
 type ModusTableExpandedState = true | Record<string, boolean>;
 type ModusTablePaginationState = {
     pageIndex: number;
@@ -604,6 +610,7 @@ interface ModusTableCellValueChange {
 interface ModusTableRowSelectionOptions {
   multiple?: boolean;
   subRowSelection?: boolean;
+  preSelectedRows?: string[];
 }
 
 interface ModusTableRowAction {
@@ -649,6 +656,7 @@ Users can use keyboard navigation to perform different actions.
 | `columnResize`            | `column-resize`           |                                                                                                                                                                                               | `boolean`                              | `false`                                                   |
 | `columns` _(required)_    | --                        | (Required) To display headers in the table.                                                                                                                                                   | `ModusTableColumn<unknown, unknown>[]` | `undefined`                                               |
 | `data` _(required)_       | --                        | (Required) To display data in the table.                                                                                                                                                      | `unknown[]`                            | `undefined`                                               |
+| `defaultSort`             | `default-sort`            | (Optional) To control the default column to be used to  sort the table.                                                                                                                       | `ModusTableColumnSort`                 | `undefined`                                               |
 | `density`                 | `density`                 | (Optional) To control the density in the table. This is the row height.                                                                                                                       | `"relaxed", "comfortable", "compact"`  | `"relaxed"`                                               |
 | `displayOptions`          | --                        | (Optional) To control display options of table.                                                                                                                                               | `ModusTableDisplayOptions`             | `{     borderless: false,     cellBorderless: false,   }` |
 | `fullWidth`               | `full-width`              |                                                                                                                                                                                               | `boolean`                              | `false`                                                   |
@@ -668,6 +676,7 @@ Users can use keyboard navigation to perform different actions.
 | `summaryRow`              | `summary-row`             | (Optional) To display summary row.                                                                                                                                                            | `boolean`                              | `false`                                                   |
 | `toolbar`                 | `toolbar`                 | (Optional) To display a toolbar for the table.                                                                                                                                                | `boolean`                              | `false`                                                   |
 | `toolbarOptions`          | --                        | (Optional) To display a toolbar, which allows access to table operations like hiding columns.                                                                                                 | `ModusTableToolbarOptions`             | `null`                                                    |
+| `wrapText`                | `wrap-text`               | (Optional) To wrap text that overflows the cell.                                                                                                                                              | `boolean`                              | `false`                                                   |
 
 ## Events
 
@@ -702,6 +711,13 @@ Users can use this to provide custom elements.
 | ------------------------ | ----------------------------------------- | ----------------------------------- | -------------------- |
 | `getColumnData`          | Gets data of a perticular column.         | `accessorKey: string`               | `Promise<unknown[]>` |
 | `toggleColumnVisibility` | Decides the Data table column visibility. | `columnId: string`, `show: boolean` | `Promise<void>`      |
+
+### Text Wrapping
+
+This wraps overflowing text of table cell.
+
+- Text wrapping is disable by default, set `wrapText` to `true` to enable wrapping.
+
 
 ## Upcoming features 🚧
 

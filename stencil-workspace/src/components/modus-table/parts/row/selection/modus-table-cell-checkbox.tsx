@@ -10,12 +10,14 @@ interface ModusTableCellCheckboxProps {
   isChecked: boolean;
   multipleRowSelection: boolean;
   row: Row<unknown>;
+  checkboxSize: 'small' | 'medium';
 }
 
 export const ModusTableCellCheckbox: FunctionalComponent<ModusTableCellCheckboxProps> = ({
   multipleRowSelection,
   row,
   isChecked,
+  checkboxSize,
 }) => {
   let cellEl: HTMLTableCellElement = null;
   let checkboxInput: HTMLModusCheckboxElement = null;
@@ -33,7 +35,7 @@ export const ModusTableCellCheckbox: FunctionalComponent<ModusTableCellCheckboxP
   }
   return (
     <td
-      class="row-checkbox sticky-left"
+      class={'row-checkbox sticky-left ' + (checkboxSize ?? '')}
       tabIndex={0}
       ref={(el) => (cellEl = el)}
       onFocus={() => checkboxInput?.focusCheckbox()}
@@ -43,6 +45,7 @@ export const ModusTableCellCheckbox: FunctionalComponent<ModusTableCellCheckboxP
         ref={(el) => (checkboxInput = el)}
         checked={isChecked}
         indeterminate={multipleRowSelection && row.getIsSomeSelected()}
+        size={checkboxSize}
         onCheckboxClick={() => row.toggleSelected()}></modus-checkbox>
     </td>
   );

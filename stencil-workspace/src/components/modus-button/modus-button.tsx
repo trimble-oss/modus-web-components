@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 import { Component, Prop, h, Event, EventEmitter, Element, State, Listen, Method, Fragment } from '@stencil/core';
-import { IconMap } from '../icons/IconMap';
+import { ModusIconMap } from '../../icons/ModusIconMap';
 import { JSX } from '@stencil/core/internal';
 
 @Component({
@@ -86,7 +86,7 @@ export class ModusButton {
       <Fragment>
         {this.leftIcon && (
           <span class="icon left-icon">
-            <IconMap icon={this.leftIcon}></IconMap>
+            <ModusIconMap icon={this.leftIcon}></ModusIconMap>
           </span>
         )}
         <span class="label">
@@ -95,7 +95,7 @@ export class ModusButton {
 
         {this.rightIcon && !this.showCaret && (
           <span class="icon right-icon">
-            <IconMap icon={this.rightIcon}></IconMap>
+            <ModusIconMap icon={this.rightIcon}></ModusIconMap>
           </span>
         )}
       </Fragment>
@@ -105,7 +105,7 @@ export class ModusButton {
   renderIconOnly(): JSX.Element {
     return (
       <span class="icon">
-        <IconMap icon={this.iconOnly}></IconMap>
+        <ModusIconMap icon={this.iconOnly}></ModusIconMap>
       </span>
     );
   }
@@ -130,7 +130,7 @@ export class ModusButton {
         role="button"
         ref={(el) => (this.buttonRef = el)}>
         {this.iconOnly ? this.renderIconOnly() : this.renderIconWithText()}
-        {this.showCaret && <IconMap size="24" icon="caret-down"></IconMap>}
+        {this.showCaret && <ModusIconMap size="24" icon="caret_down"></ModusIconMap>}
       </button>
     );
   }

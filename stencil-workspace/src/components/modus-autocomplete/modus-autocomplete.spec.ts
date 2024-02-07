@@ -7,13 +7,16 @@ describe('modus-autocomplete', () => {
       components: [ModusAutocomplete],
       html: '<modus-autocomplete></modus-autocomplete>',
     });
+
+    const listId = root.shadowRoot.querySelector('ul').getAttribute('id');
+
     expect(root).toEqualHtml(`
     <modus-autocomplete>
       <mock:shadow-root>
         <div class="autocomplete medium">
-          <modus-text-input includesearchicon="" size="medium"></modus-text-input>
+          <modus-text-input aria-autocomplete="list" aria-controls="${listId}" autocomplete="off" includesearchicon="" role="combobox" size="medium" type="search"></modus-text-input>
           <div class="options-container" style="max-height: 300px; z-index: 1; overflow-y: auto;">
-            <ul></ul>
+            <ul aria-label="options" id="${listId}" role="listbox"></ul>
           </div>
           <div style="display: none;">
             <slot></slot>
@@ -34,13 +37,16 @@ describe('modus-autocomplete', () => {
         </li>
       </modus-autocomplete>`,
     });
+
+    const listId = root.shadowRoot.querySelector('ul').getAttribute('id');
+
     expect(root).toEqualHtml(`
     <modus-autocomplete>
       <mock:shadow-root>
         <div class="autocomplete medium">
-          <modus-text-input includesearchicon="" size="medium"></modus-text-input>
+          <modus-text-input aria-autocomplete="list" aria-controls="${listId}" autocomplete="off" includesearchicon="" role="combobox" size="medium" type="search"></modus-text-input>
           <div class="options-container" style="max-height: 300px; z-index: 1; overflow-y: auto;">
-            <ul></ul>
+            <ul aria-label="options" id="${listId}" role="listbox"></ul>
           </div>
           <div style="display: none;">
             <slot></slot>
@@ -94,6 +100,7 @@ describe('modus-autocomplete', () => {
       { id: 'Option 1', value: 'Option 1' },
       { id: 'Option 2', value: 'Option 2' },
     ];
+    modusAutocomplete.hasFocus = true;
     modusAutocomplete.handleSearchChange('Option 1');
     expect(modusAutocomplete.visibleOptions).toEqual([{ id: 'Option 1', value: 'Option 1' }]);
   });
@@ -105,6 +112,7 @@ describe('modus-autocomplete', () => {
       { id: 'Option 2', value: 'Option 2' },
     ];
     modusAutocomplete.visibleOptions = [{ id: 'Option 1', value: 'Option 1' }];
+    modusAutocomplete.hasFocus = true;
     modusAutocomplete.handleSearchChange('');
     expect(modusAutocomplete.visibleOptions).toEqual([
       { id: 'Option 1', value: 'Option 1' },

@@ -2,7 +2,7 @@
 @mixin custom-navbar-menu {
   background-color: var(--modus-body-bg, $col_white);
   border: $rem-1px solid var(--modus-navbar-popup-border-color, #cbcdd6);
-  border-radius: $rem_2px;
+  border-radius: $rem_4px;
   box-shadow: $box-shadow-lg;
   color: var(--modus-body-color, #252a2e);
   display: flex;

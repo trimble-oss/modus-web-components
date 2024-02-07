@@ -1,8 +1,8 @@
 // eslint-disable-next-line
 import { FunctionalComponent, h } from '@stencil/core';
 import { ModusDataTableSort, ModusDataTableSortOptions, TColumn } from '../modus-data-table.models';
-import { IconSortAZ } from '../../icons/icon-sort-a-z';
-import { IconSortZA } from '../../icons/icon-sort-z-a';
+import { IconSortAZ } from '../../../icons/svgs/icon-sort-a-z';
+import { IconSortZA } from '../../../icons/svgs/icon-sort-z-a';
 
 interface ModusDataTableHeaderProps {
   column: TColumn;

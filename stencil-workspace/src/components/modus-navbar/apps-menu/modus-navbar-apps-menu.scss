@@ -8,6 +8,7 @@
   cursor: default;
   max-height: 605px;
   overflow-y: auto;
+  padding: $rem-8px;
   width: max-content;
 
   &.reverse {
@@ -20,7 +21,7 @@
 
   .app {
     border-color: $menu-border-color;
-    border-radius: $rem-2px;
+    border-radius: $rem-4px;
     box-sizing: border-box;
     color: $menu-color;
     cursor: default;
@@ -63,7 +64,7 @@
   }
 
   .category {
-    border-top: 1px solid $menu-border-color;
+    border-top: $rem-1px solid $menu-border-color;
     color: $menu-color;
     font-size: $rem-12px;
     font-weight: $font-weight-semi-bold;

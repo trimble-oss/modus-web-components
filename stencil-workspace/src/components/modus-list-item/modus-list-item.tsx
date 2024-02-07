@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 import { Component, Event, EventEmitter, Method, Prop, h } from '@stencil/core';
-import { IconCheck } from '../icons/icon-check';
+import { IconCheck } from '../../icons/svgs/icon-check';
 
 @Component({
   tag: 'modus-list-item',
@@ -19,6 +19,12 @@ export class ModusListItem {
 
   /** (optional) The size of list item */
   @Prop() size: 'condensed' | 'large' | 'standard' = 'standard';
+
+  /** (optional) Whether to show Subtext below the Slot content or not  */
+  @Prop() subText: string;
+
+  /** (optional) Whether to wrap the sub text. */
+  @Prop() wrapSubText: true | false = true;
 
   /** (optional) The type of list item */
   @Prop() type = 'standard'; // Future support for 'checkbox' | 'icon' | 'menu' | 'standard' | 'switchLeft' | 'switchRight'
@@ -58,9 +64,12 @@ export class ModusListItem {
         tabIndex={this.disabled ? -1 : 0}
         onClick={() => (!this.disabled ? this.itemClick.emit() : null)}
         onKeyDown={(e) => this.handleKeydown(e)}>
-        <span class="slot">
-          <slot />
-        </span>
+        <div class="text-container">
+          <span class="slot">
+            <slot />
+          </span>
+          {this.subText && <span class={'sub-text ' + (this.wrapSubText ? 'wrap' : 'no-wrap')}>{this.subText}</span>}
+        </div>
         {this.selected && <IconCheck size={iconCheckSize} />}
       </li>
     );

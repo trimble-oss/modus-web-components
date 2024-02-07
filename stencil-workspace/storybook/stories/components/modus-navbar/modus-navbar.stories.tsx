@@ -45,7 +45,7 @@ export default {
   },
   parameters: {
     actions: {
-      handles: ['searchMenuClick', 'buttonClick'],
+      handles: ['searchMenuClick', 'buttonClick', 'productLogoClick'],
     },
     controls: { expanded: true, sort: 'requiredFirst' },
     docs: {

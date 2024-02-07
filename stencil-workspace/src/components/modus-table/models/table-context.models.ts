@@ -32,6 +32,8 @@ export interface TableContext {
 
   data: unknown[];
 
+  density: 'relaxed' | 'comfortable' | 'compact';
+
   displayOptions?: ModusTableDisplayOptions;
 
   hover: boolean;
@@ -59,6 +61,8 @@ export interface TableContext {
   showSortIconOnHover: boolean;
 
   sort: boolean;
+
+  sortIconStyle: 'alphabetical' | 'directional';
 
   summaryRow: boolean;
 
@@ -95,6 +99,8 @@ export interface TableContext {
   tableInstance: Table<unknown>;
 
   tableCore: ModusTableCore;
+
+  wrapText: boolean;
 
   getRowId: (originalRow: unknown, index: number, parent?: Row<unknown>) => string;
   updateData: (updater: Updater<unknown>, context: TableCellEdited) => void;
