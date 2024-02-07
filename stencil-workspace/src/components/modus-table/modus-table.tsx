@@ -327,10 +327,20 @@ export class ModusTable {
 
   componentWillLoad(): void {
     this._id = this.element.id || `modus-table-${createGuid()}`;
-    this.setTableState({
+
+    const initialTableState: TableState = {
       columnOrder: this.columns?.map((column) => column.id as string),
       rowSelection: this.getPreselectedRowState(),
-    });
+    };
+
+    if (this.manualPaginationOptions?.currentPageSize) {
+      initialTableState.pagination = {
+        ...this.tableState.pagination,
+        pageSize: this.manualPaginationOptions.currentPageSize,
+      };
+    }
+
+    this.setTableState(initialTableState);
     this.onRowsExpandableChange(this.rowsExpandable);
     this.initializeTable();
   }
