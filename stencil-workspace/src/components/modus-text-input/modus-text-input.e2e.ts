@@ -279,4 +279,44 @@ describe('modus-text-input', () => {
     const input = await page.find('modus-text-input >>> input');
     expect(await input.getProperty('autocomplete')).toEqual('off');
   });
+
+  it('should clear on Enter', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-text-input clearable value="Some value"></modus-text-input>');
+
+    const input = await page.find('modus-text-input');
+    input.click();
+    await page.waitForChanges();
+
+    await page.keyboard.press('Tab');
+
+    const valueChange = await page.spyOnEvent('valueChange');
+    await page.keyboard.press('Enter');
+    await page.waitForChanges();
+
+    const textInput = await page.find('modus-text-input');
+    expect(await textInput.getProperty('value')).toBeFalsy();
+    expect(valueChange).toHaveReceivedEvent();
+  });
+
+  it('should clear on space', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-text-input clearable value="Some value"></modus-text-input>');
+
+    const input = await page.find('modus-text-input');
+    input.click();
+    await page.waitForChanges();
+
+    await page.keyboard.press('Tab');
+
+    const valueChange = await page.spyOnEvent('valueChange');
+    await page.keyboard.press(' ');
+    await page.waitForChanges();
+
+    const textInput = await page.find('modus-text-input');
+    expect(await textInput.getProperty('value')).toBeFalsy();
+    expect(valueChange).toHaveReceivedEvent();
+  });
 });

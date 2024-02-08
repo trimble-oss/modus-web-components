@@ -97,6 +97,14 @@ export class ModusTextInput {
     this.valueChange.emit(null);
   }
 
+  handleKeyDown(e: KeyboardEvent): void {
+    if (e.key === 'Enter' || e.key === ' ') {
+      this.handleClear();
+      this.focusInput();
+      e.preventDefault();
+    }
+  }
+
   handleOnInput(event: Event): void {
     const value = (event.currentTarget as HTMLInputElement).value;
     this.value = value;
@@ -194,7 +202,7 @@ export class ModusTextInput {
           )}
           {showClearIcon && (
             <span class="icons clear" role="button" aria-label="Clear entry">
-              <IconClose onClick={() => this.handleClear()} size="16" />
+              <IconClose onClick={() => this.handleClear()} onKeyDown={(e) => this.handleKeyDown(e)} size="16" />
             </span>
           )}
         </div>

@@ -11,8 +11,10 @@ import { <%= icon.name %> } from './generated-icons/<%= icon.name %>';
 export interface IconProps {
     color?: string;
     onClick?: (event?) => void;
+    onKeyDown?: (event?) => void;
     size?: string;
     pressed?: boolean;
+    tabindex?: number;
 }
 
 interface ModusIconMapProps extends IconProps {
