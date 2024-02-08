@@ -21,7 +21,7 @@ export const ModusTablePagination: FunctionalComponent<ModusTablePaginationProps
   let totalCount = data.length ?? 0;
   let activePage = 1;
 
-  if (manualPaginationOptions) {
+  if (options.manualPagination) {
     const { totalRecords, currentPageIndex, currentPageSize } = manualPaginationOptions;
     const manualPageIndex = currentPageIndex ?? activePage;
     activePage = manualPageIndex <= getPageCount() ? manualPageIndex : activePage;
@@ -55,14 +55,14 @@ export const ModusTablePagination: FunctionalComponent<ModusTablePaginationProps
           <span>-</span>
           <span>
             {pageIndex + 1 === getPageCount()
-              ? !manualPaginationOptions && options.paginateExpandedRows
+              ? !options.manualPagination && options.paginateExpandedRows
                 ? getExpandedRowModel().rows.length
                 : totalCount
               : (pageIndex + 1) * pageSize}
           </span>
           <span>of</span>
           <span>
-            {!manualPaginationOptions && options.paginateExpandedRows ? getExpandedRowModel().rows.length : totalCount}
+            {!options.manualPagination && options.paginateExpandedRows ? getExpandedRowModel().rows.length : totalCount}
           </span>{' '}
         </div>
         <modus-pagination
