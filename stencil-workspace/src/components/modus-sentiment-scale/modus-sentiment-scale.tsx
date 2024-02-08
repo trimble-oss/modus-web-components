@@ -83,7 +83,7 @@ export class ModusSentimentScale {
                 class={containerClass}
                 onClick={() => this.handleSentimentClick(key)}
                 onKeyDown={(event) => this.handleKeyDown(event, key)}>
-                <SentimentIconMap icon={iconName} size={`${this.type === 'thumbs' ? '32' : '24'}`} />
+                <SentimentIconMap icon={iconName} size={`${this.type ===  THUMB_SENTIMENT_TYPE ? '32' : '24'}`} />
               </div>
             );
           })}
