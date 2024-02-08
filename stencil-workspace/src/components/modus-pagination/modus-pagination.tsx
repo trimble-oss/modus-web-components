@@ -9,8 +9,8 @@ import {
   Watch,
 } from '@stencil/core';
 import { PaginationDirection } from './enums/pagination-direction.enum';
-import { IconChevronRightThick } from '../../icons/svgs/icon-chevron-right-thick';
-import { IconChevronLeftThick } from '../../icons/svgs/icon-chevron-left-thick';
+import { IconChevronRight } from '../../icons/svgs/icon-chevron-right';
+import { IconChevronLeft } from '../../icons/svgs/icon-chevron-left';
 
 @Component({
   tag: 'modus-pagination',
@@ -149,7 +149,7 @@ export class ModusPagination {
           {this.prevPageButtonText ? (
             <span data-test-id="prev-button-text">{this.prevPageButtonText}</span>
           ) : (
-            <IconChevronLeftThick size={this.chevronSizeBySize.get(this.size)} />
+            <IconChevronLeft size={this.chevronSizeBySize.get(this.size)} />
           )}
         </li>
       )
@@ -168,7 +168,7 @@ export class ModusPagination {
           {this.nextPageButtonText ? (
             <span data-test-id="next-button-text">{this.nextPageButtonText}</span>
           ) : (
-            <IconChevronRightThick size={this.chevronSizeBySize.get(this.size)} />
+            <IconChevronRight size={this.chevronSizeBySize.get(this.size)} />
           )}
         </li>
       )
