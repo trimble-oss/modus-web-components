@@ -1,10 +1,10 @@
 import {
   FunctionalComponent,
+  JSX,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
-import { Column } from '@tanstack/table-core';
-import { IconSortAZ } from '../../../../icons/svgs/icon-sort-a-z';
-import { IconSortZA } from '../../../../icons/svgs/icon-sort-z-a';
+import { Column, SortDirection } from '@tanstack/table-core';
+import { ModusIconMap } from '../../../../icons/ModusIconMap';
 import {
   KEYBOARD_ENTER,
   SORT_ASCENDING,
@@ -15,8 +15,48 @@ import {
 
 interface ModusTableColumnSortIconProps {
   column: Column<unknown, unknown>;
+  sortIconStyle: 'alphabetical' | 'directional';
   showSortIconOnHover: boolean;
   isColumnResizing: boolean;
+}
+
+const ICON_SIZE = '16';
+
+/**
+ * Render sort icon based on direction and style
+ * @param direction Column sort direction
+ * @param style Alphabetical or directional (arrow up/down) icons
+ * @returns Sort icon
+ */
+function renderSortIcon(direction: false | SortDirection, style: 'alphabetical' | 'directional'): JSX.Element {
+  const icon = style === 'alphabetical' ? getAlphabeticalSortIcon(direction) : getDirectionalSortIcon(direction);
+  return <ModusIconMap icon={icon} size={ICON_SIZE}></ModusIconMap>;
+}
+
+/**
+ * Select directional icon based on direction
+ * @param direction Is the column currently sorted
+ * @returns string
+ */
+function getDirectionalSortIcon(direction: false | SortDirection): string {
+  if (!direction) {
+    return 'unsorted_arrows';
+  }
+
+  return direction === 'asc' ? 'sort_arrow_up' : 'sort_arrow_down';
+}
+
+/**
+ * Select alphabetical icon based on direction
+ * @param direction Is the column currently sorted
+ * @returns string
+ */
+function getAlphabeticalSortIcon(direction: false | SortDirection): string {
+  if (direction === 'asc') {
+    return 'sort_alpha_down';
+  }
+
+  return 'sort_alpha_up';
 }
 
 /**
@@ -51,6 +91,7 @@ function sortOnKeyDown(column: Column<unknown, unknown>, event: KeyboardEvent): 
 
 export const ModusTableColumnSortIcon: FunctionalComponent<ModusTableColumnSortIconProps> = ({
   column,
+  sortIconStyle,
   showSortIconOnHover,
   isColumnResizing,
 }) => {
@@ -70,7 +111,7 @@ export const ModusTableColumnSortIcon: FunctionalComponent<ModusTableColumnSortI
               ${!column.getIsSorted() && 'disabled'}
               ${showSortIconOnHover ? 'hidden' : ''}
             `}>
-            {column.getIsSorted() === 'asc' ? <IconSortAZ size={'16'} /> : <IconSortZA size={'16'} />}
+            {renderSortIcon(column.getIsSorted(), sortIconStyle)}
           </span>
         </span>
       }

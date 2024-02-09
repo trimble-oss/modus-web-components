@@ -17,7 +17,7 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
   const hasRowActions = rowActions?.length > 0;
   const multipleRowSelection = rowSelectionOptions?.multiple;
   let checkboxSize: 'medium' | 'small' = 'medium';
-  if(density === 'compact') {
+  if (density === 'compact') {
     checkboxSize = 'small';
   }
 

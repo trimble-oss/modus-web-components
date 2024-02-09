@@ -1,15 +1,10 @@
 // eslint-disable-next-line
 import { FunctionalComponent, h } from '@stencil/core';
-
-interface IconProps {
-  color?: string;
-  onClick?: () => void;
-  size?: string;
-}
+import { IconProps } from '../ModusIconMap';
 
 export const IconHorizontalEllipsis: FunctionalComponent<IconProps> = (props: IconProps) => (
   <svg
-    class="icon-horizontal-ellipsis"
+    class={`icon-horizontal-ellipsis ${props.pressed ? 'pressed' : ''}`}
     fill={props.color ?? 'currentColor'}
     height={props.size ?? 16}
     onClick={props.onClick ? () => props.onClick() : null}
