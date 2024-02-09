@@ -156,7 +156,7 @@ table {
             }
           }
         }
-
+        
         .resize-handle {
           &:focus-visible {
             outline: none;
@@ -174,7 +174,14 @@ table {
 
         &:not(.active-resize) {
           .resize-handle:focus-visible {
-            border-right: 2px solid $modus-table-header-color;
+            +.resize-handle-border{
+              border-right: 2px solid $modus-table-header-color;
+              position: absolute;
+              right: -1px;
+              height: 100%;
+              top: 0;
+            }
+   
           }
         }
 
