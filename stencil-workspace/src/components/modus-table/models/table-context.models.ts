@@ -62,6 +62,8 @@ export interface TableContext {
 
   sort: boolean;
 
+  sortIconStyle: 'alphabetical' | 'directional';
+
   summaryRow: boolean;
 
   toolbar: boolean;
@@ -97,6 +99,8 @@ export interface TableContext {
   tableInstance: Table<unknown>;
 
   tableCore: ModusTableCore;
+
+  wrapText: boolean;
 
   getRowId: (originalRow: unknown, index: number, parent?: Row<unknown>) => string;
   updateData: (updater: Updater<unknown>, context: TableCellEdited) => void;

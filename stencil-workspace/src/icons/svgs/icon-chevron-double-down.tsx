@@ -4,7 +4,7 @@ import { IconProps } from '../ModusIconMap';
 
 export const IconChevronDoubleDown: FunctionalComponent<IconProps> = (props: IconProps) => (
   <svg
-    class="icon-chevron-double-down"
+    class={`icon-chevron-double-down ${props.pressed ? 'pressed' : ''}`}
     xmlns="http://www.w3.org/2000/svg"
     fill={props.color ?? 'currentColor'}
     height={props.size ?? 16}

@@ -172,18 +172,35 @@ describe('modus-table', () => {
     await page.waitForChanges();
 
     let iconSortAZ = await page.find('modus-table >>> svg');
-    let dataTestId = iconSortAZ['__attributeMap']['__items'].find((item) => item['_name'] === 'data-test-id');
-    let dataTestIdValue = dataTestId && dataTestId['_value'];
-
-    expect(dataTestIdValue).toBe('iconSortZA');
+    expect(iconSortAZ).toHaveClass('icon-sort-alpha-up');
 
     const header = await page.find('modus-table >>> .sort-icon');
     await header.click();
     await page.waitForChanges();
     iconSortAZ = await page.find('modus-table >>> svg');
-    dataTestId = iconSortAZ['__attributeMap']['__items'].find((item) => item['_name'] === 'data-test-id');
-    dataTestIdValue = dataTestId && dataTestId['_value'];
-    expect(dataTestIdValue).toBe('iconSortAZ');
+    expect(iconSortAZ).toHaveClass('icon-sort-alpha-down');
+  });
+
+  it('Renders with correct sort icon when icon style provided and sort enabled', async () => {
+    page = await newE2EPage();
+    await page.setContent('<modus-table />');
+
+    const component = await page.find('modus-table');
+
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    component.setProperty('sort', true);
+    component.setProperty('sortIconStyle', 'directional');
+    await page.waitForChanges();
+
+    let arrowIcon = await page.find('modus-table >>> svg');
+    expect(arrowIcon).toHaveClass('icon-unsorted-arrows');
+
+    const header = await page.find('modus-table >>> .sort-icon');
+    await header.click();
+    await page.waitForChanges();
+    arrowIcon = await page.find('modus-table >>> svg');
+    expect(arrowIcon).toHaveClass('icon-sort-arrow-up');
   });
 
   it('Should output sort data on sort icon click with sort enabled', async () => {
@@ -271,10 +288,7 @@ describe('modus-table', () => {
     await page.waitForChanges();
 
     const iconSortAZ = await page.find('modus-table >>> svg');
-    const dataTestId = iconSortAZ['__attributeMap']['__items'].find((item) => item['_name'] === 'data-test-id');
-    const dataTestIdValue = dataTestId && dataTestId['_value'];
-
-    expect(dataTestIdValue).toBe('iconSortAZ');
+    expect(iconSortAZ).toHaveClass('icon-sort-alpha-down');
   });
 
   it('Check sort icon tooltip text for enabled manual sorting', async () => {
@@ -296,6 +310,30 @@ describe('modus-table', () => {
 
     expect(tooltip).not.toBeNull();
     expect(tooltipText).toEqual('Sorted Ascending');
+  });
+
+  it('Displays bold header text when sorted', async () => {
+    page = await newE2EPage();
+    await page.setContent('<modus-table />');
+
+    const component = await page.find('modus-table');
+
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    component.setProperty('sort', true);
+    await page.waitForChanges();
+
+    let sortHeader = await page.find('modus-table >>> div.can-sort > span');
+    let style = await sortHeader.getComputedStyle();
+    expect(style['font-weight']).toBe('600');
+
+    const header = await page.find('modus-table >>> .sort-icon');
+    await header.click();
+    await page.waitForChanges();
+
+    sortHeader = await page.find('modus-table >>> div.can-sort > span');
+    style = await sortHeader.getComputedStyle();
+    expect(style['font-weight']).toBe('700');
   });
 
   it('Render pagination when pagination is enabled', async () => {
@@ -410,12 +448,11 @@ describe('modus-table', () => {
     const paginationContainer = await page.find('modus-table >>> .pagination-and-count > .total-count');
     await page.waitForChanges();
 
+    expect(paginationContainer).not.toBeNull();
     expect(await pagination.getAttribute('active-page')).toBeTruthy();
     expect(await pagination.getAttribute('max-page')).toBeTruthy();
     expect(await pagination.getAttribute('active-page')).toBe(`${MockManualPagination.currentPageIndex}`);
     expect(await pagination.getAttribute('max-page')).toBe(`${MockManualPagination.pageCount}`);
-
-    expect(paginationContainer).not.toBeNull();
     expect(paginationContainer.textContent).toContain('Showing result11-20of100');
   });
 
@@ -912,6 +949,19 @@ describe('modus-table', () => {
     expect(firstItem).toBe('Mock Data One 2');
   });
 
+  it('should set table-layout to fixed when fullWidth', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-table></modus-table>');
+    const component = await page.find('modus-table');
+    await component.setProperty('fullWidth', true);
+
+    await page.waitForChanges();
+
+    const table = await page.find('modus-table >>> table');
+    const style = await table.getComputedStyle();
+    expect(style['table-layout']).toBe('fixed');
+  });
+
   it('Renders small size checkboxes for compact density', async () => {
     const page = await newE2EPage();
 
@@ -934,5 +984,57 @@ describe('modus-table', () => {
       const size = await rows[i].getProperty('size');
       expect(size).toBe('small');
     }
+  });
+
+  it('Should truncate long text by default', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-table />');
+    const component = await page.find('modus-table');
+
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', [
+      {
+        mockColumnOne: 'This is an example of long text',
+        mockColumnTwo: 10101,
+      },
+      ...MockData,
+    ]);
+
+    await page.waitForChanges();
+
+    const spanData = await page.findAll('modus-table >>> tbody .truncate-text');
+    expect(spanData.length).toBeGreaterThan(0);
+
+    const style = await spanData[0].getComputedStyle();
+    expect(style['overflow']).toBe('hidden');
+    expect(style['text-overflow']).toBe('ellipsis');
+    expect(style['white-space']).toBe('nowrap');
+  });
+
+  it('Should render long text with text wrap enabled', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-table />');
+    const component = await page.find('modus-table');
+
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', [
+      {
+        mockColumnOne: 'This is an example of long text',
+        mockColumnTwo: 10101,
+      },
+      ...MockData,
+    ]);
+    component.setProperty('wrapText', true);
+
+    await page.waitForChanges();
+
+    const spanData = await page.findAll('modus-table >>> tbody .wrap-text');
+    expect(spanData.length).toBeGreaterThan(0);
+
+    const style = await spanData[0].getComputedStyle();
+    expect(style['overflow-wrap']).toBe('break-word');
+    expect(style['word-break']).toBe('break-word');
   });
 });

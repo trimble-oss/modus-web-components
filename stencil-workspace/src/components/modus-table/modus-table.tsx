@@ -153,25 +153,20 @@ export class ModusTable {
 
   /** (Optional) To enable manual pagination mode. When enabled, the table will not automatically paginate rows, instead will expect the current page index and other details to be passed. */
   @Prop() manualPaginationOptions: ModusTableManualPaginationOptions;
-  @Watch('manualPaginationOptions') onManualPaginationOptionsChange(
-    newVal: ModusTableManualPaginationOptions,
-    oldVal: ModusTableManualPaginationOptions
-  ) {
-    const hasUpdateValues =
-      newVal?.pageCount !== oldVal?.pageCount ||
-      newVal?.currentPageIndex !== oldVal?.currentPageIndex ||
-      newVal?.currentPageSize !== oldVal?.currentPageSize;
-
-    if (hasUpdateValues) {
+  @Watch('manualPaginationOptions') onManualPaginationOptionsChange(newVal: ModusTableManualPaginationOptions) {
+    if (Object.keys(newVal).length === 0) {
+      this.tableCore?.setOptions('manualPagination', false);
+      this.tableCore?.setState('pagination', {
+        pageIndex: 0,
+        pageSize: this.pageSizeList[0],
+      });
+    } else {
       this.tableCore?.setOptions('pageCount', newVal.pageCount);
+      this.tableCore?.setOptions('manualPagination', true);
       this.tableCore?.setState('pagination', {
         pageIndex: newVal.currentPageIndex - 1,
         pageSize: newVal.currentPageSize,
       });
-      this.manualPaginationOptions = { ...newVal };
-    } else if (Object.keys(newVal).length === 0 && Object.keys(oldVal).length === 0) {
-      this.tableCore?.setOptions('manualPagination', false);
-      this.initializeTable();
     }
   }
 
@@ -226,6 +221,9 @@ export class ModusTable {
     this.tableCore?.setOptions('enableSorting', newVal);
   }
 
+  /** (Optional) To display a-z or arrow sort icons. */
+  @Prop() sortIconStyle: 'alphabetical' | 'directional' = 'alphabetical';
+
   /** (Optional) To display summary row. */
   @Prop() summaryRow = false;
 
@@ -246,6 +244,9 @@ export class ModusTable {
       this.tableCore?.setState('sorting', [newVal]);
     }
   }
+
+  /** (Optional) To wrap text that overflows the cell. */
+  @Prop() wrapText = false;
 
   /** Emits the cell value that was edited */
   @Event() cellValueChange: EventEmitter<ModusTableCellValueChange>;
@@ -326,10 +327,20 @@ export class ModusTable {
 
   componentWillLoad(): void {
     this._id = this.element.id || `modus-table-${createGuid()}`;
-    this.setTableState({
+
+    const initialTableState: TableState = {
       columnOrder: this.columns?.map((column) => column.id as string),
       rowSelection: this.getPreselectedRowState(),
-    });
+    };
+
+    if (this.manualPaginationOptions?.currentPageSize) {
+      initialTableState.pagination = {
+        ...this.tableState.pagination,
+        pageSize: this.manualPaginationOptions.currentPageSize,
+      };
+    }
+
+    this.setTableState(initialTableState);
     this.onRowsExpandableChange(this.rowsExpandable);
     this.initializeTable();
   }
@@ -425,6 +436,7 @@ export class ModusTable {
       data: this.data,
       density: this.density,
       sort: this.sort,
+      sortIconStyle: this.sortIconStyle,
       componentId: this._id,
       hover: this.hover,
       pagination: this.pagination,
@@ -459,6 +471,7 @@ export class ModusTable {
       isColumnResizing: this.isColumnResizing,
       tableCore: this.tableCore,
       tableInstance: this.tableCore.getTableInstance(),
+      wrapText: this.wrapText,
       onColumnsChange: this.onColumnsChange,
       onColumnResizeChange: this.onColumnResizeChange,
       onColumnReorderChange: this.onColumnReorderChange,
@@ -671,7 +684,7 @@ export class ModusTable {
     `;
 
     const tableStyle = this.fullWidth
-      ? { width: '100%' }
+      ? { width: '100%', tableLayout: 'fixed' }
       : totalSize > 0
         ? { width: `${totalSize}px`, tableLayout: 'fixed' }
         : { tableLayout: 'fixed' };
