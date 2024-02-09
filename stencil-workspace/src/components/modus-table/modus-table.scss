@@ -103,7 +103,7 @@ table {
         border-right: $rem-1px $modus-table-border-color solid;
         box-shadow: inset 0 -0.5px 0 $modus-table-border-color;
         font-weight: $font-weight-semi-bold;
-        overflow: hidden;
+        overflow: visible;
         padding: $rem-8px $rem-8px $rem-8px $rem-16px;
         position: relative;
 
@@ -156,16 +156,15 @@ table {
           &:focus-visible {
             outline: none;
           }
-
           cursor: e-resize;
           height: 100%;
           position: absolute;
-          right: 0;
+          right: -7px;
           top: 0;
           touch-action: none;
           user-select: none;
-          width: $rem-3px;
-          padding-right: 4px;
+          width: 13px;
+          z-index: 11;
         }
 
         &:not(.active-resize) {
@@ -302,9 +301,10 @@ table {
     }
   }
 
+  
   tr {
     height: 3rem;
-
+  
     th,
     td {
       border-right: $rem-1px $modus-table-border-color solid;
@@ -336,6 +336,14 @@ table {
 
       &.active-resize {
         border-right: 2px $modus-primary-color solid !important;
+      }
+
+    }
+    th {
+      position: relative;
+      div {
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
 
