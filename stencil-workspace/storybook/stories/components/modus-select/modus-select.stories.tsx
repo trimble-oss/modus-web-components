@@ -39,6 +39,7 @@ const Template = () => html`
     size="large"
     aria-label="select"
     options-display-prop="display"></modus-select>
+  <modus-select id="select-demo-6" label="Custom Placeholder" aria-label="select" placeholder="Custom Placeholder" options-display-prop="display"></modus-select>
   ${setSelects()}
 `;
 
@@ -64,6 +65,13 @@ const setSelects = () => {
       const select5 = document.querySelector('#select-demo-5');
       select5.options = options;
       select5.value = options[2];
+
+      const select6 = document.querySelector('#select-demo-6');
+      select6.options = options;
+      select6.addEventListener('valueChange', function handleValueChange(e) {
+         const selectedOption = e.detail;
+         select6.value = selectedOption;
+      });
   `;
 
   return tag;

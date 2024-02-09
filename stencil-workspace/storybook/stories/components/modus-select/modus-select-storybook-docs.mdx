@@ -40,6 +40,10 @@ This component is compatible with Angular reactive forms. This can be achieved t
   size="large"
   options-display-prop="display"></modus-select>
 
+<!-- Custom Placeholder -->
+<modus-select id="select-demo-6" label="Custom Placeholder" aria-label="select" placeholder="Custom Placeholder" options-display-prop="display"></modus-select>
+
+
 <script>
   const options = [
     { display: 'Option 1' },
@@ -70,6 +74,13 @@ This component is compatible with Angular reactive forms. This can be achieved t
      const selectedOption = e.detail;
      select5.value = selectedOption;
   });
+
+  const select6 = document.querySelector('#select-demo-6');
+  select6.options = options;
+  select6.addEventListener('valueChange', function handleValueChange(e) {
+     const selectedOption = e.detail;
+     select6.value = selectedOption;
+  });
 </script>
 ```
 
@@ -86,6 +97,7 @@ This component is compatible with Angular reactive forms. This can be achieved t
 | `optionsDisplayProp` | `options-display-prop` | The options property to render in the dropdown list. | `string`              | `undefined` |
 | `required`           | `required`             | (optional) Whether the input is required.            | `boolean`             | `undefined` |
 | `size`               | `size`                 | (optional) The input's size.                         | `"large" | "medium"`  | `'medium'`  |
+| `placeholder`        | `placeholder`          | (optional) The input's placeholder.                  | `string`              | `Please Select` |
 | `validText`          | `valid-text`           | (optional) The input's valid text.                   | `string`              | `undefined` |
 | `value`              | --                     | (optional) The input value.                          | `unknown`             | `undefined` |
 
