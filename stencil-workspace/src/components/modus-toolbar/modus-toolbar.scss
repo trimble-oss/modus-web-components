@@ -1,0 +1,48 @@
+@import './modus-toolbar.vars';
+
+div {
+  align-items: center;
+  border-radius: $rem-4px;
+  display: flex;
+  position: relative;
+  width: fit-content;
+
+  &.layout-horizontal {
+    flex-direction: row;
+  }
+
+  &.layout-vertical {
+    flex-direction: column;
+  }
+
+  &.style-combined {
+    background-color: $modus-toolbar-bg;
+    box-shadow: $box-shadow-lg;
+
+    &.layout-horizontal {
+      border-left: $rem-4px solid $modus-toolbar-bg;
+      border-right: $rem-8px solid $modus-toolbar-bg;
+      padding: $rem-4px 0 $rem-4px 0;
+    }
+
+    &.layout-vertical {
+      border-bottom: $rem-8px solid $modus-toolbar-bg;
+      border-top: $rem-4px solid $modus-toolbar-bg;
+      padding: 0 $rem-4px 0 $rem-4px;
+    }
+  }
+
+  modus-toolbar-button {
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+
+    &.layout-horizontal {
+      flex-direction: row;
+    }
+
+    &.layout-vertical {
+      flex-direction: column;
+    }
+  }
+}

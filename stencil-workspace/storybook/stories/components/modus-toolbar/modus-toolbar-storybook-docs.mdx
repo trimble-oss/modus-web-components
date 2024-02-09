@@ -1,0 +1,122 @@
+import { Story } from '@storybook/addon-docs';
+
+# Toolbar
+
+---
+
+[Modus Toolbar](https://modus.trimble.com/components/web/toolbar/) web components consists of a series of icon buttons occupying minimum workspace. They are referenced using the `<modus-toolbar>` custom HTML element.
+
+A new TypeScript typing has been provided named Button defined as:
+
+```ts
+{
+  onClick: () => void; // required.
+  tooltip: ModusToolbarTooltip; // required.
+  iconSrc?: string; // optional.
+  textButton?: string; // optional.
+  disabled?: boolean; // optional.
+  active?: boolean; // optional.
+  divider?: boolean; // optional.
+}
+```
+
+### Default
+
+<Story id="components-toolbar--default" />
+
+```html
+<modus-toolbar layout="horizontal" toolbarStyle="combined"></modus-toolbar>
+
+<script>
+  const modusToolbar = document.querySelector('modus-toolbar');
+
+  modusToolbar.buttons = [
+    { 
+      tooltip: 
+      {
+        text: 'Text button',
+        position: 'bottom',
+      },
+      textButton: 'Text button',
+    },
+    { 
+      tooltip: 
+      {
+        text: 'Add',
+        position: 'bottom',
+      },
+      iconSrc: 'add', 
+      divider: true,
+    },
+    {  
+      tooltip: 
+      {
+        text: 'Edit',
+        position: 'bottom',
+      },
+      iconSrc: 'edit', 
+      disabled: true,
+    },
+    {  
+      tooltip: 
+      {
+        text: 'Refresh',
+        position: 'bottom',
+      },
+      iconSrc: 'refresh', 
+      active: true, 
+      divider: true,
+    },
+  ];
+</script>
+```
+
+### Vertical Split Toolbar
+
+<Story id="components-toolbar--vertical-split-toolbar" />
+
+```html
+<modus-toolbar layout="vertical" toolbarStyle="split"></modus-toolbar>
+
+<script>
+  const modusToolbar = document.querySelector('modus-toolbar');
+
+  modusToolbar.buttons = [
+    { 
+      tooltip: 
+      {
+        text: 'Add',
+        position: 'right',
+      },
+      iconSrc: 'add', 
+    },
+    {  
+      tooltip: 
+      {
+        text: 'Edit',
+        position: 'right',
+      },
+      iconSrc: 'edit', 
+      disabled: true,
+    },
+    {  
+      tooltip: 
+      {
+        text: 'Refresh',
+        position: 'right',
+      },
+      iconSrc: 'refresh', 
+      active: true, 
+    },
+  ];
+</script>
+```
+
+### Properties
+
+| Name            | Description                         | Type                         | Default        |
+| --------------- | ----------------------------------- | ---------------------------- | -------------- |
+| `buttons`       | The buttons to render.              | `ModusToolbarButton[]`       | `undefined`    |
+| `layout`        | (optional) The toolbar's layout.    | `"horizontal" | "vertical"`  | `'horizontal'` |
+| `toolbar-style` | (optional) The style of the toolbar | `"combined" | "split"`       | `'combined'`   |
+

@@ -1,0 +1,111 @@
+@import '../modus-toolbar.vars';
+
+div {
+  background-color: $modus-toolbar-divider-bg;
+
+  &.layout-horizontal {
+    border-left: $rem-4px solid $modus-toolbar-bg;
+    border-right: 0;
+    height: $rem-24px;
+    width: $rem-1px;
+  }
+
+  &.layout-vertical {
+    border-bottom: 0;
+    border-top: $rem-4px solid $modus-toolbar-bg;
+    height: $rem-1px;
+    width: $rem-24px;
+  }
+}
+
+button {
+  align-items: center;
+  background-color: $modus-toolbar-bg;
+  border: 0;
+  cursor: default;
+  display: inline-flex;
+  font-family: $primary-font;
+  font-weight: $btn-font-weight;
+  height: $rem-24px;
+  justify-content: center;
+  min-width: $rem-24px;
+  padding: 0 $rem-4px 0 $rem-4px;
+  position: relative;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: auto;
+
+  &.style-margin {
+    border-radius: $rem-4px;
+    box-shadow: $box-shadow-lg;
+    height: $rem-32px;
+    min-width: $rem-32px;
+
+    &.layout-horizontal {
+      margin-left: $rem-4px;
+    }
+
+    &.layout-vertical {
+      margin-top: $rem-4px;
+    }
+  }
+
+  &.style-marginless {
+    border-radius: $rem-4px;
+
+    &.layout-horizontal {
+      margin-left: $rem-4px;
+    }
+
+    &.layout-vertical {
+      margin-top: $rem-4px;
+    }
+
+    &:hover {
+      background-color: $modus-toolbar-button-hover-bg;
+      cursor: pointer;
+    }
+
+    &:active {
+      background-color: $modus-toolbar-button-active-bg;
+    }
+
+    &.active-button {
+      background-color: $modus-toolbar-button-active-bg;
+    }
+  }
+
+  div {
+    align-items: center;
+    background-color: $modus-toolbar-bg;
+    border-radius: $rem-2px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+
+    &.style-margin {
+      height: $rem-24px;
+      min-width: $rem-24px;
+    }
+
+    &:hover {
+      background-color: $modus-toolbar-button-hover-bg;
+      cursor: pointer;
+    }
+
+    &:active {
+      background-color: $modus-toolbar-button-active-bg;
+    }
+
+    &.active-button {
+      background-color: $modus-toolbar-button-active-bg;
+    }
+  }
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.3;
+    pointer-events: none;
+  }
+}
