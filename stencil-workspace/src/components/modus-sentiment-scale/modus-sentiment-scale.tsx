@@ -22,7 +22,7 @@ export class ModusSentimentScale {
   @Prop() type: ModusSentimentScaleType = 'smileys';
 
   /** (optional) Whether the sentiment scale is disabled. */
-  @Prop() disabled?: boolean ;
+  @Prop() disabled?: boolean=false;
 
   /** An event that fires the selected sentiment. */
   @Event() sentimentSelection: EventEmitter;
@@ -83,7 +83,7 @@ export class ModusSentimentScale {
                 class={containerClass}
                 onClick={() => this.handleSentimentClick(key)}
                 onKeyDown={(event) => this.handleKeyDown(event, key)}>
-                <SentimentIconMap icon={iconName} size={`${this.type ===  THUMB_SENTIMENT_TYPE ? '32' : '24'}`} />
+                <SentimentIconMap icon={iconName} size={`${this.type === THUMB_SENTIMENT_TYPE ? '32' : '24'}`} />
               </div>
             );
           })}
