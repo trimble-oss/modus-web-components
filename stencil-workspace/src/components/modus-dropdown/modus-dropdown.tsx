@@ -71,6 +71,20 @@ export class ModusDropdown {
       this.dropdownClose.emit();
     }
   }
+  @Listen('keydown', { target: 'document' })
+  documentKeyDownHandler(event: KeyboardEvent): void {
+    if (event.key === 'Enter' || event.key === ' ') {
+      if (this.dropdownToggleClicked || (event.target as HTMLElement).closest(`#${this.toggleElementId}`)) {
+        this.dropdownToggleClicked = false;
+        return;
+      }
+    }
+    if (event.key === 'Escape' && this.visible) {
+      this.visible = false;
+      this.dropdownClose.emit();
+      this.dropdownToggleClicked = false;
+    }
+  }
 
   handleDropdownClick(event: MouseEvent): void {
     if ((event.target as HTMLElement).closest(`#${this.toggleElementId}`)) {
@@ -86,6 +100,22 @@ export class ModusDropdown {
     }
   }
 
+  handleDropdownKeyDown(event: KeyboardEvent) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      if ((event.target as HTMLElement).closest(`#${this.toggleElementId}`)) {
+        this.visible = !this.visible;
+      } else {
+        this.visible = false;
+      }
+
+      if (!this.visible) {
+        this.dropdownClose.emit();
+      } else {
+        this.dropdownToggleClicked = true;
+      }
+    }
+  }
+
   render(): unknown {
     const listContainerClass = `dropdown-list ${this.visible ? 'visible' : 'hidden'} ${
       this.showDropdownListBorder ? 'list-border' : ''
@@ -94,7 +124,14 @@ export class ModusDropdown {
     const width = `${this.toggleElement?.offsetWidth ? this.toggleElement?.offsetWidth : 0}px`;
 
     return (
-      <div aria-label={this.ariaLabel} class="dropdown" role="listbox" onClick={(event) => this.handleDropdownClick(event)}>
+      <div
+        aria-label={this.ariaLabel}
+        class="dropdown"
+        role="listbox"
+        onClick={(event) => this.handleDropdownClick(event)}
+        onKeyDown={(event) => {
+          this.handleDropdownKeyDown(event);
+        }}>
         <slot name="dropdownToggle" />
         <div
           class={listContainerClass}
