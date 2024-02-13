@@ -1152,6 +1152,10 @@ export namespace Components {
          */
         "sort": boolean;
         /**
+          * (Optional) To display a-z or arrow sort icons.
+         */
+        "sortIconStyle": 'alphabetical' | 'directional';
+        /**
           * (Optional) To display summary row.
          */
         "summaryRow": boolean;
@@ -3346,6 +3350,10 @@ declare namespace LocalJSX {
           * (Optional) To sort data in table.
          */
         "sort"?: boolean;
+        /**
+          * (Optional) To display a-z or arrow sort icons.
+         */
+        "sortIconStyle"?: 'alphabetical' | 'directional';
         /**
           * (Optional) To display summary row.
          */

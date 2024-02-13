@@ -281,6 +281,7 @@ const DefaultColumns = [
 const DefaultArgs = {
   hover: false,
   sort: false,
+  sortIconStyle: 'alphabetical',
   columnResize: false,
   columnReorder: false,
   pagination: false,
@@ -338,6 +339,19 @@ export default {
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },
+      },
+      type: { required: false },
+    },
+    sortIconStyle: {
+      name: 'sortIconStyle',
+      description: 'Display alphabetical or directional arrow icons when sort is enabled',
+      control: {
+        options: ['alphabetical', 'directional'],
+        type: 'select',
+      },
+      table: {
+        defaultValue: { summary: `'alphabetical'` },
+        type: { summary: `'alphabetical', 'directional'` },
       },
       type: { required: false },
     },
@@ -551,6 +565,7 @@ export default {
 const Template = ({
   hover,
   sort,
+  sortIconStyle,
   columnResize,
   columnReorder,
   pagination,
@@ -579,6 +594,7 @@ const Template = ({
     <modus-table
       hover="${hover}"
       sort="${sort}"
+      sort-icon-style="${sortIconStyle}"
       column-resize="${columnResize}"
       column-reorder="${columnReorder}"
       density="${density}"
@@ -629,6 +645,7 @@ ManualSorting.args = {
 export const ValueFormatter = ({
   hover,
   sort,
+  sortIconStyle,
   columnResize,
   pagination,
   showSortIconOnHover,
@@ -650,6 +667,7 @@ export const ValueFormatter = ({
     <modus-table
       hover="${hover}"
       sort="${sort}"
+      sort="${sortIconStyle}"
       column-resize="${columnResize}"
       density="${density}"
       pagination="${pagination}"
@@ -668,6 +686,7 @@ export const ValueFormatter = ({
 ValueFormatter.args = {
   hover: false,
   sort: false,
+  sortIconStyle: 'alphabetical',
   columnResize: false,
   columnReorder: false,
   pagination: false,

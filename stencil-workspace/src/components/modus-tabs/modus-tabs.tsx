@@ -57,6 +57,7 @@ export class ModusTabs {
     const tabs = this.tabs.map((tab: Tab) => {
       return (
         <div
+          id={`${tab.id}`}
           class={`tab ${tab.active ? 'active' : ''} ${this.classBySize.get(this.size)} ${
             this.fullWidth ? 'resizable' : ''
           } `}
