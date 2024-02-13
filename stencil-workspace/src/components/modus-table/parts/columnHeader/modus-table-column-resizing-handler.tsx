@@ -105,7 +105,7 @@ export const ModusTableColumnResizingHandler: FunctionalComponent<ModusTableColu
         onMouseLeave={() => onMouseLeave()}
         class="resize-handle"></div>
 
-      <div  class="resize-handle-border"></div>
+      <div class="resize-handle-border"></div>
     </div>
   );
 };

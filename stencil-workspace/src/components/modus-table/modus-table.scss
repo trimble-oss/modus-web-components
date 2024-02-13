@@ -156,11 +156,12 @@ table {
             }
           }
         }
-        
+
         .resize-handle {
           &:focus-visible {
             outline: none;
           }
+
           cursor: e-resize;
           height: 100%;
           position: absolute;
@@ -174,14 +175,13 @@ table {
 
         &:not(.active-resize) {
           .resize-handle:focus-visible {
-            +.resize-handle-border{
+            + .resize-handle-border {
               border-right: 2px solid $modus-table-header-color;
+              height: 100%;
               position: absolute;
               right: -1px;
-              height: 100%;
               top: 0;
             }
-   
           }
         }
 
@@ -329,10 +329,9 @@ table {
     }
   }
 
-  
   tr {
     height: 3rem;
-  
+
     th,
     td {
       border-right: $rem-1px $modus-table-border-color solid;
@@ -365,10 +364,11 @@ table {
       &.active-resize {
         border-right: 2px $modus-primary-color solid !important;
       }
-
     }
+
     th {
       position: relative;
+
       div {
         overflow: hidden;
         text-overflow: ellipsis;
