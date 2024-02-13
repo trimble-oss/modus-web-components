@@ -35,7 +35,7 @@ div.alert {
   }
 
   &.with-action-button {
-    padding: 12px;
+    padding: 12px 16px 12px 16px;
   }
 
   &.type-info {
@@ -153,7 +153,6 @@ div.alert {
     align-items: center;
     display: flex;
     margin-left: auto;
-    padding: 0;
   }
 
   .action-button {

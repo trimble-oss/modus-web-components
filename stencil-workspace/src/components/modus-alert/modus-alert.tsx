@@ -83,7 +83,7 @@ export class ModusAlert {
               buttonStyle="borderless"
               size="medium"
               ariaLabel={this.buttonAriaLabel}
-              onClick={() => this.actionClick.emit()}
+              onButtonClick={() => this.actionClick.emit()}
               onKeyDown={(e) => this.handleKeyDown(e, 'action')}>
               {this.buttonText}
             </modus-button>
