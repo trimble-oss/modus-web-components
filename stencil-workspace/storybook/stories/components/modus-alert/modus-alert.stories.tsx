@@ -77,8 +77,8 @@ const Template = ({ ariaLabel,buttonAriaLabel,buttonText, dismissible, message, 
   html`
     <modus-alert
       ariaLabel=${ariaLabel}
-      buttonAriaLabel=${buttonAriaLabel}
-      buttonText=${buttonText}
+      button-aria-label=${buttonAriaLabel}
+      button-text=${buttonText}
       dismissible=${dismissible}
       message=${message}
       type=${type}>
@@ -173,8 +173,8 @@ const TemplateWithLink = ({ ariaLabel,buttonAriaLabel,buttonText, dismissible, m
   html`
     <modus-alert
       ariaLabel=${ariaLabel}
-      buttonAriaLabel=${buttonAriaLabel}
-      buttonText=${buttonText}
+      button-aria-label=${buttonAriaLabel}
+      button-text=${buttonText}
       dismissible=${dismissible}
       message=${message}
       type=${type}>

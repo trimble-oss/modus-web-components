@@ -18,6 +18,12 @@ import { Anchor, Story } from '@storybook/addon-docs';
 
 <modus-alert dismissible message="Dismissible alert"></modus-alert>
 
+<Anchor storyId="components-alert--action-button"/>
+
+### Action button
+
+<modus-alert message="Info alert with action button" button-text="Action"></modus-alert>
+
 <Anchor storyId="components-alert--error" />
 
 ### Error
@@ -61,6 +67,7 @@ Note: If anchor tags are nested, it is required to apply CSS variables  `--modus
 ```html
 <modus-alert message="Info alert (default)"></modus-alert>
 <modus-alert dismissible message="Dismissible alert"></modus-alert>
+<modus-alert message="Info alert with action button" button-text="Action"></modus-alert>
 <modus-alert message="Error alert" type="error"></modus-alert>
 <modus-alert message="Info gray alert" type="info-gray"></modus-alert>
 <modus-alert message="Info gray dark alert" type="info-gray-dark"></modus-alert>
@@ -105,6 +112,22 @@ Note: If anchor tags are nested, it is required to apply CSS variables  `--modus
         <td></td>
       </tr>
       <tr>
+        <td>button-aria-label</td>
+        <td>The button's aria-label</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>button-text</td>
+        <td>The button's text</td>
+        <td>string</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
         <td>dismissible</td>
         <td>Whether the alert is dismissible, renders the close icon</td>
         <td>boolean</td>
@@ -141,6 +164,11 @@ Note: If anchor tags are nested, it is required to apply CSS variables  `--modus
       <tr>
         <td>dismissClick</td>
         <td>Fires on dismiss icon click</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>actionClick</td>
+        <td>Fires on action button click</td>
         <td></td>
       </tr>
     </tbody>
