@@ -1499,7 +1499,7 @@ export namespace Components {
     }
     interface ModusTreeViewItem {
         /**
-          * (optional) Tab Index for the tree item
+          * (optional) Actions that can be performed on each item. A maximum of 3 icons will be shown, including overflow menu and expand icons.
          */
         "actions": ModusActionBarOptions1[];
         /**
@@ -3738,9 +3738,9 @@ declare namespace LocalJSX {
     }
     interface ModusTreeViewItem {
         /**
-          * (optional) Tab Index for the tree item
+          * (optional) Actions that can be performed on each item. A maximum of 3 icons will be shown, including overflow menu and expand icons.
          */
-        "actions": ModusActionBarOptions1[];
+        "actions"?: ModusActionBarOptions1[];
         /**
           * (optional) Disables the tree item
          */

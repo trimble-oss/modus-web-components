@@ -596,6 +596,7 @@ const WithItemActionBarTemplate = ({
   multiCheckboxSelection,
   multiSelection,
   size,
+  rowActions,
 }) => html`
   <div
     style="display: flex; flex-direction: column; width: 400px;">
@@ -609,26 +610,18 @@ const WithItemActionBarTemplate = ({
       selected-items="false"
       size=${size}
     >
-      <modus-tree-view-item node-id="1" label="Inbox"></modus-tree-view-item>
+      <modus-tree-view-item node-id="1" label="Inbox" .actions=${rowActions}></modus-tree-view-item>
     </modus-tree-view>
   </div>
-  ${ItemActionBarScript()}
 `;
-
-const ItemActionBarScript = () => {
-  const tag = document.createElement('script');
-  tag.innerHTML = `
-    document.querySelector('[node-id="1"]').actions = [
-    { id: 'export', icon: 'export', label: 'Export' },
-    { id: 'history', icon: 'history', label: 'History' },
-    { id: 'edit', icon: 'pencil', label: 'Edit' },
-    { id: 'delete', icon: 'delete', label: 'Delete' }
-    ];
-  `;
-  return tag;
-};
 
 export const WithActionBar = WithItemActionBarTemplate.bind({});
 WithActionBar.args = {
   ...Default.args,
+  rowActions: [
+    { id: 'export', icon: 'export', label: 'Export' },
+    { id: 'history', icon: 'history', label: 'History' },
+    { id: 'edit', icon: 'pencil', label: 'Edit' },
+    { id: 'delete', icon: 'delete', label: 'Delete' }
+    ]
 };

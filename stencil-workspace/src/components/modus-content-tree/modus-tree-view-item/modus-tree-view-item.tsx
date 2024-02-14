@@ -61,8 +61,8 @@ export class ModusTreeViewItem {
   /** (optional) Tab Index for the tree item */
   @Prop({ mutable: true }) tabIndexValue: string | number = 0;
 
-  /** (optional) Tab Index for the tree item */
-  @Prop({ mutable: true }) actions!: ModusActionBarOptions[];
+  /** (optional) Actions that can be performed on each item. A maximum of 3 icons will be shown, including overflow menu and expand icons. */
+  @Prop({ mutable: true }) actions: ModusActionBarOptions[];
 
   /**
    * @internal
