@@ -67,8 +67,7 @@ export class ModusDropdown {
     }
 
     if (this.visible) {
-      this.visible = false;
-      this.dropdownClose.emit();
+      this.hideDropdown();
     }
   }
   @Listen('keydown', { target: 'document' })
@@ -80,12 +79,15 @@ export class ModusDropdown {
       }
     }
     if (event.key === 'Escape' && this.visible) {
-      this.visible = false;
-      this.dropdownClose.emit();
+      this.hideDropdown();
       this.dropdownToggleClicked = false;
     }
   }
 
+  hideDropdown(): void {
+    this.visible = false;
+    this.dropdownClose.emit();
+  }
   handleDropdownClick(event: MouseEvent): void {
     if ((event.target as HTMLElement).closest(`#${this.toggleElementId}`)) {
       this.visible = !this.visible;
