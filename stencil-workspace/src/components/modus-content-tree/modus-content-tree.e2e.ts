@@ -430,11 +430,9 @@ describe('modus-tree-view-item', () => {
     const actionBarContent = await (await page.find('modus-tree-view-item[node-id="1"] >>> modus-action-bar')).shadowRoot;
     const actionBarOptions = actionBarContent.querySelectorAll('modus-button');
 
-  
     expect(actionBarOptions).not.toBeNull();
 
-    expect(actionBarOptions[0].textContent).toBe('Export')
-    expect(actionBarOptions[1].textContent).toBe('History')
-
+    expect(actionBarOptions[0].textContent).toBe('Export');
+    expect(actionBarOptions[1].textContent).toBe('History');
   });
 });
