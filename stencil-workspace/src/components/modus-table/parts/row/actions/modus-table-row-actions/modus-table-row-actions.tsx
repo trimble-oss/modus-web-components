@@ -1,11 +1,11 @@
 import {
-  Host,
   Component,
+  Event,
+  EventEmitter, // eslint-disable-line @typescript-eslint/no-unused-vars
+  Fragment,
+  Host,
   Prop,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
-  Fragment,
-  Event,
-  EventEmitter,
 } from '@stencil/core';
 import { Row } from '@tanstack/table-core';
 import { ModusTableRowAction } from '../../../../models/modus-table.models';
@@ -91,7 +91,7 @@ export class ModusTableRowActions {
               class="row-actions-menu-button"
               button-style="borderless"
               color="secondary"
-              icon-only="vertical_ellipsis"
+              icon-only="more_vertical"
               ariaLabel="overflow button"
               size="small"
               onKeyDown={(e) => this.handleMoreButtonKeydown(e, overflowMenu)}

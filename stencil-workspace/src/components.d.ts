@@ -1168,6 +1168,10 @@ export namespace Components {
          */
         "sort": boolean;
         /**
+          * (Optional) To display a-z or arrow sort icons.
+         */
+        "sortIconStyle": 'alphabetical' | 'directional';
+        /**
           * (Optional) To display summary row.
          */
         "summaryRow": boolean;
@@ -1185,6 +1189,10 @@ export namespace Components {
           * (Optional) To display a toolbar, which allows access to table operations like hiding columns.
          */
         "toolbarOptions": ModusTableToolbarOptions | null;
+        /**
+          * (Optional) To wrap text that overflows the cell.
+         */
+        "wrapText": boolean;
     }
     interface ModusTableCellEditor {
         "args": ModusTableCellEditorArgs;
@@ -3390,6 +3398,10 @@ declare namespace LocalJSX {
          */
         "sort"?: boolean;
         /**
+          * (Optional) To display a-z or arrow sort icons.
+         */
+        "sortIconStyle"?: 'alphabetical' | 'directional';
+        /**
           * (Optional) To display summary row.
          */
         "summaryRow"?: boolean;
@@ -3401,6 +3413,10 @@ declare namespace LocalJSX {
           * (Optional) To display a toolbar, which allows access to table operations like hiding columns.
          */
         "toolbarOptions"?: ModusTableToolbarOptions | null;
+        /**
+          * (Optional) To wrap text that overflows the cell.
+         */
+        "wrapText"?: boolean;
     }
     interface ModusTableCellEditor {
         "args"?: ModusTableCellEditorArgs;

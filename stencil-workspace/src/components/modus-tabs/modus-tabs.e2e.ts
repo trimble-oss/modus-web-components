@@ -30,10 +30,12 @@ describe('modus-tabs', () => {
     let tabs = await page.findAll('modus-tabs >>> .tab');
     expect(tabs.length).toBeFalsy();
 
-    modusTabs.setProperty('tabs', [{ id: 0, label: 'Tab1' }]);
+    modusTabs.setProperty('tabs', [{ id: 'tab-1', label: 'Tab1' }]);
     await page.waitForChanges();
     tabs = await page.findAll('modus-tabs >>> .tab');
+
     expect(tabs.length).toEqual(1);
+    expect(tabs[0].id).toEqual('tab-1');
   });
 
   it('emits pageChange on page click', async () => {

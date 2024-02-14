@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.actor != 'coliff' && github.actor != 'egunther39' && github.actor != 'enowak1031' && github.actor != 'HarshithaNous' && github.actor != 'msankaran0712' }}
     steps:
-      - uses: github/issue-labeler@v3.3
+      - uses: github/issue-labeler@v3.4
         with:
           configuration-path: .github/issue-labeler.yml
           enable-versioned-regex: 0

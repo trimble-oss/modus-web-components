@@ -281,6 +281,7 @@ const DefaultColumns = [
 const DefaultArgs = {
   hover: false,
   sort: false,
+  sortIconStyle: 'alphabetical',
   columnResize: false,
   columnReorder: false,
   pagination: false,
@@ -299,6 +300,7 @@ const DefaultArgs = {
   rowActions: [],
   rowSelection: false,
   rowSelectionOptions: {},
+  wrapText: false,
 };
 
 export default {
@@ -337,6 +339,19 @@ export default {
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },
+      },
+      type: { required: false },
+    },
+    sortIconStyle: {
+      name: 'sortIconStyle',
+      description: 'Display alphabetical or directional arrow icons when sort is enabled',
+      control: {
+        options: ['alphabetical', 'directional'],
+        type: 'select',
+      },
+      table: {
+        defaultValue: { summary: `'alphabetical'` },
+        type: { summary: `'alphabetical', 'directional'` },
       },
       type: { required: false },
     },
@@ -519,6 +534,16 @@ export default {
       },
       type: { required: false },
     }
+    ,
+    wrapText : {
+      name: 'wrapText',
+      description: 'To wrap text that overflows the cell',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      },
+      type: { required: false },
+    }
   },
 
   parameters: {
@@ -540,6 +565,7 @@ export default {
 const Template = ({
   hover,
   sort,
+  sortIconStyle,
   columnResize,
   columnReorder,
   pagination,
@@ -561,12 +587,14 @@ const Template = ({
   manualPaginationOptions,
   manualSortingOptions,
   defaultSort,
-  density
+  density,
+  wrapText
 }) => html`
   <div style="width: 950px">
     <modus-table
       hover="${hover}"
       sort="${sort}"
+      sort-icon-style="${sortIconStyle}"
       column-resize="${columnResize}"
       column-reorder="${columnReorder}"
       density="${density}"
@@ -578,7 +606,8 @@ const Template = ({
       rows-expandable="${rowsExpandable}"
       max-height="${maxHeight}"
       max-width="${maxWidth}"
-      row-selection="${rowSelection}" />
+      row-selection="${rowSelection}"
+      wrap-text="${wrapText}" />
   </div>
   ${initializeTable({columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions, manualPaginationOptions, manualSortingOptions, defaultSort})}
 `;
@@ -616,6 +645,7 @@ ManualSorting.args = {
 export const ValueFormatter = ({
   hover,
   sort,
+  sortIconStyle,
   columnResize,
   pagination,
   showSortIconOnHover,
@@ -630,12 +660,14 @@ export const ValueFormatter = ({
   maxWidth,
   rowSelection,
   rowSelectionOptions,
-  density
+  density,
+  wrapText
 }) => html`
   <div style="width: 950px">
     <modus-table
       hover="${hover}"
       sort="${sort}"
+      sort="${sortIconStyle}"
       column-resize="${columnResize}"
       density="${density}"
       pagination="${pagination}"
@@ -646,13 +678,15 @@ export const ValueFormatter = ({
       toolbar="${toolbar}"
       max-height="${maxHeight}"
       max-width="${maxWidth}"
-      row-selection="${rowSelection}" />
+      row-selection="${rowSelection}"
+      wrap-text="${wrapText}" />
   </div>
   ${valueFormatterTable(pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions)}
 `;
 ValueFormatter.args = {
   hover: false,
   sort: false,
+  sortIconStyle: 'alphabetical',
   columnResize: false,
   columnReorder: false,
   pagination: false,
@@ -666,7 +700,8 @@ ValueFormatter.args = {
   maxHeight: '',
   maxWidth: '',
   rowSelection: false,
-  rowSelectionOptions: {}
+  rowSelectionOptions: {},
+  wrapText: false
 };
 const valueFormatterTable = (pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions) => {
   const tag = document.createElement('script');
@@ -824,4 +859,12 @@ RowActions.args = {
     }
 
   ], data: makeData(7), fullWidth: true
+};
+
+export const WrapText = Template.bind({});
+WrapText.args = { ...DefaultArgs, data: [{
+    ...newPerson(),
+    lastName: 'This is an example of long text'
+  },
+  ...makeData(4)], wrapText: true
 };
