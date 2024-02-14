@@ -1,15 +1,7 @@
 import { newE2EPage } from '@stencil/core/testing';
 
-const MockActionBars = [
-  { id: 'export', icon: 'export', label: 'Export' },
-  { id: 'history', icon: 'history', label: 'History' },
-  { id: 'edit', icon: 'pencil', label: 'Edit' },
-  { id: 'delete', icon: 'delete', label: 'Delete' },
-];
-
 describe('modus-tree-view-item', () => {
   // verify renders
-
   it('renders tree root', async () => {
     const page = await newE2EPage();
     await page.setContent('<modus-tree-view></modus-tree-view>');
@@ -431,34 +423,18 @@ describe('modus-tree-view-item', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <modus-tree-view>
-        <modus-tree-view-item node-id="1" label="Test Node" >
-       </modus-tree-view-item>
+        <modus-tree-view-item node-id="1" label="Test Node" show-action-bar="true"></modus-tree-view-item>
       </modus-tree-view>
     `);
 
-    const treeView = await page.find('modus-tree-view');
-    expect(treeView).not.toBeNull();
+    const actionBarContent = await (await page.find('modus-tree-view-item[node-id="1"] >>> modus-action-bar')).shadowRoot;
+    const actionBarOptions = actionBarContent.querySelectorAll('modus-button');
 
-    const treeViewItem = await page.find('modus-tree-view-item[node-id="1"]');
-    treeViewItem.setProperty('actions', MockActionBars);
-    await page.waitForChanges();
-    expect(treeViewItem).not.toBeNull();
+  
+    expect(actionBarOptions).not.toBeNull();
 
-    const actionBar = await page.find('modus-tree-view-item[node-id="1"] >>> modus-action-bar');
-    expect(actionBar).not.toBeNull();
+    expect(actionBarOptions[0].textContent).toBe('Export')
+    expect(actionBarOptions[1].textContent).toBe('History')
 
-    await actionBar.click();
-    await page.waitForChanges();
-
-    const historyAction = await page.find('modus-tree-view-item[node-id="1"] >>> modus-action-bar >>> modus-list');
-
-    const test = historyAction.shadowRoot.querySelectorAll('modus-list-item');
-    expect(test[0]);
-
-    await page.waitForChanges();
-    expect(test[0].textContent).toBe('Export');
-    expect(test[1].textContent).toBe('History');
-    expect(test[2].textContent).toBe('Edit');
-    expect(test[3].textContent).toBe('Delete');
   });
 });

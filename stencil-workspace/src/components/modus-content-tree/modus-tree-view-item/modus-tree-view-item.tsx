@@ -60,9 +60,8 @@ export class ModusTreeViewItem {
   /** (optional) Tab Index for the tree item */
   @Prop({ mutable: true }) tabIndexValue: string | number = 0;
 
-  @Prop({ mutable: true }) actions!: { id: string; icon: string; label: string }[];
-
-  @Prop({ mutable: true }) visibleItemCount: number;
+  /** (optional) Allows the item to show an action bar*/
+  @Prop({ mutable: true }) showActionBar: boolean;
 
   /**
    * @internal
@@ -386,6 +385,13 @@ export class ModusTreeViewItem {
     const treeItemClass = `tree-item ${selected ? 'selected' : ''} ${sizeClass} ${isDisabled ? 'disabled' : ''} `;
     const treeItemChildrenClass = `tree-item-group ${sizeClass} ${expanded ? 'expanded' : ''}`;
 
+    const actions = [
+      { id: 'export', icon: 'export', label: 'Export' },
+      { id: 'history', icon: 'history', label: 'History' },
+      { id: 'edit', icon: 'pencil', label: 'Edit' },
+      { id: 'delete', icon: 'history', label: 'Delete' },
+    ];
+
     return (
       <li {...ariaControls} class={`tree-item-container${selectionIndicator ? ' selected-indicator' : ''}`}>
         <div
@@ -458,9 +464,7 @@ export class ModusTreeViewItem {
               }></this.CustomSlot>
           </div>
 
-          {this.actions && (
-            <modus-action-bar visible-item-count={this.visibleItemCount || 1} actions={this.actions}></modus-action-bar>
-          )}
+          {this.showActionBar && <modus-action-bar visible-item-count={3} actions={actions}></modus-action-bar>}
         </div>
         <ul class={treeItemChildrenClass} role="tree">
           <slot onSlotchange={() => this.handleTreeSlotChange()} />

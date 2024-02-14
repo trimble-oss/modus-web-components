@@ -1496,7 +1496,6 @@ export namespace Components {
         "size": 'condensed' | 'large' | 'standard';
     }
     interface ModusTreeViewItem {
-        "actions": { id: string; icon: string; label: string }[];
         /**
           * (optional) Disables the tree item
          */
@@ -1531,11 +1530,14 @@ export namespace Components {
          */
         "nodeId": string;
         /**
+          * (optional) Allows the item to show an action bar
+         */
+        "showActionBar": boolean;
+        /**
           * (optional) Tab Index for the tree item
          */
         "tabIndexValue": string | number;
         "updateComponent": () => Promise<void>;
-        "visibleItemCount": number;
     }
 }
 export interface ModusAccordionItemCustomEvent<T> extends CustomEvent<T> {
@@ -3733,7 +3735,6 @@ declare namespace LocalJSX {
         "size"?: 'condensed' | 'large' | 'standard';
     }
     interface ModusTreeViewItem {
-        "actions": { id: string; icon: string; label: string }[];
         /**
           * (optional) Disables the tree item
          */
@@ -3772,10 +3773,13 @@ declare namespace LocalJSX {
          */
         "onItemExpandToggle"?: (event: ModusTreeViewItemCustomEvent<boolean>) => void;
         /**
+          * (optional) Allows the item to show an action bar
+         */
+        "showActionBar"?: boolean;
+        /**
           * (optional) Tab Index for the tree item
          */
         "tabIndexValue"?: string | number;
-        "visibleItemCount"?: number;
     }
     interface IntrinsicElements {
         "modus-accordion": ModusAccordion;
