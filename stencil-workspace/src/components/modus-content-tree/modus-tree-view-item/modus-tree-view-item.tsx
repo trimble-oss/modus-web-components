@@ -11,7 +11,7 @@ import {
   FunctionalComponent,
 } from '@stencil/core';
 import { ModusIconMap } from '../../../icons/ModusIconMap';
-import { TreeViewItemOptions } from '../modus-content-tree.types';
+import { ModusActionBarOptions, TreeViewItemOptions } from '../modus-content-tree.types';
 import { TREE_ITEM_SIZE_CLASS } from '../modus-content-tree.constants';
 
 /**
@@ -60,8 +60,8 @@ export class ModusTreeViewItem {
   /** (optional) Tab Index for the tree item */
   @Prop({ mutable: true }) tabIndexValue: string | number = 0;
 
-  /** (optional) Allows the item to show an action bar*/
-  @Prop({ mutable: true }) showActionBar: boolean;
+  /** (optional) Tab Index for the tree item */
+  @Prop({ mutable: true }) actions!: ModusActionBarOptions[];
 
   /**
    * @internal
@@ -385,13 +385,6 @@ export class ModusTreeViewItem {
     const treeItemClass = `tree-item ${selected ? 'selected' : ''} ${sizeClass} ${isDisabled ? 'disabled' : ''} `;
     const treeItemChildrenClass = `tree-item-group ${sizeClass} ${expanded ? 'expanded' : ''}`;
 
-    const actions = [
-      { id: 'export', icon: 'export', label: 'Export' },
-      { id: 'history', icon: 'history', label: 'History' },
-      { id: 'edit', icon: 'pencil', label: 'Edit' },
-      { id: 'delete', icon: 'history', label: 'Delete' },
-    ];
-
     return (
       <li {...ariaControls} class={`tree-item-container${selectionIndicator ? ' selected-indicator' : ''}`}>
         <div
@@ -464,7 +457,7 @@ export class ModusTreeViewItem {
               }></this.CustomSlot>
           </div>
 
-          {this.showActionBar && <modus-action-bar visible-item-count={3} actions={actions}></modus-action-bar>}
+          {this.actions?.length > 0 && <modus-action-bar visible-item-count={3} actions={this.actions}></modus-action-bar>}
         </div>
         <ul class={treeItemChildrenClass} role="tree">
           <slot onSlotchange={() => this.handleTreeSlotChange()} />

@@ -47,3 +47,5 @@ export type TreeViewItemDragState = {
 };
 
 export type Position = { x: number; y: number };
+
+export type ModusActionBarOptions = { id: string; icon: string; label: string };

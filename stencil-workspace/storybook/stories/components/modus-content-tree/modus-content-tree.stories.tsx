@@ -46,13 +46,6 @@ export default {
         type: { summary: `'condensed' | 'standard' | 'large' ` },
       },
     },
-    showActionBar: {
-      name: 'show-action-bar',
-      description: 'Allow the item to show an action bar.',
-      table: {
-        type: { summary: 'boolean' },
-      },
-    },
   },
   parameters: {
     docs: {
@@ -71,7 +64,6 @@ const Template = ({
   multiCheckboxSelection,
   multiSelection,
   disableTabbing,
-  showActionBar,
   size,
 }) => html`
   <modus-tree-view
@@ -81,13 +73,13 @@ const Template = ({
     multi-checkbox-selection=${multiCheckboxSelection ? 'true' : 'false'}
     multi-selection=${multiSelection ? 'true' : 'false'}
     size=${size}>
-    <modus-tree-view-item node-Id="1" label="Inbox" show-action-bar=${showActionBar}>
+    <modus-tree-view-item node-Id="1" label="Inbox">
       <modus-tree-view-item node-Id="2" label="Personal"></modus-tree-view-item>
       <modus-tree-view-item node-Id="3" label="Work"></modus-tree-view-item>
       <modus-tree-view-item node-Id="4" label="Social"></modus-tree-view-item>
       <modus-tree-view-item node-Id="5" label="More ..."></modus-tree-view-item>
     </modus-tree-view-item>
-    <modus-tree-view-item node-Id="6" label="Archived" show-action-bar=${showActionBar}>
+    <modus-tree-view-item node-Id="6" label="Archived">
       <modus-tree-view-item node-Id="7" label="Folder1">
         <modus-tree-view-item node-Id="8" label="File1"></modus-tree-view-item>
         <modus-tree-view-item node-Id="9" label="Folder2">
@@ -95,10 +87,10 @@ const Template = ({
             node-Id="10"
             label="File2"></modus-tree-view-item>
         </modus-tree-view-item>
-        <modus-tree-view-item node-Id="11" label="File3" show-action-bar=${showActionBar}></modus-tree-view-item>
+        <modus-tree-view-item node-Id="11" label="File3"></modus-tree-view-item>
       </modus-tree-view-item>
     </modus-tree-view-item>
-    <modus-tree-view-item node-Id="12" label="Spam" show-action-bar=${showActionBar}></modus-tree-view-item>
+    <modus-tree-view-item node-Id="12" label="Spam"></modus-tree-view-item>
   </modus-tree-view>
 `;
 
@@ -140,7 +132,6 @@ Default.args = {
   disableTabbing: false,
   multiCheckboxSelection: false,
   multiSelection: false,
-  showActionBar: false,
   size: 'standard',
 };
 
@@ -618,10 +609,24 @@ const WithItemActionBarTemplate = ({
       selected-items="false"
       size=${size}
     >
-      <modus-tree-view-item node-id="1" label="Inbox" show-action-bar="true"></modus-tree-view-item>
+      <modus-tree-view-item node-id="1" label="Inbox"></modus-tree-view-item>
     </modus-tree-view>
   </div>
+  ${ItemActionBarScript()}
 `;
+
+const ItemActionBarScript = () => {
+  const tag = document.createElement('script');
+  tag.innerHTML = `
+    document.querySelector('[node-id="1"]').actions = [
+    { id: 'export', icon: 'export', label: 'Export' },
+    { id: 'history', icon: 'history', label: 'History' },
+    { id: 'edit', icon: 'pencil', label: 'Edit' },
+    { id: 'delete', icon: 'delete', label: 'Delete' }
+    ];
+  `;
+  return tag;
+};
 
 export const WithActionBar = WithItemActionBarTemplate.bind({});
 WithActionBar.args = {
