@@ -11,8 +11,9 @@ import {
   FunctionalComponent,
 } from '@stencil/core';
 import { ModusIconMap } from '../../../icons/ModusIconMap';
-import { ModusActionBarOptions, TreeViewItemOptions } from '../modus-content-tree.types';
+import { TreeViewItemOptions } from '../modus-content-tree.types';
 import { TREE_ITEM_SIZE_CLASS } from '../modus-content-tree.constants';
+import { ModusActionBarOptions } from '../../modus-action-bar/modus-action-bar';
 
 /**
  * @slot collapseIcon - Slot for custom collapse icon

@@ -25,7 +25,8 @@ import { TableRowActionsMenuEvent } from "./components/modus-table/models/table-
 import { Tab } from "./components/modus-tabs/modus-tabs";
 import { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
 import { ModusToolTipPlacement } from "./components/modus-tooltip/modus-tooltip.models";
-import { ModusActionBarOptions as ModusActionBarOptions1, TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
+import { ModusActionBarOptions as ModusActionBarOptions1 } from "./components/modus-action-bar/modus-action-bar";
+import { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export { ModusActionBarOptions } from "./components/modus-action-bar/modus-action-bar";
 export { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
 export { BadgeProperties } from "./components/modus-badge/modus-badge";
@@ -46,7 +47,8 @@ export { TableRowActionsMenuEvent } from "./components/modus-table/models/table-
 export { Tab } from "./components/modus-tabs/modus-tabs";
 export { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
 export { ModusToolTipPlacement } from "./components/modus-tooltip/modus-tooltip.models";
-export { ModusActionBarOptions as ModusActionBarOptions1, TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
+export { ModusActionBarOptions as ModusActionBarOptions1 } from "./components/modus-action-bar/modus-action-bar";
+export { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export namespace Components {
     interface ModusAccordion {
         /**
