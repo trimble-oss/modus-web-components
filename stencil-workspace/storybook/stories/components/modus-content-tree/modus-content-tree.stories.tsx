@@ -599,3 +599,31 @@ const FilterScript = () => {
 export const CustomFilter = FilterTemplate.bind({});
 CustomFilter.args = {...Default.args,
 };
+
+const WithItemActionBarTemplate = ({
+  checkboxSelection,
+  multiCheckboxSelection,
+  multiSelection,
+  size,
+}) => html`
+  <div
+    style="display: flex; flex-direction: column; width: 400px;">
+    <modus-tree-view
+      style="width:400px;"
+      checkbox-selection=${checkboxSelection}
+      checked-items="false"
+      expanded-items="false"
+      multi-checkbox-selection=${multiCheckboxSelection}
+      multi-selection=${multiSelection}
+      selected-items="false"
+      size=${size}
+    >
+      <modus-tree-view-item node-id="1" label="Inbox" show-action-bar="true"></modus-tree-view-item>
+    </modus-tree-view>
+  </div>
+`;
+
+export const WithActionBar = WithItemActionBarTemplate.bind({});
+WithActionBar.args = {
+  ...Default.args,
+};

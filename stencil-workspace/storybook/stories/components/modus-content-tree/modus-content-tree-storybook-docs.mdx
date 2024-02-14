@@ -631,6 +631,26 @@ It is located on the left side of the screen and cannot be combined with Side Na
 </script>
 ```
 
+### WithActionBar
+
+<Story id="components-content-tree--with-action-bar" />
+
+```html
+<modus-tree-view
+  style="width:400px;"
+  checkbox-selection="false"
+  checked-items="false"
+  expanded-items="false"
+  multi-checkbox-selection="false"
+  multi-selection="false"
+  selected-items="false"
+  size=""
+  class="hydrated">
+  <modus-tree-view-item node-id="1" label="Inbox" class="hydrated" show-action-bar="true"></modus-tree-view-item>
+</modus-tree-view>
+```
+
+
 ### Accessibility
 
 Every item and the elements such as drag icon, expand & collapse icon and the checkbox are accessible through keyboard. `Tab` key moves focus to the next focusable element and `Shift + Tab` moves focus to the previous focusable element. If `disableTabbing` is set `true`, tabbing inside the tree isn't allowed. Please refer to the next section for more details on keyboard interaction.
@@ -685,6 +705,7 @@ Every item and the elements such as drag icon, expand & collapse icon and the ch
 | checkboxClick    | An event that fires on tree item checkbox click  | boolean |
 | itemClick        | An event that fires on tree item click           | boolean |
 | itemExpandToggle | An event that fires on tree item expand/collapse | boolean |
+| showActionBar    | Allows the item to show an action bar            | boolean |
 
 ### Methods
 
