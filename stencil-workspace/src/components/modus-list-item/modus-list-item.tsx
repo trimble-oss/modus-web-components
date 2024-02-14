@@ -20,6 +20,7 @@ export class ModusListItem {
 
   /** (optional) Takes the icon name and shows the icon aligned to the left of the button text. */
   @Prop() leftIcon: string;
+
   /** (optional) The size of list item */
   @Prop() size: 'condensed' | 'large' | 'standard' = 'standard';
 

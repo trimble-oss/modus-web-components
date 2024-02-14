@@ -1,7 +1,6 @@
 @import './../modus-tree-view-item.vars';
 
 .tree-item {
-  display: flex;
   align-items: center;
   background-color: $modus-tree-view-item-bg;
   border: $rem-1px solid $modus-tree-view-item-border-color;
@@ -9,12 +8,12 @@
   cursor: pointer;
   display: flex;
   fill: $modus-tree-view-item-color;
+  flex-direction: row;
   font-family: $primary-font;
   font-size: $rem-16px;
+  justify-content: space-between;
   min-height: $list-group-item-height;
   width: 100%;
-  flex-direction: row;
-  justify-content: space-between;
 
   svg path {
     fill: $modus-tree-view-item-color;

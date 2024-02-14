@@ -1,12 +1,12 @@
-import { 
-  Component, 
-  Prop, 
-  State, 
+import {
+  Component,
+  Prop,
+  State,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
-  Element, 
-  Listen, 
-  Event, 
-  EventEmitter 
+  Element,
+  Listen,
+  Event,
+  EventEmitter,
 } from '@stencil/core';
 import { createPopper, Instance } from '@popperjs/core';
 
@@ -90,7 +90,6 @@ export class ModusActionBar {
   }
 
   handleButtonClick(action) {
-    console.log('Action clicked:', action); // Log the action details
     this.actionBarClick.emit({ actionId: action.id });
     if (this.showOverflowMenu) {
       this.closeOverflowMenu();
@@ -120,7 +119,7 @@ export class ModusActionBar {
         {visibleActions.map((action) => (
           <modus-tooltip text={action.label}>
             <modus-button
-              iconOnly={action.icon}
+              icon-only={action.icon}
               buttonStyle="borderless"
               color="secondary"
               size={this.size}
@@ -135,7 +134,7 @@ export class ModusActionBar {
         {this.actions.length > this.visibleItemCount && (
           <modus-button
             ref={(el) => (this.overflowButtonElement = el)}
-            iconOnly="vertical_ellipsis"
+            icon-only="more_vertical"
             buttonStyle="borderless"
             color="secondary"
             size={this.size}
