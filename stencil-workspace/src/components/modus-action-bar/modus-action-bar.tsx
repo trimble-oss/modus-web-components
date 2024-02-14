@@ -31,7 +31,6 @@ export class ModusActionBar {
   @State() showOverflowMenu = false;
 
   /** (optional) List of actions */
-
   @Prop({ mutable: true }) actions: ModusActionBarOptions[];
 
   /** (optional) The size of the action items. */
@@ -125,7 +124,6 @@ export class ModusActionBar {
               size={this.size}
               onClick={() => this.handleButtonClick(action)}
               onKeyDown={(event) => this.handleKeyDown(event, action)}>
-              {action.label}
               {action.label}
             </modus-button>
           </modus-tooltip>
