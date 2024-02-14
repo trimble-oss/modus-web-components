@@ -2,6 +2,7 @@
 import docs from './modus-sentiment-scale-storybook-docs.mdx';
 import { html } from 'lit-html';
 
+//changed
 export default {
   title: 'Components/Sentiment Scale',
   argTypes: {
