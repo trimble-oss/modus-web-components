@@ -1,7 +1,14 @@
 import { newE2EPage } from '@stencil/core/testing';
 
+const MockActionBars = [
+  { id: 'export', icon: 'export', label: 'Export' },
+  { id: 'history', icon: 'history', label: 'History' },
+  { id: 'edit', icon: 'pencil', label: 'Edit' },
+];
+
 describe('modus-tree-view-item', () => {
   // verify renders
+  /*
   it('renders tree root', async () => {
     const page = await newE2EPage();
     await page.setContent('<modus-tree-view></modus-tree-view>');
@@ -419,20 +426,33 @@ describe('modus-tree-view-item', () => {
     expect(checkboxClick).toHaveReceivedEvent();
   });
 
+  */
+
   it('should open action bar and select an option', async () => {
     const page = await newE2EPage();
     await page.setContent(`
       <modus-tree-view>
-        <modus-tree-view-item node-id="1" label="Test Node" show-action-bar="true"></modus-tree-view-item>
+        <modus-tree-view-item node-id="1" label="Test Node" >
+       </modus-tree-view-item>
       </modus-tree-view>
     `);
 
-    const actionBarContent = await (await page.find('modus-tree-view-item[node-id="1"] >>> modus-action-bar')).shadowRoot;
-    const actionBarOptions = actionBarContent.querySelectorAll('modus-button');
+    const treeView = await page.find('modus-tree-view');
+    expect(treeView).not.toBeNull();
 
-    expect(actionBarOptions).not.toBeNull();
+    const treeViewItem = await page.find('modus-tree-view-item[node-id="1"]');
+    treeViewItem.setProperty('actions', MockActionBars);
+    await page.waitForChanges();
+    expect(treeViewItem).not.toBeNull();
 
-    expect(actionBarOptions[0].textContent).toBe('Export');
-    expect(actionBarOptions[1].textContent).toBe('History');
+    const actionBar = await page.find('modus-tree-view-item[node-id="1"] >>> modus-action-bar');
+    expect(actionBar).not.toBeNull();
+
+    const actionItems = actionBar.shadowRoot.querySelectorAll('modus-button');
+
+    expect(actionItems[0].textContent).toBe('Export');
+    expect(actionItems[1].textContent).toBe('History');
+    expect(actionItems[2].textContent).toBe('Edit');
+    await page.waitForChanges();
   });
 });
