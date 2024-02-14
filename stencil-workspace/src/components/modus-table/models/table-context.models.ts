@@ -62,6 +62,8 @@ export interface TableContext {
 
   sort: boolean;
 
+  sortIconStyle: 'alphabetical' | 'directional';
+
   summaryRow: boolean;
 
   toolbar: boolean;
