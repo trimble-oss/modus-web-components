@@ -10,6 +10,7 @@ import { defineCustomElements } from '@trimble-oss/modus-web-components/loader';
 defineCustomElements();
 export const ModusAccordion = /*@__PURE__*/createReactComponent<JSX.ModusAccordion, HTMLModusAccordionElement>('modus-accordion');
 export const ModusAccordionItem = /*@__PURE__*/createReactComponent<JSX.ModusAccordionItem, HTMLModusAccordionItemElement>('modus-accordion-item');
+export const ModusActionBar = /*@__PURE__*/createReactComponent<JSX.ModusActionBar, HTMLModusActionBarElement>('modus-action-bar');
 export const ModusAlert = /*@__PURE__*/createReactComponent<JSX.ModusAlert, HTMLModusAlertElement>('modus-alert');
 export const ModusAutocomplete = /*@__PURE__*/createReactComponent<JSX.ModusAutocomplete, HTMLModusAutocompleteElement>('modus-autocomplete');
 export const ModusBadge = /*@__PURE__*/createReactComponent<JSX.ModusBadge, HTMLModusBadgeElement>('modus-badge');
