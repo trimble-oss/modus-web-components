@@ -218,6 +218,10 @@ export class ModusTreeViewItem {
   }
 
   handleItemClick(e?: KeyboardEvent | MouseEvent): void {
+    if (e.defaultPrevented) {
+      return;
+    }
+
     if (this.shouldHandleEvent(e)) {
       const { onItemSelection, hasItemSelected } = this.options;
 
@@ -351,7 +355,7 @@ export class ModusTreeViewItem {
       };
   }
 
-  shouldHandleEvent(e?: Event) {
+  shouldHandleEvent(e?: Event): boolean {
     if (e) e.stopPropagation();
     // Do not handle the event when the item is disabled
     return this.options && !this.options.hasItemDisabled(this.nodeId);

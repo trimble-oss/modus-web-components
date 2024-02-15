@@ -3731,6 +3731,9 @@ declare namespace LocalJSX {
           * (optional) Enables multiple tree items selection
          */
         "multiSelection"?: boolean;
+        /**
+          * Fired when an action is clicked within any tree item. Includes both the `actionId` and `nodeId` of the action and item, respectively.
+         */
         "onItemActionClick"?: (event: ModusTreeViewCustomEvent<any>) => void;
         /**
           * (optional) Set selected tree items
@@ -3770,6 +3773,9 @@ declare namespace LocalJSX {
           * (required) Unique tree item identifier
          */
         "nodeId": string;
+        /**
+          * Fired when an action button within the tree item is clicked. Includes the `actionId`.
+         */
         "onActionClick"?: (event: ModusTreeViewItemCustomEvent<any>) => void;
         /**
           * An event that fires on tree item checkbox click

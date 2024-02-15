@@ -1601,7 +1601,9 @@ export class ModusTreeView {
 
 
 export declare interface ModusTreeView extends Components.ModusTreeView {
-
+  /**
+   * Fired when an action is clicked within any tree item. Includes both the `actionId` and `nodeId` of the action and item, respectively.
+   */
   itemActionClick: EventEmitter<CustomEvent<any>>;
 }
 
@@ -1640,7 +1642,9 @@ export declare interface ModusTreeViewItem extends Components.ModusTreeViewItem 
    * An event that fires on tree item expand/collapse
    */
   itemExpandToggle: EventEmitter<CustomEvent<boolean>>;
-
+  /**
+   * Fired when an action button within the tree item is clicked. Includes the `actionId`.
+   */
   actionClick: EventEmitter<CustomEvent<any>>;
 }
 
