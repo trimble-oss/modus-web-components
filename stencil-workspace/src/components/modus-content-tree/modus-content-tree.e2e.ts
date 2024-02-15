@@ -8,7 +8,7 @@ const MockActionBars = [
 
 describe('modus-tree-view-item', () => {
   // verify renders
-  /*
+
   it('renders tree root', async () => {
     const page = await newE2EPage();
     await page.setContent('<modus-tree-view></modus-tree-view>');
@@ -425,8 +425,6 @@ describe('modus-tree-view-item', () => {
 
     expect(checkboxClick).toHaveReceivedEvent();
   });
-
-  */
 
   it('should open action bar and select an option', async () => {
     const page = await newE2EPage();

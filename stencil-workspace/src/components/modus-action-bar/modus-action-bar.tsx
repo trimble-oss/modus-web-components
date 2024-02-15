@@ -56,7 +56,7 @@ export class ModusActionBar {
     const isMoreVerticalBtnTarget = event.target.localName === 'modus-tree-view-item';
 
     // Check if the focus is moving outside the component and if not clicked on the ellipsis button.
-    if (!this.el.contains(event.target as Node) && !isMoreVerticalBtnTarget  && this.showOverflowMenu) {
+    if (!this.el.contains(event.target as Node) && !isMoreVerticalBtnTarget && this.showOverflowMenu) {
       this.closeOverflowMenu();
     }
   }
