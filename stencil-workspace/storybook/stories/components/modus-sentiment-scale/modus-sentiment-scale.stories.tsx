@@ -44,22 +44,14 @@ export default {
   },
 };
 
-const Template = ({ariaLabel,iconsType,
-disabled}) => html`
-<modus-sentiment-scale  aria-label=${ariaLabel} type="${iconsType}" disabled="${disabled}"></modus-sentiment-scale>
-
-<script>
-  const sentimentScale = document.querySelector('modus-sentiment-scale');
-  sentimentScale.addEventListener('sentimentSelection', (event) => {
-    console.log('Sentiment selected:', event.detail);
-  });
-</script>
+const Template = ({ariaLabel,iconsType, disabled}) => html`
+<modus-sentiment-scale  aria-label=${ariaLabel} type="${iconsType}" ?disabled="${disabled}"></modus-sentiment-scale>
 `;
 export const Default = Template.bind({});
 Default.args = {
   ariaLabel: '',
   iconsType: 'smileys',
-  disabled: false,
+  disabled: false
 };
 
 

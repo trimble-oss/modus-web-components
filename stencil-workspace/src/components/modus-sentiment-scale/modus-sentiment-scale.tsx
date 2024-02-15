@@ -15,14 +15,14 @@ import { SentimentIconMap } from './SentimentIconMap';
   shadow: true,
 })
 export class ModusSentimentScale {
-  /** (optional) The input's aria-label. */
+  /** (optional) The sentiment scale's aria-label. */
   @Prop() ariaLabel: string | null;
 
   /** The type of icons to be displayed. */
   @Prop() type: ModusSentimentScaleType = 'smileys';
 
   /** (optional) Whether the sentiment scale is disabled. */
-  @Prop() disabled?: boolean=false;
+  @Prop() disabled?: boolean = false;
 
   /** An event that fires the selected sentiment. */
   @Event() sentimentSelection: EventEmitter;

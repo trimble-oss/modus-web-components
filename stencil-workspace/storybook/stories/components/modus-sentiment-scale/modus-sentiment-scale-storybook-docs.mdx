@@ -31,17 +31,18 @@ The Modus Sentiment Scale component offers a configurable sentiment scale for us
 ```
 ### Properties
 
-| Property     | Attribute   | Description                                     | Type                                                  | Options                    | Default   | Required |
-| ------------ | ----------- | ----------------------------------------------- | ----------------------------------------------------- | -------------------------- | --------- | -------- |
-| `type`  | `type` | The type of icons to be displayed.               | `typeof SMILEY_ICONS \| typeof THUMB_ICONS`            | `smileys`, `thumbs` |           | Yes      |
-| `disabled`   | `disabled`   | (optional) Whether the sentiment scale is disabled. | `boolean`                                            |                           | `false`   |          |
+| Property     | Attribute    | Description                                         | Type                            | Options                    | Default | Required |
+| ------------ | ------------ | --------------------------------------------------- | ------------------------------- | -------------------------- | ------- | -------- |
+| `ariaLabel`  | `aria-label` | (optional) The button's aria-label.                 | `string`                        |                            |         |          |
+| `type`       | `type`       | The type of icons to be displayed.                  | `SMILEY_ICONS` \| `THUMB_ICONS` | `smileys`, `thumbs`        |         | Yes      |
+| `disabled`   | `disabled`   | (optional) Whether the sentiment scale is disabled. | `boolean`                       |                            | `false` |          |
 
 ### Types
 
-| Types               | Values                                 |
-| -------------------- | ------------------------------------------- |
-| smileys | 'thumbs-up', 'thumbs-down'    |
-| thumbs | 'smiley-satisfied', 'smiley-dissatisfied', 'smiley-somewhat-dissatisfied', 'smiley-neutral', 'smiley-somewhat-satisfied',    |
+| Types   | Values                                                                                                                   |
+| ------- | ------------------------------------------------------------------------------------------------------------------------ |
+| smileys | `thumbs-up`, `thumbs-down`                                                                                               |
+| thumbs  | `smiley-satisfied`, `smiley-dissatisfied`, `smiley-somewhat-dissatisfied`, `smiley-neutral`, `smiley-somewhat-satisfied` |
 
 ### Events
 
