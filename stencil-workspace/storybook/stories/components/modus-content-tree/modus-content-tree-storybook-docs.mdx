@@ -711,13 +711,20 @@ Every item and the elements such as drag icon, expand & collapse icon and the ch
 
 ### DOM Events
 
+#### Modus Tree View
+
+| Name            | Description                                                                                                                           | Emits                                  |
+| --------------- |-------------------------------------------------------------------------------------------------------------------------------------- |--------------------------------------- |
+| itemActionClick | Fired when an action is clicked within any tree item. Includes both the `actionId` and `nodeId` of the action and item, respectively. | `{ actionId: string, nodeId: string }` |
+
 ##### Modus Tree View Item
 
-| Name             | Description                                      | Emits   |
-| ---------------- | ------------------------------------------------ | ------- |
-| checkboxClick    | An event that fires on tree item checkbox click  | boolean |
-| itemClick        | An event that fires on tree item click           | boolean |
-| itemExpandToggle | An event that fires on tree item expand/collapse | boolean |
+| Name             | Description                                                                           | Emits                  |
+| ---------------- | ------------------------------------------------------------------------------------- | ---------------------- |
+| actionClick      | Fired when an action button within the tree item is clicked. Includes the `actionId`. | `{ actionId: string }` |
+| checkboxClick    | An event that fires on tree item checkbox click                                       | boolean                |
+| itemClick        | An event that fires on tree item click                                                | boolean                |
+| itemExpandToggle | An event that fires on tree item expand/collapse                                      | boolean                |
 
 ### Methods
 

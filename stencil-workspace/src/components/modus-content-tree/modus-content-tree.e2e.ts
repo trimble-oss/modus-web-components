@@ -455,4 +455,69 @@ describe('modus-tree-view-item', () => {
     expect(actionItems[2].textContent).toBe('Edit');
     await page.waitForChanges();
   });
+
+  it('should emit actionClick event when an action is clicked', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <modus-tree-view>
+        <modus-tree-view-item node-id="1" label="Test Node">
+        </modus-tree-view-item>
+      </modus-tree-view>
+    `);
+
+    const treeViewItem = await page.find('modus-tree-view-item[node-id="1"]');
+    treeViewItem.setProperty('actions', MockActionBars);
+
+    await page.waitForChanges();
+    const actionClickEvent = await treeViewItem.spyOnEvent('actionClick');
+
+    const actionBar = await page.evaluateHandle(() =>
+      document.querySelector('modus-tree-view-item').shadowRoot.querySelector('modus-action-bar')
+    );
+
+    const exportButton = await page.evaluateHandle(
+      (actionBar) => actionBar.shadowRoot.querySelector('modus-button[icon-only="export"]'),
+      actionBar
+    );
+
+    expect(exportButton).toBeDefined();
+
+    await exportButton.click();
+    await page.waitForChanges();
+
+    expect(actionClickEvent).toHaveReceivedEventDetail({ actionId: 'export' });
+  });
+
+  it('should emit itemActionClick event on the tree when an action is clicked in an item', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <modus-tree-view>
+        <modus-tree-view-item node-id="1" label="Test Node">
+        </modus-tree-view-item>
+      </modus-tree-view>
+    `);
+
+    const treeView = await page.find('modus-tree-view');
+    const treeViewItem = await page.find('modus-tree-view-item[node-id="1"]');
+    treeViewItem.setProperty('actions', MockActionBars);
+
+    await page.waitForChanges();
+    const itemActionClickEvent = await treeView.spyOnEvent('itemActionClick');
+
+    const actionBar = await page.evaluateHandle(() =>
+      document.querySelector('modus-tree-view-item').shadowRoot.querySelector('modus-action-bar')
+    );
+
+    const exportButton = await page.evaluateHandle(
+      (actionBar) => actionBar.shadowRoot.querySelector('modus-button[icon-only="export"]'),
+      actionBar
+    );
+
+    expect(exportButton).toBeDefined();
+
+    await exportButton.click();
+    await page.waitForChanges();
+
+    expect(itemActionClickEvent).toHaveReceivedEventDetail({ actionId: 'export', nodeId: '1' });
+  });
 });

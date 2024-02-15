@@ -1595,11 +1595,15 @@ export class ModusTreeView {
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['itemActionClick']);
   }
 }
 
 
-export declare interface ModusTreeView extends Components.ModusTreeView {}
+export declare interface ModusTreeView extends Components.ModusTreeView {
+
+  itemActionClick: EventEmitter<CustomEvent<any>>;
+}
 
 
 @ProxyCmp({
@@ -1618,7 +1622,7 @@ export class ModusTreeViewItem {
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['checkboxClick', 'itemClick', 'itemExpandToggle']);
+    proxyOutputs(this, this.el, ['checkboxClick', 'itemClick', 'itemExpandToggle', 'actionClick']);
   }
 }
 
@@ -1636,6 +1640,8 @@ export declare interface ModusTreeViewItem extends Components.ModusTreeViewItem 
    * An event that fires on tree item expand/collapse
    */
   itemExpandToggle: EventEmitter<CustomEvent<boolean>>;
+
+  actionClick: EventEmitter<CustomEvent<any>>;
 }
 
 

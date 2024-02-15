@@ -23,6 +23,7 @@
 
 | Event              | Description                                      | Type                   |
 | ------------------ | ------------------------------------------------ | ---------------------- |
+| `actionClick`      |                                                  | `CustomEvent<any>`     |
 | `checkboxClick`    | An event that fires on tree item checkbox click  | `CustomEvent<boolean>` |
 | `itemClick`        | An event that fires on tree item click           | `CustomEvent<boolean>` |
 | `itemExpandToggle` | An event that fires on tree item expand/collapse | `CustomEvent<boolean>` |

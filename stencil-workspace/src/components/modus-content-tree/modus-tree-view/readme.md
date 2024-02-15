@@ -19,6 +19,13 @@
 | `size`                   | `size`                     | (optional) The default size of all tree items                                                                                                                                                 | `"condensed" \| "large" \| "standard"` | `'standard'` |
 
 
+## Events
+
+| Event             | Description | Type               |
+| ----------------- | ----------- | ------------------ |
+| `itemActionClick` |             | `CustomEvent<any>` |
+
+
 ----------------------------------------------
 
 

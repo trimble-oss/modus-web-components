@@ -6,6 +6,7 @@ import {
   Element,
   Event,
   EventEmitter,
+  Listen,
   Method,
   Watch,
   FunctionalComponent,
@@ -64,10 +65,23 @@ export class ModusTreeViewItem {
   /** (optional) Actions that can be performed on each item. A maximum of 3 icons will be shown, including overflow menu and expand icons. */
   @Prop({ mutable: true }) actions: ModusActionBarOptions[];
 
+  @Listen('actionBarClick')
+  handleActionBarClick(event: CustomEvent) {
+    const actionId = event.detail.actionId;
+    this.actionClick.emit({ actionId });
+    event.stopPropagation();
+    event.preventDefault();
+  }
+
   /**
    * @internal
    */
   @Event() itemAdded: EventEmitter<HTMLElement>;
+
+  /**
+   * Fired when an action button within the tree item is clicked. Includes the `actionId`.
+   */
+  @Event() actionClick: EventEmitter;
 
   @State() childrenIds: string[];
   @State() forceUpdate = {};
