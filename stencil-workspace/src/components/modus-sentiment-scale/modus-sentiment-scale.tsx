@@ -22,7 +22,7 @@ export class ModusSentimentScale {
   @Prop() type: ModusSentimentScaleType = 'smileys';
 
   /** (optional) Whether the sentiment scale is disabled. */
-  @Prop() disabled?: boolean = false;
+  @Prop() disabled?: boolean=false;
 
   /** An event that fires the selected sentiment. */
   @Event() sentimentSelection: EventEmitter;
@@ -59,7 +59,11 @@ export class ModusSentimentScale {
 
     let containerClass = `${this.type + '-container'} ${this.disabled ? ' disabled' : ''}`;
     return (
-      <div class="sentiment-scale-container" role="group">
+      <div
+        class="sentiment-scale-container"
+        aria-disabled={this.disabled ? 'true' : ''}
+        aria-label={this.ariaLabel}
+        role="group">
         {iconsMap &&
           Array.from(iconsMap).map(([key, value]) => {
             const isIconSelected = key === this.selected;
