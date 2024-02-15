@@ -1678,6 +1678,10 @@ export interface ModusToastCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusToastElement;
 }
+export interface ModusTreeViewCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusTreeViewElement;
+}
 export interface ModusTreeViewItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusTreeViewItemElement;
@@ -3728,6 +3732,10 @@ declare namespace LocalJSX {
          */
         "multiSelection"?: boolean;
         /**
+          * Fired when an action is clicked within any tree item. Includes both the `actionId` and `nodeId` of the action and item, respectively.
+         */
+        "onItemActionClick"?: (event: ModusTreeViewCustomEvent<any>) => void;
+        /**
           * (optional) Set selected tree items
          */
         "selectedItems"?: string[];
@@ -3765,6 +3773,10 @@ declare namespace LocalJSX {
           * (required) Unique tree item identifier
          */
         "nodeId": string;
+        /**
+          * Fired when an action button within the tree item is clicked. Includes the `actionId`.
+         */
+        "onActionClick"?: (event: ModusTreeViewItemCustomEvent<any>) => void;
         /**
           * An event that fires on tree item checkbox click
          */

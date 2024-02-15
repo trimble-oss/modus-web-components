@@ -21,11 +21,12 @@
 
 ## Events
 
-| Event              | Description                                      | Type                   |
-| ------------------ | ------------------------------------------------ | ---------------------- |
-| `checkboxClick`    | An event that fires on tree item checkbox click  | `CustomEvent<boolean>` |
-| `itemClick`        | An event that fires on tree item click           | `CustomEvent<boolean>` |
-| `itemExpandToggle` | An event that fires on tree item expand/collapse | `CustomEvent<boolean>` |
+| Event              | Description                                                                           | Type                   |
+| ------------------ | ------------------------------------------------------------------------------------- | ---------------------- |
+| `actionClick`      | Fired when an action button within the tree item is clicked. Includes the `actionId`. | `CustomEvent<any>`     |
+| `checkboxClick`    | An event that fires on tree item checkbox click                                       | `CustomEvent<boolean>` |
+| `itemClick`        | An event that fires on tree item click                                                | `CustomEvent<boolean>` |
+| `itemExpandToggle` | An event that fires on tree item expand/collapse                                      | `CustomEvent<boolean>` |
 
 
 ## Methods

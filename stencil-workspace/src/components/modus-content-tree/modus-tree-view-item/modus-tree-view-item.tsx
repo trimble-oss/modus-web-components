@@ -6,6 +6,7 @@ import {
   Element,
   Event,
   EventEmitter,
+  Listen,
   Method,
   Watch,
   FunctionalComponent,
@@ -64,10 +65,23 @@ export class ModusTreeViewItem {
   /** (optional) Actions that can be performed on each item. A maximum of 3 icons will be shown, including overflow menu and expand icons. */
   @Prop({ mutable: true }) actions: ModusActionBarOptions[];
 
+  @Listen('actionBarClick')
+  handleActionBarClick(event: CustomEvent) {
+    const actionId = event.detail.actionId;
+    this.actionClick.emit({ actionId });
+    event.stopPropagation();
+    event.preventDefault();
+  }
+
   /**
    * @internal
    */
   @Event() itemAdded: EventEmitter<HTMLElement>;
+
+  /**
+   * Fired when an action button within the tree item is clicked. Includes the `actionId`.
+   */
+  @Event() actionClick: EventEmitter;
 
   @State() childrenIds: string[];
   @State() forceUpdate = {};
@@ -204,6 +218,10 @@ export class ModusTreeViewItem {
   }
 
   handleItemClick(e?: KeyboardEvent | MouseEvent): void {
+    if (e.defaultPrevented) {
+      return;
+    }
+
     if (this.shouldHandleEvent(e)) {
       const { onItemSelection, hasItemSelected } = this.options;
 
@@ -337,7 +355,7 @@ export class ModusTreeViewItem {
       };
   }
 
-  shouldHandleEvent(e?: Event) {
+  shouldHandleEvent(e?: Event): boolean {
     if (e) e.stopPropagation();
     // Do not handle the event when the item is disabled
     return this.options && !this.options.hasItemDisabled(this.nodeId);

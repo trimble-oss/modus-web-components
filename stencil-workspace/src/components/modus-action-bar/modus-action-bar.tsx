@@ -81,16 +81,31 @@ export class ModusActionBar {
     });
   }
 
-  handleKeyDown(event, action) {
+  handleKeyDown(event: KeyboardEvent, action: ModusActionBarOptions) {
     if (event && event.key !== 'Enter' && event.key !== ' ') {
       return;
     }
 
-    event.preventDefault();
-    this.handleButtonClick(action);
+    this.handleButtonClick(event, action);
   }
 
-  handleButtonClick(action) {
+  handleOverflowClick(event: KeyboardEvent | MouseEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.toggleOverflowMenu();
+  }
+
+  handleOverflowKeyDown(event: KeyboardEvent) {
+    if (event && event.key !== 'Enter' && event.key !== ' ') {
+      return;
+    }
+
+    this.handleOverflowClick(event);
+  }
+
+  handleButtonClick(event: KeyboardEvent | MouseEvent, action: ModusActionBarOptions) {
+    event.preventDefault();
+    event.stopPropagation();
     this.actionBarClick.emit({ actionId: action.id });
     if (this.showOverflowMenu) {
       this.closeOverflowMenu();
@@ -124,7 +139,7 @@ export class ModusActionBar {
               buttonStyle="borderless"
               color="secondary"
               size={this.size}
-              onClick={() => this.handleButtonClick(action)}
+              onClick={(event) => this.handleButtonClick(event, action)}
               onKeyDown={(event) => this.handleKeyDown(event, action)}>
               {action.label}
             </modus-button>
@@ -138,7 +153,8 @@ export class ModusActionBar {
             buttonStyle="borderless"
             color="secondary"
             size={this.size}
-            onClick={() => this.toggleOverflowMenu()}></modus-button>
+            onClick={(event) => this.handleOverflowClick(event)}
+            onKeyDown={(event) => this.handleOverflowKeyDown(event)}></modus-button>
         )}
 
         {this.showOverflowMenu && (
@@ -150,7 +166,7 @@ export class ModusActionBar {
               {overflowActions.map((action) => (
                 <modus-list-item
                   size={this.size === 'small' ? 'condensed' : 'standard'}
-                  onClick={() => this.handleButtonClick(action)}
+                  onClick={(event) => this.handleButtonClick(event, action)}
                   onKeyDown={(event) => this.handleKeyDown(event, action)}
                   leftIcon={action.icon}>
                   {action.label}
