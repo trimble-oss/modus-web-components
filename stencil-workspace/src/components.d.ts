@@ -966,7 +966,7 @@ export namespace Components {
     }
     interface ModusSentimentScale {
         /**
-          * (optional) The input's aria-label.
+          * (optional) The sentiment scale's aria-label.
          */
         "ariaLabel": string | null;
         /**
@@ -3139,7 +3139,7 @@ declare namespace LocalJSX {
     }
     interface ModusSentimentScale {
         /**
-          * (optional) The input's aria-label.
+          * (optional) The sentiment scale's aria-label.
          */
         "ariaLabel"?: string | null;
         /**
