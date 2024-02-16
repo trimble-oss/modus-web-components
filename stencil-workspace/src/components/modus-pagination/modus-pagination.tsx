@@ -9,7 +9,7 @@ import {
   Watch,
 } from '@stencil/core';
 import { PaginationDirection } from './enums/pagination-direction.enum';
-import { ModusIconMap   } from '../../icons/ModusIconMap';
+import { ModusIconMap } from '../../icons/ModusIconMap';
 
 @Component({
   tag: 'modus-pagination',
