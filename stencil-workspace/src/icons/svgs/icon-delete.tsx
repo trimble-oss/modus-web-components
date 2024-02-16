@@ -1,15 +1,10 @@
 // eslint-disable-next-line
 import { FunctionalComponent, h } from '@stencil/core';
-
-interface IconProps {
-  color?: string;
-  onClick?: () => void;
-  size?: string;
-}
+import { IconProps } from '../ModusIconMap';
 
 export const IconDelete: FunctionalComponent<IconProps> = (props: IconProps) => (
   <svg
-    class="icon-delete"
+    class={`icon-delete ${props.pressed ? 'pressed' : ''}`}
     xmlns="http://www.w3.org/2000/svg"
     fill={props.color ?? 'currentColor'}
     height={props.size ?? 16}

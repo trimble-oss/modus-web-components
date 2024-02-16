@@ -5,6 +5,7 @@
 *.js
 
 dist/*
+stencil-workspace/src/icons/generated-icons/*
 www/*
 
 *.stories.tsx

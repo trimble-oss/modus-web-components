@@ -22,7 +22,7 @@ nav {
   .icon-menu,
   .icon-close,
   .icon-button svg {
-    border-radius: $rem-2px;
+    border-radius: $rem-4px;
     padding: $rem-12px;
 
     path {
@@ -156,13 +156,14 @@ nav {
           width: 32px;
         }
 
-        > :first-child:hover,
-        > :first-child:focus {
-          border: $rem-4px solid $modus-navbar-icon-color;
+        > :first-child:hover {
+          border: $rem-4px solid $modus-navbar-icon-hover-bg;
         }
 
-        > :first-child:active {
-          outline: $rem-4px solid $modus-navbar-profile-icon-active-border-color;
+        > :first-child:active,
+        > :first-child:focus {
+          border: $rem-4px solid $modus-navbar-profile-icon-active-border-color;
+          outline: none;
         }
 
         &:hover {
@@ -220,13 +221,21 @@ nav {
           color: $modus-navbar-blue-profile-icon-initials-color;
         }
 
-        > :first-child:hover,
-        > :first-child:focus {
-          border-color: $modus-navbar-blue-icon-color;
+        > :first-child:hover {
+          border-color: $modus-navbar-blue-icon-hover-bg;
+          border-radius: 50%;
+          outline: $rem-2px solid $modus-navbar-blue-profile-icon-active-border-color;
         }
 
-        > :first-child:active {
-          outline: $rem-4px solid $modus-navbar-blue-profile-icon-active-border-color;
+        > :first-child:active,
+        > :first-child:focus {
+          border-color: $modus-navbar-blue-profile-icon-active-border-color;
+          border-radius: 50%;
+          outline: none;
+        }
+
+        &:hover {
+          cursor: pointer;
         }
       }
     }

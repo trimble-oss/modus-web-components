@@ -1,6 +1,7 @@
 @import './modus-text-input.vars';
 
 .modus-text-input {
+  border-radius: 4px;
   display: inline-flex;
   flex-direction: column;
   font-family: $primary-font;
@@ -33,6 +34,7 @@
     background-color: $modus-input-bg;
     border: $rem-1px solid $modus-input-border-color;
     border-bottom-color: $modus-input-bottom-line-color;
+    border-radius: 4px;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;

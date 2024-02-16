@@ -4,6 +4,7 @@ import * as d from './components';
 export const DIRECTIVES = [
   d.ModusAccordion,
   d.ModusAccordionItem,
+  d.ModusActionBar,
   d.ModusAlert,
   d.ModusAutocomplete,
   d.ModusBadge,
