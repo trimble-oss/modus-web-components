@@ -487,6 +487,7 @@ const FilterTemplate = ({
       id="filter"
       size="large"
       placeholder="Search"
+      type="search"
       disabled="true"
       include-search-icon></modus-text-input>
     <modus-tree-view checkbox-selection=${checkboxSelection ? 'true' : 'false'}
