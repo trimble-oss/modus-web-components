@@ -130,7 +130,6 @@ This displays the highlighted row where the cursor is currently located.
 
 - Hover is disable by default, set `hover` to `true` to enable hover.
 
-
 ### Borderless
 
 Table has two views one with border and another is borderless.
@@ -138,7 +137,6 @@ Table has two views one with border and another is borderless.
 - Table with a border is shown by default. There are two options under `displayOptions`: `borderless` and `cellborderless`.
 - To eliminate the outer table border, set `borderless` to `true`.
 - Set `cellborderless` to `true` remove the innter table border i.e. for the border for cells.
-
 
 ### Sorting
 
@@ -157,7 +155,6 @@ Manual Sorting allows users to handle sorting in server-side mode.
 - Manual Sorting can be enabled using the `manualSortingOptions` prop.
 - The `currentSortingState` represents how the data is sorted (column and direction).
 
-
 ### Value Formatter
 
 User can take the data of a cell and apply any string-based formatting logic.
@@ -165,36 +162,35 @@ User can take the data of a cell and apply any string-based formatting logic.
 - Need to pass a custom formatter function that returns a string, to the `cell` property on the `columns` array, example, `cell: (props) => formatCurrency(props)`.
 
 ```javascript
-  // e.g. for currency formatting `cell: (props) => formatCurrency(props)`
-  function formatCurrency(props) {
-    const value = props.cell.getValue();
-    return '$' + formatNumber(value);
-  }
+// e.g. for currency formatting `cell: (props) => formatCurrency(props)`
+function formatCurrency(props) {
+  const value = props.cell.getValue();
+  return '$' + formatNumber(value);
+}
 
-  // e.g. for decimal number formatting `cell: (props) =>formatNumber(props)`
-  function formatNumber(props) {
-    const value = props.cell.getValue();
-    return Number(value)
+// e.g. for decimal number formatting `cell: (props) =>formatNumber(props)`
+function formatNumber(props) {
+  const value = props.cell.getValue();
+  return Number(value)
     .toFixed(2)
     .replace(/\d(?=(\d{3})+\.)/g, '$&,');
-  }
+}
 
-  // e.g. for date formatting `cell: (props) => formatDate(props)`
-  function formatDate(props) {
-    const value = props.cell.getValue();
-    const date = new Date(value);
-    return (
-      (date.getMonth() > 8 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1)) +
-      '/' +
-      (date.getDate() > 9 ? date.getDate() : '0' + date.getDate()) +
-      '/' +
-      date.getFullYear()
-    );
-  }
+// e.g. for date formatting `cell: (props) => formatDate(props)`
+function formatDate(props) {
+  const value = props.cell.getValue();
+  const date = new Date(value);
+  return (
+    (date.getMonth() > 8 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1)) +
+    '/' +
+    (date.getDate() > 9 ? date.getDate() : '0' + date.getDate()) +
+    '/' +
+    date.getFullYear()
+  );
+}
 
-  // NOTE: One can use their own custom functions to format data as per their requirements.
+// NOTE: One can use their own custom functions to format data as per their requirements.
 ```
-
 
 ### Hyperlink
 
@@ -301,7 +297,6 @@ The column sizing feature allows users to dynamically change the width of all co
 - By default, the table will get a fixed size by calculating the sum of the sizes of all columns and resizing a column will not impact others.
 - By setting `fullWidth` to true, a column can be resized with table responsiveness and other columns will be adjusted to fit within the confines of the table.
 - Optionally you can specify the width of each column using `size`, `minSize` and `maxSize` to limit the resizing of a column to a specific value.
-
 
 ```html
 <div style="width: 950px">
@@ -480,9 +475,9 @@ User can expand rows to display as child/sub row data.
 
 To select rows, users can use the checkbox provided on each row. Normally, the Modus Table permits selecting only one row at a time, but this can be modified to allow multiple selections by using `rowSelectionOptions` option.
 
-  - To enable multiple row selection, set `multiple` to `true`.
-  - Sub-rows will also be selected if the parent is selected by setting `subRowSelection` to `true`.
-  - To load the table with pre selected rows, set preSelectedRows to a list of row ids. **Row ids default to the row index, but can also be set by passing an id value in data.**
+- To enable multiple row selection, set `multiple` to `true`.
+- Sub-rows will also be selected if the parent is selected by setting `subRowSelection` to `true`.
+- To load the table with pre selected rows, set preSelectedRows to a list of row ids. **Row ids default to the row index, but can also be set by passing an id value in data.**
 
 ### Inline Editing
 
@@ -513,9 +508,8 @@ Refer to the [Accessibility](#accessibility) section for how to use keyboard for
 
 Users can add actions to rows. These actions will be shown in the first column as icons. A maximum of 4 icons will be shown, including the expand icon for expandable rows, if there more actions are provided, an overflow menu will be shown with a list of the remaining actions displayed as their label.
 
-  - Clicking a row action button will emit a rowActionClick with the action id and the row.
-  - To disable actions for specific rows, use the isDisabled(row) method.
-
+- Clicking a row action button will emit a rowActionClick with the action id and the row.
+- To disable actions for specific rows, use the isDisabled(row) method.
 
 ### Types
 
@@ -638,25 +632,25 @@ interface ModusTableManualSortingOptions {
 
 Users can use keyboard navigation to perform different actions.
 
-| Name              | Description                                                                                                                                                                                                                                                                                                             |
-| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Sorting           | The `tab` key is used for navigating between the sort icons, while the `enter` key is used to interact with the icon.                                                                                                                                                                                                   |
-| Pagination        | Users can change page size and page number using keyboard navigation. The Tab key brings focus to an element and the Enter key is used to perform an action like selecting a page size and page number.                                                                                                                 |
-| Column Resize     | Users can select the column for resizing by using the `Tab` key. and by pressing the `Spacebar` or `Enter` key to enable the column resize for the selected column. To resize, use the `left`/`right` keys. When the `Enter` or `Spacebar` key is pressed, its position is saved.                                       |
-| Column Reorder    | Users can navigate to the column to be reorder by using the `Tab` key. By pressing `Enter` key selects the column header, to move to the desired location user can use `left`/`right` keys and the column can be dropped by `Enter` key.                                                                               |
-| Column Visibility | The meatball icon buttom will get focus by using the `Tab` key. By pressing `Enter or Spacebar`, a dropdown will be opened; press the `Escape` key to close the dropdown. Using `Tab or Shift+Tab` / `ArrowUp or ArrowDown`, column checkboxes/items can get focus to change state by pressing the `Enter or Spacebar`. |
-| Cell Navigation | Table cells can be navigated using keys like `Tab`, `Shift+Tab`, `ArrowUp`, and `ArrowDown`. Additionally, the `Tab` key can be used to focus on elements inside a cell. |
-| Inline Editing | When a cell is in focus, pressing the `Enter` key will activate the cell editor. The cell's value will be saved either when the focus shifts to another cell or when the `Enter` key is pressed again, which will also move the focus to the cell below in the same row. `Escape` key reverts the cell value to its original state and closes the editor. Note: Dropdown cell editor saves the value only when the cell loses focus.|
+| Name              | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Sorting           | The <kbd>Tab</kbd> key is used for navigating between the sort icons, while the <kbd>Enter</kbd> key is used to interact with the icon.                                                                                                                                                                                                                                                                                                                         |
+| Pagination        | Users can change page size and page number using keyboard navigation. The <kbd>Tab</kbd> key brings focus to an element and the Enter key is used to perform an action like selecting a page size and page number.                                                                                                                                                                                                                                              |
+| Column Resize     | Users can select the column for resizing by using the <kbd>Tab</kbd> key, and by pressing the <kbd>Spacebar</kbd> or <kbd>Enter</kbd> key to enable the column resize for the selected column. To resize, use the `left`/`right` MediaKeySession. When the <kbd>Enter</kbd> key is pressed, its position is saved.                                                                                                                                              |
+| Column Reorder    | Users can navigate to the column to be reorder by using the <kbd>Tab</kbd> key. By pressing <kbd>Enter</kbd> key selects the column header, to move to the desired location user can use `left`/`right` keys and the column can be dropped by <kbd>Enter</kbd> key.                                                                                                                                                                                             |
+| Column Visibility | The meatball icon buttom will get focus by using the <kbd>Tab</kbd> key. By pressing <kbd>Enter</kbd> or <kbd>Space</kbd>, a dropdown will be opened; press the <kbd>Escape</kbd> key to close the dropdown. Using `Tab or Shift+Tab` / `ArrowUp or ArrowDown`, column checkboxes/items can get focus to change state by pressing the <kbd>Enter</kbd> or <kbd>Space</kbd>.                                                                                                      |
+| Cell Navigation   | Table cells can be navigated using keys like <kbd>Tab</kbd>, `Shift+Tab`, `ArrowUp`, and `ArrowDown`. Additionally, the <kbd>Tab</kbd> key can be used to focus on elements inside a cell.                                                                                                                                                                                                                                                                      |
+| Inline Editing    | When a cell is in focus, pressing the <kbd>Enter</kbd> key will activate the cell editor. The cell's value will be saved either when the focus shifts to another cell or when the <kbd>Enter</kbd> key is pressed again, which will also move the focus to the cell below in the same row. <kbd>Escape</kbd> key reverts the cell value to its original state and closes the editor. Note: Dropdown cell editor saves the value only when the cell loses focus. |
 
 ## Properties
 
 | Property                  | Attribute                 | Description                                                                                                                                                                                   | Type                                   | Default                                                   |
-| ------------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  | -------------------------------------- | --------------------------------------------------------- |
+| ------------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- | --------------------------------------------------------- |
 | `columnReorder`           | `column-reorder`          | (Optional) To allow column reordering.                                                                                                                                                        | `boolean`                              | `false`                                                   |
 | `columnResize`            | `column-resize`           |                                                                                                                                                                                               | `boolean`                              | `false`                                                   |
 | `columns` _(required)_    | --                        | (Required) To display headers in the table.                                                                                                                                                   | `ModusTableColumn<unknown, unknown>[]` | `undefined`                                               |
 | `data` _(required)_       | --                        | (Required) To display data in the table.                                                                                                                                                      | `unknown[]`                            | `undefined`                                               |
-| `defaultSort`             | `default-sort`            | (Optional) To control the default column to be used to  sort the table.                                                                                                                       | `ModusTableColumnSort`                 | `undefined`                                               |
+| `defaultSort`             | `default-sort`            | (Optional) To control the default column to be used to sort the table.                                                                                                                        | `ModusTableColumnSort`                 | `undefined`                                               |
 | `density`                 | `density`                 | (Optional) To control the density in the table. This is the row height.                                                                                                                       | `"relaxed", "comfortable", "compact"`  | `"relaxed"`                                               |
 | `displayOptions`          | --                        | (Optional) To control display options of table.                                                                                                                                               | `ModusTableDisplayOptions`             | `{     borderless: false,     cellBorderless: false,   }` |
 | `fullWidth`               | `full-width`              |                                                                                                                                                                                               | `boolean`                              | `false`                                                   |
@@ -693,8 +687,6 @@ Users can use keyboard navigation to perform different actions.
 | `rowSelectionChange`     | Emits rows selected                               | `CustomEvent<unknown>`                              |
 | `sortChange`             | Emits column sort order                           | `CustomEvent<ColumnSort[]>`                         |
 
-
-
 ### Slot
 
 Users can use this to provide custom elements.
@@ -717,7 +709,6 @@ Users can use this to provide custom elements.
 This wraps overflowing text of table cell.
 
 - Text wrapping is disable by default, set `wrapText` to `true` to enable wrapping.
-
 
 ## Upcoming features 🚧
 
