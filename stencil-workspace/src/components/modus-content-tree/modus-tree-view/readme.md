@@ -19,6 +19,13 @@
 | `size`                   | `size`                     | (optional) The default size of all tree items                                                                                                                                                 | `"condensed" \| "large" \| "standard"` | `'standard'` |
 
 
+## Events
+
+| Event             | Description                                                                                                                           | Type               |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| `itemActionClick` | Fired when an action is clicked within any tree item. Includes both the `actionId` and `nodeId` of the action and item, respectively. | `CustomEvent<any>` |
+
+
 ----------------------------------------------
 
 

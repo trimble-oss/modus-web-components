@@ -8,8 +8,10 @@
   cursor: pointer;
   display: flex;
   fill: $modus-tree-view-item-color;
+  flex-direction: row;
   font-family: $primary-font;
   font-size: $rem-16px;
+  justify-content: space-between;
   min-height: $list-group-item-height;
   width: 100%;
 
