@@ -631,6 +631,38 @@ It is located on the left side of the screen and cannot be combined with Side Na
 </script>
 ```
 
+### With Item Action Bar
+
+<Story id="components-content-tree--with-action-bar" />
+
+```html
+<div>
+  <modus-tree-view
+    style="width:400px;"
+    checkbox-selection="false"
+    checked-items="false"
+    expanded-items="false"
+    multi-checkbox-selection="false"
+    multi-selection="false"
+    selected-items="false"
+    size=""
+    class="hydrated">
+    <modus-tree-view-item node-id="1" label="Inbox" class="hydrated"></modus-tree-view-item>
+  </modus-tree-view>
+</div>
+<script>
+  function loadActions() {
+    document.querySelector('[node-id="1"]').actions = [
+      { id: 'export', icon: 'export', label: 'Export' },
+      { id: 'history', icon: 'history', label: 'History' },
+      { id: 'edit', icon: 'pencil', label: 'Edit' },
+    ];
+  }
+  loadActions();
+</script>
+```
+
+
 ### Accessibility
 
 Every item and the elements such as drag icon, expand & collapse icon and the checkbox are accessible through keyboard. `Tab` key moves focus to the next focusable element and `Shift + Tab` moves focus to the previous focusable element. If `disableTabbing` is set `true`, tabbing inside the tree isn't allowed. Please refer to the next section for more details on keyboard interaction.
@@ -666,25 +698,33 @@ Every item and the elements such as drag icon, expand & collapse icon and the ch
 
 ##### Modus Tree View Item
 
-| Property              | Attribute         | Description                                                                              | Type               | Default     |
-| --------------------- | ----------------- | ---------------------------------------------------------------------------------------- | ------------------ | ----------- |
-| `disabled`            | `disabled`        | (optional) Disables the tree item                                                        | `boolean`          | `undefined` |
-| `draggableItem`       | `draggable-item`  | (optional) Allows the item to be dragged across the tree                                 | `boolean`          | `undefined` |
-| `droppableItem`       | `droppable-item`  | (optional) Allows the item to be a drop zone so other tree items can be dropped above it | `boolean`          | `undefined` |
-| `editable`            | `editable`        | (optional) Changes the label field into a text box                                       | `boolean`          | `undefined` |
-| `label` _(required)_  | `label`           | (required) Label for the tree item                                                       | `string`           | `undefined` |
-| `nodeId` _(required)_ | `node-id`         | (required) Unique tree item identifier                                                   | `string`           | `undefined` |
-| `tabIndexValue`       | `tab-index-value` | (optional) Tab Index for the tree item                                                   | `number \| string` | `0`         |
+| Property              | Attribute         | Description                                                                                                                          | Type                    | Default     |
+| --------------------- | ----------------- | -----------------------------------------------------------------------------------------------------------------------------------  | ----------------------- | ----------- |
+| `actions`             | `actions`         | (optional) Actions that can be performed on each item. A maximum of 3 icons will be shown, including overflow menu and expand icons. | `ModusActionBarOptions` | `undefined` |
+| `disabled`            | `disabled`        | (optional) Disables the tree item                                                                                                    | `boolean`               | `undefined` |
+| `draggableItem`       | `draggable-item`  | (optional) Allows the item to be dragged across the tree                                                                             | `boolean`               | `undefined` |
+| `droppableItem`       | `droppable-item`  | (optional) Allows the item to be a drop zone so other tree items can be dropped above it                                             | `boolean`               | `undefined` |
+| `editable`            | `editable`        | (optional) Changes the label field into a text box                                                                                   | `boolean`               | `undefined` |
+| `label` _(required)_  | `label`           | (required) Label for the tree item                                                                                                   | `string`                | `undefined` |
+| `nodeId` _(required)_ | `node-id`         | (required) Unique tree item identifier                                                                                               | `string`                | `undefined` |
+| `tabIndexValue`       | `tab-index-value` | (optional) Tab Index for the tree item                                                                                               | `number \| string`      | `0`         |
 
 ### DOM Events
 
+#### Modus Tree View
+
+| Name            | Description                                                                                                                           | Emits                                  |
+| --------------- |-------------------------------------------------------------------------------------------------------------------------------------- |--------------------------------------- |
+| itemActionClick | Fired when an action is clicked within any tree item. Includes both the `actionId` and `nodeId` of the action and item, respectively. | `{ actionId: string, nodeId: string }` |
+
 ##### Modus Tree View Item
 
-| Name             | Description                                      | Emits   |
-| ---------------- | ------------------------------------------------ | ------- |
-| checkboxClick    | An event that fires on tree item checkbox click  | boolean |
-| itemClick        | An event that fires on tree item click           | boolean |
-| itemExpandToggle | An event that fires on tree item expand/collapse | boolean |
+| Name             | Description                                                                           | Emits                  |
+| ---------------- | ------------------------------------------------------------------------------------- | ---------------------- |
+| actionClick      | Fired when an action button within the tree item is clicked. Includes the `actionId`. | `{ actionId: string }` |
+| checkboxClick    | An event that fires on tree item checkbox click                                       | boolean                |
+| itemClick        | An event that fires on tree item click                                                | boolean                |
+| itemExpandToggle | An event that fires on tree item expand/collapse                                      | boolean                |
 
 ### Methods
 
@@ -694,3 +734,14 @@ Every item and the elements such as drag icon, expand & collapse icon and the ch
 | --------------- | ------------------------------------- | --------- | --------------- |
 | `focusCheckbox` | Focus the checkbox inside a tree item |           | `Promise<void>` |
 | `focusItem`     | Focus the tree item                   |           | `Promise<void>` |
+
+
+### Types
+
+```ts
+  type ModusActionBarOptions = {
+    id: string;
+    icon: string;
+    label: string
+  };
+```
