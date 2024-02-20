@@ -149,7 +149,20 @@ export class ModusTable {
   }
 
   /** (Optional) To display checkbox. */
-  @Prop() rowSelection = false;
+  @Prop({ mutable: true }) rowSelection = false;
+  @Watch('rowSelection') onRowSlectionChange(newVal: boolean) {
+    if(newVal){
+      this.rowSelectionChange.emit(
+        this.tableCore
+          .getTableInstance()
+          .getSelectedRowModel()
+          .flatRows.map((row) => {
+            row.original['id'] = row.id;
+            return row.original;
+          })
+      );
+    }
+  }
 
   /** (Optional) To enable manual pagination mode. When enabled, the table will not automatically paginate rows, instead will expect the current page index and other details to be passed. */
   @Prop() manualPaginationOptions: ModusTableManualPaginationOptions;
