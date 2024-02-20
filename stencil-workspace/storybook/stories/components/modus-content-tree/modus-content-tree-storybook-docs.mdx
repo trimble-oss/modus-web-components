@@ -662,10 +662,9 @@ It is located on the left side of the screen and cannot be combined with Side Na
 </script>
 ```
 
-
 ### Accessibility
 
-Every item and the elements such as drag icon, expand & collapse icon and the checkbox are accessible through keyboard. `Tab` key moves focus to the next focusable element and `Shift + Tab` moves focus to the previous focusable element. If `disableTabbing` is set `true`, tabbing inside the tree isn't allowed. Please refer to the next section for more details on keyboard interaction.
+Every item and the elements such as drag icon, expand & collapse icon and the checkbox are accessible through keyboard. <kbd>Tab</kbd> key moves focus to the next focusable element and <kbd>Shift</kbd> + <kbd>Tab</kbd> moves focus to the previous focusable element. If `disableTabbing` is set `true`, tabbing inside the tree isn't allowed. Please refer to the next section for more details on keyboard interaction.
 
 ### Keyboard Navigation
 
@@ -676,7 +675,7 @@ Every item and the elements such as drag icon, expand & collapse icon and the ch
 | Arrow Up              | Moves to the previous focusable item and focus moves to a child if the current or previous parent item is expanded                                                                                                           |
 | Arrow Down            | Moves to the next focusable item and focus moves to a child if the current or next parent item is expanded                                                                                                                   |
 | Ctrl + click          | If `multi-selection` is true, it performs multiple selection on the clicked items                                                                                                                                            |
-| Enter                 | Using `Tab` key if the focus is set on an item, pressing `Enter` key will select it and if the focus is on an element like checkbox, collapse/expand icon, pressing `Enter` key will perform operations only on that element |
+| Enter                 | Using <kbd>Tab</kbd> key if the focus is set on an item, pressing `Enter` key will select it and if the focus is on an element like checkbox, collapse/expand icon, pressing `Enter` key will perform operations only on that element |
 | Shift + Arrow Up/Down | If `multi-selection` is true, it performs multiple selection starting from the item that is already selected                                                                                                                 |
 | Shift + Arrow Right   | Can be used to focus the checkbox inside a tree item if `disableTabbing` is true                                                                                                                                             |
 | Space                 | Expands/Collapses the item when it is in focus                                                                                                                                                                               |
@@ -689,7 +688,7 @@ Every item and the elements such as drag icon, expand & collapse icon and the ch
 | ------------------------ | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- | ------------ |
 | `checkboxSelection`      | `checkbox-selection`       | (optional) Enables checkbox selection on each tree item                                                                                                                                       | `boolean`                              | `undefined`  |
 | `checkedItems`           | --                         | (optional) Set checked tree items                                                                                                                                                             | `string[]`                             | `[]`         |
-| `disableTabbing`         | `disable-tabbing`          | (optional) Disable usage of `tab` key to focus elements inside a tree view. Use `Arrow Up/Down` for focussing a tree item and `Shift + Arrow Right` for focussing a checkbox inside the item. | `boolean`                              | `undefined`  |
+| `disableTabbing`         | `disable-tabbing`          | (optional) Disable usage of <kbd>Tab</kbd> key to focus elements inside a tree view. Use `Arrow Up/Down` for focussing a tree item and `Shift + Arrow Right` for focussing a checkbox inside the item. | `boolean`                              | `undefined`  |
 | `expandedItems`          | --                         | (optional) Set expanded tree items                                                                                                                                                            | `string[]`                             | `[]`         |
 | `multiCheckboxSelection` | `multi-checkbox-selection` | (optional) Enables multiple checkbox selection                                                                                                                                                | `boolean`                              | `undefined`  |
 | `multiSelection`         | `multi-selection`          | (optional) Enables multiple tree items selection                                                                                                                                              | `boolean`                              | `undefined`  |
