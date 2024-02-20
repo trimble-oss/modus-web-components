@@ -151,7 +151,7 @@ export class ModusTable {
   /** (Optional) To display checkbox. */
   @Prop({ mutable: true }) rowSelection = false;
   @Watch('rowSelection') onRowSlectionChange(newVal: boolean) {
-    if(newVal){
+    if (newVal) {
       this.rowSelectionChange.emit(
         this.tableCore
           .getTableInstance()
