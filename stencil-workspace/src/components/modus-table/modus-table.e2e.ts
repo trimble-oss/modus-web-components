@@ -448,12 +448,11 @@ describe('modus-table', () => {
     const paginationContainer = await page.find('modus-table >>> .pagination-and-count > .total-count');
     await page.waitForChanges();
 
+    expect(paginationContainer).not.toBeNull();
     expect(await pagination.getAttribute('active-page')).toBeTruthy();
     expect(await pagination.getAttribute('max-page')).toBeTruthy();
     expect(await pagination.getAttribute('active-page')).toBe(`${MockManualPagination.currentPageIndex}`);
     expect(await pagination.getAttribute('max-page')).toBe(`${MockManualPagination.pageCount}`);
-
-    expect(paginationContainer).not.toBeNull();
     expect(paginationContainer.textContent).toContain('Showing result11-20of100');
   });
 

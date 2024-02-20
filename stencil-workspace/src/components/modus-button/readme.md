@@ -44,6 +44,7 @@ Type: `Promise<void>`
 
 ### Used by
 
+ - [modus-action-bar](../modus-action-bar)
  - [modus-modal](../modus-modal)
  - [modus-table-columns-visibility](../modus-table/parts/panel/modus-table-columns-visibility)
  - [modus-table-row-actions](../modus-table/parts/row/actions/modus-table-row-actions)
@@ -51,6 +52,7 @@ Type: `Promise<void>`
 ### Graph
 ```mermaid
 graph TD;
+  modus-action-bar --> modus-button
   modus-modal --> modus-button
   modus-table-columns-visibility --> modus-button
   modus-table-row-actions --> modus-button
