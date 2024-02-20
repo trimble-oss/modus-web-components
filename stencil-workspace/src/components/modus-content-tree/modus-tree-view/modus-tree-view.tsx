@@ -1,6 +1,8 @@
 import {
   Component,
   Element,
+  Event,
+  EventEmitter,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
   Host,
   Listen,
@@ -175,6 +177,11 @@ export class ModusTreeView {
       element.initTreeViewItem(options);
     });
   }
+
+  /**
+   * Fired when an action is clicked within any tree item. Includes both the `actionId` and `nodeId` of the action and item, respectively.
+   */
+  @Event() itemActionClick: EventEmitter;
 
   handleTreeSlotChange() {
     const childrenAtRoot = Array.from(this.element.children as unknown as HTMLModusTreeViewItemElement[])
@@ -444,6 +451,13 @@ export class ModusTreeView {
 
     event.preventDefault();
     event.stopPropagation();
+  }
+
+  @Listen('actionClick')
+  handleItemClick(event: CustomEvent) {
+    const actionId = event.detail.actionId;
+    const nodeId = (event.target as HTMLElement).getAttribute('node-id');
+    this.itemActionClick.emit({ actionId, nodeId });
   }
 
   handleItemExpand(itemId: string): void {
