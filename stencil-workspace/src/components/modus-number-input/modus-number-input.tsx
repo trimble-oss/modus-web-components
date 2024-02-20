@@ -115,12 +115,13 @@ export class ModusNumberInput {
       <div class={buildContainerClassNames()}>
         {this.label || this.required ? (
           <div class="label-container">
-            {this.label ? <label>{this.label}</label> : null}
+            {this.label ? <label htmlFor="numberInput">{this.label}</label> : null}
             {this.required ? <span class="required">*</span> : null}
           </div>
         ) : null}
         <div class={buildInputContainerClassNames()} part="input-container">
           <input
+            id="numberInput"
             aria-label={this.ariaLabel}
             aria-invalid={!!this.errorText}
             aria-required={this.required?.toString()}

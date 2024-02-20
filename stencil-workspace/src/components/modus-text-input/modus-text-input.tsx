@@ -151,7 +151,7 @@ export class ModusTextInput {
       <div class={buildContainerClassNames()}>
         {this.label || this.required ? (
           <div class={'label-container'}>
-            {this.label ? <label>{this.label}</label> : null}
+            {this.label ? <label htmlFor="textInput">{this.label}</label> : null}
             {this.required ? <span class="required">*</span> : null}
           </div>
         ) : null}
@@ -163,6 +163,7 @@ export class ModusTextInput {
           part="input-container">
           {this.includeSearchIcon ? <IconSearch size="16" /> : null}
           <input
+            id="textInput"
             aria-invalid={!!this.errorText}
             aria-label={this.ariaLabel}
             aria-required={this.required?.toString()}
