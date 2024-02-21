@@ -12,7 +12,7 @@ describe('modus-number-input', () => {
         <mock:shadow-root>
           <div class="modus-number-input">
             <div class="input-container medium" part="input-container">
-              <input class="text-align-left" id="numberInput" tabindex="0" type="number">
+              <input class="text-align-left" id="mwc_id_0_number-input" tabindex="0" type="number">
             </div>
           </div>
         </mock:shadow-root>

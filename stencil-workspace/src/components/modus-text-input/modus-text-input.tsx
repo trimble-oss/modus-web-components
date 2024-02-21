@@ -4,6 +4,7 @@ import { IconSearch } from '../../icons/svgs/icon-search';
 import { IconClose } from '../../icons/svgs/icon-close';
 import { IconVisibility } from '../../icons/svgs/icon-visibility';
 import { IconVisibilityOff } from '../../icons/svgs/icon-visibility-off';
+import { generateElementId } from '../../utils/utils';
 
 @Component({
   tag: 'modus-text-input',
@@ -76,6 +77,8 @@ export class ModusTextInput {
 
   /** An event that fires on input value change. */
   @Event() valueChange: EventEmitter<string>;
+
+  private inputId = generateElementId() + '_text-input';
 
   classBySize: Map<string, string> = new Map([
     ['medium', 'medium'],
@@ -151,7 +154,7 @@ export class ModusTextInput {
       <div class={buildContainerClassNames()}>
         {this.label || this.required ? (
           <div class={'label-container'}>
-            {this.label ? <label htmlFor="textInput">{this.label}</label> : null}
+            {this.label ? <label htmlFor={this.inputId}>{this.label}</label> : null}
             {this.required ? <span class="required">*</span> : null}
           </div>
         ) : null}
@@ -163,7 +166,7 @@ export class ModusTextInput {
           part="input-container">
           {this.includeSearchIcon ? <IconSearch size="16" /> : null}
           <input
-            id="textInput"
+            id={this.inputId}
             aria-invalid={!!this.errorText}
             aria-label={this.ariaLabel}
             aria-required={this.required?.toString()}
