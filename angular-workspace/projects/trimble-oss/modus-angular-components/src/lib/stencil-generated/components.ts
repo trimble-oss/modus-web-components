@@ -90,21 +90,21 @@ export declare interface ModusActionBar extends Components.ModusActionBar {
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'dismissible', 'message', 'type']
+  inputs: ['ariaLabel', 'buttonAriaLabel', 'buttonText', 'dismissible', 'message', 'type']
 })
 @Component({
   selector: 'modus-alert',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['ariaLabel', 'dismissible', 'message', 'type'],
+  inputs: ['ariaLabel', 'buttonAriaLabel', 'buttonText', 'dismissible', 'message', 'type'],
 })
 export class ModusAlert {
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['dismissClick']);
+    proxyOutputs(this, this.el, ['dismissClick', 'actionClick']);
   }
 }
 
@@ -114,6 +114,10 @@ export declare interface ModusAlert extends Components.ModusAlert {
    * An event that fires when the alert is dismissed
    */
   dismissClick: EventEmitter<CustomEvent<any>>;
+  /**
+   * An event that firest when the action button is clicked
+   */
+  actionClick: EventEmitter<CustomEvent<any>>;
 }
 
 

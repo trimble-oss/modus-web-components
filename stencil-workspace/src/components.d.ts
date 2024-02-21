@@ -94,6 +94,14 @@ export namespace Components {
          */
         "ariaLabel": string | null;
         /**
+          * (optional) The button's aria-label.
+         */
+        "buttonAriaLabel": string | null;
+        /**
+          * (optional) The button's text
+         */
+        "buttonText": string | null;
+        /**
           * (optional) Whether the alert has a dismiss button
          */
         "dismissible": boolean;
@@ -2142,6 +2150,14 @@ declare namespace LocalJSX {
          */
         "ariaLabel"?: string | null;
         /**
+          * (optional) The button's aria-label.
+         */
+        "buttonAriaLabel"?: string | null;
+        /**
+          * (optional) The button's text
+         */
+        "buttonText"?: string | null;
+        /**
           * (optional) Whether the alert has a dismiss button
          */
         "dismissible"?: boolean;
@@ -2149,6 +2165,10 @@ declare namespace LocalJSX {
           * (optional) The alert message
          */
         "message"?: string;
+        /**
+          * An event that firest when the action button is clicked
+         */
+        "onActionClick"?: (event: ModusAlertCustomEvent<any>) => void;
         /**
           * An event that fires when the alert is dismissed
          */
