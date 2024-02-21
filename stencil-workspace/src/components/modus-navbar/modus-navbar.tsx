@@ -363,7 +363,12 @@ export class ModusNavbar {
               <div class={`left ${direction}`}>
                 {this.showMainMenu && (
                   <div class="navbar-button main-menu-button">
-                    <span class="navbar-button-icon" onKeyDown={(event) => this.mainMenuKeydownHandler(event)} tabIndex={0}>
+                    <span
+                      class="navbar-button-icon"
+                      role="button"
+                      aria-label="Toggle navigation"
+                      onKeyDown={(event) => this.mainMenuKeydownHandler(event)}
+                      tabIndex={0}>
                       <IconMenu
                         size="24"
                         pressed={this.mainMenuVisible}
@@ -390,6 +395,7 @@ export class ModusNavbar {
                       position="bottom">
                       <span
                         class="navbar-button-icon"
+                        role="button"
                         onKeyDown={(event) => this.searchMenuKeydownHandler(event)}
                         tabIndex={0}
                         id="search-button"
@@ -413,6 +419,8 @@ export class ModusNavbar {
                   <div class="navbar-button" data-test-id="notifications-menu">
                     <span
                       class="navbar-button-icon"
+                      role="button"
+                      aria-label="Notifications"
                       onKeyDown={(event) => this.notificationsMenuKeydownHandler(event)}
                       tabIndex={0}>
                       <IconNotifications
@@ -431,14 +439,19 @@ export class ModusNavbar {
                 {this.showPendoPlaceholder && <div class={'pendo-placeholder'} />}
                 {this.showHelp && (
                   <div class="navbar-button" data-test-id="help-menu">
-                    <span class="navbar-button-icon" tabIndex={0}>
+                    <span class="navbar-button-icon" role="button" tabIndex={0}>
                       <IconHelp size="24" onClick={(event) => this.helpMenuClickHandler(event)} />
                     </span>
                   </div>
                 )}
                 {this.showAppsMenu && (
                   <div class="navbar-button" data-test-id="apps-menu">
-                    <span class="navbar-button-icon" onKeyDown={(event) => this.appsMenuKeydownHandler(event)} tabIndex={0}>
+                    <span
+                      class="navbar-button-icon"
+                      role="button"
+                      aria-label="Apps"
+                      onKeyDown={(event) => this.appsMenuKeydownHandler(event)}
+                      tabIndex={0}>
                       <IconApps
                         size="24"
                         pressed={this.appsMenuVisible}

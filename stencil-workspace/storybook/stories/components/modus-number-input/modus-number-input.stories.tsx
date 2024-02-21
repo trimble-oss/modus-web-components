@@ -156,7 +156,7 @@ const Template = ({
 }) => html`
   <modus-number-input
     aria-label=${ariaLabel}
-    disabled=${disabled}
+    ?disabled=${disabled}
     error-text=${errorText}
     helper-text=${helperText}
     label=${label}
@@ -164,7 +164,7 @@ const Template = ({
     min-value=${minValue}
     placeholder=${placeholder}
     read-only=${readOnly}
-    required=${required}
+    ?required=${required}
     size=${size}
     step=${step}
     text-align=${textAlign}
