@@ -80,7 +80,8 @@ export class ModusAlert {
           {this.buttonText?.length > 0 ? (
             <modus-button
               class="action-button"
-              buttonStyle="borderless"
+              buttonStyle="outline"
+              color="secondary"
               size="medium"
               ariaLabel={this.buttonAriaLabel}
               onButtonClick={() => this.actionClick.emit()}
