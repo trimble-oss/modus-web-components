@@ -85,6 +85,11 @@
     position: absolute;
     width: 100%;
 
+    .icon-check {
+      display: inline-flex;
+      margin-left: auto;
+    }
+
     .text-option {
       align-items: center;
       border: 1px solid $modus-autocomplete-options-border-color;
@@ -95,6 +100,10 @@
       font-size: $rem-12px;
       min-height: 2rem;
       padding: 0 8px;
+
+      &.selected {
+        background-color: $modus-autocomplete-selected-option-color;
+      }
 
       &:hover {
         background-color: $modus-autocomplete-options-hover-background-color;
@@ -108,6 +117,10 @@
     .custom-option {
       border: 1px solid $modus-autocomplete-options-border-color;
       cursor: pointer;
+
+      &.selected {
+        background-color: $modus-autocomplete-selected-option-color;
+      }
 
       &:hover {
         background-color: $modus-autocomplete-options-hover-background-color;

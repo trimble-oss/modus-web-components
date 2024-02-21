@@ -15,6 +15,7 @@ import { IconClose } from '../../icons/svgs/icon-close';
 
 import { IconSearch } from '../../icons/svgs/icon-search';
 import { generateElementId } from '../../utils/utils';
+import { IconCheck } from '../../icons/generated-icons/IconCheck';
 
 export interface ModusAutocompleteOption {
   id: string;
@@ -73,6 +74,8 @@ export class ModusAutocomplete {
 
   /** An array to hold the selected chips. */
   @State() selectedChips: string[] = [];
+
+  @State() selectedOption: string;
 
   /** Whether to show autocomplete's options when focus. */
   @Prop() showOptionsOnFocus: boolean;
@@ -182,6 +185,7 @@ export class ModusAutocomplete {
     if (this.multiple) {
       this.addChipValue(optionValue);
     } else {
+      this.selectedOption = optionValue;
       this.disableFiltering = this.disableCloseOnSelect;
       this.handleSearchChange(optionValue);
     }
@@ -244,6 +248,7 @@ export class ModusAutocomplete {
     if (this.multiple) {
       this.addChipValue(option.value);
     } else {
+      this.selectedOption = option.value;
       this.disableFiltering = this.disableCloseOnSelect;
       this.handleSearchChange(option.value);
     }
@@ -405,28 +410,47 @@ export class ModusAutocomplete {
           <ul id={this.listId} aria-label="options" role="listbox">
             {this.displayOptions() &&
               this.visibleOptions?.map((option) => {
+                let className;
+                let isSelected;
+                if (this.multiple) {
+                  isSelected = this.selectedChips.includes(option.value);
+                  className = 'text-option' + (isSelected ? ' selected' : '');
+                } else {
+                  isSelected = this.selectedOption === option.value;
+                  className = 'text-option' + (isSelected ? ' selected' : '');
+                }
                 return (
                   <li
-                    class="text-option"
+                    class={className}
                     tabindex="-1"
                     role="option"
                     onClick={() => this.handleOptionClick(option)}
                     onKeyDown={(e) => this.handleOptionKeyDown(e, option)}>
                     {option.value}
+                    {isSelected && <IconCheck size="16" />}
                   </li>
                 );
               })}
             {this.displayOptions() &&
-              this.visibleCustomOptions?.map((option) => (
-                <li
-                  class="custom-option"
-                  tabindex="-1"
-                  role="option"
-                  onClick={() => this.handleCustomOptionClick(option)}
-                  onKeyDown={(e) => this.handleOptionKeyDown(e, option, true)}
-                  innerHTML={option.outerHTML}
-                />
-              ))}
+              this.visibleCustomOptions?.map((option) => {
+                const optionValue = option.getAttribute(DATA_SEARCH_VALUE);
+                let className;
+                if (this.multiple) {
+                  className = 'custom-option' + (this.selectedChips.includes(optionValue) ? ' selected' : '');
+                } else {
+                  className = 'custom-option' + (this.selectedOption === optionValue ? ' selected' : '');
+                }
+                return (
+                  <li
+                    class={className}
+                    tabindex="-1"
+                    role="option"
+                    onClick={() => this.handleCustomOptionClick(option)}
+                    onKeyDown={(e) => this.handleOptionKeyDown(e, option, true)}
+                    innerHTML={option.outerHTML}
+                  />
+                );
+              })}
           </ul>
           {this.displayNoResults() && <NoResultsFound text={this.noResultsFoundText} subtext={this.noResultsFoundSubtext} />}
         </div>
