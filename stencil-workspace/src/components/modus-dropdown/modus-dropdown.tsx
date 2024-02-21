@@ -104,7 +104,7 @@ export class ModusDropdown {
 
   handleDropdownKeyDown(event: KeyboardEvent) {
     if (event.key === 'Enter' || event.key === ' ') {
-      if ((event.target as HTMLElement).closest(`#${this.toggleElementId}`)) {
+      if ((event.target as HTMLElement)?.closest(`#${this.toggleElementId}`)) {
         this.visible = !this.visible;
       } else {
         this.visible = false;
