@@ -78,7 +78,7 @@ export class ModusTextInput {
   /** An event that fires on input value change. */
   @Event() valueChange: EventEmitter<string>;
 
-  private inputId = generateElementId() + '_text-input';
+  private inputId = generateElementId() + '_text_input';
 
   classBySize: Map<string, string> = new Map([
     ['medium', 'medium'],
