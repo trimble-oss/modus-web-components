@@ -948,6 +948,10 @@ export namespace Components {
          */
         "optionsDisplayProp": string;
         /**
+          * (optional) The input's placeholder.
+         */
+        "placeholder": string;
+        /**
           * (optional) Whether the input is required.
          */
         "required": boolean;
@@ -3120,6 +3124,10 @@ declare namespace LocalJSX {
           * The options property to render in the dropdown list.
          */
         "optionsDisplayProp"?: string;
+        /**
+          * (optional) The input's placeholder.
+         */
+        "placeholder"?: string;
         /**
           * (optional) Whether the input is required.
          */
