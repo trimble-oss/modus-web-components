@@ -17,7 +17,7 @@ export default {
       name: 'show-profile',
       description: 'Toggle the profile',
       table: {
-        default: { summary: true },
+        defaultValue: { summary: true },
         type: { summary: 'boolean' },
       }
     },
