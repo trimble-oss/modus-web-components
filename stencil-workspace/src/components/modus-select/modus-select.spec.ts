@@ -15,7 +15,7 @@ describe('modus-select', () => {
           <div>
             <span class="input-container">
             <select class="medium" part="input">
-              <option disabled="" hidden="" selected="" value="">
+              <option disabled="" selected="" value="">
                 Please Select
               </option>
             </select>

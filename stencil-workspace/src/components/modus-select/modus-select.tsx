@@ -137,7 +137,7 @@ export class ModusSelect {
             }}
             aria-invalid={!!this.errorText}
             aria-required={this.required?.toString()}>
-            <option value="" disabled selected hidden>
+            <option value="" disabled selected>
               {this.placeholder}
             </option>
             {this.renderOptions()}
