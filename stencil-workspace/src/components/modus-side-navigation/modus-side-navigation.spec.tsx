@@ -11,7 +11,7 @@ describe('modus-side-navigation', () => {
     expect(page.root).toEqualHtml(`
       <modus-side-navigation>
         <mock:shadow-root>
-          <nav role="navigation"
+          <nav
             class="side-nav-panel"
             aria-label="side navigation">
             <div class="side-nav-level center">
@@ -24,6 +24,7 @@ describe('modus-side-navigation', () => {
       </modus-side-navigation>
     `);
   });
+  ``;
   it('renders root with item', async () => {
     const page = await newSpecPage({
       components: [ModusSideNavigation],
@@ -40,7 +41,7 @@ describe('modus-side-navigation', () => {
     expect(page.root).toEqualHtml(`
       <modus-side-navigation>
         <mock:shadow-root>
-          <nav role="navigation"
+          <nav
             class="side-nav-panel"
             aria-label="side navigation">
             <div class="side-nav-level center">
