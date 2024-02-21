@@ -73,7 +73,7 @@ export default {
   },
 };
 
-const Template = ({ ariaLabel,buttonAriaLabel,buttonText, dismissible, message, type }) =>
+const Template = ({ ariaLabel, buttonAriaLabel, buttonText, dismissible, message, type }) =>
   html`
     <modus-alert
       ariaLabel=${ariaLabel}
@@ -169,7 +169,7 @@ Warning.args = {
 };
 
 
-const TemplateWithLink = ({ ariaLabel,buttonAriaLabel,buttonText, dismissible, message, type }) =>
+const TemplateWithLink = ({ ariaLabel, buttonAriaLabel, buttonText, dismissible, message, type }) =>
   html`
     <modus-alert
       ariaLabel=${ariaLabel}
