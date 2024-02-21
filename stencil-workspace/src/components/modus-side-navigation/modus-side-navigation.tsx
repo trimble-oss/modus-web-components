@@ -370,7 +370,6 @@ export class ModusSideNavigation {
   render() {
     return (
       <nav
-        role="navigation"
         class={`side-nav-panel${this.expanded ? ' expanded' : ''}`}
         style={{ width: this.expanded ? this.maxWidth : null }}
         onKeyDown={(e) => this.handleKeyDown(e)}

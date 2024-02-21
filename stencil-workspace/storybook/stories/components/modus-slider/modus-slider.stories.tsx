@@ -72,7 +72,7 @@ const Template = ({
 }) => html`
   <modus-slider
     aria-label=${ariaLabel}
-    disabled=${disabled}
+    ?disabled=${disabled}
     label=${label}
     max-value=${maxValue}
     min-value=${minValue}

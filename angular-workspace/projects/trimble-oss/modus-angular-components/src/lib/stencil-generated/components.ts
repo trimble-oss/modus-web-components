@@ -62,6 +62,34 @@ export declare interface ModusAccordionItem extends Components.ModusAccordionIte
 
 
 @ProxyCmp({
+  inputs: ['actions', 'size', 'visibleItemCount']
+})
+@Component({
+  selector: 'modus-action-bar',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['actions', 'size', 'visibleItemCount'],
+})
+export class ModusActionBar {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['actionBarClick']);
+  }
+}
+
+
+export declare interface ModusActionBar extends Components.ModusActionBar {
+  /**
+   * (optional) An event that fires on action item click.
+   */
+  actionBarClick: EventEmitter<CustomEvent<any>>;
+}
+
+
+@ProxyCmp({
   inputs: ['ariaLabel', 'dismissible', 'message', 'type']
 })
 @Component({
@@ -501,7 +529,7 @@ export declare interface ModusList extends Components.ModusList {}
 
 
 @ProxyCmp({
-  inputs: ['borderless', 'disabled', 'selected', 'size', 'subText', 'type', 'wrapSubText'],
+  inputs: ['borderless', 'disabled', 'leftIcon', 'selected', 'size', 'subText', 'type', 'wrapSubText'],
   methods: ['focusItem']
 })
 @Component({
@@ -509,7 +537,7 @@ export declare interface ModusList extends Components.ModusList {}
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['borderless', 'disabled', 'selected', 'size', 'subText', 'type', 'wrapSubText'],
+  inputs: ['borderless', 'disabled', 'leftIcon', 'selected', 'size', 'subText', 'type', 'wrapSubText'],
 })
 export class ModusListItem {
   protected el: HTMLElement;
@@ -1567,15 +1595,21 @@ export class ModusTreeView {
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['itemActionClick']);
   }
 }
 
 
-export declare interface ModusTreeView extends Components.ModusTreeView {}
+export declare interface ModusTreeView extends Components.ModusTreeView {
+  /**
+   * Fired when an action is clicked within any tree item. Includes both the `actionId` and `nodeId` of the action and item, respectively.
+   */
+  itemActionClick: EventEmitter<CustomEvent<any>>;
+}
 
 
 @ProxyCmp({
-  inputs: ['disabled', 'draggableItem', 'droppableItem', 'editable', 'label', 'nodeId', 'tabIndexValue'],
+  inputs: ['actions', 'disabled', 'draggableItem', 'droppableItem', 'editable', 'label', 'nodeId', 'tabIndexValue'],
   methods: ['focusItem', 'focusCheckbox']
 })
 @Component({
@@ -1583,14 +1617,14 @@ export declare interface ModusTreeView extends Components.ModusTreeView {}
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['disabled', 'draggableItem', 'droppableItem', 'editable', 'label', 'nodeId', 'tabIndexValue'],
+  inputs: ['actions', 'disabled', 'draggableItem', 'droppableItem', 'editable', 'label', 'nodeId', 'tabIndexValue'],
 })
 export class ModusTreeViewItem {
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['checkboxClick', 'itemClick', 'itemExpandToggle']);
+    proxyOutputs(this, this.el, ['checkboxClick', 'itemClick', 'itemExpandToggle', 'actionClick']);
   }
 }
 
@@ -1608,6 +1642,10 @@ export declare interface ModusTreeViewItem extends Components.ModusTreeViewItem 
    * An event that fires on tree item expand/collapse
    */
   itemExpandToggle: EventEmitter<CustomEvent<boolean>>;
+  /**
+   * Fired when an action button within the tree item is clicked. Includes the `actionId`.
+   */
+  actionClick: EventEmitter<CustomEvent<any>>;
 }
 
 

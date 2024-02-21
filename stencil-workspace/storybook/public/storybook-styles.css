@@ -139,3 +139,11 @@ body.dark .sidebar-header a[title="Storybook"] {
 html:has(body.dark) {
   color-scheme: dark;
 }
+
+.sbdocs kbd {
+  background-color: var(--theme-color) !important;
+  border-radius: 4px;
+  color: var(--theme-bg-color) !important;
+  opacity: .7;
+  padding: 0 4px;
+}

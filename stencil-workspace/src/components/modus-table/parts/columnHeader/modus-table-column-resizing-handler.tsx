@@ -95,13 +95,17 @@ export const ModusTableColumnResizingHandler: FunctionalComponent<ModusTableColu
   onMouseLeave,
 }) => {
   return (
-    <div
-      tabindex={0}
-      onMouseDown={header.getResizeHandler()}
-      onTouchStart={header.getResizeHandler()}
-      onKeyDown={throttle(table, header.column)}
-      onMouseEnter={() => onMouseEnter()}
-      onMouseLeave={() => onMouseLeave()}
-      class="resize-handle"></div>
+    <div>
+      <div
+        tabIndex={0}
+        onMouseDown={header.getResizeHandler()}
+        onTouchStart={header.getResizeHandler()}
+        onKeyDown={throttle(table, header.column)}
+        onMouseEnter={() => onMouseEnter()}
+        onMouseLeave={() => onMouseLeave()}
+        class="resize-handle"></div>
+
+      <div class="resize-handle-border"></div>
+    </div>
   );
 };

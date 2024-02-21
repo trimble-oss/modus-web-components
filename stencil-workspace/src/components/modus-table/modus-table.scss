@@ -103,7 +103,7 @@ table {
         border-right: $rem-1px $modus-table-border-color solid;
         box-shadow: inset 0 -0.5px 0 $modus-table-border-color;
         font-weight: $font-weight-semi-bold;
-        overflow: hidden;
+        overflow: visible;
         padding: $rem-8px $rem-8px $rem-8px $rem-16px;
         position: relative;
 
@@ -165,16 +165,23 @@ table {
           cursor: e-resize;
           height: 100%;
           position: absolute;
-          right: 0;
+          right: -7px;
           top: 0;
           touch-action: none;
           user-select: none;
-          width: $rem-3px;
+          width: 13px;
+          z-index: 11;
         }
 
         &:not(.active-resize) {
           .resize-handle:focus-visible {
-            border-right: 2px solid $modus-table-header-color;
+            + .resize-handle-border {
+              border-right: 2px solid $modus-table-header-color;
+              height: 100%;
+              position: absolute;
+              right: -1px;
+              top: 0;
+            }
           }
         }
 
@@ -356,6 +363,15 @@ table {
 
       &.active-resize {
         border-right: 2px $modus-primary-color solid !important;
+      }
+    }
+
+    th {
+      position: relative;
+
+      div {
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
 

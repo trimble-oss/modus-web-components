@@ -35,6 +35,7 @@ export class ModusNavbarSearchOverlay {
             <modus-text-input
               placeholder="Search"
               size="large"
+              type="search"
               clearable={true}
               onValueChange={(event: CustomEvent<string>) => this.search.emit(event.detail)}
               include-search-icon
@@ -43,6 +44,7 @@ export class ModusNavbarSearchOverlay {
           <div class="navbar-button" data-test-id="close-button">
             <span
               class="navbar-button-icon"
+              role="button"
               tabIndex={0}
               onKeyDown={(event: KeyboardEvent) => event.code === 'Enter' && this.close.emit()}
               onClick={() => this.close.emit()}>
