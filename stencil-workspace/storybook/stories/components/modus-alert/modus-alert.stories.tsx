@@ -61,7 +61,7 @@ export default {
   },
   parameters: {
     actions: {
-      handles: ['dismissClick'],
+      handles: [ 'dismissClick', 'actionClick '],
     },
     controls: { expanded: true, sort: 'requiredFirst' },
     docs: {

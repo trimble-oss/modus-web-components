@@ -80,100 +80,22 @@ Note: If anchor tags are nested, it is required to apply CSS variables  `--modus
 
 ### Properties
 
-<section>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Type</th>
-        <th>Options</th>
-        <th>Default Value</th>
-        <th>Required</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>message</td>
-        <td>The alert message</td>
-        <td>string</td>
-        <td></td>
-        <td></td>
-        <td>
-          <span class="material-icons">&#10004;</span>
-        </td>
-      </tr>
-      <tr>
-        <td>aria-label</td>
-        <td>The alert's aria-label</td>
-        <td>string</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>button-aria-label</td>
-        <td>The button's aria-label</td>
-        <td>string</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>button-text</td>
-        <td>The button's text</td>
-        <td>string</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>dismissible</td>
-        <td>Whether the alert is dismissible, renders the close icon</td>
-        <td>boolean</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>type</td>
-        <td>The type of the alert</td>
-        <td>string</td>
-        <td>
-          'error', 'info', 'info-gray', 'info-gray-dark', 'success', 'warning'
-        </td>
-        <td>'info'</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+| Name               | Description                                              | Type      | Options                                                              | Default Value | Required |
+| ------------------ | -------------------------------------------------------- | --------- | -------------------------------------------------------------------- | ------------- | -------- |
+| `ariaLabel`        | The alert's aria-label                                   | `string`  |                                                                      |               |          |
+| `buttonAriaLabel`  | The button's aria-label                                  | `string`  |                                                                      |               |          |
+| `buttonText`       | The button's text                                        | `string`  |                                                                      |               |          |
+| `dismissible`      | Whether the alert is dismissible, renders the close icon | `boolean` |                                                                      |               |          |
+| `message`          | The alert message                                        | `string`  |                                                                      |               | &#10004; |
+| `type`             | The type of the alert                                    | `string`  | 'error', 'info', 'info-gray', 'info-gray-dark', 'success', 'warning' | 'info'        |          |
+
 
 ### DOM Events
 
-<section>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Emits</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>dismissClick</td>
-        <td>Fires on dismiss icon click</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>actionClick</td>
-        <td>Fires on action button click</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+| Name          | Description                  | Type                |
+| ------------- | ---------------------------- | ------------------- |
+| `dismissClick`| Fires on dismiss icon click  | `CustomEvent<void>` |
+| `actionClick` | Fires on action button click | `CustomEvent<void>` |
 
 ### Accessibility
 
