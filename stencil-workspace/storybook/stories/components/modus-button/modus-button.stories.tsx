@@ -112,7 +112,7 @@ const DefaultTemplate = ({
     aria-label=${ariaLabel}
     button-style=${buttonStyle}
     color=${color}
-    disabled=${disabled}
+    ?disabled=${disabled}
     size=${size} left-icon=${leftIcon} right-icon=${rightIcon} icon-only=${iconOnly} show-caret=${showCaret}>
     ${label}
   </modus-button>

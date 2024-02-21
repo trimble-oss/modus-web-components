@@ -45,11 +45,14 @@ export default {
         defaultValue: { summary: `'standard'` },
         type: { summary: `'condensed' | 'standard' | 'large' ` },
       },
-    }
+    },
   },
   parameters: {
     docs: {
       page: docs,
+    },
+    actions: {
+      handles: ['itemActionClick modus-tree-view', 'actionClick modus-tree-view-item', 'itemClick modus-tree-view-item'],
     },
     controls: { expanded: true, sort: 'requiredFirst' },
     options: {
@@ -484,6 +487,7 @@ const FilterTemplate = ({
       id="filter"
       size="large"
       placeholder="Search"
+      type="search"
       disabled="true"
       include-search-icon></modus-text-input>
     <modus-tree-view checkbox-selection=${checkboxSelection ? 'true' : 'false'}
@@ -591,3 +595,37 @@ export const CustomFilter = FilterTemplate.bind({});
 CustomFilter.args = {...Default.args,
 };
 
+const WithItemActionBarTemplate = ({
+  checkboxSelection,
+  multiCheckboxSelection,
+  multiSelection,
+  size,
+  rowActions,
+}) => html`
+  <div
+    style="display: flex; flex-direction: column; width: 400px;">
+    <modus-tree-view
+      style="width:400px;"
+      checkbox-selection=${checkboxSelection}
+      checked-items="false"
+      expanded-items="false"
+      multi-checkbox-selection=${multiCheckboxSelection}
+      multi-selection=${multiSelection}
+      selected-items="false"
+      size=${size}
+    >
+      <modus-tree-view-item node-id="1" label="Inbox" .actions=${rowActions}></modus-tree-view-item>
+    </modus-tree-view>
+  </div>
+`;
+
+export const WithActionBar = WithItemActionBarTemplate.bind({});
+WithActionBar.args = {
+  ...Default.args,
+  rowActions: [
+    { id: 'export', icon: 'export', label: 'Export' },
+    { id: 'history', icon: 'history', label: 'History' },
+    { id: 'edit', icon: 'pencil', label: 'Edit' },
+    { id: 'delete', icon: 'delete', label: 'Delete' }
+    ]
+};

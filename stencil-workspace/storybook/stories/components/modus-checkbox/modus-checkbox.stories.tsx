@@ -85,7 +85,7 @@ const Template = ({
   <modus-checkbox
     aria-label=${ariaLabel}
     checked=${checked}
-    disabled=${disabled}
+    ?disabled=${disabled}
     indeterminate=${indeterminate}
     label=${label}
     tab-index-value=${tabIndexValue}
