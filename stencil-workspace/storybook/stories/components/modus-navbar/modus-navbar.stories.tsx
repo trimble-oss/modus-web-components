@@ -13,6 +13,14 @@ export default {
         type: { summary: 'boolean' },
       },
     },
+    showProfile: {
+      name: 'show-profile',
+      description: 'Toggle the profile',
+      table: {
+        default: { summary: true },
+        type: { summary: 'boolean' },
+      }
+    },
     showSearch: {
       name: 'show-search',
       description: 'Toggle the search button',
@@ -59,13 +67,45 @@ export default {
   },
 };
 
-const Template = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay, searchTooltip }) => html`
+const workingAvatarUrl = 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0e738c17-7f3c-422e-8225-f8c782b08626/d9pordj-43d4aa59-54b0-46a1-a568-e36dd691cf27.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzBlNzM4YzE3LTdmM2MtNDIyZS04MjI1LWY4Yzc4MmIwODYyNlwvZDlwb3Jkai00M2Q0YWE1OS01NGIwLTQ2YTEtYTU2OC1lMzZkZDY5MWNmMjcucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.xvDk9KFIUAx0yAG3BPamDfRqmWUX6zwR4WVW40GjsoY';
+const failingAvatarUrl = 'https://avatar.example.com/broken-image-link.png';
+const defaultPrimaryLogo = 'https://modus.trimble.com/img/trimble-logo.svg';
+const defaultSecondaryLogo = 'https://modus.trimble.com/favicon.svg';
+const defaultLogo = {
+  primary: {
+    url: defaultPrimaryLogo,
+  },
+  secondary: {
+    url: defaultSecondaryLogo,
+  }
+};
+const blueLogo = {
+  primary: {
+    url: 'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
+  },
+  secondary: {
+    url: 'https://modus-bootstrap.trimble.com/img/trimble-icon-rev.svg',
+  }
+};
+const defaultApps = {
+  description: 'The One Trimble Design System',
+  logoUrl: 'https://modus.trimble.com/favicon.svg',
+  name: 'Trimble Modus',
+  url: 'https://modus.trimble.com/',
+};
+
+const Template = ({ buttons, enableSearchOverlay, profileMenuOptions, searchTooltip, showProfile, showSearch }) => html`
   <modus-navbar
-    id="working"
     enable-search-overlay=${enableSearchOverlay}
-    show-search=${showSearch}
     show-apps-menu
-    show-main-menu>
+    show-main-menu
+    show-profile=${showProfile}
+    show-search=${showSearch}
+    .apps=${defaultApps}
+    .buttons=${buttons}
+    .logo=${defaultLogo}
+    .profileMenuOptions=${profileMenuOptions}
+    .searchTooltip=${searchTooltip}>
     <div slot="main" style="height:300px;">Render your own main menu.</div>
 
       <modus-list slot="addMenu">
@@ -76,11 +116,21 @@ const Template = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay
     <div slot="notificationMenu">Render your own notification menu.</div>
     <div slot="profileMenu">Render your own profile menu content.</div>
   </modus-navbar>
-  ${setNavbar(true, '#working', profileMenuOptions, '', '', buttons, searchTooltip)}
 `;
 export const Default = Template.bind({});
 Default.args = {
+  enableSearchOverlay: false,
+  buttons: [
+    {
+      id: 'addMenu', icon: 'add',
+      tooltip: {
+        text: 'Add',
+      }
+    },
+    { id: 'notificationMenu', icon: 'notifications' },
+  ],
   profileMenuOptions: {
+    avatarUrl: workingAvatarUrl,
     email: 'modus_user@trimble.com',
     initials: 'MU',
     username: 'Modus User',
@@ -100,115 +150,75 @@ Default.args = {
       text: 'User Profile Menu',
     }
   },
-  buttons: [
-    {
-      id: 'addMenu', icon: 'add',
-      tooltip: {
-        text: 'Add',
-      }
-    },
-    { id: 'notificationMenu', icon: 'notifications' },
-  ],
+  searchTooltip: undefined,
+  showProfile: true,
   showSearch: false,
-  enableSearchOverlay: false,
-  searchTooltip: undefined
 };
 
-const FailedToLoadAvatarTemplate = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay, searchTooltip }) => html`
+const FailedToLoadAvatarTemplate = ({ buttons, enableSearchOverlay, profileMenuOptions, searchTooltip, showProfile, showSearch }) => html`
   <modus-navbar
-    id="broken"
     enable-search-overlay=${enableSearchOverlay}
-    show-search=${showSearch}
-    show-apps-menu
-    show-help
-    show-main-menu
-    show-notifications>
-    <div slot="main" style="height:300px;">Render your own main menu.</div>
-    <div slot="notifications">Render your own notifications.</div>
-  </modus-navbar>
-  ${setNavbar(false, '#broken', profileMenuOptions, '', '', buttons, searchTooltip)}
-`;
-export const FailedAvatar = FailedToLoadAvatarTemplate.bind({});
-FailedAvatar.args = {
-  profileMenuOptions: {
-    email: 'modus_user@trimble.com',
-    initials: 'MU',
-    username: 'Modus User',
-  },
-  buttons: [],
-  showSearch: false,
-  enableSearchOverlay: false,
-  searchTooltip: undefined
-};
-const BlueTemplate = ({ profileMenuOptions, buttons, showSearch, enableSearchOverlay, searchTooltip }) => html`
-  <modus-navbar
-    id="blue-theme"
-    enable-search-overlay=${enableSearchOverlay}
-    show-search=${showSearch}
     show-apps-menu
     show-help
     show-main-menu
     show-notifications
-    variant="blue">
+    show-profile=${showProfile}
+    show-search=${showSearch}
+    .apps=${defaultApps}
+    .buttons=${buttons}
+    .logo=${defaultLogo}
+    .profileMenuOptions=${profileMenuOptions}
+    .searchTooltip=${searchTooltip}>
     <div slot="main" style="height:300px;">Render your own main menu.</div>
     <div slot="notifications">Render your own notifications.</div>
   </modus-navbar>
-  ${setNavbar(
-  false,
-  '#blue-theme',
-  profileMenuOptions,
-  'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
-  'https://modus-bootstrap.trimble.com/img/trimble-icon-rev.svg',
-  buttons,
-  searchTooltip
-)}
 `;
-export const BlueNavbar = BlueTemplate.bind({});
-BlueNavbar.args = {
+export const FailedAvatar = FailedToLoadAvatarTemplate.bind({});
+FailedAvatar.args = {
+  buttons: [],
+  enableSearchOverlay: false,
   profileMenuOptions: {
+    avatarUrl: failingAvatarUrl,
     email: 'modus_user@trimble.com',
     initials: 'MU',
     username: 'Modus User',
   },
-  buttons: [],
+  searchTooltip: undefined,
+  showProfile: true,
   showSearch: false,
-  enableSearchOverlay: false,
-  searchTooltip: undefined
 };
 
-const setNavbar = (
-  workingAvatar: boolean,
-  id: string,
-  profileMenuOptions,
-  logoUrl = '',
-  iconUrl = '',
+const BlueTemplate = ({ buttons, enableSearchOverlay, profileMenuOptions, searchTooltip, showProfile, showSearch }) => html`
+  <modus-navbar
+    enable-search-overlay=${enableSearchOverlay}
+    show-apps-menu
+    show-help
+    show-main-menu
+    show-notifications
+    show-profile=${showProfile}
+    show-search=${showSearch}
+    variant="blue"
+    .apps=${defaultApps}
+    .buttons=${buttons}
+    .logo=${blueLogo}
+    .profileMenuOptions=${profileMenuOptions}
+    .searchTooltip=${searchTooltip}>
+    <div slot="main" style="height:300px;">Render your own main menu.</div>
+    <div slot="notifications">Render your own notifications.</div>
+  </modus-navbar>
+`;
+
+export const BlueNavbar = BlueTemplate.bind({});
+BlueNavbar.args = {
   buttons: [],
-  searchTooltip
-) => {
-  const tag = document.createElement('script');
-  profileMenuOptions.avatarUrl = workingAvatar
-    ? 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0e738c17-7f3c-422e-8225-f8c782b08626/d9pordj-43d4aa59-54b0-46a1-a568-e36dd691cf27.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzBlNzM4YzE3LTdmM2MtNDIyZS04MjI1LWY4Yzc4MmIwODYyNlwvZDlwb3Jkai00M2Q0YWE1OS01NGIwLTQ2YTEtYTU2OC1lMzZkZDY5MWNmMjcucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.xvDk9KFIUAx0yAG3BPamDfRqmWUX6zwR4WVW40GjsoY'
-    : 'https://avatar.example.com/broken-image-link.png';
-
-  tag.innerHTML = `
-document.querySelectorAll('modus-list-item').forEach(i => i.style.setProperty('--modus-list-item-border-color', 'transparent'));
-document.querySelector('${id}').apps = [
-  { description: 'The One Trimble Design System', logoUrl: 'https://modus.trimble.com/favicon.svg', name: 'Trimble Modus', url: 'https://modus.trimble.com/' }
-];
-document.querySelector('${id}').logoOptions = {
-  primary: {
-    url: '${logoUrl || 'https://modus.trimble.com/img/trimble-logo.svg'}'},
-          secondary:{
-  url: '${iconUrl || 'https://modus.trimble.com/favicon.svg'} '}
-        };
-        document.querySelector('${id}').profileMenuOptions = ${JSON.stringify(profileMenuOptions)};
-        document.querySelector('${id}').profileMenuTooltip = {
-          text: '${profileMenuOptions?.tooltip?.text || ''}',
-          ariaLabel: '${profileMenuOptions?.tooltip?.ariaLabel}',
-        };
-        document.querySelector('${id}').buttons = ${JSON.stringify(buttons)};
-        document.querySelector('${id}').searchTooltip = ${JSON.stringify(searchTooltip)};
-  `;
-
-  return tag;
+  enableSearchOverlay: false,
+  profileMenuOptions: {
+    avatarUrl: workingAvatarUrl,
+    email: 'modus_user@trimble.com',
+    initials: 'MU',
+    username: 'Modus User',
+  },
+  searchTooltip: undefined,
+  showProfile: true,
+  showSearch: false,
 };
