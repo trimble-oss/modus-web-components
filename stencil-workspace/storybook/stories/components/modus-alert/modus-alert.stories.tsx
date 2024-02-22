@@ -12,6 +12,18 @@ export default {
         type: { summary: 'string' },
       },
     },
+    buttonAriaLabel: {
+      description: "The button's aria-label",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    buttonText: {
+      description: "The button's text",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
     dismissible: {
       description: 'Whether the alert is dismissible, renders the close icon',
       table: {
@@ -49,7 +61,7 @@ export default {
   },
   parameters: {
     actions: {
-      handles: ['dismissClick'],
+      handles: [ 'dismissClick', 'actionClick '],
     },
     controls: { expanded: true, sort: 'requiredFirst' },
     docs: {
@@ -61,10 +73,12 @@ export default {
   },
 };
 
-const Template = ({ ariaLabel, dismissible, message, type }) =>
+const Template = ({ ariaLabel, buttonAriaLabel, buttonText, dismissible, message, type }) =>
   html`
     <modus-alert
       ariaLabel=${ariaLabel}
+      button-aria-label=${buttonAriaLabel}
+      button-text=${buttonText}
       dismissible=${dismissible}
       message=${message}
       type=${type}>
@@ -76,8 +90,20 @@ const Template = ({ ariaLabel, dismissible, message, type }) =>
 export const Default = Template.bind({});
 Default.args = {
   ariaLabel: '',
+  buttonAriaLabel: '',
+  buttonText: '',
   dismissible: false,
   message: 'Info alert (default)',
+  type: 'info',
+};
+
+export const ActionButton = Template.bind({});
+ActionButton.args = {
+  ariaLabel: '',
+  buttonAriaLabel: 'Action button',
+  buttonText: 'Action',
+  dismissible: false,
+  message: 'Info alert with action button',
   type: 'info',
 };
 
@@ -85,6 +111,8 @@ Default.args = {
 export const Dismissible = Template.bind({});
 Dismissible.args = {
   ariaLabel: '',
+  buttonAriaLabel: '',
+  buttonText: '',
   dismissible: true,
   message: 'Dismissible alert',
   type: 'info',
@@ -93,6 +121,8 @@ Dismissible.args = {
 export const Error = Template.bind({});
 Error.args = {
   ariaLabel: '',
+  buttonAriaLabel: '',
+  buttonText: '',
   dismissible: false,
   message: 'Error alert',
   type: 'error',
@@ -101,6 +131,8 @@ Error.args = {
 export const InfoGray = Template.bind({});
 InfoGray.args = {
   ariaLabel: '',
+  buttonAriaLabel: '',
+  buttonText: '',
   dismissible: false,
   message: 'Info gray alert',
   type: 'info-gray',
@@ -109,6 +141,8 @@ InfoGray.args = {
 export const InfoGrayDark = Template.bind({});
 InfoGrayDark.args = {
   ariaLabel: '',
+  buttonAriaLabel: '',
+  buttonText: '',
   dismissible: false,
   message: 'Info gray dark alert',
   type: 'info-gray-dark',
@@ -117,6 +151,8 @@ InfoGrayDark.args = {
 export const Success = Template.bind({});
 Success.args = {
   ariaLabel: '',
+  buttonAriaLabel: '',
+  buttonText: '',
   dismissible: false,
   message: 'Success alert',
   type: 'success',
@@ -125,16 +161,20 @@ Success.args = {
 export const Warning = Template.bind({});
 Warning.args = {
   ariaLabel: '',
+  buttonAriaLabel: '',
+  buttonText: '',
   dismissible: false,
   message: 'Warning alert',
   type: 'warning',
 };
 
 
-const TemplateWithLink = ({ ariaLabel, dismissible, message, type }) =>
+const TemplateWithLink = ({ ariaLabel, buttonAriaLabel, buttonText, dismissible, message, type }) =>
   html`
     <modus-alert
       ariaLabel=${ariaLabel}
+      button-aria-label=${buttonAriaLabel}
+      button-text=${buttonText}
       dismissible=${dismissible}
       message=${message}
       type=${type}>
@@ -145,6 +185,8 @@ const TemplateWithLink = ({ ariaLabel, dismissible, message, type }) =>
 export const WithLink = TemplateWithLink.bind({});
 WithLink.args = {
   ariaLabel: '',
+  buttonAriaLabel: '',
+  buttonText: '',
   dismissible: false,
   type: 'info',
   message: null,

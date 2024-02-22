@@ -1,6 +1,7 @@
 // eslint-disable-next-line
 import { Component, Event, EventEmitter, Prop, h } from '@stencil/core';
 import { IconChevronDownThick } from '../../icons/svgs/icon-chevron-down-thick';
+import { generateElementId } from '../../utils/utils';
 
 @Component({
   tag: 'modus-accordion-item',
@@ -25,6 +26,8 @@ export class ModusAccordionItem {
 
   /** An event that fires on every accordion open.  */
   @Event() opened: EventEmitter;
+
+  private expandedContentId = generateElementId() + '_accordion-item';
 
   classBySize: Map<string, string> = new Map([
     ['condensed', 'small'],
@@ -118,6 +121,9 @@ export class ModusAccordionItem {
         class="accordion-item">
         <div
           class={headerClass}
+          role="button"
+          aria-expanded={this.expanded ? 'true' : 'false'}
+          aria-controls={this.expandedContentId}
           onClick={() => this.handleHeaderClick()}
           onKeyDown={(event) => this.handleKeydown(event)}
           tabIndex={this.disabled ? -1 : 0}>
@@ -130,7 +136,7 @@ export class ModusAccordionItem {
             </div>
           }
         </div>
-        <div class={bodyClass} ref={(el) => (this.accordionBodyRef = el)}>
+        <div id={this.expandedContentId} class={bodyClass} ref={(el) => (this.accordionBodyRef = el)}>
           <div class="body-content">
             <slot />
           </div>

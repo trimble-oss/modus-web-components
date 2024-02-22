@@ -73,6 +73,9 @@ export class ModusNavbar {
   /** (optional) Whether to show the placeholder for Pendo. */
   @Prop() showPendoPlaceholder: boolean;
 
+  /** (optional) Whether to show profile.  **/
+  @Prop() showProfile = true;
+
   /** (optional) Whether to show search. */
   @Prop() showSearch: boolean;
 
@@ -351,7 +354,12 @@ export class ModusNavbar {
               <div class={`left ${direction}`}>
                 {this.showMainMenu && (
                   <div class="navbar-button main-menu-button">
-                    <span class="navbar-button-icon" onKeyDown={(event) => this.mainMenuKeydownHandler(event)} tabIndex={0}>
+                    <span
+                      class="navbar-button-icon"
+                      role="button"
+                      aria-label="Toggle navigation"
+                      onKeyDown={(event) => this.mainMenuKeydownHandler(event)}
+                      tabIndex={0}>
                       <IconMenu
                         size="24"
                         pressed={this.mainMenuVisible}
@@ -378,6 +386,7 @@ export class ModusNavbar {
                       position="bottom">
                       <span
                         class="navbar-button-icon"
+                        role="button"
                         onKeyDown={(event) => this.searchMenuKeydownHandler(event)}
                         tabIndex={0}
                         id="search-button"
@@ -400,6 +409,8 @@ export class ModusNavbar {
                   <div class="navbar-button" data-test-id="notifications-menu">
                     <span
                       class="navbar-button-icon"
+                      role="button"
+                      aria-label="Notifications"
                       onKeyDown={(event) => this.notificationsMenuKeydownHandler(event)}
                       tabIndex={0}>
                       <IconNotifications
@@ -418,14 +429,19 @@ export class ModusNavbar {
                 {this.showPendoPlaceholder && <div class={'pendo-placeholder'} />}
                 {this.showHelp && (
                   <div class="navbar-button" data-test-id="help-menu">
-                    <span class="navbar-button-icon" tabIndex={0}>
+                    <span class="navbar-button-icon" role="button" tabIndex={0}>
                       <IconHelp size="24" onClick={(event) => this.helpMenuClickHandler(event)} />
                     </span>
                   </div>
                 )}
                 {this.showAppsMenu && (
                   <div class="navbar-button" data-test-id="apps-menu">
-                    <span class="navbar-button-icon" onKeyDown={(event) => this.appsMenuKeydownHandler(event)} tabIndex={0}>
+                    <span
+                      class="navbar-button-icon"
+                      role="button"
+                      aria-label="Apps"
+                      onKeyDown={(event) => this.appsMenuKeydownHandler(event)}
+                      tabIndex={0}>
                       <IconApps
                         size="24"
                         pressed={this.appsMenuVisible}
@@ -441,46 +457,48 @@ export class ModusNavbar {
                     )}
                   </div>
                 )}
-                <div class="profile-menu">
-                  <modus-tooltip
-                    text={this.profileMenuOptions?.tooltip?.text}
-                    aria-label={this.profileMenuOptions?.tooltip?.ariaLabel}
-                    disabled={this.profileMenuVisible}
-                    position="bottom">
-                    {this.profileMenuOptions?.avatarUrl ? (
-                      <img
-                        class="avatar"
-                        height="32"
-                        src={this.profileMenuOptions?.avatarUrl}
-                        alt="Modus navbar profile menu avatar"
-                        onClick={(event) => this.profileMenuClickHandler(event)}
-                        onKeyDown={(event) => this.profileMenuKeydownHandler(event)}
-                        tabIndex={0}
-                        ref={(el) => (this.profileAvatarElement = el as HTMLImageElement)}
-                      />
-                    ) : (
-                      <span
-                        class="initials"
-                        onClick={(event) => this.profileMenuClickHandler(event)}
-                        onKeyDown={(event) => this.profileMenuKeydownHandler(event)}
-                        tabIndex={0}>
-                        {this.profileMenuOptions?.initials}
-                      </span>
+                {this.showProfile && (
+                  <div class="profile-menu">
+                    <modus-tooltip
+                      text={this.profileMenuOptions?.tooltip?.text}
+                      aria-label={this.profileMenuOptions?.tooltip?.ariaLabel}
+                      disabled={this.profileMenuVisible}
+                      position="bottom">
+                      {this.profileMenuOptions?.avatarUrl ? (
+                        <img
+                          class="avatar"
+                          height="32"
+                          src={this.profileMenuOptions?.avatarUrl}
+                          alt="Modus navbar profile menu avatar"
+                          onClick={(event) => this.profileMenuClickHandler(event)}
+                          onKeyDown={(event) => this.profileMenuKeydownHandler(event)}
+                          tabIndex={0}
+                          ref={(el) => (this.profileAvatarElement = el as HTMLImageElement)}
+                        />
+                      ) : (
+                        <span
+                          class="initials"
+                          onClick={(event) => this.profileMenuClickHandler(event)}
+                          onKeyDown={(event) => this.profileMenuKeydownHandler(event)}
+                          tabIndex={0}>
+                          {this.profileMenuOptions?.initials}
+                        </span>
+                      )}
+                    </modus-tooltip>
+                    {this.profileMenuVisible && (
+                      <modus-navbar-profile-menu
+                        avatar-url={this.profileMenuOptions?.avatarUrl}
+                        email={this.profileMenuOptions?.email}
+                        initials={this.profileMenuOptions?.initials}
+                        links={this.profileMenuOptions?.links}
+                        reverse={this.reverse}
+                        username={this.profileMenuOptions?.username}
+                        variant={this.variant}>
+                        <slot name={this.SLOT_PROFILE_MENU}></slot>
+                      </modus-navbar-profile-menu>
                     )}
-                  </modus-tooltip>
-                  {this.profileMenuVisible && (
-                    <modus-navbar-profile-menu
-                      avatar-url={this.profileMenuOptions?.avatarUrl}
-                      email={this.profileMenuOptions?.email}
-                      initials={this.profileMenuOptions?.initials}
-                      links={this.profileMenuOptions?.links}
-                      reverse={this.reverse}
-                      username={this.profileMenuOptions?.username}
-                      variant={this.variant}>
-                      <slot name={this.SLOT_PROFILE_MENU}></slot>
-                    </modus-navbar-profile-menu>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
             </Fragment>
           )}

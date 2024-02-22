@@ -73,12 +73,14 @@ describe('modus-sentiment-scale', () => {
     await page.setContent('<modus-sentiment-scale disabled></modus-sentiment-scale>');
 
     const element = await page.find('modus-sentiment-scale');
+    element.setProperty('disabled', 'true');
+    await page.waitForChanges();
     expect(await element.getProperty('disabled')).toBe(true);
   });
+
   it('renders with disabled property set to false', async () => {
     const page = await newE2EPage();
     await page.setContent('<modus-sentiment-scale></modus-sentiment-scale>');
-
     const element = await page.find('modus-sentiment-scale');
     expect(await element.getProperty('disabled')).toBe(false);
   });

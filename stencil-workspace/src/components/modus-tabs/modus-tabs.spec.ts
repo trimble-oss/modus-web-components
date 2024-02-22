@@ -1,5 +1,5 @@
 import { newSpecPage } from '@stencil/core/testing';
-import { ModusTabs } from './modus-tabs';
+import { ModusTabs, Tab } from './modus-tabs';
 
 describe('modus-button', () => {
   it('renders', async () => {
@@ -30,5 +30,38 @@ describe('modus-button', () => {
     const flag = modusTabs.fullWidth;
 
     expect(flag.toString()).toEqual('false');
+  });
+
+  it('should set the correct id and label for each tab base on tabs configuration', async () => {
+    const page = await newSpecPage({
+      components: [ModusTabs],
+      html: '<modus-tabs></modus-tabs>',
+    });
+    const component = page.rootInstance as ModusTabs;
+    const tabs = [
+      {
+        id: 'tab-1',
+        label: 'Tab 1',
+        active: true,
+      },
+      {
+        id: 'tab-2',
+        label: 'Tab 2',
+      },
+    ] as Tab[];
+
+    component.tabs = tabs;
+    await page.waitForChanges();
+
+    expect(page.root).toEqualHtml(`
+      <modus-tabs>
+        <mock:shadow-root>
+          <div class="medium modus-tabs">
+            <div class="active medium tab" id="${tabs[0].id}" tabIndex="0">${tabs[0].label}</div>
+            <div class="medium tab" id="${tabs[1].id}" tabIndex="0">${tabs[1].label}</div>
+          </div>
+        </mock:shadow-root>
+      </modus-tabs>
+    `);
   });
 });

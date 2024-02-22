@@ -30,6 +30,7 @@
 | `rowsExpandable`          | `rows-expandable`         | (Optional) To display expanded rows.                                                                                                                                                  | `boolean`                                 | `false`                                                   |
 | `showSortIconOnHover`     | `show-sort-icon-on-hover` | (Optional) To display sort icon on hover.                                                                                                                                             | `boolean`                                 | `false`                                                   |
 | `sort`                    | `sort`                    | (Optional) To sort data in table.                                                                                                                                                     | `boolean`                                 | `false`                                                   |
+| `sortIconStyle`           | `sort-icon-style`         | (Optional) To display a-z or arrow sort icons.                                                                                                                                        | `"alphabetical" \| "directional"`         | `'alphabetical'`                                          |
 | `summaryRow`              | `summary-row`             | (Optional) To display summary row.                                                                                                                                                    | `boolean`                                 | `false`                                                   |
 | `toolbar`                 | `toolbar`                 | (Optional) To display a toolbar for the table.                                                                                                                                        | `boolean`                                 | `false`                                                   |
 | `toolbarOptions`          | --                        | (Optional) To display a toolbar, which allows access to table operations like hiding columns.                                                                                         | `ModusTableToolbarOptions`                | `null`                                                    |
@@ -127,6 +128,7 @@ graph TD;
   modus-table-cell-editor --> modus-date-input
   modus-table-cell-editor --> modus-autocomplete
   modus-autocomplete --> modus-text-input
+  modus-autocomplete --> modus-chip
   style modus-table fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

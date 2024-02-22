@@ -439,4 +439,14 @@ describe('modus-navbar', () => {
 
     expect(profileMenuSignOutClickEvent).toHaveReceivedEvent();
   });
+
+  it('should hide profile avatar', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-navbar show-profile="false"></modus-navbar>');
+    await page.waitForChanges();
+
+    const profileMenuButton = await page.find('modus-navbar >>> .profile-menu');
+    expect(profileMenuButton).toBeNull();
+  });
 });

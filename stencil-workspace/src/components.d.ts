@@ -5,6 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { ModusActionBarOptions } from "./components/modus-action-bar/modus-action-bar";
 import { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
 import { BadgeProperties } from "./components/modus-badge/modus-badge";
 import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
@@ -24,7 +25,9 @@ import { TableRowActionsMenuEvent } from "./components/modus-table/models/table-
 import { Tab } from "./components/modus-tabs/modus-tabs";
 import { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
 import { ModusToolTipPlacement } from "./components/modus-tooltip/modus-tooltip.models";
+import { ModusActionBarOptions as ModusActionBarOptions1 } from "./components/modus-action-bar/modus-action-bar";
 import { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
+export { ModusActionBarOptions } from "./components/modus-action-bar/modus-action-bar";
 export { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
 export { BadgeProperties } from "./components/modus-badge/modus-badge";
 export { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
@@ -44,6 +47,7 @@ export { TableRowActionsMenuEvent } from "./components/modus-table/models/table-
 export { Tab } from "./components/modus-tabs/modus-tabs";
 export { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
 export { ModusToolTipPlacement } from "./components/modus-tooltip/modus-tooltip.models";
+export { ModusActionBarOptions as ModusActionBarOptions1 } from "./components/modus-action-bar/modus-action-bar";
 export { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export namespace Components {
     interface ModusAccordion {
@@ -70,11 +74,33 @@ export namespace Components {
          */
         "size": 'condensed' | 'standard';
     }
+    interface ModusActionBar {
+        /**
+          * (optional) List of actions
+         */
+        "actions": ModusActionBarOptions[];
+        /**
+          * (optional) The size of the action items.
+         */
+        "size": 'small' | 'medium' | 'large';
+        /**
+          * (optional) Total number of icons to show
+         */
+        "visibleItemCount": number;
+    }
     interface ModusAlert {
         /**
           * (optional) The alert's aria-label.
          */
         "ariaLabel": string | null;
+        /**
+          * (optional) The button's aria-label.
+         */
+        "buttonAriaLabel": string | null;
+        /**
+          * (optional) The button's text
+         */
+        "buttonText": string | null;
         /**
           * (optional) Whether the alert has a dismiss button
          */
@@ -125,6 +151,10 @@ export namespace Components {
           * The autocomplete's label.
          */
         "label": string;
+        /**
+          * When enabled, multiple options can be selected in the component. And selected options are shown as chips in the input.
+         */
+        "multiple": boolean;
         /**
           * The autocomplete's no results sub-text.
          */
@@ -582,6 +612,10 @@ export namespace Components {
         "disabled": boolean;
         "focusItem": () => Promise<void>;
         /**
+          * (optional) Takes the icon name and shows the icon aligned to the left of the button text.
+         */
+        "leftIcon": string;
+        /**
           * (optional) The selected state of the list item
          */
         "selected": boolean;
@@ -720,6 +754,10 @@ export namespace Components {
           * (optional) Whether to show the placeholder for Pendo.
          */
         "showPendoPlaceholder": boolean;
+        /**
+          * (optional) Whether to show profile.  *
+         */
+        "showProfile": boolean;
         /**
           * (optional) Whether to show search.
          */
@@ -926,6 +964,10 @@ export namespace Components {
          */
         "optionsDisplayProp": string;
         /**
+          * (optional) The input's placeholder.
+         */
+        "placeholder": string;
+        /**
           * (optional) Whether the input is required.
          */
         "required": boolean;
@@ -944,7 +986,7 @@ export namespace Components {
     }
     interface ModusSentimentScale {
         /**
-          * (optional) The input's aria-label.
+          * (optional) The sentiment scale's aria-label.
          */
         "ariaLabel": string | null;
         /**
@@ -1147,6 +1189,10 @@ export namespace Components {
           * (Optional) To sort data in table.
          */
         "sort": boolean;
+        /**
+          * (Optional) To display a-z or arrow sort icons.
+         */
+        "sortIconStyle": 'alphabetical' | 'directional';
         /**
           * (Optional) To display summary row.
          */
@@ -1473,6 +1519,10 @@ export namespace Components {
     }
     interface ModusTreeViewItem {
         /**
+          * (optional) Actions that can be performed on each item. A maximum of 3 icons will be shown, including overflow menu and expand icons.
+         */
+        "actions": ModusActionBarOptions1[];
+        /**
           * (optional) Disables the tree item
          */
         "disabled": boolean;
@@ -1515,6 +1565,10 @@ export namespace Components {
 export interface ModusAccordionItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusAccordionItemElement;
+}
+export interface ModusActionBarCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusActionBarElement;
 }
 export interface ModusAlertCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1644,6 +1698,10 @@ export interface ModusToastCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusToastElement;
 }
+export interface ModusTreeViewCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusTreeViewElement;
+}
 export interface ModusTreeViewItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusTreeViewItemElement;
@@ -1660,6 +1718,12 @@ declare global {
     var HTMLModusAccordionItemElement: {
         prototype: HTMLModusAccordionItemElement;
         new (): HTMLModusAccordionItemElement;
+    };
+    interface HTMLModusActionBarElement extends Components.ModusActionBar, HTMLStencilElement {
+    }
+    var HTMLModusActionBarElement: {
+        prototype: HTMLModusActionBarElement;
+        new (): HTMLModusActionBarElement;
     };
     interface HTMLModusAlertElement extends Components.ModusAlert, HTMLStencilElement {
     }
@@ -1985,6 +2049,7 @@ declare global {
     interface HTMLElementTagNameMap {
         "modus-accordion": HTMLModusAccordionElement;
         "modus-accordion-item": HTMLModusAccordionItemElement;
+        "modus-action-bar": HTMLModusActionBarElement;
         "modus-alert": HTMLModusAlertElement;
         "modus-autocomplete": HTMLModusAutocompleteElement;
         "modus-badge": HTMLModusBadgeElement;
@@ -2073,11 +2138,37 @@ declare namespace LocalJSX {
          */
         "size"?: 'condensed' | 'standard';
     }
+    interface ModusActionBar {
+        /**
+          * (optional) List of actions
+         */
+        "actions"?: ModusActionBarOptions[];
+        /**
+          * (optional) An event that fires on action item click.
+         */
+        "onActionBarClick"?: (event: ModusActionBarCustomEvent<any>) => void;
+        /**
+          * (optional) The size of the action items.
+         */
+        "size"?: 'small' | 'medium' | 'large';
+        /**
+          * (optional) Total number of icons to show
+         */
+        "visibleItemCount"?: number;
+    }
     interface ModusAlert {
         /**
           * (optional) The alert's aria-label.
          */
         "ariaLabel"?: string | null;
+        /**
+          * (optional) The button's aria-label.
+         */
+        "buttonAriaLabel"?: string | null;
+        /**
+          * (optional) The button's text
+         */
+        "buttonText"?: string | null;
         /**
           * (optional) Whether the alert has a dismiss button
          */
@@ -2086,6 +2177,10 @@ declare namespace LocalJSX {
           * (optional) The alert message
          */
         "message"?: string;
+        /**
+          * An event that firest when the action button is clicked
+         */
+        "onActionClick"?: (event: ModusAlertCustomEvent<any>) => void;
         /**
           * An event that fires when the alert is dismissed
          */
@@ -2132,6 +2227,10 @@ declare namespace LocalJSX {
           * The autocomplete's label.
          */
         "label"?: string;
+        /**
+          * When enabled, multiple options can be selected in the component. And selected options are shown as chips in the input.
+         */
+        "multiple"?: boolean;
         /**
           * The autocomplete's no results sub-text.
          */
@@ -2628,6 +2727,10 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
+          * (optional) Takes the icon name and shows the icon aligned to the left of the button text.
+         */
+        "leftIcon"?: string;
+        /**
           * An event that fires on list item click
          */
         "onItemClick"?: (event: ModusListItemCustomEvent<any>) => void;
@@ -2825,6 +2928,10 @@ declare namespace LocalJSX {
           * (optional) Whether to show the placeholder for Pendo.
          */
         "showPendoPlaceholder"?: boolean;
+        /**
+          * (optional) Whether to show profile.  *
+         */
+        "showProfile"?: boolean;
         /**
           * (optional) Whether to show search.
          */
@@ -3054,6 +3161,10 @@ declare namespace LocalJSX {
          */
         "optionsDisplayProp"?: string;
         /**
+          * (optional) The input's placeholder.
+         */
+        "placeholder"?: string;
+        /**
           * (optional) Whether the input is required.
          */
         "required"?: boolean;
@@ -3072,7 +3183,7 @@ declare namespace LocalJSX {
     }
     interface ModusSentimentScale {
         /**
-          * (optional) The input's aria-label.
+          * (optional) The sentiment scale's aria-label.
          */
         "ariaLabel"?: string | null;
         /**
@@ -3338,6 +3449,10 @@ declare namespace LocalJSX {
           * (Optional) To sort data in table.
          */
         "sort"?: boolean;
+        /**
+          * (Optional) To display a-z or arrow sort icons.
+         */
+        "sortIconStyle"?: 'alphabetical' | 'directional';
         /**
           * (Optional) To display summary row.
          */
@@ -3661,6 +3776,10 @@ declare namespace LocalJSX {
          */
         "multiSelection"?: boolean;
         /**
+          * Fired when an action is clicked within any tree item. Includes both the `actionId` and `nodeId` of the action and item, respectively.
+         */
+        "onItemActionClick"?: (event: ModusTreeViewCustomEvent<any>) => void;
+        /**
           * (optional) Set selected tree items
          */
         "selectedItems"?: string[];
@@ -3670,6 +3789,10 @@ declare namespace LocalJSX {
         "size"?: 'condensed' | 'large' | 'standard';
     }
     interface ModusTreeViewItem {
+        /**
+          * (optional) Actions that can be performed on each item. A maximum of 3 icons will be shown, including overflow menu and expand icons.
+         */
+        "actions"?: ModusActionBarOptions1[];
         /**
           * (optional) Disables the tree item
          */
@@ -3695,6 +3818,10 @@ declare namespace LocalJSX {
          */
         "nodeId": string;
         /**
+          * Fired when an action button within the tree item is clicked. Includes the `actionId`.
+         */
+        "onActionClick"?: (event: ModusTreeViewItemCustomEvent<any>) => void;
+        /**
           * An event that fires on tree item checkbox click
          */
         "onCheckboxClick"?: (event: ModusTreeViewItemCustomEvent<boolean>) => void;
@@ -3715,6 +3842,7 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "modus-accordion": ModusAccordion;
         "modus-accordion-item": ModusAccordionItem;
+        "modus-action-bar": ModusActionBar;
         "modus-alert": ModusAlert;
         "modus-autocomplete": ModusAutocomplete;
         "modus-badge": ModusBadge;
@@ -3776,6 +3904,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "modus-accordion": LocalJSX.ModusAccordion & JSXBase.HTMLAttributes<HTMLModusAccordionElement>;
             "modus-accordion-item": LocalJSX.ModusAccordionItem & JSXBase.HTMLAttributes<HTMLModusAccordionItemElement>;
+            "modus-action-bar": LocalJSX.ModusActionBar & JSXBase.HTMLAttributes<HTMLModusActionBarElement>;
             "modus-alert": LocalJSX.ModusAlert & JSXBase.HTMLAttributes<HTMLModusAlertElement>;
             "modus-autocomplete": LocalJSX.ModusAutocomplete & JSXBase.HTMLAttributes<HTMLModusAutocompleteElement>;
             "modus-badge": LocalJSX.ModusBadge & JSXBase.HTMLAttributes<HTMLModusBadgeElement>;
