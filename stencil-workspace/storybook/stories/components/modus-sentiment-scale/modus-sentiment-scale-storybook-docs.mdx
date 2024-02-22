@@ -2,7 +2,9 @@
 
 ---
 
-The Modus Sentiment Scale component offers a configurable sentiment scale for users to choose a sentiment from predefined options. This component supports both smiley and thumb icon types. They are referenced using the `<modus-sentiment-scale>` custom HTML element. Users can navigate the sentiment scale using the Tab & Shift+Tab keys. Pressing the Enter key will toggle the selection.
+The Modus Sentiment Scale component offers a configurable sentiment scale for users to choose a sentiment from predefined options. This component supports both smiley and thumb icon types and are are referenced using the `<modus-sentiment-scale>` custom HTML element.
+
+Users can navigate the sentiment scale using the <kbd>Tab</kbd> & <kbd>Shift</kbd>+<kbd>Tab</kbd> keys. Pressing the <kbd>Enter</kbd> key will toggle the selection.
 
 ## Usage
 ### Thumbs
@@ -31,17 +33,18 @@ The Modus Sentiment Scale component offers a configurable sentiment scale for us
 ```
 ### Properties
 
-| Property     | Attribute   | Description                                     | Type                                                  | Options                    | Default   | Required |
-| ------------ | ----------- | ----------------------------------------------- | ----------------------------------------------------- | -------------------------- | --------- | -------- |
-| `type`  | `type` | The type of icons to be displayed.               | `typeof SMILEY_ICONS \| typeof THUMB_ICONS`            | `smileys`, `thumbs` |           | Yes      |
-| `disabled`   | `disabled`   | (optional) Whether the sentiment scale is disabled. | `boolean`                                            |                           | `false`   |          |
+| Property     | Attribute    | Description                                         | Type                            | Options                    | Default | Required |
+| ------------ | ------------ | --------------------------------------------------- | ------------------------------- | -------------------------- | ------- | -------- |
+| `ariaLabel`  | `aria-label` | (optional) The button's aria-label.                 | `string`                        |                            |         |          |
+| `type`       | `type`       | The type of icons to be displayed.                  | `SMILEY_ICONS` \| `THUMB_ICONS` | `smileys`, `thumbs`        |         | Yes      |
+| `disabled`   | `disabled`   | (optional) Whether the sentiment scale is disabled. | `boolean`                       |                            | `false` |          |
 
 ### Types
 
-| Types               | Values                                 |
-| -------------------- | ------------------------------------------- |
-| smileys | 'thumbs-up', 'thumbs-down'    |
-| thumbs | 'smiley-satisfied', 'smiley-dissatisfied', 'smiley-somewhat-dissatisfied', 'smiley-neutral', 'smiley-somewhat-satisfied',    |
+| Types   | Values                                                                                                                   |
+| ------- | ------------------------------------------------------------------------------------------------------------------------ |
+| smileys | `thumbs-up`, `thumbs-down`                                                                                               |
+| thumbs  | `smiley-satisfied`, `smiley-dissatisfied`, `smiley-somewhat-dissatisfied`, `smiley-neutral`, `smiley-somewhat-satisfied` |
 
 ### Events
 

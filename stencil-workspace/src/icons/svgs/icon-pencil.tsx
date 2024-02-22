@@ -4,7 +4,7 @@ import { IconProps } from '../ModusIconMap';
 
 export const IconPencil: FunctionalComponent<IconProps> = (props: IconProps) => (
   <svg
-    class="icon-pencil"
+    class={`icon-pencil ${props.pressed ? 'pressed' : ''}`}
     height={props.size ?? 16}
     width={props.size ?? 16}
     onClick={props.onClick}

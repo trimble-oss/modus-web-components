@@ -62,21 +62,49 @@ export declare interface ModusAccordionItem extends Components.ModusAccordionIte
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'dismissible', 'message', 'type']
+  inputs: ['actions', 'size', 'visibleItemCount']
+})
+@Component({
+  selector: 'modus-action-bar',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['actions', 'size', 'visibleItemCount'],
+})
+export class ModusActionBar {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['actionBarClick']);
+  }
+}
+
+
+export declare interface ModusActionBar extends Components.ModusActionBar {
+  /**
+   * (optional) An event that fires on action item click.
+   */
+  actionBarClick: EventEmitter<CustomEvent<any>>;
+}
+
+
+@ProxyCmp({
+  inputs: ['ariaLabel', 'buttonAriaLabel', 'buttonText', 'dismissible', 'message', 'type']
 })
 @Component({
   selector: 'modus-alert',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['ariaLabel', 'dismissible', 'message', 'type'],
+  inputs: ['ariaLabel', 'buttonAriaLabel', 'buttonText', 'dismissible', 'message', 'type'],
 })
 export class ModusAlert {
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['dismissClick']);
+    proxyOutputs(this, this.el, ['dismissClick', 'actionClick']);
   }
 }
 
@@ -86,18 +114,22 @@ export declare interface ModusAlert extends Components.ModusAlert {
    * An event that fires when the alert is dismissed
    */
   dismissClick: EventEmitter<CustomEvent<any>>;
+  /**
+   * An event that firest when the action button is clicked
+   */
+  actionClick: EventEmitter<CustomEvent<any>>;
 }
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'clearable', 'disableCloseOnSelect', 'disabled', 'dropdownMaxHeight', 'dropdownZIndex', 'errorText', 'includeSearchIcon', 'label', 'noResultsFoundSubtext', 'noResultsFoundText', 'options', 'placeholder', 'readOnly', 'required', 'showNoResultsFoundMessage', 'showOptionsOnFocus', 'size', 'value']
+  inputs: ['ariaLabel', 'clearable', 'disableCloseOnSelect', 'disabled', 'dropdownMaxHeight', 'dropdownZIndex', 'errorText', 'includeSearchIcon', 'label', 'multiple', 'noResultsFoundSubtext', 'noResultsFoundText', 'options', 'placeholder', 'readOnly', 'required', 'showNoResultsFoundMessage', 'showOptionsOnFocus', 'size', 'value']
 })
 @Component({
   selector: 'modus-autocomplete',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['ariaLabel', 'clearable', 'disableCloseOnSelect', 'disabled', 'dropdownMaxHeight', 'dropdownZIndex', 'errorText', 'includeSearchIcon', 'label', 'noResultsFoundSubtext', 'noResultsFoundText', 'options', 'placeholder', 'readOnly', 'required', 'showNoResultsFoundMessage', 'showOptionsOnFocus', 'size', 'value'],
+  inputs: ['ariaLabel', 'clearable', 'disableCloseOnSelect', 'disabled', 'dropdownMaxHeight', 'dropdownZIndex', 'errorText', 'includeSearchIcon', 'label', 'multiple', 'noResultsFoundSubtext', 'noResultsFoundText', 'options', 'placeholder', 'readOnly', 'required', 'showNoResultsFoundMessage', 'showOptionsOnFocus', 'size', 'value'],
 })
 export class ModusAutocomplete {
   protected el: HTMLElement;
@@ -501,7 +533,7 @@ export declare interface ModusList extends Components.ModusList {}
 
 
 @ProxyCmp({
-  inputs: ['borderless', 'disabled', 'selected', 'size', 'subText', 'type', 'wrapSubText'],
+  inputs: ['borderless', 'disabled', 'leftIcon', 'selected', 'size', 'subText', 'type', 'wrapSubText'],
   methods: ['focusItem']
 })
 @Component({
@@ -509,7 +541,7 @@ export declare interface ModusList extends Components.ModusList {}
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['borderless', 'disabled', 'selected', 'size', 'subText', 'type', 'wrapSubText'],
+  inputs: ['borderless', 'disabled', 'leftIcon', 'selected', 'size', 'subText', 'type', 'wrapSubText'],
 })
 export class ModusListItem {
   protected el: HTMLElement;
@@ -593,7 +625,7 @@ export declare interface ModusModal extends Components.ModusModal {
 
 
 @ProxyCmp({
-  inputs: ['apps', 'buttons', 'enableSearchOverlay', 'helpUrl', 'logoOptions', 'profileMenuOptions', 'reverse', 'searchTooltip', 'showAppsMenu', 'showHelp', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showSearch', 'showShadow', 'variant'],
+  inputs: ['apps', 'buttons', 'enableSearchOverlay', 'helpUrl', 'logoOptions', 'profileMenuOptions', 'reverse', 'searchTooltip', 'showAppsMenu', 'showHelp', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showProfile', 'showSearch', 'showShadow', 'variant'],
   methods: ['hideMainMenu']
 })
 @Component({
@@ -601,7 +633,7 @@ export declare interface ModusModal extends Components.ModusModal {
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['apps', 'buttons', 'enableSearchOverlay', 'helpUrl', 'logoOptions', 'profileMenuOptions', 'reverse', 'searchTooltip', 'showAppsMenu', 'showHelp', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showSearch', 'showShadow', 'variant'],
+  inputs: ['apps', 'buttons', 'enableSearchOverlay', 'helpUrl', 'logoOptions', 'profileMenuOptions', 'reverse', 'searchTooltip', 'showAppsMenu', 'showHelp', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showProfile', 'showSearch', 'showShadow', 'variant'],
 })
 export class ModusNavbar {
   protected el: HTMLElement;
@@ -928,7 +960,7 @@ export declare interface ModusRadioGroup extends Components.ModusRadioGroup {
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'disabled', 'errorText', 'helperText', 'label', 'options', 'optionsDisplayProp', 'required', 'size', 'validText', 'value'],
+  inputs: ['ariaLabel', 'disabled', 'errorText', 'helperText', 'label', 'options', 'optionsDisplayProp', 'placeholder', 'required', 'size', 'validText', 'value'],
   methods: ['focusInput']
 })
 @Component({
@@ -936,7 +968,7 @@ export declare interface ModusRadioGroup extends Components.ModusRadioGroup {
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['ariaLabel', 'disabled', 'errorText', 'helperText', 'label', 'options', 'optionsDisplayProp', 'required', 'size', 'validText', 'value'],
+  inputs: ['ariaLabel', 'disabled', 'errorText', 'helperText', 'label', 'options', 'optionsDisplayProp', 'placeholder', 'required', 'size', 'validText', 'value'],
 })
 export class ModusSelect {
   protected el: HTMLElement;
@@ -1132,7 +1164,7 @@ export declare interface ModusSwitch extends Components.ModusSwitch {
 
 
 @ProxyCmp({
-  inputs: ['columnReorder', 'columnResize', 'columns', 'data', 'defaultSort', 'density', 'displayOptions', 'fullWidth', 'hover', 'manualPaginationOptions', 'manualSortingOptions', 'maxHeight', 'maxWidth', 'pageSizeList', 'pagination', 'rowActions', 'rowSelection', 'rowSelectionOptions', 'rowsExpandable', 'showSortIconOnHover', 'sort', 'summaryRow', 'toolbar', 'toolbarOptions', 'wrapText'],
+  inputs: ['columnReorder', 'columnResize', 'columns', 'data', 'defaultSort', 'density', 'displayOptions', 'fullWidth', 'hover', 'manualPaginationOptions', 'manualSortingOptions', 'maxHeight', 'maxWidth', 'pageSizeList', 'pagination', 'rowActions', 'rowSelection', 'rowSelectionOptions', 'rowsExpandable', 'showSortIconOnHover', 'sort', 'sortIconStyle', 'summaryRow', 'toolbar', 'toolbarOptions', 'wrapText'],
   methods: ['getColumnData', 'toggleColumnVisibility']
 })
 @Component({
@@ -1140,7 +1172,7 @@ export declare interface ModusSwitch extends Components.ModusSwitch {
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['columnReorder', 'columnResize', 'columns', 'data', 'defaultSort', 'density', 'displayOptions', 'fullWidth', 'hover', 'manualPaginationOptions', 'manualSortingOptions', 'maxHeight', 'maxWidth', 'pageSizeList', 'pagination', 'rowActions', 'rowSelection', 'rowSelectionOptions', 'rowsExpandable', 'showSortIconOnHover', 'sort', 'summaryRow', 'toolbar', 'toolbarOptions', 'wrapText'],
+  inputs: ['columnReorder', 'columnResize', 'columns', 'data', 'defaultSort', 'density', 'displayOptions', 'fullWidth', 'hover', 'manualPaginationOptions', 'manualSortingOptions', 'maxHeight', 'maxWidth', 'pageSizeList', 'pagination', 'rowActions', 'rowSelection', 'rowSelectionOptions', 'rowsExpandable', 'showSortIconOnHover', 'sort', 'sortIconStyle', 'summaryRow', 'toolbar', 'toolbarOptions', 'wrapText'],
 })
 export class ModusTable {
   protected el: HTMLElement;
@@ -1567,15 +1599,21 @@ export class ModusTreeView {
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['itemActionClick']);
   }
 }
 
 
-export declare interface ModusTreeView extends Components.ModusTreeView {}
+export declare interface ModusTreeView extends Components.ModusTreeView {
+  /**
+   * Fired when an action is clicked within any tree item. Includes both the `actionId` and `nodeId` of the action and item, respectively.
+   */
+  itemActionClick: EventEmitter<CustomEvent<any>>;
+}
 
 
 @ProxyCmp({
-  inputs: ['disabled', 'draggableItem', 'droppableItem', 'editable', 'label', 'nodeId', 'tabIndexValue'],
+  inputs: ['actions', 'disabled', 'draggableItem', 'droppableItem', 'editable', 'label', 'nodeId', 'tabIndexValue'],
   methods: ['focusItem', 'focusCheckbox']
 })
 @Component({
@@ -1583,14 +1621,14 @@ export declare interface ModusTreeView extends Components.ModusTreeView {}
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['disabled', 'draggableItem', 'droppableItem', 'editable', 'label', 'nodeId', 'tabIndexValue'],
+  inputs: ['actions', 'disabled', 'draggableItem', 'droppableItem', 'editable', 'label', 'nodeId', 'tabIndexValue'],
 })
 export class ModusTreeViewItem {
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['checkboxClick', 'itemClick', 'itemExpandToggle']);
+    proxyOutputs(this, this.el, ['checkboxClick', 'itemClick', 'itemExpandToggle', 'actionClick']);
   }
 }
 
@@ -1608,6 +1646,10 @@ export declare interface ModusTreeViewItem extends Components.ModusTreeViewItem 
    * An event that fires on tree item expand/collapse
    */
   itemExpandToggle: EventEmitter<CustomEvent<boolean>>;
+  /**
+   * Fired when an action button within the tree item is clicked. Includes the `actionId`.
+   */
+  actionClick: EventEmitter<CustomEvent<any>>;
 }
 
 

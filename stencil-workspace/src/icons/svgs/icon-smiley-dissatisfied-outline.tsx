@@ -4,7 +4,7 @@ import { IconProps } from '../ModusIconMap';
 
 export const IconSmileyDissatisfiedOutline: FunctionalComponent<IconProps> = (props: IconProps) => (
   <svg
-    class="icon-smiley-dissatistied-outline"
+    class={`icon-smiley-dissatistied-outline ${props.pressed ? 'pressed' : ''}`}
     width={props.size ?? '16'}
     height={props.size ?? 16}
     onClick={props.onClick ? (event) => props.onClick(event) : null}

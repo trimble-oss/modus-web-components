@@ -1,5 +1,6 @@
 // eslint-disable-next-line
 import { Component, Event, EventEmitter, h, Method, Prop, Watch } from '@stencil/core';
+import { generateElementId } from '../../utils/utils';
 
 @Component({
   tag: 'modus-number-input',
@@ -54,6 +55,8 @@ export class ModusNumberInput {
 
   /** An event that fires on input value change. */
   @Event() valueChange: EventEmitter<string>;
+
+  private inputId = generateElementId() + '_number-input';
 
   classBySize: Map<string, string> = new Map([
     ['medium', 'medium'],
@@ -115,12 +118,13 @@ export class ModusNumberInput {
       <div class={buildContainerClassNames()}>
         {this.label || this.required ? (
           <div class="label-container">
-            {this.label ? <label>{this.label}</label> : null}
+            {this.label ? <label htmlFor={this.inputId}>{this.label}</label> : null}
             {this.required ? <span class="required">*</span> : null}
           </div>
         ) : null}
         <div class={buildInputContainerClassNames()} part="input-container">
           <input
+            id={this.inputId}
             aria-label={this.ariaLabel}
             aria-invalid={!!this.errorText}
             aria-required={this.required?.toString()}
