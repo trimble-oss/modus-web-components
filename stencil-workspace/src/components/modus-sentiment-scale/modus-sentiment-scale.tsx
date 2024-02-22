@@ -15,7 +15,7 @@ import { SentimentIconMap } from './SentimentIconMap';
   shadow: true,
 })
 export class ModusSentimentScale {
-  /** (optional) The input's aria-label. */
+  /** (optional) The sentiment scale's aria-label. */
   @Prop() ariaLabel: string | null;
 
   /** The type of icons to be displayed. */
@@ -59,7 +59,11 @@ export class ModusSentimentScale {
 
     let containerClass = `${this.type + '-container'} ${this.disabled ? ' disabled' : ''}`;
     return (
-      <div class="sentiment-scale-container" role="group">
+      <div
+        class="sentiment-scale-container"
+        aria-disabled={this.disabled ? 'true' : ''}
+        aria-label={this.ariaLabel}
+        role="group">
         {iconsMap &&
           Array.from(iconsMap).map(([key, value]) => {
             const isIconSelected = key === this.selected;

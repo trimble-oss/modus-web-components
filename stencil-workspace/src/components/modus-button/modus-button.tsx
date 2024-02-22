@@ -127,7 +127,6 @@ export class ModusButton {
         onKeyUp={() => (this.pressed = false)}
         onMouseDown={() => (this.pressed = true)}
         onMouseUp={() => (this.pressed = false)}
-        role="button"
         ref={(el) => (this.buttonRef = el)}>
         {this.iconOnly ? this.renderIconOnly() : this.renderIconWithText()}
         {this.showCaret && <ModusIconMap size="24" icon="caret_down"></ModusIconMap>}

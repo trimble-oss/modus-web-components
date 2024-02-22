@@ -26,18 +26,19 @@ When designing a custom footer, it is highly recommended to use button progressi
 </modus-modal>
 
 <script>
-    document.querySelector('#btn-modal').addEventListener('buttonClick', () => {
-      document.querySelector('modus-modal').open();
-    });
+  document.querySelector('#btn-modal').addEventListener('buttonClick', () => {
+    document.querySelector('modus-modal').open();
+  });
 
-    document.querySelector('modus-modal').addEventListener('closed', () => {
-      // Timeout is a workaround for Stencil Web Component not capturing the state updates quick enough when another component is immediately focussed
-      setTimeout(() => {
-        document.querySelector('#btn-modal').focusButton();
-      }, 100);
-    });
+  document.querySelector('modus-modal').addEventListener('closed', () => {
+    // Timeout is a workaround for Stencil Web Component not capturing the state updates quick enough when another component is immediately focussed
+    setTimeout(() => {
+      document.querySelector('#btn-modal').focusButton();
+    }, 100);
+  });
 </script>
 ```
+
 ### Custom footer
 
 <Story id="components-modal--custom-footer" height={'400px'} />
@@ -45,45 +46,49 @@ When designing a custom footer, it is highly recommended to use button progressi
 ```html
 <modus-button id="btn-modal" color="primary">Open modal</modus-button>
 <modus-modal>
-    <p>A dialog or a modal is a window overlaid on the primary window. It interrupts the user and requires an action. It disables the main content until the user explicitly interacts with the modal dialog.</p>
-    <div style="align-items: center;
+  <p>
+    A dialog or a modal is a window overlaid on the primary window. It interrupts the user and requires an action. It
+    disables the main content until the user explicitly interacts with the modal dialog.
+  </p>
+  <div
+    style="align-items: center;
     display: flex;
-    justify-content: flex-end; gap: 8px; height:100%;" slot="footerContent">
-      <modus-button color="tertiary">Cancel</modus-button>
-      <modus-button color="secondary">Check later</modus-button>
-      <modus-button color="primary">Approve</modus-button>
-    </div>
+    justify-content: flex-end; gap: 8px; height:100%;"
+    slot="footerContent">
+    <modus-button color="tertiary">Cancel</modus-button>
+    <modus-button color="secondary">Check later</modus-button>
+    <modus-button color="primary">Approve</modus-button>
+  </div>
 </modus-modal>
 
 <script>
-    document.querySelector('#btn-modal').addEventListener('buttonClick', () => {
-      document.querySelector('modus-modal').open();
-    });
+  document.querySelector('#btn-modal').addEventListener('buttonClick', () => {
+    document.querySelector('modus-modal').open();
+  });
 
-    document.querySelector('modus-modal').addEventListener('closed', () => {
-      // Timeout is a workaround for Stencil Web Component not capturing the state updates quick enough when another component is immediately focussed
-      setTimeout(() => {
-        document.querySelector('#btn-modal').focusButton();
-      }, 100);
-    });
+  document.querySelector('modus-modal').addEventListener('closed', () => {
+    // Timeout is a workaround for Stencil Web Component not capturing the state updates quick enough when another component is immediately focussed
+    setTimeout(() => {
+      document.querySelector('#btn-modal').focusButton();
+    }, 100);
+  });
 </script>
 ```
 
 ### Properties
 
-| Property                   | Attribute                     | Description                                                                                                                                               | Type                            | Default     |
-| -------------------------- | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------| ----------- |
-| `ariaLabel`                | `aria-label`                  | (optional) The modal's aria-label.                                                                                                                        | `string`                        | `undefined` |
-| `backdrop`                 | `backdrop`                    | (optional) The modal's backdrop.  Specify 'static' for a backdrop that doesn't close the modal when clicked outside the modal content.                    | "static" \| "default"`          | `'default'` |
-| `headerText`               | `header-text`                 | (optional) The modal's primary button text.                                                                                                               | `string`                        | `undefined` |
-| `primaryButtonAriaLabel`   | `primary-button-aria-label`   | (optional) The modal's primary button aria-label.                                                                                                         | `string`                        | `undefined` |
-| `primaryButtonDisabled`    | `primary-button-disabled`     | (optional) Disable primary button.                                                                                                                        | `boolean`                       | `undefined` |
-| `primaryButtonText`        | `primary-button-text`         | (optional) The modal's primary button text.                                                                                                               | `string`                        | `undefined` |
-| `secondaryButtonAriaLabel` | `secondary-button-aria-label` | (optional) The modal's secondary button aria-label.                                                                                                       | `string`                        | `undefined` |
-| `secondaryButtonDisabled`  | `secondary-button-disabled`   | (optional) Disable secondary button.                                                                                                                      | `boolean`                       | `undefined` |
-| `secondaryButtonText`      | `secondary-button-text`       | (optional) The modal's secondary button text.                                                                                                             | `string`                        | `undefined` |
-| `zIndex`                   | `z-index`                     | (optional) The modal's z-index.                                                                                                                           | `string`                        | `'1'`       |
-
+| Property                   | Attribute                     | Description                                                                                                                           | Type                   | Default     |
+| -------------------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----------- |
+| `ariaLabel`                | `aria-label`                  | (optional) The modal's aria-label.                                                                                                    | `string`               | `undefined` |
+| `backdrop`                 | `backdrop`                    | (optional) The modal's backdrop. Specify 'static' for a backdrop that doesn't close the modal when clicked outside the modal content. | "static" \| "default"` | `'default'` |
+| `headerText`               | `header-text`                 | (optional) The modal's primary button text.                                                                                           | `string`               | `undefined` |
+| `primaryButtonAriaLabel`   | `primary-button-aria-label`   | (optional) The modal's primary button aria-label.                                                                                     | `string`               | `undefined` |
+| `primaryButtonDisabled`    | `primary-button-disabled`     | (optional) Disable primary button.                                                                                                    | `boolean`              | `undefined` |
+| `primaryButtonText`        | `primary-button-text`         | (optional) The modal's primary button text.                                                                                           | `string`               | `undefined` |
+| `secondaryButtonAriaLabel` | `secondary-button-aria-label` | (optional) The modal's secondary button aria-label.                                                                                   | `string`               | `undefined` |
+| `secondaryButtonDisabled`  | `secondary-button-disabled`   | (optional) Disable secondary button.                                                                                                  | `boolean`              | `undefined` |
+| `secondaryButtonText`      | `secondary-button-text`       | (optional) The modal's secondary button text.                                                                                         | `string`               | `undefined` |
+| `zIndex`                   | `z-index`                     | (optional) The modal's z-index.                                                                                                       | `string`               | `'1'`       |
 
 ### Events
 
@@ -94,13 +99,12 @@ When designing a custom footer, it is highly recommended to use button progressi
 | `primaryButtonClick`   | An event that fires on primary button click.   | `CustomEvent<any>` |
 | `secondaryButtonClick` | An event that fires on secondary button click. | `CustomEvent<any>` |
 
-
 ### Methods
 
-| Method name  | Description     | Parameter | Return          |
-| ------------ | --------------- | --------- | --------------- |
-| `close` | Closes the Modal |           | `Promise<void>` |
-| `open` | Opens the Modal |           | `Promise<void>` |
+| Method name | Description      | Parameter | Return          |
+| ----------- | ---------------- | --------- | --------------- |
+| `close`     | Closes the Modal |           | `Promise<void>` |
+| `open`      | Opens the Modal  |           | `Promise<void>` |
 
 ### Slots
 
@@ -112,8 +116,8 @@ When designing a custom footer, it is highly recommended to use button progressi
 
 - Modal has `role` of `dialog`.
 - Modal gets `aria-hidden` set to whether Modal is closed.
-- When Primary button has focus, **Enter** emits `primaryButtonClick` event.
-- When Secondary button has focus, **Enter** emits `secondaryButtonClick` event.
-- When the Modal is open, tabbing can be performed only on the focussable elements inside Modal. Note: Pressing `Shift` + `Tab` on Modal Header cannot go back to Modal Footer.
-- Pressing `Escape` key closes the Modal and emits `close` event.
+- When Primary button has focus, <kbd>Enter</kbd> emits `primaryButtonClick` event.
+- When Secondary button has focus, <kbd>Enter</kbd> emits `secondaryButtonClick` event.
+- When the Modal is open, tabbing can be performed only on the focussable elements inside Modal. Note: Pressing <kbd>Shift</kbd> + <kbd>Tab</kbd> on Modal Header cannot go back to Modal Footer.
+- Pressing <kbd>Escape</kbd> key closes the Modal and emits `close` event.
 - To customize footer, slot option is provided and referenced by `slot='footer'`.
