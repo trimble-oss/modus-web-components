@@ -84,4 +84,16 @@ describe('modus-alert', () => {
     await page.waitForChanges();
     expect(dismissClick).toHaveReceivedEvent();
   });
+
+  it('emits actionClick event on action button click', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-alert button-text="Action"></modus-alert>');
+    const actionClick = await page.spyOnEvent('actionClick');
+    const element = await page.find('modus-alert >>> modus-button');
+
+    await element.click();
+    await page.waitForChanges();
+    expect(actionClick).toHaveReceivedEvent();
+  });
 });

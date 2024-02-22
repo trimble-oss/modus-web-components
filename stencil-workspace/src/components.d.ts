@@ -94,6 +94,14 @@ export namespace Components {
          */
         "ariaLabel": string | null;
         /**
+          * (optional) The button's aria-label.
+         */
+        "buttonAriaLabel": string | null;
+        /**
+          * (optional) The button's text
+         */
+        "buttonText": string | null;
+        /**
           * (optional) Whether the alert has a dismiss button
          */
         "dismissible": boolean;
@@ -143,6 +151,10 @@ export namespace Components {
           * The autocomplete's label.
          */
         "label": string;
+        /**
+          * When enabled, multiple options can be selected in the component. And selected options are shown as chips in the input.
+         */
+        "multiple": boolean;
         /**
           * The autocomplete's no results sub-text.
          */
@@ -743,6 +755,10 @@ export namespace Components {
          */
         "showPendoPlaceholder": boolean;
         /**
+          * (optional) Whether to show profile.  *
+         */
+        "showProfile": boolean;
+        /**
           * (optional) Whether to show search.
          */
         "showSearch": boolean;
@@ -947,6 +963,10 @@ export namespace Components {
           * The options property to render in the dropdown list.
          */
         "optionsDisplayProp": string;
+        /**
+          * (optional) The input's placeholder.
+         */
+        "placeholder": string;
         /**
           * (optional) Whether the input is required.
          */
@@ -2142,6 +2162,14 @@ declare namespace LocalJSX {
          */
         "ariaLabel"?: string | null;
         /**
+          * (optional) The button's aria-label.
+         */
+        "buttonAriaLabel"?: string | null;
+        /**
+          * (optional) The button's text
+         */
+        "buttonText"?: string | null;
+        /**
           * (optional) Whether the alert has a dismiss button
          */
         "dismissible"?: boolean;
@@ -2149,6 +2177,10 @@ declare namespace LocalJSX {
           * (optional) The alert message
          */
         "message"?: string;
+        /**
+          * An event that firest when the action button is clicked
+         */
+        "onActionClick"?: (event: ModusAlertCustomEvent<any>) => void;
         /**
           * An event that fires when the alert is dismissed
          */
@@ -2195,6 +2227,10 @@ declare namespace LocalJSX {
           * The autocomplete's label.
          */
         "label"?: string;
+        /**
+          * When enabled, multiple options can be selected in the component. And selected options are shown as chips in the input.
+         */
+        "multiple"?: boolean;
         /**
           * The autocomplete's no results sub-text.
          */
@@ -2893,6 +2929,10 @@ declare namespace LocalJSX {
          */
         "showPendoPlaceholder"?: boolean;
         /**
+          * (optional) Whether to show profile.  *
+         */
+        "showProfile"?: boolean;
+        /**
           * (optional) Whether to show search.
          */
         "showSearch"?: boolean;
@@ -3120,6 +3160,10 @@ declare namespace LocalJSX {
           * The options property to render in the dropdown list.
          */
         "optionsDisplayProp"?: string;
+        /**
+          * (optional) The input's placeholder.
+         */
+        "placeholder"?: string;
         /**
           * (optional) Whether the input is required.
          */
