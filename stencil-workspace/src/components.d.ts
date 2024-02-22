@@ -755,6 +755,10 @@ export namespace Components {
          */
         "showPendoPlaceholder": boolean;
         /**
+          * (optional) Whether to show profile.  *
+         */
+        "showProfile": boolean;
+        /**
           * (optional) Whether to show search.
          */
         "showSearch": boolean;
@@ -2924,6 +2928,10 @@ declare namespace LocalJSX {
           * (optional) Whether to show the placeholder for Pendo.
          */
         "showPendoPlaceholder"?: boolean;
+        /**
+          * (optional) Whether to show profile.  *
+         */
+        "showProfile"?: boolean;
         /**
           * (optional) Whether to show search.
          */
