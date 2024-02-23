@@ -4,13 +4,24 @@ import { html } from 'lit-html';
 
 export default {
   title: 'Components/Breadcrumb',
+  argTypes: {
+    underline:{
+      name: 'underline',
+      description: 'A flag that controls the display of underline',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      },
+    },
+    },
   parameters: {
     docs: {
       inlineStories: false,
       page: docs,
     },
     controls: {
-      disabled: true,
+      disabled: false,
+      expanded: true,
     },
     options: {
       isToolshown: true,
@@ -18,12 +29,14 @@ export default {
   },
 };
 
-const Template = () => html`
-  <modus-breadcrumb></modus-breadcrumb>
+const Template = ({underline}) => html`
+  <modus-breadcrumb underline=${underline}></modus-breadcrumb>
   ${setBreadcrumb()}
 `;
 export const Default = Template.bind({});
-
+Default.args = { underline: false };
+export const Underline = Template.bind({});
+Underline.args = { underline: true };
 // The <script> tag cannot be used in the MDX file, so we use this method to
 // set the breadcrumbs for the default story.
 const setBreadcrumb = () => {

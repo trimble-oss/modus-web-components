@@ -7,10 +7,11 @@
 
 ## Properties
 
-| Property    | Attribute    | Description                  | Type      | Default     |
-| ----------- | ------------ | ---------------------------- | --------- | ----------- |
-| `ariaLabel` | `aria-label` | The breadcrumb's aria-label. | `string`  | `undefined` |
-| `crumbs`    | --           | The breadcrumbs to render.   | `Crumb[]` | `[]`        |
+| Property    | Attribute    | Description                                     | Type      | Default     |
+| ----------- | ------------ | ----------------------------------------------- | --------- | ----------- |
+| `ariaLabel` | `aria-label` | The breadcrumb's aria-label.                    | `string`  | `undefined` |
+| `crumbs`    | --           | The breadcrumbs to render.                      | `Crumb[]` | `[]`        |
+| `underline` | `underline`  | (optional) The breadcrumbs to have an underline | `boolean` | `undefined` |
 
 
 ## Events
