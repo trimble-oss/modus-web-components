@@ -494,7 +494,7 @@ export class ModusNavbar {
                         reverse={this.reverse}
                         username={this.profileMenuOptions?.username}
                         variant={this.variant}
-                        profile-menu-text={this.profileMenuOptions?.profileMenuText}>
+                        sign-out-text={this.profileMenuOptions?.signOutText}>
                         <slot name={this.SLOT_PROFILE_MENU}></slot>
                       </modus-navbar-profile-menu>
                     )}

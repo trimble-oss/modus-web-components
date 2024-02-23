@@ -7,16 +7,16 @@
 
 ## Properties
 
-| Property          | Attribute           | Description | Type                           | Default      |
-| ----------------- | ------------------- | ----------- | ------------------------------ | ------------ |
-| `avatarUrl`       | `avatar-url`        |             | `string`                       | `undefined`  |
-| `email`           | `email`             |             | `string`                       | `undefined`  |
-| `initials`        | `initials`          |             | `string`                       | `undefined`  |
-| `links`           | --                  |             | `ModusNavbarProfileMenuLink[]` | `undefined`  |
-| `profileMenuText` | `profile-menu-text` |             | `string`                       | `'Sign out'` |
-| `reverse`         | `reverse`           |             | `boolean`                      | `undefined`  |
-| `username`        | `username`          |             | `string`                       | `undefined`  |
-| `variant`         | `variant`           |             | `"blue" \| "default"`          | `'default'`  |
+| Property      | Attribute       | Description | Type                           | Default      |
+| ------------- | --------------- | ----------- | ------------------------------ | ------------ |
+| `avatarUrl`   | `avatar-url`    |             | `string`                       | `undefined`  |
+| `email`       | `email`         |             | `string`                       | `undefined`  |
+| `initials`    | `initials`      |             | `string`                       | `undefined`  |
+| `links`       | --              |             | `ModusNavbarProfileMenuLink[]` | `undefined`  |
+| `reverse`     | `reverse`       |             | `boolean`                      | `undefined`  |
+| `signOutText` | `sign-out-text` |             | `string`                       | `'Sign out'` |
+| `username`    | `username`      |             | `string`                       | `undefined`  |
+| `variant`     | `variant`       |             | `"blue" \| "default"`          | `'default'`  |
 
 
 ## Events
