@@ -493,7 +493,8 @@ export class ModusNavbar {
                         links={this.profileMenuOptions?.links}
                         reverse={this.reverse}
                         username={this.profileMenuOptions?.username}
-                        variant={this.variant}>
+                        variant={this.variant}
+                        profile-menu-text={this.profileMenuOptions?.profileMenuText}>
                         <slot name={this.SLOT_PROFILE_MENU}></slot>
                       </modus-navbar-profile-menu>
                     )}

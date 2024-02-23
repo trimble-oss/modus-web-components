@@ -133,6 +133,7 @@ Default.args = {
     avatarUrl: workingAvatarUrl,
     email: 'modus_user@trimble.com',
     initials: 'MU',
+    profileMenuText: 'Sign out',
     username: 'Modus User',
     links: [
       {
@@ -181,6 +182,7 @@ FailedAvatar.args = {
     avatarUrl: failingAvatarUrl,
     email: 'modus_user@trimble.com',
     initials: 'MU',
+    profileMenuText: 'Sign out',
     username: 'Modus User',
   },
   searchTooltip: undefined,
@@ -216,6 +218,7 @@ BlueNavbar.args = {
     avatarUrl: workingAvatarUrl,
     email: 'modus_user@trimble.com',
     initials: 'MU',
+    profileMenuText: 'Sign out',
     username: 'Modus User',
   },
   searchTooltip: undefined,
