@@ -176,14 +176,14 @@ export declare interface ModusBadge extends Components.ModusBadge {}
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'crumbs']
+  inputs: ['ariaLabel', 'crumbs', 'underline']
 })
 @Component({
   selector: 'modus-breadcrumb',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['ariaLabel', 'crumbs'],
+  inputs: ['ariaLabel', 'crumbs', 'underline'],
 })
 export class ModusBreadcrumb {
   protected el: HTMLElement;
