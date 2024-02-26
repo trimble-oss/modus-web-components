@@ -1,0 +1,43 @@
+{
+  "name": "angular-workspace",
+  "version": "0.0.0-1",
+  "private": true,
+  "scripts": {
+    "ng": "ng",
+    "start:test-harness": "ng run test-harness:serve",
+    "build": "ng run @trimble-oss/modus-angular-components:build:production",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test"
+  },
+  "dependencies": {
+    "@angular/animations": "^17.2.2",
+    "@angular/common": "^17.2.2",
+    "@angular/compiler": "^17.2.2",
+    "@angular/core": "^17.2.2",
+    "@angular/forms": "^17.2.2",
+    "@angular/platform-browser": "^17.2.2",
+    "@angular/platform-browser-dynamic": "^17.2.2",
+    "@angular/router": "^17.2.2",
+    "rxjs": "~7.8.1",
+    "tslib": "^2.5.3",
+    "zone.js": "~0.14.4"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^17.2.1",
+    "@angular/cli": "^17.2.1",
+    "@angular/compiler-cli": "^17.2.2",
+    "@types/jasmine": "~3.10.0",
+    "@types/node": "^12.11.1",
+    "jasmine-core": "~4.0.0",
+    "karma": "~6.4.2",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.1",
+    "karma-jasmine": "~4.0.0",
+    "karma-jasmine-html-reporter": "~1.7.0",
+    "ng-packagr": "^17.2.0",
+    "typescript": "~5.2.0"
+  },
+  "engines": {
+    "node": ">=18.13.0"
+  }
+}
