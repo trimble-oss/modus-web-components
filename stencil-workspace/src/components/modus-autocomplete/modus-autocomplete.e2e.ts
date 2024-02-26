@@ -669,4 +669,167 @@ describe('modus-autocomplete', () => {
     expect(optionSelected).toHaveReceivedEvent();
     expect(optionSelected).toHaveReceivedEventDetail('1');
   });
+
+  it('should add chip when option is selected and multiple is true', async () => {
+    const element = await page.find('modus-autocomplete');
+    element.setProperty('multiple', true);
+    await page.waitForChanges();
+
+    element.setProperty('options', ['Test 1']);
+    await page.waitForChanges();
+
+    const textInput = await page.find('modus-autocomplete >>> modus-text-input');
+    await textInput.click();
+    await textInput.type('Test');
+    await page.waitForChanges();
+
+    const option = await page.find('modus-autocomplete >>> li');
+    await option.click();
+    await page.waitForChanges();
+
+    const chipsContainer = await page.find('modus-autocomplete >>> .chips-container');
+
+    const chips = await chipsContainer.findAll('modus-chip');
+
+    expect(chips.length).toEqual(1);
+
+    expect(await chips[0].getProperty('value')).toBe('Test 1');
+  });
+
+  it('should not add chip when multiple is false', async () => {
+    const element = await page.find('modus-autocomplete');
+    element.setProperty('multiple', false);
+    await page.waitForChanges();
+
+    element.setProperty('options', ['Test 1']);
+    await page.waitForChanges();
+
+    const textInput = await page.find('modus-autocomplete >>> modus-text-input');
+    await textInput.click();
+    await textInput.type('Test');
+    await page.waitForChanges();
+
+    const option = await page.find('modus-autocomplete >>> li');
+    await option.click();
+    await page.waitForChanges();
+
+    const chipsContainer = await page.find('modus-autocomplete >>> .chips-container');
+
+    const chips = await chipsContainer.findAll('modus-chip');
+
+    expect(chips.length).toEqual(0);
+  });
+
+  it('should render clear button when clearable is true and there is a value', async () => {
+    const element = await page.find('modus-autocomplete');
+    element.setProperty('clearable', true);
+
+    element.setProperty('options', ['Test 1']);
+
+    await page.waitForChanges();
+
+    const textInput = await page.find('modus-autocomplete >>> modus-text-input');
+    await textInput.click();
+    await textInput.type('Test');
+    await page.waitForChanges();
+
+    const option = await page.find('modus-autocomplete >>> li');
+    await option.click();
+    await page.waitForChanges();
+
+    const clearButton = await element.findAll('.icons-close');
+    expect(clearButton).not.toBeNull();
+  });
+
+  it('should not render clear button when clearable is false or there is no value', async () => {
+    const element = await page.find('modus-autocomplete');
+    element.setProperty('clearable', false);
+
+    element.setProperty('options', ['Test 1']);
+
+    await page.waitForChanges();
+
+    const textInput = await page.find('modus-autocomplete >>> modus-text-input');
+    await textInput.click();
+    await textInput.type('Test');
+    await page.waitForChanges();
+
+    const option = await page.find('modus-autocomplete >>> li');
+    await option.click();
+    await page.waitForChanges();
+
+    const clearButton = await element.findAll('.icons-close');
+    expect(clearButton).toEqual([]);
+  });
+
+  it('should disable the autocomplete when disabled is true', async () => {
+    const element = await page.find('modus-autocomplete');
+    element.setProperty('disabled', true);
+    await page.waitForChanges();
+
+    expect(await element.getProperty('disabled')).toBe(true);
+  });
+
+  it('should enable the autocomplete when disabled is false', async () => {
+    const element = await page.find('modus-autocomplete');
+    element.setProperty('disabled', false);
+    await page.waitForChanges();
+
+    expect(await element.getProperty('disabled')).toBe(false);
+  });
+
+  it('should display error message when there is an error', async () => {
+    const element = await page.find('modus-autocomplete');
+    element.setProperty('errorText', "This field can't be empty");
+    await page.waitForChanges();
+    const errorLabel = await page.findAll('modus-autocomplete >>> .error label');
+
+    expect(errorLabel.length).toEqual(1);
+  });
+
+  it('should not display error message when there is no error', async () => {
+    const element = await page.find('modus-autocomplete');
+    element.setProperty('errorText', '');
+    await page.waitForChanges();
+    const errorLabel = await page.findAll('modus-autocomplete >>> .error label');
+
+    expect(errorLabel.length).toEqual(0);
+  });
+
+  it('should include search icon when includeSearchIcon is true', async () => {
+    const element = await page.find('modus-autocomplete');
+    element.setProperty('includeSearchIcon', true);
+    await page.waitForChanges();
+
+    const searchIcon = await page.findAll('modus-autocomplete >>> .chips-container .icon-search');
+    expect(searchIcon.length).toEqual(1);
+  });
+
+  it('should not include search icon when includeSearchIcon is false', async () => {
+    const element = await page.find('modus-autocomplete');
+    element.setProperty('includeSearchIcon', false);
+    await page.waitForChanges();
+
+    const searchIcon = await page.findAll('modus-autocomplete >>> .chips-container .icon-search');
+    expect(searchIcon.length).toEqual(0);
+  });
+
+  it('should render label when label is provided', async () => {
+    const element = await page.find('modus-autocomplete');
+    const label = 'Select an option';
+    element.setProperty('label', label);
+    await page.waitForChanges();
+
+    const labelContainer = await page.findAll('modus-autocomplete >>> .label-container');
+    expect(labelContainer.length).toEqual(1);
+  });
+
+  it('should not render label when label is not provided', async () => {
+    const element = await page.find('modus-autocomplete');
+    element.setProperty('label', '');
+    await page.waitForChanges();
+
+    const labelContainer = await page.findAll('modus-autocomplete >>> .label-container');
+    expect(labelContainer.length).toEqual(0);
+  });
 });

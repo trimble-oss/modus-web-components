@@ -1,6 +1,6 @@
 {
   "name": "@trimble-oss/modus-web-components",
-  "version": "0.17.0",
+  "version": "0.18.0",
   "description": "Trimble Modus Web Component Library",
   "homepage": "https://modus-web-components.trimble.com/",
   "bugs": {
@@ -45,7 +45,7 @@
     "@tanstack/table-core": "^8.11.6"
   },
   "devDependencies": {
-    "@stencil/angular-output-target": "^0.7.1",
+    "@stencil/angular-output-target": "^0.8.4",
     "@stencil/postcss": "^2.1.0",
     "@stencil/react-output-target": "^0.5.3",
     "@stencil/sass": "^2.0.4",

@@ -63,7 +63,7 @@ export const Medium = ({ ariaLabel, checked, disabled, label, size }) =>
     <modus-switch
       aria-label=${ariaLabel}
       checked=${checked}
-      disabled=${disabled}
+      ?disabled=${disabled}
       label=${label}
       size=${size}>
     </modus-switch>
@@ -81,7 +81,7 @@ export const Checked = ({ ariaLabel, checked, disabled, label, size }) =>
     <modus-switch
       aria-label=${ariaLabel}
       checked=${checked}
-      disabled=${disabled}
+      ?disabled=${disabled}
       label=${label}
       size=${size}>
     </modus-switch>
@@ -99,7 +99,7 @@ export const Disabled = ({ ariaLabel, checked, disabled, label, size }) =>
     <modus-switch
       aria-label=${ariaLabel}
       checked=${checked}
-      disabled=${disabled}
+      ?disabled=${disabled}
       label=${label}
       size=${size}>
     </modus-switch>
