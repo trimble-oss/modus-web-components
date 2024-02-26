@@ -13,6 +13,7 @@ export class ModusNavbarProfileMenu {
   @Prop() email: string;
   @Prop() initials: string;
   @Prop() links: ModusNavbarProfileMenuLink[];
+  @Prop() signOutText = 'Sign out';
   @Prop() reverse: boolean;
   @Prop() username: string;
   @Prop() variant: 'default' | 'blue' = 'default';
@@ -68,7 +69,7 @@ export class ModusNavbarProfileMenu {
           onClick={() => this.signOutClick.emit()}
           onKeyDown={(event) => this.signOutKeydownHandler(event)}
           tabIndex={0}>
-          <div>Sign out</div>
+          <div>{this.signOutText}</div>
         </div>
       </div>
     );

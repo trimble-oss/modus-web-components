@@ -13,6 +13,7 @@ This component utilizes the slot element, allowing you to render your own HTML i
 - The only required navigation items are the product logo and the user menu. The rest are hidden by default.
 - If a profile menu avatarUrl is provided it will take rendering preference over initials.
   - If the provided avatarUrl fails to load, initials will be used as a fallback.
+- If the profile menu signOutText is provided, a sign out button with the provided text will be rendered else the sign out button will be rendered with the text "Sign out".
 - If `buttons` are provided, Navbar creates the icon buttons dynamically
   - The `slot` allows rendering custom HTML on button click by linking the slot name with button id.
 - If a `show-search` with `enable-search-overlay` set as true then search overly will open on search button click, if enable-search-overlay set to false then search button emit the event for client.
@@ -55,6 +56,7 @@ This component utilizes the slot element, allowing you to render your own HTML i
     avatarUrl: '...',
     email: 'modus_user@trimble.com',
     initials: 'MU',
+    signOutText: 'Sign out',
     username: 'Modus User',
     links: [
       {
@@ -112,6 +114,7 @@ This component utilizes the slot element, allowing you to render your own HTML i
     avatarUrl: 'https://avatar.example.com/broken-image-link.png',
     email: 'modus_user@trimble.com',
     initials: 'MU',
+    signOutText: 'Sign out',
     username: 'Modus User',
   };
 </script>
@@ -156,6 +159,7 @@ Use the `variant` prop to choose a blue background navbar.
     avatarUrl: 'https://avatar.example.com/broken-image-link.png',
     email: 'modus_user@trimble.com',
     initials: 'MU',
+    signOutText: 'Sign out',
     username: 'Modus User',
   };
 </script>
@@ -198,6 +202,7 @@ interface ModusProfileMenuOptions {
   avatarUrl?: string;
   email?: string;
   initials?: string;
+  signOutText?: string;
   links?: ModusNavbarProfileMenuLink[];
   username: string;
   tooltip: ModusNavbarTooltip;
