@@ -15,6 +15,12 @@ export class ModusAlert {
   /** (optional) The alert's aria-label. */
   @Prop() ariaLabel: string | null;
 
+  /** (optional) The button's aria-label. */
+  @Prop() buttonAriaLabel: string | null;
+
+  /**(optional) The button's text */
+  @Prop() buttonText: string | null;
+
   /** (optional) Whether the alert has a dismiss button */
   @Prop() dismissible: boolean;
 
@@ -26,6 +32,9 @@ export class ModusAlert {
 
   /** An event that fires when the alert is dismissed */
   @Event() dismissClick: EventEmitter;
+
+  /**An event that firest when the action button is clicked */
+  @Event() actionClick: EventEmitter;
 
   classByType: Map<string, string> = new Map([
     ['error', 'type-error'],
@@ -52,7 +61,7 @@ export class ModusAlert {
   }
 
   render(): unknown {
-    const className = `alert ${this.classByType.get(this.type)}`;
+    const className = `alert ${this.classByType.get(this.type)} ${(this.dismissible && this.buttonText?.length > 0) || this.buttonText?.length > 0 ? 'with-action-button' : ''}`;
     const iconSize = '24';
 
     return (
@@ -67,19 +76,41 @@ export class ModusAlert {
           {this.message}
           <slot></slot>
         </div>
-
-        {this.dismissible ? (
-          <div
-            class="icon-close-container"
-            aria-label="Dismiss alert"
-            role="button"
-            tabIndex={0}
-            onClick={() => this.dismissClick.emit()}
-            onKeyDown={(e) => e.key.toUpperCase() === 'ENTER' && this.dismissClick.emit()}>
-            <IconClose size="18" />
-          </div>
-        ) : null}
+        <div class="alert-buttons-container">
+          {this.buttonText?.length > 0 ? (
+            <modus-button
+              class="action-button"
+              buttonStyle="outline"
+              color="secondary"
+              size="medium"
+              ariaLabel={this.buttonAriaLabel}
+              onButtonClick={() => this.actionClick.emit()}
+              onKeyDown={(e) => this.handleKeyDown(e, 'action')}>
+              {this.buttonText}
+            </modus-button>
+          ) : null}
+          {this.dismissible ? (
+            <div
+              class="icon-close-container"
+              aria-label="Dismiss alert"
+              role="button"
+              tabIndex={0}
+              onClick={() => this.dismissClick.emit()}
+              onKeyDown={(e) => this.handleKeyDown(e, 'dismiss')}>
+              <IconClose size="18" />
+            </div>
+          ) : null}
+        </div>
       </div>
     );
+  }
+  handleKeyDown(e: KeyboardEvent, buttonType: string) {
+    if (e.key.toUpperCase() === 'ENTER') {
+      if (buttonType === 'dismiss') {
+        this.dismissClick.emit();
+        return;
+      }
+      this.actionClick.emit();
+    }
   }
 }

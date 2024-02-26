@@ -23,7 +23,7 @@ export class ModusBreadcrumb {
 
   render(): unknown {
     return (
-      <nav aria-label={this.ariaLabel} role="navigation">
+      <nav aria-label={this.ariaLabel}>
         <ol>
           {this.crumbs.map((crumb, index) => (
             <li key={crumb.id}>
