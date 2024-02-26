@@ -2,12 +2,37 @@ import { newE2EPage } from '@stencil/core/testing';
 import { ModusNavbarButton } from './modus-navbar.models';
 
 describe('modus-navbar', () => {
-  it('renders', async () => {
+  it('renders default navbar state', async () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-navbar></modus-navbar>');
     const element = await page.find('modus-navbar');
     expect(element).toHaveClass('hydrated');
+
+    const profileMenuButton = await page.find('modus-navbar >>> .profile-menu');
+    expect(profileMenuButton).toBeTruthy();
+    await profileMenuButton.click();
+    await page.waitForChanges();
+
+    const navbarprofileMenu = await page.find('modus-navbar >>> modus-navbar-profile-menu');
+    const signOut = await navbarprofileMenu.shadowRoot.querySelector('.profile-menu > .sign-out');
+    expect(signOut.textContent).toContain('Sign out');
+  });
+  it('renders change to signOutText', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-navbar></modus-navbar>');
+    const component = await page.find('modus-navbar');
+    component.setProperty('profileMenuOptions', { signOutText: 'Log out' });
+    await page.waitForChanges();
+
+    const profileMenuButton = await page.find('modus-navbar >>> .profile-menu');
+    await profileMenuButton.click();
+    await page.waitForChanges();
+
+    const navbarprofileMenu = await page.find('modus-navbar >>> modus-navbar-profile-menu');
+    const signOut = await navbarprofileMenu.shadowRoot.querySelector('.profile-menu > .sign-out');
+    expect(signOut.textContent).toContain('Log out');
   });
 
   it('shows shadow when showShadow is true', async () => {
