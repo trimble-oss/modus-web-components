@@ -1037,4 +1037,32 @@ describe('modus-table', () => {
     expect(style['overflow-wrap']).toBe('break-word');
     expect(style['word-break']).toBe('break-word');
   });
+
+  it('should trigger rowSelectionChange event after change rowSelection value', async () => {
+    page = await newE2EPage();
+
+    await page.setContent('<modus-table  />');
+    const component = await page.find('modus-table');
+
+    const rowSelectionChange = await page.spyOnEvent('rowSelectionChange');
+
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    component.setProperty('rowSelection', true);
+
+    await page.waitForChanges();
+
+    const cell = await page.find('modus-table >>> td');
+
+    expect(cell).toHaveClass('row-checkbox');
+    cell.focus();
+    await page.waitForChanges();
+
+    await page.keyboard.press('ArrowDown');
+    await page.waitForChanges();
+    await page.keyboard.press('Enter');
+    await page.waitForChanges();
+
+    expect(rowSelectionChange).toHaveReceivedEvent();
+  });
 });
