@@ -5,8 +5,8 @@ import { html } from 'lit-html';
 export default {
   title: 'Components/Breadcrumb',
   argTypes: {
-    underline:{
-      name: 'underline',
+    underlineLinks:{
+      name: 'underlineLinks',
       description: 'A flag that controls the display of underline',
       table: {
         defaultValue: { summary: false },
@@ -36,11 +36,11 @@ const defaultCrumbs = [
   { id: '4', display: 'Crumb 4' },
 ];
 
-const Template = ({underline}) => html`
-  <modus-breadcrumb underline=${underline} .crumbs=${defaultCrumbs}></modus-breadcrumb>
+const Template = ({underlineLinks}) => html`
+  <modus-breadcrumb underline-links=${underlineLinks} .crumbs=${defaultCrumbs}></modus-breadcrumb>
 `;
 export const Default = Template.bind({});
-Default.args = { underline: false };
+Default.args = { underlineLinks: false };
 
 export const Underline = Template.bind({});
-Underline.args = { underline: true };
+Underline.args = { underlineLinks: true };

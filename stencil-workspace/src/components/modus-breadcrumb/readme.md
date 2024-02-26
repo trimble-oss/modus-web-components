@@ -7,11 +7,11 @@
 
 ## Properties
 
-| Property    | Attribute    | Description                                              | Type      | Default     |
-| ----------- | ------------ | -------------------------------------------------------- | --------- | ----------- |
-| `ariaLabel` | `aria-label` | The breadcrumb's aria-label.                             | `string`  | `undefined` |
-| `crumbs`    | --           | The breadcrumbs to render.                               | `Crumb[]` | `[]`        |
-| `underline` | `underline`  | (optional) A flag that controls the display of underline | `boolean` | `undefined` |
+| Property         | Attribute         | Description                                              | Type      | Default     |
+| ---------------- | ----------------- | -------------------------------------------------------- | --------- | ----------- |
+| `ariaLabel`      | `aria-label`      | The breadcrumb's aria-label.                             | `string`  | `undefined` |
+| `crumbs`         | --                | The breadcrumbs to render.                               | `Crumb[]` | `[]`        |
+| `underlineLinks` | `underline-links` | (optional) A flag that controls the display of underline | `boolean` | `undefined` |
 
 
 ## Events
