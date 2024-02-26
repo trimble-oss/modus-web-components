@@ -103,7 +103,7 @@ const Template = ({ buttons, enableSearchOverlay, profileMenuOptions, searchTool
     show-search=${showSearch}
     .apps=${defaultApps}
     .buttons=${buttons}
-    .logo=${defaultLogo}
+    .logoOptions=${defaultLogo}
     .profileMenuOptions=${profileMenuOptions}
     .searchTooltip=${searchTooltip}>
     <div slot="main" style="height:300px;">Render your own main menu.</div>
@@ -166,7 +166,7 @@ const FailedToLoadAvatarTemplate = ({ buttons, enableSearchOverlay, profileMenuO
     show-search=${showSearch}
     .apps=${defaultApps}
     .buttons=${buttons}
-    .logo=${defaultLogo}
+    .logoOptions=${defaultLogo}
     .profileMenuOptions=${profileMenuOptions}
     .searchTooltip=${searchTooltip}>
     <div slot="main" style="height:300px;">Render your own main menu.</div>
@@ -200,7 +200,7 @@ const BlueTemplate = ({ buttons, enableSearchOverlay, profileMenuOptions, search
     variant="blue"
     .apps=${defaultApps}
     .buttons=${buttons}
-    .logo=${blueLogo}
+    .logoOptions=${blueLogo}
     .profileMenuOptions=${profileMenuOptions}
     .searchTooltip=${searchTooltip}>
     <div slot="main" style="height:300px;">Render your own main menu.</div>
