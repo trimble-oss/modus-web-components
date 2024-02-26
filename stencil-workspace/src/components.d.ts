@@ -223,6 +223,10 @@ export namespace Components {
           * The breadcrumbs to render.
          */
         "crumbs": Crumb[];
+        /**
+          * (optional) A flag that controls the display of underline
+         */
+        "underlineLinks": boolean;
     }
     interface ModusButton {
         /**
@@ -2311,6 +2315,10 @@ declare namespace LocalJSX {
           * (optional) An event that fires on breadcrumb click.
          */
         "onCrumbClick"?: (event: ModusBreadcrumbCustomEvent<Crumb>) => void;
+        /**
+          * (optional) A flag that controls the display of underline
+         */
+        "underlineLinks"?: boolean;
     }
     interface ModusButton {
         /**
