@@ -226,7 +226,7 @@ export namespace Components {
         /**
           * (optional) A flag that controls the display of underline
          */
-        "underline": boolean;
+        "underlineLinks": boolean;
     }
     interface ModusButton {
         /**
@@ -2318,7 +2318,7 @@ declare namespace LocalJSX {
         /**
           * (optional) A flag that controls the display of underline
          */
-        "underline"?: boolean;
+        "underlineLinks"?: boolean;
     }
     interface ModusButton {
         /**
