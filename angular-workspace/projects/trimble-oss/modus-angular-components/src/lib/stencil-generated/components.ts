@@ -794,14 +794,14 @@ export declare interface ModusNavbarNotificationsMenu extends Components.ModusNa
 
 
 @ProxyCmp({
-  inputs: ['avatarUrl', 'email', 'initials', 'links', 'reverse', 'username', 'variant']
+  inputs: ['avatarUrl', 'email', 'initials', 'links', 'reverse', 'signOutText', 'username', 'variant']
 })
 @Component({
   selector: 'modus-navbar-profile-menu',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['avatarUrl', 'email', 'initials', 'links', 'reverse', 'username', 'variant'],
+  inputs: ['avatarUrl', 'email', 'initials', 'links', 'reverse', 'signOutText', 'username', 'variant'],
 })
 export class ModusNavbarProfileMenu {
   protected el: HTMLElement;
