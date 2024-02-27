@@ -87,12 +87,12 @@ const blueLogo = {
     url: 'https://modus-bootstrap.trimble.com/img/trimble-icon-rev.svg',
   }
 };
-const defaultApps = {
+const defaultApps = [{
   description: 'The One Trimble Design System',
   logoUrl: 'https://modus.trimble.com/favicon.svg',
   name: 'Trimble Modus',
   url: 'https://modus.trimble.com/',
-};
+}];
 
 const Template = ({ buttons, enableSearchOverlay, profileMenuOptions, searchTooltip, showProfile, showSearch }) => html`
   <modus-navbar
