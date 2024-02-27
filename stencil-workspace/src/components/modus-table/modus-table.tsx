@@ -150,6 +150,9 @@ export class ModusTable {
 
   /** (Optional) To display checkbox. */
   @Prop() rowSelection = false;
+  @Watch('rowSelection') onRowSlectionChange(newVal: boolean) {
+    this.tableCore.setOptions('enableRowSelection', newVal);
+  }
 
   /** (Optional) To enable manual pagination mode. When enabled, the table will not automatically paginate rows, instead will expect the current page index and other details to be passed. */
   @Prop() manualPaginationOptions: ModusTableManualPaginationOptions;
