@@ -49,6 +49,13 @@ export default {
       table: {
         type: { summary: 'ModusNavbarTooltip' },
       },
+    },
+    helpTooltip: {
+      name: 'help-tooltip ',
+      description: 'To add the help icon tooltip text and ariaLabel',
+      table: {
+        type: { summary: 'ModusNavbarTooltip' },
+      },
     }
   },
   parameters: {
@@ -94,7 +101,7 @@ const defaultApps = {
   url: 'https://modus.trimble.com/',
 };
 
-const Template = ({ buttons, enableSearchOverlay, profileMenuOptions, searchTooltip, showProfile, showSearch }) => html`
+const Template = ({ buttons, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showProfile, showSearch }) => html`
   <modus-navbar
     enable-search-overlay=${enableSearchOverlay}
     show-apps-menu
@@ -103,6 +110,7 @@ const Template = ({ buttons, enableSearchOverlay, profileMenuOptions, searchTool
     show-search=${showSearch}
     .apps=${defaultApps}
     .buttons=${buttons}
+    .helpTooltip=${helpTooltip}
     .logoOptions=${defaultLogo}
     .profileMenuOptions=${profileMenuOptions}
     .searchTooltip=${searchTooltip}>
@@ -129,6 +137,7 @@ Default.args = {
     },
     { id: 'notificationMenu', icon: 'notifications' },
   ],
+  helpTooltip: undefined,
   profileMenuOptions: {
     avatarUrl: workingAvatarUrl,
     email: 'modus_user@trimble.com',
@@ -156,7 +165,7 @@ Default.args = {
   showSearch: false,
 };
 
-const FailedToLoadAvatarTemplate = ({ buttons, enableSearchOverlay, profileMenuOptions, searchTooltip, showProfile, showSearch }) => html`
+const FailedToLoadAvatarTemplate = ({ buttons, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showProfile, showSearch }) => html`
   <modus-navbar
     enable-search-overlay=${enableSearchOverlay}
     show-apps-menu
@@ -167,6 +176,7 @@ const FailedToLoadAvatarTemplate = ({ buttons, enableSearchOverlay, profileMenuO
     show-search=${showSearch}
     .apps=${defaultApps}
     .buttons=${buttons}
+    .helpTooltip=${helpTooltip}
     .logoOptions=${defaultLogo}
     .profileMenuOptions=${profileMenuOptions}
     .searchTooltip=${searchTooltip}>
@@ -178,6 +188,7 @@ export const FailedAvatar = FailedToLoadAvatarTemplate.bind({});
 FailedAvatar.args = {
   buttons: [],
   enableSearchOverlay: false,
+  helpTooltip: undefined,
   profileMenuOptions: {
     avatarUrl: failingAvatarUrl,
     email: 'modus_user@trimble.com',
@@ -190,7 +201,7 @@ FailedAvatar.args = {
   showSearch: false,
 };
 
-const BlueTemplate = ({ buttons, enableSearchOverlay, profileMenuOptions, searchTooltip, showProfile, showSearch }) => html`
+const BlueTemplate = ({ buttons, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showProfile, showSearch }) => html`
   <modus-navbar
     enable-search-overlay=${enableSearchOverlay}
     show-apps-menu
@@ -202,6 +213,7 @@ const BlueTemplate = ({ buttons, enableSearchOverlay, profileMenuOptions, search
     variant="blue"
     .apps=${defaultApps}
     .buttons=${buttons}
+    .helpTooltip=${helpTooltip}
     .logoOptions=${blueLogo}
     .profileMenuOptions=${profileMenuOptions}
     .searchTooltip=${searchTooltip}>
@@ -214,6 +226,7 @@ export const BlueNavbar = BlueTemplate.bind({});
 BlueNavbar.args = {
   buttons: [],
   enableSearchOverlay: false,
+  helpTooltip: undefined,
   profileMenuOptions: {
     avatarUrl: workingAvatarUrl,
     email: 'modus_user@trimble.com',

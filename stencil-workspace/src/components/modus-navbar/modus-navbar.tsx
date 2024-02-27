@@ -85,6 +85,9 @@ export class ModusNavbar {
   /** (optional) Whether to show help. */
   @Prop() showHelp: boolean;
 
+  /** (optional) Help tooltip. */
+  @Prop() helpTooltip: ModusNavbarTooltip;
+
   /** (optional) Help URL. */
   @Prop() helpUrl: string;
 
@@ -429,9 +432,11 @@ export class ModusNavbar {
                 {this.showPendoPlaceholder && <div class={'pendo-placeholder'} />}
                 {this.showHelp && (
                   <div class="navbar-button" data-test-id="help-menu">
-                    <span class="navbar-button-icon" role="button" tabIndex={0}>
-                      <IconHelp size="24" onClick={(event) => this.helpMenuClickHandler(event)} />
-                    </span>
+                    <modus-tooltip text={this.helpTooltip?.text} aria-label={this.helpTooltip?.ariaLabel} position="bottom">
+                      <span class="navbar-button-icon" role="button" tabIndex={0}>
+                        <IconHelp size="24" onClick={(event) => this.helpMenuClickHandler(event)} />
+                      </span>
+                    </modus-tooltip>
                   </div>
                 )}
                 {this.showAppsMenu && (
