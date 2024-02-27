@@ -348,7 +348,7 @@ export class ModusAutocomplete {
       onValueChange={(searchEvent: CustomEvent<string>) => this.handleTextInputValueChange(searchEvent)}
       placeholder={this.placeholder}
       size={this.size}
-      type="text"
+      type="search"
       value={this.value}
       onBlur={this.handleInputBlur}
       role="combobox"
