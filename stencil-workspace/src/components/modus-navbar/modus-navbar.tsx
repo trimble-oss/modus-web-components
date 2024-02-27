@@ -182,7 +182,6 @@ export class ModusNavbar {
 
     const slotElements = this.element.querySelectorAll('[slot]') as unknown as HTMLSlotElement[];
     const slotNames = Array.from(slotElements).map((s) => s.slot) || [];
-
     const isUpdated = this.slots?.length !== slotNames.length || this.slots?.filter((s) => !slotNames.includes(s)).length;
     if (isUpdated) this.slots = [...slotNames];
   }
@@ -325,14 +324,27 @@ export class ModusNavbar {
     }, 100);
   }
 
+  showButtonMenuById(id: string): void {
+    this.buttonClick.emit(id);
+    this.hideMenus();
+    if (this.openButtonMenuId !== id) {
+      this.openButtonMenuId = id;
+    }
+  }
+
   buttonMenuClickHandler(event: MouseEvent, button: ModusNavbarButton): void {
     event.preventDefault();
-    this.buttonClick.emit(button.id);
-    if (this.openButtonMenuId == button.id) {
+    this.showButtonMenuById(button.id);
+  }
+
+  buttonMenuKeyDownHandler(event: KeyboardEvent, button: ModusNavbarButton): void {
+    if (event.code == 'Enter' || event.code == 'Space') {
+      event.preventDefault();
+      this.showButtonMenuById(button.id);
+    }
+
+    if (event.code == 'Escape') {
       this.hideMenus();
-    } else {
-      this.hideMenus();
-      this.openButtonMenuId = button.id;
     }
   }
 
@@ -407,6 +419,7 @@ export class ModusNavbar {
                   buttons={sortedButtonList}
                   reverse={this.reverse}
                   openButtonMenuId={this.openButtonMenuId}
+                  onKeyDown={(event, button) => this.buttonMenuKeyDownHandler(event, button)}
                   onClick={(event, button) => this.buttonMenuClickHandler(event, button)}></ModusNavbarButtonList>
                 {this.showNotifications && (
                   <div class="navbar-button" data-test-id="notifications-menu">
