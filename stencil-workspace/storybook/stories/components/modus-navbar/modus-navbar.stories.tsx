@@ -13,6 +13,14 @@ export default {
         type: { summary: 'boolean' },
       },
     },
+    showHelp: {
+      name: 'show-help',
+      description: 'Toggle the help button',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' }
+      }
+    },
     showProfile: {
       name: 'show-profile',
       description: 'Toggle the profile',
@@ -101,10 +109,11 @@ const defaultApps = {
   url: 'https://modus.trimble.com/',
 };
 
-const Template = ({ buttons, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showProfile, showSearch }) => html`
+const Template = ({ buttons, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
   <modus-navbar
     enable-search-overlay=${enableSearchOverlay}
     show-apps-menu
+    show-help=${showHelp}
     show-main-menu
     show-profile=${showProfile}
     show-search=${showSearch}
@@ -125,6 +134,7 @@ const Template = ({ buttons, enableSearchOverlay, helpTooltip, profileMenuOption
     <div slot="profileMenu">Render your own profile menu content.</div>
   </modus-navbar>
 `;
+
 export const Default = Template.bind({});
 Default.args = {
   enableSearchOverlay: false,
@@ -161,14 +171,16 @@ Default.args = {
     }
   },
   searchTooltip: undefined,
+  showHelp: false,
   showProfile: true,
   showSearch: false,
 };
 
-const FailedToLoadAvatarTemplate = ({ buttons, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showProfile, showSearch }) => html`
+const FailedToLoadAvatarTemplate = ({ buttons, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
   <modus-navbar
     enable-search-overlay=${enableSearchOverlay}
     show-apps-menu
+    show-help=${showHelp}
     show-help
     show-main-menu
     show-notifications
@@ -184,6 +196,7 @@ const FailedToLoadAvatarTemplate = ({ buttons, enableSearchOverlay, helpTooltip,
     <div slot="notifications">Render your own notifications.</div>
   </modus-navbar>
 `;
+
 export const FailedAvatar = FailedToLoadAvatarTemplate.bind({});
 FailedAvatar.args = {
   buttons: [],
@@ -197,14 +210,16 @@ FailedAvatar.args = {
     username: 'Modus User',
   },
   searchTooltip: undefined,
+  showHelp: false,
   showProfile: true,
   showSearch: false,
 };
 
-const BlueTemplate = ({ buttons, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showProfile, showSearch }) => html`
+const BlueTemplate = ({ buttons, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
   <modus-navbar
     enable-search-overlay=${enableSearchOverlay}
     show-apps-menu
+    show-help=${showHelp}
     show-help
     show-main-menu
     show-notifications
@@ -235,6 +250,7 @@ BlueNavbar.args = {
     username: 'Modus User',
   },
   searchTooltip: undefined,
+  showHelp: false,
   showProfile: true,
   showSearch: false,
 };
