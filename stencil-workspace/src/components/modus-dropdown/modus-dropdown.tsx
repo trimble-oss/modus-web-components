@@ -76,6 +76,8 @@ export class ModusDropdown {
       if (this.dropdownToggleClicked || (event.target as HTMLElement).closest(`#${this.toggleElementId}`)) {
         this.dropdownToggleClicked = false;
         return;
+      } else {
+        this.hideDropdown();
       }
     }
     if (event.key === 'Escape' && this.visible) {
