@@ -718,6 +718,10 @@ export namespace Components {
          */
         "enableSearchOverlay": boolean;
         /**
+          * (optional) Help tooltip.
+         */
+        "helpTooltip": ModusNavbarTooltip;
+        /**
           * (optional) Help URL.
          */
         "helpUrl": string;
@@ -2849,6 +2853,10 @@ declare namespace LocalJSX {
           * (optional) Whether to show search overlay or not.
          */
         "enableSearchOverlay"?: boolean;
+        /**
+          * (optional) Help tooltip.
+         */
+        "helpTooltip"?: ModusNavbarTooltip;
         /**
           * (optional) Help URL.
          */
