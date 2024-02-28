@@ -474,4 +474,28 @@ describe('modus-navbar', () => {
     const profileMenuButton = await page.find('modus-navbar >>> .profile-menu');
     expect(profileMenuButton).toBeNull();
   });
+
+  it('should show tooltip on hover of help icon', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-navbar show-help></modus-navbar>');
+
+    await page.waitForChanges();
+
+    const helpIcon = await page.find('modus-navbar >>> [data-test-id="help-menu"]');
+    const navbar = await page.find('modus-navbar');
+    navbar.setProperty('helpTooltip', { text: 'Resource Center' });
+    await page.waitForChanges();
+
+    const tooltip = await helpIcon.find('modus-tooltip >>> .tooltip');
+    expect(tooltip.getAttribute('data-show')).toBeNull();
+
+    await helpIcon.hover();
+    await page.waitForChanges();
+
+    await new Promise((r) => setTimeout(r, 500));
+    expect(tooltip.getAttribute('data-show')).not.toBeNull();
+
+    const tooltipText = await page.$eval('modus-navbar >>> modus-tooltip >>> .tooltip', (tooltip) => tooltip.textContent);
+    expect(tooltipText).toBe('Resource Center');
+  });
 });
