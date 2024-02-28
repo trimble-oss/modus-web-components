@@ -223,6 +223,10 @@ export namespace Components {
           * The breadcrumbs to render.
          */
         "crumbs": Crumb[];
+        /**
+          * (optional) A flag that controls the display of underline
+         */
+        "underlineLinks": boolean;
     }
     interface ModusButton {
         /**
@@ -714,6 +718,10 @@ export namespace Components {
          */
         "enableSearchOverlay": boolean;
         /**
+          * (optional) Help tooltip.
+         */
+        "helpTooltip": ModusNavbarTooltip;
+        /**
           * (optional) Help URL.
          */
         "helpUrl": string;
@@ -790,6 +798,7 @@ export namespace Components {
         "initials": string;
         "links": ModusNavbarProfileMenuLink[];
         "reverse": boolean;
+        "signOutText": string;
         "username": string;
         "variant": 'default' | 'blue';
     }
@@ -2311,6 +2320,10 @@ declare namespace LocalJSX {
           * (optional) An event that fires on breadcrumb click.
          */
         "onCrumbClick"?: (event: ModusBreadcrumbCustomEvent<Crumb>) => void;
+        /**
+          * (optional) A flag that controls the display of underline
+         */
+        "underlineLinks"?: boolean;
     }
     interface ModusButton {
         /**
@@ -2841,6 +2854,10 @@ declare namespace LocalJSX {
          */
         "enableSearchOverlay"?: boolean;
         /**
+          * (optional) Help tooltip.
+         */
+        "helpTooltip"?: ModusNavbarTooltip;
+        /**
           * (optional) Help URL.
          */
         "helpUrl"?: string;
@@ -2967,6 +2984,7 @@ declare namespace LocalJSX {
         "onLinkClick"?: (event: ModusNavbarProfileMenuCustomEvent<string>) => void;
         "onSignOutClick"?: (event: ModusNavbarProfileMenuCustomEvent<MouseEvent>) => void;
         "reverse"?: boolean;
+        "signOutText"?: string;
         "username"?: string;
         "variant"?: 'default' | 'blue';
     }
