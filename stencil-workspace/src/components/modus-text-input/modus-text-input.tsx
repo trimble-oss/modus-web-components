@@ -2,9 +2,9 @@
 import { Component, Event, EventEmitter, h, Method, Prop } from '@stencil/core';
 import { IconSearch } from '../../icons/svgs/icon-search';
 import { IconClose } from '../../icons/svgs/icon-close';
-import { IconVisibility } from '../../icons/svgs/icon-visibility';
 import { IconVisibilityOff } from '../../icons/svgs/icon-visibility-off';
 import { generateElementId } from '../../utils/utils';
+import { IconVisibilityOn } from '../../icons/generated-icons/IconVisibilityOn';
 
 @Component({
   tag: 'modus-text-input',
@@ -75,6 +75,8 @@ export class ModusTextInput {
   /** (optional) The input's value. */
   @Prop({ mutable: true }) value: string;
 
+  @State() passwordVisible = true;
+
   /** An event that fires on input value change. */
   @Event() valueChange: EventEmitter<string>;
 
@@ -109,9 +111,11 @@ export class ModusTextInput {
 
   handleTogglePassword() {
     if (this.textInput.type === 'password') {
+      this.passwordVisible = false;
       this.textInput.type = 'text';
       this.buttonTogglePassword.setAttribute('aria-label', 'Hide password.');
     } else {
+      this.passwordVisible = true;
       this.textInput.type = 'password';
       this.buttonTogglePassword.setAttribute(
         'aria-label',
@@ -192,8 +196,7 @@ export class ModusTextInput {
               aria-label="Show password as plain text. Warning: this will display your password on the screen."
               ref={(el) => (this.buttonTogglePassword = el as HTMLDivElement)}
               onClick={() => this.handleTogglePassword()}>
-              <IconVisibility size="16" />
-              <IconVisibilityOff size="16" />
+              {this.passwordVisible ? <IconVisibilityOn size="16" /> : <IconVisibilityOff size="16" />}
             </div>
           )}
           {showClearIcon && (
@@ -212,4 +215,7 @@ export class ModusTextInput {
       </div>
     );
   }
+}
+function State(): (target: ModusTextInput, propertyKey: 'passwordVisible') => void {
+  throw new Error('Function not implemented.');
 }
