@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { Component, Event, EventEmitter, h, Method, Prop } from '@stencil/core';
+import { Component, Event, EventEmitter, h, Method, Prop, State } from '@stencil/core';
 import { IconSearch } from '../../icons/svgs/icon-search';
 import { IconClose } from '../../icons/svgs/icon-close';
 import { IconVisibilityOff } from '../../icons/svgs/icon-visibility-off';
@@ -215,7 +215,4 @@ export class ModusTextInput {
       </div>
     );
   }
-}
-function State(): (target: ModusTextInput, propertyKey: 'passwordVisible') => void {
-  throw new Error('Function not implemented.');
 }
