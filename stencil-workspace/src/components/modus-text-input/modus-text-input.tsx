@@ -96,6 +96,14 @@ export class ModusTextInput {
     this.textInput.focus();
   }
 
+  handleClearKeyDown(event: KeyboardEvent): void {
+    if (event.key !== 'Enter' && event.key !== ' ') {
+      return;
+    }
+
+    this.handleClear();
+  }
+
   handleClear(): void {
     this.textInput.value = null;
     this.value = null;
@@ -107,6 +115,13 @@ export class ModusTextInput {
     this.value = value;
 
     this.valueChange.emit(value);
+  }
+
+  handleTogglePasswordKeyDown(event: KeyboardEvent): void {
+    if (event.key !== 'Enter' && event.key !== ' ') {
+      return;
+    }
+    this.handleTogglePassword();
   }
 
   handleTogglePassword() {
@@ -125,10 +140,10 @@ export class ModusTextInput {
   }
 
   render(): unknown {
+    const iconSize = this.size === 'large' ? '24' : '16';
     const isPassword = this.type === 'password';
     const showPasswordToggle = !!(this.includePasswordTextToggle && isPassword && this.value?.length);
-    const isToggleablePassword = isPassword && this.includePasswordTextToggle;
-    const showClearIcon = !isToggleablePassword && this.clearable && !this.readOnly && !!this.value;
+    const showClearIcon = this.clearable && !this.readOnly && !!this.value;
 
     const buildTextInputClassNames = (): string => {
       const classNames = [];
@@ -168,7 +183,7 @@ export class ModusTextInput {
           )}`}
           onClick={() => this.textInput.focus()}
           part="input-container">
-          {this.includeSearchIcon ? <IconSearch size="16" /> : null}
+          {this.includeSearchIcon ? <IconSearch size={iconSize} /> : null}
           <input
             id={this.inputId}
             aria-invalid={!!this.errorText}
@@ -192,22 +207,24 @@ export class ModusTextInput {
           {showPasswordToggle && (
             <div
               class="icons toggle-password"
+              tabIndex={0}
+              onKeyDown={(event) => this.handleTogglePasswordKeyDown(event)}
+              onClick={() => this.handleTogglePassword()}
               role="button"
               aria-label="Show password as plain text. Warning: this will display your password on the screen."
-              ref={(el) => (this.buttonTogglePassword = el as HTMLDivElement)}
-              onClick={() => this.handleTogglePassword()}>
-              {this.passwordVisible ? <IconVisibilityOn size="16" /> : <IconVisibilityOff size="16" />}
+              ref={(el) => (this.buttonTogglePassword = el as HTMLDivElement)}>
+              {this.passwordVisible ? <IconVisibilityOn size={iconSize} /> : <IconVisibilityOff size={iconSize} />}
             </div>
           )}
           {showClearIcon && (
             <span
               class="icons clear"
               tabIndex={0}
-              onKeyDown={() => this.handleClear()}
+              onKeyDown={(event) => this.handleClearKeyDown(event)}
               onClick={() => this.handleClear()}
               role="button"
               aria-label="Clear entry">
-              <IconClose size="16" />
+              <IconClose size={iconSize} />
             </span>
           )}
         </div>
