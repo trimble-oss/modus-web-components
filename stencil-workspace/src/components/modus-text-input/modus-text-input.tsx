@@ -197,8 +197,14 @@ export class ModusTextInput {
             </div>
           )}
           {showClearIcon && (
-            <span class="icons clear" role="button" aria-label="Clear entry">
-              <IconClose onClick={() => this.handleClear()} size="16" />
+            <span
+              class="icons clear"
+              tabIndex={0}
+              onKeyDown={() => this.handleClear()}
+              onClick={() => this.handleClear()}
+              role="button"
+              aria-label="Clear entry">
+              <IconClose size="16" />
             </span>
           )}
         </div>
