@@ -115,6 +115,16 @@
         }
       }
 
+      .out-of-range-notification {
+        margin-top: 0.6rem;
+        text-align: center;
+      }
+
+      .goto-available-dates {
+        color: $modus-date-picker-calendar-body-goto-text;
+        cursor: pointer;
+      }
+
       .calendar-days-week {
         color: $modus-date-picker-calendar-day-week-color;
         font: normal normal bold 14px/19px $primary-font;
