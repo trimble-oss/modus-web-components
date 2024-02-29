@@ -169,7 +169,7 @@ export class ModusTableColumnsVisibility {
     return (
       <div class="columns-visibility-menu">
         <div class="column-visibility-header">{this.columnsVisibility.title || 'Columns'}</div>
-        <div>{this.renderColumnsChecklist()}</div>
+        <div class="column-visibility-content">{this.renderColumnsChecklist()}</div>
         {this.renderCancelApplyButtons()}
       </div>
     );
