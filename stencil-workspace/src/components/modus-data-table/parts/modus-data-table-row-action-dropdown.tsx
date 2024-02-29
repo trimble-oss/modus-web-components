@@ -15,7 +15,8 @@ export const ModusDataTableRowActionDropdown: FunctionalComponent<Props> = (prop
     <modus-dropdown
       toggle-element-id={`dropdownToggle-${props.rowId}`}
       animate-list={props.animateDropdown}
-      customPlacement={{ left: -194 }}>
+      customPlacement={{ left: -194 }}
+      showDropdownListBorder={false}>
       <div class="row-action" id={`dropdownToggle-${props.rowId}`} slot="dropdownToggle">
         <ModusIconMap icon="more_vertical" size="24" />
       </div>
