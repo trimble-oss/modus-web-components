@@ -80,10 +80,11 @@
 
     .icons {
       align-items: center;
-      background-color: $modus-input-bg;
       color: $modus-input-helper-icon-color;
+      cursor: pointer;
       display: flex;
       font-size: $rem-16px;
+      height: 100%;
       justify-content: center;
       width: 2rem;
 
@@ -207,22 +208,10 @@
   }
 
   .toggle-password {
-    z-index: 9;
-
     svg.visibility,
     svg.visibility-off {
       display: none;
     }
-  }
-
-  .toggle-password:active,
-  .toggle-password:focus,
-  .toggle-password:hover {
-    cursor: pointer;
-  }
-
-  .toggle-password:focus {
-    outline: none !important;
   }
 
   input {

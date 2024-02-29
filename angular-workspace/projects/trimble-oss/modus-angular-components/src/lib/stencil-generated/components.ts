@@ -176,14 +176,14 @@ export declare interface ModusBadge extends Components.ModusBadge {}
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'crumbs']
+  inputs: ['ariaLabel', 'crumbs', 'underlineLinks']
 })
 @Component({
   selector: 'modus-breadcrumb',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['ariaLabel', 'crumbs'],
+  inputs: ['ariaLabel', 'crumbs', 'underlineLinks'],
 })
 export class ModusBreadcrumb {
   protected el: HTMLElement;
@@ -625,7 +625,7 @@ export declare interface ModusModal extends Components.ModusModal {
 
 
 @ProxyCmp({
-  inputs: ['apps', 'buttons', 'enableSearchOverlay', 'helpUrl', 'logoOptions', 'profileMenuOptions', 'reverse', 'searchTooltip', 'showAppsMenu', 'showHelp', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showProfile', 'showSearch', 'showShadow', 'variant'],
+  inputs: ['apps', 'buttons', 'enableSearchOverlay', 'helpTooltip', 'helpUrl', 'logoOptions', 'profileMenuOptions', 'reverse', 'searchTooltip', 'showAppsMenu', 'showHelp', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showProfile', 'showSearch', 'showShadow', 'variant'],
   methods: ['hideMainMenu']
 })
 @Component({
@@ -633,7 +633,7 @@ export declare interface ModusModal extends Components.ModusModal {
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['apps', 'buttons', 'enableSearchOverlay', 'helpUrl', 'logoOptions', 'profileMenuOptions', 'reverse', 'searchTooltip', 'showAppsMenu', 'showHelp', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showProfile', 'showSearch', 'showShadow', 'variant'],
+  inputs: ['apps', 'buttons', 'enableSearchOverlay', 'helpTooltip', 'helpUrl', 'logoOptions', 'profileMenuOptions', 'reverse', 'searchTooltip', 'showAppsMenu', 'showHelp', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showProfile', 'showSearch', 'showShadow', 'variant'],
 })
 export class ModusNavbar {
   protected el: HTMLElement;
@@ -794,14 +794,14 @@ export declare interface ModusNavbarNotificationsMenu extends Components.ModusNa
 
 
 @ProxyCmp({
-  inputs: ['avatarUrl', 'email', 'initials', 'links', 'reverse', 'username', 'variant']
+  inputs: ['avatarUrl', 'email', 'initials', 'links', 'reverse', 'signOutText', 'username', 'variant']
 })
 @Component({
   selector: 'modus-navbar-profile-menu',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['avatarUrl', 'email', 'initials', 'links', 'reverse', 'username', 'variant'],
+  inputs: ['avatarUrl', 'email', 'initials', 'links', 'reverse', 'signOutText', 'username', 'variant'],
 })
 export class ModusNavbarProfileMenu {
   protected el: HTMLElement;

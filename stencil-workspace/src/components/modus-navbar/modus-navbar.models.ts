@@ -12,6 +12,7 @@ export interface ModusProfileMenuOptions {
   email?: string;
   initials?: string;
   links?: ModusNavbarProfileMenuLink[];
+  signOutText?: string;
   username: string;
   tooltip?: ModusNavbarTooltip;
 }

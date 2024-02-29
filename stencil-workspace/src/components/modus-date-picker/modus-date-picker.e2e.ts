@@ -321,4 +321,63 @@ describe('modus-date-picker', () => {
   //   expect(disabledDates.some((element) => element.innerHTML === '22')).toEqual(false);
   //   expect(disabledDates.some((element) => element.innerHTML === '23')).toEqual(true);
   // });
+  it('checks out of range notification when date set is lower than minimum', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+    <modus-date-picker>
+      <modus-date-input format="mmm d, yyyy" show-calendar-icon="true" type="start" label="Start Date" min="2023-02-17" max="2023-04-22">
+      </modus-date-input>
+    </modus-date-picker>`);
+
+    const dateInput = await page.find('modus-date-input[type="start"] >>> input');
+
+    await dateInput.type('Jan 1, 2023', { delay: 20 });
+    await page.waitForChanges();
+
+    const calendar = await page.find('modus-date-input[type="start"] >>> .icon-calendar');
+    await calendar.click();
+    await page.waitForChanges();
+
+    const notification = await page.find('modus-date-picker >>> .calendar-container');
+    const goToAvailableDatesLink = await notification.find('.out-of-range-notification > .goto-available-dates');
+
+    expect(notification).toBeTruthy();
+    expect(goToAvailableDatesLink).toBeTruthy();
+
+    await goToAvailableDatesLink.click();
+    await page.waitForChanges();
+
+    const calendarHeader = await page.find('modus-date-picker >>> .calendar-header > .title');
+    expect(calendarHeader.textContent).toContain('February 2023');
+  });
+
+  it('checks out of range notification when date set is higher than maximum', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+    <modus-date-picker>
+      <modus-date-input format="mmm d, yyyy" show-calendar-icon="true" type="start" label="Start Date" min="2023-02-17" max="2023-04-22">
+      </modus-date-input>
+    </modus-date-picker>`);
+
+    const dateInput = await page.find('modus-date-input[type="start"] >>> input');
+
+    await dateInput.type('May 1, 2023', { delay: 20 });
+    await page.waitForChanges();
+
+    const calendar = await page.find('modus-date-input[type="start"] >>> .icon-calendar');
+    await calendar.click();
+    await page.waitForChanges();
+
+    const notification = await page.find('modus-date-picker >>> .calendar-container');
+    const goToAvailableDatesLink = await notification.find('.out-of-range-notification > .goto-available-dates');
+
+    expect(notification).toBeTruthy();
+    expect(goToAvailableDatesLink).toBeTruthy();
+
+    await goToAvailableDatesLink.click();
+    await page.waitForChanges();
+
+    const calendarHeader = await page.find('modus-date-picker >>> .calendar-header > .title');
+    expect(calendarHeader.textContent).toContain('April 2023');
+  });
 });

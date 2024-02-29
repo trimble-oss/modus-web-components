@@ -4,13 +4,24 @@ import { html } from 'lit-html';
 
 export default {
   title: 'Components/Breadcrumb',
+  argTypes: {
+    underlineLinks:{
+      name: 'underlineLinks',
+      description: 'A flag that controls the display of underline',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      },
+    },
+    },
   parameters: {
     docs: {
       inlineStories: false,
       page: docs,
     },
     controls: {
-      disabled: true,
+      disabled: false,
+      expanded: true,
     },
     options: {
       isToolshown: true,
@@ -18,24 +29,18 @@ export default {
   },
 };
 
-const Template = () => html`
-  <modus-breadcrumb></modus-breadcrumb>
-  ${setBreadcrumb()}
+const defaultCrumbs = [
+  { id: '1', display: 'Crumb 1' },
+  { id: '2', display: 'Crumb 2' },
+  { id: '3', display: 'Crumb 3' },
+  { id: '4', display: 'Crumb 4' },
+];
+
+const Template = ({underlineLinks}) => html`
+  <modus-breadcrumb underline-links=${underlineLinks} .crumbs=${defaultCrumbs}></modus-breadcrumb>
 `;
 export const Default = Template.bind({});
+Default.args = { underlineLinks: false };
 
-// The <script> tag cannot be used in the MDX file, so we use this method to
-// set the breadcrumbs for the default story.
-const setBreadcrumb = () => {
-  const tag = document.createElement('script');
-  tag.innerHTML = `
-   document.querySelector('modus-breadcrumb').crumbs = [
-      { id: '1', display: 'Crumb 1' },
-      { id: '2', display: 'Crumb 2' },
-      { id: '3', display: 'Crumb 3' },
-      { id: '4', display: 'Crumb 4' },
-    ];
-  `;
-
-  return tag;
-};
+export const Underline = Template.bind({});
+Underline.args = { underlineLinks: true };
