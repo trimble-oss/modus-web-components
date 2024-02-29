@@ -2,7 +2,7 @@
 
 ## About
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.
+This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.
 The components in this library were programmatically generated using the [StencilJS](https://stenciljs.com/) [Angular Framework Integration](https://stenciljs.com/docs/angular).
 
 ## Installation
