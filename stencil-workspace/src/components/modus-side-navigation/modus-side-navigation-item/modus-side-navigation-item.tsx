@@ -90,9 +90,12 @@ export class ModusSideNavigationItem {
   }
 
   render() {
-    const classes = `side-nav-item${this.expanded ? ' expanded' : ''}${this.selected ? ' selected' : ''}${
-      this.disabled ? ' disabled' : ''
-    }`;
+    const classes = {
+      'side-nav-item': true,
+      expanded: this.expanded,
+      selected: this.selected,
+      disabled: this.disabled,
+    };
     const menuIconTooltip = this.label;
 
     return (
@@ -115,7 +118,9 @@ export class ModusSideNavigationItem {
 
           {this.expanded && <div class="menu-text">{this.label}</div>}
 
-          <div class="level-icon">{this.showExpandIcon && <ModusIconMap icon="chevron_right_bold" />}</div>
+          <div class="level-icon">
+            {this.showExpandIcon && <ModusIconMap icon="chevron_right" size={this.expanded ? '24' : '16'} />}
+          </div>
         </li>
       </modus-tooltip>
     );
