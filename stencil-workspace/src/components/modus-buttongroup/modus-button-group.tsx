@@ -77,7 +77,6 @@ export class ModusButtonGroup {
           this.buttonPosition = null;
         }
         const className = `modus-button ${this.groupStyle == OUTLINE_STYLE ? OUTLINE_STYLE : ''}`;
-        const tabIndexValue = this.disabled ? -1 : this.tabIndexValue;
         return (
           <modus-button
             aria-disabled={this.disabled ? 'true' : undefined}
@@ -86,7 +85,6 @@ export class ModusButtonGroup {
             class={className}
             disabled={this.disabled}
             onClick={() => (!this.disabled ? this.handleClick(id) : null)}
-            tabIndex={tabIndexValue}
             onKeyDown={(e) => this.handleDefaultKeyDown(e, id)}
             color={this.variant}
             button-position={this.buttonPosition}
