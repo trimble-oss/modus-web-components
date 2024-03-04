@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 import { Component, Event, EventEmitter, Prop, h } from '@stencil/core';
-import { IconChevronDownThick } from '../../icons/svgs/icon-chevron-down-thick';
+import { IconExpandMore } from '../../icons/generated-icons/IconExpandMore';
 import { generateElementId } from '../../utils/utils';
 
 @Component({
@@ -132,7 +132,7 @@ export class ModusAccordionItem {
             <div
               class={`chevron-container ${this.expanded ? 'reverse' : ''} `}
               ref={(el) => (this.chevronContainerRef = el)}>
-              <IconChevronDownThick size="24"></IconChevronDownThick>
+              <IconExpandMore size="24"></IconExpandMore>
             </div>
           }
         </div>

@@ -55,7 +55,7 @@ describe('modus-accordion-item', () => {
     await page.setContent('<modus-accordion-item></modus-accordion-item>');
     const component = await page.find('modus-accordion-item');
     const headerElement = await page.find('modus-accordion-item >>> .header');
-    const iconElement = await page.find('modus-accordion-item >>> .icon-chevron-down-thick');
+    const iconElement = await page.find('modus-accordion-item >>> .icon-expand-more');
     let iconComputedStyle = await iconElement.getComputedStyle();
     expect(headerElement).toHaveClass('standard');
     expect(iconComputedStyle['height']).toEqual('24px');

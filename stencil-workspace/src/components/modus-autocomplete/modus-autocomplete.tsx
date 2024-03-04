@@ -11,7 +11,6 @@ import {
   Element,
   Watch,
 } from '@stencil/core';
-import { IconClose } from '../../icons/svgs/icon-close';
 
 import { IconSearch } from '../../icons/svgs/icon-search';
 import { generateElementId } from '../../utils/utils';
@@ -75,6 +74,7 @@ export class ModusAutocomplete {
   /** An array to hold the selected chips. */
   @State() selectedChips: string[] = [];
 
+  /** The autocomplete's selected option. */
   @State() selectedOption: string;
 
   /** Whether to show autocomplete's options when focus. */
@@ -240,8 +240,7 @@ export class ModusAutocomplete {
 
   handleClear(): void {
     this.selectedChips = [];
-    this.value = null;
-    this.valueChange.emit(null);
+    this.selectedOption = '';
   }
 
   handleOptionClick = (option: ModusAutocompleteOption) => {
@@ -343,7 +342,7 @@ export class ModusAutocomplete {
     <modus-text-input
       class="input"
       autocomplete="off"
-      clearable={this.clearable}
+      clearable={this.clearable && !this.readOnly && !!this.value}
       errorText={this.hasFocus ? '' : this.errorText}
       includeSearchIcon={false}
       onValueChange={(searchEvent: CustomEvent<string>) => this.handleTextInputValueChange(searchEvent)}
@@ -359,9 +358,15 @@ export class ModusAutocomplete {
     />
   );
 
+  @Listen('valueChange')
+  valueChangedHandler(event: CustomEvent<string>) {
+    if (event.detail == null) {
+      this.handleClear();
+    }
+  }
+
   render(): unknown {
     const classes = `autocomplete ${this.classBySize.get(this.size)}`;
-    const showClearIcon = this.clearable && !this.readOnly && !!this.value;
     return (
       <div
         aria-disabled={this.disabled ? 'true' : undefined}
@@ -397,11 +402,6 @@ export class ModusAutocomplete {
             <modus-chip value={chip} size="medium" show-close onCloseClick={() => this.handleCloseClick(chip)}></modus-chip>
           ))}
           {this.TextInput()}
-          {showClearIcon && (
-            <span class="icons-clear" role="button" aria-label="Clear entry">
-              <IconClose onClick={() => this.handleClear()} size="16" />
-            </span>
-          )}
         </div>
         <div class={'error'}>{this.errorText ? <label class="sub-text error">{this.errorText}</label> : null}</div>
         <div
