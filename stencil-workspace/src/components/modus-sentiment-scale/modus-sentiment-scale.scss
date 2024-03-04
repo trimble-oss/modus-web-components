@@ -26,6 +26,10 @@
     margin-right: 10px;
   }
 
+  &[aria-disabled='true'] {
+    pointer-events: none;
+  }
+
   .disabled {
     opacity: $modus-sentiment-scale-disabled-opacity;
 
