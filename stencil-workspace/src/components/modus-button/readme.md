@@ -1,9 +1,6 @@
 # modus-button
 
-
-
 <!-- Auto Generated Below -->
-
 
 ## Properties
 
@@ -18,14 +15,13 @@
 | `rightIcon`   | `right-icon`   | (optional) Takes the icon name and shows the icon aligned to the right of the button text. | `string`                                             | `undefined` |
 | `showCaret`   | `show-caret`   | (optional) Shows a caret icon right side of the button.                                    | `boolean`                                            | `undefined` |
 | `size`        | `size`         | (optional) The size of the button.                                                         | `"large" \| "medium" \| "small"`                     | `'medium'`  |
-
+| `type`        | `type`         | (Optional) Button types                                                                    | `"button" \| "reset" \| "submit"`                    | `'button'`  |
 
 ## Events
 
 | Event         | Description                                     | Type               |
 | ------------- | ----------------------------------------------- | ------------------ |
 | `buttonClick` | (optional) An event that fires on button click. | `CustomEvent<any>` |
-
 
 ## Methods
 
@@ -37,20 +33,18 @@ Focus the Button
 
 Type: `Promise<void>`
 
-
-
-
 ## Dependencies
 
 ### Used by
 
- - [modus-action-bar](../modus-action-bar)
- - [modus-alert](../modus-alert)
- - [modus-modal](../modus-modal)
- - [modus-table-columns-visibility](../modus-table/parts/panel/modus-table-columns-visibility)
- - [modus-table-row-actions](../modus-table/parts/row/actions/modus-table-row-actions)
+- [modus-action-bar](../modus-action-bar)
+- [modus-alert](../modus-alert)
+- [modus-modal](../modus-modal)
+- [modus-table-columns-visibility](../modus-table/parts/panel/modus-table-columns-visibility)
+- [modus-table-row-actions](../modus-table/parts/row/actions/modus-table-row-actions)
 
 ### Graph
+
 ```mermaid
 graph TD;
   modus-action-bar --> modus-button
@@ -61,6 +55,4 @@ graph TD;
   style modus-button fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
-----------------------------------------------
-
-
+---
