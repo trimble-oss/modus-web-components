@@ -58,7 +58,7 @@
     "colors": "^1.4.0",
     "ejs": "^3.1.9",
     "eslint": "^8.57.0",
-    "eslint-plugin-storybook": "^0.6.15",
+    "eslint-plugin-storybook": "^0.8.0",
     "jest": "^27.0.3",
     "jest-cli": "^27.5.1",
     "prettier": "3.2.5",
