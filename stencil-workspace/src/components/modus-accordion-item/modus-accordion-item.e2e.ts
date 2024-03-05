@@ -106,7 +106,7 @@ describe('modus-accordion-item', () => {
     await page.waitForChanges();
     expect(opened).not.toHaveReceivedEvent();
   });
-  
+
   it('renders changes to the expandButtonType prop', async () => {
     const page = await newE2EPage();
 
@@ -123,7 +123,7 @@ describe('modus-accordion-item', () => {
     expect(element).toHaveClass('icon-expand-less-circle');
     expect(element).not.toHaveClass('icon-expand-less');
   });
-  
+
   it('renders changes to the icon prop', async () => {
     const page = await newE2EPage();
 
