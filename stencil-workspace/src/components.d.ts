@@ -62,6 +62,10 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
+          * (optional) The type of expand button
+         */
+        "expandButtonType": 'standardArrow' | 'circleArrow';
+        /**
           * (optional) Whether the accordion item is expanded.
          */
         "expanded": boolean;
@@ -69,6 +73,10 @@ export namespace Components {
           * (required) The text to render in the header.
          */
         "headerText": string;
+        /**
+          * (optional) The icon to display before the header text.
+         */
+        "icon": string;
         /**
           * (optional) The size of accordion item.
          */
@@ -2572,6 +2580,10 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
+          * (optional) The type of expand button
+         */
+        "expandButtonType"?: 'standardArrow' | 'circleArrow';
+        /**
           * (optional) Whether the accordion item is expanded.
          */
         "expanded"?: boolean;
@@ -2579,6 +2591,10 @@ declare namespace LocalJSX {
           * (required) The text to render in the header.
          */
         "headerText"?: string;
+        /**
+          * (optional) The icon to display before the header text.
+         */
+        "icon"?: string;
         /**
           * An event that fires on every accordion close.
          */
