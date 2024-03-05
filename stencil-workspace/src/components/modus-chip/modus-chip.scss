@@ -10,7 +10,7 @@
   display: inline-flex;
   flex-direction: row;
   font-family: $primary-font;
-  height: 1.625rem;
+  height: $rem-30px;
   justify-content: center;
   padding: $rem-2px $rem-4px;
   vertical-align: middle;
@@ -20,7 +20,7 @@
   }
 
   &.small {
-    height: $rem-16px;
+    height: $rem-24px;
 
     span {
       font-size: $rem-12px;

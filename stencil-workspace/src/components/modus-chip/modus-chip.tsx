@@ -104,12 +104,13 @@ export class ModusChip {
       },
     };
     return (
-      <div
+      <button
         aria-disabled={this.disabled ? 'true' : undefined}
         aria-label={this.ariaLabel}
         class={chipClass}
         onClick={this.disabled ? null : (event) => this.onChipClick(event)}
-        tabIndex={0}>
+        tabIndex={0}
+        type="button">
         {this.imageUrl ? (
           <img src={this.imageUrl} alt="" />
         ) : this.showCheckmark ? (
@@ -119,7 +120,7 @@ export class ModusChip {
         {this.showClose ? (
           <IconRemove onClick={this.disabled ? null : (event) => this.onCloseClick(event)} size={'16'}></IconRemove>
         ) : null}
-      </div>
+      </button>
     );
   }
 }
