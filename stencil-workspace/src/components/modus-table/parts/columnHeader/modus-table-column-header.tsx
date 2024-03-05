@@ -45,11 +45,10 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
     sortIconStyle,
   } = context;
   const { column, id: headerId, colSpan, isPlaceholder, getSize } = header;
-
   return (
     <th
       data-accessor-key={headerId}
-      tabindex={`${!isColumnResizing && columnReorder ? '0' : ''}`}
+      //tabindex={`${!isColumnResizing && columnReorder ? '0' : ''}`}
       key={id}
       colSpan={colSpan}
       /**
@@ -79,28 +78,40 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
           onDragStart(event, headerId, elementRef, false);
         }
       }}>
-      {isPlaceholder ? null : ( // header.isPlaceholder is Required for nested column headers to display empty cell
-        <div class={column.getCanSort() && 'can-sort'}>
-          <span class={column.getCanSort() && column.getIsSorted() ? 'sorted' : ''}>{column.columnDef.header}</span>
-          {column.getCanSort() && (
-            <ModusTableColumnSortIcon
-              column={column}
-              sortIconStyle={sortIconStyle}
-              showSortIconOnHover={showSortIconOnHover}
-              isColumnResizing={isColumnResizing}
-            />
+      <modus-tooltip text="This is a Test" position="bottom" disabled={showSortIconOnHover} >
+        <div
+          tabIndex={0}
+          style={{ outline: 'none' }}
+          onFocus={() => {
+            elementRef.style.border = '1px solid red';
+          }}
+          onBlur={() => {
+            elementRef.style.border = 'none';
+          }}>
+          {isPlaceholder ? null : ( // header.isPlaceholder is Required for nested column headers to display empty cell
+            <div class={column.getCanSort() && 'can-sort'}>
+              <span class={column.getCanSort() && column.getIsSorted() ? 'sorted' : ''}>{column.columnDef.header}</span>
+              {column.getCanSort() && (
+                <ModusTableColumnSortIcon
+                  column={column}
+                  sortIconStyle={sortIconStyle}
+                  showSortIconOnHover={showSortIconOnHover}
+                  isColumnResizing={isColumnResizing}
+                />
+              )}
+            </div>
           )}
+          {/** Column resizing handler */}
+          {column.getCanResize() ? (
+            <ModusTableColumnResizingHandler
+              table={table}
+              header={header}
+              onMouseEnter={() => onMouseEnterResize()}
+              onMouseLeave={() => onMouseLeaveResize()}
+            />
+          ) : null}
         </div>
-      )}
-      {/** Column resizing handler */}
-      {column.getCanResize() ? (
-        <ModusTableColumnResizingHandler
-          table={table}
-          header={header}
-          onMouseEnter={() => onMouseEnterResize()}
-          onMouseLeave={() => onMouseLeaveResize()}
-        />
-      ) : null}
+      </modus-tooltip>
     </th>
   );
 };
