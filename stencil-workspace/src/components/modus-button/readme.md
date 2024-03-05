@@ -20,6 +20,7 @@
 | `type`         | `type`          | (Optional) Button types                                                                    | `"button" \| "reset" \| "submit"`                    | `'button'`  |
 
 
+
 ## Events
 
 | Event         | Description                                     | Type               |
