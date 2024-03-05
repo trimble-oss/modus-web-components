@@ -106,6 +106,7 @@ describe('modus-accordion-item', () => {
     await page.waitForChanges();
     expect(opened).not.toHaveReceivedEvent();
   });
+  
   it('renders changes to the expandButtonType prop', async () => {
     const page = await newE2EPage();
 
@@ -121,5 +122,21 @@ describe('modus-accordion-item', () => {
     await page.waitForChanges();
     expect(element).toHaveClass('icon-expand-less-circle');
     expect(element).not.toHaveClass('icon-expand-less');
+  });
+  
+  it('renders changes to the icon prop', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-accordion-item></modus-accordion-item>');
+    await page.waitForChanges();
+
+    const component = await page.find('modus-accordion-item');
+    const element = await page.find('modus-accordion-item >>> .header');
+    expect(element).not.toHaveClass('icon');
+
+    component.setProperty('icon', 'add');
+    await page.waitForChanges();
+    const icon = await page.find('modus-accordion-item >>> .icon-add');
+    expect(icon).toBeTruthy();
   });
 });

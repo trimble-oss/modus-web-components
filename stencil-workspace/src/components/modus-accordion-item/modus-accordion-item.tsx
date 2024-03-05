@@ -3,6 +3,8 @@ import { Component, Event, EventEmitter, Prop, h } from '@stencil/core';
 import { generateElementId } from '../../utils/utils';
 import { IconExpandLessCircle } from '../../icons/generated-icons/IconExpandLessCircle';
 import { IconExpandLess } from '../../icons/generated-icons/IconExpandLess';
+import { ModusIconMap } from '../../icons/ModusIconMap';
+import { JSX } from '@stencil/core/internal';
 
 @Component({
   tag: 'modus-accordion-item',
@@ -21,6 +23,9 @@ export class ModusAccordionItem {
 
   /** (required) The text to render in the header. */
   @Prop() headerText: string;
+
+  /** (optional) The icon to display before the header text. */
+  @Prop() icon: string;
 
   /** (optional) The size of accordion item. */
   @Prop() size: 'condensed' | 'standard' = 'standard';
@@ -111,6 +116,14 @@ export class ModusAccordionItem {
     element.offsetHeight; // eslint-disable-line no-unused-expressions
   };
 
+  renderIcon(): JSX.Element {
+    return (
+      <span class="icon">
+        <ModusIconMap icon={this.icon}></ModusIconMap>
+      </span>
+    );
+  }
+
   render(): unknown {
     const sizeClass = `${this.classBySize.get(this.size)}`;
     const disabledClass = `${this.disabled ? 'disabled' : ''}`;
@@ -131,6 +144,7 @@ export class ModusAccordionItem {
           onClick={() => this.handleHeaderClick()}
           onKeyDown={(event) => this.handleKeydown(event)}
           tabIndex={this.disabled ? -1 : 0}>
+          {this.icon ? this.renderIcon() : null}
           <span class="title">{this.headerText}</span>
           {
             <div

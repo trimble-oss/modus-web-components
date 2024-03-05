@@ -13,6 +13,7 @@
 | `expandButtonType` | `expand-button-type` | (optional) The type of expand button                           | `"circleArrow" \| "standardArrow"` | `'standardArrow'` |
 | `expanded`         | `expanded`           | (optional) Whether the accordion item is expanded.             | `boolean`                          | `undefined`       |
 | `headerText`       | `header-text`        | (required) The text to render in the header.                   | `string`                           | `undefined`       |
+| `icon`             | `icon`               | (optional) The icon to display before the header text.         | `string`                           | `undefined`       |
 | `size`             | `size`               | (optional) The size of accordion item.                         | `"condensed" \| "standard"`        | `'standard'`      |
 
 
