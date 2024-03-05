@@ -91,7 +91,6 @@ export interface ModusTableDisplayOptions {
 
 export interface ModusTableToolbarOptions {
   columnsVisibility?: ModusTableColumnsVisibilityOptions;
-  maxHeight?: string;
 }
 
 export interface ModusTableColumnsVisibilityOptions {

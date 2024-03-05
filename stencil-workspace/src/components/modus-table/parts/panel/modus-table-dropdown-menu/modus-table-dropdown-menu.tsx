@@ -54,6 +54,7 @@ export class ModusTableDropdownMenu {
     const {
       tableInstance: { getAllLeafColumns },
       toolbarOptions: options,
+      maxHeight,
     } = this.context;
     return (
       <div class="dropdown-menu-container">
@@ -75,7 +76,7 @@ export class ModusTableDropdownMenu {
               showDropdown={this.show}
               menuIconContainerRef={this.menuIconContainerRef}
               toggleDropdown={(show: boolean) => (this.show = show)}
-              maxHeight={options?.maxHeight}
+              maxHeight={maxHeight}
             />
           </div>
         )}

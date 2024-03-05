@@ -27,7 +27,7 @@ export class ModusTableColumnsVisibility {
 
   @Prop() toggleDropdown: (show: boolean) => void;
 
-  @Prop({ mutable: true }) maxHeight: string;
+  @Prop() maxHeight: string;
 
   @State() columnsVisibilityState: Map<string, boolean> = new Map();
 
@@ -169,7 +169,7 @@ export class ModusTableColumnsVisibility {
 
   render(): void {
     return (
-      <div class="columns-visibility-menu" style={{ maxHeight: this.maxHeight || '80vh' }}>
+      <div class="columns-visibility-menu" style={{ maxHeight: this.maxHeight || '60dvh' }}>
         <div class="column-visibility-header">{this.columnsVisibility.title || 'Columns'}</div>
         <div class="column-visibility-content">{this.renderColumnsChecklist()}</div>
         {this.renderCancelApplyButtons()}
