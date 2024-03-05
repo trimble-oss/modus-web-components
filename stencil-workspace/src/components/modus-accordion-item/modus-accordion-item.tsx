@@ -20,7 +20,7 @@ export class ModusAccordionItem {
   /** (required) The text to render in the header. */
   @Prop() headerText: string;
 
-  /** (optional) Takes the icon name and renders the icon. */
+  /** (optional) The icon to display before the header text. */
   @Prop() icon: string;
 
   /** (optional) The size of accordion item. */
