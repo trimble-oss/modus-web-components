@@ -30,14 +30,14 @@ export declare interface ModusAccordion extends Components.ModusAccordion {}
 
 
 @ProxyCmp({
-  inputs: ['disabled', 'expanded', 'headerText', 'size']
+  inputs: ['disabled', 'expanded', 'headerText', 'icon', 'size']
 })
 @Component({
   selector: 'modus-accordion-item',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['disabled', 'expanded', 'headerText', 'size'],
+  inputs: ['disabled', 'expanded', 'headerText', 'icon', 'size'],
 })
 export class ModusAccordionItem {
   protected el: HTMLElement;
