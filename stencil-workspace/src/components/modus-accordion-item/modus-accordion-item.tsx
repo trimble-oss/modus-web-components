@@ -1,7 +1,8 @@
 // eslint-disable-next-line
 import { Component, Event, EventEmitter, Prop, h } from '@stencil/core';
-import { IconExpandMore } from '../../icons/generated-icons/IconExpandMore';
 import { generateElementId } from '../../utils/utils';
+import { IconExpandLessCircle } from '../../icons/generated-icons/IconExpandLessCircle';
+import { IconExpandLess } from '../../icons/generated-icons/IconExpandLess';
 
 @Component({
   tag: 'modus-accordion-item',
@@ -11,6 +12,9 @@ import { generateElementId } from '../../utils/utils';
 export class ModusAccordionItem {
   /** (optional) Disables the accordion item, locks expand/collapse. */
   @Prop() disabled: boolean;
+
+  /** (optional) The type of expand button */
+  @Prop() expandButtonType: 'standardArrow' | 'circleArrow' = 'standardArrow';
 
   /** (optional) Whether the accordion item is expanded. */
   @Prop({ mutable: true }) expanded: boolean;
@@ -132,7 +136,11 @@ export class ModusAccordionItem {
             <div
               class={`chevron-container ${this.expanded ? 'reverse' : ''} `}
               ref={(el) => (this.chevronContainerRef = el)}>
-              <IconExpandMore size="24"></IconExpandMore>
+              {this.expandButtonType == 'circleArrow' ? (
+                <IconExpandLessCircle size="24"></IconExpandLessCircle>
+              ) : (
+                <IconExpandLess size="24"></IconExpandLess>
+              )}
             </div>
           }
         </div>

@@ -30,6 +30,20 @@ The `<modus-accordion-item>` utilizes the slot element, allowing you to render y
   </modus-accordion-item>
 </modus-accordion>
 
+### Circle Arrow
+
+<modus-accordion>
+  <modus-accordion-item header-text="Item 1" size="condensed" expand-button-type="circleArrow">
+    Content
+  </modus-accordion-item>
+  <modus-accordion-item header-text="Item 2" size="condensed" expand-button-type="circleArrow">
+    Content
+  </modus-accordion-item>
+  <modus-accordion-item disabled expanded header-text="Item 3" size="condensed" expand-button-type="circleArrow">
+    Content
+  </modus-accordion-item>
+</modus-accordion>
+
 ```html
 <modus-accordion>
   <modus-accordion-item header-text="Item 1">Content</modus-accordion-item>
@@ -42,6 +56,18 @@ The `<modus-accordion-item>` utilizes the slot element, allowing you to render y
   <modus-accordion-item header-text="Item 2" size="condensed">Content</modus-accordion-item>
   <modus-accordion-item disabled expanded header-text="Item 3" size="condensed">Content</modus-accordion-item>
 </modus-accordion>
+
+<modus-accordion>
+  <modus-accordion-item header-text="Item 1" size="condensed" expand-button-type="circleArrow">
+    Content
+  </modus-accordion-item>
+  <modus-accordion-item header-text="Item 2" size="condensed" expand-button-type="circleArrow">
+    Content
+  </modus-accordion-item>
+  <modus-accordion-item disabled expanded header-text="Item 3" size="condensed" expand-button-type="circleArrow">
+    Content
+  </modus-accordion-item>
+</modus-accordion>
 ```
 
 ### Properties
@@ -53,7 +79,7 @@ The `<modus-accordion-item>` utilizes the slot element, allowing you to render y
 | `expanded`    | The expanded state of the accordion item        | `boolean` |                         |               |          |
 | `header-text` | The text to render in the accordion item header | `string`  |                         |               |          |
 | `size`        | The size of the accordion item                  | `string`  | 'condensed', 'standard' | 'standard'    |          |
-
+|`expand-button-type`| The type of expand button                   | `string`  |  'standardArrow' ,'circleArrow'| 'standardArrow' | |
 ### DOM Events
 
 | Name     | Description                      | Emits |
