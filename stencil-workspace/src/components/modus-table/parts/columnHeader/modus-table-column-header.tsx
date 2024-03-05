@@ -78,7 +78,7 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
           onDragStart(event, headerId, elementRef, false);
         }
       }}>
-      <modus-tooltip text="This is a Test" position="bottom" disabled={showSortIconOnHover} >
+      <modus-tooltip text="This is a Test" position="bottom" disabled={showSortIconOnHover}>
         <div
           tabIndex={0}
           style={{ outline: 'none' }}
