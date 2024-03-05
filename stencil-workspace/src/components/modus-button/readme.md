@@ -1,9 +1,6 @@
 # modus-button
 
-
-
 <!-- Auto Generated Below -->
-
 
 ## Properties
 
@@ -20,14 +17,13 @@
 | `showCaret`      | `show-caret`      | (optional) Shows a caret icon right side of the button.                                    | `boolean`                                            | `undefined` |
 | `size`           | `size`            | (optional) The size of the button.                                                         | `"large" \| "medium" \| "small"`                     | `'medium'`  |
 | `toggleable`     | `toggleable`      | (optional) Makes the button toggleable.                                                    | `boolean`                                            | `undefined` |
-
+| `type`        | `type`         | (Optional) Button types                                                                    | `"button" \| "reset" \| "submit"`                    | `'button'`  |
 
 ## Events
 
 | Event         | Description                                     | Type               |
 | ------------- | ----------------------------------------------- | ------------------ |
 | `buttonClick` | (optional) An event that fires on button click. | `CustomEvent<any>` |
-
 
 ## Methods
 
@@ -38,9 +34,6 @@ Focus the Button
 #### Returns
 
 Type: `Promise<void>`
-
-
-
 
 ## Dependencies
 
@@ -54,6 +47,7 @@ Type: `Promise<void>`
  - [modus-table-row-actions](../modus-table/parts/row/actions/modus-table-row-actions)
 
 ### Graph
+
 ```mermaid
 graph TD;
   modus-button-group --> modus-button
@@ -65,6 +59,4 @@ graph TD;
   style modus-button fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
-----------------------------------------------
-
-
+---

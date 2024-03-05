@@ -206,7 +206,7 @@ export declare interface ModusBreadcrumb extends Components.ModusBreadcrumb {
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'buttonStyle', 'color', 'disabled', 'iconOnly', 'leftIcon', 'rightIcon', 'showCaret', 'size'],
+  inputs: ['ariaLabel', 'buttonStyle', 'color', 'disabled', 'iconOnly', 'leftIcon', 'rightIcon', 'showCaret', 'size', 'type'],
   methods: ['focusButton']
 })
 @Component({
@@ -214,7 +214,7 @@ export declare interface ModusBreadcrumb extends Components.ModusBreadcrumb {
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['ariaLabel', 'buttonStyle', 'color', 'disabled', 'iconOnly', 'leftIcon', 'rightIcon', 'showCaret', 'size'],
+  inputs: ['ariaLabel', 'buttonStyle', 'color', 'disabled', 'iconOnly', 'leftIcon', 'rightIcon', 'showCaret', 'size', 'type'],
 })
 export class ModusButton {
   protected el: HTMLElement;
