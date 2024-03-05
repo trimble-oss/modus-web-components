@@ -1,7 +1,9 @@
 // eslint-disable-next-line
 import { Component, Event, EventEmitter, Prop, h } from '@stencil/core';
-import { IconChevronDownThick } from '../../icons/svgs/icon-chevron-down-thick';
+import { IconExpandMore } from '../../icons/generated-icons/IconExpandMore';
 import { generateElementId } from '../../utils/utils';
+import { ModusIconMap } from '../../icons/ModusIconMap';
+import { JSX } from '@stencil/core/internal';
 
 @Component({
   tag: 'modus-accordion-item',
@@ -17,6 +19,9 @@ export class ModusAccordionItem {
 
   /** (required) The text to render in the header. */
   @Prop() headerText: string;
+
+  /** (optional) The icon to display before the header text. */
+  @Prop() icon: string;
 
   /** (optional) The size of accordion item. */
   @Prop() size: 'condensed' | 'standard' = 'standard';
@@ -107,6 +112,14 @@ export class ModusAccordionItem {
     element.offsetHeight; // eslint-disable-line no-unused-expressions
   };
 
+  renderIcon(): JSX.Element {
+    return (
+      <span class="icon">
+        <ModusIconMap icon={this.icon}></ModusIconMap>
+      </span>
+    );
+  }
+
   render(): unknown {
     const sizeClass = `${this.classBySize.get(this.size)}`;
     const disabledClass = `${this.disabled ? 'disabled' : ''}`;
@@ -127,12 +140,13 @@ export class ModusAccordionItem {
           onClick={() => this.handleHeaderClick()}
           onKeyDown={(event) => this.handleKeydown(event)}
           tabIndex={this.disabled ? -1 : 0}>
+          {this.icon ? this.renderIcon() : null}
           <span class="title">{this.headerText}</span>
           {
             <div
               class={`chevron-container ${this.expanded ? 'reverse' : ''} `}
               ref={(el) => (this.chevronContainerRef = el)}>
-              <IconChevronDownThick size="24"></IconChevronDownThick>
+              <IconExpandMore size="24"></IconExpandMore>
             </div>
           }
         </div>
