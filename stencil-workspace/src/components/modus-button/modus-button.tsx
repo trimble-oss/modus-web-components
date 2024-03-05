@@ -36,6 +36,9 @@ export class ModusButton {
   /** (optional) Shows a caret icon right side of the button. */
   @Prop() showCaret: boolean;
 
+  /** (Optional) Button types */
+  @Prop() type: 'button' | 'reset' | 'submit' = 'button';
+
   /** (optional) An event that fires on button click. */
   @Event() buttonClick: EventEmitter;
 
@@ -127,7 +130,8 @@ export class ModusButton {
         onKeyUp={() => (this.pressed = false)}
         onMouseDown={() => (this.pressed = true)}
         onMouseUp={() => (this.pressed = false)}
-        ref={(el) => (this.buttonRef = el)}>
+        ref={(el) => (this.buttonRef = el)}
+        type={this.type}>
         {this.iconOnly ? this.renderIconOnly() : this.renderIconWithText()}
         {this.showCaret && <ModusIconMap size="24" icon="caret_down"></ModusIconMap>}
       </button>
