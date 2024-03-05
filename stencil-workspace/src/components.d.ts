@@ -238,6 +238,10 @@ export namespace Components {
     }
     interface ModusButton {
         /**
+          * (optional) The button's aria-disabled state.
+         */
+        "ariaDisabled": string | null;
+        /**
           * (optional) The button's aria-label.
          */
         "ariaLabel": string | null;
@@ -2787,6 +2791,10 @@ declare namespace LocalJSX {
         "underlineLinks"?: boolean;
     }
     interface ModusButton {
+        /**
+          * (optional) The button's aria-disabled state.
+         */
+        "ariaDisabled"?: string | null;
         /**
           * (optional) The button's aria-label.
          */
