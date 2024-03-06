@@ -30,14 +30,14 @@ export declare interface ModusAccordion extends Components.ModusAccordion {}
 
 
 @ProxyCmp({
-  inputs: ['disabled', 'expanded', 'headerText', 'size']
+  inputs: ['disabled', 'expandButtonType', 'expanded', 'headerText', 'icon', 'size']
 })
 @Component({
   selector: 'modus-accordion-item',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['disabled', 'expanded', 'headerText', 'size'],
+  inputs: ['disabled', 'expandButtonType', 'expanded', 'headerText', 'icon', 'size'],
 })
 export class ModusAccordionItem {
   protected el: HTMLElement;
@@ -206,7 +206,7 @@ export declare interface ModusBreadcrumb extends Components.ModusBreadcrumb {
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'buttonStyle', 'color', 'disabled', 'iconOnly', 'leftIcon', 'rightIcon', 'showCaret', 'size', 'type'],
+  inputs: ['ariaDisabled', 'ariaLabel', 'buttonStyle', 'color', 'disabled', 'iconOnly', 'leftIcon', 'rightIcon', 'showCaret', 'size', 'type'],
   methods: ['focusButton']
 })
 @Component({
@@ -214,7 +214,7 @@ export declare interface ModusBreadcrumb extends Components.ModusBreadcrumb {
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['ariaLabel', 'buttonStyle', 'color', 'disabled', 'iconOnly', 'leftIcon', 'rightIcon', 'showCaret', 'size', 'type'],
+  inputs: ['ariaDisabled', 'ariaLabel', 'buttonStyle', 'color', 'disabled', 'iconOnly', 'leftIcon', 'rightIcon', 'showCaret', 'size', 'type'],
 })
 export class ModusButton {
   protected el: HTMLElement;
