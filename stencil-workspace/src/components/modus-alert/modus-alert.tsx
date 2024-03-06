@@ -73,7 +73,7 @@ export class ModusAlert {
           {this.type === 'warning' ? <IconWarning size={iconSize} /> : null}
         </div>
         <div class="message">
-          {this.message}
+          {this.message?.substring(0, 300)}
           <slot></slot>
         </div>
         <div class="alert-buttons-container">
