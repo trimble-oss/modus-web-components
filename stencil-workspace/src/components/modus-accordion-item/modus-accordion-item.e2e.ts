@@ -55,7 +55,7 @@ describe('modus-accordion-item', () => {
     await page.setContent('<modus-accordion-item></modus-accordion-item>');
     const component = await page.find('modus-accordion-item');
     const headerElement = await page.find('modus-accordion-item >>> .header');
-    const iconElement = await page.find('modus-accordion-item >>> .icon-expand-more');
+    const iconElement = await page.find('modus-accordion-item >>> .icon-expand-less');
     let iconComputedStyle = await iconElement.getComputedStyle();
     expect(headerElement).toHaveClass('standard');
     expect(iconComputedStyle['height']).toEqual('24px');
@@ -105,5 +105,38 @@ describe('modus-accordion-item', () => {
     await element.click();
     await page.waitForChanges();
     expect(opened).not.toHaveReceivedEvent();
+  });
+
+  it('renders changes to the expandButtonType prop', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-accordion-item></modus-accordion-item>');
+    await page.waitForChanges();
+
+    const component = await page.find('modus-accordion-item');
+    const element = await page.find('modus-accordion-item >>> .icon-expand-less');
+    expect(element).toHaveClass('icon-expand-less');
+    expect(element).not.toHaveClass('icon-expand-less-circle');
+
+    component.setProperty('expandButtonType', 'circleArrow');
+    await page.waitForChanges();
+    expect(element).toHaveClass('icon-expand-less-circle');
+    expect(element).not.toHaveClass('icon-expand-less');
+  });
+
+  it('renders changes to the icon prop', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-accordion-item></modus-accordion-item>');
+    await page.waitForChanges();
+
+    const component = await page.find('modus-accordion-item');
+    const element = await page.find('modus-accordion-item >>> .header');
+    expect(element).not.toHaveClass('icon');
+
+    component.setProperty('icon', 'add');
+    await page.waitForChanges();
+    const icon = await page.find('modus-accordion-item >>> .icon-add');
+    expect(icon).toBeTruthy();
   });
 });
