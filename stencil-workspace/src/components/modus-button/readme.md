@@ -2,10 +2,12 @@
 
 <!-- Auto Generated Below -->
 
+
 ## Properties
 
 | Property         | Attribute         | Description                                                                                | Type                                                 | Default     |
 | ---------------- | ----------------- | ------------------------------------------------------------------------------------------ | ---------------------------------------------------- | ----------- |
+| `ariaDisabled`   | `aria-disabled`   | (optional) The button's aria-disabled state.                                               | `string`                                             | `undefined` |
 | `ariaLabel`      | `aria-label`      | (optional) The button's aria-label.                                                        | `string`                                             | `undefined` |
 | `buttonPosition` | `button-position` |                                                                                            | `"center" \| "left" \| "right"`                      | `undefined` |
 | `buttonStyle`    | `button-style`    | (optional) The style of the button                                                         | `"borderless" \| "fill" \| "outline"`                | `'fill'`    |
@@ -25,6 +27,7 @@
 | ------------- | ----------------------------------------------- | ------------------ |
 | `buttonClick` | (optional) An event that fires on button click. | `CustomEvent<any>` |
 
+
 ## Methods
 
 ### `focusButton() => Promise<void>`
@@ -34,6 +37,9 @@ Focus the Button
 #### Returns
 
 Type: `Promise<void>`
+
+
+
 
 ## Dependencies
 
@@ -47,7 +53,6 @@ Type: `Promise<void>`
  - [modus-table-row-actions](../modus-table/parts/row/actions/modus-table-row-actions)
 
 ### Graph
-
 ```mermaid
 graph TD;
   modus-button-group --> modus-button
@@ -59,4 +64,6 @@ graph TD;
   style modus-button fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
----
+----------------------------------------------
+
+
