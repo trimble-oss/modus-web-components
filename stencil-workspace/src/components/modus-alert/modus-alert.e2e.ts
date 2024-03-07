@@ -96,4 +96,21 @@ describe('modus-alert', () => {
     await page.waitForChanges();
     expect(actionClick).toHaveReceivedEvent();
   });
+
+  it('renders the number of characters allowed to be entered in the message', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(
+      '<modus-alert message="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Dodfasd."></modus-alert>'
+    );
+    const component = await page.find('modus-alert');
+    const element = await page.find('modus-alert >>> div.message');
+    expect(element.textContent.length).toEqual(300);
+    component.setProperty(
+      'message',
+      'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Dodfa'
+    );
+    await page.waitForChanges();
+    expect(element.textContent.length).toEqual(299);
+  });
 });
