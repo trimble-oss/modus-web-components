@@ -49,6 +49,9 @@ export class ModusNavbar {
   /** (optional) Whether to show search overlay or not. */
   @Prop() enableSearchOverlay: boolean;
 
+  /** (optional) whether the dynamic button slot is open or not */
+  @Prop() isDynamicButtonSlotOpen: boolean;
+
   /** (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels. */
   @Prop() logoOptions: ModusNavbarLogoOptions;
 
@@ -326,8 +329,9 @@ export class ModusNavbar {
 
   showButtonMenuById(id: string): void {
     this.buttonClick.emit(id);
+    this.isDynamicButtonSlotOpen = this.openButtonMenuId === id;
     this.hideMenus();
-    if (this.openButtonMenuId !== id) {
+    if (this.openButtonMenuId !== id && !this.isDynamicButtonSlotOpen) {
       this.openButtonMenuId = id;
     }
   }
