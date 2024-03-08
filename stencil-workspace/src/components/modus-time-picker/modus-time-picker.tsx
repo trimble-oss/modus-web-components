@@ -212,7 +212,6 @@ export class ModusTimePicker {
         aria-label={this.label ? null : this.ariaLabel}
         aria-placeholder={this.placeholder}
         disabled={this.disabled}
-        inputmode="text"
         onInput={(event) => this.handleInputChange(event)}
         placeholder={this.placeholder}
         readonly={this.readOnly}
