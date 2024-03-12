@@ -286,6 +286,8 @@ export namespace Components {
          */
         "type": 'button' | 'reset' | 'submit';
     }
+    interface ModusButtonGroup {
+    }
     interface ModusCard {
         /**
           * (optional) The card's aria-label.
@@ -1849,6 +1851,12 @@ declare global {
         prototype: HTMLModusButtonElement;
         new (): HTMLModusButtonElement;
     };
+    interface HTMLModusButtonGroupElement extends Components.ModusButtonGroup, HTMLStencilElement {
+    }
+    var HTMLModusButtonGroupElement: {
+        prototype: HTMLModusButtonGroupElement;
+        new (): HTMLModusButtonGroupElement;
+    };
     interface HTMLModusCardElement extends Components.ModusCard, HTMLStencilElement {
     }
     var HTMLModusCardElement: {
@@ -2521,6 +2529,7 @@ declare global {
         "modus-badge": HTMLModusBadgeElement;
         "modus-breadcrumb": HTMLModusBreadcrumbElement;
         "modus-button": HTMLModusButtonElement;
+        "modus-button-group": HTMLModusButtonGroupElement;
         "modus-card": HTMLModusCardElement;
         "modus-checkbox": HTMLModusCheckboxElement;
         "modus-chip": HTMLModusChipElement;
@@ -2839,6 +2848,8 @@ declare namespace LocalJSX {
           * (Optional) Button types
          */
         "type"?: 'button' | 'reset' | 'submit';
+    }
+    interface ModusButtonGroup {
     }
     interface ModusCard {
         /**
@@ -4339,6 +4350,7 @@ declare namespace LocalJSX {
         "modus-badge": ModusBadge;
         "modus-breadcrumb": ModusBreadcrumb;
         "modus-button": ModusButton;
+        "modus-button-group": ModusButtonGroup;
         "modus-card": ModusCard;
         "modus-checkbox": ModusCheckbox;
         "modus-chip": ModusChip;
@@ -4401,6 +4413,7 @@ declare module "@stencil/core" {
             "modus-badge": LocalJSX.ModusBadge & JSXBase.HTMLAttributes<HTMLModusBadgeElement>;
             "modus-breadcrumb": LocalJSX.ModusBreadcrumb & JSXBase.HTMLAttributes<HTMLModusBreadcrumbElement>;
             "modus-button": LocalJSX.ModusButton & JSXBase.HTMLAttributes<HTMLModusButtonElement>;
+            "modus-button-group": LocalJSX.ModusButtonGroup & JSXBase.HTMLAttributes<HTMLModusButtonGroupElement>;
             "modus-card": LocalJSX.ModusCard & JSXBase.HTMLAttributes<HTMLModusCardElement>;
             "modus-checkbox": LocalJSX.ModusCheckbox & JSXBase.HTMLAttributes<HTMLModusCheckboxElement>;
             "modus-chip": LocalJSX.ModusChip & JSXBase.HTMLAttributes<HTMLModusChipElement>;

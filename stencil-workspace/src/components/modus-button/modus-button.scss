@@ -8,8 +8,11 @@
 
 button {
   align-items: center;
-  border: $rem-1px solid transparent;
-  border-radius: $rem-4px;
+  border-bottom: var(--btn-border-bottom-width, #{$rem-1px}) solid transparent;
+  border-left: var(--btn-border-left-width, #{$rem-1px}) solid transparent;
+  border-right: var(--btn-border-right-width, #{$rem-1px}) solid transparent;
+  border-top: var(--btn-border-top-width, #{$rem-1px}) solid transparent;
+  border-radius: var(--btn-border-radius, #{$rem-4px});
   cursor: default;
   display: inline-flex;
   font-family: $primary-font;
