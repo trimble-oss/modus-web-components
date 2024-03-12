@@ -1,20 +1,5 @@
 // eslint-disable-next-line
-import { Component, h, Prop, Element, Event, EventEmitter, State } from '@stencil/core';
-import {
-  ButtonGroupStyle,
-  ButtonGroupButtonPosition,
-  ButtonGroupSelectionType,
-  ButtonGroupVariant,
-} from './modus-button-group.models';
-import {
-  OUTLINE_STYLE,
-  FILL_STYLE,
-  PRIMARY_VARIANT,
-  DEFAULT_SELECT__TYPE,
-  LEFT_BUTTON_POSITION,
-  RIGHT_BUTTON_POSITION,
-  CENTER_BUTTON_POSITION,
-} from './modus-button-group.constants';
+import { Component, h, Prop, Element, Host, Listen } from '@stencil/core';
 @Component({
   tag: 'modus-button-group',
   styleUrl: 'modus-button-group.scss',
@@ -24,79 +9,38 @@ export class ModusButtonGroup {
   /** (optional) The button's aria-label. */
   @Prop() ariaLabel: string | null;
 
-  /** (optional) The style of the button */
-  @Prop() groupStyle: ButtonGroupStyle = FILL_STYLE;
-
   /** (optional) Disables the button. */
   @Prop() disabled: boolean;
 
-  /** (optional) Tab Index for the button */
-  @Prop({ mutable: true }) tabIndexValue = 0;
-
-  /**(optional) The selection type of button */
-  @Prop() selectionType: ButtonGroupSelectionType = DEFAULT_SELECT__TYPE;
-
-  /** (optional) The color of the button */
-  @Prop() variant: ButtonGroupVariant = PRIMARY_VARIANT;
-
-  /** (optional) An event that fires on button click. */
-  @Event() groupClick: EventEmitter;
-
   @Element() host: HTMLElement;
 
-  @State() buttonPosition: ButtonGroupButtonPosition = CENTER_BUTTON_POSITION;
-
-  @State() selectedIndex = -1;
-
-  handleDefaultKeyDown(e, id) {
-    const code = e.code.toUpperCase();
-    if (code === 'ENTER' || code === 'SPACE') {
-      this.handleClick(id);
-    }
+  componentWillLoad() {
+    const buttons = this.host.querySelectorAll('modus-button');
+    buttons.forEach((button: HTMLModusButtonElement) => {
+      button.disabled = this.disabled;
+      button.type = 'toggle';
+      button.buttonStyle = 'outline';
+    });
   }
 
-  private handleClick(id: number): void {
-    this.selectedIndex = id;
-    this.groupClick.emit(id);
+  @Listen('slotchange')
+  handleSlotChange(event: Event) {
+    const slot = event.target as HTMLSlotElement;
+    const buttons = slot.assignedElements({ flatten: true }).filter((el) => el.tagName === 'modus-button');
+    buttons.forEach((button: HTMLModusButtonElement) => {
+      button.disabled = this.disabled;
+      button.buttonStyle = 'outline';
+      button.type = 'toggle';
+    });
   }
 
-  renderButtons() {
-    {
-      return Array.from(this.host.children).map((child, id, items) => {
-        if (items.length > 1) {
-          if (id == 0) {
-            this.buttonPosition = LEFT_BUTTON_POSITION;
-          }
-          if (id == items.length - 1) {
-            this.buttonPosition = RIGHT_BUTTON_POSITION;
-          }
-          if (id > 0 && id < items.length - 1) {
-            this.buttonPosition = CENTER_BUTTON_POSITION;
-          }
-        } else {
-          this.buttonPosition = null;
-        }
-        const className = `modus-button ${this.groupStyle == OUTLINE_STYLE ? OUTLINE_STYLE : ''}`;
-        return (
-          <modus-button
-            aria-disabled={this.disabled ? 'true' : undefined}
-            aria-label={this.ariaLabel}
-            aria-checked={this.selectionType == 'single' ? id == this.selectedIndex : ''}
-            class={className}
-            disabled={this.disabled}
-            onClick={() => (!this.disabled ? this.handleClick(id) : null)}
-            onKeyDown={(e) => this.handleDefaultKeyDown(e, id)}
-            color={this.variant}
-            button-position={this.buttonPosition}
-            button-style={this.groupStyle}
-            toggleable={this.selectionType == 'single' ? id == this.selectedIndex : false}>
-            {child.textContent}
-          </modus-button>
-        );
-      });
-    }
-  }
   render() {
-    return <div class="modus-buttongroup">{this.renderButtons()}</div>;
+    return (
+      <Host>
+        <div class="button-group" aria-label={this.ariaLabel} aria-disabled={this.disabled}>
+          <slot />
+        </div>
+      </Host>
+    );
   }
 }

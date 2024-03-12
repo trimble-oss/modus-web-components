@@ -7,35 +7,11 @@
 
 ## Properties
 
-| Property        | Attribute         | Description                             | Type                       | Default                |
-| --------------- | ----------------- | --------------------------------------- | -------------------------- | ---------------------- |
-| `ariaLabel`     | `aria-label`      | (optional) The button's aria-label.     | `string`                   | `undefined`            |
-| `disabled`      | `disabled`        | (optional) Disables the button.         | `boolean`                  | `undefined`            |
-| `groupStyle`    | `group-style`     | (optional) The style of the button      | `"fill" \| "outline"`      | `FILL_STYLE`           |
-| `selectionType` | `selection-type`  | (optional) The selection type of button | `"default" \| "single"`    | `DEFAULT_SELECT__TYPE` |
-| `tabIndexValue` | `tab-index-value` | (optional) Tab Index for the button     | `number`                   | `0`                    |
-| `variant`       | `variant`         | (optional) The color of the button      | `"primary" \| "secondary"` | `PRIMARY_VARIANT`      |
+| Property    | Attribute    | Description                         | Type      | Default     |
+| ----------- | ------------ | ----------------------------------- | --------- | ----------- |
+| `ariaLabel` | `aria-label` | (optional) The button's aria-label. | `string`  | `undefined` |
+| `disabled`  | `disabled`   | (optional) Disables the button.     | `boolean` | `undefined` |
 
-
-## Events
-
-| Event        | Description                                     | Type               |
-| ------------ | ----------------------------------------------- | ------------------ |
-| `groupClick` | (optional) An event that fires on button click. | `CustomEvent<any>` |
-
-
-## Dependencies
-
-### Depends on
-
-- [modus-button](../modus-button)
-
-### Graph
-```mermaid
-graph TD;
-  modus-button-group --> modus-button
-  style modus-button-group fill:#f9f,stroke:#333,stroke-width:4px
-```
 
 ----------------------------------------------
 

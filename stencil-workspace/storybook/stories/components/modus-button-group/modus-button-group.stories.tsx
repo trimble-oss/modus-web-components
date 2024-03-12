@@ -20,54 +20,12 @@ export default {
         type: { summary: 'boolean' },
       },
     },
-    groupStyle: {
-      name: 'group-style',
-      control: {
-        options: [ 'fill', 'outline'],
-        type: 'select',
-      },
-      description: 'The style of the button group',
-      table: {
-        defaultValue: { summary: `'fill'` },
-        type: { summary: `'fill' | 'outline'` },
-      },
-    },
-    variant: {
-      control: {
-        options: ['primary', 'secondary'],
-        type: 'select',
-      },
-      description: 'The variant of the button group',
-      table: {
-        defaultValue: { summary: `'primary'` },
-        type: { summary: `'primary' | 'secondary'` },
-      },
-    },
-    selectionType: {
-      name: 'selection-type',
-      control: {
-        options: ['single', 'default'],
-        type: 'select',
-      },
-      description: 'The selection type of button',
-      table: {
-        defaultValue: { summary: `'default'` },
-        type: { summary: `'single' | 'default'` },
-      },
-    },
-    tabIndexValue: {
-      name: 'tab-index-value',
-      description: 'Tab Index for the button',
-      table: {
-        type: { summary: 'number' },
-      },
-    },
   },
 
   parameters: {
     controls: { expanded: true, sort: 'alpha' },
     actions:{
-      handles: ['groupClick'],
+      handles: ['buttonClick'],
     },
     docs: {
       page: docs,
@@ -77,8 +35,8 @@ export default {
     },
   },
 };
-const Default = ({ ariaLabel, disabled, groupStyle, selectionType, tabIndexValue, variant }) => html`
-  <modus-button-group aria-label=${ariaLabel} disabled=${disabled} group-style=${groupStyle} selection-type=${selectionType} tab-index-value=${tabIndexValue} variant=${variant}>
+const Template = ({ ariaLabel, disabled }) => html`
+  <modus-button-group aria-label=${ariaLabel} disabled=${disabled}>
     <modus-button>Button 1</modus-button>
     <modus-button>Button 2</modus-button>
     <modus-button>Button 3</modus-button>
@@ -86,19 +44,9 @@ const Default = ({ ariaLabel, disabled, groupStyle, selectionType, tabIndexValue
 `;
 const DefaultArgs = {
   ariaLabel: '',
-  groupStyle: 'fill',
-  selectionType: 'default',
-  variant: 'primary',
   disabled: false,
-  tabIndexValue: 0,
 };
-export const DefaultSelectionButtonGroup = Default.bind({});
-DefaultSelectionButtonGroup.args = { ...DefaultArgs };
+export const Default = Template.bind({});
+Default.args = { ...DefaultArgs };
 
-export const SingleSelectionButtonGroup = Default.bind({});
-const SingleSelectionArgs = {
-  ...DefaultArgs,
-  selectionType: 'single',
-};
-SingleSelectionButtonGroup.args = { ...SingleSelectionArgs };
 
