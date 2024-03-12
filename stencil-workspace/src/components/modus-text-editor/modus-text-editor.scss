@@ -1,0 +1,47 @@
+/* my-rich-text-editor.css */
+/* Adjust the size of the editor container */
+.editor-container {
+  width: 100%;
+  height: 300px; /* Adjust height as needed */
+}
+
+/* Adjust the size and appearance of Quill toolbar buttons and icons */
+.ql-toolbar {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  padding: 8px;
+}
+
+.ql-toolbar .ql-picker {
+  width: auto;
+  padding: 4px;
+}
+
+.ql-toolbar .ql-picker-label {
+  padding: 2px;
+}
+
+.ql-toolbar .ql-picker-options {
+  padding: 4px;
+}
+
+.ql-toolbar .ql-picker-item {
+  padding: 2px;
+}
+
+.ql-toolbar .ql-picker-label svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Adjust the size and appearance of Quill editor content */
+.ql-container {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.ql-editor {
+  min-height: 200px; /* Adjust min-height as needed */
+  font-size: 14px; /* Adjust font size as needed */
+}
