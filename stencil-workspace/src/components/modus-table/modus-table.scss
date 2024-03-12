@@ -107,6 +107,10 @@ table {
         padding: $rem-8px $rem-8px $rem-8px $rem-16px;
         position: relative;
 
+        &.header-base {
+          outline: -webkit-focus-ring-color auto 1px;
+        }
+        
         .can-sort {
           align-items: center;
           display: flex;
