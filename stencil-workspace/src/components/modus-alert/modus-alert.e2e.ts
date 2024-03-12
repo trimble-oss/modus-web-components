@@ -101,14 +101,14 @@ describe('modus-alert', () => {
     const page = await newE2EPage();
 
     await page.setContent(
-      '<modus-alert message="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Dodfasd."></modus-alert>'
+      '<modus-alert message="Modus is a shared source of truth–a place to reference official Trimble patterns and styles. It includes foundational guidelines and components. Web components serve developers by providing ready, framework-agnostic code that helps build better products faster.  Even with this great system, implementing Modus in a large application requires significant effort."></modus-alert>'
     );
     const component = await page.find('modus-alert');
     const element = await page.find('modus-alert >>> div.message');
-    expect(element.textContent.length).toEqual(300);
+    expect(element.textContent.length).toEqual(303);
     component.setProperty(
       'message',
-      'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Dodfa'
+      'Modus is a shared source of truth–a place to reference official Trimble patterns and styles. It includes foundational guidelines and components. Web components serve developers by providing ready, framework-agnostic code that helps build better products faster.  Even with this great system, the end'
     );
     await page.waitForChanges();
     expect(element.textContent.length).toEqual(299);
