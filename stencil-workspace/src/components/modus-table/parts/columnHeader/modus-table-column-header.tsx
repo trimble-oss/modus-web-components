@@ -82,90 +82,76 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
 
   const renderContent = () => (
     <div
-    tabindex={`${!isColumnResizing && columnReorder ? '0' : ''}`}
-    style={{ outline: 'none', zIndex: '500' }}
-    onFocus={() => {
-      cellElementRef.classList.add('header-base');
-    }}
-    onBlur={() => {
-      cellElementRef.classList.remove('header-base');
-    }}>
-    {isPlaceholder ? null : ( // header.isPlaceholder is Required for nested column headers to display empty cell
-      <span
-        class={column.getCanSort() && 'can-sort'}
-        ref={(element: HTMLTableCellElement) => {
-          headerContentRef = element;
-        }}>
-        <modus-tooltip text={sorting_status_text} disabled={!column.getCanSort()}>
-          <span
-            tabindex={`${column.getCanSort() ? '0' : ''}`}
-            onFocus={() => {
-              cellElementRef.firstElementChild.parentNode
-                .querySelector('modus-tooltip')
-                .setAttribute('disabled', 'true');
-            }}
-            onMouseOver={() => {
-              headerContentRef.children[1].setAttribute('disabled', 'true');
-              cellElementRef.firstElementChild.parentNode
-                .querySelector('modus-tooltip')
-                .setAttribute('disabled', 'true');
-            }}
-            onMouseLeave={() => {
-              headerContentRef.children[1].setAttribute('disabled', 'false');
-              cellElementRef.firstElementChild.parentNode
-                .querySelector('modus-tooltip')
-                .setAttribute('disabled', 'false');
-            }}
-            onBlur={() => {
-              cellElementRef.firstElementChild.parentNode
-                .querySelector('modus-tooltip')
-                .setAttribute('disabled', 'false');
-            }}
-            onKeyDown={handleSortIconHover}
-            class={`${column.getCanSort() && column.getIsSorted() ? 'sorted' : ''}`}>
-            {column.columnDef.header}
-          </span>
-        </modus-tooltip>
-        {column.getCanSort() && (
-          <ModusTableColumnSortIcon
-            column={column}
-            sortIconStyle={sortIconStyle}
-            showSortIconOnHover={showSortIconOnHover}
-            sortingStatus={sorting_status_text}
-            onKeyDown={handleSortIconHover}
-            onMouseOver={() => {
-              headerContentRef.children[0].setAttribute('disabled', 'true');
-              cellElementRef.firstElementChild.parentNode
-                .querySelector('modus-tooltip')
-                .setAttribute('disabled', 'true');
-            }}
-            onMouseLeave={() => {
-              headerContentRef.children[1].setAttribute('disabled', 'false');
-              headerContentRef.children[0].setAttribute('disabled', 'false');
-              cellElementRef.firstElementChild.parentNode
-                .querySelector('modus-tooltip')
-                .setAttribute('disabled', 'true');
-            }}
-            onBlur={() => {
-              cellElementRef.firstElementChild.parentNode
-                .querySelector('modus-tooltip')
-                .setAttribute('disabled', 'false');
-            }}
-          />
-        )}
-      </span>
-    )}
-    {/** Column resizing handler */}
-    {column.getCanResize() ? (
-      <ModusTableColumnResizingHandler
-        table={table}
-        header={header}
-        onMouseEnter={() => onMouseEnterResize()}
-        onMouseLeave={() => onMouseLeaveResize()}
-      />
-    ) : null}
-  </div>
-  )
+      tabindex={`${!isColumnResizing && columnReorder ? '0' : ''}`}
+      style={{ outline: 'none', zIndex: '500' }}
+      onFocus={() => {
+        cellElementRef.classList.add('header-base');
+      }}
+      onBlur={() => {
+        cellElementRef.classList.remove('header-base');
+      }}>
+      {isPlaceholder ? null : ( // header.isPlaceholder is Required for nested column headers to display empty cell
+        <span
+          class={column.getCanSort() && 'can-sort'}
+          ref={(element: HTMLTableCellElement) => {
+            headerContentRef = element;
+          }}>
+          <modus-tooltip text={sorting_status_text} disabled={!column.getCanSort()}>
+            <span
+              tabindex={`${column.getCanSort() ? '0' : ''}`}
+              onFocus={() => {
+                cellElementRef.firstElementChild.parentNode.querySelector('modus-tooltip').setAttribute('disabled', 'true');
+              }}
+              onMouseOver={() => {
+                headerContentRef.children[1].setAttribute('disabled', 'true');
+                cellElementRef.firstElementChild.parentNode.querySelector('modus-tooltip').setAttribute('disabled', 'true');
+              }}
+              onMouseLeave={() => {
+                headerContentRef.children[1].setAttribute('disabled', 'false');
+                cellElementRef.firstElementChild.parentNode.querySelector('modus-tooltip').setAttribute('disabled', 'false');
+              }}
+              onBlur={() => {
+                cellElementRef.firstElementChild.parentNode.querySelector('modus-tooltip').setAttribute('disabled', 'false');
+              }}
+              onKeyDown={handleSortIconHover}
+              class={`${column.getCanSort() && column.getIsSorted() ? 'sorted' : ''}`}>
+              {column.columnDef.header}
+            </span>
+          </modus-tooltip>
+          {column.getCanSort() && (
+            <ModusTableColumnSortIcon
+              column={column}
+              sortIconStyle={sortIconStyle}
+              showSortIconOnHover={showSortIconOnHover}
+              sortingStatus={sorting_status_text}
+              onKeyDown={handleSortIconHover}
+              onMouseOver={() => {
+                headerContentRef.children[0].setAttribute('disabled', 'true');
+                cellElementRef.firstElementChild.parentNode.querySelector('modus-tooltip').setAttribute('disabled', 'true');
+              }}
+              onMouseLeave={() => {
+                headerContentRef.children[1].setAttribute('disabled', 'false');
+                headerContentRef.children[0].setAttribute('disabled', 'false');
+                cellElementRef.firstElementChild.parentNode.querySelector('modus-tooltip').setAttribute('disabled', 'true');
+              }}
+              onBlur={() => {
+                cellElementRef.firstElementChild.parentNode.querySelector('modus-tooltip').setAttribute('disabled', 'false');
+              }}
+            />
+          )}
+        </span>
+      )}
+      {/** Column resizing handler */}
+      {column.getCanResize() ? (
+        <ModusTableColumnResizingHandler
+          table={table}
+          header={header}
+          onMouseEnter={() => onMouseEnterResize()}
+          onMouseLeave={() => onMouseLeaveResize()}
+        />
+      ) : null}
+    </div>
+  );
   return (
     <th
       data-accessor-key={headerId}
@@ -198,17 +184,12 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
           onDragStart(event, headerId, cellElementRef, false);
         }
       }}>
-        {columnReorder && (
-          <modus-tooltip class="table-header-tooltip" text="Reorder column" position="bottom">
+      {columnReorder && (
+        <modus-tooltip class="table-header-tooltip" text="Reorder column" position="bottom">
           {renderContent()}
-          </modus-tooltip>
-        )}
-        {
-          !columnReorder && (
-            renderContent()
-          )
-        }
-     
+        </modus-tooltip>
+      )}
+      {!columnReorder && renderContent()}
     </th>
   );
 };
