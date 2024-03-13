@@ -77,6 +77,7 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
     }
     event.stopPropagation();
   };
+  
 
   const sorting_status_text = showSortingStatus(column, isColumnResizing);
 
@@ -86,17 +87,25 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
     }
   }
 
+  const disableToolTip = (element: any, value: boolean) => {
+    if(element){
+      element.setAttribute('disabled', `${value}`);
+    }
+  }
+
   const headerTextProps = {
     onClick: column.getToggleSortingHandler(),
     onFocus: () => {
       disableCellToolTip(true);
     },
     onMouseOver: () => {
-      headerContentRef.children[1].setAttribute('disabled', 'true');
+      const sortIconToolTip = headerContentRef.children[1];
+      disableToolTip(sortIconToolTip, true);
       disableCellToolTip(true);
     },
     onMouseLeave: () => {
-      headerContentRef.children[1].setAttribute('disabled', 'false');
+      const sortIconToolTip = headerContentRef.children[1];
+      disableToolTip(sortIconToolTip, false);
       disableCellToolTip(false);
     },
     onBlur: () => {
@@ -139,12 +148,16 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
               sortingStatus={sorting_status_text}
               onKeyDown={handleSortIconHover}
               onMouseOver={() => {
-                headerContentRef.children[0].setAttribute('disabled', 'true');
+                const headerTextToolTip = headerContentRef.children[0];
+                disableToolTip(headerTextToolTip, true);
                 disableCellToolTip(true);
               }}
               onMouseLeave={() => {
-                headerContentRef.children[1].setAttribute('disabled', 'false');
-                headerContentRef.children[0].setAttribute('disabled', 'false');
+                const headerTextToolTip = headerContentRef.children[0];
+                const sortIconToolTip =  headerContentRef.children[1];
+                
+                disableToolTip(headerTextToolTip, false);
+                disableToolTip(sortIconToolTip, false);
                 disableCellToolTip(true);
               }}
               onBlur={() => {
