@@ -29,6 +29,19 @@
 | `closeClick` | An event that fires on close icon click. | `CustomEvent<any>` |
 
 
+## Dependencies
+
+### Used by
+
+ - [modus-autocomplete](../modus-autocomplete)
+
+### Graph
+```mermaid
+graph TD;
+  modus-autocomplete --> modus-chip
+  style modus-chip fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 

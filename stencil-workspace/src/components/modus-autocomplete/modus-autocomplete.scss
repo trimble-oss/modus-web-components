@@ -9,6 +9,64 @@
     padding: 0;
   }
 
+  label {
+    color: $modus-autocomplete-label-color;
+    font-size: $rem-12px;
+    margin-bottom: $rem-4px;
+  }
+
+  .label-container {
+    display: inline-block;
+
+    .required {
+      bottom: $rem-1px;
+      color: $modus-autocomplete-validation-error-color;
+      margin-left: $rem-4px;
+      position: relative;
+    }
+  }
+
+  .chips-container {
+    align-items: center;
+    background-color: $modus-autocomplete-bg;
+    border: $rem-1px solid $modus-autocomplete-container-border-color;
+    border-bottom-color: $modus-autocomplete-container-bottom-line-color;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: row wrap;
+    height: auto;
+    margin: 0;
+    min-height: 32px;
+    padding: 2px;
+    position: relative;
+    width: 100%;
+
+    .icon-search {
+      margin-left: 4px;
+      margin-right: 0;
+    }
+
+    modus-chip {
+      margin-left: 4px;
+      margin-right: 4px;
+    }
+
+    .input {
+      display: flex;
+      flex: 1;
+      height: auto !important;
+      position: relative;
+
+      &::part(input-container) {
+        border: none !important;
+      }
+    }
+  }
+
+  .error {
+    color: $modus-autocomplete-validation-error-color;
+  }
+
   .options-container {
     background-color: $modus-autocomplete-options-background-color;
     border-radius: 4px;
@@ -18,6 +76,11 @@
     padding: 0;
     position: absolute;
     width: 100%;
+
+    .icon-check {
+      display: inline-flex;
+      margin-left: auto;
+    }
 
     .text-option {
       align-items: center;
@@ -29,6 +92,10 @@
       font-size: $rem-12px;
       min-height: 2rem;
       padding: 0 8px;
+
+      &.selected {
+        background-color: $modus-autocomplete-selected-option-color;
+      }
 
       &:hover {
         background-color: $modus-autocomplete-options-hover-background-color;
@@ -42,6 +109,10 @@
     .custom-option {
       border: 1px solid $modus-autocomplete-options-border-color;
       cursor: pointer;
+
+      &.selected {
+        background-color: $modus-autocomplete-selected-option-color;
+      }
 
       &:hover {
         background-color: $modus-autocomplete-options-hover-background-color;

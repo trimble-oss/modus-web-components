@@ -27,6 +27,6 @@ export class ModusIcon {
     this.iconClick.emit(event);
   }
   render(): unknown {
-    return <ModusIconMap icon={this.name} onClick={this.onClick} size={this.size} color={this.color} />;
+    return <ModusIconMap icon={this.name} onClick={(event) => this.onClick(event)} size={this.size} color={this.color} />;
   }
 }

@@ -10,7 +10,7 @@ import {
   State,
 } from '@stencil/core';
 import { ModusSideNavigationItemCustomEvent as ModusSideNavItemEvent } from '../../components';
-import { IconChevronLeftThick } from '../../icons/svgs/icon-chevron-left-thick';
+import { IconChevronLeft } from '../../icons/generated-icons/IconChevronLeft';
 import { ModusSideNavigationTree } from './modus-side-navigation-tree';
 import { ModusSideNavigationItemInfo, ModusSideNavItemLevelInfo } from './modus-side-navigation.models';
 
@@ -370,7 +370,6 @@ export class ModusSideNavigation {
   render() {
     return (
       <nav
-        role="navigation"
         class={`side-nav-panel${this.expanded ? ' expanded' : ''}`}
         style={{ width: this.expanded ? this.maxWidth : null }}
         onKeyDown={(e) => this.handleKeyDown(e)}
@@ -391,7 +390,7 @@ export class ModusSideNavigation {
                         }
                       : {})}>
                     <p>
-                      <IconChevronLeftThick size="10" />
+                      <IconChevronLeft size="24" />
                       <a tabIndex={0} onClick={(e) => this.handleBackClick(e)} onKeyDown={(e) => this.handleBackClick(e)}>
                         Back
                       </a>

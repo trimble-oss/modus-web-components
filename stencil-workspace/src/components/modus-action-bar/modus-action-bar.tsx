@@ -52,8 +52,12 @@ export class ModusActionBar {
 
   @Listen('focusin', { target: 'document' })
   @Listen('mouseup', { target: 'document' })
-  handleGlobalFocus(event: any) {
-    const isMoreVerticalBtnTarget = event.target.localName === 'modus-tree-view-item';
+  handleGlobalFocus(event: FocusEvent | MouseEvent) {
+    if (!(event.target instanceof HTMLElement)) {
+      return;
+    }
+
+    const isMoreVerticalBtnTarget = (event.target as HTMLElement).localName === 'modus-tree-view-item';
 
     // Check if the focus is moving outside the component and if not clicked on the ellipsis button.
     if (!this.el.contains(event.target as Node) && !isMoreVerticalBtnTarget && this.showOverflowMenu) {

@@ -15,6 +15,7 @@ describe('modus-alert', () => {
             <div class='message'>
             <slot></slot>
             </div>
+            <div class="alert-buttons-container"></div>
           </div>
         </mock:shadow-root>
       </modus-alert>

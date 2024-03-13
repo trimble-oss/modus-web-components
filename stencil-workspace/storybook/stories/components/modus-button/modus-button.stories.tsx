@@ -5,6 +5,13 @@ import docs from './modus-button-storybook-docs.mdx';
 export default {
   title: 'Components/Button',
   argTypes: {
+    ariaDisabled: {
+      name: 'aria-disabled',
+      description: "The button's aria-disabled state",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
     ariaLabel: {
       name: 'aria-label',
       description: "The button's aria-label",
@@ -97,6 +104,7 @@ export default {
 };
 
 const DefaultTemplate = ({
+  ariaDisabled,
   ariaLabel,
   buttonStyle,
   color,
@@ -109,16 +117,18 @@ const DefaultTemplate = ({
   label
 }) => html`
   <modus-button
+    aria-disabled=${ariaDisabled}
     aria-label=${ariaLabel}
     button-style=${buttonStyle}
     color=${color}
-    disabled=${disabled}
+    ?disabled=${disabled}
     size=${size} left-icon=${leftIcon} right-icon=${rightIcon} icon-only=${iconOnly} show-caret=${showCaret}>
     ${label}
   </modus-button>
 `;
 
 const DefaultTemplateArgs = {
+  ariaDisabled: '',
   ariaLabel: '',
   buttonStyle: 'fill',
   color: 'primary',

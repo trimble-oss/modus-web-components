@@ -58,7 +58,7 @@ export const Default = ({
     aria-label=${ariaLabel}
     position=${position}
     text=${text}
-    disabled=${disabled}>
+    ?disabled=${disabled}>
     <modus-button>Button</modus-button>
   </modus-tooltip>
 `;

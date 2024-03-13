@@ -30,14 +30,14 @@ export declare interface ModusAccordion extends Components.ModusAccordion {}
 
 
 @ProxyCmp({
-  inputs: ['disabled', 'expanded', 'headerText', 'size']
+  inputs: ['disabled', 'expandButtonType', 'expanded', 'headerText', 'icon', 'size']
 })
 @Component({
   selector: 'modus-accordion-item',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['disabled', 'expanded', 'headerText', 'size'],
+  inputs: ['disabled', 'expandButtonType', 'expanded', 'headerText', 'icon', 'size'],
 })
 export class ModusAccordionItem {
   protected el: HTMLElement;
@@ -90,21 +90,21 @@ export declare interface ModusActionBar extends Components.ModusActionBar {
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'dismissible', 'message', 'type']
+  inputs: ['ariaLabel', 'buttonAriaLabel', 'buttonText', 'dismissible', 'message', 'type']
 })
 @Component({
   selector: 'modus-alert',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['ariaLabel', 'dismissible', 'message', 'type'],
+  inputs: ['ariaLabel', 'buttonAriaLabel', 'buttonText', 'dismissible', 'message', 'type'],
 })
 export class ModusAlert {
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['dismissClick']);
+    proxyOutputs(this, this.el, ['dismissClick', 'actionClick']);
   }
 }
 
@@ -114,18 +114,22 @@ export declare interface ModusAlert extends Components.ModusAlert {
    * An event that fires when the alert is dismissed
    */
   dismissClick: EventEmitter<CustomEvent<any>>;
+  /**
+   * An event that firest when the action button is clicked
+   */
+  actionClick: EventEmitter<CustomEvent<any>>;
 }
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'clearable', 'disableCloseOnSelect', 'disabled', 'dropdownMaxHeight', 'dropdownZIndex', 'errorText', 'includeSearchIcon', 'label', 'noResultsFoundSubtext', 'noResultsFoundText', 'options', 'placeholder', 'readOnly', 'required', 'showNoResultsFoundMessage', 'showOptionsOnFocus', 'size', 'value']
+  inputs: ['ariaLabel', 'clearable', 'disableCloseOnSelect', 'disabled', 'dropdownMaxHeight', 'dropdownZIndex', 'errorText', 'includeSearchIcon', 'label', 'multiple', 'noResultsFoundSubtext', 'noResultsFoundText', 'options', 'placeholder', 'readOnly', 'required', 'showNoResultsFoundMessage', 'showOptionsOnFocus', 'size', 'value']
 })
 @Component({
   selector: 'modus-autocomplete',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['ariaLabel', 'clearable', 'disableCloseOnSelect', 'disabled', 'dropdownMaxHeight', 'dropdownZIndex', 'errorText', 'includeSearchIcon', 'label', 'noResultsFoundSubtext', 'noResultsFoundText', 'options', 'placeholder', 'readOnly', 'required', 'showNoResultsFoundMessage', 'showOptionsOnFocus', 'size', 'value'],
+  inputs: ['ariaLabel', 'clearable', 'disableCloseOnSelect', 'disabled', 'dropdownMaxHeight', 'dropdownZIndex', 'errorText', 'includeSearchIcon', 'label', 'multiple', 'noResultsFoundSubtext', 'noResultsFoundText', 'options', 'placeholder', 'readOnly', 'required', 'showNoResultsFoundMessage', 'showOptionsOnFocus', 'size', 'value'],
 })
 export class ModusAutocomplete {
   protected el: HTMLElement;
@@ -172,14 +176,14 @@ export declare interface ModusBadge extends Components.ModusBadge {}
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'crumbs']
+  inputs: ['ariaLabel', 'crumbs', 'underlineLinks']
 })
 @Component({
   selector: 'modus-breadcrumb',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['ariaLabel', 'crumbs'],
+  inputs: ['ariaLabel', 'crumbs', 'underlineLinks'],
 })
 export class ModusBreadcrumb {
   protected el: HTMLElement;
@@ -202,7 +206,7 @@ export declare interface ModusBreadcrumb extends Components.ModusBreadcrumb {
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'buttonStyle', 'color', 'disabled', 'iconOnly', 'leftIcon', 'rightIcon', 'showCaret', 'size'],
+  inputs: ['ariaDisabled', 'ariaLabel', 'buttonStyle', 'color', 'disabled', 'iconOnly', 'leftIcon', 'rightIcon', 'showCaret', 'size', 'type'],
   methods: ['focusButton']
 })
 @Component({
@@ -210,7 +214,7 @@ export declare interface ModusBreadcrumb extends Components.ModusBreadcrumb {
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['ariaLabel', 'buttonStyle', 'color', 'disabled', 'iconOnly', 'leftIcon', 'rightIcon', 'showCaret', 'size'],
+  inputs: ['ariaDisabled', 'ariaLabel', 'buttonStyle', 'color', 'disabled', 'iconOnly', 'leftIcon', 'rightIcon', 'showCaret', 'size', 'type'],
 })
 export class ModusButton {
   protected el: HTMLElement;
@@ -621,7 +625,7 @@ export declare interface ModusModal extends Components.ModusModal {
 
 
 @ProxyCmp({
-  inputs: ['apps', 'buttons', 'enableSearchOverlay', 'helpUrl', 'logoOptions', 'profileMenuOptions', 'reverse', 'searchTooltip', 'showAppsMenu', 'showHelp', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showSearch', 'showShadow', 'variant'],
+  inputs: ['apps', 'buttons', 'enableSearchOverlay', 'helpTooltip', 'helpUrl', 'logoOptions', 'profileMenuOptions', 'reverse', 'searchTooltip', 'showAppsMenu', 'showHelp', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showProfile', 'showSearch', 'showShadow', 'variant'],
   methods: ['hideMainMenu']
 })
 @Component({
@@ -629,7 +633,7 @@ export declare interface ModusModal extends Components.ModusModal {
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['apps', 'buttons', 'enableSearchOverlay', 'helpUrl', 'logoOptions', 'profileMenuOptions', 'reverse', 'searchTooltip', 'showAppsMenu', 'showHelp', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showSearch', 'showShadow', 'variant'],
+  inputs: ['apps', 'buttons', 'enableSearchOverlay', 'helpTooltip', 'helpUrl', 'logoOptions', 'profileMenuOptions', 'reverse', 'searchTooltip', 'showAppsMenu', 'showHelp', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showProfile', 'showSearch', 'showShadow', 'variant'],
 })
 export class ModusNavbar {
   protected el: HTMLElement;
@@ -790,14 +794,14 @@ export declare interface ModusNavbarNotificationsMenu extends Components.ModusNa
 
 
 @ProxyCmp({
-  inputs: ['avatarUrl', 'email', 'initials', 'links', 'reverse', 'username', 'variant']
+  inputs: ['avatarUrl', 'email', 'initials', 'links', 'reverse', 'signOutText', 'username', 'variant']
 })
 @Component({
   selector: 'modus-navbar-profile-menu',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['avatarUrl', 'email', 'initials', 'links', 'reverse', 'username', 'variant'],
+  inputs: ['avatarUrl', 'email', 'initials', 'links', 'reverse', 'signOutText', 'username', 'variant'],
 })
 export class ModusNavbarProfileMenu {
   protected el: HTMLElement;
@@ -956,7 +960,7 @@ export declare interface ModusRadioGroup extends Components.ModusRadioGroup {
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'disabled', 'errorText', 'helperText', 'label', 'options', 'optionsDisplayProp', 'required', 'size', 'validText', 'value'],
+  inputs: ['ariaLabel', 'disabled', 'errorText', 'helperText', 'label', 'options', 'optionsDisplayProp', 'placeholder', 'required', 'size', 'validText', 'value'],
   methods: ['focusInput']
 })
 @Component({
@@ -964,7 +968,7 @@ export declare interface ModusRadioGroup extends Components.ModusRadioGroup {
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['ariaLabel', 'disabled', 'errorText', 'helperText', 'label', 'options', 'optionsDisplayProp', 'required', 'size', 'validText', 'value'],
+  inputs: ['ariaLabel', 'disabled', 'errorText', 'helperText', 'label', 'options', 'optionsDisplayProp', 'placeholder', 'required', 'size', 'validText', 'value'],
 })
 export class ModusSelect {
   protected el: HTMLElement;

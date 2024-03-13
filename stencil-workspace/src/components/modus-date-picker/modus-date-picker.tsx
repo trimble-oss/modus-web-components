@@ -158,6 +158,16 @@ export class ModusDatePicker {
     this._calendar.gotoDate(date.getFullYear(), date.getMonth());
   }
 
+  private goToNearestBoundaryDate(date: Date): void {
+    const minDate = this._currentInput?.getMinDateAllowed();
+    const maxDate = this._currentInput?.getMaxDateAllowed();
+
+    const targetDate = this.compare(date, minDate) < 0 ? minDate : maxDate;
+
+    this.gotoDateBeingPicked(targetDate);
+    this.forceUpdate();
+  }
+
   isInvalidDateRange = (startDate, endDate) => this.compare(endDate, startDate) < 0;
 
   pickCalendarDate(date: Date) {
@@ -271,6 +281,7 @@ export class ModusDatePicker {
                   }}
                   disabled={isDateDisabled}
                   tabIndex={0}
+                  aria-current="date"
                   onClick={() => this.pickCalendarDate(date)}
                   {...onBlurEvent}>
                   {date.getDate()}
@@ -279,6 +290,14 @@ export class ModusDatePicker {
             })}
           </div>
         </div>
+        {!this.isWithinCurrentMinMax(this._currentInput.getDate()) && (
+          <div class="out-of-range-notification">
+            <div>The selected date is not available</div>
+            <span class="goto-available-dates" onClick={() => this.goToNearestBoundaryDate(this._currentInput.getDate())}>
+              Go to available dates
+            </span>
+          </div>
+        )}
       </div>
     );
   }

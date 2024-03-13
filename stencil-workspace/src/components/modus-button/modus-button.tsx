@@ -9,6 +9,9 @@ import { JSX } from '@stencil/core/internal';
   shadow: true,
 })
 export class ModusButton {
+  /** (optional) The button's aria-disabled state. */
+  @Prop() ariaDisabled: string | null;
+
   /** (optional) The button's aria-label. */
   @Prop() ariaLabel: string | null;
 
@@ -35,6 +38,9 @@ export class ModusButton {
 
   /** (optional) Shows a caret icon right side of the button. */
   @Prop() showCaret: boolean;
+
+  /** (Optional) Button types */
+  @Prop() type: 'button' | 'reset' | 'submit' = 'button';
 
   /** (optional) An event that fires on button click. */
   @Event() buttonClick: EventEmitter;
@@ -117,7 +123,7 @@ export class ModusButton {
 
     return (
       <button
-        aria-disabled={this.disabled ? 'true' : undefined}
+        aria-disabled={this.ariaDisabled ? this.ariaDisabled : this.disabled ? 'true' : undefined}
         aria-label={this.ariaLabel}
         aria-pressed={this.pressed ? 'true' : undefined}
         class={className}
@@ -127,8 +133,8 @@ export class ModusButton {
         onKeyUp={() => (this.pressed = false)}
         onMouseDown={() => (this.pressed = true)}
         onMouseUp={() => (this.pressed = false)}
-        role="button"
-        ref={(el) => (this.buttonRef = el)}>
+        ref={(el) => (this.buttonRef = el)}
+        type={this.type}>
         {this.iconOnly ? this.renderIconOnly() : this.renderIconWithText()}
         {this.showCaret && <ModusIconMap size="24" icon="caret_down"></ModusIconMap>}
       </button>

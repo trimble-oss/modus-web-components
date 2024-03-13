@@ -40,63 +40,20 @@ A new TypeScript typing has been provided named Crumb defined as:
 
 ### Properties
 
-<section>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Type</th>
-        <th>Options</th>
-        <th>Default Value</th>
-        <th>Required</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>crumbs</td>
-        <td>The breadcrumbs to render</td>
-        <td>Crumb[]</td>
-        <td></td>
-        <td>[]</td>
-        <td>
-          <span class="material-icons">&#10004;</span>
-        </td>
-      </tr>
-      <tr>
-        <td>aria-label</td>
-        <td>The breadcrumb's aria-label</td>
-        <td>string</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+| Name         | Description                                   | Type      | Options | Default Value | Required |
+| ------------ | --------------------------------------------- | --------- | ------- | ------------- | -------- |
+| `ariaLabel`  | The breadcrumb's aria-label                   | `string`  |         |               |          |
+| `crumbs`     | The breadcrumbs to render                     | `Crumb[]` |         | `[]`          | &#10004; |
+| `underlineLinks`  | A flag that controls the display of underline | `boolean` |         | `false`       |          |
+
 
 ### DOM Events
 
-<section>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Emits</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>crumbClick</td>
-        <td>Fires on breadcrumb click</td>
-        <td>The clicked crumb object</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+| Name         | Description               | Emits                    |
+| ------------ | ------------------------- | ------------------------ |
+| `crumbClick` | Fires on breadcrumb click | The clicked crumb object |
+
 
 ### Accessibility
 
-- Breadcrumb has `role` of `navigation`.
-- When a Breadcrumb has focus, **Enter** emits the `crumbClick` event.
+- When a Breadcrumb has focus, <kbd>Enter</kbd> emits the `crumbClick` event.

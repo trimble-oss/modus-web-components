@@ -116,7 +116,7 @@ export const Default = ({
   <modus-chip
     aria-label=${ariaLabel}
     chip-style=${chipStyle}
-    disabled=${disabled}
+    ?disabled=${disabled}
     has-error=${hasError}
     image-url=${imageUrl}
     show-checkmark=${showCheckmark}
@@ -154,7 +154,7 @@ export const Outline = ({
   <modus-chip
     aria-label=${ariaLabel}
     chip-style=${chipStyle}
-    disabled=${disabled}
+    ?disabled=${disabled}
     has-error=${hasError}
     image-url=${imageUrl}
     show-checkmark=${showCheckmark}
