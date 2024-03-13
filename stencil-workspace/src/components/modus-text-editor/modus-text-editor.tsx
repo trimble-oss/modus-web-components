@@ -21,12 +21,12 @@ export class ModusTextEditor {
     this.quillInstance = new Quill(editorContainer, {
       modules: {
         toolbar: [
-          [{ header: [false, 1, 2] }],
+          [{ font: ['sans', 'serif', 'monospace'] }],
           [{ size: ['14px', '16px', '18px'] }],
           ['bold', 'italic', 'underline', 'strike'],
-          [{ font: ['serif', 'monospace'] }],
-          ['blockquote', 'code-block', 'image'],
-          [{ list: 'ordered' }, { list: 'bullet' }],
+          [{ align: '' }, { align: 'center' }, { align: 'right' }],
+          [{ list: 'bullet' }, { list: 'ordered' }],
+          ['link'],
         ],
       },
       theme: 'snow', // You can change the theme here
