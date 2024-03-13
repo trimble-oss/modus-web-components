@@ -1069,4 +1069,145 @@ describe('modus-table', () => {
 
     expect(rowSelectionChange).toHaveReceivedEvent();
   });
+
+
+  describe('Header Text Focus', () => {
+    it('Should focus header text when sort is enabled and display a tooltip', async () => {
+      page = await newE2EPage();
+      await page.setContent('<modus-table />');
+
+      const component = await page.find('modus-table');
+
+      component.setProperty('columns', MockColumns);
+      component.setProperty('data', MockData);
+      component.setProperty('sort', true);
+
+      await page.waitForChanges();
+      await page.keyboard.press('Tab');
+
+      const headerTextTooltip = await page.findAll('modus-table >>> modus-tooltip >>> div.can-sort >>> modus-tooltip');
+      const tooltipText = await headerTextTooltip[0].getProperty('text');
+
+      expect(tooltipText).not.toBeNull();
+      expect(tooltipText).toEqual('Sort Ascending');
+    });
+
+    it('Should tab focus header text when new column is added with sort prop enabled', async () => {
+      page = await newE2EPage();
+      await page.setContent('<modus-table />');
+
+      const component = await page.find('modus-table');
+
+      component.setProperty('columns', [
+        {
+          header: 'Mock Column One',
+          accessorKey: 'mockColumnOne',
+          id: 'mock-column-one',
+          dataType: 'text',
+          footer: 'Total',
+        },
+      ]);
+      component.setProperty('data', MockData);
+      component.setProperty('sort', true);
+
+      await page.waitForChanges();
+      await page.keyboard.press('Tab');
+
+      let headerTextTooltip = await page.findAll('modus-table >>> modus-tooltip >>> div.can-sort >>> modus-tooltip');
+      const tooltipText = await headerTextTooltip[0].getProperty('text');
+
+      expect(tooltipText).not.toBeNull();
+      expect(tooltipText).toEqual('Sort Ascending');
+
+      component.setProperty('columns', MockColumns);
+      await page.waitForChanges();
+
+      await page.keyboard.press('Tab');
+      await page.keyboard.press('Tab');
+
+      headerTextTooltip = await page.findAll('modus-table >>> modus-tooltip >>> div.can-sort >>> modus-tooltip');
+      await page.waitForChanges();
+
+      const secondColumnHeaderText = await headerTextTooltip[2].getProperty('text');
+
+      expect(headerTextTooltip[2].textContent).toBe('Mock Column Two');
+      expect(secondColumnHeaderText).not.toBeNull();
+      expect(secondColumnHeaderText).toEqual('Sort Ascending');
+    });
+
+    it('Should tab focus header text after a column is removed with sort prop enabled', async () => {
+      page = await newE2EPage();
+      await page.setContent('<modus-table />');
+
+      const component = await page.find('modus-table');
+
+      component.setProperty('columns', MockColumns);
+      component.setProperty('data', MockData);
+      component.setProperty('sort', true);
+
+      await page.waitForChanges();
+      await page.keyboard.press('Tab');
+
+      let headerTextTooltip = await page.findAll('modus-table >>> modus-tooltip >>> div.can-sort >>> modus-tooltip');
+      const tooltipText = await headerTextTooltip[0].getProperty('text');
+
+      expect(tooltipText).not.toBeNull();
+      expect(tooltipText).toEqual('Sort Ascending');
+
+      component.setProperty('columns', [
+        {
+          header: 'Mock Column One',
+          accessorKey: 'mockColumnOne',
+          id: 'mock-column-one',
+          dataType: 'text',
+          footer: 'Total',
+        },
+      ]);
+      await page.waitForChanges();
+
+      expect(tooltipText).not.toBeNull();
+      expect(tooltipText).toEqual('Sort Ascending');
+
+    });
+  });
+
+  // describe('Header Text Sorting', () => {
+  //   it('Should output sort event on header text click with sort enabled', async () => {
+  //     page = await newE2EPage();
+  //     await page.setContent('<modus-table />');
+
+  //     const component = await page.find('modus-table');
+  //     component.setProperty('columns', [
+  //       {
+  //         header: 'Mock Column One',
+  //         accessorKey: 'mockColumnOne',
+  //         id: 'mock-column-one',
+  //         dataType: 'text',
+  //         footer: 'Total',
+  //       },
+  //     ]);
+  //     component.setProperty('data', MockData);
+  //     component.setProperty('sort', true);
+  //     await page.waitForChanges();
+  //     const sortEvent = await page.spyOnEvent('sortChange');
+     
+ 
+      
+  //     const cellElement = await page.find('modus-table >>> .can-sort > modus-tooltip >>> span');
+  
+  //     console.log('cellElement[0]=>', cellElement.innerHTML);
+  //    // await cellElement.focus();
+      
+  //     await cellElement.click();
+  //     //await cellElement.click();
+      
+  //     await page.waitForChanges();
+  //     // await headerText.click();
+
+  //     await page.waitForSelector('.klk');
+  //     expect(sortEvent).toHaveReceivedEventTimes(2);
+  //   });
+  // });
+
+
 });

@@ -80,6 +80,32 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
 
   const sorting_status_text = showSortingStatus(column, isColumnResizing);
 
+  const disableCellToolTip = (value: boolean) => {
+    if(columnReorder){
+      cellElementRef.firstElementChild.parentNode.querySelector('modus-tooltip').setAttribute('disabled', `${value}`);
+    }
+  }
+
+  const headerTextProps = {
+    onClick: column.getToggleSortingHandler(),
+    onFocus: () => {
+      disableCellToolTip(true);
+    },
+    onMouseOver: () => {
+      headerContentRef.children[1].setAttribute('disabled', 'true');
+      disableCellToolTip(true);
+    },
+    onMouseLeave: () => {
+      headerContentRef.children[1].setAttribute('disabled', 'false');
+      disableCellToolTip(false);
+    },
+    onBlur: () => {
+      disableCellToolTip(false);
+    },
+    onKeyDown: handleSortIconHover,
+    class:`${column.getCanSort() && column.getIsSorted() ? 'sorted' : ''}`
+  }
+
   const renderContent = () => (
     <div
       tabindex={`${!isColumnResizing && columnReorder ? '0' : ''}`}
@@ -89,7 +115,8 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
       }}
       onBlur={() => {
         cellElementRef.classList.remove('header-base');
-      }}>
+      }}
+      >
       {isPlaceholder ? null : ( // header.isPlaceholder is Required for nested column headers to display empty cell
         <span
           class={column.getCanSort() && 'can-sort'}
@@ -99,22 +126,8 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
           <modus-tooltip text={sorting_status_text} disabled={!column.getCanSort()}>
             <span
               tabindex={`${column.getCanSort() ? '0' : ''}`}
-              onFocus={() => {
-                cellElementRef.firstElementChild.parentNode.querySelector('modus-tooltip').setAttribute('disabled', 'true');
-              }}
-              onMouseOver={() => {
-                headerContentRef.children[1].setAttribute('disabled', 'true');
-                cellElementRef.firstElementChild.parentNode.querySelector('modus-tooltip').setAttribute('disabled', 'true');
-              }}
-              onMouseLeave={() => {
-                headerContentRef.children[1].setAttribute('disabled', 'false');
-                cellElementRef.firstElementChild.parentNode.querySelector('modus-tooltip').setAttribute('disabled', 'false');
-              }}
-              onBlur={() => {
-                cellElementRef.firstElementChild.parentNode.querySelector('modus-tooltip').setAttribute('disabled', 'false');
-              }}
-              onKeyDown={handleSortIconHover}
-              class={`${column.getCanSort() && column.getIsSorted() ? 'sorted' : ''}`}>
+              {...headerTextProps}
+              >
               {column.columnDef.header}
             </span>
           </modus-tooltip>
@@ -127,15 +140,15 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
               onKeyDown={handleSortIconHover}
               onMouseOver={() => {
                 headerContentRef.children[0].setAttribute('disabled', 'true');
-                cellElementRef.firstElementChild.parentNode.querySelector('modus-tooltip').setAttribute('disabled', 'true');
+                disableCellToolTip(true);
               }}
               onMouseLeave={() => {
                 headerContentRef.children[1].setAttribute('disabled', 'false');
                 headerContentRef.children[0].setAttribute('disabled', 'false');
-                cellElementRef.firstElementChild.parentNode.querySelector('modus-tooltip').setAttribute('disabled', 'true');
+                disableCellToolTip(true);
               }}
               onBlur={() => {
-                cellElementRef.firstElementChild.parentNode.querySelector('modus-tooltip').setAttribute('disabled', 'false');
+                disableCellToolTip(false);
               }}
             />
           )}
