@@ -1304,6 +1304,8 @@ export namespace Components {
          */
         "tabs": Tab[];
     }
+    interface ModusTextEditor {
+    }
     interface ModusTextInput {
         /**
           * (optional) The input's aria-label.
@@ -1586,6 +1588,20 @@ export namespace Components {
         "tabIndexValue": string | number;
         "updateComponent": () => Promise<void>;
     }
+    interface QuillEditor {
+        "bounds": HTMLElement | string;
+        "content": string;
+        "customToolbarPosition": 'top' | 'bottom';
+        "debug": string;
+        "format": 'html' | 'text' | 'json';
+        "formats": string[];
+        "modules"?: string;
+        "placeholder": string;
+        "preserveWhitespace": boolean;
+        "readOnly": boolean;
+        "styles": string;
+        "theme": string;
+    }
 }
 export interface ModusAccordionItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1730,6 +1746,10 @@ export interface ModusTreeViewCustomEvent<T> extends CustomEvent<T> {
 export interface ModusTreeViewItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusTreeViewItemElement;
+}
+export interface QuillEditorCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLQuillEditorElement;
 }
 declare global {
     interface HTMLModusAccordionElement extends Components.ModusAccordion, HTMLStencilElement {
@@ -2416,6 +2436,12 @@ declare global {
         prototype: HTMLModusTabsElement;
         new (): HTMLModusTabsElement;
     };
+    interface HTMLModusTextEditorElement extends Components.ModusTextEditor, HTMLStencilElement {
+    }
+    var HTMLModusTextEditorElement: {
+        prototype: HTMLModusTextEditorElement;
+        new (): HTMLModusTextEditorElement;
+    };
     interface HTMLModusTextInputElementEventMap {
         "valueChange": string;
     }
@@ -2512,6 +2538,63 @@ declare global {
         prototype: HTMLModusTreeViewItemElement;
         new (): HTMLModusTreeViewItemElement;
     };
+    interface HTMLQuillEditorElementEventMap {
+        "editorInit": any;
+        "editorChange": | {
+        editor: any;
+        event: 'text-change';
+        content: any;
+        text: string;
+        html: string;
+        delta: any;
+        oldDelta: any;
+        source: string;
+      }
+    | {
+        editor: any;
+        event: 'selection-change';
+        range: any;
+        oldRange: any;
+        source: string;
+      };
+        "editorContentChange": {
+    editor: any;
+    content: any;
+    text: string;
+    html: string;
+    delta: any;
+    oldDelta: any;
+    source: string;
+  };
+        "editorSelectionChange": {
+    editor: any;
+    range: any;
+    oldRange: any;
+    source: string;
+  };
+        "editorFocus": {
+    editor: any;
+    source: string;
+  };
+        "editorBlur": {
+    editor: any;
+    source: string;
+  };
+    }
+    interface HTMLQuillEditorElement extends Components.QuillEditor, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLQuillEditorElementEventMap>(type: K, listener: (this: HTMLQuillEditorElement, ev: QuillEditorCustomEvent<HTMLQuillEditorElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLQuillEditorElementEventMap>(type: K, listener: (this: HTMLQuillEditorElement, ev: QuillEditorCustomEvent<HTMLQuillEditorElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLQuillEditorElement: {
+        prototype: HTMLQuillEditorElement;
+        new (): HTMLQuillEditorElement;
+    };
     interface HTMLElementTagNameMap {
         "modus-accordion": HTMLModusAccordionElement;
         "modus-accordion-item": HTMLModusAccordionItemElement;
@@ -2563,12 +2646,14 @@ declare global {
         "modus-table-row-actions-menu": HTMLModusTableRowActionsMenuElement;
         "modus-table-toolbar": HTMLModusTableToolbarElement;
         "modus-tabs": HTMLModusTabsElement;
+        "modus-text-editor": HTMLModusTextEditorElement;
         "modus-text-input": HTMLModusTextInputElement;
         "modus-time-picker": HTMLModusTimePickerElement;
         "modus-toast": HTMLModusToastElement;
         "modus-tooltip": HTMLModusTooltipElement;
         "modus-tree-view": HTMLModusTreeViewElement;
         "modus-tree-view-item": HTMLModusTreeViewItemElement;
+        "quill-editor": HTMLQuillEditorElement;
     }
 }
 declare namespace LocalJSX {
@@ -4029,6 +4114,8 @@ declare namespace LocalJSX {
          */
         "tabs"?: Tab[];
     }
+    interface ModusTextEditor {
+    }
     interface ModusTextInput {
         /**
           * (optional) The input's aria-label.
@@ -4330,6 +4417,61 @@ declare namespace LocalJSX {
          */
         "tabIndexValue"?: string | number;
     }
+    interface QuillEditor {
+        "bounds"?: HTMLElement | string;
+        "content"?: string;
+        "customToolbarPosition"?: 'top' | 'bottom';
+        "debug"?: string;
+        "format"?: 'html' | 'text' | 'json';
+        "formats"?: string[];
+        "modules"?: string;
+        "onEditorBlur"?: (event: QuillEditorCustomEvent<{
+    editor: any;
+    source: string;
+  }>) => void;
+        "onEditorChange"?: (event: QuillEditorCustomEvent<| {
+        editor: any;
+        event: 'text-change';
+        content: any;
+        text: string;
+        html: string;
+        delta: any;
+        oldDelta: any;
+        source: string;
+      }
+    | {
+        editor: any;
+        event: 'selection-change';
+        range: any;
+        oldRange: any;
+        source: string;
+      }>) => void;
+        "onEditorContentChange"?: (event: QuillEditorCustomEvent<{
+    editor: any;
+    content: any;
+    text: string;
+    html: string;
+    delta: any;
+    oldDelta: any;
+    source: string;
+  }>) => void;
+        "onEditorFocus"?: (event: QuillEditorCustomEvent<{
+    editor: any;
+    source: string;
+  }>) => void;
+        "onEditorInit"?: (event: QuillEditorCustomEvent<any>) => void;
+        "onEditorSelectionChange"?: (event: QuillEditorCustomEvent<{
+    editor: any;
+    range: any;
+    oldRange: any;
+    source: string;
+  }>) => void;
+        "placeholder"?: string;
+        "preserveWhitespace"?: boolean;
+        "readOnly"?: boolean;
+        "styles"?: string;
+        "theme"?: string;
+    }
     interface IntrinsicElements {
         "modus-accordion": ModusAccordion;
         "modus-accordion-item": ModusAccordionItem;
@@ -4381,12 +4523,14 @@ declare namespace LocalJSX {
         "modus-table-row-actions-menu": ModusTableRowActionsMenu;
         "modus-table-toolbar": ModusTableToolbar;
         "modus-tabs": ModusTabs;
+        "modus-text-editor": ModusTextEditor;
         "modus-text-input": ModusTextInput;
         "modus-time-picker": ModusTimePicker;
         "modus-toast": ModusToast;
         "modus-tooltip": ModusTooltip;
         "modus-tree-view": ModusTreeView;
         "modus-tree-view-item": ModusTreeViewItem;
+        "quill-editor": QuillEditor;
     }
 }
 export { LocalJSX as JSX };
@@ -4446,12 +4590,14 @@ declare module "@stencil/core" {
             "modus-table-row-actions-menu": LocalJSX.ModusTableRowActionsMenu & JSXBase.HTMLAttributes<HTMLModusTableRowActionsMenuElement>;
             "modus-table-toolbar": LocalJSX.ModusTableToolbar & JSXBase.HTMLAttributes<HTMLModusTableToolbarElement>;
             "modus-tabs": LocalJSX.ModusTabs & JSXBase.HTMLAttributes<HTMLModusTabsElement>;
+            "modus-text-editor": LocalJSX.ModusTextEditor & JSXBase.HTMLAttributes<HTMLModusTextEditorElement>;
             "modus-text-input": LocalJSX.ModusTextInput & JSXBase.HTMLAttributes<HTMLModusTextInputElement>;
             "modus-time-picker": LocalJSX.ModusTimePicker & JSXBase.HTMLAttributes<HTMLModusTimePickerElement>;
             "modus-toast": LocalJSX.ModusToast & JSXBase.HTMLAttributes<HTMLModusToastElement>;
             "modus-tooltip": LocalJSX.ModusTooltip & JSXBase.HTMLAttributes<HTMLModusTooltipElement>;
             "modus-tree-view": LocalJSX.ModusTreeView & JSXBase.HTMLAttributes<HTMLModusTreeViewElement>;
             "modus-tree-view-item": LocalJSX.ModusTreeViewItem & JSXBase.HTMLAttributes<HTMLModusTreeViewItemElement>;
+            "quill-editor": LocalJSX.QuillEditor & JSXBase.HTMLAttributes<HTMLQuillEditorElement>;
         }
     }
 }
