@@ -88,7 +88,6 @@ export const ModusTableColumnSortIcon: FunctionalComponent<ModusTableColumnSortI
     <modus-tooltip class="modus-tooltip-sort-icon" text={sortingStatus} position="bottom">
       {
         <span
-          style={{ border: '1px solid green', zIndex: '1000' }}
           tabindex="0"
           aria-label={sortingStatus}
           role="button"

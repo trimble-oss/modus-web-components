@@ -323,17 +323,21 @@ describe('modus-table', () => {
     component.setProperty('sort', true);
     await page.waitForChanges();
 
-    let sortHeader = await page.find('modus-table >>> div.can-sort > span');
+    let sortHeader = await page.find('modus-table >>> modus-tooltip >>> div.can-sort >>> modus-tooltip:firstElement span');
     let style = await sortHeader.getComputedStyle();
     expect(style['font-weight']).toBe('600');
 
-    const header = await page.find('modus-table >>> .sort-icon');
-    await header.click();
+  
+    const contentElement = await page.findAll('modus-table >>> modus-tooltip');
+    
+    await contentElement[1].click();
     await page.waitForChanges();
+  
+    const headerText = await page.find('modus-table >>> th .sorted');
 
-    sortHeader = await page.find('modus-table >>> div.can-sort > span');
-    style = await sortHeader.getComputedStyle();
-    expect(style['font-weight']).toBe('700');
+    style = await headerText.getComputedStyle()
+
+    expect( style['font-weight']).toBe('700');
   });
 
   it('Render pagination when pagination is enabled', async () => {
