@@ -7,15 +7,15 @@ import { ValueAccessor } from './value-accessor';
   /* tslint:disable-next-line:directive-selector */
   selector: 'modus-autocomplete, modus-number-input, modus-text-input',
   host: {
-    '(valueChange)': 'handleChangeEvent($event.target.value)',
+    '(valueChange)': 'handleChangeEvent($event.target.value)'
   },
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: TextValueAccessor,
-      multi: true,
-    },
-  ],
+      multi: true
+    }
+  ]
 })
 export class TextValueAccessor extends ValueAccessor {
   constructor(el: ElementRef) {
