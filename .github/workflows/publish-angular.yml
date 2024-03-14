@@ -9,6 +9,7 @@ on:
           - '14'
           - '15'
           - '16'
+          - '17'
         description: The version of Angular you want to build
 
 permissions:
@@ -28,11 +29,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Set Node version
+        run: |
+          if [ "${{ github.event.inputs.angularVersion }}" == "17" ]; then
+            echo "NODE_VERSION=18.x" >> $GITHUB_ENV
+          else
+            echo "NODE_VERSION=16.x" >> $GITHUB_ENV
+          fi
+
       # Setup Node, build, and publish to the npm, and GitHub registries
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
         with:
-          node-version: '16.x'
+          node-version: '${{ env.NODE_VERSION }}'
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install Angular ${{ github.event.inputs.angularVersion }}
