@@ -1211,13 +1211,22 @@
   border: 1px solid #ccc;
   box-sizing: border-box;
   font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
-  padding: 8px;
+  padding: 0;
+}
+
+.ql-toolbar.ql-snow .ql-formats:not(:last-child) {
+  margin: 5px 0;
+  border-right: 1px solid #ccc;
+  padding: 2px;
 }
 
 .ql-toolbar.ql-snow .ql-formats {
-  margin-right: 15px;
+  margin-right: 2px;
+  margin-left: 2px;
 }
-
+.ql-toolbar.ql-snow .ql-formats button {
+  padding-left: 0;
+}
 .ql-toolbar.ql-snow .ql-picker-label {
   border: 1px solid transparent;
 }
@@ -1327,4 +1336,5 @@
 .ql-container.ql-snow {
   border: 1px solid #ccc;
   border-bottom: 1px solid #6a6e79;
+  min-height: 200px;
 }
