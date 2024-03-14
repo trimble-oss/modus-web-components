@@ -63,6 +63,7 @@ export class ModusAlert {
   render(): unknown {
     const className = `alert ${this.classByType.get(this.type)} ${(this.dismissible && this.buttonText?.length > 0) || this.buttonText?.length > 0 ? 'with-action-button' : ''}`;
     const iconSize = '24';
+    const MAX_LENGTH = 300;
 
     return (
       <div aria-label={this.ariaLabel} class={className} role="alert">
@@ -73,11 +74,11 @@ export class ModusAlert {
           {this.type === 'warning' ? <IconWarning size={iconSize} /> : null}
         </div>
         <div class="message">
-          {this.message}
+          {this.message && this.message.length > MAX_LENGTH ? `${this.message.substring(0, MAX_LENGTH)}...` : this.message}
           <slot></slot>
         </div>
         <div class="alert-buttons-container">
-          {this.buttonText?.length > 0 ? (
+          {this.buttonText?.length > 0 && (
             <modus-button
               class="action-button"
               buttonStyle="outline"
@@ -88,8 +89,8 @@ export class ModusAlert {
               onKeyDown={(e) => this.handleKeyDown(e, 'action')}>
               {this.buttonText}
             </modus-button>
-          ) : null}
-          {this.dismissible ? (
+          )}
+          {this.dismissible && (
             <div
               class="icon-close-container"
               aria-label="Dismiss alert"
@@ -99,7 +100,7 @@ export class ModusAlert {
               onKeyDown={(e) => this.handleKeyDown(e, 'dismiss')}>
               <IconClose size="18" />
             </div>
-          ) : null}
+          )}
         </div>
       </div>
     );
