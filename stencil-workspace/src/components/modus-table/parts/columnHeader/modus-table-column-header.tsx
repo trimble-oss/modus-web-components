@@ -77,7 +77,6 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
     }
     event.stopPropagation();
   };
-  
 
   const sorting_status_text = showSortingStatus(column, isColumnResizing);
 
