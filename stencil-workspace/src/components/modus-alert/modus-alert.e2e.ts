@@ -96,4 +96,37 @@ describe('modus-alert', () => {
     await page.waitForChanges();
     expect(actionClick).toHaveReceivedEvent();
   });
+
+  it('should render complete message text when length less than 300', async () => {
+    const page = await newE2EPage();
+    const message = 'a'.repeat(299);
+
+    await page.setContent(`<modus-alert message="${message}"></modus-alert>`);
+    const element = await page.find('modus-alert >>> div.message');
+
+    expect(element.textContent.length).toEqual(299);
+    expect(element.textContent).not.toMatch(/.*\.\.\.$/);
+  });
+
+  it('should render complete message text when length equals 300', async () => {
+    const page = await newE2EPage();
+    const message = 'a'.repeat(300);
+
+    await page.setContent(`<modus-alert message="${message}"></modus-alert>`);
+    const element = await page.find('modus-alert >>> div.message');
+
+    expect(element.textContent.length).toEqual(300);
+    expect(element.textContent).not.toMatch(/.*\.\.\.$/);
+  });
+
+  it('should render truncated message text when length is greater than 300', async () => {
+    const page = await newE2EPage();
+    const message = 'a'.repeat(301);
+
+    await page.setContent(`<modus-alert message="${message}"></modus-alert>`);
+    const element = await page.find('modus-alert >>> div.message');
+
+    expect(element.textContent.length).toEqual(303);
+    expect(element.textContent).toMatch(/.*\.\.\.$/);
+  });
 });

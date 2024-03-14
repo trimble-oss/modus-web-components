@@ -281,6 +281,7 @@ export class ModusDatePicker {
                   }}
                   disabled={isDateDisabled}
                   tabIndex={0}
+                  aria-current="date"
                   onClick={() => this.pickCalendarDate(date)}
                   {...onBlurEvent}>
                   {date.getDate()}
