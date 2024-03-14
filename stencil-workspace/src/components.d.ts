@@ -1263,6 +1263,7 @@ export namespace Components {
           * Table data.
          */
         "getAllLeafColumns": () => Column<unknown, unknown>[];
+        "maxHeight": string;
         "menuIconContainerRef": HTMLDivElement;
         "showDropdown": boolean;
         "toggleDropdown": (show: boolean) => void;
@@ -3983,6 +3984,7 @@ declare namespace LocalJSX {
           * Table data.
          */
         "getAllLeafColumns"?: () => Column<unknown, unknown>[];
+        "maxHeight"?: string;
         "menuIconContainerRef"?: HTMLDivElement;
         "showDropdown"?: boolean;
         "toggleDropdown"?: (show: boolean) => void;
