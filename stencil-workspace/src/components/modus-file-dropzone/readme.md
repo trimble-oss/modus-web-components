@@ -34,6 +34,12 @@
 
 Add a file to the dropzone.
 
+#### Parameters
+
+| Name   | Type   | Description |
+| ------ | ------ | ----------- |
+| `file` | `File` |             |
+
 #### Returns
 
 Type: `Promise<void>`
@@ -63,6 +69,12 @@ Type: `Promise<File[]>`
 ### `removeFile(fileName: string) => Promise<void>`
 
 Remove a file from the dropzone.
+
+#### Parameters
+
+| Name       | Type     | Description |
+| ---------- | -------- | ----------- |
+| `fileName` | `string` |             |
 
 #### Returns
 

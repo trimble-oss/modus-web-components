@@ -38,7 +38,8 @@ button {
     cursor: pointer;
   }
 
-  &:disabled {
+  &:disabled,
+  &[aria-disabled='true'] {
     background-color: $modus-btn-disabled-bg;
     color: $modus-btn-disabled-color;
     cursor: default;

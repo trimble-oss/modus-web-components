@@ -21,7 +21,7 @@ export default {
 };
 
 const Template = () => html`
-  <modus-dropdown toggle-element-id="toggleElement" aria-label="Dropdown">
+  <modus-dropdown toggle-element-id="toggleElement">
   <modus-button id="toggleElement" slot="dropdownToggle" show-caret="true">Dropdown</modus-button>
   <modus-list slot="dropdownList">
     <modus-list-item size="condensed" borderless>Item 1</modus-list-item>
