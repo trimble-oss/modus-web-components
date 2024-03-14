@@ -13,9 +13,140 @@
     <!--Manually load Modus font-family-->
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
     <link rel="stylesheet" src="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+
+    <!-- PrismJS: Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/normalize-whitespace/prism-normalize-whitespace.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+<style>
+  body {
+    font-weight: initial;
+    margin: 0;
+  }
+  .example {
+    margin: 1rem 0;
+  }
+  h1 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 36px;
+    margin-bottom: .5rem;
+    margin-top: 0;
+
+  }
+  .body {
+    margin: 1rem;
+  }
+</style>
   </head>
 
   <body data-mwc-theme="light">
-    <!-- Test components -->
+    <modus-navbar variant="blue"></modus-navbar>
+    <div class="body">
+      <h1>Accordian</h1>
+      <div class="example">
+        <modus-accordion icon="pencil">
+          <modus-accordion-item icon="pencil" header-text="icon prop" expanded>
+            <pre>
+              <code class="language-html">
+                &lt;modus-accordion icon=&quot;pencil&quot;&gt;
+                  &lt;modus-accordion-item icon=&quot;pencil&quot;&gt;&lt;/modus-accordion-item&gt;
+                &lt;/modus-accordion&gt;
+              </code>
+            </pre>
+          </modus-accordion-item>
+        </modus-accordion>
+      </div>
+
+      <div class="example">
+        <modus-accordion icon="pencil">
+          <modus-accordion-item expand-icon-style="circleArrow" header-text="expand-icon-style prop" expanded>
+            <pre>
+              <code class="language-html">
+                &lt;modus-accordion&gt;
+                  &lt;modus-accordion-item expand-icon-style=&quot;circleArrow&quot;&gt;&lt;/modus-accordion-item&gt;
+                &lt;/modus-accordion&gt;
+              </code>
+            </pre>
+          </modus-accordion-item>
+        </modus-accordion>
+      </div>
+
+      <h1>Alert</h1>
+      <div class="example">
+        <modus-alert button-text="Action">Now with `button-text` property and `actionClick` event</modus-alert>
+        <pre>
+          <code class="language-html">
+            &lt;modus-alert button-text=&quot;Action&quot;&gt;Now with `button-text` property and `actionClick` event&lt;/modus-alert&gt;
+            &lt;script&gt;
+              document.querySelector(&#39;modus-alert&#39;).addEventListener(&#39;actionClick&#39;, () =&gt; alert(&#39;Action clicked!&#39;)
+            &lt;/script&gt;
+          </code>
+        </pre>
+        <script>
+          document.querySelector('modus-alert').addEventListener('actionClick', () => alert('Action clicked!'));
+        </script>
+      </div>
+
+      <h1>Autocomplete</h1>
+      <div class="example">
+        <modus-autocomplete multiple>
+        </modus-autocomplete>
+        <pre>
+          <code class="language-html">
+            &lt;modus-autocomplete multiple&gt;&lt;/modus-autocomplete&gt;
+            &lt;script&gt;
+              document.querySelector(&#39;modus-autocomplete&#39;).options = [
+                { id: &#39;0&#39;, value: &#39;Apple&#39; },
+                { id: &#39;1&#39;, value: &#39;Banana&#39; },
+                { id: &#39;2&#39;, value: &#39;Orange&#39; }
+              ];
+            &lt;/script&gt;
+          </code>
+        <script>
+          document.querySelector('modus-autocomplete').options = [
+            { id: '0', value: 'Apple' },
+            { id: '1', value: 'Banana' },
+            { id: '2', value: 'Orange' }
+          ];
+        </script>
+      </div>
+
+      <h1>Breadcrumb</h1>
+      <div class="example">
+        <modus-breadcrumb underline-links></modus-breadcrumb>
+        <pre>
+          <code class="language-html">
+            &lt;modus-breadcrumb underline-links&gt;&lt;/modus-breadcrumb&gt;
+            &lt;script&gt;
+              const modusBreadcrumb = document.querySelector(&#39;modus-breadcrumb&#39;);
+              const crumbs = [
+                { id: &#39;1&#39;, display: &#39;Crumb 1&#39; },
+                { id: &#39;2&#39;, display: &#39;Crumb 2&#39; },
+                { id: &#39;3&#39;, display: &#39;Crumb 3&#39; },
+                { id: &#39;4&#39;, display: &#39;Crumb 4&#39; },
+              ];
+              modusBreadcrumb.crumbs = crumbs;
+            &lt;/script&gt;
+          </code>
+
+        <script>
+          const modusBreadcrumb = document.querySelector('modus-breadcrumb');
+          const crumbs = [
+            { id: '1', display: 'Crumb 1' },
+            { id: '2', display: 'Crumb 2' },
+            { id: '3', display: 'Crumb 3' },
+            { id: '4', display: 'Crumb 4' },
+          ];
+          modusBreadcrumb.crumbs = crumbs;
+        </script>
+
+      </div>
+    </div>
  </body>
 </html>
