@@ -330,10 +330,10 @@ export class ModusTable {
 
   componentWillLoad(): void {
     this._id = this.element.id || `modus-table-${createGuid()}`;
-    this.columns = this.columns?.map((column) => {
-      column.sortingFn = column.sortingFn ?? 'alphanumeric';
-      return column;
-    });
+    this.columns = this.columns?.map((column) => ({
+      ...column,
+      sortingFn: column.sortingFn ?? 'alphanumeric',
+    }));
 
     const initialTableState: TableState = {
       columnOrder: this.columns?.map((column) => column.id as string),
