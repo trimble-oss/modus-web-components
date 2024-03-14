@@ -97,20 +97,36 @@ describe('modus-alert', () => {
     expect(actionClick).toHaveReceivedEvent();
   });
 
-  it('renders the number of characters allowed to be entered in the message', async () => {
+  it('should render complete message text when length less than 300', async () => {
     const page = await newE2EPage();
+    const message = 'a'.repeat(299);
 
-    await page.setContent(
-      '<modus-alert message="Modus is a shared source of truth–a place to reference official Trimble patterns and styles. It includes foundational guidelines and components. Web components serve developers by providing ready, framework-agnostic code that helps build better products faster.  Even with this great system, implementing Modus in a large application requires significant effort."></modus-alert>'
-    );
-    const component = await page.find('modus-alert');
+    await page.setContent(`<modus-alert message="${message}"></modus-alert>`);
     const element = await page.find('modus-alert >>> div.message');
-    expect(element.textContent.length).toEqual(303);
-    component.setProperty(
-      'message',
-      'Modus is a shared source of truth–a place to reference official Trimble patterns and styles. It includes foundational guidelines and components. Web components serve developers by providing ready, framework-agnostic code that helps build better products faster.  Even with this great system, the end'
-    );
-    await page.waitForChanges();
+
     expect(element.textContent.length).toEqual(299);
+    expect(element.textContent).not.toMatch(/.*\.\.\.$/);
+  });
+
+  it('should render complete message text when length equals 300', async () => {
+    const page = await newE2EPage();
+    const message = 'a'.repeat(300);
+
+    await page.setContent(`<modus-alert message="${message}"></modus-alert>`);
+    const element = await page.find('modus-alert >>> div.message');
+
+    expect(element.textContent.length).toEqual(300);
+    expect(element.textContent).not.toMatch(/.*\.\.\.$/);
+  });
+
+  it('should render truncated message text when length is greater than 300', async () => {
+    const page = await newE2EPage();
+    const message = 'a'.repeat(301);
+
+    await page.setContent(`<modus-alert message="${message}"></modus-alert>`);
+    const element = await page.find('modus-alert >>> div.message');
+
+    expect(element.textContent.length).toEqual(303);
+    expect(element.textContent).toMatch(/.*\.\.\.$/);
   });
 });
