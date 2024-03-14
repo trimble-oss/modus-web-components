@@ -1001,12 +1001,14 @@ describe('modus-table', () => {
       await page.keyboard.press('Tab');
       await page.keyboard.press('Tab');
       await page.keyboard.press('Enter');
+      await page.waitForChanges();
 
       const headerTextTooltip = await page.findAll('modus-table >>> modus-tooltip >>> div.can-sort >>> modus-tooltip');
       const tooltipText = await headerTextTooltip[0].getProperty('text');
 
+      await page.waitForChanges();
       expect(tooltipText).not.toBeNull();
-      expect(tooltipText).toEqual('Sorted Ascending');
+      expect(tooltipText).toBe('Sorted Ascending');
     });
 
     it('Should display a tooltip when header text is focus after the header got sorted for the second time', async () => {
@@ -1029,7 +1031,7 @@ describe('modus-table', () => {
       const tooltipText = await headerTextTooltip[0].getProperty('text');
 
       expect(tooltipText).not.toBeNull();
-      expect(tooltipText).toEqual('Sorted Descending');
+      expect(tooltipText).toBe('Sorted Descending');
     });
     it('Should display a tooltip when header text is focus after the header got sorted for the third time', async () => {
       page = await newE2EPage();
@@ -1052,7 +1054,7 @@ describe('modus-table', () => {
       const tooltipText = await headerTextTooltip[0].getProperty('text');
 
       expect(tooltipText).not.toBeNull();
-      expect(tooltipText).toEqual('Sort Ascending');
+      expect(tooltipText).toBe('Sort Ascending');
     });
   });
 

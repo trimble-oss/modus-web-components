@@ -93,7 +93,7 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
   };
 
   const headerTextProps = {
-    onClick: column.getToggleSortingHandler(),
+    onClick: (e)=>{ e.preventDefault(); column.toggleSorting() },
     onFocus: () => {
       disableCellToolTip(true);
     },
@@ -126,12 +126,13 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
       }}>
       {isPlaceholder ? null : ( // header.isPlaceholder is Required for nested column headers to display empty cell
         <span
+          onMouseDown={(event:MouseEvent)=> event.stopPropagation()}
           class={column.getCanSort() && 'can-sort'}
           ref={(element: HTMLTableCellElement) => {
             headerContentRef = element;
           }}>
           <modus-tooltip text={sorting_status_text} disabled={!column.getCanSort()}>
-            <span tabindex="0" {...headerTextProps}>
+            <span tabindex="0" {...headerTextProps} style={{zIndex: '1000'}}>
               {column.columnDef.header}
             </span>
           </modus-tooltip>
