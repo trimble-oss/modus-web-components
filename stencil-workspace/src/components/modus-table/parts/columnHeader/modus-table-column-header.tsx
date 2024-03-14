@@ -132,7 +132,7 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
             headerContentRef = element;
           }}>
           <modus-tooltip text={sorting_status_text} disabled={!column.getCanSort()}>
-            <span tabindex={`${column.getCanSort() ? '0' : ''}`} {...headerTextProps}>
+            <span tabindex="0" {...headerTextProps}>
               {column.columnDef.header}
             </span>
           </modus-tooltip>
