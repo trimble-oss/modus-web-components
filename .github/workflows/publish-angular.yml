@@ -29,19 +29,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set Node version
-        run: |
-          if [ "${{ github.event.inputs.angularVersion }}" == "17" ]; then
-            echo "NODE_VERSION=18.x" >> $GITHUB_ENV
-          else
-            echo "NODE_VERSION=16.x" >> $GITHUB_ENV
-          fi
-
-      # Setup Node, build, and publish to the npm, and GitHub registries
-      - name: Setup Node.js environment
+      # Setup Node.js environment for Angular versions up to 16
+      - name: Setup Node.js environment (Angular <= 16)
+        if: ${{ github.event.inputs.angularVersion < 17 }}
         uses: actions/setup-node@v4
         with:
-          node-version: '${{ env.NODE_VERSION }}'
+          node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
+
+      # Setup Node.js environment specifically for Angular version 17 and above
+      - name: Setup Node.js environment (Angular >= 17)
+        if: ${{ github.event.inputs.angularVersion >= 17 }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install Angular ${{ github.event.inputs.angularVersion }}
