@@ -32,9 +32,9 @@ jobs:
       - name: Set Node version
         run: |
           if [ "${{ github.event.inputs.angularVersion }}" == "17" ]; then
-            echo 'NODE_VERSION="18.x"' >> $GITHUB_ENV
+            echo "NODE_VERSION=18.x" >> $GITHUB_ENV
           else
-            echo 'NODE_VERSION="16.x"' >> $GITHUB_ENV
+            echo "NODE_VERSION=16.x" >> $GITHUB_ENV
           fi
 
       # Setup Node, build, and publish to the npm, and GitHub registries
