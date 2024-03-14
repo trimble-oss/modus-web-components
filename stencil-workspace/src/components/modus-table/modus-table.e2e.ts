@@ -926,7 +926,7 @@ describe('modus-table', () => {
 
       expect(headerTextTooltip[2].textContent).toBe('Mock Column Two');
       expect(secondColumnHeaderText).not.toBeNull();
-      expect(secondColumnHeaderText).toEqual('Sort Ascending');
+      expect(secondColumnHeaderText).toBe('Sort Ascending');
     });
 
     it('Should tab focus header text after a column is removed with sort prop enabled', async () => {
@@ -1030,6 +1030,8 @@ describe('modus-table', () => {
       const headerTextTooltip = await page.findAll('modus-table >>> modus-tooltip >>> div.can-sort >>> modus-tooltip');
       const tooltipText = await headerTextTooltip[0].getProperty('text');
 
+      await page.waitForChanges();
+
       expect(tooltipText).not.toBeNull();
       expect(tooltipText).toBe('Sorted Descending');
     });
@@ -1052,7 +1054,8 @@ describe('modus-table', () => {
 
       const headerTextTooltip = await page.findAll('modus-table >>> modus-tooltip >>> div.can-sort >>> modus-tooltip');
       const tooltipText = await headerTextTooltip[0].getProperty('text');
-
+      
+      await page.waitForChanges();
       expect(tooltipText).not.toBeNull();
       expect(tooltipText).toBe('Sort Ascending');
     });
