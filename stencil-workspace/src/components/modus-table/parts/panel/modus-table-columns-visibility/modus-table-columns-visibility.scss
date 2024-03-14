@@ -1,6 +1,9 @@
 @import '../../../modus-table.vars';
 
 .columns-visibility-menu {
+  display: flex;
+  flex-direction: column;
+
   .column-visibility-header {
     color: $modus-primary-color;
     font-size: $rem-14px;
@@ -8,6 +11,10 @@
     line-height: 18px;
     margin: 12px;
     margin-bottom: 5px;
+  }
+
+  .column-visibility-content {
+    overflow: auto;
   }
 
   .column-visibility-item {
