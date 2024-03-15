@@ -51,23 +51,20 @@ jobs:
       - name: Build Angular ${{ github.event.inputs.angularVersion }}
         run: npm run build
 
-      - name: Change directory
-        run: cd projects/trimble-oss/modus-angular-components
-
       - name: npm install
         run: npm i
-
-      - name: Change directory
-        run: cd dist/trimble-oss/modus-angular-components
+        working-directory: ./angular-workspace/ng${{ github.event.inputs.angularVersion }}/projects/trimble-oss/modus-angular-components
 
       - name: Set npm Registry Auth Token
         run: npm set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TRIMBLE_OSS_AUTOMATION_TOKEN }}
 
       - name: Publish Angular npm Package Publicly
         run: npm publish --access public
+        working-directory: ./angular-workspace/ng${{ github.event.inputs.angularVersion }}/dist/trimble-oss/modus-angular-components
 
       - name: Set GitHub Registry Auth Token
         run: npm set //npm.pkg.github.com/:_authToken ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish Angular npm Package to GitHub Registry
         run: npm publish --access public --ignore-scripts --@trimble-oss:registry='https://npm.pkg.github.com'
+        working-directory: ./angular-workspace/ng${{ github.event.inputs.angularVersion }}/dist/trimble-oss/modus-angular-components
