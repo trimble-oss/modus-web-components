@@ -25,7 +25,7 @@ This component utilizes the `modus-button` element, allowing you to render your 
 ```
 
 
-## Properties
+### Properties
 
 | Property        | Attribute        | Description                             | Type                       | Default                |
 | --------------- | ---------------- | --------------------------------------- | -------------------------- | ---------------------- |
@@ -33,10 +33,12 @@ This component utilizes the `modus-button` element, allowing you to render your 
 |`disabled`       | `disabled`       | (optional) The disabled state of button | `boolean`                  | `false`                |
 
 
+### DOM Events
+
+| Event         | Description                                     | Type               |
+| ------------- | ----------------------------------------------- | ------------------ |
+| `buttonsSelected` | It contains the button selected | `CustomEvent<any>` |
+
 ### Accessibility
 - ButtonGroup gets an aria-label provided by the aria-label property input.
 - ButtonGroup gets an aria-disabled set to whether ButtonGroup is disabled.
-
-
-
-

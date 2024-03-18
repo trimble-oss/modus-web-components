@@ -39,6 +39,22 @@ Type: `Promise<void>`
 
 
 
+### `setActive(isActive: boolean) => Promise<void>`
+
+Set the button to active or inactive
+
+#### Parameters
+
+| Name       | Type      | Description |
+| ---------- | --------- | ----------- |
+| `isActive` | `boolean` |             |
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
 
 ## Dependencies
 

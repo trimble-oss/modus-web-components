@@ -20,12 +20,20 @@ export default {
         type: { summary: 'boolean' },
       },
     },
+selectionType: {
+  name: 'selection-type',
+  description: 'The type of selection',
+  table: {
+    defaultValue: { summary: 'single' },
+    type: { summary: 'string' },
+  },
+}
   },
 
   parameters: {
     controls: { expanded: true, sort: 'alpha' },
     actions:{
-      handles: ['buttonClick'],
+      handles: ['buttonClick', 'buttonsSelected'],
     },
     docs: {
       page: docs,
@@ -35,8 +43,8 @@ export default {
     },
   },
 };
-const Template = ({ ariaLabel, disabled }) => html`
-  <modus-button-group aria-label=${ariaLabel} disabled=${disabled}>
+const Template = ({ ariaLabel, disabled, selectionType }) => html`
+  <modus-button-group aria-label=${ariaLabel} disabled=${disabled} selection-type=${selectionType}>
     <modus-button>Button 1</modus-button>
     <modus-button>Button 2</modus-button>
     <modus-button>Button 3</modus-button>
@@ -45,6 +53,7 @@ const Template = ({ ariaLabel, disabled }) => html`
 const DefaultArgs = {
   ariaLabel: '',
   disabled: false,
+  selectionType: 'single',
 };
 export const Default = Template.bind({});
 Default.args = { ...DefaultArgs };

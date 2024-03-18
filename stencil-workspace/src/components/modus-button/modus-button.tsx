@@ -79,6 +79,11 @@ export class ModusButton {
     this.buttonRef?.focus();
     return Promise.resolve();
   }
+  /** Set the button to active or inactive */
+  @Method()
+  async setActive(isActive: boolean): Promise<void> {
+    this.isActive = isActive;
+  }
 
   @Listen('keyup')
   elementKeyupHandler(event: KeyboardEvent): void {
