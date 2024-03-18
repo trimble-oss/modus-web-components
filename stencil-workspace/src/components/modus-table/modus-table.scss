@@ -76,6 +76,8 @@ table {
         cursor: e-resize;
 
         .can-sort {
+          cursor: e-resize;
+
           .sort-icon-container {
             cursor: e-resize;
           }
@@ -113,6 +115,7 @@ table {
 
         .can-sort {
           align-items: center;
+          cursor: pointer;
           display: flex;
           justify-content: space-between;
 
@@ -121,7 +124,6 @@ table {
           }
 
           .sort-icon-container {
-            cursor: pointer;
             margin-left: 8px;
             padding: $rem-2px $rem-2px 0;
 

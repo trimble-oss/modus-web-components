@@ -1,5 +1,5 @@
 import { E2EPage, newE2EPage } from '@stencil/core/testing';
-//import { ModusTableRowAction } from '../../interfaces';
+import { ModusTableRowAction } from '../../interfaces';
 
 const MockColumns = [
   {
@@ -28,7 +28,6 @@ const MockData = [
     mockColumnTwo: 900293,
   },
 ];
-/*
 const MockManualPagination = {
   currentPageIndex: 2,
   currentPageSize: 10,
@@ -43,7 +42,7 @@ const MockManualSorting = {
       desc: false,
     },
   ],
-}; */
+};
 
 describe('modus-table', () => {
   let page: E2EPage;
@@ -52,7 +51,6 @@ describe('modus-table', () => {
     page = await newE2EPage();
     await page.setContent('<modus-table />');
   });
-  /*
   it('Renders', async () => {
     const element = await page.find('modus-table');
     expect(element).toHaveClass('hydrated');
@@ -1010,62 +1008,60 @@ describe('modus-table', () => {
       expect(tooltipText).not.toBeNull();
       expect(tooltipText).toBe('Sorted Ascending');
     });
-*/
-  it('Should display a tooltip when header text is focus after the header got sorted for the second time', async () => {
-    page = await newE2EPage();
-    await page.setContent('<modus-table />');
 
-    const component = await page.find('modus-table');
+    it('Should display a tooltip when header text is focus after the header got sorted for the second time', async () => {
+      page = await newE2EPage();
+      await page.setContent('<modus-table />');
 
-    component.setProperty('columns', MockColumns);
-    component.setProperty('data', MockData);
-    component.setProperty('sort', true);
-    component.setProperty('columnReorder', false);
+      const component = await page.find('modus-table');
 
-    await page.waitForChanges();
-    await page.keyboard.press('Tab');
-    await page.keyboard.press('Tab');
-    await page.keyboard.press('Enter');
-    await page.keyboard.press('Enter');
+      component.setProperty('columns', MockColumns);
+      component.setProperty('data', MockData);
+      component.setProperty('sort', true);
+      component.setProperty('columnReorder', false);
 
-    const headerTextTooltip = await page.findAll('modus-table >>> modus-tooltip >>> div.can-sort >>> modus-tooltip');
-    const tooltipText = await headerTextTooltip[0].getProperty('text');
+      await page.waitForChanges();
+      await page.keyboard.press('Tab');
+      await page.keyboard.press('Tab');
+      await page.keyboard.press('Enter');
+      await page.keyboard.press('Enter');
 
-    await page.waitForChanges();
+      const headerTextTooltip = await page.findAll('modus-table >>> modus-tooltip >>> div.can-sort >>> modus-tooltip');
+      const tooltipText = await headerTextTooltip[0].getProperty('text');
 
-    expect(tooltipText).not.toBeNull();
-    expect(tooltipText).toBe('Sorted Descending');
-  });
+      await page.waitForChanges();
 
-  it('Should display a tooltip when header text is focus after the header got sorted for the third time', async () => {
-    page = await newE2EPage();
-    await page.setContent('<modus-table />');
+      expect(tooltipText).not.toBeNull();
+      expect(tooltipText).toBe('Sorted Descending');
+    });
 
-    const component = await page.find('modus-table');
+    it('Should display a tooltip when header text is focus after the header got sorted for the third time', async () => {
+      page = await newE2EPage();
+      await page.setContent('<modus-table />');
 
-    component.setProperty('columns', MockColumns);
-    component.setProperty('data', MockData);
-    component.setProperty('sort', true);
+      const component = await page.find('modus-table');
 
-    await page.waitForChanges();
-    await page.keyboard.press('Tab');
-    await page.waitForChanges();
-    await page.keyboard.press('Tab');
-    await page.waitForChanges();
-    await page.keyboard.press('Enter');
-    await page.waitForChanges();
-    await page.keyboard.press('Enter');
-    await page.waitForChanges();
-    await page.keyboard.press('Enter');
+      component.setProperty('columns', MockColumns);
+      component.setProperty('data', MockData);
+      component.setProperty('sort', true);
 
-    const headerTextTooltip = await page.findAll('modus-table >>> modus-tooltip >>> div.can-sort >>> modus-tooltip');
-    const tooltipText = await headerTextTooltip[0].getProperty('text');
+      await page.waitForChanges();
+      await page.keyboard.press('Tab');
+      await page.waitForChanges();
+      await page.keyboard.press('Tab');
+      await page.waitForChanges();
+      await page.keyboard.press('Enter');
+      await page.waitForChanges();
+      await page.keyboard.press('Enter');
+      await page.waitForChanges();
+      await page.keyboard.press('Enter');
 
-    
-    expect(tooltipText).not.toBeNull();
-    expect(tooltipText).toBe('Sort Ascending');
-  });
-  /*
+      const headerTextTooltip = await page.findAll('modus-table >>> modus-tooltip >>> div.can-sort >>> modus-tooltip');
+      const tooltipText = await headerTextTooltip[0].getProperty('text');
+
+      expect(tooltipText).not.toBeNull();
+      expect(tooltipText).toBe('Sort Ascending');
+    });
   });
 
   describe('Sort Icon', () => {
@@ -1305,6 +1301,7 @@ describe('modus-table', () => {
       expect(style['font-weight']).toBe('700');
     });
   });
+
   describe('Tab Order', () => {
     it('Should validate tab order when Reorder and Sort are enabled', async () => {
       page = await newE2EPage();
@@ -1319,9 +1316,8 @@ describe('modus-table', () => {
 
       await page.waitForChanges();
 
-      let cell = await page.find('modus-table >>>  modus-tooltip >>> th');
+      let cell = await page.find('modus-table >>> th');
       let headerElement = await page.findAll('modus-table >>> modus-tooltip >>> div.can-sort >>> modus-tooltip');
-
       let cellStyle = await cell.getComputedStyle();
       let headerTextStyle = await headerElement[0].getComputedStyle();
       let sortIconStyle = await headerElement[1].getComputedStyle();
@@ -1341,7 +1337,7 @@ describe('modus-table', () => {
       await page.keyboard.press('Tab');
 
       headerElement = await page.findAll('modus-table >>> modus-tooltip >>> div.can-sort >>> modus-tooltip');
-      headerTextStyle = await (await headerElement[1].find('span')).getComputedStyle();
+      headerTextStyle = await (await headerElement[0].find('span')).getComputedStyle();
 
       expect(headerTextStyle['outlineWidth']).toBe('1px');
 
@@ -1350,7 +1346,7 @@ describe('modus-table', () => {
 
       headerElement = await page.findAll('modus-table >>> modus-tooltip >>> div.can-sort >>> modus-tooltip');
 
-      const sortIconElement = await headerElement[2];
+      const sortIconElement = await headerElement[1];
       sortIconStyle = await (await sortIconElement.find('span')).getComputedStyle();
 
       expect(sortIconStyle['outlineWidth']).toBe('1px');
@@ -1390,5 +1386,5 @@ describe('modus-table', () => {
       headerTextStyle = await (await headerElement[0].find('span')).getComputedStyle();
       expect(headerTextStyle['outlineWidth']).toBe('1px');
     });
-  });*/
+  });
 });

@@ -13,11 +13,11 @@ interface ModusTableColumnSortIconProps {
   showSortIconOnHover: boolean;
   sortingStatus: string;
   onKeyDown: (e) => void;
-  onMouseOver?: () => void;
-  onMouseLeave?: () => void;
-  onFocus?: () => void;
-  onBlur?: () => void;
-  showToolTipText?: boolean;
+  onMouseEnter?: (e) => void;
+  onMouseLeave?: (e) => void;
+  onFocus?: (e) => void;
+  onBlur?: (e) => void;
+  disabled?: boolean;
 }
 
 const ICON_SIZE = '16';
@@ -76,16 +76,16 @@ export const ModusTableColumnSortIcon: FunctionalComponent<ModusTableColumnSortI
   column,
   sortIconStyle,
   showSortIconOnHover,
-  // showToolTipText,
   sortingStatus,
+  disabled,
   onKeyDown,
-  onMouseOver,
+  onMouseEnter,
   onFocus,
   onBlur,
   onMouseLeave,
 }) => {
   return (
-    <modus-tooltip class="modus-tooltip-sort-icon" text={sortingStatus} position="bottom">
+    <modus-tooltip class="modus-tooltip-sort-icon" text={sortingStatus} position="bottom" disabled={disabled}>
       {
         <span
           tabindex="0"
@@ -94,7 +94,7 @@ export const ModusTableColumnSortIcon: FunctionalComponent<ModusTableColumnSortI
           onClick={column.getToggleSortingHandler()}
           onKeyDown={(event) => (onKeyDown ? onKeyDown(event) : sortOnKeyDown(column, event))}
           onMouseDown={(event: MouseEvent) => event.stopPropagation()}
-          onMouseEnter={onMouseOver}
+          onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
           onFocus={onFocus}
           onBlur={onBlur}
