@@ -25,6 +25,7 @@
 <style>
   body {
     font-weight: initial;
+    font-family: 'Open Sans', sans-serif;
     margin: 0;
   }
   .example {
@@ -42,12 +43,85 @@
   .body {
     margin: 1rem;
   }
+
+  .christian {
+    display: none;
+  }
+
+  div[slot="notifications"] {
+    padding:1rem;
+  }
 </style>
   </head>
 
   <body data-mwc-theme="light">
-    <modus-navbar variant="blue"></modus-navbar>
+    <modus-navbar variant="blue" show-help show-notifications show-profile="false">
+      <div slot="notifications">No longer has <b>Notifications</b> title</div>
+    </modus-navbar>
+
     <div class="body">
+
+      <h1>Navbar</h1>
+      <div class="example">
+        <p>
+          Add property for <code class="language-markup">show-profile</code> <modus-switch></modus-switch>
+        </p>
+        <p>
+          Add property for <code class="language-markup">helpTooltip</code>
+        </p>
+        <p>
+          Add property for <code class="language-markup">signOutText</code> under <code class="language-markup">profileMenuOptions</code>
+        </p>
+        <p>
+          Removed <b>Notifications</b> title from notification menu
+        </p>
+        <p>
+          Added keyboard support to menu buttons
+        </p>
+        <script>
+          const navbar = document.querySelector('modus-navbar')
+
+          navbar.profileMenuOptions  = {
+            initials: 'MU',
+            signOutText: 'Exit',
+          }
+
+          navbar.helpTooltip = {
+            text: 'Custom help text',
+            ariaLabel: 'Custom help text',
+          }
+
+          const switchElement = document.querySelector('modus-switch');
+          switchElement.addEventListener('switchClick', (event) => {
+            navbar.showProfile = event.detail;
+          });
+        </script>
+        <pre>
+          <code class="language-html">
+            &lt;modus-navbar variant=&quot;blue&quot; show-help show-notifications show-profile=&quot;false&quot;&gt;
+              &lt;div slot=&quot;notifications&quot;&gt;No longer has &lt;b&gt;Notifications&lt;/b&gt; title&lt;/div&gt;
+            &lt;/modus-navbar&gt;
+            &lt;script&gt;
+              const navbar = document.querySelector(&#39;modus-navbar&#39;)
+
+              navbar.profileMenuOptions  = {
+                initials: &#39;MU&#39;,
+                signOutText: &#39;Exit&#39;,
+              }
+
+              navbar.helpTooltip = {
+                text: &#39;Custom help text&#39;,
+                ariaLabel: &#39;Custom help text&#39;,
+              }
+
+              const switchElement = document.querySelector(&#39;modus-switch&#39;);
+              switchElement.addEventListener(&#39;switchClick&#39;, (event) =&gt; {
+                navbar.showProfile = event.detail;
+              });
+            &lt;/script&gt;
+          </code>
+      </div>
+
       <h1>Accordian</h1>
       <div class="example">
         <modus-accordion icon="pencil">
@@ -64,7 +138,7 @@
       </div>
 
       <div class="example">
-        <modus-accordion icon="pencil">
+        <modus-accordion icon="pencil"  expand-icon-style="circleArrow">
           <modus-accordion-item expand-icon-style="circleArrow" header-text="expand-icon-style prop" expanded>
             <pre>
               <code class="language-html">
@@ -108,6 +182,7 @@
               ];
             &lt;/script&gt;
           </code>
+        </pre>
         <script>
           document.querySelector('modus-autocomplete').options = [
             { id: '0', value: 'Apple' },
@@ -118,7 +193,17 @@
       </div>
 
       <h1>Breadcrumb</h1>
+      <div class="christian">
+        <div class="example">
+          <p>
+            Removed <code class="language-markup">role="navigation"</code> attribute
+          </p>
+        </div>
+      </div>
       <div class="example">
+        <p>
+          Added <code class="language-markup">underline-links</code> property.
+        </p>
         <modus-breadcrumb underline-links></modus-breadcrumb>
         <pre>
           <code class="language-html">
@@ -134,6 +219,7 @@
               modusBreadcrumb.crumbs = crumbs;
             &lt;/script&gt;
           </code>
+        </pre>
 
         <script>
           const modusBreadcrumb = document.querySelector('modus-breadcrumb');
@@ -146,6 +232,184 @@
           modusBreadcrumb.crumbs = crumbs;
         </script>
 
+      </div>
+
+      <div class="christian">
+        <h1>Button</h1>
+        <div class="example">
+          Now have a new <code class="language-markup">type</code> with values for <code class="language-markup">button</code>, <code class="language-markup">submit</code>, and <code class="language-markup">reset</code>.
+        </div>
+        <div class="example">
+          No longer have the <code class="language-markup">role="button"</code> attribute.
+        </div>
+        <div class="example">
+          Now have a new <code class="language-markup">aria-disabled</code> property.
+        </div>
+
+        <h1>Chips</h1>
+        <div class="example">
+          Render as <code class="language-markup">button</code> elements now.
+        </div>
+      </div>
+
+      <h1>Date Picker</h1>
+      <div class="example">
+        <modus-date-picker>
+          <modus-date-input  min="2024-03-01" max="2024-03-21" value="2024-04-01" show-calendar-icon></modus-date-input>
+        </modus-date-picker>
+        <pre>
+          <code class="language-html">
+            &lt;modus-date-picker&gt;
+              &lt;modus-date-input min=&quot;2024-03-01&quot; max=&quot;2024-03-21&quot; value=&quot;2024-04-01&quot; show-calendar-icon&gt;&lt;/modus-date-input&gt;
+            &lt;/modus-date-picker&gt;
+          </code>
+        </pre>
+      </div>
+
+      <div class="christian">
+        <h1>Dropdown</h1>
+        <div class="example">
+          <p>
+            The <code class="language-markup">border-radius</code> has been changed to <code class="language-markup">4px</code>.
+          </p>
+          <modus-dropdown toggle-element-id="toggleElement">
+            <modus-button id="toggleElement" slot="dropdownToggle" show-caret="true">Dropdown</modus-button>
+            <modus-list slot="dropdownList">
+              <modus-list-item size="condensed" borderless>Item 1</modus-list-item>
+              <modus-list-item size="condensed" borderless>Item 2</modus-list-item>
+              <modus-list-item size="condensed" borderless>Item 3</modus-list-item>
+            </modus-list>
+          </modus-dropdown>
+          <pre class="language-html">
+            <code>
+              &lt;modus-dropdown toggle-element-id="toggleElement"&gt;
+                &lt;modus-button id="toggleElement" slot="dropdownToggle" show-caret="true"&gt;Dropdown&lt;/modus-button&gt;
+                &lt;modus-list slot="dropdownList"&gt;
+                  &lt;modus-list-item size="condensed" borderless&gt;Item 1&lt;/modus-list-item&gt;
+                  &lt;modus-list-item size="condensed" borderless&gt;Item 2&lt;/modus-list-item&gt;
+                  &lt;modus-list-item size="condensed" borderless&gt;Item 3&lt;/modus-list-item&gt;
+                &lt;/modus-list&gt;
+              &lt;/modus-dropdown&gt;
+            </code>
+          </pre>
+        </div>
+      </div>
+
+      <div class="example">
+        <h1>Icons</h1>
+        <p>
+          Updated documentation to properly use <code class="language-markup">iconClick</code> event
+        </p>
+          <modus-icon name="trimble_logo" size="48" color="#0e416c"></modus-icon>
+          <script>
+            document.querySelector('modus-icon').addEventListener('iconClick', () => alert('Icon clicked!'));
+          </script>
+        <pre>
+          <code class="language-html">
+            &lt;modus-icon name=&quot;trimble_logo&quot; size=&quot;48&quot;&gt;&lt;/modus-icon&gt;
+            &lt;script&gt;
+              document.querySelector(&#39;modus-icon&#39;).addEventListener(&#39;iconClick&#39;, () =&gt; alert(&#39;Icon clicked!&#39;));
+            &lt;/script&gt;
+          </code>
+        </pre>
+      </div>
+
+      <div class="example">
+        <h1>Input</h1>
+        <p>
+          Input label now sets the <code class="language-markup">for</code> attribute on the input element
+        </p>
+        <modus-text-input label="Input Label" placeholder="Placeholder"></modus-text-input>
+        <pre>
+          <code class="language-html">
+            &lt;modus-input label=&quot;Input Label&quot; placeholder=&quot;Placeholder&quot;&gt;&lt;/modus-input&gt;
+          </code>
+        </pre>
+      </div>
+
+      <h1>Pagination</h1>
+      <div class="example">
+        <p>
+          Updated cheron icon to correct one
+        </p>
+        <modus-pagination
+  active-page="8"
+  max-page="32"
+  min-page="1"
+  size="medium"></modus-pagination>
+      </div>
+
+      <h1>Select</h1>
+      <div class="example">
+        <p>
+          Added <code class="language-markup">placeholder</code> property
+        </p>
+        <modus-select placeholder="Please select" options-display-prop="display"></modus-select>
+        <script>
+          document.querySelector('modus-select').options = [
+            { display: 'Apple' },
+            { display: 'Banana' },
+            { display: 'Orange' }
+          ];
+        </script>
+        <pre>
+          <code class="language-html">
+            &lt;modus-select placeholder=&quot;Please select&quot; options-display-prop=&quot;display&quot;&gt;&lt;/modus-select&gt;
+            &lt;script&gt;
+              document.querySelector(&#39;modus-select&#39;).options = [
+                { display: &#39;Apple&#39; },
+                { display: &#39;Banana&#39; },
+                { display: &#39;Orange&#39; }
+              ];
+            &lt;/script&gt;
+          </code>
+        </pre>
+      </div>
+
+      <div class="christian">
+        <h1>Sentiment Scale</h1>
+        <div class="example">
+          <p>
+
+          </p>
+        </div>
+      </div>
+
+      <h1>Table</h1>
+      <div class="example">
+        <p>
+          Updated sorted function to default to alphanumeric
+        </p>
+        <modus-table sort></modus-table>
+        <script>
+          const table = document.querySelector('modus-table');
+          table.columns = [
+            { header: 'Column 1', accessorKey: 'column1'},
+          ];
+          table.data = [
+            { column1: 'b' },
+            { column1: 'A' },
+            { column1: 'D' },
+            { column1: 'C' },
+          ];
+        </script>
+        <pre>
+          <code class="language-html">
+            &lt;modus-table sort&gt;&lt;/modus-table&gt;
+            &lt;script&gt;
+              const table = document.querySelector(&#39;modus-table&#39;);
+              table.columns = [
+                { header: &#39;Column 1&#39;, accessorKey: &#39;column1&#39;},
+              ];
+              table.data = [
+                { column1: &#39;b&#39; },
+                { column1: &#39;A&#39; },
+                { column1: &#39;D&#39; },
+                { column1: &#39;C&#39; },
+              ];
+            &lt;/script&gt;
+          </code>
+        </pre>
       </div>
     </div>
  </body>
