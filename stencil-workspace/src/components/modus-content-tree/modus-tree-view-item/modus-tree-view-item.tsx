@@ -321,6 +321,7 @@ export class ModusTreeViewItem {
         multiCheckboxSelection,
         showSelectionIndicator,
         size,
+        borderless,
         getLevel,
         hasItemSelected,
         hasItemDisabled,
@@ -346,6 +347,7 @@ export class ModusTreeViewItem {
         checkboxSelection,
         multiCheckboxSelection,
         size,
+        borderless,
         isDisabled,
         selectionIndicator,
       };
@@ -388,6 +390,7 @@ export class ModusTreeViewItem {
       checkboxSelection,
       multiCheckboxSelection,
       size,
+      borderless,
       isDisabled,
       selectionIndicator,
     } = this.rootOptions();
@@ -401,7 +404,7 @@ export class ModusTreeViewItem {
     };
     const sizeClass = `${TREE_ITEM_SIZE_CLASS.get(size || 'standard')}`;
     const tabIndex: string | number = isDisabled ? -1 : this.tabIndexValue;
-    const treeItemClass = `tree-item ${selected ? 'selected' : ''} ${sizeClass} ${isDisabled ? 'disabled' : ''} `;
+    const treeItemClass = `tree-item ${selected ? 'selected' : ''} ${sizeClass} ${isDisabled ? 'disabled' : ''} ${borderless ? 'borderless' : ''}`;
     const treeItemChildrenClass = `tree-item-group ${sizeClass} ${expanded ? 'expanded' : ''}`;
 
     return (
