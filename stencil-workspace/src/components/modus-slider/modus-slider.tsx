@@ -1,5 +1,6 @@
-// eslint-disable-next-line
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Component, Event, EventEmitter, h, Prop } from '@stencil/core';
+import { generateElementId } from '../../utils/utils';
 
 @Component({
   tag: 'modus-slider',
@@ -31,6 +32,8 @@ export class ModusSlider {
   /** An event that fires on slider value input. */
   @Event() valueInput: EventEmitter<string>;
 
+  private sliderId = generateElementId() + '_slider';
+
   handleOnChange(event: Event): void {
     const value = (event.currentTarget as HTMLInputElement).value;
     this.value = value;
@@ -47,17 +50,12 @@ export class ModusSlider {
     const className = `modus-slider ${this.disabled ? 'disabled' : ''}`;
 
     return (
-      <div
-        aria-disabled={this.disabled ? 'true' : undefined}
-        aria-label={this.ariaLabel}
-        aria-valuemax={this.maxValue}
-        aria-valuemin={this.minValue}
-        aria-valuenow={this.value}
-        class={className}>
-        {this.label && <label>{this.label}</label>}
+      <div aria-disabled={this.disabled ? 'true' : undefined} aria-label={this.ariaLabel} class={className}>
+        {this.label && <label htmlFor={this.sliderId}>{this.label}</label>}
         <input
           class="slider"
           disabled={this.disabled}
+          id={this.sliderId}
           max={this.maxValue}
           min={this.minValue}
           onChange={(event) => this.handleOnChange(event)}
