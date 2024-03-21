@@ -1037,4 +1037,74 @@ describe('modus-table', () => {
     expect(style['overflow-wrap']).toBe('break-word');
     expect(style['word-break']).toBe('break-word');
   });
+
+  it('should load previous page when last page is active and all data removed from page', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-table />');
+    const component = await page.find('modus-table');
+
+    // set data to 100 rows using Array.from
+    const data = Array.from({ length: 100 }, (_, i) => ({
+      mockColumnOne: `Mock Data One ${i}`,
+      mockColumnTwo: i,
+    }));
+
+    component.setProperty('columns', MockColumns);
+    component.setProperty('pageSizeList', [5, 10, 50]);
+    component.setProperty('data', data);
+    component.setProperty('pagination', true);
+    await page.waitForChanges();
+
+    const paginationContainer = await page.find('modus-table >>> .pagination-container');
+    await page.waitForChanges();
+
+    let lastPage = await paginationContainer.find('modus-pagination >>> li:nth-last-child(2)');
+    lastPage.click();
+    await page.waitForChanges();
+
+    expect(lastPage.textContent).toBe('20');
+
+    component.setProperty('data', data.slice(0, data.length - 5));
+    await page.waitForChanges();
+
+    lastPage = await paginationContainer.find('modus-pagination >>> li:nth-last-child(2)');
+
+    expect(lastPage.textContent).toBe('19');
+  });
+
+  it('should stay on current page when data changed with items still on active page', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-table />');
+    const component = await page.find('modus-table');
+
+    // set data to 100 rows using Array.from
+    const data = Array.from({ length: 100 }, (_, i) => ({
+      mockColumnOne: `Mock Data One ${i}`,
+      mockColumnTwo: i,
+    }));
+
+    component.setProperty('columns', MockColumns);
+    component.setProperty('pageSizeList', [5, 10, 50]);
+    component.setProperty('data', data);
+    component.setProperty('pagination', true);
+    await page.waitForChanges();
+
+    const paginationContainer = await page.find('modus-table >>> .pagination-container');
+    await page.waitForChanges();
+
+    let secondPage = await paginationContainer.find('modus-pagination >>> li:nth-child(3)');
+    secondPage.click();
+    await page.waitForChanges();
+
+    expect(secondPage.textContent).toBe('2');
+
+    component.setProperty('data', data.slice(0, data.length - 5));
+    await page.waitForChanges();
+
+    let activePage = await paginationContainer.find('modus-pagination >>> li.active');
+    const lastPage = await paginationContainer.find('modus-pagination >>> li:nth-last-child(2)');
+
+    expect(activePage.textContent).toBe('2');
+    expect(lastPage.textContent).toBe('19');
+  });
 });
