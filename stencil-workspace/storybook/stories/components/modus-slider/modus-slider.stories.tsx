@@ -74,6 +74,7 @@ const Template = ({
     aria-label=${ariaLabel}
     ?disabled=${disabled}
     label=${label}
+    label=${label}
     max-value=${maxValue}
     min-value=${minValue}
     value=${value}>
@@ -84,7 +85,7 @@ export const Default = Template.bind({});
 Default.args = {
   ariaLabel: '',
   disabled: false,
-  label: '',
+  label: 'Label',
   maxValue: 100,
   minValue: 0,
   value: 50,
