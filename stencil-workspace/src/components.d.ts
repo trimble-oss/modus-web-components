@@ -1509,6 +1509,10 @@ export namespace Components {
     }
     interface ModusTreeView {
         /**
+          * (optional) Whether the content tree and items have a border or not
+         */
+        "borderless": boolean;
+        /**
           * (optional) Enables checkbox selection on each tree item
          */
         "checkboxSelection": boolean;
@@ -4242,6 +4246,10 @@ declare namespace LocalJSX {
         "text"?: string;
     }
     interface ModusTreeView {
+        /**
+          * (optional) Whether the content tree and items have a border or not
+         */
+        "borderless"?: boolean;
         /**
           * (optional) Enables checkbox selection on each tree item
          */

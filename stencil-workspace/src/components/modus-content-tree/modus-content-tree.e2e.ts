@@ -518,4 +518,40 @@ describe('modus-tree-view-item', () => {
 
     expect(itemActionClickEvent).toHaveReceivedEventDetail({ actionId: 'export', nodeId: '1' });
   });
+
+  it('toggles borderless class on tree item', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+    <modus-tree-view borderless>
+      <modus-tree-view-item node-Id="1" label="Node one">
+      </modus-tree-view-item>
+    </modus-tree-view>`);
+
+    const element = await page.find('modus-tree-view-item >>> li > div.tree-item');
+    expect(element).toHaveClass('borderless');
+  });
+
+  it('renders changes to the borderless prop at the root level', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+    <modus-tree-view>
+      <modus-tree-view-item node-Id="1" label="Node one">
+      </modus-tree-view-item>
+    </modus-tree-view>`);
+    const root = await page.find('modus-tree-view');
+    const element = await page.find('modus-tree-view-item >>> li > div.tree-item');
+
+    expect(element).not.toHaveClass('borderless');
+    // set
+    root.setProperty('borderless', true);
+    await page.waitForChanges();
+    expect(element).toHaveClass('borderless');
+
+    // unset
+    root.setProperty('borderless', false);
+    await page.waitForChanges();
+    expect(element).not.toHaveClass('borderless');
+  });
 });
