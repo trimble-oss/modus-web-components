@@ -158,6 +158,16 @@ export class ModusDatePicker {
     this._calendar.gotoDate(date.getFullYear(), date.getMonth());
   }
 
+  private goToNearestBoundaryDate(date: Date): void {
+    const minDate = this._currentInput?.getMinDateAllowed();
+    const maxDate = this._currentInput?.getMaxDateAllowed();
+
+    const targetDate = this.compare(date, minDate) < 0 ? minDate : maxDate;
+
+    this.gotoDateBeingPicked(targetDate);
+    this.forceUpdate();
+  }
+
   isInvalidDateRange = (startDate, endDate) => this.compare(endDate, startDate) < 0;
 
   pickCalendarDate(date: Date) {
@@ -204,7 +214,7 @@ export class ModusDatePicker {
     const startDate = this._dateInputs['start']?.getDate();
     const endDate = this._dateInputs['end']?.getDate();
     const singleDate = this._dateInputs['single']?.getDate();
-    //Get day of the week and prepare blank cells to render the calendar dates properly
+    // Get day of the week and prepare blank cells to render the calendar dates properly
     const firstDay = new Date(this._calendar.selectedYear, this._calendar.selectedMonth)?.getDay();
     const blankDatesArr = new Array(firstDay).fill(0);
     return (
@@ -271,6 +281,7 @@ export class ModusDatePicker {
                   }}
                   disabled={isDateDisabled}
                   tabIndex={0}
+                  aria-current="date"
                   onClick={() => this.pickCalendarDate(date)}
                   {...onBlurEvent}>
                   {date.getDate()}
@@ -279,6 +290,14 @@ export class ModusDatePicker {
             })}
           </div>
         </div>
+        {!this.isWithinCurrentMinMax(this._currentInput.getDate()) && (
+          <div class="out-of-range-notification">
+            <div>The selected date is not available</div>
+            <span class="goto-available-dates" onClick={() => this.goToNearestBoundaryDate(this._currentInput.getDate())}>
+              Go to available dates
+            </span>
+          </div>
+        )}
       </div>
     );
   }
@@ -286,24 +305,27 @@ export class ModusDatePicker {
   private renderCalendarHeader() {
     return (
       <div class="calendar-header">
-        <button aria-label="Previous Month" onClick={() => this.addMonthOffset(-1)}>
+        <button type="button" aria-label="Previous Month" onClick={() => this.addMonthOffset(-1)}>
           <ModusIconMap icon="chevron_left_bold"></ModusIconMap>
         </button>
 
         <div class="title">
-          <span tabIndex={0} class="calendar-title" aria-label="ModusCalendar title" role="title">
-            {`${this._calendar?.month} ${this._calendar?.year}`}
-          </span>
+          <div class="calendar-title">{`${this._calendar?.month} ${this._calendar?.year}`}</div>
           <div class="year-icons">
-            <button tabIndex={0} aria-label="Next Year" onClick={() => this.addYearOffset(1)} class="year-up">
+            <button type="button" tabIndex={0} aria-label="Next Year" onClick={() => this.addYearOffset(1)} class="year-up">
               <ModusIconMap icon="caret_up" size="16"></ModusIconMap>
             </button>
-            <button tabIndex={0} aria-label="Previous Year" onClick={() => this.addYearOffset(-1)} class="year-down">
+            <button
+              type="button"
+              tabIndex={0}
+              aria-label="Previous Year"
+              onClick={() => this.addYearOffset(-1)}
+              class="year-down">
               <ModusIconMap size="16" icon="caret_down"></ModusIconMap>
             </button>
           </div>
         </div>
-        <button tabIndex={0} aria-label="Next Month" onClick={() => this.addMonthOffset(1)}>
+        <button type="button" tabIndex={0} aria-label="Next Month" onClick={() => this.addMonthOffset(1)}>
           <ModusIconMap icon="chevron_right_bold"></ModusIconMap>
         </button>
       </div>

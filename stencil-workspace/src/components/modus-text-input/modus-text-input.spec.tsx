@@ -12,7 +12,7 @@ describe('modus-text-input', () => {
         <mock:shadow-root>
             <div class="modus-text-input">
                 <div class="input-container medium" part="input-container">
-                    <input class="text-align-left" type="text" tabindex="0">
+                    <input class="text-align-left" id="mwc_id_0_text_input" type="text" tabindex="0">
                 </div>
             </div>
         </mock:shadow-root>
@@ -30,7 +30,7 @@ describe('modus-text-input', () => {
         <mock:shadow-root>
             <div class="modus-text-input">
                 <div class="input-container medium" part="input-container">
-                <input class="text-align-left" tabindex="0" type="password">
+                <input class="text-align-left" id="mwc_id_1_text_input" tabindex="0" type="password">
                 </div>
             </div>
         </mock:shadow-root>

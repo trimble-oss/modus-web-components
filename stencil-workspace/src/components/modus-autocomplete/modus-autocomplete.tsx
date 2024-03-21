@@ -11,8 +11,10 @@ import {
   Element,
   Watch,
 } from '@stencil/core';
+
 import { IconSearch } from '../../icons/svgs/icon-search';
 import { generateElementId } from '../../utils/utils';
+import { IconCheck } from '../../icons/generated-icons/IconCheck';
 
 export interface ModusAutocompleteOption {
   id: string;
@@ -28,7 +30,8 @@ const DATA_SEARCH_VALUE = 'data-search-value';
   shadow: true,
 })
 export class ModusAutocomplete {
-  @Element() el: HTMLElement;
+  /** When enabled, multiple options can be selected in the component. And selected options are shown as chips in the input. */
+  @Prop() multiple: boolean;
 
   /** The autocomplete's aria label. */
   @Prop() ariaLabel: string | null;
@@ -51,6 +54,8 @@ export class ModusAutocomplete {
   /** The autocomplete's error text. */
   @Prop() errorText: string;
 
+  @Element() el: HTMLElement;
+
   /** Whether the search icon is included. */
   @Prop() includeSearchIcon = true;
 
@@ -65,6 +70,16 @@ export class ModusAutocomplete {
 
   /** The autocomplete's options. */
   @Prop({ mutable: true }) options: ModusAutocompleteOption[] | string[];
+
+  /** An array to hold the selected chips. */
+  @State() selectedChips: string[] = [];
+
+  /** The autocomplete's selected option. */
+  @State() selectedOption: string;
+
+  /** Whether to show autocomplete's options when focus. */
+  @Prop() showOptionsOnFocus: boolean;
+
   @Watch('options')
   watchOptions() {
     this.convertOptions();
@@ -73,9 +88,6 @@ export class ModusAutocomplete {
 
   /** The autocomplete's input placeholder. */
   @Prop() placeholder: string;
-
-  /** Whether to show autocomplete's options when focus. */
-  @Prop() showOptionsOnFocus: boolean;
 
   /** Whether the autocomplete is read-only. */
   @Prop() readOnly: boolean;
@@ -158,11 +170,26 @@ export class ModusAutocomplete {
     return this.hasFocus && showOptions && !this.disabled;
   };
 
+  addChipValue(value: string) {
+    if (this.selectedChips.includes(value)) {
+      return;
+    }
+    this.selectedChips = [...this.selectedChips, value];
+    this.valueChange.emit(this.selectedChips.join(','));
+    this.value = '';
+  }
   handleCustomOptionClick = (option: any) => {
     const optionValue = option.getAttribute(DATA_SEARCH_VALUE);
     const optionId = option.getAttribute(DATA_ID);
-    this.disableFiltering = this.disableCloseOnSelect;
-    this.handleSearchChange(optionValue);
+
+    if (this.multiple) {
+      this.addChipValue(optionValue);
+    } else {
+      this.selectedOption = optionValue;
+      this.disableFiltering = this.disableCloseOnSelect;
+      this.handleSearchChange(optionValue);
+    }
+
     this.hasFocus = this.disableCloseOnSelect;
     this.optionSelected.emit(optionId);
   };
@@ -211,9 +238,20 @@ export class ModusAutocomplete {
     }
   };
 
+  handleClear(): void {
+    this.selectedChips = [];
+    this.selectedOption = '';
+  }
+
   handleOptionClick = (option: ModusAutocompleteOption) => {
-    this.disableFiltering = this.disableCloseOnSelect;
-    this.handleSearchChange(option.value);
+    if (this.multiple) {
+      this.addChipValue(option.value);
+    } else {
+      this.selectedOption = option.value;
+      this.disableFiltering = this.disableCloseOnSelect;
+      this.handleSearchChange(option.value);
+    }
+
     this.hasFocus = this.disableCloseOnSelect;
     this.optionSelected.emit(option.id);
   };
@@ -238,6 +276,13 @@ export class ModusAutocomplete {
     this.value = search;
     this.valueChange.emit(search);
   };
+
+  handleCloseClick(chipValue: string) {
+    if (this.selectedChips.length != 0) {
+      this.selectedChips = this.selectedChips.filter((chip) => chip !== chipValue);
+      this.valueChange.emit(this.selectedChips.join(','));
+    }
+  }
 
   handleTextInputValueChange = (event: CustomEvent<string>) => {
     // Cancel the modus-text-input's value change event or else it will bubble to consumer.
@@ -295,16 +340,13 @@ export class ModusAutocomplete {
 
   TextInput = () => (
     <modus-text-input
+      class="input"
       autocomplete="off"
-      clearable={this.clearable}
+      clearable={this.clearable && !this.readOnly && !!this.value}
       errorText={this.hasFocus ? '' : this.errorText}
-      includeSearchIcon={this.includeSearchIcon}
-      label={this.label}
-      onValueChange={(searchEvent: CustomEvent<string>) => {
-        this.handleTextInputValueChange(searchEvent);
-      }}
+      includeSearchIcon={false}
+      onValueChange={(searchEvent: CustomEvent<string>) => this.handleTextInputValueChange(searchEvent)}
       placeholder={this.placeholder}
-      required={this.required}
       size={this.size}
       type="search"
       value={this.value}
@@ -315,6 +357,13 @@ export class ModusAutocomplete {
       aria-expanded={this.displayOptions()}
     />
   );
+
+  @Listen('valueChange')
+  valueChangedHandler(event: CustomEvent<string>) {
+    if (event.detail == null) {
+      this.handleClear();
+    }
+  }
 
   render(): unknown {
     const classes = `autocomplete ${this.classBySize.get(this.size)}`;
@@ -341,35 +390,67 @@ export class ModusAutocomplete {
           }
         }}
         onKeyDown={(e) => this.handleInputKeyDown(e)}>
-        {this.TextInput()}
+        {this.label || this.required ? (
+          <div class={'label-container'}>
+            {this.label ? <label>{this.label}</label> : null}
+            {this.required ? <span class="required">*</span> : null}
+          </div>
+        ) : null}
+        <div class="chips-container">
+          {this.includeSearchIcon ? <IconSearch size="16" /> : null}
+          {this.selectedChips.map((chip) => (
+            <modus-chip value={chip} size="medium" show-close onCloseClick={() => this.handleCloseClick(chip)}></modus-chip>
+          ))}
+          {this.TextInput()}
+        </div>
+        <div class={'error'}>{this.errorText ? <label class="sub-text error">{this.errorText}</label> : null}</div>
         <div
           class="options-container"
           style={{ maxHeight: this.dropdownMaxHeight, zIndex: this.dropdownZIndex, overflowY: 'auto' }}>
           <ul id={this.listId} aria-label="options" role="listbox">
             {this.displayOptions() &&
               this.visibleOptions?.map((option) => {
+                let className;
+                let isSelected;
+                if (this.multiple) {
+                  isSelected = this.selectedChips.includes(option.value);
+                  className = 'text-option' + (isSelected ? ' selected' : '');
+                } else {
+                  isSelected = this.selectedOption === option.value;
+                  className = 'text-option' + (isSelected ? ' selected' : '');
+                }
                 return (
                   <li
-                    class="text-option"
+                    class={className}
                     tabindex="-1"
                     role="option"
                     onClick={() => this.handleOptionClick(option)}
                     onKeyDown={(e) => this.handleOptionKeyDown(e, option)}>
                     {option.value}
+                    {isSelected && <IconCheck size="16" />}
                   </li>
                 );
               })}
             {this.displayOptions() &&
-              this.visibleCustomOptions?.map((option) => (
-                <li
-                  class="custom-option"
-                  tabindex="-1"
-                  role="option"
-                  onClick={() => this.handleCustomOptionClick(option)}
-                  onKeyDown={(e) => this.handleOptionKeyDown(e, option, true)}
-                  innerHTML={option.outerHTML}
-                />
-              ))}
+              this.visibleCustomOptions?.map((option) => {
+                const optionValue = option.getAttribute(DATA_SEARCH_VALUE);
+                let className;
+                if (this.multiple) {
+                  className = 'custom-option' + (this.selectedChips.includes(optionValue) ? ' selected' : '');
+                } else {
+                  className = 'custom-option' + (this.selectedOption === optionValue ? ' selected' : '');
+                }
+                return (
+                  <li
+                    class={className}
+                    tabindex="-1"
+                    role="option"
+                    onClick={() => this.handleCustomOptionClick(option)}
+                    onKeyDown={(e) => this.handleOptionKeyDown(e, option, true)}
+                    innerHTML={option.outerHTML}
+                  />
+                );
+              })}
           </ul>
           {this.displayNoResults() && <NoResultsFound text={this.noResultsFoundText} subtext={this.noResultsFoundSubtext} />}
         </div>

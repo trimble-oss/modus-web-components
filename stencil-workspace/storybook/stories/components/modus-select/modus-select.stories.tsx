@@ -23,22 +23,23 @@ export default {
 };
 
 const Template = () => html`
-  <modus-select id="select-demo-1" label="Select Demo 1" aria-label="select" options-display-prop="display"></modus-select>
+  <modus-select id="select-demo-1" label="Select Demo 1" aria-label="select" options-display-prop="display"></modus-select><br/>
   <modus-select
     disabled
     helper-text="Helper demo"
     aria-label="select"
     id="select-demo-2"
     label="Select Demo 2"
-    options-display-prop="display"></modus-select>
-  <modus-select error-text="Error demo" aria-label="select" label="Select Demo 3"></modus-select>
-  <modus-select label="Select Demo 4" aria-label="select" valid-text="Valid demo"></modus-select>
+    options-display-prop="display"></modus-select><br/>
+  <modus-select error-text="Error demo" aria-label="select" label="Select Demo 3"></modus-select><br/>
+  <modus-select label="Select Demo 4" aria-label="select" valid-text="Valid demo"></modus-select><br/>
   <modus-select
     id="select-demo-5"
     label="Select Demo 5"
     size="large"
     aria-label="select"
-    options-display-prop="display"></modus-select>
+    options-display-prop="display"></modus-select><br/>
+  <modus-select id="select-demo-6" label="Custom Placeholder" aria-label="select" placeholder="Custom Placeholder" options-display-prop="display"></modus-select><br/>
   ${setSelects()}
 `;
 
@@ -64,6 +65,13 @@ const setSelects = () => {
       const select5 = document.querySelector('#select-demo-5');
       select5.options = options;
       select5.value = options[2];
+
+      const select6 = document.querySelector('#select-demo-6');
+      select6.options = options;
+      select6.addEventListener('valueChange', function handleValueChange(e) {
+         const selectedOption = e.detail;
+         select6.value = selectedOption;
+      });
   `;
 
   return tag;

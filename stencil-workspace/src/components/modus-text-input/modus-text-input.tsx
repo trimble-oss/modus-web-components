@@ -1,9 +1,10 @@
 // eslint-disable-next-line
-import { Component, Event, EventEmitter, h, Method, Prop } from '@stencil/core';
+import { Component, Event, EventEmitter, h, Method, Prop, State } from '@stencil/core';
 import { IconSearch } from '../../icons/svgs/icon-search';
 import { IconClose } from '../../icons/svgs/icon-close';
-import { IconVisibility } from '../../icons/svgs/icon-visibility';
 import { IconVisibilityOff } from '../../icons/svgs/icon-visibility-off';
+import { generateElementId } from '../../utils/utils';
+import { IconVisibilityOn } from '../../icons/generated-icons/IconVisibilityOn';
 
 @Component({
   tag: 'modus-text-input',
@@ -74,8 +75,12 @@ export class ModusTextInput {
   /** (optional) The input's value. */
   @Prop({ mutable: true }) value: string;
 
+  @State() passwordVisible = true;
+
   /** An event that fires on input value change. */
   @Event() valueChange: EventEmitter<string>;
+
+  private inputId = generateElementId() + '_text_input';
 
   classBySize: Map<string, string> = new Map([
     ['medium', 'medium'],
@@ -91,6 +96,14 @@ export class ModusTextInput {
     this.textInput.focus();
   }
 
+  handleClearKeyDown(event: KeyboardEvent): void {
+    if (event.key !== 'Enter' && event.key !== ' ') {
+      return;
+    }
+
+    this.handleClear();
+  }
+
   handleClear(): void {
     this.textInput.value = null;
     this.value = null;
@@ -104,11 +117,20 @@ export class ModusTextInput {
     this.valueChange.emit(value);
   }
 
+  handleTogglePasswordKeyDown(event: KeyboardEvent): void {
+    if (event.key !== 'Enter' && event.key !== ' ') {
+      return;
+    }
+    this.handleTogglePassword();
+  }
+
   handleTogglePassword() {
     if (this.textInput.type === 'password') {
+      this.passwordVisible = false;
       this.textInput.type = 'text';
       this.buttonTogglePassword.setAttribute('aria-label', 'Hide password.');
     } else {
+      this.passwordVisible = true;
       this.textInput.type = 'password';
       this.buttonTogglePassword.setAttribute(
         'aria-label',
@@ -118,10 +140,10 @@ export class ModusTextInput {
   }
 
   render(): unknown {
+    const iconSize = this.size === 'large' ? '24' : '16';
     const isPassword = this.type === 'password';
     const showPasswordToggle = !!(this.includePasswordTextToggle && isPassword && this.value?.length);
-    const isToggleablePassword = isPassword && this.includePasswordTextToggle;
-    const showClearIcon = !isToggleablePassword && this.clearable && !this.readOnly && !!this.value;
+    const showClearIcon = this.clearable && !this.readOnly && !!this.value;
 
     const buildTextInputClassNames = (): string => {
       const classNames = [];
@@ -151,7 +173,7 @@ export class ModusTextInput {
       <div class={buildContainerClassNames()}>
         {this.label || this.required ? (
           <div class={'label-container'}>
-            {this.label ? <label>{this.label}</label> : null}
+            {this.label ? <label htmlFor={this.inputId}>{this.label}</label> : null}
             {this.required ? <span class="required">*</span> : null}
           </div>
         ) : null}
@@ -161,8 +183,9 @@ export class ModusTextInput {
           )}`}
           onClick={() => this.textInput.focus()}
           part="input-container">
-          {this.includeSearchIcon ? <IconSearch size="16" /> : null}
+          {this.includeSearchIcon ? <IconSearch size={iconSize} /> : null}
           <input
+            id={this.inputId}
             aria-invalid={!!this.errorText}
             aria-label={this.ariaLabel}
             aria-required={this.required?.toString()}
@@ -184,17 +207,24 @@ export class ModusTextInput {
           {showPasswordToggle && (
             <div
               class="icons toggle-password"
+              tabIndex={0}
+              onKeyDown={(event) => this.handleTogglePasswordKeyDown(event)}
+              onClick={() => this.handleTogglePassword()}
               role="button"
               aria-label="Show password as plain text. Warning: this will display your password on the screen."
-              ref={(el) => (this.buttonTogglePassword = el as HTMLDivElement)}
-              onClick={() => this.handleTogglePassword()}>
-              <IconVisibility size="16" />
-              <IconVisibilityOff size="16" />
+              ref={(el) => (this.buttonTogglePassword = el as HTMLDivElement)}>
+              {this.passwordVisible ? <IconVisibilityOn size={iconSize} /> : <IconVisibilityOff size={iconSize} />}
             </div>
           )}
           {showClearIcon && (
-            <span class="icons clear" role="button" aria-label="Clear entry">
-              <IconClose onClick={() => this.handleClear()} size="16" />
+            <span
+              class="icons clear"
+              tabIndex={0}
+              onKeyDown={(event) => this.handleClearKeyDown(event)}
+              onClick={() => this.handleClear()}
+              role="button"
+              aria-label="Clear entry">
+              <IconClose size={iconSize} />
             </span>
           )}
         </div>

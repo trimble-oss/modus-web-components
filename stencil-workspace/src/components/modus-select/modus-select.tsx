@@ -29,6 +29,9 @@ export class ModusSelect {
   /** The options property to render in the dropdown list. */
   @Prop() optionsDisplayProp: string;
 
+  /** (optional) The input's placeholder. */
+  @Prop() placeholder = 'Please Select';
+
   /** (optional) Whether the input is required. */
   @Prop() required: boolean;
 
@@ -134,6 +137,9 @@ export class ModusSelect {
             }}
             aria-invalid={!!this.errorText}
             aria-required={this.required?.toString()}>
+            <option value="" disabled selected>
+              {this.placeholder}
+            </option>
             {this.renderOptions()}
           </select>
           {this.renderSubText()}

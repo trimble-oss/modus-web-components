@@ -11,6 +11,7 @@
 | ---------------------- | --------------- | ------------------------- | ------------------------------------ | ----------- |
 | `columnsVisibility`    | --              | Column visibility options | `ModusTableColumnsVisibilityOptions` | `undefined` |
 | `getAllLeafColumns`    | --              | Table data.               | `() => Column<unknown, unknown>[]`   | `undefined` |
+| `maxHeight`            | `max-height`    |                           | `string`                             | `undefined` |
 | `menuIconContainerRef` | --              |                           | `HTMLDivElement`                     | `undefined` |
 | `showDropdown`         | `show-dropdown` |                           | `boolean`                            | `undefined` |
 | `toggleDropdown`       | --              |                           | `(show: boolean) => void`            | `undefined` |

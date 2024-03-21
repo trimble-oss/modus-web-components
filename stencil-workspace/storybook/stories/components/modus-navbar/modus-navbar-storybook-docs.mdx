@@ -13,6 +13,7 @@ This component utilizes the slot element, allowing you to render your own HTML i
 - The only required navigation items are the product logo and the user menu. The rest are hidden by default.
 - If a profile menu avatarUrl is provided it will take rendering preference over initials.
   - If the provided avatarUrl fails to load, initials will be used as a fallback.
+- If the profile menu signOutText is provided, a sign out button with the provided text will be rendered else the sign out button will be rendered with the text "Sign out".
 - If `buttons` are provided, Navbar creates the icon buttons dynamically
   - The `slot` allows rendering custom HTML on button click by linking the slot name with button id.
 - If a `show-search` with `enable-search-overlay` set as true then search overly will open on search button click, if enable-search-overlay set to false then search button emit the event for client.
@@ -55,6 +56,7 @@ This component utilizes the slot element, allowing you to render your own HTML i
     avatarUrl: '...',
     email: 'modus_user@trimble.com',
     initials: 'MU',
+    signOutText: 'Sign out',
     username: 'Modus User',
     links: [
       {
@@ -112,6 +114,7 @@ This component utilizes the slot element, allowing you to render your own HTML i
     avatarUrl: 'https://avatar.example.com/broken-image-link.png',
     email: 'modus_user@trimble.com',
     initials: 'MU',
+    signOutText: 'Sign out',
     username: 'Modus User',
   };
 </script>
@@ -156,6 +159,7 @@ Use the `variant` prop to choose a blue background navbar.
     avatarUrl: 'https://avatar.example.com/broken-image-link.png',
     email: 'modus_user@trimble.com',
     initials: 'MU',
+    signOutText: 'Sign out',
     username: 'Modus User',
   };
 </script>
@@ -198,6 +202,7 @@ interface ModusProfileMenuOptions {
   avatarUrl?: string;
   email?: string;
   initials?: string;
+  signOutText?: string;
   links?: ModusNavbarProfileMenuLink[];
   username: string;
   tooltip: ModusNavbarTooltip;
@@ -218,7 +223,8 @@ interface ModusNavbarButton {
 | ---------------------- | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- | ----------- |
 | `apps`                 | --                       | (optional) The apps to render in the apps menu.                                                                                                                                         | `ModusNavbarApp[]`        | `undefined` |
 | `buttons`              | --                       | (optional) The buttons to render in the Navbar.                                                                                                                                         | `ModusNavbarButton[]`     | `undefined` |
-| `enableSearchOverlay`  | `enable-search-overlay`    | (optional) Whether to show search overlay or not.                                                                                                                                    | `boolean`                 | `undefined` |
+| `enableSearchOverlay`  | `enable-search-overlay`    | (optional) Whether to show search overlay or not.                                                                                                                                     | `boolean`                 | `undefined` |
+| `helpTooltip`          | --                       | (optional) Help tooltip.                                                                                                                                                                | `ModusNavbarTooltip`      | `undefined` |
 | `helpUrl`              | `help-url`               | (optional) Help URL.                                                                                                                                                                    | `string`                  | `undefined` |
 | `logoOptions`          | --                       | (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels. | `ModusNavbarLogoOptions`  | `undefined` |
 | `profileMenuOptions`   | --                       | (required) Profile menu options.                                                                                                                                                        | `ModusProfileMenuOptions` | `undefined` |
@@ -229,6 +235,7 @@ interface ModusNavbarButton {
 | `showMainMenu`         | `show-main-menu`         | (optional) Whether to show the main menu.                                                                                                                                               | `boolean`                 | `undefined` |
 | `showNotifications`    | `show-notifications`     | (optional) Whether to show notifications.                                                                                                                                               | `boolean`                 | `undefined` |
 | `showPendoPlaceholder` | `show-pendo-placeholder` | (optional) Whether to show the placeholder for Pendo.                                                                                                                                   | `boolean`                 | `undefined` |
+| `showProfile`          | `show-profile`           | (optional) Whether to show the profile.                                                                                                                                                 | `boolean`                 | `true`      |
 | `showSearch`           | `show-search`            | (optional) Whether to show search.                                                                                                                                                      | `boolean`                 | `undefined` |
 | `showShadow`           | `show-shadow`            | (optional) Whether to show a shadow under the navbar.                                                                                                                                   | `boolean`                 | `undefined` |
 | `variant`              | `variant`                | (optional) Color variants for NavBar.                                                                                                                                                   | `"blue" \| "default"`     | `'default'` |

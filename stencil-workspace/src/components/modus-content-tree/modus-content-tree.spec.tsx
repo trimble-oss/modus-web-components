@@ -65,7 +65,7 @@ describe('modus-tree-view-item', () => {
           <slot name="itemIcon"></slot>
         </div>
         <div role="heading" aria-level="1" class="label-slot">
-          <div role="button" class="">
+          <div role="button">
             <slot name="label"></slot>test
           </div>
         </div>
