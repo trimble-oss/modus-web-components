@@ -45,6 +45,9 @@ export class ModusTreeView {
   /** (optional) The default size of all tree items */
   @Prop() size: 'condensed' | 'large' | 'standard' = 'standard';
 
+  /** (optional) Whether the content tree and items have a border or not */
+  @Prop() borderless: boolean;
+
   @State() itemDragState: TreeViewItemDragState;
 
   private focusItem: string;
@@ -171,6 +174,7 @@ export class ModusTreeView {
   @Watch('multiCheckboxSelection')
   @Watch('multiSelection')
   @Watch('size')
+  @Watch('borderless')
   handleOptionsProps() {
     const options = this.getTreeViewItemOptions();
     Object.values(this.items).forEach(({ element }) => {
@@ -373,6 +377,7 @@ export class ModusTreeView {
       checkboxSelection: this.checkboxSelection,
       multiCheckboxSelection: this.multiCheckboxSelection,
       size: this.size,
+      borderless: this.borderless,
       disableTabbing: this.disableTabbing,
 
       getLevel: (id) => this.getLevel(id),
