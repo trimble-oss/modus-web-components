@@ -133,11 +133,13 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
               tabindex="0"
               onClick={() => column.toggleSorting()}
               onMouseOver={() => {
-                const sortIconToolTip = headerContentRef.children[1];
-                disableToolTip(sortIconToolTip, true);
+               if(column.getCanSort()){
+                  const sortIconToolTip = headerContentRef.children[1];
+                  disableToolTip(sortIconToolTip, true);
+                }
               }}
-              onMouseLeave={() => disableAllTooltip(false)}
-              onBlur={() => disableAllTooltip(false)}
+              onMouseLeave={() => column.getCanSort() && disableAllTooltip(false)}
+              onBlur={() => column.getCanSort() && disableAllTooltip(false)}
               onKeyDown={handleSortIconHover}
               class={`header-text ${column.getCanSort() && column.getIsSorted() ? 'sorted' : ''}`}>
               {column.columnDef.header}
