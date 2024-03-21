@@ -1,6 +1,6 @@
 {
   "name": "@trimble-oss/modus-angular-components",
-  "version": "0.21.1-ng14",
+  "version": "0.22.0-ng14",
   "license": "MIT",
   "description": "Trimble Modus Angular Components Library",
   "homepage": "https://modus-web-components.trimble.com/",

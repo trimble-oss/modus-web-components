@@ -1,6 +1,6 @@
 {
   "name": "@trimble-oss/modus-react-components",
-  "version": "0.21.1-react18",
+  "version": "0.22.0-react18",
   "description": "Trimble Modus React Component Library",
   "homepage": "https://modus-web-components.trimble.com/",
   "bugs": {
