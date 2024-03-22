@@ -159,7 +159,7 @@ export default {
 };
 
 const defaultArgs = {
-  ariaLabel: 'Date Input',
+  ariaLabel: '',
   allowedCharsRegex: '[\\d\\/]',
   altFormats: '',
   autoFocusInput: true,
