@@ -115,12 +115,14 @@ table {
 
         .can-sort {
           align-items: center;
-          cursor: pointer;
           display: flex;
           justify-content: space-between;
 
           .sorted {
             font-weight: bold;
+          }
+          .header-text, .sort-icon{
+            cursor: pointer;
           }
 
           .sort-icon-container {
