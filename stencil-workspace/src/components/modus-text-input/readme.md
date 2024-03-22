@@ -25,9 +25,10 @@
 | `placeholder`               | `placeholder`                  | (optional) The input's placeholder text.                      | `string`                                                                    | `undefined` |
 | `readOnly`                  | `read-only`                    | (optional) Whether the input's content is read-only           | `boolean`                                                                   | `undefined` |
 | `required`                  | `required`                     | (optional) Whether the input is required.                     | `boolean`                                                                   | `undefined` |
+| `rows`                      | `rows`                         | (optional) Number of rows for textarea. Defaults to 5.        | `number`                                                                    | `undefined` |
 | `size`                      | `size`                         | (optional) The input's size.                                  | `"large" \| "medium"`                                                       | `'medium'`  |
 | `textAlign`                 | `text-align`                   | (optional) The input's text alignment.                        | `"left" \| "right"`                                                         | `'left'`    |
-| `type`                      | `type`                         | (optional) The input's type.                                  | `"email" \| "password" \| "search" \| "tel" \| "text" \| "url"`             | `'text'`    |
+| `type`                      | `type`                         | (optional) The input's type.                                  | `"email" \| "password" \| "search" \| "tel" \| "text" \| "textarea" \| "url"`             | `'text'`    |
 | `validText`                 | `valid-text`                   | (optional) The input's valid state text.                      | `string`                                                                    | `undefined` |
 | `value`                     | `value`                        | (optional) The input's value.                                 | `string`                                                                    | `undefined` |
 
