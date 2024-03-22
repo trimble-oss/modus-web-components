@@ -74,7 +74,6 @@ const Template = ({
     aria-label=${ariaLabel}
     ?disabled=${disabled}
     label=${label}
-    label=${label}
     max-value=${maxValue}
     min-value=${minValue}
     value=${value}>
