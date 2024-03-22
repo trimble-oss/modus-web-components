@@ -23,23 +23,21 @@ export default {
 };
 
 const Template = () => html`
-  <modus-select id="select-demo-1" label="Select Demo 1" aria-label="select" options-display-prop="display"></modus-select><br/>
+  <modus-select id="select-demo-1" label="Select Demo 1" options-display-prop="display"></modus-select><br/>
   <modus-select
     disabled
     helper-text="Helper demo"
-    aria-label="select"
     id="select-demo-2"
     label="Select Demo 2"
     options-display-prop="display"></modus-select><br/>
-  <modus-select error-text="Error demo" aria-label="select" label="Select Demo 3"></modus-select><br/>
-  <modus-select label="Select Demo 4" aria-label="select" valid-text="Valid demo"></modus-select><br/>
+  <modus-select error-text="Error demo" label="Select Demo 3"></modus-select><br/>
+  <modus-select label="Select Demo 4" valid-text="Valid demo"></modus-select><br/>
   <modus-select
     id="select-demo-5"
     label="Select Demo 5"
     size="large"
-    aria-label="select"
     options-display-prop="display"></modus-select><br/>
-  <modus-select id="select-demo-6" label="Custom Placeholder" aria-label="select" placeholder="Custom Placeholder" options-display-prop="display"></modus-select><br/>
+  <modus-select id="select-demo-6" label="Custom Placeholder" placeholder="Custom Placeholder" options-display-prop="display"></modus-select><br/>
   ${setSelects()}
 `;
 
