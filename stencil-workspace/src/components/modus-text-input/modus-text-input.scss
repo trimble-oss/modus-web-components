@@ -52,7 +52,8 @@
       }
     }
 
-    input {
+    input,
+    textarea {
       background-color: transparent;
       border: none;
       color: $modus-input-color;

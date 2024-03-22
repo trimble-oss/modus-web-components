@@ -1373,6 +1373,10 @@ export namespace Components {
          */
         "required": boolean;
         /**
+          * (optional) Number of rows on textarea for multiline input
+         */
+        "rows": number;
+        /**
           * (optional) The input's size.
          */
         "size": 'medium' | 'large';
@@ -1383,7 +1387,7 @@ export namespace Components {
         /**
           * (optional) The input's type.
          */
-        "type": 'email' | 'password' | 'search' | 'text' | 'tel' | 'url';
+        "type": 'email' | 'password' | 'search' | 'text' | 'textarea' | 'tel' | 'url';
         /**
           * (optional) The input's valid state text.
          */
@@ -4103,6 +4107,10 @@ declare namespace LocalJSX {
          */
         "required"?: boolean;
         /**
+          * (optional) Number of rows on textarea for multiline input
+         */
+        "rows"?: number;
+        /**
           * (optional) The input's size.
          */
         "size"?: 'medium' | 'large';
@@ -4113,7 +4121,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The input's type.
          */
-        "type"?: 'email' | 'password' | 'search' | 'text' | 'tel' | 'url';
+        "type"?: 'email' | 'password' | 'search' | 'text' | 'textarea' | 'tel' | 'url';
         /**
           * (optional) The input's valid state text.
          */

@@ -60,6 +60,9 @@ export class ModusTextInput {
   /** (optional) Whether the input is required. */
   @Prop() required: boolean;
 
+  /** (optional) Number of rows on textarea for multiline input */
+  @Prop() rows = 5;
+
   /** (optional) The input's size. */
   @Prop() size: 'medium' | 'large' = 'medium';
 
@@ -67,7 +70,7 @@ export class ModusTextInput {
   @Prop() textAlign: 'left' | 'right' = 'left';
 
   /** (optional) The input's type. */
-  @Prop() type: 'email' | 'password' | 'search' | 'text' | 'tel' | 'url' = 'text';
+  @Prop() type: 'email' | 'password' | 'search' | 'text' | 'textarea' | 'tel' | 'url' = 'text';
 
   /** (optional) The input's valid state text. */
   @Prop() validText: string;
@@ -139,6 +142,26 @@ export class ModusTextInput {
     }
   }
 
+  get inputAttributeName(): 'input' | 'textarea' {
+    return this.type === 'textarea' ? 'textarea' : 'input';
+  }
+
+  get containerHeight(): number {
+    if (this.type !== 'textarea') {
+      return 2;
+    } else {
+      return this.rows + 1;
+    }
+  }
+
+  get numRows(): number {
+    return this.type === 'textarea' ? this.rows : null;
+  }
+
+  get inputContainerStyle() {
+    return this.type === 'textarea' ? { height: this.containerHeight + 'rem' } : null;
+  }
+
   render(): unknown {
     const iconSize = this.size === 'large' ? '24' : '16';
     const isPassword = this.type === 'password';
@@ -181,10 +204,11 @@ export class ModusTextInput {
           class={`input-container ${this.errorText ? 'error' : this.validText ? 'valid' : ''} ${this.classBySize.get(
             this.size
           )}`}
+          style={this.inputContainerStyle}
           onClick={() => this.textInput.focus()}
           part="input-container">
           {this.includeSearchIcon ? <IconSearch size={iconSize} /> : null}
-          <input
+          <this.inputAttributeName
             id={this.inputId}
             aria-invalid={!!this.errorText}
             aria-label={this.ariaLabel}
@@ -199,6 +223,7 @@ export class ModusTextInput {
             placeholder={this.placeholder}
             readonly={this.readOnly}
             ref={(el) => (this.textInput = el as HTMLInputElement)}
+            rows={this.numRows}
             tabIndex={0}
             type={this.type}
             value={this.value}

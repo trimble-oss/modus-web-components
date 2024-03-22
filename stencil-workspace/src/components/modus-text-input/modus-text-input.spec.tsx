@@ -116,4 +116,40 @@ describe('modus-text-input', () => {
     const modusTextInput = new ModusTextInput();
     expect(modusTextInput.minLength).toBeFalsy();
   });
+
+  it('should default to input type', async () => {
+    const modusTextInput = new ModusTextInput();
+    expect(modusTextInput.type).toBe('text');
+    expect(modusTextInput.inputAttributeName).toBe('input');
+  });
+
+  it('should add a "textarea" tag when type is "textarea"', () => {
+    const modusTextInput = new ModusTextInput();
+    modusTextInput.type = 'textarea';
+    expect(modusTextInput.inputAttributeName).toBe('textarea');
+  });
+
+  it('should default to not including the "rows" attribute', async () => {
+    const modusTextInput = new ModusTextInput();
+    expect(modusTextInput.numRows).toBe(null);
+  });
+
+  it('should default "rows" to 5 when big', async () => {
+    const modusTextInput = new ModusTextInput();
+    modusTextInput.type = 'textarea';
+    expect(modusTextInput.numRows).toBe(5);
+  });
+
+  it('should default to not including the "style" attribute on the input container', async () => {
+    const modusTextInput = new ModusTextInput();
+    expect(modusTextInput.inputContainerStyle).toBe(null);
+  });
+
+  it('should return a correct size when "type" is textarea', async () => {
+    const modusTextInput = new ModusTextInput();
+    modusTextInput.type = 'textarea';
+    expect(modusTextInput.inputContainerStyle.height).toBe('6rem');
+    modusTextInput.rows = 2;
+    expect(modusTextInput.inputContainerStyle.height).toBe('3rem');
+  });
 });
