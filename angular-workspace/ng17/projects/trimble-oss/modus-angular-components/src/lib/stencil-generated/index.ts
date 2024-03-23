@@ -53,6 +53,7 @@ export const DIRECTIVES = [
   d.ModusTableToolbar,
   d.ModusTabs,
   d.ModusTextInput,
+  d.ModusTextareaInput,
   d.ModusTimePicker,
   d.ModusToast,
   d.ModusTooltip,
