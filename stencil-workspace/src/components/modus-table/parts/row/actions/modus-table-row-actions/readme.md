@@ -15,9 +15,9 @@
 
 ## Events
 
-| Event                | Description | Type               |
-| -------------------- | ----------- | ------------------ |
-| `overflowRowActions` |             | `CustomEvent<any>` |
+| Event                | Description | Type                          |
+| -------------------- | ----------- | ----------------------------- |
+| `overflowRowActions` |             | `CustomEvent<OverflowAction>` |
 
 
 ## Dependencies
