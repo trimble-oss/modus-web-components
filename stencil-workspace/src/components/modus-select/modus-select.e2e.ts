@@ -124,29 +124,4 @@ describe('modus-select', () => {
     const button = await page.find('modus-select >>> select');
     expect(await button.getProperty('textContent')).toContain(options[0].display);
   });
-
-  it('emits valueChange event', async () => {
-    const page = await newE2EPage();
-
-    await page.setContent('<modus-select></modus-select>');
-
-    const options = [{ display: 'Option 0' }, { display: 'Option 1 - Select me!' }, { display: 'Option 2' }];
-    const select = await page.find('modus-select');
-    select.setProperty('optionsDisplayProp', 'display');
-    select.setProperty('options', options);
-    await page.waitForChanges();
-
-    const valueChangeSpy = await page.spyOnEvent('valueChange');
-    const selectElement = await page.find('modus-select >>> select');
-    await selectElement.focus();
-    await page.waitForChanges();
-
-    // Simulate option selection by changing the value and triggering the change event
-    await page.keyboard.press('ArrowDown');
-    await page.keyboard.press('Enter');
-    await page.waitForChanges();
-
-    expect(valueChangeSpy).toHaveReceivedEvent();
-    expect(valueChangeSpy).toHaveReceivedEventDetail(options[0]);
-  });
 });

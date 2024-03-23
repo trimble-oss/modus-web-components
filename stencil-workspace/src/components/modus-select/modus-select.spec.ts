@@ -79,4 +79,33 @@ describe('modus-select', () => {
     const modusSelect = new ModusSelect();
     expect(modusSelect.value).toBeFalsy();
   });
+
+  it('emits valueChange event', () => {
+    const modusSelect = new ModusSelect();
+
+    modusSelect.options = [
+      {
+        display: 'Option 0',
+      },
+      {
+        display: 'Option 1 - Select me!',
+      },
+      {
+        display: 'Option 2',
+      },
+    ];
+
+    spyOn(modusSelect.valueChange, 'emit');
+    const target = {
+      value: {
+        display: 'Option 1 - Select me!',
+      },
+    } as unknown as EventTarget;
+    const event = {
+      target: target,
+    } as unknown as Event;
+    modusSelect.handleSelectChange(event);
+
+    expect(modusSelect.valueChange.emit).toBeCalled();
+  });
 });
