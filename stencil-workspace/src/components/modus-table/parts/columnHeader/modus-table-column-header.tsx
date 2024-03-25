@@ -80,16 +80,28 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
         }
       }}>
       {isPlaceholder ? null : ( // header.isPlaceholder is Required for nested column headers to display empty cell
-        <div class={column.getCanSort() && 'can-sort'}>
-          <span class={column.getCanSort() && column.getIsSorted() ? 'sorted' : ''}>{column.columnDef.header}</span>
-          {column.getCanSort() && (
-            <ModusTableColumnSortIcon
-              column={column}
-              sortIconStyle={sortIconStyle}
-              showSortIconOnHover={showSortIconOnHover}
-              isColumnResizing={isColumnResizing}
-            />
-          )}
+        <div
+          class={{
+            'can-sort': column.getCanSort(),
+            'cell-contents': true,
+          }}>
+          <span
+            class={{
+              sorted: column.getCanSort() && column.getIsSorted() !== false,
+              'column-title': true,
+            }}>
+            {column.columnDef.header}
+          </span>
+          <span class="sort-icon">
+            {column.getCanSort() && (
+              <ModusTableColumnSortIcon
+                column={column}
+                sortIconStyle={sortIconStyle}
+                showSortIconOnHover={showSortIconOnHover}
+                isColumnResizing={isColumnResizing}
+              />
+            )}
+          </span>
         </div>
       )}
       {/** Column resizing handler */}

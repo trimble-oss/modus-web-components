@@ -12,11 +12,43 @@ export default {
         type: { summary: 'string' },
       },
     },
+    autocapitalize: {
+      name: 'autocapitalize',
+      control: {
+        options: [
+          'none',
+          'off',
+          'sentences',
+          'on',
+          'words',
+          'characters'
+        ],
+        type: 'select',
+      },
+      description: "Capitalization behavior when using a non-traditional keyboard (e.g. microphone, touch screen)",
+      table: {
+        type: { summary: `boolean | 'none' | 'off' | 'sentences' | 'on' | 'words' | 'characters'` },
+      },
+    },
     autocomplete: {
       name: 'autocomplete',
       description: "The text input's autocomplete",
       table: {
         type: { summary: 'string' },
+      },
+    },
+    autocorrect: {
+      name: 'autocorrect',
+      control: {
+        options: [
+          'off',
+          'on'
+        ],
+        type: 'select',
+      },
+      description: "Whether to activate automatic correction while the user is editing this field in Safari",
+      table: {
+        type: { summary: `boolean | 'off' | 'on'` },
       },
     },
     autoFocusInput: {
@@ -38,6 +70,24 @@ export default {
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },
+      },
+    },
+    enterkeyhint: {
+      control: {
+        options: [
+          'enter',
+          'done',
+          'go',
+          'next',
+          'previous',
+          'search',
+          'send'
+        ],
+        type: 'select',
+      },
+      description: 'Which action label to present for the enter key on virtual keyboards',
+      table: {
+        type: { summary: `'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send'` },
       },
     },
     errorText: {
@@ -141,6 +191,24 @@ export default {
       table: {
         defaultValue: { summary: "'medium'" },
         type: { summary: "'medium' | 'large'" },
+      },
+    },
+    spellcheck: {
+      control: {
+        options: [
+          'none',
+          'off',
+          'sentences',
+          'on',
+          'words',
+          'characters'
+        ],
+        type: 'select',
+      },
+      name: 'autocapitalize',
+      description: "TCapitalization behavior when using a non-traditional keyboard (e.g. microphone, touch screen)",
+      table: {
+        type: { summary: 'boolean' },
       },
     },
     textAlign: {
