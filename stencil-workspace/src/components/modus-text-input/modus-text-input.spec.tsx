@@ -38,6 +38,102 @@ describe('modus-text-input', () => {
     `);
   });
 
+  it('renders autocapitalize', async () => {
+    const page = await newSpecPage({
+      components: [ModusTextInput],
+      html: '<modus-text-input autocapitalize="words"></modus-text-input>',
+    });
+    expect(page.root).toEqualHtml(`
+      <modus-text-input autocapitalize="words">
+        <mock:shadow-root>
+            <div class="modus-text-input">
+                <div class="input-container medium" part="input-container">
+                <input class="text-align-left" id="mwc_id_2_text_input" tabindex="0" autocapitalize="words" type="text">
+                </div>
+            </div>
+        </mock:shadow-root>
+      </modus-text-input>
+    `);
+  });
+
+  it('renders autocorrect', async () => {
+    const page = await newSpecPage({
+      components: [ModusTextInput],
+      html: '<modus-text-input autocorrect="on"></modus-text-input>',
+    });
+    expect(page.root).toEqualHtml(`
+      <modus-text-input autocorrect="on">
+        <mock:shadow-root>
+            <div class="modus-text-input">
+                <div class="input-container medium" part="input-container">
+                <input class="text-align-left" id="mwc_id_3_text_input" tabindex="0" autocorrect="on" type="text">
+                </div>
+            </div>
+        </mock:shadow-root>
+      </modus-text-input>
+    `);
+  });
+
+  it('renders enterkeyhint', async () => {
+    const page = await newSpecPage({
+      components: [ModusTextInput],
+      html: '<modus-text-input enterkeyhint="done"></modus-text-input>',
+    });
+    expect(page.root).toEqualHtml(`
+      <modus-text-input enterkeyhint="done">
+        <mock:shadow-root>
+            <div class="modus-text-input">
+                <div class="input-container medium" part="input-container">
+                <input class="text-align-left" id="mwc_id_4_text_input" tabindex="0" enterkeyhint="done" type="text">
+                </div>
+            </div>
+        </mock:shadow-root>
+      </modus-text-input>
+    `);
+  });
+
+  it('renders spellcheck', async () => {
+    const page = await newSpecPage({
+      components: [ModusTextInput],
+      html: '<modus-text-input spellcheck></modus-text-input>',
+    });
+    expect(page.root).toEqualHtml(`
+      <modus-text-input spellcheck>
+        <mock:shadow-root>
+            <div class="modus-text-input">
+                <div class="input-container medium" part="input-container">
+                <input class="text-align-left" id="mwc_id_5_text_input" tabindex="0" spellcheck type="text">
+                </div>
+            </div>
+        </mock:shadow-root>
+      </modus-text-input>
+    `);
+  });
+
+  it('should set autocapitalize on the input to "on" when "true" is passed in', async () => {
+    const modusTextInput = new ModusTextInput();
+    modusTextInput.autocapitalize = true;
+    expect(modusTextInput.inputAutocapitalize).toEqual('on');
+  });
+
+  it('should set autocapitalize on the input to "off" when "false" is passed in', async () => {
+    const modusTextInput = new ModusTextInput();
+    modusTextInput.autocapitalize = false;
+    expect(modusTextInput.inputAutocapitalize).toEqual('off');
+  });
+
+  it('should set autocorrect on the input to "on" when "true" is passed in', async () => {
+    const modusTextInput = new ModusTextInput();
+    modusTextInput.autocorrect = true;
+    expect(modusTextInput.inputAutocorrect).toEqual('on');
+  });
+
+  it('should set autocorrect on the input to "off" when "false" is passed in', async () => {
+    const modusTextInput = new ModusTextInput();
+    modusTextInput.autocorrect = false;
+    expect(modusTextInput.inputAutocorrect).toEqual('off');
+  });
+
   it('should get the correct class by size', async () => {
     const modusTextInput = new ModusTextInput();
     let className = modusTextInput.classBySize.get(modusTextInput.size);
