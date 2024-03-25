@@ -177,6 +177,7 @@
 
         &.disabled {
           opacity: $modus-date-picker-calendar-day-disabled-opacity;
+          pointer-events: none;
         }
 
         &.range-selected {
