@@ -223,6 +223,7 @@ const Template = ({
   validText,
   value,
 }) => html`
+<form>
   <modus-text-input
     aria-label=${ariaLabel}
     autocomplete=${autocomplete}
@@ -245,11 +246,12 @@ const Template = ({
     type=${type}
     valid-text=${validText}
     value=${value}></modus-text-input>
+</form>
 `;
 
 export const Default = Template.bind({});
 Default.args = {
-  ariaLabel: 'Text Input',
+  ariaLabel: '',
   autocomplete: '',
   autoFocusInput: true,
   clearable: false,
@@ -259,8 +261,8 @@ Default.args = {
   includePasswordTextToggle: true,
   includeSearchIcon: false,
   inputmode: '',
-  label: '',
-  maxLength: 100,
+  label: 'Username',
+  maxLength: 20,
   minLength: 0,
   placeholder: '',
   readOnly: false,
@@ -269,5 +271,5 @@ Default.args = {
   textAlign: 'left',
   type: 'text',
   validText: '',
-  value: 'Hello, text input!',
+  value: '',
 };
