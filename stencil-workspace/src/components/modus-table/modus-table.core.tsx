@@ -92,6 +92,7 @@ export default class ModusTableCore {
     const { multiple, subRowSelection } = rowSelectionOptions;
     const defaultSortState = defaultSort ? [defaultSort] : [];
     const options: TableOptionsResolved<unknown> = {
+      autoResetPageIndex: false,
       data: data ?? [],
       columns: (columns as ColumnDef<unknown>[]) ?? [],
       state: {
@@ -103,9 +104,9 @@ export default class ModusTableCore {
         expanded: null,
         sorting: manualSorting ? sortingState : defaultSortState,
         rowSelection: preSelectedRows,
-        pagination: pagination && {
+        pagination: {
           pageIndex: 0,
-          pageSize: pageSizeList[0],
+          pageSize: pagination ? pageSizeList[0] : data?.length,
         },
       },
       enableRowSelection: rowSelection,
@@ -130,7 +131,7 @@ export default class ModusTableCore {
       onColumnVisibilityChange: setColumnVisibility,
       onColumnOrderChange: setColumnOrder,
       getCoreRowModel: getCoreRowModel(),
-      getPaginationRowModel: pagination && getPaginationRowModel(),
+      getPaginationRowModel: getPaginationRowModel(),
       getSortedRowModel: getSortedRowModel(),
       getExpandedRowModel: getExpandedRowModel(),
       getSubRows: (row) => row[COLUMN_DEF_SUB_ROWS_KEY],

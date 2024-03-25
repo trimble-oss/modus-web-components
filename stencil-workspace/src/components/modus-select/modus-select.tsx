@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Component, Event, EventEmitter, h, JSX, Method, Prop, State, Watch } from '@stencil/core';
-import { createGuid } from '../../utils/utils';
+import { createGuid, generateElementId } from '../../utils/utils';
 
 @Component({
   tag: 'modus-select',
@@ -57,6 +57,8 @@ export class ModusSelect {
   @State() internalValue: unknown;
   @State() optionIdMap: Map<string, unknown> = new Map();
 
+  private selectId = generateElementId() + '_select';
+
   selectInput: HTMLSelectElement;
 
   classBySize: Map<string, string> = new Map([
@@ -99,7 +101,7 @@ export class ModusSelect {
   renderLabel(): JSX.Element | null {
     return this.label || this.required ? (
       <div class="label-container">
-        {this.label ? <label>{this.label}</label> : null}
+        {this.label ? <label htmlFor={this.selectId}>{this.label}</label> : null}
         {this.required ? <span class="required">*</span> : null}
       </div>
     ) : null;
@@ -129,6 +131,7 @@ export class ModusSelect {
             part="input"
             ref={(el) => (this.selectInput = el)}
             disabled={this.disabled}
+            id={this.selectId}
             class={selectClass}
             aria-label={this.ariaLabel}
             onBlur={(e) => this.inputBlur.emit(e)}
