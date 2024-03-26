@@ -1,4 +1,4 @@
-// eslint-disable-next-line
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Component, Prop, h, Event, EventEmitter, State, Element, Listen } from '@stencil/core';
 
 @Component({
@@ -131,7 +131,6 @@ export class ModusDropdown {
       <div
         aria-label={this.ariaLabel}
         class="dropdown"
-        role="listbox"
         onClick={(event) => this.handleDropdownClick(event)}
         onKeyDown={(event) => {
           this.handleDropdownKeyDown(event);

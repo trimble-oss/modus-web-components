@@ -1,8 +1,10 @@
+
 import * as d from './components';
 
 export const DIRECTIVES = [
   d.ModusAccordion,
   d.ModusAccordionItem,
+  d.ModusActionBar,
   d.ModusAlert,
   d.ModusAutocomplete,
   d.ModusBadge,
@@ -16,6 +18,7 @@ export const DIRECTIVES = [
   d.ModusDatePicker,
   d.ModusDropdown,
   d.ModusFileDropzone,
+  d.ModusIcon,
   d.ModusList,
   d.ModusListItem,
   d.ModusMessage,
@@ -32,16 +35,27 @@ export const DIRECTIVES = [
   d.ModusProgressBar,
   d.ModusRadioGroup,
   d.ModusSelect,
+  d.ModusSentimentScale,
   d.ModusSideNavigation,
   d.ModusSideNavigationItem,
   d.ModusSlider,
   d.ModusSpinner,
   d.ModusSwitch,
+  d.ModusTable,
+  d.ModusTableCellEditor,
+  d.ModusTableCellMain,
+  d.ModusTableColumnsVisibility,
+  d.ModusTableDropdownMenu,
+  d.ModusTableFillerColumn,
+  d.ModusTableRowActions,
+  d.ModusTableRowActionsCell,
+  d.ModusTableRowActionsMenu,
+  d.ModusTableToolbar,
   d.ModusTabs,
   d.ModusTextInput,
   d.ModusTimePicker,
   d.ModusToast,
   d.ModusTooltip,
   d.ModusTreeView,
-  d.ModusTreeViewItem,
+  d.ModusTreeViewItem
 ];

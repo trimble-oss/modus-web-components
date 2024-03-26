@@ -35,10 +35,38 @@ export const config: Config = {
     },
     angularOutputTarget({
       componentCorePackage: '@trimble-oss/modus-web-components',
+      outputType: 'component',
       directivesProxyFile:
-        '../angular-workspace/projects/trimble-oss/modus-angular-components/src/lib/stencil-generated/components.ts',
+        '../angular-workspace/ng14/projects/trimble-oss/modus-angular-components/src/lib/stencil-generated/components.ts',
       directivesArrayFile:
-        '../angular-workspace/projects/trimble-oss/modus-angular-components/src/lib/stencil-generated/index.ts',
+        '../angular-workspace/ng14/projects/trimble-oss/modus-angular-components/src/lib/stencil-generated/index.ts',
+      valueAccessorConfigs: angularValueAccessorBindings,
+    }),
+    angularOutputTarget({
+      componentCorePackage: '@trimble-oss/modus-web-components',
+      outputType: 'component',
+      directivesProxyFile:
+        '../angular-workspace/ng15/projects/trimble-oss/modus-angular-components/src/lib/stencil-generated/components.ts',
+      directivesArrayFile:
+        '../angular-workspace/ng15/projects/trimble-oss/modus-angular-components/src/lib/stencil-generated/index.ts',
+      valueAccessorConfigs: angularValueAccessorBindings,
+    }),
+    angularOutputTarget({
+      componentCorePackage: '@trimble-oss/modus-web-components',
+      outputType: 'component',
+      directivesProxyFile:
+        '../angular-workspace/ng16/projects/trimble-oss/modus-angular-components/src/lib/stencil-generated/components.ts',
+      directivesArrayFile:
+        '../angular-workspace/ng16/projects/trimble-oss/modus-angular-components/src/lib/stencil-generated/index.ts',
+      valueAccessorConfigs: angularValueAccessorBindings,
+    }),
+    angularOutputTarget({
+      componentCorePackage: '@trimble-oss/modus-web-components',
+      outputType: 'component',
+      directivesProxyFile:
+        '../angular-workspace/ng17/projects/trimble-oss/modus-angular-components/src/lib/stencil-generated/components.ts',
+      directivesArrayFile:
+        '../angular-workspace/ng17/projects/trimble-oss/modus-angular-components/src/lib/stencil-generated/index.ts',
       valueAccessorConfigs: angularValueAccessorBindings,
     }),
     react({

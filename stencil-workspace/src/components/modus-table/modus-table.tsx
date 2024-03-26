@@ -107,6 +107,18 @@ export class ModusTable {
   /** (Required) To display data in the table. */
   @Prop({ mutable: true }) data!: unknown[];
   @Watch('data') onDataChange(newVal: unknown[]) {
+    if (this.pagination && !this.manualPaginationOptions) {
+      const maxPageIndex = Math.ceil(this.data.length / this.tableState.pagination.pageSize) - 1;
+
+      if (this.tableState.pagination.pageIndex > maxPageIndex) {
+        this.tableState.pagination.pageIndex = maxPageIndex >= 0 ? maxPageIndex : 0;
+      }
+    }
+    this.tableCore.setState('pagination', {
+      ...this.tableState.pagination,
+      pageIndex: this.tableState.pagination.pageIndex,
+      pageSize: this.pagination ? this.tableState.pagination.pageSize : this.data.length,
+    });
     this.tableCore?.setOptions('data', newVal);
   }
 
@@ -136,6 +148,17 @@ export class ModusTable {
 
   /* (optional) To enable pagination for the table. */
   @Prop() pagination: boolean;
+  @Watch('pagination')
+  onPaginationChange(newVal: boolean) {
+    if (newVal) {
+      this.tableState.pagination.pageIndex = 0;
+      this.tableState.pagination.pageSize = this.pageSizeList[0];
+    }
+    this.tableCore?.setState('pagination', {
+      pageIndex: 0,
+      pageSize: newVal === true ? this.pageSizeList[0] : this.data.length,
+    });
+  }
 
   /** (Optional) Actions that can be performed on each row. A maximum of 4 icons will be shown, including overflow menu and expand icons. */
   @Prop() rowActions: ModusTableRowAction[] = [];
@@ -330,10 +353,10 @@ export class ModusTable {
 
   componentWillLoad(): void {
     this._id = this.element.id || `modus-table-${createGuid()}`;
-    this.columns = this.columns?.map((column) => {
-      column.sortingFn = column.sortingFn ?? 'alphanumeric';
-      return column;
-    });
+    this.columns = this.columns?.map((column) => ({
+      ...column,
+      sortingFn: column.sortingFn ?? 'alphanumeric',
+    }));
 
     const initialTableState: TableState = {
       columnOrder: this.columns?.map((column) => column.id as string),

@@ -15,7 +15,7 @@
   "author": "Trimble Inc",
   "scripts": {
     "prettier": "npx prettier --write \"**/*.yml\"",
-    "build-angular": "cd angular-workspace/ng14 && npm run build && cd ../ng15 && npm ci && npm run build && cd ../ng16 && npm ci && npm run build && cd ../ng17 && npm ci && npm run build",
+    "build-angular": "cd angular-workspace/ng14 && npm ci && npm run build && cd ../ng15 && npm ci && npm run build && cd ../ng16 && npm ci && npm run build && cd ../ng17 && npm ci && npm run build",
     "update-mwc-dependants": "cd angular-workspace/ng14/projects/trimble-oss/modus-angular-components && npx npm-check-updates -u --dep peer @trimble-oss* && npm i && cd ../../../../ng15/projects/trimble-oss/modus-angular-components && npx npm-check-updates -u --dep peer @trimble-oss* && npm i && cd ../../../../ng16/projects/trimble-oss/modus-angular-components && npx npm-check-updates -u --dep peer @trimble-oss* && npm i && cd ../../../../ng17/projects/trimble-oss/modus-angular-components && npx npm-check-updates -u --dep peer @trimble-oss* && npm i && cd ../../../../../react-workspace/react-17 && npx npm-check-updates -u @trimble-oss* && npm i && cd ../react-18 && npx npm-check-updates -u @trimble-oss* && npm i"
   },
   "engines": {
