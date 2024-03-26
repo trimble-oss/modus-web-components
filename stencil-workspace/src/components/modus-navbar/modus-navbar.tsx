@@ -50,7 +50,7 @@ export class ModusNavbar {
   @Prop() enableSearchOverlay: boolean;
 
   /** (optional) whether the dynamic button slot is open or not */
-  @Prop() isDynamicButtonSlotOpen: boolean;
+  @Prop({ mutable: true }) isDynamicButtonSlotOpen: boolean;
 
   /** (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels. */
   @Prop() logoOptions: ModusNavbarLogoOptions;
