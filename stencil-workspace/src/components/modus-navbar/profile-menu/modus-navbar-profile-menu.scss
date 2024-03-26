@@ -80,6 +80,8 @@
       align-items: center;
       display: flex;
       flex-direction: row;
+      white-space: normal;
+      word-wrap: break-word;
     }
 
     .icon {
