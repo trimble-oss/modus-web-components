@@ -239,6 +239,7 @@ export class ModusDatePicker {
                       'calendar-day grid-item': false,
                       disabled: true,
                     }}
+                    disabled
                     tabIndex={-1}>
                     &nbsp;
                   </button>
@@ -281,7 +282,7 @@ export class ModusDatePicker {
                   }}
                   disabled={isDateDisabled}
                   tabIndex={0}
-                  aria-current="date"
+                  aria-current={isSelected ? 'date' : undefined}
                   onClick={() => this.pickCalendarDate(date)}
                   {...onBlurEvent}>
                   {date.getDate()}
