@@ -113,11 +113,11 @@ export const ModusTableColumnHeaderLabel: FunctionalComponent<ModusTableColumnHe
     if (canSort) {
       disableToolTip(element, true);
     }
-  }
+  };
 
   const containerProps = {
     'aria-label': sortingStatus,
-    role: "button",
+    role: 'button',
     onClick: column.getToggleSortingHandler(),
     onMouseLeave: () => disableAllTooltip(false),
     onKeyDown: (event) => sortOnKeyDown(column, event),
@@ -133,9 +133,8 @@ export const ModusTableColumnHeaderLabel: FunctionalComponent<ModusTableColumnHe
           class={`header-text ${canSort && isSorted ? 'sorted' : ''}`}
           onMouseEnter={() => {
             const sortIconToolTip = headerContentRef.children[1];
-            handleDisableElement(sortIconToolTip)
-          }}
-          >
+            handleDisableElement(sortIconToolTip);
+          }}>
           {column.columnDef.header}
         </span>
       </modus-tooltip>
@@ -147,14 +146,13 @@ export const ModusTableColumnHeaderLabel: FunctionalComponent<ModusTableColumnHe
     return (
       <modus-tooltip class="modus-tooltip-sort-icon" text={sortingStatus} position="bottom">
         <span
-            {...containerProps}
-            tabindex="0"
-            class="sort-icon-container"
-            onMouseEnter={() => {
-              const headerTextToolTip = headerContentRef.children[0];
-              handleDisableElement(headerTextToolTip)
-            }}
-          >
+          {...containerProps}
+          tabindex="0"
+          class="sort-icon-container"
+          onMouseEnter={() => {
+            const headerTextToolTip = headerContentRef.children[0];
+            handleDisableElement(headerTextToolTip);
+          }}>
           <span class={`sort-icon ${!isSorted && 'disabled'} ${showSortIconOnHover ? 'hidden' : ''}`}>
             {renderSortIcon(isSorted, sortIconStyle)}
           </span>
