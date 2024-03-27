@@ -170,6 +170,64 @@ It is located on the left side of the screen and cannot be combined with Side Na
 </modus-tree-view>
 ```
 
+### Borderless
+
+<Story id="components-content-tree--borderless" />
+
+```html
+<modus-tree-view
+  borderless="true"
+  style="width:400px;"
+  checkbox-selection="true"
+  checked-items="false"
+  expanded-items="false"
+  multi-checkbox-selection="false"
+  multi-selection="false"
+  selected-items="false"
+  size="condensed">
+  <modus-tree-view-item node-id="1" label="Inbox" class="hydrated">
+    <modus-tree-view-item
+      node-id="2"
+      label="Personal"
+      class="hydrated"></modus-tree-view-item>
+    <modus-tree-view-item
+      node-id="3"
+      label="Work"
+      class="hydrated"></modus-tree-view-item>
+    <modus-tree-view-item
+      node-id="4"
+      label="Social"
+      class="hydrated"></modus-tree-view-item>
+    <modus-tree-view-item
+      node-id="5"
+      label="More ..."
+      class="hydrated"></modus-tree-view-item>
+  </modus-tree-view-item>
+  <modus-tree-view-item node-id="6" label="Archived" class="hydrated">
+    <modus-tree-view-item node-id="7" label="Folder1" class="hydrated">
+      <modus-tree-view-item
+        node-id="8"
+        label="File1"
+        class="hydrated"></modus-tree-view-item>
+      <modus-tree-view-item node-id="9" label="Folder2" class="hydrated">
+        <modus-tree-view-item
+          node-id="10"
+          label="File2"
+          class="hydrated"></modus-tree-view-item>
+      </modus-tree-view-item>
+      <modus-tree-view-item
+        node-id="11"
+        label="File3"
+        class="hydrated"></modus-tree-view-item>
+    </modus-tree-view-item>
+  </modus-tree-view-item>
+  <modus-tree-view-item
+    node-id="12"
+    label="Spam"
+    class="hydrated"></modus-tree-view-item>
+</modus-tree-view>
+```
+
 ### Multi Selection
 
 <Story id="components-content-tree--multi-selection" />
@@ -686,6 +744,7 @@ Every item and the elements such as drag icon, expand & collapse icon and the ch
 
 | Property                 | Attribute                  | Description                                                                                                                                                                                   | Type                                   | Default      |
 | ------------------------ | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- | ------------ |
+| `borderless`             | `borderless`               | (optional) Whether the content tree and items have a border or not                                                                                                                            | `boolean`                              | `undefined`  |
 | `checkboxSelection`      | `checkbox-selection`       | (optional) Enables checkbox selection on each tree item                                                                                                                                       | `boolean`                              | `undefined`  |
 | `checkedItems`           | --                         | (optional) Set checked tree items                                                                                                                                                             | `string[]`                             | `[]`         |
 | `disableTabbing`         | `disable-tabbing`          | (optional) Disable usage of <kbd>Tab</kbd> key to focus elements inside a tree view. Use `Arrow Up/Down` for focussing a tree item and `Shift + Arrow Right` for focussing a checkbox inside the item. | `boolean`                              | `undefined`  |

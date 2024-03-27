@@ -46,6 +46,13 @@ export default {
         type: { summary: `'condensed' | 'standard' | 'large' ` },
       },
     },
+    borderless: {
+      description:
+        'Whether the content tree and items have a border or not. Default is `false`.',
+      table: {
+        type: { summary: 'boolean' },
+      },
+    },
   },
   parameters: {
     docs: {
@@ -63,6 +70,7 @@ export default {
 };
 
 const Template = ({
+  borderless,
   checkboxSelection,
   multiCheckboxSelection,
   multiSelection,
@@ -71,6 +79,7 @@ const Template = ({
 }) => html`
   <modus-tree-view
     style="width:400px;"
+    borderless=${borderless ? 'true' : 'false'}
     checkbox-selection=${checkboxSelection ? 'true' : 'false'}
     disable-tabbing=${disableTabbing ? 'true' : 'false'}
     multi-checkbox-selection=${multiCheckboxSelection ? 'true' : 'false'}
@@ -98,6 +107,7 @@ const Template = ({
 `;
 
 const SlotIconTemplate = ({
+  borderless,
   checkboxSelection,
   multiCheckboxSelection,
   multiSelection,
@@ -105,6 +115,7 @@ const SlotIconTemplate = ({
   size,
 }) => html`
   <modus-tree-view style="width:400px;"
+  borderless=${borderless ? 'true' : 'false'}
   checkbox-selection=${checkboxSelection ? 'true' : 'false'}
   disable-tabbing=${disableTabbing ? 'true' : 'false'}
   multi-checkbox-selection=${multiCheckboxSelection ? 'true' : 'false'}
@@ -131,6 +142,7 @@ const SlotIconTemplate = ({
 
 export const Default = Template.bind({});
 Default.args = {
+  borderless: false,
   checkboxSelection: false,
   disableTabbing: false,
   multiCheckboxSelection: false,
@@ -147,6 +159,9 @@ WithIcon.args = {...Default.args,
 export const Condensed = Template.bind({});
 Condensed.args = { ...Default.args, checkboxSelection: true, size: 'condensed' };
 
+export const Borderless = Template.bind({});
+Borderless.args = { ...Default.args, borderless: true };
+
 export const MultiSelection = Template.bind({});
 MultiSelection.args = {...Default.args,
   multiSelection: true,
@@ -155,6 +170,7 @@ MultiSelection.args = {...Default.args,
 };
 
 const ActionBarTemplate = ({
+  borderless,
   checkboxSelection,
   multiCheckboxSelection,
   multiSelection,
@@ -297,11 +313,13 @@ const ActionBarTemplate = ({
         </svg>
       </modus-button>
     </div>
-    <modus-tree-view checkbox-selection=${checkboxSelection ? 'true' : 'false'}
-    disable-tabbing=${disableTabbing ? 'true' : 'false'}
-    multi-checkbox-selection=${multiCheckboxSelection ? 'true' : 'false'}
-    multi-selection=${multiSelection ? 'true' : 'false'}
-    size=${size}>
+    <modus-tree-view
+      borderless=${borderless ? 'true' : 'false'}
+      checkbox-selection=${checkboxSelection ? 'true' : 'false'}
+      disable-tabbing=${disableTabbing ? 'true' : 'false'}
+      multi-checkbox-selection=${multiCheckboxSelection ? 'true' : 'false'}
+      multi-selection=${multiSelection ? 'true' : 'false'}
+      size=${size}>
       <modus-tree-view-item node-Id="1" label="Inbox">
         <modus-tree-view-item
           node-Id="2"
@@ -474,6 +492,7 @@ CustomActionBar.args = {...Default.args,
 };
 
 const FilterTemplate = ({
+  borderless,
   checkboxSelection,
   multiCheckboxSelection,
   multiSelection,
@@ -490,11 +509,13 @@ const FilterTemplate = ({
       type="search"
       disabled="true"
       include-search-icon></modus-text-input>
-    <modus-tree-view checkbox-selection=${checkboxSelection ? 'true' : 'false'}
-    disable-tabbing=${disableTabbing ? 'true' : 'false'}
-    multi-checkbox-selection=${multiCheckboxSelection ? 'true' : 'false'}
-    multi-selection=${multiSelection ? 'true' : 'false'}
-    size=${size}>
+    <modus-tree-view
+      borderless=${borderless ? 'true' : 'false'}
+      checkbox-selection=${checkboxSelection ? 'true' : 'false'}
+      disable-tabbing=${disableTabbing ? 'true' : 'false'}
+      multi-checkbox-selection=${multiCheckboxSelection ? 'true' : 'false'}
+      multi-selection=${multiSelection ? 'true' : 'false'}
+      size=${size}>
       <modus-tree-view-item node-Id="1">
         <div slot="label">Inbox</div>
         <modus-tree-view-item node-Id="2">
@@ -596,6 +617,7 @@ CustomFilter.args = {...Default.args,
 };
 
 const WithItemActionBarTemplate = ({
+  borderless,
   checkboxSelection,
   multiCheckboxSelection,
   multiSelection,
@@ -606,6 +628,7 @@ const WithItemActionBarTemplate = ({
     style="display: flex; flex-direction: column; width: 400px;">
     <modus-tree-view
       style="width:400px;"
+      borderless=${borderless}
       checkbox-selection=${checkboxSelection}
       checked-items="false"
       expanded-items="false"

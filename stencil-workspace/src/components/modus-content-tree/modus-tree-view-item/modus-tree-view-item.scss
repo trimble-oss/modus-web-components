@@ -26,6 +26,10 @@
     }
   }
 
+  &.borderless {
+    border: none;
+  }
+
   &.disabled {
     color: $modus-tree-view-item-disabled-color;
     cursor: default !important;

@@ -159,7 +159,7 @@ export default {
 };
 
 const defaultArgs = {
-  ariaLabel: 'Date Input',
+  ariaLabel: '',
   allowedCharsRegex: '[\\d\\/]',
   altFormats: '',
   autoFocusInput: true,
@@ -312,6 +312,7 @@ DateRange.args = {
 const DefaultWithPickerTemplate = ({
     ariaLabel,
     allowedCharsRegex,
+    altFormats,
     autoFocusInput,
     disableValidation,
     disabled,
@@ -333,6 +334,7 @@ const DefaultWithPickerTemplate = ({
     <modus-date-input
       allowed-chars-regex=${allowedCharsRegex}
       aria-label=${ariaLabel}
+      alt-formats=${altFormats}
       auto-focus-input=${autoFocusInput}
       disable-validation=${disableValidation}
       ?disabled=${disabled}
