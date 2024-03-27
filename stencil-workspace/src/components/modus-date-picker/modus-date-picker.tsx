@@ -214,7 +214,7 @@ export class ModusDatePicker {
     const startDate = this._dateInputs['start']?.getDate();
     const endDate = this._dateInputs['end']?.getDate();
     const singleDate = this._dateInputs['single']?.getDate();
-    //Get day of the week and prepare blank cells to render the calendar dates properly
+    // Get day of the week and prepare blank cells to render the calendar dates properly
     const firstDay = new Date(this._calendar.selectedYear, this._calendar.selectedMonth)?.getDay();
     const blankDatesArr = new Array(firstDay).fill(0);
     return (
@@ -239,6 +239,7 @@ export class ModusDatePicker {
                       'calendar-day grid-item': false,
                       disabled: true,
                     }}
+                    disabled
                     tabIndex={-1}>
                     &nbsp;
                   </button>
@@ -281,7 +282,8 @@ export class ModusDatePicker {
                   }}
                   disabled={isDateDisabled}
                   tabIndex={0}
-                  aria-current="date"
+                  type="button"
+                  aria-current={isSelected ? 'date' : undefined}
                   onClick={() => this.pickCalendarDate(date)}
                   {...onBlurEvent}>
                   {date.getDate()}
@@ -305,24 +307,27 @@ export class ModusDatePicker {
   private renderCalendarHeader() {
     return (
       <div class="calendar-header">
-        <button aria-label="Previous Month" onClick={() => this.addMonthOffset(-1)}>
+        <button type="button" aria-label="Previous Month" onClick={() => this.addMonthOffset(-1)}>
           <ModusIconMap icon="chevron_left_bold"></ModusIconMap>
         </button>
 
         <div class="title">
-          <span tabIndex={0} class="calendar-title" aria-label="ModusCalendar title" role="title">
-            {`${this._calendar?.month} ${this._calendar?.year}`}
-          </span>
+          <div class="calendar-title" role="heading">{`${this._calendar?.month} ${this._calendar?.year}`}</div>
           <div class="year-icons">
-            <button tabIndex={0} aria-label="Next Year" onClick={() => this.addYearOffset(1)} class="year-up">
+            <button type="button" tabIndex={0} aria-label="Next Year" onClick={() => this.addYearOffset(1)} class="year-up">
               <ModusIconMap icon="caret_up" size="16"></ModusIconMap>
             </button>
-            <button tabIndex={0} aria-label="Previous Year" onClick={() => this.addYearOffset(-1)} class="year-down">
+            <button
+              type="button"
+              tabIndex={0}
+              aria-label="Previous Year"
+              onClick={() => this.addYearOffset(-1)}
+              class="year-down">
               <ModusIconMap size="16" icon="caret_down"></ModusIconMap>
             </button>
           </div>
         </div>
-        <button tabIndex={0} aria-label="Next Month" onClick={() => this.addMonthOffset(1)}>
+        <button type="button" tabIndex={0} aria-label="Next Month" onClick={() => this.addMonthOffset(1)}>
           <ModusIconMap icon="chevron_right_bold"></ModusIconMap>
         </button>
       </div>

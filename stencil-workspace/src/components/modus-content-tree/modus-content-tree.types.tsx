@@ -21,6 +21,7 @@ export type TreeViewItemOptions = {
   onItemDrag?: (itemId: string, dragContent: HTMLElement, e: MouseEvent) => void;
   onItemUpdate?: (newValue: TreeViewItemInfo, oldValue?: TreeViewItemInfo) => void;
   size?: string;
+  borderless?: boolean;
 };
 
 export type TreeViewItemInfo = {
