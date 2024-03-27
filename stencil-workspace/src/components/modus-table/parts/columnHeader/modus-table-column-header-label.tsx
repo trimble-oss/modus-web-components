@@ -116,7 +116,6 @@ export const ModusTableColumnHeaderLabel: FunctionalComponent<ModusTableColumnHe
   }
 
   const containerProps = {
-    tabindex: "0",
     'aria-label': sortingStatus,
     role: "button",
     onClick: column.getToggleSortingHandler(),
@@ -149,6 +148,7 @@ export const ModusTableColumnHeaderLabel: FunctionalComponent<ModusTableColumnHe
       <modus-tooltip class="modus-tooltip-sort-icon" text={sortingStatus} position="bottom">
         <span
             {...containerProps}
+            tabindex="0"
             class="sort-icon-container"
             onMouseEnter={() => {
               const headerTextToolTip = headerContentRef.children[0];
