@@ -741,10 +741,6 @@ export namespace Components {
         "helpUrl": string;
         "hideMainMenu": () => Promise<void>;
         /**
-          * (optional) whether the dynamic button slot is open or not
-         */
-        "isDynamicButtonSlotOpen": boolean;
-        /**
           * (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels.
          */
         "logoOptions": ModusNavbarLogoOptions;
@@ -3341,10 +3337,6 @@ declare namespace LocalJSX {
           * (optional) Help URL.
          */
         "helpUrl"?: string;
-        /**
-          * (optional) whether the dynamic button slot is open or not
-         */
-        "isDynamicButtonSlotOpen"?: boolean;
         /**
           * (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels.
          */
