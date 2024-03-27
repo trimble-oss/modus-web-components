@@ -64,7 +64,7 @@ export class ModusSwitch {
     const switchClassName = `switch ${this.checked ? 'checked' : ''}`;
 
     return (
-      <div class={containerClassName} onClick={() => this.handleSwitchClick()} tabIndex={0}>
+      <div class={containerClassName} onClick={() => this.handleSwitchClick()} tabIndex={this.disabled ? -1 : 0}>
         <div class={switchClassName}>
           <span class={`slider`}></span>
         </div>
