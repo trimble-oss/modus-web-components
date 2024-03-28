@@ -7,19 +7,18 @@ import { Column, RowData, SortDirection } from '@tanstack/table-core';
 import { ModusIconMap } from '../../../../icons/ModusIconMap';
 import {
   KEYBOARD_ENTER,
-  SORTED_ASCENDING,
-  SORTED_DESCENDING,
   SORT_ASCENDING,
   SORT_DESCENDING,
+  SORTED_ASCENDING,
+  SORTED_DESCENDING,
 } from '../../modus-table.constants';
 
-type ModusTableColumnHeaderLabelProps = {
-  showSortIconOnHover: boolean;
+interface ModusTableColumnHeaderLabelProps {
+  column: Column<RowData, unknown>;
   isColumnResizing: boolean;
   sortIconStyle: 'alphabetical' | 'directional';
-  column: Column<RowData, any>;
-  disableAllTooltip?: (show: boolean) => void;
-};
+  showSortIconOnHover: boolean;
+}
 
 const ICON_SIZE = '16';
 
@@ -61,25 +60,6 @@ function getAlphabeticalSortIcon(direction: false | SortDirection): string {
 }
 
 /**
- * Toggles column sort on 'Enter' key press.
- * @param column Data related to the perticular column.
- * @param event Keyboard event.
- */
-function sortOnKeyDown(column: Column<unknown, unknown>, event: KeyboardEvent): void {
-  if (event.key.toLowerCase() === KEYBOARD_ENTER) {
-    column.toggleSorting();
-    event.preventDefault();
-  }
-  event.stopPropagation();
-}
-
-function disableToolTip(element: Element, value: boolean) {
-  if (element) {
-    element.setAttribute('disabled', `${value}`);
-  }
-}
-
-/**
  * To show sorting status.
  * @param column Data related to the perticular column.
  * @returns Active sort or sort that will occur.
@@ -96,45 +76,45 @@ function getSortingStatus(column: Column<unknown, unknown>, isColumnResizing: bo
           : SORT_DESCENDING;
 }
 
-export const ModusTableColumnHeaderLabel: FunctionalComponent<ModusTableColumnHeaderLabelProps> = ({
-  showSortIconOnHover,
-  sortIconStyle,
-  isColumnResizing,
-  column,
-  disableAllTooltip,
-}) => {
-  let headerContentRef: HTMLTableCellElement;
+/**
+ * Toggles column sort on 'Enter' key press.
+ * @param column Data related to the perticular column.
+ * @param event Keyboard event.
+ */
+function sortOnKeyDown(column: Column<unknown, unknown>, event: KeyboardEvent): void {
+  if (event.key.toLowerCase() === KEYBOARD_ENTER) {
+    column.toggleSorting();
+    event.preventDefault();
+  }
+  event.stopPropagation();
+}
 
+export const ModusTableColumnHeaderLabel: FunctionalComponent<ModusTableColumnHeaderLabelProps> = ({
+  column,
+  isColumnResizing,
+  sortIconStyle,
+  showSortIconOnHover,
+}) => {
   const sortingStatus = getSortingStatus(column, isColumnResizing);
   const canSort = column.getCanSort();
   const isSorted = column.getIsSorted();
-
-  const handleDisableElement = (element) => {
-    if (canSort) {
-      disableToolTip(element, true);
-    }
-  };
 
   const containerProps = {
     'aria-label': sortingStatus,
     role: 'button',
     onClick: column.getToggleSortingHandler(),
-    onMouseLeave: () => disableAllTooltip(false),
     onKeyDown: (event) => sortOnKeyDown(column, event),
     onMouseDown: (event: MouseEvent) => event.stopPropagation(),
-    onBlur: () => canSort && disableAllTooltip(false),
   };
 
   const HeaderText = () => {
+    if (!canSort) {
+      return column.columnDef.header;
+    }
+
     return (
-      <modus-tooltip text={sortingStatus} disabled={!canSort}>
-        <span
-          {...containerProps}
-          class={`header-text ${canSort && isSorted ? 'sorted' : ''}`}
-          onMouseEnter={() => {
-            const sortIconToolTip = headerContentRef.children[1];
-            handleDisableElement(sortIconToolTip);
-          }}>
+      <modus-tooltip text={sortingStatus}>
+        <span {...containerProps} class={`header-text ${canSort && isSorted ? 'sorted' : ''}`}>
           {column.columnDef.header}
         </span>
       </modus-tooltip>
@@ -142,17 +122,13 @@ export const ModusTableColumnHeaderLabel: FunctionalComponent<ModusTableColumnHe
   };
 
   const SortIcon = () => {
-    if (!canSort) return null;
+    if (!canSort) {
+      return null;
+    }
+
     return (
       <modus-tooltip class="modus-tooltip-sort-icon" text={sortingStatus} position="bottom">
-        <span
-          {...containerProps}
-          tabindex="0"
-          class="sort-icon-container"
-          onMouseEnter={() => {
-            const headerTextToolTip = headerContentRef.children[0];
-            handleDisableElement(headerTextToolTip);
-          }}>
+        <span {...containerProps} tabindex="0" class="sort-icon-container">
           <span class={`sort-icon ${!isSorted && 'disabled'} ${showSortIconOnHover ? 'hidden' : ''}`}>
             {renderSortIcon(isSorted, sortIconStyle)}
           </span>
@@ -162,13 +138,7 @@ export const ModusTableColumnHeaderLabel: FunctionalComponent<ModusTableColumnHe
   };
 
   return (
-    // header.isPlaceholder is Required for nested column headers to display empty cell
-    <span
-      onMouseDown={(event: MouseEvent) => event.stopPropagation()}
-      class={canSort && 'can-sort'}
-      ref={(element: HTMLTableCellElement) => {
-        headerContentRef = element;
-      }}>
+    <span class={canSort && 'can-sort'}>
       <HeaderText />
       <SortIcon />
     </span>

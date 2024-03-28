@@ -20,7 +20,6 @@ interface ModusTableColumnHeaderProps {
   ) => void;
   onMouseEnterResize: () => void;
   onMouseLeaveResize: () => void;
-  disableAllTooltip?: (show: boolean) => void;
 }
 
 /**
@@ -35,7 +34,6 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
   onDragStart,
   onMouseEnterResize,
   onMouseLeaveResize,
-  disableAllTooltip,
 }) => {
   let cellElementRef: HTMLTableCellElement;
 
@@ -82,13 +80,12 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
           onDragStart(event, headerId, cellElementRef, false);
         }
       }}>
-      {!isPlaceholder && (
+      {!isPlaceholder && ( // header.isPlaceholder is Required for nested column headers to display empty cell
         <ModusTableColumnHeaderLabel
           isColumnResizing={isColumnResizing}
           showSortIconOnHover={showSortIconOnHover}
           sortIconStyle={sortIconStyle}
           column={column}
-          disableAllTooltip={disableAllTooltip}
         />
       )}
       {/** Column resizing handler */}

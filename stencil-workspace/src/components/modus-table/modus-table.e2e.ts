@@ -915,7 +915,7 @@ describe('modus-table', () => {
 
       await page.waitForChanges();
 
-      const headerTextTooltip = await page.findAll('modus-table >>> modus-tooltip >>> div.can-sort >>> modus-tooltip');
+      const headerTextTooltip = await page.findAll('modus-table >>> modus-tooltip');
       const headerTextElement = headerTextTooltip[0];
       await headerTextElement.hover();
       const tooltipText = await headerTextElement.getProperty('text');
@@ -937,7 +937,7 @@ describe('modus-table', () => {
 
       await page.waitForChanges();
 
-      const headerContent = await page.findAll('modus-table >>> modus-tooltip >>> div.can-sort >>> modus-tooltip');
+      const headerContent = await page.findAll('modus-table >>> modus-tooltip');
       const headerTextContent = headerContent[0];
       const headerTextElement = await headerTextContent.find('span');
 
@@ -966,7 +966,7 @@ describe('modus-table', () => {
 
       await page.waitForChanges();
 
-      const headerContent = await page.findAll('modus-table >>> modus-tooltip >>> div.can-sort >>> modus-tooltip');
+      const headerContent = await page.findAll('modus-table >>> modus-tooltip');
       const headerTextContent = headerContent[0];
       const headerTextElement = await headerTextContent.find('span');
 
@@ -993,7 +993,7 @@ describe('modus-table', () => {
 
       await page.waitForChanges();
 
-      const headerContent = await page.findAll('modus-table >>> modus-tooltip >>> div.can-sort >>> modus-tooltip');
+      const headerContent = await page.findAll('modus-table >>> modus-tooltip');
       const headerTextContent = headerContent[0];
       const headerTextElement = await headerTextContent.find('span');
 
@@ -1182,7 +1182,7 @@ describe('modus-table', () => {
       expect(tooltipText).toEqual('Sorted Descending');
     });
 
-    it('Renders with correct sort icon when manual sorting is enabled', async () => {
+    it('should renders with correct sort icon when manual sorting is enabled', async () => {
       page = await newE2EPage();
       await page.setContent('<modus-table />');
 
@@ -1229,19 +1229,16 @@ describe('modus-table', () => {
       component.setProperty('sort', true);
       await page.waitForChanges();
 
-      let sortHeader = await page.find('modus-table >>> modus-tooltip >>> div.can-sort >>> modus-tooltip:firstElement span');
+      const firstTooltip = await page.find('modus-table >>> modus-tooltip');
+      const sortHeader = await firstTooltip.find('span');
+
       let style = await sortHeader.getComputedStyle();
       expect(style['font-weight']).toBe('600');
 
-      const contentElement = await page.findAll('modus-table >>> modus-tooltip');
-
-      await contentElement[1].click();
+      await sortHeader.click();
       await page.waitForChanges();
 
-      const headerText = await page.find('modus-table >>> th .sorted');
-
-      style = await headerText.getComputedStyle();
-
+      style = await sortHeader.getComputedStyle();
       expect(style['font-weight']).toBe('700');
     });
   });
@@ -1260,11 +1257,13 @@ describe('modus-table', () => {
 
       await page.waitForChanges();
 
-      let cell = await page.find('modus-table >>> th');
-      let headerElement = await page.findAll('modus-table >>> modus-tooltip >>> div.can-sort >>> modus-tooltip');
+      const cell = await page.find('modus-table >>> th');
+      const headerElement = await page.findAll('modus-table >>> modus-tooltip');
+      const headerText = await headerElement[0].find('span');
+      const iconElement = await headerElement[1].find('span');
       let cellStyle = await cell.getComputedStyle();
-      let headerTextStyle = await headerElement[0].getComputedStyle();
-      let sortIconStyle = await headerElement[1].getComputedStyle();
+      let headerTextStyle = await headerText.getComputedStyle();
+      let sortIconStyle = await iconElement.getComputedStyle();
 
       expect(cellStyle['outlineWidth']).toBe('0px');
       expect(headerTextStyle['outlineWidth']).toBe('0px');
@@ -1272,19 +1271,26 @@ describe('modus-table', () => {
 
       //HEADER CELL FOCUS
       await page.keyboard.press('Tab');
+      await page.waitForChanges();
 
-      cell = await page.find('modus-table >>> th');
       cellStyle = await cell.getComputedStyle();
+      headerTextStyle = await headerText.getComputedStyle();
+      sortIconStyle = await iconElement.getComputedStyle();
+
       expect(cellStyle['outlineWidth']).toBe('1px');
+      expect(headerTextStyle['outlineWidth']).toBe('0px');
+      expect(sortIconStyle['outlineWidth']).toBe('0px');
 
       // SORT ICON
       await page.keyboard.press('Tab');
+      await page.waitForChanges();
 
-      headerElement = await page.findAll('modus-table >>> modus-tooltip >>> div.can-sort >>> modus-tooltip');
+      cellStyle = await cell.getComputedStyle();
+      headerTextStyle = await headerText.getComputedStyle();
+      sortIconStyle = await iconElement.getComputedStyle();
 
-      const sortIconElement = await headerElement[1];
-      sortIconStyle = await (await sortIconElement.find('span')).getComputedStyle();
-
+      expect(cellStyle['outlineWidth']).toBe('0px');
+      expect(headerTextStyle['outlineWidth']).toBe('0px');
       expect(sortIconStyle['outlineWidth']).toBe('1px');
     });
 
@@ -1301,26 +1307,31 @@ describe('modus-table', () => {
 
       await page.waitForChanges();
 
-      let cell = await page.find('modus-table >>>  modus-tooltip >>> th');
-      let headerElement = await page.findAll('modus-table >>> modus-tooltip >>> div.can-sort >>> modus-tooltip');
+      const cells = await page.findAll('modus-table >>> th');
 
-      let cellStyle = await cell.getComputedStyle();
-      let headerTextStyle = await headerElement[0].getComputedStyle();
+      let cell1Style = await cells[0].getComputedStyle();
+      let cell2Style = await cells[1].getComputedStyle();
 
-      expect(cellStyle['outlineWidth']).toBe('0px');
-      expect(headerTextStyle['outlineWidth']).toBe('0px');
-
-      await page.keyboard.press('Tab');
-
-      cell = await page.find('modus-table >>> th');
-      cellStyle = await cell.getComputedStyle();
-      expect(cellStyle['outlineWidth']).toBe('1px');
+      expect(cell1Style['outlineWidth']).toBe('0px');
+      expect(cell2Style['outlineWidth']).toBe('0px');
 
       await page.keyboard.press('Tab');
+      await page.waitForChanges();
 
-      headerElement = await page.findAll('modus-table >>> modus-tooltip >>> div.can-sort >>> modus-tooltip');
-      headerTextStyle = await (await headerElement[0].find('span')).getComputedStyle();
-      expect(headerTextStyle['outlineWidth']).toBe('0px');
+      cell1Style = await cells[0].getComputedStyle();
+      cell2Style = await cells[1].getComputedStyle();
+
+      expect(cell1Style['outlineWidth']).toBe('1px');
+      expect(cell2Style['outlineWidth']).toBe('0px');
+
+      await page.keyboard.press('Tab');
+      await page.waitForChanges();
+
+      cell1Style = await cells[0].getComputedStyle();
+      cell2Style = await cells[1].getComputedStyle();
+
+      expect(cell1Style['outlineWidth']).toBe('0px');
+      expect(cell2Style['outlineWidth']).toBe('1px');
     });
   });
 });

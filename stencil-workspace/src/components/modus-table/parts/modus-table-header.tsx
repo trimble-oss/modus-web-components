@@ -36,17 +36,9 @@ export const ModusTableHeader: FunctionalComponent<ModusTableHeaderProps> = ({
   const tableHeadClass = { 'show-resize-cursor': getColumnResizing(), 'show-column-reorder-cursor': columnReorder };
   const headerGroups: HeaderGroup<unknown>[] = getHeaderGroups();
   const rowActionsLength = Math.min(Math.max(rowActions.length * 40, 90), 160);
-  let theadRef: HTMLTableSectionElement;
-
-  const disableAllTooltip = (show: boolean) => {
-    const tooltips = theadRef.querySelectorAll('modus-tooltip');
-    tooltips.forEach((tooltip) => {
-      tooltip.disabled = show;
-    });
-  };
 
   return (
-    <thead class={tableHeadClass} ref={(element: HTMLTableSectionElement) => (theadRef = element)}>
+    <thead class={tableHeadClass}>
       {headerGroups?.map((headerGroup, index) => (
         <tr key={headerGroup.id}>
           {rowSelection && <ModusTableHeaderCheckbox context={context}></ModusTableHeaderCheckbox>}
@@ -61,7 +53,6 @@ export const ModusTableHeader: FunctionalComponent<ModusTableHeaderProps> = ({
                 onDragStart={onDragStart}
                 onMouseEnterResize={() => setColumnResizing(true)}
                 onMouseLeaveResize={() => setColumnResizing(false)}
-                disableAllTooltip={disableAllTooltip}
               />
             );
           })}
