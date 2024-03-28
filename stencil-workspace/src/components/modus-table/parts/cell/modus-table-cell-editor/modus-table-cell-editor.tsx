@@ -25,12 +25,13 @@ import { ModusAutocompleteOption } from '../../../../modus-autocomplete/modus-au
 })
 export class ModusTableCellEditor {
   @Prop() args: ModusTableCellEditorArgs;
+  @Prop() dataType: string;
   @Prop() value: string;
   @Prop() type: string;
   @Prop() valueChange: (newValue: string) => void;
   @Prop() keyDown: (e: KeyboardEvent, newValue: string) => void;
 
-  private editedValue: string;
+  private editedValue: unknown;
   private inputElement: HTMLElement;
 
   connectedCallback(): void {
@@ -42,11 +43,11 @@ export class ModusTableCellEditor {
   }
 
   handleBlur: () => void = () => {
-    this.valueChange(this.editedValue);
+    this.valueChange(this.editedValue as string);
   };
 
   handleKeyDown: (e: KeyboardEvent) => void = (e) => {
-    this.keyDown(e, this.editedValue);
+    this.keyDown(e, this.editedValue as string);
   };
 
   getDefaultProps = (ariaLabel) => ({
@@ -91,7 +92,7 @@ export class ModusTableCellEditor {
   renderDropdownInput(): JSX.Element[] {
     const valueKey = 'display';
     const options = (this.args as ModusTableCellDropdownEditorArgs)?.options || [];
-    const selectedOption = options.find((option) => option[valueKey] === this.value);
+    const selectedOption = options.find((option) => option[valueKey] === this.value) as any;
 
     function handleEnter(e: KeyboardEvent, callback: (e: KeyboardEvent) => void) {
       const code = e.key.toLowerCase();
@@ -111,7 +112,14 @@ export class ModusTableCellEditor {
           onInputBlur={this.handleBlur}
           onKeyDown={(e) => handleEnter(e, this.handleKeyDown)}
           onValueChange={(e: CustomEvent<unknown>) => {
-            this.editedValue = e.detail[valueKey];
+            if (this.dataType === 'badge') {
+              const { display, ...restProps } = e.detail as any;
+              this.editedValue = { ...restProps, text: display };
+            } else if (this.dataType === 'link') {
+              this.editedValue = e.detail;
+            } else {
+              this.editedValue = e.detail[valueKey];
+            }
           }}></modus-select>
       </div>
     );
@@ -148,7 +156,7 @@ export class ModusTableCellEditor {
         // onInputBlur={this.handleBlur}
         onOptionSelected={(e: CustomEvent<string>) => {
           this.editedValue = e.detail;
-          this.valueChange(this.editedValue);
+          this.valueChange(this.editedValue as string);
         }}
         // value={selectedOption}
         // onKeyDown={(e) => e.stopPropagation()}
