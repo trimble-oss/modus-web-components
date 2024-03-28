@@ -19,6 +19,17 @@ export default {
         type: { summary: 'boolean' },
       },
     },
+    role: {
+      control: {
+        options: ['alert', 'log', 'marquee', 'status', 'timer'],
+        type: 'select'
+      },
+      description: 'Role taken by the toast',
+      table: {
+        defaultValue: { summary: 'status' },
+        type: { summary: '"alert" | "log" | "marquee" | "status" | "timer"' },
+      },
+    },
     showIcon: {
       name: 'show-icon',
       description: "The toast's message",
@@ -63,12 +74,13 @@ export default {
   },
 };
 
-const Template = ({ ariaLabel, dismissible, showIcon, type }) =>
+const Template = ({ ariaLabel, dismissible, showIcon, role, type }) =>
   html`
     <modus-toast
       aria-label=${ariaLabel}
       dismissible=${dismissible}
       show-icon=${showIcon}
+      role=${role}
       type=${type}
       >Toast!</modus-toast
     >
@@ -78,6 +90,7 @@ export const Default = Template.bind({});
 Default.args = {
   ariaLabel: '',
   dismissible: false,
+  role: 'status',
   showIcon: true,
   type: 'default',
 };
@@ -86,6 +99,7 @@ export const Danger = Template.bind({});
 Danger.args = {
   ariaLabel: '',
   dismissible: false,
+  role: 'status',
   showIcon: true,
   type: 'danger',
 };
@@ -94,6 +108,7 @@ export const Dark = Template.bind({});
 Dark.args = {
   ariaLabel: '',
   dismissible: false,
+  role: 'status',
   showIcon: true,
   type: 'dark',
 };
@@ -102,6 +117,7 @@ export const Primary = Template.bind({});
 Primary.args = {
   ariaLabel: '',
   dismissible: false,
+  role: 'status',
   showIcon: true,
   type: 'primary',
 };
@@ -110,6 +126,7 @@ export const Secondary = Template.bind({});
 Secondary.args = {
   ariaLabel: '',
   dismissible: false,
+  role: 'status',
   showIcon: true,
   type: 'secondary',
 };
@@ -118,6 +135,7 @@ export const Success = Template.bind({});
 Success.args = {
   ariaLabel: '',
   dismissible: false,
+  role: 'status',
   showIcon: true,
   type: 'success',
 };
@@ -126,6 +144,7 @@ export const Warning = Template.bind({});
 Warning.args = {
   ariaLabel: '',
   dismissible: false,
+  role: 'status',
   showIcon: true,
   type: 'warning',
 };
