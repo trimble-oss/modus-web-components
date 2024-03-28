@@ -111,6 +111,12 @@ export default {
         type: { summary: 'string' },
       },
     },
+    pattern: {
+      description: "The text input's pattern attribute",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
     placeholder: {
       description: "The text input's placeholder text",
       table: {
@@ -214,6 +220,7 @@ const Template = ({
   label,
   maxLength,
   minLength,
+  pattern,
   placeholder,
   readOnly,
   required,
@@ -238,6 +245,7 @@ const Template = ({
     label=${label}
     max-length=${maxLength}
     min-length=${minLength}
+    pattern=${pattern}
     placeholder=${placeholder}
     read-only=${readOnly}
     ?required=${required}
@@ -264,6 +272,7 @@ Default.args = {
   label: 'Username',
   maxLength: 20,
   minLength: 0,
+  pattern: '',
   placeholder: '',
   readOnly: false,
   required: false,
