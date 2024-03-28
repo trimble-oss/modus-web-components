@@ -59,6 +59,7 @@ export const ModusTableRowActionsMenu = /*@__PURE__*/createReactComponent<JSX.Mo
 export const ModusTableToolbar = /*@__PURE__*/createReactComponent<JSX.ModusTableToolbar, HTMLModusTableToolbarElement>('modus-table-toolbar');
 export const ModusTabs = /*@__PURE__*/createReactComponent<JSX.ModusTabs, HTMLModusTabsElement>('modus-tabs');
 export const ModusTextInput = /*@__PURE__*/createReactComponent<JSX.ModusTextInput, HTMLModusTextInputElement>('modus-text-input');
+export const ModusTextareaInput = /*@__PURE__*/createReactComponent<JSX.ModusTextareaInput, HTMLModusTextareaInputElement>('modus-textarea-input');
 export const ModusTimePicker = /*@__PURE__*/createReactComponent<JSX.ModusTimePicker, HTMLModusTimePickerElement>('modus-time-picker');
 export const ModusToast = /*@__PURE__*/createReactComponent<JSX.ModusToast, HTMLModusToastElement>('modus-toast');
 export const ModusTooltip = /*@__PURE__*/createReactComponent<JSX.ModusTooltip, HTMLModusTooltipElement>('modus-tooltip');

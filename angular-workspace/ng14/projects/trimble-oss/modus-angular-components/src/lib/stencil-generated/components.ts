@@ -1498,6 +1498,35 @@ export declare interface ModusTextInput extends Components.ModusTextInput {
 
 
 @ProxyCmp({
+  inputs: ['ariaLabel', 'autoFocusInput', 'clearable', 'disabled', 'errorText', 'helperText', 'label', 'maxLength', 'minLength', 'placeholder', 'readOnly', 'required', 'rows', 'size', 'textAlign', 'validText', 'value'],
+  methods: ['focusInput']
+})
+@Component({
+  selector: 'modus-textarea-input',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['ariaLabel', 'autoFocusInput', 'clearable', 'disabled', 'errorText', 'helperText', 'label', 'maxLength', 'minLength', 'placeholder', 'readOnly', 'required', 'rows', 'size', 'textAlign', 'validText', 'value'],
+})
+export class ModusTextareaInput {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['valueChange']);
+  }
+}
+
+
+export declare interface ModusTextareaInput extends Components.ModusTextareaInput {
+  /**
+   * An event that fires on input value change.
+   */
+  valueChange: EventEmitter<CustomEvent<string>>;
+}
+
+
+@ProxyCmp({
   inputs: ['allowedCharsRegex', 'ampm', 'ariaLabel', 'autoFocusInput', 'autoFormat', 'disableValidation', 'disabled', 'errorText', 'helperText', 'label', 'max', 'min', 'placeholder', 'readOnly', 'required', 'size', 'validText', 'value'],
   methods: ['focusInput']
 })
