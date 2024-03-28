@@ -1,0 +1,44 @@
+import { Anchor } from '@storybook/addon-docs';
+
+# Button Group
+
+[Modus ButtonGroup](https://modus.trimble.com/components) web components provide a way to group buttons together. They are referenced using the `<modus-button-group>` custom HTML element.
+This component utilizes the `modus-button` element, allowing you to render your own HTML in the button group.
+
+
+
+## Default
+
+<modus-button-group>
+  <modus-button>Button 1</modus-button>
+  <modus-button>Button 2</modus-button>
+  <modus-button>Button 3</modus-button>
+</modus-button-group>
+
+```html
+<modus-button-group>
+  <modus-button>Button 1</modus-button>
+  <modus-button>Button 2</modus-button>
+  <modus-button>Button 3</modus-button>
+</modus-button-group>
+
+```
+
+
+### Properties
+
+| Property        | Attribute        | Description                             | Type                       | Default                |
+| --------------- | ---------------- | --------------------------------------- | -------------------------- | ---------------------- |
+|`ariaLabel`      | `aria-label`     | (optional) The aria label of the button | `string`                   | `undefined`            |
+|`disabled`       | `disabled`       | (optional) The disabled state of button | `boolean`                  | `false`                |
+
+
+### DOM Events
+
+| Event         | Description                                     | Type               |
+| ------------- | ----------------------------------------------- | ------------------ |
+| `buttonsSelected` | It contains the button selected | `CustomEvent<any>` |
+
+### Accessibility
+- ButtonGroup gets an aria-label provided by the aria-label property input.
+- ButtonGroup gets an aria-disabled set to whether ButtonGroup is disabled.

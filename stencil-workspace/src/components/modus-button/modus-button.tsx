@@ -40,12 +40,14 @@ export class ModusButton {
   @Prop() showCaret: boolean;
 
   /** (Optional) Button types */
-  @Prop() type: 'button' | 'reset' | 'submit' = 'button';
+  @Prop() type: 'button' | 'reset' | 'submit' | 'toggle' = 'button';
 
   /** (optional) An event that fires on button click. */
   @Event() buttonClick: EventEmitter;
 
   @Element() el: HTMLElement;
+
+  @State() isActive: boolean;
 
   @State() pressed: boolean;
 
@@ -76,6 +78,11 @@ export class ModusButton {
   async focusButton(): Promise<void> {
     this.buttonRef?.focus();
     return Promise.resolve();
+  }
+  /** Set the button to active or inactive */
+  @Method()
+  async setActive(isActive: boolean): Promise<void> {
+    this.isActive = isActive;
   }
 
   @Listen('keyup')
@@ -117,9 +124,11 @@ export class ModusButton {
   }
 
   render(): unknown {
-    const className = `${this.classBySize.get(this.size)} ${this.classByColor.get(this.color)} ${this.classByButtonStyle.get(
-      this.buttonStyle
-    )} ${this.iconOnly ? 'icon-only' : ''} ${this.showCaret ? 'has-caret' : ''}`;
+    const className = `${this.classBySize.get(
+      this.size
+    )} ${this.classByColor.get(this.color)} ${this.classByButtonStyle.get(this.buttonStyle)} ${
+      this.iconOnly ? 'icon-only' : ''
+    } ${this.showCaret ? 'has-caret' : ''} ${this.isActive ? ' active' : ''}`;
 
     return (
       <button
@@ -128,7 +137,14 @@ export class ModusButton {
         aria-pressed={this.pressed ? 'true' : undefined}
         class={className}
         disabled={this.disabled}
-        onClick={() => (!this.disabled ? this.buttonClick.emit() : null)}
+        onClick={() => {
+          if (!this.disabled) {
+            this.buttonClick.emit();
+            if (this.type === 'toggle') {
+              this.isActive = !this.isActive;
+            }
+          }
+        }}
         onKeyDown={() => (this.pressed = true)}
         onKeyUp={() => (this.pressed = false)}
         onMouseDown={() => (this.pressed = true)}
