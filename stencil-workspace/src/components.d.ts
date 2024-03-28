@@ -21,6 +21,7 @@ import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/
 import { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnSort, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 import { Cell, Column, Row } from "@tanstack/table-core";
 import { TableCellEdited, TableContext } from "./components/modus-table/models/table-context.models";
+import { OverflowAction } from "./components/modus-table/parts/row/actions/modus-table-row-actions/modus-table-row-actions";
 import { Tab } from "./components/modus-tabs/modus-tabs";
 import { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
 import { ModusToolTipPlacement } from "./components/modus-tooltip/modus-tooltip.models";
@@ -42,6 +43,7 @@ export { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/
 export { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnSort, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 export { Cell, Column, Row } from "@tanstack/table-core";
 export { TableCellEdited, TableContext } from "./components/modus-table/models/table-context.models";
+export { OverflowAction } from "./components/modus-table/parts/row/actions/modus-table-row-actions/modus-table-row-actions";
 export { Tab } from "./components/modus-tabs/modus-tabs";
 export { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
 export { ModusToolTipPlacement } from "./components/modus-tooltip/modus-tooltip.models";
@@ -2368,7 +2370,7 @@ declare global {
         new (): HTMLModusTableFillerColumnElement;
     };
     interface HTMLModusTableRowActionsElementEventMap {
-        "overflowRowActions": any;
+        "overflowRowActions": OverflowAction;
     }
     interface HTMLModusTableRowActionsElement extends Components.ModusTableRowActions, HTMLStencilElement {
         addEventListener<K extends keyof HTMLModusTableRowActionsElementEventMap>(type: K, listener: (this: HTMLModusTableRowActionsElement, ev: ModusTableRowActionsCustomEvent<HTMLModusTableRowActionsElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -4004,7 +4006,7 @@ declare namespace LocalJSX {
     }
     interface ModusTableRowActions {
         "context"?: TableContext;
-        "onOverflowRowActions"?: (event: ModusTableRowActionsCustomEvent<any>) => void;
+        "onOverflowRowActions"?: (event: ModusTableRowActionsCustomEvent<OverflowAction>) => void;
         "row"?: Row<unknown>;
     }
     interface ModusTableRowActionsCell {
