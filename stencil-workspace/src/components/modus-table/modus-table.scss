@@ -1,5 +1,23 @@
 @import './modus-table.vars';
 
+.cell-contents {
+  align-items: center;
+  display: flex;
+  gap: 0.25rem;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.column-title {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sort-icon {
+  flex-shrink: 0;
+}
+
 .table-container {
   border: $rem-1px $modus-table-border-color solid;
   display: flex;
