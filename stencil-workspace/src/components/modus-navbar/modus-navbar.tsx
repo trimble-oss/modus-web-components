@@ -326,8 +326,9 @@ export class ModusNavbar {
 
   showButtonMenuById(id: string): void {
     this.buttonClick.emit(id);
+    const isDynamicButtonSlotOpen = this.openButtonMenuId === id;
     this.hideMenus();
-    if (this.openButtonMenuId !== id) {
+    if (this.openButtonMenuId !== id && !isDynamicButtonSlotOpen) {
       this.openButtonMenuId = id;
     }
   }
