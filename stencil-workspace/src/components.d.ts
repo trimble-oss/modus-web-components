@@ -1481,6 +1481,10 @@ export namespace Components {
          */
         "dismissible": boolean;
         /**
+          * (optional) Role taken by the toast.  Defaults to 'status'.
+         */
+        "role": 'alert' | 'log' | 'marquee' | 'status' | 'timer';
+        /**
           * (optional) Whether to show the toasts' icon.
          */
         "showIcon": boolean;
@@ -4218,6 +4222,10 @@ declare namespace LocalJSX {
           * An event that fires when the toast is dismissed
          */
         "onDismissClick"?: (event: ModusToastCustomEvent<any>) => void;
+        /**
+          * (optional) Role taken by the toast.  Defaults to 'status'.
+         */
+        "role"?: 'alert' | 'log' | 'marquee' | 'status' | 'timer';
         /**
           * (optional) Whether to show the toasts' icon.
          */
