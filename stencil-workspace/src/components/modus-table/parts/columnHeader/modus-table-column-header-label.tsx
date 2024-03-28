@@ -17,7 +17,7 @@ type ModusTableColumnHeaderLabelProps = {
   showSortIconOnHover: boolean;
   isColumnResizing: boolean;
   sortIconStyle: 'alphabetical' | 'directional';
-  column: Column<RowData, any>;
+  column: Column<RowData, unknown>;
   disableAllTooltip?: (show: boolean) => void;
 };
 
