@@ -28,6 +28,8 @@ Thumbs.db
 UserInterfaceState.xcuserstate
 .env
 
+**/stencil-generated/**
+
 stencil-workspace/generate-icons/generate-icons.js
 stencil-workspace/src/icons/generated-icons/*.tsx
 stencil-workspace/src/icons/ModusIconMap.tsx
