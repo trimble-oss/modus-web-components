@@ -50,7 +50,7 @@ describe('modus-tabs', () => {
       { id: 1, label: 'Tab2' },
     ]);
     await page.waitForChanges();
-    const element = await page.find('modus-tabs >>> div.active + div');
+    const element = await page.find('modus-tabs >>> button.active + button');
 
     await element.click();
     await page.waitForChanges();
