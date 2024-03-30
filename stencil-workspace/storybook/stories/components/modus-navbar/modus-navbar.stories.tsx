@@ -5,6 +5,13 @@ import { html } from 'lit-html';
 export default {
   title: 'Components/Navbar',
   argTypes: {
+    ariaLabel: {
+      name: 'aria-label',
+      description: "The navbar's aria-label",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
     enableSearchOverlay: {
       name: 'enable-search-overlay',
       description: 'Whether to show search overlay or not.',
@@ -109,8 +116,9 @@ const defaultApps = [{
   url: 'https://modus.trimble.com/',
 }];
 
-const Template = ({ buttons, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
+const Template = ({ ariaLabel, buttons, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
   <modus-navbar
+    aria-label=${ariaLabel}
     enable-search-overlay=${enableSearchOverlay}
     show-apps-menu
     show-help=${showHelp}
@@ -137,6 +145,7 @@ const Template = ({ buttons, enableSearchOverlay, helpTooltip, profileMenuOption
 
 export const Default = Template.bind({});
 Default.args = {
+  ariaLabel: 'Default',
   enableSearchOverlay: false,
   buttons: [
     {
@@ -176,8 +185,9 @@ Default.args = {
   showSearch: false,
 };
 
-const FailedToLoadAvatarTemplate = ({ buttons, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
+const FailedToLoadAvatarTemplate = ({ ariaLabel, buttons, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
   <modus-navbar
+    aria-label=${ariaLabel}
     enable-search-overlay=${enableSearchOverlay}
     show-apps-menu
     show-help=${showHelp}
@@ -199,6 +209,7 @@ const FailedToLoadAvatarTemplate = ({ buttons, enableSearchOverlay, helpTooltip,
 
 export const FailedAvatar = FailedToLoadAvatarTemplate.bind({});
 FailedAvatar.args = {
+  ariaLabel: 'Failed Avatar',
   buttons: [],
   enableSearchOverlay: false,
   helpTooltip: undefined,
@@ -215,8 +226,9 @@ FailedAvatar.args = {
   showSearch: false,
 };
 
-const BlueTemplate = ({ buttons, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
+const BlueTemplate = ({ ariaLabel, buttons, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
   <modus-navbar
+    aria-label=${ariaLabel}
     enable-search-overlay=${enableSearchOverlay}
     show-apps-menu
     show-help=${showHelp}
@@ -239,6 +251,7 @@ const BlueTemplate = ({ buttons, enableSearchOverlay, helpTooltip, profileMenuOp
 
 export const BlueNavbar = BlueTemplate.bind({});
 BlueNavbar.args = {
+  ariaLabel: 'Blue navbar',
   buttons: [],
   enableSearchOverlay: false,
   helpTooltip: undefined,

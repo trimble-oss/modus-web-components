@@ -724,6 +724,10 @@ export namespace Components {
          */
         "apps": ModusNavbarApp[];
         /**
+          * (optional) The navbar's aria-label.
+         */
+        "ariaLabel"?: string;
+        /**
           * (optional) The buttons to render in the Navbar.
          */
         "buttons": ModusNavbarButton[];
@@ -3325,6 +3329,10 @@ declare namespace LocalJSX {
           * (optional) The apps to render in the apps menu.
          */
         "apps"?: ModusNavbarApp[];
+        /**
+          * (optional) The navbar's aria-label.
+         */
+        "ariaLabel"?: string;
         /**
           * (optional) The buttons to render in the Navbar.
          */

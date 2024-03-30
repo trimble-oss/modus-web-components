@@ -498,4 +498,24 @@ describe('modus-navbar', () => {
     const tooltipText = await page.$eval('modus-navbar >>> modus-tooltip >>> .tooltip', (tooltip) => tooltip.textContent);
     expect(tooltipText).toBe('Resource Center');
   });
+
+  it('should have aria-label when provided', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-navbar aria-label="test"></modus-navbar>');
+    await page.waitForChanges();
+
+    const navElement = await page.find('modus-navbar >>> nav');
+    expect(navElement.getAttribute('aria-label')).toEqual('test');
+  });
+
+  it('should not have aria-label when not provided', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-navbar></modus-navbar>');
+    await page.waitForChanges();
+
+    const navElement = await page.find('modus-navbar >>> nav');
+    expect(navElement.getAttribute('aria-label')).toBeNull();
+  });
 });
