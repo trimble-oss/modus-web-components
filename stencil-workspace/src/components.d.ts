@@ -567,6 +567,10 @@ export namespace Components {
          */
         "dropzoneWidth": string;
         /**
+          * (optional) The dropzone's instruction text when a file is being dragged over.
+         */
+        "fileDraggedOverInstructions": string;
+        /**
           * Get the dropzone's error.
          */
         "getError": () => Promise<string | null>;
@@ -578,6 +582,10 @@ export namespace Components {
           * (optional) Whether to include the upload icon.
          */
         "includeStateIcon": boolean;
+        /**
+          * (optional) The dropzone's instruction text.
+         */
+        "instructions": string;
         /**
           * (optional) The dropzone's label text.
          */
@@ -3162,9 +3170,17 @@ declare namespace LocalJSX {
          */
         "dropzoneWidth"?: string;
         /**
+          * (optional) The dropzone's instruction text when a file is being dragged over.
+         */
+        "fileDraggedOverInstructions"?: string;
+        /**
           * (optional) Whether to include the upload icon.
          */
         "includeStateIcon"?: boolean;
+        /**
+          * (optional) The dropzone's instruction text.
+         */
+        "instructions"?: string;
         /**
           * (optional) The dropzone's label text.
          */

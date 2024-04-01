@@ -33,11 +33,25 @@ export default {
         type: { summary: 'string' },
       },
     },
+    fileDraggedOverInstructions: {
+      name: 'file-dragged-over-instructions',
+      description: "The dropzone's instruction text when a file is being dragged over.'",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
     includeStateIcon: {
       name: 'include-state-icon',
       description: 'Whether to include the state icon',
       table: {
         type: { summary: 'boolean' },
+      },
+    },
+    instructions: {
+      name: 'instructions',
+      description: "The dropzone's instruction text",
+      table: {
+        type: { summary: 'string' },
       },
     },
     label: {
@@ -95,7 +109,9 @@ export const Default = ({
   description,
   dropzoneHeight,
   dropzoneWidth,
+  fileDraggedOverInstructions,
   includeStateIcon,
+  instructions,
   label,
   maxFileCount,
   maxFileNameLength,
@@ -107,7 +123,9 @@ export const Default = ({
     description=${description}
     dropzone-height=${dropzoneHeight}
     dropzone-width=${dropzoneWidth}
+    file-dragged-over-instructions=${fileDraggedOverInstructions}
     include-state-icon=${includeStateIcon}
+    instructions=${instructions}
     label=${label}
     max-file-count=${maxFileCount}
     max-file-name-length=${maxFileNameLength}
@@ -120,7 +138,9 @@ Default.args = {
   description: 'File dropzone description',
   dropzoneHeight: '200px',
   dropzoneWidth: '500px',
+  fileDraggedOverInstructions: 'Drag files here.',
   includeStateIcon: true,
+  instructions: 'Drag files here or browse to upload.',
   label: 'Dropzone Label',
   maxFileCount: '4',
   maxFileNameLength: '20',
