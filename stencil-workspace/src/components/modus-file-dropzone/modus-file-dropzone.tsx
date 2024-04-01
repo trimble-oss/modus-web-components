@@ -176,7 +176,7 @@ export class ModusFileDropzone {
   };
 
   render() {
-    const html = (
+    return (
       <Host aria-label={this.ariaLabel} role="button">
         <div class="modus-file-dropzone">
           <input
@@ -219,7 +219,5 @@ export class ModusFileDropzone {
         </div>
       </Host>
     );
-    console.log(html);
-    return html;
   }
 }
