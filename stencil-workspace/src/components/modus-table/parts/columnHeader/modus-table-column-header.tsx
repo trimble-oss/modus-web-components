@@ -5,9 +5,8 @@ import {
 import { Header } from '@tanstack/table-core';
 import { KEYBOARD_ENTER } from '../../modus-table.constants';
 import { ModusTableColumnResizingHandler } from './modus-table-column-resizing-handler';
-import { ModusTableColumnSortIcon } from './modus-table-column-sort-icon';
+import { ModusTableColumnHeaderLabel } from './modus-table-column-header-label';
 import { TableContext } from '../../models/table-context.models';
-
 interface ModusTableColumnHeaderProps {
   context: TableContext;
   header: Header<unknown, unknown>;
@@ -26,6 +25,7 @@ interface ModusTableColumnHeaderProps {
 /**
  * Modus Table Header
  */
+
 export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderProps> = ({
   id,
   context,
@@ -35,7 +35,8 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
   onMouseEnterResize,
   onMouseLeaveResize,
 }) => {
-  let elementRef: HTMLTableCellElement;
+  let cellElementRef: HTMLTableCellElement;
+
   const {
     tableInstance: table,
     isColumnResizing,
@@ -49,7 +50,7 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
   return (
     <th
       data-accessor-key={headerId}
-      tabindex={`${!isColumnResizing && columnReorder ? '0' : ''}`}
+      tabindex={`${isColumnResizing ? '' : '0'}`}
       key={id}
       colSpan={colSpan}
       /**
@@ -72,25 +73,20 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
       role="columnheader"
       scope="col"
       id={id}
-      ref={(element: HTMLTableCellElement) => (elementRef = element)}
-      onMouseDown={(event: MouseEvent) => onDragStart(event, headerId, elementRef, true)}
+      ref={(element: HTMLTableCellElement) => (cellElementRef = element)}
+      onMouseDown={(event: MouseEvent) => onDragStart(event, headerId, cellElementRef, true)}
       onKeyDown={(event: KeyboardEvent) => {
         if (event.key.toLowerCase() === KEYBOARD_ENTER) {
-          onDragStart(event, headerId, elementRef, false);
+          onDragStart(event, headerId, cellElementRef, false);
         }
       }}>
-      {isPlaceholder ? null : ( // header.isPlaceholder is Required for nested column headers to display empty cell
-        <div class={column.getCanSort() && 'can-sort'}>
-          <span class={column.getCanSort() && column.getIsSorted() ? 'sorted' : ''}>{column.columnDef.header}</span>
-          {column.getCanSort() && (
-            <ModusTableColumnSortIcon
-              column={column}
-              sortIconStyle={sortIconStyle}
-              showSortIconOnHover={showSortIconOnHover}
-              isColumnResizing={isColumnResizing}
-            />
-          )}
-        </div>
+      {!isPlaceholder && ( // header.isPlaceholder is Required for nested column headers to display empty cell
+        <ModusTableColumnHeaderLabel
+          isColumnResizing={isColumnResizing}
+          showSortIconOnHover={showSortIconOnHover}
+          sortIconStyle={sortIconStyle}
+          column={column}
+        />
       )}
       {/** Column resizing handler */}
       {column.getCanResize() ? (

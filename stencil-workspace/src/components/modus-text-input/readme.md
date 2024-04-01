@@ -22,6 +22,7 @@
 | `label`                     | `label`                        | (optional) The input's label.                                 | `string`                                                                    | `undefined` |
 | `maxLength`                 | `max-length`                   | (optional) The input's maximum length.                        | `number`                                                                    | `undefined` |
 | `minLength`                 | `min-length`                   | (optional) The input's minimum length.                        | `number`                                                                    | `undefined` |
+| `pattern`                   | `pattern`                      | (optional) The input's pattern HTML attribute.                | `string`                                                                    | `undefined` |
 | `placeholder`               | `placeholder`                  | (optional) The input's placeholder text.                      | `string`                                                                    | `undefined` |
 | `readOnly`                  | `read-only`                    | (optional) Whether the input's content is read-only           | `boolean`                                                                   | `undefined` |
 | `required`                  | `required`                     | (optional) Whether the input is required.                     | `boolean`                                                                   | `undefined` |
