@@ -32,6 +32,7 @@ export class ModusTableCellEditor {
 
   private editedValue: string;
   private inputElement: HTMLElement;
+  private outsideClickListener: (event: any) => void;
 
   connectedCallback(): void {
     this.editedValue = this.value;
@@ -39,6 +40,16 @@ export class ModusTableCellEditor {
 
   componentDidLoad(): void {
     if (this.inputElement['focusInput']) this.inputElement['focusInput']();
+
+    this.outsideClickListener = (event) => {
+      if (!this.inputElement.contains(event.target)) {
+        this.handleBlur();
+      }
+    };
+    document.addEventListener('click', this.outsideClickListener);
+  }
+  disconnectedCallback(): void {
+    document.removeEventListener('click', this.outsideClickListener);
   }
 
   handleBlur: () => void = () => {
@@ -121,17 +132,16 @@ export class ModusTableCellEditor {
     const valueKey = 'value';
     const format = (this.args as ModusTableCellDateEditorArgs)?.format;
     return (
-      <modus-date-picker>
+      <modus-date-picker onBlur={this.handleBlur} onClick={(e: MouseEvent) => e.stopPropagation()}>
         <modus-date-input
           {...this.getDefaultProps('Date input')}
           format={format}
           size="large"
           show-calendar-icon="true"
           value={this.value}
-          onClick={(e: MouseEvent) => e.stopPropagation()}
-          onValueChange={(e: CustomEvent<ModusDateInputEventDetails>) =>
-            (this.editedValue = e.detail[valueKey])
-          }></modus-date-input>
+          onValueChange={(e: CustomEvent<ModusDateInputEventDetails>) => {
+            this.editedValue = e.detail[valueKey];
+          }}></modus-date-input>
       </modus-date-picker>
     );
   }
