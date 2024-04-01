@@ -51,6 +51,9 @@ export class ModusTextInput {
   /** (optional) The input's minimum length. */
   @Prop() minLength: number;
 
+  /** (optional) The input's pattern HTML attribute. */
+  @Prop() pattern: string;
+
   /** (optional) The input's placeholder text. */
   @Prop() placeholder: string;
 
@@ -196,6 +199,7 @@ export class ModusTextInput {
             maxlength={this.maxLength}
             minlength={this.minLength}
             onInput={(event) => this.handleOnInput(event)}
+            pattern={this.pattern}
             placeholder={this.placeholder}
             readonly={this.readOnly}
             ref={(el) => (this.textInput = el as HTMLInputElement)}
