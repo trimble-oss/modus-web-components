@@ -141,6 +141,19 @@ describe('modus-text-input', () => {
     expect(await input.getProperty('value')).toEqual('am changed');
   });
 
+  it('renders changes to pattern', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-text-input></modus-text-input>');
+
+    const textInput = await page.find('modus-text-input');
+    textInput.setProperty('pattern', 'pattern');
+    await page.waitForChanges();
+
+    const input = await page.find('modus-text-input >>> input');
+    expect(await input.getProperty('pattern')).toEqual('pattern');
+  });
+
   it('renders changes to placeholder', async () => {
     const page = await newE2EPage();
 

@@ -10,11 +10,11 @@ describe('modus-text-input', () => {
     expect(page.root).toEqualHtml(`
       <modus-text-input>
         <mock:shadow-root>
-            <div class="modus-text-input">
-                <div class="input-container medium" part="input-container">
-                    <input class="text-align-left" id="mwc_id_0_text_input" type="text" tabindex="0">
-                </div>
+          <div class="modus-text-input">
+            <div class="input-container medium" part="input-container">
+              <input class="text-align-left" id="mwc_id_0_text_input" type="text" tabindex="0">
             </div>
+          </div>
         </mock:shadow-root>
       </modus-text-input>
     `);
@@ -28,11 +28,11 @@ describe('modus-text-input', () => {
     expect(page.root).toEqualHtml(`
       <modus-text-input type="password">
         <mock:shadow-root>
-            <div class="modus-text-input">
-                <div class="input-container medium" part="input-container">
-                <input class="text-align-left" id="mwc_id_1_text_input" tabindex="0" type="password">
-                </div>
+          <div class="modus-text-input">
+            <div class="input-container medium" part="input-container">
+              <input class="text-align-left" id="mwc_id_1_text_input" tabindex="0" type="password">
             </div>
+          </div>
         </mock:shadow-root>
       </modus-text-input>
     `);
@@ -90,6 +90,11 @@ describe('modus-text-input', () => {
   it('should default with no label', async () => {
     const modusTextInput = new ModusTextInput();
     expect(modusTextInput.label).toBeFalsy();
+  });
+
+  it('should default with no pattern', async () => {
+    const modusTextInput = new ModusTextInput();
+    expect(modusTextInput.pattern).toBeFalsy();
   });
 
   it('should default with no placeholder', async () => {

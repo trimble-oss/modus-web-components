@@ -76,6 +76,8 @@ table {
         cursor: e-resize;
 
         .can-sort {
+          cursor: e-resize;
+
           .sort-icon-container {
             cursor: e-resize;
           }
@@ -111,6 +113,9 @@ table {
         &.row-checkbox {
           padding: $rem-4px $rem-8px;
         }
+        &.header-base {
+          outline: -webkit-focus-ring-color auto 1px;
+        }
 
         .can-sort {
           align-items: center;
@@ -121,9 +126,15 @@ table {
             font-weight: bold;
           }
 
-          .sort-icon-container {
+          .header-text,
+          .sort-icon {
             cursor: pointer;
             padding: 0;
+          }
+
+          .sort-icon-container {
+            margin-left: 8px;
+            padding: $rem-2px $rem-2px 0;
 
             .sort-icon {
               svg {
