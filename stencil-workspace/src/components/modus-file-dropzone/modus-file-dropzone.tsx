@@ -190,7 +190,11 @@ export class ModusFileDropzone {
             <span>{this.description}</span>
           </div>
           <div
-            class={`dropzone ${this.fileDraggedOver ? 'highlight' : null} ${this.error ? 'error' : null}`}
+            class={{
+              dropzone: true,
+              error: !!this.error,
+              highlight: this.fileDraggedOver,
+            }}
             onDragLeave={(e) => this.onDragLeave(e)}
             onDragOver={(e) => this.onDragOver(e)}
             onDrop={(e) => this.onDrop(e)}
