@@ -42,7 +42,9 @@ export class ModusTabs {
   }
 
   handleTabChange(id: string): void {
-    if (id === this.tabs.find((tab) => tab.active).id) {
+    const activeTab = this.tabs.find((tab) => tab.active);
+
+    if (activeTab != undefined && activeTab.id) {
       return;
     }
 
