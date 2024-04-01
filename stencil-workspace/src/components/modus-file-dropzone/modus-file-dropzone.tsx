@@ -25,11 +25,17 @@ export class ModusFileDropzone {
   /** (optional) The dropzone's width. */
   @Prop() dropzoneWidth: string;
 
+  /** (optional) The dropzone's instruction text when a file is being dragged over. */
+  @Prop() fileDraggedOverInstructions = 'Drag files here.';
+
   /** (optional) Whether to include the upload icon. */
   @Prop() includeStateIcon = true;
 
   /** (optional) The dropzone's label text. */
   @Prop() label: string;
+
+  /** (optional) The dropzone's instruction text. */
+  @Prop() instructions = 'Drag files here or browse to upload.';
 
   /** (optional) The dropzone's max file count. */
   @Prop() maxFileCount: number;
@@ -169,8 +175,8 @@ export class ModusFileDropzone {
     this.errorMessageBottom = '';
   };
 
-  render(): unknown {
-    return (
+  render() {
+    const html = (
       <Host aria-label={this.ariaLabel} role="button">
         <div class="modus-file-dropzone">
           <input
@@ -193,10 +199,10 @@ export class ModusFileDropzone {
             {this.includeStateIcon && (this.error ? <IconCancel size={'36'} /> : <IconUploadCloud size={'36'} />)}
             {!this.error &&
               (this.fileDraggedOver ? (
-                'Drag files here.'
+                this.fileDraggedOverInstructions
               ) : (
                 <div class="browse" onClick={this.openBrowse}>
-                  Drag files here or browse to upload.
+                  {this.instructions}
                 </div>
               ))}
             {this.error && (
@@ -209,5 +215,7 @@ export class ModusFileDropzone {
         </div>
       </Host>
     );
+    console.log(html);
+    return html;
   }
 }
