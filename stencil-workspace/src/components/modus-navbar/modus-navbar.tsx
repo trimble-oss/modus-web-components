@@ -364,7 +364,6 @@ export class ModusNavbar {
         onClose={() => this.searchOverlayCloseEventHandler()}
         onSearch={(event) => this.searchChange.emit(event.detail)}></modus-navbar-search-overlay>
     );
-
     return (
       <Host id={this.componentId}>
         <nav class={`${direction} ${shadow} ${variant}`} aria-label={this.ariaLabel}>
