@@ -1361,6 +1361,10 @@ export namespace Components {
          */
         "minLength": number;
         /**
+          * (optional) The input's pattern HTML attribute.
+         */
+        "pattern": string;
+        /**
           * (optional) The input's placeholder text.
          */
         "placeholder": string;
@@ -4090,6 +4094,10 @@ declare namespace LocalJSX {
           * An event that fires on input value change.
          */
         "onValueChange"?: (event: ModusTextInputCustomEvent<string>) => void;
+        /**
+          * (optional) The input's pattern HTML attribute.
+         */
+        "pattern"?: string;
         /**
           * (optional) The input's placeholder text.
          */

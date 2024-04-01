@@ -282,6 +282,7 @@ export class ModusDatePicker {
                   }}
                   disabled={isDateDisabled}
                   tabIndex={0}
+                  type="button"
                   aria-current={isSelected ? 'date' : undefined}
                   onClick={() => this.pickCalendarDate(date)}
                   {...onBlurEvent}>
@@ -311,7 +312,7 @@ export class ModusDatePicker {
         </button>
 
         <div class="title">
-          <div class="calendar-title">{`${this._calendar?.month} ${this._calendar?.year}`}</div>
+          <div class="calendar-title" role="heading">{`${this._calendar?.month} ${this._calendar?.year}`}</div>
           <div class="year-icons">
             <button type="button" tabIndex={0} aria-label="Next Year" onClick={() => this.addYearOffset(1)} class="year-up">
               <ModusIconMap icon="caret_up" size="16"></ModusIconMap>
