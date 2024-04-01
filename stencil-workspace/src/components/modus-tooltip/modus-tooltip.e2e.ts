@@ -78,4 +78,81 @@ describe('modus-tooltip', () => {
     await new Promise((r) => setTimeout(r, 500));
     expect(tooltip.getAttribute('data-show')).toBeNull();
   });
+
+  it('preserves tabindex on hide', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-tooltip text="Tooltip text">
+        <modus-button tabindex="3" id="tooltip-button">Button</modus-button>
+      </modus-tooltip>
+      <modus-button id="not-tooltip-button">Other button</modus-button>
+      `);
+
+    const tooltip = await page.find('modus-tooltip');
+    const button = await tooltip.find('#tooltip-button');
+    await page.hover('#tooltip-button');
+    await page.waitForChanges();
+    expect(button.getAttribute('tabindex')).toEqual('3');
+
+    await page.hover('#not-tooltip-button');
+    await page.waitForChanges();
+    expect(button.getAttribute('tabindex')).toEqual('3');
+  });
+
+  it('preserves lack of tabindex on hide', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-tooltip text="Tooltip text">
+        <modus-button id="tooltip-button">Button</modus-button>
+      </modus-tooltip>
+      <modus-button id="not-tooltip-button">Other button</modus-button>
+      `);
+
+    const tooltip = await page.find('modus-tooltip');
+    const button = await tooltip.find('#tooltip-button');
+    await page.hover('#tooltip-button');
+    await page.waitForChanges();
+    expect(button.getAttribute('tabindex')).toEqual('-1');
+
+    await page.hover('#not-tooltip-button');
+    await page.waitForChanges();
+    expect(button.getAttribute('tabindex')).toBeNull();
+  });
+
+  it('focuses the tooltipped element on show', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-tooltip text="Tooltip text">
+        <modus-button id="tooltip-button">Button</modus-button>
+      </modus-tooltip>
+      `);
+
+    await page.hover('#tooltip-button');
+    await page.waitForChanges();
+    const activeElementId = await page.evaluate(() => document.activeElement!.id);
+    expect(activeElementId).toEqual('tooltip-button');
+  });
+
+  it('hides the tooltip on "escape" key', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-tooltip text="Tooltip text">
+        <modus-button tabindex="3" id="tooltip-button">Button</modus-button>
+      </modus-tooltip>
+      `);
+
+    const tooltip = await page.find('modus-tooltip >>> .tooltip');
+    await page.hover('#tooltip-button');
+
+    await page.waitForChanges();
+    expect(tooltip).toHaveAttribute('data-show');
+
+    page.keyboard.press('Escape');
+    await page.waitForChanges();
+    expect(tooltip).not.toHaveAttribute('data-show');
+  });
 });

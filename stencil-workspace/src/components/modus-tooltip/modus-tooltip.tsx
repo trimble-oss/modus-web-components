@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { Component, Element, Fragment, h, Prop, Watch } from '@stencil/core';
+import { Component, Element, h, Prop, Watch, Fragment } from '@stencil/core';
 import { createPopper, Instance } from '@popperjs/core';
 import { ModusToolTipPlacement } from './modus-tooltip.models';
 
@@ -47,6 +47,7 @@ export class ModusTooltip {
   }
 
   private popperInstance: Instance;
+  private targetTabIndex?: string; // necessary for preserving tab index after blur
   private tooltipElement: HTMLDivElement;
   private readonly showEvents = ['mouseenter', 'mouseover', 'focus'];
   private readonly hideEvents = ['mouseleave', 'blur', 'click'];
@@ -72,6 +73,8 @@ export class ModusTooltip {
     const target = this.element.firstElementChild;
     if (!target || !this.tooltipElement) return;
 
+    this.targetTabIndex = target.getAttribute('tabindex');
+
     this.popperInstance = createPopper(target, this.tooltipElement, {
       placement: position,
       modifiers: [
@@ -91,6 +94,8 @@ export class ModusTooltip {
     this.hideEvents.forEach((event) => {
       target.addEventListener(event, this.hideEventsListener);
     });
+
+    target.addEventListener('keydown', this.escapeKeyHandler);
   }
 
   cleanupPopper(): void {
@@ -109,7 +114,17 @@ export class ModusTooltip {
     this.popperInstance = null;
   }
 
+  escapeKeyHandler = (event: KeyboardEvent) => {
+    if (event.code === 'Escape') {
+      this.hide();
+    }
+  };
+
   show(): void {
+    const target = this.element.firstElementChild as HTMLElement;
+    const tabIndex = this.targetTabIndex !== '' && this.targetTabIndex != null ? (this.targetTabIndex as string) : '-1';
+    target.setAttribute('tabindex', tabIndex);
+    target.focus();
     if (this.popperInstance) {
       // Make the tooltip visible
       this.tooltipElement.setAttribute('data-show', '');
@@ -135,6 +150,15 @@ export class ModusTooltip {
         ...options,
         modifiers: [...options.modifiers, { name: 'eventListeners', enabled: false }],
       }));
+
+      const target = this.element.firstElementChild as HTMLElement;
+
+      if (this.targetTabIndex == null) {
+        target.removeAttribute('tabindex');
+      } else {
+        target.setAttribute('tabindex', this.targetTabIndex);
+      }
+      target.blur();
     }
   }
 
