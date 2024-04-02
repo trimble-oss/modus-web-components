@@ -502,7 +502,7 @@ describe('modus-navbar', () => {
   it('should have aria-label when provided', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<modus-navbar aria-label="test"></modus-navbar>');
+    await page.setContent('<modus-navbar nav-aria-label="test"></modus-navbar>');
     await page.waitForChanges();
 
     const navElement = await page.find('modus-navbar >>> nav');

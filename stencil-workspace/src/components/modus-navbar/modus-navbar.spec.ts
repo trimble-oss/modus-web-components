@@ -40,12 +40,12 @@ describe('modus-navbar', () => {
   it('renders correct html', async () => {
     const page = await newSpecPage({
       components: [ModusNavbar],
-      html: '<modus-navbar aria-label="test"></modus-navbar>',
+      html: '<modus-navbar nav-aria-label="test"></modus-navbar>',
     });
 
     page.root.removeAttribute('id'); // this is done because it's randomly generated.
 
-    expect(page.root).toEqualHtml(`<modus-navbar aria-label="test">
+    expect(page.root).toEqualHtml(`<modus-navbar nav-aria-label="test">
        <mock:shadow-root>
          <nav aria-label="test">
            <div class="left"></div>

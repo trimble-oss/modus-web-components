@@ -724,10 +724,6 @@ export namespace Components {
          */
         "apps": ModusNavbarApp[];
         /**
-          * (optional) The navbar's aria-label.
-         */
-        "ariaLabel"?: string;
-        /**
           * (optional) The buttons to render in the Navbar.
          */
         "buttons": ModusNavbarButton[];
@@ -748,6 +744,10 @@ export namespace Components {
           * (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels.
          */
         "logoOptions": ModusNavbarLogoOptions;
+        /**
+          * (optional) The navbar's aria-label.
+         */
+        "navAriaLabel"?: string;
         /**
           * (required) Profile menu options.
          */
@@ -3330,10 +3330,6 @@ declare namespace LocalJSX {
          */
         "apps"?: ModusNavbarApp[];
         /**
-          * (optional) The navbar's aria-label.
-         */
-        "ariaLabel"?: string;
-        /**
           * (optional) The buttons to render in the Navbar.
          */
         "buttons"?: ModusNavbarButton[];
@@ -3353,6 +3349,10 @@ declare namespace LocalJSX {
           * (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels.
          */
         "logoOptions"?: ModusNavbarLogoOptions;
+        /**
+          * (optional) The navbar's aria-label.
+         */
+        "navAriaLabel"?: string;
         /**
           * An event that fires when an apps menu app opens.
          */
