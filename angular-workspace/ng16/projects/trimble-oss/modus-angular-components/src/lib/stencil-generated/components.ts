@@ -1368,11 +1368,9 @@ export class ModusTableRowActions {
 }
 
 
-import type { OverflowAction as IModusTableRowActionsOverflowAction } from '@trimble-oss/modus-web-components';
-
 export declare interface ModusTableRowActions extends Components.ModusTableRowActions {
 
-  overflowRowActions: EventEmitter<CustomEvent<IModusTableRowActionsOverflowAction>>;
+  overflowRowActions: EventEmitter<CustomEvent<unknown>>;
 }
 
 

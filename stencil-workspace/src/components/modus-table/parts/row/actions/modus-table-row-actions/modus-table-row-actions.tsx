@@ -11,17 +11,6 @@ import { Row } from '@tanstack/table-core';
 import { ModusTableRowAction } from '../../../../models/modus-table.models';
 import { TableContext } from '../../../../models/table-context.models';
 
-export interface OverflowAction {
-  componentId: string;
-  actions: ModusTableRowAction[];
-  position: {
-    x: number;
-    y: number;
-  };
-  row: Row<unknown>;
-  onClose: () => unknown;
-}
-
 @Component({
   tag: 'modus-table-row-actions',
   styleUrl: './modus-table-row-actions.scss',
@@ -30,7 +19,7 @@ export class ModusTableRowActions {
   @Prop() row: Row<unknown>;
   @Prop() context: TableContext;
 
-  @Event() overflowRowActions: EventEmitter<OverflowAction>;
+  @Event() overflowRowActions: EventEmitter<unknown>;
 
   private overflowButtonRef: HTMLModusButtonElement;
 
