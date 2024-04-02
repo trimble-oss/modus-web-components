@@ -7,6 +7,10 @@ modus-table-filler-column {
     display: none;
   }
 
+  table tr {
+    height: inherit;
+  }
+
   table:not(.cell-borderless) {
     td,
     th {
@@ -20,10 +24,6 @@ modus-table-filler-column {
       &:first-child {
         border-left: $rem-1px $modus-table-border-color solid !important;
       }
-    }
-
-    tr {
-      height: inherit;
     }
   }
 }
