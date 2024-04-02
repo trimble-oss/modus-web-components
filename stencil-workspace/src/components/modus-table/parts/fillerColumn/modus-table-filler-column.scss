@@ -7,8 +7,11 @@ modus-table-filler-column {
     display: none;
   }
 
-  table tr {
-    height: inherit;
+  table {
+    thead tr,
+    tfoot tr {
+      height: inherit;
+    }
   }
 
   table:not(.cell-borderless) {
