@@ -941,7 +941,7 @@ export namespace Components {
          */
         "checkedId": string;
         /**
-          * The radio button group name.
+          * The radio button group name. Used to group individual radio elements into one group.
          */
         "name": string;
         /**
@@ -1313,9 +1313,17 @@ export namespace Components {
          */
         "autoFocusInput": boolean;
         /**
+          * (optional) Capitalization behavior when using a non-traditional keyboard (e.g. microphone, touch screen)
+         */
+        "autocapitalize": boolean | 'none' | 'off' | 'sentences' | 'on' | 'words' | 'characters';
+        /**
           * (optional) Sets autocomplete on the input.
          */
         "autocomplete": string | null;
+        /**
+          * (optional) Whether to activate automatic correction while the user is editing this field in Safari.
+         */
+        "autocorrect": boolean | 'off' | 'on';
         /**
           * (optional) Whether the input has a clear button.
          */
@@ -1324,6 +1332,10 @@ export namespace Components {
           * (optional) Whether the input is disabled.
          */
         "disabled": boolean;
+        /**
+          * (optional) Which action label to present for the enter key on virtual keyboards.
+         */
+        "enterkeyhint": 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
         /**
           * (optional) The input's error state text.
          */
@@ -1380,6 +1392,10 @@ export namespace Components {
           * (optional) The input's size.
          */
         "size": 'medium' | 'large';
+        /**
+          * (optional) Whether to enable spell checking.
+         */
+        "spellcheck": boolean;
         /**
           * (optional) The input's text alignment.
          */
@@ -3605,7 +3621,7 @@ declare namespace LocalJSX {
          */
         "checkedId"?: string;
         /**
-          * The radio button group name.
+          * The radio button group name. Used to group individual radio elements into one group.
          */
         "name"?: string;
         /**
@@ -4047,9 +4063,17 @@ declare namespace LocalJSX {
          */
         "autoFocusInput"?: boolean;
         /**
+          * (optional) Capitalization behavior when using a non-traditional keyboard (e.g. microphone, touch screen)
+         */
+        "autocapitalize"?: boolean | 'none' | 'off' | 'sentences' | 'on' | 'words' | 'characters';
+        /**
           * (optional) Sets autocomplete on the input.
          */
         "autocomplete"?: string | null;
+        /**
+          * (optional) Whether to activate automatic correction while the user is editing this field in Safari.
+         */
+        "autocorrect"?: boolean | 'off' | 'on';
         /**
           * (optional) Whether the input has a clear button.
          */
@@ -4058,6 +4082,10 @@ declare namespace LocalJSX {
           * (optional) Whether the input is disabled.
          */
         "disabled"?: boolean;
+        /**
+          * (optional) Which action label to present for the enter key on virtual keyboards.
+         */
+        "enterkeyhint"?: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
         /**
           * (optional) The input's error state text.
          */
@@ -4114,6 +4142,10 @@ declare namespace LocalJSX {
           * (optional) The input's size.
          */
         "size"?: 'medium' | 'large';
+        /**
+          * (optional) Whether to enable spell checking.
+         */
+        "spellcheck"?: boolean;
         /**
           * (optional) The input's text alignment.
          */
