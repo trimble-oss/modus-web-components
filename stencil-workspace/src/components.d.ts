@@ -941,7 +941,7 @@ export namespace Components {
          */
         "checkedId": string;
         /**
-          * The radio button group name.
+          * The radio button group name. Used to group individual radio elements into one group.
          */
         "name": string;
         /**
@@ -3605,7 +3605,7 @@ declare namespace LocalJSX {
          */
         "checkedId"?: string;
         /**
-          * The radio button group name.
+          * The radio button group name. Used to group individual radio elements into one group.
          */
         "name"?: string;
         /**
