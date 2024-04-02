@@ -39,6 +39,9 @@ export class ModusChip {
   /** (optional) Maximum width for the Chip's text and shows ellipsis when truncated */
   @Prop() maxWidth: string;
 
+  /** (optional) Whether the chip is active. */
+  @Prop() isActive = false;
+
   /** An event that fires on chip click. */
   @Event() chipClick: EventEmitter;
 
@@ -97,6 +100,7 @@ export class ModusChip {
       ${this.classBySize.get(this.size)}
       ${!this.showCheckmark && !this.imageUrl ? 'no-left-icon' : null}
       ${!this.showClose ? 'no-right-icon' : null}
+      ${this.isActive ? 'active' : ''}
     `;
     const style = {
       style: {

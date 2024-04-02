@@ -46,6 +46,15 @@ export default {
         type: { summary: 'string' },
       },
     },
+    isActive:{
+      name: 'is-active',
+      description: 'Whether the chip is active',
+      table: {
+      defaultValue: { summary: false },
+      type: { summary: 'boolean' },
+      },
+
+    },
     showCheckmark: {
       name: 'show-checkmark',
       description: 'Whether to show the checkmark',
@@ -107,6 +116,7 @@ export const Default = ({
   disabled,
   hasError,
   imageUrl,
+  isActive,
   showCheckmark,
   showClose,
   size,
@@ -119,6 +129,7 @@ export const Default = ({
     ?disabled=${disabled}
     has-error=${hasError}
     image-url=${imageUrl}
+    is-active=${isActive}
     show-checkmark=${showCheckmark}
     show-close=${showClose}
     size=${size}
@@ -132,6 +143,7 @@ Default.args = {
   disabled: false,
   hasError: false,
   imageUrl: 'https://randomuser.me/api/portraits/lego/1.jpg',
+  isActive: false,
   showCheckmark: false,
   showClose: false,
   size: 'medium',
@@ -145,6 +157,7 @@ export const Outline = ({
   disabled,
   hasError,
   imageUrl,
+  isActive,
   showCheckmark,
   showClose,
   size,
@@ -157,6 +170,7 @@ export const Outline = ({
     ?disabled=${disabled}
     has-error=${hasError}
     image-url=${imageUrl}
+    is-active=${isActive}
     show-checkmark=${showCheckmark}
     show-close=${showClose}
     size=${size}
@@ -170,6 +184,7 @@ Outline.args = {
   disabled: false,
   hasError: false,
   imageUrl: 'https://randomuser.me/api/portraits/lego/1.jpg',
+  isActive: false,
   showCheckmark: false,
   showClose: false,
   size: 'medium',

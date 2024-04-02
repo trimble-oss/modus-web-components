@@ -11,6 +11,7 @@ import { Anchor } from '@storybook/addon-docs';
 ### Default
 
 <modus-chip image-url="https://randomuser.me/api/portraits/lego/1.jpg" show-close value="Bryan"></modus-chip>
+<modus-chip is-active image-url="https://randomuser.me/api/portraits/lego/1.jpg" show-close value="Bryan"></modus-chip>
 <modus-chip has-error image-url="https://randomuser.me/api/portraits/lego/1.jpg" show-close value="Bryan"></modus-chip>
 <modus-chip disabled image-url="https://randomuser.me/api/portraits/lego/1.jpg" show-close value="Bryan"></modus-chip>
 
@@ -19,6 +20,7 @@ import { Anchor } from '@storybook/addon-docs';
 ### Outline
 
 <modus-chip image-url="https://randomuser.me/api/portraits/lego/1.jpg" show-close chip-style="outline" value="Bryan"></modus-chip>
+<modus-chip is-active image-url="https://randomuser.me/api/portraits/lego/1.jpg" show-close chip-style="outline" value="Bryan"></modus-chip>
 <modus-chip has-error image-url="https://randomuser.me/api/portraits/lego/1.jpg" show-close chip-style="outline" value="Bryan"></modus-chip>
 <modus-chip disabled image-url="https://randomuser.me/api/portraits/lego/1.jpg" show-close chip-style="outline" value="Bryan"></modus-chip>
 
@@ -28,10 +30,12 @@ import { Anchor } from '@storybook/addon-docs';
 
 ```html
 <modus-chip image-url="https://example.com/image.jpg" show-close value="Bryan"></modus-chip>
+<modus-chip is-active image-url="https://example.com/image.jpg" show-close value="Bryan"></modus-chip>
 <modus-chip has-error image-url="https://example.com/image.jpg" show-close value="Bryan"></modus-chip>
 <modus-chip disabled image-url="https://example.com/image.jpg" show-close value="Bryan"></modus-chip>
 
 <modus-chip image-url="https://example.com/image.jpg" show-close chip-style="outline" value="Bryan"></modus-chip>
+<modus-chip is-active image-url="https://example.com/image.jpg" show-close chip-style="outline" value="Bryan"></modus-chip>
 <modus-chip has-error image-url="https://example.com/image.jpg" show-close chip-style="outline" value="Bryan"></modus-chip>
 <modus-chip disabled image-url="https://example.com/image.jpg" show-close chip-style="outline" value="Bryan"></modus-chip>
 
@@ -47,6 +51,7 @@ import { Anchor } from '@storybook/addon-docs';
 | disabled       | Whether the chip is disabled                                        | boolean |                    | false         |          |
 | has-error      | Whether the chip has an error                                       | boolean |                    | false         |          |
 | image-url      | The chip's image url                                                | string  |                    |               |          |
+| is-active      | Whether the chip is active                                          | boolean |                    | false         |          |
 | show-checkmark | Whether to show the checkmark                                       | boolean |                    | false         |          |
 | show-close     | Whether to show the close icon                                      | boolean |                    | false         |          |
 | size           | The chip's size                                                     | string  | 'medium', 'small'  | 'medium'      |          |

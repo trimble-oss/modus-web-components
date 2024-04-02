@@ -14,6 +14,7 @@
 | `disabled`      | `disabled`       | (optional) Whether the chip is disabled.                                       | `boolean`              | `false`     |
 | `hasError`      | `has-error`      | (optional) Whether the chip has an error.                                      | `boolean`              | `false`     |
 | `imageUrl`      | `image-url`      | (optional) The image's url.                                                    | `string`               | `undefined` |
+| `isActive`      | `is-active`      | (optional) Whether the chip is active.                                         | `boolean`              | `false`     |
 | `maxWidth`      | `max-width`      | (optional) Maximum width for the Chip's text and shows ellipsis when truncated | `string`               | `undefined` |
 | `showCheckmark` | `show-checkmark` | (optional) Whether to show the checkmark.                                      | `boolean`              | `false`     |
 | `showClose`     | `show-close`     | (optional) Whether to show the close icon.                                     | `boolean`              | `false`     |
