@@ -21,5 +21,10 @@ modus-table-filler-column {
         border-left: $rem-1px $modus-table-border-color solid !important;
       }
     }
+
+    thead tr,
+    tr {
+      height: inherit;
+    }
   }
 }
