@@ -21,6 +21,106 @@ describe('modus-textarea-input', () => {
     `);
   });
 
+  it('renders autocapitalize', async () => {
+    const page = await newSpecPage({
+      components: [ModusTextareaInput],
+      html: '<modus-textarea-input autocapitalize="words"></modus-textarea-input>',
+    });
+    expect(page.root).toEqualHtml(`
+      <modus-textarea-input autocapitalize="words">
+        <mock:shadow-root>
+            <div class="modus-textarea-input">
+                <div class="input-container medium" part="input-container" style="height: 6rem;">
+                  <textarea class="text-align-left" id="mwc_id_1_textarea_input" rows="5" tabindex="0" autocapitalize="words">
+                  </textarea>
+                </div>
+            </div>
+        </mock:shadow-root>
+      </modus-textarea-input>
+    `);
+  });
+
+  it('renders autocorrect', async () => {
+    const page = await newSpecPage({
+      components: [ModusTextareaInput],
+      html: '<modus-textarea-input autocorrect="on"></modus-textarea-input>',
+    });
+    expect(page.root).toEqualHtml(`
+      <modus-textarea-input autocorrect="on">
+        <mock:shadow-root>
+            <div class="modus-textarea-input">
+                <div class="input-container medium" part="input-container" style="height: 6rem;">
+                <textarea class="text-align-left" id="mwc_id_2_textarea_input" rows="5" tabindex="0" autocorrect="on">
+                </textarea>
+                </div>
+            </div>
+        </mock:shadow-root>
+      </modus-textarea-input>
+    `);
+  });
+
+  it('renders enterkeyhint', async () => {
+    const page = await newSpecPage({
+      components: [ModusTextareaInput],
+      html: '<modus-textarea-input enterkeyhint="done"></modus-textarea-input>',
+    });
+    expect(page.root).toEqualHtml(`
+      <modus-textarea-input enterkeyhint="done">
+        <mock:shadow-root>
+            <div class="modus-textarea-input">
+                <div class="input-container medium" part="input-container" style="height: 6rem;">
+                <textarea class="text-align-left" id="mwc_id_3_textarea_input" rows="5" tabindex="0" enterkeyhint="done">
+                </textarea>
+                </div>
+            </div>
+        </mock:shadow-root>
+      </modus-textarea-input>
+    `);
+  });
+
+  it('renders spellcheck', async () => {
+    const page = await newSpecPage({
+      components: [ModusTextareaInput],
+      html: '<modus-textarea-input spellcheck></modus-textarea-input>',
+    });
+    expect(page.root).toEqualHtml(`
+      <modus-textarea-input spellcheck>
+        <mock:shadow-root>
+            <div class="modus-textarea-input">
+                <div class="input-container medium" part="input-container" style="height: 6rem;">
+                <textarea class="text-align-left" id="mwc_id_4_textarea_input" rows="5" tabindex="0" spellcheck>
+                </textarea>
+                </div>
+            </div>
+        </mock:shadow-root>
+      </modus-textarea-input>
+    `);
+  });
+
+  it('should set autocapitalize on the input to "on" when "true" is passed in', async () => {
+    const modusTextInput = new ModusTextareaInput();
+    modusTextInput.autocapitalize = true;
+    expect(modusTextInput.inputAutocapitalize).toEqual('on');
+  });
+
+  it('should set autocapitalize on the input to "off" when "false" is passed in', async () => {
+    const modusTextInput = new ModusTextareaInput();
+    modusTextInput.autocapitalize = false;
+    expect(modusTextInput.inputAutocapitalize).toEqual('off');
+  });
+
+  it('should set autocorrect on the input to "on" when "true" is passed in', async () => {
+    const modusTextInput = new ModusTextareaInput();
+    modusTextInput.autocorrect = true;
+    expect(modusTextInput.inputAutocorrect).toEqual('on');
+  });
+
+  it('should set autocorrect on the input to "off" when "false" is passed in', async () => {
+    const modusTextInput = new ModusTextareaInput();
+    modusTextInput.autocorrect = false;
+    expect(modusTextInput.inputAutocorrect).toEqual('off');
+  });
+
   it('should get the correct class by size', async () => {
     const modusTextInput = new ModusTextareaInput();
     let className = modusTextInput.classBySize.get(modusTextInput.size);

@@ -12,6 +12,12 @@ export class ModusTextareaInput {
   /** (optional) The input's aria-label. */
   @Prop() ariaLabel: string | null;
 
+  /** (optional) Capitalization behavior when using a non-traditional keyboard (e.g. microphone, touch screen) */
+  @Prop() autocapitalize: boolean | 'none' | 'off' | 'sentences' | 'on' | 'words' | 'characters';
+
+  /** (optional) Whether to activate automatic correction while the user is editing this field in Safari. */
+  @Prop() autocorrect: boolean | 'off' | 'on';
+
   /** (optional) Sets autofocus on the input. */
   @Prop() autoFocusInput: boolean;
 
@@ -20,6 +26,9 @@ export class ModusTextareaInput {
 
   /** (optional) Whether the input is disabled. */
   @Prop() disabled: boolean;
+
+  /** (optional) Which action label to present for the enter key on virtual keyboards. */
+  @Prop() enterkeyhint: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
 
   /** (optional) The input's error state text. */
   @Prop() errorText: string;
@@ -50,6 +59,9 @@ export class ModusTextareaInput {
 
   /** (optional) The input's size. */
   @Prop() size: 'medium' | 'large' = 'medium';
+
+  /** (optional) Whether to enable spell checking. */
+  @Prop() spellcheck: boolean;
 
   /** (optional) The input's text alignment. */
   @Prop() textAlign: 'left' | 'right' = 'left';
@@ -100,6 +112,24 @@ export class ModusTextareaInput {
     this.valueChange.emit(value);
   }
 
+  get inputAutocapitalize() {
+    if (this.autocapitalize === true) {
+      return 'on';
+    } else if (this.autocapitalize === false) {
+      return 'off';
+    }
+    return this.autocapitalize;
+  }
+
+  get inputAutocorrect() {
+    if (this.autocorrect === true) {
+      return 'on';
+    } else if (this.autocorrect === false) {
+      return 'off';
+    }
+    return this.autocorrect;
+  }
+
   render(): unknown {
     const iconSize = this.size === 'large' ? '24' : '16';
     const showClearIcon = this.clearable && !this.readOnly && !!this.value;
@@ -145,8 +175,11 @@ export class ModusTextareaInput {
             aria-invalid={!!this.errorText}
             aria-label={this.ariaLabel}
             aria-required={this.required?.toString()}
+            autoCapitalize={this.inputAutocapitalize}
+            autocorrect={this.autocorrect as string}
             class={buildTextInputClassNames()}
             disabled={this.disabled}
+            enterkeyhint={this.enterkeyhint}
             maxlength={this.maxLength}
             minlength={this.minLength}
             onInput={(event) => this.handleOnInput(event)}
@@ -154,6 +187,7 @@ export class ModusTextareaInput {
             readonly={this.readOnly}
             ref={(el) => (this.textInput = el as HTMLTextAreaElement)}
             rows={this.rows}
+            spellcheck={this.spellcheck}
             tabIndex={0}
             value={this.value}
             autofocus={this.autoFocusInput}
