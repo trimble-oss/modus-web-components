@@ -128,13 +128,7 @@ export class ModusDropdown {
     const width = `${this.toggleElement?.offsetWidth ? this.toggleElement?.offsetWidth : 0}px`;
 
     return (
-      <div
-        aria-label={this.ariaLabel}
-        class="dropdown"
-        onClick={(event) => this.handleDropdownClick(event)}
-        onKeyDown={(event) => {
-          this.handleDropdownKeyDown(event);
-        }}>
+      <div aria-label={this.ariaLabel} class="dropdown" onClick={(event) => this.handleDropdownClick(event)}>
         <slot name="dropdownToggle" />
         <div
           class={listContainerClass}
