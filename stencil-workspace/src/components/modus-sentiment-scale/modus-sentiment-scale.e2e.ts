@@ -85,6 +85,24 @@ describe('modus-sentiment-scale', () => {
     expect(await element.getProperty('disabled')).toBe(false);
   });
 
+  it('renders without "aria-disabled" attribute on sentiment scale container when not disabled', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-sentiment-scale type="thumbs"></modus-sentiment-scale>');
+
+    const element = await page.find('modus-sentiment-scale >>> .sentiment-scale-container');
+
+    expect(element).not.toHaveAttribute('aria-disabled');
+  });
+
+  it('renders with "aria-disabled" attribute on sentiment scale container set as "true" when disabled', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-sentiment-scale type="thumbs" disabled></modus-sentiment-scale>');
+
+    const element = await page.find('modus-sentiment-scale >>> .sentiment-scale-container');
+
+    expect(element.getAttribute('aria-disabled')).toEqual('true');
+  });
+
   it('renders with default type as "smileyIcons"', async () => {
     const page = await newE2EPage();
     await page.setContent('<modus-sentiment-scale></modus-sentiment-scale>');
