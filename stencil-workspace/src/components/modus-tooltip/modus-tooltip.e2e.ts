@@ -68,14 +68,14 @@ describe('modus-tooltip', () => {
           </modus-tooltip>
       `);
     await page.hover('modus-button'); // Hover over the element that triggers the tooltip
-    await new Promise((r) => setTimeout(r, 500));
+    await page.waitForChanges();
 
     const tooltip = await page.find('modus-tooltip >>> .tooltip');
     expect(tooltip.getAttribute('data-show')).not.toBeNull();
 
     const button = await page.find('modus-button >>> button');
     await button.click();
-    await new Promise((r) => setTimeout(r, 500));
+    await page.waitForChanges();
     expect(tooltip.getAttribute('data-show')).toBeNull();
   });
 });
