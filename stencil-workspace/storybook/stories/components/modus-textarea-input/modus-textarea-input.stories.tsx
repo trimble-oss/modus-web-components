@@ -12,6 +12,38 @@ export default {
         type: { summary: 'string' },
       },
     },
+    autocapitalize: {
+      name: 'autocapitalize',
+      control: {
+        options: [
+          'none',
+          'off',
+          'sentences',
+          'on',
+          'words',
+          'characters'
+        ],
+        type: 'select',
+      },
+      description: "Capitalization behavior when using a non-traditional keyboard (e.g. microphone, touch screen)",
+      table: {
+        type: { summary: `boolean | 'none' | 'off' | 'sentences' | 'on' | 'words' | 'characters'` },
+      },
+    },
+    autocorrect: {
+      name: 'autocorrect',
+      control: {
+        options: [
+          'off',
+          'on'
+        ],
+        type: 'select',
+      },
+      description: "Whether to activate automatic correction while the user is editing this field in Safari",
+      table: {
+        type: { summary: `boolean | 'off' | 'on'` },
+      },
+    },
     autoFocusInput: {
       name: 'auto-focus-input',
       description: 'Sets autofocus for the input',
@@ -31,6 +63,24 @@ export default {
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },
+      },
+    },
+    enterkeyhint: {
+      control: {
+        options: [
+          'enter',
+          'done',
+          'go',
+          'next',
+          'previous',
+          'search',
+          'send'
+        ],
+        type: 'select',
+      },
+      description: 'Which action label to present for the enter key on virtual keyboards',
+      table: {
+        type: { summary: `'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send'` },
       },
     },
     errorText: {
@@ -106,6 +156,16 @@ export default {
         type: { summary: "'medium' | 'large'" },
       },
     },
+    spellcheck: {
+      control: {
+        type: 'boolean'
+      },
+      name: 'spellcheck',
+      description: "Whether to enable spell checking.",
+      table: {
+        type: { summary: 'boolean' },
+      },
+    },
     textAlign: {
       name: 'text-align',
       control: {
@@ -154,10 +214,12 @@ export default {
 
 const Template = ({
   ariaLabel,
-  autocomplete,
+  autocapitalize,
+  autocorrect,
   autoFocusInput,
   clearable,
   disabled,
+  enterkeyhint,
   errorText,
   helperText,
   inputmode,
@@ -169,6 +231,7 @@ const Template = ({
   required,
   rows,
   size,
+  spellcheck,
   textAlign,
   validText,
   value,
@@ -176,10 +239,12 @@ const Template = ({
 <form>
   <modus-textarea-input
     aria-label=${ariaLabel}
-    autocomplete=${autocomplete}
+    autocapitalize=${autocapitalize}
+    autocorrect=${autocorrect}
     auto-focus-input=${autoFocusInput}
     clearable=${clearable}
     ?disabled=${disabled}
+    enterkeyhint=${enterkeyhint}
     error-text=${errorText}
     helper-text=${helperText}
     inputmode=${inputmode}
@@ -191,6 +256,7 @@ const Template = ({
     ?required=${required}
     rows=${rows}
     size=${size}
+    ?spellcheck=${spellcheck}
     text-align=${textAlign}
     valid-text=${validText}
     value=${value}></modus-textarea-input>
@@ -200,10 +266,12 @@ const Template = ({
 export const Default = Template.bind({});
 Default.args = {
   ariaLabel: '',
-  autocomplete: '',
+  autocapitalize: undefined,
+  autocorrect: null,
   autoFocusInput: true,
   clearable: false,
   disabled: false,
+  enterkeyhint: undefined,
   errorText: '',
   helperText: '',
   inputmode: '',
@@ -215,6 +283,7 @@ Default.args = {
   required: false,
   rows: 5,
   size: 'medium',
+  spellcheck: false,
   textAlign: 'left',
   validText: '',
   value: '',
