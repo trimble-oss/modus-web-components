@@ -6,7 +6,6 @@ import { convertIconToSVG } from '../../utils/utils';
 @Component({
   tag: 'modus-text-editor',
   styleUrl: 'modus-text-editor.scss',
-  shadow: true,
 })
 export class ModusTextEditor {
   @Element() hostElement;
@@ -16,26 +15,6 @@ export class ModusTextEditor {
 
   private fontSizeArr = ['14px', '16px', '18px'];
 
-  componentDidLoad() {
-    const editorContainer = this.hostElement.shadowRoot.querySelector('.editor-container');
-    this.setIcons();
-    this.setFontSize();
-    this.quillInstance = new Quill(editorContainer, {
-      modules: {
-        toolbar: [
-          [{ font: ['serif', 'monospace'] }],
-          [{ size: this.fontSizeArr }],
-          ['bold', 'italic', 'underline', 'strike'],
-          [{ align: '' }, { align: 'center' }, { align: 'right' }],
-          [{ list: 'bullet' }, { list: 'ordered' }],
-          ['link'],
-        ],
-      },
-      theme: 'snow',
-    });
-
-    this.setCaretIcons();
-  }
   setIcons() {
     const icons = Quill.import('ui/icons');
     icons['bold'] = convertIconToSVG(<ModusIconMap icon="text_bold" size="28" />);
@@ -49,6 +28,7 @@ export class ModusTextEditor {
     icons['list']['ordered'] = convertIconToSVG(<ModusIconMap icon="list_numbered" size="28" />);
     icons['link'] = convertIconToSVG(<ModusIconMap icon="link" size="28" />);
   }
+
   setFontSize() {
     const fontSize: any = Quill.import('attributors/style/size');
 
@@ -56,12 +36,60 @@ export class ModusTextEditor {
 
     Quill.register(fontSize, true);
   }
+
   setCaretIcons() {
-    const fontPicker = this.hostElement.shadowRoot.querySelector('.ql-font .ql-picker-label svg');
-    const fontSizePicker = this.hostElement.shadowRoot.querySelector('.ql-size .ql-picker-label svg');
+    const fontPicker = this.hostElement.querySelector('.ql-font .ql-picker-label svg');
+    const fontSizePicker = this.hostElement.querySelector('.ql-size .ql-picker-label svg');
 
     fontPicker.innerHTML = convertIconToSVG(<ModusIconMap icon="caret_down" />);
     fontSizePicker.innerHTML = convertIconToSVG(<ModusIconMap icon="caret_down" />);
+  }
+
+  componentDidRender() {
+    if (!this.quillInstance) {
+      this.initializeQuillEditor();
+    }
+  }
+
+  initializeQuillEditor() {
+    const editorContainer = this.hostElement.querySelector('.editor-container');
+
+    this.setIcons();
+    this.setFontSize();
+    const toolbarOptions = {
+      container: [
+        [{ font: ['serif', 'monospace'] }],
+        [{ size: this.fontSizeArr }],
+        ['bold', 'italic', 'underline', 'strike'],
+        [{ align: '' }, { align: 'center' }, { align: 'right' }],
+        [{ list: 'bullet' }, { list: 'ordered' }],
+        ['link'],
+      ],
+      handlers: {
+        link: function (value) {
+          console.log(value);
+          if (value) {
+            const href = prompt('Enter the URL');
+
+            console.log('quill', this.quill.format('link', href));
+            this.quill.format('link', true);
+          } else {
+            this.quill.format('link', false);
+          }
+        },
+      },
+    };
+
+    if (editorContainer) {
+      this.quillInstance = new Quill(editorContainer, {
+        modules: {
+          toolbar: toolbarOptions,
+        },
+        theme: 'snow',
+      });
+    }
+
+    this.setCaretIcons();
   }
 
   render() {
