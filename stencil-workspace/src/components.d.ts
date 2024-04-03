@@ -2388,7 +2388,7 @@ declare global {
         new (): HTMLModusTableFillerColumnElement;
     };
     interface HTMLModusTableRowActionsElementEventMap {
-        "overflowRowActions": any;
+        "overflowRowActions": unknown;
     }
     interface HTMLModusTableRowActionsElement extends Components.ModusTableRowActions, HTMLStencilElement {
         addEventListener<K extends keyof HTMLModusTableRowActionsElementEventMap>(type: K, listener: (this: HTMLModusTableRowActionsElement, ev: ModusTableRowActionsCustomEvent<HTMLModusTableRowActionsElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -4024,7 +4024,7 @@ declare namespace LocalJSX {
     }
     interface ModusTableRowActions {
         "context"?: TableContext;
-        "onOverflowRowActions"?: (event: ModusTableRowActionsCustomEvent<any>) => void;
+        "onOverflowRowActions"?: (event: ModusTableRowActionsCustomEvent<unknown>) => void;
         "row"?: Row<unknown>;
     }
     interface ModusTableRowActionsCell {

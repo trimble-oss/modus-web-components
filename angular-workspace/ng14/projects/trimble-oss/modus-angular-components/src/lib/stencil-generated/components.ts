@@ -1370,7 +1370,7 @@ export class ModusTableRowActions {
 
 export declare interface ModusTableRowActions extends Components.ModusTableRowActions {
 
-  overflowRowActions: EventEmitter<CustomEvent<any>>;
+  overflowRowActions: EventEmitter<CustomEvent<unknown>>;
 }
 
 

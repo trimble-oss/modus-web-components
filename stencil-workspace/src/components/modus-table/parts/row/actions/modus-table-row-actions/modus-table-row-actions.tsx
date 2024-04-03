@@ -19,7 +19,7 @@ export class ModusTableRowActions {
   @Prop() row: Row<unknown>;
   @Prop() context: TableContext;
 
-  @Event() overflowRowActions: EventEmitter<any>;
+  @Event() overflowRowActions: EventEmitter<unknown>;
 
   private overflowButtonRef: HTMLModusButtonElement;
 
