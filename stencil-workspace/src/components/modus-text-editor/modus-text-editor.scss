@@ -87,10 +87,6 @@
   }
 }
 
-.ql-editor table {
-  border-collapse: collapse;
-}
-
 .ql-editor td {
   border: 1px solid #000;
   padding: 2px 5px;
@@ -479,6 +475,7 @@
 }
 
 .ql-editor table {
+  border-collapse: collapse;
   table-layout: fixed;
   width: 100%;
 }
@@ -561,17 +558,11 @@
 }
 
 .ql-editor .ql-font-serif {
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
+  font-family: Georgia, 'Times New Roman', serif;
 }
 
 .ql-editor .ql-font-monospace {
-  font-family:
-    Monaco,
-    "Courier New",
-    monospace;
+  font-family: Monaco, 'Courier New', monospace;
 }
 
 .ql-editor .ql-size-small {
@@ -773,13 +764,9 @@
   visibility: hidden;
 }
 
-.ql-snow .ql-tooltip {
-  position: absolute;
-  transform: translateY(10px);
-}
-
 .ql-snow .ql-tooltip a {
   cursor: pointer;
+  line-height: 26px;
   text-decoration: none;
 }
 
@@ -882,27 +869,21 @@
   padding-left: 16px;
 }
 
-.ql-snow .ql-editor code,
-.ql-snow .ql-editor .ql-code-block-container {
+.ql-snow .ql-editor code {
   background-color: #f0f0f0;
   border-radius: 3px;
-}
-
-.ql-snow .ql-editor .ql-code-block-container {
-  margin-bottom: 5px;
-  margin-top: 5px;
-  padding: 5px 10px;
-}
-
-.ql-snow .ql-editor code {
   font-size: 85%;
   padding: 2px 4px;
 }
 
 .ql-snow .ql-editor .ql-code-block-container {
-  background-color: #23241f;
+  background-color: #f0f0f0;
+  border-radius: 3px;
   color: #f8f8f2;
+  margin-bottom: 5px;
+  margin-top: 5px;
   overflow: visible;
+  padding: 5px 10px;
 }
 
 .ql-snow .ql-editor img {
@@ -1157,17 +1138,11 @@
 }
 
 .ql-snow .ql-picker.ql-font .ql-picker-item[data-value='serif']::before {
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
+  font-family: Georgia, 'Times New Roman', serif;
 }
 
 .ql-snow .ql-picker.ql-font .ql-picker-item[data-value='monospace']::before {
-  font-family:
-    Monaco,
-    "Courier New",
-    monospace;
+  font-family: Monaco, 'Courier New', monospace;
 }
 
 .ql-snow .ql-picker.ql-size {
@@ -1272,6 +1247,8 @@
   box-shadow: 0 0 5px #ddd;
   color: #444;
   padding: 5px 12px;
+  position: absolute;
+  transform: translateY(10px);
   white-space: nowrap;
 }
 
@@ -1309,10 +1286,6 @@
 .ql-snow .ql-tooltip a.ql-remove::before {
   content: 'Remove';
   margin-left: 8px;
-}
-
-.ql-snow .ql-tooltip a {
-  line-height: 26px;
 }
 
 .ql-snow .ql-tooltip.ql-editing a.ql-preview,
