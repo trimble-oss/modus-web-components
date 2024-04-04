@@ -163,7 +163,6 @@ export class ModusTableCellEditor {
       options = args.map((option: any) => option.display) as ModusAutocompleteOption[] | string[];
     } else {
       options = (args || []) as ModusAutocompleteOption[] | string[];
-      console.log('options', options);
     }
     return (
       <modus-autocomplete
@@ -187,7 +186,6 @@ export class ModusTableCellEditor {
               }
             });
           } else {
-            console.log('e.detail', e.detail);
             this.editedValue = e.detail;
           }
         }}
