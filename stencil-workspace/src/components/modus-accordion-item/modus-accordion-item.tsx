@@ -1,4 +1,4 @@
-// eslint-disable-next-line
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Component, Event, EventEmitter, Prop, h } from '@stencil/core';
 import { generateElementId } from '../../utils/utils';
 import { IconExpandLessCircle } from '../../icons/generated-icons/IconExpandLessCircle';

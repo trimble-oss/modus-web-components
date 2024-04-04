@@ -16,10 +16,9 @@
     font-size: $rem-16px;
     font-weight: $font-weight-semi-bold;
     height: 48px;
+    padding: 0 16px;
 
     .icon {
-      margin-left: 8px;
-      margin-right: 0;
       margin-top: 4px;
     }
 
@@ -29,6 +28,7 @@
     }
 
     &.expanded {
+      background-color: $modus-accordion-item-header-expanded-bg;
       color: $modus-accordion-item-header-expand-color;
     }
 
@@ -49,7 +49,6 @@
       align-items: center;
       display: flex;
       margin-left: auto;
-      margin-right: $rem-8px;
       transition: transform 0.2s ease-in-out;
 
       &.reverse {
@@ -69,7 +68,7 @@
 
     .body-content {
       font-size: $rem-14px;
-      padding: $rem-16px $rem-8px;
+      padding: $rem-16px;
     }
 
     &.collapse:not(.show) {
