@@ -197,6 +197,7 @@ export class ModusTableCellMain {
       <Host>
         {this.editMode ? (
           <modus-table-cell-editor
+            data-type={this.cell.column.columnDef[COLUMN_DEF_DATATYPE_KEY]}
             value={valueString}
             type={this.getEditorType()}
             args={this.getEditorArgs()}
