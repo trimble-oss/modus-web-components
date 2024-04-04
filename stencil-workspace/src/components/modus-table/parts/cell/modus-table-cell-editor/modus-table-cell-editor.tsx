@@ -47,7 +47,7 @@ export class ModusTableCellEditor {
         this.handleBlur();
       }
     };
-    document.addEventListener('click', this.outsideClickListener);
+    if (this.type == 'date') document.addEventListener('click', this.outsideClickListener);
   }
   disconnectedCallback(): void {
     document.removeEventListener('click', this.outsideClickListener);

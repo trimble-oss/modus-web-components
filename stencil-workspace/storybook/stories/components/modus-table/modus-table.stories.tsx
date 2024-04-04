@@ -790,8 +790,18 @@ CheckboxRowSelection.args = {
   }, data: makeData(7)
 };
 
-const EditableColumns =DefaultColumns.map(col =>{
-  if(col.dataType === 'link') return col;
+const DefaultColumnsWithPriority = [
+  ...DefaultColumns,
+  {
+    header: 'Priority',
+    accessorKey: 'priority',
+    sortingFn: 'sortForBadge',
+    id: 'priority',
+    dataType: 'badge',
+    maxSize: 100,
+  },
+];
+const EditableColumns =DefaultColumnsWithPriority.map(col =>{
   if(col.accessorKey === 'status'){
     return {...col,  cellEditable:true,
       cellEditorType: 'dropdown',
@@ -803,6 +813,44 @@ const EditableColumns =DefaultColumns.map(col =>{
         ]
       } };
   }
+  if(col.accessorKey === 'firstName'){
+    return {...col,  cellEditable:true,
+      cellEditorType: 'autocomplete',
+    cellEditorArgs: {
+      options:[
+        "Tom",
+        "Patrick",
+        "Jerry",
+      ],
+    },
+  }
+}
+if(col.accessorKey === 'email'){
+  return {...col,  cellEditable:true,
+    cellEditorType: 'autocomplete',
+    cellEditorArgs: {
+      options:[
+        { display: 'jerry', url: 'jerrymouse@example.com'},
+        {display:'tomcat@example.com', url: 'tomcat@example.com'},
+        {display:'patrickstar@example.com', url: 'sss'},
+      ],
+  }
+}
+}
+if (col.accessorKey === 'priority') {
+  return {
+    ...col,
+    cellEditable: true,
+    cellEditorType: 'dropdown',
+    cellEditorArgs: {
+      options: [
+        { display: 'Low',type: 'counter', color: 'danger', size: 'medium'},
+        { display: 'Medium',type: 'counter', color: 'primary', size: 'medium',},
+        { display: 'High',type: 'counter', color: 'success', size: 'medium'},
+      ],
+    },
+  };
+}
   else return {...col, cellEditable: true};
 });
 export const InlineEditing = Template.bind({});

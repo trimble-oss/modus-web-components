@@ -502,6 +502,79 @@ Refer to the [Accessibility](#accessibility) section for how to use keyboard for
       ]
     },
   },
+  {
+  header: 'Priority',
+  accessorKey: 'priority',
+  id: 'priority',
+  dataType: 'badge',
+  cellEditable: true,
+  cellEditorType: 'autocomplete',
+  cellEditorArgs: {
+    options: [
+      { size: 'medium', type: 'counter', text: 'High', color: 'success' },
+      { size: 'medium', type: 'counter', text: 'Low', color: 'danger' },
+      { size: 'medium', type: 'counter', text: 'Medium', color: 'warning' },
+    ]
+  },
+},
+{
+  header: 'Email',
+  accessorKey: 'email',
+  id: 'email',
+  dataType: 'link',
+  size: 230,
+  minSize: 80,
+  cellEditable: true,
+  cellEditorType: 'autocomplete',
+  cellEditorArgs: {
+    options: [
+      { display: 'Google', url: 'https://www.google.com' },
+      { display: 'Yahoo', url: 'https://www.yahoo.com' },
+      { display: 'Bing', url: 'https://www.bing.com' },
+    ]
+  },
+},
+{
+  header: 'Priority',
+  accessorKey: 'priority',
+  id: 'priority',
+  dataType: 'badge',
+  cellEditable: true,
+  cellEditorType: 'dropdown',
+  cellEditorArgs: {
+    options: [
+      { size: 'medium', type: 'counter', display: 'High', color: 'success' },
+      { size: 'medium', type: 'counter', display: 'Low', color: 'danger' },
+      { size: 'medium', type: 'counter', display: 'Medium', color: 'warning' },
+    ]
+  },
+},
+{
+  header: 'Email',
+  accessorKey: 'email',
+  id: 'email',
+  dataType: 'link',
+  size: 230,
+  minSize: 80,
+  cellEditable: true,
+  cellEditorType: 'dropdown',
+  cellEditorArgs: {
+    options: [
+      { display: 'Google', url: 'https://www.google.com' },
+      { display: 'Yahoo', url: 'https://www.yahoo.com' },
+      { display: 'Bing', url: 'https://www.bing.com' },
+    ]
+  },
+},
+{
+  header: 'Date',
+  accessorKey: 'date',
+  id: 'date',
+  dataType: 'date',
+  cellEditable: true,
+  cellEditorType: 'date',
+},
+
 ```
 
 ### Row Actions
