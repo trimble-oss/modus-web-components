@@ -155,18 +155,41 @@ export class ModusTableCellEditor {
   }
 
   renderAutocompleteInput(): JSX.Element[] {
-    const options = ((this.args as ModusTableCellDropdownEditorArgs)?.options || []) as ModusAutocompleteOption[] | string[];
+    let options;
+    const args = (this.args as ModusTableCellDropdownEditorArgs)?.options;
+    if (this.dataType === 'badge') {
+      options = args.map((option: any) => option.text) as ModusAutocompleteOption[] | string[];
+    } else if (this.dataType === 'link') {
+      options = args.map((option: any) => option.display) as ModusAutocompleteOption[] | string[];
+    } else {
+      options = (args || []) as ModusAutocompleteOption[] | string[];
+      console.log('options', options);
+    }
     return (
       <modus-autocomplete
         {...this.getDefaultProps('Autocomplete input')}
         include-search-icon="false"
         size="large"
-        // onClick={(e: MouseEvent) => e.stopPropagation()}
+        //onClick={(e: MouseEvent) => e.stopPropagation()}
         options={options}
-        // onInputBlur={this.handleBlur}
+        onBlur={this.handleBlur}
         onOptionSelected={(e: CustomEvent<string>) => {
-          this.editedValue = e.detail;
-          this.valueChange(this.editedValue as string);
+          if (this.dataType === 'badge') {
+            args.map((option: any) => {
+              if (option.text == e.detail) {
+                this.editedValue = option;
+              }
+            });
+          } else if (this.dataType === 'link') {
+            args.map((option: any) => {
+              if (option.display == e.detail) {
+                this.editedValue = option;
+              }
+            });
+          } else {
+            console.log('e.detail', e.detail);
+            this.editedValue = e.detail;
+          }
         }}
         // value={selectedOption}
         // onKeyDown={(e) => e.stopPropagation()}

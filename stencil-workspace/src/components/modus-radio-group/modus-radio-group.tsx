@@ -14,7 +14,7 @@ export class ModusRadioGroup {
   /** The ID of the checked radio button. */
   @Prop({ mutable: true }) checkedId: string;
 
-  /** The radio button group name. */
+  /** The radio button group name. Used to group individual radio elements into one group. */
   @Prop() name: string;
 
   /** The radio buttons to render. */
