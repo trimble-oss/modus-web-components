@@ -205,7 +205,7 @@ export class ModusModal {
     return (
       <div
         aria-hidden={this.closed}
-        aria-label={this.ariaLabel}
+        aria-label={this.ariaLabel || undefined}
         class={`modus-modal overlay ${this.visible ? 'visible' : 'hidden'}`}
         onClick={(event) => this.handleOverlayClick(event)}
         role="dialog"
