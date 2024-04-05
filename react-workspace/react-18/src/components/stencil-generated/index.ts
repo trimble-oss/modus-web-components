@@ -16,6 +16,7 @@ export const ModusAutocomplete = /*@__PURE__*/createReactComponent<JSX.ModusAuto
 export const ModusBadge = /*@__PURE__*/createReactComponent<JSX.ModusBadge, HTMLModusBadgeElement>('modus-badge');
 export const ModusBreadcrumb = /*@__PURE__*/createReactComponent<JSX.ModusBreadcrumb, HTMLModusBreadcrumbElement>('modus-breadcrumb');
 export const ModusButton = /*@__PURE__*/createReactComponent<JSX.ModusButton, HTMLModusButtonElement>('modus-button');
+export const ModusButtonGroup = /*@__PURE__*/createReactComponent<JSX.ModusButtonGroup, HTMLModusButtonGroupElement>('modus-button-group');
 export const ModusCard = /*@__PURE__*/createReactComponent<JSX.ModusCard, HTMLModusCardElement>('modus-card');
 export const ModusCheckbox = /*@__PURE__*/createReactComponent<JSX.ModusCheckbox, HTMLModusCheckboxElement>('modus-checkbox');
 export const ModusChip = /*@__PURE__*/createReactComponent<JSX.ModusChip, HTMLModusChipElement>('modus-chip');

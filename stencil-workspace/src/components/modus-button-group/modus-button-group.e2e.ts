@@ -44,7 +44,7 @@ describe('modus-button-group', () => {
     }
   });
 
-  it('emits selected buttons for default selectionType', async () => {
+  it('does not mark buttons active for default selectionType', async () => {
     const page = await newE2EPage();
 
     await page.setContent(`
@@ -63,13 +63,16 @@ describe('modus-button-group', () => {
 
     buttons[0].click();
     await page.waitForChanges();
+
     for (let i = 0; i < buttons.length; i++) {
       const button = await buttons[i]?.shadowRoot.querySelector('button');
       expect(button).toBeTruthy();
       expect(button).not.toHaveClass('active');
     }
+
     buttons[1].click();
     await page.waitForChanges();
+
     for (let i = 0; i < buttons.length; i++) {
       const button = await buttons[i]?.shadowRoot.querySelector('button');
       expect(button).toBeTruthy();
@@ -96,10 +99,11 @@ describe('modus-button-group', () => {
     expect(buttons).toBeTruthy();
 
     buttons[0].click();
-    const emittedButtons = await buttonGroup.spyOnEvent('buttonsSelected');
+    const emittedButtons = await buttonGroup.spyOnEvent('selectionChange');
     await page.waitForChanges();
 
     expect(emittedButtons).toHaveReceivedEventTimes(1);
+    expect(emittedButtons.events[0]?.detail.length).toBe(1);
 
     expect(emittedButtons.length).toBe(1);
     const button = await buttons[0]?.shadowRoot.querySelector('button');
@@ -115,6 +119,7 @@ describe('modus-button-group', () => {
     await page.waitForChanges();
 
     expect(emittedButtons).toHaveReceivedEventTimes(2);
+    expect(emittedButtons.events[1]?.detail.length).toBe(1);
 
     const button1 = await buttons[1]?.shadowRoot.querySelector('button');
     expect(button1).toBeTruthy();
@@ -126,5 +131,57 @@ describe('modus-button-group', () => {
       expect(button).toBeTruthy();
       expect(button).not.toHaveClass('active');
     }
+  });
+
+  it('handles multiple selectionType correctly', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-button-group selection-type="multiple">
+        <modus-button>Button 1</modus-button>
+        <modus-button>Button 2</modus-button>
+        <modus-button>Button 3</modus-button>
+      </modus-button-group>
+    `);
+    await page.waitForChanges();
+
+    const buttonGroup = await page.find('modus-button-group');
+    expect(buttonGroup).toBeTruthy();
+
+    const buttons = await page.findAll('modus-button');
+    expect(buttons).toBeTruthy();
+
+    buttons[0].click();
+    const emittedButtons = await buttonGroup.spyOnEvent('selectionChange');
+    await page.waitForChanges();
+
+    expect(emittedButtons).toHaveReceivedEventTimes(1);
+    expect(emittedButtons.events[0]?.detail.length).toBe(1);
+
+    expect(emittedButtons.length).toBe(1);
+    const button = await buttons[0]?.shadowRoot.querySelector('button');
+    expect(button).toBeTruthy();
+    expect(button).toHaveClass('active');
+    for (let i = 1; i < buttons.length; i++) {
+      const button = await buttons[i]?.shadowRoot.querySelector('button');
+      expect(button).toBeTruthy();
+      expect(button).not.toHaveClass('active');
+    }
+
+    buttons[1].click();
+    await page.waitForChanges();
+
+    expect(emittedButtons).toHaveReceivedEventTimes(2);
+    expect(emittedButtons.events[1]?.detail.length).toBe(2);
+    const indicesToCheck = [0, 1];
+    for (const i of indicesToCheck) {
+      const button = await buttons[i]?.shadowRoot.querySelector('button');
+      expect(button).toBeTruthy();
+      expect(button).toHaveClass('active');
+    }
+
+    const button1 = await buttons[2]?.shadowRoot.querySelector('button');
+    expect(button1).toBeTruthy();
+    expect(button1).not.toHaveClass('active');
   });
 });

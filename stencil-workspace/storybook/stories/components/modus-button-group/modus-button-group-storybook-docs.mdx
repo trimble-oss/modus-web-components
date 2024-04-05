@@ -2,10 +2,11 @@ import { Anchor } from '@storybook/addon-docs';
 
 # Button Group
 
-[Modus ButtonGroup](https://modus.trimble.com/components) web components provide a way to group buttons together. They are referenced using the `<modus-button-group>` custom HTML element.
+[Modus Button Group](https://modus.trimble.com/components) web components provide a way to group buttons together. They are referenced using the `<modus-button-group>` custom HTML element.
 This component utilizes the `modus-button` element, allowing you to render your own HTML in the button group.
 
 
+<Anchor storyId="components-button-group--default" />
 
 ## Default
 
@@ -24,20 +25,59 @@ This component utilizes the `modus-button` element, allowing you to render your 
 
 ```
 
+<Anchor storyId="components-button-group--single-selection" />
+
+## Single Selection
+
+<modus-button-group selection-type="single">
+  <modus-button>Button 1</modus-button>
+  <modus-button is-active="true">Button 2</modus-button>
+  <modus-button>Button 3</modus-button>
+</modus-button-group>
+
+```html
+<modus-button-group selection-type="single">
+  <modus-button>Button 1</modus-button>
+  <modus-button>Button 2</modus-button>
+  <modus-button>Button 3</modus-button>
+</modus-button-group>
+```
+
+<Anchor storyId="components-button-group--multiple-selection" />
+
+## Multiple Selection
+
+<modus-button-group selection-type="multiple">
+  <modus-button>Button 1</modus-button>
+  <modus-button>Button 2</modus-button>
+  <modus-button>Button 3</modus-button>
+</modus-button-group>
+
+```html
+<modus-button-group selection-type="multiple">
+  <modus-button>Button 1</modus-button>
+  <modus-button>Button 2</modus-button>
+  <modus-button>Button 3</modus-button>
+</modus-button-group>
+```
+
 
 ### Properties
 
-| Property        | Attribute        | Description                             | Type                       | Default                |
-| --------------- | ---------------- | --------------------------------------- | -------------------------- | ---------------------- |
-|`ariaLabel`      | `aria-label`     | (optional) The aria label of the button | `string`                   | `undefined`            |
-|`disabled`       | `disabled`       | (optional) The disabled state of button | `boolean`                  | `false`                |
-
+| Property        | Attribute        | Description                                                      | Type                                             | Default     |
+|-----------------|------------------|------------------------------------------------------------------|--------------------------------------------------|-------------|
+| `ariaLabel`     | `aria-label`     | (optional) The aria label of the button group                    | `string`                                         | `undefined` |
+| `disabled`      | `disabled`       | (optional) If `true`, the button group is disabled               | `boolean`                                        | `false`     |
+| `selectionType` | `selection-type` | (optional) The selection type (`none`, `single`, `multiple`)     | `ButtonGroupSelectionType`                       | `none`      |
+| `size`          | `size`           | (optional) The size of the buttons. (`small`, `medium`, `large`) | `ButtonSize`                                     | `medium`    |
 
 ### DOM Events
 
-| Event         | Description                                     | Type               |
-| ------------- | ----------------------------------------------- | ------------------ |
-| `buttonsSelected` | It contains the button selected | `CustomEvent<any>` |
+| Event             | Description                                                                                                                   | Type                                            |
+|-------------------|-------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------|
+| `buttonClick`     | An event that fires on button click.                                                                                          | `CustomEvent<ModusButtonGroupButtonClickEvent>` |
+| `selectionChange` | An event that fires when selection type is `single` or `multiple` on button click that provides the list of selected buttons. | `CustomEvent<HTMLModusButtonElement[]>`         |
+
 
 ### Accessibility
 - ButtonGroup gets an aria-label provided by the aria-label property input.

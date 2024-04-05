@@ -207,7 +207,7 @@ export declare interface ModusBreadcrumb extends Components.ModusBreadcrumb {
 
 @ProxyCmp({
   inputs: ['ariaDisabled', 'ariaLabel', 'buttonStyle', 'color', 'disabled', 'iconOnly', 'leftIcon', 'rightIcon', 'showCaret', 'size', 'type'],
-  methods: ['focusButton']
+  methods: ['focusButton', 'setActive']
 })
 @Component({
   selector: 'modus-button',
@@ -231,6 +231,40 @@ export declare interface ModusButton extends Components.ModusButton {
    * (optional) An event that fires on button click.
    */
   buttonClick: EventEmitter<CustomEvent<any>>;
+}
+
+
+@ProxyCmp({
+  inputs: ['ariaLabel', 'buttonStyle', 'color', 'disabled', 'selectionType', 'size']
+})
+@Component({
+  selector: 'modus-button-group',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['ariaLabel', 'buttonStyle', 'color', 'disabled', 'selectionType', 'size'],
+})
+export class ModusButtonGroup {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['buttonGroupClick', 'selectionChange']);
+  }
+}
+
+
+import type { ModusButtonGroupButtonClickEvent as IModusButtonGroupModusButtonGroupButtonClickEvent } from '@trimble-oss/modus-web-components';
+
+export declare interface ModusButtonGroup extends Components.ModusButtonGroup {
+  /**
+   * Event emitted when a button is clicked
+   */
+  buttonGroupClick: EventEmitter<CustomEvent<IModusButtonGroupModusButtonGroupButtonClickEvent>>;
+  /**
+   * Event emitted when the selection changes
+   */
+  selectionChange: EventEmitter<CustomEvent<HTMLModusButtonElement[]>>;
 }
 
 
@@ -1469,7 +1503,7 @@ export declare interface ModusTabs extends Components.ModusTabs {
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'autoFocusInput', 'autocomplete', 'clearable', 'disabled', 'errorText', 'helperText', 'includePasswordTextToggle', 'includeSearchIcon', 'inputmode', 'label', 'maxLength', 'minLength', 'pattern', 'placeholder', 'readOnly', 'required', 'size', 'textAlign', 'type', 'validText', 'value'],
+  inputs: ['ariaLabel', 'autoFocusInput', 'autocapitalize', 'autocomplete', 'autocorrect', 'clearable', 'disabled', 'enterkeyhint', 'errorText', 'helperText', 'includePasswordTextToggle', 'includeSearchIcon', 'inputmode', 'label', 'maxLength', 'minLength', 'pattern', 'placeholder', 'readOnly', 'required', 'size', 'spellcheck', 'textAlign', 'type', 'validText', 'value'],
   methods: ['focusInput']
 })
 @Component({
@@ -1477,7 +1511,7 @@ export declare interface ModusTabs extends Components.ModusTabs {
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['ariaLabel', 'autoFocusInput', 'autocomplete', 'clearable', 'disabled', 'errorText', 'helperText', 'includePasswordTextToggle', 'includeSearchIcon', 'inputmode', 'label', 'maxLength', 'minLength', 'pattern', 'placeholder', 'readOnly', 'required', 'size', 'textAlign', 'type', 'validText', 'value'],
+  inputs: ['ariaLabel', 'autoFocusInput', 'autocapitalize', 'autocomplete', 'autocorrect', 'clearable', 'disabled', 'enterkeyhint', 'errorText', 'helperText', 'includePasswordTextToggle', 'includeSearchIcon', 'inputmode', 'label', 'maxLength', 'minLength', 'pattern', 'placeholder', 'readOnly', 'required', 'size', 'spellcheck', 'textAlign', 'type', 'validText', 'value'],
 })
 export class ModusTextInput {
   protected el: HTMLElement;

@@ -10,6 +10,7 @@ export const DIRECTIVES = [
   d.ModusBadge,
   d.ModusBreadcrumb,
   d.ModusButton,
+  d.ModusButtonGroup,
   d.ModusCard,
   d.ModusCheckbox,
   d.ModusChip,

@@ -13,9 +13,69 @@
     <!--Manually load Modus font-family-->
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
     <link rel="stylesheet" src="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" />
+    <style>
+      body {
+        display:flex;
+        gap: 1rem;
+        flex-direction: column;
+      }
+    </style>
   </head>
 
   <body data-mwc-theme="light">
+    <div data-mwc-theme="dark" style="background-color:black; padding: .25rem .25rem; display: flex; gap: 1rem; flex-direction: column;">
+      <modus-button-group selection-type="single" color="tertiary" size="large" button-style="fill" aria-label="test">
+        <modus-button icon-only="text_bold"></modus-button>
+        <modus-button icon-only="text_italic"></modus-button>
+        <modus-button icon-only="text_underlined"></modus-button>
+        <modus-button icon-only="text_strikethrough" color="tertiary"></modus-button>
+        <modus-button color="danger">Something</modus-button>
+      </modus-button-group>
+      <modus-button-group selection-type="multiple" color="primary" size="large" button-style="outline" aria-label="test">
+        <modus-button icon-only="text_bold"></modus-button>
+        <modus-button icon-only="text_italic"></modus-button>
+        <modus-button icon-only="text_underlined"></modus-button>
+        <modus-button icon-only="text_strikethrough"></modus-button>
+        <modus-button>Something</modus-button>
+      </modus-button-group>
+      <modus-button-group selection-type="multiple" size="large" color="tertiary" button-style="borderless">
+        <modus-button icon-only="text_bold"></modus-button>
+        <modus-button icon-only="text_italic"></modus-button>
+        <modus-button icon-only="text_underlined"></modus-button>
+        <modus-button icon-only="text_strikethrough"></modus-button>
+        <modus-button>Something</modus-button>
+      </modus-button-group>
+   </div>
     <!-- Test components -->
+    <modus-button-group selection-type="none" color="primary" size="large" button-style="fill">
+      <modus-button icon-only="text_bold"></modus-button>
+      <modus-button icon-only="text_italic"></modus-button>
+      <modus-button icon-only="text_underlined"></modus-button>
+      <modus-button icon-only="text_strikethrough"></modus-button>
+    </modus-button-group>
+    <modus-button-group selection-type="multiple" color="primary" size="large" button-style="outline">
+      <modus-button icon-only="text_bold"></modus-button>
+      <modus-button icon-only="text_italic"></modus-button>
+      <modus-button icon-only="text_underlined"></modus-button>
+      <modus-button icon-only="text_strikethrough"></modus-button>
+    </modus-button-group>
+    <modus-button-group selection-type="multiple" size="large" color="primary" button-style="borderless">
+      <modus-button icon-only="text_bold"></modus-button>
+      <modus-button icon-only="text_italic"></modus-button>
+      <modus-button icon-only="text_underlined"></modus-button>
+      <modus-button icon-only="text_strikethrough"></modus-button>
+    </modus-button-group>
+    <div>
+      <modus-button color="primary" button-style="borderless">Test</modus-button>
+    </div>
+    <script>
+      const buttonGroup = document.querySelector('modus-button-group');
+      buttonGroup.addEventListener('selectionChange', (event) => {
+        console.log('Selected buttons:', event.detail);
+      });
+      buttonGroup.addEventListener('buttonGroupClick', (event) => {
+        console.log('buttonGroupClick:', event.detail);
+      });
+    </script>
  </body>
 </html>

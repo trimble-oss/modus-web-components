@@ -119,16 +119,16 @@ button {
     }
 
     &.icon-only {
-      height: 40px;
+      height: 32px;
       padding: 0;
-      width: 40px;
+      width: 32px;
 
       &.has-caret {
         padding: 0 4px;
       }
 
       .icon {
-        padding: 0 8px;
+        padding: 0 3px;
 
         svg {
           height: 24px;
@@ -237,6 +237,11 @@ button {
         }
       }
     }
+  }
+
+  &.style-borderless.active:not([disabled]) {
+    background-color: $modus-btn-borderless-active-bg;
+    color: $modus-btn-borderless-active-color;
   }
 
   // Solid variants
