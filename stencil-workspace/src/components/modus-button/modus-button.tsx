@@ -124,7 +124,7 @@ export class ModusButton {
     return (
       <button
         aria-disabled={this.ariaDisabled ? this.ariaDisabled : this.disabled ? 'true' : undefined}
-        aria-label={this.ariaLabel}
+        aria-label={this.ariaLabel === '' ? null : this.ariaLabel}
         aria-pressed={this.pressed ? 'true' : undefined}
         class={className}
         disabled={this.disabled}
