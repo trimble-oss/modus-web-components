@@ -27,7 +27,7 @@ export default {
       },
       description: "Capitalization behavior when using a non-traditional keyboard (e.g. microphone, touch screen)",
       table: {
-        type: { summary: `boolean | 'none' | 'off' | 'sentences' | 'on' | 'words' | 'characters'` },
+        type: { summary: `'none' | 'off' | 'sentences' | 'on' | 'words' | 'characters'` },
       },
     },
     autocomplete: {
