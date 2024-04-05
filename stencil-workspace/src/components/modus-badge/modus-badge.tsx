@@ -54,7 +54,7 @@ export class ModusBadge implements BadgeProperties {
     )}`;
 
     return (
-      <div aria-label={this.ariaLabel} class={className} role="status">
+      <div aria-label={this.ariaLabel === '' ? null : this.ariaLabel} class={className} role="status">
         <slot />
       </div>
     );
