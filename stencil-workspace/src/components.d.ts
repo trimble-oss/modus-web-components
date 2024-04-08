@@ -1315,7 +1315,7 @@ export namespace Components {
         /**
           * (optional) Capitalization behavior when using a non-traditional keyboard (e.g. microphone, touch screen)
          */
-        "autocapitalize": boolean | 'none' | 'off' | 'sentences' | 'on' | 'words' | 'characters';
+        "autocapitalize": 'none' | 'off' | 'sentences' | 'on' | 'words' | 'characters';
         /**
           * (optional) Sets autocomplete on the input.
          */
@@ -4065,7 +4065,7 @@ declare namespace LocalJSX {
         /**
           * (optional) Capitalization behavior when using a non-traditional keyboard (e.g. microphone, touch screen)
          */
-        "autocapitalize"?: boolean | 'none' | 'off' | 'sentences' | 'on' | 'words' | 'characters';
+        "autocapitalize"?: 'none' | 'off' | 'sentences' | 'on' | 'words' | 'characters';
         /**
           * (optional) Sets autocomplete on the input.
          */
