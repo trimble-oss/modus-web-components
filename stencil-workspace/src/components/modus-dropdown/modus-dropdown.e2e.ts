@@ -129,4 +129,115 @@ describe('modus-dropdown', () => {
     await page.waitForChanges();
     expect(dropdownClose).toHaveReceivedEvent();
   });
+
+  it('should close dropdown when Enter is pressed outside the toggle element', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-dropdown toggle-element-id='toggle-id'>
+        <modus-button id='toggle-id' slot='dropdownToggle'>Dropdown</modus-button>
+        <modus-list slot='dropdownList'>
+          <modus-list-item>Item 1</modus-list-item>
+        </modus-list>
+      </modus-dropdown>
+      <div id="not-dropdown">
+    `);
+
+    const dropdown = await page.find('modus-dropdown');
+    await dropdown.focus();
+    await page.keyboard.press('Enter');
+    expect(dropdown.find('.dropdown-list.visible')).toBeTruthy();
+
+    const notDropdownComponent = await page.find('#not-dropdown');
+    await notDropdownComponent.focus();
+    await page.keyboard.press('Enter');
+    expect(dropdown.find('.dropdown-list.hidden')).toBeTruthy();
+  });
+
+  it('should close dropdown when Space is pressed outside the toggle element', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-dropdown toggle-element-id='toggle-id'>
+        <modus-button id='toggle-id' slot='dropdownToggle'>Dropdown</modus-button>
+        <modus-list slot='dropdownList'>
+          <modus-list-item>Item 1</modus-list-item>
+        </modus-list>
+      </modus-dropdown>
+      <div id="not-dropdown">
+    `);
+
+    const dropdown = await page.find('modus-dropdown');
+    await dropdown.focus();
+    await page.keyboard.press(' ');
+    expect(dropdown.find('.dropdown-list.visible')).toBeTruthy();
+
+    const notDropdownComponent = await page.find('#not-dropdown');
+    await notDropdownComponent.focus();
+    await page.keyboard.press(' ');
+    expect(dropdown.find('.dropdown-list.hidden')).toBeTruthy();
+  });
+
+  it('should toggle visibility when Enter is pressed on the toggle element', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-dropdown toggle-element-id='toggle-id'>
+        <modus-button id='toggle-id' slot='dropdownToggle'>Dropdown</modus-button>
+        <modus-list slot='dropdownList'>
+          <modus-list-item>Item 1</modus-list-item>
+        </modus-list>
+      </modus-dropdown>
+    `);
+
+    const dropdown = await page.find('modus-dropdown');
+    await dropdown.focus();
+    await page.keyboard.press('Enter');
+    expect(dropdown.find('.dropdown-list.visible')).toBeTruthy();
+
+    await page.keyboard.press('Enter');
+    expect(dropdown.find('.dropdown-list.hidden')).toBeTruthy();
+  });
+
+  it('should toggle visibility when Space is pressed on the toggle element', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-dropdown toggle-element-id='toggle-id'>
+        <modus-button id='toggle-id' slot='dropdownToggle'>Dropdown</modus-button>
+        <modus-list slot='dropdownList'>
+          <modus-list-item>Item 1</modus-list-item>
+        </modus-list>
+      </modus-dropdown>
+    `);
+
+    const dropdown = await page.find('modus-dropdown');
+    await dropdown.focus();
+    await page.keyboard.press(' ');
+    expect(dropdown.find('.dropdown-list.visible')).toBeTruthy();
+
+    await page.keyboard.press(' ');
+    expect(dropdown.find('.dropdown-list.hidden')).toBeTruthy();
+  });
+
+  it('should close dropdown when Escape is pressed', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-dropdown toggle-element-id='toggle-id'>
+        <modus-button id='toggle-id' slot='dropdownToggle'>Dropdown</modus-button>
+        <modus-list slot='dropdownList'>
+          <modus-list-item>Item 1</modus-list-item>
+        </modus-list>
+      </modus-dropdown>
+    `);
+
+    const dropdown = await page.find('modus-dropdown');
+    await dropdown.focus();
+    await page.keyboard.press(' ');
+    expect(dropdown.find('.dropdown-list.visible')).toBeTruthy();
+
+    await page.keyboard.press('Escape');
+    expect(dropdown.find('.dropdown-list.hidden')).toBeTruthy();
+  });
 });

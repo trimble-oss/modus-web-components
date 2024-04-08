@@ -104,22 +104,6 @@ export class ModusDropdown {
     }
   }
 
-  handleDropdownKeyDown(event: KeyboardEvent) {
-    if (event.key === 'Enter' || event.key === ' ') {
-      if ((event.target as HTMLElement)?.closest(`#${this.toggleElementId}`)) {
-        this.visible = !this.visible;
-      } else {
-        this.visible = false;
-      }
-
-      if (!this.visible) {
-        this.dropdownClose.emit();
-      } else {
-        this.dropdownToggleClicked = true;
-      }
-    }
-  }
-
   render(): unknown {
     const listContainerClass = `dropdown-list ${this.visible ? 'visible' : 'hidden'} ${
       this.showDropdownListBorder ? 'list-border' : ''
@@ -128,13 +112,7 @@ export class ModusDropdown {
     const width = `${this.toggleElement?.offsetWidth ? this.toggleElement?.offsetWidth : 0}px`;
 
     return (
-      <div
-        aria-label={this.ariaLabel}
-        class="dropdown"
-        onClick={(event) => this.handleDropdownClick(event)}
-        onKeyDown={(event) => {
-          this.handleDropdownKeyDown(event);
-        }}>
+      <div aria-label={this.ariaLabel} class="dropdown" onClick={(event) => this.handleDropdownClick(event)}>
         <slot name="dropdownToggle" />
         <div
           class={listContainerClass}
