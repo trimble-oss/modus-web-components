@@ -23,7 +23,6 @@ describe('modus-toast', () => {
           <span class="text">
             <slot></slot>
           </span>
-          <button class="close" aria-label="Dismiss"></button>
         </div>
       </mock:shadow-root>
     </modus-toast>
@@ -51,7 +50,6 @@ describe('modus-toast', () => {
           <span class="text">
             <slot></slot>
           </span>
-          <button class="close" aria-label="Dismiss"></button>
         </div>
       </mock:shadow-root>
     </modus-toast>
