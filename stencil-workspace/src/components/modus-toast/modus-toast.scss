@@ -29,7 +29,14 @@
   }
 
   .close {
+    background-color: transparent;
+    border: 0;
     margin-left: auto;
+
+    .icon-close {
+      height: 24px;
+      width: 24px;
+    }
 
     &:hover svg {
       cursor: pointer;
