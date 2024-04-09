@@ -11,6 +11,7 @@
 | ---------------------- | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- | ----------- |
 | `apps`                 | --                       | (optional) The apps to render in the apps menu.                                                                                                                                         | `ModusNavbarApp[]`        | `undefined` |
 | `buttons`              | --                       | (optional) The buttons to render in the Navbar.                                                                                                                                         | `ModusNavbarButton[]`     | `undefined` |
+| `counter`              | `counter`                | (optional) Whether to show badge on top of notification                                                                                                                                 | `string`                  | `undefined` |
 | `enableSearchOverlay`  | `enable-search-overlay`  | (optional) Whether to show search overlay or not.                                                                                                                                       | `boolean`                 | `undefined` |
 | `helpTooltip`          | --                       | (optional) Help tooltip.                                                                                                                                                                | `ModusNavbarTooltip`      | `undefined` |
 | `helpUrl`              | `help-url`               | (optional) Help URL.                                                                                                                                                                    | `string`                  | `undefined` |
@@ -75,6 +76,7 @@ Type: `Promise<void>`
 - [modus-navbar-search-overlay](search-overlay)
 - [modus-navbar-main-menu](main-menu)
 - [modus-tooltip](../modus-tooltip)
+- [modus-badge](../modus-badge)
 - [modus-navbar-notifications-menu](notifications-menu)
 - [modus-navbar-apps-menu](apps-menu)
 - [modus-navbar-profile-menu](profile-menu)
@@ -87,6 +89,7 @@ graph TD;
   modus-navbar --> modus-navbar-search-overlay
   modus-navbar --> modus-navbar-main-menu
   modus-navbar --> modus-tooltip
+  modus-navbar --> modus-badge
   modus-navbar --> modus-navbar-notifications-menu
   modus-navbar --> modus-navbar-apps-menu
   modus-navbar --> modus-navbar-profile-menu

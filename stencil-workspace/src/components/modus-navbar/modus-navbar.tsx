@@ -70,6 +70,9 @@ export class ModusNavbar {
   /** (optional) Whether to show notifications. */
   @Prop() showNotifications: boolean;
 
+  /** (optional) Whether to show badge on top of notification */
+  @Prop() counter: string;
+
   /** (optional) Whether to show the placeholder for Pendo. */
   @Prop() showPendoPlaceholder: boolean;
 
@@ -361,6 +364,24 @@ export class ModusNavbar {
         onClose={() => this.searchOverlayCloseEventHandler()}
         onSearch={(event) => this.searchChange.emit(event.detail)}></modus-navbar-search-overlay>
     );
+    let counterValue;
+    if (this.counter) {
+      const counter = parseInt(this.counter);
+      const isCounterValid = !isNaN(counter) && /^[\d]+$/.test(this.counter);
+      console.log(this.counter, isCounterValid);
+      if (isCounterValid) {
+        if (counter < 1) {
+          counterValue = '1';
+        } else if (counter > 99) {
+          counterValue = '99+';
+        } else {
+          counterValue = this.counter;
+        }
+      } else {
+        this.counter = null;
+      }
+    }
+    console.log('countervalue', counterValue);
 
     return (
       <Host id={this.componentId}>
@@ -436,6 +457,11 @@ export class ModusNavbar {
                         onClick={(event) => this.notificationsMenuClickHandler(event)}
                         pressed={this.notificationsMenuVisible}
                       />
+                      {counterValue && (
+                        <modus-badge class="badge" size="small" type="counter" aria-label="Notification badge">
+                          {counterValue}
+                        </modus-badge>
+                      )}
                     </span>
                     {this.notificationsMenuVisible && (
                       <modus-navbar-notifications-menu reverse={this.reverse}>

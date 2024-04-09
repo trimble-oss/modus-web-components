@@ -64,7 +64,13 @@ export default {
       table: {
         type: { summary: 'ModusNavbarTooltip' },
       },
-    }
+    },
+    counter:{
+      control: { type: 'text' },
+      name: 'counter',
+      description: 'To add the counter value to the notification icon',
+type: { summary: 'string' },
+    },
   },
   parameters: {
     actions: {
@@ -109,7 +115,7 @@ const defaultApps = [{
   url: 'https://modus.trimble.com/',
 }];
 
-const Template = ({ buttons, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
+const Template = ({ buttons,counter, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
   <modus-navbar
     enable-search-overlay=${enableSearchOverlay}
     show-apps-menu
@@ -117,6 +123,8 @@ const Template = ({ buttons, enableSearchOverlay, helpTooltip, profileMenuOption
     show-main-menu
     show-profile=${showProfile}
     show-search=${showSearch}
+    counter=${counter}
+    show-notifications
     .apps=${defaultApps}
     .buttons=${buttons}
     .helpTooltip=${helpTooltip}
@@ -174,9 +182,10 @@ Default.args = {
   showHelp: false,
   showProfile: true,
   showSearch: false,
+  counter:""
 };
 
-const FailedToLoadAvatarTemplate = ({ buttons, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
+const FailedToLoadAvatarTemplate = ({ buttons,counter, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
   <modus-navbar
     enable-search-overlay=${enableSearchOverlay}
     show-apps-menu
@@ -184,6 +193,7 @@ const FailedToLoadAvatarTemplate = ({ buttons, enableSearchOverlay, helpTooltip,
     show-help
     show-main-menu
     show-notifications
+    counter=${counter}
     show-profile=${showProfile}
     show-search=${showSearch}
     .apps=${defaultApps}
@@ -213,9 +223,10 @@ FailedAvatar.args = {
   showHelp: false,
   showProfile: true,
   showSearch: false,
+  counter:""
 };
 
-const BlueTemplate = ({ buttons, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
+const BlueTemplate = ({ buttons, counter,enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
   <modus-navbar
     enable-search-overlay=${enableSearchOverlay}
     show-apps-menu
@@ -223,6 +234,7 @@ const BlueTemplate = ({ buttons, enableSearchOverlay, helpTooltip, profileMenuOp
     show-help
     show-main-menu
     show-notifications
+    counter=${counter}
     show-profile=${showProfile}
     show-search=${showSearch}
     variant="blue"
@@ -253,4 +265,5 @@ BlueNavbar.args = {
   showHelp: false,
   showProfile: true,
   showSearch: false,
+  counter:""
 };
