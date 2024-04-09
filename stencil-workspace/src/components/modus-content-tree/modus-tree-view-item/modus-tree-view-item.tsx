@@ -432,13 +432,13 @@ export class ModusTreeViewItem {
             tabindex={expandable ? tabIndex : -1}>
             <this.CustomSlot
               className="inline-flex rotate-right"
-              defaultContent={<ModusIconMap icon="expand_more_bold" size="24" />}
+              defaultContent={<ModusIconMap icon="expand_more" size="24" />}
               display={!expanded}
               name={this.SLOT_EXPAND_ICON}
             />
             <this.CustomSlot
               className="inline-flex"
-              defaultContent={<ModusIconMap icon="expand_more_bold" size="24" />}
+              defaultContent={<ModusIconMap icon="expand_more" size="24" />}
               display={expanded}
               name={this.SLOT_COLLAPSE_ICON}
             />
