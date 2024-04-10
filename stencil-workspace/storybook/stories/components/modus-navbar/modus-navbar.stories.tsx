@@ -65,11 +65,13 @@ export default {
         type: { summary: 'ModusNavbarTooltip' },
       },
     },
-    counter:{
+    notificationCount:{
       control: { type: 'text' },
-      name: 'counter',
+      name: 'notification-count',
       description: 'To add the counter value to the notification icon',
-type: { summary: 'string' },
+      table: {
+        type: { summary: 'string' },
+      },
     },
   },
   parameters: {
@@ -115,7 +117,7 @@ const defaultApps = [{
   url: 'https://modus.trimble.com/',
 }];
 
-const Template = ({ buttons,counter, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
+const Template = ({ buttons, notificationCount, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
   <modus-navbar
     enable-search-overlay=${enableSearchOverlay}
     show-apps-menu
@@ -123,7 +125,7 @@ const Template = ({ buttons,counter, enableSearchOverlay, helpTooltip, profileMe
     show-main-menu
     show-profile=${showProfile}
     show-search=${showSearch}
-    counter=${counter}
+    notification-count=${notificationCount}
     show-notifications
     .apps=${defaultApps}
     .buttons=${buttons}
@@ -182,10 +184,10 @@ Default.args = {
   showHelp: false,
   showProfile: true,
   showSearch: false,
-  counter:""
+  notificationCount:""
 };
 
-const FailedToLoadAvatarTemplate = ({ buttons,counter, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
+const FailedToLoadAvatarTemplate = ({ buttons, notificationCount, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
   <modus-navbar
     enable-search-overlay=${enableSearchOverlay}
     show-apps-menu
@@ -193,7 +195,7 @@ const FailedToLoadAvatarTemplate = ({ buttons,counter, enableSearchOverlay, help
     show-help
     show-main-menu
     show-notifications
-    counter=${counter}
+    notification-count=${notificationCount}
     show-profile=${showProfile}
     show-search=${showSearch}
     .apps=${defaultApps}
@@ -223,10 +225,10 @@ FailedAvatar.args = {
   showHelp: false,
   showProfile: true,
   showSearch: false,
-  counter:""
+  notificationCount:""
 };
 
-const BlueTemplate = ({ buttons, counter,enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
+const BlueTemplate = ({ buttons, notificationCount, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
   <modus-navbar
     enable-search-overlay=${enableSearchOverlay}
     show-apps-menu
@@ -234,7 +236,7 @@ const BlueTemplate = ({ buttons, counter,enableSearchOverlay, helpTooltip, profi
     show-help
     show-main-menu
     show-notifications
-    counter=${counter}
+    notification-count=${notificationCount}
     show-profile=${showProfile}
     show-search=${showSearch}
     variant="blue"
@@ -265,5 +267,5 @@ BlueNavbar.args = {
   showHelp: false,
   showProfile: true,
   showSearch: false,
-  counter:""
+  notificationCount:""
 };
