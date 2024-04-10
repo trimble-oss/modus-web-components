@@ -45,18 +45,18 @@ describe('modus-tree-view-item', () => {
         <div aria-disabled="true" style="padding-left: 0rem;"></div>
         <div class="icon-slot hidden" tabindex="-1">
           <div class="inline-flex rotate-right">
-            <slot name="expandIcon"></slot><svg class="icon-expand-more-bold" height="24" width="24" viewBox="0 0 24 24"
+            <slot name="expandIcon"></slot><svg class="icon-expand-more" height="24" width="24" viewBox="0 0 24 24"
               fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path
-                d="M17.65 8.93c-.59-.58-1.54-.57-2.12 0L12 12.46 8.47 8.93c-.56-.57-1.55-.57-2.12 0-.58.58-.58 1.53 0 2.12l4.59 4.59c.29.29.68.44 1.06.44s.77-.15 1.06-.44l4.59-4.59a1.5 1.5 0 0 0 0-2.12">
+                d="M15.88 9.29 12 13.17 8.12 9.29a.996.996 0 1 0-1.41 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59a.996.996 0 0 0 0-1.41c-.39-.38-1.03-.39-1.42 0">
               </path>
             </svg>
           </div>
           <div class="inline-flex">
-            <slot name="collapseIcon"></slot><svg class="icon-expand-more-bold" height="24" width="24" viewBox="0 0 24 24"
+            <slot name="collapseIcon"></slot><svg class="icon-expand-more" height="24" width="24" viewBox="0 0 24 24"
               fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path
-                d="M17.65 8.93c-.59-.58-1.54-.57-2.12 0L12 12.46 8.47 8.93c-.56-.57-1.55-.57-2.12 0-.58.58-.58 1.53 0 2.12l4.59 4.59c.29.29.68.44 1.06.44s.77-.15 1.06-.44l4.59-4.59a1.5 1.5 0 0 0 0-2.12">
+                d="M15.88 9.29 12 13.17 8.12 9.29a.996.996 0 1 0-1.41 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59a.996.996 0 0 0 0-1.41c-.39-.38-1.03-.39-1.42 0">
               </path>
             </svg>
           </div>

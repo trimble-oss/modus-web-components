@@ -19,6 +19,9 @@ export class ModusToast {
   /** (optional) Whether the toast has a dismiss button. */
   @Prop() dismissible: boolean;
 
+  /** (optional) Role taken by the toast.  Defaults to 'status'. */
+  @Prop() role: 'alert' | 'log' | 'marquee' | 'status' | 'timer' = 'status';
+
   /** (optional) Whether to show the toasts' icon. */
   @Prop() showIcon = true;
 
@@ -55,7 +58,7 @@ export class ModusToast {
     const className = `modus-toast ${this.classByType.get(this.type)}`;
 
     return (
-      <div aria-label={this.ariaLabel} class={className} role="status">
+      <div aria-label={this.ariaLabel} class={className} role={this.role}>
         {this.showIcon && <div class="icon">{icon}</div>}
         <span class={'text'}>
           <slot />
