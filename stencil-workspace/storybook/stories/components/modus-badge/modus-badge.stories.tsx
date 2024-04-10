@@ -92,7 +92,7 @@ export const Counter = ({ ariaLabel, color, size, type }) =>
       color=${color}
       size=${size}
       type=${type}>
-      Counter
+      12
     </modus-badge>
   `;
 Counter.args = {
