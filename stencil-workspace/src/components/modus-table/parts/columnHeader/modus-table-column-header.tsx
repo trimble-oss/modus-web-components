@@ -30,9 +30,13 @@ function getSortingStatus(column: Column<unknown, unknown>, isColumnResizing: bo
 
   const currentSort = column.getIsSorted();
 
-  if (!currentSort) return null;
-  if (currentSort === 'asc') return 'ascending';
-  if (currentSort === 'desc') return 'descending';
+  if (!currentSort) {
+    return null;
+  } else if (currentSort === 'asc') {
+    return 'ascending';
+  } else if (currentSort === 'desc') {
+    return 'descending';
+  }
 
   const nextSort = column.getNextSortingOrder();
   return nextSort === 'asc' ? 'ascending' : 'descending';
