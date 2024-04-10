@@ -26,15 +26,16 @@ interface ModusTableColumnHeaderProps {
  * Modus Table Header
  */
 function getSortingStatus(column: Column<unknown, unknown>, isColumnResizing: boolean): string {
-  return isColumnResizing
-    ? '' // When column resize is enabled, we don't show the tooltip.
-    : column.getIsSorted() === 'asc'
-      ? 'ascending'
-      : column.getIsSorted() === 'desc'
-        ? 'descending'
-        : column.getNextSortingOrder() === 'asc'
-          ? 'ascending'
-          : 'descending';
+  if (isColumnResizing) return '';
+
+  const currentSort = column.getIsSorted();
+
+  if (!currentSort) return null;
+  if (currentSort === 'asc') return 'ascending';
+  if (currentSort === 'desc') return 'descending';
+
+  const nextSort = column.getNextSortingOrder();
+  return nextSort === 'asc' ? 'ascending' : 'descending';
 }
 export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderProps> = ({
   id,
