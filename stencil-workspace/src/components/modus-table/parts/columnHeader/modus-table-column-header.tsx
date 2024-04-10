@@ -2,7 +2,7 @@ import {
   FunctionalComponent,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
-import { Header } from '@tanstack/table-core';
+import { Column, Header } from '@tanstack/table-core';
 import { KEYBOARD_ENTER } from '../../modus-table.constants';
 import { ModusTableColumnResizingHandler } from './modus-table-column-resizing-handler';
 import { ModusTableColumnHeaderLabel } from './modus-table-column-header-label';
@@ -25,7 +25,22 @@ interface ModusTableColumnHeaderProps {
 /**
  * Modus Table Header
  */
+function getSortingStatus(column: Column<unknown, unknown>, isColumnResizing: boolean): string {
+  if (isColumnResizing) return '';
 
+  const currentSort = column.getIsSorted();
+
+  if (!currentSort) {
+    return null;
+  } else if (currentSort === 'asc') {
+    return 'ascending';
+  } else if (currentSort === 'desc') {
+    return 'descending';
+  }
+
+  const nextSort = column.getNextSortingOrder();
+  return nextSort === 'asc' ? 'ascending' : 'descending';
+}
 export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderProps> = ({
   id,
   context,
@@ -53,6 +68,7 @@ export const ModusTableColumnHeader: FunctionalComponent<ModusTableColumnHeaderP
       tabindex={`${isColumnResizing ? '' : '0'}`}
       key={id}
       colSpan={colSpan}
+      aria-sort={getSortingStatus(column, isColumnResizing)}
       /**
        * isNestedParentHeader: If parent in nested headers, `text-align: center` will be applied.
        * frozenColumns.includes(header.id): Checks if the header is to be frozen or not.
