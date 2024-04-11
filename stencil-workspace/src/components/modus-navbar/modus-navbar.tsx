@@ -292,6 +292,17 @@ export class ModusNavbar {
 
   helpMenuClickHandler(event: MouseEvent): void {
     event.preventDefault();
+    this.openHelpMenu();
+  }
+
+  helpMenuKeyHandler(event: KeyboardEvent): void {
+    if (event.code !== 'Enter' && event.code !== 'Space') {
+      return;
+    }
+    this.openHelpMenu();
+  }
+
+  openHelpMenu(): void {
     if (this.helpUrl) window.open(this.helpUrl, '_blank');
     this.helpOpen.emit();
   }
@@ -448,8 +459,14 @@ export class ModusNavbar {
                 {this.showHelp && (
                   <div class="navbar-button" data-test-id="help-menu">
                     <modus-tooltip text={this.helpTooltip?.text} aria-label={this.helpTooltip?.ariaLabel} position="bottom">
-                      <span class="navbar-button-icon" role="button" aria-label="Help" tabIndex={0}>
-                        <IconHelp size="24" onClick={(event) => this.helpMenuClickHandler(event)} />
+                      <span
+                        class="navbar-button-icon"
+                        role="button"
+                        onKeyDown={(event) => this.helpMenuKeyHandler(event)}
+                        aria-label="Help"
+                        onClick={(event) => this.helpMenuClickHandler(event)}
+                        tabIndex={0}>
+                        <IconHelp size="24" />
                       </span>
                     </modus-tooltip>
                   </div>
