@@ -111,7 +111,7 @@ export class ModusAccordionItem {
 
   // Trick to restart an element's animation
   // see https://www.charistheo.io/blog/2021/02/restart-a-css-animation-with-javascript/#restarting-a-css-animation
-  // taken from: https://getbootstrap.com/docs/5.2/dist/js/bootstrap.js
+  // taken from: https://getbootstrap.com/docs/5.3/dist/js/bootstrap.js
   reflow = (element) => {
     element.offsetHeight; // eslint-disable-line no-unused-expressions
   };
