@@ -353,18 +353,21 @@ export class ModusNavbar {
   }
 
   getNotificationCount(): string {
-    let counterValue;
-    if (this.notificationCount) {
-      const counter = this.notificationCount;
-      if (counter < 1) {
-        counterValue = '1';
-      } else if (counter > 99) {
-        counterValue = '99+';
-      } else {
-        counterValue = this.notificationCount;
-      }
+    if (!this.notificationCount) {
+      return;
     }
-    return counterValue;
+
+    const counter = this.notificationCount;
+
+    if (counter < 1) {
+      return '1';
+    }
+
+    if (counter > 99) {
+      return '99+';
+    }
+
+    return this.notificationCount.toString();
   }
 
   render(): unknown {
@@ -456,7 +459,12 @@ export class ModusNavbar {
                         pressed={this.notificationsMenuVisible}
                       />
                       {counterValue && (
-                        <modus-badge class="badge" size="medium" type="counter" aria-label="Notification badge">
+                        <modus-badge
+                          class="badge"
+                          color="danger"
+                          size="medium"
+                          type="counter"
+                          aria-label="Notification badge">
                           {counterValue}
                         </modus-badge>
                       )}

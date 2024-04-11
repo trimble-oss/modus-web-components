@@ -66,11 +66,10 @@ export default {
       },
     },
     notificationCount:{
-      control: { type: 'text' },
       name: 'notification-count',
       description: 'To add the counter value to the notification icon',
       table: {
-        type: { summary: 'string' },
+        type: { summary: 'number' },
       },
     },
   },
@@ -184,7 +183,7 @@ Default.args = {
   showHelp: false,
   showProfile: true,
   showSearch: false,
-  notificationCount:""
+  notificationCount: 0
 };
 
 const FailedToLoadAvatarTemplate = ({ buttons, notificationCount, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
@@ -225,7 +224,7 @@ FailedAvatar.args = {
   showHelp: false,
   showProfile: true,
   showSearch: false,
-  notificationCount:""
+  notificationCount: 0
 };
 
 const BlueTemplate = ({ buttons, notificationCount, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
@@ -267,5 +266,5 @@ BlueNavbar.args = {
   showHelp: false,
   showProfile: true,
   showSearch: false,
-  notificationCount:""
+  notificationCount: 0
 };
