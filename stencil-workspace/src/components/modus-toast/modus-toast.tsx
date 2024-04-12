@@ -64,8 +64,8 @@ export class ModusToast {
           <slot />
         </span>
         {this.dismissible && (
-          <button class={'close'} aria-label="Dismiss">
-            <IconClose size={'18'} onClick={() => this.dismissClick.emit()} />
+          <button class={'close'} onClick={() => this.dismissClick.emit()} aria-label="Dismiss">
+            <IconClose size={'18'} />
           </button>
         )}
       </div>
