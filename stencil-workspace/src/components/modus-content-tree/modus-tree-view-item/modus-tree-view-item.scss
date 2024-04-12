@@ -135,3 +135,17 @@
     display: block;
   }
 }
+
+.tree-item.is-children {
+  border-bottom: none;
+  border-top: none;
+}
+
+.tree-item.expanded {
+  border-bottom: none;
+}
+
+.tree-item.is-last-child {
+  border-bottom: $rem-1px solid $modus-tree-view-item-border-color;
+  border-top: none;
+}

@@ -53,6 +53,12 @@ export default {
         type: { summary: 'boolean' },
       },
     },
+    isLastChild:{
+      description: 'To be set true when the tree item is an expandable last child',
+      table: {
+        type: { summary: 'boolean' },
+      },
+    },
   },
   parameters: {
     docs: {
@@ -113,6 +119,7 @@ const SlotIconTemplate = ({
   multiSelection,
   disableTabbing,
   size,
+  isLastChild,
 }) => html`
   <modus-tree-view style="width:400px;"
   borderless=${borderless ? 'true' : 'false'}
@@ -135,7 +142,7 @@ const SlotIconTemplate = ({
       <modus-tree-view-item node-Id="2" label="Personal"></modus-tree-view-item>
       <modus-tree-view-item node-Id="3" label="Work"></modus-tree-view-item>
       <modus-tree-view-item node-Id="4" label="Social"></modus-tree-view-item>
-      <modus-tree-view-item node-Id="5" label="More ..."></modus-tree-view-item>
+      <modus-tree-view-item node-Id="5" is-last-child=${isLastChild} label="More ..."></modus-tree-view-item>
     </modus-tree-view-item>
   </modus-tree-view>
 `;
@@ -176,6 +183,7 @@ const ActionBarTemplate = ({
   multiSelection,
   disableTabbing,
   size,
+  isLastChild,
 }) => html`
   <div
     id="tree-with-action-bar"
@@ -331,12 +339,12 @@ const ActionBarTemplate = ({
           label="More ..."></modus-tree-view-item>
       </modus-tree-view-item>
       <modus-tree-view-item node-Id="6" label="Archived">
-        <modus-tree-view-item node-Id="7" label="Folder1">
+        <modus-tree-view-item node-Id="7"  is-last-child=${isLastChild}  label="Folder1">
           <modus-tree-view-item
             node-Id="8"
             label="File1"></modus-tree-view-item>
           <modus-tree-view-item
-            node-Id="9"
+            node-Id="9"  is-last-child=${isLastChild}
             label="File3"></modus-tree-view-item>
         </modus-tree-view-item>
       </modus-tree-view-item>
@@ -498,6 +506,7 @@ const FilterTemplate = ({
   multiSelection,
   disableTabbing,
   size,
+  isLastChild,
 }) => html`
   <div
     id="tree-with-filter"
@@ -527,12 +536,12 @@ const FilterTemplate = ({
       </modus-tree-view-item>
       <modus-tree-view-item node-Id="6">
         <div slot="label">Archived</div>
-        <modus-tree-view-item node-Id="7">
+        <modus-tree-view-item is-last-child=${isLastChild} node-Id="7">
           <div slot="label">Folder1</div>
           <modus-tree-view-item node-Id="8">
             <div slot="label">File1</div>
           </modus-tree-view-item>
-          <modus-tree-view-item node-Id="11">
+          <modus-tree-view-item is-last-child=${isLastChild} node-Id="11">
             <div slot="label">File2</div>
           </modus-tree-view-item>
         </modus-tree-view-item>
