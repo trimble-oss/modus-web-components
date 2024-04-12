@@ -745,6 +745,10 @@ export namespace Components {
          */
         "logoOptions": ModusNavbarLogoOptions;
         /**
+          * (optional) Whether to show badge on top of notification
+         */
+        "notificationCount": number;
+        /**
           * (required) Profile menu options.
          */
         "profileMenuOptions": ModusProfileMenuOptions;
@@ -3365,6 +3369,10 @@ declare namespace LocalJSX {
           * (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels.
          */
         "logoOptions"?: ModusNavbarLogoOptions;
+        /**
+          * (optional) Whether to show badge on top of notification
+         */
+        "notificationCount"?: number;
         /**
           * An event that fires when an apps menu app opens.
          */

@@ -1,8 +1,8 @@
-// eslint-disable-next-line
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Component, Event, EventEmitter, Prop, h } from '@stencil/core';
 import { generateElementId } from '../../utils/utils';
-import { IconExpandLessCircle } from '../../icons/generated-icons/IconExpandLessCircle';
-import { IconExpandLess } from '../../icons/generated-icons/IconExpandLess';
+import { IconExpandMoreCircle } from '../../icons/generated-icons/IconExpandMoreCircle';
+import { IconExpandMore } from '../../icons/generated-icons/IconExpandMore';
 import { ModusIconMap } from '../../icons/ModusIconMap';
 import { JSX } from '@stencil/core/internal';
 
@@ -111,7 +111,7 @@ export class ModusAccordionItem {
 
   // Trick to restart an element's animation
   // see https://www.charistheo.io/blog/2021/02/restart-a-css-animation-with-javascript/#restarting-a-css-animation
-  // taken from: https://getbootstrap.com/docs/5.2/dist/js/bootstrap.js
+  // taken from: https://getbootstrap.com/docs/5.3/dist/js/bootstrap.js
   reflow = (element) => {
     element.offsetHeight; // eslint-disable-line no-unused-expressions
   };
@@ -151,9 +151,9 @@ export class ModusAccordionItem {
               class={`chevron-container ${this.expanded ? 'reverse' : ''} `}
               ref={(el) => (this.chevronContainerRef = el)}>
               {this.expandButtonType == 'circleArrow' ? (
-                <IconExpandLessCircle size="24"></IconExpandLessCircle>
+                <IconExpandMoreCircle size="24"></IconExpandMoreCircle>
               ) : (
-                <IconExpandLess size="24"></IconExpandLess>
+                <IconExpandMore size="24"></IconExpandMore>
               )}
             </div>
           }
