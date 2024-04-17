@@ -56,4 +56,32 @@ describe('modus-tabs', () => {
     await page.waitForChanges();
     expect(tabChange).toHaveReceivedEvent();
   });
+
+  it('renders aria-label on tabs div when set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-tabs aria-label="test label"></modus-tabs>');
+    let element = await page.find('modus-tabs >>> .modus-tabs');
+    expect(element).toBeDefined();
+    expect(element).toHaveAttribute('aria-label');
+    expect(element.getAttribute('aria-label')).toEqual('test label');
+  });
+
+  it('does not render aria-label on tabs div when not set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-tabs></modus-tabs>');
+    let element = await page.find('modus-tabs >>> .modus-tabs');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
+
+  it('does not render aria-label on tabs div when set to empty string', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-tabs aria-label=""></modus-tabs>');
+    let element = await page.find('modus-tabs >>> .modus-tabs');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
 });
