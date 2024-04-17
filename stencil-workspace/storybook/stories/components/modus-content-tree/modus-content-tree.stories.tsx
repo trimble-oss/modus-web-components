@@ -344,7 +344,8 @@ const ActionBarTemplate = ({
             node-Id="8"
             label="File1"></modus-tree-view-item>
           <modus-tree-view-item
-            node-Id="9"  is-last-child=${isLastChild}
+            node-Id="9"
+            is-last-child=${isLastChild}
             label="File3"></modus-tree-view-item>
         </modus-tree-view-item>
       </modus-tree-view-item>
