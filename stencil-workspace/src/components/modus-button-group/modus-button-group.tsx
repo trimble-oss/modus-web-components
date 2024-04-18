@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import { Component, h, Prop, Element, Event, EventEmitter, Host, Listen, Watch } from '@stencil/core';
 import { ButtonGroupSelectionType, ModusButtonGroupButtonClickEvent } from './modus-button-group.models';
 import { DEFAULT_SELECTION_TYPE, SINGLE_SELECTION_TYPE, MULTIPLE_SELECTION_TYPE } from './modus-button-group.constants';
@@ -89,12 +90,12 @@ export class ModusButtonGroup {
     this.buttonGroupClick.emit({ button: clickedButton, isSelected: this.selectedButtons.includes(clickedButton) });
   }
 
-  setupButtons(reset: boolean = false) {
+  setupButtons(reset: boolean) {
     const buttons = this.host.querySelectorAll('modus-button');
     this.renderButtons(buttons, reset);
   }
 
-  renderButtons(buttons: NodeListOf<HTMLModusButtonElement>, reset: boolean = false) {
+  renderButtons(buttons: NodeListOf<HTMLModusButtonElement>, reset: boolean) {
     const buttonType = this.determineButtonType();
     buttons.forEach((button: HTMLModusButtonElement) => {
       if (reset) {
