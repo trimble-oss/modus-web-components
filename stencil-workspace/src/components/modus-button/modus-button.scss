@@ -152,6 +152,33 @@ button {
     }
   }
 
+  &.style-borderless:not(.icon-only).color-secondary {
+    background-color: $modus-btn-borderless-bg;
+    color: black;
+
+    svg path {
+      fill: black !important;
+    }
+
+    &:hover:not([disabled]) {
+      background-color: var(--modus-btn-icon-only-secondary-hover-bg, map-get($btn-icon-only-hover, secondary, 'bg'));
+      color: black;
+
+      svg path {
+        fill: black;
+      }
+    }
+
+    &:active:not([disabled]) {
+      background-color: var(--modus-btn-icon-only-secondary-active-bg, map-get($btn-icon-only-active, secondary, 'bg'));
+      color: black;
+
+      svg path {
+        fill: black;
+      }
+    }
+  }
+
   &.style-borderless:not(.icon-only) {
     background-color: $modus-btn-borderless-bg;
     color: $modus-btn-borderless-color;
