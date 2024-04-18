@@ -9,6 +9,20 @@
   font-family: $primary-font;
   position: relative;
 
+  &[aria-expanded='true'] {
+    .header:has(div svg.icon-expand-more) {
+      border-left: 4px solid var(--modus-blue);
+      padding-left: 12px;
+    }
+  }
+
+  // Accordion body left border
+  &:has(div svg.icon-expand-more) {
+    .body {
+      box-shadow: 4px 0 0 var(--modus-blue) inset;
+    }
+  }
+
   .header {
     align-items: center;
     cursor: pointer;
@@ -16,10 +30,9 @@
     font-size: $rem-16px;
     font-weight: $font-weight-semi-bold;
     height: 48px;
+    padding: 0 16px;
 
     .icon {
-      margin-left: 8px;
-      margin-right: 0;
       margin-top: 4px;
     }
 
@@ -32,6 +45,10 @@
       color: $modus-accordion-item-header-expand-color;
     }
 
+    &.expanded:has(div svg.icon-expand-more) {
+      background-color: $modus-accordion-item-header-expanded-bg;
+    }
+
     &:hover:not(.disabled) {
       background-color: $modus-accordion-item-header-hover-bg;
     }
@@ -41,15 +58,10 @@
       height: 32px;
     }
 
-    .title {
-      padding-left: $rem-8px;
-    }
-
     .chevron-container {
       align-items: center;
       display: flex;
       margin-left: auto;
-      margin-right: $rem-8px;
       transition: transform 0.2s ease-in-out;
 
       &.reverse {
@@ -69,7 +81,7 @@
 
     .body-content {
       font-size: $rem-14px;
-      padding: $rem-16px $rem-8px;
+      padding: $rem-16px;
     }
 
     &.collapse:not(.show) {
@@ -88,4 +100,10 @@
       }
     }
   }
+}
+
+.accordion-item:has(> .body.collapsing) .header:has(div svg.icon-expand-more) {
+  background-color: $modus-accordion-item-header-expanded-bg;
+  border-left: 4px solid var(--modus-blue);
+  padding-left: 12px;
 }

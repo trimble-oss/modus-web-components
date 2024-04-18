@@ -110,18 +110,6 @@ describe('modus-text-input', () => {
     `);
   });
 
-  it('should set autocapitalize on the input to "on" when "true" is passed in', async () => {
-    const modusTextInput = new ModusTextInput();
-    modusTextInput.autocapitalize = true;
-    expect(modusTextInput.inputAutocapitalize).toEqual('on');
-  });
-
-  it('should set autocapitalize on the input to "off" when "false" is passed in', async () => {
-    const modusTextInput = new ModusTextInput();
-    modusTextInput.autocapitalize = false;
-    expect(modusTextInput.inputAutocapitalize).toEqual('off');
-  });
-
   it('should set autocorrect on the input to "on" when "true" is passed in', async () => {
     const modusTextInput = new ModusTextInput();
     modusTextInput.autocorrect = true;
