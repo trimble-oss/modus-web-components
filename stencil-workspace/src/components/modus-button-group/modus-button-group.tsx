@@ -90,7 +90,7 @@ export class ModusButtonGroup {
     this.buttonGroupClick.emit({ button: clickedButton, isSelected: this.selectedButtons.includes(clickedButton) });
   }
 
-  setupButtons(reset: boolean) {
+  setupButtons(reset?: boolean) {
     const buttons = this.host.querySelectorAll('modus-button');
     this.renderButtons(buttons, reset);
   }
