@@ -745,6 +745,10 @@ export namespace Components {
          */
         "logoOptions": ModusNavbarLogoOptions;
         /**
+          * (optional) Whether to show badge on top of notification
+         */
+        "notificationCount": number;
+        /**
           * (required) Profile menu options.
          */
         "profileMenuOptions": ModusProfileMenuOptions;
@@ -1315,7 +1319,7 @@ export namespace Components {
         /**
           * (optional) Capitalization behavior when using a non-traditional keyboard (e.g. microphone, touch screen)
          */
-        "autocapitalize": boolean | 'none' | 'off' | 'sentences' | 'on' | 'words' | 'characters';
+        "autocapitalize": 'none' | 'off' | 'sentences' | 'on' | 'words' | 'characters';
         /**
           * (optional) Sets autocomplete on the input.
          */
@@ -1500,6 +1504,10 @@ export namespace Components {
           * (optional) Whether the toast has a dismiss button.
          */
         "dismissible": boolean;
+        /**
+          * (optional) Role taken by the toast.  Defaults to 'status'.
+         */
+        "role": 'alert' | 'log' | 'marquee' | 'status' | 'timer';
         /**
           * (optional) Whether to show the toasts' icon.
          */
@@ -3362,6 +3370,10 @@ declare namespace LocalJSX {
          */
         "logoOptions"?: ModusNavbarLogoOptions;
         /**
+          * (optional) Whether to show badge on top of notification
+         */
+        "notificationCount"?: number;
+        /**
           * An event that fires when an apps menu app opens.
          */
         "onAppsMenuAppOpen"?: (event: ModusNavbarCustomEvent<ModusNavbarApp>) => void;
@@ -4065,7 +4077,7 @@ declare namespace LocalJSX {
         /**
           * (optional) Capitalization behavior when using a non-traditional keyboard (e.g. microphone, touch screen)
          */
-        "autocapitalize"?: boolean | 'none' | 'off' | 'sentences' | 'on' | 'words' | 'characters';
+        "autocapitalize"?: 'none' | 'off' | 'sentences' | 'on' | 'words' | 'characters';
         /**
           * (optional) Sets autocomplete on the input.
          */
@@ -4258,6 +4270,10 @@ declare namespace LocalJSX {
           * An event that fires when the toast is dismissed
          */
         "onDismissClick"?: (event: ModusToastCustomEvent<any>) => void;
+        /**
+          * (optional) Role taken by the toast.  Defaults to 'status'.
+         */
+        "role"?: 'alert' | 'log' | 'marquee' | 'status' | 'timer';
         /**
           * (optional) Whether to show the toasts' icon.
          */

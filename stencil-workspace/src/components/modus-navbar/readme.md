@@ -15,6 +15,7 @@
 | `helpTooltip`          | --                       | (optional) Help tooltip.                                                                                                                                                                | `ModusNavbarTooltip`      | `undefined` |
 | `helpUrl`              | `help-url`               | (optional) Help URL.                                                                                                                                                                    | `string`                  | `undefined` |
 | `logoOptions`          | --                       | (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels. | `ModusNavbarLogoOptions`  | `undefined` |
+| `notificationCount`    | `notification-count`     | (optional) Whether to show badge on top of notification                                                                                                                                 | `number`                  | `undefined` |
 | `profileMenuOptions`   | --                       | (required) Profile menu options.                                                                                                                                                        | `ModusProfileMenuOptions` | `undefined` |
 | `reverse`              | `reverse`                | (optional) Whether to display the navbar items in reverse order.                                                                                                                        | `boolean`                 | `undefined` |
 | `searchTooltip`        | --                       | (optional) Search tooltip.                                                                                                                                                              | `ModusNavbarTooltip`      | `undefined` |
@@ -75,6 +76,7 @@ Type: `Promise<void>`
 - [modus-navbar-search-overlay](search-overlay)
 - [modus-navbar-main-menu](main-menu)
 - [modus-tooltip](../modus-tooltip)
+- [modus-badge](../modus-badge)
 - [modus-navbar-notifications-menu](notifications-menu)
 - [modus-navbar-apps-menu](apps-menu)
 - [modus-navbar-profile-menu](profile-menu)
@@ -87,6 +89,7 @@ graph TD;
   modus-navbar --> modus-navbar-search-overlay
   modus-navbar --> modus-navbar-main-menu
   modus-navbar --> modus-tooltip
+  modus-navbar --> modus-badge
   modus-navbar --> modus-navbar-notifications-menu
   modus-navbar --> modus-navbar-apps-menu
   modus-navbar --> modus-navbar-profile-menu
