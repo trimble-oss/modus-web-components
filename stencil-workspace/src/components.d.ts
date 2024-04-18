@@ -294,10 +294,20 @@ export namespace Components {
     }
     interface ModusButtonGroup {
         /**
+          * (optional) The button group's aria-disabled state.
+         */
+        "ariaDisabled": string | null;
+        /**
           * (optional) The button group's aria-label.
          */
         "ariaLabel": string;
+        /**
+          * (optional) The style of the buttons in the group
+         */
         "buttonStyle": ButtonStyle;
+        /**
+          * (optional) The color of the buttons in the group
+         */
         "color": ButtonColor;
         /**
           * (optional) Disables the button group.
@@ -1914,7 +1924,7 @@ declare global {
     };
     interface HTMLModusButtonGroupElementEventMap {
         "buttonGroupClick": ModusButtonGroupButtonClickEvent;
-        "selectionChange": HTMLModusButtonElement[];
+        "buttonSelectionChange": HTMLModusButtonElement[];
     }
     interface HTMLModusButtonGroupElement extends Components.ModusButtonGroup, HTMLStencilElement {
         addEventListener<K extends keyof HTMLModusButtonGroupElementEventMap>(type: K, listener: (this: HTMLModusButtonGroupElement, ev: ModusButtonGroupCustomEvent<HTMLModusButtonGroupElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2924,10 +2934,20 @@ declare namespace LocalJSX {
     }
     interface ModusButtonGroup {
         /**
+          * (optional) The button group's aria-disabled state.
+         */
+        "ariaDisabled"?: string | null;
+        /**
           * (optional) The button group's aria-label.
          */
         "ariaLabel"?: string;
+        /**
+          * (optional) The style of the buttons in the group
+         */
         "buttonStyle"?: ButtonStyle;
+        /**
+          * (optional) The color of the buttons in the group
+         */
         "color"?: ButtonColor;
         /**
           * (optional) Disables the button group.
@@ -2940,7 +2960,7 @@ declare namespace LocalJSX {
         /**
           * Event emitted when the selection changes
          */
-        "onSelectionChange"?: (event: ModusButtonGroupCustomEvent<HTMLModusButtonElement[]>) => void;
+        "onButtonSelectionChange"?: (event: ModusButtonGroupCustomEvent<HTMLModusButtonElement[]>) => void;
         /**
           * (optional) The selection type of buttons
          */

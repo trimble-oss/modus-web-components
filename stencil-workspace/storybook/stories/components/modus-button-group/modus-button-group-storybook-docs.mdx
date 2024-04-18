@@ -5,6 +5,18 @@ import { Anchor } from '@storybook/addon-docs';
 [Modus Button Group](https://modus.trimble.com/components) web components provide a way to group buttons together. They are referenced using the `<modus-button-group>` custom HTML element.
 This component utilizes the `modus-button` element, allowing you to render your own HTML in the button group.
 
+#### Implementation Details
+For Text Buttons and Icon with Text Buttons,
+
+- Solid buttons supports all the given colors.
+- Outline buttons only support `primary` and `secondary` colors.
+- Borderless buttons only support `primary` color.
+
+For Icon only Buttons,
+
+- Solid buttons supports all the given colors except `danger`.
+- Outline buttons only support `primary` and `secondary` colors.
+- Borderless buttons supports all the given colors except `danger`.
 
 <Anchor storyId="components-button-group--default" />
 
@@ -66,7 +78,10 @@ This component utilizes the `modus-button` element, allowing you to render your 
 
 | Property        | Attribute        | Description                                                      | Type                                             | Default     |
 |-----------------|------------------|------------------------------------------------------------------|--------------------------------------------------|-------------|
-| `ariaLabel`     | `aria-label`     | (optional) The aria label of the button group                    | `string`                                         | `undefined` |
+| `ariaDisabled`  | `aria-disabled`  | (optional) The button groups's `aria-disabled` state             | `string`                                         | `undefined` |
+| `ariaLabel`     | `aria-label`     | (optional) The button groups's `aria-label`                      | `string`                                         | `undefined` |
+| `buttonStyle`   | `button-style`   | (optional) The style of the buttons in group                     | `"borderless" , "fill" , "outline"`              | `'outline'` |
+| `color`         | `color`          | (optional) The color of the buttons in group                     | `"danger" ,"primary" , "secondary" , "tertiary"` | `'primary'` |
 | `disabled`      | `disabled`       | (optional) If `true`, the button group is disabled               | `boolean`                                        | `false`     |
 | `selectionType` | `selection-type` | (optional) The selection type (`none`, `single`, `multiple`)     | `ButtonGroupSelectionType`                       | `none`      |
 | `size`          | `size`           | (optional) The size of the buttons. (`small`, `medium`, `large`) | `ButtonSize`                                     | `medium`    |

@@ -235,21 +235,21 @@ export declare interface ModusButton extends Components.ModusButton {
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'buttonStyle', 'color', 'disabled', 'selectionType', 'size']
+  inputs: ['ariaDisabled', 'ariaLabel', 'buttonStyle', 'color', 'disabled', 'selectionType', 'size']
 })
 @Component({
   selector: 'modus-button-group',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['ariaLabel', 'buttonStyle', 'color', 'disabled', 'selectionType', 'size'],
+  inputs: ['ariaDisabled', 'ariaLabel', 'buttonStyle', 'color', 'disabled', 'selectionType', 'size'],
 })
 export class ModusButtonGroup {
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['buttonGroupClick', 'selectionChange']);
+    proxyOutputs(this, this.el, ['buttonGroupClick', 'buttonSelectionChange']);
   }
 }
 
@@ -264,7 +264,7 @@ export declare interface ModusButtonGroup extends Components.ModusButtonGroup {
   /**
    * Event emitted when the selection changes
    */
-  selectionChange: EventEmitter<CustomEvent<HTMLModusButtonElement[]>>;
+  buttonSelectionChange: EventEmitter<CustomEvent<HTMLModusButtonElement[]>>;
 }
 
 

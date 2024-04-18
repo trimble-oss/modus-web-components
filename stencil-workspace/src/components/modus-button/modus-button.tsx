@@ -23,7 +23,7 @@ export class ModusButton {
   @Prop({ reflect: true }) color: ButtonColor = 'primary';
 
   /** (optional) Disables the button. */
-  @Prop() disabled: boolean;
+  @Prop({ reflect: true }) disabled: boolean;
 
   /** (optional) Takes the icon name and renders an icon-only button. */
   @Prop() iconOnly: string;

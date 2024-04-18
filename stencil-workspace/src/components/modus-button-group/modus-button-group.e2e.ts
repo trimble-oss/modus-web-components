@@ -99,7 +99,7 @@ describe('modus-button-group', () => {
     expect(buttons).toBeTruthy();
 
     buttons[0].click();
-    const emittedButtons = await buttonGroup.spyOnEvent('selectionChange');
+    const emittedButtons = await buttonGroup.spyOnEvent('buttonSelectionChange');
     await page.waitForChanges();
 
     expect(emittedButtons).toHaveReceivedEventTimes(1);
@@ -152,7 +152,7 @@ describe('modus-button-group', () => {
     expect(buttons).toBeTruthy();
 
     buttons[0].click();
-    const emittedButtons = await buttonGroup.spyOnEvent('selectionChange');
+    const emittedButtons = await buttonGroup.spyOnEvent('buttonSelectionChange');
     await page.waitForChanges();
 
     expect(emittedButtons).toHaveReceivedEventTimes(1);
@@ -183,5 +183,66 @@ describe('modus-button-group', () => {
     const button1 = await buttons[2]?.shadowRoot.querySelector('button');
     expect(button1).toBeTruthy();
     expect(button1).not.toHaveClass('active');
+  });
+
+  it('disables all buttons when the group is disabled', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-button-group disabled>
+        <modus-button>Button 1</modus-button>
+        <modus-button>Button 2</modus-button>
+      </modus-button-group>
+    `);
+    await page.waitForChanges();
+
+    const buttons = await page.findAll('modus-button');
+
+    for (let button of buttons) {
+      const buttonDisabled = await button.getProperty('disabled');
+      expect(buttonDisabled).toBe(true);
+    }
+  });
+
+  it('reflects style changes to all buttons', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-button-group button-style="solid">
+        <modus-button>Button 1</modus-button>
+        <modus-button>Button 2</modus-button>
+      </modus-button-group>
+    `);
+    await page.waitForChanges();
+
+    const buttonGroup = await page.find('modus-button-group');
+    expect(buttonGroup.getAttribute('button-style')).toBe('solid');
+
+    const buttons = await page.findAll('modus-button');
+    for (let i = 0; i < buttons.length; i++) {
+      expect(await buttons[i].getProperty('buttonStyle')).toBe('solid');
+    }
+
+    buttonGroup.setProperty('buttonStyle', 'outline');
+    await page.waitForChanges();
+
+    for (let i = 0; i < buttons.length; i++) {
+      expect(await buttons[i].getProperty('buttonStyle')).toBe('outline');
+    }
+  });
+
+  it('sets aria-label and aria-disabled correctly', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-button-group aria-label="Group Label" aria-disabled="true">
+        <modus-button>Button 1</modus-button>
+      </modus-button-group>
+    `);
+    await page.waitForChanges();
+
+    const buttonGroup = await page.find('modus-button-group');
+    expect(buttonGroup.getAttribute('aria-label')).toBe('Group Label');
+    expect(buttonGroup.getAttribute('aria-disabled')).toBe('true');
   });
 });

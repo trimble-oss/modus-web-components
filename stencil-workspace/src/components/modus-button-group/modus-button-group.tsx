@@ -9,20 +9,25 @@ import { ButtonColor, ButtonSize, ButtonStyle, ButtonType } from '../modus-butto
   shadow: true,
 })
 export class ModusButtonGroup {
-  @Element() host: HTMLElement;
-
   /** Array to store selected buttons */
   selectedButtons: HTMLModusButtonElement[] = [];
+
+  @Element() host: HTMLElement;
+
+  /** (optional) The button group's aria-disabled state. */
+  @Prop() ariaDisabled: string | null;
 
   /** (optional) The button group's aria-label. */
   @Prop() ariaLabel: string;
 
+  /** (optional) The style of the buttons in the group */
   @Prop() buttonStyle: ButtonStyle = 'outline';
 
+  /** (optional) The color of the buttons in the group */
   @Prop() color: ButtonColor = 'primary';
 
   /** (optional) Disables the button group. */
-  @Prop() disabled: boolean;
+  @Prop({ reflect: true }) disabled: boolean;
 
   /** (optional) The selection type of buttons */
   @Prop() selectionType: ButtonGroupSelectionType = DEFAULT_SELECTION_TYPE;
@@ -38,8 +43,14 @@ export class ModusButtonGroup {
   @Prop() size: ButtonSize = 'medium';
 
   @Watch('disabled')
+  protected disabledChanged(): void {
+    this.setupButtons(true);
+  }
+
+  @Watch('buttonStyle')
+  @Watch('color')
   @Watch('size')
-  protected propsChanged(): void {
+  protected sizeChanged(): void {
     this.setupButtons();
   }
 
@@ -47,7 +58,7 @@ export class ModusButtonGroup {
   @Event() buttonGroupClick: EventEmitter<ModusButtonGroupButtonClickEvent>;
 
   /** Event emitted when the selection changes */
-  @Event() selectionChange: EventEmitter<HTMLModusButtonElement[]>;
+  @Event() buttonSelectionChange: EventEmitter<HTMLModusButtonElement[]>;
 
   componentWillLoad() {
     this.setupButtons();
@@ -74,19 +85,26 @@ export class ModusButtonGroup {
         break;
     }
 
-    this.selectionChange.emit(this.selectedButtons);
+    this.buttonSelectionChange.emit(this.selectedButtons);
     this.buttonGroupClick.emit({ button: clickedButton, isSelected: this.selectedButtons.includes(clickedButton) });
   }
 
-  setupButtons() {
+  setupButtons(reset: boolean = false) {
     const buttons = this.host.querySelectorAll('modus-button');
-    this.renderButtons(buttons);
+    this.renderButtons(buttons, reset);
   }
 
-  renderButtons(buttons: NodeListOf<HTMLModusButtonElement>) {
+  renderButtons(buttons: NodeListOf<HTMLModusButtonElement>, reset: boolean = false) {
     const buttonType = this.determineButtonType();
     buttons.forEach((button: HTMLModusButtonElement) => {
-      button.disabled = this.disabled;
+      if (reset) {
+        button.ariaDisabled = this.ariaDisabled;
+        button.disabled = this.disabled;
+      } else {
+        button.ariaDisabled = button.ariaDisabled || this.ariaDisabled;
+        button.disabled = button.disabled || this.disabled;
+      }
+
       button.buttonStyle = this.buttonStyle;
       button.color = this.color;
       button.size = this.size;
@@ -115,7 +133,9 @@ export class ModusButtonGroup {
 
   render() {
     return (
-      <Host aria-label={this.ariaLabel} aria-disabled={this.disabled}>
+      <Host
+        aria-label={this.ariaLabel}
+        aria-disabled={this.ariaDisabled ? this.ariaDisabled : this.disabled ? 'true' : undefined}>
         <slot />
       </Host>
     );

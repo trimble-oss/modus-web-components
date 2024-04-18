@@ -6,11 +6,41 @@ import docs from './modus-button-group-storybook-docs.mdx';
 export default {
   title: 'Components/Button Group',
   argTypes:{
+    ariaDisabled: {
+      name: 'aria-disabled',
+      description: "The button group's aria-disabled state",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
     ariaLabel: {
       name: 'aria-label',
       description: "The button's aria-label",
       table: {
         type: { summary: 'string' },
+      },
+    },
+    buttonStyle: {
+      name: 'button-style',
+      control: {
+        options: ['borderless', 'fill', 'outline'],
+        type: 'select',
+      },
+      description: 'The style of the buttons in group, not all colors are supported for each button style',
+      table: {
+        defaultValue: { summary: `'outline'` },
+        type: { summary: `'borderless' | 'fill' | 'outline'` },
+      },
+    },
+    color: {
+      control: {
+        options: ['danger', 'primary', 'secondary', 'tertiary'],
+        type: 'select',
+      },
+      description: 'The color of the buttons in group, not all button styles are supported for each color',
+      table: {
+        defaultValue: { summary: `'primary'` },
+        type: { summary: `'danger' | 'primary' | 'secondary' | 'tertiary'` },
       },
     },
     disabled: {
@@ -49,7 +79,7 @@ export default {
   parameters: {
     controls: { expanded: true, sort: 'alpha' },
     actions:{
-      handles: ['buttonGroupClick', 'selectionChange'],
+      handles: ['buttonGroupClick', 'buttonSelectionChange'],
     },
     docs: {
       page: docs,
@@ -59,18 +89,21 @@ export default {
     },
   },
 };
-const Template = ({ ariaLabel, disabled, selectionType, size }) => html`
-  <modus-button-group aria-label=${ariaLabel} .disabled=${disabled} selection-type=${selectionType} size=${size}>
+const Template = ({ ariaLabel, buttonStyle, color, disabled, selectionType, size }) => html`
+  <modus-button-group aria-label=${ariaLabel} button-style=${buttonStyle} color=${color} .disabled=${disabled} selection-type=${selectionType} size=${size}>
     <modus-button>Button 1</modus-button>
     <modus-button>Button 2</modus-button>
     <modus-button>Button 3</modus-button>
   </modus-button-group>
 `;
 const DefaultArgs = {
+  ariaDisabled: '',
   ariaLabel: '',
   disabled: false,
   selectionType: 'none',
   size: 'medium',
+  color: 'primary',
+  buttonStyle: 'outline',
 };
 export const Default = Template.bind({});
 Default.args = { ...DefaultArgs };
