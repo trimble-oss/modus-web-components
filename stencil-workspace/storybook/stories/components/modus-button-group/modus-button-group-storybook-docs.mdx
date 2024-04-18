@@ -73,6 +73,19 @@ For Icon only Buttons,
 </modus-button-group>
 ```
 
+### Types
+
+```ts
+type ButtonGroupSelectionType =
+  | typeof SINGLE_SELECTION_TYPE
+  | typeof MULTIPLE_SELECTION_TYPE
+  | typeof DEFAULT_SELECTION_TYPE;
+
+interface ModusButtonGroupButtonClickEvent {
+  button: HTMLModusButtonElement;
+  isSelected: boolean;
+}
+```
 
 ### Properties
 
