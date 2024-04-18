@@ -5,6 +5,14 @@ import docs from './modus-chip-storybook-docs.mdx';
 export default {
   title: 'Components/Chip',
   argTypes: {
+    active:{
+      name: 'active',
+      description: 'Whether the chip is active',
+      table: {
+      defaultValue: { summary: false },
+      type: { summary: 'boolean' },
+      },
+    },
     ariaLabel: {
       name: 'aria-label',
       description: "The chip's aria-label",
@@ -45,15 +53,6 @@ export default {
       table: {
         type: { summary: 'string' },
       },
-    },
-    isActive:{
-      name: 'is-active',
-      description: 'Whether the chip is active',
-      table: {
-      defaultValue: { summary: false },
-      type: { summary: 'boolean' },
-      },
-
     },
     showCheckmark: {
       name: 'show-checkmark',
@@ -111,83 +110,83 @@ export default {
 };
 
 export const Default = ({
+  active,
   ariaLabel,
   chipStyle,
   disabled,
   hasError,
   imageUrl,
-  isActive,
+  maxWidth,
   showCheckmark,
   showClose,
   size,
   value,
-  maxWidth,
 }) => html`
   <modus-chip
+    active=${active}
     aria-label=${ariaLabel}
     chip-style=${chipStyle}
     ?disabled=${disabled}
     has-error=${hasError}
     image-url=${imageUrl}
-    is-active=${isActive}
+    max-width=${maxWidth}
     show-checkmark=${showCheckmark}
     show-close=${showClose}
     size=${size}
-    max-width=${maxWidth}
     value=${value}>
   </modus-chip>
 `;
 Default.args = {
+  active: false,
   ariaLabel: '',
   chipStyle: 'solid',
   disabled: false,
   hasError: false,
   imageUrl: 'https://randomuser.me/api/portraits/lego/1.jpg',
-  isActive: false,
+  maxWidth:'100px',
   showCheckmark: false,
   showClose: false,
   size: 'medium',
   value: 'Bryan',
-  maxWidth:'100px'
 };
 
 export const Outline = ({
+  active,
   ariaLabel,
   chipStyle,
   disabled,
   hasError,
   imageUrl,
-  isActive,
+  maxWidth,
   showCheckmark,
   showClose,
   size,
   value,
-  maxWidth,
 }) => html`
   <modus-chip
+    active=${active}
     aria-label=${ariaLabel}
     chip-style=${chipStyle}
     ?disabled=${disabled}
     has-error=${hasError}
     image-url=${imageUrl}
-    is-active=${isActive}
+    max-width=${maxWidth}
     show-checkmark=${showCheckmark}
     show-close=${showClose}
     size=${size}
-    value=${value}
-    max-width=${maxWidth}>
+    value=${value}>
   </modus-chip>
 `;
 Outline.args = {
+  active: false,
   ariaLabel: '',
   chipStyle: 'outline',
   disabled: false,
   hasError: false,
   imageUrl: 'https://randomuser.me/api/portraits/lego/1.jpg',
-  isActive: false,
+  maxWidth:'100px',
   showCheckmark: false,
   showClose: false,
   size: 'medium',
   value: 'Bryan',
-  maxWidth:'100px'
 };

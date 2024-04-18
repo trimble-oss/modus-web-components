@@ -350,6 +350,10 @@ export namespace Components {
     }
     interface ModusChip {
         /**
+          * (optional) Whether the chip is active.
+         */
+        "active": boolean;
+        /**
           * (optional) The chip's aria-label.
          */
         "ariaLabel": string | null;
@@ -2936,6 +2940,10 @@ declare namespace LocalJSX {
         "tabIndexValue"?: string | number;
     }
     interface ModusChip {
+        /**
+          * (optional) Whether the chip is active.
+         */
+        "active"?: boolean;
         /**
           * (optional) The chip's aria-label.
          */
