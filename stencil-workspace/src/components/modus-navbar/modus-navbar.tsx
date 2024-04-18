@@ -490,7 +490,10 @@ export class ModusNavbar {
                 {this.showPendoPlaceholder && <div class={'pendo-placeholder'} />}
                 {this.showHelp && (
                   <div class="navbar-button" data-test-id="help-menu">
-                    <modus-tooltip text={this.helpTooltip?.text} aria-label={this.helpTooltip?.ariaLabel || undefined} position="bottom">
+                    <modus-tooltip
+                      text={this.helpTooltip?.text}
+                      aria-label={this.helpTooltip?.ariaLabel || undefined}
+                      position="bottom">
                       <span
                         class="navbar-button-icon"
                         role="button"
