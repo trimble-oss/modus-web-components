@@ -76,10 +76,7 @@ For Icon only Buttons,
 ### Types
 
 ```ts
-type ButtonGroupSelectionType =
-  | typeof SINGLE_SELECTION_TYPE
-  | typeof MULTIPLE_SELECTION_TYPE
-  | typeof DEFAULT_SELECTION_TYPE;
+type ButtonGroupSelectionType = 'single' | 'multiple' | 'none';
 
 interface ModusButtonGroupButtonClickEvent {
   button: HTMLModusButtonElement;
