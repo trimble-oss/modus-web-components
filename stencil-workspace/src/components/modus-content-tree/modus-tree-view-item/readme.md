@@ -14,6 +14,7 @@
 | `draggableItem`       | `draggable-item`  | (optional) Allows the item to be dragged across the tree                                                                             | `boolean`                 | `undefined` |
 | `droppableItem`       | `droppable-item`  | (optional) Allows the item to be a drop zone so other tree items can be dropped above it                                             | `boolean`                 | `undefined` |
 | `editable`            | `editable`        | (optional) Changes the label field into a text box                                                                                   | `boolean`                 | `undefined` |
+| `isLastChild`         | `is-last-child`   | To be set true when the tree item is an expandable last child                                                                        | `boolean`                 | `undefined` |
 | `label` _(required)_  | `label`           | (required) Label for the tree item                                                                                                   | `string`                  | `undefined` |
 | `nodeId` _(required)_ | `node-id`         | (required) Unique tree item identifier                                                                                               | `string`                  | `undefined` |
 | `tabIndexValue`       | `tab-index-value` | (optional) Tab Index for the tree item                                                                                               | `number \| string`        | `0`         |
@@ -44,6 +45,16 @@ Type: `Promise<void>`
 ### `focusItem() => Promise<void>`
 
 Focus the tree item
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+### `setChildren() => Promise<void>`
+
+
 
 #### Returns
 
