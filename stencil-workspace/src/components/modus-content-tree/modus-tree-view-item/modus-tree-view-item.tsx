@@ -65,6 +65,12 @@ export class ModusTreeViewItem {
   /** (optional) Actions that can be performed on each item. A maximum of 3 icons will be shown, including overflow menu and expand icons. */
   @Prop({ mutable: true }) actions: ModusActionBarOptions[];
 
+  /** To be set true when the tree item is an expandable last child */
+  @Prop() isLastChild: boolean;
+
+  @State() isExpanded: boolean;
+  @State() isChildren: boolean;
+
   @Listen('actionBarClick')
   handleActionBarClick(event: CustomEvent) {
     const actionId = event.detail.actionId;
@@ -129,6 +135,16 @@ export class ModusTreeViewItem {
     if (this.refLabelInput && this.editable) {
       this.refLabelInput.focusInput();
     }
+    const children = this.element.querySelectorAll('modus-tree-view-item') as unknown as HTMLModusTreeViewItemElement[];
+    children.forEach((child) => {
+      console.log('child', child);
+      child.setChildren();
+    });
+  }
+
+  @Method()
+  async setChildren() {
+    this.isChildren = true;
   }
 
   componentWillLoad() {
@@ -206,6 +222,7 @@ export class ModusTreeViewItem {
       const { onItemExpandToggle, hasItemExpanded } = this.options;
 
       onItemExpandToggle(this.nodeId);
+      this.isExpanded = hasItemExpanded(this.nodeId);
       this.itemExpandToggle.emit(hasItemExpanded(this.nodeId));
     }
   }
@@ -404,7 +421,7 @@ export class ModusTreeViewItem {
     };
     const sizeClass = `${TREE_ITEM_SIZE_CLASS.get(size || 'standard')}`;
     const tabIndex: string | number = isDisabled ? -1 : this.tabIndexValue;
-    const treeItemClass = `tree-item ${selected ? 'selected' : ''} ${sizeClass} ${isDisabled ? 'disabled' : ''} ${borderless ? 'borderless' : ''}`;
+    const treeItemClass = `tree-item ${this.isExpanded ? 'expanded' : ''} ${this.isChildren ? 'is-children' : ''} ${this.isLastChild && !this.isExpanded ? 'is-last-child' : ''}${selected ? 'selected' : ''} ${sizeClass} ${isDisabled ? 'disabled' : ''} ${borderless ? 'borderless' : ''}`;
     const treeItemChildrenClass = `tree-item-group ${sizeClass} ${expanded ? 'expanded' : ''}`;
 
     return (
