@@ -20,10 +20,10 @@
 
 ## Events
 
-| Event                   | Description                              | Type                                            |
-| ----------------------- | ---------------------------------------- | ----------------------------------------------- |
-| `buttonGroupClick`      | Event emitted when a button is clicked   | `CustomEvent<ModusButtonGroupButtonClickEvent>` |
-| `buttonSelectionChange` | Event emitted when the selection changes | `CustomEvent<HTMLModusButtonElement[]>`         |
+| Event                   | Description                              | Type                                    |
+| ----------------------- | ---------------------------------------- | --------------------------------------- |
+| `buttonGroupClick`      | Event emitted when a button is clicked   | `CustomEvent<unknown>`                  |
+| `buttonSelectionChange` | Event emitted when the selection changes | `CustomEvent<HTMLModusButtonElement[]>` |
 
 
 ----------------------------------------------

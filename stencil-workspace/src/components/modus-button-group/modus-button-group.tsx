@@ -56,7 +56,7 @@ export class ModusButtonGroup {
   }
 
   /** Event emitted when a button is clicked */
-  @Event() buttonGroupClick: EventEmitter<ModusButtonGroupButtonClickEvent>;
+  @Event() buttonGroupClick: EventEmitter<unknown>;
 
   /** Event emitted when the selection changes */
   @Event() buttonSelectionChange: EventEmitter<HTMLModusButtonElement[]>;
