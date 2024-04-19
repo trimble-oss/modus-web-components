@@ -9,6 +9,8 @@ import { ModusActionBarOptions } from "./components/modus-action-bar/modus-actio
 import { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
 import { BadgeProperties } from "./components/modus-badge/modus-badge";
 import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
+import { ButtonColor, ButtonSize, ButtonStyle, ButtonType } from "./components/modus-button/modus-button.models";
+import { ButtonGroupSelectionType, ModusButtonGroupButtonClickEvent } from "./components/modus-button-group/modus-button-group.models";
 import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 import { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
 import { ModusIconName } from "./icons/ModusIconUtilities";
@@ -30,6 +32,8 @@ export { ModusActionBarOptions } from "./components/modus-action-bar/modus-actio
 export { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
 export { BadgeProperties } from "./components/modus-badge/modus-badge";
 export { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
+export { ButtonColor, ButtonSize, ButtonStyle, ButtonType } from "./components/modus-button/modus-button.models";
+export { ButtonGroupSelectionType, ModusButtonGroupButtonClickEvent } from "./components/modus-button-group/modus-button-group.models";
 export { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 export { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
 export { ModusIconName } from "./icons/ModusIconUtilities";
@@ -246,11 +250,11 @@ export namespace Components {
         /**
           * (optional) The style of the button
          */
-        "buttonStyle": 'borderless' | 'fill' | 'outline';
+        "buttonStyle": ButtonStyle;
         /**
           * (optional) The color of the button
          */
-        "color": 'danger' | 'primary' | 'secondary' | 'tertiary';
+        "color": ButtonColor;
         /**
           * (optional) Disables the button.
          */
@@ -272,17 +276,51 @@ export namespace Components {
          */
         "rightIcon": string;
         /**
+          * Set the button to active or inactive
+         */
+        "setActive": (isActive: boolean) => Promise<void>;
+        /**
           * (optional) Shows a caret icon right side of the button.
          */
         "showCaret": boolean;
         /**
           * (optional) The size of the button.
          */
-        "size": 'small' | 'medium' | 'large';
+        "size": ButtonSize;
         /**
           * (Optional) Button types
          */
-        "type": 'button' | 'reset' | 'submit';
+        "type": ButtonType;
+    }
+    interface ModusButtonGroup {
+        /**
+          * (optional) The button group's aria-disabled state.
+         */
+        "ariaDisabled": string | null;
+        /**
+          * (optional) The button group's aria-label.
+         */
+        "ariaLabel": string;
+        /**
+          * (optional) The style of the buttons in the group
+         */
+        "buttonStyle": ButtonStyle;
+        /**
+          * (optional) The color of the buttons in the group
+         */
+        "color": ButtonColor;
+        /**
+          * (optional) Disables the button group.
+         */
+        "disabled": boolean;
+        /**
+          * (optional) The selection type of buttons
+         */
+        "selectionType": ButtonGroupSelectionType;
+        /**
+          * (optional) The size of the buttons
+         */
+        "size": ButtonSize;
     }
     interface ModusCard {
         /**
@@ -1642,6 +1680,10 @@ export interface ModusButtonCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusButtonElement;
 }
+export interface ModusButtonGroupCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusButtonGroupElement;
+}
 export interface ModusCheckboxCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusCheckboxElement;
@@ -1879,6 +1921,24 @@ declare global {
     var HTMLModusButtonElement: {
         prototype: HTMLModusButtonElement;
         new (): HTMLModusButtonElement;
+    };
+    interface HTMLModusButtonGroupElementEventMap {
+        "buttonGroupClick": ModusButtonGroupButtonClickEvent;
+        "buttonSelectionChange": HTMLModusButtonElement[];
+    }
+    interface HTMLModusButtonGroupElement extends Components.ModusButtonGroup, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusButtonGroupElementEventMap>(type: K, listener: (this: HTMLModusButtonGroupElement, ev: ModusButtonGroupCustomEvent<HTMLModusButtonGroupElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusButtonGroupElementEventMap>(type: K, listener: (this: HTMLModusButtonGroupElement, ev: ModusButtonGroupCustomEvent<HTMLModusButtonGroupElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLModusButtonGroupElement: {
+        prototype: HTMLModusButtonGroupElement;
+        new (): HTMLModusButtonGroupElement;
     };
     interface HTMLModusCardElement extends Components.ModusCard, HTMLStencilElement {
     }
@@ -2552,6 +2612,7 @@ declare global {
         "modus-badge": HTMLModusBadgeElement;
         "modus-breadcrumb": HTMLModusBreadcrumbElement;
         "modus-button": HTMLModusButtonElement;
+        "modus-button-group": HTMLModusButtonGroupElement;
         "modus-card": HTMLModusCardElement;
         "modus-checkbox": HTMLModusCheckboxElement;
         "modus-chip": HTMLModusChipElement;
@@ -2833,11 +2894,11 @@ declare namespace LocalJSX {
         /**
           * (optional) The style of the button
          */
-        "buttonStyle"?: 'borderless' | 'fill' | 'outline';
+        "buttonStyle"?: ButtonStyle;
         /**
           * (optional) The color of the button
          */
-        "color"?: 'danger' | 'primary' | 'secondary' | 'tertiary';
+        "color"?: ButtonColor;
         /**
           * (optional) Disables the button.
          */
@@ -2865,11 +2926,49 @@ declare namespace LocalJSX {
         /**
           * (optional) The size of the button.
          */
-        "size"?: 'small' | 'medium' | 'large';
+        "size"?: ButtonSize;
         /**
           * (Optional) Button types
          */
-        "type"?: 'button' | 'reset' | 'submit';
+        "type"?: ButtonType;
+    }
+    interface ModusButtonGroup {
+        /**
+          * (optional) The button group's aria-disabled state.
+         */
+        "ariaDisabled"?: string | null;
+        /**
+          * (optional) The button group's aria-label.
+         */
+        "ariaLabel"?: string;
+        /**
+          * (optional) The style of the buttons in the group
+         */
+        "buttonStyle"?: ButtonStyle;
+        /**
+          * (optional) The color of the buttons in the group
+         */
+        "color"?: ButtonColor;
+        /**
+          * (optional) Disables the button group.
+         */
+        "disabled"?: boolean;
+        /**
+          * Event emitted when a button is clicked
+         */
+        "onButtonGroupClick"?: (event: ModusButtonGroupCustomEvent<ModusButtonGroupButtonClickEvent>) => void;
+        /**
+          * Event emitted when the selection changes
+         */
+        "onButtonSelectionChange"?: (event: ModusButtonGroupCustomEvent<HTMLModusButtonElement[]>) => void;
+        /**
+          * (optional) The selection type of buttons
+         */
+        "selectionType"?: ButtonGroupSelectionType;
+        /**
+          * (optional) The size of the buttons
+         */
+        "size"?: ButtonSize;
     }
     interface ModusCard {
         /**
@@ -4403,6 +4502,7 @@ declare namespace LocalJSX {
         "modus-badge": ModusBadge;
         "modus-breadcrumb": ModusBreadcrumb;
         "modus-button": ModusButton;
+        "modus-button-group": ModusButtonGroup;
         "modus-card": ModusCard;
         "modus-checkbox": ModusCheckbox;
         "modus-chip": ModusChip;
@@ -4465,6 +4565,7 @@ declare module "@stencil/core" {
             "modus-badge": LocalJSX.ModusBadge & JSXBase.HTMLAttributes<HTMLModusBadgeElement>;
             "modus-breadcrumb": LocalJSX.ModusBreadcrumb & JSXBase.HTMLAttributes<HTMLModusBreadcrumbElement>;
             "modus-button": LocalJSX.ModusButton & JSXBase.HTMLAttributes<HTMLModusButtonElement>;
+            "modus-button-group": LocalJSX.ModusButtonGroup & JSXBase.HTMLAttributes<HTMLModusButtonGroupElement>;
             "modus-card": LocalJSX.ModusCard & JSXBase.HTMLAttributes<HTMLModusCardElement>;
             "modus-checkbox": LocalJSX.ModusCheckbox & JSXBase.HTMLAttributes<HTMLModusCheckboxElement>;
             "modus-chip": LocalJSX.ModusChip & JSXBase.HTMLAttributes<HTMLModusChipElement>;
