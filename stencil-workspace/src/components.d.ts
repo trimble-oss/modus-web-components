@@ -10,7 +10,7 @@ import { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-a
 import { BadgeProperties } from "./components/modus-badge/modus-badge";
 import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 import { ButtonColor, ButtonSize, ButtonStyle, ButtonType } from "./components/modus-button/modus-button.models";
-import { ButtonGroupSelectionType, ModusButtonGroupButtonClickEvent } from "./components/modus-button-group/modus-button-group.models";
+import { ButtonGroupSelectionType } from "./components/modus-button-group/modus-button-group.models";
 import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 import { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
 import { ModusIconName } from "./icons/ModusIconUtilities";
@@ -33,7 +33,7 @@ export { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-a
 export { BadgeProperties } from "./components/modus-badge/modus-badge";
 export { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 export { ButtonColor, ButtonSize, ButtonStyle, ButtonType } from "./components/modus-button/modus-button.models";
-export { ButtonGroupSelectionType, ModusButtonGroupButtonClickEvent } from "./components/modus-button-group/modus-button-group.models";
+export { ButtonGroupSelectionType } from "./components/modus-button-group/modus-button-group.models";
 export { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 export { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
 export { ModusIconName } from "./icons/ModusIconUtilities";
@@ -1642,6 +1642,10 @@ export namespace Components {
         "focusItem": () => Promise<void>;
         "initTreeViewItem": (newValue: TreeViewItemOptions) => Promise<void>;
         /**
+          * To be set true when the tree item is an expandable last child
+         */
+        "isLastChild": boolean;
+        /**
           * (required) Label for the tree item
          */
         "label": string;
@@ -1649,6 +1653,7 @@ export namespace Components {
           * (required) Unique tree item identifier
          */
         "nodeId": string;
+        "setChildren": () => Promise<void>;
         /**
           * (optional) Tab Index for the tree item
          */
@@ -1923,7 +1928,7 @@ declare global {
         new (): HTMLModusButtonElement;
     };
     interface HTMLModusButtonGroupElementEventMap {
-        "buttonGroupClick": ModusButtonGroupButtonClickEvent;
+        "buttonGroupClick": unknown;
         "buttonSelectionChange": HTMLModusButtonElement[];
     }
     interface HTMLModusButtonGroupElement extends Components.ModusButtonGroup, HTMLStencilElement {
@@ -2956,7 +2961,7 @@ declare namespace LocalJSX {
         /**
           * Event emitted when a button is clicked
          */
-        "onButtonGroupClick"?: (event: ModusButtonGroupCustomEvent<ModusButtonGroupButtonClickEvent>) => void;
+        "onButtonGroupClick"?: (event: ModusButtonGroupCustomEvent<unknown>) => void;
         /**
           * Event emitted when the selection changes
          */
@@ -4463,6 +4468,10 @@ declare namespace LocalJSX {
           * (optional) Changes the label field into a text box
          */
         "editable"?: boolean;
+        /**
+          * To be set true when the tree item is an expandable last child
+         */
+        "isLastChild"?: boolean;
         /**
           * (required) Label for the tree item
          */
