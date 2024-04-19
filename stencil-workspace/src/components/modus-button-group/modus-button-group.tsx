@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 import { Component, h, Prop, Element, Event, EventEmitter, Host, Listen, Watch } from '@stencil/core';
-import { ButtonGroupSelectionType, ModusButtonGroupButtonClickEvent } from './modus-button-group.models';
+import { ButtonGroupSelectionType } from './modus-button-group.models';
 import { DEFAULT_SELECTION_TYPE, SINGLE_SELECTION_TYPE, MULTIPLE_SELECTION_TYPE } from './modus-button-group.constants';
 import { ButtonColor, ButtonSize, ButtonStyle, ButtonType } from '../modus-button/modus-button.models';
 
@@ -56,7 +56,7 @@ export class ModusButtonGroup {
   }
 
   /** Event emitted when a button is clicked */
-  @Event() buttonGroupClick: EventEmitter<ModusButtonGroupButtonClickEvent>;
+  @Event() buttonGroupClick: EventEmitter<unknown>;
 
   /** Event emitted when the selection changes */
   @Event() buttonSelectionChange: EventEmitter<HTMLModusButtonElement[]>;
