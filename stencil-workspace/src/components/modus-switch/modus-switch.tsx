@@ -69,11 +69,11 @@ export class ModusSwitch {
           <span class={`slider`}></span>
         </div>
         <input
-          aria-checked={String(this.checked)}
           aria-disabled={this.disabled ? 'true' : undefined}
           aria-label={this.ariaLabel}
           checked={this.checked}
           disabled={this.disabled}
+          id={this.label}
           ref={(el) => (this.checkboxInput = el as HTMLInputElement)}
           role="switch"
           type="checkbox"></input>
