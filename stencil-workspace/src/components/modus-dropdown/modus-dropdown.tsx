@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Component, Prop, h, Event, EventEmitter, State, Element, Listen } from '@stencil/core';
+import { Component, Prop, h, Event, EventEmitter, State, Element, Listen, Watch } from '@stencil/core';
 
 @Component({
   tag: 'modus-dropdown',
@@ -55,6 +55,9 @@ export class ModusDropdown {
     if (!this.toggleElement) {
       throw Error('matching element not found for toggle-element-id');
     }
+    if (this.disabled) {
+      this.toggleElement.setAttribute('disabled', String(this.disabled));
+    }
   }
 
   @Listen('click', { target: 'document' })
@@ -73,6 +76,9 @@ export class ModusDropdown {
   @Listen('keydown', { target: 'document' })
   documentKeyDownHandler(event: KeyboardEvent): void {
     if (event.key === 'Enter' || event.key === ' ') {
+      if (this.disabled) {
+        return;
+      }
       if (this.dropdownToggleClicked || (event.target as HTMLElement).closest(`#${this.toggleElementId}`)) {
         this.dropdownToggleClicked = false;
         return;
@@ -86,11 +92,19 @@ export class ModusDropdown {
     }
   }
 
+  @Watch('disabled')
+  onDisabledChange(newValue: boolean) {
+    this.toggleElement.setAttribute('disabled', String(newValue));
+  }
+
   hideDropdown(): void {
     this.visible = false;
     this.dropdownClose.emit();
   }
   handleDropdownClick(event: MouseEvent): void {
+    if (this.disabled) {
+      return;
+    }
     if ((event.target as HTMLElement).closest(`#${this.toggleElementId}`)) {
       this.visible = !this.visible;
     } else {
