@@ -11,7 +11,7 @@
 
   &[aria-expanded='true'] {
     .header:has(div svg.icon-expand-more) {
-      border-left: 4px solid var(--modus-blue);
+      border-left: 4px solid $modus-accordion-item-expanded-border-left-color;
       padding-left: 12px;
     }
   }
@@ -19,7 +19,7 @@
   // Accordion body left border
   &:has(div svg.icon-expand-more) {
     .body {
-      box-shadow: 4px 0 0 var(--modus-blue) inset;
+      box-shadow: 4px 0 0 $modus-accordion-item-expanded-border-left-color inset;
     }
   }
 
