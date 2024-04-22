@@ -17,7 +17,7 @@
 | `rightIcon`    | `right-icon`    | (optional) Takes the icon name and shows the icon aligned to the right of the button text. | `string`                                             | `undefined` |
 | `showCaret`    | `show-caret`    | (optional) Shows a caret icon right side of the button.                                    | `boolean`                                            | `undefined` |
 | `size`         | `size`          | (optional) The size of the button.                                                         | `"large" \| "medium" \| "small"`                     | `'medium'`  |
-| `type`         | `type`          | (Optional) Button types                                                                    | `"button" \| "reset" \| "submit"`                    | `'button'`  |
+| `type`         | `type`          | (Optional) Button types                                                                    | `"button" \| "reset" \| "submit" \| "toggle"`        | `'button'`  |
 
 
 ## Events
@@ -32,6 +32,22 @@
 ### `focusButton() => Promise<void>`
 
 Focus the Button
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+### `setActive(isActive: boolean) => Promise<void>`
+
+Set the button to active or inactive
+
+#### Parameters
+
+| Name       | Type      | Description |
+| ---------- | --------- | ----------- |
+| `isActive` | `boolean` |             |
 
 #### Returns
 
