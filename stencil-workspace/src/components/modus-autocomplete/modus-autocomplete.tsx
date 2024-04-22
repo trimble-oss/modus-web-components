@@ -77,6 +77,9 @@ export class ModusAutocomplete {
   /** The autocomplete's selected option. */
   @State() selectedOption: string;
 
+  /** Whether the text has been entered. */
+  @State() textEntered = false;
+
   /** Whether to show autocomplete's options when focus. */
   @Prop() showOptionsOnFocus: boolean;
 
@@ -166,8 +169,7 @@ export class ModusAutocomplete {
     this.value?.length > 0;
 
   displayOptions = () => {
-    const showOptions = this.showOptionsOnFocus || this.value?.length > 0 || this.disableCloseOnSelect;
-    return this.hasFocus && showOptions && !this.disabled;
+    return this.hasFocus && !this.disabled;
   };
 
   addChipValue(value: string) {
@@ -286,6 +288,7 @@ export class ModusAutocomplete {
 
   handleTextInputValueChange = (event: CustomEvent<string>) => {
     // Cancel the modus-text-input's value change event or else it will bubble to consumer.
+    this.textEntered = true;
     event.stopPropagation();
     this.disableFiltering = !this.disableCloseOnSelect;
     this.handleSearchChange(event.detail);
@@ -307,10 +310,11 @@ export class ModusAutocomplete {
       this.visibleCustomOptions = this.customOptions;
       return;
     }
-
-    this.visibleCustomOptions = this.customOptions?.filter((o: any) => {
-      return o.getAttribute(DATA_SEARCH_VALUE).toLowerCase().includes(search.toLowerCase());
-    });
+    if (this.textEntered || this.disableCloseOnSelect) {
+      this.visibleCustomOptions = this.customOptions?.filter((o: any) => {
+        return o.getAttribute(DATA_SEARCH_VALUE).toLowerCase().includes(search.toLowerCase());
+      });
+    }
     this.containsSlottedElements = this.customOptions.length > 0;
   };
 
@@ -325,10 +329,11 @@ export class ModusAutocomplete {
       this.visibleOptions = this.options as ModusAutocompleteOption[];
       return;
     }
-
-    this.visibleOptions = (this.options as ModusAutocompleteOption[])?.filter((o: ModusAutocompleteOption) => {
-      return o.value.toLowerCase().includes(search.toLowerCase());
-    });
+    if (this.textEntered || this.disableCloseOnSelect) {
+      this.visibleOptions = (this.options as ModusAutocompleteOption[])?.filter((o: ModusAutocompleteOption) => {
+        return o.value.toLowerCase().includes(search.toLowerCase());
+      });
+    }
   };
 
   // Do not display the slot for the custom options. We use this hidden slot to reference the slot's children.
@@ -376,6 +381,7 @@ export class ModusAutocomplete {
         aria-required={this.required}
         class={classes}
         onFocusin={() => {
+          this.textEntered = false;
           if (this.hasFocus) {
             return;
           }
