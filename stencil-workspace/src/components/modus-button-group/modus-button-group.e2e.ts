@@ -4,7 +4,7 @@ describe('modus-button-group', () => {
   it('renders', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<modus-button-group></modus-button-group>');
+    await page.setContent('<modus-button-group role="group"></modus-button-group>');
     const element = await page.find('modus-button-group');
     expect(element).toHaveClass('hydrated');
   });
@@ -13,7 +13,7 @@ describe('modus-button-group', () => {
     const page = await newE2EPage();
 
     await page.setContent(`
-      <modus-button-group>
+      <modus-button-group role="group">
         <modus-button>Button 1</modus-button>
         <modus-button>Button 2</modus-button>
       </modus-button-group>
@@ -27,7 +27,7 @@ describe('modus-button-group', () => {
     const page = await newE2EPage();
 
     await page.setContent(`
-      <modus-button-group>
+      <modus-button-group role="group">
         <modus-button>Button 1</modus-button>
         <modus-button>Button 2</modus-button>
       </modus-button-group>
@@ -48,7 +48,7 @@ describe('modus-button-group', () => {
     const page = await newE2EPage();
 
     await page.setContent(`
-      <modus-button-group>
+      <modus-button-group role="group">
         <modus-button>Button 1</modus-button>
         <modus-button>Button 2</modus-button>
       </modus-button-group>
@@ -84,7 +84,7 @@ describe('modus-button-group', () => {
     const page = await newE2EPage();
 
     await page.setContent(`
-      <modus-button-group selection-type="single">
+      <modus-button-group selection-type="single" role="group">
         <modus-button>Button 1</modus-button>
         <modus-button>Button 2</modus-button>
         <modus-button>Button 3</modus-button>
@@ -137,7 +137,7 @@ describe('modus-button-group', () => {
     const page = await newE2EPage();
 
     await page.setContent(`
-      <modus-button-group selection-type="multiple">
+      <modus-button-group selection-type="multiple" role="group">
         <modus-button>Button 1</modus-button>
         <modus-button>Button 2</modus-button>
         <modus-button>Button 3</modus-button>
@@ -189,7 +189,7 @@ describe('modus-button-group', () => {
     const page = await newE2EPage();
 
     await page.setContent(`
-      <modus-button-group disabled>
+      <modus-button-group disabled role="group">
         <modus-button>Button 1</modus-button>
         <modus-button>Button 2</modus-button>
       </modus-button-group>
@@ -198,7 +198,7 @@ describe('modus-button-group', () => {
 
     const buttons = await page.findAll('modus-button');
 
-    for (let button of buttons) {
+    for (const button of buttons) {
       const buttonDisabled = await button.getProperty('disabled');
       expect(buttonDisabled).toBe(true);
     }
@@ -208,7 +208,7 @@ describe('modus-button-group', () => {
     const page = await newE2EPage();
 
     await page.setContent(`
-      <modus-button-group button-style="solid">
+      <modus-button-group button-style="solid" role="group">
         <modus-button>Button 1</modus-button>
         <modus-button>Button 2</modus-button>
       </modus-button-group>
@@ -235,7 +235,7 @@ describe('modus-button-group', () => {
     const page = await newE2EPage();
 
     await page.setContent(`
-      <modus-button-group aria-label="Group Label" aria-disabled="true">
+      <modus-button-group aria-label="Group Label" aria-disabled="true" role="group">
         <modus-button>Button 1</modus-button>
       </modus-button-group>
     `);
