@@ -8,6 +8,7 @@ import angularValueAccessorBindings from './angular-value-accessor-bindings';
 
 export const config: Config = {
   namespace: 'modus-web-components',
+  buildDist: true,
   sourceMap: false,
   extras: {
     enableImportInjection: true,

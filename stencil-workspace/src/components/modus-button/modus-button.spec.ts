@@ -8,7 +8,7 @@ describe('modus-button', () => {
       html: '<modus-button></modus-button>',
     });
     expect(root).toEqualHtml(`
-      <modus-button>
+      <modus-button button-style="fill" color="primary">
         <mock:shadow-root>
           <button class="size-medium color-primary style-fill" type="button">
             <span class="label">
@@ -26,7 +26,7 @@ describe('modus-button', () => {
       html: `<modus-button>Button</modus-button>`,
     });
     expect(root).toEqualHtml(`
-      <modus-button>
+      <modus-button button-style="fill" color="primary">
         <mock:shadow-root>
           <button class="size-medium color-primary style-fill" type="button">
             <span class="label">
@@ -45,7 +45,7 @@ describe('modus-button', () => {
       html: `<modus-button icon-only="add"></modus-button>`,
     });
     expect(root).toEqualHtml(`
-      <modus-button icon-only="add">
+      <modus-button button-style="fill" color="primary" icon-only="add">
         <mock:shadow-root>
           <button class="color-primary icon-only size-medium style-fill" type="button">
             <span class="icon">

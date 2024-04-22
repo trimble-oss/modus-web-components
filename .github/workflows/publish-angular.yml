@@ -45,6 +45,14 @@ jobs:
           node-version: '18.x'
           registry-url: 'https://registry.npmjs.org'
 
+      - name: Install Modus Web Components
+        run: npm ci
+        working-directory: ./stencil-workspace
+
+      - name: Build Modus Web Components
+        run: npm run build
+        working-directory: ./stencil-workspace
+
       - name: npm install
         run: npm i
         working-directory: ./angular-workspace/ng${{ github.event.inputs.angularVersion }}/projects/trimble-oss/modus-angular-components

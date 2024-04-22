@@ -48,7 +48,7 @@ export class ModusTooltip {
 
   private popperInstance: Instance;
   private tooltipElement: HTMLDivElement;
-  private readonly showEvents = ['mouseenter', 'focus'];
+  private readonly showEvents = ['mouseenter', 'mouseover', 'focus'];
   private readonly hideEvents = ['mouseleave', 'blur', 'click'];
   private showEventsListener = () => this.show();
   private hideEventsListener = () => this.hide();
