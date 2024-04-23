@@ -27,7 +27,7 @@
     "@storybook/web-components": "^6.5.16",
     "babel-loader": "8.2.5",
     "postcss": "^8.4.31",
-    "storybook-dark-mode": "^3.0.1"
+    "storybook-dark-mode": "^4.0.1"
   },
   "engines": {
     "npm": ">=8.0.0 <9.0.0",
