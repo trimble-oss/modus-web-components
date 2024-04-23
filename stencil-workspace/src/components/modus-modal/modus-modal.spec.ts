@@ -10,7 +10,7 @@ describe('modus-modal', () => {
     expect(root).toEqualHtml(`
       <modus-modal>
         <mock:shadow-root>
-        <div class="modus-modal overlay hidden" role="dialog" style="z-index: 1;">
+        <div aria-hidden="true" class="modus-modal overlay hidden" style="z-index: 1;">
             <div class="content">
                 <div id="startTrap" tabindex="0" aria-hidden="true"></div>
                  <header>

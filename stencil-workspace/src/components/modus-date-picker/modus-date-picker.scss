@@ -36,6 +36,12 @@
     }
   }
 
+  .input-container {
+    input {
+      font-family: $primary-font;
+    }
+  }
+
   .calendar-container {
     background-color: $modus-date-picker-calendar-body-bg;
     border-radius: 4px;
@@ -177,6 +183,7 @@
 
         &.disabled {
           opacity: $modus-date-picker-calendar-day-disabled-opacity;
+          pointer-events: none;
         }
 
         &.range-selected {

@@ -9,7 +9,12 @@
 button {
   align-items: center;
   border: $rem-1px solid transparent;
+  border-bottom: var(--btn-border-bottom-width, #{$rem-1px}) solid transparent;
+  border-left: var(--btn-border-left-width, #{$rem-1px}) solid transparent;
   border-radius: $rem-4px;
+  border-radius: var(--btn-border-radius, #{$rem-4px});
+  border-right: var(--btn-border-right-width, #{$rem-1px}) solid transparent;
+  border-top: var(--btn-border-top-width, #{$rem-1px}) solid transparent;
   cursor: default;
   display: inline-flex;
   font-family: $primary-font;
@@ -49,6 +54,20 @@ button {
     :not(.style-borderless) {
       border-color: $modus-btn-disabled-border-color;
     }
+  }
+
+  &.left {
+    border-radius: $rem-4px 0 0 $rem-4px;
+    border-right-width: 0;
+  }
+
+  &.center {
+    border-radius: 0;
+    border-right-width: 0;
+  }
+
+  &.right {
+    border-radius: 0 $rem-4px $rem-4px 0;
   }
 
   &.size-small {
@@ -100,16 +119,16 @@ button {
     }
 
     &.icon-only {
-      height: 40px;
+      height: 32px;
       padding: 0;
-      width: 40px;
+      width: 32px;
 
       &.has-caret {
         padding: 0 4px;
       }
 
       .icon {
-        padding: 0 8px;
+        padding: 0 3px;
 
         svg {
           height: 24px;
@@ -220,6 +239,11 @@ button {
     }
   }
 
+  &.style-borderless.active:not([disabled]) {
+    background-color: $modus-btn-borderless-active-bg;
+    color: $modus-btn-borderless-active-color;
+  }
+
   // Solid variants
   &.style-fill {
     @each $color, $value in $btn-theme-colors {
@@ -283,6 +307,46 @@ button {
 
       // Active state
       &.color-#{$color}:active:not([disabled]) {
+        $btn-color: var(--modus-btn-outline-#{$color}-active-color, map-get($btn-outline-active, $color, 'color'));
+
+        background-color: var(--modus-btn-outline-#{$color}-active-bg, map-get($btn-outline-active, $color, 'bg'));
+        border-color: $btn-color;
+        color: $btn-color;
+
+        svg path {
+          fill: $btn-color;
+        }
+      }
+    }
+  }
+
+  &.style-fill.active {
+    @each $color, $value in $btn-theme-colors {
+      $default-text-color: $white;
+
+      @if $color == 'tertiary' {
+        $default-text-color: $col_trimble_gray;
+      }
+
+      &.color-#{$color} {
+        background-color: var(--modus-btn-#{$color}-active-bg, map-get($btn-active-colors, $color));
+        border-color: var(--modus-btn-#{$color}-active-bg, map-get($btn-active-colors, $color));
+        color: var(--modus-btn-#{$color}-color, $default-text-color);
+
+        svg path {
+          fill: var(--modus-btn-#{$color}-color, $default-text-color);
+        }
+      }
+      &.color-#{$color}:hover:not([disabled]) {
+        background-color: var(--modus-btn-#{$color}-hover-bg, map-get($btn-hover-colors, $color));
+        border-color: var(--modus-btn-#{$color}-hover-bg, map-get($btn-hover-colors, $color));
+      }
+    }
+  }
+
+  &.style-outline.active {
+    @each $color, $value in $btn-outline-theme-colors {
+      &.color-#{$color} {
         $btn-color: var(--modus-btn-outline-#{$color}-active-color, map-get($btn-outline-active, $color, 'color'));
 
         background-color: var(--modus-btn-outline-#{$color}-active-bg, map-get($btn-outline-active, $color, 'bg'));

@@ -207,7 +207,7 @@ export declare interface ModusBreadcrumb extends Components.ModusBreadcrumb {
 
 @ProxyCmp({
   inputs: ['ariaDisabled', 'ariaLabel', 'buttonStyle', 'color', 'disabled', 'iconOnly', 'leftIcon', 'rightIcon', 'showCaret', 'size', 'type'],
-  methods: ['focusButton']
+  methods: ['focusButton', 'setActive']
 })
 @Component({
   selector: 'modus-button',
@@ -231,6 +231,38 @@ export declare interface ModusButton extends Components.ModusButton {
    * (optional) An event that fires on button click.
    */
   buttonClick: EventEmitter<CustomEvent<any>>;
+}
+
+
+@ProxyCmp({
+  inputs: ['ariaDisabled', 'ariaLabel', 'buttonStyle', 'color', 'disabled', 'selectionType', 'size']
+})
+@Component({
+  selector: 'modus-button-group',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['ariaDisabled', 'ariaLabel', 'buttonStyle', 'color', 'disabled', 'selectionType', 'size'],
+})
+export class ModusButtonGroup {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['buttonGroupClick', 'buttonSelectionChange']);
+  }
+}
+
+
+export declare interface ModusButtonGroup extends Components.ModusButtonGroup {
+  /**
+   * Event emitted when a button is clicked
+   */
+  buttonGroupClick: EventEmitter<CustomEvent<unknown>>;
+  /**
+   * Event emitted when the selection changes
+   */
+  buttonSelectionChange: EventEmitter<CustomEvent<HTMLModusButtonElement[]>>;
 }
 
 
@@ -625,7 +657,7 @@ export declare interface ModusModal extends Components.ModusModal {
 
 
 @ProxyCmp({
-  inputs: ['apps', 'buttons', 'enableSearchOverlay', 'helpTooltip', 'helpUrl', 'logoOptions', 'profileMenuOptions', 'reverse', 'searchTooltip', 'showAppsMenu', 'showHelp', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showProfile', 'showSearch', 'showShadow', 'variant'],
+  inputs: ['apps', 'buttons', 'enableSearchOverlay', 'helpTooltip', 'helpUrl', 'logoOptions', 'notificationCount', 'profileMenuOptions', 'reverse', 'searchTooltip', 'showAppsMenu', 'showHelp', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showProfile', 'showSearch', 'showShadow', 'variant'],
   methods: ['hideMainMenu']
 })
 @Component({
@@ -633,7 +665,7 @@ export declare interface ModusModal extends Components.ModusModal {
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['apps', 'buttons', 'enableSearchOverlay', 'helpTooltip', 'helpUrl', 'logoOptions', 'profileMenuOptions', 'reverse', 'searchTooltip', 'showAppsMenu', 'showHelp', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showProfile', 'showSearch', 'showShadow', 'variant'],
+  inputs: ['apps', 'buttons', 'enableSearchOverlay', 'helpTooltip', 'helpUrl', 'logoOptions', 'notificationCount', 'profileMenuOptions', 'reverse', 'searchTooltip', 'showAppsMenu', 'showHelp', 'showMainMenu', 'showNotifications', 'showPendoPlaceholder', 'showProfile', 'showSearch', 'showShadow', 'variant'],
 })
 export class ModusNavbar {
   protected el: HTMLElement;
@@ -1370,7 +1402,7 @@ export class ModusTableRowActions {
 
 export declare interface ModusTableRowActions extends Components.ModusTableRowActions {
 
-  overflowRowActions: EventEmitter<CustomEvent<any>>;
+  overflowRowActions: EventEmitter<CustomEvent<unknown>>;
 }
 
 
@@ -1469,7 +1501,7 @@ export declare interface ModusTabs extends Components.ModusTabs {
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'autoFocusInput', 'autocomplete', 'clearable', 'disabled', 'errorText', 'helperText', 'includePasswordTextToggle', 'includeSearchIcon', 'inputmode', 'label', 'maxLength', 'minLength', 'placeholder', 'readOnly', 'required', 'size', 'textAlign', 'type', 'validText', 'value'],
+  inputs: ['ariaLabel', 'autoFocusInput', 'autocapitalize', 'autocomplete', 'autocorrect', 'clearable', 'disabled', 'enterkeyhint', 'errorText', 'helperText', 'includePasswordTextToggle', 'includeSearchIcon', 'inputmode', 'label', 'maxLength', 'minLength', 'pattern', 'placeholder', 'readOnly', 'required', 'size', 'spellcheck', 'textAlign', 'type', 'validText', 'value'],
   methods: ['focusInput']
 })
 @Component({
@@ -1477,7 +1509,7 @@ export declare interface ModusTabs extends Components.ModusTabs {
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['ariaLabel', 'autoFocusInput', 'autocomplete', 'clearable', 'disabled', 'errorText', 'helperText', 'includePasswordTextToggle', 'includeSearchIcon', 'inputmode', 'label', 'maxLength', 'minLength', 'placeholder', 'readOnly', 'required', 'size', 'textAlign', 'type', 'validText', 'value'],
+  inputs: ['ariaLabel', 'autoFocusInput', 'autocapitalize', 'autocomplete', 'autocorrect', 'clearable', 'disabled', 'enterkeyhint', 'errorText', 'helperText', 'includePasswordTextToggle', 'includeSearchIcon', 'inputmode', 'label', 'maxLength', 'minLength', 'pattern', 'placeholder', 'readOnly', 'required', 'size', 'spellcheck', 'textAlign', 'type', 'validText', 'value'],
 })
 export class ModusTextInput {
   protected el: HTMLElement;
@@ -1498,7 +1530,7 @@ export declare interface ModusTextInput extends Components.ModusTextInput {
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'autoFocusInput', 'clearable', 'disabled', 'errorText', 'helperText', 'label', 'maxLength', 'minLength', 'placeholder', 'readOnly', 'required', 'rows', 'size', 'textAlign', 'validText', 'value'],
+  inputs: ['ariaLabel', 'autoFocusInput', 'autocapitalize', 'autocorrect', 'clearable', 'disabled', 'enterkeyhint', 'errorText', 'helperText', 'label', 'maxLength', 'minLength', 'placeholder', 'readOnly', 'required', 'rows', 'size', 'spellcheck', 'textAlign', 'validText', 'value'],
   methods: ['focusInput']
 })
 @Component({
@@ -1506,7 +1538,7 @@ export declare interface ModusTextInput extends Components.ModusTextInput {
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['ariaLabel', 'autoFocusInput', 'clearable', 'disabled', 'errorText', 'helperText', 'label', 'maxLength', 'minLength', 'placeholder', 'readOnly', 'required', 'rows', 'size', 'textAlign', 'validText', 'value'],
+  inputs: ['ariaLabel', 'autoFocusInput', 'autocapitalize', 'autocorrect', 'clearable', 'disabled', 'enterkeyhint', 'errorText', 'helperText', 'label', 'maxLength', 'minLength', 'placeholder', 'readOnly', 'required', 'rows', 'size', 'spellcheck', 'textAlign', 'validText', 'value'],
 })
 export class ModusTextareaInput {
   protected el: HTMLElement;
@@ -1562,14 +1594,14 @@ export declare interface ModusTimePicker extends Components.ModusTimePicker {
 
 
 @ProxyCmp({
-  inputs: ['ariaLabel', 'dismissible', 'showIcon', 'type']
+  inputs: ['ariaLabel', 'dismissible', 'role', 'showIcon', 'type']
 })
 @Component({
   selector: 'modus-toast',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['ariaLabel', 'dismissible', 'showIcon', 'type'],
+  inputs: ['ariaLabel', 'dismissible', 'role', 'showIcon', 'type'],
 })
 export class ModusToast {
   protected el: HTMLElement;
@@ -1640,15 +1672,15 @@ export declare interface ModusTreeView extends Components.ModusTreeView {
 
 
 @ProxyCmp({
-  inputs: ['actions', 'disabled', 'draggableItem', 'droppableItem', 'editable', 'label', 'nodeId', 'tabIndexValue'],
-  methods: ['focusItem', 'focusCheckbox']
+  inputs: ['actions', 'disabled', 'draggableItem', 'droppableItem', 'editable', 'isLastChild', 'label', 'nodeId', 'tabIndexValue'],
+  methods: ['setChildren', 'focusItem', 'focusCheckbox']
 })
 @Component({
   selector: 'modus-tree-view-item',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['actions', 'disabled', 'draggableItem', 'droppableItem', 'editable', 'label', 'nodeId', 'tabIndexValue'],
+  inputs: ['actions', 'disabled', 'draggableItem', 'droppableItem', 'editable', 'isLastChild', 'label', 'nodeId', 'tabIndexValue'],
 })
 export class ModusTreeViewItem {
   protected el: HTMLElement;

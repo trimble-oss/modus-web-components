@@ -3,7 +3,7 @@ import {
   JSX,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
-import { Column, SortDirection } from '@tanstack/table-core';
+import { Column, RowData, SortDirection } from '@tanstack/table-core';
 import { ModusIconMap } from '../../../../icons/ModusIconMap';
 import {
   KEYBOARD_ENTER,
@@ -13,11 +13,11 @@ import {
   SORTED_DESCENDING,
 } from '../../modus-table.constants';
 
-interface ModusTableColumnSortIconProps {
-  column: Column<unknown, unknown>;
+interface ModusTableColumnHeaderLabelProps {
+  column: Column<RowData, unknown>;
+  isColumnResizing: boolean;
   sortIconStyle: 'alphabetical' | 'directional';
   showSortIconOnHover: boolean;
-  isColumnResizing: boolean;
 }
 
 const ICON_SIZE = '16';
@@ -64,7 +64,7 @@ function getAlphabeticalSortIcon(direction: false | SortDirection): string {
  * @param column Data related to the perticular column.
  * @returns Active sort or sort that will occur.
  */
-function showSortingStatus(column: Column<unknown, unknown>, isColumnResizing: boolean): string {
+function getSortingStatus(column: Column<unknown, unknown>, isColumnResizing: boolean): string {
   return isColumnResizing
     ? '' // When column resize is enabled, we don't show the tooltip.
     : column.getIsSorted() === 'asc'
@@ -89,32 +89,58 @@ function sortOnKeyDown(column: Column<unknown, unknown>, event: KeyboardEvent): 
   event.stopPropagation();
 }
 
-export const ModusTableColumnSortIcon: FunctionalComponent<ModusTableColumnSortIconProps> = ({
+export const ModusTableColumnHeaderLabel: FunctionalComponent<ModusTableColumnHeaderLabelProps> = ({
   column,
+  isColumnResizing,
   sortIconStyle,
   showSortIconOnHover,
-  isColumnResizing,
 }) => {
-  return (
-    <modus-tooltip text={showSortingStatus(column, isColumnResizing)} position="bottom">
-      {
-        <span
-          tabindex="0"
-          aria-label={showSortingStatus(column, isColumnResizing)}
-          role="button"
-          onClick={column.getToggleSortingHandler()}
-          onKeyDown={(event) => sortOnKeyDown(column, event)}
-          onMouseDown={(event: MouseEvent) => event.stopPropagation()}
-          class="sort-icon-container">
-          <span
-            class={`sort-icon
-              ${!column.getIsSorted() && 'disabled'}
-              ${showSortIconOnHover ? 'hidden' : ''}
-            `}>
-            {renderSortIcon(column.getIsSorted(), sortIconStyle)}
+  const sortingStatus = getSortingStatus(column, isColumnResizing);
+  const canSort = column.getCanSort();
+  const isSorted = column.getIsSorted();
+
+  const containerProps = {
+    'aria-label': sortingStatus,
+    role: 'button',
+    onClick: column.getToggleSortingHandler(),
+    onKeyDown: (event) => sortOnKeyDown(column, event),
+    onMouseDown: (event: MouseEvent) => event.stopPropagation(),
+  };
+
+  const HeaderText = () => {
+    if (!canSort) {
+      return column.columnDef.header;
+    }
+
+    return (
+      <modus-tooltip class="column-title" text={sortingStatus}>
+        <span {...containerProps} class={`header-text ${canSort && isSorted ? 'sorted' : ''}`}>
+          {column.columnDef.header}
+        </span>
+      </modus-tooltip>
+    );
+  };
+
+  const SortIcon = () => {
+    if (!canSort) {
+      return null;
+    }
+
+    return (
+      <modus-tooltip class="modus-tooltip-sort-icon" text={sortingStatus} position="bottom">
+        <span {...containerProps} tabindex="0" class="sort-icon-container">
+          <span class={`sort-icon ${!isSorted && 'disabled'} ${showSortIconOnHover ? 'hidden' : ''}`}>
+            {renderSortIcon(isSorted, sortIconStyle)}
           </span>
         </span>
-      }
-    </modus-tooltip>
+      </modus-tooltip>
+    );
+  };
+
+  return (
+    <span class={canSort && 'can-sort'}>
+      <HeaderText />
+      <SortIcon />
+    </span>
   );
 };

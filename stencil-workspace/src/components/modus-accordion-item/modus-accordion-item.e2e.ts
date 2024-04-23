@@ -55,7 +55,7 @@ describe('modus-accordion-item', () => {
     await page.setContent('<modus-accordion-item></modus-accordion-item>');
     const component = await page.find('modus-accordion-item');
     const headerElement = await page.find('modus-accordion-item >>> .header');
-    const iconElement = await page.find('modus-accordion-item >>> .icon-expand-less');
+    const iconElement = await page.find('modus-accordion-item >>> .icon-expand-more');
     let iconComputedStyle = await iconElement.getComputedStyle();
     expect(headerElement).toHaveClass('standard');
     expect(iconComputedStyle['height']).toEqual('24px');
@@ -114,14 +114,14 @@ describe('modus-accordion-item', () => {
     await page.waitForChanges();
 
     const component = await page.find('modus-accordion-item');
-    const element = await page.find('modus-accordion-item >>> .icon-expand-less');
-    expect(element).toHaveClass('icon-expand-less');
-    expect(element).not.toHaveClass('icon-expand-less-circle');
+    const element = await page.find('modus-accordion-item >>> .icon-expand-more');
+    expect(element).toHaveClass('icon-expand-more');
+    expect(element).not.toHaveClass('icon-expand-more-circle');
 
     component.setProperty('expandButtonType', 'circleArrow');
     await page.waitForChanges();
-    expect(element).toHaveClass('icon-expand-less-circle');
-    expect(element).not.toHaveClass('icon-expand-less');
+    expect(element).toHaveClass('icon-expand-more-circle');
+    expect(element).not.toHaveClass('icon-expand-more');
   });
 
   it('renders changes to the icon prop', async () => {

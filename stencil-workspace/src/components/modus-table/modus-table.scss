@@ -1,5 +1,23 @@
 @import './modus-table.vars';
 
+.cell-contents {
+  align-items: center;
+  display: flex;
+  gap: 0.25rem;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.column-title {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sort-icon {
+  flex-shrink: 0;
+}
+
 .table-container {
   border: $rem-1px $modus-table-border-color solid;
   display: flex;
@@ -76,6 +94,8 @@ table {
         cursor: e-resize;
 
         .can-sort {
+          cursor: e-resize;
+
           .sort-icon-container {
             cursor: e-resize;
           }
@@ -97,15 +117,24 @@ table {
 
     tr {
       color: $modus-table-header-color;
+      height: $rem-48px;
 
       th {
         background-color: $modus-table-header-bg;
         border-right: $rem-1px $modus-table-border-color solid;
         box-shadow: inset 0 -0.5px 0 $modus-table-border-color;
         font-weight: $font-weight-semi-bold;
-        overflow: visible;
-        padding: $rem-8px $rem-8px $rem-8px $rem-16px;
+        overflow: hidden;
+        padding: $rem-6px $rem-8px $rem-6px $rem-16px;
         position: relative;
+
+        &.row-checkbox {
+          padding: $rem-4px $rem-8px;
+        }
+
+        &.header-base {
+          outline: -webkit-focus-ring-color auto 1px;
+        }
 
         .can-sort {
           align-items: center;
@@ -116,8 +145,13 @@ table {
             font-weight: bold;
           }
 
-          .sort-icon-container {
+          .header-text,
+          .sort-icon {
             cursor: pointer;
+            padding: 0;
+          }
+
+          .sort-icon-container {
             margin-left: 8px;
             padding: $rem-2px $rem-2px 0;
 
@@ -393,16 +427,79 @@ table {
   }
 
   &.density-relaxed {
+    thead {
+      tr {
+        height: $rem-48px;
+
+        th {
+          padding-bottom: $rem-6px;
+          padding-top: $rem-6px;
+
+          &.row-checkbox {
+            padding: $rem-4px $rem-8px;
+          }
+
+          .can-sort {
+            .sort-icon-container {
+              padding: 0;
+            }
+          }
+        }
+      }
+    }
+
     tbody {
       tr {
+        height: $rem-48px;
+      }
+    }
+
+    tfoot {
+      .summary-row {
         height: $rem-48px;
       }
     }
   }
 
   &.density-comfortable {
+    thead {
+      tr {
+        height: 32px;
+
+        th {
+          padding-bottom: $rem-6px;
+          padding-top: $rem-6px;
+
+          &.row-checkbox {
+            padding: $rem-4px $rem-8px;
+          }
+
+          .can-sort {
+            .sort-icon-container {
+              padding: 0;
+            }
+          }
+        }
+      }
+    }
+
     tbody {
       tr {
+        height: $rem-32px;
+
+        td {
+          padding-bottom: $rem-6px;
+          padding-top: $rem-6px;
+
+          &.row-checkbox {
+            padding: $rem-4px $rem-8px;
+          }
+        }
+      }
+    }
+
+    tfoot {
+      .summary-row {
         height: $rem-32px;
 
         td {
@@ -418,6 +515,27 @@ table {
   }
 
   &.density-compact {
+    thead {
+      tr {
+        height: $rem-24px;
+
+        th {
+          padding-bottom: $rem-2px;
+          padding-top: $rem-2px;
+
+          &.row-checkbox {
+            padding: $rem-2px $rem-8px;
+          }
+
+          .can-sort {
+            .sort-icon-container {
+              padding: 0;
+            }
+          }
+        }
+      }
+    }
+
     tbody {
       tr {
         height: $rem-24px;
@@ -428,6 +546,21 @@ table {
 
           &.row-checkbox {
             padding: $rem-2px $rem-8px;
+          }
+        }
+      }
+    }
+
+    tfoot {
+      .summary-row {
+        height: 24px;
+
+        td {
+          padding-bottom: $rem-2px;
+          padding-top: $rem-2px;
+
+          &.row-checkbox {
+            padding: $rem-4px $rem-8px;
           }
         }
       }
