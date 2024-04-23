@@ -80,9 +80,6 @@ export class ModusAutocomplete {
   /** Whether the text has been entered. */
   @State() textEntered = false;
 
-  /** Whether to show autocomplete's options when focus. */
-  @Prop() showOptionsOnFocus: boolean;
-
   @Watch('options')
   watchOptions() {
     this.convertOptions();
@@ -310,7 +307,7 @@ export class ModusAutocomplete {
       this.visibleCustomOptions = this.customOptions;
       return;
     }
-    if (this.textEntered || this.disableCloseOnSelect) {
+    if (this.textEntered || this.disableCloseOnSelect || search.length > 0) {
       this.visibleCustomOptions = this.customOptions?.filter((o: any) => {
         return o.getAttribute(DATA_SEARCH_VALUE).toLowerCase().includes(search.toLowerCase());
       });
@@ -325,11 +322,11 @@ export class ModusAutocomplete {
     search = search || '';
     const isSearchEmpty = search.length === 0;
 
-    if ((isSearchEmpty && !this.showOptionsOnFocus) || (this.disableFiltering && this.disableCloseOnSelect)) {
+    if (isSearchEmpty || (this.disableFiltering && this.disableCloseOnSelect)) {
       this.visibleOptions = this.options as ModusAutocompleteOption[];
       return;
     }
-    if (this.textEntered || this.disableCloseOnSelect) {
+    if (this.textEntered || this.disableCloseOnSelect || search.length > 0) {
       this.visibleOptions = (this.options as ModusAutocompleteOption[])?.filter((o: ModusAutocompleteOption) => {
         return o.value.toLowerCase().includes(search.toLowerCase());
       });

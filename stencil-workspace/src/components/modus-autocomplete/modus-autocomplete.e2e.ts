@@ -235,29 +235,6 @@ describe('modus-autocomplete', () => {
     expect(options.length).toEqual(1);
   });
 
-  it('should display options on focus when showOptionsOnFocus prop is true', async () => {
-    const element = await page.find('modus-autocomplete');
-    expect(element).toHaveClass('hydrated');
-
-    element.setProperty('options', [
-      { id: 1, value: 'Test 1' },
-      { id: 2, value: 'Test 2' },
-    ]);
-
-    element.setProperty('showOptionsOnFocus', true);
-
-    await page.waitForChanges();
-
-    const textInput = await page.find('modus-autocomplete >>> modus-text-input');
-    await textInput.click();
-
-    await page.waitForChanges();
-
-    const options = await page.findAll('modus-autocomplete >>> .options-container li');
-
-    expect(options.length).toEqual(2);
-  });
-
   it('should default text input autocomplete to off', async () => {
     const element = await page.find('modus-autocomplete');
     expect(element).toHaveClass('hydrated');
@@ -421,7 +398,7 @@ describe('modus-autocomplete', () => {
 
     await page.waitForChanges();
 
-    let options = await page.findAll('modus-autocomplete >>> .options-container li');
+    const options = await page.findAll('modus-autocomplete >>> .options-container li');
 
     await options[0].focus();
     await page.waitForChanges();
@@ -449,7 +426,7 @@ describe('modus-autocomplete', () => {
     await textInput.click();
     await page.waitForChanges();
 
-    let options = await page.findAll('modus-autocomplete >>> .options-container li');
+    const options = await page.findAll('modus-autocomplete >>> .options-container li');
 
     await options[1].focus();
     await page.waitForChanges();
