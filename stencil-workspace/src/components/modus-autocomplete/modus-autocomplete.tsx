@@ -80,6 +80,9 @@ export class ModusAutocomplete {
   /** Whether the text has been entered. */
   @State() textEntered = false;
 
+  /** Whether to show autocomplete's options when focus. */
+  @Prop() showOptionsOnFocus: boolean;
+
   @Watch('options')
   watchOptions() {
     this.convertOptions();
@@ -166,7 +169,8 @@ export class ModusAutocomplete {
     this.value?.length > 0;
 
   displayOptions = () => {
-    return this.hasFocus && !this.disabled;
+    const showOptions = this.showOptionsOnFocus || !this.textEntered || this.disableCloseOnSelect || this.value?.length > 0;
+    return this.hasFocus && showOptions && !this.disabled;
   };
 
   addChipValue(value: string) {
@@ -270,6 +274,7 @@ export class ModusAutocomplete {
   };
 
   handleSearchChange = (search: string) => {
+    console.log('search', search, this.hasFocus);
     this.updateVisibleOptions(search);
     this.updateVisibleCustomOptions(search);
     this.value = search;
@@ -303,7 +308,7 @@ export class ModusAutocomplete {
     this.customOptions = slotted.assignedNodes().filter((node) => node.nodeName !== '#text');
 
     search = search || '';
-    if (search.length === 0 || (this.disableFiltering && this.disableCloseOnSelect)) {
+    if ((search.length === 0 && !this.showOptionsOnFocus) || (this.disableFiltering && this.disableCloseOnSelect)) {
       this.visibleCustomOptions = this.customOptions;
       return;
     }
@@ -322,10 +327,11 @@ export class ModusAutocomplete {
     search = search || '';
     const isSearchEmpty = search.length === 0;
 
-    if (isSearchEmpty || (this.disableFiltering && this.disableCloseOnSelect)) {
+    if ((isSearchEmpty && !this.showOptionsOnFocus) || (this.disableFiltering && this.disableCloseOnSelect)) {
       this.visibleOptions = this.options as ModusAutocompleteOption[];
       return;
     }
+    console.log('search', this.textEntered, this.disableCloseOnSelect, search.length, this.visibleOptions);
     if (this.textEntered || this.disableCloseOnSelect || search.length > 0) {
       this.visibleOptions = (this.options as ModusAutocompleteOption[])?.filter((o: ModusAutocompleteOption) => {
         return o.value.toLowerCase().includes(search.toLowerCase());
