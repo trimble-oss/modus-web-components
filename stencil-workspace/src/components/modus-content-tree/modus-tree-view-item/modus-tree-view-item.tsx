@@ -35,6 +35,9 @@ export class ModusTreeViewItem {
   /** An event that fires on tree item checkbox click */
   @Event() checkboxClick: EventEmitter<boolean>;
 
+  /** An event that fires on tree item label changes */
+  @Event() itemLabelChange: EventEmitter<string>;
+
   /** (optional) Disables the tree item */
   @Prop() disabled: boolean;
 
@@ -137,7 +140,6 @@ export class ModusTreeViewItem {
     }
     const children = this.element.querySelectorAll('modus-tree-view-item') as unknown as HTMLModusTreeViewItemElement[];
     children.forEach((child) => {
-      console.log('child', child);
       child.setChildren();
     });
   }
@@ -276,6 +278,7 @@ export class ModusTreeViewItem {
     switch (e.code) {
       case 'Enter':
         e.preventDefault();
+        this.itemLabelChange.emit(this.refLabelInput.value);
         this.updateLabelInput();
         break;
     }
