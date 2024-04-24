@@ -1,4 +1,4 @@
-// eslint-disable-next-line
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Component, Prop, State, h, Event, EventEmitter } from '@stencil/core';
 import {
   SMILEYS_TYPE_MAP,
