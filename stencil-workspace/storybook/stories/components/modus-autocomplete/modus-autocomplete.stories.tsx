@@ -116,6 +116,14 @@ export default {
         type: { summary: 'boolean' },
       },
     },
+    showOptionsOnFocus: {
+      name: 'show-options-on-focus',
+      description: 'Whether to show autocomplete options when focus',
+      table: {
+        defaultValue: { summary: true },
+        type: { summary: 'boolean' },
+      }
+    },
     size: {
       control: {
         options: ['medium', 'large'],
@@ -176,6 +184,7 @@ const Template = ({
   readOnly,
   required,
   showNoResultsFoundMessage,
+  showOptionsOnFocus,
   size,
   value,
   options,
@@ -199,6 +208,7 @@ const Template = ({
       read-only=${readOnly}
       ?required=${required}
       show-no-results-found-message=${showNoResultsFoundMessage}
+      show-options-on-focus=${showOptionsOnFocus}
       size=${size}
       value=${value}
       .options=${options}>
@@ -225,6 +235,7 @@ const defaultArgs = {
   readOnly: false,
   required: false,
   showNoResultsFoundMessage: true,
+  showOptionsOnFocus: false,
   size: 'medium',
   value: '',
   options: defaultOptions,
@@ -256,6 +267,7 @@ export const WithCustomOption = ({
   readOnly,
   required,
   showNoResultsFoundMessage,
+  showOptionsOnFocus,
   size,
   value,
 }) => html`
@@ -277,6 +289,7 @@ export const WithCustomOption = ({
       read-only=${readOnly}
       required=${required}
       show-no-results-found-message=${showNoResultsFoundMessage}
+      show-options-on-focus=${showOptionsOnFocus}
       size=${size}
       value=${value}>
       <li data-search-value="The Git Guru" data-id="1" style="padding: 8px">
@@ -308,6 +321,7 @@ WithCustomOption.args = {
   readOnly: false,
   required: false,
   showNoResultsFoundMessage: true,
+  showOptionsOnFocus: false,
   size: 'medium',
   value: '',
 }
