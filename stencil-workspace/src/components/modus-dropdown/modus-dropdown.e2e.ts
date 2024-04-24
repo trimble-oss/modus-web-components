@@ -296,4 +296,38 @@ describe('modus-dropdown', () => {
     const button = await page.find('#toggle-id');
     expect(button.getAttribute('disabled')).toBeNull();
   });
+
+  it('should have disabled class on dropdown element when disabled', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-dropdown disabled toggle-element-id='toggle-id'>
+        <modus-button id='toggle-id' slot='dropdownToggle'>Dropdown</modus-button>
+        <modus-list slot='dropdownList'>
+          <modus-list-item>Item 1</modus-list-item>
+        </modus-list>
+      </modus-dropdown>
+    `);
+
+    const dropdown = await page.find('modus-dropdown >>> .dropdown');
+    expect(dropdown).not.toBeNull();
+    expect(dropdown.classList.contains('disabled')).toBeTruthy();
+  });
+
+  it('should have disabled class on dropdown element when disabled', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-dropdown toggle-element-id='toggle-id'>
+        <modus-button id='toggle-id' slot='dropdownToggle'>Dropdown</modus-button>
+        <modus-list slot='dropdownList'>
+          <modus-list-item>Item 1</modus-list-item>
+        </modus-list>
+      </modus-dropdown>
+    `);
+
+    const dropdown = await page.find('modus-dropdown >>> .dropdown');
+    expect(dropdown).not.toBeNull();
+    expect(dropdown.classList.contains('disabled')).toBeFalsy();
+  });
 });
