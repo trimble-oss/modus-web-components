@@ -199,4 +199,14 @@ describe('modus-chip', () => {
     expect((await computedStyles).width).toBe('16px');
     expect((await computedStyles).height).toBe('16px');
   });
+
+  it('should be in active state when active property is true', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-chip active></modus-chip');
+    await page.waitForChanges();
+
+    const shadowContainer = await page.find('modus-chip >>> .modus-chip');
+    expect(shadowContainer.classList.contains('active'));
+  });
 });
