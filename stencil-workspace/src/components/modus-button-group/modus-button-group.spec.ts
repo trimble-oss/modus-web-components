@@ -8,7 +8,7 @@ describe('modus-button-group', () => {
       html: '<modus-button-group></modus-button-group>',
     });
     expect(root).toEqualHtml(`
-    <modus-button-group>
+    <modus-button-group role="group">
       <mock:shadow-root>
         <slot></slot>
       </mock:shadow-root>
@@ -28,7 +28,7 @@ describe('modus-button-group', () => {
         `,
     });
     expect(root).toEqualHtml(`
-    <modus-button-group>
+    <modus-button-group role="group">
       <mock:shadow-root>
         <slot></slot>
       </mock:shadow-root>
