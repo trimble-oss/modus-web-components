@@ -103,7 +103,8 @@ interface ModusButtonGroupButtonClickEvent {
 | `buttonClick`     | An event that fires on button click.                                                                                          | `CustomEvent<ModusButtonGroupButtonClickEvent>` |
 | `selectionChange` | An event that fires when selection type is `single` or `multiple` on button click that provides the list of selected buttons. | `CustomEvent<HTMLModusButtonElement[]>`         |
 
-
 ### Accessibility
-- ButtonGroup gets an aria-label provided by the aria-label property input.
-- ButtonGroup gets an aria-disabled set to whether ButtonGroup is disabled.
+
+- ButtonGroup gets an `aria-label` provided by the `aria-label` property input.
+- ButtonGroup gets an `aria-disabled` set to whether ButtonGroup is disabled.
+- ButtonGroup gets `role="group"` set.

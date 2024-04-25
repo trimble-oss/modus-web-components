@@ -79,7 +79,6 @@ export class ModusNumberInput {
   watchValue(newValue: string, oldValue: string): void {
     if (isNaN(+newValue)) {
       this.value = oldValue;
-      console.error(`${newValue} is not a number.`);
     } else {
       this.value = newValue;
     }
