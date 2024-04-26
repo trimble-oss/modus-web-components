@@ -127,7 +127,11 @@ export class ModusCheckbox {
           ref={(el) => (this.checkboxInput = el as HTMLInputElement)}
           type="checkbox"></input>
         {this.label ? (
-          <label htmlFor={this.checkBoxId} class={` ${this.disabled ? 'disabled' : ''} ${this.size === 'small' ? 'small' : ''}`}>{this.label}</label>
+          <label
+            htmlFor={this.checkBoxId}
+            class={` ${this.disabled ? 'disabled' : ''} ${this.size === 'small' ? 'small' : ''}`}>
+            {this.label}
+          </label>
         ) : null}
       </div>
     );

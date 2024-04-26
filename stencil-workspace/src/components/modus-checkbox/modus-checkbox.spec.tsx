@@ -18,7 +18,7 @@ describe('modus-checkbox', () => {
                 </svg>
               </div>
             </div>
-            <input aria-checked="false" type="checkbox">
+            <input aria-checked="false" id="mwc_id_0_checkbox" type="checkbox">
           </div>
         </mock:shadow-root>
       </modus-checkbox>
