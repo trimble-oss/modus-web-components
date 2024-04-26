@@ -9,6 +9,7 @@ import {
 } from '@stencil/core';
 import { IconCheck } from '../../icons/svgs/icon-check';
 import { IconIndeterminate } from '../../icons/svgs/icon-indeterminate';
+import { generateElementId } from '../../utils/utils';
 
 @Component({
   tag: 'modus-checkbox',
@@ -42,6 +43,8 @@ export class ModusCheckbox {
 
   /** (optional) The size of the checkbox. */
   @Prop() size: 'small' | 'medium' = 'medium';
+
+  private checkBoxId = generateElementId() + '_checkbox';
 
   checkboxInput: HTMLInputElement;
   checkboxContainer: HTMLDivElement;
@@ -120,10 +123,11 @@ export class ModusCheckbox {
           aria-label={this.ariaLabel || undefined}
           checked={this.checked}
           disabled={this.disabled}
+          id={this.checkBoxId}
           ref={(el) => (this.checkboxInput = el as HTMLInputElement)}
           type="checkbox"></input>
         {this.label ? (
-          <label class={` ${this.disabled ? 'disabled' : ''} ${this.size === 'small' ? 'small' : ''}`}>{this.label}</label>
+          <label htmlFor={this.checkBoxId} class={` ${this.disabled ? 'disabled' : ''} ${this.size === 'small' ? 'small' : ''}`}>{this.label}</label>
         ) : null}
       </div>
     );
