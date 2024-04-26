@@ -46,11 +46,12 @@ describe('modus-switch', () => {
 
     await page.setContent('<modus-switch></modus-switch>');
     const component = await page.find('modus-switch');
+    const input = await page.find('modus-switch >>> input');
+    expect(await input.getProperty('checked')).toBeFalsy();
 
     component.setProperty('checked', 'true');
     await page.waitForChanges();
 
-    const input = await page.find('modus-switch >>> input');
     expect(await input.getProperty('checked')).toBeTruthy();
   });
 
