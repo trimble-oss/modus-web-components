@@ -124,9 +124,12 @@ export class ModusDropdown {
     } ${this.animateList ? 'animate-list' : ''} ${this.classByPlacement.get(this.placement)}`;
     const left = this.placement === 'right' ? `${this.toggleElement?.offsetWidth}px` : 'unset';
     const width = `${this.toggleElement?.offsetWidth ? this.toggleElement?.offsetWidth : 0}px`;
-
+    const dropdownClass = {
+      dropdown: true,
+      disabled: this.disabled,
+    };
     return (
-      <div aria-label={this.ariaLabel} class="dropdown" onClick={(event) => this.handleDropdownClick(event)}>
+      <div aria-label={this.ariaLabel} class={dropdownClass} onClick={(event) => this.handleDropdownClick(event)}>
         <slot name="dropdownToggle" />
         <div
           class={listContainerClass}
