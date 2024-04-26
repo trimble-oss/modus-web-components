@@ -1,4 +1,4 @@
-// eslint-disable-next-line
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Component, Prop, h, Event, EventEmitter } from '@stencil/core';
 
 export interface Crumb {

@@ -9,6 +9,7 @@
 
 | Property        | Attribute        | Description                                                                    | Type                   | Default     |
 | --------------- | ---------------- | ------------------------------------------------------------------------------ | ---------------------- | ----------- |
+| `active`        | `active`         | (optional) Whether the chip is active.                                         | `boolean`              | `false`     |
 | `ariaLabel`     | `aria-label`     | (optional) The chip's aria-label.                                              | `string`               | `undefined` |
 | `chipStyle`     | `chip-style`     | (optional) The chip's style.                                                   | `"outline" \| "solid"` | `'solid'`   |
 | `disabled`      | `disabled`       | (optional) Whether the chip is disabled.                                       | `boolean`              | `false`     |
