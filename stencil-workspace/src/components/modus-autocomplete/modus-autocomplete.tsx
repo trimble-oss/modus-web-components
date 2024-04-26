@@ -170,7 +170,7 @@ export class ModusAutocomplete {
 
   displayOptions = () => {
     const showByDefault = this.hasFocus && !this.disabled;
-    return showByDefault || showByDefault && this.hasEnableControl();
+    return showByDefault || (showByDefault && this.hasEnableControl());
   };
 
   addChipValue(value: string) {
@@ -198,11 +198,11 @@ export class ModusAutocomplete {
   };
 
   handleInputBlur = () => {
-    if(!this.hasOptionMatched(this.value)){
-      if(this.selectedOption !== '' && this.value !== ''){
-        if(!this.hasFocus){
-        this.value = this.selectedOption;
-        this.disableFiltering = true;
+    if (!this.hasOptionMatched(this.value)) {
+      if (this.selectedOption !== '' && this.value !== '') {
+        if (!this.hasFocus) {
+          this.value = this.selectedOption;
+          this.disableFiltering = true;
         }
       }
     }
@@ -298,7 +298,7 @@ export class ModusAutocomplete {
     // Cancel the modus-text-input's value change event or else it will bubble to consumer.
     event.stopPropagation();
     this.disableFiltering = !this.hasEnableControl();
-     this.handleSearchChange(event.detail);
+    this.handleSearchChange(event.detail);
   };
 
   updateVisibleCustomOptions = (search = '') => {
@@ -331,9 +331,9 @@ export class ModusAutocomplete {
     search = search || '';
     const isSearchEmpty = search.length === 0;
 
-    if(isSearchEmpty) this.selectedOption = '';
+    if (isSearchEmpty) this.selectedOption = '';
 
-    if(isSearchEmpty || this.disableFiltering){
+    if (isSearchEmpty || this.disableFiltering) {
       this.visibleOptions = this.options as ModusAutocompleteOption[];
 
       return;
