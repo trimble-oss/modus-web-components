@@ -63,7 +63,7 @@
     align-items: center;
     display: flex;
     justify-content: center;
-    width: $rem-24px;
+    width: $rem-24px !important;
 
     &.drag-icon {
       cursor: grab !important;
