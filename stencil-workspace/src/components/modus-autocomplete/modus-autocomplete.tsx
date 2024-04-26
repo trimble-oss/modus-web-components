@@ -177,6 +177,10 @@ export class ModusAutocomplete {
     if (this.selectedChips.includes(value)) {
       return;
     }
+    this.selectedOption = value;
+
+    this.disableFiltering = !this.showOptionsOnFocus;
+
     this.selectedChips = [...this.selectedChips, value];
     this.valueChange.emit(this.selectedChips.join(','));
     this.value = '';
@@ -258,11 +262,11 @@ export class ModusAutocomplete {
       this.addChipValue(option.value);
     } else {
       this.selectedOption = option.value;
+      this.handleSearchChange(option.value);
       this.disableFiltering = !this.showOptionsOnFocus;
     }
 
-    this.hasFocus = this.hasEnableControl();
-    this.handleSearchChange(option.value);
+    this.hasFocus = this.disableCloseOnSelect;
     this.optionSelected.emit(option.id);
   };
 
