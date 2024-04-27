@@ -1,7 +1,8 @@
-// eslint-disable-next-line
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Component, Prop, h, Event, EventEmitter, Element, State, Listen, Method, Fragment } from '@stencil/core';
 import { ModusIconMap } from '../../icons/ModusIconMap';
 import { JSX } from '@stencil/core/internal';
+import { ButtonColor, ButtonSize, ButtonStyle, ButtonType } from './modus-button.models';
 
 @Component({
   tag: 'modus-button',
@@ -16,13 +17,13 @@ export class ModusButton {
   @Prop() ariaLabel: string | null;
 
   /** (optional) The style of the button */
-  @Prop() buttonStyle: 'borderless' | 'fill' | 'outline' = 'fill';
+  @Prop({ reflect: true }) buttonStyle: ButtonStyle = 'fill';
 
   /** (optional) The color of the button */
-  @Prop() color: 'danger' | 'primary' | 'secondary' | 'tertiary' = 'primary';
+  @Prop({ reflect: true }) color: ButtonColor = 'primary';
 
   /** (optional) Disables the button. */
-  @Prop() disabled: boolean;
+  @Prop({ reflect: true }) disabled: boolean;
 
   /** (optional) Takes the icon name and renders an icon-only button. */
   @Prop() iconOnly: string;
@@ -34,18 +35,20 @@ export class ModusButton {
   @Prop() rightIcon: string;
 
   /** (optional) The size of the button. */
-  @Prop() size: 'small' | 'medium' | 'large' = 'medium';
+  @Prop() size: ButtonSize = 'medium';
 
   /** (optional) Shows a caret icon right side of the button. */
   @Prop() showCaret: boolean;
 
   /** (Optional) Button types */
-  @Prop() type: 'button' | 'reset' | 'submit' = 'button';
+  @Prop() type: ButtonType = 'button';
 
   /** (optional) An event that fires on button click. */
   @Event() buttonClick: EventEmitter;
 
   @Element() el: HTMLElement;
+
+  @State() isActive: boolean;
 
   @State() pressed: boolean;
 
@@ -76,6 +79,11 @@ export class ModusButton {
   async focusButton(): Promise<void> {
     this.buttonRef?.focus();
     return Promise.resolve();
+  }
+  /** Set the button to active or inactive */
+  @Method()
+  async setActive(isActive: boolean): Promise<void> {
+    this.isActive = isActive;
   }
 
   @Listen('keyup')
@@ -117,9 +125,11 @@ export class ModusButton {
   }
 
   render(): unknown {
-    const className = `${this.classBySize.get(this.size)} ${this.classByColor.get(this.color)} ${this.classByButtonStyle.get(
-      this.buttonStyle
-    )} ${this.iconOnly ? 'icon-only' : ''} ${this.showCaret ? 'has-caret' : ''}`;
+    const className = `${this.classBySize.get(
+      this.size
+    )} ${this.classByColor.get(this.color)} ${this.classByButtonStyle.get(this.buttonStyle)} ${
+      this.iconOnly ? 'icon-only' : ''
+    } ${this.showCaret ? 'has-caret' : ''} ${this.isActive ? ' active' : ''}`;
 
     return (
       <button
@@ -128,7 +138,14 @@ export class ModusButton {
         aria-pressed={this.pressed ? 'true' : undefined}
         class={className}
         disabled={this.disabled}
-        onClick={() => (!this.disabled ? this.buttonClick.emit() : null)}
+        onClick={() => {
+          if (!this.disabled) {
+            this.buttonClick.emit();
+            if (this.type === 'toggle') {
+              this.isActive = !this.isActive;
+            }
+          }
+        }}
         onKeyDown={() => (this.pressed = true)}
         onKeyUp={() => (this.pressed = false)}
         onMouseDown={() => (this.pressed = true)}

@@ -94,12 +94,14 @@ describe('modus-switch', () => {
     const input = await page.find('modus-switch >>> input');
     expect(await modusSwitch.getProperty('checked')).toBeTruthy();
     expect(await input.getProperty('checked')).toBeTruthy();
+    expect(await input.getAttribute('aria-checked').toLowerCase()).toEqual('true');
 
     await element.click();
     await page.waitForChanges();
 
     expect(await modusSwitch.getProperty('checked')).toBeFalsy();
     expect(await input.getProperty('checked')).toBeFalsy();
+    expect(await input.getAttribute('aria-checked').toLowerCase()).toEqual('false');
   });
   it('renders with medium size', async () => {
     const page = await newE2EPage();

@@ -199,6 +199,46 @@ describe('modus-dropdown', () => {
     expect(dropdown.find('.dropdown-list.hidden')).toBeTruthy();
   });
 
+  it('should toggle visibility when clicked', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-dropdown toggle-element-id='toggle-id'>
+        <modus-button id='toggle-id' slot='dropdownToggle'>Dropdown</modus-button>
+        <modus-list slot='dropdownList'>
+          <modus-list-item>Item 1</modus-list-item>
+        </modus-list>
+      </modus-dropdown>
+    `);
+
+    const dropdown = await page.find('modus-dropdown');
+    await dropdown.focus();
+    await dropdown.click();
+    await page.waitForChanges();
+    expect(dropdown.find('.dropdown-list.visible')).toBeTruthy();
+
+    await dropdown.click();
+    await page.waitForChanges();
+    expect(dropdown.find('.dropdown-list.hidden')).toBeTruthy();
+  });
+
+  it('should not toggle visibility dropdown is disabled and clicked', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-dropdown disabled toggle-element-id='toggle-id'>
+        <modus-button id='toggle-id' slot='dropdownToggle'>Dropdown</modus-button>
+        <modus-list slot='dropdownList'>
+          <modus-list-item>Item 1</modus-list-item>
+        </modus-list>
+      </modus-dropdown>
+    `);
+
+    const dropdown = await page.find('modus-dropdown');
+    await dropdown.click();
+    expect(dropdown.find('.dropdown-list.hidden')).toBeTruthy();
+  });
+
   it('should toggle visibility when Space is pressed on the toggle element', async () => {
     const page = await newE2EPage();
 
@@ -267,5 +307,55 @@ describe('modus-dropdown', () => {
     let element = await page.find('modus-dropdown >>> .dropdown');
     expect(element).toBeDefined();
     expect(element).not.toHaveAttribute('aria-label');
+  });
+  
+  it('does not set the toggle element to disabled when "disabled" is not in as an attribute', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-dropdown toggle-element-id='toggle-id'>
+        <modus-button id='toggle-id' slot='dropdownToggle'>Dropdown</modus-button>
+        <modus-list slot='dropdownList'>
+          <modus-list-item>Item 1</modus-list-item>
+        </modus-list>
+      </modus-dropdown>
+    `);
+
+    const button = await page.find('#toggle-id');
+    expect(button.getAttribute('disabled')).toBeNull();
+  });
+
+  it('should have disabled class on dropdown element when disabled', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-dropdown disabled toggle-element-id='toggle-id'>
+        <modus-button id='toggle-id' slot='dropdownToggle'>Dropdown</modus-button>
+        <modus-list slot='dropdownList'>
+          <modus-list-item>Item 1</modus-list-item>
+        </modus-list>
+      </modus-dropdown>
+    `);
+
+    const dropdown = await page.find('modus-dropdown >>> .dropdown');
+    expect(dropdown).not.toBeNull();
+    expect(dropdown.classList.contains('disabled')).toBeTruthy();
+  });
+
+  it('should have disabled class on dropdown element when disabled', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-dropdown toggle-element-id='toggle-id'>
+        <modus-button id='toggle-id' slot='dropdownToggle'>Dropdown</modus-button>
+        <modus-list slot='dropdownList'>
+          <modus-list-item>Item 1</modus-list-item>
+        </modus-list>
+      </modus-dropdown>
+    `);
+
+    const dropdown = await page.find('modus-dropdown >>> .dropdown');
+    expect(dropdown).not.toBeNull();
+    expect(dropdown.classList.contains('disabled')).toBeFalsy();
   });
 });

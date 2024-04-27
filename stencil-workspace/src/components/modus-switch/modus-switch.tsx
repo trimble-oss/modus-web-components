@@ -11,7 +11,7 @@ export class ModusSwitch {
   @Prop() ariaLabel: string | null;
 
   /** (optional) Whether the switch is checked. */
-  @Prop({ mutable: true }) checked: boolean;
+  @Prop({ mutable: true }) checked = false;
 
   /** (optional) Whether the switch is disabled. */
   @Prop() disabled: boolean;
@@ -69,7 +69,7 @@ export class ModusSwitch {
           <span class={`slider`}></span>
         </div>
         <input
-          aria-checked={this.checked}
+          aria-checked={String(this.checked)}
           aria-disabled={this.disabled ? 'true' : undefined}
           aria-label={this.ariaLabel || undefined}
           checked={this.checked}

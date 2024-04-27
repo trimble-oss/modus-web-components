@@ -5,7 +5,7 @@ import { IconWarning } from '../../icons/svgs/icon-warning';
 import { IconInfo } from '../../icons/svgs/icon-info';
 import { IconHelp } from '../../icons/svgs/icon-help';
 import { IconCheckCircle } from '../../icons/svgs/icon-check-circle';
-import { IconClose } from '../../icons/svgs/icon-close';
+import { IconClose } from '../../icons/generated-icons/IconClose';
 
 @Component({
   tag: 'modus-toast',
@@ -64,7 +64,7 @@ export class ModusToast {
           <slot />
         </span>
         {this.dismissible && (
-          <button class={'close'} onClick={() => this.dismissClick.emit()} aria-label="Dismiss">
+          <button type="button" class={'close'} onClick={() => this.dismissClick.emit()} aria-label="Dismiss">
             <IconClose size={'18'} />
           </button>
         )}

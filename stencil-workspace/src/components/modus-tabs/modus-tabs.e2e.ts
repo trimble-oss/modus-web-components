@@ -84,4 +84,23 @@ describe('modus-tabs', () => {
     expect(element).toBeDefined();
     expect(element).not.toHaveAttribute('aria-label');
   });
+
+  it('emits pageChange on page click when no tabs are active before click', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-tabs></modus-tabs>');
+    const tabChange = await page.spyOnEvent('tabChange');
+
+    const modusTabs = await page.find('modus-tabs');
+    modusTabs.setProperty('tabs', [
+      { id: 0, label: 'Tab1' },
+      { id: 1, label: 'Tab2' },
+    ]);
+    await page.waitForChanges();
+    const element = await page.find('modus-tabs >>> div[id="0"] + div');
+
+    await element.click();
+    await page.waitForChanges();
+    expect(tabChange).toHaveReceivedEvent();
+  });
 });

@@ -5,3 +5,7 @@ $modus-accordion-item-chevron-color: var(--modus-chevron-color, #6a6e79) !defaul
 $modus-accordion-item-header-hover-bg: var(--modus-accordion-item-header-hover-bg, #e0e1e9) !default;
 $modus-accordion-item-header-expand-color: var(--modus-accordion-item-header-expand-color, #252a2e) !default;
 $modus-accordion-item-header-expanded-bg: var(--modus-accordion-item-header-expanded-bg, #dcedf9) !default; // Blue Pale
+$modus-accordion-item-expanded-border-left-color: var(
+  --modus-accordion-item-expanded-border-left-color,
+  #0063a3
+) !default; // Blue
