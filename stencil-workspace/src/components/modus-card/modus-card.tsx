@@ -29,7 +29,7 @@ export class ModusCard {
     return (
       <article
         class={`${this.showShadowOnHover ? 'shadow' : ''} ${this.showCardBorder ? 'card-border' : ''}  `}
-        aria-label={this.ariaLabel === '' ? null : this.ariaLabel}
+        aria-label={this.ariaLabel || undefined}
         style={{
           height: this.height,
           width: this.width,

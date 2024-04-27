@@ -74,7 +74,7 @@ export class ModusAlert {
     }
 
     return (
-      <div aria-label={this.ariaLabel == '' ? null : this.ariaLabel} class={className} role="alert">
+      <div aria-label={this.ariaLabel || undefined} class={className} role="alert">
         <div class="icon">
           {this.type === 'error' ? <IconError size={iconSize} /> : null}
           {this.infoTypes.includes(this.type) ? <IconInfo size={iconSize} /> : null}

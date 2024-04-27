@@ -26,7 +26,7 @@ export class ModusBreadcrumb {
 
   render(): unknown {
     return (
-      <nav aria-label={this.ariaLabel === '' ? null : this.ariaLabel}>
+      <nav aria-label={this.ariaLabel || undefined}>
         <ol>
           {this.crumbs.map((crumb, index) => (
             <li key={crumb.id}>

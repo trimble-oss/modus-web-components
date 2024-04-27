@@ -12,7 +12,7 @@ export class ModusAccordion {
 
   render(): unknown {
     return (
-      <div aria-label={this.ariaLabel === '' ? null : this.ariaLabel} class="accordion">
+      <div aria-label={this.ariaLabel || undefined} class="accordion">
         <slot />
       </div>
     );
