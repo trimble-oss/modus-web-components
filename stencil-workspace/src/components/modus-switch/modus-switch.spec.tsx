@@ -14,7 +14,7 @@ describe('modus-switch', () => {
             <div class="switch">
               <span class="slider"></span>
             </div>
-            <input role="switch" type="checkbox">
+            <input id="mwc_id_0_switch_input" role="switch" type="checkbox">
           </div>
         </mock:shadow-root>
       </modus-switch>

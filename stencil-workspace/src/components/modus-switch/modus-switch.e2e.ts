@@ -118,23 +118,6 @@ describe('modus-switch', () => {
     expect(element).toHaveClass('small');
   });
 
-  it('does not include "id" on input when "label" is not provided', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<modus-switch></modus-switch>');
-
-    const element = await page.find('modus-switch >>> input');
-    expect(element).not.toHaveAttribute('id');
-  });
-
-  it('renders "id" on input when "label" is provided', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<modus-switch label="test label"></modus-switch>');
-
-    const element = await page.find('modus-switch >>> input');
-    expect(element).toHaveAttribute('id');
-    expect(element.id).toEqual('test label');
-  });
-
   it('sets tabindex to -1 when disabled', async () => {
     const page = await newE2EPage();
     await page.setContent('<modus-switch disabled></modus-switch>');
@@ -142,5 +125,18 @@ describe('modus-switch', () => {
     const element = await page.find('modus-switch >>> .modus-switch');
     expect(element).toHaveAttribute('tabindex');
     expect(element.getAttribute('tabindex')).toEqual('-1');
+  });
+
+  it('renders with "for" on label equal to "id" on input', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-switch label="test label"></modus-switch>');
+
+    const input = await page.find('modus-switch >>> input');
+    const id = await input.getAttribute('id');
+
+    const label = await page.find('modus-switch >>> label');
+    const forAttr = await label.getAttribute('for');
+
+    expect(id).toEqual(forAttr);
   });
 });
