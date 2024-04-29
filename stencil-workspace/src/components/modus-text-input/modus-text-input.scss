@@ -57,7 +57,7 @@
       border: none;
       color: $modus-input-color;
       font-family: $primary-font;
-      font-size: $rem-12px;
+      font-size: var(--input-font-size, #{$rem-12px});
       outline: none;
       padding: 0 $rem-8px;
       width: 100%;

@@ -21,6 +21,8 @@ function newPerson() {
   const firstName = Names[namesIndex].split(' ')[0];
   const lastName = Names[namesIndex].split(' ')[1];
   const email: string = `${firstName}${lastName}@example.com`.toLowerCase();
+  const randomDate = new Date(randomNumber(1990, 2020), randomNumber(0, 11), randomNumber(1, 30));
+  const formattedDate = `${randomDate.getFullYear()}-${(randomDate.getMonth() + 1).toString().padStart(2, '0')}-${randomDate.getDate().toString().padStart(2, '0')}`;
   return {
     firstName,
     lastName,
@@ -29,7 +31,7 @@ function newPerson() {
     email:{ display: email, url: email },
     progress: randomNumber(1, 100) * 100,
     status: randomNumber(1, 100) > 66 ? 'Verified' : randomNumber(0, 100) > 33 ? 'Pending' : 'Rejected',
-    createdAt: new Date(randomNumber(1990, 2020), randomNumber(0, 11), randomNumber(1, 30)).toDateString(),
+    createdAt: formattedDate,
     priority: Priorities[
       randomNumber(1, 100) > 66 ? 'high':
       randomNumber(0, 100) > 33 ? 'medium'
@@ -271,7 +273,7 @@ const DefaultColumns = [
     header: 'Created At',
     accessorKey: 'createdAt',
     id: 'createdAt',
-    dataType: 'string',
+    dataType: 'date',
     size: 150,
     minSize: 150,
   },
@@ -814,26 +816,20 @@ const EditableColumns =DefaultColumnsWithPriority.map(col =>{
       } };
   }
   if(col.accessorKey === 'firstName'){
+    const nameOptions = Names.map(name => (name.split(' ')[0]));
     return {...col,  cellEditable:true,
       cellEditorType: 'autocomplete',
-    cellEditorArgs: {
-      options:[
-        "Tom",
-        "Patrick",
-        "Jerry",
-      ],
+      cellEditorArgs: {
+      options:nameOptions,
     },
   }
 }
 if(col.accessorKey === 'email'){
+  const emailOptions = Names.map(name => ({display: `${name.split(' ')[0]}${name.split(' ')[1]}@example.com`, url: `${name.split(' ')[0]}${name.split(' ')[1]}@example.com`}));
   return {...col,  cellEditable:true,
     cellEditorType: 'autocomplete',
     cellEditorArgs: {
-      options:[
-        { display: 'jerry', url: 'jerrymouse@example.com'},
-        {display:'tomcat@example.com', url: 'tomcat@example.com'},
-        {display:'patrickstar@example.com', url: 'sss'},
-      ],
+      options:emailOptions,
   }
 }
 }
@@ -848,6 +844,14 @@ if (col.accessorKey === 'priority') {
         { display: 'Medium',type: 'counter', color: 'primary', size: 'medium',},
         { display: 'High',type: 'counter', color: 'success', size: 'medium'},
       ],
+    },
+  };
+}
+if(col.accessorKey==='createdAt'){
+  return {...col, cellEditable:true,
+    cellEditorType: 'date',
+    cellEditorArgs: {
+      format: 'yyyy-mm-dd',
     },
   };
 }

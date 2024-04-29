@@ -13,7 +13,7 @@
 | `dataType`    | `data-type` |             | `string`                                         | `undefined` |
 | `keyDown`     | --          |             | `(e: KeyboardEvent, newValue: string) => void`   | `undefined` |
 | `type`        | `type`      |             | `string`                                         | `undefined` |
-| `value`       | `value`     |             | `string`                                         | `undefined` |
+| `value`       | `value`     |             | `any`                                            | `undefined` |
 | `valueChange` | --          |             | `(newValue: string) => void`                     | `undefined` |
 
 

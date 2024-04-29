@@ -29,7 +29,7 @@
   .chips-container {
     align-items: center;
     background-color: $modus-autocomplete-bg;
-    border: $rem-1px solid $modus-autocomplete-container-border-color;
+    border: var(--modus-autocomplete-border, #{$rem-1px solid $modus-autocomplete-container-border-color});
     border-bottom-color: $modus-autocomplete-container-bottom-line-color;
     box-sizing: border-box;
     display: flex;
@@ -56,6 +56,8 @@
       flex: 1;
       height: auto !important;
       position: relative;
+
+      --input-font-size: var(--modus-autocomplete-font-size, #{12px});
 
       &::part(input-container) {
         border: none !important;

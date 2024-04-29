@@ -26,12 +26,12 @@ import { ModusAutocompleteOption } from '../../../../modus-autocomplete/modus-au
 export class ModusTableCellEditor {
   @Prop() args: ModusTableCellEditorArgs;
   @Prop() dataType: string;
-  @Prop() value: string;
+  @Prop() value: any;
   @Prop() type: string;
   @Prop() valueChange: (newValue: string) => void;
   @Prop() keyDown: (e: KeyboardEvent, newValue: string) => void;
 
-  private editedValue: unknown;
+  private editedValue: any;
   private inputElement: HTMLElement;
   private outsideClickListener: (event: any) => void;
 
@@ -155,23 +155,28 @@ export class ModusTableCellEditor {
   }
 
   renderAutocompleteInput(): JSX.Element[] {
-    let options;
+    let options, selectedOption;
     const args = (this.args as ModusTableCellDropdownEditorArgs)?.options;
     if (this.dataType === 'badge') {
       options = args.map((option: any) => option.text) as ModusAutocompleteOption[] | string[];
+      selectedOption = this.value['text'];
     } else if (this.dataType === 'link') {
       options = args.map((option: any) => option.display) as ModusAutocompleteOption[] | string[];
+      selectedOption = this.value['display'];
     } else {
       options = (args || []) as ModusAutocompleteOption[] | string[];
+      selectedOption = this.editedValue;
     }
     return (
       <modus-autocomplete
         {...this.getDefaultProps('Autocomplete input')}
         include-search-icon="false"
-        size="large"
+        size="medium"
         //onClick={(e: MouseEvent) => e.stopPropagation()}
         options={options}
+        showOptionsOnFocus
         onBlur={this.handleBlur}
+        onKeyDown={(e) => e.stopPropagation()}
         onOptionSelected={(e: CustomEvent<string>) => {
           if (this.dataType === 'badge') {
             args.map((option: any) => {
@@ -189,7 +194,7 @@ export class ModusTableCellEditor {
             this.editedValue = e.detail;
           }
         }}
-        // value={selectedOption}
+        value={selectedOption}
         // onKeyDown={(e) => e.stopPropagation()}
       ></modus-autocomplete>
     );
