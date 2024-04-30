@@ -70,7 +70,7 @@ export class ModusAlert {
     };
     const typeClass = this.classByType.get(this.type);
     if (typeClass != undefined) {
-      className[typeClass] = typeClass;
+      className[typeClass] = true;
     }
 
     return (
