@@ -62,4 +62,24 @@ describe('modus-toast', () => {
     await page.waitForChanges();
     expect(dismissClick).toHaveReceivedEvent();
   });
+
+  it('emits dismissClick event after 15000ms', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-toast></modus-toast>');
+    const dismissClick = await page.spyOnEvent('dismissClick');
+
+    await page.waitForTimeout(15000);
+    expect(dismissClick).toHaveReceivedEvent();
+  });
+
+  it('emits dismissClick event after 15000ms', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-toast delay="10000"></modus-toast>');
+    const dismissClick = await page.spyOnEvent('dismissClick');
+
+    await page.waitForTimeout(10000);
+    expect(dismissClick).toHaveReceivedEvent();
+  });
 });

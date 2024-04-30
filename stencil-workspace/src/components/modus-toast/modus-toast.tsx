@@ -19,6 +19,9 @@ export class ModusToast {
   /** (optional) Whether the toast has a dismiss button. */
   @Prop() dismissible: boolean;
 
+  /** (optional) Time taken to dismiss the toast */
+  @Prop() delay = 15000;
+
   /** (optional) Role taken by the toast.  Defaults to 'status'. */
   @Prop() role: 'alert' | 'log' | 'marquee' | 'status' | 'timer' = 'status';
 
@@ -30,6 +33,8 @@ export class ModusToast {
 
   /** An event that fires when the toast is dismissed */
   @Event() dismissClick: EventEmitter;
+
+  private timerId: NodeJS.Timeout;
 
   iconByType: Map<string, HTMLElement> = new Map([
     ['danger', <IconWarning color={'#C81922'} size={'18'} />],
@@ -52,6 +57,16 @@ export class ModusToast {
     ['tertiary', 'tertiary'],
     ['warning', 'warning'],
   ]);
+
+  componentDidLoad(): void {
+    this.timerId = setTimeout(() => {
+      this.dismissClick.emit();
+    }, this.delay);
+  }
+
+  disconnectedCallback(): void {
+    clearTimeout(this.timerId);
+  }
 
   render(): unknown {
     const icon = this.iconByType.get(this.type);
