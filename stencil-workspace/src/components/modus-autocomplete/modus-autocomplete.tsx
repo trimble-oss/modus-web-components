@@ -106,7 +106,6 @@ export class ModusAutocomplete {
   @Watch('value')
   onValueChange() {
     if (this.hasFocus && !this.hasEnableControl()) {
-      this.disableFiltering = false;
       this.updateVisibleOptions(this.value);
       this.updateVisibleCustomOptions(this.value);
     }
@@ -118,7 +117,6 @@ export class ModusAutocomplete {
   /** An event that fires when the input value changes. Emits the value string. */
   @Event() valueChange: EventEmitter<string>;
 
-  @State() containsSlottedElements = false;
   @State() hasFocus = false;
   @State() visibleOptions: ModusAutocompleteOption[] = [];
   @State() customOptions: Array<any> = [];
@@ -166,8 +164,17 @@ export class ModusAutocomplete {
     this.value?.length > 0;
 
   hasEnableControl = (): boolean => !!this.showOptionsOnFocus || !!this.disableCloseOnSelect;
-  hasOptionMatched = (value: string) => !!this.visibleOptions.find((el) => el.value === value);
+  hasOptionMatched = (value: string) => {
+    const isCustomOption = this.customOptions.length > 0;
 
+    if (isCustomOption) {
+      return !!this.customOptions?.find((el) =>
+        el.getAttribute(DATA_SEARCH_VALUE).toLowerCase().includes(this.selectedOption)
+      );
+    }
+
+    return !!this.visibleOptions.find((el) => el.value === value);
+  };
   displayOptions = () => {
     const showByDefault = this.hasFocus && !this.disabled;
     return showByDefault || (showByDefault && this.hasEnableControl());
@@ -193,7 +200,7 @@ export class ModusAutocomplete {
       this.addChipValue(optionValue);
     } else {
       this.selectedOption = optionValue;
-      this.disableFiltering = this.disableCloseOnSelect;
+      this.disableFiltering = !this.showOptionsOnFocus;
       this.handleSearchChange(optionValue);
     }
 
@@ -262,8 +269,8 @@ export class ModusAutocomplete {
       this.addChipValue(option.value);
     } else {
       this.selectedOption = option.value;
-      this.handleSearchChange(option.value);
       this.disableFiltering = !this.showOptionsOnFocus;
+      this.handleSearchChange(option.value);
     }
 
     this.hasFocus = this.disableCloseOnSelect;
@@ -317,7 +324,9 @@ export class ModusAutocomplete {
     this.customOptions = slotted.assignedNodes().filter((node) => node.nodeName !== '#text');
 
     search = search || '';
-    if (search.length === 0 || (this.disableFiltering && this.disableCloseOnSelect)) {
+    const isSearchEmpty = search.length === 0;
+
+    if (isSearchEmpty || this.disableFiltering) {
       this.visibleCustomOptions = this.customOptions;
       return;
     }
@@ -325,7 +334,6 @@ export class ModusAutocomplete {
     this.visibleCustomOptions = this.customOptions?.filter((o: any) => {
       return o.getAttribute(DATA_SEARCH_VALUE).toLowerCase().includes(search.toLowerCase());
     });
-    this.containsSlottedElements = this.customOptions.length > 0;
   };
 
   updateVisibleOptions = (search = '') => {
