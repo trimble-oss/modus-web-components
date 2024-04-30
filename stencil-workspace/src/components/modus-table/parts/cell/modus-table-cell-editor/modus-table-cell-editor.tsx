@@ -168,35 +168,37 @@ export class ModusTableCellEditor {
       selectedOption = this.editedValue;
     }
     return (
-      <modus-autocomplete
-        {...this.getDefaultProps('Autocomplete input')}
-        include-search-icon="false"
-        size="medium"
-        //onClick={(e: MouseEvent) => e.stopPropagation()}
-        options={options}
-        showOptionsOnFocus
-        onBlur={this.handleBlur}
-        onKeyDown={(e) => e.stopPropagation()}
-        onOptionSelected={(e: CustomEvent<string>) => {
-          if (this.dataType === 'badge') {
-            args.map((option: any) => {
-              if (option.text == e.detail) {
-                this.editedValue = option;
-              }
-            });
-          } else if (this.dataType === 'link') {
-            args.map((option: any) => {
-              if (option.display == e.detail) {
-                this.editedValue = option;
-              }
-            });
-          } else {
-            this.editedValue = e.detail;
-          }
-        }}
-        value={selectedOption}
-        // onKeyDown={(e) => e.stopPropagation()}
-      ></modus-autocomplete>
+      <div class="autocomplete-container">
+        <modus-autocomplete
+          {...this.getDefaultProps('Autocomplete input')}
+          include-search-icon="false"
+          size="medium"
+          //onClick={(e: MouseEvent) => e.stopPropagation()}
+          options={options}
+          showOptionsOnFocus
+          onBlur={this.handleBlur}
+          onKeyDown={(e) => e.stopPropagation()}
+          onOptionSelected={(e: CustomEvent<string>) => {
+            if (this.dataType === 'badge') {
+              args.map((option: any) => {
+                if (option.text == e.detail) {
+                  this.editedValue = option;
+                }
+              });
+            } else if (this.dataType === 'link') {
+              args.map((option: any) => {
+                if (option.display == e.detail) {
+                  this.editedValue = option;
+                }
+              });
+            } else {
+              this.editedValue = e.detail;
+            }
+          }}
+          value={selectedOption}
+          // onKeyDown={(e) => e.stopPropagation()}
+        ></modus-autocomplete>
+      </div>
     );
   }
 
