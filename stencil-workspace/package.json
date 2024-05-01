@@ -58,7 +58,7 @@
     "cheerio": "^1.0.0-rc.12",
     "colors": "^1.4.0",
     "ejs": "^3.1.9",
-    "eslint": "^8.57.0",
+    "eslint": "^9.1.1",
     "eslint-plugin-storybook": "^0.8.0",
     "jest": "^27.0.3",
     "jest-cli": "^27.5.1",
