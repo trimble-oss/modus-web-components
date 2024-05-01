@@ -637,8 +637,8 @@ describe('modus-autocomplete', () => {
     });
   });
 
-  describe.skip('with custom', () => {
-    it.skip('should render changes to custom options slot', async () => {
+  describe('with custom', () => {
+    it('should render changes to custom options slot', async () => {
       const p = await newE2EPage();
       await p.setContent(`
         <modus-autocomplete>
@@ -659,7 +659,7 @@ describe('modus-autocomplete', () => {
       expect(options.length).toEqual(1);
     });
 
-    it.skip('should fire optionSelected and valueChange on custom option click', async () => {
+    it('should fire optionSelected and valueChange on custom option click', async () => {
       const p = await newE2EPage();
       await p.setContent(`
         <modus-autocomplete>
@@ -687,7 +687,7 @@ describe('modus-autocomplete', () => {
       expect(valueChange).toHaveReceivedEventTimes(1);
     });
 
-    it.skip('should display custom options on focus without close when disableCloseOnSelect prop is true', async () => {
+    it('should display custom options on focus without close when disableCloseOnSelect prop is true', async () => {
       const page = await newE2EPage();
       await page.setContent(`
         <modus-autocomplete>
@@ -721,7 +721,7 @@ describe('modus-autocomplete', () => {
       expect(options.length).toEqual(2);
     });
 
-    it.skip('should focus custom first element when arrow key down is pressed', async () => {
+    it('should focus custom first element when arrow key down is pressed', async () => {
       const page = await newE2EPage();
       await page.setContent(`
         <modus-autocomplete>
@@ -755,7 +755,7 @@ describe('modus-autocomplete', () => {
       expect(optionSelected).toHaveReceivedEventDetail('1');
     });
 
-    it.skip('should focus custom second element when arrow key down is pressed twice', async () => {
+    it('should focus custom second element when arrow key down is pressed twice', async () => {
       const page = await newE2EPage();
       await page.setContent(`
         <modus-autocomplete>
@@ -793,7 +793,7 @@ describe('modus-autocomplete', () => {
       expect(optionSelected).toHaveReceivedEventDetail('2');
     });
 
-    it.skip('should focus custom first element when arrow key up is pressed', async () => {
+    it('should focus custom first element when arrow key up is pressed', async () => {
       const page = await newE2EPage();
       await page.setContent(`
         <modus-autocomplete>

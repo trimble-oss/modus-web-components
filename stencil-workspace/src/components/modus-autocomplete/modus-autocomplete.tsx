@@ -308,7 +308,7 @@ export class ModusAutocomplete {
   handleTextInputValueChange = (event: CustomEvent<string>) => {
     // Cancel the modus-text-input's value change event or else it will bubble to consumer.
     event.stopPropagation();
-    this.disableFiltering = !this.hasEnableControl();
+    this.disableFiltering = false;
     this.handleSearchChange(event.detail);
   };
 
