@@ -8,7 +8,8 @@ describe('modus-autocomplete', () => {
     await page.setContent('<modus-autocomplete></modus-autocomplete>');
   });
 
-  describe('with default', () => {
+  // Created using: ContractTest
+  describe('with default mode', () => {
     it('renders', async () => {
       const element = await page.find('modus-autocomplete');
       expect(element).toHaveClass('hydrated');
@@ -78,25 +79,6 @@ describe('modus-autocomplete', () => {
 
       size = await element.getProperty('size');
       expect(size).toEqual('large');
-    });
-
-    it('should render changes to showNoResultsFoundMessage prop', async () => {
-      const element = await page.find('modus-autocomplete');
-      element.setProperty('options', ['Test 1', 'Test 2']);
-      await page.waitForChanges();
-
-      const textInput = await page.find('modus-autocomplete >>> modus-text-input');
-      await textInput.click();
-      await textInput.type('Test 3');
-      await page.waitForChanges();
-
-      let noResultsFoundMessage = await page.find('modus-autocomplete >>> .no-results');
-      expect(noResultsFoundMessage).toBeTruthy();
-
-      element.setProperty('showNoResultsFoundMessage', false);
-      await page.waitForChanges();
-      noResultsFoundMessage = await page.find('modus-autocomplete >>> .no-results');
-      expect(noResultsFoundMessage).toBeFalsy();
     });
 
     it('should render changes to noResultsFoundText prop', async () => {
@@ -187,29 +169,6 @@ describe('modus-autocomplete', () => {
       expect(options.length).toEqual(1);
     });
 
-    it('should display options on focus when showOptionsOnFocus prop is true', async () => {
-      const element = await page.find('modus-autocomplete');
-      expect(element).toHaveClass('hydrated');
-
-      element.setProperty('options', [
-        { id: 1, value: 'Test 1' },
-        { id: 2, value: 'Test 2' },
-      ]);
-
-      element.setProperty('showOptionsOnFocus', true);
-
-      await page.waitForChanges();
-
-      const textInput = await page.find('modus-autocomplete >>> modus-text-input');
-      await textInput.click();
-
-      await page.waitForChanges();
-
-      const options = await page.findAll('modus-autocomplete >>> .options-container li');
-
-      expect(options.length).toEqual(2);
-    });
-
     it('should default text input autocomplete to off', async () => {
       const element = await page.find('modus-autocomplete');
       expect(element).toHaveClass('hydrated');
@@ -293,31 +252,6 @@ describe('modus-autocomplete', () => {
       await page.waitForChanges();
       options = await page.findAll('modus-autocomplete >>> .options-container li');
       expect(options.length).toBe(1);
-    });
-
-    it('should display options on focus without close when disableCloseOnSelect prop is true', async () => {
-      const element = await page.find('modus-autocomplete');
-      expect(element).toHaveClass('hydrated');
-
-      element.setProperty('options', [
-        { id: 1, value: 'Test 1' },
-        { id: 2, value: 'Test 2' },
-      ]);
-
-      element.setProperty('disableCloseOnSelect', true);
-
-      await page.waitForChanges();
-
-      const textInput = await page.find('modus-autocomplete >>> modus-text-input');
-      await textInput.click();
-
-      await page.waitForChanges();
-
-      const options = await page.findAll('modus-autocomplete >>> .options-container li');
-
-      options[0].click();
-      await page.waitForChanges();
-      expect(options.length).toEqual(2);
     });
 
     it('should select the option by hitting Space', async () => {
@@ -635,9 +569,29 @@ describe('modus-autocomplete', () => {
       const labelContainer = await page.findAll('modus-autocomplete >>> .label-container');
       expect(labelContainer.length).toEqual(0);
     });
+
+    it('should render changes to showNoResultsFoundMessage prop', async () => {
+      const element = await page.find('modus-autocomplete');
+      element.setProperty('options', ['Test 1', 'Test 2']);
+      await page.waitForChanges();
+
+      const textInput = await page.find('modus-autocomplete >>> modus-text-input');
+      await textInput.click();
+      await textInput.type('Test 3');
+      await page.waitForChanges();
+
+      let noResultsFoundMessage = await page.find('modus-autocomplete >>> .no-results');
+      expect(noResultsFoundMessage).toBeTruthy();
+
+      element.setProperty('showNoResultsFoundMessage', false);
+      await page.waitForChanges();
+      noResultsFoundMessage = await page.find('modus-autocomplete >>> .no-results');
+      expect(noResultsFoundMessage).toBeFalsy();
+    });
   });
 
-  describe('with custom', () => {
+  // Created using: ContractTest
+  describe('with custom mode', () => {
     it('should render changes to custom options slot', async () => {
       const p = await newE2EPage();
       await p.setContent(`
@@ -833,6 +787,150 @@ describe('modus-autocomplete', () => {
 
       expect(optionSelected).toHaveReceivedEvent();
       expect(optionSelected).toHaveReceivedEventDetail('1');
+    });
+  });
+
+  // Created using: DecisionTableTest
+  describe('with showOptionsOnFocus control', () => {
+    it('should display options on focus when showOptionsOnFocus prop is true using default mode', async () => {
+      const element = await page.find('modus-autocomplete');
+      expect(element).toHaveClass('hydrated');
+
+      element.setProperty('options', [
+        { id: 1, value: 'Test 1' },
+        { id: 2, value: 'Test 2' },
+      ]);
+
+      element.setProperty('showOptionsOnFocus', true);
+
+      await page.waitForChanges();
+
+      const textInput = await page.find('modus-autocomplete >>> modus-text-input');
+      await textInput.click();
+
+      await page.waitForChanges();
+
+      const options = await page.findAll('modus-autocomplete >>> .options-container li');
+
+      expect(options.length).toEqual(2);
+    });
+
+    it('should display options on focus when showOptionsOnFocus prop is true using custom mode', async () => {
+      const element = await newE2EPage();
+      await element.setContent(`
+        <modus-autocomplete show-options-on-focus="true">
+          <li id="item-1" data-search-value="Test1" data-id="1" style="padding: 8px">
+            <div style="font-weight: bold">Test1 Option</div>
+            <div style="font-size: 12px">Option1 Description</div>
+          </li>
+          <li id="item-2" data-search-value="Test2" data-id="2" style="padding: 8px">
+            <div style="font-weight: bold">Test2 Option</div>
+            <div style="font-size: 12px">Option2 Description</div>
+          </li>
+        </modus-autocomplete>
+      `);
+      await element.waitForChanges();
+
+      // Click on Input
+      let textInput = await element.find('modus-autocomplete >>> modus-text-input');
+      await textInput.click();
+
+      await element.waitForChanges();
+
+      // Expect 2 items
+      let options = await element.findAll('modus-autocomplete >>> .options-container li.custom-option');
+
+      expect(options.length).toEqual(2);
+
+      // Then click on Input and type item 1
+      textInput = await element.find('modus-autocomplete >>> modus-text-input');
+      await textInput.click();
+      await textInput.type('Test1');
+      await element.waitForChanges();
+
+      // Click on item 1
+      options = await element.findAll('modus-autocomplete >>> .options-container li.custom-option');
+      await options[0].click();
+      await element.waitForChanges();
+
+      // Then click on Input again and it should show 1 option filtered
+      textInput = await element.find('modus-autocomplete >>> modus-text-input');
+      await textInput.click();
+      options = await element.findAll('modus-autocomplete >>> .options-container li.custom-option');
+      expect(options.length).toEqual(1);
+    });
+  });
+
+  // Created using: DecisionTableTest
+  describe('with disableCloseOnSelect control', () => {
+    it('should display options on focus without close when disableCloseOnSelect prop is true', async () => {
+      const element = await page.find('modus-autocomplete');
+      expect(element).toHaveClass('hydrated');
+
+      element.setProperty('options', [
+        { id: 1, value: 'Test 1' },
+        { id: 2, value: 'Test 2' },
+      ]);
+
+      element.setProperty('disableCloseOnSelect', true);
+
+      await page.waitForChanges();
+
+      const textInput = await page.find('modus-autocomplete >>> modus-text-input');
+      await textInput.click();
+
+      await page.waitForChanges();
+
+      const options = await page.findAll('modus-autocomplete >>> .options-container li');
+
+      options[0].click();
+      await page.waitForChanges();
+      expect(options.length).toEqual(2);
+    });
+
+    it('should display options on focus when disableCloseOnSelect prop is true using custom mode', async () => {
+      const element = await newE2EPage();
+      await element.setContent(`
+        <modus-autocomplete disable-close-on-select="true">
+          <li id="item-1" data-search-value="Test1" data-id="1" style="padding: 8px">
+            <div style="font-weight: bold">Test1 Option</div>
+            <div style="font-size: 12px">Option1 Description</div>
+          </li>
+          <li id="item-2" data-search-value="Test2" data-id="2" style="padding: 8px">
+            <div style="font-weight: bold">Test2 Option</div>
+            <div style="font-size: 12px">Option2 Description</div>
+          </li>
+        </modus-autocomplete>
+      `);
+      await element.waitForChanges();
+
+      // Click on Input
+      let textInput = await element.find('modus-autocomplete >>> modus-text-input');
+      await textInput.click();
+
+      await element.waitForChanges();
+
+      // Expect 2 items
+      let options = await element.findAll('modus-autocomplete >>> .options-container li.custom-option');
+
+      expect(options.length).toEqual(2);
+
+      // Then click on Input and type item 1
+      textInput = await element.find('modus-autocomplete >>> modus-text-input');
+      await textInput.click();
+      await textInput.type('Test1');
+      await element.waitForChanges();
+
+      // Click on item 1
+      options = await element.findAll('modus-autocomplete >>> .options-container li.custom-option');
+      await options[0].click();
+      await element.waitForChanges();
+
+      // Then click on Input again and it should show all options again
+      textInput = await element.find('modus-autocomplete >>> modus-text-input');
+      await textInput.click();
+      options = await element.findAll('modus-autocomplete >>> .options-container li.custom-option');
+      expect(options.length).toEqual(2);
     });
   });
 });
