@@ -118,4 +118,32 @@ describe('modus-sentiment-scale', () => {
     const element = await page.find('modus-sentiment-scale');
     expect(await element.getProperty('type')).toBe('thumbs');
   });
+
+  it('renders aria-label on sentiment scale container when set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-sentiment-scale aria-label="test label"></modus-modus-sentiment-scale>');
+    let element = await page.find('modus-sentiment-scale >>> .sentiment-scale-container');
+    expect(element).toBeDefined();
+    expect(element).toHaveAttribute('aria-label');
+    expect(element.getAttribute('aria-label')).toEqual('test label');
+  });
+
+  it('does not render aria-label on sentiment scale container when not set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-sentiment-scale></modus-sentiment-scale>');
+    let element = await page.find('modus-sentiment-scale >>> .sentiment-scale-container');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
+
+  it('does not render aria-label on sentiment scale container when set to empty string', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-sentiment-scale aria-label=""></modus-sentiment-scale>');
+    let element = await page.find('modus-sentiment-scale >>> .sentiment-scale-container');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
 });

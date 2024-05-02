@@ -28,7 +28,7 @@ export class ModusMessage {
     const className = `modus-message ${this.classByType.get(this.type)}`;
 
     return (
-      <div aria-label={this.ariaLabel} class={className} role="note">
+      <div aria-label={this.ariaLabel || undefined} class={className} role="note">
         <span class="icon">
           {this.icon ? (
             <ModusIconMap icon={this.icon} size="18" />
