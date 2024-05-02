@@ -312,7 +312,7 @@ export class ModusDateInput {
           part="input-container">
           <input
             aria-invalid={!!this.errorText}
-            aria-label={this.ariaLabel}
+            aria-label={this.ariaLabel || undefined}
             aria-required={this.required?.toString()}
             autofocus={this.autoFocusInput}
             class={{ 'has-right-icon': this.showCalendarIcon }}

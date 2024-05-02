@@ -58,7 +58,7 @@ export class ModusToast {
     const className = `modus-toast ${this.classByType.get(this.type)}`;
 
     return (
-      <div aria-label={this.ariaLabel} class={className} role={this.role}>
+      <div aria-label={this.ariaLabel || undefined} class={className} role={this.role}>
         {this.showIcon && <div class="icon">{icon}</div>}
         <span class={'text'}>
           <slot />

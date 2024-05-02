@@ -78,4 +78,32 @@ describe('modus-tooltip', () => {
     await page.waitForChanges();
     expect(tooltip.getAttribute('data-show')).toBeNull();
   });
+
+  it('renders aria-label on div when set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-tooltip aria-label="test label"></modus-tooltip>');
+    let element = await page.find('modus-tooltip >>> .tooltip');
+    expect(element).toBeDefined();
+    expect(element).toHaveAttribute('aria-label');
+    expect(element.getAttribute('aria-label')).toEqual('test label');
+  });
+
+  it('does not render aria-label on div when not set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-tooltip></modus-tooltip>');
+    let element = await page.find('modus-tooltip >>> .tooltip');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
+
+  it('does not render aria-label on div when set to empty string', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-tooltip aria-label=""></modus-tooltip>');
+    let element = await page.find('modus-tooltip >>> .tooltip');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
 });

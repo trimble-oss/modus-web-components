@@ -431,7 +431,7 @@ export class ModusNavbar {
                   <div class="navbar-button search" data-test-id="search-menu">
                     <modus-tooltip
                       text={this.searchTooltip?.text}
-                      aria-label={this.searchTooltip?.ariaLabel}
+                      aria-label={this.searchTooltip?.ariaLabel || undefined}
                       position="bottom">
                       <span
                         class="navbar-button-icon"
@@ -490,7 +490,10 @@ export class ModusNavbar {
                 {this.showPendoPlaceholder && <div class={'pendo-placeholder'} />}
                 {this.showHelp && (
                   <div class="navbar-button" data-test-id="help-menu">
-                    <modus-tooltip text={this.helpTooltip?.text} aria-label={this.helpTooltip?.ariaLabel} position="bottom">
+                    <modus-tooltip
+                      text={this.helpTooltip?.text}
+                      aria-label={this.helpTooltip?.ariaLabel || undefined}
+                      position="bottom">
                       <span
                         class="navbar-button-icon"
                         role="button"
@@ -530,7 +533,7 @@ export class ModusNavbar {
                   <div class="profile-menu">
                     <modus-tooltip
                       text={this.profileMenuOptions?.tooltip?.text}
-                      aria-label={this.profileMenuOptions?.tooltip?.ariaLabel}
+                      aria-label={this.profileMenuOptions?.tooltip?.ariaLabel || undefined}
                       disabled={this.profileMenuVisible}
                       position="bottom">
                       {this.profileMenuOptions?.avatarUrl ? (
