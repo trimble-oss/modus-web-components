@@ -205,7 +205,7 @@ export class ModusModal {
     return (
       <div
         aria-hidden={this.visible ? undefined : 'true'}
-        aria-label={this.visible ? this.ariaLabel : undefined}
+        aria-label={this.visible ? this.ariaLabel || undefined : undefined}
         aria-modal={this.visible ? 'true' : undefined}
         class={`modus-modal overlay ${this.visible ? 'visible' : 'hidden'}`}
         onClick={(event) => this.handleOverlayClick(event)}

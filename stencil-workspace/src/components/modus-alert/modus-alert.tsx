@@ -1,4 +1,4 @@
-// eslint-disable-next-line
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Component, Prop, h, Event, EventEmitter, Listen } from '@stencil/core';
 import { IconCheckCircle } from '../../icons/svgs/icon-check-circle';
 import { IconError } from '../../icons/svgs/icon-error';
@@ -61,12 +61,20 @@ export class ModusAlert {
   }
 
   render(): unknown {
-    const className = `alert ${this.classByType.get(this.type)} ${(this.dismissible && this.buttonText?.length > 0) || this.buttonText?.length > 0 ? 'with-action-button' : ''}`;
     const iconSize = '24';
     const MAX_LENGTH = 300;
 
+    const className = {
+      alert: true,
+      'with-action-button': (this.dismissible && this.buttonText?.length > 0) || this.buttonText?.length > 0,
+    };
+    const typeClass = this.classByType.get(this.type);
+    if (typeClass != undefined) {
+      className[typeClass] = true;
+    }
+
     return (
-      <div aria-label={this.ariaLabel} class={className} role="alert">
+      <div aria-label={this.ariaLabel || undefined} class={className} role="alert">
         <div class="icon">
           {this.type === 'error' ? <IconError size={iconSize} /> : null}
           {this.infoTypes.includes(this.type) ? <IconInfo size={iconSize} /> : null}

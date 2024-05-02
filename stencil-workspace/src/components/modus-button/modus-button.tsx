@@ -1,4 +1,4 @@
-// eslint-disable-next-line
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Component, Prop, h, Event, EventEmitter, Element, State, Listen, Method, Fragment } from '@stencil/core';
 import { ModusIconMap } from '../../icons/ModusIconMap';
 import { JSX } from '@stencil/core/internal';
@@ -134,7 +134,7 @@ export class ModusButton {
     return (
       <button
         aria-disabled={this.ariaDisabled ? this.ariaDisabled : this.disabled ? 'true' : undefined}
-        aria-label={this.ariaLabel}
+        aria-label={this.ariaLabel || undefined}
         aria-pressed={this.pressed ? 'true' : undefined}
         class={className}
         disabled={this.disabled}

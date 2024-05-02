@@ -136,7 +136,8 @@ export class ModusButtonGroup {
     return (
       <Host
         aria-label={this.ariaLabel}
-        aria-disabled={this.ariaDisabled ? this.ariaDisabled : this.disabled ? 'true' : undefined}>
+        aria-disabled={this.ariaDisabled ? this.ariaDisabled : this.disabled ? 'true' : undefined}
+        role="group">
         <slot />
       </Host>
     );
