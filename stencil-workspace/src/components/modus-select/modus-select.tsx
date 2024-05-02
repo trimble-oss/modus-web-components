@@ -133,7 +133,7 @@ export class ModusSelect {
             disabled={this.disabled}
             id={this.selectId}
             class={selectClass}
-            aria-label={this.ariaLabel}
+            aria-label={this.ariaLabel || undefined}
             onBlur={(e) => this.inputBlur.emit(e)}
             onChange={(event) => {
               this.handleSelectChange(event);

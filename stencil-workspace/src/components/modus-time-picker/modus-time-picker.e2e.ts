@@ -318,4 +318,32 @@ describe('modus-time-picker', () => {
 
     expect(timeInputBlur).toHaveReceivedEvent();
   });
+
+  it('renders aria-label on input when set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-time-picker aria-label="test label"></modus-time-picker>');
+    let element = await page.find('modus-time-picker >>> input');
+    expect(element).toBeDefined();
+    expect(element).toHaveAttribute('aria-label');
+    expect(element.getAttribute('aria-label')).toEqual('test label');
+  });
+
+  it('does not render aria-label on input when not set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-time-picker></modus-time-picker>');
+    let element = await page.find('modus-time-picker >>> input');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
+
+  it('does not render aria-label on input when set to empty string', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-time-picker aria-label=""></modus-time-picker>');
+    let element = await page.find('modus-time-picker >>> input');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
 });
