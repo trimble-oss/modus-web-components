@@ -110,7 +110,7 @@ const Template = ({ ariaLabel, headerText, primaryButtonAriaLabel,primaryButtonD
 `;
 export const Default = Template.bind({});
 Default.args = {
-  ariaLabel: 'Modal',
+  ariaLabel: '',
   headerText: 'Modal title',
   primaryButtonAriaLabel: 'Save changes',
   primaryButtonDisabled: false,
@@ -141,7 +141,7 @@ const CustomFooterTemplate = ({ ariaLabel, headerText, zIndex, backdrop  }) => h
 `;
 export const CustomFooter = CustomFooterTemplate.bind({});
 CustomFooter.args = {
-  ariaLabel: 'Modal',
+  ariaLabel: '',
   headerText: 'Modal title',
   zIndex: '1',
   backdrop: 'default'};

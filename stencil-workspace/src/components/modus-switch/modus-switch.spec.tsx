@@ -14,7 +14,7 @@ describe('modus-switch', () => {
             <div class="switch">
               <span class="slider"></span>
             </div>
-            <input role="switch" type="checkbox">
+            <input aria-checked="false" role="switch" type="checkbox">
           </div>
         </mock:shadow-root>
       </modus-switch>
@@ -33,7 +33,7 @@ describe('modus-switch', () => {
             <div class="switch">
               <span class="slider"></span>
             </div>
-            <input role="switch" aria-disabled="true" disabled type="checkbox">
+            <input aria-checked="false" role="switch" aria-disabled="true" disabled type="checkbox">
           </div>
         </mock:shadow-root>
       </modus-switch>

@@ -1,4 +1,4 @@
-// eslint-disable-next-line
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Component, Prop, h, Event, EventEmitter } from '@stencil/core';
 
 export interface Crumb {
@@ -26,7 +26,7 @@ export class ModusBreadcrumb {
 
   render(): unknown {
     return (
-      <nav aria-label={this.ariaLabel}>
+      <nav aria-label={this.ariaLabel || undefined}>
         <ol>
           {this.crumbs.map((crumb, index) => (
             <li key={crumb.id}>

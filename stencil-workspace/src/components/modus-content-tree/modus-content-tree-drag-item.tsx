@@ -1,4 +1,4 @@
-// eslint-disable-next-line
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FunctionalComponent, h } from '@stencil/core';
 import { TreeViewItemDragState } from './modus-content-tree.types';
 import { TREE_ITEM_SIZE_CLASS } from './modus-content-tree.constants';
