@@ -114,10 +114,12 @@ export class ModusTableCellMain {
 
     if (key === 'tab' && isCellEditable) {
       this.editMode = !this.editMode;
-      const nextCell = this.cellEl.nextElementSibling?.querySelector('modus-table-cell-main') as any;
+      const nextCell = this.cellEl.nextElementSibling?.querySelector(
+        'modus-table-cell-main'
+      ) as unknown as ModusTableCellMain;
       if (nextCell) {
         nextCell.editMode = true;
-        nextCell.focus();
+        (nextCell as unknown as HTMLElement).focus();
       }
       event.preventDefault();
     }
