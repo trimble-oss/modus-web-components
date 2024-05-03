@@ -65,7 +65,7 @@ export default {
       page: docs,
     },
     actions: {
-      handles: ['itemActionClick modus-tree-view', 'actionClick modus-tree-view-item', 'itemClick modus-tree-view-item'],
+      handles: ['itemActionClick modus-tree-view', 'actionClick modus-tree-view-item', 'itemClick modus-tree-view-item','itemLabelChange modus-tree-view-item'],
     },
     controls: { expanded: true, sort: 'requiredFirst' },
     options: {

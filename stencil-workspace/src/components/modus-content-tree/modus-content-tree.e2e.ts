@@ -554,4 +554,28 @@ describe('modus-tree-view-item', () => {
     await page.waitForChanges();
     expect(element).not.toHaveClass('borderless');
   });
+
+  it('should emit itemLabelChange event when Enter key is pressed on editable label input', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-tree-view>
+        <modus-tree-view-item node-Id="1" label="Original Label" editable="true">
+        </modus-tree-view-item>
+      </modus-tree-view>
+    `);
+
+    const treeViewItem = await page.find('modus-tree-view-item');
+    const itemLabelChangeEvent = await treeViewItem.spyOnEvent('itemLabelChange');
+
+    const labelInput = await page.find('modus-tree-view-item >>> .label-slot >>> input');
+
+    expect(labelInput).not.toBeNull();
+
+    await labelInput.type('NewLabel');
+    await labelInput.press('Enter');
+
+    await page.waitForChanges();
+    expect(itemLabelChangeEvent).toHaveReceivedEventDetail('Original LabelNewLabel');
+  });
 });
