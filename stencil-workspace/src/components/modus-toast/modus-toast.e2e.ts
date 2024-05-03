@@ -109,6 +109,5 @@ describe('modus-toast', () => {
 
     await page.waitForTimeout(10000);
     expect(dismissClick).toHaveReceivedEvent();
-
   });
 });

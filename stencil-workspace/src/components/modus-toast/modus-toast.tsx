@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { Component, Event, EventEmitter, h, Prop } from '@stencil/core';
+import { Component, Event, EventEmitter, h, Prop, Element } from '@stencil/core';
 import { IconError } from '../../icons/svgs/icon-error';
 import { IconWarning } from '../../icons/svgs/icon-warning';
 import { IconInfo } from '../../icons/svgs/icon-info';
@@ -20,7 +20,7 @@ export class ModusToast {
   @Prop() dismissible: boolean;
 
   /** (optional) Time taken to dismiss the toast */
-  @Prop() delay = 15000;
+  @Prop() delay: number;
 
   /** (optional) Role taken by the toast.  Defaults to 'status'. */
   @Prop() role: 'alert' | 'log' | 'marquee' | 'status' | 'timer' = 'status';
@@ -34,7 +34,11 @@ export class ModusToast {
   /** An event that fires when the toast is dismissed */
   @Event() dismissClick: EventEmitter;
 
+  @Element() el!: HTMLElement;
+
   private timerId: NodeJS.Timeout;
+
+  private defaultDismissDelay = 15000;
 
   iconByType: Map<string, HTMLElement> = new Map([
     ['danger', <IconWarning color={'#C81922'} size={'18'} />],
@@ -58,10 +62,19 @@ export class ModusToast {
     ['warning', 'warning'],
   ]);
 
+  dismissElement() {
+    this.dismissClick.emit();
+    this.el.remove();
+  }
   componentDidLoad(): void {
-    this.timerId = setTimeout(() => {
-      this.dismissClick.emit();
-    }, this.delay);
+    if (this.delay > 0) {
+      this.timerId = setTimeout(() => {
+        this.dismissElement();
+      }, this.delay);
+    } else
+      this.timerId = setTimeout(() => {
+        this.dismissClick.emit();
+      }, this.defaultDismissDelay);
   }
 
   disconnectedCallback(): void {
@@ -79,7 +92,7 @@ export class ModusToast {
           <slot />
         </span>
         {this.dismissible && (
-          <button type="button" class={'close'} onClick={() => this.dismissClick.emit()} aria-label="Dismiss">
+          <button type="button" class={'close'} onClick={() => this.dismissElement()} aria-label="Dismiss">
             <IconClose size={'18'} />
           </button>
         )}
