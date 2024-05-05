@@ -123,7 +123,7 @@ const defaultApps = [{
   url: 'https://modus.trimble.com/',
 }];
 
-const Template = ({ buttons, notificationCount, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
+const Template = ({ buttons, notificationCount, enableSearchOverlay, helpTooltip, navAriaLabel, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
   <modus-navbar
     enable-search-overlay=${enableSearchOverlay}
     nav-aria-label=${navAriaLabel}
@@ -195,7 +195,7 @@ Default.args = {
   notificationCount: 0
 };
 
-const FailedToLoadAvatarTemplate = ({ buttons, notificationCount, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
+const FailedToLoadAvatarTemplate = ({ buttons, notificationCount, enableSearchOverlay, helpTooltip, navAriaLabel, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
   <modus-navbar
     enable-search-overlay=${enableSearchOverlay}
     nav-aria-label=${navAriaLabel}
@@ -238,7 +238,7 @@ FailedAvatar.args = {
   notificationCount: 0
 };
 
-const BlueTemplate = ({ buttons, notificationCount, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
+const BlueTemplate = ({ buttons, notificationCount, enableSearchOverlay, helpTooltip, navAriaLabel, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
   <modus-navbar
     enable-search-overlay=${enableSearchOverlay}
     nav-aria-label=${navAriaLabel}
