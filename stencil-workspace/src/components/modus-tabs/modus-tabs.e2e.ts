@@ -38,7 +38,7 @@ describe('modus-tabs', () => {
     expect(tabs[0].id).toEqual('tab-1');
   });
 
-  it('emits pageChange on page click', async () => {
+  it('emits tabChange on tab click', async () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-tabs></modus-tabs>');
