@@ -42,7 +42,9 @@ export class ModusTabs {
   }
 
   handleTabChange(id: string): void {
-    if (id === this.tabs.find((tab) => tab.active).id) {
+    const activeTab = this.tabs.find((tab) => tab.active);
+
+    if (activeTab?.id === id) {
       return;
     }
 
@@ -70,7 +72,7 @@ export class ModusTabs {
     });
 
     return (
-      <div aria-label={this.ariaLabel} class={`modus-tabs ${this.classBySize.get(this.size)}`}>
+      <div aria-label={this.ariaLabel || undefined} class={`modus-tabs ${this.classBySize.get(this.size)}`}>
         {tabs}
       </div>
     );

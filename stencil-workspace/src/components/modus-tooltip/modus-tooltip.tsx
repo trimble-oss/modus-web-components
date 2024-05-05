@@ -167,7 +167,7 @@ export class ModusTooltip {
     return (
       <Fragment>
         <slot />
-        <div tabIndex={-1} class={{ tooltip: true, hide: hidden }} aria-label={this.ariaLabel} role="tooltip">
+        <div tabIndex={-1} class={{ tooltip: true, hide: hidden }} aria-label={this.ariaLabel || undefined} role="tooltip">
           {this.text}
           <div id="arrow" data-popper-arrow></div>
         </div>

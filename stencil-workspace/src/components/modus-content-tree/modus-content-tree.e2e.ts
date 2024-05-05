@@ -150,13 +150,13 @@ describe('modus-tree-view-item', () => {
     </modus-tree-view>`);
     const root = await page.find('modus-tree-view');
 
-    const rightChevron = await page.find('modus-tree-view-item >>> .rotate-right .icon-expand-more-bold');
+    const rightChevron = await page.find('modus-tree-view-item >>> .rotate-right .icon-expand-more');
     expect(rightChevron).toBeTruthy();
 
     root.setProperty('expandedItems', ['1']);
     await page.waitForChanges();
 
-    const downChevron = await page.find('modus-tree-view-item >>> .icon-expand-more-bold');
+    const downChevron = await page.find('modus-tree-view-item >>> .icon-expand-more');
     expect(downChevron).toBeTruthy();
   });
 
@@ -189,12 +189,12 @@ describe('modus-tree-view-item', () => {
       </modus-tree-view-item>
     </modus-tree-view>`);
 
-    const rightChevron = await page.find("modus-tree-view-item[node-id='1'] >>> .rotate-right .icon-expand-more-bold");
+    const rightChevron = await page.find("modus-tree-view-item[node-id='1'] >>> .rotate-right .icon-expand-more");
     expect(rightChevron).toBeTruthy();
 
     await rightChevron.click();
 
-    const downChevron = await page.find("modus-tree-view-item[node-id='1'] >>> .icon-expand-more-bold");
+    const downChevron = await page.find("modus-tree-view-item[node-id='1'] >>> .icon-expand-more");
     expect(downChevron).toBeTruthy();
   });
 
@@ -398,7 +398,7 @@ describe('modus-tree-view-item', () => {
     </modus-tree-view>`);
 
     const itemExpandToggle = await page.spyOnEvent('itemExpandToggle');
-    const rightChevron = await page.find("modus-tree-view-item[node-id='1'] >>> .rotate-right .icon-expand-more-bold");
+    const rightChevron = await page.find("modus-tree-view-item[node-id='1'] >>> .rotate-right .icon-expand-more");
     expect(rightChevron).toBeTruthy();
 
     await rightChevron.click();
@@ -553,5 +553,29 @@ describe('modus-tree-view-item', () => {
     root.setProperty('borderless', false);
     await page.waitForChanges();
     expect(element).not.toHaveClass('borderless');
+  });
+
+  it('should emit itemLabelChange event when Enter key is pressed on editable label input', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-tree-view>
+        <modus-tree-view-item node-Id="1" label="Original Label" editable="true">
+        </modus-tree-view-item>
+      </modus-tree-view>
+    `);
+
+    const treeViewItem = await page.find('modus-tree-view-item');
+    const itemLabelChangeEvent = await treeViewItem.spyOnEvent('itemLabelChange');
+
+    const labelInput = await page.find('modus-tree-view-item >>> .label-slot >>> input');
+
+    expect(labelInput).not.toBeNull();
+
+    await labelInput.type('NewLabel');
+    await labelInput.press('Enter');
+
+    await page.waitForChanges();
+    expect(itemLabelChangeEvent).toHaveReceivedEventDetail('Original LabelNewLabel');
   });
 });

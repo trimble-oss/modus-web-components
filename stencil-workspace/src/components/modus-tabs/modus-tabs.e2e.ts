@@ -56,4 +56,51 @@ describe('modus-tabs', () => {
     await page.waitForChanges();
     expect(tabChange).toHaveReceivedEvent();
   });
+
+  it('renders aria-label on tabs div when set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-tabs aria-label="test label"></modus-tabs>');
+    let element = await page.find('modus-tabs >>> .modus-tabs');
+    expect(element).toBeDefined();
+    expect(element).toHaveAttribute('aria-label');
+    expect(element.getAttribute('aria-label')).toEqual('test label');
+  });
+
+  it('does not render aria-label on tabs div when not set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-tabs></modus-tabs>');
+    let element = await page.find('modus-tabs >>> .modus-tabs');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
+
+  it('does not render aria-label on tabs div when set to empty string', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-tabs aria-label=""></modus-tabs>');
+    let element = await page.find('modus-tabs >>> .modus-tabs');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
+
+  it('emits pageChange on page click when no tabs are active before click', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-tabs></modus-tabs>');
+    const tabChange = await page.spyOnEvent('tabChange');
+
+    const modusTabs = await page.find('modus-tabs');
+    modusTabs.setProperty('tabs', [
+      { id: 0, label: 'Tab1' },
+      { id: 1, label: 'Tab2' },
+    ]);
+    await page.waitForChanges();
+    const element = await page.find('modus-tabs >>> div[id="0"] + div');
+
+    await element.click();
+    await page.waitForChanges();
+    expect(tabChange).toHaveReceivedEvent();
+  });
 });

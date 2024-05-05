@@ -50,4 +50,32 @@ describe('modus-breadcrumb', () => {
     expect(crumbClick).toHaveReceivedEvent();
     expect(crumbClick).toHaveReceivedEventDetail(crumbs[0]);
   });
+
+  it('renders aria-label on alert div when set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-breadcrumb aria-label="test label"></modus-breadcrumb>');
+    let element = await page.find('modus-breadcrumb >>> nav');
+    expect(element).toBeDefined();
+    expect(element).toHaveAttribute('aria-label');
+    expect(element.getAttribute('aria-label')).toEqual('test label');
+  });
+
+  it('does not render aria-label on alert div when not set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-breadcrumb></modus-breadcrumb>');
+    let element = await page.find('modus-breadcrumb >>> nav');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
+
+  it('does not render aria-label on alert div when set to empty string', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-breadcrumb aria-label=""></modus-breadcrumb>');
+    let element = await page.find('modus-breadcrumb >>> nav');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
 });

@@ -165,4 +165,32 @@ describe('modus-checkbox', () => {
 
     expect(await modusCheckbox.getProperty('size')).toBe('small');
   });
+
+  it('renders aria-label on alert div when set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-checkbox aria-label="test label"></modus-checkbox>');
+    let element = await page.find('modus-checkbox >>> input');
+    expect(element).toBeDefined();
+    expect(element).toHaveAttribute('aria-label');
+    expect(element.getAttribute('aria-label')).toEqual('test label');
+  });
+
+  it('does not render aria-label on alert div when not set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-checkbox></modus-checkbox>');
+    let element = await page.find('modus-checkbox >>> input');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
+
+  it('does not render aria-label on alert div when set to empty string', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-checkbox aria-label=""></modus-checkbox>');
+    let element = await page.find('modus-checkbox >>> input');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
 });
