@@ -199,4 +199,43 @@ describe('modus-chip', () => {
     expect((await computedStyles).width).toBe('16px');
     expect((await computedStyles).height).toBe('16px');
   });
+
+
+  it('renders aria-label on alert div when set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-chip aria-label="test label"></modus-chip>');
+    let element = await page.find('modus-chip >>> button');
+    expect(element).toBeDefined();
+    expect(element).toHaveAttribute('aria-label');
+    expect(element.getAttribute('aria-label')).toEqual('test label');
+  });
+
+  it('does not render aria-label on alert div when not set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-chip></modus-chip>');
+    let element = await page.find('modus-chip >>> button');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
+
+  it('does not render aria-label on alert div when set to empty string', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-chip aria-label=""></modus-chip>');
+    let element = await page.find('modus-chip >>> button');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
+  
+  it('should be in active state when active property is true', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-chip active></modus-chip');
+    await page.waitForChanges();
+
+    const shadowContainer = await page.find('modus-chip >>> .modus-chip');
+    expect(shadowContainer.classList.contains('active'));
+  });
 });

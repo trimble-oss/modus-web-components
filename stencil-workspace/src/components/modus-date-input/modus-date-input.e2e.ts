@@ -469,4 +469,32 @@ describe('modus-date-input', () => {
     const errorText = await page.find('modus-date-input >>> .sub-text > label');
     expect(errorText).toBeFalsy();
   });
+
+  it('renders aria-label on alert div when set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-date-input aria-label="test label"></modus-date-input>');
+    let element = await page.find('modus-date-input >>> input');
+    expect(element).toBeDefined();
+    expect(element).toHaveAttribute('aria-label');
+    expect(element.getAttribute('aria-label')).toEqual('test label');
+  });
+
+  it('does not render aria-label on alert div when not set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-date-input></modus-date-input>');
+    let element = await page.find('modus-date-input >>> input');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
+
+  it('does not render aria-label on alert div when set to empty string', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-date-input aria-label=""></modus-date-input>');
+    let element = await page.find('modus-date-input >>> input');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
 });

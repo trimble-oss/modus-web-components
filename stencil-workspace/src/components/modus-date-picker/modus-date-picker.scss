@@ -36,6 +36,12 @@
     }
   }
 
+  .input-container {
+    input {
+      font-family: $primary-font;
+    }
+  }
+
   .calendar-container {
     background-color: $modus-date-picker-calendar-body-bg;
     border-radius: 4px;

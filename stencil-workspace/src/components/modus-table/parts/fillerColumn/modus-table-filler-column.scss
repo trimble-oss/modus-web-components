@@ -7,6 +7,13 @@ modus-table-filler-column {
     display: none;
   }
 
+  table {
+    thead tr,
+    tfoot tr {
+      height: inherit;
+    }
+  }
+
   table:not(.cell-borderless) {
     td,
     th {

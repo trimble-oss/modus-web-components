@@ -5,7 +5,7 @@ import { IconWarning } from '../../icons/svgs/icon-warning';
 import { IconInfo } from '../../icons/svgs/icon-info';
 import { IconHelp } from '../../icons/svgs/icon-help';
 import { IconCheckCircle } from '../../icons/svgs/icon-check-circle';
-import { IconClose } from '../../icons/svgs/icon-close';
+import { IconClose } from '../../icons/generated-icons/IconClose';
 
 @Component({
   tag: 'modus-toast',
@@ -18,6 +18,9 @@ export class ModusToast {
 
   /** (optional) Whether the toast has a dismiss button. */
   @Prop() dismissible: boolean;
+
+  /** (optional) Role taken by the toast.  Defaults to 'status'. */
+  @Prop() role: 'alert' | 'log' | 'marquee' | 'status' | 'timer' = 'status';
 
   /** (optional) Whether to show the toasts' icon. */
   @Prop() showIcon = true;
@@ -55,12 +58,16 @@ export class ModusToast {
     const className = `modus-toast ${this.classByType.get(this.type)}`;
 
     return (
-      <div aria-label={this.ariaLabel} class={className} role="status">
+      <div aria-label={this.ariaLabel || undefined} class={className} role={this.role}>
         {this.showIcon && <div class="icon">{icon}</div>}
         <span class={'text'}>
           <slot />
         </span>
-        <span class={'close'}>{this.dismissible && <IconClose size={'18'} onClick={() => this.dismissClick.emit()} />}</span>
+        {this.dismissible && (
+          <button type="button" class={'close'} onClick={() => this.dismissClick.emit()} aria-label="Dismiss">
+            <IconClose size={'18'} />
+          </button>
+        )}
       </div>
     );
   }

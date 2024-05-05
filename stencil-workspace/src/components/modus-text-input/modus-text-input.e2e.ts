@@ -141,6 +141,19 @@ describe('modus-text-input', () => {
     expect(await input.getProperty('value')).toEqual('am changed');
   });
 
+  it('renders changes to pattern', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-text-input></modus-text-input>');
+
+    const textInput = await page.find('modus-text-input');
+    textInput.setProperty('pattern', 'pattern');
+    await page.waitForChanges();
+
+    const input = await page.find('modus-text-input >>> input');
+    expect(await input.getProperty('pattern')).toEqual('pattern');
+  });
+
   it('renders changes to placeholder', async () => {
     const page = await newE2EPage();
 
@@ -278,5 +291,33 @@ describe('modus-text-input', () => {
 
     const input = await page.find('modus-text-input >>> input');
     expect(await input.getProperty('autocomplete')).toEqual('off');
+  });
+
+  it('renders aria-label on input when set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-text-input aria-label="test label"></modus-text-input>');
+    let element = await page.find('modus-text-input >>> input');
+    expect(element).toBeDefined();
+    expect(element).toHaveAttribute('aria-label');
+    expect(element.getAttribute('aria-label')).toEqual('test label');
+  });
+
+  it('does not render aria-label on input when not set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-text-input></modus-text-input>');
+    let element = await page.find('modus-text-input >>> input');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
+
+  it('does not render aria-label on input when set to empty string', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-text-input aria-label=""></modus-text-input>');
+    let element = await page.find('modus-text-input >>> input');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
   });
 });
