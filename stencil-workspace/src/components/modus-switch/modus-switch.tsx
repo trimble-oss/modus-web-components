@@ -72,7 +72,8 @@ export class ModusSwitch {
         </div>
         <input
           aria-disabled={this.disabled ? 'true' : undefined}
-          aria-label={this.ariaLabel}
+          aria-label={this.ariaLabel || undefined}
+          checked={this.checked}
           disabled={this.disabled}
           id={this.generatedId}
           checked={this.checked}

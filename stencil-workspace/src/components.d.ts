@@ -388,6 +388,10 @@ export namespace Components {
     }
     interface ModusChip {
         /**
+          * (optional) Whether the chip is active.
+         */
+        "active": boolean;
+        /**
           * (optional) The chip's aria-label.
          */
         "ariaLabel": string | null;
@@ -2589,6 +2593,7 @@ declare global {
     };
     interface HTMLModusTreeViewItemElementEventMap {
         "checkboxClick": boolean;
+        "itemLabelChange": string;
         "itemClick": boolean;
         "itemExpandToggle": boolean;
         "itemAdded": HTMLElement;
@@ -3040,6 +3045,10 @@ declare namespace LocalJSX {
         "tabIndexValue"?: string | number;
     }
     interface ModusChip {
+        /**
+          * (optional) Whether the chip is active.
+         */
+        "active"?: boolean;
         /**
           * (optional) The chip's aria-label.
          */
@@ -4497,6 +4506,10 @@ declare namespace LocalJSX {
           * An event that fires on tree item expand/collapse
          */
         "onItemExpandToggle"?: (event: ModusTreeViewItemCustomEvent<boolean>) => void;
+        /**
+          * An event that fires on tree item label changes
+         */
+        "onItemLabelChange"?: (event: ModusTreeViewItemCustomEvent<string>) => void;
         /**
           * (optional) Tab Index for the tree item
          */
