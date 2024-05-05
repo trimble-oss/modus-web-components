@@ -85,7 +85,7 @@ describe('modus-tabs', () => {
     expect(element).not.toHaveAttribute('aria-label');
   });
 
-  it('emits pageChange on page click when no tabs are active before click', async () => {
+  it('emits tabChange on tab click when no tabs are active before click', async () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-tabs></modus-tabs>');
@@ -97,7 +97,7 @@ describe('modus-tabs', () => {
       { id: 1, label: 'Tab2' },
     ]);
     await page.waitForChanges();
-    const element = await page.find('modus-tabs >>> div[id="0"] + div');
+    const element = await page.find('modus-tabs >>> button[id="0"] + button');
 
     await element.click();
     await page.waitForChanges();
@@ -116,7 +116,7 @@ describe('modus-tabs', () => {
       { id: 1, label: 'Tab2' },
     ]);
     await page.waitForChanges();
-    const element = await page.find('modus-tabs >>> button.active + button');
+    const element = await page.find('modus-tabs >>> .tab.active');
     element.focus();
 
     await page.keyboard.press('Tab');
