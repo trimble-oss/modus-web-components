@@ -76,7 +76,6 @@ export class ModusSwitch {
           checked={this.checked}
           disabled={this.disabled}
           id={this.generatedId}
-          checked={this.checked}
           ref={(el) => (this.checkboxInput = el as HTMLInputElement)}
           role="switch"
           type="checkbox"></input>
