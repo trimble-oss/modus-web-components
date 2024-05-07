@@ -97,7 +97,7 @@ const Template = ({ ariaLabel, dismissible, showIcon, role, type , delay }) =>
 export const Default = Template.bind({});
 Default.args = {
   ariaLabel: '',
-  delay: 15000,
+  delay: 0,
   dismissible: false,
   role: 'status',
   showIcon: true,
@@ -107,7 +107,7 @@ Default.args = {
 export const Danger = Template.bind({});
 Danger.args = {
   ariaLabel: '',
-  delay: 15000,
+  delay: 0,
   dismissible: false,
   role: 'status',
   showIcon: true,
@@ -117,7 +117,7 @@ Danger.args = {
 export const Dark = Template.bind({});
 Dark.args = {
   ariaLabel: '',
-  delay: 15000,
+  delay: 0,
   dismissible: false,
   role: 'status',
   showIcon: true,
@@ -127,7 +127,7 @@ Dark.args = {
 export const Primary = Template.bind({});
 Primary.args = {
   ariaLabel: '',
-  delay: 15000,
+  delay: 0,
   dismissible: false,
   role: 'status',
   showIcon: true,
@@ -137,7 +137,7 @@ Primary.args = {
 export const Secondary = Template.bind({});
 Secondary.args = {
   ariaLabel: '',
-  delay: 15000,
+  delay: 0,
   dismissible: false,
   role: 'status',
   showIcon: true,
@@ -147,7 +147,7 @@ Secondary.args = {
 export const Success = Template.bind({});
 Success.args = {
   ariaLabel: '',
-  delay: 15000,
+  delay: 0,
   dismissible: false,
   role: 'status',
   showIcon: true,
@@ -157,7 +157,7 @@ Success.args = {
 export const Warning = Template.bind({});
 Warning.args = {
   ariaLabel: '',
-  delay: 15000,
+  delay: 0,
   dismissible: false,
   role: 'status',
   showIcon: true,
