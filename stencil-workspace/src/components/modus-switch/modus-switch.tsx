@@ -1,5 +1,6 @@
 // eslint-disable-next-line
 import { generateElementId } from '../../utils/utils';
+// eslint-disable-next-line
 import { Component, Prop, h, Event, EventEmitter, Listen } from '@stencil/core';
 
 @Component({
