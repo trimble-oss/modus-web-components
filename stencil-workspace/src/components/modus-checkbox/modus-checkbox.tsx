@@ -30,9 +30,6 @@ export class ModusCheckbox {
   /** (optional) The checkbox label. */
   @Prop() label: string;
 
-  /** (optional) Tab Index for the checkbox */
-  @Prop({ mutable: true }) tabIndexValue: string | number = 0;
-
   /** An event that fires on checkbox click. */
   @Event() checkboxClick: EventEmitter<boolean>;
 
@@ -90,10 +87,9 @@ export class ModusCheckbox {
 
   render(): unknown {
     const className = `modus-checkbox ${this.size === 'small' ? 'small' : ''}`;
-    const tabIndexValue = this.disabled ? -1 : this.tabIndexValue;
 
     return (
-      <div class={className} tabindex={tabIndexValue}>
+      <div class={className}>
         <input
           class={`checkbox ${this.size === 'small' ? 'small' : ''} ${this.disabled ? 'disabled' : ''}`}
           aria-checked={this.checked ? 'true' : 'false'}

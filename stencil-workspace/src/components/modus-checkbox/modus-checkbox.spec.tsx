@@ -10,7 +10,7 @@ describe('modus-checkbox', () => {
     expect(page.root).toEqualHtml(`
       <modus-checkbox>
         <mock:shadow-root>
-          <div class="modus-checkbox" tabindex="0">
+          <div class="modus-checkbox">
             <input class="checkbox" aria-checked="false" id="mwc_id_0_checkbox" type="checkbox">
           </div>
         </mock:shadow-root>
