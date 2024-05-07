@@ -114,6 +114,7 @@ export class ModusTreeViewItem {
     display?: boolean;
     onClick?: (e: MouseEvent) => void;
     onMouseDown?: (e: MouseEvent) => void;
+    onKeyDown?: (e: KeyboardEvent) => void;
     role?: string;
   }> = ({ name, className, defaultContent, display = true, ...props }) => {
     const showDefault = !this.slots.has(name) && defaultContent;
@@ -218,6 +219,10 @@ export class ModusTreeViewItem {
       this.options.onItemDrag(this.nodeId, dragContent, e);
     }
   }
+  handleDragKeyDown(e: KeyboardEvent) {
+    const dragContent = this.refItemContent.cloneNode(true) as HTMLElement;
+    this.options.onItemDragClick(this.nodeId, dragContent, e);
+  }
 
   handleExpandToggle(e?: Event): void {
     if (this.shouldHandleEvent(e)) {
@@ -260,8 +265,11 @@ export class ModusTreeViewItem {
         e.stopPropagation();
         break;
       case 'Enter':
-        this.handleItemClick(e);
-        e.stopPropagation();
+        if (this.draggableItem) this.handleDragKeyDown(e);
+        else {
+          this.handleItemClick(e);
+          e.stopPropagation();
+        }
         break;
     }
   }
@@ -440,6 +448,7 @@ export class ModusTreeViewItem {
             className={`icon-slot drag-icon${!this.draggableItem ? ' hidden' : ''}`}
             defaultContent={<ModusIconMap icon="drag_indicator" />}
             name={this.SLOT_DRAG_ICON}
+            onKeyDown={(e) => this.handleDragKeyDown(e)}
             onMouseDown={(e) => this.handleDrag(e)}
           />
           <div aria-disabled="true" style={{ paddingLeft: `${(level - 1) * 0.5}rem` }}>

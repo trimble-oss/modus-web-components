@@ -50,6 +50,12 @@ export class ModusTreeView {
 
   @State() itemDragState: TreeViewItemDragState;
 
+  @State() isDraggingWithKeyboard: boolean;
+
+  //count number of times arrow up or down is pressed
+  private countup = 0;
+  private countdown = 0;
+  private y;
   private focusItem: string;
   private items: { [key: string]: TreeViewItemInfo } = {};
   private syncItems: string[] = [];
@@ -58,6 +64,7 @@ export class ModusTreeView {
   private onMouseMove = (e) => this.handleItemDragOver(e);
   private onMouseUp = () => this.handleItemDrop();
 
+  private onKeyDown = (e) => this.handleArrowKeys(e);
   readonly INITIAL_DRAG_POSITION: Position = { x: 0, y: 0 };
 
   clearItemDropState(): TreeViewItemDragState {
@@ -91,6 +98,16 @@ export class ModusTreeView {
     }
   }
 
+  @Watch('isDraggingWithKeyboard')
+  handleDraggingWithKeyboard(newValue: boolean) {
+    if (newValue) {
+      // add event listeners for arrow keys up and down
+      document.addEventListener('keydown', this.onKeyDown);
+    } else {
+      document.removeEventListener('keydown', this.onKeyDown);
+    }
+  }
+
   handleItemDragStart(itemId: string, dragContent: HTMLElement, event: MouseEvent) {
     const { clientX, clientY, currentTarget } = event;
     const parent = (currentTarget as HTMLElement)?.parentElement;
@@ -104,6 +121,84 @@ export class ModusTreeView {
       width: `${parent?.offsetWidth}px`,
       height: `${parent?.offsetHeight}px`,
     };
+  }
+
+  handleItemDragStartKeyboard(itemId: string, dragContent: HTMLElement, event: KeyboardEvent) {
+    if (event.code === 'Enter') {
+      if (!this.isDraggingWithKeyboard) {
+        const { currentTarget } = event;
+        const parent = (currentTarget as HTMLElement)?.parentElement;
+
+        const clientX = parent.getBoundingClientRect().x;
+        const clientY = parent.getBoundingClientRect().y;
+        const initialDragPosition = { x: clientX + 40, y: clientY + 20 };
+        this.clearItemDropState();
+        this.itemDragState = {
+          dragContent,
+          origin: initialDragPosition,
+          translation: initialDragPosition,
+          itemId,
+          width: `${parent?.offsetWidth}px`,
+          height: `${parent?.offsetHeight}px`,
+        };
+
+        this.isDraggingWithKeyboard = true;
+      } else {
+        // Perform dropping action
+        this.handleItemDrop();
+        this.isDraggingWithKeyboard = false;
+      }
+    }
+  }
+
+  handleArrowKeys(event: KeyboardEvent) {
+    if (!this.itemDragState) return;
+
+    if (event.key === 'ArrowUp') {
+      this.countup++;
+    } else if (event.key === 'ArrowDown') {
+      this.countdown++;
+    }
+    const direction = event.key === 'ArrowUp' ? 1 : event.key === 'ArrowDown' ? -1 : 0;
+    if (direction === 0) return;
+
+    const diff = this.countdown - this.countup;
+
+    const parent = this.itemDragState.dragContent.parentElement;
+    if (!parent) return;
+
+    const x = parent.getBoundingClientRect().x;
+
+    if (isNaN(this.y)) {
+      this.y = parent.getBoundingClientRect().y;
+    }
+
+    this.y = parent.offsetHeight * diff + parent.getBoundingClientRect().y;
+
+    let newDragState = { ...this.clearItemDropState() };
+    const {
+      nodeId: dropZoneId,
+      element: dropZoneItem,
+      content: dropZoneContent,
+    } = this.getItemWithinBounds(x, this.y) || {};
+    if (dropZoneId && dropZoneId !== newDragState.itemId) {
+      const parents = this.getParentIds(dropZoneId);
+      newDragState = { ...newDragState, targetId: dropZoneId };
+      if (
+        dropZoneItem.droppableItem &&
+        !this.isItemDisabled(dropZoneId) &&
+        !(parents && parents.includes(newDragState.itemId))
+      ) {
+        newDragState.validTarget = true;
+        dropZoneContent.classList.add('drop-allow');
+      } else {
+        newDragState.validTarget = false;
+        dropZoneContent.classList.add('drop-block');
+      }
+    }
+
+    // Update the itemDragState
+    this.itemDragState = { ...newDragState };
   }
 
   handleItemDragOver(event: MouseEvent) {
@@ -397,6 +492,7 @@ export class ModusTreeView {
       onItemDelete: (id) => this.deleteItem(id),
       onItemUpdate: (newValue, oldValue) => this.updateItem(newValue, oldValue),
       onItemDrag: (id, content, e) => this.handleItemDragStart(id, content, e),
+      onItemDragClick: (id, content, e) => this.handleItemDragStartKeyboard(id, content, e),
     };
   }
 
@@ -511,69 +607,69 @@ export class ModusTreeView {
     }
     const key = event.code.toUpperCase();
     let preventDefault = false;
+    if (!this.isDraggingWithKeyboard) {
+      switch (key) {
+        case 'SPACE':
+          if (this.focusItem) {
+            this.handleItemExpand(this.focusItem);
+            preventDefault = true;
+          }
+          break;
+        case 'ENTER':
+          if (this.focusItem) {
+            this.handleItemSelection(this.focusItem, event);
+            event.stopPropagation();
+          }
+          break;
+        case 'ARROWDOWN':
+          // eslint-disable-next-line no-case-declarations
+          const nextItem = this.focusItem ? this.getNextNavigableItem(this.focusItem) : this.getFirstItem();
 
-    switch (key) {
-      case 'SPACE':
-        if (this.focusItem) {
-          this.handleItemExpand(this.focusItem);
+          // Multi-Selection
+          if (this.multiSelection && event.shiftKey && this.isItemSelected(this.focusItem)) {
+            // deselect if going back to the selected node
+            if (this.isItemSelected(nextItem)) this.handleItemSelection(this.focusItem, event);
+            else this.handleItemSelection(nextItem, event);
+          }
+
+          this.handleItemFocus(nextItem);
           preventDefault = true;
-        }
-        break;
-      case 'ENTER':
-        if (this.focusItem) {
-          this.handleItemSelection(this.focusItem, event);
-          event.stopPropagation();
-        }
-        break;
-      case 'ARROWDOWN':
-        // eslint-disable-next-line no-case-declarations
-        const nextItem = this.focusItem ? this.getNextNavigableItem(this.focusItem) : this.getFirstItem();
+          break;
+        case 'ARROWUP':
+          // eslint-disable-next-line no-case-declarations
+          const prevItem = this.focusItem ? this.getPrevNavigableItem(this.focusItem) : this.getLastItem();
 
-        // Multi-Selection
-        if (this.multiSelection && event.shiftKey && this.isItemSelected(this.focusItem)) {
-          // deselect if going back to the selected node
-          if (this.isItemSelected(nextItem)) this.handleItemSelection(this.focusItem, event);
-          else this.handleItemSelection(nextItem, event);
-        }
+          // Multi-Selection
+          if (this.multiSelection && event.shiftKey && this.isItemSelected(this.focusItem)) {
+            // deselect if going back to the selected node
+            if (this.isItemSelected(prevItem)) this.handleItemSelection(this.focusItem, event);
+            else this.handleItemSelection(prevItem, event);
+          }
 
-        this.handleItemFocus(nextItem);
-        preventDefault = true;
-        break;
-      case 'ARROWUP':
-        // eslint-disable-next-line no-case-declarations
-        const prevItem = this.focusItem ? this.getPrevNavigableItem(this.focusItem) : this.getLastItem();
+          this.handleItemFocus(prevItem);
+          preventDefault = true;
+          break;
+        case 'ARROWRIGHT':
+          if (this.focusItem) {
+            if (this.disableTabbing && event.shiftKey) {
+              const { element } = this.items[this.focusItem];
+              element.focusCheckbox();
+            } else if (!this.isItemExpanded(this.focusItem)) {
+              this.handleItemExpand(this.focusItem);
+            }
+          }
 
-        // Multi-Selection
-        if (this.multiSelection && event.shiftKey && this.isItemSelected(this.focusItem)) {
-          // deselect if going back to the selected node
-          if (this.isItemSelected(prevItem)) this.handleItemSelection(this.focusItem, event);
-          else this.handleItemSelection(prevItem, event);
-        }
-
-        this.handleItemFocus(prevItem);
-        preventDefault = true;
-        break;
-      case 'ARROWRIGHT':
-        if (this.focusItem) {
-          // 'Shift + Arrow Right' can be used to focus the checkbox when tabbing is disabled inside the tree
-          if (this.disableTabbing && event.shiftKey) {
-            const { element } = this.items[this.focusItem];
-            element.focusCheckbox();
-          } else if (!this.isItemExpanded(this.focusItem)) {
+          break;
+        case 'ARROWLEFT':
+          if (this.focusItem && this.isItemExpanded(this.focusItem)) {
             this.handleItemExpand(this.focusItem);
           }
-        }
-
-        break;
-      case 'ARROWLEFT':
-        if (this.focusItem && this.isItemExpanded(this.focusItem)) {
-          this.handleItemExpand(this.focusItem);
-        }
-        break;
-      case 'TAB':
-        if (this.disableTabbing) this.resetFocusItem();
-        break;
-      default:
+          break;
+        case 'TAB':
+          if (this.disableTabbing) this.resetFocusItem();
+          break;
+        default:
+      }
     }
 
     if (preventDefault) {
