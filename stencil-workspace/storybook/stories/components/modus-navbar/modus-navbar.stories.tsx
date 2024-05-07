@@ -154,7 +154,6 @@ const Template = ({ buttons, notificationCount, enableSearchOverlay, helpTooltip
 
 export const Default = Template.bind({});
 Default.args = {
-  ariaLabel: 'Default',
   enableSearchOverlay: false,
   buttons: [
     {
@@ -166,6 +165,7 @@ Default.args = {
     { id: 'notificationMenu', icon: 'notifications' },
   ],
   helpTooltip: undefined,
+  navAriaLabel: 'Default',
   profileMenuOptions: {
     avatarUrl: workingAvatarUrl,
     email: 'modus_user@trimble.com',
