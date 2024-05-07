@@ -12,6 +12,13 @@ export default {
         type: { summary: 'string' },
       },
     },
+    delay:{
+      description:'Time taken to dismiss the toast',
+      table: {
+        defaultValue: { summary: 15000 },
+        type: { summary: 'number' },
+      },
+    },
     dismissible: {
       description: 'Whether the toast is dismissible, renders the close icon',
       table: {
@@ -74,10 +81,11 @@ export default {
   },
 };
 
-const Template = ({ ariaLabel, dismissible, showIcon, role, type }) =>
+const Template = ({ ariaLabel, dismissible, showIcon, role, type , delay }) =>
   html`
     <modus-toast
       aria-label=${ariaLabel}
+      delay=${delay}
       dismissible=${dismissible}
       show-icon=${showIcon}
       role=${role}
@@ -89,6 +97,7 @@ const Template = ({ ariaLabel, dismissible, showIcon, role, type }) =>
 export const Default = Template.bind({});
 Default.args = {
   ariaLabel: '',
+  delay: 0,
   dismissible: false,
   role: 'status',
   showIcon: true,
@@ -98,6 +107,7 @@ Default.args = {
 export const Danger = Template.bind({});
 Danger.args = {
   ariaLabel: '',
+  delay: 0,
   dismissible: false,
   role: 'status',
   showIcon: true,
@@ -107,6 +117,7 @@ Danger.args = {
 export const Dark = Template.bind({});
 Dark.args = {
   ariaLabel: '',
+  delay: 0,
   dismissible: false,
   role: 'status',
   showIcon: true,
@@ -116,6 +127,7 @@ Dark.args = {
 export const Primary = Template.bind({});
 Primary.args = {
   ariaLabel: '',
+  delay: 0,
   dismissible: false,
   role: 'status',
   showIcon: true,
@@ -125,6 +137,7 @@ Primary.args = {
 export const Secondary = Template.bind({});
 Secondary.args = {
   ariaLabel: '',
+  delay: 0,
   dismissible: false,
   role: 'status',
   showIcon: true,
@@ -134,6 +147,7 @@ Secondary.args = {
 export const Success = Template.bind({});
 Success.args = {
   ariaLabel: '',
+  delay: 0,
   dismissible: false,
   role: 'status',
   showIcon: true,
@@ -143,6 +157,7 @@ Success.args = {
 export const Warning = Template.bind({});
 Warning.args = {
   ariaLabel: '',
+  delay: 0,
   dismissible: false,
   role: 'status',
   showIcon: true,
