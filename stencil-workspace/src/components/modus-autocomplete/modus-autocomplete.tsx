@@ -209,14 +209,12 @@ export class ModusAutocomplete {
   };
 
   handleInputBlur = () => {
-    if (!this.hasOptionMatched(this.value)) {
-      if (this.selectedOption !== '' && this.value !== '') {
-        if (!this.hasFocus) {
-          this.value = this.selectedOption;
-          this.disableFiltering = true;
-        }
-      }
+    if (this.hasOptionMatched(this.value) || this.selectedOption === '' || this.value === '' || this.hasFocus) {
+      return;
     }
+
+    this.value = this.selectedOption;
+    this.disableFiltering = true;
   };
 
   handleInputKeyDown = (event: KeyboardEvent) => {
@@ -343,7 +341,9 @@ export class ModusAutocomplete {
     search = search || '';
     const isSearchEmpty = search.length === 0;
 
-    if (isSearchEmpty) this.selectedOption = '';
+    if (isSearchEmpty) {
+      this.selectedOption = '';
+    }
 
     if (isSearchEmpty || this.disableFiltering) {
       this.visibleOptions = this.options as ModusAutocompleteOption[];
