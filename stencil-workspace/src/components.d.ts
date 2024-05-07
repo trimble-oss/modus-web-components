@@ -381,10 +381,6 @@ export namespace Components {
           * (optional) If you wish to prevent the propagation of your event, you may opt for this.
          */
         "stopPropagation": boolean;
-        /**
-          * (optional) Tab Index for the checkbox
-         */
-        "tabIndexValue": string | number;
     }
     interface ModusChip {
         /**
@@ -3151,10 +3147,6 @@ declare namespace LocalJSX {
           * (optional) If you wish to prevent the propagation of your event, you may opt for this.
          */
         "stopPropagation"?: boolean;
-        /**
-          * (optional) Tab Index for the checkbox
-         */
-        "tabIndexValue"?: string | number;
     }
     interface ModusChip {
         /**
