@@ -110,7 +110,7 @@ export class ModusChip {
     return (
       <button
         aria-disabled={this.disabled ? 'true' : undefined}
-        aria-label={this.ariaLabel}
+        aria-label={this.ariaLabel || undefined}
         class={chipClass}
         onClick={this.disabled ? null : (event) => this.onChipClick(event)}
         tabIndex={0}

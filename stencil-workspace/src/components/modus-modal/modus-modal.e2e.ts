@@ -332,4 +332,44 @@ describe('modus-modal', () => {
     console.error(backgroundColor);
     expect(backgroundColor).toBe('rgba(37, 42, 46, 0.75)');
   });
+
+  it('renders aria-label on alert div when set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-modal aria-label="test label" visible="true"></modus-modal>');
+    let component = await page.find('modus-modal');
+    let element = await page.find('modus-modal >>> .modus-modal');
+    await component.callMethod('open');
+    await page.waitForChanges();
+
+    expect(element).toBeDefined();
+    expect(element).toHaveAttribute('aria-label');
+    expect(element.getAttribute('aria-label')).toEqual('test label');
+  });
+
+  it('does not render aria-label on alert div when not set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-modal  visible="true"></modus-modal>');
+    let component = await page.find('modus-modal');
+    let element = await page.find('modus-modal >>> .modus-modal');
+    await component.callMethod('open');
+    await page.waitForChanges();
+
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
+
+  it('does not render aria-label on alert div when set to empty string', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-modal  visible="true" aria-label=""></modus-modal>');
+    let component = await page.find('modus-modal');
+    let element = await page.find('modus-modal >>> .modus-modal');
+    await component.callMethod('open');
+    await page.waitForChanges();
+
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
 });

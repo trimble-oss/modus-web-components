@@ -16,7 +16,6 @@
 | `label`           | `label`            | (optional) The checkbox label.                                                         | `string`              | `undefined` |
 | `size`            | `size`             | (optional) The size of the checkbox.                                                   | `"medium" \| "small"` | `'medium'`  |
 | `stopPropagation` | `stop-propagation` | (optional) If you wish to prevent the propagation of your event, you may opt for this. | `boolean`             | `undefined` |
-| `tabIndexValue`   | `tab-index-value`  | (optional) Tab Index for the checkbox                                                  | `number \| string`    | `0`         |
 
 
 ## Events

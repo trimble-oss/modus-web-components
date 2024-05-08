@@ -381,10 +381,6 @@ export namespace Components {
           * (optional) If you wish to prevent the propagation of your event, you may opt for this.
          */
         "stopPropagation": boolean;
-        /**
-          * (optional) Tab Index for the checkbox
-         */
-        "tabIndexValue": string | number;
     }
     interface ModusChip {
         /**
@@ -2593,6 +2589,7 @@ declare global {
     };
     interface HTMLModusTreeViewItemElementEventMap {
         "checkboxClick": boolean;
+        "itemLabelChange": string;
         "itemClick": boolean;
         "itemExpandToggle": boolean;
         "itemAdded": HTMLElement;
@@ -3038,10 +3035,6 @@ declare namespace LocalJSX {
           * (optional) If you wish to prevent the propagation of your event, you may opt for this.
          */
         "stopPropagation"?: boolean;
-        /**
-          * (optional) Tab Index for the checkbox
-         */
-        "tabIndexValue"?: string | number;
     }
     interface ModusChip {
         /**
@@ -4505,6 +4498,10 @@ declare namespace LocalJSX {
           * An event that fires on tree item expand/collapse
          */
         "onItemExpandToggle"?: (event: ModusTreeViewItemCustomEvent<boolean>) => void;
+        /**
+          * An event that fires on tree item label changes
+         */
+        "onItemLabelChange"?: (event: ModusTreeViewItemCustomEvent<string>) => void;
         /**
           * (optional) Tab Index for the tree item
          */

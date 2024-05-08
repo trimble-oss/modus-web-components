@@ -62,7 +62,7 @@ export class ModusSentimentScale {
       <div
         class="sentiment-scale-container"
         aria-disabled={this.disabled ? 'true' : undefined}
-        aria-label={this.ariaLabel}
+        aria-label={this.ariaLabel || undefined}
         role="group">
         {iconsMap &&
           Array.from(iconsMap).map(([key, value]) => {

@@ -211,7 +211,7 @@ export class ModusTextInput {
           <input
             id={this.inputId}
             aria-invalid={!!this.errorText}
-            aria-label={this.ariaLabel}
+            aria-label={this.ariaLabel || undefined}
             aria-required={this.required?.toString()}
             autocapitalize={this.autocapitalize}
             autocomplete={this.autocomplete}

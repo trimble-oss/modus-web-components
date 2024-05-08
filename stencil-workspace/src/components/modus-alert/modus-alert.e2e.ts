@@ -23,6 +23,34 @@ describe('modus-alert', () => {
     expect(element).toBeNull();
   });
 
+  it('renders aria-label on alert div when set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-alert aria-label="test label"></modus-alert>');
+    let element = await page.find('modus-alert >>> div.alert');
+    expect(element).toBeDefined();
+    expect(element).toHaveAttribute('aria-label');
+    expect(element.getAttribute('aria-label')).toEqual('test label');
+  });
+
+  it('does not render aria-label on alert div when not set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-alert></modus-alert>');
+    let element = await page.find('modus-alert >>> div.alert');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
+
+  it('does not render aria-label on alert div when set to empty string', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-alert aria-label=""></modus-alert>');
+    let element = await page.find('modus-alert >>> div.alert');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
+
   it('renders changes to the message prop', async () => {
     const page = await newE2EPage();
 
