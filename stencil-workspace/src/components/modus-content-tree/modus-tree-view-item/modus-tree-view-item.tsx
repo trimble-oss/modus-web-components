@@ -490,8 +490,7 @@ export class ModusTreeViewItem {
                 indeterminate={indeterminate}
                 onClick={(e) => this.handleCheckboxClick(e)}
                 onKeyDown={(e) => this.handleDefaultKeyDown(e, () => this.handleCheckboxClick(e))}
-                ref={(el) => (this.refCheckbox = el)}
-                tabIndexValue={tabIndex}></modus-checkbox>
+                ref={(el) => (this.refCheckbox = el)}></modus-checkbox>
             </div>
           )}
 
