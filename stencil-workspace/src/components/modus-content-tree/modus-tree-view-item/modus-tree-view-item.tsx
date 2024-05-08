@@ -437,7 +437,7 @@ export class ModusTreeViewItem {
           ref={(el) => this.handleRefItemContent(el)}
           tabindex={tabIndex}>
           <this.CustomSlot
-            className={`icon-slot drag-icon${!this.draggableItem ? ' hidden' : ''}`}
+            className={`icon-slot drag-icon${!this.draggableItem ? ' d-none' : ''}`}
             defaultContent={<ModusIconMap icon="drag_indicator" />}
             name={this.SLOT_DRAG_ICON}
             onMouseDown={(e) => this.handleDrag(e)}

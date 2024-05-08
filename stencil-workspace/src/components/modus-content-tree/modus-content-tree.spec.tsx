@@ -34,7 +34,7 @@ describe('modus-tree-view-item', () => {
       <mock:shadow-root>
       <li aria-level="1" aria-selected="false" aria-disabled="false" role="treeitem" class="tree-item-container">
       <div class="tree-item standard" tabindex="0">
-        <div class="icon-slot drag-icon hidden">
+        <div class="icon-slot drag-icon d-none">
           <slot name="dragIcon"></slot><svg class="icon-drag-indicator" height="16" width="16" viewBox="0 0 24 24"
             fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path
