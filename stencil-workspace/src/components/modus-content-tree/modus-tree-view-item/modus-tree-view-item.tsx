@@ -249,6 +249,18 @@ export class ModusTreeViewItem {
     }
   }
 
+  handleKeyDownItemClick(e?: KeyboardEvent | MouseEvent): void {
+    if (e.defaultPrevented) {
+      return;
+    }
+
+    const { hasItemSelected, multiSelection } = this.options;
+
+    if (e.shiftKey && multiSelection) {
+      this.itemClick.emit(hasItemSelected(this.nodeId));
+    }
+  }
+
   handleKeyDownTreeItem(e: KeyboardEvent) {
     if (e.defaultPrevented) {
       return; // Do nothing if event already handled
@@ -262,6 +274,12 @@ export class ModusTreeViewItem {
       case 'Enter':
         this.handleItemClick(e);
         e.stopPropagation();
+        break;
+      case 'ArrowDown':
+        this.handleKeyDownItemClick(e);
+        break;
+      case 'ArrowUp':
+        this.handleKeyDownItemClick(e);
         break;
     }
   }
