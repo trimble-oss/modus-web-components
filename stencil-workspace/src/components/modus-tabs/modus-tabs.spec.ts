@@ -10,7 +10,7 @@ describe('modus-tabs', () => {
     expect(root).toEqualHtml(`
       <modus-tabs>
         <mock:shadow-root>
-          <div class="medium modus-tabs" role="tablist"></div>
+          <div class="medium modus-tabs"></div>
         </mock:shadow-root>
       </modus-tabs>
     `);
@@ -56,7 +56,7 @@ describe('modus-tabs', () => {
     expect(page.root).toEqualHtml(`
       <modus-tabs>
         <mock:shadow-root>
-          <div class="medium modus-tabs" role="tablist">
+          <div class="medium modus-tabs">
             <button class="active medium tab" id="${tabs[0].id}">${tabs[0].label}</button>
             <button class="medium tab" id="${tabs[1].id}">${tabs[1].label}</button>
           </div>
