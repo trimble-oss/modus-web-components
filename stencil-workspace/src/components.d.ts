@@ -1539,6 +1539,10 @@ export namespace Components {
          */
         "ariaLabel": string | null;
         /**
+          * (optional) Time taken to dismiss the toast
+         */
+        "delay": number;
+        /**
           * (optional) Whether the toast has a dismiss button.
          */
         "dismissible": boolean;
@@ -4367,6 +4371,10 @@ declare namespace LocalJSX {
           * (optional) The toast's aria-label.
          */
         "ariaLabel"?: string | null;
+        /**
+          * (optional) Time taken to dismiss the toast
+         */
+        "delay"?: number;
         /**
           * (optional) Whether the toast has a dismiss button.
          */
