@@ -52,10 +52,8 @@ export class ModusTreeView {
 
   @State() isDraggingWithKeyboard: boolean;
 
-  //count number of times arrow up or down is pressed
-  private countup = 0;
-  private countdown = 0;
-  private y;
+  private currentItem: TreeViewItemInfo;
+
   private focusItem: string;
   private items: { [key: string]: TreeViewItemInfo } = {};
   private syncItems: string[] = [];
@@ -125,6 +123,7 @@ export class ModusTreeView {
 
   handleItemDragStartKeyboard(itemId: string, dragContent: HTMLElement, event: KeyboardEvent) {
     if (event.code === 'Enter') {
+      this.currentItem = null;
       if (!this.isDraggingWithKeyboard) {
         const { currentTarget } = event;
         const parent = (currentTarget as HTMLElement)?.parentElement;
@@ -150,50 +149,36 @@ export class ModusTreeView {
       }
     }
   }
-
   handleArrowKeys(event: KeyboardEvent) {
     if (!this.itemDragState) return;
 
-    if (event.key === 'ArrowUp') {
-      this.countup++;
-    } else if (event.key === 'ArrowDown') {
-      this.countdown++;
-    }
-    const direction = event.key === 'ArrowUp' ? 1 : event.key === 'ArrowDown' ? -1 : 0;
+    const direction = event.key === 'ArrowUp' ? -1 : event.key === 'ArrowDown' ? 1 : 0;
     if (direction === 0) return;
 
-    const diff = this.countdown - this.countup;
-
-    const parent = this.itemDragState.dragContent.parentElement;
-    if (!parent) return;
-
-    const x = parent.getBoundingClientRect().x;
-
-    if (isNaN(this.y)) {
-      this.y = parent.getBoundingClientRect().y;
+    if (!this.currentItem) {
+      this.currentItem = this.items[this.itemDragState.itemId];
     }
 
-    this.y = parent.offsetHeight * diff + parent.getBoundingClientRect().y;
+    if (direction === 1) {
+      this.currentItem = this.items[this.getNextNavigableItem(this.currentItem.nodeId)];
+    } else {
+      this.currentItem = this.items[this.getPrevNavigableItem(this.currentItem.nodeId)];
+    }
 
     let newDragState = { ...this.clearItemDropState() };
-    const {
-      nodeId: dropZoneId,
-      element: dropZoneItem,
-      content: dropZoneContent,
-    } = this.getItemWithinBounds(x, this.y) || {};
-    if (dropZoneId && dropZoneId !== newDragState.itemId) {
-      const parents = this.getParentIds(dropZoneId);
-      newDragState = { ...newDragState, targetId: dropZoneId };
+    if (this.currentItem.nodeId && this.currentItem.nodeId !== newDragState.itemId) {
+      const parents = this.getParentIds(this.currentItem.nodeId);
+      newDragState = { ...newDragState, targetId: this.currentItem.nodeId };
       if (
-        dropZoneItem.droppableItem &&
-        !this.isItemDisabled(dropZoneId) &&
+        this.currentItem.element.droppableItem &&
+        !this.isItemDisabled(this.currentItem.nodeId) &&
         !(parents && parents.includes(newDragState.itemId))
       ) {
         newDragState.validTarget = true;
-        dropZoneContent.classList.add('drop-allow');
+        this.currentItem.content.classList.add('drop-allow');
       } else {
         newDragState.validTarget = false;
-        dropZoneContent.classList.add('drop-block');
+        this.currentItem.content.classList.add('drop-block');
       }
     }
 
@@ -750,7 +735,9 @@ export class ModusTreeView {
         <ul role="tree" tabindex={this.disableTabbing ? 0 : null} onKeyDown={(e) => this.handleKeyDown(e)}>
           <slot onSlotchange={() => this.handleTreeSlotChange()} />
         </ul>
-        <ModusContentTreeDragItem draggingState={this.itemDragState}></ModusContentTreeDragItem>
+        <ModusContentTreeDragItem draggingState={this.itemDragState}>
+          <div class="drag-indicator" tabIndex={-1}></div>
+        </ModusContentTreeDragItem>
       </Host>
     );
   }

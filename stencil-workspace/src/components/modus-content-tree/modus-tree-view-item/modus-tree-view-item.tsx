@@ -112,6 +112,7 @@ export class ModusTreeViewItem {
     className?: string;
     defaultContent?: string | HTMLElement;
     display?: boolean;
+    tabIndex?: number;
     onClick?: (e: MouseEvent) => void;
     onMouseDown?: (e: MouseEvent) => void;
     onKeyDown?: (e: KeyboardEvent) => void;
@@ -265,8 +266,7 @@ export class ModusTreeViewItem {
         e.stopPropagation();
         break;
       case 'Enter':
-        if (this.draggableItem) this.handleDragKeyDown(e);
-        else {
+        if (!this.draggableItem) {
           this.handleItemClick(e);
           e.stopPropagation();
         }
@@ -448,6 +448,7 @@ export class ModusTreeViewItem {
             className={`icon-slot drag-icon${!this.draggableItem ? ' hidden' : ''}`}
             defaultContent={<ModusIconMap icon="drag_indicator" />}
             name={this.SLOT_DRAG_ICON}
+            tabIndex={0}
             onKeyDown={(e) => this.handleDragKeyDown(e)}
             onMouseDown={(e) => this.handleDrag(e)}
           />
