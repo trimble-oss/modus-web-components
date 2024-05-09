@@ -269,6 +269,7 @@ export class ModusAutocomplete {
       this.selectedOption = option.value;
       this.disableFiltering = !this.showOptionsOnFocus;
       this.handleSearchChange(option.value);
+      this.focusItemIndex = this.visibleOptions.findIndex((el)=> el.id === option.id);
     }
 
     this.hasFocus = this.disableCloseOnSelect;
@@ -390,6 +391,17 @@ export class ModusAutocomplete {
     }
   }
 
+  scrollToOptionSelected = () =>{
+    if(this.multiple || this.focusItemIndex === 0){
+      return;
+    }
+    const optionList = this.el.shadowRoot.querySelector(`.options-container`) as HTMLUListElement;
+    setTimeout(()=>{
+      const selectedOption = (optionList.querySelector('li.selected') as HTMLElement);
+      optionList.scrollTop = selectedOption.offsetTop - optionList.offsetHeight + selectedOption.offsetHeight;
+    },0)
+  }
+
   render(): unknown {
     const classes = `autocomplete ${this.classBySize.get(this.size)}`;
     return (
@@ -408,6 +420,7 @@ export class ModusAutocomplete {
           this.hasFocus = true;
           this.updateVisibleOptions(this.value);
           this.updateVisibleCustomOptions(this.value);
+          this.scrollToOptionSelected();
         }}
         onFocusout={() => {
           if (this.hasFocus) {
