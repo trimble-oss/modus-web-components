@@ -40,6 +40,9 @@ import { ModusNavbarButtonList } from './button-list/modus-navbar-button-list';
 export class ModusNavbar {
   @Element() element: HTMLElement;
 
+  /** (optional) The navbar's aria-label. */
+  @Prop() navAriaLabel?: string;
+
   /** (optional) The apps to render in the apps menu. */
   @Prop() apps: ModusNavbarApp[];
 
@@ -397,7 +400,7 @@ export class ModusNavbar {
 
     return (
       <Host id={this.componentId}>
-        <nav class={`${direction} ${shadow} ${variant}`}>
+        <nav class={`${direction} ${shadow} ${variant}`} aria-label={this.navAriaLabel}>
           {!this.searchOverlayVisible && (
             <Fragment>
               <div class={`left ${direction}`}>
