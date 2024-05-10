@@ -596,6 +596,26 @@ describe('modus-navbar', () => {
     expect(tooltipText).toBe('Resource Center');
   });
 
+  it('should have aria-label when provided', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-navbar nav-aria-label="test"></modus-navbar>');
+    await page.waitForChanges();
+
+    const navElement = await page.find('modus-navbar >>> nav');
+    expect(navElement.getAttribute('aria-label')).toEqual('test');
+  });
+
+  it('should not have aria-label when not provided', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-navbar></modus-navbar>');
+    await page.waitForChanges();
+
+    const navElement = await page.find('modus-navbar >>> nav');
+    expect(navElement.getAttribute('aria-label')).toBeNull();
+  });
+
   it('should not render aria-label on help tooltip when not provided', async () => {
     const page = await newE2EPage();
     await page.setContent('<modus-navbar show-help></modus-navbar>');

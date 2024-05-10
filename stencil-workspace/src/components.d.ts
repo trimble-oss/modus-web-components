@@ -783,6 +783,10 @@ export namespace Components {
          */
         "logoOptions": ModusNavbarLogoOptions;
         /**
+          * (optional) The navbar's aria-label.
+         */
+        "navAriaLabel"?: string;
+        /**
           * (optional) Whether to show badge on top of notification
          */
         "notificationCount": number;
@@ -1538,6 +1542,10 @@ export namespace Components {
           * (optional) The toast's aria-label.
          */
         "ariaLabel": string | null;
+        /**
+          * (optional) Time taken to dismiss the toast
+         */
+        "delay": number;
         /**
           * (optional) Whether the toast has a dismiss button.
          */
@@ -3475,6 +3483,10 @@ declare namespace LocalJSX {
          */
         "logoOptions"?: ModusNavbarLogoOptions;
         /**
+          * (optional) The navbar's aria-label.
+         */
+        "navAriaLabel"?: string;
+        /**
           * (optional) Whether to show badge on top of notification
          */
         "notificationCount"?: number;
@@ -4367,6 +4379,10 @@ declare namespace LocalJSX {
           * (optional) The toast's aria-label.
          */
         "ariaLabel"?: string | null;
+        /**
+          * (optional) Time taken to dismiss the toast
+         */
+        "delay"?: number;
         /**
           * (optional) Whether the toast has a dismiss button.
          */
