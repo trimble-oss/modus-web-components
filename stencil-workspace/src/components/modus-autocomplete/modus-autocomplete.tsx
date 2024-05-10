@@ -230,6 +230,7 @@ export class ModusAutocomplete {
   };
 
   handleOptionKeyDown = (event: any, option: any, isCustomOption = false) => {
+    //this.disableFiltering = !this.disableCloseOnSelect;
     this.disableFiltering = !this.hasEnableControl();
 
     switch (event.key.toUpperCase()) {
@@ -398,7 +399,9 @@ export class ModusAutocomplete {
     const optionList = this.el.shadowRoot.querySelector(`.options-container`) as HTMLUListElement;
     setTimeout(() => {
       const selectedOption = optionList.querySelector('li.selected') as HTMLElement;
-      optionList.scrollTop = selectedOption.offsetTop - optionList.offsetHeight + selectedOption.offsetHeight;
+      if (selectedOption) {
+        optionList.scrollTop = selectedOption.offsetTop - optionList.offsetHeight + selectedOption.offsetHeight;
+      }
     }, 0);
   };
 
