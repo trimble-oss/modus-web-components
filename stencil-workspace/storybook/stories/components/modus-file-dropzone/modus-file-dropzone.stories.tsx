@@ -5,6 +5,13 @@ import docs from './modus-file-dropzone-storybook-docs.mdx';
 export default {
   title: 'Components/File Dropzone',
   argTypes: {
+    accept: {
+      name:'accept',
+      description:"The dropzone's accepted file types",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
     ariaLabel: {
       name: 'aria-label',
       description: "The dropzone's aria-label",
@@ -91,6 +98,7 @@ export default {
 };
 
 export const Default = ({
+  accept,
   ariaLabel,
   description,
   dropzoneHeight,
@@ -103,6 +111,7 @@ export const Default = ({
   multiple,
 }) => html`
   <modus-file-dropzone
+    accept=${accept}
     aria-label=${ariaLabel}
     description=${description}
     dropzone-height=${dropzoneHeight}
@@ -116,6 +125,7 @@ export const Default = ({
   </modus-file-dropzone>
 `;
 Default.args = {
+  accept:'',
   ariaLabel: 'dropzone',
   description: 'File dropzone description',
   dropzoneHeight: '200px',
