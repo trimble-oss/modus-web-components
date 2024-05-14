@@ -1,7 +1,7 @@
 import { newSpecPage } from '@stencil/core/testing';
 import { ModusTabs, Tab } from './modus-tabs';
 
-describe('modus-button', () => {
+describe('modus-tabs', () => {
   it('renders', async () => {
     const { root } = await newSpecPage({
       components: [ModusTabs],
@@ -57,8 +57,8 @@ describe('modus-button', () => {
       <modus-tabs>
         <mock:shadow-root>
           <div class="medium modus-tabs">
-            <div class="active medium tab" id="${tabs[0].id}" tabIndex="0">${tabs[0].label}</div>
-            <div class="medium tab" id="${tabs[1].id}" tabIndex="0">${tabs[1].label}</div>
+            <button class="active medium tab" id="${tabs[0].id}">${tabs[0].label}</button>
+            <button class="medium tab" id="${tabs[1].id}">${tabs[1].label}</button>
           </div>
         </mock:shadow-root>
       </modus-tabs>
