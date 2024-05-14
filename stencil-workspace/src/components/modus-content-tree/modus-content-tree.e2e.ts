@@ -578,4 +578,34 @@ describe('modus-tree-view-item', () => {
     await page.waitForChanges();
     expect(itemLabelChangeEvent).toHaveReceivedEventDetail('Original LabelNewLabel');
   });
+  it('when the item is draggable and droppable when clicked on the drag icon and clicked enter and use arrow keys to navigate and press enter', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-tree-view>
+        <modus-tree-view-item node-Id="1" label="Original Label" draggable droppable>
+        <modus-tree-view-item node-Id="2" label="Original Label" draggable droppable>
+        <modus-tree-view-item node-Id="3" label="Original Label" draggable>
+        </modus-tree-view-item>
+      </modus-tree-view>
+    `);
+
+    const treeViewItem = await page.find('modus-tree-view-item[node-id="1"]');
+    const itemDragEvent = await treeViewItem.spyOnEvent('itemDrag');
+
+    const dragIcon = await page.find('modus-tree-view-item >>> .icon-slot');
+    expect(dragIcon).not.toBeNull();
+
+    //key down enter
+    await dragIcon.press('Enter');
+    //press down arrow key
+    await dragIcon.press('ArrowDown');
+    //press enter
+    //node 2 should have class drop-allow
+    expect(await page.find('modus-tree-view-item[node-id="2"]')).toHaveClass('drop-allow');
+    await dragIcon.press('Enter');
+
+    await page.waitForChanges();
+    expect(itemDragEvent).toHaveReceivedEvent();
+  });
 });
