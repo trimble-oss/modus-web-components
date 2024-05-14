@@ -18,6 +18,7 @@ import {
   COLUMN_DEF_DATATYPE_TEXT,
   CELL_EDIT_TYPE_DROPDOWN,
   COLUMN_DEF_DATATYPE_BADGE,
+  COLUMN_DEF_DATATYPE_CUSTOM,
 } from '../modus-table.constants';
 
 export type ModusTableRowData = RowData;
@@ -103,6 +104,10 @@ export interface ModusTableCellLink {
   display: string;
   url: string;
   _type?: typeof COLUMN_DEF_DATATYPE_LINK;
+}
+
+export interface ModusTableCustomCell {
+  _type?: typeof COLUMN_DEF_DATATYPE_CUSTOM;
 }
 
 export interface ModusTableCellBadge extends BadgeProperties {

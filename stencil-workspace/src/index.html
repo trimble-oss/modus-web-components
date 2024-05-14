@@ -17,5 +17,94 @@
 
   <body data-mwc-theme="light">
     <!-- Test components -->
+    <div style="width: 950px">
+      <modus-table hover="false" sort="false" />
+    </div>
+  <script>
+    document.querySelector('modus-table').columns = [
+      {
+        header: 'First Name',
+        accessorKey: 'firstName',
+        id: 'first-name',
+        dataType: 'text',
+      },
+      {
+        header: 'Last Name',
+        accessorKey: 'lastName',
+        id: 'last-name',
+        dataType: 'text',
+      },
+      { header: 'Age', accessorKey: 'age', id: 'age', dataType: 'integer' },
+      {
+        header: 'Visits',
+        accessorKey: 'visits',
+        id: 'visits',
+        dataType: 'integer',
+      },
+      { header: 'Status', accessorKey: 'status', id: 'status', dataType: 'text' },
+      {
+        header: 'Profile Progress',
+        accessorKey: 'progress',
+        id: 'progress',
+        dataType: 'integer',
+      },
+      {
+        header: 'Created At',
+        accessorKey: 'createdAt',
+        id: 'createdAt',
+        dataType: 'date',
+      },
+      {
+        header:'Custom',
+        accessorKey: 'custom',
+        id: 'custom',
+        dataType: 'custom',
+
+      }
+    ];
+    document.querySelector('modus-table').data = [
+      {
+        firstName: 'Gordon',
+        lastName: 'Lemke',
+        age: 40,
+        visits: 434,
+        progress: 97,
+        status: 'single',
+        createdAt: '2002-11-21T12:48:51.739Z',
+        custom:"<modus-button color='primary'>Custom1</modus-button>"
+      },
+      {
+        firstName: 'Elliott',
+        lastName: 'Bosco',
+        age: 21,
+        visits: 348,
+        progress: 60,
+        status: 'complicated',
+        createdAt: '2012-02-08T12:14:22.776Z',
+        custom:"<modus-button color='secondary'>Custom2</modus-button>"
+      },
+      {
+        firstName: 'Agnes',
+        lastName: 'Breitenberg',
+        age: 34,
+        visits: 639,
+        progress: 84,
+        status: 'single',
+        createdAt: '1995-04-07T07:24:57.577Z',
+        custom:"<modus-button color='tertiary'>Custom3</modus-button>"
+      },
+      {
+        firstName: 'Nicolette',
+        lastName: 'Stamm',
+        age: 13,
+        visits: 518,
+        progress: 28,
+        status: 'relationship',
+        createdAt: '2009-07-28T14:29:51.505Z',
+        custom:"<modus-button color='danger'>Custom4</modus-button>"
+      },
+    ];
+  </script>
+  </html>
  </body>
 </html>

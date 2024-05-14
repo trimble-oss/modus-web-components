@@ -9,8 +9,14 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Cell } from '@tanstack/table-core';
-import { ModusTableCellBadge, ModusTableCellEditorArgs, ModusTableCellLink } from '../../../models/modus-table.models';
 import {
+  ModusTableCellBadge,
+  ModusTableCellEditorArgs,
+  ModusTableCellLink,
+  ModusTableCustomCell,
+} from '../../../models/modus-table.models';
+import {
+  COLUMN_DEF_DATATYPE_CUSTOM,
   COLUMN_DEF_DATATYPE_KEY,
   COLUMN_DEF_DATATYPE_INTEGER,
   COLUMN_DEF_CELL_EDITOR_TYPE_KEY,
@@ -28,6 +34,7 @@ import { ModusTableCellLinkElement } from '../modus-table-cell-link-element';
 import { ModusTableCellBadgeElement } from '../modus-table-cell-badge-element';
 import { TableContext, TableCellEdited } from '../../../models/table-context.models';
 import ModusTableCellExpandIcons from '../modus-table-cell-expand-icons';
+import { ModusTableCustomCellElement } from '../modus-table-custom-cell-element';
 
 @Component({
   tag: 'modus-table-cell-main',
@@ -165,7 +172,9 @@ export class ModusTableCellMain {
     };
 
     const renderCell = () => {
-      if (cellDataType === COLUMN_DEF_DATATYPE_LINK) {
+      if (cellDataType === COLUMN_DEF_DATATYPE_CUSTOM) {
+        return <ModusTableCustomCellElement customElement={cellValue as ModusTableCustomCell} />;
+      } else if (cellDataType === COLUMN_DEF_DATATYPE_LINK) {
         return (
           <ModusTableCellLinkElement
             link={cellValue as ModusTableCellLink}
