@@ -19,10 +19,12 @@
 
   .tab {
     align-items: center;
+    background-color: transparent;
     border: solid transparent $rem-3px;
     border-radius: $rem-4px $rem-4px 0 0;
     color: $modus-tab-color;
     display: flex;
+    font-family: $primary-font;
     font-weight: $font-weight-semi-bold;
     justify-content: center;
     overflow: hidden;
