@@ -129,6 +129,12 @@ export class ModusAutocomplete {
     this.convertOptions();
   }
 
+  componentDidRender(): void {
+    if (this.hasFocus && this.displayOptions()) {
+      this.scrollToOptionSelected();
+    }
+  }
+
   @Listen('mousedown', { target: 'document' })
   onMouseDown(event: MouseEvent): void {
     if (!this.hasFocus) {
@@ -397,12 +403,11 @@ export class ModusAutocomplete {
       return;
     }
     const optionList = this.el.shadowRoot.querySelector(`.options-container`) as HTMLUListElement;
-    setTimeout(() => {
-      const selectedOption = optionList.querySelector('li.selected') as HTMLElement;
-      if (selectedOption) {
-        optionList.scrollTop = selectedOption.offsetTop - optionList.offsetHeight + selectedOption.offsetHeight;
-      }
-    }, 0);
+
+    const selectedOption = optionList.querySelector('li.selected') as HTMLElement;
+    if (selectedOption) {
+      optionList.scrollTop = selectedOption.offsetTop - optionList.offsetHeight + selectedOption.offsetHeight;
+    }
   };
 
   render(): unknown {
