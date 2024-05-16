@@ -933,4 +933,32 @@ describe('modus-autocomplete', () => {
       expect(options.length).toEqual(2);
     });
   });
+
+  it('renders aria-label on alert div when set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-autocomplete aria-label="test label"></modus-autocomplete>');
+    let element = await page.find('modus-autocomplete >>> div.autocomplete');
+    expect(element).toBeDefined();
+    expect(element).toHaveAttribute('aria-label');
+    expect(element.getAttribute('aria-label')).toEqual('test label');
+  });
+
+  it('does not render aria-label on alert div when not set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-autocomplete></modus-autocomplete>');
+    let element = await page.find('modus-autocomplete >>> div.autocomplete');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
+
+  it('does not render aria-label on alert div when set to empty string', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-autocomplete aria-label=""></modus-autocomplete>');
+    let element = await page.find('modus-autocomplete >>> div.autocomplete');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
 });

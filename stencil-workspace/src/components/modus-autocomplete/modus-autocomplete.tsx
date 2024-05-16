@@ -411,7 +411,7 @@ export class ModusAutocomplete {
       <div
         aria-disabled={this.disabled ? 'true' : undefined}
         aria-invalid={!!this.errorText}
-        aria-label={this.ariaLabel}
+        aria-label={this.ariaLabel || undefined}
         aria-readonly={this.readOnly}
         aria-required={this.required}
         class={classes}

@@ -50,7 +50,7 @@ export class ModusSlider {
     const className = `modus-slider ${this.disabled ? 'disabled' : ''}`;
 
     return (
-      <div aria-disabled={this.disabled ? 'true' : undefined} aria-label={this.ariaLabel} class={className}>
+      <div aria-disabled={this.disabled ? 'true' : undefined} aria-label={this.ariaLabel || undefined} class={className}>
         {this.label && <label htmlFor={this.sliderId}>{this.label}</label>}
         <input
           class="slider"
