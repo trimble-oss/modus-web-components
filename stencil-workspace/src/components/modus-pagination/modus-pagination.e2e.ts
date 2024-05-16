@@ -86,8 +86,9 @@ describe('modus-pagination', () => {
 
     await page.setContent('<modus-pagination min-page="0" max-page="100" active-page="40"></modus-pagination>');
     const pageChange = await page.spyOnEvent('pageChange');
-    const element = await page.find('modus-pagination >>> li+ li')
-    
+    await page.waitForChanges();
+    const element = await page.find('modus-pagination >>> li:nth-last-child(1)' )
+
     await element.click();
     await page.waitForChanges();
     expect(pageChange).toHaveReceivedEvent();
