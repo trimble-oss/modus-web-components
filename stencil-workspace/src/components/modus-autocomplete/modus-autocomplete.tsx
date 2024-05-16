@@ -216,6 +216,7 @@ export class ModusAutocomplete {
 
   handleInputBlur = () => {
     if (this.hasOptionMatched(this.value) || this.selectedOption === '' || this.value === '' || this.hasFocus) {
+      this.value = '';
       return;
     }
 
@@ -428,7 +429,6 @@ export class ModusAutocomplete {
           this.hasFocus = true;
           this.updateVisibleOptions(this.value);
           this.updateVisibleCustomOptions(this.value);
-          this.scrollToOptionSelected();
         }}
         onFocusout={() => {
           if (this.hasFocus) {
