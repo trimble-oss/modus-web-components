@@ -170,17 +170,7 @@ export class ModusAutocomplete {
     this.value?.length > 0;
 
   hasEnableControl = (): boolean => !!this.showOptionsOnFocus || !!this.disableCloseOnSelect;
-  hasOptionMatched = (value: string) => {
-    const isCustomOption = this.customOptions.length > 0;
 
-    if (isCustomOption) {
-      return !!this.customOptions?.find((el) =>
-        el.getAttribute(DATA_SEARCH_VALUE).toLowerCase().includes(this.selectedOption)
-      );
-    }
-
-    return !!this.visibleOptions.find((el) => el.value === value);
-  };
   displayOptions = () => {
     const showByDefault = this.hasFocus && !this.disabled;
     return showByDefault || (showByDefault && this.hasEnableControl());
@@ -215,7 +205,7 @@ export class ModusAutocomplete {
   };
 
   handleInputBlur = () => {
-    if (this.hasOptionMatched(this.value) || this.selectedOption === '' || this.value === '' || this.hasFocus) {
+    if (this.selectedOption === '' || this.value === '' || this.hasFocus) {
       this.value = '';
       return;
     }
