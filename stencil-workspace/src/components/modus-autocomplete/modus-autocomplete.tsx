@@ -397,7 +397,11 @@ export class ModusAutocomplete {
 
     const selectedOption = optionList.querySelector('li.selected') as HTMLElement;
     if (selectedOption) {
-      optionList.scrollTop = selectedOption.offsetTop - optionList.offsetHeight + selectedOption.offsetHeight;
+      const containerHeight = optionList.offsetHeight;
+      const optionHeight = selectedOption.offsetHeight;
+      const optionTop = selectedOption.offsetTop;
+      const scrollPosition = optionTop - containerHeight + (2 * optionHeight);
+      optionList.scrollTop = Math.max(scrollPosition, 0);
     }
   };
 
