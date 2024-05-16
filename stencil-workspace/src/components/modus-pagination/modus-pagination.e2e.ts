@@ -86,8 +86,8 @@ describe('modus-pagination', () => {
 
     await page.setContent('<modus-pagination min-page="0" max-page="100" active-page="40"></modus-pagination>');
     const pageChange = await page.spyOnEvent('pageChange');
-    const element = await page.find('modus-pagination >>> li.active + li');
-
+    const element = await page.find('modus-pagination >>> li+ li')
+    
     await element.click();
     await page.waitForChanges();
     expect(pageChange).toHaveReceivedEvent();
@@ -127,7 +127,7 @@ describe('modus-pagination', () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-pagination min-page="1" active-page="1" max-page="100"></modus-pagination>');
-    const element = await page.find('modus-pagination >>> li.disabled');
+    const element = await page.find('modus-pagination >>> li button.disabled');
     expect(element).not.toBeNull();
   });
 
@@ -135,7 +135,7 @@ describe('modus-pagination', () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-pagination min-page="1" active-page="100" max-page="100"></modus-pagination>');
-    const element = await page.find('modus-pagination >>> li.disabled');
+    const element = await page.find('modus-pagination >>> li button.disabled');
     expect(element).not.toBeNull();
   });
 
