@@ -19,20 +19,26 @@
   white-space: nowrap;
 
   .checkbox {
-    align-items: center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     background-color: $modus-checkbox-bg;
-    border: $rem-2px solid $modus-checkbox-border-color;
-    border-radius: 1.75px;
-    display: flex;
-    height: $rem-14px;
-    justify-content: center;
-    transition: background-color 0.15s ease-in-out;
-    width: $rem-14px;
+    background-image: var(--modus-checkbox-checked-bg-image);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border:$rem-2px solid $modus-checkbox-border-color;
+    border-radius: 0.25em;
+    flex-shrink: 0;
+    height: $rem-16px;
+    margin-top: 0.1875em;
+    vertical-align: top;
+    width: $rem-16px;
 
-    &.small {
-      border-radius: 1.5px;
-      height: $rem-8px;
-      width: $rem-8px;
+    &:checked {
+      background-color: $modus-checkbox-selected-bg;
+      background-image: $modus-check-checked-bg-image;
+      border-color: $modus-checkbox-selected-border-color;
     }
 
     &:focus,
@@ -42,33 +48,22 @@
       outline-offset: 2px !important;
     }
 
-    &.blue-background {
-      background-color: $modus-checkbox-selected-border-color !important;
-      border: $rem-2px solid $modus-checkbox-selected-border-color !important;
-    }
-
-    &.disabled {
+    &:disabled {
       cursor: default;
       opacity: $modus-checkbox-disabled-opacity;
     }
 
-    .checkmark {
-      align-items: center;
-      display: flex;
-      justify-content: center;
-      transform: scale(0);
-      transition: transform 0.25s ease-in-out;
-      visibility: hidden;
-
-      &.checked {
-        transform: scale(0.75);
-        visibility: visible;
-      }
+    &:indeterminate {
+      background-color: $modus-checkbox-indeterminate-bg;
+      background-image: $modus-check-bg-image-indeterminate;
+      border-color: $modus-checkbox-indeterminate-border-color;
     }
-  }
 
-  input {
-    display: none;
+    &.small {
+      border-radius: 1.5px;
+      height: $rem-12px;
+      width: $rem-12px;
+    }
   }
 
   label {

@@ -58,21 +58,20 @@ export class ModusTabs {
   render(): unknown {
     const tabs = this.tabs.map((tab: Tab) => {
       return (
-        <div
+        <button
           id={`${tab.id}`}
           class={`tab ${tab.active ? 'active' : ''} ${this.classBySize.get(this.size)} ${
             this.fullWidth ? 'resizable' : ''
           } `}
           onClick={() => this.handleTabChange(tab.id)}
-          onKeyDown={(event) => this.handleKeyDown(event, tab.id)}
-          tabIndex={0}>
+          onKeyDown={(event) => this.handleKeyDown(event, tab.id)}>
           {tab.label}
-        </div>
+        </button>
       );
     });
 
     return (
-      <div aria-label={this.ariaLabel} class={`modus-tabs ${this.classBySize.get(this.size)}`}>
+      <div aria-label={this.ariaLabel || undefined} class={`modus-tabs ${this.classBySize.get(this.size)}`}>
         {tabs}
       </div>
     );

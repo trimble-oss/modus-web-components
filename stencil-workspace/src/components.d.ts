@@ -381,10 +381,6 @@ export namespace Components {
           * (optional) If you wish to prevent the propagation of your event, you may opt for this.
          */
         "stopPropagation": boolean;
-        /**
-          * (optional) Tab Index for the checkbox
-         */
-        "tabIndexValue": string | number;
     }
     interface ModusChip {
         /**
@@ -786,6 +782,10 @@ export namespace Components {
           * (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels.
          */
         "logoOptions": ModusNavbarLogoOptions;
+        /**
+          * (optional) The navbar's aria-label.
+         */
+        "navAriaLabel"?: string;
         /**
           * (optional) Whether to show badge on top of notification
          */
@@ -1542,6 +1542,10 @@ export namespace Components {
           * (optional) The toast's aria-label.
          */
         "ariaLabel": string | null;
+        /**
+          * (optional) Time taken to dismiss the toast
+         */
+        "delay": number;
         /**
           * (optional) Whether the toast has a dismiss button.
          */
@@ -2593,6 +2597,7 @@ declare global {
     };
     interface HTMLModusTreeViewItemElementEventMap {
         "checkboxClick": boolean;
+        "itemLabelChange": string;
         "itemClick": boolean;
         "itemExpandToggle": boolean;
         "itemAdded": HTMLElement;
@@ -3038,10 +3043,6 @@ declare namespace LocalJSX {
           * (optional) If you wish to prevent the propagation of your event, you may opt for this.
          */
         "stopPropagation"?: boolean;
-        /**
-          * (optional) Tab Index for the checkbox
-         */
-        "tabIndexValue"?: string | number;
     }
     interface ModusChip {
         /**
@@ -3481,6 +3482,10 @@ declare namespace LocalJSX {
           * (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels.
          */
         "logoOptions"?: ModusNavbarLogoOptions;
+        /**
+          * (optional) The navbar's aria-label.
+         */
+        "navAriaLabel"?: string;
         /**
           * (optional) Whether to show badge on top of notification
          */
@@ -4375,6 +4380,10 @@ declare namespace LocalJSX {
          */
         "ariaLabel"?: string | null;
         /**
+          * (optional) Time taken to dismiss the toast
+         */
+        "delay"?: number;
+        /**
           * (optional) Whether the toast has a dismiss button.
          */
         "dismissible"?: boolean;
@@ -4505,6 +4514,10 @@ declare namespace LocalJSX {
           * An event that fires on tree item expand/collapse
          */
         "onItemExpandToggle"?: (event: ModusTreeViewItemCustomEvent<boolean>) => void;
+        /**
+          * An event that fires on tree item label changes
+         */
+        "onItemLabelChange"?: (event: ModusTreeViewItemCustomEvent<string>) => void;
         /**
           * (optional) Tab Index for the tree item
          */
