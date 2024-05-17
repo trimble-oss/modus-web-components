@@ -144,6 +144,7 @@ export class ModusPagination {
           <button
             aria-label="Previous"
             class={`${this.activePage != this.minPage ? 'hoverable' : 'disabled'}`}
+            disabled={this.activePage === this.minPage}
             onClick={() => this.handleChevronClick(PaginationDirection.Previous)}
             onKeyDown={(event) => this.handleChevronKeydown(event, PaginationDirection.Previous)}>
             {this.prevPageButtonText ? (
@@ -164,6 +165,7 @@ export class ModusPagination {
           <button
             aria-label="Next"
             class={`${this.activePage != this.maxPage ? 'hoverable' : 'disabled'}`}
+            disabled={this.activePage === this.maxPage}
             onClick={() => this.handleChevronClick(PaginationDirection.Next)}
             onKeyDown={(event) => this.handleChevronKeydown(event, PaginationDirection.Next)}>
             {this.nextPageButtonText ? (
