@@ -585,6 +585,10 @@ export namespace Components {
     }
     interface ModusFileDropzone {
         /**
+          * (optional) The dropzone's accepted file types
+         */
+        "acceptFileTypes": string;
+        /**
           * Add a file to the dropzone.
          */
         "addFile": (file: File) => Promise<void>;
@@ -3282,6 +3286,10 @@ declare namespace LocalJSX {
         "toggleElementId"?: string;
     }
     interface ModusFileDropzone {
+        /**
+          * (optional) The dropzone's accepted file types
+         */
+        "acceptFileTypes"?: string;
         /**
           * (optional) The dropzone's aria-label.
          */
