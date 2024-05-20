@@ -13,11 +13,11 @@ describe('modus-pagination', () => {
     <mock:shadow-root>
     <nav class="medium">
       <ul>
-          <li aria-current="page" class="active hoverable" tabindex="0">1</li>
-          <li class="hoverable" tabindex="0">2</li>
-          <li class="hoverable" tabindex="0">3</li>
-          <li class="hoverable" tabindex="0">4</li>
-          <li class="hoverable" tabindex="0">5</li>
+          <li><button aria-current="page" class="active hoverable">1</button></li>
+          <li><button class="hoverable">2</button></li>
+          <li><button class="hoverable">3</button></li>
+          <li><button class="hoverable">4</button></li>
+          <li><button class="hoverable">5</button></li>
       </ul>
     </nav>
     </mock:shadow-root>
