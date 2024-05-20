@@ -122,6 +122,11 @@ export class ModusTreeView {
   }
 
   handleItemDragStartKeyboard(itemId: string, dragContent: HTMLElement, event: KeyboardEvent) {
+    if (event.code === 'Escape' && this.itemDragState) {
+      dragContent.style.transform = `translate(${this.INITIAL_DRAG_POSITION.x}px, ${this.INITIAL_DRAG_POSITION.y}px)`;
+      this.clearItemDropState();
+      this.itemDragState = null;
+    }
     if (event.code === 'Enter') {
       this.currentItem = null;
       if (!this.isDraggingWithKeyboard) {
@@ -149,6 +154,14 @@ export class ModusTreeView {
       }
     }
   }
+  handleKeys(direction: number, skipTwo = false) {
+    if (direction === 1) {
+      this.currentItem = this.items[this.getNextNavigableItem(this.currentItem.nodeId, skipTwo)];
+    } else {
+      this.currentItem = this.items[this.getPrevNavigableItem(this.currentItem.nodeId, skipTwo)];
+    }
+  }
+
   handleArrowKeys(event: KeyboardEvent) {
     if (!this.itemDragState) return;
 
@@ -159,12 +172,19 @@ export class ModusTreeView {
       this.currentItem = this.items[this.itemDragState.itemId];
     }
 
-    if (direction === 1) {
-      this.currentItem = this.items[this.getNextNavigableItem(this.currentItem.nodeId)];
+    this.handleKeys(direction);
+    if (direction == 1) {
+      if (this.currentItem == this.items[this.getNextNavigableItem(this.itemDragState.itemId)]) {
+        this.handleKeys(direction);
+      }
+      if (this.currentItem == this.items[this.itemDragState.itemId]) {
+        this.handleKeys(direction, true);
+      }
     } else {
-      this.currentItem = this.items[this.getPrevNavigableItem(this.currentItem.nodeId)];
+      if (this.currentItem == this.items[this.getNextNavigableItem(this.itemDragState.itemId)]) {
+        this.handleKeys(direction, true);
+      }
     }
-
     let newDragState = { ...this.clearItemDropState() };
     if (this.currentItem.nodeId && this.currentItem.nodeId !== newDragState.itemId) {
       const parents = this.getParentIds(this.currentItem.nodeId);
@@ -409,8 +429,8 @@ export class ModusTreeView {
     return siblings.filter((c) => !this.isItemDisabled(c));
   }
 
-  getNextNavigableItem(itemId: string): string {
-    // If expanded get first child
+  getNextNavigableItem(itemId: string, skipTwo = false): string {
+    // If expanded, get the first child
     if (this.isItemExpanded(itemId)) {
       const validItems = this.getNavigableChildrenIds(itemId);
       if (validItems.length) return validItems[0];
@@ -418,32 +438,39 @@ export class ModusTreeView {
 
     let item = this.items[itemId];
     while (item != null) {
-      // Try to get next sibling
+      // Try to get the next sibling
       const siblings = this.getNavigableChildrenIds(item.parentId);
-      const nextSibling = siblings[siblings.indexOf(item.nodeId) + 1];
+      const currentIndex = siblings.indexOf(item.nodeId);
+      const nextIndex = skipTwo ? currentIndex + 2 : currentIndex + 1;
+      const nextSibling = siblings[nextIndex];
+
       if (nextSibling) {
         return nextSibling;
       }
 
-      // If the sibling does not exist, go up a level to the parent and try again.
+      // If the sibling does not exist, go up a level to the parent and try again
       item = this.items[item.parentId];
     }
 
     return itemId;
   }
 
-  getPrevNavigableItem(itemId: string): string {
+  getPrevNavigableItem(itemId: string, skipTwo = false): string {
     const item = this.items[itemId];
     const siblings = this.getNavigableChildrenIds(item.parentId);
     const index = siblings.indexOf(itemId);
 
-    // focus reached the top item
+    // Focus reached the top item
     if (index === 0) {
       return item.parentId || itemId;
     }
 
-    // get previous item, if expanded get its last child
-    let curr = siblings[index - 1];
+    // Get the previous item, if expanded get its last child
+    let prevIndex = skipTwo ? index - 2 : index - 1;
+    if (prevIndex < 0) {
+      prevIndex = 0; // Ensure we don't go out of bounds
+    }
+    let curr = siblings[prevIndex];
     while (this.isItemExpanded(curr) && this.getNavigableChildrenIds(curr).length > 0) {
       curr = this.getNavigableChildrenIds(curr).pop();
     }
