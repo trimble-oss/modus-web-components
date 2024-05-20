@@ -249,15 +249,15 @@ export class ModusTreeViewItem {
     }
   }
 
-  handleKeyDownItemClick(e?: KeyboardEvent | MouseEvent): void {
+  handleKeyDownItemClick(e: KeyboardEvent): void {
     if (e.defaultPrevented) {
       return;
     }
 
-    const { hasItemSelected, multiSelection } = this.options;
+    const { multiSelection } = this.options;
 
     if (e.shiftKey && multiSelection) {
-      this.itemClick.emit(hasItemSelected(this.nodeId));
+      this.itemClick.emit(e.key === 'ArrowDown');
     }
   }
 
