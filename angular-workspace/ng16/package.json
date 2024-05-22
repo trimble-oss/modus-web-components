@@ -18,7 +18,7 @@
     "@angular/platform-browser": "^16.1.7",
     "@angular/platform-browser-dynamic": "^16.1.7",
     "@angular/router": "^16.1.7",
-    "@trimble-oss/modus-web-components": "0.28.0",
+    "@trimble-oss/modus-web-components": "0.29.0",
     "rxjs": "~7.8.1",
     "tslib": "^2.5.3",
     "zone.js": "~0.13.1"
