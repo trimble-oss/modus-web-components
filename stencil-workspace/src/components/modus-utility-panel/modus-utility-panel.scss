@@ -1,0 +1,50 @@
+.utility-panel {
+  position: fixed;
+  top: 0;
+  right: -312px;
+  width: 312px;
+  height: 100%;
+  transition: right 0.2s ease-out;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  background-color: white;
+
+  &.open {
+    right: 0;
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.25s ease-out;
+    height: 100%;
+  }
+
+  .panel-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .panel-header,
+    .panel-footer {
+      height: 50px;
+      display: flex;
+      align-items: center;
+      padding: 0 1rem;
+    }
+
+    .panel-body {
+      flex: 1;
+      overflow: auto;
+      padding: 1rem;
+    }
+
+    hr {
+      margin: 0;
+      border: none;
+      border-top: 1px solid #ccc;
+    }
+  }
+}
