@@ -9,6 +9,7 @@
 
 | Property                | Attribute                   | Description                                                  | Type      | Default     |
 | ----------------------- | --------------------------- | ------------------------------------------------------------ | --------- | ----------- |
+| `acceptFileTypes`       | `accept-file-types`         | (optional) The dropzone's accepted file types                | `string`  | `undefined` |
 | `ariaLabel`             | `aria-label`                | (optional) The dropzone's aria-label.                        | `string`  | `undefined` |
 | `description`           | `description`               | (optional) The dropzone's description text.                  | `string`  | `undefined` |
 | `dropzoneHeight`        | `dropzone-height`           | (optional) The dropzone's height.                            | `string`  | `undefined` |
