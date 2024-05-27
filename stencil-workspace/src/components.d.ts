@@ -585,6 +585,10 @@ export namespace Components {
     }
     interface ModusFileDropzone {
         /**
+          * (optional) The dropzone's accepted file types
+         */
+        "acceptFileTypes": string;
+        /**
           * Add a file to the dropzone.
          */
         "addFile": (file: File) => Promise<void>;
@@ -782,6 +786,10 @@ export namespace Components {
           * (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels.
          */
         "logoOptions": ModusNavbarLogoOptions;
+        /**
+          * (optional) The navbar's aria-label.
+         */
+        "navAriaLabel"?: string;
         /**
           * (optional) Whether to show badge on top of notification
          */
@@ -1538,6 +1546,10 @@ export namespace Components {
           * (optional) The toast's aria-label.
          */
         "ariaLabel": string | null;
+        /**
+          * (optional) Time taken to dismiss the toast
+         */
+        "delay": number;
         /**
           * (optional) Whether the toast has a dismiss button.
          */
@@ -3275,6 +3287,10 @@ declare namespace LocalJSX {
     }
     interface ModusFileDropzone {
         /**
+          * (optional) The dropzone's accepted file types
+         */
+        "acceptFileTypes"?: string;
+        /**
           * (optional) The dropzone's aria-label.
          */
         "ariaLabel"?: string | null;
@@ -3474,6 +3490,10 @@ declare namespace LocalJSX {
           * (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels.
          */
         "logoOptions"?: ModusNavbarLogoOptions;
+        /**
+          * (optional) The navbar's aria-label.
+         */
+        "navAriaLabel"?: string;
         /**
           * (optional) Whether to show badge on top of notification
          */
@@ -4367,6 +4387,10 @@ declare namespace LocalJSX {
           * (optional) The toast's aria-label.
          */
         "ariaLabel"?: string | null;
+        /**
+          * (optional) Time taken to dismiss the toast
+         */
+        "delay"?: number;
         /**
           * (optional) Whether the toast has a dismiss button.
          */
