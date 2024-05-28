@@ -1,5 +1,5 @@
 .utility-panel {
-  position: fixed;
+  position: absolute;
   top: 0;
   right: -312px;
   width: 312px;
@@ -10,15 +10,14 @@
 
   &.open {
     right: 0;
+    transition: right 0.2s ease-out;
   }
 
   .overlay {
-    position: fixed;
+    position: absolute;
     top: 0;
     right: 0;
     width: 100%;
-    opacity: 0;
-    transition: opacity 0.25s ease-out;
     height: 100%;
   }
 

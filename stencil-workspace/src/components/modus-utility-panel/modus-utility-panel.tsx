@@ -46,8 +46,6 @@ export class ModusUtilityPanel {
   adjustContent() {
     const content = document.querySelector(this.targetContent) as HTMLElement;
 
-    
-
     if (content) {
       content.style.transition = 'margin-right 0.2s ease-out';
       if (this.expanded) {
