@@ -50,8 +50,20 @@ export class ModusTooltip {
   private tooltipElement: HTMLDivElement;
   private readonly showEvents = ['mouseenter', 'mouseover', 'focus'];
   private readonly hideEvents = ['mouseleave', 'blur', 'click'];
-  private showEventsListener = () => this.show();
-  private hideEventsListener = () => this.hide();
+  private hoverTimer: number | undefined;
+
+  private showEventsListener = () => {
+    window.clearTimeout(this.hoverTimer);
+    this.hoverTimer = window.setTimeout(() => {
+      this.show();
+    }, 500);
+  };
+
+  private hideEventsListener = () => {
+    this.hide();
+    window.clearTimeout(this.hoverTimer);
+    this.hoverTimer = undefined;
+  };
 
   componentDidLoad(): void {
     this.tooltipElement = this.element.shadowRoot.querySelector('.tooltip') as HTMLDivElement;
@@ -62,6 +74,7 @@ export class ModusTooltip {
 
   disconnectedCallback(): void {
     this.cleanupPopper();
+    window.clearTimeout(this.hoverTimer);
   }
 
   initializePopper(position: ModusToolTipPlacement): void {
