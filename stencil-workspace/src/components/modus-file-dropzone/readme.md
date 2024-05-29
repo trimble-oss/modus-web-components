@@ -9,6 +9,7 @@
 
 | Property                | Attribute                   | Description                                                  | Type      | Default     |
 | ----------------------- | --------------------------- | ------------------------------------------------------------ | --------- | ----------- |
+| `acceptFileTypes`       | `accept-file-types`         | (optional) The dropzone's accepted file types                | `string`  | `undefined` |
 | `ariaLabel`             | `aria-label`                | (optional) The dropzone's aria-label.                        | `string`  | `undefined` |
 | `description`           | `description`               | (optional) The dropzone's description text.                  | `string`  | `undefined` |
 | `dropzoneHeight`        | `dropzone-height`           | (optional) The dropzone's height.                            | `string`  | `undefined` |
@@ -33,6 +34,12 @@
 ### `addFile(file: File) => Promise<void>`
 
 Add a file to the dropzone.
+
+#### Parameters
+
+| Name   | Type   | Description |
+| ------ | ------ | ----------- |
+| `file` | `File` |             |
 
 #### Returns
 
@@ -63,6 +70,12 @@ Type: `Promise<File[]>`
 ### `removeFile(fileName: string) => Promise<void>`
 
 Remove a file from the dropzone.
+
+#### Parameters
+
+| Name       | Type     | Description |
+| ---------- | -------- | ----------- |
+| `fileName` | `string` |             |
 
 #### Returns
 

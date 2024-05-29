@@ -1,7 +1,10 @@
-// eslint-disable-next-line
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Component, Event, EventEmitter, Prop, h } from '@stencil/core';
-import { IconChevronDownThick } from '../../icons/svgs/icon-chevron-down-thick';
 import { generateElementId } from '../../utils/utils';
+import { IconExpandMoreCircle } from '../../icons/generated-icons/IconExpandMoreCircle';
+import { IconExpandMore } from '../../icons/generated-icons/IconExpandMore';
+import { ModusIconMap } from '../../icons/ModusIconMap';
+import { JSX } from '@stencil/core/internal';
 
 @Component({
   tag: 'modus-accordion-item',
@@ -12,11 +15,17 @@ export class ModusAccordionItem {
   /** (optional) Disables the accordion item, locks expand/collapse. */
   @Prop() disabled: boolean;
 
+  /** (optional) The type of expand button */
+  @Prop() expandButtonType: 'standardArrow' | 'circleArrow' = 'standardArrow';
+
   /** (optional) Whether the accordion item is expanded. */
   @Prop({ mutable: true }) expanded: boolean;
 
   /** (required) The text to render in the header. */
   @Prop() headerText: string;
+
+  /** (optional) The icon to display before the header text. */
+  @Prop() icon: string;
 
   /** (optional) The size of accordion item. */
   @Prop() size: 'condensed' | 'standard' = 'standard';
@@ -102,10 +111,18 @@ export class ModusAccordionItem {
 
   // Trick to restart an element's animation
   // see https://www.charistheo.io/blog/2021/02/restart-a-css-animation-with-javascript/#restarting-a-css-animation
-  // taken from: https://getbootstrap.com/docs/5.2/dist/js/bootstrap.js
+  // taken from: https://getbootstrap.com/docs/5.3/dist/js/bootstrap.js
   reflow = (element) => {
     element.offsetHeight; // eslint-disable-line no-unused-expressions
   };
+
+  renderIcon(): JSX.Element {
+    return (
+      <span class="icon">
+        <ModusIconMap icon={this.icon}></ModusIconMap>
+      </span>
+    );
+  }
 
   render(): unknown {
     const sizeClass = `${this.classBySize.get(this.size)}`;
@@ -127,12 +144,17 @@ export class ModusAccordionItem {
           onClick={() => this.handleHeaderClick()}
           onKeyDown={(event) => this.handleKeydown(event)}
           tabIndex={this.disabled ? -1 : 0}>
+          {this.icon ? this.renderIcon() : null}
           <span class="title">{this.headerText}</span>
           {
             <div
               class={`chevron-container ${this.expanded ? 'reverse' : ''} `}
               ref={(el) => (this.chevronContainerRef = el)}>
-              <IconChevronDownThick size="24"></IconChevronDownThick>
+              {this.expandButtonType == 'circleArrow' ? (
+                <IconExpandMoreCircle size="24"></IconExpandMoreCircle>
+              ) : (
+                <IconExpandMore size="24"></IconExpandMore>
+              )}
             </div>
           }
         </div>

@@ -9,6 +9,7 @@ on:
           - '14'
           - '15'
           - '16'
+          - '17'
         description: The version of Angular you want to build
 
 permissions:
@@ -28,12 +29,33 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Setup Node, build, and publish to the npm, and GitHub registries
-      - name: Setup Node.js environment
+      # Setup Node.js environment for Angular versions up to 16
+      - name: Setup Node.js environment (Angular <= 16)
+        if: ${{ github.event.inputs.angularVersion < 17 }}
         uses: actions/setup-node@v4
         with:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
+
+      # Setup Node.js environment specifically for Angular version 17 and above
+      - name: Setup Node.js environment (Angular >= 17)
+        if: ${{ github.event.inputs.angularVersion >= 17 }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install Modus Web Components
+        run: npm ci
+        working-directory: ./stencil-workspace
+
+      - name: Build Modus Web Components
+        run: npm run build
+        working-directory: ./stencil-workspace
+
+      - name: npm install
+        run: npm i
+        working-directory: ./angular-workspace/ng${{ github.event.inputs.angularVersion }}/projects/trimble-oss/modus-angular-components
 
       - name: Install Angular ${{ github.event.inputs.angularVersion }}
         run: npm ci
@@ -41,23 +63,16 @@ jobs:
       - name: Build Angular ${{ github.event.inputs.angularVersion }}
         run: npm run build
 
-      - name: Change directory
-        run: cd projects/trimble-oss/modus-angular-components
-
-      - name: npm install
-        run: npm i
-
-      - name: Change directory
-        run: cd dist/trimble-oss/modus-angular-components
-
       - name: Set npm Registry Auth Token
         run: npm set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TRIMBLE_OSS_AUTOMATION_TOKEN }}
 
       - name: Publish Angular npm Package Publicly
         run: npm publish --access public
+        working-directory: ./angular-workspace/ng${{ github.event.inputs.angularVersion }}/dist/trimble-oss/modus-angular-components
 
       - name: Set GitHub Registry Auth Token
         run: npm set //npm.pkg.github.com/:_authToken ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish Angular npm Package to GitHub Registry
         run: npm publish --access public --ignore-scripts --@trimble-oss:registry='https://npm.pkg.github.com'
+        working-directory: ./angular-workspace/ng${{ github.event.inputs.angularVersion }}/dist/trimble-oss/modus-angular-components

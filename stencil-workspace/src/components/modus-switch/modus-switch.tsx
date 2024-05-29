@@ -11,7 +11,7 @@ export class ModusSwitch {
   @Prop() ariaLabel: string | null;
 
   /** (optional) Whether the switch is checked. */
-  @Prop({ mutable: true }) checked: boolean;
+  @Prop({ mutable: true }) checked = false;
 
   /** (optional) Whether the switch is disabled. */
   @Prop() disabled: boolean;
@@ -64,14 +64,14 @@ export class ModusSwitch {
     const switchClassName = `switch ${this.checked ? 'checked' : ''}`;
 
     return (
-      <div class={containerClassName} onClick={() => this.handleSwitchClick()} tabIndex={0}>
+      <div class={containerClassName} onClick={() => this.handleSwitchClick()} tabIndex={this.disabled ? -1 : 0}>
         <div class={switchClassName}>
           <span class={`slider`}></span>
         </div>
         <input
-          aria-checked={this.checked}
+          aria-checked={String(this.checked)}
           aria-disabled={this.disabled ? 'true' : undefined}
-          aria-label={this.ariaLabel}
+          aria-label={this.ariaLabel || undefined}
           checked={this.checked}
           disabled={this.disabled}
           ref={(el) => (this.checkboxInput = el as HTMLInputElement)}

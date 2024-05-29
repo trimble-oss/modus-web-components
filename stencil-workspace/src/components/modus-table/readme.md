@@ -59,6 +59,12 @@
 
 Returns data of a column.
 
+#### Parameters
+
+| Name          | Type     | Description           |
+| ------------- | -------- | --------------------- |
+| `accessorKey` | `string` | : Column name as key. |
+
 #### Returns
 
 Type: `Promise<unknown[]>`
@@ -68,6 +74,13 @@ Type: `Promise<unknown[]>`
 ### `toggleColumnVisibility(columnId: string, show: boolean) => Promise<void>`
 
 Toggle the table column visibility
+
+#### Parameters
+
+| Name       | Type      | Description                                   |
+| ---------- | --------- | --------------------------------------------- |
+| `columnId` | `string`  | Column id                                     |
+| `show`     | `boolean` | Boolean value decides to visibility of column |
 
 #### Returns
 

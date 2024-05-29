@@ -10,7 +10,6 @@ import {
 import { Row } from '@tanstack/table-core';
 import { ModusTableRowAction } from '../../../../models/modus-table.models';
 import { TableContext } from '../../../../models/table-context.models';
-import { TableRowActionsMenuEvent } from '../../../../models/table-row-actions.models';
 
 @Component({
   tag: 'modus-table-row-actions',
@@ -20,7 +19,7 @@ export class ModusTableRowActions {
   @Prop() row: Row<unknown>;
   @Prop() context: TableContext;
 
-  @Event() overflowRowActions: EventEmitter<TableRowActionsMenuEvent>;
+  @Event() overflowRowActions: EventEmitter<unknown>;
 
   private overflowButtonRef: HTMLModusButtonElement;
 

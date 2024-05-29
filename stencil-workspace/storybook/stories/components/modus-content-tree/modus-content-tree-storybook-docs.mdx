@@ -107,6 +107,7 @@ It is located on the left side of the screen and cannot be combined with Side Na
     <modus-tree-view-item
       node-id="5"
       label="More ..."
+      is-last-child="true"
       class="hydrated"></modus-tree-view-item>
   </modus-tree-view-item>
 </modus-tree-view>
@@ -127,6 +128,64 @@ It is located on the left side of the screen and cannot be combined with Side Na
   selected-items="false"
   size="condensed"
   class="hydrated">
+  <modus-tree-view-item node-id="1" label="Inbox" class="hydrated">
+    <modus-tree-view-item
+      node-id="2"
+      label="Personal"
+      class="hydrated"></modus-tree-view-item>
+    <modus-tree-view-item
+      node-id="3"
+      label="Work"
+      class="hydrated"></modus-tree-view-item>
+    <modus-tree-view-item
+      node-id="4"
+      label="Social"
+      class="hydrated"></modus-tree-view-item>
+    <modus-tree-view-item
+      node-id="5"
+      label="More ..."
+      class="hydrated"></modus-tree-view-item>
+  </modus-tree-view-item>
+  <modus-tree-view-item node-id="6" label="Archived" class="hydrated">
+    <modus-tree-view-item node-id="7" label="Folder1" class="hydrated">
+      <modus-tree-view-item
+        node-id="8"
+        label="File1"
+        class="hydrated"></modus-tree-view-item>
+      <modus-tree-view-item node-id="9" label="Folder2" class="hydrated">
+        <modus-tree-view-item
+          node-id="10"
+          label="File2"
+          class="hydrated"></modus-tree-view-item>
+      </modus-tree-view-item>
+      <modus-tree-view-item
+        node-id="11"
+        label="File3"
+        class="hydrated"></modus-tree-view-item>
+    </modus-tree-view-item>
+  </modus-tree-view-item>
+  <modus-tree-view-item
+    node-id="12"
+    label="Spam"
+    class="hydrated"></modus-tree-view-item>
+</modus-tree-view>
+```
+
+### Borderless
+
+<Story id="components-content-tree--borderless" />
+
+```html
+<modus-tree-view
+  borderless="true"
+  style="width:400px;"
+  checkbox-selection="true"
+  checked-items="false"
+  expanded-items="false"
+  multi-checkbox-selection="false"
+  multi-selection="false"
+  selected-items="false"
+  size="condensed">
   <modus-tree-view-item node-id="1" label="Inbox" class="hydrated">
     <modus-tree-view-item
       node-id="2"
@@ -377,9 +436,9 @@ It is located on the left side of the screen and cannot be combined with Side Na
       <modus-tree-view-item node-Id="5" label="More ..."></modus-tree-view-item>
     </modus-tree-view-item>
     <modus-tree-view-item node-Id="6" label="Archived">
-      <modus-tree-view-item node-Id="7" label="Folder1">
+      <modus-tree-view-item node-Id="7 is-last-child="true" label="Folder1">
         <modus-tree-view-item node-Id="8" label="File1"></modus-tree-view-item>
-        <modus-tree-view-item node-Id="9" label="File3"></modus-tree-view-item>
+        <modus-tree-view-item node-Id="9" is-last-child="true" label="File3"></modus-tree-view-item>
       </modus-tree-view-item>
     </modus-tree-view-item>
   </modus-tree-view>
@@ -556,12 +615,12 @@ It is located on the left side of the screen and cannot be combined with Side Na
     </modus-tree-view-item>
     <modus-tree-view-item node-Id="6">
       <div slot="label">Archived</div>
-      <modus-tree-view-item node-Id="7">
+      <modus-tree-view-item is-last-child="true" node-Id="7">
         <div slot="label">Folder1</div>
         <modus-tree-view-item node-Id="8">
           <div slot="label">File1</div>
         </modus-tree-view-item>
-        <modus-tree-view-item node-Id="11">
+        <modus-tree-view-item is-last-child="true" node-Id="11">
           <div slot="label">File2</div>
         </modus-tree-view-item>
       </modus-tree-view-item>
@@ -686,6 +745,7 @@ Every item and the elements such as drag icon, expand & collapse icon and the ch
 
 | Property                 | Attribute                  | Description                                                                                                                                                                                   | Type                                   | Default      |
 | ------------------------ | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- | ------------ |
+| `borderless`             | `borderless`               | (optional) Whether the content tree and items have a border or not                                                                                                                            | `boolean`                              | `undefined`  |
 | `checkboxSelection`      | `checkbox-selection`       | (optional) Enables checkbox selection on each tree item                                                                                                                                       | `boolean`                              | `undefined`  |
 | `checkedItems`           | --                         | (optional) Set checked tree items                                                                                                                                                             | `string[]`                             | `[]`         |
 | `disableTabbing`         | `disable-tabbing`          | (optional) Disable usage of <kbd>Tab</kbd> key to focus elements inside a tree view. Use `Arrow Up/Down` for focussing a tree item and `Shift + Arrow Right` for focussing a checkbox inside the item. | `boolean`                              | `undefined`  |
@@ -707,6 +767,7 @@ Every item and the elements such as drag icon, expand & collapse icon and the ch
 | `label` _(required)_  | `label`           | (required) Label for the tree item                                                                                                   | `string`                | `undefined` |
 | `nodeId` _(required)_ | `node-id`         | (required) Unique tree item identifier                                                                                               | `string`                | `undefined` |
 | `tabIndexValue`       | `tab-index-value` | (optional) Tab Index for the tree item                                                                                               | `number \| string`      | `0`         |
+| `isLastChild          | `is-last-child`   |  To be set true when the tree item is an expandable last child                                                                       | `boolean`               |  false      |
 
 ### DOM Events
 
@@ -724,6 +785,7 @@ Every item and the elements such as drag icon, expand & collapse icon and the ch
 | checkboxClick    | An event that fires on tree item checkbox click                                       | boolean                |
 | itemClick        | An event that fires on tree item click                                                | boolean                |
 | itemExpandToggle | An event that fires on tree item expand/collapse                                      | boolean                |
+| itemLabelChange  | An event that fires on tree item label change                                         | `CustomEvent<string>`  |
 
 ### Methods
 

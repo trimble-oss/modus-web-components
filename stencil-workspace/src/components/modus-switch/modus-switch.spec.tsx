@@ -14,7 +14,26 @@ describe('modus-switch', () => {
             <div class="switch">
               <span class="slider"></span>
             </div>
-            <input role="switch" type="checkbox">
+            <input aria-checked="false" role="switch" type="checkbox">
+          </div>
+        </mock:shadow-root>
+      </modus-switch>
+    `);
+  });
+
+  it('sets tabindex to -1 when disabled', async () => {
+    const page = await newSpecPage({
+      components: [ModusSwitch],
+      html: '<modus-switch disabled></modus-switch>',
+    });
+    expect(page.root).toEqualHtml(`
+      <modus-switch disabled>
+        <mock:shadow-root>
+          <div class="disabled medium modus-switch" tabindex="-1">
+            <div class="switch">
+              <span class="slider"></span>
+            </div>
+            <input aria-checked="false" role="switch" aria-disabled="true" disabled type="checkbox">
           </div>
         </mock:shadow-root>
       </modus-switch>

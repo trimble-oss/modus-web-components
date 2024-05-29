@@ -1,4 +1,4 @@
-// eslint-disable-next-line
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Component, h, Prop } from '@stencil/core';
 
 @Component({
@@ -12,7 +12,7 @@ export class ModusAccordion {
 
   render(): unknown {
     return (
-      <div aria-label={this.ariaLabel} class="accordion">
+      <div aria-label={this.ariaLabel || undefined} class="accordion">
         <slot />
       </div>
     );

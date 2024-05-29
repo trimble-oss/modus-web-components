@@ -13,6 +13,13 @@ export default {
         type: { summary: 'boolean' },
       },
     },
+    navAriaLabel: {
+      name: 'nav-aria-label',
+      description: "The navbar's aria-label",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
     showHelp: {
       name: 'show-help',
       description: 'Toggle the help button',
@@ -64,7 +71,14 @@ export default {
       table: {
         type: { summary: 'ModusNavbarTooltip' },
       },
-    }
+    },
+    notificationCount:{
+      name: 'notification-count',
+      description: 'To add the counter value to the notification icon',
+      table: {
+        type: { summary: 'number' },
+      },
+    },
   },
   parameters: {
     actions: {
@@ -109,14 +123,17 @@ const defaultApps = [{
   url: 'https://modus.trimble.com/',
 }];
 
-const Template = ({ buttons, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
+const Template = ({ buttons, notificationCount, enableSearchOverlay, helpTooltip, navAriaLabel, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
   <modus-navbar
     enable-search-overlay=${enableSearchOverlay}
+    nav-aria-label=${navAriaLabel}
     show-apps-menu
     show-help=${showHelp}
     show-main-menu
     show-profile=${showProfile}
     show-search=${showSearch}
+    notification-count=${notificationCount}
+    show-notifications
     .apps=${defaultApps}
     .buttons=${buttons}
     .helpTooltip=${helpTooltip}
@@ -148,6 +165,7 @@ Default.args = {
     { id: 'notificationMenu', icon: 'notifications' },
   ],
   helpTooltip: undefined,
+  navAriaLabel: 'Default',
   profileMenuOptions: {
     avatarUrl: workingAvatarUrl,
     email: 'modus_user@trimble.com',
@@ -174,16 +192,19 @@ Default.args = {
   showHelp: false,
   showProfile: true,
   showSearch: false,
+  notificationCount: 0
 };
 
-const FailedToLoadAvatarTemplate = ({ buttons, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
+const FailedToLoadAvatarTemplate = ({ buttons, notificationCount, enableSearchOverlay, helpTooltip, navAriaLabel, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
   <modus-navbar
     enable-search-overlay=${enableSearchOverlay}
+    nav-aria-label=${navAriaLabel}
     show-apps-menu
     show-help=${showHelp}
     show-help
     show-main-menu
     show-notifications
+    notification-count=${notificationCount}
     show-profile=${showProfile}
     show-search=${showSearch}
     .apps=${defaultApps}
@@ -202,6 +223,7 @@ FailedAvatar.args = {
   buttons: [],
   enableSearchOverlay: false,
   helpTooltip: undefined,
+  navAriaLabel: 'Failed Avatar',
   profileMenuOptions: {
     avatarUrl: failingAvatarUrl,
     email: 'modus_user@trimble.com',
@@ -213,16 +235,19 @@ FailedAvatar.args = {
   showHelp: false,
   showProfile: true,
   showSearch: false,
+  notificationCount: 0
 };
 
-const BlueTemplate = ({ buttons, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
+const BlueTemplate = ({ buttons, notificationCount, enableSearchOverlay, helpTooltip, navAriaLabel, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
   <modus-navbar
     enable-search-overlay=${enableSearchOverlay}
+    nav-aria-label=${navAriaLabel}
     show-apps-menu
     show-help=${showHelp}
     show-help
     show-main-menu
     show-notifications
+    notification-count=${notificationCount}
     show-profile=${showProfile}
     show-search=${showSearch}
     variant="blue"
@@ -242,6 +267,7 @@ BlueNavbar.args = {
   buttons: [],
   enableSearchOverlay: false,
   helpTooltip: undefined,
+  navAriaLabel: 'Blue navbar',
   profileMenuOptions: {
     avatarUrl: workingAvatarUrl,
     email: 'modus_user@trimble.com',
@@ -253,4 +279,5 @@ BlueNavbar.args = {
   showHelp: false,
   showProfile: true,
   showSearch: false,
+  notificationCount: 0
 };

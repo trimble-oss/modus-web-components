@@ -13,6 +13,9 @@ export class ModusFileDropzone {
   @State() error: 'maxFileCount' | 'maxFileNameLength' | 'maxTotalFileSize' | null = null;
   @State() fileDraggedOver = false;
 
+  /** (optional) The dropzone's accepted file types */
+  @Prop() acceptFileTypes: string;
+
   /** (optional) The dropzone's aria-label. */
   @Prop() ariaLabel: string | null;
 
@@ -178,6 +181,7 @@ export class ModusFileDropzone {
             multiple={this.multiple}
             ref={(el) => (this.fileInput = el as HTMLInputElement)}
             type="file"
+            accept={this.acceptFileTypes}
           />
           <div class="header">
             <label>{this.label}</label>

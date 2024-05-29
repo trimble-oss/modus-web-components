@@ -48,7 +48,7 @@ export class ModusTooltip {
 
   private popperInstance: Instance;
   private tooltipElement: HTMLDivElement;
-  private readonly showEvents = ['mouseenter', 'focus'];
+  private readonly showEvents = ['mouseenter', 'mouseover', 'focus'];
   private readonly hideEvents = ['mouseleave', 'blur', 'click'];
   private showEventsListener = () => this.show();
   private hideEventsListener = () => this.hide();
@@ -143,7 +143,7 @@ export class ModusTooltip {
     return (
       <Fragment>
         <slot />
-        <div tabIndex={-1} class={{ tooltip: true, hide: hidden }} aria-label={this.ariaLabel} role="tooltip">
+        <div tabIndex={-1} class={{ tooltip: true, hide: hidden }} aria-label={this.ariaLabel || undefined} role="tooltip">
           {this.text}
           <div id="arrow" data-popper-arrow></div>
         </div>

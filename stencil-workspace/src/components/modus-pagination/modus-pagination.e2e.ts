@@ -86,7 +86,8 @@ describe('modus-pagination', () => {
 
     await page.setContent('<modus-pagination min-page="0" max-page="100" active-page="40"></modus-pagination>');
     const pageChange = await page.spyOnEvent('pageChange');
-    const element = await page.find('modus-pagination >>> li.active + li');
+    await page.waitForChanges();
+    const element = await page.find('modus-pagination >>> li:nth-last-child(1)' )
 
     await element.click();
     await page.waitForChanges();
@@ -127,7 +128,7 @@ describe('modus-pagination', () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-pagination min-page="1" active-page="1" max-page="100"></modus-pagination>');
-    const element = await page.find('modus-pagination >>> li.disabled');
+    const element = await page.find('modus-pagination >>> li button.disabled');
     expect(element).not.toBeNull();
   });
 
@@ -135,7 +136,35 @@ describe('modus-pagination', () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-pagination min-page="1" active-page="100" max-page="100"></modus-pagination>');
-    const element = await page.find('modus-pagination >>> li.disabled');
+    const element = await page.find('modus-pagination >>> li button.disabled');
     expect(element).not.toBeNull();
+  });
+
+  it('renders aria-label on alert div when set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-pagination aria-label="test label"></modus-pagination>');
+    let element = await page.find('modus-pagination >>> nav');
+    expect(element).toBeDefined();
+    expect(element).toHaveAttribute('aria-label');
+    expect(element.getAttribute('aria-label')).toEqual('test label');
+  });
+
+  it('does not render aria-label on alert div when not set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-pagination></modus-pagination>');
+    let element = await page.find('modus-pagination >>> nav');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
+
+  it('does not render aria-label on alert div when set to empty string', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-pagination aria-label=""></modus-pagination>');
+    let element = await page.find('modus-pagination >>> nav');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
   });
 });
