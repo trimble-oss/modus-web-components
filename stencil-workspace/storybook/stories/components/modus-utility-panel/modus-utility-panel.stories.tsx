@@ -88,10 +88,10 @@ const DefaultTemplate = ({
     </div>
   </div>
 </div>
-${setEventListeners('#defaultTemplate')}
+${setEventListeners()}
 `;
 
-const setEventListeners = (containerId) => {
+const setEventListeners = () => {
   const tag = document.createElement('script');
   tag.innerHTML = `
   document.addEventListener('helpOpen', (e) => {

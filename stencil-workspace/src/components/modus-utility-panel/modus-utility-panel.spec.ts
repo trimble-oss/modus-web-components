@@ -90,6 +90,5 @@ describe('modus-utility-panel', () => {
         </mock:shadow-root>
       </modus-utility-panel>
     `);
-
   });
 });
