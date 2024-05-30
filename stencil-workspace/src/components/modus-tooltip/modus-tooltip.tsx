@@ -65,11 +65,23 @@ export class ModusTooltip {
     this.hoverTimer = undefined;
   };
 
+  private attachEventListeners(): void {
+    const target = this.element.firstElementChild;
+    if (!target) return;
+
+    this.showEvents.forEach((event) => {
+      target.addEventListener(event, this.showEventsListener);
+    });
+
+    this.hideEvents.forEach((event) => {
+      target.addEventListener(event, this.hideEventsListener);
+    });
+  }
+
+
   componentDidLoad(): void {
     this.tooltipElement = this.element.shadowRoot.querySelector('.tooltip') as HTMLDivElement;
-    if (!this.disabled && this.text?.length > 1) {
-      this.initializePopper(this.position);
-    }
+    this.attachEventListeners();
   }
 
   disconnectedCallback(): void {
@@ -123,6 +135,11 @@ export class ModusTooltip {
   }
 
   show(): void {
+
+    if (!this.popperInstance && this.text?.length > 1 && !this.disabled) {
+      this.initializePopper(this.position);
+    }
+
     if (this.popperInstance) {
       // Make the tooltip visible
       this.tooltipElement.setAttribute('data-show', '');
