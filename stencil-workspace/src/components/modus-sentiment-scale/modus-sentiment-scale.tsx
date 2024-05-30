@@ -1,4 +1,4 @@
-// eslint-disable-next-line
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Component, Prop, State, h, Event, EventEmitter } from '@stencil/core';
 import {
   SMILEYS_TYPE_MAP,
@@ -61,8 +61,8 @@ export class ModusSentimentScale {
     return (
       <div
         class="sentiment-scale-container"
-        aria-disabled={this.disabled ? 'true' : ''}
-        aria-label={this.ariaLabel}
+        aria-disabled={this.disabled ? 'true' : undefined}
+        aria-label={this.ariaLabel || undefined}
         role="group">
         {iconsMap &&
           Array.from(iconsMap).map(([key, value]) => {

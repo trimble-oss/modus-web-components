@@ -35,6 +35,9 @@ export class ModusTreeViewItem {
   /** An event that fires on tree item checkbox click */
   @Event() checkboxClick: EventEmitter<boolean>;
 
+  /** An event that fires on tree item label changes */
+  @Event() itemLabelChange: EventEmitter<string>;
+
   /** (optional) Disables the tree item */
   @Prop() disabled: boolean;
 
@@ -64,6 +67,12 @@ export class ModusTreeViewItem {
 
   /** (optional) Actions that can be performed on each item. A maximum of 3 icons will be shown, including overflow menu and expand icons. */
   @Prop({ mutable: true }) actions: ModusActionBarOptions[];
+
+  /** To be set true when the tree item is an expandable last child */
+  @Prop() isLastChild: boolean;
+
+  @State() isExpanded: boolean;
+  @State() isChildren: boolean;
 
   @Listen('actionBarClick')
   handleActionBarClick(event: CustomEvent) {
@@ -129,6 +138,15 @@ export class ModusTreeViewItem {
     if (this.refLabelInput && this.editable) {
       this.refLabelInput.focusInput();
     }
+    const children = this.element.querySelectorAll('modus-tree-view-item') as unknown as HTMLModusTreeViewItemElement[];
+    children.forEach((child) => {
+      child.setChildren();
+    });
+  }
+
+  @Method()
+  async setChildren() {
+    this.isChildren = true;
   }
 
   componentWillLoad() {
@@ -206,6 +224,7 @@ export class ModusTreeViewItem {
       const { onItemExpandToggle, hasItemExpanded } = this.options;
 
       onItemExpandToggle(this.nodeId);
+      this.isExpanded = hasItemExpanded(this.nodeId);
       this.itemExpandToggle.emit(hasItemExpanded(this.nodeId));
     }
   }
@@ -259,6 +278,7 @@ export class ModusTreeViewItem {
     switch (e.code) {
       case 'Enter':
         e.preventDefault();
+        this.itemLabelChange.emit(this.refLabelInput.value);
         this.updateLabelInput();
         break;
     }
@@ -404,7 +424,7 @@ export class ModusTreeViewItem {
     };
     const sizeClass = `${TREE_ITEM_SIZE_CLASS.get(size || 'standard')}`;
     const tabIndex: string | number = isDisabled ? -1 : this.tabIndexValue;
-    const treeItemClass = `tree-item ${selected ? 'selected' : ''} ${sizeClass} ${isDisabled ? 'disabled' : ''} ${borderless ? 'borderless' : ''}`;
+    const treeItemClass = `tree-item ${this.isExpanded ? 'expanded' : ''} ${this.isChildren ? 'is-children' : ''} ${this.isLastChild && !this.isExpanded ? 'is-last-child' : ''}${selected ? 'selected' : ''} ${sizeClass} ${isDisabled ? 'disabled' : ''} ${borderless ? 'borderless' : ''}`;
     const treeItemChildrenClass = `tree-item-group ${sizeClass} ${expanded ? 'expanded' : ''}`;
 
     return (
@@ -432,13 +452,13 @@ export class ModusTreeViewItem {
             tabindex={expandable ? tabIndex : -1}>
             <this.CustomSlot
               className="inline-flex rotate-right"
-              defaultContent={<ModusIconMap icon="expand_more_bold" size="24" />}
+              defaultContent={<ModusIconMap icon="expand_more" size="24" />}
               display={!expanded}
               name={this.SLOT_EXPAND_ICON}
             />
             <this.CustomSlot
               className="inline-flex"
-              defaultContent={<ModusIconMap icon="expand_more_bold" size="24" />}
+              defaultContent={<ModusIconMap icon="expand_more" size="24" />}
               display={expanded}
               name={this.SLOT_COLLAPSE_ICON}
             />
@@ -452,8 +472,7 @@ export class ModusTreeViewItem {
                 indeterminate={indeterminate}
                 onClick={(e) => this.handleCheckboxClick(e)}
                 onKeyDown={(e) => this.handleDefaultKeyDown(e, () => this.handleCheckboxClick(e))}
-                ref={(el) => (this.refCheckbox = el)}
-                tabIndexValue={tabIndex}></modus-checkbox>
+                ref={(el) => (this.refCheckbox = el)}></modus-checkbox>
             </div>
           )}
 

@@ -171,7 +171,7 @@ export class ModusTimePicker {
   getAriaControls(): { [key: string]: boolean | string } {
     return {
       'aria-invalid': !!this.errorText,
-      'aria-label': this.ariaLabel,
+      'aria-label': this.ariaLabel || undefined,
       'aria-required': this.required,
     };
   }
@@ -209,7 +209,7 @@ export class ModusTimePicker {
       <input
         {...ariaControls}
         id="time-input"
-        aria-label={this.label ? null : this.ariaLabel}
+        aria-label={(this.label ? null : this.ariaLabel) || undefined}
         aria-placeholder={this.placeholder}
         disabled={this.disabled}
         onInput={(event) => this.handleInputChange(event)}

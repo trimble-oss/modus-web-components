@@ -113,7 +113,7 @@ export const ModusTableColumnHeaderLabel: FunctionalComponent<ModusTableColumnHe
     }
 
     return (
-      <modus-tooltip text={sortingStatus}>
+      <modus-tooltip class="column-title" text={sortingStatus}>
         <span {...containerProps} class={`header-text ${canSort && isSorted ? 'sorted' : ''}`}>
           {column.columnDef.header}
         </span>

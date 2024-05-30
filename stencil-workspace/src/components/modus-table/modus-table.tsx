@@ -593,6 +593,7 @@ export class ModusTable {
       toolbarOptions: this.toolbarOptions,
       preSelectedRows: this.getPreselectedRowState(),
       defaultSort: this.defaultSort,
+      currentPageSize: this.manualPaginationOptions?.currentPageSize,
 
       ...(this.manualPaginationOptions && {
         manualPagination: true,

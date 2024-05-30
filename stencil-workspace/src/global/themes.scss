@@ -196,6 +196,7 @@
 
   // Checkbox and Radio button Inputs
   --modus-check-input-bg: var(--modus-white);
+  --modus-check-selected-bg: var(--modus-highlight-blue-color);
   --modus-check-input-border-color: var(--modus-gray-4);
   --modus-check-input-disabled-opacity: 0.3;
   --modus-check-input-label-color: var(--modus-input-label-color);
@@ -446,6 +447,8 @@
   // Accordion
   --modus-accordion-item-header-hover-bg: var(--modus-gray-8);
   --modus-accordion-item-header-expand-color: var(--modus-highlight-blue-color);
+  --modus-accordion-item-header-expanded-bg: rgba(1, 154, 235, 0.3);
+  --modus-accordion-item-expanded-border-left-color: var(--modus-blue);
 
   // Alert
   // Background
@@ -560,6 +563,8 @@
   --modus-check-input-label-color: var(--modus-input-label-color);
   --modus-check-input-hover-border-color: var(--modus-highlight-blue-color);
   --modus-check-input-active-border-color: var(--modus-highlight-blue-color);
+  --modus-check-checked-bg-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 5.8 4.7'%3E%3Cpath fill='%23fff' d='M1.7 4.7.1 3.2C0 3 0 2.7.1 2.5s.5-.2.7 0l.9.9L4.9.2c.2-.2.5-.2.7-.1s.2.5 0 .7L1.7 4.7z'/%3E%3C/svg%3E");
+  --modus-check-bg-image-indeterminate: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10h8'/%3e%3c/svg%3e");
 
   // Card
   --modus-card-bg: var(--modus-gray-9);

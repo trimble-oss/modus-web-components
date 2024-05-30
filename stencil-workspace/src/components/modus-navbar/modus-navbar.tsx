@@ -40,6 +40,9 @@ import { ModusNavbarButtonList } from './button-list/modus-navbar-button-list';
 export class ModusNavbar {
   @Element() element: HTMLElement;
 
+  /** (optional) The navbar's aria-label. */
+  @Prop() navAriaLabel?: string;
+
   /** (optional) The apps to render in the apps menu. */
   @Prop() apps: ModusNavbarApp[];
 
@@ -69,6 +72,9 @@ export class ModusNavbar {
 
   /** (optional) Whether to show notifications. */
   @Prop() showNotifications: boolean;
+
+  /** (optional) Whether to show badge on top of notification */
+  @Prop() notificationCount: number;
 
   /** (optional) Whether to show the placeholder for Pendo. */
   @Prop() showPendoPlaceholder: boolean;
@@ -292,6 +298,17 @@ export class ModusNavbar {
 
   helpMenuClickHandler(event: MouseEvent): void {
     event.preventDefault();
+    this.openHelpMenu();
+  }
+
+  helpMenuKeyHandler(event: KeyboardEvent): void {
+    if (event.code !== 'Enter' && event.code !== 'Space') {
+      return;
+    }
+    this.openHelpMenu();
+  }
+
+  openHelpMenu(): void {
     if (this.helpUrl) window.open(this.helpUrl, '_blank');
     this.helpOpen.emit();
   }
@@ -349,6 +366,24 @@ export class ModusNavbar {
     }
   }
 
+  getNotificationCount(): string {
+    if (!this.notificationCount) {
+      return;
+    }
+
+    const counter = this.notificationCount;
+
+    if (counter < 1) {
+      return '1';
+    }
+
+    if (counter > 99) {
+      return '99+';
+    }
+
+    return this.notificationCount.toString();
+  }
+
   render(): unknown {
     const direction = this.reverse ? 'reverse' : '';
     const shadow = this.showShadow ? 'shadow' : '';
@@ -361,10 +396,11 @@ export class ModusNavbar {
         onClose={() => this.searchOverlayCloseEventHandler()}
         onSearch={(event) => this.searchChange.emit(event.detail)}></modus-navbar-search-overlay>
     );
+    const counterValue = this.getNotificationCount();
 
     return (
       <Host id={this.componentId}>
-        <nav class={`${direction} ${shadow} ${variant}`}>
+        <nav class={`${direction} ${shadow} ${variant}`} aria-label={this.navAriaLabel}>
           {!this.searchOverlayVisible && (
             <Fragment>
               <div class={`left ${direction}`}>
@@ -398,7 +434,7 @@ export class ModusNavbar {
                   <div class="navbar-button search" data-test-id="search-menu">
                     <modus-tooltip
                       text={this.searchTooltip?.text}
-                      aria-label={this.searchTooltip?.ariaLabel}
+                      aria-label={this.searchTooltip?.ariaLabel || undefined}
                       position="bottom">
                       <span
                         class="navbar-button-icon"
@@ -436,6 +472,16 @@ export class ModusNavbar {
                         onClick={(event) => this.notificationsMenuClickHandler(event)}
                         pressed={this.notificationsMenuVisible}
                       />
+                      {counterValue && (
+                        <modus-badge
+                          class="badge"
+                          color="danger"
+                          size="medium"
+                          type="counter"
+                          aria-label="Notification badge">
+                          {counterValue}
+                        </modus-badge>
+                      )}
                     </span>
                     {this.notificationsMenuVisible && (
                       <modus-navbar-notifications-menu reverse={this.reverse}>
@@ -447,9 +493,18 @@ export class ModusNavbar {
                 {this.showPendoPlaceholder && <div class={'pendo-placeholder'} />}
                 {this.showHelp && (
                   <div class="navbar-button" data-test-id="help-menu">
-                    <modus-tooltip text={this.helpTooltip?.text} aria-label={this.helpTooltip?.ariaLabel} position="bottom">
-                      <span class="navbar-button-icon" role="button" aria-label="Help" tabIndex={0}>
-                        <IconHelp size="24" onClick={(event) => this.helpMenuClickHandler(event)} />
+                    <modus-tooltip
+                      text={this.helpTooltip?.text}
+                      aria-label={this.helpTooltip?.ariaLabel || undefined}
+                      position="bottom">
+                      <span
+                        class="navbar-button-icon"
+                        role="button"
+                        onKeyDown={(event) => this.helpMenuKeyHandler(event)}
+                        aria-label="Help"
+                        onClick={(event) => this.helpMenuClickHandler(event)}
+                        tabIndex={0}>
+                        <IconHelp size="24" />
                       </span>
                     </modus-tooltip>
                   </div>
@@ -481,7 +536,7 @@ export class ModusNavbar {
                   <div class="profile-menu">
                     <modus-tooltip
                       text={this.profileMenuOptions?.tooltip?.text}
-                      aria-label={this.profileMenuOptions?.tooltip?.ariaLabel}
+                      aria-label={this.profileMenuOptions?.tooltip?.ariaLabel || undefined}
                       disabled={this.profileMenuVisible}
                       position="bottom">
                       {this.profileMenuOptions?.avatarUrl ? (

@@ -9,6 +9,8 @@ import { ModusActionBarOptions } from "./components/modus-action-bar/modus-actio
 import { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
 import { BadgeProperties } from "./components/modus-badge/modus-badge";
 import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
+import { ButtonColor, ButtonSize, ButtonStyle, ButtonType } from "./components/modus-button/modus-button.models";
+import { ButtonGroupSelectionType } from "./components/modus-button-group/modus-button-group.models";
 import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 import { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
 import { ModusIconName } from "./icons/ModusIconUtilities";
@@ -30,6 +32,8 @@ export { ModusActionBarOptions } from "./components/modus-action-bar/modus-actio
 export { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
 export { BadgeProperties } from "./components/modus-badge/modus-badge";
 export { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
+export { ButtonColor, ButtonSize, ButtonStyle, ButtonType } from "./components/modus-button/modus-button.models";
+export { ButtonGroupSelectionType } from "./components/modus-button-group/modus-button-group.models";
 export { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 export { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
 export { ModusIconName } from "./icons/ModusIconUtilities";
@@ -246,11 +250,11 @@ export namespace Components {
         /**
           * (optional) The style of the button
          */
-        "buttonStyle": 'borderless' | 'fill' | 'outline';
+        "buttonStyle": ButtonStyle;
         /**
           * (optional) The color of the button
          */
-        "color": 'danger' | 'primary' | 'secondary' | 'tertiary';
+        "color": ButtonColor;
         /**
           * (optional) Disables the button.
          */
@@ -272,17 +276,51 @@ export namespace Components {
          */
         "rightIcon": string;
         /**
+          * Set the button to active or inactive
+         */
+        "setActive": (isActive: boolean) => Promise<void>;
+        /**
           * (optional) Shows a caret icon right side of the button.
          */
         "showCaret": boolean;
         /**
           * (optional) The size of the button.
          */
-        "size": 'small' | 'medium' | 'large';
+        "size": ButtonSize;
         /**
           * (Optional) Button types
          */
-        "type": 'button' | 'reset' | 'submit';
+        "type": ButtonType;
+    }
+    interface ModusButtonGroup {
+        /**
+          * (optional) The button group's aria-disabled state.
+         */
+        "ariaDisabled": string | null;
+        /**
+          * (optional) The button group's aria-label.
+         */
+        "ariaLabel": string;
+        /**
+          * (optional) The style of the buttons in the group
+         */
+        "buttonStyle": ButtonStyle;
+        /**
+          * (optional) The color of the buttons in the group
+         */
+        "color": ButtonColor;
+        /**
+          * (optional) Disables the button group.
+         */
+        "disabled": boolean;
+        /**
+          * (optional) The selection type of buttons
+         */
+        "selectionType": ButtonGroupSelectionType;
+        /**
+          * (optional) The size of the buttons
+         */
+        "size": ButtonSize;
     }
     interface ModusCard {
         /**
@@ -343,12 +381,12 @@ export namespace Components {
           * (optional) If you wish to prevent the propagation of your event, you may opt for this.
          */
         "stopPropagation": boolean;
-        /**
-          * (optional) Tab Index for the checkbox
-         */
-        "tabIndexValue": string | number;
     }
     interface ModusChip {
+        /**
+          * (optional) Whether the chip is active.
+         */
+        "active": boolean;
         /**
           * (optional) The chip's aria-label.
          */
@@ -546,6 +584,10 @@ export namespace Components {
         "toggleElementId": string;
     }
     interface ModusFileDropzone {
+        /**
+          * (optional) The dropzone's accepted file types
+         */
+        "acceptFileTypes": string;
         /**
           * Add a file to the dropzone.
          */
@@ -753,6 +795,14 @@ export namespace Components {
          */
         "logoOptions": ModusNavbarLogoOptions;
         /**
+          * (optional) The navbar's aria-label.
+         */
+        "navAriaLabel"?: string;
+        /**
+          * (optional) Whether to show badge on top of notification
+         */
+        "notificationCount": number;
+        /**
           * (required) Profile menu options.
          */
         "profileMenuOptions": ModusProfileMenuOptions;
@@ -949,7 +999,7 @@ export namespace Components {
          */
         "checkedId": string;
         /**
-          * The radio button group name.
+          * The radio button group name. Used to group individual radio elements into one group.
          */
         "name": string;
         /**
@@ -1321,9 +1371,17 @@ export namespace Components {
          */
         "autoFocusInput": boolean;
         /**
+          * (optional) Capitalization behavior when using a non-traditional keyboard (e.g. microphone, touch screen)
+         */
+        "autocapitalize": 'none' | 'off' | 'sentences' | 'on' | 'words' | 'characters';
+        /**
           * (optional) Sets autocomplete on the input.
          */
         "autocomplete": string | null;
+        /**
+          * (optional) Whether to activate automatic correction while the user is editing this field in Safari.
+         */
+        "autocorrect": boolean | 'off' | 'on';
         /**
           * (optional) Whether the input has a clear button.
          */
@@ -1332,6 +1390,10 @@ export namespace Components {
           * (optional) Whether the input is disabled.
          */
         "disabled": boolean;
+        /**
+          * (optional) Which action label to present for the enter key on virtual keyboards.
+         */
+        "enterkeyhint": 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
         /**
           * (optional) The input's error state text.
          */
@@ -1388,6 +1450,10 @@ export namespace Components {
           * (optional) The input's size.
          */
         "size": 'medium' | 'large';
+        /**
+          * (optional) Whether to enable spell checking.
+         */
+        "spellcheck": boolean;
         /**
           * (optional) The input's text alignment.
          */
@@ -1489,9 +1555,17 @@ export namespace Components {
          */
         "ariaLabel": string | null;
         /**
+          * (optional) Time taken to dismiss the toast
+         */
+        "delay": number;
+        /**
           * (optional) Whether the toast has a dismiss button.
          */
         "dismissible": boolean;
+        /**
+          * (optional) Role taken by the toast.  Defaults to 'status'.
+         */
+        "role": 'alert' | 'log' | 'marquee' | 'status' | 'timer';
         /**
           * (optional) Whether to show the toasts' icon.
          */
@@ -1588,6 +1662,10 @@ export namespace Components {
         "focusItem": () => Promise<void>;
         "initTreeViewItem": (newValue: TreeViewItemOptions) => Promise<void>;
         /**
+          * To be set true when the tree item is an expandable last child
+         */
+        "isLastChild": boolean;
+        /**
           * (required) Label for the tree item
          */
         "label": string;
@@ -1595,6 +1673,7 @@ export namespace Components {
           * (required) Unique tree item identifier
          */
         "nodeId": string;
+        "setChildren": () => Promise<void>;
         /**
           * (optional) Tab Index for the tree item
          */
@@ -1625,6 +1704,10 @@ export interface ModusBreadcrumbCustomEvent<T> extends CustomEvent<T> {
 export interface ModusButtonCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusButtonElement;
+}
+export interface ModusButtonGroupCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusButtonGroupElement;
 }
 export interface ModusCheckboxCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1863,6 +1946,24 @@ declare global {
     var HTMLModusButtonElement: {
         prototype: HTMLModusButtonElement;
         new (): HTMLModusButtonElement;
+    };
+    interface HTMLModusButtonGroupElementEventMap {
+        "buttonGroupClick": unknown;
+        "buttonSelectionChange": HTMLModusButtonElement[];
+    }
+    interface HTMLModusButtonGroupElement extends Components.ModusButtonGroup, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusButtonGroupElementEventMap>(type: K, listener: (this: HTMLModusButtonGroupElement, ev: ModusButtonGroupCustomEvent<HTMLModusButtonGroupElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusButtonGroupElementEventMap>(type: K, listener: (this: HTMLModusButtonGroupElement, ev: ModusButtonGroupCustomEvent<HTMLModusButtonGroupElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLModusButtonGroupElement: {
+        prototype: HTMLModusButtonGroupElement;
+        new (): HTMLModusButtonGroupElement;
     };
     interface HTMLModusCardElement extends Components.ModusCard, HTMLStencilElement {
     }
@@ -2380,7 +2481,7 @@ declare global {
         new (): HTMLModusTableFillerColumnElement;
     };
     interface HTMLModusTableRowActionsElementEventMap {
-        "overflowRowActions": any;
+        "overflowRowActions": unknown;
     }
     interface HTMLModusTableRowActionsElement extends Components.ModusTableRowActions, HTMLStencilElement {
         addEventListener<K extends keyof HTMLModusTableRowActionsElementEventMap>(type: K, listener: (this: HTMLModusTableRowActionsElement, ev: ModusTableRowActionsCustomEvent<HTMLModusTableRowActionsElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2508,6 +2609,7 @@ declare global {
     };
     interface HTMLModusTreeViewItemElementEventMap {
         "checkboxClick": boolean;
+        "itemLabelChange": string;
         "itemClick": boolean;
         "itemExpandToggle": boolean;
         "itemAdded": HTMLElement;
@@ -2536,6 +2638,7 @@ declare global {
         "modus-badge": HTMLModusBadgeElement;
         "modus-breadcrumb": HTMLModusBreadcrumbElement;
         "modus-button": HTMLModusButtonElement;
+        "modus-button-group": HTMLModusButtonGroupElement;
         "modus-card": HTMLModusCardElement;
         "modus-checkbox": HTMLModusCheckboxElement;
         "modus-chip": HTMLModusChipElement;
@@ -2817,11 +2920,11 @@ declare namespace LocalJSX {
         /**
           * (optional) The style of the button
          */
-        "buttonStyle"?: 'borderless' | 'fill' | 'outline';
+        "buttonStyle"?: ButtonStyle;
         /**
           * (optional) The color of the button
          */
-        "color"?: 'danger' | 'primary' | 'secondary' | 'tertiary';
+        "color"?: ButtonColor;
         /**
           * (optional) Disables the button.
          */
@@ -2849,11 +2952,49 @@ declare namespace LocalJSX {
         /**
           * (optional) The size of the button.
          */
-        "size"?: 'small' | 'medium' | 'large';
+        "size"?: ButtonSize;
         /**
           * (Optional) Button types
          */
-        "type"?: 'button' | 'reset' | 'submit';
+        "type"?: ButtonType;
+    }
+    interface ModusButtonGroup {
+        /**
+          * (optional) The button group's aria-disabled state.
+         */
+        "ariaDisabled"?: string | null;
+        /**
+          * (optional) The button group's aria-label.
+         */
+        "ariaLabel"?: string;
+        /**
+          * (optional) The style of the buttons in the group
+         */
+        "buttonStyle"?: ButtonStyle;
+        /**
+          * (optional) The color of the buttons in the group
+         */
+        "color"?: ButtonColor;
+        /**
+          * (optional) Disables the button group.
+         */
+        "disabled"?: boolean;
+        /**
+          * Event emitted when a button is clicked
+         */
+        "onButtonGroupClick"?: (event: ModusButtonGroupCustomEvent<unknown>) => void;
+        /**
+          * Event emitted when the selection changes
+         */
+        "onButtonSelectionChange"?: (event: ModusButtonGroupCustomEvent<HTMLModusButtonElement[]>) => void;
+        /**
+          * (optional) The selection type of buttons
+         */
+        "selectionType"?: ButtonGroupSelectionType;
+        /**
+          * (optional) The size of the buttons
+         */
+        "size"?: ButtonSize;
     }
     interface ModusCard {
         /**
@@ -2914,12 +3055,12 @@ declare namespace LocalJSX {
           * (optional) If you wish to prevent the propagation of your event, you may opt for this.
          */
         "stopPropagation"?: boolean;
-        /**
-          * (optional) Tab Index for the checkbox
-         */
-        "tabIndexValue"?: string | number;
     }
     interface ModusChip {
+        /**
+          * (optional) Whether the chip is active.
+         */
+        "active"?: boolean;
         /**
           * (optional) The chip's aria-label.
          */
@@ -3154,6 +3295,10 @@ declare namespace LocalJSX {
     }
     interface ModusFileDropzone {
         /**
+          * (optional) The dropzone's accepted file types
+         */
+        "acceptFileTypes"?: string;
+        /**
           * (optional) The dropzone's aria-label.
          */
         "ariaLabel"?: string | null;
@@ -3361,6 +3506,14 @@ declare namespace LocalJSX {
           * (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels.
          */
         "logoOptions"?: ModusNavbarLogoOptions;
+        /**
+          * (optional) The navbar's aria-label.
+         */
+        "navAriaLabel"?: string;
+        /**
+          * (optional) Whether to show badge on top of notification
+         */
+        "notificationCount"?: number;
         /**
           * An event that fires when an apps menu app opens.
          */
@@ -3621,7 +3774,7 @@ declare namespace LocalJSX {
          */
         "checkedId"?: string;
         /**
-          * The radio button group name.
+          * The radio button group name. Used to group individual radio elements into one group.
          */
         "name"?: string;
         /**
@@ -4024,7 +4177,7 @@ declare namespace LocalJSX {
     }
     interface ModusTableRowActions {
         "context"?: TableContext;
-        "onOverflowRowActions"?: (event: ModusTableRowActionsCustomEvent<any>) => void;
+        "onOverflowRowActions"?: (event: ModusTableRowActionsCustomEvent<unknown>) => void;
         "row"?: Row<unknown>;
     }
     interface ModusTableRowActionsCell {
@@ -4063,9 +4216,17 @@ declare namespace LocalJSX {
          */
         "autoFocusInput"?: boolean;
         /**
+          * (optional) Capitalization behavior when using a non-traditional keyboard (e.g. microphone, touch screen)
+         */
+        "autocapitalize"?: 'none' | 'off' | 'sentences' | 'on' | 'words' | 'characters';
+        /**
           * (optional) Sets autocomplete on the input.
          */
         "autocomplete"?: string | null;
+        /**
+          * (optional) Whether to activate automatic correction while the user is editing this field in Safari.
+         */
+        "autocorrect"?: boolean | 'off' | 'on';
         /**
           * (optional) Whether the input has a clear button.
          */
@@ -4074,6 +4235,10 @@ declare namespace LocalJSX {
           * (optional) Whether the input is disabled.
          */
         "disabled"?: boolean;
+        /**
+          * (optional) Which action label to present for the enter key on virtual keyboards.
+         */
+        "enterkeyhint"?: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
         /**
           * (optional) The input's error state text.
          */
@@ -4130,6 +4295,10 @@ declare namespace LocalJSX {
           * (optional) The input's size.
          */
         "size"?: 'medium' | 'large';
+        /**
+          * (optional) Whether to enable spell checking.
+         */
+        "spellcheck"?: boolean;
         /**
           * (optional) The input's text alignment.
          */
@@ -4235,6 +4404,10 @@ declare namespace LocalJSX {
          */
         "ariaLabel"?: string | null;
         /**
+          * (optional) Time taken to dismiss the toast
+         */
+        "delay"?: number;
+        /**
           * (optional) Whether the toast has a dismiss button.
          */
         "dismissible"?: boolean;
@@ -4242,6 +4415,10 @@ declare namespace LocalJSX {
           * An event that fires when the toast is dismissed
          */
         "onDismissClick"?: (event: ModusToastCustomEvent<any>) => void;
+        /**
+          * (optional) Role taken by the toast.  Defaults to 'status'.
+         */
+        "role"?: 'alert' | 'log' | 'marquee' | 'status' | 'timer';
         /**
           * (optional) Whether to show the toasts' icon.
          */
@@ -4333,6 +4510,10 @@ declare namespace LocalJSX {
          */
         "editable"?: boolean;
         /**
+          * To be set true when the tree item is an expandable last child
+         */
+        "isLastChild"?: boolean;
+        /**
           * (required) Label for the tree item
          */
         "label": string;
@@ -4358,6 +4539,10 @@ declare namespace LocalJSX {
          */
         "onItemExpandToggle"?: (event: ModusTreeViewItemCustomEvent<boolean>) => void;
         /**
+          * An event that fires on tree item label changes
+         */
+        "onItemLabelChange"?: (event: ModusTreeViewItemCustomEvent<string>) => void;
+        /**
           * (optional) Tab Index for the tree item
          */
         "tabIndexValue"?: string | number;
@@ -4371,6 +4556,7 @@ declare namespace LocalJSX {
         "modus-badge": ModusBadge;
         "modus-breadcrumb": ModusBreadcrumb;
         "modus-button": ModusButton;
+        "modus-button-group": ModusButtonGroup;
         "modus-card": ModusCard;
         "modus-checkbox": ModusCheckbox;
         "modus-chip": ModusChip;
@@ -4433,6 +4619,7 @@ declare module "@stencil/core" {
             "modus-badge": LocalJSX.ModusBadge & JSXBase.HTMLAttributes<HTMLModusBadgeElement>;
             "modus-breadcrumb": LocalJSX.ModusBreadcrumb & JSXBase.HTMLAttributes<HTMLModusBreadcrumbElement>;
             "modus-button": LocalJSX.ModusButton & JSXBase.HTMLAttributes<HTMLModusButtonElement>;
+            "modus-button-group": LocalJSX.ModusButtonGroup & JSXBase.HTMLAttributes<HTMLModusButtonGroupElement>;
             "modus-card": LocalJSX.ModusCard & JSXBase.HTMLAttributes<HTMLModusCardElement>;
             "modus-checkbox": LocalJSX.ModusCheckbox & JSXBase.HTMLAttributes<HTMLModusCheckboxElement>;
             "modus-chip": LocalJSX.ModusChip & JSXBase.HTMLAttributes<HTMLModusChipElement>;
