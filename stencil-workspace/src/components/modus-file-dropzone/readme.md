@@ -7,19 +7,21 @@
 
 ## Properties
 
-| Property                | Attribute                   | Description                                                  | Type      | Default     |
-| ----------------------- | --------------------------- | ------------------------------------------------------------ | --------- | ----------- |
-| `acceptFileTypes`       | `accept-file-types`         | (optional) The dropzone's accepted file types                | `string`  | `undefined` |
-| `ariaLabel`             | `aria-label`                | (optional) The dropzone's aria-label.                        | `string`  | `undefined` |
-| `description`           | `description`               | (optional) The dropzone's description text.                  | `string`  | `undefined` |
-| `dropzoneHeight`        | `dropzone-height`           | (optional) The dropzone's height.                            | `string`  | `undefined` |
-| `dropzoneWidth`         | `dropzone-width`            | (optional) The dropzone's width.                             | `string`  | `undefined` |
-| `includeStateIcon`      | `include-state-icon`        | (optional) Whether to include the upload icon.               | `boolean` | `true`      |
-| `label`                 | `label`                     | (optional) The dropzone's label text.                        | `string`  | `undefined` |
-| `maxFileCount`          | `max-file-count`            | (optional) The dropzone's max file count.                    | `number`  | `undefined` |
-| `maxFileNameLength`     | `max-file-name-length`      | (optional) The dropzone's max file name length of each file. | `number`  | `undefined` |
-| `maxTotalFileSizeBytes` | `max-total-file-size-bytes` | (optional) The dropzone's max total file size.               | `number`  | `undefined` |
-| `multiple`              | `multiple`                  | (optional) Whether multiple files can be uploaded.           | `boolean` | `true`      |
+| Property                      | Attribute                        | Description                                                                   | Type      | Default                                  |
+| ----------------------------- | -------------------------------- | ----------------------------------------------------------------------------- | --------- | ---------------------------------------- |
+| `acceptFileTypes`             | `accept-file-types`              | (optional) The dropzone's accepted file types                                 | `string`  | `undefined`                              |
+| `ariaLabel`                   | `aria-label`                     | (optional) The dropzone's aria-label.                                         | `string`  | `undefined`                              |
+| `description`                 | `description`                    | (optional) The dropzone's description text.                                   | `string`  | `undefined`                              |
+| `dropzoneHeight`              | `dropzone-height`                | (optional) The dropzone's height.                                             | `string`  | `undefined`                              |
+| `dropzoneWidth`               | `dropzone-width`                 | (optional) The dropzone's width.                                              | `string`  | `undefined`                              |
+| `fileDraggedOverInstructions` | `file-dragged-over-instructions` | (optional) The dropzone's instruction text when a file is being dragged over. | `string`  | `'Drag files here.'`                     |
+| `includeStateIcon`            | `include-state-icon`             | (optional) Whether to include the upload icon.                                | `boolean` | `true`                                   |
+| `instructions`                | `instructions`                   | (optional) The dropzone's instruction text.                                   | `string`  | `'Drag files here or browse to upload.'` |
+| `label`                       | `label`                          | (optional) The dropzone's label text.                                         | `string`  | `undefined`                              |
+| `maxFileCount`                | `max-file-count`                 | (optional) The dropzone's max file count.                                     | `number`  | `undefined`                              |
+| `maxFileNameLength`           | `max-file-name-length`           | (optional) The dropzone's max file name length of each file.                  | `number`  | `undefined`                              |
+| `maxTotalFileSizeBytes`       | `max-total-file-size-bytes`      | (optional) The dropzone's max total file size.                                | `number`  | `undefined`                              |
+| `multiple`                    | `multiple`                       | (optional) Whether multiple files can be uploaded.                            | `boolean` | `true`                                   |
 
 
 ## Events
