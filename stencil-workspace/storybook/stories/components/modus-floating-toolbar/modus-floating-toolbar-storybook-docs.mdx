@@ -1,0 +1,30 @@
+import {Story} from '@storybook/addon-docs';
+
+# Floating Toolsbar
+
+The `modus-floating-toolbar` component provides a customizable floating toolbar that can be positioned at various locations on the screen. It's designed to offer users quick access to common actions or tools.
+
+### Default
+
+The default floating toolbar positioned at the bottom-right of the screen.
+
+<Story id="components-floating-toolbar--default" height="400px" />
+
+## Properties
+
+| Property   | Attribute    | Description                                        | Type      | Default         |
+|------------|--------------|----------------------------------------------------|-----------|-----------------|
+| `ariaLabel`| `aria-label` | The floating toolbar's aria-label                  | `string`  |                 |
+| `disabled` | `disabled`   | Whether the floating toolbar is disabled           | `boolean` | `false`         |
+
+## Events
+
+| Event          | Description                                     | Type                               |
+|----------------|-------------------------------------------------|------------------------------------|
+| `buttonClick`  | Fires when a button in the toolbar is triggered | `CustomEvent<{ action: string; }>` |
+
+### Accessibility
+
+- Floating toolbar gets an `aria-label` provided by the `aria-label` property input.
+
+

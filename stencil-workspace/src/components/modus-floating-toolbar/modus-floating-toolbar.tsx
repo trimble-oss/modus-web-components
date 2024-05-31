@@ -1,4 +1,4 @@
-import { Component, h, Element, Prop } from '@stencil/core';
+import { Component, h, Element, Prop, Host } from '@stencil/core';
 
 @Component({
   tag: 'modus-floating-toolbar',
@@ -27,13 +27,11 @@ export class ModusFloatingToolbar {
 
         return (
           <modus-button
-            aria-disabled={this.disabled ? 'true' : undefined}
-            aria-label={this.ariaLabel}
+            button-style="borderless"
+            color="secondary"
             class={className}
             disabled={this.disabled}
-            color="secondary"
-            icon-only={iconOnly}
-            button-style="borderless">
+            icon-only={iconOnly}>
             {label}
           </modus-button>
         );
@@ -46,6 +44,10 @@ export class ModusFloatingToolbar {
   }
 
   render() {
-    return <div class="modus-floating-toolbar">{this.renderButtons()}</div>;
+    return (
+      <Host aria-label={this.ariaLabel || undefined} role="toolbar">
+        {this.renderButtons()}
+      </Host>
+    );
   }
 }
