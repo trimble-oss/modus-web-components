@@ -95,7 +95,6 @@ const setEventListeners = () => {
   const tag = document.createElement('script');
   tag.innerHTML = `
   document.addEventListener('helpOpen', (e) => {
-    console.log('helpOpen event received');
     const panel = document.querySelector('modus-utility-panel');
     panel.expanded = !panel.expanded;
   });
