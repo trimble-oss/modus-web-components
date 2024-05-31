@@ -30,14 +30,24 @@ describe('modus-tooltip', () => {
 
     await page.setContent(`
     <modus-tooltip text="Tooltip text...">
-          <modus-button>Button</modus-button>
+          <modus-button style="margin-top:100px;margin-left:100px">Button</modus-button>
         </modus-tooltip>
     `);
     const component = await page.find('modus-tooltip');
-
-    component.setProperty('position','right');
-    await page.waitForChanges();
     let element = await page.find('modus-tooltip >>> .tooltip');
+    await page.hover('modus-button');
+    await new Promise((r) => setTimeout(r, 500));
+    await page.waitForChanges();
+    expect(element.getAttribute('data-popper-placement')).toEqual('top');
+
+    component.setProperty('position', 'left');
+    await page.waitForChanges();
+    element = await page.find('modus-tooltip >>> .tooltip');
+    expect(element.getAttribute('data-popper-placement')).toEqual('left');
+
+    component.setProperty('position', 'right');
+    await page.waitForChanges();
+    element = await page.find('modus-tooltip >>> .tooltip');
     expect(element.getAttribute('data-popper-placement')).toEqual('right');
 
     component.setProperty('position', 'bottom');
