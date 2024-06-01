@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
-    "@stencil/core": "^4.12.4",
+    "@stencil/core": "^4.18.3",
     "@tanstack/table-core": "^8.11.6"
   },
   "devDependencies": {
