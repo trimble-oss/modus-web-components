@@ -114,7 +114,7 @@ export class ModusTable {
         this.tableState.pagination.pageIndex = maxPageIndex >= 0 ? maxPageIndex : 0;
       }
     }
-    this.tableCore?.setState('pagination', {
+    this.tableCore.setState('pagination', {
       ...this.tableState.pagination,
       pageIndex: this.tableState.pagination.pageIndex,
       pageSize: this.pagination ? this.tableState.pagination.pageSize : this.data.length,
@@ -372,6 +372,9 @@ export class ModusTable {
 
     this.setTableState(initialTableState);
     this.onRowsExpandableChange(this.rowsExpandable);
+  }
+
+  connectedCallback(){
     this.initializeTable();
   }
 
