@@ -12,11 +12,13 @@
   label {
     color: $modus-autocomplete-label-color;
     font-size: $rem-12px;
+    font-weight: 700;
     margin-bottom: $rem-4px;
   }
 
   .label-container {
     display: inline-block;
+    margin-bottom: 0.25rem;
 
     .required {
       bottom: $rem-1px;
@@ -31,6 +33,7 @@
     background-color: $modus-autocomplete-bg;
     border: var(--modus-autocomplete-border, #{$rem-1px solid $modus-autocomplete-container-border-color});
     border-bottom-color: $modus-autocomplete-container-bottom-line-color;
+    border-radius: 4px;
     box-sizing: border-box;
     display: flex;
     flex-flow: row wrap;
@@ -61,6 +64,7 @@
 
       &::part(input-container) {
         border: none !important;
+        box-shadow: none;
       }
     }
   }
@@ -159,4 +163,9 @@
       padding: 0 $rem-16px;
     }
   }
+}
+
+.autocomplete .chips-container:focus-within {
+  border-color: $modus-autocomplete-container-border-active-color;
+  box-shadow: 0 0 0 1px $modus-autocomplete-container-border-active-color;
 }
