@@ -12,6 +12,7 @@
     label {
       color: $modus-input-label-color;
       font-size: $rem-12px;
+      font-weight: 700;
       margin: 0 $rem-4px $rem-4px 0;
     }
 
@@ -35,8 +36,7 @@
       background-position: right 0.5rem center;
       background-repeat: no-repeat;
       background-size: 16px 12px;
-      border: solid $rem-1px $modus-input-border-color;
-      border-bottom-color: $modus-input-bottom-line-color;
+      border: solid $rem-1px $modus-input-bottom-line-color;
       border-radius: 4px;
       color: $modus-select-color;
       display: flex;
@@ -61,8 +61,8 @@
       }
 
       &:focus-within {
-        border-bottom-color: $modus-input-bottom-line-active-color;
-        border-bottom-width: $rem-2px;
+        border-color: $modus-input-bottom-line-active-color;
+        box-shadow: 0 0 0 1px $modus-input-bottom-line-active-color;
       }
 
       &.large {
@@ -71,13 +71,13 @@
       }
 
       &.error {
-        border-bottom-color: $modus-input-validation-error-color;
-        border-bottom-width: $rem-2px;
+        border-color: $modus-input-validation-error-color;
+        box-shadow: 0 0 0 1px $modus-input-validation-error-color;
       }
 
       &.valid {
-        border-bottom-color: $modus-input-validation-success-color;
-        border-bottom-width: $rem-2px;
+        border-color: $modus-input-validation-success-color;
+        box-shadow: 0 0 0 1px $modus-input-validation-success-color;
       }
 
       &.fit-parent {

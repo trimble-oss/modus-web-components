@@ -129,7 +129,10 @@ export class ModusDropdown {
       disabled: this.disabled,
     };
     return (
-      <div aria-label={this.ariaLabel || undefined} class={dropdownClass} onClick={(event) => this.handleDropdownClick(event)}>
+      <div
+        aria-label={this.ariaLabel || undefined}
+        class={dropdownClass}
+        onClick={(event) => this.handleDropdownClick(event)}>
         <slot name="dropdownToggle" />
         <div
           class={listContainerClass}

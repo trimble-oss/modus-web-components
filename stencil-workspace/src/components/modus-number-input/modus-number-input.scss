@@ -9,6 +9,7 @@
   label {
     color: $modus-input-label-color;
     font-size: $rem-12px;
+    font-weight: 700;
     margin-bottom: $rem-4px;
 
     span {
@@ -20,6 +21,7 @@
   .label-container {
     align-items: baseline;
     display: inline-block;
+    margin-bottom: 0.25rem;
 
     .required {
       color: $modus-input-validation-error-color;
@@ -30,8 +32,7 @@
   .input-container {
     align-items: center;
     background-color: $modus-input-bg;
-    border: $rem-1px solid $modus-input-border-color;
-    border-bottom-color: $modus-input-bottom-line-color;
+    border: $rem-1px solid $modus-input-bottom-line-color;
     border-radius: 4px;
     display: flex;
     flex-direction: row;
@@ -56,23 +57,19 @@
       }
     }
 
-    &:focus-within,
-    &.error,
-    &.valid {
-      border-bottom-width: $rem-2px;
-      height: 31px; // Counteract bottom border width.
-    }
-
     &:focus-within {
-      border-bottom-color: $modus-input-bottom-line-active-color;
+      border-color: $modus-input-bottom-line-active-color;
+      box-shadow: 0 0 0 1px $modus-input-bottom-line-active-color;
     }
 
     &.error {
-      border-bottom-color: $modus-input-validation-error-color;
+      border-color: $modus-input-validation-error-color;
+      box-shadow: 0 0 0 1px $modus-input-validation-error-color;
     }
 
     &.valid {
-      border-bottom-color: $modus-input-validation-success-color;
+      border-color: $modus-input-validation-success-color;
+      box-shadow: 0 0 0 1px $modus-input-validation-success-color;
     }
 
     &.large {
@@ -83,18 +80,12 @@
         height: 47px;
         padding: 0 $rem-16px;
       }
-
-      &:focus-within,
-      &.error,
-      &.valid {
-        height: 47px; // Counteract bottom border width.
-      }
     }
   }
 
   .input-container:has(input[readonly]) {
     background-color: $modus-input-readonly-bg;
-    border-bottom-color: $modus-input-disabled-bottom-line-color;
+    border-color: $modus-input-disabled-bottom-line-color;
   }
 
   .sub-text {
@@ -120,8 +111,7 @@
 
     .input-container {
       background-color: $modus-input-disabled-bg;
-      border: $rem-1px solid $modus-input-disabled-border-color;
-      border-bottom-color: $modus-input-disabled-bottom-line-color;
+      border: $rem-1px solid $modus-input-disabled-bottom-line-color;
 
       input {
         background-color: transparent;
