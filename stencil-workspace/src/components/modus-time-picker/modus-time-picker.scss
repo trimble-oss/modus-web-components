@@ -113,7 +113,7 @@
 
   .input-container:has(input[readonly]) {
     background-color: $modus-input-readonly-bg;
-    border-bottom-color: $modus-input-disabled-bottom-line-color;
+    border-color: transparent;
   }
 
   .sub-text {
@@ -144,7 +144,7 @@
 
     .input-container {
       background-color: $modus-input-disabled-bg;
-      border: $rem-1px solid $modus-input-disabled-bottom-line-color;
+      border-color: transparent;
 
       input {
         background-color: transparent;
