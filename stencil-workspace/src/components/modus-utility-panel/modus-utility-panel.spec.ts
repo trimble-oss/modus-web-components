@@ -12,16 +12,8 @@ describe('modus-utility-panel', () => {
         <mock:shadow-root>
           <div class="overlay utility-panel">
             <div class="panel-content">
-              <div class="panel-header">
-                <slot name="header"></slot>
-              </div>
-              <hr>
               <div class="panel-body">
                 <slot name="body"></slot>
-              </div>
-              <hr>
-              <div class="panel-footer">
-                <slot name="footer"></slot>
               </div>
             </div>
           </div>
@@ -41,16 +33,8 @@ describe('modus-utility-panel', () => {
         <mock:shadow-root>
           <div class="open overlay utility-panel">
             <div class="panel-content">
-              <div class="panel-header">
-                <slot name="header"></slot>
-              </div>
-              <hr>
               <div class="panel-body">
                 <slot name="body"></slot>
-              </div>
-              <hr>
-              <div class="panel-footer">
-                <slot name="footer"></slot>
               </div>
             </div>
           </div>
@@ -74,16 +58,8 @@ describe('modus-utility-panel', () => {
         <mock:shadow-root>
           <div class="open utility-panel">
             <div class="panel-content">
-              <div class="panel-header">
-                <slot name="header"></slot>
-              </div>
-              <hr>
               <div class="panel-body">
                 <slot name="body"></slot>
-              </div>
-              <hr>
-              <div class="panel-footer">
-                <slot name="footer"></slot>
               </div>
             </div>
           </div>

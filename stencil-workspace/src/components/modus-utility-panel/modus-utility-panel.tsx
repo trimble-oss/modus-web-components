@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Component, Prop, Event, EventEmitter, h, Watch } from '@stencil/core';
+import { Component, Prop, Element, Event, EventEmitter, Watch, h, Fragment } from '@stencil/core';
 
 @Component({
   tag: 'modus-utility-panel',
@@ -20,6 +20,8 @@ export class ModusUtilityPanel {
 
   /** An event that fires when the panel is closed. */
   @Event() panelClosed: EventEmitter<void>;
+
+  @Element() el: HTMLElement;
 
   @Watch('expanded')
   handleExpandedChange(newValue: boolean) {
@@ -60,22 +62,37 @@ export class ModusUtilityPanel {
   handlePanelClose = () => {
     this.closePanel();
   };
-
+  hasSlotContent(slotName: string): boolean {
+    const slot = this.el.querySelector(`[slot="${slotName}"]`);
+    return !!slot;
+  }
   render() {
+    const hasHeader = this.hasSlotContent('header');
+    const hasFooter = this.hasSlotContent('footer');
     return (
       <div class={{ 'utility-panel': true, open: this.expanded, overlay: !this.pushContent }}>
         <div class="panel-content">
-          <div class="panel-header">
-            <slot name="header"></slot>
-          </div>
-          <hr />
+          {hasHeader && (
+            <Fragment>
+              <div class="panel-header">
+                <slot name="header"></slot>
+              </div>
+              <hr />
+            </Fragment>
+          )}
+
           <div class="panel-body">
             <slot name="body"></slot>
           </div>
-          <hr />
-          <div class="panel-footer">
-            <slot name="footer"></slot>
-          </div>
+
+          {hasFooter && (
+            <Fragment>
+              <hr />
+              <div class="panel-footer">
+                <slot name="footer"></slot>
+              </div>
+            </Fragment>
+          )}
         </div>
       </div>
     );

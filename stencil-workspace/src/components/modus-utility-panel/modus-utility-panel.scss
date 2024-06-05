@@ -3,14 +3,14 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   height: 100%;
   position: absolute;
-  right: -312px;
+  right: -324px;
   top: 0;
-  transition: right 0.2s ease-out;
+  transition: right 0.3s ease-out;
   width: 312px;
 
   &.open {
     right: 0;
-    transition: right 0.2s ease-out;
+    transition: right 0.3s ease-out;
   }
 
   .overlay {
