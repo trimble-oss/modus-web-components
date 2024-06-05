@@ -806,7 +806,7 @@ const DefaultColumnsWithPriority = [
 const EditableColumns =DefaultColumnsWithPriority.map(col =>{
   if(col.accessorKey === 'status'){
     return {...col,  cellEditable:true,
-      cellEditorType: 'dropdown',
+      cellEditorType: 'select',
       cellEditorArgs: {
         options:[
         { display: 'Verified' },
@@ -837,7 +837,7 @@ if (col.accessorKey === 'priority') {
   return {
     ...col,
     cellEditable: true,
-    cellEditorType: 'dropdown',
+    cellEditorType: 'select',
     cellEditorArgs: {
       options: [
         { display: 'Low',type: 'counter', color: 'danger', size: 'medium'},
