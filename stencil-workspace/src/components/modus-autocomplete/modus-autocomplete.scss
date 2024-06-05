@@ -166,6 +166,7 @@
 }
 
 .autocomplete .chips-container:focus-within {
-  border-color: $modus-autocomplete-container-border-active-color;
-  box-shadow: 0 0 0 1px $modus-autocomplete-container-border-active-color;
+  border: var(--modus-autocomplete-border-active, #{$rem-1px solid $modus-autocomplete-container-border-active-color});
+  box-shadow: 0 0 0 1px
+    var(--modus-autocomplete-border-active, #{$rem-1px solid $modus-autocomplete-container-border-active-color});
 }

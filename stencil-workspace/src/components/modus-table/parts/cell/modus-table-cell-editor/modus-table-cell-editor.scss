@@ -1,6 +1,8 @@
 :host {
   --modus-autocomplete-border: none;
+  --modus-autocomplete-border-active: none;
   --modus-autocomplete-font-size: 14px;
+  --modus-input-border-color: none;
 }
 
 .editor::part(input-container),

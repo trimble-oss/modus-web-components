@@ -4,7 +4,7 @@ import {
   KEYBOARD_ENTER,
   CELL_EDIT_TYPE_AUTOCOMPLETE,
   CELL_EDIT_TYPE_DATE,
-  CELL_EDIT_TYPE_DROPDOWN,
+  CELL_EDIT_TYPE_SELECT,
   CELL_EDIT_TYPE_TEXT,
   CELL_EDIT_TYPE_INT,
   KEYBOARD_UP,
@@ -12,8 +12,9 @@ import {
 } from '../../../modus-table.constants';
 
 import {
+  ModusTableCellAutocompleteEditorArgs,
   ModusTableCellDateEditorArgs,
-  ModusTableCellDropdownEditorArgs,
+  ModusTableCellSelectEditorArgs,
   ModusTableCellEditorArgs,
 } from '../../../models/modus-table.models';
 import { ModusDateInputEventDetails } from '../../../../modus-date-input/utils/modus-date-input.models';
@@ -100,10 +101,12 @@ export class ModusTableCellEditor {
     );
   }
 
-  renderDropdownInput(): JSX.Element[] {
+  renderSelectInput(): JSX.Element[] {
     const valueKey = 'display';
-    const options = (this.args as ModusTableCellDropdownEditorArgs)?.options || [];
-    const selectedOption = options.find((option) => option[valueKey] === this.value) as any;
+    const args = this.args as ModusTableCellSelectEditorArgs;
+    const options = args?.options || [];
+    const optionsDisplayProp = args?.optionsDisplayProp || valueKey;
+    const selectedOption = options.find((option) => option[optionsDisplayProp] === this.value) as any;
 
     function handleEnter(e: KeyboardEvent, callback: (e: KeyboardEvent) => void) {
       const code = e.key.toLowerCase();
@@ -117,7 +120,7 @@ export class ModusTableCellEditor {
         <modus-select
           {...this.getDefaultProps('Select input')}
           value={selectedOption}
-          options-display-prop="display"
+          options-display-prop={optionsDisplayProp}
           size="large"
           options={options}
           onInputBlur={this.handleBlur}
@@ -156,15 +159,16 @@ export class ModusTableCellEditor {
 
   renderAutocompleteInput(): JSX.Element[] {
     let options, selectedOption;
-    const args = (this.args as ModusTableCellDropdownEditorArgs)?.options;
+    const args = this.args as ModusTableCellAutocompleteEditorArgs;
+    // const { noResultsFoundText, noResultsFoundSubtext, showNoResultsFoundMessage, showOptionsOnFocus } = args;
     if (this.dataType === 'badge') {
-      options = args.map((option: any) => option.text) as ModusAutocompleteOption[] | string[];
+      options = args?.options.map((option: any) => option.text) as ModusAutocompleteOption[] | string[];
       selectedOption = this.value['text'];
     } else if (this.dataType === 'link') {
-      options = args.map((option: any) => option.display) as ModusAutocompleteOption[] | string[];
+      options = args?.options.map((option: any) => option.display) as ModusAutocompleteOption[] | string[];
       selectedOption = this.value['display'];
     } else {
-      options = (args || []) as ModusAutocompleteOption[] | string[];
+      options = (args?.options || []) as ModusAutocompleteOption[] | string[];
       selectedOption = this.editedValue;
     }
     return (
@@ -175,18 +179,17 @@ export class ModusTableCellEditor {
           size="medium"
           //onClick={(e: MouseEvent) => e.stopPropagation()}
           options={options}
-          showOptionsOnFocus
           onBlur={this.handleBlur}
           onKeyDown={(e) => e.stopPropagation()}
           onOptionSelected={(e: CustomEvent<string>) => {
             if (this.dataType === 'badge') {
-              args.map((option: any) => {
+              args?.options.map((option: any) => {
                 if (option.text == e.detail) {
                   this.editedValue = option;
                 }
               });
             } else if (this.dataType === 'link') {
-              args.map((option: any) => {
+              args?.options.map((option: any) => {
                 if (option.display == e.detail) {
                   this.editedValue = option;
                 }
@@ -204,8 +207,8 @@ export class ModusTableCellEditor {
 
   renderEditor(): JSX.Element[] {
     switch (this.type) {
-      case CELL_EDIT_TYPE_DROPDOWN:
-        return this.renderDropdownInput();
+      case CELL_EDIT_TYPE_SELECT:
+        return this.renderSelectInput();
       case CELL_EDIT_TYPE_AUTOCOMPLETE:
         return this.renderAutocompleteInput();
       case CELL_EDIT_TYPE_DATE:
