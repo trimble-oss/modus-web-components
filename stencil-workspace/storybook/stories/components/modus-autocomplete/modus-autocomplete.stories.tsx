@@ -120,7 +120,7 @@ export default {
       name: 'show-options-on-focus',
       description: 'Whether to show autocomplete options when focus',
       table: {
-        defaultValue: { summary: true },
+        defaultValue: { summary: false },
         type: { summary: 'boolean' },
       }
     },
