@@ -199,6 +199,7 @@ export class ModusTextInput {
           <div class={'label-container'}>
             {this.label ? <label htmlFor={this.inputId}>{this.label}</label> : null}
             {this.required ? <span class="required">*</span> : null}
+            {this.helperText ? <label class="sub-text helper">{this.helperText}</label> : null}
           </div>
         ) : null}
         <div
@@ -261,8 +262,6 @@ export class ModusTextInput {
           <label class="sub-text error">{this.errorText}</label>
         ) : this.validText ? (
           <label class="sub-text valid">{this.validText}</label>
-        ) : this.helperText ? (
-          <label class="sub-text helper">{this.helperText}</label>
         ) : null}
       </div>
     );
