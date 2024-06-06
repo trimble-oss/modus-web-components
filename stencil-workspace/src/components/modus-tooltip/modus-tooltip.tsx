@@ -50,18 +50,43 @@ export class ModusTooltip {
   private tooltipElement: HTMLDivElement;
   private readonly showEvents = ['mouseenter', 'mouseover', 'focus'];
   private readonly hideEvents = ['mouseleave', 'blur', 'click'];
-  private showEventsListener = () => this.show();
-  private hideEventsListener = () => this.hide();
+  private hoverTimer: number | undefined;
+
+  private showEventsListener = () => {
+    window.clearTimeout(this.hoverTimer);
+    this.hoverTimer = window.setTimeout(() => {
+      this.show();
+    }, 500);
+  };
+
+  private hideEventsListener = () => {
+    this.hide();
+    window.clearTimeout(this.hoverTimer);
+    this.hoverTimer = undefined;
+  };
+
+  private attachEventListeners(): void {
+    const target = this.element.firstElementChild;
+    if (!target) return;
+
+    this.showEvents.forEach((event) => {
+      target.addEventListener(event, this.showEventsListener);
+    });
+
+    this.hideEvents.forEach((event) => {
+      target.addEventListener(event, this.hideEventsListener);
+    });
+  }
+
 
   componentDidLoad(): void {
     this.tooltipElement = this.element.shadowRoot.querySelector('.tooltip') as HTMLDivElement;
-    if (!this.disabled && this.text?.length > 1) {
-      this.initializePopper(this.position);
-    }
+    this.attachEventListeners();
   }
 
   disconnectedCallback(): void {
     this.cleanupPopper();
+    window.clearTimeout(this.hoverTimer);
   }
 
   initializePopper(position: ModusToolTipPlacement): void {
@@ -110,6 +135,11 @@ export class ModusTooltip {
   }
 
   show(): void {
+
+    if (!this.popperInstance && this.text?.length > 1 && !this.disabled) {
+      this.initializePopper(this.position);
+    }
+
     if (this.popperInstance) {
       // Make the tooltip visible
       this.tooltipElement.setAttribute('data-show', '');

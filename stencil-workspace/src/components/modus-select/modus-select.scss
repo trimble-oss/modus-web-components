@@ -50,6 +50,7 @@
 
       &.disabled {
         background-color: $modus-input-disabled-bg;
+        border-color: transparent;
       }
 
       &:hover {

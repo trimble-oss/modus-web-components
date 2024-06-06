@@ -173,8 +173,7 @@
 
     .input-container {
       background-color: $modus-input-disabled-bg;
-      border: $rem-1px solid $modus-input-disabled-border-color;
-      border-bottom-color: $modus-input-disabled-bottom-line-color;
+      border-color: transparent;
 
       svg path {
         fill: $modus-input-disabled-color;

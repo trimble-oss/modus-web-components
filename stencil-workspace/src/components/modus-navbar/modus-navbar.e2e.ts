@@ -265,6 +265,7 @@ describe('modus-navbar', () => {
     await page.waitForChanges();
 
     await new Promise((r) => setTimeout(r, 500));
+    await page.waitForChanges();
     expect(tooltip.getAttribute('data-show')).not.toBeNull();
 
     const tooltipText = await page.$eval('modus-navbar >>> modus-tooltip >>> .tooltip', (tooltip) => tooltip.textContent);
@@ -441,9 +442,8 @@ describe('modus-navbar', () => {
     expect(tooltip.getAttribute('data-show')).toBeNull();
 
     await profileMenuButton.hover();
-    await page.waitForChanges();
-
     await new Promise((r) => setTimeout(r, 500));
+    await page.waitForChanges();
     expect(tooltip.getAttribute('data-show')).not.toBeNull();
 
     const tooltipText = await page.$eval('modus-navbar >>> modus-tooltip >>> .tooltip', (tooltip) => tooltip.textContent);
@@ -587,9 +587,8 @@ describe('modus-navbar', () => {
     expect(tooltip.getAttribute('data-show')).toBeNull();
 
     await helpIcon.hover();
-    await page.waitForChanges();
-
     await new Promise((r) => setTimeout(r, 500));
+    await page.waitForChanges();
     expect(tooltip.getAttribute('data-show')).not.toBeNull();
 
     const tooltipText = await page.$eval('modus-navbar >>> modus-tooltip >>> .tooltip', (tooltip) => tooltip.textContent);

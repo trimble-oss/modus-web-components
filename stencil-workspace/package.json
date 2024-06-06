@@ -43,7 +43,7 @@
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "@stencil/core": "^4.12.4",
-    "@tanstack/table-core": "^8.11.6"
+    "@tanstack/table-core": "^8.17.3"
   },
   "devDependencies": {
     "@stencil/angular-output-target": "^0.8.4",
