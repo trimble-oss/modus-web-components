@@ -55,7 +55,7 @@
 
 ## Methods
 
-### `getCellEditable(rowIndex: string, columnId: string) => Promise<boolean>`
+### `getCellEditable(rowIndex: string, columnId: string) => Promise<void>`
 
 Returns whether a cell is editable based on row index and column ID.
 
@@ -68,7 +68,7 @@ Returns whether a cell is editable based on row index and column ID.
 
 #### Returns
 
-Type: `Promise<boolean>`
+Type: `Promise<void>`
 
 Boolean indicating if the cell is editable.
 

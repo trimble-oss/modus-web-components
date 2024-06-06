@@ -103,7 +103,7 @@ export class ModusTableCellMain {
 
     if (!row) return;
 
-    const cell = row.getAllCells().find(cell => cell.column.id === columnId);
+    const cell = row.getAllCells().find((cell) => cell.column.id === columnId);
     if (!cell) return;
 
     // Focus on the cell element
