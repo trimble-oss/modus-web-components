@@ -55,6 +55,23 @@
 
 ## Methods
 
+### `getCellEditable(rowIndex: string, columnId: string) => Promise<boolean>`
+
+Returns whether a cell is editable based on row index and column ID.
+
+#### Parameters
+
+| Name       | Type     | Description           |
+| ---------- | -------- | --------------------- |
+| `rowIndex` | `string` | The index of the row. |
+| `columnId` | `string` | The ID of the column. |
+
+#### Returns
+
+Type: `Promise<boolean>`
+
+Boolean indicating if the cell is editable.
+
 ### `getColumnData(accessorKey: string) => Promise<unknown[]>`
 
 Returns data of a column.

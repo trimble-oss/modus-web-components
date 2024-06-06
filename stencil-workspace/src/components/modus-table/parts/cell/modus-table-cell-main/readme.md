@@ -15,6 +15,26 @@
 | `valueChange`       | --                    |             | `(props: TableCellEdited) => void` | `undefined` |
 
 
+## Methods
+
+### `handleCellEdit(rowIndex: string, columnId: string) => Promise<void>`
+
+
+
+#### Parameters
+
+| Name       | Type     | Description |
+| ---------- | -------- | ----------- |
+| `rowIndex` | `string` |             |
+| `columnId` | `string` |             |
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+
 ## Dependencies
 
 ### Used by
