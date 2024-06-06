@@ -857,7 +857,7 @@ describe('modus-autocomplete', () => {
       textInput = await element.find('modus-autocomplete >>> modus-text-input');
       await textInput.click();
       options = await element.findAll('modus-autocomplete >>> .options-container li.custom-option');
-      expect(options.length).toEqual(1);
+      expect(options.length).toEqual(2);
     });
   });
 

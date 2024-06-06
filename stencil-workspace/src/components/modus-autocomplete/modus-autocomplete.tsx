@@ -196,22 +196,15 @@ export class ModusAutocomplete {
       this.addChipValue(optionValue);
     } else {
       this.selectedOption = optionValue;
-      this.disableFiltering = !this.showOptionsOnFocus;
+      this.disableFiltering = this.disableCloseOnSelect || !this.disableFiltering;
       this.handleSearchChange(optionValue);
     }
 
-    this.hasFocus = this.disableCloseOnSelect;
     this.optionSelected.emit(optionId);
   };
 
   handleInputBlur = () => {
-    if (this.selectedOption === '' || this.value === '' || this.hasFocus) {
-      this.value = '';
-      return;
-    }
-
-    this.value = this.selectedOption;
-    this.disableFiltering = true;
+    this.hasFocus = !this.disableCloseOnSelect;
   };
 
   handleInputKeyDown = (event: KeyboardEvent) => {
@@ -227,7 +220,6 @@ export class ModusAutocomplete {
   };
 
   handleOptionKeyDown = (event: any, option: any, isCustomOption = false) => {
-    //this.disableFiltering = !this.disableCloseOnSelect;
     this.disableFiltering = !this.hasEnableControl();
 
     switch (event.key.toUpperCase()) {
@@ -265,12 +257,11 @@ export class ModusAutocomplete {
       this.addChipValue(option.value);
     } else {
       this.selectedOption = option.value;
-      this.disableFiltering = !this.showOptionsOnFocus;
+      this.disableFiltering = this.disableCloseOnSelect || !this.disableFiltering;
       this.handleSearchChange(option.value);
       this.focusItemIndex = this.visibleOptions.findIndex((el) => el.id === option.id);
     }
 
-    this.hasFocus = this.disableCloseOnSelect;
     this.optionSelected.emit(option.id);
   };
 
@@ -322,6 +313,10 @@ export class ModusAutocomplete {
 
     search = search || '';
     const isSearchEmpty = search.length === 0;
+
+    if (isSearchEmpty) {
+      this.selectedOption = '';
+    }
 
     if (isSearchEmpty || this.disableFiltering) {
       this.visibleCustomOptions = this.customOptions;
@@ -394,13 +389,15 @@ export class ModusAutocomplete {
       return;
     }
     const optionList = this.el.shadowRoot.querySelector(`.options-container`) as HTMLUListElement;
-
     const selectedOption = optionList.querySelector('li.selected') as HTMLElement;
+
     if (selectedOption) {
       const containerHeight = optionList.offsetHeight;
       const optionHeight = selectedOption.offsetHeight;
       const optionTop = selectedOption.offsetTop;
-      const scrollPosition = optionTop - containerHeight + (2 * optionHeight);
+      const scrollPosition = optionTop - containerHeight + 2 * optionHeight;
+
+      selectedOption.scrollIntoView({ behavior: 'smooth', inline: 'nearest' });
       optionList.scrollTop = Math.max(scrollPosition, 0);
     }
   };
@@ -421,6 +418,7 @@ export class ModusAutocomplete {
           }
 
           this.hasFocus = true;
+          this.disableFiltering = this.showOptionsOnFocus || this.disableCloseOnSelect;
           this.updateVisibleOptions(this.value);
           this.updateVisibleCustomOptions(this.value);
         }}
