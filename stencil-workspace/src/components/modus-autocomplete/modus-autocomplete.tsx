@@ -196,7 +196,7 @@ export class ModusAutocomplete {
       this.addChipValue(optionValue);
     } else {
       this.selectedOption = optionValue;
-      this.disableFiltering = this.disableCloseOnSelect || !this.disableFiltering;
+      this.disableFiltering = this.disableCloseOnSelect;
       this.handleSearchChange(optionValue);
     }
 
@@ -257,7 +257,7 @@ export class ModusAutocomplete {
       this.addChipValue(option.value);
     } else {
       this.selectedOption = option.value;
-      this.disableFiltering = this.disableCloseOnSelect || !this.disableFiltering;
+      this.disableFiltering = this.disableCloseOnSelect;
       this.handleSearchChange(option.value);
       this.focusItemIndex = this.visibleOptions.findIndex((el) => el.id === option.id);
     }
