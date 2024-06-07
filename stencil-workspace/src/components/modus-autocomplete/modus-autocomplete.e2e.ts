@@ -154,7 +154,7 @@ describe('modus-autocomplete', () => {
       expect(valueChange).toHaveReceivedEventTimes(1);
     });
 
-    it('should filter options when value is not empty', async () => {
+    it('should not filter options when value is not empty', async () => {
       const element = await page.find('modus-autocomplete');
       expect(element).toHaveClass('hydrated');
 
@@ -166,7 +166,7 @@ describe('modus-autocomplete', () => {
       await textInput.type('Test 1');
 
       const options = await page.findAll('modus-autocomplete >>> .options-container li');
-      expect(options.length).toEqual(1);
+      expect(options.length).toEqual(2);
     });
 
     it('should default text input autocomplete to off', async () => {
@@ -215,8 +215,6 @@ describe('modus-autocomplete', () => {
 
       let options = await page.findAll('modus-autocomplete >>> .options-container li');
 
-      expect(options.length).toBe(1);
-
       element.setProperty('value', '');
 
       await page.waitForChanges();
@@ -241,7 +239,7 @@ describe('modus-autocomplete', () => {
 
       let options = await page.findAll('modus-autocomplete >>> .options-container li');
 
-      expect(options.length).toBe(1);
+      expect(options.length).toBe(2);
 
       element.setProperty('value', 'Test 2');
 
@@ -251,7 +249,7 @@ describe('modus-autocomplete', () => {
 
       await page.waitForChanges();
       options = await page.findAll('modus-autocomplete >>> .options-container li');
-      expect(options.length).toBe(1);
+      expect(options.length).toBe(2);
     });
 
     it('should select the option by hitting Space', async () => {
@@ -857,7 +855,7 @@ describe('modus-autocomplete', () => {
       textInput = await element.find('modus-autocomplete >>> modus-text-input');
       await textInput.click();
       options = await element.findAll('modus-autocomplete >>> .options-container li.custom-option');
-      expect(options.length).toEqual(1);
+      expect(options.length).toEqual(2);
     });
   });
 

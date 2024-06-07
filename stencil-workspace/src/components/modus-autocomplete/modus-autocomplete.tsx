@@ -132,7 +132,7 @@ export class ModusAutocomplete {
   }
 
   componentDidRender(): void {
-    if (this.disableCloseOnSelect && this.displayOptions()) {
+    if (this.displayOptions()) {
       this.scrollToOptionSelected();
     }
   }
@@ -317,14 +317,18 @@ export class ModusAutocomplete {
       this.selectedOption = '';
     }
 
-    if (isSearchEmpty || (this.disableFiltering && this.disableCloseOnSelect)) {
+    const hasMatchedText =
+      this.customOptions?.filter((o: any) => {
+        return o.getAttribute(DATA_SEARCH_VALUE).toLowerCase().includes(search.toLowerCase());
+      }).length > 0;
+
+    if (hasMatchedText) {
       this.visibleCustomOptions = this.customOptions;
-      return;
+    } else {
+      this.visibleCustomOptions = [];
+      this.showNoResultsFoundMessage = true;
     }
 
-    this.visibleCustomOptions = this.customOptions?.filter((o: any) => {
-      return o.getAttribute(DATA_SEARCH_VALUE).toLowerCase().includes(search.toLowerCase());
-    });
     this.containsSlottedElements = this.customOptions.length > 0;
   };
 
@@ -339,15 +343,17 @@ export class ModusAutocomplete {
       this.selectedOption = '';
     }
 
-    if ((isSearchEmpty && !this.showOptionsOnFocus) || (this.disableFiltering && this.disableCloseOnSelect)) {
+    const hasMatchedText =
+      (this.options as ModusAutocompleteOption[])?.filter((o: ModusAutocompleteOption) => {
+        return o.value.toLowerCase().includes(search.toLowerCase());
+      }).length > 0;
+
+    if (hasMatchedText) {
       this.visibleOptions = this.options as ModusAutocompleteOption[];
-
-      return;
+    } else {
+      this.visibleOptions = [];
+      this.showNoResultsFoundMessage = true;
     }
-
-    this.visibleOptions = (this.options as ModusAutocompleteOption[])?.filter((o: ModusAutocompleteOption) => {
-      return o.value.toLowerCase().includes(search.toLowerCase());
-    });
   };
 
   // Do not display the slot for the custom options. We use this hidden slot to reference the slot's children.
