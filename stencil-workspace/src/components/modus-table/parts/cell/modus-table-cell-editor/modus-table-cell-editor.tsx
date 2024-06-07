@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { Host, JSX, Component, Prop, h } from '@stencil/core';
+import { Host, JSX, Component, Prop, h, Listen } from '@stencil/core';
 import {
   KEYBOARD_ENTER,
   CELL_EDIT_TYPE_AUTOCOMPLETE,
@@ -18,7 +18,6 @@ import {
   ModusTableCellEditorArgs,
 } from '../../../models/modus-table.models';
 import { ModusDateInputEventDetails } from '../../../../modus-date-input/utils/modus-date-input.models';
-import { ModusAutocompleteOption } from '../../../../modus-autocomplete/modus-autocomplete';
 
 @Component({
   tag: 'modus-table-cell-editor',
@@ -27,31 +26,34 @@ import { ModusAutocompleteOption } from '../../../../modus-autocomplete/modus-au
 export class ModusTableCellEditor {
   @Prop() args: ModusTableCellEditorArgs;
   @Prop() dataType: string;
-  @Prop() value: any;
+  @Prop() value: unknown;
   @Prop() type: string;
   @Prop() valueChange: (newValue: string) => void;
   @Prop() keyDown: (e: KeyboardEvent, newValue: string) => void;
 
-  private editedValue: any;
+  private editedValue: unknown;
   private inputElement: HTMLElement;
-  private outsideClickListener: (event: any) => void;
 
   connectedCallback(): void {
     this.editedValue = this.value;
   }
 
   componentDidLoad(): void {
-    if (this.inputElement['focusInput']) this.inputElement['focusInput']();
-
-    this.outsideClickListener = (event) => {
-      if (!this.inputElement.contains(event.target)) {
-        this.handleBlur();
-      }
-    };
-    if (this.type == 'date') document.addEventListener('click', this.outsideClickListener);
+    if (this.inputElement['focusInput']) {
+      this.inputElement['focusInput']();
+    }
   }
-  disconnectedCallback(): void {
-    document.removeEventListener('click', this.outsideClickListener);
+
+  @Listen('click', { target: 'document' })
+  handleDocumentClick(event: MouseEvent) {
+    if (this.type != 'date') {
+      return;
+    }
+
+    const target = event.target as HTMLElement;
+    if (!this.inputElement.contains(target)) {
+      this.handleBlur();
+    }
   }
 
   handleBlur: () => void = () => {
@@ -79,7 +81,7 @@ export class ModusTableCellEditor {
     return (
       <modus-number-input
         {...this.getDefaultProps('Number input')}
-        value={this.value}
+        value={this.value as string}
         textAlign="right"
         size="large"
         onBlur={this.handleBlur}
@@ -92,7 +94,7 @@ export class ModusTableCellEditor {
     return (
       <modus-text-input
         {...this.getDefaultProps('Text input')}
-        value={this.value}
+        value={this.value as string}
         onValueChange={(e: CustomEvent<string>) => (this.editedValue = e.detail)}
         onBlur={this.handleBlur}
         onKeyDown={this.handleKeyDown}
@@ -106,7 +108,7 @@ export class ModusTableCellEditor {
     const args = this.args as ModusTableCellSelectEditorArgs;
     const options = args?.options || [];
     const optionsDisplayProp = args?.optionsDisplayProp || valueKey;
-    const selectedOption = options.find((option) => option[optionsDisplayProp] === this.value) as any;
+    const selectedOption = options.find((option) => option[optionsDisplayProp] === this.value) as unknown;
 
     function handleEnter(e: KeyboardEvent, callback: (e: KeyboardEvent) => void) {
       const code = e.key.toLowerCase();
@@ -126,13 +128,14 @@ export class ModusTableCellEditor {
           onInputBlur={this.handleBlur}
           onKeyDown={(e) => handleEnter(e, this.handleKeyDown)}
           onValueChange={(e: CustomEvent<unknown>) => {
+            const detail = e.detail as { display: string; [key: string]: unknown };
             if (this.dataType === 'badge') {
-              const { display, ...restProps } = e.detail as any;
+              const { display, ...restProps } = detail;
               this.editedValue = { ...restProps, text: display };
             } else if (this.dataType === 'link') {
-              this.editedValue = e.detail;
+              this.editedValue = detail;
             } else {
-              this.editedValue = e.detail[valueKey];
+              this.editedValue = detail[valueKey];
             }
           }}></modus-select>
       </div>
@@ -149,7 +152,7 @@ export class ModusTableCellEditor {
           format={format}
           size="large"
           show-calendar-icon="true"
-          value={this.value}
+          value={this.value as string}
           onValueChange={(e: CustomEvent<ModusDateInputEventDetails>) => {
             this.editedValue = e.detail[valueKey];
           }}></modus-date-input>
@@ -158,49 +161,48 @@ export class ModusTableCellEditor {
   }
 
   renderAutocompleteInput(): JSX.Element[] {
-    let options, selectedOption;
     const args = this.args as ModusTableCellAutocompleteEditorArgs;
-    // const { noResultsFoundText, noResultsFoundSubtext, showNoResultsFoundMessage, showOptionsOnFocus } = args;
+    let options: string[] = [];
+    let selectedOption = '';
+
     if (this.dataType === 'badge') {
-      options = args?.options.map((option: any) => option.text) as ModusAutocompleteOption[] | string[];
-      selectedOption = this.value['text'];
+      options = args?.options.map((option) => (option as unknown as { text: string }).text);
+      selectedOption = (this.value as { text: string })?.text || '';
     } else if (this.dataType === 'link') {
-      options = args?.options.map((option: any) => option.display) as ModusAutocompleteOption[] | string[];
-      selectedOption = this.value['display'];
+      options = args?.options.map((option) => (option as unknown as { display: string }).display);
+      selectedOption = (this.value as { display: string })?.display || '';
     } else {
-      options = (args?.options || []) as ModusAutocompleteOption[] | string[];
-      selectedOption = this.editedValue;
+      options = (args?.options || []) as unknown as string[];
+      selectedOption = this.editedValue as string;
     }
+
     return (
       <div class="autocomplete-container">
         <modus-autocomplete
           {...this.getDefaultProps('Autocomplete input')}
           include-search-icon="false"
           size="medium"
-          //onClick={(e: MouseEvent) => e.stopPropagation()}
           options={options}
           onBlur={this.handleBlur}
           onKeyDown={(e) => e.stopPropagation()}
           onOptionSelected={(e: CustomEvent<string>) => {
+            const selectedDetail = e.detail;
+
             if (this.dataType === 'badge') {
-              args?.options.map((option: any) => {
-                if (option.text == e.detail) {
-                  this.editedValue = option;
-                }
-              });
+              const selectedOption = args?.options.find(
+                (option) => (option as unknown as { text: string }).text === selectedDetail
+              );
+              this.editedValue = selectedOption;
             } else if (this.dataType === 'link') {
-              args?.options.map((option: any) => {
-                if (option.display == e.detail) {
-                  this.editedValue = option;
-                }
-              });
+              const selectedOption = args?.options.find(
+                (option) => (option as unknown as { display: string }).display === selectedDetail
+              );
+              this.editedValue = selectedOption;
             } else {
-              this.editedValue = e.detail;
+              this.editedValue = selectedDetail;
             }
           }}
-          value={selectedOption}
-          // onKeyDown={(e) => e.stopPropagation()}
-        ></modus-autocomplete>
+          value={selectedOption}></modus-autocomplete>
       </div>
     );
   }

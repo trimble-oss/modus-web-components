@@ -170,12 +170,20 @@ export class ModusTableCellMain {
           <ModusTableCellLinkElement
             link={cellValue as ModusTableCellLink}
             onLinkClick={(link: ModusTableCellLink) => {
+              this.cellEl.focus();
               cellLinkClick.emit(link);
             }}
           />
         );
       } else if (cellDataType === COLUMN_DEF_DATATYPE_BADGE) {
-        return <ModusTableCellBadgeElement badge={cellValue as ModusTableCellBadge} />;
+        return (
+          <ModusTableCellBadgeElement
+            badge={cellValue as ModusTableCellBadge}
+            onBadgeClick={() => {
+              this.cellEl.focus();
+            }}
+          />
+        );
       } else {
         return CellFormatter(this.cell.column.columnDef.cell, this.cell.getContext());
       }

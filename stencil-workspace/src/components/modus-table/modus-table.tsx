@@ -86,10 +86,6 @@ import { createGuid } from '../../utils/utils';
 export class ModusTable {
   @Element() element: HTMLElement;
 
-  @Prop() editableCellId: string[] = [];
-  @Watch('editableCellId') onEditableCellIdsChange(newVal: string[]) {
-    console.log('editableCellIds', newVal);
-  }
   /** (Required) To display headers in the table. */
   @Prop({ mutable: true }) columns!: ModusTableColumn<unknown>[];
   @Watch('columns') onColumnsChange(newVal: ModusTableColumn<unknown>[]) {
@@ -377,7 +373,6 @@ export class ModusTable {
     this.setTableState(initialTableState);
     this.onRowsExpandableChange(this.rowsExpandable);
     this.initializeTable();
-    console.log('editableCellId232s', this.editableCellId);
   }
 
   componentWillRender(): void {
