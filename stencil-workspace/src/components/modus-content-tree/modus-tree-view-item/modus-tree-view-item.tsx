@@ -41,7 +41,7 @@ export class ModusTreeViewItem {
   /** (optional) Disables the tree item */
   @Prop() disabled: boolean;
 
-  /** (optional) Allows the item to be dragged across the tree */
+  /** (optional) Allows the item to be xed across the tree */
   @Prop() draggableItem: boolean;
 
   /** (optional) Allows the item to be a drop zone so other tree items can be dropped above it */
@@ -112,8 +112,10 @@ export class ModusTreeViewItem {
     className?: string;
     defaultContent?: string | HTMLElement;
     display?: boolean;
+    tabIndex?: number;
     onClick?: (e: MouseEvent) => void;
     onMouseDown?: (e: MouseEvent) => void;
+    onKeyDown?: (e: KeyboardEvent) => void;
     role?: string;
   }> = ({ name, className, defaultContent, display = true, ...props }) => {
     const showDefault = !this.slots.has(name) && defaultContent;
@@ -218,6 +220,10 @@ export class ModusTreeViewItem {
       this.options.onItemDrag(this.nodeId, dragContent, e);
     }
   }
+  handleDragKeyDown(e: KeyboardEvent) {
+    const dragContent = this.refItemContent.cloneNode(true) as HTMLElement;
+    this.options.onItemDragClick(this.nodeId, dragContent, e);
+  }
 
   handleExpandToggle(e?: Event): void {
     if (this.shouldHandleEvent(e)) {
@@ -260,8 +266,10 @@ export class ModusTreeViewItem {
         e.stopPropagation();
         break;
       case 'Enter':
-        this.handleItemClick(e);
-        e.stopPropagation();
+        if (!this.draggableItem) {
+          this.handleItemClick(e);
+          e.stopPropagation();
+        }
         break;
     }
   }
@@ -440,6 +448,8 @@ export class ModusTreeViewItem {
             className={`icon-slot drag-icon${!this.draggableItem ? ' hidden' : ''}`}
             defaultContent={<ModusIconMap icon="drag_indicator" />}
             name={this.SLOT_DRAG_ICON}
+            tabIndex={0}
+            onKeyDown={(e) => this.handleDragKeyDown(e)}
             onMouseDown={(e) => this.handleDrag(e)}
           />
           <div aria-disabled="true" style={{ paddingLeft: `${(level - 1) * 0.5}rem` }}>
