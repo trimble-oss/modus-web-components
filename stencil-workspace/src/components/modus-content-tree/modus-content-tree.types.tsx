@@ -19,6 +19,7 @@ export type TreeViewItemOptions = {
   onItemExpandToggle?: (itemId: string) => void;
   onItemFocus?: (itemId: string) => void;
   onItemDrag?: (itemId: string, dragContent: HTMLElement, e: MouseEvent) => void;
+  onItemDragClick?: (itemId: string, dragContent: HTMLElement, e: KeyboardEvent) => void;
   onItemUpdate?: (newValue: TreeViewItemInfo, oldValue?: TreeViewItemInfo) => void;
   size?: string;
   borderless?: boolean;
