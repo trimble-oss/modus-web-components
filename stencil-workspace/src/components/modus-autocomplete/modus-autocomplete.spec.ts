@@ -114,7 +114,10 @@ describe('modus-autocomplete', () => {
     ];
     modusAutocomplete.hasFocus = true;
     modusAutocomplete.handleSearchChange('Option 1');
-    expect(modusAutocomplete.visibleOptions).toEqual([{ id: 'Option 1', value: 'Option 1' }]);
+    expect(modusAutocomplete.visibleOptions).toEqual([
+      { id: 'Option 1', value: 'Option 1' },
+      { id: 'Option 2', value: 'Option 2' },
+    ]);
   });
 
   it('should show all options on empty search', async () => {
