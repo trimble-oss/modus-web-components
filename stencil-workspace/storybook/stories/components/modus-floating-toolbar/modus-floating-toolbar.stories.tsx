@@ -44,18 +44,18 @@ const Template = ({ ariaLabel, disabled, tabIndex }) => html`
   <modus-floating-toolbar .disabled=${disabled} aria-label=${ariaLabel} tab-index=${tabIndex}>
     <modus-button>Button 1</modus-button>
     <modus-button>Button 2</modus-button>
-    <modus-divider></modus-divider>
     <modus-button>Button 3</modus-button>
   </modus-floating-toolbar>
 `;
 
 const IconOnlyTemplate = ({ ariaLabel, disabled, tabIndex }) => html`
   <modus-floating-toolbar .disabled=${disabled} aria-label=${ariaLabel} tab-index=${tabIndex}>
-    <modus-button button-style="borderless" icon-only="notifications"></modus-button>
+    <modus-button button-style="borderless" icon-only="undo"></modus-button>
+    <modus-button button-style="borderless" icon-only="redo"></modus-button>
+    <modus-button button-style="borderless" icon-only="expand"></modus-button>
+    <modus-button button-style="borderless" icon-only="collapse"></modus-button>
     <modus-divider></modus-divider>
-    <modus-button button-style="borderless" icon-only="notifications"></modus-button>
-    <modus-divider></modus-divider>
-    <modus-button button-style="borderless" icon-only="notifications"></modus-button>
+    <modus-button button-style="borderless" icon-only="window_dock_undock"></modus-button>
   </modus-floating-toolbar>
 `;
 
