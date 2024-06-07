@@ -300,7 +300,7 @@ export namespace Components {
         /**
           * (optional) The button group's aria-label.
          */
-        "ariaLabel": string;
+        "ariaLabel": string | null;
         /**
           * (optional) The style of the buttons in the group
          */
@@ -1373,7 +1373,7 @@ export namespace Components {
         /**
           * (optional) Capitalization behavior when using a non-traditional keyboard (e.g. microphone, touch screen)
          */
-        "autocapitalize": 'none' | 'off' | 'sentences' | 'on' | 'words' | 'characters';
+        "autocapitalize": string;
         /**
           * (optional) Sets autocomplete on the input.
          */
@@ -1565,7 +1565,7 @@ export namespace Components {
         /**
           * (optional) Role taken by the toast.  Defaults to 'status'.
          */
-        "role": 'alert' | 'log' | 'marquee' | 'status' | 'timer';
+        "role": string | null;
         /**
           * (optional) Whether to show the toasts' icon.
          */
@@ -2966,7 +2966,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The button group's aria-label.
          */
-        "ariaLabel"?: string;
+        "ariaLabel"?: string | null;
         /**
           * (optional) The style of the buttons in the group
          */
@@ -4218,7 +4218,7 @@ declare namespace LocalJSX {
         /**
           * (optional) Capitalization behavior when using a non-traditional keyboard (e.g. microphone, touch screen)
          */
-        "autocapitalize"?: 'none' | 'off' | 'sentences' | 'on' | 'words' | 'characters';
+        "autocapitalize"?: string;
         /**
           * (optional) Sets autocomplete on the input.
          */
@@ -4418,7 +4418,7 @@ declare namespace LocalJSX {
         /**
           * (optional) Role taken by the toast.  Defaults to 'status'.
          */
-        "role"?: 'alert' | 'log' | 'marquee' | 'status' | 'timer';
+        "role"?: string | null;
         /**
           * (optional) Whether to show the toasts' icon.
          */
