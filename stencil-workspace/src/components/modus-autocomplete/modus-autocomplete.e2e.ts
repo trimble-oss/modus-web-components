@@ -213,8 +213,6 @@ describe('modus-autocomplete', () => {
       await textInput.type('Test 1');
       await page.waitForChanges();
 
-      let options = await page.findAll('modus-autocomplete >>> .options-container li');
-
       element.setProperty('value', '');
 
       await page.waitForChanges();
@@ -223,7 +221,8 @@ describe('modus-autocomplete', () => {
 
       await textInput.type('T');
       await page.waitForChanges();
-      options = await page.findAll('modus-autocomplete >>> .options-container li');
+
+      const options = await page.findAll('modus-autocomplete >>> .options-container li');
       expect(options.length).toBe(2);
     });
 
