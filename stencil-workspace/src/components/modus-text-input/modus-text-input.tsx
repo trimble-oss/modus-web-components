@@ -16,7 +16,7 @@ export class ModusTextInput {
   @Prop() ariaLabel: string | null;
 
   /** (optional) Capitalization behavior when using a non-traditional keyboard (e.g. microphone, touch screen) */
-  @Prop() autocapitalize: 'none' | 'off' | 'sentences' | 'on' | 'words' | 'characters';
+  @Prop() autocapitalize: string;
 
   /** (optional) Whether to activate automatic correction while the user is editing this field in Safari. */
   @Prop() autocorrect: boolean | 'off' | 'on';

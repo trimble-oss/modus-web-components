@@ -41,7 +41,7 @@ export class ModusTreeViewItem {
   /** (optional) Disables the tree item */
   @Prop() disabled: boolean;
 
-  /** (optional) Allows the item to be xed across the tree */
+  /** (optional) Allows the item to be dragged across the tree */
   @Prop() draggableItem: boolean;
 
   /** (optional) Allows the item to be a drop zone so other tree items can be dropped above it */
