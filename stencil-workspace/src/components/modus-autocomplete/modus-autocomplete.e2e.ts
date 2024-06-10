@@ -154,7 +154,7 @@ describe('modus-autocomplete', () => {
       expect(valueChange).toHaveReceivedEventTimes(1);
     });
 
-    it('should not filter options when value is not empty', async () => {
+    it('should filter options when value is not empty', async () => {
       const element = await page.find('modus-autocomplete');
       expect(element).toHaveClass('hydrated');
 
@@ -166,7 +166,7 @@ describe('modus-autocomplete', () => {
       await textInput.type('Test 1');
 
       const options = await page.findAll('modus-autocomplete >>> .options-container li');
-      expect(options.length).toEqual(2);
+      expect(options.length).toEqual(1);
     });
 
     it('should default text input autocomplete to off', async () => {
@@ -238,7 +238,7 @@ describe('modus-autocomplete', () => {
 
       let options = await page.findAll('modus-autocomplete >>> .options-container li');
 
-      expect(options.length).toBe(2);
+      expect(options.length).toBe(1);
 
       element.setProperty('value', 'Test 2');
 
@@ -248,7 +248,7 @@ describe('modus-autocomplete', () => {
 
       await page.waitForChanges();
       options = await page.findAll('modus-autocomplete >>> .options-container li');
-      expect(options.length).toBe(2);
+      expect(options.length).toBe(1);
     });
 
     it('should select the option by hitting Space', async () => {
@@ -269,7 +269,7 @@ describe('modus-autocomplete', () => {
 
       await page.waitForChanges();
 
-      let options = await page.findAll('modus-autocomplete >>> .options-container li');
+      const options = await page.findAll('modus-autocomplete >>> .options-container li');
 
       await options[0].focus();
       await page.waitForChanges();
@@ -297,7 +297,7 @@ describe('modus-autocomplete', () => {
       await textInput.click();
       await page.waitForChanges();
 
-      let options = await page.findAll('modus-autocomplete >>> .options-container li');
+      const options = await page.findAll('modus-autocomplete >>> .options-container li');
 
       await options[1].focus();
       await page.waitForChanges();
@@ -935,7 +935,7 @@ describe('modus-autocomplete', () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-autocomplete aria-label="test label"></modus-autocomplete>');
-    let element = await page.find('modus-autocomplete >>> div.autocomplete');
+    const element = await page.find('modus-autocomplete >>> div.autocomplete');
     expect(element).toBeDefined();
     expect(element).toHaveAttribute('aria-label');
     expect(element.getAttribute('aria-label')).toEqual('test label');
@@ -945,7 +945,7 @@ describe('modus-autocomplete', () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-autocomplete></modus-autocomplete>');
-    let element = await page.find('modus-autocomplete >>> div.autocomplete');
+    const element = await page.find('modus-autocomplete >>> div.autocomplete');
     expect(element).toBeDefined();
     expect(element).not.toHaveAttribute('aria-label');
   });
@@ -954,7 +954,7 @@ describe('modus-autocomplete', () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-autocomplete aria-label=""></modus-autocomplete>');
-    let element = await page.find('modus-autocomplete >>> div.autocomplete');
+    const element = await page.find('modus-autocomplete >>> div.autocomplete');
     expect(element).toBeDefined();
     expect(element).not.toHaveAttribute('aria-label');
   });

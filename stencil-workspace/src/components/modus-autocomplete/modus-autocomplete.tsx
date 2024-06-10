@@ -292,6 +292,14 @@ export class ModusAutocomplete {
     }
   }
 
+  handleTextInputFocus = () => {
+    console.log(this.value);
+    const hasDefaultTextInput = this.value?.length > 0 && !this.disableCloseOnSelect;
+    if (hasDefaultTextInput) {
+      this.disableFiltering = true;
+    }
+  };
+
   handleTextInputValueChange = (event: CustomEvent<string>) => {
     // Cancel the modus-text-input's value change event or else it will bubble to consumer.
     event.stopPropagation();
@@ -317,15 +325,15 @@ export class ModusAutocomplete {
       this.selectedOption = '';
     }
 
-    const hasMatchedText =
-      this.customOptions?.filter((o: any) => {
+    if (!this.disableFiltering) {
+      this.visibleCustomOptions = this.customOptions?.filter((o: any) => {
         return o.getAttribute(DATA_SEARCH_VALUE).toLowerCase().includes(search.toLowerCase());
-      }).length > 0;
-
-    if (hasMatchedText) {
-      this.visibleCustomOptions = this.customOptions;
+      });
     } else {
-      this.visibleCustomOptions = [];
+      this.visibleCustomOptions = this.customOptions;
+    }
+
+    if (this.visibleCustomOptions?.length === 0) {
       this.showNoResultsFoundMessage = true;
     }
 
@@ -343,15 +351,15 @@ export class ModusAutocomplete {
       this.selectedOption = '';
     }
 
-    const hasMatchedText =
-      (this.options as ModusAutocompleteOption[])?.filter((o: ModusAutocompleteOption) => {
+    if (!this.disableFiltering) {
+      this.visibleOptions = (this.options as ModusAutocompleteOption[])?.filter((o: ModusAutocompleteOption) => {
         return o.value.toLowerCase().includes(search.toLowerCase());
-      }).length > 0;
-
-    if (hasMatchedText) {
-      this.visibleOptions = this.options as ModusAutocompleteOption[];
+      });
     } else {
-      this.visibleOptions = [];
+      this.visibleOptions = this.options as ModusAutocompleteOption[];
+    }
+
+    if (this.visibleOptions?.length === 0) {
       this.showNoResultsFoundMessage = true;
     }
   };
@@ -370,6 +378,7 @@ export class ModusAutocomplete {
       clearable={this.clearable && !this.readOnly && !!this.value}
       errorText={this.hasFocus ? '' : this.errorText}
       includeSearchIcon={false}
+      onFocus={this.handleTextInputFocus}
       onValueChange={(searchEvent: CustomEvent<string>) => this.handleTextInputValueChange(searchEvent)}
       placeholder={this.placeholder}
       size={this.size}
