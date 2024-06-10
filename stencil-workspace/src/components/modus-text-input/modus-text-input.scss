@@ -58,7 +58,7 @@
       border: none;
       color: $modus-input-color;
       font-family: $primary-font;
-      font-size: $rem-12px;
+      font-size: var(--input-font-size, #{$rem-12px});
       outline: none;
       padding: 0 $rem-8px;
       width: 100%;
@@ -105,8 +105,8 @@
     }
 
     &:focus-within {
-      border-color: $modus-input-bottom-line-active-color;
-      box-shadow: 0 0 0 1px $modus-input-bottom-line-active-color;
+      border-color: var(--modus-input-border-color, #{$rem-1px solid $modus-input-bottom-line-active-color});
+      box-shadow: 0 0 0 1px var(--modus-input-border-color, #{$rem-1px solid $modus-input-bottom-line-active-color});
     }
 
     &.error {
