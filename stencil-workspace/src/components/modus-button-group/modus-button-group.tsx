@@ -19,7 +19,7 @@ export class ModusButtonGroup {
   @Prop() ariaDisabled: string | null;
 
   /** (optional) The button group's aria-label. */
-  @Prop() ariaLabel: string;
+  @Prop() ariaLabel: string | null;
 
   /** (optional) The style of the buttons in the group */
   @Prop() buttonStyle: ButtonStyle = 'outline';

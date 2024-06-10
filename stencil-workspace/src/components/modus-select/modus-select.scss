@@ -62,8 +62,8 @@
       }
 
       &:focus-within {
-        border-color: $modus-input-bottom-line-active-color;
-        box-shadow: 0 0 0 1px $modus-input-bottom-line-active-color;
+        border-color: var(--modus-input-border-color, #{$rem-1px solid $modus-input-bottom-line-active-color});
+        box-shadow: 0 0 0 1px var(--modus-input-border-color, #{$rem-1px solid $modus-input-bottom-line-active-color});
       }
 
       &.large {

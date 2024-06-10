@@ -23,7 +23,7 @@ export class ModusToast {
   @Prop() delay = 15000;
 
   /** (optional) Role taken by the toast.  Defaults to 'status'. */
-  @Prop() role: 'alert' | 'log' | 'marquee' | 'status' | 'timer' = 'status';
+  @Prop() role: string | null = 'status';
 
   /** (optional) Whether to show the toasts' icon. */
   @Prop() showIcon = true;

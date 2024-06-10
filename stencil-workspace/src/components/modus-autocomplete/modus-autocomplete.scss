@@ -31,7 +31,8 @@
   .chips-container {
     align-items: center;
     background-color: $modus-autocomplete-bg;
-    border: $rem-1px solid $modus-autocomplete-container-border-color;
+    border: var(--modus-autocomplete-border, #{$rem-1px solid $modus-autocomplete-container-border-color});
+    border-bottom-color: $modus-autocomplete-container-bottom-line-color;
     border-radius: 4px;
     box-sizing: border-box;
     display: flex;
@@ -58,6 +59,8 @@
       flex: 1;
       height: auto !important;
       position: relative;
+
+      --input-font-size: var(--modus-autocomplete-font-size, #{12px});
 
       &::part(input-container) {
         border: none !important;
@@ -163,6 +166,7 @@
 }
 
 .autocomplete .chips-container:focus-within {
-  border-color: $modus-autocomplete-container-border-active-color;
-  box-shadow: 0 0 0 1px $modus-autocomplete-container-border-active-color;
+  border: var(--modus-autocomplete-border-active, #{$rem-1px solid $modus-autocomplete-container-border-active-color});
+  box-shadow: 0 0 0 1px
+    var(--modus-autocomplete-border-active, #{$rem-1px solid $modus-autocomplete-container-border-active-color});
 }

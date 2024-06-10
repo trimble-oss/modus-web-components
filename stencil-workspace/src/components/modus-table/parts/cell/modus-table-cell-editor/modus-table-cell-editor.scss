@@ -1,3 +1,10 @@
+:host {
+  --modus-autocomplete-border: none;
+  --modus-autocomplete-border-active: none;
+  --modus-autocomplete-font-size: 14px;
+  --modus-input-border-color: none;
+}
+
 .editor::part(input-container),
 .editor::part(input) {
   border: none !important;
@@ -16,4 +23,9 @@ table.density-compact {
   .editor::part(input) {
     height: calc($rem-24px - $rem-4px) !important;
   }
+}
+
+.autocomplete-container {
+  margin-left: 4px;
+  margin-top: 5px;
 }
