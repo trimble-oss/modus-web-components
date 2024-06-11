@@ -179,9 +179,8 @@
   // Input
   --modus-input-bg: var(--modus-white);
   --modus-input-color: var(--modus-gray-8);
-  --modus-input-border-color: var(--modus-gray-0);
-  --modus-input-bottom-line-color: var(--modus-gray-6);
-  --modus-input-bottom-line-active-color: var(--modus-highlight-blue-color);
+  --modus-input-border-color: var(--modus-gray-6);
+  --modus-input-border-active-color: var(--modus-highlight-blue-color);
   --modus-input-helper-icon-color: var(--modus-gray-6);
   --modus-input-hint-text-color: var(--modus-gray-3);
   --modus-input-label-color: var(--modus-gray-8);
@@ -539,7 +538,7 @@
   --modus-input-bg: var(--modus-gray-10);
   --modus-input-color: var(--modus-body-color);
   --modus-input-border-color: var(--modus-gray-8);
-  --modus-input-bottom-line-active-color: var(--modus-highlight-blue-color);
+  --modus-input-border-active-color: var(--modus-highlight-blue-color);
   --modus-input-helper-icon-color: var(--modus-gray-2);
   --modus-input-hint-text-color: var(--modus-gray-5);
   --modus-input-label-color: var(--modus-gray-2);
