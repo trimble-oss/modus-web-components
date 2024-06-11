@@ -408,7 +408,7 @@ export class ModusAutocomplete {
     const selectedOption = optionList.querySelector('li.selected') as HTMLElement;
 
     if (selectedOption) {
-     selectedOption.scrollIntoView({ behavior: 'smooth', inline: 'nearest' });
+      selectedOption.scrollIntoView({ behavior: 'smooth', inline: 'nearest' });
     }
   };
 
