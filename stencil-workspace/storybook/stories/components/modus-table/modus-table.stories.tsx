@@ -16,6 +16,10 @@ function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
+function randomBoolean() {
+  return Math.random() < 0.5;
+}
+
 function newPerson() {
   const namesIndex = randomNumber(0, 17);
   const firstName = Names[namesIndex].split(' ')[0];
@@ -37,6 +41,7 @@ function newPerson() {
       randomNumber(0, 100) > 33 ? 'medium'
       : 'low'
     ],
+    trusted: TrustedStatus[randomBoolean() ? 'true' : 'false'],
   };
 }
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -209,6 +214,15 @@ const Priorities = {
     size: 'medium', type: 'counter',
     text: 'Low',
     color: 'danger'
+  }
+}
+
+const TrustedStatus = {
+  "true": {
+    checked: true,
+  },
+  "false": {
+    checked: false,
   }
 }
 
@@ -739,6 +753,24 @@ Badge.args = {
   ],
   data: makeData(7)
 
+}
+
+export const Checkbox = Template.bind({});
+Checkbox.args = {
+  ...DefaultArgs,
+  columns: [
+    ...DefaultColumns.slice(0, DefaultColumns.length - 6),
+    {
+      header: 'Trusted',
+      accessorKey: 'trusted',
+      sortingFn: 'sortForCheckbox',
+      id: 'trusted',
+      dataType: 'checkbox',
+      maxSize: 90,
+    },
+    ...DefaultColumns.slice(DefaultColumns.length - 1)
+  ],
+  data: makeData(7)
 }
 
 export const ColumnResize = Template.bind({});

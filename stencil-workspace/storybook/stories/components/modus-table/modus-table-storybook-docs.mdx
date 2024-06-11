@@ -16,6 +16,7 @@ import { Story } from '@storybook/addon-docs';
 - [Value Formatter](#value-formatter)
 - [Hyperlink](#hyperlink)
 - [Badge](#badge)
+- [Checkbox](#checkbox)
 - [Column Resize](#column-resize)
 - [Column Reorder](#column-reorder)
 - [Pagination](#pagination)
@@ -281,6 +282,67 @@ User can display badge in a table column.
           type: 'counter',
           text: 'Low',
           color: 'danger'
+        },
+        createdAt: '2002-11-21T12:48:51.739Z',
+      },
+      ...
+    ];
+  </script>
+</html>
+```
+
+### Checkbox
+
+Users can display a checkbox in a table column.
+
+- Pass the data in `ModusTableCellCheckbox` format and specify `ModusTableCellCheckbox.checkbox` as the column type.
+- As a checkbox is an object, the default sorting is ineffective. We must pass `sortingFn:'sortForCheckbox'` along with the column information in order to sort a column with the `ModusTableCellCheckbox` datatype or if '\_type' is used to override the datatype.
+
+```html
+<div style="width: 950px">
+   <modus-table column-resize="true" />
+</div>
+ <script>
+    document.querySelector('modus-table').columns = [
+      {
+        header: 'First Name',
+        accessorKey: 'firstName',
+        id: 'first-name',
+        dataType: 'text',
+        size: 150,
+        minSize: 80
+      },
+      {
+        header: 'Last Name',
+        accessorKey: 'lastName',
+        id: 'last-name',
+        dataType: 'text',
+        size: 150,
+        minSize: 80
+      },
+      {
+        header: 'Trusted',
+        accessorKey: 'trusted',
+        sortingFn: 'sortForCheckbox',
+        id: 'trusted',
+        dataType: 'checkbox',
+        maxSize: 90,
+      },
+      {
+        header: 'Created At',
+        accessorKey: 'createdAt',
+        id: 'createdAt',
+        dataType: 'date',
+        size: 210,
+        minSize: 100,
+      },
+    ];
+    document.querySelector('modus-table').data = [
+      {
+        firstName: 'Gordon',
+        lastName: 'Lemke',
+        priority: {
+          checked: true,
         },
         createdAt: '2002-11-21T12:48:51.739Z',
       },
