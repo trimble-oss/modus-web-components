@@ -63,7 +63,11 @@ export type ModusTableCellAutocompleteEditorArgs = {
 };
 export type ModusTableCellEditorArgs = ModusTableCellSelectEditorArgs | ModusTableCellDateEditorArgs;
 
-export type ModusTableSortingFunction<TData extends RowData> = SortingFnOption<TData> | 'sortForHyperlink' | 'sortForBadge';
+export type ModusTableSortingFunction<TData extends RowData> =
+  | SortingFnOption<TData>
+  | 'sortForHyperlink'
+  | 'sortForBadge'
+  | 'sortForCheckbox';
 
 export interface ModusTableRowAction {
   id: string;

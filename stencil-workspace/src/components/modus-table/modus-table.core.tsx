@@ -25,7 +25,7 @@ import {
   ModusTableSortingState,
   ModusTableToolbarOptions,
 } from './models/modus-table.models';
-import { sortHyperlink, sortBadge } from './functions/sortingFunction';
+import { sortHyperlink, sortBadge, sortCheckbox } from './functions/sortingFunction';
 import { COLUMN_DEF_SUB_ROWS_KEY } from './modus-table.constants';
 
 export interface TableCoreOptions {
@@ -118,6 +118,7 @@ export default class ModusTableCore {
       sortingFns: {
         sortForHyperlink: sortHyperlink,
         sortForBadge: sortBadge,
+        sortForCheckbox: sortCheckbox,
       },
       columnResizeMode: 'onChange',
       enableColumnResizing: columnResize,

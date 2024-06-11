@@ -8,6 +8,10 @@ export function sortBadge(rowA: Row<unknown>, rowB: Row<unknown>, columnId: stri
   return sortByValue(rowA, rowB, columnId, 'text');
 }
 
+export function sortCheckbox(rowA: Row<unknown>, rowB: Row<unknown>, columnId: string) {
+  return sortByValue(rowA, rowB, columnId, 'checked');
+}
+
 function sortByValue(rowA: Row<unknown>, rowB: Row<unknown>, columnId: string, valueKey: string): number {
   const valA = rowA.getValue(columnId)?.[valueKey] ?? rowA.getValue(columnId);
   const valB = rowB.getValue(columnId)?.[valueKey] ?? rowB.getValue(columnId);
