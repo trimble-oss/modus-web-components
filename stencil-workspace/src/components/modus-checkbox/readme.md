@@ -20,9 +20,9 @@
 
 ## Events
 
-| Event           | Description                            | Type                   |
-| --------------- | -------------------------------------- | ---------------------- |
-| `checkboxClick` | An event that fires on checkbox click. | `CustomEvent<boolean>` |
+| Event           | Description                            | Type               |
+| --------------- | -------------------------------------- | ------------------ |
+| `checkboxClick` | An event that fires on checkbox click. | `CustomEvent<any>` |
 
 
 ## Methods
@@ -44,6 +44,7 @@ Type: `Promise<void>`
 
  - [modus-data-table](../modus-data-table)
  - [modus-table](../modus-table)
+ - [modus-table-cell-main](../modus-table/parts/cell/modus-table-cell-main)
  - [modus-table-columns-visibility](../modus-table/parts/panel/modus-table-columns-visibility)
  - [modus-tree-view-item](../modus-content-tree/modus-tree-view-item)
 
@@ -52,6 +53,7 @@ Type: `Promise<void>`
 graph TD;
   modus-data-table --> modus-checkbox
   modus-table --> modus-checkbox
+  modus-table-cell-main --> modus-checkbox
   modus-table-columns-visibility --> modus-checkbox
   modus-tree-view-item --> modus-checkbox
   style modus-checkbox fill:#f9f,stroke:#333,stroke-width:4px
