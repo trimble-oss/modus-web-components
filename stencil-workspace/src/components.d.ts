@@ -300,7 +300,7 @@ export namespace Components {
         /**
           * (optional) The button group's aria-label.
          */
-        "ariaLabel": string;
+        "ariaLabel": string | null;
         /**
           * (optional) The style of the buttons in the group
          */
@@ -585,6 +585,10 @@ export namespace Components {
     }
     interface ModusFileDropzone {
         /**
+          * (optional) The dropzone's accepted file types
+         */
+        "acceptFileTypes": string;
+        /**
           * Add a file to the dropzone.
          */
         "addFile": (file: File) => Promise<void>;
@@ -605,6 +609,10 @@ export namespace Components {
          */
         "dropzoneWidth": string;
         /**
+          * (optional) The dropzone's instruction text when a file is being dragged over.
+         */
+        "fileDraggedOverInstructions": string;
+        /**
           * Get the dropzone's error.
          */
         "getError": () => Promise<string | null>;
@@ -616,6 +624,10 @@ export namespace Components {
           * (optional) Whether to include the upload icon.
          */
         "includeStateIcon": boolean;
+        /**
+          * (optional) The dropzone's instruction text.
+         */
+        "instructions": string;
         /**
           * (optional) The dropzone's label text.
          */
@@ -1287,9 +1299,10 @@ export namespace Components {
     }
     interface ModusTableCellEditor {
         "args": ModusTableCellEditorArgs;
+        "dataType": string;
         "keyDown": (e: KeyboardEvent, newValue: string) => void;
         "type": string;
-        "value": string;
+        "value": unknown;
         "valueChange": (newValue: string) => void;
     }
     interface ModusTableCellMain {
@@ -1361,7 +1374,7 @@ export namespace Components {
         /**
           * (optional) Capitalization behavior when using a non-traditional keyboard (e.g. microphone, touch screen)
          */
-        "autocapitalize": 'none' | 'off' | 'sentences' | 'on' | 'words' | 'characters';
+        "autocapitalize": string;
         /**
           * (optional) Sets autocomplete on the input.
          */
@@ -1643,7 +1656,7 @@ export namespace Components {
         /**
           * (optional) Role taken by the toast.  Defaults to 'status'.
          */
-        "role": 'alert' | 'log' | 'marquee' | 'status' | 'timer';
+        "role": string | null;
         /**
           * (optional) Whether to show the toasts' icon.
          */
@@ -3066,7 +3079,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The button group's aria-label.
          */
-        "ariaLabel"?: string;
+        "ariaLabel"?: string | null;
         /**
           * (optional) The style of the buttons in the group
          */
@@ -3395,6 +3408,10 @@ declare namespace LocalJSX {
     }
     interface ModusFileDropzone {
         /**
+          * (optional) The dropzone's accepted file types
+         */
+        "acceptFileTypes"?: string;
+        /**
           * (optional) The dropzone's aria-label.
          */
         "ariaLabel"?: string | null;
@@ -3411,9 +3428,17 @@ declare namespace LocalJSX {
          */
         "dropzoneWidth"?: string;
         /**
+          * (optional) The dropzone's instruction text when a file is being dragged over.
+         */
+        "fileDraggedOverInstructions"?: string;
+        /**
           * (optional) Whether to include the upload icon.
          */
         "includeStateIcon"?: boolean;
+        /**
+          * (optional) The dropzone's instruction text.
+         */
+        "instructions"?: string;
         /**
           * (optional) The dropzone's label text.
          */
@@ -4227,9 +4252,10 @@ declare namespace LocalJSX {
     }
     interface ModusTableCellEditor {
         "args"?: ModusTableCellEditorArgs;
+        "dataType"?: string;
         "keyDown"?: (e: KeyboardEvent, newValue: string) => void;
         "type"?: string;
-        "value"?: string;
+        "value"?: unknown;
         "valueChange"?: (newValue: string) => void;
     }
     interface ModusTableCellMain {
@@ -4306,7 +4332,7 @@ declare namespace LocalJSX {
         /**
           * (optional) Capitalization behavior when using a non-traditional keyboard (e.g. microphone, touch screen)
          */
-        "autocapitalize"?: 'none' | 'off' | 'sentences' | 'on' | 'words' | 'characters';
+        "autocapitalize"?: string;
         /**
           * (optional) Sets autocomplete on the input.
          */
@@ -4596,7 +4622,7 @@ declare namespace LocalJSX {
         /**
           * (optional) Role taken by the toast.  Defaults to 'status'.
          */
-        "role"?: 'alert' | 'log' | 'marquee' | 'status' | 'timer';
+        "role"?: string | null;
         /**
           * (optional) Whether to show the toasts' icon.
          */

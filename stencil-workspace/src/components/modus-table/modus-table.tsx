@@ -114,7 +114,7 @@ export class ModusTable {
         this.tableState.pagination.pageIndex = maxPageIndex >= 0 ? maxPageIndex : 0;
       }
     }
-    this.tableCore.setState('pagination', {
+    this.tableCore?.setState('pagination', {
       ...this.tableState.pagination,
       pageIndex: this.tableState.pagination.pageIndex,
       pageSize: this.pagination ? this.tableState.pagination.pageSize : this.data.length,
@@ -593,6 +593,7 @@ export class ModusTable {
       toolbarOptions: this.toolbarOptions,
       preSelectedRows: this.getPreselectedRowState(),
       defaultSort: this.defaultSort,
+      currentPageSize: this.manualPaginationOptions?.currentPageSize,
 
       ...(this.manualPaginationOptions && {
         manualPagination: true,

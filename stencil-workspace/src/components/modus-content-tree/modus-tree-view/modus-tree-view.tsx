@@ -50,6 +50,10 @@ export class ModusTreeView {
 
   @State() itemDragState: TreeViewItemDragState;
 
+  @State() isDraggingWithKeyboard: boolean;
+
+  private currentItem: TreeViewItemInfo;
+
   private focusItem: string;
   private items: { [key: string]: TreeViewItemInfo } = {};
   private syncItems: string[] = [];
@@ -58,6 +62,7 @@ export class ModusTreeView {
   private onMouseMove = (e) => this.handleItemDragOver(e);
   private onMouseUp = () => this.handleItemDrop();
 
+  private onKeyDown = (e) => this.handleArrowKeys(e);
   readonly INITIAL_DRAG_POSITION: Position = { x: 0, y: 0 };
 
   clearItemDropState(): TreeViewItemDragState {
@@ -91,6 +96,16 @@ export class ModusTreeView {
     }
   }
 
+  @Watch('isDraggingWithKeyboard')
+  handleDraggingWithKeyboard(newValue: boolean) {
+    if (newValue) {
+      // add event listeners for arrow keys up and down
+      document.addEventListener('keydown', this.onKeyDown);
+    } else {
+      document.removeEventListener('keydown', this.onKeyDown);
+    }
+  }
+
   handleItemDragStart(itemId: string, dragContent: HTMLElement, event: MouseEvent) {
     const { clientX, clientY, currentTarget } = event;
     const parent = (currentTarget as HTMLElement)?.parentElement;
@@ -104,6 +119,91 @@ export class ModusTreeView {
       width: `${parent?.offsetWidth}px`,
       height: `${parent?.offsetHeight}px`,
     };
+  }
+
+  handleItemDragStartKeyboard(itemId: string, dragContent: HTMLElement, event: KeyboardEvent) {
+    if (event.code === 'Escape' && this.itemDragState) {
+      dragContent.style.transform = `translate(${this.INITIAL_DRAG_POSITION.x}px, ${this.INITIAL_DRAG_POSITION.y}px)`;
+      this.clearItemDropState();
+      this.itemDragState = null;
+    }
+    if (event.code === 'Enter') {
+      this.currentItem = null;
+      if (!this.isDraggingWithKeyboard) {
+        const { currentTarget } = event;
+        const parent = (currentTarget as HTMLElement)?.parentElement;
+
+        const clientX = parent.getBoundingClientRect().x;
+        const clientY = parent.getBoundingClientRect().y;
+        const initialDragPosition = { x: clientX + 40, y: clientY + 20 };
+        this.clearItemDropState();
+        this.itemDragState = {
+          dragContent,
+          origin: initialDragPosition,
+          translation: initialDragPosition,
+          itemId,
+          width: `${parent?.offsetWidth}px`,
+          height: `${parent?.offsetHeight}px`,
+        };
+
+        this.isDraggingWithKeyboard = true;
+      } else {
+        // Perform dropping action
+        this.handleItemDrop();
+        this.isDraggingWithKeyboard = false;
+      }
+    }
+  }
+  handleKeys(direction: number, skipTwo = false) {
+    if (direction === 1) {
+      this.currentItem = this.items[this.getNextNavigableItem(this.currentItem.nodeId, skipTwo)];
+    } else {
+      this.currentItem = this.items[this.getPrevNavigableItem(this.currentItem.nodeId, skipTwo)];
+    }
+  }
+
+  handleArrowKeys(event: KeyboardEvent) {
+    if (!this.itemDragState) return;
+
+    const direction = event.key === 'ArrowUp' ? -1 : event.key === 'ArrowDown' ? 1 : 0;
+    if (direction === 0) return;
+
+    if (!this.currentItem) {
+      this.currentItem = this.items[this.itemDragState.itemId];
+    }
+
+    this.handleKeys(direction);
+    if (direction == 1) {
+      if (this.currentItem == this.items[this.getNextNavigableItem(this.itemDragState.itemId)]) {
+        this.handleKeys(direction);
+      }
+      if (this.currentItem == this.items[this.itemDragState.itemId]) {
+        this.handleKeys(direction, true);
+      }
+    } else {
+      if (this.currentItem == this.items[this.getNextNavigableItem(this.itemDragState.itemId)]) {
+        this.handleKeys(direction, true);
+      }
+    }
+    let newDragState = { ...this.clearItemDropState() };
+    if (this.currentItem.nodeId && this.currentItem.nodeId !== newDragState.itemId) {
+      const parents = this.getParentIds(this.currentItem.nodeId);
+      newDragState = { ...newDragState, targetId: this.currentItem.nodeId };
+      if (
+        this.currentItem.element.droppableItem &&
+        !this.isItemDisabled(this.currentItem.nodeId) &&
+        !(parents && parents.includes(newDragState.itemId))
+      ) {
+        newDragState.validTarget = true;
+        this.currentItem.content.classList.add('drop-allow');
+      } else {
+        newDragState.validTarget = false;
+        this.currentItem.content.classList.add('drop-block');
+      }
+    }
+
+    // Update the itemDragState
+    this.itemDragState = { ...newDragState };
   }
 
   handleItemDragOver(event: MouseEvent) {
@@ -329,8 +429,8 @@ export class ModusTreeView {
     return siblings.filter((c) => !this.isItemDisabled(c));
   }
 
-  getNextNavigableItem(itemId: string): string {
-    // If expanded get first child
+  getNextNavigableItem(itemId: string, skipTwo = false): string {
+    // If expanded, get the first child
     if (this.isItemExpanded(itemId)) {
       const validItems = this.getNavigableChildrenIds(itemId);
       if (validItems.length) return validItems[0];
@@ -338,32 +438,39 @@ export class ModusTreeView {
 
     let item = this.items[itemId];
     while (item != null) {
-      // Try to get next sibling
+      // Try to get the next sibling
       const siblings = this.getNavigableChildrenIds(item.parentId);
-      const nextSibling = siblings[siblings.indexOf(item.nodeId) + 1];
+      const currentIndex = siblings.indexOf(item.nodeId);
+      const nextIndex = skipTwo ? currentIndex + 2 : currentIndex + 1;
+      const nextSibling = siblings[nextIndex];
+
       if (nextSibling) {
         return nextSibling;
       }
 
-      // If the sibling does not exist, go up a level to the parent and try again.
+      // If the sibling does not exist, go up a level to the parent and try again
       item = this.items[item.parentId];
     }
 
     return itemId;
   }
 
-  getPrevNavigableItem(itemId: string): string {
+  getPrevNavigableItem(itemId: string, skipTwo = false): string {
     const item = this.items[itemId];
     const siblings = this.getNavigableChildrenIds(item.parentId);
     const index = siblings.indexOf(itemId);
 
-    // focus reached the top item
+    // Focus reached the top item
     if (index === 0) {
       return item.parentId || itemId;
     }
 
-    // get previous item, if expanded get its last child
-    let curr = siblings[index - 1];
+    // Get the previous item, if expanded get its last child
+    let prevIndex = skipTwo ? index - 2 : index - 1;
+    if (prevIndex < 0) {
+      prevIndex = 0; // Ensure we don't go out of bounds
+    }
+    let curr = siblings[prevIndex];
     while (this.isItemExpanded(curr) && this.getNavigableChildrenIds(curr).length > 0) {
       curr = this.getNavigableChildrenIds(curr).pop();
     }
@@ -397,6 +504,7 @@ export class ModusTreeView {
       onItemDelete: (id) => this.deleteItem(id),
       onItemUpdate: (newValue, oldValue) => this.updateItem(newValue, oldValue),
       onItemDrag: (id, content, e) => this.handleItemDragStart(id, content, e),
+      onItemDragClick: (id, content, e) => this.handleItemDragStartKeyboard(id, content, e),
     };
   }
 
@@ -511,69 +619,69 @@ export class ModusTreeView {
     }
     const key = event.code.toUpperCase();
     let preventDefault = false;
+    if (!this.isDraggingWithKeyboard) {
+      switch (key) {
+        case 'SPACE':
+          if (this.focusItem) {
+            this.handleItemExpand(this.focusItem);
+            preventDefault = true;
+          }
+          break;
+        case 'ENTER':
+          if (this.focusItem) {
+            this.handleItemSelection(this.focusItem, event);
+            event.stopPropagation();
+          }
+          break;
+        case 'ARROWDOWN':
+          // eslint-disable-next-line no-case-declarations
+          const nextItem = this.focusItem ? this.getNextNavigableItem(this.focusItem) : this.getFirstItem();
 
-    switch (key) {
-      case 'SPACE':
-        if (this.focusItem) {
-          this.handleItemExpand(this.focusItem);
+          // Multi-Selection
+          if (this.multiSelection && event.shiftKey && this.isItemSelected(this.focusItem)) {
+            // deselect if going back to the selected node
+            if (this.isItemSelected(nextItem)) this.handleItemSelection(this.focusItem, event);
+            else this.handleItemSelection(nextItem, event);
+          }
+
+          this.handleItemFocus(nextItem);
           preventDefault = true;
-        }
-        break;
-      case 'ENTER':
-        if (this.focusItem) {
-          this.handleItemSelection(this.focusItem, event);
-          event.stopPropagation();
-        }
-        break;
-      case 'ARROWDOWN':
-        // eslint-disable-next-line no-case-declarations
-        const nextItem = this.focusItem ? this.getNextNavigableItem(this.focusItem) : this.getFirstItem();
+          break;
+        case 'ARROWUP':
+          // eslint-disable-next-line no-case-declarations
+          const prevItem = this.focusItem ? this.getPrevNavigableItem(this.focusItem) : this.getLastItem();
 
-        // Multi-Selection
-        if (this.multiSelection && event.shiftKey && this.isItemSelected(this.focusItem)) {
-          // deselect if going back to the selected node
-          if (this.isItemSelected(nextItem)) this.handleItemSelection(this.focusItem, event);
-          else this.handleItemSelection(nextItem, event);
-        }
+          // Multi-Selection
+          if (this.multiSelection && event.shiftKey && this.isItemSelected(this.focusItem)) {
+            // deselect if going back to the selected node
+            if (this.isItemSelected(prevItem)) this.handleItemSelection(this.focusItem, event);
+            else this.handleItemSelection(prevItem, event);
+          }
 
-        this.handleItemFocus(nextItem);
-        preventDefault = true;
-        break;
-      case 'ARROWUP':
-        // eslint-disable-next-line no-case-declarations
-        const prevItem = this.focusItem ? this.getPrevNavigableItem(this.focusItem) : this.getLastItem();
+          this.handleItemFocus(prevItem);
+          preventDefault = true;
+          break;
+        case 'ARROWRIGHT':
+          if (this.focusItem) {
+            if (this.disableTabbing && event.shiftKey) {
+              const { element } = this.items[this.focusItem];
+              element.focusCheckbox();
+            } else if (!this.isItemExpanded(this.focusItem)) {
+              this.handleItemExpand(this.focusItem);
+            }
+          }
 
-        // Multi-Selection
-        if (this.multiSelection && event.shiftKey && this.isItemSelected(this.focusItem)) {
-          // deselect if going back to the selected node
-          if (this.isItemSelected(prevItem)) this.handleItemSelection(this.focusItem, event);
-          else this.handleItemSelection(prevItem, event);
-        }
-
-        this.handleItemFocus(prevItem);
-        preventDefault = true;
-        break;
-      case 'ARROWRIGHT':
-        if (this.focusItem) {
-          // 'Shift + Arrow Right' can be used to focus the checkbox when tabbing is disabled inside the tree
-          if (this.disableTabbing && event.shiftKey) {
-            const { element } = this.items[this.focusItem];
-            element.focusCheckbox();
-          } else if (!this.isItemExpanded(this.focusItem)) {
+          break;
+        case 'ARROWLEFT':
+          if (this.focusItem && this.isItemExpanded(this.focusItem)) {
             this.handleItemExpand(this.focusItem);
           }
-        }
-
-        break;
-      case 'ARROWLEFT':
-        if (this.focusItem && this.isItemExpanded(this.focusItem)) {
-          this.handleItemExpand(this.focusItem);
-        }
-        break;
-      case 'TAB':
-        if (this.disableTabbing) this.resetFocusItem();
-        break;
-      default:
+          break;
+        case 'TAB':
+          if (this.disableTabbing) this.resetFocusItem();
+          break;
+        default:
+      }
     }
 
     if (preventDefault) {
@@ -654,7 +762,9 @@ export class ModusTreeView {
         <ul role="tree" tabindex={this.disableTabbing ? 0 : null} onKeyDown={(e) => this.handleKeyDown(e)}>
           <slot onSlotchange={() => this.handleTreeSlotChange()} />
         </ul>
-        <ModusContentTreeDragItem draggingState={this.itemDragState}></ModusContentTreeDragItem>
+        <ModusContentTreeDragItem draggingState={this.itemDragState}>
+          <div class="drag-indicator" tabIndex={-1}></div>
+        </ModusContentTreeDragItem>
       </Host>
     );
   }

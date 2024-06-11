@@ -22,31 +22,36 @@ nav {
     padding: 0;
 
     li {
-      align-items: center;
-      border-radius: 4px;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
       list-style-type: none;
-      min-width: min-content;
       user-select: none;
 
-      &.active {
-        background-color: $modus-pagination-active-bg;
-        color: $modus-pagination-active-color;
-      }
+      button {
+        align-items: center;
+        background-color: transparent;
+        border: unset;
+        border-radius: $rem-4px;
+        color: #252a2e;
+        display: flex;
+        font-family: $primary-font;
+        justify-content: center;
 
-      &.disabled {
-        opacity: 0.3;
-      }
+        &.active {
+          background-color: $modus-pagination-active-bg;
+          color: $modus-pagination-active-color;
+        }
 
-      &.hoverable {
-        cursor: pointer;
-      }
+        &.disabled {
+          opacity: 0.3;
+        }
 
-      &.hoverable:not(.active) {
-        &:hover {
-          background-color: $modus-pagination-hover-bg;
+        &.hoverable {
+          cursor: pointer;
+        }
+
+        &.hoverable:not(.active) {
+          &:hover {
+            background-color: $modus-pagination-hover-bg;
+          }
         }
       }
     }
@@ -55,14 +60,14 @@ nav {
   &.small {
     height: $rem-24px;
 
-    ul li {
+    ul li button {
       font-size: $rem-12px;
       height: $rem-24px;
       padding: 0 $rem-8px;
     }
 
-    ul li[aria-label='Next'],
-    ul li[aria-label='Previous'] {
+    ul li button[aria-label='Next'],
+    ul li button[aria-label='Previous'] {
       padding-left: $rem-4px;
       padding-right: $rem-4px;
     }
@@ -71,14 +76,14 @@ nav {
   &.medium {
     height: 2rem;
 
-    ul li {
+    ul li button {
       font-size: $rem-14px;
       height: 2rem;
       padding: 0 $rem-12px;
     }
 
-    ul li[aria-label='Next'],
-    ul li[aria-label='Previous'] {
+    ul li button[aria-label='Next'],
+    ul li button[aria-label='Previous'] {
       padding-left: $rem-6px;
       padding-right: $rem-6px;
     }
@@ -87,14 +92,14 @@ nav {
   &.large {
     height: 3rem;
 
-    ul li {
+    ul li button {
       font-size: $rem-20px;
       height: 3rem;
       padding: 0 $rem-18px;
     }
 
-    ul li[aria-label='Next'],
-    ul li[aria-label='Previous'] {
+    ul li button[aria-label='Next'],
+    ul li button[aria-label='Previous'] {
       padding-left: $rem-12px;
       padding-right: $rem-12px;
     }
