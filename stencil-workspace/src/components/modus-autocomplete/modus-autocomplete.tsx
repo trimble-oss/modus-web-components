@@ -256,8 +256,9 @@ export class ModusAutocomplete {
     } else {
       this.selectedOption = option.value;
       this.disableFiltering = this.disableCloseOnSelect;
-      this.handleSearchChange(option.value);
       this.focusItemIndex = this.visibleOptions.findIndex((el) => el.id === option.id);
+      this.handleSearchChange(option.value);
+
     }
 
     this.hasFocus = this.disableCloseOnSelect;
@@ -407,13 +408,7 @@ export class ModusAutocomplete {
     const selectedOption = optionList.querySelector('li.selected') as HTMLElement;
 
     if (selectedOption) {
-      const containerHeight = optionList.offsetHeight;
-      const optionHeight = selectedOption.offsetHeight;
-      const optionTop = selectedOption.offsetTop;
-      const scrollPosition = optionTop - containerHeight + 2 * optionHeight;
-
-      selectedOption.scrollIntoView({ behavior: 'smooth', inline: 'nearest' });
-      optionList.scrollTop = Math.max(scrollPosition, 0);
+     selectedOption.scrollIntoView({ behavior: 'smooth', inline: 'nearest' });
     }
   };
 
