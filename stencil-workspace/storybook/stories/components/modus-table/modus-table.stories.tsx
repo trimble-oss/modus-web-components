@@ -642,6 +642,123 @@ ManualSorting.args = {
   }
 };
 
+const SortingTemplate = ({
+  hover,
+  sort,
+  sortIconStyle,
+  columnResize,
+  columnReorder,
+  pagination,
+  showSortIconOnHover,
+  summaryRow,
+  fullWidth,
+  pageSizeList,
+  toolbar,
+  columns,
+  data,
+  toolbarOptions,
+  displayOptions,
+  rowsExpandable,
+  maxHeight,
+  maxWidth,
+  rowActions,
+  rowSelection,
+  rowSelectionOptions,
+  manualPaginationOptions,
+  manualSortingOptions,
+  defaultSort,
+  density,
+  wrapText,
+}) => html`
+  <div style="width: 950px">
+    <modus-table
+      hover="${hover}"
+      sort="${sort}"
+      sort-icon-style="${sortIconStyle}"
+      column-resize="${columnResize}"
+      column-reorder="${columnReorder}"
+      density="${density}"
+      pagination="${pagination}"
+      show-sort-icon-on-hover="${showSortIconOnHover}"
+      summary-row="${summaryRow}"
+      full-width="${fullWidth}"
+      toolbar="${toolbar}"
+      rows-expandable="${rowsExpandable}"
+      max-height="${maxHeight}"
+      max-width="${maxWidth}"
+      row-selection="${rowSelection}"
+      wrap-text="${wrapText}" />
+  </div>
+  ${initializeTableSort({
+    columns,
+    data,
+    pageSizeList,
+    toolbarOptions,
+    displayOptions,
+    rowSelectionOptions,
+    rowActions,
+    manualPaginationOptions,
+    manualSortingOptions,
+    defaultSort,
+  })}
+`;
+function initializeTableSort(props) {
+  const {
+    columns,
+    data,
+    pageSizeList,
+    toolbarOptions,
+    displayOptions,
+    rowSelectionOptions,
+    rowActions,
+    manualPaginationOptions,
+    manualSortingOptions,
+    defaultSort,
+  } = props;
+  const tag = document.createElement('script');
+  tag.innerHTML = `
+  var modusTable = document.querySelector('modus-table');
+  modusTable.columns = ${JSON.stringify(columns)};
+  modusTable.data = ${JSON.stringify(data)};
+  modusTable.pageSizeList = ${JSON.stringify(pageSizeList)};
+  modusTable.toolbarOptions = ${JSON.stringify(toolbarOptions)};
+  modusTable.displayOptions = ${JSON.stringify(displayOptions)};
+  modusTable.rowSelectionOptions = ${JSON.stringify(rowSelectionOptions)};
+  modusTable.rowActions = ${JSON.stringify(rowActions)};
+  modusTable.manualPaginationOptions = ${JSON.stringify(manualPaginationOptions)};
+  modusTable.manualSortingOptions = ${JSON.stringify(manualSortingOptions)};
+  modusTable.defaultSort = ${JSON.stringify(defaultSort)};
+
+  var globalData = ${JSON.stringify(data)};
+
+  function sortStatusFn(rowA, rowB, _columnId){
+    const statusA = rowA.original.status
+    const statusB = rowB.original.status
+    const statusOrder = ['Rejected', 'Verified', 'Pending']
+    return statusOrder.indexOf(statusA) - statusOrder.indexOf(statusB)
+  }
+
+   function addSortingFn() {
+    const sortCol =  modusTable.columns.map(col =>{
+      if(col.accessorKey === 'status'){
+         return {...col,
+           sortingFn : sortStatusFn};
+      }
+       else return {...col};
+    })
+    return sortCol
+  }
+  modusTable.columns = addSortingFn()
+  `;
+
+  return tag;
+}
+
+
+export const CustomSorting = SortingTemplate.bind({});
+CustomSorting.args = {...DefaultArgs, sort:true ,data:makeData(7)
+}
+
 export const ValueFormatter = ({
   hover,
   sort,
