@@ -9,7 +9,12 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Cell } from '@tanstack/table-core';
-import { ModusTableCellBadge, ModusTableCellEditorArgs, ModusTableCellLink } from '../../../models/modus-table.models';
+import {
+  ModusTableCellBadge,
+  ModusTableCellCheckbox,
+  ModusTableCellEditorArgs,
+  ModusTableCellLink,
+} from '../../../models/modus-table.models';
 import {
   COLUMN_DEF_DATATYPE_KEY,
   COLUMN_DEF_DATATYPE_INTEGER,
@@ -21,11 +26,13 @@ import {
   KEYBOARD_ENTER,
   KEYBOARD_ESCAPE,
   COLUMN_DEF_DATATYPE_BADGE,
+  COLUMN_DEF_DATATYPE_CHECKBOX,
 } from '../../../modus-table.constants';
 import NavigateTableCells from '../../../utilities/table-cell-navigation.utility';
 import { CellFormatter } from '../../../utilities/table-cell-formatter.utility';
 import { ModusTableCellLinkElement } from '../modus-table-cell-link-element';
 import { ModusTableCellBadgeElement } from '../modus-table-cell-badge-element';
+import { ModusTableCellCheckboxElement } from '../modus-table-cell-checkbox-element';
 import { TableContext, TableCellEdited } from '../../../models/table-context.models';
 import ModusTableCellExpandIcons from '../modus-table-cell-expand-icons';
 
@@ -184,6 +191,8 @@ export class ModusTableCellMain {
             }}
           />
         );
+      } else if (cellDataType === COLUMN_DEF_DATATYPE_CHECKBOX) {
+        return <ModusTableCellCheckboxElement checkbox={cellValue as ModusTableCellCheckbox} />;
       } else {
         return CellFormatter(this.cell.column.columnDef.cell, this.cell.getContext());
       }

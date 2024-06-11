@@ -9,35 +9,46 @@ import {
 } from '@stencil/core';
 import { generateElementId } from '../../utils/utils';
 
+export type CheckboxProperties = {
+  ariaLabel: string | null;
+  checked: boolean;
+  disabled: boolean;
+  indeterminate: boolean;
+  label: string;
+  checkboxClick: EventEmitter<boolean>;
+  stopPropagation: boolean;
+  size?: 'small' | 'medium';
+};
+
 @Component({
   tag: 'modus-checkbox',
   styleUrl: 'modus-checkbox.scss',
   shadow: true,
 })
-export class ModusCheckbox {
+export class ModusCheckbox implements CheckboxProperties {
   /** (optional) The checkbox's aria-label. */
-  @Prop() ariaLabel: string | null;
+  @Prop() ariaLabel: CheckboxProperties['ariaLabel'];
 
   /** (optional) Whether the checkbox is checked. */
-  @Prop({ mutable: true }) checked: boolean;
+  @Prop({ mutable: true }) checked: CheckboxProperties['checked'];
 
   /** (optional) Whether the checkbox is disabled. */
-  @Prop() disabled: boolean;
+  @Prop() disabled: CheckboxProperties['disabled'];
 
   /** (optional) Whether the checkbox is indeterminate. */
-  @Prop({ mutable: true }) indeterminate: boolean;
+  @Prop({ mutable: true }) indeterminate: CheckboxProperties['indeterminate'];
 
   /** (optional) The checkbox label. */
-  @Prop() label: string;
+  @Prop() label: CheckboxProperties['label'];
 
   /** An event that fires on checkbox click. */
-  @Event() checkboxClick: EventEmitter<boolean>;
+  @Event() checkboxClick: CheckboxProperties['checkboxClick'];
 
   /** (optional) If you wish to prevent the propagation of your event, you may opt for this. */
-  @Prop() stopPropagation: boolean;
+  @Prop() stopPropagation: CheckboxProperties['stopPropagation'];
 
   /** (optional) The size of the checkbox. */
-  @Prop() size: 'small' | 'medium' = 'medium';
+  @Prop() size: CheckboxProperties['size'] = 'medium';
 
   private checkBoxId = generateElementId() + '_checkbox';
 

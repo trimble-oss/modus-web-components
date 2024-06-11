@@ -11,6 +11,7 @@ import { BadgeProperties } from "./components/modus-badge/modus-badge";
 import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 import { ButtonColor, ButtonSize, ButtonStyle, ButtonType } from "./components/modus-button/modus-button.models";
 import { ButtonGroupSelectionType } from "./components/modus-button-group/modus-button-group.models";
+import { CheckboxProperties } from "./components/modus-checkbox/modus-checkbox";
 import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 import { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
 import { ModusIconName } from "./icons/ModusIconUtilities";
@@ -34,6 +35,7 @@ export { BadgeProperties } from "./components/modus-badge/modus-badge";
 export { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 export { ButtonColor, ButtonSize, ButtonStyle, ButtonType } from "./components/modus-button/modus-button.models";
 export { ButtonGroupSelectionType } from "./components/modus-button-group/modus-button-group.models";
+export { CheckboxProperties } from "./components/modus-checkbox/modus-checkbox";
 export { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 export { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
 export { ModusIconName } from "./icons/ModusIconUtilities";
@@ -352,15 +354,15 @@ export namespace Components {
         /**
           * (optional) The checkbox's aria-label.
          */
-        "ariaLabel": string | null;
+        "ariaLabel": CheckboxProperties['ariaLabel'];
         /**
           * (optional) Whether the checkbox is checked.
          */
-        "checked": boolean;
+        "checked": CheckboxProperties['checked'];
         /**
           * (optional) Whether the checkbox is disabled.
          */
-        "disabled": boolean;
+        "disabled": CheckboxProperties['disabled'];
         /**
           * Focus the checkbox input
          */
@@ -368,19 +370,19 @@ export namespace Components {
         /**
           * (optional) Whether the checkbox is indeterminate.
          */
-        "indeterminate": boolean;
+        "indeterminate": CheckboxProperties['indeterminate'];
         /**
           * (optional) The checkbox label.
          */
-        "label": string;
+        "label": CheckboxProperties['label'];
         /**
           * (optional) The size of the checkbox.
          */
-        "size": 'small' | 'medium';
+        "size": CheckboxProperties['size'];
         /**
           * (optional) If you wish to prevent the propagation of your event, you may opt for this.
          */
-        "stopPropagation": boolean;
+        "stopPropagation": CheckboxProperties['stopPropagation'];
     }
     interface ModusChip {
         /**
@@ -1973,7 +1975,7 @@ declare global {
         new (): HTMLModusCardElement;
     };
     interface HTMLModusCheckboxElementEventMap {
-        "checkboxClick": boolean;
+        "checkboxClick": any;
     }
     interface HTMLModusCheckboxElement extends Components.ModusCheckbox, HTMLStencilElement {
         addEventListener<K extends keyof HTMLModusCheckboxElementEventMap>(type: K, listener: (this: HTMLModusCheckboxElement, ev: ModusCheckboxCustomEvent<HTMLModusCheckboxElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3027,35 +3029,35 @@ declare namespace LocalJSX {
         /**
           * (optional) The checkbox's aria-label.
          */
-        "ariaLabel"?: string | null;
+        "ariaLabel"?: CheckboxProperties['ariaLabel'];
         /**
           * (optional) Whether the checkbox is checked.
          */
-        "checked"?: boolean;
+        "checked"?: CheckboxProperties['checked'];
         /**
           * (optional) Whether the checkbox is disabled.
          */
-        "disabled"?: boolean;
+        "disabled"?: CheckboxProperties['disabled'];
         /**
           * (optional) Whether the checkbox is indeterminate.
          */
-        "indeterminate"?: boolean;
+        "indeterminate"?: CheckboxProperties['indeterminate'];
         /**
           * (optional) The checkbox label.
          */
-        "label"?: string;
+        "label"?: CheckboxProperties['label'];
         /**
           * An event that fires on checkbox click.
          */
-        "onCheckboxClick"?: (event: ModusCheckboxCustomEvent<boolean>) => void;
+        "onCheckboxClick"?: (event: ModusCheckboxCustomEvent<any>) => void;
         /**
           * (optional) The size of the checkbox.
          */
-        "size"?: 'small' | 'medium';
+        "size"?: CheckboxProperties['size'];
         /**
           * (optional) If you wish to prevent the propagation of your event, you may opt for this.
          */
-        "stopPropagation"?: boolean;
+        "stopPropagation"?: CheckboxProperties['stopPropagation'];
     }
     interface ModusChip {
         /**

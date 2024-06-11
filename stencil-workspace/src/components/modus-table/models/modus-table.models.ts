@@ -12,11 +12,13 @@ import {
   VisibilityState,
 } from '@tanstack/table-core';
 import { BadgeProperties } from '../../modus-badge/modus-badge';
+import { CheckboxProperties } from '../../modus-checkbox/modus-checkbox';
 import {
   COLUMN_DEF_DATATYPE_INTEGER,
   COLUMN_DEF_DATATYPE_LINK,
   COLUMN_DEF_DATATYPE_TEXT,
   COLUMN_DEF_DATATYPE_BADGE,
+  COLUMN_DEF_DATATYPE_CHECKBOX,
   CELL_EDIT_TYPE_SELECT,
   CELL_EDIT_TYPE_DATE,
   CELL_EDIT_TYPE_AUTOCOMPLETE,
@@ -39,7 +41,8 @@ export type ModusTableColumnDataType =
   | typeof COLUMN_DEF_DATATYPE_TEXT
   | typeof COLUMN_DEF_DATATYPE_INTEGER
   | typeof COLUMN_DEF_DATATYPE_LINK
-  | typeof COLUMN_DEF_DATATYPE_BADGE;
+  | typeof COLUMN_DEF_DATATYPE_BADGE
+  | typeof COLUMN_DEF_DATATYPE_CHECKBOX;
 // | typeof COLUMN_DEF_DATATYPE_DATE;
 
 export type ModusTableCellEditorType =
@@ -124,6 +127,10 @@ export interface ModusTableCellLink {
 export interface ModusTableCellBadge extends BadgeProperties {
   text: string;
   _type?: typeof COLUMN_DEF_DATATYPE_BADGE;
+}
+
+export interface ModusTableCellCheckbox extends CheckboxProperties {
+  _type?: typeof COLUMN_DEF_DATATYPE_CHECKBOX;
 }
 
 export interface ModusTableCellValueChange {
