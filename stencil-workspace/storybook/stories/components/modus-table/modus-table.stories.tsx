@@ -53,7 +53,7 @@ function makeData(...lens): object[] {
 }
 
 function initializeTable(props) {
-  const {columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions, manualPaginationOptions, manualSortingOptions, defaultSort} = props
+  const {columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions, manualPaginationOptions, manualSortingOptions, defaultSort, customSort} = props
   const tag = document.createElement('script');
   tag.innerHTML = `
   var modusTable = document.querySelector('modus-table');
@@ -67,8 +67,22 @@ function initializeTable(props) {
   modusTable.manualPaginationOptions = ${JSON.stringify(manualPaginationOptions)};
   modusTable.manualSortingOptions = ${JSON.stringify(manualSortingOptions)};
   modusTable.defaultSort = ${JSON.stringify(defaultSort)};
+  modusTable.customSort = ${JSON.stringify(customSort)};
 
   var globalData = ${JSON.stringify(data)};
+
+function sortStatusFn(rowA, rowB, _columnId) {
+  const statusA = rowA.original.status;
+  const statusB = rowB.original.status;
+  const statusOrder = modusTable.customSort;
+  return statusOrder.indexOf(statusA) - statusOrder.indexOf(statusB);
+}
+
+function addSortingFn(columns) {
+  return columns.map((col) => (col.accessorKey === 'status' ? { ...col, sortingFn: sortStatusFn } : col));
+}
+
+
   if(!!modusTable.manualSortingOptions){
     let currentData = globalData;
     const accessorKey = getAccessortKey(modusTable.columns, modusTable.manualSortingOptions.currentSortingState[0].id);
@@ -82,7 +96,9 @@ function initializeTable(props) {
   } else if(!!modusTable.manualPaginationOptions){
     modusTable.data = globalData.slice((modusTable.manualPaginationOptions.currentPageIndex - 1) * modusTable.manualPaginationOptions.currentPageSize,
       modusTable.manualPaginationOptions.currentPageIndex * modusTable.manualPaginationOptions.currentPageSize);
-  } else {
+  }else if(modusTable.customSort.length > 0){
+    modusTable.columns = addSortingFn(modusTable.columns);
+  }else {
     modusTable.data = globalData;
   }
 
@@ -301,6 +317,7 @@ const DefaultArgs = {
   rowSelection: false,
   rowSelectionOptions: {},
   wrapText: false,
+  customSort:[],
 };
 
 export default {
@@ -526,6 +543,14 @@ export default {
       },
       type: { required: false },
     },
+    customSort: {
+      name: 'CustomSorting',
+      description: 'To sort data using custom sorting functions.',
+      table: {
+        type: { summary: 'customSort'},
+      },
+      type: { required: false },
+    },
     defaultSort : {
       name: 'defaultSort',
       description: 'To set the default sorting of the table',
@@ -588,7 +613,8 @@ const Template = ({
   manualSortingOptions,
   defaultSort,
   density,
-  wrapText
+  wrapText,
+  customSort
 }) => html`
   <div style="width: 950px">
     <modus-table
@@ -609,7 +635,7 @@ const Template = ({
       row-selection="${rowSelection}"
       wrap-text="${wrapText}" />
   </div>
-  ${initializeTable({columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions, manualPaginationOptions, manualSortingOptions, defaultSort})}
+  ${initializeTable({columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions, manualPaginationOptions, manualSortingOptions, defaultSort, customSort})}
 `;
 
 export const Default = Template.bind({});
@@ -642,121 +668,9 @@ ManualSorting.args = {
   }
 };
 
-const SortingTemplate = ({
-  hover,
-  sort,
-  sortIconStyle,
-  columnResize,
-  columnReorder,
-  pagination,
-  showSortIconOnHover,
-  summaryRow,
-  fullWidth,
-  pageSizeList,
-  toolbar,
-  columns,
-  data,
-  toolbarOptions,
-  displayOptions,
-  rowsExpandable,
-  maxHeight,
-  maxWidth,
-  rowActions,
-  rowSelection,
-  rowSelectionOptions,
-  manualPaginationOptions,
-  manualSortingOptions,
-  defaultSort,
-  density,
-  wrapText,
-}) => html`
-  <div style="width: 950px">
-    <modus-table
-      hover="${hover}"
-      sort="${sort}"
-      sort-icon-style="${sortIconStyle}"
-      column-resize="${columnResize}"
-      column-reorder="${columnReorder}"
-      density="${density}"
-      pagination="${pagination}"
-      show-sort-icon-on-hover="${showSortIconOnHover}"
-      summary-row="${summaryRow}"
-      full-width="${fullWidth}"
-      toolbar="${toolbar}"
-      rows-expandable="${rowsExpandable}"
-      max-height="${maxHeight}"
-      max-width="${maxWidth}"
-      row-selection="${rowSelection}"
-      wrap-text="${wrapText}" />
-  </div>
-  ${initializeTableSort({
-    columns,
-    data,
-    pageSizeList,
-    toolbarOptions,
-    displayOptions,
-    rowSelectionOptions,
-    rowActions,
-    manualPaginationOptions,
-    manualSortingOptions,
-    defaultSort,
-  })}
-`;
-function initializeTableSort(props) {
-  const {
-    columns,
-    data,
-    pageSizeList,
-    toolbarOptions,
-    displayOptions,
-    rowSelectionOptions,
-    rowActions,
-    manualPaginationOptions,
-    manualSortingOptions,
-    defaultSort,
-  } = props;
-  const tag = document.createElement('script');
-  tag.innerHTML = `
-  var modusTable = document.querySelector('modus-table');
-  modusTable.columns = ${JSON.stringify(columns)};
-  modusTable.data = ${JSON.stringify(data)};
-  modusTable.pageSizeList = ${JSON.stringify(pageSizeList)};
-  modusTable.toolbarOptions = ${JSON.stringify(toolbarOptions)};
-  modusTable.displayOptions = ${JSON.stringify(displayOptions)};
-  modusTable.rowSelectionOptions = ${JSON.stringify(rowSelectionOptions)};
-  modusTable.rowActions = ${JSON.stringify(rowActions)};
-  modusTable.manualPaginationOptions = ${JSON.stringify(manualPaginationOptions)};
-  modusTable.manualSortingOptions = ${JSON.stringify(manualSortingOptions)};
-  modusTable.defaultSort = ${JSON.stringify(defaultSort)};
 
-  var globalData = ${JSON.stringify(data)};
-
-  function sortStatusFn(rowA, rowB, _columnId){
-    const statusA = rowA.original.status
-    const statusB = rowB.original.status
-    const statusOrder = ['Rejected', 'Verified', 'Pending']
-    return statusOrder.indexOf(statusA) - statusOrder.indexOf(statusB)
-  }
-
-   function addSortingFn() {
-    const sortCol =  modusTable.columns.map(col =>{
-      if(col.accessorKey === 'status'){
-         return {...col,
-           sortingFn : sortStatusFn};
-      }
-       else return {...col};
-    })
-    return sortCol
-  }
-  modusTable.columns = addSortingFn()
-  `;
-
-  return tag;
-}
-
-
-export const CustomSorting = SortingTemplate.bind({});
-CustomSorting.args = {...DefaultArgs, sort:true ,data:makeData(7)
+export const CustomSorting = Template.bind({});
+CustomSorting.args = {...DefaultArgs, customSort:['Rejected', 'Verified', 'Pending'],sort:true ,data:makeData(5)
 }
 
 export const ValueFormatter = ({
