@@ -1,6 +1,12 @@
-@import './modus-text-input.vars';
+@import './modus-textarea-input.vars';
 
-.modus-text-input {
+textarea {
+  font-family: $primary-font;
+  height: 4rem;
+  resize: none;
+}
+
+.modus-textarea-input {
   border-radius: 4px;
   display: inline-flex;
   flex-direction: column;
@@ -10,18 +16,16 @@
   label {
     color: $modus-input-label-color;
     font-size: $rem-12px;
-    font-weight: 700;
     margin-bottom: $rem-4px;
 
     span {
-      color: $modus-input-border-color;
+      color: $modus-input-bottom-line-color;
       margin: $rem-4px;
     }
   }
 
   .label-container {
     display: inline-block;
-    margin-bottom: 0.25rem;
 
     .required {
       bottom: $rem-1px;
@@ -35,12 +39,13 @@
     align-items: center;
     background-color: $modus-input-bg;
     border: $rem-1px solid $modus-input-border-color;
+    border-bottom-color: $modus-input-bottom-line-color;
     border-radius: 4px;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
-    height: 2rem;
     margin: 0;
+    min-height: 4.5rem;
     padding: 0;
     position: relative;
     width: 100%;
@@ -53,12 +58,11 @@
       }
     }
 
-    input {
+    textarea {
       background-color: transparent;
       border: none;
       color: $modus-input-color;
-      font-family: $primary-font;
-      font-size: var(--input-font-size, #{$rem-12px});
+      font-size: $rem-12px;
       outline: none;
       padding: 0 $rem-8px;
       width: 100%;
@@ -104,19 +108,23 @@
       cursor: text;
     }
 
+    &:focus-within,
+    &.error,
+    &.valid {
+      border-bottom-width: $rem-2px;
+      height: 2rem; // Counteract bottom border width.
+    }
+
     &:focus-within {
-      border-color: $modus-input-border-active-color;
-      box-shadow: 0 0 0 1px $modus-input-border-active-color;
+      border-bottom-color: $modus-input-bottom-line-active-color;
     }
 
     &.error {
-      border-color: $modus-input-validation-error-color;
-      box-shadow: 0 0 0 1px $modus-input-validation-error-color;
+      border-bottom-color: $modus-input-validation-error-color;
     }
 
     &.valid {
-      border-color: $modus-input-validation-success-color;
-      box-shadow: 0 0 0 1px $modus-input-validation-success-color;
+      border-bottom-color: $modus-input-validation-success-color;
     }
 
     &.large {
@@ -137,7 +145,7 @@
 
   .input-container:has(input[readonly]) {
     background-color: $modus-input-readonly-bg;
-    border-color: transparent;
+    border-bottom-color: $modus-input-disabled-bottom-line-color;
   }
 
   .sub-text {
@@ -175,7 +183,7 @@
     .input-container {
       background-color: $modus-input-disabled-bg;
       border: $rem-1px solid $modus-input-disabled-border-color;
-      border-color: transparent;
+      border-bottom-color: $modus-input-disabled-bottom-line-color;
 
       svg path {
         fill: $modus-input-disabled-color;
@@ -197,12 +205,6 @@
         height: 100%;
       }
     }
-  }
-
-  // hide default password reveal icon in Edge
-  // https://docs.microsoft.com/en-us/microsoft-edge/web-platform/password-reveal#remove-the-password-reveal-control
-  ::-ms-reveal {
-    display: none;
   }
 
   .toggle-password {
