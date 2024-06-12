@@ -93,6 +93,12 @@ export default {
         type: { summary: 'string' },
         defaultValue: { summary: '100px' },
       },
+    },
+    chipId: {
+      description: "This chip's id, this created much more visiblity for testing",
+      table: {
+        type: { summary: `string` },
+      },
     }
   },
   parameters: {
@@ -121,6 +127,7 @@ export const Default = ({
   showClose,
   size,
   value,
+  chipId,
 }) => html`
   <modus-chip
     active=${active}
@@ -133,7 +140,8 @@ export const Default = ({
     show-checkmark=${showCheckmark}
     show-close=${showClose}
     size=${size}
-    value=${value}>
+    value=${value}
+    chip-id=${chipId}>    
   </modus-chip>
 `;
 Default.args = {
@@ -148,6 +156,7 @@ Default.args = {
   showClose: false,
   size: 'medium',
   value: 'Bryan',
+  chipId: '',
 };
 
 export const Outline = ({

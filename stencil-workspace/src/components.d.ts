@@ -392,6 +392,10 @@ export namespace Components {
          */
         "ariaLabel": string | null;
         /**
+          * (optional) the chip's id
+         */
+        "chipId": string;
+        /**
           * (optional) The chip's style.
          */
         "chipStyle": 'outline' | 'solid';
@@ -1987,6 +1991,7 @@ declare global {
     interface HTMLModusAutocompleteElementEventMap {
         "optionSelected": string;
         "valueChange": string;
+        "selectionsChanged": string[];
     }
     interface HTMLModusAutocompleteElement extends Components.ModusAutocomplete, HTMLStencilElement {
         addEventListener<K extends keyof HTMLModusAutocompleteElementEventMap>(type: K, listener: (this: HTMLModusAutocompleteElement, ev: ModusAutocompleteCustomEvent<HTMLModusAutocompleteElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2949,6 +2954,10 @@ declare namespace LocalJSX {
          */
         "onOptionSelected"?: (event: ModusAutocompleteCustomEvent<string>) => void;
         /**
+          * An event that fires when an option is selected/removed. Emits the option ids.
+         */
+        "onSelectionsChanged"?: (event: ModusAutocompleteCustomEvent<string[]>) => void;
+        /**
           * An event that fires when the input value changes. Emits the value string.
          */
         "onValueChange"?: (event: ModusAutocompleteCustomEvent<string>) => void;
@@ -3178,6 +3187,10 @@ declare namespace LocalJSX {
           * (optional) The chip's aria-label.
          */
         "ariaLabel"?: string | null;
+        /**
+          * (optional) the chip's id
+         */
+        "chipId"?: string;
         /**
           * (optional) The chip's style.
          */
