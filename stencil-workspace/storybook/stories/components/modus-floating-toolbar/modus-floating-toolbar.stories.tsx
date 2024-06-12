@@ -21,13 +21,6 @@ export default {
         defaultValue: { summary: false },
       },
     },
-    tabIndex: {
-      name: 'tab-index',
-      description: 'Tab Index for the toolbar',
-      table: {
-        type: { summary: 'number' },
-      },
-    },
   },
   parameters: {
     actions: {
@@ -40,16 +33,16 @@ export default {
   },
 };
 
-const Template = ({ ariaLabel, disabled, tabIndex }) => html`
-  <modus-floating-toolbar .disabled=${disabled} aria-label=${ariaLabel} tab-index=${tabIndex}>
+const Template = ({ ariaLabel, disabled }) => html`
+  <modus-floating-toolbar .disabled=${disabled} aria-label=${ariaLabel}>
     <modus-button>Button 1</modus-button>
     <modus-button>Button 2</modus-button>
     <modus-button>Button 3</modus-button>
   </modus-floating-toolbar>
 `;
 
-const IconOnlyTemplate = ({ ariaLabel, disabled, tabIndex }) => html`
-  <modus-floating-toolbar .disabled=${disabled} aria-label=${ariaLabel} tab-index=${tabIndex}>
+const IconOnlyTemplate = ({ ariaLabel, disabled }) => html`
+  <modus-floating-toolbar .disabled=${disabled} aria-label=${ariaLabel}>
     <modus-button button-style="borderless" icon-only="undo"></modus-button>
     <modus-button button-style="borderless" icon-only="redo"></modus-button>
     <modus-button button-style="borderless" icon-only="expand"></modus-button>

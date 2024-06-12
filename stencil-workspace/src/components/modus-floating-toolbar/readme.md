@@ -7,11 +7,10 @@
 
 ## Properties
 
-| Property        | Attribute         | Description                         | Type      | Default     |
-| --------------- | ----------------- | ----------------------------------- | --------- | ----------- |
-| `ariaLabel`     | `aria-label`      | (optional) The button's aria-label. | `string`  | `undefined` |
-| `disabled`      | `disabled`        | (optional) Disables the button.     | `boolean` | `undefined` |
-| `tabIndexValue` | `tab-index-value` | (optional) Tab Index for the button | `number`  | `0`         |
+| Property    | Attribute    | Description                         | Type      | Default     |
+| ----------- | ------------ | ----------------------------------- | --------- | ----------- |
+| `ariaLabel` | `aria-label` | (optional) The button's aria-label. | `string`  | `undefined` |
+| `disabled`  | `disabled`   | (optional) Disables the button.     | `boolean` | `undefined` |
 
 
 ## Dependencies

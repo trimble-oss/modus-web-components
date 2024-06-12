@@ -13,9 +13,6 @@ export class ModusFloatingToolbar {
   /** (optional) Disables the button. */
   @Prop() disabled: boolean;
 
-  /** (optional) Tab Index for the button */
-  @Prop({ mutable: true }) tabIndexValue = 0;
-
   @Element() host: HTMLElement;
 
   renderButtons() {
