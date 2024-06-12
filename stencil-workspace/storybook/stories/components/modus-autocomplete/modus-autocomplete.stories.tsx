@@ -155,6 +155,7 @@ export default {
       handles: [
         'valueChange',
         'optionSelected',
+        'selectionsChanged'
       ],
     },
     docs: {
@@ -241,6 +242,12 @@ const defaultArgs = {
   options: defaultOptions,
 }
 
+const customOptions = [
+  { id: 'ID0', value: 'Apple' },
+  { id: 'ID1', value: 'Banana' },
+  { id: 'ID2', value: 'Orange' }
+];
+
 export const Default = Template.bind({});
 Default.args = defaultArgs;
 
@@ -248,7 +255,7 @@ export const WithOption = Template.bind({});
 WithOption.args = { ...defaultArgs, label: 'Autocomplete using option model' };
 
 export const WithChips = Template.bind({});
-WithChips.args = { ...defaultArgs, label: 'Autocomplete using chips', multiple: true };
+WithChips.args = { ...defaultArgs, label: 'Autocomplete using chips', multiple: true, options: customOptions };
 
 export const WithCustomOption = ({
   ariaLabel,
