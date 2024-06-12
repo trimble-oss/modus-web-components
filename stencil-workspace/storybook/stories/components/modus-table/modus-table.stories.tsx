@@ -673,7 +673,7 @@ ManualSorting.args = {
 
 export const CustomSorting = Template.bind({});
 CustomSorting.args = {...DefaultArgs, customSort:['Rejected', 'Verified', 'Pending'],sort:true ,data:makeData(5)
-}
+};
 
 export const ValueFormatter = ({
   hover,
