@@ -1,6 +1,7 @@
 // eslint-disable-next-line
 import { Component, Event, EventEmitter, h, Method, Prop, Watch } from '@stencil/core';
 import { generateElementId } from '../../utils/utils';
+import AutoNumeric from 'autonumeric';
 
 @Component({
   tag: 'modus-number-input',
@@ -63,6 +64,16 @@ export class ModusNumberInput {
     ['large', 'large'],
   ]);
   numberInput: HTMLInputElement;
+  autoNumericInstance: AutoNumeric;
+
+  componentDidLoad() {
+    this.autoNumericInstance = new AutoNumeric(this.numberInput, {
+      digitGroupSeparator: ',',
+      digitalGroupSpacing: '2',
+      decimalCharacter: '.',
+      decimalPlaces: 2,
+    });
+  }
 
   handleOnInput(): void {
     this.value = this.numberInput.value;
@@ -140,7 +151,7 @@ export class ModusNumberInput {
             ref={(el) => (this.numberInput = el as HTMLInputElement)}
             step={this.step}
             tabIndex={0}
-            type="number"
+            type="text"
             value={this.value}></input>
         </div>
         {this.errorText ? (
