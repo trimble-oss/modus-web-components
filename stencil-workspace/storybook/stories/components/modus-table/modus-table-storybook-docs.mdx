@@ -13,6 +13,7 @@ import { Story } from '@storybook/addon-docs';
 - [Borderless](#borderless)
 - [Sorting](#sorting)
 - [Manual Sorting](#manual-sorting)
+- [Custom Sorting](#custom-sorting)
 - [Value Formatter](#value-formatter)
 - [Hyperlink](#hyperlink)
 - [Badge](#badge)
@@ -154,6 +155,76 @@ Manual Sorting allows users to handle sorting in server-side mode.
 
 - Manual Sorting can be enabled using the `manualSortingOptions` prop.
 - The `currentSortingState` represents how the data is sorted (column and direction).
+
+
+### Custom Sorting
+
+Custom sorting allows you to define your own logic for sorting table data.Custom sorting can be implemented by defining a sorting function `sortingFn` and assigning it to the relevant columns in your table configuration.
+
+A custom sorting function receives two arguments: the row values for the column being sorted, and the column id.
+
+
+```javascript
+
+
+const myCustomSortingFn(rowA, rowB, columnId) => {
+  return //-1, 0, or 1 - access any row data using rowA.original and rowB.original
+}
+
+
+```
+
+
+It should return -1 if the first argument should come before the second, 1 if it should come after, or 0 if they are equal.
+
+
+```javascript
+
+const columns = [
+  {
+    header: () => 'Name',
+    accessorKey: 'name',
+    sortingFn: 'alphanumeric', // use built-in sorting function by name
+  },
+  {
+    header: () => 'Age',
+    accessorKey: 'age',
+    sortingFn: 'myCustomSortingFn', // use custom global sorting function
+  },
+  {
+    header: () => 'Birthday',
+    accessorKey: 'birthday',
+    sortingFn: 'datetime', // recommended for date columns
+  },
+  {
+    header: () => 'Profile',
+    accessorKey: 'profile',
+    // use custom sorting function directly
+    sortingFn: (rowA, rowB, columnId) => {
+      return rowA.original.someProperty - rowB.original.someProperty
+    },
+  }
+]
+
+
+```
+
+Custom Sorting Function
+
+
+```javascript
+const sortStatusFn: SortingFn<Person> = (rowA, rowB, _columnId) => {
+  const statusA = rowA.original.status
+  const statusB = rowB.original.status
+  const statusOrder = ['single', 'complicated', 'relationship']
+  return statusOrder.indexOf(statusA) - statusOrder.indexOf(statusB)
+}
+
+```
+
+The sortStatusFn function sorts rows based on the status property of each row's data. The status property can have one of three values: 'single', 'complicated', or 'relationship'. The function ensures that rows are sorted in the order specified by the statusOrder array.
+
+
 
 ### Value Formatter
 
