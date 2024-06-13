@@ -1,28 +1,22 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Component, Event, EventEmitter, h, Method, Prop, State } from '@stencil/core';
-import { IconSearch } from '../../icons/svgs/icon-search';
+// eslint-disable-next-line
+import { Component, Event, EventEmitter, h, Method, Prop } from '@stencil/core';
 import { IconClose } from '../../icons/svgs/icon-close';
-import { IconVisibilityOff } from '../../icons/svgs/icon-visibility-off';
 import { generateElementId } from '../../utils/utils';
-import { IconVisibilityOn } from '../../icons/generated-icons/IconVisibilityOn';
 
 @Component({
-  tag: 'modus-text-input',
-  styleUrl: 'modus-text-input.scss',
+  tag: 'modus-textarea-input',
+  styleUrl: 'modus-textarea-input.scss',
   shadow: true,
 })
-export class ModusTextInput {
+export class ModusTextareaInput {
   /** (optional) The input's aria-label. */
   @Prop() ariaLabel: string | null;
 
   /** (optional) Capitalization behavior when using a non-traditional keyboard (e.g. microphone, touch screen) */
-  @Prop() autocapitalize: string;
+  @Prop() autocapitalize: boolean | 'none' | 'off' | 'sentences' | 'on' | 'words' | 'characters';
 
   /** (optional) Whether to activate automatic correction while the user is editing this field in Safari. */
   @Prop() autocorrect: boolean | 'off' | 'on';
-
-  /** (optional) Sets autocomplete on the input. */
-  @Prop() autocomplete: string | null;
 
   /** (optional) Sets autofocus on the input. */
   @Prop() autoFocusInput: boolean;
@@ -42,15 +36,6 @@ export class ModusTextInput {
   /** (optional) The input's helper text displayed below the input. */
   @Prop() helperText: string;
 
-  /** (optional) Whether the search icon is included. */
-  @Prop() includeSearchIcon: boolean;
-
-  /** (optional) Whether the password text toggle icon is included. */
-  @Prop() includePasswordTextToggle = true;
-
-  /** (optional) The input's inputmode. */
-  @Prop() inputmode: 'decimal' | 'email' | 'numeric' | 'search' | 'tel' | 'text' | 'url';
-
   /** (optional) The input's label. */
   @Prop() label: string;
 
@@ -60,14 +45,14 @@ export class ModusTextInput {
   /** (optional) The input's minimum length. */
   @Prop() minLength: number;
 
-  /** (optional) The input's pattern HTML attribute. */
-  @Prop() pattern: string;
-
   /** (optional) The input's placeholder text. */
   @Prop() placeholder: string;
 
   /** (optional) Whether the input's content is read-only */
   @Prop() readOnly: boolean;
+
+  /** (optional) Number of rows on textarea */
+  @Prop() rows = 5;
 
   /** (optional) Whether the input is required. */
   @Prop() required: boolean;
@@ -81,28 +66,23 @@ export class ModusTextInput {
   /** (optional) The input's text alignment. */
   @Prop() textAlign: 'left' | 'right' = 'left';
 
-  /** (optional) The input's type. */
-  @Prop() type: 'email' | 'password' | 'search' | 'text' | 'tel' | 'url' = 'text';
-
   /** (optional) The input's valid state text. */
   @Prop() validText: string;
 
   /** (optional) The input's value. */
   @Prop({ mutable: true }) value: string;
 
-  @State() passwordVisible = true;
-
   /** An event that fires on input value change. */
   @Event() valueChange: EventEmitter<string>;
 
-  private inputId = generateElementId() + '_text_input';
+  private inputId = generateElementId() + '_textarea_input';
 
   classBySize: Map<string, string> = new Map([
     ['medium', 'medium'],
     ['large', 'large'],
   ]);
 
-  textInput: HTMLInputElement;
+  textInput: HTMLTextAreaElement;
   buttonTogglePassword: HTMLDivElement;
 
   /** Focus the input. */
@@ -132,26 +112,13 @@ export class ModusTextInput {
     this.valueChange.emit(value);
   }
 
-  handleTogglePasswordKeyDown(event: KeyboardEvent): void {
-    if (event.key !== 'Enter' && event.key !== ' ') {
-      return;
+  get inputAutocapitalize() {
+    if (this.autocapitalize === true) {
+      return 'on';
+    } else if (this.autocapitalize === false) {
+      return 'off';
     }
-    this.handleTogglePassword();
-  }
-
-  handleTogglePassword() {
-    if (this.textInput.type === 'password') {
-      this.passwordVisible = false;
-      this.textInput.type = 'text';
-      this.buttonTogglePassword.setAttribute('aria-label', 'Hide password.');
-    } else {
-      this.passwordVisible = true;
-      this.textInput.type = 'password';
-      this.buttonTogglePassword.setAttribute(
-        'aria-label',
-        'Show password as plain text. ' + 'Warning: this will display your password on the screen.'
-      );
-    }
+    return this.autocapitalize;
   }
 
   get inputAutocorrect() {
@@ -165,16 +132,11 @@ export class ModusTextInput {
 
   render(): unknown {
     const iconSize = this.size === 'large' ? '24' : '16';
-    const isPassword = this.type === 'password';
-    const showPasswordToggle = !!(this.includePasswordTextToggle && isPassword && this.value?.length);
     const showClearIcon = this.clearable && !this.readOnly && !!this.value;
 
     const buildTextInputClassNames = (): string => {
       const classNames = [];
 
-      if (this.includeSearchIcon) {
-        classNames.push('has-left-icon');
-      }
       if (showClearIcon) {
         classNames.push('has-right-icon');
       }
@@ -184,7 +146,7 @@ export class ModusTextInput {
 
     const buildContainerClassNames = (): string => {
       const classNames = [];
-      classNames.push('modus-text-input');
+      classNames.push('modus-textarea-input');
 
       if (this.disabled) {
         classNames.push('disabled');
@@ -199,7 +161,6 @@ export class ModusTextInput {
           <div class={'label-container'}>
             {this.label ? <label htmlFor={this.inputId}>{this.label}</label> : null}
             {this.required ? <span class="required">*</span> : null}
-            {this.helperText ? <label class="sub-text helper">{this.helperText}</label> : null}
           </div>
         ) : null}
         <div
@@ -207,45 +168,30 @@ export class ModusTextInput {
             this.size
           )}`}
           onClick={() => this.textInput.focus()}
-          part="input-container">
-          {this.includeSearchIcon ? <IconSearch size={iconSize} /> : null}
-          <input
+          part="input-container"
+          style={{ height: this.rows + 1 + 'rem' }}>
+          <textarea
             id={this.inputId}
             aria-invalid={!!this.errorText}
-            aria-label={this.ariaLabel || undefined}
+            aria-label={this.ariaLabel}
             aria-required={this.required?.toString()}
-            autocapitalize={this.autocapitalize}
-            autocomplete={this.autocomplete}
+            autoCapitalize={this.inputAutocapitalize}
             autocorrect={this.autocorrect as string}
             class={buildTextInputClassNames()}
             disabled={this.disabled}
             enterkeyhint={this.enterkeyhint}
-            inputmode={this.inputmode}
             maxlength={this.maxLength}
             minlength={this.minLength}
             onInput={(event) => this.handleOnInput(event)}
-            pattern={this.pattern}
             placeholder={this.placeholder}
             readonly={this.readOnly}
-            ref={(el) => (this.textInput = el as HTMLInputElement)}
+            ref={(el) => (this.textInput = el as HTMLTextAreaElement)}
+            rows={this.rows}
             spellcheck={this.spellcheck}
             tabIndex={0}
-            type={this.type}
             value={this.value}
             autofocus={this.autoFocusInput}
           />
-          {showPasswordToggle && (
-            <div
-              class="icons toggle-password"
-              tabIndex={0}
-              onKeyDown={(event) => this.handleTogglePasswordKeyDown(event)}
-              onClick={() => this.handleTogglePassword()}
-              role="button"
-              aria-label="Show password as plain text. Warning: this will display your password on the screen."
-              ref={(el) => (this.buttonTogglePassword = el as HTMLDivElement)}>
-              {this.passwordVisible ? <IconVisibilityOn size={iconSize} /> : <IconVisibilityOff size={iconSize} />}
-            </div>
-          )}
           {showClearIcon && (
             <span
               class="icons clear"
@@ -262,6 +208,8 @@ export class ModusTextInput {
           <label class="sub-text error">{this.errorText}</label>
         ) : this.validText ? (
           <label class="sub-text valid">{this.validText}</label>
+        ) : this.helperText ? (
+          <label class="sub-text helper">{this.helperText}</label>
         ) : null}
       </div>
     );

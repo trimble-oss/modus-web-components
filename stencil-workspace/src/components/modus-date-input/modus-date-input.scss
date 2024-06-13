@@ -23,7 +23,7 @@
     margin-bottom: $rem-4px;
 
     span {
-      color: $modus-input-bottom-line-color;
+      color: $modus-input-border-color;
       margin: $rem-4px;
     }
   }
@@ -42,7 +42,7 @@
   .input-container {
     align-items: center;
     background-color: $modus-input-bg;
-    border: $rem-1px solid $modus-input-bottom-line-color;
+    border: $rem-1px solid $modus-input-border-color;
     border-radius: 4px;
     box-sizing: border-box;
     display: flex;
@@ -95,11 +95,11 @@
     }
 
     &:focus-within {
-      border-color: $modus-input-bottom-line-active-color;
-      box-shadow: 0 0 0 1px $modus-input-bottom-line-active-color;
+      border-color: $modus-input-border-active-color;
+      box-shadow: 0 0 0 1px $modus-input-border-active-color;
 
       svg.icon-calendar path {
-        fill: $modus-input-bottom-line-active-color;
+        fill: $modus-input-border-active-color;
       }
     }
 
@@ -133,7 +133,7 @@
 
   .input-container:has(input[readonly]) {
     background-color: $modus-input-readonly-bg;
-    border-bottom-color: $modus-input-disabled-bottom-line-color;
+    border-color: transparent;
   }
 
   .sub-text {

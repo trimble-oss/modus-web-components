@@ -78,7 +78,6 @@ export class ModusTooltip {
     });
   }
 
-
   componentDidLoad(): void {
     this.tooltipElement = this.element.shadowRoot.querySelector('.tooltip') as HTMLDivElement;
     this.attachEventListeners();
@@ -135,7 +134,6 @@ export class ModusTooltip {
   }
 
   show(): void {
-
     if (!this.popperInstance && this.text?.length > 1 && !this.disabled) {
       this.initializePopper(this.position);
     }
