@@ -105,9 +105,10 @@ Default.decorators = [
   (Story) => {
     useEffect(() => {
       const handleHelpOpen = () => {
-        const panel = document.querySelector('modus-utility-panel') as any;
+        const panel = document.querySelector('modus-utility-panel');
         if (panel) {
-          panel.expanded = !panel.expanded;
+          const isExpanded = panel.getAttribute('expanded') === 'true';
+          panel.setAttribute('expanded', (!isExpanded).toString());
         }
       };
       document.addEventListener('helpOpen', handleHelpOpen);

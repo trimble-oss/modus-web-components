@@ -1771,6 +1771,17 @@ export namespace Components {
         "tabIndexValue": string | number;
         "updateComponent": () => Promise<void>;
     }
+    interface ModusUtilityPanel {
+        /**
+          * The panel is expanded or closed
+         */
+        "expanded": boolean;
+        /**
+          * Determines if the panel pushes content or displays an overlay.
+         */
+        "pushContent": boolean;
+        "targetContent": string;
+    }
 }
 export interface ModusAccordionItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1923,6 +1934,10 @@ export interface ModusTreeViewCustomEvent<T> extends CustomEvent<T> {
 export interface ModusTreeViewItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusTreeViewItemElement;
+}
+export interface ModusUtilityPanelCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusUtilityPanelElement;
 }
 declare global {
     interface HTMLModusAccordionElement extends Components.ModusAccordion, HTMLStencilElement {
@@ -2741,6 +2756,24 @@ declare global {
         prototype: HTMLModusTreeViewItemElement;
         new (): HTMLModusTreeViewItemElement;
     };
+    interface HTMLModusUtilityPanelElementEventMap {
+        "panelOpened": void;
+        "panelClosed": void;
+    }
+    interface HTMLModusUtilityPanelElement extends Components.ModusUtilityPanel, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusUtilityPanelElementEventMap>(type: K, listener: (this: HTMLModusUtilityPanelElement, ev: ModusUtilityPanelCustomEvent<HTMLModusUtilityPanelElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusUtilityPanelElementEventMap>(type: K, listener: (this: HTMLModusUtilityPanelElement, ev: ModusUtilityPanelCustomEvent<HTMLModusUtilityPanelElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLModusUtilityPanelElement: {
+        prototype: HTMLModusUtilityPanelElement;
+        new (): HTMLModusUtilityPanelElement;
+    };
     interface HTMLElementTagNameMap {
         "modus-accordion": HTMLModusAccordionElement;
         "modus-accordion-item": HTMLModusAccordionItemElement;
@@ -2800,6 +2833,7 @@ declare global {
         "modus-tooltip": HTMLModusTooltipElement;
         "modus-tree-view": HTMLModusTreeViewElement;
         "modus-tree-view-item": HTMLModusTreeViewItemElement;
+        "modus-utility-panel": HTMLModusUtilityPanelElement;
     }
 }
 declare namespace LocalJSX {
@@ -4751,6 +4785,25 @@ declare namespace LocalJSX {
          */
         "tabIndexValue"?: string | number;
     }
+    interface ModusUtilityPanel {
+        /**
+          * The panel is expanded or closed
+         */
+        "expanded"?: boolean;
+        /**
+          * An event that fires when the panel is closed.
+         */
+        "onPanelClosed"?: (event: ModusUtilityPanelCustomEvent<void>) => void;
+        /**
+          * An event that fires when the panel is opened.
+         */
+        "onPanelOpened"?: (event: ModusUtilityPanelCustomEvent<void>) => void;
+        /**
+          * Determines if the panel pushes content or displays an overlay.
+         */
+        "pushContent"?: boolean;
+        "targetContent"?: string;
+    }
     interface IntrinsicElements {
         "modus-accordion": ModusAccordion;
         "modus-accordion-item": ModusAccordionItem;
@@ -4810,6 +4863,7 @@ declare namespace LocalJSX {
         "modus-tooltip": ModusTooltip;
         "modus-tree-view": ModusTreeView;
         "modus-tree-view-item": ModusTreeViewItem;
+        "modus-utility-panel": ModusUtilityPanel;
     }
 }
 export { LocalJSX as JSX };
@@ -4877,6 +4931,7 @@ declare module "@stencil/core" {
             "modus-tooltip": LocalJSX.ModusTooltip & JSXBase.HTMLAttributes<HTMLModusTooltipElement>;
             "modus-tree-view": LocalJSX.ModusTreeView & JSXBase.HTMLAttributes<HTMLModusTreeViewElement>;
             "modus-tree-view-item": LocalJSX.ModusTreeViewItem & JSXBase.HTMLAttributes<HTMLModusTreeViewItemElement>;
+            "modus-utility-panel": LocalJSX.ModusUtilityPanel & JSXBase.HTMLAttributes<HTMLModusUtilityPanelElement>;
         }
     }
 }
