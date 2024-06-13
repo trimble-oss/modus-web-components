@@ -7,7 +7,7 @@
     "build-storybook": "build-storybook -o ./dist"
   },
   "dependencies": {
-    "@storybook/addon-docs": "^6.5.16",
+    "@storybook/addon-docs": "^8.1.8",
     "@storybook/addons": "^6.5.16",
     "@storybook/components": "^6.5.16",
     "@storybook/theming": "^6.5.16",
@@ -21,10 +21,10 @@
     "@babel/preset-react": "^7.24.6",
     "@storybook/addon-a11y": "^6.5.16",
     "@storybook/addon-actions": "^6.5.16",
-    "@storybook/addon-essentials": "^6.5.16",
+    "@storybook/addon-essentials": "^8.1.8",
     "@storybook/addon-links": "^6.5.16",
     "@storybook/addon-styling": "^0.3.2",
-    "@storybook/web-components": "^6.5.16",
+    "@storybook/web-components": "^8.1.8",
     "babel-loader": "8.2.5",
     "postcss": "^8.4.31",
     "storybook-dark-mode": "^3.0.1"
