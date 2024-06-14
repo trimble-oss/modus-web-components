@@ -98,9 +98,9 @@ function addSortingFn(columns) {
   } else if(!!modusTable.manualPaginationOptions){
     modusTable.data = globalData.slice((modusTable.manualPaginationOptions.currentPageIndex - 1) * modusTable.manualPaginationOptions.currentPageSize,
       modusTable.manualPaginationOptions.currentPageIndex * modusTable.manualPaginationOptions.currentPageSize);
-  }else if(modusTable.customSort.length > 0){
+  } else if(modusTable.customSort.length > 0){
     modusTable.columns = addSortingFn(modusTable.columns);
-  }else {
+  } else {
     modusTable.data = globalData;
   }
 
@@ -546,10 +546,10 @@ export default {
       type: { required: false },
     },
     customSort: {
-      name: 'CustomSorting',
-      description: 'To sort data using custom sorting functions.',
+      name: 'customSorting',
+      description: 'This property is for demonstration purposes only and is not available on the component. This demo illustrates how to implement custom sorting for the status column based on a given order.',
       table: {
-        type: { summary: 'customSort'},
+        // type: { summary: 'sortingFn'},
       },
       type: { required: false },
     },
