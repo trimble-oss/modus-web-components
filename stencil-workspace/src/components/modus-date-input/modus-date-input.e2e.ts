@@ -76,6 +76,9 @@ describe('modus-date-input', () => {
     await page.setContent('<modus-date-input></modus-date-input>');
 
     const textInput = await page.find('modus-date-input');
+    textInput.setProperty('label', 'label');
+    await page.waitForChanges();
+
     textInput.setProperty('helperText', 'Helper.');
     await page.waitForChanges();
 
