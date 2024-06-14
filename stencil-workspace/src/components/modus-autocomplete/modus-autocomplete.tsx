@@ -294,7 +294,6 @@ export class ModusAutocomplete {
   }
 
   handleTextInputFocus = () => {
-    console.log(this.value);
     const hasDefaultTextInput = this.value?.length > 0 && !this.disableCloseOnSelect;
     if (hasDefaultTextInput) {
       this.disableFiltering = true;
