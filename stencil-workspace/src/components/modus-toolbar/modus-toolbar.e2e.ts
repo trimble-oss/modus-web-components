@@ -1,27 +1,27 @@
 import { newE2EPage } from '@stencil/core/testing';
 
-describe('modus-floating-toolbar', () => {
+describe('modus-toolbar', () => {
   it('renders', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <modus-floating-toolbar>
+      <modus-toolbar>
         <modus-button>Button</modus-button>
-      </modus-floating-toolbar>
+      </modus-toolbar>
     `);
 
-    const element = await page.find('modus-floating-toolbar');
+    const element = await page.find('modus-toolbar');
     expect(element).toHaveClass('hydrated');
   });
 
   it('should render a divider', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <modus-floating-toolbar>
+      <modus-toolbar>
         <modus-divider></modus-divider>
-      </modus-floating-toolbar>
+      </modus-toolbar>
     `);
 
-    const element = await page.find('modus-floating-toolbar');
+    const element = await page.find('modus-toolbar');
     expect(element).toHaveClass('hydrated');
   });
 
@@ -29,12 +29,12 @@ describe('modus-floating-toolbar', () => {
     const page = await newE2EPage();
 
     await page.setContent(`
-        <modus-floating-toolbar>
+        <modus-toolbar>
           <modus-button>Button 1</modus-button>
           <modus-button>Button 2</modus-button>
-        </modus-floating-toolbar>
+        </modus-toolbar>
       `);
-    const buttons = await page.findAll('modus-floating-toolbar >>> modus-button');
+    const buttons = await page.findAll('modus-toolbar >>> modus-button');
     expect(buttons.length).toBe(2);
   });
 
@@ -42,25 +42,25 @@ describe('modus-floating-toolbar', () => {
     const page = await newE2EPage();
 
     await page.setContent(`
-        <modus-floating-toolbar>
+        <modus-toolbar>
           <modus-button>Button 1</modus-button>
           <modus-divider></modus-divider>
           <modus-button>Button 2</modus-button>
-        </modus-floating-toolbar>
+        </modus-toolbar>
       `);
-    const dividers = await page.findAll('modus-floating-toolbar >>> modus-divider');
+    const dividers = await page.findAll('modus-toolbar >>> modus-divider');
     expect(dividers.length).toBe(1);
   });
 
   it('disables buttons when the disabled prop is set', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<modus-floating-toolbar disabled></modus-floating-toolbar>');
-    const toolbar = await page.find('modus-floating-toolbar');
+    await page.setContent('<modus-toolbar disabled></modus-toolbar>');
+    const toolbar = await page.find('modus-toolbar');
     toolbar.setProperty('disabled', true);
     await page.waitForChanges();
 
-    const buttons = await page.findAll('modus-floating-toolbar >>> modus-button');
+    const buttons = await page.findAll('modus-toolbar >>> modus-button');
     for (const button of buttons) {
       expect(button.getAttribute('disabled')).toBe('true');
     }
@@ -70,22 +70,22 @@ describe('modus-floating-toolbar', () => {
     const ariaLabel = 'Test Label';
     const page = await newE2EPage();
 
-    await page.setContent('<modus-floating-toolbar></modus-floating-toolbar>');
-    const toolbar = await page.find('modus-floating-toolbar');
+    await page.setContent('<modus-toolbar></modus-toolbar>');
+    const toolbar = await page.find('modus-toolbar');
     toolbar.setProperty('ariaLabel', ariaLabel);
     await page.waitForChanges();
 
-    const buttons = await page.findAll('modus-floating-toolbar >>> modus-button');
+    const buttons = await page.findAll('modus-toolbar >>> modus-button');
     for (const button of buttons) {
       expect(button.getAttribute('aria-label')).toBe(ariaLabel);
     }
   });
 
-  it('has the correct floating position and style', async () => {
+  it('has the correct position and style', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<modus-floating-toolbar></modus-floating-toolbar>');
-    const toolbar = await page.find('modus-floating-toolbar');
+    await page.setContent('<modus-toolbar></modus-toolbar>');
+    const toolbar = await page.find('modus-toolbar');
     const style = await toolbar.getComputedStyle();
 
     expect(style.position).toBe('fixed');
@@ -97,12 +97,12 @@ describe('modus-floating-toolbar', () => {
     const page = await newE2EPage();
 
     await page.setContent(`
-      <modus-floating-toolbar>
+      <modus-toolbar>
         <modus-button icon-only="close">Close</modus-button>
-      </modus-floating-toolbar>
+      </modus-toolbar>
     `);
 
-    const button = await page.find('modus-floating-toolbar >>> modus-button');
+    const button = await page.find('modus-toolbar >>> modus-button');
     expect(button).not.toBeNull();
     expect(button.textContent).toEqual('Close');
     expect(button.getAttribute('icon-only')).toEqual('close');

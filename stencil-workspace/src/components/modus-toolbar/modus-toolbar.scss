@@ -1,8 +1,8 @@
-@import './modus-floating-toolbar.vars';
+@import './modus-toolbar.vars';
 
 :host {
   align-items: center;
-  background-color: $modus-floating-toolbar-bg;
+  background-color: $modus-toolbar-bg;
   border-radius: 4px;
   bottom: 20px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);

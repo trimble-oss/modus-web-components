@@ -23,9 +23,9 @@
 ### Graph
 ```mermaid
 graph TD;
-  modus-floating-toolbar --> modus-button
-  modus-floating-toolbar --> modus-divider
-  style modus-floating-toolbar fill:#f9f,stroke:#333,stroke-width:4px
+  modus-toolbar --> modus-button
+  modus-toolbar --> modus-divider
+  style modus-toolbar fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

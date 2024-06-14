@@ -2,11 +2,11 @@
 import { Component, h, Element, Prop, Host } from '@stencil/core';
 
 @Component({
-  tag: 'modus-floating-toolbar',
-  styleUrl: 'modus-floating-toolbar.scss',
+  tag: 'modus-toolbar',
+  styleUrl: 'modus-toolbar.scss',
   shadow: true,
 })
-export class ModusFloatingToolbar {
+export class ModusToolbar {
   /** (optional) The button's aria-label. */
   @Prop() ariaLabel: string | null;
 

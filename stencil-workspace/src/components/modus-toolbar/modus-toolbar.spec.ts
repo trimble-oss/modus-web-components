@@ -1,17 +1,17 @@
 import { newSpecPage } from '@stencil/core/testing';
-import { ModusFloatingToolbar } from './modus-floating-toolbar';
+import { ModusToolbar } from './modus-toolbar';
 
-describe('modus-floating-toolbar', () => {
+describe('modus-toolbar', () => {
   it('renders', async () => {
     const { root } = await newSpecPage({
-      components: [ModusFloatingToolbar],
+      components: [ModusToolbar],
       html: `
-        <modus-floating-toolbar>
+        <modus-toolbar>
           <modus-button>Button</modus-button>
-        </modus-floating-toolbar>`,
+        </modus-toolbar>`,
     });
     expect(root).toEqualHtml(`
-      <modus-floating-toolbar role="toolbar">
+      <modus-toolbar role="toolbar">
         <mock:shadow-root>
           <modus-button button-style="borderless" class="modus-button" color="secondary">
             Button
@@ -20,37 +20,37 @@ describe('modus-floating-toolbar', () => {
         <modus-button>
           Button
         </modus-button>
-      </modus-floating-toolbar>
+      </modus-toolbar>
     `);
   });
 
   it('should render a divider', async () => {
     const { root } = await newSpecPage({
-      components: [ModusFloatingToolbar],
+      components: [ModusToolbar],
       html: `
-        <modus-floating-toolbar role="toolbar">
+        <modus-toolbar role="toolbar">
           <modus-divider></modus-divider>
-        </modus-floating-toolbar>`,
+        </modus-toolbar>`,
     });
     expect(root).toEqualHtml(`
-      <modus-floating-toolbar role="toolbar">
+      <modus-toolbar role="toolbar">
         <mock:shadow-root>
           <modus-divider></modus-divider>
         </mock:shadow-root>
         <modus-divider></modus-divider>
-      </modus-floating-toolbar>
+      </modus-toolbar>
     `);
   });
   it('should render a button with icon only', async () => {
     const { root } = await newSpecPage({
-      components: [ModusFloatingToolbar],
+      components: [ModusToolbar],
       html: `
-        <modus-floating-toolbar>
+        <modus-toolbar>
           <modus-button icon-only="close">Button</modus-button>
-        </modus-floating-toolbar>`,
+        </modus-toolbar>`,
     });
     expect(root).toEqualHtml(`
-      <modus-floating-toolbar role="toolbar">
+      <modus-toolbar role="toolbar">
         <mock:shadow-root>
           <modus-button button-style="borderless" class="modus-button" color="secondary" icon-only="close">
             Button
@@ -59,19 +59,19 @@ describe('modus-floating-toolbar', () => {
         <modus-button icon-only="close">
           Button
         </modus-button>
-      </modus-floating-toolbar>
+      </modus-toolbar>
     `);
   });
   it('should render a button with icon only and label', async () => {
     const { root } = await newSpecPage({
-      components: [ModusFloatingToolbar],
+      components: [ModusToolbar],
       html: `
-        <modus-floating-toolbar>
+        <modus-toolbar>
           <modus-button icon-only="close">Button</modus-button>
-        </modus-floating-toolbar>`,
+        </modus-toolbar>`,
     });
     expect(root).toEqualHtml(`
-      <modus-floating-toolbar role="toolbar">
+      <modus-toolbar role="toolbar">
         <mock:shadow-root>
           <modus-button button-style="borderless" class="modus-button" color="secondary" icon-only="close">
             Button
@@ -80,19 +80,19 @@ describe('modus-floating-toolbar', () => {
         <modus-button icon-only="close">
           Button
         </modus-button>
-      </modus-floating-toolbar>
+      </modus-toolbar>
     `);
   });
   it('should render a button with label only', async () => {
     const { root } = await newSpecPage({
-      components: [ModusFloatingToolbar],
+      components: [ModusToolbar],
       html: `
-        <modus-floating-toolbar>
+        <modus-toolbar>
           <modus-button>Button</modus-button>
-        </modus-floating-toolbar>`,
+        </modus-toolbar>`,
     });
     expect(root).toEqualHtml(`
-      <modus-floating-toolbar role="toolbar">
+      <modus-toolbar role="toolbar">
         <mock:shadow-root>
           <modus-button button-style="borderless" class="modus-button" color="secondary">
             Button
@@ -101,7 +101,7 @@ describe('modus-floating-toolbar', () => {
         <modus-button>
           Button
         </modus-button>
-      </modus-floating-toolbar>
+      </modus-toolbar>
     `);
   });
 });

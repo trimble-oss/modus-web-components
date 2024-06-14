@@ -425,11 +425,11 @@
   // Radio Button
   --modus-radio-btn-focus-color: #3db0ee;
 
-  // Floating Toolbar
-  --modus-floating-toolbar-bg: var(--modus-white);
+  // Toolbar
+  --modus-toolbar-bg: var(--modus-white);
 
   // Divider
-  --modus-floating-toolbar-divider-bg: var(--modus-trimble-gray);
+  --modus-toolbar-divider-bg: var(--modus-trimble-gray);
 }
 
 [data-mwc-theme='dark'] {
@@ -790,11 +790,11 @@
   // Radio Button
   --modus-radio-btn-focus-color: #0a7ebc;
 
-  // Floating Toolbar
-  --modus-floating-toolbar-bg: var(--modus-gray-10);
+  // Toolbar
+  --modus-toolbar-bg: var(--modus-gray-10);
 
   // Divider
-  --modus-floating-toolbar-divider-bg: var(--modus-white);
+  --modus-toolbar-divider-bg: var(--modus-white);
 }
 
 // Mixins
