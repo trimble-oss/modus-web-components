@@ -1,4 +1,4 @@
-import {Story} from '@storybook/addon-docs';
+import { Story } from '@storybook/addon-docs';
 
 # Toolbar
 
@@ -22,24 +22,33 @@ The `modus-toolbar` component provides a customizable Toolbar that can be positi
 
 ```html
 <modus-toolbar>
-  <modus-button button-style="borderless" icon-only="undo"></modus-button>
-  <modus-button button-style="borderless" icon-only="redo"></modus-button>
-  <modus-button button-style="borderless" icon-only="expand"></modus-button>
-  <modus-button button-style="borderless" icon-only="collapse"></modus-button>
+  <modus-tooltip text="undo" position="top">
+    <modus-button icon-only="undo"></modus-button>
+  </modus-tooltip>
+  <modus-tooltip text="redo" position="top">
+    <modus-button icon-only="redo"></modus-button>
+  </modus-tooltip>
+  <modus-tooltip text="expand" position="top">
+    <modus-button icon-only="expand"></modus-button>
+  </modus-tooltip>
+  <modus-tooltip text="collapse" position="top">
+    <modus-button icon-only="collapse"></modus-button>
+  </modus-tooltip>
   <modus-divider></modus-divider>
-  <modus-button button-style="borderless" icon-only="window_dock_undock"></modus-button>
+  <modus-tooltip text="window_dock_undock" position="top">
+    <modus-button icon-only="window_dock_undock"></modus-button>
+  </modus-tooltip>
 </modus-toolbar>
 ```
 
 ## Properties
 
-| Property   | Attribute    | Description                                        | Type      | Default         |
-|------------|--------------|----------------------------------------------------|-----------|-----------------|
-| `ariaLabel`| `aria-label` | The Toolbar's aria-label                  | `string`  |                 |
-| `disabled` | `disabled`   | Whether the Toolbar is disabled           | `boolean` | `false`         |
+| Property    | Attribute    | Description                     | Type      | Default |
+| ----------- | ------------ | ------------------------------- | --------- | ------- |
+| `ariaLabel` | `aria-label` | The Toolbar's aria-label        | `string`  |         |
+| `disabled`  | `disabled`   | Whether the Toolbar is disabled | `boolean` | `false` |
 
 ### Accessibility
 
+- Toolbar gets role="toolbar"
 - Toolbar gets an `aria-label` provided by the `aria-label` property input.
-
-

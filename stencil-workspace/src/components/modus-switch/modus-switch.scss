@@ -57,6 +57,7 @@
       background-color: $col_white;
       border-radius: 50%;
       content: '';
+      forced-color-adjust: none;
       height: $rem-16px;
       position: absolute;
       transition: 0.1s;
@@ -103,5 +104,12 @@
   &.disabled {
     opacity: $modus-switch-disabled-opacity;
     pointer-events: none;
+  }
+}
+
+@media (forced-colors: active) and (prefers-color-scheme: light) {
+  .slider::before {
+    border: 1px solid ButtonText;
+    margin-top: -1px;
   }
 }

@@ -126,12 +126,6 @@
         font-size: $rem-14px;
         padding: 0 $rem-16px;
       }
-
-      &:focus-within,
-      &.error,
-      &.valid {
-        height: 3rem; // Counteract bottom border width.
-      }
     }
   }
 
