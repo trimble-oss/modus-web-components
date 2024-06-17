@@ -21,13 +21,8 @@ This component is compatible with Angular reactive forms. This can be achieved t
 <modus-textarea-input label="Textarea Input (Large & Helper Text)" placeholder="Placeholder" value="Value" size="large" helper-text="Your username must be 8-20 characters long, contain letters and numbers, and must not contain spaces"></modus-textarea-input>
 
 ```html
-<modus-textarea-input
-  label="Textarea Input"
-  placeholder="Placeholder"
-  required></modus-textarea-input>
-<modus-textarea-input
-  label="Textarea Input (Disabled)"
-  disabled></modus-textarea-input>
+<modus-textarea-input label="Textarea Input" placeholder="Placeholder" required></modus-textarea-input>
+<modus-textarea-input label="Textarea Input (Disabled)" disabled></modus-textarea-input>
 <modus-textarea-input
   label="Textarea Input (Helper Text)"
   placeholder="Placeholder"
@@ -59,29 +54,28 @@ This component is compatible with Angular reactive forms. This can be achieved t
 
 ### Properties
 
-| Property                    | Attribute                      | Description                                                                                               | Type                                                                        | Default     |
-| --------------------------- | ------------------------------ | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------- |
-| `ariaLabel`                 | `aria-label`                   | (optional) The textarea's aria-label.                                                                     | `string`                                                                    | `undefined` |
-| `autoFocusInput`            | `auto-focus-input`             | (optional) Sets autofocus on the textarea.                                                                | `boolean`                                                                   | `undefined` |
-| `autocapitalize`            | `autocapitalize`               | (optional) Capitalization behavior when using a non-traditional keyboard (e.g. microphone, touch screen). | `boolean, "none", "off", "sentences", "on", "words", "characters"`          | `undefined` |
-| `autocorrect`               | `autocorrect`                  | (optional) Whether to activate automatic correction while the user is editing this field in Safari.       | `boolean, "off", "on"`                                                      | `undefined` |
-| `clearable`                 | `clearable`                    | (optional) Whether the textarea has a clear button.                                                       | `boolean`                                                                   | `false`     |
-| `disabled`                  | `disabled`                     | (optional) Whether the textarea is disabled.                                                              | `boolean`                                                                   | `undefined` |
-| `enterkeyhint`              | `enterkeyhint`                 | Which action label to present for the enter key on virtual keyboards.                                     | `"enter", "done", "go", "next", "previous", "search", "send"`               | `undefined` |
-| `errorText`                 | `error-text`                   | (optional) The textarea's error state text.                                                               | `string`                                                                    | `undefined` |
-| `helperText`                | `helper-text`                  | (optional) The textarea's helper text displayed below the input.                                          | `string`                                                                    | `undefined` |
-| `label`                     | `label`                        | (optional) The textarea's label.                                                                          | `string`                                                                    | `undefined` |
-| `maxLength`                 | `max-length`                   | (optional) The textarea's maximum length.                                                                 | `number`                                                                    | `undefined` |
-| `minLength`                 | `min-length`                   | (optional) The textarea's minimum length.                                                                 | `number`                                                                    | `undefined` |
-| `placeholder`               | `placeholder`                  | (optional) The textarea's placeholder text.                                                               | `string`                                                                    | `undefined` |
-| `readOnly`                  | `read-only`                    | (optional) Whether the textarea's content is read-only                                                    | `boolean`                                                                   | `undefined` |
-| `required`                  | `required`                     | (optional) Whether the input is required.                                                                 | `boolean`                                                                   | `undefined` |
-| `rows`                      | `rows`                         | (optional) Number of rows on textarea.                                                                    | `number`                                                                    | `undefined` |
-| `size`                      | `size`                         | (optional) The textarea's size.                                                                           | `"large", "medium"`                                                         | `'medium'`  |
-| `spellcheck`                | `spellcheck`                   | (optional) Whether to enable spell checking.                                                              | `"large", "medium"`                                                         | `'medium'`  |
-| `textAlign`                 | `text-align`                   | (optional) The textarea's text alignment.                                                                 | `boolean`                                                                   | `'false'`   |
-| `validText`                 | `valid-text`                   | (optional) The textarea's valid state text.                                                               | `string`                                                                    | `undefined` |
-| `value`                     | `value`                        | (optional) The textarea's value.                                                                          |
+| Property         | Attribute          | Description                                                                                         | Type                                                          | Default     |
+| ---------------- | ------------------ | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- | ----------- |
+| `ariaLabel`      | `aria-label`       | (optional) The textarea's aria-label.                                                               | `string`                                                      | `undefined` |
+| `autoFocusInput` | `auto-focus-input` | (optional) Sets autofocus on the textarea.                                                          | `boolean`                                                     | `undefined` |
+| `autocorrect`    | `autocorrect`      | (optional) Whether to activate automatic correction while the user is editing this field in Safari. | `boolean, "off", "on"`                                        | `undefined` |
+| `clearable`      | `clearable`        | (optional) Whether the textarea has a clear button.                                                 | `boolean`                                                     | `false`     |
+| `disabled`       | `disabled`         | (optional) Whether the textarea is disabled.                                                        | `boolean`                                                     | `undefined` |
+| `enterkeyhint`   | `enterkeyhint`     | Which action label to present for the enter key on virtual keyboards.                               | `"enter", "done", "go", "next", "previous", "search", "send"` | `undefined` |
+| `errorText`      | `error-text`       | (optional) The textarea's error state text.                                                         | `string`                                                      | `undefined` |
+| `helperText`     | `helper-text`      | (optional) The textarea's helper text displayed below the input.                                    | `string`                                                      | `undefined` |
+| `label`          | `label`            | (optional) The textarea's label.                                                                    | `string`                                                      | `undefined` |
+| `maxLength`      | `max-length`       | (optional) The textarea's maximum length.                                                           | `number`                                                      | `undefined` |
+| `minLength`      | `min-length`       | (optional) The textarea's minimum length.                                                           | `number`                                                      | `undefined` |
+| `placeholder`    | `placeholder`      | (optional) The textarea's placeholder text.                                                         | `string`                                                      | `undefined` |
+| `readOnly`       | `read-only`        | (optional) Whether the textarea's content is read-only                                              | `boolean`                                                     | `undefined` |
+| `required`       | `required`         | (optional) Whether the input is required.                                                           | `boolean`                                                     | `undefined` |
+| `rows`           | `rows`             | (optional) Number of rows on textarea.                                                              | `number`                                                      | `undefined` |
+| `size`           | `size`             | (optional) The textarea's size.                                                                     | `"large", "medium"`                                           | `'medium'`  |
+| `spellcheck`     | `spellcheck`       | (optional) Whether to enable spell checking.                                                        | `"large", "medium"`                                           | `'medium'`  |
+| `textAlign`      | `text-align`       | (optional) The textarea's text alignment.                                                           | `boolean`                                                     | `'false'`   |
+| `validText`      | `valid-text`       | (optional) The textarea's valid state text.                                                         | `string`                                                      | `undefined` |
+| `value`          | `value`            | (optional) The textarea's value.                                                                    |
 
 ### DOM Events
 
