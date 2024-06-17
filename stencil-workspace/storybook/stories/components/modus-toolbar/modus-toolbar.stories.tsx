@@ -43,12 +43,12 @@ const Template = ({ ariaLabel, disabled }) => html`
 
 const IconOnlyTemplate = ({ ariaLabel, disabled }) => html`
   <modus-toolbar .disabled=${disabled} aria-label=${ariaLabel}>
-    <modus-button button-style="borderless" icon-only="undo"></modus-button>
-    <modus-button button-style="borderless" icon-only="redo"></modus-button>
-    <modus-button button-style="borderless" icon-only="expand"></modus-button>
-    <modus-button button-style="borderless" icon-only="collapse"></modus-button>
+    <modus-button icon-only="undo"></modus-button>
+    <modus-button icon-only="redo"></modus-button>
+    <modus-button icon-only="expand"></modus-button>
+    <modus-button icon-only="collapse"></modus-button>
     <modus-divider></modus-divider>
-    <modus-button button-style="borderless" icon-only="window_dock_undock"></modus-button>
+    <modus-button icon-only="window_dock_undock"></modus-button>
   </modus-toolbar>
 `;
 
