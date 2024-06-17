@@ -1,0 +1,45 @@
+import {Story} from '@storybook/addon-docs';
+
+# Toolbar
+
+The `modus-toolbar` component provides a customizable Toolbar that can be positioned at the bottom of the screen, other positions are a work in progress. It's designed to offer users quick access to common actions or tools.
+
+### Default
+
+<Story id="components-toolbar--default" height="100px" />
+
+```html
+<modus-toolbar>
+  <modus-button>Button 1</modus-button>
+  <modus-button>Button 2</modus-button>
+  <modus-button>Button 3</modus-button>
+</modus-toolbar>
+```
+
+### Icon Only
+
+<Story id="components-toolbar--icon-only" height="100px" />
+
+```html
+<modus-toolbar>
+  <modus-button button-style="borderless" icon-only="undo"></modus-button>
+  <modus-button button-style="borderless" icon-only="redo"></modus-button>
+  <modus-button button-style="borderless" icon-only="expand"></modus-button>
+  <modus-button button-style="borderless" icon-only="collapse"></modus-button>
+  <modus-divider></modus-divider>
+  <modus-button button-style="borderless" icon-only="window_dock_undock"></modus-button>
+</modus-toolbar>
+```
+
+## Properties
+
+| Property   | Attribute    | Description                                        | Type      | Default         |
+|------------|--------------|----------------------------------------------------|-----------|-----------------|
+| `ariaLabel`| `aria-label` | The Toolbar's aria-label                  | `string`  |                 |
+| `disabled` | `disabled`   | Whether the Toolbar is disabled           | `boolean` | `false`         |
+
+### Accessibility
+
+- Toolbar gets an `aria-label` provided by the `aria-label` property input.
+
+
