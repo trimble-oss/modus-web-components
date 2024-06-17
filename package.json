@@ -14,7 +14,9 @@
   "license": "MIT",
   "author": "Trimble Inc",
   "scripts": {
+    "lint-links": "npx linkinator https://modus-web-components.trimble.com/ --recurse",
     "prettier": "npx prettier --write \"**/*.yml\"",
+    "spellcheck": "npx cspell \"**/*.{html,json,md,mdx,toml,ts,yml}\" --no-progress",
     "build-angular": "cd angular-workspace/ng14 && npm i && npm run build && cd ../ng15 && npm i && npm run build && cd ../ng16 && npm i && npm run build && cd ../ng17 && npm i && npm run build",
     "update-mwc-dependants": "cd angular-workspace/ng14/projects/trimble-oss/modus-angular-components && npx npm-check-updates -u --dep peer @trimble-oss* && npm i && cd ../../../../ng15/projects/trimble-oss/modus-angular-components && npx npm-check-updates -u --dep peer @trimble-oss* && npm i && cd ../../../../ng16/projects/trimble-oss/modus-angular-components && npx npm-check-updates -u --dep peer @trimble-oss* && npm i && cd ../../../../ng17/projects/trimble-oss/modus-angular-components && npx npm-check-updates -u --dep peer @trimble-oss* && npm i && cd ../../../../../react-workspace/react-17 && npx npm-check-updates -u @trimble-oss* && npm i && cd ../react-18 && npx npm-check-updates -u @trimble-oss* && npm i"
   },
