@@ -19,6 +19,7 @@
 #arrow,
 #arrow::before {
   background: inherit;
+  forced-color-adjust: none;
   height: 8px;
   position: absolute;
   width: 8px;
@@ -48,4 +49,10 @@
 
 .tooltip[data-popper-placement^='right'] > #arrow {
   left: -4px;
+}
+
+@media (forced-colors: active) {
+  .tooltip {
+    border: 1px solid transparent;
+  }
 }
