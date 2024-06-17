@@ -1219,6 +1219,13 @@ export namespace Components {
         "displayOptions"?: ModusTableDisplayOptions;
         "fullWidth": boolean;
         /**
+          * Returns whether a cell is editable based on row index and column ID.
+          * @param rowIndex The index of the row.
+          * @param columnId The ID of the column.
+          * @returns Boolean indicating if the cell is editable.
+         */
+        "getCellEditable": (rowIndex: string, columnId: string) => Promise<void>;
+        /**
           * Returns data of a column.
           * @param accessorKey : Column name as key.
           * @returns : Column data as Array or empty array.
@@ -1308,6 +1315,13 @@ export namespace Components {
     interface ModusTableCellMain {
         "cell": Cell<unknown, unknown>;
         "context": TableContext;
+        /**
+          * Returns whether a cell is editable based on row index and column ID.
+          * @param rowIndex The index of the row.
+          * @param columnId The ID of the column.
+          * @returns Boolean indicating if the cell is editable.
+         */
+        "handleCellEdit": (rowIndex: string, columnId: string) => Promise<void>;
         "hasRowsExpandable": boolean;
         "valueChange": (props: TableCellEdited) => void;
     }

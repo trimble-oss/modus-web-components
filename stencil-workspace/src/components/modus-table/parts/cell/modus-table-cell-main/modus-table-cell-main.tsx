@@ -96,6 +96,12 @@ export class ModusTableCellMain {
     }
   };
 
+  /**
+   * Returns whether a cell is editable based on row index and column ID.
+   * @param rowIndex The index of the row.
+   * @param columnId The ID of the column.
+   * @returns Boolean indicating if the cell is editable.
+   */
   @Method()
   async handleCellEdit(rowIndex: string, columnId: string): Promise<void> {
     const tableInstance = this.cell.getContext().table;
