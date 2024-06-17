@@ -11,45 +11,62 @@ It has header, body, and footer slots for adding content. It supports both overl
 <Story id="components-utility-panel--default" />
 
 ```html
-<div id="container" style="display:flex; min-height:500px; overflow:hidden; position: relative; box-shadow: 0 0 2px var(--modus-secondary)!important;">
+    <div id="defaultTemplate">
+      <div
+        style="width: 100%; align-items: center; height: 56px; box-shadow: 0 0 2px var(--modus-secondary)!important; margin-top: 50px;">
+        <modus-navbar
+          id="navbar"
+          show-main-menu
+          .buttons=${[
+            {
+              id: 'addMenu',
+              icon: 'add',
+              tooltip: {
+                text: 'Add',
+              },
+            },
+          ]}>
+        </modus-navbar>
+      </div>
+  <div
+    id="container"
+    style="display:flex; min-height:500px; overflow:hidden; position: relative; box-shadow: 0 0 2px var(--modus-secondary)!important;">
+    <modus-utility-panel
+      target-content="#panelcontent"
+      expanded="${expanded}"
+      push-content="${pushContent}"
+      target-content="${targetContent}">
+      <span slot="header">Utility Panel Header</span>
+      <div slot="body">Content of the utility panel goes here.</div>
+      <span slot="footer">Utility Panel Footer</span>
+    </modus-utility-panel>
 
-<modus-utility-panel target-content="#panelcontent" expanded=${expanded} push-content=${pushContent} target-content=${targetContent}>
-  <span slot="header">Utility Panel Header</span>
-  <div slot="body">Content of the utility panel goes here.</div>
-  <span slot="footer">Utility Panel Footer</span>
-</modus-utility-panel>
-
-<div id="panelcontent" style="padding: 10px;">
-  <div id="overview">
-    <p>
-      The side navigation of an application provides context through
-      accessible menu options and positions a consistent component to
-      connect to various pages in the application.
-      The side navigation is a collapsible side content of the site’s
-      pages. It is located alongside the page’s primary content. The
-      component is designed to add side content to a fullscreen
-      application. It is activated through the “hamburger” menu in the
-      Navbar.
-    </p>
+    <div id="panelcontent" style="padding: 10px;">
+      <div id="overview">
+        <p>
+          The side navigation of an application provides context through accessible menu options and positions a consistent
+          component to connect to various pages in the application. The side navigation is a collapsible side content of the
+          site’s pages. It is located alongside the page’s primary content. The component is designed to add side content to
+          a fullscreen application. It is activated through the “hamburger” menu in the Navbar.
+        </p>
+      </div>
+    </div>
   </div>
 </div>
-</div>
-</div>
 <script>
-document.addEventListener('helpOpen', (e) => {
-const panel = document.querySelector('modus-utility-panel');
-panel.expanded = !panel.expanded;
-});
-
-
-</script>`
+  const element = document.querySelector('modus-navbar');
+  element.buttons = [{ id: 'addMenu', icon: 'add' }];
+  document.addEventListener('buttonClick', (e) => {
+    const panel = document.querySelector('modus-utility-panel');
+    panel.expanded = !panel.expanded;
+  });
+</script>
 ```
 
 ## Properties
 
-| Property       | Description                                                                                                                   | Type      | Default       |
-| -------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------- | ------------- |
-| `expanded`     | Controls the expanded state of the utility panel. When `true`, the panel is visible.                                          | `boolean` | false         |
-| `pushContent`  | Determines whether the utility panel should push the main content to the right (`true`) or overlay the content (`false`).     | `boolean` | false         |
-| `targetContent`| Specifies the selector for the page's content that will be affected by the utility panel based on the `pushContent` property. | `string`  |               |
-
+| Property        | Description                                                                                                                   | Type      | Default |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------- | ------- |
+| `expanded`      | Controls the expanded state of the utility panel. When `true`, the panel is visible.                                          | `boolean` | false   |
+| `pushContent`   | Determines whether the utility panel should push the main content to the right (`true`) or overlay the content (`false`).     | `boolean` | false   |
+| `targetContent` | Specifies the selector for the page's content that will be affected by the utility panel based on the `pushContent` property. | `string`  |         |
