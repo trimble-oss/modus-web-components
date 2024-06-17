@@ -52,7 +52,7 @@ export class ModusTextareaInput {
   @Prop() readOnly: boolean;
 
   /** (optional) Number of rows on textarea */
-  @Prop() rows = 5;
+  @Prop() rows = 3;
 
   /** (optional) Whether the input is required. */
   @Prop() required: boolean;
@@ -168,8 +168,7 @@ export class ModusTextareaInput {
             this.size
           )}`}
           onClick={() => this.textInput.focus()}
-          part="input-container"
-          style={{ height: this.rows + 1 + 'rem' }}>
+          part="input-container">
           <textarea
             id={this.inputId}
             aria-invalid={!!this.errorText}
