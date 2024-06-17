@@ -181,7 +181,6 @@ export default {
 
 const Template = ({
   ariaLabel,
-  autocapitalize,
   autocorrect,
   autoFocusInput,
   clearable,
@@ -206,7 +205,6 @@ const Template = ({
   <form>
     <modus-textarea-input
       aria-label=${ariaLabel}
-      autocapitalize=${autocapitalize}
       autocorrect=${autocorrect}
       auto-focus-input=${autoFocusInput}
       clearable=${clearable}
@@ -233,7 +231,6 @@ const Template = ({
 export const Default = Template.bind({});
 Default.args = {
   ariaLabel: '',
-  autocapitalize: undefined,
   autocorrect: null,
   autoFocusInput: true,
   clearable: false,

@@ -31,7 +31,7 @@ describe('modus-textarea-input', () => {
         <mock:shadow-root>
             <div class="modus-textarea-input">
                 <div class="input-container medium" part="input-container">
-                <textarea class="text-align-left" id="mwc_id_2_textarea_input" rows="3" tabindex="0" autocorrect="on">
+                <textarea class="text-align-left" id="mwc_id_1_textarea_input" rows="3" tabindex="0" autocorrect="on">
                 </textarea>
                 </div>
             </div>
@@ -50,7 +50,7 @@ describe('modus-textarea-input', () => {
         <mock:shadow-root>
             <div class="modus-textarea-input">
                 <div class="input-container medium" part="input-container">
-                <textarea class="text-align-left" id="mwc_id_3_textarea_input" rows="3" tabindex="0" enterkeyhint="done">
+                <textarea class="text-align-left" id="mwc_id_2_textarea_input" rows="3" tabindex="0" enterkeyhint="done">
                 </textarea>
                 </div>
             </div>
@@ -69,7 +69,7 @@ describe('modus-textarea-input', () => {
         <mock:shadow-root>
             <div class="modus-textarea-input">
                 <div class="input-container medium" part="input-container">
-                <textarea class="text-align-left" id="mwc_id_4_textarea_input" rows="3" tabindex="0" spellcheck>
+                <textarea class="text-align-left" id="mwc_id_3_textarea_input" rows="3" tabindex="0" spellcheck>
                 </textarea>
                 </div>
             </div>
