@@ -21,25 +21,6 @@ describe('modus-textarea-input', () => {
     `);
   });
 
-  it('renders autocapitalize', async () => {
-    const page = await newSpecPage({
-      components: [ModusTextareaInput],
-      html: '<modus-textarea-input autocapitalize="words"></modus-textarea-input>',
-    });
-    expect(page.root).toEqualHtml(`
-      <modus-textarea-input autocapitalize="words">
-        <mock:shadow-root>
-            <div class="modus-textarea-input">
-                <div class="input-container medium" part="input-container">
-                  <textarea class="text-align-left" id="mwc_id_1_textarea_input" rows="3" tabindex="0" autocapitalize="words">
-                  </textarea>
-                </div>
-            </div>
-        </mock:shadow-root>
-      </modus-textarea-input>
-    `);
-  });
-
   it('renders autocorrect', async () => {
     const page = await newSpecPage({
       components: [ModusTextareaInput],
@@ -95,18 +76,6 @@ describe('modus-textarea-input', () => {
         </mock:shadow-root>
       </modus-textarea-input>
     `);
-  });
-
-  it('should set autocapitalize on the input to "on" when "true" is passed in', async () => {
-    const modusTextInput = new ModusTextareaInput();
-    modusTextInput.autocapitalize = true;
-    expect(modusTextInput.inputAutocapitalize).toEqual('on');
-  });
-
-  it('should set autocapitalize on the input to "off" when "false" is passed in', async () => {
-    const modusTextInput = new ModusTextareaInput();
-    modusTextInput.autocapitalize = false;
-    expect(modusTextInput.inputAutocapitalize).toEqual('off');
   });
 
   it('should set autocorrect on the input to "on" when "true" is passed in', async () => {

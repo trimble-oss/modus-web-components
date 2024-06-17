@@ -12,34 +12,13 @@ export default {
         type: { summary: 'string' },
       },
     },
-    autocapitalize: {
-      name: 'autocapitalize',
-      control: {
-        options: [
-          'none',
-          'off',
-          'sentences',
-          'on',
-          'words',
-          'characters'
-        ],
-        type: 'select',
-      },
-      description: "Capitalization behavior when using a non-traditional keyboard (e.g. microphone, touch screen)",
-      table: {
-        type: { summary: `boolean | 'none' | 'off' | 'sentences' | 'on' | 'words' | 'characters'` },
-      },
-    },
     autocorrect: {
       name: 'autocorrect',
       control: {
-        options: [
-          'off',
-          'on'
-        ],
+        options: ['off', 'on'],
         type: 'select',
       },
-      description: "Whether to activate automatic correction while the user is editing this field in Safari",
+      description: 'Whether to activate automatic correction while the user is editing this field in Safari',
       table: {
         type: { summary: `boolean | 'off' | 'on'` },
       },
@@ -67,15 +46,7 @@ export default {
     },
     enterkeyhint: {
       control: {
-        options: [
-          'enter',
-          'done',
-          'go',
-          'next',
-          'previous',
-          'search',
-          'send'
-        ],
+        options: ['enter', 'done', 'go', 'next', 'previous', 'search', 'send'],
         type: 'select',
       },
       description: 'Which action label to present for the enter key on virtual keyboards',
@@ -141,7 +112,7 @@ export default {
     rows: {
       description: 'Number of rows on textarea',
       table: {
-        defaultValue: { summary: "5" },
+        defaultValue: { summary: '5' },
         type: { summary: 'number' },
       },
     },
@@ -158,10 +129,10 @@ export default {
     },
     spellcheck: {
       control: {
-        type: 'boolean'
+        type: 'boolean',
       },
       name: 'spellcheck',
-      description: "Whether to enable spell checking.",
+      description: 'Whether to enable spell checking.',
       table: {
         type: { summary: 'boolean' },
       },
@@ -169,18 +140,14 @@ export default {
     textAlign: {
       name: 'text-align',
       control: {
-        options: [
-          'left',
-          'right'
-        ],
+        options: ['left', 'right'],
         type: 'select',
       },
       description: 'text alignment for the input.',
       table: {
         defaultValue: { summary: "'left'" },
         type: {
-          summary:
-            "'left' | 'right'",
+          summary: "'left' | 'right'",
         },
       },
     },
@@ -236,31 +203,31 @@ const Template = ({
   validText,
   value,
 }) => html`
-<form>
-  <modus-textarea-input
-    aria-label=${ariaLabel}
-    autocapitalize=${autocapitalize}
-    autocorrect=${autocorrect}
-    auto-focus-input=${autoFocusInput}
-    clearable=${clearable}
-    ?disabled=${disabled}
-    enterkeyhint=${enterkeyhint}
-    error-text=${errorText}
-    helper-text=${helperText}
-    inputmode=${inputmode}
-    label=${label}
-    max-length=${maxLength}
-    min-length=${minLength}
-    placeholder=${placeholder}
-    read-only=${readOnly}
-    ?required=${required}
-    rows=${rows}
-    size=${size}
-    ?spellcheck=${spellcheck}
-    text-align=${textAlign}
-    valid-text=${validText}
-    value=${value}></modus-textarea-input>
-</form>
+  <form>
+    <modus-textarea-input
+      aria-label=${ariaLabel}
+      autocapitalize=${autocapitalize}
+      autocorrect=${autocorrect}
+      auto-focus-input=${autoFocusInput}
+      clearable=${clearable}
+      ?disabled=${disabled}
+      enterkeyhint=${enterkeyhint}
+      error-text=${errorText}
+      helper-text=${helperText}
+      inputmode=${inputmode}
+      label=${label}
+      max-length=${maxLength}
+      min-length=${minLength}
+      placeholder=${placeholder}
+      read-only=${readOnly}
+      ?required=${required}
+      rows=${rows}
+      size=${size}
+      ?spellcheck=${spellcheck}
+      text-align=${textAlign}
+      valid-text=${validText}
+      value=${value}></modus-textarea-input>
+  </form>
 `;
 
 export const Default = Template.bind({});
