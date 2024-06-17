@@ -24,6 +24,7 @@
  - [modus-navbar](../modus-navbar)
  - [modus-side-navigation-item](../modus-side-navigation/modus-side-navigation-item)
  - [modus-table](../modus-table)
+ - [modus-toolbar](../modus-toolbar)
 
 ### Graph
 ```mermaid
@@ -33,6 +34,7 @@ graph TD;
   modus-navbar --> modus-tooltip
   modus-side-navigation-item --> modus-tooltip
   modus-table --> modus-tooltip
+  modus-toolbar --> modus-tooltip
   style modus-tooltip fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
