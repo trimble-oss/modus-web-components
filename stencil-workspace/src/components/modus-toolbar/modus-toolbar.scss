@@ -1,0 +1,18 @@
+@import './modus-toolbar.vars';
+
+:host {
+  align-items: center;
+  background-color: $modus-toolbar-bg;
+  border-radius: 4px;
+  bottom: 20px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  padding: 1px;
+  position: fixed;
+  right: 20px;
+  z-index: 9999;
+}
+
+modus-button {
+  margin: 2px !important;
+}
