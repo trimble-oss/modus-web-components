@@ -1,6 +1,6 @@
 {
   "name": "@trimble-oss/modus-web-components",
-  "version": "0.31.0",
+  "version": "0.31.1",
   "description": "Trimble Modus Web Component Library",
   "homepage": "https://modus-web-components.trimble.com/",
   "bugs": {
@@ -73,6 +73,9 @@
   "engines": {
     "node": ">=16",
     "npm": ">=8"
+  },
+  "volta": {
+    "node": "16.20.2"
   },
   "license": "MIT"
 }
