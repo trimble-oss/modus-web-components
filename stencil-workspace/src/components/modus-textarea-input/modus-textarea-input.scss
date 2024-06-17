@@ -1,11 +1,5 @@
 @import './modus-textarea-input.vars';
 
-textarea {
-  font-family: $primary-font;
-  height: 4rem;
-  resize: none;
-}
-
 .modus-textarea-input {
   border-radius: 4px;
   display: inline-flex;
@@ -16,16 +10,18 @@ textarea {
   label {
     color: $modus-input-label-color;
     font-size: $rem-12px;
+    font-weight: 700;
     margin-bottom: $rem-4px;
 
     span {
-      color: $modus-input-bottom-line-color;
+      color: $modus-input-border-color;
       margin: $rem-4px;
     }
   }
 
   .label-container {
     display: inline-block;
+    margin-bottom: 0.25rem;
 
     .required {
       bottom: $rem-1px;
@@ -39,14 +35,14 @@ textarea {
     align-items: center;
     background-color: $modus-input-bg;
     border: $rem-1px solid $modus-input-border-color;
-    border-bottom-color: $modus-input-bottom-line-color;
     border-radius: 4px;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
     margin: 0;
     min-height: 4.5rem;
-    padding: 0;
+    padding-bottom: 2px;
+    padding-top: 2px;
     position: relative;
     width: 100%;
 
@@ -62,9 +58,13 @@ textarea {
       background-color: transparent;
       border: none;
       color: $modus-input-color;
+      font-family: $primary-font;
       font-size: $rem-12px;
+      min-height: 4rem;
       outline: none;
       padding: 0 $rem-8px;
+      resize: none;
+      resize: vertical;
       width: 100%;
 
       &.has-left-icon {
@@ -108,44 +108,34 @@ textarea {
       cursor: text;
     }
 
-    &:focus-within,
-    &.error,
-    &.valid {
-      border-bottom-width: $rem-2px;
-      height: 2rem; // Counteract bottom border width.
-    }
-
     &:focus-within {
-      border-bottom-color: $modus-input-bottom-line-active-color;
+      border-color: $modus-input-border-active-color;
+      box-shadow: 0 0 0 1px $modus-input-border-active-color;
     }
 
     &.error {
-      border-bottom-color: $modus-input-validation-error-color;
+      border-color: $modus-input-validation-error-color;
+      box-shadow: 0 0 0 1px $modus-input-validation-error-color;
     }
 
     &.valid {
-      border-bottom-color: $modus-input-validation-success-color;
+      border-color: $modus-input-validation-success-color;
+      box-shadow: 0 0 0 1px $modus-input-validation-success-color;
     }
 
     &.large {
-      height: 3rem;
+      min-height: 5rem;
 
-      input {
+      textarea {
         font-size: $rem-14px;
         padding: 0 $rem-16px;
-      }
-
-      &:focus-within,
-      &.error,
-      &.valid {
-        height: 3rem; // Counteract bottom border width.
       }
     }
   }
 
   .input-container:has(input[readonly]) {
     background-color: $modus-input-readonly-bg;
-    border-bottom-color: $modus-input-disabled-bottom-line-color;
+    border-color: transparent;
   }
 
   .sub-text {
@@ -183,7 +173,7 @@ textarea {
     .input-container {
       background-color: $modus-input-disabled-bg;
       border: $rem-1px solid $modus-input-disabled-border-color;
-      border-bottom-color: $modus-input-disabled-bottom-line-color;
+      border-color: transparent;
 
       svg path {
         fill: $modus-input-disabled-color;

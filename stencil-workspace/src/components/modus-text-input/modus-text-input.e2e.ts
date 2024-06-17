@@ -79,6 +79,9 @@ describe('modus-text-input', () => {
     await page.setContent('<modus-text-input></modus-text-input>');
 
     const textInput = await page.find('modus-text-input');
+    textInput.setProperty('label', 'label');
+    await page.waitForChanges();
+
     textInput.setProperty('helperText', 'Helper.');
     await page.waitForChanges();
 
