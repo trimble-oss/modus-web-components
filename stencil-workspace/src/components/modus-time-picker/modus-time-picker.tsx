@@ -232,8 +232,6 @@ export class ModusTimePicker {
       <label class="sub-text error">{this.errorText}</label>
     ) : this.validText ? (
       <label class="sub-text valid">{this.validText}</label>
-    ) : this.helperText ? (
-      <label class="sub-text helper">{this.helperText}</label>
     ) : null;
   }
 
@@ -245,6 +243,7 @@ export class ModusTimePicker {
             <div class={'label-container'}>
               {this.label ? <label htmlFor="time-input">{this.label}</label> : null}
               {this.required ? <span class="required">*</span> : null}
+              {this.helperText ? <label class="sub-text helper">{this.helperText}</label> : null}
             </div>
           ) : null}
           <div

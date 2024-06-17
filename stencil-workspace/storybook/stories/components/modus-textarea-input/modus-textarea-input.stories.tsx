@@ -281,7 +281,7 @@ Default.args = {
   placeholder: '',
   readOnly: false,
   required: false,
-  rows: 5,
+  rows: 3,
   size: 'medium',
   spellcheck: false,
   textAlign: 'left',
