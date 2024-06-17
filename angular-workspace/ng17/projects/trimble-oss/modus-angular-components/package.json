@@ -14,7 +14,7 @@
   "peerDependencies": {
     "@angular/common": "^17.2.2",
     "@angular/core": "^17.2.2",
-    "@trimble-oss/modus-web-components": "0.30.0"
+    "@trimble-oss/modus-web-components": "0.31.0"
   },
   "dependencies": {
     "tslib": "^2.5.3"
