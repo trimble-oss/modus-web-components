@@ -14,7 +14,7 @@
     margin-bottom: $rem-4px;
 
     span {
-      color: $modus-input-bottom-line-color;
+      color: $modus-input-border-color;
       margin: $rem-4px;
     }
   }
@@ -34,7 +34,7 @@
   .input-container {
     align-items: center;
     background-color: $modus-input-bg;
-    border: $rem-1px solid $modus-input-bottom-line-color;
+    border: $rem-1px solid $modus-input-border-color;
     border-radius: 4px;
     box-sizing: border-box;
     display: flex;
@@ -105,8 +105,8 @@
     }
 
     &:focus-within {
-      border-color: var(--modus-input-border-color, #{$rem-1px solid $modus-input-bottom-line-active-color});
-      box-shadow: 0 0 0 1px var(--modus-input-border-color, #{$rem-1px solid $modus-input-bottom-line-active-color});
+      border-color: $modus-input-border-active-color;
+      box-shadow: 0 0 0 1px $modus-input-border-active-color;
     }
 
     &.error {
@@ -126,12 +126,6 @@
         font-size: $rem-14px;
         padding: 0 $rem-16px;
       }
-
-      &:focus-within,
-      &.error,
-      &.valid {
-        height: 3rem; // Counteract bottom border width.
-      }
     }
   }
 
@@ -141,12 +135,14 @@
   }
 
   .sub-text {
-    font-size: $rem-11px;
+    font-size: $rem-12px;
     margin-top: $rem-4px;
 
     &.helper {
       color: $modus-input-label-color;
+      display: block;
       font-weight: 600;
+      margin: 0;
     }
 
     &.error {

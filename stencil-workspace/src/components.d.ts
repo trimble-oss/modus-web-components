@@ -548,6 +548,8 @@ export namespace Components {
          */
         "label": string;
     }
+    interface ModusDivider {
+    }
     interface ModusDropdown {
         /**
           * Whether to apply list opening animation.
@@ -1472,6 +1474,92 @@ export namespace Components {
          */
         "value": string;
     }
+    interface ModusTextareaInput {
+        /**
+          * (optional) The input's aria-label.
+         */
+        "ariaLabel": string | null;
+        /**
+          * (optional) Sets autofocus on the input.
+         */
+        "autoFocusInput": boolean;
+        /**
+          * (optional) Whether to activate automatic correction while the user is editing this field in Safari.
+         */
+        "autocorrect": boolean | 'off' | 'on';
+        /**
+          * (optional) Whether the input has a clear button.
+         */
+        "clearable": boolean;
+        /**
+          * (optional) Whether the input is disabled.
+         */
+        "disabled": boolean;
+        /**
+          * (optional) Which action label to present for the enter key on virtual keyboards.
+         */
+        "enterkeyhint": 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
+        /**
+          * (optional) The input's error state text.
+         */
+        "errorText": string;
+        /**
+          * Focus the input.
+         */
+        "focusInput": () => Promise<void>;
+        /**
+          * (optional) The input's helper text displayed below the input.
+         */
+        "helperText": string;
+        /**
+          * (optional) The input's label.
+         */
+        "label": string;
+        /**
+          * (optional) The input's maximum length.
+         */
+        "maxLength": number;
+        /**
+          * (optional) The input's minimum length.
+         */
+        "minLength": number;
+        /**
+          * (optional) The input's placeholder text.
+         */
+        "placeholder": string;
+        /**
+          * (optional) Whether the input's content is read-only
+         */
+        "readOnly": boolean;
+        /**
+          * (optional) Whether the input is required.
+         */
+        "required": boolean;
+        /**
+          * (optional) Number of rows on textarea
+         */
+        "rows": number;
+        /**
+          * (optional) The input's size.
+         */
+        "size": 'medium' | 'large';
+        /**
+          * (optional) Whether to enable spell checking.
+         */
+        "spellcheck": boolean;
+        /**
+          * (optional) The input's text alignment.
+         */
+        "textAlign": 'left' | 'right';
+        /**
+          * (optional) The input's valid state text.
+         */
+        "validText": string;
+        /**
+          * (optional) The input's value.
+         */
+        "value": string;
+    }
     interface ModusTimePicker {
         /**
           * (optional) Regular expression to allow characters while typing the input. Default is `/[\d:apm\s]/gi` or `/[\d:]/gi` based on the display format.
@@ -1575,6 +1663,16 @@ export namespace Components {
           * (optional) The toasts' type.
          */
         "type": 'danger' | 'dark' | 'default' | 'primary' | 'secondary' | 'success' | 'warning';
+    }
+    interface ModusToolbar {
+        /**
+          * (optional) The button's aria-label.
+         */
+        "ariaLabel": string | null;
+        /**
+          * (optional) Disables the button.
+         */
+        "disabled": boolean;
     }
     interface ModusTooltip {
         /**
@@ -1814,6 +1912,10 @@ export interface ModusTextInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusTextInputElement;
 }
+export interface ModusTextareaInputCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusTextareaInputElement;
+}
 export interface ModusTimePickerCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusTimePickerElement;
@@ -2052,6 +2154,12 @@ declare global {
     var HTMLModusDatePickerElement: {
         prototype: HTMLModusDatePickerElement;
         new (): HTMLModusDatePickerElement;
+    };
+    interface HTMLModusDividerElement extends Components.ModusDivider, HTMLStencilElement {
+    }
+    var HTMLModusDividerElement: {
+        prototype: HTMLModusDividerElement;
+        new (): HTMLModusDividerElement;
     };
     interface HTMLModusDropdownElementEventMap {
         "dropdownClose": any;
@@ -2550,6 +2658,23 @@ declare global {
         prototype: HTMLModusTextInputElement;
         new (): HTMLModusTextInputElement;
     };
+    interface HTMLModusTextareaInputElementEventMap {
+        "valueChange": string;
+    }
+    interface HTMLModusTextareaInputElement extends Components.ModusTextareaInput, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusTextareaInputElementEventMap>(type: K, listener: (this: HTMLModusTextareaInputElement, ev: ModusTextareaInputCustomEvent<HTMLModusTextareaInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusTextareaInputElementEventMap>(type: K, listener: (this: HTMLModusTextareaInputElement, ev: ModusTextareaInputCustomEvent<HTMLModusTextareaInputElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLModusTextareaInputElement: {
+        prototype: HTMLModusTextareaInputElement;
+        new (): HTMLModusTextareaInputElement;
+    };
     interface HTMLModusTimePickerElementEventMap {
         "timeInputBlur": ModusTimePickerEventDetails;
         "valueChange": ModusTimePickerEventDetails;
@@ -2584,6 +2709,12 @@ declare global {
     var HTMLModusToastElement: {
         prototype: HTMLModusToastElement;
         new (): HTMLModusToastElement;
+    };
+    interface HTMLModusToolbarElement extends Components.ModusToolbar, HTMLStencilElement {
+    }
+    var HTMLModusToolbarElement: {
+        prototype: HTMLModusToolbarElement;
+        new (): HTMLModusToolbarElement;
     };
     interface HTMLModusTooltipElement extends Components.ModusTooltip, HTMLStencilElement {
     }
@@ -2646,6 +2777,7 @@ declare global {
         "modus-data-table": HTMLModusDataTableElement;
         "modus-date-input": HTMLModusDateInputElement;
         "modus-date-picker": HTMLModusDatePickerElement;
+        "modus-divider": HTMLModusDividerElement;
         "modus-dropdown": HTMLModusDropdownElement;
         "modus-file-dropzone": HTMLModusFileDropzoneElement;
         "modus-icon": HTMLModusIconElement;
@@ -2683,8 +2815,10 @@ declare global {
         "modus-table-toolbar": HTMLModusTableToolbarElement;
         "modus-tabs": HTMLModusTabsElement;
         "modus-text-input": HTMLModusTextInputElement;
+        "modus-textarea-input": HTMLModusTextareaInputElement;
         "modus-time-picker": HTMLModusTimePickerElement;
         "modus-toast": HTMLModusToastElement;
+        "modus-toolbar": HTMLModusToolbarElement;
         "modus-tooltip": HTMLModusTooltipElement;
         "modus-tree-view": HTMLModusTreeViewElement;
         "modus-tree-view-item": HTMLModusTreeViewItemElement;
@@ -3254,6 +3388,8 @@ declare namespace LocalJSX {
           * (optional) Label for the field.
          */
         "label"?: string;
+    }
+    interface ModusDivider {
     }
     interface ModusDropdown {
         /**
@@ -4318,6 +4454,92 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
+    interface ModusTextareaInput {
+        /**
+          * (optional) The input's aria-label.
+         */
+        "ariaLabel"?: string | null;
+        /**
+          * (optional) Sets autofocus on the input.
+         */
+        "autoFocusInput"?: boolean;
+        /**
+          * (optional) Whether to activate automatic correction while the user is editing this field in Safari.
+         */
+        "autocorrect"?: boolean | 'off' | 'on';
+        /**
+          * (optional) Whether the input has a clear button.
+         */
+        "clearable"?: boolean;
+        /**
+          * (optional) Whether the input is disabled.
+         */
+        "disabled"?: boolean;
+        /**
+          * (optional) Which action label to present for the enter key on virtual keyboards.
+         */
+        "enterkeyhint"?: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
+        /**
+          * (optional) The input's error state text.
+         */
+        "errorText"?: string;
+        /**
+          * (optional) The input's helper text displayed below the input.
+         */
+        "helperText"?: string;
+        /**
+          * (optional) The input's label.
+         */
+        "label"?: string;
+        /**
+          * (optional) The input's maximum length.
+         */
+        "maxLength"?: number;
+        /**
+          * (optional) The input's minimum length.
+         */
+        "minLength"?: number;
+        /**
+          * An event that fires on input value change.
+         */
+        "onValueChange"?: (event: ModusTextareaInputCustomEvent<string>) => void;
+        /**
+          * (optional) The input's placeholder text.
+         */
+        "placeholder"?: string;
+        /**
+          * (optional) Whether the input's content is read-only
+         */
+        "readOnly"?: boolean;
+        /**
+          * (optional) Whether the input is required.
+         */
+        "required"?: boolean;
+        /**
+          * (optional) Number of rows on textarea
+         */
+        "rows"?: number;
+        /**
+          * (optional) The input's size.
+         */
+        "size"?: 'medium' | 'large';
+        /**
+          * (optional) Whether to enable spell checking.
+         */
+        "spellcheck"?: boolean;
+        /**
+          * (optional) The input's text alignment.
+         */
+        "textAlign"?: 'left' | 'right';
+        /**
+          * (optional) The input's valid state text.
+         */
+        "validText"?: string;
+        /**
+          * (optional) The input's value.
+         */
+        "value"?: string;
+    }
     interface ModusTimePicker {
         /**
           * (optional) Regular expression to allow characters while typing the input. Default is `/[\d:apm\s]/gi` or `/[\d:]/gi` based on the display format.
@@ -4429,6 +4651,16 @@ declare namespace LocalJSX {
           * (optional) The toasts' type.
          */
         "type"?: 'danger' | 'dark' | 'default' | 'primary' | 'secondary' | 'success' | 'warning';
+    }
+    interface ModusToolbar {
+        /**
+          * (optional) The button's aria-label.
+         */
+        "ariaLabel"?: string | null;
+        /**
+          * (optional) Disables the button.
+         */
+        "disabled"?: boolean;
     }
     interface ModusTooltip {
         /**
@@ -4565,6 +4797,7 @@ declare namespace LocalJSX {
         "modus-data-table": ModusDataTable;
         "modus-date-input": ModusDateInput;
         "modus-date-picker": ModusDatePicker;
+        "modus-divider": ModusDivider;
         "modus-dropdown": ModusDropdown;
         "modus-file-dropzone": ModusFileDropzone;
         "modus-icon": ModusIcon;
@@ -4602,8 +4835,10 @@ declare namespace LocalJSX {
         "modus-table-toolbar": ModusTableToolbar;
         "modus-tabs": ModusTabs;
         "modus-text-input": ModusTextInput;
+        "modus-textarea-input": ModusTextareaInput;
         "modus-time-picker": ModusTimePicker;
         "modus-toast": ModusToast;
+        "modus-toolbar": ModusToolbar;
         "modus-tooltip": ModusTooltip;
         "modus-tree-view": ModusTreeView;
         "modus-tree-view-item": ModusTreeViewItem;
@@ -4628,6 +4863,7 @@ declare module "@stencil/core" {
             "modus-data-table": LocalJSX.ModusDataTable & JSXBase.HTMLAttributes<HTMLModusDataTableElement>;
             "modus-date-input": LocalJSX.ModusDateInput & JSXBase.HTMLAttributes<HTMLModusDateInputElement>;
             "modus-date-picker": LocalJSX.ModusDatePicker & JSXBase.HTMLAttributes<HTMLModusDatePickerElement>;
+            "modus-divider": LocalJSX.ModusDivider & JSXBase.HTMLAttributes<HTMLModusDividerElement>;
             "modus-dropdown": LocalJSX.ModusDropdown & JSXBase.HTMLAttributes<HTMLModusDropdownElement>;
             "modus-file-dropzone": LocalJSX.ModusFileDropzone & JSXBase.HTMLAttributes<HTMLModusFileDropzoneElement>;
             "modus-icon": LocalJSX.ModusIcon & JSXBase.HTMLAttributes<HTMLModusIconElement>;
@@ -4668,8 +4904,10 @@ declare module "@stencil/core" {
             "modus-table-toolbar": LocalJSX.ModusTableToolbar & JSXBase.HTMLAttributes<HTMLModusTableToolbarElement>;
             "modus-tabs": LocalJSX.ModusTabs & JSXBase.HTMLAttributes<HTMLModusTabsElement>;
             "modus-text-input": LocalJSX.ModusTextInput & JSXBase.HTMLAttributes<HTMLModusTextInputElement>;
+            "modus-textarea-input": LocalJSX.ModusTextareaInput & JSXBase.HTMLAttributes<HTMLModusTextareaInputElement>;
             "modus-time-picker": LocalJSX.ModusTimePicker & JSXBase.HTMLAttributes<HTMLModusTimePickerElement>;
             "modus-toast": LocalJSX.ModusToast & JSXBase.HTMLAttributes<HTMLModusToastElement>;
+            "modus-toolbar": LocalJSX.ModusToolbar & JSXBase.HTMLAttributes<HTMLModusToolbarElement>;
             "modus-tooltip": LocalJSX.ModusTooltip & JSXBase.HTMLAttributes<HTMLModusTooltipElement>;
             "modus-tree-view": LocalJSX.ModusTreeView & JSXBase.HTMLAttributes<HTMLModusTreeViewElement>;
             "modus-tree-view-item": LocalJSX.ModusTreeViewItem & JSXBase.HTMLAttributes<HTMLModusTreeViewItemElement>;

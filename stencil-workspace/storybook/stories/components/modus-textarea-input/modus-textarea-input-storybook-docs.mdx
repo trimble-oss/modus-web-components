@@ -1,0 +1,100 @@
+# Textarea Input
+
+---
+
+[Modus Text](https://modus.trimble.com/components/inputs/) Input web components are wrappers around native `<textarea>` elements. They are referenced using the `<modus-textarea-input>` custom HTML element.
+
+This component is compatible with Angular reactive forms. This can be achieved through the implementation of a simple directive.
+
+### Default
+
+<modus-textarea-input label="Textarea Input" placeholder="Placeholder" required></modus-textarea-input>
+
+<modus-textarea-input label="Textarea Input (Disabled)" disabled></modus-textarea-input>
+
+<modus-textarea-input label="Textarea Input (Helper Text)" placeholder="Placeholder" value="Value" helper-text="Helper Demo" required></modus-textarea-input>
+
+<modus-textarea-input label="Textarea Input (Error)" placeholder="Placeholder" value="Value" error-text="Error Demo"></modus-textarea-input>
+
+<modus-textarea-input label="Textarea Input (Valid)" placeholder="Placeholder" value="Value" valid-text="Valid Demo"></modus-textarea-input>
+
+<modus-textarea-input label="Textarea Input (Large & Helper Text)" placeholder="Placeholder" value="Value" size="large" helper-text="Your username must be 8-20 characters long, contain letters and numbers, and must not contain spaces"></modus-textarea-input>
+
+```html
+<modus-textarea-input label="Textarea Input" placeholder="Placeholder" required></modus-textarea-input>
+<modus-textarea-input label="Textarea Input (Disabled)" disabled></modus-textarea-input>
+<modus-textarea-input
+  label="Textarea Input (Helper Text)"
+  placeholder="Placeholder"
+  value="Value"
+  helper-text="Helper Demo"
+  required></modus-textarea-input>
+<modus-textarea-input
+  label="Textarea Input (Error)"
+  placeholder="Placeholder"
+  value="Value"
+  error-text="Error Demo"></modus-textarea-input>
+<modus-textarea-input
+  label="Textarea Input (Valid)"
+  placeholder="Placeholder"
+  value="Value"
+  valid-text="Valid Demo"></modus-textarea-input>
+<modus-textarea-input
+  label="Textarea Input (Large & Helper Text)"
+  placeholder="Placeholder"
+  value="Value"
+  size="large"
+  helper-text="Your username must be 8-20 characters long, contain letters and numbers, and must not contain spaces"></modus-textarea-input>
+<modus-textarea-input
+  label="Textarea Input (3 rows)"
+  placeholder="Placeholder"
+  value="Value"
+  rows="3"></modus-textarea-input>
+```
+
+### Properties
+
+| Property         | Attribute          | Description                                                                                         | Type                                                          | Default     |
+| ---------------- | ------------------ | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- | ----------- |
+| `ariaLabel`      | `aria-label`       | (optional) The textarea's aria-label.                                                               | `string`                                                      | `undefined` |
+| `autoFocusInput` | `auto-focus-input` | (optional) Sets autofocus on the textarea.                                                          | `boolean`                                                     | `undefined` |
+| `autocorrect`    | `autocorrect`      | (optional) Whether to activate automatic correction while the user is editing this field in Safari. | `boolean, "off", "on"`                                        | `undefined` |
+| `clearable`      | `clearable`        | (optional) Whether the textarea has a clear button.                                                 | `boolean`                                                     | `false`     |
+| `disabled`       | `disabled`         | (optional) Whether the textarea is disabled.                                                        | `boolean`                                                     | `undefined` |
+| `enterkeyhint`   | `enterkeyhint`     | Which action label to present for the enter key on virtual keyboards.                               | `"enter", "done", "go", "next", "previous", "search", "send"` | `undefined` |
+| `errorText`      | `error-text`       | (optional) The textarea's error state text.                                                         | `string`                                                      | `undefined` |
+| `helperText`     | `helper-text`      | (optional) The textarea's helper text displayed below the input.                                    | `string`                                                      | `undefined` |
+| `label`          | `label`            | (optional) The textarea's label.                                                                    | `string`                                                      | `undefined` |
+| `maxLength`      | `max-length`       | (optional) The textarea's maximum length.                                                           | `number`                                                      | `undefined` |
+| `minLength`      | `min-length`       | (optional) The textarea's minimum length.                                                           | `number`                                                      | `undefined` |
+| `placeholder`    | `placeholder`      | (optional) The textarea's placeholder text.                                                         | `string`                                                      | `undefined` |
+| `readOnly`       | `read-only`        | (optional) Whether the textarea's content is read-only                                              | `boolean`                                                     | `undefined` |
+| `required`       | `required`         | (optional) Whether the input is required.                                                           | `boolean`                                                     | `undefined` |
+| `rows`           | `rows`             | (optional) Number of rows on textarea.                                                              | `number`                                                      | `undefined` |
+| `size`           | `size`             | (optional) The textarea's size.                                                                     | `"large", "medium"`                                           | `'medium'`  |
+| `spellcheck`     | `spellcheck`       | (optional) Whether to enable spell checking.                                                        | `"large", "medium"`                                           | `'medium'`  |
+| `textAlign`      | `text-align`       | (optional) The textarea's text alignment.                                                           | `boolean`                                                     | `'false'`   |
+| `validText`      | `valid-text`       | (optional) The textarea's valid state text.                                                         | `string`                                                      | `undefined` |
+| `value`          | `value`            | (optional) The textarea's value.                                                                    |
+
+### DOM Events
+
+| Name          | Description                          | Emits    |
+| ------------- | ------------------------------------ | -------- |
+| `valueChange` | Fires on textarea input value change | `string` |
+
+### Methods
+
+| Method name  | Description     | Parameter | Return          |
+| ------------ | --------------- | --------- | --------------- |
+| `focusInput` | Focus the input |           | `Promise<void>` |
+
+### Accessibility
+
+- Textarea Input gets an `aria-label` provided by the `aria-label` property input.
+- It is recommended to pass `aria-label` when there is no label used so the input is accessible to screen readers.
+- Textarea Input gets an `aria-disabled` set to whether Textarea Input is disabled.
+- Textarea Input gets an `aria-placeholder` provided by the `placeholder` property input.
+- Textarea Input gets an `aria-invalid` set to whether Textarea Input is invalid.
+- Textarea Input gets an `aria-readonly` set to whether Textarea Input is readonly.
+- Textarea Input gets an `aria-required` set to whether Textarea Input is required.
