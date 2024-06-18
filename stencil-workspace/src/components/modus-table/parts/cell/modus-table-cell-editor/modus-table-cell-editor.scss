@@ -29,3 +29,26 @@ table.density-compact {
   margin-left: 4px;
   margin-top: 5px;
 }
+
+.editor::part(sub-text) {
+  display: none;
+}
+
+
+.error-tooltip {
+  background-color: #da212c;
+  color: #ffffff;
+  padding: 5px 10px;
+  z-index: 10;
+  display: none;
+  max-width: 200px;
+  word-wrap: break-word;
+  font-family: Open Sans;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 15px;
+  letter-spacing: 0.005em;
+  text-align: left;
+  width: 121PX;
+  border-radius: 0px 0px 2px 2px;
+}

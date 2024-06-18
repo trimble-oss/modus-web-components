@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { Host, JSX, Component, Prop, h, Listen } from '@stencil/core';
+import { Host, JSX, Component, Prop, h, Listen, State } from '@stencil/core';
 import {
   KEYBOARD_ENTER,
   CELL_EDIT_TYPE_AUTOCOMPLETE,
@@ -18,6 +18,7 @@ import {
   ModusTableCellEditorArgs,
 } from '../../../models/modus-table.models';
 import { ModusDateInputEventDetails } from '../../../../modus-date-input/utils/modus-date-input.models';
+import { createPopper } from '@popperjs/core';
 
 @Component({
   tag: 'modus-table-cell-editor',
@@ -31,8 +32,12 @@ export class ModusTableCellEditor {
   @Prop() valueChange: (newValue: string) => void;
   @Prop() keyDown: (e: KeyboardEvent, newValue: string) => void;
 
+  @State() errorMessage: string;
+
   private editedValue: unknown;
   private inputElement: HTMLElement;
+  private errorTooltip: HTMLElement;
+  private popperInstance: any;
 
   connectedCallback(): void {
     this.editedValue = this.value;
@@ -42,6 +47,11 @@ export class ModusTableCellEditor {
     if (this.inputElement['focusInput']) {
       this.inputElement['focusInput']();
     }
+    this.createErrorTooltip();
+  }
+
+  disconnectedCallback(): void {
+    this.destroyErrorTooltip();
   }
 
   @Listen('click', { target: 'document' })
@@ -58,10 +68,16 @@ export class ModusTableCellEditor {
 
   handleBlur: () => void = () => {
     this.valueChange(this.editedValue as string);
+    this.destroyErrorTooltip();
   };
 
   handleKeyDown: (e: KeyboardEvent) => void = (e) => {
     this.keyDown(e, this.editedValue as string);
+  };
+
+  handleError = (e: CustomEvent<string>) => {
+    this.errorMessage = e.detail;
+    this.showErrorTooltip();
   };
 
   getDefaultProps = (ariaLabel) => ({
@@ -69,6 +85,44 @@ export class ModusTableCellEditor {
     class: 'editor',
     ref: (ref) => (this.inputElement = ref),
   });
+
+  createErrorTooltip(): void {
+    if (!this.errorTooltip) {
+      this.errorTooltip = document.createElement('div');
+      this.errorTooltip.className = 'error-tooltip';
+      this.inputElement.getRootNode().appendChild(this.errorTooltip); // Append to the same parent element as input
+      this.popperInstance = createPopper(this.inputElement, this.errorTooltip, {
+        placement: 'bottom',
+      });
+    }
+  }
+
+  showErrorTooltip(): void {
+    if (this.errorTooltip) {
+      this.errorTooltip.innerText = this.errorMessage;
+      this.errorTooltip.style.display = 'block';
+      if (this.popperInstance) {
+        this.popperInstance.update();
+      }
+    }
+  }
+
+  hideErrorTooltip(): void {
+    if (this.errorTooltip) {
+      this.errorTooltip.style.display = 'none';
+    }
+  }
+
+  destroyErrorTooltip(): void {
+    if (this.popperInstance) {
+      this.popperInstance.destroy();
+      this.popperInstance = null;
+    }
+    if (this.errorTooltip) {
+      this.errorTooltip.remove();
+      this.errorTooltip = null;
+    }
+  }
 
   renderNumberInput(): JSX.Element[] {
     function handleArrowKeys(e: KeyboardEvent, callback: (e: KeyboardEvent) => void) {
@@ -155,7 +209,9 @@ export class ModusTableCellEditor {
           value={this.value as string}
           onValueChange={(e: CustomEvent<ModusDateInputEventDetails>) => {
             this.editedValue = e.detail[valueKey];
-          }}></modus-date-input>
+            this.hideErrorTooltip();
+          }}
+          onValueError={(e: CustomEvent<string>) => this.handleError(e)}></modus-date-input>
       </modus-date-picker>
     );
   }

@@ -2126,6 +2126,7 @@ declare global {
         "calendarIconClicked": ModusDateInputEventDetails;
         "dateInputBlur": ModusDateInputEventDetails;
         "valueChange": ModusDateInputEventDetails;
+        "valueError": string;
     }
     interface HTMLModusDateInputElement extends Components.ModusDateInput, HTMLStencilElement {
         addEventListener<K extends keyof HTMLModusDateInputElementEventMap>(type: K, listener: (this: HTMLModusDateInputElement, ev: ModusDateInputCustomEvent<HTMLModusDateInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3328,6 +3329,7 @@ declare namespace LocalJSX {
           * An event that fires on input value change.
          */
         "onValueChange"?: (event: ModusDateInputCustomEvent<ModusDateInputEventDetails>) => void;
+        "onValueError"?: (event: ModusDateInputCustomEvent<string>) => void;
         /**
           * (optional) The input's placeholder text.
          */
