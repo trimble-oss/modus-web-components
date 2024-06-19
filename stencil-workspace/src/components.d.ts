@@ -548,6 +548,8 @@ export namespace Components {
          */
         "label": string;
     }
+    interface ModusDivider {
+    }
     interface ModusDropdown {
         /**
           * Whether to apply list opening animation.
@@ -1482,10 +1484,6 @@ export namespace Components {
          */
         "autoFocusInput": boolean;
         /**
-          * (optional) Capitalization behavior when using a non-traditional keyboard (e.g. microphone, touch screen)
-         */
-        "autocapitalize": boolean | 'none' | 'off' | 'sentences' | 'on' | 'words' | 'characters';
-        /**
           * (optional) Whether to activate automatic correction while the user is editing this field in Safari.
          */
         "autocorrect": boolean | 'off' | 'on';
@@ -1665,6 +1663,16 @@ export namespace Components {
           * (optional) The toasts' type.
          */
         "type": 'danger' | 'dark' | 'default' | 'primary' | 'secondary' | 'success' | 'warning';
+    }
+    interface ModusToolbar {
+        /**
+          * (optional) The button's aria-label.
+         */
+        "ariaLabel": string | null;
+        /**
+          * (optional) Disables the button.
+         */
+        "disabled": boolean;
     }
     interface ModusTooltip {
         /**
@@ -2161,6 +2169,12 @@ declare global {
     var HTMLModusDatePickerElement: {
         prototype: HTMLModusDatePickerElement;
         new (): HTMLModusDatePickerElement;
+    };
+    interface HTMLModusDividerElement extends Components.ModusDivider, HTMLStencilElement {
+    }
+    var HTMLModusDividerElement: {
+        prototype: HTMLModusDividerElement;
+        new (): HTMLModusDividerElement;
     };
     interface HTMLModusDropdownElementEventMap {
         "dropdownClose": any;
@@ -2711,6 +2725,12 @@ declare global {
         prototype: HTMLModusToastElement;
         new (): HTMLModusToastElement;
     };
+    interface HTMLModusToolbarElement extends Components.ModusToolbar, HTMLStencilElement {
+    }
+    var HTMLModusToolbarElement: {
+        prototype: HTMLModusToolbarElement;
+        new (): HTMLModusToolbarElement;
+    };
     interface HTMLModusTooltipElement extends Components.ModusTooltip, HTMLStencilElement {
     }
     var HTMLModusTooltipElement: {
@@ -2790,6 +2810,7 @@ declare global {
         "modus-data-table": HTMLModusDataTableElement;
         "modus-date-input": HTMLModusDateInputElement;
         "modus-date-picker": HTMLModusDatePickerElement;
+        "modus-divider": HTMLModusDividerElement;
         "modus-dropdown": HTMLModusDropdownElement;
         "modus-file-dropzone": HTMLModusFileDropzoneElement;
         "modus-icon": HTMLModusIconElement;
@@ -2830,6 +2851,7 @@ declare global {
         "modus-textarea-input": HTMLModusTextareaInputElement;
         "modus-time-picker": HTMLModusTimePickerElement;
         "modus-toast": HTMLModusToastElement;
+        "modus-toolbar": HTMLModusToolbarElement;
         "modus-tooltip": HTMLModusTooltipElement;
         "modus-tree-view": HTMLModusTreeViewElement;
         "modus-tree-view-item": HTMLModusTreeViewItemElement;
@@ -3400,6 +3422,8 @@ declare namespace LocalJSX {
           * (optional) Label for the field.
          */
         "label"?: string;
+    }
+    interface ModusDivider {
     }
     interface ModusDropdown {
         /**
@@ -4474,10 +4498,6 @@ declare namespace LocalJSX {
          */
         "autoFocusInput"?: boolean;
         /**
-          * (optional) Capitalization behavior when using a non-traditional keyboard (e.g. microphone, touch screen)
-         */
-        "autocapitalize"?: boolean | 'none' | 'off' | 'sentences' | 'on' | 'words' | 'characters';
-        /**
           * (optional) Whether to activate automatic correction while the user is editing this field in Safari.
          */
         "autocorrect"?: boolean | 'off' | 'on';
@@ -4666,6 +4686,16 @@ declare namespace LocalJSX {
          */
         "type"?: 'danger' | 'dark' | 'default' | 'primary' | 'secondary' | 'success' | 'warning';
     }
+    interface ModusToolbar {
+        /**
+          * (optional) The button's aria-label.
+         */
+        "ariaLabel"?: string | null;
+        /**
+          * (optional) Disables the button.
+         */
+        "disabled"?: boolean;
+    }
     interface ModusTooltip {
         /**
           * (optional) The tooltip's aria-label.
@@ -4820,6 +4850,7 @@ declare namespace LocalJSX {
         "modus-data-table": ModusDataTable;
         "modus-date-input": ModusDateInput;
         "modus-date-picker": ModusDatePicker;
+        "modus-divider": ModusDivider;
         "modus-dropdown": ModusDropdown;
         "modus-file-dropzone": ModusFileDropzone;
         "modus-icon": ModusIcon;
@@ -4860,6 +4891,7 @@ declare namespace LocalJSX {
         "modus-textarea-input": ModusTextareaInput;
         "modus-time-picker": ModusTimePicker;
         "modus-toast": ModusToast;
+        "modus-toolbar": ModusToolbar;
         "modus-tooltip": ModusTooltip;
         "modus-tree-view": ModusTreeView;
         "modus-tree-view-item": ModusTreeViewItem;
@@ -4885,6 +4917,7 @@ declare module "@stencil/core" {
             "modus-data-table": LocalJSX.ModusDataTable & JSXBase.HTMLAttributes<HTMLModusDataTableElement>;
             "modus-date-input": LocalJSX.ModusDateInput & JSXBase.HTMLAttributes<HTMLModusDateInputElement>;
             "modus-date-picker": LocalJSX.ModusDatePicker & JSXBase.HTMLAttributes<HTMLModusDatePickerElement>;
+            "modus-divider": LocalJSX.ModusDivider & JSXBase.HTMLAttributes<HTMLModusDividerElement>;
             "modus-dropdown": LocalJSX.ModusDropdown & JSXBase.HTMLAttributes<HTMLModusDropdownElement>;
             "modus-file-dropzone": LocalJSX.ModusFileDropzone & JSXBase.HTMLAttributes<HTMLModusFileDropzoneElement>;
             "modus-icon": LocalJSX.ModusIcon & JSXBase.HTMLAttributes<HTMLModusIconElement>;
@@ -4928,6 +4961,7 @@ declare module "@stencil/core" {
             "modus-textarea-input": LocalJSX.ModusTextareaInput & JSXBase.HTMLAttributes<HTMLModusTextareaInputElement>;
             "modus-time-picker": LocalJSX.ModusTimePicker & JSXBase.HTMLAttributes<HTMLModusTimePickerElement>;
             "modus-toast": LocalJSX.ModusToast & JSXBase.HTMLAttributes<HTMLModusToastElement>;
+            "modus-toolbar": LocalJSX.ModusToolbar & JSXBase.HTMLAttributes<HTMLModusToolbarElement>;
             "modus-tooltip": LocalJSX.ModusTooltip & JSXBase.HTMLAttributes<HTMLModusTooltipElement>;
             "modus-tree-view": LocalJSX.ModusTreeView & JSXBase.HTMLAttributes<HTMLModusTreeViewElement>;
             "modus-tree-view-item": LocalJSX.ModusTreeViewItem & JSXBase.HTMLAttributes<HTMLModusTreeViewItemElement>;
