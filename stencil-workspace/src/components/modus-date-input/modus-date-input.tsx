@@ -309,6 +309,7 @@ export class ModusDateInput {
           <div class="label-container">
             {this.label ? <label htmlFor={this._dateInputId}>{this.label}</label> : null}
             {this.required ? <span class="required">*</span> : null}
+            {this.helperText ? <label class="sub-text helper">{this.helperText}</label> : null}
           </div>
         ) : null}
         <div
@@ -352,8 +353,6 @@ export class ModusDateInput {
             <label class="error">{this.errorText}</label>
           ) : this.validText ? (
             <label class="valid">{this.validText}</label>
-          ) : this.helperText ? (
-            <label class="helper">{this.helperText}</label>
           ) : null}
         </div>
       </div>

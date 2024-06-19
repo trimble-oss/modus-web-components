@@ -12,9 +12,6 @@ export class ModusTextareaInput {
   /** (optional) The input's aria-label. */
   @Prop() ariaLabel: string | null;
 
-  /** (optional) Capitalization behavior when using a non-traditional keyboard (e.g. microphone, touch screen) */
-  @Prop() autocapitalize: boolean | 'none' | 'off' | 'sentences' | 'on' | 'words' | 'characters';
-
   /** (optional) Whether to activate automatic correction while the user is editing this field in Safari. */
   @Prop() autocorrect: boolean | 'off' | 'on';
 
@@ -52,7 +49,7 @@ export class ModusTextareaInput {
   @Prop() readOnly: boolean;
 
   /** (optional) Number of rows on textarea */
-  @Prop() rows = 5;
+  @Prop() rows = 3;
 
   /** (optional) Whether the input is required. */
   @Prop() required: boolean;
@@ -112,15 +109,6 @@ export class ModusTextareaInput {
     this.valueChange.emit(value);
   }
 
-  get inputAutocapitalize() {
-    if (this.autocapitalize === true) {
-      return 'on';
-    } else if (this.autocapitalize === false) {
-      return 'off';
-    }
-    return this.autocapitalize;
-  }
-
   get inputAutocorrect() {
     if (this.autocorrect === true) {
       return 'on';
@@ -168,14 +156,12 @@ export class ModusTextareaInput {
             this.size
           )}`}
           onClick={() => this.textInput.focus()}
-          part="input-container"
-          style={{ height: this.rows + 1 + 'rem' }}>
+          part="input-container">
           <textarea
             id={this.inputId}
             aria-invalid={!!this.errorText}
             aria-label={this.ariaLabel}
             aria-required={this.required?.toString()}
-            autoCapitalize={this.inputAutocapitalize}
             autocorrect={this.autocorrect as string}
             class={buildTextInputClassNames()}
             disabled={this.disabled}

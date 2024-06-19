@@ -68,3 +68,9 @@
     }
   }
 }
+
+@media (forced-colors: active) {
+  .slider {
+    border: 1px solid transparent;
+  }
+}
