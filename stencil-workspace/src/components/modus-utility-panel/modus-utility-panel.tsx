@@ -74,21 +74,21 @@ export class ModusUtilityPanel {
         <div class="panel-content">
           {hasHeader && (
             <Fragment>
-              <div class="panel-header">
+              <div class="panel-header" aria-labelledby="header">
                 <slot name="header"></slot>
               </div>
               <hr />
             </Fragment>
           )}
 
-          <div class="panel-body">
+          <div class="panel-body" aria-labelledby="body">
             <slot name="body"></slot>
           </div>
 
           {hasFooter && (
             <Fragment>
               <hr />
-              <div class="panel-footer">
+              <div class="panel-footer" aria-labelledby="footer">
                 <slot name="footer"></slot>
               </div>
             </Fragment>
