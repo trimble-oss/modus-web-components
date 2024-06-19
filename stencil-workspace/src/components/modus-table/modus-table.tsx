@@ -411,7 +411,7 @@ export class ModusTable {
    * @returns Boolean indicating if the cell is editable.
    */
   @Method()
-  async getCellEditable(rowIndex: string, columnId: string): Promise<void> {
+  async getEditableCell(rowIndex: string, columnId: string): Promise<void> {
     this.updateCells();
 
     // Find the specific cell to edit

@@ -55,23 +55,6 @@
 
 ## Methods
 
-### `getCellEditable(rowIndex: string, columnId: string) => Promise<void>`
-
-Returns whether a cell is editable based on row index and column ID.
-
-#### Parameters
-
-| Name       | Type     | Description           |
-| ---------- | -------- | --------------------- |
-| `rowIndex` | `string` | The index of the row. |
-| `columnId` | `string` | The ID of the column. |
-
-#### Returns
-
-Type: `Promise<void>`
-
-Boolean indicating if the cell is editable.
-
 ### `getColumnData(accessorKey: string) => Promise<unknown[]>`
 
 Returns data of a column.
@@ -87,6 +70,23 @@ Returns data of a column.
 Type: `Promise<unknown[]>`
 
 : Column data as Array or empty array.
+
+### `getEditableCell(rowIndex: string, columnId: string) => Promise<void>`
+
+Returns whether a cell is editable based on row index and column ID.
+
+#### Parameters
+
+| Name       | Type     | Description           |
+| ---------- | -------- | --------------------- |
+| `rowIndex` | `string` | The index of the row. |
+| `columnId` | `string` | The ID of the column. |
+
+#### Returns
+
+Type: `Promise<void>`
+
+Boolean indicating if the cell is editable.
 
 ### `toggleColumnVisibility(columnId: string, show: boolean) => Promise<void>`
 
