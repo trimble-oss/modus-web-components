@@ -18,7 +18,7 @@ import {
   ModusTableCellEditorArgs,
 } from '../../../models/modus-table.models';
 import { ModusDateInputEventDetails } from '../../../../modus-date-input/utils/modus-date-input.models';
-import { createPopper } from '@popperjs/core';
+import { createPopper, Instance } from '@popperjs/core';
 
 @Component({
   tag: 'modus-table-cell-editor',
@@ -37,7 +37,7 @@ export class ModusTableCellEditor {
   private editedValue: unknown;
   private inputElement: HTMLElement;
   private errorTooltip: HTMLElement;
-  private popperInstance: any;
+  private popperInstance: Instance;
 
   connectedCallback(): void {
     this.editedValue = this.value;
@@ -92,7 +92,21 @@ export class ModusTableCellEditor {
       this.errorTooltip.className = 'error-tooltip';
       this.inputElement.getRootNode().appendChild(this.errorTooltip); // Append to the same parent element as input
       this.popperInstance = createPopper(this.inputElement, this.errorTooltip, {
-        placement: 'bottom',
+        placement: 'bottom-start',
+        modifiers: [
+          {
+            name: 'offset',
+            options: {
+              offset: [-1, 0], // Offset from the element
+            },
+          },
+          {
+            name: 'preventOverflow',
+            options: {
+              boundary: 'viewport', // Prevents tooltip from overflowing the viewport
+            },
+          },
+        ],
       });
     }
   }

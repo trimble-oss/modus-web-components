@@ -7,7 +7,6 @@
 
 .editor::part(input-container),
 .editor::part(input) {
-  border: none !important;
   height: calc($rem-48px - $rem-4px) !important;
 }
 
@@ -34,21 +33,31 @@ table.density-compact {
   display: none;
 }
 
+.editor::part(input-container) {
+  border: 1px solid var(--modus-input-border-active-color, #217cbb);
+  border-radius: unset;
+  z-index: 10;
+}
+
+.editor::part(input-container error) {
+  border: 1px solid var(--modus-input-validation-error-color, #da212c);
+  border-radius: unset;
+  z-index: 10;
+}
 
 .error-tooltip {
-  background-color: #da212c;
-  color: #ffffff;
-  padding: 5px 10px;
-  z-index: 10;
+  background-color: var(--modus-input-validation-error-color, #da212c);
+  border-radius: 2px;
+  color: #fff;
   display: none;
-  max-width: 200px;
-  word-wrap: break-word;
-  font-family: Open Sans;
-  font-size: 10px;
-  font-weight: 600;
-  line-height: 15px;
+  font-family: $primary-font;
+  font-size: 12px;
+  font-weight: $font-weight-semi-bold;
   letter-spacing: 0.005em;
+  line-height: 15px;
+  max-width: 200px;
+  padding: 5px 8px;
   text-align: left;
-  width: 121PX;
-  border-radius: 0px 0px 2px 2px;
+  word-wrap: break-word;
+  z-index: 10;
 }

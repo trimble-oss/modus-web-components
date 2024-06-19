@@ -3329,6 +3329,9 @@ declare namespace LocalJSX {
           * An event that fires on input value change.
          */
         "onValueChange"?: (event: ModusDateInputCustomEvent<ModusDateInputEventDetails>) => void;
+        /**
+          * An event that fires on value error.
+         */
         "onValueError"?: (event: ModusDateInputCustomEvent<string>) => void;
         /**
           * (optional) The input's placeholder text.

@@ -133,7 +133,8 @@ export class ModusDateInput {
 
   /** An event that fires on input value change. */
   @Event() valueChange: EventEmitter<ModusDateInputEventDetails>;
-  @Event() valueError: EventEmitter<string>;  // Added valueError event
+  /** An event that fires on value error.*/
+  @Event() valueError: EventEmitter<string>;
 
   private classBySize: Map<string, string> = new Map([
     ['medium', 'medium'],
@@ -314,7 +315,7 @@ export class ModusDateInput {
           class={`input-container ${this.errorText ? 'error' : this.validText ? 'valid' : ''} ${this.classBySize.get(
             this.size
           )}`}
-          part="input-container">
+          part={`input-container ${this.errorText ? 'error' : this.validText ? 'valid' : ''}`}>
           <input
             aria-invalid={!!this.errorText}
             aria-label={this.ariaLabel || undefined}
