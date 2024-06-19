@@ -89,3 +89,9 @@
     border: $rem-2px solid $modus-checkbox-selected-border-color;
   }
 }
+
+@media (forced-colors: active) and (prefers-color-scheme: light) {
+  .modus-checkbox .checkbox {
+    forced-color-adjust: none;
+  }
+}

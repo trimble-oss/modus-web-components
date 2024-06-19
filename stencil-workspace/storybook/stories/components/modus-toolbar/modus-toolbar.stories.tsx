@@ -5,7 +5,6 @@ export default {
   title: 'Components/Toolbar',
   component: 'modus-toolbar',
   argTypes: {
-
     ariaLabel: {
       name: 'aria-label',
       description: "The Toolbar's aria-label",
@@ -15,7 +14,7 @@ export default {
     },
     disabled: {
       name: 'disabled',
-      description:'Whether the Toolbar is disabled',
+      description: 'Whether the Toolbar is disabled',
       table: {
         type: { summary: 'boolean' },
         defaultValue: { summary: false },
@@ -43,12 +42,22 @@ const Template = ({ ariaLabel, disabled }) => html`
 
 const IconOnlyTemplate = ({ ariaLabel, disabled }) => html`
   <modus-toolbar .disabled=${disabled} aria-label=${ariaLabel}>
-    <modus-button button-style="borderless" icon-only="undo"></modus-button>
-    <modus-button button-style="borderless" icon-only="redo"></modus-button>
-    <modus-button button-style="borderless" icon-only="expand"></modus-button>
-    <modus-button button-style="borderless" icon-only="collapse"></modus-button>
+    <modus-tooltip text="Undo" position="top">
+      <modus-button icon-only="undo"></modus-button>
+    </modus-tooltip>
+    <modus-tooltip text="Redo" position="top">
+      <modus-button icon-only="redo"></modus-button>
+    </modus-tooltip>
+    <modus-tooltip text="Expand" position="top">
+      <modus-button icon-only="expand"></modus-button>
+    </modus-tooltip>
+    <modus-tooltip text="Collapse" position="top">
+      <modus-button icon-only="collapse"></modus-button>
+    </modus-tooltip>
     <modus-divider></modus-divider>
-    <modus-button button-style="borderless" icon-only="window_dock_undock"></modus-button>
+    <modus-tooltip text="Window Dock / Undock" position="top">
+      <modus-button icon-only="window_dock_undock"></modus-button>
+    </modus-tooltip>
   </modus-toolbar>
 `;
 
@@ -65,4 +74,3 @@ IconOnly.args = {
   disabled: false,
   tabIndex: 0,
 };
-

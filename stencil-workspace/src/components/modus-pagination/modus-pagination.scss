@@ -38,6 +38,7 @@ nav {
         &.active {
           background-color: $modus-pagination-active-bg;
           color: $modus-pagination-active-color;
+          outline: 1px solid transparent;
         }
 
         &.disabled {

@@ -414,3 +414,9 @@ button {
     }
   }
 }
+
+@media (forced-colors: active) and (prefers-color-scheme: light) {
+  svg.icon-caret-down {
+    forced-color-adjust: none;
+  }
+}

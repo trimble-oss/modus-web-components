@@ -66,7 +66,7 @@ describe('modus-time-picker', () => {
     const textInput = await page.find('modus-time-picker');
     textInput.setProperty('label', 'label');
     await page.waitForChanges();
-    
+
     textInput.setProperty('helperText', 'Helper.');
     await page.waitForChanges();
 

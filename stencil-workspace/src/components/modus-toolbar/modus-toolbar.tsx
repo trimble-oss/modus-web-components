@@ -1,5 +1,6 @@
 // eslint-disable-next-line
 import { Component, h, Element, Prop, Host } from '@stencil/core';
+import { ModusToolTipPlacement } from '../modus-tooltip/modus-tooltip.models';
 
 @Component({
   tag: 'modus-toolbar',
@@ -15,24 +16,40 @@ export class ModusToolbar {
 
   @Element() host: HTMLElement;
 
+  createButton(child: Element) {
+    const className = 'modus-button';
+    const iconOnly = child.getAttribute('icon-only');
+    const label = child.textContent ? child.textContent.trim() : '';
+
+    return (
+      <modus-button
+        button-style="borderless"
+        color="secondary"
+        class={className}
+        disabled={this.disabled}
+        icon-only={iconOnly}>
+        {label}
+      </modus-button>
+    );
+  }
+
   renderButtons() {
     const children = Array.from(this.host.children);
     const buttons = children.map((child) => {
       if (child.tagName === 'MODUS-BUTTON') {
-        const className = 'modus-button';
-        const iconOnly = child.getAttribute('icon-only');
-        const label = child.textContent ? child.textContent.trim() : '';
+        return this.createButton(child);
+      } else if (child.tagName === 'MODUS-TOOLTIP') {
+        const tooltipChild = child.children[0];
+        const tooltipText = child.getAttribute('text');
+        const tooltipPosition = child.getAttribute('position') as ModusToolTipPlacement;
 
-        return (
-          <modus-button
-            button-style="borderless"
-            color="secondary"
-            class={className}
-            disabled={this.disabled}
-            icon-only={iconOnly}>
-            {label}
-          </modus-button>
-        );
+        if (tooltipChild && tooltipChild.tagName === 'MODUS-BUTTON') {
+          return (
+            <modus-tooltip text={tooltipText} position={tooltipPosition}>
+              {this.createButton(tooltipChild)}
+            </modus-tooltip>
+          );
+        }
       } else {
         return <modus-divider></modus-divider>;
       }

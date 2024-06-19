@@ -65,6 +65,7 @@ div.modus-radio-group {
       border-radius: 90%;
       content: '';
       display: none;
+      forced-color-adjust: none;
       height: 0.44rem; // Specific size so that the check is centered.
       left: 0.155rem;
       position: absolute;

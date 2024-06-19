@@ -258,7 +258,6 @@ export class ModusAutocomplete {
       this.disableFiltering = this.disableCloseOnSelect;
       this.focusItemIndex = this.visibleOptions.findIndex((el) => el.id === option.id);
       this.handleSearchChange(option.value);
-
     }
 
     this.hasFocus = this.disableCloseOnSelect;

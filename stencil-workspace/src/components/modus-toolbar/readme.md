@@ -18,12 +18,14 @@
 ### Depends on
 
 - [modus-button](../modus-button)
+- [modus-tooltip](../modus-tooltip)
 - [modus-divider](.)
 
 ### Graph
 ```mermaid
 graph TD;
   modus-toolbar --> modus-button
+  modus-toolbar --> modus-tooltip
   modus-toolbar --> modus-divider
   style modus-toolbar fill:#f9f,stroke:#333,stroke-width:4px
 ```

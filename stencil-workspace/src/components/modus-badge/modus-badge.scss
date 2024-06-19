@@ -96,3 +96,9 @@ div.badge {
     }
   }
 }
+
+@media (forced-colors: active) {
+  .badge {
+    outline: 1px solid transparent;
+  }
+}
