@@ -7,7 +7,7 @@
 
 .editor::part(input-container),
 .editor::part(input) {
-  height: calc($rem-48px - $rem-4px) !important;
+  height: calc($rem-48px - $rem-1px) !important;
 }
 
 table.density-comfortable {
@@ -33,16 +33,22 @@ table.density-compact {
   display: none;
 }
 
+.date-picker-container::part(date-inputs) {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
 .editor::part(input-container) {
-  border: 1px solid var(--modus-input-border-active-color, #217cbb);
+  border: 2px solid var(--modus-input-border-active-color, #217cbb);
   border-radius: unset;
-  z-index: 10;
+  z-index: 99;
 }
 
 .editor::part(input-container error) {
-  border: 1px solid var(--modus-input-validation-error-color, #da212c);
+  border: 2px solid var(--modus-input-validation-error-color, #da212c);
   border-radius: unset;
-  z-index: 10;
+  z-index: 99;
 }
 
 .error-tooltip {

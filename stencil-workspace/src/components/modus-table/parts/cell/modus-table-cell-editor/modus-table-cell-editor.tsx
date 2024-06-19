@@ -97,7 +97,7 @@ export class ModusTableCellEditor {
           {
             name: 'offset',
             options: {
-              offset: [-1, 0], // Offset from the element
+              offset: [-0.5, 0], // Offset from the element
             },
           },
           {
@@ -214,7 +214,10 @@ export class ModusTableCellEditor {
     const valueKey = 'value';
     const format = (this.args as ModusTableCellDateEditorArgs)?.format;
     return (
-      <modus-date-picker onBlur={this.handleBlur} onClick={(e: MouseEvent) => e.stopPropagation()}>
+      <modus-date-picker
+        onBlur={this.handleBlur}
+        onClick={(e: MouseEvent) => e.stopPropagation()}
+        class="date-picker-container">
         <modus-date-input
           {...this.getDefaultProps('Date input')}
           format={format}
