@@ -430,6 +430,10 @@
 
   // Divider
   --modus-toolbar-divider-bg: var(--modus-trimble-gray);
+
+  // Utility Panel
+  --modus-utility-panel-bg: var(--modus-white);
+  --modus-utility-panel-color: var(--modus-black);
 }
 
 [data-mwc-theme='dark'] {
@@ -795,6 +799,10 @@
 
   // Divider
   --modus-toolbar-divider-bg: var(--modus-white);
+
+  // Utility Panel
+  --modus-utility-panel-bg: var(--modus-gray-10);
+  --modus-utility-panel-color: var(--modus-white);
 }
 
 // Mixins
