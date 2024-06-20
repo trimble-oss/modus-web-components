@@ -338,7 +338,7 @@ export class ModusDatePicker {
     return (
       <div class="modus-date-picker">
         {this.label ? <div class={'label-container'}>{this.label ? <label>{this.label}</label> : null}</div> : null}
-        <div class="date-inputs">
+        <div class="date-inputs" part="date-inputs">
           <slot onSlotchange={() => this.handleSlotChange()}></slot>
         </div>
         <div style={{ display: 'inline-flex' }}>
