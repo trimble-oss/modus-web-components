@@ -165,7 +165,7 @@
   --modus-btn-icon-only-secondary-hover-color: var(--modus-trimble-gray);
   --modus-btn-icon-only-secondary-active-bg: var(--modus-gray-1);
   --modus-btn-icon-only-secondary-active-color: var(--modus-trimble-gray);
-  --modus-btn-borderless-secondary-color: (var(--modus-black));
+  --modus-btn-borderless-secondary-color: var(--modus-black);
   --modus-btn-borderless-secondary-hover-bg: var(--modus-gray-0);
 
   // Tertiary
@@ -535,7 +535,7 @@
   --modus-btn-icon-only-secondary-hover-color: var(--modus-white);
   --modus-btn-icon-only-secondary-active-bg: var(--modus-gray-6);
   --modus-btn-icon-only-secondary-active-color: var(--modus-white);
-  --modus-btn-borderless-secondary-color: (var(--modus-white));
+  --modus-btn-borderless-secondary-color: var(--modus-white);
   --modus-btn-borderless-secondary-hover-bg: #32363b;
 
   // Tertiary
