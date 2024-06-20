@@ -7,16 +7,14 @@ export default {
   argTypes: {
     allowedCharsRegex: {
       name: 'allowed-chars-regex',
-      description:
-        'Regular expression to allow characters while typing the input.',
+      description: 'Regular expression to allow characters while typing the input.',
       table: {
         type: { summary: 'string' },
       },
     },
     altFormats: {
       name: 'alt-formats',
-      description:
-        'Alternative formats string for the date input split by | separator.',
+      description: 'Alternative formats string for the date input split by | separator.',
       table: {
         type: { summary: 'string' },
       },
@@ -81,13 +79,13 @@ export default {
       description: "The maximum date allowed. The input string should be ISO8601 'yyyy-mm-dd'.",
       table: {
         type: { summary: 'string' },
-      }
+      },
     },
     min: {
       description: "The minimum date allowed. The input string should be ISO8601 'yyyy-mm-dd'.",
       table: {
         type: { summary: 'string' },
-      }
+      },
     },
     placeholder: {
       description: "The input's placeholder text",
@@ -137,8 +135,7 @@ export default {
       },
     },
     value: {
-      description:
-        "A string representing the date entered in the input. The input string should be ISO8601 'yyyy-mm-dd'.",
+      description: "A string representing the date entered in the input. The input string should be ISO8601 'yyyy-mm-dd'.",
       table: {
         type: { summary: 'string' },
       },
@@ -310,26 +307,26 @@ DateRange.args = {
 };
 
 const DefaultWithPickerTemplate = ({
-    ariaLabel,
-    allowedCharsRegex,
-    altFormats,
-    autoFocusInput,
-    disableValidation,
-    disabled,
-    errorText,
-    format,
-    helperText,
-    label,
-    min,
-    max,
-    placeholder,
-    readOnly,
-    required,
-    showCalendarIcon,
-    size,
-    validText,
-    value,
-  }) => html`
+  ariaLabel,
+  allowedCharsRegex,
+  altFormats,
+  autoFocusInput,
+  disableValidation,
+  disabled,
+  errorText,
+  format,
+  helperText,
+  label,
+  min,
+  max,
+  placeholder,
+  readOnly,
+  required,
+  showCalendarIcon,
+  size,
+  validText,
+  value,
+}) => html`
   <modus-date-picker>
     <modus-date-input
       allowed-chars-regex=${allowedCharsRegex}

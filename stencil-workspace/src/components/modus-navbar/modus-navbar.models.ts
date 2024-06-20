@@ -26,6 +26,17 @@ export interface ModusNavbarLogoOptions {
   secondary?: ModusNavbarLogo;
 }
 
+export interface ModusNavbarDropdownItem {
+  text: string;
+  value: string;
+}
+
+export interface ModusNavbarDropdownOptions {
+  ariaLabel: string;
+  defaultValue: string;
+  items: ModusNavbarDropdownItem[];
+}
+
 export interface ModusNavbarButton {
   id: string;
   icon: string;

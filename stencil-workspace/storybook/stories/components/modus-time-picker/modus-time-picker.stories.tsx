@@ -274,11 +274,7 @@ const WithTimeZoneTemplate = ({
     valid-text=${validText}
     value=${value}>
     <div style="width: 300px;padding-left: 0.5rem;" slot="timeZone">
-      <modus-select
-        id="timezone"
-        label="Time Zone"
-        aria-label="Time Zone"
-        options-display-prop="display"></modus-select>
+      <modus-select id="timezone" label="Time Zone" aria-label="Time Zone" options-display-prop="display"></modus-select>
     </div>
   </modus-time-picker>
   ${setSelects()}

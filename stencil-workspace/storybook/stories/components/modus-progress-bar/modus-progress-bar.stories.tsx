@@ -84,17 +84,7 @@ export default {
   },
 };
 
-const Template = ({
-  ariaLabel,
-  backgroundColor,
-  color,
-  maxValue,
-  minValue,
-  size,
-  text,
-  textColor,
-  value,
-}) => html`
+const Template = ({ ariaLabel, backgroundColor, color, maxValue, minValue, size, text, textColor, value }) => html`
   <modus-progress-bar
     aria-label=${ariaLabel}
     background-color=${backgroundColor}

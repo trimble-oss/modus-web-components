@@ -6,7 +6,7 @@ export default {
   title: 'Components/List',
   argTypes: {
     subText: {
-      description: "set the sub-text for the list-item",
+      description: 'set the sub-text for the list-item',
       table: {
         type: { summary: 'string' },
       },
@@ -42,5 +42,5 @@ export const Default = Template.bind({});
 
 Default.args = {
   subText: 'default',
-  wrapSubText: true
-}
+  wrapSubText: true,
+};

@@ -69,21 +69,21 @@ export default {
     },
     iconOnly: {
       name: 'icon-only',
-      description: "Takes the icon name and renders an icon-only button",
+      description: 'Takes the icon name and renders an icon-only button',
       table: {
         type: { summary: 'string' },
       },
     },
     leftIcon: {
       name: 'left-icon',
-      description: "Takes the icon name and shows the icon aligned to the left of the button text",
+      description: 'Takes the icon name and shows the icon aligned to the left of the button text',
       table: {
         type: { summary: 'string' },
       },
     },
     rightIcon: {
       name: 'right-icon',
-      description: "Takes the icon name and shows the icon aligned to the right of the button text",
+      description: 'Takes the icon name and shows the icon aligned to the right of the button text',
       table: {
         type: { summary: 'string' },
       },
@@ -114,7 +114,7 @@ const DefaultTemplate = ({
   rightIcon,
   iconOnly,
   showCaret,
-  label
+  label,
 }) => html`
   <modus-button
     aria-disabled=${ariaDisabled}
@@ -122,7 +122,11 @@ const DefaultTemplate = ({
     button-style=${buttonStyle}
     color=${color}
     ?disabled=${disabled}
-    size=${size} left-icon=${leftIcon} right-icon=${rightIcon} icon-only=${iconOnly} show-caret=${showCaret}>
+    size=${size}
+    left-icon=${leftIcon}
+    right-icon=${rightIcon}
+    icon-only=${iconOnly}
+    show-caret=${showCaret}>
     ${label}
   </modus-button>
 `;
@@ -138,41 +142,31 @@ const DefaultTemplateArgs = {
   rightIcon: '',
   iconOnly: '',
   showCaret: false,
-  label: 'Default'
+  label: 'Default',
 };
-
 
 export const Default = DefaultTemplate.bind({});
-Default.args = { ...DefaultTemplateArgs
-};
+Default.args = { ...DefaultTemplateArgs };
 
 export const Borderless = DefaultTemplate.bind({});
-Borderless.args = {...DefaultTemplateArgs,
-  buttonStyle: 'borderless', label: 'Borderless',
-};
+Borderless.args = { ...DefaultTemplateArgs, buttonStyle: 'borderless', label: 'Borderless' };
 
 export const Outline = DefaultTemplate.bind({});
-Outline.args = {...DefaultTemplateArgs,
-  buttonStyle: 'outline', label: 'Outline',
-};
+Outline.args = { ...DefaultTemplateArgs, buttonStyle: 'outline', label: 'Outline' };
 
 export const IconWithText = DefaultTemplate.bind({});
-IconWithText.args = {...DefaultTemplateArgs,  label: 'Default',
-  leftIcon: 'notifications'
-};
+IconWithText.args = { ...DefaultTemplateArgs, label: 'Default', leftIcon: 'notifications' };
 
 export const IconOnly = DefaultTemplate.bind({});
-IconOnly.args = {...DefaultTemplateArgs,  label: '', buttonStyle: 'borderless',
-color: 'secondary',
-size: 'large',
-iconOnly: 'notifications',
-showCaret: false
+IconOnly.args = {
+  ...DefaultTemplateArgs,
+  label: '',
+  buttonStyle: 'borderless',
+  color: 'secondary',
+  size: 'large',
+  iconOnly: 'notifications',
+  showCaret: false,
 };
 
 export const WithCaret = DefaultTemplate.bind({});
-WithCaret.args = {...DefaultTemplateArgs,  label: 'Primary',
-color: 'primary',
-disabled: false,
-showCaret: true
-};
-
+WithCaret.args = { ...DefaultTemplateArgs, label: 'Primary', color: 'primary', disabled: false, showCaret: true };

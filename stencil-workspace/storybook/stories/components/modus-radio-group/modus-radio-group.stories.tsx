@@ -14,7 +14,7 @@ export default {
     },
     disabled: {
       description: 'If true, the radio group is disabled',
-      control:{
+      control: {
         type: 'boolean',
       },
       table: {
@@ -41,7 +41,7 @@ export default {
     },
   },
   parameters: {
-    controls: { expanded: true, },
+    controls: { expanded: true },
     docs: {
       page: docs,
     },
@@ -51,13 +51,8 @@ export default {
   },
 };
 
-const Template = ({ariaLabel, disabled, name, size }) => html`
-  <modus-radio-group
-    aria-label=${ariaLabel}
-    ?disabled=${disabled}
-    name=${name}
-    size=${size}
-  ></modus-radio-group>
+const Template = ({ ariaLabel, disabled, name, size }) => html`
+  <modus-radio-group aria-label=${ariaLabel} ?disabled=${disabled} name=${name} size=${size}></modus-radio-group>
   ${setRadioGroup()}
 `;
 
@@ -90,5 +85,3 @@ const setRadioGroup = () => {
 
   return tag;
 };
-
-

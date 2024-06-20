@@ -40,14 +40,7 @@ export default {
     },
     type: {
       control: {
-        options: [
-          'error',
-          'info',
-          'info-gray',
-          'info-gray-dark',
-          'success',
-          'warning',
-        ],
+        options: ['error', 'info', 'info-gray', 'info-gray-dark', 'success', 'warning'],
         type: 'select',
       },
       description: 'The type of the alert',
@@ -61,7 +54,7 @@ export default {
   },
   parameters: {
     actions: {
-      handles: [ 'dismissClick', 'actionClick '],
+      handles: ['dismissClick', 'actionClick '],
     },
     controls: { expanded: true, sort: 'requiredFirst' },
     docs: {
@@ -73,17 +66,16 @@ export default {
   },
 };
 
-const Template = ({ ariaLabel, buttonAriaLabel, buttonText, dismissible, message, type }) =>
-  html`
-    <modus-alert
-      ariaLabel=${ariaLabel}
-      button-aria-label=${buttonAriaLabel}
-      button-text=${buttonText}
-      dismissible=${dismissible}
-      message=${message}
-      type=${type}>
-    </modus-alert>
-  `;
+const Template = ({ ariaLabel, buttonAriaLabel, buttonText, dismissible, message, type }) => html`
+  <modus-alert
+    ariaLabel=${ariaLabel}
+    button-aria-label=${buttonAriaLabel}
+    button-text=${buttonText}
+    dismissible=${dismissible}
+    message=${message}
+    type=${type}>
+  </modus-alert>
+`;
 
 // TODO - Figure out how to get rid of the optional parameters in the template (dismissible and type).
 // If not passed, they should result to null or their default values.
@@ -106,7 +98,6 @@ ActionButton.args = {
   message: 'Info alert with action button',
   type: 'info',
 };
-
 
 export const Dismissible = Template.bind({});
 Dismissible.args = {
@@ -168,19 +159,17 @@ Warning.args = {
   type: 'warning',
 };
 
-
-const TemplateWithLink = ({ ariaLabel, buttonAriaLabel, buttonText, dismissible, message, type }) =>
-  html`
-    <modus-alert
-      ariaLabel=${ariaLabel}
-      button-aria-label=${buttonAriaLabel}
-      button-text=${buttonText}
-      dismissible=${dismissible}
-      message=${message}
-      type=${type}>
-      This is a info alert with <a href="#">an example link</a>
-    </modus-alert>
-  `;
+const TemplateWithLink = ({ ariaLabel, buttonAriaLabel, buttonText, dismissible, message, type }) => html`
+  <modus-alert
+    ariaLabel=${ariaLabel}
+    button-aria-label=${buttonAriaLabel}
+    button-text=${buttonText}
+    dismissible=${dismissible}
+    message=${message}
+    type=${type}>
+    This is a info alert with <a href="#">an example link</a>
+  </modus-alert>
+`;
 
 export const WithLink = TemplateWithLink.bind({});
 WithLink.args = {

@@ -36,7 +36,7 @@ export default {
     },
     dropdownZIndex: {
       name: 'dropdown-z-index',
-      description: 'The dropdown\'s z-index',
+      description: "The dropdown's z-index",
       table: {
         defaultValue: { summary: '1' },
         type: { summary: 'string' },
@@ -122,7 +122,7 @@ export default {
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },
-      }
+      },
     },
     size: {
       control: {
@@ -142,20 +142,18 @@ export default {
       },
     },
     multiple: {
-      description: "When enabled, multiple options can be selected in the component. And selected options are shown as chips in the input",
+      description:
+        'When enabled, multiple options can be selected in the component. And selected options are shown as chips in the input',
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },
       },
-    }
+    },
   },
   parameters: {
     controls: { expanded: true, sort: 'requiredFirst' },
     actions: {
-      handles: [
-        'valueChange',
-        'optionSelected',
-      ],
+      handles: ['valueChange', 'optionSelected'],
     },
     docs: {
       inlineStories: true,
@@ -239,7 +237,7 @@ const defaultArgs = {
   size: 'medium',
   value: '',
   options: defaultOptions,
-}
+};
 
 export const Default = Template.bind({});
 Default.args = defaultArgs;
@@ -324,4 +322,4 @@ WithCustomOption.args = {
   showOptionsOnFocus: false,
   size: 'medium',
   value: '',
-}
+};

@@ -41,7 +41,7 @@ export default {
     },
     stopPropagation: {
       name: 'stop-propagation',
-      description: "It should stop propagating the event further.",
+      description: 'It should stop propagating the event further.',
       table: {
         type: { summary: 'boolean' },
       },
@@ -67,14 +67,7 @@ export default {
   },
 };
 
-const Template = ({
-  ariaLabel,
-  checked,
-  disabled,
-  indeterminate,
-  label,
-  size
-}) => html`
+const Template = ({ ariaLabel, checked, disabled, indeterminate, label, size }) => html`
   <modus-checkbox
     aria-label=${ariaLabel}
     checked=${checked}
@@ -91,7 +84,7 @@ Medium.args = {
   disabled: false,
   indeterminate: false,
   label: 'Checkbox',
-  size:'medium',
+  size: 'medium',
 };
 
 export const Indeterminate = Template.bind({});
@@ -101,5 +94,5 @@ Indeterminate.args = {
   disabled: false,
   indeterminate: true,
   label: 'Checkbox',
-  size:'medium',
+  size: 'medium',
 };

@@ -7,8 +7,11 @@ The Modus Sentiment Scale component offers a configurable sentiment scale for us
 Users can navigate the sentiment scale using the <kbd>Tab</kbd> & <kbd>Shift</kbd>+<kbd>Tab</kbd> keys. Pressing the <kbd>Enter</kbd> key will toggle the selection.
 
 ## Usage
+
 ### Thumbs
+
 <modus-sentiment-scale type="thumbs"></modus-sentiment-scale>
+
 ```html
 <modus-sentiment-scale type="thumbs"></modus-sentiment-scale>
 
@@ -19,8 +22,11 @@ Users can navigate the sentiment scale using the <kbd>Tab</kbd> & <kbd>Shift</kb
   });
 </script>
 ```
+
 ### Smileys
+
 <modus-sentiment-scale type="smileys"></modus-sentiment-scale>
+
 ```html
 <modus-sentiment-scale type="smileys"></modus-sentiment-scale>
 
@@ -31,13 +37,14 @@ Users can navigate the sentiment scale using the <kbd>Tab</kbd> & <kbd>Shift</kb
   });
 </script>
 ```
+
 ### Properties
 
-| Property     | Attribute    | Description                                         | Type                            | Options                    | Default | Required |
-| ------------ | ------------ | --------------------------------------------------- | ------------------------------- | -------------------------- | ------- | -------- |
-| `ariaLabel`  | `aria-label` | (optional) The button's aria-label.                 | `string`                        |                            |         |          |
-| `type`       | `type`       | The type of icons to be displayed.                  | `SMILEY_ICONS` \| `THUMB_ICONS` | `smileys`, `thumbs`        |         | Yes      |
-| `disabled`   | `disabled`   | (optional) Whether the sentiment scale is disabled. | `boolean`                       |                            | `false` |          |
+| Property    | Attribute    | Description                                         | Type                            | Options             | Default | Required |
+| ----------- | ------------ | --------------------------------------------------- | ------------------------------- | ------------------- | ------- | -------- |
+| `ariaLabel` | `aria-label` | (optional) The button's aria-label.                 | `string`                        |                     |         |          |
+| `type`      | `type`       | The type of icons to be displayed.                  | `SMILEY_ICONS` \| `THUMB_ICONS` | `smileys`, `thumbs` |         | Yes      |
+| `disabled`  | `disabled`   | (optional) Whether the sentiment scale is disabled. | `boolean`                       |                     | `false` |          |
 
 ### Types
 
@@ -48,6 +55,6 @@ Users can navigate the sentiment scale using the <kbd>Tab</kbd> & <kbd>Shift</kb
 
 ### Events
 
-| Events               | Description                                 | Detail                    |
-| -------------------- | ------------------------------------------- | ------------------------- |
-| `sentimentSelection` | Fires when a sentiment is selected.         | The selected sentiment.   |
+| Events               | Description                         | Detail                  |
+| -------------------- | ----------------------------------- | ----------------------- |
+| `sentimentSelection` | Fires when a sentiment is selected. | The selected sentiment. |

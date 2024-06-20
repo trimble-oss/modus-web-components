@@ -3,7 +3,8 @@ import docs from './modus-card-storybook-docs.mdx';
 import { html } from 'lit-html';
 
 export default {
-  title: 'Components/Card',argTypes: {
+  title: 'Components/Card',
+  argTypes: {
     ariaLabel: {
       name: 'aria-label',
       description: "The card's aria-label",
@@ -33,7 +34,7 @@ export default {
       },
     },
     showCardBorder: {
-      description: "A flag that controls the display of border",
+      description: 'A flag that controls the display of border',
       table: {
         type: { summary: 'boolean' },
       },
@@ -56,14 +57,14 @@ export default {
   },
 };
 
-const Template = ({
-  ariaLabel,
-  height,
-  width,
-  borderRadius,
-  showCardBorder,
-  showShadowOnHover,}) => html`
-  <modus-card aria-label=${ariaLabel} height=${height} width=${width} border-radius=${borderRadius} show-card-border=${showCardBorder} show-shadow-on-hover=${showShadowOnHover}>
+const Template = ({ ariaLabel, height, width, borderRadius, showCardBorder, showShadowOnHover }) => html`
+  <modus-card
+    aria-label=${ariaLabel}
+    height=${height}
+    width=${width}
+    border-radius=${borderRadius}
+    show-card-border=${showCardBorder}
+    show-shadow-on-hover=${showShadowOnHover}>
     <!-- Render anything here -->
     <div style="padding:10px">
       <h4>Card title</h4>
@@ -80,5 +81,5 @@ Default.args = {
   width: '250px',
   borderRadius: '4px',
   showCardBorder: true,
-  showShadowOnHover: true
+  showShadowOnHover: true,
 };

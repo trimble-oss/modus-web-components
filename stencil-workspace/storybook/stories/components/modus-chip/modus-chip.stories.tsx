@@ -5,12 +5,12 @@ import docs from './modus-chip-storybook-docs.mdx';
 export default {
   title: 'Components/Chip',
   argTypes: {
-    active:{
+    active: {
       name: 'active',
       description: 'Whether the chip is active',
       table: {
-      defaultValue: { summary: false },
-      type: { summary: 'boolean' },
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
       },
     },
     ariaLabel: {
@@ -93,7 +93,7 @@ export default {
         type: { summary: 'string' },
         defaultValue: { summary: '100px' },
       },
-    }
+    },
   },
   parameters: {
     controls: { expanded: true },
@@ -143,7 +143,7 @@ Default.args = {
   disabled: false,
   hasError: false,
   imageUrl: 'https://randomuser.me/api/portraits/lego/1.jpg',
-  maxWidth:'100px',
+  maxWidth: '100px',
   showCheckmark: false,
   showClose: false,
   size: 'medium',
@@ -184,7 +184,7 @@ Outline.args = {
   disabled: false,
   hasError: false,
   imageUrl: 'https://randomuser.me/api/portraits/lego/1.jpg',
-  maxWidth:'100px',
+  maxWidth: '100px',
   showCheckmark: false,
   showClose: false,
   size: 'medium',

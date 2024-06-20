@@ -24,10 +24,7 @@ import { Story } from '@storybook/addon-docs';
 <Story id="user-inputs-time-picker--default" />
 
 ```html
-<modus-time-picker
-  label="Time"
-  placeholder="23:39"
-  helper-text="hh:mm"></modus-time-picker>
+<modus-time-picker label="Time" placeholder="23:39" helper-text="hh:mm"></modus-time-picker>
 ```
 
 #### 12 Hour Format
@@ -62,18 +59,9 @@ import { Story } from '@storybook/addon-docs';
 <Story id="user-inputs-time-picker--with-time-zone" />
 
 ```html
-<modus-time-picker
-  helper-text="hh:mm"
-  label="Time"
-  max-length="10"
-  auto-format="true"
-  value="23:39">
+<modus-time-picker helper-text="hh:mm" label="Time" max-length="10" auto-format="true" value="23:39">
   <div style="width: 300px;padding-left: 0.5rem;" slot="timeZone">
-    <modus-select
-      id="timezone"
-      label="Time Zone"
-      aria-label="Time Zone"
-      options-display-prop="display"></modus-select>
+    <modus-select id="timezone" label="Time Zone" aria-label="Time Zone" options-display-prop="display"></modus-select>
   </div>
 </modus-time-picker>
 <script>

@@ -12,8 +12,8 @@ export default {
         type: { summary: 'string' },
       },
     },
-    delay:{
-      description:'Time taken to dismiss the toast',
+    delay: {
+      description: 'Time taken to dismiss the toast',
       table: {
         defaultValue: { summary: 15000 },
         type: { summary: 'number' },
@@ -29,7 +29,7 @@ export default {
     role: {
       control: {
         options: ['alert', 'log', 'marquee', 'status', 'timer'],
-        type: 'select'
+        type: 'select',
       },
       description: 'Role taken by the toast',
       table: {
@@ -47,15 +47,7 @@ export default {
     },
     type: {
       control: {
-        options: [
-          'danger',
-          'dark',
-          'default',
-          'primary',
-          'secondary',
-          'success',
-          'warning',
-        ],
+        options: ['danger', 'dark', 'default', 'primary', 'secondary', 'success', 'warning'],
         type: 'select',
       },
       description: 'The type of the toast',
@@ -81,18 +73,17 @@ export default {
   },
 };
 
-const Template = ({ ariaLabel, dismissible, showIcon, role, type , delay }) =>
-  html`
-    <modus-toast
-      aria-label=${ariaLabel}
-      delay=${delay}
-      dismissible=${dismissible}
-      show-icon=${showIcon}
-      role=${role}
-      type=${type}
-      >Toast!</modus-toast
-    >
-  `;
+const Template = ({ ariaLabel, dismissible, showIcon, role, type, delay }) => html`
+  <modus-toast
+    aria-label=${ariaLabel}
+    delay=${delay}
+    dismissible=${dismissible}
+    show-icon=${showIcon}
+    role=${role}
+    type=${type}
+    >Toast!</modus-toast
+  >
+`;
 
 export const Default = Template.bind({});
 Default.args = {

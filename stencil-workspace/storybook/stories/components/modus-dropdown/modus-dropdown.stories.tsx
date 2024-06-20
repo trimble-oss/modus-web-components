@@ -12,46 +12,45 @@ export default {
         type: { summary: 'boolean' },
         defaultValue: { summary: false },
       },
-     },
+    },
     ariaLabel: {
       name: 'aria-label',
       description: "The dropdowns's aria-label",
       table: {
-        type: { summary: 'string' }
+        type: { summary: 'string' },
       },
     },
     disabled: {
-    name: 'disabled',
-    description: 'Whether the dropdown is disabled',
-    table: {
-       type: { summary: 'boolean' },
-       defaultValue: { summary: false },
-      }
+      name: 'disabled',
+      description: 'Whether the dropdown is disabled',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: false },
+      },
     },
     placement: {
       name: 'placement',
-     description: 'The placement of the dropdown in relation to the toggleElement.',
-     control: {
-      options: [
-        'top' , 'right' , 'bottom' , 'left'
-      ],
-      type: 'select',
-    },
-      table: { type: { summary: `'top' | 'right' | 'bottom' | 'left'` },
+      description: 'The placement of the dropdown in relation to the toggleElement.',
+      control: {
+        options: ['top', 'right', 'bottom', 'left'],
+        type: 'select',
+      },
+      table: {
+        type: { summary: `'top' | 'right' | 'bottom' | 'left'` },
 
-    defaultValue: { summary: 'bottom'}
-    } },
+        defaultValue: { summary: 'bottom' },
+      },
+    },
     showDropdownListBorder: {
       name: 'show-dropdown-list-border',
       description: 'Whether to show the dropdown list border',
       table: {
-        type:
-        {
-           summary: 'boolean'
-           },
-           defaultValue: { summary: true },
-          },
-     },
+        type: {
+          summary: 'boolean',
+        },
+        defaultValue: { summary: true },
+      },
+    },
   },
   parameters: {
     actions: {
@@ -67,15 +66,20 @@ export default {
   },
 };
 
-
 const DefaultTemplate = ({ animateList, ariaLabel, disabled, placement, showDropdownListBorder }) => html`
-  <modus-dropdown animate-list=${animateList} aria-label=${ariaLabel} disabled=${disabled} placement=${placement} show-dropdown-list-border=${showDropdownListBorder} toggle-element-id="toggleElement">
-  <modus-button id="toggleElement" slot="dropdownToggle" show-caret="true">Dropdown</modus-button>
-  <modus-list slot="dropdownList">
-    <modus-list-item size="condensed" borderless>Item 1</modus-list-item>
-    <modus-list-item size="condensed" borderless>Item 2</modus-list-item>
-    <modus-list-item size="condensed" borderless>Item 3</modus-list-item>
-  </modus-list>
+  <modus-dropdown
+    animate-list=${animateList}
+    aria-label=${ariaLabel}
+    disabled=${disabled}
+    placement=${placement}
+    show-dropdown-list-border=${showDropdownListBorder}
+    toggle-element-id="toggleElement">
+    <modus-button id="toggleElement" slot="dropdownToggle" show-caret="true">Dropdown</modus-button>
+    <modus-list slot="dropdownList">
+      <modus-list-item size="condensed" borderless>Item 1</modus-list-item>
+      <modus-list-item size="condensed" borderless>Item 2</modus-list-item>
+      <modus-list-item size="condensed" borderless>Item 3</modus-list-item>
+    </modus-list>
   </modus-dropdown>
 `;
 export const Default = DefaultTemplate.bind({});
@@ -85,23 +89,29 @@ Default.args = {
   disabled: false,
   placement: 'bottom',
   showDropdownListBorder: true,
-}
+};
 
 const WithManyItemsTemplate = ({ animateList, ariaLabel, disabled, placement, showDropdownListBorder }) => html`
-  <modus-dropdown animate-list=${animateList} aria-label=${ariaLabel} disabled=${disabled} placement=${placement} show-dropdown-list-border=${showDropdownListBorder} toggle-element-id="toggleElement">
-  <modus-button id="toggleElement" slot="dropdownToggle" show-caret="true">Dropdown</modus-button>
-  <modus-list slot="dropdownList">
-    <modus-list-item size="condensed" borderless>Item 1</modus-list-item>
-    <modus-list-item size="condensed" borderless>Item 2</modus-list-item>
-    <modus-list-item size="condensed" borderless>Item 3</modus-list-item>
-    <modus-list-item size="condensed" borderless>Item 4</modus-list-item>
-    <modus-list-item size="condensed" borderless>Item 5</modus-list-item>
-    <modus-list-item size="condensed" borderless>Item 6</modus-list-item>
-    <modus-list-item size="condensed" borderless>Item 7</modus-list-item>
-    <modus-list-item size="condensed" borderless>Item 8</modus-list-item>
-    <modus-list-item size="condensed" borderless>Item 9</modus-list-item>
-    <modus-list-item size="condensed" borderless>Item 10</modus-list-item>
-  </modus-list>
+  <modus-dropdown
+    animate-list=${animateList}
+    aria-label=${ariaLabel}
+    disabled=${disabled}
+    placement=${placement}
+    show-dropdown-list-border=${showDropdownListBorder}
+    toggle-element-id="toggleElement">
+    <modus-button id="toggleElement" slot="dropdownToggle" show-caret="true">Dropdown</modus-button>
+    <modus-list slot="dropdownList">
+      <modus-list-item size="condensed" borderless>Item 1</modus-list-item>
+      <modus-list-item size="condensed" borderless>Item 2</modus-list-item>
+      <modus-list-item size="condensed" borderless>Item 3</modus-list-item>
+      <modus-list-item size="condensed" borderless>Item 4</modus-list-item>
+      <modus-list-item size="condensed" borderless>Item 5</modus-list-item>
+      <modus-list-item size="condensed" borderless>Item 6</modus-list-item>
+      <modus-list-item size="condensed" borderless>Item 7</modus-list-item>
+      <modus-list-item size="condensed" borderless>Item 8</modus-list-item>
+      <modus-list-item size="condensed" borderless>Item 9</modus-list-item>
+      <modus-list-item size="condensed" borderless>Item 10</modus-list-item>
+    </modus-list>
   </modus-dropdown>
 `;
 export const WithManyItems = WithManyItemsTemplate.bind({});
@@ -111,5 +121,4 @@ WithManyItems.args = {
   disabled: false,
   placement: 'bottom',
   showDropdownListBorder: true,
-}
-
+};
