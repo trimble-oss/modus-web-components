@@ -7,10 +7,12 @@ import { ModusNavbarDropdownItem, ModusNavbarDropdownOptions } from '../modus-na
 interface Props {
   itemSelect: (item: ModusNavbarDropdownItem) => void;
   options: ModusNavbarDropdownOptions;
+  reverse: boolean;
   selectedItem: ModusNavbarDropdownItem;
 }
 
-export const ModusNavbarDropdown: FunctionalComponent<Props> = ({ itemSelect, options, selectedItem }) => {
+export const ModusNavbarDropdown: FunctionalComponent<Props> = ({ itemSelect, options, reverse, selectedItem }) => {
+  const direction = reverse ? 'rtl' : 'ltr';
   const toggleElementId = 'navbar-dropdown';
 
   const itemSelectHandler = (item: ModusNavbarDropdownItem) => {
@@ -28,7 +30,7 @@ export const ModusNavbarDropdown: FunctionalComponent<Props> = ({ itemSelect, op
         show-caret={true}>
         {selectedItem.text}
       </modus-button>
-      <modus-list slot={'dropdownList'}>
+      <modus-list dir={direction} slot={'dropdownList'}>
         {options.items.map((item) => (
           <modus-list-item
             key={item.value}

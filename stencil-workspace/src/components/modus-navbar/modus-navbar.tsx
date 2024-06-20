@@ -458,6 +458,7 @@ export class ModusNavbar {
                   <ModusNavbarDropdown
                     itemSelect={(item) => this.dropdownItemSelectHandler(item)}
                     options={this.dropdownOptions}
+                    reverse={this.reverse}
                     selectedItem={this.selectedDropdownItem}
                   />
                 )}
