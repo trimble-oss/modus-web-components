@@ -52,6 +52,15 @@ This component utilizes the slot element, allowing you to render your own HTML i
     },
     secondary: { url: 'https://modus.trimble.com/favicon.svg', height: 24 },
   };
+  element.dropdownOptions = {
+    ariaLabel: 'Project dropdown',
+    defaultValue: '2',
+    items: [
+      { text: 'Project 1', value: '1' },
+      { text: 'Project 2', value: '2' },
+      { text: 'Project 3', value: '3' },
+    ],
+  };
   element.profileMenuOptions = {
     avatarUrl: '...',
     email: 'modus_user@trimble.com',

@@ -25,8 +25,8 @@ export default {
       description: 'Toggle the help button',
       table: {
         defaultValue: { summary: false },
-        type: { summary: 'boolean' }
-      }
+        type: { summary: 'boolean' },
+      },
     },
     showProfile: {
       name: 'show-profile',
@@ -34,7 +34,7 @@ export default {
       table: {
         defaultValue: { summary: true },
         type: { summary: 'boolean' },
-      }
+      },
     },
     showSearch: {
       name: 'show-search',
@@ -72,7 +72,7 @@ export default {
         type: { summary: 'ModusNavbarTooltip' },
       },
     },
-    notificationCount:{
+    notificationCount: {
       name: 'notification-count',
       description: 'To add the counter value to the notification icon',
       table: {
@@ -96,7 +96,8 @@ export default {
   },
 };
 
-const workingAvatarUrl = 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0e738c17-7f3c-422e-8225-f8c782b08626/d9pordj-43d4aa59-54b0-46a1-a568-e36dd691cf27.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzBlNzM4YzE3LTdmM2MtNDIyZS04MjI1LWY4Yzc4MmIwODYyNlwvZDlwb3Jkai00M2Q0YWE1OS01NGIwLTQ2YTEtYTU2OC1lMzZkZDY5MWNmMjcucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.xvDk9KFIUAx0yAG3BPamDfRqmWUX6zwR4WVW40GjsoY';
+const workingAvatarUrl =
+  'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0e738c17-7f3c-422e-8225-f8c782b08626/d9pordj-43d4aa59-54b0-46a1-a568-e36dd691cf27.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzBlNzM4YzE3LTdmM2MtNDIyZS04MjI1LWY4Yzc4MmIwODYyNlwvZDlwb3Jkai00M2Q0YWE1OS01NGIwLTQ2YTEtYTU2OC1lMzZkZDY5MWNmMjcucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.xvDk9KFIUAx0yAG3BPamDfRqmWUX6zwR4WVW40GjsoY';
 const failingAvatarUrl = 'https://avatar.example.com/broken-image-link.png';
 const defaultPrimaryLogo = 'https://modus.trimble.com/img/trimble-logo.svg';
 const defaultSecondaryLogo = 'https://modus.trimble.com/favicon.svg';
@@ -106,7 +107,7 @@ const defaultLogo = {
   },
   secondary: {
     url: defaultSecondaryLogo,
-  }
+  },
 };
 const blueLogo = {
   primary: {
@@ -114,16 +115,38 @@ const blueLogo = {
   },
   secondary: {
     url: 'https://modus-bootstrap.trimble.com/img/trimble-icon-rev.svg',
-  }
+  },
 };
-const defaultApps = [{
-  description: 'The One Trimble Design System',
-  logoUrl: 'https://modus.trimble.com/favicon.svg',
-  name: 'Trimble Modus',
-  url: 'https://modus.trimble.com/',
-}];
+const defaultDropdownOptions = {
+  ariaLabel: 'Project dropdown',
+  defaultValue: '2',
+  items: [
+    { text: 'Project 1', value: '1' },
+    { text: 'Project 2', value: '2' },
+    { text: 'Project 3', value: '3' },
+  ],
+};
+const defaultApps = [
+  {
+    description: 'The One Trimble Design System',
+    logoUrl: 'https://modus.trimble.com/favicon.svg',
+    name: 'Trimble Modus',
+    url: 'https://modus.trimble.com/',
+  },
+];
 
-const Template = ({ buttons, notificationCount, enableSearchOverlay, helpTooltip, navAriaLabel, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
+const Template = ({
+  buttons,
+  notificationCount,
+  enableSearchOverlay,
+  helpTooltip,
+  navAriaLabel,
+  profileMenuOptions,
+  searchTooltip,
+  showHelp,
+  showProfile,
+  showSearch,
+}) => html`
   <modus-navbar
     enable-search-overlay=${enableSearchOverlay}
     nav-aria-label=${navAriaLabel}
@@ -138,14 +161,15 @@ const Template = ({ buttons, notificationCount, enableSearchOverlay, helpTooltip
     .buttons=${buttons}
     .helpTooltip=${helpTooltip}
     .logoOptions=${defaultLogo}
+    .dropdownOptions=${defaultDropdownOptions}
     .profileMenuOptions=${profileMenuOptions}
     .searchTooltip=${searchTooltip}>
     <div slot="main" style="height:300px;">Render your own main menu.</div>
 
-      <modus-list slot="addMenu">
-        <modus-list-item>Menu Item 1</modus-list-item>
-        <modus-list-item>Menu Item 2</modus-list-item>
-      </modus-list>
+    <modus-list slot="addMenu">
+      <modus-list-item>Menu Item 1</modus-list-item>
+      <modus-list-item>Menu Item 2</modus-list-item>
+    </modus-list>
 
     <div slot="notificationMenu">Render your own notification menu.</div>
     <div slot="profileMenu">Render your own profile menu content.</div>
@@ -157,10 +181,11 @@ Default.args = {
   enableSearchOverlay: false,
   buttons: [
     {
-      id: 'addMenu', icon: 'add',
+      id: 'addMenu',
+      icon: 'add',
       tooltip: {
         text: 'Add',
-      }
+      },
     },
     { id: 'notificationMenu', icon: 'notifications' },
   ],
@@ -174,28 +199,39 @@ Default.args = {
     username: 'Modus User',
     links: [
       {
-        id: "link1",
-        display: "Link 1",
-        icon: "moon"
+        id: 'link1',
+        display: 'Link 1',
+        icon: 'moon',
       },
       {
-        id: "link2",
-        display: "Link 2",
-        icon: "sun"
-      }
+        id: 'link2',
+        display: 'Link 2',
+        icon: 'sun',
+      },
     ],
     tooltip: {
       text: 'User Profile Menu',
-    }
+    },
   },
   searchTooltip: undefined,
   showHelp: false,
   showProfile: true,
   showSearch: false,
-  notificationCount: 0
+  notificationCount: 0,
 };
 
-const FailedToLoadAvatarTemplate = ({ buttons, notificationCount, enableSearchOverlay, helpTooltip, navAriaLabel, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
+const FailedToLoadAvatarTemplate = ({
+  buttons,
+  notificationCount,
+  enableSearchOverlay,
+  helpTooltip,
+  navAriaLabel,
+  profileMenuOptions,
+  searchTooltip,
+  showHelp,
+  showProfile,
+  showSearch,
+}) => html`
   <modus-navbar
     enable-search-overlay=${enableSearchOverlay}
     nav-aria-label=${navAriaLabel}
@@ -235,10 +271,21 @@ FailedAvatar.args = {
   showHelp: false,
   showProfile: true,
   showSearch: false,
-  notificationCount: 0
+  notificationCount: 0,
 };
 
-const BlueTemplate = ({ buttons, notificationCount, enableSearchOverlay, helpTooltip, navAriaLabel, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
+const BlueTemplate = ({
+  buttons,
+  notificationCount,
+  enableSearchOverlay,
+  helpTooltip,
+  navAriaLabel,
+  profileMenuOptions,
+  searchTooltip,
+  showHelp,
+  showProfile,
+  showSearch,
+}) => html`
   <modus-navbar
     enable-search-overlay=${enableSearchOverlay}
     nav-aria-label=${navAriaLabel}
@@ -279,5 +326,5 @@ BlueNavbar.args = {
   showHelp: false,
   showProfile: true,
   showSearch: false,
-  notificationCount: 0
+  notificationCount: 0,
 };
