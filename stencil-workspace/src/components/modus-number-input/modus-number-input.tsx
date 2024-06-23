@@ -88,7 +88,7 @@ export class ModusNumberInput {
   }
 
   modifyInputValue(value: string) {
-    return this.cleaveInstance.setRawValue(value);
+    this.cleaveInstance.setRawValue(value);
   }
 
   @Watch('digitGroupSeparator')
@@ -135,9 +135,9 @@ export class ModusNumberInput {
   @Watch('value')
   watchValue(newValue: string, oldValue: string): void {
     if (isNaN(+newValue)) {
-      this.value = this.modifyInputValue(oldValue);
+      this.value = oldValue;
     } else {
-      this.value = this.modifyInputValue(newValue);
+      this.value = newValue;
     }
   }
 
