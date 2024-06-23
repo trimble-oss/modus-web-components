@@ -22,5 +22,10 @@
   },
   "engines": {
     "node": ">=16.20.2"
+  },
+  "dependencies": {
+    "autonumeric": "^4.10.5",
+    "cleave.js": "^1.6.0",
+    "inputmask": "^5.0.9"
   }
 }

@@ -1,3 +1,5 @@
+// modus-number-input.stories.tsx
+
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-number-input-storybook-docs.mdx';
 import { html } from 'lit-html';
@@ -10,6 +12,46 @@ export default {
       description: "The number input's aria-label",
       table: {
         type: { summary: 'string' },
+      },
+    },
+    currencySymbol: {
+      name: 'currency-symbol',
+      description: 'The currency symbol',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: "''" },
+      },
+    },
+    decimalCharacter: {
+      name: 'decimal-character',
+      description: 'The decimal character',
+      table: {
+        type: { summary: `'.' | ','` },
+        defaultValue: { summary: "'.'" },
+      },
+    },
+    decimalPlaces: {
+      name: 'decimal-places',
+      description: 'The number of decimal places',
+      table: {
+        type: { summary: 'number' },
+        defaultValue: { summary: 2 },
+      },
+    },
+    digitGroupSeparator: {
+      name: 'digit-group-separator',
+      description: 'The digit group separator',
+      table: {
+        type: { summary: `' ' | ',' | '.'` },
+        defaultValue: { summary: "','" },
+      },
+    },
+    digitGroupSpacing: {
+      name: 'digit-group-spacing',
+      description: 'The digit group spacing',
+      table: {
+        type: { summary: `'lakh' | 'none' | 'thousand' | 'lakh'` },
+        defaultValue: { summary: `'none'` },
       },
     },
     disabled: {
@@ -31,6 +73,13 @@ export default {
       description: "The number input's helper text",
       table: {
         type: { summary: 'string' },
+      },
+    },
+    integerLimit: {
+      name: 'integer-limit',
+      description: 'The number of integer limit',
+      table: {
+        type: { summary: 'number' },
       },
     },
     label: {
@@ -82,7 +131,7 @@ export default {
       description: 'The size of the number input',
       table: {
         defaultValue: { summary: `'medium'` },
-        type: { summary: `'medium' | 'large'` },
+        type: { summary: `'large' | 'medium'` },
       },
     },
     step: {
@@ -94,18 +143,14 @@ export default {
     textAlign: {
       name: 'text-align',
       control: {
-        options: [
-          'left',
-          'right'
-        ],
+        options: ['left', 'right'],
         type: 'select',
       },
       description: 'text alignment for the number input.',
       table: {
         defaultValue: { summary: "'left'" },
         type: {
-          summary:
-            "'left' | 'right'",
+          summary: "'left' | 'right'",
         },
       },
     },
@@ -139,9 +184,15 @@ export default {
 
 const Template = ({
   ariaLabel,
+  currencySymbol,
+  decimalCharacter,
+  decimalPlaces,
+  digitGroupSeparator,
+  digitGroupSpacing,
   disabled,
   errorText,
   helperText,
+  integerLimit,
   label,
   maxValue,
   minValue,
@@ -156,14 +207,20 @@ const Template = ({
 }) => html`
   <modus-number-input
     aria-label=${ariaLabel}
+    currency-symbol=${currencySymbol}
+    decimal-character=${decimalCharacter}
+    decimal-places=${decimalPlaces}
+    digit-group-separator=${digitGroupSeparator}
+    digit-group-spacing=${digitGroupSpacing}
     ?disabled=${disabled}
     error-text=${errorText}
     helper-text=${helperText}
+    integer-limit=${integerLimit}
     label=${label}
     max-value=${maxValue}
     min-value=${minValue}
     placeholder=${placeholder}
-    read-only=${readOnly}
+    ?read-only=${readOnly}
     ?required=${required}
     size=${size}
     step=${step}
@@ -175,11 +232,17 @@ const Template = ({
 export const Default = Template.bind({});
 Default.args = {
   ariaLabel: '',
+  currencySymbol: '',
+  decimalCharacter: '.',
+  decimalPlaces: 2,
+  digitGroupSeparator: ',',
+  digitGroupSpacing: 'thousand',
   disabled: false,
   errorText: '',
   helperText: '',
+  integerLimit: 5,
   label: 'Number Input',
-  maxValue: 100,
+  maxValue: 100000,
   minValue: 0,
   placeholder: '',
   readOnly: false,
@@ -188,5 +251,5 @@ Default.args = {
   step: 1,
   textAlign: 'left',
   validText: '',
-  value: 100,
+  value: 10000,
 };

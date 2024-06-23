@@ -1,7 +1,6 @@
-// eslint-disable-next-line
-import { Component, Event, EventEmitter, h, Method, Prop, Watch } from '@stencil/core';
+import { Component, h, Prop, Event, EventEmitter, Method, Watch } from '@stencil/core';
+import Cleave from 'cleave.js';
 import { generateElementId } from '../../utils/utils';
-import AutoNumeric from 'autonumeric';
 
 @Component({
   tag: 'modus-number-input',
@@ -12,6 +11,21 @@ export class ModusNumberInput {
   /** (optional) The input's aria-label. */
   @Prop() ariaLabel: string | null;
 
+  /** (optional) The currency symbol. */
+  @Prop() currencySymbol = '';
+
+  /** (optional) The decimal character. */
+  @Prop() decimalCharacter: '.' | ',' = '.';
+
+  /** (optional) The number of decimal places. */
+  @Prop() decimalPlaces = 2;
+
+  /** (optional) The digit group separator. */
+  @Prop() digitGroupSeparator: ' ' | ',' | '.' = ',';
+
+  /** (optional) The digit group spacing. */
+  @Prop() digitGroupSpacing: 'lakh' | 'none' | 'thousand' | 'lakh' = 'none';
+
   /** (optional) Whether the input is disabled. */
   @Prop() disabled: boolean;
 
@@ -20,6 +34,9 @@ export class ModusNumberInput {
 
   /** (optional) The input's helper text displayed below the input. */
   @Prop() helperText: string;
+
+  /** (optional) The maximum number of integers allowed. */
+  @Prop() integerLimit: number;
 
   /** (optional) The input's label. */
   @Prop() label: string;
@@ -64,15 +81,44 @@ export class ModusNumberInput {
     ['large', 'large'],
   ]);
   numberInput: HTMLInputElement;
-  autoNumericInstance: AutoNumeric;
+  cleaveInstance: Cleave;
 
   componentDidLoad() {
-    this.autoNumericInstance = new AutoNumeric(this.numberInput, {
-      digitGroupSeparator: ',',
-      digitalGroupSpacing: '2',
-      decimalCharacter: '.',
-      decimalPlaces: 2,
-    });
+    this.initializeCleave();
+  }
+
+  modifyInputValue(value: string) {
+    return this.cleaveInstance.setRawValue(value);
+  }
+
+  @Watch('digitGroupSeparator')
+  @Watch('digitGroupSpacing')
+  @Watch('decimalCharacter')
+  @Watch('decimalPlaces')
+  @Watch('currencySymbol')
+  @Watch('integerLimit')
+  watchPropChangeHandler() {
+    this.modifyInputValue(this.value);
+  }
+
+  initializeCleave() {
+    const cleaveOptions = {
+      numeral: true,
+      numeralThousandsGroupStyle: this?.digitGroupSpacing,
+      delimiter: this?.digitGroupSeparator,
+      numeralDecimalMark: this?.decimalCharacter,
+      prefix: this?.currencySymbol,
+      numeralIntegerScale: this?.integerLimit,
+      numeralDecimalScale: this?.decimalPlaces,
+      rawValueTrimPrefix: true,
+    };
+
+    this.cleaveInstance = new Cleave(this.numberInput, cleaveOptions);
+
+    if (this.value) {
+      this.numberInput.value = this.value;
+      this.cleaveInstance.setRawValue(this.value);
+    }
   }
 
   handleOnInput(): void {
@@ -89,9 +135,9 @@ export class ModusNumberInput {
   @Watch('value')
   watchValue(newValue: string, oldValue: string): void {
     if (isNaN(+newValue)) {
-      this.value = oldValue;
+      this.value = this.modifyInputValue(oldValue);
     } else {
-      this.value = newValue;
+      this.value = this.modifyInputValue(newValue);
     }
   }
 

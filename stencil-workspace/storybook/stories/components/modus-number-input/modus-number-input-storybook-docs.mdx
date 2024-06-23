@@ -16,54 +16,43 @@ This component is compatible with Angular reactive forms. This can be achieved t
 <modus-number-input label="Text Input Demo 6" placeholder="Placeholder" size="large" value="100"></modus-number-input>
 
 ```html
-<modus-number-input
-  label="Number Input Demo 1"
-  placeholder="Placeholder"
-  required="true"></modus-number-input>
+<modus-number-input label="Number Input Demo 1" placeholder="Placeholder" required="true"></modus-number-input>
 <modus-number-input
   disabled="true"
   label="Number Input Demo 2"
   placeholder="Placeholder"
   required="true"></modus-number-input>
-<modus-number-input
-  helper-text="Helper demo"
-  label="Number Input Demo 3"
-  placeholder="Placeholder"></modus-number-input>
-<modus-number-input
-  error-text="Error demo"
-  label="Number Input Demo 4"
-  placeholder="Placeholder"></modus-number-input>
-<modus-number-input
-  valid-text="Valid demo"
-  label="Number Input Demo 5"
-  placeholder="Placeholder"></modus-number-input>
-<modus-number-input
-  label="Text Input Demo 6"
-  placeholder="Placeholder"
-  size="large"
-  value="100"></modus-number-input>
+<modus-number-input helper-text="Helper demo" label="Number Input Demo 3" placeholder="Placeholder"></modus-number-input>
+<modus-number-input error-text="Error demo" label="Number Input Demo 4" placeholder="Placeholder"></modus-number-input>
+<modus-number-input valid-text="Valid demo" label="Number Input Demo 5" placeholder="Placeholder"></modus-number-input>
+<modus-number-input label="Text Input Demo 6" placeholder="Placeholder" size="large" value="100"></modus-number-input>
 ```
 
 ### Properties
 
-| Property      | Attribute     | Description                                                   | Type                  | Default     |
-| ------------- | ------------- | ------------------------------------------------------------- | --------------------- | ----------- |
-| `ariaLabel`   | `aria-label`  | (optional) The input's aria-label.                            | `string`              | `undefined` |
-| `disabled`    | `disabled`    | (optional) Whether the input is disabled.                     | `boolean`             | `undefined` |
-| `errorText`   | `error-text`  | (optional) The input's error state text.                      | `string`              | `undefined` |
-| `helperText`  | `helper-text` | (optional) The input's helper text displayed below the input. | `string`              | `undefined` |
-| `label`       | `label`       | (optional) The input's label.                                 | `string`              | `undefined` |
-| `maxValue`    | `max-value`   | (optional) The input's maximum value.                         | `number`              | `undefined` |
-| `minValue`    | `min-value`   | (optional) The input's minimum value.                         | `number`              | `undefined` |
-| `placeholder` | `placeholder` | (optional) The input's placeholder text.                      | `string`              | `undefined` |
-| `readOnly`    | `read-only`   | (optional) Whether the input's content is read-only           | `boolean`             | `undefined` |
-| `required`    | `required`    | (optional) Whether the input is required.                     | `boolean`             | `undefined` |
-| `size`        | `size`        | (optional) The input's size.                                  | `"large" \| "medium"` | `'medium'`  |
-| `step`        | `step`        | (optional) The input's step.                                  | `number`              | `undefined` |
-| `textAlign`   | `text-align`  | (optional) The input's text alignment.                        | `"left" \| "right"`   | `'left'`    |
-| `validText`   | `valid-text`  | (optional) The input's valid state text.                      | `string`              | `undefined` |
-| `value`       | `value`       | (optional) The input's value.                                 | `string`              | `undefined` |
-
+| Property              | Attribute               | Description                                          | Type                                       | Default     |
+| --------------------- | ----------------------- | ---------------------------------------------------- | ------------------------------------------ | ----------- |
+| `ariaLabel`           | `aria-label`            | (optional) The input's aria-label.                   | `string`                                   | `undefined` |
+| `currencySymbol`      | `currency-symbol`       | (optional) The currency symbol.                      | `string`                                   | `''`        |
+| `decimalCharacter`    | `decimal-character`     | (optional) The decimal character.                    | `'.' \| ','`                               | `'.'`       |
+| `decimalPlaces`       | `decimal-places`        | (optional) The number of decimal places.             | `number`                                   | `2`         |
+| `digitGroupSeparator` | `digit-group-separator` | (optional) The digit group separator.                | `' ' \| ',' \| '.'`                        | `','`       |
+| `digitGroupSpacing`   | `digit-group-spacing`   | (optional) The digit group spacing.                  | `'lakh' \| 'none' \| 'thousand' \| 'lakh'` | `'none'`    |
+| `disabled`            | `disabled`              | (optional) Whether the input is disabled.            | `boolean`                                  | `undefined` |
+| `errorText`           | `error-text`            | (optional) The input's error state text.             | `string`                                   | `undefined` |
+| `helperText`          | `helper-text`           | (optional) The input's helper text displayed below.  | `string`                                   | `undefined` |
+| `integerLimit`        | `integer-limit`         | (optional) The maximum number of integers allowed.   | `number`                                   | `undefined` |
+| `label`               | `label`                 | (optional) The input's label.                        | `string`                                   | `undefined` |
+| `maxValue`            | `max-value`             | (optional) The input's maximum value.                | `number`                                   | `undefined` |
+| `minValue`            | `min-value`             | (optional) The input's minimum value.                | `number`                                   | `undefined` |
+| `placeholder`         | `placeholder`           | (optional) The input's placeholder text.             | `string`                                   | `undefined` |
+| `readOnly`            | `read-only`             | (optional) Whether the input's content is read-only. | `boolean`                                  | `undefined` |
+| `required`            | `required`              | (optional) Whether the input is required.            | `boolean`                                  | `undefined` |
+| `size`                | `size`                  | (optional) The input's size.                         | `"large" \| "medium"`                      | `'medium'`  |
+| `step`                | `step`                  | (optional) The input's step.                         | `number`                                   | `undefined` |
+| `textAlign`           | `text-align`            | (optional) The input's text alignment.               | `"left" \| "right"`                        | `'left'`    |
+| `validText`           | `valid-text`            | (optional) The input's valid state text.             | `string`                                   | `undefined` |
+| `value`               | `value`                 | (optional) The input's value.                        | `string`                                   | `undefined` |
 
 ### DOM Events
 
@@ -76,7 +65,6 @@ This component is compatible with Angular reactive forms. This can be achieved t
 | Method name  | Description     | Parameter | Return          |
 | ------------ | --------------- | --------- | --------------- |
 | `focusInput` | Focus the input |           | `Promise<void>` |
-
 
 ### Accessibility
 
