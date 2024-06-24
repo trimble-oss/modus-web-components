@@ -1227,6 +1227,13 @@ export namespace Components {
          */
         "getColumnData": (accessorKey: string) => Promise<unknown[]>;
         /**
+          * Returns whether a cell is editable based on row index and column ID.
+          * @param rowIndex The index of the row.
+          * @param columnId The ID of the column.
+          * @returns Boolean indicating if the cell is editable.
+         */
+        "getEditableCell": (rowIndex: string, columnId: string) => Promise<void>;
+        /**
           * (Optional) To enable row hover in table.
          */
         "hover": boolean;
@@ -1310,6 +1317,13 @@ export namespace Components {
     interface ModusTableCellMain {
         "cell": Cell<unknown, unknown>;
         "context": TableContext;
+        /**
+          * Returns whether a cell is editable based on row index and column ID.
+          * @param rowIndex The index of the row.
+          * @param columnId The ID of the column.
+          * @returns Boolean indicating if the cell is editable.
+         */
+        "handleCellEdit": (rowIndex: string, columnId: string) => Promise<void>;
         "hasRowsExpandable": boolean;
         "valueChange": (props: TableCellEdited) => void;
     }
@@ -2149,6 +2163,7 @@ declare global {
         "calendarIconClicked": ModusDateInputEventDetails;
         "dateInputBlur": ModusDateInputEventDetails;
         "valueChange": ModusDateInputEventDetails;
+        "valueError": string;
     }
     interface HTMLModusDateInputElement extends Components.ModusDateInput, HTMLStencilElement {
         addEventListener<K extends keyof HTMLModusDateInputElementEventMap>(type: K, listener: (this: HTMLModusDateInputElement, ev: ModusDateInputCustomEvent<HTMLModusDateInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3384,6 +3399,10 @@ declare namespace LocalJSX {
           * An event that fires on input value change.
          */
         "onValueChange"?: (event: ModusDateInputCustomEvent<ModusDateInputEventDetails>) => void;
+        /**
+          * An event that fires on value error.
+         */
+        "onValueError"?: (event: ModusDateInputCustomEvent<string>) => void;
         /**
           * (optional) The input's placeholder text.
          */

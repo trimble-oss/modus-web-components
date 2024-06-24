@@ -6,6 +6,7 @@ import {
   Watch,
   Component,
   Prop,
+  Method,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Cell } from '@tanstack/table-core';
@@ -94,6 +95,31 @@ export class ModusTableCellMain {
       this.editMode = true;
     }
   };
+
+  /**
+   * Returns whether a cell is editable based on row index and column ID.
+   * @param rowIndex The index of the row.
+   * @param columnId The ID of the column.
+   * @returns Boolean indicating if the cell is editable.
+   */
+  @Method()
+  async handleCellEdit(rowIndex: string, columnId: string): Promise<void> {
+    const tableInstance = this.cell.getContext().table;
+    const row = tableInstance.getRowModel().rows[rowIndex];
+
+    if (!row) return;
+
+    const cell = row.getAllCells().find((cell) => cell.column.id === columnId);
+    if (!cell) return;
+
+    // Focus on the cell element
+    const cellElement = this.el.querySelector(`[data-cell-id="${rowIndex}-${columnId}"]`) as HTMLElement;
+    if (cellElement) {
+      cellElement.focus();
+    }
+
+    this.editMode = true;
+  }
 
   handleCellBlur = (event: FocusEvent) => {
     if (!this.el.contains(event.relatedTarget as HTMLElement)) {
