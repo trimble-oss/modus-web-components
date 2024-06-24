@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 import { Component, h, Prop, Event, EventEmitter, Method, Watch } from '@stencil/core';
-import Cleave from 'cleave.js';
+import { formatNumeral, FormatNumeralOptions, NumeralThousandGroupStyles } from 'cleave-zen';
 import { generateElementId } from '../../utils/utils';
 
 @Component({
@@ -25,7 +25,7 @@ export class ModusNumberInput {
   @Prop() digitGroupSeparator: ' ' | ',' | '.' = ',';
 
   /** (optional) The digit group spacing. */
-  @Prop() digitGroupSpacing: 'lakh' | 'none' | 'thousand' | 'lakh' = 'none';
+  @Prop() digitGroupSpacing: NumeralThousandGroupStyles;
 
   /** (optional) Whether the input is disabled. */
   @Prop() disabled: boolean;
@@ -82,14 +82,9 @@ export class ModusNumberInput {
     ['large', 'large'],
   ]);
   numberInput: HTMLInputElement;
-  cleaveInstance: Cleave;
 
   componentDidLoad() {
-    this.initializeCleave();
-  }
-
-  modifyInputValue(value: string) {
-    this.cleaveInstance.setRawValue(value);
+    this.formatInputValue();
   }
 
   @Watch('digitGroupSeparator')
@@ -99,31 +94,28 @@ export class ModusNumberInput {
   @Watch('currencySymbol')
   @Watch('integerLimit')
   watchPropChangeHandler() {
-    this.modifyInputValue(this.value);
+    this.formatInputValue();
   }
 
-  initializeCleave() {
-    const cleaveOptions = {
-      numeral: true,
-      numeralThousandsGroupStyle: this?.digitGroupSpacing,
-      delimiter: this?.digitGroupSeparator,
-      numeralDecimalMark: this?.decimalCharacter,
-      prefix: this?.currencySymbol,
-      numeralIntegerScale: this?.integerLimit,
-      numeralDecimalScale: this?.decimalPlaces,
-      rawValueTrimPrefix: true,
-    };
+  formatInputValue() {
+    if (this.numberInput) {
+      const options: FormatNumeralOptions = {
+        numeralThousandsGroupStyle: this?.digitGroupSpacing,
+        delimiter: this?.digitGroupSeparator,
+        numeralDecimalMark: this?.decimalCharacter,
+        prefix: this?.currencySymbol,
+        numeralIntegerScale: this?.integerLimit,
+        numeralDecimalScale: this?.decimalPlaces,
+      };
 
-    this.cleaveInstance = new Cleave(this.numberInput, cleaveOptions);
-
-    if (this.value) {
-      this.numberInput.value = this.value;
-      this.cleaveInstance.setRawValue(this.value);
+      const formattedValue = formatNumeral(this.numberInput.value, options);
+      this.numberInput.value = formattedValue;
+      this.value = formattedValue;
     }
   }
 
   handleOnInput(): void {
-    this.value = this.numberInput.value;
+    this.formatInputValue();
     this.valueChange.emit(this.value);
   }
 
