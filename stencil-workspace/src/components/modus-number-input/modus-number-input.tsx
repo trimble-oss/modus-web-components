@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import { Component, h, Prop, Event, EventEmitter, Method, Watch } from '@stencil/core';
 import Cleave from 'cleave.js';
 import { generateElementId } from '../../utils/utils';
@@ -190,6 +191,7 @@ export class ModusNumberInput {
             aria-valuenow={this.value}
             class={textAlignClassName}
             disabled={this.disabled}
+            inputMode="numeric"
             max={this.maxValue}
             min={this.minValue}
             onInput={() => this.handleOnInput()}

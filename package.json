@@ -22,8 +22,5 @@
   },
   "engines": {
     "node": ">=16.20.2"
-  },
-  "dependencies": {
-    "cleave.js": "^1.6.0"
   }
 }
