@@ -117,15 +117,6 @@ const blueLogo = {
     url: 'https://modus-bootstrap.trimble.com/img/trimble-icon-rev.svg',
   },
 };
-const defaultDropdownOptions = {
-  ariaLabel: 'Project dropdown',
-  defaultValue: '2',
-  items: [
-    { text: 'Project 1', value: '1' },
-    { text: 'Project 2', value: '2' },
-    { text: 'Project 3', value: '3' },
-  ],
-};
 const defaultApps = [
   {
     description: 'The One Trimble Design System',
@@ -161,7 +152,6 @@ const Template = ({
     .buttons=${buttons}
     .helpTooltip=${helpTooltip}
     .logoOptions=${defaultLogo}
-    .dropdownOptions=${defaultDropdownOptions}
     .profileMenuOptions=${profileMenuOptions}
     .searchTooltip=${searchTooltip}>
     <div slot="main" style="height:300px;">Render your own main menu.</div>
@@ -179,16 +169,6 @@ const Template = ({
 export const Default = Template.bind({});
 Default.args = {
   enableSearchOverlay: false,
-  buttons: [
-    {
-      id: 'addMenu',
-      icon: 'add',
-      tooltip: {
-        text: 'Add',
-      },
-    },
-    { id: 'notificationMenu', icon: 'notifications' },
-  ],
   helpTooltip: undefined,
   navAriaLabel: 'Default',
   profileMenuOptions: {
@@ -321,6 +301,91 @@ BlueNavbar.args = {
     initials: 'MU',
     signOutText: 'Sign out',
     username: 'Modus User',
+  },
+  searchTooltip: undefined,
+  showHelp: false,
+  showProfile: true,
+  showSearch: false,
+  notificationCount: 0,
+};
+
+const dropdownOptions = {
+  ariaLabel: 'Project dropdown',
+  defaultValue: '2',
+  items: [
+    { text: 'Project 1', value: '1' },
+    { text: 'Project 2', value: '2' },
+    { text: 'Project 3', value: '3' },
+  ],
+};
+
+const WithOptionalFeaturesTemplate = ({
+  buttons,
+  notificationCount,
+  enableSearchOverlay,
+  helpTooltip,
+  navAriaLabel,
+  profileMenuOptions,
+  searchTooltip,
+  showHelp,
+  showProfile,
+  showSearch,
+}) => html`
+  <modus-navbar
+    enable-search-overlay=${enableSearchOverlay}
+    nav-aria-label=${navAriaLabel}
+    show-apps-menu
+    show-help=${showHelp}
+    show-main-menu
+    show-profile=${showProfile}
+    show-search=${showSearch}
+    notification-count=${notificationCount}
+    show-notifications
+    .apps=${defaultApps}
+    .buttons=${buttons}
+    .helpTooltip=${helpTooltip}
+    .logoOptions=${defaultLogo}
+    .dropdownOptions=${dropdownOptions}
+    .profileMenuOptions=${profileMenuOptions}
+    .searchTooltip=${searchTooltip}>
+    <div slot="main" style="height:300px;">Render your own main menu.</div>
+
+    <modus-list slot="addMenu">
+      <modus-list-item>Menu Item 1</modus-list-item>
+      <modus-list-item>Menu Item 2</modus-list-item>
+    </modus-list>
+
+    <div slot="notificationMenu">Render your own notification menu.</div>
+    <div slot="profileMenu">Render your own profile menu content.</div>
+  </modus-navbar>
+`;
+
+export const WithOptionalFeatures = WithOptionalFeaturesTemplate.bind({});
+WithOptionalFeatures.args = {
+  enableSearchOverlay: false,
+  helpTooltip: undefined,
+  navAriaLabel: 'Default',
+  profileMenuOptions: {
+    avatarUrl: workingAvatarUrl,
+    email: 'modus_user@trimble.com',
+    initials: 'MU',
+    signOutText: 'Sign out',
+    username: 'Modus User',
+    links: [
+      {
+        id: 'link1',
+        display: 'Link 1',
+        icon: 'moon',
+      },
+      {
+        id: 'link2',
+        display: 'Link 2',
+        icon: 'sun',
+      },
+    ],
+    tooltip: {
+      text: 'User Profile Menu',
+    },
   },
   searchTooltip: undefined,
   showHelp: false,
