@@ -125,6 +125,7 @@ export class ModusAutocomplete {
   @State() visibleCustomOptions: Array<any> = [];
   @State() disableFiltering = false;
   @State() focusItemIndex = 0;
+  @State() ShowItemsOnKeyDown = false;
   private listId = generateElementId() + '_list';
 
   componentWillLoad(): void {
@@ -145,6 +146,7 @@ export class ModusAutocomplete {
 
     if (this.el !== event.target || !this.el.contains(event.target as Node)) {
       this.hasFocus = false;
+      this.ShowItemsOnKeyDown = false;
     }
   }
 
@@ -172,7 +174,8 @@ export class ModusAutocomplete {
     this.value?.length > 0;
 
   displayOptions = () => {
-    const showOptions = this.showOptionsOnFocus || this.value?.length > 0 || this.disableCloseOnSelect;
+    const showOptions =
+      this.showOptionsOnFocus || this.value?.length > 0 || this.disableCloseOnSelect || this.ShowItemsOnKeyDown;
     return this.hasFocus && showOptions && !this.disabled;
   };
 
@@ -210,6 +213,7 @@ export class ModusAutocomplete {
       return; // Do nothing if event already handled
     }
     if (event.code.toUpperCase() === 'ARROWDOWN') {
+      this.ShowItemsOnKeyDown = true;
       if (this.displayOptions() && !this.displayNoResults()) {
         this.focusItemIndex = 0;
         this.focusOptionItem();
