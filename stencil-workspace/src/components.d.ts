@@ -1424,6 +1424,10 @@ export namespace Components {
          */
         "helperText": string;
         /**
+          * (optional) Whether the error icon is included.
+         */
+        "includeErrorIcon": boolean;
+        /**
           * (optional) Whether the password text toggle icon is included.
          */
         "includePasswordTextToggle": boolean;
@@ -4438,6 +4442,10 @@ declare namespace LocalJSX {
           * (optional) The input's helper text displayed below the input.
          */
         "helperText"?: string;
+        /**
+          * (optional) Whether the error icon is included.
+         */
+        "includeErrorIcon"?: boolean;
         /**
           * (optional) Whether the password text toggle icon is included.
          */
