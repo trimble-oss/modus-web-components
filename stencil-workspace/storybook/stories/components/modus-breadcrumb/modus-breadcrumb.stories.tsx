@@ -19,6 +19,11 @@ export default {
       inlineStories: false,
       page: docs,
     },
+    actions: {
+      handles: [
+        'crumbClick',
+      ],
+    },
     controls: {
       disabled: false,
       expanded: true,
