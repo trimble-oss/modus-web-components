@@ -178,9 +178,6 @@ export class ModusNumberInput {
             aria-label={this.ariaLabel}
             aria-invalid={!!this.errorText}
             aria-required={this.required?.toString()}
-            aria-valuemax={this.maxValue}
-            aria-valuemin={this.minValue}
-            aria-valuenow={this.value}
             class={textAlignClassName}
             disabled={this.disabled}
             inputMode="decimal"
