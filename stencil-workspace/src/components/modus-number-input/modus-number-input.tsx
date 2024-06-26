@@ -183,7 +183,7 @@ export class ModusNumberInput {
             aria-valuenow={this.value}
             class={textAlignClassName}
             disabled={this.disabled}
-            inputMode="numeric"
+            inputMode="decimal"
             max={this.maxValue}
             min={this.minValue}
             onInput={() => this.handleOnInput()}
