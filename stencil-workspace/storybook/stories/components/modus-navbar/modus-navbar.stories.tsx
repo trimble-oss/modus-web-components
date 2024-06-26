@@ -82,7 +82,7 @@ export default {
   },
   parameters: {
     actions: {
-      handles: ['searchMenuClick', 'buttonClick', 'productLogoClick', 'helpOpen'],
+      handles: ['searchMenuClick', 'buttonClick', 'productLogoClick', 'helpOpen', 'profileMenuSignOutClick'],
     },
     controls: { expanded: true, sort: 'requiredFirst' },
     docs: {
