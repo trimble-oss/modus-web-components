@@ -165,6 +165,8 @@
   --modus-btn-icon-only-secondary-hover-color: var(--modus-trimble-gray);
   --modus-btn-icon-only-secondary-active-bg: var(--modus-gray-1);
   --modus-btn-icon-only-secondary-active-color: var(--modus-trimble-gray);
+  --modus-btn-borderless-secondary-color: (var(--modus-black));
+  --modus-btn-borderless-secondary-hover-bg: var(--modus-gray-0);
 
   // Tertiary
   --modus-btn-icon-only-tertiary-color: var(--modus-gray-6);
@@ -422,6 +424,12 @@
 
   // Radio Button
   --modus-radio-btn-focus-color: #3db0ee;
+
+  // Toolbar
+  --modus-toolbar-bg: var(--modus-white);
+
+  // Divider
+  --modus-toolbar-divider-bg: var(--modus-trimble-gray);
 }
 
 [data-mwc-theme='dark'] {
@@ -523,6 +531,8 @@
   --modus-btn-icon-only-secondary-hover-color: var(--modus-white);
   --modus-btn-icon-only-secondary-active-bg: var(--modus-gray-6);
   --modus-btn-icon-only-secondary-active-color: var(--modus-white);
+  --modus-btn-borderless-secondary-color: (var(--modus-white));
+  --modus-btn-borderless-secondary-hover-bg: #32363b;
 
   // Tertiary
   --modus-btn-icon-only-tertiary-color: var(--modus-gray-4);
@@ -779,6 +789,12 @@
 
   // Radio Button
   --modus-radio-btn-focus-color: #0a7ebc;
+
+  // Toolbar
+  --modus-toolbar-bg: var(--modus-gray-10);
+
+  // Divider
+  --modus-toolbar-divider-bg: var(--modus-white);
 }
 
 // Mixins

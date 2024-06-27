@@ -126,12 +126,6 @@
         font-size: $rem-14px;
         padding: 0 $rem-16px;
       }
-
-      &:focus-within,
-      &.error,
-      &.valid {
-        height: 3rem; // Counteract bottom border width.
-      }
     }
   }
 
@@ -141,12 +135,14 @@
   }
 
   .sub-text {
-    font-size: $rem-11px;
+    font-size: $rem-12px;
     margin-top: $rem-4px;
 
     &.helper {
       color: $modus-input-label-color;
+      display: block;
       font-weight: 600;
+      margin: 0;
     }
 
     &.error {
