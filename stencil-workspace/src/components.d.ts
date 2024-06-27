@@ -3744,7 +3744,7 @@ declare namespace LocalJSX {
          */
         "onButtonClick"?: (event: ModusNavbarCustomEvent<string>) => void;
         /**
-          * An event that fires when a dropdown option is selected *
+          * An event that fires when a dropdown item is selected *
          */
         "onDropdownItemSelect"?: (event: ModusNavbarCustomEvent<ModusNavbarDropdownItem>) => void;
         /**
