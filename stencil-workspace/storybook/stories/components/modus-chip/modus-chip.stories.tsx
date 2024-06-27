@@ -95,7 +95,7 @@ export default {
       },
     },
     chipId: {
-      description: "This chip's id, this created much more visiblity for testing",
+      description: "This chip's id will create much more visibility for testing",
       table: {
         type: { summary: `string` },
       },
