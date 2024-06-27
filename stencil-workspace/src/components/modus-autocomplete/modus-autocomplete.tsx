@@ -218,6 +218,8 @@ export class ModusAutocomplete {
         this.focusItemIndex = 0;
         this.focusOptionItem();
       }
+    } else if (event.code.toUpperCase() === 'ESCAPE') {
+      this.ShowItemsOnKeyDown = false;
     }
   };
 
