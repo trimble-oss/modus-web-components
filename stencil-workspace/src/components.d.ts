@@ -15,7 +15,7 @@ import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRow
 import { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
 import { ModusIconName } from "./icons/ModusIconUtilities";
 import { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
-import { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
+import { ModusNavbarButton, ModusNavbarDropdownItem, ModusNavbarDropdownOptions, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { ModusSentimentScaleType } from "./components/modus-sentiment-scale/modus-sentiment-scale.models";
@@ -26,8 +26,8 @@ import { TableCellEdited, TableContext } from "./components/modus-table/models/t
 import { Tab } from "./components/modus-tabs/modus-tabs";
 import { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
 import { ModusToolTipPlacement } from "./components/modus-tooltip/modus-tooltip.models";
+import { TreeViewItemInfo, TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 import { ModusActionBarOptions as ModusActionBarOptions1 } from "./components/modus-action-bar/modus-action-bar";
-import { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export { ModusActionBarOptions } from "./components/modus-action-bar/modus-action-bar";
 export { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
 export { BadgeProperties } from "./components/modus-badge/modus-badge";
@@ -38,7 +38,7 @@ export { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRow
 export { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
 export { ModusIconName } from "./icons/ModusIconUtilities";
 export { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
-export { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
+export { ModusNavbarButton, ModusNavbarDropdownItem, ModusNavbarDropdownOptions, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
 export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 export { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 export { ModusSentimentScaleType } from "./components/modus-sentiment-scale/modus-sentiment-scale.models";
@@ -49,8 +49,8 @@ export { TableCellEdited, TableContext } from "./components/modus-table/models/t
 export { Tab } from "./components/modus-tabs/modus-tabs";
 export { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
 export { ModusToolTipPlacement } from "./components/modus-tooltip/modus-tooltip.models";
+export { TreeViewItemInfo, TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export { ModusActionBarOptions as ModusActionBarOptions1 } from "./components/modus-action-bar/modus-action-bar";
-export { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export namespace Components {
     interface ModusAccordion {
         /**
@@ -780,6 +780,10 @@ export namespace Components {
          */
         "buttons": ModusNavbarButton[];
         /**
+          * (optional) Dropdown options.
+         */
+        "dropdownOptions": ModusNavbarDropdownOptions;
+        /**
           * (optional) Whether to show search overlay or not.
          */
         "enableSearchOverlay": boolean;
@@ -1423,6 +1427,10 @@ export namespace Components {
           * (optional) The input's helper text displayed below the input.
          */
         "helperText": string;
+        /**
+          * (optional) Whether the error icon is included.
+         */
+        "includeErrorIcon": boolean;
         /**
           * (optional) Whether the password text toggle icon is included.
          */
@@ -2296,6 +2304,7 @@ declare global {
         "appsMenuAppOpen": ModusNavbarApp;
         "buttonClick": string;
         "helpOpen": void;
+        "dropdownItemSelect": ModusNavbarDropdownItem;
         "mainMenuClick": KeyboardEvent | MouseEvent;
         "notificationsMenuOpen": void;
         "productLogoClick": MouseEvent;
@@ -2753,6 +2762,7 @@ declare global {
         new (): HTMLModusTooltipElement;
     };
     interface HTMLModusTreeViewElementEventMap {
+        "itemDrop": { [key: string]: TreeViewItemInfo };
         "itemActionClick": any;
     }
     interface HTMLModusTreeViewElement extends Components.ModusTreeView, HTMLStencilElement {
@@ -3681,6 +3691,10 @@ declare namespace LocalJSX {
          */
         "buttons"?: ModusNavbarButton[];
         /**
+          * (optional) Dropdown options.
+         */
+        "dropdownOptions"?: ModusNavbarDropdownOptions;
+        /**
           * (optional) Whether to show search overlay or not.
          */
         "enableSearchOverlay"?: boolean;
@@ -3716,6 +3730,10 @@ declare namespace LocalJSX {
           * An event that fires when a button in the custom button list is clicked.
          */
         "onButtonClick"?: (event: ModusNavbarCustomEvent<string>) => void;
+        /**
+          * An event that fires when a dropdown option is selected *
+         */
+        "onDropdownItemSelect"?: (event: ModusNavbarCustomEvent<ModusNavbarDropdownItem>) => void;
         /**
           * An event that fires when the help link opens.
          */
@@ -4439,6 +4457,10 @@ declare namespace LocalJSX {
          */
         "helperText"?: string;
         /**
+          * (optional) Whether the error icon is included.
+         */
+        "includeErrorIcon"?: boolean;
+        /**
           * (optional) Whether the password text toggle icon is included.
          */
         "includePasswordTextToggle"?: boolean;
@@ -4766,6 +4788,7 @@ declare namespace LocalJSX {
           * Fired when an action is clicked within any tree item. Includes both the `actionId` and `nodeId` of the action and item, respectively.
          */
         "onItemActionClick"?: (event: ModusTreeViewCustomEvent<any>) => void;
+        "onItemDrop"?: (event: ModusTreeViewCustomEvent<{ [key: string]: TreeViewItemInfo }>) => void;
         /**
           * (optional) Set selected tree items
          */
