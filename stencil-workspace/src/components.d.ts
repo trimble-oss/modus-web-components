@@ -15,7 +15,7 @@ import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRow
 import { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
 import { ModusIconName } from "./icons/ModusIconUtilities";
 import { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
-import { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
+import { ModusNavbarButton, ModusNavbarDropdownItem, ModusNavbarDropdownOptions, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { ModusSentimentScaleType } from "./components/modus-sentiment-scale/modus-sentiment-scale.models";
@@ -38,7 +38,7 @@ export { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRow
 export { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
 export { ModusIconName } from "./icons/ModusIconUtilities";
 export { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
-export { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
+export { ModusNavbarButton, ModusNavbarDropdownItem, ModusNavbarDropdownOptions, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
 export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 export { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 export { ModusSentimentScaleType } from "./components/modus-sentiment-scale/modus-sentiment-scale.models";
@@ -779,6 +779,10 @@ export namespace Components {
           * (optional) The buttons to render in the Navbar.
          */
         "buttons": ModusNavbarButton[];
+        /**
+          * (optional) Dropdown options.
+         */
+        "dropdownOptions": ModusNavbarDropdownOptions;
         /**
           * (optional) Whether to show search overlay or not.
          */
@@ -2300,6 +2304,7 @@ declare global {
         "appsMenuAppOpen": ModusNavbarApp;
         "buttonClick": string;
         "helpOpen": void;
+        "dropdownItemSelect": ModusNavbarDropdownItem;
         "mainMenuClick": KeyboardEvent | MouseEvent;
         "notificationsMenuOpen": void;
         "productLogoClick": MouseEvent;
@@ -3686,6 +3691,10 @@ declare namespace LocalJSX {
          */
         "buttons"?: ModusNavbarButton[];
         /**
+          * (optional) Dropdown options.
+         */
+        "dropdownOptions"?: ModusNavbarDropdownOptions;
+        /**
           * (optional) Whether to show search overlay or not.
          */
         "enableSearchOverlay"?: boolean;
@@ -3721,6 +3730,10 @@ declare namespace LocalJSX {
           * An event that fires when a button in the custom button list is clicked.
          */
         "onButtonClick"?: (event: ModusNavbarCustomEvent<string>) => void;
+        /**
+          * An event that fires when a dropdown option is selected *
+         */
+        "onDropdownItemSelect"?: (event: ModusNavbarCustomEvent<ModusNavbarDropdownItem>) => void;
         /**
           * An event that fires when the help link opens.
          */
