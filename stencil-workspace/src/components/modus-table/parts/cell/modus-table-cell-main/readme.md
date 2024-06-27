@@ -45,12 +45,14 @@ Boolean indicating if the cell is editable.
 
 - [modus-table-cell-editor](../modus-table-cell-editor)
 - [modus-badge](../../../../modus-badge)
+- [modus-checkbox](../../../../modus-checkbox)
 
 ### Graph
 ```mermaid
 graph TD;
   modus-table-cell-main --> modus-table-cell-editor
   modus-table-cell-main --> modus-badge
+  modus-table-cell-main --> modus-checkbox
   modus-table-cell-editor --> modus-number-input
   modus-table-cell-editor --> modus-text-input
   modus-table-cell-editor --> modus-select

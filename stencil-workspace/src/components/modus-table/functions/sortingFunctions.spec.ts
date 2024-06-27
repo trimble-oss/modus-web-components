@@ -1,15 +1,26 @@
 import { Row } from '@tanstack/table-core';
-import { sortBadge as sortForBadge, sortHyperlink as sortForHyperlink } from './sortingFunction';
+import {
+  sortBadge as sortForBadge,
+  sortHyperlink as sortForHyperlink,
+  sortCheckbox as sortForCheckbox,
+} from './sortingFunction';
 
 interface RowValue {
   display: string;
   text: string;
+  checked: boolean;
 }
 describe('Sorting Functions', () => {
   const mockRows: Row<unknown>[] = [
-    { getValue: (columnId: string) => (columnId === 'testColumn' ? { display: 'C', text: '2' } : null) } as Row<unknown>,
-    { getValue: (columnId: string) => (columnId === 'testColumn' ? { display: 'A', text: '1' } : null) } as Row<unknown>,
-    { getValue: (columnId: string) => (columnId === 'testColumn' ? { display: 'B', text: '3' } : null) } as Row<unknown>,
+    {
+      getValue: (columnId: string) => (columnId === 'testColumn' ? { display: 'C', text: '2', checked: true } : null),
+    } as Row<unknown>,
+    {
+      getValue: (columnId: string) => (columnId === 'testColumn' ? { display: 'A', text: '1', checked: false } : null),
+    } as Row<unknown>,
+    {
+      getValue: (columnId: string) => (columnId === 'testColumn' ? { display: 'B', text: '3', checked: true } : null),
+    } as Row<unknown>,
   ];
 
   describe('sortForHyperlink', () => {
@@ -27,6 +38,15 @@ describe('Sorting Functions', () => {
       expect((sorted[0].getValue('testColumn') as RowValue).text).toBe('1');
       expect((sorted[1].getValue('testColumn') as RowValue).text).toBe('2');
       expect((sorted[2].getValue('testColumn') as RowValue).text).toBe('3');
+    });
+  });
+
+  describe('sortForCheckbox', () => {
+    it('should sort rows based on checked value', () => {
+      const sorted = [...mockRows].sort((a, b) => sortForCheckbox(a, b, 'testColumn'));
+      expect((sorted[0].getValue('testColumn') as RowValue).checked).toBe(true);
+      expect((sorted[1].getValue('testColumn') as RowValue).checked).toBe(true);
+      expect((sorted[2].getValue('testColumn') as RowValue).checked).toBe(false);
     });
   });
 });
