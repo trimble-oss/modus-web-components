@@ -217,7 +217,10 @@ const Template = ({
   </div>
 `;
 
-const defaultOptions = ['Apple', 'Banana', 'Orange'];
+const defaultOptions = [
+  'Apple', 'Banana', 'Orange', 'Mango', 'Pineapple', 'Grapes', 'Watermelon', 'Strawberry', 'Blueberry', 'Raspberry',
+  'Blackberry', 'Cherry', 'Peach', 'Pear', 'Plum', 'Kiwi', 'Lemon', 'Lime', 'Papaya', 'Passion Fruit'
+];
 
 const defaultArgs = {
   ariaLabel: 'autocomplete',
@@ -254,8 +257,8 @@ Default.args = defaultArgs;
 export const WithOption = Template.bind({});
 WithOption.args = { ...defaultArgs, label: 'Autocomplete using option model' };
 
-export const WithChips = Template.bind({});
-WithChips.args = { ...defaultArgs, label: 'Autocomplete using chips', multiple: true, options: customOptions };
+export const MultipleSelection = Template.bind({});
+MultipleSelection.args = { ...defaultArgs, label: 'Autocomplete with multiple selection', multiple: true, options: customOptions };
 
 export const WithCustomOption = ({
   ariaLabel,

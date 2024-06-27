@@ -133,6 +133,8 @@ export class ModusDateInput {
 
   /** An event that fires on input value change. */
   @Event() valueChange: EventEmitter<ModusDateInputEventDetails>;
+  /** An event that fires on value error.*/
+  @Event() valueError: EventEmitter<string>;
 
   private classBySize: Map<string, string> = new Map([
     ['medium', 'medium'],
@@ -269,11 +271,13 @@ export class ModusDateInput {
     if (!inputString) {
       if (this.required) {
         this.errorText = 'Required';
+        this.valueError.emit(this.errorText);
       } else {
         this.clearValidation();
       }
     } else if (!this.value) {
       this.errorText = 'Invalid date';
+      this.valueError.emit(this.errorText);
     } else {
       this.validateMinMax();
     }
@@ -287,9 +291,11 @@ export class ModusDateInput {
     if (min && min > value) {
       min.setUTCDate(min.getDate() - 1);
       this.errorText = `Select a date after ${this._formatter.formatDisplayString(min.toISOString())}`;
+      this.valueError.emit(this.errorText);
     } else if (max && max < value) {
       max.setUTCDate(max.getDate() + 1);
       this.errorText = `Select a date before ${this._formatter.formatDisplayString(max.toISOString())}`;
+      this.valueError.emit(this.errorText);
     } else {
       this.clearValidation();
     }
@@ -310,7 +316,7 @@ export class ModusDateInput {
           class={`input-container ${this.errorText ? 'error' : this.validText ? 'valid' : ''} ${this.classBySize.get(
             this.size
           )}`}
-          part="input-container">
+          part={`input-container ${this.errorText ? 'error' : this.validText ? 'valid' : ''}`}>
           <input
             aria-invalid={!!this.errorText}
             aria-label={this.ariaLabel || undefined}
@@ -342,7 +348,7 @@ export class ModusDateInput {
             </span>
           )}
         </div>
-        <div class="sub-text">
+        <div class="sub-text" part="sub-text">
           {this.errorText ? (
             <label class="error">{this.errorText}</label>
           ) : this.validText ? (

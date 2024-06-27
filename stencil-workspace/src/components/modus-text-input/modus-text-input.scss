@@ -147,6 +147,11 @@
 
     &.error {
       color: $modus-input-validation-error-color;
+      display: inline-flex;
+
+      svg {
+        margin-right: 0.25rem;
+      }
     }
 
     &.valid {
