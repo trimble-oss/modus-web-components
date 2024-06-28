@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 import { Component, h, Prop, Event, EventEmitter, Method, Watch } from '@stencil/core';
-import { formatNumeral, FormatNumeralOptions, NumeralThousandGroupStyles } from 'cleave-zen';
+import { formatNumeral, formatCreditCard, FormatNumeralOptions, NumeralThousandGroupStyles } from 'cleave-zen';
 import { generateElementId } from '../../utils/utils';
 import { ModusIconMap } from '../../icons/ModusIconMap';
 
@@ -39,6 +39,9 @@ export class ModusNumberInput {
 
   /** (optional) The maximum number of integers allowed. */
   @Prop() integerLimit: number;
+
+  /** (optional)  */
+  @Prop() isCreditCard: boolean;
 
   /** (optional) The input's label. */
   @Prop() label: string;
@@ -108,7 +111,9 @@ export class ModusNumberInput {
         numeralIntegerScale: this?.integerLimit,
         numeralDecimalScale: this?.decimalPlaces,
       };
-      const formattedValue = formatNumeral(this.numberInput.value, options);
+      const formattedValue = this.isCreditCard
+        ? formatCreditCard(this.numberInput.value, options)
+        : formatNumeral(this.numberInput.value, options);
       this.numberInput.value = formattedValue;
       this.value = formattedValue;
     }
@@ -193,12 +198,12 @@ export class ModusNumberInput {
             type="text"
             value={this.value}></input>
           <div class="value-adjusters">
-            <button class="increment" onClick={() => this.incrementValue()}>
-              <ModusIconMap icon="caret_up" />
-            </button>
-            <button class="decrement" onClick={() => this.decrementValue()}>
-              <ModusIconMap icon="caret_down" />
-            </button>
+            <div class="increment" onClick={() => this.incrementValue()}>
+              <ModusIconMap icon="caret_up" size="16" />
+            </div>
+            <div class="decrement" onClick={() => this.decrementValue()}>
+              <ModusIconMap icon="caret_down" size="16" />
+            </div>
           </div>
         </div>
         {this.errorText ? (

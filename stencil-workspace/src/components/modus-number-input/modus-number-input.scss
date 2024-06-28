@@ -46,26 +46,37 @@
       padding: $rem-4px 0;
       width: 24px;
 
-      button {
-        background-color: transparent;
+      div {
+        align-items: center;
+        background-color: #f1f1f1;
         border: none;
         color: $modus-input-color;
         cursor: pointer;
+        display: flex;
         font-size: $rem-12px;
-        height: 50%;
+        height: 10px;
+        justify-content: center;
+        opacity: 0;
         outline: 0;
         padding: 0;
         text-align: center;
-        width: 100%;
-        //add hover effect
-        &:hover {
-          background-color: grey;
+        width: 15px;
+
+        &:hover,
+        &:active,
+        .input-container:focus-within & {
+          opacity: 1;
+          background-color: #d2d2d2;
+          color: #4f4f4f;
         }
+
         &:active {
-          background-color: lightgray;
+          background-color: #787878;
+          color: #fefefe;
         }
       }
     }
+
     input {
       background-color: transparent;
       border: none;
@@ -88,16 +99,15 @@
     &:focus-within {
       border-color: $modus-input-border-active-color;
       box-shadow: 0 0 0 1px $modus-input-border-active-color;
+
+      .value-adjusters div {
+        opacity: 1;
+      }
     }
 
     &.error {
       border-color: $modus-input-validation-error-color;
       box-shadow: 0 0 0 1px $modus-input-validation-error-color;
-    }
-
-    &.valid {
-      border-color: $modus-input-validation-success-color;
-      box-shadow: 0 0 0 1px $modus-input-validation-success-color;
     }
 
     &.large {
@@ -108,6 +118,11 @@
         height: 47px;
         padding: 0 $rem-16px;
       }
+    }
+
+    &.valid {
+      border-color: $modus-input-validation-success-color;
+      box-shadow: 0 0 0 1px $modus-input-validation-success-color;
     }
   }
 
