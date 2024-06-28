@@ -29,8 +29,7 @@ export default {
   },
 };
 
-export const Default = ({ color, size }) =>
-  html` <modus-spinner color=${color} size=${size}> </modus-spinner> `;
+export const Default = ({ color, size }) => html` <modus-spinner color=${color} size=${size}> </modus-spinner> `;
 Default.args = {
   color: '#005F9E',
   size: '2rem',
