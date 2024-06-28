@@ -968,6 +968,7 @@ RowActions.args = {
     {
       id: '1',
       icon: 'add',
+      iconColor: 'primary',
       label: 'Add',
       index: 0,
     },
@@ -981,7 +982,8 @@ RowActions.args = {
 
     {
       id: '3',
-      icon: 'cancel',
+      icon: 'cancel_circle',
+      iconColor: 'danger',
       label: 'Cancel',
       index: 2,
     },

@@ -749,6 +749,7 @@ interface ModusTableRowSelectionOptions {
 interface ModusTableRowAction {
   id: string;
   icon?: string;
+  iconColor?: ButtonColor;
   label?: string;
   index: number;
   isDisabled?: (row: unknown) => boolean;

@@ -12,6 +12,7 @@ import {
   VisibilityState,
 } from '@tanstack/table-core';
 import { BadgeProperties } from '../../modus-badge/modus-badge';
+import { ButtonColor } from '../../modus-button/modus-button.models';
 import {
   COLUMN_DEF_DATATYPE_INTEGER,
   COLUMN_DEF_DATATYPE_LINK,
@@ -65,6 +66,7 @@ export type ModusTableSortingFunction<TData extends RowData> = SortingFnOption<T
 export interface ModusTableRowAction {
   id: string;
   icon?: string;
+  iconColor?: ButtonColor;
   label?: string;
   index: number;
   isDisabled?: (row: unknown) => boolean;

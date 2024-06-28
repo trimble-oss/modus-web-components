@@ -1,9 +1,9 @@
 // Default theme colors
 $btn-theme-colors: (
-  'primary': #0063a3,
+  'primary': $col_blue,
   'secondary': #6a6e79,
-  'tertiary': #cbcdd6,
-  'danger': #da212c,
+  'tertiary': $col_gray_1,
+  'danger': $col_red,
 );
 $btn-hover-colors: (
   'primary': #0082d6,
@@ -20,7 +20,7 @@ $btn-active-colors: (
 
 // Default Outline
 $btn-outline-theme-colors: (
-  'primary': #0063a3,
+  'primary': $col_blue,
   'secondary': $col_trimble_gray,
 );
 $btn-outline-hover: (
@@ -46,7 +46,7 @@ $btn-outline-active: (
 
 // Default Borderless
 $modus-btn-borderless-bg: var(--modus-btn-text-primary-bg, transparent) !default;
-$modus-btn-borderless-color: var(--modus-btn-text-primary-color, #0063a3) !default;
+$modus-btn-borderless-color: var(--modus-btn-text-primary-color, $col_blue) !default;
 $modus-btn-borderless-secondary-color: var(--modus-btn-borderless-secondary-color, #000) !default;
 
 // Hover
@@ -88,35 +88,44 @@ $modus-btn-disabled-border-color: var(--modus-btn-disabled-border-color) !defaul
 
 // Default Icon-only
 $btn-icon-only-theme-colors: (
-  'primary': #0063a3,
+  'primary': $col_blue,
   'secondary': $col_trimble_gray,
   'tertiary': $col_gray_6,
+  'danger': $col_red,
 );
 $btn-icon-only-hover: (
+  'primary': (
+    'bg': #dcedf9,
+    'color': $col_blue_light,
+  ),
   'secondary': (
-    'bg': #e0e1e9,
+    'bg': $col_gray_0,
     'color': $col_gray_6,
   ),
   'tertiary': (
-    'bg': #e0e1e9,
+    'bg': $col_gray_0,
     'color': $col_trimble_gray,
   ),
-  'primary': (
-    'bg': #dcedf9,
-    'color': #217cbb,
+  'danger': (
+    'bg': $col_gray_0,
+    'color': $col_red,
   ),
 );
 $btn-icon-only-active: (
-  'tertiary': (
-    'bg': #cbcdd6,
-    'color': $col_trimble_gray,
-  ),
-  'secondary': (
-    'bg': #cbcdd6,
-    'color': $col_trimble_gray,
-  ),
   'primary': (
     'bg': rgba(0, 99, 163, 0.18),
     'color': #004f83,
+  ),
+  'secondary': (
+    'bg': $col_gray_1,
+    'color': $col_trimble_gray,
+  ),
+  'tertiary': (
+    'bg': $col_gray_1,
+    'color': $col_trimble_gray,
+  ),
+  'danger': (
+    'bg': $col_gray_1,
+    'color': $col_red,
   ),
 );
