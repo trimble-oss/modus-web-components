@@ -38,6 +38,34 @@
     flex-direction: row;
     height: 32px;
 
+    .value-adjusters {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-right: $rem-8px;
+      padding: $rem-4px 0;
+      width: 24px;
+
+      button {
+        background-color: transparent;
+        border: none;
+        color: $modus-input-color;
+        cursor: pointer;
+        font-size: $rem-12px;
+        height: 50%;
+        outline: 0;
+        padding: 0;
+        text-align: center;
+        width: 100%;
+        //add hover effect
+        &:hover {
+          background-color: grey;
+        }
+        &:active {
+          background-color: lightgray;
+        }
+      }
+    }
     input {
       background-color: transparent;
       border: none;

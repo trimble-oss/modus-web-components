@@ -13,6 +13,14 @@ describe('modus-number-input', () => {
           <div class="modus-number-input">
             <div class="input-container medium" part="input-container">
               <input class="text-align-left" id="mwc_id_0_number-input" inputmode="decimal" tabindex="0" type="text" value="">
+                <div class="value-adjusters">
+                    <button class="increment">
+                        +
+                    </button>
+                    <button class="decrement">
+                        -
+                    </button>
+                </div>
             </div>
           </div>
         </mock:shadow-root>

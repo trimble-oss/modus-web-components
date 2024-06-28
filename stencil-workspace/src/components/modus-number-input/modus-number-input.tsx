@@ -2,6 +2,7 @@
 import { Component, h, Prop, Event, EventEmitter, Method, Watch } from '@stencil/core';
 import { formatNumeral, FormatNumeralOptions, NumeralThousandGroupStyles } from 'cleave-zen';
 import { generateElementId } from '../../utils/utils';
+import { ModusIconMap } from '../../icons/ModusIconMap';
 
 @Component({
   tag: 'modus-number-input',
@@ -107,7 +108,6 @@ export class ModusNumberInput {
         numeralIntegerScale: this?.integerLimit,
         numeralDecimalScale: this?.decimalPlaces,
       };
-
       const formattedValue = formatNumeral(this.numberInput.value, options);
       this.numberInput.value = formattedValue;
       this.value = formattedValue;
@@ -184,6 +184,7 @@ export class ModusNumberInput {
             max={this.maxValue}
             min={this.minValue}
             onInput={() => this.handleOnInput()}
+            onWheel={(event) => this.handleWheel(event)}
             placeholder={this.placeholder}
             readonly={this.readOnly}
             ref={(el) => (this.numberInput = el as HTMLInputElement)}
@@ -191,6 +192,14 @@ export class ModusNumberInput {
             tabIndex={0}
             type="text"
             value={this.value}></input>
+          <div class="value-adjusters">
+            <button class="increment" onClick={() => this.incrementValue()}>
+              <ModusIconMap icon="caret_up" />
+            </button>
+            <button class="decrement" onClick={() => this.decrementValue()}>
+              <ModusIconMap icon="caret_down" />
+            </button>
+          </div>
         </div>
         {this.errorText ? (
           <label class="sub-text error">{this.errorText}</label>
@@ -199,5 +208,75 @@ export class ModusNumberInput {
         ) : null}
       </div>
     );
+  }
+  incrementValue(): void {
+    const currentValue = this.parseValue(this.numberInput.value || '0');
+    const step = this.step || 1;
+    let newValue = currentValue + step;
+    if (this.maxValue !== undefined && newValue > this.maxValue) {
+      newValue = this.maxValue;
+    }
+    this.numberInput.value = newValue.toString();
+    this.formatInputValue();
+    this.valueChange.emit(this.numberInput.value);
+  }
+
+  decrementValue(): void {
+    const currentValue = this.parseValue(this.numberInput.value || '0');
+    const step = this.step || 1;
+    let newValue = currentValue - step;
+    if (this.minValue !== undefined && newValue < this.minValue) {
+      newValue = this.minValue;
+    }
+    this.numberInput.value = newValue.toString();
+    this.formatInputValue();
+    this.valueChange.emit(this.value);
+  }
+  handleWheel(event: WheelEvent): void {
+    event.preventDefault();
+    if (!this.disabled && !this.readOnly) {
+      const step = this.step || 1;
+      const delta = Math.sign(event.deltaY);
+
+      const currentValue = this.parseValue(this.numberInput.value || '0');
+      let newValue = currentValue + delta * step;
+
+      if (this.minValue !== undefined && newValue < this.minValue) {
+        newValue = this.minValue;
+      }
+      if (this.maxValue !== undefined && newValue > this.maxValue) {
+        newValue = this.maxValue;
+      }
+
+      this.numberInput.value = newValue.toString();
+      this.formatInputValue();
+      this.valueChange.emit(this.numberInput.value);
+    }
+  }
+  parseValue(value: string): number {
+    // Remove the currency symbol if present
+    if (this.currencySymbol) {
+      value = value.replace(this.currencySymbol, '');
+    }
+
+    // Replace digit group separators with an empty string
+    if (this.digitGroupSeparator) {
+      value = value.split(this.digitGroupSeparator).join('');
+    }
+
+    // Replace the decimal character with a dot for proper parsing
+    if (this.decimalCharacter && this.decimalCharacter !== '.') {
+      value = value.replace(this.decimalCharacter, '.');
+    }
+
+    // Parse the resulting string to a float
+    const parsedValue = parseFloat(value);
+
+    // If the parsed value is not a number, return NaN
+    if (isNaN(parsedValue)) {
+      return NaN;
+    }
+
+    return parsedValue;
   }
 }
