@@ -426,6 +426,30 @@ describe('modus-tree-view-item', () => {
     expect(checkboxClick).toHaveReceivedEvent();
   });
 
+  it('emits itemDrop event', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+    <modus-tree-view>
+      <modus-tree-view-item node-Id="1" label="1" draggable-item droppable-item></modus-tree-view-item>
+      <modus-tree-view-item node-Id="2" label="2" draggable-item droppable-item></modus-tree-view-item>
+      <modus-tree-view-item node-Id="3" label="3" draggable-item droppable-item></modus-tree-view-item>
+    </modus-tree-view>`);
+
+    const itemDropEvent = await page.spyOnEvent('itemDrop');
+    const dragIcon = await page.find("modus-tree-view-item[node-id='1'] >>> .drag-icon");
+
+    expect(dragIcon).toBeTruthy();
+
+    await dragIcon.press('Enter');
+    await dragIcon.press('ArrowDown');
+    await dragIcon.press('Enter');
+
+    await page.waitForChanges();
+
+    expect(itemDropEvent).toHaveReceivedEvent();
+  });
+
   it('should open action bar and select an option', async () => {
     const page = await newE2EPage();
     await page.setContent(`

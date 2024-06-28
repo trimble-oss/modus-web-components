@@ -156,13 +156,11 @@ Manual Sorting allows users to handle sorting in server-side mode.
 - Manual Sorting can be enabled using the `manualSortingOptions` prop.
 - The `currentSortingState` represents how the data is sorted (column and direction).
 
-
 ### Custom Sorting
 
 Custom sorting allows you to define your own logic for sorting table data.Custom sorting can be implemented by defining a sorting function `sortingFn` and assigning it to the relevant columns in your table configuration.
 
 A custom sorting function receives two arguments: the row values for the column being sorted, and the column id.
-
 
 ```javascript
 
@@ -174,12 +172,9 @@ const myCustomSortingFn(rowA, rowB, columnId) => {
 
 ```
 
-
 It should return -1 if the first argument should come before the second, 1 if it should come after, or 0 if they are equal.
 
-
 ```javascript
-
 const columns = [
   {
     header: () => 'Name',
@@ -201,16 +196,13 @@ const columns = [
     accessorKey: 'profile',
     // use custom sorting function directly
     sortingFn: (rowA, rowB, columnId) => {
-      return rowA.original.someProperty - rowB.original.someProperty
+      return rowA.original.someProperty - rowB.original.someProperty;
     },
-  }
-]
-
-
+  },
+];
 ```
 
 Custom Sorting Function
-
 
 ```javascript
 const myCustomSortingFn: SortingFn<Person> = (rowA, rowB, _columnId) => {
@@ -223,8 +215,6 @@ const myCustomSortingFn: SortingFn<Person> = (rowA, rowB, _columnId) => {
 ```
 
 The `myCustomSortingFn` function sorts rows based on the status property of each row's data. The status property can have one of three values: 'single', 'complicated', or 'relationship'. The function ensures that rows are sorted in the order specified by the statusOrder array.
-
-
 
 ### Value Formatter
 
@@ -781,14 +771,14 @@ interface ModusTableManualSortingOptions {
 
 Users can use keyboard navigation to perform different actions.
 
-| Name              | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Sorting           | The <kbd>Tab</kbd> key is used for navigating between the sort icons, while the <kbd>Enter</kbd> key is used to interact with the icon.                                                                                                                                                                                                                                                                                                                         |
-| Pagination        | Users can change page size and page number using keyboard navigation. The <kbd>Tab</kbd> key brings focus to an element and the Enter key is used to perform an action like selecting a page size and page number.                                                                                                                                                                                                                                              |
-| Column Resize     | Users can select the column for resizing by using the <kbd>Tab</kbd> key, and by pressing the <kbd>Spacebar</kbd> or <kbd>Enter</kbd> key to enable the column resize for the selected column. To resize, use the `left`/`right` MediaKeySession. When the <kbd>Enter</kbd> key is pressed, its position is saved.                                                                                                                                              |
-| Column Reorder    | Users can navigate to the column to be reorder by using the <kbd>Tab</kbd> key. By pressing <kbd>Enter</kbd> key selects the column header, to move to the desired location user can use `left`/`right` keys and the column can be dropped by <kbd>Enter</kbd> key.                                                                                                                                                                                             |
-| Column Visibility | The meatball icon buttom will get focus by using the <kbd>Tab</kbd> key. By pressing <kbd>Enter</kbd> or <kbd>Space</kbd>, a dropdown will be opened; press the <kbd>Escape</kbd> key to close the dropdown. Using `Tab or Shift+Tab` / `ArrowUp or ArrowDown`, column checkboxes/items can get focus to change state by pressing the <kbd>Enter</kbd> or <kbd>Space</kbd>.                                                                                                      |
-| Cell Navigation   | Table cells can be navigated using keys like <kbd>Tab</kbd>, `Shift+Tab`, `ArrowUp`, and `ArrowDown`. Additionally, the <kbd>Tab</kbd> key can be used to focus on elements inside a cell.                                                                                                                                                                                                                                                                      |
+| Name              | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Sorting           | The <kbd>Tab</kbd> key is used for navigating between the sort icons, while the <kbd>Enter</kbd> key is used to interact with the icon.                                                                                                                                                                                                                                                                                                                       |
+| Pagination        | Users can change page size and page number using keyboard navigation. The <kbd>Tab</kbd> key brings focus to an element and the Enter key is used to perform an action like selecting a page size and page number.                                                                                                                                                                                                                                            |
+| Column Resize     | Users can select the column for resizing by using the <kbd>Tab</kbd> key, and by pressing the <kbd>Spacebar</kbd> or <kbd>Enter</kbd> key to enable the column resize for the selected column. To resize, use the `left`/`right` MediaKeySession. When the <kbd>Enter</kbd> key is pressed, its position is saved.                                                                                                                                            |
+| Column Reorder    | Users can navigate to the column to be reorder by using the <kbd>Tab</kbd> key. By pressing <kbd>Enter</kbd> key selects the column header, to move to the desired location user can use `left`/`right` keys and the column can be dropped by <kbd>Enter</kbd> key.                                                                                                                                                                                           |
+| Column Visibility | The meatball icon buttom will get focus by using the <kbd>Tab</kbd> key. By pressing <kbd>Enter</kbd> or <kbd>Space</kbd>, a dropdown will be opened; press the <kbd>Escape</kbd> key to close the dropdown. Using `Tab or Shift+Tab` / `ArrowUp or ArrowDown`, column checkboxes/items can get focus to change state by pressing the <kbd>Enter</kbd> or <kbd>Space</kbd>.                                                                                   |
+| Cell Navigation   | Table cells can be navigated using keys like <kbd>Tab</kbd>, `Shift+Tab`, `ArrowUp`, and `ArrowDown`. Additionally, the <kbd>Tab</kbd> key can be used to focus on elements inside a cell.                                                                                                                                                                                                                                                                    |
 | Inline Editing    | When a cell is in focus, pressing the <kbd>Enter</kbd> key will activate the cell editor. The cell's value will be saved either when the focus shifts to another cell or when the <kbd>Enter</kbd> key is pressed again, which will also move the focus to the cell below in the same row. <kbd>Escape</kbd> key reverts the cell value to its original state and closes the editor. Note: Select cell editor saves the value only when the cell loses focus. |
 
 ## Properties
@@ -848,11 +838,11 @@ Users can use this to provide custom elements.
 
 ### Methods
 
-| Method name              | Description                               | Parameter                           | Return               |
-| ------------------------ | ----------------------------------------- | ----------------------------------- | -------------------- |
-| `getColumnData`          | Gets data of a perticular column.         | `accessorKey: string`               | `Promise<unknown[]>` |
-| `toggleColumnVisibility` | Decides the Data table column visibility. | `columnId: string`, `show: boolean` | `Promise<void>`      |
-| `getEditableCell`        | Handle the editability of a specific cell.| `rowIndex: string`, `columnId: string` | `Promise<void>`      |
+| Method name              | Description                                | Parameter                              | Return               |
+| ------------------------ | ------------------------------------------ | -------------------------------------- | -------------------- |
+| `getColumnData`          | Gets data of a perticular column.          | `accessorKey: string`                  | `Promise<unknown[]>` |
+| `toggleColumnVisibility` | Decides the Data table column visibility.  | `columnId: string`, `show: boolean`    | `Promise<void>`      |
+| `getEditableCell`        | Handle the editability of a specific cell. | `rowIndex: string`, `columnId: string` | `Promise<void>`      |
 
 ### Text Wrapping
 

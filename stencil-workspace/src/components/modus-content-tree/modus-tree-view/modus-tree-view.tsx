@@ -52,6 +52,8 @@ export class ModusTreeView {
 
   @State() isDraggingWithKeyboard: boolean;
 
+  @Event() itemDrop: EventEmitter<{ [key: string]: TreeViewItemInfo }>;
+
   private currentItem: TreeViewItemInfo;
 
   private focusItem: string;
@@ -255,6 +257,7 @@ export class ModusTreeView {
         const insertElement = this.items[this.itemDragState.itemId].element as unknown as HTMLElement;
 
         insertAtParent.insertBefore(insertElement, insertBefore);
+        this.itemDrop.emit(this.items);
       }
     }
 
