@@ -40,7 +40,7 @@ export class ModusNumberInput {
   /** (optional) The maximum number of integers allowed. */
   @Prop() integerLimit: number;
 
-  /** (optional)  */
+  /** (optional) Whether the input is a credit card. */
   @Prop() isCreditCard: boolean;
 
   /** (optional) The input's label. */
@@ -139,6 +139,41 @@ export class ModusNumberInput {
     }
   }
 
+  incrementValue() {
+    this.updateValue(this.parseValue(this.numberInput.value || '0') + (this.step || 1));
+  }
+
+  decrementValue() {
+    this.updateValue(this.parseValue(this.numberInput.value || '0') - (this.step || 1));
+  }
+
+  handleWheel(event: WheelEvent) {
+    event.preventDefault();
+    if (!this.disabled && !this.readOnly) {
+      const step = this.step || 1;
+      const delta = Math.sign(event.deltaY);
+      this.updateValue(this.parseValue(this.numberInput.value || '0') + delta * step);
+    }
+  }
+
+  updateValue(newValue: number) {
+    if (this.minValue !== undefined && newValue < this.minValue) {
+      newValue = this.minValue;
+    }
+    if (this.maxValue !== undefined && newValue > this.maxValue) {
+      newValue = this.maxValue;
+    }
+    this.numberInput.value = newValue.toString();
+    this.formatInputValue();
+    this.valueChange.emit(this.numberInput.value);
+  }
+
+  parseValue(value: string): number {
+    value = value.replace(this.currencySymbol, '').split(this.digitGroupSeparator).join('');
+    value = this.decimalCharacter !== '.' ? value.replace(this.decimalCharacter, '.') : value;
+    return parseFloat(value) || 0;
+  }
+
   render(): unknown {
     const textAlignClassName = `text-align-${this.textAlign}`;
     const buildContainerClassNames = (): string => {
@@ -213,75 +248,5 @@ export class ModusNumberInput {
         ) : null}
       </div>
     );
-  }
-  incrementValue(): void {
-    const currentValue = this.parseValue(this.numberInput.value || '0');
-    const step = this.step || 1;
-    let newValue = currentValue + step;
-    if (this.maxValue !== undefined && newValue > this.maxValue) {
-      newValue = this.maxValue;
-    }
-    this.numberInput.value = newValue.toString();
-    this.formatInputValue();
-    this.valueChange.emit(this.numberInput.value);
-  }
-
-  decrementValue(): void {
-    const currentValue = this.parseValue(this.numberInput.value || '0');
-    const step = this.step || 1;
-    let newValue = currentValue - step;
-    if (this.minValue !== undefined && newValue < this.minValue) {
-      newValue = this.minValue;
-    }
-    this.numberInput.value = newValue.toString();
-    this.formatInputValue();
-    this.valueChange.emit(this.value);
-  }
-  handleWheel(event: WheelEvent): void {
-    event.preventDefault();
-    if (!this.disabled && !this.readOnly) {
-      const step = this.step || 1;
-      const delta = Math.sign(event.deltaY);
-
-      const currentValue = this.parseValue(this.numberInput.value || '0');
-      let newValue = currentValue + delta * step;
-
-      if (this.minValue !== undefined && newValue < this.minValue) {
-        newValue = this.minValue;
-      }
-      if (this.maxValue !== undefined && newValue > this.maxValue) {
-        newValue = this.maxValue;
-      }
-
-      this.numberInput.value = newValue.toString();
-      this.formatInputValue();
-      this.valueChange.emit(this.numberInput.value);
-    }
-  }
-  parseValue(value: string): number {
-    // Remove the currency symbol if present
-    if (this.currencySymbol) {
-      value = value.replace(this.currencySymbol, '');
-    }
-
-    // Replace digit group separators with an empty string
-    if (this.digitGroupSeparator) {
-      value = value.split(this.digitGroupSeparator).join('');
-    }
-
-    // Replace the decimal character with a dot for proper parsing
-    if (this.decimalCharacter && this.decimalCharacter !== '.') {
-      value = value.replace(this.decimalCharacter, '.');
-    }
-
-    // Parse the resulting string to a float
-    const parsedValue = parseFloat(value);
-
-    // If the parsed value is not a number, return NaN
-    if (isNaN(parsedValue)) {
-      return NaN;
-    }
-
-    return parsedValue;
   }
 }

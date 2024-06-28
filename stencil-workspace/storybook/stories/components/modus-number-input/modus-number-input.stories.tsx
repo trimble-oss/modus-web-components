@@ -82,6 +82,13 @@ export default {
         type: { summary: 'number' },
       },
     },
+    isCreditCard: {
+      name: 'is-credit-card',
+      description: 'Whether the number input is a credit card',
+      table: {
+        type: { summary: 'boolean' },
+      },
+    },
     label: {
       description: "The number input's label",
       table: {
@@ -193,6 +200,7 @@ const Template = ({
   errorText,
   helperText,
   integerLimit,
+  isCreditCard,
   label,
   maxValue,
   minValue,
@@ -216,6 +224,7 @@ const Template = ({
     error-text=${errorText}
     helper-text=${helperText}
     integer-limit=${integerLimit}
+    ?is-credit-card=${isCreditCard}
     label=${label}
     max-value=${maxValue}
     min-value=${minValue}
@@ -241,6 +250,7 @@ Default.args = {
   errorText: '',
   helperText: '',
   integerLimit: 5,
+  isCreditCard: false,
   label: 'Number Input',
   maxValue: 100000,
   minValue: 0,
