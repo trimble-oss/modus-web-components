@@ -177,7 +177,7 @@ export class ModusTableCellMain {
     const { row, getValue } = this.cell;
     const cellValue = getValue();
 
-    if (cellValue !== null && cellValue !== undefined) return null;
+    if (cellValue === null || cellValue === undefined) return null;
 
     const { cellLinkClick, wrapText } = this.context;
     const cellDataType = cellValue['_type'] ?? this.cell.column.columnDef[COLUMN_DEF_DATATYPE_KEY];
