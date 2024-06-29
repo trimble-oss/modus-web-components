@@ -67,13 +67,13 @@ export class ModusTableRowActions {
     }
     return (
       <Host>
-        {actionButtons?.map(({ label, icon, id, isDisabled = () => false }) => {
+        {actionButtons?.map(({ label, icon, iconColor, id, isDisabled = () => false }) => {
           const disabled = isDisabled(this.row.original);
           return (
             <modus-button
               class="row-actions"
               button-style="borderless"
-              color="secondary"
+              color={iconColor || 'secondary'}
               icon-only={icon}
               size="small"
               ariaLabel={label}
