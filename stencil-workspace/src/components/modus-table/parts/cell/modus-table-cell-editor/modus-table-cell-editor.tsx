@@ -176,6 +176,7 @@ export class ModusTableCellEditor {
     const args = this.args as ModusTableCellSelectEditorArgs;
     const options = args?.options || [];
     const optionsDisplayProp = args?.optionsDisplayProp || valueKey;
+    const placeholder = args?.placeholder;
     const selectedOption = options.find((option) => option[optionsDisplayProp] === this.value) as unknown;
 
     function handleEnter(e: KeyboardEvent, callback: (e: KeyboardEvent) => void) {
@@ -193,6 +194,7 @@ export class ModusTableCellEditor {
           options-display-prop={optionsDisplayProp}
           size="large"
           options={options}
+          placeholder={placeholder}
           onInputBlur={this.handleBlur}
           onKeyDown={(e) => handleEnter(e, this.handleKeyDown)}
           onValueChange={(e: CustomEvent<unknown>) => {

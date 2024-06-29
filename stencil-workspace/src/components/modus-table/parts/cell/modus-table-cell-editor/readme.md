@@ -7,14 +7,14 @@
 
 ## Properties
 
-| Property      | Attribute   | Description | Type                                                                          | Default     |
-| ------------- | ----------- | ----------- | ----------------------------------------------------------------------------- | ----------- |
-| `args`        | --          |             | `{ format: string; } \| { options: unknown[]; optionsDisplayProp?: string; }` | `undefined` |
-| `dataType`    | `data-type` |             | `string`                                                                      | `undefined` |
-| `keyDown`     | --          |             | `(e: KeyboardEvent, newValue: string) => void`                                | `undefined` |
-| `type`        | `type`      |             | `string`                                                                      | `undefined` |
-| `value`       | --          |             | `unknown`                                                                     | `undefined` |
-| `valueChange` | --          |             | `(newValue: string) => void`                                                  | `undefined` |
+| Property      | Attribute   | Description | Type                                                                                                | Default     |
+| ------------- | ----------- | ----------- | --------------------------------------------------------------------------------------------------- | ----------- |
+| `args`        | --          |             | `{ format: string; } \| { options: unknown[]; optionsDisplayProp?: string; placeholder?: string; }` | `undefined` |
+| `dataType`    | `data-type` |             | `string`                                                                                            | `undefined` |
+| `keyDown`     | --          |             | `(e: KeyboardEvent, newValue: string) => void`                                                      | `undefined` |
+| `type`        | `type`      |             | `string`                                                                                            | `undefined` |
+| `value`       | --          |             | `unknown`                                                                                           | `undefined` |
+| `valueChange` | --          |             | `(newValue: string) => void`                                                                        | `undefined` |
 
 
 ## Dependencies
