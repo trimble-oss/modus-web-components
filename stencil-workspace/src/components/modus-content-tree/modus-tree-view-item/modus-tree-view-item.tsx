@@ -260,10 +260,10 @@ export class ModusTreeViewItem {
       return;
     }
 
-    const { multiSelection } = this.options;
+    const { multiSelection, hasItemSelected } = this.options;
 
     if (e.shiftKey && multiSelection) {
-      this.itemClick.emit(e.key === 'ArrowDown');
+      this.itemClick.emit(hasItemSelected(this.nodeId));
     }
   }
 
@@ -282,12 +282,6 @@ export class ModusTreeViewItem {
           this.handleItemClick(e);
           e.stopPropagation();
         }
-        break;
-      case 'ArrowDown':
-        this.handleKeyDownItemClick(e);
-        break;
-      case 'ArrowUp':
-        this.handleKeyDownItemClick(e);
         break;
     }
   }
@@ -459,6 +453,7 @@ export class ModusTreeViewItem {
           class={treeItemClass}
           onFocus={() => this.handleFocus()}
           onClick={(e) => this.handleItemClick(e)}
+          onKeyUp={(e) => this.handleKeyDownItemClick(e)}
           onKeyDown={(e) => this.handleKeyDownTreeItem(e)}
           ref={(el) => this.handleRefItemContent(el)}
           tabindex={tabIndex}>
