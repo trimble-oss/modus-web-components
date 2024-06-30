@@ -1,7 +1,13 @@
+:host {
+  --modus-autocomplete-border: none;
+  --modus-autocomplete-border-active: none;
+  --modus-autocomplete-font-size: 14px;
+  --modus-input-border-color: none;
+}
+
 .editor::part(input-container),
 .editor::part(input) {
-  border: none !important;
-  height: calc($rem-48px - $rem-4px) !important;
+  height: calc($rem-48px - $rem-1px) !important;
 }
 
 table.density-comfortable {
@@ -16,4 +22,48 @@ table.density-compact {
   .editor::part(input) {
     height: calc($rem-24px - $rem-4px) !important;
   }
+}
+
+.autocomplete-container {
+  margin-left: 4px;
+  margin-top: 5px;
+}
+
+.editor::part(sub-text) {
+  display: none;
+}
+
+.date-picker-container::part(date-inputs) {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.editor::part(input-container) {
+  border: 2px solid var(--modus-input-border-active-color, #217cbb);
+  border-radius: unset;
+  z-index: 99;
+}
+
+.editor::part(input-container error) {
+  border: 2px solid var(--modus-input-validation-error-color, #da212c);
+  border-radius: unset;
+  z-index: 99;
+}
+
+.error-tooltip {
+  background-color: var(--modus-input-validation-error-color, #da212c);
+  border-radius: 2px;
+  color: #fff;
+  display: none;
+  font-family: $primary-font;
+  font-size: 12px;
+  font-weight: $font-weight-semi-bold;
+  letter-spacing: 0.005em;
+  line-height: 15px;
+  max-width: 200px;
+  padding: 5px 8px;
+  text-align: left;
+  word-wrap: break-word;
+  z-index: 10;
 }

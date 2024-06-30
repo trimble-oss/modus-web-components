@@ -200,7 +200,6 @@ describe('modus-chip', () => {
     expect((await computedStyles).height).toBe('16px');
   });
 
-
   it('renders aria-label on alert div when set', async () => {
     const page = await newE2EPage();
 
@@ -228,7 +227,7 @@ describe('modus-chip', () => {
     expect(element).toBeDefined();
     expect(element).not.toHaveAttribute('aria-label');
   });
-  
+
   it('should be in active state when active property is true', async () => {
     const page = await newE2EPage();
 

@@ -47,6 +47,7 @@ $btn-outline-active: (
 // Default Borderless
 $modus-btn-borderless-bg: var(--modus-btn-text-primary-bg, transparent) !default;
 $modus-btn-borderless-color: var(--modus-btn-text-primary-color, #0063a3) !default;
+$modus-btn-borderless-secondary-color: var(--modus-btn-borderless-secondary-color, #000) !default;
 
 // Hover
 $btn-borderless-hover: (

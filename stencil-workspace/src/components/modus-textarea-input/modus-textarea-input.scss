@@ -1,0 +1,138 @@
+@import './modus-textarea-input.vars';
+
+.modus-textarea-input {
+  border-radius: 4px;
+  display: inline-flex;
+  flex-direction: column;
+  font-family: $primary-font;
+  width: 100%;
+
+  label {
+    color: $modus-input-label-color;
+    font-size: $rem-12px;
+    font-weight: 700;
+    margin-bottom: $rem-4px;
+
+    span {
+      color: $modus-input-border-color;
+      margin: $rem-4px;
+    }
+  }
+
+  .label-container {
+    display: inline-block;
+    margin-bottom: 0.25rem;
+
+    .required {
+      bottom: $rem-1px;
+      color: $modus-input-validation-error-color;
+      margin-left: $rem-4px;
+      position: relative;
+    }
+  }
+
+  .input-container {
+    align-items: center;
+    background-color: $modus-input-bg;
+    border: $rem-1px solid $modus-input-border-color;
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    min-height: 4.5rem;
+    padding-bottom: 2px;
+    padding-top: 2px;
+    position: relative;
+    width: 100%;
+
+    textarea {
+      background-color: transparent;
+      border: none;
+      color: $modus-input-color;
+      font-family: $primary-font;
+      font-size: $rem-12px;
+      min-height: 4rem;
+      outline: none;
+      padding: 0 $rem-8px;
+      resize: none;
+      resize: vertical;
+      width: 100%;
+
+      &::placeholder {
+        color: $modus-input-hint-text-color;
+      }
+    }
+
+    &:hover {
+      cursor: text;
+    }
+
+    &:focus-within {
+      border-color: $modus-input-border-active-color;
+      box-shadow: 0 0 0 1px $modus-input-border-active-color;
+    }
+
+    &.error {
+      border-color: $modus-input-validation-error-color;
+      box-shadow: 0 0 0 1px $modus-input-validation-error-color;
+    }
+
+    &.valid {
+      border-color: $modus-input-validation-success-color;
+      box-shadow: 0 0 0 1px $modus-input-validation-success-color;
+    }
+
+    &.large {
+      min-height: 5rem;
+
+      textarea {
+        font-size: $rem-14px;
+        padding: 0 $rem-16px;
+      }
+    }
+  }
+
+  .input-container:has(textarea[readonly]) {
+    background-color: $modus-input-readonly-bg;
+    border-color: transparent;
+  }
+
+  .sub-text {
+    font-size: $rem-11px;
+    margin-top: $rem-4px;
+
+    &.helper {
+      color: $modus-input-label-color;
+      font-weight: 600;
+    }
+
+    &.error {
+      color: $modus-input-validation-error-color;
+    }
+
+    &.valid {
+      color: $modus-input-validation-success-color;
+    }
+  }
+
+  span {
+    &.required {
+      color: $modus-input-validation-error-color;
+    }
+  }
+
+  &.large {
+    font-size: $rem-14px;
+    height: 48px;
+  }
+
+  &.disabled {
+    pointer-events: none;
+
+    .input-container {
+      background-color: $modus-input-disabled-bg;
+      border: $rem-1px solid transparent;
+    }
+  }
+}

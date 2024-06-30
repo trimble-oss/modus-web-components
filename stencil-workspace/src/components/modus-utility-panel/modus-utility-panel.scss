@@ -1,0 +1,52 @@
+@import './modus-utility-panel.vars';
+
+.utility-panel {
+  background-color: $modus-utility-panel-bg;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  color: $modus-utility-panel-color;
+  height: 100%;
+  position: absolute;
+  right: -324px;
+  top: 0;
+  transition: right 0.3s ease-out;
+  width: 312px;
+
+  &.open {
+    right: 0;
+    transition: right 0.3s ease-out;
+  }
+
+  .overlay {
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  .panel-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .panel-header,
+    .panel-footer {
+      align-items: center;
+      display: flex;
+      height: 50px;
+      padding: 0 1rem;
+    }
+
+    .panel-body {
+      flex: 1;
+      overflow: auto;
+      padding: 1rem;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #cbcdd6;
+      margin: 0;
+    }
+  }
+}

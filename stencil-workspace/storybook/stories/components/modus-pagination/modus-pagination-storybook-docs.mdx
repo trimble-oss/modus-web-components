@@ -29,21 +29,9 @@ import { Anchor } from '@storybook/addon-docs';
 <modus-pagination active-page="8" max-page="32" min-page="1" size="medium" prev-page-button-text="Prev" next-page-button-text="Next"></modus-pagination>
 
 ```html
-<modus-pagination
-  active-page="8"
-  max-page="32"
-  min-page="1"
-  size="medium"></modus-pagination>
-<modus-pagination
-  active-page="8"
-  max-page="32"
-  min-page="1"
-  size="large"></modus-pagination>
-<modus-pagination
-  active-page="8"
-  max-page="32"
-  min-page="1"
-  size="small"></modus-pagination>
+<modus-pagination active-page="8" max-page="32" min-page="1" size="medium"></modus-pagination>
+<modus-pagination active-page="8" max-page="32" min-page="1" size="large"></modus-pagination>
+<modus-pagination active-page="8" max-page="32" min-page="1" size="small"></modus-pagination>
 <modus-pagination
   active-page="8"
   max-page="32"
@@ -55,15 +43,15 @@ import { Anchor } from '@storybook/addon-docs';
 
 ## Properties
 
-| Property             | Attribute               | Description                                                                         | Type     | Default     |
-| -------------------- | ----------------------- | ----------------------------------------------------------------------------------- | -------- | ----------- | -------- | ---------- |
-| `activePage`         | `active-page`           | The pagination's active page                                                        | `number` | `1` |
-| `ariaLabel`          | `aria-label`            | The pagination's aria-label                                                         | `string` | `undefined` |
-| `maxPage`            | `max-page`              | The pagination's maximum page                                                       | `number` | `undefined` |
-| `minPage`            | `min-page`              | The pagination's minimum page                                                       | `number` | `undefined` |
-| `nextPageButtonText` | `next-page-button-text` | (Optional) The previous page button text. If not set, an icon control will be used. | `string` | `undefined` |
-| `prevPageButtonText` | `prev-page-button-text` | (Optional) The next page button text. If not set, an icon control will be used.     | `string` | `undefined` |
-| `size`               | `size`                  | The pagination's size                                                               | `"large" | "medium"    | "small"` | `'medium'` |
+| Property             | Attribute               | Description                                                                         | Type                         | Default     |
+| -------------------- | ----------------------- | ----------------------------------------------------------------------------------- | ---------------------------- | ----------- |
+| `activePage`         | `active-page`           | The pagination's active page                                                        | `number`                     | `1`         |
+| `ariaLabel`          | `aria-label`            | The pagination's aria-label                                                         | `string`                     | `undefined` |
+| `maxPage`            | `max-page`              | The pagination's maximum page                                                       | `number`                     | `undefined` |
+| `minPage`            | `min-page`              | The pagination's minimum page                                                       | `number`                     | `undefined` |
+| `nextPageButtonText` | `next-page-button-text` | (Optional) The previous page button text. If not set, an icon control will be used. | `string`                     | `undefined` |
+| `prevPageButtonText` | `prev-page-button-text` | (Optional) The next page button text. If not set, an icon control will be used.     | `string`                     | `undefined` |
+| `size`               | `size`                  | The pagination's size                                                               | `"large", "medium", "small"` | `'medium'`  |
 
 ### DOM Events
 

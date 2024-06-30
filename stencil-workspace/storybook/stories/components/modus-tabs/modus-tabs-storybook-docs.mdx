@@ -11,8 +11,11 @@ A new TypeScript typing has been provided named Tab defined as:
 ```ts
 {
   active?: boolean;
+  iconOnly?: string;
   id: string;
-  label: string;
+  label?: string;
+  leftIcon?: string;
+  rightIcon?: string;
 }
 ```
 
@@ -40,6 +43,26 @@ A new TypeScript typing has been provided named Tab defined as:
       id: 1,
       label: 'Tab 2',
     },
+    {
+      id: 'tab-3',
+      label: 'Tab 3',
+      leftIcon: 'sun',
+    },
+    {
+      id: 'tab-4',
+      label: 'Tab 4',
+      rightIcon: 'moon',
+    },
+    {
+      id: 'tab-5',
+      label: 'Tab 5',
+      leftIcon: 'sun',
+      rightIcon: 'moon',
+    },
+    {
+      id: 'tab-6',
+      iconOnly: 'settings',
+    },
   ];
 </script>
 ```
@@ -48,7 +71,7 @@ A new TypeScript typing has been provided named Tab defined as:
 
 | Name         | Description          | Type      | Options           | Default Value | Required |
 | ------------ | -------------------- | --------- | ----------------- | ------------- | -------- |
-| `tabs`       | The tabs' tabs       | `Tab[]`   |                   |               | ✔        |
+| `tabs`       | The tabs' tabs       | `Tab[]`   |                   |               | ✔       |
 | `aria-label` | The tabs' aria-label | `string`  |                   |               |          |
 | `size`       | The tabs' size       | `string`  | 'medium', 'small' | 'medium'      |          |
 | `full-width` | The tabs' width      | `boolean` | true, false       | false         |          |

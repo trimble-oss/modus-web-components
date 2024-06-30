@@ -114,7 +114,7 @@ export class ModusTable {
         this.tableState.pagination.pageIndex = maxPageIndex >= 0 ? maxPageIndex : 0;
       }
     }
-    this.tableCore.setState('pagination', {
+    this.tableCore?.setState('pagination', {
       ...this.tableState.pagination,
       pageIndex: this.tableState.pagination.pageIndex,
       pageSize: this.pagination ? this.tableState.pagination.pageSize : this.data.length,
@@ -335,6 +335,7 @@ export class ModusTable {
   };
 
   @State() tableCore: ModusTableCore;
+  @State() cells: HTMLModusTableCellMainElement[] = [];
 
   classByDensity: Map<string, string> = new Map([
     ['relaxed', 'density-relaxed'],
@@ -350,6 +351,11 @@ export class ModusTable {
   private onMouseMove = (event: MouseEvent) => this.handleDragOver(event);
   private onKeyDown = (event: KeyboardEvent) => this.handleKeyDown(event);
   private onMouseUp = () => this.handleDrop();
+
+  /** Updates the cells state by querying the shadow DOM for modus-table-cell-main elements.*/
+  private updateCells() {
+    this.cells = Array.from(this.element.shadowRoot.querySelectorAll('modus-table-cell-main'));
+  }
 
   componentWillLoad(): void {
     this._id = this.element.id || `modus-table-${createGuid()}`;
@@ -396,6 +402,28 @@ export class ModusTable {
       }
     }
     return rowData;
+  }
+
+  /**
+   * Returns whether a cell is editable based on row index and column ID.
+   * @param rowIndex The index of the row.
+   * @param columnId The ID of the column.
+   * @returns Boolean indicating if the cell is editable.
+   */
+  @Method()
+  async getEditableCell(rowIndex: string, columnId: string): Promise<void> {
+    this.updateCells();
+
+    // Find the specific cell to edit
+    const cellToEdit = this.cells.find(
+      (cell) => cell.cell.row.index.toString() === rowIndex && cell.cell.column.id === columnId
+    );
+
+    if (!cellToEdit) {
+      return;
+    }
+
+    await cellToEdit.handleCellEdit(rowIndex, columnId);
   }
 
   /**

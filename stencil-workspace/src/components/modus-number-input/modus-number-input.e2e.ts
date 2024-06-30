@@ -74,6 +74,9 @@ describe('modus-number-input', () => {
     expect(helperLabel).toBeNull();
 
     const numberInput = await page.find('modus-number-input');
+    numberInput.setProperty('label', 'label');
+    await page.waitForChanges();
+
     numberInput.setProperty('helperText', 'Helper.');
     await page.waitForChanges();
 

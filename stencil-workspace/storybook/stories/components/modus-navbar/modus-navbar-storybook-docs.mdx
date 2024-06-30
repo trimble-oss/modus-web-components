@@ -52,6 +52,15 @@ This component utilizes the slot element, allowing you to render your own HTML i
     },
     secondary: { url: 'https://modus.trimble.com/favicon.svg', height: 24 },
   };
+  element.dropdownOptions = {
+    ariaLabel: 'Project dropdown',
+    defaultValue: '2',
+    items: [
+      { text: 'Project 1', value: '1' },
+      { text: 'Project 2', value: '2' },
+      { text: 'Project 3', value: '3' },
+    ],
+  };
   element.profileMenuOptions = {
     avatarUrl: '...',
     email: 'modus_user@trimble.com',
@@ -71,10 +80,6 @@ This component utilizes the slot element, allowing you to render your own HTML i
       }
     ]
   };
-  element.buttons = [
-    { id:'addMenu', icon: 'add' },
-    { id: 'notificationMenu', icon: 'notifications' }
-  ];
 </script>
 ```
 
@@ -109,6 +114,59 @@ This component utilizes the slot element, allowing you to render your own HTML i
       height: 24,
     },
     secondary: { url: 'https://modus.trimble.com/favicon.svg', height: 24 },
+  };
+  element.profileMenuOptions = {
+    avatarUrl: 'https://avatar.example.com/broken-image-link.png',
+    email: 'modus_user@trimble.com',
+    initials: 'MU',
+    signOutText: 'Sign out',
+    username: 'Modus User',
+  };
+</script>
+```
+
+### Navbar with Optional Features
+
+Add optional features to the navbar.
+
+<Story id="components-navbar--with-optional-features" />
+
+```html
+<modus-navbar
+  id="with-optional-features"
+  show-apps-menu
+  show-help
+  show-main-menu
+  show-notifications>
+  <div slot="main" style="height:300px;">Render your own main menu.</div>
+  <div slot="notifications">Render your own notifications.</div>
+</modus-navbar>
+
+<script>
+  const element = document.querySelector('modus-navbar');
+  element.apps = [
+    {
+        description: 'The One Trimble Design System',
+        logoUrl: 'https://modus.trimble.com/favicon.svg',
+        name: 'Trimble Modus',
+        url: 'https://modus.trimble.com/',
+    },
+  ];
+  element.logoOptions = {
+    primary: {
+      url: 'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
+      height: 24,
+    },
+    secondary: { url: 'https://modus.trimble.com/favicon.svg', height: 24 },
+  };
+  element.dropdownOptions = {
+    ariaLabel: 'Project dropdown',
+    defaultValue: '2',
+    items: [
+      { text: 'Project 1', value: '1' },
+      { text: 'Project 2', value: '2' },
+      { text: 'Project 3', value: '3' },
+    ],
   };
   element.profileMenuOptions = {
     avatarUrl: 'https://avatar.example.com/broken-image-link.png',
@@ -219,28 +277,29 @@ interface ModusNavbarButton {
 
 ### Properties
 
-| Property               | Attribute                | Description                                                                                                                                                                             | Type                      | Default     |
-| ---------------------- | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- | ----------- |
-| `apps`                 | --                       | (optional) The apps to render in the apps menu.                                                                                                                                         | `ModusNavbarApp[]`        | `undefined` |
-| `navAriaLabel`         | `nav-aria-label`         | (optional) The navbar's aria-label.                                                                                                                                                     | `string`                  | `undefined` |
-| `buttons`              | --                       | (optional) The buttons to render in the Navbar.                                                                                                                                         | `ModusNavbarButton[]`     | `undefined` |
-| `notificationCount`    | `notification-count`     | (optional) To add the counter value to the notification icon.                                                                                                                           | `number`                  | `undefined` |
-| `enableSearchOverlay`  | `enable-search-overlay`    | (optional) Whether to show search overlay or not.                                                                                                                                     | `boolean`                 | `undefined` |
-| `helpTooltip`          | --                       | (optional) Help tooltip.                                                                                                                                                                | `ModusNavbarTooltip`      | `undefined` |
-| `helpUrl`              | `help-url`               | (optional) Help URL.                                                                                                                                                                    | `string`                  | `undefined` |
-| `logoOptions`          | --                       | (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels. | `ModusNavbarLogoOptions`  | `undefined` |
-| `profileMenuOptions`   | --                       | (required) Profile menu options.                                                                                                                                                        | `ModusProfileMenuOptions` | `undefined` |
-| `reverse`              | `reverse`                | (optional) Whether to display the navbar items in reverse order.                                                                                                                        | `boolean`                 | `undefined` |
-| `searchTooltip`        | --                       | (optional) Search tooltip.                                                                                                                                                              | `ModusNavbarTooltip`      | `undefined` |
-| `showAppsMenu`         | `show-apps-menu`         | (optional) Whether to show the apps menu.                                                                                                                                               | `boolean`                 | `undefined` |
-| `showHelp`             | `show-help`              | (optional) Whether to show help.                                                                                                                                                        | `boolean`                 | `undefined` |
-| `showMainMenu`         | `show-main-menu`         | (optional) Whether to show the main menu.                                                                                                                                               | `boolean`                 | `undefined` |
-| `showNotifications`    | `show-notifications`     | (optional) Whether to show notifications.                                                                                                                                               | `boolean`                 | `undefined` |
-| `showPendoPlaceholder` | `show-pendo-placeholder` | (optional) Whether to show the placeholder for Pendo.                                                                                                                                   | `boolean`                 | `undefined` |
-| `showProfile`          | `show-profile`           | (optional) Whether to show the profile.                                                                                                                                                 | `boolean`                 | `true`      |
-| `showSearch`           | `show-search`            | (optional) Whether to show search.                                                                                                                                                      | `boolean`                 | `undefined` |
-| `showShadow`           | `show-shadow`            | (optional) Whether to show a shadow under the navbar.                                                                                                                                   | `boolean`                 | `undefined` |
-| `variant`              | `variant`                | (optional) Color variants for NavBar.                                                                                                                                                   | `"blue" \| "default"`     | `'default'` |
+| Property               | Attribute                | Description                                                                                                                                                                             | Type                         | Default     |
+| ---------------------- | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- | ----------- |
+| `apps`                 | --                       | (optional) The apps to render in the apps menu.                                                                                                                                         | `ModusNavbarApp[]`           | `undefined` |
+| `navAriaLabel`         | `nav-aria-label`         | (optional) The navbar's aria-label.                                                                                                                                                     | `string`                     | `undefined` |
+| `buttons`              | --                       | (optional) The buttons to render in the Navbar.                                                                                                                                         | `ModusNavbarButton[]`        | `undefined` |
+| `notificationCount`    | `notification-count`     | (optional) To add the counter value to the notification icon.                                                                                                                           | `number`                     | `undefined` |
+| `enableSearchOverlay`  | `enable-search-overlay`    | (optional) Whether to show search overlay or not.                                                                                                                                     | `boolean`                    | `undefined` |
+| `helpTooltip`          | --                       | (optional) Help tooltip.                                                                                                                                                                | `ModusNavbarTooltip`         | `undefined` |
+| `helpUrl`              | `help-url`               | (optional) Help URL.                                                                                                                                                                    | `string`                     | `undefined` |
+| `logoOptions`          | --                       | (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels. | `ModusNavbarLogoOptions`     | `undefined` |
+| `dropdownOptions`      | --                       | (optional) Renders a modus dropdown in the Navbar.                                                                                                                                      | `ModusNavbarDropdownOptions` | `undefined` |
+| `profileMenuOptions`   | --                       | (required) Profile menu options.                                                                                                                                                        | `ModusProfileMenuOptions`    | `undefined` |
+| `reverse`              | `reverse`                | (optional) Whether to display the navbar items in reverse order.                                                                                                                        | `boolean`                    | `undefined` |
+| `searchTooltip`        | --                       | (optional) Search tooltip.                                                                                                                                                              | `ModusNavbarTooltip`         | `undefined` |
+| `showAppsMenu`         | `show-apps-menu`         | (optional) Whether to show the apps menu.                                                                                                                                               | `boolean`                    | `undefined` |
+| `showHelp`             | `show-help`              | (optional) Whether to show help.                                                                                                                                                        | `boolean`                    | `undefined` |
+| `showMainMenu`         | `show-main-menu`         | (optional) Whether to show the main menu.                                                                                                                                               | `boolean`                    | `undefined` |
+| `showNotifications`    | `show-notifications`     | (optional) Whether to show notifications.                                                                                                                                               | `boolean`                    | `undefined` |
+| `showPendoPlaceholder` | `show-pendo-placeholder` | (optional) Whether to show the placeholder for Pendo.                                                                                                                                   | `boolean`                    | `undefined` |
+| `showProfile`          | `show-profile`           | (optional) Whether to show the profile.                                                                                                                                                 | `boolean`                    | `true`      |
+| `showSearch`           | `show-search`            | (optional) Whether to show search.                                                                                                                                                      | `boolean`                    | `undefined` |
+| `showShadow`           | `show-shadow`            | (optional) Whether to show a shadow under the navbar.                                                                                                                                   | `boolean`                    | `undefined` |
+| `variant`              | `variant`                | (optional) Color variants for NavBar.                                                                                                                                                   | `"blue" \| "default"`        | `'default'` |
 
 ### DOM Events
 
@@ -249,6 +308,7 @@ interface ModusNavbarButton {
 | `appsMenuAppOpen`         | An event that fires when an apps menu app opens.                        | `CustomEvent<ModusNavbarApp>`                             |
 | `appsMenuOpen`            | An event that fires when the apps menu opens.                           | `CustomEvent<void>`                                       |
 | `buttonClick`             | An event that fires when a button in the custom button list is clicked. | `CustomEvent<string>`                                     |
+| `dropdownItemSelect`      | An event that fires when a dropdown item is selected.                   | `CustomEvent<ModusNavbarDropdownItem>`                    |
 | `helpOpen`                | An event that fires when the help link opens.                           | `CustomEvent<void>`                                       |
 | `mainMenuClick`           | An event that fires on main menu click.                                 | `CustomEvent<KeyboardEvent>` or `CustomEvent<MouseEvent>` |
 | `notificationsMenuOpen`   | An event that fires when the notifications menu opens.                  | `CustomEvent<void>`                                       |

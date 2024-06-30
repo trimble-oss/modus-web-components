@@ -21,20 +21,18 @@ function newPerson() {
   const firstName = Names[namesIndex].split(' ')[0];
   const lastName = Names[namesIndex].split(' ')[1];
   const email: string = `${firstName}${lastName}@example.com`.toLowerCase();
+  const randomDate = new Date(randomNumber(1990, 2020), randomNumber(0, 11), randomNumber(1, 30));
+  const formattedDate = `${randomDate.getFullYear()}-${(randomDate.getMonth() + 1).toString().padStart(2, '0')}-${randomDate.getDate().toString().padStart(2, '0')}`;
   return {
     firstName,
     lastName,
     age: randomNumber(20, 80) * 30,
     visits: randomNumber(1, 100) * 100,
-    email:{ display: email, url: email },
+    email: { display: email, url: email },
     progress: randomNumber(1, 100) * 100,
     status: randomNumber(1, 100) > 66 ? 'Verified' : randomNumber(0, 100) > 33 ? 'Pending' : 'Rejected',
-    createdAt: new Date(randomNumber(1990, 2020), randomNumber(0, 11), randomNumber(1, 30)).toDateString(),
-    priority: Priorities[
-      randomNumber(1, 100) > 66 ? 'high':
-      randomNumber(0, 100) > 33 ? 'medium'
-      : 'low'
-    ],
+    createdAt: formattedDate,
+    priority: Priorities[randomNumber(1, 100) > 66 ? 'high' : randomNumber(0, 100) > 33 ? 'medium' : 'low'],
   };
 }
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -53,7 +51,19 @@ function makeData(...lens): object[] {
 }
 
 function initializeTable(props) {
-  const {columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions, manualPaginationOptions, manualSortingOptions, defaultSort} = props
+  const {
+    columns,
+    data,
+    pageSizeList,
+    toolbarOptions,
+    displayOptions,
+    rowSelectionOptions,
+    rowActions,
+    manualPaginationOptions,
+    manualSortingOptions,
+    defaultSort,
+    customSort,
+  } = props;
   const tag = document.createElement('script');
   tag.innerHTML = `
   var modusTable = document.querySelector('modus-table');
@@ -67,8 +77,22 @@ function initializeTable(props) {
   modusTable.manualPaginationOptions = ${JSON.stringify(manualPaginationOptions)};
   modusTable.manualSortingOptions = ${JSON.stringify(manualSortingOptions)};
   modusTable.defaultSort = ${JSON.stringify(defaultSort)};
+  modusTable.customSort = ${JSON.stringify(customSort)};
 
   var globalData = ${JSON.stringify(data)};
+
+function sortStatusFn(rowA, rowB, _columnId) {
+  const statusA = rowA.original.status;
+  const statusB = rowB.original.status;
+  const statusOrder = modusTable.customSort;
+  return statusOrder.indexOf(statusA) - statusOrder.indexOf(statusB);
+}
+
+function addSortingFn(columns) {
+  return columns.map((col) => (col.accessorKey === 'status' ? { ...col, sortingFn: sortStatusFn } : col));
+}
+
+
   if(!!modusTable.manualSortingOptions){
     let currentData = globalData;
     const accessorKey = getAccessortKey(modusTable.columns, modusTable.manualSortingOptions.currentSortingState[0].id);
@@ -82,6 +106,8 @@ function initializeTable(props) {
   } else if(!!modusTable.manualPaginationOptions){
     modusTable.data = globalData.slice((modusTable.manualPaginationOptions.currentPageIndex - 1) * modusTable.manualPaginationOptions.currentPageSize,
       modusTable.manualPaginationOptions.currentPageIndex * modusTable.manualPaginationOptions.currentPageSize);
+  } else if(modusTable.customSort.length > 0){
+    modusTable.columns = addSortingFn(modusTable.columns);
   } else {
     modusTable.data = globalData;
   }
@@ -192,24 +218,25 @@ const Names = [
 ];
 
 const Priorities = {
-  "high": {
+  high: {
     size: 'medium',
     type: 'counter',
     text: 'High',
     color: 'success',
   },
-  "medium": {
-    size: 'medium', type: 'counter',
+  medium: {
+    size: 'medium',
+    type: 'counter',
     text: 'Medium',
-    color: 'warning'
+    color: 'warning',
   },
-  "low": {
-    size: 'medium', type: 'counter',
+  low: {
+    size: 'medium',
+    type: 'counter',
     text: 'Low',
-    color: 'danger'
-  }
-}
-
+    color: 'danger',
+  },
+};
 
 const DefaultColumns = [
   {
@@ -253,7 +280,8 @@ const DefaultColumns = [
     dataType: 'link',
     size: 230,
     minSize: 80,
-    sortingFn: 'sortForHyperlink'},
+    sortingFn: 'sortForHyperlink',
+  },
   {
     header: 'Status',
     accessorKey: 'status',
@@ -271,12 +299,11 @@ const DefaultColumns = [
     header: 'Created At',
     accessorKey: 'createdAt',
     id: 'createdAt',
-    dataType: 'string',
+    dataType: 'date',
     size: 150,
     minSize: 150,
   },
 ];
-
 
 const DefaultArgs = {
   hover: false,
@@ -301,6 +328,7 @@ const DefaultArgs = {
   rowSelection: false,
   rowSelectionOptions: {},
   wrapText: false,
+  customSort: [],
 };
 
 export default {
@@ -526,16 +554,24 @@ export default {
       },
       type: { required: false },
     },
-    defaultSort : {
+    customSort: {
+      name: 'customSorting',
+      description:
+        'This property is for demonstration purposes only and is not available on the component. This demo illustrates how to implement custom sorting for the status column based on a given order.',
+      table: {
+        // type: { summary: 'customSort'},
+      },
+      type: { required: false },
+    },
+    defaultSort: {
       name: 'defaultSort',
       description: 'To set the default sorting of the table',
       table: {
         type: { summary: 'ModusTableColumnSort' },
       },
       type: { required: false },
-    }
-    ,
-    wrapText : {
+    },
+    wrapText: {
       name: 'wrapText',
       description: 'To wrap text that overflows the cell',
       table: {
@@ -543,12 +579,24 @@ export default {
         type: { summary: 'boolean' },
       },
       type: { required: false },
-    }
+    },
   },
 
   parameters: {
     actions: {
-      handles: ['cellValueChange','cellLinkClick', 'columnOrderChange', 'columnSizingChange', 'columnVisibilityChange', 'paginationChange', 'rowExpanded', 'rowSelectionChange', 'rowUpdated', 'sortChange', 'rowActionClick'],
+      handles: [
+        'cellValueChange',
+        'cellLinkClick',
+        'columnOrderChange',
+        'columnSizingChange',
+        'columnVisibilityChange',
+        'paginationChange',
+        'rowExpanded',
+        'rowSelectionChange',
+        'rowUpdated',
+        'sortChange',
+        'rowActionClick',
+      ],
     },
     controls: { expanded: true, sort: 'requiredFirst' },
     docs: {
@@ -588,7 +636,8 @@ const Template = ({
   manualSortingOptions,
   defaultSort,
   density,
-  wrapText
+  wrapText,
+  customSort,
 }) => html`
   <div style="width: 950px">
     <modus-table
@@ -609,7 +658,19 @@ const Template = ({
       row-selection="${rowSelection}"
       wrap-text="${wrapText}" />
   </div>
-  ${initializeTable({columns, data, pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions, rowActions, manualPaginationOptions, manualSortingOptions, defaultSort})}
+  ${initializeTable({
+    columns,
+    data,
+    pageSizeList,
+    toolbarOptions,
+    displayOptions,
+    rowSelectionOptions,
+    rowActions,
+    manualPaginationOptions,
+    manualSortingOptions,
+    defaultSort,
+    customSort,
+  })}
 `;
 
 export const Default = Template.bind({});
@@ -635,12 +696,17 @@ ManualSorting.args = {
   ...DefaultArgs,
   sort: true,
   manualSortingOptions: {
-    currentSortingState: [{
-      id: 'first-name',
-      desc: false
-    }]
-  }
+    currentSortingState: [
+      {
+        id: 'first-name',
+        desc: false,
+      },
+    ],
+  },
 };
+
+export const CustomSorting = Template.bind({});
+CustomSorting.args = { ...DefaultArgs, customSort: ['Rejected', 'Verified', 'Pending'], sort: true, data: makeData(5) };
 
 export const ValueFormatter = ({
   hover,
@@ -661,7 +727,7 @@ export const ValueFormatter = ({
   rowSelection,
   rowSelectionOptions,
   density,
-  wrapText
+  wrapText,
 }) => html`
   <div style="width: 950px">
     <modus-table
@@ -701,7 +767,7 @@ ValueFormatter.args = {
   maxWidth: '',
   rowSelection: false,
   rowSelectionOptions: {},
-  wrapText: false
+  wrapText: false,
 };
 const valueFormatterTable = (pageSizeList, toolbarOptions, displayOptions, rowSelectionOptions) => {
   const tag = document.createElement('script');
@@ -724,7 +790,7 @@ export const Badge = Template.bind({});
 Badge.args = {
   ...DefaultArgs,
   columns: [
-    ...DefaultColumns.slice(0, DefaultColumns.length-2),
+    ...DefaultColumns.slice(0, DefaultColumns.length - 2),
     {
       header: 'Priority',
       accessorKey: 'priority',
@@ -733,11 +799,10 @@ Badge.args = {
       dataType: 'badge',
       maxSize: 100,
     },
-    ...DefaultColumns.slice(DefaultColumns.length - 1)
+    ...DefaultColumns.slice(DefaultColumns.length - 1),
   ],
-  data: makeData(7)
-
-}
+  data: makeData(7),
+};
 
 export const ColumnResize = Template.bind({});
 ColumnResize.args = { ...DefaultArgs, columnResize: true };
@@ -783,48 +848,123 @@ ExpandableRows.args = { ...DefaultArgs, rowsExpandable: true, data: makeData(7, 
 
 export const CheckboxRowSelection = Template.bind({});
 CheckboxRowSelection.args = {
-  ...DefaultArgs, rowSelection: true, rowSelectionOptions: {
+  ...DefaultArgs,
+  rowSelection: true,
+  rowSelectionOptions: {
     multiple: true,
     subRowSelection: true,
-    preSelectedRows:["0"],
-  }, data: makeData(7)
+    preSelectedRows: ['0'],
+  },
+  data: makeData(7),
 };
 
-const EditableColumns =DefaultColumns.map(col =>{
-  if(col.dataType === 'link') return col;
-  if(col.accessorKey === 'status'){
-    return {...col,  cellEditable:true,
-      cellEditorType: 'dropdown',
+const DefaultColumnsWithPriority = [
+  ...DefaultColumns,
+  {
+    header: 'Priority',
+    accessorKey: 'priority',
+    sortingFn: 'sortForBadge',
+    id: 'priority',
+    dataType: 'badge',
+    maxSize: 100,
+  },
+];
+const EditableColumns = DefaultColumnsWithPriority.map((col) => {
+  if (col.accessorKey === 'status') {
+    return {
+      ...col,
+      cellEditable: true,
+      cellEditorType: 'select',
       cellEditorArgs: {
-        options:[
-        { display: 'Verified' },
-        { display: 'Pending' },
-        { display: 'Rejected' },
-        ]
-      } };
+        options: [{ display: 'Verified' }, { display: 'Pending' }, { display: 'Rejected' }],
+      },
+    };
   }
-  else return {...col, cellEditable: true};
+  if (col.accessorKey === 'firstName') {
+    const nameOptions = Names.map((name) => name.split(' ')[0]);
+    return {
+      ...col,
+      cellEditable: true,
+      cellEditorType: 'autocomplete',
+      cellEditorArgs: {
+        options: nameOptions,
+      },
+    };
+  }
+  if (col.accessorKey === 'email') {
+    const emailOptions = Names.map((name) => ({
+      display: `${name.split(' ')[0]}${name.split(' ')[1]}@example.com`,
+      url: `${name.split(' ')[0]}${name.split(' ')[1]}@example.com`,
+    }));
+    return {
+      ...col,
+      cellEditable: true,
+      cellEditorType: 'autocomplete',
+      cellEditorArgs: {
+        options: emailOptions,
+      },
+    };
+  }
+  if (col.accessorKey === 'priority') {
+    return {
+      ...col,
+      cellEditable: true,
+      cellEditorType: 'select',
+      cellEditorArgs: {
+        options: [
+          { display: 'Low', type: 'counter', color: 'danger', size: 'medium' },
+          { display: 'Medium', type: 'counter', color: 'primary', size: 'medium' },
+          { display: 'High', type: 'counter', color: 'success', size: 'medium' },
+        ],
+      },
+    };
+  }
+  if (col.accessorKey === 'createdAt') {
+    return {
+      ...col,
+      cellEditable: true,
+      cellEditorType: 'date',
+      cellEditorArgs: {
+        format: 'yyyy-mm-dd',
+      },
+    };
+  } else return { ...col, cellEditable: true };
 });
 export const InlineEditing = Template.bind({});
 InlineEditing.args = { ...DefaultArgs, columns: EditableColumns, data: makeData(7) };
 
 export const LargeDataset = Template.bind({});
 
-LargeDataset.args = { ...DefaultArgs, columns: EditableColumns, data: makeData(10000, 1,1 ),pagination: true, pageSizeList: [5, 10, 50], sort: true , hover: true, rowsExpandable: true, summaryRow: true , columnReorder:true, columnResize: true, toolbar:true,  toolbarOptions: {
-  columnsVisibility: {
-    title: '',
-    requiredColumns: ['age', 'visits'],
-  }
-},
-rowSelection: true, rowSelectionOptions: {
-  multiple: true,
-  subRowSelection: true
-}
+LargeDataset.args = {
+  ...DefaultArgs,
+  columns: EditableColumns,
+  data: makeData(10000, 1, 1),
+  pagination: true,
+  pageSizeList: [5, 10, 50],
+  sort: true,
+  hover: true,
+  rowsExpandable: true,
+  summaryRow: true,
+  columnReorder: true,
+  columnResize: true,
+  toolbar: true,
+  toolbarOptions: {
+    columnsVisibility: {
+      title: '',
+      requiredColumns: ['age', 'visits'],
+    },
+  },
+  rowSelection: true,
+  rowSelectionOptions: {
+    multiple: true,
+    subRowSelection: true,
+  },
 };
 
 export const RowActions = Template.bind({});
 RowActions.args = {
-  ...DefaultArgs, rowActions:[
+  ...DefaultArgs,
+  rowActions: [
     {
       id: '1',
       icon: 'add',
@@ -856,15 +996,21 @@ RowActions.args = {
       index: 4,
       icon: 'delete',
       label: 'Delete',
-    }
-
-  ], data: makeData(7), fullWidth: true
+    },
+  ],
+  data: makeData(7),
+  fullWidth: true,
 };
 
 export const WrapText = Template.bind({});
-WrapText.args = { ...DefaultArgs, data: [{
-    ...newPerson(),
-    lastName: 'This is an example of long text'
-  },
-  ...makeData(4)], wrapText: true
+WrapText.args = {
+  ...DefaultArgs,
+  data: [
+    {
+      ...newPerson(),
+      lastName: 'This is an example of long text',
+    },
+    ...makeData(4),
+  ],
+  wrapText: true,
 };

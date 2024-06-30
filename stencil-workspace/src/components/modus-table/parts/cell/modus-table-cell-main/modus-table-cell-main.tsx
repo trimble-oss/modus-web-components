@@ -6,6 +6,7 @@ import {
   Watch,
   Component,
   Prop,
+  Method,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Cell } from '@tanstack/table-core';
@@ -95,6 +96,31 @@ export class ModusTableCellMain {
     }
   };
 
+  /**
+   * Returns whether a cell is editable based on row index and column ID.
+   * @param rowIndex The index of the row.
+   * @param columnId The ID of the column.
+   * @returns Boolean indicating if the cell is editable.
+   */
+  @Method()
+  async handleCellEdit(rowIndex: string, columnId: string): Promise<void> {
+    const tableInstance = this.cell.getContext().table;
+    const row = tableInstance.getRowModel().rows[rowIndex];
+
+    if (!row) return;
+
+    const cell = row.getAllCells().find((cell) => cell.column.id === columnId);
+    if (!cell) return;
+
+    // Focus on the cell element
+    const cellElement = this.el.querySelector(`[data-cell-id="${rowIndex}-${columnId}"]`) as HTMLElement;
+    if (cellElement) {
+      cellElement.focus();
+    }
+
+    this.editMode = true;
+  }
+
   handleCellBlur = (event: FocusEvent) => {
     if (!this.el.contains(event.relatedTarget as HTMLElement)) {
       this.editMode = false;
@@ -170,12 +196,20 @@ export class ModusTableCellMain {
           <ModusTableCellLinkElement
             link={cellValue as ModusTableCellLink}
             onLinkClick={(link: ModusTableCellLink) => {
+              this.cellEl.focus();
               cellLinkClick.emit(link);
             }}
           />
         );
       } else if (cellDataType === COLUMN_DEF_DATATYPE_BADGE) {
-        return <ModusTableCellBadgeElement badge={cellValue as ModusTableCellBadge} />;
+        return (
+          <ModusTableCellBadgeElement
+            badge={cellValue as ModusTableCellBadge}
+            onBadgeClick={() => {
+              this.cellEl.focus();
+            }}
+          />
+        );
       } else {
         return CellFormatter(this.cell.column.columnDef.cell, this.cell.getContext());
       }
@@ -197,7 +231,8 @@ export class ModusTableCellMain {
       <Host>
         {this.editMode ? (
           <modus-table-cell-editor
-            value={valueString}
+            data-type={this.cell.column.columnDef[COLUMN_DEF_DATATYPE_KEY]}
+            value={this.cell.getValue()}
             type={this.getEditorType()}
             args={this.getEditorArgs()}
             valueChange={(newVal: string) => this.handleCellEditorValueChange(newVal, valueString)}
