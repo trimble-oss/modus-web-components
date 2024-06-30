@@ -255,6 +255,18 @@ export class ModusTreeViewItem {
     }
   }
 
+  handleKeyUpTreeItem(e: KeyboardEvent): void {
+    if (e.defaultPrevented) {
+      return;
+    }
+
+    const { multiSelection, hasItemSelected } = this.options;
+
+    if (e.shiftKey && multiSelection) {
+      this.itemClick.emit(hasItemSelected(this.nodeId));
+    }
+  }
+
   handleKeyDownTreeItem(e: KeyboardEvent) {
     if (e.defaultPrevented) {
       return; // Do nothing if event already handled
@@ -441,6 +453,7 @@ export class ModusTreeViewItem {
           class={treeItemClass}
           onFocus={() => this.handleFocus()}
           onClick={(e) => this.handleItemClick(e)}
+          onKeyUp={(e) => this.handleKeyUpTreeItem(e)}
           onKeyDown={(e) => this.handleKeyDownTreeItem(e)}
           ref={(el) => this.handleRefItemContent(el)}
           tabindex={tabIndex}>
