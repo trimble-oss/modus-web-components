@@ -255,7 +255,7 @@ export class ModusTreeViewItem {
     }
   }
 
-  handleKeyDownItemClick(e: KeyboardEvent): void {
+  handleKeyUpTreeItem(e: KeyboardEvent): void {
     if (e.defaultPrevented) {
       return;
     }
@@ -453,7 +453,7 @@ export class ModusTreeViewItem {
           class={treeItemClass}
           onFocus={() => this.handleFocus()}
           onClick={(e) => this.handleItemClick(e)}
-          onKeyUp={(e) => this.handleKeyDownItemClick(e)}
+          onKeyUp={(e) => this.handleKeyUpTreeItem(e)}
           onKeyDown={(e) => this.handleKeyDownTreeItem(e)}
           ref={(el) => this.handleRefItemContent(el)}
           tabindex={tabIndex}>
