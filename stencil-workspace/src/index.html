@@ -18,6 +18,44 @@
   <body data-mwc-theme="light">
     <main>
       <!-- Test components -->
+      <div style="width: 950px">
+        <modus-table hover="false" sort="false" />
+      </div>
+      <script>
+        // Existing code to set initial columns and data
+        document.querySelector('modus-table').columns = [
+          { header: 'First Name', accessorKey: 'firstName', id: 'first-name', dataType: 'text' },
+          { header: 'Last Name', accessorKey: 'lastName', id: 'last-name', dataType: 'text' },
+          { header: 'Age', accessorKey: 'age', id: 'age', dataType: 'integer' },
+          { header: 'Visits', accessorKey: 'visits', id: 'visits', dataType: 'integer' },
+          { header: 'Status', accessorKey: 'status', id: 'status', dataType: 'text' },
+          { header: 'Profile Progress', accessorKey: 'progress', id: 'progress', dataType: 'integer' },
+          { header: 'Created At', accessorKey: 'createdAt', id: 'createdAt', dataType: 'date' },
+        ];
+
+        document.querySelector('modus-table').data = [
+          // Existing data
+        ];
+
+        // Function to generate a single data entry
+        function generateData(index) {
+          return {
+            firstName: `Name ${index}`,
+            lastName: `Surname ${index}`,
+            age: Math.floor(Math.random() * 100),
+            visits: Math.floor(Math.random() * 1000),
+            progress: Math.floor(Math.random() * 100),
+            status: 'single', // Simplified for example
+            createdAt: new Date().toISOString(),
+          };
+        }
+
+        // Generate and add 100 more data entries
+        for (let i = 0; i < 30; i++) {
+          document.querySelector('modus-table').data.push(generateData(i));
+        }
+      </script>
+    </html>
     </main>
   </body>
 </html>

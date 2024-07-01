@@ -43,6 +43,7 @@
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "@stencil/core": "^4.12.4",
+    "@tanstack/react-virtual": "^3.7.0",
     "@tanstack/table-core": "^8.17.3"
   },
   "devDependencies": {
