@@ -20,7 +20,7 @@ export class ModusNumberInput {
   @Prop() decimalCharacter: '.' | ',' = '.';
 
   /** (optional) The number of decimal places. */
-  @Prop() decimalPlaces: number;
+  @Prop() decimalPlaces = 2;
 
   /** (optional) The digit group separator. */
   @Prop() digitGroupSeparator: ' ' | ',' | '.' = ',';
