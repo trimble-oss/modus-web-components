@@ -1,6 +1,8 @@
 // eslint-disable-next-line
-import { Component, Event, EventEmitter, h, Method, Prop, Watch } from '@stencil/core';
+import { Component, h, Prop, Event, EventEmitter, Method, Watch } from '@stencil/core';
+import { formatNumeral, formatCreditCard, FormatNumeralOptions, NumeralThousandGroupStyles } from 'cleave-zen';
 import { generateElementId } from '../../utils/utils';
+import { ModusIconMap } from '../../icons/ModusIconMap';
 
 @Component({
   tag: 'modus-number-input',
@@ -11,6 +13,21 @@ export class ModusNumberInput {
   /** (optional) The input's aria-label. */
   @Prop() ariaLabel: string | null;
 
+  /** (optional) The currency symbol. */
+  @Prop() currencySymbol = '';
+
+  /** (optional) The decimal character. */
+  @Prop() decimalCharacter: '.' | ',' = '.';
+
+  /** (optional) The number of decimal places. */
+  @Prop() decimalPlaces: number;
+
+  /** (optional) The digit group separator. */
+  @Prop() digitGroupSeparator: ' ' | ',' | '.' = ',';
+
+  /** (optional) The digit group spacing. */
+  @Prop() digitGroupSpacing: NumeralThousandGroupStyles;
+
   /** (optional) Whether the input is disabled. */
   @Prop() disabled: boolean;
 
@@ -19,6 +36,12 @@ export class ModusNumberInput {
 
   /** (optional) The input's helper text displayed below the input. */
   @Prop() helperText: string;
+
+  /** (optional) The maximum number of integers allowed. */
+  @Prop() integerLimit: number;
+
+  /** (optional) Whether the input is a credit card. */
+  @Prop() isCreditCard: boolean;
 
   /** (optional) The input's label. */
   @Prop() label: string;
@@ -64,8 +87,40 @@ export class ModusNumberInput {
   ]);
   numberInput: HTMLInputElement;
 
+  componentDidLoad() {
+    this.formatInputValue();
+  }
+
+  @Watch('digitGroupSeparator')
+  @Watch('digitGroupSpacing')
+  @Watch('decimalCharacter')
+  @Watch('decimalPlaces')
+  @Watch('currencySymbol')
+  @Watch('integerLimit')
+  watchPropChangeHandler() {
+    this.formatInputValue();
+  }
+
+  formatInputValue() {
+    if (this.numberInput) {
+      const options: FormatNumeralOptions = {
+        numeralThousandsGroupStyle: this?.digitGroupSpacing,
+        delimiter: this?.digitGroupSeparator,
+        numeralDecimalMark: this?.decimalCharacter,
+        prefix: this?.currencySymbol,
+        numeralIntegerScale: this?.integerLimit,
+        numeralDecimalScale: this?.decimalPlaces,
+      };
+      const formattedValue = this.isCreditCard
+        ? formatCreditCard(this.numberInput.value, options)
+        : formatNumeral(this.numberInput.value, options);
+      this.numberInput.value = formattedValue;
+      this.value = formattedValue;
+    }
+  }
+
   handleOnInput(): void {
-    this.value = this.numberInput.value;
+    this.formatInputValue();
     this.valueChange.emit(this.value);
   }
 
@@ -82,6 +137,41 @@ export class ModusNumberInput {
     } else {
       this.value = newValue;
     }
+  }
+
+  incrementValue() {
+    this.updateValue(this.parseValue(this.numberInput.value || '0') + (this.step || 1));
+  }
+
+  decrementValue() {
+    this.updateValue(this.parseValue(this.numberInput.value || '0') - (this.step || 1));
+  }
+
+  handleWheel(event: WheelEvent) {
+    event.preventDefault();
+    if (!this.disabled && !this.readOnly) {
+      const step = this.step || 1;
+      const delta = Math.sign(event.deltaY);
+      this.updateValue(this.parseValue(this.numberInput.value || '0') + delta * step);
+    }
+  }
+
+  updateValue(newValue: number) {
+    if (this.minValue !== undefined && newValue < this.minValue) {
+      newValue = this.minValue;
+    }
+    if (this.maxValue !== undefined && newValue > this.maxValue) {
+      newValue = this.maxValue;
+    }
+    this.numberInput.value = newValue.toString();
+    this.formatInputValue();
+    this.valueChange.emit(this.numberInput.value);
+  }
+
+  parseValue(value: string): number {
+    value = value.replace(this.currencySymbol, '').split(this.digitGroupSeparator).join('');
+    value = this.decimalCharacter !== '.' ? value.replace(this.decimalCharacter, '.') : value;
+    return parseFloat(value) || 0;
   }
 
   render(): unknown {
@@ -128,21 +218,28 @@ export class ModusNumberInput {
             aria-label={this.ariaLabel}
             aria-invalid={!!this.errorText}
             aria-required={this.required?.toString()}
-            aria-valuemax={this.maxValue}
-            aria-valuemin={this.minValue}
-            aria-valuenow={this.value}
             class={textAlignClassName}
             disabled={this.disabled}
+            inputMode="decimal"
             max={this.maxValue}
             min={this.minValue}
             onInput={() => this.handleOnInput()}
+            onWheel={(event) => this.handleWheel(event)}
             placeholder={this.placeholder}
             readonly={this.readOnly}
             ref={(el) => (this.numberInput = el as HTMLInputElement)}
             step={this.step}
             tabIndex={0}
-            type="number"
+            type="text"
             value={this.value}></input>
+          <div class="value-adjusters">
+            <div class="increment" onClick={() => this.incrementValue()}>
+              <ModusIconMap icon="caret_up" size="16" />
+            </div>
+            <div class="decrement" onClick={() => this.decrementValue()}>
+              <ModusIconMap icon="caret_down" size="16" />
+            </div>
+          </div>
         </div>
         {this.errorText ? (
           <label class="sub-text error">{this.errorText}</label>
