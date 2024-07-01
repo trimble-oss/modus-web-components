@@ -242,10 +242,10 @@ export const Default = Template.bind({});
 Default.args = {
   ariaLabel: '',
   currencySymbol: '',
-  decimalCharacter: '.',
-  decimalPlaces: 2,
-  digitGroupSeparator: ',',
-  digitGroupSpacing: 'thousand',
+  decimalCharacter: '',
+  decimalPlaces: '',
+  digitGroupSeparator: '',
+  digitGroupSpacing: 'none',
   disabled: false,
   errorText: '',
   helperText: '',
@@ -261,5 +261,5 @@ Default.args = {
   step: 1,
   textAlign: 'left',
   validText: '',
-  value: 10000,
+  value: 25,
 };
