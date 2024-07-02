@@ -200,10 +200,8 @@ export class ModusTableCellEditor {
             if (this.dataType === 'badge') {
               const { display, ...restProps } = detail;
               this.editedValue = { ...restProps, text: display };
-            } else if (this.dataType === 'link') {
-              this.editedValue = detail;
             } else {
-              this.editedValue = detail[valueKey];
+              this.editedValue = detail;
             }
           }}></modus-select>
       </div>
