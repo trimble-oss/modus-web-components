@@ -458,7 +458,7 @@ export class ModusAutocomplete {
             <modus-chip
               value={chip.value}
               chipId={chip.id}
-              size="medium"
+              size="small"
               show-close
               onCloseClick={() => this.handleCloseClick(chip)}></modus-chip>
           ))}
