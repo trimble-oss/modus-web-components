@@ -19,10 +19,12 @@ export class ModusToolbar {
   createButton(child: Element) {
     const className = 'modus-button';
     const iconOnly = child.getAttribute('icon-only');
+    const ariaLabel = child.getAttribute('aria-label');
     const label = child.textContent ? child.textContent.trim() : '';
 
     return (
       <modus-button
+        aria-label={ariaLabel}
         button-style="borderless"
         color="secondary"
         class={className}
