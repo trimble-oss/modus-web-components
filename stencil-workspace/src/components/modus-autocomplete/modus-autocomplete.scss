@@ -63,9 +63,9 @@
       --input-font-size: var(--modus-autocomplete-font-size, #{12px});
 
       &::part(input-container) {
-        height: 1.875rem;
         border: none !important;
         box-shadow: none;
+        height: 1.875rem;
       }
     }
   }
@@ -158,6 +158,18 @@
   }
 
   &.large {
+    .chips-container {
+      .input {
+        &::part(input-container) {
+          height: 3rem;
+        }
+      }
+    }
+
+    .icon-search {
+      margin-left: 8px;
+    }
+
     .options-container > .text-option {
       font-size: $rem-14px;
       min-height: 3rem;
