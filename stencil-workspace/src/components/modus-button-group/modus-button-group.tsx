@@ -111,7 +111,7 @@ export class ModusButtonGroup {
       button.color = this.color;
       button.size = this.size;
       button.type = buttonType;
-      if (button.hasAttribute('selected') && !foundSelected && this.selectionType == DEFAULT_SELECTION_TYPE) {
+      if (button.hasAttribute('selected') && !foundSelected && this.selectionType == SINGLE_SELECTION_TYPE) {
         button.setActive(true);
         this.selectedButtons.push(button);
         foundSelected = true;
