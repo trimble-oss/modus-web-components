@@ -97,6 +97,7 @@ export class ModusButtonGroup {
 
   renderButtons(buttons: NodeListOf<HTMLModusButtonElement>, reset: boolean) {
     const buttonType = this.determineButtonType();
+    let foundSelected = false;
     buttons.forEach((button: HTMLModusButtonElement) => {
       if (reset) {
         button.ariaDisabled = this.ariaDisabled;
@@ -110,6 +111,11 @@ export class ModusButtonGroup {
       button.color = this.color;
       button.size = this.size;
       button.type = buttonType;
+      if (button.hasAttribute('selected') && !foundSelected && this.selectionType == DEFAULT_SELECTION_TYPE) {
+        button.setActive(true);
+        this.selectedButtons.push(button);
+        foundSelected = true;
+      }
     });
   }
 
