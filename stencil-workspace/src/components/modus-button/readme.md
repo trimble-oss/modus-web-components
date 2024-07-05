@@ -63,6 +63,7 @@ Type: `Promise<void>`
  - [modus-action-bar](../modus-action-bar)
  - [modus-alert](../modus-alert)
  - [modus-modal](../modus-modal)
+ - [modus-navbar](../modus-navbar)
  - [modus-table-columns-visibility](../modus-table/parts/panel/modus-table-columns-visibility)
  - [modus-table-row-actions](../modus-table/parts/row/actions/modus-table-row-actions)
  - [modus-toolbar](../modus-toolbar)
@@ -73,6 +74,7 @@ graph TD;
   modus-action-bar --> modus-button
   modus-alert --> modus-button
   modus-modal --> modus-button
+  modus-navbar --> modus-button
   modus-table-columns-visibility --> modus-button
   modus-table-row-actions --> modus-button
   modus-toolbar --> modus-button

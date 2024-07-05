@@ -28,6 +28,11 @@ import { Anchor } from '@storybook/addon-docs';
 
 <modus-chip show-checkmark size="small" value="Pets OK"></modus-chip>
 
+### Chips with chip-id
+
+<modus-chip image-url="https://randomuser.me/api/portraits/lego/1.jpg" show-close chip-id="chip-id-1" size="small" value="Pet 1"></modus-chip>
+<modus-chip image-url="https://randomuser.me/api/portraits/lego/1.jpg" show-close chip-id="chip-id-2" size="small" value="Pet 2"></modus-chip>
+
 ```html
 <modus-chip image-url="https://example.com/image.jpg" show-close value="Bryan"></modus-chip>
 <modus-chip active image-url="https://example.com/image.jpg" show-close value="Bryan"></modus-chip>
@@ -39,7 +44,9 @@ import { Anchor } from '@storybook/addon-docs';
 <modus-chip has-error image-url="https://example.com/image.jpg" show-close chip-style="outline" value="Bryan"></modus-chip>
 <modus-chip disabled image-url="https://example.com/image.jpg" show-close chip-style="outline" value="Bryan"></modus-chip>
 
-<modus-chip show-checkmark size="small" value="Pets OK"></modus-chip>
+<modus-chip image-url="https://randomuser.me/api/portraits/lego/1.jpg" show-close chipId="chip-1" size="small" value="Pet 1"></modus-chip>
+<modus-chip image-url="https://randomuser.me/api/portraits/lego/1.jpg" show-close chipId="chip-2" size="small" value="Pet 2"></modus-chip>
+
 ```
 
 ### Properties
@@ -57,6 +64,7 @@ import { Anchor } from '@storybook/addon-docs';
 | size           | The chip's size                                                     | string  | 'medium', 'small'  | 'medium'      |          |
 | value          | The chip's value                                                    | string  |                    |               |          |
 | maxWidth       | Maximum width for the Chip's text and shows ellipsis when truncated | string  |                    |               |          |
+| chipId         | This chip's id will create much more visibility for testing        | string  |                    |               |          |
 
 ### DOM Events
 

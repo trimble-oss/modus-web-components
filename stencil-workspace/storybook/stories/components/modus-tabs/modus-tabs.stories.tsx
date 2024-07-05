@@ -28,13 +28,13 @@ const Template = ({ size }) => html`
 `;
 export const Default = Template.bind({});
 Default.args = {
-  size: 'medium'
-}
+  size: 'medium',
+};
 
 export const Small = Template.bind({});
 Small.args = {
-  size: 'small'
-}
+  size: 'small',
+};
 
 const setTabs = () => {
   const tag = document.createElement('script');

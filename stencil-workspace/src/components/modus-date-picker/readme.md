@@ -12,6 +12,13 @@
 | `label`  | `label`   | (optional) Label for the field. | `string` | `undefined` |
 
 
+## Shadow Parts
+
+| Part            | Description |
+| --------------- | ----------- |
+| `"date-inputs"` |             |
+
+
 ## Dependencies
 
 ### Used by

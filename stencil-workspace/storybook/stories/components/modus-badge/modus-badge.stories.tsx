@@ -14,15 +14,7 @@ export default {
     },
     color: {
       control: {
-        options: [
-          'danger',
-          'dark',
-          'primary',
-          'secondary',
-          'success',
-          'tertiary',
-          'warning',
-        ],
+        options: ['danger', 'dark', 'primary', 'secondary', 'success', 'tertiary', 'warning'],
         type: 'select',
       },
       description: 'The color of the badge',
@@ -68,16 +60,9 @@ export default {
 };
 
 // TODO - Figure how to work with slots.
-export const Default = ({ ariaLabel, color, size, type }) =>
-  html`
-    <modus-badge
-      aria-label=${ariaLabel}
-      color=${color}
-      size=${size}
-      type=${type}>
-      Default
-    </modus-badge>
-  `;
+export const Default = ({ ariaLabel, color, size, type }) => html`
+  <modus-badge aria-label=${ariaLabel} color=${color} size=${size} type=${type}> Default </modus-badge>
+`;
 Default.args = {
   ariaLabel: '',
   color: 'primary',
@@ -85,16 +70,9 @@ Default.args = {
   type: 'default',
 };
 
-export const Counter = ({ ariaLabel, color, size, type }) =>
-  html`
-    <modus-badge
-      aria-label=${ariaLabel}
-      color=${color}
-      size=${size}
-      type=${type}>
-      12
-    </modus-badge>
-  `;
+export const Counter = ({ ariaLabel, color, size, type }) => html`
+  <modus-badge aria-label=${ariaLabel} color=${color} size=${size} type=${type}> 12 </modus-badge>
+`;
 Counter.args = {
   ariaLabel: '',
   color: 'primary',
@@ -102,14 +80,7 @@ Counter.args = {
   type: 'counter',
 };
 
-export const Text = ({ ariaLabel, color, size, type }) =>
-  html`
-    <modus-badge
-      aria-label=${ariaLabel}
-      color=${color}
-      size=${size}
-      type=${type}>
-      Text
-    </modus-badge>
-  `;
+export const Text = ({ ariaLabel, color, size, type }) => html`
+  <modus-badge aria-label=${ariaLabel} color=${color} size=${size} type=${type}> Text </modus-badge>
+`;
 Text.args = { ariaLabel: '', color: 'primary', size: 'medium', type: 'text' };

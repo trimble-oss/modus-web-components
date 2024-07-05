@@ -58,16 +58,9 @@ export default {
   },
 };
 
-export const Medium = ({ ariaLabel, checked, disabled, label, size }) =>
-  html`
-    <modus-switch
-      aria-label=${ariaLabel}
-      checked=${checked}
-      ?disabled=${disabled}
-      label=${label}
-      size=${size}>
-    </modus-switch>
-  `;
+export const Medium = ({ ariaLabel, checked, disabled, label, size }) => html`
+  <modus-switch aria-label=${ariaLabel} checked=${checked} ?disabled=${disabled} label=${label} size=${size}> </modus-switch>
+`;
 Medium.args = {
   ariaLabel: '',
   checked: false,
@@ -76,16 +69,9 @@ Medium.args = {
   size: 'medium',
 };
 
-export const Checked = ({ ariaLabel, checked, disabled, label, size }) =>
-  html`
-    <modus-switch
-      aria-label=${ariaLabel}
-      checked=${checked}
-      ?disabled=${disabled}
-      label=${label}
-      size=${size}>
-    </modus-switch>
-  `;
+export const Checked = ({ ariaLabel, checked, disabled, label, size }) => html`
+  <modus-switch aria-label=${ariaLabel} checked=${checked} ?disabled=${disabled} label=${label} size=${size}> </modus-switch>
+`;
 Checked.args = {
   ariaLabel: '',
   checked: true,
@@ -94,16 +80,9 @@ Checked.args = {
   size: 'medium',
 };
 
-export const Disabled = ({ ariaLabel, checked, disabled, label, size }) =>
-  html`
-    <modus-switch
-      aria-label=${ariaLabel}
-      checked=${checked}
-      ?disabled=${disabled}
-      label=${label}
-      size=${size}>
-    </modus-switch>
-  `;
+export const Disabled = ({ ariaLabel, checked, disabled, label, size }) => html`
+  <modus-switch aria-label=${ariaLabel} checked=${checked} ?disabled=${disabled} label=${label} size=${size}> </modus-switch>
+`;
 Disabled.args = {
   ariaLabel: '',
   checked: false,

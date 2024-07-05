@@ -13,7 +13,7 @@ export default {
       },
     },
     disabled: {
-      description: "Hide the tooltip",
+      description: 'Hide the tooltip',
       table: {
         type: { summary: 'boolean' },
       },
@@ -44,21 +44,12 @@ export default {
     options: {
       isToolshown: true,
     },
-    layout: 'centered'
+    layout: 'centered',
   },
 };
 
-export const Default = ({
-  ariaLabel,
-  position,
-  text,
-  disabled
-}) => html`
-  <modus-tooltip
-    aria-label=${ariaLabel}
-    position=${position}
-    text=${text}
-    ?disabled=${disabled}>
+export const Default = ({ ariaLabel, position, text, disabled }) => html`
+  <modus-tooltip aria-label=${ariaLabel} position=${position} text=${text} ?disabled=${disabled}>
     <modus-button>Button</modus-button>
   </modus-tooltip>
 `;
@@ -66,5 +57,5 @@ Default.args = {
   ariaLabel: '',
   position: 'bottom',
   text: 'Tooltip text...',
-  disabled: false
+  disabled: false,
 };

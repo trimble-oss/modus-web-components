@@ -33,3 +33,14 @@ export interface ModusNavbarButton {
   hideMenu?: boolean;
   tooltip?: ModusNavbarTooltip;
 }
+
+export interface ModusNavbarDropdownItem {
+  text: string;
+  value: string;
+}
+
+export interface ModusNavbarDropdownOptions {
+  ariaLabel: string;
+  defaultValue: string;
+  items: ModusNavbarDropdownItem[];
+}

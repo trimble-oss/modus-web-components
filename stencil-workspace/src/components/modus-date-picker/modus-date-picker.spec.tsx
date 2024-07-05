@@ -19,7 +19,7 @@ describe('modus-date-picker', () => {
            Date range:
          </label>
        </div>
-       <div class="date-inputs">
+       <div class="date-inputs" part="date-inputs">
          <slot></slot>
        </div>
        <div style="display: inline-flex;"></div>
