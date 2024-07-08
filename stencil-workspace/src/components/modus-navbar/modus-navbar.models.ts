@@ -41,6 +41,13 @@ export interface ModusNavbarDropdownItem {
 
 export interface ModusNavbarDropdownOptions {
   ariaLabel: string;
-  defaultValue: string;
+  defaultValue?: string;
   items: ModusNavbarDropdownItem[];
+  useItemSelectPromise?: boolean;
+}
+
+export interface ModusNavbarDropdownItemSelectEvent {
+  item: ModusNavbarDropdownItem;
+  resolve?: (value: ModusNavbarDropdownItem) => void;
+  reject?: (reason?: any) => void; // eslint-disable-line @typescript-eslint/no-explicit-any
 }

@@ -20,6 +20,7 @@ import { IconHelp } from '../../icons/svgs/icon-help';
 import {
   ModusNavbarButton,
   ModusNavbarDropdownItem,
+  ModusNavbarDropdownItemSelectEvent,
   ModusNavbarDropdownOptions,
   ModusNavbarLogoOptions,
   ModusNavbarTooltip,
@@ -119,7 +120,7 @@ export class ModusNavbar {
   @Event() helpOpen: EventEmitter<void>;
 
   /** An event that fires when a dropdown item is selected **/
-  @Event() dropdownItemSelect: EventEmitter<ModusNavbarDropdownItem>;
+  @Event() dropdownItemSelect: EventEmitter<ModusNavbarDropdownItemSelectEvent>;
 
   /** An event that fires on main menu click. */
   @Event() mainMenuClick: EventEmitter<KeyboardEvent | MouseEvent>;
@@ -383,8 +384,23 @@ export class ModusNavbar {
   }
 
   dropdownItemSelectHandler(item: ModusNavbarDropdownItem): void {
-    this.selectedDropdownItem = item;
-    this.dropdownItemSelect.emit(item);
+    if (this.dropdownOptions.useItemSelectPromise) {
+      const promise = new Promise<ModusNavbarDropdownItem>((resolve, reject) => {
+        this.dropdownItemSelect.emit({ item, resolve, reject });
+      });
+
+      promise
+        .then((value) => {
+          this.selectedDropdownItem = value;
+        })
+        .catch(() => {
+          // Common tasks on rejection, this should be flexible.
+          // Consumers are using this to control the value themselves, open a new tab while keeping the current one unchanged, etc.
+        });
+    } else {
+      this.selectedDropdownItem = item;
+      this.dropdownItemSelect.emit({ item });
+    }
   }
 
   getNotificationCount(): string {
