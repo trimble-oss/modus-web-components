@@ -61,6 +61,9 @@ export class ModusNavbar {
   /** (optional) Dropdown options. */
   @Prop() dropdownOptions: ModusNavbarDropdownOptions;
 
+  /** (optional) The selected dropdown item value. */
+  @Prop() selectedDropdownItem: ModusNavbarDropdownItem;
+
   /** (required) Profile menu options. */
   @Prop({ mutable: true }) profileMenuOptions: ModusProfileMenuOptions;
 
@@ -158,7 +161,6 @@ export class ModusNavbar {
   @State() componentId = createGuid();
   @State() searchOverlayVisible: boolean;
   @State() openButtonMenuId: string;
-  @State() selectedDropdownItem: ModusNavbarDropdownItem;
 
   readonly SLOT_MAIN = 'main';
   readonly SLOT_NOTIFICATIONS = 'notifications';
@@ -185,12 +187,6 @@ export class ModusNavbar {
   @Listen('signOutClick')
   signOutClickHandler(event: KeyboardEvent | MouseEvent): void {
     this.profileMenuSignOutClick.emit(event);
-  }
-
-  componentWillLoad(): void {
-    this.selectedDropdownItem = this.dropdownOptions?.items.find(
-      (item) => item.value === this.dropdownOptions.defaultValue
-    ) ?? { text: '', value: '' };
   }
 
   componentDidRender(): void {
@@ -383,7 +379,6 @@ export class ModusNavbar {
   }
 
   dropdownItemSelectHandler(item: ModusNavbarDropdownItem): void {
-    this.selectedDropdownItem = item;
     this.dropdownItemSelect.emit(item);
   }
 

@@ -825,6 +825,10 @@ export namespace Components {
          */
         "searchTooltip": ModusNavbarTooltip;
         /**
+          * (optional) The selected dropdown item value.
+         */
+        "selectedDropdownItem": ModusNavbarDropdownItem;
+        /**
           * (optional) Whether to show the apps menu.
          */
         "showAppsMenu": boolean;
@@ -3795,6 +3799,10 @@ declare namespace LocalJSX {
           * (optional) Search tooltip.
          */
         "searchTooltip"?: ModusNavbarTooltip;
+        /**
+          * (optional) The selected dropdown item value.
+         */
+        "selectedDropdownItem"?: ModusNavbarDropdownItem;
         /**
           * (optional) Whether to show the apps menu.
          */

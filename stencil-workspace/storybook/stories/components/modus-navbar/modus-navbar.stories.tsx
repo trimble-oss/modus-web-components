@@ -309,14 +309,14 @@ BlueNavbar.args = {
   notificationCount: 0,
 };
 
+const defaultItem = { text: 'Project 1', value: '1' };
 const dropdownOptions = {
   ariaLabel: 'Project dropdown',
-  defaultValue: '2',
-  items: [
-    { text: 'Project 1', value: '1' },
-    { text: 'Project 2', value: '2' },
-    { text: 'Project 3', value: '3' },
-  ],
+  items: [defaultItem, { text: 'Project 2', value: '2' }, { text: 'Project 3', value: '3' }],
+};
+let selectedDropdownItem = defaultItem;
+const dropdownItemSelectHandler = ({ detail }) => {
+  selectedDropdownItem = detail;
 };
 
 const WithOptionalFeaturesTemplate = ({
@@ -332,6 +332,7 @@ const WithOptionalFeaturesTemplate = ({
   showSearch,
 }) => html`
   <modus-navbar
+    with-optional-features
     enable-search-overlay=${enableSearchOverlay}
     nav-aria-label=${navAriaLabel}
     show-apps-menu
@@ -346,6 +347,7 @@ const WithOptionalFeaturesTemplate = ({
     .helpTooltip=${helpTooltip}
     .logoOptions=${defaultLogo}
     .dropdownOptions=${dropdownOptions}
+    .selectedDropdownItem=${selectedDropdownItem}
     .profileMenuOptions=${profileMenuOptions}
     .searchTooltip=${searchTooltip}>
     <div slot="main" style="height:300px;">Render your own main menu.</div>
@@ -393,3 +395,15 @@ WithOptionalFeatures.args = {
   showSearch: false,
   notificationCount: 0,
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const navbar = document.querySelector('modus-navbar[with-optional-features]') as any;
+    if (navbar) {
+      navbar.addEventListener('dropdownItemSelect', (event) => {
+        navbar.selectedDropdownItem = event.detail;
+      });
+    }
+  }, 500);
+});
