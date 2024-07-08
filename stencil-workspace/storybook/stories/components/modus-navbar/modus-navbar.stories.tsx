@@ -314,10 +314,7 @@ const dropdownOptions = {
   ariaLabel: 'Project dropdown',
   items: [defaultItem, { text: 'Project 2', value: '2' }, { text: 'Project 3', value: '3' }],
 };
-let selectedDropdownItem = defaultItem;
-const dropdownItemSelectHandler = ({ detail }) => {
-  selectedDropdownItem = detail;
-};
+const selectedDropdownItem = defaultItem;
 
 const WithOptionalFeaturesTemplate = ({
   buttons,
