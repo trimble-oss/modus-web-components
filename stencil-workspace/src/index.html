@@ -39,6 +39,11 @@
           },
           secondary: { url: 'https://modus.trimble.com/favicon.svg', height: 24 },
         };
+
+        element.addEventListener('dropdownItemSelect', (props) => {
+          const { item, resolve, reject } = props.detail;
+          resolve(item);
+        });
         element.dropdownOptions = {
           ariaLabel: 'Project dropdown',
           defaultValue: '2',
@@ -47,7 +52,9 @@
             { text: 'Project 2', value: '2' },
             { text: 'Project 3', value: '3' },
           ],
+          useItemSelectPromise: true,
         };
+
         element.profileMenuOptions = {
           avatarUrl: 'https://avatar.example.com/broken-image-link.png',
           email: 'modus_user@trimble.com',

@@ -18,6 +18,7 @@ This component utilizes the slot element, allowing you to render your own HTML i
   - The `slot` allows rendering custom HTML on button click by linking the slot name with button id.
 - If a `show-search` with `enable-search-overlay` set as true then search overly will open on search button click, if enable-search-overlay set to false then search button emit the event for client.
 - The `slot` allows rendering custom HTML by linking the slot name with `profileMenu` id under the links.
+- Dropdown item selection can be handled by the consumer using promises by setting `dropdownOptions.useItemSelectPromise` to true (see the "Types" section for more details).
 
 ### Default
 
@@ -273,6 +274,24 @@ interface ModusNavbarButton {
   hideMenu?: boolean;
   tooltip?: ModusNavbarTooltip;
 }
+
+export interface ModusNavbarDropdownItem {
+  text: string;
+  value: string;
+}
+
+export interface ModusNavbarDropdownOptions {
+  ariaLabel: string;
+  defaultValue?: string;
+  items: ModusNavbarDropdownItem[];
+  useItemSelectPromise?: boolean;
+}
+
+export interface ModusNavbarDropdownItemSelectEvent {
+  item: ModusNavbarDropdownItem;
+  resolve?: (value: ModusNavbarDropdownItem) => void;
+  reject?: (reason?: any) => void;
+}
 ```
 
 ### Properties
@@ -308,7 +327,7 @@ interface ModusNavbarButton {
 | `appsMenuAppOpen`         | An event that fires when an apps menu app opens.                        | `CustomEvent<ModusNavbarApp>`                             |
 | `appsMenuOpen`            | An event that fires when the apps menu opens.                           | `CustomEvent<void>`                                       |
 | `buttonClick`             | An event that fires when a button in the custom button list is clicked. | `CustomEvent<string>`                                     |
-| `dropdownItemSelect`      | An event that fires when a dropdown item is selected.                   | `CustomEvent<ModusNavbarDropdownItem>`                    |
+| `dropdownItemSelect`      | An event that fires when a dropdown item is selected.                   | `CustomEvent<ModusNavbarDropdownItemSelectEvent>`         |
 | `helpOpen`                | An event that fires when the help link opens.                           | `CustomEvent<void>`                                       |
 | `mainMenuClick`           | An event that fires on main menu click.                                 | `CustomEvent<KeyboardEvent>` or `CustomEvent<MouseEvent>` |
 | `notificationsMenuOpen`   | An event that fires when the notifications menu opens.                  | `CustomEvent<void>`                                       |
