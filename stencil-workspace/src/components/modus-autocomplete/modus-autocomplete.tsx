@@ -133,6 +133,9 @@ export class ModusAutocomplete {
 
   componentWillLoad(): void {
     this.convertOptions();
+    if (this.multiple) {
+      this.initializeSelectedChips();
+    }
   }
 
   componentDidRender(): void {
@@ -287,6 +290,23 @@ export class ModusAutocomplete {
   focusOptionItem = () => {
     (this.el.shadowRoot.querySelectorAll('[role="option"]')[this.focusItemIndex] as HTMLUListElement).focus();
   };
+
+  initializeSelectedChips() {
+    if (this.multiple && typeof this.value === 'string') {
+      const val = this.value.split(',');
+
+      const filteredOptions = val
+        ?.map((value) => {
+          return (this.options as ModusAutocompleteOption[]).find((option) => option?.value === value.trim());
+        })
+        .filter((option) => option !== undefined);
+
+      this.selectedChips = filteredOptions;
+      this.valueChange.emit(this.selectedChips.map((opt) => opt.value).join(','));
+      this.selectionsChanged.emit(this.selectedChips.map((opt) => opt.id));
+      this.value = '';
+    }
+  }
 
   handleSearchChange = (search: string) => {
     this.updateVisibleOptions(search);
