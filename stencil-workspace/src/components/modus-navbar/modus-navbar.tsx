@@ -61,7 +61,7 @@ export class ModusNavbar {
   /** (optional) Dropdown options. */
   @Prop() dropdownOptions: ModusNavbarDropdownOptions;
 
-  /** (optional) The selected dropdown item value. */
+  /** (optional) The selected dropdown item object. */
   @Prop() selectedDropdownItem: ModusNavbarDropdownItem;
 
   /** (required) Profile menu options. */

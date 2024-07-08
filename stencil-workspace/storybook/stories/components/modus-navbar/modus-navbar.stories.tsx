@@ -397,6 +397,7 @@ WithOptionalFeatures.args = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Ensure that Storybook has rendered before accessing the modus-navbar
   setTimeout(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const navbar = document.querySelector('modus-navbar[with-optional-features]') as any;
