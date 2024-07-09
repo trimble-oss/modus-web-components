@@ -115,6 +115,11 @@ export class ModusButtonGroup {
         button.setActive(true);
         this.selectedButtons.push(button);
         foundSelected = true;
+      } else if (button.hasAttribute('selected') && this.selectionType == MULTIPLE_SELECTION_TYPE) {
+        button.setActive(true);
+        if (!this.selectedButtons.includes(button)) {
+          this.selectedButtons.push(button);
+        }
       }
     });
   }
