@@ -372,4 +372,30 @@ describe('modus-modal', () => {
     expect(element).toBeDefined();
     expect(element).not.toHaveAttribute('aria-label');
   });
+
+  it('does open modal in full screen view', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-modal fullscreen="true"></modus-modal>');
+    let component = await page.find('modus-modal');
+    let element = await page.find('modus-modal >>> .modus-modal');
+    await component.callMethod('open');
+    await page.waitForChanges();
+
+    expect(element).toBeDefined();
+    expect(element).toHaveClass('fullscreen');
+  });
+
+  it('does open modal in normal screen view', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-modal fullscreen="false"></modus-modal>');
+    let component = await page.find('modus-modal');
+    let element = await page.find('modus-modal >>> .modus-modal');
+    await component.callMethod('open');
+    await page.waitForChanges();
+
+    expect(element).toBeDefined();
+    expect(element).not.toHaveClass('fullscreen');
+  });
 });
