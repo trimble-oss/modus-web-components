@@ -103,6 +103,10 @@ export class ModusAutocomplete {
 
   /** The autocomplete's search value. */
   @Prop({ mutable: true }) value: string;
+
+  /** The autocomplete's default value. */
+  @Prop() defaultvalue: string;
+
   @Watch('value')
   onValueChange() {
     if (this.hasFocus && !this.disableCloseOnSelect) {
@@ -292,18 +296,14 @@ export class ModusAutocomplete {
   };
 
   initializeSelectedChips() {
-    if (this.multiple && typeof this.value === 'string') {
-      const val = this.value.split(',');
-
-      const filteredOptions = val
-        ?.map((value) => {
-          return (this.options as ModusAutocompleteOption[]).find((option) => option?.value === value.trim());
-        })
-        .filter((option) => option !== undefined);
+    if (this.multiple && typeof this.defaultvalue === 'string') {
+      const val = this.defaultvalue.split(',').map(v => v.trim());
+      const filteredOptions = (this.options as ModusAutocompleteOption[])
+        .filter(option => val.includes(option.value));
 
       this.selectedChips = filteredOptions;
-      this.valueChange.emit(this.selectedChips.map((opt) => opt.value).join(','));
-      this.selectionsChanged.emit(this.selectedChips.map((opt) => opt.id));
+      this.valueChange.emit(filteredOptions.map(opt => opt.value).join(','));
+      this.selectionsChanged.emit(filteredOptions.map(opt => opt.id));
       this.value = '';
     }
   }
