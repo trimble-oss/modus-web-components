@@ -94,18 +94,14 @@ export default {
     textAlign: {
       name: 'text-align',
       control: {
-        options: [
-          'left',
-          'right'
-        ],
+        options: ['left', 'right'],
         type: 'select',
       },
       description: 'text alignment for the number input.',
       table: {
         defaultValue: { summary: "'left'" },
         type: {
-          summary:
-            "'left' | 'right'",
+          summary: "'left' | 'right'",
         },
       },
     },

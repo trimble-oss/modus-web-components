@@ -36,7 +36,7 @@ export default {
     },
     dropdownZIndex: {
       name: 'dropdown-z-index',
-      description: 'The dropdown\'s z-index',
+      description: "The dropdown's z-index",
       table: {
         defaultValue: { summary: '1' },
         type: { summary: 'string' },
@@ -122,7 +122,7 @@ export default {
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },
-      }
+      },
     },
     size: {
       control: {
@@ -142,20 +142,18 @@ export default {
       },
     },
     multiple: {
-      description: "When enabled, multiple options can be selected in the component. And selected options are shown as chips in the input",
+      description:
+        'When enabled, multiple options can be selected in the component. And selected options are shown as chips in the input',
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },
       },
-    }
+    },
   },
   parameters: {
     controls: { expanded: true, sort: 'requiredFirst' },
     actions: {
-      handles: [
-        'valueChange',
-        'optionSelected',
-      ],
+      handles: ['valueChange', 'optionSelected', 'selectionsChanged'],
     },
     docs: {
       inlineStories: true,
@@ -217,8 +215,26 @@ const Template = ({
 `;
 
 const defaultOptions = [
-  'Apple', 'Banana', 'Orange', 'Mango', 'Pineapple', 'Grapes', 'Watermelon', 'Strawberry', 'Blueberry', 'Raspberry',
-  'Blackberry', 'Cherry', 'Peach', 'Pear', 'Plum', 'Kiwi', 'Lemon', 'Lime', 'Papaya', 'Passion Fruit'
+  'Apple',
+  'Banana',
+  'Orange',
+  'Mango',
+  'Pineapple',
+  'Grapes',
+  'Watermelon',
+  'Strawberry',
+  'Blueberry',
+  'Raspberry',
+  'Blackberry',
+  'Cherry',
+  'Peach',
+  'Pear',
+  'Plum',
+  'Kiwi',
+  'Lemon',
+  'Lime',
+  'Papaya',
+  'Passion Fruit',
 ];
 
 const defaultArgs = {
@@ -242,7 +258,13 @@ const defaultArgs = {
   size: 'medium',
   value: '',
   options: defaultOptions,
-}
+};
+
+const customOptions = [
+  { id: 'ID0', value: 'Apple' },
+  { id: 'ID1', value: 'Banana' },
+  { id: 'ID2', value: 'Orange' },
+];
 
 export const Default = Template.bind({});
 Default.args = defaultArgs;
@@ -251,7 +273,12 @@ export const WithOption = Template.bind({});
 WithOption.args = { ...defaultArgs, label: 'Autocomplete using option model' };
 
 export const MultipleSelection = Template.bind({});
-MultipleSelection.args = { ...defaultArgs, label: 'Autocomplete with multiple selection', multiple: true };
+MultipleSelection.args = {
+  ...defaultArgs,
+  label: 'Autocomplete with multiple selection',
+  multiple: true,
+  options: customOptions,
+};
 
 export const WithCustomOption = ({
   ariaLabel,
@@ -327,4 +354,4 @@ WithCustomOption.args = {
   showOptionsOnFocus: false,
   size: 'medium',
   value: '',
-}
+};
