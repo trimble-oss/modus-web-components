@@ -902,6 +902,30 @@ describe('modus-table', () => {
     expect(lastPage.textContent).toBe('19');
   });
 
+  it('should emit an event on row click', async () => {
+    page = await newE2EPage();
+
+    await page.setContent('<modus-table  />');
+    const component = await page.find('modus-table');
+
+    const rowClick = await page.spyOnEvent('rowClick');
+
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+
+    await page.waitForChanges();
+
+    const cell = await page.find('modus-table >>> td');
+
+    cell.focus();
+    await page.waitForChanges();
+
+    await page.keyboard.press('Enter');
+    await page.waitForChanges();
+
+    expect(rowClick).toHaveReceivedEvent();
+  });
+
   describe('Header Text: Tooltip', () => {
     it('Should display a tooltip when header text is hover when a column have not been sorted', async () => {
       page = await newE2EPage();

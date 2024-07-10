@@ -417,6 +417,10 @@ table {
         background-color: $modus-table-selected-bg;
       }
     }
+
+    &.show-pointer {
+      cursor: pointer;
+    }
   }
 
   .sticky-right {

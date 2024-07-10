@@ -17,7 +17,50 @@
 
   <body data-mwc-theme="light">
     <main>
-      <!-- Test components -->
+      <modus-table />
+      <script>
+        const table = document.querySelector('modus-table');
+        const MockColumns = [
+          {
+            header: 'Mock Column One',
+            accessorKey: 'mockColumnOne',
+            id: 'mock-column-one',
+            dataType: 'text',
+            footer: 'Total',
+          },
+          {
+            header: 'Mock Column Two',
+            accessorKey: 'mockColumnTwo',
+            id: 'mock-column-two',
+            dataType: 'integer',
+            showTotal: true,
+          },
+        ];
+
+        const MockData = [
+          {
+            mockColumnOne: 'Mock Data One 1',
+            mockColumnTwo: 330160,
+          },
+          {
+            mockColumnOne: 'Mock Data One 2',
+            mockColumnTwo: 900293,
+          },
+        ];
+
+        const displayOptions = {
+          borderless: true,
+          cellBorderless: true,
+        };
+        table.columns = MockColumns;
+        table.data = MockData;
+        table.showPointerOnHover = true;
+        table.hover = true;
+        table.displayOptions = displayOptions;
+        table.addEventListener('rowClick', (event) => {
+          console.log('Row Clicked', event.detail);
+        });
+      </script>
     </main>
   </body>
 </html>

@@ -52,6 +52,7 @@ import {
   ModusTableSortingState,
   ModusTableRowWithId,
   ModusTableColumnSort,
+  ModusTableRowClick,
 } from './models/modus-table.models';
 import ColumnDragState from './models/column-drag-state.model';
 import {
@@ -274,6 +275,9 @@ export class ModusTable {
   /** (Optional) To wrap text that overflows the cell. */
   @Prop() wrapText = false;
 
+  /** (Optional) To show a pointer on row hover. */
+  @Prop() showPointerOnHover = false;
+
   /** Emits the cell value that was edited */
   @Event() cellValueChange: EventEmitter<ModusTableCellValueChange>;
 
@@ -303,6 +307,9 @@ export class ModusTable {
 
   /** Emits selected page index and size */
   @Event() paginationChange: EventEmitter<ModusTablePaginationState>;
+
+  /** Emits selected page index and size */
+  @Event() rowClick: EventEmitter<ModusTableRowClick>;
 
   @State() itemDragState: ColumnDragState;
   @Watch('itemDragState')
@@ -510,6 +517,7 @@ export class ModusTable {
       rowSelectionChange: this.rowSelectionChange,
       rowExpanded: this.rowExpanded,
       rowActionClick: this.rowActionClick,
+      rowClick: this.rowClick,
       sortChange: this.sortChange,
       paginationChange: this.paginationChange,
       columnSizingChange: this.columnSizingChange,
@@ -530,6 +538,7 @@ export class ModusTable {
       tableCore: this.tableCore,
       tableInstance: this.tableCore.getTableInstance(),
       wrapText: this.wrapText,
+      showPointerOnHover: this.showPointerOnHover,
       onColumnsChange: this.onColumnsChange,
       onColumnResizeChange: this.onColumnResizeChange,
       onColumnReorderChange: this.onColumnReorderChange,
