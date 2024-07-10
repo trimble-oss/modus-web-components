@@ -309,14 +309,14 @@ BlueNavbar.args = {
   notificationCount: 0,
 };
 
+const items = [
+  { text: 'Project 1', value: '1' },
+  { text: 'Project 2', value: '2' },
+  { text: 'Project 3', value: '3' },
+];
 const dropdownOptions = {
   ariaLabel: 'Project dropdown',
-  defaultValue: '2',
-  items: [
-    { text: 'Project 1', value: '1' },
-    { text: 'Project 2', value: '2' },
-    { text: 'Project 3', value: '3' },
-  ],
+  items,
 };
 
 const WithOptionalFeaturesTemplate = ({
@@ -346,6 +346,7 @@ const WithOptionalFeaturesTemplate = ({
     .helpTooltip=${helpTooltip}
     .logoOptions=${defaultLogo}
     .dropdownOptions=${dropdownOptions}
+    .selectedDropdownItem=${items[1]}
     .profileMenuOptions=${profileMenuOptions}
     .searchTooltip=${searchTooltip}>
     <div slot="main" style="height:300px;">Render your own main menu.</div>
