@@ -73,4 +73,18 @@
       }
     }
   }
+
+  &.fullscreen {
+    overflow: hidden;
+
+    .content {
+      .body {
+        flex-grow: 1;
+      }
+
+      height: calc(100% - 64px);
+      max-width: none;
+      width: calc(100% - 64px);
+    }
+  }
 }
