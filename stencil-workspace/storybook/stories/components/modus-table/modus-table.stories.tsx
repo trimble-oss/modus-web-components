@@ -313,6 +313,7 @@ const DefaultArgs = {
   columnReorder: false,
   pagination: false,
   showSortIconOnHover: false,
+  showPointerOnHover: false,
   summaryRow: false,
   fullWidth: false,
   pageSizeList: [7, 10, 20],
@@ -353,6 +354,16 @@ export default {
     hover: {
       name: 'hover',
       description: 'Enables hover on table rows',
+      control: 'boolean',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      },
+      type: { required: false },
+    },
+    showPointerOnHover: {
+      name: 'showPointerOnHover',
+      description: 'Shows a pointer cursor on hover',
       control: 'boolean',
       table: {
         defaultValue: { summary: false },
@@ -639,6 +650,7 @@ const Template = ({
   density,
   wrapText,
   customSort,
+  showPointerOnHover,
 }) => html`
   <div style="width: 950px">
     <modus-table
@@ -650,6 +662,7 @@ const Template = ({
       density="${density}"
       pagination="${pagination}"
       show-sort-icon-on-hover="${showSortIconOnHover}"
+      show-pointer-on-hover="${showPointerOnHover}"
       summary-row="${summaryRow}"
       full-width="${fullWidth}"
       toolbar="${toolbar}"
