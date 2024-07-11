@@ -72,7 +72,6 @@ import { ModusTableBody } from './parts/modus-table-body';
 import { TableContext, TableCellEdited } from './models/table-context.models';
 import { TableRowActionWithOverflow } from './models/table-row-actions.models';
 import { createGuid } from '../../utils/utils';
-import { useVirtualizer } from '@tanstack/react-virtual';
 
 /**
  * @slot customFooter - Slot for custom footer.
@@ -82,7 +81,7 @@ import { useVirtualizer } from '@tanstack/react-virtual';
 @Component({
   tag: 'modus-table',
   styleUrl: 'modus-table.scss',
-  shadow: false,
+  shadow: true,
 })
 export class ModusTable {
   @Element() element: HTMLElement;
@@ -357,17 +356,7 @@ export class ModusTable {
   private updateCells() {
     this.cells = Array.from(this.element.shadowRoot.querySelectorAll('modus-table-cell-main'));
   }
-  private tableRef: HTMLTableElement; // Define a variable for the table reference
 
-  initializeVirtualizer() {
-    const virtualizer = useVirtualizer({
-      count: this.data.length,
-      getScrollElement: () => this.tableRef,
-      estimateSize: () => 50, // Adjust this value based on your row height
-      overscan: 5,
-    });
-    console.log('virtualizer', virtualizer);
-  }
   componentWillLoad(): void {
     this._id = this.element.id || `modus-table-${createGuid()}`;
     this.columns = this.columns?.map((column) => ({
@@ -390,11 +379,6 @@ export class ModusTable {
     this.setTableState(initialTableState);
     this.onRowsExpandableChange(this.rowsExpandable);
     this.initializeTable();
-    console.log('cwil');
-  }
-  componentDidLoad(): void {
-    console.log('cd');
-    this.initializeVirtualizer();
   }
 
   componentWillRender(): void {
@@ -441,11 +425,7 @@ export class ModusTable {
 
     await cellToEdit.handleCellEdit(rowIndex, columnId);
   }
-  getTableBodyRef(): HTMLElement {
-    const ref = this?.element.querySelector('modus-table-body');
-    console.log('table body', ref);
-    return;
-  }
+
   /**
    * Toggle the table column visibility
    * @param columnId Column id
@@ -769,13 +749,11 @@ export class ModusTable {
         : { tableLayout: 'fixed' };
 
     return (
-      <div ref={(el) => (this.tableRef = el as HTMLTableElement)}>
-        <table data-test-id="main-table" class={tableMainClass} style={tableStyle}>
-          {this.renderTableHeader()}
-          {this.renderTableBody()}
-          {this.renderTableFooter()}
-        </table>
-      </div>
+      <table data-test-id="main-table" class={tableMainClass} style={tableStyle}>
+        {this.renderTableHeader()}
+        {this.renderTableBody()}
+        {this.renderTableFooter()}
+      </table>
     );
   }
 
