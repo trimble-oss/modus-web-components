@@ -738,6 +738,10 @@ export namespace Components {
          */
         "close": () => Promise<void>;
         /**
+          * (optional) The modal's full screen view
+         */
+        "fullscreen": boolean;
+        /**
           * (optional) The modal's primary button text.
          */
         "headerText": string;
@@ -824,6 +828,10 @@ export namespace Components {
           * (optional) Search tooltip.
          */
         "searchTooltip": ModusNavbarTooltip;
+        /**
+          * (optional) The selected dropdown item.
+         */
+        "selectedDropdownItem": ModusNavbarDropdownItem;
         /**
           * (optional) Whether to show the apps menu.
          */
@@ -3646,6 +3654,10 @@ declare namespace LocalJSX {
          */
         "backdrop"?: 'default' | 'static';
         /**
+          * (optional) The modal's full screen view
+         */
+        "fullscreen"?: boolean;
+        /**
           * (optional) The modal's primary button text.
          */
         "headerText"?: string;
@@ -3795,6 +3807,10 @@ declare namespace LocalJSX {
           * (optional) Search tooltip.
          */
         "searchTooltip"?: ModusNavbarTooltip;
+        /**
+          * (optional) The selected dropdown item.
+         */
+        "selectedDropdownItem"?: ModusNavbarDropdownItem;
         /**
           * (optional) Whether to show the apps menu.
          */

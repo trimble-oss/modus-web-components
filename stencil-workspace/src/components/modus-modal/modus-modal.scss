@@ -38,7 +38,7 @@
       border-bottom: 1px solid $modus-modal-divider-color;
       display: flex;
       font-size: $rem-16px;
-      font-weight: $font-weight-semi-bold;
+      font-weight: $font-weight-bold;
       height: 64px;
       justify-content: space-between;
       padding: 0 $rem-16px;
@@ -71,6 +71,20 @@
         gap: $rem-8px;
         justify-content: flex-end;
       }
+    }
+  }
+
+  &.fullscreen {
+    overflow: hidden;
+
+    .content {
+      .body {
+        flex-grow: 1;
+      }
+
+      height: calc(100% - 64px);
+      max-width: none;
+      width: calc(100% - 64px);
     }
   }
 }

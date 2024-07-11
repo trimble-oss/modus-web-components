@@ -8,7 +8,7 @@ interface Props {
   itemSelect: (item: ModusNavbarDropdownItem) => void;
   options: ModusNavbarDropdownOptions;
   reverse: boolean;
-  selectedItem: ModusNavbarDropdownItem;
+  selectedItem?: ModusNavbarDropdownItem;
 }
 
 export const ModusNavbarDropdown: FunctionalComponent<Props> = ({ itemSelect, options, reverse, selectedItem }) => {
@@ -28,14 +28,11 @@ export const ModusNavbarDropdown: FunctionalComponent<Props> = ({ itemSelect, op
         id={toggleElementId}
         slot={'dropdownToggle'}
         show-caret={true}>
-        {selectedItem.text}
+        {selectedItem?.text}
       </modus-button>
       <modus-list dir={direction} slot={'dropdownList'}>
         {options.items.map((item) => (
-          <modus-list-item
-            key={item.value}
-            onItemClick={() => itemSelectHandler(item)}
-            selected={item.value !== '' && item.value === selectedItem.value}>
+          <modus-list-item key={item.value} onItemClick={() => itemSelectHandler(item)} selected={item === selectedItem}>
             {item.text}
           </modus-list-item>
         ))}
