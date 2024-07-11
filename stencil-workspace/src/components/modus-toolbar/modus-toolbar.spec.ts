@@ -13,7 +13,7 @@ describe('modus-toolbar', () => {
     expect(root).toEqualHtml(`
       <modus-toolbar role="toolbar">
         <mock:shadow-root>
-          <modus-button button-style="borderless" class="modus-button" color="secondary">
+          <modus-button arialabel="button" button-style="borderless" class="modus-button" color="secondary">
             Button
           </modus-button>
         </mock:shadow-root>
@@ -52,7 +52,7 @@ describe('modus-toolbar', () => {
     expect(root).toEqualHtml(`
       <modus-toolbar role="toolbar">
         <mock:shadow-root>
-          <modus-button button-style="borderless" class="modus-button" color="secondary" icon-only="close">
+          <modus-button arialabel="button" button-style="borderless" class="modus-button" color="secondary" icon-only="close">
             Button
           </modus-button>
         </mock:shadow-root>
@@ -73,7 +73,7 @@ describe('modus-toolbar', () => {
     expect(root).toEqualHtml(`
       <modus-toolbar role="toolbar">
         <mock:shadow-root>
-          <modus-button button-style="borderless" class="modus-button" color="secondary" icon-only="close">
+          <modus-button arialabel="button" button-style="borderless" class="modus-button" color="secondary" icon-only="close">
             Button
           </modus-button>
         </mock:shadow-root>
@@ -94,7 +94,7 @@ describe('modus-toolbar', () => {
     expect(root).toEqualHtml(`
       <modus-toolbar role="toolbar">
         <mock:shadow-root>
-          <modus-button button-style="borderless" class="modus-button" color="secondary">
+          <modus-button arialabel="button" button-style="borderless" class="modus-button" color="secondary">
             Button
           </modus-button>
         </mock:shadow-root>

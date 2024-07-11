@@ -46,6 +46,9 @@ export class ModusModal {
   /** (optional) The modal's backdrop. Specify 'static' for a backdrop that doesn't close the modal when clicked outside the modal content */
   @Prop() backdrop: 'default' | 'static' = 'default';
 
+  /** (optional) The modal's full screen view */
+  @Prop() fullscreen = false;
+
   /** An event that fires on modal close.  */
   @Event() closed: EventEmitter;
 
@@ -207,7 +210,7 @@ export class ModusModal {
         aria-hidden={this.visible ? undefined : 'true'}
         aria-label={this.visible ? this.ariaLabel || undefined : undefined}
         aria-modal={this.visible ? 'true' : undefined}
-        class={`modus-modal overlay ${this.visible ? 'visible' : 'hidden'}`}
+        class={`modus-modal ${this.fullscreen ? 'fullscreen' : ''} overlay ${this.visible ? 'visible' : 'hidden'}`}
         onClick={(event) => this.handleOverlayClick(event)}
         role={this.visible ? 'dialog' : undefined}
         style={{ zIndex: this.zIndex }}>
