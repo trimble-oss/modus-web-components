@@ -41,6 +41,5 @@ export interface ModusNavbarDropdownItem {
 
 export interface ModusNavbarDropdownOptions {
   ariaLabel: string;
-  defaultValue: string;
   items: ModusNavbarDropdownItem[];
 }
