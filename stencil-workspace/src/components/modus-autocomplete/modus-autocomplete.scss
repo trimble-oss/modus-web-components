@@ -44,6 +44,11 @@
     position: relative;
     width: 100%;
 
+    &:focus-within {
+      border-color: $modus-autocomplete-container-border-active-color;
+      box-shadow: 0 0 0 1px $modus-autocomplete-container-border-active-color;
+    }
+
     .icon-search {
       margin-left: 4px;
       margin-right: 0;
@@ -178,7 +183,21 @@
   }
 }
 
-.autocomplete .chips-container:focus-within {
-  border-color: $modus-autocomplete-container-border-active-color;
-  box-shadow: 0 0 0 1px $modus-autocomplete-container-border-active-color;
+.autocomplete[aria-disabled='true'] {
+  .chips-container {
+    background-color: var(--modus-input-disabled-bg, #e0e1e9);
+    border-color: transparent;
+    pointer-events: none;
+    user-select: none;
+
+    .input {
+      &::part(input-container) {
+        background-color: var(--modus-input-disabled-bg, #e0e1e9);
+        border-color: transparent;
+        color: var(--modus-input-disabled-color, #a3a6b1);
+        pointer-events: none;
+        user-select: none;
+      }
+    }
+  }
 }
