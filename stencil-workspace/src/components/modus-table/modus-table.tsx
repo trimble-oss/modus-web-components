@@ -72,6 +72,7 @@ import { ModusTableBody } from './parts/modus-table-body';
 import { TableContext, TableCellEdited } from './models/table-context.models';
 import { TableRowActionWithOverflow } from './models/table-row-actions.models';
 import { createGuid } from '../../utils/utils';
+import { Virtualizer, observeElementRect, observeElementOffset, elementScroll } from '@tanstack/virtual-core';
 
 /**
  * @slot customFooter - Slot for custom footer.
@@ -352,9 +353,31 @@ export class ModusTable {
   private onKeyDown = (event: KeyboardEvent) => this.handleKeyDown(event);
   private onMouseUp = () => this.handleDrop();
 
+  private virtualizer: Virtualizer<Element, HTMLElement>;
+  @State() virtualItems: unknown[] = [];
+
   /** Updates the cells state by querying the shadow DOM for modus-table-cell-main elements.*/
   private updateCells() {
     this.cells = Array.from(this.element.shadowRoot.querySelectorAll('modus-table-cell-main'));
+  }
+
+  componentDidLoad() {
+    this.virtualizer = new Virtualizer({
+      count: this.data.length,
+      getScrollElement: () => this.element.shadowRoot.querySelector('.table-container') as HTMLElement,
+
+      estimateSize: () => 32,
+      overscan: 5,
+
+      observeElementRect: observeElementRect,
+      observeElementOffset: observeElementOffset,
+      scrollToFn: elementScroll,
+      onChange: (instance) => {
+        this.virtualItems = instance.getVirtualItems();
+      },
+    });
+
+    this.virtualizer._willUpdate();
   }
 
   componentWillLoad(): void {
@@ -779,7 +802,7 @@ export class ModusTable {
   }
 
   renderTableBody(): JSX.Element | null {
-    return <ModusTableBody context={this._context}></ModusTableBody>;
+    return <ModusTableBody context={this._context} virtualItems={this.virtualItems}></ModusTableBody>;
   }
 
   renderTableFooter(): JSX.Element | null {

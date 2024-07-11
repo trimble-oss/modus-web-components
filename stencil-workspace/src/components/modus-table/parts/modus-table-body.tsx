@@ -7,12 +7,14 @@ import { ModusTableCell } from './cell/modus-table-cell';
 import { ModusTableCellCheckbox } from './row/selection/modus-table-cell-checkbox';
 import { COLUMN_DEF_SUB_ROWS_KEY } from '../modus-table.constants';
 import { TableContext } from '../models/table-context.models';
+import { VirtualItem } from '@tanstack/virtual-core';
 
 interface ModusTableBodyProps {
   context: TableContext;
+  virtualItems: unknown[];
 }
 
-export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ context }) => {
+export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ context, virtualItems }) => {
   const { density, hover, rowSelection, rowSelectionOptions, rowActions, tableInstance: table, updateData } = context;
   const hasRowActions = rowActions?.length > 0;
   const multipleRowSelection = rowSelectionOptions?.multiple;
@@ -51,13 +53,14 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
       { ...props, row: row['original'] }
     );
   }
-
+  console.log('virtualItems', virtualItems);
+  const rows = table.getRowModel()?.rows;
   return (
     <tbody>
-      {table.getRowModel()?.rows.map((row) => {
+      {virtualItems.map((virtualItem) => {
+        const row = rows[(virtualItem as VirtualItem<HTMLElement>).index];
         const { getIsSelected, getIsAllSubRowsSelected, getVisibleCells, subRows, id } = row;
         const isChecked = getIsSelected() && (subRows?.length ? getIsAllSubRowsSelected() : true);
-
         return (
           <tr key={id} class={{ 'enable-hover': hover, 'row-selected': isChecked }}>
             {rowSelection && (
@@ -65,11 +68,18 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
                 multipleRowSelection={multipleRowSelection}
                 row={row}
                 isChecked={isChecked}
-                checkboxSize={checkboxSize}></ModusTableCellCheckbox>
+                checkboxSize={checkboxSize}
+                virtualItem={virtualItem as VirtualItem<HTMLElement>}></ModusTableCellCheckbox>
             )}
             {getVisibleCells()?.map((cell, cellIndex) => {
               return (
-                <ModusTableCell cell={cell} cellIndex={cellIndex} context={context} valueChange={handleCellValueChange} />
+                <ModusTableCell
+                  cell={cell}
+                  cellIndex={cellIndex}
+                  context={context}
+                  valueChange={handleCellValueChange}
+                  virtualItem={virtualItem as VirtualItem<HTMLElement>}
+                />
               );
             })}
             {hasRowActions && (
