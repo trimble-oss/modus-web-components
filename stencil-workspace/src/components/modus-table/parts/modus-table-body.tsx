@@ -53,7 +53,7 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
       { ...props, row: row['original'] }
     );
   }
-  console.log('virtualItems', virtualItems);
+
   const rows = table.getRowModel()?.rows;
   return (
     <tbody>

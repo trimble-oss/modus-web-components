@@ -1,7 +1,4 @@
-import {
-  FunctionalComponent,
-  h, // eslint-disable-line @typescript-eslint/no-unused-vars
-} from '@stencil/core';
+import { FunctionalComponent, h } from '@stencil/core';
 import { Cell } from '@tanstack/table-core';
 import { TableContext, TableCellEdited } from '../../models/table-context.models';
 import { VirtualItem } from '@tanstack/virtual-core';
@@ -29,11 +26,11 @@ export const ModusTableCell: FunctionalComponent<ModusTableCellProps> = ({
       key={id}
       tabindex={0}
       style={{
-        top: '0',
-        left: '0',
+        position: 'absolute',
+        top: `${virtualItem.start}px`,
+        left: `${cellIndex * cell.column.getSize()}px`, // Correctly position cell based on index
         width: `${cell.column.getSize()}px`,
         height: `${virtualItem.size}px`,
-        transform: `translateY(${virtualItem.start}px)`,
       }}
       class={`
       ${hasRowsExpandable || frozenColumns.includes(cell.column.id) ? 'sticky-left' : ''}
