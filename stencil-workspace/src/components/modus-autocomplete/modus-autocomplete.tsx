@@ -482,7 +482,7 @@ export class ModusAutocomplete {
             <modus-chip
               value={chip.value}
               chipId={chip.id}
-              size="medium"
+              size={this.size === 'large' ? 'medium' : 'small'}
               show-close
               onCloseClick={() => this.handleCloseClick(chip)}></modus-chip>
           ))}
