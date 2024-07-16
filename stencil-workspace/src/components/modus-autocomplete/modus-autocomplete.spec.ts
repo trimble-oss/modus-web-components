@@ -151,4 +151,22 @@ describe('modus-autocomplete', () => {
 
     expect(modusAutocomplete.displayOptions()).toEqual(true);
   });
+
+  it('should select chips using default value', async () => {
+    const modusAutocomplete = new ModusAutocomplete();
+    modusAutocomplete.disabled = false;
+    modusAutocomplete.options = [
+      { id: '1', value: 'Option 1' },
+      { id: '2', value: 'Option 2' },
+    ];
+    modusAutocomplete.multiple = true;
+    modusAutocomplete.value = ['Option 1', 'Option 2'];
+    modusAutocomplete.initializeSelectedChips();
+
+    expect(modusAutocomplete.value).toEqual(['Option 1', 'Option 2']);
+    expect(modusAutocomplete.selectedChips).toEqual([
+      { id: '1', value: 'Option 1' },
+      { id: '2', value: 'Option 2' },
+    ]);
+  });
 });
