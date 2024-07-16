@@ -27,8 +27,8 @@ export const ModusTableCell: FunctionalComponent<ModusTableCellProps> = ({
       tabindex={0}
       style={{
         position: 'absolute',
-        top: `${virtualItem.start + virtualItem.size}px`,
-        left: `${cellIndex * cell.column.getSize()}px`, // Correctly position cell based on index
+        top: `${virtualItem.start}px`,
+        left: `${cellIndex * cell.column.getSize()}px`, 
         width: `${cell.column.getSize()}px`,
         height: `${virtualItem.size}px`,
       }}

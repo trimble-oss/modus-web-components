@@ -808,7 +808,12 @@ export class ModusTable {
   }
 
   renderTableBody(): JSX.Element | null {
-    return <ModusTableBody context={this._context} virtualItems={this.virtualItems}></ModusTableBody>;
+    return (
+      <ModusTableBody
+        context={this._context}
+        virtualItems={this.virtualItems}
+        virtualizer={this.virtualizer}></ModusTableBody>
+    );
   }
 
   renderTableFooter(): JSX.Element | null {

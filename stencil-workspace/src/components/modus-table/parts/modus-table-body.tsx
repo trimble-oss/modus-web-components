@@ -7,14 +7,15 @@ import { ModusTableCell } from './cell/modus-table-cell';
 import { ModusTableCellCheckbox } from './row/selection/modus-table-cell-checkbox';
 import { COLUMN_DEF_SUB_ROWS_KEY } from '../modus-table.constants';
 import { TableContext } from '../models/table-context.models';
-import { VirtualItem } from '@tanstack/virtual-core';
+import { VirtualItem, Virtualizer } from '@tanstack/virtual-core';
 
 interface ModusTableBodyProps {
   context: TableContext;
   virtualItems: unknown[];
+  virtualizer: Virtualizer<Element, HTMLElement>;
 }
 
-export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ context, virtualItems }) => {
+export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ context, virtualItems, virtualizer }) => {
   const { density, hover, rowSelection, rowSelectionOptions, rowActions, tableInstance: table, updateData } = context;
   const hasRowActions = rowActions?.length > 0;
   const multipleRowSelection = rowSelectionOptions?.multiple;
@@ -55,8 +56,9 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
   }
 
   const rows = table.getRowModel()?.rows;
+
   return (
-    <tbody>
+    <tbody style={{ height: `${virtualizer?.getTotalSize().toString()}px`, position: 'relative' }}>
       {virtualItems.map((virtualItem) => {
         const row = rows[(virtualItem as VirtualItem<HTMLElement>).index];
         const { getIsSelected, getIsAllSubRowsSelected, getVisibleCells, subRows, id } = row;
