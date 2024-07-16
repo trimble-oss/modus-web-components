@@ -361,12 +361,18 @@ export class ModusTable {
     this.cells = Array.from(this.element.shadowRoot.querySelectorAll('modus-table-cell-main'));
   }
 
+  private densitySizeMap = {
+    relaxed: 48,
+    comfortable: 32,
+    compact: 24,
+  };
+
   componentDidLoad() {
     this.virtualizer = new Virtualizer({
       count: this.data.length,
       getScrollElement: () => this.element.shadowRoot.querySelector('.table-container') as HTMLElement,
 
-      estimateSize: () => 32,
+      estimateSize: () => this.densitySizeMap[this.density || 'comfortable'],
       overscan: 5,
 
       observeElementRect: observeElementRect,
