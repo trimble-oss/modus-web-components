@@ -50,7 +50,7 @@ export type ModusTableCellEditorType =
   | typeof CELL_EDIT_TYPE_DATE;
 
 export type ModusTableCellDateEditorArgs = { format: string };
-export type ModusTableCellSelectEditorArgs = { options: unknown[]; optionsDisplayProp?: string };
+export type ModusTableCellSelectEditorArgs = { options: unknown[]; optionsDisplayProp?: string; placeholder?: string };
 export type ModusTableCellAutocompleteEditorArgs = {
   options: ModusAutocompleteOption[];
   noResultsFoundText: string;

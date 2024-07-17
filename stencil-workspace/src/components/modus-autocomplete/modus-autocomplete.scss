@@ -40,9 +40,14 @@
     height: auto;
     margin: 0;
     min-height: 32px;
-    padding: 2px;
+    padding: 0;
     position: relative;
     width: 100%;
+
+    &:focus-within {
+      border-color: $modus-autocomplete-container-border-active-color;
+      box-shadow: 0 0 0 1px $modus-autocomplete-container-border-active-color;
+    }
 
     .icon-search {
       margin-left: 4px;
@@ -65,6 +70,7 @@
       &::part(input-container) {
         border: none !important;
         box-shadow: none;
+        height: 1.875rem;
       }
     }
   }
@@ -157,6 +163,18 @@
   }
 
   &.large {
+    .chips-container {
+      .input {
+        &::part(input-container) {
+          height: 3rem;
+        }
+      }
+    }
+
+    .icon-search {
+      margin-left: 8px;
+    }
+
     .options-container > .text-option {
       font-size: $rem-14px;
       min-height: 3rem;
@@ -165,7 +183,21 @@
   }
 }
 
-.autocomplete .chips-container:focus-within {
-  border-color: $modus-autocomplete-container-border-active-color;
-  box-shadow: 0 0 0 1px $modus-autocomplete-container-border-active-color;
+.autocomplete[aria-disabled='true'] {
+  .chips-container {
+    background-color: var(--modus-input-disabled-bg, #e0e1e9);
+    border-color: transparent;
+    pointer-events: none;
+    user-select: none;
+
+    .input {
+      &::part(input-container) {
+        background-color: var(--modus-input-disabled-bg, #e0e1e9);
+        border-color: transparent;
+        color: var(--modus-input-disabled-color, #a3a6b1);
+        pointer-events: none;
+        user-select: none;
+      }
+    }
+  }
 }
