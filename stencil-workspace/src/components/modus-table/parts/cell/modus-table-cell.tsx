@@ -11,13 +11,7 @@ interface ModusTableCellProps {
   virtualItem: VirtualItem<Element>;
 }
 
-export const ModusTableCell: FunctionalComponent<ModusTableCellProps> = ({
-  cell,
-  cellIndex,
-  context,
-  valueChange,
-  virtualItem,
-}) => {
+export const ModusTableCell: FunctionalComponent<ModusTableCellProps> = ({ cell, cellIndex, context, valueChange }) => {
   const { rowsExpandable, frozenColumns } = context;
   const hasRowsExpandable = cellIndex === 0 && rowsExpandable;
   const { id } = cell;
@@ -27,10 +21,8 @@ export const ModusTableCell: FunctionalComponent<ModusTableCellProps> = ({
       tabindex={0}
       style={{
         position: 'absolute',
-        top: `${virtualItem.start}px`,
-        left: `${cellIndex * cell.column.getSize()}px`, 
+        left: `${cellIndex * cell.column.getSize()}px`,
         width: `${cell.column.getSize()}px`,
-        height: `${virtualItem.size}px`,
       }}
       class={`
       ${hasRowsExpandable || frozenColumns.includes(cell.column.id) ? 'sticky-left' : ''}

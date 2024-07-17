@@ -60,11 +60,19 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
   return (
     <tbody style={{ height: `${virtualizer?.getTotalSize().toString()}px`, position: 'relative' }}>
       {virtualItems.map((virtualItem) => {
-        const row = rows[(virtualItem as VirtualItem<HTMLElement>).index];
+        const item = virtualItem as VirtualItem<HTMLElement>;
+        const row = rows[item.index];
         const { getIsSelected, getIsAllSubRowsSelected, getVisibleCells, subRows, id } = row;
         const isChecked = getIsSelected() && (subRows?.length ? getIsAllSubRowsSelected() : true);
         return (
-          <tr key={id} class={{ 'enable-hover': hover, 'row-selected': isChecked }}>
+          <tr
+            key={id}
+            class={{ 'enable-hover': hover, 'row-selected': isChecked }}
+            style={{
+              position: 'absolute',
+              top: `${item.start}px`,
+              height: `${item.size}px`,
+            }}>
             {rowSelection && (
               <ModusTableCellCheckbox
                 multipleRowSelection={multipleRowSelection}
