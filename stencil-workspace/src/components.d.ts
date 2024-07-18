@@ -26,7 +26,7 @@ import { TableCellEdited, TableContext } from "./components/modus-table/models/t
 import { Tab } from "./components/modus-tabs/modus-tabs";
 import { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
 import { ModusToolTipPlacement } from "./components/modus-tooltip/modus-tooltip.models";
-import { TreeViewItemInfo, TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
+import { TreeItemChange, TreeViewItemInfo, TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 import { ModusActionBarOptions as ModusActionBarOptions1 } from "./components/modus-action-bar/modus-action-bar";
 export { ModusActionBarOptions } from "./components/modus-action-bar/modus-action-bar";
 export { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
@@ -49,7 +49,7 @@ export { TableCellEdited, TableContext } from "./components/modus-table/models/t
 export { Tab } from "./components/modus-tabs/modus-tabs";
 export { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
 export { ModusToolTipPlacement } from "./components/modus-tooltip/modus-tooltip.models";
-export { TreeViewItemInfo, TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
+export { TreeItemChange, TreeViewItemInfo, TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export { ModusActionBarOptions as ModusActionBarOptions1 } from "./components/modus-action-bar/modus-action-bar";
 export namespace Components {
     interface ModusAccordion {
@@ -2776,6 +2776,7 @@ declare global {
     };
     interface HTMLModusTreeViewElementEventMap {
         "itemDrop": { [key: string]: TreeViewItemInfo };
+        "itemChange": TreeItemChange;
         "itemActionClick": any;
     }
     interface HTMLModusTreeViewElement extends Components.ModusTreeView, HTMLStencilElement {
@@ -4817,6 +4818,7 @@ declare namespace LocalJSX {
           * Fired when an action is clicked within any tree item. Includes both the `actionId` and `nodeId` of the action and item, respectively.
          */
         "onItemActionClick"?: (event: ModusTreeViewCustomEvent<any>) => void;
+        "onItemChange"?: (event: ModusTreeViewCustomEvent<TreeItemChange>) => void;
         "onItemDrop"?: (event: ModusTreeViewCustomEvent<{ [key: string]: TreeViewItemInfo }>) => void;
         /**
           * (optional) Set selected tree items

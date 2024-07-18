@@ -37,6 +37,12 @@ export type TreeViewItemInfo = {
   level?: number;
 };
 
+export type TreeItemChange = {
+  itemId: string;
+  isSelected: boolean;
+  selectedItems: string[];
+};
+
 export type TreeViewItemDragState = {
   itemId: string;
   dragContent: HTMLElement;
