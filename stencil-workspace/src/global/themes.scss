@@ -306,11 +306,11 @@
   --modus-navbar-blue-profile-icon-active-border-color: #019aeb;
 
   // Pagination
-  --modus-pagination-color: var(--modus-body-color);
+  --modus-pagination-color: var(--modus-trimble-gray);
   --modus-pagination-chevron-color: var(--modus-gray-6);
   --modus-pagination-hover-bg: var(--modus-gray-0);
   --modus-pagination-active-bg: var(--modus-highlight-blue-bg);
-  --modus-pagination-active-color: var(--modus-highlight-blue-color);
+  --modus-pagination-active-color: var(--modus-blue-light);
 
   // Slider
   --modus-slider-range-disabled-bg: var(--modus-gray-0);
@@ -681,7 +681,7 @@
   --modus-pagination-chevron-color: var(--modus-pagination-color);
   --modus-pagination-hover-bg: var(--modus-gray-8);
   --modus-pagination-active-bg: var(--modus-highlight-blue-color);
-  --modus-pagination-active-color: var(--modus-white);
+  --modus-pagination-active-color: var(--modus-gray-10);
 
   // Slider
   --modus-slider-range-disabled-bg: var(--modus-gray-6);
