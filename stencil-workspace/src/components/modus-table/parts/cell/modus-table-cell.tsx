@@ -21,7 +21,7 @@ export const ModusTableCell: FunctionalComponent<ModusTableCellProps> = ({ cell,
       tabindex={0}
       style={{
         position: 'absolute',
-        left: `${cellIndex * cell.column.getSize()}px`,
+        left: `${cell.column.getStart()}px`,
         width: `${cell.column.getSize()}px`,
       }}
       class={`

@@ -13,9 +13,15 @@ interface ModusTableBodyProps {
   context: TableContext;
   virtualItems: unknown[];
   virtualizer: Virtualizer<Element, HTMLElement>;
+  pagination: boolean;
 }
 
-export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ context, virtualItems, virtualizer }) => {
+export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({
+  context,
+  virtualItems,
+  virtualizer,
+  pagination,
+}) => {
   const { density, hover, rowSelection, rowSelectionOptions, rowActions, tableInstance: table, updateData } = context;
   const hasRowActions = rowActions?.length > 0;
   const multipleRowSelection = rowSelectionOptions?.multiple;
@@ -57,11 +63,19 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
 
   const rows = table.getRowModel()?.rows;
 
+  const totalHeight = pagination
+    ? (virtualItems as VirtualItem<HTMLElement>[]).reduce((_, item) => item.size * rows.length, 0)
+    : virtualizer?.getTotalSize().toString();
+
   return (
-    <tbody style={{ height: `${virtualizer?.getTotalSize().toString()}px`, position: 'relative' }}>
+    <tbody style={{ height: `${totalHeight}px`, position: 'relative' }}>
       {virtualItems.map((virtualItem) => {
         const item = virtualItem as VirtualItem<HTMLElement>;
         const row = rows[item.index];
+
+        if (row === undefined) {
+          return;
+        }
         const { getIsSelected, getIsAllSubRowsSelected, getVisibleCells, subRows, id } = row;
         const isChecked = getIsSelected() && (subRows?.length ? getIsAllSubRowsSelected() : true);
         return (

@@ -812,7 +812,8 @@ export class ModusTable {
       <ModusTableBody
         context={this._context}
         virtualItems={this.virtualItems}
-        virtualizer={this.virtualizer}></ModusTableBody>
+        virtualizer={this.virtualizer}
+        pagination={this.pagination}></ModusTableBody>
     );
   }
 
