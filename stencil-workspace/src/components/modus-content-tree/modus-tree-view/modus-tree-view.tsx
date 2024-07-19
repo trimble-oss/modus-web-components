@@ -603,8 +603,8 @@ export class ModusTreeView {
     current.focusItem();
   }
 
-  handleChangeTreeitem(isSelected: boolean, itemId: string, selectedItems: string[]): void {
-    this.itemChange.emit({ isSelected, itemId, selectedItems });
+  handleChangeTreeitem(isSelected: boolean, itemId: string): void {
+    this.itemChange.emit({ isSelected, itemId });
   }
 
   handleItemSelection(itemId: string, event?: KeyboardEvent | MouseEvent): void {
@@ -618,13 +618,13 @@ export class ModusTreeView {
     if (isSelected) {
       if (allowMultipleSelection) {
         newItems.push(itemId);
-        this.handleChangeTreeitem(true, itemId, newItems);
+        this.handleChangeTreeitem(true, itemId);
       } else {
         newItems = [itemId];
       }
     } else {
       newItems = newItems.filter((i) => i !== itemId);
-      if (allowMultipleSelection) this.handleChangeTreeitem(false, itemId, newItems);
+      if (allowMultipleSelection) this.handleChangeTreeitem(false, itemId);
     }
     this.selectedItems = [...newItems];
     this.syncItems.push(...oldItems, ...newItems);

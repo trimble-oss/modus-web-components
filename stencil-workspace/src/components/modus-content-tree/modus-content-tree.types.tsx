@@ -40,7 +40,6 @@ export type TreeViewItemInfo = {
 export type TreeItemChange = {
   itemId: string;
   isSelected: boolean;
-  selectedItems: string[];
 };
 
 export type TreeViewItemDragState = {
