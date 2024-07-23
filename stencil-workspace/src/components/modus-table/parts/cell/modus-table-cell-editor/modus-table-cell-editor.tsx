@@ -167,7 +167,16 @@ export class ModusTableCellEditor {
         onBlur={this.handleBlur}
         onKeyDown={this.handleKeyDown}
         autoFocusInput
-        size="large"></modus-text-input>
+        size="large"
+        onValueError={(e: CustomEvent<string | null>) => {
+          if (e.detail) {
+            this.errorMessage = e.detail;
+            this.showErrorTooltip();
+          } else {
+            this.errorMessage = '';
+            this.hideErrorTooltip();
+          }
+        }}></modus-text-input>
     );
   }
 

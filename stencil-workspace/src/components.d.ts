@@ -2695,6 +2695,7 @@ declare global {
     };
     interface HTMLModusTextInputElementEventMap {
         "valueChange": string;
+        "valueError": string;
     }
     interface HTMLModusTextInputElement extends Components.ModusTextInput, HTMLStencilElement {
         addEventListener<K extends keyof HTMLModusTextInputElementEventMap>(type: K, listener: (this: HTMLModusTextInputElement, ev: ModusTextInputCustomEvent<HTMLModusTextInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -4517,6 +4518,10 @@ declare namespace LocalJSX {
           * An event that fires on input value change.
          */
         "onValueChange"?: (event: ModusTextInputCustomEvent<string>) => void;
+        /**
+          * An event that fires on input value error.
+         */
+        "onValueError"?: (event: ModusTextInputCustomEvent<string>) => void;
         /**
           * (optional) The input's pattern HTML attribute.
          */

@@ -39,6 +39,13 @@ table.density-compact {
   justify-content: center;
 }
 
+
+.editor::part(table-inputs) {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
 .editor::part(input-container) {
   border: 2px solid var(--modus-input-border-active-color, #217cbb);
   border-radius: unset;
