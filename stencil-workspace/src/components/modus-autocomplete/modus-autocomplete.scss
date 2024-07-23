@@ -134,7 +134,11 @@
         background-color: $modus-autocomplete-options-hover-background-color;
       }
     }
-
+    .is-loading {
+      display: flex;
+      justify-content: center;
+      padding: 4px;
+    }
     .no-results {
       align-items: center;
       border: 1px solid $modus-autocomplete-options-border-color;

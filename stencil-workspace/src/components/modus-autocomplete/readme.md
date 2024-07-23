@@ -22,6 +22,7 @@
 | `noResultsFoundSubtext`     | `no-results-found-subtext`      | The autocomplete's no results sub-text.                                                                                | `string`                                | `'Check spelling or try a different keyword'` |
 | `noResultsFoundText`        | `no-results-found-text`         | The autocomplete's no results text.                                                                                    | `string`                                | `'No results found'`                          |
 | `options`                   | --                              | The autocomplete's options.                                                                                            | `ModusAutocompleteOption[] \| string[]` | `undefined`                                   |
+| `optionsPromise`            | --                              | A promise that resolves to an array of autocomplete options.                                                           | `Promise<ModusAutocompleteOption[]>`    | `undefined`                                   |
 | `placeholder`               | `placeholder`                   | The autocomplete's input placeholder.                                                                                  | `string`                                | `undefined`                                   |
 | `readOnly`                  | `read-only`                     | Whether the autocomplete is read-only.                                                                                 | `boolean`                               | `undefined`                                   |
 | `required`                  | `required`                      | Whether the autocomplete is required.                                                                                  | `boolean`                               | `undefined`                                   |
@@ -50,12 +51,14 @@
 
 - [modus-text-input](../modus-text-input)
 - [modus-chip](../modus-chip)
+- [modus-spinner](../modus-spinner)
 
 ### Graph
 ```mermaid
 graph TD;
   modus-autocomplete --> modus-text-input
   modus-autocomplete --> modus-chip
+  modus-autocomplete --> modus-spinner
   modus-table-cell-editor --> modus-autocomplete
   style modus-autocomplete fill:#f9f,stroke:#333,stroke-width:4px
 ```

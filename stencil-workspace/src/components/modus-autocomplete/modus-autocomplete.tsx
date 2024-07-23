@@ -77,6 +77,8 @@ export class ModusAutocomplete {
   /** The autocomplete's selected option. */
   @State() selectedOption: string;
 
+  @State() isLoading = false;
+
   /** Whether to show autocomplete's options when focus. */
   @Prop() showOptionsOnFocus: boolean;
 
@@ -339,6 +341,7 @@ export class ModusAutocomplete {
     event.stopPropagation();
     this.disableFiltering = !this.disableCloseOnSelect;
     this.handleSearchChange(event.detail);
+    this.isLoading = true; // Start loading when the value changes
   };
 
   updateVisibleCustomOptions = (search = '') => {
@@ -420,6 +423,10 @@ export class ModusAutocomplete {
       value={this.getValueAsString()}
       onBlur={this.handleInputBlur}
       role="combobox"
+      onKeyUp={(e) => {
+        console.log('keyup', e);
+        this.processChange();
+      }}
       aria-autocomplete="list"
       aria-controls={this.listId}
       aria-expanded={this.displayOptions()}
@@ -444,6 +451,65 @@ export class ModusAutocomplete {
       selectedOption.scrollIntoView({ behavior: 'smooth', inline: 'nearest' });
     }
   };
+  debounce(func, timeout = 300) {
+    let timer;
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        func.apply(this, args);
+      }, timeout);
+    };
+  }
+  //new options shoudl be a promise
+  /** A promise that resolves to an array of autocomplete options. */
+  @Prop() optionsPromise: Promise<ModusAutocompleteOption[]>;
+  async saveInput() {
+    console.log('Saving data', this.value);
+    try {
+      // Fetch and convert the new options
+      const resolvedOptions = await this.optionsPromise;
+      console.log('Resolved options:', resolvedOptions);
+
+      // Convert new options separately
+      const convertedNewOptions = this.convertNewOptions(resolvedOptions);
+      console.log('Converted new options:', convertedNewOptions);
+
+      // Filter out duplicate options based on their IDs
+      const uniqueNewOptions = this.filterOutDuplicateOptions(convertedNewOptions);
+      console.log('Unique new options:', uniqueNewOptions);
+
+      // Update the existing options with unique new options
+      this.options = [...this.options, ...uniqueNewOptions] as ModusAutocompleteOption[];
+
+      // Update visible options
+      this.updateVisibleOptions(this.getValueAsString());
+    } catch (error) {
+      console.error('Failed to resolve optionsPromise:', error);
+    } finally {
+      this.isLoading = false;
+    }
+  }
+
+  convertNewOptions(newOptions: ModusAutocompleteOption[] | string[]): ModusAutocompleteOption[] {
+    if (newOptions && newOptions.length > 0) {
+      if (typeof newOptions[0] === 'string') {
+        return newOptions.map((option) => ({
+          id: option,
+          value: option,
+        }));
+      } else {
+        return newOptions as ModusAutocompleteOption[];
+      }
+    }
+    return [];
+  }
+
+  filterOutDuplicateOptions(newOptions: ModusAutocompleteOption[]): ModusAutocompleteOption[] {
+    const existingIds = new Set(this.options.map((option) => option.id));
+    return newOptions.filter((option) => !existingIds.has(option.id));
+  }
+
+  processChange = this.debounce(() => this.saveInput());
 
   render(): unknown {
     const classes = `autocomplete ${this.classBySize.get(this.size)}`;
@@ -537,7 +603,12 @@ export class ModusAutocomplete {
                 );
               })}
           </ul>
-          {this.displayNoResults() && <NoResultsFound text={this.noResultsFoundText} subtext={this.noResultsFoundSubtext} />}
+
+          {this.isLoading ? (
+            <LoadingSpinner />
+          ) : (
+            this.displayNoResults() && <NoResultsFound text={this.noResultsFoundText} subtext={this.noResultsFoundSubtext} />
+          )}
         </div>
         {this.CustomOptionsSlot()}
       </div>
@@ -552,5 +623,10 @@ const NoResultsFound = (props: { text: string; subtext: string }) => (
       <div class="message">{props.text}</div>
     </div>
     <div class="subtext">{props.subtext}</div>
+  </div>
+);
+const LoadingSpinner = () => (
+  <div class="is-loading">
+    <modus-spinner size="1.5rem"></modus-spinner>
   </div>
 );
