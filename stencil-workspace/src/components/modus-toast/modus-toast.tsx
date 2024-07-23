@@ -39,14 +39,14 @@ export class ModusToast {
   private timerId: NodeJS.Timeout;
 
   iconByType: Map<string, HTMLElement> = new Map([
-    ['danger', <IconWarning color={'#C81922'} size={'18'} />],
-    ['dark', <IconInfo color={'white'} size={'18'} />],
+    ['danger', <IconWarning size={'18'} />],
+    ['dark', <IconInfo size={'18'} />],
     ['default', <IconInfo size={'18'} />],
-    ['primary', <IconInfo color={'#0D6AA8'} size={'18'} />],
+    ['primary', <IconInfo size={'18'} />],
     ['secondary', <IconHelp size={'18'} />],
-    ['success', <IconCheckCircle color={'#5E9331'} size={'18'} />],
+    ['success', <IconCheckCircle size={'18'} />],
     ['tertiary', <IconInfo size={'18'} />],
-    ['warning', <IconError color={'#FFBE00'} size={'18'} />],
+    ['warning', <IconError size={'18'} />],
   ]);
 
   classByType: Map<string, string> = new Map([
