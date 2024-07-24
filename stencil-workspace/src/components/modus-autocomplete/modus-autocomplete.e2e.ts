@@ -577,13 +577,13 @@ describe('modus-autocomplete', () => {
       await textInput.type('Test 3');
       await page.waitForChanges();
 
-      const noResultsFoundMessage = await page.find('modus-autocomplete >>> .no-results');
+      let noResultsFoundMessage = await page.find('modus-autocomplete >>> .no-results');
       expect(noResultsFoundMessage).toBeTruthy();
 
-      // element.setProperty('showNoResultsFoundMessage', false);
-      // await page.waitForChanges();
-      // noResultsFoundMessage = await page.find('modus-autocomplete >>> .no-results');
-      // expect(noResultsFoundMessage).toBeFalsy();
+      element.setProperty('showNoResultsFoundMessage', false);
+      await page.waitForChanges();
+      noResultsFoundMessage = await page.find('modus-autocomplete >>> .no-results');
+      expect(noResultsFoundMessage).toBeFalsy();
     });
   });
 

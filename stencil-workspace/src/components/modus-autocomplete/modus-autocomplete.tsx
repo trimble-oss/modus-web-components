@@ -372,10 +372,6 @@ export class ModusAutocomplete {
       this.visibleCustomOptions = this.customOptions;
     }
 
-    if (this.visibleCustomOptions?.length === 0) {
-      this.showNoResultsFoundMessage = true;
-    }
-
     this.containsSlottedElements = this.customOptions.length > 0;
   };
 
@@ -396,10 +392,6 @@ export class ModusAutocomplete {
       });
     } else {
       this.visibleOptions = this.options as ModusAutocompleteOption[];
-    }
-
-    if (this.visibleOptions?.length === 0) {
-      this.showNoResultsFoundMessage = true;
     }
   };
 
