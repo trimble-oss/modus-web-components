@@ -56,6 +56,9 @@ export class ModusNumberInput {
   /** An event that fires on input value change. */
   @Event() valueChange: EventEmitter<string>;
 
+  /** An event that fires on input value error. */
+  @Event() valueError: EventEmitter<string>;
+
   private inputId = generateElementId() + '_number-input';
 
   classBySize: Map<string, string> = new Map([
@@ -67,6 +70,12 @@ export class ModusNumberInput {
   handleOnInput(): void {
     this.value = this.numberInput.value;
     this.valueChange.emit(this.value);
+
+    if (this.errorText) {
+      this.valueError.emit(this.errorText);
+    } else {
+      this.valueError.emit(null);
+    }
   }
 
   /** Focus the input. */
@@ -114,7 +123,7 @@ export class ModusNumberInput {
     };
 
     return (
-      <div class={buildContainerClassNames()}>
+      <div class={buildContainerClassNames()} part="table-inputs">
         {this.label || this.required ? (
           <div class="label-container">
             {this.label ? <label htmlFor={this.inputId}>{this.label}</label> : null}
@@ -122,7 +131,9 @@ export class ModusNumberInput {
             {this.helperText ? <label class="sub-text helper">{this.helperText}</label> : null}
           </div>
         ) : null}
-        <div class={buildInputContainerClassNames()} part="input-container">
+        <div
+          class={buildInputContainerClassNames()}
+          part={`input-container ${this.errorText ? 'error' : this.validText ? 'valid' : ''}`}>
           <input
             id={this.inputId}
             aria-label={this.ariaLabel}
@@ -144,11 +155,13 @@ export class ModusNumberInput {
             type="number"
             value={this.value}></input>
         </div>
-        {this.errorText ? (
-          <label class="sub-text error">{this.errorText}</label>
-        ) : this.validText ? (
-          <label class="sub-text valid">{this.validText}</label>
-        ) : null}
+        <div class="sub-text" part="sub-text">
+          {this.errorText ? (
+            <label class="sub-text error">{this.errorText}</label>
+          ) : this.validText ? (
+            <label class="sub-text valid">{this.validText}</label>
+          ) : null}
+        </div>
       </div>
     );
   }
