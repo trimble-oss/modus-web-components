@@ -13,12 +13,13 @@ describe('modus-select', () => {
       <modus-select>
         <mock:shadow-root>
           <div>
-            <span class="input-container">
-            <select class="medium" id="mwc_id_0_select" part="input">
+            <span class="input-container" part="table-inputs">
+            <select class="medium" id="mwc_id_0_select" part="input select-input ">
               <option disabled="" selected="" value="">
                 Please Select
               </option>
             </select>
+            <div class="sub-text" part="sub-text"></div>
             </span>
           </div>
         </mock:shadow-root>

@@ -2472,6 +2472,7 @@ declare global {
     };
     interface HTMLModusSelectElementEventMap {
         "valueChange": unknown;
+        "valueError": string;
         "inputBlur": FocusEvent;
     }
     interface HTMLModusSelectElement extends Components.ModusSelect, HTMLStencilElement {
@@ -4062,6 +4063,10 @@ declare namespace LocalJSX {
           * An event that fires on input value change.
          */
         "onValueChange"?: (event: ModusSelectCustomEvent<unknown>) => void;
+        /**
+          * An event that fires on input value error.
+         */
+        "onValueError"?: (event: ModusSelectCustomEvent<string>) => void;
         /**
           * The options for the dropdown list.
          */

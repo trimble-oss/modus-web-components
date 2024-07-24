@@ -46,10 +46,16 @@ export class ModusSelect {
   @Watch('value')
   handleValueChange(newValue: unknown): void {
     this.internalValue = newValue;
+    if (this.errorText) {
+      this.valueError.emit(this.errorText);
+    }
   }
 
   /** An event that fires on input value change. */
   @Event() valueChange: EventEmitter<unknown>;
+
+  /** An event that fires on input value error. */
+  @Event() valueError: EventEmitter<string>;
 
   /** An event that fires on input blur. */
   @Event() inputBlur: EventEmitter<FocusEvent>;
@@ -74,10 +80,16 @@ export class ModusSelect {
 
   connectedCallback(): void {
     this.internalValue = this.value;
+    if (this.errorText) {
+      this.valueError.emit(this.errorText);
+    }
   }
 
   handleOptionSelect(option: unknown): void {
     this.valueChange.emit(option);
+    if (this.errorText) {
+      this.valueError.emit(this.errorText);
+    }
   }
 
   handleSelectChange(event: Event): void {
@@ -126,9 +138,9 @@ export class ModusSelect {
     return (
       <div class={this.disabled ? 'disabled' : undefined}>
         {this.renderLabel()}
-        <span class="input-container">
+        <span class="input-container" part="table-inputs">
           <select
-            part="input"
+            part={`input select-input ${this.errorText ? 'error' : this.validText ? 'valid' : ''}`}
             ref={(el) => (this.selectInput = el)}
             disabled={this.disabled}
             id={this.selectId}
@@ -145,7 +157,9 @@ export class ModusSelect {
             </option>
             {this.renderOptions()}
           </select>
-          {this.renderSubText()}
+          <div class="sub-text" part="sub-text">
+            {this.renderSubText()}
+          </div>
         </span>
       </div>
     );

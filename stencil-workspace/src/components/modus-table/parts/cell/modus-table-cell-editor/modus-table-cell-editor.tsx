@@ -225,6 +225,15 @@ export class ModusTableCellEditor {
             } else {
               this.editedValue = detail[valueKey];
             }
+          }}
+          onValueError={(e: CustomEvent<string | null>) => {
+            if (e.detail) {
+              this.errorMessage = e.detail;
+              this.showErrorTooltip();
+            } else {
+              this.errorMessage = '';
+              this.hideErrorTooltip();
+            }
           }}></modus-select>
       </div>
     );

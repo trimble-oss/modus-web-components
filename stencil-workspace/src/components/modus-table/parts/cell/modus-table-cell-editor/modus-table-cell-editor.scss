@@ -58,6 +58,12 @@ table.density-compact {
   z-index: 99;
 }
 
+.editor::part(select-input error) {
+  border: 2px solid var(--modus-input-validation-error-color, #da212c);
+  border-radius: unset;
+  z-index: 99;
+}
+
 .error-tooltip {
   background-color: var(--modus-input-validation-error-color, #da212c);
   border-radius: 2px;
