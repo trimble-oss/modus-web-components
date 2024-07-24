@@ -79,6 +79,9 @@ export class ModusAutocomplete {
 
   @State() isLoading = false;
 
+  /** A promise that resolves to an array of autocomplete options. */
+  @Prop() newOptions: Promise<ModusAutocompleteOption[]>;
+
   /** Whether to show autocomplete's options when focus. */
   @Prop() showOptionsOnFocus: boolean;
 
@@ -341,7 +344,6 @@ export class ModusAutocomplete {
     event.stopPropagation();
     this.disableFiltering = !this.disableCloseOnSelect;
     this.handleSearchChange(event.detail);
-    this.isLoading = true; // Start loading when the value changes
   };
 
   updateVisibleCustomOptions = (search = '') => {
@@ -423,8 +425,7 @@ export class ModusAutocomplete {
       value={this.getValueAsString()}
       onBlur={this.handleInputBlur}
       role="combobox"
-      onKeyUp={(e) => {
-        console.log('keyup', e);
+      onKeyUp={() => {
         this.processChange();
       }}
       aria-autocomplete="list"
@@ -460,23 +461,18 @@ export class ModusAutocomplete {
       }, timeout);
     };
   }
-  //new options shoudl be a promise
-  /** A promise that resolves to an array of autocomplete options. */
-  @Prop() optionsPromise: Promise<ModusAutocompleteOption[]>;
+
   async saveInput() {
-    console.log('Saving data', this.value);
+    this.isLoading = true;
     try {
       // Fetch and convert the new options
-      const resolvedOptions = await this.optionsPromise;
-      console.log('Resolved options:', resolvedOptions);
+      const resolvedOptions = await this.newOptions;
 
       // Convert new options separately
       const convertedNewOptions = this.convertNewOptions(resolvedOptions);
-      console.log('Converted new options:', convertedNewOptions);
 
       // Filter out duplicate options based on their IDs
       const uniqueNewOptions = this.filterOutDuplicateOptions(convertedNewOptions);
-      console.log('Unique new options:', uniqueNewOptions);
 
       // Update the existing options with unique new options
       this.options = [...this.options, ...uniqueNewOptions] as ModusAutocompleteOption[];
@@ -484,7 +480,7 @@ export class ModusAutocomplete {
       // Update visible options
       this.updateVisibleOptions(this.getValueAsString());
     } catch (error) {
-      console.error('Failed to resolve optionsPromise:', error);
+      this.isLoading = false;
     } finally {
       this.isLoading = false;
     }
