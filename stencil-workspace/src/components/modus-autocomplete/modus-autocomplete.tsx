@@ -62,6 +62,9 @@ export class ModusAutocomplete {
   /** The autocomplete's label. */
   @Prop() label: string;
 
+  /** The autocomplete's additional options. */
+  @Prop() newOptions: Promise<ModusAutocompleteOption[]>;
+
   /** The autocomplete's no results text. */
   @Prop() noResultsFoundText = 'No results found';
 
@@ -78,9 +81,6 @@ export class ModusAutocomplete {
   @State() selectedOption: string;
 
   @State() isLoading = false;
-
-  /** A promise that resolves to an array of autocomplete options. */
-  @Prop() newOptions: Promise<ModusAutocompleteOption[]>;
 
   /** Whether to show autocomplete's options when focus. */
   @Prop() showOptionsOnFocus: boolean;

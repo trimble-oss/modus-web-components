@@ -281,6 +281,72 @@ MultipleSelection.args = {
   options: customOptions,
 };
 
+export const WithNewOptions = ({
+  ariaLabel,
+  clearable,
+  disabled,
+  dropdownMaxHeight,
+  dropdownZIndex,
+  disableCloseOnSelect,
+  errorText,
+  includeSearchIcon,
+  label,
+  multiple,
+  noResultsFoundText,
+  noResultsFoundSubtext,
+  placeholder,
+  readOnly,
+  required,
+  showNoResultsFoundMessage,
+  showOptionsOnFocus,
+  size,
+  value,
+  options,
+}) => html`
+  <div style="width: 600px">
+    <modus-autocomplete
+      aria-label=${ariaLabel}
+      clearable=${clearable}
+      disabled=${disabled}
+      dropdown-max-height=${dropdownMaxHeight}
+      dropdown-z-index=${dropdownZIndex}
+      disable-close-on-select=${disableCloseOnSelect}
+      error-text=${errorText}
+      include-search-icon=${includeSearchIcon}
+      label=${label}
+      multiple=${multiple}
+      no-results-found-text=${noResultsFoundText}
+      no-results-found-subtext=${noResultsFoundSubtext}
+      placeholder=${placeholder}
+      read-only=${readOnly}
+      required=${required}
+      show-no-results-found-message=${showNoResultsFoundMessage}
+      show-options-on-focus=${showOptionsOnFocus}
+      size=${size}
+      .value=${value}
+      .options=${options}>
+  </div>
+  ${setNewOptions()}
+`;
+
+WithNewOptions.args = defaultArgs;
+const setNewOptions = () => {
+  const tag = document.createElement('script');
+  tag.innerHTML = `
+      var newOptions = ['Cranberry', 'Fig', 'Pomegranate'];
+      var autoComplete = document.querySelector('modus-autocomplete');
+      if (autoComplete) {
+        autoComplete.newOptions = new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(['Pomegranate', 'Guava', 'Fig']);
+        }, 3000);
+      });
+    }
+  `;
+
+  return tag;
+};
+
 export const WithCustomOption = ({
   ariaLabel,
   clearable,

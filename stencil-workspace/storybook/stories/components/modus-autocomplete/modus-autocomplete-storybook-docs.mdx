@@ -32,6 +32,10 @@ from a set of choices. When the user enters text into the input field, a list of
 
 <Story id="user-inputs-autocomplete--with-custom-option" />
 
+### With New options
+
+<Story id="user-inputs-autocomplete--with-new-options" />
+
 ```html
 <div style="width: 500px">
   <!-- Default (values set in <script />) -->
@@ -58,6 +62,9 @@ from a set of choices. When the user enters text into the input field, a list of
       <div style="font-size: 12px">Senior Construction Engineer</div>
     </li>
   </modus-autocomplete>
+
+  <!-- With New Options -->
+  <modus-autocomplete id="new-options" label="New Options" placeholder="Search..."></modus-autocomplete>
 </div>
 <script>
   document.querySelector('#default').options = [
@@ -126,6 +133,34 @@ from a set of choices. When the user enters text into the input field, a list of
     { id: '18', value: 'Papaya' },
     { id: '19', value: 'Passion Fruit' },
   ];
+  const withNewOptions = document.querySelector('#new-options');
+  withNewOptions.options = [
+    'Apple',
+    'Banana',
+    'Orange',
+    'Mango',
+    'Pineapple',
+    'Grapes',
+    'Watermelon',
+    'Strawberry',
+    'Blueberry',
+    'Raspberry',
+    'Blackberry',
+    'Cherry',
+    'Peach',
+    'Pear',
+    'Plum',
+    'Kiwi',
+    'Lemon',
+    'Lime',
+    'Papaya',
+    'Passion Fruit',
+  ];
+  withNewOptions.newOptions = new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(['Cranberry', 'Figs', 'Pomegranate']);
+    }, 5000);
+  }),
 </script>
 ```
 
