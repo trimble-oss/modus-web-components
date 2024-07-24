@@ -75,33 +75,25 @@
 
   // Alert
   // Background
-  --modus-alert-primary-bg: var(--modus-white);
-  --modus-alert-secondary-bg: var(--modus-white);
-  --modus-alert-dark-bg: var(--modus-white);
-  --modus-alert-success-bg: var(--modus-white);
-  --modus-alert-danger-bg: var(--modus-white);
-  --modus-alert-warning-bg: var(--modus-white);
+  --modus-alert-primary-bg: rgba(220, 237, 249, 0.5);
+  --modus-alert-success-bg: rgba(224, 236, 207, 0.5);
+  --modus-alert-danger-bg: rgba(251, 212, 215, 0.5);
+  --modus-alert-warning-bg: rgba(255, 245, 228, 0.5);
 
   // Text
   --modus-alert-primary-color: var(--modus-primary);
-  --modus-alert-secondary-color: var(--modus-secondary);
-  --modus-alert-dark-color: var(--modus-dark);
   --modus-alert-success-color: var(--modus-success);
   --modus-alert-danger-color: var(--modus-danger);
   --modus-alert-warning-color: var(--modus-trimble-gray);
 
   // Links
   --modus-alert-primary-link-color: #003b61;
-  --modus-alert-secondary-link-color: #4b4e56;
-  --modus-alert-dark-link-color: #070809;
   --modus-alert-success-link-color: #002414;
   --modus-alert-danger-link-color: #a01820;
   --modus-alert-warning-link-color: #070809;
 
   // Border
   --modus-alert-primary-border-color: var(--modus-primary);
-  --modus-alert-secondary-border-color: var(--modus-gray-6);
-  --modus-alert-dark-border-color: var(--modus-trimble-gray);
   --modus-alert-success-border-color: var(--modus-success);
   --modus-alert-danger-border-color: var(--modus-danger);
   --modus-alert-warning-border-color: var(--modus-warning);
@@ -457,25 +449,19 @@
 
   // Alert
   // Background
-  --modus-alert-primary-bg: #019aeb80;
-  --modus-alert-secondary-bg: #6a6e7980;
-  --modus-alert-dark-bg: #171c1e80;
-  --modus-alert-success-bg: #1e8a4480;
-  --modus-alert-danger-bg: #da212c80;
-  --modus-alert-warning-bg: #fbad2680;
+  --modus-alert-primary-bg: rgba(1, 154, 235, 0.5);
+  --modus-alert-success-bg: rgba(30, 138, 68, 0.5);
+  --modus-alert-danger-bg: rgba(218, 33, 44, 0.5);
+  --modus-alert-warning-bg: rgba(251, 173, 38, 0.5);
 
   // Text
   --modus-alert-primary-color: var(--modus-body-color);
-  --modus-alert-secondary-color: var(--modus-body-color);
-  --modus-alert-dark-color: var(--modus-body-color);
   --modus-alert-success-color: var(--modus-body-color);
   --modus-alert-danger-color: var(--modus-body-color);
   --modus-alert-warning-color: var(--modus-body-color);
 
   // Links
   --modus-alert-primary-link-color: #c9c9dc;
-  --modus-alert-secondary-link-color: #c9c9dc;
-  --modus-alert-dark-link-color: #c9c9dc;
   --modus-alert-success-link-color: #c9c9dc;
   --modus-alert-danger-link-color: #c9c9dc;
   --modus-alert-warning-link-color: #c9c9dc;
