@@ -154,7 +154,16 @@ export class ModusTableCellEditor {
         size="large"
         onBlur={this.handleBlur}
         onValueChange={(e: CustomEvent<string>) => (this.editedValue = e.detail)}
-        onKeyDown={(e) => handleArrowKeys(e, this.handleKeyDown)}></modus-number-input>
+        onKeyDown={(e) => handleArrowKeys(e, this.handleKeyDown)}
+        onValueError={(e: CustomEvent<string | null>) => {
+          if (e.detail) {
+            this.errorMessage = e.detail;
+            this.showErrorTooltip();
+          } else {
+            this.errorMessage = '';
+            this.hideErrorTooltip();
+          }
+        }}></modus-number-input>
     );
   }
 

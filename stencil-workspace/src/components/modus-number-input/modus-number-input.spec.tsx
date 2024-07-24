@@ -10,10 +10,11 @@ describe('modus-number-input', () => {
     expect(page.root).toEqualHtml(`
       <modus-number-input>
         <mock:shadow-root>
-          <div class="modus-number-input">
-            <div class="input-container medium" part="input-container">
+          <div class="modus-number-input" part="table-inputs">
+            <div class="input-container medium" part="input-container ">
               <input class="text-align-left" id="mwc_id_0_number-input" tabindex="0" type="number">
             </div>
+            <div class="sub-text" part="sub-text"></div>
           </div>
         </mock:shadow-root>
       </modus-number-input>
