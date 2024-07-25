@@ -336,12 +336,14 @@ const setNewOptions = () => {
       var newOptions = ['Cranberry', 'Fig', 'Pomegranate'];
       var autoComplete = document.querySelector('modus-autocomplete');
       if (autoComplete) {
-        autoComplete.newOptions = new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(['Pomegranate', 'Guava', 'Fig']);
-        }, 3000);
-      });
-    }
+        autoComplete.addEventListener('inputChanged', async (event) => {
+          autoComplete.additionalOptions = new Promise((resolve) => {
+            setTimeout(() => {
+              resolve(['Cranberry', 'Fig', 'Pomegranate']);
+            }, 3000);
+          });
+        });
+      }
   `;
 
   return tag;

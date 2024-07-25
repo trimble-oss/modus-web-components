@@ -36,6 +36,29 @@ export class ModusAutocomplete {
   /** The autocomplete's aria label. */
   @Prop() ariaLabel: string | null;
 
+  /** The autocomplete's additional options. */
+  @Prop() additionalOptions: Promise<ModusAutocompleteOption[]>;
+
+  @Watch('additionalOptions')
+  async watchAdditionalOptions() {
+    if (this.additionalOptions) {
+      this.isLoading = true;
+      try {
+        const resolvedOptions = await this.additionalOptions;
+
+        // Convert new options separately
+        const convertedAdditionalOptions = this.convertAdditionalOptions(resolvedOptions);
+
+        // Update the existing options with new options
+        this.options = convertedAdditionalOptions as ModusAutocompleteOption[];
+      } catch (error) {
+        this.isLoading = false;
+      } finally {
+        this.isLoading = false;
+      }
+    }
+  }
+
   /** Whether the input has a clear button. */
   @Prop() clearable = false;
 
@@ -61,9 +84,6 @@ export class ModusAutocomplete {
 
   /** The autocomplete's label. */
   @Prop() label: string;
-
-  /** The autocomplete's additional options. */
-  @Prop() newOptions: Promise<ModusAutocompleteOption[]>;
 
   /** The autocomplete's no results text. */
   @Prop() noResultsFoundText = 'No results found';
@@ -117,6 +137,9 @@ export class ModusAutocomplete {
       this.updateVisibleCustomOptions(this.getValueAsString());
     }
   }
+
+  /** An event that emits the input value after typing a sequence of characters */
+  @Event() inputChanged: EventEmitter<string>;
 
   /** An event that fires when a dropdown option is selected. Emits the option id. */
   @Event() optionSelected: EventEmitter<string>;
@@ -444,6 +467,7 @@ export class ModusAutocomplete {
       selectedOption.scrollIntoView({ behavior: 'smooth', inline: 'nearest' });
     }
   };
+
   debounce(func, timeout = 300) {
     let timer;
     return (...args) => {
@@ -454,50 +478,25 @@ export class ModusAutocomplete {
     };
   }
 
-  async saveInput() {
-    this.isLoading = true;
-    try {
-      // Fetch and convert the new options
-      const resolvedOptions = await this.newOptions;
+  processChange = this.debounce(() => this.saveInput());
 
-      // Convert new options separately
-      const convertedNewOptions = this.convertNewOptions(resolvedOptions);
-
-      // Filter out duplicate options based on their IDs
-      const uniqueNewOptions = this.filterOutDuplicateOptions(convertedNewOptions);
-
-      // Update the existing options with unique new options
-      this.options = [...this.options, ...uniqueNewOptions] as ModusAutocompleteOption[];
-
-      // Update visible options
-      this.updateVisibleOptions(this.getValueAsString());
-    } catch (error) {
-      this.isLoading = false;
-    } finally {
-      this.isLoading = false;
-    }
+  saveInput() {
+    this.inputChanged.emit(this.getValueAsString());
   }
 
-  convertNewOptions(newOptions: ModusAutocompleteOption[] | string[]): ModusAutocompleteOption[] {
-    if (newOptions && newOptions.length > 0) {
-      if (typeof newOptions[0] === 'string') {
-        return newOptions.map((option) => ({
+  convertAdditionalOptions(additionalOptions: ModusAutocompleteOption[] | string[]): ModusAutocompleteOption[] {
+    if (additionalOptions && additionalOptions.length > 0) {
+      if (typeof additionalOptions[0] === 'string') {
+        return additionalOptions.map((option) => ({
           id: option,
           value: option,
         }));
       } else {
-        return newOptions as ModusAutocompleteOption[];
+        return additionalOptions as ModusAutocompleteOption[];
       }
     }
     return [];
   }
-
-  filterOutDuplicateOptions(newOptions: ModusAutocompleteOption[]): ModusAutocompleteOption[] {
-    const existingIds = new Set(this.options.map((option) => option.id));
-    return newOptions.filter((option) => !existingIds.has(option.id));
-  }
-
-  processChange = this.debounce(() => this.saveInput());
 
   render(): unknown {
     const classes = `autocomplete ${this.classBySize.get(this.size)}`;
