@@ -301,7 +301,6 @@ export const WithNewOptions = ({
   showOptionsOnFocus,
   size,
   value,
-  options,
 }) => html`
   <div style="width: 600px">
     <modus-autocomplete
@@ -323,8 +322,7 @@ export const WithNewOptions = ({
       show-no-results-found-message=${showNoResultsFoundMessage}
       show-options-on-focus=${showOptionsOnFocus}
       size=${size}
-      .value=${value}
-      .options=${options}>
+      .value=${value}>
   </div>
   ${setNewOptions()}
 `;
