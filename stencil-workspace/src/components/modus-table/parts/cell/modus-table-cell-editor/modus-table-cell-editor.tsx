@@ -304,6 +304,15 @@ export class ModusTableCellEditor {
               this.editedValue = selectedDetail;
             }
           }}
+          onValueError={(e: CustomEvent<string | null>) => {
+            if (e.detail) {
+              this.errorMessage = e.detail;
+              this.showErrorTooltip();
+            } else {
+              this.errorMessage = '';
+              this.hideErrorTooltip();
+            }
+          }}
           value={selectedOption}></modus-autocomplete>
       </div>
     );
