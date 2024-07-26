@@ -24,11 +24,7 @@ This component utilizes the slot element, allowing you to render your own HTML i
 <Story id="components-navbar--default" />
 
 ```html
-<modus-navbar
-  id="working"
-  show-apps-menu
-  show-help
-  show-main-menu>
+<modus-navbar id="working" show-apps-menu show-help show-main-menu>
   <div slot="main" style="height:300px;">Render your own main menu.</div>
   <div slot="addMenu">Render your own add menu.</div>
   <div slot="notificationMenu">Render your own notification menu.</div>
@@ -39,10 +35,10 @@ This component utilizes the slot element, allowing you to render your own HTML i
   const element = document.querySelector('modus-navbar');
   element.apps = [
     {
-        description: 'The One Trimble Design System',
-        logoUrl: 'https://modus.trimble.com/favicon.svg',
-        name: 'Trimble Modus',
-        url: 'https://modus.trimble.com/',
+      description: 'The One Trimble Design System',
+      logoUrl: 'https://modus.trimble.com/favicon.svg',
+      name: 'Trimble Modus',
+      url: 'https://modus.trimble.com/',
     },
   ];
   element.logoOptions = {
@@ -69,16 +65,16 @@ This component utilizes the slot element, allowing you to render your own HTML i
     username: 'Modus User',
     links: [
       {
-        id: "link1",
-        display: "Link 1",
-        icon: "moon"
+        id: 'link1',
+        display: 'Link 1',
+        icon: 'moon',
       },
       {
-        id: "link2",
-        display: "Link 2",
-        icon: "sun"
-      }
-    ]
+        id: 'link2',
+        display: 'Link 2',
+        icon: 'sun',
+      },
+    ],
   };
 </script>
 ```
@@ -88,12 +84,7 @@ This component utilizes the slot element, allowing you to render your own HTML i
 <Story id="components-navbar--failed-avatar" />
 
 ```html
-<modus-navbar
-  id="broken"
-  show-apps-menu
-  show-help
-  show-main-menu
-  show-notifications>
+<modus-navbar id="broken" show-apps-menu show-help show-main-menu show-notifications>
   <div slot="main" style="height:300px;">Render your own main menu.</div>
   <div slot="notifications">Render your own notifications.</div>
 </modus-navbar>
@@ -102,10 +93,10 @@ This component utilizes the slot element, allowing you to render your own HTML i
   const element = document.querySelector('modus-navbar');
   element.apps = [
     {
-        description: 'The One Trimble Design System',
-        logoUrl: 'https://modus.trimble.com/favicon.svg',
-        name: 'Trimble Modus',
-        url: 'https://modus.trimble.com/',
+      description: 'The One Trimble Design System',
+      logoUrl: 'https://modus.trimble.com/favicon.svg',
+      name: 'Trimble Modus',
+      url: 'https://modus.trimble.com/',
     },
   ];
   element.logoOptions = {
@@ -132,12 +123,7 @@ Add optional features to the navbar.
 <Story id="components-navbar--with-optional-features" />
 
 ```html
-<modus-navbar
-  id="with-optional-features"
-  show-apps-menu
-  show-help
-  show-main-menu
-  show-notifications>
+<modus-navbar id="with-optional-features" show-apps-menu show-help show-main-menu show-notifications>
   <div slot="main" style="height:300px;">Render your own main menu.</div>
   <div slot="notifications">Render your own notifications.</div>
 </modus-navbar>
@@ -146,10 +132,10 @@ Add optional features to the navbar.
   const element = document.querySelector('modus-navbar');
   element.apps = [
     {
-        description: 'The One Trimble Design System',
-        logoUrl: 'https://modus.trimble.com/favicon.svg',
-        name: 'Trimble Modus',
-        url: 'https://modus.trimble.com/',
+      description: 'The One Trimble Design System',
+      logoUrl: 'https://modus.trimble.com/favicon.svg',
+      name: 'Trimble Modus',
+      url: 'https://modus.trimble.com/',
     },
   ];
   element.logoOptions = {
@@ -188,13 +174,7 @@ Use the `variant` prop to choose a blue background navbar.
 <Story id="components-navbar--blue-navbar" />
 
 ```html
-<modus-navbar
-  id="blue-theme"
-  show-apps-menu
-  show-help
-  show-main-menu
-  show-notifications
-  variant="blue">
+<modus-navbar id="blue-theme" show-apps-menu show-help show-main-menu show-notifications variant="blue">
   <div slot="main" style="height:300px;">Render your own main menu.</div>
   <div slot="notifications">Render your own notifications.</div>
 </modus-navbar>
@@ -203,10 +183,10 @@ Use the `variant` prop to choose a blue background navbar.
   const element = document.querySelector('modus-navbar');
   element.apps = [
     {
-        description: 'The One Trimble Design System',
-        logoUrl: 'https://modus.trimble.com/favicon.svg',
-        name: 'Trimble Modus',
-        url: 'https://modus.trimble.com/',
+      description: 'The One Trimble Design System',
+      logoUrl: 'https://modus.trimble.com/favicon.svg',
+      name: 'Trimble Modus',
+      url: 'https://modus.trimble.com/',
     },
   ];
   element.logoOptions = {
@@ -255,8 +235,8 @@ interface ModusNavbarLogoOptions {
 }
 
 interface ModusNavbarTooltip {
-    text: string;
-    ariaLabel?: string;
+  text: string;
+  ariaLabel?: string;
 }
 
 interface ModusProfileMenuOptions {
@@ -294,9 +274,10 @@ export interface ModusNavbarDropdownOptions {
 | ---------------------- | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- | ----------- |
 | `apps`                 | --                       | (optional) The apps to render in the apps menu.                                                                                                                                         | `ModusNavbarApp[]`           | `undefined` |
 | `navAriaLabel`         | `nav-aria-label`         | (optional) The navbar's aria-label.                                                                                                                                                     | `string`                     | `undefined` |
+| `navId`                | `nav-id`                 | (optional) The navbar's id.                                                                                                                                                             | `string`                     | `undefined` |
 | `buttons`              | --                       | (optional) The buttons to render in the Navbar.                                                                                                                                         | `ModusNavbarButton[]`        | `undefined` |
 | `notificationCount`    | `notification-count`     | (optional) To add the counter value to the notification icon.                                                                                                                           | `number`                     | `undefined` |
-| `enableSearchOverlay`  | `enable-search-overlay`    | (optional) Whether to show search overlay or not.                                                                                                                                     | `boolean`                    | `undefined` |
+| `enableSearchOverlay`  | `enable-search-overlay`  | (optional) Whether to show search overlay or not.                                                                                                                                       | `boolean`                    | `undefined` |
 | `helpTooltip`          | --                       | (optional) Help tooltip.                                                                                                                                                                | `ModusNavbarTooltip`         | `undefined` |
 | `helpUrl`              | `help-url`               | (optional) Help URL.                                                                                                                                                                    | `string`                     | `undefined` |
 | `logoOptions`          | --                       | (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels. | `ModusNavbarLogoOptions`     | `undefined` |

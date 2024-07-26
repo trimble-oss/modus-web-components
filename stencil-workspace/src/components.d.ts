@@ -813,6 +813,10 @@ export namespace Components {
          */
         "navAriaLabel"?: string;
         /**
+          * (optional) The ID to use for the navbar.
+         */
+        "navId": string;
+        /**
           * (optional) Whether to show badge on top of notification
          */
         "notificationCount": number;
@@ -3739,6 +3743,10 @@ declare namespace LocalJSX {
           * (optional) The navbar's aria-label.
          */
         "navAriaLabel"?: string;
+        /**
+          * (optional) The ID to use for the navbar.
+         */
+        "navId"?: string;
         /**
           * (optional) Whether to show badge on top of notification
          */
