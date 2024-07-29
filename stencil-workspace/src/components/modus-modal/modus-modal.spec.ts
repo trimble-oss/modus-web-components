@@ -56,4 +56,31 @@ describe('modus-modal', () => {
     await modal.close();
     expect(modal.visible).toBeFalsy();
   });
+
+  it('should update isContentScrollable when content changes', async () => {
+    const page = await newSpecPage({
+      components: [ModusModal],
+      html: `<modus-modal></modus-modal>`,
+    });
+
+    const modal = page.rootInstance as ModusModal;
+
+    expect(modal.isContentScrollable).toBe(false);
+
+    modal.modalContentRef = {
+      scrollHeight: 200,
+      clientHeight: 100,
+    } as HTMLDivElement;
+
+    modal.componentDidRender();
+    expect(modal.isContentScrollable).toBe(true);
+
+    modal.modalContentRef = {
+      scrollHeight: 100,
+      clientHeight: 200,
+    } as HTMLDivElement;
+
+    modal.componentDidRender();
+    expect(modal.isContentScrollable).toBe(false);
+  });
 });

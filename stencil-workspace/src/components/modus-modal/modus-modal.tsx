@@ -61,6 +61,9 @@ export class ModusModal {
   /** An event that fires on secondary button click.  */
   @Event() secondaryButtonClick: EventEmitter;
 
+  /** A state that checks if content is scrollable.  */
+  @State() isContentScrollable = false;
+
   ignoreOverlayClick = false;
 
   // A hidden element used to find the end of the Modal to prevent tabbing in the background
@@ -133,8 +136,16 @@ export class ModusModal {
   }
 
   componentDidRender() {
-    if (this.modalContentRef && this.startTrapRef)
+    if (this.modalContentRef && this.startTrapRef) {
       this.focusWrapping = new ModalFocusWrapping(this.modalContentRef, this.startTrapRef);
+    }
+    this.checkContentScrollable();
+  }
+
+  checkContentScrollable() {
+    if (this.modalContentRef) {
+      this.isContentScrollable = this.modalContentRef.scrollHeight > this.modalContentRef.clientHeight;
+    }
   }
 
   renderModal(): JSX.Element[] {
@@ -156,7 +167,7 @@ export class ModusModal {
 
   renderModalHeader(): JSX.Element[] {
     return (
-      <header>
+      <header class={{ scrollable: this.isContentScrollable }}>
         {this.headerText}
         <div
           role="button"
@@ -176,6 +187,7 @@ export class ModusModal {
         <footer
           class={{
             'has-buttons': Boolean(this.primaryButtonText || this.secondaryButtonText),
+            scrollable: this.isContentScrollable,
           }}>
           {this.secondaryButtonText && (
             <modus-button
