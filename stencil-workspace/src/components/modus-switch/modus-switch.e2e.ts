@@ -46,11 +46,12 @@ describe('modus-switch', () => {
 
     await page.setContent('<modus-switch></modus-switch>');
     const component = await page.find('modus-switch');
+    const input = await page.find('modus-switch >>> input');
+    expect(await input.getProperty('checked')).toBeFalsy();
 
     component.setProperty('checked', 'true');
     await page.waitForChanges();
 
-    const input = await page.find('modus-switch >>> input');
     expect(await input.getProperty('checked')).toBeTruthy();
   });
 
@@ -94,14 +95,12 @@ describe('modus-switch', () => {
     const input = await page.find('modus-switch >>> input');
     expect(await modusSwitch.getProperty('checked')).toBeTruthy();
     expect(await input.getProperty('checked')).toBeTruthy();
-    expect(await input.getAttribute('aria-checked').toLowerCase()).toEqual('true');
 
     await element.click();
     await page.waitForChanges();
 
     expect(await modusSwitch.getProperty('checked')).toBeFalsy();
     expect(await input.getProperty('checked')).toBeFalsy();
-    expect(await input.getAttribute('aria-checked').toLowerCase()).toEqual('false');
   });
   it('renders with medium size', async () => {
     const page = await newE2EPage();
@@ -117,6 +116,28 @@ describe('modus-switch', () => {
 
     const element = await page.find('modus-switch >>> .modus-switch');
     expect(element).toHaveClass('small');
+  });
+
+  it('sets tabindex to -1 when disabled', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-switch disabled></modus-switch>');
+
+    const element = await page.find('modus-switch >>> .modus-switch');
+    expect(element).toHaveAttribute('tabindex');
+    expect(element.getAttribute('tabindex')).toEqual('-1');
+  });
+
+  it('renders with "for" on label equal to "id" on input', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-switch label="test label"></modus-switch>');
+
+    const input = await page.find('modus-switch >>> input');
+    const id = await input.getAttribute('id');
+
+    const label = await page.find('modus-switch >>> label');
+    const forAttr = await label.getAttribute('for');
+
+    expect(id).toEqual(forAttr);
   });
 
   it('renders aria-label on input when set', async () => {

@@ -1,4 +1,6 @@
 // eslint-disable-next-line
+import { generateElementId } from '../../utils/utils';
+// eslint-disable-next-line
 import { Component, Prop, h, Event, EventEmitter, Listen } from '@stencil/core';
 
 @Component({
@@ -25,6 +27,7 @@ export class ModusSwitch {
   /** An event that fires on switch click. */
   @Event() switchClick: EventEmitter<boolean>;
 
+  private generatedId = generateElementId() + '_switch_input';
   checkboxInput: HTMLInputElement;
 
   @Listen('keydown')
@@ -69,15 +72,15 @@ export class ModusSwitch {
           <span class={`slider`}></span>
         </div>
         <input
-          aria-checked={String(this.checked)}
           aria-disabled={this.disabled ? 'true' : undefined}
           aria-label={this.ariaLabel || undefined}
           checked={this.checked}
           disabled={this.disabled}
+          id={this.generatedId}
           ref={(el) => (this.checkboxInput = el as HTMLInputElement)}
           role="switch"
           type="checkbox"></input>
-        {this.label ? <label>{this.label}</label> : null}
+        {this.label ? <label htmlFor={this.generatedId}>{this.label}</label> : null}
       </div>
     );
   }
