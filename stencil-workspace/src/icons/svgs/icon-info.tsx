@@ -9,7 +9,7 @@ export const IconInfo: FunctionalComponent<IconProps> = (props: IconProps) => (
     width={props.size ?? 16}
     onClick={() => props.onClick()}
     viewBox="0 0 24 24"
-    fill="none"
+    fill="currentColor"
     xmlns="http://www.w3.org/2000/svg">
     <path
       fill-rule="evenodd"

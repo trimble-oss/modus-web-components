@@ -58,6 +58,8 @@
 
     .body {
       height: auto;
+      max-height: calc(100dvh - 188px);
+      overflow-y: auto;
       padding: $rem-16px;
     }
 

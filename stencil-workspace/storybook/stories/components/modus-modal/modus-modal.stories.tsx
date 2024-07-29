@@ -79,7 +79,7 @@ export default {
       name: 'fullscreen',
       description: "The modal's full screen view",
       table: {
-        type: { summary: 'boolean' }
+        type: { summary: 'boolean' },
       },
     },
   },
@@ -110,7 +110,7 @@ const Template = ({
   secondaryButtonText,
   zIndex,
   backdrop,
-  fullscreen
+  fullscreen,
 }) => html`
   <modus-button id="btn-modal" color="primary">Open modal</modus-button>
   <modus-modal
@@ -141,21 +141,26 @@ Default.args = {
   secondaryButtonText: 'Sweet',
   zIndex: '1',
   backdrop: 'default',
-  fullscreen: false
+  fullscreen: false,
 };
 
-const CustomFooterTemplate = ({ ariaLabel, headerText, zIndex, backdrop,fullscreen }) => html`
+const CustomFooterTemplate = ({ ariaLabel, headerText, zIndex, backdrop, fullscreen }) => html`
   <modus-button id="btn-modal" color="primary">Open modal</modus-button>
   <modus-modal
-  aria-label=${ariaLabel}
-  header-text=${headerText}
-  z-index=${zIndex}
-  backdrop=${backdrop}
-  fullscreen=${fullscreen}>
-    <p>A dialog or a modal is a window overlaid on the primary window. It interrupts the user and requires an action. It disables the main content until the user explicitly interacts with the modal dialog.</p>
-    <div style="align-items: center;
+    aria-label=${ariaLabel}
+    header-text=${headerText}
+    z-index=${zIndex}
+    backdrop=${backdrop}
+    fullscreen=${fullscreen}>
+    <p>
+      A dialog or a modal is a window overlaid on the primary window. It interrupts the user and requires an action. It
+      disables the main content until the user explicitly interacts with the modal dialog.
+    </p>
+    <div
+      style="align-items: center;
     display: flex;
-    justify-content: flex-end; gap: 8px; height:100%;" slot="footerContent">
+    justify-content: flex-end; gap: 8px; height:100%;"
+      slot="footerContent">
       <modus-button color="tertiary">Cancel</modus-button>
       <modus-button color="secondary">Check later</modus-button>
       <modus-button color="primary">Approve</modus-button>
@@ -169,7 +174,7 @@ CustomFooter.args = {
   headerText: 'Modal title',
   zIndex: '1',
   backdrop: 'default',
-  fullscreen: false
+  fullscreen: false,
 };
 
 const setScript = () => {

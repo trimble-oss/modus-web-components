@@ -60,7 +60,7 @@ declare interface ButtonComponentProps {
   children?: React.ReactNode | React.ReactNode[];
   color?: 'danger' | 'default' | 'primary' | 'secondary' | 'warning';
   disabled?: boolean;
-  onClick?: (event: React.MouseEvent) => void;
+  buttonClick?: (event: React.MouseEvent) => void;
   size?: 'small' | 'medium' | 'large';
 }
 
@@ -72,7 +72,7 @@ const ButtonComponent: React.FC<ButtonComponentProps> = (
       button-style={props.buttonStyle}
       color={props.color}
       disabled={props.disabled}
-      onClick={(event: React.MouseEvent) =>
+      buttonClick={(event: React.MouseEvent) =>
         props.onClick ? props.onClick(event) : null
       }
       size={props.size}>
