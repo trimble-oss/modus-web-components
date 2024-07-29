@@ -27,7 +27,7 @@ describe('modus-alert', () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-alert aria-label="test label"></modus-alert>');
-    let element = await page.find('modus-alert >>> div.alert');
+    const element = await page.find('modus-alert >>> div.alert');
     expect(element).toBeDefined();
     expect(element).toHaveAttribute('aria-label');
     expect(element.getAttribute('aria-label')).toEqual('test label');
@@ -37,7 +37,7 @@ describe('modus-alert', () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-alert></modus-alert>');
-    let element = await page.find('modus-alert >>> div.alert');
+    const element = await page.find('modus-alert >>> div.alert');
     expect(element).toBeDefined();
     expect(element).not.toHaveAttribute('aria-label');
   });
@@ -46,7 +46,7 @@ describe('modus-alert', () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-alert aria-label=""></modus-alert>');
-    let element = await page.find('modus-alert >>> div.alert');
+    const element = await page.find('modus-alert >>> div.alert');
     expect(element).toBeDefined();
     expect(element).not.toHaveAttribute('aria-label');
   });
