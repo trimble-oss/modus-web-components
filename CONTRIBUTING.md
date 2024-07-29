@@ -30,9 +30,7 @@ _We recommend using [nvm](https://github.com/nvm-sh/nvm). It is a great tool for
 
 If this is your first time in the project, navigate to the `./stencil-workspace` directory and run `npm install` to download third-party packages.
 
-Once you've installed the project's packages, run `npm start`.
-A development environment will start up with the contents of `index.html`.
-This file provides a place to render components for development and end-to-end testing.
+Once you've installed the project's packages, run `npm run build`. After the build is complete, run `npm start`. A development environment will start up with the contents of `index.html`. This file provides a place to render components for development and end-to-end testing.
 
 All web components are located under the `./stencil-workspace/src/components` directory.
 
