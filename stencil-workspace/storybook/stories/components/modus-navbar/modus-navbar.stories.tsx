@@ -20,13 +20,6 @@ export default {
         type: { summary: 'string' },
       },
     },
-    navId: {
-      name: 'nav-id',
-      description: "The navbar's id",
-      table: {
-        type: { summary: 'string' },
-      },
-    },
     showHelp: {
       name: 'show-help',
       description: 'Toggle the help button',
@@ -144,12 +137,10 @@ const Template = ({
   showHelp,
   showProfile,
   showSearch,
-  navId,
 }) => html`
   <modus-navbar
     enable-search-overlay=${enableSearchOverlay}
     nav-aria-label=${navAriaLabel}
-    nav-id=${navId}
     show-apps-menu
     show-help=${showHelp}
     show-main-menu
@@ -180,7 +171,6 @@ Default.args = {
   enableSearchOverlay: false,
   helpTooltip: undefined,
   navAriaLabel: 'Default',
-  navId: '',
   profileMenuOptions: {
     avatarUrl: workingAvatarUrl,
     email: 'modus_user@trimble.com',
@@ -221,12 +211,10 @@ const FailedToLoadAvatarTemplate = ({
   showHelp,
   showProfile,
   showSearch,
-  navId,
 }) => html`
   <modus-navbar
     enable-search-overlay=${enableSearchOverlay}
     nav-aria-label=${navAriaLabel}
-    nav-id=${navId}
     show-apps-menu
     show-help=${showHelp}
     show-help
@@ -277,12 +265,10 @@ const BlueTemplate = ({
   showHelp,
   showProfile,
   showSearch,
-  navId,
 }) => html`
   <modus-navbar
     enable-search-overlay=${enableSearchOverlay}
     nav-aria-label=${navAriaLabel}
-    nav-id=${navId}
     show-apps-menu
     show-help=${showHelp}
     show-help
@@ -344,12 +330,10 @@ const WithOptionalFeaturesTemplate = ({
   showHelp,
   showProfile,
   showSearch,
-  navId,
 }) => html`
   <modus-navbar
     enable-search-overlay=${enableSearchOverlay}
     nav-aria-label=${navAriaLabel}
-    nav-id=${navId}
     show-apps-menu
     show-help=${showHelp}
     show-main-menu

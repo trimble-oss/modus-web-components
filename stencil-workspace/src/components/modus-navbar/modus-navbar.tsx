@@ -109,9 +109,6 @@ export class ModusNavbar {
   /** (optional) Color variants for NavBar. */
   @Prop() variant: 'default' | 'blue' = 'default';
 
-  /** (optional) The ID to use for the navbar. */
-  @Prop() navId: string;
-
   /** An event that fires when the apps menu opens. */
   @Event() appsMenuOpen: EventEmitter<void>;
 
@@ -419,7 +416,7 @@ export class ModusNavbar {
     const counterValue = this.getNotificationCount();
 
     return (
-      <Host id={this.navId ? this.navId : this.componentId}>
+      <Host id={this.componentId}>
         <nav class={`${direction} ${shadow} ${variant}`} aria-label={this.navAriaLabel}>
           {!this.searchOverlayVisible && (
             <Fragment>
@@ -441,7 +438,7 @@ export class ModusNavbar {
                   </div>
                 )}
                 {this.mainMenuVisible && (
-                  <modus-navbar-main-menu navbarId={this.navId ? this.navId : this.componentId}>
+                  <modus-navbar-main-menu navbarId={this.componentId}>
                     <slot name={this.SLOT_MAIN}></slot>
                   </modus-navbar-main-menu>
                 )}
