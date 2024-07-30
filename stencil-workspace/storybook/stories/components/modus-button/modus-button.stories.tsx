@@ -173,3 +173,9 @@ IconOnly.args = {
 
 export const WithCaret = DefaultTemplate.bind({});
 WithCaret.args = { ...DefaultTemplateArgs, label: 'Primary', color: 'primary', disabled: false, showCaret: true };
+
+export const SpecialButton = DefaultTemplate.bind({});
+SpecialButton.args = { ...DefaultTemplateArgs, label: 'Button', color: 'special' };
+
+export const DangerButton = DefaultTemplate.bind({});
+DangerButton.args = { ...DefaultTemplateArgs, label: 'Danger', color: 'danger' };
