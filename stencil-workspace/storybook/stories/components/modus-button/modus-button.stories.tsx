@@ -34,13 +34,13 @@ export default {
     },
     color: {
       control: {
-        options: ['danger', 'primary', 'secondary', 'tertiary'],
+        options: ['danger', 'primary', 'secondary', 'tertiary', 'special'],
         type: 'select',
       },
       description: 'The color of the button',
       table: {
         defaultValue: { summary: `'primary'` },
-        type: { summary: `'danger' | 'primary' | 'secondary' | 'tertiary'` },
+        type: { summary: `'danger' | 'primary' | 'secondary' | 'tertiary' | 'special'` },
       },
     },
     disabled: {
