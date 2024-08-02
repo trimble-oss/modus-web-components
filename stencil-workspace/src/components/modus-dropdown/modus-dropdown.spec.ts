@@ -15,7 +15,7 @@ describe('modus-dropdown', () => {
         <mock:shadow-root>
           <div class="dropdown">
             <slot name='dropdownToggle'></slot>
-            <div class='bottom dropdown-list hidden list-border' style='left: unset; min-width: 0px;'>
+            <div class='bottom dropdown-list hidden list-border' style='left: unset; min-width: 240px;'>
               <slot name='dropdownList'></slot>
             </div>
           </div>

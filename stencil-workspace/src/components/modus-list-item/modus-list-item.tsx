@@ -36,6 +36,9 @@ export class ModusListItem {
   /** An event that fires on list item click */
   @Event() itemClick: EventEmitter;
 
+  /** (optional) Whether the list item has a radius or not */
+  @Prop() radiusless: boolean;
+
   listItemRef: HTMLLIElement;
 
   @Method()
@@ -58,7 +61,7 @@ export class ModusListItem {
   render(): unknown {
     const containerClass = `${this.classBySize.get(this.size)} ${this.disabled ? 'disabled' : ''} ${
       this.selected ? 'selected' : ''
-    } ${this.borderless ? 'borderless' : ''}`;
+    } ${this.borderless ? 'borderless' : ''} ${this.radiusless ? 'radiusless' : ''}`;
     const iconCheckSize = this.size === 'condensed' ? '16' : '24';
 
     return (

@@ -64,6 +64,10 @@ li {
     fill: $modus-list-item-color;
   }
 
+  &.radiusless {
+    border-radius: 0;
+  }
+
   &.small {
     gap: $rem-10px;
     min-height: $rem-32px;
