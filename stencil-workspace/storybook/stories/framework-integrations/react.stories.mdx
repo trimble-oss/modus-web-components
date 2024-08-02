@@ -73,7 +73,7 @@ const ButtonComponent: React.FC<ButtonComponentProps> = (
       color={props.color}
       disabled={props.disabled}
       buttonClick={(event: React.MouseEvent) =>
-        props.onClick ? props.onClick(event) : null
+        props.buttonClick ? props.buttonClick(event) : null
       }
       size={props.size}>
       {props.children}
