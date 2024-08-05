@@ -12,9 +12,9 @@
   font-family: $primary-font;
   height: $rem-30px;
   justify-content: center;
+  margin: $rem-2px 0;
   padding: $rem-2px $rem-4px;
   vertical-align: middle;
-  margin: 2px 0px;
 
   &.no-left-icon.no-right-icon {
     padding: $rem-2px $rem-16px;
