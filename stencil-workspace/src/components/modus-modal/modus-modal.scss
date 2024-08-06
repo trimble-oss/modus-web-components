@@ -54,6 +54,36 @@
           opacity: $modus-modal-close-hover-opacity;
         }
       }
+
+      .icon-expand {
+        cursor: pointer;
+
+        path {
+          fill: $modus-modal-close-color;
+        }
+
+        &:hover path {
+          opacity: $modus-modal-close-hover-opacity;
+        }
+      }
+
+      .icon-collapse {
+        cursor: pointer;
+
+        path {
+          fill: $modus-modal-close-color;
+        }
+
+        &:hover path {
+          opacity: $modus-modal-close-hover-opacity;
+        }
+      }
+    }
+
+    .header-resize-buttons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .body {

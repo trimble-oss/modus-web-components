@@ -1,8 +1,9 @@
-// eslint-disable-next-line
 import { Component, Element, Event, EventEmitter, h, JSX, Listen, Method, Prop, State } from '@stencil/core';
 import { IconClose } from '../../icons/svgs/icon-close';
 import { FocusWrap, ModalFocusWrapping } from './modal-focus-wrapping';
 import { Fragment } from '@stencil/core/internal';
+import { IconCollapse } from '../../icons/generated-icons/IconCollapse';
+import { IconExpand } from '../../icons/generated-icons/IconExpand';
 
 /**
  * @slot footerContent - Slot for a custom footer content
@@ -47,7 +48,7 @@ export class ModusModal {
   @Prop() backdrop: 'default' | 'static' = 'default';
 
   /** (optional) The modal's full screen view */
-  @Prop() fullscreen = false;
+  @Prop({ mutable: true }) fullscreen = false;
 
   /** An event that fires on modal close.  */
   @Event() closed: EventEmitter;
@@ -88,6 +89,10 @@ export class ModusModal {
   }
 
   @State() visible: boolean;
+
+  toggleFullscreen(): void {
+    this.fullscreen = !this.fullscreen;
+  }
 
   handleModalContentMouseDown(): void {
     // If Mouse was dragged off from the Modal content, ignore mouse up on overlay preventing Modal to close
@@ -158,13 +163,23 @@ export class ModusModal {
     return (
       <header>
         {this.headerText}
-        <div
-          role="button"
-          tabindex={0}
-          aria-label="Close"
-          onClick={() => this.close()}
-          onKeyDown={(event) => this.handleCloseKeydown(event)}>
-          <IconClose size="20" />
+        <div class="header-resize-buttons">
+          <div
+            role="button"
+            tabindex={0}
+            aria-label={this.fullscreen ? "Collapse" : "Expand"}
+            onClick={() => this.toggleFullscreen()}
+            onKeyDown={(event) => this.handleEnterKeydown(event, () => this.toggleFullscreen())}>
+            {this.fullscreen ? <IconCollapse size="20" /> : <IconExpand size="20" />}
+          </div>
+          <div
+            role="button"
+            tabindex={0}
+            aria-label="Close"
+            onClick={() => this.close()}
+            onKeyDown={(event) => this.handleCloseKeydown(event)}>
+            <IconClose size="20" />
+          </div>
         </div>
       </header>
     );
