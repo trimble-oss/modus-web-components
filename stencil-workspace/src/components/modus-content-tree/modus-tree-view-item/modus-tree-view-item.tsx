@@ -433,7 +433,10 @@ export class ModusTreeViewItem {
       ...(expandable ? { 'aria-expanded': expanded ? 'true' : 'false' } : {}),
       role: 'treeitem',
     };
-    this.draggableItem = draggable;
+
+    if (draggable) {
+      this.draggableItem = draggable;
+    }
 
     const sizeClass = `${TREE_ITEM_SIZE_CLASS.get(size || 'standard')}`;
     const tabIndex: string | number = isDisabled ? -1 : this.tabIndexValue;
