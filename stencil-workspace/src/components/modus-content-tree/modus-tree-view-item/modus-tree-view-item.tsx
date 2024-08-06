@@ -350,6 +350,7 @@ export class ModusTreeViewItem {
         showSelectionIndicator,
         size,
         borderless,
+        draggable,
         getLevel,
         hasItemSelected,
         hasItemDisabled,
@@ -376,6 +377,7 @@ export class ModusTreeViewItem {
         multiCheckboxSelection,
         size,
         borderless,
+        draggable,
         isDisabled,
         selectionIndicator,
       };
@@ -419,6 +421,7 @@ export class ModusTreeViewItem {
       multiCheckboxSelection,
       size,
       borderless,
+      draggable,
       isDisabled,
       selectionIndicator,
     } = this.rootOptions();
@@ -430,6 +433,8 @@ export class ModusTreeViewItem {
       ...(expandable ? { 'aria-expanded': expanded ? 'true' : 'false' } : {}),
       role: 'treeitem',
     };
+    this.draggableItem = draggable;
+
     const sizeClass = `${TREE_ITEM_SIZE_CLASS.get(size || 'standard')}`;
     const tabIndex: string | number = isDisabled ? -1 : this.tabIndexValue;
     const treeItemClass = `tree-item ${this.isExpanded ? 'expanded' : ''} ${this.isChildren ? 'is-children' : ''} ${this.isLastChild && !this.isExpanded ? 'is-last-child' : ''}${selected ? 'selected' : ''} ${sizeClass} ${isDisabled ? 'disabled' : ''} ${borderless ? 'borderless' : ''}`;
