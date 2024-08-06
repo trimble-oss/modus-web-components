@@ -52,6 +52,12 @@ export default {
         type: { summary: 'boolean' },
       },
     },
+    isDraggable: {
+      description: 'Sets draggable state to be true to all the children',
+      table: {
+        type: { summary: 'boolean' },
+      },
+    },
     isLastChild: {
       description: 'To be set true when the tree item is an expandable last child',
       table: {
@@ -80,9 +86,18 @@ export default {
   },
 };
 
-const Template = ({ borderless, checkboxSelection, multiCheckboxSelection, multiSelection, disableTabbing, size }) => html`
+const Template = ({
+  borderless,
+  isDraggable,
+  checkboxSelection,
+  multiCheckboxSelection,
+  multiSelection,
+  disableTabbing,
+  size,
+}) => html`
   <modus-tree-view
     style="width:400px;"
+    is-draggable=${isDraggable ? 'true' : 'false'}
     borderless=${borderless ? 'true' : 'false'}
     checkbox-selection=${checkboxSelection ? 'true' : 'false'}
     disable-tabbing=${disableTabbing ? 'true' : 'false'}
@@ -110,6 +125,7 @@ const Template = ({ borderless, checkboxSelection, multiCheckboxSelection, multi
 
 const SlotIconTemplate = ({
   borderless,
+  isDraggable,
   checkboxSelection,
   multiCheckboxSelection,
   multiSelection,
@@ -119,6 +135,7 @@ const SlotIconTemplate = ({
 }) => html`
   <modus-tree-view
     style="width:400px;"
+    is-draggable=${isDraggable}
     borderless=${borderless ? 'true' : 'false'}
     checkbox-selection=${checkboxSelection ? 'true' : 'false'}
     disable-tabbing=${disableTabbing ? 'true' : 'false'}
@@ -141,6 +158,7 @@ const SlotIconTemplate = ({
 export const Default = Template.bind({});
 Default.args = {
   borderless: false,
+  isDraggable: false,
   checkboxSelection: false,
   disableTabbing: false,
   multiCheckboxSelection: false,
@@ -164,6 +182,7 @@ MultiSelection.args = { ...Default.args, multiSelection: true, checkboxSelection
 
 const ActionBarTemplate = ({
   borderless,
+  isDraggable,
   checkboxSelection,
   multiCheckboxSelection,
   multiSelection,
@@ -247,6 +266,7 @@ const ActionBarTemplate = ({
       </modus-button>
     </div>
     <modus-tree-view
+      is-draggable=${isDraggable}
       borderless=${borderless ? 'true' : 'false'}
       checkbox-selection=${checkboxSelection ? 'true' : 'false'}
       disable-tabbing=${disableTabbing ? 'true' : 'false'}
@@ -417,6 +437,7 @@ CustomActionBar.args = { ...Default.args };
 
 const FilterTemplate = ({
   borderless,
+  isDraggable,
   checkboxSelection,
   multiCheckboxSelection,
   multiSelection,
@@ -433,6 +454,7 @@ const FilterTemplate = ({
       disabled="true"
       include-search-icon></modus-text-input>
     <modus-tree-view
+      is-draggable=${isDraggable}
       borderless=${borderless ? 'true' : 'false'}
       checkbox-selection=${checkboxSelection ? 'true' : 'false'}
       disable-tabbing=${disableTabbing ? 'true' : 'false'}
@@ -540,6 +562,7 @@ CustomFilter.args = { ...Default.args };
 
 const WithItemActionBarTemplate = ({
   borderless,
+  isDraggable,
   checkboxSelection,
   multiCheckboxSelection,
   multiSelection,
@@ -549,6 +572,7 @@ const WithItemActionBarTemplate = ({
   <div style="display: flex; flex-direction: column; width: 400px;">
     <modus-tree-view
       style="width:400px;"
+      is-draggable=${isDraggable}
       borderless=${borderless}
       checkbox-selection=${checkboxSelection}
       checked-items="false"
