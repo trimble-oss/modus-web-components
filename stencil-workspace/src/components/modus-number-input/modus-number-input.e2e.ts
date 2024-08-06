@@ -237,4 +237,17 @@ describe('modus-number-input', () => {
 
     expect(await element.getProperty('value')).toEqual('2');
   });
+
+  it('emits valueError event if error message is present', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-number-input></modus-number-input>');
+    const valueError = await page.spyOnEvent('valueError');
+    const numberInput = await page.find('modus-number-input >>> input');
+
+    numberInput.setProperty('errorText', 'Error message');
+    await page.waitForChanges();
+    await numberInput.type('1', { delay: 20 });
+    expect(valueError).toHaveReceivedEvent();
+  });
 });

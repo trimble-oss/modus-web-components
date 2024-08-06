@@ -110,6 +110,9 @@ export class ModusAutocomplete {
       this.updateVisibleOptions(this.value);
       this.updateVisibleCustomOptions(this.value);
     }
+    if (this.errorText) {
+      this.valueError.emit(this.errorText);
+    }
   }
 
   /** An event that fires when a dropdown option is selected. Emits the option id. */
@@ -117,6 +120,9 @@ export class ModusAutocomplete {
 
   /** An event that fires when the input value changes. Emits the value string. */
   @Event() valueChange: EventEmitter<string>;
+
+  /** An event that fires on input value error. */
+  @Event() valueError: EventEmitter<string>;
 
   /** An event that fires when an option is selected/removed. Emits the option ids. */
   @Event() selectionsChanged: EventEmitter<string[]>;
@@ -293,6 +299,9 @@ export class ModusAutocomplete {
     this.updateVisibleCustomOptions(search);
     this.value = search;
     this.valueChange.emit(search);
+    if (this.errorText) {
+      this.valueError.emit(this.errorText);
+    }
   };
 
   handleCloseClick(chipValue: ModusAutocompleteOption) {
@@ -315,6 +324,9 @@ export class ModusAutocomplete {
     event.stopPropagation();
     this.disableFiltering = !this.disableCloseOnSelect;
     this.handleSearchChange(event.detail);
+    if (this.errorText) {
+      this.valueError.emit(this.errorText);
+    }
   };
 
   updateVisibleCustomOptions = (search = '') => {
@@ -399,6 +411,7 @@ export class ModusAutocomplete {
       aria-autocomplete="list"
       aria-controls={this.listId}
       aria-expanded={this.displayOptions()}
+      part={`input-container ${this.errorText ? 'error' : ''}`}
     />
   );
 
@@ -464,7 +477,9 @@ export class ModusAutocomplete {
           ))}
           {this.TextInput()}
         </div>
-        <div class={'error'}>{this.errorText ? <label class="sub-text error">{this.errorText}</label> : null}</div>
+        <div class={'error'} part="sub-text">
+          {this.errorText ? <label class="sub-text error">{this.errorText}</label> : null}
+        </div>
         <div
           class="options-container"
           style={{ maxHeight: this.dropdownMaxHeight, zIndex: this.dropdownZIndex, overflowY: 'auto' }}>

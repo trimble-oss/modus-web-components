@@ -177,4 +177,31 @@ describe('modus-select', () => {
     expect(element).toBeDefined();
     expect(element).not.toHaveAttribute('aria-label');
   });
+
+  it('emits valueError event if error message is present', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-select></modus-select>');
+    const valueError = await page.spyOnEvent('valueError');
+    const select = await page.find('modus-select');
+
+    const options = [
+      { value: '1', label: 'Option 1' },
+      { value: '2', label: 'Option 2' },
+    ];
+    select.setProperty('options', options);
+    select.setProperty('optionsDisplayProp', 'display');
+    select.setProperty('errorText', 'Error message');
+    await page.waitForChanges();
+
+    const selectElement = await page.find('modus-select >>> select');
+    await selectElement.focus();
+    await page.waitForChanges();
+
+    await page.keyboard.press('ArrowDown');
+    await page.keyboard.press('Enter');
+    await page.waitForChanges();
+
+    expect(valueError).toHaveReceivedEvent();
+  });
 });

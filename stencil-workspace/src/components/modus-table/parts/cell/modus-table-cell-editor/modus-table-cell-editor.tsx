@@ -154,7 +154,16 @@ export class ModusTableCellEditor {
         size="large"
         onBlur={this.handleBlur}
         onValueChange={(e: CustomEvent<string>) => (this.editedValue = e.detail)}
-        onKeyDown={(e) => handleArrowKeys(e, this.handleKeyDown)}></modus-number-input>
+        onKeyDown={(e) => handleArrowKeys(e, this.handleKeyDown)}
+        onValueError={(e: CustomEvent<string | null>) => {
+          if (e.detail) {
+            this.errorMessage = e.detail;
+            this.showErrorTooltip();
+          } else {
+            this.errorMessage = '';
+            this.hideErrorTooltip();
+          }
+        }}></modus-number-input>
     );
   }
 
@@ -167,7 +176,16 @@ export class ModusTableCellEditor {
         onBlur={this.handleBlur}
         onKeyDown={this.handleKeyDown}
         autoFocusInput
-        size="large"></modus-text-input>
+        size="large"
+        onValueError={(e: CustomEvent<string | null>) => {
+          if (e.detail) {
+            this.errorMessage = e.detail;
+            this.showErrorTooltip();
+          } else {
+            this.errorMessage = '';
+            this.hideErrorTooltip();
+          }
+        }}></modus-text-input>
     );
   }
 
@@ -206,6 +224,15 @@ export class ModusTableCellEditor {
               this.editedValue = detail;
             } else {
               this.editedValue = detail[valueKey];
+            }
+          }}
+          onValueError={(e: CustomEvent<string | null>) => {
+            if (e.detail) {
+              this.errorMessage = e.detail;
+              this.showErrorTooltip();
+            } else {
+              this.errorMessage = '';
+              this.hideErrorTooltip();
             }
           }}></modus-select>
       </div>
@@ -275,6 +302,15 @@ export class ModusTableCellEditor {
               this.editedValue = selectedOption;
             } else {
               this.editedValue = selectedDetail;
+            }
+          }}
+          onValueError={(e: CustomEvent<string | null>) => {
+            if (e.detail) {
+              this.errorMessage = e.detail;
+              this.showErrorTooltip();
+            } else {
+              this.errorMessage = '';
+              this.hideErrorTooltip();
             }
           }}
           value={selectedOption}></modus-autocomplete>

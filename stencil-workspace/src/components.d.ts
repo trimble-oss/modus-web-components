@@ -2044,6 +2044,7 @@ declare global {
     interface HTMLModusAutocompleteElementEventMap {
         "optionSelected": string;
         "valueChange": string;
+        "valueError": string;
         "selectionsChanged": string[];
     }
     interface HTMLModusAutocompleteElement extends Components.ModusAutocomplete, HTMLStencilElement {
@@ -2414,6 +2415,7 @@ declare global {
     };
     interface HTMLModusNumberInputElementEventMap {
         "valueChange": string;
+        "valueError": string;
     }
     interface HTMLModusNumberInputElement extends Components.ModusNumberInput, HTMLStencilElement {
         addEventListener<K extends keyof HTMLModusNumberInputElementEventMap>(type: K, listener: (this: HTMLModusNumberInputElement, ev: ModusNumberInputCustomEvent<HTMLModusNumberInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2471,6 +2473,7 @@ declare global {
     };
     interface HTMLModusSelectElementEventMap {
         "valueChange": unknown;
+        "valueError": string;
         "inputBlur": FocusEvent;
     }
     interface HTMLModusSelectElement extends Components.ModusSelect, HTMLStencilElement {
@@ -2695,6 +2698,7 @@ declare global {
     };
     interface HTMLModusTextInputElementEventMap {
         "valueChange": string;
+        "valueError": string;
     }
     interface HTMLModusTextInputElement extends Components.ModusTextInput, HTMLStencilElement {
         addEventListener<K extends keyof HTMLModusTextInputElementEventMap>(type: K, listener: (this: HTMLModusTextInputElement, ev: ModusTextInputCustomEvent<HTMLModusTextInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3050,6 +3054,10 @@ declare namespace LocalJSX {
           * An event that fires when the input value changes. Emits the value string.
          */
         "onValueChange"?: (event: ModusAutocompleteCustomEvent<string>) => void;
+        /**
+          * An event that fires on input value error.
+         */
+        "onValueError"?: (event: ModusAutocompleteCustomEvent<string>) => void;
         /**
           * The autocomplete's options.
          */
@@ -3918,6 +3926,10 @@ declare namespace LocalJSX {
          */
         "onValueChange"?: (event: ModusNumberInputCustomEvent<string>) => void;
         /**
+          * An event that fires on input value error.
+         */
+        "onValueError"?: (event: ModusNumberInputCustomEvent<string>) => void;
+        /**
           * (optional) The input's placeholder text.
          */
         "placeholder"?: string;
@@ -4056,6 +4068,10 @@ declare namespace LocalJSX {
           * An event that fires on input value change.
          */
         "onValueChange"?: (event: ModusSelectCustomEvent<unknown>) => void;
+        /**
+          * An event that fires on input value error.
+         */
+        "onValueError"?: (event: ModusSelectCustomEvent<string>) => void;
         /**
           * The options for the dropdown list.
          */
@@ -4517,6 +4533,10 @@ declare namespace LocalJSX {
           * An event that fires on input value change.
          */
         "onValueChange"?: (event: ModusTextInputCustomEvent<string>) => void;
+        /**
+          * An event that fires on input value error.
+         */
+        "onValueError"?: (event: ModusTextInputCustomEvent<string>) => void;
         /**
           * (optional) The input's pattern HTML attribute.
          */

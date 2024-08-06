@@ -958,4 +958,20 @@ describe('modus-autocomplete', () => {
     expect(element).toBeDefined();
     expect(element).not.toHaveAttribute('aria-label');
   });
+
+  it('emits valueError event if error message is present', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-autocomplete></modus-autocomplete>');
+    const valueError = await page.spyOnEvent('valueError');
+    const autocomplete = await page.find('modus-autocomplete >>> div.autocomplete');
+
+    autocomplete.setProperty('errorText', 'Error message');
+    await page.waitForChanges();
+
+    const textInput = await page.find('modus-autocomplete >>> modus-text-input');
+    await textInput.click();
+    await textInput.type('apple', { delay: 20 });
+    expect(valueError).toHaveReceivedEvent();
+  });
 });
