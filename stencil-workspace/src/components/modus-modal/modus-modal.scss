@@ -43,36 +43,10 @@
       justify-content: space-between;
       padding: 0 $rem-16px;
 
-      .icon-close {
-        cursor: pointer;
-
-        path {
-          fill: $modus-modal-close-color;
-        }
-
-        &:hover path {
-          opacity: $modus-modal-close-hover-opacity;
-        }
-      }
-
-      .icon-expand {
-        cursor: pointer;
-        width: 24px;
-        height: 24px;
-
-        path {
-          fill: $modus-modal-close-color;
-        }
-
-        &:hover path {
-          opacity: $modus-modal-close-hover-opacity;
-        }
-      }
-
+      .icon-close,
+      .icon-expand,
       .icon-collapse {
         cursor: pointer;
-        width: 24px;
-        height: 24px;
 
         path {
           fill: $modus-modal-close-color;
@@ -85,8 +59,9 @@
     }
 
     .header-resize-buttons {
-      display: flex;
       align-items: center;
+      display: flex;
+      gap: $rem-4px;
       justify-content: center;
     }
 
