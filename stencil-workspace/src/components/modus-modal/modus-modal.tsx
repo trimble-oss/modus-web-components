@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import { Component, Element, Event, EventEmitter, h, JSX, Listen, Method, Prop, State } from '@stencil/core';
 import { IconClose } from '../../icons/svgs/icon-close';
 import { FocusWrap, ModalFocusWrapping } from './modal-focus-wrapping';
