@@ -57,8 +57,8 @@
 
       .icon-expand {
         cursor: pointer;
-        width: 24px;
         height: 24px;
+        width: 24px;
 
         path {
           fill: $modus-modal-close-color;
@@ -71,8 +71,8 @@
 
       .icon-collapse {
         cursor: pointer;
-        width: 24px;
         height: 24px;
+        width: 24px;
 
         path {
           fill: $modus-modal-close-color;
@@ -85,8 +85,8 @@
     }
 
     .header-resize-buttons {
-      display: flex;
       align-items: center;
+      display: flex;
       justify-content: center;
     }
 
