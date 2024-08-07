@@ -167,7 +167,7 @@ export class ModusModal {
           <div
             role="button"
             tabindex={0}
-            aria-label={this.fullscreen ? "Collapse" : "Expand"}
+            aria-label={this.fullscreen ? 'Collapse' : 'Expand'}
             onClick={() => this.toggleFullscreen()}
             onKeyDown={(event) => this.handleEnterKeydown(event, () => this.toggleFullscreen())}>
             {this.fullscreen ? <IconCollapse size="20" /> : <IconExpand size="20" />}
