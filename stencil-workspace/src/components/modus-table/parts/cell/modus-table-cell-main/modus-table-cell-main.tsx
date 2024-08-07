@@ -93,6 +93,9 @@ export class ModusTableCellMain {
 
     if (this.cell.column.columnDef[this.cellEditableKey]) {
       this.editMode = true;
+    } else {
+      const { rowClick } = this.context;
+      rowClick.emit({ row: this.cell.row.original, column: this.cell.column.id });
     }
   };
 
@@ -133,9 +136,14 @@ export class ModusTableCellMain {
     const key = event.key?.toLowerCase();
     const isCellEditable = this.cell.column.columnDef[this.cellEditableKey];
 
-    if (isCellEditable && !this.editMode && key === KEYBOARD_ENTER) {
-      this.editMode = true;
+    if (key === KEYBOARD_ENTER) {
       event.stopPropagation();
+      if (isCellEditable && !this.editMode) {
+        this.editMode = true;
+      } else {
+        const { rowClick } = this.context;
+        rowClick.emit({ row: this.cell.row.original, column: this.cell.column.id });
+      }
     } else {
       NavigateTableCells({
         eventKey: event.key,

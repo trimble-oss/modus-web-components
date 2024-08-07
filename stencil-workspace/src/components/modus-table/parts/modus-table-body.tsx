@@ -57,9 +57,9 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
       {table.getRowModel()?.rows.map((row) => {
         const { getIsSelected, getIsAllSubRowsSelected, getVisibleCells, subRows, id } = row;
         const isChecked = getIsSelected() && (subRows?.length ? getIsAllSubRowsSelected() : true);
-
+        const { showPointerOnHover } = context;
         return (
-          <tr key={id} class={{ 'enable-hover': hover, 'row-selected': isChecked }}>
+          <tr key={id} class={{ 'enable-hover': hover, 'row-selected': isChecked, 'show-pointer': showPointerOnHover }}>
             {rowSelection && (
               <ModusTableCellCheckbox
                 multipleRowSelection={multipleRowSelection}

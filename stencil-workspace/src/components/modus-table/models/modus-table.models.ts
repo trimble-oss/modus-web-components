@@ -152,3 +152,8 @@ export interface ModusTableManualSortingOptions {
 }
 
 export type ModusTableColumnSort = ColumnSort;
+
+export interface ModusTableRowClick {
+  row: unknown;
+  column: string;
+}

@@ -14,6 +14,7 @@ import {
   ModusTableSortingState,
   ModusTablePaginationState,
   ModusTableManualPaginationOptions,
+  ModusTableRowClick,
 } from './modus-table.models';
 import { Row, Table, Updater } from '@tanstack/table-core';
 import ModusTableCore from '../modus-table.core';
@@ -82,6 +83,8 @@ export interface TableContext {
 
   rowActionClick: EventEmitter<ModusTableRowActionClick>;
 
+  rowClick: EventEmitter<ModusTableRowClick>;
+
   rowExpanded: EventEmitter<ModusTableExpandedState>;
 
   rowSelectionChange: EventEmitter<unknown>;
@@ -101,6 +104,8 @@ export interface TableContext {
   tableCore: ModusTableCore;
 
   wrapText: boolean;
+
+  showPointerOnHover: boolean;
 
   getRowId: (originalRow: unknown, index: number, parent?: Row<unknown>) => string;
   updateData: (updater: Updater<unknown>, context: TableCellEdited) => void;

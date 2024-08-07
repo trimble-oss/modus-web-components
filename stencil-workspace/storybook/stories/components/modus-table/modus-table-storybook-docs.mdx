@@ -765,6 +765,11 @@ interface ModusTableManualSortingOptions {
   currentSortingState: ModusTableSortingState
 }
 
+interface ModusTableRowClick {
+  row: unknown;
+  column: string;
+}
+
 ```
 
 ### Accessibility
@@ -804,6 +809,7 @@ Users can use keyboard navigation to perform different actions.
 | `rowSelection`            | `row-selection`           | (Optional) To display checkbox.                                                                                                                                                               | `boolean`                              | `false`                                                   |
 | `rowSelectionOptions`     | --                        | (Optional) To control multiple row selection.                                                                                                                                                 | `ModusTableRowSelectionOptions`        | `{     multiple: false,     subRowSelection: false,   }`  |
 | `rowsExpandable`          | `rows-expandable`         | (Optional) To display expanded rows.                                                                                                                                                          | `boolean`                              | `false`                                                   |
+| `showPointerOnHover`      | `show-pointer-on-hover`   | (Optional) To display a pointer on row hover.                                                                                                                                                 | `boolean`                              | `false`                                                   |
 | `showSortIconOnHover`     | `show-sort-icon-on-hover` | (Optional) To display sort icon on hover.                                                                                                                                                     | `boolean`                              | `false`                                                   |
 | `sort`                    | `sort`                    | (Optional) To sort data in table.                                                                                                                                                             | `boolean`                              | `false`                                                   |
 | `summaryRow`              | `summary-row`             | (Optional) To display summary row.                                                                                                                                                            | `boolean`                              | `false`                                                   |
@@ -822,6 +828,7 @@ Users can use keyboard navigation to perform different actions.
 | `columnVisibilityChange` | Emits visibility state of each column             | `CustomEvent<{ [x: string]: boolean; }>`            |
 | `paginationChange`       | Emits selected page index and size                | `CustomEvent<PaginationState>`                      |
 | `rowActionClick`         | An event that fires when a row action is clicked. | `CustomEvent<ModusTableRowActionClick>`             |
+| `rowClick`               | Emits the row clicked and the column id           | `CustomEvent<ModusTableRowClick>`                   |
 | `rowExpanded`            | Emits expanded state of the columns               | `CustomEvent<boolean \| { [x: string]: boolean; }>` |
 | `rowSelectionChange`     | Emits rows selected                               | `CustomEvent<unknown>`                              |
 | `sortChange`             | Emits column sort order                           | `CustomEvent<ColumnSort[]>`                         |

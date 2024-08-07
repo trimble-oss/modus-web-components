@@ -20,7 +20,7 @@ import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/app
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { ModusSentimentScaleType } from "./components/modus-sentiment-scale/modus-sentiment-scale.models";
 import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-import { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnSort, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+import { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnSort, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 import { Cell, Column, Row } from "@tanstack/table-core";
 import { TableCellEdited, TableContext } from "./components/modus-table/models/table-context.models";
 import { Tab } from "./components/modus-tabs/modus-tabs";
@@ -43,7 +43,7 @@ export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/app
 export { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 export { ModusSentimentScaleType } from "./components/modus-sentiment-scale/modus-sentiment-scale.models";
 export { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-export { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnSort, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+export { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnSort, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 export { Cell, Column, Row } from "@tanstack/table-core";
 export { TableCellEdited, TableContext } from "./components/modus-table/models/table-context.models";
 export { Tab } from "./components/modus-tabs/modus-tabs";
@@ -1287,6 +1287,10 @@ export namespace Components {
           * (Optional) To display expanded rows.
          */
         "rowsExpandable": boolean;
+        /**
+          * (Optional) To show a pointer on row hover.
+         */
+        "showPointerOnHover": boolean;
         /**
           * (Optional) To display sort icon on hover.
          */
@@ -2593,6 +2597,7 @@ declare global {
         "rowSelectionChange": unknown;
         "sortChange": ModusTableSortingState;
         "paginationChange": ModusTablePaginationState;
+        "rowClick": ModusTableRowClick;
     }
     interface HTMLModusTableElement extends Components.ModusTable, HTMLStencilElement {
         addEventListener<K extends keyof HTMLModusTableElementEventMap>(type: K, listener: (this: HTMLModusTableElement, ev: ModusTableCustomEvent<HTMLModusTableElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -4316,6 +4321,10 @@ declare namespace LocalJSX {
          */
         "onRowActionClick"?: (event: ModusTableCustomEvent<ModusTableRowActionClick>) => void;
         /**
+          * Emits selected page index and size
+         */
+        "onRowClick"?: (event: ModusTableCustomEvent<ModusTableRowClick>) => void;
+        /**
           * Emits expanded state of the columns
          */
         "onRowExpanded"?: (event: ModusTableCustomEvent<ModusTableExpandedState>) => void;
@@ -4345,6 +4354,10 @@ declare namespace LocalJSX {
           * (Optional) To display expanded rows.
          */
         "rowsExpandable"?: boolean;
+        /**
+          * (Optional) To show a pointer on row hover.
+         */
+        "showPointerOnHover"?: boolean;
         /**
           * (Optional) To display sort icon on hover.
          */
