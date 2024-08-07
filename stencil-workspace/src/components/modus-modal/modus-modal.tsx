@@ -118,23 +118,21 @@ export class ModusModal {
   }
 
   handleEnterKeydown(event: KeyboardEvent, callback: () => void): void {
-    switch (event.code) {
-      case 'Enter':
-        callback();
-        break;
+    if (event.code === 'Enter') {
+      callback();
     }
   }
 
-  handleCloseKeydown(event: KeyboardEvent): void {
-    this.handleEnterKeydown(event, () => this.close());
+  handlePrimaryClick(): void {
+    if (!this.primaryButtonDisabled) {
+      this.primaryButtonClick.emit();
+    }
   }
 
-  handlePrimaryKeydown(event: KeyboardEvent): void {
-    this.handleEnterKeydown(event, () => this.primaryButtonClick.emit());
-  }
-
-  handleSecondaryKeydown(event: KeyboardEvent): void {
-    this.handleEnterKeydown(event, () => this.secondaryButtonClick.emit());
+  handleSecondaryClick(): void {
+    if (!this.secondaryButtonDisabled) {
+      this.secondaryButtonClick.emit();
+    }
   }
 
   componentDidRender() {
@@ -177,7 +175,7 @@ export class ModusModal {
             tabindex={0}
             aria-label="Close"
             onClick={() => this.close()}
-            onKeyDown={(event) => this.handleCloseKeydown(event)}>
+            onKeyDown={(event) => this.handleEnterKeydown(event, () => this.close())}>
             <IconClose size="20" />
           </div>
         </div>
@@ -185,21 +183,18 @@ export class ModusModal {
     );
   }
 
-  renderModalFooter(): JSX.Element[] {
+  renderModalFooter(): JSX.Element {
     return (
       <Fragment>
-        <footer
-          class={{
-            'has-buttons': Boolean(this.primaryButtonText || this.secondaryButtonText),
-          }}>
+        <footer class={{ 'has-buttons': Boolean(this.primaryButtonText || this.secondaryButtonText) }}>
           {this.secondaryButtonText && (
             <modus-button
               disabled={this.secondaryButtonDisabled}
               button-style="outline"
               color="secondary"
               ariaLabel={this.secondaryButtonAriaLabel}
-              onButtonClick={() => this.secondaryButtonClick.emit()}
-              onKeyDown={(event) => this.handlePrimaryKeydown(event)}>
+              onButtonClick={() => this.handleSecondaryClick()}
+              onKeyDown={(event) => this.handleEnterKeydown(event, () => this.handleSecondaryClick())}>
               {this.secondaryButtonText}
             </modus-button>
           )}
@@ -208,8 +203,8 @@ export class ModusModal {
               disabled={this.primaryButtonDisabled}
               color="primary"
               ariaLabel={this.primaryButtonAriaLabel}
-              onButtonClick={() => this.primaryButtonClick.emit()}
-              onKeyDown={(event) => this.handleSecondaryKeydown(event)}>
+              onButtonClick={() => this.handlePrimaryClick()}
+              onKeyDown={(event) => this.handleEnterKeydown(event, () => this.handlePrimaryClick())}>
               {this.primaryButtonText}
             </modus-button>
           )}
