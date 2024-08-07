@@ -60,8 +60,14 @@ table {
       box-shadow: none !important;
     }
   }
-
-  th,
+  &.cell-vertical-borderless {
+    th,
+    td {
+      border-right: none !important;
+      box-shadow: none !important;
+    }
+  }
+  &.ce th,
   td {
     box-sizing: border-box;
 
