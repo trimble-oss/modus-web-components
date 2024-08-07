@@ -121,7 +121,7 @@ export class ModusAutocomplete {
   @Prop() required: boolean;
 
   /** Whether to show the no results found message. */
-  @Prop() showNoResultsFoundMessage = true;
+  @Prop({ mutable: true }) showNoResultsFoundMessage = true;
 
   /** The autocomplete's size. */
   @Prop() size: 'medium' | 'large' = 'medium';
