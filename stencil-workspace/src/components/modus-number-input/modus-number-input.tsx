@@ -94,15 +94,12 @@ export class ModusNumberInput {
           locale: this?.locale,
           currency: this?.currencySymbol as CurrencyDisplay.Code,
           currencyDisplay: CurrencyDisplay.Symbol,
-          unit: undefined,
-          unitDisplay: undefined,
           valueRange: {
-            min: undefined,
-            max: undefined,
+            min: this.minValue,
+            max: this.maxValue,
           },
-          precision: undefined,
-          hidePrefixOrSuffixOnFocus: false,
-          hideGroupingSeparatorOnFocus: false,
+          hidePrefixOrSuffixOnFocus: true,
+          hideGroupingSeparatorOnFocus: true,
           hideNegligibleDecimalDigitsOnFocus: false,
           autoDecimalDigits: false,
           exportValueAsInteger: false,
@@ -112,14 +109,16 @@ export class ModusNumberInput {
       if (!this.value) {
         this.inputOptions?.setValue(this.value as unknown as number);
       }
-      // this.numberInput.value = formattedValue;
-      // this.value = formattedValue;
     }
   }
 
+  extractNumbers(): string {
+    const numbers = this.numberInput.value.match(/\d+(\.\d+)?/g);
+    return numbers ? numbers.join('') : '';
+  }
+
   handleOnInput(): void {
-    // this.formatInputValue();
-    this.valueChange.emit(this.value);
+    this.valueChange.emit(this.extractNumbers());
   }
 
   /** Focus the input. */
@@ -139,10 +138,12 @@ export class ModusNumberInput {
 
   incrementValue() {
     this.inputOptions?.increment();
+    this.valueChange.emit(this.extractNumbers());
   }
 
   decrementValue() {
     this.inputOptions?.decrement();
+    this.valueChange.emit(this.extractNumbers());
   }
 
   handleWheel(event: WheelEvent) {
@@ -154,6 +155,7 @@ export class ModusNumberInput {
       } else {
         this.incrementValue();
       }
+      this.valueChange.emit(this.extractNumbers());
     }
   }
 
