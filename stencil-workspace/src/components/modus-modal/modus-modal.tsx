@@ -164,10 +164,9 @@ export class ModusModal {
     return (
       <header>
         {this.headerText}
-        <div class="header-resize-buttons">
+        <div class="header-buttons">
           <div
             role="button"
-            class="resize-button"
             tabindex={0}
             aria-label={this.fullscreen ? 'Collapse' : 'Expand'}
             onClick={() => this.toggleFullscreen()}
@@ -176,7 +175,6 @@ export class ModusModal {
           </div>
           <div
             role="button"
-            class="resize-button"
             tabindex={0}
             aria-label="Close"
             onClick={() => this.close()}
