@@ -63,6 +63,7 @@
       display: flex;
       gap: $rem-8px;
       justify-content: center;
+
       .resize-button {
         font-size: 0; // to center align and remove the additional vertical space
       }
