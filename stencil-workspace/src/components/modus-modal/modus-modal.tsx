@@ -176,6 +176,7 @@ export class ModusModal {
           </div>
           <div
             role="button"
+            class="resize-button"
             tabindex={0}
             aria-label="Close"
             onClick={() => this.close()}
