@@ -135,10 +135,10 @@ This displays the highlighted row where the cursor is currently located.
 
 Table has two views one with border and another is borderless.
 
-- Table with a border is shown by default. There are three options under `displayOptions`: `borderless` , `cellborderless` and `cellVertcalBorderless`.
+- Table with a border is shown by default. There are three options under `displayOptions`: `borderless` , `cellborderless` and `cellVerticalBorderless`.
 - To eliminate the outer table border, set `borderless` to `true`.
 - Set `cellborderless` to `true` remove the innter table border i.e. for the border for cells.
-- Set `cellVertcalBorderless` to `true` to remove the vertical border for cells. When both `cellborderless` and `cellVertcalBorderless` are set to `true`, `cellBorderless` will take precedence.
+- Set `cellVerticalBorderless` to `true` to remove the vertical border for cells. When both `cellborderless` and `cellVerticalBorderless` are set to `true`, `cellBorderless` will take precedence.
 
 ````html
 ### Sorting Users can arrange data in a table by sorting it in either ascending or descending order. The sort icon will be
@@ -688,7 +688,7 @@ interface ModusTableColumn<TData extends RowData, TValue = unknown> {
 interface ModusTableDisplayOptions {
   borderless?: boolean;
   cellBorderless?: boolean;
-  cellVertcalBorderless?: boolean;
+  cellVerticalBorderless?: boolean;
 }
 
 interface ModusTableToolbarOptions {
