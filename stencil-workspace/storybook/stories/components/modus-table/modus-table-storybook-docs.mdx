@@ -140,20 +140,38 @@ Table has two views one with border and another is borderless.
 - Set `cellborderless` to `true` remove the innter table border i.e. for the border for cells.
 - Set `cellVerticalBorderless` to `true` to remove the vertical border for cells. When both `cellborderless` and `cellVerticalBorderless` are set to `true`, `cellBorderless` will take precedence.
 
-````html
-### Sorting Users can arrange data in a table by sorting it in either ascending or descending order. The sort icon will be
-visible when enabled. - Sorting is disabled by default. The way to activate it is to set `sort` to `true`. - Every column has
-sorting turned on by default. Setting `enableSorting` `true` or `false` for a certain column will enable or disable it. -
-When enabled, the sort icon's initial click will sort in ascending order, while its second click will sort in descending
-order. - Set `showSortIconOnHover` to `true` to enable sort on hover as well. - A default sorting can be set by setting
-`defaultSort` with the column `id` and sorting direction. ### Manual Sorting Manual Sorting allows users to handle sorting in
-server-side mode. - Manual Sorting can be enabled using the `manualSortingOptions` prop. - The `currentSortingState`
-represents how the data is sorted (column and direction). ### Custom Sorting Custom sorting allows you to define your own
-logic for sorting table data.Custom sorting can be implemented by defining a sorting function `sortingFn` and assigning it to
-the relevant columns in your table configuration. A custom sorting function receives two arguments: the row values for the
-column being sorted, and the column id. ```javascript const myCustomSortingFn(rowA, rowB, columnId) => { return //-1, 0, or 1
-- access any row data using rowA.original and rowB.original }
-````
+### Sorting
+
+Users can arrange data in a table by sorting it in either ascending or descending order. The sort icon will be visible when enabled.
+
+- Sorting is disabled by default. The way to activate it is to set `sort` to `true`.
+- Every column has sorting turned on by default. Setting `enableSorting` `true` or `false` for a certain column will enable or disable it.
+- When enabled, the sort icon's initial click will sort in ascending order, while its second click will sort in descending order.
+- Set `showSortIconOnHover` to `true` to enable sort on hover as well.
+- A default sorting can be set by setting `defaultSort` with the column `id` and sorting direction.
+
+### Manual Sorting
+
+Manual Sorting allows users to handle sorting in server-side mode.
+
+- Manual Sorting can be enabled using the `manualSortingOptions` prop.
+- The `currentSortingState` represents how the data is sorted (column and direction).
+
+### Custom Sorting
+
+Custom sorting allows you to define your own logic for sorting table data.Custom sorting can be implemented by defining a sorting function `sortingFn` and assigning it to the relevant columns in your table configuration.
+
+A custom sorting function receives two arguments: the row values for the column being sorted, and the column id.
+
+```javascript
+
+
+const myCustomSortingFn(rowA, rowB, columnId) => {
+  return //-1, 0, or 1 - access any row data using rowA.original and rowB.original
+}
+
+
+```
 
 It should return -1 if the first argument should come before the second, 1 if it should come after, or 0 if they are equal.
 
