@@ -167,11 +167,12 @@ export class ModusModal {
         <div class="header-resize-buttons">
           <div
             role="button"
+            class="resize-button"
             tabindex={0}
             aria-label={this.fullscreen ? 'Collapse' : 'Expand'}
             onClick={() => this.toggleFullscreen()}
             onKeyDown={(event) => this.handleEnterKeydown(event, () => this.toggleFullscreen())}>
-            {this.fullscreen ? <IconCollapse size="20" /> : <IconExpand size="20" />}
+            {this.fullscreen ? <IconCollapse size="24" /> : <IconExpand size="24" />}
           </div>
           <div
             role="button"
@@ -179,7 +180,7 @@ export class ModusModal {
             aria-label="Close"
             onClick={() => this.close()}
             onKeyDown={(event) => this.handleCloseKeydown(event)}>
-            <IconClose size="20" />
+            <IconClose size="24" />
           </div>
         </div>
       </header>
