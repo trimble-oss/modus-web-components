@@ -165,9 +165,8 @@ describe('modus-number-input', () => {
     await page.setContent('<modus-number-input></modus-number-input>');
     const valueChange = await page.spyOnEvent('valueChange');
     const element = await page.find('modus-number-input >>> input');
-    await page.waitForChanges();
 
-    await element.type('modus-number-input >>> input', { delay: 20 });
+    await element.type('123', { delay: 20 });
     await page.waitForChanges();
     expect(valueChange).toHaveReceivedEvent();
   });
