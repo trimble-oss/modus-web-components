@@ -138,7 +138,7 @@ export default {
     value: {
       description: "The autocomplete's value",
       table: {
-        type: { summary: 'string' },
+        type: { summary: 'string | string[]' },
       },
     },
     multiple: {
@@ -208,7 +208,7 @@ const Template = ({
       show-no-results-found-message=${showNoResultsFoundMessage}
       show-options-on-focus=${showOptionsOnFocus}
       size=${size}
-      value=${value}
+      .value=${value}
       .options=${options}>
     </modus-autocomplete>
   </div>
@@ -277,6 +277,7 @@ MultipleSelection.args = {
   ...defaultArgs,
   label: 'Autocomplete with multiple selection',
   multiple: true,
+  value: ['Apple', 'Banana'],
   options: customOptions,
 };
 

@@ -685,6 +685,7 @@ Borderless.args = {
   displayOptions: {
     borderless: true,
     cellBorderless: true,
+    cellVerticalBorderless: true,
   },
 };
 

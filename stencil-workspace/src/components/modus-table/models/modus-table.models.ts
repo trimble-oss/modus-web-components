@@ -103,6 +103,7 @@ export interface ModusTableColumn<TData extends RowData, TValue = unknown> {
 export interface ModusTableDisplayOptions {
   borderless?: boolean;
   cellBorderless?: boolean;
+  cellVerticalBorderless?: boolean;
 }
 
 export interface ModusTableToolbarOptions {

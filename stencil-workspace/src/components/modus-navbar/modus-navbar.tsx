@@ -26,7 +26,6 @@ import {
   ModusProfileMenuOptions,
 } from './modus-navbar.models';
 import { ModusNavbarProductLogo } from './product-logo/modus-navbar-product-logo';
-import { createGuid } from '../../utils/utils';
 import { ModusNavbarButtonList } from './button-list/modus-navbar-button-list';
 import { ModusNavbarDropdown } from './dropdown/modus-navbar-dropdown';
 
@@ -158,7 +157,6 @@ export class ModusNavbar {
   @State() notificationsMenuVisible: boolean;
   @State() profileMenuVisible: boolean;
   @State() slots: string[] = [];
-  @State() componentId = createGuid();
   @State() searchOverlayVisible: boolean;
   @State() openButtonMenuId: string;
 
@@ -416,7 +414,7 @@ export class ModusNavbar {
     const counterValue = this.getNotificationCount();
 
     return (
-      <Host id={this.componentId}>
+      <Host>
         <nav class={`${direction} ${shadow} ${variant}`} aria-label={this.navAriaLabel}>
           {!this.searchOverlayVisible && (
             <Fragment>
@@ -438,7 +436,7 @@ export class ModusNavbar {
                   </div>
                 )}
                 {this.mainMenuVisible && (
-                  <modus-navbar-main-menu navbarId={this.componentId}>
+                  <modus-navbar-main-menu parentNavbar={this.element}>
                     <slot name={this.SLOT_MAIN}></slot>
                   </modus-navbar-main-menu>
                 )}
