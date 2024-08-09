@@ -22,36 +22,11 @@ export default {
         defaultValue: { summary: "''" },
       },
     },
-    decimalCharacter: {
-      name: 'decimal-character',
-      description: 'The decimal character',
+    locale: {
+      name: 'locale',
+      description: 'The locale',
       table: {
-        type: { summary: `'.' | ','` },
-        defaultValue: { summary: "'.'" },
-      },
-    },
-    decimalPlaces: {
-      name: 'decimal-places',
-      description: 'The number of decimal places',
-      table: {
-        type: { summary: 'number' },
-        defaultValue: { summary: 2 },
-      },
-    },
-    digitGroupSeparator: {
-      name: 'digit-group-separator',
-      description: 'The digit group separator',
-      table: {
-        type: { summary: `' ' | ',' | '.'` },
-        defaultValue: { summary: "','" },
-      },
-    },
-    digitGroupSpacing: {
-      name: 'digit-group-spacing',
-      description: 'The digit group spacing',
-      table: {
-        type: { summary: `'lakh' | 'none' | 'thousand' | 'lakh'` },
-        defaultValue: { summary: `'none'` },
+        type: { summary: 'string' },
       },
     },
     disabled: {
@@ -73,20 +48,6 @@ export default {
       description: "The number input's helper text",
       table: {
         type: { summary: 'string' },
-      },
-    },
-    integerLimit: {
-      name: 'integer-limit',
-      description: 'The number of integer limit',
-      table: {
-        type: { summary: 'number' },
-      },
-    },
-    isCreditCard: {
-      name: 'is-credit-card',
-      description: 'Whether the number input is a credit card',
-      table: {
-        type: { summary: 'boolean' },
       },
     },
     label: {
@@ -192,15 +153,10 @@ export default {
 const Template = ({
   ariaLabel,
   currencySymbol,
-  decimalCharacter,
-  decimalPlaces,
-  digitGroupSeparator,
-  digitGroupSpacing,
+  locale,
   disabled,
   errorText,
   helperText,
-  integerLimit,
-  isCreditCard,
   label,
   maxValue,
   minValue,
@@ -216,15 +172,10 @@ const Template = ({
   <modus-number-input
     aria-label=${ariaLabel}
     currency-symbol=${currencySymbol}
-    decimal-character=${decimalCharacter}
-    decimal-places=${decimalPlaces}
-    digit-group-separator=${digitGroupSeparator}
-    digit-group-spacing=${digitGroupSpacing}
+    locale=${locale}
     ?disabled=${disabled}
     error-text=${errorText}
     helper-text=${helperText}
-    integer-limit=${integerLimit}
-    ?is-credit-card=${isCreditCard}
     label=${label}
     max-value=${maxValue}
     min-value=${minValue}
@@ -241,16 +192,11 @@ const Template = ({
 export const Default = Template.bind({});
 Default.args = {
   ariaLabel: '',
-  currencySymbol: '',
-  decimalCharacter: '.',
-  decimalPlaces: '2',
-  digitGroupSeparator: ',',
-  digitGroupSpacing: 'thousand',
+  currencySymbol: 'EUR',
+  locale: 'en-IN',
   disabled: false,
   errorText: '',
   helperText: '',
-  integerLimit: 5,
-  isCreditCard: false,
   label: 'Number Input',
   maxValue: 100000,
   minValue: 0,

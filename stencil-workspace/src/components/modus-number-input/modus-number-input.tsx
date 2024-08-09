@@ -64,6 +64,9 @@ export class ModusNumberInput {
   /** An event that fires on input value change. */
   @Event() valueChange: EventEmitter<string>;
 
+  /**  An event that fires on input change*/
+  @Event() inputChange: EventEmitter<string>;
+
   private inputId = generateElementId() + '_number-input';
 
   classBySize: Map<string, string> = new Map([
@@ -87,10 +90,17 @@ export class ModusNumberInput {
 
   formatInputValue() {
     if (this?.numberInput) {
+      const formatStyle = this?.currencySymbol ? ('currency' as NumberFormatStyle) : ('decimal' as NumberFormatStyle);
+      const currency = this?.currencySymbol || undefined;
+      const currencyDisplay = this?.currencySymbol ? CurrencyDisplay.Symbol : undefined;
       this.inputOptions = new NumberInput({
         el: this.numberInput,
+        onInput: this.inputChange.emit.bind(this),
+        onChange: this.valueChange.emit.bind(this),
         options: {
-          formatStyle: 'decimal' as NumberFormatStyle,
+          formatStyle: formatStyle,
+          currency: currency,
+          currencyDisplay: currencyDisplay,
           locale: this?.locale,
           valueRange: {
             min: this?.minValue,
@@ -104,26 +114,11 @@ export class ModusNumberInput {
           useGrouping: true,
         },
       });
-      if (this?.currencySymbol) {
-        this.inputOptions?.setOptions({
-          formatStyle: 'currency' as NumberFormatStyle,
-          currency: this?.currencySymbol,
-          currencyDisplay: CurrencyDisplay.Symbol,
-        });
-      }
+
       if (!this.value) {
         this.inputOptions?.setValue(this.value as unknown as number);
       }
     }
-  }
-
-  extractNumbers(): string {
-    const numbers = this.numberInput.value.match(/\d+(\.\d+)?/g);
-    return numbers ? numbers.join('') : '';
-  }
-
-  handleOnInput(): void {
-    this.valueChange.emit(this.extractNumbers());
   }
 
   /** Focus the input. */
@@ -143,23 +138,21 @@ export class ModusNumberInput {
 
   incrementValue() {
     this.inputOptions?.increment();
-    this.valueChange.emit(this.extractNumbers());
   }
 
   decrementValue() {
     this.inputOptions?.decrement();
-    this.valueChange.emit(this.extractNumbers());
   }
 
   handleWheel(event: WheelEvent) {
-    if (!this.disabled && !this.readOnly) {
-      const delta = Math.sign(event.deltaY);
-      if (delta < 0) {
-        this.decrementValue();
-      } else {
-        this.incrementValue();
-      }
-      this.valueChange.emit(this.extractNumbers());
+    if (this.disabled || this.readOnly) return;
+
+    const isScrollUp = Math.sign(event.deltaY) < 0;
+
+    if (isScrollUp) {
+      this.decrementValue();
+    } else {
+      this.incrementValue();
     }
   }
 
@@ -212,7 +205,6 @@ export class ModusNumberInput {
             inputMode="decimal"
             max={this.maxValue}
             min={this.minValue}
-            onInput={() => this.handleOnInput()}
             placeholder={this.placeholder}
             readonly={this.readOnly}
             ref={(el) => (this.numberInput = el as HTMLInputElement)}
