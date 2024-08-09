@@ -71,6 +71,8 @@ export class ModusModal {
   focusWrapping: ModalFocusWrapping;
   modalContentRef: HTMLDivElement;
   tabbableNodes: HTMLElement[];
+  modalBodyRef: HTMLDivElement;
+  resizeObserver: ResizeObserver;
 
   /** Closes the Modal */
   @Method()
@@ -139,12 +141,22 @@ export class ModusModal {
     if (this.modalContentRef && this.startTrapRef) {
       this.focusWrapping = new ModalFocusWrapping(this.modalContentRef, this.startTrapRef);
     }
+    if (this.modalBodyRef) {
+      this.resizeObserver = new ResizeObserver(() => this.checkContentScrollable());
+      this.resizeObserver.observe(this.modalBodyRef);
+    }
     this.checkContentScrollable();
+  }
+
+  disconnectedCallback() {
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+    }
   }
 
   checkContentScrollable() {
     if (this.modalContentRef) {
-      this.isContentScrollable = this.modalContentRef.scrollHeight > this.modalContentRef.clientHeight;
+      this.isContentScrollable = this.modalBodyRef.scrollHeight > this.modalBodyRef.clientHeight;
     }
   }
 
@@ -156,7 +168,7 @@ export class ModusModal {
           ref={(el) => (this.startTrapRef = el)}
           onFocus={() => this.focusWrapping?.onStartWrapFocus()}></FocusWrap>
         {this.renderModalHeader()}
-        <div class="body">
+        <div class="body" ref={(el) => (this.modalBodyRef = el)}>
           <slot />
         </div>
         {this.renderModalFooter()}

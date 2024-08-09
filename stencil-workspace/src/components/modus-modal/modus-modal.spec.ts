@@ -2,6 +2,19 @@ import { newSpecPage } from '@stencil/core/testing';
 import { ModusModal } from './modus-modal';
 
 describe('modus-modal', () => {
+  beforeAll(() => {
+    global.ResizeObserver = class {
+      observe() {
+        return null;
+      }
+      unobserve() {
+        return null;
+      }
+      disconnect() {
+        return null;
+      }
+    };
+  });
   it('renders', async () => {
     const { root } = await newSpecPage({
       components: [ModusModal],
@@ -60,27 +73,28 @@ describe('modus-modal', () => {
   it('should update isContentScrollable when content changes', async () => {
     const page = await newSpecPage({
       components: [ModusModal],
-      html: `<modus-modal></modus-modal>`,
+      html: '<modus-modal></modus-modal>',
     });
 
     const modal = page.rootInstance as ModusModal;
+    const modalBody = page.root.shadowRoot.querySelector('.body') as HTMLDivElement;
 
-    expect(modal.isContentScrollable).toBe(false);
+    // Simulate content change by modifying the height
+    Object.defineProperty(modalBody, 'scrollHeight', { value: 200, writable: true });
+    Object.defineProperty(modalBody, 'clientHeight', { value: 100, writable: true });
 
-    modal.modalContentRef = {
-      scrollHeight: 200,
-      clientHeight: 100,
-    } as HTMLDivElement;
+    // Trigger the scroll check
+    modal.checkContentScrollable();
 
-    modal.componentDidRender();
+    // Assert the state
     expect(modal.isContentScrollable).toBe(true);
 
-    modal.modalContentRef = {
-      scrollHeight: 100,
-      clientHeight: 200,
-    } as HTMLDivElement;
+    // Reset the heights and check again
+    Object.defineProperty(modalBody, 'scrollHeight', { value: 100, writable: true });
+    Object.defineProperty(modalBody, 'clientHeight', { value: 200, writable: true });
 
-    modal.componentDidRender();
+    modal.checkContentScrollable();
+
     expect(modal.isContentScrollable).toBe(false);
   });
 });
