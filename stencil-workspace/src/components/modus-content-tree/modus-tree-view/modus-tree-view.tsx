@@ -30,6 +30,9 @@ export class ModusTreeView {
   /** (optional) Disable usage of `tab` key to focus elements inside a tree view. Use `Arrow Up/Down` for focussing a tree item and `Shift + Arrow Right` for focussing a checkbox inside the item.*/
   @Prop({ mutable: true }) disableTabbing: boolean;
 
+  /** (optional) Sets draggable state to be true to all the children */
+  @Prop() isDraggable: boolean;
+
   /** (optional) Set expanded tree items */
   @Prop({ mutable: true }) expandedItems: string[] = [];
 
@@ -278,6 +281,7 @@ export class ModusTreeView {
   @Watch('multiSelection')
   @Watch('size')
   @Watch('borderless')
+  @Watch('isDraggable')
   handleOptionsProps() {
     const options = this.getTreeViewItemOptions();
     Object.values(this.items).forEach(({ element }) => {
@@ -489,6 +493,7 @@ export class ModusTreeView {
       size: this.size,
       borderless: this.borderless,
       disableTabbing: this.disableTabbing,
+      draggable: this.isDraggable,
 
       getLevel: (id) => this.getLevel(id),
       hasItemFocus: (id) => this.isItemInFocus(id),
