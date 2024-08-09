@@ -76,6 +76,7 @@ export class ModusNumberInput {
 
   componentDidLoad() {
     this.formatInputValue();
+    this.numberInput.addEventListener('wheel', (event) => this.handleWheel(event), { passive: true });
   }
 
   @Watch('currencySymbol')
@@ -86,17 +87,14 @@ export class ModusNumberInput {
 
   formatInputValue() {
     if (this?.numberInput) {
-      const formatStyle = this?.currencySymbol ? 'currency' : 'decimal';
       this.inputOptions = new NumberInput({
         el: this.numberInput,
         options: {
-          formatStyle: formatStyle as NumberFormatStyle,
+          formatStyle: 'decimal' as NumberFormatStyle,
           locale: this?.locale,
-          currency: this?.currencySymbol as CurrencyDisplay.Code,
-          currencyDisplay: CurrencyDisplay.Symbol,
           valueRange: {
-            min: this.minValue,
-            max: this.maxValue,
+            min: this?.minValue,
+            max: this?.maxValue,
           },
           hidePrefixOrSuffixOnFocus: true,
           hideGroupingSeparatorOnFocus: true,
@@ -106,6 +104,13 @@ export class ModusNumberInput {
           useGrouping: true,
         },
       });
+      if (this?.currencySymbol) {
+        this.inputOptions?.setOptions({
+          formatStyle: 'currency' as NumberFormatStyle,
+          currency: this?.currencySymbol,
+          currencyDisplay: CurrencyDisplay.Symbol,
+        });
+      }
       if (!this.value) {
         this.inputOptions?.setValue(this.value as unknown as number);
       }
@@ -147,7 +152,6 @@ export class ModusNumberInput {
   }
 
   handleWheel(event: WheelEvent) {
-    event.preventDefault();
     if (!this.disabled && !this.readOnly) {
       const delta = Math.sign(event.deltaY);
       if (delta < 0) {
@@ -209,7 +213,6 @@ export class ModusNumberInput {
             max={this.maxValue}
             min={this.minValue}
             onInput={() => this.handleOnInput()}
-            onWheel={(event) => this.handleWheel(event)}
             placeholder={this.placeholder}
             readonly={this.readOnly}
             ref={(el) => (this.numberInput = el as HTMLInputElement)}

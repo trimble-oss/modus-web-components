@@ -244,12 +244,8 @@ describe('modus-number-input', () => {
 
     const numberInput = await page.find('modus-number-input');
 
-    await numberInput.setProperty('currencySymbol', 'EUR ');
-    await numberInput.setProperty('decimalCharacter', ',');
-    await numberInput.setProperty('decimalPlaces', 2);
-    await numberInput.setProperty('digitGroupSeparator', '.');
-    await numberInput.setProperty('integerLimit', '5');
-    await numberInput.setProperty('maxValue', 1000);
+    await numberInput.setProperty('currencySymbol', 'EUR');
+    await numberInput.setProperty('locale', 'en-IN');
 
     await page.waitForChanges();
 
@@ -257,11 +253,7 @@ describe('modus-number-input', () => {
 
     await input.type('1234');
 
-    expect(await numberInput.getProperty('currencySymbol')).toBe('EUR ');
-    expect(await numberInput.getProperty('decimalCharacter')).toBe(',');
-    expect(await numberInput.getProperty('decimalPlaces')).toBe(2);
-    expect(await numberInput.getProperty('digitGroupSeparator')).toBe('.');
-    expect(await numberInput.getProperty('integerLimit')).toBe(5);
-    expect(await numberInput.getProperty('maxValue')).toBe(1000);
+    expect(await numberInput.getProperty('currencySymbol')).toBe('EUR');
+    expect(await numberInput.getProperty('locale')).toBe('en-IN');
   });
 });
