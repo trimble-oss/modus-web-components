@@ -436,6 +436,7 @@ export class ModusTreeViewItem {
 
     if (draggable) {
       this.draggableItem = draggable;
+      this.droppableItem = draggable;
     }
 
     const sizeClass = `${TREE_ITEM_SIZE_CLASS.get(size || 'standard')}`;
