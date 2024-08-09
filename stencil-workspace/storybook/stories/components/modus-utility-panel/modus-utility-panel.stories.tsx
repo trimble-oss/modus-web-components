@@ -76,9 +76,9 @@ const DefaultTemplate = ({ ariaLabel, expanded, targetContent, pushContent }) =>
           expanded=${expanded}
           push-content=${pushContent}
           target-content=${targetContent}>
-          <span slot="header">Utility Panel Header</span>
-          <div slot="body">Content of the utility panel goes here.</div>
-          <span slot="footer">Utility Panel Footer</span>
+          <span slot="header" style="padding: 0 1rem">Utility Panel Header</span>
+          <div slot="body" style="padding: 1rem">Content of the utility panel goes here.</div>
+          <span slot="footer" style="padding: 0 1rem">Utility Panel Footer</span>
         </modus-utility-panel>
 
         <div id="panelcontent" style="padding: 10px;">
