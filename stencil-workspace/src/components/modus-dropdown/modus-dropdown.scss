@@ -15,7 +15,9 @@
   .dropdown-list {
     border-collapse: collapse;
     border-radius: $rem-4px;
+    box-shadow: 0 0 4px 0 rgba(54, 53, 69, 0.3);
     display: none;
+    margin-top: 4px;
     max-height: 200px;
     max-width: 300px;
     opacity: 1;

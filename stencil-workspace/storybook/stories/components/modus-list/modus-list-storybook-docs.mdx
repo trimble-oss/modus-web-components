@@ -25,23 +25,21 @@ The `<modus-list-item>` utilizes the slot element, allowing you to render your o
   <modus-list-item selected size="large">
     Large & Selected
   </modus-list-item>
-  <modus-list-item borderless>
-    Borderless
-  </modus-list-item>
+  <modus-list-item borderless>Borderless</modus-list-item>
+  <modus-list-item radiusless>Radiusless</modus-list-item>
 </modus-list>
 
 ```html
 <modus-list>
   <modus-list-item size="condensed">Condensed</modus-list-item>
-  <modus-list-item selected size="condensed"
-    >Condensed & Selected</modus-list-item
-  >
+  <modus-list-item selected size="condensed">Condensed & Selected</modus-list-item>
   <modus-list-item wrap-sub-text="true" sub-text="default">Default</modus-list-item>
   <modus-list-item selected>Selected</modus-list-item>
   <modus-list-item disabled>Disabled</modus-list-item>
   <modus-list-item size="large">Large</modus-list-item>
   <modus-list-item selected size="large">Large & Selected</modus-list-item>
   <modus-list-item borderless>Borderless</modus-list-item>
+  <modus-list-item radiusless>Radiusless</modus-list-item>
 </modus-list>
 ```
 
@@ -53,6 +51,7 @@ The `<modus-list-item>` utilizes the slot element, allowing you to render your o
 | ------------- | --------------- | ---------------------------------------------------------------- | -------------------------------------- | ------------ |
 | `borderless`  | `borderless`    | (optional) Whether the list item has a border or not             | `boolean`                              | `undefined`  |
 | `disabled`    | `disabled`      | (optional) Disables the list item                                | `boolean`                              | `undefined`  |
+| `radiusless`  | `radiusless`    | (optional) Whether the list item has a radius or not             | `boolean`                              | `undefined`  |
 | `selected`    | `selected`      | (optional) The selected state of the list item                   | `boolean`                              | `undefined`  |
 | `size`        | `size`          | (optional) The size of list item                                 | `"condensed" \| "large" \| "standard"` | `'standard'` |
 | `subText`     | `sub-text`      | (optional) Whether to show Subtext below the Slot content or not | `string`                               | `undefined`  |
@@ -71,9 +70,9 @@ The `<modus-list-item>` utilizes the slot element, allowing you to render your o
 
 ##### Modus List Item
 
-| Method name  | Description                     | Parameter          | Return            |
-| ------------ | ------------------------------- | ------------------ | ----------------- | ----- |
-| `focusItem`    | Focus the list item      | `Promise<void>`       | `Promise<void>`   |
+| Method name | Description         | Parameter       | Return          |
+| ----------- | ------------------- | --------------- | --------------- |
+| `focusItem` | Focus the list item | `Promise<void>` | `Promise<void>` |
 
 ### Shadow Parts
 
