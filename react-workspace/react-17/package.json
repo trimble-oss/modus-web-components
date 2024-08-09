@@ -33,7 +33,7 @@
     ]
   },
   "dependencies": {
-    "@trimble-oss/modus-web-components": "0.35.0"
+    "@trimble-oss/modus-web-components": "0.36.0"
   },
   "devDependencies": {
     "@types/jest": "23.3.9",
