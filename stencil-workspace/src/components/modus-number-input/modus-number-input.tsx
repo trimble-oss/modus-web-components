@@ -2,7 +2,7 @@
 import { Component, h, Prop, Event, EventEmitter, Method, Watch } from '@stencil/core';
 import { generateElementId } from '../../utils/utils';
 import { ModusIconMap } from '../../icons/ModusIconMap';
-import { NumberInput, CurrencyDisplay, NumberFormatStyle } from 'intl-number-input';
+import { NumberInput, CurrencyDisplay, NumberFormatStyle, NumberInputValue } from 'intl-number-input';
 
 @Component({
   tag: 'modus-number-input',
@@ -74,7 +74,8 @@ export class ModusNumberInput {
     ['large', 'large'],
   ]);
 
-  numberInput: HTMLInputElement;
+  private previousValue: number | undefined;
+  private numberInput: HTMLInputElement;
   private inputOptions: NumberInput;
 
   componentDidLoad() {
@@ -88,6 +89,14 @@ export class ModusNumberInput {
     this.formatInputValue();
   }
 
+  handleInputChange(event: Event) {
+    const target = event as unknown as NumberInputValue;
+    if (target.number !== this.previousValue) {
+      this.previousValue = target.number;
+      this.inputChange.emit(target.number.toString());
+    }
+  }
+
   formatInputValue() {
     if (this?.numberInput) {
       const formatStyle = this?.currencySymbol ? ('currency' as NumberFormatStyle) : ('decimal' as NumberFormatStyle);
@@ -95,8 +104,7 @@ export class ModusNumberInput {
       const currencyDisplay = this?.currencySymbol ? CurrencyDisplay.Symbol : undefined;
       this.inputOptions = new NumberInput({
         el: this.numberInput,
-        onInput: this.inputChange.emit.bind(this),
-        onChange: this.valueChange.emit.bind(this),
+        onInput: this.handleInputChange.bind(this),
         options: {
           formatStyle: formatStyle,
           currency: currency,
