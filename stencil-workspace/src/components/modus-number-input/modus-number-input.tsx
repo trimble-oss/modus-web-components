@@ -88,9 +88,9 @@ export class ModusNumberInput {
 
   handleInputChange(event: Event) {
     const target = event as unknown as NumberInputValue;
-    if (target.number !== this.previousValue) {
-      this.previousValue = target.number;
-      this.valueChange.emit(target.number.toString());
+    if (target?.number !== this?.previousValue) {
+      this.previousValue = target?.number;
+      this.valueChange.emit(target?.number?.toString());
     }
   }
 
