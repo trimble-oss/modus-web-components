@@ -64,9 +64,6 @@ export class ModusNumberInput {
   /** An event that fires on input value change. */
   @Event() valueChange: EventEmitter<string>;
 
-  /**  An event that fires on input change*/
-  @Event() inputChange: EventEmitter<string>;
-
   private inputId = generateElementId() + '_number-input';
 
   classBySize: Map<string, string> = new Map([
@@ -93,7 +90,7 @@ export class ModusNumberInput {
     const target = event as unknown as NumberInputValue;
     if (target.number !== this.previousValue) {
       this.previousValue = target.number;
-      this.inputChange.emit(target.number.toString());
+      this.valueChange.emit(target.number.toString());
     }
   }
 
