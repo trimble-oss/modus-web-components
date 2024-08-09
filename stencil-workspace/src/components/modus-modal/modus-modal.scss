@@ -43,7 +43,9 @@
       justify-content: space-between;
       padding: 0 $rem-16px;
 
-      .icon-close {
+      .icon-close,
+      .icon-expand,
+      .icon-collapse {
         cursor: pointer;
 
         path {
@@ -54,6 +56,13 @@
           opacity: $modus-modal-close-hover-opacity;
         }
       }
+    }
+
+    .header-resize-buttons {
+      align-items: center;
+      display: flex;
+      gap: $rem-4px;
+      justify-content: center;
     }
 
     .body {
