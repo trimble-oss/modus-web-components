@@ -19,6 +19,7 @@
 | `includeSearchIcon`         | `include-search-icon`           | Whether the search icon is included.                                                                                   | `boolean`                               | `true`                                        |
 | `label`                     | `label`                         | The autocomplete's label.                                                                                              | `string`                                | `undefined`                                   |
 | `multiple`                  | `multiple`                      | When enabled, multiple options can be selected in the component. And selected options are shown as chips in the input. | `boolean`                               | `undefined`                                   |
+| `newOptions`                | --                              | The autocomplete's additional options.                                                                                 | `Promise<ModusAutocompleteOption[]>`    | `undefined`                                   |
 | `noResultsFoundSubtext`     | `no-results-found-subtext`      | The autocomplete's no results sub-text.                                                                                | `string`                                | `'Check spelling or try a different keyword'` |
 | `noResultsFoundText`        | `no-results-found-text`         | The autocomplete's no results text.                                                                                    | `string`                                | `'No results found'`                          |
 | `options`                   | --                              | The autocomplete's options.                                                                                            | `ModusAutocompleteOption[] \| string[]` | `undefined`                                   |
@@ -50,12 +51,14 @@
 
 - [modus-text-input](../modus-text-input)
 - [modus-chip](../modus-chip)
+- [modus-spinner](../modus-spinner)
 
 ### Graph
 ```mermaid
 graph TD;
   modus-autocomplete --> modus-text-input
   modus-autocomplete --> modus-chip
+  modus-autocomplete --> modus-spinner
   modus-table-cell-editor --> modus-autocomplete
   style modus-autocomplete fill:#f9f,stroke:#333,stroke-width:4px
 ```

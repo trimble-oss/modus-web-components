@@ -36,6 +36,29 @@ export class ModusAutocomplete {
   /** The autocomplete's aria label. */
   @Prop() ariaLabel: string | null;
 
+  /** The autocomplete's additional options. */
+  @Prop() additionalOptions: Promise<ModusAutocompleteOption[]>;
+
+  @Watch('additionalOptions')
+  async watchAdditionalOptions() {
+    if (this.additionalOptions) {
+      this.isLoading = true;
+      try {
+        const resolvedOptions = await this.additionalOptions;
+
+        // Convert new options separately
+        const convertedAdditionalOptions = this.convertAdditionalOptions(resolvedOptions);
+
+        // Update the existing options with new options
+        this.options = convertedAdditionalOptions as ModusAutocompleteOption[];
+      } catch (error) {
+        this.isLoading = false;
+      } finally {
+        this.isLoading = false;
+      }
+    }
+  }
+
   /** Whether the input has a clear button. */
   @Prop() clearable = false;
 
@@ -77,6 +100,8 @@ export class ModusAutocomplete {
   /** The autocomplete's selected option. */
   @State() selectedOption: string;
 
+  @State() isLoading = false;
+
   /** Whether to show autocomplete's options when focus. */
   @Prop() showOptionsOnFocus: boolean;
 
@@ -112,6 +137,9 @@ export class ModusAutocomplete {
       this.updateVisibleCustomOptions(this.getValueAsString());
     }
   }
+
+  /** An event that emits the input value after typing a sequence of characters */
+  @Event() inputChanged: EventEmitter<string>;
 
   /** An event that fires when a dropdown option is selected. Emits the option id. */
   @Event() optionSelected: EventEmitter<string>;
@@ -367,10 +395,6 @@ export class ModusAutocomplete {
       this.visibleCustomOptions = this.customOptions;
     }
 
-    if (this.visibleCustomOptions?.length === 0) {
-      this.showNoResultsFoundMessage = true;
-    }
-
     this.containsSlottedElements = this.customOptions.length > 0;
   };
 
@@ -391,10 +415,6 @@ export class ModusAutocomplete {
       });
     } else {
       this.visibleOptions = this.options as ModusAutocompleteOption[];
-    }
-
-    if (this.visibleOptions?.length === 0) {
-      this.showNoResultsFoundMessage = true;
     }
   };
 
@@ -420,6 +440,9 @@ export class ModusAutocomplete {
       value={this.getValueAsString()}
       onBlur={this.handleInputBlur}
       role="combobox"
+      onKeyUp={() => {
+        this.processChange();
+      }}
       aria-autocomplete="list"
       aria-controls={this.listId}
       aria-expanded={this.displayOptions()}
@@ -444,6 +467,36 @@ export class ModusAutocomplete {
       selectedOption.scrollIntoView({ behavior: 'smooth', inline: 'nearest' });
     }
   };
+
+  debounce(func, timeout = 300) {
+    let timer;
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        func.apply(this, args);
+      }, timeout);
+    };
+  }
+
+  processChange = this.debounce(() => this.saveInput());
+
+  saveInput() {
+    this.inputChanged.emit(this.getValueAsString());
+  }
+
+  convertAdditionalOptions(additionalOptions: ModusAutocompleteOption[] | string[]): ModusAutocompleteOption[] {
+    if (additionalOptions && additionalOptions.length > 0) {
+      if (typeof additionalOptions[0] === 'string') {
+        return additionalOptions.map((option) => ({
+          id: option,
+          value: option,
+        }));
+      } else {
+        return additionalOptions as ModusAutocompleteOption[];
+      }
+    }
+    return [];
+  }
 
   render(): unknown {
     const classes = `autocomplete ${this.classBySize.get(this.size)}`;
@@ -537,7 +590,12 @@ export class ModusAutocomplete {
                 );
               })}
           </ul>
-          {this.displayNoResults() && <NoResultsFound text={this.noResultsFoundText} subtext={this.noResultsFoundSubtext} />}
+
+          {this.isLoading ? (
+            <LoadingSpinner />
+          ) : (
+            this.displayNoResults() && <NoResultsFound text={this.noResultsFoundText} subtext={this.noResultsFoundSubtext} />
+          )}
         </div>
         {this.CustomOptionsSlot()}
       </div>
@@ -552,5 +610,10 @@ const NoResultsFound = (props: { text: string; subtext: string }) => (
       <div class="message">{props.text}</div>
     </div>
     <div class="subtext">{props.subtext}</div>
+  </div>
+);
+const LoadingSpinner = () => (
+  <div class="is-loading">
+    <modus-spinner size="1.5rem"></modus-spinner>
   </div>
 );
