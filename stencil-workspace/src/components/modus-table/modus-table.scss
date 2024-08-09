@@ -136,6 +136,12 @@ table {
           outline: -webkit-focus-ring-color auto 1px;
         }
 
+        &:nth-last-child(1) .resize-handle {
+          position: absolute;
+          right: 0;
+          width: 6px;
+        }
+
         .can-sort {
           align-items: center;
           display: flex;
@@ -194,11 +200,6 @@ table {
         .resize-handle {
           &:focus-visible {
             outline: none;
-          }
-
-          &:nth-child(1) {
-            position: absolute;
-            right: 0;
           }
 
           cursor: e-resize;
