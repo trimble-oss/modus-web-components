@@ -129,6 +129,7 @@ export class ModusTable {
   @Prop() displayOptions?: ModusTableDisplayOptions = {
     borderless: false,
     cellBorderless: false,
+    cellVerticalBorderless: false,
   };
 
   /** (Optional) To enable row hover in table. */
@@ -739,6 +740,7 @@ export class ModusTable {
     const tableMainClass = `
       ${this.displayOptions?.borderless ? 'borderless' : ''}
       ${this.displayOptions?.cellBorderless ? 'cell-borderless' : ''}
+      ${this.displayOptions?.cellVerticalBorderless ? 'cell-vertical-borderless' : ''}
       ${this.classByDensity.get(this.density)}
     `;
 

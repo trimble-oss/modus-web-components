@@ -31,8 +31,8 @@ describe('modus-navbar-main-menu', () => {
 
   it('should not update container layout when navbar does not exist', () => {
     const mainMenu = new ModusNavbarMainMenu();
-    mainMenu.navbarId = 'non-existing-navbar';
 
+    mainMenu.parentNavbar = document.getElementById('non-existing-navbar') as HTMLElement;
     mainMenu.updateContainerLayout();
 
     expect(mainMenu.containerLayout).toEqual(DEFAULT_CONTAINER_LAYOUT);
@@ -45,6 +45,7 @@ describe('modus-navbar-main-menu', () => {
     jest.spyOn(global.document, 'getElementById').mockReturnValue(mockNavbar);
 
     const mainMenu = new ModusNavbarMainMenu();
+    mainMenu.parentNavbar = mockNavbar;
     mainMenu.updateContainerLayout();
 
     expect(window.scrollY).toBe(0);
@@ -60,6 +61,7 @@ describe('modus-navbar-main-menu', () => {
     jest.spyOn(global.document, 'getElementById').mockReturnValue(mockNavbar);
 
     const mainMenu = new ModusNavbarMainMenu();
+    mainMenu.parentNavbar = mockNavbar;
     mainMenu.updateContainerLayout();
 
     expect(window.scrollY).toBe(0);
