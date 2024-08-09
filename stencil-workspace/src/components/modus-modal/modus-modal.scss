@@ -35,13 +35,16 @@
 
     header {
       align-items: center;
-      border-bottom: 1px solid $modus-modal-divider-color;
       display: flex;
       font-size: $rem-16px;
       font-weight: $font-weight-bold;
       height: 64px;
       justify-content: space-between;
       padding: 0 $rem-16px;
+
+      &.scrollable {
+        border-bottom: 1px solid $modus-modal-divider-color;
+      }
 
       .icon-close {
         cursor: pointer;
@@ -64,8 +67,11 @@
     }
 
     footer {
-      border-top: 1px solid $modus-modal-divider-color;
       padding: $rem-20px $rem-16px;
+
+      &.scrollable {
+        border-top: 1px solid $modus-modal-divider-color;
+      }
 
       &.has-buttons {
         align-items: center;
