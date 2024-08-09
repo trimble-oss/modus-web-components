@@ -196,6 +196,11 @@ table {
             outline: none;
           }
 
+          &:nth-child(1) {
+            position: absolute;
+            right: 0;
+          }
+
           cursor: e-resize;
           height: 100%;
           position: absolute;
