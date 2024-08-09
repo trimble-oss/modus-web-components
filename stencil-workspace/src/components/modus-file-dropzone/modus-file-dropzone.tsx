@@ -141,6 +141,29 @@ export class ModusFileDropzone {
   };
 
   updateDropzoneState = (): void => {
+    // Checks and delete invalid accepted-file-types
+    if (this.acceptFileTypes) {
+      const acceptedFileTypes = this.acceptFileTypes
+        .split(',')
+        .map((ext) => ext.trim())
+        .filter((ext) => ext.length > 0);
+      let fileLength = this.dropzoneFiles.length;
+      for (let i = 0; i < fileLength; i++) {
+        const [_, fileExtention] = this.dropzoneFiles[i].type.split('/');
+        if (!acceptedFileTypes.includes('.' + fileExtention)) {
+          if (i > -1) {
+            this.dropzoneFiles.splice(i, 1);
+            this.dropzoneFiles = [...this.dropzoneFiles];
+            --i;
+            --fileLength;
+          }
+          if (this.dropzoneFiles.length <= 0) {
+            return;
+          }
+        }
+      }
+    }
+
     // Raise error if having multiple files is invalid.
     if (!this.multiple && this.dropzoneFiles.length > 1) {
       this.error = 'maxFileCount';
