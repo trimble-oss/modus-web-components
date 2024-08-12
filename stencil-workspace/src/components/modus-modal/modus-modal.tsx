@@ -119,23 +119,22 @@ export class ModusModal {
   }
 
   handleEnterKeydown(event: KeyboardEvent, callback: () => void): void {
-    switch (event.code) {
-      case 'Enter':
-        callback();
-        break;
+    if (event.code === 'Enter') {
+      event.preventDefault();
+      callback();
     }
   }
 
-  handleCloseKeydown(event: KeyboardEvent): void {
-    this.handleEnterKeydown(event, () => this.close());
+  handlePrimaryClick(): void {
+    if (!this.primaryButtonDisabled) {
+      this.primaryButtonClick.emit();
+    }
   }
 
-  handlePrimaryKeydown(event: KeyboardEvent): void {
-    this.handleEnterKeydown(event, () => this.primaryButtonClick.emit());
-  }
-
-  handleSecondaryKeydown(event: KeyboardEvent): void {
-    this.handleEnterKeydown(event, () => this.secondaryButtonClick.emit());
+  handleSecondaryClick(): void {
+    if (!this.secondaryButtonDisabled) {
+      this.secondaryButtonClick.emit();
+    }
   }
 
   componentDidRender() {
@@ -164,22 +163,22 @@ export class ModusModal {
     return (
       <header>
         {this.headerText}
-        <div class="header-buttons">
+        <div class="header-resize-buttons">
           <div
             role="button"
             tabindex={0}
             aria-label={this.fullscreen ? 'Collapse' : 'Expand'}
             onClick={() => this.toggleFullscreen()}
             onKeyDown={(event) => this.handleEnterKeydown(event, () => this.toggleFullscreen())}>
-            {this.fullscreen ? <IconCollapse size="24" /> : <IconExpand size="24" />}
+            {this.fullscreen ? <IconCollapse size="20" /> : <IconExpand size="20" />}
           </div>
           <div
             role="button"
             tabindex={0}
             aria-label="Close"
             onClick={() => this.close()}
-            onKeyDown={(event) => this.handleCloseKeydown(event)}>
-            <IconClose size="24" />
+            onKeyDown={(event) => this.handleEnterKeydown(event, () => this.close())}>
+            <IconClose size="20" />
           </div>
         </div>
       </header>
@@ -199,8 +198,8 @@ export class ModusModal {
               button-style="outline"
               color="secondary"
               ariaLabel={this.secondaryButtonAriaLabel}
-              onButtonClick={() => this.secondaryButtonClick.emit()}
-              onKeyDown={(event) => this.handlePrimaryKeydown(event)}>
+              onButtonClick={() => this.handleSecondaryClick()}
+              onKeyDown={(event) => this.handleEnterKeydown(event, () => this.handleSecondaryClick())}>
               {this.secondaryButtonText}
             </modus-button>
           )}
@@ -209,8 +208,8 @@ export class ModusModal {
               disabled={this.primaryButtonDisabled}
               color="primary"
               ariaLabel={this.primaryButtonAriaLabel}
-              onButtonClick={() => this.primaryButtonClick.emit()}
-              onKeyDown={(event) => this.handleSecondaryKeydown(event)}>
+              onButtonClick={() => this.handlePrimaryClick()}
+              onKeyDown={(event) => this.handleEnterKeydown(event, () => this.handlePrimaryClick())}>
               {this.primaryButtonText}
             </modus-button>
           )}
