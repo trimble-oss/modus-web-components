@@ -27,12 +27,14 @@ _We recommend using [nvm](https://github.com/nvm-sh/nvm). It is a great tool for
 ## Getting Started
 
 ### Before you get started
-Before you get started we STRONGLY recommend that you save yourself a lot of time by scheduling a pre-design.  Our PRs that had a predesign went smoothly and the ones that didn’t had lots of changes.  Please schedule the predesign.  You can request a predesign session in the Modus Web Components chat group:
+
+Before you get started we STRONGLY recommend that you save yourself a lot of time by scheduling a pre-design. Our PRs that had a predesign went smoothly and the ones that didn’t had lots of changes. Please schedule the predesign. You can request a predesign session in the Modus Web Components chat group:
 https://mail.google.com/chat/u/0/#chat/space/AAAAQFpPtIY
 
 To prepare for the predesign session please:
-Bring you link to the approved Modus Sigma designs (we only  contribute Figma approved components)
-Bring documentation on the component
+
+- Bring your link to the approved Modus Figma designs (we only contribute Figma approved components)
+- Bring documentation on the component
 
 ### Running the App
 
