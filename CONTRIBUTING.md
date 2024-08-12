@@ -28,8 +28,7 @@ _We recommend using [nvm](https://github.com/nvm-sh/nvm). It is a great tool for
 
 ### Before you get started
 
-Before you get started we STRONGLY recommend that you save yourself a lot of time by scheduling a pre-design. Our PRs that had a predesign went smoothly and the ones that didn’t had lots of changes. Please schedule the predesign. You can request a predesign session in the Modus Web Components chat group:
-https://mail.google.com/chat/u/0/#chat/space/AAAAQFpPtIY
+Before you get started we STRONGLY recommend that you save yourself a lot of time by scheduling a pre-design. Our PRs that had a predesign went smoothly and the ones that didn’t had lots of changes. Please schedule the predesign. You can request a predesign session in the [Modus Web Components chat group](https://mail.google.com/chat/u/0/#chat/space/AAAAQFpPtIY)
 
 To prepare for the predesign session please:
 
