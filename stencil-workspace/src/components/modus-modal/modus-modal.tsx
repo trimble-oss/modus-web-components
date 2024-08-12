@@ -120,7 +120,6 @@ export class ModusModal {
 
   handleEnterKeydown(event: KeyboardEvent, callback: () => void): void {
     if (event.code === 'Enter') {
-      event.preventDefault();
       callback();
     }
   }
@@ -163,14 +162,14 @@ export class ModusModal {
     return (
       <header>
         {this.headerText}
-        <div class="header-resize-buttons">
+        <div class="header-buttons">
           <div
             role="button"
             tabindex={0}
             aria-label={this.fullscreen ? 'Collapse' : 'Expand'}
             onClick={() => this.toggleFullscreen()}
             onKeyDown={(event) => this.handleEnterKeydown(event, () => this.toggleFullscreen())}>
-            {this.fullscreen ? <IconCollapse size="20" /> : <IconExpand size="20" />}
+            {this.fullscreen ? <IconCollapse size="24" /> : <IconExpand size="24" />}
           </div>
           <div
             role="button"
@@ -178,7 +177,7 @@ export class ModusModal {
             aria-label="Close"
             onClick={() => this.close()}
             onKeyDown={(event) => this.handleEnterKeydown(event, () => this.close())}>
-            <IconClose size="20" />
+            <IconClose size="24" />
           </div>
         </div>
       </header>
@@ -198,8 +197,7 @@ export class ModusModal {
               button-style="outline"
               color="secondary"
               ariaLabel={this.secondaryButtonAriaLabel}
-              onButtonClick={() => this.handleSecondaryClick()}
-              onKeyDown={(event) => this.handleEnterKeydown(event, () => this.handleSecondaryClick())}>
+              onButtonClick={() => this.handleSecondaryClick()}>
               {this.secondaryButtonText}
             </modus-button>
           )}
@@ -208,8 +206,7 @@ export class ModusModal {
               disabled={this.primaryButtonDisabled}
               color="primary"
               ariaLabel={this.primaryButtonAriaLabel}
-              onButtonClick={() => this.handlePrimaryClick()}
-              onKeyDown={(event) => this.handleEnterKeydown(event, () => this.handlePrimaryClick())}>
+              onButtonClick={() => this.handlePrimaryClick()}>
               {this.primaryButtonText}
             </modus-button>
           )}
