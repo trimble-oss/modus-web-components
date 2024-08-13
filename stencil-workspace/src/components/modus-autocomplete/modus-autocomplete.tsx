@@ -36,29 +36,6 @@ export class ModusAutocomplete {
   /** The autocomplete's aria label. */
   @Prop() ariaLabel: string | null;
 
-  /** The autocomplete's additional options. */
-  @Prop() additionalOptions: Promise<ModusAutocompleteOption[]>;
-
-  @Watch('additionalOptions')
-  async watchAdditionalOptions() {
-    if (this.additionalOptions) {
-      this.isLoading = true;
-      try {
-        const resolvedOptions = await this.additionalOptions;
-
-        // Convert new options separately
-        const convertedAdditionalOptions = this.convertAdditionalOptions(resolvedOptions);
-
-        // Update the existing options with new options
-        this.options = convertedAdditionalOptions as ModusAutocompleteOption[];
-      } catch (error) {
-        this.isLoading = false;
-      } finally {
-        this.isLoading = false;
-      }
-    }
-  }
-
   /** Whether the input has a clear button. */
   @Prop() clearable = false;
 
@@ -92,7 +69,7 @@ export class ModusAutocomplete {
   @Prop() noResultsFoundSubtext = 'Check spelling or try a different keyword';
 
   /** The autocomplete's options. */
-  @Prop({ mutable: true }) options: ModusAutocompleteOption[] | string[];
+  @Prop({ mutable: true }) options: Promise<ModusAutocompleteOption[]> | ModusAutocompleteOption[] | string[];
 
   /** An array to hold the selected chips. */
   @State() selectedChips: ModusAutocompleteOption[] = [];
@@ -100,7 +77,7 @@ export class ModusAutocomplete {
   /** The autocomplete's selected option. */
   @State() selectedOption: string;
 
-  @State() isLoading = false;
+  @Prop() isLoading = false;
 
   /** Whether to show autocomplete's options when focus. */
   @Prop() showOptionsOnFocus: boolean;
@@ -191,12 +168,14 @@ export class ModusAutocomplete {
   ]);
 
   convertOptions(): void {
-    if (this.options && this.options.length > 0) {
+    if (Array.isArray(this.options) && this.options.length > 0) {
       if (typeof this.options[0] === 'string') {
-        this.options = this.options?.map((option) => ({
-          id: option,
-          value: option,
-        }));
+        if (Array.isArray(this.options)) {
+          this.options = this.options.map((option) => ({
+            id: option.id,
+            value: option.value,
+          }));
+        }
       }
     }
   }
@@ -398,7 +377,7 @@ export class ModusAutocomplete {
     this.containsSlottedElements = this.customOptions.length > 0;
   };
 
-  updateVisibleOptions = (search = '') => {
+  updateVisibleOptions = async (search = '') => {
     if (!this.hasFocus) {
       return;
     }
@@ -409,12 +388,12 @@ export class ModusAutocomplete {
       this.selectedOption = '';
     }
 
-    if (!this.disableFiltering) {
-      this.visibleOptions = (this.options as ModusAutocompleteOption[])?.filter((o: ModusAutocompleteOption) => {
-        return o.value.toLowerCase().includes(search.toLowerCase());
+    if (!this.disableFiltering && !(this?.options instanceof Promise)) {
+      this.visibleOptions = ((await this?.options) as ModusAutocompleteOption[])?.filter((o: ModusAutocompleteOption) => {
+        return o?.value.toLowerCase().includes(search?.toLowerCase());
       });
     } else {
-      this.visibleOptions = this.options as ModusAutocompleteOption[];
+      this.visibleOptions = (await this?.options) as ModusAutocompleteOption[];
     }
   };
 
@@ -440,9 +419,6 @@ export class ModusAutocomplete {
       value={this.getValueAsString()}
       onBlur={this.handleInputBlur}
       role="combobox"
-      onKeyUp={() => {
-        this.processChange();
-      }}
       aria-autocomplete="list"
       aria-controls={this.listId}
       aria-expanded={this.displayOptions()}
@@ -467,36 +443,6 @@ export class ModusAutocomplete {
       selectedOption.scrollIntoView({ behavior: 'smooth', inline: 'nearest' });
     }
   };
-
-  debounce(func, timeout = 300) {
-    let timer;
-    return (...args) => {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        func.apply(this, args);
-      }, timeout);
-    };
-  }
-
-  processChange = this.debounce(() => this.saveInput());
-
-  saveInput() {
-    this.inputChanged.emit(this.getValueAsString());
-  }
-
-  convertAdditionalOptions(additionalOptions: ModusAutocompleteOption[] | string[]): ModusAutocompleteOption[] {
-    if (additionalOptions && additionalOptions.length > 0) {
-      if (typeof additionalOptions[0] === 'string') {
-        return additionalOptions.map((option) => ({
-          id: option,
-          value: option,
-        }));
-      } else {
-        return additionalOptions as ModusAutocompleteOption[];
-      }
-    }
-    return [];
-  }
 
   render(): unknown {
     const classes = `autocomplete ${this.classBySize.get(this.size)}`;
