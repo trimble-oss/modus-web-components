@@ -17,9 +17,7 @@ For Text Buttons and Icon with Text Buttons,
 
 For Icon only Buttons,
 
-- Solid buttons supports all the given colors except `danger`.
 - Outline buttons only support `primary` and `secondary` colors.
-- Borderless buttons supports all the given colors except `danger`.
 
 <Anchor storyId="components-button--default" />
 
@@ -28,9 +26,6 @@ For Icon only Buttons,
 <modus-button color="primary">Primary</modus-button>
 <modus-button color="secondary">Secondary</modus-button>
 <modus-button color="tertiary">Tertiary</modus-button>
-
-<modus-button color="danger">Danger</modus-button>
-<modus-button disabled color="danger">Disabled</modus-button>
 
 <modus-button size="small" color="primary">Small</modus-button>
 <modus-button size="large" color="primary">Large</modus-button>
@@ -60,9 +55,6 @@ For Icon only Buttons,
 <modus-button color="secondary">Secondary</modus-button>
 <modus-button color="tertiary">Tertiary</modus-button>
 
-<modus-button color="danger">Danger</modus-button>
-<modus-button disabled color="danger">Disabled</modus-button>
-
 <modus-button size="small" color="primary">Small</modus-button>
 <modus-button size="large" color="primary">Large</modus-button>
 
@@ -84,7 +76,6 @@ For Icon only Buttons,
 <modus-button size="small" left-icon="notifications">Primary</modus-button>
 <modus-button color="secondary" right-icon="notifications">Secondary</modus-button>
 <modus-button size="large" left-icon="notifications" color="tertiary" right-icon="notifications">Tertiary</modus-button>
-<modus-button size="large" left-icon="add" color="danger" right-icon="remove">Danger</modus-button>
 
 <Anchor storyId="components-button--icon-only" />
 
@@ -112,7 +103,6 @@ For Icon only Buttons,
 <modus-button size="small" left-icon="notifications">Primary</modus-button>
 <modus-button color="secondary" right-icon="notifications">Secondary</modus-button>
 <modus-button size="large" left-icon="notifications" color="tertiary" right-icon="notifications">Tertiary</modus-button>
-<modus-button size="large" left-icon="add" color="danger" right-icon="remove">Danger</modus-button>
 
 <!-- Icon only Buttons - Default(Fill) -->
 <modus-button size="small" color="primary" icon-only="notifications" aria-label="Notifications"></modus-button>
@@ -147,21 +137,43 @@ Users can choose to show a caret icon at the right side of the button using `sho
 <modus-button color="secondary" button-style="borderless" icon-only="notifications" show-caret="true"></modus-button>
 ```
 
+### Special Button
+
+Only use in special cases and sparingly within an otherwise blue/gray UI in order to bring more attention to a particular action. It should not be used with primary or danger buttons. It does not support borderless or outline variants.
+
+<modus-button color="special" >Button</modus-button>
+<modus-button disabled color="special">Disabled</modus-button>
+
+```html
+<modus-button color="special">Button</modus-button> <modus-button disabled color="special">Disabled</modus-button>
+```
+
+### Danger Button
+
+The danger color variant is used for alerting or critical actions. It does not support borderless or outline variants.
+
+<modus-button color="danger" >Button</modus-button>
+<modus-button disabled color="danger">Disabled</modus-button>
+
+```html
+<modus-button color="danger">Button</modus-button> <modus-button disabled color="danger">Disabled</modus-button>
+```
+
 ### Properties
 
-| Property       | Attribute       | Description                                                                                | Type                                             | Default     |
-| -------------- | --------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------ | ----------- |
-| `ariaDisabled` | `aria-disabled` | (optional) The button's `aria-disabled` state.                                             | `string`                                         | `undefined` |
-| `ariaLabel`    | `aria-label`    | (optional) The button's aria-label.                                                        | `string`                                         | `undefined` |
-| `buttonStyle`  | `button-style`  | (optional) The style of the button                                                         | `"borderless" , "fill" , "outline"`              | `'fill'`    |
-| `color`        | `color`         | (optional) The color of the button                                                         | `"danger" ,"primary" , "secondary" , "tertiary"` | `'primary'` |
-| `disabled`     | `disabled`      | (optional) Disables the button.                                                            | `boolean`                                        | `undefined` |
-| `iconOnly`     | `icon-only`     | (optional) Takes the icon name and renders an icon-only button.                            | `string`                                         | `undefined` |
-| `leftIcon`     | `left-icon`     | (optional) Takes the icon name and shows the icon aligned to the left of the button text.  | `string`                                         | `undefined` |
-| `rightIcon`    | `right-icon`    | (optional) Takes the icon name and shows the icon aligned to the right of the button text. | `string`                                         | `undefined` |
-| `showCaret`    | `show-caret`    | (optional) Shows a caret icon right side of the button.                                    | `boolean`                                        | `undefined` |
-| `size`         | `size`          | (optional) The size of the button.                                                         | `"large" ,"medium" , "small"`                    | `'medium'`  |
-| `type`         | `type`          | (optional) The type of the button.                                                         | `"button" , "reset" , "submit"`                  | `'button'`  |
+| Property       | Attribute       | Description                                                                                | Type                                                      | Default     |
+| -------------- | --------------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------------- | ----------- |
+| `ariaDisabled` | `aria-disabled` | (optional) The button's `aria-disabled` state.                                             | `string`                                                  | `undefined` |
+| `ariaLabel`    | `aria-label`    | (optional) The button's aria-label.                                                        | `string`                                                  | `undefined` |
+| `buttonStyle`  | `button-style`  | (optional) The style of the button                                                         | `"borderless", "fill", "outline"`                         | `'fill'`    |
+| `color`        | `color`         | (optional) The color of the button                                                         | `"danger", "primary", "secondary", "tertiary", "special"` | `'primary'` |
+| `disabled`     | `disabled`      | (optional) Disables the button.                                                            | `boolean`                                                 | `undefined` |
+| `iconOnly`     | `icon-only`     | (optional) Takes the icon name and renders an icon-only button.                            | `string`                                                  | `undefined` |
+| `leftIcon`     | `left-icon`     | (optional) Takes the icon name and shows the icon aligned to the left of the button text.  | `string`                                                  | `undefined` |
+| `rightIcon`    | `right-icon`    | (optional) Takes the icon name and shows the icon aligned to the right of the button text. | `string`                                                  | `undefined` |
+| `showCaret`    | `show-caret`    | (optional) Shows a caret icon right side of the button.                                    | `boolean`                                                 | `undefined` |
+| `size`         | `size`          | (optional) The size of the button.                                                         | `"large", "medium", "small"`                              | `'medium'`  |
+| `type`         | `type`          | (optional) The type of the button.                                                         | `"button", "reset", "submit"`                             | `'button'`  |
 
 ### DOM Events
 

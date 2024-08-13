@@ -13,8 +13,8 @@ permissions:
 jobs:
   build:
     permissions:
-      contents: read # for actions/checkout to fetch code
-      statuses: write # for github/super-linter/slim to mark status of each linter run
+      contents: read
+      statuses: write
     name: Lint Code Base
     runs-on: ubuntu-latest
 
@@ -43,6 +43,8 @@ jobs:
           VALIDATE_HTML: false
           VALIDATE_JSCPD: false
           VALIDATE_NATURAL_LANGUAGE: false
-          VALIDATE_YAML: false
+          VALIDATE_TSX: false
           VALIDATE_TYPESCRIPT_ES: false
+          VALIDATE_TYPESCRIPT_PRETTIER: false
           VALIDATE_TYPESCRIPT_STANDARD: false
+          VALIDATE_YAML: false
