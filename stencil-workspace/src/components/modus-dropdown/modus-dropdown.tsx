@@ -123,7 +123,7 @@ export class ModusDropdown {
       this.showDropdownListBorder ? 'list-border' : ''
     } ${this.animateList ? 'animate-list' : ''} ${this.classByPlacement.get(this.placement)}`;
     const left = this.placement === 'right' ? `${this.toggleElement?.offsetWidth}px` : 'unset';
-    const width = `${this.toggleElement?.offsetWidth ? this.toggleElement?.offsetWidth : 0}px`;
+    const width = `${(this.toggleElement?.offsetWidth || 0) < 240 ? 240 : this.toggleElement?.offsetWidth ? this.toggleElement?.offsetWidth : 0}px`;
     const dropdownClass = {
       dropdown: true,
       disabled: this.disabled,
