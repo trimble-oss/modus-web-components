@@ -71,6 +71,12 @@ export class ModusAutocomplete {
   /** The autocomplete's options. */
   @Prop({ mutable: true }) options: Promise<ModusAutocompleteOption[]> | ModusAutocompleteOption[] | string[];
 
+  /** A promise that returns the filtered options. */
+  @Prop() getFilteredOptions: (search: string) => Promise<ModusAutocompleteOption[]>;
+
+  /** Whether to skip filtering when the options change. **/
+  @Prop() skipFiltering: boolean;
+
   /** An array to hold the selected chips. */
   @State() selectedChips: ModusAutocompleteOption[] = [];
 
@@ -197,6 +203,7 @@ export class ModusAutocomplete {
     if (this.selectedChips.includes(value)) {
       return;
     }
+    console.log('value', value, this.selectedChips);
     this.selectedChips = [...this.selectedChips, value];
     this.valueChange.emit(this.selectedChips.map((opt) => opt.value));
     this.selectionsChanged.emit(this.selectedChips.map((opt) => opt.id));
@@ -319,9 +326,11 @@ export class ModusAutocomplete {
     }
   }
 
-  handleSearchChange = (search: string) => {
-    this.updateVisibleOptions(search);
-    this.updateVisibleCustomOptions(search);
+  handleSearchChange = (search: string, skipFiltering = false) => {
+    if (!skipFiltering) {
+      this.updateVisibleOptions(search);
+      this.updateVisibleCustomOptions(search);
+    }
     this.value = search;
     this.valueChange.emit(search);
   };
@@ -342,10 +351,23 @@ export class ModusAutocomplete {
   };
 
   handleTextInputValueChange = (event: CustomEvent<string>) => {
-    // Cancel the modus-text-input's value change event or else it will bubble to consumer.
-    event.stopPropagation();
-    this.disableFiltering = !this.disableCloseOnSelect;
-    this.handleSearchChange(event.detail);
+    if (typeof this.getFilteredOptions === 'function') {
+      const tempValue = event.detail;
+      this.handleSearchChange(tempValue, this.skipFiltering);
+
+      this.getFilteredOptions(tempValue).then((filteredOptions) => {
+        const currentValue = this.getValueAsString();
+        if (tempValue !== currentValue) {
+          return;
+        }
+        this.visibleOptions = filteredOptions;
+      });
+    } else {
+      // Cancel the modus-text-input's value change event or else it will bubble to consumer.
+      event.stopPropagation();
+      this.disableFiltering = !this.disableCloseOnSelect;
+      this.handleSearchChange(event.detail);
+    }
   };
 
   updateVisibleCustomOptions = (search = '') => {
@@ -378,6 +400,7 @@ export class ModusAutocomplete {
   };
 
   updateVisibleOptions = async (search = '') => {
+    console.log('updateVisibleOptions', search, this.hasFocus);
     if (!this.hasFocus) {
       return;
     }
@@ -387,11 +410,15 @@ export class ModusAutocomplete {
     if (isSearchEmpty) {
       this.selectedOption = '';
     }
-
-    if (!this.disableFiltering && !(this?.options instanceof Promise)) {
+    if (this?.getFilteredOptions) {
+      return;
+    }
+    console.log('this?.options', this?.options);
+    if (!this.disableFiltering) {
       this.visibleOptions = ((await this?.options) as ModusAutocompleteOption[])?.filter((o: ModusAutocompleteOption) => {
         return o?.value.toLowerCase().includes(search?.toLowerCase());
       });
+      console.log('visibleOptions', this.visibleOptions);
     } else {
       this.visibleOptions = (await this?.options) as ModusAutocompleteOption[];
     }
