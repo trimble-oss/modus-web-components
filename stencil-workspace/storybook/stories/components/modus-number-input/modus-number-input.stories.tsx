@@ -24,7 +24,7 @@ export default {
     },
     locale: {
       name: 'locale',
-      description: 'The locale',
+      description: 'The locale of the selected currency',
       table: {
         type: { summary: 'string' },
       },

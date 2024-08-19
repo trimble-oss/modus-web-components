@@ -16,7 +16,7 @@ export class ModusNumberInput {
   /** (optional) The currency symbol. */
   @Prop() currencySymbol = '';
 
-  /** (optional) The decimal character. */
+  /** (optional) The locale of the selected currency. */
   @Prop() locale: string;
 
   /** (optional) Whether the input is disabled. */
