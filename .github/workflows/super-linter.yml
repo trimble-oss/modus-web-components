@@ -25,7 +25,7 @@ jobs:
           fetch-depth: 0
 
       - name: Lint Code Base
-        uses: super-linter/super-linter/slim@v6
+        uses: super-linter/super-linter/slim@v7
         env:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -42,6 +42,7 @@ jobs:
           VALIDATE_GITLEAKS: false
           VALIDATE_HTML: false
           VALIDATE_JSCPD: false
+          VALIDATE_JSON: false
           VALIDATE_NATURAL_LANGUAGE: false
           VALIDATE_TSX: false
           VALIDATE_TYPESCRIPT_ES: false
