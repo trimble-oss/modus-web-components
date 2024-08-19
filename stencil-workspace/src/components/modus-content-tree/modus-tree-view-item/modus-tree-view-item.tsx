@@ -409,6 +409,15 @@ export class ModusTreeViewItem {
     this.editable = false;
   }
 
+  setDraggableState(draggable = false) {
+    if (this.draggableItem === false || this.droppableItem === false) {
+      return;
+    }
+    if (draggable) {
+      this.draggableItem = this.droppableItem = draggable;
+    }
+  }
+
   render(): HTMLLIElement {
     const {
       selected,
@@ -433,12 +442,7 @@ export class ModusTreeViewItem {
       ...(expandable ? { 'aria-expanded': expanded ? 'true' : 'false' } : {}),
       role: 'treeitem',
     };
-
-    if (draggable) {
-      this.draggableItem = draggable;
-      this.droppableItem = draggable;
-    }
-
+    this.setDraggableState(draggable);
     const sizeClass = `${TREE_ITEM_SIZE_CLASS.get(size || 'standard')}`;
     const tabIndex: string | number = isDisabled ? -1 : this.tabIndexValue;
     const treeItemClass = `tree-item ${this.isExpanded ? 'expanded' : ''} ${this.isChildren ? 'is-children' : ''} ${this.isLastChild && !this.isExpanded ? 'is-last-child' : ''}${selected ? 'selected' : ''} ${sizeClass} ${isDisabled ? 'disabled' : ''} ${borderless ? 'borderless' : ''}`;
