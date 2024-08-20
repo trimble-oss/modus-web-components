@@ -7,7 +7,9 @@ import {
   Component,
   Prop,
   Method,
-  h, // eslint-disable-line @typescript-eslint/no-unused-vars
+  h,
+  Event,
+  EventEmitter, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Cell } from '@tanstack/table-core';
 import { ModusTableCellBadge, ModusTableCellEditorArgs, ModusTableCellLink } from '../../../models/modus-table.models';
@@ -45,6 +47,8 @@ export class ModusTableCellMain {
     if (newValue) this.cellEl.classList.add('edit-mode');
     else this.cellEl.classList.remove('edit-mode');
   }
+
+  @Event() cellValueChanged: EventEmitter<TableCellEdited>;
 
   private cellEl: HTMLElement;
   private onCellClick: (e: MouseEvent) => void = (e) => this.handleCellClick(e);
@@ -144,6 +148,17 @@ export class ModusTableCellMain {
     }
   };
 
+  handleCellEditValuesChange(newValue: string, oldValue: string) {
+    const changeDetails: TableCellEdited = {
+      row: this.cell.row,
+      accessorKey: this.cell.column.columnDef[this.accessorKey],
+      newValue,
+      oldValue,
+    };
+
+    this.cellValueChanged.emit(changeDetails);
+  }
+
   handleCellEditorValueChange(newValue: string, oldValue: string) {
     if (this.editMode && newValue !== oldValue && this.valueChange) {
       this.valueChange({
@@ -233,10 +248,12 @@ export class ModusTableCellMain {
           <modus-table-cell-editor
             data-type={this.cell.column.columnDef[COLUMN_DEF_DATATYPE_KEY]}
             value={this.cell.getValue()}
+            error-text={(this.cell.row as any).original.errorText}
             type={this.getEditorType()}
             args={this.getEditorArgs()}
             valueChange={(newVal: string) => this.handleCellEditorValueChange(newVal, valueString)}
             keyDown={(event: KeyboardEvent, newVal: string) => this.handleCellEditorKeyDown(event, newVal, valueString)}
+            onValueChange={(newVal: string) => this.handleCellEditValuesChange(newVal, valueString)}
           />
         ) : (
           this.renderCellValue()

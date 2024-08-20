@@ -18,6 +18,137 @@
   <body data-mwc-theme="light">
     <main>
       <!-- Test components -->
+
+      <div style="width: 950px">
+        <modus-table hover="false" sort="false" />
+      </div>
+      <script>
+        document.querySelector('modus-table').columns = [
+          {
+            header: 'First Name',
+            accessorKey: 'firstName',
+            id: 'first-name',
+            dataType: 'text',
+            cellEditable: true,
+          },
+          {
+            header: 'Last Name',
+            accessorKey: 'lastName',
+            id: 'last-name',
+            dataType: 'text',
+          },
+          { header: 'Age', accessorKey: 'age', id: 'age', dataType: 'integer' },
+          {
+            header: 'Visits',
+            accessorKey: 'visits',
+            id: 'visits',
+            dataType: 'integer',
+          },
+          { header: 'Status', accessorKey: 'status', id: 'status', dataType: 'text' },
+          {
+            header: 'Profile Progress',
+            accessorKey: 'progress',
+            id: 'progress',
+            dataType: 'integer',
+          },
+          {
+            header: 'Created At',
+            accessorKey: 'createdAt',
+            id: 'createdAt',
+            dataType: 'date',
+          },
+        ];
+        const data = [
+          {
+            id: '1',
+            firstName: 'Gordon',
+            lastName: 'Lemke',
+            age: 40,
+            visits: 434,
+            progress: 97,
+            status: 'single',
+            createdAt: '2002-11-21T12:48:51.739Z',
+          },
+          {
+            id: '2',
+            firstName: 'Elliott',
+            lastName: 'Bosco',
+            age: 21,
+            visits: 348,
+            progress: 60,
+            status: 'complicated',
+            createdAt: '2012-02-08T12:14:22.776Z',
+          },
+          {
+            id: '3',
+            firstName: 'Agnes',
+            lastName: 'Breitenberg',
+            age: 34,
+            visits: 639,
+            progress: 84,
+            status: 'single',
+            createdAt: '1995-04-07T07:24:57.577Z',
+          },
+          {
+            id: '4',
+            firstName: 'Nicolette',
+            lastName: 'Stamm',
+            age: 13,
+            visits: 518,
+            progress: 28,
+            status: 'relationship',
+            createdAt: '2009-07-28T14:29:51.505Z',
+          },
+        ];
+
+        document.querySelector('modus-table').data = data;
+        document.querySelector('modus-table').addEventListener('cellValueChanged', (e) => {
+          console.log(e);
+          const modusTable = document.querySelector('modus-table');
+
+          const { newValue, row, accessorKey } = e.detail;
+          // const cell = modusTable.data[row][accessorKey];
+
+          if (accessorKey === 'firstName') {
+            // Validate the length of the new value
+
+            // console.log('newValue', e.detail);
+            // if ((newValue.length) >= 5) {
+            //   row.errorText = 'Value exceeds 5 characters!';
+            // } else {
+            //   row.errorText = '';
+            // }
+
+            console.log('rows', row);
+            const pattern = /^[a-zA-Z\s]*$/;
+            const regex = new RegExp(pattern);
+            const updatedData = [];
+
+            if (!regex.test(newValue)) {
+              updatedData = data.map((d, i) => {
+                if (i === row.index) {
+                  d.errorText = 'Only letters and spaces are allowed!';
+                }
+                return d;
+              });
+            } else {
+              updatedData = data.map((d, i) => {
+                if (i === row.index) {
+                  d.errorText = '';
+                }
+                return d;
+              });
+              console.log('empty error');
+              row.original.errorText = '';
+            }
+            // Re-render the table with updated data
+            modusTable.data = updatedData;
+          }
+
+          //  console.log('cellValueChanged', e.detail);
+        });
+
+      </script>
     </main>
   </body>
 </html>

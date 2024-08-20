@@ -27,10 +27,12 @@ import { createPopper, Instance } from '@popperjs/core';
 export class ModusTableCellEditor {
   @Prop() args: ModusTableCellEditorArgs;
   @Prop() dataType: string;
+  @Prop() errorText: string;
   @Prop() value: unknown;
   @Prop() type: string;
   @Prop() valueChange: (newValue: string) => void;
   @Prop() keyDown: (e: KeyboardEvent, newValue: string) => void;
+  @Prop() onValueChange: (newValue: string) => void;
 
   @State() errorMessage: string;
 
@@ -47,6 +49,7 @@ export class ModusTableCellEditor {
     if (this.inputElement['focusInput']) {
       this.inputElement['focusInput']();
     }
+    this.updateErrorMessage(this.errorText);
     this.createErrorTooltip();
   }
 
@@ -66,6 +69,14 @@ export class ModusTableCellEditor {
     }
   }
 
+  @State() errorMessages: string;
+
+  // @Listen('cellValueChanged', { target: 'document' })
+  // handleCellValueChanged(event: CustomEvent) {
+  //   const errorText = event.detail.row.errorText;
+  //   this.updateErrorMessage(errorText);
+  // }
+
   handleBlur: () => void = () => {
     this.valueChange(this.editedValue as string);
     this.destroyErrorTooltip();
@@ -76,8 +87,26 @@ export class ModusTableCellEditor {
   };
 
   handleError = (e: CustomEvent<string>) => {
-    this.errorMessage = e.detail;
-    this.showErrorTooltip();
+    this.updateErrorMessage(e.detail);
+  };
+
+  private updateErrorMessage(errorText: string): void {
+    this.errorMessage = errorText || '';
+    if (this.errorMessage) {
+      this.showErrorTooltip();
+    } else {
+      this.hideErrorTooltip();
+    }
+  }
+
+  handleTextInputChange = (e: CustomEvent<string>) => {
+    this.editedValue = e.detail;
+    this.onValueChange(this.editedValue as string);
+    if (this.errorMessage) {
+      this.showErrorTooltip();
+    } else {
+      this.hideErrorTooltip();
+    }
   };
 
   getDefaultProps = (ariaLabel) => ({
@@ -172,20 +201,12 @@ export class ModusTableCellEditor {
       <modus-text-input
         {...this.getDefaultProps('Text input')}
         value={this.value as string}
-        onValueChange={(e: CustomEvent<string>) => (this.editedValue = e.detail)}
+        onValueChange={this.handleTextInputChange}
         onBlur={this.handleBlur}
         onKeyDown={this.handleKeyDown}
         autoFocusInput
         size="large"
-        onValueError={(e: CustomEvent<string | null>) => {
-          if (e.detail) {
-            this.errorMessage = e.detail;
-            this.showErrorTooltip();
-          } else {
-            this.errorMessage = '';
-            this.hideErrorTooltip();
-          }
-        }}></modus-text-input>
+        errorText={this.errorText}></modus-text-input>
     );
   }
 
