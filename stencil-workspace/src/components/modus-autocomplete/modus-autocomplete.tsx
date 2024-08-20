@@ -203,7 +203,6 @@ export class ModusAutocomplete {
     if (this.selectedChips.includes(value)) {
       return;
     }
-    console.log('value', value, this.selectedChips);
     this.selectedChips = [...this.selectedChips, value];
     this.valueChange.emit(this.selectedChips.map((opt) => opt.value));
     this.selectionsChanged.emit(this.selectedChips.map((opt) => opt.id));
@@ -400,7 +399,6 @@ export class ModusAutocomplete {
   };
 
   updateVisibleOptions = async (search = '') => {
-    console.log('updateVisibleOptions', search, this.hasFocus);
     if (!this.hasFocus) {
       return;
     }
@@ -413,12 +411,10 @@ export class ModusAutocomplete {
     if (this?.getFilteredOptions) {
       return;
     }
-    console.log('this?.options', this?.options);
     if (!this.disableFiltering) {
       this.visibleOptions = ((await this?.options) as ModusAutocompleteOption[])?.filter((o: ModusAutocompleteOption) => {
         return o?.value.toLowerCase().includes(search?.toLowerCase());
       });
-      console.log('visibleOptions', this.visibleOptions);
     } else {
       this.visibleOptions = (await this?.options) as ModusAutocompleteOption[];
     }
