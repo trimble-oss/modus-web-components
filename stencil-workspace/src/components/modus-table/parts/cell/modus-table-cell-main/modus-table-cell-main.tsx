@@ -29,6 +29,7 @@ import { ModusTableCellLinkElement } from '../modus-table-cell-link-element';
 import { ModusTableCellBadgeElement } from '../modus-table-cell-badge-element';
 import { TableContext, TableCellEdited } from '../../../models/table-context.models';
 import ModusTableCellExpandIcons from '../modus-table-cell-expand-icons';
+import { createPopper, Instance } from '@popperjs/core';
 
 @Component({
   tag: 'modus-table-cell-main',
@@ -42,14 +43,21 @@ export class ModusTableCellMain {
 
   @State() editMode: boolean;
   @Watch('editMode') onEditModeChange(newValue: boolean) {
-    if (newValue) this.cellEl.classList.add('edit-mode');
-    else this.cellEl.classList.remove('edit-mode');
+    if (newValue) {
+      this.cellEl.classList.add('edit-mode');
+      this.createErrorTooltip(); // Create tooltip when entering edit mode
+    } else {
+      this.cellEl.classList.remove('edit-mode');
+      this.destroyErrorTooltip(); // Destroy tooltip when exiting edit mode
+    }
   }
 
   private cellEl: HTMLElement;
   private onCellClick: (e: MouseEvent) => void = (e) => this.handleCellClick(e);
   private onCellKeyDown: (e: KeyboardEvent) => void = (e: KeyboardEvent) => this.handleCellKeydown(e);
   private onCellBlur: (e: FocusEvent) => void = (e) => this.handleCellBlur(e);
+  private errorTooltip: HTMLElement;
+  private popperInstance: Instance;
 
   readonly cellEditableKey = 'cellEditable';
   readonly accessorKey = 'accessorKey';
@@ -67,6 +75,7 @@ export class ModusTableCellMain {
       this.cellEl.removeEventListener('keydown', this.onCellKeyDown);
       this.cellEl.removeEventListener('blur', this.onCellBlur);
     }
+    this.destroyErrorTooltip();
   }
 
   getEditorType(): string {
@@ -155,7 +164,12 @@ export class ModusTableCellMain {
     }
 
     this.editMode = false;
+    this.destroyErrorTooltip();
   }
+
+  handleCellEditorOnInputChange = () => {
+    this.showErrorTooltip();
+  };
 
   handleCellEditorKeyDown = (event: KeyboardEvent, newValue: string, oldValue: string) => {
     const key = event.key?.toLowerCase();
@@ -168,6 +182,7 @@ export class ModusTableCellMain {
     } else if (key === KEYBOARD_ESCAPE) {
       this.editMode = false;
       this.cellEl.focus();
+      this.destroyErrorTooltip();
     } else return;
 
     event.stopPropagation();
@@ -224,6 +239,59 @@ export class ModusTableCellMain {
     );
   }
 
+  createErrorTooltip(): void {
+    if (!this.errorTooltip) {
+      this.errorTooltip = document.createElement('div');
+      this.errorTooltip.className = 'error-tooltip';
+      this.cellEl.appendChild(this.errorTooltip);
+      this.popperInstance = createPopper(this.cellEl, this.errorTooltip, {
+        placement: 'bottom-start',
+        modifiers: [
+          {
+            name: 'offset',
+            options: {
+              offset: [0.2, 0.2], // Offset from the element
+              mainAxis: false,
+            },
+          },
+          {
+            name: 'preventOverflow',
+            options: {
+              boundary: 'viewport',
+            },
+          },
+        ],
+      });
+    }
+  }
+
+  showErrorTooltip(): void {
+    if (this.errorTooltip) {
+      this.errorTooltip.innerText = 'Invalid Input';
+      this.errorTooltip.style.display = 'block';
+      if (this.popperInstance) {
+        this.popperInstance.update();
+      }
+    }
+  }
+
+  hideErrorTooltip(): void {
+    if (this.errorTooltip) {
+      this.errorTooltip.style.display = 'none';
+    }
+  }
+
+  destroyErrorTooltip(): void {
+    if (this.popperInstance) {
+      this.popperInstance.destroy();
+      this.popperInstance = null;
+    }
+    if (this.errorTooltip) {
+      this.errorTooltip.remove();
+      this.errorTooltip = null;
+    }
+  }
+
   render(): void {
     const valueString = this.cell.getValue()?.toString();
 
@@ -237,6 +305,7 @@ export class ModusTableCellMain {
             args={this.getEditorArgs()}
             valueChange={(newVal: string) => this.handleCellEditorValueChange(newVal, valueString)}
             keyDown={(event: KeyboardEvent, newVal: string) => this.handleCellEditorKeyDown(event, newVal, valueString)}
+            onInputValueChange={this.handleCellEditorOnInputChange}
           />
         ) : (
           this.renderCellValue()
