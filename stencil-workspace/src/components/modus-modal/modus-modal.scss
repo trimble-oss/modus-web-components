@@ -43,7 +43,9 @@
       justify-content: space-between;
       padding: 0 $rem-16px;
 
-      .icon-close {
+      .icon-close,
+      .icon-expand,
+      .icon-collapse {
         cursor: pointer;
 
         path {
@@ -56,8 +58,21 @@
       }
     }
 
+    .header-buttons {
+      align-items: center;
+      display: flex;
+      gap: $rem-8px;
+      justify-content: center;
+
+      div {
+        font-size: 0; // to center align and remove the additional vertical space
+      }
+    }
+
     .body {
       height: auto;
+      max-height: calc(100dvh - 188px);
+      overflow-y: auto;
       padding: $rem-16px;
     }
 

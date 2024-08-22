@@ -9,8 +9,7 @@ export const IconCheck: FunctionalComponent<IconProps> = (props: IconProps) => (
     width={props.size ?? 16}
     onClick={props.onClick ? () => props.onClick() : null}
     viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg">
+    fill="none">
     <path
       fill-rule="evenodd"
       clip-rule="evenodd"

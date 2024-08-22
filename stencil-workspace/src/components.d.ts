@@ -204,7 +204,7 @@ export namespace Components {
         /**
           * The autocomplete's search value.
          */
-        "value": string;
+        "value": string | string[];
     }
     interface ModusBadge {
         /**
@@ -877,7 +877,7 @@ export namespace Components {
         "reverse": boolean;
     }
     interface ModusNavbarMainMenu {
-        "navbarId": string;
+        "parentNavbar": HTMLElement;
     }
     interface ModusNavbarNotificationsMenu {
         "reverse": boolean;
@@ -2043,7 +2043,7 @@ declare global {
     };
     interface HTMLModusAutocompleteElementEventMap {
         "optionSelected": string;
-        "valueChange": string;
+        "valueChange": string | string[];
         "selectionsChanged": string[];
     }
     interface HTMLModusAutocompleteElement extends Components.ModusAutocomplete, HTMLStencilElement {
@@ -3050,7 +3050,7 @@ declare namespace LocalJSX {
         /**
           * An event that fires when the input value changes. Emits the value string.
          */
-        "onValueChange"?: (event: ModusAutocompleteCustomEvent<string>) => void;
+        "onValueChange"?: (event: ModusAutocompleteCustomEvent<string | string[]>) => void;
         /**
           * The autocomplete's options.
          */
@@ -3082,7 +3082,7 @@ declare namespace LocalJSX {
         /**
           * The autocomplete's search value.
          */
-        "value"?: string;
+        "value"?: string | string[];
     }
     interface ModusBadge {
         /**
@@ -3858,7 +3858,7 @@ declare namespace LocalJSX {
         "reverse"?: boolean;
     }
     interface ModusNavbarMainMenu {
-        "navbarId"?: string;
+        "parentNavbar"?: HTMLElement;
     }
     interface ModusNavbarNotificationsMenu {
         "reverse"?: boolean;

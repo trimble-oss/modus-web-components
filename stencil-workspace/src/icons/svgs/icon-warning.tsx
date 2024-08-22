@@ -9,8 +9,7 @@ export const IconWarning: FunctionalComponent<IconProps> = (props: IconProps) =>
     width={props.size ?? 16}
     onClick={() => props.onClick()}
     viewBox="0 0 24 24"
-    fill={props.color ?? 'currentColor'}
-    xmlns="http://www.w3.org/2000/svg">
+    fill={props.color ?? 'currentColor'}>
     <path
       fill-rule="evenodd"
       clip-rule="evenodd"

@@ -9,7 +9,7 @@ jobs:
     permissions:
       issues: write
     runs-on: ubuntu-latest
-    if: ${{ github.actor != 'cjwinsor' && github.actor != 'coliff' && github.actor != 'egunther39' && github.actor != 'enowak1031' && github.actor != 'msankaran0712' && github.actor != 'rthanga1' && github.repository == 'trimble-oss/modus-web-components' }}
+    if: ${{ github.actor != 'cjwinsor' && github.actor != 'coliff' && github.actor != 'egunther39' && github.actor != 'ElishaSamPeterPrabhu' && github.actor != 'enowak1031' && github.actor != 'mitch-trimble' && github.actor != 'msankaran0712' && github.actor != 'prashanth-offcl' && github.actor != 'prashanthr6383' && github.actor != 'rthanga1' && github.repository == 'trimble-oss/modus-web-components' }}
     steps:
       - name: awaiting reply
         uses: actions-cool/issues-helper@v3

@@ -30,12 +30,6 @@ describe('modus-alert', () => {
     className = modusAlert.classByType.get('error');
     expect(className).toEqual('type-error');
 
-    className = modusAlert.classByType.get('info-gray');
-    expect(className).toEqual('type-info-gray');
-
-    className = modusAlert.classByType.get('info-gray-dark');
-    expect(className).toEqual('type-info-gray-dark');
-
     className = modusAlert.classByType.get('success');
     expect(className).toEqual('type-success');
 
@@ -45,13 +39,7 @@ describe('modus-alert', () => {
 
   it('should find valid infoType', async () => {
     const modusAlert = new ModusAlert();
-    let found = modusAlert.infoTypes.includes('info');
-    expect(found).toEqual(true);
-
-    found = modusAlert.infoTypes.includes('info-gray');
-    expect(found).toEqual(true);
-
-    found = modusAlert.infoTypes.includes('info-gray-dark');
+    const found = modusAlert.infoTypes.includes('info');
     expect(found).toEqual(true);
   });
 });

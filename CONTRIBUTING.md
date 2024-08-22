@@ -26,13 +26,20 @@ _We recommend using [nvm](https://github.com/nvm-sh/nvm). It is a great tool for
 
 ## Getting Started
 
+### Before you get started
+
+Before you get started we STRONGLY recommend that you save yourself a lot of time by scheduling a pre-design. Our PRs that had a predesign went smoothly and the ones that didn’t had lots of changes. Please schedule the predesign. You can request a predesign session in the [Modus Web Components chat group](https://mail.google.com/chat/u/0/#chat/space/AAAAQFpPtIY)
+
+To prepare for the predesign session please:
+
+- Bring your link to the approved Modus Figma designs (we only contribute Figma approved components)
+- Bring documentation on the component
+
 ### Running the App
 
 If this is your first time in the project, navigate to the `./stencil-workspace` directory and run `npm install` to download third-party packages.
 
-Once you've installed the project's packages, run `npm start`.
-A development environment will start up with the contents of `index.html`.
-This file provides a place to render components for development and end-to-end testing.
+Once you've installed the project's packages, run `npm run build`. After the build is complete, run `npm start`. A development environment will start up with the contents of `index.html`. This file provides a place to render components for development and end-to-end testing.
 
 All web components are located under the `./stencil-workspace/src/components` directory.
 
