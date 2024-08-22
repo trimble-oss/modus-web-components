@@ -10,6 +10,7 @@ import { ModusIconMap } from '../../icons/ModusIconMap';
 import ModusDatePickerCalendar from './utils/modus-date-picker.calendar';
 import ModusDatePickerState from './utils/modus-date-picker.state';
 import { ModusDateInputEventDetails } from '../modus-date-input/utils/modus-date-input.models';
+import { createPopper, Instance, Placement } from '@popperjs/core';
 
 @Component({
   tag: 'modus-date-picker',
@@ -22,6 +23,8 @@ export class ModusDatePicker {
   /** (optional) Label for the field. */
   @Prop() label: string;
 
+  @Prop() calendarPlacement: Placement = 'bottom-start';
+
   /** Needed for a better control over the state and avoid re-renders */
   @State() _forceUpdate = {};
 
@@ -31,6 +34,7 @@ export class ModusDatePicker {
   private _calendar: ModusDatePickerCalendar;
   private _dateInputs: { [key: string]: ModusDatePickerState } = {};
   private _locale = 'default';
+  private _popperInstance: Instance;
 
   private get _currentInput(): ModusDatePickerState {
     return Object.values(this._dateInputs).find((dt) => dt.isCalendarOpen());
@@ -38,6 +42,55 @@ export class ModusDatePicker {
 
   componentWillLoad() {
     this._calendar = new ModusDatePickerCalendar();
+  }
+
+  componentDidLoad() {
+    this.initializePopper();
+  }
+
+  componentDidUpdate() {
+    if (this._showCalendar) {
+      this.initializePopper();
+    } else {
+      this.destroyPopper();
+    }
+  }
+
+  disconnectedCallback() {
+    this.destroyPopper();
+  }
+
+  initializePopper() {
+    const referenceElement = this.element.parentElement as HTMLElement;
+    const popperElement = this.element.shadowRoot.querySelector('.calendar-container') as HTMLElement;
+
+    if (referenceElement && popperElement && !this._popperInstance) {
+      this._popperInstance = createPopper(referenceElement, popperElement, {
+        placement: this.calendarPlacement,
+        modifiers: [
+          {
+            name: 'offset',
+            options: {
+              offset: [0.2, 0.2],
+              mainAxis: false,
+            },
+          },
+          {
+            name: 'preventOverflow',
+            options: {
+              boundary: 'viewport',
+            },
+          },
+        ],
+      });
+    }
+  }
+
+  destroyPopper() {
+    if (this._popperInstance) {
+      this._popperInstance.destroy();
+      this._popperInstance = null;
+    }
   }
 
   /** Handlers */
@@ -341,7 +394,7 @@ export class ModusDatePicker {
         <div class="date-inputs" part="date-inputs">
           <slot onSlotchange={() => this.handleSlotChange()}></slot>
         </div>
-        <div style={{ display: 'inline-flex' }}>
+        <div class="calendar" part="calendar" style={{ display: 'inline-flex' }}>
           {this._showCalendar && (
             <nav class="calendar-container" aria-label="Pick a Date">
               {this.renderCalendarHeader()}

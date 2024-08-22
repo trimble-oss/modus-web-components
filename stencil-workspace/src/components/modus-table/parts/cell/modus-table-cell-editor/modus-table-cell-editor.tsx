@@ -225,6 +225,7 @@ export class ModusTableCellEditor {
           format={format}
           size="large"
           show-calendar-icon="true"
+          calendar-placement="auto"
           value={this.value as string}
           onValueChange={(e: CustomEvent<ModusDateInputEventDetails>) => {
             this.editedValue = e.detail[valueKey];

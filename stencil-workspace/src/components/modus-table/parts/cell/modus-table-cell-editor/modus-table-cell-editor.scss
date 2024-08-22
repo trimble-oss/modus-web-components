@@ -39,6 +39,11 @@ table.density-compact {
   justify-content: center;
 }
 
+.date-picker-container::part(calendar) {
+  position: fixed;
+  z-index: 99;
+}
+
 .editor::part(input-container) {
   border: 2px solid var(--modus-input-border-active-color, #217cbb);
   border-radius: unset;
