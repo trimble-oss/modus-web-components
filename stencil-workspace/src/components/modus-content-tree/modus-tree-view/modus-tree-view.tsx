@@ -14,7 +14,7 @@ import {
   TreeViewItemOptions,
   TreeViewItemInfo,
   TreeViewItemDragState,
-  TreeItemChange,
+  TreeItemSelectionChange,
   Position,
 } from '../modus-content-tree.types';
 import { ModusContentTreeDragItem } from '../modus-content-tree-drag-item';
@@ -60,7 +60,7 @@ export class ModusTreeView {
 
   @Event() itemDrop: EventEmitter<{ [key: string]: TreeViewItemInfo }>;
 
-  @Event() itemChange: EventEmitter<TreeItemChange>;
+  @Event() selectionChange: EventEmitter<TreeItemSelectionChange>;
 
   private currentItem: TreeViewItemInfo;
 
@@ -603,8 +603,8 @@ export class ModusTreeView {
     current.focusItem();
   }
 
-  handleChangeTreeitem(isSelected: boolean, itemId: string): void {
-    this.itemChange.emit({ isSelected, itemId });
+  handleChangeTreeitem(isSelected: boolean, nodeId: string): void {
+    this.selectionChange.emit({ isSelected, nodeId });
   }
 
   handleItemSelection(itemId: string, event?: KeyboardEvent | MouseEvent): void {

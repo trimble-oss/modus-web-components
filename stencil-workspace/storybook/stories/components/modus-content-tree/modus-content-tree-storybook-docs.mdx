@@ -647,18 +647,17 @@ Every item and the elements such as drag icon, expand & collapse icon and the ch
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
 | itemActionClick | Fired when an action is clicked within any tree item. Includes both the `actionId` and `nodeId` of the action and item, respectively. | `{ actionId: string, nodeId: string }`               |
 | itemDrop        | Fired when an item is dropped in a different position. Includes the updated item's map.                                               | `{ [key: string]: TreeViewItemInfo }`                |
-| itemChange      | Fired when an multiple items is selected using keyboard                                                                               | `CustomEvent<{isSelected: boolean, itemId: number}>` |
+| selectionChange | Fired when the item's selection state changes by any means, such as mouse or keyboard interactions                                    | `CustomEvent<{isSelected: boolean, itemId: number}>` |
 
 ##### Modus Tree View Item
 
-| Name             | Description                                                                           | Emits                                                |
-| ---------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| actionClick      | Fired when an action button within the tree item is clicked. Includes the `actionId`. | `{ actionId: string }`                               |
-| checkboxClick    | An event that fires on tree item checkbox click                                       | boolean                                              |
-| itemClick        | An event that fires on tree item click                                                | boolean                                              |
-| itemExpandToggle | An event that fires on tree item expand/collapse                                      | boolean                                              |
-| itemLabelChange  | An event that fires on tree item label change                                         | `CustomEvent<string>`                                |
-| itemChange       | An event that fires on tree item click                                                | `CustomEvent<{isSelected: boolean, itemId: number}>` |
+| Name             | Description                                                                           | Emits                  |
+| ---------------- | ------------------------------------------------------------------------------------- | ---------------------- |
+| actionClick      | Fired when an action button within the tree item is clicked. Includes the `actionId`. | `{ actionId: string }` |
+| checkboxClick    | An event that fires on tree item checkbox click                                       | boolean                |
+| itemClick        | An event that fires on tree item click                                                | boolean                |
+| itemExpandToggle | An event that fires on tree item expand/collapse                                      | boolean                |
+| itemLabelChange  | An event that fires on tree item label change                                         | `CustomEvent<string>`  |
 
 ### Methods
 

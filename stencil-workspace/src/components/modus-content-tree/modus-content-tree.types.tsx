@@ -37,8 +37,8 @@ export type TreeViewItemInfo = {
   level?: number;
 };
 
-export type TreeItemChange = {
-  itemId: string;
+export type TreeItemSelectionChange = {
+  nodeId: string;
   isSelected: boolean;
 };
 

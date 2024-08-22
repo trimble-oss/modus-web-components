@@ -25,8 +25,8 @@
 | Event             | Description                                                                                                                           | Type                                                    |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
 | `itemActionClick` | Fired when an action is clicked within any tree item. Includes both the `actionId` and `nodeId` of the action and item, respectively. | `CustomEvent<any>`                                      |
-| `itemChange`      |                                                                                                                                       | `CustomEvent<{ itemId: string; isSelected: boolean; }>` |
 | `itemDrop`        |                                                                                                                                       | `CustomEvent<{ [key: string]: TreeViewItemInfo; }>`     |
+| `selectionChange` |                                                                                                                                       | `CustomEvent<{ nodeId: string; isSelected: boolean; }>` |
 
 
 ----------------------------------------------
