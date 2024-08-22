@@ -146,7 +146,9 @@ export class ModusModal {
       this.focusWrapping = new ModalFocusWrapping(this.modalContentRef, this.startTrapRef);
     }
     if (this.modalBodyRef) {
-      this.resizeObserver = new ResizeObserver(() => this.checkContentScrollable());
+      this.resizeObserver = new ResizeObserver(() => {
+        this.checkContentScrollable();
+      });
       this.resizeObserver.observe(this.modalBodyRef);
     }
     this.checkContentScrollable();

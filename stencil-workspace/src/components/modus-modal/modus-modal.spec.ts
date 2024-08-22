@@ -1,20 +1,23 @@
 import { newSpecPage } from '@stencil/core/testing';
 import { ModusModal } from './modus-modal';
 
+global.ResizeObserver = class {
+  callback: any;
+  constructor(callback) {
+    this.callback = callback;
+  }
+  observe(target: Element) {
+    return target;
+  }
+  unobserve(target: Element) {
+    return target;
+  }
+  disconnect() {
+    return null;
+  }
+};
+
 describe('modus-modal', () => {
-  beforeAll(() => {
-    global.ResizeObserver = class {
-      observe() {
-        return null;
-      }
-      unobserve() {
-        return null;
-      }
-      disconnect() {
-        return null;
-      }
-    };
-  });
   it('renders', async () => {
     const { root } = await newSpecPage({
       components: [ModusModal],
