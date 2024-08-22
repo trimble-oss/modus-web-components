@@ -3,6 +3,8 @@ import { Component, Element, Event, EventEmitter, h, JSX, Listen, Method, Prop, 
 import { IconClose } from '../../icons/svgs/icon-close';
 import { FocusWrap, ModalFocusWrapping } from './modal-focus-wrapping';
 import { Fragment } from '@stencil/core/internal';
+import { IconCollapse } from '../../icons/generated-icons/IconCollapse';
+import { IconExpand } from '../../icons/generated-icons/IconExpand';
 
 /**
  * @slot footerContent - Slot for a custom footer content
@@ -47,7 +49,7 @@ export class ModusModal {
   @Prop() backdrop: 'default' | 'static' = 'default';
 
   /** (optional) The modal's full screen view */
-  @Prop() fullscreen = false;
+  @Prop({ mutable: true }) fullscreen = false;
 
   /** An event that fires on modal close.  */
   @Event() closed: EventEmitter;
@@ -94,6 +96,10 @@ export class ModusModal {
 
   @State() visible: boolean;
 
+  toggleFullscreen(): void {
+    this.fullscreen = !this.fullscreen;
+  }
+
   handleModalContentMouseDown(): void {
     // If Mouse was dragged off from the Modal content, ignore mouse up on overlay preventing Modal to close
     this.ignoreOverlayClick = true;
@@ -118,23 +124,21 @@ export class ModusModal {
   }
 
   handleEnterKeydown(event: KeyboardEvent, callback: () => void): void {
-    switch (event.code) {
-      case 'Enter':
-        callback();
-        break;
+    if (event.code === 'Enter') {
+      callback();
     }
   }
 
-  handleCloseKeydown(event: KeyboardEvent): void {
-    this.handleEnterKeydown(event, () => this.close());
+  handlePrimaryClick(): void {
+    if (!this.primaryButtonDisabled) {
+      this.primaryButtonClick.emit();
+    }
   }
 
-  handlePrimaryKeydown(event: KeyboardEvent): void {
-    this.handleEnterKeydown(event, () => this.primaryButtonClick.emit());
-  }
-
-  handleSecondaryKeydown(event: KeyboardEvent): void {
-    this.handleEnterKeydown(event, () => this.secondaryButtonClick.emit());
+  handleSecondaryClick(): void {
+    if (!this.secondaryButtonDisabled) {
+      this.secondaryButtonClick.emit();
+    }
   }
 
   componentDidRender() {
@@ -181,13 +185,23 @@ export class ModusModal {
     return (
       <header class={{ scrollable: this.isContentScrollable }}>
         {this.headerText}
-        <div
-          role="button"
-          tabindex={0}
-          aria-label="Close"
-          onClick={() => this.close()}
-          onKeyDown={(event) => this.handleCloseKeydown(event)}>
-          <IconClose size="20" />
+        <div class="header-buttons">
+          <div
+            role="button"
+            tabindex={0}
+            aria-label={this.fullscreen ? 'Collapse' : 'Expand'}
+            onClick={() => this.toggleFullscreen()}
+            onKeyDown={(event) => this.handleEnterKeydown(event, () => this.toggleFullscreen())}>
+            {this.fullscreen ? <IconCollapse size="24" /> : <IconExpand size="24" />}
+          </div>
+          <div
+            role="button"
+            tabindex={0}
+            aria-label="Close"
+            onClick={() => this.close()}
+            onKeyDown={(event) => this.handleEnterKeydown(event, () => this.close())}>
+            <IconClose size="24" />
+          </div>
         </div>
       </header>
     );
@@ -207,8 +221,7 @@ export class ModusModal {
               button-style="outline"
               color="secondary"
               ariaLabel={this.secondaryButtonAriaLabel}
-              onButtonClick={() => this.secondaryButtonClick.emit()}
-              onKeyDown={(event) => this.handlePrimaryKeydown(event)}>
+              onButtonClick={() => this.handleSecondaryClick()}>
               {this.secondaryButtonText}
             </modus-button>
           )}
@@ -217,8 +230,7 @@ export class ModusModal {
               disabled={this.primaryButtonDisabled}
               color="primary"
               ariaLabel={this.primaryButtonAriaLabel}
-              onButtonClick={() => this.primaryButtonClick.emit()}
-              onKeyDown={(event) => this.handleSecondaryKeydown(event)}>
+              onButtonClick={() => this.handlePrimaryClick()}>
               {this.primaryButtonText}
             </modus-button>
           )}

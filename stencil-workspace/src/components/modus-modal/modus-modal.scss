@@ -46,7 +46,9 @@
         border-bottom: 1px solid $modus-modal-divider-color;
       }
 
-      .icon-close {
+      .icon-close,
+      .icon-expand,
+      .icon-collapse {
         cursor: pointer;
 
         path {
@@ -56,6 +58,17 @@
         &:hover path {
           opacity: $modus-modal-close-hover-opacity;
         }
+      }
+    }
+
+    .header-buttons {
+      align-items: center;
+      display: flex;
+      gap: $rem-8px;
+      justify-content: center;
+
+      div {
+        font-size: 0; // to center align and remove the additional vertical space
       }
     }
 
