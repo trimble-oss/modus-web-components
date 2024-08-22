@@ -71,6 +71,7 @@ export default {
         'itemLabelChange modus-tree-view-item',
         'itemDrop modus-tree-view',
         'itemChange modus-tree-view',
+        'itemChange modus-tree-view',
       ],
     },
     controls: { expanded: true, sort: 'requiredFirst' },

@@ -2797,6 +2797,7 @@ declare global {
         "checkboxClick": boolean;
         "itemLabelChange": string;
         "itemClick": boolean;
+        "itemChange": TreeItemChange;
         "itemExpandToggle": boolean;
         "itemAdded": HTMLElement;
         "actionClick": any;
@@ -4871,6 +4872,7 @@ declare namespace LocalJSX {
          */
         "onCheckboxClick"?: (event: ModusTreeViewItemCustomEvent<boolean>) => void;
         "onItemAdded"?: (event: ModusTreeViewItemCustomEvent<HTMLElement>) => void;
+        "onItemChange"?: (event: ModusTreeViewItemCustomEvent<TreeItemChange>) => void;
         /**
           * An event that fires on tree item click
          */
