@@ -218,6 +218,7 @@ export class ModusTableCellEditor {
     return (
       <modus-date-picker
         onBlur={this.handleBlur}
+        calendar-placement="auto"
         onClick={(e: MouseEvent) => e.stopPropagation()}
         class="date-picker-container">
         <modus-date-input
@@ -225,7 +226,6 @@ export class ModusTableCellEditor {
           format={format}
           size="large"
           show-calendar-icon="true"
-          calendar-placement="auto"
           value={this.value as string}
           onValueChange={(e: CustomEvent<ModusDateInputEventDetails>) => {
             this.editedValue = e.detail[valueKey];

@@ -23,6 +23,7 @@ export class ModusDatePicker {
   /** (optional) Label for the field. */
   @Prop() label: string;
 
+  /** (optional) The placement of the calendar popup */
   @Prop() calendarPlacement: Placement = 'bottom-start';
 
   /** Needed for a better control over the state and avoid re-renders */
