@@ -1,6 +1,6 @@
 export { Components, JSX } from './components';
 export { Crumb } from './components/modus-breadcrumb/modus-breadcrumb';
-export { TreeViewItemInfo } from './components/modus-content-tree/modus-content-tree.types';
+export { TreeItemSelectionChange, TreeViewItemInfo } from './components/modus-content-tree/modus-content-tree.types';
 export { ModusNavbarApp } from './components/modus-navbar/apps-menu/modus-navbar-apps-menu';
 export * from './components/modus-data-table/modus-data-table.models';
 export { ModusAutocompleteOption } from './components/modus-autocomplete/modus-autocomplete';

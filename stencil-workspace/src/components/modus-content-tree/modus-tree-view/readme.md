@@ -22,10 +22,11 @@
 
 ## Events
 
-| Event             | Description                                                                                                                           | Type                                                |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
-| `itemActionClick` | Fired when an action is clicked within any tree item. Includes both the `actionId` and `nodeId` of the action and item, respectively. | `CustomEvent<any>`                                  |
-| `itemDrop`        |                                                                                                                                       | `CustomEvent<{ [key: string]: TreeViewItemInfo; }>` |
+| Event                 | Description                                                                                                                           | Type                                                    |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| `itemActionClick`     | Fired when an action is clicked within any tree item. Includes both the `actionId` and `nodeId` of the action and item, respectively. | `CustomEvent<any>`                                      |
+| `itemDrop`            |                                                                                                                                       | `CustomEvent<{ [key: string]: TreeViewItemInfo; }>`     |
+| `itemSelectionChange` |                                                                                                                                       | `CustomEvent<{ nodeId: string; isSelected: boolean; }>` |
 
 
 ----------------------------------------------

@@ -70,6 +70,7 @@ export default {
         'itemClick modus-tree-view-item',
         'itemLabelChange modus-tree-view-item',
         'itemDrop modus-tree-view',
+        'itemSelectionChange modus-tree-view',
       ],
     },
     controls: { expanded: true, sort: 'requiredFirst' },

@@ -26,7 +26,7 @@ import { TableCellEdited, TableContext } from "./components/modus-table/models/t
 import { Tab } from "./components/modus-tabs/modus-tabs";
 import { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
 import { ModusToolTipPlacement } from "./components/modus-tooltip/modus-tooltip.models";
-import { TreeViewItemInfo, TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
+import { TreeItemSelectionChange, TreeViewItemInfo, TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 import { ModusActionBarOptions as ModusActionBarOptions1 } from "./components/modus-action-bar/modus-action-bar";
 export { ModusActionBarOptions } from "./components/modus-action-bar/modus-action-bar";
 export { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
@@ -49,7 +49,7 @@ export { TableCellEdited, TableContext } from "./components/modus-table/models/t
 export { Tab } from "./components/modus-tabs/modus-tabs";
 export { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
 export { ModusToolTipPlacement } from "./components/modus-tooltip/modus-tooltip.models";
-export { TreeViewItemInfo, TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
+export { TreeItemSelectionChange, TreeViewItemInfo, TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export { ModusActionBarOptions as ModusActionBarOptions1 } from "./components/modus-action-bar/modus-action-bar";
 export namespace Components {
     interface ModusAccordion {
@@ -2776,6 +2776,7 @@ declare global {
     };
     interface HTMLModusTreeViewElementEventMap {
         "itemDrop": { [key: string]: TreeViewItemInfo };
+        "itemSelectionChange": TreeItemSelectionChange;
         "itemActionClick": any;
     }
     interface HTMLModusTreeViewElement extends Components.ModusTreeView, HTMLStencilElement {
@@ -2796,6 +2797,7 @@ declare global {
         "checkboxClick": boolean;
         "itemLabelChange": string;
         "itemClick": boolean;
+        "itemSelectionChange": TreeItemSelectionChange;
         "itemExpandToggle": boolean;
         "itemAdded": HTMLElement;
         "actionClick": any;
@@ -4818,6 +4820,7 @@ declare namespace LocalJSX {
          */
         "onItemActionClick"?: (event: ModusTreeViewCustomEvent<any>) => void;
         "onItemDrop"?: (event: ModusTreeViewCustomEvent<{ [key: string]: TreeViewItemInfo }>) => void;
+        "onItemSelectionChange"?: (event: ModusTreeViewCustomEvent<TreeItemSelectionChange>) => void;
         /**
           * (optional) Set selected tree items
          */
@@ -4881,6 +4884,7 @@ declare namespace LocalJSX {
           * An event that fires on tree item label changes
          */
         "onItemLabelChange"?: (event: ModusTreeViewItemCustomEvent<string>) => void;
+        "onItemSelectionChange"?: (event: ModusTreeViewItemCustomEvent<TreeItemSelectionChange>) => void;
         /**
           * (optional) Tab Index for the tree item
          */
