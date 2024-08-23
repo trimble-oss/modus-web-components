@@ -12,7 +12,7 @@ import {
   FunctionalComponent,
 } from '@stencil/core';
 import { ModusIconMap } from '../../../icons/ModusIconMap';
-import { TreeViewItemOptions } from '../modus-content-tree.types';
+import { TreeItemSelectionChange, TreeViewItemOptions } from '../modus-content-tree.types';
 import { TREE_ITEM_SIZE_CLASS } from '../modus-content-tree.constants';
 import { ModusActionBarOptions } from '../../modus-action-bar/modus-action-bar';
 
@@ -52,6 +52,8 @@ export class ModusTreeViewItem {
 
   /** An event that fires on tree item click */
   @Event() itemClick: EventEmitter<boolean>;
+
+  @Event() itemSelectionChange: EventEmitter<TreeItemSelectionChange>;
 
   /** An event that fires on tree item expand/collapse */
   @Event() itemExpandToggle: EventEmitter<boolean>;
@@ -252,6 +254,9 @@ export class ModusTreeViewItem {
 
       onItemSelection(this.nodeId, e);
       this.itemClick.emit(hasItemSelected(this.nodeId));
+      if (!e.ctrlKey) {
+        this.itemSelectionChange.emit({ isSelected: hasItemSelected(this.nodeId), nodeId: this.nodeId });
+      }
     }
   }
 

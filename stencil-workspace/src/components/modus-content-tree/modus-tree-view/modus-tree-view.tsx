@@ -10,7 +10,13 @@ import {
   State,
   Watch,
 } from '@stencil/core';
-import { TreeViewItemOptions, TreeViewItemInfo, TreeViewItemDragState, Position } from '../modus-content-tree.types';
+import {
+  TreeViewItemOptions,
+  TreeViewItemInfo,
+  TreeViewItemDragState,
+  TreeItemSelectionChange,
+  Position,
+} from '../modus-content-tree.types';
 import { ModusContentTreeDragItem } from '../modus-content-tree-drag-item';
 
 @Component({
@@ -53,6 +59,8 @@ export class ModusTreeView {
   @State() isDraggingWithKeyboard: boolean;
 
   @Event() itemDrop: EventEmitter<{ [key: string]: TreeViewItemInfo }>;
+
+  @Event() itemSelectionChange: EventEmitter<TreeItemSelectionChange>;
 
   private currentItem: TreeViewItemInfo;
 
@@ -595,6 +603,10 @@ export class ModusTreeView {
     current.focusItem();
   }
 
+  handleChangeTreeitem(isSelected: boolean, nodeId: string): void {
+    this.itemSelectionChange.emit({ isSelected, nodeId });
+  }
+
   handleItemSelection(itemId: string, event?: KeyboardEvent | MouseEvent): void {
     if (this.items[itemId].disabled) return;
     const allowMultipleSelection = this.multiSelection && event && (event.shiftKey || event.ctrlKey || event.metaKey);
@@ -606,11 +618,13 @@ export class ModusTreeView {
     if (isSelected) {
       if (allowMultipleSelection) {
         newItems.push(itemId);
+        this.handleChangeTreeitem(true, itemId);
       } else {
         newItems = [itemId];
       }
     } else {
       newItems = newItems.filter((i) => i !== itemId);
+      if (allowMultipleSelection) this.handleChangeTreeitem(false, itemId);
     }
     this.selectedItems = [...newItems];
     this.syncItems.push(...oldItems, ...newItems);
