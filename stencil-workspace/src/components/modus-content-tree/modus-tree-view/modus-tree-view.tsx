@@ -60,7 +60,7 @@ export class ModusTreeView {
 
   @Event() itemDrop: EventEmitter<{ [key: string]: TreeViewItemInfo }>;
 
-  @Event() selectionChange: EventEmitter<TreeItemSelectionChange>;
+  @Event() itemSelectionChange: EventEmitter<TreeItemSelectionChange>;
 
   private currentItem: TreeViewItemInfo;
 
@@ -604,7 +604,7 @@ export class ModusTreeView {
   }
 
   handleChangeTreeitem(isSelected: boolean, nodeId: string): void {
-    this.selectionChange.emit({ isSelected, nodeId });
+    this.itemSelectionChange.emit({ isSelected, nodeId });
   }
 
   handleItemSelection(itemId: string, event?: KeyboardEvent | MouseEvent): void {

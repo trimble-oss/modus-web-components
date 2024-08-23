@@ -53,7 +53,7 @@ export class ModusTreeViewItem {
   /** An event that fires on tree item click */
   @Event() itemClick: EventEmitter<boolean>;
 
-  @Event() selectionChange: EventEmitter<TreeItemSelectionChange>;
+  @Event() itemSelectionChange: EventEmitter<TreeItemSelectionChange>;
 
   /** An event that fires on tree item expand/collapse */
   @Event() itemExpandToggle: EventEmitter<boolean>;
@@ -255,7 +255,7 @@ export class ModusTreeViewItem {
       onItemSelection(this.nodeId, e);
       this.itemClick.emit(hasItemSelected(this.nodeId));
       if (!e.ctrlKey) {
-        this.selectionChange.emit({ isSelected: hasItemSelected(this.nodeId), nodeId: this.nodeId });
+        this.itemSelectionChange.emit({ isSelected: hasItemSelected(this.nodeId), nodeId: this.nodeId });
       }
     }
   }

@@ -2776,7 +2776,7 @@ declare global {
     };
     interface HTMLModusTreeViewElementEventMap {
         "itemDrop": { [key: string]: TreeViewItemInfo };
-        "selectionChange": TreeItemSelectionChange;
+        "itemSelectionChange": TreeItemSelectionChange;
         "itemActionClick": any;
     }
     interface HTMLModusTreeViewElement extends Components.ModusTreeView, HTMLStencilElement {
@@ -2797,7 +2797,7 @@ declare global {
         "checkboxClick": boolean;
         "itemLabelChange": string;
         "itemClick": boolean;
-        "selectionChange": TreeItemSelectionChange;
+        "itemSelectionChange": TreeItemSelectionChange;
         "itemExpandToggle": boolean;
         "itemAdded": HTMLElement;
         "actionClick": any;
@@ -4820,7 +4820,7 @@ declare namespace LocalJSX {
          */
         "onItemActionClick"?: (event: ModusTreeViewCustomEvent<any>) => void;
         "onItemDrop"?: (event: ModusTreeViewCustomEvent<{ [key: string]: TreeViewItemInfo }>) => void;
-        "onSelectionChange"?: (event: ModusTreeViewCustomEvent<TreeItemSelectionChange>) => void;
+        "onItemSelectionChange"?: (event: ModusTreeViewCustomEvent<TreeItemSelectionChange>) => void;
         /**
           * (optional) Set selected tree items
          */
@@ -4884,7 +4884,7 @@ declare namespace LocalJSX {
           * An event that fires on tree item label changes
          */
         "onItemLabelChange"?: (event: ModusTreeViewItemCustomEvent<string>) => void;
-        "onSelectionChange"?: (event: ModusTreeViewItemCustomEvent<TreeItemSelectionChange>) => void;
+        "onItemSelectionChange"?: (event: ModusTreeViewItemCustomEvent<TreeItemSelectionChange>) => void;
         /**
           * (optional) Tab Index for the tree item
          */
