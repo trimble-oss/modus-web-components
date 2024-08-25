@@ -52,7 +52,7 @@ export default {
         type: { summary: 'boolean' },
       },
     },
-    isDraggable: {
+    enableReordering: {
       description: 'Sets draggable state to be true to all the children',
       table: {
         type: { summary: 'boolean' },
@@ -88,7 +88,7 @@ export default {
 
 const Template = ({
   borderless,
-  isDraggable,
+  enableReordering,
   checkboxSelection,
   multiCheckboxSelection,
   multiSelection,
@@ -97,7 +97,7 @@ const Template = ({
 }) => html`
   <modus-tree-view
     style="width:400px;"
-    is-draggable=${isDraggable ? 'true' : 'false'}
+    enable-reordering=${enableReordering ? 'true' : 'false'}
     borderless=${borderless ? 'true' : 'false'}
     checkbox-selection=${checkboxSelection ? 'true' : 'false'}
     disable-tabbing=${disableTabbing ? 'true' : 'false'}
@@ -125,7 +125,7 @@ const Template = ({
 
 const SlotIconTemplate = ({
   borderless,
-  isDraggable,
+  enableReordering,
   checkboxSelection,
   multiCheckboxSelection,
   multiSelection,
@@ -135,7 +135,7 @@ const SlotIconTemplate = ({
 }) => html`
   <modus-tree-view
     style="width:400px;"
-    is-draggable=${isDraggable}
+    enable-reordering=${enableReordering}
     borderless=${borderless ? 'true' : 'false'}
     checkbox-selection=${checkboxSelection ? 'true' : 'false'}
     disable-tabbing=${disableTabbing ? 'true' : 'false'}
@@ -158,7 +158,7 @@ const SlotIconTemplate = ({
 export const Default = Template.bind({});
 Default.args = {
   borderless: false,
-  isDraggable: false,
+  enableReordering: false,
   checkboxSelection: false,
   disableTabbing: false,
   multiCheckboxSelection: false,
@@ -182,7 +182,7 @@ MultiSelection.args = { ...Default.args, multiSelection: true, checkboxSelection
 
 const ActionBarTemplate = ({
   borderless,
-  isDraggable,
+  enableReordering,
   checkboxSelection,
   multiCheckboxSelection,
   multiSelection,
@@ -266,7 +266,7 @@ const ActionBarTemplate = ({
       </modus-button>
     </div>
     <modus-tree-view
-      is-draggable=${isDraggable}
+      enable-reordering=${enableReordering}
       borderless=${borderless ? 'true' : 'false'}
       checkbox-selection=${checkboxSelection ? 'true' : 'false'}
       disable-tabbing=${disableTabbing ? 'true' : 'false'}
@@ -418,12 +418,7 @@ const ActionBarScript = () => {
     });
 
     dragButton.addEventListener("buttonClick", () => {
-      const isDraggable = !root.children[0].draggableItem;
-      getItems().forEach((val, key) => {
-        const element =  querySelect(key);
-        element.draggableItem = isDraggable;
-        element.droppableItem = true;
-      })
+      root.enableReordering = !root.enableReordering;
     });
   }
     actionBarScript();
@@ -437,7 +432,7 @@ CustomActionBar.args = { ...Default.args };
 
 const FilterTemplate = ({
   borderless,
-  isDraggable,
+  enableReordering,
   checkboxSelection,
   multiCheckboxSelection,
   multiSelection,
@@ -454,7 +449,7 @@ const FilterTemplate = ({
       disabled="true"
       include-search-icon></modus-text-input>
     <modus-tree-view
-      is-draggable=${isDraggable}
+      enable-reordering=${enableReordering}
       borderless=${borderless ? 'true' : 'false'}
       checkbox-selection=${checkboxSelection ? 'true' : 'false'}
       disable-tabbing=${disableTabbing ? 'true' : 'false'}
@@ -562,7 +557,7 @@ CustomFilter.args = { ...Default.args };
 
 const WithItemActionBarTemplate = ({
   borderless,
-  isDraggable,
+  enableReordering,
   checkboxSelection,
   multiCheckboxSelection,
   multiSelection,
@@ -572,7 +567,7 @@ const WithItemActionBarTemplate = ({
   <div style="display: flex; flex-direction: column; width: 400px;">
     <modus-tree-view
       style="width:400px;"
-      is-draggable=${isDraggable}
+      enable-reordering=${enableReordering}
       borderless=${borderless}
       checkbox-selection=${checkboxSelection}
       checked-items="false"

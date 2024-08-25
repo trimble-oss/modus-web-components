@@ -31,7 +31,7 @@ export class ModusTreeView {
   @Prop({ mutable: true }) disableTabbing: boolean;
 
   /** (optional) Sets draggable state to be true to all the children */
-  @Prop() isDraggable: boolean;
+  @Prop() enableReordering: boolean;
 
   /** (optional) Set expanded tree items */
   @Prop({ mutable: true }) expandedItems: string[] = [];
@@ -281,7 +281,7 @@ export class ModusTreeView {
   @Watch('multiSelection')
   @Watch('size')
   @Watch('borderless')
-  @Watch('isDraggable')
+  @Watch('enableReordering')
   handleOptionsProps() {
     const options = this.getTreeViewItemOptions();
     Object.values(this.items).forEach(({ element }) => {
@@ -493,7 +493,7 @@ export class ModusTreeView {
       size: this.size,
       borderless: this.borderless,
       disableTabbing: this.disableTabbing,
-      draggable: this.isDraggable,
+      draggable: this.enableReordering,
 
       getLevel: (id) => this.getLevel(id),
       hasItemFocus: (id) => this.isItemInFocus(id),
