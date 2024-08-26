@@ -462,12 +462,7 @@ It is located on the left side of the screen and cannot be combined with Side Na
     });
 
     dragButton.addEventListener('buttonClick', () => {
-      const isDraggable = !root.children[0].draggableItem;
-      getItems().forEach((val, key) => {
-        const element = querySelect(key);
-        element.draggableItem = isDraggable;
-        element.droppableItem = true;
-      });
+      root.enableReordering = !root.enableReordering;
     });
   }
   actionBarScript();
@@ -616,6 +611,7 @@ Every item and the elements such as drag icon, expand & collapse icon and the ch
 | Property                 | Attribute                  | Description                                                                                                                                                                                            | Type                                   | Default      |
 | ------------------------ | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------- | ------------ |
 | `borderless`             | `borderless`               | (optional) Whether the content tree and items have a border or not                                                                                                                                     | `boolean`                              | `undefined`  |
+| `enableReordering`       | `enable-reordering`        | (optional) Sets draggable state to be true to all the children                                                                                                                                         | `boolean`                              | `undefined`  |
 | `checkboxSelection`      | `checkbox-selection`       | (optional) Enables checkbox selection on each tree item                                                                                                                                                | `boolean`                              | `undefined`  |
 | `checkedItems`           | --                         | (optional) Set checked tree items                                                                                                                                                                      | `string[]`                             | `[]`         |
 | `disableTabbing`         | `disable-tabbing`          | (optional) Disable usage of <kbd>Tab</kbd> key to focus elements inside a tree view. Use `Arrow Up/Down` for focussing a tree item and `Shift + Arrow Right` for focussing a checkbox inside the item. | `boolean`                              | `undefined`  |

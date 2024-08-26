@@ -42,10 +42,10 @@ export class ModusTreeViewItem {
   @Prop() disabled: boolean;
 
   /** (optional) Allows the item to be dragged across the tree */
-  @Prop() draggableItem: boolean;
+  @Prop({ mutable: true }) draggableItem: boolean;
 
   /** (optional) Allows the item to be a drop zone so other tree items can be dropped above it */
-  @Prop() droppableItem: boolean;
+  @Prop({ mutable: true }) droppableItem: boolean;
 
   /** (optional) Changes the label field into a text box */
   @Prop({ mutable: true }) editable: boolean;
@@ -344,6 +344,7 @@ export class ModusTreeViewItem {
     this.options = { ...newValue };
     this.handleTreeSlotChange();
     this.updateComponent();
+    this.setDraggableState(this?.options?.draggable);
     this.tabIndexValue = this.options.disableTabbing ? -1 : this.tabIndexValue;
   }
 
@@ -355,6 +356,7 @@ export class ModusTreeViewItem {
         showSelectionIndicator,
         size,
         borderless,
+        draggable,
         getLevel,
         hasItemSelected,
         hasItemDisabled,
@@ -381,6 +383,7 @@ export class ModusTreeViewItem {
         multiCheckboxSelection,
         size,
         borderless,
+        draggable,
         isDisabled,
         selectionIndicator,
       };
@@ -412,6 +415,15 @@ export class ModusTreeViewItem {
     this.editable = false;
   }
 
+  setDraggableState(draggable = false) {
+    if (this.draggableItem === false || this.droppableItem === false) {
+      return;
+    }
+    if (draggable) {
+      this.draggableItem = this.droppableItem = draggable;
+    }
+  }
+
   render(): HTMLLIElement {
     const {
       selected,
@@ -435,6 +447,7 @@ export class ModusTreeViewItem {
       ...(expandable ? { 'aria-expanded': expanded ? 'true' : 'false' } : {}),
       role: 'treeitem',
     };
+
     const sizeClass = `${TREE_ITEM_SIZE_CLASS.get(size || 'standard')}`;
     const tabIndex: string | number = isDisabled ? -1 : this.tabIndexValue;
     const treeItemClass = `tree-item ${this.isExpanded ? 'expanded' : ''} ${this.isChildren ? 'is-children' : ''} ${this.isLastChild && !this.isExpanded ? 'is-last-child' : ''}${selected ? 'selected' : ''} ${sizeClass} ${isDisabled ? 'disabled' : ''} ${borderless ? 'borderless' : ''}`;
