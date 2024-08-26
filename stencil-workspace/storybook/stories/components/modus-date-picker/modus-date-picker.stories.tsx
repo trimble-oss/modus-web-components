@@ -7,16 +7,14 @@ export default {
   argTypes: {
     allowedCharsRegex: {
       name: 'allowed-chars-regex',
-      description:
-        'Regular expression to allow characters while typing the input.',
+      description: 'Regular expression to allow characters while typing the input.',
       table: {
         type: { summary: 'string' },
       },
     },
     altFormats: {
       name: 'alt-formats',
-      description:
-        'Alternative formats string for the date input split by | separator.',
+      description: 'Alternative formats string for the date input split by | separator.',
       table: {
         type: { summary: 'string' },
       },
@@ -33,6 +31,37 @@ export default {
       description: 'Sets autofocus for the input',
       table: {
         type: { summary: 'boolean' },
+      },
+    },
+    calendarPlacement: {
+      name: 'calendar-placement',
+      control: {
+        options: [
+          'auto',
+          'auto-start',
+          'auto-end',
+          'top-start',
+          'top-end',
+          'bottom-start',
+          'bottom-end',
+          'right-start',
+          'right-end',
+          'left-start',
+          'left-end',
+          'top',
+          'left',
+          'bottom',
+          'right',
+        ],
+        type: 'select',
+      },
+      description: 'The placement of the calendar popup',
+      table: {
+        defaultValue: { summary: 'bottom-start' },
+        type: {
+          summary:
+            "'auto' | 'auto-start' | 'auto-end' | 'top-start' | 'top-end' | 'bottom-start' | 'bottom-end' | 'right-start' | 'right-end' | 'left-start' | 'left-end' | 'top' | 'left' | 'bottom' | 'right'",
+        },
       },
     },
     disabled: {
@@ -81,13 +110,13 @@ export default {
       description: "The maximum date allowed. The input string should be ISO8601 'yyyy-mm-dd'.",
       table: {
         type: { summary: 'string' },
-      }
+      },
     },
     min: {
       description: "The minimum date allowed. The input string should be ISO8601 'yyyy-mm-dd'.",
       table: {
         type: { summary: 'string' },
-      }
+      },
     },
     placeholder: {
       description: "The input's placeholder text",
@@ -137,8 +166,7 @@ export default {
       },
     },
     value: {
-      description:
-        "A string representing the date entered in the input. The input string should be ISO8601 'yyyy-mm-dd'.",
+      description: "A string representing the date entered in the input. The input string should be ISO8601 'yyyy-mm-dd'.",
       table: {
         type: { summary: 'string' },
       },
@@ -310,27 +338,28 @@ DateRange.args = {
 };
 
 const DefaultWithPickerTemplate = ({
-    ariaLabel,
-    allowedCharsRegex,
-    altFormats,
-    autoFocusInput,
-    disableValidation,
-    disabled,
-    errorText,
-    format,
-    helperText,
-    label,
-    min,
-    max,
-    placeholder,
-    readOnly,
-    required,
-    showCalendarIcon,
-    size,
-    validText,
-    value,
-  }) => html`
-  <modus-date-picker>
+  ariaLabel,
+  allowedCharsRegex,
+  altFormats,
+  autoFocusInput,
+  calendarPlacement,
+  disableValidation,
+  disabled,
+  errorText,
+  format,
+  helperText,
+  label,
+  min,
+  max,
+  placeholder,
+  readOnly,
+  required,
+  showCalendarIcon,
+  size,
+  validText,
+  value,
+}) => html`
+  <modus-date-picker calendar-placement=${calendarPlacement}>
     <modus-date-input
       allowed-chars-regex=${allowedCharsRegex}
       aria-label=${ariaLabel}
@@ -357,6 +386,7 @@ const DefaultWithPickerTemplate = ({
 export const DefaultWithPicker = DefaultWithPickerTemplate.bind({});
 DefaultWithPicker.args = {
   ...defaultArgs,
+  calendarPlacement: 'bottom-start',
   showCalendarIcon: true,
   min: '2022-12-02',
   max: '2022-12-30',
