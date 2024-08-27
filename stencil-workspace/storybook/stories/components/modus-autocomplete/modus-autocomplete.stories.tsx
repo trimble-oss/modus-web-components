@@ -437,7 +437,7 @@ WithCustomOption.args = {
   value: '',
 };
 
-export const dynamicOptions = ({
+export const WithDynamicOptions = ({
   ariaLabel,
   clearable,
   disabled,
@@ -469,7 +469,7 @@ export const dynamicOptions = ({
       disable-close-on-select=${disableCloseOnSelect}
       error-text=${errorText}
       include-search-icon=${includeSearchIcon}
-      id="dynamic"
+      id="dynamic-options"
       label=${label}
       loading=${loading}
       multiple=${multiple}
@@ -485,7 +485,7 @@ export const dynamicOptions = ({
   </div>
   ${setDynamicOptions()}
 `;
-dynamicOptions.args = {
+WithDynamicOptions.args = {
   ariaLabel: 'autocomplete',
   clearable: false,
   disabled: false,
@@ -511,7 +511,7 @@ const setDynamicOptions = () => {
   const tag = document.createElement('script');
   tag.innerHTML = `
 
-       var modusAutocomplete = document.querySelector('#dynamic');
+      const modusAutocomplete = document.querySelector('#dynamic-options');
       if (modusAutocomplete) {
          modusAutocomplete.filterOptions = fetchUsers;
 
