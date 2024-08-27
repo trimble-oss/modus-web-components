@@ -72,7 +72,7 @@ export class ModusAutocomplete {
   @Prop({ mutable: true }) options: Promise<ModusAutocompleteOption[]> | ModusAutocompleteOption[] | string[];
 
   /** A promise that returns the filtered options. */
-  @Prop() getFilteredOptions: (search: string) => Promise<ModusAutocompleteOption[]>;
+  @Prop() filterOptions: (search: string) => Promise<ModusAutocompleteOption[]>;
 
   /** Whether to skip filtering when the options change. **/
   @Prop() skipFiltering: boolean;
@@ -83,7 +83,8 @@ export class ModusAutocomplete {
   /** The autocomplete's selected option. */
   @State() selectedOption: string;
 
-  @Prop() isLoading = false;
+  /** Whether the autocomplete is in a loading state. */
+  @Prop() loading = false;
 
   /** Whether to show autocomplete's options when focus. */
   @Prop() showOptionsOnFocus: boolean;
@@ -92,6 +93,14 @@ export class ModusAutocomplete {
   watchOptions() {
     this.convertOptions();
     this.updateVisibleOptions(this.getValueAsString());
+  }
+
+  @Watch('loading')
+  watchloading() {
+    if (this.loading) {
+      this.visibleOptions = [];
+      this.visibleCustomOptions = [];
+    }
   }
 
   /** The autocomplete's input placeholder. */
@@ -355,11 +364,11 @@ export class ModusAutocomplete {
   };
 
   handleTextInputValueChange = (event: CustomEvent<string>) => {
-    if (typeof this.getFilteredOptions === 'function') {
+    if (typeof this.filterOptions === 'function') {
       const tempValue = event.detail;
       this.handleSearchChange(tempValue, this.skipFiltering);
 
-      this.getFilteredOptions(tempValue).then((filteredOptions) => {
+      this.filterOptions(tempValue).then((filteredOptions) => {
         const currentValue = this.getValueAsString();
         if (tempValue !== currentValue) {
           return;
@@ -413,7 +422,7 @@ export class ModusAutocomplete {
     if (isSearchEmpty) {
       this.selectedOption = '';
     }
-    if (this?.getFilteredOptions) {
+    if (this?.filterOptions) {
       return;
     }
     if (!this.disableFiltering) {
@@ -565,7 +574,7 @@ export class ModusAutocomplete {
               })}
           </ul>
 
-          {this.isLoading ? (
+          {this.loading ? (
             <LoadingSpinner />
           ) : (
             this.displayNoResults() && <NoResultsFound text={this.noResultsFoundText} subtext={this.noResultsFoundSubtext} />

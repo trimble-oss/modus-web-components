@@ -57,6 +57,13 @@ export default {
         type: { summary: 'string' },
       },
     },
+    filterOptions: {
+      name: 'filter-options',
+      description: 'Function to filter options',
+      table: {
+        type: { summary: 'function' },
+      },
+    },
     includeSearchIcon: {
       name: 'include-search-icon',
       description: 'Whether to include the search icon',
@@ -69,6 +76,13 @@ export default {
       description: "The autocomplete's label",
       table: {
         type: { summary: 'string' },
+      },
+    },
+    loading: {
+      description: 'Whether the autocomplete is in a loading state',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
       },
     },
     noResultsFoundText: {
@@ -421,4 +435,122 @@ WithCustomOption.args = {
   showOptionsOnFocus: false,
   size: 'medium',
   value: '',
+};
+
+export const dynamicOptions = ({
+  ariaLabel,
+  clearable,
+  disabled,
+  dropdownMaxHeight,
+  dropdownZIndex,
+  disableCloseOnSelect,
+  errorText,
+  includeSearchIcon,
+  label,
+  loading,
+  multiple,
+  noResultsFoundText,
+  noResultsFoundSubtext,
+  placeholder,
+  readOnly,
+  required,
+  showNoResultsFoundMessage,
+  showOptionsOnFocus,
+  size,
+  value,
+}) => html`
+  <div style="width: 600px">
+    <modus-autocomplete
+      aria-label=${ariaLabel}
+      clearable=${clearable}
+      disabled=${disabled}
+      dropdown-max-height=${dropdownMaxHeight}
+      dropdown-z-index=${dropdownZIndex}
+      disable-close-on-select=${disableCloseOnSelect}
+      error-text=${errorText}
+      include-search-icon=${includeSearchIcon}
+      id="dynamic"
+      label=${label}
+      loading=${loading}
+      multiple=${multiple}
+      no-results-found-text=${noResultsFoundText}
+      no-results-found-subtext=${noResultsFoundSubtext}
+      placeholder=${placeholder}
+      read-only=${readOnly}
+      required=${required}
+      show-no-results-found-message=${showNoResultsFoundMessage}
+      show-options-on-focus=${showOptionsOnFocus}
+      size=${size}
+      .value=${value}>
+  </div>
+  ${setDynamicOptions()}
+`;
+dynamicOptions.args = {
+  ariaLabel: 'autocomplete',
+  clearable: false,
+  disabled: false,
+  dropdownMaxHeight: '300px',
+  dropdownZIndex: '1',
+  disableCloseOnSelect: false,
+  errorText: '',
+  includeSearchIcon: true,
+  label: 'Dynamic Autocomplete',
+  loading: false,
+  multiple: false,
+  noResultsFoundText: 'No results found',
+  noResultsFoundSubtext: 'Check spelling or try a different keyword',
+  placeholder: 'Search...',
+  readOnly: false,
+  required: false,
+  showNoResultsFoundMessage: true,
+  showOptionsOnFocus: false,
+  size: 'medium',
+  value: '',
+};
+const setDynamicOptions = () => {
+  const tag = document.createElement('script');
+  tag.innerHTML = `
+
+       var modusAutocomplete = document.querySelector('#dynamic');
+      if (modusAutocomplete) {
+         modusAutocomplete.filterOptions = fetchUsers;
+
+      let firstCall = true;
+      let timer;
+      async function fetchUsers(value) {
+        try {
+          if (firstCall) {
+            if (timer) {
+            } else {
+              await new Promise((resolve) => {
+                timer = setTimeout(resolve, 5000);
+                throw 'Rejected';
+              });
+            }
+            firstCall = false;
+          }
+          modusAutocomplete.loading = true;
+          const response = await fetch('https://randomuser.me/api/?results=50');
+          const data = await response.json();
+
+          const mapData = data.results.map((item) => ({
+            id: item.name.first,
+            value: item.name.first + item.name.last,
+          }));
+
+          const filteredData = mapData.filter((item) => {
+            return item?.value?.toLowerCase()?.includes(value?.toLowerCase());
+          });
+          return filteredData;
+        } catch (error) {
+          modusAutocomplete.loading = false;
+          return [];
+        } finally {
+          modusAutocomplete.loading = false;
+        }
+      }
+      }
+  `;
+
+  return tag;
 };
