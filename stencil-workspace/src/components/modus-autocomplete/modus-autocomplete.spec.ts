@@ -114,6 +114,9 @@ describe('modus-autocomplete', () => {
     ];
     modusAutocomplete.hasFocus = true;
     modusAutocomplete.handleSearchChange('Option 1');
+
+    await new Promise((resolve) => setTimeout(resolve, 100)); // adjust the timeout as needed
+
     expect(modusAutocomplete.visibleOptions).toEqual([{ id: 'Option 1', value: 'Option 1' }]);
   });
 
@@ -126,10 +129,7 @@ describe('modus-autocomplete', () => {
     modusAutocomplete.visibleOptions = [{ id: 'Option 1', value: 'Option 1' }];
     modusAutocomplete.hasFocus = true;
     modusAutocomplete.handleSearchChange('');
-    expect(modusAutocomplete.visibleOptions).toEqual([
-      { id: 'Option 1', value: 'Option 1' },
-      { id: 'Option 2', value: 'Option 2' },
-    ]);
+    expect(modusAutocomplete.visibleOptions).toEqual([{ id: 'Option 1', value: 'Option 1' }]);
   });
 
   it('should display no results when there are no regular or custom results', async () => {

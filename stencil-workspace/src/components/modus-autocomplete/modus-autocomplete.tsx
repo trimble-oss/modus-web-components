@@ -175,14 +175,19 @@ export class ModusAutocomplete {
 
   convertOptions(): void {
     if (Array.isArray(this.options) && this.options.length > 0) {
-      if (typeof this.options[0] === 'string') {
-        if (Array.isArray(this.options)) {
-          this.options = this.options.map((option) => ({
+      this.options = this.options.map((option) => {
+        if (typeof option === 'string') {
+          return {
+            id: option,
+            value: option,
+          };
+        } else {
+          return {
             id: option.id,
             value: option.value,
-          }));
+          };
         }
-      }
+      });
     }
   }
 
@@ -389,7 +394,7 @@ export class ModusAutocomplete {
 
     if (!this.disableFiltering) {
       this.visibleCustomOptions = this.customOptions?.filter((o: any) => {
-        return o.getAttribute(DATA_SEARCH_VALUE).toLowerCase().includes(search.toLowerCase());
+        return o.getAttribute(DATA_SEARCH_VALUE)?.toLowerCase().includes(search?.toLowerCase());
       });
     } else {
       this.visibleCustomOptions = this.customOptions;
@@ -413,7 +418,7 @@ export class ModusAutocomplete {
     }
     if (!this.disableFiltering) {
       this.visibleOptions = ((await this?.options) as ModusAutocompleteOption[])?.filter((o: ModusAutocompleteOption) => {
-        return o?.value.toLowerCase().includes(search?.toLowerCase());
+        return o?.value?.toLowerCase().includes(search?.toLowerCase());
       });
     } else {
       this.visibleOptions = (await this?.options) as ModusAutocompleteOption[];
