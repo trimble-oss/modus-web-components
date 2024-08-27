@@ -33,8 +33,8 @@ export default {
         type: { summary: 'boolean' },
       },
     },
-    calendarPlacement: {
-      name: 'calendar-placement',
+    position: {
+      name: 'position',
       control: {
         options: [
           'auto',
@@ -342,7 +342,7 @@ const DefaultWithPickerTemplate = ({
   allowedCharsRegex,
   altFormats,
   autoFocusInput,
-  calendarPlacement,
+  position,
   disableValidation,
   disabled,
   errorText,
@@ -359,7 +359,7 @@ const DefaultWithPickerTemplate = ({
   validText,
   value,
 }) => html`
-  <modus-date-picker calendar-placement=${calendarPlacement}>
+  <modus-date-picker position=${position}>
     <modus-date-input
       allowed-chars-regex=${allowedCharsRegex}
       aria-label=${ariaLabel}
@@ -386,7 +386,7 @@ const DefaultWithPickerTemplate = ({
 export const DefaultWithPicker = DefaultWithPickerTemplate.bind({});
 DefaultWithPicker.args = {
   ...defaultArgs,
-  calendarPlacement: 'bottom-start',
+  position: 'bottom-start',
   showCalendarIcon: true,
   min: '2022-12-02',
   max: '2022-12-30',

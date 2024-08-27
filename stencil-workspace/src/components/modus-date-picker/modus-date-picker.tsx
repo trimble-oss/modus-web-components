@@ -24,7 +24,7 @@ export class ModusDatePicker {
   @Prop() label: string;
 
   /** (optional) The placement of the calendar popup */
-  @Prop() calendarPlacement: Placement = 'bottom-start';
+  @Prop() position: Placement = 'bottom-start';
 
   /** Needed for a better control over the state and avoid re-renders */
   @State() _forceUpdate = {};
@@ -67,7 +67,7 @@ export class ModusDatePicker {
 
     if (referenceElement && popperElement && !this._popperInstance) {
       this._popperInstance = createPopper(referenceElement, popperElement, {
-        placement: this.calendarPlacement,
+        placement: this.position,
         modifiers: [
           {
             name: 'offset',
