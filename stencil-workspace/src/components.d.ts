@@ -1946,6 +1946,10 @@ export interface ModusTableCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusTableElement;
 }
+export interface ModusTableCellMainCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusTableCellMainElement;
+}
 export interface ModusTableRowActionsCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusTableRowActionsElement;
@@ -2615,7 +2619,18 @@ declare global {
         prototype: HTMLModusTableCellEditorElement;
         new (): HTMLModusTableCellEditorElement;
     };
+    interface HTMLModusTableCellMainElementEventMap {
+        "cellValueChanged": TableCellEdited;
+    }
     interface HTMLModusTableCellMainElement extends Components.ModusTableCellMain, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusTableCellMainElementEventMap>(type: K, listener: (this: HTMLModusTableCellMainElement, ev: ModusTableCellMainCustomEvent<HTMLModusTableCellMainElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusTableCellMainElementEventMap>(type: K, listener: (this: HTMLModusTableCellMainElement, ev: ModusTableCellMainCustomEvent<HTMLModusTableCellMainElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLModusTableCellMainElement: {
         prototype: HTMLModusTableCellMainElement;
@@ -4388,6 +4403,7 @@ declare namespace LocalJSX {
         "cell"?: Cell<unknown, unknown>;
         "context"?: TableContext;
         "hasRowsExpandable"?: boolean;
+        "onCellValueChanged"?: (event: ModusTableCellMainCustomEvent<TableCellEdited>) => void;
         "valueChange"?: (props: TableCellEdited) => void;
     }
     interface ModusTableColumnsVisibility {

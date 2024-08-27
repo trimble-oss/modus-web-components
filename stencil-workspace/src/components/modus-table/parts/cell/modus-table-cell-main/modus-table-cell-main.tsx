@@ -7,7 +7,9 @@ import {
   Component,
   Prop,
   Method,
-  h, // eslint-disable-line @typescript-eslint/no-unused-vars
+  h,
+  Event,
+  EventEmitter, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { Cell } from '@tanstack/table-core';
 import { ModusTableCellBadge, ModusTableCellEditorArgs, ModusTableCellLink } from '../../../models/modus-table.models';
@@ -41,14 +43,41 @@ export class ModusTableCellMain {
   @Prop() hasRowsExpandable: boolean;
   @Prop() valueChange: (props: TableCellEdited) => void;
 
+  @State() errorMessage?: string;
   @State() editMode: boolean;
   @Watch('editMode') onEditModeChange(newValue: boolean) {
     if (newValue) {
       this.cellEl.classList.add('edit-mode');
       this.createErrorTooltip(); // Create tooltip when entering edit mode
+      if (this.errorMessage) this.showErrorTooltip();
     } else {
       this.cellEl.classList.remove('edit-mode');
       this.destroyErrorTooltip(); // Destroy tooltip when exiting edit mode
+    }
+  }
+
+  @Event() cellValueChanged: EventEmitter<TableCellEdited>;
+
+  @Watch('context')
+  onContextChange() {
+    const errorMessage = (this.context.data[this.cell.row.index] as any)?.errors?.[
+      this.cell.column.columnDef[this.accessorKey]
+    ];
+
+    const inputContainer = this.cellEl?.querySelector('modus-text-input')?.shadowRoot.querySelector('.input-container');
+
+    if (errorMessage) {
+      this.errorMessage = errorMessage;
+      inputContainer?.classList.add('error');
+      inputContainer?.part.add('error');
+      this.cellEl?.classList.add('error');
+      this.showErrorTooltip();
+    } else {
+      this.errorMessage = '';
+      inputContainer?.classList.remove('error');
+      inputContainer?.part.remove('error');
+      this.cellEl?.classList.remove('error');
+      this.hideErrorTooltip();
     }
   }
 
@@ -164,11 +193,15 @@ export class ModusTableCellMain {
     }
 
     this.editMode = false;
-    this.destroyErrorTooltip();
   }
 
-  handleCellEditorOnInputChange = () => {
-    this.showErrorTooltip();
+  handleCellEditorOnInputChange = (newValue: string, oldValue: string) => {
+    this.cellValueChanged.emit({
+      row: this.cell.row,
+      accessorKey: this.cell.column.columnDef[this.accessorKey],
+      newValue,
+      oldValue,
+    });
   };
 
   handleCellEditorKeyDown = (event: KeyboardEvent, newValue: string, oldValue: string) => {
@@ -305,7 +338,7 @@ export class ModusTableCellMain {
             args={this.getEditorArgs()}
             valueChange={(newVal: string) => this.handleCellEditorValueChange(newVal, valueString)}
             keyDown={(event: KeyboardEvent, newVal: string) => this.handleCellEditorKeyDown(event, newVal, valueString)}
-            onInputValueChange={this.handleCellEditorOnInputChange}
+            onInputValueChange={(newVal: string) => this.handleCellEditorOnInputChange(newVal, valueString)}
           />
         ) : (
           this.renderCellValue()
