@@ -99,6 +99,9 @@ export class ModusTextInput {
   /** An event that fires on input value change. */
   @Event() valueChange: EventEmitter<string>;
 
+  /** An event that fires on input value error. */
+  @Event() valueError: EventEmitter<string>;
+
   private inputId = generateElementId() + '_text_input';
 
   classBySize: Map<string, string> = new Map([
@@ -134,6 +137,12 @@ export class ModusTextInput {
     this.value = value;
 
     this.valueChange.emit(value);
+
+    if (this.errorText) {
+      this.valueError.emit(this.errorText);
+    } else {
+      this.valueError.emit(null);
+    }
   }
 
   handleTogglePasswordKeyDown(event: KeyboardEvent): void {
@@ -211,7 +220,7 @@ export class ModusTextInput {
             this.size
           )}`}
           onClick={() => this.textInput.focus()}
-          part="input-container">
+          part={`input-container ${this.errorText ? 'error' : this.validText ? 'valid' : ''}`}>
           {this.includeSearchIcon ? <IconSearch size={iconSize} /> : null}
           <input
             id={this.inputId}

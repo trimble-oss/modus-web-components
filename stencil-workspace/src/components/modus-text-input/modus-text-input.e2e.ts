@@ -323,4 +323,17 @@ describe('modus-text-input', () => {
     expect(element).toBeDefined();
     expect(element).not.toHaveAttribute('aria-label');
   });
+
+  it('emits valueError event if error message is present', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-text-input></modus-text-input>');
+    const valueError = await page.spyOnEvent('valueError');
+    const textInput = await page.find('modus-text-input >>> input');
+
+    textInput.setProperty('errorText', 'Error message');
+    await page.waitForChanges();
+    await textInput.type('test', { delay: 20 });
+    expect(valueError).toHaveReceivedEvent();
+  });
 });
