@@ -90,6 +90,11 @@ export class ModusTable {
   @Prop({ mutable: true }) columns!: ModusTableColumn<unknown>[];
   @Watch('columns') onColumnsChange(newVal: ModusTableColumn<unknown>[]) {
     this.tableCore?.setOptions('columns', (newVal as ColumnDef<unknown>[]) ?? []);
+    this.tableCore?.setState(
+      'columnOrder',
+      newVal.map((column) => column.id as string)
+    );
+    this.tableState.columnOrder = newVal.map((column) => column.id as string);
   }
 
   /* (optional) To manage column resizing */
@@ -129,6 +134,7 @@ export class ModusTable {
   @Prop() displayOptions?: ModusTableDisplayOptions = {
     borderless: false,
     cellBorderless: false,
+    cellVerticalBorderless: false,
   };
 
   /** (Optional) To enable row hover in table. */
@@ -739,6 +745,7 @@ export class ModusTable {
     const tableMainClass = `
       ${this.displayOptions?.borderless ? 'borderless' : ''}
       ${this.displayOptions?.cellBorderless ? 'cell-borderless' : ''}
+      ${this.displayOptions?.cellVerticalBorderless ? 'cell-vertical-borderless' : ''}
       ${this.classByDensity.get(this.density)}
     `;
 

@@ -35,8 +35,8 @@ describe('modus-tree-view-item', () => {
       <li aria-level="1" aria-selected="false" aria-disabled="false" role="treeitem" class="tree-item-container">
       <div class="tree-item standard" tabindex="0">
         <div class="icon-slot drag-icon hidden" tabindex="0">
-          <slot name="dragIcon"></slot><svg class="icon-drag-indicator" height="16" width="16" viewBox="0 0 24 24"
-            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <slot name="dragIcon"></slot><svg class="icon-drag-indicator" height="16" width="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor">
             <path
               d="M11 18c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2m-2-8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2m0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2m6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2m0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2m0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2">
             </path>
@@ -45,16 +45,16 @@ describe('modus-tree-view-item', () => {
         <div aria-disabled="true" style="padding-left: 0rem;"></div>
         <div class="icon-slot hidden" tabindex="-1">
           <div class="inline-flex rotate-right">
-            <slot name="expandIcon"></slot><svg class="icon-expand-more" height="24" width="24" viewBox="0 0 24 24"
-              fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <slot name="expandIcon"></slot><svg class="icon-expand-more" height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor">
               <path
                 d="M15.88 9.29 12 13.17 8.12 9.29a.996.996 0 1 0-1.41 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59a.996.996 0 0 0 0-1.41c-.39-.38-1.03-.39-1.42 0">
               </path>
             </svg>
           </div>
           <div class="inline-flex">
-            <slot name="collapseIcon"></slot><svg class="icon-expand-more" height="24" width="24" viewBox="0 0 24 24"
-              fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <slot name="collapseIcon"></slot><svg class="icon-expand-more" height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor">
               <path
                 d="M15.88 9.29 12 13.17 8.12 9.29a.996.996 0 1 0-1.41 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59a.996.996 0 0 0 0-1.41c-.39-.38-1.03-.39-1.42 0">
               </path>

@@ -398,4 +398,33 @@ describe('modus-modal', () => {
     expect(element).toBeDefined();
     expect(element).not.toHaveClass('fullscreen');
   });
+
+  it('should expand and collapse the modal', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-modal fullscreen="false"></modus-modal>');
+    const component = await page.find('modus-modal');
+    const element = await page.find('modus-modal >>> .modus-modal');
+    await component.callMethod('open');
+    await page.waitForChanges();
+
+    expect(element).toBeDefined();
+    expect(element).not.toHaveClass('fullscreen');
+
+    const expandButton = await page.find('modus-modal >>> .icon-expand');
+    expect(expandButton).toBeDefined();
+
+    await expandButton.click();
+    await page.waitForChanges();
+
+    expect(element).toHaveClass('fullscreen');
+
+    const collapseButton = await page.find('modus-modal >>> .icon-collapse');
+    expect(collapseButton).toBeDefined();
+
+    await collapseButton.click();
+    await page.waitForChanges();
+
+    expect(element).not.toHaveClass('fullscreen');
+  });
 });

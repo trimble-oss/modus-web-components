@@ -6,7 +6,6 @@ export const IconSortZA: FunctionalComponent<IconProps> = (props: IconProps) => 
   <svg
     data-test-id="iconSortZA"
     class={`${props.pressed ? 'pressed' : ''}`}
-    xmlns="http://www.w3.org/2000/svg"
     width={props.size ?? 16}
     height={props.size ?? 16}
     fill={props.color ?? 'currentColor'}
