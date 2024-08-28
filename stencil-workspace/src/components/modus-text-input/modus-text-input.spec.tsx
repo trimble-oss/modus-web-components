@@ -10,7 +10,7 @@ describe('modus-text-input', () => {
     expect(page.root).toEqualHtml(`
       <modus-text-input>
         <mock:shadow-root>
-          <div class="modus-text-input" part="table-inputs">
+          <div class="modus-text-input">
             <div class="input-container medium" part="input-container ">
               <input class="text-align-left" id="mwc_id_0_text_input" type="text" tabindex="0">
             </div>
@@ -29,7 +29,7 @@ describe('modus-text-input', () => {
     expect(page.root).toEqualHtml(`
       <modus-text-input type="password">
         <mock:shadow-root>
-          <div class="modus-text-input" part="table-inputs">
+          <div class="modus-text-input">
             <div class="input-container medium" part="input-container ">
               <input class="text-align-left" id="mwc_id_1_text_input" tabindex="0" type="password">
             </div>
@@ -48,7 +48,7 @@ describe('modus-text-input', () => {
     expect(page.root).toEqualHtml(`
       <modus-text-input autocapitalize="words">
         <mock:shadow-root>
-            <div class="modus-text-input" part="table-inputs">
+            <div class="modus-text-input">
                 <div class="input-container medium" part="input-container ">
                 <input class="text-align-left" id="mwc_id_2_text_input" tabindex="0" autocapitalize="words" type="text">
                 </div>
@@ -67,7 +67,7 @@ describe('modus-text-input', () => {
     expect(page.root).toEqualHtml(`
       <modus-text-input autocorrect="on">
         <mock:shadow-root>
-            <div class="modus-text-input" part="table-inputs">
+            <div class="modus-text-input" >
                 <div class="input-container medium" part="input-container ">
                 <input class="text-align-left" id="mwc_id_3_text_input" tabindex="0" autocorrect="on" type="text">
                 </div>
@@ -86,7 +86,7 @@ describe('modus-text-input', () => {
     expect(page.root).toEqualHtml(`
       <modus-text-input enterkeyhint="done">
         <mock:shadow-root>
-            <div class="modus-text-input" part="table-inputs">
+            <div class="modus-text-input">
                 <div class="input-container medium" part="input-container ">
                 <input class="text-align-left" id="mwc_id_4_text_input" tabindex="0" enterkeyhint="done" type="text">
                 </div>
@@ -105,7 +105,7 @@ describe('modus-text-input', () => {
     expect(page.root).toEqualHtml(`
       <modus-text-input spellcheck>
         <mock:shadow-root>
-            <div class="modus-text-input" part="table-inputs">
+            <div class="modus-text-input">
                 <div class="input-container medium" part="input-container ">
                 <input class="text-align-left" id="mwc_id_5_text_input" tabindex="0" spellcheck type="text">
                 </div>

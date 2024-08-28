@@ -39,13 +39,6 @@ table.density-compact {
   justify-content: center;
 }
 
-
-.editor::part(table-inputs) {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-}
-
 .editor::part(input-container) {
   border: 2px solid var(--modus-input-border-active-color, #217cbb);
   border-radius: unset;
@@ -53,12 +46,6 @@ table.density-compact {
 }
 
 .editor::part(input-container error) {
-  border: 2px solid var(--modus-input-validation-error-color, #da212c);
-  border-radius: unset;
-  z-index: 99;
-}
-
-.editor::part(select-input error) {
   border: 2px solid var(--modus-input-validation-error-color, #da212c);
   border-radius: unset;
   z-index: 99;
