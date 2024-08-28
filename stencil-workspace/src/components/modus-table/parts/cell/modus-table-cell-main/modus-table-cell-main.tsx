@@ -56,7 +56,7 @@ export class ModusTableCellMain {
     }
   }
 
-  @Event() cellValueChanged: EventEmitter<TableCellEdited>;
+  @Event() cellInputValueChange: EventEmitter<TableCellEdited>;
 
   @Watch('context') onContextChange() {
     const errorMessage = (this.context.data[this.cell.row.index] as any)?.errors?.[
@@ -189,7 +189,7 @@ export class ModusTableCellMain {
   }
 
   handleCellEditorOnInputChange = (newValue: string, oldValue: string) => {
-    this.cellValueChanged.emit({
+    this.cellInputValueChange.emit({
       row: this.cell.row,
       accessorKey: this.cell.column.columnDef[this.accessorKey],
       newValue,

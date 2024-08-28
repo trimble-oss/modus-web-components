@@ -2620,7 +2620,7 @@ declare global {
         new (): HTMLModusTableCellEditorElement;
     };
     interface HTMLModusTableCellMainElementEventMap {
-        "cellValueChanged": TableCellEdited;
+        "cellInputValueChange": TableCellEdited;
     }
     interface HTMLModusTableCellMainElement extends Components.ModusTableCellMain, HTMLStencilElement {
         addEventListener<K extends keyof HTMLModusTableCellMainElementEventMap>(type: K, listener: (this: HTMLModusTableCellMainElement, ev: ModusTableCellMainCustomEvent<HTMLModusTableCellMainElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -4403,7 +4403,7 @@ declare namespace LocalJSX {
         "cell"?: Cell<unknown, unknown>;
         "context"?: TableContext;
         "hasRowsExpandable"?: boolean;
-        "onCellValueChanged"?: (event: ModusTableCellMainCustomEvent<TableCellEdited>) => void;
+        "onCellInputValueChange"?: (event: ModusTableCellMainCustomEvent<TableCellEdited>) => void;
         "valueChange"?: (props: TableCellEdited) => void;
     }
     interface ModusTableColumnsVisibility {
