@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { Host, JSX, Component, Prop, h, Listen, State } from '@stencil/core';
+import { Host, JSX, Component, Prop, h, Listen } from '@stencil/core';
 import {
   KEYBOARD_ENTER,
   CELL_EDIT_TYPE_AUTOCOMPLETE,
@@ -98,7 +98,7 @@ export class ModusTableCellEditor {
         value={this.value as string}
         onValueChange={(e: CustomEvent<string>) => {
           this.editedValue = e.detail;
-          this.onInputValueChange(e.detail);
+          this.onInputValueChange(e.detail as string);
         }}
         onBlur={this.handleBlur}
         onKeyDown={this.handleKeyDown}

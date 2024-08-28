@@ -94,8 +94,8 @@ table {
 
   td.error {
     border: 2px solid var(--modus-input-validation-error-color, #da212c) !important;
-    box-shadow: 0 0 0 1px var(--modus-input-validation-error-color, #da212c);
     border-radius: unset;
+    box-shadow: 0 0 0 1px var(--modus-input-validation-error-color, #da212c);
   }
 
   thead {

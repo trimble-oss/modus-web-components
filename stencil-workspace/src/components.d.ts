@@ -1745,6 +1745,10 @@ export namespace Components {
          */
         "disableTabbing": boolean;
         /**
+          * (optional) Sets draggable state to be true to all the children
+         */
+        "enableReordering": boolean;
+        /**
           * (optional) Set expanded tree items
          */
         "expandedItems": string[];
@@ -4821,6 +4825,10 @@ declare namespace LocalJSX {
           * (optional) Disable usage of `tab` key to focus elements inside a tree view. Use `Arrow Up/Down` for focussing a tree item and `Shift + Arrow Right` for focussing a checkbox inside the item.
          */
         "disableTabbing"?: boolean;
+        /**
+          * (optional) Sets draggable state to be true to all the children
+         */
+        "enableReordering"?: boolean;
         /**
           * (optional) Set expanded tree items
          */

@@ -54,8 +54,8 @@ table.density-compact {
 .error .editor::part(input-container) {
   border: 1px solid var(--modus-input-validation-error-color, #da212c);
   border-radius: unset;
-  z-index: 99;
   box-shadow: 2px solid var(--modus-input-border-active-color, #da212c);
+  z-index: 99;
 }
 
 .error-tooltip {
