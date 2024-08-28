@@ -218,6 +218,7 @@ export class ModusTableCellEditor {
     return (
       <modus-date-picker
         onBlur={this.handleBlur}
+        position="auto"
         onClick={(e: MouseEvent) => e.stopPropagation()}
         class="date-picker-container">
         <modus-date-input
