@@ -58,24 +58,17 @@ export class ModusTableCellMain {
 
   @Event() cellValueChanged: EventEmitter<TableCellEdited>;
 
-  @Watch('context')
-  onContextChange() {
+  @Watch('context') onContextChange() {
     const errorMessage = (this.context.data[this.cell.row.index] as any)?.errors?.[
       this.cell.column.columnDef[this.accessorKey]
     ];
 
-    const inputContainer = this.cellEl?.querySelector('modus-text-input')?.shadowRoot.querySelector('.input-container');
-
     if (errorMessage) {
       this.errorMessage = errorMessage;
-      inputContainer?.classList.add('error');
-      inputContainer?.part.add('error');
       this.cellEl?.classList.add('error');
       this.showErrorTooltip();
     } else {
       this.errorMessage = '';
-      inputContainer?.classList.remove('error');
-      inputContainer?.part.remove('error');
       this.cellEl?.classList.remove('error');
       this.hideErrorTooltip();
     }
