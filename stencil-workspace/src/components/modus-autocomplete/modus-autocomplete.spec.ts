@@ -20,7 +20,7 @@ describe('modus-autocomplete', () => {
             </svg>
             <modus-text-input aria-autocomplete="list" aria-controls="${listId}" class="input" role="combobox" autocomplete="off" size="medium" type="search"  value=""></modus-text-input>
           </div>
-          <div class="error" part="sub-text"></div>
+          <div class="error"></div>
           <div class="options-container" style="max-height: 300px; z-index: 1; overflow-y: auto;">
             <ul aria-label="options" id="${listId}" role="listbox"></ul>
           </div>
@@ -56,7 +56,7 @@ describe('modus-autocomplete', () => {
             </svg>
             <modus-text-input aria-autocomplete="list" aria-controls="${listId}" class="input" role="combobox" autocomplete="off" size="medium" type="search"  value=""></modus-text-input>
           </div>
-          <div class="error" part="sub-text"></div>
+          <div class="error"></div>
           <div class="options-container" style="max-height: 300px; z-index: 1; overflow-y: auto;">
             <ul aria-label="options" id="${listId}" role="listbox"></ul>
           </div>

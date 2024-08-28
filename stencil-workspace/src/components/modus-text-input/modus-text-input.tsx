@@ -271,16 +271,14 @@ export class ModusTextInput {
             </span>
           )}
         </div>
-        <div class="sub-text" part="sub-text">
-          {this.errorText ? (
-            <label class="sub-text error">
-              {this.includeErrorIcon ? <IconError size={iconSize} /> : null}
-              {this.errorText}
-            </label>
-          ) : this.validText ? (
-            <label class="sub-text valid">{this.validText}</label>
-          ) : null}
-        </div>
+        {this.errorText ? (
+          <label class="sub-text error">
+            {this.includeErrorIcon ? <IconError size={iconSize} /> : null}
+            {this.errorText}
+          </label>
+        ) : this.validText ? (
+          <label class="sub-text valid">{this.validText}</label>
+        ) : null}
       </div>
     );
   }

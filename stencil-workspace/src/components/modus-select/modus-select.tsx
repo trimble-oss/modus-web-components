@@ -138,9 +138,9 @@ export class ModusSelect {
     return (
       <div class={this.disabled ? 'disabled' : undefined}>
         {this.renderLabel()}
-        <span class="input-container" part="table-inputs">
+        <span class="input-container">
           <select
-            part={`input select-input ${this.errorText ? 'error' : this.validText ? 'valid' : ''}`}
+            part={`input ${this.errorText ? 'error' : this.validText ? 'valid' : ''}`}
             ref={(el) => (this.selectInput = el)}
             disabled={this.disabled}
             id={this.selectId}
@@ -157,9 +157,7 @@ export class ModusSelect {
             </option>
             {this.renderOptions()}
           </select>
-          <div class="sub-text" part="sub-text">
-            {this.renderSubText()}
-          </div>
+          {this.renderSubText()}
         </span>
       </div>
     );

@@ -14,7 +14,6 @@ describe('modus-text-input', () => {
             <div class="input-container medium" part="input-container ">
               <input class="text-align-left" id="mwc_id_0_text_input" type="text" tabindex="0">
             </div>
-            <div class="sub-text" part="sub-text"></div>
           </div>
         </mock:shadow-root>
       </modus-text-input>
@@ -33,7 +32,6 @@ describe('modus-text-input', () => {
             <div class="input-container medium" part="input-container ">
               <input class="text-align-left" id="mwc_id_1_text_input" tabindex="0" type="password">
             </div>
-            <div class="sub-text" part="sub-text"></div>
           </div>
         </mock:shadow-root>
       </modus-text-input>
@@ -52,7 +50,6 @@ describe('modus-text-input', () => {
                 <div class="input-container medium" part="input-container ">
                 <input class="text-align-left" id="mwc_id_2_text_input" tabindex="0" autocapitalize="words" type="text">
                 </div>
-                <div class="sub-text" part="sub-text"></div>
             </div>
         </mock:shadow-root>
       </modus-text-input>
@@ -71,7 +68,6 @@ describe('modus-text-input', () => {
                 <div class="input-container medium" part="input-container ">
                 <input class="text-align-left" id="mwc_id_3_text_input" tabindex="0" autocorrect="on" type="text">
                 </div>
-                <div class="sub-text" part="sub-text"></div>
             </div>
         </mock:shadow-root>
       </modus-text-input>
@@ -90,7 +86,6 @@ describe('modus-text-input', () => {
                 <div class="input-container medium" part="input-container ">
                 <input class="text-align-left" id="mwc_id_4_text_input" tabindex="0" enterkeyhint="done" type="text">
                 </div>
-                <div class="sub-text" part="sub-text"></div>
             </div>
         </mock:shadow-root>
       </modus-text-input>
@@ -109,7 +104,6 @@ describe('modus-text-input', () => {
                 <div class="input-container medium" part="input-container ">
                 <input class="text-align-left" id="mwc_id_5_text_input" tabindex="0" spellcheck type="text">
                 </div>
-                <div class="sub-text" part="sub-text"></div>
             </div>
         </mock:shadow-root>
       </modus-text-input>

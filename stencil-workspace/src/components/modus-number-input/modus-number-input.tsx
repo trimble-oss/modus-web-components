@@ -123,7 +123,7 @@ export class ModusNumberInput {
     };
 
     return (
-      <div class={buildContainerClassNames()} part="table-inputs">
+      <div class={buildContainerClassNames()}>
         {this.label || this.required ? (
           <div class="label-container">
             {this.label ? <label htmlFor={this.inputId}>{this.label}</label> : null}
@@ -155,13 +155,11 @@ export class ModusNumberInput {
             type="number"
             value={this.value}></input>
         </div>
-        <div class="sub-text" part="sub-text">
-          {this.errorText ? (
-            <label class="sub-text error">{this.errorText}</label>
-          ) : this.validText ? (
-            <label class="sub-text valid">{this.validText}</label>
-          ) : null}
-        </div>
+        {this.errorText ? (
+          <label class="sub-text error">{this.errorText}</label>
+        ) : this.validText ? (
+          <label class="sub-text valid">{this.validText}</label>
+        ) : null}
       </div>
     );
   }

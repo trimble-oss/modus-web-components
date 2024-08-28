@@ -435,7 +435,6 @@ export class ModusAutocomplete {
       aria-autocomplete="list"
       aria-controls={this.listId}
       aria-expanded={this.displayOptions()}
-      part={`input-container ${this.errorText ? 'error' : ''}`}
     />
   );
 
@@ -501,9 +500,7 @@ export class ModusAutocomplete {
           ))}
           {this.TextInput()}
         </div>
-        <div class={'error'} part="sub-text">
-          {this.errorText ? <label class="sub-text error">{this.errorText}</label> : null}
-        </div>
+        <div class={'error'}>{this.errorText ? <label class="sub-text error">{this.errorText}</label> : null}</div>
         <div
           class="options-container"
           style={{ maxHeight: this.dropdownMaxHeight, zIndex: this.dropdownZIndex, overflowY: 'auto' }}>
