@@ -207,7 +207,7 @@ export class ModusTextInput {
     };
 
     return (
-      <div class={buildContainerClassNames()} part="table-inputs">
+      <div class={buildContainerClassNames()}>
         {this.label || this.required ? (
           <div class={'label-container'}>
             {this.label ? <label htmlFor={this.inputId}>{this.label}</label> : null}

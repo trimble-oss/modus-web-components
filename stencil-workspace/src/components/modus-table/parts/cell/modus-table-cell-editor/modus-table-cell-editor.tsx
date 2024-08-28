@@ -27,12 +27,10 @@ import { createPopper, Instance } from '@popperjs/core';
 export class ModusTableCellEditor {
   @Prop() args: ModusTableCellEditorArgs;
   @Prop() dataType: string;
-  @Prop() errorText: string;
   @Prop() value: unknown;
   @Prop() type: string;
   @Prop() valueChange: (newValue: string) => void;
   @Prop() keyDown: (e: KeyboardEvent, newValue: string) => void;
-  @Prop() onValueChange: (newValue: string) => void;
 
   @State() errorMessage: string;
 
@@ -49,7 +47,6 @@ export class ModusTableCellEditor {
     if (this.inputElement['focusInput']) {
       this.inputElement['focusInput']();
     }
-    this.updateErrorMessage(this.errorText);
     this.createErrorTooltip();
   }
 
@@ -69,14 +66,6 @@ export class ModusTableCellEditor {
     }
   }
 
-  @State() errorMessages: string;
-
-  // @Listen('cellValueChanged', { target: 'document' })
-  // handleCellValueChanged(event: CustomEvent) {
-  //   const errorText = event.detail.row.errorText;
-  //   this.updateErrorMessage(errorText);
-  // }
-
   handleBlur: () => void = () => {
     this.valueChange(this.editedValue as string);
     this.destroyErrorTooltip();
@@ -87,26 +76,8 @@ export class ModusTableCellEditor {
   };
 
   handleError = (e: CustomEvent<string>) => {
-    this.updateErrorMessage(e.detail);
-  };
-
-  private updateErrorMessage(errorText: string): void {
-    this.errorMessage = errorText || '';
-    if (this.errorMessage) {
-      this.showErrorTooltip();
-    } else {
-      this.hideErrorTooltip();
-    }
-  }
-
-  handleTextInputChange = (e: CustomEvent<string>) => {
-    this.editedValue = e.detail;
-    this.onValueChange(this.editedValue as string);
-    if (this.errorMessage) {
-      this.showErrorTooltip();
-    } else {
-      this.hideErrorTooltip();
-    }
+    this.errorMessage = e.detail;
+    this.showErrorTooltip();
   };
 
   getDefaultProps = (ariaLabel) => ({
@@ -183,16 +154,7 @@ export class ModusTableCellEditor {
         size="large"
         onBlur={this.handleBlur}
         onValueChange={(e: CustomEvent<string>) => (this.editedValue = e.detail)}
-        onKeyDown={(e) => handleArrowKeys(e, this.handleKeyDown)}
-        onValueError={(e: CustomEvent<string | null>) => {
-          if (e.detail) {
-            this.errorMessage = e.detail;
-            this.showErrorTooltip();
-          } else {
-            this.errorMessage = '';
-            this.hideErrorTooltip();
-          }
-        }}></modus-number-input>
+        onKeyDown={(e) => handleArrowKeys(e, this.handleKeyDown)}></modus-number-input>
     );
   }
 
@@ -201,12 +163,11 @@ export class ModusTableCellEditor {
       <modus-text-input
         {...this.getDefaultProps('Text input')}
         value={this.value as string}
-        onValueChange={this.handleTextInputChange}
+        onValueChange={(e: CustomEvent<string>) => (this.editedValue = e.detail)}
         onBlur={this.handleBlur}
         onKeyDown={this.handleKeyDown}
         autoFocusInput
-        size="large"
-        errorText={this.errorText}></modus-text-input>
+        size="large"></modus-text-input>
     );
   }
 
@@ -245,15 +206,6 @@ export class ModusTableCellEditor {
               this.editedValue = detail;
             } else {
               this.editedValue = detail[valueKey];
-            }
-          }}
-          onValueError={(e: CustomEvent<string | null>) => {
-            if (e.detail) {
-              this.errorMessage = e.detail;
-              this.showErrorTooltip();
-            } else {
-              this.errorMessage = '';
-              this.hideErrorTooltip();
             }
           }}></modus-select>
       </div>
@@ -323,15 +275,6 @@ export class ModusTableCellEditor {
               this.editedValue = selectedOption;
             } else {
               this.editedValue = selectedDetail;
-            }
-          }}
-          onValueError={(e: CustomEvent<string | null>) => {
-            if (e.detail) {
-              this.errorMessage = e.detail;
-              this.showErrorTooltip();
-            } else {
-              this.errorMessage = '';
-              this.hideErrorTooltip();
             }
           }}
           value={selectedOption}></modus-autocomplete>
