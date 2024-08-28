@@ -63,6 +63,9 @@ export class ModusModal {
   /** An event that fires on secondary button click.  */
   @Event() secondaryButtonClick: EventEmitter;
 
+  /** A state that checks if content is scrollable.  */
+  @State() isContentScrollable = false;
+
   ignoreOverlayClick = false;
 
   // A hidden element used to find the end of the Modal to prevent tabbing in the background
@@ -70,6 +73,8 @@ export class ModusModal {
   focusWrapping: ModalFocusWrapping;
   modalContentRef: HTMLDivElement;
   tabbableNodes: HTMLElement[];
+  modalBodyRef: HTMLDivElement;
+  resizeObserver: ResizeObserver;
 
   /** Closes the Modal */
   @Method()
@@ -137,8 +142,28 @@ export class ModusModal {
   }
 
   componentDidRender() {
-    if (this.modalContentRef && this.startTrapRef)
+    if (this.modalContentRef && this.startTrapRef) {
       this.focusWrapping = new ModalFocusWrapping(this.modalContentRef, this.startTrapRef);
+    }
+    if (this.modalBodyRef) {
+      this.resizeObserver = new ResizeObserver(() => {
+        this.checkContentScrollable();
+      });
+      this.resizeObserver.observe(this.modalBodyRef);
+    }
+    this.checkContentScrollable();
+  }
+
+  disconnectedCallback() {
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+    }
+  }
+
+  checkContentScrollable() {
+    if (this.modalContentRef) {
+      this.isContentScrollable = this.modalBodyRef.scrollHeight > this.modalBodyRef.clientHeight;
+    }
   }
 
   renderModal(): JSX.Element[] {
@@ -149,7 +174,7 @@ export class ModusModal {
           ref={(el) => (this.startTrapRef = el)}
           onFocus={() => this.focusWrapping?.onStartWrapFocus()}></FocusWrap>
         {this.renderModalHeader()}
-        <div class="body">
+        <div class="body" ref={(el) => (this.modalBodyRef = el)}>
           <slot />
         </div>
         {this.renderModalFooter()}
@@ -160,7 +185,7 @@ export class ModusModal {
 
   renderModalHeader(): JSX.Element[] {
     return (
-      <header>
+      <header class={{ scrollable: this.isContentScrollable }}>
         {this.headerText}
         <div class="header-buttons">
           <div
@@ -190,6 +215,7 @@ export class ModusModal {
         <footer
           class={{
             'has-buttons': Boolean(this.primaryButtonText || this.secondaryButtonText),
+            scrollable: this.isContentScrollable,
           }}>
           {this.secondaryButtonText && (
             <modus-button
