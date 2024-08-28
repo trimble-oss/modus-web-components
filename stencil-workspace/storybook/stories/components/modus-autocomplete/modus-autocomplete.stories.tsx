@@ -482,6 +482,7 @@ export const WithDynamicOptions = ({
       show-options-on-focus=${showOptionsOnFocus}
       size=${size}
       .value=${value}>
+    </modus-autocomplete>
   </div>
   ${setDynamicOptions()}
 `;
@@ -513,42 +514,39 @@ const setDynamicOptions = () => {
 
       const modusAutocomplete = document.querySelector('#dynamic-options');
       if (modusAutocomplete) {
-         modusAutocomplete.filterOptions = fetchUsers;
-
-      let firstCall = true;
-      let timer;
-      async function fetchUsers(value) {
-        try {
-          if (firstCall) {
-            if (timer) {
-            } else {
-              await new Promise((resolve) => {
-                timer = setTimeout(resolve, 5000);
-                throw 'Rejected';
-              });
-            }
-            firstCall = false;
-          }
+         const options = [
+          { id: '0', value: 'Apple' },
+          { id: '1', value: 'Banana' },
+          { id: '2', value: 'Orange' },
+          { id: '3', value: 'Mango' },
+          { id: '4', value: 'Pineapple' },
+          { id: '5', value: 'Grapes' },
+          { id: '6', value: 'Watermelon' },
+          { id: '7', value: 'Strawberry' },
+          { id: '8', value: 'Blueberry' },
+          { id: '9', value: 'Raspberry' },
+          { id: '10', value: 'Blackberry' },
+          { id: '11', value: 'Cherry' },
+          { id: '12', value: 'Peach' },
+          { id: '13', value: 'Pear' },
+          { id: '14', value: 'Plum' },
+          { id: '15', value: 'Kiwi' },
+          { id: '16', value: 'Lemon' },
+          { id: '17', value: 'Lime' },
+          { id: '18', value: 'Papaya' },
+          { id: '19', value: 'Passion Fruit' },
+        ];
+        function getFilteredOptions(value) {
           modusAutocomplete.loading = true;
-          const response = await fetch('https://randomuser.me/api/?results=50');
-          const data = await response.json();
-
-          const mapData = data.results.map((item) => ({
-            id: item.name.first,
-            value: item.name.first + item.name.last,
-          }));
-
-          const filteredData = mapData.filter((item) => {
-            return item?.value?.toLowerCase()?.includes(value?.toLowerCase());
+          return new Promise((resolve) => {
+            setTimeout(() => {
+              resolve(options.filter((option) => !option.value.includes(value)));
+              modusAutocomplete.loading = false;
+            }, 3000);
           });
-          return filteredData;
-        } catch (error) {
-          modusAutocomplete.loading = false;
-          return [];
-        } finally {
-          modusAutocomplete.loading = false;
         }
-      }
+        modusAutocomplete.options = [options[0]];
+        modusAutocomplete.filterOptions = getFilteredOptions;
       }
   `;
 

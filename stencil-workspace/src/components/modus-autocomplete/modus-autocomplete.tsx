@@ -69,10 +69,10 @@ export class ModusAutocomplete {
   @Prop() noResultsFoundSubtext = 'Check spelling or try a different keyword';
 
   /** The autocomplete's options. */
-  @Prop({ mutable: true }) options: Promise<ModusAutocompleteOption[]> | ModusAutocompleteOption[] | string[];
+  @Prop({ mutable: true }) options: ModusAutocompleteOption[] | string[];
 
   /** A promise that returns the filtered options. */
-  @Prop() filterOptions: (search: string) => Promise<ModusAutocompleteOption[]>;
+  @Prop() filterOptions: (search: string) => Promise<ModusAutocompleteOption[] | string[]>;
 
   /** Whether to skip filtering when the options change. **/
   @Prop() skipFiltering: boolean;
@@ -93,14 +93,6 @@ export class ModusAutocomplete {
   watchOptions() {
     this.convertOptions();
     this.updateVisibleOptions(this.getValueAsString());
-  }
-
-  @Watch('loading')
-  watchloading() {
-    if (this.loading) {
-      this.visibleOptions = [];
-      this.visibleCustomOptions = [];
-    }
   }
 
   /** The autocomplete's input placeholder. */
@@ -182,25 +174,25 @@ export class ModusAutocomplete {
     ['large', 'large'],
   ]);
 
+  stringToOption(options: string[]): void {
+    this.options = options?.map((option) => ({
+      id: option,
+      value: option,
+    }));
+  }
+
   convertOptions(): void {
-    if (Array.isArray(this.options) && this.options.length > 0) {
-      this.options = this.options.map((option) => {
-        if (typeof option === 'string') {
-          return {
-            id: option,
-            value: option,
-          };
-        } else {
-          return {
-            id: option.id,
-            value: option.value,
-          };
-        }
-      });
+    if (!this.options) {
+      return;
+    }
+
+    if (typeof this?.options[0] === 'string') {
+      this.stringToOption(this.options as string[]);
     }
   }
 
   displayNoResults = () =>
+    !this.loading &&
     this.showNoResultsFoundMessage &&
     this.hasFocus &&
     !this.visibleOptions?.length &&
@@ -210,7 +202,7 @@ export class ModusAutocomplete {
   displayOptions = () => {
     const showOptions =
       this.showOptionsOnFocus || this.value?.length > 0 || this.disableCloseOnSelect || this.ShowItemsOnKeyDown;
-    return this.hasFocus && showOptions && !this.disabled;
+    return !this.loading && this.hasFocus && showOptions && !this.disabled;
   };
 
   addChipValue(value: ModusAutocompleteOption) {
@@ -366,20 +358,25 @@ export class ModusAutocomplete {
   handleTextInputValueChange = (event: CustomEvent<string>) => {
     if (typeof this.filterOptions === 'function') {
       const tempValue = event.detail;
-      this.handleSearchChange(tempValue, this.skipFiltering);
+      this.handleSearchChange(tempValue, true);
 
-      this.filterOptions(tempValue).then((filteredOptions) => {
+      this.filterOptions(tempValue)?.then((filteredOptions) => {
         const currentValue = this.getValueAsString();
         if (tempValue !== currentValue) {
           return;
         }
-        this.visibleOptions = filteredOptions;
+
+        if (typeof filteredOptions[0] === 'string') {
+          this.stringToOption(filteredOptions as string[]);
+        }
+
+        this.visibleOptions = filteredOptions as ModusAutocompleteOption[];
       });
     } else {
       // Cancel the modus-text-input's value change event or else it will bubble to consumer.
       event.stopPropagation();
       this.disableFiltering = !this.disableCloseOnSelect;
-      this.handleSearchChange(event.detail);
+      this.handleSearchChange(event.detail, this.skipFiltering);
     }
   };
 
@@ -412,7 +409,7 @@ export class ModusAutocomplete {
     this.containsSlottedElements = this.customOptions.length > 0;
   };
 
-  updateVisibleOptions = async (search = '') => {
+  updateVisibleOptions = (search = '') => {
     if (!this.hasFocus) {
       return;
     }
@@ -422,15 +419,13 @@ export class ModusAutocomplete {
     if (isSearchEmpty) {
       this.selectedOption = '';
     }
-    if (this?.filterOptions) {
-      return;
-    }
+
     if (!this.disableFiltering) {
-      this.visibleOptions = ((await this?.options) as ModusAutocompleteOption[])?.filter((o: ModusAutocompleteOption) => {
+      this.visibleOptions = (this?.options as ModusAutocompleteOption[])?.filter((o: ModusAutocompleteOption) => {
         return o?.value?.toLowerCase().includes(search?.toLowerCase());
       });
     } else {
-      this.visibleOptions = (await this?.options) as ModusAutocompleteOption[];
+      this.visibleOptions = this?.options as ModusAutocompleteOption[];
     }
   };
 
