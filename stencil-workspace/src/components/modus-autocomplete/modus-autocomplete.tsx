@@ -174,8 +174,8 @@ export class ModusAutocomplete {
     ['large', 'large'],
   ]);
 
-  stringToOption(options: string[]): void {
-    this.options = options?.map((option) => ({
+  stringToOption(options: string[]): ModusAutocompleteOption[] {
+    return options?.map((option) => ({
       id: option,
       value: option,
     }));
@@ -187,7 +187,7 @@ export class ModusAutocomplete {
     }
 
     if (typeof this?.options[0] === 'string') {
-      this.stringToOption(this.options as string[]);
+      this.options = this.stringToOption(this.options as string[]);
     }
   }
 
@@ -367,7 +367,7 @@ export class ModusAutocomplete {
         }
 
         if (typeof filteredOptions[0] === 'string') {
-          this.stringToOption(filteredOptions as string[]);
+          this.options = this.stringToOption(filteredOptions as string[]);
         }
 
         this.visibleOptions = filteredOptions as ModusAutocompleteOption[];
