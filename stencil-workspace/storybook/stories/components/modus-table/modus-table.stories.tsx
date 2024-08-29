@@ -50,6 +50,17 @@ function makeData(...lens): object[] {
   return makeDataLevel();
 }
 
+function makeErrors() {
+  return {
+    1: {
+      lastName: 'Invalid Input',
+    },
+    2: {
+      lastName: 'Invalid Input',
+    },
+  };
+}
+
 function initializeTable(props) {
   const {
     columns,
@@ -63,7 +74,11 @@ function initializeTable(props) {
     manualSortingOptions,
     defaultSort,
     customSort,
+    errors,
   } = props;
+
+  console.log('fdsafdsafds', InlineEditing.args);
+
   const tag = document.createElement('script');
   tag.innerHTML = `
   var modusTable = document.querySelector('modus-table');
@@ -78,6 +93,7 @@ function initializeTable(props) {
   modusTable.manualSortingOptions = ${JSON.stringify(manualSortingOptions)};
   modusTable.defaultSort = ${JSON.stringify(defaultSort)};
   modusTable.customSort = ${JSON.stringify(customSort)};
+  modusTable.errors = ${JSON.stringify(errors)};
 
   var globalData = ${JSON.stringify(data)};
 
@@ -580,6 +596,14 @@ export default {
       },
       type: { required: false },
     },
+    errors: {
+      name: 'errors',
+      description: 'To display errors on the table',
+      table: {
+        type: { summary: 'ModusTableErrors' },
+      },
+      type: { required: false },
+    },
   },
 
   parameters: {
@@ -596,6 +620,7 @@ export default {
         'rowUpdated',
         'sortChange',
         'rowActionClick',
+        'cellInputValueChange',
       ],
     },
     controls: { expanded: true, sort: 'requiredFirst' },
@@ -624,6 +649,7 @@ const Template = ({
   toolbar,
   columns,
   data,
+  errors,
   toolbarOptions,
   displayOptions,
   rowsExpandable,
@@ -670,6 +696,7 @@ const Template = ({
     manualSortingOptions,
     defaultSort,
     customSort,
+    errors,
   })}
 `;
 
@@ -932,7 +959,7 @@ const EditableColumns = DefaultColumnsWithPriority.map((col) => {
   } else return { ...col, cellEditable: true };
 });
 export const InlineEditing = Template.bind({});
-InlineEditing.args = { ...DefaultArgs, columns: EditableColumns, data: makeData(7) };
+InlineEditing.args = { ...DefaultArgs, columns: EditableColumns, data: makeData(7), errors: makeErrors() };
 
 export const LargeDataset = Template.bind({});
 

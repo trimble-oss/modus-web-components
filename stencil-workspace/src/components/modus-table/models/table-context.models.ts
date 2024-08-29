@@ -27,7 +27,7 @@ export interface TableContext {
 
   columns: ModusTableColumn<unknown>[];
 
-  errors : ModusTableErrors;
+  errors: ModusTableErrors;
 
   columnResize: boolean;
 

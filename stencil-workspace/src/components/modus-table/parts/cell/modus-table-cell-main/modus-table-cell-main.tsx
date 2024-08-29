@@ -59,19 +59,7 @@ export class ModusTableCellMain {
   @Event() cellInputValueChange: EventEmitter<TableCellEdited>;
 
   @Watch('context') onContextChange() {
-    const rowId = this.cell.row.id ?? this.cell.row.index;
-    const accessorKey = this.cell.column.columnDef[this.accessorKey];
-    const errorMessage = this.context.errors?.[rowId]?.[accessorKey];
-
-    if (errorMessage) {
-      this.errorMessage = errorMessage;
-      this.cellEl?.classList.add('error');
-      this.showErrorTooltip();
-    } else {
-      this.errorMessage = '';
-      this.cellEl?.classList.remove('error');
-      this.hideErrorTooltip();
-    }
+    this.updateErrorState();
   }
 
   private cellEl: HTMLElement;
@@ -89,6 +77,7 @@ export class ModusTableCellMain {
     this.cellEl.addEventListener('click', this.onCellClick);
     this.cellEl.addEventListener('keydown', this.onCellKeyDown);
     this.cellEl.addEventListener('blur', this.onCellBlur);
+    this.updateErrorState();
   }
 
   disconnectedCallback() {
@@ -98,6 +87,22 @@ export class ModusTableCellMain {
       this.cellEl.removeEventListener('blur', this.onCellBlur);
     }
     this.destroyErrorTooltip();
+  }
+
+  updateErrorState() {
+    const rowId = this.cell.row.id ?? this.cell.row.index;
+    const accessorKey = this.cell.column.columnDef[this.accessorKey];
+    const errorMessage = this.context.errors?.[rowId]?.[accessorKey];
+
+    if (errorMessage) {
+      this.errorMessage = errorMessage;
+      this.cellEl?.classList.add('error');
+      this.showErrorTooltip();
+    } else {
+      this.errorMessage = '';
+      this.cellEl?.classList.remove('error');
+      this.hideErrorTooltip();
+    }
   }
 
   getEditorType(): string {

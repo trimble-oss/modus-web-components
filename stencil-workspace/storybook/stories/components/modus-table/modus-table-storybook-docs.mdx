@@ -767,6 +767,12 @@ interface ModusTableManualSortingOptions {
   currentSortingState: ModusTableSortingState
 }
 
+interface ModusTableErrors {
+  [rowIndex: number]: {
+    [accessorKey: string]: string;
+  }
+}
+
 ```
 
 ### Accessibility
@@ -827,6 +833,7 @@ Users can use keyboard navigation to perform different actions.
 | `rowExpanded`            | Emits expanded state of the columns               | `CustomEvent<boolean \| { [x: string]: boolean; }>` |
 | `rowSelectionChange`     | Emits rows selected                               | `CustomEvent<unknown>`                              |
 | `sortChange`             | Emits column sort order                           | `CustomEvent<ColumnSort[]>`                         |
+| `cellInputValueChange`   | Emits the cell value dynamically when edited      | `CustomEvent<ModusTableCellValueChange>`            |
 
 ### Slot
 
