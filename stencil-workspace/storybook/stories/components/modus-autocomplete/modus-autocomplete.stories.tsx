@@ -445,48 +445,49 @@ WithDynamicOptions.args = {
 const setDynamicOptions = () => {
   const tag = document.createElement('script');
   tag.innerHTML = `
-
-      const modusAutocomplete = document.querySelector('#dynamic-options');
-      if (modusAutocomplete) {
-        const options = [
-          { id: '0', value: 'Apple' },
-          { id: '1', value: 'Banana' },
-          { id: '2', value: 'Orange' },
-          { id: '3', value: 'Mango' },
-          { id: '4', value: 'Pineapple' },
-        ];
-        const dynamicOptions = [
-          { id: '5', value: 'Grapes' },
-          { id: '6', value: 'Watermelon' },
-          { id: '7', value: 'Strawberry' },
-          { id: '8', value: 'Blueberry' },
-          { id: '9', value: 'Raspberry' },
-          { id: '10', value: 'Blackberry' },
-          { id: '11', value: 'Cherry' },
-          { id: '12', value: 'Peach' },
-          { id: '13', value: 'Pear' },
-          { id: '14', value: 'Plum' },
-          { id: '15', value: 'Kiwi' },
-          { id: '16', value: 'Lemon' },
-          { id: '17', value: 'Lime' },
-          { id: '18', value: 'Papaya' },
-          { id: '19', value: 'Passion Fruit' },
-        ];
-        function filterOptions(value) {
-          modusAutocomplete.loading = true;
-          return new Promise((resolve) => {
-            setTimeout(() => {
-              const filteredOptions = [...options, ...dynamicOptions].filter((option) =>
-                (option.value ?? option).toLowerCase().includes(value.toLowerCase())
-              );
-              resolve(filteredOptions);
-              modusAutocomplete.loading = false;
-            }, 1000);
-          });
-        }
-        modusAutocomplete.options = [options[0]];
-        modusAutocomplete.filterOptions = filterOptions;
-      }
+        (function () {
+          const modusAutocomplete = document.querySelector('#dynamic-options');
+          if (modusAutocomplete) {
+            const options = [
+              { id: '0', value: 'Apple' },
+              { id: '1', value: 'Banana' },
+              { id: '2', value: 'Orange' },
+              { id: '3', value: 'Mango' },
+              { id: '4', value: 'Pineapple' },
+            ];
+            const dynamicOptions = [
+              { id: '5', value: 'Grapes' },
+              { id: '6', value: 'Watermelon' },
+              { id: '7', value: 'Strawberry' },
+              { id: '8', value: 'Blueberry' },
+              { id: '9', value: 'Raspberry' },
+              { id: '10', value: 'Blackberry' },
+              { id: '11', value: 'Cherry' },
+              { id: '12', value: 'Peach' },
+              { id: '13', value: 'Pear' },
+              { id: '14', value: 'Plum' },
+              { id: '15', value: 'Kiwi' },
+              { id: '16', value: 'Lemon' },
+              { id: '17', value: 'Lime' },
+              { id: '18', value: 'Papaya' },
+              { id: '19', value: 'Passion Fruit' },
+            ];
+            function getFilteredOptions(value) {
+              modusAutocomplete.loading = true;
+              return new Promise((resolve) => {
+                setTimeout(() => {
+                  const filteredOptions = [...options, ...dynamicOptions].filter((option) =>
+                    (option.value ?? option).toLowerCase().includes(value.toLowerCase())
+                  );
+                  resolve(filteredOptions);
+                  modusAutocomplete.loading = false;
+                }, 1500);
+              });
+            }
+            modusAutocomplete.options = options;
+            modusAutocomplete.filterOptions = getFilteredOptions;
+          }
+        }())
   `;
 
   return tag;
