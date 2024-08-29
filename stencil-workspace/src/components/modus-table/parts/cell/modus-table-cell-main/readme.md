@@ -15,6 +15,13 @@
 | `valueChange`       | --                    |             | `(props: TableCellEdited) => void` | `undefined` |
 
 
+## Events
+
+| Event                  | Description | Type                                                                                       |
+| ---------------------- | ----------- | ------------------------------------------------------------------------------------------ |
+| `cellInputValueChange` |             | `CustomEvent<{ accessorKey: string; row: unknown; newValue: string; oldValue?: string; }>` |
+
+
 ## Methods
 
 ### `handleCellEdit(rowIndex: string, columnId: string) => Promise<void>`
