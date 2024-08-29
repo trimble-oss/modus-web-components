@@ -50,17 +50,6 @@ function makeData(...lens): object[] {
   return makeDataLevel();
 }
 
-function makeErrors() {
-  return {
-    1: {
-      lastName: 'Invalid Input',
-    },
-    2: {
-      lastName: 'Invalid Input',
-    },
-  };
-}
-
 function initializeTable(props) {
   const {
     columns,
@@ -957,7 +946,7 @@ const EditableColumns = DefaultColumnsWithPriority.map((col) => {
   } else return { ...col, cellEditable: true };
 });
 export const InlineEditing = Template.bind({});
-InlineEditing.args = { ...DefaultArgs, columns: EditableColumns, data: makeData(7), errors:{} };
+InlineEditing.args = { ...DefaultArgs, columns: EditableColumns, data: makeData(7), errors: {} };
 
 export const LargeDataset = Template.bind({});
 
