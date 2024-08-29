@@ -30,7 +30,6 @@
 | `showNoResultsFoundMessage` | `show-no-results-found-message` | Whether to show the no results found message.                                                                          | `boolean`                                                            | `true`                                        |
 | `showOptionsOnFocus`        | `show-options-on-focus`         | Whether to show autocomplete's options when focus.                                                                     | `boolean`                                                            | `undefined`                                   |
 | `size`                      | `size`                          | The autocomplete's size.                                                                                               | `"large" \| "medium"`                                                | `'medium'`                                    |
-| `skipFiltering`             | `skip-filtering`                | Whether to skip filtering when the options change. *                                                                   | `boolean`                                                            | `undefined`                                   |
 | `value`                     | `value`                         | The autocomplete's search value.                                                                                       | `string \| string[]`                                                 | `undefined`                                   |
 
 
@@ -38,7 +37,6 @@
 
 | Event               | Description                                                                   | Type                              |
 | ------------------- | ----------------------------------------------------------------------------- | --------------------------------- |
-| `inputChanged`      | An event that emits the input value after typing a sequence of characters     | `CustomEvent<string>`             |
 | `optionSelected`    | An event that fires when a dropdown option is selected. Emits the option id.  | `CustomEvent<string>`             |
 | `selectionsChanged` | An event that fires when an option is selected/removed. Emits the option ids. | `CustomEvent<string[]>`           |
 | `valueChange`       | An event that fires when the input value changes. Emits the value string.     | `CustomEvent<string \| string[]>` |

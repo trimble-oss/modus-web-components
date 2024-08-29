@@ -32,10 +32,6 @@ from a set of choices. When the user enters text into the input field, a list of
 
 <Story id="user-inputs-autocomplete--with-custom-option" />
 
-### With New options
-
-<Story id="user-inputs-autocomplete--with-new-options" />
-
 ### With Dynamic Options
 
 <Story id="user-inputs-autocomplete--with-dynamic-options" />
@@ -66,9 +62,6 @@ from a set of choices. When the user enters text into the input field, a list of
       <div style="font-size: 12px">Senior Construction Engineer</div>
     </li>
   </modus-autocomplete>
-
-  <!-- With New Options -->
-  <modus-autocomplete id="new-options" label="New Options" placeholder="Search..."></modus-autocomplete>
 
   <!-- With Dynamic Options -->
   <modus-autocomplete id="dynamic-options" label="Dynamic Autocomplete" placeholder="Search..."></modus-autocomplete>
@@ -140,55 +133,50 @@ from a set of choices. When the user enters text into the input field, a list of
     { id: '18', value: 'Papaya' },
     { id: '19', value: 'Passion Fruit' },
   ];
-  const withNewOptions = document.querySelector('#new-options');
-  const newOptions = ['Cranberry', 'Fig', 'Pomegranate'];
-  if (withNewOptions) {
-    autoComplete.addEventListener('inputChanged', async (event) => {
-      autoComplete.additionalOptions = new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(newOptions);
-        }, 3000);
-      });
-    });
-  }
+
+  // For dynamic options
+  const options = [
+    { id: '0', value: 'Apple' },
+    { id: '1', value: 'Banana' },
+    { id: '2', value: 'Orange' },
+    { id: '3', value: 'Mango' },
+    { id: '4', value: 'Pineapple' },
+  ];
+  const dynamicOptions = [
+    { id: '5', value: 'Grapes' },
+    { id: '6', value: 'Watermelon' },
+    { id: '7', value: 'Strawberry' },
+    { id: '8', value: 'Blueberry' },
+    { id: '9', value: 'Raspberry' },
+    { id: '10', value: 'Blackberry' },
+    { id: '11', value: 'Cherry' },
+    { id: '12', value: 'Peach' },
+    { id: '13', value: 'Pear' },
+    { id: '14', value: 'Plum' },
+    { id: '15', value: 'Kiwi' },
+    { id: '16', value: 'Lemon' },
+    { id: '17', value: 'Lime' },
+    { id: '18', value: 'Papaya' },
+    { id: '19', value: 'Passion Fruit' },
+  ];
   const modusAutocomplete = document.querySelector('#dynamic-options');
   if (modusAutocomplete) {
-    modusAutocomplete.filterOptions = fetchUsers;
+    modusAutocomplete.filterOptions = filterOptions;
 
-    let firstCall = true;
-    let timer;
-    async function fetchUsers(value) {
-      try {
-        if (firstCall) {
-          if (timer) {
-          } else {
-            await new Promise((resolve) => {
-              timer = setTimeout(resolve, 5000);
-              throw 'Rejected';
-            });
-          }
-          firstCall = false;
-        }
-        modusAutocomplete.loading = true;
-        const response = await fetch('https://randomuser.me/api/?results=50');
-        const data = await response.json();
-
-        const mapData = data.results.map((item) => ({
-          id: item.name.first,
-          value: item.name.first + item.name.last,
-        }));
-
-        const filteredData = mapData.filter((item) => {
-          return item?.value?.toLowerCase()?.includes(value?.toLowerCase());
-        });
-        return filteredData;
-      } catch (error) {
-        modusAutocomplete.loading = false;
-        return [];
-      } finally {
-        modusAutocomplete.loading = false;
-      }
+    function filterOptions(value) {
+      modusAutocomplete.loading = true;
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          const filteredOptions = [...options, ...dynamicOptions].filter((option) =>
+            (option.value ?? option).toLowerCase().includes(value.toLowerCase())
+          );
+          resolve(filteredOptions);
+          modusAutocomplete.loading = false;
+        }, 1000);
+      });
     }
+    modusAutocomplete.options = options;
+    modusAutocomplete.filterOptions = filterOptions;
   }
 </script>
 ```
@@ -226,7 +214,6 @@ interface ModusAutocompleteOption {
 
 | Property                    | Attribute                       | Description                                                                                                            | Type                                                    | Default                                       |
 | --------------------------- | ------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- | --------------------------------------------- | ----------- |
-| `additionalOptions`         | --                              | The autocomplete's additional options.                                                                                 | `ModusAutocompleteOption[]`                             | `undefined`                                   |
 | `ariaLabel`                 | `aria-label`                    | The autocomplete's aria label.                                                                                         | `string`                                                | `undefined`                                   |
 | `clearable`                 | `clearable`                     | Whether the input has a clear button.                                                                                  | `boolean`                                               | `false`                                       |
 | `disabled`                  | `disabled`                      | Whether the input is disabled.                                                                                         | `boolean`                                               | `undefined`                                   |

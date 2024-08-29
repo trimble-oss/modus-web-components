@@ -154,6 +154,10 @@ export namespace Components {
          */
         "errorText": string;
         /**
+          * A promise that returns the filtered options.
+         */
+        "filterOptions": (search: string) => Promise<ModusAutocompleteOption[] | string[]>;
+        /**
           * Whether the search icon is included.
          */
         "includeSearchIcon": boolean;
@@ -161,6 +165,10 @@ export namespace Components {
           * The autocomplete's label.
          */
         "label": string;
+        /**
+          * Whether the autocomplete is in a loading state.
+         */
+        "loading": boolean;
         /**
           * When enabled, multiple options can be selected in the component. And selected options are shown as chips in the input.
          */
@@ -3019,6 +3027,10 @@ declare namespace LocalJSX {
          */
         "errorText"?: string;
         /**
+          * A promise that returns the filtered options.
+         */
+        "filterOptions"?: (search: string) => Promise<ModusAutocompleteOption[] | string[]>;
+        /**
           * Whether the search icon is included.
          */
         "includeSearchIcon"?: boolean;
@@ -3026,6 +3038,10 @@ declare namespace LocalJSX {
           * The autocomplete's label.
          */
         "label"?: string;
+        /**
+          * Whether the autocomplete is in a loading state.
+         */
+        "loading"?: boolean;
         /**
           * When enabled, multiple options can be selected in the component. And selected options are shown as chips in the input.
          */

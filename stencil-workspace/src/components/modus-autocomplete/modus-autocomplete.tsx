@@ -74,9 +74,6 @@ export class ModusAutocomplete {
   /** A promise that returns the filtered options. */
   @Prop() filterOptions: (search: string) => Promise<ModusAutocompleteOption[] | string[]>;
 
-  /** Whether to skip filtering when the options change. **/
-  @Prop() skipFiltering: boolean;
-
   /** An array to hold the selected chips. */
   @State() selectedChips: ModusAutocompleteOption[] = [];
 
@@ -121,9 +118,6 @@ export class ModusAutocomplete {
       this.updateVisibleCustomOptions(this.getValueAsString());
     }
   }
-
-  /** An event that emits the input value after typing a sequence of characters */
-  @Event() inputChanged: EventEmitter<string>;
 
   /** An event that fires when a dropdown option is selected. Emits the option id. */
   @Event() optionSelected: EventEmitter<string>;
@@ -182,12 +176,10 @@ export class ModusAutocomplete {
   }
 
   convertOptions(): void {
-    if (!this.options) {
-      return;
-    }
-
-    if (typeof this?.options[0] === 'string') {
-      this.options = this.stringToOption(this.options as string[]);
+    if (this.options && this.options.length > 0) {
+      if (typeof this.options[0] === 'string') {
+        this.options = this.stringToOption(this.options as string[]);
+      }
     }
   }
 
@@ -365,18 +357,18 @@ export class ModusAutocomplete {
         if (tempValue !== currentValue) {
           return;
         }
-
-        if (typeof filteredOptions[0] === 'string') {
-          this.options = this.stringToOption(filteredOptions as string[]);
-        }
-
-        this.visibleOptions = filteredOptions as ModusAutocompleteOption[];
+        const transformedOptions =
+          filteredOptions[0] && typeof filteredOptions[0] === 'string'
+            ? this.stringToOption(filteredOptions as string[])
+            : (filteredOptions as ModusAutocompleteOption[]);
+        this.options = transformedOptions;
+        this.visibleOptions = transformedOptions;
       });
     } else {
       // Cancel the modus-text-input's value change event or else it will bubble to consumer.
       event.stopPropagation();
       this.disableFiltering = !this.disableCloseOnSelect;
-      this.handleSearchChange(event.detail, this.skipFiltering);
+      this.handleSearchChange(event.detail);
     }
   };
 
@@ -590,8 +582,9 @@ const NoResultsFound = (props: { text: string; subtext: string }) => (
     <div class="subtext">{props.subtext}</div>
   </div>
 );
+
 const LoadingSpinner = () => (
-  <div class="is-loading">
+  <div class="spinner-container">
     <modus-spinner size="1.5rem"></modus-spinner>
   </div>
 );

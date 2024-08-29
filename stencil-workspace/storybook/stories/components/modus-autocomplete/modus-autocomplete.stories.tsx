@@ -295,72 +295,6 @@ MultipleSelection.args = {
   options: customOptions,
 };
 
-export const WithNewOptions = ({
-  ariaLabel,
-  clearable,
-  disabled,
-  dropdownMaxHeight,
-  dropdownZIndex,
-  disableCloseOnSelect,
-  errorText,
-  includeSearchIcon,
-  label,
-  multiple,
-  noResultsFoundText,
-  noResultsFoundSubtext,
-  placeholder,
-  readOnly,
-  required,
-  showNoResultsFoundMessage,
-  showOptionsOnFocus,
-  size,
-  value,
-}) => html`
-  <div style="width: 600px">
-    <modus-autocomplete
-      aria-label=${ariaLabel}
-      clearable=${clearable}
-      disabled=${disabled}
-      dropdown-max-height=${dropdownMaxHeight}
-      dropdown-z-index=${dropdownZIndex}
-      disable-close-on-select=${disableCloseOnSelect}
-      error-text=${errorText}
-      include-search-icon=${includeSearchIcon}
-      label=${label}
-      multiple=${multiple}
-      no-results-found-text=${noResultsFoundText}
-      no-results-found-subtext=${noResultsFoundSubtext}
-      placeholder=${placeholder}
-      read-only=${readOnly}
-      required=${required}
-      show-no-results-found-message=${showNoResultsFoundMessage}
-      show-options-on-focus=${showOptionsOnFocus}
-      size=${size}
-      .value=${value}>
-  </div>
-  ${setNewOptions()}
-`;
-
-WithNewOptions.args = defaultArgs;
-const setNewOptions = () => {
-  const tag = document.createElement('script');
-  tag.innerHTML = `
-      var newOptions = ['Cranberry', 'Fig', 'Pomegranate'];
-      var autoComplete = document.querySelector('modus-autocomplete');
-      if (autoComplete) {
-        autoComplete.addEventListener('inputChanged', async (event) => {
-          autoComplete.additionalOptions = new Promise((resolve) => {
-            setTimeout(() => {
-              resolve(['Cranberry', 'Fig', 'Pomegranate']);
-            }, 3000);
-          });
-        });
-      }
-  `;
-
-  return tag;
-};
-
 export const WithCustomOption = ({
   ariaLabel,
   clearable,
@@ -514,12 +448,14 @@ const setDynamicOptions = () => {
 
       const modusAutocomplete = document.querySelector('#dynamic-options');
       if (modusAutocomplete) {
-         const options = [
+        const options = [
           { id: '0', value: 'Apple' },
           { id: '1', value: 'Banana' },
           { id: '2', value: 'Orange' },
           { id: '3', value: 'Mango' },
           { id: '4', value: 'Pineapple' },
+        ];
+        const dynamicOptions = [
           { id: '5', value: 'Grapes' },
           { id: '6', value: 'Watermelon' },
           { id: '7', value: 'Strawberry' },
@@ -536,17 +472,20 @@ const setDynamicOptions = () => {
           { id: '18', value: 'Papaya' },
           { id: '19', value: 'Passion Fruit' },
         ];
-        function getFilteredOptions(value) {
+        function filterOptions(value) {
           modusAutocomplete.loading = true;
           return new Promise((resolve) => {
             setTimeout(() => {
-              resolve(options.filter((option) => !option.value.includes(value)));
+              const filteredOptions = [...options, ...dynamicOptions].filter((option) =>
+                (option.value ?? option).toLowerCase().includes(value.toLowerCase())
+              );
+              resolve(filteredOptions);
               modusAutocomplete.loading = false;
-            }, 3000);
+            }, 1000);
           });
         }
         modusAutocomplete.options = [options[0]];
-        modusAutocomplete.filterOptions = getFilteredOptions;
+        modusAutocomplete.filterOptions = filterOptions;
       }
   `;
 
