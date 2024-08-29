@@ -34,7 +34,7 @@ This component is compatible with Angular reactive forms. This can be achieved t
 | ---------------- | ----------------- | ---------------------------------------------------- | --------------------- | ----------- |
 | `ariaLabel`      | `aria-label`      | (optional) The input's aria-label.                   | `string`              | `undefined` |
 | `currencySymbol` | `currency-symbol` | (optional) The currency symbol.                      | `string`              | `''`        |
-| `locale`         | `locale`          | (optional) The locale of the selected currency       | `string`              | `undefined`   |
+| `locale`         | `locale`          | (optional) The locale of the selected currency       | `string`              | `undefined` |
 | `disabled`       | `disabled`        | (optional) Whether the input is disabled.            | `boolean`             | `undefined` |
 | `errorText`      | `error-text`      | (optional) The input's error state text.             | `string`              | `undefined` |
 | `helperText`     | `helper-text`     | (optional) The input's helper text displayed below.  | `string`              | `undefined` |
@@ -74,3 +74,8 @@ This component is compatible with Angular reactive forms. This can be achieved t
 - Number Input gets a `aria-valuemax` provided by the `max-value` property input.
 - Number Input gets a `aria-valuemin` provided by the `min-value` property input.
 - Number Input gets a `aria-valuenow` set to Number Input's current value.
+
+Note :
+
+- Follow the locale codes from [BCP 47](https://tools.ietf.org/html/bcp47) for the `locale` property.
+- Follow the currency codes from [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) for the `currencySymbol` property.

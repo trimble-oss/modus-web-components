@@ -77,7 +77,11 @@ export class ModusNumberInput {
 
   componentDidLoad() {
     this.formatInputValue();
-    this.numberInput.addEventListener('wheel', (event) => this.handleWheel(event), { passive: true });
+    this.numberInput.addEventListener('wheel', this.handleWheel.bind(this), { passive: true });
+  }
+
+  disconnectedCallback() {
+    this.numberInput.removeEventListener('wheel', this.handleWheel);
   }
 
   @Watch('currencySymbol')
@@ -95,6 +99,12 @@ export class ModusNumberInput {
   }
 
   formatInputValue() {
+    if (!(this.currencySymbol || this.locale)) {
+      if (this.numberInput) {
+        this.numberInput.type = 'number';
+      }
+      return;
+    }
     if (this?.numberInput) {
       const formatStyle = this?.currencySymbol ? ('currency' as NumberFormatStyle) : ('decimal' as NumberFormatStyle);
       const currency = this?.currencySymbol || undefined;
@@ -117,6 +127,7 @@ export class ModusNumberInput {
           autoDecimalDigits: false,
           exportValueAsInteger: false,
           useGrouping: true,
+          step: this.step,
         },
       });
 
@@ -142,10 +153,20 @@ export class ModusNumberInput {
   }
 
   incrementValue() {
+    if (this.numberInput.type === 'number') {
+      this.numberInput.stepUp();
+      this.value = this.numberInput.value;
+      return;
+    }
     this.inputOptions?.increment();
   }
 
   decrementValue() {
+    if (this.numberInput.type === 'number') {
+      this.numberInput.stepDown();
+      this.value = this.numberInput.value;
+      return;
+    }
     this.inputOptions?.decrement();
   }
 
@@ -158,6 +179,16 @@ export class ModusNumberInput {
       this.decrementValue();
     } else {
       this.incrementValue();
+    }
+  }
+
+  handleKeys(event: KeyboardEvent) {
+    if (this.disabled || this.readOnly) return;
+
+    if (event.key === 'ArrowUp') {
+      this.incrementValue();
+    } else if (event.key === 'ArrowDown') {
+      this.decrementValue();
     }
   }
 
@@ -212,6 +243,7 @@ export class ModusNumberInput {
             min={this.minValue}
             placeholder={this.placeholder}
             readonly={this.readOnly}
+            onKeyDown={(event) => this.handleKeys(event)}
             ref={(el) => (this.numberInput = el as HTMLInputElement)}
             step={this.step}
             tabIndex={0}

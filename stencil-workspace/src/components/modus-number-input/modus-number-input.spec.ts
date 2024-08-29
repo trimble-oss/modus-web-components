@@ -12,7 +12,7 @@ describe('modus-number-input', () => {
         <mock:shadow-root>
           <div class="modus-number-input">
             <div class="input-container medium" part="input-container">
-              <input class="text-align-left" id="mwc_id_0_number-input" inputmode="decimal" tabindex="0" type="text" value="">
+              <input class="text-align-left" id="mwc_id_0_number-input" inputmode="decimal" tabindex="0" type="number">
                 <div class="value-adjusters">
                     <div class="increment">
                       <svg class="icon-caret-up" fill="currentColor" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
