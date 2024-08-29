@@ -59,9 +59,9 @@ export class ModusTableCellMain {
   @Event() cellInputValueChange: EventEmitter<TableCellEdited>;
 
   @Watch('context') onContextChange() {
-    const errorMessage = (this.context.data[this.cell.row.index] as any)?.errors?.[
-      this.cell.column.columnDef[this.accessorKey]
-    ];
+    const rowId = this.cell.row.id ?? this.cell.row.index;
+    const accessorKey = this.cell.column.columnDef[this.accessorKey];
+    const errorMessage = this.context.errors?.[rowId]?.[accessorKey];
 
     if (errorMessage) {
       this.errorMessage = errorMessage;
@@ -331,7 +331,7 @@ export class ModusTableCellMain {
             args={this.getEditorArgs()}
             valueChange={(newVal: string) => this.handleCellEditorValueChange(newVal, valueString)}
             keyDown={(event: KeyboardEvent, newVal: string) => this.handleCellEditorKeyDown(event, newVal, valueString)}
-            onInputValueChange={(newVal: string) => this.handleCellEditorOnInputChange(newVal, valueString)}
+            inputValueChangeHandler={(newVal: string) => this.handleCellEditorOnInputChange(newVal, valueString)}
           />
         ) : (
           this.renderCellValue()

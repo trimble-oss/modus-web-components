@@ -30,7 +30,7 @@ export class ModusTableCellEditor {
   @Prop() type: string;
   @Prop() valueChange: (newValue: string) => void;
   @Prop() keyDown: (e: KeyboardEvent, newValue: string) => void;
-  @Prop() onInputValueChange: (newValue: string) => void;
+  @Prop() inputValueChangeHandler: (newValue: string) => void;
 
   private editedValue: unknown;
   private inputElement: HTMLElement;
@@ -98,7 +98,7 @@ export class ModusTableCellEditor {
         value={this.value as string}
         onValueChange={(e: CustomEvent<string>) => {
           this.editedValue = e.detail;
-          this.onInputValueChange(e.detail as string);
+          this.inputValueChangeHandler(e.detail as string);
         }}
         onBlur={this.handleBlur}
         onKeyDown={this.handleKeyDown}
