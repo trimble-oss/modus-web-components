@@ -7,9 +7,9 @@ import {
   Component,
   Prop,
   Method,
-  h,
+  h,// eslint-disable-line @typescript-eslint/no-unused-vars
   Event,
-  EventEmitter, // eslint-disable-line @typescript-eslint/no-unused-vars
+  EventEmitter,
 } from '@stencil/core';
 import { Cell } from '@tanstack/table-core';
 import { ModusTableCellBadge, ModusTableCellEditorArgs, ModusTableCellLink } from '../../../models/modus-table.models';
