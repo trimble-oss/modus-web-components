@@ -135,6 +135,12 @@
       }
     }
 
+    .spinner-container {
+      display: flex;
+      justify-content: center;
+      padding: 4px;
+    }
+
     .no-results {
       align-items: center;
       border: 1px solid $modus-autocomplete-options-border-color;
