@@ -77,8 +77,6 @@ function initializeTable(props) {
     errors,
   } = props;
 
-  console.log('fdsafdsafds', InlineEditing.args);
-
   const tag = document.createElement('script');
   tag.innerHTML = `
   var modusTable = document.querySelector('modus-table');
@@ -959,7 +957,7 @@ const EditableColumns = DefaultColumnsWithPriority.map((col) => {
   } else return { ...col, cellEditable: true };
 });
 export const InlineEditing = Template.bind({});
-InlineEditing.args = { ...DefaultArgs, columns: EditableColumns, data: makeData(7), errors: makeErrors() };
+InlineEditing.args = { ...DefaultArgs, columns: EditableColumns, data: makeData(7), errors:{} };
 
 export const LargeDataset = Template.bind({});
 
