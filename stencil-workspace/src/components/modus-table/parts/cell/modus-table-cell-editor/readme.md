@@ -43,6 +43,7 @@ graph TD;
   modus-table-cell-editor --> modus-autocomplete
   modus-autocomplete --> modus-text-input
   modus-autocomplete --> modus-chip
+  modus-autocomplete --> modus-spinner
   modus-table-cell-main --> modus-table-cell-editor
   style modus-table-cell-editor fill:#f9f,stroke:#333,stroke-width:4px
 ```

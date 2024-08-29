@@ -32,6 +32,10 @@ from a set of choices. When the user enters text into the input field, a list of
 
 <Story id="user-inputs-autocomplete--with-custom-option" />
 
+### With Dynamic Options
+
+<Story id="user-inputs-autocomplete--with-dynamic-options" />
+
 ```html
 <div style="width: 500px">
   <!-- Default (values set in <script />) -->
@@ -58,6 +62,9 @@ from a set of choices. When the user enters text into the input field, a list of
       <div style="font-size: 12px">Senior Construction Engineer</div>
     </li>
   </modus-autocomplete>
+
+  <!-- With Dynamic Options -->
+  <modus-autocomplete id="dynamic-options" label="Dynamic Autocomplete" placeholder="Search..."></modus-autocomplete>
 </div>
 <script>
   document.querySelector('#default').options = [
@@ -126,6 +133,51 @@ from a set of choices. When the user enters text into the input field, a list of
     { id: '18', value: 'Papaya' },
     { id: '19', value: 'Passion Fruit' },
   ];
+
+  // For dynamic options
+  const options = [
+    { id: '0', value: 'Apple' },
+    { id: '1', value: 'Banana' },
+    { id: '2', value: 'Orange' },
+    { id: '3', value: 'Mango' },
+    { id: '4', value: 'Pineapple' },
+  ];
+  const dynamicOptions = [
+    { id: '5', value: 'Grapes' },
+    { id: '6', value: 'Watermelon' },
+    { id: '7', value: 'Strawberry' },
+    { id: '8', value: 'Blueberry' },
+    { id: '9', value: 'Raspberry' },
+    { id: '10', value: 'Blackberry' },
+    { id: '11', value: 'Cherry' },
+    { id: '12', value: 'Peach' },
+    { id: '13', value: 'Pear' },
+    { id: '14', value: 'Plum' },
+    { id: '15', value: 'Kiwi' },
+    { id: '16', value: 'Lemon' },
+    { id: '17', value: 'Lime' },
+    { id: '18', value: 'Papaya' },
+    { id: '19', value: 'Passion Fruit' },
+  ];
+  const modusAutocomplete = document.querySelector('#dynamic-options');
+  if (modusAutocomplete) {
+    modusAutocomplete.filterOptions = filterOptions;
+
+    function filterOptions(value) {
+      modusAutocomplete.loading = true;
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          const filteredOptions = [...options, ...dynamicOptions].filter((option) =>
+            (option.value ?? option).toLowerCase().includes(value.toLowerCase())
+          );
+          resolve(filteredOptions);
+          modusAutocomplete.loading = false;
+        }, 1000);
+      });
+    }
+    modusAutocomplete.options = options;
+    modusAutocomplete.filterOptions = filterOptions;
+  }
 </script>
 ```
 
@@ -160,28 +212,30 @@ interface ModusAutocompleteOption {
 
 ### Properties
 
-| Property                    | Attribute                       | Description                                                                                                            | Type                       | Default                                       |
-| --------------------------- | ------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | -------------------------- | --------------------------------------------- | ----------- |
-| `ariaLabel`                 | `aria-label`                    | The autocomplete's aria label.                                                                                         | `string`                   | `undefined`                                   |
-| `clearable`                 | `clearable`                     | Whether the input has a clear button.                                                                                  | `boolean`                  | `false`                                       |
-| `disabled`                  | `disabled`                      | Whether the input is disabled.                                                                                         | `boolean`                  | `undefined`                                   |
-| `dropdownMaxHeight`         | `dropdown-max-height`           | The autocomplete's dropdown's max height.                                                                              | `string`                   | `'300px'`                                     |
-| `dropdownZIndex`            | `dropdown-z-index`              | The autocomplete's dropdown z-index.                                                                                   | `string`                   | `'1'`                                         |
-| `disableCloseOnSelect`      | `disable-close-on-select`       | Whether the autocomplete's options always display on select.                                                           | `boolean`                  | `false`                                       |
-| `errorText`                 | `error-text`                    | The autocomplete's error text.                                                                                         | `string`                   | `undefined`                                   |
-| `includeSearchIcon`         | `include-search-icon`           | Whether the search icon is included.                                                                                   | `boolean`                  | `true`                                        |
-| `label`                     | `label`                         | The autocomplete's label.                                                                                              | `string`                   | `undefined`                                   |
-| `multiple`                  | `multiple`                      | When enabled, multiple options can be selected in the component. And selected options are shown as chips in the input. | `boolean`                  | `false`                                       |
-| `noResultsFoundSubtext`     | `no-results-found-subtext`      | The autocomplete's no results sub-text.                                                                                | `string`                   | `'Check spelling or try a different keyword'` |
-| `noResultsFoundText`        | `no-results-found-text`         | The autocomplete's no results text.                                                                                    | `string`                   | `'No results found'`                          |
-| `options`                   | --                              | The autocomplete's options.                                                                                            | `ModusAutocompleteOption[] | string[]`                                     | `undefined` |
-| `placeholder`               | `placeholder`                   | The autocomplete's input placeholder.                                                                                  | `string`                   | `undefined`                                   |
-| `readOnly`                  | `read-only`                     | Whether the autocomplete is read-only.                                                                                 | `boolean`                  | `undefined`                                   |
-| `required`                  | `required`                      | Whether the autocomplete is required.                                                                                  | `boolean`                  | `undefined`                                   |
-| `showNoResultsFoundMessage` | `show-no-results-found-message` | Whether to show the no results found message.                                                                          | `boolean`                  | `true`                                        |
-| `showOptionsOnFocus`        | `show-options-on-focus`         | Whether to show autocomplete's options when focus                                                                      | `boolean`                  | `false`                                       |
-| `size`                      | `size`                          | The autocomplete's size.                                                                                               | `"large" \| "medium"`      | `'medium'`                                    |
-| `value`                     | `value`                         | The autocomplete's search value.                                                                                       | `"string" \| "string[]"`   | `undefined`                                   |
+| Property                    | Attribute                       | Description                                                                                                            | Type                                                    | Default                                       |
+| --------------------------- | ------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- | --------------------------------------------- | ----------- |
+| `ariaLabel`                 | `aria-label`                    | The autocomplete's aria label.                                                                                         | `string`                                                | `undefined`                                   |
+| `clearable`                 | `clearable`                     | Whether the input has a clear button.                                                                                  | `boolean`                                               | `false`                                       |
+| `disabled`                  | `disabled`                      | Whether the input is disabled.                                                                                         | `boolean`                                               | `undefined`                                   |
+| `dropdownMaxHeight`         | `dropdown-max-height`           | The autocomplete's dropdown's max height.                                                                              | `string`                                                | `'300px'`                                     |
+| `dropdownZIndex`            | `dropdown-z-index`              | The autocomplete's dropdown z-index.                                                                                   | `string`                                                | `'1'`                                         |
+| `disableCloseOnSelect`      | `disable-close-on-select`       | Whether the autocomplete's options always display on select.                                                           | `boolean`                                               | `false`                                       |
+| `errorText`                 | `error-text`                    | The autocomplete's error text.                                                                                         | `string`                                                | `undefined`                                   |
+| `filterOptions`             | `filter-options`                | If provided, the built-in filtering will be turned off and the returned options will be displayed in the list.         | `(value: string) => Promise<ModusAutocompleteOption[]>` | `undefined`                                   |
+| `includeSearchIcon`         | `include-search-icon`           | Whether the search icon is included.                                                                                   | `boolean`                                               | `true`                                        |
+| `label`                     | `label`                         | The autocomplete's label.                                                                                              | `string`                                                | `undefined`                                   |
+| `loading`                   | `loading`                       | Whether the autocomplete is in a loading state.                                                                        | `boolean`                                               | `false`                                       |
+| `multiple`                  | `multiple`                      | When enabled, multiple options can be selected in the component. And selected options are shown as chips in the input. | `boolean`                                               | `false`                                       |
+| `noResultsFoundSubtext`     | `no-results-found-subtext`      | The autocomplete's no results sub-text.                                                                                | `string`                                                | `'Check spelling or try a different keyword'` |
+| `noResultsFoundText`        | `no-results-found-text`         | The autocomplete's no results text.                                                                                    | `string`                                                | `'No results found'`                          |
+| `options`                   | --                              | The autocomplete's options.                                                                                            | `ModusAutocompleteOption[]                              | string[]`                                     | `undefined` |
+| `placeholder`               | `placeholder`                   | The autocomplete's input placeholder.                                                                                  | `string`                                                | `undefined`                                   |
+| `readOnly`                  | `read-only`                     | Whether the autocomplete is read-only.                                                                                 | `boolean`                                               | `undefined`                                   |
+| `required`                  | `required`                      | Whether the autocomplete is required.                                                                                  | `boolean`                                               | `undefined`                                   |
+| `showNoResultsFoundMessage` | `show-no-results-found-message` | Whether to show the no results found message.                                                                          | `boolean`                                               | `true`                                        |
+| `showOptionsOnFocus`        | `show-options-on-focus`         | Whether to show autocomplete's options when focus                                                                      | `boolean`                                               | `false`                                       |
+| `size`                      | `size`                          | The autocomplete's size.                                                                                               | `"large" \| "medium"`                                   | `'medium'`                                    |
+| `value`                     | `value`                         | The autocomplete's search value.                                                                                       | `"string" \| "string[]"`                                | `undefined`                                   |
 
 ### Events
 
