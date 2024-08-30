@@ -92,6 +92,12 @@ table {
     left: 46.25px;
   }
 
+  td.error {
+    border: 2px solid var(--modus-input-validation-error-color, #da212c) !important;
+    border-radius: unset;
+    box-shadow: 0 0 0 1px var(--modus-input-validation-error-color, #da212c);
+  }
+
   thead {
     position: sticky;
     top: 0;

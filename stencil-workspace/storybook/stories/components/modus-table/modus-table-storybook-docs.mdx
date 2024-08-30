@@ -767,6 +767,12 @@ interface ModusTableManualSortingOptions {
   currentSortingState: ModusTableSortingState
 }
 
+interface ModusTableErrors {
+  [rowIndex: number]: {
+    [accessorKey: string]: string;
+  }
+}
+
 ```
 
 ### Accessibility
@@ -815,18 +821,19 @@ Users can use keyboard navigation to perform different actions.
 
 ## Events
 
-| Event                    | Description                                       | Type                                                |
-| ------------------------ | ------------------------------------------------- | --------------------------------------------------- |
-| `cellLinkClick`          | Emits the link that was clicked                   | `CustomEvent<ModusTableCellLink>`                   |
-| `cellValueChange`        | Emits the cell value that was edited              | `CustomEvent<ModusTableCellValueChange>`            |
-| `columnOrderChange`      | Emits columns in the updated order                | `CustomEvent<string[]>`                             |
-| `columnSizingChange`     | Emits latest column size                          | `CustomEvent<{ [x: string]: number; }>`             |
-| `columnVisibilityChange` | Emits visibility state of each column             | `CustomEvent<{ [x: string]: boolean; }>`            |
-| `paginationChange`       | Emits selected page index and size                | `CustomEvent<PaginationState>`                      |
-| `rowActionClick`         | An event that fires when a row action is clicked. | `CustomEvent<ModusTableRowActionClick>`             |
-| `rowExpanded`            | Emits expanded state of the columns               | `CustomEvent<boolean \| { [x: string]: boolean; }>` |
-| `rowSelectionChange`     | Emits rows selected                               | `CustomEvent<unknown>`                              |
-| `sortChange`             | Emits column sort order                           | `CustomEvent<ColumnSort[]>`                         |
+| Event                    | Description                                           | Type                                                |
+| ------------------------ | ----------------------------------------------------- | --------------------------------------------------- |
+| `cellLinkClick`          | Emits the link that was clicked                       | `CustomEvent<ModusTableCellLink>`                   |
+| `cellValueChange`        | Emits the cell value that was edited                  | `CustomEvent<ModusTableCellValueChange>`            |
+| `columnOrderChange`      | Emits columns in the updated order                    | `CustomEvent<string[]>`                             |
+| `columnSizingChange`     | Emits latest column size                              | `CustomEvent<{ [x: string]: number; }>`             |
+| `columnVisibilityChange` | Emits visibility state of each column                 | `CustomEvent<{ [x: string]: boolean; }>`            |
+| `paginationChange`       | Emits selected page index and size                    | `CustomEvent<PaginationState>`                      |
+| `rowActionClick`         | An event that fires when a row action is clicked.     | `CustomEvent<ModusTableRowActionClick>`             |
+| `rowExpanded`            | Emits expanded state of the columns                   | `CustomEvent<boolean \| { [x: string]: boolean; }>` |
+| `rowSelectionChange`     | Emits rows selected                                   | `CustomEvent<unknown>`                              |
+| `sortChange`             | Emits column sort order                               | `CustomEvent<ColumnSort[]>`                         |
+| `cellInputValueChange`   | Emits the current cell input value on every keystroke | `CustomEvent<ModusTableCellValueChange>`            |
 
 ### Slot
 

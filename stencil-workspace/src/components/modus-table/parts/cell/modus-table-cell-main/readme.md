@@ -15,6 +15,13 @@
 | `valueChange`       | --                    |             | `(props: TableCellEdited) => void` | `undefined` |
 
 
+## Events
+
+| Event                  | Description | Type                                                                                       |
+| ---------------------- | ----------- | ------------------------------------------------------------------------------------------ |
+| `cellInputValueChange` |             | `CustomEvent<{ accessorKey: string; row: unknown; newValue: string; oldValue?: string; }>` |
+
+
 ## Methods
 
 ### `handleCellEdit(rowIndex: string, columnId: string) => Promise<void>`
@@ -59,6 +66,7 @@ graph TD;
   modus-table-cell-editor --> modus-autocomplete
   modus-autocomplete --> modus-text-input
   modus-autocomplete --> modus-chip
+  modus-autocomplete --> modus-spinner
   modus-table --> modus-table-cell-main
   style modus-table-cell-main fill:#f9f,stroke:#333,stroke-width:4px
 ```
