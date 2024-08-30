@@ -104,6 +104,14 @@ export default {
         type: { summary: 'string' },
       },
     },
+    includeErrorIcon: {
+      name: 'include-error-icon',
+      description: 'Whether to include the error icon',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      },
+    },
     includePasswordTextToggle: {
       name: 'include-password-text-toggle',
       description: 'Whether the password text toggle icon is included',
@@ -277,6 +285,7 @@ const Template = ({
   enterkeyhint,
   errorText,
   helperText,
+  includeErrorIcon,
   includePasswordTextToggle,
   includeSearchIcon,
   inputmode,
@@ -306,6 +315,7 @@ const Template = ({
     enterkeyhint=${enterkeyhint}
     error-text=${errorText}
     helper-text=${helperText}
+    include-error-icon=${includeErrorIcon}
     include-password-text-toggle=${includePasswordTextToggle}
     include-search-icon=${includeSearchIcon}
     inputmode=${inputmode}
@@ -337,6 +347,7 @@ Default.args = {
   enterkeyhint: undefined,
   errorText: '',
   helperText: '',
+  includeErrorIcon: false,
   includePasswordTextToggle: true,
   includeSearchIcon: false,
   inputmode: '',

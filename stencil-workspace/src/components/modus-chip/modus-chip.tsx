@@ -36,6 +36,9 @@ export class ModusChip {
   /** (optional) The chip's value. */
   @Prop() value: string;
 
+  /** (optional) the chip's id */
+  @Prop() chipId: string;
+
   /** (optional) Maximum width for the Chip's text and shows ellipsis when truncated */
   @Prop() maxWidth: string;
 
@@ -111,6 +114,7 @@ export class ModusChip {
       <button
         aria-disabled={this.disabled ? 'true' : undefined}
         aria-label={this.ariaLabel || undefined}
+        id={this.chipId || undefined}
         class={chipClass}
         onClick={this.disabled ? null : (event) => this.onChipClick(event)}
         tabIndex={0}

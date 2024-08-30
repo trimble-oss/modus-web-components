@@ -5,6 +5,13 @@ import docs from './modus-file-dropzone-storybook-docs.mdx';
 export default {
   title: 'Components/File Dropzone',
   argTypes: {
+    acceptFileTypes: {
+      name: 'accept-file-types',
+      description: "The dropzone's accepted file types",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
     ariaLabel: {
       name: 'aria-label',
       description: "The dropzone's aria-label",
@@ -33,11 +40,25 @@ export default {
         type: { summary: 'string' },
       },
     },
+    fileDraggedOverInstructions: {
+      name: 'file-dragged-over-instructions',
+      description: "The dropzone's instruction text when a file is being dragged over.'",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
     includeStateIcon: {
       name: 'include-state-icon',
       description: 'Whether to include the state icon',
       table: {
         type: { summary: 'boolean' },
+      },
+    },
+    instructions: {
+      name: 'instructions',
+      description: "The dropzone's instruction text",
+      table: {
+        type: { summary: 'string' },
       },
     },
     label: {
@@ -91,11 +112,14 @@ export default {
 };
 
 export const Default = ({
+  acceptFileTypes,
   ariaLabel,
   description,
   dropzoneHeight,
   dropzoneWidth,
+  fileDraggedOverInstructions,
   includeStateIcon,
+  instructions,
   label,
   maxFileCount,
   maxFileNameLength,
@@ -103,11 +127,14 @@ export const Default = ({
   multiple,
 }) => html`
   <modus-file-dropzone
+    accept-file-types=${acceptFileTypes}
     aria-label=${ariaLabel}
     description=${description}
     dropzone-height=${dropzoneHeight}
     dropzone-width=${dropzoneWidth}
+    file-dragged-over-instructions=${fileDraggedOverInstructions}
     include-state-icon=${includeStateIcon}
+    instructions=${instructions}
     label=${label}
     max-file-count=${maxFileCount}
     max-file-name-length=${maxFileNameLength}
@@ -116,11 +143,14 @@ export const Default = ({
   </modus-file-dropzone>
 `;
 Default.args = {
+  acceptFileTypes: '.doc,.docx',
   ariaLabel: 'dropzone',
   description: 'File dropzone description',
   dropzoneHeight: '200px',
   dropzoneWidth: '500px',
+  fileDraggedOverInstructions: 'Drag files here.',
   includeStateIcon: true,
+  instructions: 'Drag files here or browse to upload.',
   label: 'Dropzone Label',
   maxFileCount: '4',
   maxFileNameLength: '20',

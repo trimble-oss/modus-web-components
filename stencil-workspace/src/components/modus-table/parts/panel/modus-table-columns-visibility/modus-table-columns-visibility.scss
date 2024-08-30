@@ -32,7 +32,10 @@
   }
 
   .column-visibility-buttons-container {
+    display: flex;
+    justify-content: flex-end;
     margin-bottom: 12px;
+    margin-right: 12px;
   }
 }
 

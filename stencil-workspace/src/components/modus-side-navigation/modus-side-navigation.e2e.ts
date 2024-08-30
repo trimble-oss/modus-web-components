@@ -13,7 +13,7 @@ describe('modus-side-navigation', () => {
     const page = await newE2EPage();
     await page.setContent(`<modus-side-navigation>
     <modus-side-navigation-item label="Test">
-      <svg slot="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="24" width="24" viewBox="0 0 32 32">
+      <svg slot="menu-icon" fill="currentColor" height="24" width="24" viewBox="0 0 32 32">
         <g>
           <path d="m27.707 14.293-11-11a1 1 0 0 0-1.414 0l-11 11A1 1 0 0 0 5 16h5v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V16h5a1 1 0 0 0 .707-1.707z"/>
         </g>
@@ -68,7 +68,7 @@ describe('modus-side-navigation', () => {
     const page = await newE2EPage();
     await page.setContent(`<modus-side-navigation>
     <modus-side-navigation-item label="Test">
-      <svg slot="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="24" width="24" viewBox="0 0 32 32">
+      <svg slot="menu-icon" fill="currentColor" height="24" width="24" viewBox="0 0 32 32">
         <g>
           <path d="m27.707 14.293-11-11a1 1 0 0 0-1.414 0l-11 11A1 1 0 0 0 5 16h5v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V16h5a1 1 0 0 0 .707-1.707z"/>
         </g>
@@ -100,7 +100,7 @@ describe('modus-side-navigation', () => {
     const page = await newE2EPage();
     await page.setContent(`<div><modus-side-navigation max-width="300px">
     <modus-side-navigation-item label="Test">
-      <svg slot="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="24" width="24" viewBox="0 0 32 32">
+      <svg slot="menu-icon" fill="currentColor" height="24" width="24" viewBox="0 0 32 32">
         <g>
           <path d="m27.707 14.293-11-11a1 1 0 0 0-1.414 0l-11 11A1 1 0 0 0 5 16h5v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V16h5a1 1 0 0 0 .707-1.707z"/>
         </g>
@@ -135,7 +135,7 @@ describe('modus-side-navigation', () => {
     await page.setContent(`
   <modus-side-navigation>
     <modus-side-navigation-item label="Test">
-      <svg slot="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="24" width="24" viewBox="0 0 32 32">
+      <svg slot="menu-icon" fill="currentColor" height="24" width="24" viewBox="0 0 32 32">
         <g>
           <path d="m27.707 14.293-11-11a1 1 0 0 0-1.414 0l-11 11A1 1 0 0 0 5 16h5v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V16h5a1 1 0 0 0 .707-1.707z"/>
         </g>
@@ -160,7 +160,7 @@ describe('modus-side-navigation-item', () => {
     const page = await newE2EPage();
     await page.setContent(`<modus-side-navigation>
     <modus-side-navigation-item>
-      <svg slot="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="24" width="24" viewBox="0 0 32 32">
+      <svg slot="menu-icon" fill="currentColor" height="24" width="24" viewBox="0 0 32 32">
         <g>
           <path d="m27.707 14.293-11-11a1 1 0 0 0-1.414 0l-11 11A1 1 0 0 0 5 16h5v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V16h5a1 1 0 0 0 .707-1.707z"/>
         </g>
@@ -184,7 +184,7 @@ describe('modus-side-navigation-item', () => {
     const page = await newE2EPage();
     await page.setContent(`<modus-side-navigation>
     <modus-side-navigation-item label="Test">
-      <svg slot="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="24" width="24" viewBox="0 0 32 32">
+      <svg slot="menu-icon" fill="currentColor" height="24" width="24" viewBox="0 0 32 32">
         <g>
           <path d="m27.707 14.293-11-11a1 1 0 0 0-1.414 0l-11 11A1 1 0 0 0 5 16h5v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V16h5a1 1 0 0 0 .707-1.707z"/>
         </g>
@@ -206,7 +206,7 @@ describe('modus-side-navigation-item', () => {
     const page = await newE2EPage();
     await page.setContent(`<modus-side-navigation>
     <modus-side-navigation-item label="Test">
-      <svg slot="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="24" width="24" viewBox="0 0 32 32">
+      <svg slot="menu-icon" fill="currentColor" height="24" width="24" viewBox="0 0 32 32">
         <g>
           <path d="m27.707 14.293-11-11a1 1 0 0 0-1.414 0l-11 11A1 1 0 0 0 5 16h5v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V16h5a1 1 0 0 0 .707-1.707z"/>
         </g>
@@ -228,7 +228,7 @@ describe('modus-side-navigation-item', () => {
     const page = await newE2EPage();
     await page.setContent(`<modus-side-navigation>
     <modus-side-navigation-item label="Test">
-      <svg slot="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="24" width="24" viewBox="0 0 32 32">
+      <svg slot="menu-icon" fill="currentColor" height="24" width="24" viewBox="0 0 32 32">
         <g>
           <path d="m27.707 14.293-11-11a1 1 0 0 0-1.414 0l-11 11A1 1 0 0 0 5 16h5v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V16h5a1 1 0 0 0 .707-1.707z"/>
         </g>
@@ -253,7 +253,7 @@ describe('modus-side-navigation-item', () => {
     const page = await newE2EPage();
     await page.setContent(`<modus-side-navigation>
     <modus-side-navigation-item label="Test">
-      <svg slot="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="24" width="24" viewBox="0 0 32 32">
+      <svg slot="menu-icon" fill="currentColor" height="24" width="24" viewBox="0 0 32 32">
         <g>
           <path d="m27.707 14.293-11-11a1 1 0 0 0-1.414 0l-11 11A1 1 0 0 0 5 16h5v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V16h5a1 1 0 0 0 .707-1.707z"/>
         </g>
@@ -277,7 +277,7 @@ describe('modus-side-navigation-item', () => {
     const page = await newE2EPage();
     await page.setContent(`<modus-side-navigation>
     <modus-side-navigation-item label="Test">
-      <svg slot="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="24" width="24" viewBox="0 0 32 32">
+      <svg slot="menu-icon" fill="currentColor" height="24" width="24" viewBox="0 0 32 32">
         <g>
           <path d="m27.707 14.293-11-11a1 1 0 0 0-1.414 0l-11 11A1 1 0 0 0 5 16h5v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V16h5a1 1 0 0 0 .707-1.707z"/>
         </g>
@@ -329,7 +329,7 @@ describe('modus-side-navigation-item', () => {
     const page = await newE2EPage();
     await page.setContent(`<div><modus-side-navigation  collapse-on-click-outside="false" expanded="true" max-width="300px">
     <modus-side-navigation-item label="Test">
-      <svg slot="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="24" width="24" viewBox="0 0 32 32">
+      <svg slot="menu-icon" fill="currentColor" height="24" width="24" viewBox="0 0 32 32">
         <g>
           <path d="m27.707 14.293-11-11a1 1 0 0 0-1.414 0l-11 11A1 1 0 0 0 5 16h5v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V16h5a1 1 0 0 0 .707-1.707z"/>
         </g>
@@ -354,7 +354,7 @@ describe('modus-side-navigation-item', () => {
     await page.setContent(`
   <modus-side-navigation>
     <modus-side-navigation-item label="Test">
-      <svg slot="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="24" width="24" viewBox="0 0 32 32">
+      <svg slot="menu-icon" fill="currentColor" height="24" width="24" viewBox="0 0 32 32">
         <g>
           <path d="m27.707 14.293-11-11a1 1 0 0 0-1.414 0l-11 11A1 1 0 0 0 5 16h5v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V16h5a1 1 0 0 0 .707-1.707z"/>
         </g>

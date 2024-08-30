@@ -120,3 +120,15 @@
     }
   }
 }
+
+@media (prefers-reduced-motion) {
+  .side-nav-level,
+  .side-nav-menu,
+  .side-nav-panel {
+    transition-duration: 0s !important;
+
+    &.expanded {
+      transition-duration: 0s !important;
+    }
+  }
+}

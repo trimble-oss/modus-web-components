@@ -13,6 +13,9 @@ export class ModusFileDropzone {
   @State() error: 'maxFileCount' | 'maxFileNameLength' | 'maxTotalFileSize' | null = null;
   @State() fileDraggedOver = false;
 
+  /** (optional) The dropzone's accepted file types */
+  @Prop() acceptFileTypes: string;
+
   /** (optional) The dropzone's aria-label. */
   @Prop() ariaLabel: string | null;
 
@@ -25,11 +28,17 @@ export class ModusFileDropzone {
   /** (optional) The dropzone's width. */
   @Prop() dropzoneWidth: string;
 
+  /** (optional) The dropzone's instruction text when a file is being dragged over. */
+  @Prop() fileDraggedOverInstructions = 'Drag files here.';
+
   /** (optional) Whether to include the upload icon. */
   @Prop() includeStateIcon = true;
 
   /** (optional) The dropzone's label text. */
   @Prop() label: string;
+
+  /** (optional) The dropzone's instruction text. */
+  @Prop() instructions = 'Drag files here or browse to upload.';
 
   /** (optional) The dropzone's max file count. */
   @Prop() maxFileCount: number;
@@ -169,7 +178,7 @@ export class ModusFileDropzone {
     this.errorMessageBottom = '';
   };
 
-  render(): unknown {
+  render() {
     return (
       <Host aria-label={this.ariaLabel} role="button">
         <div class="modus-file-dropzone">
@@ -178,13 +187,18 @@ export class ModusFileDropzone {
             multiple={this.multiple}
             ref={(el) => (this.fileInput = el as HTMLInputElement)}
             type="file"
+            accept={this.acceptFileTypes}
           />
           <div class="header">
             <label>{this.label}</label>
             <span>{this.description}</span>
           </div>
           <div
-            class={`dropzone ${this.fileDraggedOver ? 'highlight' : null} ${this.error ? 'error' : null}`}
+            class={{
+              dropzone: true,
+              error: !!this.error,
+              highlight: this.fileDraggedOver,
+            }}
             onDragLeave={(e) => this.onDragLeave(e)}
             onDragOver={(e) => this.onDragOver(e)}
             onDrop={(e) => this.onDrop(e)}
@@ -193,10 +207,10 @@ export class ModusFileDropzone {
             {this.includeStateIcon && (this.error ? <IconCancel size={'36'} /> : <IconUploadCloud size={'36'} />)}
             {!this.error &&
               (this.fileDraggedOver ? (
-                'Drag files here.'
+                this.fileDraggedOverInstructions
               ) : (
                 <div class="browse" onClick={this.openBrowse}>
-                  Drag files here or browse to upload.
+                  {this.instructions}
                 </div>
               ))}
             {this.error && (

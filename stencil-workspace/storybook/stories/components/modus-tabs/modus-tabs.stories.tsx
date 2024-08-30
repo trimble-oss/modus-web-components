@@ -1,6 +1,6 @@
 // @ts-ignore: JSX/MDX with Stencil
-import docs from './modus-tabs-storybook-docs.mdx';
 import { html } from 'lit-html';
+import docs from './modus-tabs-storybook-docs.mdx';
 
 export default {
   title: 'Components/Tabs',
@@ -28,13 +28,13 @@ const Template = ({ size }) => html`
 `;
 export const Default = Template.bind({});
 Default.args = {
-  size: 'medium'
-}
+  size: 'medium',
+};
 
 export const Small = Template.bind({});
 Small.args = {
-  size: 'small'
-}
+  size: 'small',
+};
 
 const setTabs = () => {
   const tag = document.createElement('script');
@@ -48,6 +48,26 @@ const setTabs = () => {
         active: true,
         id: 1,
         label: 'Tab 2'
+      },
+      {
+        id: 'tab-3',
+        label: 'Tab 3',
+        leftIcon: 'sun',
+      },
+      {
+        id: 'tab-4',
+        label: 'Tab 4',
+        rightIcon: 'moon',
+      },
+      {
+        id: 'tab-5',
+        label: 'Tab 5',
+        leftIcon: 'sun',
+        rightIcon: 'moon',
+      },
+      {
+        id: 'tab-6',
+        iconOnly: 'settings',
       }
     ];
   `;

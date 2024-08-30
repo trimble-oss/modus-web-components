@@ -31,9 +31,7 @@ npm install @trimble-oss/modus-web-components --save
 
 ```html
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=fallback"
-  rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=fallback" rel="stylesheet" />
 ```
 
 3. The package exposes the `defineCustomElements()` method which will define every component in the bundle. It does not run automatically, so you must import it and execute it yourself. We recommend you do this near the root of your application like so:
@@ -61,9 +59,7 @@ Modus Web Components ships with a file called `vscode.html-custom-data.json` tha
 
 ```json
 {
-  "html.customData": [
-    "./node_modules/@trimble-oss/modus-web-components/dist/vscode.html-custom-data.json"
-  ]
+  "html.customData": ["./node_modules/@trimble-oss/modus-web-components/dist/vscode.html-custom-data.json"]
 }
 ```
 
