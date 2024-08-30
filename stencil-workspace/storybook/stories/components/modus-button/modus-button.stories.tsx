@@ -34,13 +34,13 @@ export default {
     },
     color: {
       control: {
-        options: ['danger', 'primary', 'secondary', 'tertiary'],
+        options: ['danger', 'primary', 'secondary', 'tertiary', 'special'],
         type: 'select',
       },
       description: 'The color of the button',
       table: {
         defaultValue: { summary: `'primary'` },
-        type: { summary: `'danger' | 'primary' | 'secondary' | 'tertiary'` },
+        type: { summary: `'danger' | 'primary' | 'secondary' | 'tertiary' | 'special'` },
       },
     },
     disabled: {
@@ -173,3 +173,9 @@ IconOnly.args = {
 
 export const WithCaret = DefaultTemplate.bind({});
 WithCaret.args = { ...DefaultTemplateArgs, label: 'Primary', color: 'primary', disabled: false, showCaret: true };
+
+export const SpecialButton = DefaultTemplate.bind({});
+SpecialButton.args = { ...DefaultTemplateArgs, label: 'Button', color: 'special' };
+
+export const DangerButton = DefaultTemplate.bind({});
+DangerButton.args = { ...DefaultTemplateArgs, label: 'Danger', color: 'danger' };

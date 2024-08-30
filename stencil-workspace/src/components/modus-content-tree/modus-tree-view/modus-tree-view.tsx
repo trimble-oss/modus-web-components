@@ -10,7 +10,13 @@ import {
   State,
   Watch,
 } from '@stencil/core';
-import { TreeViewItemOptions, TreeViewItemInfo, TreeViewItemDragState, Position } from '../modus-content-tree.types';
+import {
+  TreeViewItemOptions,
+  TreeViewItemInfo,
+  TreeViewItemDragState,
+  TreeItemSelectionChange,
+  Position,
+} from '../modus-content-tree.types';
 import { ModusContentTreeDragItem } from '../modus-content-tree-drag-item';
 
 @Component({
@@ -29,6 +35,9 @@ export class ModusTreeView {
 
   /** (optional) Disable usage of `tab` key to focus elements inside a tree view. Use `Arrow Up/Down` for focussing a tree item and `Shift + Arrow Right` for focussing a checkbox inside the item.*/
   @Prop({ mutable: true }) disableTabbing: boolean;
+
+  /** (optional) Sets draggable state to be true to all the children */
+  @Prop() enableReordering: boolean;
 
   /** (optional) Set expanded tree items */
   @Prop({ mutable: true }) expandedItems: string[] = [];
@@ -53,6 +62,8 @@ export class ModusTreeView {
   @State() isDraggingWithKeyboard: boolean;
 
   @Event() itemDrop: EventEmitter<{ [key: string]: TreeViewItemInfo }>;
+
+  @Event() itemSelectionChange: EventEmitter<TreeItemSelectionChange>;
 
   private currentItem: TreeViewItemInfo;
 
@@ -278,6 +289,7 @@ export class ModusTreeView {
   @Watch('multiSelection')
   @Watch('size')
   @Watch('borderless')
+  @Watch('enableReordering')
   handleOptionsProps() {
     const options = this.getTreeViewItemOptions();
     Object.values(this.items).forEach(({ element }) => {
@@ -489,6 +501,7 @@ export class ModusTreeView {
       size: this.size,
       borderless: this.borderless,
       disableTabbing: this.disableTabbing,
+      draggable: this.enableReordering,
 
       getLevel: (id) => this.getLevel(id),
       hasItemFocus: (id) => this.isItemInFocus(id),
@@ -595,6 +608,10 @@ export class ModusTreeView {
     current.focusItem();
   }
 
+  handleChangeTreeitem(isSelected: boolean, nodeId: string): void {
+    this.itemSelectionChange.emit({ isSelected, nodeId });
+  }
+
   handleItemSelection(itemId: string, event?: KeyboardEvent | MouseEvent): void {
     if (this.items[itemId].disabled) return;
     const allowMultipleSelection = this.multiSelection && event && (event.shiftKey || event.ctrlKey || event.metaKey);
@@ -606,11 +623,13 @@ export class ModusTreeView {
     if (isSelected) {
       if (allowMultipleSelection) {
         newItems.push(itemId);
+        this.handleChangeTreeitem(true, itemId);
       } else {
         newItems = [itemId];
       }
     } else {
       newItems = newItems.filter((i) => i !== itemId);
+      if (allowMultipleSelection) this.handleChangeTreeitem(false, itemId);
     }
     this.selectedItems = [...newItems];
     this.syncItems.push(...oldItems, ...newItems);

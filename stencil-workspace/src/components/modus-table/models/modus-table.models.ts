@@ -103,6 +103,7 @@ export interface ModusTableColumn<TData extends RowData, TValue = unknown> {
 export interface ModusTableDisplayOptions {
   borderless?: boolean;
   cellBorderless?: boolean;
+  cellVerticalBorderless?: boolean;
 }
 
 export interface ModusTableToolbarOptions {
@@ -152,3 +153,10 @@ export interface ModusTableManualSortingOptions {
 }
 
 export type ModusTableColumnSort = ColumnSort;
+
+export interface ModusTableErrors {
+  [rowIndex: number]: {
+    // if id is present in row data, use that, otherwise use index
+    [accessorKey: string]: string;
+  };
+}
