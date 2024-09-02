@@ -786,8 +786,9 @@ CheckboxRowSelection.args = {
   ...DefaultArgs, rowSelection: true, rowSelectionOptions: {
     multiple: true,
     subRowSelection: true,
-    preSelectedRows:["0"],
-  }, data: makeData(7)
+    preSelectedRows: [],
+  },
+  data: makeData(7),
 };
 
 const EditableColumns =DefaultColumns.map(col =>{
