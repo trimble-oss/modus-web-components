@@ -147,10 +147,25 @@ export class ModusFileDropzone {
         .split(',')
         .map((ext) => ext.trim())
         .filter((ext) => ext.length > 0);
+      
       let fileLength = this.dropzoneFiles.length;
       for (let i = 0; i < fileLength; i++) {
-        const [_, fileExtention] = this.dropzoneFiles[i].type.split('/');
-        if (!acceptedFileTypes.includes('.' + fileExtention)) {
+        const fileType = this.dropzoneFiles[i].type;
+        const [typeCategory, fileExtension] = fileType.split('/');
+    
+        const isAccepted = acceptedFileTypes.some((acceptedType) => {
+          if (acceptedType.includes('/')) {
+            const [acceptedCategory, acceptedExtension] = acceptedType.split('/');
+            if (acceptedExtension === '*' && acceptedCategory === typeCategory) {
+              return true;
+            }
+            return acceptedType === fileType;
+          } else {
+            return '.' + fileExtension === acceptedType;
+          }
+        });
+    
+        if (!isAccepted) {
           if (i > -1) {
             this.dropzoneFiles.splice(i, 1);
             this.dropzoneFiles = [...this.dropzoneFiles];
@@ -163,7 +178,7 @@ export class ModusFileDropzone {
         }
       }
     }
-
+    
     // Raise error if having multiple files is invalid.
     if (!this.multiple && this.dropzoneFiles.length > 1) {
       this.error = 'maxFileCount';
