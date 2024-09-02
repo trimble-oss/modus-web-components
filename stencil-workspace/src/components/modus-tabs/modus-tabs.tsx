@@ -1,10 +1,14 @@
 // eslint-disable-next-line
-import { Component, Event, EventEmitter, h, Prop } from '@stencil/core';
+import { Component, Event, EventEmitter, Fragment, h, JSX, Prop } from '@stencil/core';
+import { ModusIconMap } from '../../icons/ModusIconMap';
 
 export interface Tab {
   active?: boolean;
+  iconOnly?: string;
   id: string;
-  label: string;
+  label?: string;
+  leftIcon?: string;
+  rightIcon?: string;
 }
 
 @Component({
@@ -55,19 +59,46 @@ export class ModusTabs {
     this.tabChange.emit(id);
   }
 
+  renderIconWithText(label: string, leftIcon?: string, rightIcon?: string): JSX.Element {
+    return (
+      <Fragment>
+        {leftIcon && (
+          <span class="icon left-icon">
+            <ModusIconMap icon={leftIcon} size={this.size === 'small' ? '16' : '24'}></ModusIconMap>
+          </span>
+        )}
+        <span class="label">{label}</span>
+        {rightIcon && (
+          <span class="icon right-icon">
+            <ModusIconMap icon={rightIcon} size={this.size === 'small' ? '16' : '24'}></ModusIconMap>
+          </span>
+        )}
+      </Fragment>
+    );
+  }
+
+  renderIconOnly(iconOnly: string): JSX.Element {
+    return (
+      <span class="icon">
+        <ModusIconMap icon={iconOnly} size={this.size === 'small' ? '16' : '24'}></ModusIconMap>
+      </span>
+    );
+  }
+
   render(): unknown {
     const tabs = this.tabs.map((tab: Tab) => {
       return (
-        <div
+        <button
           id={`${tab.id}`}
           class={`tab ${tab.active ? 'active' : ''} ${this.classBySize.get(this.size)} ${
             this.fullWidth ? 'resizable' : ''
           } `}
           onClick={() => this.handleTabChange(tab.id)}
-          onKeyDown={(event) => this.handleKeyDown(event, tab.id)}
-          tabIndex={0}>
-          {tab.label}
-        </div>
+          onKeyDown={(event) => this.handleKeyDown(event, tab.id)}>
+          {tab.iconOnly
+            ? this.renderIconOnly(tab.iconOnly)
+            : this.renderIconWithText(tab.label, tab.leftIcon, tab.rightIcon)}
+        </button>
       );
     });
 

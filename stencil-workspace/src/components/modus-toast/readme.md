@@ -12,7 +12,7 @@
 | `ariaLabel`   | `aria-label`  | (optional) The toast's aria-label.                         | `string`                                                                                | `undefined` |
 | `delay`       | `delay`       | (optional) Time taken to dismiss the toast                 | `number`                                                                                | `15000`     |
 | `dismissible` | `dismissible` | (optional) Whether the toast has a dismiss button.         | `boolean`                                                                               | `undefined` |
-| `role`        | `role`        | (optional) Role taken by the toast.  Defaults to 'status'. | `"alert" \| "log" \| "marquee" \| "status" \| "timer"`                                  | `'status'`  |
+| `role`        | `role`        | (optional) Role taken by the toast.  Defaults to 'status'. | `string`                                                                                | `'status'`  |
 | `showIcon`    | `show-icon`   | (optional) Whether to show the toasts' icon.               | `boolean`                                                                               | `true`      |
 | `type`        | `type`        | (optional) The toasts' type.                               | `"danger" \| "dark" \| "default" \| "primary" \| "secondary" \| "success" \| "warning"` | `'default'` |
 

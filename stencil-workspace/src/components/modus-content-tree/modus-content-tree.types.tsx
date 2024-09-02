@@ -19,8 +19,10 @@ export type TreeViewItemOptions = {
   onItemExpandToggle?: (itemId: string) => void;
   onItemFocus?: (itemId: string) => void;
   onItemDrag?: (itemId: string, dragContent: HTMLElement, e: MouseEvent) => void;
+  onItemDragClick?: (itemId: string, dragContent: HTMLElement, e: KeyboardEvent) => void;
   onItemUpdate?: (newValue: TreeViewItemInfo, oldValue?: TreeViewItemInfo) => void;
   size?: string;
+  draggable?: boolean;
   borderless?: boolean;
 };
 
@@ -30,10 +32,16 @@ export type TreeViewItemInfo = {
   element?: HTMLModusTreeViewItemElement;
   content?: HTMLElement;
   disabled?: boolean;
+  draggable?: boolean;
   droppable?: boolean;
   parentId?: string;
   children?: string[];
   level?: number;
+};
+
+export type TreeItemSelectionChange = {
+  nodeId: string;
+  isSelected: boolean;
 };
 
 export type TreeViewItemDragState = {

@@ -57,44 +57,6 @@ div.alert {
     }
   }
 
-  &.type-info-gray {
-    background-color: $modus-alert-secondary-bg;
-    border-color: $modus-alert-secondary-border-color;
-    color: $modus-alert-secondary-color;
-
-    ::slotted(a) {
-      color: $modus-alert-secondary-link-color;
-    }
-
-    .icon-check-circle,
-    .icon-error,
-    .icon-info,
-    .icon-warning {
-      path {
-        fill: $modus-alert-secondary-color;
-      }
-    }
-  }
-
-  &.type-info-gray-dark {
-    background-color: $modus-alert-dark-bg;
-    border-color: $modus-alert-dark-border-color;
-    color: $modus-alert-dark-color;
-
-    ::slotted(a) {
-      color: $modus-alert-dark-link-color;
-    }
-
-    .icon-check-circle,
-    .icon-error,
-    .icon-info,
-    .icon-warning {
-      path {
-        fill: $modus-alert-dark-color;
-      }
-    }
-  }
-
   &.type-success {
     background-color: $modus-alert-success-bg;
     border-color: $modus-alert-success-border-color;
@@ -138,6 +100,7 @@ div.alert {
   }
 
   .message {
+    color: var(--modus-body-color);
     font-size: $rem-14px;
     font-weight: $alert-font-weight;
   }

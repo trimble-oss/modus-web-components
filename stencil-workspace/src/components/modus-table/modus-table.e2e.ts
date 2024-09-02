@@ -895,7 +895,7 @@ describe('modus-table', () => {
     component.setProperty('data', data.slice(0, data.length - 5));
     await page.waitForChanges();
 
-    let activePage = await paginationContainer.find('modus-pagination >>> li.active');
+    let activePage = await paginationContainer.find('modus-pagination >>> li button.active');
     const lastPage = await paginationContainer.find('modus-pagination >>> li:nth-last-child(2)');
 
     expect(activePage.textContent).toBe('2');

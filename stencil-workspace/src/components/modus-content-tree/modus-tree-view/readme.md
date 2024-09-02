@@ -13,6 +13,7 @@
 | `checkboxSelection`      | `checkbox-selection`       | (optional) Enables checkbox selection on each tree item                                                                                                                                       | `boolean`                              | `undefined`  |
 | `checkedItems`           | --                         | (optional) Set checked tree items                                                                                                                                                             | `string[]`                             | `[]`         |
 | `disableTabbing`         | `disable-tabbing`          | (optional) Disable usage of `tab` key to focus elements inside a tree view. Use `Arrow Up/Down` for focussing a tree item and `Shift + Arrow Right` for focussing a checkbox inside the item. | `boolean`                              | `undefined`  |
+| `enableReordering`       | `enable-reordering`        | (optional) Sets draggable state to be true to all the children                                                                                                                                | `boolean`                              | `undefined`  |
 | `expandedItems`          | --                         | (optional) Set expanded tree items                                                                                                                                                            | `string[]`                             | `[]`         |
 | `multiCheckboxSelection` | `multi-checkbox-selection` | (optional) Enables multiple checkbox selection                                                                                                                                                | `boolean`                              | `undefined`  |
 | `multiSelection`         | `multi-selection`          | (optional) Enables multiple tree items selection                                                                                                                                              | `boolean`                              | `undefined`  |
@@ -22,9 +23,11 @@
 
 ## Events
 
-| Event             | Description                                                                                                                           | Type               |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| `itemActionClick` | Fired when an action is clicked within any tree item. Includes both the `actionId` and `nodeId` of the action and item, respectively. | `CustomEvent<any>` |
+| Event                 | Description                                                                                                                           | Type                                                    |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| `itemActionClick`     | Fired when an action is clicked within any tree item. Includes both the `actionId` and `nodeId` of the action and item, respectively. | `CustomEvent<any>`                                      |
+| `itemDrop`            |                                                                                                                                       | `CustomEvent<{ [key: string]: TreeViewItemInfo; }>`     |
+| `itemSelectionChange` |                                                                                                                                       | `CustomEvent<{ nodeId: string; isSelected: boolean; }>` |
 
 
 ----------------------------------------------

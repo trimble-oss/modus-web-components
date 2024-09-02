@@ -1,6 +1,6 @@
 /* https://storybook.js.org/docs/react/configure/theming */
 
-body[data-mwc-theme="light"] {
+body[data-mwc-theme='light'] {
   --theme-bg-color: #fff;
   --theme-color: #252a2e;
   --theme-sbdocs-table-head-bg-color: #f1f1f6;
@@ -13,10 +13,10 @@ body[data-mwc-theme="light"] {
   --theme-code-color: #333;
   --theme-code-bg-color: #f8f8f8;
   --theme-code-border-color: #eee;
-  --theme-header-underline-color: rgba(0,0,0,.1);
+  --theme-header-underline-color: rgba(0, 0, 0, 0.1);
 }
 
-body[data-mwc-theme="dark"] {
+body[data-mwc-theme='dark'] {
   --theme-bg-color: #252a2e;
   --theme-color: #f1f1f6;
   --theme-sbdocs-table-head-bg-color: #171c1e;
@@ -29,7 +29,7 @@ body[data-mwc-theme="dark"] {
   --theme-code-color: #f1f1f6;
   --theme-code-bg-color: #6a6e79;
   --theme-code-border-color: #6a6e79;
-  --theme-header-underline-color: rgba(255,255,255,.2);
+  --theme-header-underline-color: rgba(255, 255, 255, 0.2);
 }
 
 body.sb-show-main,
@@ -85,12 +85,12 @@ hr {
   color: var(--theme-docblock-source-color) !important;
 }
 
-[data-mwc-theme="dark"] .docblock-source pre span,
-[data-mwc-theme="dark"] .docblock-source button {
+[data-mwc-theme='dark'] .docblock-source pre span,
+[data-mwc-theme='dark'] .docblock-source button {
   color: var(--theme-docblock-source-color) !important;
 }
 
-[data-mwc-theme="dark"] .docblock-source button {
+[data-mwc-theme='dark'] .docblock-source button {
   background-color: var(--theme-docblock-source-bg-color);
   border-color: var(--theme-docblock-source-color);
 }
@@ -122,17 +122,17 @@ code {
   color: var(--theme-code-color) !important;
 }
 
-.sidebar-header a[title="Storybook"] {
-  background-image: url("/trimble-logo.svg");
+.sidebar-header a[title='Storybook'] {
+  background-image: url('/trimble-logo.svg');
   background-position: center;
   background-repeat: no-repeat;
 }
 
-body.dark .sidebar-header a[title="Storybook"] {
+body.dark .sidebar-header a[title='Storybook'] {
   filter: invert(1) brightness(999%) saturate(0);
 }
 
-.sidebar-header a[title="Storybook"] svg {
+.sidebar-header a[title='Storybook'] svg {
   opacity: 0;
 }
 
@@ -144,6 +144,22 @@ html:has(body.dark) {
   background-color: var(--theme-color) !important;
   border-radius: 4px;
   color: var(--theme-bg-color) !important;
-  opacity: .7;
+  opacity: 0.7;
   padding: 0 4px;
+}
+
+@media (forced-colors: active) {
+  #panel-tab-content input,
+  #panel-tab-content select,
+  #panel-tab-content textarea {
+    border: 1px solid transparent;
+  }
+
+  .sidebar-container {
+    border-right: 1px solid transparent;
+  }
+
+  a[href='/?path=/settings/about'] {
+    border: 1px solid transparent;
+  }
 }

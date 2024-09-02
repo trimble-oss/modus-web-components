@@ -79,6 +79,10 @@ nav {
     display: flex;
   }
 
+  .navbar-logo {
+    padding-inline-end: 0.5rem;
+  }
+
   .right,
   .left {
     align-items: center;

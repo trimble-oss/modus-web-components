@@ -19,15 +19,15 @@ export default {
         options: ['smileys', 'thumbs'],
         type: 'select',
       },
-   },
- disabled: {
-   description: 'Whether the sentiment-scale is disabled',
-   table: {
-     defaultValue: { summary: false },
-     type: { summary: 'boolean' },
-   },
+    },
+    disabled: {
+      description: 'Whether the sentiment-scale is disabled',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      },
+    },
   },
-},
   parameters: {
     docs: {
       page: docs,
@@ -44,16 +44,12 @@ export default {
   },
 };
 
-const Template = ({ariaLabel,iconsType, disabled}) => html`
-<modus-sentiment-scale  aria-label=${ariaLabel} type="${iconsType}" ?disabled="${disabled}"></modus-sentiment-scale>
+const Template = ({ ariaLabel, iconsType, disabled }) => html`
+  <modus-sentiment-scale aria-label=${ariaLabel} type="${iconsType}" ?disabled="${disabled}"></modus-sentiment-scale>
 `;
 export const Default = Template.bind({});
 Default.args = {
   ariaLabel: '',
   iconsType: 'smileys',
-  disabled: false
+  disabled: false,
 };
-
-
-
-

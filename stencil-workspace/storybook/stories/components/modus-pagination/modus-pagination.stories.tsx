@@ -38,7 +38,7 @@ export default {
     },
     prevPageButtonText: {
       name: 'prev-page-button-text',
-      description: "The previous page button text. If not set, an icon control will be used.",
+      description: 'The previous page button text. If not set, an icon control will be used.',
       table: {
         type: { summary: 'string' },
       },
@@ -46,7 +46,7 @@ export default {
     },
     nextPageButtonText: {
       name: 'next-page-button-text',
-      description: "The next page button text. If not set, an icon control will be used.",
+      description: 'The next page button text. If not set, an icon control will be used.',
       table: {
         type: { summary: 'string' },
       },
@@ -78,15 +78,7 @@ export default {
   },
 };
 
-export const Default = ({
-  activePage,
-  ariaLabel,
-  maxPage,
-  minPage,
-  prevPageButtonText,
-  nextPageButtonText,
-  size,
-}) => html`
+export const Default = ({ activePage, ariaLabel, maxPage, minPage, prevPageButtonText, nextPageButtonText, size }) => html`
   <modus-pagination
     active-page=${activePage}
     aria-label=${ariaLabel}
@@ -108,15 +100,7 @@ Default.args = {
   size: 'medium',
 };
 
-export const Large = ({
-  activePage,
-  ariaLabel,
-  maxPage,
-  minPage,
-  prevPageButtonText,
-  nextPageButtonText,
-  size,
-}) => html`
+export const Large = ({ activePage, ariaLabel, maxPage, minPage, prevPageButtonText, nextPageButtonText, size }) => html`
   <modus-pagination
     active-page=${activePage}
     aria-label=${ariaLabel}
@@ -138,15 +122,7 @@ Large.args = {
   size: 'large',
 };
 
-export const Small = ({
-  activePage,
-  ariaLabel,
-  maxPage,
-  minPage,
-  prevPageButtonText,
-  nextPageButtonText,
-  size,
-}) => html`
+export const Small = ({ activePage, ariaLabel, maxPage, minPage, prevPageButtonText, nextPageButtonText, size }) => html`
   <modus-pagination
     active-page=${activePage}
     aria-label=${ariaLabel}

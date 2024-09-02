@@ -265,6 +265,7 @@ describe('modus-navbar', () => {
     await page.waitForChanges();
 
     await new Promise((r) => setTimeout(r, 500));
+    await page.waitForChanges();
     expect(tooltip.getAttribute('data-show')).not.toBeNull();
 
     const tooltipText = await page.$eval('modus-navbar >>> modus-tooltip >>> .tooltip', (tooltip) => tooltip.textContent);
@@ -441,9 +442,8 @@ describe('modus-navbar', () => {
     expect(tooltip.getAttribute('data-show')).toBeNull();
 
     await profileMenuButton.hover();
-    await page.waitForChanges();
-
     await new Promise((r) => setTimeout(r, 500));
+    await page.waitForChanges();
     expect(tooltip.getAttribute('data-show')).not.toBeNull();
 
     const tooltipText = await page.$eval('modus-navbar >>> modus-tooltip >>> .tooltip', (tooltip) => tooltip.textContent);
@@ -587,13 +587,32 @@ describe('modus-navbar', () => {
     expect(tooltip.getAttribute('data-show')).toBeNull();
 
     await helpIcon.hover();
-    await page.waitForChanges();
-
     await new Promise((r) => setTimeout(r, 500));
+    await page.waitForChanges();
     expect(tooltip.getAttribute('data-show')).not.toBeNull();
 
     const tooltipText = await page.$eval('modus-navbar >>> modus-tooltip >>> .tooltip', (tooltip) => tooltip.textContent);
     expect(tooltipText).toBe('Resource Center');
+  });
+
+  it('should have aria-label when provided', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-navbar nav-aria-label="test"></modus-navbar>');
+    await page.waitForChanges();
+
+    const navElement = await page.find('modus-navbar >>> nav');
+    expect(navElement.getAttribute('aria-label')).toEqual('test');
+  });
+
+  it('should not have aria-label when not provided', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-navbar></modus-navbar>');
+    await page.waitForChanges();
+
+    const navElement = await page.find('modus-navbar >>> nav');
+    expect(navElement.getAttribute('aria-label')).toBeNull();
   });
 
   it('should not render aria-label on help tooltip when not provided', async () => {
