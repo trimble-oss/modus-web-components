@@ -304,13 +304,28 @@ export class ModusAutocomplete {
     this.focusOptionItem();
   };
 
+  handleBackspaceKeyDown = (e) => {
+    if (e.key !== 'Backspace' || !this.multiple) {
+      return;
+    }
+
+    if (!this.getValueAsString() && this.selectedChips.length > 0) {
+      e.stopPropagation();
+      e.preventDefault();
+
+      this.selectedChips = this.selectedChips.slice(0, -1);
+      this.valueChange.emit(this.selectedChips.map((opt) => opt.value));
+      this.selectionsChanged.emit(this.selectedChips.map((opt) => opt.id));
+    }
+  };
+
   handleArrowUp = () => {
     this.focusItemIndex = Math.max(0, this.focusItemIndex - 1);
     this.focusOptionItem();
   };
 
   focusOptionItem = () => {
-    (this.el.shadowRoot.querySelectorAll('[role="option"]')[this.focusItemIndex] as HTMLUListElement).focus();
+    (this.el.shadowRoot.querySelectorAll('[role="option"]')[this.focusItemIndex] as HTMLUListElement)?.focus();
   };
 
   initializeSelectedChips(): void {
@@ -442,6 +457,7 @@ export class ModusAutocomplete {
       type="search"
       value={this.getValueAsString()}
       onBlur={this.handleInputBlur}
+      onKeyDown={(e) => this.handleBackspaceKeyDown(e)}
       role="combobox"
       aria-autocomplete="list"
       aria-controls={this.listId}
