@@ -6,6 +6,8 @@
   height: $rem-16px;
   outline: $rem-1px solid $modus-progress-border-color;
   width: 100%;
+  overflow: hidden;
+  position: relative;
 
   &.default-background-color {
     background-color: $modus-progress-bg;
@@ -29,10 +31,11 @@
 
     &.indeterminate {
       position: relative;
-      width: 10%;
+      width: 100%;
+      height: 100%;
       background-color: $modus-progress-bar-bg;
       overflow: hidden;
-      animation: indeterminate-animation 1.5s infinite;
+      animation: indeterminate-animation 1.5s infinite linear;
     }
   }
 
@@ -47,10 +50,13 @@
 
 @keyframes indeterminate-animation {
   0% {
-    left: -100%;
+    left: -50%;
     width: 50%;
   }
-
+  50% {
+    left: 25%;
+    width: 50%;
+  }
   100% {
     left: 100%;
     width: 50%;
