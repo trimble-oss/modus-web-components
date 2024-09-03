@@ -1,5 +1,7 @@
 cache/
 dist/
+react-workspace/test-react-v17/build/
+react-workspace/test-react-v18/build/
 www/
 loader/
 
@@ -25,3 +27,10 @@ $RECYCLE.BIN/
 Thumbs.db
 UserInterfaceState.xcuserstate
 .env
+
+**/stencil-generated/**
+
+stencil-workspace/generate-icons/generate-icons.js
+stencil-workspace/src/icons/generated-icons/*.tsx
+stencil-workspace/src/icons/ModusIconMap.tsx
+stencil-workspace/src/icons/ModusIconUtilities.ts

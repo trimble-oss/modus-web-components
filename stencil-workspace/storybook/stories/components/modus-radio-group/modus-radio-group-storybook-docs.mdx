@@ -6,7 +6,7 @@ import { Story } from '@storybook/addon-docs';
 
 [Modus Radio Group](https://modus.trimble.com/components/lists/) web components are wrappers around native `<modus-radio-button>` custom HTML elements. They are referenced using the `<modus-radio-group>` custom HTML element.
 
-A new TypeScript typing has been provided named RadioButton defined as:
+A TypeScript typing has been provided named RadioButton defined as:
 
 ```ts
 {
@@ -19,7 +19,7 @@ A new TypeScript typing has been provided named RadioButton defined as:
 
 ### Default
 
-<Story id="components-radio-group--default" height={'150px'} />
+<Story id="user-inputs-radio-group--default" height={'150px'} />
 
 ```html
 <modus-radio-group checked-id="1" name="my-group"></modus-radio-group>
@@ -46,12 +46,13 @@ A new TypeScript typing has been provided named RadioButton defined as:
 
 ### Properties
 
-| Name           | Description                        | Type            | Options | Default Value | Required |
-| -------------- | ---------------------------------- | --------------- | ------- | ------------- | -------- |
-| `checked-id`   | The id of the checked radio button | `string`        |         |               | ✔        |
-| `name`         | The name of the radio group        | `string`        |         |               | ✔        |
-| `radioButtons` | The radio buttons                  | `RadioButton[]` |         |               | ✔        |
-| `aria-label`   | The radio group's aria-label       | `string`        |         |               |          |
+| Name           | Description                                                                                                                                                                          | Type            | Options          | Default Value | Required |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------- | ---------------- | ------------- | -------- |
+| `checked-id`   | The id of the checked radio button                                                                                                                                                   | `string`        |                  |               | ✔       |
+| `name`         | The [name](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio#defining_a_radio_group) of the radio group. Used to group individual radio elements into one group. | `string`        |                  |               | ✔       |
+| `radioButtons` | The radio buttons                                                                                                                                                                    | `RadioButton[]` |                  |               | ✔       |
+| `aria-label`   | The radio group's aria-label                                                                                                                                                         | `string`        |                  |               |          |
+| `size`         | The radio group's size                                                                                                                                                               | `string`        | "small","medium" | "medium"      |          |
 
 ### DOM Events
 
@@ -61,4 +62,4 @@ A new TypeScript typing has been provided named RadioButton defined as:
 
 ### Accessibility
 
-- When a Radio Button has focus, **Enter** selects it, and emits `buttonClick` event.
+- When a Radio Button has focus, <kbd>Enter</kbd> selects it, and emits `buttonClick` event.

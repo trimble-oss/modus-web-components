@@ -1,0 +1,19 @@
+/**********************************************************************
+    THIS IS AN AUTOMATICALLY GENERATED FILE, DO NOT EDIT DIRECTLY.
+***********************************************************************/
+
+// eslint-disable-next-line
+import { FunctionalComponent, h } from '@stencil/core';
+import { IconProps } from '../ModusIconMap';
+
+export const <%= componentName %>: FunctionalComponent<IconProps> = (props: IconProps) => (
+    <svg
+        class={props.pressed ? '<%= className %> pressed' : '<%= className %>'}
+        height={props.size ?? 16}
+        width={props.size ?? 16}
+        viewBox="<%= viewBox %>"
+        fill={props.color ?? 'currentColor'}
+        xmlns="http://www.w3.org/2000/svg"
+        onClick={props.onClick ? (event) => props.onClick(event) : null}><%- svgHtml -%>
+    </svg>
+);

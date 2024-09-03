@@ -4,9 +4,11 @@
   @include custom-navbar-menu;
 
   align-items: flex-start;
+  background-color: $menu-background-color;
   cursor: default;
   max-height: 605px;
   overflow-y: auto;
+  padding: $rem-8px;
   width: max-content;
 
   &.reverse {
@@ -18,9 +20,9 @@
   }
 
   .app {
-    box-sizing: border-box;
     border-color: $menu-border-color;
-    border-radius: $rem-2px;
+    border-radius: $rem-4px;
+    box-sizing: border-box;
     color: $menu-color;
     cursor: default;
     display: flex;
@@ -42,9 +44,7 @@
     }
 
     img {
-      height: 2em;
       margin-right: $rem-12px;
-      width: 2em;
     }
 
     .right {
@@ -62,7 +62,7 @@
   }
 
   .category {
-    border-top: 1px solid $menu-border-color;
+    border-top: $rem-1px solid $menu-border-color;
     color: $menu-color;
     font-size: $rem-12px;
     font-weight: $font-weight-semi-bold;

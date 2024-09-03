@@ -22,7 +22,7 @@ body:
     id: motivation
     attributes:
       label: Motivation and context
-      description: Tell us why this change is needed or helpful, and what problems it may help solve.
+      description: Tell us why this change is needed or helpful, and what is the use case.
   - type: dropdown
     id: package
     attributes:

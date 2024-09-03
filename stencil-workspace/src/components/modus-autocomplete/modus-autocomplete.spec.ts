@@ -7,13 +7,22 @@ describe('modus-autocomplete', () => {
       components: [ModusAutocomplete],
       html: '<modus-autocomplete></modus-autocomplete>',
     });
+
+    const listId = root.shadowRoot.querySelector('ul').getAttribute('id');
+
     expect(root).toEqualHtml(`
     <modus-autocomplete>
       <mock:shadow-root>
         <div class="autocomplete medium">
-          <modus-text-input includesearchicon="" size="medium"></modus-text-input>
+          <div class="chips-container">
+            <svg class="icon-search" fill="currentColor" height="16" viewBox="0 0 24 24" width="16">
+               <path d="M15.5 14H14.71L14.43 13.73C15.41 12.59 16 11.11 16 9.5C16 5.91 13.09 3 9.5 3C5.91 3 3 5.91 3 9.5C3 13.09 5.91 16 9.5 16C11.11 16 12.59 15.41 13.73 14.43L14 14.71V15.5L19 20.49L20.49 19L15.5 14ZM9.5 14C7.01 14 5 11.99 5 9.5C5 7.01 7.01 5 9.5 5C11.99 5 14 7.01 14 9.5C14 11.99 11.99 14 9.5 14Z"></path>
+            </svg>
+            <modus-text-input aria-autocomplete="list" aria-controls="${listId}" class="input" role="combobox" autocomplete="off" size="medium" type="search"  value=""></modus-text-input>
+          </div>
+          <div class="error"></div>
           <div class="options-container" style="max-height: 300px; z-index: 1; overflow-y: auto;">
-            <ul></ul>
+            <ul aria-label="options" id="${listId}" role="listbox"></ul>
           </div>
           <div style="display: none;">
             <slot></slot>
@@ -34,13 +43,22 @@ describe('modus-autocomplete', () => {
         </li>
       </modus-autocomplete>`,
     });
+
+    const listId = root.shadowRoot.querySelector('ul').getAttribute('id');
+
     expect(root).toEqualHtml(`
     <modus-autocomplete>
       <mock:shadow-root>
         <div class="autocomplete medium">
-          <modus-text-input includesearchicon="" size="medium"></modus-text-input>
+          <div class="chips-container">
+            <svg class="icon-search" fill="currentColor" height="16" viewBox="0 0 24 24" width="16">
+              <path d="M15.5 14H14.71L14.43 13.73C15.41 12.59 16 11.11 16 9.5C16 5.91 13.09 3 9.5 3C5.91 3 3 5.91 3 9.5C3 13.09 5.91 16 9.5 16C11.11 16 12.59 15.41 13.73 14.43L14 14.71V15.5L19 20.49L20.49 19L15.5 14ZM9.5 14C7.01 14 5 11.99 5 9.5C5 7.01 7.01 5 9.5 5C11.99 5 14 7.01 14 9.5C14 11.99 11.99 14 9.5 14Z"></path>
+            </svg>
+            <modus-text-input aria-autocomplete="list" aria-controls="${listId}" class="input" role="combobox" autocomplete="off" size="medium" type="search"  value=""></modus-text-input>
+          </div>
+          <div class="error"></div>
           <div class="options-container" style="max-height: 300px; z-index: 1; overflow-y: auto;">
-            <ul></ul>
+            <ul aria-label="options" id="${listId}" role="listbox"></ul>
           </div>
           <div style="display: none;">
             <slot></slot>
@@ -94,7 +112,11 @@ describe('modus-autocomplete', () => {
       { id: 'Option 1', value: 'Option 1' },
       { id: 'Option 2', value: 'Option 2' },
     ];
+    modusAutocomplete.hasFocus = true;
     modusAutocomplete.handleSearchChange('Option 1');
+
+    await new Promise((resolve) => setTimeout(resolve, 100)); // adjust the timeout as needed
+
     expect(modusAutocomplete.visibleOptions).toEqual([{ id: 'Option 1', value: 'Option 1' }]);
   });
 
@@ -105,6 +127,7 @@ describe('modus-autocomplete', () => {
       { id: 'Option 2', value: 'Option 2' },
     ];
     modusAutocomplete.visibleOptions = [{ id: 'Option 1', value: 'Option 1' }];
+    modusAutocomplete.hasFocus = true;
     modusAutocomplete.handleSearchChange('');
     expect(modusAutocomplete.visibleOptions).toEqual([
       { id: 'Option 1', value: 'Option 1' },
@@ -130,5 +153,23 @@ describe('modus-autocomplete', () => {
     modusAutocomplete.value = 'search value';
 
     expect(modusAutocomplete.displayOptions()).toEqual(true);
+  });
+
+  it('should select chips using default value', async () => {
+    const modusAutocomplete = new ModusAutocomplete();
+    modusAutocomplete.disabled = false;
+    modusAutocomplete.options = [
+      { id: '1', value: 'Option 1' },
+      { id: '2', value: 'Option 2' },
+    ];
+    modusAutocomplete.multiple = true;
+    modusAutocomplete.value = ['Option 1', 'Option 2'];
+    modusAutocomplete.initializeSelectedChips();
+
+    expect(modusAutocomplete.value).toEqual(['Option 1', 'Option 2']);
+    expect(modusAutocomplete.selectedChips).toEqual([
+      { id: '1', value: 'Option 1' },
+      { id: '2', value: 'Option 2' },
+    ]);
   });
 });

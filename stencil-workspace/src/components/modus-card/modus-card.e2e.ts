@@ -57,7 +57,7 @@ describe('modus-card', () => {
     const component = await page.find('modus-card');
     const element = await page.find('modus-card >>> article');
     let computedStyle = await element.getComputedStyle();
-    expect(computedStyle['borderRadius']).toEqual('2px');
+    expect(computedStyle['borderRadius']).toEqual('4px');
 
     component.setProperty('borderRadius', '10px');
     await page.waitForChanges();
@@ -89,5 +89,33 @@ describe('modus-card', () => {
     component.setProperty('showCardBorder', 'false');
     await page.waitForChanges();
     expect(element).not.toHaveClass('card-border');
+  });
+
+  it('renders aria-label on alert div when set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-card aria-label="test label"></modus-card>');
+    let element = await page.find('modus-card >>> article');
+    expect(element).toBeDefined();
+    expect(element).toHaveAttribute('aria-label');
+    expect(element.getAttribute('aria-label')).toEqual('test label');
+  });
+
+  it('does not render aria-label on alert div when not set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-card></modus-card>');
+    let element = await page.find('modus-card >>> article');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
+
+  it('does not render aria-label on alert div when set to empty string', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-card aria-label=""></modus-card>');
+    let element = await page.find('modus-card >>> article');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
   });
 });

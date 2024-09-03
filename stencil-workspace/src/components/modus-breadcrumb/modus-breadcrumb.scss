@@ -30,6 +30,12 @@ nav {
           }
         }
 
+        &.underline {
+          a {
+            text-decoration: underline;
+          }
+        }
+
         .divider {
           color: $modus-breadcrumb-divider-color;
           cursor: default;

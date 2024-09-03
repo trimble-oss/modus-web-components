@@ -8,7 +8,7 @@ import { ContainerLayout, DOM_OBSERVER_CONFIG, DEFAULT_CONTAINER_LAYOUT } from '
   shadow: true,
 })
 export class ModusNavbarMainMenu {
-  @Prop() navbarId: string;
+  @Prop() parentNavbar: HTMLElement;
 
   @State() containerLayout: ContainerLayout = DEFAULT_CONTAINER_LAYOUT;
 
@@ -47,7 +47,7 @@ export class ModusNavbarMainMenu {
   }
 
   updateContainerLayout = (): void => {
-    const navbarRect = document.getElementById(this.navbarId)?.getBoundingClientRect();
+    const navbarRect = this.parentNavbar?.getBoundingClientRect();
 
     if (!navbarRect) {
       return;

@@ -38,9 +38,12 @@ Default validation can also be disabled and use the props `errorText`, `invalid`
 
 A custom date format can be set using the prop `format` as shown in the example. The displayed date format will differ from the actual `value` because the `value` is always parsed to ISO8601 'yyyy-mm-dd'.
 
+If you want to support a few alternative date formats then you can set the prop `alt-formats` with a few formats separated by a `|` symbol separator. If you input a valid date for any of the alternative formats then it will be accepted by the component and converted to the main format specified in the `format` prop.
+
 <modus-date-input label="Formatted date"
   helper-text="yyyy-mm"
   format="yyyy-mm"
+  alt-formats="yyyy mmm|yy.mm"
   value="2022-12-22"></modus-date-input>
 
 ```html
@@ -49,6 +52,7 @@ A custom date format can be set using the prop `format` as shown in the example.
   helper-text="yyyy-mm"
   allowed-chars-regex="[\d-]"
   format="yyyy-mm"
+  alt-formats="yyyy mmm|yy.mm"
   value="2022-12-22"></modus-date-input>
 ```
 
@@ -109,6 +113,8 @@ Each character as shown in the table below can be used for representing the date
 | `format`            | `format`             | Format string for the date input. Default 'mm/dd/yyyy'. Use 'm','mm' for month, 'd','dd' for date and 'yy','yyyy' for year with any separator that is not a regular expression.                                   | `string`                       | `'mm/dd/yyyy'` |
 | `helperText`        | `helper-text`        | (optional) Custom helper text displayed below the input.                                                                                                                                                          | `any`                          | `undefined`    |
 | `label`             | `label`              | (optional) The input's label.                                                                                                                                                                                     | `string`                       | `undefined`    |
+| `max`               | `max`                | (optional) The maximum date allowed. The date is formatted according to ISO8601 'yyyy-mm-dd'.                                                                                                                     | `string`                       | `undefined`    |
+| `min`               | `min`                | (optional) The minimum date allowed. The date is formatted according to ISO8601 'yyyy-mm-dd'.                                                                                                                     | `string`                       | `undefined`    |
 | `placeholder`       | `placeholder`        | (optional) The input's placeholder text.                                                                                                                                                                          | `string`                       | `undefined`    |
 | `readOnly`          | `read-only`          | (optional) Whether the input's content is read-only                                                                                                                                                               | `boolean`                      | `undefined`    |
 | `required`          | `required`           | (optional) Whether the input is required.                                                                                                                                                                         | `boolean`                      | `undefined`    |
@@ -120,9 +126,11 @@ Each character as shown in the table below can be used for representing the date
 
 ##### Modus Date Picker
 
-| Property | Attribute | Description                     | Type     | Default     |
-| -------- | --------- | ------------------------------- | -------- | ----------- |
-| `label`  | `label`   | (optional) Label for the field. | `string` | `undefined` |
+| Property            | Attribute            | Description                                     | Type                                                                                                                                                                                                        | Default        |
+| ------------------- | -------------------- | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| `label`             | `label`              | (optional) Label for the field.                 | `string`                                                                                                                                                                                                    | `undefined`    |
+| `position` | `position` | (optional) The position  of the calendar popup. | `"auto" \| "auto-start" \| "auto-end" \| "top-start" \| "top-end" \| "bottom-start" \| "bottom-end" \| "right-start" \| "right-end" \| "left-start" \| "left-end" \| "top" \| "left" \| "bottom" \| "right" | `bottom-start` |
+| `                   |
 
 ### DOM Events
 
@@ -136,13 +144,14 @@ Each character as shown in the table below can be used for representing the date
 
 ##### Modus Date Input
 
-| Method name  | Description     | Parameter | Return          |
-| ------------ | --------------- | --------- | --------------- |
-| `focusInput` | Focus the input |           | `Promise<void>` |
+| Method name  | Description        | Parameter | Return          |
+| ------------ | ------------------ | --------- | --------------- |
+| `focusInput` | Focus the input    |           | `Promise<void>` |
+| `validate`   | Validate the input |           | `Promise<void>` |
 
 ### Accessibility
 
-- Every element in Modus Date Input is accessible through keyboard. Use `Tab` key and `Shift + Tab` key to interact with the Date Input field and the calendar view.
+- Every element in Modus Date Input is accessible through keyboard. Use <kbd>Tab</kbd> key and `Shift + Tab` key to interact with the Date Input field and the calendar view.
 - Date Input gets an `aria-label` provided by the `aria-label` property input.
 - It is recommended to pass `aria-label` when there is no label used so the input is accessible to screen readers.
 - Date Input gets an `aria-disabled` provided by the `disabled` property input.

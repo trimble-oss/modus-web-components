@@ -2,7 +2,7 @@
 
 .modus-message {
   align-items: center;
-  border-radius: $rem-2px;
+  border-radius: $rem-4px;
   display: flex;
   font-family: $primary-font;
   font-size: $rem-14px;
@@ -30,5 +30,11 @@
     svg path {
       fill: $modus-message-question-color !important;
     }
+  }
+}
+
+@media (forced-colors: active) {
+  .modus-message {
+    border: 1px solid transparent;
   }
 }

@@ -3,12 +3,11 @@
 nav {
   align-items: center;
   background-color: transparent;
-  border-radius: $rem-2px;
+  border-radius: $rem-4px;
   color: $modus-pagination-color;
   display: inline-flex;
   font-family: $primary-font;
   justify-content: center;
-  user-select: none;
   width: 100%;
 
   svg path {
@@ -23,29 +22,37 @@ nav {
     padding: 0;
 
     li {
-      align-items: center;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
       list-style-type: none;
-      min-width: min-content;
+      user-select: none;
 
-      &.active {
-        background-color: $modus-pagination-active-bg;
-        color: $modus-pagination-active-color;
-      }
+      button {
+        align-items: center;
+        background-color: transparent;
+        border: unset;
+        border-radius: $rem-4px;
+        color: $modus-pagination-color;
+        display: flex;
+        font-family: $primary-font;
+        justify-content: center;
 
-      &.disabled {
-        opacity: 0.3;
-      }
+        &.active {
+          background-color: $modus-pagination-active-bg;
+          color: $modus-pagination-active-color;
+          outline: 1px solid transparent;
+        }
 
-      &.hoverable {
-        cursor: pointer;
-      }
+        &.disabled {
+          opacity: 0.3;
+        }
 
-      &.hoverable:not(.active) {
-        &:hover {
-          background-color: $modus-pagination-hover-bg;
+        &.hoverable {
+          cursor: pointer;
+        }
+
+        &.hoverable:not(.active) {
+          &:hover {
+            background-color: $modus-pagination-hover-bg;
+          }
         }
       }
     }
@@ -54,30 +61,48 @@ nav {
   &.small {
     height: $rem-24px;
 
-    li {
+    ul li button {
       font-size: $rem-12px;
       height: $rem-24px;
-      width: $rem-24px;
+      padding: 0 $rem-8px;
+    }
+
+    ul li button[aria-label='Next'],
+    ul li button[aria-label='Previous'] {
+      padding-left: $rem-4px;
+      padding-right: $rem-4px;
     }
   }
 
   &.medium {
     height: 2rem;
 
-    ul li {
+    ul li button {
       font-size: $rem-14px;
       height: 2rem;
-      width: 2rem;
+      padding: 0 $rem-12px;
+    }
+
+    ul li button[aria-label='Next'],
+    ul li button[aria-label='Previous'] {
+      padding-left: $rem-6px;
+      padding-right: $rem-6px;
     }
   }
 
   &.large {
     height: 3rem;
 
-    ul li {
+    ul li button {
       font-size: $rem-20px;
       height: 3rem;
-      width: 3rem;
+      padding: 0 $rem-18px;
+    }
+
+    ul li button[aria-label='Next'],
+    ul li button[aria-label='Previous'] {
+      padding-left: $rem-12px;
+      padding-right: $rem-12px;
     }
   }
 }

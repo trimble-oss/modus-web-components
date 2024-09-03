@@ -7,8 +7,14 @@ export default {
   argTypes: {
     allowedCharsRegex: {
       name: 'allowed-chars-regex',
-      description:
-        'Regular expression to allow characters while typing the input.',
+      description: 'Regular expression to allow characters while typing the input.',
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    altFormats: {
+      name: 'alt-formats',
+      description: 'Alternative formats string for the date input split by | separator.',
       table: {
         type: { summary: 'string' },
       },
@@ -25,6 +31,37 @@ export default {
       description: 'Sets autofocus for the input',
       table: {
         type: { summary: 'boolean' },
+      },
+    },
+    position: {
+      name: 'position',
+      control: {
+        options: [
+          'auto',
+          'auto-start',
+          'auto-end',
+          'top-start',
+          'top-end',
+          'bottom-start',
+          'bottom-end',
+          'right-start',
+          'right-end',
+          'left-start',
+          'left-end',
+          'top',
+          'left',
+          'bottom',
+          'right',
+        ],
+        type: 'select',
+      },
+      description: 'The placement of the calendar popup',
+      table: {
+        defaultValue: { summary: 'bottom-start' },
+        type: {
+          summary:
+            "'auto' | 'auto-start' | 'auto-end' | 'top-start' | 'top-end' | 'bottom-start' | 'bottom-end' | 'right-start' | 'right-end' | 'left-start' | 'left-end' | 'top' | 'left' | 'bottom' | 'right'",
+        },
       },
     },
     disabled: {
@@ -65,6 +102,18 @@ export default {
     },
     label: {
       description: "The input's label",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    max: {
+      description: "The maximum date allowed. The input string should be ISO8601 'yyyy-mm-dd'.",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    min: {
+      description: "The minimum date allowed. The input string should be ISO8601 'yyyy-mm-dd'.",
       table: {
         type: { summary: 'string' },
       },
@@ -117,8 +166,7 @@ export default {
       },
     },
     value: {
-      description:
-        "A string representing the date entered in the input. The input string should be ISO8601 'yyyy-mm-dd'.",
+      description: "A string representing the date entered in the input. The input string should be ISO8601 'yyyy-mm-dd'.",
       table: {
         type: { summary: 'string' },
       },
@@ -139,8 +187,9 @@ export default {
 };
 
 const defaultArgs = {
-  ariaLabel: 'Date Input',
+  ariaLabel: '',
   allowedCharsRegex: '[\\d\\/]',
+  altFormats: '',
   autoFocusInput: true,
   disableValidation: false,
   disabled: false,
@@ -148,6 +197,8 @@ const defaultArgs = {
   format: 'mm/dd/yyyy',
   helperText: 'mm/dd/yyyy',
   label: 'Date',
+  min: '',
+  max: '',
   placeholder: '',
   readOnly: false,
   required: false,
@@ -160,6 +211,7 @@ const defaultArgs = {
 const DefaultTemplate = ({
   ariaLabel,
   allowedCharsRegex,
+  altFormats,
   autoFocusInput,
   disableValidation,
   disabled,
@@ -167,6 +219,8 @@ const DefaultTemplate = ({
   format,
   helperText,
   label,
+  min,
+  max,
   placeholder,
   readOnly,
   required,
@@ -177,17 +231,20 @@ const DefaultTemplate = ({
 }) => html`
   <modus-date-input
     allowed-chars-regex=${allowedCharsRegex}
+    alt-formats=${altFormats}
     aria-label=${ariaLabel}
     auto-focus-input=${autoFocusInput}
     disable-validation=${disableValidation}
-    disabled=${disabled}
+    ?disabled=${disabled}
     error-text=${errorText}
     format=${format}
     helper-text=${helperText}
     label=${label}
+    min=${min}
+    max=${max}
     placeholder=${placeholder}
     read-only=${readOnly}
-    required=${required}
+    ?required=${required}
     size=${size}
     show-calendar-icon=${showCalendarIcon}
     valid-text=${validText}
@@ -206,11 +263,14 @@ Default.args = {
 const DateRangeTemplate = ({
   ariaLabel,
   allowedCharsRegex,
+  altFormats,
   autoFocusInput,
   disableValidation,
   disabled,
   errorText,
   format,
+  min,
+  max,
   helperText,
   placeholder,
   readOnly,
@@ -223,18 +283,21 @@ const DateRangeTemplate = ({
   <modus-date-picker label="Select date range">
     <modus-date-input
       allowed-chars-regex=${allowedCharsRegex}
+      alt-formats=${altFormats}
       aria-label=${ariaLabel}
       auto-focus-input=${autoFocusInput}
       disable-validation=${disableValidation}
-      disabled=${disabled}
+      ?disabled=${disabled}
       error-text=${errorText}
       format=${format}
+      min=${min}
+      max=${max}
       helper-text=${helperText}
       type="start"
       label="Start"
       placeholder=${placeholder}
       read-only=${readOnly}
-      required=${required}
+      ?required=${required}
       size=${size}
       show-calendar-icon=${showCalendarIcon}
       valid-text=${validText}
@@ -242,18 +305,21 @@ const DateRangeTemplate = ({
 
     <modus-date-input
       allowed-chars-regex=${allowedCharsRegex}
+      alt-formats=${altFormats}
       aria-label=${ariaLabel}
       auto-focus-input=${autoFocusInput}
       disable-validation=${disableValidation}
-      disabled=${disabled}
+      ?disabled=${disabled}
       error-text=${errorText}
       format=${format}
+      min=${min}
+      max=${max}
       helper-text=${helperText}
       type="end"
       label="End"
       placeholder=${placeholder}
       read-only=${readOnly}
-      required=${required}
+      ?required=${required}
       size=${size}
       show-calendar-icon=${showCalendarIcon}
       valid-text=${validText}
@@ -269,4 +335,63 @@ DateRange.args = {
     helperText: 'dd-mm-yyyy',
     allowedCharsRegex: '[\\d-]',
   },
+};
+
+const DefaultWithPickerTemplate = ({
+  ariaLabel,
+  allowedCharsRegex,
+  altFormats,
+  autoFocusInput,
+  position,
+  disableValidation,
+  disabled,
+  errorText,
+  format,
+  helperText,
+  label,
+  min,
+  max,
+  placeholder,
+  readOnly,
+  required,
+  showCalendarIcon,
+  size,
+  validText,
+  value,
+}) => html`
+  <modus-date-picker position=${position}>
+    <modus-date-input
+      allowed-chars-regex=${allowedCharsRegex}
+      aria-label=${ariaLabel}
+      alt-formats=${altFormats}
+      auto-focus-input=${autoFocusInput}
+      disable-validation=${disableValidation}
+      ?disabled=${disabled}
+      error-text=${errorText}
+      format=${format}
+      helper-text=${helperText}
+      label=${label}
+      min=${min}
+      max=${max}
+      placeholder=${placeholder}
+      read-only=${readOnly}
+      ?required=${required}
+      size=${size}
+      show-calendar-icon=${showCalendarIcon}
+      valid-text=${validText}
+      value=${value}></modus-date-input>
+  </modus-date-picker>
+`;
+
+export const DefaultWithPicker = DefaultWithPickerTemplate.bind({});
+DefaultWithPicker.args = {
+  ...defaultArgs,
+  position: 'bottom-start',
+  showCalendarIcon: true,
+  min: '2022-12-02',
+  max: '2022-12-30',
+  format: 'mmm dd, yyyy',
+  allowedCharsRegex: '.',
+  helperText: 'mmm dd, yyyy',
+  label: 'Single Date',
 };

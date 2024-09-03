@@ -7,19 +7,21 @@ describe('modus-date-input', () => {
       components: [ModusDateInput],
       html: '<modus-date-input label="Single Date"></modus-date-input>',
     });
+    const inputId = page.root.shadowRoot.querySelector('input').getAttribute('id');
+
     expect(page.root).toEqualHtml(`
      <modus-date-input label="Single Date">
        <mock:shadow-root>
          <div class="modus-date-input">
            <div class="label-container">
-             <label htmlFor="date-input">
+             <label htmlFor="${inputId}">
                Single Date
              </label>
            </div>
-           <div class="input-container medium">
-             <input id="date-input" tabindex="0" type="text">
+           <div class="input-container medium" part="input-container ">
+             <input id="${inputId}" tabindex="0" type="text">
            </div>
-           <div class="sub-text">
+           <div class="sub-text" part="sub-text">
            </div>
          </div>
     `);

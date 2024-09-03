@@ -39,10 +39,17 @@ export default {
         type: { summary: 'string' },
       },
     },
-    tabIndexValue: {
-      description: 'Tab Index for the checkbox',
+    stopPropagation: {
+      name: 'stop-propagation',
+      description: "It should stop propagating the event further.",
       table: {
-        type: { summary: 'string' },
+        type: { summary: 'boolean' },
+      },
+    },
+    size: {
+      control: {
+        options: ['small', 'medium'],
+        type: 'select',
       },
     },
   },
@@ -66,25 +73,25 @@ const Template = ({
   disabled,
   indeterminate,
   label,
-  tabIndexValue,
+  size
 }) => html`
   <modus-checkbox
     aria-label=${ariaLabel}
     checked=${checked}
-    disabled=${disabled}
+    ?disabled=${disabled}
     indeterminate=${indeterminate}
     label=${label}
-    tab-index-value=${tabIndexValue}></modus-checkbox>
+    size=${size}></modus-checkbox>
 `;
 
-export const Default = Template.bind({});
-Default.args = {
+export const Medium = Template.bind({});
+Medium.args = {
   ariaLabel: '',
   checked: false,
   disabled: false,
   indeterminate: false,
   label: 'Checkbox',
-  tabIndexValue: 0,
+  size:'medium',
 };
 
 export const Indeterminate = Template.bind({});
@@ -94,5 +101,5 @@ Indeterminate.args = {
   disabled: false,
   indeterminate: true,
   label: 'Checkbox',
-  tabIndexValue: 0,
+  size:'medium',
 };

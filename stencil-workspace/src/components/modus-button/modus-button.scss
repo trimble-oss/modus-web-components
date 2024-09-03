@@ -1,7 +1,6 @@
 @import './modus-button.vars';
 
 :host {
-  cursor: pointer;
   display: inline-block;
   position: relative;
   width: auto;
@@ -10,7 +9,12 @@
 button {
   align-items: center;
   border: $rem-1px solid transparent;
-  border-radius: $rem-2px;
+  border-bottom: var(--btn-border-bottom-width, #{$rem-1px}) solid transparent;
+  border-left: var(--btn-border-left-width, #{$rem-1px}) solid transparent;
+  border-radius: $rem-4px;
+  border-radius: var(--btn-border-radius, #{$rem-4px});
+  border-right: var(--btn-border-right-width, #{$rem-1px}) solid transparent;
+  border-top: var(--btn-border-top-width, #{$rem-1px}) solid transparent;
   cursor: default;
   display: inline-flex;
   font-family: $primary-font;
@@ -39,7 +43,8 @@ button {
     cursor: pointer;
   }
 
-  &:disabled {
+  &:disabled,
+  &[aria-disabled='true'] {
     background-color: $modus-btn-disabled-bg;
     color: $modus-btn-disabled-color;
     cursor: default;
@@ -49,6 +54,20 @@ button {
     :not(.style-borderless) {
       border-color: $modus-btn-disabled-border-color;
     }
+  }
+
+  &.left {
+    border-radius: $rem-4px 0 0 $rem-4px;
+    border-right-width: 0;
+  }
+
+  &.center {
+    border-radius: 0;
+    border-right-width: 0;
+  }
+
+  &.right {
+    border-radius: 0 $rem-4px $rem-4px 0;
   }
 
   &.size-small {
@@ -66,8 +85,9 @@ button {
     }
 
     &.icon-only {
-      height: 32px;
+      height: 24px;
       padding: 0;
+      width: 24px;
 
       &.has-caret {
         padding: 0 4px;
@@ -77,8 +97,8 @@ button {
         padding: 0 4px;
 
         svg {
-          height: 24px;
-          width: 24px;
+          height: 18px;
+          width: 18px;
         }
       }
     }
@@ -99,15 +119,16 @@ button {
     }
 
     &.icon-only {
-      height: 40px;
+      height: 32px;
       padding: 0;
+      width: 32px;
 
       &.has-caret {
         padding: 0 4px;
       }
 
       .icon {
-        padding: 0 8px;
+        padding: 0 3px;
 
         svg {
           height: 24px;
@@ -134,6 +155,7 @@ button {
     &.icon-only {
       height: 48px;
       padding: 0;
+      width: 48px;
 
       &.has-caret {
         padding: 0 8px 0 4px;
@@ -146,6 +168,60 @@ button {
           height: 32px;
           width: 32px;
         }
+      }
+    }
+  }
+
+  &.style-borderless:not(.icon-only).color-secondary {
+    background-color: $modus-btn-borderless-bg;
+    color: $modus-btn-borderless-secondary-color;
+
+    svg path {
+      fill: $modus-btn-borderless-secondary-color !important;
+    }
+
+    &:hover:not([disabled]) {
+      background-color: var(--modus-btn-borderless-secondary-hover-bg, map-get($btn-icon-only-hover, secondary, 'bg'));
+      color: $modus-btn-borderless-secondary-color;
+
+      svg path {
+        fill: $modus-btn-borderless-secondary-color;
+      }
+    }
+
+    &:active:not([disabled]) {
+      background-color: var(--modus-btn-icon-only-secondary-active-bg, map-get($btn-icon-only-active, secondary, 'bg'));
+      color: $modus-btn-borderless-secondary-color;
+
+      svg path {
+        fill: $modus-btn-borderless-secondary-color;
+      }
+    }
+  }
+
+  &.style-borderless.icon-only.color-secondary {
+    background-color: $modus-btn-borderless-bg;
+    color: $modus-btn-borderless-secondary-color;
+
+    svg path {
+      fill: $modus-btn-borderless-secondary-color !important;
+    }
+
+    &:hover:not([disabled]) {
+      background-color: var(--modus-btn-borderless-secondary-hover-bg, map-get($btn-icon-only-hover, secondary, 'bg'));
+      color: $modus-btn-borderless-secondary-color;
+
+      svg path {
+        fill: $modus-btn-borderless-secondary-color;
+      }
+    }
+
+    &:active:not([disabled]) {
+      background-color: var(--modus-btn-icon-only-secondary-active-bg, map-get($btn-icon-only-active, secondary, 'bg'));
+      color: $modus-btn-borderless-secondary-color;
+
+      svg path {
+        fill: $modus-btn-borderless-secondary-color;
       }
     }
   }
@@ -217,18 +293,33 @@ button {
     }
   }
 
+  &.style-borderless.active:not([disabled]) {
+    background-color: $modus-btn-borderless-active-bg;
+    color: $modus-btn-borderless-active-color;
+  }
+
   // Solid variants
   &.style-fill {
     @each $color, $value in $btn-theme-colors {
       $default-text-color: $white;
+      $border-color: $value;
+      $hover-border-color: map-get($btn-hover-colors, $color);
+      $active-border-color: map-get($btn-active-colors, $color);
 
       @if $color == 'tertiary' {
         $default-text-color: $col_trimble_gray;
       }
 
+      @if $color == 'special' {
+        $default-text-color: $col_trimble_gray;
+        $border-color: $col_trimble_red;
+        $hover-border-color: $col_trimble_red;
+        $active-border-color: $col_trimble_red;
+      }
+
       &.color-#{$color} {
         background-color: var(--modus-btn-#{$color}-bg, $value);
-        border-color: var(--modus-btn-#{$color}-border-color, $value);
+        border-color: var(--modus-btn-#{$color}-border-color, $border-color);
         color: var(--modus-btn-#{$color}-color, $default-text-color);
 
         svg path {
@@ -239,13 +330,13 @@ button {
       // Hover state
       &.color-#{$color}:hover:not([disabled]) {
         background-color: var(--modus-btn-#{$color}-hover-bg, map-get($btn-hover-colors, $color));
-        border-color: var(--modus-btn-#{$color}-hover-bg, map-get($btn-hover-colors, $color));
+        border-color: var(--modus-btn-#{$color}-hover-bg, $hover-border-color);
       }
 
       // Active state
       &.color-#{$color}:active:not([disabled]) {
         background-color: var(--modus-btn-#{$color}-active-bg, map-get($btn-active-colors, $color));
-        border-color: var(--modus-btn-#{$color}-active-bg, map-get($btn-active-colors, $color));
+        border-color: var(--modus-btn-#{$color}-active-bg, $active-border-color);
       }
     }
   }
@@ -291,5 +382,51 @@ button {
         }
       }
     }
+  }
+
+  &.style-fill.active {
+    @each $color, $value in $btn-theme-colors {
+      $default-text-color: $white;
+
+      @if $color == 'tertiary' {
+        $default-text-color: $col_trimble_gray;
+      }
+
+      &.color-#{$color} {
+        background-color: var(--modus-btn-#{$color}-active-bg, map-get($btn-active-colors, $color));
+        border-color: var(--modus-btn-#{$color}-active-bg, map-get($btn-active-colors, $color));
+        color: var(--modus-btn-#{$color}-color, $default-text-color);
+
+        svg path {
+          fill: var(--modus-btn-#{$color}-color, $default-text-color);
+        }
+      }
+      &.color-#{$color}:hover:not([disabled]) {
+        background-color: var(--modus-btn-#{$color}-hover-bg, map-get($btn-hover-colors, $color));
+        border-color: var(--modus-btn-#{$color}-hover-bg, map-get($btn-hover-colors, $color));
+      }
+    }
+  }
+
+  &.style-outline.active {
+    @each $color, $value in $btn-outline-theme-colors {
+      &.color-#{$color} {
+        $btn-color: var(--modus-btn-outline-#{$color}-active-color, map-get($btn-outline-active, $color, 'color'));
+
+        background-color: var(--modus-btn-outline-#{$color}-active-bg, map-get($btn-outline-active, $color, 'bg'));
+        border-color: $btn-color;
+        color: $btn-color;
+
+        svg path {
+          fill: $btn-color;
+        }
+      }
+    }
+  }
+}
+
+@media (forced-colors: active) and (prefers-color-scheme: light) {
+  svg.icon-caret-down {
+    forced-color-adjust: none;
   }
 }

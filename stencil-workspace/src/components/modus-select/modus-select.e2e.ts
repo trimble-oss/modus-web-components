@@ -122,7 +122,7 @@ describe('modus-select', () => {
     await page.waitForChanges();
 
     const button = await page.find('modus-select >>> select');
-    expect(await button.getProperty('textContent')).toEqual(options[0].display);
+    expect(await button.getProperty('textContent')).toContain(options[0].display);
   });
 
   it('emits valueChange event', async () => {
@@ -147,6 +147,34 @@ describe('modus-select', () => {
     await page.waitForChanges();
 
     expect(valueChangeSpy).toHaveReceivedEvent();
-    expect(valueChangeSpy).toHaveReceivedEventDetail(options[1]);
+    expect(valueChangeSpy).toHaveReceivedEventDetail(options[0]);
+  });
+
+  it('renders aria-label on select when set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-select aria-label="test label"></modus-select>');
+    let element = await page.find('modus-select >>> select');
+    expect(element).toBeDefined();
+    expect(element).toHaveAttribute('aria-label');
+    expect(element.getAttribute('aria-label')).toEqual('test label');
+  });
+
+  it('does not render aria-label on select when not set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-select></modus-select>');
+    let element = await page.find('modus-select >>> select');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
+
+  it('does not render aria-label on select when set to empty string', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-select aria-label=""></modus-select>');
+    let element = await page.find('modus-select >>> select');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
   });
 });

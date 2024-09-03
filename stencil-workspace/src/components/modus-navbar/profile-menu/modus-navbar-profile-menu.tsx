@@ -1,6 +1,8 @@
 // eslint-disable-next-line
 import { Component, Prop, h, Event, EventEmitter } from '@stencil/core';
 import { ModusNavbarProfileMenuLink } from '../modus-navbar.models';
+import { ModusIconMap } from '../../../icons/ModusIconMap';
+
 @Component({
   tag: 'modus-navbar-profile-menu',
   styleUrl: 'modus-navbar-profile-menu.scss',
@@ -11,12 +13,20 @@ export class ModusNavbarProfileMenu {
   @Prop() email: string;
   @Prop() initials: string;
   @Prop() links: ModusNavbarProfileMenuLink[];
+  @Prop() signOutText = 'Sign out';
   @Prop() reverse: boolean;
   @Prop() username: string;
   @Prop() variant: 'default' | 'blue' = 'default';
 
   @Event() linkClick: EventEmitter<string>;
   @Event() signOutClick: EventEmitter<MouseEvent>;
+
+  signOutKeydownHandler(event: KeyboardEvent): void {
+    if (event.code !== 'Enter') {
+      return;
+    }
+    this.signOutClick.emit();
+  }
 
   render(): unknown {
     const direction = this.reverse ? 'reverse' : '';
@@ -30,24 +40,36 @@ export class ModusNavbarProfileMenu {
           ) : (
             <span class="initials">{this.initials}</span>
           )}
-          <div>
+          <div class="user-details">
             <div class="username">{this.username}</div>
             <div class="email">{this.email}</div>
           </div>
         </div>
         {this.links?.length ? (
-          <div class="links">
+          <modus-list class="links">
             {this.links.map((link) => {
               return (
-                <div class="link" onClick={() => this.linkClick.emit(link.id)}>
-                  {link.display}
-                </div>
+                <modus-list-item borderless onItemClick={() => this.linkClick.emit(link.id)}>
+                  <div class="link-item">
+                    {link.icon && (
+                      <div class="icon">
+                        <ModusIconMap icon={link.icon} size="24" />
+                      </div>
+                    )}
+                    {link.display}
+                  </div>
+                </modus-list-item>
               );
             })}
-          </div>
+          </modus-list>
         ) : null}
-        <div class="sign-out" onClick={() => this.signOutClick.emit()}>
-          <div>Sign out</div>
+        <slot />
+        <div
+          class="sign-out"
+          onClick={() => this.signOutClick.emit()}
+          onKeyDown={(event) => this.signOutKeydownHandler(event)}
+          tabIndex={0}>
+          <div>{this.signOutText}</div>
         </div>
       </div>
     );

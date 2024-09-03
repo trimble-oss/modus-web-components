@@ -8,8 +8,8 @@ import {
   ModusDataTableRowActionClickEvent,
   ModusDataTableSort,
   ModusDataTableSortEvent,
-  ModusTableSelectionOptions,
-  ModusTableSortOptions,
+  ModusDataTableSelectionOptions,
+  ModusDataTableSortOptions,
   TCell,
   TColumn,
   TRow,
@@ -47,13 +47,13 @@ export class ModusDataTable {
   @Prop() rowActions?: ModusDataTableRowAction[] = [];
 
   /** Options for data table item selection. */
-  @Prop() selectionOptions?: ModusTableSelectionOptions = {
+  @Prop() selectionOptions?: ModusDataTableSelectionOptions = {
     canSelect: false,
     checkboxSelection: false,
   };
 
   /** Options for data table column sort. */
-  @Prop() sortOptions?: ModusTableSortOptions = {
+  @Prop() sortOptions?: ModusDataTableSortOptions = {
     canSort: false,
     serverSide: false,
   };

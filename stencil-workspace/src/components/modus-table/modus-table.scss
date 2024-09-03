@@ -1,0 +1,682 @@
+@import './modus-table.vars';
+
+.cell-contents {
+  align-items: center;
+  display: flex;
+  gap: 0.25rem;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.column-title {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sort-icon {
+  flex-shrink: 0;
+}
+
+.table-container {
+  border: $rem-1px $modus-table-border-color solid;
+  display: flex;
+  overflow: auto;
+  position: relative;
+  z-index: 0;
+
+  &::-webkit-scrollbar {
+    height: 0.75em;
+    width: 0.75em;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: $modus-table-scrollbar-track-color;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $modus-table-scrollbar-thumb-color;
+    border-radius: 0.25em;
+  }
+}
+
+.borderless {
+  border: none !important;
+}
+
+table {
+  border-collapse: separate; // Sticky table cells lose their border when used with `border-collapse:collapse`.
+  border-spacing: 0; // Set `border-collapse: separate` and `border-spacing: 0` to resolve the problem metion in above line.
+  font-family: $primary-font;
+  font-size: $rem-14px;
+  height: fit-content;
+  width: 100%;
+
+  &.cell-borderless {
+    th,
+    td,
+    tr {
+      border: none !important;
+      box-shadow: none !important;
+    }
+  }
+
+  &.cell-vertical-borderless {
+    th,
+    td {
+      border-right: none !important;
+      box-shadow: none !important;
+    }
+  }
+
+  &.ce th,
+  td {
+    box-sizing: border-box;
+
+    &.row-checkbox {
+      padding: 0.5rem;
+      width: 46px;
+
+      &.small {
+        width: 38px;
+      }
+    }
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  th.row-checkbox + th.sticky-left,
+  td.row-checkbox + td.sticky-left {
+    left: 46.25px;
+  }
+
+  td.error {
+    border: 2px solid var(--modus-input-validation-error-color, #da212c) !important;
+    border-radius: unset;
+    box-shadow: 0 0 0 1px var(--modus-input-validation-error-color, #da212c);
+  }
+
+  thead {
+    position: sticky;
+    top: 0;
+    z-index: 99;
+
+    &.show-resize-cursor {
+      th {
+        cursor: e-resize;
+
+        .can-sort {
+          cursor: e-resize;
+
+          .sort-icon-container {
+            cursor: e-resize;
+          }
+        }
+      }
+    }
+
+    &.show-column-reorder-cursor:not(.show-resize-cursor) {
+      th:not(.sticky-left) {
+        &:hover {
+          cursor: grab;
+        }
+
+        &:active {
+          cursor: grabbing;
+        }
+      }
+    }
+
+    tr {
+      color: $modus-table-header-color;
+      height: $rem-48px;
+
+      th {
+        background-color: $modus-table-header-bg;
+        border-right: $rem-1px $modus-table-border-color solid;
+        box-shadow: inset 0 -0.5px 0 $modus-table-border-color;
+        font-weight: $font-weight-semi-bold;
+        overflow: hidden;
+        padding: $rem-6px $rem-8px $rem-6px $rem-16px;
+        position: relative;
+
+        &.row-checkbox {
+          padding: $rem-4px $rem-8px;
+        }
+
+        &.header-base {
+          outline: -webkit-focus-ring-color auto 1px;
+        }
+
+        &:nth-last-child(1) .resize-handle {
+          position: absolute;
+          right: 0;
+          width: 6px;
+        }
+
+        .can-sort {
+          align-items: center;
+          display: flex;
+          justify-content: space-between;
+
+          .sorted {
+            font-weight: bold;
+          }
+
+          .header-text,
+          .sort-icon {
+            cursor: pointer;
+            padding: 0;
+          }
+
+          .sort-icon-container {
+            margin-left: 8px;
+            padding: $rem-2px $rem-2px 0;
+
+            .sort-icon {
+              svg {
+                fill: $modus-table-header-color;
+              }
+
+              &:focus {
+                outline-style: auto;
+              }
+
+              &:focus:not(:focus-visible) {
+                outline-style: none;
+              }
+            }
+
+            .disabled {
+              opacity: 0.5;
+            }
+
+            .hidden {
+              visibility: hidden;
+            }
+
+            &:focus {
+              .hidden {
+                visibility: visible;
+              }
+            }
+          }
+
+          &:hover {
+            .hidden {
+              visibility: visible;
+            }
+          }
+        }
+
+        .resize-handle {
+          &:focus-visible {
+            outline: none;
+          }
+
+          cursor: e-resize;
+          height: 100%;
+          position: absolute;
+          right: -7px;
+          top: 0;
+          touch-action: none;
+          user-select: none;
+          width: 13px;
+          z-index: 11;
+        }
+
+        &:not(.active-resize) {
+          .resize-handle:focus-visible {
+            + .resize-handle-border {
+              border-right: 2px solid $modus-table-header-color;
+              height: 100%;
+              position: absolute;
+              right: -1px;
+              top: 0;
+            }
+          }
+        }
+
+        &:has(modus-tooltip) {
+          // On hover of child, parent overflow property is changed.
+          overflow: visible;
+        }
+      }
+    }
+  }
+
+  tbody {
+    tr:first-child {
+      td {
+        border-top: none;
+      }
+    }
+
+    tr:last-child {
+      td {
+        border-bottom: none;
+      }
+    }
+
+    tr {
+      color: $modus-table-body-color;
+
+      .truncate-text,
+      .truncate-text .cell-link {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .wrap-text {
+        overflow-wrap: break-word;
+        word-break: break-word;
+      }
+
+      td {
+        background-color: $modus-table-body-bg;
+        border-top: $rem-1px $modus-table-border-color solid;
+
+        // density-relaxed
+        padding-bottom: $rem-14px;
+        padding-top: $rem-14px;
+        vertical-align: top;
+
+        &.row-checkbox {
+          padding-bottom: $rem-12px;
+          padding-top: $rem-12px;
+        }
+
+        &.edit-mode {
+          // border: $rem-2px $modus-table-cell-border-color solid;
+          box-sizing: border-box;
+          padding: 0;
+
+          div {
+            box-sizing: border-box;
+
+            input {
+              background-color: inherit;
+              border: none;
+              color: inherit;
+              font: inherit;
+              outline: none;
+              padding: 0.25rem 1rem;
+              width: calc(100% - 2rem); // 100% - (padding-left + padding-right)
+
+              &.text-align-right {
+                text-align: right;
+              }
+            }
+
+            modus-select,
+            modus-autocomplete,
+            modus-date-picker {
+              background-color: inherit;
+              color: inherit;
+              outline: none;
+              width: 100%;
+            }
+          }
+        }
+
+        .cell-content {
+          align-items: center;
+          display: flex;
+
+          .cell-link {
+            color: $modus-table-cell-link-color;
+            cursor: pointer;
+            font-weight: $font-weight-semi-bold;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+
+          &.text-align-right {
+            justify-content: flex-end;
+          }
+
+          .expand-icon-container {
+            width: 24px;
+
+            .expand-icon {
+              cursor: pointer;
+              display: flex;
+            }
+          }
+        }
+      }
+
+      &.enable-hover {
+        &:hover {
+          td:not(.edit-mode) {
+            background-color: $modus-table-hover-bg;
+          }
+        }
+      }
+    }
+  }
+
+  tfoot {
+    tr {
+      &.summary-row {
+        background-color: $modus-table-header-bg;
+        bottom: 0;
+        box-shadow: 1px -1px $modus-table-border-color;
+        position: sticky;
+        z-index: 2;
+
+        td {
+          background-color: $modus-table-header-bg;
+          border: none;
+          font-weight: 700;
+
+          &.text-align-right {
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+
+  tr {
+    height: 3rem;
+
+    th,
+    td {
+      border-right: $rem-1px $modus-table-border-color solid;
+
+      /* The box-sizing property is set to border-box to include padding and border in the element's total width.
+      However, in the context of setting the width for the row selection column, the border-box property is causing issues.
+      If removing this property doesn't negatively impact the table's layout, it can be safely removed. */
+      // box-sizing: border-box;
+      min-height: 3rem;
+      padding: 0.25rem 1rem;
+      text-align: left;
+
+      &.text-align-center {
+        text-align: center;
+      }
+
+      &.sticky-left {
+        border-right: $rem-2px $modus-table-border-color solid;
+        left: 0;
+        position: sticky;
+        z-index: 1;
+      }
+
+      &.hide-text-selection {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      &.active-resize {
+        border-right: 2px $modus-primary-color solid !important;
+      }
+    }
+
+    th {
+      position: relative;
+
+      div {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    &.row-selected {
+      background-color: $modus-table-selected-bg;
+
+      th,
+      td {
+        background-color: $modus-table-selected-bg;
+      }
+    }
+  }
+
+  .sticky-right {
+    border-left: $rem-2px $modus-table-border-color solid;
+    position: sticky;
+    right: 0;
+    z-index: 1;
+  }
+
+  &.density-relaxed {
+    thead {
+      tr {
+        height: $rem-48px;
+
+        th {
+          padding-bottom: $rem-6px;
+          padding-top: $rem-6px;
+
+          &.row-checkbox {
+            padding: $rem-4px $rem-8px;
+          }
+
+          .can-sort {
+            .sort-icon-container {
+              padding: 0;
+            }
+          }
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        height: $rem-48px;
+      }
+    }
+
+    tfoot {
+      .summary-row {
+        height: $rem-48px;
+      }
+    }
+  }
+
+  &.density-comfortable {
+    thead {
+      tr {
+        height: 32px;
+
+        th {
+          padding-bottom: $rem-6px;
+          padding-top: $rem-6px;
+
+          &.row-checkbox {
+            padding: $rem-4px $rem-8px;
+          }
+
+          .can-sort {
+            .sort-icon-container {
+              padding: 0;
+            }
+          }
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        height: $rem-32px;
+
+        td {
+          padding-bottom: $rem-6px;
+          padding-top: $rem-6px;
+
+          &.row-checkbox {
+            padding: $rem-4px $rem-8px;
+          }
+        }
+      }
+    }
+
+    tfoot {
+      .summary-row {
+        height: $rem-32px;
+
+        td {
+          padding-bottom: $rem-6px;
+          padding-top: $rem-6px;
+
+          &.row-checkbox {
+            padding: $rem-4px $rem-8px;
+          }
+        }
+      }
+    }
+  }
+
+  &.density-compact {
+    thead {
+      tr {
+        height: $rem-24px;
+
+        th {
+          padding-bottom: $rem-2px;
+          padding-top: $rem-2px;
+
+          &.row-checkbox {
+            padding: $rem-2px $rem-8px;
+          }
+
+          .can-sort {
+            .sort-icon-container {
+              padding: 0;
+            }
+          }
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        height: $rem-24px;
+
+        td {
+          padding-bottom: $rem-4px;
+          padding-top: $rem-4px;
+
+          &.row-checkbox {
+            padding: $rem-2px $rem-8px;
+          }
+        }
+      }
+    }
+
+    tfoot {
+      .summary-row {
+        height: 24px;
+
+        td {
+          padding-bottom: $rem-2px;
+          padding-top: $rem-2px;
+
+          &.row-checkbox {
+            padding: $rem-4px $rem-8px;
+          }
+        }
+      }
+    }
+  }
+}
+
+modus-table-filler-column {
+  width: 100%;
+}
+
+.pagination-container {
+  align-items: center;
+  color: $modus-table-pagination-color;
+  display: flex;
+  flex-wrap: wrap;
+  font-family: $primary-font;
+  font-size: $rem-14px;
+  font-weight: 400;
+  justify-content: space-between;
+  margin-top: $rem-24px;
+
+  .items-per-page {
+    align-items: center;
+    display: flex;
+
+    modus-select {
+      margin-right: $rem-5px;
+      min-width: 60px;
+
+      /* Prevent the select from shrinking */
+    }
+
+    span {
+      margin-right: $rem-5px;
+    }
+  }
+
+  .pagination-and-count {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+
+    .total-count {
+      margin-right: $rem-5px;
+
+      span {
+        margin-right: $rem-5px;
+
+        &:last-child {
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+.drag-content {
+  background: $modus-data-table-drag-header-bg;
+  border: $rem-1px $modus-table-border-color solid;
+  cursor: grabbing !important;
+  display: flex;
+  left: 0;
+  opacity: 0.75;
+  position: fixed;
+  top: 0;
+  z-index: 9;
+
+  th {
+    align-self: center;
+    font-family: $primary-font;
+    font-weight: $font-weight-semi-bold;
+    padding: 0.25rem 1rem;
+    text-align: left;
+
+    div {
+      font-size: $rem-14px;
+    }
+  }
+
+  .sort-icon-container,
+  svg {
+    display: none;
+  }
+}
+
+.drop-allow-arrows {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  left: 0;
+  position: fixed;
+  top: -1px;
+  z-index: 9;
+
+  svg {
+    fill: $modus-table-header-drop-color;
+  }
+}

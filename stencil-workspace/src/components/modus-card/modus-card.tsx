@@ -1,4 +1,4 @@
-// eslint-disable-next-line
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Component, Prop, h } from '@stencil/core';
 
 @Component({
@@ -29,7 +29,7 @@ export class ModusCard {
     return (
       <article
         class={`${this.showShadowOnHover ? 'shadow' : ''} ${this.showCardBorder ? 'card-border' : ''}  `}
-        aria-label={this.ariaLabel}
+        aria-label={this.ariaLabel || undefined}
         style={{
           height: this.height,
           width: this.width,

@@ -1,6 +1,6 @@
 {
   "name": "@trimble-oss/modus-web-components",
-  "version": "0.1.53",
+  "version": "0.37.0",
   "description": "Trimble Modus Web Component Library",
   "homepage": "https://modus-web-components.trimble.com/",
   "bugs": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/trimble-oss/modus-web-components"
+    "url": "git+https://github.com/trimble-oss/modus-web-components.git"
   },
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
@@ -31,40 +31,51 @@
     "test.debug": "stencil test --spec --e2e --watchAll --devtools -- {file name}",
     "generate": "stencil generate",
     "lint": "npm run lint-js && npm run lint-css && npm run prettier",
-    "lint-js": "eslint src/** storybook/**/*.stories.tsx --no-error-on-unmatched-pattern",
-    "lint-css": "stylelint src/**/*.scss --fix",
-    "prettier": "prettier --write storybook/stories/**/*.* src/**/*.* --config ../.prettierrc.json --ignore-path ../.prettierignore",
+    "lint-js": "eslint \"src/**\" \"storybook/**/*.stories.tsx\"",
+    "lint-css": "stylelint \"src/**/*.scss\"",
+    "lint-css-fix": "stylelint \"src/**/*.scss\" --fix",
+    "prettier": "prettier --write \"storybook/stories/**/*.*\" \"src/**/*.*\" --config ../.prettierrc.json --ignore-path ../.prettierignore",
     "full": "npm ci && npm run lint && npm run build && npm run test && npm run ci-storybook",
     "ci-storybook": "cd storybook && npm ci && npm run build-storybook",
-    "start-storybook": "npm run build && cd storybook && npm run storybook"
+    "start-storybook": "npm run build && cd storybook && npm run storybook",
+    "prebuild": "tsc generate-icons/generate-icons.ts && node generate-icons/generate-icons.js"
   },
   "dependencies": {
-    "@stencil/core": "^3.3.0"
+    "@popperjs/core": "^2.11.8",
+    "@stencil/core": "^4.12.4",
+    "@tanstack/table-core": "^8.19.3"
   },
   "devDependencies": {
-    "@stencil/angular-output-target": "^0.7.1",
+    "@stencil/angular-output-target": "^0.8.4",
     "@stencil/postcss": "^2.1.0",
     "@stencil/react-output-target": "^0.5.3",
-    "@stencil/sass": "^2.0.4",
+    "@stencil/sass": "^3.0.12",
+    "@trimble-oss/modus-icons": "1.15.0",
     "@types/jest": "^27.5.1",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
     "@typescript-eslint/parser": "^5.58.0",
-    "autoprefixer": "^10.4.15",
-    "eslint": "^8.48.0",
-    "eslint-plugin-storybook": "^0.6.13",
+    "autoprefixer": "^10.4.20",
+    "cheerio": "^1.0.0-rc.12",
+    "colors": "^1.4.0",
+    "ejs": "^3.1.10",
+    "eslint": "^8.57.0",
+    "eslint-plugin-storybook": "^0.8.0",
     "jest": "^27.0.3",
     "jest-cli": "^27.5.1",
-    "prettier": "3.0.3",
+    "prettier": "3.3.3",
     "puppeteer": "^19.11.1",
-    "puppeteer-core": "^19.7.2",
-    "stylelint": "15.10.3",
-    "stylelint-config-standard-scss": "10.0.0",
-    "stylelint-order": "6.0.3",
-    "typescript": "^4.9.5"
+    "puppeteer-core": "^19.11.1",
+    "stylelint": "15.11.0",
+    "stylelint-config-standard-scss": "11.1.0",
+    "stylelint-order": "6.0.4",
+    "typescript": "^5.5.4"
   },
   "engines": {
-    "node": ">=14",
-    "npm": ">=7"
+    "node": ">=16",
+    "npm": ">=8"
+  },
+  "volta": {
+    "node": "16.20.2"
   },
   "license": "MIT"
 }

@@ -1,6 +1,7 @@
 @import './modus-text-input.vars';
 
 .modus-text-input {
+  border-radius: 4px;
   display: inline-flex;
   flex-direction: column;
   font-family: $primary-font;
@@ -9,16 +10,18 @@
   label {
     color: $modus-input-label-color;
     font-size: $rem-12px;
+    font-weight: 700;
     margin-bottom: $rem-4px;
 
     span {
-      color: $modus-input-bottom-line-color;
+      color: $modus-input-border-color;
       margin: $rem-4px;
     }
   }
 
   .label-container {
-    display: flex;
+    display: inline-block;
+    margin-bottom: 0.25rem;
 
     .required {
       bottom: $rem-1px;
@@ -32,7 +35,7 @@
     align-items: center;
     background-color: $modus-input-bg;
     border: $rem-1px solid $modus-input-border-color;
-    border-bottom-color: $modus-input-bottom-line-color;
+    border-radius: 4px;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
@@ -54,7 +57,8 @@
       background-color: transparent;
       border: none;
       color: $modus-input-color;
-      font-size: $rem-12px;
+      font-family: $primary-font;
+      font-size: var(--input-font-size, #{$rem-12px});
       outline: none;
       padding: 0 $rem-8px;
       width: 100%;
@@ -78,10 +82,11 @@
 
     .icons {
       align-items: center;
-      background-color: $modus-input-bg;
       color: $modus-input-helper-icon-color;
+      cursor: pointer;
       display: flex;
       font-size: $rem-16px;
+      height: 100%;
       justify-content: center;
       width: 2rem;
 
@@ -99,23 +104,19 @@
       cursor: text;
     }
 
-    &:focus-within,
-    &.error,
-    &.valid {
-      border-bottom-width: $rem-2px;
-      height: 2rem; // Counteract bottom border width.
-    }
-
     &:focus-within {
-      border-bottom-color: $modus-input-bottom-line-active-color;
+      border-color: $modus-input-border-active-color;
+      box-shadow: 0 0 0 1px $modus-input-border-active-color;
     }
 
     &.error {
-      border-bottom-color: $modus-input-validation-error-color;
+      border-color: $modus-input-validation-error-color;
+      box-shadow: 0 0 0 1px $modus-input-validation-error-color;
     }
 
     &.valid {
-      border-bottom-color: $modus-input-validation-success-color;
+      border-color: $modus-input-validation-success-color;
+      box-shadow: 0 0 0 1px $modus-input-validation-success-color;
     }
 
     &.large {
@@ -123,27 +124,34 @@
 
       input {
         font-size: $rem-14px;
-      }
-
-      &:focus-within,
-      &.error,
-      &.valid {
-        height: 3rem; // Counteract bottom border width.
+        padding: 0 $rem-16px;
       }
     }
   }
 
+  .input-container:has(input[readonly]) {
+    background-color: $modus-input-readonly-bg;
+    border-color: transparent;
+  }
+
   .sub-text {
-    font-size: $rem-11px;
+    font-size: $rem-12px;
     margin-top: $rem-4px;
 
     &.helper {
       color: $modus-input-label-color;
+      display: block;
       font-weight: 600;
+      margin: 0;
     }
 
     &.error {
       color: $modus-input-validation-error-color;
+      display: inline-flex;
+
+      svg {
+        margin-right: 0.25rem;
+      }
     }
 
     &.valid {
@@ -168,7 +176,7 @@
     .input-container {
       background-color: $modus-input-disabled-bg;
       border: $rem-1px solid $modus-input-disabled-border-color;
-      border-bottom-color: $modus-input-disabled-bottom-line-color;
+      border-color: transparent;
 
       svg path {
         fill: $modus-input-disabled-color;
@@ -199,22 +207,10 @@
   }
 
   .toggle-password {
-    z-index: 9;
-
     svg.visibility,
     svg.visibility-off {
       display: none;
     }
-  }
-
-  .toggle-password:active,
-  .toggle-password:focus,
-  .toggle-password:hover {
-    cursor: pointer;
-  }
-
-  .toggle-password:focus {
-    outline: none !important;
   }
 
   input {
@@ -230,5 +226,11 @@
 
   input[type='text'] + .toggle-password > svg.visibility-off {
     display: inline;
+  }
+
+  input[type='search']::-webkit-search-cancel-button,
+  input[type='search']::-webkit-search-decoration {
+    -webkit-appearance: none;
+    appearance: none;
   }
 }

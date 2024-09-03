@@ -33,6 +33,39 @@
 | `valueChange` | An event that fires on input value change. | `CustomEvent<string>` |
 
 
+## Methods
+
+### `focusInput() => Promise<void>`
+
+Focus the input.
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+
+## Shadow Parts
+
+| Part                | Description |
+| ------------------- | ----------- |
+| `"input-container"` |             |
+
+
+## Dependencies
+
+### Used by
+
+ - [modus-table-cell-editor](../modus-table/parts/cell/modus-table-cell-editor)
+
+### Graph
+```mermaid
+graph TD;
+  modus-table-cell-editor --> modus-number-input
+  style modus-number-input fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 

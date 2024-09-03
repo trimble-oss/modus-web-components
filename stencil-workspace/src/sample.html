@@ -2,7 +2,7 @@
 <html dir="ltr" lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Trimble Modus Web Components</title>
 
     <script type="module" src="/build/modus-web-components.esm.js"></script>
@@ -24,7 +24,7 @@
     </style>
   </head>
   <body>
-    <div style="padding: 10px">
+    <main style="padding: 10px">
       <modus-button color="primary" style="position: sticky; top: 0; z-index: 1000; padding: 10px" id="toggle">Toggle theme</modus-button>
       <modus-button color="primary" style="position: sticky; top: 0; z-index: 1000; padding: 10px" id="reset">Reset theme</modus-button>
 
@@ -127,7 +127,7 @@
         <modus-card>
           <div style="padding: 10px">
             <h4 id="card-title">Card title</h4>
-            <h5 id="card-subtitle">Card subtitle</h5>
+            <h5>Card subtitle</h5>
             <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             <modus-button color="primary">Go somewhere</modus-button>
           </div>
@@ -239,7 +239,7 @@
         <modus-button color="primary" id="toggle_file-dropzone" style="padding: 10px">Toggle File upload dropzone</modus-button>
       </div>
       <div>
-        <modus-file-dropzone aria-Label="dropzone" description="File dropzone description" dropzone-Height="175px" dropzone-Width="400px" label="Dropzone Label" multiple="false"> </modus-file-dropzone>
+        <modus-file-dropzone aria-label="dropzone" description="File dropzone description" dropzone-Height="175px" dropzone-Width="400px" label="Dropzone Label" multiple="false"> </modus-file-dropzone>
       </div>
       <div>
         <modus-button color="primary" id="toggle_message" style="padding: 10px">Toggle Messages theme</modus-button>
@@ -465,6 +465,7 @@
         </div>
       </div>
     </div>
+    </main>
   </body>
   <script>
     document.querySelector('#btn-modal').addEventListener('buttonClick', () => {

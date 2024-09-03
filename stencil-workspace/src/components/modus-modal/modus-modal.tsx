@@ -1,8 +1,14 @@
 // eslint-disable-next-line
 import { Component, Element, Event, EventEmitter, h, JSX, Listen, Method, Prop, State } from '@stencil/core';
-import { IconClose } from '../icons/icon-close';
+import { IconClose } from '../../icons/svgs/icon-close';
 import { FocusWrap, ModalFocusWrapping } from './modal-focus-wrapping';
+import { Fragment } from '@stencil/core/internal';
+import { IconCollapse } from '../../icons/generated-icons/IconCollapse';
+import { IconExpand } from '../../icons/generated-icons/IconExpand';
 
+/**
+ * @slot footerContent - Slot for a custom footer content
+ */
 @Component({
   tag: 'modus-modal',
   styleUrl: 'modus-modal.scss',
@@ -42,6 +48,9 @@ export class ModusModal {
   /** (optional) The modal's backdrop. Specify 'static' for a backdrop that doesn't close the modal when clicked outside the modal content */
   @Prop() backdrop: 'default' | 'static' = 'default';
 
+  /** (optional) The modal's full screen view */
+  @Prop({ mutable: true }) fullscreen = false;
+
   /** An event that fires on modal close.  */
   @Event() closed: EventEmitter;
 
@@ -54,6 +63,9 @@ export class ModusModal {
   /** An event that fires on secondary button click.  */
   @Event() secondaryButtonClick: EventEmitter;
 
+  /** A state that checks if content is scrollable.  */
+  @State() isContentScrollable = false;
+
   ignoreOverlayClick = false;
 
   // A hidden element used to find the end of the Modal to prevent tabbing in the background
@@ -61,6 +73,8 @@ export class ModusModal {
   focusWrapping: ModalFocusWrapping;
   modalContentRef: HTMLDivElement;
   tabbableNodes: HTMLElement[];
+  modalBodyRef: HTMLDivElement;
+  resizeObserver: ResizeObserver;
 
   /** Closes the Modal */
   @Method()
@@ -81,6 +95,10 @@ export class ModusModal {
   }
 
   @State() visible: boolean;
+
+  toggleFullscreen(): void {
+    this.fullscreen = !this.fullscreen;
+  }
 
   handleModalContentMouseDown(): void {
     // If Mouse was dragged off from the Modal content, ignore mouse up on overlay preventing Modal to close
@@ -106,28 +124,46 @@ export class ModusModal {
   }
 
   handleEnterKeydown(event: KeyboardEvent, callback: () => void): void {
-    switch (event.code) {
-      case 'Enter':
-        callback();
-        break;
+    if (event.code === 'Enter') {
+      callback();
     }
   }
 
-  handleCloseKeydown(event: KeyboardEvent): void {
-    this.handleEnterKeydown(event, () => this.close());
+  handlePrimaryClick(): void {
+    if (!this.primaryButtonDisabled) {
+      this.primaryButtonClick.emit();
+    }
   }
 
-  handlePrimaryKeydown(event: KeyboardEvent): void {
-    this.handleEnterKeydown(event, () => this.primaryButtonClick.emit());
-  }
-
-  handleSecondaryKeydown(event: KeyboardEvent): void {
-    this.handleEnterKeydown(event, () => this.secondaryButtonClick.emit());
+  handleSecondaryClick(): void {
+    if (!this.secondaryButtonDisabled) {
+      this.secondaryButtonClick.emit();
+    }
   }
 
   componentDidRender() {
-    if (this.modalContentRef && this.startTrapRef)
+    if (this.modalContentRef && this.startTrapRef) {
       this.focusWrapping = new ModalFocusWrapping(this.modalContentRef, this.startTrapRef);
+    }
+    if (this.modalBodyRef) {
+      this.resizeObserver = new ResizeObserver(() => {
+        this.checkContentScrollable();
+      });
+      this.resizeObserver.observe(this.modalBodyRef);
+    }
+    this.checkContentScrollable();
+  }
+
+  disconnectedCallback() {
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+    }
+  }
+
+  checkContentScrollable() {
+    if (this.modalContentRef) {
+      this.isContentScrollable = this.modalBodyRef.scrollHeight > this.modalBodyRef.clientHeight;
+    }
   }
 
   renderModal(): JSX.Element[] {
@@ -138,7 +174,7 @@ export class ModusModal {
           ref={(el) => (this.startTrapRef = el)}
           onFocus={() => this.focusWrapping?.onStartWrapFocus()}></FocusWrap>
         {this.renderModalHeader()}
-        <div class="body">
+        <div class="body" ref={(el) => (this.modalBodyRef = el)}>
           <slot />
         </div>
         {this.renderModalFooter()}
@@ -149,56 +185,72 @@ export class ModusModal {
 
   renderModalHeader(): JSX.Element[] {
     return (
-      <div class="header">
+      <header class={{ scrollable: this.isContentScrollable }}>
         {this.headerText}
-        <div
-          role="button"
-          tabindex={0}
-          aria-label="Close"
-          onClick={() => this.close()}
-          onKeyDown={(event) => this.handleCloseKeydown(event)}>
-          <IconClose size="20" />
+        <div class="header-buttons">
+          <div
+            role="button"
+            tabindex={0}
+            aria-label={this.fullscreen ? 'Collapse' : 'Expand'}
+            onClick={() => this.toggleFullscreen()}
+            onKeyDown={(event) => this.handleEnterKeydown(event, () => this.toggleFullscreen())}>
+            {this.fullscreen ? <IconCollapse size="24" /> : <IconExpand size="24" />}
+          </div>
+          <div
+            role="button"
+            tabindex={0}
+            aria-label="Close"
+            onClick={() => this.close()}
+            onKeyDown={(event) => this.handleEnterKeydown(event, () => this.close())}>
+            <IconClose size="24" />
+          </div>
         </div>
-      </div>
+      </header>
     );
   }
 
   renderModalFooter(): JSX.Element[] {
     return (
-      <div class="footer">
-        {this.secondaryButtonText && (
-          <modus-button
-            disabled={this.secondaryButtonDisabled}
-            button-style="outline"
-            color="secondary"
-            ariaLabel={this.secondaryButtonAriaLabel}
-            onButtonClick={() => this.secondaryButtonClick.emit()}
-            onKeyDown={(event) => this.handlePrimaryKeydown(event)}>
-            {this.secondaryButtonText}
-          </modus-button>
-        )}
-        {this.primaryButtonText && (
-          <modus-button
-            disabled={this.primaryButtonDisabled}
-            color="primary"
-            ariaLabel={this.primaryButtonAriaLabel}
-            onButtonClick={() => this.primaryButtonClick.emit()}
-            onKeyDown={(event) => this.handleSecondaryKeydown(event)}>
-            {this.primaryButtonText}
-          </modus-button>
-        )}
-      </div>
+      <Fragment>
+        <footer
+          class={{
+            'has-buttons': Boolean(this.primaryButtonText || this.secondaryButtonText),
+            scrollable: this.isContentScrollable,
+          }}>
+          {this.secondaryButtonText && (
+            <modus-button
+              disabled={this.secondaryButtonDisabled}
+              button-style="outline"
+              color="secondary"
+              ariaLabel={this.secondaryButtonAriaLabel}
+              onButtonClick={() => this.handleSecondaryClick()}>
+              {this.secondaryButtonText}
+            </modus-button>
+          )}
+          {this.primaryButtonText && (
+            <modus-button
+              disabled={this.primaryButtonDisabled}
+              color="primary"
+              ariaLabel={this.primaryButtonAriaLabel}
+              onButtonClick={() => this.handlePrimaryClick()}>
+              {this.primaryButtonText}
+            </modus-button>
+          )}
+          <slot name="footerContent"></slot>
+        </footer>
+      </Fragment>
     );
   }
 
   render(): unknown {
     return (
       <div
-        aria-hidden={this.closed}
-        aria-label={this.ariaLabel}
-        class={`modus-modal overlay ${this.visible ? 'visible' : 'hidden'}`}
+        aria-hidden={this.visible ? undefined : 'true'}
+        aria-label={this.visible ? this.ariaLabel || undefined : undefined}
+        aria-modal={this.visible ? 'true' : undefined}
+        class={`modus-modal ${this.fullscreen ? 'fullscreen' : ''} overlay ${this.visible ? 'visible' : 'hidden'}`}
         onClick={(event) => this.handleOverlayClick(event)}
-        role="dialog"
+        role={this.visible ? 'dialog' : undefined}
         style={{ zIndex: this.zIndex }}>
         {this.renderModal()}
       </div>

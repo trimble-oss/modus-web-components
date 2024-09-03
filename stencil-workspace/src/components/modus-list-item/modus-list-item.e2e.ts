@@ -78,4 +78,18 @@ describe('modus-list-item', () => {
     await page.waitForChanges();
     expect(itemClick).not.toHaveReceivedEvent();
   });
+
+  it('should show subText below slot in the list item', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-list-item></modus-list-item>');
+    await page.waitForChanges();
+
+    const component = await page.find('modus-list-item');
+    component.setProperty('subText', 'test');
+    await page.waitForChanges();
+
+    const element = await page.find('modus-list-item >>> li >>> .sub-text');
+    expect(element.textContent).toEqual('test');
+  });
 });

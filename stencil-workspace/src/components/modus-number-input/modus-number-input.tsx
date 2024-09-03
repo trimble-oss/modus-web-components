@@ -1,5 +1,6 @@
 // eslint-disable-next-line
-import { Component, Event, EventEmitter, h, Prop, Watch } from '@stencil/core';
+import { Component, Event, EventEmitter, h, Method, Prop, Watch } from '@stencil/core';
+import { generateElementId } from '../../utils/utils';
 
 @Component({
   tag: 'modus-number-input',
@@ -55,6 +56,8 @@ export class ModusNumberInput {
   /** An event that fires on input value change. */
   @Event() valueChange: EventEmitter<string>;
 
+  private inputId = generateElementId() + '_number-input';
+
   classBySize: Map<string, string> = new Map([
     ['medium', 'medium'],
     ['large', 'large'],
@@ -66,11 +69,16 @@ export class ModusNumberInput {
     this.valueChange.emit(this.value);
   }
 
+  /** Focus the input. */
+  @Method()
+  async focusInput(): Promise<void> {
+    this.numberInput.focus();
+  }
+
   @Watch('value')
   watchValue(newValue: string, oldValue: string): void {
     if (isNaN(+newValue)) {
       this.value = oldValue;
-      console.error(`${newValue} is not a number.`);
     } else {
       this.value = newValue;
     }
@@ -109,12 +117,14 @@ export class ModusNumberInput {
       <div class={buildContainerClassNames()}>
         {this.label || this.required ? (
           <div class="label-container">
-            {this.label ? <label>{this.label}</label> : null}
+            {this.label ? <label htmlFor={this.inputId}>{this.label}</label> : null}
             {this.required ? <span class="required">*</span> : null}
+            {this.helperText ? <label class="sub-text helper">{this.helperText}</label> : null}
           </div>
         ) : null}
-        <div class={buildInputContainerClassNames()}>
+        <div class={buildInputContainerClassNames()} part="input-container">
           <input
+            id={this.inputId}
             aria-label={this.ariaLabel}
             aria-invalid={!!this.errorText}
             aria-required={this.required?.toString()}
@@ -138,8 +148,6 @@ export class ModusNumberInput {
           <label class="sub-text error">{this.errorText}</label>
         ) : this.validText ? (
           <label class="sub-text valid">{this.validText}</label>
-        ) : this.helperText ? (
-          <label class="sub-text helper">{this.helperText}</label>
         ) : null}
       </div>
     );

@@ -4,6 +4,59 @@ import { html } from 'lit-html';
 
 export default {
   title: 'Components/Side Navigation',
+  argTypes: {
+    collapseOnClickOutside: {
+      name: 'collapse-on-click-outside',
+      description: " To choose whether to collapse the panel when clicked outside",
+      table: {
+        type: { summary: 'boolean' },
+      },
+    },
+    data: {
+      description: 'Data property to create the side navigation items',
+      table: {
+        type: { summary: 'ModusSideNavigationItemInfo' },
+      },
+    },
+    maxWidth: {
+      name: 'max-width',
+      description: "Maximum width of the side navigation panel in an expanded state",
+      table: {
+        defaultValue: { summary: '256px' },
+        type: { summary: 'string' },
+      },
+    },
+    mode:
+    {
+      control: {
+        options: [
+          'overlay',
+          'push',
+        ],
+        type: 'select',
+      },
+      description: 'Mode to make side navigation either overlay or push the content for the selector specified in `targetContent`',
+      table: {
+        defaultValue: { summary: `'overlay'` },
+        type: {
+          summary: `'overlay' | 'push'`,
+        },
+      },
+    },
+    expanded: {
+      description: "The expanded state of side navigation panel and items",
+      table: {
+        type: { summary: 'boolean' },
+      },
+    },
+    targetContent: {
+      name: "target-content",
+      description: "Specify the selector for the page's content for which paddings and margins will be set by side navigation based on the `mode`",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+  },
   parameters: {
     docs: {
       page: docs,
@@ -11,14 +64,21 @@ export default {
     options: {
       isToolshown: true,
     },
-    controls: {
-      disabled: true,
+    actions: {
+      handles: ['sideNavExpand', 'sideNavItemClicked', 'mainMenuClick'],
     },
+    controls: { expanded: true, sort: 'requiredFirst' },
     viewMode: 'docs',
   },
 };
 
-const DefaultTemplate = () => html`
+const DefaultTemplate = ({
+  collapseOnClickOutside,
+  maxWidth,
+  mode,
+  expanded,
+  targetContent,
+}) => html`
   <div id="defaultTemplate">
     <div
       style="width: 100%;align-items: center;height: 56px;box-shadow: 0 0 2px var(--modus-secondary)!important; margin-top: 50px;">
@@ -35,68 +95,23 @@ const DefaultTemplate = () => html`
       id="container"
       style="display:flex; min-height:500px; overflow-y: auto; position: relative;box-shadow: 0 0 2px var(--modus-secondary)!important;">
       <modus-side-navigation
-        max-width="300px"
+        max-width=${maxWidth}
         id="sideNav"
-        target-content="#defaultTemplate #panelcontent">
+        collapse-on-click-outside=${collapseOnClickOutside}
+        mode=${mode}
+        expanded=${expanded}
+        target-content=${targetContent}>
         <modus-side-navigation-item id="home-menu" label="Home page">
-          <svg
-            slot="menu-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            height="24"
-            width="24"
-            viewBox="0 0 32 32">
-            <style>
-              .st1 {
-                stroke: #000;
-                stroke-miterlimit: 10;
-              }
-            </style>
-            <path
-              d="M30.707 15.293 26 10.586V5a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v1.586l-4.293-4.293a1 1 0 0 0-1.414 0l-13 13A1 1 0 0 0 4 17h3v12a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-7h6v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V17h3a1 1 0 0 0 .707-1.707z" />
-          </svg>
+          <modus-icon name="home" size="24" slot="menu-icon"></modus-icon>
         </modus-side-navigation-item>
         <modus-side-navigation-item id="usage-menu" label="Usage">
-          <svg
-            slot="menu-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            height="24"
-            width="24"
-            viewBox="0 0 32 32">
-            <g>
-              <path
-                d="M30 23v6c0 .55-.45 1-1 1h-6c-.55 0-1-.45-1-1v-6c0-.55.45-1 1-1h2v-5h-8v5h2c.55 0 1 .45 1 1v6c0 .55-.45 1-1 1h-6c-.55 0-1-.45-1-1v-6c0-.55.45-1 1-1h2v-5H7v5h2c.55 0 1 .45 1 1v6c0 .55-.45 1-1 1H3c-.55 0-1-.45-1-1v-6c0-.55.45-1 1-1h2v-6c0-.55.45-1 1-1h9v-5h-2c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h6c.55 0 1 .45 1 1v6c0 .55-.45 1-1 1h-2v5h9c.55 0 1 .45 1 1v6h2c.55 0 1 .45 1 1z" />
-            </g>
-          </svg>
+          <modus-icon name="flowchart" size="24" slot="menu-icon"></modus-icon>
         </modus-side-navigation-item>
         <modus-side-navigation-item id="styles-menu" label="Styles">
-          <svg
-            slot="menu-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            height="24"
-            width="24"
-            viewBox="0 0 32 32">
-            <path
-              d="M30 25h-1v-9a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v9h-2V5a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v20h-2V12a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v13H3a1 1 0 1 0 0 2h27a1 1 0 1 0 0-2zM6 25V13h3v12H6zm9 0V6h3v19h-3zm9 0v-8h3v8h-3z" />
-          </svg>
+          <modus-icon name="bar_graph_line" size="24" slot="menu-icon"></modus-icon>
         </modus-side-navigation-item>
-        <modus-side-navigation-item
-          id="accessibility-menu"
-          label="Accessibility">
-          <svg
-            slot="menu-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            height="24"
-            width="24"
-            viewBox="0 0 32 32">
-            <g>
-              <path
-                d="M29 4H3c-.55 0-1 .45-1 1v17c0 .55.45 1 1 1h12v3h-4c-.55 0-1 .45-1 1s.45 1 1 1h10c.55 0 1-.45 1-1s-.45-1-1-1h-4v-3h12c.55 0 1-.45 1-1V5c0-.55-.45-1-1-1zm-1 17H4v-2h24v2z" />
-            </g>
-          </svg>
+        <modus-side-navigation-item id="accessibility-menu" label="Accessibility">
+          <modus-icon name="screen" size="24" slot="menu-icon"></modus-icon>
         </modus-side-navigation-item>
       </modus-side-navigation>
 
@@ -121,8 +136,21 @@ const DefaultTemplate = () => html`
   ${setJavascriptDefaultTemplate('defaultTemplate')}
 `;
 export const Default = DefaultTemplate.bind({});
+Default.args = {
+  collapseOnClickOutside: true,
+  maxWidth: '300px',
+  mode: 'overlay',
+  expanded: false,
+  targetContent: '#defaultTemplate #panelcontent',
+};
 
-const SideNavigationWithDataTemplate = () => html`
+const SideNavigationWithDataTemplate = ({
+  collapseOnClickOutside,
+  maxWidth,
+  mode,
+  expanded,
+  targetContent,
+}) => html`
   <div id="dataTemplate">
     <modus-switch id="switch-theme" label="Enable blue theme"></modus-switch>
     <br />
@@ -144,10 +172,12 @@ const SideNavigationWithDataTemplate = () => html`
       id="container"
       style="display:flex; min-height:500px; overflow-y: auto; position: relative;box-shadow: 0 0 2px var(--modus-secondary)!important;">
       <modus-side-navigation
-        max-width="300px"
-        id="sideNav"
-        target-content="#dataTemplate #panelcontent"
-        mode="overlay">
+      max-width=${maxWidth}
+      id="sideNav"
+      collapse-on-click-outside=${collapseOnClickOutside}
+      mode=${mode}
+      expanded=${expanded}
+      target-content=${targetContent}>
       </modus-side-navigation>
 
       <div
@@ -173,6 +203,13 @@ const SideNavigationWithDataTemplate = () => html`
   ${setJavascriptDataTemplate('dataTemplate')}
 `;
 export const SideNavigationWithData = SideNavigationWithDataTemplate.bind({});
+SideNavigationWithData.args = {
+  collapseOnClickOutside: true,
+  maxWidth: '300px',
+  mode: 'overlay',
+  expanded: true,
+  targetContent: '#dataTemplate #panelcontent',
+};
 
 const helpers = (containerId) => {
   return `
@@ -205,7 +242,7 @@ const helpers = (containerId) => {
     },
   };
   getRoot().querySelector('#navbar').profileMenuOptions = {
-    avatarUrl: 'broken-link',
+    avatarUrl: 'https://avatar.example.com/broken-image-link.png',
     email: 'modus_user@trimble.com',
     initials: 'MU',
     username: 'Modus User',
@@ -252,17 +289,10 @@ const setJavascriptDefaultTemplate = (containerId) => {
 };
 
 const setJavascriptDataTemplate = (containerId) => {
-  const homeIcon =
-    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='currentColor' height='24' width='24' viewBox='0 0 32 32'%3E%3Cstyle%3E .st1 %7B stroke: %23000; stroke-miterlimit: 10; %7D %3C/style%3E%3Cpath d='M30.707 15.293 26 10.586V5a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v1.586l-4.293-4.293a1 1 0 0 0-1.414 0l-13 13A1 1 0 0 0 4 17h3v12a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-7h6v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V17h3a1 1 0 0 0 .707-1.707z' /%3E%3C/svg%3E";
-
-  const usageIcon =
-    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='currentColor' height='24' width='24' viewBox='0 0 32 32'%3E%3Cg%3E%3Cpath d='M30 23v6c0 .55-.45 1-1 1h-6c-.55 0-1-.45-1-1v-6c0-.55.45-1 1-1h2v-5h-8v5h2c.55 0 1 .45 1 1v6c0 .55-.45 1-1 1h-6c-.55 0-1-.45-1-1v-6c0-.55.45-1 1-1h2v-5H7v5h2c.55 0 1 .45 1 1v6c0 .55-.45 1-1 1H3c-.55 0-1-.45-1-1v-6c0-.55.45-1 1-1h2v-6c0-.55.45-1 1-1h9v-5h-2c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h6c.55 0 1 .45 1 1v6c0 .55-.45 1-1 1h-2v5h9c.55 0 1 .45 1 1v6h2c.55 0 1 .45 1 1z' /%3E%3C/g%3E%3C/svg%3E";
-
-  const stylesIcon =
-    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='currentColor' height='24' width='24' viewBox='0 0 32 32'%3E%3Cpath d='M30 25h-1v-9a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v9h-2V5a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v20h-2V12a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v13H3a1 1 0 1 0 0 2h27a1 1 0 1 0 0-2zM6 25V13h3v12H6zm9 0V6h3v19h-3zm9 0v-8h3v8h-3z' /%3E%3C/svg%3E";
-
-  const accessibilityIcon =
-    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='currentColor' height='24' width='24' viewBox='0 0 32 32'%3E%3Cg%3E%3Cpath d='M29 4H3c-.55 0-1 .45-1 1v17c0 .55.45 1 1 1h12v3h-4c-.55 0-1 .45-1 1s.45 1 1 1h10c.55 0 1-.45 1-1s-.45-1-1-1h-4v-3h12c.55 0 1-.45 1-1V5c0-.55-.45-1-1-1zm-1 17H4v-2h24v2z' /%3E%3C/g%3E%3C/svg%3E";
+  const homeIcon = "home";
+  const usageIcon = "flowchart";
+  const stylesIcon = "bar_graph_line";
+  const accessibilityIcon = "screen";
 
   const selectionHandler = `
     onSideNavItemClicked: (e)=>{
@@ -279,7 +309,7 @@ const setJavascriptDataTemplate = (containerId) => {
     },
     `;
 
-  const blueTheme = `--modus-side-navigation-bg:#0e416c;--modus-side-navigation-item-color:#ffffff;--modus-side-navigation-item-active-bg:#217cbb;--modus-side-navigation-item-hover-bg:#0063a3;--modus-side-navigation-item-icon-color:#ffffff;--modus-side-navigation-item-chevron-color:#ffffff;--modus-side-navigation-item-icon-filter:invert(100%) sepia(0%) saturate(24%) hue-rotate(114deg) brightness(108%) contrast(108%);`;
+  const blueTheme = `--modus-side-navigation-link-color:#ffffff;--modus-side-navigation-bg:#0e416c;--modus-side-navigation-item-color:#ffffff;--modus-side-navigation-item-active-bg:#217cbb;--modus-side-navigation-item-hover-bg:#0063a3;--modus-side-navigation-item-icon-color:#ffffff;--modus-side-navigation-item-chevron-color:#ffffff;--modus-side-navigation-item-icon-filter:invert(100%) sepia(0%) saturate(24%) hue-rotate(114deg) brightness(108%) contrast(108%);`;
 
   const tag = document.createElement('script');
   tag.innerHTML = `

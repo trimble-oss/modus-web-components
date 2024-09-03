@@ -62,4 +62,52 @@ describe('modus-toast', () => {
     await page.waitForChanges();
     expect(dismissClick).toHaveReceivedEvent();
   });
+
+  it('renders aria-label on div when set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-toast aria-label="test label"></modus-toast>');
+    let element = await page.find('modus-toast >>> .modus-toast');
+    expect(element).toBeDefined();
+    expect(element).toHaveAttribute('aria-label');
+    expect(element.getAttribute('aria-label')).toEqual('test label');
+  });
+
+  it('does not render aria-label on div when not set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-toast></modus-toast>');
+    let element = await page.find('modus-toast >>> .modus-toast');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
+
+  it('does not render aria-label on div when set to empty string', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-toast aria-label=""></modus-toast>');
+    let element = await page.find('modus-toast >>> .modus-toast');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
+
+  it('emits dismissClick event after 15000ms', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-toast></modus-toast>');
+    const dismissClick = await page.spyOnEvent('dismissClick');
+
+    await page.waitForTimeout(15000);
+    expect(dismissClick).toHaveReceivedEvent();
+  });
+
+  it('emits dismissClick event after 15000ms', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-toast delay="10000"></modus-toast>');
+    const dismissClick = await page.spyOnEvent('dismissClick');
+
+    await page.waitForTimeout(10000);
+    expect(dismissClick).toHaveReceivedEvent();
+  });
 });

@@ -1,4 +1,4 @@
-// eslint-disable-next-line
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Component, Prop, h, Event, EventEmitter } from '@stencil/core';
 
 export interface Crumb {
@@ -18,17 +18,20 @@ export class ModusBreadcrumb {
   /** The breadcrumbs to render. */
   @Prop() crumbs: Crumb[] = [];
 
+  /**(optional) A flag that controls the display of underline */
+  @Prop() underlineLinks: boolean;
+
   /** (optional) An event that fires on breadcrumb click. */
   @Event() crumbClick: EventEmitter<Crumb>;
 
   render(): unknown {
     return (
-      <nav aria-label={this.ariaLabel} role="navigation">
+      <nav aria-label={this.ariaLabel || undefined}>
         <ol>
           {this.crumbs.map((crumb, index) => (
             <li key={crumb.id}>
               {index < this.crumbs.length - 1 ? (
-                <span class="crumb">
+                <span class={`crumb ${this.underlineLinks ? 'underline' : ''}`}>
                   <a onClick={() => this.crumbClick.emit(crumb)}>{crumb.display}</a>
                   <span class="divider">{'>'}</span>
                 </span>

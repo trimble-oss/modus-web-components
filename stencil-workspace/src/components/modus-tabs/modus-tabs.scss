@@ -19,16 +19,33 @@
 
   .tab {
     align-items: center;
+    background-color: transparent;
     border: solid transparent $rem-3px;
-    border-radius: $rem-2px $rem-2px 0 0;
+    border-radius: $rem-4px $rem-4px 0 0;
     color: $modus-tab-color;
     display: flex;
+    font-family: $primary-font;
     font-weight: $font-weight-semi-bold;
     justify-content: center;
     overflow: hidden;
     text-transform: uppercase;
     text-wrap: none;
     user-select: none;
+
+    .icon {
+      align-items: center;
+      display: flex;
+      flex: 0 0 auto;
+      pointer-events: none;
+
+      &.left-icon {
+        padding-right: $rem-8px;
+      }
+
+      &.right-icon {
+        padding-left: $rem-8px;
+      }
+    }
 
     &.resizable {
       width: 100%;

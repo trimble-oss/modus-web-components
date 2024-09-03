@@ -15,6 +15,16 @@ nav {
     box-shadow: $box-shadow;
   }
 
+  .badge {
+    border-radius: 50%;
+    color: white;
+    height: 22px;
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    width: 22px;
+  }
+
   .icon-search,
   .icon-notifications,
   .icon-help,
@@ -22,7 +32,7 @@ nav {
   .icon-menu,
   .icon-close,
   .icon-button svg {
-    border-radius: $rem-2px;
+    border-radius: $rem-4px;
     padding: $rem-12px;
 
     path {
@@ -67,6 +77,10 @@ nav {
 
   .navbar-button-list {
     display: flex;
+  }
+
+  .navbar-logo {
+    padding-inline-end: 0.5rem;
   }
 
   .right,
@@ -133,7 +147,10 @@ nav {
         img.avatar {
           background-color: $modus-navbar-icon-color;
           border-radius: 50%;
+          display: flex;
           height: 32px;
+          max-height: 32px;
+          max-width: 32px;
           width: 32px;
         }
 
@@ -147,17 +164,20 @@ nav {
           font-weight: $font-weight-semi-bold;
           height: 32px;
           justify-content: center;
+          max-height: 32px;
+          max-width: 32px;
           user-select: none;
           width: 32px;
         }
 
-        > :first-child:hover,
-        > :first-child:focus {
-          border: $rem-4px solid $modus-navbar-icon-color;
+        > :first-child:hover {
+          border: $rem-4px solid $modus-navbar-icon-hover-bg;
         }
 
-        > :first-child:active {
-          outline: $rem-4px solid $modus-navbar-profile-icon-active-border-color;
+        > :first-child:active,
+        > :first-child:focus {
+          border: $rem-4px solid $modus-navbar-profile-icon-active-border-color;
+          outline: none;
         }
 
         &:hover {
@@ -215,19 +235,29 @@ nav {
           color: $modus-navbar-blue-profile-icon-initials-color;
         }
 
-        > :first-child:hover,
-        > :first-child:focus {
-          border-color: $modus-navbar-blue-icon-color;
+        > :first-child:hover {
+          border-color: $modus-navbar-blue-icon-hover-bg;
+          border-radius: 50%;
+          outline: $rem-2px solid $modus-navbar-blue-profile-icon-active-border-color;
         }
 
-        > :first-child:active {
-          outline: $rem-4px solid $modus-navbar-blue-profile-icon-active-border-color;
+        > :first-child:active,
+        > :first-child:focus {
+          border-color: $modus-navbar-blue-profile-icon-active-border-color;
+          border-radius: 50%;
+          outline: none;
+        }
+
+        &:hover {
+          cursor: pointer;
         }
       }
     }
   }
 
   .product-logo {
+    display: flex;
+    justify-content: center;
     user-select: none;
 
     @media screen and (width > 576px) {

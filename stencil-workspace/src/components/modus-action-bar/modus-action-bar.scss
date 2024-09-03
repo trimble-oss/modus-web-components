@@ -1,0 +1,15 @@
+.modus-action-bar {
+  align-items: center;
+  display: flex;
+  gap: 0;
+
+  .overflow-menu {
+    display: none;
+    position: absolute;
+    z-index: 1;
+
+    &.show {
+      display: block;
+    }
+  }
+}

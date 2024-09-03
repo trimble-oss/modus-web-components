@@ -32,6 +32,17 @@ export default {
         type: { summary: 'string' },
       },
     },
+    size: {
+      control: {
+        options: ['small', 'medium'],
+        type: 'select',
+      },
+      description: 'The size of the button',
+      table: {
+        defaultValue: { summary: `'medium'` },
+        type: { summary: `'small' | 'medium'` },
+      },
+    },
   },
   parameters: {
     actions: {
@@ -47,50 +58,35 @@ export default {
   },
 };
 
-export const Default = ({ ariaLabel, checked, disabled, label }) =>
-  html`
-    <modus-switch
-      aria-label=${ariaLabel}
-      checked=${checked}
-      disabled=${disabled}
-      label=${label}>
-    </modus-switch>
-  `;
-Default.args = {
+export const Medium = ({ ariaLabel, checked, disabled, label, size }) => html`
+  <modus-switch aria-label=${ariaLabel} checked=${checked} ?disabled=${disabled} label=${label} size=${size}> </modus-switch>
+`;
+Medium.args = {
   ariaLabel: '',
   checked: false,
   disabled: false,
-  label: 'Default',
+  label: 'Medium',
+  size: 'medium',
 };
 
-export const Checked = ({ ariaLabel, checked, disabled, label }) =>
-  html`
-    <modus-switch
-      aria-label=${ariaLabel}
-      checked=${checked}
-      disabled=${disabled}
-      label=${label}>
-    </modus-switch>
-  `;
+export const Checked = ({ ariaLabel, checked, disabled, label, size }) => html`
+  <modus-switch aria-label=${ariaLabel} checked=${checked} ?disabled=${disabled} label=${label} size=${size}> </modus-switch>
+`;
 Checked.args = {
   ariaLabel: '',
   checked: true,
   disabled: false,
   label: 'Checked',
+  size: 'medium',
 };
 
-export const Disabled = ({ ariaLabel, checked, disabled, label }) =>
-  html`
-    <modus-switch
-      aria-label=${ariaLabel}
-      checked=${checked}
-      disabled=${disabled}
-      label=${label}>
-    </modus-switch>
-  `;
+export const Disabled = ({ ariaLabel, checked, disabled, label, size }) => html`
+  <modus-switch aria-label=${ariaLabel} checked=${checked} ?disabled=${disabled} label=${label} size=${size}> </modus-switch>
+`;
 Disabled.args = {
   ariaLabel: '',
   checked: false,
   disabled: true,
   label: 'Disabled',
+  size: 'medium',
 };

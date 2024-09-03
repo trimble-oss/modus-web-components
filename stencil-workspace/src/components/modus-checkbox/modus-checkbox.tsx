@@ -7,8 +7,7 @@ import {
   Listen,
   Method,
 } from '@stencil/core';
-import { IconCheck } from '../icons/icon-check';
-import { IconIndeterminate } from '../icons/icon-indeterminate';
+import { generateElementId } from '../../utils/utils';
 
 @Component({
   tag: 'modus-checkbox',
@@ -31,23 +30,27 @@ export class ModusCheckbox {
   /** (optional) The checkbox label. */
   @Prop() label: string;
 
-  /** (optional) Tab Index for the checkbox */
-  @Prop({ mutable: true }) tabIndexValue: string | number = 0;
-
   /** An event that fires on checkbox click. */
   @Event() checkboxClick: EventEmitter<boolean>;
 
+  /** (optional) If you wish to prevent the propagation of your event, you may opt for this. */
+  @Prop() stopPropagation: boolean;
+
+  /** (optional) The size of the checkbox. */
+  @Prop() size: 'small' | 'medium' = 'medium';
+
+  private checkBoxId = generateElementId() + '_checkbox';
+
   checkboxInput: HTMLInputElement;
-  checkboxContainer: HTMLDivElement;
 
   @Listen('keydown')
   elementKeydownHandler(event: KeyboardEvent): void {
     switch (event.code) {
       case 'Enter':
-        this.handleCheckboxClick();
+        this.handleCheckboxClick(event);
         break;
       case 'Space':
-        this.handleCheckboxClick();
+        this.handleCheckboxClick(event);
         break;
     }
   }
@@ -55,20 +58,25 @@ export class ModusCheckbox {
   /** Focus the checkbox input */
   @Method()
   async focusCheckbox(): Promise<void> {
-    this.checkboxContainer.focus();
+    this.checkboxInput.focus();
   }
 
   componentDidRender(): void {
     this.checkboxInput.indeterminate = this.indeterminate;
   }
 
-  handleCheckboxClick(): void {
+  handleCheckboxClick(event: MouseEvent | KeyboardEvent): void {
     if (this.disabled) {
       return;
     }
 
     this.updateChecked();
     this.checkboxClick.emit(this.checked);
+
+    if (this.stopPropagation) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
   }
 
   updateChecked(): void {
@@ -78,40 +86,30 @@ export class ModusCheckbox {
   }
 
   render(): unknown {
-    const className = 'modus-checkbox';
-    const tabIndexValue = this.disabled ? -1 : this.tabIndexValue;
+    const className = `modus-checkbox ${this.size === 'small' ? 'small' : ''}`;
 
     return (
-      <div
-        class={className}
-        onClick={() => {
-          this.handleCheckboxClick();
-        }}>
-        <div
-          tabindex={tabIndexValue}
-          class={`${this.checked || this.indeterminate ? 'checkbox blue-background checked' : 'checkbox'} ${
-            this.disabled ? 'disabled' : ''
-          }`}
-          ref={(el) => (this.checkboxContainer = el)}>
-          {this.indeterminate ? (
-            <div class={'checkmark checked'}>
-              <IconIndeterminate color="#FFFFFF" size="24" />
-            </div>
-          ) : (
-            <div class={this.checked ? 'checkmark checked' : 'checkmark'}>
-              <IconCheck color="#FFFFFF" size="24" />
-            </div>
-          )}
-        </div>
+      <div class={className}>
         <input
-          aria-checked={this.checked}
+          class={`checkbox ${this.size === 'small' ? 'small' : ''} ${this.disabled ? 'disabled' : ''}`}
+          aria-checked={this.checked ? 'true' : 'false'}
           aria-disabled={this.disabled ? 'true' : undefined}
-          aria-label={this.ariaLabel}
+          aria-label={this.ariaLabel || undefined}
           checked={this.checked}
           disabled={this.disabled}
+          id={this.checkBoxId}
           ref={(el) => (this.checkboxInput = el as HTMLInputElement)}
+          onChange={(event: MouseEvent) => {
+            this.handleCheckboxClick(event);
+          }}
           type="checkbox"></input>
-        {this.label ? <label class={this.disabled ? 'disabled' : null}>{this.label}</label> : null}
+        {this.label ? (
+          <label
+            htmlFor={this.checkBoxId}
+            class={` ${this.disabled ? 'disabled' : ''} ${this.size === 'small' ? 'small' : ''}`}>
+            {this.label}
+          </label>
+        ) : null}
       </div>
     );
   }

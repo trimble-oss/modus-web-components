@@ -19,20 +19,27 @@
 
 ## Dependencies
 
-- Node (>= v14)
+- Node (>= v16)
 - npm CLI (>= v7)
 
 _We recommend using [nvm](https://github.com/nvm-sh/nvm). It is a great tool for switching between Node versions_
 
 ## Getting Started
 
+### Before you get started
+
+Before you get started we STRONGLY recommend that you save yourself a lot of time by scheduling a pre-design. Our PRs that had a predesign went smoothly and the ones that didn’t had lots of changes. Please schedule the predesign. You can request a predesign session in the [Modus Web Components chat group](https://mail.google.com/chat/u/0/#chat/space/AAAAQFpPtIY)
+
+To prepare for the predesign session please:
+
+- Bring your link to the approved Modus Figma designs (we only contribute Figma approved components)
+- Bring documentation on the component
+
 ### Running the App
 
 If this is your first time in the project, navigate to the `./stencil-workspace` directory and run `npm install` to download third-party packages.
 
-Once you've installed the project's packages, run `npm start`.
-A development environment will start up with the contents of `index.html`.
-This file provides a place to render components for development and end-to-end testing.
+Once you've installed the project's packages, run `npm run build`. After the build is complete, run `npm start`. A development environment will start up with the contents of `index.html`. This file provides a place to render components for development and end-to-end testing.
 
 All web components are located under the `./stencil-workspace/src/components` directory.
 
@@ -72,6 +79,9 @@ If the issue's considered a bug, add the 'bug' label to the issue.
 
 Also add a priority level label to the issue. The priority options are low, medium, and high.
 If you are unsure of its priority, reach out to one of the developers for their opinion.
+
+**[Modus core team](https://github.com/orgs/trimble-oss/teams/modus-maintainers) will be looking at the open issues, analyze them, and provide guidance on how to proceed.** Contributors are welcome to participate in the discussion and provide their input on how to best solve the issue, and even submit a PR if they want to.
+**Please wait until the issue is ready to be worked on before submitting a PR, or you can reach out to the core team if it is time bound.** For trivial things, or bugs that don't change the expected behaviors and UI, you can go ahead and make a PR.
 
 ## Technologies
 
@@ -130,7 +140,7 @@ You can find more in depth examples of how these attributes and properties are s
 
 ## Style Guide
 
-This project follows [Stencil's Style Guide](https://stenciljs.com/docs/style-guide).
+This project follows [Modus Styleguide](https://modus.trimble.com/) for UX guidelines and uses [Stencil's Style Guide](https://stenciljs.com/docs/style-guide) for how to structure the code components.
 
 ## Testing
 
@@ -154,7 +164,7 @@ Before running the `test.debug` script, make sure to add the file you want to de
 This will open Chrome dev tools for debugging, and run only the Autocomplete e2e tests.
 
 You can add the following code to the test file to pause the test at a specific point while it's running in Chrome dev tools:
-`page.evaluate(() => { debugger; });`
+`page.evaluate(() => {  });`
 
 ## Considerations
 
@@ -167,14 +177,12 @@ Check out the [Considerations](CONSIDERATIONS.md) doc for more information.
 2. Branch from your fork using the naming convention `issue-{#}/{description}`. For example, `issue-123/my-bug-fix`.
 3. Make your changes. Be sure to update or add relevant tests!
 4. Run `npm run lint`, `npm run build`, and `npm run test`. If all is well, continue.
-5. If the library is going to require a version bump for release, bump the version in `package.json` and run `npm i` after. If a release is not needed at this point, don't worry about this step.
-6. If there is any change to the library's API, update the Storybook documentation under `./storybook/stories`.
+5. If there is any change to the library's API, update the Storybook documentation under `./storybook/stories`.
    - To run the Storybook site, `cd` into the directory and run `npm run storybook`. The library build will need to be up to date. The changes to the site will be deployed upon the PR merge to `main`.
-7. Once all of your changes have been made, squash your commits down to a singular commit with a relevant message.
+6. Once all of your changes have been made, squash your commits down to a singular commit with a relevant message.
    - If you prefer to do this with a GUI, GitHub Desktop has a [great squashing feature](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/managing-commits/squashing-commits).
-8. Submit your PR with your branch as the `head`, and the `@trimble-oss/modus-web-components` `main` branch as the `base`.
+7. Submit your PR with your branch as the `head`, and the `@trimble-oss/modus-web-components` `main` branch as the `base`.
    - Don't forget to link your relevant issue in the PR description.
-9. Rebase and Merge the PR upon approval.
 
 ## Changelog
 

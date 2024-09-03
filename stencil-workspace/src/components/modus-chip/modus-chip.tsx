@@ -1,7 +1,7 @@
-// eslint-disable-next-line
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Component, Prop, h, EventEmitter, Event, Listen } from '@stencil/core';
-import { IconRemove } from '../icons/icon-remove';
-import { IconCheck } from '../icons/icon-check';
+import { IconRemove } from '../../icons/svgs/icon-remove';
+import { IconCheck } from '../../icons/svgs/icon-check';
 
 @Component({
   tag: 'modus-chip',
@@ -35,6 +35,15 @@ export class ModusChip {
 
   /** (optional) The chip's value. */
   @Prop() value: string;
+
+  /** (optional) the chip's id */
+  @Prop() chipId: string;
+
+  /** (optional) Maximum width for the Chip's text and shows ellipsis when truncated */
+  @Prop() maxWidth: string;
+
+  /** (optional) Whether the chip is active. */
+  @Prop() active = false;
 
   /** An event that fires on chip click. */
   @Event() chipClick: EventEmitter;
@@ -94,25 +103,32 @@ export class ModusChip {
       ${this.classBySize.get(this.size)}
       ${!this.showCheckmark && !this.imageUrl ? 'no-left-icon' : null}
       ${!this.showClose ? 'no-right-icon' : null}
+      ${this.active ? 'active' : ''}
     `;
-
+    const style = {
+      style: {
+        'max-width': this.maxWidth ?? undefined,
+      },
+    };
     return (
-      <div
+      <button
         aria-disabled={this.disabled ? 'true' : undefined}
-        aria-label={this.ariaLabel}
+        aria-label={this.ariaLabel || undefined}
+        id={this.chipId || undefined}
         class={chipClass}
         onClick={this.disabled ? null : (event) => this.onChipClick(event)}
-        tabIndex={0}>
+        tabIndex={0}
+        type="button">
         {this.imageUrl ? (
           <img src={this.imageUrl} alt="" />
         ) : this.showCheckmark ? (
-          <IconCheck size={'24'}></IconCheck>
+          <IconCheck size={'16'}></IconCheck>
         ) : null}
-        <span>{this.value}</span>
+        <span {...style}>{this.value}</span>
         {this.showClose ? (
-          <IconRemove onClick={this.disabled ? null : (event) => this.onCloseClick(event)} size={'24'}></IconRemove>
+          <IconRemove onClick={this.disabled ? null : (event) => this.onCloseClick(event)} size={'16'}></IconRemove>
         ) : null}
-      </div>
+      </button>
     );
   }
 }

@@ -12,11 +12,29 @@ export default {
         type: { summary: 'string' },
       },
     },
+    delay: {
+      description: 'Time taken to dismiss the toast',
+      table: {
+        defaultValue: { summary: 15000 },
+        type: { summary: 'number' },
+      },
+    },
     dismissible: {
       description: 'Whether the toast is dismissible, renders the close icon',
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },
+      },
+    },
+    role: {
+      control: {
+        options: ['alert', 'log', 'marquee', 'status', 'timer'],
+        type: 'select',
+      },
+      description: 'Role taken by the toast',
+      table: {
+        defaultValue: { summary: 'status' },
+        type: { summary: '"alert" | "log" | "marquee" | "status" | "timer"' },
       },
     },
     showIcon: {
@@ -29,22 +47,14 @@ export default {
     },
     type: {
       control: {
-        options: [
-          'danger',
-          'dark',
-          'default',
-          'primary',
-          'secondary',
-          'success',
-          'warning',
-        ],
+        options: ['danger', 'primary', 'secondary', 'success'],
         type: 'select',
       },
       description: 'The type of the toast',
       table: {
         defaultValue: { summary: `'default'` },
         type: {
-          summary: `'danger' | 'dark' | 'default' | 'primary' | 'secondary' | 'success' | 'warning'`,
+          summary: `'danger' | 'primary' | 'secondary' | 'success'`,
         },
       },
     },
@@ -63,45 +73,24 @@ export default {
   },
 };
 
-const Template = ({ ariaLabel, dismissible, showIcon, type }) =>
-  html`
-    <modus-toast
-      aria-label=${ariaLabel}
-      dismissible=${dismissible}
-      show-icon=${showIcon}
-      type=${type}
-      >Toast!</modus-toast
-    >
-  `;
-
-export const Default = Template.bind({});
-Default.args = {
-  ariaLabel: '',
-  dismissible: false,
-  showIcon: true,
-  type: 'default',
-};
-
-export const Danger = Template.bind({});
-Danger.args = {
-  ariaLabel: '',
-  dismissible: false,
-  showIcon: true,
-  type: 'danger',
-};
-
-export const Dark = Template.bind({});
-Dark.args = {
-  ariaLabel: '',
-  dismissible: false,
-  showIcon: true,
-  type: 'dark',
-};
+const Template = ({ ariaLabel, dismissible, showIcon, role, type, delay }) => html`
+  <modus-toast
+    aria-label=${ariaLabel}
+    delay=${delay}
+    dismissible=${dismissible}
+    show-icon=${showIcon}
+    role=${role}
+    type=${type}
+    >Toast!</modus-toast
+  >
+`;
 
 export const Primary = Template.bind({});
 Primary.args = {
   ariaLabel: '',
+  delay: 0,
   dismissible: false,
+  role: 'status',
   showIcon: true,
   type: 'primary',
 };
@@ -109,7 +98,9 @@ Primary.args = {
 export const Secondary = Template.bind({});
 Secondary.args = {
   ariaLabel: '',
+  delay: 0,
   dismissible: false,
+  role: 'status',
   showIcon: true,
   type: 'secondary',
 };
@@ -117,15 +108,19 @@ Secondary.args = {
 export const Success = Template.bind({});
 Success.args = {
   ariaLabel: '',
+  delay: 0,
   dismissible: false,
+  role: 'status',
   showIcon: true,
   type: 'success',
 };
 
-export const Warning = Template.bind({});
-Warning.args = {
+export const Danger = Template.bind({});
+Danger.args = {
   ariaLabel: '',
+  delay: 0,
   dismissible: false,
+  role: 'status',
   showIcon: true,
-  type: 'warning',
+  type: 'danger',
 };

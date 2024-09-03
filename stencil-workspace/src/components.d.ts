@@ -5,30 +5,54 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { ModusActionBarOptions } from "./components/modus-action-bar/modus-action-bar";
 import { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
+import { BadgeProperties } from "./components/modus-badge/modus-badge";
 import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
-import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSortEvent, ModusTableSelectionOptions, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
+import { ButtonColor, ButtonSize, ButtonStyle, ButtonType } from "./components/modus-button/modus-button.models";
+import { ButtonGroupSelectionType } from "./components/modus-button-group/modus-button-group.models";
+import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 import { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
+import { Placement } from "@popperjs/core";
+import { ModusIconName } from "./icons/ModusIconUtilities";
 import { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
-import { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
+import { ModusNavbarButton, ModusNavbarDropdownItem, ModusNavbarDropdownOptions, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
+import { ModusSentimentScaleType } from "./components/modus-sentiment-scale/modus-sentiment-scale.models";
 import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
+import { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnSort, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableErrors, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+import { Cell, Column, Row } from "@tanstack/table-core";
+import { TableCellEdited, TableContext } from "./components/modus-table/models/table-context.models";
 import { Tab } from "./components/modus-tabs/modus-tabs";
 import { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
-import { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
+import { ModusToolTipPlacement } from "./components/modus-tooltip/modus-tooltip.models";
+import { TreeItemSelectionChange, TreeViewItemInfo, TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
+import { ModusActionBarOptions as ModusActionBarOptions1 } from "./components/modus-action-bar/modus-action-bar";
+export { ModusActionBarOptions } from "./components/modus-action-bar/modus-action-bar";
 export { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
+export { BadgeProperties } from "./components/modus-badge/modus-badge";
 export { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
-export { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSortEvent, ModusTableSelectionOptions, ModusTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
+export { ButtonColor, ButtonSize, ButtonStyle, ButtonType } from "./components/modus-button/modus-button.models";
+export { ButtonGroupSelectionType } from "./components/modus-button-group/modus-button-group.models";
+export { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 export { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
+export { Placement } from "@popperjs/core";
+export { ModusIconName } from "./icons/ModusIconUtilities";
 export { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
-export { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
+export { ModusNavbarButton, ModusNavbarDropdownItem, ModusNavbarDropdownOptions, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
 export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 export { RadioButton } from "./components/modus-radio-group/modus-radio-button";
+export { ModusSentimentScaleType } from "./components/modus-sentiment-scale/modus-sentiment-scale.models";
 export { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
+export { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnSort, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableErrors, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+export { Cell, Column, Row } from "@tanstack/table-core";
+export { TableCellEdited, TableContext } from "./components/modus-table/models/table-context.models";
 export { Tab } from "./components/modus-tabs/modus-tabs";
 export { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
-export { TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
+export { ModusToolTipPlacement } from "./components/modus-tooltip/modus-tooltip.models";
+export { TreeItemSelectionChange, TreeViewItemInfo, TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
+export { ModusActionBarOptions as ModusActionBarOptions1 } from "./components/modus-action-bar/modus-action-bar";
 export namespace Components {
     interface ModusAccordion {
         /**
@@ -42,6 +66,10 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
+          * (optional) The type of expand button
+         */
+        "expandButtonType": 'standardArrow' | 'circleArrow';
+        /**
           * (optional) Whether the accordion item is expanded.
          */
         "expanded": boolean;
@@ -50,15 +78,41 @@ export namespace Components {
          */
         "headerText": string;
         /**
+          * (optional) The icon to display before the header text.
+         */
+        "icon": string;
+        /**
           * (optional) The size of accordion item.
          */
         "size": 'condensed' | 'standard';
+    }
+    interface ModusActionBar {
+        /**
+          * (optional) List of actions
+         */
+        "actions": ModusActionBarOptions[];
+        /**
+          * (optional) The size of the action items.
+         */
+        "size": 'small' | 'medium' | 'large';
+        /**
+          * (optional) Total number of icons to show
+         */
+        "visibleItemCount": number;
     }
     interface ModusAlert {
         /**
           * (optional) The alert's aria-label.
          */
         "ariaLabel": string | null;
+        /**
+          * (optional) The button's aria-label.
+         */
+        "buttonAriaLabel": string | null;
+        /**
+          * (optional) The button's text
+         */
+        "buttonText": string | null;
         /**
           * (optional) Whether the alert has a dismiss button
          */
@@ -82,6 +136,10 @@ export namespace Components {
          */
         "clearable": boolean;
         /**
+          * Whether the autocomplete's options always display on select.
+         */
+        "disableCloseOnSelect": boolean;
+        /**
           * Whether the input is disabled.
          */
         "disabled": boolean;
@@ -98,6 +156,10 @@ export namespace Components {
          */
         "errorText": string;
         /**
+          * A promise that returns the filtered options.
+         */
+        "filterOptions": (search: string) => Promise<ModusAutocompleteOption[] | string[]>;
+        /**
           * Whether the search icon is included.
          */
         "includeSearchIcon": boolean;
@@ -105,6 +167,14 @@ export namespace Components {
           * The autocomplete's label.
          */
         "label": string;
+        /**
+          * Whether the autocomplete is in a loading state.
+         */
+        "loading": boolean;
+        /**
+          * When enabled, multiple options can be selected in the component. And selected options are shown as chips in the input.
+         */
+        "multiple": boolean;
         /**
           * The autocomplete's no results sub-text.
          */
@@ -134,31 +204,35 @@ export namespace Components {
          */
         "showNoResultsFoundMessage": boolean;
         /**
+          * Whether to show autocomplete's options when focus.
+         */
+        "showOptionsOnFocus": boolean;
+        /**
           * The autocomplete's size.
          */
         "size": 'medium' | 'large';
         /**
           * The autocomplete's search value.
          */
-        "value": string;
+        "value": string | string[];
     }
     interface ModusBadge {
         /**
           * (optional) The badge's aria-label
          */
-        "ariaLabel": string | null;
+        "ariaLabel": BadgeProperties['ariaLabel'];
         /**
           * (optional) The color of the badge
          */
-        "color": 'danger' | 'dark' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning';
+        "color": BadgeProperties['color'];
         /**
           * (optional) The size of the badge
          */
-        "size": 'small' | 'medium' | 'large';
+        "size": BadgeProperties['size'];
         /**
           * (optional) The type of the badge
          */
-        "type": 'counter' | 'default' | 'text';
+        "type": BadgeProperties['type'];
     }
     interface ModusBreadcrumb {
         /**
@@ -169,8 +243,16 @@ export namespace Components {
           * The breadcrumbs to render.
          */
         "crumbs": Crumb[];
+        /**
+          * (optional) A flag that controls the display of underline
+         */
+        "underlineLinks": boolean;
     }
     interface ModusButton {
+        /**
+          * (optional) The button's aria-disabled state.
+         */
+        "ariaDisabled": string | null;
         /**
           * (optional) The button's aria-label.
          */
@@ -178,11 +260,11 @@ export namespace Components {
         /**
           * (optional) The style of the button
          */
-        "buttonStyle": 'borderless' | 'fill' | 'outline';
+        "buttonStyle": ButtonStyle;
         /**
           * (optional) The color of the button
          */
-        "color": 'danger' | 'primary' | 'secondary' | 'tertiary';
+        "color": ButtonColor;
         /**
           * (optional) Disables the button.
          */
@@ -204,13 +286,51 @@ export namespace Components {
          */
         "rightIcon": string;
         /**
+          * Set the button to active or inactive
+         */
+        "setActive": (isActive: boolean) => Promise<void>;
+        /**
           * (optional) Shows a caret icon right side of the button.
          */
         "showCaret": boolean;
         /**
           * (optional) The size of the button.
          */
-        "size": 'small' | 'medium' | 'large';
+        "size": ButtonSize;
+        /**
+          * (Optional) Button types
+         */
+        "type": ButtonType;
+    }
+    interface ModusButtonGroup {
+        /**
+          * (optional) The button group's aria-disabled state.
+         */
+        "ariaDisabled": string | null;
+        /**
+          * (optional) The button group's aria-label.
+         */
+        "ariaLabel": string | null;
+        /**
+          * (optional) The style of the buttons in the group
+         */
+        "buttonStyle": ButtonStyle;
+        /**
+          * (optional) The color of the buttons in the group
+         */
+        "color": ButtonColor;
+        /**
+          * (optional) Disables the button group.
+         */
+        "disabled": boolean;
+        /**
+          * (optional) The selection type of buttons
+         */
+        "selectionType": ButtonGroupSelectionType;
+        /**
+          * (optional) The size of the buttons
+         */
+        "size": ButtonSize;
     }
     interface ModusCard {
         /**
@@ -264,15 +384,27 @@ export namespace Components {
          */
         "label": string;
         /**
-          * (optional) Tab Index for the checkbox
+          * (optional) The size of the checkbox.
          */
-        "tabIndexValue": string | number;
+        "size": 'small' | 'medium';
+        /**
+          * (optional) If you wish to prevent the propagation of your event, you may opt for this.
+         */
+        "stopPropagation": boolean;
     }
     interface ModusChip {
+        /**
+          * (optional) Whether the chip is active.
+         */
+        "active": boolean;
         /**
           * (optional) The chip's aria-label.
          */
         "ariaLabel": string | null;
+        /**
+          * (optional) the chip's id
+         */
+        "chipId": string;
         /**
           * (optional) The chip's style.
          */
@@ -289,6 +421,10 @@ export namespace Components {
           * (optional) The image's url.
          */
         "imageUrl": string;
+        /**
+          * (optional) Maximum width for the Chip's text and shows ellipsis when truncated
+         */
+        "maxWidth": string;
         /**
           * (optional) Whether to show the checkmark.
          */
@@ -320,17 +456,21 @@ export namespace Components {
         /**
           * Options for data table item selection.
          */
-        "selectionOptions"?: ModusTableSelectionOptions;
+        "selectionOptions"?: ModusDataTableSelectionOptions;
         /**
           * Options for data table column sort.
          */
-        "sortOptions"?: ModusTableSortOptions;
+        "sortOptions"?: ModusDataTableSortOptions;
     }
     interface ModusDateInput {
         /**
           * (optional) Regular expression to allow characters while typing the input.
          */
         "allowedCharsRegex": RegExp | string;
+        /**
+          * Alternative formats string for the date input split by | separator. Use 'm','mm' for month, 'd','dd' for date and 'yy','yyyy' for year with any separator that is not a regular expression.
+         */
+        "altFormats": string;
         /**
           * (optional) The input's aria-label.
          */
@@ -366,11 +506,19 @@ export namespace Components {
         /**
           * (optional) Custom helper text displayed below the input.
          */
-        "helperText": any;
+        "helperText": string;
         /**
           * (optional) The input's label.
          */
         "label": string;
+        /**
+          * (optional) The maximum date allowed. The date is formatted according to ISO8601 'yyyy-mm-dd'.
+         */
+        "max": string;
+        /**
+          * (optional) The minimum date allowed. The date is formatted according to ISO8601 'yyyy-mm-dd'.
+         */
+        "min": string;
         /**
           * (optional) The input's placeholder text.
          */
@@ -400,7 +548,11 @@ export namespace Components {
          */
         "validText": string;
         /**
-          * (optional) A string representing the date entered in the input. The date is formatted according to ISO8601 'yyyy-mm-dd'. The displayed date format will differ from the 'value'.
+          * Validate the input.
+         */
+        "validate": () => Promise<void>;
+        /**
+          * (optional) A string representing the date entered to the input. The date is formatted according to ISO8601 'yyyy-mm-dd'. The displayed date format will differ from the 'value'.
          */
         "value": string;
     }
@@ -409,6 +561,12 @@ export namespace Components {
           * (optional) Label for the field.
          */
         "label": string;
+        /**
+          * (optional) The placement of the calendar popup
+         */
+        "position": Placement;
+    }
+    interface ModusDivider {
     }
     interface ModusDropdown {
         /**
@@ -437,11 +595,19 @@ export namespace Components {
          */
         "placement": 'top' | 'right' | 'bottom' | 'left';
         /**
+          * (optional) Whether to show the dropdown list's border.
+         */
+        "showDropdownListBorder": boolean;
+        /**
           * (required) The element id that the list renders near and that triggers the toggling of the list.
          */
         "toggleElementId": string;
     }
     interface ModusFileDropzone {
+        /**
+          * (optional) The dropzone's accepted file types
+         */
+        "acceptFileTypes": string;
         /**
           * Add a file to the dropzone.
          */
@@ -463,6 +629,10 @@ export namespace Components {
          */
         "dropzoneWidth": string;
         /**
+          * (optional) The dropzone's instruction text when a file is being dragged over.
+         */
+        "fileDraggedOverInstructions": string;
+        /**
           * Get the dropzone's error.
          */
         "getError": () => Promise<string | null>;
@@ -474,6 +644,10 @@ export namespace Components {
           * (optional) Whether to include the upload icon.
          */
         "includeStateIcon": boolean;
+        /**
+          * (optional) The dropzone's instruction text.
+         */
+        "instructions": string;
         /**
           * (optional) The dropzone's label text.
          */
@@ -499,13 +673,36 @@ export namespace Components {
          */
         "removeFile": (fileName: string) => Promise<void>;
     }
+    interface ModusIcon {
+        /**
+          * (optional) The color of the Icon
+         */
+        "color"?: string;
+        /**
+          * The name of the icon
+         */
+        "name": ModusIconName | null;
+        /**
+          * (optional) The size of the Icon
+         */
+        "size"?: string;
+    }
     interface ModusList {
     }
     interface ModusListItem {
         /**
+          * (optional) Whether the list item has a border or not
+         */
+        "borderless": boolean;
+        /**
           * (optional) Disables the list item
          */
         "disabled": boolean;
+        "focusItem": () => Promise<void>;
+        /**
+          * (optional) Takes the icon name and shows the icon aligned to the left of the button text.
+         */
+        "leftIcon": string;
         /**
           * (optional) The selected state of the list item
          */
@@ -515,9 +712,17 @@ export namespace Components {
          */
         "size": 'condensed' | 'large' | 'standard';
         /**
+          * (optional) Whether to show Subtext below the Slot content or not
+         */
+        "subText": string;
+        /**
           * (optional) The type of list item
          */
         "type": string;
+        /**
+          * (optional) Whether to wrap the sub text.
+         */
+        "wrapSubText": true | false;
     }
     interface ModusMessage {
         /**
@@ -546,6 +751,10 @@ export namespace Components {
           * Closes the Modal
          */
         "close": () => Promise<void>;
+        /**
+          * (optional) The modal's full screen view
+         */
+        "fullscreen": boolean;
         /**
           * (optional) The modal's primary button text.
          */
@@ -593,9 +802,17 @@ export namespace Components {
          */
         "buttons": ModusNavbarButton[];
         /**
+          * (optional) Dropdown options.
+         */
+        "dropdownOptions": ModusNavbarDropdownOptions;
+        /**
           * (optional) Whether to show search overlay or not.
          */
         "enableSearchOverlay": boolean;
+        /**
+          * (optional) Help tooltip.
+         */
+        "helpTooltip": ModusNavbarTooltip;
         /**
           * (optional) Help URL.
          */
@@ -605,6 +822,14 @@ export namespace Components {
           * (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels.
          */
         "logoOptions": ModusNavbarLogoOptions;
+        /**
+          * (optional) The navbar's aria-label.
+         */
+        "navAriaLabel"?: string;
+        /**
+          * (optional) Whether to show badge on top of notification
+         */
+        "notificationCount": number;
         /**
           * (required) Profile menu options.
          */
@@ -617,6 +842,10 @@ export namespace Components {
           * (optional) Search tooltip.
          */
         "searchTooltip": ModusNavbarTooltip;
+        /**
+          * (optional) The selected dropdown item.
+         */
+        "selectedDropdownItem": ModusNavbarDropdownItem;
         /**
           * (optional) Whether to show the apps menu.
          */
@@ -638,6 +867,10 @@ export namespace Components {
          */
         "showPendoPlaceholder": boolean;
         /**
+          * (optional) Whether to show profile.  *
+         */
+        "showProfile": boolean;
+        /**
           * (optional) Whether to show search.
          */
         "showSearch": boolean;
@@ -658,7 +891,7 @@ export namespace Components {
         "reverse": boolean;
     }
     interface ModusNavbarMainMenu {
-        "navbarId": string;
+        "parentNavbar": HTMLElement;
     }
     interface ModusNavbarNotificationsMenu {
         "reverse": boolean;
@@ -669,6 +902,7 @@ export namespace Components {
         "initials": string;
         "links": ModusNavbarProfileMenuLink[];
         "reverse": boolean;
+        "signOutText": string;
         "username": string;
         "variant": 'default' | 'blue';
     }
@@ -687,6 +921,10 @@ export namespace Components {
           * (optional) The input's error state text.
          */
         "errorText": string;
+        /**
+          * Focus the input.
+         */
+        "focusInput": () => Promise<void>;
         /**
           * (optional) The input's helper text displayed below the input.
          */
@@ -741,6 +979,8 @@ export namespace Components {
         "ariaLabel": string | null;
         "maxPage": number;
         "minPage": number;
+        "nextPageButtonText"?: string;
+        "prevPageButtonText"?: string;
         "size": 'large' | 'medium' | 'small';
     }
     interface ModusProgressBar {
@@ -791,13 +1031,17 @@ export namespace Components {
          */
         "checkedId": string;
         /**
-          * The radio button group name.
+          * The radio button group name. Used to group individual radio elements into one group.
          */
         "name": string;
         /**
           * The radio buttons to render.
          */
         "radioButtons": RadioButton[];
+        /**
+          * (optional) The size of the radiobutton.
+         */
+        "size"?: 'small' | 'medium';
     }
     interface ModusSelect {
         /**
@@ -812,6 +1056,10 @@ export namespace Components {
           * (optional) The input's error text.
          */
         "errorText": string;
+        /**
+          * Focus the input.
+         */
+        "focusInput": () => Promise<void>;
         /**
           * (optional) The input's helper text.
          */
@@ -829,6 +1077,10 @@ export namespace Components {
          */
         "optionsDisplayProp": string;
         /**
+          * (optional) The input's placeholder.
+         */
+        "placeholder": string;
+        /**
           * (optional) Whether the input is required.
          */
         "required": boolean;
@@ -845,7 +1097,25 @@ export namespace Components {
          */
         "value": unknown;
     }
+    interface ModusSentimentScale {
+        /**
+          * (optional) The sentiment scale's aria-label.
+         */
+        "ariaLabel": string | null;
+        /**
+          * (optional) Whether the sentiment scale is disabled.
+         */
+        "disabled"?: boolean;
+        /**
+          * The type of icons to be displayed.
+         */
+        "type": ModusSentimentScaleType;
+    }
     interface ModusSideNavigation {
+        /**
+          * (optional) To choose whether to collapse the panel when clicked outside.
+         */
+        "collapseOnClickOutside": boolean;
         /**
           * (optional) Data property to create the items.
          */
@@ -948,6 +1218,188 @@ export namespace Components {
           * (optional) The switch label.
          */
         "label": string;
+        /**
+          * (optional) The size of the radiobutton.
+         */
+        "size"?: 'small' | 'medium';
+    }
+    interface ModusTable {
+        /**
+          * (Optional) To allow column reordering.
+         */
+        "columnReorder": boolean;
+        "columnResize": boolean;
+        /**
+          * (Required) To display headers in the table.
+         */
+        "columns": ModusTableColumn<unknown>[];
+        /**
+          * (Required) To display data in the table.
+         */
+        "data": unknown[];
+        /**
+          * (Optional) To set the default sorting for the table.
+         */
+        "defaultSort": ModusTableColumnSort;
+        /**
+          * (optional) The density of the table.
+         */
+        "density": 'relaxed' | 'comfortable' | 'compact';
+        /**
+          * (Optional) To control display options of table.
+         */
+        "displayOptions"?: ModusTableDisplayOptions;
+        "errors": ModusTableErrors;
+        "fullWidth": boolean;
+        /**
+          * Returns data of a column.
+          * @param accessorKey : Column name as key.
+          * @returns : Column data as Array or empty array.
+         */
+        "getColumnData": (accessorKey: string) => Promise<unknown[]>;
+        /**
+          * Returns whether a cell is editable based on row index and column ID.
+          * @param rowIndex The index of the row.
+          * @param columnId The ID of the column.
+          * @returns Boolean indicating if the cell is editable.
+         */
+        "getEditableCell": (rowIndex: string, columnId: string) => Promise<void>;
+        /**
+          * (Optional) To enable row hover in table.
+         */
+        "hover": boolean;
+        /**
+          * (Optional) To enable manual pagination mode. When enabled, the table will not automatically paginate rows, instead will expect the current page index and other details to be passed.
+         */
+        "manualPaginationOptions": ModusTableManualPaginationOptions;
+        /**
+          * (Optional) To set modus-table in manual sorting mode.
+         */
+        "manualSortingOptions": ModusTableManualSortingOptions;
+        /**
+          * (Optional) To display a vertical scrollbar when the height is exceeded.
+         */
+        "maxHeight": string;
+        /**
+          * (Optional) To display a horizontal scrollbar when the width is exceeded.
+         */
+        "maxWidth": string;
+        "pageSizeList": number[];
+        "pagination": boolean;
+        /**
+          * (Optional) Actions that can be performed on each row. A maximum of 4 icons will be shown, including overflow menu and expand icons.
+         */
+        "rowActions": ModusTableRowAction[];
+        /**
+          * (Optional) To display checkbox.
+         */
+        "rowSelection": boolean;
+        /**
+          * (Optional) To control multiple row selection.
+         */
+        "rowSelectionOptions": ModusTableRowSelectionOptions;
+        /**
+          * (Optional) To display expanded rows.
+         */
+        "rowsExpandable": boolean;
+        /**
+          * (Optional) To display sort icon on hover.
+         */
+        "showSortIconOnHover": boolean;
+        /**
+          * (Optional) To sort data in table.
+         */
+        "sort": boolean;
+        /**
+          * (Optional) To display a-z or arrow sort icons.
+         */
+        "sortIconStyle": 'alphabetical' | 'directional';
+        /**
+          * (Optional) To display summary row.
+         */
+        "summaryRow": boolean;
+        /**
+          * Toggle the table column visibility
+          * @param columnId Column id
+          * @param show Boolean value decides to visibility of column
+         */
+        "toggleColumnVisibility": (columnId: string, show: boolean) => Promise<void>;
+        /**
+          * (Optional) To display a toolbar for the table.
+         */
+        "toolbar": boolean;
+        /**
+          * (Optional) To display a toolbar, which allows access to table operations like hiding columns.
+         */
+        "toolbarOptions": ModusTableToolbarOptions | null;
+        /**
+          * (Optional) To wrap text that overflows the cell.
+         */
+        "wrapText": boolean;
+    }
+    interface ModusTableCellEditor {
+        "args": ModusTableCellEditorArgs;
+        "dataType": string;
+        "inputValueChangeHandler": (newValue: string) => void;
+        "keyDown": (e: KeyboardEvent, newValue: string) => void;
+        "type": string;
+        "value": unknown;
+        "valueChange": (newValue: string) => void;
+    }
+    interface ModusTableCellMain {
+        "cell": Cell<unknown, unknown>;
+        "context": TableContext;
+        /**
+          * Returns whether a cell is editable based on row index and column ID.
+          * @param rowIndex The index of the row.
+          * @param columnId The ID of the column.
+          * @returns Boolean indicating if the cell is editable.
+         */
+        "handleCellEdit": (rowIndex: string, columnId: string) => Promise<void>;
+        "hasRowsExpandable": boolean;
+        "valueChange": (props: TableCellEdited) => void;
+    }
+    interface ModusTableColumnsVisibility {
+        /**
+          * Column visibility options
+         */
+        "columnsVisibility": ModusTableColumnsVisibilityOptions;
+        /**
+          * Table data.
+         */
+        "getAllLeafColumns": () => Column<unknown, unknown>[];
+        "maxHeight": string;
+        "menuIconContainerRef": HTMLDivElement;
+        "showDropdown": boolean;
+        "toggleDropdown": (show: boolean) => void;
+    }
+    interface ModusTableDropdownMenu {
+        "context": TableContext;
+    }
+    /**
+     * ModusFillerColumn is to fill empty space within a table or grid when the content in other columns is not wide enough to occupy the entire available width
+     */
+    interface ModusTableFillerColumn {
+        "cellBorderless": boolean;
+        "container"?: HTMLElement;
+        "summaryRow": boolean;
+    }
+    interface ModusTableRowActions {
+        "context": TableContext;
+        "row": Row<unknown>;
+    }
+    interface ModusTableRowActionsCell {
+        "context": TableContext;
+        "row": Row<unknown>;
+    }
+    interface ModusTableRowActionsMenu {
+        "context": TableContext;
+    }
+    interface ModusTableToolbar {
+        /**
+          * Table data.
+         */
+        "context": TableContext;
     }
     interface ModusTabs {
         "ariaLabel": string | null;
@@ -968,6 +1420,18 @@ export namespace Components {
          */
         "autoFocusInput": boolean;
         /**
+          * (optional) Capitalization behavior when using a non-traditional keyboard (e.g. microphone, touch screen)
+         */
+        "autocapitalize": string;
+        /**
+          * (optional) Sets autocomplete on the input.
+         */
+        "autocomplete": string | null;
+        /**
+          * (optional) Whether to activate automatic correction while the user is editing this field in Safari.
+         */
+        "autocorrect": boolean | 'off' | 'on';
+        /**
           * (optional) Whether the input has a clear button.
          */
         "clearable": boolean;
@@ -975,6 +1439,10 @@ export namespace Components {
           * (optional) Whether the input is disabled.
          */
         "disabled": boolean;
+        /**
+          * (optional) Which action label to present for the enter key on virtual keyboards.
+         */
+        "enterkeyhint": 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
         /**
           * (optional) The input's error state text.
          */
@@ -987,6 +1455,10 @@ export namespace Components {
           * (optional) The input's helper text displayed below the input.
          */
         "helperText": string;
+        /**
+          * (optional) Whether the error icon is included.
+         */
+        "includeErrorIcon": boolean;
         /**
           * (optional) Whether the password text toggle icon is included.
          */
@@ -1012,6 +1484,10 @@ export namespace Components {
          */
         "minLength": number;
         /**
+          * (optional) The input's pattern HTML attribute.
+         */
+        "pattern": string;
+        /**
           * (optional) The input's placeholder text.
          */
         "placeholder": string;
@@ -1028,13 +1504,103 @@ export namespace Components {
          */
         "size": 'medium' | 'large';
         /**
+          * (optional) Whether to enable spell checking.
+         */
+        "spellcheck": boolean;
+        /**
           * (optional) The input's text alignment.
          */
         "textAlign": 'left' | 'right';
         /**
           * (optional) The input's type.
          */
-        "type": 'text' | 'password';
+        "type": 'email' | 'password' | 'search' | 'text' | 'tel' | 'url';
+        /**
+          * (optional) The input's valid state text.
+         */
+        "validText": string;
+        /**
+          * (optional) The input's value.
+         */
+        "value": string;
+    }
+    interface ModusTextareaInput {
+        /**
+          * (optional) The input's aria-label.
+         */
+        "ariaLabel": string | null;
+        /**
+          * (optional) Sets autofocus on the input.
+         */
+        "autoFocusInput": boolean;
+        /**
+          * (optional) Whether to activate automatic correction while the user is editing this field in Safari.
+         */
+        "autocorrect": boolean | 'off' | 'on';
+        /**
+          * (optional) Whether the input has a clear button.
+         */
+        "clearable": boolean;
+        /**
+          * (optional) Whether the input is disabled.
+         */
+        "disabled": boolean;
+        /**
+          * (optional) Which action label to present for the enter key on virtual keyboards.
+         */
+        "enterkeyhint": 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
+        /**
+          * (optional) The input's error state text.
+         */
+        "errorText": string;
+        /**
+          * Focus the input.
+         */
+        "focusInput": () => Promise<void>;
+        /**
+          * (optional) The input's helper text displayed below the input.
+         */
+        "helperText": string;
+        /**
+          * (optional) The input's label.
+         */
+        "label": string;
+        /**
+          * (optional) The input's maximum length.
+         */
+        "maxLength": number;
+        /**
+          * (optional) The input's minimum length.
+         */
+        "minLength": number;
+        /**
+          * (optional) The input's placeholder text.
+         */
+        "placeholder": string;
+        /**
+          * (optional) Whether the input's content is read-only
+         */
+        "readOnly": boolean;
+        /**
+          * (optional) Whether the input is required.
+         */
+        "required": boolean;
+        /**
+          * (optional) Number of rows on textarea
+         */
+        "rows": number;
+        /**
+          * (optional) The input's size.
+         */
+        "size": 'medium' | 'large';
+        /**
+          * (optional) Whether to enable spell checking.
+         */
+        "spellcheck": boolean;
+        /**
+          * (optional) The input's text alignment.
+         */
+        "textAlign": 'left' | 'right';
         /**
           * (optional) The input's valid state text.
          */
@@ -1128,9 +1694,17 @@ export namespace Components {
          */
         "ariaLabel": string | null;
         /**
+          * (optional) Time taken to dismiss the toast
+         */
+        "delay": number;
+        /**
           * (optional) Whether the toast has a dismiss button.
          */
         "dismissible": boolean;
+        /**
+          * (optional) Role taken by the toast.  Defaults to 'status'.
+         */
+        "role": string | null;
         /**
           * (optional) Whether to show the toasts' icon.
          */
@@ -1139,6 +1713,16 @@ export namespace Components {
           * (optional) The toasts' type.
          */
         "type": 'danger' | 'dark' | 'default' | 'primary' | 'secondary' | 'success' | 'warning';
+    }
+    interface ModusToolbar {
+        /**
+          * (optional) The button's aria-label.
+         */
+        "ariaLabel": string | null;
+        /**
+          * (optional) Disables the button.
+         */
+        "disabled": boolean;
     }
     interface ModusTooltip {
         /**
@@ -1152,13 +1736,17 @@ export namespace Components {
         /**
           * (optional) The tooltip's position relative to its content.
          */
-        "position": 'bottom' | 'left' | 'right' | 'top';
+        "position": ModusToolTipPlacement;
         /**
           * The tooltip's text.
          */
         "text": string;
     }
     interface ModusTreeView {
+        /**
+          * (optional) Whether the content tree and items have a border or not
+         */
+        "borderless": boolean;
         /**
           * (optional) Enables checkbox selection on each tree item
          */
@@ -1171,6 +1759,10 @@ export namespace Components {
           * (optional) Disable usage of `tab` key to focus elements inside a tree view. Use `Arrow Up/Down` for focussing a tree item and `Shift + Arrow Right` for focussing a checkbox inside the item.
          */
         "disableTabbing": boolean;
+        /**
+          * (optional) Sets draggable state to be true to all the children
+         */
+        "enableReordering": boolean;
         /**
           * (optional) Set expanded tree items
          */
@@ -1193,6 +1785,10 @@ export namespace Components {
         "size": 'condensed' | 'large' | 'standard';
     }
     interface ModusTreeViewItem {
+        /**
+          * (optional) Actions that can be performed on each item. A maximum of 3 icons will be shown, including overflow menu and expand icons.
+         */
+        "actions": ModusActionBarOptions1[];
         /**
           * (optional) Disables the tree item
          */
@@ -1219,6 +1815,10 @@ export namespace Components {
         "focusItem": () => Promise<void>;
         "initTreeViewItem": (newValue: TreeViewItemOptions) => Promise<void>;
         /**
+          * To be set true when the tree item is an expandable last child
+         */
+        "isLastChild": boolean;
+        /**
           * (required) Label for the tree item
          */
         "label": string;
@@ -1226,16 +1826,32 @@ export namespace Components {
           * (required) Unique tree item identifier
          */
         "nodeId": string;
+        "setChildren": () => Promise<void>;
         /**
           * (optional) Tab Index for the tree item
          */
         "tabIndexValue": string | number;
         "updateComponent": () => Promise<void>;
     }
+    interface ModusUtilityPanel {
+        /**
+          * The panel is expanded or closed
+         */
+        "expanded": boolean;
+        /**
+          * Determines if the panel pushes content or displays an overlay.
+         */
+        "pushContent": boolean;
+        "targetContent": string;
+    }
 }
 export interface ModusAccordionItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusAccordionItemElement;
+}
+export interface ModusActionBarCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusActionBarElement;
 }
 export interface ModusAlertCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1252,6 +1868,10 @@ export interface ModusBreadcrumbCustomEvent<T> extends CustomEvent<T> {
 export interface ModusButtonCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusButtonElement;
+}
+export interface ModusButtonGroupCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusButtonGroupElement;
 }
 export interface ModusCheckboxCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1276,6 +1896,10 @@ export interface ModusDropdownCustomEvent<T> extends CustomEvent<T> {
 export interface ModusFileDropzoneCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusFileDropzoneElement;
+}
+export interface ModusIconCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusIconElement;
 }
 export interface ModusListItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1317,6 +1941,10 @@ export interface ModusSelectCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusSelectElement;
 }
+export interface ModusSentimentScaleCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusSentimentScaleElement;
+}
 export interface ModusSideNavigationCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusSideNavigationElement;
@@ -1333,6 +1961,18 @@ export interface ModusSwitchCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusSwitchElement;
 }
+export interface ModusTableCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusTableElement;
+}
+export interface ModusTableCellMainCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusTableCellMainElement;
+}
+export interface ModusTableRowActionsCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusTableRowActionsElement;
+}
 export interface ModusTabsCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusTabsElement;
@@ -1340,6 +1980,10 @@ export interface ModusTabsCustomEvent<T> extends CustomEvent<T> {
 export interface ModusTextInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusTextInputElement;
+}
+export interface ModusTextareaInputCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusTextareaInputElement;
 }
 export interface ModusTimePickerCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1349,9 +1993,17 @@ export interface ModusToastCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusToastElement;
 }
+export interface ModusTreeViewCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusTreeViewElement;
+}
 export interface ModusTreeViewItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusTreeViewItemElement;
+}
+export interface ModusUtilityPanelCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusUtilityPanelElement;
 }
 declare global {
     interface HTMLModusAccordionElement extends Components.ModusAccordion, HTMLStencilElement {
@@ -1360,19 +2012,73 @@ declare global {
         prototype: HTMLModusAccordionElement;
         new (): HTMLModusAccordionElement;
     };
+    interface HTMLModusAccordionItemElementEventMap {
+        "closed": any;
+        "opened": any;
+    }
     interface HTMLModusAccordionItemElement extends Components.ModusAccordionItem, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusAccordionItemElementEventMap>(type: K, listener: (this: HTMLModusAccordionItemElement, ev: ModusAccordionItemCustomEvent<HTMLModusAccordionItemElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusAccordionItemElementEventMap>(type: K, listener: (this: HTMLModusAccordionItemElement, ev: ModusAccordionItemCustomEvent<HTMLModusAccordionItemElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLModusAccordionItemElement: {
         prototype: HTMLModusAccordionItemElement;
         new (): HTMLModusAccordionItemElement;
     };
+    interface HTMLModusActionBarElementEventMap {
+        "actionBarClick": any;
+    }
+    interface HTMLModusActionBarElement extends Components.ModusActionBar, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusActionBarElementEventMap>(type: K, listener: (this: HTMLModusActionBarElement, ev: ModusActionBarCustomEvent<HTMLModusActionBarElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusActionBarElementEventMap>(type: K, listener: (this: HTMLModusActionBarElement, ev: ModusActionBarCustomEvent<HTMLModusActionBarElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLModusActionBarElement: {
+        prototype: HTMLModusActionBarElement;
+        new (): HTMLModusActionBarElement;
+    };
+    interface HTMLModusAlertElementEventMap {
+        "dismissClick": any;
+        "actionClick": any;
+    }
     interface HTMLModusAlertElement extends Components.ModusAlert, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusAlertElementEventMap>(type: K, listener: (this: HTMLModusAlertElement, ev: ModusAlertCustomEvent<HTMLModusAlertElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusAlertElementEventMap>(type: K, listener: (this: HTMLModusAlertElement, ev: ModusAlertCustomEvent<HTMLModusAlertElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLModusAlertElement: {
         prototype: HTMLModusAlertElement;
         new (): HTMLModusAlertElement;
     };
+    interface HTMLModusAutocompleteElementEventMap {
+        "optionSelected": string;
+        "valueChange": string | string[];
+        "selectionsChanged": string[];
+    }
     interface HTMLModusAutocompleteElement extends Components.ModusAutocomplete, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusAutocompleteElementEventMap>(type: K, listener: (this: HTMLModusAutocompleteElement, ev: ModusAutocompleteCustomEvent<HTMLModusAutocompleteElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusAutocompleteElementEventMap>(type: K, listener: (this: HTMLModusAutocompleteElement, ev: ModusAutocompleteCustomEvent<HTMLModusAutocompleteElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLModusAutocompleteElement: {
         prototype: HTMLModusAutocompleteElement;
@@ -1384,17 +2090,57 @@ declare global {
         prototype: HTMLModusBadgeElement;
         new (): HTMLModusBadgeElement;
     };
+    interface HTMLModusBreadcrumbElementEventMap {
+        "crumbClick": Crumb;
+    }
     interface HTMLModusBreadcrumbElement extends Components.ModusBreadcrumb, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusBreadcrumbElementEventMap>(type: K, listener: (this: HTMLModusBreadcrumbElement, ev: ModusBreadcrumbCustomEvent<HTMLModusBreadcrumbElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusBreadcrumbElementEventMap>(type: K, listener: (this: HTMLModusBreadcrumbElement, ev: ModusBreadcrumbCustomEvent<HTMLModusBreadcrumbElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLModusBreadcrumbElement: {
         prototype: HTMLModusBreadcrumbElement;
         new (): HTMLModusBreadcrumbElement;
     };
+    interface HTMLModusButtonElementEventMap {
+        "buttonClick": any;
+    }
     interface HTMLModusButtonElement extends Components.ModusButton, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusButtonElementEventMap>(type: K, listener: (this: HTMLModusButtonElement, ev: ModusButtonCustomEvent<HTMLModusButtonElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusButtonElementEventMap>(type: K, listener: (this: HTMLModusButtonElement, ev: ModusButtonCustomEvent<HTMLModusButtonElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLModusButtonElement: {
         prototype: HTMLModusButtonElement;
         new (): HTMLModusButtonElement;
+    };
+    interface HTMLModusButtonGroupElementEventMap {
+        "buttonGroupClick": unknown;
+        "buttonSelectionChange": HTMLModusButtonElement[];
+    }
+    interface HTMLModusButtonGroupElement extends Components.ModusButtonGroup, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusButtonGroupElementEventMap>(type: K, listener: (this: HTMLModusButtonGroupElement, ev: ModusButtonGroupCustomEvent<HTMLModusButtonGroupElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusButtonGroupElementEventMap>(type: K, listener: (this: HTMLModusButtonGroupElement, ev: ModusButtonGroupCustomEvent<HTMLModusButtonGroupElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLModusButtonGroupElement: {
+        prototype: HTMLModusButtonGroupElement;
+        new (): HTMLModusButtonGroupElement;
     };
     interface HTMLModusCardElement extends Components.ModusCard, HTMLStencilElement {
     }
@@ -1402,25 +2148,77 @@ declare global {
         prototype: HTMLModusCardElement;
         new (): HTMLModusCardElement;
     };
+    interface HTMLModusCheckboxElementEventMap {
+        "checkboxClick": boolean;
+    }
     interface HTMLModusCheckboxElement extends Components.ModusCheckbox, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusCheckboxElementEventMap>(type: K, listener: (this: HTMLModusCheckboxElement, ev: ModusCheckboxCustomEvent<HTMLModusCheckboxElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusCheckboxElementEventMap>(type: K, listener: (this: HTMLModusCheckboxElement, ev: ModusCheckboxCustomEvent<HTMLModusCheckboxElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLModusCheckboxElement: {
         prototype: HTMLModusCheckboxElement;
         new (): HTMLModusCheckboxElement;
     };
+    interface HTMLModusChipElementEventMap {
+        "chipClick": any;
+        "closeClick": any;
+    }
     interface HTMLModusChipElement extends Components.ModusChip, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusChipElementEventMap>(type: K, listener: (this: HTMLModusChipElement, ev: ModusChipCustomEvent<HTMLModusChipElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusChipElementEventMap>(type: K, listener: (this: HTMLModusChipElement, ev: ModusChipCustomEvent<HTMLModusChipElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLModusChipElement: {
         prototype: HTMLModusChipElement;
         new (): HTMLModusChipElement;
     };
+    interface HTMLModusDataTableElementEventMap {
+        "cellLinkClick": ModusDataTableCellLink;
+        "rowDoubleClick": string;
+        "selection": string[];
+        "sort": ModusDataTableSortEvent;
+        "rowActionClick": ModusDataTableRowActionClickEvent;
+    }
     interface HTMLModusDataTableElement extends Components.ModusDataTable, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusDataTableElementEventMap>(type: K, listener: (this: HTMLModusDataTableElement, ev: ModusDataTableCustomEvent<HTMLModusDataTableElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusDataTableElementEventMap>(type: K, listener: (this: HTMLModusDataTableElement, ev: ModusDataTableCustomEvent<HTMLModusDataTableElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLModusDataTableElement: {
         prototype: HTMLModusDataTableElement;
         new (): HTMLModusDataTableElement;
     };
+    interface HTMLModusDateInputElementEventMap {
+        "calendarIconClicked": ModusDateInputEventDetails;
+        "dateInputBlur": ModusDateInputEventDetails;
+        "valueChange": ModusDateInputEventDetails;
+        "valueError": string;
+    }
     interface HTMLModusDateInputElement extends Components.ModusDateInput, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusDateInputElementEventMap>(type: K, listener: (this: HTMLModusDateInputElement, ev: ModusDateInputCustomEvent<HTMLModusDateInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusDateInputElementEventMap>(type: K, listener: (this: HTMLModusDateInputElement, ev: ModusDateInputCustomEvent<HTMLModusDateInputElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLModusDateInputElement: {
         prototype: HTMLModusDateInputElement;
@@ -1432,17 +2230,62 @@ declare global {
         prototype: HTMLModusDatePickerElement;
         new (): HTMLModusDatePickerElement;
     };
+    interface HTMLModusDividerElement extends Components.ModusDivider, HTMLStencilElement {
+    }
+    var HTMLModusDividerElement: {
+        prototype: HTMLModusDividerElement;
+        new (): HTMLModusDividerElement;
+    };
+    interface HTMLModusDropdownElementEventMap {
+        "dropdownClose": any;
+    }
     interface HTMLModusDropdownElement extends Components.ModusDropdown, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusDropdownElementEventMap>(type: K, listener: (this: HTMLModusDropdownElement, ev: ModusDropdownCustomEvent<HTMLModusDropdownElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusDropdownElementEventMap>(type: K, listener: (this: HTMLModusDropdownElement, ev: ModusDropdownCustomEvent<HTMLModusDropdownElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLModusDropdownElement: {
         prototype: HTMLModusDropdownElement;
         new (): HTMLModusDropdownElement;
     };
+    interface HTMLModusFileDropzoneElementEventMap {
+        "files": [File[], string | null];
+    }
     interface HTMLModusFileDropzoneElement extends Components.ModusFileDropzone, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusFileDropzoneElementEventMap>(type: K, listener: (this: HTMLModusFileDropzoneElement, ev: ModusFileDropzoneCustomEvent<HTMLModusFileDropzoneElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusFileDropzoneElementEventMap>(type: K, listener: (this: HTMLModusFileDropzoneElement, ev: ModusFileDropzoneCustomEvent<HTMLModusFileDropzoneElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLModusFileDropzoneElement: {
         prototype: HTMLModusFileDropzoneElement;
         new (): HTMLModusFileDropzoneElement;
+    };
+    interface HTMLModusIconElementEventMap {
+        "iconClick": any;
+    }
+    interface HTMLModusIconElement extends Components.ModusIcon, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusIconElementEventMap>(type: K, listener: (this: HTMLModusIconElement, ev: ModusIconCustomEvent<HTMLModusIconElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusIconElementEventMap>(type: K, listener: (this: HTMLModusIconElement, ev: ModusIconCustomEvent<HTMLModusIconElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLModusIconElement: {
+        prototype: HTMLModusIconElement;
+        new (): HTMLModusIconElement;
     };
     interface HTMLModusListElement extends Components.ModusList, HTMLStencilElement {
     }
@@ -1450,7 +2293,18 @@ declare global {
         prototype: HTMLModusListElement;
         new (): HTMLModusListElement;
     };
+    interface HTMLModusListItemElementEventMap {
+        "itemClick": any;
+    }
     interface HTMLModusListItemElement extends Components.ModusListItem, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusListItemElementEventMap>(type: K, listener: (this: HTMLModusListItemElement, ev: ModusListItemCustomEvent<HTMLModusListItemElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusListItemElementEventMap>(type: K, listener: (this: HTMLModusListItemElement, ev: ModusListItemCustomEvent<HTMLModusListItemElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLModusListItemElement: {
         prototype: HTMLModusListItemElement;
@@ -1462,19 +2316,67 @@ declare global {
         prototype: HTMLModusMessageElement;
         new (): HTMLModusMessageElement;
     };
+    interface HTMLModusModalElementEventMap {
+        "closed": any;
+        "opened": any;
+        "primaryButtonClick": any;
+        "secondaryButtonClick": any;
+    }
     interface HTMLModusModalElement extends Components.ModusModal, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusModalElementEventMap>(type: K, listener: (this: HTMLModusModalElement, ev: ModusModalCustomEvent<HTMLModusModalElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusModalElementEventMap>(type: K, listener: (this: HTMLModusModalElement, ev: ModusModalCustomEvent<HTMLModusModalElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLModusModalElement: {
         prototype: HTMLModusModalElement;
         new (): HTMLModusModalElement;
     };
+    interface HTMLModusNavbarElementEventMap {
+        "appsMenuOpen": void;
+        "appsMenuAppOpen": ModusNavbarApp;
+        "buttonClick": string;
+        "helpOpen": void;
+        "dropdownItemSelect": ModusNavbarDropdownItem;
+        "mainMenuClick": KeyboardEvent | MouseEvent;
+        "notificationsMenuOpen": void;
+        "productLogoClick": MouseEvent;
+        "profileMenuLinkClick": string;
+        "profileMenuOpen": void;
+        "profileMenuSignOutClick": KeyboardEvent | MouseEvent;
+        "searchChange": string;
+        "searchMenuClick": void;
+    }
     interface HTMLModusNavbarElement extends Components.ModusNavbar, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusNavbarElementEventMap>(type: K, listener: (this: HTMLModusNavbarElement, ev: ModusNavbarCustomEvent<HTMLModusNavbarElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusNavbarElementEventMap>(type: K, listener: (this: HTMLModusNavbarElement, ev: ModusNavbarCustomEvent<HTMLModusNavbarElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLModusNavbarElement: {
         prototype: HTMLModusNavbarElement;
         new (): HTMLModusNavbarElement;
     };
+    interface HTMLModusNavbarAppsMenuElementEventMap {
+        "appOpen": ModusNavbarApp1;
+    }
     interface HTMLModusNavbarAppsMenuElement extends Components.ModusNavbarAppsMenu, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusNavbarAppsMenuElementEventMap>(type: K, listener: (this: HTMLModusNavbarAppsMenuElement, ev: ModusNavbarAppsMenuCustomEvent<HTMLModusNavbarAppsMenuElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusNavbarAppsMenuElementEventMap>(type: K, listener: (this: HTMLModusNavbarAppsMenuElement, ev: ModusNavbarAppsMenuCustomEvent<HTMLModusNavbarAppsMenuElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLModusNavbarAppsMenuElement: {
         prototype: HTMLModusNavbarAppsMenuElement;
@@ -1498,25 +2400,71 @@ declare global {
         prototype: HTMLModusNavbarNotificationsMenuElement;
         new (): HTMLModusNavbarNotificationsMenuElement;
     };
+    interface HTMLModusNavbarProfileMenuElementEventMap {
+        "linkClick": string;
+        "signOutClick": MouseEvent;
+    }
     interface HTMLModusNavbarProfileMenuElement extends Components.ModusNavbarProfileMenu, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusNavbarProfileMenuElementEventMap>(type: K, listener: (this: HTMLModusNavbarProfileMenuElement, ev: ModusNavbarProfileMenuCustomEvent<HTMLModusNavbarProfileMenuElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusNavbarProfileMenuElementEventMap>(type: K, listener: (this: HTMLModusNavbarProfileMenuElement, ev: ModusNavbarProfileMenuCustomEvent<HTMLModusNavbarProfileMenuElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLModusNavbarProfileMenuElement: {
         prototype: HTMLModusNavbarProfileMenuElement;
         new (): HTMLModusNavbarProfileMenuElement;
     };
+    interface HTMLModusNavbarSearchOverlayElementEventMap {
+        "close": void;
+        "search": string;
+    }
     interface HTMLModusNavbarSearchOverlayElement extends Components.ModusNavbarSearchOverlay, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusNavbarSearchOverlayElementEventMap>(type: K, listener: (this: HTMLModusNavbarSearchOverlayElement, ev: ModusNavbarSearchOverlayCustomEvent<HTMLModusNavbarSearchOverlayElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusNavbarSearchOverlayElementEventMap>(type: K, listener: (this: HTMLModusNavbarSearchOverlayElement, ev: ModusNavbarSearchOverlayCustomEvent<HTMLModusNavbarSearchOverlayElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLModusNavbarSearchOverlayElement: {
         prototype: HTMLModusNavbarSearchOverlayElement;
         new (): HTMLModusNavbarSearchOverlayElement;
     };
+    interface HTMLModusNumberInputElementEventMap {
+        "valueChange": string;
+    }
     interface HTMLModusNumberInputElement extends Components.ModusNumberInput, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusNumberInputElementEventMap>(type: K, listener: (this: HTMLModusNumberInputElement, ev: ModusNumberInputCustomEvent<HTMLModusNumberInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusNumberInputElementEventMap>(type: K, listener: (this: HTMLModusNumberInputElement, ev: ModusNumberInputCustomEvent<HTMLModusNumberInputElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLModusNumberInputElement: {
         prototype: HTMLModusNumberInputElement;
         new (): HTMLModusNumberInputElement;
     };
+    interface HTMLModusPaginationElementEventMap {
+        "pageChange": number;
+    }
     interface HTMLModusPaginationElement extends Components.ModusPagination, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusPaginationElementEventMap>(type: K, listener: (this: HTMLModusPaginationElement, ev: ModusPaginationCustomEvent<HTMLModusPaginationElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusPaginationElementEventMap>(type: K, listener: (this: HTMLModusPaginationElement, ev: ModusPaginationCustomEvent<HTMLModusPaginationElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLModusPaginationElement: {
         prototype: HTMLModusPaginationElement;
@@ -1528,31 +2476,108 @@ declare global {
         prototype: HTMLModusProgressBarElement;
         new (): HTMLModusProgressBarElement;
     };
+    interface HTMLModusRadioGroupElementEventMap {
+        "buttonClick": string;
+    }
     interface HTMLModusRadioGroupElement extends Components.ModusRadioGroup, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusRadioGroupElementEventMap>(type: K, listener: (this: HTMLModusRadioGroupElement, ev: ModusRadioGroupCustomEvent<HTMLModusRadioGroupElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusRadioGroupElementEventMap>(type: K, listener: (this: HTMLModusRadioGroupElement, ev: ModusRadioGroupCustomEvent<HTMLModusRadioGroupElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLModusRadioGroupElement: {
         prototype: HTMLModusRadioGroupElement;
         new (): HTMLModusRadioGroupElement;
     };
+    interface HTMLModusSelectElementEventMap {
+        "valueChange": unknown;
+        "inputBlur": FocusEvent;
+    }
     interface HTMLModusSelectElement extends Components.ModusSelect, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusSelectElementEventMap>(type: K, listener: (this: HTMLModusSelectElement, ev: ModusSelectCustomEvent<HTMLModusSelectElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusSelectElementEventMap>(type: K, listener: (this: HTMLModusSelectElement, ev: ModusSelectCustomEvent<HTMLModusSelectElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLModusSelectElement: {
         prototype: HTMLModusSelectElement;
         new (): HTMLModusSelectElement;
     };
+    interface HTMLModusSentimentScaleElementEventMap {
+        "sentimentSelection": any;
+    }
+    interface HTMLModusSentimentScaleElement extends Components.ModusSentimentScale, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusSentimentScaleElementEventMap>(type: K, listener: (this: HTMLModusSentimentScaleElement, ev: ModusSentimentScaleCustomEvent<HTMLModusSentimentScaleElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusSentimentScaleElementEventMap>(type: K, listener: (this: HTMLModusSentimentScaleElement, ev: ModusSentimentScaleCustomEvent<HTMLModusSentimentScaleElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLModusSentimentScaleElement: {
+        prototype: HTMLModusSentimentScaleElement;
+        new (): HTMLModusSentimentScaleElement;
+    };
+    interface HTMLModusSideNavigationElementEventMap {
+        "sideNavExpand": boolean;
+    }
     interface HTMLModusSideNavigationElement extends Components.ModusSideNavigation, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusSideNavigationElementEventMap>(type: K, listener: (this: HTMLModusSideNavigationElement, ev: ModusSideNavigationCustomEvent<HTMLModusSideNavigationElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusSideNavigationElementEventMap>(type: K, listener: (this: HTMLModusSideNavigationElement, ev: ModusSideNavigationCustomEvent<HTMLModusSideNavigationElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLModusSideNavigationElement: {
         prototype: HTMLModusSideNavigationElement;
         new (): HTMLModusSideNavigationElement;
     };
+    interface HTMLModusSideNavigationItemElementEventMap {
+        "sideNavItemClicked": { id: string; selected: boolean };
+        "sideNavItemFocus": { id: string };
+        "_sideNavItemAdded": HTMLElement;
+        "_sideNavItemRemoved": HTMLElement;
+    }
     interface HTMLModusSideNavigationItemElement extends Components.ModusSideNavigationItem, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusSideNavigationItemElementEventMap>(type: K, listener: (this: HTMLModusSideNavigationItemElement, ev: ModusSideNavigationItemCustomEvent<HTMLModusSideNavigationItemElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusSideNavigationItemElementEventMap>(type: K, listener: (this: HTMLModusSideNavigationItemElement, ev: ModusSideNavigationItemCustomEvent<HTMLModusSideNavigationItemElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLModusSideNavigationItemElement: {
         prototype: HTMLModusSideNavigationItemElement;
         new (): HTMLModusSideNavigationItemElement;
     };
+    interface HTMLModusSliderElementEventMap {
+        "valueChange": string;
+        "valueInput": string;
+    }
     interface HTMLModusSliderElement extends Components.ModusSlider, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusSliderElementEventMap>(type: K, listener: (this: HTMLModusSliderElement, ev: ModusSliderCustomEvent<HTMLModusSliderElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusSliderElementEventMap>(type: K, listener: (this: HTMLModusSliderElement, ev: ModusSliderCustomEvent<HTMLModusSliderElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLModusSliderElement: {
         prototype: HTMLModusSliderElement;
@@ -1564,35 +2589,219 @@ declare global {
         prototype: HTMLModusSpinnerElement;
         new (): HTMLModusSpinnerElement;
     };
+    interface HTMLModusSwitchElementEventMap {
+        "switchClick": boolean;
+    }
     interface HTMLModusSwitchElement extends Components.ModusSwitch, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusSwitchElementEventMap>(type: K, listener: (this: HTMLModusSwitchElement, ev: ModusSwitchCustomEvent<HTMLModusSwitchElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusSwitchElementEventMap>(type: K, listener: (this: HTMLModusSwitchElement, ev: ModusSwitchCustomEvent<HTMLModusSwitchElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLModusSwitchElement: {
         prototype: HTMLModusSwitchElement;
         new (): HTMLModusSwitchElement;
     };
+    interface HTMLModusTableElementEventMap {
+        "cellValueChange": ModusTableCellValueChange;
+        "cellLinkClick": ModusTableCellLink;
+        "columnOrderChange": ModusTableColumnOrderState;
+        "columnSizingChange": ModusTableColumnSizingState;
+        "columnVisibilityChange": ModusTableColumnVisibilityState;
+        "rowActionClick": ModusTableRowActionClick;
+        "rowExpanded": ModusTableExpandedState;
+        "rowSelectionChange": unknown;
+        "sortChange": ModusTableSortingState;
+        "paginationChange": ModusTablePaginationState;
+    }
+    interface HTMLModusTableElement extends Components.ModusTable, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusTableElementEventMap>(type: K, listener: (this: HTMLModusTableElement, ev: ModusTableCustomEvent<HTMLModusTableElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusTableElementEventMap>(type: K, listener: (this: HTMLModusTableElement, ev: ModusTableCustomEvent<HTMLModusTableElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLModusTableElement: {
+        prototype: HTMLModusTableElement;
+        new (): HTMLModusTableElement;
+    };
+    interface HTMLModusTableCellEditorElement extends Components.ModusTableCellEditor, HTMLStencilElement {
+    }
+    var HTMLModusTableCellEditorElement: {
+        prototype: HTMLModusTableCellEditorElement;
+        new (): HTMLModusTableCellEditorElement;
+    };
+    interface HTMLModusTableCellMainElementEventMap {
+        "cellInputValueChange": TableCellEdited;
+    }
+    interface HTMLModusTableCellMainElement extends Components.ModusTableCellMain, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusTableCellMainElementEventMap>(type: K, listener: (this: HTMLModusTableCellMainElement, ev: ModusTableCellMainCustomEvent<HTMLModusTableCellMainElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusTableCellMainElementEventMap>(type: K, listener: (this: HTMLModusTableCellMainElement, ev: ModusTableCellMainCustomEvent<HTMLModusTableCellMainElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLModusTableCellMainElement: {
+        prototype: HTMLModusTableCellMainElement;
+        new (): HTMLModusTableCellMainElement;
+    };
+    interface HTMLModusTableColumnsVisibilityElement extends Components.ModusTableColumnsVisibility, HTMLStencilElement {
+    }
+    var HTMLModusTableColumnsVisibilityElement: {
+        prototype: HTMLModusTableColumnsVisibilityElement;
+        new (): HTMLModusTableColumnsVisibilityElement;
+    };
+    interface HTMLModusTableDropdownMenuElement extends Components.ModusTableDropdownMenu, HTMLStencilElement {
+    }
+    var HTMLModusTableDropdownMenuElement: {
+        prototype: HTMLModusTableDropdownMenuElement;
+        new (): HTMLModusTableDropdownMenuElement;
+    };
+    /**
+     * ModusFillerColumn is to fill empty space within a table or grid when the content in other columns is not wide enough to occupy the entire available width
+     */
+    interface HTMLModusTableFillerColumnElement extends Components.ModusTableFillerColumn, HTMLStencilElement {
+    }
+    var HTMLModusTableFillerColumnElement: {
+        prototype: HTMLModusTableFillerColumnElement;
+        new (): HTMLModusTableFillerColumnElement;
+    };
+    interface HTMLModusTableRowActionsElementEventMap {
+        "overflowRowActions": unknown;
+    }
+    interface HTMLModusTableRowActionsElement extends Components.ModusTableRowActions, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusTableRowActionsElementEventMap>(type: K, listener: (this: HTMLModusTableRowActionsElement, ev: ModusTableRowActionsCustomEvent<HTMLModusTableRowActionsElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusTableRowActionsElementEventMap>(type: K, listener: (this: HTMLModusTableRowActionsElement, ev: ModusTableRowActionsCustomEvent<HTMLModusTableRowActionsElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLModusTableRowActionsElement: {
+        prototype: HTMLModusTableRowActionsElement;
+        new (): HTMLModusTableRowActionsElement;
+    };
+    interface HTMLModusTableRowActionsCellElement extends Components.ModusTableRowActionsCell, HTMLStencilElement {
+    }
+    var HTMLModusTableRowActionsCellElement: {
+        prototype: HTMLModusTableRowActionsCellElement;
+        new (): HTMLModusTableRowActionsCellElement;
+    };
+    interface HTMLModusTableRowActionsMenuElement extends Components.ModusTableRowActionsMenu, HTMLStencilElement {
+    }
+    var HTMLModusTableRowActionsMenuElement: {
+        prototype: HTMLModusTableRowActionsMenuElement;
+        new (): HTMLModusTableRowActionsMenuElement;
+    };
+    interface HTMLModusTableToolbarElement extends Components.ModusTableToolbar, HTMLStencilElement {
+    }
+    var HTMLModusTableToolbarElement: {
+        prototype: HTMLModusTableToolbarElement;
+        new (): HTMLModusTableToolbarElement;
+    };
+    interface HTMLModusTabsElementEventMap {
+        "tabChange": string;
+    }
     interface HTMLModusTabsElement extends Components.ModusTabs, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusTabsElementEventMap>(type: K, listener: (this: HTMLModusTabsElement, ev: ModusTabsCustomEvent<HTMLModusTabsElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusTabsElementEventMap>(type: K, listener: (this: HTMLModusTabsElement, ev: ModusTabsCustomEvent<HTMLModusTabsElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLModusTabsElement: {
         prototype: HTMLModusTabsElement;
         new (): HTMLModusTabsElement;
     };
+    interface HTMLModusTextInputElementEventMap {
+        "valueChange": string;
+    }
     interface HTMLModusTextInputElement extends Components.ModusTextInput, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusTextInputElementEventMap>(type: K, listener: (this: HTMLModusTextInputElement, ev: ModusTextInputCustomEvent<HTMLModusTextInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusTextInputElementEventMap>(type: K, listener: (this: HTMLModusTextInputElement, ev: ModusTextInputCustomEvent<HTMLModusTextInputElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLModusTextInputElement: {
         prototype: HTMLModusTextInputElement;
         new (): HTMLModusTextInputElement;
     };
+    interface HTMLModusTextareaInputElementEventMap {
+        "valueChange": string;
+    }
+    interface HTMLModusTextareaInputElement extends Components.ModusTextareaInput, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusTextareaInputElementEventMap>(type: K, listener: (this: HTMLModusTextareaInputElement, ev: ModusTextareaInputCustomEvent<HTMLModusTextareaInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusTextareaInputElementEventMap>(type: K, listener: (this: HTMLModusTextareaInputElement, ev: ModusTextareaInputCustomEvent<HTMLModusTextareaInputElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLModusTextareaInputElement: {
+        prototype: HTMLModusTextareaInputElement;
+        new (): HTMLModusTextareaInputElement;
+    };
+    interface HTMLModusTimePickerElementEventMap {
+        "timeInputBlur": ModusTimePickerEventDetails;
+        "valueChange": ModusTimePickerEventDetails;
+    }
     interface HTMLModusTimePickerElement extends Components.ModusTimePicker, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusTimePickerElementEventMap>(type: K, listener: (this: HTMLModusTimePickerElement, ev: ModusTimePickerCustomEvent<HTMLModusTimePickerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusTimePickerElementEventMap>(type: K, listener: (this: HTMLModusTimePickerElement, ev: ModusTimePickerCustomEvent<HTMLModusTimePickerElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLModusTimePickerElement: {
         prototype: HTMLModusTimePickerElement;
         new (): HTMLModusTimePickerElement;
     };
+    interface HTMLModusToastElementEventMap {
+        "dismissClick": any;
+    }
     interface HTMLModusToastElement extends Components.ModusToast, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusToastElementEventMap>(type: K, listener: (this: HTMLModusToastElement, ev: ModusToastCustomEvent<HTMLModusToastElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusToastElementEventMap>(type: K, listener: (this: HTMLModusToastElement, ev: ModusToastCustomEvent<HTMLModusToastElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLModusToastElement: {
         prototype: HTMLModusToastElement;
         new (): HTMLModusToastElement;
+    };
+    interface HTMLModusToolbarElement extends Components.ModusToolbar, HTMLStencilElement {
+    }
+    var HTMLModusToolbarElement: {
+        prototype: HTMLModusToolbarElement;
+        new (): HTMLModusToolbarElement;
     };
     interface HTMLModusTooltipElement extends Components.ModusTooltip, HTMLStencilElement {
     }
@@ -1600,34 +2809,86 @@ declare global {
         prototype: HTMLModusTooltipElement;
         new (): HTMLModusTooltipElement;
     };
+    interface HTMLModusTreeViewElementEventMap {
+        "itemDrop": { [key: string]: TreeViewItemInfo };
+        "itemSelectionChange": TreeItemSelectionChange;
+        "itemActionClick": any;
+    }
     interface HTMLModusTreeViewElement extends Components.ModusTreeView, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusTreeViewElementEventMap>(type: K, listener: (this: HTMLModusTreeViewElement, ev: ModusTreeViewCustomEvent<HTMLModusTreeViewElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusTreeViewElementEventMap>(type: K, listener: (this: HTMLModusTreeViewElement, ev: ModusTreeViewCustomEvent<HTMLModusTreeViewElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLModusTreeViewElement: {
         prototype: HTMLModusTreeViewElement;
         new (): HTMLModusTreeViewElement;
     };
+    interface HTMLModusTreeViewItemElementEventMap {
+        "checkboxClick": boolean;
+        "itemLabelChange": string;
+        "itemClick": boolean;
+        "itemSelectionChange": TreeItemSelectionChange;
+        "itemExpandToggle": boolean;
+        "itemAdded": HTMLElement;
+        "actionClick": any;
+    }
     interface HTMLModusTreeViewItemElement extends Components.ModusTreeViewItem, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusTreeViewItemElementEventMap>(type: K, listener: (this: HTMLModusTreeViewItemElement, ev: ModusTreeViewItemCustomEvent<HTMLModusTreeViewItemElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusTreeViewItemElementEventMap>(type: K, listener: (this: HTMLModusTreeViewItemElement, ev: ModusTreeViewItemCustomEvent<HTMLModusTreeViewItemElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLModusTreeViewItemElement: {
         prototype: HTMLModusTreeViewItemElement;
         new (): HTMLModusTreeViewItemElement;
     };
+    interface HTMLModusUtilityPanelElementEventMap {
+        "panelOpened": void;
+        "panelClosed": void;
+    }
+    interface HTMLModusUtilityPanelElement extends Components.ModusUtilityPanel, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusUtilityPanelElementEventMap>(type: K, listener: (this: HTMLModusUtilityPanelElement, ev: ModusUtilityPanelCustomEvent<HTMLModusUtilityPanelElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusUtilityPanelElementEventMap>(type: K, listener: (this: HTMLModusUtilityPanelElement, ev: ModusUtilityPanelCustomEvent<HTMLModusUtilityPanelElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLModusUtilityPanelElement: {
+        prototype: HTMLModusUtilityPanelElement;
+        new (): HTMLModusUtilityPanelElement;
+    };
     interface HTMLElementTagNameMap {
         "modus-accordion": HTMLModusAccordionElement;
         "modus-accordion-item": HTMLModusAccordionItemElement;
+        "modus-action-bar": HTMLModusActionBarElement;
         "modus-alert": HTMLModusAlertElement;
         "modus-autocomplete": HTMLModusAutocompleteElement;
         "modus-badge": HTMLModusBadgeElement;
         "modus-breadcrumb": HTMLModusBreadcrumbElement;
         "modus-button": HTMLModusButtonElement;
+        "modus-button-group": HTMLModusButtonGroupElement;
         "modus-card": HTMLModusCardElement;
         "modus-checkbox": HTMLModusCheckboxElement;
         "modus-chip": HTMLModusChipElement;
         "modus-data-table": HTMLModusDataTableElement;
         "modus-date-input": HTMLModusDateInputElement;
         "modus-date-picker": HTMLModusDatePickerElement;
+        "modus-divider": HTMLModusDividerElement;
         "modus-dropdown": HTMLModusDropdownElement;
         "modus-file-dropzone": HTMLModusFileDropzoneElement;
+        "modus-icon": HTMLModusIconElement;
         "modus-list": HTMLModusListElement;
         "modus-list-item": HTMLModusListItemElement;
         "modus-message": HTMLModusMessageElement;
@@ -1644,18 +2905,32 @@ declare global {
         "modus-progress-bar": HTMLModusProgressBarElement;
         "modus-radio-group": HTMLModusRadioGroupElement;
         "modus-select": HTMLModusSelectElement;
+        "modus-sentiment-scale": HTMLModusSentimentScaleElement;
         "modus-side-navigation": HTMLModusSideNavigationElement;
         "modus-side-navigation-item": HTMLModusSideNavigationItemElement;
         "modus-slider": HTMLModusSliderElement;
         "modus-spinner": HTMLModusSpinnerElement;
         "modus-switch": HTMLModusSwitchElement;
+        "modus-table": HTMLModusTableElement;
+        "modus-table-cell-editor": HTMLModusTableCellEditorElement;
+        "modus-table-cell-main": HTMLModusTableCellMainElement;
+        "modus-table-columns-visibility": HTMLModusTableColumnsVisibilityElement;
+        "modus-table-dropdown-menu": HTMLModusTableDropdownMenuElement;
+        "modus-table-filler-column": HTMLModusTableFillerColumnElement;
+        "modus-table-row-actions": HTMLModusTableRowActionsElement;
+        "modus-table-row-actions-cell": HTMLModusTableRowActionsCellElement;
+        "modus-table-row-actions-menu": HTMLModusTableRowActionsMenuElement;
+        "modus-table-toolbar": HTMLModusTableToolbarElement;
         "modus-tabs": HTMLModusTabsElement;
         "modus-text-input": HTMLModusTextInputElement;
+        "modus-textarea-input": HTMLModusTextareaInputElement;
         "modus-time-picker": HTMLModusTimePickerElement;
         "modus-toast": HTMLModusToastElement;
+        "modus-toolbar": HTMLModusToolbarElement;
         "modus-tooltip": HTMLModusTooltipElement;
         "modus-tree-view": HTMLModusTreeViewElement;
         "modus-tree-view-item": HTMLModusTreeViewItemElement;
+        "modus-utility-panel": HTMLModusUtilityPanelElement;
     }
 }
 declare namespace LocalJSX {
@@ -1671,6 +2946,10 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
+          * (optional) The type of expand button
+         */
+        "expandButtonType"?: 'standardArrow' | 'circleArrow';
+        /**
           * (optional) Whether the accordion item is expanded.
          */
         "expanded"?: boolean;
@@ -1678,6 +2957,10 @@ declare namespace LocalJSX {
           * (required) The text to render in the header.
          */
         "headerText"?: string;
+        /**
+          * (optional) The icon to display before the header text.
+         */
+        "icon"?: string;
         /**
           * An event that fires on every accordion close.
          */
@@ -1691,11 +2974,37 @@ declare namespace LocalJSX {
          */
         "size"?: 'condensed' | 'standard';
     }
+    interface ModusActionBar {
+        /**
+          * (optional) List of actions
+         */
+        "actions"?: ModusActionBarOptions[];
+        /**
+          * (optional) An event that fires on action item click.
+         */
+        "onActionBarClick"?: (event: ModusActionBarCustomEvent<any>) => void;
+        /**
+          * (optional) The size of the action items.
+         */
+        "size"?: 'small' | 'medium' | 'large';
+        /**
+          * (optional) Total number of icons to show
+         */
+        "visibleItemCount"?: number;
+    }
     interface ModusAlert {
         /**
           * (optional) The alert's aria-label.
          */
         "ariaLabel"?: string | null;
+        /**
+          * (optional) The button's aria-label.
+         */
+        "buttonAriaLabel"?: string | null;
+        /**
+          * (optional) The button's text
+         */
+        "buttonText"?: string | null;
         /**
           * (optional) Whether the alert has a dismiss button
          */
@@ -1704,6 +3013,10 @@ declare namespace LocalJSX {
           * (optional) The alert message
          */
         "message"?: string;
+        /**
+          * An event that firest when the action button is clicked
+         */
+        "onActionClick"?: (event: ModusAlertCustomEvent<any>) => void;
         /**
           * An event that fires when the alert is dismissed
          */
@@ -1723,6 +3036,10 @@ declare namespace LocalJSX {
          */
         "clearable"?: boolean;
         /**
+          * Whether the autocomplete's options always display on select.
+         */
+        "disableCloseOnSelect"?: boolean;
+        /**
           * Whether the input is disabled.
          */
         "disabled"?: boolean;
@@ -1739,6 +3056,10 @@ declare namespace LocalJSX {
          */
         "errorText"?: string;
         /**
+          * A promise that returns the filtered options.
+         */
+        "filterOptions"?: (search: string) => Promise<ModusAutocompleteOption[] | string[]>;
+        /**
           * Whether the search icon is included.
          */
         "includeSearchIcon"?: boolean;
@@ -1746,6 +3067,14 @@ declare namespace LocalJSX {
           * The autocomplete's label.
          */
         "label"?: string;
+        /**
+          * Whether the autocomplete is in a loading state.
+         */
+        "loading"?: boolean;
+        /**
+          * When enabled, multiple options can be selected in the component. And selected options are shown as chips in the input.
+         */
+        "multiple"?: boolean;
         /**
           * The autocomplete's no results sub-text.
          */
@@ -1759,9 +3088,13 @@ declare namespace LocalJSX {
          */
         "onOptionSelected"?: (event: ModusAutocompleteCustomEvent<string>) => void;
         /**
+          * An event that fires when an option is selected/removed. Emits the option ids.
+         */
+        "onSelectionsChanged"?: (event: ModusAutocompleteCustomEvent<string[]>) => void;
+        /**
           * An event that fires when the input value changes. Emits the value string.
          */
-        "onValueChange"?: (event: ModusAutocompleteCustomEvent<string>) => void;
+        "onValueChange"?: (event: ModusAutocompleteCustomEvent<string | string[]>) => void;
         /**
           * The autocomplete's options.
          */
@@ -1783,31 +3116,35 @@ declare namespace LocalJSX {
          */
         "showNoResultsFoundMessage"?: boolean;
         /**
+          * Whether to show autocomplete's options when focus.
+         */
+        "showOptionsOnFocus"?: boolean;
+        /**
           * The autocomplete's size.
          */
         "size"?: 'medium' | 'large';
         /**
           * The autocomplete's search value.
          */
-        "value"?: string;
+        "value"?: string | string[];
     }
     interface ModusBadge {
         /**
           * (optional) The badge's aria-label
          */
-        "ariaLabel"?: string | null;
+        "ariaLabel"?: BadgeProperties['ariaLabel'];
         /**
           * (optional) The color of the badge
          */
-        "color"?: 'danger' | 'dark' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning';
+        "color"?: BadgeProperties['color'];
         /**
           * (optional) The size of the badge
          */
-        "size"?: 'small' | 'medium' | 'large';
+        "size"?: BadgeProperties['size'];
         /**
           * (optional) The type of the badge
          */
-        "type"?: 'counter' | 'default' | 'text';
+        "type"?: BadgeProperties['type'];
     }
     interface ModusBreadcrumb {
         /**
@@ -1822,8 +3159,16 @@ declare namespace LocalJSX {
           * (optional) An event that fires on breadcrumb click.
          */
         "onCrumbClick"?: (event: ModusBreadcrumbCustomEvent<Crumb>) => void;
+        /**
+          * (optional) A flag that controls the display of underline
+         */
+        "underlineLinks"?: boolean;
     }
     interface ModusButton {
+        /**
+          * (optional) The button's aria-disabled state.
+         */
+        "ariaDisabled"?: string | null;
         /**
           * (optional) The button's aria-label.
          */
@@ -1831,11 +3176,11 @@ declare namespace LocalJSX {
         /**
           * (optional) The style of the button
          */
-        "buttonStyle"?: 'borderless' | 'fill' | 'outline';
+        "buttonStyle"?: ButtonStyle;
         /**
           * (optional) The color of the button
          */
-        "color"?: 'danger' | 'primary' | 'secondary' | 'tertiary';
+        "color"?: ButtonColor;
         /**
           * (optional) Disables the button.
          */
@@ -1863,7 +3208,49 @@ declare namespace LocalJSX {
         /**
           * (optional) The size of the button.
          */
-        "size"?: 'small' | 'medium' | 'large';
+        "size"?: ButtonSize;
+        /**
+          * (Optional) Button types
+         */
+        "type"?: ButtonType;
+    }
+    interface ModusButtonGroup {
+        /**
+          * (optional) The button group's aria-disabled state.
+         */
+        "ariaDisabled"?: string | null;
+        /**
+          * (optional) The button group's aria-label.
+         */
+        "ariaLabel"?: string | null;
+        /**
+          * (optional) The style of the buttons in the group
+         */
+        "buttonStyle"?: ButtonStyle;
+        /**
+          * (optional) The color of the buttons in the group
+         */
+        "color"?: ButtonColor;
+        /**
+          * (optional) Disables the button group.
+         */
+        "disabled"?: boolean;
+        /**
+          * Event emitted when a button is clicked
+         */
+        "onButtonGroupClick"?: (event: ModusButtonGroupCustomEvent<unknown>) => void;
+        /**
+          * Event emitted when the selection changes
+         */
+        "onButtonSelectionChange"?: (event: ModusButtonGroupCustomEvent<HTMLModusButtonElement[]>) => void;
+        /**
+          * (optional) The selection type of buttons
+         */
+        "selectionType"?: ButtonGroupSelectionType;
+        /**
+          * (optional) The size of the buttons
+         */
+        "size"?: ButtonSize;
     }
     interface ModusCard {
         /**
@@ -1917,15 +3304,27 @@ declare namespace LocalJSX {
          */
         "onCheckboxClick"?: (event: ModusCheckboxCustomEvent<boolean>) => void;
         /**
-          * (optional) Tab Index for the checkbox
+          * (optional) The size of the checkbox.
          */
-        "tabIndexValue"?: string | number;
+        "size"?: 'small' | 'medium';
+        /**
+          * (optional) If you wish to prevent the propagation of your event, you may opt for this.
+         */
+        "stopPropagation"?: boolean;
     }
     interface ModusChip {
+        /**
+          * (optional) Whether the chip is active.
+         */
+        "active"?: boolean;
         /**
           * (optional) The chip's aria-label.
          */
         "ariaLabel"?: string | null;
+        /**
+          * (optional) the chip's id
+         */
+        "chipId"?: string;
         /**
           * (optional) The chip's style.
          */
@@ -1942,6 +3341,10 @@ declare namespace LocalJSX {
           * (optional) The image's url.
          */
         "imageUrl"?: string;
+        /**
+          * (optional) Maximum width for the Chip's text and shows ellipsis when truncated
+         */
+        "maxWidth"?: string;
         /**
           * An event that fires on chip click.
          */
@@ -2001,17 +3404,21 @@ declare namespace LocalJSX {
         /**
           * Options for data table item selection.
          */
-        "selectionOptions"?: ModusTableSelectionOptions;
+        "selectionOptions"?: ModusDataTableSelectionOptions;
         /**
           * Options for data table column sort.
          */
-        "sortOptions"?: ModusTableSortOptions;
+        "sortOptions"?: ModusDataTableSortOptions;
     }
     interface ModusDateInput {
         /**
           * (optional) Regular expression to allow characters while typing the input.
          */
         "allowedCharsRegex"?: RegExp | string;
+        /**
+          * Alternative formats string for the date input split by | separator. Use 'm','mm' for month, 'd','dd' for date and 'yy','yyyy' for year with any separator that is not a regular expression.
+         */
+        "altFormats"?: string;
         /**
           * (optional) The input's aria-label.
          */
@@ -2043,11 +3450,19 @@ declare namespace LocalJSX {
         /**
           * (optional) Custom helper text displayed below the input.
          */
-        "helperText"?: any;
+        "helperText"?: string;
         /**
           * (optional) The input's label.
          */
         "label"?: string;
+        /**
+          * (optional) The maximum date allowed. The date is formatted according to ISO8601 'yyyy-mm-dd'.
+         */
+        "max"?: string;
+        /**
+          * (optional) The minimum date allowed. The date is formatted according to ISO8601 'yyyy-mm-dd'.
+         */
+        "min"?: string;
         /**
           * An event that fires on calendar icon click.
          */
@@ -2060,6 +3475,10 @@ declare namespace LocalJSX {
           * An event that fires on input value change.
          */
         "onValueChange"?: (event: ModusDateInputCustomEvent<ModusDateInputEventDetails>) => void;
+        /**
+          * An event that fires on value error.
+         */
+        "onValueError"?: (event: ModusDateInputCustomEvent<string>) => void;
         /**
           * (optional) The input's placeholder text.
          */
@@ -2089,7 +3508,7 @@ declare namespace LocalJSX {
          */
         "validText"?: string;
         /**
-          * (optional) A string representing the date entered in the input. The date is formatted according to ISO8601 'yyyy-mm-dd'. The displayed date format will differ from the 'value'.
+          * (optional) A string representing the date entered to the input. The date is formatted according to ISO8601 'yyyy-mm-dd'. The displayed date format will differ from the 'value'.
          */
         "value"?: string;
     }
@@ -2098,6 +3517,12 @@ declare namespace LocalJSX {
           * (optional) Label for the field.
          */
         "label"?: string;
+        /**
+          * (optional) The placement of the calendar popup
+         */
+        "position"?: Placement;
+    }
+    interface ModusDivider {
     }
     interface ModusDropdown {
         /**
@@ -2130,11 +3555,19 @@ declare namespace LocalJSX {
          */
         "placement"?: 'top' | 'right' | 'bottom' | 'left';
         /**
+          * (optional) Whether to show the dropdown list's border.
+         */
+        "showDropdownListBorder"?: boolean;
+        /**
           * (required) The element id that the list renders near and that triggers the toggling of the list.
          */
         "toggleElementId"?: string;
     }
     interface ModusFileDropzone {
+        /**
+          * (optional) The dropzone's accepted file types
+         */
+        "acceptFileTypes"?: string;
         /**
           * (optional) The dropzone's aria-label.
          */
@@ -2152,9 +3585,17 @@ declare namespace LocalJSX {
          */
         "dropzoneWidth"?: string;
         /**
+          * (optional) The dropzone's instruction text when a file is being dragged over.
+         */
+        "fileDraggedOverInstructions"?: string;
+        /**
           * (optional) Whether to include the upload icon.
          */
         "includeStateIcon"?: boolean;
+        /**
+          * (optional) The dropzone's instruction text.
+         */
+        "instructions"?: string;
         /**
           * (optional) The dropzone's label text.
          */
@@ -2180,13 +3621,39 @@ declare namespace LocalJSX {
          */
         "onFiles"?: (event: ModusFileDropzoneCustomEvent<[File[], string | null]>) => void;
     }
+    interface ModusIcon {
+        /**
+          * (optional) The color of the Icon
+         */
+        "color"?: string;
+        /**
+          * The name of the icon
+         */
+        "name"?: ModusIconName | null;
+        /**
+          * (optional) The click handler function
+         */
+        "onIconClick"?: (event: ModusIconCustomEvent<any>) => void;
+        /**
+          * (optional) The size of the Icon
+         */
+        "size"?: string;
+    }
     interface ModusList {
     }
     interface ModusListItem {
         /**
+          * (optional) Whether the list item has a border or not
+         */
+        "borderless"?: boolean;
+        /**
           * (optional) Disables the list item
          */
         "disabled"?: boolean;
+        /**
+          * (optional) Takes the icon name and shows the icon aligned to the left of the button text.
+         */
+        "leftIcon"?: string;
         /**
           * An event that fires on list item click
          */
@@ -2200,9 +3667,17 @@ declare namespace LocalJSX {
          */
         "size"?: 'condensed' | 'large' | 'standard';
         /**
+          * (optional) Whether to show Subtext below the Slot content or not
+         */
+        "subText"?: string;
+        /**
           * (optional) The type of list item
          */
         "type"?: string;
+        /**
+          * (optional) Whether to wrap the sub text.
+         */
+        "wrapSubText"?: true | false;
     }
     interface ModusMessage {
         /**
@@ -2227,6 +3702,10 @@ declare namespace LocalJSX {
           * (optional) The modal's backdrop. Specify 'static' for a backdrop that doesn't close the modal when clicked outside the modal content
          */
         "backdrop"?: 'default' | 'static';
+        /**
+          * (optional) The modal's full screen view
+         */
+        "fullscreen"?: boolean;
         /**
           * (optional) The modal's primary button text.
          */
@@ -2286,9 +3765,17 @@ declare namespace LocalJSX {
          */
         "buttons"?: ModusNavbarButton[];
         /**
+          * (optional) Dropdown options.
+         */
+        "dropdownOptions"?: ModusNavbarDropdownOptions;
+        /**
           * (optional) Whether to show search overlay or not.
          */
         "enableSearchOverlay"?: boolean;
+        /**
+          * (optional) Help tooltip.
+         */
+        "helpTooltip"?: ModusNavbarTooltip;
         /**
           * (optional) Help URL.
          */
@@ -2297,6 +3784,14 @@ declare namespace LocalJSX {
           * (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels.
          */
         "logoOptions"?: ModusNavbarLogoOptions;
+        /**
+          * (optional) The navbar's aria-label.
+         */
+        "navAriaLabel"?: string;
+        /**
+          * (optional) Whether to show badge on top of notification
+         */
+        "notificationCount"?: number;
         /**
           * An event that fires when an apps menu app opens.
          */
@@ -2309,6 +3804,10 @@ declare namespace LocalJSX {
           * An event that fires when a button in the custom button list is clicked.
          */
         "onButtonClick"?: (event: ModusNavbarCustomEvent<string>) => void;
+        /**
+          * An event that fires when a dropdown item is selected *
+         */
+        "onDropdownItemSelect"?: (event: ModusNavbarCustomEvent<ModusNavbarDropdownItem>) => void;
         /**
           * An event that fires when the help link opens.
          */
@@ -2336,7 +3835,7 @@ declare namespace LocalJSX {
         /**
           * An event that fires on profile menu sign out click.
          */
-        "onProfileMenuSignOutClick"?: (event: ModusNavbarCustomEvent<MouseEvent>) => void;
+        "onProfileMenuSignOutClick"?: (event: ModusNavbarCustomEvent<KeyboardEvent | MouseEvent>) => void;
         /**
           * An event that fires on search value change.
          */
@@ -2358,6 +3857,10 @@ declare namespace LocalJSX {
          */
         "searchTooltip"?: ModusNavbarTooltip;
         /**
+          * (optional) The selected dropdown item.
+         */
+        "selectedDropdownItem"?: ModusNavbarDropdownItem;
+        /**
           * (optional) Whether to show the apps menu.
          */
         "showAppsMenu"?: boolean;
@@ -2377,6 +3880,10 @@ declare namespace LocalJSX {
           * (optional) Whether to show the placeholder for Pendo.
          */
         "showPendoPlaceholder"?: boolean;
+        /**
+          * (optional) Whether to show profile.  *
+         */
+        "showProfile"?: boolean;
         /**
           * (optional) Whether to show search.
          */
@@ -2399,7 +3906,7 @@ declare namespace LocalJSX {
         "reverse"?: boolean;
     }
     interface ModusNavbarMainMenu {
-        "navbarId"?: string;
+        "parentNavbar"?: HTMLElement;
     }
     interface ModusNavbarNotificationsMenu {
         "reverse"?: boolean;
@@ -2412,6 +3919,7 @@ declare namespace LocalJSX {
         "onLinkClick"?: (event: ModusNavbarProfileMenuCustomEvent<string>) => void;
         "onSignOutClick"?: (event: ModusNavbarProfileMenuCustomEvent<MouseEvent>) => void;
         "reverse"?: boolean;
+        "signOutText"?: string;
         "username"?: string;
         "variant"?: 'default' | 'blue';
     }
@@ -2496,10 +4004,12 @@ declare namespace LocalJSX {
         "ariaLabel"?: string | null;
         "maxPage"?: number;
         "minPage"?: number;
+        "nextPageButtonText"?: string;
         /**
           * An event that fires on page change.
          */
         "onPageChange"?: (event: ModusPaginationCustomEvent<number>) => void;
+        "prevPageButtonText"?: string;
         "size"?: 'large' | 'medium' | 'small';
     }
     interface ModusProgressBar {
@@ -2550,7 +4060,7 @@ declare namespace LocalJSX {
          */
         "checkedId"?: string;
         /**
-          * The radio button group name.
+          * The radio button group name. Used to group individual radio elements into one group.
          */
         "name"?: string;
         /**
@@ -2561,6 +4071,10 @@ declare namespace LocalJSX {
           * The radio buttons to render.
          */
         "radioButtons"?: RadioButton[];
+        /**
+          * (optional) The size of the radiobutton.
+         */
+        "size"?: 'small' | 'medium';
     }
     interface ModusSelect {
         /**
@@ -2584,6 +4098,10 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
+          * An event that fires on input blur.
+         */
+        "onInputBlur"?: (event: ModusSelectCustomEvent<FocusEvent>) => void;
+        /**
           * An event that fires on input value change.
          */
         "onValueChange"?: (event: ModusSelectCustomEvent<unknown>) => void;
@@ -2595,6 +4113,10 @@ declare namespace LocalJSX {
           * The options property to render in the dropdown list.
          */
         "optionsDisplayProp"?: string;
+        /**
+          * (optional) The input's placeholder.
+         */
+        "placeholder"?: string;
         /**
           * (optional) Whether the input is required.
          */
@@ -2612,7 +4134,29 @@ declare namespace LocalJSX {
          */
         "value"?: unknown;
     }
+    interface ModusSentimentScale {
+        /**
+          * (optional) The sentiment scale's aria-label.
+         */
+        "ariaLabel"?: string | null;
+        /**
+          * (optional) Whether the sentiment scale is disabled.
+         */
+        "disabled"?: boolean;
+        /**
+          * An event that fires the selected sentiment.
+         */
+        "onSentimentSelection"?: (event: ModusSentimentScaleCustomEvent<any>) => void;
+        /**
+          * The type of icons to be displayed.
+         */
+        "type"?: ModusSentimentScaleType;
+    }
     interface ModusSideNavigation {
+        /**
+          * (optional) To choose whether to collapse the panel when clicked outside.
+         */
+        "collapseOnClickOutside"?: boolean;
         /**
           * (optional) Data property to create the items.
          */
@@ -2740,6 +4284,204 @@ declare namespace LocalJSX {
           * An event that fires on switch click.
          */
         "onSwitchClick"?: (event: ModusSwitchCustomEvent<boolean>) => void;
+        /**
+          * (optional) The size of the radiobutton.
+         */
+        "size"?: 'small' | 'medium';
+    }
+    interface ModusTable {
+        /**
+          * (Optional) To allow column reordering.
+         */
+        "columnReorder"?: boolean;
+        "columnResize"?: boolean;
+        /**
+          * (Required) To display headers in the table.
+         */
+        "columns": ModusTableColumn<unknown>[];
+        /**
+          * (Required) To display data in the table.
+         */
+        "data": unknown[];
+        /**
+          * (Optional) To set the default sorting for the table.
+         */
+        "defaultSort"?: ModusTableColumnSort;
+        /**
+          * (optional) The density of the table.
+         */
+        "density"?: 'relaxed' | 'comfortable' | 'compact';
+        /**
+          * (Optional) To control display options of table.
+         */
+        "displayOptions"?: ModusTableDisplayOptions;
+        "errors"?: ModusTableErrors;
+        "fullWidth"?: boolean;
+        /**
+          * (Optional) To enable row hover in table.
+         */
+        "hover"?: boolean;
+        /**
+          * (Optional) To enable manual pagination mode. When enabled, the table will not automatically paginate rows, instead will expect the current page index and other details to be passed.
+         */
+        "manualPaginationOptions"?: ModusTableManualPaginationOptions;
+        /**
+          * (Optional) To set modus-table in manual sorting mode.
+         */
+        "manualSortingOptions"?: ModusTableManualSortingOptions;
+        /**
+          * (Optional) To display a vertical scrollbar when the height is exceeded.
+         */
+        "maxHeight"?: string;
+        /**
+          * (Optional) To display a horizontal scrollbar when the width is exceeded.
+         */
+        "maxWidth"?: string;
+        /**
+          * Emits the link that was clicked
+         */
+        "onCellLinkClick"?: (event: ModusTableCustomEvent<ModusTableCellLink>) => void;
+        /**
+          * Emits the cell value that was edited
+         */
+        "onCellValueChange"?: (event: ModusTableCustomEvent<ModusTableCellValueChange>) => void;
+        /**
+          * Emits columns in the updated order
+         */
+        "onColumnOrderChange"?: (event: ModusTableCustomEvent<ModusTableColumnOrderState>) => void;
+        /**
+          * Emits latest column size
+         */
+        "onColumnSizingChange"?: (event: ModusTableCustomEvent<ModusTableColumnSizingState>) => void;
+        /**
+          * Emits visibility state of each column
+         */
+        "onColumnVisibilityChange"?: (event: ModusTableCustomEvent<ModusTableColumnVisibilityState>) => void;
+        /**
+          * Emits selected page index and size
+         */
+        "onPaginationChange"?: (event: ModusTableCustomEvent<ModusTablePaginationState>) => void;
+        /**
+          * An event that fires when a row action is clicked.
+         */
+        "onRowActionClick"?: (event: ModusTableCustomEvent<ModusTableRowActionClick>) => void;
+        /**
+          * Emits expanded state of the columns
+         */
+        "onRowExpanded"?: (event: ModusTableCustomEvent<ModusTableExpandedState>) => void;
+        /**
+          * Emits rows selected
+         */
+        "onRowSelectionChange"?: (event: ModusTableCustomEvent<unknown>) => void;
+        /**
+          * Emits column sort order
+         */
+        "onSortChange"?: (event: ModusTableCustomEvent<ModusTableSortingState>) => void;
+        "pageSizeList"?: number[];
+        "pagination"?: boolean;
+        /**
+          * (Optional) Actions that can be performed on each row. A maximum of 4 icons will be shown, including overflow menu and expand icons.
+         */
+        "rowActions"?: ModusTableRowAction[];
+        /**
+          * (Optional) To display checkbox.
+         */
+        "rowSelection"?: boolean;
+        /**
+          * (Optional) To control multiple row selection.
+         */
+        "rowSelectionOptions"?: ModusTableRowSelectionOptions;
+        /**
+          * (Optional) To display expanded rows.
+         */
+        "rowsExpandable"?: boolean;
+        /**
+          * (Optional) To display sort icon on hover.
+         */
+        "showSortIconOnHover"?: boolean;
+        /**
+          * (Optional) To sort data in table.
+         */
+        "sort"?: boolean;
+        /**
+          * (Optional) To display a-z or arrow sort icons.
+         */
+        "sortIconStyle"?: 'alphabetical' | 'directional';
+        /**
+          * (Optional) To display summary row.
+         */
+        "summaryRow"?: boolean;
+        /**
+          * (Optional) To display a toolbar for the table.
+         */
+        "toolbar"?: boolean;
+        /**
+          * (Optional) To display a toolbar, which allows access to table operations like hiding columns.
+         */
+        "toolbarOptions"?: ModusTableToolbarOptions | null;
+        /**
+          * (Optional) To wrap text that overflows the cell.
+         */
+        "wrapText"?: boolean;
+    }
+    interface ModusTableCellEditor {
+        "args"?: ModusTableCellEditorArgs;
+        "dataType"?: string;
+        "inputValueChangeHandler"?: (newValue: string) => void;
+        "keyDown"?: (e: KeyboardEvent, newValue: string) => void;
+        "type"?: string;
+        "value"?: unknown;
+        "valueChange"?: (newValue: string) => void;
+    }
+    interface ModusTableCellMain {
+        "cell"?: Cell<unknown, unknown>;
+        "context"?: TableContext;
+        "hasRowsExpandable"?: boolean;
+        "onCellInputValueChange"?: (event: ModusTableCellMainCustomEvent<TableCellEdited>) => void;
+        "valueChange"?: (props: TableCellEdited) => void;
+    }
+    interface ModusTableColumnsVisibility {
+        /**
+          * Column visibility options
+         */
+        "columnsVisibility"?: ModusTableColumnsVisibilityOptions;
+        /**
+          * Table data.
+         */
+        "getAllLeafColumns"?: () => Column<unknown, unknown>[];
+        "maxHeight"?: string;
+        "menuIconContainerRef"?: HTMLDivElement;
+        "showDropdown"?: boolean;
+        "toggleDropdown"?: (show: boolean) => void;
+    }
+    interface ModusTableDropdownMenu {
+        "context"?: TableContext;
+    }
+    /**
+     * ModusFillerColumn is to fill empty space within a table or grid when the content in other columns is not wide enough to occupy the entire available width
+     */
+    interface ModusTableFillerColumn {
+        "cellBorderless"?: boolean;
+        "container"?: HTMLElement;
+        "summaryRow"?: boolean;
+    }
+    interface ModusTableRowActions {
+        "context"?: TableContext;
+        "onOverflowRowActions"?: (event: ModusTableRowActionsCustomEvent<unknown>) => void;
+        "row"?: Row<unknown>;
+    }
+    interface ModusTableRowActionsCell {
+        "context"?: TableContext;
+        "row"?: Row<unknown>;
+    }
+    interface ModusTableRowActionsMenu {
+        "context"?: TableContext;
+    }
+    interface ModusTableToolbar {
+        /**
+          * Table data.
+         */
+        "context"?: TableContext;
     }
     interface ModusTabs {
         "ariaLabel"?: string | null;
@@ -2764,6 +4506,18 @@ declare namespace LocalJSX {
          */
         "autoFocusInput"?: boolean;
         /**
+          * (optional) Capitalization behavior when using a non-traditional keyboard (e.g. microphone, touch screen)
+         */
+        "autocapitalize"?: string;
+        /**
+          * (optional) Sets autocomplete on the input.
+         */
+        "autocomplete"?: string | null;
+        /**
+          * (optional) Whether to activate automatic correction while the user is editing this field in Safari.
+         */
+        "autocorrect"?: boolean | 'off' | 'on';
+        /**
           * (optional) Whether the input has a clear button.
          */
         "clearable"?: boolean;
@@ -2772,6 +4526,10 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
+          * (optional) Which action label to present for the enter key on virtual keyboards.
+         */
+        "enterkeyhint"?: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
+        /**
           * (optional) The input's error state text.
          */
         "errorText"?: string;
@@ -2779,6 +4537,10 @@ declare namespace LocalJSX {
           * (optional) The input's helper text displayed below the input.
          */
         "helperText"?: string;
+        /**
+          * (optional) Whether the error icon is included.
+         */
+        "includeErrorIcon"?: boolean;
         /**
           * (optional) Whether the password text toggle icon is included.
          */
@@ -2808,6 +4570,10 @@ declare namespace LocalJSX {
          */
         "onValueChange"?: (event: ModusTextInputCustomEvent<string>) => void;
         /**
+          * (optional) The input's pattern HTML attribute.
+         */
+        "pattern"?: string;
+        /**
           * (optional) The input's placeholder text.
          */
         "placeholder"?: string;
@@ -2824,13 +4590,103 @@ declare namespace LocalJSX {
          */
         "size"?: 'medium' | 'large';
         /**
+          * (optional) Whether to enable spell checking.
+         */
+        "spellcheck"?: boolean;
+        /**
           * (optional) The input's text alignment.
          */
         "textAlign"?: 'left' | 'right';
         /**
           * (optional) The input's type.
          */
-        "type"?: 'text' | 'password';
+        "type"?: 'email' | 'password' | 'search' | 'text' | 'tel' | 'url';
+        /**
+          * (optional) The input's valid state text.
+         */
+        "validText"?: string;
+        /**
+          * (optional) The input's value.
+         */
+        "value"?: string;
+    }
+    interface ModusTextareaInput {
+        /**
+          * (optional) The input's aria-label.
+         */
+        "ariaLabel"?: string | null;
+        /**
+          * (optional) Sets autofocus on the input.
+         */
+        "autoFocusInput"?: boolean;
+        /**
+          * (optional) Whether to activate automatic correction while the user is editing this field in Safari.
+         */
+        "autocorrect"?: boolean | 'off' | 'on';
+        /**
+          * (optional) Whether the input has a clear button.
+         */
+        "clearable"?: boolean;
+        /**
+          * (optional) Whether the input is disabled.
+         */
+        "disabled"?: boolean;
+        /**
+          * (optional) Which action label to present for the enter key on virtual keyboards.
+         */
+        "enterkeyhint"?: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
+        /**
+          * (optional) The input's error state text.
+         */
+        "errorText"?: string;
+        /**
+          * (optional) The input's helper text displayed below the input.
+         */
+        "helperText"?: string;
+        /**
+          * (optional) The input's label.
+         */
+        "label"?: string;
+        /**
+          * (optional) The input's maximum length.
+         */
+        "maxLength"?: number;
+        /**
+          * (optional) The input's minimum length.
+         */
+        "minLength"?: number;
+        /**
+          * An event that fires on input value change.
+         */
+        "onValueChange"?: (event: ModusTextareaInputCustomEvent<string>) => void;
+        /**
+          * (optional) The input's placeholder text.
+         */
+        "placeholder"?: string;
+        /**
+          * (optional) Whether the input's content is read-only
+         */
+        "readOnly"?: boolean;
+        /**
+          * (optional) Whether the input is required.
+         */
+        "required"?: boolean;
+        /**
+          * (optional) Number of rows on textarea
+         */
+        "rows"?: number;
+        /**
+          * (optional) The input's size.
+         */
+        "size"?: 'medium' | 'large';
+        /**
+          * (optional) Whether to enable spell checking.
+         */
+        "spellcheck"?: boolean;
+        /**
+          * (optional) The input's text alignment.
+         */
+        "textAlign"?: 'left' | 'right';
         /**
           * (optional) The input's valid state text.
          */
@@ -2928,6 +4784,10 @@ declare namespace LocalJSX {
          */
         "ariaLabel"?: string | null;
         /**
+          * (optional) Time taken to dismiss the toast
+         */
+        "delay"?: number;
+        /**
           * (optional) Whether the toast has a dismiss button.
          */
         "dismissible"?: boolean;
@@ -2936,6 +4796,10 @@ declare namespace LocalJSX {
          */
         "onDismissClick"?: (event: ModusToastCustomEvent<any>) => void;
         /**
+          * (optional) Role taken by the toast.  Defaults to 'status'.
+         */
+        "role"?: string | null;
+        /**
           * (optional) Whether to show the toasts' icon.
          */
         "showIcon"?: boolean;
@@ -2943,6 +4807,16 @@ declare namespace LocalJSX {
           * (optional) The toasts' type.
          */
         "type"?: 'danger' | 'dark' | 'default' | 'primary' | 'secondary' | 'success' | 'warning';
+    }
+    interface ModusToolbar {
+        /**
+          * (optional) The button's aria-label.
+         */
+        "ariaLabel"?: string | null;
+        /**
+          * (optional) Disables the button.
+         */
+        "disabled"?: boolean;
     }
     interface ModusTooltip {
         /**
@@ -2956,13 +4830,17 @@ declare namespace LocalJSX {
         /**
           * (optional) The tooltip's position relative to its content.
          */
-        "position"?: 'bottom' | 'left' | 'right' | 'top';
+        "position"?: ModusToolTipPlacement;
         /**
           * The tooltip's text.
          */
         "text"?: string;
     }
     interface ModusTreeView {
+        /**
+          * (optional) Whether the content tree and items have a border or not
+         */
+        "borderless"?: boolean;
         /**
           * (optional) Enables checkbox selection on each tree item
          */
@@ -2976,6 +4854,10 @@ declare namespace LocalJSX {
          */
         "disableTabbing"?: boolean;
         /**
+          * (optional) Sets draggable state to be true to all the children
+         */
+        "enableReordering"?: boolean;
+        /**
           * (optional) Set expanded tree items
          */
         "expandedItems"?: string[];
@@ -2988,6 +4870,12 @@ declare namespace LocalJSX {
          */
         "multiSelection"?: boolean;
         /**
+          * Fired when an action is clicked within any tree item. Includes both the `actionId` and `nodeId` of the action and item, respectively.
+         */
+        "onItemActionClick"?: (event: ModusTreeViewCustomEvent<any>) => void;
+        "onItemDrop"?: (event: ModusTreeViewCustomEvent<{ [key: string]: TreeViewItemInfo }>) => void;
+        "onItemSelectionChange"?: (event: ModusTreeViewCustomEvent<TreeItemSelectionChange>) => void;
+        /**
           * (optional) Set selected tree items
          */
         "selectedItems"?: string[];
@@ -2997,6 +4885,10 @@ declare namespace LocalJSX {
         "size"?: 'condensed' | 'large' | 'standard';
     }
     interface ModusTreeViewItem {
+        /**
+          * (optional) Actions that can be performed on each item. A maximum of 3 icons will be shown, including overflow menu and expand icons.
+         */
+        "actions"?: ModusActionBarOptions1[];
         /**
           * (optional) Disables the tree item
          */
@@ -3014,6 +4906,10 @@ declare namespace LocalJSX {
          */
         "editable"?: boolean;
         /**
+          * To be set true when the tree item is an expandable last child
+         */
+        "isLastChild"?: boolean;
+        /**
           * (required) Label for the tree item
          */
         "label": string;
@@ -3021,6 +4917,10 @@ declare namespace LocalJSX {
           * (required) Unique tree item identifier
          */
         "nodeId": string;
+        /**
+          * Fired when an action button within the tree item is clicked. Includes the `actionId`.
+         */
+        "onActionClick"?: (event: ModusTreeViewItemCustomEvent<any>) => void;
         /**
           * An event that fires on tree item checkbox click
          */
@@ -3035,26 +4935,54 @@ declare namespace LocalJSX {
          */
         "onItemExpandToggle"?: (event: ModusTreeViewItemCustomEvent<boolean>) => void;
         /**
+          * An event that fires on tree item label changes
+         */
+        "onItemLabelChange"?: (event: ModusTreeViewItemCustomEvent<string>) => void;
+        "onItemSelectionChange"?: (event: ModusTreeViewItemCustomEvent<TreeItemSelectionChange>) => void;
+        /**
           * (optional) Tab Index for the tree item
          */
         "tabIndexValue"?: string | number;
     }
+    interface ModusUtilityPanel {
+        /**
+          * The panel is expanded or closed
+         */
+        "expanded"?: boolean;
+        /**
+          * An event that fires when the panel is closed.
+         */
+        "onPanelClosed"?: (event: ModusUtilityPanelCustomEvent<void>) => void;
+        /**
+          * An event that fires when the panel is opened.
+         */
+        "onPanelOpened"?: (event: ModusUtilityPanelCustomEvent<void>) => void;
+        /**
+          * Determines if the panel pushes content or displays an overlay.
+         */
+        "pushContent"?: boolean;
+        "targetContent"?: string;
+    }
     interface IntrinsicElements {
         "modus-accordion": ModusAccordion;
         "modus-accordion-item": ModusAccordionItem;
+        "modus-action-bar": ModusActionBar;
         "modus-alert": ModusAlert;
         "modus-autocomplete": ModusAutocomplete;
         "modus-badge": ModusBadge;
         "modus-breadcrumb": ModusBreadcrumb;
         "modus-button": ModusButton;
+        "modus-button-group": ModusButtonGroup;
         "modus-card": ModusCard;
         "modus-checkbox": ModusCheckbox;
         "modus-chip": ModusChip;
         "modus-data-table": ModusDataTable;
         "modus-date-input": ModusDateInput;
         "modus-date-picker": ModusDatePicker;
+        "modus-divider": ModusDivider;
         "modus-dropdown": ModusDropdown;
         "modus-file-dropzone": ModusFileDropzone;
+        "modus-icon": ModusIcon;
         "modus-list": ModusList;
         "modus-list-item": ModusListItem;
         "modus-message": ModusMessage;
@@ -3071,18 +4999,32 @@ declare namespace LocalJSX {
         "modus-progress-bar": ModusProgressBar;
         "modus-radio-group": ModusRadioGroup;
         "modus-select": ModusSelect;
+        "modus-sentiment-scale": ModusSentimentScale;
         "modus-side-navigation": ModusSideNavigation;
         "modus-side-navigation-item": ModusSideNavigationItem;
         "modus-slider": ModusSlider;
         "modus-spinner": ModusSpinner;
         "modus-switch": ModusSwitch;
+        "modus-table": ModusTable;
+        "modus-table-cell-editor": ModusTableCellEditor;
+        "modus-table-cell-main": ModusTableCellMain;
+        "modus-table-columns-visibility": ModusTableColumnsVisibility;
+        "modus-table-dropdown-menu": ModusTableDropdownMenu;
+        "modus-table-filler-column": ModusTableFillerColumn;
+        "modus-table-row-actions": ModusTableRowActions;
+        "modus-table-row-actions-cell": ModusTableRowActionsCell;
+        "modus-table-row-actions-menu": ModusTableRowActionsMenu;
+        "modus-table-toolbar": ModusTableToolbar;
         "modus-tabs": ModusTabs;
         "modus-text-input": ModusTextInput;
+        "modus-textarea-input": ModusTextareaInput;
         "modus-time-picker": ModusTimePicker;
         "modus-toast": ModusToast;
+        "modus-toolbar": ModusToolbar;
         "modus-tooltip": ModusTooltip;
         "modus-tree-view": ModusTreeView;
         "modus-tree-view-item": ModusTreeViewItem;
+        "modus-utility-panel": ModusUtilityPanel;
     }
 }
 export { LocalJSX as JSX };
@@ -3091,19 +5033,23 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "modus-accordion": LocalJSX.ModusAccordion & JSXBase.HTMLAttributes<HTMLModusAccordionElement>;
             "modus-accordion-item": LocalJSX.ModusAccordionItem & JSXBase.HTMLAttributes<HTMLModusAccordionItemElement>;
+            "modus-action-bar": LocalJSX.ModusActionBar & JSXBase.HTMLAttributes<HTMLModusActionBarElement>;
             "modus-alert": LocalJSX.ModusAlert & JSXBase.HTMLAttributes<HTMLModusAlertElement>;
             "modus-autocomplete": LocalJSX.ModusAutocomplete & JSXBase.HTMLAttributes<HTMLModusAutocompleteElement>;
             "modus-badge": LocalJSX.ModusBadge & JSXBase.HTMLAttributes<HTMLModusBadgeElement>;
             "modus-breadcrumb": LocalJSX.ModusBreadcrumb & JSXBase.HTMLAttributes<HTMLModusBreadcrumbElement>;
             "modus-button": LocalJSX.ModusButton & JSXBase.HTMLAttributes<HTMLModusButtonElement>;
+            "modus-button-group": LocalJSX.ModusButtonGroup & JSXBase.HTMLAttributes<HTMLModusButtonGroupElement>;
             "modus-card": LocalJSX.ModusCard & JSXBase.HTMLAttributes<HTMLModusCardElement>;
             "modus-checkbox": LocalJSX.ModusCheckbox & JSXBase.HTMLAttributes<HTMLModusCheckboxElement>;
             "modus-chip": LocalJSX.ModusChip & JSXBase.HTMLAttributes<HTMLModusChipElement>;
             "modus-data-table": LocalJSX.ModusDataTable & JSXBase.HTMLAttributes<HTMLModusDataTableElement>;
             "modus-date-input": LocalJSX.ModusDateInput & JSXBase.HTMLAttributes<HTMLModusDateInputElement>;
             "modus-date-picker": LocalJSX.ModusDatePicker & JSXBase.HTMLAttributes<HTMLModusDatePickerElement>;
+            "modus-divider": LocalJSX.ModusDivider & JSXBase.HTMLAttributes<HTMLModusDividerElement>;
             "modus-dropdown": LocalJSX.ModusDropdown & JSXBase.HTMLAttributes<HTMLModusDropdownElement>;
             "modus-file-dropzone": LocalJSX.ModusFileDropzone & JSXBase.HTMLAttributes<HTMLModusFileDropzoneElement>;
+            "modus-icon": LocalJSX.ModusIcon & JSXBase.HTMLAttributes<HTMLModusIconElement>;
             "modus-list": LocalJSX.ModusList & JSXBase.HTMLAttributes<HTMLModusListElement>;
             "modus-list-item": LocalJSX.ModusListItem & JSXBase.HTMLAttributes<HTMLModusListItemElement>;
             "modus-message": LocalJSX.ModusMessage & JSXBase.HTMLAttributes<HTMLModusMessageElement>;
@@ -3120,18 +5066,35 @@ declare module "@stencil/core" {
             "modus-progress-bar": LocalJSX.ModusProgressBar & JSXBase.HTMLAttributes<HTMLModusProgressBarElement>;
             "modus-radio-group": LocalJSX.ModusRadioGroup & JSXBase.HTMLAttributes<HTMLModusRadioGroupElement>;
             "modus-select": LocalJSX.ModusSelect & JSXBase.HTMLAttributes<HTMLModusSelectElement>;
+            "modus-sentiment-scale": LocalJSX.ModusSentimentScale & JSXBase.HTMLAttributes<HTMLModusSentimentScaleElement>;
             "modus-side-navigation": LocalJSX.ModusSideNavigation & JSXBase.HTMLAttributes<HTMLModusSideNavigationElement>;
             "modus-side-navigation-item": LocalJSX.ModusSideNavigationItem & JSXBase.HTMLAttributes<HTMLModusSideNavigationItemElement>;
             "modus-slider": LocalJSX.ModusSlider & JSXBase.HTMLAttributes<HTMLModusSliderElement>;
             "modus-spinner": LocalJSX.ModusSpinner & JSXBase.HTMLAttributes<HTMLModusSpinnerElement>;
             "modus-switch": LocalJSX.ModusSwitch & JSXBase.HTMLAttributes<HTMLModusSwitchElement>;
+            "modus-table": LocalJSX.ModusTable & JSXBase.HTMLAttributes<HTMLModusTableElement>;
+            "modus-table-cell-editor": LocalJSX.ModusTableCellEditor & JSXBase.HTMLAttributes<HTMLModusTableCellEditorElement>;
+            "modus-table-cell-main": LocalJSX.ModusTableCellMain & JSXBase.HTMLAttributes<HTMLModusTableCellMainElement>;
+            "modus-table-columns-visibility": LocalJSX.ModusTableColumnsVisibility & JSXBase.HTMLAttributes<HTMLModusTableColumnsVisibilityElement>;
+            "modus-table-dropdown-menu": LocalJSX.ModusTableDropdownMenu & JSXBase.HTMLAttributes<HTMLModusTableDropdownMenuElement>;
+            /**
+             * ModusFillerColumn is to fill empty space within a table or grid when the content in other columns is not wide enough to occupy the entire available width
+             */
+            "modus-table-filler-column": LocalJSX.ModusTableFillerColumn & JSXBase.HTMLAttributes<HTMLModusTableFillerColumnElement>;
+            "modus-table-row-actions": LocalJSX.ModusTableRowActions & JSXBase.HTMLAttributes<HTMLModusTableRowActionsElement>;
+            "modus-table-row-actions-cell": LocalJSX.ModusTableRowActionsCell & JSXBase.HTMLAttributes<HTMLModusTableRowActionsCellElement>;
+            "modus-table-row-actions-menu": LocalJSX.ModusTableRowActionsMenu & JSXBase.HTMLAttributes<HTMLModusTableRowActionsMenuElement>;
+            "modus-table-toolbar": LocalJSX.ModusTableToolbar & JSXBase.HTMLAttributes<HTMLModusTableToolbarElement>;
             "modus-tabs": LocalJSX.ModusTabs & JSXBase.HTMLAttributes<HTMLModusTabsElement>;
             "modus-text-input": LocalJSX.ModusTextInput & JSXBase.HTMLAttributes<HTMLModusTextInputElement>;
+            "modus-textarea-input": LocalJSX.ModusTextareaInput & JSXBase.HTMLAttributes<HTMLModusTextareaInputElement>;
             "modus-time-picker": LocalJSX.ModusTimePicker & JSXBase.HTMLAttributes<HTMLModusTimePickerElement>;
             "modus-toast": LocalJSX.ModusToast & JSXBase.HTMLAttributes<HTMLModusToastElement>;
+            "modus-toolbar": LocalJSX.ModusToolbar & JSXBase.HTMLAttributes<HTMLModusToolbarElement>;
             "modus-tooltip": LocalJSX.ModusTooltip & JSXBase.HTMLAttributes<HTMLModusTooltipElement>;
             "modus-tree-view": LocalJSX.ModusTreeView & JSXBase.HTMLAttributes<HTMLModusTreeViewElement>;
             "modus-tree-view-item": LocalJSX.ModusTreeViewItem & JSXBase.HTMLAttributes<HTMLModusTreeViewItemElement>;
+            "modus-utility-panel": LocalJSX.ModusUtilityPanel & JSXBase.HTMLAttributes<HTMLModusUtilityPanelElement>;
         }
     }
 }

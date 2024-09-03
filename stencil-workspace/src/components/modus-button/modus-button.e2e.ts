@@ -170,4 +170,32 @@ describe('modus-button', () => {
     await page.waitForChanges();
     expect(buttonClick).not.toHaveReceivedEvent();
   });
+
+  it('renders aria-label on alert div when set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-button aria-label="test label"></modus-button>');
+    let element = await page.find('modus-button >>> button');
+    expect(element).toBeDefined();
+    expect(element).toHaveAttribute('aria-label');
+    expect(element.getAttribute('aria-label')).toEqual('test label');
+  });
+
+  it('does not render aria-label on alert div when not set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-button></modus-button>');
+    let element = await page.find('modus-button >>> button');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
+
+  it('does not render aria-label on alert div when set to empty string', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-button aria-label=""></modus-button>');
+    let element = await page.find('modus-button >>> button');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
 });

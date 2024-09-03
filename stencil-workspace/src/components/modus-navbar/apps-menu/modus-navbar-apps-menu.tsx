@@ -36,7 +36,7 @@ export class ModusNavbarAppsMenu {
           <div class="app-div">
             {app.showCategory ? <div class="category">{app.category}</div> : null}
             <a class="app" href={app.url} onClick={(event) => this.clickAppHandler(event, app)}>
-              <img src={app.logoUrl} />
+              <img src={app.logoUrl} alt="" height="32" width="32" />
               <div class="right">
                 <div class="name">{app.name}</div>
                 {app.description ? <div class="description">{app.description}</div> : null}

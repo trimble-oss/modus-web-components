@@ -23,14 +23,22 @@ jobs:
       packages: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Setup Node, build, and publish to the npm, and GitHub registries
       - name: Setup Node.js environment
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
+
+      - name: Install Modus Web Components
+        run: npm ci
+        working-directory: ./stencil-workspace
+
+      - name: Build Modus Web Components
+        run: npm run build
+        working-directory: ./stencil-workspace
 
       - name: Install React ${{ github.event.inputs.reactVersion }}
         run: npm ci

@@ -1,0 +1,32 @@
+@import '../../modus-table.vars';
+
+modus-table-filler-column {
+  z-index: 0;
+
+  .d-none {
+    display: none;
+  }
+
+  table {
+    thead tr,
+    tfoot tr {
+      height: inherit;
+    }
+  }
+
+  table:not(.cell-borderless) {
+    td,
+    th {
+      &:last-child {
+        border-right: none;
+      }
+    }
+
+    tbody td,
+    thead th {
+      &:first-child {
+        border-left: $rem-1px $modus-table-border-color solid !important;
+      }
+    }
+  }
+}

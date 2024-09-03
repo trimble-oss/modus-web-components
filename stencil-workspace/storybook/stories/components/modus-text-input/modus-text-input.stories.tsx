@@ -12,6 +12,45 @@ export default {
         type: { summary: 'string' },
       },
     },
+    autocapitalize: {
+      name: 'autocapitalize',
+      control: {
+        options: [
+          'none',
+          'off',
+          'sentences',
+          'on',
+          'words',
+          'characters'
+        ],
+        type: 'select',
+      },
+      description: "Capitalization behavior when using a non-traditional keyboard (e.g. microphone, touch screen)",
+      table: {
+        type: { summary: `'none' | 'off' | 'sentences' | 'on' | 'words' | 'characters'` },
+      },
+    },
+    autocomplete: {
+      name: 'autocomplete',
+      description: "The text input's autocomplete",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    autocorrect: {
+      name: 'autocorrect',
+      control: {
+        options: [
+          'off',
+          'on'
+        ],
+        type: 'select',
+      },
+      description: "Whether to activate automatic correction while the user is editing this field in Safari",
+      table: {
+        type: { summary: `boolean | 'off' | 'on'` },
+      },
+    },
     autoFocusInput: {
       name: 'auto-focus-input',
       description: 'Sets autofocus for the input',
@@ -33,6 +72,24 @@ export default {
         type: { summary: 'boolean' },
       },
     },
+    enterkeyhint: {
+      control: {
+        options: [
+          'enter',
+          'done',
+          'go',
+          'next',
+          'previous',
+          'search',
+          'send'
+        ],
+        type: 'select',
+      },
+      description: 'Which action label to present for the enter key on virtual keyboards',
+      table: {
+        type: { summary: `'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send'` },
+      },
+    },
     errorText: {
       name: 'error-text',
       description: "The text input's error text",
@@ -45,6 +102,14 @@ export default {
       description: "The text input's helper text",
       table: {
         type: { summary: 'string' },
+      },
+    },
+    includeErrorIcon: {
+      name: 'include-error-icon',
+      description: 'Whether to include the error icon',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
       },
     },
     includePasswordTextToggle: {
@@ -104,6 +169,12 @@ export default {
         type: { summary: 'string' },
       },
     },
+    pattern: {
+      description: "The text input's pattern attribute",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
     placeholder: {
       description: "The text input's placeholder text",
       table: {
@@ -136,6 +207,16 @@ export default {
         type: { summary: "'medium' | 'large'" },
       },
     },
+    spellcheck: {
+      control: {
+        type: 'boolean'
+      },
+      name: 'spellcheck',
+      description: "Whether to enable spell checking.",
+      table: {
+        type: { summary: 'boolean' },
+      },
+    },
     textAlign: {
       name: 'text-align',
       control: {
@@ -156,13 +237,13 @@ export default {
     },
     type: {
       control: {
-        options: ['text', 'password'],
+        options: ['email', 'password', 'search', 'tel', 'text', 'url'],
         type: 'select',
       },
       description: 'The input type',
       table: {
         defaultValue: { summary: "'text'" },
-        type: { summary: "'text' | 'password'" },
+        type: { summary: "'email' | 'password' | 'search' | 'tel' | 'text' | 'url'" },
       },
     },
     validText: {
@@ -195,69 +276,92 @@ export default {
 
 const Template = ({
   ariaLabel,
+  autocapitalize,
+  autocomplete,
+  autocorrect,
   autoFocusInput,
   clearable,
   disabled,
+  enterkeyhint,
   errorText,
   helperText,
+  includeErrorIcon,
   includePasswordTextToggle,
   includeSearchIcon,
   inputmode,
   label,
   maxLength,
   minLength,
+  pattern,
   placeholder,
   readOnly,
   required,
   size,
+  spellcheck,
   textAlign,
   type,
   validText,
   value,
 }) => html`
+<form>
   <modus-text-input
     aria-label=${ariaLabel}
+    autocapitalize=${autocapitalize}
+    autocomplete=${autocomplete}
+    autocorrect=${autocorrect}
     auto-focus-input=${autoFocusInput}
     clearable=${clearable}
-    disabled=${disabled}
+    ?disabled=${disabled}
+    enterkeyhint=${enterkeyhint}
     error-text=${errorText}
     helper-text=${helperText}
+    include-error-icon=${includeErrorIcon}
     include-password-text-toggle=${includePasswordTextToggle}
     include-search-icon=${includeSearchIcon}
     inputmode=${inputmode}
     label=${label}
     max-length=${maxLength}
     min-length=${minLength}
+    pattern=${pattern}
     placeholder=${placeholder}
     read-only=${readOnly}
-    required=${required}
+    ?required=${required}
     size=${size}
+    ?spellcheck=${spellcheck}
     text-align=${textAlign}
     type=${type}
     valid-text=${validText}
     value=${value}></modus-text-input>
+</form>
 `;
 
 export const Default = Template.bind({});
 Default.args = {
-  ariaLabel: 'Text Input',
+  ariaLabel: '',
+  autocapitalize: undefined,
+  autocomplete: '',
+  autocorrect: null,
   autoFocusInput: true,
   clearable: false,
   disabled: false,
+  enterkeyhint: undefined,
   errorText: '',
   helperText: '',
+  includeErrorIcon: false,
   includePasswordTextToggle: true,
   includeSearchIcon: false,
   inputmode: '',
-  label: '',
-  maxLength: 100,
+  label: 'Username',
+  maxLength: 20,
   minLength: 0,
+  pattern: '',
   placeholder: '',
   readOnly: false,
   required: false,
   size: 'medium',
+  spellcheck: false,
   textAlign: 'left',
   type: 'text',
   validText: '',
-  value: 'Hello, text input!',
+  value: '',
 };

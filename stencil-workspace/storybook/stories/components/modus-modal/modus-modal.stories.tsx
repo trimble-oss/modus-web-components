@@ -28,7 +28,7 @@ export default {
     },
     primaryButtonDisabled: {
       name: 'primaryButtonDisabled',
-      description: "Disable primary button",
+      description: 'Disable primary button',
       table: {
         type: { summary: 'boolean' },
       },
@@ -49,7 +49,7 @@ export default {
     },
     secondaryButtonDisabled: {
       name: 'secondaryButtonDisabled',
-      description: "Disable secondary button",
+      description: 'Disable secondary button',
       table: {
         type: { summary: 'boolean' },
       },
@@ -75,10 +75,17 @@ export default {
         type: { summary: 'string' },
       },
     },
+    fullscreen: {
+      name: 'fullscreen',
+      description: "The modal's full screen view",
+      table: {
+        type: { summary: 'boolean' },
+      },
+    },
   },
   parameters: {
     actions: {
-      handles: ['closed', 'primaryButtonClick', 'secondaryButtonClick'],
+      handles: ['closed', 'primaryButtonClick', 'secondaryButtonClick', 'buttonClick'],
     },
     docs: {
       inlineStories: false,
@@ -92,25 +99,39 @@ export default {
   },
 };
 
-const Template = ({ ariaLabel, headerText, primaryButtonAriaLabel,primaryButtonDisabled, primaryButtonText, secondaryButtonAriaLabel, secondaryButtonDisabled, secondaryButtonText, zIndex, backdrop  }) => html`
+const Template = ({
+  ariaLabel,
+  headerText,
+  primaryButtonAriaLabel,
+  primaryButtonDisabled,
+  primaryButtonText,
+  secondaryButtonAriaLabel,
+  secondaryButtonDisabled,
+  secondaryButtonText,
+  zIndex,
+  backdrop,
+  fullscreen,
+}) => html`
   <modus-button id="btn-modal" color="primary">Open modal</modus-button>
   <modus-modal
-  aria-label=${ariaLabel}
-  header-text=${headerText}
-  primary-button-aria-label=${primaryButtonAriaLabel}
-  primary-button-disabled=${primaryButtonDisabled}
-  primary-button-text=${primaryButtonText}
-  secondary-button-aria-label=${secondaryButtonAriaLabel}  secondary-button-disabled=${secondaryButtonDisabled}
-  secondary-button-text=${secondaryButtonText}
-  z-index=${zIndex}
-  backdrop=${backdrop}>
+    aria-label=${ariaLabel}
+    header-text=${headerText}
+    primary-button-aria-label=${primaryButtonAriaLabel}
+    primary-button-disabled=${primaryButtonDisabled}
+    primary-button-text=${primaryButtonText}
+    secondary-button-aria-label=${secondaryButtonAriaLabel}
+    secondary-button-disabled=${secondaryButtonDisabled}
+    secondary-button-text=${secondaryButtonText}
+    z-index=${zIndex}
+    backdrop=${backdrop}
+    fullscreen=${fullscreen}>
     <p>Woo-hoo, you're reading this text in a modal!</p>
   </modus-modal>
   ${setScript()}
 `;
 export const Default = Template.bind({});
 Default.args = {
-  ariaLabel: 'Modal',
+  ariaLabel: '',
   headerText: 'Modal title',
   primaryButtonAriaLabel: 'Save changes',
   primaryButtonDisabled: false,
@@ -119,7 +140,42 @@ Default.args = {
   secondaryButtonDisabled: false,
   secondaryButtonText: 'Sweet',
   zIndex: '1',
-  backdrop: 'default'};
+  backdrop: 'default',
+  fullscreen: false,
+};
+
+const CustomFooterTemplate = ({ ariaLabel, headerText, zIndex, backdrop, fullscreen }) => html`
+  <modus-button id="btn-modal" color="primary">Open modal</modus-button>
+  <modus-modal
+    aria-label=${ariaLabel}
+    header-text=${headerText}
+    z-index=${zIndex}
+    backdrop=${backdrop}
+    fullscreen=${fullscreen}>
+    <p>
+      A dialog or a modal is a window overlaid on the primary window. It interrupts the user and requires an action. It
+      disables the main content until the user explicitly interacts with the modal dialog.
+    </p>
+    <div
+      style="align-items: center;
+    display: flex;
+    justify-content: flex-end; gap: 8px; height:100%;"
+      slot="footerContent">
+      <modus-button color="tertiary">Cancel</modus-button>
+      <modus-button color="secondary">Check later</modus-button>
+      <modus-button color="primary">Approve</modus-button>
+    </div>
+  </modus-modal>
+  ${setScript()}
+`;
+export const CustomFooter = CustomFooterTemplate.bind({});
+CustomFooter.args = {
+  ariaLabel: '',
+  headerText: 'Modal title',
+  zIndex: '1',
+  backdrop: 'default',
+  fullscreen: false,
+};
 
 const setScript = () => {
   const tag = document.createElement('script');

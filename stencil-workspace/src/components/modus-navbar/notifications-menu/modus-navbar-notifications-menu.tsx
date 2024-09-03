@@ -14,7 +14,6 @@ export class ModusNavbarNotificationsMenu {
 
     return (
       <div class={`notifications-menu ${direction}`} onClick={(event) => event.preventDefault()}>
-        <div class="title">Notifications</div>
         <slot />
       </div>
     );

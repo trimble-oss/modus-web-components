@@ -1,7 +1,16 @@
-// eslint-disable-next-line
-import { Component, Event, EventEmitter, h, Prop, State, Watch } from '@stencil/core';
-import { IconChevronLeftThick } from '../icons/icon-chevron-left-thick';
-import { IconChevronRightThick } from '../icons/icon-chevron-right-thick';
+import {
+  Component,
+  Event,
+  EventEmitter,
+  h, // eslint-disable-line @typescript-eslint/no-unused-vars
+  JSX,
+  Prop,
+  State,
+  Watch,
+} from '@stencil/core';
+import { PaginationDirection } from './enums/pagination-direction.enum';
+import { IconChevronLeft } from '../../icons/generated-icons/IconChevronLeft';
+import { IconChevronRight } from '../../icons/generated-icons/IconChevronRight';
 
 @Component({
   tag: 'modus-pagination',
@@ -13,7 +22,7 @@ export class ModusPagination {
   @Prop() ariaLabel: string | null;
 
   /* The active page. */
-  @Prop({ mutable: true }) activePage: number;
+  @Prop({ mutable: true }) activePage = 1;
   @Watch('activePage')
   activePageWatch(newValue: number, oldValue: number) {
     if (newValue !== oldValue) {
@@ -26,6 +35,12 @@ export class ModusPagination {
 
   /* The minimum page value. */
   @Prop() minPage: number;
+
+  /* The previous page button text. If not set, an icon control will be used. */
+  @Prop() prevPageButtonText?: string;
+
+  /* The next page button text. If not set, an icon control will be used. */
+  @Prop() nextPageButtonText?: string;
 
   /* The pagination's size. */
   @Prop() size: 'large' | 'medium' | 'small' = 'medium';
@@ -40,6 +55,9 @@ export class ModusPagination {
   }
 
   componentWillRender(): void {
+    if (this.activePage === undefined || isNaN(this.activePage)) {
+      this.activePage = 1;
+    }
     this.setPages();
   }
 
@@ -61,7 +79,7 @@ export class ModusPagination {
     const ellipsis = '...';
 
     // Always show the first page.
-    pages.push(this.minPage);
+    this.maxPage > 1 && pages.push(this.minPage);
 
     if (this.maxPage - this.minPage < 7) {
       // No need for ellipsis for 7 pages - push all of them.
@@ -91,28 +109,26 @@ export class ModusPagination {
     this.pages = pages;
   }
 
-  handleChevronClick(way: 'back' | 'forward'): void {
-    if (way === 'back' && this.activePage != this.minPage) {
+  handleChevronClick(direction: PaginationDirection): void {
+    if (direction === PaginationDirection.Previous && this.activePage !== this.minPage) {
       this.activePage--;
-    } else if (way === 'forward' && this.activePage != this.maxPage) {
+    } else if (direction === PaginationDirection.Next && this.activePage !== this.maxPage) {
       this.activePage++;
     }
   }
 
-  handleKeydownBack(event: KeyboardEvent): void {
-    if (event.code !== 'Enter') {
-      return;
+  handleChevronKeydown(event: KeyboardEvent, direction: PaginationDirection): void {
+    if (event.key.toLowerCase() === 'enter') {
+      this.handleChevronClick(direction);
+      event.preventDefault();
     }
-
-    this.handleChevronClick('back');
   }
 
-  handleKeydownForward(event: KeyboardEvent): void {
-    if (event.code !== 'Enter') {
-      return;
+  handlePageKeydown(event: KeyboardEvent, page: number): void {
+    if (event.key.toLowerCase() === 'enter') {
+      this.handlePageClick(page);
+      event.preventDefault();
     }
-
-    this.handleChevronClick('forward');
   }
 
   handlePageClick(page: number): void {
@@ -121,41 +137,83 @@ export class ModusPagination {
     }
   }
 
+  renderPreviousPageControl(): JSX.Element[] {
+    return (
+      this.maxPage - this.minPage >= 7 && (
+        <li>
+          <button
+            aria-label="Previous"
+            class={`${this.activePage != this.minPage ? 'hoverable' : 'disabled'}`}
+            disabled={this.activePage === this.minPage}
+            onClick={() => this.handleChevronClick(PaginationDirection.Previous)}
+            onKeyDown={(event) => this.handleChevronKeydown(event, PaginationDirection.Previous)}>
+            {this.prevPageButtonText ? (
+              <span data-test-id="prev-button-text">{this.prevPageButtonText}</span>
+            ) : (
+              <IconChevronLeft size={this.chevronSizeBySize.get(this.size)} />
+            )}
+          </button>
+        </li>
+      )
+    );
+  }
+
+  renderNextPageControl(): JSX.Element[] {
+    return (
+      this.maxPage - this.minPage >= 7 && (
+        <li>
+          <button
+            aria-label="Next"
+            class={`${this.activePage != this.maxPage ? 'hoverable' : 'disabled'}`}
+            disabled={this.activePage === this.maxPage}
+            onClick={() => this.handleChevronClick(PaginationDirection.Next)}
+            onKeyDown={(event) => this.handleChevronKeydown(event, PaginationDirection.Next)}>
+            {this.nextPageButtonText ? (
+              <span data-test-id="next-button-text">{this.nextPageButtonText}</span>
+            ) : (
+              <IconChevronRight size={this.chevronSizeBySize.get(this.size)} />
+            )}
+          </button>
+        </li>
+      )
+    );
+  }
+
+  renderPageNumbers(): JSX.Element[] {
+    return this.pages.map((page) => {
+      const isCurrentPage = page === this.activePage;
+
+      if (page === '...') {
+        return (
+          <li>
+            <button class={`${!isNaN(+page) ? 'hoverable' : ''}`} tabIndex={-1}>
+              {page}
+            </button>
+          </li>
+        );
+      }
+
+      return (
+        <li>
+          <button
+            aria-current={isCurrentPage ? 'page' : null}
+            class={`${page === this.activePage ? 'active' : ''} ${!isNaN(+page) ? 'hoverable' : ''}`}
+            onClick={() => this.handlePageClick(+page)}
+            onKeyDown={(event: KeyboardEvent) => this.handlePageKeydown(event, +page)}>
+            {page}
+          </button>
+        </li>
+      );
+    });
+  }
+
   render(): unknown {
     return (
-      <nav aria-label={this.ariaLabel} class={`${this.classBySize.get(this.size)}`}>
+      <nav aria-label={this.ariaLabel || undefined} class={`${this.classBySize.get(this.size)}`}>
         <ul>
-          {this.maxPage - this.minPage >= 7 && (
-            <li
-              class={`${this.activePage != this.minPage ? 'hoverable' : 'disabled'}`}
-              onClick={() => this.handleChevronClick('back')}
-              onKeyDown={(event) => this.handleKeydownBack(event)}
-              tabIndex={0}
-              aria-label="Previous">
-              <IconChevronLeftThick size={this.chevronSizeBySize.get(this.size)} />
-            </li>
-          )}
-          {this.pages.map((page) => {
-            const isCurrentPage = page === this.activePage;
-            return (
-              <li
-                aria-current={isCurrentPage ? 'page' : null}
-                class={`${isCurrentPage ? 'active' : ''} ${!isNaN(+page) ? 'hoverable' : ''}`}
-                onClick={() => this.handlePageClick(+page)}>
-                {page}
-              </li>
-            );
-          })}
-          {this.maxPage - this.minPage >= 7 && (
-            <li
-              class={`${this.activePage != this.maxPage ? 'hoverable' : 'disabled'}`}
-              onClick={() => this.handleChevronClick('forward')}
-              onKeyDown={(event) => this.handleKeydownForward(event)}
-              tabIndex={0}
-              aria-label="Next">
-              <IconChevronRightThick size={this.chevronSizeBySize.get(this.size)} />
-            </li>
-          )}
+          {this.renderPreviousPageControl()}
+          {this.renderPageNumbers()}
+          {this.renderNextPageControl()}
         </ul>
       </nav>
     );

@@ -1,8 +1,8 @@
 // eslint-disable-next-line
 import { Component, Prop, h } from '@stencil/core';
-import { IconInfo } from '../icons/icon-info';
-import { IconHelp } from '../icons/icon-help';
-import { IconMap } from '../icons/IconMap';
+import { IconInfo } from '../../icons/generated-icons/IconInfo';
+import { IconHelp } from '../../icons/generated-icons/IconHelp';
+import { ModusIconMap } from '../../icons/ModusIconMap';
 
 @Component({
   tag: 'modus-message',
@@ -28,10 +28,10 @@ export class ModusMessage {
     const className = `modus-message ${this.classByType.get(this.type)}`;
 
     return (
-      <div aria-label={this.ariaLabel} class={className} role="note">
+      <div aria-label={this.ariaLabel || undefined} class={className} role="note">
         <span class="icon">
           {this.icon ? (
-            <IconMap icon={this.icon} size="18" />
+            <ModusIconMap icon={this.icon} size="18" />
           ) : this.type === 'info' ? (
             <IconInfo size="18" />
           ) : this.type === 'question' ? (

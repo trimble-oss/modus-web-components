@@ -57,12 +57,12 @@ export interface ModusDataTableRowAction {
   };
 }
 
-export interface ModusTableSelectionOptions {
+export interface ModusDataTableSelectionOptions {
   canSelect: boolean;
   checkboxSelection: boolean;
 }
 
-export interface ModusTableSortOptions {
+export interface ModusDataTableSortOptions {
   canSort: boolean;
   serverSide: boolean;
 }

@@ -94,18 +94,14 @@ export default {
     textAlign: {
       name: 'text-align',
       control: {
-        options: [
-          'left',
-          'right'
-        ],
+        options: ['left', 'right'],
         type: 'select',
       },
       description: 'text alignment for the number input.',
       table: {
         defaultValue: { summary: "'left'" },
         type: {
-          summary:
-            "'left' | 'right'",
+          summary: "'left' | 'right'",
         },
       },
     },
@@ -156,7 +152,7 @@ const Template = ({
 }) => html`
   <modus-number-input
     aria-label=${ariaLabel}
-    disabled=${disabled}
+    ?disabled=${disabled}
     error-text=${errorText}
     helper-text=${helperText}
     label=${label}
@@ -164,7 +160,7 @@ const Template = ({
     min-value=${minValue}
     placeholder=${placeholder}
     read-only=${readOnly}
-    required=${required}
+    ?required=${required}
     size=${size}
     step=${step}
     text-align=${textAlign}
@@ -174,11 +170,11 @@ const Template = ({
 
 export const Default = Template.bind({});
 Default.args = {
-  ariaLabel: 'Number Input',
+  ariaLabel: '',
   disabled: false,
   errorText: '',
   helperText: '',
-  label: '',
+  label: 'Number Input',
   maxValue: 100,
   minValue: 0,
   placeholder: '',

@@ -36,8 +36,15 @@
     }
   }
 
+  .input-container {
+    input {
+      font-family: $primary-font;
+    }
+  }
+
   .calendar-container {
     background-color: $modus-date-picker-calendar-body-bg;
+    border-radius: 4px;
     box-shadow: 0 0 4px #00000029;
     display: flex;
     flex-direction: column;
@@ -46,9 +53,16 @@
     position: absolute;
     z-index: 1;
 
+    &[data-popper-reference-hidden] {
+      pointer-events: none;
+      visibility: hidden;
+    }
+
     .calendar-header {
       align-items: center;
       background-color: $modus-date-picker-calendar-header-bg;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
       color: $modus-date-picker-calendar-header-color;
       display: flex;
       font: normal normal 600 16px/22px $primary-font;
@@ -87,14 +101,6 @@
         button:active {
           opacity: 0.5;
         }
-
-        button:first-child {
-          transform: rotate(180deg) scaleX(-1);
-        }
-
-        svg {
-          padding: 0.125rem;
-        }
       }
     }
 
@@ -118,6 +124,16 @@
           justify-content: center;
           width: 32px;
         }
+      }
+
+      .out-of-range-notification {
+        margin-top: 0.6rem;
+        text-align: center;
+      }
+
+      .goto-available-dates {
+        color: $modus-date-picker-calendar-body-goto-text;
+        cursor: pointer;
       }
 
       .calendar-days-week {
@@ -172,6 +188,7 @@
 
         &.disabled {
           opacity: $modus-date-picker-calendar-day-disabled-opacity;
+          pointer-events: none;
         }
 
         &.range-selected {

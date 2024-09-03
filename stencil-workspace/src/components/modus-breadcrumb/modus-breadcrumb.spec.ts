@@ -10,7 +10,7 @@ describe('modus-breadcrumb', () => {
     expect(root).toEqualHtml(`
       <modus-breadcrumb>
         <mock:shadow-root>
-          <nav role='navigation'>
+          <nav>
             <ol></ol>
           </nav>
         </mock:shadow-root>

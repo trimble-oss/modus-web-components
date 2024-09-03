@@ -1,5 +1,5 @@
-// eslint-disable-next-line
-import { Component, Prop, h, Event, EventEmitter, State, Element, Listen } from '@stencil/core';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { Component, Prop, h, Event, EventEmitter, State, Element, Listen, Watch } from '@stencil/core';
 
 @Component({
   tag: 'modus-dropdown',
@@ -30,6 +30,9 @@ export class ModusDropdown {
   /** (optional) The placement of the dropdown in related to the toggleElement. */
   @Prop() placement: 'top' | 'right' | 'bottom' | 'left' = 'bottom';
 
+  /** (optional) Whether to show the dropdown list's border. */
+  @Prop() showDropdownListBorder = true;
+
   /** (required) The element id that the list renders near and that triggers the toggling of the list. */
   @Prop() toggleElementId: string;
 
@@ -52,6 +55,9 @@ export class ModusDropdown {
     if (!this.toggleElement) {
       throw Error('matching element not found for toggle-element-id');
     }
+    if (this.disabled) {
+      this.toggleElement.setAttribute('disabled', String(this.disabled));
+    }
   }
 
   @Listen('click', { target: 'document' })
@@ -64,12 +70,41 @@ export class ModusDropdown {
     }
 
     if (this.visible) {
-      this.visible = false;
-      this.dropdownClose.emit();
+      this.hideDropdown();
+    }
+  }
+  @Listen('keydown', { target: 'document' })
+  documentKeyDownHandler(event: KeyboardEvent): void {
+    if (event.key === 'Enter' || event.key === ' ') {
+      if (this.disabled) {
+        return;
+      }
+      if (this.dropdownToggleClicked || (event.target as HTMLElement).closest(`#${this.toggleElementId}`)) {
+        this.dropdownToggleClicked = false;
+        return;
+      } else {
+        this.hideDropdown();
+      }
+    }
+    if (event.key === 'Escape' && this.visible) {
+      this.hideDropdown();
+      this.dropdownToggleClicked = false;
     }
   }
 
+  @Watch('disabled')
+  onDisabledChange(newValue: boolean) {
+    this.toggleElement.setAttribute('disabled', String(newValue));
+  }
+
+  hideDropdown(): void {
+    this.visible = false;
+    this.dropdownClose.emit();
+  }
   handleDropdownClick(event: MouseEvent): void {
+    if (this.disabled) {
+      return;
+    }
     if ((event.target as HTMLElement).closest(`#${this.toggleElementId}`)) {
       this.visible = !this.visible;
     } else {
@@ -85,13 +120,19 @@ export class ModusDropdown {
 
   render(): unknown {
     const listContainerClass = `dropdown-list ${this.visible ? 'visible' : 'hidden'} ${
-      this.animateList ? 'animate-list' : ''
-    } ${this.classByPlacement.get(this.placement)}`;
+      this.showDropdownListBorder ? 'list-border' : ''
+    } ${this.animateList ? 'animate-list' : ''} ${this.classByPlacement.get(this.placement)}`;
     const left = this.placement === 'right' ? `${this.toggleElement?.offsetWidth}px` : 'unset';
     const width = `${this.toggleElement?.offsetWidth ? this.toggleElement?.offsetWidth : 0}px`;
-
+    const dropdownClass = {
+      dropdown: true,
+      disabled: this.disabled,
+    };
     return (
-      <div aria-label={this.ariaLabel} class="dropdown" role="listbox" onClick={(event) => this.handleDropdownClick(event)}>
+      <div
+        aria-label={this.ariaLabel || undefined}
+        class={dropdownClass}
+        onClick={(event) => this.handleDropdownClick(event)}>
         <slot name="dropdownToggle" />
         <div
           class={listContainerClass}

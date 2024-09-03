@@ -1,0 +1,14 @@
+/**********************************************************************
+    THIS IS AN AUTOMATICALLY GENERATED FILE, DO NOT EDIT DIRECTLY.
+***********************************************************************/
+
+export const MODUS_ICON_NAMES = [
+<%_ iconNames.forEach(iconName => { _%>
+    <%- iconName %>,
+<%_ }); _%>
+];
+
+export type ModusIconName =
+<%_ for(let i = 0; i < iconNames.length; i++) { _%>
+    <%- iconNames[i] %><%- i < iconNames.length - 1 ? ' | ' : '' %>
+<%_ } _%>;

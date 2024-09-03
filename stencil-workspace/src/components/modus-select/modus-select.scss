@@ -12,6 +12,7 @@
     label {
       color: $modus-input-label-color;
       font-size: $rem-12px;
+      font-weight: 700;
       margin: 0 $rem-4px $rem-4px 0;
     }
 
@@ -29,20 +30,27 @@
 
     select {
       align-items: center;
+      appearance: none;
       background-color: $modus-input-bg;
+      background-image: $modus-select-bg-image;
+      background-position: right 0.5rem center;
+      background-repeat: no-repeat;
+      background-size: 16px 12px;
       border: solid $rem-1px $modus-input-border-color;
-      border-bottom-color: $modus-input-bottom-line-color;
+      border-radius: 4px;
       color: $modus-select-color;
       display: flex;
       font-family: $primary-font;
       font-size: $rem-12px;
       height: $rem-32px;
       padding-left: $rem-10px;
+      padding-right: 2rem;
       position: relative;
       width: 100%;
 
       &.disabled {
         background-color: $modus-input-disabled-bg;
+        border-color: transparent;
       }
 
       &:hover {
@@ -54,8 +62,8 @@
       }
 
       &:focus-within {
-        border-bottom-color: $modus-input-bottom-line-active-color;
-        border-bottom-width: $rem-2px;
+        border-color: $modus-input-border-active-color;
+        box-shadow: 0 0 0 1px $modus-input-border-active-color;
       }
 
       &.large {
@@ -64,13 +72,18 @@
       }
 
       &.error {
-        border-bottom-color: $modus-input-validation-error-color;
-        border-bottom-width: $rem-2px;
+        border-color: $modus-input-validation-error-color;
+        box-shadow: 0 0 0 1px $modus-input-validation-error-color;
       }
 
       &.valid {
-        border-bottom-color: $modus-input-validation-success-color;
-        border-bottom-width: $rem-2px;
+        border-color: $modus-input-validation-success-color;
+        box-shadow: 0 0 0 1px $modus-input-validation-success-color;
+      }
+
+      &.fit-parent {
+        border: none;
+        height: inherit;
       }
     }
   }

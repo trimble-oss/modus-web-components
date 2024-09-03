@@ -1,23 +1,30 @@
 // eslint-disable-next-line
 import { Component, Prop, h } from '@stencil/core';
 
+export type BadgeProperties = {
+  ariaLabel: string | null;
+  color?: 'danger' | 'dark' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning';
+  size?: 'small' | 'medium' | 'large';
+  type?: 'counter' | 'default' | 'text';
+};
+
 @Component({
   tag: 'modus-badge',
   styleUrl: 'modus-badge.scss',
   shadow: true,
 })
-export class ModusBadge {
+export class ModusBadge implements BadgeProperties {
   /** (optional) The badge's aria-label */
-  @Prop() ariaLabel: string | null;
+  @Prop() ariaLabel: BadgeProperties['ariaLabel'];
 
   /** (optional) The color of the badge */
-  @Prop() color: 'danger' | 'dark' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning' = 'primary';
+  @Prop() color: BadgeProperties['color'] = 'primary';
 
   /** (optional) The size of the badge */
-  @Prop() size: 'small' | 'medium' | 'large' = 'medium';
+  @Prop() size: BadgeProperties['size'] = 'medium';
 
   /** (optional) The type of the badge */
-  @Prop() type: 'counter' | 'default' | 'text' = 'default';
+  @Prop() type: BadgeProperties['type'] = 'default';
 
   classByColor: Map<string, string> = new Map([
     ['danger', 'color-danger'],
@@ -47,7 +54,7 @@ export class ModusBadge {
     )}`;
 
     return (
-      <div aria-label={this.ariaLabel} class={className} role="status">
+      <div aria-label={this.ariaLabel || undefined} class={className} role="status">
         <slot />
       </div>
     );

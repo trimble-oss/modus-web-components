@@ -9,7 +9,7 @@ import {
   Watch,
   State,
 } from '@stencil/core';
-import { IconMap } from '../icons/IconMap';
+import { ModusIconMap } from '../../icons/ModusIconMap';
 import DateInputFormatter from './utils/modus-date-input.formatter';
 import { ModusDateInputEventDetails, ModusDateInputType } from './utils/modus-date-input.models';
 
@@ -23,7 +23,7 @@ export class ModusDateInput {
 
   /** (optional) Regular expression to allow characters while typing the input.
    */
-  @Prop() allowedCharsRegex: RegExp | string;
+  @Prop({ mutable: true }) allowedCharsRegex: RegExp | string;
 
   /** (optional) The input's aria-label. */
   @Prop() ariaLabel: string | null;
@@ -60,8 +60,25 @@ export class ModusDateInput {
     this.handleValueChange(this.value);
   }
 
+  /**
+   * Alternative formats string for the date input split by | separator.
+   * Use 'm','mm' for month, 'd','dd' for date and 'yy','yyyy' for year with any separator that is not a regular expression. */
+  @Prop() altFormats: string;
+  @Watch('altFormats')
+  handleAltFormatsChange(altFormats: string): void {
+    if (!altFormats) {
+      return;
+    }
+
+    this._altFormatters = altFormats
+      .split('|')
+      .map((format) => format.trim())
+      .filter(Boolean)
+      .map((format) => new DateInputFormatter(this.fillerDate, format));
+  }
+
   /** (optional) Custom helper text displayed below the input. */
-  @Prop() helperText;
+  @Prop() helperText: string;
 
   /** (optional) The input's label. */
   @Prop() label: string;
@@ -87,7 +104,13 @@ export class ModusDateInput {
   /** (optional) The input's valid state text. */
   @Prop() validText: string;
 
-  /** (optional) A string representing the date entered in the input. The date is formatted according to ISO8601 'yyyy-mm-dd'. The displayed date format will differ from the 'value'. */
+  /** (optional) The minimum date allowed. The date is formatted according to ISO8601 'yyyy-mm-dd'. */
+  @Prop() min: string;
+
+  /** (optional) The maximum date allowed. The date is formatted according to ISO8601 'yyyy-mm-dd'. */
+  @Prop() max: string;
+
+  /** (optional) A string representing the date entered to the input. The date is formatted according to ISO8601 'yyyy-mm-dd'. The displayed date format will differ from the 'value'. */
   @Prop({ mutable: true }) value: string;
   @Watch('value')
   handleValueChange(val: string): void {
@@ -110,6 +133,8 @@ export class ModusDateInput {
 
   /** An event that fires on input value change. */
   @Event() valueChange: EventEmitter<ModusDateInputEventDetails>;
+  /** An event that fires on value error.*/
+  @Event() valueError: EventEmitter<string>;
 
   private classBySize: Map<string, string> = new Map([
     ['medium', 'medium'],
@@ -117,7 +142,9 @@ export class ModusDateInput {
   ]);
 
   private _dateInput: HTMLInputElement;
+  private _dateInputId = `date-input-${Math.random().toString().slice(2, 7)}`;
   private _formatter: DateInputFormatter;
+  private _altFormatters: DateInputFormatter[] = [];
   private _isEditing: boolean;
 
   // TODO: Auto formatting for single tokens 'm' and 'd' is tricky because user can input double digits
@@ -127,6 +154,7 @@ export class ModusDateInput {
 
   componentWillLoad() {
     this.handleFormatChange(this.format);
+    this.handleAltFormatsChange(this.altFormats);
     this._dateDisplay = this._formatter.formatDisplayString(this.value);
     this.setDefaultAllowedKeysRegex(this.autoFormat);
   }
@@ -136,6 +164,12 @@ export class ModusDateInput {
   @Method()
   async focusInput(): Promise<void> {
     this._dateInput.focus();
+  }
+
+  /** Validate the input. */
+  @Method()
+  async validate(): Promise<void> {
+    this.validateInput(this._dateDisplay);
   }
 
   /** Handlers */
@@ -155,6 +189,7 @@ export class ModusDateInput {
   handleBlur(): void {
     this._isEditing = false;
 
+    this.updateDateFromAltFormats();
     this.validateInput(this._dateDisplay);
     this.dateInputBlur.emit({
       value: this.value,
@@ -172,6 +207,12 @@ export class ModusDateInput {
     return keyIsValid;
   }
 
+  handleInputKeyDown(event: KeyboardEvent): void {
+    if (event.key.toLowerCase() === 'enter') {
+      this.handleBlur();
+    }
+  }
+
   handleOnInput(event: Event): void {
     this._isEditing = true;
     event.stopPropagation();
@@ -180,7 +221,7 @@ export class ModusDateInput {
     const inputString = (event.currentTarget as HTMLInputElement)?.value;
 
     this._dateDisplay = inputString;
-    this.value = this._formatter.parseDisplayString(this._dateDisplay);
+    this.value = this._formatter.parseDisplayString(inputString.trim());
   }
 
   // Helpers
@@ -188,14 +229,34 @@ export class ModusDateInput {
     this.errorText = null;
   }
 
+  /** Check if the input string matches any of the alternative formats. */
+  updateDateFromAltFormats(): string {
+    if (this.value) {
+      this._dateDisplay = this._formatter.formatDisplayString(this.value);
+      return;
+    }
+
+    if (!this._dateDisplay) return;
+    const displayDate = this._dateDisplay.trim();
+
+    // if there is no value for the default format, check the alternative formats
+    for (const formatter of this._altFormatters) {
+      const result = formatter.parseDisplayString(displayDate);
+
+      if (result) {
+        this._dateDisplay = this._formatter.formatDisplayString(result);
+        this.value = result;
+        return;
+      }
+    }
+  }
+
   keyIsValidDateCharacter(key: string): boolean {
     if (!this.allowedCharsRegex) return true;
 
     const dateCharacterRegex = new RegExp(this.allowedCharsRegex);
-    if (dateCharacterRegex.test(key)) {
-      return true;
-    }
-    return false;
+
+    return dateCharacterRegex.test(key);
   }
 
   setDefaultAllowedKeysRegex(autoFormat: boolean) {
@@ -208,10 +269,36 @@ export class ModusDateInput {
     if (this.disableValidation) return;
 
     if (!inputString) {
-      if (this.required) this.errorText = 'Required';
-      else this.clearValidation();
-    } else if (!this.value) this.errorText = 'Invalid date';
-    else this.clearValidation();
+      if (this.required) {
+        this.errorText = 'Required';
+        this.valueError.emit(this.errorText);
+      } else {
+        this.clearValidation();
+      }
+    } else if (!this.value) {
+      this.errorText = 'Invalid date';
+      this.valueError.emit(this.errorText);
+    } else {
+      this.validateMinMax();
+    }
+  }
+
+  private validateMinMax(): void {
+    const min = this._formatter.parseIsoToDate(this.min);
+    const max = this._formatter.parseIsoToDate(this.max);
+    const value = this._formatter.parseIsoToDate(this.value);
+
+    if (min && min > value) {
+      min.setUTCDate(min.getDate() - 1);
+      this.errorText = `Select a date after ${this._formatter.formatDisplayString(min.toISOString())}`;
+      this.valueError.emit(this.errorText);
+    } else if (max && max < value) {
+      max.setUTCDate(max.getDate() + 1);
+      this.errorText = `Select a date before ${this._formatter.formatDisplayString(max.toISOString())}`;
+      this.valueError.emit(this.errorText);
+    } else {
+      this.clearValidation();
+    }
   }
 
   render() {
@@ -220,25 +307,28 @@ export class ModusDateInput {
       <div class={className}>
         {this.label || this.required ? (
           <div class="label-container">
-            {this.label ? <label htmlFor="date-input">{this.label}</label> : null}
+            {this.label ? <label htmlFor={this._dateInputId}>{this.label}</label> : null}
             {this.required ? <span class="required">*</span> : null}
+            {this.helperText ? <label class="sub-text helper">{this.helperText}</label> : null}
           </div>
         ) : null}
         <div
           class={`input-container ${this.errorText ? 'error' : this.validText ? 'valid' : ''} ${this.classBySize.get(
             this.size
-          )}`}>
+          )}`}
+          part={`input-container ${this.errorText ? 'error' : this.validText ? 'valid' : ''}`}>
           <input
             aria-invalid={!!this.errorText}
-            aria-label={this.ariaLabel}
+            aria-label={this.ariaLabel || undefined}
             aria-required={this.required?.toString()}
             autofocus={this.autoFocusInput}
             class={{ 'has-right-icon': this.showCalendarIcon }}
             disabled={this.disabled}
-            id="date-input"
+            id={this._dateInputId}
             onBlur={() => this.handleBlur()}
             onInput={(event) => this.handleOnInput(event)}
             onKeyPress={(e) => this.handleInputKeyPress(e)}
+            onKeyDown={(e) => this.handleInputKeyDown(e)}
             placeholder={this.placeholder}
             readonly={this.readOnly}
             ref={(el) => (this._dateInput = el as HTMLInputElement)}
@@ -254,17 +344,15 @@ export class ModusDateInput {
               onClick={() => this.handleCalendarClick()}
               role="button"
               aria-label="Open calendar">
-              <IconMap icon="calendar" size="16" />
+              <ModusIconMap icon="calendar" size="16" />
             </span>
           )}
         </div>
-        <div class="sub-text">
+        <div class="sub-text" part="sub-text">
           {this.errorText ? (
             <label class="error">{this.errorText}</label>
           ) : this.validText ? (
             <label class="valid">{this.validText}</label>
-          ) : this.helperText ? (
-            <label class="helper">{this.helperText}</label>
           ) : null}
         </div>
       </div>

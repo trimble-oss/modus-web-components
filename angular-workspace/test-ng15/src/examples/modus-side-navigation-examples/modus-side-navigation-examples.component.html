@@ -1,0 +1,43 @@
+
+<h3>Side navigation</h3>
+
+<div id="dataTemplate">
+  <modus-switch id="switch-mode" (switchClick)="handleSwitch($event)" label="Enable Push Side Navigation"></modus-switch>
+  <div style='width: 100%; align-items: center; height: 56px; box-shadow: 0 0 2px; margin-top: 10px'>
+    <modus-navbar
+      (mainMenuClick)="handleNavBarMainMenu($event)"
+      id="navbar"
+      show-apps-menu
+      show-help
+      show-main-menu
+      show-notifications
+      [apps]="navbarOptions.apps"
+      [logoOptions]="navbarOptions.logoOptions"
+      [profileMenuOptions]="navbarOptions.profileMenuOptions"></modus-navbar>
+  </div>
+
+  <div
+    id="container"
+    style="display:flex; min-height:500px; overflow-y: auto; position: relative;box-shadow: 0 0 2px;">
+    <modus-side-navigation
+      max-width="300px"
+      id="sideNav"
+      target-content="#dataTemplate #panelcontent"
+      mode="overlay"
+      [data]="sideNavData"></modus-side-navigation>
+
+    <div id="panelcontent" style="padding:10px; transition: all 0.25s linear 0s;">
+      <div id="overview">
+        <p>
+          The side navigation of an application provides context through accessible menu options and positions a
+          consistent component to connect to various pages in the application.
+        </p>
+        <p>
+          The side navigation is a collapsible side content of the site’s pages. It is located alongside the page’s
+          primary content. The component is designed to add side content to a fullscreen application. It is activated
+          through the “hamburger” menu in the Navbar.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+@import '../../../modus-table.vars';
+
+.columns-visibility-menu {
+  display: flex;
+  flex-direction: column;
+
+  .column-visibility-header {
+    color: $modus-primary-color;
+    font-size: $rem-14px;
+    font-weight: 700;
+    line-height: 18px;
+    margin: 12px;
+    margin-bottom: 5px;
+  }
+
+  .column-visibility-content {
+    overflow: auto;
+  }
+
+  .column-visibility-item {
+    padding: 5px 5px 5px 12px;
+
+    &:focus,
+    &:hover {
+      background: $modus-menu-dropdown-item-hover-bg;
+      outline: none;
+    }
+
+    &:last-child {
+      margin-bottom: 10px;
+    }
+  }
+
+  .column-visibility-buttons-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 12px;
+    margin-right: 12px;
+  }
+}
+
+modus-button {
+  padding: 12px 0 0 12px;
+}

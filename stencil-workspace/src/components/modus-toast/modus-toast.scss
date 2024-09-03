@@ -3,8 +3,8 @@
 .modus-toast {
   align-items: center;
   background-color: $modus-toast-bg;
-  border: $rem-1px solid $modus-toast-border-color;
-  border-radius: $rem-2px;
+  border: $rem-1px solid transparent;
+  border-radius: $rem-4px;
   box-shadow: 0 0 8px rgba(36, 35, 45, 0.3);
   color: $modus-toast-color;
   display: flex;
@@ -13,6 +13,7 @@
   font-size: $rem-14px;
   height: 2.6875rem;
   padding: 0 $rem-16px;
+  width: 370px;
 
   .icon {
     align-items: center;
@@ -29,7 +30,15 @@
   }
 
   .close {
+    background-color: transparent;
+    border: 0;
     margin-left: auto;
+    margin-top: 2px;
+
+    .icon-close {
+      height: 18px;
+      width: 18px;
+    }
 
     &:hover svg {
       cursor: pointer;
@@ -43,7 +52,7 @@
   @each $color, $value in $modus-toast-variants {
     &.#{$color} {
       background-color: var(--modus-toast-#{$color}-bg, map-get($value, 'bg'));
-      border-color: var(--modus-toast-#{$color}-border-color, map-get($value, 'border-color'));
+      border-color: var(--modus-toast-#{$color}-bg, map-get($value, 'border-color'));
       color: var(
         --modus-toast-#{$color}-color,
         if(map-get($value, 'color') == null, $modus-toast-color, map-get($value, 'color'))
@@ -52,8 +61,8 @@
       .close {
         svg path {
           fill: var(
-            --modus-toast-#{$color}-close-btn-color,
-            if(map-get($value, 'close-button') == null, $modus-toast-close-btn-color, map-get($value, 'close-button'))
+            --modus-toast-#{$color}-color,
+            if(map-get($value, 'close-button') == null, $modus-toast-color, map-get($value, 'close-button'))
           );
         }
       }
@@ -67,7 +76,7 @@
         }
       } @else {
         svg:not(.icon-close) path {
-          fill: var(--modus-toast-#{$color}-border-color, map-get($value, 'border-color'));
+          fill: var(--modus-toast-#{$color}-color, map-get($value, 'border-color'));
         }
       }
     }

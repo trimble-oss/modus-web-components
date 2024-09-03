@@ -8,8 +8,10 @@
   cursor: pointer;
   display: flex;
   fill: $modus-tree-view-item-color;
+  flex-direction: row;
   font-family: $primary-font;
   font-size: $rem-16px;
+  justify-content: space-between;
   min-height: $list-group-item-height;
   width: 100%;
 
@@ -22,6 +24,10 @@
     path {
       fill: $modus-tree-view-item-chevron-color;
     }
+  }
+
+  &.borderless {
+    border: none;
   }
 
   &.disabled {
@@ -57,6 +63,7 @@
     align-items: center;
     display: flex;
     justify-content: center;
+    margin-left: 0.3rem;
     width: $rem-24px;
 
     &.drag-icon {
@@ -128,4 +135,17 @@
   &.expanded {
     display: block;
   }
+}
+
+.tree-item.is-children {
+  border-bottom: none;
+  border-top: none;
+}
+
+.tree-item.expanded {
+  border-bottom: none;
+}
+
+.tree-item.is-last-child {
+  border-bottom: $rem-1px solid $modus-tree-view-item-border-color;
 }

@@ -7,7 +7,7 @@ import {
   EventEmitter,
   Method,
 } from '@stencil/core';
-import { IconMap } from '../../icons/IconMap';
+import { ModusIconMap } from '../../../icons/ModusIconMap';
 
 @Component({
   tag: 'modus-side-navigation-item',
@@ -90,34 +90,39 @@ export class ModusSideNavigationItem {
   }
 
   render() {
-    const classes = `side-nav-item${this.expanded ? ' expanded' : ''}${this.selected ? ' selected' : ''}${
-      this.disabled ? ' disabled' : ''
-    }`;
-    const menuIconTooltip = this.expanded || this.disabled ? null : this.label;
+    const classes = {
+      'side-nav-item': true,
+      expanded: this.expanded,
+      selected: this.selected,
+      disabled: this.disabled,
+    };
+    const menuIconTooltip = this.label;
 
     return (
-      <li
-        role="treeitem"
-        ref={(el) => (this._itemRef = el)}
-        tabIndex={this.disabled ? -1 : 0}
-        class={classes}
-        onClick={() => this.handleClick()}
-        onKeyDown={(e) => this.handleKeyDown(e)}
-        aria-disabled={this.disabled ? 'true' : null}
-        aria-label={this.label}
-        aria-current={this.selected ? 'true' : null}
-        onFocus={() => this.sideNavItemFocus.emit({ id: this.element.id })}>
-        <div class="menu-icon" onClick={() => this.sideNavItemFocus.emit({ id: this.element.id })}>
-          <modus-tooltip text={menuIconTooltip} position="right">
+      <modus-tooltip text={menuIconTooltip} disabled={this.disabled} position="right">
+        <li
+          role="treeitem"
+          ref={(el) => (this._itemRef = el)}
+          tabIndex={this.disabled ? -1 : 0}
+          class={classes}
+          onClick={() => this.handleClick()}
+          onKeyDown={(e) => this.handleKeyDown(e)}
+          aria-disabled={this.disabled ? 'true' : null}
+          aria-label={this.label}
+          aria-current={this.selected ? 'true' : null}
+          onFocus={() => this.sideNavItemFocus.emit({ id: this.element.id })}>
+          <div class="menu-icon" onClick={() => this.sideNavItemFocus.emit({ id: this.element.id })}>
             <slot name="menu-icon"></slot>
-            {this.menuIcon && <IconMap icon={this.menuIcon} aria-label={this.label} size="24"></IconMap>}
-          </modus-tooltip>
-        </div>
+            {this.menuIcon && <ModusIconMap icon={this.menuIcon} aria-label={this.label} size="24"></ModusIconMap>}
+          </div>
 
-        {this.expanded && <div class="menu-text">{this.label}</div>}
+          {this.expanded && <div class="menu-text">{this.label}</div>}
 
-        <div class="level-icon">{this.showExpandIcon && <IconMap icon="chevron-right-thick" />}</div>
-      </li>
+          <div class="level-icon">
+            {this.showExpandIcon && <ModusIconMap icon="chevron_right" size={this.expanded ? '24' : '16'} />}
+          </div>
+        </li>
+      </modus-tooltip>
     );
   }
 }

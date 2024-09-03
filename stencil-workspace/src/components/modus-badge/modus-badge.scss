@@ -3,14 +3,14 @@
 div.badge {
   align-items: center;
   background-color: $modus-badge-primary-bg;
-  border-radius: 2px;
+  border-radius: 4px;
   color: $modus-badge-primary-color;
   display: inline-flex;
   font-family: $primary-font;
   font-size: $rem-12px;
   font-weight: $badge-font-weight;
   height: 20px;
-  padding: 0 8px;
+  padding: 0 7px;
   position: relative;
 
   &.color-danger {
@@ -77,6 +77,7 @@ div.badge {
   }
 
   &.size-small {
+    border-radius: 2px;
     font-size: $rem-10px;
     height: 14px;
     padding: 0 4px;
@@ -94,5 +95,11 @@ div.badge {
     &.type-counter {
       border-radius: 28px;
     }
+  }
+}
+
+@media (forced-colors: active) {
+  .badge {
+    outline: 1px solid transparent;
   }
 }

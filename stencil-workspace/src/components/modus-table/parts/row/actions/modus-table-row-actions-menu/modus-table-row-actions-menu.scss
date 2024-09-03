@@ -1,0 +1,17 @@
+@import '../../../../modus-table.vars';
+
+modus-table-row-actions-menu {
+  .row-actions-menu {
+    background-color: $modus-table-body-bg;
+    box-shadow: 0 0 2px rgba(37, 42, 46, 0.3);
+    color: $modus-table-body-color;
+    display: flex;
+    position: fixed;
+    top: -1px;
+    z-index: 9;
+  }
+
+  modus-list-item {
+    cursor: pointer;
+  }
+}

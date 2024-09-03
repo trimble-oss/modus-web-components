@@ -1,7 +1,14 @@
 import { newE2EPage } from '@stencil/core/testing';
 
+const MockActionBars = [
+  { id: 'export', icon: 'export', label: 'Export' },
+  { id: 'history', icon: 'history', label: 'History' },
+  { id: 'edit', icon: 'pencil', label: 'Edit' },
+];
+
 describe('modus-tree-view-item', () => {
   // verify renders
+
   it('renders tree root', async () => {
     const page = await newE2EPage();
     await page.setContent('<modus-tree-view></modus-tree-view>');
@@ -143,13 +150,13 @@ describe('modus-tree-view-item', () => {
     </modus-tree-view>`);
     const root = await page.find('modus-tree-view');
 
-    const rightChevron = await page.find('modus-tree-view-item >>> .rotate-right .icon-chevron-down-thick');
+    const rightChevron = await page.find('modus-tree-view-item >>> .rotate-right .icon-expand-more');
     expect(rightChevron).toBeTruthy();
 
     root.setProperty('expandedItems', ['1']);
     await page.waitForChanges();
 
-    const downChevron = await page.find('modus-tree-view-item >>> .icon-chevron-down-thick');
+    const downChevron = await page.find('modus-tree-view-item >>> .icon-expand-more');
     expect(downChevron).toBeTruthy();
   });
 
@@ -182,12 +189,12 @@ describe('modus-tree-view-item', () => {
       </modus-tree-view-item>
     </modus-tree-view>`);
 
-    const rightChevron = await page.find("modus-tree-view-item[node-id='1'] >>> .rotate-right .icon-chevron-down-thick");
+    const rightChevron = await page.find("modus-tree-view-item[node-id='1'] >>> .rotate-right .icon-expand-more");
     expect(rightChevron).toBeTruthy();
 
     await rightChevron.click();
 
-    const downChevron = await page.find("modus-tree-view-item[node-id='1'] >>> .icon-chevron-down-thick");
+    const downChevron = await page.find("modus-tree-view-item[node-id='1'] >>> .icon-expand-more");
     expect(downChevron).toBeTruthy();
   });
 
@@ -391,7 +398,7 @@ describe('modus-tree-view-item', () => {
     </modus-tree-view>`);
 
     const itemExpandToggle = await page.spyOnEvent('itemExpandToggle');
-    const rightChevron = await page.find("modus-tree-view-item[node-id='1'] >>> .rotate-right .icon-chevron-down-thick");
+    const rightChevron = await page.find("modus-tree-view-item[node-id='1'] >>> .rotate-right .icon-expand-more");
     expect(rightChevron).toBeTruthy();
 
     await rightChevron.click();
@@ -417,5 +424,182 @@ describe('modus-tree-view-item', () => {
     await page.waitForChanges();
 
     expect(checkboxClick).toHaveReceivedEvent();
+  });
+
+  it('emits itemDrop event', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+    <modus-tree-view>
+      <modus-tree-view-item node-Id="1" label="1" draggable-item droppable-item></modus-tree-view-item>
+      <modus-tree-view-item node-Id="2" label="2" draggable-item droppable-item></modus-tree-view-item>
+      <modus-tree-view-item node-Id="3" label="3" draggable-item droppable-item></modus-tree-view-item>
+    </modus-tree-view>`);
+
+    const itemDropEvent = await page.spyOnEvent('itemDrop');
+    const dragIcon = await page.find("modus-tree-view-item[node-id='1'] >>> .drag-icon");
+
+    expect(dragIcon).toBeTruthy();
+
+    await dragIcon.press('Enter');
+    await dragIcon.press('ArrowDown');
+    await dragIcon.press('Enter');
+
+    await page.waitForChanges();
+
+    expect(itemDropEvent).toHaveReceivedEvent();
+  });
+
+  it('should open action bar and select an option', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <modus-tree-view>
+        <modus-tree-view-item node-id="1" label="Test Node" >
+       </modus-tree-view-item>
+      </modus-tree-view>
+    `);
+
+    const treeView = await page.find('modus-tree-view');
+    expect(treeView).not.toBeNull();
+
+    const treeViewItem = await page.find('modus-tree-view-item[node-id="1"]');
+    treeViewItem.setProperty('actions', MockActionBars);
+    await page.waitForChanges();
+    expect(treeViewItem).not.toBeNull();
+
+    const actionBar = await page.find('modus-tree-view-item[node-id="1"] >>> modus-action-bar');
+    expect(actionBar).not.toBeNull();
+
+    const actionItems = actionBar.shadowRoot.querySelectorAll('modus-button');
+
+    expect(actionItems[0].textContent).toBe('Export');
+    expect(actionItems[1].textContent).toBe('History');
+    expect(actionItems[2].textContent).toBe('Edit');
+    await page.waitForChanges();
+  });
+
+  it('should emit actionClick event when an action is clicked', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <modus-tree-view>
+        <modus-tree-view-item node-id="1" label="Test Node">
+        </modus-tree-view-item>
+      </modus-tree-view>
+    `);
+
+    const treeViewItem = await page.find('modus-tree-view-item[node-id="1"]');
+    treeViewItem.setProperty('actions', MockActionBars);
+
+    await page.waitForChanges();
+    const actionClickEvent = await treeViewItem.spyOnEvent('actionClick');
+
+    const actionBar = await page.evaluateHandle(() =>
+      document.querySelector('modus-tree-view-item').shadowRoot.querySelector('modus-action-bar')
+    );
+
+    const exportButton = await page.evaluateHandle(
+      (actionBar) => actionBar.shadowRoot.querySelector('modus-button[icon-only="export"]'),
+      actionBar
+    );
+
+    expect(exportButton).toBeDefined();
+
+    await exportButton.click();
+    await page.waitForChanges();
+
+    expect(actionClickEvent).toHaveReceivedEventDetail({ actionId: 'export' });
+  });
+
+  it('should emit itemActionClick event on the tree when an action is clicked in an item', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <modus-tree-view>
+        <modus-tree-view-item node-id="1" label="Test Node">
+        </modus-tree-view-item>
+      </modus-tree-view>
+    `);
+
+    const treeView = await page.find('modus-tree-view');
+    const treeViewItem = await page.find('modus-tree-view-item[node-id="1"]');
+    treeViewItem.setProperty('actions', MockActionBars);
+
+    await page.waitForChanges();
+    const itemActionClickEvent = await treeView.spyOnEvent('itemActionClick');
+
+    const actionBar = await page.evaluateHandle(() =>
+      document.querySelector('modus-tree-view-item').shadowRoot.querySelector('modus-action-bar')
+    );
+
+    const exportButton = await page.evaluateHandle(
+      (actionBar) => actionBar.shadowRoot.querySelector('modus-button[icon-only="export"]'),
+      actionBar
+    );
+
+    expect(exportButton).toBeDefined();
+
+    await exportButton.click();
+    await page.waitForChanges();
+
+    expect(itemActionClickEvent).toHaveReceivedEventDetail({ actionId: 'export', nodeId: '1' });
+  });
+
+  it('toggles borderless class on tree item', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+    <modus-tree-view borderless>
+      <modus-tree-view-item node-Id="1" label="Node one">
+      </modus-tree-view-item>
+    </modus-tree-view>`);
+
+    const element = await page.find('modus-tree-view-item >>> li > div.tree-item');
+    expect(element).toHaveClass('borderless');
+  });
+
+  it('renders changes to the borderless prop at the root level', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+    <modus-tree-view>
+      <modus-tree-view-item node-Id="1" label="Node one">
+      </modus-tree-view-item>
+    </modus-tree-view>`);
+    const root = await page.find('modus-tree-view');
+    const element = await page.find('modus-tree-view-item >>> li > div.tree-item');
+
+    expect(element).not.toHaveClass('borderless');
+    // set
+    root.setProperty('borderless', true);
+    await page.waitForChanges();
+    expect(element).toHaveClass('borderless');
+
+    // unset
+    root.setProperty('borderless', false);
+    await page.waitForChanges();
+    expect(element).not.toHaveClass('borderless');
+  });
+
+  it('should emit itemLabelChange event when Enter key is pressed on editable label input', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-tree-view>
+        <modus-tree-view-item node-Id="1" label="Original Label" editable="true">
+        </modus-tree-view-item>
+      </modus-tree-view>
+    `);
+
+    const treeViewItem = await page.find('modus-tree-view-item');
+    const itemLabelChangeEvent = await treeViewItem.spyOnEvent('itemLabelChange');
+
+    const labelInput = await page.find('modus-tree-view-item >>> .label-slot >>> input');
+
+    expect(labelInput).not.toBeNull();
+
+    await labelInput.type('NewLabel');
+    await labelInput.press('Enter');
+
+    await page.waitForChanges();
+    expect(itemLabelChangeEvent).toHaveReceivedEventDetail('Original LabelNewLabel');
   });
 });

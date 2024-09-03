@@ -1,5 +1,6 @@
 export { Components, JSX } from './components';
 export { Crumb } from './components/modus-breadcrumb/modus-breadcrumb';
+export { TreeItemSelectionChange, TreeViewItemInfo } from './components/modus-content-tree/modus-content-tree.types';
 export { ModusNavbarApp } from './components/modus-navbar/apps-menu/modus-navbar-apps-menu';
 export * from './components/modus-data-table/modus-data-table.models';
 export { ModusAutocompleteOption } from './components/modus-autocomplete/modus-autocomplete';
@@ -13,4 +14,10 @@ export {
   ModusNavbarLogo,
   ModusNavbarLogoOptions,
   ModusNavbarButton,
+  ModusNavbarDropdownItem,
 } from './components/modus-navbar/modus-navbar.models';
+export * from './components/modus-table/models/modus-table.models';
+export { ModusSentimentScaleType } from './components/modus-sentiment-scale/modus-sentiment-scale.models';
+export * from './components/modus-table/models/table-context.models';
+export * from './components/modus-tooltip/modus-tooltip.models';
+export { ModusIconName } from './icons/ModusIconUtilities.ts';

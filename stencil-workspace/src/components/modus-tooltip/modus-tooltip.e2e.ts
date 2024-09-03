@@ -12,29 +12,48 @@ describe('modus-tooltip', () => {
   it('renders changes to text', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<modus-tooltip text="Hello"></modus-tooltip>');
+    await page.setContent('<modus-tooltip></modus-tooltip>');
 
-    let text = await page.find('modus-tooltip >>> .text');
-    expect(text.textContent).toEqual('Hello');
+    let text = await page.find('modus-tooltip >>> .tooltip');
+    expect(text).toHaveClass('hide');
 
     const tooltip = await page.find('modus-tooltip');
-    tooltip.setProperty('text', 'Something else');
+    tooltip.setProperty('text', 'Something');
     await page.waitForChanges();
-    text = await page.find('modus-tooltip >>> .text');
-    expect(text.textContent).toEqual('Something else');
+
+    text = await page.find('modus-tooltip >>> .tooltip');
+    expect(text.textContent).toEqual('Something');
   });
 
   it('renders changes to the position', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<modus-tooltip></modus-tooltip>');
+    await page.setContent(`
+    <modus-tooltip text="Tooltip text...">
+          <modus-button style="margin-top:100px;margin-left:100px">Button</modus-button>
+        </modus-tooltip>
+    `);
     const component = await page.find('modus-tooltip');
-    const element = await page.find('modus-tooltip >>> .modus-tooltip');
-    expect(element).toHaveClass('top');
+    let element = await page.find('modus-tooltip >>> .tooltip');
+    await page.hover('modus-button');
+    await new Promise((r) => setTimeout(r, 500));
+    await page.waitForChanges();
+    expect(element.getAttribute('data-popper-placement')).toEqual('top');
+
+    component.setProperty('position', 'left');
+    await page.waitForChanges();
+    element = await page.find('modus-tooltip >>> .tooltip');
+    expect(element.getAttribute('data-popper-placement')).toEqual('left');
+
+    component.setProperty('position', 'right');
+    await page.waitForChanges();
+    element = await page.find('modus-tooltip >>> .tooltip');
+    expect(element.getAttribute('data-popper-placement')).toEqual('right');
 
     component.setProperty('position', 'bottom');
     await page.waitForChanges();
-    expect(element).toHaveClass('bottom');
+    element = await page.find('modus-tooltip >>> .tooltip');
+    expect(element.getAttribute('data-popper-placement')).toEqual('bottom');
   });
 
   it('tooltip should show or hide if disabled prop set', async () => {
@@ -44,12 +63,60 @@ describe('modus-tooltip', () => {
 
     tooltip.setProperty('disabled', false);
     await page.waitForChanges();
-    let text = await page.find('modus-tooltip >>> .text');
-    expect(text.textContent).toEqual('Hello');
+    let text = await page.find('modus-tooltip >>> .tooltip');
+    expect(text).not.toHaveClass('hide');
 
     tooltip.setProperty('disabled', true);
     await page.waitForChanges();
-    text = await page.find('modus-tooltip >>> .text');
-    expect(text).toEqual(null);
+    text = await page.find('modus-tooltip >>> .tooltip');
+    expect(text).toHaveClass('hide');
+  });
+
+  it('should display tooltip on hover', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-tooltip text="Tooltip text">
+            <modus-button>Button</modus-button>
+          </modus-tooltip>
+      `);
+    await page.hover('modus-button'); // Hover over the element that triggers the tooltip
+    await page.waitForChanges();
+    await new Promise((r) => setTimeout(r, 500));
+    const tooltip = await page.find('modus-tooltip >>> .tooltip');
+    expect(tooltip.getAttribute('data-show')).not.toBeNull();
+
+    const button = await page.find('modus-button >>> button');
+    await button.click();
+    await page.waitForChanges();
+    expect(tooltip.getAttribute('data-show')).toBeNull();
+  });
+
+  it('renders aria-label on div when set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-tooltip aria-label="test label"></modus-tooltip>');
+    const element = await page.find('modus-tooltip >>> .tooltip');
+    expect(element).toBeDefined();
+    expect(element).toHaveAttribute('aria-label');
+    expect(element.getAttribute('aria-label')).toEqual('test label');
+  });
+
+  it('does not render aria-label on div when not set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-tooltip></modus-tooltip>');
+    const element = await page.find('modus-tooltip >>> .tooltip');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
+
+  it('does not render aria-label on div when set to empty string', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-tooltip aria-label=""></modus-tooltip>');
+    const element = await page.find('modus-tooltip >>> .tooltip');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
   });
 });

@@ -10,7 +10,7 @@ import {
   State,
 } from '@stencil/core';
 import { ModusSideNavigationItemCustomEvent as ModusSideNavItemEvent } from '../../components';
-import { IconChevronLeftThick } from '../icons/icon-chevron-left-thick';
+import { IconChevronLeft } from '../../icons/generated-icons/IconChevronLeft';
 import { ModusSideNavigationTree } from './modus-side-navigation-tree';
 import { ModusSideNavigationItemInfo, ModusSideNavItemLevelInfo } from './modus-side-navigation.models';
 
@@ -21,6 +21,9 @@ import { ModusSideNavigationItemInfo, ModusSideNavItemLevelInfo } from './modus-
 })
 export class ModusSideNavigation {
   @Element() element: HTMLElement;
+
+  /** (optional) To choose whether to collapse the panel when clicked outside. */
+  @Prop() collapseOnClickOutside = true;
 
   /** (optional) Data property to create the items. */
   @Prop() data: ModusSideNavigationItemInfo[];
@@ -71,7 +74,7 @@ export class ModusSideNavigation {
 
   @Listen('click', { target: 'document' })
   documentClickHandler(event: MouseEvent): void {
-    if (this.element.contains(event.target as HTMLElement) || event.defaultPrevented) return;
+    if (!this.collapseOnClickOutside || this.element.contains(event.target as HTMLElement) || event.defaultPrevented) return;
 
     // Collapse when clicked outside
     this.expanded = false;
@@ -367,7 +370,6 @@ export class ModusSideNavigation {
   render() {
     return (
       <nav
-        role="navigation"
         class={`side-nav-panel${this.expanded ? ' expanded' : ''}`}
         style={{ width: this.expanded ? this.maxWidth : null }}
         onKeyDown={(e) => this.handleKeyDown(e)}
@@ -388,7 +390,7 @@ export class ModusSideNavigation {
                         }
                       : {})}>
                     <p>
-                      <IconChevronLeftThick size="10" />
+                      <IconChevronLeft size="24" />
                       <a tabIndex={0} onClick={(e) => this.handleBackClick(e)} onKeyDown={(e) => this.handleBackClick(e)}>
                         Back
                       </a>
