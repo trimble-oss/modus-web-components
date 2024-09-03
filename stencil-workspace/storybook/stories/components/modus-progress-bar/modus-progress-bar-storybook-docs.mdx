@@ -26,6 +26,12 @@
   <modus-progress-bar value="3" max-value="4" min-value="0" size="compact"></modus-progress-bar>
 </div>
 
+### Indeterminate
+
+<div>
+  <modus-progress-bar mode="indeterminate"></modus-progress-bar>
+</div>
+
 <Anchor storyId="components-progress-bar--compact" />
 
 ```html
@@ -42,6 +48,7 @@
 | `background-color` | The bar's background color    | `string`                            | `#FFFFFF` (Trimble White)    |          |
 | `color`            | The bar's color               | `string`                            | `#005F9E` (Trimble Blue Mid) |          |
 | `max-value`        | The maximum value             | `number`                            | `100`                        |          |
+| `mode`             | The progress bar's mode       | `'determinate'`, `'indeterminate'`  | `determinate`                |          |
 | `min-value `       | The minimum value             | `number`                            | `0`                          |          |
 | `size`             | The size of the bar           | `'default'`, `'small'`, `'compact'` | `default`                    |          |
 | `text`             | The text displayed on the bar | `string`                            |                              |          |
@@ -55,3 +62,4 @@
 - Progress Bar gets an `aria-maxvalue` provided by the `max-value` property input.
 - Progress Bar gets an `aria-minvalue` provided by the `min-value` property input.
 - Progress Bar gets an `aria-valuenow` set to the current value.
+- Progress Bar in `indeterminate` mode has `aria-valuetext`,`aria-maxvalue` and `aria-minvalue` set to `null`.
