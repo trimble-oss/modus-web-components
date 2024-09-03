@@ -39,13 +39,11 @@ export class ModusAlert {
   classByType: Map<string, string> = new Map([
     ['error', 'type-error'],
     ['info', 'type-info'],
-    ['info-gray', 'type-info-gray'],
-    ['info-gray-dark', 'type-info-gray-dark'],
     ['success', 'type-success'],
     ['warning', 'type-warning'],
   ]);
 
-  infoTypes = ['info', 'info-gray', 'info-gray-dark'];
+  infoTypes = ['info'];
 
   @Listen('keyup')
   elementKeyupHandler(event: KeyboardEvent): void {

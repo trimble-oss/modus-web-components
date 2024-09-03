@@ -13,6 +13,7 @@ import { ButtonColor, ButtonSize, ButtonStyle, ButtonType } from "./components/m
 import { ButtonGroupSelectionType } from "./components/modus-button-group/modus-button-group.models";
 import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 import { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
+import { Placement } from "@popperjs/core";
 import { ModusIconName } from "./icons/ModusIconUtilities";
 import { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { ModusNavbarButton, ModusNavbarDropdownItem, ModusNavbarDropdownOptions, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
@@ -20,13 +21,13 @@ import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/app
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { ModusSentimentScaleType } from "./components/modus-sentiment-scale/modus-sentiment-scale.models";
 import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-import { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnSort, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+import { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnSort, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableErrors, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 import { Cell, Column, Row } from "@tanstack/table-core";
 import { TableCellEdited, TableContext } from "./components/modus-table/models/table-context.models";
 import { Tab } from "./components/modus-tabs/modus-tabs";
 import { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
 import { ModusToolTipPlacement } from "./components/modus-tooltip/modus-tooltip.models";
-import { TreeViewItemInfo, TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
+import { TreeItemSelectionChange, TreeViewItemInfo, TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 import { ModusActionBarOptions as ModusActionBarOptions1 } from "./components/modus-action-bar/modus-action-bar";
 export { ModusActionBarOptions } from "./components/modus-action-bar/modus-action-bar";
 export { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
@@ -36,6 +37,7 @@ export { ButtonColor, ButtonSize, ButtonStyle, ButtonType } from "./components/m
 export { ButtonGroupSelectionType } from "./components/modus-button-group/modus-button-group.models";
 export { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 export { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
+export { Placement } from "@popperjs/core";
 export { ModusIconName } from "./icons/ModusIconUtilities";
 export { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 export { ModusNavbarButton, ModusNavbarDropdownItem, ModusNavbarDropdownOptions, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
@@ -43,13 +45,13 @@ export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/app
 export { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 export { ModusSentimentScaleType } from "./components/modus-sentiment-scale/modus-sentiment-scale.models";
 export { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-export { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnSort, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+export { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnSort, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableErrors, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 export { Cell, Column, Row } from "@tanstack/table-core";
 export { TableCellEdited, TableContext } from "./components/modus-table/models/table-context.models";
 export { Tab } from "./components/modus-tabs/modus-tabs";
 export { ModusTimePickerEventDetails } from "./components/modus-time-picker/modus-time-picker.models";
 export { ModusToolTipPlacement } from "./components/modus-tooltip/modus-tooltip.models";
-export { TreeViewItemInfo, TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
+export { TreeItemSelectionChange, TreeViewItemInfo, TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export { ModusActionBarOptions as ModusActionBarOptions1 } from "./components/modus-action-bar/modus-action-bar";
 export namespace Components {
     interface ModusAccordion {
@@ -154,6 +156,10 @@ export namespace Components {
          */
         "errorText": string;
         /**
+          * A promise that returns the filtered options.
+         */
+        "filterOptions": (search: string) => Promise<ModusAutocompleteOption[] | string[]>;
+        /**
           * Whether the search icon is included.
          */
         "includeSearchIcon": boolean;
@@ -161,6 +167,10 @@ export namespace Components {
           * The autocomplete's label.
          */
         "label": string;
+        /**
+          * Whether the autocomplete is in a loading state.
+         */
+        "loading": boolean;
         /**
           * When enabled, multiple options can be selected in the component. And selected options are shown as chips in the input.
          */
@@ -204,7 +214,7 @@ export namespace Components {
         /**
           * The autocomplete's search value.
          */
-        "value": string;
+        "value": string | string[];
     }
     interface ModusBadge {
         /**
@@ -551,6 +561,10 @@ export namespace Components {
           * (optional) Label for the field.
          */
         "label": string;
+        /**
+          * (optional) The placement of the calendar popup
+         */
+        "position": Placement;
     }
     interface ModusDivider {
     }
@@ -877,7 +891,7 @@ export namespace Components {
         "reverse": boolean;
     }
     interface ModusNavbarMainMenu {
-        "navbarId": string;
+        "parentNavbar": HTMLElement;
     }
     interface ModusNavbarNotificationsMenu {
         "reverse": boolean;
@@ -1235,6 +1249,7 @@ export namespace Components {
           * (Optional) To control display options of table.
          */
         "displayOptions"?: ModusTableDisplayOptions;
+        "errors": ModusTableErrors;
         "fullWidth": boolean;
         /**
           * Returns data of a column.
@@ -1325,6 +1340,7 @@ export namespace Components {
     interface ModusTableCellEditor {
         "args": ModusTableCellEditorArgs;
         "dataType": string;
+        "inputValueChangeHandler": (newValue: string) => void;
         "keyDown": (e: KeyboardEvent, newValue: string) => void;
         "type": string;
         "value": unknown;
@@ -1744,6 +1760,10 @@ export namespace Components {
          */
         "disableTabbing": boolean;
         /**
+          * (optional) Sets draggable state to be true to all the children
+         */
+        "enableReordering": boolean;
+        /**
           * (optional) Set expanded tree items
          */
         "expandedItems": string[];
@@ -1945,6 +1965,10 @@ export interface ModusTableCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusTableElement;
 }
+export interface ModusTableCellMainCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModusTableCellMainElement;
+}
 export interface ModusTableRowActionsCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLModusTableRowActionsElement;
@@ -2043,7 +2067,7 @@ declare global {
     };
     interface HTMLModusAutocompleteElementEventMap {
         "optionSelected": string;
-        "valueChange": string;
+        "valueChange": string | string[];
         "selectionsChanged": string[];
     }
     interface HTMLModusAutocompleteElement extends Components.ModusAutocomplete, HTMLStencilElement {
@@ -2614,7 +2638,18 @@ declare global {
         prototype: HTMLModusTableCellEditorElement;
         new (): HTMLModusTableCellEditorElement;
     };
+    interface HTMLModusTableCellMainElementEventMap {
+        "cellInputValueChange": TableCellEdited;
+    }
     interface HTMLModusTableCellMainElement extends Components.ModusTableCellMain, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLModusTableCellMainElementEventMap>(type: K, listener: (this: HTMLModusTableCellMainElement, ev: ModusTableCellMainCustomEvent<HTMLModusTableCellMainElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLModusTableCellMainElementEventMap>(type: K, listener: (this: HTMLModusTableCellMainElement, ev: ModusTableCellMainCustomEvent<HTMLModusTableCellMainElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLModusTableCellMainElement: {
         prototype: HTMLModusTableCellMainElement;
@@ -2776,6 +2811,7 @@ declare global {
     };
     interface HTMLModusTreeViewElementEventMap {
         "itemDrop": { [key: string]: TreeViewItemInfo };
+        "itemSelectionChange": TreeItemSelectionChange;
         "itemActionClick": any;
     }
     interface HTMLModusTreeViewElement extends Components.ModusTreeView, HTMLStencilElement {
@@ -2796,6 +2832,7 @@ declare global {
         "checkboxClick": boolean;
         "itemLabelChange": string;
         "itemClick": boolean;
+        "itemSelectionChange": TreeItemSelectionChange;
         "itemExpandToggle": boolean;
         "itemAdded": HTMLElement;
         "actionClick": any;
@@ -3019,6 +3056,10 @@ declare namespace LocalJSX {
          */
         "errorText"?: string;
         /**
+          * A promise that returns the filtered options.
+         */
+        "filterOptions"?: (search: string) => Promise<ModusAutocompleteOption[] | string[]>;
+        /**
           * Whether the search icon is included.
          */
         "includeSearchIcon"?: boolean;
@@ -3026,6 +3067,10 @@ declare namespace LocalJSX {
           * The autocomplete's label.
          */
         "label"?: string;
+        /**
+          * Whether the autocomplete is in a loading state.
+         */
+        "loading"?: boolean;
         /**
           * When enabled, multiple options can be selected in the component. And selected options are shown as chips in the input.
          */
@@ -3049,7 +3094,7 @@ declare namespace LocalJSX {
         /**
           * An event that fires when the input value changes. Emits the value string.
          */
-        "onValueChange"?: (event: ModusAutocompleteCustomEvent<string>) => void;
+        "onValueChange"?: (event: ModusAutocompleteCustomEvent<string | string[]>) => void;
         /**
           * The autocomplete's options.
          */
@@ -3081,7 +3126,7 @@ declare namespace LocalJSX {
         /**
           * The autocomplete's search value.
          */
-        "value"?: string;
+        "value"?: string | string[];
     }
     interface ModusBadge {
         /**
@@ -3472,6 +3517,10 @@ declare namespace LocalJSX {
           * (optional) Label for the field.
          */
         "label"?: string;
+        /**
+          * (optional) The placement of the calendar popup
+         */
+        "position"?: Placement;
     }
     interface ModusDivider {
     }
@@ -3857,7 +3906,7 @@ declare namespace LocalJSX {
         "reverse"?: boolean;
     }
     interface ModusNavbarMainMenu {
-        "navbarId"?: string;
+        "parentNavbar"?: HTMLElement;
     }
     interface ModusNavbarNotificationsMenu {
         "reverse"?: boolean;
@@ -4266,6 +4315,7 @@ declare namespace LocalJSX {
           * (Optional) To control display options of table.
          */
         "displayOptions"?: ModusTableDisplayOptions;
+        "errors"?: ModusTableErrors;
         "fullWidth"?: boolean;
         /**
           * (Optional) To enable row hover in table.
@@ -4377,6 +4427,7 @@ declare namespace LocalJSX {
     interface ModusTableCellEditor {
         "args"?: ModusTableCellEditorArgs;
         "dataType"?: string;
+        "inputValueChangeHandler"?: (newValue: string) => void;
         "keyDown"?: (e: KeyboardEvent, newValue: string) => void;
         "type"?: string;
         "value"?: unknown;
@@ -4386,6 +4437,7 @@ declare namespace LocalJSX {
         "cell"?: Cell<unknown, unknown>;
         "context"?: TableContext;
         "hasRowsExpandable"?: boolean;
+        "onCellInputValueChange"?: (event: ModusTableCellMainCustomEvent<TableCellEdited>) => void;
         "valueChange"?: (props: TableCellEdited) => void;
     }
     interface ModusTableColumnsVisibility {
@@ -4802,6 +4854,10 @@ declare namespace LocalJSX {
          */
         "disableTabbing"?: boolean;
         /**
+          * (optional) Sets draggable state to be true to all the children
+         */
+        "enableReordering"?: boolean;
+        /**
           * (optional) Set expanded tree items
          */
         "expandedItems"?: string[];
@@ -4818,6 +4874,7 @@ declare namespace LocalJSX {
          */
         "onItemActionClick"?: (event: ModusTreeViewCustomEvent<any>) => void;
         "onItemDrop"?: (event: ModusTreeViewCustomEvent<{ [key: string]: TreeViewItemInfo }>) => void;
+        "onItemSelectionChange"?: (event: ModusTreeViewCustomEvent<TreeItemSelectionChange>) => void;
         /**
           * (optional) Set selected tree items
          */
@@ -4881,6 +4938,7 @@ declare namespace LocalJSX {
           * An event that fires on tree item label changes
          */
         "onItemLabelChange"?: (event: ModusTreeViewItemCustomEvent<string>) => void;
+        "onItemSelectionChange"?: (event: ModusTreeViewItemCustomEvent<TreeItemSelectionChange>) => void;
         /**
           * (optional) Tab Index for the tree item
          */
