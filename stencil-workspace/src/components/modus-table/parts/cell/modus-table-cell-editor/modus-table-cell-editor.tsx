@@ -174,7 +174,6 @@ export class ModusTableCellEditor {
     const args = this.args as ModusTableCellAutocompleteEditorArgs;
     let options: string[] = [];
     let selectedOption = '';
-    let autocompleteRef: HTMLModusAutocompleteElement;
 
     if (this.dataType === 'badge') {
       options = args?.options.map((option) => (option as unknown as { text: string }).text);
@@ -191,20 +190,13 @@ export class ModusTableCellEditor {
       <div class="autocomplete-container">
         <modus-autocomplete
           {...this.getDefaultProps('Autocomplete input')}
-          ref={(el) => (autocompleteRef = el)}
           include-search-icon="false"
           size="medium"
           options={options}
           onBlur={this.handleBlur}
           onKeyDown={(e) => e.stopPropagation()}
-          filterOptions={(...props) => {
-            if (args?.filterOptions) {
-              autocompleteRef.loading = true;
-              return args?.filterOptions(...props).finally(() => {
-                autocompleteRef.loading = args.loading;
-              });
-            }
-          }}
+          loading={args?.loading}
+          filterOptions={args?.filterOptions}
           onOptionSelected={(e: CustomEvent<string>) => {
             const selectedDetail = e.detail;
 
