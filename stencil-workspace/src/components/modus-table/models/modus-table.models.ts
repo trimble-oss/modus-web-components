@@ -57,6 +57,8 @@ export type ModusTableCellAutocompleteEditorArgs = {
   noResultsFoundSubtext: string;
   showNoResultsFoundMessage: boolean;
   showOptionsOnFocus: boolean;
+  loading: boolean;
+  filterOptions: (value: string) => Promise<ModusAutocompleteOption[] | string[]>;
 };
 export type ModusTableCellEditorArgs = ModusTableCellSelectEditorArgs | ModusTableCellDateEditorArgs;
 
