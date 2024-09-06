@@ -110,7 +110,9 @@ export class ModusDatePicker {
 
   @Listen('click', { target: 'document' })
   handleClickOutside(event: MouseEvent): void {
-    if (this.element.contains(event.target as HTMLElement) || event.defaultPrevented) {
+    const path = event.composedPath();
+    const insideComponent = path.includes(this.element);
+    if (insideComponent || event.defaultPrevented) {
       return;
     }
     // Collapse when clicked outside
