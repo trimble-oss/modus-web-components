@@ -868,7 +868,7 @@ CheckboxRowSelection.args = {
   rowSelectionOptions: {
     multiple: true,
     subRowSelection: true,
-    preSelectedRows: ['0'],
+    preSelectedRows: undefined,
   },
   data: makeData(7),
 };
