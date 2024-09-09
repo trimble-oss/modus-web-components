@@ -305,14 +305,7 @@ export class ModusAutocomplete {
   };
 
   handleBackspaceKeyDown = (e) => {
-    if (e.key !== 'Backspace' || !this.multiple) {
-      return;
-    }
-
-    if (!this.getValueAsString() && this.selectedChips.length > 0) {
-      e.stopPropagation();
-      e.preventDefault();
-
+    if (e.key === 'Backspace' && this.multiple && !this.getValueAsString() && this.selectedChips.length > 0) {
       this.selectedChips = this.selectedChips.slice(0, -1);
       this.valueChange.emit(this.selectedChips.map((opt) => opt.value));
       this.selectionsChanged.emit(this.selectedChips.map((opt) => opt.id));
