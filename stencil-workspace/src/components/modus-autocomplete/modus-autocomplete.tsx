@@ -227,7 +227,7 @@ export class ModusAutocomplete {
     this.hasFocus = !this.disableCloseOnSelect;
   };
 
-  handleInputKeyDown = (event: KeyboardEvent) => {
+  handleKeyDown = (event: KeyboardEvent) => {
     if (event.defaultPrevented) {
       return; // Do nothing if event already handled
     }
@@ -304,7 +304,11 @@ export class ModusAutocomplete {
     this.focusOptionItem();
   };
 
-  handleBackspaceKeyDown = (e) => {
+  handleInputKeyDown = (e) => {
+    if (e.defaultPrevented) {
+      return; // Do nothing if event already handled
+    }
+
     if (e.key === 'Backspace' && this.multiple && !this.getValueAsString() && this.selectedChips.length > 0) {
       this.selectedChips = this.selectedChips.slice(0, -1);
       this.valueChange.emit(this.selectedChips.map((opt) => opt.value));
@@ -450,7 +454,7 @@ export class ModusAutocomplete {
       type="search"
       value={this.getValueAsString()}
       onBlur={this.handleInputBlur}
-      onKeyDown={(e) => this.handleBackspaceKeyDown(e)}
+      onKeyDown={(e) => this.handleInputKeyDown(e)}
       role="combobox"
       aria-autocomplete="list"
       aria-controls={this.listId}
@@ -501,7 +505,7 @@ export class ModusAutocomplete {
             this.hasFocus = this.disableCloseOnSelect;
           }
         }}
-        onKeyDown={(e) => this.handleInputKeyDown(e)}>
+        onKeyDown={(e) => this.handleKeyDown(e)}>
         {this.label || this.required ? (
           <div class={'label-container'}>
             {this.label ? <label>{this.label}</label> : null}
