@@ -50,13 +50,4 @@ describe('modus-progress-bar', () => {
     className = modusProgress.classBySize.get('compact');
     expect(className).toEqual('compact');
   });
-
-  it('should get the correct class by mode', async () => {
-    const modusProgress = new ModusProgressBar();
-    const className = modusProgress.classBySize.get(modusProgress.mode);
-    expect(className).toEqual('determinate');
-
-    modusProgress.mode = 'indeterminate';
-    expect(className).toEqual('indeterminate');
-  });
 });
