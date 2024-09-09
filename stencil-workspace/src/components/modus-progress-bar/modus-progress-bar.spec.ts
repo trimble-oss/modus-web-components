@@ -11,7 +11,7 @@ describe('modus-progress-bar', () => {
       <modus-progress-bar aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" role="progressbar">
         <mock:shadow-root>
           <div class="default default-background-color modus-progress-bar">
-            <div class="default-color default-text-color progress" style="width: 0%;">
+            <div class="default-color default-text-color determinate progress" style="width: 0%;">
             </div>
           </div>
         </mock:shadow-root>
@@ -49,5 +49,14 @@ describe('modus-progress-bar', () => {
 
     className = modusProgress.classBySize.get('compact');
     expect(className).toEqual('compact');
+  });
+
+  it('should get the correct class by mode', async () => {
+    const modusProgress = new ModusProgressBar();
+    const className = modusProgress.classBySize.get(modusProgress.mode);
+    expect(className).toEqual('determinate');
+
+    modusProgress.mode = 'indeterminate';
+    expect(className).toEqual('indeterminate');
   });
 });

@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import { Component, Prop, h, Host } from '@stencil/core';
 
 @Component({
@@ -21,6 +22,9 @@ export class ModusProgressBar {
   /** (optional) The progress bar's minimum value. */
   @Prop() minValue = 0;
 
+  /** (optional) The progress bar's mode. */
+  @Prop() mode: 'determinate' | 'indeterminate' = 'determinate';
+
   /** (optional) The progress bar's size. */
   @Prop() size: 'default' | 'small' | 'compact' = 'default';
 
@@ -32,9 +36,6 @@ export class ModusProgressBar {
 
   /** (optional) The progress bar's value. */
   @Prop() value = 0;
-
-  /** (optional) The progress bar's mode. */
-  @Prop() mode: 'determinate' | 'indeterminate' = 'determinate';
 
   classBySize: Map<string, string> = new Map([
     ['default', 'default'],
@@ -74,7 +75,7 @@ export class ModusProgressBar {
       ${progressBarBackgroundColorClass}
       ${this.classBySize.get(this.size)}
      `;
-    const progressClass = `progress ${progressColorClass} ${progressTextColor} ${this.mode === 'indeterminate' ? 'indeterminate' : ''}`;
+    const progressClass = `progress ${progressColorClass} ${progressTextColor} ${this.mode === 'indeterminate' ? 'indeterminate' : 'determinate'}`;
 
     return (
       <Host
