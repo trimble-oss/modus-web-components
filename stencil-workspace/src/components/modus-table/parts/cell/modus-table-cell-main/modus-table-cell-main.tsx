@@ -7,7 +7,7 @@ import {
   Component,
   Prop,
   Method,
-  h,// eslint-disable-line @typescript-eslint/no-unused-vars
+  h, // eslint-disable-line @typescript-eslint/no-unused-vars
   Event,
   EventEmitter,
 } from '@stencil/core';
@@ -24,6 +24,7 @@ import {
   KEYBOARD_ENTER,
   KEYBOARD_ESCAPE,
   COLUMN_DEF_DATATYPE_BADGE,
+  KEYBOARD_TAB,
 } from '../../../modus-table.constants';
 import NavigateTableCells from '../../../utilities/table-cell-navigation.utility';
 import { CellFormatter } from '../../../utilities/table-cell-formatter.utility';
@@ -214,6 +215,25 @@ export class ModusTableCellMain {
       this.editMode = false;
       this.cellEl.focus();
       this.destroyErrorTooltip();
+    } else if (key === KEYBOARD_TAB) {
+      NavigateTableCells({
+        eventKey: KEYBOARD_TAB,
+        cellElement: this.cellEl,
+        onNavigateComplete: (cellElement) => {
+          // Focus on the next cell and enable edit mode
+          if (cellElement) {
+            cellElement.focus();
+            const cellComponent = cellElement;
+            if (cellComponent) {
+              (cellComponent as any).componentOnReady().then((componentInstance) => {
+                const nextRowIndex = componentInstance.cell.row.index.toString();
+                const nextColumnId = componentInstance.cell.column.id;
+                componentInstance.handleCellEdit(nextRowIndex, nextColumnId);
+              });
+            }
+          }
+        },
+      });
     } else return;
 
     event.stopPropagation();
