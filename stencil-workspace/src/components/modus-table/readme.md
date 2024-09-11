@@ -16,6 +16,7 @@
 | `defaultSort`             | --                        | (Optional) To set the default sorting for the table.                                                                                                                                  | `ColumnSort`                              | `undefined`                                                                                  |
 | `density`                 | `density`                 | (optional) The density of the table.                                                                                                                                                  | `"comfortable" \| "compact" \| "relaxed"` | `'relaxed'`                                                                                  |
 | `displayOptions`          | --                        | (Optional) To control display options of table.                                                                                                                                       | `ModusTableDisplayOptions`                | `{     borderless: false,     cellBorderless: false,     cellVerticalBorderless: false,   }` |
+| `errors`                  | --                        |                                                                                                                                                                                       | `ModusTableErrors`                        | `undefined`                                                                                  |
 | `fullWidth`               | `full-width`              |                                                                                                                                                                                       | `boolean`                                 | `false`                                                                                      |
 | `hover`                   | `hover`                   | (Optional) To enable row hover in table.                                                                                                                                              | `boolean`                                 | `false`                                                                                      |
 | `manualPaginationOptions` | --                        | (Optional) To enable manual pagination mode. When enabled, the table will not automatically paginate rows, instead will expect the current page index and other details to be passed. | `ModusTableManualPaginationOptions`       | `undefined`                                                                                  |
@@ -159,6 +160,7 @@ graph TD;
   modus-table-cell-editor --> modus-autocomplete
   modus-autocomplete --> modus-text-input
   modus-autocomplete --> modus-chip
+  modus-autocomplete --> modus-spinner
   style modus-table fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

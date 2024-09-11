@@ -71,11 +71,17 @@ export class ModusAutocomplete {
   /** The autocomplete's options. */
   @Prop({ mutable: true }) options: ModusAutocompleteOption[] | string[];
 
+  /** A promise that returns the filtered options. */
+  @Prop() filterOptions: (search: string) => Promise<ModusAutocompleteOption[] | string[]>;
+
   /** An array to hold the selected chips. */
   @State() selectedChips: ModusAutocompleteOption[] = [];
 
   /** The autocomplete's selected option. */
   @State() selectedOption: string;
+
+  /** Whether the autocomplete is in a loading state. */
+  @Prop() loading = false;
 
   /** Whether to show autocomplete's options when focus. */
   @Prop() showOptionsOnFocus: boolean;
@@ -162,18 +168,23 @@ export class ModusAutocomplete {
     ['large', 'large'],
   ]);
 
+  stringToOption(options: string[]): ModusAutocompleteOption[] {
+    return options?.map((option) => ({
+      id: option,
+      value: option,
+    }));
+  }
+
   convertOptions(): void {
     if (this.options && this.options.length > 0) {
       if (typeof this.options[0] === 'string') {
-        this.options = this.options?.map((option) => ({
-          id: option,
-          value: option,
-        }));
+        this.options = this.stringToOption(this.options as string[]);
       }
     }
   }
 
   displayNoResults = () =>
+    !this.loading &&
     this.showNoResultsFoundMessage &&
     this.hasFocus &&
     !this.visibleOptions?.length &&
@@ -183,7 +194,7 @@ export class ModusAutocomplete {
   displayOptions = () => {
     const showOptions =
       this.showOptionsOnFocus || this.value?.length > 0 || this.disableCloseOnSelect || this.ShowItemsOnKeyDown;
-    return this.hasFocus && showOptions && !this.disabled;
+    return !this.loading && this.hasFocus && showOptions && !this.disabled;
   };
 
   addChipValue(value: ModusAutocompleteOption) {
@@ -312,9 +323,11 @@ export class ModusAutocomplete {
     }
   }
 
-  handleSearchChange = (search: string) => {
-    this.updateVisibleOptions(search);
-    this.updateVisibleCustomOptions(search);
+  handleSearchChange = (search: string, skipFiltering = false) => {
+    if (!skipFiltering) {
+      this.updateVisibleOptions(search);
+      this.updateVisibleCustomOptions(search);
+    }
     this.value = search;
     this.valueChange.emit(search);
   };
@@ -335,10 +348,28 @@ export class ModusAutocomplete {
   };
 
   handleTextInputValueChange = (event: CustomEvent<string>) => {
-    // Cancel the modus-text-input's value change event or else it will bubble to consumer.
-    event.stopPropagation();
-    this.disableFiltering = !this.disableCloseOnSelect;
-    this.handleSearchChange(event.detail);
+    if (typeof this.filterOptions === 'function') {
+      const tempValue = event.detail;
+      this.handleSearchChange(tempValue, true);
+
+      this.filterOptions(tempValue)?.then((filteredOptions) => {
+        const currentValue = this.getValueAsString();
+        if (tempValue !== currentValue) {
+          return;
+        }
+        const transformedOptions =
+          filteredOptions[0] && typeof filteredOptions[0] === 'string'
+            ? this.stringToOption(filteredOptions as string[])
+            : (filteredOptions as ModusAutocompleteOption[]);
+        this.options = transformedOptions;
+        this.visibleOptions = transformedOptions;
+      });
+    } else {
+      // Cancel the modus-text-input's value change event or else it will bubble to consumer.
+      event.stopPropagation();
+      this.disableFiltering = !this.disableCloseOnSelect;
+      this.handleSearchChange(event.detail);
+    }
   };
 
   updateVisibleCustomOptions = (search = '') => {
@@ -361,14 +392,10 @@ export class ModusAutocomplete {
 
     if (!this.disableFiltering) {
       this.visibleCustomOptions = this.customOptions?.filter((o: any) => {
-        return o.getAttribute(DATA_SEARCH_VALUE).toLowerCase().includes(search.toLowerCase());
+        return o.getAttribute(DATA_SEARCH_VALUE)?.toLowerCase().includes(search?.toLowerCase());
       });
     } else {
       this.visibleCustomOptions = this.customOptions;
-    }
-
-    if (this.visibleCustomOptions?.length === 0) {
-      this.showNoResultsFoundMessage = true;
     }
 
     this.containsSlottedElements = this.customOptions.length > 0;
@@ -386,15 +413,11 @@ export class ModusAutocomplete {
     }
 
     if (!this.disableFiltering) {
-      this.visibleOptions = (this.options as ModusAutocompleteOption[])?.filter((o: ModusAutocompleteOption) => {
-        return o.value.toLowerCase().includes(search.toLowerCase());
+      this.visibleOptions = (this?.options as ModusAutocompleteOption[])?.filter((o: ModusAutocompleteOption) => {
+        return o?.value?.toLowerCase().includes(search?.toLowerCase());
       });
     } else {
-      this.visibleOptions = this.options as ModusAutocompleteOption[];
-    }
-
-    if (this.visibleOptions?.length === 0) {
-      this.showNoResultsFoundMessage = true;
+      this.visibleOptions = this?.options as ModusAutocompleteOption[];
     }
   };
 
@@ -537,7 +560,12 @@ export class ModusAutocomplete {
                 );
               })}
           </ul>
-          {this.displayNoResults() && <NoResultsFound text={this.noResultsFoundText} subtext={this.noResultsFoundSubtext} />}
+
+          {this.loading ? (
+            <LoadingSpinner />
+          ) : (
+            this.displayNoResults() && <NoResultsFound text={this.noResultsFoundText} subtext={this.noResultsFoundSubtext} />
+          )}
         </div>
         {this.CustomOptionsSlot()}
       </div>
@@ -552,5 +580,11 @@ const NoResultsFound = (props: { text: string; subtext: string }) => (
       <div class="message">{props.text}</div>
     </div>
     <div class="subtext">{props.subtext}</div>
+  </div>
+);
+
+const LoadingSpinner = () => (
+  <div class="spinner-container">
+    <modus-spinner size="1.5rem"></modus-spinner>
   </div>
 );

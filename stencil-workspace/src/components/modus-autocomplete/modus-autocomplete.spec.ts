@@ -114,6 +114,9 @@ describe('modus-autocomplete', () => {
     ];
     modusAutocomplete.hasFocus = true;
     modusAutocomplete.handleSearchChange('Option 1');
+
+    await new Promise((resolve) => setTimeout(resolve, 100)); // adjust the timeout as needed
+
     expect(modusAutocomplete.visibleOptions).toEqual([{ id: 'Option 1', value: 'Option 1' }]);
   });
 

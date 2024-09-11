@@ -52,6 +52,7 @@ import {
   ModusTableSortingState,
   ModusTableRowWithId,
   ModusTableColumnSort,
+  ModusTableErrors,
 } from './models/modus-table.models';
 import ColumnDragState from './models/column-drag-state.model';
 import {
@@ -90,6 +91,11 @@ export class ModusTable {
   @Prop({ mutable: true }) columns!: ModusTableColumn<unknown>[];
   @Watch('columns') onColumnsChange(newVal: ModusTableColumn<unknown>[]) {
     this.tableCore?.setOptions('columns', (newVal as ColumnDef<unknown>[]) ?? []);
+    this.tableCore?.setState(
+      'columnOrder',
+      newVal.map((column) => column.id as string)
+    );
+    this.tableState.columnOrder = newVal.map((column) => column.id as string);
   }
 
   /* (optional) To manage column resizing */
@@ -131,6 +137,8 @@ export class ModusTable {
     cellBorderless: false,
     cellVerticalBorderless: false,
   };
+
+  @Prop() errors: ModusTableErrors;
 
   /** (Optional) To enable row hover in table. */
   @Prop() hover = false;
@@ -506,6 +514,7 @@ export class ModusTable {
       rowSelectionOptions: this.rowSelectionOptions,
       rowsExpandable: this.rowsExpandable,
       columns: this.columns,
+      errors: this.errors,
       columnReorder: this.columnReorder,
       columnResize: this.columnResize,
       rowSelectionChange: this.rowSelectionChange,

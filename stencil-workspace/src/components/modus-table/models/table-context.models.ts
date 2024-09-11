@@ -14,6 +14,7 @@ import {
   ModusTableSortingState,
   ModusTablePaginationState,
   ModusTableManualPaginationOptions,
+  ModusTableErrors,
 } from './modus-table.models';
 import { Row, Table, Updater } from '@tanstack/table-core';
 import ModusTableCore from '../modus-table.core';
@@ -25,6 +26,8 @@ export interface TableContext {
   element: HTMLElement;
 
   columns: ModusTableColumn<unknown>[];
+
+  errors: ModusTableErrors;
 
   columnResize: boolean;
 
