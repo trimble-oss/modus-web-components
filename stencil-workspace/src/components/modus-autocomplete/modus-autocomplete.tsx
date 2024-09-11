@@ -227,7 +227,7 @@ export class ModusAutocomplete {
     this.hasFocus = !this.disableCloseOnSelect;
   };
 
-  handleInputKeyDown = (event: KeyboardEvent) => {
+  handleKeyDown = (event: KeyboardEvent) => {
     if (event.defaultPrevented) {
       return; // Do nothing if event already handled
     }
@@ -304,13 +304,25 @@ export class ModusAutocomplete {
     this.focusOptionItem();
   };
 
+  handleInputKeyDown = (e) => {
+    if (e.defaultPrevented) {
+      return; // Do nothing if event already handled
+    }
+
+    if (e.key === 'Backspace' && this.multiple && !this.getValueAsString() && this.selectedChips.length > 0) {
+      this.selectedChips = this.selectedChips.slice(0, -1);
+      this.valueChange.emit(this.selectedChips.map((opt) => opt.value));
+      this.selectionsChanged.emit(this.selectedChips.map((opt) => opt.id));
+    }
+  };
+
   handleArrowUp = () => {
     this.focusItemIndex = Math.max(0, this.focusItemIndex - 1);
     this.focusOptionItem();
   };
 
   focusOptionItem = () => {
-    (this.el.shadowRoot.querySelectorAll('[role="option"]')[this.focusItemIndex] as HTMLUListElement).focus();
+    (this.el.shadowRoot.querySelectorAll('[role="option"]')[this.focusItemIndex] as HTMLUListElement)?.focus();
   };
 
   initializeSelectedChips(): void {
@@ -442,6 +454,7 @@ export class ModusAutocomplete {
       type="search"
       value={this.getValueAsString()}
       onBlur={this.handleInputBlur}
+      onKeyDown={(e) => this.handleInputKeyDown(e)}
       role="combobox"
       aria-autocomplete="list"
       aria-controls={this.listId}
@@ -492,7 +505,7 @@ export class ModusAutocomplete {
             this.hasFocus = this.disableCloseOnSelect;
           }
         }}
-        onKeyDown={(e) => this.handleInputKeyDown(e)}>
+        onKeyDown={(e) => this.handleKeyDown(e)}>
         {this.label || this.required ? (
           <div class={'label-container'}>
             {this.label ? <label>{this.label}</label> : null}

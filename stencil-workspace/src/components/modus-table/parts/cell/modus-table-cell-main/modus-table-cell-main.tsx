@@ -7,7 +7,7 @@ import {
   Component,
   Prop,
   Method,
-  h,// eslint-disable-line @typescript-eslint/no-unused-vars
+  h, // eslint-disable-line @typescript-eslint/no-unused-vars
   Event,
   EventEmitter,
 } from '@stencil/core';
