@@ -15,6 +15,7 @@ import {
 import { IconSearch } from '../../icons/svgs/icon-search';
 import { generateElementId } from '../../utils/utils';
 import { IconCheck } from '../../icons/generated-icons/IconCheck';
+import { createPopper, Instance, Placement } from '@popperjs/core';
 
 export interface ModusAutocompleteOption {
   id: string;
@@ -74,6 +75,9 @@ export class ModusAutocomplete {
   /** A promise that returns the filtered options. */
   @Prop() filterOptions: (search: string) => Promise<ModusAutocompleteOption[] | string[]>;
 
+  /** (optional) The placement of the options */
+  @Prop() position: Placement = 'bottom-start';
+
   /** An array to hold the selected chips. */
   @State() selectedChips: ModusAutocompleteOption[] = [];
 
@@ -85,6 +89,8 @@ export class ModusAutocomplete {
 
   /** Whether to show autocomplete's options when focus. */
   @Prop() showOptionsOnFocus: boolean;
+
+  private popperInstance: Instance;
 
   @Watch('options')
   watchOptions() {
@@ -137,6 +143,38 @@ export class ModusAutocomplete {
   @State() focusItemIndex = 0;
   @State() ShowItemsOnKeyDown = false;
   private listId = generateElementId() + '_list';
+
+  componentDidLoad(): void {
+    this.convertOptions();
+    if (this.multiple) {
+      this.initializeSelectedChips();
+    }
+    this.initializePopper();
+  }
+
+  disconnectedCallback(): void {
+    if (this.popperInstance) {
+      this.popperInstance.destroy();
+    }
+  }
+
+  initializePopper(): void {
+    const optionsContainer = this.el.shadowRoot.querySelector(`.options-container`) as HTMLElement;
+    const referenceElement = this.el as HTMLElement;
+
+    this.popperInstance = createPopper(referenceElement, optionsContainer, {
+      placement: 'bottom-start',
+      strategy: this.position === 'auto' ? 'fixed' : 'absolute',
+      modifiers: [
+        {
+          name: 'offset',
+          options: {
+            offset: [0, 2],
+          },
+        },
+      ],
+    });
+  }
 
   componentWillLoad(): void {
     this.convertOptions();
@@ -514,6 +552,7 @@ export class ModusAutocomplete {
         <div class={'error'}>{this.errorText ? <label class="sub-text error">{this.errorText}</label> : null}</div>
         <div
           class="options-container"
+          part="options-container"
           style={{ maxHeight: this.dropdownMaxHeight, zIndex: this.dropdownZIndex, overflowY: 'auto' }}>
           <ul id={this.listId} aria-label="options" role="listbox">
             {this.displayOptions() &&

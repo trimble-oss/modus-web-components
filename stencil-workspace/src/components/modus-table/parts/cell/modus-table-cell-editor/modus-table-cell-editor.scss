@@ -44,6 +44,10 @@ table.density-compact {
   z-index: 99;
 }
 
+.autocomplete::part(options-container) {
+  width: auto;
+}
+
 .editor::part(input-container) {
   border: 2px solid var(--modus-input-border-active-color, #217cbb);
   border-radius: unset;
