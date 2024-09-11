@@ -192,6 +192,7 @@ export class ModusTableCellEditor {
           {...this.getDefaultProps('Autocomplete input')}
           include-search-icon="false"
           size="medium"
+          class="autocomplete"
           options={options}
           onBlur={this.handleBlur}
           onKeyDown={(e) => e.stopPropagation()}
@@ -212,6 +213,7 @@ export class ModusTableCellEditor {
               this.editedValue = selectedDetail;
             }
           }}
+          position="auto"
           value={selectedOption}></modus-autocomplete>
       </div>
     );
