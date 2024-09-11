@@ -40,7 +40,6 @@ table.density-compact {
 }
 
 .date-picker-container::part(calendar) {
-  position: fixed;
   z-index: 99;
 }
 
