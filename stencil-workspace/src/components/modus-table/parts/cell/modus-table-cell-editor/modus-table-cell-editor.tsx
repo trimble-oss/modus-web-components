@@ -195,8 +195,14 @@ export class ModusTableCellEditor {
           options={options}
           onBlur={this.handleBlur}
           onKeyDown={(e) => e.stopPropagation()}
-          loading={args?.loading}
-          filterOptions={args?.filterOptions}
+          filterOptions={(...props) => {
+            if (this.inputElement && args?.filterOptions) {
+              (this.inputElement as HTMLModusAutocompleteElement).loading = true;
+              return args?.filterOptions(...props).finally(() => {
+                (this.inputElement as HTMLModusAutocompleteElement).loading = args?.loading ?? false;
+              });
+            }
+          }}
           onOptionSelected={(e: CustomEvent<string>) => {
             const selectedDetail = e.detail;
 
