@@ -1,6 +1,7 @@
 // eslint-disable-next-line
 import { Component, Event, EventEmitter, h, Method, Prop, Watch } from '@stencil/core';
 import { generateElementId } from '../../utils/utils';
+import { ModusIconMap } from '../../icons/ModusIconMap';
 
 @Component({
   tag: 'modus-number-input',
@@ -10,6 +11,9 @@ import { generateElementId } from '../../utils/utils';
 export class ModusNumberInput {
   /** (optional) The input's aria-label. */
   @Prop() ariaLabel: string | null;
+
+  /** (optional) The input's currency */
+  @Prop() currency: string;
 
   /** (optional) Whether the input is disabled. */
   @Prop() disabled: boolean;
@@ -22,6 +26,9 @@ export class ModusNumberInput {
 
   /** (optional) The input's label. */
   @Prop() label: string;
+
+  /** (optional) The input's locale */
+  @Prop() locale: string;
 
   /** (optional) The input's maximum value. */
   @Prop() maxValue: number;
@@ -83,6 +90,122 @@ export class ModusNumberInput {
       this.value = newValue;
     }
   }
+  private inputFocused = false;
+
+  componentDidLoad(): void {
+    if (this.value && !isNaN(+this.value)) {
+      this.formatValue(true);
+    }
+    this.numberInput.addEventListener('wheel', this.handleWheel.bind(this), { passive: true });
+
+    document.addEventListener('click', this.handleDocumentClick.bind(this));
+  }
+
+  disconnectedCallback() {
+    this.numberInput.removeEventListener('wheel', this.handleWheel);
+
+    document.removeEventListener('click', this.handleDocumentClick.bind(this));
+  }
+
+  handleDocumentClick(event: MouseEvent): void {
+    if (!this.inputFocused && !this.numberInput.contains(event.target as Node)) {
+      this.formatValue();
+    }
+  }
+
+  handleOnBlur(): void {
+    this.inputFocused = false;
+    this.formatValue();
+  }
+
+  handleKeyPress(event: KeyboardEvent): void {
+    const charCode = event.charCode;
+    const charStr = String.fromCharCode(charCode);
+
+    if (
+      !charStr.match(/^[0-9.-]$/) ||
+      (charStr === '.' && this.numberInput.value.includes('.')) ||
+      (charStr === '-' && this.numberInput.value.includes('-'))
+    ) {
+      event.preventDefault();
+    }
+  }
+
+  formatValue(initialSetup = false): void {
+    let numericValue = parseFloat(this.value.replace(/[^0-9.-]+/g, ''));
+    if (numericValue < this.minValue) {
+      numericValue = this.minValue;
+    }
+    if (numericValue > this.maxValue) {
+      numericValue = this.maxValue;
+    }
+
+    if (this?.value && this.numberInput) {
+      let formattedValue;
+      if (this.currency && this.locale) {
+        formattedValue = new Intl.NumberFormat(this.locale, {
+          style: 'currency',
+          currency: this.currency,
+        }).format(numericValue);
+      } else if (this.currency) {
+        formattedValue = new Intl.NumberFormat(undefined, {
+          style: 'currency',
+          currency: this.currency,
+        }).format(numericValue);
+      } else if (this.locale) {
+        formattedValue = new Intl.NumberFormat(this.locale).format(numericValue);
+      } else {
+        formattedValue = numericValue.toString();
+      }
+
+      if (!initialSetup) {
+        this.value = formattedValue;
+      }
+      if (formattedValue) {
+        this.numberInput.value = formattedValue;
+      }
+      this.valueChange.emit(numericValue.toString());
+    }
+  }
+
+  handleOnFocus(): void {
+    this.inputFocused = true;
+    this.numberInput.value = this.value;
+  }
+
+  incrementValue() {
+    const numericValue = parseFloat(this.value.replace(/[^0-9.-]+/g, ''));
+    const newValue = numericValue + this.step;
+    this.value = newValue.toString();
+  }
+
+  decrementValue() {
+    const numericValue = parseFloat(this.value.replace(/[^0-9.-]+/g, ''));
+    const newValue = numericValue - this.step;
+    this.value = newValue.toString();
+  }
+
+  handleWheel(event: WheelEvent) {
+    if (this.disabled || this.readOnly) return;
+
+    const isScrollUp = Math.sign(event.deltaY) < 0;
+
+    if (isScrollUp) {
+      this.decrementValue();
+    } else {
+      this.incrementValue();
+    }
+  }
+
+  handleKeys(event: KeyboardEvent) {
+    if (this.disabled || this.readOnly) return;
+
+    if (event.key === 'ArrowUp') {
+      this.incrementValue();
+    } else if (event.key === 'ArrowDown') {
+      this.decrementValue();
+    }
+  }
 
   render(): unknown {
     const textAlignClassName = `text-align-${this.textAlign}`;
@@ -136,13 +259,25 @@ export class ModusNumberInput {
             max={this.maxValue}
             min={this.minValue}
             onInput={() => this.handleOnInput()}
+            onFocusin={() => this.handleOnFocus()}
+            onBlur={() => this.handleOnBlur()}
             placeholder={this.placeholder}
             readonly={this.readOnly}
+            onKeyDown={(event) => this.handleKeys(event)}
+            onKeyPress={(event) => this.handleKeyPress(event)}
             ref={(el) => (this.numberInput = el as HTMLInputElement)}
             step={this.step}
             tabIndex={0}
-            type="number"
+            type="text"
             value={this.value}></input>
+          <div class="value-adjusters">
+            <div class="increment" onClick={() => this.incrementValue()}>
+              <ModusIconMap icon="caret_up" size="16" />
+            </div>
+            <div class="decrement" onClick={() => this.decrementValue()}>
+              <ModusIconMap icon="caret_down" size="16" />
+            </div>
+          </div>
         </div>
         {this.errorText ? (
           <label class="sub-text error">{this.errorText}</label>
