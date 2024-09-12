@@ -199,7 +199,7 @@ export class ModusTableCellEditor {
             if (this.inputElement && args?.filterOptions) {
               (this.inputElement as HTMLModusAutocompleteElement).loading = true;
               return args?.filterOptions(...props).finally(() => {
-                (this.inputElement as HTMLModusAutocompleteElement).loading = args?.loading ?? false;
+                (this.inputElement as HTMLModusAutocompleteElement).loading = false;
               });
             }
           }}

@@ -97,30 +97,6 @@ function initializeTable(props) {
     return columns.map((col) => (col.accessorKey === 'status' ? { ...col, sortingFn: sortStatusFn } : col));
   }
 
-
-  if (modusTable.isInlineEditing) {
-    if (modusTable.columns[0].cellEditorType === 'autocomplete') {
-      modusTable.columns[0].cellEditorArgs = {
-        ...modusTable.columns[0].cellEditorArgs,
-        filterOptions: filterDynamicOptions,
-      };
-    }
-  }
-
-  function filterDynamicOptions(value) {
-    const firstNameOptions = ${JSON.stringify(Names.map((name) => name.split(' ')[0]))};
-    const dynamicFirstNameOptions = ${JSON.stringify(Names.map((name) => name.split(' ')[1]))};
-
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const filteredOptions = [...firstNameOptions, ...dynamicFirstNameOptions].filter((option) =>
-          option.toLowerCase().includes(value.toLowerCase())
-        );
-        resolve(filteredOptions);
-      }, 1000);
-    });
-  }
-
   if(!!modusTable.manualSortingOptions){
     let currentData = globalData;
     const accessorKey = getAccessortKey(modusTable.columns, modusTable.manualSortingOptions.currentSortingState[0].id);

@@ -639,7 +639,7 @@ Refer to the [Accessibility](#accessibility) section for how to use keyboard for
 
 ```
 
-### Inline Editing - Dynamic Filtering
+### Inline Editing - Autocomplete with Dynamic Filtering
 
 The dynamic filtering feature in the modus-table component leverages an existing autocomplete component to enhance user interaction. This feature is integrated through the cellEditorArgs property of the table’s columns. When a cell with an autocomplete editor is activated, the filterOptions function is invoked with the user’s input value. This function dynamically filters the list of available options based on the input, providing real-time suggestions that are relevant to the user's search criteria
 
@@ -658,7 +658,6 @@ table.columns = [
     cellEditorType: 'autocomplete', // Autocomplete input type
     cellEditorArgs: {
       filterOptions: filterDynamicOptions, // Function to dynamically filter options
-      loading: false, // Pass the loading state
       options: options, // Default options
     },
   },
@@ -800,6 +799,14 @@ type ModusTableCellEditorType =
   | typeof CELL_EDIT_TYPE_DATE;
 type ModusTableCellDateEditorArgs = { format: string };
 type ModusTableCellSelectEditorArgs = { options: unknown[] };
+type ModusTableCellAutocompleteEditorArgs = {
+  options: ModusAutocompleteOption[];
+  noResultsFoundText: string;
+  noResultsFoundSubtext: string;
+  showNoResultsFoundMessage: boolean;
+  showOptionsOnFocus: boolean;
+  filterOptions: (value: string) => Promise<ModusAutocompleteOption[] | string[]>;
+};
 type ModusTableCellEditorArgs = ModusTableCellSelectEditorArgs | ModusTableCellDateEditorArgs;
 type ModusTableDataUpdaterProps = { rowId: string; accessorKey: string; newValue: string; oldValue?: string };
 type ModusTableSortingFunction<TData extends RowData> = SortingFnOption<TData> | 'sortForHyperlink' | 'sortForBadge';
