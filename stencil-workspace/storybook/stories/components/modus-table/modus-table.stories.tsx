@@ -64,6 +64,7 @@ function initializeTable(props) {
     defaultSort,
     customSort,
     errors,
+    isInlineEditing,
   } = props;
 
   const tag = document.createElement('script');
@@ -81,20 +82,44 @@ function initializeTable(props) {
   modusTable.defaultSort = ${JSON.stringify(defaultSort)};
   modusTable.customSort = ${JSON.stringify(customSort)};
   modusTable.errors = ${JSON.stringify(errors)};
+  modusTable.isInlineEditing = ${JSON.stringify(isInlineEditing)};
 
   var globalData = ${JSON.stringify(data)};
 
-function sortStatusFn(rowA, rowB, _columnId) {
-  const statusA = rowA.original.status;
-  const statusB = rowB.original.status;
-  const statusOrder = modusTable.customSort;
-  return statusOrder.indexOf(statusA) - statusOrder.indexOf(statusB);
-}
+  function sortStatusFn(rowA, rowB, _columnId) {
+    const statusA = rowA.original.status;
+    const statusB = rowB.original.status;
+    const statusOrder = modusTable.customSort;
+    return statusOrder.indexOf(statusA) - statusOrder.indexOf(statusB);
+  }
 
-function addSortingFn(columns) {
-  return columns.map((col) => (col.accessorKey === 'status' ? { ...col, sortingFn: sortStatusFn } : col));
-}
+  function addSortingFn(columns) {
+    return columns.map((col) => (col.accessorKey === 'status' ? { ...col, sortingFn: sortStatusFn } : col));
+  }
 
+
+  if (modusTable.isInlineEditing) {
+    if (modusTable.columns[0].cellEditorType === 'autocomplete') {
+      modusTable.columns[0].cellEditorArgs = {
+        ...modusTable.columns[0].cellEditorArgs,
+        filterOptions: filterDynamicOptions,
+      };
+    }
+  }
+
+  function filterDynamicOptions(value) {
+    const firstNameOptions = ${JSON.stringify(Names.map((name) => name.split(' ')[0]))};
+    const dynamicFirstNameOptions = ${JSON.stringify(Names.map((name) => name.split(' ')[1]))};
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const filteredOptions = [...firstNameOptions, ...dynamicFirstNameOptions].filter((option) =>
+          option.toLowerCase().includes(value.toLowerCase())
+        );
+        resolve(filteredOptions);
+      }, 1000);
+    });
+  }
 
   if(!!modusTable.manualSortingOptions){
     let currentData = globalData;
@@ -651,6 +676,7 @@ const Template = ({
   density,
   wrapText,
   customSort,
+  isInlineEditing,
 }) => html`
   <div style="width: 950px">
     <modus-table
@@ -684,6 +710,7 @@ const Template = ({
     defaultSort,
     customSort,
     errors,
+    isInlineEditing,
   })}
 `;
 
@@ -946,7 +973,7 @@ const EditableColumns = DefaultColumnsWithPriority.map((col) => {
   } else return { ...col, cellEditable: true };
 });
 export const InlineEditing = Template.bind({});
-InlineEditing.args = { ...DefaultArgs, columns: EditableColumns, data: makeData(7), errors: {} };
+InlineEditing.args = { ...DefaultArgs, columns: EditableColumns, data: makeData(7), errors: {}, isInlineEditing: true };
 
 export const LargeDataset = Template.bind({});
 
