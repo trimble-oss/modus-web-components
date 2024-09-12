@@ -35,6 +35,10 @@ export default {
     },
     mode: {
       name: 'mode',
+      control: {
+        options: ['determinate', 'indeterminate'],
+        type: 'select',
+      },
       description: "The progress bar's mode",
       table: {
         defaultValue: { summary: 'determinate' },
