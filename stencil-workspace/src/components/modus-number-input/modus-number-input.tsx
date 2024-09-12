@@ -49,7 +49,7 @@ export class ModusNumberInput {
   @Prop() size: 'medium' | 'large' = 'medium';
 
   /** (optional) The input's step. */
-  @Prop() step: number;
+  @Prop() step = 1;
 
   /** (optional) The input's text alignment. */
   @Prop() textAlign: 'left' | 'right' = 'left';
@@ -93,8 +93,11 @@ export class ModusNumberInput {
   private inputFocused = false;
 
   componentDidLoad(): void {
-    if (this.value && !isNaN(+this.value)) {
-      this.formatValue(true);
+    if (this.currency || this.locale) {
+      this.numberInput.type = 'text';
+      if (this.value && !isNaN(+this.value)) {
+        this.formatValue(true);
+      }
     }
     this.numberInput.addEventListener('wheel', this.handleWheel.bind(this), { passive: true });
 
@@ -103,7 +106,6 @@ export class ModusNumberInput {
 
   disconnectedCallback() {
     this.numberInput.removeEventListener('wheel', this.handleWheel);
-
     document.removeEventListener('click', this.handleDocumentClick.bind(this));
   }
 
@@ -114,8 +116,10 @@ export class ModusNumberInput {
   }
 
   handleOnBlur(): void {
-    this.inputFocused = false;
-    this.formatValue();
+    if (this.currency || this.locale) {
+      this.inputFocused = false;
+      this.formatValue();
+    }
   }
 
   handleKeyPress(event: KeyboardEvent): void {
@@ -169,20 +173,30 @@ export class ModusNumberInput {
   }
 
   handleOnFocus(): void {
-    this.inputFocused = true;
-    this.numberInput.value = this.value;
+    if (this.currency || this.locale) {
+      this.inputFocused = true;
+      this.numberInput.value = this.value;
+    }
   }
 
   incrementValue() {
-    const numericValue = parseFloat(this.value.replace(/[^0-9.-]+/g, ''));
-    const newValue = numericValue + this.step;
-    this.value = newValue.toString();
+    if (this.currency || this.locale) {
+      const numericValue = parseFloat(this.value.replace(/[^0-9.-]+/g, ''));
+      const newValue = numericValue + this.step;
+      this.value = newValue.toString();
+      return;
+    }
+    this.numberInput.stepUp();
   }
 
   decrementValue() {
-    const numericValue = parseFloat(this.value.replace(/[^0-9.-]+/g, ''));
-    const newValue = numericValue - this.step;
-    this.value = newValue.toString();
+    if (this.currency || this.locale) {
+      const numericValue = parseFloat(this.value.replace(/[^0-9.-]+/g, ''));
+      const newValue = numericValue - this.step;
+      this.value = newValue.toString();
+      return;
+    }
+    this.numberInput.stepDown();
   }
 
   handleWheel(event: WheelEvent) {
@@ -268,7 +282,7 @@ export class ModusNumberInput {
             ref={(el) => (this.numberInput = el as HTMLInputElement)}
             step={this.step}
             tabIndex={0}
-            type="text"
+            type="number"
             value={this.value}></input>
           <div class="value-adjusters">
             <div class="increment" onClick={() => this.incrementValue()}>
