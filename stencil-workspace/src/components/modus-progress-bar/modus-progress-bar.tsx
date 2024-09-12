@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import { Component, Prop, h, Host } from '@stencil/core';
 
 @Component({
