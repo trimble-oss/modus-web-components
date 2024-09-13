@@ -639,6 +639,126 @@ Refer to the [Accessibility](#accessibility) section for how to use keyboard for
 
 ```
 
+### Inline Editing - Autocomplete with Dynamic Filtering
+
+This feature extends support for dynamic options within the table's autocomplete editor. Consumers can implement custom/dynamic filtering using the `filterOptions` function, the loading state is handled internally.
+
+```javascript
+const options = ['Mickey', 'Bugs', 'Homer', 'Fred', 'Daffy'];
+const dynamicFilterOptions = ['Scooby', 'Tom', 'Jerry'];
+
+const table = document.querySelector('modus-table');
+table.columns = [
+  {
+    header: 'First Name',
+    accessorKey: 'firstName',
+    id: 'first-name',
+    dataType: 'text',
+    cellEditable: true,
+    cellEditorType: 'autocomplete', // Autocomplete input type
+    cellEditorArgs: {
+      filterOptions: filterDynamicOptions, // Function to dynamically filter options
+      options: options, // Default options
+    },
+  },
+  {
+    header: 'Status',
+    accessorKey: 'status',
+    id: 'status',
+    dataType: 'text',
+    minSize: 80,
+    cellEditable: true,
+    cellEditorType: 'select',
+    cellEditorArgs: {
+      options: [{ display: 'Verified' }, { display: 'Pending' }, { display: 'Rejected' }],
+    },
+  },
+  {
+    header: 'Priority',
+    accessorKey: 'priority',
+    id: 'priority',
+    dataType: 'badge',
+    cellEditable: true,
+    cellEditorType: 'select',
+    cellEditorArgs: {
+      options: [
+        { size: 'medium', type: 'counter', display: 'High', color: 'success' },
+        { size: 'medium', type: 'counter', display: 'Low', color: 'danger' },
+        { size: 'medium', type: 'counter', display: 'Medium', color: 'warning' },
+      ],
+    },
+  },
+  {
+    header: 'Email',
+    accessorKey: 'email',
+    id: 'email',
+    dataType: 'link',
+    size: 230,
+    minSize: 80,
+    cellEditable: true,
+    cellEditorType: 'select',
+    cellEditorArgs: {
+      options: [
+        { display: 'Google', url: 'https://www.google.com' },
+        { display: 'Yahoo', url: 'https://www.yahoo.com' },
+        { display: 'Bing', url: 'https://www.bing.com' },
+      ],
+    },
+  },
+  {
+    header: 'Date',
+    accessorKey: 'date',
+    id: 'date',
+    dataType: 'date', // Date type column
+    cellEditable: true,
+    cellEditorType: 'date',
+  },
+];
+
+table.data = [
+  {
+    firstName: 'John',
+    status: 'Verified',
+    email: { display: 'Google', url: 'https://www.google.com' },
+    priority: { size: 'medium', type: 'counter', display: 'High', color: 'success' },
+    date: '2022-01-01',
+  },
+  {
+    firstName: 'Jane',
+    status: 'Pending',
+    email: { display: 'Yahoo', url: 'https://www.yahoo.com' },
+    priority: { size: 'medium', type: 'counter', display: 'Medium', color: 'warning' },
+    date: '2022-02-01',
+  },
+  {
+    firstName: 'Bob',
+    status: 'Rejected',
+    email: { display: 'Bing', url: 'https://www.bing.com' },
+    priority: { size: 'medium', type: 'counter', display: 'Low', color: 'danger' },
+    date: '2022-03-01',
+  },
+];
+
+/**
+ * Function to dynamically filter options for the 'autocomplete' editor
+ * @param {string} value - The input value to filter the options
+ * @returns {Promise<string[]>} - A promise that resolves with the filtered options
+ */
+function filterDynamicOptions(value) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      // Filter options based on the input value
+      const filteredOptions = [...options, ...dynamicFilterOptions].filter((option) =>
+        option.toLowerCase().includes(value.toLowerCase())
+      );
+
+      // Resolve the promise with filtered options
+      resolve(filteredOptions);
+    }, 1000); // Simulate API delay
+  });
+}
+```
+
 ### Row Actions
 
 Users can add actions to rows. These actions will be shown in the first column as icons. A maximum of 4 icons will be shown, including the expand icon for expandable rows, if there more actions are provided, an overflow menu will be shown with a list of the remaining actions displayed as their label.
@@ -679,6 +799,14 @@ type ModusTableCellEditorType =
   | typeof CELL_EDIT_TYPE_DATE;
 type ModusTableCellDateEditorArgs = { format: string };
 type ModusTableCellSelectEditorArgs = { options: unknown[] };
+type ModusTableCellAutocompleteEditorArgs = {
+  options: ModusAutocompleteOption[];
+  noResultsFoundText: string;
+  noResultsFoundSubtext: string;
+  showNoResultsFoundMessage: boolean;
+  showOptionsOnFocus: boolean;
+  filterOptions: (value: string) => Promise<ModusAutocompleteOption[] | string[]>;
+};
 type ModusTableCellEditorArgs = ModusTableCellSelectEditorArgs | ModusTableCellDateEditorArgs;
 type ModusTableDataUpdaterProps = { rowId: string; accessorKey: string; newValue: string; oldValue?: string };
 type ModusTableSortingFunction<TData extends RowData> = SortingFnOption<TData> | 'sortForHyperlink' | 'sortForBadge';
