@@ -5,6 +5,8 @@
   font-family: $primary-font;
   height: $rem-16px;
   outline: $rem-1px solid $modus-progress-border-color;
+  overflow: hidden;
+  position: relative;
   width: 100%;
 
   &.default-background-color {
@@ -26,6 +28,15 @@
     &.default-text-color {
       color: $col_white;
     }
+
+    &.indeterminate {
+      animation: indeterminate-animation 1.5s infinite linear;
+      background-color: $modus-progress-bar-bg;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+    }
   }
 
   &.small {
@@ -34,5 +45,22 @@
 
   &.compact {
     height: $rem-4px;
+  }
+}
+
+@keyframes indeterminate-animation {
+  0% {
+    left: -50%;
+    width: 50%;
+  }
+
+  50% {
+    left: 25%;
+    width: 50%;
+  }
+
+  100% {
+    left: 100%;
+    width: 50%;
   }
 }
