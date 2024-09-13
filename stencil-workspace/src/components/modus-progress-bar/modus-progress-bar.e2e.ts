@@ -73,4 +73,17 @@ describe('modus-progress-bar', () => {
     await page.waitForChanges();
     expect(el).toHaveClass('compact');
   });
+
+  it('renders changes to mode prop', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-progress-bar></modus-progress-bar>');
+    const component = await page.find('modus-progress-bar');
+    const el = await page.find('modus-progress-bar >>> .progress');
+
+    expect(el).toHaveClass('determinate');
+    component.setProperty('mode', 'indeterminate');
+    await page.waitForChanges();
+    expect(el).toHaveClass('indeterminate');
+  });
 });
