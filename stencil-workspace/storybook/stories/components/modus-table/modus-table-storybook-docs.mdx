@@ -641,7 +641,7 @@ Refer to the [Accessibility](#accessibility) section for how to use keyboard for
 
 ### Inline Editing - Autocomplete with Dynamic Filtering
 
-The dynamic filtering feature in the modus-table component leverages an existing autocomplete component to enhance user interaction. This feature is integrated through the cellEditorArgs property of the table’s columns. When a cell with an autocomplete editor is activated, the filterOptions function is invoked with the user’s input value. This function dynamically filters the list of available options based on the input, providing real-time suggestions that are relevant to the user's search criteria
+This feature extends support for dynamic options within the table's autocomplete editor. Consumers can implement custom/dynamic filtering using the filterOptions function, the loading state is handled internally.
 
 ```javascript
 const options = ['Mickey', 'Bugs', 'Homer', 'Fred', 'Daffy'];
