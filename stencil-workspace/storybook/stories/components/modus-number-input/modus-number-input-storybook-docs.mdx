@@ -28,6 +28,26 @@ This component is compatible with Angular reactive forms. This can be achieved t
 <modus-number-input label="Text Input Demo 6" placeholder="Placeholder" size="large" value="100"></modus-number-input>
 ```
 
+### Currency
+
+- Follow the currency codes from [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) for the `currencySymbol` property.
+
+<modus-number-input label="With Currency" currency="USD" placeholder="Placeholder" value="2400" ></modus-number-input><br />
+
+```html
+<modus-number-input label="With Currency" currency="USD" placeholder="Placeholder" value="2400"></modus-number-input>
+```
+
+### Locale
+
+- Follow the locale codes from [BCP 47](https://tools.ietf.org/html/bcp47) for the `locale` property.
+
+  <modus-number-input label="With Locale" locale="en-IN" placeholder="Placeholder"  value="2400" ></modus-number-input><br />
+
+```html
+<modus-number-input label="With Locale" locale="en-IN" placeholder="Placeholder" value="2400"></modus-number-input>
+```
+
 ### Properties
 
 | Property      | Attribute     | Description                                          | Type                  | Default     |
@@ -74,8 +94,3 @@ This component is compatible with Angular reactive forms. This can be achieved t
 - Number Input gets a `aria-valuemax` provided by the `max-value` property input.
 - Number Input gets a `aria-valuemin` provided by the `min-value` property input.
 - Number Input gets a `aria-valuenow` set to Number Input's current value.
-
-Note :
-
-- Follow the locale codes from [BCP 47](https://tools.ietf.org/html/bcp47) for the `locale` property.
-- Follow the currency codes from [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) for the `currencySymbol` property.

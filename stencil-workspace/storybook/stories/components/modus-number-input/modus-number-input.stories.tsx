@@ -16,7 +16,8 @@ export default {
     },
     currency: {
       name: 'currency',
-      description: 'The currency symbol',
+      description:
+        'The currency symbol.\nNote: Follow the currency codes from [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) for the `currencySymbol` property.\n',
       table: {
         type: { summary: 'string' },
         defaultValue: { summary: "''" },
@@ -24,7 +25,8 @@ export default {
     },
     locale: {
       name: 'locale',
-      description: 'The locale of the selected currency',
+      description:
+        'The locale of the selected currency. Note: Follow the locale codes from [BCP 47](https://tools.ietf.org/html/bcp47) for the `locale` property.',
       table: {
         type: { summary: 'string' },
       },
