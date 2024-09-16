@@ -28,23 +28,18 @@ This component is compatible with Angular reactive forms. This can be achieved t
 <modus-number-input label="Text Input Demo 6" placeholder="Placeholder" size="large" value="100"></modus-number-input>
 ```
 
-### Currency
+### Currency and Locale
 
-- Follow the currency codes from [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) for the `currencySymbol` property.
+The number Input uses Intl.NumberFormat to format the value based on the currency and locale provided.
+
+- Follow the currency codes from [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) for the `currency` property.
+- Follow the locale codes from [BCP 47](https://tools.ietf.org/html/bcp47) for the `locale` property.
 
 <modus-number-input label="With Currency" currency="USD" placeholder="Placeholder" value="2400" ></modus-number-input><br />
+<modus-number-input label="With Locale" locale="en-IN" placeholder="Placeholder"  value="2400" ></modus-number-input><br />
 
 ```html
 <modus-number-input label="With Currency" currency="USD" placeholder="Placeholder" value="2400"></modus-number-input>
-```
-
-### Locale
-
-- Follow the locale codes from [BCP 47](https://tools.ietf.org/html/bcp47) for the `locale` property.
-
-  <modus-number-input label="With Locale" locale="en-IN" placeholder="Placeholder"  value="2400" ></modus-number-input><br />
-
-```html
 <modus-number-input label="With Locale" locale="en-IN" placeholder="Placeholder" value="2400"></modus-number-input>
 ```
 
