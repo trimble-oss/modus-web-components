@@ -1,3 +1,5 @@
+// modus-number-input.stories.tsx
+
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-number-input-storybook-docs.mdx';
 import { html } from 'lit-html';
@@ -99,7 +101,7 @@ export default {
       description: 'The size of the number input',
       table: {
         defaultValue: { summary: `'medium'` },
-        type: { summary: `'medium' | 'large'` },
+        type: { summary: `'large' | 'medium'` },
       },
     },
     step: {
@@ -180,7 +182,7 @@ const Template = ({
     max-value=${maxValue}
     min-value=${minValue}
     placeholder=${placeholder}
-    read-only=${readOnly}
+    ?read-only=${readOnly}
     ?required=${required}
     size=${size}
     step=${step}
@@ -198,7 +200,7 @@ Default.args = {
   errorText: '',
   helperText: '',
   label: 'Number Input',
-  maxValue: 100,
+  maxValue: 100000,
   minValue: 0,
   placeholder: '',
   readOnly: false,
@@ -207,5 +209,5 @@ Default.args = {
   step: 1,
   textAlign: 'left',
   validText: '',
-  value: 100,
+  value: 100000,
 };
