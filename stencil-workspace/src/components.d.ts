@@ -914,6 +914,10 @@ export namespace Components {
          */
         "ariaLabel": string | null;
         /**
+          * (optional) The input's currency
+         */
+        "currency": string;
+        /**
           * (optional) Whether the input is disabled.
          */
         "disabled": boolean;
@@ -933,6 +937,10 @@ export namespace Components {
           * (optional) The input's label.
          */
         "label": string;
+        /**
+          * (optional) The input's locale
+         */
+        "locale": string;
         /**
           * (optional) The input's maximum value.
          */
@@ -1004,6 +1012,10 @@ export namespace Components {
           * (optional) The progress bar's minimum value.
          */
         "minValue": number;
+        /**
+          * (optional) The progress bar's mode.
+         */
+        "mode": 'determinate' | 'indeterminate';
         /**
           * (optional) The progress bar's size.
          */
@@ -3939,6 +3951,10 @@ declare namespace LocalJSX {
          */
         "ariaLabel"?: string | null;
         /**
+          * (optional) The input's currency
+         */
+        "currency"?: string;
+        /**
           * (optional) Whether the input is disabled.
          */
         "disabled"?: boolean;
@@ -3954,6 +3970,10 @@ declare namespace LocalJSX {
           * (optional) The input's label.
          */
         "label"?: string;
+        /**
+          * (optional) The input's locale
+         */
+        "locale"?: string;
         /**
           * (optional) The input's maximum value.
          */
@@ -4033,6 +4053,10 @@ declare namespace LocalJSX {
           * (optional) The progress bar's minimum value.
          */
         "minValue"?: number;
+        /**
+          * (optional) The progress bar's mode.
+         */
+        "mode"?: 'determinate' | 'indeterminate';
         /**
           * (optional) The progress bar's size.
          */
