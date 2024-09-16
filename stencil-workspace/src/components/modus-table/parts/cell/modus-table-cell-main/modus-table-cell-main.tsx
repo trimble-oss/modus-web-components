@@ -325,7 +325,7 @@ export class ModusTableCellMain {
 
   render(): void {
     const valueString = this.cell.getValue()?.toString();
-
+    const cellColumnWidth = this.cell.column.getSize();
     return (
       <Host>
         {this.editMode ? (
@@ -334,6 +334,7 @@ export class ModusTableCellMain {
             value={this.cell.getValue()}
             type={this.getEditorType()}
             args={this.getEditorArgs()}
+            cellSize={cellColumnWidth}
             valueChange={(newVal: string) => this.handleCellEditorValueChange(newVal, valueString)}
             keyDown={(event: KeyboardEvent, newVal: string) => this.handleCellEditorKeyDown(event, newVal, valueString)}
             inputValueChangeHandler={(newVal: string) => this.handleCellEditorOnInputChange(newVal, valueString)}
