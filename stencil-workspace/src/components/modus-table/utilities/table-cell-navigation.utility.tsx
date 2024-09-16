@@ -11,11 +11,12 @@ import {
 interface NavigateTableCellsProps {
   eventKey: string;
   cellElement: HTMLElement;
-  onNavigateComplete?: (nextCell) => void;
+  onNavigateComplete?: (cell: HTMLElement) => void;
 }
 export default function NavigateTableCells(props: NavigateTableCellsProps) {
   const { eventKey: key, cellElement: cell, onNavigateComplete } = props;
   let nextCell: HTMLElement;
+  let nextRowCell: HTMLElement;
 
   const row = cell.closest('tr') as HTMLTableRowElement;
   const index = Array.prototype.indexOf.call(row.children, cell);
@@ -31,17 +32,17 @@ export default function NavigateTableCells(props: NavigateTableCellsProps) {
       cell.focus();
       break;
     case KEYBOARD_TAB:
-      nextCell = (cell.nextSibling as HTMLElement)?.children[0] as HTMLElement;
+      nextCell = (cell.nextSibling as HTMLElement)?.querySelector('modus-table-cell-main') as HTMLElement;
+      nextRowCell = (row.nextSibling as HTMLElement)?.querySelector('modus-table-cell-main') as HTMLElement;
+
       if (nextCell) {
         onNavigateComplete(nextCell);
+      } else if (nextRowCell) {
+        // onNavigateComplete(nextRowCell);
+        // nextRowCell.focus();
+        return;
       } else {
-        const nextRow = row.nextSibling as HTMLElement;
-        if (nextRow) {
-          const modusTableCell = nextRow?.querySelector('modus-table-cell-main') as HTMLElement;
-          if (modusTableCell) {
-            onNavigateComplete(modusTableCell);
-          }
-        }
+        return;
       }
       break;
     case KEYBOARD_RIGHT: // Moves to right cell

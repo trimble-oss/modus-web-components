@@ -173,12 +173,26 @@ export class ModusTableCellMain {
     if (isCellEditable && !this.editMode && key === KEYBOARD_ENTER) {
       this.editMode = true;
       event.stopPropagation();
-    } else {
+    } else if (isCellEditable && this.editMode && key === KEYBOARD_TAB) {
+      event.stopPropagation();
       NavigateTableCells({
         eventKey: event.key,
         cellElement: this.cellEl,
+        onNavigateComplete: (cellElement) => {
+          if (cellElement) {
+            cellElement.focus();
+            const cellComponent = cellElement;
+            if (cellComponent) {
+              (cellComponent as any).componentOnReady().then((componentInstance) => {
+                const nextRowIndex = componentInstance.cell.row.index.toString();
+                const nextColumnId = componentInstance.cell.column.id;
+                componentInstance.handleCellEdit(nextRowIndex, nextColumnId);
+              });
+            }
+          }
+        },
       });
-    }
+    } else return;
   };
 
   handleCellEditorValueChange(newValue: string, oldValue: string) {
@@ -215,25 +229,6 @@ export class ModusTableCellMain {
       this.editMode = false;
       this.cellEl.focus();
       this.destroyErrorTooltip();
-    } else if (key === KEYBOARD_TAB) {
-      NavigateTableCells({
-        eventKey: KEYBOARD_TAB,
-        cellElement: this.cellEl,
-        onNavigateComplete: (cellElement) => {
-          // Focus on the next cell and enable edit mode
-          if (cellElement) {
-            cellElement.focus();
-            const cellComponent = cellElement;
-            if (cellComponent) {
-              (cellComponent as any).componentOnReady().then((componentInstance) => {
-                const nextRowIndex = componentInstance.cell.row.index.toString();
-                const nextColumnId = componentInstance.cell.column.id;
-                componentInstance.handleCellEdit(nextRowIndex, nextColumnId);
-              });
-            }
-          }
-        },
-      });
     } else return;
 
     event.stopPropagation();
