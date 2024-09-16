@@ -26,7 +26,6 @@ import { ModusDateInputEventDetails } from '../../../../modus-date-input/utils/m
 export class ModusTableCellEditor {
   @Prop() args: ModusTableCellEditorArgs;
   @Prop() dataType: string;
-  @Prop() cellSize: number;
   @Prop() value: unknown;
   @Prop() type: string;
   @Prop() valueChange: (newValue: string) => void;
@@ -215,7 +214,6 @@ export class ModusTableCellEditor {
             }
           }}
           position="auto"
-          style={{ '--cell-size': this.cellSize + 'px' }}
           value={selectedOption}></modus-autocomplete>
       </div>
     );

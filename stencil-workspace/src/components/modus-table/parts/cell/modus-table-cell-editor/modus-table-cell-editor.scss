@@ -44,7 +44,7 @@ table.density-compact {
 }
 
 .autocomplete::part(options-container) {
-  width: var(--cell-size, auto);
+  width: auto;
 }
 
 .editor::part(input-container) {
