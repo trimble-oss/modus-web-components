@@ -191,7 +191,12 @@ export class ModusTableCellMain {
           }
         },
       });
-    } else return;
+    } else {
+      NavigateTableCells({
+        eventKey: event.key,
+        cellElement: this.cellEl,
+      });
+    }
   };
 
   handleCellEditorValueChange(newValue: string, oldValue: string) {
