@@ -169,14 +169,13 @@ export class ModusTableCellMain {
 
     const key = event.key?.toLowerCase();
     const isCellEditable = this.cell.column.columnDef[this.cellEditableKey];
-
     if (isCellEditable && !this.editMode && key === KEYBOARD_ENTER) {
       this.editMode = true;
       event.stopPropagation();
     } else if (isCellEditable && this.editMode && key === KEYBOARD_TAB) {
-      event.stopPropagation();
+      const isShiftPressed = event.shiftKey;
       NavigateTableCells({
-        eventKey: event.key,
+        eventKey: isShiftPressed ? 'shift+tab' : event.key,
         cellElement: this.cellEl,
         onNavigateComplete: (cellElement) => {
           if (cellElement) {

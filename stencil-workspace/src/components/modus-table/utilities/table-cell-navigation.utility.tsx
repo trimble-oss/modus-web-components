@@ -15,9 +15,7 @@ interface NavigateTableCellsProps {
 }
 export default function NavigateTableCells(props: NavigateTableCellsProps) {
   const { eventKey: key, cellElement: cell, onNavigateComplete } = props;
-  let nextCell: HTMLElement;
-  let nextRowCell: HTMLElement;
-
+  let nextCell, prevCell, nextRowCell, prevRowCell: HTMLElement;
   const row = cell.closest('tr') as HTMLTableRowElement;
   const index = Array.prototype.indexOf.call(row.children, cell);
 
@@ -31,6 +29,17 @@ export default function NavigateTableCells(props: NavigateTableCellsProps) {
     case KEYBOARD_ESCAPE: // Pressing Escape does nothing but to retain the focus
       cell.focus();
       break;
+    case 'shift+tab':
+      prevCell = (cell.previousSibling as HTMLElement)?.querySelector('modus-table-cell-main') as HTMLElement;
+      prevRowCell = (row.previousSibling?.lastChild as HTMLElement)?.querySelector('modus-table-cell-main') as HTMLElement;
+
+      if (prevCell) {
+        onNavigateComplete(prevCell);
+      } else if (prevRowCell) {
+        onNavigateComplete(prevRowCell);
+        return;
+      }
+      break;
     case KEYBOARD_TAB:
       nextCell = (cell.nextSibling as HTMLElement)?.querySelector('modus-table-cell-main') as HTMLElement;
       nextRowCell = (row.nextSibling as HTMLElement)?.querySelector('modus-table-cell-main') as HTMLElement;
@@ -38,10 +47,7 @@ export default function NavigateTableCells(props: NavigateTableCellsProps) {
       if (nextCell) {
         onNavigateComplete(nextCell);
       } else if (nextRowCell) {
-        // onNavigateComplete(nextRowCell);
-        // nextRowCell.focus();
-        return;
-      } else {
+        onNavigateComplete(nextRowCell);
         return;
       }
       break;
