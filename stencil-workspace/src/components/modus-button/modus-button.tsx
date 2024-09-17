@@ -43,6 +43,8 @@ export class ModusButton {
   /** (Optional) Button types */
   @Prop() type: ButtonType = 'button';
 
+  @Prop() criticalAction: boolean;
+
   /** (optional) An event that fires on button click. */
   @Event() buttonClick: EventEmitter;
 
@@ -149,8 +151,20 @@ export class ModusButton {
         }}
         onKeyDown={() => (this.pressed = true)}
         onKeyUp={() => (this.pressed = false)}
-        onMouseDown={() => (this.pressed = true)}
-        onMouseUp={() => (this.pressed = false)}
+        onMouseDown={() => {
+          this.pressed = true;
+          if (this.criticalAction) {
+            this.buttonRef.classList.remove('reverse');
+            this.buttonRef.classList.add('progress');
+          }
+        }}
+        onMouseUp={() => {
+          this.pressed = false;
+          if (this.criticalAction) {
+            this.buttonRef.classList.remove('progress');
+            this.buttonRef.classList.add('reverse');
+          }
+        }}
         ref={(el) => (this.buttonRef = el)}
         type={this.type}>
         {this.iconOnly ? this.renderIconOnly() : this.renderIconWithText()}

@@ -77,6 +77,7 @@ button {
     .label {
       font-size: $rem-12px;
       padding: 0 4px;
+      z-index: 9;
     }
 
     .icon svg {
@@ -111,6 +112,7 @@ button {
     .label {
       font-size: $rem-14px;
       padding: 0 8px;
+      z-index: 9;
     }
 
     .icon svg {
@@ -145,6 +147,7 @@ button {
     .label {
       font-size: $rem-16px;
       padding: 0 8px;
+      z-index: 9;
     }
 
     .icon svg {
@@ -422,6 +425,44 @@ button {
         }
       }
     }
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background-color: #e44a53;
+    z-index: 1;
+    transition: width 0.3s linear;
+  }
+
+  @keyframes progress-forward {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+
+  @keyframes progress-reverse {
+    0% {
+      width: var(--progress-width, 100%);
+    }
+    100% {
+      width: 0;
+    }
+  }
+
+  &.progress::after {
+    animation: progress-forward 3s forwards;
+  }
+
+  &.reverse::after {
+    animation: progress-reverse 3s forwards;
   }
 }
 
