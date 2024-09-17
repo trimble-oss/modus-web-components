@@ -269,6 +269,7 @@ export namespace Components {
           * (optional) The color of the button
          */
         "color": ButtonColor;
+        "criticalAction": boolean;
         /**
           * (optional) Disables the button.
          */
@@ -3217,6 +3218,7 @@ declare namespace LocalJSX {
           * (optional) The color of the button
          */
         "color"?: ButtonColor;
+        "criticalAction"?: boolean;
         /**
           * (optional) Disables the button.
          */
