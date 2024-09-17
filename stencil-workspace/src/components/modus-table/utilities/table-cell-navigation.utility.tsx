@@ -15,7 +15,7 @@ interface NavigateTableCellsProps {
 }
 export default function NavigateTableCells(props: NavigateTableCellsProps) {
   const { eventKey: key, cellElement: cell, onNavigateComplete } = props;
-  let nextCell, prevCell, nextRowCell, prevRowCell: HTMLElement;
+  let nextCell, prevCell: HTMLElement;
   const row = cell.closest('tr') as HTMLTableRowElement;
   const index = Array.prototype.indexOf.call(row.children, cell);
 
@@ -30,26 +30,18 @@ export default function NavigateTableCells(props: NavigateTableCellsProps) {
       cell.focus();
       break;
     case 'shift+tab':
-      prevCell = (cell.previousSibling as HTMLElement)?.querySelector('modus-table-cell-main') as HTMLElement;
-      prevRowCell = (row.previousSibling?.lastChild as HTMLElement)?.querySelector('modus-table-cell-main') as HTMLElement;
+      prevCell =
+        ((cell.previousSibling as HTMLElement)?.querySelector('modus-table-cell-main') as HTMLElement) ||
+        ((row.previousSibling?.lastChild as HTMLElement)?.querySelector('modus-table-cell-main') as HTMLElement);
 
-      if (prevCell) {
-        onNavigateComplete(prevCell);
-      } else if (prevRowCell) {
-        onNavigateComplete(prevRowCell);
-        return;
-      }
+      if (prevCell) onNavigateComplete(prevCell);
       break;
     case KEYBOARD_TAB:
-      nextCell = (cell.nextSibling as HTMLElement)?.querySelector('modus-table-cell-main') as HTMLElement;
-      nextRowCell = (row.nextSibling as HTMLElement)?.querySelector('modus-table-cell-main') as HTMLElement;
+      nextCell =
+        ((cell.nextSibling as HTMLElement)?.querySelector('modus-table-cell-main') as HTMLElement) ||
+        ((row.nextSibling as HTMLElement)?.querySelector('modus-table-cell-main') as HTMLElement);
 
-      if (nextCell) {
-        onNavigateComplete(nextCell);
-      } else if (nextRowCell) {
-        onNavigateComplete(nextRowCell);
-        return;
-      }
+      if (nextCell) onNavigateComplete(nextCell);
       break;
     case KEYBOARD_RIGHT: // Moves to right cell
       nextCell = cell.nextSibling as HTMLElement;
