@@ -435,21 +435,22 @@ button {
   }
 
   &::after {
+    background-color: $btn-progress-bg;
     content: '';
+    height: 100%;
+    left: 0;
     position: absolute;
     top: 0;
-    left: 0;
-    height: 100%;
-    width: 0;
-    background-color: $btn-progress-bg;
-    z-index: 1;
     transition: width 0.3s linear;
+    width: 0;
+    z-index: 1;
   }
 
   @keyframes progress-forward {
     0% {
       width: 0;
     }
+
     100% {
       width: 100%;
     }
@@ -459,6 +460,7 @@ button {
     0% {
       width: var(--progress-width, 100%);
     }
+
     100% {
       width: 0;
     }
