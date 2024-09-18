@@ -269,6 +269,9 @@ export namespace Components {
           * (optional) The color of the button
          */
         "color": ButtonColor;
+        /**
+          * (Optional) enable the progress animation for danger button
+         */
         "criticalAction": boolean;
         /**
           * (optional) Disables the button.
@@ -3218,6 +3221,9 @@ declare namespace LocalJSX {
           * (optional) The color of the button
          */
         "color"?: ButtonColor;
+        /**
+          * (Optional) enable the progress animation for danger button
+         */
         "criticalAction"?: boolean;
         /**
           * (optional) Disables the button.
