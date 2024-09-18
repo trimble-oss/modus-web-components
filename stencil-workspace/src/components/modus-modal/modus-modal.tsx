@@ -48,7 +48,10 @@ export class ModusModal {
   /** (optional) The modal's backdrop. Specify 'static' for a backdrop that doesn't close the modal when clicked outside the modal content */
   @Prop() backdrop: 'default' | 'static' = 'default';
 
-  /** (optional) The modal's full screen view */
+  /** (optional) Show full screen toggle. */
+  @Prop() showFullscreenToggle = false;
+
+  /** (optional) The modal's full screen view. */
   @Prop({ mutable: true }) fullscreen = false;
 
   /** An event that fires on modal close.  */
@@ -188,14 +191,16 @@ export class ModusModal {
       <header class={{ scrollable: this.isContentScrollable }}>
         {this.headerText}
         <div class="header-buttons">
-          <div
-            role="button"
-            tabindex={0}
-            aria-label={this.fullscreen ? 'Collapse' : 'Expand'}
-            onClick={() => this.toggleFullscreen()}
-            onKeyDown={(event) => this.handleEnterKeydown(event, () => this.toggleFullscreen())}>
-            {this.fullscreen ? <IconCollapse size="24" /> : <IconExpand size="24" />}
-          </div>
+          {this.showFullscreenToggle && (
+            <div
+              role="button"
+              tabindex={0}
+              aria-label={this.fullscreen ? 'Collapse' : 'Expand'}
+              onClick={() => this.toggleFullscreen()}
+              onKeyDown={(event) => this.handleEnterKeydown(event, () => this.toggleFullscreen())}>
+              {this.fullscreen ? <IconCollapse size="24" /> : <IconExpand size="24" />}
+            </div>
+          )}
           <div
             role="button"
             tabindex={0}
