@@ -144,8 +144,15 @@ export class ModusButton {
         progressWidth: Math.min((elapsedTime / this.progressState.animationDuration) * 100, 100),
         progressClass: 'reverse',
       };
-      this.buttonRef.classList.remove('progress');
-      this.buttonRef.classList.add('reverse');
+
+      if (this.progressState.progressWidth >= 100) {
+        this.buttonClick.emit();
+        this.buttonRef.classList.remove('progress');
+        this.buttonRef.classList.remove('reverse');
+      } else {
+        this.buttonRef.classList.remove('progress');
+        this.buttonRef.classList.add('reverse');
+      }
 
       setTimeout(() => {
         this.progressState = {
@@ -186,7 +193,7 @@ export class ModusButton {
         class={className}
         disabled={this.disabled}
         onClick={() => {
-          if (!this.disabled) {
+          if (!this.disabled && !this.criticalAction) {
             this.buttonClick.emit();
             if (this.type === 'toggle') {
               this.isActive = !this.isActive;

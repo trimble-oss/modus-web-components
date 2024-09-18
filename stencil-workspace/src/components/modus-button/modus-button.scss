@@ -336,7 +336,8 @@ button {
         border-color: var(--modus-btn-#{$color}-hover-bg, $hover-border-color);
 
         &.progress,
-        &.reverse {
+        &.reverse,
+        &.progress-complete {
           background-color: var(--modus-btn-#{$color}-bg, $value);
           border-color: var(--modus-btn-#{$color}-border-color, $border-color);
           color: var(--modus-btn-#{$color}-color, $default-text-color);
@@ -471,7 +472,7 @@ button {
   }
 
   &.reverse::after {
-    animation: progress-reverse 2s linear forwards;
+    animation: progress-reverse 3s linear forwards;
   }
 }
 
