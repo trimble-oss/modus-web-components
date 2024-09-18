@@ -57,11 +57,23 @@ describe('modus-tabs', () => {
     expect(tabChange).toHaveReceivedEvent();
   });
 
+  it('renders changes on tabs even without tab id provided', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-tabs></modus-tabs>');
+    const modusTabs = await page.find('modus-tabs');
+    modusTabs.setProperty('tabs', [{ label: 'Tab1' }, { id: 0, label: 'Tab 2' }]);
+    await page.waitForChanges();
+    const element = await page.find('modus-tabs >>> button');
+
+    expect(element.id).toEqual('tab-label-tab1');
+  });
+
   it('renders aria-label on tabs div when set', async () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-tabs aria-label="test label"></modus-tabs>');
-    let element = await page.find('modus-tabs >>> .modus-tabs');
+    const element = await page.find('modus-tabs >>> .modus-tabs');
     expect(element).toBeDefined();
     expect(element).toHaveAttribute('aria-label');
     expect(element.getAttribute('aria-label')).toEqual('test label');
@@ -71,7 +83,7 @@ describe('modus-tabs', () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-tabs></modus-tabs>');
-    let element = await page.find('modus-tabs >>> .modus-tabs');
+    const element = await page.find('modus-tabs >>> .modus-tabs');
     expect(element).toBeDefined();
     expect(element).not.toHaveAttribute('aria-label');
   });
@@ -80,7 +92,7 @@ describe('modus-tabs', () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-tabs aria-label=""></modus-tabs>');
-    let element = await page.find('modus-tabs >>> .modus-tabs');
+    const element = await page.find('modus-tabs >>> .modus-tabs');
     expect(element).toBeDefined();
     expect(element).not.toHaveAttribute('aria-label');
   });

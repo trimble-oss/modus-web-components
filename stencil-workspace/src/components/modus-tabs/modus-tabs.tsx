@@ -1,6 +1,7 @@
 // eslint-disable-next-line
 import { Component, Event, EventEmitter, Fragment, h, JSX, Prop } from '@stencil/core';
 import { ModusIconMap } from '../../icons/ModusIconMap';
+import { kebabCase } from '../../utils/utils';
 
 export interface Tab {
   active?: boolean;
@@ -87,6 +88,10 @@ export class ModusTabs {
 
   render(): unknown {
     const tabs = this.tabs.map((tab: Tab) => {
+      if (!tab.id) {
+        tab.id = tab?.label ? `tab-label-${kebabCase(tab.label)}` : `tab-label-${this.tabs.indexOf(tab).toString()}`;
+      }
+
       return (
         <button
           id={`${tab.id}`}

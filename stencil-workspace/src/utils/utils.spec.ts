@@ -1,4 +1,4 @@
-import { createGuid, generateElementId } from './utils';
+import { createGuid, generateElementId, kebabCase } from './utils';
 
 describe('createGuid', () => {
   it('returns truthy guid value', () => {
@@ -17,5 +17,11 @@ describe('generateElementId', () => {
 
   it('second run return 1 at the end', () => {
     expect(generateElementId()).toEqual('mwc_id_1');
+  });
+});
+
+describe('kebabCase', () => {
+  it('should return kebab case string - with whitespace', () => {
+    expect(kebabCase('This is a string')).toEqual('this-is-a-string');
   });
 });
