@@ -332,8 +332,16 @@ button {
 
       // Hover state
       &.color-#{$color}:hover:not([disabled]) {
-        // background-color: var(--modus-btn-#{$color}-hover-bg, map-get($btn-hover-colors, $color));
-        // border-color: var(--modus-btn-#{$color}-hover-bg, $hover-border-color);
+        background-color: var(--modus-btn-#{$color}-hover-bg, map-get($btn-hover-colors, $color));
+        border-color: var(--modus-btn-#{$color}-hover-bg, $hover-border-color);
+
+        &.progress,
+        &.reverse,
+        &[style*='--progress-width:'] {
+          background-color: var(--modus-btn-#{$color}-bg, $value);
+          border-color: var(--modus-btn-#{$color}-border-color, $border-color);
+          color: var(--modus-btn-#{$color}-color, $default-text-color);
+        }
       }
 
       // Active state
