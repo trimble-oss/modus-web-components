@@ -77,7 +77,15 @@ export default {
     },
     fullscreen: {
       name: 'fullscreen',
-      description: "The modal's full screen view",
+      description:
+        "The modal's full screen view. It will be displayed in full screen view only if showToggleButtons and fullscreen are set to true",
+      table: {
+        type: { summary: 'boolean' },
+      },
+    },
+    showToggleButtons: {
+      name: 'showToggleButtons',
+      description: 'Show toggle buttons',
       table: {
         type: { summary: 'boolean' },
       },
@@ -111,6 +119,7 @@ const Template = ({
   zIndex,
   backdrop,
   fullscreen,
+  showToggleButtons,
 }) => html`
   <modus-button id="btn-modal" color="primary">Open modal</modus-button>
   <modus-modal
@@ -124,7 +133,8 @@ const Template = ({
     secondary-button-text=${secondaryButtonText}
     z-index=${zIndex}
     backdrop=${backdrop}
-    fullscreen=${fullscreen}>
+    fullscreen=${fullscreen}
+    show-toggle-buttons=${showToggleButtons}>
     <p>Woo-hoo, you're reading this text in a modal!</p>
   </modus-modal>
   ${setScript()}
@@ -142,16 +152,18 @@ Default.args = {
   zIndex: '1',
   backdrop: 'default',
   fullscreen: false,
+  showToggleButtons: false,
 };
 
-const CustomFooterTemplate = ({ ariaLabel, headerText, zIndex, backdrop, fullscreen }) => html`
+const CustomFooterTemplate = ({ ariaLabel, headerText, zIndex, backdrop, fullscreen, showToggleButtons }) => html`
   <modus-button id="btn-modal" color="primary">Open modal</modus-button>
   <modus-modal
     aria-label=${ariaLabel}
     header-text=${headerText}
     z-index=${zIndex}
     backdrop=${backdrop}
-    fullscreen=${fullscreen}>
+    fullscreen=${fullscreen}
+    show-toggle-buttons=${showToggleButtons}>
     <p>
       A dialog or a modal is a window overlaid on the primary window. It interrupts the user and requires an action. It
       disables the main content until the user explicitly interacts with the modal dialog.
@@ -175,6 +187,7 @@ CustomFooter.args = {
   zIndex: '1',
   backdrop: 'default',
   fullscreen: false,
+  showToggleButtons: false,
 };
 
 const setScript = () => {
