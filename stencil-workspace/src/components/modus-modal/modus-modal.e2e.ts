@@ -337,8 +337,8 @@ describe('modus-modal', () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-modal aria-label="test label" visible="true"></modus-modal>');
-    let component = await page.find('modus-modal');
-    let element = await page.find('modus-modal >>> .modus-modal');
+    const component = await page.find('modus-modal');
+    const element = await page.find('modus-modal >>> .modus-modal');
     await component.callMethod('open');
     await page.waitForChanges();
 
@@ -351,8 +351,8 @@ describe('modus-modal', () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-modal  visible="true"></modus-modal>');
-    let component = await page.find('modus-modal');
-    let element = await page.find('modus-modal >>> .modus-modal');
+    const component = await page.find('modus-modal');
+    const element = await page.find('modus-modal >>> .modus-modal');
     await component.callMethod('open');
     await page.waitForChanges();
 
@@ -364,8 +364,8 @@ describe('modus-modal', () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-modal  visible="true" aria-label=""></modus-modal>');
-    let component = await page.find('modus-modal');
-    let element = await page.find('modus-modal >>> .modus-modal');
+    const component = await page.find('modus-modal');
+    const element = await page.find('modus-modal >>> .modus-modal');
     await component.callMethod('open');
     await page.waitForChanges();
 
@@ -373,12 +373,12 @@ describe('modus-modal', () => {
     expect(element).not.toHaveAttribute('aria-label');
   });
 
-  it('does open modal in full screen view', async () => {
+  it('does open modal in full screen view when fullscreen and showToggleButtons are true', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<modus-modal fullscreen="true"></modus-modal>');
-    let component = await page.find('modus-modal');
-    let element = await page.find('modus-modal >>> .modus-modal');
+    await page.setContent('<modus-modal fullscreen="true" show-toggle-buttons=true></modus-modal>');
+    const component = await page.find('modus-modal');
+    const element = await page.find('modus-modal >>> .modus-modal');
     await component.callMethod('open');
     await page.waitForChanges();
 
@@ -386,12 +386,12 @@ describe('modus-modal', () => {
     expect(element).toHaveClass('fullscreen');
   });
 
-  it('does open modal in normal screen view', async () => {
+  it('does not open modal in full screen view when fullscreen is true and showToggleButtons is false', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<modus-modal fullscreen="false"></modus-modal>');
-    let component = await page.find('modus-modal');
-    let element = await page.find('modus-modal >>> .modus-modal');
+    await page.setContent('<modus-modal fullscreen="true" show-toggle-buttons=false></modus-modal>');
+    const component = await page.find('modus-modal');
+    const element = await page.find('modus-modal >>> .modus-modal');
     await component.callMethod('open');
     await page.waitForChanges();
 
@@ -399,10 +399,23 @@ describe('modus-modal', () => {
     expect(element).not.toHaveClass('fullscreen');
   });
 
-  it('should expand and collapse the modal', async () => {
+  it('does open modal in normal screen view', async () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-modal fullscreen="false"></modus-modal>');
+    const component = await page.find('modus-modal');
+    const element = await page.find('modus-modal >>> .modus-modal');
+    await component.callMethod('open');
+    await page.waitForChanges();
+
+    expect(element).toBeDefined();
+    expect(element).not.toHaveClass('fullscreen');
+  });
+
+  it('should expand and collapse the modal when toggle buttons are visible', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-modal fullscreen="false" show-toggle-buttons=true></modus-modal>');
     const component = await page.find('modus-modal');
     const element = await page.find('modus-modal >>> .modus-modal');
     await component.callMethod('open');
@@ -426,5 +439,44 @@ describe('modus-modal', () => {
     await page.waitForChanges();
 
     expect(element).not.toHaveClass('fullscreen');
+  });
+
+  it('modal should has the toggle buttons visible when showToggleButtons is true', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-modal show-toggle-buttons=true></modus-modal>');
+    const component = await page.find('modus-modal');
+    const element = await page.find('modus-modal >>> .modus-modal');
+    await component.callMethod('open');
+    await page.waitForChanges();
+
+    expect(element).toBeDefined();
+
+    const expandButton = await page.find('modus-modal >>> .icon-expand');
+    expect(expandButton).toBeDefined();
+
+    await expandButton.click();
+    await page.waitForChanges();
+
+    const collapseButton = await page.find('modus-modal >>> .icon-collapse');
+    expect(collapseButton).toBeDefined();
+  });
+
+  it('modal should not have the toggle buttons visible when showToggleButtons is false', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-modal show-toggle-buttons=false></modus-modal>');
+    const component = await page.find('modus-modal');
+    const element = await page.find('modus-modal >>> .modus-modal');
+    await component.callMethod('open');
+    await page.waitForChanges();
+
+    expect(element).toBeDefined();
+
+    const expandButton = await page.find('modus-modal >>> .icon-expand');
+    const collapseButton = await page.find('modus-modal >>> .icon-collapse');
+
+    expect(expandButton).toBeFalsy();
+    expect(collapseButton).toBeFalsy();
   });
 });

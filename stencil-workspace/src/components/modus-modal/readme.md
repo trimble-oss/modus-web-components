@@ -7,19 +7,20 @@
 
 ## Properties
 
-| Property                   | Attribute                     | Description                                                                                                                          | Type                    | Default     |
-| -------------------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ----------------------- | ----------- |
-| `ariaLabel`                | `aria-label`                  | (optional) The modal's aria-label.                                                                                                   | `string`                | `undefined` |
-| `backdrop`                 | `backdrop`                    | (optional) The modal's backdrop. Specify 'static' for a backdrop that doesn't close the modal when clicked outside the modal content | `"default" \| "static"` | `'default'` |
-| `fullscreen`               | `fullscreen`                  | (optional) The modal's full screen view                                                                                              | `boolean`               | `false`     |
-| `headerText`               | `header-text`                 | (optional) The modal's primary button text.                                                                                          | `string`                | `undefined` |
-| `primaryButtonAriaLabel`   | `primary-button-aria-label`   | (optional) The modal's primary button aria-label.                                                                                    | `string`                | `undefined` |
-| `primaryButtonDisabled`    | `primary-button-disabled`     | (optional) Disable primary button.                                                                                                   | `boolean`               | `undefined` |
-| `primaryButtonText`        | `primary-button-text`         | (optional) The modal's primary button text.                                                                                          | `string`                | `undefined` |
-| `secondaryButtonAriaLabel` | `secondary-button-aria-label` | (optional) The modal's secondary button aria-label.                                                                                  | `string`                | `undefined` |
-| `secondaryButtonDisabled`  | `secondary-button-disabled`   | (optional) Disable secondary button.                                                                                                 | `boolean`               | `undefined` |
-| `secondaryButtonText`      | `secondary-button-text`       | (optional) The modal's secondary button text.                                                                                        | `string`                | `undefined` |
-| `zIndex`                   | `z-index`                     | (optional) The modal's z-index.                                                                                                      | `string`                | `'1'`       |
+| Property                   | Attribute                     | Description                                                                                                                                | Type                    | Default     |
+| -------------------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------- | ----------- |
+| `ariaLabel`                | `aria-label`                  | (optional) The modal's aria-label.                                                                                                         | `string`                | `undefined` |
+| `backdrop`                 | `backdrop`                    | (optional) The modal's backdrop. Specify 'static' for a backdrop that doesn't close the modal when clicked outside the modal content       | `"default" \| "static"` | `'default'` |
+| `fullscreen`               | `fullscreen`                  | (optional) The modal's full screen view. It will be displayed in full screen view only if showToggleButtons and fullscreen are set to true | `boolean`               | `false`     |
+| `headerText`               | `header-text`                 | (optional) The modal's primary button text.                                                                                                | `string`                | `undefined` |
+| `primaryButtonAriaLabel`   | `primary-button-aria-label`   | (optional) The modal's primary button aria-label.                                                                                          | `string`                | `undefined` |
+| `primaryButtonDisabled`    | `primary-button-disabled`     | (optional) Disable primary button.                                                                                                         | `boolean`               | `undefined` |
+| `primaryButtonText`        | `primary-button-text`         | (optional) The modal's primary button text.                                                                                                | `string`                | `undefined` |
+| `secondaryButtonAriaLabel` | `secondary-button-aria-label` | (optional) The modal's secondary button aria-label.                                                                                        | `string`                | `undefined` |
+| `secondaryButtonDisabled`  | `secondary-button-disabled`   | (optional) Disable secondary button.                                                                                                       | `boolean`               | `undefined` |
+| `secondaryButtonText`      | `secondary-button-text`       | (optional) The modal's secondary button text.                                                                                              | `string`                | `undefined` |
+| `showToggleButtons`        | `show-toggle-buttons`         | (optional) Show toggle buttons.                                                                                                            | `boolean`               | `false`     |
+| `zIndex`                   | `z-index`                     | (optional) The modal's z-index.                                                                                                            | `string`                | `'1'`       |
 
 
 ## Events

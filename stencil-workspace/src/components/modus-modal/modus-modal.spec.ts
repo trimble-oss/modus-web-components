@@ -21,9 +21,9 @@ describe('modus-modal', () => {
   it('renders', async () => {
     const { root } = await newSpecPage({
       components: [ModusModal],
-      html: '<modus-modal></modus-modal>',
+      html: '<modus-modal show-toggle-buttons=true></modus-modal>',
     });
-    expect(root).toEqualHtml(` <modus-modal>
+    expect(root).toEqualHtml(` <modus-modal show-toggle-buttons=true>
       <mock:shadow-root>
         <div aria-hidden="true" class="modus-modal overlay hidden" style="z-index: 1;">
           <div class="content">

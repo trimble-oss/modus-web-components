@@ -48,7 +48,10 @@ export class ModusModal {
   /** (optional) The modal's backdrop. Specify 'static' for a backdrop that doesn't close the modal when clicked outside the modal content */
   @Prop() backdrop: 'default' | 'static' = 'default';
 
-  /** (optional) The modal's full screen view */
+  /** (optional) Show toggle buttons. */
+  @Prop() showToggleButtons = false;
+
+  /** (optional) The modal's full screen view. It will be displayed in full screen view only if showToggleButtons and fullscreen are set to true */
   @Prop({ mutable: true }) fullscreen = false;
 
   /** An event that fires on modal close.  */
@@ -188,14 +191,16 @@ export class ModusModal {
       <header class={{ scrollable: this.isContentScrollable }}>
         {this.headerText}
         <div class="header-buttons">
-          <div
-            role="button"
-            tabindex={0}
-            aria-label={this.fullscreen ? 'Collapse' : 'Expand'}
-            onClick={() => this.toggleFullscreen()}
-            onKeyDown={(event) => this.handleEnterKeydown(event, () => this.toggleFullscreen())}>
-            {this.fullscreen ? <IconCollapse size="24" /> : <IconExpand size="24" />}
-          </div>
+          {this.showToggleButtons && (
+            <div
+              role="button"
+              tabindex={0}
+              aria-label={this.fullscreen ? 'Collapse' : 'Expand'}
+              onClick={() => this.toggleFullscreen()}
+              onKeyDown={(event) => this.handleEnterKeydown(event, () => this.toggleFullscreen())}>
+              {this.fullscreen ? <IconCollapse size="24" /> : <IconExpand size="24" />}
+            </div>
+          )}
           <div
             role="button"
             tabindex={0}
@@ -248,7 +253,7 @@ export class ModusModal {
         aria-hidden={this.visible ? undefined : 'true'}
         aria-label={this.visible ? this.ariaLabel || undefined : undefined}
         aria-modal={this.visible ? 'true' : undefined}
-        class={`modus-modal ${this.fullscreen ? 'fullscreen' : ''} overlay ${this.visible ? 'visible' : 'hidden'}`}
+        class={`modus-modal ${this.fullscreen && this.showToggleButtons ? 'fullscreen' : ''} overlay ${this.visible ? 'visible' : 'hidden'}`}
         onClick={(event) => this.handleOverlayClick(event)}
         role={this.visible ? 'dialog' : undefined}
         style={{ zIndex: this.zIndex }}>
