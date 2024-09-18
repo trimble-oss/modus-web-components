@@ -43,6 +43,7 @@ export class ModusButton {
   /** (Optional) Button types */
   @Prop() type: ButtonType = 'button';
 
+  /**(Optional) enable the progress animation for danger button*/
   @Prop() criticalAction: boolean;
 
   /** (optional) An event that fires on button click. */
@@ -136,7 +137,7 @@ export class ModusButton {
 
   handleMouseUp() {
     this.pressed = false;
-    if (this.criticalAction && this.color === 'danger') {
+    if (this.criticalAction && this.color === 'danger' && !this.disabled) {
       const elapsedTime = Date.now() - this.progressState.startTime;
       this.progressState = {
         ...this.progressState,
@@ -145,12 +146,21 @@ export class ModusButton {
       };
       this.buttonRef.classList.remove('progress');
       this.buttonRef.classList.add('reverse');
+
+      setTimeout(() => {
+        this.progressState = {
+          ...this.progressState,
+          progressWidth: 0,
+          progressClass: '',
+        };
+        this.buttonRef.classList.remove('reverse');
+      }, this.progressState.animationDuration);
     }
   }
 
   handleMouseDown() {
     this.pressed = true;
-    if (this.criticalAction && this.color === 'danger') {
+    if (this.criticalAction && this.color === 'danger' && !this.disabled) {
       this.progressState = {
         ...this.progressState,
         progressClass: 'progress',
