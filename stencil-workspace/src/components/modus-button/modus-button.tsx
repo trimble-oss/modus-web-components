@@ -54,6 +54,13 @@ export class ModusButton {
 
   @State() pressed: boolean;
 
+  @State() progressState = {
+    progressClass: '',
+    progressWidth: 0,
+    startTime: 0,
+    animationDuration: 3000,
+  };
+
   classByButtonStyle: Map<string, string> = new Map([
     ['borderless', 'style-borderless'],
     ['fill', 'style-fill'],
@@ -127,6 +134,33 @@ export class ModusButton {
     );
   }
 
+  handleMouseUp() {
+    this.pressed = false;
+    if (this.criticalAction && this.color === 'danger') {
+      const elapsedTime = Date.now() - this.progressState.startTime;
+      this.progressState = {
+        ...this.progressState,
+        progressWidth: Math.min((elapsedTime / this.progressState.animationDuration) * 100, 100),
+        progressClass: 'reverse',
+      };
+      this.buttonRef.classList.remove('progress');
+      this.buttonRef.classList.add('reverse');
+    }
+  }
+
+  handleMouseDown() {
+    this.pressed = true;
+    if (this.criticalAction && this.color === 'danger') {
+      this.progressState = {
+        ...this.progressState,
+        progressClass: 'progress',
+        startTime: Date.now(),
+      };
+      this.buttonRef.classList.remove('reverse');
+      this.buttonRef.classList.add('progress');
+    }
+  }
+
   render(): unknown {
     const className = `${this.classBySize.get(
       this.size
@@ -149,22 +183,11 @@ export class ModusButton {
             }
           }
         }}
+        style={{ '--progress-width': `${this.progressState.progressWidth}%` }}
         onKeyDown={() => (this.pressed = true)}
         onKeyUp={() => (this.pressed = false)}
-        onMouseDown={() => {
-          this.pressed = true;
-          if (this.criticalAction) {
-            this.buttonRef.classList.remove('reverse');
-            this.buttonRef.classList.add('progress');
-          }
-        }}
-        onMouseUp={() => {
-          this.pressed = false;
-          if (this.criticalAction) {
-            this.buttonRef.classList.remove('progress');
-            this.buttonRef.classList.add('reverse');
-          }
-        }}
+        onMouseDown={() => this.handleMouseDown()}
+        onMouseUp={() => this.handleMouseUp()}
         ref={(el) => (this.buttonRef = el)}
         type={this.type}>
         {this.iconOnly ? this.renderIconOnly() : this.renderIconWithText()}
