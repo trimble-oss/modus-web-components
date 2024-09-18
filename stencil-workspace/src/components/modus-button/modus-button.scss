@@ -332,8 +332,8 @@ button {
 
       // Hover state
       &.color-#{$color}:hover:not([disabled]) {
-        background-color: var(--modus-btn-#{$color}-hover-bg, map-get($btn-hover-colors, $color));
-        border-color: var(--modus-btn-#{$color}-hover-bg, $hover-border-color);
+        // background-color: var(--modus-btn-#{$color}-hover-bg, map-get($btn-hover-colors, $color));
+        // border-color: var(--modus-btn-#{$color}-hover-bg, $hover-border-color);
       }
 
       // Active state
@@ -434,7 +434,7 @@ button {
     left: 0;
     height: 100%;
     width: 0;
-    background-color: #e44a53;
+    background-color: $btn-progress-bg;
     z-index: 1;
     transition: width 0.3s linear;
   }
@@ -458,11 +458,11 @@ button {
   }
 
   &.progress::after {
-    animation: progress-forward 3s forwards;
+    animation: progress-forward 3s linear forwards;
   }
 
   &.reverse::after {
-    animation: progress-reverse 3s forwards;
+    animation: progress-reverse 2s linear forwards;
   }
 }
 
