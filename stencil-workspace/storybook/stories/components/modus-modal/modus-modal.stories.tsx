@@ -82,9 +82,9 @@ export default {
         type: { summary: 'boolean' },
       },
     },
-    showToggleButtons: {
-      name: 'showToggleButtons',
-      description: 'Show toggle buttons',
+    showFullscreenToggle: {
+      name: 'showFullscreenToggle',
+      description: 'Show full screen toggle',
       table: {
         type: { summary: 'boolean' },
       },
@@ -118,7 +118,7 @@ const Template = ({
   zIndex,
   backdrop,
   fullscreen,
-  showToggleButtons,
+  showFullscreenToggle,
 }) => html`
   <modus-button id="btn-modal" color="primary">Open modal</modus-button>
   <modus-modal
@@ -133,7 +133,7 @@ const Template = ({
     z-index=${zIndex}
     backdrop=${backdrop}
     fullscreen=${fullscreen}
-    show-toggle-buttons=${showToggleButtons}>
+    show-fullscreen-toggle=${showFullscreenToggle}>
     <p>Woo-hoo, you're reading this text in a modal!</p>
   </modus-modal>
   ${setScript()}
@@ -151,10 +151,10 @@ Default.args = {
   zIndex: '1',
   backdrop: 'default',
   fullscreen: false,
-  showToggleButtons: false,
+  showFullscreenToggle: false,
 };
 
-const CustomFooterTemplate = ({ ariaLabel, headerText, zIndex, backdrop, fullscreen, showToggleButtons }) => html`
+const CustomFooterTemplate = ({ ariaLabel, headerText, zIndex, backdrop, fullscreen, showFullscreenToggle }) => html`
   <modus-button id="btn-modal" color="primary">Open modal</modus-button>
   <modus-modal
     aria-label=${ariaLabel}
@@ -162,7 +162,7 @@ const CustomFooterTemplate = ({ ariaLabel, headerText, zIndex, backdrop, fullscr
     z-index=${zIndex}
     backdrop=${backdrop}
     fullscreen=${fullscreen}
-    show-toggle-buttons=${showToggleButtons}>
+    show-fullscreen-toggle=${showFullscreenToggle}>
     <p>
       A dialog or a modal is a window overlaid on the primary window. It interrupts the user and requires an action. It
       disables the main content until the user explicitly interacts with the modal dialog.
@@ -186,7 +186,7 @@ CustomFooter.args = {
   zIndex: '1',
   backdrop: 'default',
   fullscreen: false,
-  showToggleButtons: false,
+  showFullscreenToggle: false,
 };
 
 const setScript = () => {

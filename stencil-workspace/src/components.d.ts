@@ -788,9 +788,9 @@ export namespace Components {
          */
         "secondaryButtonText": string;
         /**
-          * (optional) Show toggle buttons.
+          * (optional) Show full screen toggle.
          */
-        "showToggleButtons": boolean;
+        "showFullscreenToggle": boolean;
         /**
           * (optional) The modal's z-index.
          */
@@ -3767,9 +3767,9 @@ declare namespace LocalJSX {
          */
         "secondaryButtonText"?: string;
         /**
-          * (optional) Show toggle buttons.
+          * (optional) Show full screen toggle.
          */
-        "showToggleButtons"?: boolean;
+        "showFullscreenToggle"?: boolean;
         /**
           * (optional) The modal's z-index.
          */

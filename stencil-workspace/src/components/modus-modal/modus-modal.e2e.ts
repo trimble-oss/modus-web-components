@@ -402,7 +402,7 @@ describe('modus-modal', () => {
   it('should expand and collapse the modal when toggle buttons are visible', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<modus-modal fullscreen="false" show-toggle-buttons="true"></modus-modal>');
+    await page.setContent('<modus-modal fullscreen="false" show-fullscreen-toggle="true"></modus-modal>');
     const component = await page.find('modus-modal');
     const element = await page.find('modus-modal >>> .modus-modal');
     await component.callMethod('open');
@@ -428,10 +428,10 @@ describe('modus-modal', () => {
     expect(element).not.toHaveClass('fullscreen');
   });
 
-  it('modal should has the toggle buttons visible when showToggleButtons is true', async () => {
+  it('modal should has the toggle buttons visible when showFullscreenToggle is true', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<modus-modal show-toggle-buttons="true"></modus-modal>');
+    await page.setContent('<modus-modal show-fullscreen-toggle="true"></modus-modal>');
     const component = await page.find('modus-modal');
     const element = await page.find('modus-modal >>> .modus-modal');
     await component.callMethod('open');
@@ -449,10 +449,10 @@ describe('modus-modal', () => {
     expect(collapseButton).toBeDefined();
   });
 
-  it('modal should not have the toggle buttons visible when showToggleButtons is false', async () => {
+  it('modal should not have the toggle buttons visible when showFullscreenToggle is false', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<modus-modal show-toggle-buttons="false"></modus-modal>');
+    await page.setContent('<modus-modal show-fullscreen-toggle="false"></modus-modal>');
     const component = await page.find('modus-modal');
     const element = await page.find('modus-modal >>> .modus-modal');
     await component.callMethod('open');

@@ -19,7 +19,7 @@
 | `secondaryButtonAriaLabel` | `secondary-button-aria-label` | (optional) The modal's secondary button aria-label.                                                                                  | `string`                | `undefined` |
 | `secondaryButtonDisabled`  | `secondary-button-disabled`   | (optional) Disable secondary button.                                                                                                 | `boolean`               | `undefined` |
 | `secondaryButtonText`      | `secondary-button-text`       | (optional) The modal's secondary button text.                                                                                        | `string`                | `undefined` |
-| `showToggleButtons`        | `show-toggle-buttons`         | (optional) Show toggle buttons.                                                                                                      | `boolean`               | `false`     |
+| `showFullscreenToggle`     | `show-fullscreen-toggle`      | (optional) Show full screen toggle.                                                                                                  | `boolean`               | `false`     |
 | `zIndex`                   | `z-index`                     | (optional) The modal's z-index.                                                                                                      | `string`                | `'1'`       |
 
 

@@ -48,8 +48,8 @@ export class ModusModal {
   /** (optional) The modal's backdrop. Specify 'static' for a backdrop that doesn't close the modal when clicked outside the modal content */
   @Prop() backdrop: 'default' | 'static' = 'default';
 
-  /** (optional) Show toggle buttons. */
-  @Prop() showToggleButtons = false;
+  /** (optional) Show full screen toggle. */
+  @Prop() showFullscreenToggle = false;
 
   /** (optional) The modal's full screen view. */
   @Prop({ mutable: true }) fullscreen = false;
@@ -191,7 +191,7 @@ export class ModusModal {
       <header class={{ scrollable: this.isContentScrollable }}>
         {this.headerText}
         <div class="header-buttons">
-          {this.showToggleButtons && (
+          {this.showFullscreenToggle && (
             <div
               role="button"
               tabindex={0}
