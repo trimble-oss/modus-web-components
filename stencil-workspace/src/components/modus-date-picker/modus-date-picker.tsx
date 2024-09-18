@@ -62,12 +62,13 @@ export class ModusDatePicker {
   }
 
   initializePopper() {
-    const referenceElement = this.element.parentElement as HTMLElement;
+    const referenceElement = this.element.shadowRoot.querySelector('.calendar') as HTMLElement;
     const popperElement = this.element.shadowRoot.querySelector('.calendar-container') as HTMLElement;
 
     if (referenceElement && popperElement && !this._popperInstance) {
       this._popperInstance = createPopper(referenceElement, popperElement, {
         placement: this.position,
+        strategy: this.position === 'auto' ? 'fixed' : 'absolute',
         modifiers: [
           {
             name: 'offset',

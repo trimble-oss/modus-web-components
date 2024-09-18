@@ -28,25 +28,42 @@ This component is compatible with Angular reactive forms. This can be achieved t
 <modus-number-input label="Text Input Demo 6" placeholder="Placeholder" size="large" value="100"></modus-number-input>
 ```
 
+### Currency and Locale
+
+The number Input uses Intl.NumberFormat to format the value based on the currency and locale provided.
+
+- Follow the currency codes from [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) for the `currency` property.
+- Follow the locale codes from [BCP 47](https://tools.ietf.org/html/bcp47) for the `locale` property.
+
+<modus-number-input label="With Currency" currency="USD" placeholder="Placeholder" value="2400" ></modus-number-input><br />
+<modus-number-input label="With Locale" locale="en-IN" placeholder="Placeholder"  value="2400" ></modus-number-input><br />
+
+```html
+<modus-number-input label="With Currency" currency="USD" placeholder="Placeholder" value="2400"></modus-number-input>
+<modus-number-input label="With Locale" locale="en-IN" placeholder="Placeholder" value="2400"></modus-number-input>
+```
+
 ### Properties
 
-| Property      | Attribute     | Description                                                   | Type                  | Default     |
-| ------------- | ------------- | ------------------------------------------------------------- | --------------------- | ----------- |
-| `ariaLabel`   | `aria-label`  | (optional) The input's aria-label.                            | `string`              | `undefined` |
-| `disabled`    | `disabled`    | (optional) Whether the input is disabled.                     | `boolean`             | `undefined` |
-| `errorText`   | `error-text`  | (optional) The input's error state text.                      | `string`              | `undefined` |
-| `helperText`  | `helper-text` | (optional) The input's helper text displayed below the input. | `string`              | `undefined` |
-| `label`       | `label`       | (optional) The input's label.                                 | `string`              | `undefined` |
-| `maxValue`    | `max-value`   | (optional) The input's maximum value.                         | `number`              | `undefined` |
-| `minValue`    | `min-value`   | (optional) The input's minimum value.                         | `number`              | `undefined` |
-| `placeholder` | `placeholder` | (optional) The input's placeholder text.                      | `string`              | `undefined` |
-| `readOnly`    | `read-only`   | (optional) Whether the input's content is read-only           | `boolean`             | `undefined` |
-| `required`    | `required`    | (optional) Whether the input is required.                     | `boolean`             | `undefined` |
-| `size`        | `size`        | (optional) The input's size.                                  | `"large" \| "medium"` | `'medium'`  |
-| `step`        | `step`        | (optional) The input's step.                                  | `number`              | `undefined` |
-| `textAlign`   | `text-align`  | (optional) The input's text alignment.                        | `"left" \| "right"`   | `'left'`    |
-| `validText`   | `valid-text`  | (optional) The input's valid state text.                      | `string`              | `undefined` |
-| `value`       | `value`       | (optional) The input's value.                                 | `string`              | `undefined` |
+| Property      | Attribute     | Description                                          | Type                  | Default     |
+| ------------- | ------------- | ---------------------------------------------------- | --------------------- | ----------- |
+| `ariaLabel`   | `aria-label`  | (optional) The input's aria-label.                   | `string`              | `undefined` |
+| `currency`    | `currency`    | (optional) The input's currency.                     | `string`              | `''`        |
+| `locale`      | `locale`      | (optional) The input's locale                        | `string`              | `undefined` |
+| `disabled`    | `disabled`    | (optional) Whether the input is disabled.            | `boolean`             | `undefined` |
+| `errorText`   | `error-text`  | (optional) The input's error state text.             | `string`              | `undefined` |
+| `helperText`  | `helper-text` | (optional) The input's helper text displayed below.  | `string`              | `undefined` |
+| `label`       | `label`       | (optional) The input's label.                        | `string`              | `undefined` |
+| `maxValue`    | `max-value`   | (optional) The input's maximum value.                | `number`              | `undefined` |
+| `minValue`    | `min-value`   | (optional) The input's minimum value.                | `number`              | `undefined` |
+| `placeholder` | `placeholder` | (optional) The input's placeholder text.             | `string`              | `undefined` |
+| `readOnly`    | `read-only`   | (optional) Whether the input's content is read-only. | `boolean`             | `undefined` |
+| `required`    | `required`    | (optional) Whether the input is required.            | `boolean`             | `undefined` |
+| `size`        | `size`        | (optional) The input's size.                         | `"large" \| "medium"` | `'medium'`  |
+| `step`        | `step`        | (optional) The input's step.                         | `number`              | `undefined` |
+| `textAlign`   | `text-align`  | (optional) The input's text alignment.               | `"left" \| "right"`   | `'left'`    |
+| `validText`   | `valid-text`  | (optional) The input's valid state text.             | `string`              | `undefined` |
+| `value`       | `value`       | (optional) The input's value.                        | `string`              | `undefined` |
 
 ### DOM Events
 

@@ -11,7 +11,7 @@ describe('modus-progress-bar', () => {
       <modus-progress-bar aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" role="progressbar">
         <mock:shadow-root>
           <div class="default default-background-color modus-progress-bar">
-            <div class="default-color default-text-color progress" style="width: 0%;">
+            <div class="default-color default-text-color determinate progress" style="width: 0%;">
             </div>
           </div>
         </mock:shadow-root>
