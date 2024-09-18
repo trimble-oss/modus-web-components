@@ -752,7 +752,7 @@ export namespace Components {
          */
         "close": () => Promise<void>;
         /**
-          * (optional) The modal's full screen view. It will be displayed in full screen view only if showToggleButtons and fullscreen are set to true
+          * (optional) The modal's full screen view.
          */
         "fullscreen": boolean;
         /**
@@ -3719,7 +3719,7 @@ declare namespace LocalJSX {
          */
         "backdrop"?: 'default' | 'static';
         /**
-          * (optional) The modal's full screen view. It will be displayed in full screen view only if showToggleButtons and fullscreen are set to true
+          * (optional) The modal's full screen view.
          */
         "fullscreen"?: boolean;
         /**

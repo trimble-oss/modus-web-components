@@ -77,8 +77,7 @@ export default {
     },
     fullscreen: {
       name: 'fullscreen',
-      description:
-        "The modal's full screen view. It will be displayed in full screen view only if showToggleButtons and fullscreen are set to true",
+      description: "The modal's full screen view.",
       table: {
         type: { summary: 'boolean' },
       },

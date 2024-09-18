@@ -51,7 +51,7 @@ export class ModusModal {
   /** (optional) Show toggle buttons. */
   @Prop() showToggleButtons = false;
 
-  /** (optional) The modal's full screen view. It will be displayed in full screen view only if showToggleButtons and fullscreen are set to true */
+  /** (optional) The modal's full screen view. */
   @Prop({ mutable: true }) fullscreen = false;
 
   /** An event that fires on modal close.  */
@@ -253,7 +253,7 @@ export class ModusModal {
         aria-hidden={this.visible ? undefined : 'true'}
         aria-label={this.visible ? this.ariaLabel || undefined : undefined}
         aria-modal={this.visible ? 'true' : undefined}
-        class={`modus-modal ${this.fullscreen && this.showToggleButtons ? 'fullscreen' : ''} overlay ${this.visible ? 'visible' : 'hidden'}`}
+        class={`modus-modal ${this.fullscreen ? 'fullscreen' : ''} overlay ${this.visible ? 'visible' : 'hidden'}`}
         onClick={(event) => this.handleOverlayClick(event)}
         role={this.visible ? 'dialog' : undefined}
         style={{ zIndex: this.zIndex }}>
