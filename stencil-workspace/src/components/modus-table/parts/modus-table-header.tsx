@@ -31,11 +31,12 @@ export const ModusTableHeader: FunctionalComponent<ModusTableHeaderProps> = ({
     rowSelection,
     componentId,
     rowActions,
+    rowActionSize,
   } = context;
 
   const tableHeadClass = { 'show-resize-cursor': getColumnResizing(), 'show-column-reorder-cursor': columnReorder };
   const headerGroups: HeaderGroup<unknown>[] = getHeaderGroups();
-  const rowActionsLength = Math.min(Math.max(rowActions.length * 40, 90), 160);
+  const rowActionsLength = rowActionSize ? rowActionSize : Math.min(Math.max(rowActions.length * 40, 90), 160);
 
   return (
     <thead class={tableHeadClass}>
