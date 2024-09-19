@@ -72,8 +72,10 @@ export class ModusButtonGroup {
   }
 
   componentDidLoad() {
-    this.observer = new MutationObserver(this.handleMutations.bind(this));
-    this.observer.observe(this.host, { subtree: true, attributes: true, attributeFilter: [SELECTION_ATTRIBUTE] });
+    if (typeof MutationObserver !== 'undefined') {
+      this.observer = new MutationObserver(this.handleMutations.bind(this));
+      this.observer.observe(this.host, { subtree: true, attributes: true, attributeFilter: [SELECTION_ATTRIBUTE] });
+    }
   }
 
   disconnectedCallback() {
@@ -126,8 +128,10 @@ export class ModusButtonGroup {
   }
 
   setupButtons(reset?: boolean) {
-    const buttons = this.host.querySelectorAll('modus-button');
-    this.renderButtons(buttons, reset);
+    customElements.whenDefined('modus-button').then(() => {
+      const buttons = this.host.querySelectorAll('modus-button');
+      this.renderButtons(buttons, reset);
+    });
   }
 
   renderButtons(buttons: NodeListOf<HTMLModusButtonElement>, reset: boolean) {
