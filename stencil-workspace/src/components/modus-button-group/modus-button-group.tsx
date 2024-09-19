@@ -72,10 +72,8 @@ export class ModusButtonGroup {
   }
 
   componentDidLoad() {
-    if (typeof MutationObserver !== 'undefined') {
-      this.observer = new MutationObserver(this.handleMutations.bind(this));
-      this.observer.observe(this.host, { subtree: true, attributes: true, attributeFilter: [SELECTION_ATTRIBUTE] });
-    }
+    this.observer = new MutationObserver(this.handleMutations.bind(this));
+    this.observer.observe(this.host, { subtree: true, attributes: true, attributeFilter: [SELECTION_ATTRIBUTE] });
   }
 
   disconnectedCallback() {
