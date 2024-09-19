@@ -160,7 +160,7 @@ export class ModusAutocomplete {
 
   initializePopper(): void {
     const optionsContainer = this.el.shadowRoot.querySelector(`.options-container`) as HTMLElement;
-    const referenceElement = this.el as HTMLElement;
+    const referenceElement = this.el.shadowRoot.querySelector(`.chips-container`) as HTMLElement;
 
     this.popperInstance = createPopper(referenceElement, optionsContainer, {
       placement: 'bottom-start',
@@ -174,6 +174,10 @@ export class ModusAutocomplete {
         },
       ],
     });
+
+    if (referenceElement && optionsContainer) {
+      optionsContainer.style.width = `${referenceElement.offsetWidth}px`;
+    }
   }
 
   componentWillLoad(): void {
