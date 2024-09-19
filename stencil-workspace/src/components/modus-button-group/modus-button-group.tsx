@@ -105,7 +105,7 @@ export class ModusButtonGroup {
     this.buttonGroupClick.emit({ button: clickedButton, isSelected: this.selectedButtons.includes(clickedButton) });
   }
 
-  handleMutations(mutationList: MutationRecord[], observer: MutationObserver) {
+  handleMutations(mutationList: MutationRecord[]) {
     for (const mutation of mutationList) {
       if (mutation.type === 'attributes' && mutation.attributeName === SELECTION_ATTRIBUTE) {
         this.setupButtons();
