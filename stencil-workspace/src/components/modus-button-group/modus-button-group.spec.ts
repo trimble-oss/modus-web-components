@@ -2,6 +2,21 @@ import { newSpecPage } from '@stencil/core/testing';
 import { ModusButtonGroup } from './modus-button-group';
 
 describe('modus-button-group', () => {
+  beforeAll(() => {
+    class MutationObserverMock {
+      observe() {}
+      disconnect() {}
+      takeRecords() {
+        return [];
+      }
+    }
+    global.MutationObserver = MutationObserverMock;
+  });
+
+  afterAll(() => {
+    delete global.MutationObserver;
+  });
+
   it('renders', async () => {
     const { root } = await newSpecPage({
       components: [ModusButtonGroup],
