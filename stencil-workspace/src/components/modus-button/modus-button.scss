@@ -39,6 +39,10 @@ button {
     pointer-events: none;
   }
 
+  svg {
+    z-index: 9;
+  }
+
   &:hover {
     cursor: pointer;
   }
