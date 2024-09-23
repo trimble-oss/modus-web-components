@@ -167,7 +167,8 @@ export class ModusButton {
 
   handleMouseDown() {
     this.pressed = true;
-    if (this.criticalAction && this.color === 'danger' && !this.disabled) {
+    const isCriticalAction = this.criticalAction && this.color === 'danger' && !this.disabled && this.buttonStyle === 'fill';
+    if (isCriticalAction) {
       this.progressState = {
         ...this.progressState,
         progressClass: 'progress',
