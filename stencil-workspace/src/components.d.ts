@@ -752,7 +752,7 @@ export namespace Components {
          */
         "close": () => Promise<void>;
         /**
-          * (optional) The modal's full screen view
+          * (optional) The modal's full screen view.
          */
         "fullscreen": boolean;
         /**
@@ -787,6 +787,10 @@ export namespace Components {
           * (optional) The modal's secondary button text.
          */
         "secondaryButtonText": string;
+        /**
+          * (optional) Show full screen toggle.
+         */
+        "showFullscreenToggle": boolean;
         /**
           * (optional) The modal's z-index.
          */
@@ -3715,7 +3719,7 @@ declare namespace LocalJSX {
          */
         "backdrop"?: 'default' | 'static';
         /**
-          * (optional) The modal's full screen view
+          * (optional) The modal's full screen view.
          */
         "fullscreen"?: boolean;
         /**
@@ -3762,6 +3766,10 @@ declare namespace LocalJSX {
           * (optional) The modal's secondary button text.
          */
         "secondaryButtonText"?: string;
+        /**
+          * (optional) Show full screen toggle.
+         */
+        "showFullscreenToggle"?: boolean;
         /**
           * (optional) The modal's z-index.
          */
