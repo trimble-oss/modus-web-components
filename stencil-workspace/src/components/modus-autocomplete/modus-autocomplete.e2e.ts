@@ -991,4 +991,35 @@ describe('modus-autocomplete', () => {
     const updatedChips = await chipsContainer.findAll('modus-chip');
     expect(updatedChips.length).toEqual(0);
   });
+
+  it('should reset when the value is set to empty', async () => {
+    const element = await page.find('modus-autocomplete');
+    element.setProperty('multiple', true);
+    await page.waitForChanges();
+
+    element.setProperty('options', [
+      { id: 1, value: 'Test 1' },
+      { id: 2, value: 'Test 2' },
+    ]);
+    await page.waitForChanges();
+
+    const textInput = await page.find('modus-autocomplete >>> modus-text-input');
+    await textInput.click();
+    await textInput.type('Test');
+    await page.waitForChanges();
+
+    const option = await page.find('modus-autocomplete >>> li');
+    await option.click();
+    await page.waitForChanges();
+
+    const chipsContainer = await page.find('modus-autocomplete >>> .chips-container');
+    const chips = await chipsContainer.findAll('modus-chip');
+    expect(chips.length).toEqual(1);
+
+    element.setProperty('value', []);
+    await page.waitForChanges();
+
+    const updatedChips = await chipsContainer.findAll('modus-chip');
+    expect(updatedChips.length).toEqual(0);
+  });
 });

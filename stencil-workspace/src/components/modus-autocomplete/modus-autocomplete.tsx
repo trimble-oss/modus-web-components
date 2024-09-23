@@ -52,7 +52,7 @@ export class ModusAutocomplete {
   @Prop() dropdownZIndex = '1';
 
   /** The autocomplete's error text. */
-  @Prop() errorText: string;
+  @Prop({ mutable: true }) errorText: string;
 
   @Element() el: HTMLElement;
 
@@ -116,6 +116,14 @@ export class ModusAutocomplete {
       this.disableFiltering = false;
       this.updateVisibleOptions(this.getValueAsString());
       this.updateVisibleCustomOptions(this.getValueAsString());
+    }
+    if (this.multiple && Array.isArray(this.value)) {
+      if (this.value.length) {
+        this.initializeSelectedChips();
+      } else {
+        this.handleClear();
+        this.errorText = '';
+      }
     }
   }
 
@@ -445,7 +453,6 @@ export class ModusAutocomplete {
       class="input"
       autocomplete="off"
       clearable={this.clearable && !this.readOnly && !!this.value}
-      errorText={this.hasFocus ? '' : this.errorText}
       includeSearchIcon={false}
       onFocus={this.handleTextInputFocus}
       onValueChange={(searchEvent: CustomEvent<string>) => this.handleTextInputValueChange(searchEvent)}
