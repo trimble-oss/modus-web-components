@@ -60,6 +60,7 @@ export class ModusButton {
     progressWidth: 0,
     startTime: 0,
     animationDuration: 3000,
+    resetTimeout: null as NodeJS.Timeout | null,
   };
 
   classByButtonStyle: Map<string, string> = new Map([
@@ -135,9 +136,13 @@ export class ModusButton {
     );
   }
 
+  isCriticalAction() {
+    return this.criticalAction && this.color === 'danger' && !this.disabled && this.buttonStyle === 'fill';
+  }
+
   handleMouseUp() {
     this.pressed = false;
-    if (this.criticalAction && this.color === 'danger' && !this.disabled) {
+    if (this.isCriticalAction()) {
       const elapsedTime = Date.now() - this.progressState.startTime;
       this.progressState = {
         ...this.progressState,
@@ -154,7 +159,11 @@ export class ModusButton {
         this.buttonRef.classList.add('reverse');
       }
 
-      setTimeout(() => {
+      if (this.progressState.resetTimeout) {
+        clearTimeout(this.progressState.resetTimeout);
+      }
+
+      this.progressState.resetTimeout = setTimeout(() => {
         this.progressState = {
           ...this.progressState,
           progressWidth: 0,
@@ -167,8 +176,7 @@ export class ModusButton {
 
   handleMouseDown() {
     this.pressed = true;
-    const isCriticalAction = this.criticalAction && this.color === 'danger' && !this.disabled && this.buttonStyle === 'fill';
-    if (isCriticalAction) {
+    if (this.isCriticalAction()) {
       this.progressState = {
         ...this.progressState,
         progressClass: 'progress',
