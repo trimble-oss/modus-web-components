@@ -63,6 +63,12 @@ export class ModusButton {
     resetTimeout: null as NodeJS.Timeout | null,
   };
 
+  @State() keyProgressState = {
+    firstKeydownTime: 0,
+    lastKeydownTime: 0,
+    keyDownActive: false,
+  };
+
   classByButtonStyle: Map<string, string> = new Map([
     ['borderless', 'style-borderless'],
     ['fill', 'style-fill'],
@@ -102,8 +108,75 @@ export class ModusButton {
   elementKeyupHandler(event: KeyboardEvent): void {
     switch (event.code) {
       case 'Space':
-        this.buttonClick.emit();
+        if (!this.criticalAction) this.buttonClick.emit();
         break;
+      case 'Enter':
+        this.handleKeyup();
+        break;
+    }
+  }
+
+  @Listen('keydown')
+  elementKeydownHandler(event: KeyboardEvent): void {
+    switch (event.code) {
+      case 'Enter':
+        this.handleKeydown();
+        break;
+    }
+  }
+
+  handleKeydown(): void {
+    if (!this.keyProgressState.keyDownActive) {
+      this.keyProgressState.firstKeydownTime = Date.now();
+      this.keyProgressState.keyDownActive = true;
+    }
+
+    this.progressState = {
+      ...this.progressState,
+      progressClass: 'progress',
+      startTime: Date.now(),
+    };
+    this.buttonRef.classList.remove('reverse');
+    this.buttonRef.classList.add('progress');
+
+    this.keyProgressState.lastKeydownTime = Date.now();
+  }
+
+  handleKeyup() {
+    if (this.keyProgressState.keyDownActive) {
+      const elapsedTime = this.keyProgressState.lastKeydownTime - this.keyProgressState.firstKeydownTime;
+
+      this.progressState = {
+        ...this.progressState,
+        progressWidth: Math.min((elapsedTime / this.progressState.animationDuration) * 100, 100),
+        progressClass: 'reverse',
+      };
+
+      if (this.progressState.progressWidth >= 100) {
+        this.buttonClick.emit();
+        this.buttonRef.classList.remove('progress');
+        this.buttonRef.classList.remove('reverse');
+      } else {
+        this.buttonRef.classList.remove('progress');
+        this.buttonRef.classList.add('reverse');
+      }
+
+      if (this.progressState.resetTimeout) {
+        clearTimeout(this.progressState.resetTimeout);
+      }
+
+      this.progressState.resetTimeout = setTimeout(() => {
+        this.progressState = {
+          ...this.progressState,
+          progressWidth: 0,
+          progressClass: '',
+        };
+        this.buttonRef.classList.remove('reverse');
+      }, this.progressState.animationDuration);
+
+      this.keyProgressState.firstKeydownTime = null;
+      this.keyProgressState.lastKeydownTime = null;
+      this.keyProgressState.keyDownActive = false;
     }
   }
 
