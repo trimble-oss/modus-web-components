@@ -125,20 +125,49 @@ export class ModusButton {
     }
   }
 
+  handleProgressAnimation() {
+    this.pressed = true;
+    if (this.isCriticalAction()) {
+      this.progressState = {
+        ...this.progressState,
+        progressClass: 'progress',
+        startTime: Date.now(),
+      };
+      this.buttonRef.classList.remove('reverse');
+      this.buttonRef.classList.add('progress');
+    }
+  }
+
+  handleReverseAnimation() {
+    if (this.progressState.progressWidth >= 100) {
+      this.buttonClick.emit();
+      this.buttonRef.classList.remove('progress');
+      this.buttonRef.classList.remove('reverse');
+    } else {
+      this.buttonRef.classList.remove('progress');
+      this.buttonRef.classList.add('reverse');
+    }
+
+    if (this.progressState.resetTimeout) {
+      clearTimeout(this.progressState.resetTimeout);
+    }
+
+    this.progressState.resetTimeout = setTimeout(() => {
+      this.progressState = {
+        ...this.progressState,
+        progressWidth: 0,
+        progressClass: '',
+      };
+      this.buttonRef.classList.remove('reverse');
+    }, this.progressState.animationDuration);
+  }
+
   handleKeydown(): void {
     if (!this.keyProgressState.keyDownActive) {
       this.keyProgressState.firstKeydownTime = Date.now();
       this.keyProgressState.keyDownActive = true;
     }
-
-    this.progressState = {
-      ...this.progressState,
-      progressClass: 'progress',
-      startTime: Date.now(),
-    };
-    this.buttonRef.classList.remove('reverse');
-    this.buttonRef.classList.add('progress');
-
+    this.handleProgressAnimation();
     this.keyProgressState.lastKeydownTime = Date.now();
   }
 
@@ -151,29 +180,7 @@ export class ModusButton {
         progressWidth: Math.min((elapsedTime / this.progressState.animationDuration) * 100, 100),
         progressClass: 'reverse',
       };
-
-      if (this.progressState.progressWidth >= 100) {
-        this.buttonClick.emit();
-        this.buttonRef.classList.remove('progress');
-        this.buttonRef.classList.remove('reverse');
-      } else {
-        this.buttonRef.classList.remove('progress');
-        this.buttonRef.classList.add('reverse');
-      }
-
-      if (this.progressState.resetTimeout) {
-        clearTimeout(this.progressState.resetTimeout);
-      }
-
-      this.progressState.resetTimeout = setTimeout(() => {
-        this.progressState = {
-          ...this.progressState,
-          progressWidth: 0,
-          progressClass: '',
-        };
-        this.buttonRef.classList.remove('reverse');
-      }, this.progressState.animationDuration);
-
+      this.handleReverseAnimation();
       this.keyProgressState.firstKeydownTime = null;
       this.keyProgressState.lastKeydownTime = null;
       this.keyProgressState.keyDownActive = false;
@@ -222,41 +229,7 @@ export class ModusButton {
         progressWidth: Math.min((elapsedTime / this.progressState.animationDuration) * 100, 100),
         progressClass: 'reverse',
       };
-
-      if (this.progressState.progressWidth >= 100) {
-        this.buttonClick.emit();
-        this.buttonRef.classList.remove('progress');
-        this.buttonRef.classList.remove('reverse');
-      } else {
-        this.buttonRef.classList.remove('progress');
-        this.buttonRef.classList.add('reverse');
-      }
-
-      if (this.progressState.resetTimeout) {
-        clearTimeout(this.progressState.resetTimeout);
-      }
-
-      this.progressState.resetTimeout = setTimeout(() => {
-        this.progressState = {
-          ...this.progressState,
-          progressWidth: 0,
-          progressClass: '',
-        };
-        this.buttonRef.classList.remove('reverse');
-      }, this.progressState.animationDuration);
-    }
-  }
-
-  handleMouseDown() {
-    this.pressed = true;
-    if (this.isCriticalAction()) {
-      this.progressState = {
-        ...this.progressState,
-        progressClass: 'progress',
-        startTime: Date.now(),
-      };
-      this.buttonRef.classList.remove('reverse');
-      this.buttonRef.classList.add('progress');
+      this.handleReverseAnimation();
     }
   }
 
@@ -285,7 +258,7 @@ export class ModusButton {
         style={{ '--progress-width': `${this.progressState.progressWidth}%` }}
         onKeyDown={() => (this.pressed = true)}
         onKeyUp={() => (this.pressed = false)}
-        onMouseDown={() => this.handleMouseDown()}
+        onMouseDown={() => this.handleProgressAnimation()}
         onMouseUp={() => this.handleMouseUp()}
         ref={(el) => (this.buttonRef = el)}
         type={this.type}>
