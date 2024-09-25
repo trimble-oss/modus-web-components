@@ -24,7 +24,7 @@ export const ModusNavbarProductLogo: FunctionalComponent<{
           class={secondary && 'product-logo-primary'}
           height={primary.height ?? '24'}
           src={primary.url}
-          alt={primary.alt ? primary.alt : 'Modus Navbar primary product logo'}
+          alt={primary.alt ? primary.alt : null}
           data-test-id="primary-logo"
         />
       )}
@@ -33,7 +33,7 @@ export const ModusNavbarProductLogo: FunctionalComponent<{
           class={primary && 'product-logo-secondary'}
           height={secondary.height ?? '24'}
           src={secondary.url}
-          alt={secondary.alt ? secondary.alt : 'Modus Navbar secondary product logo'}
+          alt={secondary.alt ? secondary.alt : null}
           data-test-id="secondary-logo"
         />
       )}
