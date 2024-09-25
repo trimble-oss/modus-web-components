@@ -172,6 +172,9 @@ export class ModusTable {
   /** (Optional) Actions that can be performed on each row. A maximum of 4 icons will be shown, including overflow menu and expand icons. */
   @Prop() rowActions: ModusTableRowAction[] = [];
 
+  /**(Optional) The size of the row action's column*/
+  @Prop() rowActionSize: number;
+
   /** (Optional) To display expanded rows. */
   @Prop() rowsExpandable = false;
   @Watch('rowsExpandable') onRowsExpandableChange(newVal: boolean) {
@@ -520,6 +523,7 @@ export class ModusTable {
       rowSelectionChange: this.rowSelectionChange,
       rowExpanded: this.rowExpanded,
       rowActionClick: this.rowActionClick,
+      rowActionSize: this.rowActionSize,
       sortChange: this.sortChange,
       paginationChange: this.paginationChange,
       columnSizingChange: this.columnSizingChange,
