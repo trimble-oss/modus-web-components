@@ -1014,7 +1014,7 @@ RowActions.args = {
 
     {
       id: '3',
-      icon: 'cancel',
+      icon: 'cancel_circle',
       label: 'Cancel',
       index: 2,
     },

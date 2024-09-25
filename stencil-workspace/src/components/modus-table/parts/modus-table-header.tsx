@@ -57,7 +57,7 @@ export const ModusTableHeader: FunctionalComponent<ModusTableHeaderProps> = ({
               />
             );
           })}
-          {rowActions.length > 0 && <th class="sticky-right" style={{ width: `${rowActionsLength}px` }}></th>}
+          {rowActions.length > 0 && <th class="sticky-right" style={{ width: `${rowActionsLength}px` }}>Row Actions Column</th>}
         </tr>
       ))}
     </thead>
