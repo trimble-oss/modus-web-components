@@ -30,23 +30,31 @@ import { Anchor } from '@storybook/addon-docs';
 
 <Anchor storyId="components-toast--danger" />
 
+### Retained Toast
+
+<modus-toast type="primary" retain-element="true">Retained Toast</modus-toast>
+
+<Anchor storyId="components-toast--retained-toast" />
+
 ```html
 <modus-toast type="primary">Primary</modus-toast>
 <modus-toast type="secondary">Secondary</modus-toast>
 <modus-toast type="success">Success</modus-toast>
 <modus-toast type="danger">Danger</modus-toast>
+<modus-toast type="primary" retain-element="true">Retained Toast</modus-toast>
 ```
 
 ### Properties
 
-| Name          | Description                      | Type      | Options                                      | Default Value |
-| ------------- | -------------------------------- | --------- | -------------------------------------------- | ------------- |
-| `aria-label`  | The toast's aria-label           | `string`  |                                              |               |
-| `delay`       | Time taken to dismiss the toast  | `number`  |                                              | 15000         |
-| `dismissible` | Whether the toast is dismissible | `boolean` |                                              | false         |
-| `role`        | Role taken by the toast          | `string`  | 'alert', 'log', 'marquee', 'status', 'timer' | 'status'      |
-| `show-icon`   | Whether to show the toast's      | `boolean` |                                              | false         |
-| `type`        | The toast's type                 | `string`  | 'danger', 'primary', 'secondary', 'success', | 'primary'     |
+| Name             | Description                                                            | Type      | Options                                      | Default Value |
+| ---------------- | ---------------------------------------------------------------------- | --------- | -------------------------------------------- | ------------- |
+| `aria-label`     | The toast's aria-label                                                 | `string`  |                                              |               |
+| `delay`          | Time taken to dismiss the toast                                        | `number`  |                                              | 15000         |
+| `dismissible`    | Whether the toast is dismissible                                       | `boolean` |                                              | false         |
+| `retain-element` | Whether to retain the toast's element in the DOM after it is dismissed | `boolean` |                                              | false         |
+| `role`           | Role taken by the toast                                                | `string`  | 'alert', 'log', 'marquee', 'status', 'timer' | 'status'      |
+| `show-icon`      | Whether to show the toast's                                            | `boolean` |                                              | false         |
+| `type`           | The toast's type                                                       | `string`  | 'danger', 'primary', 'secondary', 'success', | 'primary'     |
 
 ### DOM Events
 
