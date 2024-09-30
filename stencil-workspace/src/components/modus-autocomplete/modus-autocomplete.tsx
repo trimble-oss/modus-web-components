@@ -52,7 +52,7 @@ export class ModusAutocomplete {
   @Prop() dropdownZIndex = '1';
 
   /** The autocomplete's error text. */
-  @Prop() errorText: string;
+  @Prop({ mutable: true }) errorText: string;
 
   @Element() el: HTMLElement;
 
@@ -71,11 +71,17 @@ export class ModusAutocomplete {
   /** The autocomplete's options. */
   @Prop({ mutable: true }) options: ModusAutocompleteOption[] | string[];
 
+  /** A promise that returns the filtered options. */
+  @Prop() filterOptions: (search: string) => Promise<ModusAutocompleteOption[] | string[]>;
+
   /** An array to hold the selected chips. */
-  @State() selectedChips: string[] = [];
+  @State() selectedChips: ModusAutocompleteOption[] = [];
 
   /** The autocomplete's selected option. */
   @State() selectedOption: string;
+
+  /** Whether the autocomplete is in a loading state. */
+  @Prop() loading = false;
 
   /** Whether to show autocomplete's options when focus. */
   @Prop() showOptionsOnFocus: boolean;
@@ -83,7 +89,7 @@ export class ModusAutocomplete {
   @Watch('options')
   watchOptions() {
     this.convertOptions();
-    this.updateVisibleOptions(this.value);
+    this.updateVisibleOptions(this.getValueAsString());
   }
 
   /** The autocomplete's input placeholder. */
@@ -96,19 +102,28 @@ export class ModusAutocomplete {
   @Prop() required: boolean;
 
   /** Whether to show the no results found message. */
-  @Prop() showNoResultsFoundMessage = true;
+  @Prop({ mutable: true }) showNoResultsFoundMessage = true;
 
   /** The autocomplete's size. */
   @Prop() size: 'medium' | 'large' = 'medium';
 
   /** The autocomplete's search value. */
-  @Prop({ mutable: true }) value: string;
+  @Prop({ mutable: true }) value: string | string[];
+
   @Watch('value')
   onValueChange() {
     if (this.hasFocus && !this.disableCloseOnSelect) {
       this.disableFiltering = false;
-      this.updateVisibleOptions(this.value);
-      this.updateVisibleCustomOptions(this.value);
+      this.updateVisibleOptions(this.getValueAsString());
+      this.updateVisibleCustomOptions(this.getValueAsString());
+    }
+    if (this.multiple && Array.isArray(this.value)) {
+      if (this.value.length) {
+        this.initializeSelectedChips();
+      } else {
+        this.handleClear();
+        this.errorText = '';
+      }
     }
   }
 
@@ -116,7 +131,10 @@ export class ModusAutocomplete {
   @Event() optionSelected: EventEmitter<string>;
 
   /** An event that fires when the input value changes. Emits the value string. */
-  @Event() valueChange: EventEmitter<string>;
+  @Event() valueChange: EventEmitter<string | string[]>;
+
+  /** An event that fires when an option is selected/removed. Emits the option ids. */
+  @Event() selectionsChanged: EventEmitter<string[]>;
 
   @State() containsSlottedElements = false;
   @State() hasFocus = false;
@@ -125,10 +143,20 @@ export class ModusAutocomplete {
   @State() visibleCustomOptions: Array<any> = [];
   @State() disableFiltering = false;
   @State() focusItemIndex = 0;
+  @State() ShowItemsOnKeyDown = false;
   private listId = generateElementId() + '_list';
 
   componentWillLoad(): void {
     this.convertOptions();
+    if (this.multiple) {
+      this.initializeSelectedChips();
+    }
+  }
+
+  componentDidRender(): void {
+    if (this.displayOptions()) {
+      this.scrollToOptionSelected();
+    }
   }
 
   @Listen('mousedown', { target: 'document' })
@@ -139,6 +167,7 @@ export class ModusAutocomplete {
 
     if (this.el !== event.target || !this.el.contains(event.target as Node)) {
       this.hasFocus = false;
+      this.ShowItemsOnKeyDown = false;
     }
   }
 
@@ -147,18 +176,23 @@ export class ModusAutocomplete {
     ['large', 'large'],
   ]);
 
+  stringToOption(options: string[]): ModusAutocompleteOption[] {
+    return options?.map((option) => ({
+      id: option,
+      value: option,
+    }));
+  }
+
   convertOptions(): void {
     if (this.options && this.options.length > 0) {
       if (typeof this.options[0] === 'string') {
-        this.options = this.options?.map((option) => ({
-          id: option,
-          value: option,
-        }));
+        this.options = this.stringToOption(this.options as string[]);
       }
     }
   }
 
   displayNoResults = () =>
+    !this.loading &&
     this.showNoResultsFoundMessage &&
     this.hasFocus &&
     !this.visibleOptions?.length &&
@@ -166,16 +200,18 @@ export class ModusAutocomplete {
     this.value?.length > 0;
 
   displayOptions = () => {
-    const showOptions = this.showOptionsOnFocus || this.value?.length > 0 || this.disableCloseOnSelect;
-    return this.hasFocus && showOptions && !this.disabled;
+    const showOptions =
+      this.showOptionsOnFocus || this.value?.length > 0 || this.disableCloseOnSelect || this.ShowItemsOnKeyDown;
+    return !this.loading && this.hasFocus && showOptions && !this.disabled;
   };
 
-  addChipValue(value: string) {
+  addChipValue(value: ModusAutocompleteOption) {
     if (this.selectedChips.includes(value)) {
       return;
     }
     this.selectedChips = [...this.selectedChips, value];
-    this.valueChange.emit(this.selectedChips.join(','));
+    this.valueChange.emit(this.selectedChips.map((opt) => opt.value));
+    this.selectionsChanged.emit(this.selectedChips.map((opt) => opt.id));
     this.value = '';
   }
   handleCustomOptionClick = (option: any) => {
@@ -183,11 +219,12 @@ export class ModusAutocomplete {
     const optionId = option.getAttribute(DATA_ID);
 
     if (this.multiple) {
-      this.addChipValue(optionValue);
+      this.addChipValue({ id: optionId, value: optionValue });
     } else {
       this.selectedOption = optionValue;
       this.disableFiltering = this.disableCloseOnSelect;
       this.handleSearchChange(optionValue);
+      this.focusItemIndex = this.visibleCustomOptions.findIndex((el) => el.getAttribute(DATA_ID) === optionId);
     }
 
     this.hasFocus = this.disableCloseOnSelect;
@@ -198,15 +235,18 @@ export class ModusAutocomplete {
     this.hasFocus = !this.disableCloseOnSelect;
   };
 
-  handleInputKeyDown = (event: KeyboardEvent) => {
+  handleKeyDown = (event: KeyboardEvent) => {
     if (event.defaultPrevented) {
       return; // Do nothing if event already handled
     }
     if (event.code.toUpperCase() === 'ARROWDOWN') {
+      this.ShowItemsOnKeyDown = true;
       if (this.displayOptions() && !this.displayNoResults()) {
         this.focusItemIndex = 0;
         this.focusOptionItem();
       }
+    } else if (event.code.toUpperCase() === 'ESCAPE') {
+      this.ShowItemsOnKeyDown = false;
     }
   };
 
@@ -245,10 +285,11 @@ export class ModusAutocomplete {
 
   handleOptionClick = (option: ModusAutocompleteOption) => {
     if (this.multiple) {
-      this.addChipValue(option.value);
+      this.addChipValue(option);
     } else {
       this.selectedOption = option.value;
       this.disableFiltering = this.disableCloseOnSelect;
+      this.focusItemIndex = this.visibleOptions.findIndex((el) => el.id === option.id);
       this.handleSearchChange(option.value);
     }
 
@@ -256,9 +297,31 @@ export class ModusAutocomplete {
     this.optionSelected.emit(option.id);
   };
 
+  getValueAsString(): string {
+    if (this.value && Array.isArray(this.value)) {
+      return '';
+    }
+    if (this.value && typeof this.value === 'string') {
+      return this.value;
+    }
+    return '';
+  }
+
   handleArrowDown = (options: any) => {
     this.focusItemIndex = Math.min(options.length - 1, this.focusItemIndex + 1);
     this.focusOptionItem();
+  };
+
+  handleInputKeyDown = (e) => {
+    if (e.defaultPrevented) {
+      return; // Do nothing if event already handled
+    }
+
+    if (e.key === 'Backspace' && this.multiple && !this.getValueAsString() && this.selectedChips.length > 0) {
+      this.selectedChips = this.selectedChips.slice(0, -1);
+      this.valueChange.emit(this.selectedChips.map((opt) => opt.value));
+      this.selectionsChanged.emit(this.selectedChips.map((opt) => opt.id));
+    }
   };
 
   handleArrowUp = () => {
@@ -267,28 +330,66 @@ export class ModusAutocomplete {
   };
 
   focusOptionItem = () => {
-    (this.el.shadowRoot.querySelectorAll('[role="option"]')[this.focusItemIndex] as HTMLUListElement).focus();
+    (this.el.shadowRoot.querySelectorAll('[role="option"]')[this.focusItemIndex] as HTMLUListElement)?.focus();
   };
 
-  handleSearchChange = (search: string) => {
-    this.updateVisibleOptions(search);
-    this.updateVisibleCustomOptions(search);
+  initializeSelectedChips(): void {
+    if (Array.isArray(this.value)) {
+      const val = this.value.map((v) => v.trim());
+      const filteredOptions = (this.options as ModusAutocompleteOption[]).filter((option) => val.includes(option.value));
+      this.selectedChips = filteredOptions;
+      this.valueChange.emit(this.selectedChips.map((opt) => opt.value));
+      this.selectionsChanged.emit(this.selectedChips.map((opt) => opt.id));
+    }
+  }
+
+  handleSearchChange = (search: string, skipFiltering = false) => {
+    if (!skipFiltering) {
+      this.updateVisibleOptions(search);
+      this.updateVisibleCustomOptions(search);
+    }
     this.value = search;
     this.valueChange.emit(search);
   };
 
-  handleCloseClick(chipValue: string) {
+  handleCloseClick(chipValue: ModusAutocompleteOption) {
     if (this.selectedChips.length != 0) {
-      this.selectedChips = this.selectedChips.filter((chip) => chip !== chipValue);
-      this.valueChange.emit(this.selectedChips.join(','));
+      this.selectedChips = this.selectedChips.filter((chip) => chip.id !== chipValue.id);
+      this.valueChange.emit(this.selectedChips.map((v) => v.value));
+      this.selectionsChanged.emit(this.selectedChips.map((opt) => opt.id));
     }
   }
 
+  handleTextInputFocus = () => {
+    const hasDefaultTextInput = this.value?.length > 0 && !this.disableCloseOnSelect;
+    if (hasDefaultTextInput) {
+      this.disableFiltering = true;
+    }
+  };
+
   handleTextInputValueChange = (event: CustomEvent<string>) => {
-    // Cancel the modus-text-input's value change event or else it will bubble to consumer.
-    event.stopPropagation();
-    this.disableFiltering = !this.disableCloseOnSelect;
-    this.handleSearchChange(event.detail);
+    if (typeof this.filterOptions === 'function') {
+      const tempValue = event.detail;
+      this.handleSearchChange(tempValue, true);
+
+      this.filterOptions(tempValue)?.then((filteredOptions) => {
+        const currentValue = this.getValueAsString();
+        if (tempValue !== currentValue) {
+          return;
+        }
+        const transformedOptions =
+          filteredOptions[0] && typeof filteredOptions[0] === 'string'
+            ? this.stringToOption(filteredOptions as string[])
+            : (filteredOptions as ModusAutocompleteOption[]);
+        this.options = transformedOptions;
+        this.visibleOptions = transformedOptions;
+      });
+    } else {
+      // Cancel the modus-text-input's value change event or else it will bubble to consumer.
+      event.stopPropagation();
+      this.disableFiltering = !this.disableCloseOnSelect;
+      this.handleSearchChange(event.detail);
+    }
   };
 
   updateVisibleCustomOptions = (search = '') => {
@@ -303,14 +404,20 @@ export class ModusAutocomplete {
     this.customOptions = slotted.assignedNodes().filter((node) => node.nodeName !== '#text');
 
     search = search || '';
-    if (search.length === 0 || (this.disableFiltering && this.disableCloseOnSelect)) {
-      this.visibleCustomOptions = this.customOptions;
-      return;
+    const isSearchEmpty = search.length === 0;
+
+    if (isSearchEmpty) {
+      this.selectedOption = '';
     }
 
-    this.visibleCustomOptions = this.customOptions?.filter((o: any) => {
-      return o.getAttribute(DATA_SEARCH_VALUE).toLowerCase().includes(search.toLowerCase());
-    });
+    if (!this.disableFiltering) {
+      this.visibleCustomOptions = this.customOptions?.filter((o: any) => {
+        return o.getAttribute(DATA_SEARCH_VALUE)?.toLowerCase().includes(search?.toLowerCase());
+      });
+    } else {
+      this.visibleCustomOptions = this.customOptions;
+    }
+
     this.containsSlottedElements = this.customOptions.length > 0;
   };
 
@@ -321,20 +428,23 @@ export class ModusAutocomplete {
     search = search || '';
     const isSearchEmpty = search.length === 0;
 
-    if ((isSearchEmpty && !this.showOptionsOnFocus) || (this.disableFiltering && this.disableCloseOnSelect)) {
-      this.visibleOptions = this.options as ModusAutocompleteOption[];
-      return;
+    if (isSearchEmpty) {
+      this.selectedOption = '';
     }
 
-    this.visibleOptions = (this.options as ModusAutocompleteOption[])?.filter((o: ModusAutocompleteOption) => {
-      return o.value.toLowerCase().includes(search.toLowerCase());
-    });
+    if (!this.disableFiltering) {
+      this.visibleOptions = (this?.options as ModusAutocompleteOption[])?.filter((o: ModusAutocompleteOption) => {
+        return o?.value?.toLowerCase().includes(search?.toLowerCase());
+      });
+    } else {
+      this.visibleOptions = this?.options as ModusAutocompleteOption[];
+    }
   };
 
   // Do not display the slot for the custom options. We use this hidden slot to reference the slot's children.
   CustomOptionsSlot = () => (
     <div style={{ display: 'none' }}>
-      <slot onSlotchange={() => this.updateVisibleCustomOptions(this.value)} />
+      <slot onSlotchange={() => this.updateVisibleCustomOptions(this.getValueAsString())} />
     </div>
   );
 
@@ -343,14 +453,15 @@ export class ModusAutocomplete {
       class="input"
       autocomplete="off"
       clearable={this.clearable && !this.readOnly && !!this.value}
-      errorText={this.hasFocus ? '' : this.errorText}
       includeSearchIcon={false}
+      onFocus={this.handleTextInputFocus}
       onValueChange={(searchEvent: CustomEvent<string>) => this.handleTextInputValueChange(searchEvent)}
       placeholder={this.placeholder}
       size={this.size}
       type="search"
-      value={this.value}
+      value={this.getValueAsString()}
       onBlur={this.handleInputBlur}
+      onKeyDown={(e) => this.handleInputKeyDown(e)}
       role="combobox"
       aria-autocomplete="list"
       aria-controls={this.listId}
@@ -364,6 +475,18 @@ export class ModusAutocomplete {
       this.handleClear();
     }
   }
+
+  scrollToOptionSelected = () => {
+    if (this.multiple || this.focusItemIndex === 0) {
+      return;
+    }
+    const optionList = this.el.shadowRoot.querySelector(`.options-container`) as HTMLUListElement;
+    const selectedOption = optionList.querySelector('li.selected') as HTMLElement;
+
+    if (selectedOption) {
+      selectedOption.scrollIntoView({ behavior: 'smooth', inline: 'nearest' });
+    }
+  };
 
   render(): unknown {
     const classes = `autocomplete ${this.classBySize.get(this.size)}`;
@@ -381,15 +504,15 @@ export class ModusAutocomplete {
           }
 
           this.hasFocus = true;
-          this.updateVisibleOptions(this.value);
-          this.updateVisibleCustomOptions(this.value);
+          this.updateVisibleOptions(this.getValueAsString());
+          this.updateVisibleCustomOptions(this.getValueAsString());
         }}
         onFocusout={() => {
           if (this.hasFocus) {
             this.hasFocus = this.disableCloseOnSelect;
           }
         }}
-        onKeyDown={(e) => this.handleInputKeyDown(e)}>
+        onKeyDown={(e) => this.handleKeyDown(e)}>
         {this.label || this.required ? (
           <div class={'label-container'}>
             {this.label ? <label>{this.label}</label> : null}
@@ -399,7 +522,12 @@ export class ModusAutocomplete {
         <div class="chips-container">
           {this.includeSearchIcon ? <IconSearch size="16" /> : null}
           {this.selectedChips.map((chip) => (
-            <modus-chip value={chip} size="medium" show-close onCloseClick={() => this.handleCloseClick(chip)}></modus-chip>
+            <modus-chip
+              value={chip.value}
+              chipId={chip.id}
+              size={this.size === 'large' ? 'medium' : 'small'}
+              show-close
+              onCloseClick={() => this.handleCloseClick(chip)}></modus-chip>
           ))}
           {this.TextInput()}
         </div>
@@ -413,7 +541,7 @@ export class ModusAutocomplete {
                 let className;
                 let isSelected;
                 if (this.multiple) {
-                  isSelected = this.selectedChips.includes(option.value);
+                  isSelected = this.selectedChips.includes(option);
                   className = 'text-option' + (isSelected ? ' selected' : '');
                 } else {
                   isSelected = this.selectedOption === option.value;
@@ -452,7 +580,12 @@ export class ModusAutocomplete {
                 );
               })}
           </ul>
-          {this.displayNoResults() && <NoResultsFound text={this.noResultsFoundText} subtext={this.noResultsFoundSubtext} />}
+
+          {this.loading ? (
+            <LoadingSpinner />
+          ) : (
+            this.displayNoResults() && <NoResultsFound text={this.noResultsFoundText} subtext={this.noResultsFoundSubtext} />
+          )}
         </div>
         {this.CustomOptionsSlot()}
       </div>
@@ -467,5 +600,11 @@ const NoResultsFound = (props: { text: string; subtext: string }) => (
       <div class="message">{props.text}</div>
     </div>
     <div class="subtext">{props.subtext}</div>
+  </div>
+);
+
+const LoadingSpinner = () => (
+  <div class="spinner-container">
+    <modus-spinner size="1.5rem"></modus-spinner>
   </div>
 );

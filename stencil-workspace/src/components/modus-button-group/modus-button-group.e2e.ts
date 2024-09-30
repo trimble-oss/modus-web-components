@@ -245,4 +245,28 @@ describe('modus-button-group', () => {
     expect(buttonGroup.getAttribute('aria-label')).toBe('Group Label');
     expect(buttonGroup.getAttribute('aria-disabled')).toBe('true');
   });
+
+  it('should remove active state from buttons when selected attribute is removed or set to false', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <modus-button-group selection-type="single">
+        <modus-button selected>Button 1</modus-button>
+      </modus-button-group>
+    `);
+    const modusButton = await page.find('modus-button');
+    const buttonElement = await page.find('modus-button >>> button');
+
+    modusButton.removeAttribute('selected');
+    await page.waitForChanges();
+    expect(buttonElement).not.toHaveClass('active');
+
+    modusButton.setAttribute('selected', 'true');
+    await page.waitForChanges();
+    expect(buttonElement).toHaveClass('active');
+
+    modusButton.setAttribute('selected', 'false');
+    await page.waitForChanges();
+    expect(buttonElement).not.toHaveClass('active');
+  });
 });

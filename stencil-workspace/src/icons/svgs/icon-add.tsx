@@ -9,8 +9,7 @@ export const IconAdd: FunctionalComponent<IconProps> = (props: IconProps) => (
     width={props.size ?? 16}
     onClick={props.onClick ? (event) => props.onClick(event) : null}
     viewBox="0 0 24 24"
-    fill={props.color ?? 'currentColor'}
-    xmlns="http://www.w3.org/2000/svg">
+    fill={props.color ?? 'currentColor'}>
     <path d="M19,13H13v6H11V13H5V11h6V5h2v6h6Z" />
   </svg>
 );

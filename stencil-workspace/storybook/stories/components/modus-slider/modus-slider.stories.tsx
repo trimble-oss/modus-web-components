@@ -62,14 +62,7 @@ export default {
   },
 };
 
-const Template = ({
-  ariaLabel,
-  disabled,
-  label,
-  maxValue,
-  minValue,
-  value,
-}) => html`
+const Template = ({ ariaLabel, disabled, label, maxValue, minValue, value }) => html`
   <modus-slider
     aria-label=${ariaLabel}
     ?disabled=${disabled}

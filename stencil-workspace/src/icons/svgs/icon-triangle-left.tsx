@@ -9,8 +9,7 @@ export const IconTriangleLeft: FunctionalComponent<IconProps> = (props: IconProp
     width={props.size ?? 16}
     onClick={() => props.onClick()}
     viewBox="0 0 24 24"
-    fill={props.color ?? 'currentColor'}
-    xmlns="http://www.w3.org/2000/svg">
+    fill={props.color ?? 'currentColor'}>
     <path d="m16 4-8 8 8 8Z" />
   </svg>
 );

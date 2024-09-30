@@ -16,10 +16,15 @@ import {
   COLUMN_DEF_DATATYPE_INTEGER,
   COLUMN_DEF_DATATYPE_LINK,
   COLUMN_DEF_DATATYPE_TEXT,
-  CELL_EDIT_TYPE_DROPDOWN,
   COLUMN_DEF_DATATYPE_BADGE,
+  CELL_EDIT_TYPE_SELECT,
+  CELL_EDIT_TYPE_DATE,
+  CELL_EDIT_TYPE_AUTOCOMPLETE,
+  CELL_EDIT_TYPE_INT,
+  CELL_EDIT_TYPE_TEXT,
   COLUMN_DEF_DATATYPE_CUSTOM,
 } from '../modus-table.constants';
+import { ModusAutocompleteOption } from '../../modus-autocomplete/modus-autocomplete';
 
 export type ModusTableRowData = RowData;
 export type ModusTableSortingState = SortingState;
@@ -38,12 +43,24 @@ export type ModusTableColumnDataType =
   | typeof COLUMN_DEF_DATATYPE_BADGE;
 // | typeof COLUMN_DEF_DATATYPE_DATE;
 
-export type ModusTableCellEditorType = typeof CELL_EDIT_TYPE_DROPDOWN;
-// typeof CELL_EDIT_TYPE_AUTOCOMPLETE |
+export type ModusTableCellEditorType =
+  | typeof CELL_EDIT_TYPE_SELECT
+  | typeof CELL_EDIT_TYPE_TEXT
+  | typeof CELL_EDIT_TYPE_INT
+  | typeof CELL_EDIT_TYPE_AUTOCOMPLETE
+  | typeof CELL_EDIT_TYPE_DATE;
 
 export type ModusTableCellDateEditorArgs = { format: string };
-export type ModusTableCellDropdownEditorArgs = { options: unknown[] };
-export type ModusTableCellEditorArgs = ModusTableCellDropdownEditorArgs | ModusTableCellDateEditorArgs;
+export type ModusTableCellSelectEditorArgs = { options: unknown[]; optionsDisplayProp?: string; placeholder?: string };
+export type ModusTableCellAutocompleteEditorArgs = {
+  options: ModusAutocompleteOption[];
+  noResultsFoundText: string;
+  noResultsFoundSubtext: string;
+  showNoResultsFoundMessage: boolean;
+  showOptionsOnFocus: boolean;
+  filterOptions: (value: string) => Promise<ModusAutocompleteOption[] | string[]>;
+};
+export type ModusTableCellEditorArgs = ModusTableCellSelectEditorArgs | ModusTableCellDateEditorArgs;
 
 export type ModusTableSortingFunction<TData extends RowData> = SortingFnOption<TData> | 'sortForHyperlink' | 'sortForBadge';
 
@@ -88,6 +105,7 @@ export interface ModusTableColumn<TData extends RowData, TValue = unknown> {
 export interface ModusTableDisplayOptions {
   borderless?: boolean;
   cellBorderless?: boolean;
+  cellVerticalBorderless?: boolean;
 }
 
 export interface ModusTableToolbarOptions {
@@ -141,3 +159,10 @@ export interface ModusTableManualSortingOptions {
 }
 
 export type ModusTableColumnSort = ColumnSort;
+
+export interface ModusTableErrors {
+  [rowIndex: number]: {
+    // if id is present in row data, use that, otherwise use index
+    [accessorKey: string]: string;
+  };
+}

@@ -172,6 +172,60 @@ button {
     }
   }
 
+  &.style-borderless:not(.icon-only).color-secondary {
+    background-color: $modus-btn-borderless-bg;
+    color: $modus-btn-borderless-secondary-color;
+
+    svg path {
+      fill: $modus-btn-borderless-secondary-color !important;
+    }
+
+    &:hover:not([disabled]) {
+      background-color: var(--modus-btn-borderless-secondary-hover-bg, map-get($btn-icon-only-hover, secondary, 'bg'));
+      color: $modus-btn-borderless-secondary-color;
+
+      svg path {
+        fill: $modus-btn-borderless-secondary-color;
+      }
+    }
+
+    &:active:not([disabled]) {
+      background-color: var(--modus-btn-icon-only-secondary-active-bg, map-get($btn-icon-only-active, secondary, 'bg'));
+      color: $modus-btn-borderless-secondary-color;
+
+      svg path {
+        fill: $modus-btn-borderless-secondary-color;
+      }
+    }
+  }
+
+  &.style-borderless.icon-only.color-secondary {
+    background-color: $modus-btn-borderless-bg;
+    color: $modus-btn-borderless-secondary-color;
+
+    svg path {
+      fill: $modus-btn-borderless-secondary-color !important;
+    }
+
+    &:hover:not([disabled]) {
+      background-color: var(--modus-btn-borderless-secondary-hover-bg, map-get($btn-icon-only-hover, secondary, 'bg'));
+      color: $modus-btn-borderless-secondary-color;
+
+      svg path {
+        fill: $modus-btn-borderless-secondary-color;
+      }
+    }
+
+    &:active:not([disabled]) {
+      background-color: var(--modus-btn-icon-only-secondary-active-bg, map-get($btn-icon-only-active, secondary, 'bg'));
+      color: $modus-btn-borderless-secondary-color;
+
+      svg path {
+        fill: $modus-btn-borderless-secondary-color;
+      }
+    }
+  }
+
   &.style-borderless:not(.icon-only) {
     background-color: $modus-btn-borderless-bg;
     color: $modus-btn-borderless-color;
@@ -248,14 +302,24 @@ button {
   &.style-fill {
     @each $color, $value in $btn-theme-colors {
       $default-text-color: $white;
+      $border-color: $value;
+      $hover-border-color: map-get($btn-hover-colors, $color);
+      $active-border-color: map-get($btn-active-colors, $color);
 
       @if $color == 'tertiary' {
         $default-text-color: $col_trimble_gray;
       }
 
+      @if $color == 'special' {
+        $default-text-color: $col_trimble_gray;
+        $border-color: $col_trimble_red;
+        $hover-border-color: $col_trimble_red;
+        $active-border-color: $col_trimble_red;
+      }
+
       &.color-#{$color} {
         background-color: var(--modus-btn-#{$color}-bg, $value);
-        border-color: var(--modus-btn-#{$color}-border-color, $value);
+        border-color: var(--modus-btn-#{$color}-border-color, $border-color);
         color: var(--modus-btn-#{$color}-color, $default-text-color);
 
         svg path {
@@ -266,13 +330,13 @@ button {
       // Hover state
       &.color-#{$color}:hover:not([disabled]) {
         background-color: var(--modus-btn-#{$color}-hover-bg, map-get($btn-hover-colors, $color));
-        border-color: var(--modus-btn-#{$color}-hover-bg, map-get($btn-hover-colors, $color));
+        border-color: var(--modus-btn-#{$color}-hover-bg, $hover-border-color);
       }
 
       // Active state
       &.color-#{$color}:active:not([disabled]) {
         background-color: var(--modus-btn-#{$color}-active-bg, map-get($btn-active-colors, $color));
-        border-color: var(--modus-btn-#{$color}-active-bg, map-get($btn-active-colors, $color));
+        border-color: var(--modus-btn-#{$color}-active-bg, $active-border-color);
       }
     }
   }
@@ -358,5 +422,11 @@ button {
         }
       }
     }
+  }
+}
+
+@media (forced-colors: active) and (prefers-color-scheme: light) {
+  svg.icon-caret-down {
+    forced-color-adjust: none;
   }
 }

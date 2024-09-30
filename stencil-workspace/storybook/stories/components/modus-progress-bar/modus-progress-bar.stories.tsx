@@ -33,6 +33,18 @@ export default {
         type: { summary: 'number' },
       },
     },
+    mode: {
+      name: 'mode',
+      control: {
+        options: ['determinate', 'indeterminate'],
+        type: 'select',
+      },
+      description: "The progress bar's mode",
+      table: {
+        defaultValue: { summary: 'determinate' },
+        type: { summary: "'determinate' | 'indeterminate'" },
+      },
+    },
     minValue: {
       name: 'min-value',
       description: "The progress bar's minimum value",
@@ -84,22 +96,13 @@ export default {
   },
 };
 
-const Template = ({
-  ariaLabel,
-  backgroundColor,
-  color,
-  maxValue,
-  minValue,
-  size,
-  text,
-  textColor,
-  value,
-}) => html`
+const Template = ({ ariaLabel, backgroundColor, color, maxValue, minValue, mode, size, text, textColor, value }) => html`
   <modus-progress-bar
     aria-label=${ariaLabel}
     background-color=${backgroundColor}
     color=${color}
     max-value=${maxValue}
+    mode=${mode}
     min-value=${minValue}
     size=${size}
     text=${text}
@@ -114,6 +117,7 @@ Default.args = {
   backgroundColor: '',
   color: '',
   maxValue: 100,
+  mode: 'determinate',
   minValue: 0,
   size: 'default',
   text: 'Some progress!',
@@ -127,6 +131,7 @@ Small.args = {
   backgroundColor: '',
   color: '',
   maxValue: 100,
+  mode: 'determinate',
   minValue: 0,
   size: 'small',
   text: '',
@@ -140,9 +145,24 @@ Compact.args = {
   backgroundColor: '',
   color: '',
   maxValue: 100,
+  mode: 'determinate',
   minValue: 0,
   size: 'compact',
   text: '',
+  textColor: '',
+  value: 50,
+};
+
+export const Indeterminate = Template.bind({});
+Indeterminate.args = {
+  ariaLabel: 'progress bar',
+  backgroundColor: '',
+  color: '',
+  maxValue: 100,
+  mode: 'indeterminate',
+  minValue: 0,
+  size: 'default',
+  text: 'Indeterminate progress!',
   textColor: '',
   value: 50,
 };

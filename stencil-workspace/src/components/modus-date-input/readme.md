@@ -39,6 +39,7 @@
 | `calendarIconClicked` | An event that fires on calendar icon click.      | `CustomEvent<ModusDateInputEventDetails>` |
 | `dateInputBlur`       | An event that fires on input value out of focus. | `CustomEvent<ModusDateInputEventDetails>` |
 | `valueChange`         | An event that fires on input value change.       | `CustomEvent<ModusDateInputEventDetails>` |
+| `valueError`          | An event that fires on value error.              | `CustomEvent<string>`                     |
 
 
 ## Methods
@@ -66,9 +67,9 @@ Type: `Promise<void>`
 
 ## Shadow Parts
 
-| Part                | Description |
-| ------------------- | ----------- |
-| `"input-container"` |             |
+| Part         | Description |
+| ------------ | ----------- |
+| `"sub-text"` |             |
 
 
 ## Dependencies
