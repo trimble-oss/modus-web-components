@@ -101,20 +101,26 @@ const workingAvatarUrl =
 const failingAvatarUrl = 'https://avatar.example.com/broken-image-link.png';
 const defaultPrimaryLogo = 'https://modus.trimble.com/img/trimble-logo.svg';
 const defaultSecondaryLogo = 'https://modus.trimble.com/favicon.svg';
+const primaryAlt = 'Trimble Modus Logo';
+const secondaryAlt = 'Trimble Modus Icon';
 const defaultLogo = {
   primary: {
     url: defaultPrimaryLogo,
+    alt: primaryAlt,
   },
   secondary: {
     url: defaultSecondaryLogo,
+    alt: secondaryAlt,
   },
 };
 const blueLogo = {
   primary: {
     url: 'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
+    alt: 'Trimble Modus Logo',
   },
   secondary: {
     url: 'https://modus-bootstrap.trimble.com/img/trimble-icon-rev.svg',
+    alt: 'Trimble Modus Icon',
   },
 };
 const defaultApps = [
