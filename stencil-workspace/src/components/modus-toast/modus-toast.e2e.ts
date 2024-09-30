@@ -111,7 +111,7 @@ describe('modus-toast', () => {
     expect(dismissClick).toHaveReceivedEvent();
   });
 
-  it('removes the element from the DOM when retainElement is true', async () => {
+  it('retains the element from the DOM when retainElement is true', async () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-toast retainElement="true" delay="1000"></modus-toast>');
@@ -124,7 +124,7 @@ describe('modus-toast', () => {
     expect(element).toBeDefined();
   });
 
-  it('retains the element in the DOM when retainElement is false', async () => {
+  it('removes the element in the DOM when retainElement is false', async () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-toast retainElement="false" delay="1000"></modus-toast>');
