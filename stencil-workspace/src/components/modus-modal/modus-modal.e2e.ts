@@ -466,4 +466,26 @@ describe('modus-modal', () => {
     expect(expandButton).toBeFalsy();
     expect(collapseButton).toBeFalsy();
   });
+
+  it('should not trigger a close event if the modal is already closed', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-modal></modus-modal>');
+    const component = await page.find('modus-modal');
+    const element = await page.find('modus-modal >>> .modus-modal');
+    await component.callMethod('open');
+    await page.waitForChanges();
+
+    expect(element).toHaveClass('visible');
+    const closed = await page.spyOnEvent('closed');
+
+    await component.callMethod('close');
+    await page.waitForChanges();
+    expect(element).toHaveClass('hidden');
+
+    await component.callMethod('close');
+    await page.waitForChanges();
+
+    expect(closed).toHaveReceivedEventTimes(1);
+  });
 });
