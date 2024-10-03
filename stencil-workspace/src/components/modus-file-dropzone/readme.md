@@ -12,6 +12,7 @@
 | `acceptFileTypes`             | `accept-file-types`              | (optional) The dropzone's accepted file types                                 | `string`  | `undefined`                              |
 | `ariaLabel`                   | `aria-label`                     | (optional) The dropzone's aria-label.                                         | `string`  | `undefined`                              |
 | `description`                 | `description`                    | (optional) The dropzone's description text.                                   | `string`  | `undefined`                              |
+| `disabled`                    | `disabled`                       | (optional) disables the dropzone                                              | `boolean` | `undefined`                              |
 | `dropzoneHeight`              | `dropzone-height`                | (optional) The dropzone's height.                                             | `string`  | `undefined`                              |
 | `dropzoneWidth`               | `dropzone-width`                 | (optional) The dropzone's width.                                              | `string`  | `undefined`                              |
 | `fileDraggedOverInstructions` | `file-dragged-over-instructions` | (optional) The dropzone's instruction text when a file is being dragged over. | `string`  | `'Drag files here.'`                     |
