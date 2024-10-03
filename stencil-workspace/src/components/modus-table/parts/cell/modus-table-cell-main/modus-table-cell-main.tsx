@@ -12,12 +12,7 @@ import {
   EventEmitter,
 } from '@stencil/core';
 import { Cell } from '@tanstack/table-core';
-import {
-  ModusTableCellBadge,
-  ModusTableCellEditorArgs,
-  ModusTableCellLink,
-  ModusTableCustomCell,
-} from '../../../models/modus-table.models';
+import { ModusTableCellBadge, ModusTableCellEditorArgs, ModusTableCellLink } from '../../../models/modus-table.models';
 import {
   COLUMN_DEF_DATATYPE_CUSTOM,
   COLUMN_DEF_DATATYPE_KEY,
@@ -229,6 +224,7 @@ export class ModusTableCellMain {
   renderCellValue(): JSX.Element[] {
     const { row, getValue } = this.cell;
     const cellValue = getValue();
+    const cell = this.cell;
 
     if (cellValue === null || cellValue === undefined) return null;
 
@@ -245,7 +241,7 @@ export class ModusTableCellMain {
 
     const renderCell = () => {
       if (cellDataType === COLUMN_DEF_DATATYPE_CUSTOM) {
-        return <ModusTableCustomCellElement customElement={cellValue as ModusTableCustomCell} />;
+        return <ModusTableCustomCellElement customElement={cell} />;
       } else if (cellDataType === COLUMN_DEF_DATATYPE_LINK) {
         return (
           <ModusTableCellLinkElement
