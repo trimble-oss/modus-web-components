@@ -266,10 +266,6 @@ export namespace Components {
          */
         "color": ButtonColor;
         /**
-          * (Optional) enable the progress animation for danger button
-         */
-        "criticalAction": boolean;
-        /**
           * (optional) Disables the button.
          */
         "disabled": boolean;
@@ -624,6 +620,7 @@ export namespace Components {
           * (optional) The dropzone's description text.
          */
         "description": string;
+        "disabled": boolean;
         /**
           * (optional) The dropzone's height.
          */
@@ -3206,10 +3203,6 @@ declare namespace LocalJSX {
          */
         "color"?: ButtonColor;
         /**
-          * (Optional) enable the progress animation for danger button
-         */
-        "criticalAction"?: boolean;
-        /**
           * (optional) Disables the button.
          */
         "disabled"?: boolean;
@@ -3604,6 +3597,7 @@ declare namespace LocalJSX {
           * (optional) The dropzone's description text.
          */
         "description"?: string;
+        "disabled"?: boolean;
         /**
           * (optional) The dropzone's height.
          */
