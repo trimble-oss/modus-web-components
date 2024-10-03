@@ -52,6 +52,7 @@ export class ModusFileDropzone {
   /** (optional) Whether multiple files can be uploaded. */
   @Prop() multiple = true;
 
+  /** (optional) disables the dropzone*/
   @Prop({ reflect: true }) disabled: boolean;
 
   /** An event that fires when files have been added or removed, regardless of whether they're valid. */

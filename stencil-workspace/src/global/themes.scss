@@ -251,11 +251,11 @@
   --modus-file-upload-dropzone-error-border-color: var(--modus-red-dark);
   --modus-file-upload-dropzone-error-color: var(--modus-red-dark);
 
-  //disabled
-  $modus-file-upload-dropzone-disabled-bg: #f1f1f666;
-  $modus-file-upload-dropzone-disabled-border-color: var(--modus-gray-6);
-  $modus-file-upload-dropzone-disabled-color: var(--modus-gray-6);
-  $modus-file-upload-dropzone-disabled--svg-color: var(--modus-gray-2);
+  // disabled
+  --modus-file-upload-dropzone-disabled-bg: #f1f1f666;
+  --modus-file-upload-dropzone-disabled-border-color: var(--modus-gray-6);
+  --modus-file-upload-dropzone-disabled-color: var(--modus-gray-6);
+  --modus-file-upload-dropzone-disabled-svg-color: var(--modus-gray-2);
 
   // Message
   // Type - Info
