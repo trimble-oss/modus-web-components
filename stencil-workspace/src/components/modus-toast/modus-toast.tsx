@@ -22,6 +22,9 @@ export class ModusToast {
   /** (optional) Time taken to dismiss the toast */
   @Prop() delay = 15000;
 
+  /** (optional) Whether to retain the element in the DOM after it has been dismissed. */
+  @Prop() retainElement = false;
+
   /** (optional) Role taken by the toast.  Defaults to 'status'. */
   @Prop() role: string | null = 'status';
 
@@ -70,7 +73,9 @@ export class ModusToast {
 
   dismissElement() {
     this.dismissClick.emit();
-    this.el.remove();
+    if (!this.retainElement) {
+      this.el.remove();
+    }
   }
   componentDidLoad(): void {
     if (this.delay > 0) {

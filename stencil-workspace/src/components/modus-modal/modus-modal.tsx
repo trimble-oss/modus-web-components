@@ -82,6 +82,7 @@ export class ModusModal {
   /** Closes the Modal */
   @Method()
   async close(): Promise<void> {
+    if (!this.visible) return;
     this.visible = false;
     this.closed.emit();
 
@@ -91,6 +92,7 @@ export class ModusModal {
   /** Opens the Modal */
   @Method()
   async open(): Promise<void> {
+    if (this.visible) return;
     this.visible = true;
     this.opened.emit();
 
