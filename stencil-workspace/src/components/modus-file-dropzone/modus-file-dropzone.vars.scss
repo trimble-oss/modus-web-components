@@ -21,3 +21,9 @@ $modus-file-upload-dropzone-highlight-color: var(--modus-file-upload-dropzone-hi
 $modus-file-upload-dropzone-error-bg: var(--modus-file-upload-dropzone-error-bg, #fbd4d7) !default;
 $modus-file-upload-dropzone-error-border-color: var(--modus-file-upload-dropzone-error-border-color, #ab1f26) !default;
 $modus-file-upload-dropzone-error-color: var(--modus-file-upload-dropzone-error-color, #ab1f26) !default;
+
+// disabled
+$modus-file-upload-dropzone-disabled-bg: var(--modus-file-upload-dropzone-disabled-bg, #f1f1f6) !default;
+$modus-file-upload-dropzone-disabled-border-color: var(--modus-file-upload-dropzone-disabled-border-color, #6a6e79) !default;
+$modus-file-upload-dropzone-disabled-color: var(--modus-file-upload-dropzone-disabled-color, #6a6e79) !default;
+$modus-file-upload-dropzone-disabled-svg-color: var(--modus-file-upload-dropzone-disabled--svg-color, #b7b9c3) !default;
