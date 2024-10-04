@@ -19,6 +19,7 @@ export interface ModusProfileMenuOptions {
 export interface ModusNavbarLogo {
   url: string;
   height?: string;
+  alt?: string;
 }
 
 export interface ModusNavbarLogoOptions {
