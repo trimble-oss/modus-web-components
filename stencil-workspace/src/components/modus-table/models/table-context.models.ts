@@ -57,6 +57,8 @@ export interface TableContext {
 
   rowActionSize: number;
 
+  rowActionHeader: string;
+
   rowsExpandable: boolean;
 
   rowSelection: boolean;

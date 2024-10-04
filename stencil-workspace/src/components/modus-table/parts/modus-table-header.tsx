@@ -32,11 +32,18 @@ export const ModusTableHeader: FunctionalComponent<ModusTableHeaderProps> = ({
     componentId,
     rowActions,
     rowActionSize,
+    rowActionHeader,
   } = context;
 
   const tableHeadClass = { 'show-resize-cursor': getColumnResizing(), 'show-column-reorder-cursor': columnReorder };
   const headerGroups: HeaderGroup<unknown>[] = getHeaderGroups();
-  const rowActionsLength = rowActionSize ? rowActionSize : Math.min(Math.max(rowActions.length * 40, 90), 160);
+  const rowActionsLength =
+    rowActionSize && rowActionSize >= 40 ? rowActionSize : Math.min(Math.max(rowActions.length * 40, 90), 160);
+  const rowActionsHeader = rowActionHeader ? rowActionHeader : 'Row Actions Column';
+  const rowActionsConfig: {
+    header?: string;
+    width?: number;
+  } = { header: rowActionsHeader, width: rowActionsLength };
 
   return (
     <thead class={tableHeadClass}>
@@ -57,7 +64,11 @@ export const ModusTableHeader: FunctionalComponent<ModusTableHeaderProps> = ({
               />
             );
           })}
-          {rowActions.length > 0 && <th class="sticky-right" style={{ width: `${rowActionsLength}px` }}>Row Actions Column</th>}
+          {rowActions.length > 0 && (
+            <th class="sticky-right" style={{ width: `${rowActionsConfig.width}px` }}>
+              {rowActionsConfig.header}
+            </th>
+          )}
         </tr>
       ))}
     </thead>
