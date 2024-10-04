@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 import { Component, h, Prop, State, Event, EventEmitter, Method, Listen, Host } from '@stencil/core';
 import { IconUploadCloud } from '../../icons/svgs/icon-upload-cloud';
 import { IconCancel } from '../../icons/svgs/icon-cancel';
@@ -69,7 +68,6 @@ export class ModusFileDropzone {
   async addFile(file: File): Promise<void> {
     this.dropzoneFiles.push(file);
     this.updateDropzoneState();
-
     this.files.emit([this.dropzoneFiles, this.error]);
   }
 
@@ -138,6 +136,14 @@ export class ModusFileDropzone {
 
   openBrowse = (): void => {
     this.fileInput.click();
+  };
+
+  reset = (): void => {
+    this.dropzoneFiles = [];
+    this.error = null;
+    this.errorMessageTop = '';
+    this.errorMessageBottom = '';
+    this.files.emit([this.dropzoneFiles, this.error]);
   };
 
   updateDropzoneState = (): void => {
@@ -217,6 +223,9 @@ export class ModusFileDropzone {
               <div class="error-messages" role="alert">
                 {this.errorMessageTop && <span>{this.errorMessageTop}</span>}
                 {this.errorMessageBottom && <span>{this.errorMessageBottom}</span>}
+                <modus-button button-style="outline" color="secondary" onClick={this.reset}>
+                  Reset
+                </modus-button>
               </div>
             )}
           </div>
