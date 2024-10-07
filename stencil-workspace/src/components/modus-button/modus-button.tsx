@@ -255,7 +255,7 @@ export class ModusButton {
             }
           }
         }}
-        style={{ '--progress-width': `${this.progressState.progressWidth}%` }}
+        style={this.isCriticalAction() ? { '--progress-width': `${this.progressState.progressWidth}%` } : {}}
         onKeyDown={() => (this.pressed = true)}
         onKeyUp={() => (this.pressed = false)}
         onMouseDown={() => this.handleProgressAnimation()}
