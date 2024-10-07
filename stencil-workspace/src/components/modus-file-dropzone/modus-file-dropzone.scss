@@ -70,6 +70,7 @@
       background-color: $modus-file-upload-dropzone-disabled-bg;
       border-color: $modus-file-upload-dropzone-disabled-border-color;
       color: $modus-file-upload-dropzone-disabled-color;
+      cursor: not-allowed;
 
       svg {
         fill: $modus-file-upload-dropzone-disabled-svg-color;
