@@ -17,6 +17,12 @@ export default {
         type: { summary: 'boolean' },
       },
     },
+    leftIcon: {
+      description: 'set the left icon for the list-item',
+      table: {
+        type: { summary: 'string' },
+      },
+    },
   },
   parameters: {
     docs: {
@@ -31,9 +37,9 @@ export default {
   },
 };
 
-const Template = ({ subText, wrapSubText }) => html`
+const Template = ({ subText, wrapSubText, leftIcon }) => html`
   <modus-list>
-    <modus-list-item wrap-sub-text=${wrapSubText} sub-text=${subText}>Default</modus-list-item>
+    <modus-list-item wrap-sub-text=${wrapSubText} sub-text=${subText} left-icon=${leftIcon}>Default</modus-list-item>
     <modus-list-item selected>Selected</modus-list-item>
     <modus-list-item disabled>Disabled</modus-list-item>
   </modus-list>
@@ -42,5 +48,6 @@ export const Default = Template.bind({});
 
 Default.args = {
   subText: 'default',
-  wrapSubText: true
-}
+  wrapSubText: true,
+  leftIcon: '',
+};
