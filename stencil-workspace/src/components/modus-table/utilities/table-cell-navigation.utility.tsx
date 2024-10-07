@@ -11,10 +11,11 @@ import {
 interface NavigateTableCellsProps {
   eventKey: string;
   cellElement: HTMLElement;
+  isCellEditable?: boolean;
   onNavigateComplete?: (cell: HTMLElement) => void;
 }
 export default function NavigateTableCells(props: NavigateTableCellsProps) {
-  const { eventKey: key, cellElement: cell, onNavigateComplete } = props;
+  const { eventKey: key, cellElement: cell, onNavigateComplete, isCellEditable } = props;
   let nextCell, prevCell: HTMLElement;
   const row = cell.closest('tr') as HTMLTableRowElement;
   const index = Array.prototype.indexOf.call(row.children, cell);
@@ -34,14 +35,14 @@ export default function NavigateTableCells(props: NavigateTableCellsProps) {
         ((cell.previousSibling as HTMLElement)?.querySelector('modus-table-cell-main') as HTMLElement) ||
         ((row.previousSibling?.lastChild as HTMLElement)?.querySelector('modus-table-cell-main') as HTMLElement);
 
-      if (prevCell) onNavigateComplete(prevCell);
+      if (prevCell && isCellEditable) onNavigateComplete(prevCell);
       break;
     case KEYBOARD_TAB:
       nextCell =
         ((cell.nextSibling as HTMLElement)?.querySelector('modus-table-cell-main') as HTMLElement) ||
         ((row.nextSibling as HTMLElement)?.querySelector('modus-table-cell-main') as HTMLElement);
 
-      if (nextCell) onNavigateComplete(nextCell);
+      if (nextCell && isCellEditable) onNavigateComplete(nextCell);
       break;
     case KEYBOARD_RIGHT: // Moves to right cell
       nextCell = cell.nextSibling as HTMLElement;

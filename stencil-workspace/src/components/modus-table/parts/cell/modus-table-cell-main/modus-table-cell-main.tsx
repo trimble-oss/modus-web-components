@@ -177,6 +177,7 @@ export class ModusTableCellMain {
       NavigateTableCells({
         eventKey: isShiftPressed ? 'shift+tab' : event.key,
         cellElement: this.cellEl,
+        isCellEditable: isCellEditable,
         onNavigateComplete: (cellElement) => {
           if (cellElement) {
             cellElement.focus();
