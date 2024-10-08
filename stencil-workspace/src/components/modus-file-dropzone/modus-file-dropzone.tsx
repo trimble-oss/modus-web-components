@@ -112,7 +112,7 @@ export class ModusFileDropzone {
   };
 
   onDragOver = (event: DragEvent): void => {
-    if (this.error) {
+    if (this.error || this.disabled) {
       return;
     }
 
@@ -121,6 +121,9 @@ export class ModusFileDropzone {
   };
 
   onDrop = (event: DragEvent): void => {
+    if (this.disabled) {
+      return;
+    }
     this.fileDraggedOver = false;
     event.preventDefault();
 
@@ -183,7 +186,7 @@ export class ModusFileDropzone {
 
   render() {
     return (
-      <Host aria-label={this.ariaLabel} role="button">
+      <Host aria-label={this.ariaLabel} role="button" aria-disabled={this.disabled ? 'true' : undefined}>
         <div class="modus-file-dropzone">
           <input
             onChange={this.onFileChange}
