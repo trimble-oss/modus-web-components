@@ -20,6 +20,14 @@ export default {
         type: { summary: 'string' }
       },
     },
+    customPlacement: {
+      name: 'custom-placement',
+      description: 'Determines custom dropdown placement offset.',
+      table: {
+        type: { summary: '{ top?: number; right?: number; bottom?: number; left?: number; }' },
+      },
+      type: { required: false },
+    },
     disabled: {
     name: 'disabled',
     description: 'Whether the dropdown is disabled',
@@ -67,49 +75,79 @@ export default {
   },
 };
 
-
-const DefaultTemplate = ({ animateList, ariaLabel, disabled, placement, showDropdownListBorder }) => html`
-  <modus-dropdown animate-list=${animateList} aria-label=${ariaLabel} disabled=${disabled} placement=${placement} show-dropdown-list-border=${showDropdownListBorder} toggle-element-id="toggleElement">
-  <modus-button id="toggleElement" slot="dropdownToggle" show-caret="true">Dropdown</modus-button>
-  <modus-list slot="dropdownList">
-    <modus-list-item size="condensed" borderless>Item 1</modus-list-item>
-    <modus-list-item size="condensed" borderless>Item 2</modus-list-item>
-    <modus-list-item size="condensed" borderless>Item 3</modus-list-item>
-  </modus-list>
+const DefaultTemplate = ({ animateList, ariaLabel, customPlacement, disabled, placement, showDropdownListBorder }) => html`
+  <modus-dropdown
+    animate-list=${animateList}
+    aria-label=${ariaLabel}
+    disabled=${disabled}
+    placement=${placement}
+    show-dropdown-list-border=${showDropdownListBorder}
+    toggle-element-id="toggleElement">
+    <modus-button id="toggleElement" slot="dropdownToggle" show-caret="true">Dropdown</modus-button>
+    <modus-list slot="dropdownList">
+      <modus-list-item size="condensed" borderless>Item 1</modus-list-item>
+      <modus-list-item size="condensed" borderless>Item 2</modus-list-item>
+      <modus-list-item size="condensed" borderless>Item 3</modus-list-item>
+    </modus-list>
   </modus-dropdown>
+  ${initializeCustomPlacement(customPlacement)}
 `;
 export const Default = DefaultTemplate.bind({});
 Default.args = {
   animateList: false,
   ariaLabel: '',
+  customPlacement: { top: 0, right: 0, bottom: 0, left: 0 },
   disabled: false,
   placement: 'bottom',
   showDropdownListBorder: true,
 }
 
-const WithManyItemsTemplate = ({ animateList, ariaLabel, disabled, placement, showDropdownListBorder }) => html`
-  <modus-dropdown animate-list=${animateList} aria-label=${ariaLabel} disabled=${disabled} placement=${placement} show-dropdown-list-border=${showDropdownListBorder} toggle-element-id="toggleElement">
-  <modus-button id="toggleElement" slot="dropdownToggle" show-caret="true">Dropdown</modus-button>
-  <modus-list slot="dropdownList">
-    <modus-list-item size="condensed" borderless>Item 1</modus-list-item>
-    <modus-list-item size="condensed" borderless>Item 2</modus-list-item>
-    <modus-list-item size="condensed" borderless>Item 3</modus-list-item>
-    <modus-list-item size="condensed" borderless>Item 4</modus-list-item>
-    <modus-list-item size="condensed" borderless>Item 5</modus-list-item>
-    <modus-list-item size="condensed" borderless>Item 6</modus-list-item>
-    <modus-list-item size="condensed" borderless>Item 7</modus-list-item>
-    <modus-list-item size="condensed" borderless>Item 8</modus-list-item>
-    <modus-list-item size="condensed" borderless>Item 9</modus-list-item>
-    <modus-list-item size="condensed" borderless>Item 10</modus-list-item>
-  </modus-list>
+const WithManyItemsTemplate = ({
+  animateList,
+  ariaLabel,
+  customPlacement,
+  disabled,
+  placement,
+  showDropdownListBorder,
+}) => html`
+  <modus-dropdown
+    animate-list=${animateList}
+    aria-label=${ariaLabel}
+    disabled=${disabled}
+    placement=${placement}
+    show-dropdown-list-border=${showDropdownListBorder}
+    toggle-element-id="toggleElement">
+    <modus-button id="toggleElement" slot="dropdownToggle" show-caret="true">Dropdown</modus-button>
+    <modus-list slot="dropdownList">
+      <modus-list-item size="condensed" borderless>Item 1</modus-list-item>
+      <modus-list-item size="condensed" borderless>Item 2</modus-list-item>
+      <modus-list-item size="condensed" borderless>Item 3</modus-list-item>
+      <modus-list-item size="condensed" borderless>Item 4</modus-list-item>
+      <modus-list-item size="condensed" borderless>Item 5</modus-list-item>
+      <modus-list-item size="condensed" borderless>Item 6</modus-list-item>
+      <modus-list-item size="condensed" borderless>Item 7</modus-list-item>
+      <modus-list-item size="condensed" borderless>Item 8</modus-list-item>
+      <modus-list-item size="condensed" borderless>Item 9</modus-list-item>
+      <modus-list-item size="condensed" borderless>Item 10</modus-list-item>
+    </modus-list>
   </modus-dropdown>
+  ${initializeCustomPlacement(customPlacement)}
 `;
 export const WithManyItems = WithManyItemsTemplate.bind({});
 WithManyItems.args = {
   animateList: false,
   ariaLabel: '',
+  customPlacement: { top: 0, right: 0, bottom: 0, left: 0 },
   disabled: false,
   placement: 'bottom',
   showDropdownListBorder: true,
 }
 
+function initializeCustomPlacement(customPlacement) {
+  const tag = document.createElement('script');
+  tag.innerHTML = `
+  var modusDropdown = document.querySelector('modus-dropdown');
+  modusDropdown.customPlacement = ${JSON.stringify(customPlacement)};
+  `;
+  return tag;
+}
