@@ -92,6 +92,14 @@ export class ModusButton {
 
   buttonRef: HTMLButtonElement;
 
+  componentDidLoad() {
+    document.addEventListener('click', this.handleClickOutside);
+  }
+
+  disconnectedCallback() {
+    document.removeEventListener('click', this.handleClickOutside);
+  }
+
   /** Focus the Button */
   @Method()
   async focusButton(): Promise<void> {
@@ -108,8 +116,6 @@ export class ModusButton {
   elementKeyupHandler(event: KeyboardEvent): void {
     switch (event.code) {
       case 'Space':
-        if (!this.criticalAction) this.buttonClick.emit();
-        break;
       case 'Enter':
         if (this.isCriticalAction()) this.handleKeyup();
         break;
@@ -119,11 +125,18 @@ export class ModusButton {
   @Listen('keydown')
   elementKeydownHandler(event: KeyboardEvent): void {
     switch (event.code) {
+      case 'Space':
       case 'Enter':
         if (this.isCriticalAction()) this.handleKeydown();
         break;
     }
   }
+
+  handleClickOutside = (event: MouseEvent) => {
+    if (this.buttonRef && !this.buttonRef.contains(event.target as Node) && this.isCriticalAction()) {
+      this.handleReverseAnimation();
+    }
+  };
 
   handleProgressAnimation() {
     this.pressed = true;
@@ -248,12 +261,12 @@ export class ModusButton {
         class={className}
         disabled={this.disabled}
         onClick={() => {
-            if (!this.disabled && !this.isCriticalAction()) {
+          if (!this.disabled && !this.isCriticalAction()) {
             this.buttonClick.emit();
             if (this.type === 'toggle') {
               this.isActive = !this.isActive;
             }
-            }
+          }
         }}
         style={this.isCriticalAction() ? { '--progress-width': `${this.progressState.progressWidth}%` } : {}}
         onKeyDown={() => (this.pressed = true)}
