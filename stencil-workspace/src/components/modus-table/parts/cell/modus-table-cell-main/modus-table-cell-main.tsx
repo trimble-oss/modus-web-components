@@ -22,8 +22,8 @@ import {
   COLUMN_DEF_CELL_EDITOR_ARGS_KEY,
   COLUMN_DEF_DATATYPE_LINK,
   KEYBOARD_ENTER,
-  KEYBOARD_ESCAPE,
   COLUMN_DEF_DATATYPE_BADGE,
+  KEYBOARD_ESCAPE,
 } from '../../../modus-table.constants';
 import NavigateTableCells from '../../../utilities/table-cell-navigation.utility';
 import { CellFormatter } from '../../../utilities/table-cell-formatter.utility';
@@ -164,12 +164,30 @@ export class ModusTableCellMain {
   };
 
   handleCellKeydown = (event: KeyboardEvent) => {
-    if (event.defaultPrevented) return;
-
     const key = event.key?.toLowerCase();
     const isCellEditable = this.cell.column.columnDef[this.cellEditableKey];
 
-    if (isCellEditable && !this.editMode && key === KEYBOARD_ENTER) {
+    if (event.defaultPrevented) return;
+
+    if (key === KEYBOARD_ENTER && isCellEditable) {
+      this.editMode = !this.editMode;
+
+      event.preventDefault();
+    }
+
+    if (key === 'tab' && isCellEditable) {
+      this.editMode = !this.editMode;
+      const nextCell = this.cellEl.nextElementSibling?.querySelector(
+        'modus-table-cell-main'
+      ) as unknown as ModusTableCellMain;
+      if (nextCell) {
+        nextCell.editMode = true;
+        (nextCell as unknown as HTMLElement).focus();
+      }
+      event.preventDefault();
+    }
+
+    if (isCellEditable && !this.editMode) {
       this.editMode = true;
       event.stopPropagation();
     } else {
@@ -204,7 +222,13 @@ export class ModusTableCellMain {
 
   handleCellEditorKeyDown = (event: KeyboardEvent, newValue: string, oldValue: string) => {
     const key = event.key?.toLowerCase();
-    if (key === KEYBOARD_ENTER) {
+    if (key === 'tab') {
+      this.handleCellEditorValueChange(newValue, oldValue);
+      NavigateTableCells({
+        eventKey: 'tab',
+        cellElement: this.cellEl,
+      });
+    } else if (key === KEYBOARD_ENTER) {
       this.handleCellEditorValueChange(newValue, oldValue);
       NavigateTableCells({
         eventKey: KEYBOARD_ENTER,
@@ -213,7 +237,6 @@ export class ModusTableCellMain {
     } else if (key === KEYBOARD_ESCAPE) {
       this.editMode = false;
       this.cellEl.focus();
-      this.destroyErrorTooltip();
     } else return;
 
     event.stopPropagation();
