@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import { Component, h, Prop, State, Event, EventEmitter, Method, Listen, Host } from '@stencil/core';
 import { IconUploadCloud } from '../../icons/svgs/icon-upload-cloud';
 import { IconCancel } from '../../icons/svgs/icon-cancel';
