@@ -111,7 +111,7 @@ export class ModusButton {
         if (!this.criticalAction) this.buttonClick.emit();
         break;
       case 'Enter':
-        this.handleKeyup();
+        if (this.isCriticalAction()) this.handleKeyup();
         break;
     }
   }
@@ -120,7 +120,7 @@ export class ModusButton {
   elementKeydownHandler(event: KeyboardEvent): void {
     switch (event.code) {
       case 'Enter':
-        this.handleKeydown();
+        if (this.isCriticalAction()) this.handleKeydown();
         break;
     }
   }
@@ -248,12 +248,12 @@ export class ModusButton {
         class={className}
         disabled={this.disabled}
         onClick={() => {
-          if (!this.disabled && !this.criticalAction) {
+            if (!this.disabled && !this.isCriticalAction()) {
             this.buttonClick.emit();
             if (this.type === 'toggle') {
               this.isActive = !this.isActive;
             }
-          }
+            }
         }}
         style={this.isCriticalAction() ? { '--progress-width': `${this.progressState.progressWidth}%` } : {}}
         onKeyDown={() => (this.pressed = true)}
