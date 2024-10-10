@@ -621,6 +621,10 @@ export namespace Components {
          */
         "description": string;
         /**
+          * (optional) disables the dropzone
+         */
+        "disabled": boolean;
+        /**
           * (optional) The dropzone's height.
          */
         "dropzoneHeight": string;
@@ -1717,6 +1721,10 @@ export namespace Components {
           * (optional) Whether the toast has a dismiss button.
          */
         "dismissible": boolean;
+        /**
+          * (optional) Whether to retain the element in the DOM after it has been dismissed.
+         */
+        "retainElement": boolean;
         /**
           * (optional) Role taken by the toast.  Defaults to 'status'.
          */
@@ -3593,6 +3601,10 @@ declare namespace LocalJSX {
          */
         "description"?: string;
         /**
+          * (optional) disables the dropzone
+         */
+        "disabled"?: boolean;
+        /**
           * (optional) The dropzone's height.
          */
         "dropzoneHeight"?: string;
@@ -4827,6 +4839,10 @@ declare namespace LocalJSX {
           * An event that fires when the toast is dismissed
          */
         "onDismissClick"?: (event: ModusToastCustomEvent<any>) => void;
+        /**
+          * (optional) Whether to retain the element in the DOM after it has been dismissed.
+         */
+        "retainElement"?: boolean;
         /**
           * (optional) Role taken by the toast.  Defaults to 'status'.
          */
