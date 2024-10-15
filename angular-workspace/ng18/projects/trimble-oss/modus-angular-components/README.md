@@ -14,7 +14,7 @@ The components in this library were programmatically generated using the [Stenci
 
   ```typescript
   import { defineCustomElements } from '@trimble-oss/modus-web-components/loader';
-ß
+
   defineCustomElements();
   ```
 

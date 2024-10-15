@@ -11,4 +11,3 @@ To build a local copy of these components you can run:
 `npx ng run @trimble-oss/modus-angular-components:build:production`
 
 This can be consumed in a local angular application using npm link
-

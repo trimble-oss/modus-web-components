@@ -28,10 +28,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "tsConfig": "projects/trimble-oss/modus-angular-components/tsconfig.spec.json",
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ]
+            "polyfills": ["zone.js", "zone.js/testing"]
           }
         }
       }
@@ -53,9 +50,7 @@
             "outputPath": "dist/test-harness",
             "index": "projects/test-harness/src/index.html",
             "browser": "projects/test-harness/src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "projects/test-harness/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -64,9 +59,7 @@
                 "input": "projects/test-harness/public"
               }
             ],
-            "styles": [
-              "projects/test-harness/src/styles.scss"
-            ],
+            "styles": ["projects/test-harness/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -111,10 +104,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/test-harness/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -123,9 +113,7 @@
                 "input": "projects/test-harness/public"
               }
             ],
-            "styles": [
-              "projects/test-harness/src/styles.scss"
-            ],
+            "styles": ["projects/test-harness/src/styles.scss"],
             "scripts": []
           }
         }

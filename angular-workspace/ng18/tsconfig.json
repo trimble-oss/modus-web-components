@@ -4,9 +4,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "@trimble-oss/modus-angular-components": [
-        "./dist/trimble-oss/modus-angular-components"
-      ]
+      "@trimble-oss/modus-angular-components": ["./dist/trimble-oss/modus-angular-components"]
     },
     "outDir": "./dist/out-tsc",
     "strict": true,
@@ -23,10 +21,7 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
-    "lib": [
-      "ES2022",
-      "dom"
-    ]
+    "lib": ["ES2022", "dom"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
