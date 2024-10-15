@@ -55,6 +55,10 @@ export interface TableContext {
 
   rowActions: TableRowActionWithOverflow[];
 
+  rowActionSize: number;
+
+  rowActionHeader: string;
+
   rowsExpandable: boolean;
 
   rowSelection: boolean;

@@ -71,6 +71,11 @@ export interface ModusTableRowAction {
   isDisabled?: (row: unknown) => boolean;
 }
 
+export interface ModusTableRowActionConfig {
+  header?: string;
+  width?: number;
+}
+
 export interface ModusTableRowActionClick {
   actionId: string;
   row: unknown;
