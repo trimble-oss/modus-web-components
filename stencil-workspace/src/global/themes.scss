@@ -624,6 +624,12 @@
   --modus-file-upload-dropzone-bg: #252a2e66;
   --modus-file-upload-dropzone-color: var(--modus-white);
 
+  // disabled
+  --modus-file-upload-dropzone-disabled-bg: var(--modus-trimble-gray);
+  --modus-file-upload-dropzone-disabled-border-color: var(--modus-gray-6);
+  --modus-file-upload-dropzone-disabled-color: var(--modus-gray-6);
+  --modus-file-upload-dropzone-disabled-svg-color: var(--modus-gray-6);
+
   // Highlight
   --modus-file-upload-dropzone-highlight-bg: #019aeb33;
   --modus-file-upload-dropzone-highlight-color: var(--modus-file-upload-dropzone-color);
