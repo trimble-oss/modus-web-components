@@ -52,6 +52,9 @@ export class ModusFileDropzone {
   /** (optional) Whether multiple files can be uploaded. */
   @Prop() multiple = true;
 
+  /** (optional) disables the dropzone*/
+  @Prop({ reflect: true }) disabled: boolean;
+
   /** An event that fires when files have been added or removed, regardless of whether they're valid. */
   @Event() files: EventEmitter<[File[], string | null]>;
 
@@ -109,7 +112,7 @@ export class ModusFileDropzone {
   };
 
   onDragOver = (event: DragEvent): void => {
-    if (this.error) {
+    if (this.error || this.disabled) {
       return;
     }
 
@@ -118,6 +121,9 @@ export class ModusFileDropzone {
   };
 
   onDrop = (event: DragEvent): void => {
+    if (this.disabled) {
+      return;
+    }
     this.fileDraggedOver = false;
     event.preventDefault();
 
@@ -180,13 +186,14 @@ export class ModusFileDropzone {
 
   render() {
     return (
-      <Host aria-label={this.ariaLabel} role="button">
+      <Host aria-label={this.ariaLabel} role="button" aria-disabled={this.disabled ? 'true' : undefined}>
         <div class="modus-file-dropzone">
           <input
             onChange={this.onFileChange}
             multiple={this.multiple}
             ref={(el) => (this.fileInput = el as HTMLInputElement)}
             type="file"
+            disabled={this.disabled}
             accept={this.acceptFileTypes}
           />
           <div class="header">
@@ -198,6 +205,7 @@ export class ModusFileDropzone {
               dropzone: true,
               error: !!this.error,
               highlight: this.fileDraggedOver,
+              disabled: this.disabled,
             }}
             onDragLeave={(e) => this.onDragLeave(e)}
             onDragOver={(e) => this.onDragOver(e)}

@@ -19,6 +19,13 @@ export default {
         type: { summary: 'string' },
       },
     },
+    disabled: {
+      name: 'disabled',
+      description: 'Whether the dropzone is disabled',
+      table: {
+        type: { summary: 'boolean' },
+      },
+    },
     description: {
       name: 'description',
       description: "The dropzone's description",
@@ -114,6 +121,7 @@ export default {
 export const Default = ({
   acceptFileTypes,
   ariaLabel,
+  disabled,
   description,
   dropzoneHeight,
   dropzoneWidth,
@@ -129,6 +137,7 @@ export const Default = ({
   <modus-file-dropzone
     accept-file-types=${acceptFileTypes}
     aria-label=${ariaLabel}
+    ?disabled=${disabled}
     description=${description}
     dropzone-height=${dropzoneHeight}
     dropzone-width=${dropzoneWidth}
@@ -145,6 +154,7 @@ export const Default = ({
 Default.args = {
   acceptFileTypes: '.doc,.docx',
   ariaLabel: 'dropzone',
+  disabled: false,
   description: 'File dropzone description',
   dropzoneHeight: '200px',
   dropzoneWidth: '500px',
