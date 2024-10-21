@@ -40,7 +40,9 @@ They are referenced using the `<modus-file-dropzone>` tag.
 </modus-file-dropzone>
 
 <script>
-  document.querySelector('modus-file-dropzone').addEventListener('files', (event) => {
+  document
+    .querySelector('modus-file-dropzone')
+    .addEventListener('files', (event) => {
     const [files, error] = event.detail;
     console.log(files);
     console.log(error);
@@ -54,6 +56,7 @@ They are referenced using the `<modus-file-dropzone>` tag.
 | ----------------------------- | -------------------------------- | ----------------------------------------------------------------------------- | --------- | ---------------------------------------- |
 | `acceptfiletypes`             | `accept-file-types`              | (optional) The dropzone's accepted file types.                                | `string`  | `undefined`                              |
 | `ariaLabel`                   | `aria-label`                     | (optional) The dropzone's aria-label.                                         | `string`  | `undefined`                              |
+| `disabled`                    | `disabled`                       | (optional) Disables the dropzone.                                             | `boolean` | `undefined`                              |
 | `description`                 | `description`                    | (optional) The dropzone's description text.                                   | `string`  | `undefined`                              |
 | `dropzoneHeight`              | `dropzone-height`                | (optional) The dropzone's height.                                             | `string`  | `undefined`                              |
 | `dropzoneWidth`               | `dropzone-width`                 | (optional) The dropzone's width.                                              | `string`  | `undefined`                              |

@@ -621,6 +621,10 @@ export namespace Components {
          */
         "description": string;
         /**
+          * (optional) disables the dropzone
+         */
+        "disabled": boolean;
+        /**
           * (optional) The dropzone's height.
          */
         "dropzoneHeight": string;
@@ -3596,6 +3600,10 @@ declare namespace LocalJSX {
           * (optional) The dropzone's description text.
          */
         "description"?: string;
+        /**
+          * (optional) disables the dropzone
+         */
+        "disabled"?: boolean;
         /**
           * (optional) The dropzone's height.
          */

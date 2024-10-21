@@ -8,6 +8,15 @@ describe('modus-file-dropzone', () => {
     expect(element).toHaveClass('hydrated');
   });
 
+  it('renders with disabled state', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-file-dropzone disabled></modus-file-dropzone>');
+    const element = await page.find('modus-file-dropzone');
+    expect(element).toHaveClass('hydrated');
+    expect(element).toHaveAttribute('disabled');
+  });
+
   it('should allow adding a file and checking the state', async () => {
     const page = await newE2EPage();
     await page.setContent('<modus-file-dropzone></modus-file-dropzone>');
