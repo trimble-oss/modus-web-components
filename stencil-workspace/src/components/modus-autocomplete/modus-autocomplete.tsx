@@ -206,7 +206,7 @@ export class ModusAutocomplete {
   };
 
   addChipValue(value: ModusAutocompleteOption) {
-    if (this.selectedChips.includes(value)) {
+    if (this.selectedChips.some((chip) => chip.id === value.id)) {
       return;
     }
     this.selectedChips = [...this.selectedChips, value];
@@ -393,6 +393,7 @@ export class ModusAutocomplete {
   };
 
   updateVisibleCustomOptions = (search = '') => {
+    console.log('updateVisibleCustomOptions', search);
     if (!this.hasFocus) {
       return;
     }
