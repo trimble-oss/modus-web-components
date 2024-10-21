@@ -40,28 +40,21 @@ export default {
     },
     type: {
       control: {
-        options: [
-          'error',
-          'info',
-          'info-gray',
-          'info-gray-dark',
-          'success',
-          'warning',
-        ],
+        options: ['error', 'info', 'success', 'warning'],
         type: 'select',
       },
       description: 'The type of the alert',
       table: {
         defaultValue: { summary: `'info'` },
         type: {
-          summary: `'error' | 'info' | 'info-gray' | 'info-gray-dark' | 'success' | 'warning'`,
+          summary: `'error' | 'info' | 'success' | 'warning'`,
         },
       },
     },
   },
   parameters: {
     actions: {
-      handles: [ 'dismissClick', 'actionClick '],
+      handles: ['dismissClick', 'actionClick '],
     },
     controls: { expanded: true, sort: 'requiredFirst' },
     docs: {
@@ -73,17 +66,16 @@ export default {
   },
 };
 
-const Template = ({ ariaLabel, buttonAriaLabel, buttonText, dismissible, message, type }) =>
-  html`
-    <modus-alert
-      ariaLabel=${ariaLabel}
-      button-aria-label=${buttonAriaLabel}
-      button-text=${buttonText}
-      dismissible=${dismissible}
-      message=${message}
-      type=${type}>
-    </modus-alert>
-  `;
+const Template = ({ ariaLabel, buttonAriaLabel, buttonText, dismissible, message, type }) => html`
+  <modus-alert
+    ariaLabel=${ariaLabel}
+    button-aria-label=${buttonAriaLabel}
+    button-text=${buttonText}
+    dismissible=${dismissible}
+    message=${message}
+    type=${type}>
+  </modus-alert>
+`;
 
 // TODO - Figure out how to get rid of the optional parameters in the template (dismissible and type).
 // If not passed, they should result to null or their default values.
@@ -107,7 +99,6 @@ ActionButton.args = {
   type: 'info',
 };
 
-
 export const Dismissible = Template.bind({});
 Dismissible.args = {
   ariaLabel: '',
@@ -126,26 +117,6 @@ Error.args = {
   dismissible: false,
   message: 'Error alert',
   type: 'error',
-};
-
-export const InfoGray = Template.bind({});
-InfoGray.args = {
-  ariaLabel: '',
-  buttonAriaLabel: '',
-  buttonText: '',
-  dismissible: false,
-  message: 'Info gray alert',
-  type: 'info-gray',
-};
-
-export const InfoGrayDark = Template.bind({});
-InfoGrayDark.args = {
-  ariaLabel: '',
-  buttonAriaLabel: '',
-  buttonText: '',
-  dismissible: false,
-  message: 'Info gray dark alert',
-  type: 'info-gray-dark',
 };
 
 export const Success = Template.bind({});
@@ -168,19 +139,17 @@ Warning.args = {
   type: 'warning',
 };
 
-
-const TemplateWithLink = ({ ariaLabel, buttonAriaLabel, buttonText, dismissible, message, type }) =>
-  html`
-    <modus-alert
-      ariaLabel=${ariaLabel}
-      button-aria-label=${buttonAriaLabel}
-      button-text=${buttonText}
-      dismissible=${dismissible}
-      message=${message}
-      type=${type}>
-      This is a info alert with <a href="#">an example link</a>
-    </modus-alert>
-  `;
+const TemplateWithLink = ({ ariaLabel, buttonAriaLabel, buttonText, dismissible, message, type }) => html`
+  <modus-alert
+    ariaLabel=${ariaLabel}
+    button-aria-label=${buttonAriaLabel}
+    button-text=${buttonText}
+    dismissible=${dismissible}
+    message=${message}
+    type=${type}>
+    This is a info alert with <a href="#">an example link</a>
+  </modus-alert>
+`;
 
 export const WithLink = TemplateWithLink.bind({});
 WithLink.args = {

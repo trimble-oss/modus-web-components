@@ -1,0 +1,25 @@
+:host {
+  display: flex;
+
+  slot::slotted(modus-button) {
+    display: block;
+    margin: 0;
+
+    --btn-border-radius: 0;
+    --btn-border-left-width: #{$rem-1px};
+    --btn-border-right-width: 0;
+  }
+
+  slot::slotted(modus-button:first-child) {
+    --btn-border-radius: #{$rem-4px} 0 0 #{$rem-4px};
+  }
+
+  slot::slotted(modus-button:last-child) {
+    --btn-border-radius: 0 #{$rem-4px} #{$rem-4px} 0;
+    --btn-border-right-width: #{$rem-1px};
+  }
+
+  slot::slotted(modus-button:only-child) {
+    --btn-border-radius: #{$rem-4px};
+  }
+}

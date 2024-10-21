@@ -32,6 +32,14 @@ jobs:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
 
+      - name: Install Modus Web Components
+        run: npm ci
+        working-directory: ./stencil-workspace
+
+      - name: Build Modus Web Components
+        run: npm run build
+        working-directory: ./stencil-workspace
+
       - name: Install React ${{ github.event.inputs.reactVersion }}
         run: npm ci
 

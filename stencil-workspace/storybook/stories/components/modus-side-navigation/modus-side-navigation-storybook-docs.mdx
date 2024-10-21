@@ -216,12 +216,12 @@ Modus side navigation uses CSS variables for theming ex:`--modus-side-navigation
     sidenav.data = [
       {
         id: 'home-menu',
-        menuIconUrl: homeIcon,
+        menuIcon: homeIcon,
         label: 'Home page 1',
         children: [
           {
             id: 'home-menu-2',
-            menuIconUrl: homeIcon,
+            menuIcon: homeIcon,
             label: 'Home page 2',
             onSideNavItemClicked: selectionHandler,
           },
@@ -230,31 +230,31 @@ Modus side navigation uses CSS variables for theming ex:`--modus-side-navigation
             children: [
               {
                 id: 'home-menu-3',
-                menuIconUrl: homeIcon,
+                menuIcon: homeIcon,
                 label: 'Home page 3',
                 onSideNavItemClicked: selectionHandler,
               },
             ],
-            menuIconUrl: usageIcon,
+            menuIcon: usageIcon,
             label: 'Usage page 2',
           },
         ],
       },
       {
         id: 'usage-menu',
-        menuIconUrl: usageIcon,
+        menuIcon: usageIcon,
         label: 'Usage page 1',
         onSideNavItemClicked: selectionHandler,
       },
       {
         id: 'styles-menu',
-        menuIconUrl: stylesIcon,
+        menuIcon: stylesIcon,
         label: 'Styles page 1',
         onSideNavItemClicked: selectionHandler,
       },
       {
         id: 'accessibility-menu',
-        menuIconUrl: accessibilityIcon,
+        menuIcon: accessibilityIcon,
         label: 'Accessibility page 1',
         onSideNavItemClicked: selectionHandler,
       },

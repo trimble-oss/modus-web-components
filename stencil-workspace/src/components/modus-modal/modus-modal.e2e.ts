@@ -22,6 +22,82 @@ describe('modus-modal', () => {
     expect(element.innerText).toContain('New Text');
   });
 
+  it('does not have the role of "dialog" when not visible', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-modal></modus-modal>');
+    const element = await page.find('modus-modal >>> div');
+    expect(element.getAttribute('role')).not.toEqual('dialog');
+  });
+
+  it('has the role of "dialog" when not visible', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-modal></modus-modal>');
+    const component = await page.find('modus-modal');
+    const element = await page.find('modus-modal >>> div');
+    await component.callMethod('open');
+    await page.waitForChanges();
+    expect(element.getAttribute('role')).toEqual('dialog');
+  });
+
+  it('does not have aria-modal attribute when not visible', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-modal></modus-modal>');
+    const element = await page.find('modus-modal >>> div');
+    expect(element.getAttribute('aria-modal')).toBeNull();
+  });
+
+  it('has aria-modal attribute set to true when visible', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-modal></modus-modal>');
+    const component = await page.find('modus-modal');
+    const element = await page.find('modus-modal >>> div');
+    await component.callMethod('open');
+    await page.waitForChanges();
+    expect(element.getAttribute('aria-modal')).toBeTruthy();
+  });
+
+  it('does not have aria-label attribute when not visible', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-modal aria-label="test"></modus-modal>');
+    const element = await page.find('modus-modal >>> div');
+    expect(element.getAttribute('aria-label')).toBeNull();
+  });
+
+  it('has aria-modal attribute set to true when visible', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-modal aria-label="test"></modus-modal>');
+    const component = await page.find('modus-modal');
+    const element = await page.find('modus-modal >>> div');
+    await component.callMethod('open');
+    await page.waitForChanges();
+    expect(element.getAttribute('aria-label')).toEqual('test');
+  });
+
+  it('has aria-hidden attribute set to true when not visible', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-modal></modus-modal>');
+    const element = await page.find('modus-modal >>> div');
+    expect(element.getAttribute('aria-hidden')).toBeTruthy();
+  });
+
+  it('does not have aria-modal attribute set to true when visible', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-modal></modus-modal>');
+    const component = await page.find('modus-modal');
+    const element = await page.find('modus-modal >>> div');
+    await component.callMethod('open');
+    await page.waitForChanges();
+    expect(element.getAttribute('aria-hidden')).toBeFalsy();
+  });
+
   it('renders changes to primaryButtonText', async () => {
     const page = await newE2EPage();
 
@@ -255,5 +331,161 @@ describe('modus-modal', () => {
     await page.waitForChanges();
     console.error(backgroundColor);
     expect(backgroundColor).toBe('rgba(37, 42, 46, 0.75)');
+  });
+
+  it('renders aria-label on alert div when set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-modal aria-label="test label" visible="true"></modus-modal>');
+    const component = await page.find('modus-modal');
+    const element = await page.find('modus-modal >>> .modus-modal');
+    await component.callMethod('open');
+    await page.waitForChanges();
+
+    expect(element).toBeDefined();
+    expect(element).toHaveAttribute('aria-label');
+    expect(element.getAttribute('aria-label')).toEqual('test label');
+  });
+
+  it('does not render aria-label on alert div when not set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-modal  visible="true"></modus-modal>');
+    const component = await page.find('modus-modal');
+    const element = await page.find('modus-modal >>> .modus-modal');
+    await component.callMethod('open');
+    await page.waitForChanges();
+
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
+
+  it('does not render aria-label on alert div when set to empty string', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-modal  visible="true" aria-label=""></modus-modal>');
+    const component = await page.find('modus-modal');
+    const element = await page.find('modus-modal >>> .modus-modal');
+    await component.callMethod('open');
+    await page.waitForChanges();
+
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
+
+  it('does open modal in full screen view', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-modal fullscreen="true"></modus-modal>');
+    const component = await page.find('modus-modal');
+    const element = await page.find('modus-modal >>> .modus-modal');
+    await component.callMethod('open');
+    await page.waitForChanges();
+
+    expect(element).toBeDefined();
+    expect(element).toHaveClass('fullscreen');
+  });
+
+  it('does open modal in normal screen view', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-modal fullscreen="false"></modus-modal>');
+    const component = await page.find('modus-modal');
+    const element = await page.find('modus-modal >>> .modus-modal');
+    await component.callMethod('open');
+    await page.waitForChanges();
+
+    expect(element).toBeDefined();
+    expect(element).not.toHaveClass('fullscreen');
+  });
+
+  it('should expand and collapse the modal when toggle buttons are visible', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-modal fullscreen="false" show-fullscreen-toggle="true"></modus-modal>');
+    const component = await page.find('modus-modal');
+    const element = await page.find('modus-modal >>> .modus-modal');
+    await component.callMethod('open');
+    await page.waitForChanges();
+
+    expect(element).toBeDefined();
+    expect(element).not.toHaveClass('fullscreen');
+
+    const expandButton = await page.find('modus-modal >>> .icon-expand');
+    expect(expandButton).toBeDefined();
+
+    await expandButton.click();
+    await page.waitForChanges();
+
+    expect(element).toHaveClass('fullscreen');
+
+    const collapseButton = await page.find('modus-modal >>> .icon-collapse');
+    expect(collapseButton).toBeDefined();
+
+    await collapseButton.click();
+    await page.waitForChanges();
+
+    expect(element).not.toHaveClass('fullscreen');
+  });
+
+  it('modal should has the toggle buttons visible when showFullscreenToggle is true', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-modal show-fullscreen-toggle="true"></modus-modal>');
+    const component = await page.find('modus-modal');
+    const element = await page.find('modus-modal >>> .modus-modal');
+    await component.callMethod('open');
+    await page.waitForChanges();
+
+    expect(element).toBeDefined();
+
+    const expandButton = await page.find('modus-modal >>> .icon-expand');
+    expect(expandButton).toBeDefined();
+
+    await expandButton.click();
+    await page.waitForChanges();
+
+    const collapseButton = await page.find('modus-modal >>> .icon-collapse');
+    expect(collapseButton).toBeDefined();
+  });
+
+  it('modal should not have the toggle buttons visible when showFullscreenToggle is false', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-modal show-fullscreen-toggle="false"></modus-modal>');
+    const component = await page.find('modus-modal');
+    const element = await page.find('modus-modal >>> .modus-modal');
+    await component.callMethod('open');
+    await page.waitForChanges();
+
+    expect(element).toBeDefined();
+
+    const expandButton = await page.find('modus-modal >>> .icon-expand');
+    const collapseButton = await page.find('modus-modal >>> .icon-collapse');
+
+    expect(expandButton).toBeFalsy();
+    expect(collapseButton).toBeFalsy();
+  });
+
+  it('should not trigger a close event if the modal is already closed', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-modal></modus-modal>');
+    const component = await page.find('modus-modal');
+    const element = await page.find('modus-modal >>> .modus-modal');
+    await component.callMethod('open');
+    await page.waitForChanges();
+
+    expect(element).toHaveClass('visible');
+    const closed = await page.spyOnEvent('closed');
+
+    await component.callMethod('close');
+    await page.waitForChanges();
+    expect(element).toHaveClass('hidden');
+
+    await component.callMethod('close');
+    await page.waitForChanges();
+
+    expect(closed).toHaveReceivedEventTimes(1);
   });
 });

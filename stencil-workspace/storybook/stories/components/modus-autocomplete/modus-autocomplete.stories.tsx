@@ -36,7 +36,7 @@ export default {
     },
     dropdownZIndex: {
       name: 'dropdown-z-index',
-      description: 'The dropdown\'s z-index',
+      description: "The dropdown's z-index",
       table: {
         defaultValue: { summary: '1' },
         type: { summary: 'string' },
@@ -57,6 +57,13 @@ export default {
         type: { summary: 'string' },
       },
     },
+    filterOptions: {
+      name: 'filter-options',
+      description: 'Function to filter options',
+      table: {
+        type: { summary: 'function' },
+      },
+    },
     includeSearchIcon: {
       name: 'include-search-icon',
       description: 'Whether to include the search icon',
@@ -69,6 +76,13 @@ export default {
       description: "The autocomplete's label",
       table: {
         type: { summary: 'string' },
+      },
+    },
+    loading: {
+      description: 'Whether the autocomplete is in a loading state',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
       },
     },
     noResultsFoundText: {
@@ -120,9 +134,9 @@ export default {
       name: 'show-options-on-focus',
       description: 'Whether to show autocomplete options when focus',
       table: {
-        defaultValue: { summary: true },
+        defaultValue: { summary: false },
         type: { summary: 'boolean' },
-      }
+      },
     },
     size: {
       control: {
@@ -138,24 +152,22 @@ export default {
     value: {
       description: "The autocomplete's value",
       table: {
-        type: { summary: 'string' },
+        type: { summary: 'string | string[]' },
       },
     },
     multiple: {
-      description: "When enabled, multiple options can be selected in the component. And selected options are shown as chips in the input",
+      description:
+        'When enabled, multiple options can be selected in the component. And selected options are shown as chips in the input',
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },
       },
-    }
+    },
   },
   parameters: {
     controls: { expanded: true, sort: 'requiredFirst' },
     actions: {
-      handles: [
-        'valueChange',
-        'optionSelected',
-      ],
+      handles: ['valueChange', 'optionSelected', 'selectionsChanged'],
     },
     docs: {
       inlineStories: true,
@@ -210,13 +222,34 @@ const Template = ({
       show-no-results-found-message=${showNoResultsFoundMessage}
       show-options-on-focus=${showOptionsOnFocus}
       size=${size}
-      value=${value}
+      .value=${value}
       .options=${options}>
     </modus-autocomplete>
   </div>
 `;
 
-const defaultOptions = ['Apple', 'Banana', 'Orange'];
+const defaultOptions = [
+  'Apple',
+  'Banana',
+  'Orange',
+  'Mango',
+  'Pineapple',
+  'Grapes',
+  'Watermelon',
+  'Strawberry',
+  'Blueberry',
+  'Raspberry',
+  'Blackberry',
+  'Cherry',
+  'Peach',
+  'Pear',
+  'Plum',
+  'Kiwi',
+  'Lemon',
+  'Lime',
+  'Papaya',
+  'Passion Fruit',
+];
 
 const defaultArgs = {
   ariaLabel: 'autocomplete',
@@ -239,7 +272,13 @@ const defaultArgs = {
   size: 'medium',
   value: '',
   options: defaultOptions,
-}
+};
+
+const customOptions = [
+  { id: 'ID0', value: 'Apple' },
+  { id: 'ID1', value: 'Banana' },
+  { id: 'ID2', value: 'Orange' },
+];
 
 export const Default = Template.bind({});
 Default.args = defaultArgs;
@@ -247,8 +286,14 @@ Default.args = defaultArgs;
 export const WithOption = Template.bind({});
 WithOption.args = { ...defaultArgs, label: 'Autocomplete using option model' };
 
-export const WithChips = Template.bind({});
-WithChips.args = { ...defaultArgs, label: 'Autocomplete using chips', multiple: true };
+export const MultipleSelection = Template.bind({});
+MultipleSelection.args = {
+  ...defaultArgs,
+  label: 'Autocomplete with multiple selection',
+  multiple: true,
+  value: ['Apple', 'Banana'],
+  options: customOptions,
+};
 
 export const WithCustomOption = ({
   ariaLabel,
@@ -324,4 +369,126 @@ WithCustomOption.args = {
   showOptionsOnFocus: false,
   size: 'medium',
   value: '',
-}
+};
+
+export const WithDynamicOptions = ({
+  ariaLabel,
+  clearable,
+  disabled,
+  dropdownMaxHeight,
+  dropdownZIndex,
+  disableCloseOnSelect,
+  errorText,
+  includeSearchIcon,
+  label,
+  loading,
+  multiple,
+  noResultsFoundText,
+  noResultsFoundSubtext,
+  placeholder,
+  readOnly,
+  required,
+  showNoResultsFoundMessage,
+  showOptionsOnFocus,
+  size,
+  value,
+}) => html`
+  <div style="width: 600px">
+    <modus-autocomplete
+      aria-label=${ariaLabel}
+      clearable=${clearable}
+      disabled=${disabled}
+      dropdown-max-height=${dropdownMaxHeight}
+      dropdown-z-index=${dropdownZIndex}
+      disable-close-on-select=${disableCloseOnSelect}
+      error-text=${errorText}
+      include-search-icon=${includeSearchIcon}
+      id="dynamic-options"
+      label=${label}
+      loading=${loading}
+      multiple=${multiple}
+      no-results-found-text=${noResultsFoundText}
+      no-results-found-subtext=${noResultsFoundSubtext}
+      placeholder=${placeholder}
+      read-only=${readOnly}
+      required=${required}
+      show-no-results-found-message=${showNoResultsFoundMessage}
+      show-options-on-focus=${showOptionsOnFocus}
+      size=${size}
+      .value=${value}>
+    </modus-autocomplete>
+  </div>
+  ${setDynamicOptions()}
+`;
+WithDynamicOptions.args = {
+  ariaLabel: 'autocomplete',
+  clearable: false,
+  disabled: false,
+  dropdownMaxHeight: '300px',
+  dropdownZIndex: '1',
+  disableCloseOnSelect: false,
+  errorText: '',
+  includeSearchIcon: true,
+  label: 'Dynamic Autocomplete',
+  loading: false,
+  multiple: false,
+  noResultsFoundText: 'No results found',
+  noResultsFoundSubtext: 'Check spelling or try a different keyword',
+  placeholder: 'Search...',
+  readOnly: false,
+  required: false,
+  showNoResultsFoundMessage: true,
+  showOptionsOnFocus: false,
+  size: 'medium',
+  value: '',
+};
+const setDynamicOptions = () => {
+  const tag = document.createElement('script');
+  tag.innerHTML = `
+        (function () {
+          const modusAutocomplete = document.querySelector('#dynamic-options');
+          if (modusAutocomplete) {
+            const options = [
+              { id: '0', value: 'Apple' },
+              { id: '1', value: 'Banana' },
+              { id: '2', value: 'Orange' },
+              { id: '3', value: 'Mango' },
+              { id: '4', value: 'Pineapple' },
+            ];
+            const dynamicOptions = [
+              { id: '5', value: 'Grapes' },
+              { id: '6', value: 'Watermelon' },
+              { id: '7', value: 'Strawberry' },
+              { id: '8', value: 'Blueberry' },
+              { id: '9', value: 'Raspberry' },
+              { id: '10', value: 'Blackberry' },
+              { id: '11', value: 'Cherry' },
+              { id: '12', value: 'Peach' },
+              { id: '13', value: 'Pear' },
+              { id: '14', value: 'Plum' },
+              { id: '15', value: 'Kiwi' },
+              { id: '16', value: 'Lemon' },
+              { id: '17', value: 'Lime' },
+              { id: '18', value: 'Papaya' },
+              { id: '19', value: 'Passion Fruit' },
+            ];
+            function getFilteredOptions(value) {
+              modusAutocomplete.loading = true;
+              return new Promise((resolve) => {
+                setTimeout(() => {
+                  const filteredOptions = [...options, ...dynamicOptions].filter((option) =>
+                    (option.value ?? option).toLowerCase().includes(value.toLowerCase())
+                  );
+                  resolve(filteredOptions);
+                  modusAutocomplete.loading = false;
+                }, 1500);
+              });
+            }
+            modusAutocomplete.options = options;
+            modusAutocomplete.filterOptions = getFilteredOptions;
+          }
+        }())
+  `;
+
+  return tag;
+};

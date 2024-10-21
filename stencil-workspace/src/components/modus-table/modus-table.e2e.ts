@@ -28,7 +28,6 @@ const MockData = [
     mockColumnTwo: 900293,
   },
 ];
-
 const MockManualPagination = {
   currentPageIndex: 2,
   currentPageSize: 10,
@@ -101,239 +100,6 @@ describe('modus-table', () => {
     await page.waitForChanges();
     hover = await page.find('modus-table >>> .enable-hover');
     expect(hover).not.toBeNull();
-  });
-
-  it('Renders with sort icon when sort is enabled', async () => {
-    page = await newE2EPage();
-
-    await page.setContent('<modus-table />');
-    const component = await page.find('modus-table');
-    component.setProperty('columns', MockColumns);
-    component.setProperty('data', MockData);
-    component.setProperty('sort', false);
-
-    await page.waitForChanges();
-    let sortContainer = await page.find('modus-table >>> .can-sort');
-    expect(sortContainer).toBeNull();
-
-    component.setProperty('sort', true);
-    await page.waitForChanges();
-    sortContainer = await page.find('modus-table >>> .can-sort');
-    expect(sortContainer).not.toBeNull();
-  });
-
-  it('Renders with sort icon when showSortIconOnHover is enabled', async () => {
-    page = await newE2EPage();
-
-    await page.setContent('<modus-table />');
-    const component = await page.find('modus-table');
-    component.setProperty('columns', MockColumns);
-    component.setProperty('data', MockData);
-    component.setProperty('sort', true);
-    component.setProperty('showSortIconOnHover', true);
-
-    await page.waitForChanges();
-    const header = await page.find('modus-table >>> th');
-
-    let sortContainer = await page.find('modus-table >>> .can-sort.hidden');
-    expect(sortContainer).toBeNull();
-
-    await header.hover();
-    await page.waitForChanges();
-
-    sortContainer = await page.find('modus-table >>> .hidden');
-    expect(sortContainer).not.toBeNull();
-  });
-
-  it('Should output sort event on sort icon click with sort enabled', async () => {
-    const component = await page.find('modus-table');
-    component.setProperty('columns', MockColumns);
-    component.setProperty('data', MockData);
-    component.setProperty('sort', true);
-    await page.waitForChanges();
-    const sortEvent = await page.spyOnEvent('sortChange');
-
-    const header = await page.find('modus-table >>> .sort-icon');
-    await header.click();
-    await header.click();
-
-    expect(sortEvent).toHaveReceivedEventTimes(2);
-  });
-
-  it('Renders with correct sort icon when sort is enabled', async () => {
-    page = await newE2EPage();
-    await page.setContent('<modus-table />');
-
-    const component = await page.find('modus-table');
-
-    component.setProperty('columns', MockColumns);
-    component.setProperty('data', MockData);
-    component.setProperty('sort', true);
-    await page.waitForChanges();
-
-    let iconSortAZ = await page.find('modus-table >>> svg');
-    expect(iconSortAZ).toHaveClass('icon-sort-alpha-up');
-
-    const header = await page.find('modus-table >>> .sort-icon');
-    await header.click();
-    await page.waitForChanges();
-    iconSortAZ = await page.find('modus-table >>> svg');
-    expect(iconSortAZ).toHaveClass('icon-sort-alpha-down');
-  });
-
-  it('Renders with correct sort icon when icon style provided and sort enabled', async () => {
-    page = await newE2EPage();
-    await page.setContent('<modus-table />');
-
-    const component = await page.find('modus-table');
-
-    component.setProperty('columns', MockColumns);
-    component.setProperty('data', MockData);
-    component.setProperty('sort', true);
-    component.setProperty('sortIconStyle', 'directional');
-    await page.waitForChanges();
-
-    let arrowIcon = await page.find('modus-table >>> svg');
-    expect(arrowIcon).toHaveClass('icon-unsorted-arrows');
-
-    const header = await page.find('modus-table >>> .sort-icon');
-    await header.click();
-    await page.waitForChanges();
-    arrowIcon = await page.find('modus-table >>> svg');
-    expect(arrowIcon).toHaveClass('icon-sort-arrow-up');
-  });
-
-  it('Should output sort data on sort icon click with sort enabled', async () => {
-    const component = await page.find('modus-table');
-    component.setProperty('columns', MockColumns);
-    component.setProperty('data', MockData);
-    component.setProperty('sort', true);
-    await page.waitForChanges();
-    const sortEvent = await page.spyOnEvent('sortChange');
-
-    const header = await page.find('modus-table >>> .sort-icon');
-    await header.click();
-
-    let tableData = await page.findAll('modus-table >>> td');
-    let firstItem = tableData[1].textContent;
-    let secondItem = tableData[3].textContent;
-    // Ascending sort
-    expect(firstItem).toEqual(MockData[0].mockColumnTwo.toString());
-    expect(secondItem).toEqual(MockData[1].mockColumnTwo.toString());
-
-    await header.click();
-    await page.waitForChanges();
-
-    // Descending sort
-    tableData = await page.findAll('modus-table >>> td');
-    firstItem = tableData[1].textContent;
-    secondItem = tableData[3].textContent;
-
-    expect(firstItem).toEqual(MockData[1].mockColumnTwo.toString());
-    expect(secondItem).toEqual(MockData[0].mockColumnTwo.toString());
-
-    expect(sortEvent).toHaveReceivedEventTimes(2);
-  });
-
-  it('Check sort icon tooltip text for ascending and descending ', async () => {
-    page = await newE2EPage();
-    await page.setContent('<modus-table />');
-
-    const component = await page.find('modus-table');
-
-    component.setProperty('columns', MockColumns);
-    component.setProperty('data', MockData);
-    component.setProperty('sort', false);
-    await page.waitForChanges();
-
-    let sortContainer = await page.find('modus-table >>> .can-sort');
-    expect(sortContainer).toBeNull();
-
-    component.setProperty('sort', true);
-    await page.waitForChanges();
-
-    sortContainer = await page.find('modus-table >>> th');
-    expect(sortContainer).not.toBeNull();
-
-    let tooltip = await sortContainer.find('modus-tooltip');
-    let tooltipText = await tooltip.getProperty('text');
-
-    expect(tooltip).not.toBeNull();
-    expect(tooltipText).toEqual('Sort Ascending');
-
-    let header = await page.find('modus-table >>> .sort-icon');
-    await header.click();
-    await page.waitForChanges();
-    tooltip = await sortContainer.find('modus-tooltip');
-    tooltipText = await tooltip.getProperty('text');
-    expect(tooltipText).toEqual('Sorted Ascending');
-
-    header = await page.find('modus-table >>> .sort-icon');
-    await header.click();
-    await page.waitForChanges();
-    tooltip = await sortContainer.find('modus-tooltip');
-    tooltipText = await tooltip.getProperty('text');
-    expect(tooltipText).toEqual('Sorted Descending');
-  });
-
-  it('Renders with correct sort icon when manual sorting is enabled', async () => {
-    page = await newE2EPage();
-    await page.setContent('<modus-table />');
-
-    const component = await page.find('modus-table');
-    component.setProperty('columns', MockColumns);
-    component.setProperty('data', MockData);
-    component.setProperty('sort', true);
-    component.setProperty('manualSortingOptions', MockManualSorting);
-    await page.waitForChanges();
-
-    const iconSortAZ = await page.find('modus-table >>> svg');
-    expect(iconSortAZ).toHaveClass('icon-sort-alpha-down');
-  });
-
-  it('Check sort icon tooltip text for enabled manual sorting', async () => {
-    page = await newE2EPage();
-    await page.setContent('<modus-table />');
-
-    const component = await page.find('modus-table');
-    component.setProperty('columns', MockColumns);
-    component.setProperty('data', MockData);
-    component.setProperty('sort', true);
-    component.setProperty('manualSortingOptions', MockManualSorting);
-    await page.waitForChanges();
-
-    const sortContainer = await page.find('modus-table >>> th');
-    expect(sortContainer).not.toBeNull();
-
-    const tooltip = await sortContainer.find('modus-tooltip');
-    const tooltipText = await tooltip.getProperty('text');
-
-    expect(tooltip).not.toBeNull();
-    expect(tooltipText).toEqual('Sorted Ascending');
-  });
-
-  it('Displays bold header text when sorted', async () => {
-    page = await newE2EPage();
-    await page.setContent('<modus-table />');
-
-    const component = await page.find('modus-table');
-
-    component.setProperty('columns', MockColumns);
-    component.setProperty('data', MockData);
-    component.setProperty('sort', true);
-    await page.waitForChanges();
-
-    let sortHeader = await page.find('modus-table >>> div.can-sort > span');
-    let style = await sortHeader.getComputedStyle();
-    expect(style['font-weight']).toBe('600');
-
-    const header = await page.find('modus-table >>> .sort-icon');
-    await header.click();
-    await page.waitForChanges();
-
-    sortHeader = await page.find('modus-table >>> div.can-sort > span');
-    style = await sortHeader.getComputedStyle();
-    expect(style['font-weight']).toBe('700');
   });
 
   it('Render pagination when pagination is enabled', async () => {
@@ -1064,5 +830,508 @@ describe('modus-table', () => {
     await page.waitForChanges();
 
     expect(rowSelectionChange).toHaveReceivedEvent();
+  });
+
+  it('should load previous page when last page is active and all data removed from page', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-table />');
+    const component = await page.find('modus-table');
+
+    // set data to 100 rows using Array.from
+    const data = Array.from({ length: 100 }, (_, i) => ({
+      mockColumnOne: `Mock Data One ${i}`,
+      mockColumnTwo: i,
+    }));
+
+    component.setProperty('columns', MockColumns);
+    component.setProperty('pageSizeList', [5, 10, 50]);
+    component.setProperty('data', data);
+    component.setProperty('pagination', true);
+    await page.waitForChanges();
+
+    const paginationContainer = await page.find('modus-table >>> .pagination-container');
+    await page.waitForChanges();
+
+    let lastPage = await paginationContainer.find('modus-pagination >>> li:nth-last-child(2)');
+    lastPage.click();
+    await page.waitForChanges();
+
+    expect(lastPage.textContent).toBe('20');
+
+    component.setProperty('data', data.slice(0, data.length - 5));
+    await page.waitForChanges();
+
+    lastPage = await paginationContainer.find('modus-pagination >>> li:nth-last-child(2)');
+
+    expect(lastPage.textContent).toBe('19');
+  });
+
+  it('should stay on current page when data changed with items still on active page', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-table />');
+    const component = await page.find('modus-table');
+
+    // set data to 100 rows using Array.from
+    const data = Array.from({ length: 100 }, (_, i) => ({
+      mockColumnOne: `Mock Data One ${i}`,
+      mockColumnTwo: i,
+    }));
+
+    component.setProperty('columns', MockColumns);
+    component.setProperty('pageSizeList', [5, 10, 50]);
+    component.setProperty('data', data);
+    component.setProperty('pagination', true);
+    await page.waitForChanges();
+
+    const paginationContainer = await page.find('modus-table >>> .pagination-container');
+    await page.waitForChanges();
+
+    let secondPage = await paginationContainer.find('modus-pagination >>> li:nth-child(3)');
+    secondPage.click();
+    await page.waitForChanges();
+
+    expect(secondPage.textContent).toBe('2');
+
+    component.setProperty('data', data.slice(0, data.length - 5));
+    await page.waitForChanges();
+
+    let activePage = await paginationContainer.find('modus-pagination >>> li button.active');
+    const lastPage = await paginationContainer.find('modus-pagination >>> li:nth-last-child(2)');
+
+    expect(activePage.textContent).toBe('2');
+    expect(lastPage.textContent).toBe('19');
+  });
+
+  describe('Header Text: Tooltip', () => {
+    it('Should display a tooltip when header text is hover when a column have not been sorted', async () => {
+      page = await newE2EPage();
+      await page.setContent('<modus-table />');
+
+      const component = await page.find('modus-table');
+
+      component.setProperty('columns', MockColumns);
+      component.setProperty('data', MockData);
+      component.setProperty('sort', true);
+
+      await page.waitForChanges();
+
+      const headerTextTooltip = await page.findAll('modus-table >>> modus-tooltip');
+      const headerTextElement = headerTextTooltip[0];
+      await headerTextElement.hover();
+      const tooltipText = await headerTextElement.getProperty('text');
+
+      expect(tooltipText).not.toBeNull();
+      expect(tooltipText).toEqual('Sort Ascending');
+    });
+
+    it('Should display a tooltip when header text is hover after the header got sorted the first time', async () => {
+      page = await newE2EPage();
+      await page.setContent('<modus-table />');
+
+      const component = await page.find('modus-table');
+
+      component.setProperty('columns', MockColumns);
+      component.setProperty('data', MockData);
+      component.setProperty('sort', true);
+      component.setProperty('columnReorder', false);
+
+      await page.waitForChanges();
+
+      const headerContent = await page.findAll('modus-table >>> modus-tooltip');
+      const headerTextContent = headerContent[0];
+      const headerTextElement = await headerTextContent.find('span');
+
+      await headerTextElement.click();
+
+      await page.waitForChanges();
+
+      await headerTextContent.hover();
+      const tooltipText = await headerTextContent.getProperty('text');
+
+      expect(tooltipText).not.toBeNull();
+
+      expect(tooltipText).toBe('Sorted Ascending');
+    });
+
+    it('Should display a tooltip when header text is hover after the header got sorted for the second time', async () => {
+      page = await newE2EPage();
+      await page.setContent('<modus-table />');
+
+      const component = await page.find('modus-table');
+
+      component.setProperty('columns', MockColumns);
+      component.setProperty('data', MockData);
+      component.setProperty('sort', true);
+      component.setProperty('columnReorder', false);
+
+      await page.waitForChanges();
+
+      const headerContent = await page.findAll('modus-table >>> modus-tooltip');
+      const headerTextContent = headerContent[0];
+      const headerTextElement = await headerTextContent.find('span');
+
+      await headerTextElement.click();
+      await headerTextElement.click();
+
+      const tooltipText = await headerTextContent.getProperty('text');
+
+      await page.waitForChanges();
+
+      expect(tooltipText).not.toBeNull();
+      expect(tooltipText).toBe('Sorted Descending');
+    });
+
+    it('Should display a tooltip when header text is hover after the header got sorted for the third time', async () => {
+      page = await newE2EPage();
+      await page.setContent('<modus-table />');
+
+      const component = await page.find('modus-table');
+
+      component.setProperty('columns', MockColumns);
+      component.setProperty('data', MockData);
+      component.setProperty('sort', true);
+
+      await page.waitForChanges();
+
+      const headerContent = await page.findAll('modus-table >>> modus-tooltip');
+      const headerTextContent = headerContent[0];
+      const headerTextElement = await headerTextContent.find('span');
+
+      await headerTextElement.click();
+      await headerTextElement.click();
+      await headerTextElement.click();
+
+      const tooltipText = await headerTextContent.getProperty('text');
+
+      expect(tooltipText).not.toBeNull();
+      expect(tooltipText).toBe('Sort Ascending');
+    });
+  });
+
+  describe('Sort Icon', () => {
+    it('Renders with sort icon when sort is enabled', async () => {
+      page = await newE2EPage();
+
+      await page.setContent('<modus-table />');
+      const component = await page.find('modus-table');
+      component.setProperty('columns', MockColumns);
+      component.setProperty('data', MockData);
+      component.setProperty('sort', false);
+
+      await page.waitForChanges();
+      let sortContainer = await page.find('modus-table >>> .can-sort');
+      expect(sortContainer).toBeNull();
+
+      component.setProperty('sort', true);
+      await page.waitForChanges();
+      sortContainer = await page.find('modus-table >>> .can-sort');
+      expect(sortContainer).not.toBeNull();
+    });
+
+    it('Renders with sort icon when showSortIconOnHover is enabled', async () => {
+      page = await newE2EPage();
+
+      await page.setContent('<modus-table />');
+      const component = await page.find('modus-table');
+      component.setProperty('columns', MockColumns);
+      component.setProperty('data', MockData);
+      component.setProperty('sort', true);
+      component.setProperty('showSortIconOnHover', true);
+
+      await page.waitForChanges();
+      const header = await page.find('modus-table >>> th');
+
+      let sortContainer = await page.find('modus-table >>> .can-sort.hidden');
+      expect(sortContainer).toBeNull();
+
+      await header.hover();
+      await page.waitForChanges();
+
+      sortContainer = await page.find('modus-table >>> .hidden');
+      expect(sortContainer).not.toBeNull();
+    });
+
+    it('Should output sort event on sort icon click with sort enabled', async () => {
+      const component = await page.find('modus-table');
+      component.setProperty('columns', MockColumns);
+      component.setProperty('data', MockData);
+      component.setProperty('sort', true);
+      await page.waitForChanges();
+      const sortEvent = await page.spyOnEvent('sortChange');
+
+      const header = await page.find('modus-table >>> .sort-icon');
+      await header.click();
+      await header.click();
+
+      expect(sortEvent).toHaveReceivedEventTimes(2);
+    });
+
+    it('Renders with correct sort icon when sort is enabled', async () => {
+      page = await newE2EPage();
+      await page.setContent('<modus-table />');
+
+      const component = await page.find('modus-table');
+
+      component.setProperty('columns', MockColumns);
+      component.setProperty('data', MockData);
+      component.setProperty('sort', true);
+      await page.waitForChanges();
+
+      let iconSortAZ = await page.find('modus-table >>> svg');
+      expect(iconSortAZ).toHaveClass('icon-sort-alpha-up');
+
+      const header = await page.find('modus-table >>> .sort-icon');
+      await header.click();
+      await page.waitForChanges();
+      iconSortAZ = await page.find('modus-table >>> svg');
+      expect(iconSortAZ).toHaveClass('icon-sort-alpha-down');
+    });
+
+    it('Renders with correct sort icon when icon style provided and sort enabled', async () => {
+      page = await newE2EPage();
+      await page.setContent('<modus-table />');
+
+      const component = await page.find('modus-table');
+
+      component.setProperty('columns', MockColumns);
+      component.setProperty('data', MockData);
+      component.setProperty('sort', true);
+      component.setProperty('sortIconStyle', 'directional');
+      await page.waitForChanges();
+
+      let arrowIcon = await page.find('modus-table >>> svg');
+      expect(arrowIcon).toHaveClass('icon-unsorted-arrows');
+
+      const header = await page.find('modus-table >>> .sort-icon');
+      await header.click();
+      await page.waitForChanges();
+      arrowIcon = await page.find('modus-table >>> svg');
+      expect(arrowIcon).toHaveClass('icon-sort-arrow-up');
+    });
+
+    it('Should output sort data on sort icon click with sort enabled', async () => {
+      const component = await page.find('modus-table');
+      component.setProperty('columns', MockColumns);
+      component.setProperty('data', MockData);
+      component.setProperty('sort', true);
+      await page.waitForChanges();
+      const sortEvent = await page.spyOnEvent('sortChange');
+
+      const header = await page.find('modus-table >>> .sort-icon');
+      await header.click();
+
+      let tableData = await page.findAll('modus-table >>> td');
+      let firstItem = tableData[1].textContent;
+      let secondItem = tableData[3].textContent;
+      // Ascending sort
+      expect(firstItem).toEqual(MockData[0].mockColumnTwo.toString());
+      expect(secondItem).toEqual(MockData[1].mockColumnTwo.toString());
+
+      await header.click();
+      await page.waitForChanges();
+
+      // Descending sort
+      tableData = await page.findAll('modus-table >>> td');
+      firstItem = tableData[1].textContent;
+      secondItem = tableData[3].textContent;
+
+      expect(firstItem).toEqual(MockData[1].mockColumnTwo.toString());
+      expect(secondItem).toEqual(MockData[0].mockColumnTwo.toString());
+
+      expect(sortEvent).toHaveReceivedEventTimes(2);
+    });
+
+    it('Check sort icon tooltip text for ascending and descending ', async () => {
+      page = await newE2EPage();
+      await page.setContent('<modus-table />');
+
+      const component = await page.find('modus-table');
+
+      component.setProperty('columns', MockColumns);
+      component.setProperty('data', MockData);
+      component.setProperty('sort', false);
+      await page.waitForChanges();
+
+      let sortContainer = await page.find('modus-table >>> .can-sort');
+      expect(sortContainer).toBeNull();
+
+      component.setProperty('sort', true);
+      await page.waitForChanges();
+
+      sortContainer = await page.find('modus-table >>> th');
+      expect(sortContainer).not.toBeNull();
+
+      let tooltip = await sortContainer.find('modus-tooltip');
+      let tooltipText = await tooltip.getProperty('text');
+
+      expect(tooltip).not.toBeNull();
+      expect(tooltipText).toEqual('Sort Ascending');
+
+      let header = await page.find('modus-table >>> .sort-icon');
+      await header.click();
+      await page.waitForChanges();
+      tooltip = await sortContainer.find('modus-tooltip');
+      tooltipText = await tooltip.getProperty('text');
+      expect(tooltipText).toEqual('Sorted Ascending');
+
+      header = await page.find('modus-table >>> .sort-icon');
+      await header.click();
+      await page.waitForChanges();
+      tooltip = await sortContainer.find('modus-tooltip');
+      tooltipText = await tooltip.getProperty('text');
+      expect(tooltipText).toEqual('Sorted Descending');
+    });
+
+    it('should renders with correct sort icon when manual sorting is enabled', async () => {
+      page = await newE2EPage();
+      await page.setContent('<modus-table />');
+
+      const component = await page.find('modus-table');
+      component.setProperty('columns', MockColumns);
+      component.setProperty('data', MockData);
+      component.setProperty('sort', true);
+      component.setProperty('manualSortingOptions', MockManualSorting);
+      await page.waitForChanges();
+
+      const iconSortAZ = await page.find('modus-table >>> svg');
+      expect(iconSortAZ).toHaveClass('icon-sort-alpha-down');
+    });
+
+    it('Check sort icon tooltip text for enabled manual sorting', async () => {
+      page = await newE2EPage();
+      await page.setContent('<modus-table />');
+
+      const component = await page.find('modus-table');
+      component.setProperty('columns', MockColumns);
+      component.setProperty('data', MockData);
+      component.setProperty('sort', true);
+      component.setProperty('manualSortingOptions', MockManualSorting);
+      await page.waitForChanges();
+
+      const sortContainer = await page.find('modus-table >>> th');
+      expect(sortContainer).not.toBeNull();
+
+      const tooltip = await sortContainer.find('modus-tooltip');
+      const tooltipText = await tooltip.getProperty('text');
+
+      expect(tooltip).not.toBeNull();
+      expect(tooltipText).toEqual('Sorted Ascending');
+    });
+
+    it('Displays bold header text when sorted', async () => {
+      page = await newE2EPage();
+      await page.setContent('<modus-table />');
+
+      const component = await page.find('modus-table');
+
+      component.setProperty('columns', MockColumns);
+      component.setProperty('data', MockData);
+      component.setProperty('sort', true);
+      await page.waitForChanges();
+
+      const firstTooltip = await page.find('modus-table >>> modus-tooltip');
+      const sortHeader = await firstTooltip.find('span');
+
+      let style = await sortHeader.getComputedStyle();
+      expect(style['font-weight']).toBe('600');
+
+      await sortHeader.click();
+      await page.waitForChanges();
+
+      style = await sortHeader.getComputedStyle();
+      expect(style['font-weight']).toBe('700');
+    });
+  });
+
+  describe('Tab Order', () => {
+    it('Should validate tab order when Reorder and Sort are enabled', async () => {
+      page = await newE2EPage();
+      await page.setContent('<modus-table />');
+
+      const component = await page.find('modus-table');
+
+      component.setProperty('columns', MockColumns);
+      component.setProperty('data', MockData);
+      component.setProperty('sort', true);
+      component.setProperty('columnReorder', true);
+
+      await page.waitForChanges();
+
+      const cell = await page.find('modus-table >>> th');
+      const headerElement = await page.findAll('modus-table >>> modus-tooltip');
+      const headerText = await headerElement[0].find('span');
+      const iconElement = await headerElement[1].find('span');
+      let cellStyle = await cell.getComputedStyle();
+      let headerTextStyle = await headerText.getComputedStyle();
+      let sortIconStyle = await iconElement.getComputedStyle();
+
+      expect(cellStyle['outlineWidth']).toBe('0px');
+      expect(headerTextStyle['outlineWidth']).toBe('0px');
+      expect(sortIconStyle['outlineWidth']).toBe('0px');
+
+      //HEADER CELL FOCUS
+      await page.keyboard.press('Tab');
+      await page.waitForChanges();
+
+      cellStyle = await cell.getComputedStyle();
+      headerTextStyle = await headerText.getComputedStyle();
+      sortIconStyle = await iconElement.getComputedStyle();
+
+      expect(cellStyle['outlineWidth']).toBe('1px');
+      expect(headerTextStyle['outlineWidth']).toBe('0px');
+      expect(sortIconStyle['outlineWidth']).toBe('0px');
+
+      // SORT ICON
+      await page.keyboard.press('Tab');
+      await page.waitForChanges();
+
+      cellStyle = await cell.getComputedStyle();
+      headerTextStyle = await headerText.getComputedStyle();
+      sortIconStyle = await iconElement.getComputedStyle();
+
+      expect(cellStyle['outlineWidth']).toBe('0px');
+      expect(headerTextStyle['outlineWidth']).toBe('0px');
+      expect(sortIconStyle['outlineWidth']).toBe('1px');
+    });
+
+    it('Should validate tab order when Reorder and Sort are disabled', async () => {
+      page = await newE2EPage();
+      await page.setContent('<modus-table />');
+
+      const component = await page.find('modus-table');
+
+      component.setProperty('columns', MockColumns);
+      component.setProperty('data', MockData);
+      component.setProperty('sort', false);
+      component.setProperty('columnReorder', false);
+
+      await page.waitForChanges();
+
+      const cells = await page.findAll('modus-table >>> th');
+
+      let cell1Style = await cells[0].getComputedStyle();
+      let cell2Style = await cells[1].getComputedStyle();
+
+      expect(cell1Style['outlineWidth']).toBe('0px');
+      expect(cell2Style['outlineWidth']).toBe('0px');
+
+      await page.keyboard.press('Tab');
+      await page.waitForChanges();
+
+      cell1Style = await cells[0].getComputedStyle();
+      cell2Style = await cells[1].getComputedStyle();
+
+      expect(cell1Style['outlineWidth']).toBe('1px');
+      expect(cell2Style['outlineWidth']).toBe('0px');
+
+      await page.keyboard.press('Tab');
+      await page.waitForChanges();
+
+      cell1Style = await cells[0].getComputedStyle();
+      cell2Style = await cells[1].getComputedStyle();
+
+      expect(cell1Style['outlineWidth']).toBe('0px');
+      expect(cell2Style['outlineWidth']).toBe('1px');
+    });
   });
 });

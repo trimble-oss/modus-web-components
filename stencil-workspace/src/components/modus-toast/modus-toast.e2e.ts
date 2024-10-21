@@ -62,4 +62,78 @@ describe('modus-toast', () => {
     await page.waitForChanges();
     expect(dismissClick).toHaveReceivedEvent();
   });
+
+  it('renders aria-label on div when set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-toast aria-label="test label"></modus-toast>');
+    const element = await page.find('modus-toast >>> .modus-toast');
+    expect(element).toBeDefined();
+    expect(element).toHaveAttribute('aria-label');
+    expect(element.getAttribute('aria-label')).toEqual('test label');
+  });
+
+  it('does not render aria-label on div when not set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-toast></modus-toast>');
+    const element = await page.find('modus-toast >>> .modus-toast');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
+
+  it('does not render aria-label on div when set to empty string', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-toast aria-label=""></modus-toast>');
+    const element = await page.find('modus-toast >>> .modus-toast');
+    expect(element).toBeDefined();
+    expect(element).not.toHaveAttribute('aria-label');
+  });
+
+  it('emits dismissClick event after 15000ms', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-toast></modus-toast>');
+    const dismissClick = await page.spyOnEvent('dismissClick');
+
+    await page.waitForTimeout(15000);
+    expect(dismissClick).toHaveReceivedEvent();
+  });
+
+  it('emits dismissClick event after 15000ms', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-toast delay="10000"></modus-toast>');
+    const dismissClick = await page.spyOnEvent('dismissClick');
+
+    await page.waitForTimeout(10000);
+    expect(dismissClick).toHaveReceivedEvent();
+  });
+
+  it('retains the element from the DOM when retainElement is true', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-toast retainElement="true" delay="1000"></modus-toast>');
+    const dismissClick = await page.spyOnEvent('dismissClick');
+
+    await page.waitForTimeout(1000);
+    expect(dismissClick).toHaveReceivedEvent();
+
+    const element = await page.find('modus-toast >>> .modus-toast');
+    expect(element).toBeDefined();
+  });
+
+  it('removes the element in the DOM when retainElement is false', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-toast retainElement="false" delay="1000"></modus-toast>');
+    const dismissClick = await page.spyOnEvent('dismissClick');
+
+    await page.waitForTimeout(1000);
+    expect(dismissClick).toHaveReceivedEvent();
+
+    const element = await page.find('modus-toast >>> .modus-toast');
+    expect(element).toBeNull();
+  });
 });

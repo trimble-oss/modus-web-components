@@ -13,13 +13,20 @@ export default {
         type: { summary: 'boolean' },
       },
     },
+    navAriaLabel: {
+      name: 'nav-aria-label',
+      description: "The navbar's aria-label",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
     showHelp: {
       name: 'show-help',
       description: 'Toggle the help button',
       table: {
         defaultValue: { summary: false },
-        type: { summary: 'boolean' }
-      }
+        type: { summary: 'boolean' },
+      },
     },
     showProfile: {
       name: 'show-profile',
@@ -27,7 +34,7 @@ export default {
       table: {
         defaultValue: { summary: true },
         type: { summary: 'boolean' },
-      }
+      },
     },
     showSearch: {
       name: 'show-search',
@@ -64,11 +71,18 @@ export default {
       table: {
         type: { summary: 'ModusNavbarTooltip' },
       },
-    }
+    },
+    notificationCount: {
+      name: 'notification-count',
+      description: 'To add the counter value to the notification icon',
+      table: {
+        type: { summary: 'number' },
+      },
+    },
   },
   parameters: {
     actions: {
-      handles: ['searchMenuClick', 'buttonClick', 'productLogoClick', 'helpOpen'],
+      handles: ['searchMenuClick', 'buttonClick', 'productLogoClick', 'helpOpen', 'profileMenuSignOutClick'],
     },
     controls: { expanded: true, sort: 'requiredFirst' },
     docs: {
@@ -82,41 +96,64 @@ export default {
   },
 };
 
-const workingAvatarUrl = 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0e738c17-7f3c-422e-8225-f8c782b08626/d9pordj-43d4aa59-54b0-46a1-a568-e36dd691cf27.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzBlNzM4YzE3LTdmM2MtNDIyZS04MjI1LWY4Yzc4MmIwODYyNlwvZDlwb3Jkai00M2Q0YWE1OS01NGIwLTQ2YTEtYTU2OC1lMzZkZDY5MWNmMjcucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.xvDk9KFIUAx0yAG3BPamDfRqmWUX6zwR4WVW40GjsoY';
+const workingAvatarUrl =
+  'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0e738c17-7f3c-422e-8225-f8c782b08626/d9pordj-43d4aa59-54b0-46a1-a568-e36dd691cf27.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzBlNzM4YzE3LTdmM2MtNDIyZS04MjI1LWY4Yzc4MmIwODYyNlwvZDlwb3Jkai00M2Q0YWE1OS01NGIwLTQ2YTEtYTU2OC1lMzZkZDY5MWNmMjcucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.xvDk9KFIUAx0yAG3BPamDfRqmWUX6zwR4WVW40GjsoY';
 const failingAvatarUrl = 'https://avatar.example.com/broken-image-link.png';
 const defaultPrimaryLogo = 'https://modus.trimble.com/img/trimble-logo.svg';
 const defaultSecondaryLogo = 'https://modus.trimble.com/favicon.svg';
+const primaryAlt = 'Trimble Modus Logo';
+const secondaryAlt = 'Trimble Modus Icon';
 const defaultLogo = {
   primary: {
     url: defaultPrimaryLogo,
+    alt: primaryAlt,
   },
   secondary: {
     url: defaultSecondaryLogo,
-  }
+    alt: secondaryAlt,
+  },
 };
 const blueLogo = {
   primary: {
     url: 'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
+    alt: 'Trimble Modus Logo',
   },
   secondary: {
     url: 'https://modus-bootstrap.trimble.com/img/trimble-icon-rev.svg',
-  }
+    alt: 'Trimble Modus Icon',
+  },
 };
-const defaultApps = [{
-  description: 'The One Trimble Design System',
-  logoUrl: 'https://modus.trimble.com/favicon.svg',
-  name: 'Trimble Modus',
-  url: 'https://modus.trimble.com/',
-}];
+const defaultApps = [
+  {
+    description: 'The One Trimble Design System',
+    logoUrl: 'https://modus.trimble.com/favicon.svg',
+    name: 'Trimble Modus',
+    url: 'https://modus.trimble.com/',
+  },
+];
 
-const Template = ({ buttons, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
+const Template = ({
+  buttons,
+  notificationCount,
+  enableSearchOverlay,
+  helpTooltip,
+  navAriaLabel,
+  profileMenuOptions,
+  searchTooltip,
+  showHelp,
+  showProfile,
+  showSearch,
+}) => html`
   <modus-navbar
     enable-search-overlay=${enableSearchOverlay}
+    nav-aria-label=${navAriaLabel}
     show-apps-menu
     show-help=${showHelp}
     show-main-menu
     show-profile=${showProfile}
     show-search=${showSearch}
+    notification-count=${notificationCount}
+    show-notifications
     .apps=${defaultApps}
     .buttons=${buttons}
     .helpTooltip=${helpTooltip}
@@ -125,10 +162,10 @@ const Template = ({ buttons, enableSearchOverlay, helpTooltip, profileMenuOption
     .searchTooltip=${searchTooltip}>
     <div slot="main" style="height:300px;">Render your own main menu.</div>
 
-      <modus-list slot="addMenu">
-        <modus-list-item>Menu Item 1</modus-list-item>
-        <modus-list-item>Menu Item 2</modus-list-item>
-      </modus-list>
+    <modus-list slot="addMenu">
+      <modus-list-item>Menu Item 1</modus-list-item>
+      <modus-list-item>Menu Item 2</modus-list-item>
+    </modus-list>
 
     <div slot="notificationMenu">Render your own notification menu.</div>
     <div slot="profileMenu">Render your own profile menu content.</div>
@@ -138,16 +175,8 @@ const Template = ({ buttons, enableSearchOverlay, helpTooltip, profileMenuOption
 export const Default = Template.bind({});
 Default.args = {
   enableSearchOverlay: false,
-  buttons: [
-    {
-      id: 'addMenu', icon: 'add',
-      tooltip: {
-        text: 'Add',
-      }
-    },
-    { id: 'notificationMenu', icon: 'notifications' },
-  ],
   helpTooltip: undefined,
+  navAriaLabel: 'Default',
   profileMenuOptions: {
     avatarUrl: workingAvatarUrl,
     email: 'modus_user@trimble.com',
@@ -156,34 +185,48 @@ Default.args = {
     username: 'Modus User',
     links: [
       {
-        id: "link1",
-        display: "Link 1",
-        icon: "moon"
+        id: 'link1',
+        display: 'Link 1',
+        icon: 'moon',
       },
       {
-        id: "link2",
-        display: "Link 2",
-        icon: "sun"
-      }
+        id: 'link2',
+        display: 'Link 2',
+        icon: 'sun',
+      },
     ],
     tooltip: {
       text: 'User Profile Menu',
-    }
+    },
   },
   searchTooltip: undefined,
   showHelp: false,
   showProfile: true,
   showSearch: false,
+  notificationCount: 0,
 };
 
-const FailedToLoadAvatarTemplate = ({ buttons, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
+const FailedToLoadAvatarTemplate = ({
+  buttons,
+  notificationCount,
+  enableSearchOverlay,
+  helpTooltip,
+  navAriaLabel,
+  profileMenuOptions,
+  searchTooltip,
+  showHelp,
+  showProfile,
+  showSearch,
+}) => html`
   <modus-navbar
     enable-search-overlay=${enableSearchOverlay}
+    nav-aria-label=${navAriaLabel}
     show-apps-menu
     show-help=${showHelp}
     show-help
     show-main-menu
     show-notifications
+    notification-count=${notificationCount}
     show-profile=${showProfile}
     show-search=${showSearch}
     .apps=${defaultApps}
@@ -202,6 +245,7 @@ FailedAvatar.args = {
   buttons: [],
   enableSearchOverlay: false,
   helpTooltip: undefined,
+  navAriaLabel: 'Failed Avatar',
   profileMenuOptions: {
     avatarUrl: failingAvatarUrl,
     email: 'modus_user@trimble.com',
@@ -213,16 +257,30 @@ FailedAvatar.args = {
   showHelp: false,
   showProfile: true,
   showSearch: false,
+  notificationCount: 0,
 };
 
-const BlueTemplate = ({ buttons, enableSearchOverlay, helpTooltip, profileMenuOptions, searchTooltip, showHelp, showProfile, showSearch }) => html`
+const BlueTemplate = ({
+  buttons,
+  notificationCount,
+  enableSearchOverlay,
+  helpTooltip,
+  navAriaLabel,
+  profileMenuOptions,
+  searchTooltip,
+  showHelp,
+  showProfile,
+  showSearch,
+}) => html`
   <modus-navbar
     enable-search-overlay=${enableSearchOverlay}
+    nav-aria-label=${navAriaLabel}
     show-apps-menu
     show-help=${showHelp}
     show-help
     show-main-menu
     show-notifications
+    notification-count=${notificationCount}
     show-profile=${showProfile}
     show-search=${showSearch}
     variant="blue"
@@ -242,6 +300,7 @@ BlueNavbar.args = {
   buttons: [],
   enableSearchOverlay: false,
   helpTooltip: undefined,
+  navAriaLabel: 'Blue navbar',
   profileMenuOptions: {
     avatarUrl: workingAvatarUrl,
     email: 'modus_user@trimble.com',
@@ -253,4 +312,91 @@ BlueNavbar.args = {
   showHelp: false,
   showProfile: true,
   showSearch: false,
+  notificationCount: 0,
+};
+
+const items = [
+  { text: 'Project 1', value: '1' },
+  { text: 'Project 2', value: '2' },
+  { text: 'Project 3', value: '3' },
+];
+const dropdownOptions = {
+  ariaLabel: 'Project dropdown',
+  items,
+};
+
+const WithOptionalFeaturesTemplate = ({
+  buttons,
+  notificationCount,
+  enableSearchOverlay,
+  helpTooltip,
+  navAriaLabel,
+  profileMenuOptions,
+  searchTooltip,
+  showHelp,
+  showProfile,
+  showSearch,
+}) => html`
+  <modus-navbar
+    enable-search-overlay=${enableSearchOverlay}
+    nav-aria-label=${navAriaLabel}
+    show-apps-menu
+    show-help=${showHelp}
+    show-main-menu
+    show-profile=${showProfile}
+    show-search=${showSearch}
+    notification-count=${notificationCount}
+    show-notifications
+    .apps=${defaultApps}
+    .buttons=${buttons}
+    .helpTooltip=${helpTooltip}
+    .logoOptions=${defaultLogo}
+    .dropdownOptions=${dropdownOptions}
+    .selectedDropdownItem=${items[1]}
+    .profileMenuOptions=${profileMenuOptions}
+    .searchTooltip=${searchTooltip}>
+    <div slot="main" style="height:300px;">Render your own main menu.</div>
+
+    <modus-list slot="addMenu">
+      <modus-list-item>Menu Item 1</modus-list-item>
+      <modus-list-item>Menu Item 2</modus-list-item>
+    </modus-list>
+
+    <div slot="notificationMenu">Render your own notification menu.</div>
+    <div slot="profileMenu">Render your own profile menu content.</div>
+  </modus-navbar>
+`;
+
+export const WithOptionalFeatures = WithOptionalFeaturesTemplate.bind({});
+WithOptionalFeatures.args = {
+  enableSearchOverlay: false,
+  helpTooltip: undefined,
+  navAriaLabel: 'Default',
+  profileMenuOptions: {
+    avatarUrl: workingAvatarUrl,
+    email: 'modus_user@trimble.com',
+    initials: 'MU',
+    signOutText: 'Sign out',
+    username: 'Modus User',
+    links: [
+      {
+        id: 'link1',
+        display: 'Link 1',
+        icon: 'moon',
+      },
+      {
+        id: 'link2',
+        display: 'Link 2',
+        icon: 'sun',
+      },
+    ],
+    tooltip: {
+      text: 'User Profile Menu',
+    },
+  },
+  searchTooltip: undefined,
+  showHelp: false,
+  showProfile: true,
+  showSearch: false,
+  notificationCount: 0,
 };

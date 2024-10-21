@@ -39,12 +39,6 @@ export default {
         type: { summary: 'string' },
       },
     },
-    tabIndexValue: {
-      description: 'Tab Index for the checkbox',
-      table: {
-        type: { summary: 'string' },
-      },
-    },
     stopPropagation: {
       name: 'stop-propagation',
       description: "It should stop propagating the event further.",
@@ -79,7 +73,6 @@ const Template = ({
   disabled,
   indeterminate,
   label,
-  tabIndexValue,
   size
 }) => html`
   <modus-checkbox
@@ -88,7 +81,6 @@ const Template = ({
     ?disabled=${disabled}
     indeterminate=${indeterminate}
     label=${label}
-    tab-index-value=${tabIndexValue}
     size=${size}></modus-checkbox>
 `;
 
@@ -99,7 +91,6 @@ Medium.args = {
   disabled: false,
   indeterminate: false,
   label: 'Checkbox',
-  tabIndexValue: 0,
   size:'medium',
 };
 
@@ -110,6 +101,5 @@ Indeterminate.args = {
   disabled: false,
   indeterminate: true,
   label: 'Checkbox',
-  tabIndexValue: 0,
   size:'medium',
 };

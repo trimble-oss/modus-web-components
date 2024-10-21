@@ -7,8 +7,7 @@ import {
   Listen,
   Method,
 } from '@stencil/core';
-import { IconCheck } from '../../icons/svgs/icon-check';
-import { IconIndeterminate } from '../../icons/svgs/icon-indeterminate';
+import { generateElementId } from '../../utils/utils';
 
 @Component({
   tag: 'modus-checkbox',
@@ -31,9 +30,6 @@ export class ModusCheckbox {
   /** (optional) The checkbox label. */
   @Prop() label: string;
 
-  /** (optional) Tab Index for the checkbox */
-  @Prop({ mutable: true }) tabIndexValue: string | number = 0;
-
   /** An event that fires on checkbox click. */
   @Event() checkboxClick: EventEmitter<boolean>;
 
@@ -43,8 +39,9 @@ export class ModusCheckbox {
   /** (optional) The size of the checkbox. */
   @Prop() size: 'small' | 'medium' = 'medium';
 
+  private checkBoxId = generateElementId() + '_checkbox';
+
   checkboxInput: HTMLInputElement;
-  checkboxContainer: HTMLDivElement;
 
   @Listen('keydown')
   elementKeydownHandler(event: KeyboardEvent): void {
@@ -61,7 +58,7 @@ export class ModusCheckbox {
   /** Focus the checkbox input */
   @Method()
   async focusCheckbox(): Promise<void> {
-    this.checkboxContainer.focus();
+    this.checkboxInput.focus();
   }
 
   componentDidRender(): void {
@@ -90,40 +87,28 @@ export class ModusCheckbox {
 
   render(): unknown {
     const className = `modus-checkbox ${this.size === 'small' ? 'small' : ''}`;
-    const tabIndexValue = this.disabled ? -1 : this.tabIndexValue;
 
     return (
-      <div
-        class={className}
-        onClick={(event: MouseEvent) => {
-          this.handleCheckboxClick(event);
-        }}>
-        <div
-          tabindex={tabIndexValue}
-          class={`${this.checked || this.indeterminate ? 'checkbox blue-background checked' : 'checkbox'} ${
-            this.disabled ? 'disabled' : ''
-          } ${this.size === 'small' ? 'small' : ''} `}
-          ref={(el) => (this.checkboxContainer = el)}>
-          {this.indeterminate ? (
-            <div class={'checkmark checked'}>
-              <IconIndeterminate color="#FFFFFF" size={this.size === 'small' ? '12' : '20'} />
-            </div>
-          ) : (
-            <div class={this.checked ? 'checkmark checked' : 'checkmark'}>
-              <IconCheck color="#FFFFFF" size={this.size === 'small' ? '14' : '22'} />
-            </div>
-          )}
-        </div>
+      <div class={className}>
         <input
+          class={`checkbox ${this.size === 'small' ? 'small' : ''} ${this.disabled ? 'disabled' : ''}`}
           aria-checked={this.checked ? 'true' : 'false'}
           aria-disabled={this.disabled ? 'true' : undefined}
           aria-label={this.ariaLabel || undefined}
           checked={this.checked}
           disabled={this.disabled}
+          id={this.checkBoxId}
           ref={(el) => (this.checkboxInput = el as HTMLInputElement)}
+          onChange={(event: MouseEvent) => {
+            this.handleCheckboxClick(event);
+          }}
           type="checkbox"></input>
         {this.label ? (
-          <label class={` ${this.disabled ? 'disabled' : ''} ${this.size === 'small' ? 'small' : ''}`}>{this.label}</label>
+          <label
+            htmlFor={this.checkBoxId}
+            class={` ${this.disabled ? 'disabled' : ''} ${this.size === 'small' ? 'small' : ''}`}>
+            {this.label}
+          </label>
         ) : null}
       </div>
     );

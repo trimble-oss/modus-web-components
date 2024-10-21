@@ -19,13 +19,15 @@ import { ModusNavbarApp } from './apps-menu/modus-navbar-apps-menu';
 import { IconHelp } from '../../icons/svgs/icon-help';
 import {
   ModusNavbarButton,
+  ModusNavbarDropdownItem,
+  ModusNavbarDropdownOptions,
   ModusNavbarLogoOptions,
   ModusNavbarTooltip,
   ModusProfileMenuOptions,
 } from './modus-navbar.models';
 import { ModusNavbarProductLogo } from './product-logo/modus-navbar-product-logo';
-import { createGuid } from '../../utils/utils';
 import { ModusNavbarButtonList } from './button-list/modus-navbar-button-list';
+import { ModusNavbarDropdown } from './dropdown/modus-navbar-dropdown';
 
 /**
  * @slot main - Renders custom main menu content
@@ -40,6 +42,9 @@ import { ModusNavbarButtonList } from './button-list/modus-navbar-button-list';
 export class ModusNavbar {
   @Element() element: HTMLElement;
 
+  /** (optional) The navbar's aria-label. */
+  @Prop() navAriaLabel?: string;
+
   /** (optional) The apps to render in the apps menu. */
   @Prop() apps: ModusNavbarApp[];
 
@@ -51,6 +56,12 @@ export class ModusNavbar {
 
   /** (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels. */
   @Prop() logoOptions: ModusNavbarLogoOptions;
+
+  /** (optional) Dropdown options. */
+  @Prop() dropdownOptions: ModusNavbarDropdownOptions;
+
+  /** (optional) The selected dropdown item. */
+  @Prop() selectedDropdownItem: ModusNavbarDropdownItem;
 
   /** (required) Profile menu options. */
   @Prop({ mutable: true }) profileMenuOptions: ModusProfileMenuOptions;
@@ -69,6 +80,9 @@ export class ModusNavbar {
 
   /** (optional) Whether to show notifications. */
   @Prop() showNotifications: boolean;
+
+  /** (optional) Whether to show badge on top of notification */
+  @Prop() notificationCount: number;
 
   /** (optional) Whether to show the placeholder for Pendo. */
   @Prop() showPendoPlaceholder: boolean;
@@ -106,6 +120,9 @@ export class ModusNavbar {
   /** An event that fires when the help link opens. */
   @Event() helpOpen: EventEmitter<void>;
 
+  /** An event that fires when a dropdown item is selected **/
+  @Event() dropdownItemSelect: EventEmitter<ModusNavbarDropdownItem>;
+
   /** An event that fires on main menu click. */
   @Event() mainMenuClick: EventEmitter<KeyboardEvent | MouseEvent>;
 
@@ -140,7 +157,6 @@ export class ModusNavbar {
   @State() notificationsMenuVisible: boolean;
   @State() profileMenuVisible: boolean;
   @State() slots: string[] = [];
-  @State() componentId = createGuid();
   @State() searchOverlayVisible: boolean;
   @State() openButtonMenuId: string;
 
@@ -292,6 +308,17 @@ export class ModusNavbar {
 
   helpMenuClickHandler(event: MouseEvent): void {
     event.preventDefault();
+    this.openHelpMenu();
+  }
+
+  helpMenuKeyHandler(event: KeyboardEvent): void {
+    if (event.code !== 'Enter' && event.code !== 'Space') {
+      return;
+    }
+    this.openHelpMenu();
+  }
+
+  openHelpMenu(): void {
     if (this.helpUrl) window.open(this.helpUrl, '_blank');
     this.helpOpen.emit();
   }
@@ -326,8 +353,9 @@ export class ModusNavbar {
 
   showButtonMenuById(id: string): void {
     this.buttonClick.emit(id);
+    const isDynamicButtonSlotOpen = this.openButtonMenuId === id;
     this.hideMenus();
-    if (this.openButtonMenuId !== id) {
+    if (this.openButtonMenuId !== id && !isDynamicButtonSlotOpen) {
       this.openButtonMenuId = id;
     }
   }
@@ -348,6 +376,29 @@ export class ModusNavbar {
     }
   }
 
+  dropdownItemSelectHandler(item: ModusNavbarDropdownItem): void {
+    this.selectedDropdownItem = item;
+    this.dropdownItemSelect.emit(item);
+  }
+
+  getNotificationCount(): string {
+    if (!this.notificationCount) {
+      return;
+    }
+
+    const counter = this.notificationCount;
+
+    if (counter < 1) {
+      return '1';
+    }
+
+    if (counter > 99) {
+      return '99+';
+    }
+
+    return this.notificationCount.toString();
+  }
+
   render(): unknown {
     const direction = this.reverse ? 'reverse' : '';
     const shadow = this.showShadow ? 'shadow' : '';
@@ -360,10 +411,11 @@ export class ModusNavbar {
         onClose={() => this.searchOverlayCloseEventHandler()}
         onSearch={(event) => this.searchChange.emit(event.detail)}></modus-navbar-search-overlay>
     );
+    const counterValue = this.getNotificationCount();
 
     return (
-      <Host id={this.componentId}>
-        <nav class={`${direction} ${shadow} ${variant}`}>
+      <Host>
+        <nav class={`${direction} ${shadow} ${variant}`} aria-label={this.navAriaLabel}>
           {!this.searchOverlayVisible && (
             <Fragment>
               <div class={`left ${direction}`}>
@@ -384,12 +436,25 @@ export class ModusNavbar {
                   </div>
                 )}
                 {this.mainMenuVisible && (
-                  <modus-navbar-main-menu navbarId={this.componentId}>
+                  <modus-navbar-main-menu parentNavbar={this.element}>
                     <slot name={this.SLOT_MAIN}></slot>
                   </modus-navbar-main-menu>
                 )}
                 {this.logoOptions && (
-                  <ModusNavbarProductLogo logos={this.logoOptions} onClick={(event) => this.productLogoClick.emit(event)} />
+                  <div class="navbar-logo">
+                    <ModusNavbarProductLogo
+                      logos={this.logoOptions}
+                      onClick={(event) => this.productLogoClick.emit(event)}
+                    />
+                  </div>
+                )}
+                {this.dropdownOptions && (
+                  <ModusNavbarDropdown
+                    itemSelect={(item) => this.dropdownItemSelectHandler(item)}
+                    options={this.dropdownOptions}
+                    reverse={this.reverse}
+                    selectedItem={this.selectedDropdownItem}
+                  />
                 )}
               </div>
               <div class={`right ${direction}`}>
@@ -397,10 +462,11 @@ export class ModusNavbar {
                   <div class="navbar-button search" data-test-id="search-menu">
                     <modus-tooltip
                       text={this.searchTooltip?.text}
-                      aria-label={this.searchTooltip?.ariaLabel}
+                      aria-label={this.searchTooltip?.ariaLabel || undefined}
                       position="bottom">
                       <span
                         class="navbar-button-icon"
+                        aria-label="Search"
                         role="button"
                         onKeyDown={(event) => this.searchMenuKeydownHandler(event)}
                         tabIndex={0}
@@ -434,6 +500,16 @@ export class ModusNavbar {
                         onClick={(event) => this.notificationsMenuClickHandler(event)}
                         pressed={this.notificationsMenuVisible}
                       />
+                      {counterValue && (
+                        <modus-badge
+                          class="badge"
+                          color="danger"
+                          size="medium"
+                          type="counter"
+                          aria-label="Notification badge">
+                          {counterValue}
+                        </modus-badge>
+                      )}
                     </span>
                     {this.notificationsMenuVisible && (
                       <modus-navbar-notifications-menu reverse={this.reverse}>
@@ -445,9 +521,18 @@ export class ModusNavbar {
                 {this.showPendoPlaceholder && <div class={'pendo-placeholder'} />}
                 {this.showHelp && (
                   <div class="navbar-button" data-test-id="help-menu">
-                    <modus-tooltip text={this.helpTooltip?.text} aria-label={this.helpTooltip?.ariaLabel} position="bottom">
-                      <span class="navbar-button-icon" role="button" tabIndex={0}>
-                        <IconHelp size="24" onClick={(event) => this.helpMenuClickHandler(event)} />
+                    <modus-tooltip
+                      text={this.helpTooltip?.text}
+                      aria-label={this.helpTooltip?.ariaLabel || undefined}
+                      position="bottom">
+                      <span
+                        class="navbar-button-icon"
+                        role="button"
+                        onKeyDown={(event) => this.helpMenuKeyHandler(event)}
+                        aria-label="Help"
+                        onClick={(event) => this.helpMenuClickHandler(event)}
+                        tabIndex={0}>
+                        <IconHelp size="24" />
                       </span>
                     </modus-tooltip>
                   </div>
@@ -479,7 +564,7 @@ export class ModusNavbar {
                   <div class="profile-menu">
                     <modus-tooltip
                       text={this.profileMenuOptions?.tooltip?.text}
-                      aria-label={this.profileMenuOptions?.tooltip?.ariaLabel}
+                      aria-label={this.profileMenuOptions?.tooltip?.ariaLabel || undefined}
                       disabled={this.profileMenuVisible}
                       position="bottom">
                       {this.profileMenuOptions?.avatarUrl ? (

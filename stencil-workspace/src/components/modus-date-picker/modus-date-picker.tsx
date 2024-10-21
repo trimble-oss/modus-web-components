@@ -10,6 +10,7 @@ import { ModusIconMap } from '../../icons/ModusIconMap';
 import ModusDatePickerCalendar from './utils/modus-date-picker.calendar';
 import ModusDatePickerState from './utils/modus-date-picker.state';
 import { ModusDateInputEventDetails } from '../modus-date-input/utils/modus-date-input.models';
+import { createPopper, Instance, Placement } from '@popperjs/core';
 
 @Component({
   tag: 'modus-date-picker',
@@ -22,6 +23,9 @@ export class ModusDatePicker {
   /** (optional) Label for the field. */
   @Prop() label: string;
 
+  /** (optional) The placement of the calendar popup */
+  @Prop() position: Placement = 'bottom-start';
+
   /** Needed for a better control over the state and avoid re-renders */
   @State() _forceUpdate = {};
 
@@ -31,6 +35,7 @@ export class ModusDatePicker {
   private _calendar: ModusDatePickerCalendar;
   private _dateInputs: { [key: string]: ModusDatePickerState } = {};
   private _locale = 'default';
+  private _popperInstance: Instance;
 
   private get _currentInput(): ModusDatePickerState {
     return Object.values(this._dateInputs).find((dt) => dt.isCalendarOpen());
@@ -38,6 +43,56 @@ export class ModusDatePicker {
 
   componentWillLoad() {
     this._calendar = new ModusDatePickerCalendar();
+  }
+
+  componentDidLoad() {
+    this.initializePopper();
+  }
+
+  componentDidUpdate() {
+    if (this._showCalendar) {
+      this.initializePopper();
+    } else {
+      this.destroyPopper();
+    }
+  }
+
+  disconnectedCallback() {
+    this.destroyPopper();
+  }
+
+  initializePopper() {
+    const referenceElement = this.element.shadowRoot.querySelector('.calendar') as HTMLElement;
+    const popperElement = this.element.shadowRoot.querySelector('.calendar-container') as HTMLElement;
+
+    if (referenceElement && popperElement && !this._popperInstance) {
+      this._popperInstance = createPopper(referenceElement, popperElement, {
+        placement: this.position,
+        strategy: this.position === 'auto' ? 'fixed' : 'absolute',
+        modifiers: [
+          {
+            name: 'offset',
+            options: {
+              offset: [0.2, 0.2],
+              mainAxis: false,
+            },
+          },
+          {
+            name: 'preventOverflow',
+            options: {
+              boundary: 'viewport',
+            },
+          },
+        ],
+      });
+    }
+  }
+
+  destroyPopper() {
+    if (this._popperInstance) {
+      this._popperInstance.destroy();
+      this._popperInstance = null;
+    }
   }
 
   /** Handlers */
@@ -56,7 +111,9 @@ export class ModusDatePicker {
 
   @Listen('click', { target: 'document' })
   handleClickOutside(event: MouseEvent): void {
-    if (this.element.contains(event.target as HTMLElement) || event.defaultPrevented) {
+    const path = event.composedPath();
+    const insideComponent = path.includes(this.element);
+    if (insideComponent || event.defaultPrevented) {
       return;
     }
     // Collapse when clicked outside
@@ -214,7 +271,7 @@ export class ModusDatePicker {
     const startDate = this._dateInputs['start']?.getDate();
     const endDate = this._dateInputs['end']?.getDate();
     const singleDate = this._dateInputs['single']?.getDate();
-    //Get day of the week and prepare blank cells to render the calendar dates properly
+    // Get day of the week and prepare blank cells to render the calendar dates properly
     const firstDay = new Date(this._calendar.selectedYear, this._calendar.selectedMonth)?.getDay();
     const blankDatesArr = new Array(firstDay).fill(0);
     return (
@@ -239,6 +296,7 @@ export class ModusDatePicker {
                       'calendar-day grid-item': false,
                       disabled: true,
                     }}
+                    disabled
                     tabIndex={-1}>
                     &nbsp;
                   </button>
@@ -281,6 +339,8 @@ export class ModusDatePicker {
                   }}
                   disabled={isDateDisabled}
                   tabIndex={0}
+                  type="button"
+                  aria-current={isSelected ? 'date' : undefined}
                   onClick={() => this.pickCalendarDate(date)}
                   {...onBlurEvent}>
                   {date.getDate()}
@@ -304,24 +364,27 @@ export class ModusDatePicker {
   private renderCalendarHeader() {
     return (
       <div class="calendar-header">
-        <button aria-label="Previous Month" onClick={() => this.addMonthOffset(-1)}>
+        <button type="button" aria-label="Previous Month" onClick={() => this.addMonthOffset(-1)}>
           <ModusIconMap icon="chevron_left_bold"></ModusIconMap>
         </button>
 
         <div class="title">
-          <span tabIndex={0} class="calendar-title" aria-label="ModusCalendar title" role="title">
-            {`${this._calendar?.month} ${this._calendar?.year}`}
-          </span>
+          <div class="calendar-title" role="heading">{`${this._calendar?.month} ${this._calendar?.year}`}</div>
           <div class="year-icons">
-            <button tabIndex={0} aria-label="Next Year" onClick={() => this.addYearOffset(1)} class="year-up">
+            <button type="button" tabIndex={0} aria-label="Next Year" onClick={() => this.addYearOffset(1)} class="year-up">
               <ModusIconMap icon="caret_up" size="16"></ModusIconMap>
             </button>
-            <button tabIndex={0} aria-label="Previous Year" onClick={() => this.addYearOffset(-1)} class="year-down">
+            <button
+              type="button"
+              tabIndex={0}
+              aria-label="Previous Year"
+              onClick={() => this.addYearOffset(-1)}
+              class="year-down">
               <ModusIconMap size="16" icon="caret_down"></ModusIconMap>
             </button>
           </div>
         </div>
-        <button tabIndex={0} aria-label="Next Month" onClick={() => this.addMonthOffset(1)}>
+        <button type="button" tabIndex={0} aria-label="Next Month" onClick={() => this.addMonthOffset(1)}>
           <ModusIconMap icon="chevron_right_bold"></ModusIconMap>
         </button>
       </div>
@@ -332,10 +395,10 @@ export class ModusDatePicker {
     return (
       <div class="modus-date-picker">
         {this.label ? <div class={'label-container'}>{this.label ? <label>{this.label}</label> : null}</div> : null}
-        <div class="date-inputs">
+        <div class="date-inputs" part="date-inputs">
           <slot onSlotchange={() => this.handleSlotChange()}></slot>
         </div>
-        <div style={{ display: 'inline-flex' }}>
+        <div class="calendar" part="calendar" style={{ display: 'inline-flex' }}>
           {this._showCalendar && (
             <nav class="calendar-container" aria-label="Pick a Date">
               {this.renderCalendarHeader()}

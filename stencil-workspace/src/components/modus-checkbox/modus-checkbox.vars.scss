@@ -2,15 +2,25 @@ $modus-checkbox-bg: var(--modus-checkbox-bg, #fff) !default;
 $modus-checkbox-border-color: var(--modus-checkbox-border-color, #90939f) !default;
 $modus-checkbox-disabled-opacity: var(--modus-checkbox-disabled-opacity, 0.3) !default;
 $modus-checkbox-label-color: var(--modus-checkbox-label-color, #464b52) !default;
+$modus-check-checked-bg-image: var(
+  --modus-check-checked-bg-image,
+  url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 5.8 4.7'%3E%3Cpath fill='%23fff' d='M1.7 4.7.1 3.2C0 3 0 2.7.1 2.5s.5-.2.7 0l.9.9L4.9.2c.2-.2.5-.2.7-.1s.2.5 0 .7L1.7 4.7z'/%3E%3C/svg%3E")
+) !default;
+$modus-check-bg-image-indeterminate: var(
+  --modus-check-bg-image-indeterminate,
+  url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10h8'/%3e%3c/svg%3e")
+) !default;
 
 // Hover state
 $modus-checkbox-hover-border-color: var(--modus-checkbox-hover-border-color, #217cbb) !default;
 
 // Checked state
 $modus-checkbox-selected-border-color: var(--modus-checkbox-selected-border-color, #217cbb) !default;
+$modus-checkbox-selected-bg: var(--modus-check-selected-bg, #217cbb) !default;
 
 // Indeterminate state
-$modus-checkbox-indeterminate-border-color: var(--modus-checkbox-indeterminate-border-color, #217cbb) !default;
+$modus-checkbox-indeterminate-border-color: var(--modus-check-selected-bg, #217cbb) !default;
+$modus-checkbox-indeterminate-bg: var(--modus-check-selected-bg, #217cbb) !default;
 
 // Focus state
 $modus-checkbox-focus-box-shadow-color: var(--modus-checkbox-focus-box-shadow-color, #019aeb) !default;

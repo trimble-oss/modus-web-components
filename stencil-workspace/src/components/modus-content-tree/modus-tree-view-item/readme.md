@@ -14,6 +14,7 @@
 | `draggableItem`       | `draggable-item`  | (optional) Allows the item to be dragged across the tree                                                                             | `boolean`                 | `undefined` |
 | `droppableItem`       | `droppable-item`  | (optional) Allows the item to be a drop zone so other tree items can be dropped above it                                             | `boolean`                 | `undefined` |
 | `editable`            | `editable`        | (optional) Changes the label field into a text box                                                                                   | `boolean`                 | `undefined` |
+| `isLastChild`         | `is-last-child`   | To be set true when the tree item is an expandable last child                                                                        | `boolean`                 | `undefined` |
 | `label` _(required)_  | `label`           | (required) Label for the tree item                                                                                                   | `string`                  | `undefined` |
 | `nodeId` _(required)_ | `node-id`         | (required) Unique tree item identifier                                                                                               | `string`                  | `undefined` |
 | `tabIndexValue`       | `tab-index-value` | (optional) Tab Index for the tree item                                                                                               | `number \| string`        | `0`         |
@@ -21,12 +22,14 @@
 
 ## Events
 
-| Event              | Description                                                                           | Type                   |
-| ------------------ | ------------------------------------------------------------------------------------- | ---------------------- |
-| `actionClick`      | Fired when an action button within the tree item is clicked. Includes the `actionId`. | `CustomEvent<any>`     |
-| `checkboxClick`    | An event that fires on tree item checkbox click                                       | `CustomEvent<boolean>` |
-| `itemClick`        | An event that fires on tree item click                                                | `CustomEvent<boolean>` |
-| `itemExpandToggle` | An event that fires on tree item expand/collapse                                      | `CustomEvent<boolean>` |
+| Event                 | Description                                                                           | Type                                                    |
+| --------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| `actionClick`         | Fired when an action button within the tree item is clicked. Includes the `actionId`. | `CustomEvent<any>`                                      |
+| `checkboxClick`       | An event that fires on tree item checkbox click                                       | `CustomEvent<boolean>`                                  |
+| `itemClick`           | An event that fires on tree item click                                                | `CustomEvent<boolean>`                                  |
+| `itemExpandToggle`    | An event that fires on tree item expand/collapse                                      | `CustomEvent<boolean>`                                  |
+| `itemLabelChange`     | An event that fires on tree item label changes                                        | `CustomEvent<string>`                                   |
+| `itemSelectionChange` |                                                                                       | `CustomEvent<{ nodeId: string; isSelected: boolean; }>` |
 
 
 ## Methods
@@ -44,6 +47,16 @@ Type: `Promise<void>`
 ### `focusItem() => Promise<void>`
 
 Focus the tree item
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+### `setChildren() => Promise<void>`
+
+
 
 #### Returns
 

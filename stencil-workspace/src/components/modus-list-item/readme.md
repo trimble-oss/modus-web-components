@@ -44,6 +44,7 @@ Type: `Promise<void>`
 ### Used by
 
  - [modus-action-bar](../modus-action-bar)
+ - [modus-navbar](../modus-navbar)
  - [modus-navbar-profile-menu](../modus-navbar/profile-menu)
  - [modus-table-row-actions-menu](../modus-table/parts/row/actions/modus-table-row-actions-menu)
 
@@ -51,6 +52,7 @@ Type: `Promise<void>`
 ```mermaid
 graph TD;
   modus-action-bar --> modus-list-item
+  modus-navbar --> modus-list-item
   modus-navbar-profile-menu --> modus-list-item
   modus-table-row-actions-menu --> modus-list-item
   style modus-list-item fill:#f9f,stroke:#333,stroke-width:4px

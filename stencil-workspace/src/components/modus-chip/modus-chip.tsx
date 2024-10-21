@@ -1,4 +1,4 @@
-// eslint-disable-next-line
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Component, Prop, h, EventEmitter, Event, Listen } from '@stencil/core';
 import { IconRemove } from '../../icons/svgs/icon-remove';
 import { IconCheck } from '../../icons/svgs/icon-check';
@@ -36,8 +36,14 @@ export class ModusChip {
   /** (optional) The chip's value. */
   @Prop() value: string;
 
+  /** (optional) the chip's id */
+  @Prop() chipId: string;
+
   /** (optional) Maximum width for the Chip's text and shows ellipsis when truncated */
   @Prop() maxWidth: string;
+
+  /** (optional) Whether the chip is active. */
+  @Prop() active = false;
 
   /** An event that fires on chip click. */
   @Event() chipClick: EventEmitter;
@@ -97,6 +103,7 @@ export class ModusChip {
       ${this.classBySize.get(this.size)}
       ${!this.showCheckmark && !this.imageUrl ? 'no-left-icon' : null}
       ${!this.showClose ? 'no-right-icon' : null}
+      ${this.active ? 'active' : ''}
     `;
     const style = {
       style: {
@@ -106,7 +113,8 @@ export class ModusChip {
     return (
       <button
         aria-disabled={this.disabled ? 'true' : undefined}
-        aria-label={this.ariaLabel}
+        aria-label={this.ariaLabel || undefined}
+        id={this.chipId || undefined}
         class={chipClass}
         onClick={this.disabled ? null : (event) => this.onChipClick(event)}
         tabIndex={0}

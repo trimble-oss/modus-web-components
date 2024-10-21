@@ -12,6 +12,7 @@
   font-family: $primary-font;
   height: $rem-30px;
   justify-content: center;
+  margin: $rem-2px 0;
   padding: $rem-2px $rem-4px;
   vertical-align: middle;
 
@@ -111,6 +112,36 @@
     }
   }
 
+  &.active {
+    background-color: $modus-chip-active-bg;
+    border: $rem-1px solid $modus-chip-active-bg;
+    color: $modus-chip-active-color;
+
+    svg:not(.icon-remove) path {
+      fill: $modus-chip-active-color !important;
+    }
+
+    .icon-remove,
+    .icon-remove path {
+      fill: $modus-chip-active-color !important;
+    }
+
+    &.style-outline {
+      background-color: $modus-chip-outline-active-bg;
+      border: $rem-1px solid $modus-chip-outline-active-border-color;
+      color: $modus-chip-outline-active-color;
+
+      svg:not(.icon-remove) path {
+        fill: $modus-chip-outline-active-color !important;
+      }
+
+      .icon-remove,
+      .icon-remove path {
+        fill: $modus-chip-outline-active-border-color !important;
+      }
+    }
+  }
+
   &:active {
     background-color: $modus-chip-active-bg;
     border: $rem-1px solid $modus-chip-active-bg;
@@ -153,6 +184,21 @@
     .icon-remove,
     .icon-remove path {
       fill: $modus-chip-error-color !important;
+    }
+
+    &.active {
+      background-color: $modus-chip-error-active-bg;
+      border: $rem-1px solid $modus-chip-error-active-border-color;
+      color: $modus-chip-error-active-color;
+
+      svg:not(.icon-remove) path {
+        fill: $modus-chip-error-active-color !important;
+      }
+
+      .icon-remove,
+      .icon-remove path {
+        fill: $modus-chip-error-active-color !important;
+      }
     }
 
     &:active {

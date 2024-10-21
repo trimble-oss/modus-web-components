@@ -13,23 +13,9 @@ export const ModusTablePagination: FunctionalComponent<ModusTablePaginationProps
   context: { tableInstance: table, pageSizeList, data, manualPaginationOptions },
 }) => {
   const { options, getState, getPageCount, getExpandedRowModel, setPageIndex, setPageSize } = table;
-  const { pageIndex: pageIndexState, pageSize: pageSizeState } = getState().pagination;
+  const { pageIndex, pageSize } = getState().pagination;
   const optionsList = pageSizeList.map((option) => ({ display: option }));
-
-  let pageSize = pageSizeState;
-  let pageIndex = pageIndexState;
-  let totalCount = data.length ?? 0;
-  let activePage = 1;
-
-  if (options.manualPagination) {
-    const { totalRecords, currentPageIndex, currentPageSize } = manualPaginationOptions;
-    const manualPageIndex = currentPageIndex ?? activePage;
-    activePage = manualPageIndex <= getPageCount() ? manualPageIndex : activePage;
-    pageIndex = activePage - 1;
-    pageSize = currentPageSize ?? 0;
-    totalCount = totalRecords ?? getExpandedRowModel().rows.length;
-  }
-
+  const totalCount = manualPaginationOptions?.totalRecords ?? data?.length;
   const selectedPageSize = optionsList.find((l) => l.display === pageSize);
 
   const handleChange = (event) => {
@@ -66,7 +52,7 @@ export const ModusTablePagination: FunctionalComponent<ModusTablePaginationProps
           </span>{' '}
         </div>
         <modus-pagination
-          active-page={activePage}
+          active-page={pageIndex + 1}
           max-page={getPageCount()}
           min-page={1}
           onPageChange={(event) => setPageIndex(event.detail - 1)}></modus-pagination>

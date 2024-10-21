@@ -1,4 +1,4 @@
-// eslint-disable-next-line
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Component, Prop, h, Event, EventEmitter, Listen } from '@stencil/core';
 import { IconCheckCircle } from '../../icons/svgs/icon-check-circle';
 import { IconError } from '../../icons/svgs/icon-error';
@@ -39,13 +39,11 @@ export class ModusAlert {
   classByType: Map<string, string> = new Map([
     ['error', 'type-error'],
     ['info', 'type-info'],
-    ['info-gray', 'type-info-gray'],
-    ['info-gray-dark', 'type-info-gray-dark'],
     ['success', 'type-success'],
     ['warning', 'type-warning'],
   ]);
 
-  infoTypes = ['info', 'info-gray', 'info-gray-dark'];
+  infoTypes = ['info'];
 
   @Listen('keyup')
   elementKeyupHandler(event: KeyboardEvent): void {
@@ -61,11 +59,20 @@ export class ModusAlert {
   }
 
   render(): unknown {
-    const className = `alert ${this.classByType.get(this.type)} ${(this.dismissible && this.buttonText?.length > 0) || this.buttonText?.length > 0 ? 'with-action-button' : ''}`;
     const iconSize = '24';
+    const MAX_LENGTH = 300;
+
+    const className = {
+      alert: true,
+      'with-action-button': (this.dismissible && this.buttonText?.length > 0) || this.buttonText?.length > 0,
+    };
+    const typeClass = this.classByType.get(this.type);
+    if (typeClass != undefined) {
+      className[typeClass] = true;
+    }
 
     return (
-      <div aria-label={this.ariaLabel} class={className} role="alert">
+      <div aria-label={this.ariaLabel || undefined} class={className} role="alert">
         <div class="icon">
           {this.type === 'error' ? <IconError size={iconSize} /> : null}
           {this.infoTypes.includes(this.type) ? <IconInfo size={iconSize} /> : null}
@@ -73,11 +80,11 @@ export class ModusAlert {
           {this.type === 'warning' ? <IconWarning size={iconSize} /> : null}
         </div>
         <div class="message">
-          {this.message}
+          {this.message && this.message.length > MAX_LENGTH ? `${this.message.substring(0, MAX_LENGTH)}...` : this.message}
           <slot></slot>
         </div>
         <div class="alert-buttons-container">
-          {this.buttonText?.length > 0 ? (
+          {this.buttonText?.length > 0 && (
             <modus-button
               class="action-button"
               buttonStyle="outline"
@@ -88,8 +95,8 @@ export class ModusAlert {
               onKeyDown={(e) => this.handleKeyDown(e, 'action')}>
               {this.buttonText}
             </modus-button>
-          ) : null}
-          {this.dismissible ? (
+          )}
+          {this.dismissible && (
             <div
               class="icon-close-container"
               aria-label="Dismiss alert"
@@ -99,7 +106,7 @@ export class ModusAlert {
               onKeyDown={(e) => this.handleKeyDown(e, 'dismiss')}>
               <IconClose size="18" />
             </div>
-          ) : null}
+          )}
         </div>
       </div>
     );

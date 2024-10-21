@@ -11,12 +11,14 @@ describe('modus-time-picker', () => {
     <modus-time-picker>
       <mock:shadow-root>
         <div class="modus-time-picker">
-            <div class="time-input-wrapper">
-              <div class="input-container medium"><input id="time-input" inputmode="text" tabindex="0"  maxlength="5" type="text"></div>
+          <div class="time-input-wrapper">
+            <div class="input-container medium">
+              <input id="time-input" tabindex="0" maxlength="5" type="text">
             </div>
-            <div class="time-zone-wrapper">
-              <slot name="timeZone"></slot>
-            </div>
+          </div>
+          <div class="time-zone-wrapper">
+            <slot name="timeZone"></slot>
+          </div>
         </div>
       </mock:shadow-root>
   </modus-time-picker>

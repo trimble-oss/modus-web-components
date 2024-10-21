@@ -171,7 +171,7 @@ export class ModusTimePicker {
   getAriaControls(): { [key: string]: boolean | string } {
     return {
       'aria-invalid': !!this.errorText,
-      'aria-label': this.ariaLabel,
+      'aria-label': this.ariaLabel || undefined,
       'aria-required': this.required,
     };
   }
@@ -209,10 +209,9 @@ export class ModusTimePicker {
       <input
         {...ariaControls}
         id="time-input"
-        aria-label={this.label ? null : this.ariaLabel}
+        aria-label={(this.label ? null : this.ariaLabel) || undefined}
         aria-placeholder={this.placeholder}
         disabled={this.disabled}
-        inputmode="text"
         onInput={(event) => this.handleInputChange(event)}
         placeholder={this.placeholder}
         readonly={this.readOnly}
@@ -233,8 +232,6 @@ export class ModusTimePicker {
       <label class="sub-text error">{this.errorText}</label>
     ) : this.validText ? (
       <label class="sub-text valid">{this.validText}</label>
-    ) : this.helperText ? (
-      <label class="sub-text helper">{this.helperText}</label>
     ) : null;
   }
 
@@ -246,6 +243,7 @@ export class ModusTimePicker {
             <div class={'label-container'}>
               {this.label ? <label htmlFor="time-input">{this.label}</label> : null}
               {this.required ? <span class="required">*</span> : null}
+              {this.helperText ? <label class="sub-text helper">{this.helperText}</label> : null}
             </div>
           ) : null}
           <div

@@ -1283,14 +1283,14 @@ export declare interface ModusTableCellMain extends Components.ModusTableCellMai
 
 
 @ProxyCmp({
-  inputs: ['columnsVisibility', 'getAllLeafColumns', 'menuIconContainerRef', 'showDropdown', 'toggleDropdown']
+  inputs: ['columnsVisibility', 'getAllLeafColumns', 'maxHeight', 'menuIconContainerRef', 'showDropdown', 'toggleDropdown']
 })
 @Component({
   selector: 'modus-table-columns-visibility',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['columnsVisibility', 'getAllLeafColumns', 'menuIconContainerRef', 'showDropdown', 'toggleDropdown'],
+  inputs: ['columnsVisibility', 'getAllLeafColumns', 'maxHeight', 'menuIconContainerRef', 'showDropdown', 'toggleDropdown'],
 })
 export class ModusTableColumnsVisibility {
   protected el: HTMLElement;
@@ -1585,14 +1585,14 @@ export declare interface ModusTooltip extends Components.ModusTooltip {}
 
 
 @ProxyCmp({
-  inputs: ['checkboxSelection', 'checkedItems', 'disableTabbing', 'expandedItems', 'multiCheckboxSelection', 'multiSelection', 'selectedItems', 'size']
+  inputs: ['borderless', 'checkboxSelection', 'checkedItems', 'disableTabbing', 'expandedItems', 'multiCheckboxSelection', 'multiSelection', 'selectedItems', 'size']
 })
 @Component({
   selector: 'modus-tree-view',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['checkboxSelection', 'checkedItems', 'disableTabbing', 'expandedItems', 'multiCheckboxSelection', 'multiSelection', 'selectedItems', 'size'],
+  inputs: ['borderless', 'checkboxSelection', 'checkedItems', 'disableTabbing', 'expandedItems', 'multiCheckboxSelection', 'multiSelection', 'selectedItems', 'size'],
 })
 export class ModusTreeView {
   protected el: HTMLElement;

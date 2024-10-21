@@ -36,6 +36,12 @@
     }
   }
 
+  .input-container {
+    input {
+      font-family: $primary-font;
+    }
+  }
+
   .calendar-container {
     background-color: $modus-date-picker-calendar-body-bg;
     border-radius: 4px;
@@ -46,6 +52,11 @@
     margin-top: 0.15rem;
     position: absolute;
     z-index: 1;
+
+    &[data-popper-reference-hidden] {
+      pointer-events: none;
+      visibility: hidden;
+    }
 
     .calendar-header {
       align-items: center;
@@ -177,6 +188,7 @@
 
         &.disabled {
           opacity: $modus-date-picker-calendar-day-disabled-opacity;
+          pointer-events: none;
         }
 
         &.range-selected {
