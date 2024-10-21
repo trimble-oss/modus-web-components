@@ -1718,6 +1718,10 @@ export namespace Components {
          */
         "dismissible": boolean;
         /**
+          * (optional) Whether to retain the element in the DOM after it has been dismissed.
+         */
+        "retainElement": boolean;
+        /**
           * (optional) Role taken by the toast.  Defaults to 'status'.
          */
         "role": string | null;
@@ -4827,6 +4831,10 @@ declare namespace LocalJSX {
           * An event that fires when the toast is dismissed
          */
         "onDismissClick"?: (event: ModusToastCustomEvent<any>) => void;
+        /**
+          * (optional) Whether to retain the element in the DOM after it has been dismissed.
+         */
+        "retainElement"?: boolean;
         /**
           * (optional) Role taken by the toast.  Defaults to 'status'.
          */
