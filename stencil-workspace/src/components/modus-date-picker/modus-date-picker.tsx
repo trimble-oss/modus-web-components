@@ -24,7 +24,7 @@ export class ModusDatePicker {
   @Prop() label: string;
 
   /** (optional) The placement of the calendar popup */
-  @Prop() position: Placement | 'auto' = 'bottom-start';
+  @Prop() position: Placement | 'auto' | 'auto-start' | 'auto-end' = 'bottom-start';
 
   /** Needed for a better control over the state and avoid re-renders */
   @State() _forceUpdate = {};
