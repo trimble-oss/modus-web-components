@@ -463,6 +463,7 @@ export class ModusAutocomplete {
       onBlur={this.handleInputBlur}
       onKeyDown={(e) => this.handleInputKeyDown(e)}
       role="combobox"
+      disabled={this.disabled}
       aria-autocomplete="list"
       aria-controls={this.listId}
       aria-expanded={this.displayOptions()}
@@ -523,6 +524,7 @@ export class ModusAutocomplete {
           {this.includeSearchIcon ? <IconSearch size="16" /> : null}
           {this.selectedChips.map((chip) => (
             <modus-chip
+              tabIndex={this.disabled ? -1 : 0}
               value={chip.value}
               chipId={chip.id}
               size={this.size === 'large' ? 'medium' : 'small'}
