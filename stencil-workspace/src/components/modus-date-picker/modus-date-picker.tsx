@@ -11,7 +11,6 @@ import ModusDatePickerCalendar from './utils/modus-date-picker.calendar';
 import ModusDatePickerState from './utils/modus-date-picker.state';
 import { ModusDateInputEventDetails } from '../modus-date-input/utils/modus-date-input.models';
 import {Alignment, autoPlacement, flip, AutoPlacementOptions, autoUpdate, computePosition, ComputePositionConfig, Placement, shift, limitShift} from '@floating-ui/dom';
-import { createPopper, Instance } from '@popperjs/core';
 
 @Component({
   tag: 'modus-date-picker',
@@ -36,7 +35,6 @@ export class ModusDatePicker {
   private _calendar: ModusDatePickerCalendar;
   private _dateInputs: { [key: string]: ModusDatePickerState } = {};
   private _locale = 'default';
-  private _popperInstance: Instance;
 
   private get _currentInput(): ModusDatePickerState {
     return Object.values(this._dateInputs).find((dt) => dt.isCalendarOpen());
@@ -56,33 +54,6 @@ export class ModusDatePicker {
 
   disconnectedCallback() {
     this.cleanupPopover?.();
-  }
-
-  initializePopper() {
-    const referenceElement = this.element.shadowRoot.querySelector('.calendar') as HTMLElement;
-    const popperElement = this.element.shadowRoot.querySelector('.calendar-container') as HTMLElement;
-
-    if (referenceElement && popperElement && !this._popperInstance) {
-      this._popperInstance = createPopper(referenceElement, popperElement, {
-        placement: this.position,
-        strategy: 'absolute',
-        modifiers: [
-          {
-            name: 'offset',
-            options: {
-              offset: [-0.2, -0.2],
-              mainAxis: false,
-            },
-          },
-          {
-            name: 'preventOverflow',
-            options: {
-              boundary: 'viewport',
-            },
-          },
-        ],
-      });
-    }
   }
 
   cleanupPopover: () => void | undefined = undefined;
