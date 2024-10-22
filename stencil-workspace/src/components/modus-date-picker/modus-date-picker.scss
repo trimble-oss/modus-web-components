@@ -43,16 +43,16 @@
   }
 
   .calendar-container {
-    width: max-content;
-    position: absolute;
-    top: 0;
-    left: 0;
     background-color: $modus-date-picker-calendar-body-bg;
     border-radius: 4px;
     box-shadow: 0 0 4px #00000029;
     display: flex;
     flex-direction: column;
     font-family: $primary-font;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: max-content;
     z-index: 1;
 
     &[data-popper-reference-hidden] {
@@ -85,9 +85,9 @@
         justify-content: center;
       }
 
-      .calendar-title:focus+.year-icons,
-      .calendar-title:hover+.year-icons,
-      .calendar-title:active+.year-icons,
+      .calendar-title:focus + .year-icons,
+      .calendar-title:hover + .year-icons,
+      .calendar-title:active + .year-icons,
       .year-icons:hover,
       .year-icons:focus,
       .year-icons:focus-within {
@@ -212,7 +212,6 @@
         position: absolute;
 
         &.invalid-date-range {
-
           .start::after,
           .end::after {
             opacity: 0;
