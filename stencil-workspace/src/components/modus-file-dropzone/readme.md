@@ -87,6 +87,19 @@ Type: `Promise<void>`
 
 
 
+## Dependencies
+
+### Depends on
+
+- [modus-button](../modus-button)
+
+### Graph
+```mermaid
+graph TD;
+  modus-file-dropzone --> modus-button
+  style modus-file-dropzone fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 
