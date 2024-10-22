@@ -10,7 +10,18 @@ import { ModusIconMap } from '../../icons/ModusIconMap';
 import ModusDatePickerCalendar from './utils/modus-date-picker.calendar';
 import ModusDatePickerState from './utils/modus-date-picker.state';
 import { ModusDateInputEventDetails } from '../modus-date-input/utils/modus-date-input.models';
-import {Alignment, autoPlacement, flip, AutoPlacementOptions, autoUpdate, computePosition, ComputePositionConfig, Placement, shift, limitShift} from '@floating-ui/dom';
+import {
+  Alignment,
+  autoPlacement,
+  flip,
+  AutoPlacementOptions,
+  autoUpdate,
+  computePosition,
+  ComputePositionConfig,
+  Placement,
+  shift,
+  limitShift,
+} from '@floating-ui/dom';
 
 @Component({
   tag: 'modus-date-picker',
@@ -63,28 +74,28 @@ export class ModusDatePicker {
     const floatingElement = this.element.shadowRoot.querySelector('.calendar-container') as HTMLElement;
 
     this.cleanupPopover = autoUpdate(referenceElement, floatingElement, () => {
-      let options: Partial<ComputePositionConfig> = {};
-      let middleware = [];
+      const options: Partial<ComputePositionConfig> = {};
+      const middleware = [];
 
       // The preventOverflow modifier from Popper is now called shift.
       // This is because technically many modifiers in Popper 2 “prevented overflow”,
       // which does not describe what it is actually doing unlike shift. (https://floating-ui.com/docs/migration#configure-middleware)
-      middleware.push(shift({limiter: limitShift()}))
+      middleware.push(shift({ limiter: limitShift() }));
 
-      if(this.position.includes('auto')) {
+      if (this.position.includes('auto')) {
         const autoPlacementOptions: AutoPlacementOptions = {};
-        if(this.position.includes('-')) {
-          const [_placement, alignment] = this.position.split('-');
-            autoPlacementOptions.alignment = alignment as Alignment;
+        if (this.position.includes('-')) {
+          const [, alignment] = this.position.split('-');
+          autoPlacementOptions.alignment = alignment as Alignment;
         }
-        middleware.push(autoPlacement(autoPlacementOptions))
+        middleware.push(autoPlacement(autoPlacementOptions));
       } else {
         options.placement = this.position as Placement;
-        middleware.push(flip())
+        middleware.push(flip());
       }
 
       options.middleware = middleware;
-      computePosition(referenceElement, floatingElement, options).then(({x, y}) => {
+      computePosition(referenceElement, floatingElement, options).then(({ x, y }) => {
         Object.assign(floatingElement.style, {
           left: `${x}px`,
           top: `${y}px`,
