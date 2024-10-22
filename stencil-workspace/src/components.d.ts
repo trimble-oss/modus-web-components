@@ -564,7 +564,7 @@ export namespace Components {
         /**
           * (optional) The placement of the calendar popup
          */
-        "position": Placement | 'auto';
+        "position": Placement | 'auto' | 'auto-start' | 'auto-end';
     }
     interface ModusDivider {
     }
@@ -3540,7 +3540,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The placement of the calendar popup
          */
-        "position"?: Placement | 'auto';
+        "position"?: Placement | 'auto' | 'auto-start' | 'auto-end';
     }
     interface ModusDivider {
     }

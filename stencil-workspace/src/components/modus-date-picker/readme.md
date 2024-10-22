@@ -7,10 +7,10 @@
 
 ## Properties
 
-| Property   | Attribute  | Description                                    | Type                                                                                                                                                                           | Default          |
-| ---------- | ---------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------- |
-| `label`    | `label`    | (optional) Label for the field.                | `string`                                                                                                                                                                       | `undefined`      |
-| `position` | `position` | (optional) The placement of the calendar popup | `"auto" \| "bottom" \| "bottom-end" \| "bottom-start" \| "left" \| "left-end" \| "left-start" \| "right" \| "right-end" \| "right-start" \| "top" \| "top-end" \| "top-start"` | `'bottom-start'` |
+| Property   | Attribute  | Description                                    | Type                                                                                                                                                                                                         | Default          |
+| ---------- | ---------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------- |
+| `label`    | `label`    | (optional) Label for the field.                | `string`                                                                                                                                                                                                     | `undefined`      |
+| `position` | `position` | (optional) The placement of the calendar popup | `"auto" \| "auto-end" \| "auto-start" \| "bottom" \| "bottom-end" \| "bottom-start" \| "left" \| "left-end" \| "left-start" \| "right" \| "right-end" \| "right-start" \| "top" \| "top-end" \| "top-start"` | `'bottom-start'` |
 
 
 ## Shadow Parts
