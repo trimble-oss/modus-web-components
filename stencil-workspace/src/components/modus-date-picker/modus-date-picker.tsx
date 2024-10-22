@@ -94,6 +94,10 @@ export class ModusDatePicker {
         middleware.push(flip());
       }
 
+      if(this.position === 'auto') {
+        options.strategy = 'fixed';
+      }
+
       options.middleware = middleware;
       computePosition(referenceElement, floatingElement, options).then(({ x, y }) => {
         Object.assign(floatingElement.style, {
