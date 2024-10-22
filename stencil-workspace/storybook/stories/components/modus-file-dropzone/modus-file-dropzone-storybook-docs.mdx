@@ -13,6 +13,8 @@ They are referenced using the `<modus-file-dropzone>` tag.
 - There are multiple component methods available: `addFile`, `getError`, `getFiles`, and `removeFile`. Since the component does not provide interaction outside of file selecting, the consumer can use these to control the dropzone in code.
 - The `files` event fires when a file has been added or removed. It contains the file(s) along with the current error value. These values can be accessed by array deconstruction respectively on the `event.detail`.
   - If the error value returned is `null`, there is not an error. The possible error values are: `'maxFileCount'`, `'maxFileNameLength'`, and `'maxTotalFileSize'`.
+- When error state is triggered reset button will be displayed to clear the error state.
+  - The reset button will clear the error state and remove all files from the dropzone.
 
 <Anchor storyId="components-file-dropzone--default" />
 
@@ -41,10 +43,10 @@ They are referenced using the `<modus-file-dropzone>` tag.
   document
     .querySelector('modus-file-dropzone')
     .addEventListener('files', (event) => {
-      const [files, error] = event.detail;
-      console.log(files);
-      console.log(error);
-    });
+    const [files, error] = event.detail;
+    console.log(files);
+    console.log(error);
+  });
 </script>
 ```
 
@@ -54,6 +56,7 @@ They are referenced using the `<modus-file-dropzone>` tag.
 | ----------------------------- | -------------------------------- | ----------------------------------------------------------------------------- | --------- | ---------------------------------------- |
 | `acceptfiletypes`             | `accept-file-types`              | (optional) The dropzone's accepted file types.                                | `string`  | `undefined`                              |
 | `ariaLabel`                   | `aria-label`                     | (optional) The dropzone's aria-label.                                         | `string`  | `undefined`                              |
+| `disabled`                    | `disabled`                       | (optional) Disables the dropzone.                                             | `boolean` | `undefined`                              |
 | `description`                 | `description`                    | (optional) The dropzone's description text.                                   | `string`  | `undefined`                              |
 | `dropzoneHeight`              | `dropzone-height`                | (optional) The dropzone's height.                                             | `string`  | `undefined`                              |
 | `dropzoneWidth`               | `dropzone-width`                 | (optional) The dropzone's width.                                              | `string`  | `undefined`                              |
