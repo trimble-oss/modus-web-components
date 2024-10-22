@@ -206,7 +206,7 @@ export class ModusAutocomplete {
   };
 
   addChipValue(value: ModusAutocompleteOption) {
-    if (this.selectedChips.includes(value)) {
+    if (this.selectedChips.some((chip) => chip.id === value.id)) {
       return;
     }
     this.selectedChips = [...this.selectedChips, value];
@@ -564,9 +564,10 @@ export class ModusAutocomplete {
             {this.displayOptions() &&
               this.visibleCustomOptions?.map((option) => {
                 const optionValue = option.getAttribute(DATA_SEARCH_VALUE);
+                const isSelected = this.selectedChips.some((chip) => chip.value === optionValue);
                 let className;
                 if (this.multiple) {
-                  className = 'custom-option' + (this.selectedChips.includes(optionValue) ? ' selected' : '');
+                  className = 'custom-option' + (isSelected ? ' selected' : '');
                 } else {
                   className = 'custom-option' + (this.selectedOption === optionValue ? ' selected' : '');
                 }
