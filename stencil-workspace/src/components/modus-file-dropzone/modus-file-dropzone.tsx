@@ -221,7 +221,7 @@ export class ModusFileDropzone {
                 </div>
               ))}
             {this.error && (
-              <div class="error-messages" role="alert">
+              <div class={`error-messages ${this.error ? '' : 'hidden'}`} role="alert">
                 {this.errorMessageTop && <span>{this.errorMessageTop}</span>}
                 {this.errorMessageBottom && <span>{this.errorMessageBottom}</span>}
                 <modus-button button-style="outline" color="secondary" onClick={this.reset}>

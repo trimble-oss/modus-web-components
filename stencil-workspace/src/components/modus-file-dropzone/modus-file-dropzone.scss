@@ -72,6 +72,9 @@
       display: flex;
       flex-direction: column;
       gap: $rem-8px;
+      .hidden {
+        display: none;
+      }
     }
 
     svg {
