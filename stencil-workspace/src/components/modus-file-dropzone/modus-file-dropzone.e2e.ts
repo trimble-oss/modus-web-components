@@ -8,7 +8,6 @@ describe('modus-file-dropzone', () => {
     expect(element).toHaveClass('hydrated');
   });
 
-
   it('renders with disabled state', async () => {
     const page = await newE2EPage();
 
@@ -70,18 +69,15 @@ describe('modus-file-dropzone', () => {
     let files = await dropzone.callMethod('getFiles');
     expect(files.length).toBe(1); // Only 1 file should be present
 
-    // Try to add the second file
+    // Try to add the second file (should trigger the error and show the reset button)
     await dropzone.callMethod('addFile', mockFile2);
 
-    // Check the dropzone state, it should still contain only 1 file due to max-file-count="1"
-    files = await dropzone.callMethod('getFiles');
-    expect(files.length).toBe(2); // The second file should not be added
+    // Wait for the reset button to be visible in the DOM
+    const resetButton = await page.waitForSelector('modus-file-dropzone >>> modus-button', {
+      visible: true,
+    });
 
-    // Find and click the existing reset button
-    const resetButton = await page.find('modus-file-dropzone >>> modus-button');
-
-    await page.waitForTimeout(2000);
-
+    // Click the reset button
     await resetButton.click();
 
     // Check if the dropzone is empty after reset

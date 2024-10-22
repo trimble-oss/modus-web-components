@@ -14,10 +14,7 @@ This component is compatible with Angular reactive forms. This can be achieved t
 
 ```html
 <!-- Without preset value -->
-<modus-select
-  id="select-demo-1"
-  label="Select Demo 1"
-  options-display-prop="display"></modus-select><br/>
+<modus-select id="select-demo-1" label="Select Demo 1" options-display-prop="display"></modus-select><br />
 
 <!-- Disabled with helper text and preset value -->
 <modus-select
@@ -25,81 +22,78 @@ This component is compatible with Angular reactive forms. This can be achieved t
   disabled
   helper-text="Helper demo"
   label="Select Demo 2"
-  options-display-prop="display"></modus-select><br/>
+  options-display-prop="display"></modus-select
+><br />
 
 <!-- Error -->
-<modus-select error-text="Error demo" label="Select Demo 3"></modus-select><br/>
+<modus-select error-text="Error demo" label="Select Demo 3"></modus-select><br />
 
 <!-- Valid -->
-<modus-select label="Select Demo 4" valid-text="Valid demo"></modus-select><br/>
+<modus-select label="Select Demo 4" valid-text="Valid demo"></modus-select><br />
 
 <!-- Large select -->
-<modus-select
-  id="select-demo-5"
-  label="Select Demo 5"
-  size="large"
-  options-display-prop="display"></modus-select><br/>
+<modus-select id="select-demo-5" label="Select Demo 5" size="large" options-display-prop="display"></modus-select><br />
 
 <!-- Custom Placeholder -->
-<modus-select id="select-demo-6" label="Custom Placeholder" placeholder="Custom Placeholder" options-display-prop="display"></modus-select><br/>
-
+<modus-select
+  id="select-demo-6"
+  label="Custom Placeholder"
+  placeholder="Custom Placeholder"
+  options-display-prop="display"></modus-select
+><br />
 
 <script>
-  const options = [
-    { display: 'Option 1' },
-    { display: 'Option 2' },
-    { display: 'Option 3' },
-  ];
+  const options = [{ display: 'Option 1' }, { display: 'Option 2' }, { display: 'Option 3' }];
 
   const select1 = document.querySelector('#select-demo-1');
   select1.options = options;
   select1.value = options[0];
   select1.addEventListener('valueChange', function handleValueChange(e) {
-     const selectedOption = e.detail;
-     select1.value = selectedOption;
+    const selectedOption = e.detail;
+    select1.value = selectedOption;
   });
 
   const select2 = document.querySelector('#select-demo-2');
   select2.options = options;
   select2.value = options[1];
   select2.addEventListener('valueChange', function handleValueChange(e) {
-     const selectedOption = e.detail;
-     select2.value = selectedOption;
+    const selectedOption = e.detail;
+    select2.value = selectedOption;
   });
 
   const select5 = document.querySelector('#select-demo-5');
   select5.options = options;
   select5.value = options[2];
   select5.addEventListener('valueChange', function handleValueChange(e) {
-     const selectedOption = e.detail;
-     select5.value = selectedOption;
+    const selectedOption = e.detail;
+    select5.value = selectedOption;
   });
 
   const select6 = document.querySelector('#select-demo-6');
   select6.options = options;
   select6.addEventListener('valueChange', function handleValueChange(e) {
-     const selectedOption = e.detail;
-     select6.value = selectedOption;
+    const selectedOption = e.detail;
+    select6.value = selectedOption;
   });
 </script>
 ```
 
 ## Properties
 
-| Property             | Attribute              | Description                                          | Type                  | Default         |
-| -------------------- | ---------------------- | ---------------------------------------------------- | --------------------- | --------------- |
-| `ariaLabel`          | `aria-label`           | (optional) The select's aria-label.                  | `string`              | `undefined`     |
-| `disabled`           | `disabled`             | (optional) Whether the input is disabled.            | `boolean`             | `undefined`     |
-| `errorText`          | `error-text`           | (optional) The input's error text.                   | `string`              | `undefined`     |
-| `helperText`         | `helper-text`          | (optional) The input's helper text.                  | `string`              | `undefined`     |
-| `label`              | `label`                | (optional) The input label.                          | `string`              | `undefined`     |
-| `options`            | --                     | The options for the dropdown list.                   | `unknown[]`           | `[]`            |
-| `optionsDisplayProp` | `options-display-prop` | The options property to render in the dropdown list. | `string`              | `undefined`     |
-| `placeholder`        | `placeholder`          | (optional) The input's placeholder.                  | `string`              | `Please Select` |
-| `required`           | `required`             | (optional) Whether the input is required.            | `boolean`             | `undefined`     |
-| `size`               | `size`                 | (optional) The input's size.                         | `"large" | "medium"`  | `'medium'`      |
-| `validText`          | `valid-text`           | (optional) The input's valid text.                   | `string`              | `undefined`     |
-| `value`              | --                     | (optional) The input value.                          | `unknown`             | `undefined`     |
+| Property             | Attribute              | Description                                          | Type        | Default         |
+| -------------------- | ---------------------- | ---------------------------------------------------- | ----------- | --------------- | ---------- |
+| `ariaLabel`          | `aria-label`           | (optional) The select's aria-label.                  | `string`    | `undefined`     |
+| `disabled`           | `disabled`             | (optional) Whether the input is disabled.            | `boolean`   | `undefined`     |
+| `errorText`          | `error-text`           | (optional) The input's error text.                   | `string`    | `undefined`     |
+| `helperText`         | `helper-text`          | (optional) The input's helper text.                  | `string`    | `undefined`     |
+| `label`              | `label`                | (optional) The input label.                          | `string`    | `undefined`     |
+| `options`            | --                     | The options for the dropdown list.                   | `unknown[]` | `[]`            |
+| `optionsDisplayProp` | `options-display-prop` | The options property to render in the dropdown list. | `string`    | `undefined`     |
+| `placeholder`        | `placeholder`          | (optional) The input's placeholder.                  | `string`    | `Please Select` |
+| `required`           | `required`             | (optional) Whether the input is required.            | `boolean`   | `undefined`     |
+| `size`               | `size`                 | (optional) The input's size.                         | `"large"    | "medium"`       | `'medium'` |
+| `validText`          | `valid-text`           | (optional) The input's valid text.                   | `string`    | `undefined`     |
+| `value`              | --                     | (optional) The input value.                          | `unknown`   | `undefined`     |
 
 ### DOM Events
 

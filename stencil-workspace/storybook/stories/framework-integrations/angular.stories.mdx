@@ -153,21 +153,8 @@ Moving onto the directive, there are a few things to keep in mind.
 Here is what our directive looks like:
 
 ```typescript
-import {
-  Directive,
-  forwardRef,
-  ElementRef,
-  HostListener,
-  Input,
-  OnInit,
-  Output,
-  EventEmitter,
-} from '@angular/core';
-import {
-  ControlValueAccessor,
-  FormControl,
-  NG_VALUE_ACCESSOR,
-} from '@angular/forms';
+import { Directive, forwardRef, ElementRef, HostListener, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Directive({
   selector: 'modus-select',

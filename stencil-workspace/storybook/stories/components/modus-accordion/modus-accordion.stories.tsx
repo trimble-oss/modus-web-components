@@ -5,7 +5,7 @@ import { html } from 'lit-html';
 export default {
   title: 'Components/Accordion',
   argTypes: {
-    icon:{
+    icon: {
       name: 'icon',
       description: 'The icon to display before the header text',
       table: {
@@ -26,7 +26,8 @@ export default {
   },
   parameters: {
     controls: {
-      expanded: true ,sort:"alpha"
+      expanded: true,
+      sort: 'alpha',
     },
     docs: {
       page: docs,
@@ -37,22 +38,26 @@ export default {
   },
 };
 
-const Template = ({expandButtonType, icon}) => html`
+const Template = ({ expandButtonType, icon }) => html`
   <modus-accordion>
-    <modus-accordion-item header-text="Item 1" icon=${icon} expand-button-type=${expandButtonType}>Content</modus-accordion-item>
-    <modus-accordion-item header-text="Item 2" icon=${icon} expand-button-type=${expandButtonType}>Content</modus-accordion-item>
+    <modus-accordion-item header-text="Item 1" icon=${icon} expand-button-type=${expandButtonType}
+      >Content</modus-accordion-item
+    >
+    <modus-accordion-item header-text="Item 2" icon=${icon} expand-button-type=${expandButtonType}
+      >Content</modus-accordion-item
+    >
     <modus-accordion-item disabled header-text="Item 3" icon=${icon} expand-button-type=${expandButtonType}>
       Content
     </modus-accordion-item>
   </modus-accordion>
 `;
 
-const DefaultTemplateArgs={
+const DefaultTemplateArgs = {
   expandButtonType: 'standardArrow',
   icon: '',
 };
 
-const WithIconTemplateArgs={
+const WithIconTemplateArgs = {
   expandButtonType: 'standardArrow',
   icon: 'notifications',
 };
@@ -70,4 +75,3 @@ WithIcon.args = WithIconTemplateArgs;
 
 export const CircleArrow = Template.bind({});
 CircleArrow.args = CircleArrowTemplateArgs;
-
