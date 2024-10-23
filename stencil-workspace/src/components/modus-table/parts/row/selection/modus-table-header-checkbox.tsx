@@ -14,12 +14,20 @@ export const ModusTableHeaderCheckbox: FunctionalComponent<ModusTableHeaderCheck
     rowSelectionOptions,
     density,
   } = context;
+  const densityWidths = new Map<string, string>([
+    ['compact', '38px'],
+    ['comfortable', '46px'],
+    ['relaxed', '46px'],
+  ]);
+
   let checkboxSize: 'medium' | 'small' = 'medium';
   if (density === 'compact') {
     checkboxSize = 'small';
   }
+
+  const width = densityWidths.get(density) || '46px';
   return (
-    <th class={'row-checkbox sticky-left ' + checkboxSize}>
+    <th class={'row-checkbox sticky-left ' + checkboxSize} style={{ width: width }}>
       {rowSelectionOptions?.multiple && (
         <modus-checkbox
           ariaLabel="Select all rows"
