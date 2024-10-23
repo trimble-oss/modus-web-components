@@ -59,6 +59,7 @@ function initializeTable(props) {
     displayOptions,
     rowSelectionOptions,
     rowActions,
+    rowActionSize,
     manualPaginationOptions,
     manualSortingOptions,
     defaultSort,
@@ -77,6 +78,7 @@ function initializeTable(props) {
   modusTable.displayOptions = ${JSON.stringify(displayOptions)};
   modusTable.rowSelectionOptions = ${JSON.stringify(rowSelectionOptions)};
   modusTable.rowActions = ${JSON.stringify(rowActions)};
+  modusTable.rowActionSize= ${JSON.stringify(rowActionSize)};
   modusTable.manualPaginationOptions = ${JSON.stringify(manualPaginationOptions)};
   modusTable.manualSortingOptions = ${JSON.stringify(manualSortingOptions)};
   modusTable.defaultSort = ${JSON.stringify(defaultSort)};
@@ -329,6 +331,7 @@ const DefaultArgs = {
   maxHeight: '',
   maxWidth: '',
   rowActions: [],
+  rowActionSize: 0,
   rowSelection: false,
   rowSelectionOptions: {},
   wrapText: false,
@@ -506,6 +509,15 @@ export default {
       },
       type: { required: false },
     },
+    rowActionSize: {
+      name: 'rowActionSize',
+      description: "The size of the row action's column",
+      control: 'number',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'number' },
+      },
+    },
     maxHeight: {
       name: 'maxHeight',
       description: 'To display a vertical scrollbar when the height is exceeded.',
@@ -644,6 +656,7 @@ const Template = ({
   maxHeight,
   maxWidth,
   rowActions,
+  rowActionSize,
   rowSelection,
   rowSelectionOptions,
   manualPaginationOptions,
@@ -681,6 +694,7 @@ const Template = ({
     displayOptions,
     rowSelectionOptions,
     rowActions,
+    rowActionSize,
     manualPaginationOptions,
     manualSortingOptions,
     defaultSort,
@@ -982,6 +996,7 @@ LargeDataset.args = {
 export const RowActions = Template.bind({});
 RowActions.args = {
   ...DefaultArgs,
+  rowActionSize: 160,
   rowActions: [
     {
       id: '1',
