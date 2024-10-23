@@ -1,0 +1,35 @@
+# Text Editor
+
+---
+
+The [Modus Text Editor](https://modus.trimble.com/components/text-editor/) is a rich-text editor built to offer customizable and easy-to-use content editing tools. It provides common text editing features like bold, italic, underline, and text alignment, along with the ability to insert links, images, and more.
+
+#### Implementation Details
+
+- The `modus-text-editor` component offers a toolbar for formatting text, and an editable content area.
+- Use the `content` property to get or set the content of the editor.
+- Customize the toolbar by passing an array of toolbar options via the `toolbar-options` property.
+
+### Default
+
+```html
+<modus-text-editor content="Type here..."></modus-text-editor>
+```
+
+### Properties
+
+| Property      | Attribute     | Description                                 | Type      | Default |
+| ------------- | ------------- | ------------------------------------------- | --------- | ------- |
+| `content`     | `content`     | (optional) Content of the text editor.      | `string`  | `""`    |
+| `disabled`    | `disabled`    | (optional) Disables the editor.             | `boolean` | `false` |
+| `placeholder` | `placeholder` | (optional) Placeholder text for the editor. | `string`  | `""`    |
+
+### Events
+
+| Event             | Description                  | Type                                                                 |
+| ----------------- | ---------------------------- | -------------------------------------------------------------------- |
+| `editorChange`    | Fired on editor change.      | `CustomEvent<{ eventName: string; args: unknown[] }>`                |
+| `selectionUpdate` | Fired on selection change.   | `CustomEvent<{ range: unknown; oldRange: unknown; source: string }>` |
+| `textChange`      | Fired on input value change. | `CustomEvent<{ delta: unknown; oldDelta: unknown; source: string }>` |
+
+### Accessibility

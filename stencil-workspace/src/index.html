@@ -19,8 +19,25 @@
     <!-- Test components -->
     <h3>Modus Editor</h3>
 
-    <modus-text-editor format="json" content=""></modus-text-editor>
+    <modus-text-editor placeholder="2" disabled="false"></modus-text-editor>
 
+    <script>
+      const editor = document.querySelector('modus-text-editor');
+      editor.addEventListener('textChange', (event) => handleTextChange(event));
+      editor.addEventListener('selectionUpdate', (event) => handleSelectionChange(event));
+      editor.addEventListener('editorChange', (event) => handleEditorChange(event));
 
- </body>
+      function handleTextChange(event) {
+        console.log('Text changed:', event.detail);
+      }
+
+      function handleSelectionChange(event) {
+        console.log('Selection changed:', event.detail);
+      }
+
+      function handleEditorChange(event) {
+        console.log('Editor changed:', event.detail);
+      }
+    </script>
+  </body>
 </html>

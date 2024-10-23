@@ -1,19 +1,39 @@
-import { Component, h, Element } from '@stencil/core';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { Component, h, Prop, Element, Event, EventEmitter } from '@stencil/core';
 import Quill from 'quill';
+import { Attributor } from 'parchment';
 import { ModusIconMap } from '../../icons/ModusIconMap';
 import { convertIconToSVG } from '../../utils/utils';
+//import { Delta } from 'quill/core';
 
 @Component({
   tag: 'modus-text-editor',
   styleUrl: 'modus-text-editor.scss',
 })
 export class ModusTextEditor {
-  @Element() hostElement;
+  /** (optional) Content of the editor. */
+  @Prop() content: string;
 
-  quillInstance: Quill;
-  el: Element;
+  /** (optional) Disables the editor. */
+  @Prop() disabled = false;
+
+  /** (optional) The placeholder text of the editor. */
+  @Prop() placeholder = '';
+
+  /** An event that fires on input value change. */
+  @Event() textChange: EventEmitter<{ delta: unknown; oldDelta: unknown; source: string }>;
+
+  /** An event that fires on selection change. */
+  @Event() selectionUpdate: EventEmitter<{ range: unknown; oldRange: unknown; source: string }>;
+
+  /** An event that fires on editor change. */
+  @Event() editorChange: EventEmitter<{ eventName: string; args: unknown[] }>;
+
+  private quillInstance: Quill;
 
   private fontSizeArr = ['14px', '16px', '18px'];
+
+  @Element() hostElement: HTMLElement;
 
   setIcons() {
     const icons = Quill.import('ui/icons');
@@ -30,10 +50,8 @@ export class ModusTextEditor {
   }
 
   setFontSize() {
-    const fontSize: any = Quill.import('attributors/style/size');
-
+    const fontSize = Quill.import('attributors/style/size') as Attributor;
     fontSize.whitelist = this.fontSizeArr;
-
     Quill.register(fontSize, true);
   }
 
@@ -52,10 +70,11 @@ export class ModusTextEditor {
   }
 
   initializeQuillEditor() {
-    const editorContainer = this.hostElement.querySelector('.editor-container');
+    const editorContainer = this.hostElement.querySelector('.editor-container') as HTMLElement;
 
     this.setIcons();
     this.setFontSize();
+
     const toolbarOptions = {
       container: [
         [{ font: ['serif', 'monospace'] }],
@@ -65,19 +84,6 @@ export class ModusTextEditor {
         [{ list: 'bullet' }, { list: 'ordered' }],
         ['link'],
       ],
-      handlers: {
-        link: function (value) {
-          console.log(value);
-          if (value) {
-            const href = prompt('Enter the URL');
-
-            console.log('quill', this.quill.format('link', href));
-            this.quill.format('link', true);
-          } else {
-            this.quill.format('link', false);
-          }
-        },
-      },
     };
 
     if (editorContainer) {
@@ -85,14 +91,39 @@ export class ModusTextEditor {
         modules: {
           toolbar: toolbarOptions,
         },
+        placeholder: this?.placeholder,
         theme: 'snow',
       });
+
+      if (this.content) {
+        this.quillInstance.setText(this.content);
+      }
+      if (this.disabled) {
+        this.quillInstance.enable(false);
+      }
+
+      this.attachQuillEventListeners();
     }
 
     this.setCaretIcons();
   }
 
+  attachQuillEventListeners() {
+    this.quillInstance.on('text-change', (delta, oldDelta, source) => {
+      this.textChange.emit({ delta, oldDelta, source });
+    });
+
+    this.quillInstance.on('selection-change', (range, oldRange, source) => {
+      this.selectionUpdate.emit({ range, oldRange, source });
+    });
+
+    this.quillInstance.on('editor-change', (eventName, ...args) => {
+      this.editorChange.emit({ eventName, args });
+    });
+  }
+
   render() {
-    return <div class="editor-container"></div>;
+    const editorContainerClass = `editor-container ${this.disabled ? 'disabled' : ''}`;
+    return <div class={editorContainerClass}></div>;
   }
 }
