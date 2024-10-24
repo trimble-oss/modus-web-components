@@ -240,6 +240,29 @@ describe('modus-date-picker', () => {
     expect(enabledDates.length).toEqual(1);
   });
 
+  it('it defaults to all dates enabled if no isDateEnabled function is provided', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+    <modus-date-picker>
+      <modus-date-input
+        format="mmm d, yyyy"
+        show-calendar-icon="true"
+        label="Enter a date"
+        value="2022-12-15"
+        is-date-enabled="isDateEnabled">
+      </modus-date-input>
+    </modus-date-picker>`);
+
+    const datePicker = await page.find('modus-date-picker');
+
+    const calendar = await page.find('modus-date-input >>> .icon-calendar');
+    await calendar.click();
+    await page.waitForChanges();
+
+    const enabledDates = await page.findAll('modus-date-picker >>> .calendar-body .calendar-day:not(.disabled)');
+    expect(enabledDates.length).toEqual(31);
+  })
+
   it('checks invalid date range validations', async () => {
     const page = await newE2EPage();
     await page.setContent(`
