@@ -12,12 +12,12 @@ export default {
         type: { summary: 'boolean' },
         defaultValue: { summary: false },
       },
-     },
+    },
     ariaLabel: {
       name: 'aria-label',
       description: "The dropdowns's aria-label",
       table: {
-        type: { summary: 'string' }
+        type: { summary: 'string' },
       },
     },
     customPlacement: {
@@ -29,37 +29,36 @@ export default {
       type: { required: false },
     },
     disabled: {
-    name: 'disabled',
-    description: 'Whether the dropdown is disabled',
-    table: {
-       type: { summary: 'boolean' },
-       defaultValue: { summary: false },
-      }
+      name: 'disabled',
+      description: 'Whether the dropdown is disabled',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: false },
+      },
     },
     placement: {
       name: 'placement',
-     description: 'The placement of the dropdown in relation to the toggleElement.',
-     control: {
-      options: [
-        'top' , 'right' , 'bottom' , 'left'
-      ],
-      type: 'select',
-    },
-      table: { type: { summary: `'top' | 'right' | 'bottom' | 'left'` },
+      description: 'The placement of the dropdown in relation to the toggleElement.',
+      control: {
+        options: ['top', 'right', 'bottom', 'left'],
+        type: 'select',
+      },
+      table: {
+        type: { summary: `'top' | 'right' | 'bottom' | 'left'` },
 
-    defaultValue: { summary: 'bottom'}
-    } },
+        defaultValue: { summary: 'bottom' },
+      },
+    },
     showDropdownListBorder: {
       name: 'show-dropdown-list-border',
       description: 'Whether to show the dropdown list border',
       table: {
-        type:
-        {
-           summary: 'boolean'
-           },
-           defaultValue: { summary: true },
-          },
-     },
+        type: {
+          summary: 'boolean',
+        },
+        defaultValue: { summary: true },
+      },
+    },
   },
   parameters: {
     actions: {
@@ -100,7 +99,7 @@ Default.args = {
   disabled: false,
   placement: 'bottom',
   showDropdownListBorder: true,
-}
+};
 
 const WithManyItemsTemplate = ({
   animateList,
@@ -141,7 +140,7 @@ WithManyItems.args = {
   disabled: false,
   placement: 'bottom',
   showDropdownListBorder: true,
-}
+};
 
 function initializeCustomPlacement(customPlacement) {
   const tag = document.createElement('script');
