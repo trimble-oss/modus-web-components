@@ -205,6 +205,41 @@ describe('modus-date-picker', () => {
   //   expect(calendarContainer).toBeFalsy();
   // });
 
+  it('checks the displayed date values against the provided isDateEnabled function', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+    <modus-date-picker>
+      <modus-date-input
+        format="mmm d, yyyy"
+        show-calendar-icon="true"
+        label="Enter a date"
+        value="2022-12-15"
+        is-date-enabled="isDateEnabled">
+      </modus-date-input>
+    </modus-date-picker>`);
+
+    const datePicker = await page.find('modus-date-picker');
+
+    await page.$eval('modus-date-picker', (elm: any, props) => {
+      const is15th = (date: string) =>  {
+      if(new Date(date).getDate() === 15) {
+        return true;
+      } else {
+         return false
+      };
+    }
+      elm.isDateEnabled = is15th;
+    }
+);
+
+    const calendar = await page.find('modus-date-input >>> .icon-calendar');
+    await calendar.click();
+    await page.waitForChanges();
+
+    const enabledDates = await page.findAll('modus-date-picker >>> .calendar-body .calendar-day:not(.disabled)');
+    expect(enabledDates.length).toEqual(1);
+  });
+
   it('checks invalid date range validations', async () => {
     const page = await newE2EPage();
     await page.setContent(`
