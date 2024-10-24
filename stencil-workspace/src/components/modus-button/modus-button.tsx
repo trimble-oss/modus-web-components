@@ -43,6 +43,9 @@ export class ModusButton {
   /** (Optional) Button types */
   @Prop() type: ButtonType = 'button';
 
+  /**(Optional) enable the progress animation for danger button*/
+  @Prop() criticalAction: boolean;
+
   /** (optional) An event that fires on button click. */
   @Event() buttonClick: EventEmitter;
 
@@ -51,6 +54,20 @@ export class ModusButton {
   @State() isActive: boolean;
 
   @State() pressed: boolean;
+
+  @State() progressState = {
+    progressClass: '',
+    progressWidth: 0,
+    startTime: 0,
+    animationDuration: 3000,
+    resetTimeout: null as NodeJS.Timeout | null,
+  };
+
+  @State() keyProgressState = {
+    firstKeydownTime: 0,
+    lastKeydownTime: 0,
+    keyDownActive: false,
+  };
 
   classByButtonStyle: Map<string, string> = new Map([
     ['borderless', 'style-borderless'],
@@ -75,6 +92,14 @@ export class ModusButton {
 
   buttonRef: HTMLButtonElement;
 
+  componentDidLoad() {
+    document.addEventListener('click', this.handleClickOutside);
+  }
+
+  disconnectedCallback() {
+    document.removeEventListener('click', this.handleClickOutside);
+  }
+
   /** Focus the Button */
   @Method()
   async focusButton(): Promise<void> {
@@ -91,8 +116,87 @@ export class ModusButton {
   elementKeyupHandler(event: KeyboardEvent): void {
     switch (event.code) {
       case 'Space':
-        this.buttonClick.emit();
+      case 'Enter':
+        if (this.isCriticalAction()) this.handleKeyup();
         break;
+    }
+  }
+
+  @Listen('keydown')
+  elementKeydownHandler(event: KeyboardEvent): void {
+    switch (event.code) {
+      case 'Space':
+      case 'Enter':
+        if (this.isCriticalAction()) this.handleKeydown();
+        break;
+    }
+  }
+
+  handleClickOutside = (event: MouseEvent) => {
+    if (this.buttonRef && !this.buttonRef.contains(event.target as Node) && this.isCriticalAction()) {
+      this.handleReverseAnimation();
+    }
+  };
+
+  handleProgressAnimation() {
+    this.pressed = true;
+    if (this.isCriticalAction()) {
+      this.progressState = {
+        ...this.progressState,
+        progressClass: 'progress',
+        startTime: Date.now(),
+      };
+      this.buttonRef.classList.remove('reverse');
+      this.buttonRef.classList.add('progress');
+    }
+  }
+
+  handleReverseAnimation() {
+    if (this.progressState.progressWidth >= 100) {
+      this.buttonClick.emit();
+      this.buttonRef.classList.remove('progress');
+      this.buttonRef.classList.remove('reverse');
+    } else {
+      this.buttonRef.classList.remove('progress');
+      this.buttonRef.classList.add('reverse');
+    }
+
+    if (this.progressState.resetTimeout) {
+      clearTimeout(this.progressState.resetTimeout);
+    }
+
+    this.progressState.resetTimeout = setTimeout(() => {
+      this.progressState = {
+        ...this.progressState,
+        progressWidth: 0,
+        progressClass: '',
+      };
+      this.buttonRef.classList.remove('reverse');
+    }, this.progressState.animationDuration);
+  }
+
+  handleKeydown(): void {
+    if (!this.keyProgressState.keyDownActive) {
+      this.keyProgressState.firstKeydownTime = Date.now();
+      this.keyProgressState.keyDownActive = true;
+    }
+    this.handleProgressAnimation();
+    this.keyProgressState.lastKeydownTime = Date.now();
+  }
+
+  handleKeyup() {
+    if (this.keyProgressState.keyDownActive) {
+      const elapsedTime = this.keyProgressState.lastKeydownTime - this.keyProgressState.firstKeydownTime;
+
+      this.progressState = {
+        ...this.progressState,
+        progressWidth: Math.min((elapsedTime / this.progressState.animationDuration) * 100, 100),
+        progressClass: 'reverse',
+      };
+      this.handleReverseAnimation();
+      this.keyProgressState.firstKeydownTime = null;
+      this.keyProgressState.lastKeydownTime = null;
+      this.keyProgressState.keyDownActive = false;
     }
   }
 
@@ -125,6 +229,23 @@ export class ModusButton {
     );
   }
 
+  isCriticalAction() {
+    return this.criticalAction && this.color === 'danger' && !this.disabled && this.buttonStyle === 'fill';
+  }
+
+  handleMouseUp() {
+    this.pressed = false;
+    if (this.isCriticalAction()) {
+      const elapsedTime = Date.now() - this.progressState.startTime;
+      this.progressState = {
+        ...this.progressState,
+        progressWidth: Math.min((elapsedTime / this.progressState.animationDuration) * 100, 100),
+        progressClass: 'reverse',
+      };
+      this.handleReverseAnimation();
+    }
+  }
+
   render(): unknown {
     const className = `${this.classBySize.get(
       this.size
@@ -140,17 +261,18 @@ export class ModusButton {
         class={className}
         disabled={this.disabled}
         onClick={() => {
-          if (!this.disabled) {
+          if (!this.disabled && !this.isCriticalAction()) {
             this.buttonClick.emit();
             if (this.type === 'toggle') {
               this.isActive = !this.isActive;
             }
           }
         }}
+        style={this.isCriticalAction() ? { '--progress-width': `${this.progressState.progressWidth}%` } : {}}
         onKeyDown={() => (this.pressed = true)}
         onKeyUp={() => (this.pressed = false)}
-        onMouseDown={() => (this.pressed = true)}
-        onMouseUp={() => (this.pressed = false)}
+        onMouseDown={() => this.handleProgressAnimation()}
+        onMouseUp={() => this.handleMouseUp()}
         ref={(el) => (this.buttonRef = el)}
         type={this.type}>
         {this.iconOnly ? this.renderIconOnly() : this.renderIconWithText()}
