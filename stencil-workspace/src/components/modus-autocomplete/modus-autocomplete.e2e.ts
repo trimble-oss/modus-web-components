@@ -1022,4 +1022,45 @@ describe('modus-autocomplete', () => {
     const updatedChips = await chipsContainer.findAll('modus-chip');
     expect(updatedChips.length).toEqual(0);
   });
+
+  it('should not add duplicate chips to custom options when multiple is true', async () => {
+    const element = await newE2EPage();
+    await element.setContent(`
+      <modus-autocomplete disable-close-on-select="true">
+        <li id="item-1" data-search-value="Test1" data-id="1" style="padding: 8px">
+          <div style="font-weight: bold">Test1 Option</div>
+          <div style="font-size: 12px">Option1 Description</div>
+        </li>
+        <li id="item-2" data-search-value="Test2" data-id="2" style="padding: 8px">
+          <div style="font-weight: bold">Test2 Option</div>
+          <div style="font-size: 12px">Option2 Description</div>
+        </li>
+      </modus-autocomplete>
+    `);
+    await element.waitForChanges();
+
+    const modusAutocomplete = await element.find('modus-autocomplete');
+    modusAutocomplete.setProperty('multiple', true);
+    await element.waitForChanges();
+
+    const textInput = await element.find('modus-autocomplete >>> modus-text-input');
+    await textInput.click();
+    await textInput.type('Test1');
+    await element.waitForChanges();
+
+    const option = await element.find('modus-autocomplete >>> li');
+    await option.click();
+    await element.waitForChanges();
+
+    await textInput.click();
+    await textInput.type('Test1');
+    await element.waitForChanges();
+
+    await option.click();
+    await element.waitForChanges();
+
+    const chipsContainer = await element.find('modus-autocomplete >>> .chips-container');
+    const chips = await chipsContainer.findAll('modus-chip');
+    expect(chips.length).toEqual(1);
+  });
 });

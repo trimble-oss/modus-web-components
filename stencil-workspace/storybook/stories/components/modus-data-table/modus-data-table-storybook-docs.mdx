@@ -2,7 +2,7 @@ import { Story } from '@storybook/addon-docs';
 
 # Data Table
 
-  <modus-alert type="warning" message="This component will be deprecated soon and replaced by a new Table component!"> Check our open <a href="https://github.com/trimble-oss/modus-web-components/issues?q=is%3Aopen+is%3Aissue+label%3Atable+" target="_blank" rel="noopener">GitHub issues</a>.</modus-alert>
+<modus-alert type="warning" message="This component will be deprecated soon and replaced by a new Table component!"> Check our open <a href="https://github.com/trimble-oss/modus-web-components/issues?q=is%3Aopen+is%3Aissue+label%3Atable+" target="_blank" rel="noopener">GitHub issues</a>.</modus-alert>
 
 ---
 
@@ -34,11 +34,7 @@ They are referenced using the `<modus-data-table>` custom HTML element.
   <modus-data-table />
 </div>
 <script>
-  document.querySelector('modus-data-table').columns = [
-    'Name',
-    'Age',
-    'Contacted',
-  ];
+  document.querySelector('modus-data-table').columns = ['Name', 'Age', 'Contacted'];
   document.querySelector('modus-data-table').data = [
     ['John', 25, false],
     ['Jane', 26, false],
@@ -133,9 +129,7 @@ To define columns and data in the table _using objects_:
 - The Data Table accepts `number`, `string`, `booleans`, `ModusDataTableCellBadge` and `ModusDataTableCellLink` as data.
   - `ModusDataTableCellBadge` displays a Modus Badge in the center of the cell. You must pass `badge` as the data's `_type` property. This cell type accepts all properties to configure a Modus Badge (see Types below).
     ```ts
-    const data = [
-      { badgeColumnId: { _type: 'badge', text: 'Some badge text' } },
-    ];
+    const data = [{ badgeColumnId: { _type: 'badge', text: 'Some badge text' } }];
     ```
   - `ModusDataTableCellLink` displays a Link in the cell. You must pass `link` as the data's `_type` property, similarly to the badge above. This cell type accepts `display` and `url` (see Types below).
     ```ts
@@ -153,12 +147,7 @@ To define columns and data in the table _using objects_:
 ### Types
 
 ```ts
-type TCell =
-  | number
-  | string
-  | boolean
-  | ModusDataTableCellBadge
-  | ModusDataTableCellLink;
+type TCell = number | string | boolean | ModusDataTableCellBadge | ModusDataTableCellLink;
 type TRow = {
   [key: string]: TCell;
 } & {
@@ -176,14 +165,7 @@ interface TColumn {
 
 interface ModusDataTableCellBadge {
   _type: 'badge'; // Used internally to identify the type of cell. Does not set the badge's type.
-  color?:
-    | 'danger'
-    | 'dark'
-    | 'primary'
-    | 'secondary'
-    | 'success'
-    | 'tertiary'
-    | 'warning';
+  color?: 'danger' | 'dark' | 'primary' | 'secondary' | 'success' | 'tertiary' | 'warning';
   text: string;
   type?: 'counter' | 'default' | 'text';
 }
@@ -234,14 +216,14 @@ interface ModusDataTableSortOptions {
 
 ### Properties
 
-| Property               | Attribute | Description                                | Type                           | Default                                                                                                         |
-| ---------------------- | --------- | ------------------------------------------ | ------------------------------ | --------------------------------------------------------------------------------------------------------------- |
-| `columns` _(required)_ | --        |                                            | `TColumn[], string[]`          | `undefined`                                                                                                     |
-| `data` _(required)_    | --        |                                            | `TCell[][], TRow[]`            | `undefined`                                                                                                     |
-| `displayOptions`       | --        | Options for data table display.            | `ModusDataTableDisplayOptions` | `{ animateRowActionsDropdown: false, borderless: true, cellBorderless: true, rowStripe: false, size: 'large' }` |
-| `rowActions`           | --        | Actions that can be performed on each row. | `ModusDataTableRowAction[]`    | `[]`                                                                                                            |
-| `selectionOptions`     | --        | Options for data table item selection.     | `ModusDataTableSelectionOptions`   | `{ canSelect: false, checkboxSelection: false, }`                                                               |
-| `sortOptions`          | --        | Options for data table column sort.        | `ModusDataTableSortOptions`        | `{ canSort: false, serverSide: false, }`                                                                        |
+| Property               | Attribute | Description                                | Type                             | Default                                                                                                         |
+| ---------------------- | --------- | ------------------------------------------ | -------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `columns` _(required)_ | --        |                                            | `TColumn[], string[]`            | `undefined`                                                                                                     |
+| `data` _(required)_    | --        |                                            | `TCell[][], TRow[]`              | `undefined`                                                                                                     |
+| `displayOptions`       | --        | Options for data table display.            | `ModusDataTableDisplayOptions`   | `{ animateRowActionsDropdown: false, borderless: true, cellBorderless: true, rowStripe: false, size: 'large' }` |
+| `rowActions`           | --        | Actions that can be performed on each row. | `ModusDataTableRowAction[]`      | `[]`                                                                                                            |
+| `selectionOptions`     | --        | Options for data table item selection.     | `ModusDataTableSelectionOptions` | `{ canSelect: false, checkboxSelection: false, }`                                                               |
+| `sortOptions`          | --        | Options for data table column sort.        | `ModusDataTableSortOptions`      | `{ canSort: false, serverSide: false, }`                                                                        |
 
 ### Events
 

@@ -20,9 +20,7 @@ export default {
       page: docs,
     },
     actions: {
-      handles: [
-        'crumbClick',
-      ],
+      handles: ['crumbClick'],
     },
     controls: {
       disabled: false,
