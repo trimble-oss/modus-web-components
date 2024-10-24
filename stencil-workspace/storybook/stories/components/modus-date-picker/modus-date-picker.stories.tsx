@@ -270,6 +270,7 @@ const DateRangeTemplate = ({
   errorText,
   format,
   min,
+  position,
   max,
   helperText,
   placeholder,
@@ -280,7 +281,7 @@ const DateRangeTemplate = ({
   validText,
   value,
 }) => html`
-  <modus-date-picker label="Select date range">
+  <modus-date-picker label="Select date range" position=${position}>
     <modus-date-input
       allowed-chars-regex=${allowedCharsRegex}
       alt-formats=${altFormats}
