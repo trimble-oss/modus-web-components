@@ -14,9 +14,11 @@
   "peerDependencies": {
     "@angular/common": "^17.2.2",
     "@angular/core": "^17.2.2",
-    "@trimble-oss/modus-web-components": "0.39.0"
+    "@trimble-oss/modus-web-components": "0.40.0"
   },
   "dependencies": {
+    "@trimble-oss/modus-angular-components": "file:../../../../ng18/projects/trimble-oss/modus-angular-components",
+    "cd": "^0.3.3",
     "tslib": "^2.5.3"
   },
   "engines": {
