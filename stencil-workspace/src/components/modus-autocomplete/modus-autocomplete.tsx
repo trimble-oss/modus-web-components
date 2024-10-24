@@ -206,7 +206,7 @@ export class ModusAutocomplete {
   };
 
   addChipValue(value: ModusAutocompleteOption) {
-    if (this.selectedChips.includes(value)) {
+    if (this.selectedChips.some((chip) => chip.id === value.id)) {
       return;
     }
     this.selectedChips = [...this.selectedChips, value];
@@ -463,6 +463,7 @@ export class ModusAutocomplete {
       onBlur={this.handleInputBlur}
       onKeyDown={(e) => this.handleInputKeyDown(e)}
       role="combobox"
+      disabled={this.disabled}
       aria-autocomplete="list"
       aria-controls={this.listId}
       aria-expanded={this.displayOptions()}
@@ -523,6 +524,7 @@ export class ModusAutocomplete {
           {this.includeSearchIcon ? <IconSearch size="16" /> : null}
           {this.selectedChips.map((chip) => (
             <modus-chip
+              tabIndex={this.disabled ? -1 : 0}
               value={chip.value}
               chipId={chip.id}
               size={this.size === 'large' ? 'medium' : 'small'}
@@ -562,9 +564,10 @@ export class ModusAutocomplete {
             {this.displayOptions() &&
               this.visibleCustomOptions?.map((option) => {
                 const optionValue = option.getAttribute(DATA_SEARCH_VALUE);
+                const isSelected = this.selectedChips.some((chip) => chip.value === optionValue);
                 let className;
                 if (this.multiple) {
-                  className = 'custom-option' + (this.selectedChips.includes(optionValue) ? ' selected' : '');
+                  className = 'custom-option' + (isSelected ? ' selected' : '');
                 } else {
                   className = 'custom-option' + (this.selectedOption === optionValue ? ' selected' : '');
                 }
