@@ -202,7 +202,7 @@ export class ModusAutocomplete {
   displayOptions = () => {
     const showOptions =
       this.showOptionsOnFocus || this.value?.length > 0 || this.disableCloseOnSelect || this.ShowItemsOnKeyDown;
-    return !this.loading && this.hasFocus && showOptions && !this.disabled;
+    return !this.loading && this.hasFocus && showOptions && !this.disabled && !this.readOnly;
   };
 
   addChipValue(value: ModusAutocompleteOption) {
@@ -464,6 +464,7 @@ export class ModusAutocomplete {
       onKeyDown={(e) => this.handleInputKeyDown(e)}
       role="combobox"
       disabled={this.disabled}
+      readOnly={this.readOnly}
       aria-autocomplete="list"
       aria-controls={this.listId}
       aria-expanded={this.displayOptions()}
@@ -528,7 +529,7 @@ export class ModusAutocomplete {
               value={chip.value}
               chipId={chip.id}
               size={this.size === 'large' ? 'medium' : 'small'}
-              show-close
+              show-close={!this.readOnly}
               onCloseClick={() => this.handleCloseClick(chip)}></modus-chip>
           ))}
           {this.TextInput()}
