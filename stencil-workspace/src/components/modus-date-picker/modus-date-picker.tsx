@@ -336,7 +336,7 @@ export class ModusDatePicker {
               const isSingleDateSelected = singleDate && this.compare(date, singleDate) === 0;
               const isSelected = isStartDate || isEndDate || isSingleDateSelected;
               const isInRange = !isSelected ? positions['in-range'] : false;
-              const isDateInMaxMinRange = !this.isWithinCurrentMinMax(date);
+              const isDateOutOfMaxMinRange = !this.isWithinCurrentMinMax(date);
 
               const isDateEnabled = this.isDateEnabled ? this.isDateEnabled(date.toISOString()) : true;
 
@@ -350,18 +350,20 @@ export class ModusDatePicker {
                     }
                   : {};
 
+              const buttonDisabled = isDateOutOfMaxMinRange || !isDateEnabled;
+
               return (
                 <button
                   class={{
                     'calendar-day grid-item': true,
                     selected: isSelected,
-                    disabled: isDateInMaxMinRange || !isDateEnabled,
+                    disabled: buttonDisabled,
                     start: isStartDate && !isEndDate,
                     end: isEndDate && !isStartDate,
                     'current-day': isToday,
                     'range-selected': isInRange,
                   }}
-                  disabled={isDateInMaxMinRange}
+                  disabled={buttonDisabled}
                   tabIndex={0}
                   type="button"
                   aria-current={isSelected ? 'date' : undefined}
