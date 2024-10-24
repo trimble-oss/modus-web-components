@@ -41,8 +41,8 @@ export class ModusDatePicker {
    * If true, the day will be enabled/interactive. If false, the day will be disabled/non-interactive.
    * The function accepts an ISO 8601 date string of a given day. By default, all days are enabled.
    * Developers can use this function to write custom logic to disable certain days.
-   * The function is called for each rendered calendar day, for the previous, current and next month.
-   * Custom implementations should be optimized for performance to avoid jank.
+   * The function is called for each rendered calendar day.
+   * This function should be optimized for performance to avoid jank.
    * */
   @Prop() isDateEnabled: (dateIsoString: string) => boolean | undefined;
 
@@ -103,7 +103,7 @@ export class ModusDatePicker {
         middleware.push(flip());
       }
 
-      if(this.position === 'auto') {
+      if (this.position === 'auto') {
         options.strategy = 'fixed';
       }
 
@@ -338,7 +338,6 @@ export class ModusDatePicker {
               const isInRange = !isSelected ? positions['in-range'] : false;
               const isDateInMaxMinRange = !this.isWithinCurrentMinMax(date);
 
-
               const isDateEnabled = this.isDateEnabled ? this.isDateEnabled(date.toISOString()) : true;
 
               // Only for the last date in the calendar
@@ -388,31 +387,31 @@ export class ModusDatePicker {
 
   private renderCalendarHeader() {
     return (
-        <div class="calendar-header">
-          <button type="button" aria-label="Previous Month" onClick={() => this.addMonthOffset(-1)}>
-            <ModusIconMap icon="chevron_left_bold"></ModusIconMap>
-          </button>
+      <div class="calendar-header">
+        <button type="button" aria-label="Previous Month" onClick={() => this.addMonthOffset(-1)}>
+          <ModusIconMap icon="chevron_left_bold"></ModusIconMap>
+        </button>
 
-          <div class="title">
-            <div class="calendar-title" role="heading">{`${this._calendar?.month} ${this._calendar?.year}`}</div>
-            <div class="year-icons">
-              <button type="button" tabIndex={0} aria-label="Next Year" onClick={() => this.addYearOffset(1)} class="year-up">
-                <ModusIconMap icon="caret_up" size="16"></ModusIconMap>
-              </button>
-              <button
-                type="button"
-                tabIndex={0}
-                aria-label="Previous Year"
-                onClick={() => this.addYearOffset(-1)}
-                class="year-down">
-                <ModusIconMap size="16" icon="caret_down"></ModusIconMap>
-              </button>
-            </div>
+        <div class="title">
+          <div class="calendar-title" role="heading">{`${this._calendar?.month} ${this._calendar?.year}`}</div>
+          <div class="year-icons">
+            <button type="button" tabIndex={0} aria-label="Next Year" onClick={() => this.addYearOffset(1)} class="year-up">
+              <ModusIconMap icon="caret_up" size="16"></ModusIconMap>
+            </button>
+            <button
+              type="button"
+              tabIndex={0}
+              aria-label="Previous Year"
+              onClick={() => this.addYearOffset(-1)}
+              class="year-down">
+              <ModusIconMap size="16" icon="caret_down"></ModusIconMap>
+            </button>
           </div>
-          <button type="button" tabIndex={0} aria-label="Next Month" onClick={() => this.addMonthOffset(1)}>
-            <ModusIconMap icon="chevron_right_bold"></ModusIconMap>
-          </button>
         </div>
+        <button type="button" tabIndex={0} aria-label="Next Month" onClick={() => this.addMonthOffset(1)}>
+          <ModusIconMap icon="chevron_right_bold"></ModusIconMap>
+        </button>
+      </div>
     );
   }
 

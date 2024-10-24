@@ -1,20 +1,5 @@
 import { newE2EPage } from '@stencil/core/testing';
 
-// const monthNames = [
-//   'January',
-//   'February',
-//   'March',
-//   'April',
-//   'May',
-//   'June',
-//   'July',
-//   'August',
-//   'September',
-//   'October',
-//   'November',
-//   'December',
-// ];
-
 describe('modus-date-picker', () => {
   it('renders', async () => {
     const page = await newE2EPage();
@@ -218,19 +203,16 @@ describe('modus-date-picker', () => {
       </modus-date-input>
     </modus-date-picker>`);
 
-    const datePicker = await page.find('modus-date-picker');
-
-    await page.$eval('modus-date-picker', (elm: any, props) => {
-      const is15th = (date: string) =>  {
-      if(new Date(date).getDate() === 15) {
-        return true;
-      } else {
-         return false
+    await page.$eval('modus-date-picker', (elm: HTMLModusDatePickerElement) => {
+      const is15th = (date: string) => {
+        if (new Date(date).getDate() === 15) {
+          return true;
+        } else {
+          return false;
+        }
       };
-    }
       elm.isDateEnabled = is15th;
-    }
-);
+    });
 
     const calendar = await page.find('modus-date-input >>> .icon-calendar');
     await calendar.click();
@@ -253,15 +235,13 @@ describe('modus-date-picker', () => {
       </modus-date-input>
     </modus-date-picker>`);
 
-    const datePicker = await page.find('modus-date-picker');
-
     const calendar = await page.find('modus-date-input >>> .icon-calendar');
     await calendar.click();
     await page.waitForChanges();
 
     const enabledDates = await page.findAll('modus-date-picker >>> .calendar-body .calendar-day:not(.disabled)');
     expect(enabledDates.length).toEqual(31);
-  })
+  });
 
   it('checks invalid date range validations', async () => {
     const page = await newE2EPage();
