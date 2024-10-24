@@ -42,6 +42,7 @@ graph TD;
   modus-table-cell-editor --> modus-date-picker
   modus-table-cell-editor --> modus-date-input
   modus-table-cell-editor --> modus-autocomplete
+  modus-date-picker --> modus-progress-bar
   modus-autocomplete --> modus-text-input
   modus-autocomplete --> modus-chip
   modus-autocomplete --> modus-spinner
