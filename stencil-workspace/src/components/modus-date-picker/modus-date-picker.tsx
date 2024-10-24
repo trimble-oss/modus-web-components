@@ -37,6 +37,15 @@ export class ModusDatePicker {
   /** (optional) The placement of the calendar popup */
   @Prop() position: Placement | 'auto' | 'auto-start' | 'auto-end' = 'bottom-start';
 
+  /** (optional) Function to check if a date is enabled
+   * If true, the day will be enabled/interactive. If false, the day will be disabled/non-interactive.
+   * The function accepts an ISO 8601 date string of a given day. By default, all days are enabled.
+   * Developers can use this function to write custom logic to disable certain days.
+   * The function is called for each rendered calendar day.
+   * This function should be optimized for performance to avoid jank.
+   * */
+  @Prop() isDateEnabled: (dateIsoString: string) => boolean | undefined;
+
   /** Needed for a better control over the state and avoid re-renders */
   @State() _forceUpdate = {};
 
@@ -94,7 +103,7 @@ export class ModusDatePicker {
         middleware.push(flip());
       }
 
-      if(this.position === 'auto') {
+      if (this.position === 'auto') {
         options.strategy = 'fixed';
       }
 
@@ -327,7 +336,9 @@ export class ModusDatePicker {
               const isSingleDateSelected = singleDate && this.compare(date, singleDate) === 0;
               const isSelected = isStartDate || isEndDate || isSingleDateSelected;
               const isInRange = !isSelected ? positions['in-range'] : false;
-              const isDateDisabled = !this.isWithinCurrentMinMax(date);
+              const isDateOutOfMaxMinRange = !this.isWithinCurrentMinMax(date);
+
+              const isDateEnabled = this.isDateEnabled ? this.isDateEnabled(date.toISOString()) : true;
 
               // Only for the last date in the calendar
               const onBlurEvent =
@@ -339,18 +350,20 @@ export class ModusDatePicker {
                     }
                   : {};
 
+              const buttonDisabled = isDateOutOfMaxMinRange || !isDateEnabled;
+
               return (
                 <button
                   class={{
                     'calendar-day grid-item': true,
                     selected: isSelected,
-                    disabled: isDateDisabled,
+                    disabled: buttonDisabled,
                     start: isStartDate && !isEndDate,
                     end: isEndDate && !isStartDate,
                     'current-day': isToday,
                     'range-selected': isInRange,
                   }}
-                  disabled={isDateDisabled}
+                  disabled={buttonDisabled}
                   tabIndex={0}
                   type="button"
                   aria-current={isSelected ? 'date' : undefined}
