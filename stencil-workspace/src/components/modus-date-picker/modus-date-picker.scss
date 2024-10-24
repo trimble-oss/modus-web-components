@@ -85,9 +85,9 @@
         justify-content: center;
       }
 
-      .calendar-title:focus+.year-icons,
-      .calendar-title:hover+.year-icons,
-      .calendar-title:active+.year-icons,
+      .calendar-title:focus + .year-icons,
+      .calendar-title:hover + .year-icons,
+      .calendar-title:active + .year-icons,
       .year-icons:hover,
       .year-icons:focus,
       .year-icons:focus-within {
@@ -103,17 +103,6 @@
         button:active {
           opacity: 0.5;
         }
-      }
-    }
-
-    .calendar-header-container {
-      position: relative;
-
-      .progress-bar-container {
-        width: calc(100% - 2px);
-        padding: 0 1px;
-        position: absolute;
-        bottom: -4px;
       }
     }
 
@@ -223,7 +212,6 @@
         position: absolute;
 
         &.invalid-date-range {
-
           .start::after,
           .end::after {
             opacity: 0;

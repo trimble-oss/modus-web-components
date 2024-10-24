@@ -46,8 +46,6 @@ export class ModusDatePicker {
    * */
   @Prop() isDateEnabled: (dateIsoString: string) => boolean | undefined;
 
-  @Prop() isDateEnabledLoading: boolean;
-
   /** Needed for a better control over the state and avoid re-renders */
   @State() _forceUpdate = {};
 
@@ -390,7 +388,6 @@ export class ModusDatePicker {
 
   private renderCalendarHeader() {
     return (
-      <div class="calendar-header-container">
         <div class="calendar-header">
           <button type="button" aria-label="Previous Month" onClick={() => this.addMonthOffset(-1)}>
             <ModusIconMap icon="chevron_left_bold"></ModusIconMap>
@@ -416,10 +413,6 @@ export class ModusDatePicker {
             <ModusIconMap icon="chevron_right_bold"></ModusIconMap>
           </button>
         </div>
-        <div class="progress-bar-container">
-          {this.isDateEnabledLoading && <modus-progress-bar size="compact" mode="indeterminate"></modus-progress-bar>}
-        </div>
-      </div>
     );
   }
 

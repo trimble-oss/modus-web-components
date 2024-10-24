@@ -21,19 +21,6 @@
 | `value`           | `value`            | (optional) The progress bar's value.               | `number`                            | `0`             |
 
 
-## Dependencies
-
-### Used by
-
- - [modus-date-picker](../modus-date-picker)
-
-### Graph
-```mermaid
-graph TD;
-  modus-date-picker --> modus-progress-bar
-  style modus-progress-bar fill:#f9f,stroke:#333,stroke-width:4px
-```
-
 ----------------------------------------------
 
 
