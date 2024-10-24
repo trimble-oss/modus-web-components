@@ -360,14 +360,12 @@ const DefaultWithPickerTemplate = ({
   validText,
   value,
   isDateEnabled,
-  isDateEnabledLoading
 }) => {
-  console.log("Rendering picker, isDateEnabledLoading", isDateEnabledLoading)
     setTimeout(() => {
       isDateEnabledLoading = false;
     }, 4000);
     return html`
-      <modus-date-picker .isDateEnabledLoading=${isDateEnabledLoading} .isDateEnabled=${isDateEnabled} position=${position}>
+      <modus-date-picker .isDateEnabled=${isDateEnabled} position=${position}>
         <modus-date-input
           allowed-chars-regex=${allowedCharsRegex}
           aria-label=${ariaLabel}
@@ -392,6 +390,7 @@ const DefaultWithPickerTemplate = ({
   ` };
 
 export const DefaultWithPicker = DefaultWithPickerTemplate.bind({});
+// Uncomment and pass in as isDateEnabled below to test isDateEnabled functionality
 // const isWeekend = (isoString: string) => {
 //   const date = new Date(isoString);
 //   const isWeekend  = date.getDay() === 0 || date.getDay() === 6;
