@@ -10,7 +10,18 @@ import { ModusIconMap } from '../../icons/ModusIconMap';
 import ModusDatePickerCalendar from './utils/modus-date-picker.calendar';
 import ModusDatePickerState from './utils/modus-date-picker.state';
 import { ModusDateInputEventDetails } from '../modus-date-input/utils/modus-date-input.models';
-import { createPopper, Instance, Placement } from '@popperjs/core';
+import {
+  Alignment,
+  autoPlacement,
+  flip,
+  AutoPlacementOptions,
+  autoUpdate,
+  computePosition,
+  ComputePositionConfig,
+  Placement,
+  shift,
+  limitShift,
+} from '@floating-ui/dom';
 
 @Component({
   tag: 'modus-date-picker',
@@ -24,7 +35,7 @@ export class ModusDatePicker {
   @Prop() label: string;
 
   /** (optional) The placement of the calendar popup */
-  @Prop() position: Placement = 'bottom-start';
+  @Prop() position: Placement | 'auto' | 'auto-start' | 'auto-end' = 'bottom-start';
 
   /** Needed for a better control over the state and avoid re-renders */
   @State() _forceUpdate = {};
@@ -35,7 +46,6 @@ export class ModusDatePicker {
   private _calendar: ModusDatePickerCalendar;
   private _dateInputs: { [key: string]: ModusDatePickerState } = {};
   private _locale = 'default';
-  private _popperInstance: Instance;
 
   private get _currentInput(): ModusDatePickerState {
     return Object.values(this._dateInputs).find((dt) => dt.isCalendarOpen());
@@ -45,54 +55,57 @@ export class ModusDatePicker {
     this._calendar = new ModusDatePickerCalendar();
   }
 
-  componentDidLoad() {
-    this.initializePopper();
-  }
-
   componentDidUpdate() {
     if (this._showCalendar) {
-      this.initializePopper();
+      this.configureCalendarPopover();
     } else {
-      this.destroyPopper();
+      this.cleanupPopover?.();
     }
   }
 
   disconnectedCallback() {
-    this.destroyPopper();
+    this.cleanupPopover?.();
   }
 
-  initializePopper() {
+  cleanupPopover: () => void | undefined = undefined;
+
+  configureCalendarPopover() {
     const referenceElement = this.element.shadowRoot.querySelector('.calendar') as HTMLElement;
-    const popperElement = this.element.shadowRoot.querySelector('.calendar-container') as HTMLElement;
+    const floatingElement = this.element.shadowRoot.querySelector('.calendar-container') as HTMLElement;
 
-    if (referenceElement && popperElement && !this._popperInstance) {
-      this._popperInstance = createPopper(referenceElement, popperElement, {
-        placement: this.position,
-        strategy: this.position === 'auto' ? 'fixed' : 'absolute',
-        modifiers: [
-          {
-            name: 'offset',
-            options: {
-              offset: [0.2, 0.2],
-              mainAxis: false,
-            },
-          },
-          {
-            name: 'preventOverflow',
-            options: {
-              boundary: 'viewport',
-            },
-          },
-        ],
+    this.cleanupPopover = autoUpdate(referenceElement, floatingElement, () => {
+      const options: Partial<ComputePositionConfig> = {};
+      const middleware = [];
+
+      // The preventOverflow modifier from Popper is now called shift.
+      // This is because technically many modifiers in Popper 2 “prevented overflow”,
+      // which does not describe what it is actually doing unlike shift. (https://floating-ui.com/docs/migration#configure-middleware)
+      middleware.push(shift({ limiter: limitShift() }));
+
+      if (this.position.includes('auto')) {
+        const autoPlacementOptions: AutoPlacementOptions = {};
+        if (this.position.includes('-')) {
+          const [, alignment] = this.position.split('-');
+          autoPlacementOptions.alignment = alignment as Alignment;
+        }
+        middleware.push(autoPlacement(autoPlacementOptions));
+      } else {
+        options.placement = this.position as Placement;
+        middleware.push(flip());
+      }
+
+      if(this.position === 'auto') {
+        options.strategy = 'fixed';
+      }
+
+      options.middleware = middleware;
+      computePosition(referenceElement, floatingElement, options).then(({ x, y }) => {
+        Object.assign(floatingElement.style, {
+          left: `${x}px`,
+          top: `${y}px`,
+        });
       });
-    }
-  }
-
-  destroyPopper() {
-    if (this._popperInstance) {
-      this._popperInstance.destroy();
-      this._popperInstance = null;
-    }
+    });
   }
 
   /** Handlers */

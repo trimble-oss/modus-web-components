@@ -40,9 +40,7 @@ They are referenced using the `<modus-file-dropzone>` tag.
 </modus-file-dropzone>
 
 <script>
-  document
-    .querySelector('modus-file-dropzone')
-    .addEventListener('files', (event) => {
+  document.querySelector('modus-file-dropzone').addEventListener('files', (event) => {
     const [files, error] = event.detail;
     console.log(files);
     console.log(error);

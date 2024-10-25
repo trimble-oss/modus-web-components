@@ -1,6 +1,6 @@
 {
   "name": "@trimble-oss/modus-web-components",
-  "version": "0.39.0",
+  "version": "0.40.0",
   "description": "Trimble Modus Web Component Library",
   "homepage": "https://modus-web-components.trimble.com/",
   "bugs": {
@@ -41,6 +41,7 @@
     "prebuild": "tsc generate-icons/generate-icons.ts && node generate-icons/generate-icons.js"
   },
   "dependencies": {
+    "@floating-ui/dom": "^1.6.11",
     "@popperjs/core": "^2.11.8",
     "@stencil/core": "^4.12.4",
     "@tanstack/table-core": "^8.20.5"

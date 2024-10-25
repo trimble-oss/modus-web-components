@@ -7,7 +7,7 @@ export default {
   argTypes: {
     collapseOnClickOutside: {
       name: 'collapse-on-click-outside',
-      description: " To choose whether to collapse the panel when clicked outside",
+      description: ' To choose whether to collapse the panel when clicked outside',
       table: {
         type: { summary: 'boolean' },
       },
@@ -20,22 +20,19 @@ export default {
     },
     maxWidth: {
       name: 'max-width',
-      description: "Maximum width of the side navigation panel in an expanded state",
+      description: 'Maximum width of the side navigation panel in an expanded state',
       table: {
         defaultValue: { summary: '256px' },
         type: { summary: 'string' },
       },
     },
-    mode:
-    {
+    mode: {
       control: {
-        options: [
-          'overlay',
-          'push',
-        ],
+        options: ['overlay', 'push'],
         type: 'select',
       },
-      description: 'Mode to make side navigation either overlay or push the content for the selector specified in `targetContent`',
+      description:
+        'Mode to make side navigation either overlay or push the content for the selector specified in `targetContent`',
       table: {
         defaultValue: { summary: `'overlay'` },
         type: {
@@ -44,14 +41,15 @@ export default {
       },
     },
     expanded: {
-      description: "The expanded state of side navigation panel and items",
+      description: 'The expanded state of side navigation panel and items',
       table: {
         type: { summary: 'boolean' },
       },
     },
     targetContent: {
-      name: "target-content",
-      description: "Specify the selector for the page's content for which paddings and margins will be set by side navigation based on the `mode`",
+      name: 'target-content',
+      description:
+        "Specify the selector for the page's content for which paddings and margins will be set by side navigation based on the `mode`",
       table: {
         type: { summary: 'string' },
       },
@@ -72,23 +70,11 @@ export default {
   },
 };
 
-const DefaultTemplate = ({
-  collapseOnClickOutside,
-  maxWidth,
-  mode,
-  expanded,
-  targetContent,
-}) => html`
+const DefaultTemplate = ({ collapseOnClickOutside, maxWidth, mode, expanded, targetContent }) => html`
   <div id="defaultTemplate">
     <div
       style="width: 100%;align-items: center;height: 56px;box-shadow: 0 0 2px var(--modus-secondary)!important; margin-top: 50px;">
-      <modus-navbar
-        id="navbar"
-        show-apps-menu
-        show-help
-        show-main-menu
-        show-notifications>
-      </modus-navbar>
+      <modus-navbar id="navbar" show-apps-menu show-help show-main-menu show-notifications> </modus-navbar>
     </div>
 
     <div
@@ -118,16 +104,13 @@ const DefaultTemplate = ({
       <div id="panelcontent" style="padding: 10px;">
         <div id="overview">
           <p>
-            The side navigation of an application provides context through
-            accessible menu options and positions a consistent component to
-            connect to various pages in the application.
+            The side navigation of an application provides context through accessible menu options and positions a consistent
+            component to connect to various pages in the application.
           </p>
           <p>
-            The side navigation is a collapsible side content of the site’s
-            pages. It is located alongside the page’s primary content. The
-            component is designed to add side content to a fullscreen
-            application. It is activated through the “hamburger” menu in the
-            Navbar.
+            The side navigation is a collapsible side content of the site’s pages. It is located alongside the page’s primary
+            content. The component is designed to add side content to a fullscreen application. It is activated through the
+            “hamburger” menu in the Navbar.
           </p>
         </div>
       </div>
@@ -144,57 +127,38 @@ Default.args = {
   targetContent: '#defaultTemplate #panelcontent',
 };
 
-const SideNavigationWithDataTemplate = ({
-  collapseOnClickOutside,
-  maxWidth,
-  mode,
-  expanded,
-  targetContent,
-}) => html`
+const SideNavigationWithDataTemplate = ({ collapseOnClickOutside, maxWidth, mode, expanded, targetContent }) => html`
   <div id="dataTemplate">
     <modus-switch id="switch-theme" label="Enable blue theme"></modus-switch>
     <br />
-    <modus-switch
-      id="switch-mode"
-      label="Enable Push Side Navigation"></modus-switch>
+    <modus-switch id="switch-mode" label="Enable Push Side Navigation"></modus-switch>
     <div
       style="width: 100%;align-items: center;height: 56px;box-shadow: 0 0 2px var(--modus-secondary)!important; margin-top: 10px;">
-      <modus-navbar
-        id="navbar"
-        show-apps-menu
-        show-help
-        show-main-menu
-        show-notifications>
-      </modus-navbar>
+      <modus-navbar id="navbar" show-apps-menu show-help show-main-menu show-notifications> </modus-navbar>
     </div>
 
     <div
       id="container"
       style="display:flex; min-height:500px; overflow-y: auto; position: relative;box-shadow: 0 0 2px var(--modus-secondary)!important;">
       <modus-side-navigation
-      max-width=${maxWidth}
-      id="sideNav"
-      collapse-on-click-outside=${collapseOnClickOutside}
-      mode=${mode}
-      expanded=${expanded}
-      target-content=${targetContent}>
+        max-width=${maxWidth}
+        id="sideNav"
+        collapse-on-click-outside=${collapseOnClickOutside}
+        mode=${mode}
+        expanded=${expanded}
+        target-content=${targetContent}>
       </modus-side-navigation>
 
-      <div
-        id="panelcontent"
-        style="padding:10px; transition: all 0.25s linear 0s;">
+      <div id="panelcontent" style="padding:10px; transition: all 0.25s linear 0s;">
         <div id="overview">
           <p>
-            The side navigation of an application provides context through
-            accessible menu options and positions a consistent component to
-            connect to various pages in the application.
+            The side navigation of an application provides context through accessible menu options and positions a consistent
+            component to connect to various pages in the application.
           </p>
           <p>
-            The side navigation is a collapsible side content of the site’s
-            pages. It is located alongside the page’s primary content. The
-            component is designed to add side content to a fullscreen
-            application. It is activated through the “hamburger” menu in the
-            Navbar.
+            The side navigation is a collapsible side content of the site’s pages. It is located alongside the page’s primary
+            content. The component is designed to add side content to a fullscreen application. It is activated through the
+            “hamburger” menu in the Navbar.
           </p>
         </div>
       </div>
@@ -289,10 +253,10 @@ const setJavascriptDefaultTemplate = (containerId) => {
 };
 
 const setJavascriptDataTemplate = (containerId) => {
-  const homeIcon = "home";
-  const usageIcon = "flowchart";
-  const stylesIcon = "bar_graph_line";
-  const accessibilityIcon = "screen";
+  const homeIcon = 'home';
+  const usageIcon = 'flowchart';
+  const stylesIcon = 'bar_graph_line';
+  const accessibilityIcon = 'screen';
 
   const selectionHandler = `
     onSideNavItemClicked: (e)=>{
