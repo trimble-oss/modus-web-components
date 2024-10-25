@@ -43,6 +43,9 @@ export class ModusDateInput {
   /** (optional) Custom error text displayed for the input. */
   @Prop() errorText: string;
 
+  /** Handles the internal error text */
+  @State() internalErrorText: string;
+
   /** (optional) Filler date is used as fillers for parts not in the display format when constructing a full date string, for 'value'. It must be in the ISO String format YYYY-MM-DD. Default is {current year}-01-01. */
   @Prop() fillerDate: string;
   @Watch('fillerDate')
@@ -226,7 +229,7 @@ export class ModusDateInput {
 
   // Helpers
   clearValidation(): void {
-    this.errorText = null;
+    this.internalErrorText = null;
   }
 
   /** Check if the input string matches any of the alternative formats. */
@@ -266,18 +269,18 @@ export class ModusDateInput {
   }
 
   validateInput(inputString: string | null): void {
-    if (this.disableValidation) return;
+    if (this.disableValidation || this.errorText) return;
 
     if (!inputString) {
       if (this.required) {
-        this.errorText = 'Required';
-        this.valueError.emit(this.errorText);
+        this.internalErrorText = 'Required';
+        this.valueError.emit(this.internalErrorText);
       } else {
         this.clearValidation();
       }
     } else if (!this.value) {
-      this.errorText = 'Invalid date';
-      this.valueError.emit(this.errorText);
+      this.internalErrorText = 'Invalid date';
+      this.valueError.emit(this.internalErrorText);
     } else {
       this.validateMinMax();
     }
@@ -290,12 +293,12 @@ export class ModusDateInput {
 
     if (min && min > value) {
       min.setUTCDate(min.getDate() - 1);
-      this.errorText = `Select a date after ${this._formatter.formatDisplayString(min.toISOString())}`;
-      this.valueError.emit(this.errorText);
+      this.internalErrorText = `Select a date after ${this._formatter.formatDisplayString(min.toISOString())}`;
+      this.valueError.emit(this.internalErrorText);
     } else if (max && max < value) {
       max.setUTCDate(max.getDate() + 1);
-      this.errorText = `Select a date before ${this._formatter.formatDisplayString(max.toISOString())}`;
-      this.valueError.emit(this.errorText);
+      this.internalErrorText = `Select a date before ${this._formatter.formatDisplayString(max.toISOString())}`;
+      this.valueError.emit(this.internalErrorText);
     } else {
       this.clearValidation();
     }
@@ -303,6 +306,8 @@ export class ModusDateInput {
 
   render() {
     const className = `modus-date-input ${this.disabled ? 'disabled' : ''}`;
+    const displayErrorMessage = this.internalErrorText || this.errorText;
+
     return (
       <div class={className}>
         {this.label || this.required ? (
@@ -313,12 +318,12 @@ export class ModusDateInput {
           </div>
         ) : null}
         <div
-          class={`input-container ${this.errorText ? 'error' : this.validText ? 'valid' : ''} ${this.classBySize.get(
+          class={`input-container ${displayErrorMessage ? 'error' : this.validText ? 'valid' : ''} ${this.classBySize.get(
             this.size
           )}`}
-          part={`input-container ${this.errorText ? 'error' : this.validText ? 'valid' : ''}`}>
+          part={`input-container ${displayErrorMessage ? 'error' : this.validText ? 'valid' : ''}`}>
           <input
-            aria-invalid={!!this.errorText}
+            aria-invalid={!!displayErrorMessage}
             aria-label={this.ariaLabel || undefined}
             aria-required={this.required?.toString()}
             autofocus={this.autoFocusInput}
@@ -349,10 +354,10 @@ export class ModusDateInput {
           )}
         </div>
         <div class="sub-text" part="sub-text">
-          {this.errorText ? (
-            <label class="error">{this.errorText}</label>
+          {displayErrorMessage ? (
+            <label class="error">{displayErrorMessage}</label>
           ) : this.validText ? (
-            <label class="valid">{this.validText}</label>
+            <label class="valid">{displayErrorMessage}</label>
           ) : null}
         </div>
       </div>
