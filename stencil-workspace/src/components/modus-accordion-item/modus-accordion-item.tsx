@@ -27,6 +27,9 @@ export class ModusAccordionItem {
   /** (optional) The icon to display before the header text. */
   @Prop() icon: string;
 
+  /** (optional) The label of the accordion. */
+  @Prop() label: string;
+
   /** (optional) The size of accordion item. */
   @Prop() size: 'condensed' | 'standard' = 'standard';
 
@@ -117,9 +120,10 @@ export class ModusAccordionItem {
   };
 
   renderIcon(): JSX.Element {
+    const iconSize = this.size === 'condensed' ? '20' : '24';
     return (
       <span class="icon">
-        <ModusIconMap icon={this.icon}></ModusIconMap>
+        <ModusIconMap icon={this.icon} size={iconSize}></ModusIconMap>
       </span>
     );
   }
@@ -130,6 +134,7 @@ export class ModusAccordionItem {
     const expandedClass = `${this.expanded ? 'expanded' : ''}`;
     const bodyClass = `body ${sizeClass} collapse${this.expanded ? ' show' : ''}`;
     const headerClass = `header ${sizeClass} ${disabledClass} ${expandedClass}`;
+    const expandIconSize = this.size === 'condensed' ? '16' : '18';
 
     return (
       <div
@@ -145,15 +150,18 @@ export class ModusAccordionItem {
           onKeyDown={(event) => this.handleKeydown(event)}
           tabIndex={this.disabled ? -1 : 0}>
           {this.icon ? this.renderIcon() : null}
-          <span class="title">{this.headerText}</span>
+          <div class="label-container">
+            <span class="title">{this.headerText}</span>
+            {this.label && <span class="label">{this.label}</span>}
+          </div>
           {
             <div
               class={`chevron-container ${this.expanded ? 'reverse' : ''} `}
               ref={(el) => (this.chevronContainerRef = el)}>
               {this.expandButtonType == 'circleArrow' ? (
-                <IconExpandMoreCircle size="24"></IconExpandMoreCircle>
+                <IconExpandMoreCircle size={expandIconSize}></IconExpandMoreCircle>
               ) : (
-                <IconExpandMore size="24"></IconExpandMore>
+                <IconExpandMore size={expandIconSize}></IconExpandMore>
               )}
             </div>
           }

@@ -23,6 +23,14 @@ export default {
       },
       options: ['standardArrow', 'circleArrow'],
     },
+    label: {
+      name: 'label',
+      type: 'string',
+      description: 'The label of the accordion',
+      table: {
+        type: { summary: 'string' },
+      },
+    },
   },
   parameters: {
     controls: {
@@ -37,11 +45,11 @@ export default {
   },
 };
 
-const Template = ({expandButtonType, icon}) => html`
+const Template = ({expandButtonType, icon, label}) => html`
   <modus-accordion>
-    <modus-accordion-item header-text="Item 1" icon=${icon} expand-button-type=${expandButtonType}>Content</modus-accordion-item>
-    <modus-accordion-item header-text="Item 2" icon=${icon} expand-button-type=${expandButtonType}>Content</modus-accordion-item>
-    <modus-accordion-item disabled header-text="Item 3" icon=${icon} expand-button-type=${expandButtonType}>
+    <modus-accordion-item header-text="Item 1" icon=${icon} expand-button-type=${expandButtonType} label=${label}>Content</modus-accordion-item>
+    <modus-accordion-item header-text="Item 2" icon=${icon} expand-button-type=${expandButtonType} label=${label}>Content</modus-accordion-item>
+    <modus-accordion-item disabled header-text="Item 3" icon=${icon} expand-button-type=${expandButtonType} label=${label}>
       Content
     </modus-accordion-item>
   </modus-accordion>
