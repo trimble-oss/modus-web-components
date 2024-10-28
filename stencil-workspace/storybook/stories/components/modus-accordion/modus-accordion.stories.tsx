@@ -23,10 +23,10 @@ export default {
       },
       options: ['standardArrow', 'circleArrow'],
     },
-    label: {
-      name: 'label',
+    supportingLabel: {
+      name: 'supportingLabel',
       type: 'string',
-      description: 'The label of the accordion',
+      description: 'The supportingLabel of the accordion',
       table: {
         type: { summary: 'string' },
       },
@@ -46,15 +46,28 @@ export default {
   },
 };
 
-const Template = ({ expandButtonType, icon, label }) => html`
+const Template = ({ expandButtonType, icon, supportingLabel }) => html`
   <modus-accordion>
-    <modus-accordion-item header-text="Item 1" icon=${icon} expand-button-type=${expandButtonType} label=${label}
+    <modus-accordion-item
+      header-text="Item 1"
+      icon=${icon}
+      expand-button-type=${expandButtonType}
+      supporting-label=${supportingLabel}
       >Content</modus-accordion-item
     >
-    <modus-accordion-item header-text="Item 2" icon=${icon} expand-button-type=${expandButtonType} label=${label}
+    <modus-accordion-item
+      header-text="Item 2"
+      icon=${icon}
+      expand-button-type=${expandButtonType}
+      supporting-label=${supportingLabel}
       >Content</modus-accordion-item
     >
-    <modus-accordion-item disabled header-text="Item 3" icon=${icon} expand-button-type=${expandButtonType} label=${label}>
+    <modus-accordion-item
+      disabled
+      header-text="Item 3"
+      icon=${icon}
+      expand-button-type=${expandButtonType}
+      supporting-label=${supportingLabel}>
       Content
     </modus-accordion-item>
   </modus-accordion>
@@ -63,19 +76,19 @@ const Template = ({ expandButtonType, icon, label }) => html`
 const DefaultTemplateArgs = {
   expandButtonType: 'standardArrow',
   icon: '',
-  label: 'Item Label',
+  supportingLabel: 'Item Label',
 };
 
 const WithIconTemplateArgs = {
   expandButtonType: 'standardArrow',
   icon: 'notifications',
-  label: 'Item Label',
+  supportingLabel: 'Item Label',
 };
 
 const CircleArrowTemplateArgs = {
   expandButtonType: 'circleArrow',
   icon: '',
-  label: 'Item Label',
+  supportingLabel: 'Item Label',
 };
 
 export const Default = Template.bind({});

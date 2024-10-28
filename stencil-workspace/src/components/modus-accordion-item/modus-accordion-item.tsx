@@ -27,8 +27,8 @@ export class ModusAccordionItem {
   /** (optional) The icon to display before the header text. */
   @Prop() icon: string;
 
-  /** (optional) The label of the accordion. */
-  @Prop() label: string;
+  /** (optional) The supportingLabel of the accordion. */
+  @Prop() supportingLabel: string;
 
   /** (optional) The size of accordion item. */
   @Prop() size: 'condensed' | 'standard' = 'standard';
@@ -134,7 +134,7 @@ export class ModusAccordionItem {
     const expandedClass = `${this.expanded ? 'expanded' : ''}`;
     const bodyClass = `body ${sizeClass} collapse${this.expanded ? ' show' : ''}`;
     const headerClass = `header ${sizeClass} ${disabledClass} ${expandedClass}`;
-    const expandIconSize = this.size === 'condensed' ? '16' : '18';
+    const expandIconSize = this.size === 'condensed' ? '20' : '24';
 
     return (
       <div
@@ -152,7 +152,7 @@ export class ModusAccordionItem {
           {this.icon ? this.renderIcon() : null}
           <div class="label-container">
             <span class="title">{this.headerText}</span>
-            {this.label && <span class="label">{this.label}</span>}
+            {this.supportingLabel && <span class="supporting-label">{this.supportingLabel}</span>}
           </div>
           {
             <div

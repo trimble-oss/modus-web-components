@@ -58,7 +58,7 @@ describe('modus-accordion-item', () => {
     const iconElement = await page.find('modus-accordion-item >>> .icon-expand-more');
     let iconComputedStyle = await iconElement.getComputedStyle();
     expect(headerElement).toHaveClass('standard');
-    expect(iconComputedStyle['height']).toEqual('18px');
+    expect(iconComputedStyle['height']).toEqual('24px');
 
     component.setProperty('size', 'condensed');
     await page.waitForChanges();
@@ -143,8 +143,8 @@ describe('modus-accordion-item', () => {
   it('renders changes to the label prop', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<modus-accordion-item label="label"></modus-accordion-item>');
-    const element = await page.find('modus-accordion-item >>> .label');
+    await page.setContent('<modus-accordion-item supporting-label="label"></modus-accordion-item>');
+    const element = await page.find('modus-accordion-item >>> .supporting-label');
 
     expect(element.innerText).toEqual('label');
   });
