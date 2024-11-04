@@ -307,6 +307,7 @@ export class ModusDateInput {
   render() {
     const className = `modus-date-input ${this.disabled ? 'disabled' : ''}`;
     const displayErrorMessage = this.internalErrorText || this.errorText;
+    const displayValidMessage = !displayErrorMessage && this.validText;
 
     return (
       <div class={className}>
@@ -356,8 +357,8 @@ export class ModusDateInput {
         <div class="sub-text" part="sub-text">
           {displayErrorMessage ? (
             <label class="error">{displayErrorMessage}</label>
-          ) : this.validText ? (
-            <label class="valid">{displayErrorMessage}</label>
+          ) : displayValidMessage ? (
+            <label class="valid">{this.validText}</label>
           ) : null}
         </div>
       </div>
