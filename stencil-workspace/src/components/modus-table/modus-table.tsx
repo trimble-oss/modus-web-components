@@ -176,6 +176,7 @@ export class ModusTable {
   @Prop() rowsExpandable = false;
   @Watch('rowsExpandable') onRowsExpandableChange(newVal: boolean) {
     if (newVal) {
+      this.pagination = true;
       this.freezeColumn(this.tableState.columnOrder[0]);
     }
   }
