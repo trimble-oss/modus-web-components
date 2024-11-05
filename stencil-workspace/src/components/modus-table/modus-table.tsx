@@ -624,7 +624,7 @@ export class ModusTable {
       columnResize: this.columnResize,
       sort: this.sort,
       pagination: this.pagination,
-      rowsExandable: this.rowsExpandable,
+      rowsExpandable: this.rowsExpandable,
       pageSizeList: this.pageSizeList,
       rowSelection: this.rowSelection,
       rowSelectionOptions: this.rowSelectionOptions,
