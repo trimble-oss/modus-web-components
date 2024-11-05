@@ -34,6 +34,7 @@ export interface TableCoreOptions {
   columnResize: boolean;
   sort: boolean;
   pagination: boolean;
+  rowsExandable: boolean;
   rowSelection: boolean;
   rowSelectionOptions: ModusTableRowSelectionOptions;
   columnOrder: string[];
@@ -71,6 +72,7 @@ export default class ModusTableCore {
       pagination,
       preSelectedRows,
       rowSelection,
+      rowsExandable,
       rowSelectionOptions,
       columnOrder,
       pageSizeList,
@@ -108,7 +110,7 @@ export default class ModusTableCore {
         rowSelection: preSelectedRows,
         pagination: {
           pageIndex: 0,
-          pageSize: pagination ? (currentPageSize ? currentPageSize : pageSizeList[0]) : data?.length,
+          pageSize: pagination || rowsExandable ? (currentPageSize ? currentPageSize : pageSizeList[0]) : data?.length,
         },
       },
       enableRowSelection: rowSelection,
