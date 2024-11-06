@@ -85,6 +85,10 @@ export namespace Components {
           * (optional) The size of accordion item.
          */
         "size": 'condensed' | 'standard';
+        /**
+          * (optional) The supportingLabel of the accordion.
+         */
+        "supportingLabel": string;
     }
     interface ModusActionBar {
         /**
@@ -3001,6 +3005,10 @@ declare namespace LocalJSX {
           * (optional) The size of accordion item.
          */
         "size"?: 'condensed' | 'standard';
+        /**
+          * (optional) The supportingLabel of the accordion.
+         */
+        "supportingLabel"?: string;
     }
     interface ModusActionBar {
         /**
