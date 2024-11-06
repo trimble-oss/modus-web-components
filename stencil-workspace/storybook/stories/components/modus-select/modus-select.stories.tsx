@@ -70,7 +70,7 @@ const setSelects = () => {
       select6.options = options;
       select6.addEventListener('valueChange', function handleValueChange(e) {
          const selectedOption = e.detail;
-         select6.value = selectedOption;
+         select6.value = selectedOption.display;
       });
   `;
 

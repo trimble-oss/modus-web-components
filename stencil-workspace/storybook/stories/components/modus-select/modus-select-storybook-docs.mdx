@@ -50,7 +50,7 @@ This component is compatible with Angular reactive forms. This can be achieved t
   select1.value = options[0];
   select1.addEventListener('valueChange', function handleValueChange(e) {
     const selectedOption = e.detail;
-    select1.value = selectedOption;
+    select1.value = selectedOption.display;
   });
 
   const select2 = document.querySelector('#select-demo-2');
@@ -58,7 +58,7 @@ This component is compatible with Angular reactive forms. This can be achieved t
   select2.value = options[1];
   select2.addEventListener('valueChange', function handleValueChange(e) {
     const selectedOption = e.detail;
-    select2.value = selectedOption;
+    select2.value = selectedOption.display;
   });
 
   const select5 = document.querySelector('#select-demo-5');
@@ -66,14 +66,14 @@ This component is compatible with Angular reactive forms. This can be achieved t
   select5.value = options[2];
   select5.addEventListener('valueChange', function handleValueChange(e) {
     const selectedOption = e.detail;
-    select5.value = selectedOption;
+    select5.value = selectedOption.display;
   });
 
   const select6 = document.querySelector('#select-demo-6');
   select6.options = options;
   select6.addEventListener('valueChange', function handleValueChange(e) {
     const selectedOption = e.detail;
-    select6.value = selectedOption;
+    select6.value = selectedOption.display;
   });
 </script>
 ```
