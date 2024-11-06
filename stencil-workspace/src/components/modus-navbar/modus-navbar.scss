@@ -273,3 +273,9 @@ nav {
     }
   }
 }
+
+@media screen and (forced-colors: active) {
+  nav {
+    border-bottom: 1px solid transparent;
+  }
+}
