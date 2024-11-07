@@ -191,18 +191,16 @@
 
 .autocomplete[aria-readonly='true'] {
   .chips-container {
-    background-color: var(--modus-input-readonly-bg, #e0e1e9);
+    background-color: $modus-autocomplete-readonly-bg;
     border-color: transparent;
     pointer-events: none;
-    user-select: none;
 
     .input {
       &::part(input-container) {
-        background-color: var(--modus-input-readonly-bg, #e0e1e9);
+        background-color: $modus-autocomplete-readonly-bg;
         border-color: transparent;
-        color: var(--modus-input-readonly-color, #a3a6b1);
+        color: $modus-autocomplete-readonly-color;
         pointer-events: none;
-        user-select: none;
       }
     }
   }

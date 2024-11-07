@@ -354,7 +354,7 @@ export class ModusAutocomplete {
   };
 
   handleCloseClick(chipValue: ModusAutocompleteOption) {
-    if (this.selectedChips.length != 0) {
+    if (this.selectedChips.length != 0 && !this.readOnly) {
       this.selectedChips = this.selectedChips.filter((chip) => chip.id !== chipValue.id);
       this.valueChange.emit(this.selectedChips.map((v) => v.value));
       this.selectionsChanged.emit(this.selectedChips.map((opt) => opt.id));
