@@ -139,4 +139,13 @@ describe('modus-accordion-item', () => {
     const icon = await page.find('modus-accordion-item >>> .icon-add');
     expect(icon).toBeTruthy();
   });
+
+  it('renders changes to the label prop', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-accordion-item supporting-label="label"></modus-accordion-item>');
+    const element = await page.find('modus-accordion-item >>> .supporting-label');
+
+    expect(element.innerText).toEqual('label');
+  });
 });

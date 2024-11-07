@@ -1,6 +1,6 @@
 {
   "name": "@trimble-oss/modus-web-components",
-  "version": "0.39.0",
+  "version": "0.41.0",
   "description": "Trimble Modus Web Component Library",
   "homepage": "https://modus-web-components.trimble.com/",
   "bugs": {
@@ -41,6 +41,7 @@
     "prebuild": "tsc generate-icons/generate-icons.ts && node generate-icons/generate-icons.js"
   },
   "dependencies": {
+    "@floating-ui/dom": "^1.6.12",
     "@popperjs/core": "^2.11.8",
     "@stencil/core": "^4.12.4",
     "@tanstack/table-core": "^8.20.5"
@@ -58,8 +59,8 @@
     "cheerio": "^1.0.0-rc.12",
     "colors": "^1.4.0",
     "ejs": "^3.1.10",
-    "eslint": "^8.57.0",
-    "eslint-plugin-storybook": "^0.8.0",
+    "eslint": "8.57.1",
+    "eslint-plugin-storybook": "0.7.0",
     "jest": "^27.0.3",
     "jest-cli": "^27.5.1",
     "prettier": "3.3.3",

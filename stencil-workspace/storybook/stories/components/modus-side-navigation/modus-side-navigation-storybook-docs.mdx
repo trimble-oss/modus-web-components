@@ -28,22 +28,13 @@ A basic Modus Side Navigation with only item selection and keyboard navigation f
 <div id="defaultTemplate">
   <div
     style="width: 100%;align-items: center;height: 56px;box-shadow: 0 0 2px var(--modus-secondary)!important; margin-top: 50px;">
-    <modus-navbar
-      id="navbar"
-      show-apps-menu
-      show-help
-      show-main-menu
-      show-notifications>
-    </modus-navbar>
+    <modus-navbar id="navbar" show-apps-menu show-help show-main-menu show-notifications> </modus-navbar>
   </div>
 
   <div
     id="container"
     style="display:flex; min-height:500px; overflow-y: auto; position: relative;box-shadow: 0 0 2px var(--modus-secondary)!important;">
-    <modus-side-navigation
-      max-width="300px"
-      id="sideNav"
-      target-content="#defaultTemplate #panelcontent">
+    <modus-side-navigation max-width="300px" id="sideNav" target-content="#defaultTemplate #panelcontent">
       <modus-side-navigation-item id="home-menu" label="Home page">
         <modus-icon name="home" size="24" slot="menu-icon"></modus-icon>
       </modus-side-navigation-item>
@@ -61,15 +52,13 @@ A basic Modus Side Navigation with only item selection and keyboard navigation f
     <div id="panelcontent" style="padding:10px;">
       <div id="overview">
         <p>
-          The side navigation of an application provides context through
-          accessible menu options and positions a consistent component to
-          connect to various pages in the application.
+          The side navigation of an application provides context through accessible menu options and positions a consistent
+          component to connect to various pages in the application.
         </p>
         <p>
-          The side navigation is a collapsible side content of the site’s pages.
-          It is located alongside the page’s primary content. The component is
-          designed to add side content to a fullscreen application. It is
-          activated through the “hamburger” menu in the Navbar.
+          The side navigation is a collapsible side content of the site’s pages. It is located alongside the page’s primary
+          content. The component is designed to add side content to a fullscreen application. It is activated through the
+          “hamburger” menu in the Navbar.
         </p>
       </div>
     </div>
@@ -95,21 +84,18 @@ A basic Modus Side Navigation with only item selection and keyboard navigation f
       panel.expanded = !panel.expanded;
     });
 
-    Array.from(document.querySelectorAll('modus-side-navigation-item')).forEach(
-      (c) => {
-        c.addEventListener('sideNavItemClicked', function callbackfn(e) {
-          if (e.detail.selected) {
-            const panel = document.querySelector('#panelcontent');
-            document.querySelector('#sidenav-content-title')?.remove();
-            const el = document.createElement('h3');
-            el.id = 'sidenav-content-title';
-            el.innerHTML =
-              document.querySelector('#' + e.detail.id)?.label || 'Home page';
-            panel.insertBefore(el, document.querySelector('#overview'));
-          }
-        });
-      }
-    );
+    Array.from(document.querySelectorAll('modus-side-navigation-item')).forEach((c) => {
+      c.addEventListener('sideNavItemClicked', function callbackfn(e) {
+        if (e.detail.selected) {
+          const panel = document.querySelector('#panelcontent');
+          document.querySelector('#sidenav-content-title')?.remove();
+          const el = document.createElement('h3');
+          el.id = 'sidenav-content-title';
+          el.innerHTML = document.querySelector('#' + e.detail.id)?.label || 'Home page';
+          panel.insertBefore(el, document.querySelector('#overview'));
+        }
+      });
+    });
   }
 
   addEventHandlers();
@@ -136,44 +122,28 @@ Modus side navigation uses CSS variables for theming ex:`--modus-side-navigation
 <div id="dataTemplate">
   <modus-switch id="switch-theme" label="Enable blue theme"></modus-switch>
   <br />
-  <modus-switch
-    id="switch-mode"
-    label="Enable Push Side Navigation"></modus-switch>
+  <modus-switch id="switch-mode" label="Enable Push Side Navigation"></modus-switch>
   <div
     style="width: 100%;align-items: center;height: 56px;box-shadow: 0 0 2px var(--modus-secondary)!important; margin-top: 10px;">
-    <modus-navbar
-      id="navbar"
-      show-apps-menu
-      show-help
-      show-main-menu
-      show-notifications>
-    </modus-navbar>
+    <modus-navbar id="navbar" show-apps-menu show-help show-main-menu show-notifications> </modus-navbar>
   </div>
 
   <div
     id="container"
     style="display:flex; min-height:500px; overflow-y: auto; position: relative;box-shadow: 0 0 2px var(--modus-secondary)!important;">
-    <modus-side-navigation
-      max-width="300px"
-      id="sideNav"
-      target-content="#dataTemplate #panelcontent"
-      mode="overlay">
+    <modus-side-navigation max-width="300px" id="sideNav" target-content="#dataTemplate #panelcontent" mode="overlay">
     </modus-side-navigation>
 
-    <div
-      id="panelcontent"
-      style="padding:10px; transition: all 0.25s linear 0s;">
+    <div id="panelcontent" style="padding:10px; transition: all 0.25s linear 0s;">
       <div id="overview">
         <p>
-          The side navigation of an application provides context through
-          accessible menu options and positions a consistent component to
-          connect to various pages in the application.
+          The side navigation of an application provides context through accessible menu options and positions a consistent
+          component to connect to various pages in the application.
         </p>
         <p>
-          The side navigation is a collapsible side content of the site’s pages.
-          It is located alongside the page’s primary content. The component is
-          designed to add side content to a fullscreen application. It is
-          activated through the “hamburger” menu in the Navbar.
+          The side navigation is a collapsible side content of the site’s pages. It is located alongside the page’s primary
+          content. The component is designed to add side content to a fullscreen application. It is activated through the
+          “hamburger” menu in the Navbar.
         </p>
       </div>
     </div>
@@ -193,10 +163,10 @@ Modus side navigation uses CSS variables for theming ex:`--modus-side-navigation
     username: 'Modus User',
   };
 
-  const homeIcon = "home";
-  const usageIcon = "flowchart";
-  const stylesIcon = "bar_graph_line";
-  const accessibilityIcon = "screen";
+  const homeIcon = 'home';
+  const usageIcon = 'flowchart';
+  const stylesIcon = 'bar_graph_line';
+  const accessibilityIcon = 'screen';
 
   const selectionHandler = (e) => {
     if (e.detail) {
@@ -269,21 +239,17 @@ Modus side navigation uses CSS variables for theming ex:`--modus-side-navigation
       });
     });
 
-    document
-      .querySelector('#switch-theme')
-      .addEventListener('switchClick', (e) => {
-        const sidenav = document.querySelector('modus-side-navigation');
-        if (e.detail) {
-          sidenav.style = blueTheme;
-        } else sidenav.style = '';
-      });
+    document.querySelector('#switch-theme').addEventListener('switchClick', (e) => {
+      const sidenav = document.querySelector('modus-side-navigation');
+      if (e.detail) {
+        sidenav.style = blueTheme;
+      } else sidenav.style = '';
+    });
 
-    document
-      .querySelector('#switch-mode')
-      .addEventListener('switchClick', (e) => {
-        const sidenav = document.querySelector('modus-side-navigation');
-        sidenav.mode = sidenav.mode === 'push' ? 'overlay' : 'push';
-      });
+    document.querySelector('#switch-mode').addEventListener('switchClick', (e) => {
+      const sidenav = document.querySelector('modus-side-navigation');
+      sidenav.mode = sidenav.mode === 'push' ? 'overlay' : 'push';
+    });
   }
 
   initialize();
