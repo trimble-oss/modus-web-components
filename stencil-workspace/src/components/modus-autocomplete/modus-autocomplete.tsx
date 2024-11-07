@@ -197,7 +197,8 @@ export class ModusAutocomplete {
     this.hasFocus &&
     !this.visibleOptions?.length &&
     !this.visibleCustomOptions?.length &&
-    this.value?.length > 0;
+    this.value?.length > 0 &&
+    !this.readOnly;
 
   displayOptions = () => {
     const showOptions =
@@ -497,7 +498,7 @@ export class ModusAutocomplete {
         aria-disabled={this.disabled ? 'true' : undefined}
         aria-invalid={!!this.errorText}
         aria-label={this.ariaLabel || undefined}
-        aria-readonly={this.readOnly}
+        aria-readonly={this.readOnly ? 'true' : undefined}
         aria-required={this.required}
         class={classes}
         onFocusin={() => {
@@ -528,8 +529,9 @@ export class ModusAutocomplete {
               tabIndex={this.disabled ? -1 : 0}
               value={chip.value}
               chipId={chip.id}
+              disabled={this.disabled}
               size={this.size === 'large' ? 'medium' : 'small'}
-              show-close={!this.readOnly}
+              show-close
               onCloseClick={() => this.handleCloseClick(chip)}></modus-chip>
           ))}
           {this.TextInput()}
