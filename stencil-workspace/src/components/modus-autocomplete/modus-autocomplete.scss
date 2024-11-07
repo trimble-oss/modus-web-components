@@ -191,14 +191,14 @@
 
 .autocomplete[aria-readonly='true'] {
   .chips-container {
-    background-color: var(--modus-input-readonly-bg, #E0E1E9);
+    background-color: var(--modus-input-readonly-bg, #e0e1e9);
     border-color: transparent;
     pointer-events: none;
     user-select: none;
 
     .input {
       &::part(input-container) {
-        background-color: var(--modus-input-readonly-bg, #E0E1E9);
+        background-color: var(--modus-input-readonly-bg, #e0e1e9);
         border-color: transparent;
         color: var(--modus-input-readonly-color, #a3a6b1);
         pointer-events: none;
