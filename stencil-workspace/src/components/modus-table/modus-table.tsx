@@ -120,13 +120,15 @@ export class ModusTable {
         this.tableState.pagination.pageIndex = maxPageIndex >= 0 ? maxPageIndex : 0;
       }
     }
-    if (!this.manualPaginationOptions) {
-      this.tableCore?.setState('pagination', {
-        ...this.tableState.pagination,
-        pageIndex: this.tableState.pagination.pageIndex,
-        pageSize: this.pagination ? this.tableState.pagination.pageSize : this.data.length,
-      });
-    }
+    this.tableCore?.setState('pagination', {
+      ...this.tableState.pagination,
+      pageIndex: this.tableState.pagination.pageIndex,
+      pageSize: this.pagination
+        ? this.tableState.pagination.pageSize
+        : this.rowsExpandable
+          ? this.pageSizeList[0]
+          : this.data.length,
+    });
     this.tableCore?.setOptions('data', newVal);
   }
 
@@ -626,6 +628,7 @@ export class ModusTable {
       columnResize: this.columnResize,
       sort: this.sort,
       pagination: this.pagination,
+      rowsExpandable: this.rowsExpandable,
       pageSizeList: this.pageSizeList,
       rowSelection: this.rowSelection,
       rowSelectionOptions: this.rowSelectionOptions,
