@@ -16,7 +16,7 @@ export const ModusTablePagination: FunctionalComponent<ModusTablePaginationProps
   const { pageIndex, pageSize } = getState().pagination;
   const optionsList = pageSizeList.map((option) => ({ display: option }));
   const totalCount = manualPaginationOptions?.totalRecords ?? data?.length;
-  const selectedPageSize = optionsList.find((l) => l.display === pageSize).display;
+  const selectedPageSize = optionsList.find((l) => l.display === pageSize)?.display;
 
   const handleChange = (event) => {
     const selectedValue = event.detail;
