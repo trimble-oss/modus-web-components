@@ -359,32 +359,44 @@ const DefaultWithPickerTemplate = ({
   size,
   validText,
   value,
-}) => html`
-  <modus-date-picker position=${position}>
-    <modus-date-input
-      allowed-chars-regex=${allowedCharsRegex}
-      aria-label=${ariaLabel}
-      alt-formats=${altFormats}
-      auto-focus-input=${autoFocusInput}
-      disable-validation=${disableValidation}
-      ?disabled=${disabled}
-      error-text=${errorText}
-      format=${format}
-      helper-text=${helperText}
-      label=${label}
-      min=${min}
-      max=${max}
-      placeholder=${placeholder}
-      read-only=${readOnly}
-      ?required=${required}
-      size=${size}
-      show-calendar-icon=${showCalendarIcon}
-      valid-text=${validText}
-      value=${value}></modus-date-input>
-  </modus-date-picker>
-`;
+  isDateEnabled,
+}) => {
+    setTimeout(() => {
+      isDateEnabledLoading = false;
+    }, 4000);
+    return html`
+      <modus-date-picker .isDateEnabled=${isDateEnabled} position=${position}>
+        <modus-date-input
+          allowed-chars-regex=${allowedCharsRegex}
+          aria-label=${ariaLabel}
+          alt-formats=${altFormats}
+          auto-focus-input=${autoFocusInput}
+          disable-validation=${disableValidation}
+          ?disabled=${disabled}
+          error-text=${errorText}
+          format=${format}
+          helper-text=${helperText}
+          label=${label}
+          min=${min}
+          max=${max}
+          placeholder=${placeholder}
+          read-only=${readOnly}
+          ?required=${required}
+          size=${size}
+          show-calendar-icon=${showCalendarIcon}
+          valid-text=${validText}
+          value=${value}></modus-date-input>
+      </modus-date-picker>
+  ` };
 
 export const DefaultWithPicker = DefaultWithPickerTemplate.bind({});
+// Uncomment and pass in as isDateEnabled below to test isDateEnabled functionality
+// const isWeekend = (isoString: string) => {
+//   const date = new Date(isoString);
+//   const isWeekend  = date.getDay() === 0 || date.getDay() === 6;
+//   return isWeekend;
+// }
+
 DefaultWithPicker.args = {
   ...defaultArgs,
   position: 'bottom-start',

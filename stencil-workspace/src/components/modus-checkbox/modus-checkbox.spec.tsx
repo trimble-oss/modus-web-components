@@ -11,7 +11,7 @@ describe('modus-checkbox', () => {
       <modus-checkbox>
         <mock:shadow-root>
           <div class="modus-checkbox">
-            <input class="checkbox" aria-checked="false" id="mwc_id_0_checkbox" type="checkbox">
+            <input class="checkbox" id="mwc_id_0_checkbox" type="checkbox">
           </div>
         </mock:shadow-root>
       </modus-checkbox>
