@@ -15,6 +15,7 @@
 | `headerText`       | `header-text`        | (required) The text to render in the header.                   | `string`                           | `undefined`       |
 | `icon`             | `icon`               | (optional) The icon to display before the header text.         | `string`                           | `undefined`       |
 | `size`             | `size`               | (optional) The size of accordion item.                         | `"condensed" \| "standard"`        | `'standard'`      |
+| `supportingLabel`  | `supporting-label`   | (optional) The supportingLabel of the accordion.               | `string`                           | `undefined`       |
 
 
 ## Events

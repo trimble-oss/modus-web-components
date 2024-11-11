@@ -72,6 +72,7 @@
 
   // Accordion
   --modus-accordion-item-header-hover-bg: var(--modus-gray-0);
+  --modus-accordion-label-color: var(--modus-gray-6);
 
   // Alert
   // Background
@@ -250,6 +251,12 @@
   --modus-file-upload-dropzone-error-bg: #fbd4d780;
   --modus-file-upload-dropzone-error-border-color: var(--modus-red-dark);
   --modus-file-upload-dropzone-error-color: var(--modus-red-dark);
+
+  // disabled
+  --modus-file-upload-dropzone-disabled-bg: #f1f1f666;
+  --modus-file-upload-dropzone-disabled-border-color: var(--modus-gray-6);
+  --modus-file-upload-dropzone-disabled-color: var(--modus-gray-6);
+  --modus-file-upload-dropzone-disabled-svg-color: var(--modus-gray-2);
 
   // Message
   // Type - Info
@@ -449,6 +456,7 @@
   --modus-accordion-item-header-expand-color: var(--modus-highlight-blue-color);
   --modus-accordion-item-header-expanded-bg: rgba(1, 154, 235, 0.3);
   --modus-accordion-item-expanded-border-left-color: var(--modus-blue);
+  --modus-accordion-label-color: var(--modus-gray-light);
 
   // Alert
   // Background
@@ -617,6 +625,12 @@
   // File upload dropzone
   --modus-file-upload-dropzone-bg: #252a2e66;
   --modus-file-upload-dropzone-color: var(--modus-white);
+
+  // disabled
+  --modus-file-upload-dropzone-disabled-bg: var(--modus-trimble-gray);
+  --modus-file-upload-dropzone-disabled-border-color: var(--modus-gray-6);
+  --modus-file-upload-dropzone-disabled-color: var(--modus-gray-6);
+  --modus-file-upload-dropzone-disabled-svg-color: var(--modus-gray-6);
 
   // Highlight
   --modus-file-upload-dropzone-highlight-bg: #019aeb33;

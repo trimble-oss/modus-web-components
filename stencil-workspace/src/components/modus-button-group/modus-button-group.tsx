@@ -148,13 +148,18 @@ export class ModusButtonGroup {
       button.color = this.color;
       button.size = this.size;
       button.type = buttonType;
-      if (button.hasAttribute(SELECTION_ATTRIBUTE) && !foundSelected && this.selectionType == SINGLE_SELECTION_TYPE) {
-        this.handleButtonSelection(button, button.getAttribute(SELECTION_ATTRIBUTE) !== 'false');
-        foundSelected = true;
-      } else if (button.hasAttribute(SELECTION_ATTRIBUTE) && this.selectionType == MULTIPLE_SELECTION_TYPE) {
-        this.handleButtonSelection(button, button.getAttribute(SELECTION_ATTRIBUTE) !== 'false');
-      } else {
-        this.handleButtonSelection(button, false);
+
+      const isSelected = button.hasAttribute(SELECTION_ATTRIBUTE) && button.getAttribute(SELECTION_ATTRIBUTE) !== 'false';
+
+      if (this.selectionType === SINGLE_SELECTION_TYPE) {
+        if (isSelected && !foundSelected) {
+          this.handleButtonSelection(button, true);
+          foundSelected = true;
+        } else {
+          this.handleButtonSelection(button, false);
+        }
+      } else if (this.selectionType === MULTIPLE_SELECTION_TYPE) {
+        this.handleButtonSelection(button, isSelected);
       }
     });
   }
