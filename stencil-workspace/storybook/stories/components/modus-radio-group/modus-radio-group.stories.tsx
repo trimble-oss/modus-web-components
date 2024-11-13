@@ -44,7 +44,7 @@ export default {
     actions: {
       handles: ['buttonClick'],
     },
-    controls: { expanded: true, },
+    controls: { expanded: true },
     docs: {
       page: docs,
     },

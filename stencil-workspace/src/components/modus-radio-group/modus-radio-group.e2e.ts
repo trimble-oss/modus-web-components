@@ -150,4 +150,39 @@ describe('modus-radio-group', () => {
     expect(elements[0]).toHaveClass('small');
     expect(elements[1]).toHaveClass('small');
   });
+
+  it('should navigate next or previous radio button with arrow keys', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-radio-group></modus-radio-group>');
+
+    const radioButtons: RadioButton[] = [
+      { id: '1', label: 'Option 1' },
+      { id: '2', label: 'Option 2' },
+      { id: '3', label: 'Option 3' },
+    ];
+
+    const buttonClick = await page.spyOnEvent('buttonClick');
+
+    const component = await page.find('modus-radio-group');
+    component.setProperty('radioButtons', radioButtons);
+    await page.waitForChanges();
+
+    const elements = await page.findAll('modus-radio-group >>> .modus-radio-button .radio');
+    await elements[0].click();
+    await page.waitForChanges();
+    expect(buttonClick).toHaveReceivedEvent();
+    expect(buttonClick).toHaveReceivedEventDetail('1');
+
+    await elements[0].press('ArrowDown');
+    await page.waitForChanges();
+    expect(buttonClick).toHaveReceivedEventDetail('2');
+
+    await elements[1].press('ArrowDown');
+    await page.waitForChanges();
+    expect(buttonClick).toHaveReceivedEventDetail('3');
+
+    await elements[2].press('ArrowUp');
+    await page.waitForChanges();
+    expect(buttonClick).toHaveReceivedEventDetail('2');
+  });
 });
