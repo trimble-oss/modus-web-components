@@ -191,8 +191,28 @@ const ActionBarTemplate = ({
   size,
   isLastChild,
 }) => html`
+<style>
+  .toolbar {
+    gap: 4px;
+  }
+
+  modus-button {
+    width: 24px;
+    height: 28px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  modus-button svg {
+    width: 20px;
+    height: 20px;
+    padding-top: 3px;
+  }
+</style>
   <div id="tree-with-action-bar" style="display: flex; flex-direction: column; width: 400px;">
-    <div style="display: flex; justify-content: end; flex-wrap: wrap; margin-top: 1rem;">
+    <div class="toolbar" style="display: flex; justify-content: end; flex-wrap: wrap; margin-top: 1rem;">
       <modus-button button-style="borderless" aria-label="Add" title="Add" size="small" color="primary" disabled id="add">
         <svg width="24" height="24" viewBox="0 0 24 24">
           <path d="M0,0H24V24H0Z" fill="none" />
