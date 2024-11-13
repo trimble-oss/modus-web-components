@@ -197,12 +197,13 @@ export class ModusAutocomplete {
     this.hasFocus &&
     !this.visibleOptions?.length &&
     !this.visibleCustomOptions?.length &&
-    this.value?.length > 0;
+    this.value?.length > 0 &&
+    !this.readOnly;
 
   displayOptions = () => {
     const showOptions =
       this.showOptionsOnFocus || this.value?.length > 0 || this.disableCloseOnSelect || this.ShowItemsOnKeyDown;
-    return !this.loading && this.hasFocus && showOptions && !this.disabled;
+    return !this.loading && this.hasFocus && showOptions && !this.disabled && !this.readOnly;
   };
 
   addChipValue(value: ModusAutocompleteOption) {
@@ -353,7 +354,7 @@ export class ModusAutocomplete {
   };
 
   handleCloseClick(chipValue: ModusAutocompleteOption) {
-    if (this.selectedChips.length != 0) {
+    if (this.selectedChips.length != 0 && !this.readOnly) {
       this.selectedChips = this.selectedChips.filter((chip) => chip.id !== chipValue.id);
       this.valueChange.emit(this.selectedChips.map((v) => v.value));
       this.selectionsChanged.emit(this.selectedChips.map((opt) => opt.id));
@@ -464,6 +465,7 @@ export class ModusAutocomplete {
       onKeyDown={(e) => this.handleInputKeyDown(e)}
       role="combobox"
       disabled={this.disabled}
+      readOnly={this.readOnly}
       aria-autocomplete="list"
       aria-controls={this.listId}
       aria-expanded={this.displayOptions()}
@@ -496,7 +498,7 @@ export class ModusAutocomplete {
         aria-disabled={this.disabled ? 'true' : undefined}
         aria-invalid={!!this.errorText}
         aria-label={this.ariaLabel || undefined}
-        aria-readonly={this.readOnly}
+        aria-readonly={this.readOnly ? 'true' : undefined}
         aria-required={this.required}
         class={classes}
         onFocusin={() => {
@@ -527,6 +529,7 @@ export class ModusAutocomplete {
               tabIndex={this.disabled ? -1 : 0}
               value={chip.value}
               chipId={chip.id}
+              disabled={this.disabled}
               size={this.size === 'large' ? 'medium' : 'small'}
               show-close
               onCloseClick={() => this.handleCloseClick(chip)}></modus-chip>

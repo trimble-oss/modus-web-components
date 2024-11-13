@@ -1063,4 +1063,35 @@ describe('modus-autocomplete', () => {
     const chips = await chipsContainer.findAll('modus-chip');
     expect(chips.length).toEqual(1);
   });
+
+  it('should not allow items to be selected when readonly is true', async () => {
+    const element = await page.find('modus-autocomplete');
+    expect(element).toHaveClass('hydrated');
+
+    element.setProperty('options', [
+      { id: 1, value: 'Test 1' },
+      { id: 2, value: 'Test 2' },
+    ]);
+
+    element.setProperty('disableCloseOnSelect', true);
+    await page.waitForChanges();
+
+    const textInput = await page.find('modus-autocomplete >>> modus-text-input');
+    await textInput.click();
+    await page.waitForChanges();
+
+    let options = await page.findAll('modus-autocomplete >>> .options-container li');
+    expect(options.length).toEqual(2);
+
+    element.setProperty('readOnly', true);
+    await page.waitForChanges();
+
+    options = await page.findAll('modus-autocomplete >>> .options-container li');
+    if (options.length > 0) {
+      const isClickable = await options[0].isIntersectingViewport();
+      expect(isClickable).toBe(false);
+    } else {
+      expect(options.length).toBe(0);
+    }
+  });
 });
