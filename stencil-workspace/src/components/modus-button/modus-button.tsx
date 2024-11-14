@@ -93,14 +93,6 @@ export class ModusButton {
 
   buttonRef: HTMLButtonElement;
 
-  componentDidLoad() {
-    document.addEventListener('click', this.handleClickOutside);
-  }
-
-  disconnectedCallback() {
-    document.removeEventListener('click', this.handleClickOutside);
-  }
-
   /** Focus the Button */
   @Method()
   async focusButton(): Promise<void> {
@@ -135,7 +127,9 @@ export class ModusButton {
 
   handleClickOutside = (event: MouseEvent) => {
     if (this.buttonRef && !this.buttonRef.contains(event.target as Node) && this.isCriticalAction()) {
-      this.handleReverseAnimation();
+      if (!this.keyProgressState.keyDownActive) {
+        this.handleReverseAnimation();
+      }
     }
   };
 
@@ -149,6 +143,7 @@ export class ModusButton {
       };
       this.buttonRef.classList.remove('reverse');
       this.buttonRef.classList.add('progress');
+      document.addEventListener('click', this.handleClickOutside);
     }
   }
 
@@ -177,6 +172,7 @@ export class ModusButton {
       };
       this.buttonRef.classList.remove('reverse');
     }, this.progressState.animationDuration);
+    document.removeEventListener('click', this.handleClickOutside);
   }
 
   handleKeydown(): void {
