@@ -26,6 +26,8 @@ export class ModusRadioGroup {
   /** Fires on radio button click. */
   @Event() buttonClick: EventEmitter<string>;
 
+  private radioButtonRefs: HTMLDivElement[] = [];
+
   componentWillLoad(): void {
     this.radioButtons.forEach((radioButton) => {
       this.checkedId = radioButton.checked ? radioButton.id : this.checkedId;
@@ -38,11 +40,23 @@ export class ModusRadioGroup {
   }
 
   private handleButtonKeydown(event: KeyboardEvent, id: string) {
-    if (event.code !== 'Enter') {
-      return;
-    }
+    let index = this.radioButtons.findIndex((radioButton) => radioButton.id === id);
 
-    this.handleButtonClick(id);
+    if (event.code === 'Enter') {
+      this.handleButtonClick(id);
+    } else if (event.code === 'ArrowDown') {
+      if (index < this.radioButtons.length - 1) {
+        index = index + 1;
+      }
+      this.handleButtonClick(this.radioButtons[index].id);
+      this.radioButtonRefs[index].focus();
+    } else if (event.code === 'ArrowUp') {
+      if (index > 0) {
+        index = index - 1;
+      }
+      this.handleButtonClick(this.radioButtons[index].id);
+      this.radioButtonRefs[index].focus();
+    }
   }
 
   @Watch('checkedId')
@@ -56,9 +70,10 @@ export class ModusRadioGroup {
   render(): unknown {
     return (
       <div class="modus-radio-group" aria-label={this.ariaLabel}>
-        {this.radioButtons.map((radioButton) => {
+        {this.radioButtons.map((radioButton, index) => {
           return (
             <ModusRadioButton
+              ref={(el) => (this.radioButtonRefs[index] = el)}
               size={this.size}
               checked={radioButton.checked}
               disabled={radioButton.disabled}
