@@ -41,6 +41,9 @@ export default {
     },
   },
   parameters: {
+    actions: {
+      handles: ['buttonClick'],
+    },
     controls: { expanded: true },
     docs: {
       page: docs,

@@ -17,6 +17,7 @@ interface ModusRadioButtonProps {
   label: string;
   name: string;
   size: 'small' | 'medium';
+  ref?: (el: HTMLInputElement | null) => void;
 }
 
 export const ModusRadioButton: FunctionalComponent<ModusRadioButtonProps> = (
@@ -26,6 +27,7 @@ export const ModusRadioButton: FunctionalComponent<ModusRadioButtonProps> = (
     <div
       class={`radio ${props.size}`}
       tabIndex={0}
+      ref={props.ref}
       onClick={() => props.handleButtonClick(props.id)}
       onKeyDown={(event) => props.handleKeydown(event, props.id)}>
       <input
