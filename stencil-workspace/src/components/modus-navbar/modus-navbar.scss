@@ -108,10 +108,12 @@ nav {
       max-height: 32px;
       padding: 0 $rem-8px;
       user-select: none;
+      cursor: pointer;
     }
 
     img.product-logo-secondary {
       filter: $modus-navbar-brand-logo-filter;
+      cursor: pointer;
     }
   }
 
