@@ -61,6 +61,7 @@ export class ModusButton {
     startTime: 0,
     animationDuration: 3000,
     resetTimeout: null as NodeJS.Timeout | null,
+    emitted: false,
   };
 
   @State() keyProgressState = {
@@ -153,9 +154,11 @@ export class ModusButton {
 
   handleReverseAnimation() {
     if (this.progressState.progressWidth >= 100) {
-      this.buttonClick.emit();
-      this.buttonRef.classList.remove('progress');
-      this.buttonRef.classList.remove('reverse');
+      if (!this.progressState.emitted) {
+        this.buttonClick.emit();
+        this.progressState.emitted = true;
+      }
+      this.buttonRef.classList.remove('progress', 'reverse');
     } else {
       this.buttonRef.classList.remove('progress');
       this.buttonRef.classList.add('reverse');
@@ -170,6 +173,7 @@ export class ModusButton {
         ...this.progressState,
         progressWidth: 0,
         progressClass: '',
+        emitted: false,
       };
       this.buttonRef.classList.remove('reverse');
     }, this.progressState.animationDuration);
