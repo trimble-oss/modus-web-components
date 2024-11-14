@@ -29,7 +29,6 @@ describe('modus-modal', () => {
           <div class="content">
             <div id="startTrap" tabindex="0" aria-hidden="true"></div>
             <header>
-             <span class="modal-title"></span>
               <div class="header-buttons">
                 <div aria-label="Expand" role="button" tabindex="0">
                   <svg class="icon-expand" fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">

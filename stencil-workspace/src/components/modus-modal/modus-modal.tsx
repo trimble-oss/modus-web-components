@@ -191,7 +191,7 @@ export class ModusModal {
   renderModalHeader(): JSX.Element[] {
     return (
       <header class={{ scrollable: this.isContentScrollable }}>
-        <span class="modal-title">{this.headerText}</span>
+        {this.headerText}
         <div class="header-buttons">
           {this.showFullscreenToggle && (
             <div
