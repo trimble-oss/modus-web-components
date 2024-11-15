@@ -26,7 +26,7 @@ export default {
     },
     dismissible: {
       description: 'Whether the alert is dismissible, renders the close icon',
-      type: "boolean",
+      type: 'boolean',
       table: {
         defaultValue: { summary: false },
       },

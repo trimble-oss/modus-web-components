@@ -1,33 +1,33 @@
 module.exports = {
-  "stories": ["../stories/framework-integrations/*.mdx","../stories/introduction/*.mdx", "../**/*.stories.@(js|jsx|ts|tsx)"],
-  "staticDirs": ['../public'],
+  stories: ['../stories/framework-integrations/*.mdx', '../stories/introduction/*.mdx', '../**/*.stories.@(js|jsx|ts|tsx)'],
+  staticDirs: ['../public'],
 
-  "addons": [
-    "@storybook/addon-a11y",
-    "@storybook/addon-links",
-    "@storybook/addon-docs",
-    "@storybook/addon-essentials",
-    "storybook-dark-mode",
+  addons: [
+    '@storybook/addon-a11y',
+    '@storybook/addon-links',
+    '@storybook/addon-docs',
+    '@storybook/addon-essentials',
+    'storybook-dark-mode',
     {
-      name: "@storybook/addon-styling",
+      name: '@storybook/addon-styling',
       options: {
         postCss: {
-          implementation: require("postcss"),
+          implementation: require('postcss'),
         },
       },
     },
-    "@chromatic-com/storybook",
-    "@storybook/addon-mdx-gfm",
-    "@storybook/addon-webpack5-compiler-babel"
+    '@chromatic-com/storybook',
+    '@storybook/addon-mdx-gfm',
+    '@storybook/addon-webpack5-compiler-babel',
   ],
 
   babel: async (options) => ({
     ...options,
-    presets: ['@babel/preset-react',"@babel/preset-flow"],
+    presets: ['@babel/preset-react', '@babel/preset-flow'],
   }),
 
-  "framework": {
-    name: "@storybook/web-components-webpack5",
-    options: {}
+  framework: {
+    name: '@storybook/web-components-webpack5',
+    options: {},
   },
-}
+};
