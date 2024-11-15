@@ -33,7 +33,7 @@ body[data-mwc-theme='dark'] {
 }
 
 body {
-  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif !important;
 }
 
 body.sb-show-main,
@@ -89,16 +89,6 @@ hr {
   color: var(--theme-docblock-source-color) !important;
 }
 
-[data-mwc-theme='dark'] .docblock-source pre span,
-[data-mwc-theme='dark'] .docblock-source button {
-  color: var(--theme-docblock-source-color) !important;
-}
-
-[data-mwc-theme='dark'] .docblock-source button {
-  background-color: var(--theme-docblock-source-bg-color);
-  border-color: var(--theme-docblock-source-color);
-}
-
 .sidebar-subheading {
   color: var(--theme-sidebar-subheading-color) !important;
 }
@@ -140,6 +130,16 @@ body.dark .sidebar-header a[title='Storybook'] {
   opacity: 0;
 }
 
+.sbdocs kbd {
+  background-color: var(--theme-color) !important;
+  border-radius: 4px;
+  color: var(--theme-bg-color) !important;
+  opacity: 0.7;
+  padding: 0 4px;
+}
+
+/* dark mode */
+
 html:has(body.dark) {
   color-scheme: dark;
 }
@@ -148,13 +148,23 @@ body.dark h1:first-of-type {
   color: #fff;
 }
 
-.sbdocs kbd {
-  background-color: var(--theme-color) !important;
-  border-radius: 4px;
-  color: var(--theme-bg-color) !important;
-  opacity: 0.7;
-  padding: 0 4px;
+body.dark .css-1qezoi6 :where(table:not(.sb-anchor, .sb-unstyled, .sb-unstyled table)) tr th,
+body.dark .css-1qezoi6 :where(h3:not(.sb-anchor, .sb-unstyled, .sb-unstyled h3)),
+body.dark .css-1qezoi6 :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)) {
+  color: unset;
 }
+
+[data-mwc-theme='dark'] .docblock-source pre span,
+[data-mwc-theme='dark'] .docblock-source button {
+  color: var(--theme-docblock-source-color) !important;
+}
+
+[data-mwc-theme='dark'] .docblock-source button {
+  background-color: var(--theme-docblock-source-bg-color);
+  border-color: var(--theme-docblock-source-color);
+}
+
+/* Windows Forced Colors */
 
 @media (forced-colors: active) {
   #panel-tab-content input,
