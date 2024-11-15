@@ -155,7 +155,7 @@ body.dark h1:first-of-type {
 .css-1qezoi6 :where(h3:not(.sb-anchor, .sb-unstyled, .sb-unstyled h3)),
 .css-1qezoi6 :where(h2:not(.sb-anchor, .sb-unstyled, .sb-unstyled h2)),
 .css-1qezoi6 :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)) {
-  color: unset;
+  color: unset !important;
 }
 
 [data-mwc-theme='dark'] .docblock-source pre span,
