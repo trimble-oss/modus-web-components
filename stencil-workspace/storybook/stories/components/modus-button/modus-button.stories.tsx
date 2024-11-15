@@ -151,6 +151,7 @@ const DefaultTemplateArgs = {
   iconOnly: '',
   showCaret: false,
   label: 'Default',
+  criticalAction: false,
 };
 
 export const Default = DefaultTemplate.bind({});
@@ -185,4 +186,4 @@ export const SpecialButton = DefaultTemplate.bind({});
 SpecialButton.args = { ...DefaultTemplateArgs, label: 'Button', color: 'special' };
 
 export const DangerButton = DefaultTemplate.bind({});
-DangerButton.args = { ...DefaultTemplateArgs, label: 'Danger', color: 'danger', criticalAction: false };
+DangerButton.args = { ...DefaultTemplateArgs, label: 'Danger', color: 'danger' };
