@@ -149,6 +149,9 @@ body.dark h1:first-of-type {
 }
 
 body.dark .css-1qezoi6 :where(table:not(.sb-anchor, .sb-unstyled, .sb-unstyled table)) tr th,
+body.dark .css-1qezoi6 :where(table:not(.sb-anchor, .sb-unstyled, .sb-unstyled table)) tr td,
+body.dark .css-1qezoi6 :where(li:not(.sb-anchor, .sb-unstyled, .sb-unstyled li)),
+body.dark .css-1qezoi6 :where(h4:not(.sb-anchor, .sb-unstyled, .sb-unstyled h4)),
 body.dark .css-1qezoi6 :where(h3:not(.sb-anchor, .sb-unstyled, .sb-unstyled h3)),
 body.dark .css-1qezoi6 :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)) {
   color: unset;
