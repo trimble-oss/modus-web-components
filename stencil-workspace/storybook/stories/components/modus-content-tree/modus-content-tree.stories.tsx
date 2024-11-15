@@ -35,10 +35,8 @@ export default {
       },
     },
     size: {
-      control: {
-        options: ['condensed', 'standard', 'large'],
-        type: 'select',
-      },
+      options: ['condensed', 'standard', 'large'],
+      type: 'select',
       name: 'size',
       description: 'The default size of all tree items.',
       table: {

@@ -1,19 +1,11 @@
-import React from 'react';
 import { defineCustomElements } from '../../loader';
 import yourTheme from './your-theme';
 import { themes } from '@storybook/theming';
-import addons from '@storybook/addons';
-import { DocsContainer } from '@storybook/addon-docs';
-import { useDarkMode } from 'storybook-dark-mode';
 import '../../dist/modus-web-components/modus-web-components.css';
 
 defineCustomElements();
 
-// get channel to listen to event emitter
-const channel = addons.getChannel();
-
 export const parameters = {
-  actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
     matchers: {
       color: /(background|color)$/i,
@@ -48,3 +40,4 @@ export const parameters = {
     'storybook/docs/panel': { index: -1 },
   },
 };
+export const tags = ['autodocs'];

@@ -94,10 +94,8 @@ export default {
       },
     },
     size: {
-      control: {
-        options: ['medium', 'large'],
-        type: 'select',
-      },
+      options: ['medium', 'large'],
+      type: 'select',
       description: 'The size of the number input',
       table: {
         defaultValue: { summary: `'medium'` },
@@ -112,10 +110,8 @@ export default {
     },
     textAlign: {
       name: 'text-align',
-      control: {
-        options: ['left', 'right'],
-        type: 'select',
-      },
+      options: ['left', 'right'],
+      type: 'select',
       description: 'text alignment for the number input.',
       table: {
         defaultValue: { summary: "'left'" },

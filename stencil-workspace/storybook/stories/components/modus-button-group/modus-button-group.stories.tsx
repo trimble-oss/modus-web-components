@@ -21,10 +21,8 @@ export default {
     },
     buttonStyle: {
       name: 'button-style',
-      control: {
-        options: ['borderless', 'fill', 'outline'],
-        type: 'select',
-      },
+      options: ['borderless', 'fill', 'outline'],
+      type: 'select',
       description: 'The style of the buttons in group, not all colors are supported for each button style',
       table: {
         defaultValue: { summary: `'outline'` },
@@ -32,10 +30,8 @@ export default {
       },
     },
     color: {
-      control: {
-        options: ['danger', 'primary', 'secondary', 'tertiary'],
-        type: 'select',
-      },
+      options: ['danger', 'primary', 'secondary', 'tertiary'],
+      type: 'select',
       description: 'The color of the buttons in group, not all button styles are supported for each color',
       table: {
         defaultValue: { summary: `'primary'` },
@@ -52,10 +48,8 @@ export default {
     selectionType: {
       name: 'selection-type',
       description: 'The type of selection',
-      control: {
-        options: ['none', 'single', 'multiple'],
-        type: 'select',
-      },
+      options: ['none', 'single', 'multiple'],
+      type: 'select',
       table: {
         defaultValue: { summary: `'none'` },
         type: { summary: `'none' | 'single' | 'multiple'` },
@@ -64,10 +58,8 @@ export default {
     size: {
       name: 'size',
       description: 'The size of the buttons',
-      control: {
-        options: ['small', 'medium', 'large'],
-        type: 'select',
-      },
+      options: ['small', 'medium', 'large'],
+      type: 'select',
       table: {
         defaultValue: { summary: `'medium'` },
         type: { summary: `'small' | 'medium' | 'large'` },

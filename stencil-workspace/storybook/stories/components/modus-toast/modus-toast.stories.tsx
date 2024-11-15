@@ -35,10 +35,8 @@ export default {
       },
     },
     role: {
-      control: {
-        options: ['alert', 'log', 'marquee', 'status', 'timer'],
-        type: 'select',
-      },
+      options: ['alert', 'log', 'marquee', 'status', 'timer'],
+      type: 'select',
       description: 'Role taken by the toast',
       table: {
         defaultValue: { summary: 'status' },
@@ -54,10 +52,8 @@ export default {
       },
     },
     type: {
-      control: {
-        options: ['danger', 'primary', 'secondary', 'success'],
-        type: 'select',
-      },
+      options: ['danger', 'primary', 'secondary', 'success'],
+      type: 'select',
       description: 'The type of the toast',
       table: {
         defaultValue: { summary: `'default'` },

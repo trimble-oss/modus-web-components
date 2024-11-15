@@ -33,10 +33,8 @@ export default {
       },
     },
     size: {
-      control: {
-        options: ['small', 'medium'],
-        type: 'select',
-      },
+      options: ['small', 'medium'],
+      type: 'select',
       description: 'The size of the button',
       table: {
         defaultValue: { summary: `'medium'` },

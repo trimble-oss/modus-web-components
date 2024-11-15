@@ -8,6 +8,7 @@ export default {
     underlineLinks: {
       name: 'underlineLinks',
       description: 'A flag that controls the display of underline',
+      type: 'boolean',
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },

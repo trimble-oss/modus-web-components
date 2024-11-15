@@ -139,10 +139,8 @@ export default {
       },
     },
     size: {
-      control: {
-        options: ['medium', 'large'],
-        type: 'select',
-      },
+      options: ['medium', 'large'],
+      type: 'select',
       description: 'The size of the autocomplete',
       table: {
         defaultValue: { summary: "'medium'" },

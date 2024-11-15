@@ -76,9 +76,9 @@ They are referenced using the `<modus-file-dropzone>` tag.
 ## Methods
 
 | Method name  | Description                     | Parameter          | Return            |
-| ------------ | ------------------------------- | ------------------ | ----------------- | ----- |
+| ------------ | ------------------------------- | ------------------ | ----------------- |
 | `addFile`    | Add a file to the dropzone      | `file: File`       | `Promise<void>`   |
-| `getError`   | Get the dropzone's error        |                    | Promise<string    | null> |
+| `getError`   | Get the dropzone's error        |                    | `Promise<string\|null>` |
 | `getFiles`   | Get the dropzone's files        |                    | `Promise<File[]>` |
 | `removeFile` | Remove a file from the dropzone | `fileName: string` | `Promise<void>`   |
 

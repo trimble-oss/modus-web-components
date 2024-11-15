@@ -47,10 +47,8 @@ export default {
       },
     },
     size: {
-      control: {
-        options: ['small', 'medium'],
-        type: 'select',
-      },
+      options: ['small', 'medium'],
+      type: 'select',
     },
   },
   parameters: {

@@ -377,15 +377,12 @@ export default {
     sortIconStyle: {
       name: 'sortIconStyle',
       description: 'Display alphabetical or directional arrow icons when sort is enabled',
-      control: {
-        options: ['alphabetical', 'directional'],
-        type: 'select',
-      },
+      options: ['alphabetical', 'directional'],
+      type: 'select',
       table: {
         defaultValue: { summary: `'alphabetical'` },
         type: { summary: `'alphabetical', 'directional'` },
       },
-      type: { required: false },
     },
     showSortIconOnHover: {
       name: 'showSortIconOnHover',
@@ -440,15 +437,12 @@ export default {
     density: {
       name: 'density',
       description: 'Manage table density.',
-      control: {
-        options: ['relaxed', 'comfortable', 'compact'],
-        type: 'select',
-      },
+      options: ['relaxed', 'comfortable', 'compact'],
+      type: 'select',
       table: {
         defaultValue: { summary: `'relaxed'` },
         type: { summary: `'relaxed', 'comfortable', 'compact'` },
       },
-      type: { required: false },
     },
     fullWidth: {
       name: 'fullWidth',

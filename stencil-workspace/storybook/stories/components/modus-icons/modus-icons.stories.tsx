@@ -7,14 +7,13 @@ export default {
   title: 'Components/Icons',
   argTypes: {
     name: {
-      control: {
-        options: MODUS_ICON_NAMES,
-        type: 'select',
-      },
+      name: 'name',
+      type: 'select',
       table: {
         type: { summary: `${MODUS_ICON_NAMES.map((name) => `"${name}"`).join('|')}` },
       },
       description: 'The name of the icon',
+      options: MODUS_ICON_NAMES,
     },
     size: {
       description: 'The size of the icon',

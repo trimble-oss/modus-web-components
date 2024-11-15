@@ -53,10 +53,8 @@ export default {
       type: { required: false },
     },
     size: {
-      control: {
-        options: ['small', 'medium', 'large'],
-        type: 'select',
-      },
+      options: ['small', 'medium', 'large'],
+      type: 'select',
       description: 'The size of the pagination',
       table: {
         defaultValue: { summary: `'medium'` },
