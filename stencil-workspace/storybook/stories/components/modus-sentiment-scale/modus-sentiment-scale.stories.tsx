@@ -15,10 +15,8 @@ export default {
     },
     iconsType: {
       name: 'type',
-      control: {
-        options: ['smileys', 'thumbs'],
-        type: 'select',
-      },
+      options: ['smileys', 'thumbs'],
+      type: 'select',
     },
     disabled: {
       description: 'Whether the sentiment-scale is disabled',

@@ -14,10 +14,8 @@ export default {
     },
     autocapitalize: {
       name: 'autocapitalize',
-      control: {
-        options: ['none', 'off', 'sentences', 'on', 'words', 'characters'],
-        type: 'select',
-      },
+      options: ['none', 'off', 'sentences', 'on', 'words', 'characters'],
+      type: 'select',
       description: 'Capitalization behavior when using a non-traditional keyboard (e.g. microphone, touch screen)',
       table: {
         type: { summary: `'none' | 'off' | 'sentences' | 'on' | 'words' | 'characters'` },
@@ -32,10 +30,8 @@ export default {
     },
     autocorrect: {
       name: 'autocorrect',
-      control: {
-        options: ['off', 'on'],
-        type: 'select',
-      },
+      options: ['off', 'on'],
+      type: 'select',
       description: 'Whether to activate automatic correction while the user is editing this field in Safari',
       table: {
         type: { summary: `boolean | 'off' | 'on'` },
@@ -63,10 +59,8 @@ export default {
       },
     },
     enterkeyhint: {
-      control: {
-        options: ['enter', 'done', 'go', 'next', 'previous', 'search', 'send'],
-        type: 'select',
-      },
+      options: ['enter', 'done', 'go', 'next', 'previous', 'search', 'send'],
+      type: 'select',
       description: 'Which action label to present for the enter key on virtual keyboards',
       table: {
         type: { summary: `'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send'` },
@@ -111,10 +105,8 @@ export default {
       },
     },
     inputmode: {
-      control: {
-        options: ['decimal', 'email', 'numeric', 'search', 'tel', 'text', 'url'],
-        type: 'select',
-      },
+      options: ['decimal', 'email', 'numeric', 'search', 'tel', 'text', 'url'],
+      type: 'select',
       description: 'The inputmode type',
       table: {
         type: {
@@ -170,10 +162,8 @@ export default {
       },
     },
     size: {
-      control: {
-        options: ['medium', 'large'],
-        type: 'select',
-      },
+      options: ['medium', 'large'],
+      type: 'select',
       description: 'The size of the text input',
       table: {
         defaultValue: { summary: "'medium'" },
@@ -181,9 +171,7 @@ export default {
       },
     },
     spellcheck: {
-      control: {
-        type: 'boolean',
-      },
+      type: 'boolean',
       name: 'spellcheck',
       description: 'Whether to enable spell checking.',
       table: {
@@ -192,10 +180,8 @@ export default {
     },
     textAlign: {
       name: 'text-align',
-      control: {
-        options: ['left', 'right'],
-        type: 'select',
-      },
+      options: ['left', 'right'],
+      type: 'select',
       description: 'text alignment for the input.',
       table: {
         defaultValue: { summary: "'left'" },
@@ -205,10 +191,8 @@ export default {
       },
     },
     type: {
-      control: {
-        options: ['email', 'password', 'search', 'tel', 'text', 'url'],
-        type: 'select',
-      },
+      options: ['email', 'password', 'search', 'tel', 'text', 'url'],
+      type: 'select',
       description: 'The input type',
       table: {
         defaultValue: { summary: "'text'" },

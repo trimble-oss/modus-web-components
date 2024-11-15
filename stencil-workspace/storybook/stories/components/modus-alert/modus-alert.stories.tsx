@@ -26,9 +26,9 @@ export default {
     },
     dismissible: {
       description: 'Whether the alert is dismissible, renders the close icon',
+      type: "boolean",
       table: {
         defaultValue: { summary: false },
-        type: { summary: 'boolean' },
       },
     },
     message: {
@@ -39,10 +39,8 @@ export default {
       type: { required: true },
     },
     type: {
-      control: {
-        options: ['error', 'info', 'success', 'warning'],
-        type: 'select',
-      },
+      options: ['error', 'info', 'success', 'warning'],
+      type: 'select',
       description: 'The type of the alert',
       table: {
         defaultValue: { summary: `'info'` },

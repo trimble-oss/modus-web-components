@@ -27,10 +27,8 @@ export default {
       },
     },
     mode: {
-      control: {
-        options: ['overlay', 'push'],
-        type: 'select',
-      },
+      options: ['overlay', 'push'],
+      type: 'select',
       description:
         'Mode to make side navigation either overlay or push the content for the selector specified in `targetContent`',
       table: {

@@ -22,10 +22,8 @@ export default {
     },
     chipStyle: {
       name: 'chip-style',
-      control: {
-        options: ['solid', 'outline'],
-        type: 'select',
-      },
+      options: ['solid', 'outline'],
+      type: 'select',
       description: 'The style of the chip',
       table: {
         defaultValue: { summary: `'solid'` },
@@ -71,10 +69,8 @@ export default {
       },
     },
     size: {
-      control: {
-        options: ['medium', 'small'],
-        type: 'select',
-      },
+      options: ['medium', 'small'],
+      type: 'select',
       description: 'The size of the chip',
       table: {
         defaultValue: { summary: `'medium'` },

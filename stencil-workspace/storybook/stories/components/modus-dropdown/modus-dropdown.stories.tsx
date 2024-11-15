@@ -39,10 +39,8 @@ export default {
     placement: {
       name: 'placement',
       description: 'The placement of the dropdown in relation to the toggleElement.',
-      control: {
-        options: ['top', 'right', 'bottom', 'left'],
-        type: 'select',
-      },
+      options: ['top', 'right', 'bottom', 'left'],
+      type: 'select',
       table: {
         type: { summary: `'top' | 'right' | 'bottom' | 'left'` },
 

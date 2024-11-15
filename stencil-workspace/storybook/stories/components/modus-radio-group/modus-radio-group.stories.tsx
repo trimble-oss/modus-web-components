@@ -14,9 +14,7 @@ export default {
     },
     disabled: {
       description: 'If true, the radio group is disabled',
-      control: {
-        type: 'boolean',
-      },
+      type: 'boolean',
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },
@@ -29,10 +27,8 @@ export default {
       },
     },
     size: {
-      control: {
-        options: ['small', 'medium'],
-        type: 'select',
-      },
+      options: ['small', 'medium'],
+      type: 'select',
       description: 'The size of the radio group',
       table: {
         defaultValue: { summary: `'medium'` },

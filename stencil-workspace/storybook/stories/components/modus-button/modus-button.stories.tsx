@@ -22,10 +22,8 @@ export default {
     },
     buttonStyle: {
       name: 'button-style',
-      control: {
-        options: ['borderless', 'fill', 'outline'],
-        type: 'select',
-      },
+      options: ['borderless', 'fill', 'outline'],
+      type: 'select',
       description: 'The style of the button',
       table: {
         defaultValue: { summary: `'fill'` },
@@ -33,10 +31,8 @@ export default {
       },
     },
     color: {
-      control: {
-        options: ['danger', 'primary', 'secondary', 'tertiary', 'special'],
-        type: 'select',
-      },
+      options: ['danger', 'primary', 'secondary', 'tertiary', 'special'],
+      type: 'select',
       description: 'The color of the button',
       table: {
         defaultValue: { summary: `'primary'` },
@@ -51,10 +47,8 @@ export default {
       },
     },
     size: {
-      control: {
-        options: ['small', 'medium', 'large'],
-        type: 'select',
-      },
+      options: ['small', 'medium', 'large'],
+      type: 'select',
       description: 'The size of the button',
       table: {
         defaultValue: { summary: `'medium'` },

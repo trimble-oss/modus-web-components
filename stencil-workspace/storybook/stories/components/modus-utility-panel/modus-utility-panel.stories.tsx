@@ -1,6 +1,6 @@
 import docs from './modus-utility-panel-storybook-docs.mdx';
 import { html } from 'lit-html';
-import { useEffect } from '@storybook/client-api';
+import { useEffect } from '@storybook/preview-api';
 
 export default {
   title: 'Components/Utility Panel',
