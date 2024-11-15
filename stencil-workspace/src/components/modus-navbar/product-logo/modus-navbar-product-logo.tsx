@@ -17,11 +17,14 @@ export const ModusNavbarProductLogo: FunctionalComponent<{
     }
   };
 
+  const primaryLogoClasses = `${secondary ? 'product-logo-primary' : null} ${onClick !== null ? 'icon-is-clickable' : null}`;
+  const secondaryLogoClasses = `${primary ? 'product-logo-secondary' : null} ${onClick !== null ? 'icon-is-clickable' : null}`;
+
   return (
     <div aria-label="Logo" onClick={onClick} onKeyDown={handleKeyDown} tabindex="0" role="button" class="product-logo">
       {primary && (
         <img
-          class={secondary && 'product-logo-primary' && 'icon-is-clickable'}
+          class={primaryLogoClasses}
           height={primary.height ?? '24'}
           src={primary.url}
           alt={primary.alt ? primary.alt : null}
@@ -30,7 +33,7 @@ export const ModusNavbarProductLogo: FunctionalComponent<{
       )}
       {secondary && (
         <img
-          class={primary && 'product-logo-secondary' && 'icon-is-clickable'}
+          class={secondaryLogoClasses}
           height={secondary.height ?? '24'}
           src={secondary.url}
           alt={secondary.alt ? secondary.alt : null}
