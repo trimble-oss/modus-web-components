@@ -133,6 +133,19 @@ export class ModusButton {
     }
   };
 
+  handleTouchStart() {
+    if (this.isCriticalAction()) {
+      this.handleProgressAnimation();
+    }
+  }
+
+  handleTouchCancel() {
+    this.pressed = false;
+    if (this.isCriticalAction()) {
+      this.handleReverseAnimation();
+    }
+  }
+
   handleProgressAnimation() {
     this.pressed = true;
     if (this.isCriticalAction()) {
@@ -273,6 +286,9 @@ export class ModusButton {
         onKeyUp={() => (this.pressed = false)}
         onMouseDown={() => this.handleProgressAnimation()}
         onMouseUp={() => this.handleMouseUp()}
+        onTouchStart={() => this.handleTouchStart()}
+        onTouchEnd={() => this.handleMouseUp()}
+        onTouchCancel={() => this.handleTouchCancel()}
         ref={(el) => (this.buttonRef = el)}
         type={this.type}>
         {this.iconOnly ? this.renderIconOnly() : this.renderIconWithText()}
