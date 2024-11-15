@@ -143,12 +143,12 @@ export class SelectComponent {
 
 Moving onto the directive, there are a few things to keep in mind.
 
-* The directive's `selector` is set to the web component's tag, not the wrapper's.
-* Implementing the [ControlValueAccessor](https://angular.io/api/forms/ControlValueAccessor) interface helps Angular understand when the form control has been updated or changed.
-  * When the value is set, `onChange()` notifies that the control has been updated.
-  * Calling `onTouched()` lets Angular know the component has been touched, which is needed for form validation.
-* The `get value()`, and `set value()` are used by Angular's form control.
-* Using the `@HostListener` decorator lets you listen to events from the web component, and execute appropriate logic.
+- The directive's `selector` is set to the web component's tag, not the wrapper's.
+- Implementing the [ControlValueAccessor](https://angular.io/api/forms/ControlValueAccessor) interface helps Angular understand when the form control has been updated or changed.
+  - When the value is set, `onChange()` notifies that the control has been updated.
+  - Calling `onTouched()` lets Angular know the component has been touched, which is needed for form validation.
+- The `get value()`, and `set value()` are used by Angular's form control.
+- Using the `@HostListener` decorator lets you listen to events from the web component, and execute appropriate logic.
 
 Here is what our directive looks like:
 

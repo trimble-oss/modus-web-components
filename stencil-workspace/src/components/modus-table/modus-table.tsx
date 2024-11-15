@@ -125,10 +125,10 @@ export class ModusTable {
         ...this.tableState.pagination,
         pageIndex: this.tableState.pagination.pageIndex,
         pageSize: this.pagination
-        ? this.tableState.pagination.pageSize
-        : this.rowsExpandable
-          ? this.pageSizeList[0]
-          : this.data.length,
+          ? this.tableState.pagination.pageSize
+          : this.rowsExpandable
+            ? this.pageSizeList[0]
+            : this.data.length,
       });
     }
     this.tableCore?.setOptions('data', newVal);
