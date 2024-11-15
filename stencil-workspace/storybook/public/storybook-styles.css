@@ -23,7 +23,7 @@ body[data-mwc-theme='dark'] {
   --theme-sbdocs-table-stripe-bg-color: #252a2e;
   --theme-sbdocs-table-border-color: #464b52;
   --theme-docblock-source-color: #f1f1f6;
-  --theme-docblock-source-bg-color: #6a6e79;
+  --theme-docblock-source-bg-color: #495057;
   --theme-sidebar-subheading-color: #495057;
   --theme-sbdocs-link-color: #217cbb;
   --theme-code-color: #f1f1f6;
@@ -153,6 +153,7 @@ body.dark h1:first-of-type {
 .css-1qezoi6 :where(li:not(.sb-anchor, .sb-unstyled, .sb-unstyled li)),
 .css-1qezoi6 :where(h4:not(.sb-anchor, .sb-unstyled, .sb-unstyled h4)),
 .css-1qezoi6 :where(h3:not(.sb-anchor, .sb-unstyled, .sb-unstyled h3)),
+.css-1qezoi6 :where(h2:not(.sb-anchor, .sb-unstyled, .sb-unstyled h2)),
 .css-1qezoi6 :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)) {
   color: unset;
 }
