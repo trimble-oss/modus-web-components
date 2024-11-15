@@ -189,6 +189,21 @@
   }
 }
 
+.autocomplete[aria-readonly='true'] {
+  .chips-container {
+    background-color: $modus-autocomplete-readonly-bg;
+    border-color: transparent;
+
+    .input {
+      &::part(input-container) {
+        background-color: $modus-autocomplete-readonly-bg;
+        border-color: transparent;
+        color: $modus-autocomplete-readonly-color;
+      }
+    }
+  }
+}
+
 .autocomplete[aria-disabled='true'] {
   .chips-container {
     background-color: var(--modus-input-disabled-bg, #e0e1e9);
