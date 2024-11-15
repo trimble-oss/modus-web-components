@@ -32,6 +32,10 @@ body[data-mwc-theme='dark'] {
   --theme-header-underline-color: rgba(255, 255, 255, 0.2);
 }
 
+body {
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+}
+
 body.sb-show-main,
 #docs-root,
 .sbdocs,
@@ -138,6 +142,10 @@ body.dark .sidebar-header a[title='Storybook'] {
 
 html:has(body.dark) {
   color-scheme: dark;
+}
+
+body.dark h1:first-of-type {
+  color: #fff;
 }
 
 .sbdocs kbd {
