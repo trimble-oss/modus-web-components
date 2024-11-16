@@ -25,6 +25,7 @@ export interface ModusNavbarLogo {
 export interface ModusNavbarLogoOptions {
   primary?: ModusNavbarLogo;
   secondary?: ModusNavbarLogo;
+  isHoverable?: boolean;
 }
 
 export interface ModusNavbarButton {
