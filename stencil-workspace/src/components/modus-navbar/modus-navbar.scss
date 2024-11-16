@@ -25,7 +25,7 @@ nav {
     width: 22px;
   }
 
-  .icon-is-clickable {
+  .logo-is-hoverable {
     cursor: pointer;
   }
 
@@ -265,13 +265,13 @@ nav {
     user-select: none;
 
     @media screen and (width > 576px) {
-      .product-logo-secondary {
+      .product-logo-secondary.primary-logo-exists {
         display: none;
       }
     }
 
-    @media screen and (width <=576px) {
-      .product-logo-primary {
+    @media screen and (width <= 576px) {
+      .product-logo-primary.secondary-logo-exists {
         display: none;
       }
     }
