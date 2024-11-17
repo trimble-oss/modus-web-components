@@ -73,11 +73,10 @@
     "typescript": "^5.5.4"
   },
   "engines": {
-    "node": ">=16",
-    "npm": ">=8"
+    "node": ">=18"
   },
   "volta": {
-    "node": "16.20.2"
+    "node": "18.20.4"
   },
   "license": "MIT"
 }
