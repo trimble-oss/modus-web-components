@@ -6,7 +6,7 @@ export default {
   title: 'Components/Data Table',
   argTypes: {},
   parameters: {
-    controls: { disabled: true, expanded: true, sort: 'alpha' },
+    controls: { disable: true, expanded: true, sort: 'alpha' },
     actions: {
       handles: ['cellLinkClick', 'rowDoubleClick', 'selection', 'sort', 'rowActionClick'],
     },

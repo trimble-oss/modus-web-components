@@ -79,6 +79,10 @@ hr {
   border: 1px solid var(--theme-sbdocs-table-border-color);
 }
 
+#storybook-docs tbody tr {
+  background-color: unset !important; /* Removes any inherited or set background color */
+}
+
 .sbdocs-table tbody tr td:first-of-type {
   max-width: 160px;
   width: 160px;
@@ -138,6 +142,17 @@ body.dark .sidebar-header a[title='Storybook'] {
   padding: 0 4px;
 }
 
+.css-1qezoi6 :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)) {
+  font-size: unset !important;
+  line-height: unset !important;
+  margin: unset !important;
+}
+
+.css-1qezoi6 :where(a:not(.sb-anchor, .sb-unstyled, .sb-unstyled a)) {
+  line-height: unset !important;
+  text-decoration: unset !important;
+}
+
 /* dark mode */
 
 html:has(body.dark) {
@@ -148,6 +163,10 @@ body.dark h1:first-of-type {
   color: #fff;
 }
 
+body.dark .docblock-source {
+  background-color: #353a40 !important;
+}
+
 .css-1qezoi6 :where(table:not(.sb-anchor, .sb-unstyled, .sb-unstyled table)) tr th,
 .css-1qezoi6 :where(table:not(.sb-anchor, .sb-unstyled, .sb-unstyled table)) tr td,
 .css-1qezoi6 :where(li:not(.sb-anchor, .sb-unstyled, .sb-unstyled li)),
@@ -156,6 +175,11 @@ body.dark h1:first-of-type {
 .css-1qezoi6 :where(h2:not(.sb-anchor, .sb-unstyled, .sb-unstyled h2)),
 .css-1qezoi6 :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)) {
   color: unset !important;
+}
+
+body.dark .css-1qezoi6 :where(table:not(.sb-anchor, .sb-unstyled, .sb-unstyled table)) tr td,
+body.dark .css-1qezoi6 :where(table:not(.sb-anchor, .sb-unstyled, .sb-unstyled table)) tr th {
+  border-color: #464b52 !important;
 }
 
 [data-mwc-theme='dark'] .docblock-source pre span,
