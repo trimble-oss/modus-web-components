@@ -193,19 +193,6 @@ const ActionBarTemplate = ({
 }) => html`
 <style>
 
-  :root {
-    --icon-fill-light: #252a2e;
-    --icon-fill-dark: #ffffff;
-  }
-
-  body[data-mwc-theme='light'] {
-    --icon-fill: var(--icon-fill-light);
-  }
-
-  body[data-mwc-theme='dark'] {
-    --icon-fill: var(--icon-fill-dark);
-  }
-
   .toolbar {
     gap: 4px;
     display: flex;
