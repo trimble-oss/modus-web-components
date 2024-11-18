@@ -79,6 +79,10 @@ hr {
   border: 1px solid var(--theme-sbdocs-table-border-color);
 }
 
+#storybook-docs tbody tr {
+  background-color: unset !important; /* Removes any inherited or set background color */
+}
+
 .sbdocs-table tbody tr td:first-of-type {
   max-width: 160px;
   width: 160px;
