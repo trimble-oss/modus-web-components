@@ -16,9 +16,8 @@ module.exports = {
         },
       },
     },
-    '@chromatic-com/storybook',
     '@storybook/addon-mdx-gfm',
-    '@storybook/addon-webpack5-compiler-babel',
+    '@storybook/addon-webpack5-compiler-babel'
   ],
 
   babel: async (options) => ({
