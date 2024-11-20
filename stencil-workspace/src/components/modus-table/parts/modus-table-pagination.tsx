@@ -2,8 +2,8 @@ import {
   FunctionalComponent,
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
-import { PAGINATION_PAGEVIEW_TEXT, PAGINATION_SUMMARY_TEXT } from '../modus-table.constants';
 import { TableContext } from '../models/table-context.models';
+import {getTranslations } from '../../../lang/translations';
 
 interface ModusTablePaginationProps {
   context: TableContext;
@@ -26,7 +26,7 @@ export const ModusTablePagination: FunctionalComponent<ModusTablePaginationProps
   return (
     <div class="pagination-container">
       <div class="items-per-page">
-        <span>{PAGINATION_PAGEVIEW_TEXT}</span>
+        <span>{getTranslations().pageView}</span>
         <modus-select
           ariaLabel="Select page size"
           options-display-prop="display"
@@ -36,7 +36,7 @@ export const ModusTablePagination: FunctionalComponent<ModusTablePaginationProps
       </div>
       <div class="pagination-and-count">
         <div class="total-count">
-          <span>{PAGINATION_SUMMARY_TEXT}</span>
+          <span>{getTranslations().showingResults}</span>
           <span>{pageIndex * pageSize + 1}</span>
           <span>-</span>
           <span>
