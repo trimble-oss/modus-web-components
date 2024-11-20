@@ -20,8 +20,8 @@ const translations: Record<string, Translation> = {
     sortedDescending: 'Ordenado de forma descendente',
   },
   fr: {
-    showingResult: 'Montrant le résultat',
-    pageView: 'Vue de la page',
+    showingResult: 'Afficher le résultat',
+    pageView: 'Prévisualisation',
     sortAscending: 'Trier par ordre croissant',
     sortDescending: 'Trier par ordre décroissant',
     sortedAscending: 'Trié par ordre croissant',
