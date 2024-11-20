@@ -7,14 +7,15 @@
 
 ## Properties
 
-| Property      | Attribute     | Description                                                | Type                                                                                    | Default     |
-| ------------- | ------------- | ---------------------------------------------------------- | --------------------------------------------------------------------------------------- | ----------- |
-| `ariaLabel`   | `aria-label`  | (optional) The toast's aria-label.                         | `string`                                                                                | `undefined` |
-| `delay`       | `delay`       | (optional) Time taken to dismiss the toast                 | `number`                                                                                | `15000`     |
-| `dismissible` | `dismissible` | (optional) Whether the toast has a dismiss button.         | `boolean`                                                                               | `undefined` |
-| `role`        | `role`        | (optional) Role taken by the toast.  Defaults to 'status'. | `"alert" \| "log" \| "marquee" \| "status" \| "timer"`                                  | `'status'`  |
-| `showIcon`    | `show-icon`   | (optional) Whether to show the toasts' icon.               | `boolean`                                                                               | `true`      |
-| `type`        | `type`        | (optional) The toasts' type.                               | `"danger" \| "dark" \| "default" \| "primary" \| "secondary" \| "success" \| "warning"` | `'default'` |
+| Property        | Attribute        | Description                                                                      | Type                                                                                    | Default     |
+| --------------- | ---------------- | -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | ----------- |
+| `ariaLabel`     | `aria-label`     | (optional) The toast's aria-label.                                               | `string`                                                                                | `undefined` |
+| `delay`         | `delay`          | (optional) Time taken to dismiss the toast                                       | `number`                                                                                | `15000`     |
+| `dismissible`   | `dismissible`    | (optional) Whether the toast has a dismiss button.                               | `boolean`                                                                               | `undefined` |
+| `retainElement` | `retain-element` | (optional) Whether to retain the element in the DOM after it has been dismissed. | `boolean`                                                                               | `false`     |
+| `role`          | `role`           | (optional) Role taken by the toast.  Defaults to 'status'.                       | `string`                                                                                | `'status'`  |
+| `showIcon`      | `show-icon`      | (optional) Whether to show the toasts' icon.                                     | `boolean`                                                                               | `true`      |
+| `type`          | `type`           | (optional) The toasts' type.                                                     | `"danger" \| "dark" \| "default" \| "primary" \| "secondary" \| "success" \| "warning"` | `'default'` |
 
 
 ## Events

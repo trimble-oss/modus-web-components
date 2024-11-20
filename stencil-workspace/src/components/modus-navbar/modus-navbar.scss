@@ -79,6 +79,10 @@ nav {
     display: flex;
   }
 
+  .navbar-logo {
+    padding-inline-end: 0.5rem;
+  }
+
   .right,
   .left {
     align-items: center;
@@ -141,7 +145,7 @@ nav {
 
       modus-tooltip {
         img.avatar {
-          background-color: $modus-navbar-icon-color;
+          background-color: transparent;
           border-radius: 50%;
           display: flex;
           height: 32px;
@@ -267,5 +271,11 @@ nav {
         display: none;
       }
     }
+  }
+}
+
+@media screen and (forced-colors: active) {
+  nav {
+    border-bottom: 1px solid transparent;
   }
 }

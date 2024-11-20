@@ -1,14 +1,8 @@
 *.min.*
 
-*.css
-*.html
-*.js
-
 dist/*
 stencil-workspace/src/icons/generated-icons/*
 www/*
 
-*.stories.tsx
-*.mdx
 stencil-workspace/**/readme.md
 stencil-workspace/src/components.d.ts

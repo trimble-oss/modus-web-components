@@ -12,22 +12,55 @@ This component is compatible with Angular reactive forms. This can be achieved t
 
 ### Medium
 
-<modus-checkbox></modus-checkbox><br />
-<modus-checkbox disabled></modus-checkbox><br />
-<modus-checkbox label="Checkbox"></modus-checkbox><br />
-<modus-checkbox disabled label="Checkbox"></modus-checkbox><br />
-<modus-checkbox checked disabled label="Checkbox"></modus-checkbox><br />
-<modus-checkbox indeterminate></modus-checkbox>
+<div style={{ width: 'fit-content' }}>
+  <modus-checkbox></modus-checkbox>
+</div>
+<br />
+<div style={{ width: 'fit-content' }}>
+  <modus-checkbox disabled></modus-checkbox>
+</div>
+<br />
+<div style={{ width: 'fit-content' }}>
+  <modus-checkbox label="Checkbox"></modus-checkbox>
+</div>
+<br />
+<div style={{ width: 'fit-content' }}>
+  <modus-checkbox disabled label="Checkbox"></modus-checkbox>
+</div>
+<br />
+<div style={{ width: 'fit-content' }}>
+  <modus-checkbox checked disabled label="Checkbox"></modus-checkbox>
+</div>
+<br />
+<div style={{ width: 'fit-content' }}>
+  <modus-checkbox indeterminate></modus-checkbox>
+</div>
 
 ### Small
 
-<modus-checkbox size='small'></modus-checkbox><br />
-<modus-checkbox disabled size='small'></modus-checkbox><br />
-<modus-checkbox label="Checkbox" size='small'></modus-checkbox><br />
-<modus-checkbox disabled label="Checkbox" size='small'></modus-checkbox><br />
-<modus-checkbox checked disabled label="Checkbox" size='small'></modus-checkbox><br />
-<modus-checkbox indeterminate size='small'></modus-checkbox>
-
+<div style={{ width: 'fit-content' }}>
+  <modus-checkbox size="small"></modus-checkbox>
+</div>
+<br />
+<div style={{ width: 'fit-content' }}>
+  <modus-checkbox disabled size="small"></modus-checkbox>
+</div>
+<br />
+<div style={{ width: 'fit-content' }}>
+  <modus-checkbox label="Checkbox" size="small"></modus-checkbox>
+</div>
+<br />
+<div style={{ width: 'fit-content' }}>
+  <modus-checkbox disabled label="Checkbox" size="small"></modus-checkbox>
+</div>
+<br />
+<div style={{ width: 'fit-content' }}>
+  <modus-checkbox checked disabled label="Checkbox" size="small"></modus-checkbox>
+</div>
+<br />
+<div style={{ width: 'fit-content' }}>
+  <modus-checkbox indeterminate size="small"></modus-checkbox>
+</div>
 
 ```html
 <modus-checkbox></modus-checkbox>
@@ -37,26 +70,25 @@ This component is compatible with Angular reactive forms. This can be achieved t
 <modus-checkbox checked disabled label="Checkbox"></modus-checkbox>
 <modus-checkbox indeterminate></modus-checkbox>
 
-<modus-checkbox size='small'></modus-checkbox>
-<modus-checkbox disabled size='small'></modus-checkbox>
-<modus-checkbox label="Checkbox" size='small'></modus-checkbox>
-<modus-checkbox disabled label="Checkbox" size='small'></modus-checkbox>
-<modus-checkbox checked disabled label="Checkbox" size='small'></modus-checkbox>
-<modus-checkbox indeterminate size='small'></modus-checkbox>
-
+<modus-checkbox size="small"></modus-checkbox>
+<modus-checkbox disabled size="small"></modus-checkbox>
+<modus-checkbox label="Checkbox" size="small"></modus-checkbox>
+<modus-checkbox disabled label="Checkbox" size="small"></modus-checkbox>
+<modus-checkbox checked disabled label="Checkbox" size="small"></modus-checkbox>
+<modus-checkbox indeterminate size="small"></modus-checkbox>
 ```
 
 ### Properties
 
-| Property          | Attribute          | Description                                              | Type               | Default     |
-| ----------------- | ------------------ | -------------------------------------------------------- | ------------------ | ----------- |
-| `ariaLabel`       | `aria-label`       | (optional) The checkbox's aria-label.                    | `string`           | `undefined` |
-| `checked`         | `checked`          | (optional) Whether the checkbox is checked.              | `boolean`          | `undefined` |
-| `disabled`        | `disabled`         | (optional) Whether the checkbox is disabled.             | `boolean`          | `undefined` |
-| `indeterminate`   | `indeterminate`    | (optional) Whether the checkbox is indeterminate.        | `boolean`          | `undefined` |
-| `label`           | `label`            | (optional) The checkbox label.                           | `string`           | `undefined` |
-| `stopPropagation` | `stop-propagation` | (optional) It should stop propagating the event further. | `boolean`          | `undefined` |
-| `size` | `size` | (optional) The size of the checkbox. | `"small", "medium"'          | `'medium'` |
+| Property          | Attribute          | Description                                              | Type                | Default     |
+| ----------------- | ------------------ | -------------------------------------------------------- | ------------------- | ----------- |
+| `ariaLabel`       | `aria-label`       | (optional) The checkbox's aria-label.                    | `string`            | `undefined` |
+| `checked`         | `checked`          | (optional) Whether the checkbox is checked.              | `boolean`           | `undefined` |
+| `disabled`        | `disabled`         | (optional) Whether the checkbox is disabled.             | `boolean`           | `undefined` |
+| `indeterminate`   | `indeterminate`    | (optional) Whether the checkbox is indeterminate.        | `boolean`           | `undefined` |
+| `label`           | `label`            | (optional) The checkbox label.                           | `string`            | `undefined` |
+| `stopPropagation` | `stop-propagation` | (optional) It should stop propagating the event further. | `boolean`           | `undefined` |
+| `size`            | `size`             | (optional) The size of the checkbox.                     | `"small", "medium"' | `'medium'`  |
 
 ### DOM Events
 
@@ -72,7 +104,6 @@ This component is compatible with Angular reactive forms. This can be achieved t
 
 ### Accessibility
 
-- Checkbox gets an `aria-checked` set to whether Checkbox is checked.
 - Checkbox gets an `aria-label` provided by the `aria-label` property input.
 - Checkbox gets an `aria-disabled` set to whether Checkbox is disabled.
 - When Checkbox has focus, <kbd>Space</kbd> or <kbd>Enter</kbd> toggle it, and emit `checkboxClick` event.

@@ -70,6 +70,15 @@ export const config: Config = {
         '../angular-workspace/ng17/projects/trimble-oss/modus-angular-components/src/lib/stencil-generated/index.ts',
       valueAccessorConfigs: angularValueAccessorBindings,
     }),
+    angularOutputTarget({
+      componentCorePackage: '@trimble-oss/modus-web-components',
+      outputType: 'component',
+      directivesProxyFile:
+        '../angular-workspace/ng18/projects/trimble-oss/modus-angular-components/src/lib/stencil-generated/components.ts',
+      directivesArrayFile:
+        '../angular-workspace/ng18/projects/trimble-oss/modus-angular-components/src/lib/stencil-generated/index.ts',
+      valueAccessorConfigs: angularValueAccessorBindings,
+    }),
     react({
       componentCorePackage: '@trimble-oss/modus-web-components',
       proxiesFile: '../react-workspace/react-17/src/components/stencil-generated/index.ts',

@@ -112,7 +112,7 @@ export class ModusSelect {
       const optionId = createGuid();
       this.optionIdMap.set(optionId, option);
       return (
-        <option value={optionId} key={optionId} selected={option === this.internalValue}>
+        <option value={optionId} key={optionId} selected={option[this.optionsDisplayProp] === this.internalValue}>
           {option[this.optionsDisplayProp]}
         </option>
       );

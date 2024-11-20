@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { Component, Event, EventEmitter, h, Method, Prop, Watch } from '@stencil/core';
+import { Component, Event, EventEmitter, h, Method, Prop, State, Watch } from '@stencil/core';
 import { generateElementId } from '../../utils/utils';
 
 @Component({
@@ -8,8 +8,14 @@ import { generateElementId } from '../../utils/utils';
   shadow: true,
 })
 export class ModusNumberInput {
+  /** Displayed only when the input is not focused. */
+  @State() formattedValue = this.getFormattedValue();
+
   /** (optional) The input's aria-label. */
   @Prop() ariaLabel: string | null;
+
+  /** (optional) The input's currency */
+  @Prop() currency: string;
 
   /** (optional) Whether the input is disabled. */
   @Prop() disabled: boolean;
@@ -22,6 +28,9 @@ export class ModusNumberInput {
 
   /** (optional) The input's label. */
   @Prop() label: string;
+
+  /** (optional) The input's locale */
+  @Prop() locale: string;
 
   /** (optional) The input's maximum value. */
   @Prop() maxValue: number;
@@ -57,22 +66,23 @@ export class ModusNumberInput {
   @Event() valueChange: EventEmitter<string>;
 
   private inputId = generateElementId() + '_number-input';
+  private inputFocused = false;
 
   classBySize: Map<string, string> = new Map([
     ['medium', 'medium'],
     ['large', 'large'],
   ]);
-  numberInput: HTMLInputElement;
+  input: HTMLInputElement;
 
   handleOnInput(): void {
-    this.value = this.numberInput.value;
+    this.value = this.input.value;
     this.valueChange.emit(this.value);
   }
 
   /** Focus the input. */
   @Method()
   async focusInput(): Promise<void> {
-    this.numberInput.focus();
+    this.input.focus();
   }
 
   @Watch('value')
@@ -82,7 +92,53 @@ export class ModusNumberInput {
     } else {
       this.value = newValue;
     }
+
+    // Only updated when the input value is changed programatically by the consumer
+    if ((this.currency || this.locale) && !this.inputFocused) {
+      this.formattedValue = this.getFormattedValue();
+    }
   }
+
+  getFormattedValue() {
+    const numericValue = parseFloat((this.value !== undefined ? this.value : '').replace(/[^0-9.-]+/g, ''));
+    if (this?.value) {
+      let formattedValue;
+      if (this.currency && this.locale) {
+        formattedValue = new Intl.NumberFormat(this.locale, {
+          style: 'currency',
+          currency: this.currency,
+        }).format(numericValue);
+      } else if (this.currency) {
+        formattedValue = new Intl.NumberFormat(undefined, {
+          style: 'currency',
+          currency: this.currency,
+        }).format(numericValue);
+      } else if (this.locale) {
+        formattedValue = new Intl.NumberFormat(this.locale).format(numericValue);
+      } else {
+        formattedValue = numericValue.toString();
+      }
+      return formattedValue;
+    }
+    return '';
+  }
+
+  handleOnBlur = (): void => {
+    if (this.currency || this.locale) {
+      this.inputFocused = false;
+      this.formattedValue = this.getFormattedValue();
+      this.input.type = 'text';
+      this.input.value = this.formattedValue;
+    }
+  };
+
+  handleOnFocus = (): void => {
+    if (this.currency || this.locale) {
+      this.inputFocused = true;
+      this.input.value = this.value !== undefined ? this.value : '';
+      this.input.type = 'number';
+    }
+  };
 
   render(): unknown {
     const textAlignClassName = `text-align-${this.textAlign}`;
@@ -112,6 +168,9 @@ export class ModusNumberInput {
 
       return classNames.join(' ');
     };
+    const inputType = this.currency || this.locale ? 'text' : 'number';
+    const inputAriaProps =
+      inputType === 'number' ? { ariaValuemax: this.maxValue, ariaValuemin: this.minValue, ariaValuenow: this.value } : {};
 
     return (
       <div class={buildContainerClassNames()}>
@@ -119,6 +178,7 @@ export class ModusNumberInput {
           <div class="label-container">
             {this.label ? <label htmlFor={this.inputId}>{this.label}</label> : null}
             {this.required ? <span class="required">*</span> : null}
+            {this.helperText ? <label class="sub-text helper">{this.helperText}</label> : null}
           </div>
         ) : null}
         <div class={buildInputContainerClassNames()} part="input-container">
@@ -127,28 +187,26 @@ export class ModusNumberInput {
             aria-label={this.ariaLabel}
             aria-invalid={!!this.errorText}
             aria-required={this.required?.toString()}
-            aria-valuemax={this.maxValue}
-            aria-valuemin={this.minValue}
-            aria-valuenow={this.value}
             class={textAlignClassName}
             disabled={this.disabled}
             max={this.maxValue}
             min={this.minValue}
             onInput={() => this.handleOnInput()}
+            onFocusin={this.handleOnFocus}
+            onBlur={this.handleOnBlur}
             placeholder={this.placeholder}
             readonly={this.readOnly}
-            ref={(el) => (this.numberInput = el as HTMLInputElement)}
+            ref={(el) => (this.input = el as HTMLInputElement)}
             step={this.step}
             tabIndex={0}
-            type="number"
-            value={this.value}></input>
+            type={inputType}
+            value={inputType === 'text' ? this.formattedValue : this.value}
+            {...inputAriaProps}></input>
         </div>
         {this.errorText ? (
           <label class="sub-text error">{this.errorText}</label>
         ) : this.validText ? (
           <label class="sub-text valid">{this.validText}</label>
-        ) : this.helperText ? (
-          <label class="sub-text helper">{this.helperText}</label>
         ) : null}
       </div>
     );

@@ -92,7 +92,6 @@ export class ModusCheckbox {
       <div class={className}>
         <input
           class={`checkbox ${this.size === 'small' ? 'small' : ''} ${this.disabled ? 'disabled' : ''}`}
-          aria-checked={this.checked ? 'true' : 'false'}
           aria-disabled={this.disabled ? 'true' : undefined}
           aria-label={this.ariaLabel || undefined}
           checked={this.checked}

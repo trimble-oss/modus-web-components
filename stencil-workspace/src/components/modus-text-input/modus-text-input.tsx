@@ -5,6 +5,7 @@ import { IconClose } from '../../icons/svgs/icon-close';
 import { IconVisibilityOff } from '../../icons/svgs/icon-visibility-off';
 import { generateElementId } from '../../utils/utils';
 import { IconVisibilityOn } from '../../icons/generated-icons/IconVisibilityOn';
+import { IconError } from '../../icons/svgs/icon-error';
 
 @Component({
   tag: 'modus-text-input',
@@ -17,7 +18,7 @@ export class ModusTextInput {
   @Prop() ariaLabel: string | null;
 
   /** (optional) Capitalization behavior when using a non-traditional keyboard (e.g. microphone, touch screen) */
-  @Prop() autocapitalize: 'none' | 'off' | 'sentences' | 'on' | 'words' | 'characters';
+  @Prop() autocapitalize: string;
 
   /** (optional) Whether to activate automatic correction while the user is editing this field in Safari. */
   @Prop() autocorrect: boolean | 'off' | 'on';
@@ -42,6 +43,9 @@ export class ModusTextInput {
 
   /** (optional) The input's helper text displayed below the input. */
   @Prop() helperText: string;
+
+  /** (optional) Whether the error icon is included. */
+  @Prop() includeErrorIcon: boolean;
 
   /** (optional) Whether the search icon is included. */
   @Prop() includeSearchIcon: boolean;
@@ -217,6 +221,7 @@ export class ModusTextInput {
           <div class={'label-container'}>
             {this.label ? <label htmlFor={this.inputId}>{this.label}</label> : null}
             {this.required ? <span class="required">*</span> : null}
+            {this.helperText ? <label class="sub-text helper">{this.helperText}</label> : null}
           </div>
         ) : null}
         <div
@@ -277,11 +282,12 @@ export class ModusTextInput {
           )}
         </div>
         {this.errorText ? (
-          <label class="sub-text error">{this.errorText}</label>
+          <label class="sub-text error">
+            {this.includeErrorIcon ? <IconError size={iconSize} /> : null}
+            {this.errorText}
+          </label>
         ) : this.validText ? (
           <label class="sub-text valid">{this.validText}</label>
-        ) : this.helperText ? (
-          <label class="sub-text helper">{this.helperText}</label>
         ) : null}
       </div>
     );

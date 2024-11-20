@@ -32,6 +32,21 @@
     text-wrap: none;
     user-select: none;
 
+    .icon {
+      align-items: center;
+      display: flex;
+      flex: 0 0 auto;
+      pointer-events: none;
+
+      &.left-icon {
+        padding-right: $rem-8px;
+      }
+
+      &.right-icon {
+        padding-left: $rem-8px;
+      }
+    }
+
     &.resizable {
       width: 100%;
     }

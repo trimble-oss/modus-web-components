@@ -98,3 +98,10 @@ li {
     fill: $modus-list-item-color;
   }
 }
+
+@media screen and (forced-colors: active) {
+  li.disabled {
+    border-color: GrayText;
+    color: GrayText;
+  }
+}

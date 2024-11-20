@@ -7,9 +7,9 @@
 
 ## Properties
 
-| Property   | Attribute   | Description | Type     | Default     |
-| ---------- | ----------- | ----------- | -------- | ----------- |
-| `navbarId` | `navbar-id` |             | `string` | `undefined` |
+| Property       | Attribute | Description | Type          | Default     |
+| -------------- | --------- | ----------- | ------------- | ----------- |
+| `parentNavbar` | --        |             | `HTMLElement` | `undefined` |
 
 
 ## Dependencies

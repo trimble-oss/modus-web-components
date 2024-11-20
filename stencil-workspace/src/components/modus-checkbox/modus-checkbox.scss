@@ -3,6 +3,7 @@
 :host {
   align-items: center;
   display: flex;
+  justify-content: center;
 }
 
 .modus-checkbox {
@@ -27,7 +28,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
-    border:$rem-2px solid $modus-checkbox-border-color;
+    border: $rem-2px solid $modus-checkbox-border-color;
     border-radius: 0.25em;
     flex-shrink: 0;
     height: $rem-16px;
@@ -87,5 +88,11 @@
 
   &:active .checkbox:not(.checked):not(.disabled) {
     border: $rem-2px solid $modus-checkbox-selected-border-color;
+  }
+}
+
+@media (forced-colors: active) and (prefers-color-scheme: light) {
+  .modus-checkbox .checkbox {
+    forced-color-adjust: none;
   }
 }

@@ -2,10 +2,9 @@ import { html } from 'lit-html';
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-button-group-storybook-docs.mdx';
 
-
 export default {
   title: 'Components/Button Group',
-  argTypes:{
+  argTypes: {
     ariaDisabled: {
       name: 'aria-disabled',
       description: "The button group's aria-disabled state",
@@ -73,12 +72,12 @@ export default {
         defaultValue: { summary: `'medium'` },
         type: { summary: `'small' | 'medium' | 'large'` },
       },
-    }
+    },
   },
 
   parameters: {
     controls: { expanded: true, sort: 'alpha' },
-    actions:{
+    actions: {
       handles: ['buttonGroupClick', 'buttonSelectionChange'],
     },
     docs: {
@@ -89,10 +88,42 @@ export default {
     },
   },
 };
-const Template = ({ ariaLabel, buttonStyle, color, disabled, selectionType, size }) => html`
-  <modus-button-group aria-label=${ariaLabel} button-style=${buttonStyle} color=${color} .disabled=${disabled} selection-type=${selectionType} size=${size}>
+const DefaultTemplate = ({ ariaLabel, buttonStyle, color, disabled, selectionType, size }) => html`
+  <modus-button-group
+    aria-label=${ariaLabel}
+    button-style=${buttonStyle}
+    color=${color}
+    .disabled=${disabled}
+    selection-type=${selectionType}
+    size=${size}>
     <modus-button>Button 1</modus-button>
     <modus-button>Button 2</modus-button>
+    <modus-button>Button 3</modus-button>
+  </modus-button-group>
+`;
+const SingleSelectionTemplate = ({ ariaLabel, buttonStyle, color, disabled, selectionType, size }) => html`
+  <modus-button-group
+    aria-label=${ariaLabel}
+    button-style=${buttonStyle}
+    color=${color}
+    .disabled=${disabled}
+    selection-type=${selectionType}
+    size=${size}>
+    <modus-button selected>Button 1</modus-button>
+    <modus-button>Button 2</modus-button>
+    <modus-button>Button 3</modus-button>
+  </modus-button-group>
+`;
+const MultipleSelectionTemplate = ({ ariaLabel, buttonStyle, color, disabled, selectionType, size }) => html`
+  <modus-button-group
+    aria-label=${ariaLabel}
+    button-style=${buttonStyle}
+    color=${color}
+    .disabled=${disabled}
+    selection-type=${selectionType}
+    size=${size}>
+    <modus-button selected>Button 1</modus-button>
+    <modus-button selected>Button 2</modus-button>
     <modus-button>Button 3</modus-button>
   </modus-button-group>
 `;
@@ -105,13 +136,11 @@ const DefaultArgs = {
   color: 'primary',
   buttonStyle: 'outline',
 };
-export const Default = Template.bind({});
+export const Default = DefaultTemplate.bind({});
 Default.args = { ...DefaultArgs };
 
-export const SingleSelection = Template.bind({});
+export const SingleSelection = SingleSelectionTemplate.bind({});
 SingleSelection.args = { ...DefaultArgs, selectionType: 'single' };
 
-export const MultipleSelection = Template.bind({});
+export const MultipleSelection = MultipleSelectionTemplate.bind({});
 MultipleSelection.args = { ...DefaultArgs, selectionType: 'multiple' };
-
-

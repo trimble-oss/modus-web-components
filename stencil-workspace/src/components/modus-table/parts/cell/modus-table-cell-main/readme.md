@@ -15,6 +15,33 @@
 | `valueChange`       | --                    |             | `(props: TableCellEdited) => void` | `undefined` |
 
 
+## Events
+
+| Event                  | Description | Type                                                                                       |
+| ---------------------- | ----------- | ------------------------------------------------------------------------------------------ |
+| `cellInputValueChange` |             | `CustomEvent<{ accessorKey: string; row: unknown; newValue: string; oldValue?: string; }>` |
+
+
+## Methods
+
+### `handleCellEdit(rowIndex: string, columnId: string) => Promise<void>`
+
+Returns whether a cell is editable based on row index and column ID.
+
+#### Parameters
+
+| Name       | Type     | Description           |
+| ---------- | -------- | --------------------- |
+| `rowIndex` | `string` | The index of the row. |
+| `columnId` | `string` | The ID of the column. |
+
+#### Returns
+
+Type: `Promise<void>`
+
+Boolean indicating if the cell is editable.
+
+
 ## Dependencies
 
 ### Used by
@@ -39,6 +66,7 @@ graph TD;
   modus-table-cell-editor --> modus-autocomplete
   modus-autocomplete --> modus-text-input
   modus-autocomplete --> modus-chip
+  modus-autocomplete --> modus-spinner
   modus-table --> modus-table-cell-main
   style modus-table-cell-main fill:#f9f,stroke:#333,stroke-width:4px
 ```

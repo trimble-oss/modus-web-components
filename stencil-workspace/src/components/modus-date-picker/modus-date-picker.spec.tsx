@@ -19,10 +19,10 @@ describe('modus-date-picker', () => {
            Date range:
          </label>
        </div>
-       <div class="date-inputs">
+       <div class="date-inputs" part="date-inputs">
          <slot></slot>
        </div>
-       <div style="display: inline-flex;"></div>
+       <div class="calendar" part="calendar" style="display: inline-flex;"></div>
      </div>
    </mock:shadow-root>
    <modus-date-input label="Start" show-calendar-icon="" type="start"></modus-date-input>

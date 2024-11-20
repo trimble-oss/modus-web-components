@@ -5,12 +5,12 @@ import docs from './modus-chip-storybook-docs.mdx';
 export default {
   title: 'Components/Chip',
   argTypes: {
-    active:{
+    active: {
       name: 'active',
       description: 'Whether the chip is active',
       table: {
-      defaultValue: { summary: false },
-      type: { summary: 'boolean' },
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
       },
     },
     ariaLabel: {
@@ -93,7 +93,13 @@ export default {
         type: { summary: 'string' },
         defaultValue: { summary: '100px' },
       },
-    }
+    },
+    chipId: {
+      description: "This chip's id will create much more visibility for testing",
+      table: {
+        type: { summary: `string` },
+      },
+    },
   },
   parameters: {
     controls: { expanded: true },
@@ -121,6 +127,7 @@ export const Default = ({
   showClose,
   size,
   value,
+  chipId,
 }) => html`
   <modus-chip
     active=${active}
@@ -133,7 +140,8 @@ export const Default = ({
     show-checkmark=${showCheckmark}
     show-close=${showClose}
     size=${size}
-    value=${value}>
+    value=${value}
+    chip-id=${chipId}>
   </modus-chip>
 `;
 Default.args = {
@@ -143,11 +151,12 @@ Default.args = {
   disabled: false,
   hasError: false,
   imageUrl: 'https://randomuser.me/api/portraits/lego/1.jpg',
-  maxWidth:'100px',
+  maxWidth: '100px',
   showCheckmark: false,
   showClose: false,
   size: 'medium',
   value: 'Bryan',
+  chipId: '',
 };
 
 export const Outline = ({
@@ -184,7 +193,7 @@ Outline.args = {
   disabled: false,
   hasError: false,
   imageUrl: 'https://randomuser.me/api/portraits/lego/1.jpg',
-  maxWidth:'100px',
+  maxWidth: '100px',
   showCheckmark: false,
   showClose: false,
   size: 'medium',

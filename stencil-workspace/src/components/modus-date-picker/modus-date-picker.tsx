@@ -10,6 +10,18 @@ import { ModusIconMap } from '../../icons/ModusIconMap';
 import ModusDatePickerCalendar from './utils/modus-date-picker.calendar';
 import ModusDatePickerState from './utils/modus-date-picker.state';
 import { ModusDateInputEventDetails } from '../modus-date-input/utils/modus-date-input.models';
+import {
+  Alignment,
+  autoPlacement,
+  flip,
+  AutoPlacementOptions,
+  autoUpdate,
+  computePosition,
+  ComputePositionConfig,
+  Placement,
+  shift,
+  limitShift,
+} from '@floating-ui/dom';
 
 @Component({
   tag: 'modus-date-picker',
@@ -21,6 +33,18 @@ export class ModusDatePicker {
 
   /** (optional) Label for the field. */
   @Prop() label: string;
+
+  /** (optional) The placement of the calendar popup */
+  @Prop() position: Placement | 'auto' | 'auto-start' | 'auto-end' = 'bottom-start';
+
+  /** (optional) Function to check if a date is enabled
+   * If true, the day will be enabled/interactive. If false, the day will be disabled/non-interactive.
+   * The function accepts an ISO 8601 date string of a given day. By default, all days are enabled.
+   * Developers can use this function to write custom logic to disable certain days.
+   * The function is called for each rendered calendar day.
+   * This function should be optimized for performance to avoid jank.
+   * */
+  @Prop() isDateEnabled: (dateIsoString: string) => boolean | undefined;
 
   /** Needed for a better control over the state and avoid re-renders */
   @State() _forceUpdate = {};
@@ -40,6 +64,59 @@ export class ModusDatePicker {
     this._calendar = new ModusDatePickerCalendar();
   }
 
+  componentDidUpdate() {
+    if (this._showCalendar) {
+      this.configureCalendarPopover();
+    } else {
+      this.cleanupPopover?.();
+    }
+  }
+
+  disconnectedCallback() {
+    this.cleanupPopover?.();
+  }
+
+  cleanupPopover: () => void | undefined = undefined;
+
+  configureCalendarPopover() {
+    const referenceElement = this.element.shadowRoot.querySelector('.calendar') as HTMLElement;
+    const floatingElement = this.element.shadowRoot.querySelector('.calendar-container') as HTMLElement;
+
+    this.cleanupPopover = autoUpdate(referenceElement, floatingElement, () => {
+      const options: Partial<ComputePositionConfig> = {};
+      const middleware = [];
+
+      // The preventOverflow modifier from Popper is now called shift.
+      // This is because technically many modifiers in Popper 2 “prevented overflow”,
+      // which does not describe what it is actually doing unlike shift. (https://floating-ui.com/docs/migration#configure-middleware)
+      middleware.push(shift({ limiter: limitShift() }));
+
+      if (this.position.includes('auto')) {
+        const autoPlacementOptions: AutoPlacementOptions = {};
+        if (this.position.includes('-')) {
+          const [, alignment] = this.position.split('-');
+          autoPlacementOptions.alignment = alignment as Alignment;
+        }
+        middleware.push(autoPlacement(autoPlacementOptions));
+      } else {
+        options.placement = this.position as Placement;
+        middleware.push(flip());
+      }
+
+      if (this.position === 'auto') {
+        options.strategy = 'fixed';
+      }
+
+      options.middleware = middleware;
+      computePosition(referenceElement, floatingElement, options).then(({ x, y }) => {
+        Object.assign(floatingElement.style, {
+          left: `${x}px`,
+          top: `${y}px`,
+        });
+      });
+    });
+  }
+
   /** Handlers */
   @Listen('calendarIconClicked')
   handleCalendarIconClick(event: CustomEvent<ModusDateInputEventDetails>) {
@@ -56,7 +133,9 @@ export class ModusDatePicker {
 
   @Listen('click', { target: 'document' })
   handleClickOutside(event: MouseEvent): void {
-    if (this.element.contains(event.target as HTMLElement) || event.defaultPrevented) {
+    const path = event.composedPath();
+    const insideComponent = path.includes(this.element);
+    if (insideComponent || event.defaultPrevented) {
       return;
     }
     // Collapse when clicked outside
@@ -257,7 +336,9 @@ export class ModusDatePicker {
               const isSingleDateSelected = singleDate && this.compare(date, singleDate) === 0;
               const isSelected = isStartDate || isEndDate || isSingleDateSelected;
               const isInRange = !isSelected ? positions['in-range'] : false;
-              const isDateDisabled = !this.isWithinCurrentMinMax(date);
+              const isDateOutOfMaxMinRange = !this.isWithinCurrentMinMax(date);
+
+              const isDateEnabled = this.isDateEnabled ? this.isDateEnabled(date.toISOString()) : true;
 
               // Only for the last date in the calendar
               const onBlurEvent =
@@ -269,18 +350,20 @@ export class ModusDatePicker {
                     }
                   : {};
 
+              const buttonDisabled = isDateOutOfMaxMinRange || !isDateEnabled;
+
               return (
                 <button
                   class={{
                     'calendar-day grid-item': true,
                     selected: isSelected,
-                    disabled: isDateDisabled,
+                    disabled: buttonDisabled,
                     start: isStartDate && !isEndDate,
                     end: isEndDate && !isStartDate,
                     'current-day': isToday,
                     'range-selected': isInRange,
                   }}
-                  disabled={isDateDisabled}
+                  disabled={buttonDisabled}
                   tabIndex={0}
                   type="button"
                   aria-current={isSelected ? 'date' : undefined}
@@ -338,10 +421,10 @@ export class ModusDatePicker {
     return (
       <div class="modus-date-picker">
         {this.label ? <div class={'label-container'}>{this.label ? <label>{this.label}</label> : null}</div> : null}
-        <div class="date-inputs">
+        <div class="date-inputs" part="date-inputs">
           <slot onSlotchange={() => this.handleSlotChange()}></slot>
         </div>
-        <div style={{ display: 'inline-flex' }}>
+        <div class="calendar" part="calendar" style={{ display: 'inline-flex' }}>
           {this._showCalendar && (
             <nav class="calendar-container" aria-label="Pick a Date">
               {this.renderCalendarHeader()}
