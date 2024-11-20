@@ -14,6 +14,7 @@ body[data-mwc-theme='light'] {
   --theme-code-bg-color: #f8f8f8;
   --theme-code-border-color: #eee;
   --theme-header-underline-color: rgba(0, 0, 0, 0.1);
+  --icon-fill: #252a2e;
 }
 
 body[data-mwc-theme='dark'] {
@@ -30,6 +31,7 @@ body[data-mwc-theme='dark'] {
   --theme-code-bg-color: #6a6e79;
   --theme-code-border-color: #6a6e79;
   --theme-header-underline-color: rgba(255, 255, 255, 0.2);
+  --icon-fill: #ffffff;
 }
 
 body.sb-show-main,
