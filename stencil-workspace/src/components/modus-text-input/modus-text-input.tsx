@@ -119,7 +119,6 @@ export class ModusTextInput {
     this.internals.setFormValue(this.value);
   }
 
-
   /** Focus the input. */
   @Method()
   async focusInput(): Promise<void> {

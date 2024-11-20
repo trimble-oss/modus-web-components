@@ -309,8 +309,7 @@ const Template = ({
       type=${type}
       valid-text=${validText}
       value=${value}
-      name=${name}
-      ></modus-text-input>
+      name=${name}></modus-text-input>
   </form>
 `;
 
