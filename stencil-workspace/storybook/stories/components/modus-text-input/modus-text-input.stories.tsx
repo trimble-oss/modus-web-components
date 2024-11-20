@@ -251,6 +251,13 @@ export default {
         type: { summary: 'string' },
       },
     },
+    name: {
+      name: 'name',
+      description: "The text input's name",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
   },
   parameters: {
     actions: {
@@ -292,10 +299,12 @@ const Template = ({
   textAlign,
   type,
   validText,
+  name,
   value,
 }) => html`
 <form>
   <modus-text-input
+    name=${name}
     aria-label=${ariaLabel}
     autocapitalize=${autocapitalize}
     autocomplete=${autocomplete}
@@ -321,7 +330,8 @@ const Template = ({
     text-align=${textAlign}
     type=${type}
     valid-text=${validText}
-    value=${value}></modus-text-input>
+    value=${value}>
+  </modus-text-input>
 </form>
 `;
 
@@ -341,6 +351,7 @@ Default.args = {
   includeSearchIcon: false,
   inputmode: '',
   label: 'Username',
+  name: 'test-input',
   maxLength: 20,
   minLength: 0,
   pattern: '',

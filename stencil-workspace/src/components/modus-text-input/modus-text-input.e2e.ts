@@ -297,7 +297,7 @@ describe('modus-text-input', () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-text-input aria-label="test label"></modus-text-input>');
-    let element = await page.find('modus-text-input >>> input');
+    const element = await page.find('modus-text-input >>> input');
     expect(element).toBeDefined();
     expect(element).toHaveAttribute('aria-label');
     expect(element.getAttribute('aria-label')).toEqual('test label');
@@ -307,7 +307,7 @@ describe('modus-text-input', () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-text-input></modus-text-input>');
-    let element = await page.find('modus-text-input >>> input');
+    const element = await page.find('modus-text-input >>> input');
     expect(element).toBeDefined();
     expect(element).not.toHaveAttribute('aria-label');
   });
@@ -316,8 +316,18 @@ describe('modus-text-input', () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-text-input aria-label=""></modus-text-input>');
-    let element = await page.find('modus-text-input >>> input');
+    const element = await page.find('modus-text-input >>> input');
     expect(element).toBeDefined();
     expect(element).not.toHaveAttribute('aria-label');
+  });
+
+  it('should render with the correct name attribute', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-text-input name="test-input"></modus-text-input>');
+
+    const element = await page.find('modus-text-input >>> input');
+
+    expect(element).toHaveAttribute('name');
+    expect(element.getAttribute('name')).toBe('test-input');
   });
 });
