@@ -54,7 +54,10 @@ const translations: Record<string, Translation> = {
 };
 
 function getTranslations(): Translation {
-  const lang = navigator?.language?.slice(0, 2);
+  let lang = navigator?.language?.slice(0, 2);
+  if (!lang) {
+    lang = document.documentElement.lang?.slice(0, 2);
+  }
   return translations[lang] || translations['en'];
 }
 

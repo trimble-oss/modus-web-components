@@ -3,7 +3,7 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { TableContext } from '../models/table-context.models';
-import {getTranslations } from '../../../lang/translations';
+import { getTranslations } from '../../../lang/translations';
 
 interface ModusTablePaginationProps {
   context: TableContext;
@@ -36,7 +36,7 @@ export const ModusTablePagination: FunctionalComponent<ModusTablePaginationProps
       </div>
       <div class="pagination-and-count">
         <div class="total-count">
-          <span>{getTranslations().showingResults}</span>
+          <span>{getTranslations().showingResult}</span>
           <span>{pageIndex * pageSize + 1}</span>
           <span>-</span>
           <span>
