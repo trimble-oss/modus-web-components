@@ -142,6 +142,10 @@ body.dark .sidebar-header a[title='Storybook'] {
   padding: 0 4px;
 }
 
+.css-1qezoi6 :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)) {
+  line-height: unset !important;
+}
+
 /* dark mode */
 
 html:has(body.dark) {
@@ -150,6 +154,10 @@ html:has(body.dark) {
 
 body.dark h1:first-of-type {
   color: #fff;
+}
+
+body.dark .docblock-source {
+  background-color: #353a40 !important;
 }
 
 .css-1qezoi6 :where(table:not(.sb-anchor, .sb-unstyled, .sb-unstyled table)) tr th,
