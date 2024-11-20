@@ -22,6 +22,9 @@ export class ModusProgressBar {
   /** (optional) The progress bar's minimum value. */
   @Prop() minValue = 0;
 
+  /** (optional) The progress bar's mode. */
+  @Prop() mode: 'determinate' | 'indeterminate' = 'determinate';
+
   /** (optional) The progress bar's size. */
   @Prop() size: 'default' | 'small' | 'compact' = 'default';
 
@@ -48,7 +51,7 @@ export class ModusProgressBar {
     const progressStyle = {
       backgroundColor: this.color,
       color: this.textColor,
-      width: `${percentage}%`,
+      width: this.mode === 'determinate' ? `${percentage}%` : '100%',
     };
 
     return progressStyle;
@@ -72,18 +75,18 @@ export class ModusProgressBar {
       ${progressBarBackgroundColorClass}
       ${this.classBySize.get(this.size)}
      `;
-    const progressClass = `progress ${progressColorClass} ${progressTextColor}`;
+    const progressClass = `progress ${progressColorClass} ${progressTextColor} ${this.mode === 'indeterminate' ? 'indeterminate' : 'determinate'}`;
 
     return (
       <Host
         aria-label={this.ariaLabel}
-        aria-valuemax={this.maxValue}
-        aria-valuemin={this.minValue}
-        aria-valuenow={this.value}
+        aria-valuemax={this.mode === 'determinate' ? this.maxValue : null}
+        aria-valuemin={this.mode === 'determinate' ? this.minValue : null}
+        aria-valuenow={this.mode === 'determinate' ? this.value : null}
         role="progressbar">
         <div class={progressBarClass} style={this.getProgressBarStyle()}>
           <div class={progressClass} style={this.getProgressStyle(percentage)}>
-            {this.size === 'default' && this.text}
+            {this.size === 'default' && this.mode === 'determinate' && this.text}
           </div>
         </div>
       </Host>

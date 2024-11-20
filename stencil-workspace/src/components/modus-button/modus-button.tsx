@@ -64,6 +64,7 @@ export class ModusButton {
     ['secondary', 'color-secondary'],
     ['tertiary', 'color-tertiary'],
     ['dark', 'color-dark'],
+    ['special', 'color-special'],
   ]);
 
   classBySize: Map<string, string> = new Map([

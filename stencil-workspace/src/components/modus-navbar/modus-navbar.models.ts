@@ -19,6 +19,7 @@ export interface ModusProfileMenuOptions {
 export interface ModusNavbarLogo {
   url: string;
   height?: string;
+  alt?: string;
 }
 
 export interface ModusNavbarLogoOptions {
@@ -32,4 +33,14 @@ export interface ModusNavbarButton {
   orderIndex: number;
   hideMenu?: boolean;
   tooltip?: ModusNavbarTooltip;
+}
+
+export interface ModusNavbarDropdownItem {
+  text: string;
+  value: string;
+}
+
+export interface ModusNavbarDropdownOptions {
+  ariaLabel: string;
+  items: ModusNavbarDropdownItem[];
 }

@@ -308,7 +308,7 @@ describe('modus-dropdown', () => {
     expect(element).toBeDefined();
     expect(element).not.toHaveAttribute('aria-label');
   });
-  
+
   it('does not set the toggle element to disabled when "disabled" is not in as an attribute', async () => {
     const page = await newE2EPage();
 

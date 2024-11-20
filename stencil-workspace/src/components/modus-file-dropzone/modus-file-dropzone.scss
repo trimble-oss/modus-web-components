@@ -34,13 +34,11 @@
     color: $modus-file-upload-dropzone-color;
     display: flex;
     flex-direction: column;
-    font-weight: $font-weight-semi-bold;
     justify-content: center;
     padding: $rem-12px $rem-16px;
 
     .browse {
       color: $modus-file-upload-dropzone-browse-color;
-      text-decoration: underline;
 
       &:hover {
         cursor: pointer;
@@ -67,10 +65,27 @@
       }
     }
 
+    &.disabled {
+      background-color: $modus-file-upload-dropzone-disabled-bg;
+      border-color: $modus-file-upload-dropzone-disabled-border-color;
+      color: $modus-file-upload-dropzone-disabled-color;
+      cursor: not-allowed;
+
+      svg {
+        fill: $modus-file-upload-dropzone-disabled-svg-color;
+      }
+
+      .browse {
+        color: $modus-file-upload-dropzone-disabled-color;
+        cursor: not-allowed;
+      }
+    }
+
     .error-messages {
       align-items: center;
       display: flex;
       flex-direction: column;
+      gap: $rem-8px;
     }
 
     svg {

@@ -12,7 +12,7 @@ import {
   FunctionalComponent,
 } from '@stencil/core';
 import { ModusIconMap } from '../../../icons/ModusIconMap';
-import { TreeViewItemOptions } from '../modus-content-tree.types';
+import { TreeItemSelectionChange, TreeViewItemOptions } from '../modus-content-tree.types';
 import { TREE_ITEM_SIZE_CLASS } from '../modus-content-tree.constants';
 import { ModusActionBarOptions } from '../../modus-action-bar/modus-action-bar';
 
@@ -42,16 +42,18 @@ export class ModusTreeViewItem {
   @Prop() disabled: boolean;
 
   /** (optional) Allows the item to be dragged across the tree */
-  @Prop() draggableItem: boolean;
+  @Prop({ mutable: true }) draggableItem: boolean;
 
   /** (optional) Allows the item to be a drop zone so other tree items can be dropped above it */
-  @Prop() droppableItem: boolean;
+  @Prop({ mutable: true }) droppableItem: boolean;
 
   /** (optional) Changes the label field into a text box */
   @Prop({ mutable: true }) editable: boolean;
 
   /** An event that fires on tree item click */
   @Event() itemClick: EventEmitter<boolean>;
+
+  @Event() itemSelectionChange: EventEmitter<TreeItemSelectionChange>;
 
   /** An event that fires on tree item expand/collapse */
   @Event() itemExpandToggle: EventEmitter<boolean>;
@@ -112,8 +114,10 @@ export class ModusTreeViewItem {
     className?: string;
     defaultContent?: string | HTMLElement;
     display?: boolean;
+    tabIndex?: number;
     onClick?: (e: MouseEvent) => void;
     onMouseDown?: (e: MouseEvent) => void;
+    onKeyDown?: (e: KeyboardEvent) => void;
     role?: string;
   }> = ({ name, className, defaultContent, display = true, ...props }) => {
     const showDefault = !this.slots.has(name) && defaultContent;
@@ -218,6 +222,10 @@ export class ModusTreeViewItem {
       this.options.onItemDrag(this.nodeId, dragContent, e);
     }
   }
+  handleDragKeyDown(e: KeyboardEvent) {
+    const dragContent = this.refItemContent.cloneNode(true) as HTMLElement;
+    this.options.onItemDragClick(this.nodeId, dragContent, e);
+  }
 
   handleExpandToggle(e?: Event): void {
     if (this.shouldHandleEvent(e)) {
@@ -246,6 +254,9 @@ export class ModusTreeViewItem {
 
       onItemSelection(this.nodeId, e);
       this.itemClick.emit(hasItemSelected(this.nodeId));
+      if (!e.ctrlKey) {
+        this.itemSelectionChange.emit({ isSelected: hasItemSelected(this.nodeId), nodeId: this.nodeId });
+      }
     }
   }
 
@@ -260,8 +271,10 @@ export class ModusTreeViewItem {
         e.stopPropagation();
         break;
       case 'Enter':
-        this.handleItemClick(e);
-        e.stopPropagation();
+        if (!this.draggableItem) {
+          this.handleItemClick(e);
+          e.stopPropagation();
+        }
         break;
     }
   }
@@ -331,6 +344,7 @@ export class ModusTreeViewItem {
     this.options = { ...newValue };
     this.handleTreeSlotChange();
     this.updateComponent();
+    this.setDraggableState(this?.options?.draggable);
     this.tabIndexValue = this.options.disableTabbing ? -1 : this.tabIndexValue;
   }
 
@@ -342,6 +356,7 @@ export class ModusTreeViewItem {
         showSelectionIndicator,
         size,
         borderless,
+        draggable,
         getLevel,
         hasItemSelected,
         hasItemDisabled,
@@ -368,6 +383,7 @@ export class ModusTreeViewItem {
         multiCheckboxSelection,
         size,
         borderless,
+        draggable,
         isDisabled,
         selectionIndicator,
       };
@@ -399,6 +415,15 @@ export class ModusTreeViewItem {
     this.editable = false;
   }
 
+  setDraggableState(draggable = false) {
+    if (this.draggableItem === false || this.droppableItem === false) {
+      return;
+    }
+    if (draggable) {
+      this.draggableItem = this.droppableItem = draggable;
+    }
+  }
+
   render(): HTMLLIElement {
     const {
       selected,
@@ -422,6 +447,7 @@ export class ModusTreeViewItem {
       ...(expandable ? { 'aria-expanded': expanded ? 'true' : 'false' } : {}),
       role: 'treeitem',
     };
+
     const sizeClass = `${TREE_ITEM_SIZE_CLASS.get(size || 'standard')}`;
     const tabIndex: string | number = isDisabled ? -1 : this.tabIndexValue;
     const treeItemClass = `tree-item ${this.isExpanded ? 'expanded' : ''} ${this.isChildren ? 'is-children' : ''} ${this.isLastChild && !this.isExpanded ? 'is-last-child' : ''}${selected ? 'selected' : ''} ${sizeClass} ${isDisabled ? 'disabled' : ''} ${borderless ? 'borderless' : ''}`;
@@ -440,6 +466,8 @@ export class ModusTreeViewItem {
             className={`icon-slot drag-icon${!this.draggableItem ? ' hidden' : ''}`}
             defaultContent={<ModusIconMap icon="drag_indicator" />}
             name={this.SLOT_DRAG_ICON}
+            tabIndex={0}
+            onKeyDown={(e) => this.handleDragKeyDown(e)}
             onMouseDown={(e) => this.handleDrag(e)}
           />
           <div aria-disabled="true" style={{ paddingLeft: `${(level - 1) * 0.5}rem` }}>

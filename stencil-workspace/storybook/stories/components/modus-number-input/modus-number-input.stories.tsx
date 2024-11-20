@@ -1,3 +1,5 @@
+// modus-number-input.stories.tsx
+
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-number-input-storybook-docs.mdx';
 import { html } from 'lit-html';
@@ -8,6 +10,23 @@ export default {
     ariaLabel: {
       name: 'aria-label',
       description: "The number input's aria-label",
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    currency: {
+      name: 'currency',
+      description:
+        'The currency symbol.\nNote: Follow the currency codes from [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) for the `currencySymbol` property.\n',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: "''" },
+      },
+    },
+    locale: {
+      name: 'locale',
+      description:
+        'The locale of the selected currency. Note: Follow the locale codes from [BCP 47](https://tools.ietf.org/html/bcp47) for the `locale` property.',
       table: {
         type: { summary: 'string' },
       },
@@ -82,7 +101,7 @@ export default {
       description: 'The size of the number input',
       table: {
         defaultValue: { summary: `'medium'` },
-        type: { summary: `'medium' | 'large'` },
+        type: { summary: `'large' | 'medium'` },
       },
     },
     step: {
@@ -94,18 +113,14 @@ export default {
     textAlign: {
       name: 'text-align',
       control: {
-        options: [
-          'left',
-          'right'
-        ],
+        options: ['left', 'right'],
         type: 'select',
       },
       description: 'text alignment for the number input.',
       table: {
         defaultValue: { summary: "'left'" },
         type: {
-          summary:
-            "'left' | 'right'",
+          summary: "'left' | 'right'",
         },
       },
     },
@@ -139,6 +154,8 @@ export default {
 
 const Template = ({
   ariaLabel,
+  currency,
+  locale,
   disabled,
   errorText,
   helperText,
@@ -156,6 +173,8 @@ const Template = ({
 }) => html`
   <modus-number-input
     aria-label=${ariaLabel}
+    currency=${currency}
+    locale=${locale}
     ?disabled=${disabled}
     error-text=${errorText}
     helper-text=${helperText}
@@ -163,7 +182,7 @@ const Template = ({
     max-value=${maxValue}
     min-value=${minValue}
     placeholder=${placeholder}
-    read-only=${readOnly}
+    ?read-only=${readOnly}
     ?required=${required}
     size=${size}
     step=${step}
@@ -175,11 +194,13 @@ const Template = ({
 export const Default = Template.bind({});
 Default.args = {
   ariaLabel: '',
+  currency: '',
+  locale: '',
   disabled: false,
   errorText: '',
   helperText: '',
   label: 'Number Input',
-  maxValue: 100,
+  maxValue: 100000,
   minValue: 0,
   placeholder: '',
   readOnly: false,
@@ -188,5 +209,5 @@ Default.args = {
   step: 1,
   textAlign: 'left',
   validText: '',
-  value: 100,
+  value: 100000,
 };

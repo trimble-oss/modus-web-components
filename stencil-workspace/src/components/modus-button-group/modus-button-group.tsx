@@ -1,8 +1,13 @@
 // eslint-disable-next-line
-import { Component, h, Prop, Element, Event, EventEmitter, Host, Listen, Watch } from '@stencil/core';
-import { ButtonGroupSelectionType } from './modus-button-group.models';
-import { DEFAULT_SELECTION_TYPE, SINGLE_SELECTION_TYPE, MULTIPLE_SELECTION_TYPE } from './modus-button-group.constants';
+import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, Watch } from '@stencil/core';
 import { ButtonColor, ButtonSize, ButtonStyle, ButtonType } from '../modus-button/modus-button.models';
+import {
+  DEFAULT_SELECTION_TYPE,
+  MULTIPLE_SELECTION_TYPE,
+  SELECTION_ATTRIBUTE,
+  SINGLE_SELECTION_TYPE,
+} from './modus-button-group.constants';
+import { ButtonGroupSelectionType } from './modus-button-group.models';
 
 @Component({
   tag: 'modus-button-group',
@@ -12,6 +17,7 @@ import { ButtonColor, ButtonSize, ButtonStyle, ButtonType } from '../modus-butto
 export class ModusButtonGroup {
   /** Array to store selected buttons */
   selectedButtons: HTMLModusButtonElement[] = [];
+  private observer: MutationObserver | null = null;
 
   @Element() host: HTMLElement;
 
@@ -19,7 +25,7 @@ export class ModusButtonGroup {
   @Prop() ariaDisabled: string | null;
 
   /** (optional) The button group's aria-label. */
-  @Prop() ariaLabel: string;
+  @Prop() ariaLabel: string | null;
 
   /** (optional) The style of the buttons in the group */
   @Prop() buttonStyle: ButtonStyle = 'outline';
@@ -65,6 +71,15 @@ export class ModusButtonGroup {
     this.setupButtons();
   }
 
+  componentDidLoad() {
+    this.observer = new MutationObserver(this.handleMutations.bind(this));
+    this.observer.observe(this.host, { subtree: true, attributes: true, attributeFilter: [SELECTION_ATTRIBUTE] });
+  }
+
+  disconnectedCallback() {
+    this.observer?.disconnect();
+  }
+
   @Listen('slotchange')
   handleSlotChange() {
     this.setupButtons();
@@ -90,13 +105,36 @@ export class ModusButtonGroup {
     this.buttonGroupClick.emit({ button: clickedButton, isSelected: this.selectedButtons.includes(clickedButton) });
   }
 
+  handleMutations(mutationList: MutationRecord[]) {
+    for (const mutation of mutationList) {
+      if (mutation.type === 'attributes' && mutation.attributeName === SELECTION_ATTRIBUTE) {
+        this.setupButtons();
+      }
+    }
+  }
+
+  handleButtonSelection(button, isSelected) {
+    if (isSelected) {
+      button.setActive(true);
+      this.selectedButtons.push(button);
+    } else {
+      button.setActive(false);
+      if (this.selectedButtons.includes(button)) {
+        this.selectedButtons = this.selectedButtons.filter((selectedButton) => selectedButton !== button);
+      }
+    }
+  }
+
   setupButtons(reset?: boolean) {
-    const buttons = this.host.querySelectorAll('modus-button');
-    this.renderButtons(buttons, reset);
+    customElements.whenDefined('modus-button').then(() => {
+      const buttons = this.host.querySelectorAll('modus-button');
+      this.renderButtons(buttons, reset);
+    });
   }
 
   renderButtons(buttons: NodeListOf<HTMLModusButtonElement>, reset: boolean) {
     const buttonType = this.determineButtonType();
+    let foundSelected = false;
     buttons.forEach((button: HTMLModusButtonElement) => {
       if (reset) {
         button.ariaDisabled = this.ariaDisabled;
@@ -110,6 +148,19 @@ export class ModusButtonGroup {
       button.color = this.color;
       button.size = this.size;
       button.type = buttonType;
+
+      const isSelected = button.hasAttribute(SELECTION_ATTRIBUTE) && button.getAttribute(SELECTION_ATTRIBUTE) !== 'false';
+
+      if (this.selectionType === SINGLE_SELECTION_TYPE) {
+        if (isSelected && !foundSelected) {
+          this.handleButtonSelection(button, true);
+          foundSelected = true;
+        } else {
+          this.handleButtonSelection(button, false);
+        }
+      } else if (this.selectionType === MULTIPLE_SELECTION_TYPE) {
+        this.handleButtonSelection(button, isSelected);
+      }
     });
   }
 

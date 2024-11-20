@@ -7,9 +7,8 @@
   display: none;
   font-family: $primary-font;
   font-size: $rem-12px;
-  max-width: none;
+  max-width: 250px;
   padding: $rem-4px $rem-8px;
-  white-space: nowrap;
   z-index: 1;
 }
 
@@ -20,6 +19,7 @@
 #arrow,
 #arrow::before {
   background: inherit;
+  forced-color-adjust: none;
   height: 8px;
   position: absolute;
   width: 8px;
@@ -49,4 +49,10 @@
 
 .tooltip[data-popper-placement^='right'] > #arrow {
   left: -4px;
+}
+
+@media (forced-colors: active) {
+  .tooltip {
+    border: 1px solid transparent;
+  }
 }

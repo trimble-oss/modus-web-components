@@ -76,6 +76,9 @@ describe('modus-date-input', () => {
     await page.setContent('<modus-date-input></modus-date-input>');
 
     const textInput = await page.find('modus-date-input');
+    textInput.setProperty('label', 'label');
+    await page.waitForChanges();
+
     textInput.setProperty('helperText', 'Helper.');
     await page.waitForChanges();
 
@@ -474,7 +477,7 @@ describe('modus-date-input', () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-date-input aria-label="test label"></modus-date-input>');
-    let element = await page.find('modus-date-input >>> input');
+    const element = await page.find('modus-date-input >>> input');
     expect(element).toBeDefined();
     expect(element).toHaveAttribute('aria-label');
     expect(element.getAttribute('aria-label')).toEqual('test label');
@@ -484,7 +487,7 @@ describe('modus-date-input', () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-date-input></modus-date-input>');
-    let element = await page.find('modus-date-input >>> input');
+    const element = await page.find('modus-date-input >>> input');
     expect(element).toBeDefined();
     expect(element).not.toHaveAttribute('aria-label');
   });
@@ -493,8 +496,32 @@ describe('modus-date-input', () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-date-input aria-label=""></modus-date-input>');
-    let element = await page.find('modus-date-input >>> input');
+    const element = await page.find('modus-date-input >>> input');
     expect(element).toBeDefined();
     expect(element).not.toHaveAttribute('aria-label');
+  });
+
+  it('check the error text is present on clicking outside', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<modus-date-input></modus-date-input>');
+
+    const textInput = await page.find('modus-date-input');
+    textInput.setProperty('errorText', 'Error.');
+    await page.waitForChanges();
+
+    const inputContainer = await page.find('modus-date-input >>> .input-container');
+    expect(inputContainer).toHaveClass('error');
+
+    const errorLabel = await page.find('modus-date-input >>> label.error');
+    expect(errorLabel).not.toBeNull();
+
+    const input = await page.find('modus-date-input >>> input');
+    await input.click();
+    await page.click('body');
+    await page.waitForChanges();
+
+    const errorText = await page.find('modus-date-input >>> .sub-text > label');
+    expect(errorText.innerHTML).toEqual('Error.');
   });
 });

@@ -19,13 +19,15 @@ import { ModusNavbarApp } from './apps-menu/modus-navbar-apps-menu';
 import { IconHelp } from '../../icons/svgs/icon-help';
 import {
   ModusNavbarButton,
+  ModusNavbarDropdownItem,
+  ModusNavbarDropdownOptions,
   ModusNavbarLogoOptions,
   ModusNavbarTooltip,
   ModusProfileMenuOptions,
 } from './modus-navbar.models';
 import { ModusNavbarProductLogo } from './product-logo/modus-navbar-product-logo';
-import { createGuid } from '../../utils/utils';
 import { ModusNavbarButtonList } from './button-list/modus-navbar-button-list';
+import { ModusNavbarDropdown } from './dropdown/modus-navbar-dropdown';
 
 /**
  * @slot main - Renders custom main menu content
@@ -54,6 +56,12 @@ export class ModusNavbar {
 
   /** (optional) Set the primary logo to display when the screen size is greater than 576 pixels, and the secondary logo to display when the screen size is less than or equal to 576 pixels. */
   @Prop() logoOptions: ModusNavbarLogoOptions;
+
+  /** (optional) Dropdown options. */
+  @Prop() dropdownOptions: ModusNavbarDropdownOptions;
+
+  /** (optional) The selected dropdown item. */
+  @Prop() selectedDropdownItem: ModusNavbarDropdownItem;
 
   /** (required) Profile menu options. */
   @Prop({ mutable: true }) profileMenuOptions: ModusProfileMenuOptions;
@@ -112,6 +120,9 @@ export class ModusNavbar {
   /** An event that fires when the help link opens. */
   @Event() helpOpen: EventEmitter<void>;
 
+  /** An event that fires when a dropdown item is selected **/
+  @Event() dropdownItemSelect: EventEmitter<ModusNavbarDropdownItem>;
+
   /** An event that fires on main menu click. */
   @Event() mainMenuClick: EventEmitter<KeyboardEvent | MouseEvent>;
 
@@ -146,7 +157,6 @@ export class ModusNavbar {
   @State() notificationsMenuVisible: boolean;
   @State() profileMenuVisible: boolean;
   @State() slots: string[] = [];
-  @State() componentId = createGuid();
   @State() searchOverlayVisible: boolean;
   @State() openButtonMenuId: string;
 
@@ -366,6 +376,11 @@ export class ModusNavbar {
     }
   }
 
+  dropdownItemSelectHandler(item: ModusNavbarDropdownItem): void {
+    this.selectedDropdownItem = item;
+    this.dropdownItemSelect.emit(item);
+  }
+
   getNotificationCount(): string {
     if (!this.notificationCount) {
       return;
@@ -399,7 +414,7 @@ export class ModusNavbar {
     const counterValue = this.getNotificationCount();
 
     return (
-      <Host id={this.componentId}>
+      <Host>
         <nav class={`${direction} ${shadow} ${variant}`} aria-label={this.navAriaLabel}>
           {!this.searchOverlayVisible && (
             <Fragment>
@@ -421,12 +436,25 @@ export class ModusNavbar {
                   </div>
                 )}
                 {this.mainMenuVisible && (
-                  <modus-navbar-main-menu navbarId={this.componentId}>
+                  <modus-navbar-main-menu parentNavbar={this.element}>
                     <slot name={this.SLOT_MAIN}></slot>
                   </modus-navbar-main-menu>
                 )}
                 {this.logoOptions && (
-                  <ModusNavbarProductLogo logos={this.logoOptions} onClick={(event) => this.productLogoClick.emit(event)} />
+                  <div class="navbar-logo">
+                    <ModusNavbarProductLogo
+                      logos={this.logoOptions}
+                      onClick={(event) => this.productLogoClick.emit(event)}
+                    />
+                  </div>
+                )}
+                {this.dropdownOptions && (
+                  <ModusNavbarDropdown
+                    itemSelect={(item) => this.dropdownItemSelectHandler(item)}
+                    options={this.dropdownOptions}
+                    reverse={this.reverse}
+                    selectedItem={this.selectedDropdownItem}
+                  />
                 )}
               </div>
               <div class={`right ${direction}`}>

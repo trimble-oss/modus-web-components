@@ -43,6 +43,9 @@ export class ModusDateInput {
   /** (optional) Custom error text displayed for the input. */
   @Prop() errorText: string;
 
+  /** Handles the internal error text */
+  @State() internalErrorText: string;
+
   /** (optional) Filler date is used as fillers for parts not in the display format when constructing a full date string, for 'value'. It must be in the ISO String format YYYY-MM-DD. Default is {current year}-01-01. */
   @Prop() fillerDate: string;
   @Watch('fillerDate')
@@ -133,6 +136,8 @@ export class ModusDateInput {
 
   /** An event that fires on input value change. */
   @Event() valueChange: EventEmitter<ModusDateInputEventDetails>;
+  /** An event that fires on value error.*/
+  @Event() valueError: EventEmitter<string>;
 
   private classBySize: Map<string, string> = new Map([
     ['medium', 'medium'],
@@ -224,7 +229,7 @@ export class ModusDateInput {
 
   // Helpers
   clearValidation(): void {
-    this.errorText = null;
+    this.internalErrorText = null;
   }
 
   /** Check if the input string matches any of the alternative formats. */
@@ -264,16 +269,18 @@ export class ModusDateInput {
   }
 
   validateInput(inputString: string | null): void {
-    if (this.disableValidation) return;
+    if (this.disableValidation || this.errorText) return;
 
     if (!inputString) {
       if (this.required) {
-        this.errorText = 'Required';
+        this.internalErrorText = 'Required';
+        this.valueError.emit(this.internalErrorText);
       } else {
         this.clearValidation();
       }
     } else if (!this.value) {
-      this.errorText = 'Invalid date';
+      this.internalErrorText = 'Invalid date';
+      this.valueError.emit(this.internalErrorText);
     } else {
       this.validateMinMax();
     }
@@ -286,10 +293,12 @@ export class ModusDateInput {
 
     if (min && min > value) {
       min.setUTCDate(min.getDate() - 1);
-      this.errorText = `Select a date after ${this._formatter.formatDisplayString(min.toISOString())}`;
+      this.internalErrorText = `Select a date after ${this._formatter.formatDisplayString(min.toISOString())}`;
+      this.valueError.emit(this.internalErrorText);
     } else if (max && max < value) {
       max.setUTCDate(max.getDate() + 1);
-      this.errorText = `Select a date before ${this._formatter.formatDisplayString(max.toISOString())}`;
+      this.internalErrorText = `Select a date before ${this._formatter.formatDisplayString(max.toISOString())}`;
+      this.valueError.emit(this.internalErrorText);
     } else {
       this.clearValidation();
     }
@@ -297,21 +306,25 @@ export class ModusDateInput {
 
   render() {
     const className = `modus-date-input ${this.disabled ? 'disabled' : ''}`;
+    const displayErrorMessage = this.internalErrorText || this.errorText;
+    const displayValidMessage = !displayErrorMessage && this.validText;
+
     return (
       <div class={className}>
         {this.label || this.required ? (
           <div class="label-container">
             {this.label ? <label htmlFor={this._dateInputId}>{this.label}</label> : null}
             {this.required ? <span class="required">*</span> : null}
+            {this.helperText ? <label class="sub-text helper">{this.helperText}</label> : null}
           </div>
         ) : null}
         <div
-          class={`input-container ${this.errorText ? 'error' : this.validText ? 'valid' : ''} ${this.classBySize.get(
+          class={`input-container ${displayErrorMessage ? 'error' : this.validText ? 'valid' : ''} ${this.classBySize.get(
             this.size
           )}`}
-          part="input-container">
+          part={`input-container ${displayErrorMessage ? 'error' : this.validText ? 'valid' : ''}`}>
           <input
-            aria-invalid={!!this.errorText}
+            aria-invalid={!!displayErrorMessage}
             aria-label={this.ariaLabel || undefined}
             aria-required={this.required?.toString()}
             autofocus={this.autoFocusInput}
@@ -341,13 +354,11 @@ export class ModusDateInput {
             </span>
           )}
         </div>
-        <div class="sub-text">
-          {this.errorText ? (
-            <label class="error">{this.errorText}</label>
-          ) : this.validText ? (
+        <div class="sub-text" part="sub-text">
+          {displayErrorMessage ? (
+            <label class="error">{displayErrorMessage}</label>
+          ) : displayValidMessage ? (
             <label class="valid">{this.validText}</label>
-          ) : this.helperText ? (
-            <label class="helper">{this.helperText}</label>
           ) : null}
         </div>
       </div>

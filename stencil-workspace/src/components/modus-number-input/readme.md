@@ -10,10 +10,12 @@
 | Property      | Attribute     | Description                                                   | Type                  | Default     |
 | ------------- | ------------- | ------------------------------------------------------------- | --------------------- | ----------- |
 | `ariaLabel`   | `aria-label`  | (optional) The input's aria-label.                            | `string`              | `undefined` |
+| `currency`    | `currency`    | (optional) The input's currency                               | `string`              | `undefined` |
 | `disabled`    | `disabled`    | (optional) Whether the input is disabled.                     | `boolean`             | `undefined` |
 | `errorText`   | `error-text`  | (optional) The input's error state text.                      | `string`              | `undefined` |
 | `helperText`  | `helper-text` | (optional) The input's helper text displayed below the input. | `string`              | `undefined` |
 | `label`       | `label`       | (optional) The input's label.                                 | `string`              | `undefined` |
+| `locale`      | `locale`      | (optional) The input's locale                                 | `string`              | `undefined` |
 | `maxValue`    | `max-value`   | (optional) The input's maximum value.                         | `number`              | `undefined` |
 | `minValue`    | `min-value`   | (optional) The input's minimum value.                         | `number`              | `undefined` |
 | `placeholder` | `placeholder` | (optional) The input's placeholder text.                      | `string`              | `undefined` |
