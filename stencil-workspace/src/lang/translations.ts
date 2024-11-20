@@ -5,6 +5,7 @@ interface Translation {
 const translations: Record<string, Translation> = {
   en: {
     showingResult: 'Showing result',
+    of: 'of',
     pageView: 'Page View',
     sortAscending: 'Sort Ascending',
     sortDescending: 'Sort Descending',
@@ -13,6 +14,7 @@ const translations: Record<string, Translation> = {
   },
   es: {
     showingResult: 'Mostrando resultado',
+    of: 'de',
     pageView: 'Vista de página',
     sortAscending: 'Ordenar de forma ascendente',
     sortDescending: 'Ordenar de forma descendente',
@@ -21,6 +23,7 @@ const translations: Record<string, Translation> = {
   },
   fr: {
     showingResult: 'Afficher le résultat',
+    of: 'de',
     pageView: 'Prévisualisation',
     sortAscending: 'Trier par ordre croissant',
     sortDescending: 'Trier par ordre décroissant',
@@ -29,6 +32,7 @@ const translations: Record<string, Translation> = {
   },
   de: {
     showingResult: 'Ergebnis anzeigen',
+    of: 'von',
     pageView: 'Seitenansicht',
     sortAscending: 'Aufsteigend sortieren',
     sortDescending: 'Absteigend sortieren',
@@ -37,6 +41,7 @@ const translations: Record<string, Translation> = {
   },
   it: {
     showingResult: 'Visualizzazione del risultato',
+    of: 'di',
     pageView: 'Vista della pagina',
     sortAscending: 'Ordina in ordine crescente',
     sortDescending: 'Ordina in ordine decrescente',
@@ -45,6 +50,7 @@ const translations: Record<string, Translation> = {
   },
   fi: {
     showingResult: 'Näytetään tulos',
+    of: '/',
     pageView: 'Sivunäkymä',
     sortAscending: 'Lajittele kasvavaan järjestykseen',
     sortDescending: 'Lajittele vähenevään järjestykseen',

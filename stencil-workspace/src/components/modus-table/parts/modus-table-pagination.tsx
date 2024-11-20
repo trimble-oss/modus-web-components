@@ -46,7 +46,7 @@ export const ModusTablePagination: FunctionalComponent<ModusTablePaginationProps
                 : totalCount
               : (pageIndex + 1) * pageSize}
           </span>
-          <span>of</span>
+          <span>{getTranslations().of}</span>
           <span>
             {!options.manualPagination && options.paginateExpandedRows ? getExpandedRowModel().rows.length : totalCount}
           </span>{' '}
