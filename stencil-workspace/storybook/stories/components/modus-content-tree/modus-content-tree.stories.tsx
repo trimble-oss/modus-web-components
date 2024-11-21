@@ -1,6 +1,7 @@
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-content-tree-storybook-docs.mdx';
 import { html } from 'lit-html';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 export default {
   title: 'Components/Content Tree',
@@ -83,6 +84,7 @@ export default {
       enableShortcuts: false,
     },
   },
+  decorators: [withActions],
 };
 
 const Template = ({

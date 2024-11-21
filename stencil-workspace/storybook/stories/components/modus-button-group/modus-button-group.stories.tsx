@@ -2,6 +2,7 @@ import { html } from 'lit-html';
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-button-group-storybook-docs.mdx';
 
+import { withActions } from '@storybook/addon-actions/decorator';
 export default {
   title: 'Components/Button Group',
   argTypes: {
@@ -70,7 +71,7 @@ export default {
   parameters: {
     controls: { expanded: true, sort: 'alpha' },
     actions: {
-      handles: ['buttonGroupClick', 'buttonSelectionChange'],
+      handles: ['buttonGroupClick modus-button-group', 'buttonSelectionChange modus-button-group'],
     },
     docs: {
       page: docs,
@@ -79,6 +80,7 @@ export default {
       isToolshown: true,
     },
   },
+  decorators: [withActions],
 };
 const DefaultTemplate = ({ ariaLabel, buttonStyle, color, disabled, selectionType, size }) => html`
   <modus-button-group

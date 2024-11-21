@@ -1,6 +1,7 @@
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-radio-group-storybook-docs.mdx';
 import { html } from 'lit-html';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 export default {
   title: 'User Inputs/Radio Group',
@@ -48,6 +49,7 @@ export default {
       isToolshown: true,
     },
   },
+  decorators: [withActions],
 };
 
 const Template = ({ ariaLabel, disabled, name, size }) => html`

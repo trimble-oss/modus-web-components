@@ -1,6 +1,7 @@
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-dropdown-storybook-docs.mdx';
 import { html } from 'lit-html';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 export default {
   title: 'Components/Dropdown',
@@ -70,6 +71,7 @@ export default {
       isToolshown: true,
     },
   },
+  decorators: [withActions],
 };
 
 const DefaultTemplate = ({ animateList, ariaLabel, customPlacement, disabled, placement, showDropdownListBorder }) => html`

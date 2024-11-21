@@ -2,6 +2,7 @@
 import docs from './modus-icons-storybook-docs.mdx';
 import { html } from 'lit-html';
 import { MODUS_ICON_NAMES } from '../../../../src/icons/ModusIconUtilities';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 export default {
   title: 'Components/Icons',
@@ -42,6 +43,7 @@ export default {
       isToolshown: true,
     },
   },
+  decorators: [withActions],
 };
 
 const StyledIcon = `

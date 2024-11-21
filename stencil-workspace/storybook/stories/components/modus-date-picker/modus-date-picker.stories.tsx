@@ -1,6 +1,7 @@
 import { html } from 'lit-html';
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-date-picker-storybook-docs.mdx';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 export default {
   title: 'User Inputs/Date Picker',
@@ -180,6 +181,7 @@ export default {
       isToolshown: true,
     },
   },
+  decorators: [withActions],
 };
 
 const defaultArgs = {

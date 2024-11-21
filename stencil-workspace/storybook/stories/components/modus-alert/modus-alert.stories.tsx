@@ -1,6 +1,7 @@
 import { html } from 'lit-html';
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-alert-storybook-docs.mdx';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 export default {
   title: 'Components/Alert',
@@ -62,6 +63,7 @@ export default {
       isToolshown: true,
     },
   },
+  decorators: [withActions],
 };
 
 const Template = ({ ariaLabel, buttonAriaLabel, buttonText, dismissible, message, type }) => html`

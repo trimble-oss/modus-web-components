@@ -1,6 +1,7 @@
 module.exports = {
   stories: ['../stories/framework-integrations/*.mdx', '../stories/introduction/*.mdx', '../**/*.stories.@(js|jsx|ts|tsx)'],
   staticDirs: ['../public'],
+  addons: ['@storybook/addon-actions', '@storybook/addon-controls'],
 
   addons: [
     '@storybook/addon-a11y',

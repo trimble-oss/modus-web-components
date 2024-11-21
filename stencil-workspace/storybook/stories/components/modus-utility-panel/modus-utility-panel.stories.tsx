@@ -1,6 +1,7 @@
 import docs from './modus-utility-panel-storybook-docs.mdx';
 import { html } from 'lit-html';
 import { useEffect } from '@storybook/preview-api';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 export default {
   title: 'Components/Utility Panel',
@@ -45,6 +46,7 @@ export default {
     controls: { expanded: true, sort: 'requiredFirst' },
     viewMode: 'docs',
   },
+  decorators: [withActions],
 };
 
 const DefaultTemplate = ({ ariaLabel, expanded, targetContent, pushContent }) => {

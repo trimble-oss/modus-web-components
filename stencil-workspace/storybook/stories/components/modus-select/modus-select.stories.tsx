@@ -1,6 +1,7 @@
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-select-storybook-docs.mdx';
 import { html } from 'lit-html';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 export default {
   title: 'User Inputs/Select',
@@ -20,6 +21,7 @@ export default {
       handles: ['valueChange'],
     },
   },
+  decorators: [withActions],
 };
 
 const Template = () => html`

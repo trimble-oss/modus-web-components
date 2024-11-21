@@ -1,6 +1,7 @@
 // @ts-ignore: JSX/MDX with Stencil
 import { html } from 'lit-html';
 import docs from './modus-tabs-storybook-docs.mdx';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 export default {
   title: 'Components/Tabs',
@@ -20,6 +21,7 @@ export default {
     },
     viewMode: 'docs',
   },
+  decorators: [withActions],
 };
 
 const Template = ({ size }) => html`

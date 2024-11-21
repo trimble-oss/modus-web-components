@@ -1,6 +1,7 @@
 import { html } from 'lit-html';
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-chip-storybook-docs.mdx';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 export default {
   title: 'Components/Chip',
@@ -109,6 +110,7 @@ export default {
       isToolshown: true,
     },
   },
+  decorators: [withActions],
 };
 
 export const Default = ({

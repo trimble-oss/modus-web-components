@@ -1,6 +1,7 @@
 import { html } from 'lit-html';
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-table-storybook-docs.mdx';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 // Helpers
 // for the data generator makeData function
@@ -615,6 +616,7 @@ export default {
       enableShortcuts: false,
     },
   },
+  decorators: [withActions],
 };
 
 const Template = ({
