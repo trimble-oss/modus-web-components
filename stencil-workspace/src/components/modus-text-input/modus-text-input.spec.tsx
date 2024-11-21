@@ -2,6 +2,7 @@ import { newSpecPage } from '@stencil/core/testing';
 import { ModusTextInput } from './modus-text-input';
 
 describe('modus-text-input', () => {
+
   it('renders default', async () => {
     const page = await newSpecPage({
       components: [ModusTextInput],

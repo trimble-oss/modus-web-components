@@ -115,8 +115,17 @@ export class ModusTextInput {
   textInput: HTMLInputElement;
   buttonTogglePassword: HTMLDivElement;
 
+  checkValidity() {
+    if(!this.internals || !this.internals.validity){
+      return false;
+    }
+    return  this.internals.checkValidity()
+  }
+
   componentWillLoad() {
-    this.internals.setFormValue(this.value);
+    if(this.checkValidity()){
+      this.internals.setFormValue(this.value);
+    }
   }
 
   /** Focus the input. */
@@ -146,8 +155,8 @@ export class ModusTextInput {
     const value = input.value;
     this.value = value;
 
-    if (this.internals) {
-      this.internals.setFormValue(value);
+    if (this.checkValidity()) {
+      this.internals.setFormValue(value)
     }
 
     this.valueChange.emit(value);
