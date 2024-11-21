@@ -66,13 +66,15 @@ export default {
 };
 
 const Template = ({ ariaLabel, checked, disabled, indeterminate, label, size }) => html`
-  <modus-checkbox
-    aria-label=${ariaLabel}
-    checked=${checked}
-    ?disabled=${disabled}
-    indeterminate=${indeterminate}
-    label=${label}
-    size=${size}></modus-checkbox>
+  <div style="width: fit-content">
+    <modus-checkbox
+      aria-label=${ariaLabel}
+      checked=${checked}
+      ?disabled=${disabled}
+      indeterminate=${indeterminate}
+      label=${label}
+      size=${size}></modus-checkbox>
+  </div>
 `;
 
 export const Medium = Template.bind({});
