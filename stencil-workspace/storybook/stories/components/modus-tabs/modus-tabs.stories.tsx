@@ -16,7 +16,7 @@ export default {
       isToolshown: true,
     },
     controls: {
-      disabled: true,
+      disable: true,
     },
     viewMode: 'docs',
   },

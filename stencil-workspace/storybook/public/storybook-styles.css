@@ -14,6 +14,7 @@ body[data-mwc-theme='light'] {
   --theme-code-bg-color: #f8f8f8;
   --theme-code-border-color: #eee;
   --theme-header-underline-color: rgba(0, 0, 0, 0.1);
+  --icon-fill: #252a2e;
 }
 
 body[data-mwc-theme='dark'] {
@@ -30,6 +31,7 @@ body[data-mwc-theme='dark'] {
   --theme-code-bg-color: #6a6e79;
   --theme-code-border-color: #6a6e79;
   --theme-header-underline-color: rgba(255, 255, 255, 0.2);
+  --icon-fill: #ffffff;
 }
 
 body {
@@ -143,7 +145,14 @@ body.dark .sidebar-header a[title='Storybook'] {
 }
 
 .css-1qezoi6 :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)) {
+  font-size: unset !important;
   line-height: unset !important;
+  margin: unset !important;
+}
+
+.css-1qezoi6 :where(a:not(.sb-anchor, .sb-unstyled, .sb-unstyled a)) {
+  line-height: unset !important;
+  text-decoration: unset !important;
 }
 
 /* dark mode */
@@ -168,6 +177,11 @@ body.dark .docblock-source {
 .css-1qezoi6 :where(h2:not(.sb-anchor, .sb-unstyled, .sb-unstyled h2)),
 .css-1qezoi6 :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)) {
   color: unset !important;
+}
+
+body.dark .css-1qezoi6 :where(table:not(.sb-anchor, .sb-unstyled, .sb-unstyled table)) tr td,
+body.dark .css-1qezoi6 :where(table:not(.sb-anchor, .sb-unstyled, .sb-unstyled table)) tr th {
+  border-color: #464b52 !important;
 }
 
 [data-mwc-theme='dark'] .docblock-source pre span,
