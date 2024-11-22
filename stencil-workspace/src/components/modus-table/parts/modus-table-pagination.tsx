@@ -31,6 +31,7 @@ export const ModusTablePagination: FunctionalComponent<ModusTablePaginationProps
           ariaLabel="Select page size"
           options-display-prop="display"
           options={optionsList}
+          placeholder={getTranslations().pleseSelect}
           onValueChange={handleChange}
           value={selectedPageSize}></modus-select>
       </div>
