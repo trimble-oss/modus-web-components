@@ -1,4 +1,5 @@
-import { Story } from '@storybook/addon-docs';
+import { Story } from '@storybook/blocks';
+import * as Toolbar from './modus-toolbar.stories.tsx';
 
 # Toolbar
 
@@ -6,7 +7,7 @@ The `modus-toolbar` component provides a customizable Toolbar that can be positi
 
 ### Default
 
-<Story id="components-toolbar--default" height="100px" />
+<Story of={Toolbar.Default} height="100px" />
 
 ```html
 <modus-toolbar>
@@ -18,7 +19,7 @@ The `modus-toolbar` component provides a customizable Toolbar that can be positi
 
 ### Icon Only
 
-<Story id="components-toolbar--icon-only" height="100px" />
+<Story of={Toolbar.IconOnly} height="100px" />
 
 ```html
 <modus-toolbar>

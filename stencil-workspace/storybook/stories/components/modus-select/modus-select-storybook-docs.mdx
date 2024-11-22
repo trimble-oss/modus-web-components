@@ -1,4 +1,5 @@
-import { Story } from '@storybook/addon-docs';
+import { Story } from '@storybook/blocks';
+import * as Select from './modus-select.stories';
 
 # Select
 
@@ -10,7 +11,7 @@ This component is compatible with Angular reactive forms. This can be achieved t
 
 ### Default
 
-<Story id="user-inputs-select--default" height={'565px'} />
+<Story of={Select.Default} />
 
 ```html
 <!-- Without preset value -->

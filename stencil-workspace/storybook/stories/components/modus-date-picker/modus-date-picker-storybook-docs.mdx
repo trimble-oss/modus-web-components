@@ -1,4 +1,5 @@
-import { Story } from '@storybook/addon-docs';
+import { Story } from '@storybook/blocks';
+import * as DatePicker from './modus-date-picker.stories.tsx';
 
 # Date Input
 
@@ -23,7 +24,7 @@ Default validation can also be disabled and use the props `errorText`, `invalid`
 
 ### Default
 
-<Story id="user-inputs-date-picker--default" />
+<Story of={DatePicker.Default} />
 
 ```html
 <modus-date-input
@@ -58,7 +59,7 @@ If you want to support a few alternative date formats then you can set the prop 
 
 ### Date Range with picker
 
-<Story id="user-inputs-date-picker--date-range" />
+<Story of={DatePicker.DateRange} />
 
 ```html
 <modus-date-picker label="Select date range">
