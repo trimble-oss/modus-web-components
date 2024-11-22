@@ -269,7 +269,11 @@ export class ModusButton {
     return (
       <button
         aria-disabled={this.ariaDisabled ? this.ariaDisabled : this.disabled ? 'true' : undefined}
-        aria-label={this.ariaLabel || undefined}
+        aria-label={
+          this.isCriticalAction()
+            ? 'This is a critical action button. Press and hold to confirm.'
+            : this.ariaLabel || undefined
+        }
         aria-pressed={this.pressed ? 'true' : undefined}
         class={className}
         disabled={this.disabled}
@@ -293,6 +297,11 @@ export class ModusButton {
         type={this.type}>
         {this.iconOnly ? this.renderIconOnly() : this.renderIconWithText()}
         {this.showCaret && <ModusIconMap size="24" icon="caret_down"></ModusIconMap>}
+        {this.isCriticalAction() && (
+          <span class="progress-live-region" aria-live="polite" aria-atomic="true" role="status">
+            {this.progressState.progressWidth > 0 && `${Math.floor(this.progressState.progressWidth)}% complete`}
+          </span>
+        )}
       </button>
     );
   }
