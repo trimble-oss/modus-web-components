@@ -112,6 +112,7 @@ pre .os-padding {
   z-index: inherit !important;
 }
 
+[data-radix-scroll-area-viewport],
 pre .os-content {
   max-height: 500px;
 }
