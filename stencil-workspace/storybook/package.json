@@ -10,7 +10,7 @@
     "@babel/preset-env": "^7.26.0",
     "@storybook/addon-docs": "^8.4.4",
     "@storybook/components": "^8.4.4",
-    "@storybook/theming": "^8.4.4",
+    "@storybook/theming": "^8.4.5",
     "@types/mdx": "^2.0.4",
     "lit-html": "^2.7.2"
   },
