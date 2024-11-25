@@ -886,7 +886,7 @@ describe('modus-table', () => {
     const paginationContainer = await page.find('modus-table >>> .pagination-container');
     await page.waitForChanges();
 
-    let secondPage = await paginationContainer.find('modus-pagination >>> li:nth-child(3)');
+    const secondPage = await paginationContainer.find('modus-pagination >>> li:nth-child(3)');
     secondPage.click();
     await page.waitForChanges();
 
@@ -895,7 +895,7 @@ describe('modus-table', () => {
     component.setProperty('data', data.slice(0, data.length - 5));
     await page.waitForChanges();
 
-    let activePage = await paginationContainer.find('modus-pagination >>> li button.active');
+    const activePage = await paginationContainer.find('modus-pagination >>> li button.active');
     const lastPage = await paginationContainer.find('modus-pagination >>> li:nth-last-child(2)');
 
     expect(activePage.textContent).toBe('2');
@@ -1333,5 +1333,27 @@ describe('modus-table', () => {
       expect(cell1Style['outlineWidth']).toBe('0px');
       expect(cell2Style['outlineWidth']).toBe('1px');
     });
+  });
+
+  it('should change language of pagination when browser language is changed', async () => {
+    page = await newE2EPage();
+    await page.setContent('<modus-table />');
+
+    const component = await page.find('modus-table');
+    component.setProperty('columns', MockColumns);
+    component.setProperty('data', MockData);
+    component.setProperty('pagination', true);
+    await page.waitForChanges();
+
+    const paginationContainer = await page.find('modus-table >>> .pagination-container');
+    const paginationText = await paginationContainer.find('.pagination-and-count > .total-count > span:first-child');
+    expect(paginationText).toEqualText('Showing result');
+
+    await page.evaluate(() => {
+      Object.defineProperty(navigator, 'language', { value: 'fr-FR', configurable: true });
+    });
+    await page.click('modus-table >>> .pagination-container');
+    await page.waitForChanges();
+    expect(paginationText).toEqualText('Afficher le résultat');
   });
 });
