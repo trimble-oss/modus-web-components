@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "@babel/preset-react": "^7.25.9",
-    "@stencil/angular-output-target": "^0.9.0",
+    "@stencil/angular-output-target": "^0.10.0",
     "@stencil/postcss": "^2.1.0",
     "@stencil/react-output-target": "^0.5.3",
     "@stencil/sass": "^3.0.12",
