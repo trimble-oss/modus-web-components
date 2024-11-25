@@ -53,6 +53,7 @@ import {
   ModusTableRowWithId,
   ModusTableColumnSort,
   ModusTableErrors,
+  ModusTableRowActionConfig,
 } from './models/modus-table.models';
 import ColumnDragState from './models/column-drag-state.model';
 import {
@@ -177,6 +178,9 @@ export class ModusTable {
 
   /** (Optional) Actions that can be performed on each row. A maximum of 4 icons will be shown, including overflow menu and expand icons. */
   @Prop() rowActions: ModusTableRowAction[] = [];
+
+  /** (Optional) The width and header of the rowActionsConfig. */
+  @Prop() rowActionsConfig: ModusTableRowActionConfig;
 
   /** (Optional) To display expanded rows. */
   @Prop() rowsExpandable = false;
@@ -526,6 +530,8 @@ export class ModusTable {
       rowSelectionChange: this.rowSelectionChange,
       rowExpanded: this.rowExpanded,
       rowActionClick: this.rowActionClick,
+      rowActionSize: this.rowActionsConfig?.width,
+      rowActionHeader: this.rowActionsConfig?.header,
       sortChange: this.sortChange,
       paginationChange: this.paginationChange,
       columnSizingChange: this.columnSizingChange,
