@@ -186,6 +186,11 @@ body.dark .css-1qezoi6 :where(table:not(.sb-anchor, .sb-unstyled, .sb-unstyled t
   border-color: #464b52 !important;
 }
 
+.css-1qezoi6 :where(table:not(.sb-anchor, .sb-unstyled, .sb-unstyled table)) {
+    width: 100%;
+    table-layout: auto;
+}
+
 [data-mwc-theme='dark'] .docblock-source pre span,
 [data-mwc-theme='dark'] .docblock-source button {
   color: var(--theme-docblock-source-color) !important;
