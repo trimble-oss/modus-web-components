@@ -2,30 +2,31 @@
   "name": "mwc-storybook",
   "version": "0.0.0",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build -o ./dist"
   },
   "dependencies": {
     "@babel/preset-env": "^7.26.0",
-    "@storybook/addon-docs": "^8.4.4",
-    "@storybook/components": "^8.4.4",
+    "@storybook/addon-docs": "^8.4.5",
+    "@storybook/components": "^8.4.5",
     "@storybook/theming": "^8.4.5",
-    "@types/mdx": "^2.0.4",
+    "@types/mdx": "^2.0.13",
     "lit-html": "^2.7.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.25.2",
+    "@babel/core": "^7.26.0",
     "@babel/preset-flow": "^7.25.9",
     "@babel/preset-react": "^7.25.9",
-    "@storybook/addon-a11y": "^8.4.4",
-    "@storybook/addon-actions": "^8.4.4",
-    "@storybook/addon-essentials": "^8.4.4",
-    "@storybook/addon-links": "^8.4.4",
+    "@storybook/addon-a11y": "^8.4.5",
+    "@storybook/addon-actions": "^8.4.5",
+    "@storybook/addon-essentials": "^8.4.5",
+    "@storybook/addon-links": "^8.4.5",
     "@storybook/addon-mdx-gfm": "^8.4.5",
     "@storybook/addon-webpack5-compiler-babel": "^3.0.3",
-    "@storybook/manager-api": "^8.4.4",
-    "@storybook/web-components": "^8.4.4",
+    "@storybook/manager-api": "^8.4.5",
+    "@storybook/web-components": "^8.4.5",
     "@storybook/web-components-webpack5": "^8.4.5",
     "babel-loader": "8.2.5",
     "postcss": "^8.4.49",
@@ -35,7 +36,6 @@
     "node": ">=18"
   },
   "volta": {
-    "node": "18.20.4"
-  },
-  "license": "MIT"
+    "node": "18.20.5"
+  }
 }
