@@ -10,6 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/trimble-oss/modus-web-components.git"
   },
+  "license": "MIT",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
   "es2015": "dist/esm/index.mjs",
@@ -31,9 +32,9 @@
     "test.debug": "stencil test --spec --e2e --watchAll --devtools -- {file name}",
     "generate": "stencil generate",
     "lint": "npm run lint-js && npm run lint-css && npm run prettier",
-    "lint-js": "eslint \"src/**\" \"storybook/**/*.stories.tsx\"",
     "lint-css": "stylelint \"src/**/*.scss\"",
     "lint-css-fix": "stylelint \"src/**/*.scss\" --fix",
+    "lint-js": "eslint \"src/**\" \"storybook/**/*.stories.tsx\"",
     "prettier": "prettier --write \"storybook/stories/**/*.*\" \"src/**/*.*\" --config ../.prettierrc.json --ignore-path ../.prettierignore",
     "full": "npm ci && npm run lint && npm run build && npm run test && npm run ci-storybook",
     "ci-storybook": "cd storybook && npm ci && npm run build-storybook",
@@ -65,8 +66,8 @@
     "jest": "^27.0.3",
     "jest-cli": "^27.5.1",
     "prettier": "3.3.3",
-    "puppeteer": "^19.11.1",
-    "puppeteer-core": "^19.11.1",
+    "puppeteer": "^23.9.0",
+    "puppeteer-core": "^23.9.0",
     "stylelint": "16.10.0",
     "stylelint-config-standard-scss": "13.1.0",
     "stylelint-order": "6.0.4",
@@ -77,6 +78,5 @@
   },
   "volta": {
     "node": "18.20.4"
-  },
-  "license": "MIT"
+  }
 }
