@@ -1,4 +1,5 @@
-import { Story } from '@storybook/addon-docs';
+import { Story } from '@storybook/blocks';
+import * as UtilityPanel from './modus-utility-panel.stories.tsx';
 
 # Utility Panel
 
@@ -8,7 +9,7 @@ The `modus-utility-panel` component is a versatile panel that can be used for va
 additional information, hosting forms, or any content that complements the main content of the page.
 It has header, body, and footer slots for adding content. It supports both overlay and push content modes.
 
-<Story id="components-utility-panel--default" />
+<Story of={UtilityPanel.Default} />
 
 ```html
     <div id="defaultTemplate">

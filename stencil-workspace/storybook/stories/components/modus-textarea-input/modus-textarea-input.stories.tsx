@@ -1,6 +1,7 @@
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-textarea-input-storybook-docs.mdx';
 import { html } from 'lit-html';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 export default {
   title: 'User Inputs/Textarea Input',
@@ -14,10 +15,8 @@ export default {
     },
     autocorrect: {
       name: 'autocorrect',
-      control: {
-        options: ['off', 'on'],
-        type: 'select',
-      },
+      options: ['off', 'on'],
+      type: 'select',
       description: 'Whether to activate automatic correction while the user is editing this field in Safari',
       table: {
         type: { summary: `boolean | 'off' | 'on'` },
@@ -45,10 +44,8 @@ export default {
       },
     },
     enterkeyhint: {
-      control: {
-        options: ['enter', 'done', 'go', 'next', 'previous', 'search', 'send'],
-        type: 'select',
-      },
+      options: ['enter', 'done', 'go', 'next', 'previous', 'search', 'send'],
+      type: 'select',
       description: 'Which action label to present for the enter key on virtual keyboards',
       table: {
         type: { summary: `'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send'` },
@@ -117,10 +114,8 @@ export default {
       },
     },
     size: {
-      control: {
-        options: ['medium', 'large'],
-        type: 'select',
-      },
+      options: ['medium', 'large'],
+      type: 'select',
       description: 'The size of the text input',
       table: {
         defaultValue: { summary: "'medium'" },
@@ -128,9 +123,7 @@ export default {
       },
     },
     spellcheck: {
-      control: {
-        type: 'boolean',
-      },
+      type: 'boolean',
       name: 'spellcheck',
       description: 'Whether to enable spell checking.',
       table: {
@@ -139,10 +132,8 @@ export default {
     },
     textAlign: {
       name: 'text-align',
-      control: {
-        options: ['left', 'right'],
-        type: 'select',
-      },
+      options: ['left', 'right'],
+      type: 'select',
       description: 'text alignment for the input.',
       table: {
         defaultValue: { summary: "'left'" },
@@ -177,6 +168,7 @@ export default {
       isToolshown: true,
     },
   },
+  decorators: [withActions],
 };
 
 const Template = ({

@@ -35,10 +35,8 @@ export default {
     },
     mode: {
       name: 'mode',
-      control: {
-        options: ['determinate', 'indeterminate'],
-        type: 'select',
-      },
+      options: ['determinate', 'indeterminate'],
+      type: 'select',
       description: "The progress bar's mode",
       table: {
         defaultValue: { summary: 'determinate' },
@@ -54,10 +52,8 @@ export default {
       },
     },
     size: {
-      control: {
-        options: ['default', 'small', 'compact'],
-        type: 'select',
-      },
+      options: ['default', 'small', 'compact'],
+      type: 'select',
       description: "The progress bar's size",
       table: {
         defaultValue: { summary: 'default' },

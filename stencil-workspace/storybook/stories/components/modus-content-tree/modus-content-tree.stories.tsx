@@ -1,6 +1,7 @@
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-content-tree-storybook-docs.mdx';
 import { html } from 'lit-html';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 export default {
   title: 'Components/Content Tree',
@@ -35,10 +36,8 @@ export default {
       },
     },
     size: {
-      control: {
-        options: ['condensed', 'standard', 'large'],
-        type: 'select',
-      },
+      options: ['condensed', 'standard', 'large'],
+      type: 'select',
       name: 'size',
       description: 'The default size of all tree items.',
       table: {
@@ -85,6 +84,7 @@ export default {
       enableShortcuts: false,
     },
   },
+  decorators: [withActions],
 };
 
 const Template = ({
@@ -191,31 +191,31 @@ const ActionBarTemplate = ({
   size,
   isLastChild,
 }) => html`
-<style>
 
-  .toolbar {
-    gap: 4px;
-    display: flex;
-    justify-content: end;
-    flex-wrap: wrap;
-    margin-top: 1rem;
-  }
+  <style>
+    .toolbar {
+      gap: 4px;
+      display: flex;
+      justify-content: end;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
 
-  modus-button {
-    width: 24px;
-    height: 28px;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+    modus-button {
+      width: 24px;
+      height: 28px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-  modus-button svg {
-    width: 20px;
-    height: 20px;
-    padding-top: 3px;
-  }
-</style>
+    modus-button svg {
+      width: 20px;
+      height: 20px;
+      padding-top: 3px;
+    }
+  </style>
   <div id="tree-with-action-bar" style="display: flex; flex-direction: column; width: 400px;">
     <div class="toolbar">
       <modus-button button-style="borderless" aria-label="Add" title="Add" size="small" color="primary" disabled id="add">

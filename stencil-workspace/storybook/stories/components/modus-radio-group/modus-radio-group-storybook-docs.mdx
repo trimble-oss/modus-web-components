@@ -1,4 +1,5 @@
-import { Story } from '@storybook/addon-docs';
+import { Story } from '@storybook/blocks';
+import * as RadioGroup from './modus-radio-group.stories.tsx';
 
 # Radio Group
 
@@ -19,7 +20,7 @@ A TypeScript typing has been provided named RadioButton defined as:
 
 ### Default
 
-<Story id="user-inputs-radio-group--default" height={'150px'} />
+<Story of={RadioGroup.Default}  height={'150px'}/>
 
 ```html
 <modus-radio-group checked-id="1" name="my-group"></modus-radio-group>

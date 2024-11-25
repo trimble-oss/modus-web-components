@@ -1,6 +1,7 @@
 import { html } from 'lit-html';
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-table-storybook-docs.mdx';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 // Helpers
 // for the data generator makeData function
@@ -377,15 +378,12 @@ export default {
     sortIconStyle: {
       name: 'sortIconStyle',
       description: 'Display alphabetical or directional arrow icons when sort is enabled',
-      control: {
-        options: ['alphabetical', 'directional'],
-        type: 'select',
-      },
+      options: ['alphabetical', 'directional'],
+      type: 'select',
       table: {
         defaultValue: { summary: `'alphabetical'` },
         type: { summary: `'alphabetical', 'directional'` },
       },
-      type: { required: false },
     },
     showSortIconOnHover: {
       name: 'showSortIconOnHover',
@@ -440,15 +438,12 @@ export default {
     density: {
       name: 'density',
       description: 'Manage table density.',
-      control: {
-        options: ['relaxed', 'comfortable', 'compact'],
-        type: 'select',
-      },
+      options: ['relaxed', 'comfortable', 'compact'],
+      type: 'select',
       table: {
         defaultValue: { summary: `'relaxed'` },
         type: { summary: `'relaxed', 'comfortable', 'compact'` },
       },
-      type: { required: false },
     },
     fullWidth: {
       name: 'fullWidth',
@@ -621,6 +616,7 @@ export default {
       enableShortcuts: false,
     },
   },
+  decorators: [withActions],
 };
 
 const Template = ({

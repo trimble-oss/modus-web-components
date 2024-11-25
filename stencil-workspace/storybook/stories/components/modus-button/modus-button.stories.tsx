@@ -2,6 +2,8 @@ import { html } from 'lit-html';
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-button-storybook-docs.mdx';
 
+import { withActions } from '@storybook/addon-actions/decorator';
+
 export default {
   title: 'Components/Button',
   argTypes: {
@@ -22,10 +24,8 @@ export default {
     },
     buttonStyle: {
       name: 'button-style',
-      control: {
-        options: ['borderless', 'fill', 'outline'],
-        type: 'select',
-      },
+      options: ['borderless', 'fill', 'outline'],
+      type: 'select',
       description: 'The style of the button',
       table: {
         defaultValue: { summary: `'fill'` },
@@ -33,10 +33,8 @@ export default {
       },
     },
     color: {
-      control: {
-        options: ['danger', 'primary', 'secondary', 'tertiary', 'special'],
-        type: 'select',
-      },
+      options: ['danger', 'primary', 'secondary', 'tertiary', 'special'],
+      type: 'select',
       description: 'The color of the button',
       table: {
         defaultValue: { summary: `'primary'` },
@@ -51,10 +49,8 @@ export default {
       },
     },
     size: {
-      control: {
-        options: ['small', 'medium', 'large'],
-        type: 'select',
-      },
+      options: ['small', 'medium', 'large'],
+      type: 'select',
       description: 'The size of the button',
       table: {
         defaultValue: { summary: `'medium'` },
@@ -93,7 +89,7 @@ export default {
   parameters: {
     controls: { expanded: true, sort: 'alpha' },
     actions: {
-      handles: ['buttonClick'],
+      handles: ['buttonClick modus-button'],
     },
     docs: {
       page: docs,
@@ -102,6 +98,7 @@ export default {
       isToolshown: true,
     },
   },
+  decorators: [withActions],
 };
 
 const DefaultTemplate = ({

@@ -1,5 +1,6 @@
 import { html } from 'lit-html';
 import docs from './modus-toolbar-storybook-docs.mdx';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 export default {
   title: 'Components/Toolbar',
@@ -30,6 +31,7 @@ export default {
       page: docs,
     },
   },
+  decorators: [withActions],
 };
 
 const Template = ({ ariaLabel, disabled }) => html`

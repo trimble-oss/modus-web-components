@@ -1,6 +1,7 @@
 import { html } from 'lit-html';
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-alert-storybook-docs.mdx';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 export default {
   title: 'Components/Alert',
@@ -26,9 +27,9 @@ export default {
     },
     dismissible: {
       description: 'Whether the alert is dismissible, renders the close icon',
+      type: 'boolean',
       table: {
         defaultValue: { summary: false },
-        type: { summary: 'boolean' },
       },
     },
     message: {
@@ -39,10 +40,8 @@ export default {
       type: { required: true },
     },
     type: {
-      control: {
-        options: ['error', 'info', 'success', 'warning'],
-        type: 'select',
-      },
+      options: ['error', 'info', 'success', 'warning'],
+      type: 'select',
       description: 'The type of the alert',
       table: {
         defaultValue: { summary: `'info'` },
@@ -64,6 +63,7 @@ export default {
       isToolshown: true,
     },
   },
+  decorators: [withActions],
 };
 
 const Template = ({ ariaLabel, buttonAriaLabel, buttonText, dismissible, message, type }) => html`

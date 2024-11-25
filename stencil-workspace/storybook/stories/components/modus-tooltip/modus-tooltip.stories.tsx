@@ -19,10 +19,8 @@ export default {
       },
     },
     position: {
-      control: {
-        options: ['bottom', 'left', 'right', 'top'],
-        type: 'select',
-      },
+      options: ['bottom', 'left', 'right', 'top'],
+      type: 'select',
       description: "The tooltip's position relative to the item it's wrapping",
       table: {
         defaultValue: { summary: `'top'` },

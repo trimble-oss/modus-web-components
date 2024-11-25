@@ -20,10 +20,8 @@ export default {
       },
     },
     type: {
-      control: {
-        options: ['info', 'question'],
-        type: 'select',
-      },
+      options: ['info', 'question'],
+      type: 'select',
       description: 'The type of the message',
       table: {
         defaultValue: { summary: `'info'` },
