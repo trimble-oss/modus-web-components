@@ -1,4 +1,5 @@
-import { Story } from '@storybook/addon-docs';
+import { Story } from '@storybook/blocks';
+import * as DataTable from './modus-data-table.stories.tsx';
 
 # Data Table
 
@@ -27,7 +28,7 @@ They are referenced using the `<modus-data-table>` custom HTML element.
 
 ### Default
 
-<Story id="components-data-table--default" height={'250px'} />
+<Story of={DataTable.Default} />
 
 ```html
 <div style="width: 500px">

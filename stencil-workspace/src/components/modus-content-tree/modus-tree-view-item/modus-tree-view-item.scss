@@ -13,6 +13,7 @@
   font-size: $rem-16px;
   justify-content: space-between;
   min-height: $list-group-item-height;
+  user-select: none;
   width: 100%;
 
   svg path {

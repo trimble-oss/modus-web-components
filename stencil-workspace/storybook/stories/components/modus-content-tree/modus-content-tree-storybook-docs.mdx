@@ -1,4 +1,5 @@
-import { Story } from '@storybook/addon-docs';
+import { Meta, Story } from '@storybook/blocks';
+import * as ContentTree from './modus-content-tree.stories';
 
 # Content Tree
 
@@ -53,7 +54,7 @@ It is located on the left side of the screen and cannot be combined with Side Na
 
 ### With Icon
 
-<Story id="components-content-tree--with-icon" />
+<Story of={ContentTree.WithIcon} />
 
 ```html
 <modus-tree-view style="width:400px;" class="hydrated">
@@ -72,7 +73,7 @@ It is located on the left side of the screen and cannot be combined with Side Na
 
 ### Condensed
 
-<Story id="components-content-tree--condensed" />
+<Story of={ContentTree.Condensed} />
 
 ```html
 <modus-tree-view
@@ -106,7 +107,7 @@ It is located on the left side of the screen and cannot be combined with Side Na
 
 ### Borderless
 
-<Story id="components-content-tree--borderless" />
+<Story of={ContentTree.Borderless} />
 
 ```html
 <modus-tree-view
@@ -140,7 +141,7 @@ It is located on the left side of the screen and cannot be combined with Side Na
 
 ### Multi Selection
 
-<Story id="components-content-tree--multi-selection" />
+<Story of={ContentTree.MultiSelection} />
 
 ```html
 <modus-tree-view
@@ -174,7 +175,7 @@ It is located on the left side of the screen and cannot be combined with Side Na
 
 ### Custom Action Bar
 
-<Story id="components-content-tree--custom-action-bar" />
+<Story of={ContentTree.CustomActionBar} />
 
 ```html
 <div
@@ -471,7 +472,7 @@ It is located on the left side of the screen and cannot be combined with Side Na
 
 ### Custom Filter
 
-<Story id="components-content-tree--custom-filter" />
+<Story of={ContentTree.CustomFilter} />
 
 ```html
 <div id="tree-with-filter" style="display: flex; flex-direction: column; width: 400px;">
@@ -557,7 +558,7 @@ It is located on the left side of the screen and cannot be combined with Side Na
 
 ### With Item Action Bar
 
-<Story id="components-content-tree--with-action-bar" />
+<Story of={ContentTree.WithActionBar} />
 
 ```html
 <div>

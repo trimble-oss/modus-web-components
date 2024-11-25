@@ -1,6 +1,7 @@
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-dropdown-storybook-docs.mdx';
 import { html } from 'lit-html';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 export default {
   title: 'Components/Dropdown',
@@ -39,10 +40,8 @@ export default {
     placement: {
       name: 'placement',
       description: 'The placement of the dropdown in relation to the toggleElement.',
-      control: {
-        options: ['top', 'right', 'bottom', 'left'],
-        type: 'select',
-      },
+      options: ['top', 'right', 'bottom', 'left'],
+      type: 'select',
       table: {
         type: { summary: `'top' | 'right' | 'bottom' | 'left'` },
 
@@ -72,6 +71,7 @@ export default {
       isToolshown: true,
     },
   },
+  decorators: [withActions],
 };
 
 const DefaultTemplate = ({ animateList, ariaLabel, customPlacement, disabled, placement, showDropdownListBorder }) => html`

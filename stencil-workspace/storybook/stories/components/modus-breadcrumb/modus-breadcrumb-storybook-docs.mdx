@@ -1,4 +1,6 @@
-import { Story } from '@storybook/addon-docs';
+import { Story } from '@storybook/blocks';
+import * as Breadcrumb from './modus-breadcrumb.stories.tsx';
+
 
 # Breadcrumb
 
@@ -21,7 +23,7 @@ A new TypeScript typing has been provided named Crumb defined as:
 
 ### Default
 
-<Story id="components-breadcrumb--default" height={'72px'} />
+<Story of={Breadcrumb.Default} height={'72px'}/>
 
 ```html
 <modus-breadcrumb></modus-breadcrumb>

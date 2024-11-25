@@ -1,4 +1,5 @@
-import { Story } from '@storybook/addon-docs';
+import { Story } from '@storybook/blocks';
+import * as SideNavigation from './modus-side-navigation.stories.tsx';
 
 # Modus Side Navigation
 
@@ -22,7 +23,7 @@ Every menu item is accessible through keyboard. <kbd>Tab</kbd> key and `Down Arr
 
 A basic Modus Side Navigation with only item selection and keyboard navigation features can be designed as show in the example below.
 
-<Story id="components-side-navigation--default" />
+<Story of={SideNavigation.Default} />
 
 ```html
 <div id="defaultTemplate">
@@ -116,7 +117,7 @@ Use the prop `mode` to choose whether to overlay or push and use the prop `targe
 
 Modus side navigation uses CSS variables for theming ex:`--modus-side-navigation-bg: #fff;`, it can be leveraged to apply a blue theme too as shown in the example below.
 
-<Story id="components-side-navigation--side-navigation-with-data" />
+<Story of={SideNavigation.SideNavigationWithData} />
 
 ```html
 <div id="dataTemplate">

@@ -1,6 +1,7 @@
 import { html } from 'lit-html';
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-date-picker-storybook-docs.mdx';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 export default {
   title: 'User Inputs/Date Picker',
@@ -35,26 +36,24 @@ export default {
     },
     position: {
       name: 'position',
-      control: {
-        options: [
-          'auto',
-          'auto-start',
-          'auto-end',
-          'top-start',
-          'top-end',
-          'bottom-start',
-          'bottom-end',
-          'right-start',
-          'right-end',
-          'left-start',
-          'left-end',
-          'top',
-          'left',
-          'bottom',
-          'right',
-        ],
-        type: 'select',
-      },
+      options: [
+        'auto',
+        'auto-start',
+        'auto-end',
+        'top-start',
+        'top-end',
+        'bottom-start',
+        'bottom-end',
+        'right-start',
+        'right-end',
+        'left-start',
+        'left-end',
+        'top',
+        'left',
+        'bottom',
+        'right',
+      ],
+      type: 'select',
       description: 'The placement of the calendar popup',
       table: {
         defaultValue: { summary: 'bottom-start' },
@@ -148,10 +147,8 @@ export default {
       },
     },
     size: {
-      control: {
-        options: ['medium', 'large'],
-        type: 'select',
-      },
+      options: ['medium', 'large'],
+      type: 'select',
       description: 'The size of the input',
       table: {
         defaultValue: { summary: "'medium'" },
@@ -184,6 +181,7 @@ export default {
       isToolshown: true,
     },
   },
+  decorators: [withActions],
 };
 
 const defaultArgs = {
