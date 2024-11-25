@@ -11,7 +11,7 @@ describe('modus-slider', () => {
       <modus-slider>
         <mock:shadow-root>
           <div class="modus-slider">
-            <input class="slider" id="mwc_id_0_slider" max="100" min="0" type="range">
+            <input class="slider" id="mwc_id_0_slider" max="100" min="0" type="range" value="50">
           </div>
         </mock:shadow-root>
       </modus-slider>

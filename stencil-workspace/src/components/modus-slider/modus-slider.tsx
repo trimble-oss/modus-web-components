@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Component, Event, EventEmitter, h, Prop } from '@stencil/core';
+import { Component, Event, EventEmitter, h, Prop, State, Watch } from '@stencil/core';
 import { generateElementId } from '../../utils/utils';
 
 @Component({
@@ -24,7 +24,7 @@ export class ModusSlider {
   @Prop() minValue = 0;
 
   /** (optional) The slider's value. */
-  @Prop({ mutable: true }) value: string;
+  @Prop({ mutable: true }) value = '50';
 
   /** An event that fires on slider value change. */
   @Event() valueChange: EventEmitter<string>;
@@ -32,7 +32,22 @@ export class ModusSlider {
   /** An event that fires on slider value input. */
   @Event() valueInput: EventEmitter<string>;
 
+  @State() valuePercent: number;
+
   private sliderId = generateElementId() + '_slider';
+
+  constructor() {
+    this.updateValuePercent();
+  }
+
+  componentWillLoad() {
+    this.updateValuePercent();
+  }
+
+  @Watch('value')
+  updateValuePercent() {
+    this.valuePercent = ((Number(this.value) - this.minValue) / (this.maxValue - this.minValue)) * 100;
+  }
 
   handleOnChange(event: Event): void {
     const value = (event.currentTarget as HTMLInputElement).value;
