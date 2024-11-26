@@ -1,6 +1,8 @@
 {
   "name": "@trimble-oss/modus-web-components",
   "version": "0.41.1",
+  "private": true,
+  "license": "MIT",
   "description": "Trimble Modus Web Component Library",
   "homepage": "https://modus-web-components.trimble.com/",
   "bugs": {
@@ -64,7 +66,7 @@
     "eslint-plugin-storybook": "0.11.1",
     "jest": "^27.0.3",
     "jest-cli": "^27.5.1",
-    "prettier": "3.3.3",
+    "prettier": "3.4.0",
     "puppeteer": "^19.11.1",
     "puppeteer-core": "^19.11.1",
     "stylelint": "16.10.0",
@@ -76,7 +78,6 @@
     "node": ">=18.20"
   },
   "volta": {
-    "node": "18.20.4"
-  },
-  "license": "MIT"
+    "node": "18.20.5"
+  }
 }

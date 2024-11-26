@@ -41,6 +41,14 @@ export default {
         type: { summary: `'danger' | 'primary' | 'secondary' | 'tertiary' | 'special'` },
       },
     },
+    criticalAction: {
+      name: 'critical-action',
+      description: 'Enable the progress animation for danger button',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      },
+    },
     disabled: {
       description: 'Whether the button is disabled',
       table: {
@@ -106,6 +114,7 @@ const DefaultTemplate = ({
   ariaLabel,
   buttonStyle,
   color,
+  criticalAction,
   disabled,
   size,
   leftIcon,
@@ -120,6 +129,7 @@ const DefaultTemplate = ({
     button-style=${buttonStyle}
     color=${color}
     ?disabled=${disabled}
+    critical-action=${criticalAction}
     size=${size}
     left-icon=${leftIcon}
     right-icon=${rightIcon}
@@ -141,6 +151,7 @@ const DefaultTemplateArgs = {
   iconOnly: '',
   showCaret: false,
   label: 'Default',
+  criticalAction: false,
 };
 
 export const Default = DefaultTemplate.bind({});
