@@ -557,7 +557,7 @@ export class ModusAutocomplete {
                     class={className}
                     tabindex="-1"
                     role="option"
-                    onClick={() => this.handleOptionClick(option)}
+                    onMouseDown={() => this.handleOptionClick(option)}
                     onKeyDown={(e) => this.handleOptionKeyDown(e, option)}>
                     {option.value}
                     {isSelected && <IconCheck size="16" />}
@@ -579,7 +579,7 @@ export class ModusAutocomplete {
                     class={className}
                     tabindex="-1"
                     role="option"
-                    onClick={() => this.handleCustomOptionClick(option)}
+                    onMouseDown={() => this.handleCustomOptionClick(option)}
                     onKeyDown={(e) => this.handleOptionKeyDown(e, option, true)}
                     innerHTML={option.outerHTML}
                   />
