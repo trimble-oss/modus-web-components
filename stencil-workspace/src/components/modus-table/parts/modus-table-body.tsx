@@ -13,7 +13,7 @@ interface ModusTableBodyProps {
 }
 
 export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ context }) => {
-  const { density, hover, rowSelection, rowSelectionOptions, rowActions, tableInstance: table, updateData } = context;
+  const { density, hover, rowSelection, rowSelectionOptions, rowActions, tableInstance: table, updateData, updateSelectedRows } = context;
   const hasRowActions = rowActions?.length > 0;
   const multipleRowSelection = rowSelectionOptions?.multiple;
   let checkboxSize: 'medium' | 'small' = 'medium';
@@ -52,14 +52,31 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
     );
   }
 
+
+
+  function handleKeyDown(event: KeyboardEvent, currentRowIndex: number): void {
+    const rowCount = table.getRowModel().rows.length;
+    const step = event.key === 'ArrowUp' ? -1 : event.key === 'ArrowDown' ? 1 : 0;
+
+    if (!step) return;
+
+    const nextRowIndex = currentRowIndex + step;
+
+    if (nextRowIndex >= 0 && nextRowIndex < rowCount) {
+      event.preventDefault();
+
+      updateSelectedRows(nextRowIndex, currentRowIndex);
+    }
+  }
+
   return (
     <tbody>
-      {table.getRowModel()?.rows.map((row) => {
+      {table.getRowModel()?.rows.map((row, rowIndex) => {
         const { getIsSelected, getIsAllSubRowsSelected, getVisibleCells, subRows, id } = row;
         const isChecked = getIsSelected() && (subRows?.length ? getIsAllSubRowsSelected() : true);
 
         return (
-          <tr key={id} class={{ 'enable-hover': hover, 'row-selected': isChecked }}>
+          <tr key={id} class={{ 'enable-hover': hover, 'row-selected': isChecked }}  onKeyDown={(event) => handleKeyDown(event as KeyboardEvent,rowIndex)}>
             {rowSelection && (
               <ModusTableCellCheckbox
                 multipleRowSelection={multipleRowSelection}
