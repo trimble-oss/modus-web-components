@@ -27,13 +27,32 @@
     align-items: center;
     cursor: pointer;
     display: inline-flex;
-    font-size: $rem-16px;
+    font-size: $rem-14px;
     font-weight: $font-weight-semi-bold;
     height: 48px;
     padding: 0 16px;
 
     .icon {
-      margin-top: 4px;
+      margin-right: $rem-8px;
+      margin-top: $rem-4px;
+    }
+
+    .label-container {
+      align-items: center;
+      display: flex;
+      gap: $rem-24px;
+      overflow: hidden;
+      padding: $rem-12px 0;
+      width: 100%;
+
+      .supporting-label {
+        color: $modus-accordion-label-color;
+        font-size: $rem-12px;
+        margin-left: auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
     }
 
     &.disabled {
@@ -54,14 +73,27 @@
     }
 
     &.small {
-      font-size: $rem-14px;
-      height: 32px;
+      font-size: $rem-12px;
+      height: $rem-40px;
+
+      .label-container {
+        gap: $rem-16px;
+        padding: $rem-10px 0;
+
+        .supporting-label {
+          font-size: $rem-10px;
+        }
+      }
+
+      .chevron-container {
+        margin-left: 16px;
+      }
     }
 
     .chevron-container {
       align-items: center;
       display: flex;
-      margin-left: auto;
+      margin-left: 24px;
       transition: transform 0.2s ease-in-out;
 
       &.reverse {

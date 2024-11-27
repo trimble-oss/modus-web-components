@@ -1,6 +1,7 @@
 import { html } from 'lit-html';
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-switch-storybook-docs.mdx';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 export default {
   title: 'User Inputs/Switch',
@@ -33,10 +34,8 @@ export default {
       },
     },
     size: {
-      control: {
-        options: ['small', 'medium'],
-        type: 'select',
-      },
+      options: ['small', 'medium'],
+      type: 'select',
       description: 'The size of the button',
       table: {
         defaultValue: { summary: `'medium'` },
@@ -56,6 +55,7 @@ export default {
       isToolshown: true,
     },
   },
+  decorators: [withActions],
 };
 
 export const Medium = ({ ariaLabel, checked, disabled, label, size }) => html`

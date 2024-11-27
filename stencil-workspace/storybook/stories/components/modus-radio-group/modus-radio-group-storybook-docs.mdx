@@ -1,10 +1,11 @@
-import { Story } from '@storybook/addon-docs';
+import { Story } from '@storybook/blocks';
+import * as RadioGroup from './modus-radio-group.stories.tsx';
 
 # Radio Group
 
 ---
 
-[Modus Radio Group](https://modus.trimble.com/components/lists/) web components are wrappers around native `<modus-radio-button>` custom HTML elements. They are referenced using the `<modus-radio-group>` custom HTML element.
+[Modus Radio Group](https://modus.trimble.com/components/radio-buttons/) web components are wrappers around native `<modus-radio-button>` custom HTML elements. They are referenced using the `<modus-radio-group>` custom HTML element.
 
 A TypeScript typing has been provided named RadioButton defined as:
 
@@ -19,7 +20,7 @@ A TypeScript typing has been provided named RadioButton defined as:
 
 ### Default
 
-<Story id="user-inputs-radio-group--default" height={'150px'} />
+<Story of={RadioGroup.Default} height={'150px'} />
 
 ```html
 <modus-radio-group checked-id="1" name="my-group"></modus-radio-group>

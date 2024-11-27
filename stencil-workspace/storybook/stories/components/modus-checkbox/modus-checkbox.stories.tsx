@@ -1,6 +1,8 @@
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-checkbox-storybook-docs.mdx';
 import { html } from 'lit-html';
+import { withActions } from '@storybook/addon-actions/decorator';
+
 
 export default {
   title: 'User Inputs/Checkbox',
@@ -41,16 +43,14 @@ export default {
     },
     stopPropagation: {
       name: 'stop-propagation',
-      description: "It should stop propagating the event further.",
+      description: 'It should stop propagating the event further.',
       table: {
         type: { summary: 'boolean' },
       },
     },
     size: {
-      control: {
-        options: ['small', 'medium'],
-        type: 'select',
-      },
+      options: ['small', 'medium'],
+      type: 'select',
     },
   },
   parameters: {
@@ -65,23 +65,19 @@ export default {
       isToolshown: true,
     },
   },
+  decorators: [withActions],
 };
 
-const Template = ({
-  ariaLabel,
-  checked,
-  disabled,
-  indeterminate,
-  label,
-  size
-}) => html`
-  <modus-checkbox
-    aria-label=${ariaLabel}
-    checked=${checked}
-    ?disabled=${disabled}
-    indeterminate=${indeterminate}
-    label=${label}
-    size=${size}></modus-checkbox>
+const Template = ({ ariaLabel, checked, disabled, indeterminate, label, size }) => html`
+  <div style="width: fit-content">
+    <modus-checkbox
+      aria-label=${ariaLabel}
+      checked=${checked}
+      ?disabled=${disabled}
+      indeterminate=${indeterminate}
+      label=${label}
+      size=${size}></modus-checkbox>
+  </div>
 `;
 
 export const Medium = Template.bind({});
@@ -91,7 +87,7 @@ Medium.args = {
   disabled: false,
   indeterminate: false,
   label: 'Checkbox',
-  size:'medium',
+  size: 'medium',
 };
 
 export const Indeterminate = Template.bind({});
@@ -101,5 +97,5 @@ Indeterminate.args = {
   disabled: false,
   indeterminate: true,
   label: 'Checkbox',
-  size:'medium',
+  size: 'medium',
 };

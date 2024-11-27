@@ -10,7 +10,18 @@ import { ModusIconMap } from '../../icons/ModusIconMap';
 import ModusDatePickerCalendar from './utils/modus-date-picker.calendar';
 import ModusDatePickerState from './utils/modus-date-picker.state';
 import { ModusDateInputEventDetails } from '../modus-date-input/utils/modus-date-input.models';
-import { createPopper, Instance, Placement } from '@popperjs/core';
+import {
+  Alignment,
+  autoPlacement,
+  flip,
+  AutoPlacementOptions,
+  autoUpdate,
+  computePosition,
+  ComputePositionConfig,
+  Placement,
+  shift,
+  limitShift,
+} from '@floating-ui/dom';
 
 @Component({
   tag: 'modus-date-picker',
@@ -24,7 +35,16 @@ export class ModusDatePicker {
   @Prop() label: string;
 
   /** (optional) The placement of the calendar popup */
-  @Prop() position: Placement = 'bottom-start';
+  @Prop() position: Placement | 'auto' | 'auto-start' | 'auto-end' = 'bottom-start';
+
+  /** (optional) Function to check if a date is enabled
+   * If true, the day will be enabled/interactive. If false, the day will be disabled/non-interactive.
+   * The function accepts an ISO 8601 date string of a given day. By default, all days are enabled.
+   * Developers can use this function to write custom logic to disable certain days.
+   * The function is called for each rendered calendar day.
+   * This function should be optimized for performance to avoid jank.
+   * */
+  @Prop() isDateEnabled: (dateIsoString: string) => boolean | undefined;
 
   /** Needed for a better control over the state and avoid re-renders */
   @State() _forceUpdate = {};
@@ -35,7 +55,6 @@ export class ModusDatePicker {
   private _calendar: ModusDatePickerCalendar;
   private _dateInputs: { [key: string]: ModusDatePickerState } = {};
   private _locale = 'default';
-  private _popperInstance: Instance;
 
   private get _currentInput(): ModusDatePickerState {
     return Object.values(this._dateInputs).find((dt) => dt.isCalendarOpen());
@@ -45,54 +64,57 @@ export class ModusDatePicker {
     this._calendar = new ModusDatePickerCalendar();
   }
 
-  componentDidLoad() {
-    this.initializePopper();
-  }
-
   componentDidUpdate() {
     if (this._showCalendar) {
-      this.initializePopper();
+      this.configureCalendarPopover();
     } else {
-      this.destroyPopper();
+      this.cleanupPopover?.();
     }
   }
 
   disconnectedCallback() {
-    this.destroyPopper();
+    this.cleanupPopover?.();
   }
 
-  initializePopper() {
+  cleanupPopover: () => void | undefined = undefined;
+
+  configureCalendarPopover() {
     const referenceElement = this.element.shadowRoot.querySelector('.calendar') as HTMLElement;
-    const popperElement = this.element.shadowRoot.querySelector('.calendar-container') as HTMLElement;
+    const floatingElement = this.element.shadowRoot.querySelector('.calendar-container') as HTMLElement;
 
-    if (referenceElement && popperElement && !this._popperInstance) {
-      this._popperInstance = createPopper(referenceElement, popperElement, {
-        placement: this.position,
-        strategy: this.position === 'auto' ? 'fixed' : 'absolute',
-        modifiers: [
-          {
-            name: 'offset',
-            options: {
-              offset: [0.2, 0.2],
-              mainAxis: false,
-            },
-          },
-          {
-            name: 'preventOverflow',
-            options: {
-              boundary: 'viewport',
-            },
-          },
-        ],
+    this.cleanupPopover = autoUpdate(referenceElement, floatingElement, () => {
+      const options: Partial<ComputePositionConfig> = {};
+      const middleware = [];
+
+      // The preventOverflow modifier from Popper is now called shift.
+      // This is because technically many modifiers in Popper 2 “prevented overflow”,
+      // which does not describe what it is actually doing unlike shift. (https://floating-ui.com/docs/migration#configure-middleware)
+      middleware.push(shift({ limiter: limitShift() }));
+
+      if (this.position.includes('auto')) {
+        const autoPlacementOptions: AutoPlacementOptions = {};
+        if (this.position.includes('-')) {
+          const [, alignment] = this.position.split('-');
+          autoPlacementOptions.alignment = alignment as Alignment;
+        }
+        middleware.push(autoPlacement(autoPlacementOptions));
+      } else {
+        options.placement = this.position as Placement;
+        middleware.push(flip());
+      }
+
+      if (this.position === 'auto') {
+        options.strategy = 'fixed';
+      }
+
+      options.middleware = middleware;
+      computePosition(referenceElement, floatingElement, options).then(({ x, y }) => {
+        Object.assign(floatingElement.style, {
+          left: `${x}px`,
+          top: `${y}px`,
+        });
       });
-    }
-  }
-
-  destroyPopper() {
-    if (this._popperInstance) {
-      this._popperInstance.destroy();
-      this._popperInstance = null;
-    }
+    });
   }
 
   /** Handlers */
@@ -314,7 +336,9 @@ export class ModusDatePicker {
               const isSingleDateSelected = singleDate && this.compare(date, singleDate) === 0;
               const isSelected = isStartDate || isEndDate || isSingleDateSelected;
               const isInRange = !isSelected ? positions['in-range'] : false;
-              const isDateDisabled = !this.isWithinCurrentMinMax(date);
+              const isDateOutOfMaxMinRange = !this.isWithinCurrentMinMax(date);
+
+              const isDateEnabled = this.isDateEnabled ? this.isDateEnabled(date.toISOString()) : true;
 
               // Only for the last date in the calendar
               const onBlurEvent =
@@ -326,18 +350,20 @@ export class ModusDatePicker {
                     }
                   : {};
 
+              const buttonDisabled = isDateOutOfMaxMinRange || !isDateEnabled;
+
               return (
                 <button
                   class={{
                     'calendar-day grid-item': true,
                     selected: isSelected,
-                    disabled: isDateDisabled,
+                    disabled: buttonDisabled,
                     start: isStartDate && !isEndDate,
                     end: isEndDate && !isStartDate,
                     'current-day': isToday,
                     'range-selected': isInRange,
                   }}
-                  disabled={isDateDisabled}
+                  disabled={buttonDisabled}
                   tabIndex={0}
                   type="button"
                   aria-current={isSelected ? 'date' : undefined}

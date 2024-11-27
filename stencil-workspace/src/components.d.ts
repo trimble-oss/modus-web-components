@@ -13,7 +13,7 @@ import { ButtonColor, ButtonSize, ButtonStyle, ButtonType } from "./components/m
 import { ButtonGroupSelectionType } from "./components/modus-button-group/modus-button-group.models";
 import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 import { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
-import { Placement } from "@popperjs/core";
+import { Placement } from "@floating-ui/dom";
 import { ModusIconName } from "./icons/ModusIconUtilities";
 import { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { ModusNavbarButton, ModusNavbarDropdownItem, ModusNavbarDropdownOptions, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
@@ -21,7 +21,7 @@ import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/app
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { ModusSentimentScaleType } from "./components/modus-sentiment-scale/modus-sentiment-scale.models";
 import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-import { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnSort, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableErrors, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+import { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnSort, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableErrors, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowActionConfig, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 import { Cell, Column, Row } from "@tanstack/table-core";
 import { TableCellEdited, TableContext } from "./components/modus-table/models/table-context.models";
 import { Tab } from "./components/modus-tabs/modus-tabs";
@@ -37,7 +37,7 @@ export { ButtonColor, ButtonSize, ButtonStyle, ButtonType } from "./components/m
 export { ButtonGroupSelectionType } from "./components/modus-button-group/modus-button-group.models";
 export { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 export { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
-export { Placement } from "@popperjs/core";
+export { Placement } from "@floating-ui/dom";
 export { ModusIconName } from "./icons/ModusIconUtilities";
 export { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 export { ModusNavbarButton, ModusNavbarDropdownItem, ModusNavbarDropdownOptions, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
@@ -45,7 +45,7 @@ export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/app
 export { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 export { ModusSentimentScaleType } from "./components/modus-sentiment-scale/modus-sentiment-scale.models";
 export { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-export { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnSort, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableErrors, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+export { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnSort, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableErrors, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowActionConfig, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 export { Cell, Column, Row } from "@tanstack/table-core";
 export { TableCellEdited, TableContext } from "./components/modus-table/models/table-context.models";
 export { Tab } from "./components/modus-tabs/modus-tabs";
@@ -85,6 +85,10 @@ export namespace Components {
           * (optional) The size of accordion item.
          */
         "size": 'condensed' | 'standard';
+        /**
+          * (optional) The supportingLabel of the accordion.
+         */
+        "supportingLabel": string;
     }
     interface ModusActionBar {
         /**
@@ -265,6 +269,10 @@ export namespace Components {
           * (optional) The color of the button
          */
         "color": ButtonColor;
+        /**
+          * (Optional) enable the progress animation for danger button
+         */
+        "criticalAction": boolean;
         /**
           * (optional) Disables the button.
          */
@@ -558,13 +566,17 @@ export namespace Components {
     }
     interface ModusDatePicker {
         /**
+          * (optional) Function to check if a date is enabled If true, the day will be enabled/interactive. If false, the day will be disabled/non-interactive. The function accepts an ISO 8601 date string of a given day. By default, all days are enabled. Developers can use this function to write custom logic to disable certain days. The function is called for each rendered calendar day. This function should be optimized for performance to avoid jank.
+         */
+        "isDateEnabled": (dateIsoString: string) => boolean | undefined;
+        /**
           * (optional) Label for the field.
          */
         "label": string;
         /**
           * (optional) The placement of the calendar popup
          */
-        "position": Placement;
+        "position": Placement | 'auto' | 'auto-start' | 'auto-end';
     }
     interface ModusDivider {
     }
@@ -620,6 +632,10 @@ export namespace Components {
           * (optional) The dropzone's description text.
          */
         "description": string;
+        /**
+          * (optional) disables the dropzone
+         */
+        "disabled": boolean;
         /**
           * (optional) The dropzone's height.
          */
@@ -1307,6 +1323,10 @@ export namespace Components {
          */
         "rowActions": ModusTableRowAction[];
         /**
+          * (Optional) The width and header of the rowActionsConfig.
+         */
+        "rowActionsConfig": ModusTableRowActionConfig;
+        /**
           * (Optional) To display checkbox.
          */
         "rowSelection": boolean;
@@ -1717,6 +1737,10 @@ export namespace Components {
           * (optional) Whether the toast has a dismiss button.
          */
         "dismissible": boolean;
+        /**
+          * (optional) Whether to retain the element in the DOM after it has been dismissed.
+         */
+        "retainElement": boolean;
         /**
           * (optional) Role taken by the toast.  Defaults to 'status'.
          */
@@ -2989,6 +3013,10 @@ declare namespace LocalJSX {
           * (optional) The size of accordion item.
          */
         "size"?: 'condensed' | 'standard';
+        /**
+          * (optional) The supportingLabel of the accordion.
+         */
+        "supportingLabel"?: string;
     }
     interface ModusActionBar {
         /**
@@ -3197,6 +3225,10 @@ declare namespace LocalJSX {
           * (optional) The color of the button
          */
         "color"?: ButtonColor;
+        /**
+          * (Optional) enable the progress animation for danger button
+         */
+        "criticalAction"?: boolean;
         /**
           * (optional) Disables the button.
          */
@@ -3530,13 +3562,17 @@ declare namespace LocalJSX {
     }
     interface ModusDatePicker {
         /**
+          * (optional) Function to check if a date is enabled If true, the day will be enabled/interactive. If false, the day will be disabled/non-interactive. The function accepts an ISO 8601 date string of a given day. By default, all days are enabled. Developers can use this function to write custom logic to disable certain days. The function is called for each rendered calendar day. This function should be optimized for performance to avoid jank.
+         */
+        "isDateEnabled"?: (dateIsoString: string) => boolean | undefined;
+        /**
           * (optional) Label for the field.
          */
         "label"?: string;
         /**
           * (optional) The placement of the calendar popup
          */
-        "position"?: Placement;
+        "position"?: Placement | 'auto' | 'auto-start' | 'auto-end';
     }
     interface ModusDivider {
     }
@@ -3592,6 +3628,10 @@ declare namespace LocalJSX {
           * (optional) The dropzone's description text.
          */
         "description"?: string;
+        /**
+          * (optional) disables the dropzone
+         */
+        "disabled"?: boolean;
         /**
           * (optional) The dropzone's height.
          */
@@ -4416,6 +4456,10 @@ declare namespace LocalJSX {
          */
         "rowActions"?: ModusTableRowAction[];
         /**
+          * (Optional) The width and header of the rowActionsConfig.
+         */
+        "rowActionsConfig"?: ModusTableRowActionConfig;
+        /**
           * (Optional) To display checkbox.
          */
         "rowSelection"?: boolean;
@@ -4827,6 +4871,10 @@ declare namespace LocalJSX {
           * An event that fires when the toast is dismissed
          */
         "onDismissClick"?: (event: ModusToastCustomEvent<any>) => void;
+        /**
+          * (optional) Whether to retain the element in the DOM after it has been dismissed.
+         */
+        "retainElement"?: boolean;
         /**
           * (optional) Role taken by the toast.  Defaults to 'status'.
          */

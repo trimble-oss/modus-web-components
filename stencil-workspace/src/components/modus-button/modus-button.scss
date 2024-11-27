@@ -39,6 +39,10 @@ button {
     pointer-events: none;
   }
 
+  svg {
+    z-index: 9;
+  }
+
   &:hover {
     cursor: pointer;
   }
@@ -77,6 +81,7 @@ button {
     .label {
       font-size: $rem-12px;
       padding: 0 4px;
+      z-index: 9;
     }
 
     .icon svg {
@@ -111,6 +116,7 @@ button {
     .label {
       font-size: $rem-14px;
       padding: 0 8px;
+      z-index: 9;
     }
 
     .icon svg {
@@ -145,6 +151,7 @@ button {
     .label {
       font-size: $rem-16px;
       padding: 0 8px;
+      z-index: 9;
     }
 
     .icon svg {
@@ -331,6 +338,14 @@ button {
       &.color-#{$color}:hover:not([disabled]) {
         background-color: var(--modus-btn-#{$color}-hover-bg, map-get($btn-hover-colors, $color));
         border-color: var(--modus-btn-#{$color}-hover-bg, $hover-border-color);
+
+        &.progress,
+        &.reverse,
+        &.progress-complete {
+          background-color: var(--modus-btn-#{$color}-bg, $value);
+          border-color: var(--modus-btn-#{$color}-border-color, $border-color);
+          color: var(--modus-btn-#{$color}-color, $default-text-color);
+        }
       }
 
       // Active state
@@ -422,6 +437,58 @@ button {
         }
       }
     }
+  }
+
+  &::after {
+    background-color: $btn-progress-bg;
+    content: '';
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transition: width 0.3s linear;
+    width: 0;
+    z-index: 1;
+  }
+
+  @keyframes progress-forward {
+    0% {
+      width: 0;
+    }
+
+    100% {
+      width: 100%;
+    }
+  }
+
+  @keyframes progress-reverse {
+    0% {
+      width: var(--progress-width, 100%);
+    }
+
+    100% {
+      width: 0;
+    }
+  }
+
+  &.progress::after {
+    animation: progress-forward 3s linear forwards;
+  }
+
+  &.reverse::after {
+    animation: progress-reverse 3s linear forwards;
+  }
+
+  .progress-live-region {
+    border: 0;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
   }
 }
 

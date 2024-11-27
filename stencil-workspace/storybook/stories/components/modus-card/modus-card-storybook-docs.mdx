@@ -1,16 +1,17 @@
-import { Story } from '@storybook/addon-docs';
+import { Story } from '@storybook/blocks';
+import * as Card from './modus-card.stories.tsx';
 
 # Card
 
 ---
 
-[Modus Card](https://modus.trimble.com/components/cards/) web components are wrappers around native `<article>` elements. They are referenced using the `<modus-card>` custom HTML element.
+[Modus Card](https://modus.trimble.com/components/web/cards/) web components are wrappers around native `<article>` elements. They are referenced using the `<modus-card>` custom HTML element.
 
 This component utilizes the slot element, allowing you to render your own HTML in the card. You can change the background color using the CSS variable `--modus-card-bg`.
 
 ### Default
 
-<Story id="components-card--default" height={'150px'} />
+<Story of={Card.Default} height={'150px'} />
 
 ```html
 <modus-card height="270px" width="250px" show-card-border="true" show-shadow-on-hover="true">

@@ -1,6 +1,7 @@
 import { html } from 'lit-html';
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-date-picker-storybook-docs.mdx';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 export default {
   title: 'User Inputs/Date Picker',
@@ -35,26 +36,24 @@ export default {
     },
     position: {
       name: 'position',
-      control: {
-        options: [
-          'auto',
-          'auto-start',
-          'auto-end',
-          'top-start',
-          'top-end',
-          'bottom-start',
-          'bottom-end',
-          'right-start',
-          'right-end',
-          'left-start',
-          'left-end',
-          'top',
-          'left',
-          'bottom',
-          'right',
-        ],
-        type: 'select',
-      },
+      options: [
+        'auto',
+        'auto-start',
+        'auto-end',
+        'top-start',
+        'top-end',
+        'bottom-start',
+        'bottom-end',
+        'right-start',
+        'right-end',
+        'left-start',
+        'left-end',
+        'top',
+        'left',
+        'bottom',
+        'right',
+      ],
+      type: 'select',
       description: 'The placement of the calendar popup',
       table: {
         defaultValue: { summary: 'bottom-start' },
@@ -148,10 +147,8 @@ export default {
       },
     },
     size: {
-      control: {
-        options: ['medium', 'large'],
-        type: 'select',
-      },
+      options: ['medium', 'large'],
+      type: 'select',
       description: 'The size of the input',
       table: {
         defaultValue: { summary: "'medium'" },
@@ -184,6 +181,7 @@ export default {
       isToolshown: true,
     },
   },
+  decorators: [withActions],
 };
 
 const defaultArgs = {
@@ -270,6 +268,7 @@ const DateRangeTemplate = ({
   errorText,
   format,
   min,
+  position,
   max,
   helperText,
   placeholder,
@@ -280,7 +279,7 @@ const DateRangeTemplate = ({
   validText,
   value,
 }) => html`
-  <modus-date-picker label="Select date range">
+  <modus-date-picker label="Select date range" position=${position}>
     <modus-date-input
       allowed-chars-regex=${allowedCharsRegex}
       alt-formats=${altFormats}
@@ -358,32 +357,45 @@ const DefaultWithPickerTemplate = ({
   size,
   validText,
   value,
-}) => html`
-  <modus-date-picker position=${position}>
-    <modus-date-input
-      allowed-chars-regex=${allowedCharsRegex}
-      aria-label=${ariaLabel}
-      alt-formats=${altFormats}
-      auto-focus-input=${autoFocusInput}
-      disable-validation=${disableValidation}
-      ?disabled=${disabled}
-      error-text=${errorText}
-      format=${format}
-      helper-text=${helperText}
-      label=${label}
-      min=${min}
-      max=${max}
-      placeholder=${placeholder}
-      read-only=${readOnly}
-      ?required=${required}
-      size=${size}
-      show-calendar-icon=${showCalendarIcon}
-      valid-text=${validText}
-      value=${value}></modus-date-input>
-  </modus-date-picker>
-`;
+  isDateEnabled,
+}) => {
+  setTimeout(() => {
+    isDateEnabledLoading = false;
+  }, 4000);
+  return html`
+    <modus-date-picker .isDateEnabled=${isDateEnabled} position=${position}>
+      <modus-date-input
+        allowed-chars-regex=${allowedCharsRegex}
+        aria-label=${ariaLabel}
+        alt-formats=${altFormats}
+        auto-focus-input=${autoFocusInput}
+        disable-validation=${disableValidation}
+        ?disabled=${disabled}
+        error-text=${errorText}
+        format=${format}
+        helper-text=${helperText}
+        label=${label}
+        min=${min}
+        max=${max}
+        placeholder=${placeholder}
+        read-only=${readOnly}
+        ?required=${required}
+        size=${size}
+        show-calendar-icon=${showCalendarIcon}
+        valid-text=${validText}
+        value=${value}></modus-date-input>
+    </modus-date-picker>
+  `;
+};
 
 export const DefaultWithPicker = DefaultWithPickerTemplate.bind({});
+// Uncomment and pass in as isDateEnabled below to test isDateEnabled functionality
+// const isWeekend = (isoString: string) => {
+//   const date = new Date(isoString);
+//   const isWeekend  = date.getDay() === 0 || date.getDay() === 6;
+//   return isWeekend;
+// }
+
 DefaultWithPicker.args = {
   ...defaultArgs,
   position: 'bottom-start',

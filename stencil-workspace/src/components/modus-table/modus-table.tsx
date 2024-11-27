@@ -53,6 +53,7 @@ import {
   ModusTableRowWithId,
   ModusTableColumnSort,
   ModusTableErrors,
+  ModusTableRowActionConfig,
 } from './models/modus-table.models';
 import ColumnDragState from './models/column-drag-state.model';
 import {
@@ -120,11 +121,17 @@ export class ModusTable {
         this.tableState.pagination.pageIndex = maxPageIndex >= 0 ? maxPageIndex : 0;
       }
     }
-    this.tableCore?.setState('pagination', {
-      ...this.tableState.pagination,
-      pageIndex: this.tableState.pagination.pageIndex,
-      pageSize: this.pagination ? this.tableState.pagination.pageSize : this.data.length,
-    });
+    if (!this.manualPaginationOptions) {
+      this.tableCore?.setState('pagination', {
+        ...this.tableState.pagination,
+        pageIndex: this.tableState.pagination.pageIndex,
+        pageSize: this.pagination
+          ? this.tableState.pagination.pageSize
+          : this.rowsExpandable
+            ? this.pageSizeList[0]
+            : this.data.length,
+      });
+    }
     this.tableCore?.setOptions('data', newVal);
   }
 
@@ -171,6 +178,9 @@ export class ModusTable {
 
   /** (Optional) Actions that can be performed on each row. A maximum of 4 icons will be shown, including overflow menu and expand icons. */
   @Prop() rowActions: ModusTableRowAction[] = [];
+
+  /** (Optional) The width and header of the rowActionsConfig. */
+  @Prop() rowActionsConfig: ModusTableRowActionConfig;
 
   /** (Optional) To display expanded rows. */
   @Prop() rowsExpandable = false;
@@ -520,6 +530,8 @@ export class ModusTable {
       rowSelectionChange: this.rowSelectionChange,
       rowExpanded: this.rowExpanded,
       rowActionClick: this.rowActionClick,
+      rowActionSize: this.rowActionsConfig?.width,
+      rowActionHeader: this.rowActionsConfig?.header,
       sortChange: this.sortChange,
       paginationChange: this.paginationChange,
       columnSizingChange: this.columnSizingChange,
@@ -624,6 +636,7 @@ export class ModusTable {
       columnResize: this.columnResize,
       sort: this.sort,
       pagination: this.pagination,
+      rowsExpandable: this.rowsExpandable,
       pageSizeList: this.pageSizeList,
       rowSelection: this.rowSelection,
       rowSelectionOptions: this.rowSelectionOptions,

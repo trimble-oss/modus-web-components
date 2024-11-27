@@ -13,10 +13,8 @@ export default {
       },
     },
     color: {
-      control: {
-        options: ['danger', 'dark', 'primary', 'secondary', 'success', 'tertiary', 'warning'],
-        type: 'select',
-      },
+      options: ['danger', 'dark', 'primary', 'secondary', 'success', 'tertiary', 'warning'],
+      type: 'select',
       description: 'The color of the badge',
       table: {
         defaultValue: { summary: `'primary'` },
@@ -26,10 +24,8 @@ export default {
       },
     },
     size: {
-      control: {
-        options: ['small', 'medium', 'large'],
-        type: 'select',
-      },
+      options: ['small', 'medium', 'large'],
+      type: 'select',
       description: 'The size of the badge',
       table: {
         defaultValue: { summary: `'medium'` },
@@ -37,10 +33,8 @@ export default {
       },
     },
     type: {
-      control: {
-        options: ['counter', 'default', 'text'],
-        type: 'select',
-      },
+      options: ['counter', 'default', 'text'],
+      type: 'select',
       description: 'The type of the badge',
       table: {
         defaultValue: { summary: `'default'` },
