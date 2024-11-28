@@ -355,7 +355,7 @@ export class ModusTable {
 
   @State() tableCore: ModusTableCore;
   @State() cells: HTMLModusTableCellMainElement[] = [];
-  @State() selectedRows = [];
+  @State() selectedRows: number[] = [];
 
   classByDensity: Map<string, string> = new Map([
     ['relaxed', 'density-relaxed'],
@@ -545,6 +545,7 @@ export class ModusTable {
       toolbarOptions: this.toolbarOptions,
       toolbar: this.toolbar,
       summaryRow: this.summaryRow,
+      selectedRows: this.selectedRows,
       fullWidth: this.fullWidth,
       maxHeight: this.maxHeight,
       maxWidth: this.maxWidth,
@@ -563,7 +564,7 @@ export class ModusTable {
       onToolbarOptionsChange: this.onToolbarOptionsChange,
       getRowId: this.getRowId,
       updateData: this.updateData.bind(this),
-      updateSelectedRows:this.updateSelectedRows.bind(this)
+      updateSelectedRows: this.updateSelectedRows.bind(this),
     };
   }
 
@@ -695,33 +696,31 @@ export class ModusTable {
     this.cellValueChange.emit({ ...context, data: this.data });
   }
 
-lastDirection: string = null;
+  lastDirection: string = null;
 
+  private anchorRowIndex: number | null = null;
 
-private anchorRowIndex: number | null = null;
+  updateSelectedRows(nextRowIndex: number, currentRowIndex: number): void {
+    if (this.anchorRowIndex === null) {
+      this.anchorRowIndex = currentRowIndex;
+    }
 
-updateSelectedRows(nextRowIndex: number, currentRowIndex: number): void {
-  if (this.anchorRowIndex === null) {
-    this.anchorRowIndex = currentRowIndex;
+    const tempSelectedRows = [];
+
+    const start = Math.min(this.anchorRowIndex, nextRowIndex);
+    const end = Math.max(this.anchorRowIndex, nextRowIndex);
+
+    for (let i = start; i <= end; i++) {
+      tempSelectedRows.push(i);
+    }
+
+    this.selectedRows = tempSelectedRows;
+
+    this.rowSelectionChange.emit(this.selectedRows);
+    if (nextRowIndex === currentRowIndex) {
+      this.anchorRowIndex = null;
+    }
   }
-
-  const tempSelectedRows = [];
-
-  const start = Math.min(this.anchorRowIndex, nextRowIndex);
-  const end = Math.max(this.anchorRowIndex, nextRowIndex);
-
-  for (let i = start; i <= end; i++) {
-    tempSelectedRows.push(i);
-  }
-
-  this.selectedRows = tempSelectedRows;
-
-  this.rowSelectionChange.emit(this.selectedRows);
-  if (nextRowIndex === currentRowIndex) {
-    this.anchorRowIndex = null;
-  }
-}
-
 
   updateRowSelection(updater: Updater<unknown>): void {
     this.updateTableCore(updater, ROW_SELECTION_STATE_KEY);
