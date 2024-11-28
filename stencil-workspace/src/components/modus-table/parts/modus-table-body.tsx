@@ -84,9 +84,7 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
     <tbody>
       {table.getRowModel()?.rows.map((row, rowIndex) => {
         const { getIsSelected, getIsAllSubRowsSelected, getVisibleCells, subRows, id } = row;
-        const isChecked =
-          (getIsSelected() && (subRows?.length ? getIsAllSubRowsSelected() : true)) ||
-          context.selectedRows?.includes(rowIndex);
+        const isChecked = getIsSelected() && (subRows?.length ? getIsAllSubRowsSelected() : true);
 
         return (
           <tr
