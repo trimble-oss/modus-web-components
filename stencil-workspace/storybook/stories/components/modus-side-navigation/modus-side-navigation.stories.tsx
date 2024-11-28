@@ -97,7 +97,6 @@ export default {
           if (switchMode.checked) {
             sideNav.mode = sideNav.mode === 'push' ? 'overlay' : 'push';
           }
-          console.log("mode",sideNav,sideNav.mode);
         };
         document.addEventListener('switchClick', switchMode);
         document.addEventListener('switchClick', switchTheme);
@@ -118,7 +117,6 @@ export default {
 
         const initialize = () => {
           const sidenav = document.querySelector('#dataTemplate #sideNav');
-          console.log("sidenav",sidenav);
           sidenav.data = [
             {
               id: 'home-menu',
