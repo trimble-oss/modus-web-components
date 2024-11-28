@@ -703,6 +703,9 @@ export class ModusTable {
   private anchorRowIndex: number | null = null;
 
   updateSelectedRows(nextRowIndex: number, currentRowIndex: number): void {
+    if (!this.rowSelection) {
+      return;
+    }
     if (this.anchorRowIndex === null) {
       this.anchorRowIndex = currentRowIndex;
     }
