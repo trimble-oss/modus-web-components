@@ -73,8 +73,6 @@ export interface TableContext {
 
   summaryRow: boolean;
 
-  selectedRows: number[];
-
   toolbar: boolean;
 
   toolbarOptions: ModusTableToolbarOptions | null;

@@ -355,7 +355,6 @@ export class ModusTable {
 
   @State() tableCore: ModusTableCore;
   @State() cells: HTMLModusTableCellMainElement[] = [];
-  @State() selectedRows: number[] = [];
 
   classByDensity: Map<string, string> = new Map([
     ['relaxed', 'density-relaxed'],
@@ -545,7 +544,6 @@ export class ModusTable {
       toolbarOptions: this.toolbarOptions,
       toolbar: this.toolbar,
       summaryRow: this.summaryRow,
-      selectedRows: this.selectedRows,
       fullWidth: this.fullWidth,
       maxHeight: this.maxHeight,
       maxWidth: this.maxWidth,
@@ -708,21 +706,34 @@ export class ModusTable {
       this.anchorRowIndex = currentRowIndex;
     }
 
-    const tempSelectedRows = [];
-
     const start = Math.min(this.anchorRowIndex, nextRowIndex);
     const end = Math.max(this.anchorRowIndex, nextRowIndex);
 
+    const newRowSelection: Record<string, boolean> = {};
     for (let i = start; i <= end; i++) {
-      tempSelectedRows.push(i);
+      const rowId = this.tableCore.getTableInstance().getRowModel().rows[i]?.id;
+      if (rowId !== undefined) {
+        newRowSelection[rowId] = true;
+      }
     }
 
-    this.selectedRows = tempSelectedRows;
+    // Update the rowSelection state in TanStack Table
+    this.tableCore.getTableInstance().setRowSelection(newRowSelection);
 
-    this.rowSelectionChange.emit(this.selectedRows);
-    if (nextRowIndex === currentRowIndex) {
-      this.anchorRowIndex = null;
-    }
+    // Emit the updated selection if required
+    this.emitRowSelection();
+  }
+
+  emitRowSelection(): void {
+    const selectedRows = this.tableCore
+      .getTableInstance()
+      .getSelectedRowModel()
+      .flatRows.map((row) => ({
+        id: row.id,
+        ...(typeof row.original === 'object' ? row.original : {}),
+      }));
+
+    this.rowSelectionChange.emit(selectedRows);
   }
 
   updateRowSelection(updater: Updater<unknown>): void {
