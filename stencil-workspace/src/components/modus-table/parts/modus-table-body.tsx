@@ -13,7 +13,16 @@ interface ModusTableBodyProps {
 }
 
 export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ context }) => {
-  const { density, hover, rowSelection, rowSelectionOptions, rowActions, tableInstance: table, updateData, updateSelectedRows } = context;
+  const {
+    density,
+    hover,
+    rowSelection,
+    rowSelectionOptions,
+    rowActions,
+    tableInstance: table,
+    updateData,
+    updateSelectedRows,
+  } = context;
   const hasRowActions = rowActions?.length > 0;
   const multipleRowSelection = rowSelectionOptions?.multiple;
   let checkboxSize: 'medium' | 'small' = 'medium';
@@ -52,9 +61,11 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
     );
   }
 
-
-
   function handleKeyDown(event: KeyboardEvent, currentRowIndex: number): void {
+    if (event.defaultPrevented || event.altKey || !event.shiftKey) {
+      return;
+    }
+
     const rowCount = table.getRowModel().rows.length;
     const step = event.key === 'ArrowUp' ? -1 : event.key === 'ArrowDown' ? 1 : 0;
 
@@ -73,10 +84,15 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
     <tbody>
       {table.getRowModel()?.rows.map((row, rowIndex) => {
         const { getIsSelected, getIsAllSubRowsSelected, getVisibleCells, subRows, id } = row;
-        const isChecked = getIsSelected() && (subRows?.length ? getIsAllSubRowsSelected() : true);
+        const isChecked =
+          (getIsSelected() && (subRows?.length ? getIsAllSubRowsSelected() : true)) ||
+          context.selectedRows?.includes(rowIndex);
 
         return (
-          <tr key={id} class={{ 'enable-hover': hover, 'row-selected': isChecked }}  onKeyDown={(event) => handleKeyDown(event as KeyboardEvent,rowIndex)}>
+          <tr
+            key={id}
+            class={{ 'enable-hover': hover, 'row-selected': isChecked }}
+            onKeyDown={(event) => handleKeyDown(event as KeyboardEvent, rowIndex)}>
             {rowSelection && (
               <ModusTableCellCheckbox
                 multipleRowSelection={multipleRowSelection}

@@ -73,6 +73,8 @@ export interface TableContext {
 
   summaryRow: boolean;
 
+  selectedRows: number[];
+
   toolbar: boolean;
 
   toolbarOptions: ModusTableToolbarOptions | null;
@@ -111,7 +113,7 @@ export interface TableContext {
 
   getRowId: (originalRow: unknown, index: number, parent?: Row<unknown>) => string;
   updateData: (updater: Updater<unknown>, context: TableCellEdited) => void;
-  updateSelectedRows: (rowIndex: number,currentRowIndex: number) => void;
+  updateSelectedRows: (rowIndex: number, currentRowIndex: number) => void;
   onColumnsChange: (newVal: ModusTableColumn<unknown>[]) => void;
   onColumnResizeChange: (newVal: boolean) => void;
   onColumnReorderChange: () => void;
