@@ -66,7 +66,7 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
     const isShiftClick = event.shiftKey;
     const isCtrlClick = event.ctrlKey || event.metaKey;
 
-    updateClickedRows(currentRowIndex,isShiftClick,isCtrlClick);
+    updateClickedRows(currentRowIndex, isShiftClick, isCtrlClick);
   }
 
   function handleKeyDown(event: KeyboardEvent, currentRowIndex: number): void {
@@ -99,7 +99,7 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
             key={id}
             class={{ 'enable-hover': hover, 'row-selected': isChecked }}
             onKeyDown={(event) => handleKeyDown(event as KeyboardEvent, rowIndex)}
-            onClick={(event)=> handleRowClick(event as MouseEvent, rowIndex)}>
+            onClick={(event) => handleRowClick(event as MouseEvent, rowIndex)}>
             {rowSelection && (
               <ModusTableCellCheckbox
                 multipleRowSelection={multipleRowSelection}
