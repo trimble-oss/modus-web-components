@@ -164,6 +164,10 @@ export namespace Components {
          */
         "filterOptions": (search: string) => Promise<ModusAutocompleteOption[] | string[]>;
         /**
+          * Focus the autocomplete component
+         */
+        "focusInput": () => Promise<void>;
+        /**
           * Whether the search icon is included.
          */
         "includeSearchIcon": boolean;
@@ -1519,6 +1523,10 @@ export namespace Components {
           * (optional) The input's minimum length.
          */
         "minLength": number;
+        /**
+          * (optional) The input's name.
+         */
+        "name": string;
         /**
           * (optional) The input's pattern HTML attribute.
          */
@@ -4641,6 +4649,10 @@ declare namespace LocalJSX {
           * (optional) The input's minimum length.
          */
         "minLength"?: number;
+        /**
+          * (optional) The input's name.
+         */
+        "name"?: string;
         /**
           * An event that fires on input value change.
          */
