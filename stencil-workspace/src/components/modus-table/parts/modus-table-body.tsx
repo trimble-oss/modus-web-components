@@ -22,6 +22,7 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
     tableInstance: table,
     updateData,
     updateSelectedRows,
+    updateClickedRows,
   } = context;
   const hasRowActions = rowActions?.length > 0;
   const multipleRowSelection = rowSelectionOptions?.multiple;
@@ -61,6 +62,13 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
     );
   }
 
+  function handleRowClick(event: MouseEvent, currentRowIndex: number): void {
+    const isShiftClick = event.shiftKey;
+    const isCtrlClick = event.ctrlKey || event.metaKey;
+
+    updateClickedRows(currentRowIndex,isShiftClick,isCtrlClick);
+  }
+
   function handleKeyDown(event: KeyboardEvent, currentRowIndex: number): void {
     if (event.defaultPrevented || event.altKey || !event.shiftKey) {
       return;
@@ -90,7 +98,8 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
           <tr
             key={id}
             class={{ 'enable-hover': hover, 'row-selected': isChecked }}
-            onKeyDown={(event) => handleKeyDown(event as KeyboardEvent, rowIndex)}>
+            onKeyDown={(event) => handleKeyDown(event as KeyboardEvent, rowIndex)}
+            onClick={(event)=> handleRowClick(event as MouseEvent, rowIndex)}>
             {rowSelection && (
               <ModusTableCellCheckbox
                 multipleRowSelection={multipleRowSelection}

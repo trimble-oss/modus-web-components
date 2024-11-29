@@ -45,8 +45,7 @@ export const ModusTableCellCheckbox: FunctionalComponent<ModusTableCellCheckboxP
         ref={(el) => (checkboxInput = el)}
         checked={isChecked}
         indeterminate={multipleRowSelection && row.getIsSomeSelected()}
-        size={checkboxSize}
-        onCheckboxClick={() => row.toggleSelected()}></modus-checkbox>
+        size={checkboxSize}></modus-checkbox>
     </td>
   );
 };

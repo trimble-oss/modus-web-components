@@ -509,6 +509,7 @@ export class ModusTable {
 
   getTableContext(): TableContext {
     return {
+      anchorRowIndex: this.anchorRowIndex,
       element: this.element,
       data: this.data,
       density: this.density,
@@ -563,6 +564,7 @@ export class ModusTable {
       getRowId: this.getRowId,
       updateData: this.updateData.bind(this),
       updateSelectedRows: this.updateSelectedRows.bind(this),
+      updateClickedRows: this.updateClickedRows.bind(this),
     };
   }
 
@@ -717,11 +719,63 @@ export class ModusTable {
       }
     }
 
-    // Update the rowSelection state in TanStack Table
     this.tableCore.getTableInstance().setRowSelection(newRowSelection);
 
-    // Emit the updated selection if required
     this.emitRowSelection();
+  }
+
+  updateClickedRows(currentRowIndex: number, isShiftClick: boolean, isCtrlClick: boolean): void {
+    if (isShiftClick) {
+      if (!this.rowSelection || this.anchorRowIndex === null) {
+        this.anchorRowIndex = currentRowIndex;
+        this.updateClickedRows(currentRowIndex, false, false);
+        return;
+      }
+
+      const start = Math.min(this.anchorRowIndex, currentRowIndex);
+      const end = Math.max(this.anchorRowIndex, currentRowIndex);
+
+      const newRowSelection: Record<string, boolean> = { ...this.tableCore.getTableInstance().getState().rowSelection };
+      for (let i = start; i <= end; i++) {
+        const rowId = this.tableCore.getTableInstance().getRowModel().rows[i]?.id;
+        if (rowId !== undefined) {
+          newRowSelection[rowId] = true;
+        }
+      }
+
+      this.tableCore.getTableInstance().setRowSelection(newRowSelection);
+      this.emitRowSelection();
+    } else if (isCtrlClick) {
+      if (!this.rowSelection) {
+        return;
+      }
+
+      const rowId = this.tableCore.getTableInstance().getRowModel().rows[currentRowIndex]?.id;
+      const newRowSelection: Record<string, boolean> = { ...this.tableCore.getTableInstance().getState().rowSelection };
+
+      if (rowId !== undefined) {
+        newRowSelection[rowId] = !newRowSelection[rowId];
+      }
+
+      this.tableCore.getTableInstance().setRowSelection(newRowSelection);
+      this.emitRowSelection();
+    } else {
+      if (!this.rowSelection) {
+        return;
+      }
+
+      this.anchorRowIndex = currentRowIndex;
+
+      const rowId = this.tableCore.getTableInstance().getRowModel().rows[currentRowIndex]?.id;
+      const newRowSelection: Record<string, boolean> = {};
+
+      if (rowId !== undefined) {
+        newRowSelection[rowId] = true;
+      }
+
+      this.tableCore.getTableInstance().setRowSelection(newRowSelection);
+      this.emitRowSelection();
+    }
   }
 
   emitRowSelection(): void {
