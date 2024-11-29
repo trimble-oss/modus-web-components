@@ -4,7 +4,7 @@ import {
 } from '@stencil/core';
 import { Row } from '@tanstack/table-core';
 import NavigateTableCells from '../../../utilities/table-cell-navigation.utility';
-import { KEYBOARD_ENTER } from '../../../modus-table.constants';
+import { KEYBOARD_ENTER, KEYBOARD_SPACE } from '../../../modus-table.constants';
 
 interface ModusTableCellCheckboxProps {
   isChecked: boolean;
@@ -33,6 +33,14 @@ export const ModusTableCellCheckbox: FunctionalComponent<ModusTableCellCheckboxP
       cellElement: cellEl,
     });
   }
+
+  function handleCheckboxKeyDown(e: KeyboardEvent): void {
+    if (e.key.toLowerCase() === KEYBOARD_ENTER || e.key.toLowerCase() === KEYBOARD_SPACE) {
+      e.preventDefault();
+      row.toggleSelected();
+    }
+  }
+
   return (
     <td
       class={'row-checkbox sticky-left ' + (checkboxSize ?? '')}
@@ -45,7 +53,8 @@ export const ModusTableCellCheckbox: FunctionalComponent<ModusTableCellCheckboxP
         ref={(el) => (checkboxInput = el)}
         checked={isChecked}
         indeterminate={multipleRowSelection && row.getIsSomeSelected()}
-        size={checkboxSize}></modus-checkbox>
+        size={checkboxSize}
+        onKeyDown={(e: KeyboardEvent) => handleCheckboxKeyDown(e)}></modus-checkbox>
     </td>
   );
 };
