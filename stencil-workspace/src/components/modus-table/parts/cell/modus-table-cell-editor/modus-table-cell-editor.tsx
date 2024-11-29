@@ -195,7 +195,7 @@ export class ModusTableCellEditor {
           ref={(el) => (this.inputElement = el)}
           options={options}
           onBlur={this.handleBlur}
-          onKeyDown={() => (this.inputElement as HTMLModusAutocompleteElement).focusInput()}
+          onKeyDown={(e) => e.stopPropagation()}
           filterOptions={
             args.filterOptions
               ? (...props) => {
