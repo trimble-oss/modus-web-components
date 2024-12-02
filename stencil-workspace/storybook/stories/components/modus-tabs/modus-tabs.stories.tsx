@@ -1,9 +1,19 @@
 // @ts-ignore: JSX/MDX with Stencil
 import { html } from 'lit-html';
 import docs from './modus-tabs-storybook-docs.mdx';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 export default {
   title: 'Components/Tabs',
+  argTypes: {
+    size: {
+      name: 'size',
+      description: 'Sets the size of the tabs',
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+  },
   parameters: {
     actions: {
       handles: ['tabChange'],
@@ -16,30 +26,73 @@ export default {
       isToolshown: true,
     },
     controls: {
-      disabled: true,
+      disable: false,
     },
     viewMode: 'docs',
   },
+  decorators: [withActions],
 };
 
 const Template = ({ size }) => html`
-  <modus-tabs id="my-tabs" size=${size}></modus-tabs>
-  ${setTabs()}
+  <modus-tabs id="medium-tabs" size=${size}></modus-tabs>
+  ${setMediumTabs()}
+`;
+const SmallTemplate = ({ size }) => html`
+  <modus-tabs id="small-tabs" size=${size}></modus-tabs>
+  ${setSmallTabs()}
 `;
 export const Default = Template.bind({});
 Default.args = {
   size: 'medium',
 };
 
-export const Small = Template.bind({});
+export const Small = SmallTemplate.bind({});
 Small.args = {
   size: 'small',
 };
 
-const setTabs = () => {
+const setMediumTabs = () => {
   const tag = document.createElement('script');
   tag.innerHTML = `
-    document.querySelector('modus-tabs').tabs = [
+    document.querySelector('#medium-tabs').tabs = [
+      {
+        id: 0,
+        label: 'Tab 1'
+      },
+      {
+        active: true,
+        id: 1,
+        label: 'Tab 2'
+      },
+      {
+        id: 'tab-3',
+        label: 'Tab 3',
+        leftIcon: 'sun',
+      },
+      {
+        id: 'tab-4',
+        label: 'Tab 4',
+        rightIcon: 'moon',
+      },
+      {
+        id: 'tab-5',
+        label: 'Tab 5',
+        leftIcon: 'sun',
+        rightIcon: 'moon',
+      },
+      {
+        id: 'tab-6',
+        iconOnly: 'settings',
+      }
+    ];
+  `;
+
+  return tag;
+};
+const setSmallTabs = () => {
+  const tag = document.createElement('script');
+  tag.innerHTML = `
+    document.querySelector('#small-tabs').tabs = [
       {
         id: 0,
         label: 'Tab 1'

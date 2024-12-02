@@ -24,7 +24,7 @@ body[data-mwc-theme='dark'] {
   --theme-sbdocs-table-stripe-bg-color: #252a2e;
   --theme-sbdocs-table-border-color: #464b52;
   --theme-docblock-source-color: #f1f1f6;
-  --theme-docblock-source-bg-color: #6a6e79;
+  --theme-docblock-source-bg-color: #495057;
   --theme-sidebar-subheading-color: #495057;
   --theme-sbdocs-link-color: #217cbb;
   --theme-code-color: #f1f1f6;
@@ -32,6 +32,10 @@ body[data-mwc-theme='dark'] {
   --theme-code-border-color: #6a6e79;
   --theme-header-underline-color: rgba(255, 255, 255, 0.2);
   --icon-fill: #ffffff;
+}
+
+body {
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif !important;
 }
 
 body.sb-show-main,
@@ -77,6 +81,10 @@ hr {
   border: 1px solid var(--theme-sbdocs-table-border-color);
 }
 
+#storybook-docs tbody tr {
+  background-color: unset !important; /* Removes any inherited or set background color */
+}
+
 .sbdocs-table tbody tr td:first-of-type {
   max-width: 160px;
   width: 160px;
@@ -85,16 +93,6 @@ hr {
 .docblock-source {
   background-color: var(--theme-docblock-source-bg-color) !important;
   color: var(--theme-docblock-source-color) !important;
-}
-
-[data-mwc-theme='dark'] .docblock-source pre span,
-[data-mwc-theme='dark'] .docblock-source button {
-  color: var(--theme-docblock-source-color) !important;
-}
-
-[data-mwc-theme='dark'] .docblock-source button {
-  background-color: var(--theme-docblock-source-bg-color);
-  border-color: var(--theme-docblock-source-color);
 }
 
 .sidebar-subheading {
@@ -114,7 +112,7 @@ pre .os-padding {
   z-index: inherit !important;
 }
 
-pre .os-content {
+main [data-radix-scroll-area-viewport]:not(.css-17k9ygk [data-radix-scroll-area-viewport]) {
   max-height: 500px;
 }
 
@@ -138,10 +136,6 @@ body.dark .sidebar-header a[title='Storybook'] {
   opacity: 0;
 }
 
-html:has(body.dark) {
-  color-scheme: dark;
-}
-
 .sbdocs kbd {
   background-color: var(--theme-color) !important;
   border-radius: 4px;
@@ -149,6 +143,60 @@ html:has(body.dark) {
   opacity: 0.7;
   padding: 0 4px;
 }
+
+.css-1qezoi6 :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)) {
+  font-size: unset !important;
+  line-height: unset !important;
+  margin: unset !important;
+}
+
+.css-1qezoi6 :where(a:not(.sb-anchor, .sb-unstyled, .sb-unstyled a)) {
+  line-height: unset !important;
+  text-decoration: underline !important;
+}
+
+/* dark mode */
+
+html:has(body.dark) {
+  color-scheme: dark;
+}
+
+body.dark h1:first-of-type {
+  color: #fff;
+}
+
+body.dark .docblock-source {
+  background-color: #353a40 !important;
+}
+
+.css-1qezoi6 :where(table:not(.sb-anchor, .sb-unstyled, .sb-unstyled table)) tr th,
+.css-1qezoi6 :where(table:not(.sb-anchor, .sb-unstyled, .sb-unstyled table)) tr td,
+.css-1qezoi6 :where(li:not(.sb-anchor, .sb-unstyled, .sb-unstyled li)),
+.css-1qezoi6 :where(h4:not(.sb-anchor, .sb-unstyled, .sb-unstyled h4)),
+.css-1qezoi6 :where(h5:not(.sb-anchor, .sb-unstyled, .sb-unstyled h5)),
+.css-1qezoi6 :where(h3:not(.sb-anchor, .sb-unstyled, .sb-unstyled h3)),
+.css-1qezoi6 :where(h2:not(.sb-anchor, .sb-unstyled, .sb-unstyled h2)),
+.css-1qezoi6 :where(a:not(.sb-anchor, .sb-unstyled, .sb-unstyled a)),
+.css-1qezoi6 :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)) {
+  color: unset !important;
+}
+
+body.dark .css-1qezoi6 :where(table:not(.sb-anchor, .sb-unstyled, .sb-unstyled table)) tr td,
+body.dark .css-1qezoi6 :where(table:not(.sb-anchor, .sb-unstyled, .sb-unstyled table)) tr th {
+  border-color: #464b52 !important;
+}
+
+[data-mwc-theme='dark'] .docblock-source pre span,
+[data-mwc-theme='dark'] .docblock-source button {
+  color: var(--theme-docblock-source-color) !important;
+}
+
+[data-mwc-theme='dark'] .docblock-source button {
+  background-color: var(--theme-docblock-source-bg-color);
+  border-color: var(--theme-docblock-source-color);
+}
+
+/* Windows Forced Colors */
 
 @media (forced-colors: active) {
   #panel-tab-content input,

@@ -1,6 +1,7 @@
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-modal-storybook-docs.mdx';
 import { html } from 'lit-html';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 export default {
   title: 'Components/Modal',
@@ -104,6 +105,7 @@ export default {
     controls: { expanded: true, sort: 'requiredFirst' },
     viewMode: 'docs',
   },
+  decorators: [withActions],
 };
 
 const Template = ({
@@ -155,8 +157,9 @@ Default.args = {
 };
 
 const CustomFooterTemplate = ({ ariaLabel, headerText, zIndex, backdrop, fullscreen, showFullscreenToggle }) => html`
-  <modus-button id="btn-modal" color="primary">Open modal</modus-button>
+  <modus-button id="btn-modal-footer" color="primary">Open modal</modus-button>
   <modus-modal
+    id="modal-footer"
     aria-label=${ariaLabel}
     header-text=${headerText}
     z-index=${zIndex}
@@ -177,7 +180,7 @@ const CustomFooterTemplate = ({ ariaLabel, headerText, zIndex, backdrop, fullscr
       <modus-button color="primary">Approve</modus-button>
     </div>
   </modus-modal>
-  ${setScript()}
+  ${setFooterScript()}
 `;
 export const CustomFooter = CustomFooterTemplate.bind({});
 CustomFooter.args = {
@@ -200,6 +203,23 @@ const setScript = () => {
       // Timeout is a workaround for Stencil Web Component not capturing the state updates quick enough when another component is immediately focussed
       setTimeout(() => {
         document.querySelector('#btn-modal').focusButton();
+      }, 100);
+    });
+  `;
+
+  return tag;
+};
+const setFooterScript = () => {
+  const tag = document.createElement('script');
+  tag.innerHTML = `
+    document.querySelector('#btn-modal-footer').addEventListener('buttonClick', () => {
+      document.querySelector('#modal-footer').open();
+    });
+
+    document.querySelector('#modal-footer').addEventListener('closed', () => {
+      // Timeout is a workaround for Stencil Web Component not capturing the state updates quick enough when another component is immediately focussed
+      setTimeout(() => {
+        document.querySelector('#btn-modal-footer').focusButton();
       }, 100);
     });
   `;

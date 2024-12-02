@@ -1,4 +1,5 @@
-import { Story } from '@storybook/addon-docs';
+import { Story } from '@storybook/blocks';
+import * as Select from './modus-select.stories';
 
 # Select
 
@@ -10,7 +11,7 @@ This component is compatible with Angular reactive forms. This can be achieved t
 
 ### Default
 
-<Story id="user-inputs-select--default" height={'565px'} />
+<Story of={Select.Default} />
 
 ```html
 <!-- Without preset value -->
@@ -81,7 +82,7 @@ This component is compatible with Angular reactive forms. This can be achieved t
 ## Properties
 
 | Property             | Attribute              | Description                                          | Type        | Default         |
-| -------------------- | ---------------------- | ---------------------------------------------------- | ----------- | --------------- | ---------- |
+| -------------------- | ---------------------- | ---------------------------------------------------- | ----------- | --------------- |
 | `ariaLabel`          | `aria-label`           | (optional) The select's aria-label.                  | `string`    | `undefined`     |
 | `disabled`           | `disabled`             | (optional) Whether the input is disabled.            | `boolean`   | `undefined`     |
 | `errorText`          | `error-text`           | (optional) The input's error text.                   | `string`    | `undefined`     |
@@ -91,7 +92,7 @@ This component is compatible with Angular reactive forms. This can be achieved t
 | `optionsDisplayProp` | `options-display-prop` | The options property to render in the dropdown list. | `string`    | `undefined`     |
 | `placeholder`        | `placeholder`          | (optional) The input's placeholder.                  | `string`    | `Please Select` |
 | `required`           | `required`             | (optional) Whether the input is required.            | `boolean`   | `undefined`     |
-| `size`               | `size`                 | (optional) The input's size.                         | `"large"    | "medium"`       | `'medium'` |
+| `size`               | `size`                 | (optional) The input's size.                         | `"large"    | "medium"`       |
 | `validText`          | `valid-text`           | (optional) The input's valid text.                   | `string`    | `undefined`     |
 | `value`              | --                     | (optional) The input value.                          | `unknown`   | `undefined`     |
 

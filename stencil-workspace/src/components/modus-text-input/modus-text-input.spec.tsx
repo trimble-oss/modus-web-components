@@ -111,98 +111,169 @@ describe('modus-text-input', () => {
   });
 
   it('should set autocorrect on the input to "on" when "true" is passed in', async () => {
-    const modusTextInput = new ModusTextInput();
+    const page = await newSpecPage({
+      components: [ModusTextInput],
+      html: `<modus-text-input></modus-text-input>`,
+    });
+    const modusTextInput = page.rootInstance as ModusTextInput;
     modusTextInput.autocorrect = true;
     expect(modusTextInput.inputAutocorrect).toEqual('on');
   });
 
   it('should set autocorrect on the input to "off" when "false" is passed in', async () => {
-    const modusTextInput = new ModusTextInput();
+    const page = await newSpecPage({
+      components: [ModusTextInput],
+      html: `<modus-text-input></modus-text-input>`,
+    });
+    const modusTextInput = page.rootInstance as ModusTextInput;
     modusTextInput.autocorrect = false;
     expect(modusTextInput.inputAutocorrect).toEqual('off');
   });
 
   it('should get the correct class by size', async () => {
-    const modusTextInput = new ModusTextInput();
+    const page = await newSpecPage({
+      components: [ModusTextInput],
+      html: `<modus-text-input></modus-text-input>`,
+    });
+    const modusTextInput = page.rootInstance as ModusTextInput;
     let className = modusTextInput.classBySize.get(modusTextInput.size);
     expect(className).toEqual('medium');
 
     className = modusTextInput.classBySize.get('large');
     expect(className).toEqual('large');
   });
-
   it('should not default to clearable', async () => {
-    const modusTextInput = new ModusTextInput();
+    const page = await newSpecPage({
+      components: [ModusTextInput],
+      html: `<modus-text-input></modus-text-input>`,
+    });
+    const modusTextInput = page.rootInstance as ModusTextInput;
     expect(modusTextInput.clearable).toBeFalsy();
   });
 
   it('should default to enabled', async () => {
-    const modusTextInput = new ModusTextInput();
+    const page = await newSpecPage({
+      components: [ModusTextInput],
+      html: `<modus-text-input></modus-text-input>`,
+    });
+    const modusTextInput = page.rootInstance as ModusTextInput;
     expect(modusTextInput.disabled).toBeFalsy();
   });
 
   it('should default to no error text', async () => {
-    const modusTextInput = new ModusTextInput();
+    const page = await newSpecPage({
+      components: [ModusTextInput],
+      html: `<modus-text-input></modus-text-input>`,
+    });
+    const modusTextInput = page.rootInstance as ModusTextInput;
     expect(modusTextInput.errorText).toBeFalsy();
   });
 
   it('should default to no valid text', async () => {
-    const modusTextInput = new ModusTextInput();
+    const page = await newSpecPage({
+      components: [ModusTextInput],
+      html: `<modus-text-input></modus-text-input>`,
+    });
+    const modusTextInput = page.rootInstance as ModusTextInput;
     expect(modusTextInput.validText).toBeFalsy();
   });
 
   it('should default to no helper text', async () => {
-    const modusTextInput = new ModusTextInput();
+    const page = await newSpecPage({
+      components: [ModusTextInput],
+      html: `<modus-text-input></modus-text-input>`,
+    });
+    const modusTextInput = page.rootInstance as ModusTextInput;
     expect(modusTextInput.helperText).toBeFalsy();
   });
 
   it('should default to no inputmode', async () => {
-    const modusTextInput = new ModusTextInput();
+    const page = await newSpecPage({
+      components: [ModusTextInput],
+      html: `<modus-text-input></modus-text-input>`,
+    });
+    const modusTextInput = page.rootInstance as ModusTextInput;
     expect(modusTextInput.inputmode).toBeFalsy();
   });
 
   it('should default to size medium', async () => {
-    const modusTextInput = new ModusTextInput();
+    const page = await newSpecPage({
+      components: [ModusTextInput],
+      html: `<modus-text-input></modus-text-input>`,
+    });
+    const modusTextInput = page.rootInstance as ModusTextInput;
     expect(modusTextInput.size).toEqual('medium');
   });
 
   it('should default with no search icon', async () => {
-    const modusTextInput = new ModusTextInput();
+    const page = await newSpecPage({
+      components: [ModusTextInput],
+      html: `<modus-text-input></modus-text-input>`,
+    });
+    const modusTextInput = page.rootInstance as ModusTextInput;
     expect(modusTextInput.includeSearchIcon).toBeFalsy();
   });
 
   it('should default with no label', async () => {
-    const modusTextInput = new ModusTextInput();
+    const page = await newSpecPage({
+      components: [ModusTextInput],
+      html: `<modus-text-input></modus-text-input>`,
+    });
+    const modusTextInput = page.rootInstance as ModusTextInput;
     expect(modusTextInput.label).toBeFalsy();
   });
 
   it('should default with no pattern', async () => {
-    const modusTextInput = new ModusTextInput();
+    const page = await newSpecPage({
+      components: [ModusTextInput],
+      html: `<modus-text-input></modus-text-input>`,
+    });
+    const modusTextInput = page.rootInstance as ModusTextInput;
     expect(modusTextInput.pattern).toBeFalsy();
   });
 
   it('should default with no placeholder', async () => {
-    const modusTextInput = new ModusTextInput();
+    const page = await newSpecPage({
+      components: [ModusTextInput],
+      html: `<modus-text-input></modus-text-input>`,
+    });
+    const modusTextInput = page.rootInstance as ModusTextInput;
     expect(modusTextInput.placeholder).toBeFalsy();
   });
 
   it('should default to not required', async () => {
-    const modusTextInput = new ModusTextInput();
+    const page = await newSpecPage({
+      components: [ModusTextInput],
+      html: `<modus-text-input></modus-text-input>`,
+    });
+    const modusTextInput = page.rootInstance as ModusTextInput;
     expect(modusTextInput.required).toBeFalsy();
   });
 
   it('should default with no value', async () => {
-    const modusTextInput = new ModusTextInput();
+    const page = await newSpecPage({
+      components: [ModusTextInput],
+      html: `<modus-text-input></modus-text-input>`,
+    });
+    const modusTextInput = page.rootInstance as ModusTextInput;
     expect(modusTextInput.value).toBeFalsy();
   });
 
   it('should not default with minimum length validation', async () => {
-    const modusTextInput = new ModusTextInput();
+    const page = await newSpecPage({
+      components: [ModusTextInput],
+      html: `<modus-text-input></modus-text-input>`,
+    });
+    const modusTextInput = page.rootInstance as ModusTextInput;
     expect(modusTextInput.minLength).toBeFalsy();
   });
 
   it('should not default with maximum length validation', async () => {
-    const modusTextInput = new ModusTextInput();
+    const page = await newSpecPage({
+      components: [ModusTextInput],
+      html: `<modus-text-input></modus-text-input>`,
+    });
+    const modusTextInput = page.rootInstance as ModusTextInput;
     expect(modusTextInput.minLength).toBeFalsy();
   });
 });

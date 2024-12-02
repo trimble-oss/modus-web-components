@@ -193,4 +193,18 @@ describe('modus-checkbox', () => {
     expect(element).toBeDefined();
     expect(element).not.toHaveAttribute('aria-label');
   });
+
+  it('selects checkbox on space keydown', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-checkbox></modus-checkbox>');
+    const modusCheckbox = await page.find('modus-checkbox');
+    const input = await page.find('modus-checkbox >>> input');
+    await page.waitForChanges();
+
+    await input.press('Space');
+    await page.waitForChanges();
+
+    expect(await modusCheckbox.getProperty('checked')).toBeTruthy();
+    expect(await input.getProperty('checked')).toBeTruthy();
+  });
 });

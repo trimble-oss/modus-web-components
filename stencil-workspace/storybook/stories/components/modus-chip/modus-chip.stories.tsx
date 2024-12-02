@@ -1,6 +1,7 @@
 import { html } from 'lit-html';
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-chip-storybook-docs.mdx';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 export default {
   title: 'Components/Chip',
@@ -22,10 +23,8 @@ export default {
     },
     chipStyle: {
       name: 'chip-style',
-      control: {
-        options: ['solid', 'outline'],
-        type: 'select',
-      },
+      options: ['solid', 'outline'],
+      type: 'select',
       description: 'The style of the chip',
       table: {
         defaultValue: { summary: `'solid'` },
@@ -71,10 +70,8 @@ export default {
       },
     },
     size: {
-      control: {
-        options: ['medium', 'small'],
-        type: 'select',
-      },
+      options: ['medium', 'small'],
+      type: 'select',
       description: 'The size of the chip',
       table: {
         defaultValue: { summary: `'medium'` },
@@ -113,6 +110,7 @@ export default {
       isToolshown: true,
     },
   },
+  decorators: [withActions],
 };
 
 export const Default = ({
