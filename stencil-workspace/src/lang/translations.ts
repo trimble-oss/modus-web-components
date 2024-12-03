@@ -66,7 +66,7 @@ const translations: Record<string, Translation> = {
 };
 
 function getTranslations(): Translation {
-  let lang = document.documentElement.lang || navigator?.language?.slice(0, 2);
+  let lang = document.documentElement.lang || navigator?.language;
 
   if (!lang || lang.trim() === '') {
     return translations['en'];
