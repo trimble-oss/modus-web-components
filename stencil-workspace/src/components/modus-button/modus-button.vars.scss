@@ -21,6 +21,13 @@ $btn-active-colors: (
   'special': #e49325,
 );
 
+$btn-focus-shadow-rgb: (
+  'primary': rgba(38,122,177,.5),
+  'secondary': rgba(98,102,108,.5),
+  'tertiary': rgba(156,157,166, .5),
+  'danger': rgba(224,66,76,.5),
+  'special': rgba(194,125,31,.5)
+);
 // Default Outline
 $btn-outline-theme-colors: (
   'primary': #0063a3,
@@ -125,3 +132,4 @@ $btn-icon-only-active: (
 );
 $btn-progress-bg: #e44a53;
 $btn-progress-reset: #da212c;
+

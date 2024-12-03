@@ -347,6 +347,12 @@ button {
           color: var(--modus-btn-#{$color}-color, $default-text-color);
         }
       }
+      // focus-visable state
+      &.color-#{$color}:focus-visible {
+        box-shadow: 0 0 0 0.25rem map-get($btn-focus-shadow-rgb, $color);
+        outline: 0;
+        color: $color;
+      }
 
       // Active state
       &.color-#{$color}:active:not([disabled]) {
