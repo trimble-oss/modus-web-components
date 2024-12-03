@@ -348,7 +348,7 @@ button {
         }
       }
 
-      // focus-visable state
+      // focus state
       &.color-#{$color}:focus-visible {
         box-shadow: 0 0 0 0.25rem map-get($btn-focus-shadow-rgb, $color);
         outline: 0;
