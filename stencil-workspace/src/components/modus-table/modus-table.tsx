@@ -713,69 +713,61 @@ export class ModusTable {
     const start = Math.min(this.anchorRowIndex, nextRowIndex);
     const end = Math.max(this.anchorRowIndex, nextRowIndex);
 
-    const newRowSelection: Record<string, boolean> = {};
+    const rows = this.tableCore.getTableInstance().getRowModel().rows;
+
+    this.tableCore.getTableInstance().resetRowSelection();
     for (let i = start; i <= end; i++) {
-      const rowId = this.tableCore.getTableInstance().getRowModel().rows[i]?.id;
-      if (rowId !== undefined) {
-        newRowSelection[rowId] = true;
+      const row = rows[i];
+      if (row) {
+        row.toggleSelected(true, { selectChildren: true });
       }
     }
-
-    this.tableCore.getTableInstance().setRowSelection(newRowSelection);
-
     this.emitRowSelection();
   }
 
   updateClickedRows(currentRowIndex: number, isShiftClick: boolean, isCtrlClick: boolean): void {
-    if (isShiftClick) {
-      if (!this.rowSelection || this.anchorRowIndex === null) {
-        this.anchorRowIndex = currentRowIndex;
-        this.updateClickedRows(currentRowIndex, false, false);
-        return;
-      }
+    const rows = this.tableCore.getTableInstance().getExpandedRowModel().rows;
 
-      const start = Math.min(this.anchorRowIndex, currentRowIndex);
-      const end = Math.max(this.anchorRowIndex, currentRowIndex);
-
-      const newRowSelection: Record<string, boolean> = { ...this.tableCore.getTableInstance().getState().rowSelection };
-      for (let i = start; i <= end; i++) {
-        const rowId = this.tableCore.getTableInstance().getRowModel().rows[i]?.id;
-        if (rowId !== undefined) {
-          newRowSelection[rowId] = true;
+    if (this.rowSelectionOptions.multiple) {
+      if (isShiftClick) {
+        if (this.anchorRowIndex === null) {
+          this.anchorRowIndex = currentRowIndex;
         }
-      }
 
-      this.tableCore.getTableInstance().setRowSelection(newRowSelection);
-      this.emitRowSelection();
-    } else if (isCtrlClick) {
-      if (!this.rowSelection) {
+        const start = Math.min(this.anchorRowIndex, currentRowIndex);
+        const end = Math.max(this.anchorRowIndex, currentRowIndex);
+
+        for (let i = start; i <= end; i++) {
+          const row = rows[i];
+          if (row) {
+            row.toggleSelected(true, { selectChildren: true });
+          }
+        }
+
+        this.emitRowSelection();
+        return;
+      } else if (isCtrlClick) {
+        const row = rows[currentRowIndex];
+        if (row) {
+          row.toggleSelected(undefined, { selectChildren: true });
+          this.emitRowSelection();
+        }
         return;
       }
+    }
 
-      const rowId = this.tableCore.getTableInstance().getRowModel().rows[currentRowIndex]?.id;
-      const newRowSelection: Record<string, boolean> = { ...this.tableCore.getTableInstance().getState().rowSelection };
+    this.anchorRowIndex = currentRowIndex;
 
-      if (rowId !== undefined) {
-        newRowSelection[rowId] = !newRowSelection[rowId];
+    const row = rows[currentRowIndex];
+
+    if (row) {
+      if (row.getIsSelected()) {
+        row.toggleSelected(false, { selectChildren: false });
+        this.tableCore.getTableInstance().resetRowSelection();
+      } else {
+        this.tableCore.getTableInstance().resetRowSelection();
+        row.toggleSelected(true, { selectChildren: true });
       }
-
-      this.tableCore.getTableInstance().setRowSelection(newRowSelection);
-      this.emitRowSelection();
-    } else {
-      if (!this.rowSelection) {
-        return;
-      }
-
-      this.anchorRowIndex = currentRowIndex;
-
-      const rowId = this.tableCore.getTableInstance().getRowModel().rows[currentRowIndex]?.id;
-      const newRowSelection: Record<string, boolean> = {};
-
-      if (rowId !== undefined) {
-        newRowSelection[rowId] = true;
-      }
-
-      this.tableCore.getTableInstance().setRowSelection(newRowSelection);
       this.emitRowSelection();
     }
   }
