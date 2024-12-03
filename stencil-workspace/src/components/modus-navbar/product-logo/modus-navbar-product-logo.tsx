@@ -6,7 +6,7 @@ export const ModusNavbarProductLogo: FunctionalComponent<{
   logos: ModusNavbarLogoOptions;
   onClick?: (event) => void;
 }> = ({ logos, onClick }) => {
-  const { primary, secondary, isHoverable } = logos || {};
+  const { primary, secondary, clickable } = logos || {};
 
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key !== 'Enter' && event.key !== ' ') {
@@ -17,8 +17,8 @@ export const ModusNavbarProductLogo: FunctionalComponent<{
     }
   };
 
-  const primaryLogoClasses = `product-logo-primary ${isHoverable ? 'logo-is-hoverable' : ''} ${secondary !== undefined ? 'secondary-logo-exists' : ''}`;
-  const secondaryLogoClasses = `product-logo-secondary ${isHoverable ? 'logo-is-hoverable' : ''} ${primary !== undefined ? 'primary-logo-exists' : ''}`;
+  const primaryLogoClasses = `product-logo-primary ${clickable ? 'logo-is-hoverable' : ''} ${secondary !== undefined ? 'secondary-logo-exists' : ''}`;
+  const secondaryLogoClasses = `product-logo-secondary ${clickable ? 'logo-is-hoverable' : ''} ${primary !== undefined ? 'primary-logo-exists' : ''}`;
 
   return (
     <div aria-label="Logo" onClick={onClick} onKeyDown={handleKeyDown} tabindex="0" role="button" class="product-logo">
