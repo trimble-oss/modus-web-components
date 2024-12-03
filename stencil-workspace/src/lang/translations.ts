@@ -66,11 +66,16 @@ const translations: Record<string, Translation> = {
 };
 
 function getTranslations(): Translation {
-  let lang = navigator?.language?.slice(0, 2);
-  if (!lang) {
-    lang = document.documentElement.lang?.slice(0, 2);
+  let lang = document.documentElement.lang || navigator?.language?.slice(0, 2);
+
+  if (!lang || lang.trim() === '') {
+    return translations['en'];
   }
-  return translations[lang] || translations['en'];
+
+  lang = lang?.toLowerCase();
+  const primaryLang = lang.split('-')[0];
+
+  return translations[lang] || translations[primaryLang] || translations['en'];
 }
 
 export { translations, getTranslations };
