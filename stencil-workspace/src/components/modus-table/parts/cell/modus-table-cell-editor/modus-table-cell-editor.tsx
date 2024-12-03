@@ -186,6 +186,13 @@ export class ModusTableCellEditor {
       selectedOption = this.editedValue as string;
     }
 
+    function handleArrowKeys(e: KeyboardEvent, callback: (e: KeyboardEvent) => void) {
+      const code = e.key.toLowerCase();
+      if (code === KEYBOARD_UP || code === KEYBOARD_DOWN) {
+        e.stopPropagation();
+      } else callback(e);
+    }
+
     return (
       <div class="autocomplete-container">
         <modus-autocomplete
@@ -195,7 +202,7 @@ export class ModusTableCellEditor {
           ref={(el) => (this.inputElement = el)}
           options={options}
           onBlur={this.handleBlur}
-          onKeyDown={(e) => e.stopPropagation()}
+          onKeyDown={(e) => handleArrowKeys(e, this.handleKeyDown)}
           filterOptions={
             args.filterOptions
               ? (...props) => {
