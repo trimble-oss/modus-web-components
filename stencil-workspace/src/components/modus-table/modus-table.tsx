@@ -746,20 +746,18 @@ export class ModusTable {
       return;
     }
 
-    this.anchorRowIndex = currentRowIndex;
-
     const row = rows[currentRowIndex];
-
     if (row) {
-      if (row.getIsSelected()) {
-        row.toggleSelected(undefined, { selectChildren: true });
-        this.emitRowSelection();
-      } else {
-        this.tableCore.getTableInstance().resetRowSelection();
-        row.toggleSelected(true, { selectChildren: true });
+
+      const isSelected = row.getIsSelected();
+      if (!isSelected) {
+        this.anchorRowIndex = currentRowIndex;
       }
+
+      row.toggleSelected();
       this.emitRowSelection();
     }
+
   }
 
   emitRowSelection(): void {
