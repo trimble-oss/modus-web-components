@@ -723,35 +723,27 @@ export class ModusTable {
     this.emitRowSelection();
   }
 
-  updateClickedRows(currentRowIndex: number, isShiftClick: boolean, isCtrlClick: boolean): void {
+  updateClickedRows(currentRowIndex: number, isShiftClick: boolean): void {
     const rows = this.tableCore.getTableInstance().getExpandedRowModel().rows;
 
-    if (this.rowSelectionOptions.multiple) {
-      if (isShiftClick) {
-        if (this.anchorRowIndex === null) {
-          this.anchorRowIndex = currentRowIndex;
-        }
-
-        const start = Math.min(this.anchorRowIndex, currentRowIndex);
-        const end = Math.max(this.anchorRowIndex, currentRowIndex);
-
-        for (let i = start; i <= end; i++) {
-          const row = rows[i];
-          if (row) {
-            row.toggleSelected(true, { selectChildren: true });
-          }
-        }
-
-        this.emitRowSelection();
-        return;
-      } else if (isCtrlClick) {
-        const row = rows[currentRowIndex];
-        if (row) {
-          row.toggleSelected(undefined, { selectChildren: true });
-          this.emitRowSelection();
-        }
-        return;
+    if (this.rowSelectionOptions.multiple && isShiftClick) {
+      if (this.anchorRowIndex === null) {
+        this.anchorRowIndex = currentRowIndex;
       }
+
+      const start = Math.min(this.anchorRowIndex, currentRowIndex);
+      const end = Math.max(this.anchorRowIndex, currentRowIndex);
+
+      this.tableCore.getTableInstance().resetRowSelection();
+      for (let i = start; i <= end; i++) {
+        const row = rows[i];
+        if (row) {
+          row.toggleSelected(true, { selectChildren: true });
+        }
+      }
+
+      this.emitRowSelection();
+      return;
     }
 
     this.anchorRowIndex = currentRowIndex;
@@ -760,8 +752,8 @@ export class ModusTable {
 
     if (row) {
       if (row.getIsSelected()) {
-        row.toggleSelected(false, { selectChildren: false });
-        this.tableCore.getTableInstance().resetRowSelection();
+        row.toggleSelected(undefined, { selectChildren: true });
+        this.emitRowSelection();
       } else {
         this.tableCore.getTableInstance().resetRowSelection();
         row.toggleSelected(true, { selectChildren: true });
