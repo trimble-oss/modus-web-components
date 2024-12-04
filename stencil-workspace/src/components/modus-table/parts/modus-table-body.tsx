@@ -64,9 +64,8 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
 
   function handleRowClick(event: MouseEvent, currentRowIndex: number): void {
     const isShiftClick = event.shiftKey;
-    const isCtrlClick = event.ctrlKey || event.metaKey;
 
-    updateClickedRows(currentRowIndex, isShiftClick, isCtrlClick);
+    updateClickedRows(currentRowIndex, isShiftClick);
   }
 
   function handleKeyDown(event: KeyboardEvent, currentRowIndex: number): void {
