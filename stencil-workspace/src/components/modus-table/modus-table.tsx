@@ -756,7 +756,7 @@ export class ModusTable {
         this.anchorRowIndex = currentRowIndex;
       }
 
-      row.toggleSelected();
+      row.toggleSelected(undefined, { selectChildren: true });
       this.emitRowSelection();
     }
 
