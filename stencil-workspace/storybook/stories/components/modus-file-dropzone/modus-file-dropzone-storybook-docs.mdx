@@ -15,6 +15,9 @@ They are referenced using the `<modus-file-dropzone>` tag.
   - If the error value returned is `null`, there is not an error. The possible error values are: `'maxFileCount'`, `'maxFileNameLength'`, and `'maxTotalFileSize'`.
 - When error state is triggered reset button will be displayed to clear the error state.
   - The reset button will clear the error state and remove all files from the dropzone.
+- The `accept-file-types` property allows you to define the file types that are allowed to be uploaded in the dropzone.
+  - You can specify file types using common MIME types (e.g., `image/*` for any image). You can also specify multiple types by separating them with commas.
+  - For detailed information on valid file type specifiers, see the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept#unique_file_type_specifiers).
 
 <Anchor storyId="components-file-dropzone--default" />
 
@@ -75,12 +78,12 @@ They are referenced using the `<modus-file-dropzone>` tag.
 
 ## Methods
 
-| Method name  | Description                     | Parameter          | Return            |
-| ------------ | ------------------------------- | ------------------ | ----------------- | ----- |
-| `addFile`    | Add a file to the dropzone      | `file: File`       | `Promise<void>`   |
-| `getError`   | Get the dropzone's error        |                    | Promise<string    | null> |
-| `getFiles`   | Get the dropzone's files        |                    | `Promise<File[]>` |
-| `removeFile` | Remove a file from the dropzone | `fileName: string` | `Promise<void>`   |
+| Method name  | Description                     | Parameter          | Return                  |
+| ------------ | ------------------------------- | ------------------ | ----------------------- |
+| `addFile`    | Add a file to the dropzone      | `file: File`       | `Promise<void>`         |
+| `getError`   | Get the dropzone's error        |                    | `Promise<string\|null>` |
+| `getFiles`   | Get the dropzone's files        |                    | `Promise<File[]>`       |
+| `removeFile` | Remove a file from the dropzone | `fileName: string` | `Promise<void>`         |
 
 ### Accessibility
 

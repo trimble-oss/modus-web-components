@@ -5,13 +5,8 @@ import {
 } from '@stencil/core';
 import { Column, RowData, SortDirection } from '@tanstack/table-core';
 import { ModusIconMap } from '../../../../icons/ModusIconMap';
-import {
-  KEYBOARD_ENTER,
-  SORT_ASCENDING,
-  SORT_DESCENDING,
-  SORTED_ASCENDING,
-  SORTED_DESCENDING,
-} from '../../modus-table.constants';
+import { KEYBOARD_ENTER } from '../../modus-table.constants';
+import { getTranslations } from '../../../../lang/translations';
 
 interface ModusTableColumnHeaderLabelProps {
   column: Column<RowData, unknown>;
@@ -68,12 +63,12 @@ function getSortingStatus(column: Column<unknown, unknown>, isColumnResizing: bo
   return isColumnResizing
     ? '' // When column resize is enabled, we don't show the tooltip.
     : column.getIsSorted() === 'asc'
-      ? SORTED_ASCENDING
+      ? getTranslations().sortedAscending
       : column.getIsSorted() === 'desc'
-        ? SORTED_DESCENDING
+        ? getTranslations().sortedDescending
         : column.getNextSortingOrder() === 'asc'
-          ? SORT_ASCENDING
-          : SORT_DESCENDING;
+          ? getTranslations().sortAscending
+          : getTranslations().sortDescending;
 }
 
 /**

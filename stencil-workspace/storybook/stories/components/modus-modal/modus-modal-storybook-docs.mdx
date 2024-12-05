@@ -1,4 +1,5 @@
-import { Story } from '@storybook/addon-docs';
+import { Story } from '@storybook/blocks';
+import * as Modal from './modus-modal.stories';
 
 # Modal
 
@@ -12,7 +13,7 @@ When designing a custom footer, it is highly recommended to use button progressi
 
 ### Default
 
-<Story id="components-modal--default" height={'400px'} />
+<Story of={Modal.Default} />
 
 ```html
 <modus-button id="btn-modal" color="primary">Open modal</modus-button>
@@ -41,7 +42,7 @@ When designing a custom footer, it is highly recommended to use button progressi
 
 ### Custom footer
 
-<Story id="components-modal--custom-footer" height={'400px'} />
+<Story of={Modal.CustomFooter} />
 
 ```html
 <modus-button id="btn-modal" color="primary">Open modal</modus-button>

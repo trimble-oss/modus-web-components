@@ -1,10 +1,11 @@
-import { Story } from '@storybook/addon-docs';
+import { Story } from '@storybook/blocks';
+import * as Navbar from './modus-navbar.stories.tsx';
 
 # Navbar
 
 ---
 
-[Modus Navbar](https://modus.trimble.com/components/navbar/) web components are the header of all Trimble applications. They are referenced using the `<modus-navbar>` custom HTML element.
+[Modus Navbar](https://modus.trimble.com/components/web/navbars/) web components are the header of all Trimble applications. They are referenced using the `<modus-navbar>` custom HTML element.
 
 This component utilizes the slot element, allowing you to render your own HTML in the help and notification menus.
 
@@ -21,7 +22,7 @@ This component utilizes the slot element, allowing you to render your own HTML i
 
 ### Default
 
-<Story id="components-navbar--default" />
+<Story of={Navbar.Default} />
 
 ```html
 <modus-navbar id="working" show-apps-menu show-help show-main-menu>
@@ -81,7 +82,7 @@ This component utilizes the slot element, allowing you to render your own HTML i
 
 ### Failed Avatar (Initials Fallback)
 
-<Story id="components-navbar--failed-avatar" />
+<Story of={Navbar.FailedAvatar} />
 
 ```html
 <modus-navbar id="broken" show-apps-menu show-help show-main-menu show-notifications>
@@ -120,7 +121,7 @@ This component utilizes the slot element, allowing you to render your own HTML i
 
 Add optional features to the navbar.
 
-<Story id="components-navbar--with-optional-features" />
+<Story of={Navbar.WithOptionalFeatures} />
 
 ```html
 <modus-navbar id="with-optional-features" show-apps-menu show-help show-main-menu show-notifications>
@@ -171,7 +172,7 @@ Add optional features to the navbar.
 
 Use the `variant` prop to choose a blue background navbar.
 
-<Story id="components-navbar--blue-navbar" />
+<Story of={Navbar.BlueNavbar} />
 
 ```html
 <modus-navbar id="blue-theme" show-apps-menu show-help show-main-menu show-notifications variant="blue">

@@ -2,19 +2,19 @@
 import docs from './modus-icons-storybook-docs.mdx';
 import { html } from 'lit-html';
 import { MODUS_ICON_NAMES } from '../../../../src/icons/ModusIconUtilities';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 export default {
   title: 'Components/Icons',
   argTypes: {
     name: {
-      control: {
-        options: MODUS_ICON_NAMES,
-        type: 'select',
-      },
+      name: 'name',
+      type: 'select',
       table: {
         type: { summary: `${MODUS_ICON_NAMES.map((name) => `"${name}"`).join('|')}` },
       },
       description: 'The name of the icon',
+      options: MODUS_ICON_NAMES,
     },
     size: {
       description: 'The size of the icon',
@@ -43,6 +43,7 @@ export default {
       isToolshown: true,
     },
   },
+  decorators: [withActions],
 };
 
 const StyledIcon = `

@@ -1,6 +1,7 @@
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-sentiment-scale-storybook-docs.mdx';
 import { html } from 'lit-html';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 //changed
 export default {
@@ -15,10 +16,8 @@ export default {
     },
     iconsType: {
       name: 'type',
-      control: {
-        options: ['smileys', 'thumbs'],
-        type: 'select',
-      },
+      options: ['smileys', 'thumbs'],
+      type: 'select',
     },
     disabled: {
       description: 'Whether the sentiment-scale is disabled',
@@ -42,6 +41,7 @@ export default {
       isToolshown: true,
     },
   },
+  decorators: [withActions],
 };
 
 const Template = ({ ariaLabel, iconsType, disabled }) => html`

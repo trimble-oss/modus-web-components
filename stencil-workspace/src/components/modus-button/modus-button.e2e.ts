@@ -175,7 +175,7 @@ describe('modus-button', () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-button aria-label="test label"></modus-button>');
-    let element = await page.find('modus-button >>> button');
+    const element = await page.find('modus-button >>> button');
     expect(element).toBeDefined();
     expect(element).toHaveAttribute('aria-label');
     expect(element.getAttribute('aria-label')).toEqual('test label');
@@ -185,7 +185,7 @@ describe('modus-button', () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-button></modus-button>');
-    let element = await page.find('modus-button >>> button');
+    const element = await page.find('modus-button >>> button');
     expect(element).toBeDefined();
     expect(element).not.toHaveAttribute('aria-label');
   });
@@ -194,8 +194,34 @@ describe('modus-button', () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-button aria-label=""></modus-button>');
-    let element = await page.find('modus-button >>> button');
+    const element = await page.find('modus-button >>> button');
     expect(element).toBeDefined();
     expect(element).not.toHaveAttribute('aria-label');
+  });
+
+  it('renders progress animation when progress is set', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-button></modus-button>');
+    await page.waitForChanges();
+
+    const component = await page.find('modus-button');
+    const element = await page.find('modus-button >>> button');
+    expect(element).toHaveClass('color-primary');
+
+    component.setProperty('color', 'danger');
+    await page.waitForChanges();
+
+    component.setProperty('criticalAction', true);
+    await page.waitForChanges();
+
+    await element.click({ clickCount: 1, delay: 3000 });
+    await page.waitForChanges();
+
+    const progressWidth = await page.evaluate(() => {
+      const button = document.querySelector('modus-button').shadowRoot.querySelector('button');
+      return getComputedStyle(button).getPropertyValue('--progress-width');
+    });
+
+    expect(progressWidth.trim()).toBe('100%');
   });
 });

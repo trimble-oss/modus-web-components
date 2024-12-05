@@ -1,6 +1,8 @@
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-checkbox-storybook-docs.mdx';
 import { html } from 'lit-html';
+import { withActions } from '@storybook/addon-actions/decorator';
+
 
 export default {
   title: 'User Inputs/Checkbox',
@@ -47,10 +49,8 @@ export default {
       },
     },
     size: {
-      control: {
-        options: ['small', 'medium'],
-        type: 'select',
-      },
+      options: ['small', 'medium'],
+      type: 'select',
     },
   },
   parameters: {
@@ -65,16 +65,19 @@ export default {
       isToolshown: true,
     },
   },
+  decorators: [withActions],
 };
 
 const Template = ({ ariaLabel, checked, disabled, indeterminate, label, size }) => html`
-  <modus-checkbox
-    aria-label=${ariaLabel}
-    checked=${checked}
-    ?disabled=${disabled}
-    indeterminate=${indeterminate}
-    label=${label}
-    size=${size}></modus-checkbox>
+  <div style="width: fit-content">
+    <modus-checkbox
+      aria-label=${ariaLabel}
+      checked=${checked}
+      ?disabled=${disabled}
+      indeterminate=${indeterminate}
+      label=${label}
+      size=${size}></modus-checkbox>
+  </div>
 `;
 
 export const Medium = Template.bind({});

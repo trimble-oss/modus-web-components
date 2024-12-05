@@ -3,6 +3,7 @@
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-number-input-storybook-docs.mdx';
 import { html } from 'lit-html';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 export default {
   title: 'User Inputs/Number Input',
@@ -94,10 +95,8 @@ export default {
       },
     },
     size: {
-      control: {
-        options: ['medium', 'large'],
-        type: 'select',
-      },
+      options: ['medium', 'large'],
+      type: 'select',
       description: 'The size of the number input',
       table: {
         defaultValue: { summary: `'medium'` },
@@ -112,10 +111,8 @@ export default {
     },
     textAlign: {
       name: 'text-align',
-      control: {
-        options: ['left', 'right'],
-        type: 'select',
-      },
+      options: ['left', 'right'],
+      type: 'select',
       description: 'text alignment for the number input.',
       table: {
         defaultValue: { summary: "'left'" },
@@ -150,6 +147,7 @@ export default {
       isToolshown: true,
     },
   },
+  decorators: [withActions],
 };
 
 const Template = ({

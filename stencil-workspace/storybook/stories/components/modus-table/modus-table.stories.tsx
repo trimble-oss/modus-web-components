@@ -1,6 +1,7 @@
 import { html } from 'lit-html';
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-table-storybook-docs.mdx';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 // Helpers
 // for the data generator makeData function
@@ -59,6 +60,7 @@ function initializeTable(props) {
     displayOptions,
     rowSelectionOptions,
     rowActions,
+    rowActionsConfig,
     manualPaginationOptions,
     manualSortingOptions,
     defaultSort,
@@ -77,6 +79,7 @@ function initializeTable(props) {
   modusTable.displayOptions = ${JSON.stringify(displayOptions)};
   modusTable.rowSelectionOptions = ${JSON.stringify(rowSelectionOptions)};
   modusTable.rowActions = ${JSON.stringify(rowActions)};
+  modusTable.rowActionsConfig= ${JSON.stringify(rowActionsConfig)};
   modusTable.manualPaginationOptions = ${JSON.stringify(manualPaginationOptions)};
   modusTable.manualSortingOptions = ${JSON.stringify(manualSortingOptions)};
   modusTable.defaultSort = ${JSON.stringify(defaultSort)};
@@ -329,6 +332,7 @@ const DefaultArgs = {
   maxHeight: '',
   maxWidth: '',
   rowActions: [],
+  rowActionsConfig: {},
   rowSelection: false,
   rowSelectionOptions: {},
   wrapText: false,
@@ -377,15 +381,12 @@ export default {
     sortIconStyle: {
       name: 'sortIconStyle',
       description: 'Display alphabetical or directional arrow icons when sort is enabled',
-      control: {
-        options: ['alphabetical', 'directional'],
-        type: 'select',
-      },
+      options: ['alphabetical', 'directional'],
+      type: 'select',
       table: {
         defaultValue: { summary: `'alphabetical'` },
         type: { summary: `'alphabetical', 'directional'` },
       },
-      type: { required: false },
     },
     showSortIconOnHover: {
       name: 'showSortIconOnHover',
@@ -440,15 +441,12 @@ export default {
     density: {
       name: 'density',
       description: 'Manage table density.',
-      control: {
-        options: ['relaxed', 'comfortable', 'compact'],
-        type: 'select',
-      },
+      options: ['relaxed', 'comfortable', 'compact'],
+      type: 'select',
       table: {
         defaultValue: { summary: `'relaxed'` },
         type: { summary: `'relaxed', 'comfortable', 'compact'` },
       },
-      type: { required: false },
     },
     fullWidth: {
       name: 'fullWidth',
@@ -503,6 +501,14 @@ export default {
       description: 'Control row actions.',
       table: {
         type: { summary: 'ModusTableRowAction[]' },
+      },
+      type: { required: false },
+    },
+    rowActionsConfig: {
+      name: 'rowActionsConfig',
+      description: "The configuration for the row action's column ",
+      table: {
+        type: { summary: 'ModusTableRowActionConfig' },
       },
       type: { required: false },
     },
@@ -621,6 +627,7 @@ export default {
       enableShortcuts: false,
     },
   },
+  decorators: [withActions],
 };
 
 const Template = ({
@@ -644,6 +651,7 @@ const Template = ({
   maxHeight,
   maxWidth,
   rowActions,
+  rowActionsConfig,
   rowSelection,
   rowSelectionOptions,
   manualPaginationOptions,
@@ -681,6 +689,7 @@ const Template = ({
     displayOptions,
     rowSelectionOptions,
     rowActions,
+    rowActionsConfig,
     manualPaginationOptions,
     manualSortingOptions,
     defaultSort,
@@ -982,6 +991,10 @@ LargeDataset.args = {
 export const RowActions = Template.bind({});
 RowActions.args = {
   ...DefaultArgs,
+  rowActionsConfig: {
+    header: 'Row Actions Column',
+    width: 160,
+  },
   rowActions: [
     {
       id: '1',

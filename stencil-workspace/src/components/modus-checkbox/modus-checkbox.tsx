@@ -50,6 +50,7 @@ export class ModusCheckbox {
         this.handleCheckboxClick(event);
         break;
       case 'Space':
+        event.preventDefault();
         this.handleCheckboxClick(event);
         break;
     }

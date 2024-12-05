@@ -1,6 +1,7 @@
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-navbar-storybook-docs.mdx';
 import { html } from 'lit-html';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 export default {
   title: 'Components/Navbar',
@@ -94,6 +95,7 @@ export default {
     },
     viewMode: 'docs',
   },
+  decorators: [withActions],
 };
 
 const workingAvatarUrl =
