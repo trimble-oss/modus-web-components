@@ -17,8 +17,8 @@ export const ModusNavbarProductLogo: FunctionalComponent<{
     }
   };
 
-  const primaryLogoClasses = `product-logo-primary ${clickable ? 'logo-is-hoverable' : ''} ${secondary !== undefined ? 'secondary-logo-exists' : ''}`;
-  const secondaryLogoClasses = `product-logo-secondary ${clickable ? 'logo-is-hoverable' : ''} ${primary !== undefined ? 'primary-logo-exists' : ''}`;
+  const primaryLogoClasses = `product-logo-primary ${clickable ? 'logo-clickable' : ''} ${secondary !== undefined ? 'secondary-logo-exists' : ''}`;
+  const secondaryLogoClasses = `product-logo-secondary ${clickable ? 'logo-clickable' : ''} ${primary !== undefined ? 'primary-logo-exists' : ''}`;
 
   return (
     <div aria-label="Logo" onClick={onClick} onKeyDown={handleKeyDown} tabindex="0" role="button" class="product-logo">

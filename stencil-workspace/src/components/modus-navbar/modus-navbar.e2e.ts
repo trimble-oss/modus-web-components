@@ -523,7 +523,7 @@ describe('modus-navbar', () => {
     expect(await secondaryLogo).toBeFalsy();
   });
 
-  it('should apply logo-is-hoverable class to primary logo when logoOptions.isHoverable is true', async () => {
+  it('should apply logo-clickable class to primary logo when logoOptions.clickable is true', async () => {
     const page = await newE2EPage();
     await page.setContent('<modus-navbar></modus-navbar>');
 
@@ -535,19 +535,19 @@ describe('modus-navbar', () => {
         url: 'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
         height: 24,
       },
-      isHoverable: true,
+      clickable: true,
     });
 
     await page.waitForChanges();
 
     const primaryLogo = await page.find('modus-navbar >>> [data-test-id="primary-logo"]');
 
-    const containsClass = primaryLogo.classList.contains('logo-is-hoverable');
+    const containsClass = primaryLogo.classList.contains('logo-clickable');
 
     expect(containsClass).toBeTruthy();
   });
 
-  it('should apply logo-is-hoverable class to secondary logo when logoOptions.isHoverable is true', async () => {
+  it('should apply logo-clickable class to secondary logo when logoOptions.clickable is true', async () => {
     const page = await newE2EPage();
     await page.setContent('<modus-navbar></modus-navbar>');
 
@@ -559,19 +559,19 @@ describe('modus-navbar', () => {
         url: 'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
         height: 24,
       },
-      isHoverable: true,
+      clickable: true,
     });
 
     await page.waitForChanges();
 
     const secondaryLogo = await page.find('modus-navbar >>> [data-test-id="secondary-logo"]');
 
-    const containsClass = secondaryLogo.classList.contains('logo-is-hoverable');
+    const containsClass = secondaryLogo.classList.contains('logo-clickable');
 
     expect(containsClass).toBeTruthy();
   });
 
-  it('should not apply logo-is-hoverable class to primary logo when logoOptions.isHoverable is false', async () => {
+  it('should not apply logo-clickable class to primary logo when logoOptions.clickable is false', async () => {
     const page = await newE2EPage();
     await page.setContent('<modus-navbar></modus-navbar>');
 
@@ -583,19 +583,19 @@ describe('modus-navbar', () => {
         url: 'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
         height: 24,
       },
-      isHoverable: false,
+      clickable: false,
     });
 
     await page.waitForChanges();
 
     const primaryLogo = await page.find('modus-navbar >>> [data-test-id="primary-logo"]');
 
-    const containsClass = primaryLogo.classList.contains('logo-is-hoverable');
+    const containsClass = primaryLogo.classList.contains('logo-clickable');
 
     expect(containsClass).toBeFalsy();
   });
 
-  it('should not apply logo-is-hoverable class to secondary logo when logoOptions.isHoverable is false', async () => {
+  it('should not apply logo-clickable class to secondary logo when logoOptions.clickable is false', async () => {
     const page = await newE2EPage();
     await page.setContent('<modus-navbar></modus-navbar>');
 
@@ -607,14 +607,14 @@ describe('modus-navbar', () => {
         url: 'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
         height: 24,
       },
-      isHoverable: false,
+      clickable: false,
     });
 
     await page.waitForChanges();
 
     const secondaryLogo = await page.find('modus-navbar >>> [data-test-id="secondary-logo"]');
 
-    const containsClass = secondaryLogo.classList.contains('logo-is-hoverable');
+    const containsClass = secondaryLogo.classList.contains('logo-clickable');
 
     expect(containsClass).toBeFalsy();
   });
