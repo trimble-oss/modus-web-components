@@ -559,7 +559,7 @@ export class ModusAutocomplete {
                     role="option"
                     onClick={() => this.handleOptionClick(option)}
                     onKeyDown={(e) => this.handleOptionKeyDown(e, option)}>
-                    {option.value}
+                    <span class="text-content">{option.value}</span>
                     {isSelected && <IconCheck size="16" />}
                   </li>
                 );
