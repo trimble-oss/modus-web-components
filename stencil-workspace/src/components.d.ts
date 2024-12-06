@@ -1520,6 +1520,10 @@ export namespace Components {
          */
         "minLength": number;
         /**
+          * (optional) The input's name.
+         */
+        "name": string;
+        /**
           * (optional) The input's pattern HTML attribute.
          */
         "pattern": string;
@@ -4641,6 +4645,10 @@ declare namespace LocalJSX {
           * (optional) The input's minimum length.
          */
         "minLength"?: number;
+        /**
+          * (optional) The input's name.
+         */
+        "name"?: string;
         /**
           * An event that fires on input value change.
          */
