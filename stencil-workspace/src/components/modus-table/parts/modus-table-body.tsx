@@ -13,7 +13,17 @@ interface ModusTableBodyProps {
 }
 
 export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ context }) => {
-  const { density, hover, rowSelection, rowSelectionOptions, rowActions, tableInstance: table, updateData } = context;
+  const {
+    density,
+    hover,
+    rowSelection,
+    rowSelectionOptions,
+    rowActions,
+    tableInstance: table,
+    updateData,
+    updateSelectedRows,
+    updateClickedRows,
+  } = context;
   const hasRowActions = rowActions?.length > 0;
   const multipleRowSelection = rowSelectionOptions?.multiple;
   let checkboxSize: 'medium' | 'small' = 'medium';
@@ -52,6 +62,31 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
     );
   }
 
+  function handleRowClick(event: MouseEvent, currentRowIndex: number): void {
+    const isShiftClick = event.shiftKey;
+
+    updateClickedRows(currentRowIndex, isShiftClick);
+  }
+
+  function handleKeyDown(event: KeyboardEvent, currentRowIndex: number): void {
+    if (event.defaultPrevented || event.altKey || !event.shiftKey) {
+      return;
+    }
+
+    const rowCount = table.getRowModel().rows.length;
+    const step = event.key === 'ArrowUp' ? -1 : event.key === 'ArrowDown' ? 1 : 0;
+
+    if (!step) return;
+
+    const nextRowIndex = currentRowIndex + step;
+
+    if (nextRowIndex >= 0 && nextRowIndex < rowCount) {
+      event.preventDefault();
+
+      updateSelectedRows(nextRowIndex, currentRowIndex);
+    }
+  }
+
   return (
     <tbody>
       {table.getRowModel()?.rows.map((row) => {
@@ -59,13 +94,20 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
         const isChecked = getIsSelected() && (subRows?.length ? getIsAllSubRowsSelected() : true);
 
         return (
-          <tr key={id} class={{ 'enable-hover': hover, 'row-selected': isChecked }}>
+          <tr
+            key={id}
+            class={{ 'enable-hover': hover, 'row-selected': isChecked }}
+            onClick={(event) => handleRowClick(event as MouseEvent, row.index)}
+            {...(rowSelectionOptions.multiple && {
+              onKeyDown: (event) => handleKeyDown(event as KeyboardEvent, row.index),
+            })}>
             {rowSelection && (
               <ModusTableCellCheckbox
                 multipleRowSelection={multipleRowSelection}
                 row={row}
                 isChecked={isChecked}
-                checkboxSize={checkboxSize}></ModusTableCellCheckbox>
+                checkboxSize={checkboxSize}
+                updateRow={() => updateClickedRows(row.index, false)}></ModusTableCellCheckbox>
             )}
             {getVisibleCells()?.map((cell, cellIndex) => {
               return (
