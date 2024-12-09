@@ -42,6 +42,19 @@
 | `valueChange`       | An event that fires when the input value changes. Emits the value string.     | `CustomEvent<string \| string[]>` |
 
 
+## Methods
+
+### `focusInput() => Promise<void>`
+
+Focus the autocomplete component
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+
 ## Dependencies
 
 ### Used by
