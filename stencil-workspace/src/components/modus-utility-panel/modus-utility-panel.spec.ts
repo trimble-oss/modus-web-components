@@ -10,7 +10,7 @@ describe('modus-utility-panel', () => {
     expect(root).toEqualHtml(`
       <modus-utility-panel>
         <mock:shadow-root>
-          <div class="overlay utility-panel">
+          <div class="utility-panel">
             <div class="panel-content">
               <div aria-labelledby="body" class="panel-body">
                 <slot name="body"></slot>
@@ -31,7 +31,7 @@ describe('modus-utility-panel', () => {
     expect(root).toEqualHtml(`
       <modus-utility-panel expanded="true">
         <mock:shadow-root>
-          <div class="open overlay utility-panel">
+          <div class="open utility-panel">
             <div class="panel-content">
               <div aria-labelledby="body" class="panel-body">
                 <slot name="body"></slot>
