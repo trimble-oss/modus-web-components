@@ -711,8 +711,7 @@ export class ModusTable {
     const start = Math.min(this.anchorRowIndex, nextRowIndex);
     const end = Math.max(this.anchorRowIndex, nextRowIndex);
 
-    const rows = this.tableCore.getTableInstance().getRowModel().rows;
-
+    const rows = this.tableCore.getTableInstance().getExpandedRowModel().rows;
     this.tableCore.getTableInstance().resetRowSelection();
     for (let i = start; i <= end; i++) {
       const row = rows[i];
