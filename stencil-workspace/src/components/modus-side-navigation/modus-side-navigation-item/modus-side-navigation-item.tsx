@@ -4,6 +4,7 @@ import {
   Prop,
   Element,
   Event,
+  Watch,
   EventEmitter,
   Method,
   State,
@@ -76,6 +77,13 @@ export class ModusSideNavigationItem {
   @Method()
   async focusItem(): Promise<void> {
     this._itemRef?.focus();
+  }
+
+  @Watch('expanded')
+  watchExpanded(): void {
+    if (this.dropdownVisible) {
+      this.dropdownVisible = false;
+    }
   }
 
   connectedCallback() {
