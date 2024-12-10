@@ -7,6 +7,7 @@ export interface ModusSideNavigationItemInfo {
   disabled?: boolean;
   selected?: boolean;
   options?: Map<string, string>;
+  isHeader?: boolean;
   children?: ModusSideNavigationItemInfo[];
   onSideNavItemClicked?: (event: ModusSideNavigationItemCustomEvent<{ id: string; selected: boolean }>) => void;
 }
