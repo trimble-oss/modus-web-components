@@ -20,6 +20,7 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
     rowSelection,
     rowSelectionOptions,
     rowActions,
+    rowsExpandable,
     tableInstance: table,
     updateData,
     updateSelectedRows,
@@ -64,7 +65,7 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
   }
 
   function handleRowClick(event: MouseEvent, currentRowIndex: number,row :Row<unknown>): void {
-    if(!rowSelectionOptions.subRowSelection && rowSelectionOptions.multiple && row.getCanExpand() || !rowSelectionOptions.multiple){
+    if(!rowSelectionOptions.subRowSelection && rowSelectionOptions.multiple && rowsExpandable  || !rowSelectionOptions.multiple){
       row.toggleSelected();
       return;
     }
@@ -92,7 +93,7 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
     }
   }
 function handleCheckboxKeyDown(row :Row<unknown>): void {
-    if(!rowSelectionOptions.subRowSelection && rowSelectionOptions.multiple  && row.getCanExpand() || !rowSelectionOptions.multiple){
+    if(!rowSelectionOptions.subRowSelection && rowSelectionOptions.multiple  && rowsExpandable || !rowSelectionOptions.multiple){
         row.toggleSelected();
         return;
     }
