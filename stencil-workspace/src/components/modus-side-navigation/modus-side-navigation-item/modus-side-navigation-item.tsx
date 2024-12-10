@@ -4,7 +4,6 @@ import {
   Prop,
   Element,
   Event,
-  Watch,
   EventEmitter,
   Method,
   State,
@@ -79,13 +78,6 @@ export class ModusSideNavigationItem {
     this._itemRef?.focus();
   }
 
-  @Watch('expanded')
-  watchExpanded() {
-    if (this.dropdownVisible) {
-      this.dropdownVisible = false;
-    }
-  }
-
   connectedCallback() {
     this._sideNavItemAdded.emit(this.element);
     if (this.isHeader) {
@@ -101,6 +93,10 @@ export class ModusSideNavigationItem {
   handleListItemClick(itemId: string): void {
     this.sideNavListItemClicked.emit({ id: itemId });
     this.dropdownVisible = false; // Close the dropdown
+    if(this.expanded){
+      const levelIcon : HTMLElement = this.element.shadowRoot.querySelector('.level-icon');
+      levelIcon.style.transform = 'rotate(90deg)';
+    }
     this.destroyPopper(); // Destroy the popper to reset the positioning
   }
 
