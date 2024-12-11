@@ -2,8 +2,8 @@ interface Translation {
   [key: string]: string;
 }
 
-const translations: Record<string, Translation> = {
-  en: {
+const translationStore: Record<string, Translation> = {
+  'en-US': {
     showingResult: 'Showing result',
     of: 'of',
     pageView: 'Page View',
@@ -13,7 +13,7 @@ const translations: Record<string, Translation> = {
     sortedAscending: 'Sorted Ascending',
     sortedDescending: 'Sorted Descending',
   },
-  es: {
+  'es-ES': {
     showingResult: 'Mostrando resultado',
     of: 'de',
     pageView: 'Vista de página',
@@ -23,7 +23,7 @@ const translations: Record<string, Translation> = {
     sortedAscending: 'Ordenado de forma ascendente',
     sortedDescending: 'Ordenado de forma descendente',
   },
-  fr: {
+  'fr-FR': {
     showingResult: 'Afficher le résultat',
     of: 'de',
     pageView: 'Prévisualisation',
@@ -33,7 +33,7 @@ const translations: Record<string, Translation> = {
     sortedAscending: 'Trié par ordre croissant',
     sortedDescending: 'Trié par ordre décroissant',
   },
-  de: {
+  'de-DE': {
     showingResult: 'Ergebnis anzeigen',
     of: 'von',
     pageView: 'Seitenansicht',
@@ -43,7 +43,7 @@ const translations: Record<string, Translation> = {
     sortedAscending: 'Aufsteigend sortiert',
     sortedDescending: 'Absteigend sortiert',
   },
-  it: {
+  'it-IT': {
     showingResult: 'Visualizzazione del risultato',
     of: 'di',
     pageView: 'Vista della pagina',
@@ -53,7 +53,7 @@ const translations: Record<string, Translation> = {
     sortedAscending: 'Ordinato in ordine crescente',
     sortedDescending: 'Ordinato in ordine decrescente',
   },
-  fi: {
+  'fi-FI': {
     showingResult: 'Näytetään tulos',
     of: '/',
     pageView: 'Sivunäkymä',
@@ -65,17 +65,30 @@ const translations: Record<string, Translation> = {
   },
 };
 
-function getTranslations(): Translation {
-  let lang = document.documentElement.lang || navigator?.language;
+const langMap: Record<string, string> = {
+  en: 'en-US',
+  es: 'es-ES',
+  fr: 'fr-FR',
+  de: 'de-DE',
+  it: 'it-IT',
+  fi: 'fi-FI',
+};
 
-  if (!lang || lang.trim() === '') {
-    return translations['en'];
+let translations = translationStore['en-US'];
+
+function getTranslations(): void {
+  const lang = document.documentElement.lang || navigator?.language;
+  if (translationStore[lang]) {
+    translations = translationStore[lang];
+  } else {
+    const baseLang = lang.split('-')[0];
+    const mappedLang = langMap[baseLang] || 'en-US';
+    translations = translationStore[mappedLang];
   }
-
-  lang = lang?.toLowerCase();
-  const primaryLang = lang.split('-')[0];
-
-  return translations[lang] || translations[primaryLang] || translations['en'];
 }
 
-export { translations, getTranslations };
+function translate(key: string): string {
+  return translations[key];
+}
+
+export { translations, getTranslations, translate };
