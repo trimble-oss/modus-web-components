@@ -81,7 +81,7 @@ function getTranslations(): void {
   if (translationStore[lang]) {
     translations = translationStore[lang];
   } else {
-    const baseLang = lang.split('-')[0];
+    const baseLang = lang?.split('-')[0];
     const mappedLang = langMap[baseLang] || 'en-US';
     translations = translationStore[mappedLang];
   }
