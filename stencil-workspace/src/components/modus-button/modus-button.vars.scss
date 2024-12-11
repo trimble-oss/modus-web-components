@@ -20,6 +20,13 @@ $btn-active-colors: (
   'danger': #c41e28,
   'special': #e49325,
 );
+$btn-focus-shadow-rgb: (
+  'primary': rgba(38, 122, 177, 0.5),
+  'secondary': rgba(98, 102, 108, 0.5),
+  'tertiary': rgba(156, 157, 166, 0.5),
+  'danger': rgba(224, 66, 76, 0.5),
+  'special': rgba(194, 125, 31, 0.5),
+);
 
 // Default Outline
 $btn-outline-theme-colors: (

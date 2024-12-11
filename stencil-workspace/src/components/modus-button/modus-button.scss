@@ -348,6 +348,12 @@ button {
         }
       }
 
+      // focus state
+      &.color-#{$color}:focus-visible {
+        box-shadow: 0 0 0 0.25rem map-get($btn-focus-shadow-rgb, $color);
+        outline: 0;
+      }
+
       // Active state
       &.color-#{$color}:active:not([disabled]) {
         background-color: var(--modus-btn-#{$color}-active-bg, map-get($btn-active-colors, $color));

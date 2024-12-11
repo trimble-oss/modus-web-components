@@ -523,6 +523,148 @@ describe('modus-navbar', () => {
     expect(await secondaryLogo).toBeFalsy();
   });
 
+  it('should apply logo-clickable class to primary logo when logoOptions.clickable is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-navbar></modus-navbar>');
+
+    await page.waitForChanges();
+
+    const navbar = await page.find('modus-navbar');
+    navbar.setProperty('logoOptions', {
+      primary: {
+        url: 'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
+        height: 24,
+      },
+      clickable: true,
+    });
+
+    await page.waitForChanges();
+
+    const primaryLogo = await page.find('modus-navbar >>> [data-test-id="primary-logo"]');
+
+    const containsClass = primaryLogo.classList.contains('logo-clickable');
+
+    expect(containsClass).toBeTruthy();
+  });
+
+  it('should apply logo-clickable class to secondary logo when logoOptions.clickable is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-navbar></modus-navbar>');
+
+    await page.waitForChanges();
+
+    const navbar = await page.find('modus-navbar');
+    navbar.setProperty('logoOptions', {
+      secondary: {
+        url: 'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
+        height: 24,
+      },
+      clickable: true,
+    });
+
+    await page.waitForChanges();
+
+    const secondaryLogo = await page.find('modus-navbar >>> [data-test-id="secondary-logo"]');
+
+    const containsClass = secondaryLogo.classList.contains('logo-clickable');
+
+    expect(containsClass).toBeTruthy();
+  });
+
+  it('should not apply logo-clickable class to primary logo when logoOptions.clickable is false', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-navbar></modus-navbar>');
+
+    await page.waitForChanges();
+
+    const navbar = await page.find('modus-navbar');
+    navbar.setProperty('logoOptions', {
+      primary: {
+        url: 'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
+        height: 24,
+      },
+      clickable: false,
+    });
+
+    await page.waitForChanges();
+
+    const primaryLogo = await page.find('modus-navbar >>> [data-test-id="primary-logo"]');
+
+    const containsClass = primaryLogo.classList.contains('logo-clickable');
+
+    expect(containsClass).toBeFalsy();
+  });
+
+  it('should not apply logo-clickable class to secondary logo when logoOptions.clickable is false', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-navbar></modus-navbar>');
+
+    await page.waitForChanges();
+
+    const navbar = await page.find('modus-navbar');
+    navbar.setProperty('logoOptions', {
+      secondary: {
+        url: 'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
+        height: 24,
+      },
+      clickable: false,
+    });
+
+    await page.waitForChanges();
+
+    const secondaryLogo = await page.find('modus-navbar >>> [data-test-id="secondary-logo"]');
+
+    const containsClass = secondaryLogo.classList.contains('logo-clickable');
+
+    expect(containsClass).toBeFalsy();
+  });
+
+  it('should emit the productLogoClick event when the primary logo is clicked', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-navbar></modus-navbar>');
+
+    await page.waitForChanges();
+
+    const navbar = await page.find('modus-navbar');
+    navbar.setProperty('logoOptions', {
+      primary: {
+        url: 'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
+        height: 24,
+      },
+    });
+
+    await page.waitForChanges();
+
+    const primaryLogo = await page.find('modus-navbar >>> [data-test-id="primary-logo"]');
+    const productLogoClickEvent = await page.spyOnEvent('productLogoClick');
+    primaryLogo.click();
+    await page.waitForChanges();
+    expect(productLogoClickEvent).toHaveReceivedEventTimes(1);
+  });
+
+  it('should emit the productLogoClick event when the secondary logo is clicked', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-navbar></modus-navbar>');
+
+    await page.waitForChanges();
+
+    const navbar = await page.find('modus-navbar');
+    navbar.setProperty('logoOptions', {
+      secondary: {
+        url: 'https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg',
+        height: 24,
+      },
+    });
+
+    await page.waitForChanges();
+
+    const secondaryLogo = await page.find('modus-navbar >>> [data-test-id="secondary-logo"]');
+    const productLogoClickEvent = await page.spyOnEvent('productLogoClick');
+    secondaryLogo.click();
+    await page.waitForChanges();
+    expect(productLogoClickEvent).toHaveReceivedEventTimes(1);
+  });
+
   it('should render slot in profile menu', async () => {
     const page = await newE2EPage();
     await page.setContent(
