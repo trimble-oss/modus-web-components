@@ -34,7 +34,7 @@ export class ModusSideNavigationItem {
   @Prop({ mutable: true, reflect: true }) expanded = false;
 
   /** (optional) Label for the item and the tooltip message. */
-  @Prop() label: string;
+  @Prop({ mutable: true, reflect: true })label: string;
 
   /** (optional) A built-in menu icon string or a image url. */
   @Prop() menuIcon: string;
@@ -51,6 +51,8 @@ export class ModusSideNavigationItem {
 
   /** An event that fires when a mouse click or `Enter` key press on an item. */
   @Event() sideNavItemClicked: EventEmitter<{ id: string; selected: boolean }>;
+
+  @Event() sideNavItemHeaderClicked: EventEmitter<{ id: string; selected: boolean }>;
 
   /** An event that fires when an item is in focus.  */
   @Event() sideNavItemFocus: EventEmitter<{ id: string }>;
@@ -101,10 +103,16 @@ export class ModusSideNavigationItem {
   handleListItemClick(itemId: string): void {
     this.sideNavListItemClicked.emit({ id: itemId });
     this.dropdownVisible = false; // Close the dropdown
+   // this.label= itemId;
     if(this.expanded){
       const levelIcon : HTMLElement = this.element.shadowRoot.querySelector('.level-icon');
       levelIcon.style.transform = 'rotate(90deg)';
     }
+    // this.selected = this.disableSelection ? this.selected : !this.selected;
+    this.sideNavItemHeaderClicked?.emit({
+      id: itemId,
+      selected: this?.selected,
+    });
     this.destroyPopper(); // Destroy the popper to reset the positioning
   }
 
@@ -154,7 +162,7 @@ export class ModusSideNavigationItem {
     this.selected = this.disableSelection ? this.selected : !this.selected;
     this.sideNavItemClicked?.emit({
       id: this.element.id,
-      selected: this.selected,
+      selected: this?.selected,
     });
   }
 
@@ -170,13 +178,13 @@ export class ModusSideNavigationItem {
         class={`dropdown-list ${this.dropdownVisible ? 'visible' : 'hidden'} list-border animate-list`}
         ref={(el) => (this.dropdownRef = el)}>
         <modus-list slot="dropdownList">
-            <modus-list-item size="large" borderless  onClick={() => this.handleListItemClick('Item 1 - Navigation Link for Settings and Preferences')}>
+            <modus-list-item size="large" borderless  onClick={() => this.handleListItemClick('Item-1 - Navigation Link for Settings and Preferences')}>
             Item 1 - Navigation Link for Settings and Preferences
             </modus-list-item>
-            <modus-list-item size="large" borderless  onClick={() => this.handleListItemClick('Item 2 - Navigation Link for User Profile and Account')}>
+            <modus-list-item size="large" borderless  onClick={() => this.handleListItemClick('Item-2 - Navigation Link for User Profile and Account')}>
             Item 2 - Navigation Link for User Profile and Account
             </modus-list-item>
-            <modus-list-item size="large" borderless  onClick={() => this.handleListItemClick('Item 3 - Navigation Link for Notifications and Alerts')}>
+            <modus-list-item size="large" borderless  onClick={() => this.handleListItemClick('Item-3 - Navigation Link for Notifications and Alerts')}>
             Item 3 - Navigation Link for Notifications and Alerts
             </modus-list-item>
         </modus-list>
