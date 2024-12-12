@@ -10,6 +10,7 @@ import {
   Listen,
   Element,
   Watch,
+  Method,
 } from '@stencil/core';
 
 import { IconSearch } from '../../icons/svgs/icon-search';
@@ -156,6 +157,16 @@ export class ModusAutocomplete {
   componentDidRender(): void {
     if (this.displayOptions()) {
       this.scrollToOptionSelected();
+    }
+  }
+
+  /** Focus the autocomplete component */
+  @Method()
+  async focusInput(): Promise<void> {
+    const textInputElement = this.el.shadowRoot.querySelector('modus-text-input');
+
+    if (textInputElement) {
+      textInputElement.focusInput();
     }
   }
 
