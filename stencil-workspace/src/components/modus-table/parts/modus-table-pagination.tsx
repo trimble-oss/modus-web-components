@@ -3,7 +3,7 @@ import {
   h, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@stencil/core';
 import { TableContext } from '../models/table-context.models';
-import { getTranslations } from '../../../lang/translations';
+import { translate } from '../../../lang/translations';
 
 interface ModusTablePaginationProps {
   context: TableContext;
@@ -26,18 +26,18 @@ export const ModusTablePagination: FunctionalComponent<ModusTablePaginationProps
   return (
     <div class="pagination-container">
       <div class="items-per-page">
-        <span>{getTranslations().pageView}</span>
+        <span>{translate('pageView')}</span>
         <modus-select
           ariaLabel="Select page size"
           options-display-prop="display"
           options={optionsList}
-          placeholder={getTranslations().pleaseSelect}
+          placeholder={translate('pleaseSelect')}
           onValueChange={handleChange}
           value={selectedPageSize}></modus-select>
       </div>
       <div class="pagination-and-count">
         <div class="total-count">
-          <span>{getTranslations().showingResult}</span>
+          <span>{translate('showingResult')}</span>
           <span>{pageIndex * pageSize + 1}</span>
           <span>-</span>
           <span>
@@ -47,7 +47,7 @@ export const ModusTablePagination: FunctionalComponent<ModusTablePaginationProps
                 : totalCount
               : (pageIndex + 1) * pageSize}
           </span>
-          <span>{getTranslations().of}</span>
+          <span>{translate('of')}</span>
           <span>
             {!options.manualPagination && options.paginateExpandedRows ? getExpandedRowModel().rows.length : totalCount}
           </span>{' '}
