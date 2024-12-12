@@ -1180,6 +1180,7 @@ export namespace Components {
         "disabled": boolean;
         "expanded": boolean;
         "focusItem": () => Promise<void>;
+        "isHeader": { enabled: boolean; items: string[] };
         /**
           * (optional) Label for the item and the tooltip message.
          */
@@ -2591,9 +2592,11 @@ declare global {
     };
     interface HTMLModusSideNavigationItemElementEventMap {
         "sideNavItemClicked": { id: string; selected: boolean };
+        "sideNavItemHeaderClicked": { id: string; selected: boolean };
         "sideNavItemFocus": { id: string };
         "_sideNavItemAdded": HTMLElement;
         "_sideNavItemRemoved": HTMLElement;
+        "sideNavListItemClicked": { id: string };
     }
     interface HTMLModusSideNavigationItemElement extends Components.ModusSideNavigationItem, HTMLStencilElement {
         addEventListener<K extends keyof HTMLModusSideNavigationItemElementEventMap>(type: K, listener: (this: HTMLModusSideNavigationItemElement, ev: ModusSideNavigationItemCustomEvent<HTMLModusSideNavigationItemElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -4268,6 +4271,7 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         "expanded"?: boolean;
+        "isHeader"?: { enabled: boolean; items: string[] };
         /**
           * (optional) Label for the item and the tooltip message.
          */
@@ -4277,13 +4281,15 @@ declare namespace LocalJSX {
          */
         "menuIcon"?: string;
         /**
-          * An event that fires when mouse click or `Enter` key press on an item.
+          * An event that fires when a mouse click or `Enter` key press on an item.
          */
         "onSideNavItemClicked"?: (event: ModusSideNavigationItemCustomEvent<{ id: string; selected: boolean }>) => void;
         /**
           * An event that fires when an item is in focus.
          */
         "onSideNavItemFocus"?: (event: ModusSideNavigationItemCustomEvent<{ id: string }>) => void;
+        "onSideNavItemHeaderClicked"?: (event: ModusSideNavigationItemCustomEvent<{ id: string; selected: boolean }>) => void;
+        "onSideNavListItemClicked"?: (event: ModusSideNavigationItemCustomEvent<{ id: string }>) => void;
         "on_sideNavItemAdded"?: (event: ModusSideNavigationItemCustomEvent<HTMLElement>) => void;
         "on_sideNavItemRemoved"?: (event: ModusSideNavigationItemCustomEvent<HTMLElement>) => void;
         /**

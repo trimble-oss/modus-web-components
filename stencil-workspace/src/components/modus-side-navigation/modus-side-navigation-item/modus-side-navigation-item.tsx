@@ -1,15 +1,4 @@
-import {
-  h,
-  Component,
-  Prop,
-  Element,
-  Event,
-  Watch,
-  EventEmitter,
-  Method,
-  State,
-  Host,
-} from '@stencil/core';
+import { h, Component, Prop, Element, Event, Watch, EventEmitter, Method, State, Host } from '@stencil/core';
 import { createPopper, Instance as PopperInstance } from '@popperjs/core';
 import { ModusIconMap } from '../../../icons/ModusIconMap';
 
@@ -34,7 +23,7 @@ export class ModusSideNavigationItem {
   @Prop({ mutable: true, reflect: true }) expanded = false;
 
   /** (optional) Label for the item and the tooltip message. */
-  @Prop({ mutable: true, reflect: true })label: string;
+  @Prop({ mutable: true, reflect: true }) label: string;
 
   /** (optional) A built-in menu icon string or a image url. */
   @Prop() menuIcon: string;
@@ -45,7 +34,7 @@ export class ModusSideNavigationItem {
   /** (optional) Shows the expand icon. */
   @Prop({ mutable: true, reflect: true }) showExpandIcon = false;
 
-  @Prop() isHeader = false;
+  @Prop() isHeader: { enabled: boolean; items: string[] } = { enabled: false, items: [] };
 
   @State() dropdownVisible = false;
 
@@ -90,7 +79,7 @@ export class ModusSideNavigationItem {
 
   connectedCallback() {
     this._sideNavItemAdded.emit(this.element);
-    if (this.isHeader) {
+    if (this.isHeader?.enabled) {
       this.showExpandIcon = true;
     }
   }
@@ -144,7 +133,7 @@ export class ModusSideNavigationItem {
   handleClick(): void {
     if (this.disabled) return;
 
-    if (this.isHeader) {
+    if (this.isHeader?.enabled) {
       this.dropdownVisible = !this.dropdownVisible;
 
       if (this.dropdownVisible) {
@@ -152,10 +141,10 @@ export class ModusSideNavigationItem {
       } else {
         this.destroyPopper();
       }
-      if(this.expanded){
-        const levelIcon : HTMLElement = this.element.shadowRoot.querySelector('.level-icon');
+      if (this.expanded) {
+        const levelIcon: HTMLElement = this.element.shadowRoot.querySelector('.level-icon');
         levelIcon.style.transform = this.dropdownVisible ? 'rotate(270deg)' : 'rotate(90deg)';
-        }
+      }
       return;
     }
 
@@ -178,15 +167,11 @@ export class ModusSideNavigationItem {
         class={`dropdown-list ${this.dropdownVisible ? 'visible' : 'hidden'} list-border animate-list`}
         ref={(el) => (this.dropdownRef = el)}>
         <modus-list slot="dropdownList">
-            <modus-list-item size="large" borderless  onClick={() => this.handleListItemClick('Item-1 - Navigation Link for Settings and Preferences')}>
-            Item 1 - Navigation Link for Settings and Preferences
+          {this.isHeader?.items?.map((item) => (
+            <modus-list-item size="large" borderless onClick={() => this.handleListItemClick(item)}>
+              {item}
             </modus-list-item>
-            <modus-list-item size="large" borderless  onClick={() => this.handleListItemClick('Item-2 - Navigation Link for User Profile and Account')}>
-            Item 2 - Navigation Link for User Profile and Account
-            </modus-list-item>
-            <modus-list-item size="large" borderless  onClick={() => this.handleListItemClick('Item-3 - Navigation Link for Notifications and Alerts')}>
-            Item 3 - Navigation Link for Notifications and Alerts
-            </modus-list-item>
+          ))}
         </modus-list>
       </div>
     );
@@ -202,36 +187,32 @@ export class ModusSideNavigationItem {
 
     return (
       <Host>
-      {this.isHeader && this.renderDropdown()}
-      <modus-tooltip text={this.label} disabled={this.disabled} position="right">
+        {this.isHeader?.enabled && this.renderDropdown()}
+        <modus-tooltip text={this.label} disabled={this.disabled} position="right">
+          <li
+            role="treeitem"
+            ref={(el) => (this.referenceRef = el)}
+            tabIndex={this.disabled ? -1 : 0}
+            class={classes}
+            onClick={() => this.handleClick()}
+            onKeyDown={(e) => this.handleKeyDown(e)}
+            aria-disabled={this.disabled ? 'true' : null}
+            aria-label={this.label}
+            aria-current={this.selected ? 'true' : null}
+            onFocus={() => this.sideNavItemFocus.emit({ id: this.element.id })}>
+            <div class="menu-icon">
+              <slot name="menu-icon"></slot>
+              {this.menuIcon && <ModusIconMap icon={this.menuIcon} aria-label={this.label} size="24"></ModusIconMap>}
+            </div>
 
-        <li
-          role="treeitem"
-          ref={(el) => (this.referenceRef = el)}
-          tabIndex={this.disabled ? -1 : 0}
-          class={classes}
-          onClick={() => this.handleClick()}
-          onKeyDown={(e) => this.handleKeyDown(e)}
-          aria-disabled={this.disabled ? 'true' : null}
-          aria-label={this.label}
-          aria-current={this.selected ? 'true' : null}
-          onFocus={() => this.sideNavItemFocus.emit({ id: this.element.id })}>
-          <div class="menu-icon">
-            <slot name="menu-icon"></slot>
-            {this.menuIcon && <ModusIconMap icon={this.menuIcon} aria-label={this.label} size="24"></ModusIconMap>}
-          </div>
+            {this.expanded && <div class="menu-text">{this.label}</div>}
 
-          {this.expanded && <div class="menu-text">{this.label}</div>}
-
-          <div class="level-icon" style={{ transform: this.expanded ? 'rotate(90deg)' : 'rotate(0deg)' }}>
-            {this.showExpandIcon && <ModusIconMap icon="chevron_right" size="16" />}
-          </div>
-
-
-        </li>
-      </modus-tooltip>
+            <div class="level-icon" style={{ transform: this.expanded ? 'rotate(90deg)' : 'rotate(0deg)' }}>
+              {this.showExpandIcon && <ModusIconMap icon="chevron_right" size="16" />}
+            </div>
+          </li>
+        </modus-tooltip>
       </Host>
     );
   }
 }
-
