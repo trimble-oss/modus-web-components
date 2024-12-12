@@ -74,6 +74,7 @@ import { ModusTableBody } from './parts/modus-table-body';
 import { TableContext, TableCellEdited } from './models/table-context.models';
 import { TableRowActionWithOverflow } from './models/table-row-actions.models';
 import { createGuid } from '../../utils/utils';
+import { getTranslations } from '../../lang/translations';
 
 /**
  * @slot customFooter - Slot for custom footer.
@@ -401,6 +402,7 @@ export class ModusTable {
   }
 
   componentWillRender(): void {
+    getTranslations();
     this._context = this.getTableContext();
   }
 
