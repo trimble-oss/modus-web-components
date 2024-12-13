@@ -104,14 +104,13 @@
       font-size: $rem-12px;
       min-height: 2rem;
       padding: 0 8px;
-      
+
       .text-content {
         display: inline-block;
         max-width: 95%; // Ensure the text does not exceed the text-option width and check icon is visible
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        
       }
 
       &.selected {
