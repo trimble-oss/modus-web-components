@@ -111,7 +111,9 @@ export class ModusDropdown {
     if ((event.target as HTMLElement).closest(`#${this.toggleElementId}`)) {
       this.visible = !this.visible;
     } else {
-      this.disableCloseOnSelect ? this.dropdownClose.emit() : (this.visible = false);
+      if (!this.disableCloseOnSelect) {
+        this.visible = false;
+      }
     }
 
     if (!this.visible) {
