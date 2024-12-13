@@ -92,9 +92,9 @@ export class ModusSideNavigationItem {
   handleListItemClick(itemId: string): void {
     this.sideNavListItemClicked.emit({ id: itemId });
     this.dropdownVisible = false; // Close the dropdown
-   // this.label= itemId;
-    if(this.expanded){
-      const levelIcon : HTMLElement = this.element.shadowRoot.querySelector('.level-icon');
+    this.label = itemId;
+    if (this.expanded) {
+      const levelIcon: HTMLElement = this.element.shadowRoot.querySelector('.level-icon');
       levelIcon.style.transform = 'rotate(90deg)';
     }
     // this.selected = this.disableSelection ? this.selected : !this.selected;
@@ -105,10 +105,8 @@ export class ModusSideNavigationItem {
     this.destroyPopper(); // Destroy the popper to reset the positioning
   }
 
-
   setupPopper(expanded: boolean): void {
     if (!this.referenceRef || !this.dropdownRef) return;
-
     this.popperInstance = createPopper(this.referenceRef, this.dropdownRef, {
       placement: expanded ? 'bottom-start' : 'right',
       modifiers: [
@@ -117,6 +115,18 @@ export class ModusSideNavigationItem {
           options: {
             offset: [0, 2],
             distance: 10,
+          },
+        },
+        {
+          name: 'setWidth',
+          enabled: true,
+          phase: 'write',
+          fn: ({ state }) => {
+            if (state.placement.startsWith('bottom')) {
+              state.elements.popper.style.width = '300px';
+            } else if (state.placement.startsWith('right')) {
+              state.elements.popper.style.width = '150px';
+            }
           },
         },
       ],
