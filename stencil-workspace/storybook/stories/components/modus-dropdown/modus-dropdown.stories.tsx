@@ -82,11 +82,12 @@ export default {
   decorators: [withActions],
 };
 
-const DefaultTemplate = ({ animateList, ariaLabel, customPlacement, disabled, placement, showDropdownListBorder }) => html`
+const DefaultTemplate = ({ animateList, ariaLabel, customPlacement, disabled, disableCloseOnSelect, placement, showDropdownListBorder }) => html`
   <modus-dropdown
     animate-list=${animateList}
     aria-label=${ariaLabel}
     disabled=${disabled}
+    disable-close-on-select=${disableCloseOnSelect}
     placement=${placement}
     show-dropdown-list-border=${showDropdownListBorder}
     toggle-element-id="toggleElement">
@@ -115,6 +116,7 @@ const WithManyItemsTemplate = ({
   ariaLabel,
   customPlacement,
   disabled,
+  disableCloseOnSelect,
   placement,
   showDropdownListBorder,
 }) => html`
@@ -122,6 +124,7 @@ const WithManyItemsTemplate = ({
     animate-list=${animateList}
     aria-label=${ariaLabel}
     disabled=${disabled}
+    disable-close-on-select=${disableCloseOnSelect}
     placement=${placement}
     show-dropdown-list-border=${showDropdownListBorder}
     toggle-element-id="toggleElement">
