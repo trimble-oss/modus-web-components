@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Component, Prop, h, Event, EventEmitter, State, Element, Listen, Watch } from '@stencil/core';
 
 @Component({
@@ -33,7 +34,7 @@ export class ModusDropdown {
   @Prop() showDropdownListBorder = true;
 
   /** (optional) The border radius of the dropdown list. */
-  @Prop() borderRadius = '0px';
+  @Prop() borderRadius = '0';
 
   /** (required) The element id that the list renders near and that triggers the toggling of the list. */
   @Prop() toggleElementId: string;
