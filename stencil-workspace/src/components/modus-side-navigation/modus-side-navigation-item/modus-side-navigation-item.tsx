@@ -93,10 +93,10 @@ export class ModusSideNavigationItem {
     this.sideNavListItemClicked.emit({ id: itemId });
     this.dropdownVisible = false; // Close the dropdown
     this.label = itemId;
-    if (this.expanded) {
-      const levelIcon: HTMLElement = this.element.shadowRoot.querySelector('.level-icon');
-      levelIcon.style.transform = 'rotate(90deg)';
-    }
+    // if (this.expanded) {
+    //   const levelIcon: HTMLElement = this.element.shadowRoot.querySelector('.level-icon');
+    //   levelIcon.style.transform = 'rotate(90deg)';
+    // }
     // this.selected = this.disableSelection ? this.selected : !this.selected;
     this.sideNavItemHeaderClicked?.emit({
       id: itemId,
@@ -151,10 +151,10 @@ export class ModusSideNavigationItem {
       } else {
         this.destroyPopper();
       }
-      if (this.expanded) {
-        const levelIcon: HTMLElement = this.element.shadowRoot.querySelector('.level-icon');
-        levelIcon.style.transform = this.dropdownVisible ? 'rotate(270deg)' : 'rotate(90deg)';
-      }
+      // if (this.expanded) {
+      //   const levelIcon: HTMLElement = this.element.shadowRoot.querySelector('.level-icon');
+      //   levelIcon.style.transform = this.dropdownVisible ? 'rotate(270deg)' : 'rotate(90deg)';
+      // }
       return;
     }
 
@@ -217,7 +217,7 @@ export class ModusSideNavigationItem {
 
             {this.expanded && <div class="menu-text">{this.label}</div>}
 
-            <div class="level-icon" style={{ transform: this.expanded ? 'rotate(90deg)' : 'rotate(0deg)' }}>
+            <div class={`level-icon ${this.expanded ? 'icon-expanded' : 'icon-collapsed'}`}>
               {this.showExpandIcon && <ModusIconMap icon="chevron_right" size="16" />}
             </div>
           </li>
