@@ -48,7 +48,7 @@
     "@tanstack/table-core": "^8.20.5"
   },
   "devDependencies": {
-    "@babel/preset-react": "^7.25.9",
+    "@babel/preset-react": "^7.26.3",
     "@stencil/angular-output-target": "^0.10.1",
     "@stencil/postcss": "^2.1.0",
     "@stencil/react-output-target": "^0.5.3",
