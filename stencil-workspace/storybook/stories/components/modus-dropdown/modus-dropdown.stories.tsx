@@ -21,6 +21,14 @@ export default {
         type: { summary: 'string' },
       },
     },
+    borderRadius: {
+      name: 'border-radius',
+      description: 'The border radius of the dropdown list.',
+      table: {
+        type: { summary: 'string' },
+      },
+      type: { required: false },
+    },
     customPlacement: {
       name: 'custom-placement',
       description: 'Determines custom dropdown placement offset.',
@@ -82,10 +90,13 @@ export default {
   decorators: [withActions],
 };
 
-const DefaultTemplate = ({ animateList, ariaLabel, customPlacement, disabled, disableCloseOnSelect, placement, showDropdownListBorder }) => html`
+
+const DefaultTemplate = ({ animateList, ariaLabel, borderRadius, customPlacement, disabled, placement, showDropdownListBorder }) => html`
+
   <modus-dropdown
     animate-list=${animateList}
     aria-label=${ariaLabel}
+    border-radius=${borderRadius}
     disabled=${disabled}
     disable-close-on-select=${disableCloseOnSelect}
     placement=${placement}
@@ -104,6 +115,7 @@ export const Default = DefaultTemplate.bind({});
 Default.args = {
   animateList: false,
   ariaLabel: '',
+  borderRadius: '0',
   customPlacement: { top: 0, right: 0, bottom: 0, left: 0 },
   disabled: false,
   disableCloseOnSelect: false,
@@ -114,6 +126,7 @@ Default.args = {
 const WithManyItemsTemplate = ({
   animateList,
   ariaLabel,
+  borderRadius,
   customPlacement,
   disabled,
   disableCloseOnSelect,
@@ -123,6 +136,7 @@ const WithManyItemsTemplate = ({
   <modus-dropdown
     animate-list=${animateList}
     aria-label=${ariaLabel}
+    border-radius=${borderRadius}
     disabled=${disabled}
     disable-close-on-select=${disableCloseOnSelect}
     placement=${placement}
@@ -148,6 +162,7 @@ export const WithManyItems = WithManyItemsTemplate.bind({});
 WithManyItems.args = {
   animateList: false,
   ariaLabel: '',
+  borderRadius: '0',
   customPlacement: { top: 0, right: 0, bottom: 0, left: 0 },
   disabled: false,
   disableCloseOnSelect: false,
