@@ -45,6 +45,14 @@ export default {
         defaultValue: { summary: false },
       },
     },
+    disableCloseOnSelect:{
+      name: 'disable-close-on-select',
+      description: 'Prevents the dropdown from closing when an option is selected.',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: false },
+      }
+    },
     placement: {
       name: 'placement',
       description: 'The placement of the dropdown in relation to the toggleElement.',
@@ -82,12 +90,15 @@ export default {
   decorators: [withActions],
 };
 
+
 const DefaultTemplate = ({ animateList, ariaLabel, borderRadius, customPlacement, disabled, placement, showDropdownListBorder }) => html`
+
   <modus-dropdown
     animate-list=${animateList}
     aria-label=${ariaLabel}
     border-radius=${borderRadius}
     disabled=${disabled}
+    disable-close-on-select=${disableCloseOnSelect}
     placement=${placement}
     show-dropdown-list-border=${showDropdownListBorder}
     toggle-element-id="toggleElement">
@@ -107,6 +118,7 @@ Default.args = {
   borderRadius: '0',
   customPlacement: { top: 0, right: 0, bottom: 0, left: 0 },
   disabled: false,
+  disableCloseOnSelect: false,
   placement: 'bottom',
   showDropdownListBorder: true,
 };
@@ -117,6 +129,7 @@ const WithManyItemsTemplate = ({
   borderRadius,
   customPlacement,
   disabled,
+  disableCloseOnSelect,
   placement,
   showDropdownListBorder,
 }) => html`
@@ -125,6 +138,7 @@ const WithManyItemsTemplate = ({
     aria-label=${ariaLabel}
     border-radius=${borderRadius}
     disabled=${disabled}
+    disable-close-on-select=${disableCloseOnSelect}
     placement=${placement}
     show-dropdown-list-border=${showDropdownListBorder}
     toggle-element-id="toggleElement">
@@ -151,6 +165,7 @@ WithManyItems.args = {
   borderRadius: '0',
   customPlacement: { top: 0, right: 0, bottom: 0, left: 0 },
   disabled: false,
+  disableCloseOnSelect: false,
   placement: 'bottom',
   showDropdownListBorder: true,
 };
