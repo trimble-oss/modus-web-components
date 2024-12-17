@@ -109,8 +109,12 @@ export interface TableContext {
 
   wrapText: boolean;
 
+  anchorRowIndex: number;
+
   getRowId: (originalRow: unknown, index: number, parent?: Row<unknown>) => string;
   updateData: (updater: Updater<unknown>, context: TableCellEdited) => void;
+  updateSelectedRows: (rowIndex: number, currentRowIndex: number) => void;
+  updateClickedRows: (rowIndex: number, isShiftClick: boolean) => void;
   onColumnsChange: (newVal: ModusTableColumn<unknown>[]) => void;
   onColumnResizeChange: (newVal: boolean) => void;
   onColumnReorderChange: () => void;
