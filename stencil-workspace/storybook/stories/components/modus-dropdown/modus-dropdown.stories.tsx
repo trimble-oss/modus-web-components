@@ -37,6 +37,14 @@ export default {
         defaultValue: { summary: false },
       },
     },
+    disableCloseOnSelect:{
+      name: 'disable-close-on-select',
+      description: 'Prevents the dropdown from closing when an option is selected.',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: false },
+      }
+    },
     placement: {
       name: 'placement',
       description: 'The placement of the dropdown in relation to the toggleElement.',
@@ -74,11 +82,12 @@ export default {
   decorators: [withActions],
 };
 
-const DefaultTemplate = ({ animateList, ariaLabel, customPlacement, disabled, placement, showDropdownListBorder }) => html`
+const DefaultTemplate = ({ animateList, ariaLabel, customPlacement, disabled, disableCloseOnSelect, placement, showDropdownListBorder }) => html`
   <modus-dropdown
     animate-list=${animateList}
     aria-label=${ariaLabel}
     disabled=${disabled}
+    disable-close-on-select=${disableCloseOnSelect}
     placement=${placement}
     show-dropdown-list-border=${showDropdownListBorder}
     toggle-element-id="toggleElement">
@@ -97,6 +106,7 @@ Default.args = {
   ariaLabel: '',
   customPlacement: { top: 0, right: 0, bottom: 0, left: 0 },
   disabled: false,
+  disableCloseOnSelect: false,
   placement: 'bottom',
   showDropdownListBorder: true,
 };
@@ -106,6 +116,7 @@ const WithManyItemsTemplate = ({
   ariaLabel,
   customPlacement,
   disabled,
+  disableCloseOnSelect,
   placement,
   showDropdownListBorder,
 }) => html`
@@ -113,6 +124,7 @@ const WithManyItemsTemplate = ({
     animate-list=${animateList}
     aria-label=${ariaLabel}
     disabled=${disabled}
+    disable-close-on-select=${disableCloseOnSelect}
     placement=${placement}
     show-dropdown-list-border=${showDropdownListBorder}
     toggle-element-id="toggleElement">
@@ -138,6 +150,7 @@ WithManyItems.args = {
   ariaLabel: '',
   customPlacement: { top: 0, right: 0, bottom: 0, left: 0 },
   disabled: false,
+  disableCloseOnSelect: false,
   placement: 'bottom',
   showDropdownListBorder: true,
 };
