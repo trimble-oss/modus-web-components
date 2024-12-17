@@ -11,7 +11,7 @@ export class ModusUtilityPanel {
   @Prop() expanded = false;
 
   /** Determines if the panel pushes content or displays an overlay. */
-  @Prop() pushContent = false;
+  @Prop() pushContent = true;
 
   @Prop() targetContent: string;
 
@@ -22,6 +22,12 @@ export class ModusUtilityPanel {
   @Event() panelClosed: EventEmitter<void>;
 
   @Element() el: HTMLElement;
+
+  componentDidLoad() {
+    if (this.pushContent) {
+      this.adjustContent();
+    }
+  }
 
   @Watch('expanded')
   handleExpandedChange(newValue: boolean) {

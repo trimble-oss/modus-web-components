@@ -33,8 +33,14 @@ export class ModusDropdown {
   /** (optional) Whether to show the dropdown list's border. */
   @Prop() showDropdownListBorder = true;
 
+  /** (optional) The border radius of the dropdown list. */
+  @Prop() borderRadius = '0';
+
   /** (required) The element id that the list renders near and that triggers the toggling of the list. */
   @Prop() toggleElementId: string;
+
+  /** (optional) Prevents the dropdown from closing when an option is selected. */
+  @Prop() disableCloseOnSelect = false;
 
   /** An event that fires on dropdown close. */
   @Event() dropdownClose: EventEmitter;
@@ -108,7 +114,9 @@ export class ModusDropdown {
     if ((event.target as HTMLElement).closest(`#${this.toggleElementId}`)) {
       this.visible = !this.visible;
     } else {
-      this.visible = false;
+      if (!this.disableCloseOnSelect) {
+        this.visible = false;
+      }
     }
 
     if (!this.visible) {
@@ -142,6 +150,7 @@ export class ModusDropdown {
             left: this.customPlacement?.left ? `${this.customPlacement?.left}px` : left,
             bottom: this.customPlacement?.bottom ? `${this.customPlacement?.bottom}px` : '',
             'min-width': width,
+            'border-radius': `${this.borderRadius}px`,
           }}>
           <slot name="dropdownList" />
         </div>
