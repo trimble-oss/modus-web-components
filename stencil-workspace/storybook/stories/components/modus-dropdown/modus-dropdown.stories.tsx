@@ -91,7 +91,7 @@ export default {
 };
 
 
-const DefaultTemplate = ({ animateList, ariaLabel, borderRadius, customPlacement, disabled, placement, showDropdownListBorder }) => html`
+const DefaultTemplate = ({ animateList, ariaLabel, borderRadius, customPlacement, disableCloseOnSelect, disabled, placement, showDropdownListBorder }) => html`
 
   <modus-dropdown
     animate-list=${animateList}
