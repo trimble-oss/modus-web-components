@@ -88,6 +88,10 @@
     .icon-collapsed {
       transform: rotate(0deg);
     }
+
+    .icon-dropdownvisible {
+      transform: rotate(270deg);
+    }
   }
 
   &.selected {

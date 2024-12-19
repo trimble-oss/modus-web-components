@@ -20,7 +20,7 @@ import { ModusNavbarButton, ModusNavbarDropdownItem, ModusNavbarDropdownOptions,
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { ModusSentimentScaleType } from "./components/modus-sentiment-scale/modus-sentiment-scale.models";
-import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
+import { ModusHeaderNavigationItemInfo, ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
 import { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnSort, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableErrors, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowActionConfig, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 import { Cell, Column, Row } from "@tanstack/table-core";
 import { TableCellEdited, TableContext } from "./components/modus-table/models/table-context.models";
@@ -44,7 +44,7 @@ export { ModusNavbarButton, ModusNavbarDropdownItem, ModusNavbarDropdownOptions,
 export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 export { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 export { ModusSentimentScaleType } from "./components/modus-sentiment-scale/modus-sentiment-scale.models";
-export { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
+export { ModusHeaderNavigationItemInfo, ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
 export { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnSort, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableErrors, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowActionConfig, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 export { Cell, Column, Row } from "@tanstack/table-core";
 export { TableCellEdited, TableContext } from "./components/modus-table/models/table-context.models";
@@ -1180,7 +1180,10 @@ export namespace Components {
         "disabled": boolean;
         "expanded": boolean;
         "focusItem": () => Promise<void>;
-        "isHeader": { enabled: boolean; items: string[] };
+        /**
+          * (optional to enable header dropdown feature)
+         */
+        "isHeader": ModusHeaderNavigationItemInfo;
         /**
           * (optional) Label for the item and the tooltip message.
          */
@@ -4271,7 +4274,10 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         "expanded"?: boolean;
-        "isHeader"?: { enabled: boolean; items: string[] };
+        /**
+          * (optional to enable header dropdown feature)
+         */
+        "isHeader"?: ModusHeaderNavigationItemInfo;
         /**
           * (optional) Label for the item and the tooltip message.
          */

@@ -1,6 +1,7 @@
 import { h, Component, Prop, Element, Event, Watch, EventEmitter, Method, State, Host } from '@stencil/core';
 import { createPopper, Instance as PopperInstance } from '@popperjs/core';
 import { ModusIconMap } from '../../../icons/ModusIconMap';
+import { ModusHeaderNavigationItemInfo } from '../modus-side-navigation.models';
 
 @Component({
   tag: 'modus-side-navigation-item',
@@ -34,7 +35,8 @@ export class ModusSideNavigationItem {
   /** (optional) Shows the expand icon. */
   @Prop({ mutable: true, reflect: true }) showExpandIcon = false;
 
-  @Prop() isHeader: { enabled: boolean; items: string[] } = { enabled: false, items: [] };
+  /** (optional to enable header dropdown feature)*/
+  @Prop() isHeader: ModusHeaderNavigationItemInfo = { enabled: false, items: [] };
 
   @State() dropdownVisible = false;
 
@@ -93,10 +95,6 @@ export class ModusSideNavigationItem {
     this.sideNavListItemClicked.emit({ id: itemId });
     this.dropdownVisible = false; // Close the dropdown
     this.label = itemId;
-    // if (this.expanded) {
-    //   const levelIcon: HTMLElement = this.element.shadowRoot.querySelector('.level-icon');
-    //   levelIcon.style.transform = 'rotate(90deg)';
-    // }
     // this.selected = this.disableSelection ? this.selected : !this.selected;
     this.sideNavItemHeaderClicked?.emit({
       id: itemId,
@@ -151,10 +149,6 @@ export class ModusSideNavigationItem {
       } else {
         this.destroyPopper();
       }
-      // if (this.expanded) {
-      //   const levelIcon: HTMLElement = this.element.shadowRoot.querySelector('.level-icon');
-      //   levelIcon.style.transform = this.dropdownVisible ? 'rotate(270deg)' : 'rotate(90deg)';
-      // }
       return;
     }
 
@@ -217,7 +211,8 @@ export class ModusSideNavigationItem {
 
             {this.expanded && <div class="menu-text">{this.label}</div>}
 
-            <div class={`level-icon ${this.expanded ? 'icon-expanded' : 'icon-collapsed'}`}>
+            <div
+              class={`level-icon ${this.isHeader?.enabled && this.expanded ? (this.dropdownVisible ? 'icon-dropdownvisible' : 'icon-expanded') : 'icon-collapsed'}`}>
               {this.showExpandIcon && <ModusIconMap icon="chevron_right" size="16" />}
             </div>
           </li>

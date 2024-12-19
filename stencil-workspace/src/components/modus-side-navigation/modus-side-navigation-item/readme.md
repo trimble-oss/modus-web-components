@@ -7,15 +7,15 @@
 
 ## Properties
 
-| Property           | Attribute           | Description                                                  | Type                                     | Default                         |
-| ------------------ | ------------------- | ------------------------------------------------------------ | ---------------------------------------- | ------------------------------- |
-| `disableSelection` | `disable-selection` | (optional) Disables item selection.                          | `boolean`                                | `false`                         |
-| `disabled`         | `disabled`          | (optional) The disabled state of side navigation panel item. | `boolean`                                | `false`                         |
-| `isHeader`         | --                  |                                                              | `{ enabled: boolean; items: string[]; }` | `{ enabled: false, items: [] }` |
-| `label`            | `label`             | (optional) Label for the item and the tooltip message.       | `string`                                 | `undefined`                     |
-| `menuIcon`         | `menu-icon`         | (optional) A built-in menu icon string or a image url.       | `string`                                 | `undefined`                     |
-| `selected`         | `selected`          | (optional) The selected state of side navigation panel item. | `boolean`                                | `false`                         |
-| `showExpandIcon`   | `show-expand-icon`  | (optional) Shows the expand icon.                            | `boolean`                                | `false`                         |
+| Property           | Attribute           | Description                                                  | Type                            | Default                         |
+| ------------------ | ------------------- | ------------------------------------------------------------ | ------------------------------- | ------------------------------- |
+| `disableSelection` | `disable-selection` | (optional) Disables item selection.                          | `boolean`                       | `false`                         |
+| `disabled`         | `disabled`          | (optional) The disabled state of side navigation panel item. | `boolean`                       | `false`                         |
+| `isHeader`         | --                  | (optional to enable header dropdown feature)                 | `ModusHeaderNavigationItemInfo` | `{ enabled: false, items: [] }` |
+| `label`            | `label`             | (optional) Label for the item and the tooltip message.       | `string`                        | `undefined`                     |
+| `menuIcon`         | `menu-icon`         | (optional) A built-in menu icon string or a image url.       | `string`                        | `undefined`                     |
+| `selected`         | `selected`          | (optional) The selected state of side navigation panel item. | `boolean`                       | `false`                         |
+| `showExpandIcon`   | `show-expand-icon`  | (optional) Shows the expand icon.                            | `boolean`                       | `false`                         |
 
 
 ## Events
