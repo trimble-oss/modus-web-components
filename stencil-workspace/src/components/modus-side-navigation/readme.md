@@ -34,6 +34,8 @@
 ```mermaid
 graph TD;
   modus-side-navigation --> modus-side-navigation-item
+  modus-side-navigation-item --> modus-list
+  modus-side-navigation-item --> modus-list-item
   modus-side-navigation-item --> modus-tooltip
   style modus-side-navigation fill:#f9f,stroke:#333,stroke-width:4px
 ```

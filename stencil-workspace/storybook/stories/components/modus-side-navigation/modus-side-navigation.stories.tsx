@@ -4,8 +4,6 @@ import { html } from 'lit-html';
 import { withActions } from '@storybook/addon-actions/decorator';
 import { useEffect } from '@storybook/preview-api';
 
-
-
 export default {
   title: 'Components/Side Navigation',
   argTypes: {
@@ -38,13 +36,21 @@ export default {
       table: {
         defaultValue: { summary: `'overlay'` },
         type: {
-          summary: `'overlay' | 'push'` },
+          summary: `'overlay' | 'push'`,
+        },
       },
     },
     expanded: {
       description: 'The expanded state of side navigation panel and items',
       table: {
         type: { summary: 'boolean' },
+      },
+    },
+    isHeader: {
+      name: 'is-header',
+      description: 'To enable header dropdown feature',
+      table: {
+        type: { summary: 'ModusHeaderNavigationItemInfo' },
       },
     },
     targetContent: {
@@ -64,7 +70,7 @@ export default {
       isToolshown: true,
     },
     actions: {
-      handles: ['sideNavExpand', 'sideNavItemClicked', 'mainMenuClick'],
+      handles: ['sideNavExpand', 'sideNavItemClicked', 'mainMenuClick', 'sideNavItemFocus', 'sideNavItemHeaderClicked'],
     },
     controls: { expanded: true, sort: 'requiredFirst' },
     viewMode: 'docs',
@@ -85,12 +91,11 @@ export default {
         const switchTheme = () => {
           const switchTheme = document.querySelector('#switch-theme');
           if (switchTheme.checked) {
-            sideNav.style = blueTheme ;
+            sideNav.style = blueTheme;
+          } else {
+            sideNav.style = '';
           }
-          else{
-          sideNav.style = '';
-          }
-        }
+        };
         const switchMode = () => {
           const switchMode = document.querySelector('#switch-mode');
 
@@ -102,14 +107,14 @@ export default {
         document.addEventListener('switchClick', switchTheme);
         document.addEventListener('mainMenuClick', handleHelpOpen);
 
-        Array.from(document.querySelectorAll('modus-side-navigation-item')).forEach(item => {
+        Array.from(document.querySelectorAll('modus-side-navigation-item')).forEach((item) => {
           item.addEventListener('sideNavItemClicked', (e) => {
             executeListener(e, () => {
               const panel = document.querySelector('#panelcontent');
               document.querySelector('#sidenav-content-title')?.remove();
               const el = document.createElement('h3');
-              el.id = "sidenav-content-title";
-              el.innerHTML = document.querySelector(`#${e.detail.id}`)?.label || "Home page";
+              el.id = 'sidenav-content-title';
+              el.innerHTML = document.querySelector(`#${e.detail.id}`)?.label || 'Home page';
               panel.insertBefore(el, document.querySelector('#overview'));
             });
           });
@@ -220,15 +225,15 @@ export default {
           ];
         };
         const sidenav = document.querySelector('#dataTemplate #sideNav');
-        if(sidenav){
-        initialize();
+        if (sidenav) {
+          initialize();
         }
         return () => {
           document.removeEventListener('switchClick', switchMode);
           document.removeEventListener('switchClick', switchTheme);
           document.removeEventListener('mainMenuClick', handleHelpOpen);
           document.removeEventListener('mainMenuClick', handleHelpOpen);
-          Array.from(document.querySelectorAll('modus-side-navigation-item')).forEach(item => {
+          Array.from(document.querySelectorAll('modus-side-navigation-item')).forEach((item) => {
             item.removeEventListener('sideNavItemClicked', handleHelpOpen);
           });
         };
@@ -339,8 +344,8 @@ export const SideNavigationWithData = (args) => {
   // Decorator pattern applied here to dynamically configure the component properties
   return SideNavigationWithDataTemplate({
     collapseOnClickOutside,
-    maxWidth: maxWidth || '300px',  // Defaulting to '300px' if not provided
-    mode: mode || 'overlay',        // Default to 'overlay' mode if not provided
+    maxWidth: maxWidth || '300px', // Defaulting to '300px' if not provided
+    mode: mode || 'overlay', // Default to 'overlay' mode if not provided
     expanded: expanded !== undefined ? expanded : true, // Default to expanded if not provided
     targetContent: targetContent || '#dataTemplate #panelcontent', // Default target content selector
   });
@@ -354,6 +359,159 @@ SideNavigationWithData.args = {
   targetContent: '#dataTemplate #panelcontent',
 };
 
+export const SideNavigationWithHeader = (args) => {
+  const { isHeader, maxWidth, mode, expanded, targetContent } = args;
 
+  return html`
+    <div id="dataTemplateWithHeader">
+      <modus-switch id="switch-theme" label="Enable blue theme"></modus-switch>
+      <br />
+      <modus-switch id="switch-mode" label="Enable Push Side Navigation"></modus-switch>
+      <div
+        style="width: 100%;align-items: center;height: 56px;box-shadow: 0 0 2px var(--modus-secondary)!important; margin-top: 10px;">
+        <modus-navbar id="navbarWithHeader" show-apps-menu show-help show-main-menu show-notifications> </modus-navbar>
+      </div>
 
+      <div
+        id="container"
+        style="display:flex; min-height:500px; overflow-y: auto; position: relative;box-shadow: 0 0 2px var(--modus-secondary)!important;">
+        <modus-side-navigation
+          max-width=${maxWidth}
+          id="sideNavWithHeader"
+          target-content=${targetContent}
+          mode="overlay"
+          mode=${mode}
+          expanded=${expanded}
+          isHeader=${JSON.stringify(isHeader)}>
+        </modus-side-navigation>
+        <div id="panelcontent" style="padding:10px; transition: all 0.25s linear 0s">
+          <div id="overview">
+            <p>
+              The side navigation of an application provides context through accessible menu options and positions a
+              consistent component to connect to various pages in the application.
+            </p>
+            <p>
+              The side navigation is a collapsible side content of the site’s pages. It is located alongside the page’s
+              primary content. The component is designed to add side content to a fullscreen application. It is activated
+              through the “hamburger” menu in the Navbar.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    ${sideNavWithHeaderScript()}
+  `;
+};
+
+SideNavigationWithHeader.args = {
+  collapseOnClickOutside: true,
+  maxWidth: '300px',
+  mode: 'overlay',
+  expanded: true,
+  targetContent: '#dataTemplateWithHeader #panelcontent',
+};
+
+const sideNavWithHeaderScript = () => {
+  // Check if the script is already added to prevent duplicate execution
+  if (document.querySelector('#sideNavWithHeaderScript')) return;
+
+  const script = document.createElement('script');
+  script.id = 'sideNavWithHeaderScript'; // Add an ID for tracking
+  script.innerHTML = `
+  (function () {
+    const sideNavigationHeader = document.querySelector('#dataTemplateWithHeader #sideNavWithHeader');
+
+    const homeIcon = 'home';
+    const usageIcon = 'flowchart';
+    const stylesIcon = 'bar_graph_line';
+
+    const selectionHandler = (e) => {
+      if (e.detail && e.detail.selected) {
+        const panel = document.querySelector('#panelcontent');
+        document.querySelector('#sidenav-content-title')?.remove();
+        const el = document.createElement('h3');
+        el.id = 'sidenav-content-title';
+        const selectedItem = e.target.data?.find((item) => item.id === e.detail.id);
+        el.innerHTML = selectedItem?.label || 'Home Page';
+        panel.insertBefore(el, document.querySelector('#overview'));
+      }
+    };
+
+    function getLabel(newItems) {
+      sideNavigationHeader.data = [
+        {
+          id: 'Home',
+          menuIcon: homeIcon,
+          label: 'Home',
+          isHeader: {
+            enabled: true,
+            items: ['Home', 'Charts', 'Maps'],
+          },
+          onSideNavItemHeaderClicked: selectionHeaderHandler,
+        },
+        {
+          id: 'usage-menu',
+          menuIcon: usageIcon,
+          label: newItems[0],
+          onSideNavItemClicked: selectionHandler,
+        },
+        {
+          id: 'styles-menu',
+          menuIcon: stylesIcon,
+          label: newItems[1],
+          onSideNavItemClicked: selectionHandler,
+        },
+      ];
+    }
+
+    const selectionHeaderHandler = (e) => {
+      const headerLabel = e.detail.id;
+      let newItems = [];
+
+      if (headerLabel === 'Charts') {
+        newItems = ['Pie Chart', 'Bar Chart'];
+      } else if (headerLabel === 'Maps') {
+        newItems = ['World Map', 'Region Map'];
+      } else {
+        newItems = ['Usage page', 'Styles page'];
+      }
+
+      getLabel(newItems);
+    };
+
+    function initialize() {
+      sideNavigationHeader.data = [
+        {
+          id: 'Home',
+          menuIcon: homeIcon,
+          label: 'Home',
+          isHeader: {
+            enabled: true,
+            items: ['Home', 'Charts', 'Maps'],
+          },
+          onSideNavItemHeaderClicked: selectionHeaderHandler,
+        },
+        {
+          id: 'usage-menu',
+          menuIcon: usageIcon,
+          label: 'Usage page',
+          onSideNavItemClicked: selectionHandler,
+        },
+        {
+          id: 'styles-menu',
+          menuIcon: stylesIcon,
+          label: 'Styles page',
+          onSideNavItemClicked: selectionHandler,
+        },
+      ];
+    }
+
+    initialize();
+    sideNavigationHeader.addEventListener('sideNavItemHeaderClicked', selectionHeaderHandler);
+    sideNavigationHeader.addEventListener('sideNavItemClicked', selectionHandler);
+  })();
+
+  `;
+  return script;
+};
