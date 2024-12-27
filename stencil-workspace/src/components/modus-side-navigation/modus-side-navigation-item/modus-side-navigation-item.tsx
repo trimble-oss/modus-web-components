@@ -177,7 +177,7 @@ export class ModusSideNavigationItem {
             <modus-list-item size="large" borderless onClick={() => this.handleListItemClick(item)}>
               <span class="dropdown-item">
                 <ModusIconMap icon={item?.icon} size="24" />
-                <span class="menuItemText">{item?.label}</span>
+                <span class="menu-item-text">{item?.label}</span>
               </span>
             </modus-list-item>
           ))}

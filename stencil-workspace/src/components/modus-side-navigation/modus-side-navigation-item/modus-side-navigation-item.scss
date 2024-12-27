@@ -168,16 +168,16 @@ $modus-dropdown-list-border-color: var(--modus-dropdown-list-border-color, #6a6e
 
 .dropdown-item {
   align-items: center;
+  cursor: pointer;
   display: flex;
-  padding: 0.5rem 1rem;
-  gap: 0.5rem;
   font-family: $primary-font;
   font-size: $rem-14px;
-  cursor: pointer;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
 
-  .menuItemText {
+  .menu-item-text {
     overflow: hidden;
-    white-space: nowrap;
     text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
