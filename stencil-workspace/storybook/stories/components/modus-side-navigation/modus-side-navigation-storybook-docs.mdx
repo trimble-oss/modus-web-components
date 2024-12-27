@@ -258,6 +258,190 @@ Modus side navigation uses CSS variables for theming ex:`--modus-side-navigation
 </script>
 ```
 
+### Modus Side Navigation with `Header` prop
+
+The `isHeader` property enables a dropdown menu in side navigation items when set to true and configured with menu items. This allows dynamic updates to the menu, navigation, or other interactive features.
+
+#
+
+<Story of={SideNavigation.SideNavigationWithHeader} />
+
+```html
+<div id="dataTemplate">
+  <modus-switch id="switch-theme" label="Enable blue theme"></modus-switch>
+  <br />
+  <modus-switch id="switch-mode" label="Enable Push Side Navigation"></modus-switch>
+  <div
+    style="
+            width: 100%;
+            align-items: center;
+            height: 56px;
+            box-shadow: 0 0 2px var(--modus-secondary) !important;
+            margin-top: 10px;
+          ">
+    <modus-navbar id="navbar" show-apps-menu show-help show-main-menu show-notifications> </modus-navbar>
+  </div>
+
+  <div
+    id="container"
+    style="
+            display: flex;
+            min-height: 500px;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 0 2px var(--modus-secondary) !important;
+          ">
+    <modus-side-navigation max-width="300px" id="sideNav" target-content="#dataTemplate #panelcontent" mode="overlay">
+    </modus-side-navigation>
+
+    <div id="panelcontent" style="padding: 10px; transition: all 0.25s linear 0s">
+      <div id="overview">
+        <p>
+          The side navigation of an application provides context through accessible menu options and positions a consistent
+          component to connect to various pages in the application.
+        </p>
+        <p>
+          The side navigation is a collapsible side content of the site’s pages. It is located alongside the page’s primary
+          content. The component is designed to add side content to a fullscreen application. It is activated through the
+          “hamburger” menu in the Navbar.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.querySelector('#navbar').logoOptions = {
+    primary: {
+      url: 'https://modus.trimble.com/img/trimble-logo.svg',
+    },
+  };
+  document.querySelector('#navbar').profileMenuOptions = {
+    avatarUrl: 'https://avatar.example.com/broken-image-link.png',
+    email: 'modus_user@trimble.com',
+    initials: 'MU',
+    username: 'Modus User',
+  };
+
+  const homeIcon = 'home';
+  const usageIcon = 'flowchart';
+  const stylesIcon = 'bar_graph_line';
+  const accessibilityIcon = 'screen';
+  const sidenav = document.querySelector('modus-side-navigation');
+
+  const selectionHandler = (e) => {
+    if (e.detail) {
+      if (e.detail.selected) {
+        const panel = document.querySelector('#panelcontent');
+        document.querySelector('#sidenav-content-title')?.remove();
+        const el = document.createElement('h3');
+        el.id = 'sidenav-content-title';
+        const selectedItem = e.target.data?.find((item) => item.id === e.detail.id);
+        if (selectedItem) {
+          el.innerHTML = selectedItem.label || 'Home Page';
+        }
+        panel.insertBefore(el, document.querySelector('#overview'));
+      }
+    }
+  };
+
+  function getLabel(newItems) {
+    sidenav.data = [
+      {
+        id: 'Home',
+        menuIcon: homeIcon,
+        label: 'Home',
+        isHeader: {
+          enabled: true,
+          items: ['Home', 'Charts', 'Maps'],
+        },
+        onSideNavItemHeaderClicked: selectionHeaderHandler,
+      },
+      {
+        id: 'usage-menu',
+        menuIcon: usageIcon,
+        label: newItems[0],
+        onSideNavItemClicked: selectionHandler,
+      },
+      {
+        id: 'styles-menu',
+        menuIcon: stylesIcon,
+        label: newItems[1],
+        onSideNavItemClicked: selectionHandler,
+      },
+    ];
+  }
+
+  const selectionHeaderHandler = (e) => {
+    const headerLabel = e.detail.id;
+    let newItems = [];
+
+    if (headerLabel === 'Charts') {
+      newItems = ['Pie Chart', 'Bar Chart'];
+      getLabel(newItems);
+    } else if (headerLabel === 'Maps') {
+      newItems = ['World Map', 'Region Map'];
+      getLabel(newItems);
+    } else {
+      initialize();
+    }
+  };
+
+  const blueTheme = `--modus-side-navigation-link-color:#ffffff;--modus-side-navigation-bg:#0e416c;--modus-side-navigation-item-color:#ffffff;--modus-side-navigation-item-active-bg:#217cbb;--modus-side-navigation-item-hover-bg:#0063a3;--modus-side-navigation-item-icon-color:#ffffff;--modus-side-navigation-item-chevron-color:#ffffff;--modus-side-navigation-item-icon-filter:invert(100%) sepia(0%) saturate(24%) hue-rotate(114deg) brightness(108%) contrast(108%);`;
+
+  function initialize() {
+    sidenav.data = [
+      {
+        id: 'Home',
+        menuIcon: homeIcon,
+        label: 'Home',
+        isHeader: {
+          enabled: true,
+          items: ['Home', 'Charts', 'Maps'],
+        },
+        onSideNavItemHeaderClicked: selectionHeaderHandler,
+      },
+      {
+        id: 'usage-menu',
+        menuIcon: usageIcon,
+        label: 'Usage page',
+        onSideNavItemClicked: selectionHandler,
+      },
+      {
+        id: 'styles-menu',
+        menuIcon: stylesIcon,
+        label: 'Styles page',
+        onSideNavItemClicked: selectionHandler,
+      },
+    ];
+  }
+
+  function addEventHandlers() {
+    document.addEventListener('mainMenuClick', (e) => {
+      const panel = document.querySelector('modus-side-navigation');
+      panel.expanded = !panel.expanded;
+    });
+
+    document.querySelector('#switch-theme').addEventListener('switchClick', (e) => {
+      const sidenav = document.querySelector('modus-side-navigation');
+      if (e.detail) {
+        sidenav.style = blueTheme;
+      } else sidenav.style = '';
+    });
+
+    document.querySelector('#switch-mode').addEventListener('switchClick', (e) => {
+      const sidenav = document.querySelector('modus-side-navigation');
+      sidenav.mode = sidenav.mode === 'push' ? 'overlay' : 'push';
+    });
+  }
+
+  initialize();
+  addEventHandlers();
+  sidenav.addEventListener('sideNavItemHeaderClicked', selectionHeaderHandler);
+  sidenav.addEventListener('sideNavItemClicked', selectionHandler);
+</script>
+```
+
 ### Properties
 
 #### Modus Side Navigation
@@ -279,20 +463,31 @@ Modus side navigation uses CSS variables for theming ex:`--modus-side-navigation
 
 #### Modus Side Navigation Item
 
-| Property           | Attribute           | Description                                                  | Type      | Default     |
-| ------------------ | ------------------- | ------------------------------------------------------------ | --------- | ----------- |
-| `id`               | `id`                | Unique identifier for a side navigation panel item.          | `string`  |             |
-| `disableSelection` | `disable-selection` | (optional) Disables item selection.                          | `boolean` | `false`     |
-| `disabled`         | `disabled`          | (optional) The disabled state of side navigation panel item. | `boolean` | `false`     |
-| `expanded`         | `expanded`          | (optional) The expanded state of side navigation panel item. | `boolean` | `false`     |
-| `label`            | `label`             | (optional) Label for the item and the tooltip message.       | `string`  | `undefined` |
-| `menuIcon`         | `menu-icon`         | (optional) A built-in menu icon string or a image url.       | `string`  | `undefined` |
-| `selected`         | `selected`          | (optional) The selected state of side navigation panel item. | `boolean` | `false`     |
-| `showExpandIcon`   | `show-expand-icon`  | (optional) Shows the expand icon.                            | `boolean` | `false`     |
+| Property           | Attribute           | Description                                                                | Type                            | Default                         |
+| ------------------ | ------------------- | -------------------------------------------------------------------------- | ------------------------------- | ------------------------------- |
+| `id`               | `id`                | Unique identifier for a side navigation panel item.                        | `string`                        |                                 |
+| `disableSelection` | `disable-selection` | (optional) Disables item selection.                                        | `boolean`                       | `false`                         |
+| `disabled`         | `disabled`          | (optional) The disabled state of side navigation panel item.               | `boolean`                       | `false`                         |
+| `expanded`         | `expanded`          | (optional) The expanded state of side navigation panel item.               | `boolean`                       | `false`                         |
+| `label`            | `label`             | (optional) Label for the item and the tooltip message.                     | `string`                        | `undefined`                     |
+| `menuIcon`         | `menu-icon`         | (optional) A built-in menu icon string or a image url.                     | `string`                        | `undefined`                     |
+| `selected`         | `selected`          | (optional) The selected state of side navigation panel item.               | `boolean`                       | `false`                         |
+| `showExpandIcon`   | `show-expand-icon`  | (optional) Shows the expand icon.                                          | `boolean`                       | `false`                         |
+| `isHeader`         | `isHeader`          | (optional) To enable the header dropdown feature of side navigation panel. | `ModusHeaderNavigationItemInfo` | `{ enabled: false, items: [] }` |
 
 ## Events
 
-| Event                | Description                                                           | Type                                              |
-| -------------------- | --------------------------------------------------------------------- | ------------------------------------------------- |
-| `sideNavItemClicked` | An event that fires when mouse click or `Enter` key press on an item. | `CustomEvent<{ id: string; selected: boolean; }>` |
-| `sideNavItemFocus`   | An event that fires when an item is in focus.                         | `CustomEvent<{ id: string; }>`                    |
+| Event                      | Description                                                           | Type                                              |
+| -------------------------- | --------------------------------------------------------------------- | ------------------------------------------------- |
+| `sideNavItemClicked`       | An event that fires when mouse click or `Enter` key press on an item. | `CustomEvent<{ id: string; selected: boolean; }>` |
+| `sideNavItemFocus`         | An event that fires when an item is in focus.                         | `CustomEvent<{ id: string; }>`                    |
+| `sideNavItemHeaderClicked` | An event that fires when an item in header dropdown item is selected. | `CustomEvent<{ id: string; selected: boolean }>`  |
+
+## Types
+
+```ts
+type ModusHeaderNavigationItemInfo{
+  isEnabled : boolean,
+  items: string[];
+};
+```
