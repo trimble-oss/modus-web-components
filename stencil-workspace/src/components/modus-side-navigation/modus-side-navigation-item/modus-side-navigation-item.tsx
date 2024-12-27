@@ -1,7 +1,7 @@
 import { h, Component, Prop, Element, Event, Watch, EventEmitter, Method, State, Host } from '@stencil/core';
 import { createPopper, Instance as PopperInstance } from '@popperjs/core';
 import { ModusIconMap } from '../../../icons/ModusIconMap';
-import { ModusHeaderNavigationItemInfo } from '../modus-side-navigation.models';
+import { ModusHeaderNavigationItemInfo, ModusHeaderNavigationItems } from '../modus-side-navigation.models';
 
 @Component({
   tag: 'modus-side-navigation-item',
@@ -91,13 +91,15 @@ export class ModusSideNavigationItem {
     this.destroyPopper();
   }
 
-  handleListItemClick(itemId: string): void {
-    this.sideNavListItemClicked.emit({ id: itemId });
+  handleListItemClick(itemId: ModusHeaderNavigationItems): void {
+    this.sideNavListItemClicked.emit({ id: itemId?.id });
     this.dropdownVisible = false; // Close the dropdown
-    this.label = itemId;
+    this.label = itemId?.label;
+
+    this.menuIcon = itemId?.icon || this.menuIcon;
     // this.selected = this.disableSelection ? this.selected : !this.selected;
     this.sideNavItemHeaderClicked?.emit({
-      id: itemId,
+      id: itemId?.id,
       selected: this?.selected,
     });
     this.destroyPopper(); // Destroy the popper to reset the positioning
@@ -171,9 +173,12 @@ export class ModusSideNavigationItem {
         class={`dropdown-list ${this.dropdownVisible ? 'visible' : 'hidden'} list-border animate-list`}
         ref={(el) => (this.dropdownRef = el)}>
         <modus-list slot="dropdownList">
-          {this.isHeader?.items?.map((item) => (
+          {this.isHeader?.items?.map((item: ModusHeaderNavigationItems) => (
             <modus-list-item size="large" borderless onClick={() => this.handleListItemClick(item)}>
-              {item}
+              <span class="dropdown-item">
+                <ModusIconMap icon={item?.icon} size="24" />
+                <span class="menuItemText">{item?.label}</span>
+              </span>
             </modus-list-item>
           ))}
         </modus-list>

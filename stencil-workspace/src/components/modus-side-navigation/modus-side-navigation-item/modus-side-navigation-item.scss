@@ -165,3 +165,19 @@ $modus-dropdown-list-border-color: var(--modus-dropdown-list-border-color, #6a6e
     top: 0;
   }
 }
+
+.dropdown-item {
+  align-items: center;
+  display: flex;
+  padding: 0.5rem 1rem;
+  gap: 0.5rem;
+  font-family: $primary-font;
+  font-size: $rem-14px;
+  cursor: pointer;
+
+  .menuItemText {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}

@@ -1,8 +1,14 @@
 import { ModusSideNavigationItemCustomEvent } from '../../components';
 
+export interface ModusHeaderNavigationItems {
+  id: string;
+  label: string;
+  icon?: string;
+}
+
 export interface ModusHeaderNavigationItemInfo {
   enabled: boolean;
-  items: string[];
+  items: ModusHeaderNavigationItems[];
 }
 
 export interface ModusSideNavigationItemInfo {
