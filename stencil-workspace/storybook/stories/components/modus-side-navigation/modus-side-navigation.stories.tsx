@@ -425,6 +425,7 @@ const sideNavWithHeaderScript = () => {
     const homeIcon = 'home';
     const usageIcon = 'flowchart';
     const stylesIcon = 'bar_graph_line';
+    const sideNavHeader = document.querySelector('modus-side-navigation');
 
     const selectionHandler = (e) => {
       if (e.detail && e.detail.selected) {
@@ -439,27 +440,43 @@ const sideNavWithHeaderScript = () => {
     };
 
     function getLabel(newItems) {
-      sideNavigationHeader.data = [
+      sideNavHeader.data = [
         {
           id: 'Home',
           menuIcon: homeIcon,
           label: 'Home',
           isHeader: {
             enabled: true,
-            items: ['Home', 'Charts', 'Maps'],
+            items: [
+              {
+                id: 'Home',
+                label: 'Home',
+                icon: 'warehouse',
+              },
+              {
+                id: 'Charts',
+                label: 'Charts',
+                icon: 'bar_graph',
+              },
+              {
+                id: 'Maps',
+                label: 'Maps',
+                icon: 'location_arrow',
+              },
+            ],
           },
           onSideNavItemHeaderClicked: selectionHeaderHandler,
         },
         {
           id: 'usage-menu',
-          menuIcon: usageIcon,
-          label: newItems[0],
+          menuIcon: newItems[0].icon,
+          label: newItems[0].label,
           onSideNavItemClicked: selectionHandler,
         },
         {
           id: 'styles-menu',
-          menuIcon: stylesIcon,
-          label: newItems[1],
+          menuIcon: newItems[1].icon,
+          label: newItems[1].label,
           onSideNavItemClicked: selectionHandler,
         },
       ];
@@ -470,14 +487,20 @@ const sideNavWithHeaderScript = () => {
       let newItems = [];
 
       if (headerLabel === 'Charts') {
-        newItems = ['Pie Chart', 'Bar Chart'];
+        newItems = [
+          { label: 'Bar graph square', icon: 'bar_graph_square' },
+          { label: 'gantt chart', icon: 'gantt_chart' },
+        ];
+        getLabel(newItems);
       } else if (headerLabel === 'Maps') {
-        newItems = ['World Map', 'Region Map'];
+        newItems = [
+          { label: 'world', icon: 'web' },
+          { label: 'region', icon: 'map_poi' },
+        ];
+        getLabel(newItems);
       } else {
-        newItems = ['Usage page', 'Styles page'];
+        initialize();
       }
-
-      getLabel(newItems);
     };
 
     function initialize() {
@@ -488,7 +511,23 @@ const sideNavWithHeaderScript = () => {
           label: 'Home',
           isHeader: {
             enabled: true,
-            items: ['Home', 'Charts', 'Maps'],
+            items: [
+              {
+                id: 'Home',
+                label: 'Home',
+                icon: 'warehouse',
+              },
+              {
+                id: 'Charts',
+                label: 'Charts',
+                icon: 'bar_graph',
+              },
+              {
+                id: 'Maps',
+                label: 'Maps',
+                icon: 'location_arrow',
+              },
+            ],
           },
           onSideNavItemHeaderClicked: selectionHeaderHandler,
         },
@@ -505,11 +544,10 @@ const sideNavWithHeaderScript = () => {
           onSideNavItemClicked: selectionHandler,
         },
       ];
-    }
-
+}
     initialize();
-    sideNavigationHeader.addEventListener('sideNavItemHeaderClicked', selectionHeaderHandler);
-    sideNavigationHeader.addEventListener('sideNavItemClicked', selectionHandler);
+        sideNavHeader.addEventListener('sideNavItemHeaderClicked', selectionHeaderHandler);
+        sideNavHeader.addEventListener('sideNavItemClicked', selectionHandler);
   })();
 
   `;
