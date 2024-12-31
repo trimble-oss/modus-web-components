@@ -128,7 +128,7 @@ $modus-dropdown-list-border-color: var(--modus-dropdown-list-border-color, #6a6e
   border-radius: $rem-4px;
   display: none;
   max-height: 200px;
-  max-width: 298px;
+  // max-width: 298px;
   opacity: 1;
   overflow-x: auto;
   overflow-y: auto;
@@ -172,8 +172,9 @@ $modus-dropdown-list-border-color: var(--modus-dropdown-list-border-color, #6a6e
   display: flex;
   font-family: $primary-font;
   font-size: $rem-14px;
-  gap: 0.5rem;
+  gap: 1rem;
   padding: 0.5rem 1rem;
+  padding-left: 0.2rem;
 
   .menu-item-text {
     overflow: hidden;

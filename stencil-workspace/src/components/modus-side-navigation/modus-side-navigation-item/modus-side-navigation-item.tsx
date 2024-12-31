@@ -105,8 +105,27 @@ export class ModusSideNavigationItem {
     this.destroyPopper(); // Destroy the popper to reset the positioning
   }
 
+  findParentReference(element: HTMLElement): HTMLElement | null {
+    let currentNode: HTMLElement | ShadowRoot | null = element;
+
+    while (currentNode) {
+      if (currentNode instanceof HTMLElement && currentNode.matches('nav')) {
+        return currentNode;
+      }
+
+      if (currentNode instanceof ShadowRoot) {
+        currentNode = currentNode.host as HTMLElement;
+      } else {
+        currentNode = currentNode.parentElement || (currentNode.getRootNode() as HTMLElement);
+      }
+    }
+
+    return null;
+  }
+
   setupPopper(expanded: boolean): void {
     if (!this.referenceRef || !this.dropdownRef) return;
+    const parentReference = this.findParentReference(this.element)?.clientWidth;
     this.popperInstance = createPopper(this.referenceRef, this.dropdownRef, {
       placement: expanded ? 'bottom-start' : 'right',
       modifiers: [
@@ -123,9 +142,9 @@ export class ModusSideNavigationItem {
           phase: 'write',
           fn: ({ state }) => {
             if (state.placement.startsWith('bottom')) {
-              state.elements.popper.style.width = '300px';
+              state.elements.popper.style.width = `${parentReference - 2}px` || '300px';
             } else if (state.placement.startsWith('right')) {
-              state.elements.popper.style.width = '150px';
+              state.elements.popper.style.width = `250px`;
             }
           },
         },
