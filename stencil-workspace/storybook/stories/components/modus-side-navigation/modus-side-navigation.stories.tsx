@@ -46,13 +46,6 @@ export default {
         type: { summary: 'boolean' },
       },
     },
-    isHeader: {
-      name: 'is-header',
-      description: 'To enable header dropdown feature',
-      table: {
-        type: { summary: 'ModusHeaderNavigationItemInfo' },
-      },
-    },
     targetContent: {
       name: 'target-content',
       description:
@@ -360,7 +353,7 @@ SideNavigationWithData.args = {
 };
 
 export const SideNavigationWithHeader = (args) => {
-  const { isHeader, maxWidth, mode, expanded, targetContent } = args;
+  const { isHeader, maxWidth, mode, expanded, targetContent, collapseOnClickOutside } = args;
 
   return html`
     <div id="dataTemplateWithHeader">
@@ -379,6 +372,7 @@ export const SideNavigationWithHeader = (args) => {
           max-width=${maxWidth}
           id="sideNavWithHeader"
           target-content=${targetContent}
+          collapse-on-click-outside=${collapseOnClickOutside}
           mode="overlay"
           mode=${mode}
           expanded=${expanded}
@@ -544,10 +538,10 @@ const sideNavWithHeaderScript = () => {
           onSideNavItemClicked: selectionHandler,
         },
       ];
-}
+    }
     initialize();
-        sideNavHeader.addEventListener('sideNavItemHeaderClicked', selectionHeaderHandler);
-        sideNavHeader.addEventListener('sideNavItemClicked', selectionHandler);
+    sideNavHeader.addEventListener('sideNavItemHeaderClicked', selectionHeaderHandler);
+    sideNavHeader.addEventListener('sideNavItemClicked', selectionHandler);
   })();
 
   `;
