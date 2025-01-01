@@ -51,7 +51,7 @@
     "@babel/preset-react": "^7.26.3",
     "@stencil/angular-output-target": "^0.10.1",
     "@stencil/postcss": "^2.1.0",
-    "@stencil/react-output-target": "^0.5.3",
+    "@stencil/react-output-target": "^0.8.1",
     "@stencil/sass": "^3.0.12",
     "@trimble-oss/modus-icons": "1.15.0",
     "@types/jest": "^27.5.1",
