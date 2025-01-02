@@ -66,7 +66,6 @@ export class ModusSideNavigationItem {
   private popperInstance: PopperInstance | null = null;
   private dropdownRef: HTMLElement;
   private referenceRef: HTMLElement;
-  private handleBlurTimeout: ReturnType<typeof setTimeout>;
 
   @Method()
   async focusItem(): Promise<void> {
@@ -160,16 +159,6 @@ export class ModusSideNavigationItem {
     }
   }
 
-  handleBlur(): void {
-    clearTimeout(this.handleBlurTimeout);
-    this.handleBlurTimeout = setTimeout(() => {
-      if (this.dropdownVisible) {
-        this.dropdownVisible = false;
-        this.destroyPopper();
-      }
-    }, 100);
-  }
-
   handleClick(): void {
     if (this.disabled) return;
 
@@ -234,7 +223,6 @@ export class ModusSideNavigationItem {
             tabIndex={this.disabled ? -1 : 0}
             class={classes}
             onClick={() => this.handleClick()}
-            onBlur={() => this.handleBlur()}
             onKeyDown={(e) => this.handleKeyDown(e)}
             aria-disabled={this.disabled ? 'true' : null}
             aria-label={this.label}
