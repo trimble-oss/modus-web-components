@@ -163,6 +163,12 @@ $modus-dropdown-list-border-color: var(--modus-dropdown-list-border-color, #6a6e
     right: 0;
     top: 0;
   }
+
+  .list-item::part(list-item-li) {
+    background-color: $modus-side-navigation-item-bg;
+    border-radius: unset;
+    color: $modus-side-navigation-item-color;
+  }
 }
 
 .dropdown-item {
@@ -172,8 +178,7 @@ $modus-dropdown-list-border-color: var(--modus-dropdown-list-border-color, #6a6e
   font-family: $primary-font;
   font-size: $rem-14px;
   gap: 1rem;
-  padding: 0.5rem 1rem;
-  padding-left: 0.2rem;
+  padding: 0.4rem;
 
   .menu-item-text {
     overflow: hidden;

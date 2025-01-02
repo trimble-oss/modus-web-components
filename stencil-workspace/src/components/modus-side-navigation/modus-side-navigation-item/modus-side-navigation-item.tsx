@@ -193,7 +193,7 @@ export class ModusSideNavigationItem {
         ref={(el) => (this.dropdownRef = el)}>
         <modus-list slot="dropdownList">
           {this.isHeader?.items?.map((item: ModusHeaderNavigationItems) => (
-            <modus-list-item size="large" borderless onClick={() => this.handleListItemClick(item)}>
+            <modus-list-item class="list-item" borderless onClick={() => this.handleListItemClick(item)}>
               <span class="dropdown-item">
                 <ModusIconMap icon={item?.icon} size="24" />
                 <span class="menu-item-text">{item?.label}</span>
