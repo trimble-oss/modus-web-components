@@ -31,7 +31,7 @@ body[data-mwc-theme='dark'] {
   --theme-code-bg-color: #6a6e79;
   --theme-code-border-color: #6a6e79;
   --theme-header-underline-color: rgba(255, 255, 255, 0.2);
-  --icon-fill: #ffffff;
+  --icon-fill: #fff;
 }
 
 body {
