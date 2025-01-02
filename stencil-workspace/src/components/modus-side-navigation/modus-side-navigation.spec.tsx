@@ -73,7 +73,7 @@ describe('modus-side-navigation-item', () => {
           <div class="menu-icon">
               <slot name="menu-icon"></slot>
           </div>
-          <div class="level-icon">
+          <div class="icon-collapsed level-icon">
           </div>
         </li>
         </modus-tooltip>
