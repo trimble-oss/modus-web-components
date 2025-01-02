@@ -169,6 +169,10 @@ $modus-dropdown-list-border-color: var(--modus-dropdown-list-border-color, #6a6e
     border-radius: unset;
     color: $modus-side-navigation-item-color;
   }
+
+  .list-item::part(list-item-li):hover {
+    background-color: $modus-side-navigation-item-hover-bg;
+  }
 }
 
 .dropdown-item {
