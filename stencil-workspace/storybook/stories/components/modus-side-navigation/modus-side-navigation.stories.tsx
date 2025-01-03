@@ -445,7 +445,7 @@ const sideNavWithHeaderScript = () => {
               {
                 id: 'Home',
                 label: 'Home',
-                icon: 'warehouse',
+                icon: 'home',
               },
               {
                 id: 'Charts',
@@ -483,13 +483,13 @@ const sideNavWithHeaderScript = () => {
       if (headerLabel === 'Charts') {
         newItems = [
           { label: 'Bar graph square', icon: 'bar_graph_square' },
-          { label: 'gantt chart', icon: 'gantt_chart' },
+          { label: 'Gantt chart', icon: 'gantt_chart' },
         ];
         getLabel(newItems);
       } else if (headerLabel === 'Maps') {
         newItems = [
-          { label: 'world', icon: 'web' },
-          { label: 'region', icon: 'map_poi' },
+          { label: 'World', icon: 'web' },
+          { label: 'Region', icon: 'map_poi' },
         ];
         getLabel(newItems);
       } else {
@@ -509,7 +509,7 @@ const sideNavWithHeaderScript = () => {
               {
                 id: 'Home',
                 label: 'Home',
-                icon: 'warehouse',
+                icon: 'home',
               },
               {
                 id: 'Charts',

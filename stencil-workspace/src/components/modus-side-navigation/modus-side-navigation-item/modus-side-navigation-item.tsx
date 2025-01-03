@@ -84,11 +84,13 @@ export class ModusSideNavigationItem {
     if (this.isHeader?.enabled) {
       this.showExpandIcon = true;
     }
+    document.addEventListener('mousedown', this.handleDocumentClick.bind(this));
   }
 
   disconnectedCallback() {
     this._sideNavItemRemoved.emit(this.element);
     this.destroyPopper();
+    document.removeEventListener('mousedown', this.handleDocumentClick.bind(this));
   }
 
   handleListItemClick(itemId: ModusHeaderNavigationItems): void {
@@ -186,6 +188,17 @@ export class ModusSideNavigationItem {
     }
   }
 
+  handleDocumentClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+
+    if (this.dropdownRef?.contains(target) || this.referenceRef?.contains(target)) {
+      return;
+    }
+
+    this.dropdownVisible = false;
+    this.destroyPopper();
+  }
+
   renderDropdown() {
     return (
       <div
@@ -193,7 +206,12 @@ export class ModusSideNavigationItem {
         ref={(el) => (this.dropdownRef = el)}>
         <modus-list slot="dropdownList">
           {this.isHeader?.items?.map((item: ModusHeaderNavigationItems) => (
-            <modus-list-item class="list-item" borderless onClick={() => this.handleListItemClick(item)}>
+            <modus-list-item
+              key={item.id}
+              class="list-item"
+              borderless
+              onClick={() => this.handleListItemClick(item)}
+              onMouseDown={(e) => e.stopPropagation()}>
               <span class="dropdown-item">
                 <ModusIconMap icon={item?.icon} size="24" />
                 <span class="menu-item-text">{item?.label}</span>
