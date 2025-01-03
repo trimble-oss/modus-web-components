@@ -357,7 +357,7 @@ The `isHeader` property enables a dropdown menu in side navigation items when se
             {
               id: 'Home',
               label: 'Home',
-              icon: 'warehouse',
+              icon: 'home',
             },
             {
               id: 'Charts',
@@ -392,17 +392,16 @@ The `isHeader` property enables a dropdown menu in side navigation items when se
     const headerLabel = e.detail.id;
     let newItems = [];
 
-    console.log('headerLabel', headerLabel);
     if (headerLabel === 'Charts') {
       newItems = [
         { label: 'Bar graph square', icon: 'bar_graph_square' },
-        { label: 'gantt chart', icon: 'gantt_chart' },
+        { label: 'Gantt chart', icon: 'gantt_chart' },
       ];
       getLabel(newItems);
     } else if (headerLabel === 'Maps') {
       newItems = [
-        { label: 'world', icon: 'web' },
-        { label: 'region', icon: 'map_poi' },
+        { label: 'World', icon: 'web' },
+        { label: 'Region', icon: 'map_poi' },
       ];
       getLabel(newItems);
     } else {
@@ -424,7 +423,7 @@ The `isHeader` property enables a dropdown menu in side navigation items when se
             {
               id: 'Home',
               label: 'Home',
-              icon: 'warehouse',
+              icon: 'home',
             },
             {
               id: 'Charts',
