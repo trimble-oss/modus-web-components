@@ -13,7 +13,7 @@ jobs:
     permissions:
       contents: read # for actions/checkout to fetch code
     if: github.repository == 'trimble-oss/modus-web-components'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     name: Build and Deploy Job
     steps:
       - uses: actions/checkout@v4
