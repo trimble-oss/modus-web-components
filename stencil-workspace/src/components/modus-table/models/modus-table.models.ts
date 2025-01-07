@@ -74,6 +74,7 @@ export interface ModusTableRowAction {
 export interface ModusTableRowActionConfig {
   header?: string;
   width?: number;
+  menuOnly?: boolean;
 }
 
 export interface ModusTableRowActionClick {
