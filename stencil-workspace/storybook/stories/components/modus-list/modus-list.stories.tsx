@@ -44,9 +44,11 @@ export default {
   },
 };
 
-const Template = ({ subText, wrapSubText, leftIcon }) => html`
+const Template = ({ subText, wrapSubText, leftIcon, iconColor }) => html`
   <modus-list>
-    <modus-list-item wrap-sub-text=${wrapSubText} sub-text=${subText} left-icon=${leftIcon}>Default</modus-list-item>
+    <modus-list-item wrap-sub-text=${wrapSubText} sub-text=${subText} left-icon=${leftIcon} icon-color=${iconColor}
+      >Default</modus-list-item
+    >
     <modus-list-item selected>Selected</modus-list-item>
     <modus-list-item disabled>Disabled</modus-list-item>
   </modus-list>
