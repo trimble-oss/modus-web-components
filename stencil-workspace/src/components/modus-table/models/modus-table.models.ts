@@ -68,6 +68,7 @@ export interface ModusTableRowAction {
   icon?: string;
   label?: string;
   index: number;
+  color?: string;
   isDisabled?: (row: unknown) => boolean;
 }
 

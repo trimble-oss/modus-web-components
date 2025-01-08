@@ -23,6 +23,13 @@ export default {
         type: { summary: 'string' },
       },
     },
+    iconColor: {
+      description: 'set the color of the left icon',
+      table: {
+        defaultValue: { summary: `'#6A6976'` },
+        type: { summary: 'string' },
+      },
+    },
   },
   parameters: {
     docs: {
@@ -50,4 +57,5 @@ Default.args = {
   subText: 'default',
   wrapSubText: true,
   leftIcon: '',
+  iconColor: '#6A6976',
 };
