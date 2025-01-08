@@ -12,7 +12,7 @@ export default {
       },
     },
     wrapSubText: {
-      description: 'Whether to wrap the sub text',
+      description: 'whether to wrap the sub text',
       table: {
         type: { summary: 'boolean' },
       },
