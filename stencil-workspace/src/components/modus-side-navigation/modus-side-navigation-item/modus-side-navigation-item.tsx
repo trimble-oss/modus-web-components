@@ -164,6 +164,12 @@ export class ModusSideNavigationItem {
   handleClick(): void {
     if (this.disabled) return;
 
+    this.selected = this.disableSelection ? this.selected : this.isHeader?.enabled ? false : !this.selected;
+    this.sideNavItemClicked?.emit({
+      id: this.element.id,
+      selected: this?.selected,
+    });
+
     if (this.isHeader?.enabled) {
       this.dropdownVisible = !this.dropdownVisible;
 
@@ -174,12 +180,6 @@ export class ModusSideNavigationItem {
       }
       return;
     }
-
-    this.selected = this.disableSelection ? this.selected : !this.selected;
-    this.sideNavItemClicked?.emit({
-      id: this.element.id,
-      selected: this?.selected,
-    });
   }
 
   handleKeyDown(e: KeyboardEvent): void {
