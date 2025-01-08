@@ -164,6 +164,10 @@ export namespace Components {
          */
         "filterOptions": (search: string) => Promise<ModusAutocompleteOption[] | string[]>;
         /**
+          * Focus the autocomplete component
+         */
+        "focusInput": () => Promise<void>;
+        /**
           * Whether the search icon is included.
          */
         "includeSearchIcon": boolean;
