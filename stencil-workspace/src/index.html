@@ -18,6 +18,29 @@
   <body data-mwc-theme="light">
     <main>
       <!-- Test components -->
+      <modus-chip chip-style="outline" value="Process Type" >Chip</modus-chip>
+      <br><br>
+
+
+      <modus-switch id="advanced-chip-switch" label="Advanced Chip"></modus-switch>
     </main>
+    <script>
+      const chip = document.querySelector('modus-chip');
+      const switchEl = document.querySelector('#advanced-chip-switch');
+      //ADD EVENT LISTENER
+      switchEl.addEventListener('switchClick', (e) => {
+        if(e.target.checked) {
+          chip.showClose = true;
+          chip.trailingIcon = 'caret_down';
+          chip.borderRadius = '8px';
+
+        } else {
+          chip.showClose = false;
+          chip.trailingIcon = '';
+          chip.borderRadius = '';
+        }
+      });
+
+    </script>
   </body>
 </html>

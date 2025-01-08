@@ -28,6 +28,8 @@ export class ModusChip {
   /** (optional) The chip's trailing icon */
   @Prop() trailingIcon: string;
 
+  @Prop() borderRadius: number;
+
   /** (optional) Whether to show the checkmark. */
   @Prop() showCheckmark = false;
 
@@ -122,6 +124,7 @@ export class ModusChip {
         class={chipClass}
         onClick={this.disabled ? null : (event) => this.onChipClick(event)}
         tabIndex={0}
+        style={this.borderRadius ? { 'border-radius': `${this.borderRadius}px` } : {}}
         type="button">
         {this.imageUrl ? (
           <img src={this.imageUrl} alt="" />
@@ -130,7 +133,7 @@ export class ModusChip {
         ) : null}
         <span {...style}>{this.value}</span>
         {this.trailingIcon && (
-          <ModusIconMap icon={this.trailingIcon} size={this.size === 'small' ? '16' : '24'}></ModusIconMap>
+          <ModusIconMap icon={this.trailingIcon} size={'16'}></ModusIconMap>
         )}
         {this.showClose ? (
           <IconClose onClick={this.disabled ? null : (event) => this.onCloseClick(event)} size={'16'}></IconClose>
