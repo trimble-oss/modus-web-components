@@ -361,7 +361,7 @@ describe('modus-side-navigation-item', () => {
       </svg>
     </modus-side-navigation-item>
   </modus-side-navigation>`);
-    const component = await page.find('modus-side-navigation-item');
+    const component = await page.find('modus-side-navigation-item >>> li');
     const clickedEvent = await page.spyOnEvent('sideNavItemClicked');
     const focusEvent = await page.spyOnEvent('sideNavItemFocus');
 
@@ -369,6 +369,8 @@ describe('modus-side-navigation-item', () => {
     await page.waitForChanges();
 
     expect(clickedEvent).toHaveReceivedEvent();
+    await component.press('Tab');
+    await page.waitForChanges();
     expect(focusEvent).toHaveReceivedEvent();
   });
 });
