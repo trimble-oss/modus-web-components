@@ -1,7 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Component, Prop, h, EventEmitter, Event, Listen } from '@stencil/core';
-import { IconRemove } from '../../icons/svgs/icon-remove';
+import { IconClose } from '../../icons/generated-icons/IconClose';
 import { IconCheck } from '../../icons/svgs/icon-check';
+import { ModusIconMap } from '../../icons/ModusIconMap';
 
 @Component({
   tag: 'modus-chip',
@@ -23,6 +24,9 @@ export class ModusChip {
 
   /** (optional) The image's url. */
   @Prop() imageUrl: string;
+
+  /** (optional) The chip's trailing icon */
+  @Prop() trailingIcon: string;
 
   /** (optional) Whether to show the checkmark. */
   @Prop() showCheckmark = false;
@@ -125,8 +129,11 @@ export class ModusChip {
           <IconCheck size={'16'}></IconCheck>
         ) : null}
         <span {...style}>{this.value}</span>
+        {this.trailingIcon && (
+          <ModusIconMap icon={this.trailingIcon} size={this.size === 'small' ? '16' : '24'}></ModusIconMap>
+        )}
         {this.showClose ? (
-          <IconRemove onClick={this.disabled ? null : (event) => this.onCloseClick(event)} size={'16'}></IconRemove>
+          <IconClose onClick={this.disabled ? null : (event) => this.onCloseClick(event)} size={'16'}></IconClose>
         ) : null}
       </button>
     );
