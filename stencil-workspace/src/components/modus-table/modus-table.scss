@@ -290,6 +290,10 @@ table {
           padding-top: $rem-12px;
         }
 
+        &.row-checkbox > modus-checkbox {
+          justify-content: center;
+        }
+
         &.edit-mode {
           // border: $rem-2px $modus-table-cell-border-color solid;
           box-sizing: border-box;
