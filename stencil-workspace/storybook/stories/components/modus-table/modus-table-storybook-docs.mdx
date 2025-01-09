@@ -45,9 +45,9 @@ Basic table that outputs data in tabular format after accepting `data` and `colu
 <Story id="components-table--default" height={'350px'} />
 
 ```html
-<div style="width: 950px">
-  <modus-table hover="false" sort="false" />
-</div>
+  <div style="width: 950px">
+    <modus-table hover="false" sort="false" />
+  </div>
 <script>
   document.querySelector('modus-table').columns = [
     {
@@ -271,78 +271,17 @@ User can display badge in a table column.
 
 ```html
 <div style="width: 950px">
-  <modus-table column-resize="true" />
+   <modus-table column-resize="true" />
 </div>
-<script>
-  document.querySelector('modus-table').columns = [
-    {
-      header: 'First Name',
-      accessorKey: 'firstName',
-      id: 'first-name',
-      dataType: 'text',
-      size: 150,
-      minSize: 80
-    },
-    {
-      header: 'Last Name',
-      accessorKey: 'lastName',
-      id: 'last-name',
-      dataType: 'text',
-      size: 150,
-      minSize: 80
-    },
-    {
-      header: 'Age',
-      accessorKey: 'age',
-      id: 'age',
-      dataType: 'integer',
-      size: 60,
-      minSize: 60
-    },
-    {
-      header: 'Visits',
-      accessorKey: 'visits',
-      id: 'visits',
-      dataType: 'integer',
-      maxSize: 80,
-      minSize: 80,
-      enableResizing: false,
-    },
-    {
-      header: 'Priority',
-      accessorKey: 'priority',
-      id: 'priority',
-      dataType: 'badge',
-      minSize: 80
-    },
-    {
-      header: 'Profile Progress',
-      accessorKey: 'progress',
-      id: 'progress',
-      dataType: 'integer',
-      minSize: 100,
-    },
-    {
-      header: 'Created At',
-      accessorKey: 'createdAt',
-      id: 'createdAt',
-      dataType: 'date',
-      size: 210,
-      minSize: 100,
-    },
-  ];
-  document.querySelector('modus-table').data = [
-    {
-      firstName: 'Gordon',
-      lastName: 'Lemke',
-      age: 40,
-      visits: 434,
-      progress: 97,
-      priority: {
-        size: 'medium',
-        type: 'counter',
-        text: 'Low',
-        color: 'danger'
+ <script>
+    document.querySelector('modus-table').columns = [
+      {
+        header: 'First Name',
+        accessorKey: 'firstName',
+        id: 'first-name',
+        dataType: 'text',
+        size: 150,
+        minSize: 80
       },
       {
         header: 'Last Name',
@@ -423,7 +362,7 @@ The column sizing feature allows users to dynamically change the width of all co
 
 ```html
 <div style="width: 950px">
-  <modus-table column-resize="true" />
+   <modus-table column-resize="true" />
 </div>
  <script>
     document.querySelector('modus-table').columns = [
@@ -536,7 +475,13 @@ A toolbar is used to perform operations like hiding/showing the columns. It is e
 
 ```html
 <div style="width: 950px">
-  <modus-table hover="true" sort="true" column-resize="true" pagination="true" show-sort-icon-hover="true" toolbar="true" />
+   <modus-table
+      hover="true"
+      sort="true"
+      column-resize="true"
+      pagination="true"
+      show-sort-icon-hover="true"
+      toolbar="true" />
 </div>
  <script>
     document.querySelector('modus-table').toolbarOptions = {
