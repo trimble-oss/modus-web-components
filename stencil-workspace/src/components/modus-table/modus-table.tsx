@@ -499,6 +499,11 @@ export class ModusTable {
   getRowActionsWithOverflow(): TableRowActionWithOverflow[] {
     if (this.rowActions) {
       const sortedActions = this.rowActions.sort((a, b) => a.index - b.index);
+
+      if (this.rowActionsConfig?.menuOnly) {
+        return sortedActions.map((action) => ({ ...action, isOverflow: true }));
+      }
+
       const visibleLimit = sortedActions.length < 5 ? 4 : 3;
       const actionButtons = sortedActions.slice(0, visibleLimit);
       const overflowMenu = sortedActions.slice(visibleLimit).map((action) => ({ ...action, isOverflow: true }));
@@ -749,7 +754,6 @@ export class ModusTable {
 
     const row = rows[currentRowIndex];
     if (row) {
-
       const isSelected = row.getIsSelected();
       if (!isSelected) {
         this.anchorRowIndex = currentRowIndex;
@@ -758,7 +762,6 @@ export class ModusTable {
       row.toggleSelected(undefined, { selectChildren: true });
       this.emitRowSelection();
     }
-
   }
 
   emitRowSelection(): void {

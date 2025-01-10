@@ -994,6 +994,7 @@ RowActions.args = {
   rowActionsConfig: {
     header: 'Row Actions Column',
     width: 160,
+    menuOnly: false,
   },
   rowActions: [
     {

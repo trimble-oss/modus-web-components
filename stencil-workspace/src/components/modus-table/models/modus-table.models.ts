@@ -68,12 +68,14 @@ export interface ModusTableRowAction {
   icon?: string;
   label?: string;
   index: number;
+  iconColor?: string;
   isDisabled?: (row: unknown) => boolean;
 }
 
 export interface ModusTableRowActionConfig {
   header?: string;
   width?: number;
+  menuOnly?: boolean;
 }
 
 export interface ModusTableRowActionClick {
