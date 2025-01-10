@@ -414,8 +414,6 @@ const sideNavWithHeaderScript = () => {
   script.id = 'sideNavWithHeaderScript'; // Add an ID for tracking
   script.innerHTML = `
   (function () {
-    const sideNavigationHeader = document.querySelector('#dataTemplateWithHeader #sideNavWithHeader');
-
     const homeIcon = 'home';
     const usageIcon = 'flowchart';
     const stylesIcon = 'bar_graph_line';
@@ -486,19 +484,37 @@ const sideNavWithHeaderScript = () => {
           { label: 'Gantt chart', icon: 'gantt_chart' },
         ];
         getLabel(newItems);
+
+        const simulatedEvent = {
+          detail: { selected: true, id: 'Charts' },
+          target: { data: [{ id: 'Charts', label: 'Charts' }] },
+        };
+        selectionHandler(simulatedEvent);
       } else if (headerLabel === 'Maps') {
         newItems = [
           { label: 'World', icon: 'web' },
           { label: 'Region', icon: 'map_poi' },
         ];
         getLabel(newItems);
+
+        const simulatedEvent = {
+          detail: { selected: true, id: 'Maps' },
+          target: { data: [{ id: 'Maps', label: 'Maps' }] },
+        };
+        selectionHandler(simulatedEvent);
       } else {
         initialize();
+
+        const simulatedEvent = {
+          detail: { selected: true, id: 'Home' },
+          target: { data: [{ id: 'Home', label: 'Home' }] },
+        };
+        selectionHandler(simulatedEvent);
       }
     };
 
     function initialize() {
-      sideNavigationHeader.data = [
+      sideNavHeader.data = [
         {
           id: 'Home',
           menuIcon: homeIcon,
