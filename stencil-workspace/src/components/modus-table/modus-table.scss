@@ -147,6 +147,10 @@ table {
           padding: $rem-4px $rem-8px;
         }
 
+        &.row-checkbox > modus-checkbox {
+          justify-content: center;
+        }
+
         &.header-base {
           outline: -webkit-focus-ring-color auto 1px;
         }
@@ -287,6 +291,10 @@ table {
         &.row-checkbox {
           padding-bottom: $rem-12px;
           padding-top: $rem-12px;
+        }
+
+        &.row-checkbox > modus-checkbox {
+          justify-content: center;
         }
 
         &.edit-mode {
