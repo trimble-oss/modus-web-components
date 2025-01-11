@@ -18,26 +18,66 @@
   <body data-mwc-theme="light">
     <main>
       <!-- Test components -->
-      <modus-chip chip-style="outline" value="Process Type" >Chip</modus-chip>
+       <modus-dropdown label="Dropdown" id="dropdown" toggle-element-id="toggleElement" animate-list>
+        <modus-chip id="toggleElement" slot="dropdownToggle" advanced-chip chip-style="outline" value="Processes Type" >Chip</modus-chip>
+        <modus-list slot="dropdownList" >
+          <modus-list-item value="1" disabled borderless>Select Process</modus-list-item>
+          <modus-list-item value="2" borderless>Option 2</modus-list-item>
+          <modus-list-item value="3" borderless>Option 3</modus-list-item>
+          <modus-list-item value="4" borderless>Option 4</modus-list-item>
+        </modus-list>
+       </modus-dropdown>
       <br><br>
 
 
-      <modus-switch id="advanced-chip-switch" label="Advanced Chip"></modus-switch>
+      <modus-switch id="advanced-chip-switch" checked label="Advanced Chip"></modus-switch>
+      <modus-switch id="show-close-switch" label="Show Close"></modus-switch>
     </main>
     <script>
       const chip = document.querySelector('modus-chip');
+      const dropdown = document.querySelector('modus-dropdown');
+      const list = document.querySelector('modus-list');
       const switchEl = document.querySelector('#advanced-chip-switch');
-      //ADD EVENT LISTENER
+      const showCloseSwitch = document.querySelector('#show-close-switch');
+      let itemSelected = false;
+      dropdown.addEventListener('dropdownClose', (e) => {
+        console.log('dropdownClose');
+        if(!itemSelected) {
+          chip.active = false;
+        }
+      });
+      chip.addEventListener('chipClick', (e) => {
+        console.log('chipClick');
+        chip.active = true;
+        dropdown.toggleDropdown = true;
+      });
+      chip.addEventListener('closeClick', (e) => {
+        console.log('chipClose');
+        chip.value = 'Processes Type';
+        chip.active = false;
+        chip.showClose = false;
+        dropdown.toggleDropdown = false;
+
+      });
+      list.addEventListener('itemClick', (e) => {
+        console.log('listItem', e.srcElement.innerText);
+        chip.value = 'Processes Type: ' + e.srcElement.innerText;
+        chip.showClose = true;
+        chip.active = true;
+        itemSelected = true;
+      });
       switchEl.addEventListener('switchClick', (e) => {
         if(e.target.checked) {
+          chip.advancedChip = true;
+        } else {
+          chip.advancedChip = false;
+        }
+      });
+      showCloseSwitch.addEventListener('switchClick', (e) => {
+        if(e.target.checked) {
           chip.showClose = true;
-          chip.trailingIcon = 'caret_down';
-          chip.borderRadius = '8px';
-
         } else {
           chip.showClose = false;
-          chip.trailingIcon = '';
-          chip.borderRadius = '';
         }
       });
 
