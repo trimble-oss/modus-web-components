@@ -26,7 +26,7 @@ export class ModusChip {
   /** (optional) The image's url. */
   @Prop() imageUrl: string;
 
-  /** (optional) Sets to advanced mode */
+  /** (optional) Whether the chip is advanced */
   @Prop() advancedChip: boolean;
 
   /** (optional) Whether to show the checkmark. */
@@ -131,14 +131,14 @@ export class ModusChip {
           <IconCheck size={'16'}></IconCheck>
         ) : null}
         <span {...style}>{this.value}</span>
-        {this.advancedChip && (
-          <ModusIconMap icon="caret_down" size={'16'}></ModusIconMap>
-        )}
-        {this.showClose ? this.advancedChip ? (
-          <IconClose onClick={this.disabled ? null : (event) => this.onCloseClick(event)} size={'16'}></IconClose>
-        ): <IconRemove onClick={this.disabled ? null : (event) => this.onCloseClick(event)} size={'16'}></IconRemove>
-        : null
-        }
+        {this.advancedChip && <ModusIconMap icon="caret_down" size={'16'}></ModusIconMap>}
+        {this.showClose ? (
+          this.advancedChip ? (
+            <IconClose onClick={this.disabled ? null : (event) => this.onCloseClick(event)} size={'16'}></IconClose>
+          ) : (
+            <IconRemove onClick={this.disabled ? null : (event) => this.onCloseClick(event)} size={'16'}></IconRemove>
+          )
+        ) : null}
       </button>
     );
   }
