@@ -116,14 +116,14 @@ export class ModusTextInput {
   buttonTogglePassword: HTMLDivElement;
 
   checkValidity() {
-    if (!this.internals || !this.internals.validity) {
+    if(!this.internals || !this.internals.validity){
       return false;
     }
-    return this.internals.checkValidity();
+    return  this.internals.checkValidity()
   }
 
   componentWillLoad() {
-    if (this.checkValidity()) {
+    if(this.checkValidity()){
       this.internals.setFormValue(this.value);
     }
   }
@@ -156,7 +156,7 @@ export class ModusTextInput {
     this.value = value;
 
     if (this.checkValidity()) {
-      this.internals.setFormValue(value);
+      this.internals.setFormValue(value)
     }
 
     this.valueChange.emit(value);

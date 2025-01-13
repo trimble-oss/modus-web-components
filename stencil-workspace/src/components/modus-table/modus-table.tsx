@@ -749,6 +749,7 @@ export class ModusTable {
 
     const row = rows[currentRowIndex];
     if (row) {
+
       const isSelected = row.getIsSelected();
       if (!isSelected) {
         this.anchorRowIndex = currentRowIndex;
@@ -757,6 +758,7 @@ export class ModusTable {
       row.toggleSelected(undefined, { selectChildren: true });
       this.emitRowSelection();
     }
+
   }
 
   emitRowSelection(): void {
