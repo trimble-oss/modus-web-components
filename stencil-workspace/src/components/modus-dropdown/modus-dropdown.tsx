@@ -27,6 +27,9 @@ export class ModusDropdown {
   /** (optional) Disables the dropdown. */
   @Prop() disabled: boolean; // TODO
 
+  /** (optional) Closes dropdown */
+  @Prop() toggleDropdown = true;
+
   /** (optional) The placement of the dropdown in related to the toggleElement. */
   @Prop() placement: 'top' | 'right' | 'bottom' | 'left' = 'bottom';
 
@@ -111,7 +114,7 @@ export class ModusDropdown {
     if (this.disabled) {
       return;
     }
-    if ((event.target as HTMLElement).closest(`#${this.toggleElementId}`)) {
+    if ((event.target as HTMLElement).closest(`#${this.toggleElementId}`) && this.toggleDropdown) {
       this.visible = !this.visible;
     } else {
       if (!this.disableCloseOnSelect) {
