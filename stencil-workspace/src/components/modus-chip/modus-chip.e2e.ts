@@ -98,7 +98,7 @@ describe('modus-chip', () => {
     await page.waitForChanges();
     expect(await chip.getProperty('showClose')).toBeTruthy();
 
-    const shadowIconRemove = await page.find('modus-chip >>> .icon-close');
+    const shadowIconRemove = await page.find('modus-chip >>> .icon-remove');
     expect(shadowIconRemove).not.toBeNull();
   });
 
@@ -168,7 +168,7 @@ describe('modus-chip', () => {
     await page.setContent('<modus-chip show-close></modus-chip>');
     const closeClick = await page.spyOnEvent('closeClick');
     const chipClick = await page.spyOnEvent('chipClick');
-    const shadowCloseIcon = await page.find('modus-chip >>> .icon-close');
+    const shadowCloseIcon = await page.find('modus-chip >>> .icon-remove');
     await page.waitForChanges();
 
     await shadowCloseIcon.click();
@@ -192,7 +192,7 @@ describe('modus-chip', () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-chip show-close size="small"></modus-chip');
-    const shadowIconRemove = await page.find('modus-chip >>> .icon-close');
+    const shadowIconRemove = await page.find('modus-chip >>> .icon-remove');
     await page.waitForChanges();
 
     const computedStyles = shadowIconRemove.getComputedStyle();
