@@ -21,6 +21,14 @@ export default {
         type: { summary: 'string' },
       },
     },
+    advancedChip: {
+      name: 'advanced-chip',
+      description: 'Whether the chip is advanced',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      },
+    },
     chipStyle: {
       name: 'chip-style',
       options: ['solid', 'outline'],
@@ -123,6 +131,7 @@ export default {
 export const Default = ({
   active,
   ariaLabel,
+  advancedChip,
   chipStyle,
   disabled,
   hasError,
@@ -138,6 +147,7 @@ export const Default = ({
   <modus-chip
     active=${active}
     aria-label=${ariaLabel}
+    ?advanced-chip=${advancedChip}
     chip-style=${chipStyle}
     ?disabled=${disabled}
     has-error=${hasError}
@@ -154,6 +164,7 @@ export const Default = ({
 Default.args = {
   active: false,
   ariaLabel: '',
+  advancedChip: false,
   chipStyle: 'solid',
   disabled: false,
   hasError: false,
@@ -170,6 +181,7 @@ Default.args = {
 export const Outline = ({
   active,
   ariaLabel,
+  advancedChip,
   chipStyle,
   disabled,
   hasError,
@@ -184,6 +196,7 @@ export const Outline = ({
   <modus-chip
     active=${active}
     aria-label=${ariaLabel}
+    ?advanced-chip=${advancedChip}
     chip-style=${chipStyle}
     ?disabled=${disabled}
     has-error=${hasError}
@@ -199,6 +212,7 @@ export const Outline = ({
 Outline.args = {
   active: false,
   ariaLabel: '',
+  advancedChip: false,
   chipStyle: 'outline',
   disabled: false,
   hasError: false,
@@ -209,4 +223,101 @@ Outline.args = {
   size: 'medium',
   trailingIcon: '',
   value: 'Bryan',
+};
+
+export const AdvancedChip = ({
+  active,
+  ariaLabel,
+  advancedChip,
+  chipStyle,
+  disabled,
+  hasError,
+  imageUrl,
+  maxWidth,
+  showCheckmark,
+  showClose,
+  size,
+  trailingIcon,
+  value,
+}) => html`
+  <modus-dropdown label="Dropdown" id="dropdown" toggle-element-id="toggleElement" animate-list>
+    <modus-chip
+      id="toggleElement"
+      slot="dropdownToggle"
+      active=${active}
+      aria-label=${ariaLabel}
+      ?advanced-chip=${advancedChip}
+      chip-style=${chipStyle}
+      ?disabled=${disabled}
+      has-error=${hasError}
+      image-url=${imageUrl}
+      max-width=${maxWidth}
+      show-checkmark=${showCheckmark}
+      show-close=${showClose}
+      size=${size}
+      trailing-icon=${trailingIcon}
+      value=${value}>
+    </modus-chip>
+    <modus-list slot="dropdownList">
+      <modus-list-item value="1" disabled borderless>Select Process</modus-list-item>
+      <modus-list-item value="2" borderless>First Option (FO)</modus-list-item>
+      <modus-list-item value="3" borderless>Second Option (SO)</modus-list-item>
+      <modus-list-item value="4" borderless>Next Option (NO)</modus-list-item>
+      <modus-list-item value="4" borderless>Another Option (AO)</modus-list-item>
+    </modus-list>
+  </modus-dropdown>
+
+  ${setAdvancedChip()}
+`;
+AdvancedChip.args = {
+  active: false,
+  ariaLabel: '',
+  advancedChip: true,
+  chipStyle: 'outline',
+  disabled: false,
+  hasError: false,
+  imageUrl: '',
+  maxWidth: '',
+  showCheckmark: false,
+  showClose: false,
+  size: 'medium',
+  trailingIcon: '',
+  value: 'Processes Type',
+};
+
+const setAdvancedChip = () => {
+  const tag = document.createElement('script');
+  tag.innerHTML = `
+      const chip = document.querySelector('modus-chip');
+      const dropdown = document.querySelector('modus-dropdown');
+      const list = document.querySelector('modus-list');
+      let itemSelected = false;
+      dropdown.addEventListener('dropdownClose', (e) => {
+        console.log('dropdownClose');
+        if(!itemSelected) {
+          chip.active = false;
+        }
+      });
+      chip.addEventListener('chipClick', (e) => {
+        console.log('chipClick');
+        chip.active = true;
+        dropdown.toggleDropdown = true;
+      });
+      chip.addEventListener('closeClick', (e) => {
+        console.log('chipClose');
+        chip.value = 'Processes Type';
+        chip.active = false;
+        chip.showClose = false;
+        dropdown.toggleDropdown = false;
+
+      });
+      list.addEventListener('itemClick', (e) => {
+        console.log('listItem', e.srcElement.innerText);
+        chip.value = 'Processes Type: ' + e.srcElement.innerText;
+        chip.showClose = true;
+        chip.active = true;
+        itemSelected = true;
+      });
+  `;
+  return tag;
 };
