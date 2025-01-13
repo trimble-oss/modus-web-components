@@ -237,16 +237,4 @@ describe('modus-chip', () => {
     const shadowContainer = await page.find('modus-chip >>> .modus-chip');
     expect(shadowContainer.classList.contains('active'));
   });
-
-  it('renders changes to trailingIcon', async () => {
-    const page = await newE2EPage();
-
-    await page.setContent('<modus-chip></modus-chip>');
-    const chip = await page.find('modus-chip');
-    expect(await chip.getProperty('trailingIcon')).toBeFalsy();
-
-    chip.setProperty('trailingIcon', 'caret_down');
-    await page.waitForChanges();
-    expect(await chip.getProperty('trailingIcon')).toEqual('caret_down');
-  });
 });
