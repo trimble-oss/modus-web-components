@@ -86,13 +86,6 @@ export default {
         type: { summary: `medium' | 'small'` },
       },
     },
-    trailingIcon: {
-      name: 'trailing-icon',
-      description: "The chip's trailing icon",
-      table: {
-        type: { summary: 'string' },
-      },
-    },
     value: {
       description: "The chip's value",
       table: {
@@ -140,7 +133,6 @@ export const Default = ({
   showCheckmark,
   showClose,
   size,
-  trailingIcon,
   value,
   chipId,
 }) => html`
@@ -156,7 +148,6 @@ export const Default = ({
     show-checkmark=${showCheckmark}
     show-close=${showClose}
     size=${size}
-    trailing-icon=${trailingIcon}
     value=${value}
     chip-id=${chipId}>
   </modus-chip>
@@ -173,7 +164,6 @@ Default.args = {
   showCheckmark: false,
   showClose: false,
   size: 'medium',
-  trailingIcon: '',
   value: 'Bryan',
   chipId: '',
 };
@@ -190,7 +180,6 @@ export const Outline = ({
   showCheckmark,
   showClose,
   size,
-  trailingIcon,
   value,
 }) => html`
   <modus-chip
@@ -205,7 +194,6 @@ export const Outline = ({
     show-checkmark=${showCheckmark}
     show-close=${showClose}
     size=${size}
-    trailing-icon=${trailingIcon}
     value=${value}>
   </modus-chip>
 `;
@@ -221,7 +209,6 @@ Outline.args = {
   showCheckmark: false,
   showClose: false,
   size: 'medium',
-  trailingIcon: '',
   value: 'Bryan',
 };
 
@@ -237,7 +224,6 @@ export const AdvancedChip = ({
   showCheckmark,
   showClose,
   size,
-  trailingIcon,
   value,
 }) => html`
   <modus-dropdown label="Dropdown" id="dropdown" toggle-element-id="toggleElement" animate-list>
@@ -255,7 +241,6 @@ export const AdvancedChip = ({
       show-checkmark=${showCheckmark}
       show-close=${showClose}
       size=${size}
-      trailing-icon=${trailingIcon}
       value=${value}>
     </modus-chip>
     <modus-list slot="dropdownList">
@@ -281,7 +266,6 @@ AdvancedChip.args = {
   showCheckmark: false,
   showClose: false,
   size: 'medium',
-  trailingIcon: '',
   value: 'Processes Type',
 };
 

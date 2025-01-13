@@ -26,7 +26,7 @@ export class ModusChip {
   /** (optional) The image's url. */
   @Prop() imageUrl: string;
 
-  /** (optional) Whether the chip is advanced */
+  /** (optional) Whether the chip is in advanced state */
   @Prop() advancedChip: boolean;
 
   /** (optional) Whether to show the checkmark. */
