@@ -40,6 +40,13 @@ Type: `Promise<void>`
 
 
 
+## Shadow Parts
+
+| Part             | Description |
+| ---------------- | ----------- |
+| `"list-item-li"` |             |
+
+
 ## Dependencies
 
 ### Used by
@@ -47,6 +54,7 @@ Type: `Promise<void>`
  - [modus-action-bar](../modus-action-bar)
  - [modus-navbar](../modus-navbar)
  - [modus-navbar-profile-menu](../modus-navbar/profile-menu)
+ - [modus-side-navigation-item](../modus-side-navigation/modus-side-navigation-item)
  - [modus-table-row-actions-menu](../modus-table/parts/row/actions/modus-table-row-actions-menu)
 
 ### Graph
@@ -55,6 +63,7 @@ graph TD;
   modus-action-bar --> modus-list-item
   modus-navbar --> modus-list-item
   modus-navbar-profile-menu --> modus-list-item
+  modus-side-navigation-item --> modus-list-item
   modus-table-row-actions-menu --> modus-list-item
   style modus-list-item fill:#f9f,stroke:#333,stroke-width:4px
 ```

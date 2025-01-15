@@ -67,6 +67,7 @@ export class ModusListItem {
     return (
       <li
         ref={(el) => (this.listItemRef = el)}
+        part="list-item-li"
         class={containerClass}
         tabIndex={this.disabled ? -1 : 0}
         onClick={() => (!this.disabled ? this.itemClick.emit() : null)}
