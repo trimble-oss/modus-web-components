@@ -1,4 +1,7 @@
+@import './modus-list.vars';
+
 ul {
+  background-color: $modus-list-bg;
   border-radius: $rem-4px;
   display: flex;
   flex-direction: column;
