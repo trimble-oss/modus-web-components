@@ -454,6 +454,10 @@ table {
     z-index: 1;
   }
 
+  td.sticky-right {
+    z-index: 99;
+  }
+
   &.density-relaxed {
     thead {
       tr {
