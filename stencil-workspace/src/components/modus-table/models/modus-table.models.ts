@@ -68,6 +68,8 @@ export interface ModusTableRowAction {
   icon?: string;
   label?: string;
   tooltipText?: string;
+  buttonStyle?: 'borderless' | 'fill' | 'outline';
+  color?: 'danger' |'primary' | 'secondary' | 'tertiary' | 'special'
   index: number;
   isDisabled?: (row: unknown) => boolean;
 }
