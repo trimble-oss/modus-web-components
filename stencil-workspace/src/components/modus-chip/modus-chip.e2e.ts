@@ -204,7 +204,7 @@ describe('modus-chip', () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-chip aria-label="test label"></modus-chip>');
-    let element = await page.find('modus-chip >>> button');
+    const element = await page.find('modus-chip >>> button');
     expect(element).toBeDefined();
     expect(element).toHaveAttribute('aria-label');
     expect(element.getAttribute('aria-label')).toEqual('test label');
@@ -214,7 +214,7 @@ describe('modus-chip', () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-chip></modus-chip>');
-    let element = await page.find('modus-chip >>> button');
+    const element = await page.find('modus-chip >>> button');
     expect(element).toBeDefined();
     expect(element).not.toHaveAttribute('aria-label');
   });
@@ -223,7 +223,7 @@ describe('modus-chip', () => {
     const page = await newE2EPage();
 
     await page.setContent('<modus-chip aria-label=""></modus-chip>');
-    let element = await page.find('modus-chip >>> button');
+    const element = await page.find('modus-chip >>> button');
     expect(element).toBeDefined();
     expect(element).not.toHaveAttribute('aria-label');
   });
@@ -236,5 +236,27 @@ describe('modus-chip', () => {
 
     const shadowContainer = await page.find('modus-chip >>> .modus-chip');
     expect(shadowContainer.classList.contains('active'));
+  });
+
+  it('should not emit chipClick event on Click when disabled', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-chip disabled></modus-chip>');
+    const chipClick = await page.spyOnEvent('chipClick');
+
+    const shadowContainer = await page.find('modus-chip >>> .modus-chip');
+    await shadowContainer.click();
+    await page.waitForChanges();
+    expect(chipClick).not.toHaveReceivedEvent();
+  });
+
+  it('should not emit chipClick event on keydown when disabled', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<modus-chip disabled></modus-chip>');
+    const chipClick = await page.spyOnEvent('chipClick');
+
+    const shadowContainer = await page.find('modus-chip >>> .modus-chip');
+    await shadowContainer.press('Enter');
+    await page.waitForChanges();
+    expect(chipClick).not.toHaveReceivedEvent();
   });
 });
