@@ -226,7 +226,7 @@ export const AdvancedChip = ({
   size,
   value,
 }) => html`
-  <modus-dropdown label="Dropdown" id="dropdown" toggle-element-id="toggleElement" animate-list>
+  <modus-dropdown label="Dropdown" ?disabled=${disabled} id="dropdown" toggle-element-id="toggleElement" animate-list>
     <modus-chip
       id="toggleElement"
       slot="dropdownToggle"

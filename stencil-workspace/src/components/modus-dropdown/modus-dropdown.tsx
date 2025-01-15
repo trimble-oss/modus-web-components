@@ -27,7 +27,7 @@ export class ModusDropdown {
   /** (optional) Disables the dropdown. */
   @Prop() disabled: boolean; // TODO
 
-  /** (optional) Closes dropdown */
+  /** (optional) Toggles the list when clicked. */
   @Prop() toggleDropdown = true;
 
   /** (optional) The placement of the dropdown in related to the toggleElement. */
