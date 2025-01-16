@@ -95,7 +95,7 @@ export class ModusSideNavigationItem {
     this.sideNavListItemClicked.emit({ id: itemId });
     this.dropdownVisible = false; // Close the dropdown
     this.label = itemId;
-    // this.selected = this.disableSelection ? this.selected : !this.selected;
+
     this.sideNavItemHeaderClicked?.emit({
       id: itemId,
       selected: this?.selected,
