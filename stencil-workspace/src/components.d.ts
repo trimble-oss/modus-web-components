@@ -594,6 +594,10 @@ export namespace Components {
          */
         "ariaLabel": string | null;
         /**
+          * (optional) The border radius of the dropdown list.
+         */
+        "borderRadius": string;
+        /**
           * (optional) Determines custom dropdown placement offset.
          */
         "customPlacement": {
@@ -602,6 +606,10 @@ export namespace Components {
     bottom?: number;
     left?: number;
   };
+        /**
+          * (optional) Prevents the dropdown from closing when an option is selected.
+         */
+        "disableCloseOnSelect": boolean;
         /**
           * (optional) Disables the dropdown.
          */
@@ -719,6 +727,10 @@ export namespace Components {
          */
         "disabled": boolean;
         "focusItem": () => Promise<void>;
+        /**
+          * (optional) add color to left Icon
+         */
+        "iconColor": string;
         /**
           * (optional) Takes the icon name and shows the icon aligned to the left of the button text.
          */
@@ -3600,6 +3612,10 @@ declare namespace LocalJSX {
          */
         "ariaLabel"?: string | null;
         /**
+          * (optional) The border radius of the dropdown list.
+         */
+        "borderRadius"?: string;
+        /**
           * (optional) Determines custom dropdown placement offset.
          */
         "customPlacement"?: {
@@ -3608,6 +3624,10 @@ declare namespace LocalJSX {
     bottom?: number;
     left?: number;
   };
+        /**
+          * (optional) Prevents the dropdown from closing when an option is selected.
+         */
+        "disableCloseOnSelect"?: boolean;
         /**
           * (optional) Disables the dropdown.
          */
@@ -3720,6 +3740,10 @@ declare namespace LocalJSX {
           * (optional) Disables the list item
          */
         "disabled"?: boolean;
+        /**
+          * (optional) add color to left Icon
+         */
+        "iconColor"?: string;
         /**
           * (optional) Takes the icon name and shows the icon aligned to the left of the button text.
          */

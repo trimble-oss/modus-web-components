@@ -881,12 +881,14 @@ interface ModusTableRowAction {
   icon?: string;
   label?: string;
   index: number;
+  iconColor?: string;
   isDisabled?: (row: unknown) => boolean;
 }
 
 interface ModusTableRowActionConfig {
   header?: string;
   width?: number;
+  menuOnly?:boolean;
 }
 
 interface ModusTableManualPaginationOptions {
@@ -921,7 +923,8 @@ Users can use keyboard navigation to perform different actions.
 | Column Visibility | The meatball icon buttom will get focus by using the <kbd>Tab</kbd> key. By pressing <kbd>Enter</kbd> or <kbd>Space</kbd>, a dropdown will be opened; press the <kbd>Escape</kbd> key to close the dropdown. Using `Tab or Shift+Tab` / `ArrowUp or ArrowDown`, column checkboxes/items can get focus to change state by pressing the <kbd>Enter</kbd> or <kbd>Space</kbd>.                                                                                   |
 | Cell Navigation   | Table cells can be navigated using keys like <kbd>Tab</kbd>, `Shift+Tab`, `ArrowUp`, and `ArrowDown`. Additionally, the <kbd>Tab</kbd> key can be used to focus on elements inside a cell.                                                                                                                                                                                                                                                                    |
 | Inline Editing    | When a cell is in focus, pressing the <kbd>Enter</kbd> key will activate the cell editor. The cell's value will be saved either when the focus shifts to another cell or when the <kbd>Enter</kbd> key is pressed again, which will also move the focus to the cell below in the same row. <kbd>Escape</kbd> key reverts the cell value to its original state and closes the editor. Note: Select cell editor saves the value only when the cell loses focus. |
-| Row Selection     | When multiple selection is enabled in the row selection options, users can continuously select or deselect items by using Shift + Arrow Up/Arrow Down. Additionally, if an item is selected and the Shift key is held while selecting another item, it allows for the continuous selection of all items between the two selected items. In the case of expanded items, the `subRowSelection` option should be set to true to support this behavior.             |
+| Row Selection     | When multiple selection is enabled in the row selection options, users can continuously select or deselect items by using Shift + Arrow Up/Arrow Down. Additionally, if an item is selected and the Shift key is held while selecting another item, it allows for the continuous selection of all items between the two selected items. In the case of expanded items, the `subRowSelection` option should be set to true to support this behavior.           |
+
 ## Properties
 
 | Property                  | Attribute                 | Description                                                                                                                                                                                   | Type                                   | Default                                                                                     |

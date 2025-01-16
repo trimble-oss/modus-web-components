@@ -12,7 +12,7 @@ export default {
       },
     },
     wrapSubText: {
-      description: 'Whether to wrap the sub text',
+      description: 'whether to wrap the sub text',
       table: {
         type: { summary: 'boolean' },
       },
@@ -20,6 +20,13 @@ export default {
     leftIcon: {
       description: 'set the left icon for the list-item',
       table: {
+        type: { summary: 'string' },
+      },
+    },
+    iconColor: {
+      description: 'set the color of the left icon',
+      table: {
+        defaultValue: { summary: `'#6A6976'` },
         type: { summary: 'string' },
       },
     },
@@ -37,9 +44,11 @@ export default {
   },
 };
 
-const Template = ({ subText, wrapSubText, leftIcon }) => html`
+const Template = ({ subText, wrapSubText, leftIcon, iconColor }) => html`
   <modus-list>
-    <modus-list-item wrap-sub-text=${wrapSubText} sub-text=${subText} left-icon=${leftIcon}>Default</modus-list-item>
+    <modus-list-item wrap-sub-text=${wrapSubText} sub-text=${subText} left-icon=${leftIcon} icon-color=${iconColor}
+      >Default</modus-list-item
+    >
     <modus-list-item selected>Selected</modus-list-item>
     <modus-list-item disabled>Disabled</modus-list-item>
   </modus-list>
@@ -50,4 +59,5 @@ Default.args = {
   subText: 'default',
   wrapSubText: true,
   leftIcon: '',
+  iconColor: '#6A6976',
 };
