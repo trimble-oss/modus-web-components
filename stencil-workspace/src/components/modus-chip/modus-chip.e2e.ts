@@ -254,7 +254,7 @@ describe('modus-chip', () => {
     await page.setContent('<modus-chip disabled></modus-chip>');
     const chipClick = await page.spyOnEvent('chipClick');
 
-    const shadowContainer = await page.find('modus-chip >>> .modus-chip');
+    const shadowContainer = await page.find('modus-chip');
     await shadowContainer.press('Enter');
     await page.waitForChanges();
     expect(chipClick).not.toHaveReceivedEvent();

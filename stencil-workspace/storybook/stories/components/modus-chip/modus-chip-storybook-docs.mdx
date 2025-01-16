@@ -1,4 +1,5 @@
 import { Anchor } from '@storybook/addon-docs';
+import { Story } from '@storybook/addon-docs';
 
 # Chip
 
@@ -44,6 +45,7 @@ import { Anchor } from '@storybook/addon-docs';
 <modus-chip has-error image-url="https://example.com/image.jpg" show-close chip-style="outline" value="Bryan"></modus-chip>
 <modus-chip disabled image-url="https://example.com/image.jpg" show-close chip-style="outline" value="Bryan"></modus-chip>
 
+<Story id="components-chips--advanced-chip" />
 <modus-chip
   image-url="https://randomuser.me/api/portraits/lego/1.jpg"
   show-close
@@ -56,6 +58,53 @@ import { Anchor } from '@storybook/addon-docs';
   chipId="chip-2"
   size="small"
   value="Pet 2"></modus-chip>
+<modus-dropdown label="Dropdown" ?disabled=${disabled} id="dropdown" toggle-element-id="toggleElement" animate-list>
+    <modus-chip
+      id="toggleElement"
+      slot="dropdownToggle"
+      advanced-chip
+      value="Processes Type">
+    </modus-chip>
+    <modus-list slot="dropdownList">
+      <modus-list-item value="1" disabled borderless>Select Process</modus-list-item>
+      <modus-list-item value="2" borderless>First Option (FO)</modus-list-item>
+      <modus-list-item value="3" borderless>Second Option (SO)</modus-list-item>
+      <modus-list-item value="4" borderless>Next Option (NO)</modus-list-item>
+      <modus-list-item value="4" borderless>Another Option (AO)</modus-list-item>
+    </modus-list>
+</modus-dropdown>
+
+<script>
+ const chip = document.querySelector('modus-chip');
+  const dropdown = document.querySelector('modus-dropdown');
+  const list = document.querySelector('modus-list');
+  let itemSelected = false;
+  dropdown.addEventListener('dropdownClose', (e) => {
+      console.log('dropdownClose');
+      if(!itemSelected) {
+        chip.active = false;
+      }
+  });
+  chip.addEventListener('chipClick', (e) => {
+      console.log('chipClick');
+      chip.active = true;
+      dropdown.toggleDropdown = true;
+  });
+  chip.addEventListener('closeClick', (e) => {
+      console.log('chipClose');
+      chip.value = 'Processes Type';
+      chip.active = false;
+      chip.showClose = false;
+      dropdown.toggleDropdown = false;
+  });
+  list.addEventListener('itemClick', (e) => {
+      console.log('listItem', e.srcElement.innerText);
+      chip.value = 'Processes Type: ' + e.srcElement.innerText;
+      chip.showClose = true;
+      chip.active = true;
+      itemSelected = true;
+  });
+</script>
 ```
 
 ### Properties
