@@ -75,10 +75,9 @@ export class ModusChip {
 
   @Listen('keydown')
   elementKeydownHandler(event: KeyboardEvent): void {
-    switch (event.code) {
-      case 'Enter':
-        this.chipClick.emit(event);
-        break;
+    if (event.code === 'Enter' || event.code === 'Space') {
+      event.preventDefault();
+      this.chipClick.emit(event);
     }
   }
 
@@ -116,8 +115,9 @@ export class ModusChip {
         aria-label={this.ariaLabel || undefined}
         id={this.chipId || undefined}
         class={chipClass}
-        onClick={this.disabled ? null : (event) => this.onChipClick(event)}
-        tabIndex={0}
+        disabled={this.disabled}
+        onClick={(event) => this.onChipClick(event)}
+        tabIndex={this.disabled ? -1 : 0}
         type="button">
         {this.imageUrl ? (
           <img src={this.imageUrl} alt="" />
