@@ -1,5 +1,6 @@
 import { Anchor } from '@storybook/addon-docs';
-import { Story } from '@storybook/addon-docs';
+import { Meta, Story } from '@storybook/blocks';
+import * as Chip from './modus-chip.stories.tsx';
 
 # Chip
 
@@ -34,6 +35,9 @@ import { Story } from '@storybook/addon-docs';
 <modus-chip image-url="https://randomuser.me/api/portraits/lego/1.jpg" show-close chip-id="chip-id-1" size="small" value="Pet 1"></modus-chip>
 <modus-chip image-url="https://randomuser.me/api/portraits/lego/1.jpg" show-close chip-id="chip-id-2" size="small" value="Pet 2"></modus-chip>
 
+### Advanced Chip
+<Story of={Chip.AdvancedChip}/>
+
 ```html
 <modus-chip image-url="https://example.com/image.jpg" show-close value="Bryan"></modus-chip>
 <modus-chip active image-url="https://example.com/image.jpg" show-close value="Bryan"></modus-chip>
@@ -45,7 +49,6 @@ import { Story } from '@storybook/addon-docs';
 <modus-chip has-error image-url="https://example.com/image.jpg" show-close chip-style="outline" value="Bryan"></modus-chip>
 <modus-chip disabled image-url="https://example.com/image.jpg" show-close chip-style="outline" value="Bryan"></modus-chip>
 
-<Story id="components-chips--advanced-chip" />
 <modus-chip
   image-url="https://randomuser.me/api/portraits/lego/1.jpg"
   show-close

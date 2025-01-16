@@ -272,7 +272,7 @@ AdvancedChip.args = {
 const setAdvancedChip = () => {
   const tag = document.createElement('script');
   tag.innerHTML = `
-      const chip = document.querySelector('modus-chip');
+      const chip = document.querySelector('#toggleElement');
       const dropdown = document.querySelector('modus-dropdown');
       const list = document.querySelector('modus-list');
       let itemSelected = false;
