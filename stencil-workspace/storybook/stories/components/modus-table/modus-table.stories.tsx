@@ -999,7 +999,7 @@ RowActions.args = {
     {
       id: '1',
       label: 'Add',
-      tooltipText:"Add",
+      tooltipText: 'Add',
       index: 0,
     },
 
@@ -1007,7 +1007,7 @@ RowActions.args = {
       id: '2',
       icon: 'calendar',
       label: 'calendar',
-      tooltipText:"Calendar",
+      tooltipText: 'Calendar',
       index: 1,
     },
 
@@ -1015,7 +1015,7 @@ RowActions.args = {
       id: '3',
       icon: 'cancel_circle',
       label: 'Cancel',
-      tooltipText:"Cancel",
+      tooltipText: 'Cancel',
       index: 2,
     },
     {
@@ -1023,14 +1023,14 @@ RowActions.args = {
       index: 3,
       icon: 'add',
       label: 'Add',
-      tooltipText:"Add",
+      tooltipText: 'Add',
     },
     {
       id: '5',
       index: 4,
       icon: 'delete',
       label: 'Delete',
-      tooltipText:"Delete",
+      tooltipText: 'Delete',
     },
   ],
   data: makeData(7),
