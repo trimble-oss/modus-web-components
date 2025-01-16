@@ -10,7 +10,7 @@
   "dependencies": {
     "@babel/preset-env": "^7.26.0",
     "@storybook/addon-docs": "^8.4.7",
-    "@storybook/components": "^8.4.7",
+    "@storybook/components": "^8.5.0",
     "@storybook/theming": "^8.4.7",
     "@types/mdx": "^2.0.13",
     "lit-html": "^3.2.1"
