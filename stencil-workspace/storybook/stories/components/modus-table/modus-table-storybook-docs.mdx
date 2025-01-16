@@ -884,12 +884,14 @@ interface ModusTableRowAction {
   buttonStyle?: 'borderless' | 'fill' | 'outline';
   color?: 'danger' |'primary' | 'secondary' | 'tertiary' | 'special'
   index: number;
+  iconColor?: string;
   isDisabled?: (row: unknown) => boolean;
 }
 
 interface ModusTableRowActionConfig {
   header?: string;
   width?: number;
+  menuOnly?:boolean;
 }
 
 interface ModusTableManualPaginationOptions {

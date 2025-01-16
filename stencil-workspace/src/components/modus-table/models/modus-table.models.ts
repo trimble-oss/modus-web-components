@@ -71,12 +71,14 @@ export interface ModusTableRowAction {
   buttonStyle?: 'borderless' | 'fill' | 'outline';
   color?: 'danger' | 'primary' | 'secondary' | 'tertiary' | 'special';
   index: number;
+  iconColor?: string;
   isDisabled?: (row: unknown) => boolean;
 }
 
 export interface ModusTableRowActionConfig {
   header?: string;
   width?: number;
+  menuOnly?: boolean;
 }
 
 export interface ModusTableRowActionClick {
