@@ -364,7 +364,18 @@ export class ModusAutocomplete {
     this.valueChange.emit(search);
   };
 
+  handleChipDelete = (e,chip) => {
+    if(e.key !="Delete") {
+      return;
+    }
+   this.removeChip(chip)
+  }
+
   handleCloseClick(chipValue: ModusAutocompleteOption) {
+    this.removeChip(chipValue);
+  }
+
+  removeChip(chipValue: ModusAutocompleteOption) {
     if (this.selectedChips.length != 0 && !this.readOnly) {
       this.selectedChips = this.selectedChips.filter((chip) => chip.id !== chipValue.id);
       this.valueChange.emit(this.selectedChips.map((v) => v.value));
@@ -541,6 +552,7 @@ export class ModusAutocomplete {
               value={chip.value}
               chipId={chip.id}
               disabled={this.disabled}
+              onKeyDown={(e) => this.handleChipDelete(e,chip)}
               size={this.size === 'large' ? 'medium' : 'small'}
               show-close
               onCloseClick={() => this.handleCloseClick(chip)}></modus-chip>
