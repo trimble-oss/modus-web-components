@@ -16,6 +16,7 @@ import {
 import { IconSearch } from '../../icons/svgs/icon-search';
 import { generateElementId } from '../../utils/utils';
 import { IconCheck } from '../../icons/generated-icons/IconCheck';
+import { IconClose } from '../../icons/svgs/icon-close';
 
 export interface ModusAutocompleteOption {
   id: string;
@@ -293,6 +294,17 @@ export class ModusAutocomplete {
   handleClear(): void {
     this.selectedChips = [];
     this.selectedOption = '';
+    this.value = '';
+    this.valueChange.emit(this.multiple ? [] : '');
+    this.selectionsChanged.emit(this.multiple ? [] : null);
+  }
+
+  handleClearKeyDown(event: KeyboardEvent): void {
+    if (event.key !== 'Enter' && event.key !== ' ') {
+      return;
+    }
+
+    this.handleClear();
   }
 
   handleOptionClick = (option: ModusAutocompleteOption) => {
@@ -464,7 +476,6 @@ export class ModusAutocomplete {
     <modus-text-input
       class="input"
       autocomplete="off"
-      clearable={this.clearable && !this.readOnly && !!this.value}
       includeSearchIcon={false}
       onFocus={this.handleTextInputFocus}
       onValueChange={(searchEvent: CustomEvent<string>) => this.handleTextInputValueChange(searchEvent)}
@@ -504,6 +515,9 @@ export class ModusAutocomplete {
 
   render(): unknown {
     const classes = `autocomplete ${this.classBySize.get(this.size)}`;
+    const iconSize = this.size === 'large' ? '24' : '16';
+    const showClearIcon = this.clearable && !this.readOnly && (!!this.value || this.selectedChips.length > 0);
+
     return (
       <div
         aria-disabled={this.disabled ? 'true' : undefined}
@@ -546,6 +560,17 @@ export class ModusAutocomplete {
               onCloseClick={() => this.handleCloseClick(chip)}></modus-chip>
           ))}
           {this.TextInput()}
+          {showClearIcon && (
+            <span
+              class="icons clear"
+              tabIndex={0}
+              onKeyDown={(event) => this.handleClearKeyDown(event)}
+              onClick={() => this.handleClear()}
+              role="button"
+              aria-label="Clear entry">
+              <IconClose size={iconSize} />
+            </span>
+          )}
         </div>
         <div class={'error'}>{this.errorText ? <label class="sub-text error">{this.errorText}</label> : null}</div>
         <div

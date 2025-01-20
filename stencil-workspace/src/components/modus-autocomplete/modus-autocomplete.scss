@@ -73,6 +73,26 @@
         height: 1.875rem;
       }
     }
+
+    .icons {
+      align-items: center;
+      color: $modus-input-helper-icon-color;
+      cursor: pointer;
+      display: flex;
+      font-size: $rem-16px;
+      height: 100%;
+      justify-content: center;
+      width: 2rem;
+
+      &.clear {
+        cursor: pointer;
+        min-height: 1.875rem;
+
+        &:hover svg path {
+          opacity: 0.75;
+        }
+      }
+    }
   }
 
   .error {
