@@ -410,6 +410,10 @@ export namespace Components {
          */
         "active": boolean;
         /**
+          * (optional) Whether the chip is in advanced state
+         */
+        "advancedChip": boolean;
+        /**
           * (optional) The chip's aria-label.
          */
         "ariaLabel": string | null;
@@ -622,6 +626,10 @@ export namespace Components {
           * (optional) Whether to show the dropdown list's border.
          */
         "showDropdownListBorder": boolean;
+        /**
+          * (optional) Toggles the list when clicked.
+         */
+        "toggleDropdown": boolean;
         /**
           * (required) The element id that the list renders near and that triggers the toggling of the list.
          */
@@ -3392,6 +3400,10 @@ declare namespace LocalJSX {
          */
         "active"?: boolean;
         /**
+          * (optional) Whether the chip is in advanced state
+         */
+        "advancedChip"?: boolean;
+        /**
           * (optional) The chip's aria-label.
          */
         "ariaLabel"?: string | null;
@@ -3644,6 +3656,10 @@ declare namespace LocalJSX {
           * (optional) Whether to show the dropdown list's border.
          */
         "showDropdownListBorder"?: boolean;
+        /**
+          * (optional) Toggles the list when clicked.
+         */
+        "toggleDropdown"?: boolean;
         /**
           * (required) The element id that the list renders near and that triggers the toggling of the list.
          */
