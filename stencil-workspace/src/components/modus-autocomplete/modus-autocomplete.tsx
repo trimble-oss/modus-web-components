@@ -516,7 +516,8 @@ export class ModusAutocomplete {
   render(): unknown {
     const classes = `autocomplete ${this.classBySize.get(this.size)}`;
     const iconSize = this.size === 'large' ? '24' : '16';
-    const showClearIcon = this.clearable && !this.readOnly && (!!this.value || this.selectedChips.length > 0);
+    const showClearIcon =
+      this.clearable && !this.readOnly && !this.disabled && (!!this.value || this.selectedChips.length > 0);
 
     return (
       <div
