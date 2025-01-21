@@ -46,6 +46,13 @@ export default {
         type: { summary: 'boolean' },
       },
     },
+    isHeader: {
+      name: 'is-header',
+      description: 'To enable header dropdown feature',
+      table: {
+        type: { summary: 'ModusHeaderNavigationItemInfo' },
+      },
+    },
     targetContent: {
       name: 'target-content',
       description:

@@ -1,6 +1,6 @@
 {
   "name": "@trimble-oss/modus-web-components",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "license": "MIT",
   "description": "Trimble Modus Web Component Library",
   "homepage": "https://modus-web-components.trimble.com/",
@@ -42,18 +42,18 @@
     "prebuild": "tsc generate-icons/generate-icons.ts && node generate-icons/generate-icons.js"
   },
   "dependencies": {
-    "@floating-ui/dom": "^1.6.12",
+    "@floating-ui/dom": "^1.6.13",
     "@popperjs/core": "^2.11.8",
     "@stencil/core": "^4.12.4",
     "@tanstack/table-core": "^8.20.5"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.26.3",
-    "@stencil/angular-output-target": "^0.10.1",
+    "@stencil/angular-output-target": "^0.10.2",
     "@stencil/postcss": "^2.1.0",
     "@stencil/react-output-target": "^0.5.3",
     "@stencil/sass": "^3.0.12",
-    "@trimble-oss/modus-icons": "1.15.0",
+    "@trimble-oss/modus-icons": "1.16.0",
     "@types/jest": "^27.5.1",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
     "@typescript-eslint/parser": "^5.58.0",
@@ -68,10 +68,10 @@
     "prettier": "3.4.2",
     "puppeteer": "^19.11.1",
     "puppeteer-core": "^19.11.1",
-    "stylelint": "16.12.0",
+    "stylelint": "16.13.2",
     "stylelint-config-standard-scss": "14.0.0",
     "stylelint-order": "6.0.4",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.3"
   },
   "engines": {
     "node": ">=18.20"

@@ -994,12 +994,13 @@ RowActions.args = {
   rowActionsConfig: {
     header: 'Row Actions Column',
     width: 160,
+    menuOnly: false,
   },
   rowActions: [
     {
       id: '1',
-      icon: 'add',
       label: 'Add',
+      tooltipText: 'Add',
       index: 0,
     },
 
@@ -1007,6 +1008,7 @@ RowActions.args = {
       id: '2',
       icon: 'calendar',
       label: 'calendar',
+      tooltipText: 'Calendar',
       index: 1,
     },
 
@@ -1014,6 +1016,7 @@ RowActions.args = {
       id: '3',
       icon: 'cancel_circle',
       label: 'Cancel',
+      tooltipText: 'Cancel',
       index: 2,
     },
     {
@@ -1021,12 +1024,14 @@ RowActions.args = {
       index: 3,
       icon: 'add',
       label: 'Add',
+      tooltipText: 'Add',
     },
     {
       id: '5',
       index: 4,
       icon: 'delete',
       label: 'Delete',
+      tooltipText: 'Delete',
     },
   ],
   data: makeData(7),

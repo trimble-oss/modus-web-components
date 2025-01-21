@@ -4,7 +4,7 @@ on:
     branches: [main]
 jobs:
   deploy-storybook:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     if: github.repository == 'trimble-oss/modus-web-components'
     defaults:
       run:
