@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import { h, Component, Prop, Element, Event, Watch, EventEmitter, Method, State, Host } from '@stencil/core';
 import { createPopper, Instance as PopperInstance } from '@popperjs/core';
 import { ModusIconMap } from '../../../icons/ModusIconMap';
