@@ -1,7 +1,8 @@
+// eslint-disable-next-line
 import { h, Component, Prop, Element, Event, Watch, EventEmitter, Method, State, Host } from '@stencil/core';
 import { createPopper, Instance as PopperInstance } from '@popperjs/core';
 import { ModusIconMap } from '../../../icons/ModusIconMap';
-import { ModusHeaderNavigationItemInfo } from '../modus-side-navigation.models';
+import { ModusHeaderNavigationItemInfo, ModusHeaderNavigationItems } from '../modus-side-navigation.models';
 
 @Component({
   tag: 'modus-side-navigation-item',
@@ -84,27 +85,50 @@ export class ModusSideNavigationItem {
     if (this.isHeader?.enabled) {
       this.showExpandIcon = true;
     }
+    document.addEventListener('mousedown', this.handleDocumentClick.bind(this));
   }
 
   disconnectedCallback() {
     this._sideNavItemRemoved.emit(this.element);
     this.destroyPopper();
+    document.removeEventListener('mousedown', this.handleDocumentClick.bind(this));
   }
 
-  handleListItemClick(itemId: string): void {
-    this.sideNavListItemClicked.emit({ id: itemId });
+  handleListItemClick(itemId: ModusHeaderNavigationItems): void {
+    this.sideNavListItemClicked.emit({ id: itemId?.id });
     this.dropdownVisible = false; // Close the dropdown
-    this.label = itemId;
+    this.label = itemId?.label;
 
+    this.menuIcon = itemId?.icon || this.menuIcon;
+    // this.selected = this.disableSelection ? this.selected : !this.selected;
     this.sideNavItemHeaderClicked?.emit({
-      id: itemId,
+      id: itemId?.id,
       selected: this?.selected,
     });
     this.destroyPopper(); // Destroy the popper to reset the positioning
   }
 
+  findParentReference(element: HTMLElement): HTMLElement | null {
+    let currentNode: HTMLElement | ShadowRoot | null = element;
+
+    while (currentNode) {
+      if (currentNode instanceof HTMLElement && currentNode.matches('nav')) {
+        return currentNode;
+      }
+
+      if (currentNode instanceof ShadowRoot) {
+        currentNode = currentNode.host as HTMLElement;
+      } else {
+        currentNode = currentNode.parentElement || (currentNode.getRootNode() as HTMLElement);
+      }
+    }
+
+    return null;
+  }
+
   setupPopper(expanded: boolean): void {
     if (!this.referenceRef || !this.dropdownRef) return;
+    const parentReference = this.findParentReference(this.element)?.clientWidth;
     this.popperInstance = createPopper(this.referenceRef, this.dropdownRef, {
       placement: expanded ? 'bottom-start' : 'right',
       modifiers: [
@@ -121,9 +145,9 @@ export class ModusSideNavigationItem {
           phase: 'write',
           fn: ({ state }) => {
             if (state.placement.startsWith('bottom')) {
-              state.elements.popper.style.width = '300px';
+              state.elements.popper.style.width = `${parentReference - 2}px` || '300px';
             } else if (state.placement.startsWith('right')) {
-              state.elements.popper.style.width = '150px';
+              state.elements.popper.style.width = `250px`;
             }
           },
         },
@@ -141,6 +165,12 @@ export class ModusSideNavigationItem {
   handleClick(): void {
     if (this.disabled) return;
 
+    this.selected = this.disableSelection ? this.selected : this.isHeader?.enabled ? false : !this.selected;
+    this.sideNavItemClicked?.emit({
+      id: this.element.id,
+      selected: this?.selected,
+    });
+
     if (this.isHeader?.enabled) {
       this.dropdownVisible = !this.dropdownVisible;
 
@@ -151,12 +181,6 @@ export class ModusSideNavigationItem {
       }
       return;
     }
-
-    this.selected = this.disableSelection ? this.selected : !this.selected;
-    this.sideNavItemClicked?.emit({
-      id: this.element.id,
-      selected: this?.selected,
-    });
   }
 
   handleKeyDown(e: KeyboardEvent): void {
@@ -165,15 +189,34 @@ export class ModusSideNavigationItem {
     }
   }
 
+  handleDocumentClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+
+    if (this.dropdownRef?.contains(target) || this.referenceRef?.contains(target)) {
+      return;
+    }
+
+    this.dropdownVisible = false;
+    this.destroyPopper();
+  }
+
   renderDropdown() {
     return (
       <div
         class={`dropdown-list ${this.dropdownVisible ? 'visible' : 'hidden'} list-border animate-list`}
         ref={(el) => (this.dropdownRef = el)}>
         <modus-list slot="dropdownList">
-          {this.isHeader?.items?.map((item) => (
-            <modus-list-item size="large" borderless onClick={() => this.handleListItemClick(item)}>
-              {item}
+          {this.isHeader?.items?.map((item: ModusHeaderNavigationItems) => (
+            <modus-list-item
+              key={item.id}
+              class="list-item"
+              borderless
+              onClick={() => this.handleListItemClick(item)}
+              onMouseDown={(e) => e.stopPropagation()}>
+              <span class="dropdown-item">
+                <ModusIconMap icon={item?.icon} size="24" />
+                <span class="menu-item-text">{item?.label}</span>
+              </span>
             </modus-list-item>
           ))}
         </modus-list>

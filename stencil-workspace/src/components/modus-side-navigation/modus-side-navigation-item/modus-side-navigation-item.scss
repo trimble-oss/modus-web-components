@@ -128,7 +128,6 @@ $modus-dropdown-list-border-color: var(--modus-dropdown-list-border-color, #6a6e
   border-radius: $rem-4px;
   display: none;
   max-height: 200px;
-  max-width: 298px;
   opacity: 1;
   overflow-x: auto;
   overflow-y: auto;
@@ -163,5 +162,31 @@ $modus-dropdown-list-border-color: var(--modus-dropdown-list-border-color, #6a6e
   &.left {
     right: 0;
     top: 0;
+  }
+
+  .list-item::part(list-item-li) {
+    background-color: $modus-side-navigation-item-bg;
+    border-radius: unset;
+    color: $modus-side-navigation-item-color;
+  }
+
+  .list-item::part(list-item-li):hover {
+    background-color: $modus-side-navigation-item-hover-bg;
+  }
+}
+
+.dropdown-item {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  font-family: $primary-font;
+  font-size: $rem-14px;
+  gap: 1rem;
+  padding: 0.4rem;
+
+  .menu-item-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }

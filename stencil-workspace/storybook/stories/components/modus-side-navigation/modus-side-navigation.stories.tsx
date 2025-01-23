@@ -360,7 +360,7 @@ SideNavigationWithData.args = {
 };
 
 export const SideNavigationWithHeader = (args) => {
-  const { isHeader, maxWidth, mode, expanded, targetContent } = args;
+  const { isHeader, maxWidth, mode, expanded, targetContent, collapseOnClickOutside } = args;
 
   return html`
     <div id="dataTemplateWithHeader">
@@ -379,6 +379,7 @@ export const SideNavigationWithHeader = (args) => {
           max-width=${maxWidth}
           id="sideNavWithHeader"
           target-content=${targetContent}
+          collapse-on-click-outside=${collapseOnClickOutside}
           mode="overlay"
           mode=${mode}
           expanded=${expanded}
@@ -420,11 +421,10 @@ const sideNavWithHeaderScript = () => {
   script.id = 'sideNavWithHeaderScript'; // Add an ID for tracking
   script.innerHTML = `
   (function () {
-    const sideNavigationHeader = document.querySelector('#dataTemplateWithHeader #sideNavWithHeader');
-
     const homeIcon = 'home';
     const usageIcon = 'flowchart';
     const stylesIcon = 'bar_graph_line';
+    const sideNavHeader = document.querySelector('modus-side-navigation');
 
     const selectionHandler = (e) => {
       if (e.detail && e.detail.selected) {
@@ -439,27 +439,43 @@ const sideNavWithHeaderScript = () => {
     };
 
     function getLabel(newItems) {
-      sideNavigationHeader.data = [
+      sideNavHeader.data = [
         {
           id: 'Home',
           menuIcon: homeIcon,
           label: 'Home',
           isHeader: {
             enabled: true,
-            items: ['Home', 'Charts', 'Maps'],
+            items: [
+              {
+                id: 'Home',
+                label: 'Home',
+                icon: 'home',
+              },
+              {
+                id: 'Charts',
+                label: 'Charts',
+                icon: 'bar_graph',
+              },
+              {
+                id: 'Maps',
+                label: 'Maps',
+                icon: 'location_arrow',
+              },
+            ],
           },
           onSideNavItemHeaderClicked: selectionHeaderHandler,
         },
         {
           id: 'usage-menu',
-          menuIcon: usageIcon,
-          label: newItems[0],
+          menuIcon: newItems[0].icon,
+          label: newItems[0].label,
           onSideNavItemClicked: selectionHandler,
         },
         {
           id: 'styles-menu',
-          menuIcon: stylesIcon,
-          label: newItems[1],
+          menuIcon: newItems[1].icon,
+          label: newItems[1].label,
           onSideNavItemClicked: selectionHandler,
         },
       ];
@@ -470,25 +486,65 @@ const sideNavWithHeaderScript = () => {
       let newItems = [];
 
       if (headerLabel === 'Charts') {
-        newItems = ['Pie Chart', 'Bar Chart'];
-      } else if (headerLabel === 'Maps') {
-        newItems = ['World Map', 'Region Map'];
-      } else {
-        newItems = ['Usage page', 'Styles page'];
-      }
+        newItems = [
+          { label: 'Bar graph square', icon: 'bar_graph_square' },
+          { label: 'Gantt chart', icon: 'gantt_chart' },
+        ];
+        getLabel(newItems);
 
-      getLabel(newItems);
+        const simulatedEvent = {
+          detail: { selected: true, id: 'Charts' },
+          target: { data: [{ id: 'Charts', label: 'Charts' }] },
+        };
+        selectionHandler(simulatedEvent);
+      } else if (headerLabel === 'Maps') {
+        newItems = [
+          { label: 'World', icon: 'web' },
+          { label: 'Region', icon: 'map_poi' },
+        ];
+        getLabel(newItems);
+
+        const simulatedEvent = {
+          detail: { selected: true, id: 'Maps' },
+          target: { data: [{ id: 'Maps', label: 'Maps' }] },
+        };
+        selectionHandler(simulatedEvent);
+      } else {
+        initialize();
+
+        const simulatedEvent = {
+          detail: { selected: true, id: 'Home' },
+          target: { data: [{ id: 'Home', label: 'Home' }] },
+        };
+        selectionHandler(simulatedEvent);
+      }
     };
 
     function initialize() {
-      sideNavigationHeader.data = [
+      sideNavHeader.data = [
         {
           id: 'Home',
           menuIcon: homeIcon,
           label: 'Home',
           isHeader: {
             enabled: true,
-            items: ['Home', 'Charts', 'Maps'],
+            items: [
+              {
+                id: 'Home',
+                label: 'Home',
+                icon: 'home',
+              },
+              {
+                id: 'Charts',
+                label: 'Charts',
+                icon: 'bar_graph',
+              },
+              {
+                id: 'Maps',
+                label: 'Maps',
+                icon: 'location_arrow',
+              },
+            ],
           },
           onSideNavItemHeaderClicked: selectionHeaderHandler,
         },
@@ -506,10 +562,9 @@ const sideNavWithHeaderScript = () => {
         },
       ];
     }
-
     initialize();
-    sideNavigationHeader.addEventListener('sideNavItemHeaderClicked', selectionHeaderHandler);
-    sideNavigationHeader.addEventListener('sideNavItemClicked', selectionHandler);
+    sideNavHeader.addEventListener('sideNavItemHeaderClicked', selectionHeaderHandler);
+    sideNavHeader.addEventListener('sideNavItemClicked', selectionHandler);
   })();
 
   `;

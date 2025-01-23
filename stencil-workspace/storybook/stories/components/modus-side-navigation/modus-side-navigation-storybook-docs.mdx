@@ -262,9 +262,6 @@ Modus side navigation uses CSS variables for theming ex:`--modus-side-navigation
 
 The `isHeader` property enables a dropdown menu in side navigation items when set to true and configured with menu items. This allows dynamic updates to the menu, navigation, or other interactive features.
 
-#
-
-<Story of={SideNavigation.SideNavigationWithHeader} />
 
 ```html
 <div id="dataTemplate">
@@ -272,25 +269,13 @@ The `isHeader` property enables a dropdown menu in side navigation items when se
   <br />
   <modus-switch id="switch-mode" label="Enable Push Side Navigation"></modus-switch>
   <div
-    style="
-            width: 100%;
-            align-items: center;
-            height: 56px;
-            box-shadow: 0 0 2px var(--modus-secondary) !important;
-            margin-top: 10px;
-          ">
+    style="width: 100%;align-items: center;height: 56px;box-shadow: 0 0 2px var(--modus-secondary)!important; margin-top: 10px;">
     <modus-navbar id="navbar" show-apps-menu show-help show-main-menu show-notifications> </modus-navbar>
   </div>
 
   <div
     id="container"
-    style="
-            display: flex;
-            min-height: 500px;
-            overflow-y: auto;
-            position: relative;
-            box-shadow: 0 0 2px var(--modus-secondary) !important;
-          ">
+    style="display:flex; min-height:500px; overflow-y: auto; position: relative;box-shadow: 0 0 2px var(--modus-secondary)!important;">
     <modus-side-navigation max-width="300px" id="sideNav" target-content="#dataTemplate #panelcontent" mode="overlay">
     </modus-side-navigation>
 
@@ -353,20 +338,36 @@ The `isHeader` property enables a dropdown menu in side navigation items when se
         label: 'Home',
         isHeader: {
           enabled: true,
-          items: ['Home', 'Charts', 'Maps'],
+          items: [
+            {
+              id: 'Home',
+              label: 'Home',
+              icon: 'home',
+            },
+            {
+              id: 'Charts',
+              label: 'Charts',
+              icon: 'bar_graph',
+            },
+            {
+              id: 'Maps',
+              label: 'Maps',
+              icon: 'location_arrow',
+            },
+          ],
         },
         onSideNavItemHeaderClicked: selectionHeaderHandler,
       },
       {
         id: 'usage-menu',
-        menuIcon: usageIcon,
-        label: newItems[0],
+        menuIcon: newItems[0].icon,
+        label: newItems[0].label,
         onSideNavItemClicked: selectionHandler,
       },
       {
         id: 'styles-menu',
-        menuIcon: stylesIcon,
-        label: newItems[1],
+        menuIcon: newItems[1].icon,
+        label: newItems[1].label,
         onSideNavItemClicked: selectionHandler,
       },
     ];
@@ -377,13 +378,37 @@ The `isHeader` property enables a dropdown menu in side navigation items when se
     let newItems = [];
 
     if (headerLabel === 'Charts') {
-      newItems = ['Pie Chart', 'Bar Chart'];
+      newItems = [
+        { label: 'Bar graph square', icon: 'bar_graph_square' },
+        { label: 'Gantt chart', icon: 'gantt_chart' },
+      ];
       getLabel(newItems);
+
+      const simulatedEvent = {
+        detail: { selected: true, id: 'Charts' },
+        target: { data: [{ id: 'Charts', label: 'Charts' }] },
+      };
+      selectionHandler(simulatedEvent);
     } else if (headerLabel === 'Maps') {
-      newItems = ['World Map', 'Region Map'];
+      newItems = [
+        { label: 'World', icon: 'web' },
+        { label: 'Region', icon: 'map_poi' },
+      ];
       getLabel(newItems);
+
+      const simulatedEvent = {
+        detail: { selected: true, id: 'Maps' },
+        target: { data: [{ id: 'Maps', label: 'Maps' }] },
+      };
+      selectionHandler(simulatedEvent);
     } else {
       initialize();
+
+      const simulatedEvent = {
+        detail: { selected: true, id: 'Home' },
+        target: { data: [{ id: 'Home', label: 'Home' }] },
+      };
+      selectionHandler(simulatedEvent);
     }
   };
 
@@ -397,7 +422,23 @@ The `isHeader` property enables a dropdown menu in side navigation items when se
         label: 'Home',
         isHeader: {
           enabled: true,
-          items: ['Home', 'Charts', 'Maps'],
+          items: [
+            {
+              id: 'Home',
+              label: 'Home',
+              icon: 'home',
+            },
+            {
+              id: 'Charts',
+              label: 'Charts',
+              icon: 'bar_graph',
+            },
+            {
+              id: 'Maps',
+              label: 'Maps',
+              icon: 'location_arrow',
+            },
+          ],
         },
         onSideNavItemHeaderClicked: selectionHeaderHandler,
       },

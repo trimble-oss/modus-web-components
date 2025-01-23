@@ -40,6 +40,13 @@ Type: `Promise<void>`
 
 
 
+## Shadow Parts
+
+| Part             | Description |
+| ---------------- | ----------- |
+| `"list-item-li"` |             |
+
+
 ## Dependencies
 
 ### Used by
