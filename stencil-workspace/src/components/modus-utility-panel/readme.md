@@ -10,7 +10,7 @@
 | Property        | Attribute        | Description                                                    | Type      | Default     |
 | --------------- | ---------------- | -------------------------------------------------------------- | --------- | ----------- |
 | `expanded`      | `expanded`       | The panel is expanded or closed                                | `boolean` | `false`     |
-| `pushContent`   | `push-content`   | Determines if the panel pushes content or displays an overlay. | `boolean` | `false`     |
+| `pushContent`   | `push-content`   | Determines if the panel pushes content or displays an overlay. | `boolean` | `true`      |
 | `targetContent` | `target-content` |                                                                | `string`  | `undefined` |
 
 
