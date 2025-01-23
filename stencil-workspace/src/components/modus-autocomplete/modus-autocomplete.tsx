@@ -365,7 +365,7 @@ export class ModusAutocomplete {
   };
 
   handleChipDelete = (e,chip) => {
-    if(e.key !="Delete") {
+    if(e.key !== "Delete") {
       return;
     }
    this.removeChip(chip)
