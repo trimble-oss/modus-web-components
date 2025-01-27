@@ -23,7 +23,7 @@
     "@storybook/addon-actions": "^8.4.7",
     "@storybook/addon-essentials": "^8.4.7",
     "@storybook/addon-links": "^8.4.7",
-    "@storybook/addon-mdx-gfm": "^8.4.7",
+    "@storybook/addon-mdx-gfm": "^8.5.2",
     "@storybook/addon-webpack5-compiler-babel": "^3.0.5",
     "@storybook/manager-api": "^8.5.2",
     "@storybook/web-components": "^8.4.7",
