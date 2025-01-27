@@ -27,6 +27,7 @@
 ```mermaid
 graph TD;
   modus-table-row-actions-cell --> modus-table-row-actions
+  modus-table-row-actions --> modus-tooltip
   modus-table-row-actions --> modus-button
   modus-table --> modus-table-row-actions-cell
   style modus-table-row-actions-cell fill:#f9f,stroke:#333,stroke-width:4px

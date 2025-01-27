@@ -28,11 +28,13 @@
 
 ### Depends on
 
+- [modus-tooltip](../../../../../modus-tooltip)
 - [modus-button](../../../../../modus-button)
 
 ### Graph
 ```mermaid
 graph TD;
+  modus-table-row-actions --> modus-tooltip
   modus-table-row-actions --> modus-button
   modus-table-row-actions-cell --> modus-table-row-actions
   style modus-table-row-actions fill:#f9f,stroke:#333,stroke-width:4px
