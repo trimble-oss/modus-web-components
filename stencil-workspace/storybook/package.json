@@ -8,7 +8,7 @@
     "build-storybook": "storybook build -o ./dist"
   },
   "dependencies": {
-    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-env": "^7.26.7",
     "@storybook/addon-docs": "^8.4.7",
     "@storybook/components": "^8.5.2",
     "@storybook/theming": "^8.5.2",
