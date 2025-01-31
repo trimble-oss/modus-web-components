@@ -165,6 +165,14 @@ export class ModusSideNavigationItem {
   handleClick(): void {
     if (this.disabled) return;
 
+    const allItems = this.element.parentElement?.querySelectorAll('modus-side-navigation-item');
+    allItems?.forEach((item) => {
+      const navItem = item as unknown as HTMLModusSideNavigationItemElement;
+      if (navItem !== this.element) {
+        navItem.selected = false;
+      }
+    });
+
     this.selected = this.disableSelection ? this.selected : this.isHeader?.enabled ? false : !this.selected;
     this.sideNavItemClicked?.emit({
       id: this.element.id,
