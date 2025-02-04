@@ -29,7 +29,7 @@ div.alert {
     .icon-info,
     .icon-warning {
       path {
-        fill: $modus-alert-danger-color;
+        fill: $modus-alert-danger-icon-color;
       }
     }
   }
@@ -52,7 +52,7 @@ div.alert {
     .icon-info,
     .icon-warning {
       path {
-        fill: $modus-alert-primary-color;
+        fill: $modus-alert-primary-icon-color;
       }
     }
   }
@@ -71,7 +71,7 @@ div.alert {
     .icon-info,
     .icon-warning {
       path {
-        fill: $modus-alert-success-color;
+        fill: $modus-alert-success-icon-color;
       }
     }
   }
