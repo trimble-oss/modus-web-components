@@ -76,6 +76,7 @@ export default {
         'itemLabelChange modus-tree-view-item',
         'itemDrop modus-tree-view',
         'itemSelectionChange modus-tree-view',
+        'checkboxClick modus-tree-view-item',
       ],
     },
     controls: { expanded: true, sort: 'requiredFirst' },
