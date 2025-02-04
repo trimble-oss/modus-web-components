@@ -616,7 +616,7 @@ export class ModusTreeView {
 
   handleItemSelection(itemId: string, event?: KeyboardEvent | MouseEvent): void {
     if (this.items[itemId].disabled) return;
-    
+
     const isShiftClick = event instanceof MouseEvent && event.shiftKey;
     const allowMultipleSelection = this.multiSelection && event && (event.shiftKey || event.ctrlKey || event.metaKey);
     const isSelected = !this.isItemSelected(itemId);
@@ -625,7 +625,7 @@ export class ModusTreeView {
       this.anchorItemId = itemId;
     }
 
-    if (isShiftClick) {
+    else {
       this.updateClickedItems(itemId, true);
       return;
     }
@@ -727,17 +727,18 @@ export class ModusTreeView {
 
   updateClickedItems(currentItemId: string, isShiftClick: boolean): void {
     const allItems = Object.keys(this.items);
-    console.log("all",allItems,currentItemId);
+
     if (this.multiSelection && isShiftClick) {
       if (this.anchorItemId === null) {
         this.anchorItemId = currentItemId;
       }
 
-      const startIdx = Math.min(allItems.indexOf(this.anchorItemId), allItems.indexOf(currentItemId));
-      const endIdx = Math.max(allItems.indexOf(this.anchorItemId), allItems.indexOf(currentItemId));
+      const anchorIndex = allItems.indexOf(this.anchorItemId);
+      const currentIndex = allItems.indexOf(currentItemId);
+      const startIdx = Math.min(anchorIndex, currentIndex);
+      const endIdx = Math.max(anchorIndex, currentIndex);
 
       this.selectedItems = allItems.slice(startIdx, endIdx + 1);
-      console.log("sel",this.selectedItems);
       this.syncItems.push(...this.selectedItems);
       return;
     }
