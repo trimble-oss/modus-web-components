@@ -380,18 +380,10 @@ it('should not get selected when other item is clicked', async () => {
   await page.setContent(`
   <modus-side-navigation>
     <modus-side-navigation-item id="Test" label="Test" selected>
-    <svg slot="menu-icon" fill="currentColor" height="24" width="24" viewBox="0 0 32 32">
-        <g>
-          <path d="m27.707 14.293-11-11a1 1 0 0 0-1.414 0l-11 11A1 1 0 0 0 5 16h5v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V16h5a1 1 0 0 0 .707-1.707z"/>
-        </g>
-      </svg>
+     <svg slot="menu-icon"></svg>
     </modus-side-navigation-item>
     <modus-side-navigation-item id="Test2" label="Test2"/>
-    <svg slot="menu-icon" fill="currentColor" height="24" width="24" viewBox="0 0 32 32">
-        <g>
-          <path d="m27.707 14.293-11-11a1 1 0 0 0-1.414 0l-11 11A1 1 0 0 0 5 16h5v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V16h5a1 1 0 0 0 .707-1.707z"/>
-        </g>
-      </svg>
+     <svg slot="menu-icon"></svg>
       </modus-side-navigation-item>
   </modus-side-navigation>`);
 
