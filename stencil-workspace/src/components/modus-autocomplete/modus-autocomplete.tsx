@@ -559,7 +559,7 @@ export class ModusAutocomplete {
             {this.required ? <span class="required">*</span> : null}
           </div>
         ) : null}
-        <div class="chips-container">
+        <div class={`chips-container ${this.clearable ? 'clearable-icon' : ''}`}>
           {this.includeSearchIcon ? <IconSearch size="16" /> : null}
           {this.selectedChips.map((chip) => (
             <modus-chip
