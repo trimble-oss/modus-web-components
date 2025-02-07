@@ -32,6 +32,13 @@
 | `closeClick` | An event that fires on close icon click. | `CustomEvent<any>` |
 
 
+## Shadow Parts
+
+| Part           | Description |
+| -------------- | ----------- |
+| `"chipbutton"` |             |
+
+
 ## Dependencies
 
 ### Used by

@@ -563,6 +563,7 @@ export class ModusAutocomplete {
           {this.includeSearchIcon ? <IconSearch size="16" /> : null}
           {this.selectedChips.map((chip) => (
             <modus-chip
+              class="autocomplete-chip"
               tabIndex={this.disabled ? -1 : 0}
               value={chip.value}
               chipId={chip.id}

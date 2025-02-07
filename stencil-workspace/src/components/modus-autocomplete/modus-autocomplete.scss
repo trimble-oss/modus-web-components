@@ -57,6 +57,11 @@
     modus-chip {
       margin-left: 4px;
       margin-right: 4px;
+      overflow: hidden;
+    }
+
+    .autocomplete-chip::part(chipButton) {
+      max-width: 100%;
     }
 
     .input {
