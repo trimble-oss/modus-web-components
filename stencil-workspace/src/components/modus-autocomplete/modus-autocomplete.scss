@@ -43,6 +43,7 @@
     padding: 0;
     position: relative;
     width: 100%;
+    padding-right: 32px;
 
     &:focus-within {
       border-color: $modus-autocomplete-container-border-active-color;
@@ -93,6 +94,8 @@
       &.clear {
         cursor: pointer;
         min-height: 1.875rem;
+        position: absolute;
+        right: 0;
 
         &:hover svg path {
           opacity: 0.75;
@@ -118,6 +121,7 @@
     .icon-check {
       display: inline-flex;
       margin-left: auto;
+      flex-shrink: 0;
     }
 
     .text-option {
@@ -130,6 +134,7 @@
       font-size: $rem-12px;
       min-height: 2rem;
       padding: 0 8px;
+      word-break: break-all;
 
       &.selected {
         background-color: $modus-autocomplete-selected-option-color;
