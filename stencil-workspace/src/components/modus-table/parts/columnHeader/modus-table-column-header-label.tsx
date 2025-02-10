@@ -56,7 +56,7 @@ function getAlphabeticalSortIcon(direction: false | SortDirection): string {
 
 /**
  * To show sorting status.
- * @param column Data related to the perticular column.
+ * @param column Data related to the particular column.
  * @returns Active sort or sort that will occur.
  */
 function getSortingStatus(column: Column<unknown, unknown>, isColumnResizing: boolean): string {
@@ -73,7 +73,7 @@ function getSortingStatus(column: Column<unknown, unknown>, isColumnResizing: bo
 
 /**
  * Toggles column sort on 'Enter' key press.
- * @param column Data related to the perticular column.
+ * @param column Data related to the particular column.
  * @param event Keyboard event.
  */
 function sortOnKeyDown(column: Column<unknown, unknown>, event: KeyboardEvent): void {
