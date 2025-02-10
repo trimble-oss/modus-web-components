@@ -61,6 +61,7 @@
   .icon-remove,
   .icon-remove path {
     fill: $modus-chip-color !important;
+    flex-shrink: 0;
   }
 
   &.style-outline {

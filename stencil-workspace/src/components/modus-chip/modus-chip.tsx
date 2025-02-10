@@ -120,6 +120,7 @@ export class ModusChip {
         aria-label={this.ariaLabel || undefined}
         id={this.chipId || undefined}
         class={chipClass}
+        part="chipButton"
         onClick={this.disabled ? null : (event) => this.onChipClick(event)}
         tabIndex={0}
         style={this.advancedChip ? { 'border-radius': '8px' } : {}}
