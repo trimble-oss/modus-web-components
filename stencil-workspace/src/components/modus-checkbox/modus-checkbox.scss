@@ -19,8 +19,6 @@
   white-space: nowrap;
 
   .checkbox {
-    -webkit-appearance: none;
-    -moz-appearance: none;
     appearance: none;
     background-color: $modus-checkbox-bg;
     background-image: var(--modus-checkbox-checked-bg-image);
