@@ -44,6 +44,10 @@
     position: relative;
     width: 100%;
 
+    &.clearable-icon {
+      padding-right: 32px;
+    }
+
     &:focus-within {
       border-color: $modus-autocomplete-container-border-active-color;
       box-shadow: 0 0 0 1px $modus-autocomplete-container-border-active-color;
@@ -57,6 +61,11 @@
     modus-chip {
       margin-left: 4px;
       margin-right: 4px;
+      overflow: hidden;
+    }
+
+    .autocomplete-chip::part(chipButton) {
+      max-width: 100%;
     }
 
     .input {
@@ -71,6 +80,7 @@
         border: none !important;
         box-shadow: none;
         height: 1.875rem;
+        min-width: 30px;
       }
     }
 
@@ -88,6 +98,8 @@
       &.clear {
         cursor: pointer;
         min-height: 1.875rem;
+        position: absolute;
+        right: 0;
 
         &:hover svg path {
           opacity: 0.75;
@@ -117,6 +129,7 @@
 
     .icon-check {
       display: inline-flex;
+      flex-shrink: 0;
       margin-left: auto;
     }
 
@@ -130,6 +143,7 @@
       font-size: $rem-12px;
       min-height: 2rem;
       padding: 0 8px;
+      word-break: break-all;
 
       &.selected {
         background-color: $modus-autocomplete-selected-option-color;
