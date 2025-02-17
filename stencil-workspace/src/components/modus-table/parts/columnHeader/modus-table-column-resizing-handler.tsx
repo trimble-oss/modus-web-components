@@ -23,7 +23,7 @@ interface ModusTableColumnResizingHandlerProps {
  * Handling the column resizing keyboard navigation
  * @param event Keyboard event.
  * @param table Table data.
- * @param column Data related to the perticular column.
+ * @param column Data related to the particular column.
  */
 function columnResizingOnKeyDown(event: KeyboardEvent, table: Table<unknown>, column: Column<unknown, unknown>): void {
   const eventKey = event.key.toLowerCase();
@@ -71,7 +71,7 @@ function columnResizingOnKeyDown(event: KeyboardEvent, table: Table<unknown>, co
 /**
  * Throttling the key events
  * @param table Table data.
- * @param column Data related to the perticular column.
+ * @param column Data related to the particular column.
  */
 function throttle(table: Table<unknown>, column: Column<unknown, unknown>): (event: KeyboardEvent) => void {
   let wait = false;

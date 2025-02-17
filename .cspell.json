@@ -75,6 +75,7 @@
   ],
   "language": "en-US",
   "allowCompoundWords": true,
+  "flagWords": ["hte", "perticular"],
   "ignorePaths": [
     ".cspell.json",
     ".github/CODEOWNERS",
