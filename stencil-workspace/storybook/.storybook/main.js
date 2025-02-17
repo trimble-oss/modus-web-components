@@ -1,27 +1,33 @@
 module.exports = {
-  "stories": [
-    "../**/*.stories.mdx",
-    "../**/*.stories.@(js|jsx|ts|tsx)"
-  ],
-  "staticDirs": ['../public'],
-  "addons": [
-    "@storybook/addon-a11y",
-    "@storybook/addon-links",
-    "@storybook/addon-docs",
-    "@storybook/addon-essentials",
-    "storybook-dark-mode",
+  stories: ['../stories/framework-integrations/*.mdx', '../stories/introduction/*.mdx', '../**/*.stories.@(js|jsx|ts|tsx)'],
+  staticDirs: ['../public'],
+  addons: [
+    '@storybook/addon-a11y',
+    '@storybook/addon-links',
+    '@storybook/addon-docs',
+    '@storybook/addon-actions',
+    '@storybook/addon-controls',
+    '@storybook/addon-essentials',
+    'storybook-dark-mode',
     {
-      name: "@storybook/addon-styling",
+      name: '@storybook/addon-styling',
       options: {
         postCss: {
-          implementation: require("postcss"),
+          implementation: require('postcss'),
         },
       },
     },
+    '@storybook/addon-mdx-gfm',
+    '@storybook/addon-webpack5-compiler-babel',
   ],
+
   babel: async (options) => ({
     ...options,
-    presets: [...options.presets, '@babel/preset-react'],
+    presets: ['@babel/preset-react', '@babel/preset-flow'],
   }),
-  "framework": "@storybook/web-components"
-}
+
+  framework: {
+    name: '@storybook/web-components-webpack5',
+    options: {},
+  },
+};

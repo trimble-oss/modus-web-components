@@ -1,4 +1,5 @@
-import { Story } from '@storybook/addon-docs';
+import { Story } from '@storybook/blocks';
+import * as Modal from './modus-modal.stories';
 
 # Modal
 
@@ -12,7 +13,7 @@ When designing a custom footer, it is highly recommended to use button progressi
 
 ### Default
 
-<Story id="components-modal--default" height={'400px'} />
+<Story of={Modal.Default} />
 
 ```html
 <modus-button id="btn-modal" color="primary">Open modal</modus-button>
@@ -41,7 +42,7 @@ When designing a custom footer, it is highly recommended to use button progressi
 
 ### Custom footer
 
-<Story id="components-modal--custom-footer" height={'400px'} />
+<Story of={Modal.CustomFooter} />
 
 ```html
 <modus-button id="btn-modal" color="primary">Open modal</modus-button>
@@ -81,7 +82,7 @@ When designing a custom footer, it is highly recommended to use button progressi
 | -------------------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----------- |
 | `ariaLabel`                | `aria-label`                  | (optional) The modal's aria-label.                                                                                                    | `string`               | `undefined` |
 | `backdrop`                 | `backdrop`                    | (optional) The modal's backdrop. Specify 'static' for a backdrop that doesn't close the modal when clicked outside the modal content. | "static" \| "default"` | `'default'` |
-| `fullscreen`               | `fullscreen`                  | (optional) The modal's full screen view                                                                                               | `boolean`              | `false`     |
+| `fullscreen`               | `fullscreen`                  | (optional) The modal's full screen view.                                                                                              | `boolean`              | `false`     |
 | `headerText`               | `header-text`                 | (optional) The modal's primary button text.                                                                                           | `string`               | `undefined` |
 | `primaryButtonAriaLabel`   | `primary-button-aria-label`   | (optional) The modal's primary button aria-label.                                                                                     | `string`               | `undefined` |
 | `primaryButtonDisabled`    | `primary-button-disabled`     | (optional) Disable primary button.                                                                                                    | `boolean`              | `undefined` |
@@ -89,6 +90,7 @@ When designing a custom footer, it is highly recommended to use button progressi
 | `secondaryButtonAriaLabel` | `secondary-button-aria-label` | (optional) The modal's secondary button aria-label.                                                                                   | `string`               | `undefined` |
 | `secondaryButtonDisabled`  | `secondary-button-disabled`   | (optional) Disable secondary button.                                                                                                  | `boolean`              | `undefined` |
 | `secondaryButtonText`      | `secondary-button-text`       | (optional) The modal's secondary button text.                                                                                         | `string`               | `undefined` |
+| `showFullscreenToggle`     | `show-fullscreen-toggle`      | (optional) Show full screen toggle.                                                                                                   | `boolean`              | `false`     |
 | `zIndex`                   | `z-index`                     | (optional) The modal's z-index.                                                                                                       | `string`               | `'1'`       |
 
 ### Events

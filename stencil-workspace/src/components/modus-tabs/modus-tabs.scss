@@ -2,7 +2,7 @@
 
 .modus-tabs {
   border: solid $modus-tab-bottom-line-color;
-  border-width: 0 0 $rem-1px 0;
+  border-width: 0 0 $rem-1px;
   display: inline-flex;
   flex-direction: row;
   font-family: $primary-font;
@@ -62,7 +62,7 @@
     }
 
     &.active {
-      border-color: transparent transparent $modus-tab-active-color transparent;
+      border-color: transparent transparent $modus-tab-active-color;
       color: $modus-tab-active-color;
     }
 

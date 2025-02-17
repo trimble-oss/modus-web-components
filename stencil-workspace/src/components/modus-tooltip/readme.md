@@ -24,6 +24,7 @@
  - [modus-navbar](../modus-navbar)
  - [modus-side-navigation-item](../modus-side-navigation/modus-side-navigation-item)
  - [modus-table](../modus-table)
+ - [modus-table-row-actions](../modus-table/parts/row/actions/modus-table-row-actions)
  - [modus-toolbar](../modus-toolbar)
 
 ### Graph
@@ -34,6 +35,7 @@ graph TD;
   modus-navbar --> modus-tooltip
   modus-side-navigation-item --> modus-tooltip
   modus-table --> modus-tooltip
+  modus-table-row-actions --> modus-tooltip
   modus-toolbar --> modus-tooltip
   style modus-tooltip fill:#f9f,stroke:#333,stroke-width:4px
 ```

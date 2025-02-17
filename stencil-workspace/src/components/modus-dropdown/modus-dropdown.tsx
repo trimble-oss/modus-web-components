@@ -27,14 +27,23 @@ export class ModusDropdown {
   /** (optional) Disables the dropdown. */
   @Prop() disabled: boolean; // TODO
 
+  /** (optional) Toggles the list when clicked. */
+  @Prop() toggleDropdown = true;
+
   /** (optional) The placement of the dropdown in related to the toggleElement. */
   @Prop() placement: 'top' | 'right' | 'bottom' | 'left' = 'bottom';
 
   /** (optional) Whether to show the dropdown list's border. */
   @Prop() showDropdownListBorder = true;
 
+  /** (optional) The border radius of the dropdown list. */
+  @Prop() borderRadius = '0';
+
   /** (required) The element id that the list renders near and that triggers the toggling of the list. */
   @Prop() toggleElementId: string;
+
+  /** (optional) Prevents the dropdown from closing when an option is selected. */
+  @Prop() disableCloseOnSelect = false;
 
   /** An event that fires on dropdown close. */
   @Event() dropdownClose: EventEmitter;
@@ -105,10 +114,12 @@ export class ModusDropdown {
     if (this.disabled) {
       return;
     }
-    if ((event.target as HTMLElement).closest(`#${this.toggleElementId}`)) {
+    if ((event.target as HTMLElement).closest(`#${this.toggleElementId}`) && this.toggleDropdown) {
       this.visible = !this.visible;
     } else {
-      this.visible = false;
+      if (!this.disableCloseOnSelect) {
+        this.visible = false;
+      }
     }
 
     if (!this.visible) {
@@ -142,6 +153,7 @@ export class ModusDropdown {
             left: this.customPlacement?.left ? `${this.customPlacement?.left}px` : left,
             bottom: this.customPlacement?.bottom ? `${this.customPlacement?.bottom}px` : '',
             'min-width': width,
+            'border-radius': `${this.borderRadius}px`,
           }}>
           <slot name="dropdownList" />
         </div>

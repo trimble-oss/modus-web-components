@@ -1,6 +1,7 @@
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-time-picker-storybook-docs.mdx';
 import { html } from 'lit-html';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 export default {
   title: 'User Inputs/Time Picker',
@@ -104,10 +105,8 @@ export default {
       },
     },
     size: {
-      control: {
-        options: ['medium', 'large'],
-        type: 'select',
-      },
+      options: ['medium', 'large'],
+      type: 'select',
       description: 'The size of the input',
       table: {
         defaultValue: { summary: "'medium'" },
@@ -141,6 +140,7 @@ export default {
       enableShortcuts: false,
     },
   },
+  decorators: [withActions],
 };
 
 const Template = ({
@@ -274,11 +274,7 @@ const WithTimeZoneTemplate = ({
     valid-text=${validText}
     value=${value}>
     <div style="width: 300px;padding-left: 0.5rem;" slot="timeZone">
-      <modus-select
-        id="timezone"
-        label="Time Zone"
-        aria-label="Time Zone"
-        options-display-prop="display"></modus-select>
+      <modus-select id="timezone" label="Time Zone" aria-label="Time Zone" options-display-prop="display"></modus-select>
     </div>
   </modus-time-picker>
   ${setSelects()}

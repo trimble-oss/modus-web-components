@@ -19,11 +19,13 @@ export interface ModusProfileMenuOptions {
 export interface ModusNavbarLogo {
   url: string;
   height?: string;
+  alt?: string;
 }
 
 export interface ModusNavbarLogoOptions {
   primary?: ModusNavbarLogo;
   secondary?: ModusNavbarLogo;
+  clickable?: boolean;
 }
 
 export interface ModusNavbarButton {

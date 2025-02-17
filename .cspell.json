@@ -28,6 +28,7 @@
     "hoverable",
     "inexplicitly",
     "inputmode",
+    "jank",
     "labelledby",
     "Lehner",
     "Lemke",
@@ -48,6 +49,7 @@
     "popperjs",
     "progressbar",
     "pwsh",
+    "qezoi",
     "Qube",
     "Ritchie",
     "SAMEORIGIN",
@@ -79,6 +81,7 @@
     "issue-thanks.yml",
     "labeler.yml",
     "modus-variables.scss",
+    "translations.ts",
     "wss-unified-agent.config"
   ],
   "useGitignore": true

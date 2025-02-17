@@ -10,6 +10,7 @@
 | Property        | Attribute        | Description                                                                    | Type                   | Default     |
 | --------------- | ---------------- | ------------------------------------------------------------------------------ | ---------------------- | ----------- |
 | `active`        | `active`         | (optional) Whether the chip is active.                                         | `boolean`              | `false`     |
+| `advancedChip`  | `advanced-chip`  | (optional) Whether the chip is in advanced state                               | `boolean`              | `undefined` |
 | `ariaLabel`     | `aria-label`     | (optional) The chip's aria-label.                                              | `string`               | `undefined` |
 | `chipId`        | `chip-id`        | (optional) the chip's id                                                       | `string`               | `undefined` |
 | `chipStyle`     | `chip-style`     | (optional) The chip's style.                                                   | `"outline" \| "solid"` | `'solid'`   |

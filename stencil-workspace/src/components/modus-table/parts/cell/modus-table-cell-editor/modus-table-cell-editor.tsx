@@ -186,16 +186,36 @@ export class ModusTableCellEditor {
       selectedOption = this.editedValue as string;
     }
 
+    function handleArrowKeys(e: KeyboardEvent, callback: (e: KeyboardEvent) => void) {
+      const code = e.key.toLowerCase();
+      if (code === KEYBOARD_UP || code === KEYBOARD_DOWN) {
+        e.stopPropagation();
+      } else callback(e);
+    }
+
     return (
       <div class="autocomplete-container">
         <modus-autocomplete
           {...this.getDefaultProps('Autocomplete input')}
           include-search-icon="false"
           size="medium"
+          ref={(el) => (this.inputElement = el)}
           class="autocomplete"
           options={options}
           onBlur={this.handleBlur}
-          onKeyDown={(e) => e.stopPropagation()}
+          onKeyDown={(e) => handleArrowKeys(e, this.handleKeyDown)}
+          filterOptions={
+            args.filterOptions
+              ? (...props) => {
+                  if (this.inputElement && args?.filterOptions) {
+                    (this.inputElement as HTMLModusAutocompleteElement).loading = true;
+                    return args?.filterOptions(...props).finally(() => {
+                      (this.inputElement as HTMLModusAutocompleteElement).loading = false;
+                    });
+                  }
+                }
+              : undefined
+          }
           onOptionSelected={(e: CustomEvent<string>) => {
             const selectedDetail = e.detail;
 

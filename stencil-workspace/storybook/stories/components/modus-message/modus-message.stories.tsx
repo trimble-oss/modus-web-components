@@ -20,10 +20,8 @@ export default {
       },
     },
     type: {
-      control: {
-        options: ['info', 'question'],
-        type: 'select',
-      },
+      options: ['info', 'question'],
+      type: 'select',
       description: 'The type of the message',
       table: {
         defaultValue: { summary: `'info'` },
@@ -42,18 +40,12 @@ export default {
   },
 };
 
-export const Default = ({ ariaLabel, icon, type }) =>
-  html`
-    <modus-message aria-label=${ariaLabel} icon=${icon} type=${type}>
-      Info (Default)
-    </modus-message>
-  `;
+export const Default = ({ ariaLabel, icon, type }) => html`
+  <modus-message aria-label=${ariaLabel} icon=${icon} type=${type}> Info (Default) </modus-message>
+`;
 Default.args = { ariaLabel: '', icon: '', type: 'info' };
 
-export const Question = ({ ariaLabel, icon, type }) =>
-  html`
-    <modus-message aria-label=${ariaLabel} icon=${icon} type=${type}>
-      Question
-    </modus-message>
-  `;
+export const Question = ({ ariaLabel, icon, type }) => html`
+  <modus-message aria-label=${ariaLabel} icon=${icon} type=${type}> Question </modus-message>
+`;
 Question.args = { ariaLabel: '', icon: '', type: 'question' };

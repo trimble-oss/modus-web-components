@@ -1,6 +1,8 @@
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-breadcrumb-storybook-docs.mdx';
 import { html } from 'lit-html';
+import { withActions } from '@storybook/addon-actions/decorator';
+
 
 export default {
   title: 'Components/Breadcrumb',
@@ -8,6 +10,7 @@ export default {
     underlineLinks: {
       name: 'underlineLinks',
       description: 'A flag that controls the display of underline',
+      type: 'boolean',
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },
@@ -20,9 +23,7 @@ export default {
       page: docs,
     },
     actions: {
-      handles: [
-        'crumbClick',
-      ],
+      handles: ['crumbClick'],
     },
     controls: {
       disabled: false,
@@ -32,6 +33,7 @@ export default {
       isToolshown: true,
     },
   },
+  decorators: [withActions],
 };
 
 const defaultCrumbs = [

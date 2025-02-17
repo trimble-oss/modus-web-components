@@ -1,6 +1,7 @@
 import { html } from 'lit-html';
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-table-storybook-docs.mdx';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 // Helpers
 // for the data generator makeData function
@@ -59,11 +60,13 @@ function initializeTable(props) {
     displayOptions,
     rowSelectionOptions,
     rowActions,
+    rowActionsConfig,
     manualPaginationOptions,
     manualSortingOptions,
     defaultSort,
     customSort,
     errors,
+    isInlineEditing,
   } = props;
 
   const tag = document.createElement('script');
@@ -76,25 +79,26 @@ function initializeTable(props) {
   modusTable.displayOptions = ${JSON.stringify(displayOptions)};
   modusTable.rowSelectionOptions = ${JSON.stringify(rowSelectionOptions)};
   modusTable.rowActions = ${JSON.stringify(rowActions)};
+  modusTable.rowActionsConfig= ${JSON.stringify(rowActionsConfig)};
   modusTable.manualPaginationOptions = ${JSON.stringify(manualPaginationOptions)};
   modusTable.manualSortingOptions = ${JSON.stringify(manualSortingOptions)};
   modusTable.defaultSort = ${JSON.stringify(defaultSort)};
   modusTable.customSort = ${JSON.stringify(customSort)};
   modusTable.errors = ${JSON.stringify(errors)};
+  modusTable.isInlineEditing = ${JSON.stringify(isInlineEditing)};
 
   var globalData = ${JSON.stringify(data)};
 
-function sortStatusFn(rowA, rowB, _columnId) {
-  const statusA = rowA.original.status;
-  const statusB = rowB.original.status;
-  const statusOrder = modusTable.customSort;
-  return statusOrder.indexOf(statusA) - statusOrder.indexOf(statusB);
-}
+  function sortStatusFn(rowA, rowB, _columnId) {
+    const statusA = rowA.original.status;
+    const statusB = rowB.original.status;
+    const statusOrder = modusTable.customSort;
+    return statusOrder.indexOf(statusA) - statusOrder.indexOf(statusB);
+  }
 
-function addSortingFn(columns) {
-  return columns.map((col) => (col.accessorKey === 'status' ? { ...col, sortingFn: sortStatusFn } : col));
-}
-
+  function addSortingFn(columns) {
+    return columns.map((col) => (col.accessorKey === 'status' ? { ...col, sortingFn: sortStatusFn } : col));
+  }
 
   if(!!modusTable.manualSortingOptions){
     let currentData = globalData;
@@ -328,6 +332,7 @@ const DefaultArgs = {
   maxHeight: '',
   maxWidth: '',
   rowActions: [],
+  rowActionsConfig: {},
   rowSelection: false,
   rowSelectionOptions: {},
   wrapText: false,
@@ -376,15 +381,12 @@ export default {
     sortIconStyle: {
       name: 'sortIconStyle',
       description: 'Display alphabetical or directional arrow icons when sort is enabled',
-      control: {
-        options: ['alphabetical', 'directional'],
-        type: 'select',
-      },
+      options: ['alphabetical', 'directional'],
+      type: 'select',
       table: {
         defaultValue: { summary: `'alphabetical'` },
         type: { summary: `'alphabetical', 'directional'` },
       },
-      type: { required: false },
     },
     showSortIconOnHover: {
       name: 'showSortIconOnHover',
@@ -439,15 +441,12 @@ export default {
     density: {
       name: 'density',
       description: 'Manage table density.',
-      control: {
-        options: ['relaxed', 'comfortable', 'compact'],
-        type: 'select',
-      },
+      options: ['relaxed', 'comfortable', 'compact'],
+      type: 'select',
       table: {
         defaultValue: { summary: `'relaxed'` },
         type: { summary: `'relaxed', 'comfortable', 'compact'` },
       },
-      type: { required: false },
     },
     fullWidth: {
       name: 'fullWidth',
@@ -502,6 +501,14 @@ export default {
       description: 'Control row actions.',
       table: {
         type: { summary: 'ModusTableRowAction[]' },
+      },
+      type: { required: false },
+    },
+    rowActionsConfig: {
+      name: 'rowActionsConfig',
+      description: "The configuration for the row action's column ",
+      table: {
+        type: { summary: 'ModusTableRowActionConfig' },
       },
       type: { required: false },
     },
@@ -620,6 +627,7 @@ export default {
       enableShortcuts: false,
     },
   },
+  decorators: [withActions],
 };
 
 const Template = ({
@@ -643,6 +651,7 @@ const Template = ({
   maxHeight,
   maxWidth,
   rowActions,
+  rowActionsConfig,
   rowSelection,
   rowSelectionOptions,
   manualPaginationOptions,
@@ -651,6 +660,7 @@ const Template = ({
   density,
   wrapText,
   customSort,
+  isInlineEditing,
 }) => html`
   <div style="width: 950px">
     <modus-table
@@ -679,11 +689,13 @@ const Template = ({
     displayOptions,
     rowSelectionOptions,
     rowActions,
+    rowActionsConfig,
     manualPaginationOptions,
     manualSortingOptions,
     defaultSort,
     customSort,
     errors,
+    isInlineEditing,
   })}
 `;
 
@@ -946,7 +958,7 @@ const EditableColumns = DefaultColumnsWithPriority.map((col) => {
   } else return { ...col, cellEditable: true };
 });
 export const InlineEditing = Template.bind({});
-InlineEditing.args = { ...DefaultArgs, columns: EditableColumns, data: makeData(7), errors: {} };
+InlineEditing.args = { ...DefaultArgs, columns: EditableColumns, data: makeData(7), errors: {}, isInlineEditing: true };
 
 export const LargeDataset = Template.bind({});
 
@@ -979,11 +991,16 @@ LargeDataset.args = {
 export const RowActions = Template.bind({});
 RowActions.args = {
   ...DefaultArgs,
+  rowActionsConfig: {
+    header: 'Row Actions Column',
+    width: 160,
+    menuOnly: false,
+  },
   rowActions: [
     {
       id: '1',
-      icon: 'add',
       label: 'Add',
+      tooltipText: 'Add',
       index: 0,
     },
 
@@ -991,13 +1008,15 @@ RowActions.args = {
       id: '2',
       icon: 'calendar',
       label: 'calendar',
+      tooltipText: 'Calendar',
       index: 1,
     },
 
     {
       id: '3',
-      icon: 'cancel',
+      icon: 'cancel_circle',
       label: 'Cancel',
+      tooltipText: 'Cancel',
       index: 2,
     },
     {
@@ -1005,12 +1024,14 @@ RowActions.args = {
       index: 3,
       icon: 'add',
       label: 'Add',
+      tooltipText: 'Add',
     },
     {
       id: '5',
       index: 4,
       icon: 'delete',
       label: 'Delete',
+      tooltipText: 'Delete',
     },
   ],
   data: makeData(7),

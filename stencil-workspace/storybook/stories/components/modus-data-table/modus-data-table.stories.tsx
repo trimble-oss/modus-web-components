@@ -1,20 +1,15 @@
 import { html } from 'lit-html';
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-data-table-storybook-docs.mdx';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 export default {
   title: 'Components/Data Table',
   argTypes: {},
   parameters: {
-    controls: { disabled: true, expanded: true, sort: 'alpha' },
+    controls: { disable: true, expanded: true, sort: 'alpha' },
     actions: {
-      handles: [
-        'cellLinkClick',
-        'rowDoubleClick',
-        'selection',
-        'sort',
-        'rowActionClick',
-      ],
+      handles: ['cellLinkClick', 'rowDoubleClick', 'selection', 'sort', 'rowActionClick'],
     },
     docs: {
       inlineStories: false,
@@ -24,6 +19,7 @@ export default {
       isToolshown: true,
     },
   },
+  decorators: [withActions],
 };
 
 export const Default = () => html`

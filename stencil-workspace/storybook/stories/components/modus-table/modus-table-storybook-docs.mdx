@@ -535,7 +535,7 @@ User can expand rows to display as child/sub row data.
 
 ### Checkbox Row Selection
 
-To select rows, users can use the checkbox provided on each row. Normally, the Modus Table permits selecting only one row at a time, but this can be modified to allow multiple selections by using `rowSelectionOptions` option.
+To select rows, users can use the checkbox provided on each row.The Modus table uses the `rowSelectionOptions` to configure the selection behavior. When the `multiple` setting is set to false, only one row can be selected at a time. However, this can be adjusted to allow multiple row selections by modifying the `rowSelectionOptions`.
 
 - To enable multiple row selection, set `multiple` to `true`.
 - Sub-rows will also be selected if the parent is selected by setting `subRowSelection` to `true`.
@@ -639,6 +639,126 @@ Refer to the [Accessibility](#accessibility) section for how to use keyboard for
 
 ```
 
+### Inline Editing - Autocomplete with Dynamic Filtering
+
+This feature extends support for dynamic options within the table's autocomplete editor. Consumers can implement custom/dynamic filtering using the `filterOptions` function, the loading state is handled internally.
+
+```javascript
+const options = ['Mickey', 'Bugs', 'Homer', 'Fred', 'Daffy'];
+const dynamicFilterOptions = ['Scooby', 'Tom', 'Jerry'];
+
+const table = document.querySelector('modus-table');
+table.columns = [
+  {
+    header: 'First Name',
+    accessorKey: 'firstName',
+    id: 'first-name',
+    dataType: 'text',
+    cellEditable: true,
+    cellEditorType: 'autocomplete', // Autocomplete input type
+    cellEditorArgs: {
+      filterOptions: filterDynamicOptions, // Function to dynamically filter options
+      options: options, // Default options
+    },
+  },
+  {
+    header: 'Status',
+    accessorKey: 'status',
+    id: 'status',
+    dataType: 'text',
+    minSize: 80,
+    cellEditable: true,
+    cellEditorType: 'select',
+    cellEditorArgs: {
+      options: [{ display: 'Verified' }, { display: 'Pending' }, { display: 'Rejected' }],
+    },
+  },
+  {
+    header: 'Priority',
+    accessorKey: 'priority',
+    id: 'priority',
+    dataType: 'badge',
+    cellEditable: true,
+    cellEditorType: 'select',
+    cellEditorArgs: {
+      options: [
+        { size: 'medium', type: 'counter', display: 'High', color: 'success' },
+        { size: 'medium', type: 'counter', display: 'Low', color: 'danger' },
+        { size: 'medium', type: 'counter', display: 'Medium', color: 'warning' },
+      ],
+    },
+  },
+  {
+    header: 'Email',
+    accessorKey: 'email',
+    id: 'email',
+    dataType: 'link',
+    size: 230,
+    minSize: 80,
+    cellEditable: true,
+    cellEditorType: 'select',
+    cellEditorArgs: {
+      options: [
+        { display: 'Google', url: 'https://www.google.com' },
+        { display: 'Yahoo', url: 'https://www.yahoo.com' },
+        { display: 'Bing', url: 'https://www.bing.com' },
+      ],
+    },
+  },
+  {
+    header: 'Date',
+    accessorKey: 'date',
+    id: 'date',
+    dataType: 'date', // Date type column
+    cellEditable: true,
+    cellEditorType: 'date',
+  },
+];
+
+table.data = [
+  {
+    firstName: 'John',
+    status: 'Verified',
+    email: { display: 'Google', url: 'https://www.google.com' },
+    priority: { size: 'medium', type: 'counter', display: 'High', color: 'success' },
+    date: '2022-01-01',
+  },
+  {
+    firstName: 'Jane',
+    status: 'Pending',
+    email: { display: 'Yahoo', url: 'https://www.yahoo.com' },
+    priority: { size: 'medium', type: 'counter', display: 'Medium', color: 'warning' },
+    date: '2022-02-01',
+  },
+  {
+    firstName: 'Bob',
+    status: 'Rejected',
+    email: { display: 'Bing', url: 'https://www.bing.com' },
+    priority: { size: 'medium', type: 'counter', display: 'Low', color: 'danger' },
+    date: '2022-03-01',
+  },
+];
+
+/**
+ * Function to dynamically filter options for the 'autocomplete' editor
+ * @param {string} value - The input value to filter the options
+ * @returns {Promise<string[]>} - A promise that resolves with the filtered options
+ */
+function filterDynamicOptions(value) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      // Filter options based on the input value
+      const filteredOptions = [...options, ...dynamicFilterOptions].filter((option) =>
+        option.toLowerCase().includes(value.toLowerCase())
+      );
+
+      // Resolve the promise with filtered options
+      resolve(filteredOptions);
+    }, 1000); // Simulate API delay
+  });
+}
+```
+
 ### Row Actions
 
 Users can add actions to rows. These actions will be shown in the first column as icons. A maximum of 4 icons will be shown, including the expand icon for expandable rows, if there more actions are provided, an overflow menu will be shown with a list of the remaining actions displayed as their label.
@@ -679,6 +799,14 @@ type ModusTableCellEditorType =
   | typeof CELL_EDIT_TYPE_DATE;
 type ModusTableCellDateEditorArgs = { format: string };
 type ModusTableCellSelectEditorArgs = { options: unknown[] };
+type ModusTableCellAutocompleteEditorArgs = {
+  options: ModusAutocompleteOption[];
+  noResultsFoundText: string;
+  noResultsFoundSubtext: string;
+  showNoResultsFoundMessage: boolean;
+  showOptionsOnFocus: boolean;
+  filterOptions: (value: string) => Promise<ModusAutocompleteOption[] | string[]>;
+};
 type ModusTableCellEditorArgs = ModusTableCellSelectEditorArgs | ModusTableCellDateEditorArgs;
 type ModusTableDataUpdaterProps = { rowId: string; accessorKey: string; newValue: string; oldValue?: string };
 type ModusTableSortingFunction<TData extends RowData> = SortingFnOption<TData> | 'sortForHyperlink' | 'sortForBadge';
@@ -752,8 +880,18 @@ interface ModusTableRowAction {
   id: string;
   icon?: string;
   label?: string;
+  tooltipText?: string;
+  buttonStyle?: 'borderless' | 'fill' | 'outline';
+  color?: 'danger' |'primary' | 'secondary' | 'tertiary' | 'special'
   index: number;
+  iconColor?: string;
   isDisabled?: (row: unknown) => boolean;
+}
+
+interface ModusTableRowActionConfig {
+  header?: string;
+  width?: number;
+  menuOnly?:boolean;
 }
 
 interface ModusTableManualPaginationOptions {
@@ -788,6 +926,7 @@ Users can use keyboard navigation to perform different actions.
 | Column Visibility | The meatball icon buttom will get focus by using the <kbd>Tab</kbd> key. By pressing <kbd>Enter</kbd> or <kbd>Space</kbd>, a dropdown will be opened; press the <kbd>Escape</kbd> key to close the dropdown. Using `Tab or Shift+Tab` / `ArrowUp or ArrowDown`, column checkboxes/items can get focus to change state by pressing the <kbd>Enter</kbd> or <kbd>Space</kbd>.                                                                                   |
 | Cell Navigation   | Table cells can be navigated using keys like <kbd>Tab</kbd>, `Shift+Tab`, `ArrowUp`, and `ArrowDown`. Additionally, the <kbd>Tab</kbd> key can be used to focus on elements inside a cell.                                                                                                                                                                                                                                                                    |
 | Inline Editing    | When a cell is in focus, pressing the <kbd>Enter</kbd> key will activate the cell editor. The cell's value will be saved either when the focus shifts to another cell or when the <kbd>Enter</kbd> key is pressed again, which will also move the focus to the cell below in the same row. <kbd>Escape</kbd> key reverts the cell value to its original state and closes the editor. Note: Select cell editor saves the value only when the cell loses focus. |
+| Row Selection     | When multiple selection is enabled in the row selection options, users can continuously select or deselect items by using Shift + Arrow Up/Arrow Down. Additionally, if an item is selected and the Shift key is held while selecting another item, it allows for the continuous selection of all items between the two selected items. In the case of expanded items, the `subRowSelection` option should be set to true to support this behavior.           |
 
 ## Properties
 
@@ -809,6 +948,7 @@ Users can use keyboard navigation to perform different actions.
 | `pageSizeList`            | --                        |                                                                                                                                                                                               | `number[]`                             | `PAGINATION_DEFAULT_SIZES`                                                                  |
 | `pagination`              | `pagination`              |                                                                                                                                                                                               | `boolean`                              | `undefined`                                                                                 |
 | `rowActions`              | --                        | (Optional) Actions that can be performed on each row. A maximum of 4 icons will be shown, including overflow menu and expand icons.                                                           | `ModusTableRowAction[]`                | `[]`                                                                                        |
+| `rowActionsConfig`        | --                        | (Optional) The configuration for the row action's column                                                                                                                                      | `ModusTableRowActionConfig`            | `undefined`                                                                                 |
 | `rowSelection`            | `row-selection`           | (Optional) To display checkbox.                                                                                                                                                               | `boolean`                              | `false`                                                                                     |
 | `rowSelectionOptions`     | --                        | (Optional) To control multiple row selection.                                                                                                                                                 | `ModusTableRowSelectionOptions`        | `{     multiple: false,     subRowSelection: false,   }`                                    |
 | `rowsExpandable`          | `rows-expandable`         | (Optional) To display expanded rows.                                                                                                                                                          | `boolean`                              | `false`                                                                                     |

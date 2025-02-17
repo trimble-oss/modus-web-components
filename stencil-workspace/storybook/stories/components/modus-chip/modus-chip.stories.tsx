@@ -1,6 +1,7 @@
 import { html } from 'lit-html';
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-chip-storybook-docs.mdx';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 export default {
   title: 'Components/Chip',
@@ -20,12 +21,18 @@ export default {
         type: { summary: 'string' },
       },
     },
+    advancedChip: {
+      name: 'advanced-chip',
+      description: 'Whether the chip is advanced',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      },
+    },
     chipStyle: {
       name: 'chip-style',
-      control: {
-        options: ['solid', 'outline'],
-        type: 'select',
-      },
+      options: ['solid', 'outline'],
+      type: 'select',
       description: 'The style of the chip',
       table: {
         defaultValue: { summary: `'solid'` },
@@ -71,10 +78,8 @@ export default {
       },
     },
     size: {
-      control: {
-        options: ['medium', 'small'],
-        type: 'select',
-      },
+      options: ['medium', 'small'],
+      type: 'select',
       description: 'The size of the chip',
       table: {
         defaultValue: { summary: `'medium'` },
@@ -113,11 +118,13 @@ export default {
       isToolshown: true,
     },
   },
+  decorators: [withActions],
 };
 
 export const Default = ({
   active,
   ariaLabel,
+  advancedChip,
   chipStyle,
   disabled,
   hasError,
@@ -132,6 +139,7 @@ export const Default = ({
   <modus-chip
     active=${active}
     aria-label=${ariaLabel}
+    ?advanced-chip=${advancedChip}
     chip-style=${chipStyle}
     ?disabled=${disabled}
     has-error=${hasError}
@@ -147,6 +155,7 @@ export const Default = ({
 Default.args = {
   active: false,
   ariaLabel: '',
+  advancedChip: false,
   chipStyle: 'solid',
   disabled: false,
   hasError: false,
@@ -162,6 +171,7 @@ Default.args = {
 export const Outline = ({
   active,
   ariaLabel,
+  advancedChip,
   chipStyle,
   disabled,
   hasError,
@@ -175,6 +185,7 @@ export const Outline = ({
   <modus-chip
     active=${active}
     aria-label=${ariaLabel}
+    ?advanced-chip=${advancedChip}
     chip-style=${chipStyle}
     ?disabled=${disabled}
     has-error=${hasError}
@@ -189,6 +200,7 @@ export const Outline = ({
 Outline.args = {
   active: false,
   ariaLabel: '',
+  advancedChip: false,
   chipStyle: 'outline',
   disabled: false,
   hasError: false,
@@ -198,4 +210,98 @@ Outline.args = {
   showClose: false,
   size: 'medium',
   value: 'Bryan',
+};
+
+export const AdvancedChip = ({
+  active,
+  ariaLabel,
+  advancedChip,
+  chipStyle,
+  disabled,
+  hasError,
+  imageUrl,
+  maxWidth,
+  showCheckmark,
+  showClose,
+  size,
+  value,
+}) => html`
+  <modus-dropdown label="Dropdown" ?disabled=${disabled} id="dropdown" toggle-element-id="toggleElement" animate-list>
+    <modus-chip
+      id="toggleElement"
+      slot="dropdownToggle"
+      active=${active}
+      aria-label=${ariaLabel}
+      ?advanced-chip=${advancedChip}
+      chip-style=${chipStyle}
+      ?disabled=${disabled}
+      has-error=${hasError}
+      image-url=${imageUrl}
+      max-width=${maxWidth}
+      show-checkmark=${showCheckmark}
+      show-close=${showClose}
+      size=${size}
+      value=${value}>
+    </modus-chip>
+    <modus-list slot="dropdownList">
+      <modus-list-item value="1" disabled borderless>Select Process</modus-list-item>
+      <modus-list-item value="2" borderless>First Option (FO)</modus-list-item>
+      <modus-list-item value="3" borderless>Second Option (SO)</modus-list-item>
+      <modus-list-item value="4" borderless>Next Option (NO)</modus-list-item>
+      <modus-list-item value="4" borderless>Another Option (AO)</modus-list-item>
+    </modus-list>
+  </modus-dropdown>
+
+  ${setAdvancedChip()}
+`;
+AdvancedChip.args = {
+  active: false,
+  ariaLabel: '',
+  advancedChip: true,
+  chipStyle: 'outline',
+  disabled: false,
+  hasError: false,
+  imageUrl: '',
+  maxWidth: '',
+  showCheckmark: false,
+  showClose: false,
+  size: 'medium',
+  value: 'Processes Type',
+};
+
+const setAdvancedChip = () => {
+  const tag = document.createElement('script');
+  tag.innerHTML = `
+      const chip = document.querySelector('#toggleElement');
+      const dropdown = document.querySelector('modus-dropdown');
+      const list = document.querySelector('modus-list');
+      let itemSelected = false;
+      dropdown.addEventListener('dropdownClose', (e) => {
+        console.log('dropdownClose');
+        if(!itemSelected) {
+          chip.active = false;
+        }
+      });
+      chip.addEventListener('chipClick', (e) => {
+        console.log('chipClick');
+        chip.active = true;
+        dropdown.toggleDropdown = true;
+      });
+      chip.addEventListener('closeClick', (e) => {
+        console.log('chipClose');
+        chip.value = 'Processes Type';
+        chip.active = false;
+        chip.showClose = false;
+        dropdown.toggleDropdown = false;
+
+      });
+      list.addEventListener('itemClick', (e) => {
+        console.log('listItem', e.srcElement.innerText);
+        chip.value = 'Processes Type: ' + e.srcElement.innerText;
+        chip.showClose = true;
+        chip.active = true;
+        itemSelected = true;
+      });
+  `;
+  return tag;
 };

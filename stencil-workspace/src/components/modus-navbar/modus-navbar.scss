@@ -25,6 +25,10 @@ nav {
     width: 22px;
   }
 
+  .logo-clickable {
+    cursor: pointer;
+  }
+
   .icon-search,
   .icon-notifications,
   .icon-help,
@@ -145,7 +149,7 @@ nav {
 
       modus-tooltip {
         img.avatar {
-          background-color: $modus-navbar-icon-color;
+          background-color: transparent;
           border-radius: 50%;
           display: flex;
           height: 32px;
@@ -261,15 +265,21 @@ nav {
     user-select: none;
 
     @media screen and (width > 576px) {
-      .product-logo-secondary {
+      .product-logo-secondary.primary-logo-exists {
         display: none;
       }
     }
 
-    @media screen and (width <=576px) {
-      .product-logo-primary {
+    @media screen and (width <= 576px) {
+      .product-logo-primary.secondary-logo-exists {
         display: none;
       }
     }
+  }
+}
+
+@media screen and (forced-colors: active) {
+  nav {
+    border-bottom: 1px solid transparent;
   }
 }

@@ -6,10 +6,10 @@ on:
         required: true
         type: choice
         options:
-          - '14'
           - '15'
           - '16'
           - '17'
+          - '18'
         description: The version of Angular you want to build
 
 permissions:
@@ -34,7 +34,7 @@ jobs:
         if: ${{ github.event.inputs.angularVersion < 17 }}
         uses: actions/setup-node@v4
         with:
-          node-version: '16.x'
+          node-version: '18.x'
           registry-url: 'https://registry.npmjs.org'
 
       # Setup Node.js environment specifically for Angular version 17 and above

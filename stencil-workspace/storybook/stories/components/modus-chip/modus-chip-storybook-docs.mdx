@@ -1,10 +1,12 @@
 import { Anchor } from '@storybook/addon-docs';
+import { Meta, Story } from '@storybook/blocks';
+import * as Chip from './modus-chip.stories.tsx';
 
 # Chip
 
 ---
 
-[Modus Chip](https://modus.trimble.com/components/chips/) web components are referenced using the `<modus-chip>` custom HTML element.
+[Modus Chip](https://modus.trimble.com/components/web/chips/) web components are referenced using the `<modus-chip>` custom HTML element.
 
 <Anchor storyId="components-chip--default" />
 
@@ -33,6 +35,9 @@ import { Anchor } from '@storybook/addon-docs';
 <modus-chip image-url="https://randomuser.me/api/portraits/lego/1.jpg" show-close chip-id="chip-id-1" size="small" value="Pet 1"></modus-chip>
 <modus-chip image-url="https://randomuser.me/api/portraits/lego/1.jpg" show-close chip-id="chip-id-2" size="small" value="Pet 2"></modus-chip>
 
+### Advanced Chip
+<Story of={Chip.AdvancedChip}/>
+
 ```html
 <modus-chip image-url="https://example.com/image.jpg" show-close value="Bryan"></modus-chip>
 <modus-chip active image-url="https://example.com/image.jpg" show-close value="Bryan"></modus-chip>
@@ -44,9 +49,65 @@ import { Anchor } from '@storybook/addon-docs';
 <modus-chip has-error image-url="https://example.com/image.jpg" show-close chip-style="outline" value="Bryan"></modus-chip>
 <modus-chip disabled image-url="https://example.com/image.jpg" show-close chip-style="outline" value="Bryan"></modus-chip>
 
-<modus-chip image-url="https://randomuser.me/api/portraits/lego/1.jpg" show-close chipId="chip-1" size="small" value="Pet 1"></modus-chip>
-<modus-chip image-url="https://randomuser.me/api/portraits/lego/1.jpg" show-close chipId="chip-2" size="small" value="Pet 2"></modus-chip>
+<modus-chip
+  image-url="https://randomuser.me/api/portraits/lego/1.jpg"
+  show-close
+  chipId="chip-1"
+  size="small"
+  value="Pet 1"></modus-chip>
+<modus-chip
+  image-url="https://randomuser.me/api/portraits/lego/1.jpg"
+  show-close
+  chipId="chip-2"
+  size="small"
+  value="Pet 2"></modus-chip>
+<modus-dropdown label="Dropdown" ?disabled=${disabled} id="dropdown" toggle-element-id="toggleElement" animate-list>
+    <modus-chip
+      id="toggleElement"
+      slot="dropdownToggle"
+      advanced-chip
+      value="Processes Type">
+    </modus-chip>
+    <modus-list slot="dropdownList">
+      <modus-list-item value="1" disabled borderless>Select Process</modus-list-item>
+      <modus-list-item value="2" borderless>First Option (FO)</modus-list-item>
+      <modus-list-item value="3" borderless>Second Option (SO)</modus-list-item>
+      <modus-list-item value="4" borderless>Next Option (NO)</modus-list-item>
+      <modus-list-item value="4" borderless>Another Option (AO)</modus-list-item>
+    </modus-list>
+</modus-dropdown>
 
+<script>
+ const chip = document.querySelector('modus-chip');
+  const dropdown = document.querySelector('modus-dropdown');
+  const list = document.querySelector('modus-list');
+  let itemSelected = false;
+  dropdown.addEventListener('dropdownClose', (e) => {
+      console.log('dropdownClose');
+      if(!itemSelected) {
+        chip.active = false;
+      }
+  });
+  chip.addEventListener('chipClick', (e) => {
+      console.log('chipClick');
+      chip.active = true;
+      dropdown.toggleDropdown = true;
+  });
+  chip.addEventListener('closeClick', (e) => {
+      console.log('chipClose');
+      chip.value = 'Processes Type';
+      chip.active = false;
+      chip.showClose = false;
+      dropdown.toggleDropdown = false;
+  });
+  list.addEventListener('itemClick', (e) => {
+      console.log('listItem', e.srcElement.innerText);
+      chip.value = 'Processes Type: ' + e.srcElement.innerText;
+      chip.showClose = true;
+      chip.active = true;
+      itemSelected = true;
+  });
+</script>
 ```
 
 ### Properties
@@ -62,9 +123,10 @@ import { Anchor } from '@storybook/addon-docs';
 | show-checkmark | Whether to show the checkmark                                       | boolean |                    | false         |          |
 | show-close     | Whether to show the close icon                                      | boolean |                    | false         |          |
 | size           | The chip's size                                                     | string  | 'medium', 'small'  | 'medium'      |          |
+| advanced-chip  | Whether the chip is in advanced state                               | boolean |                    | false         |          |
 | value          | The chip's value                                                    | string  |                    |               |          |
 | maxWidth       | Maximum width for the Chip's text and shows ellipsis when truncated | string  |                    |               |          |
-| chipId         | This chip's id will create much more visibility for testing        | string  |                    |               |          |
+| chipId         | This chip's id will create much more visibility for testing         | string  |                    |               |          |
 
 ### DOM Events
 

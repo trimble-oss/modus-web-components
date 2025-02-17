@@ -1,6 +1,7 @@
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-pagination-storybook-docs.mdx';
 import { html } from 'lit-html';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 export default {
   title: 'Components/Pagination',
@@ -53,10 +54,8 @@ export default {
       type: { required: false },
     },
     size: {
-      control: {
-        options: ['small', 'medium', 'large'],
-        type: 'select',
-      },
+      options: ['small', 'medium', 'large'],
+      type: 'select',
       description: 'The size of the pagination',
       table: {
         defaultValue: { summary: `'medium'` },
@@ -76,6 +75,7 @@ export default {
       isToolshown: true,
     },
   },
+  decorators: [withActions],
 };
 
 export const Default = ({ activePage, ariaLabel, maxPage, minPage, prevPageButtonText, nextPageButtonText, size }) => html`

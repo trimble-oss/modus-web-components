@@ -53,6 +53,7 @@ import {
   ModusTableRowWithId,
   ModusTableColumnSort,
   ModusTableErrors,
+  ModusTableRowActionConfig,
 } from './models/modus-table.models';
 import ColumnDragState from './models/column-drag-state.model';
 import {
@@ -73,6 +74,7 @@ import { ModusTableBody } from './parts/modus-table-body';
 import { TableContext, TableCellEdited } from './models/table-context.models';
 import { TableRowActionWithOverflow } from './models/table-row-actions.models';
 import { createGuid } from '../../utils/utils';
+import { getTranslations } from '../../lang/translations';
 
 /**
  * @slot customFooter - Slot for custom footer.
@@ -120,11 +122,17 @@ export class ModusTable {
         this.tableState.pagination.pageIndex = maxPageIndex >= 0 ? maxPageIndex : 0;
       }
     }
-    this.tableCore?.setState('pagination', {
-      ...this.tableState.pagination,
-      pageIndex: this.tableState.pagination.pageIndex,
-      pageSize: this.pagination ? this.tableState.pagination.pageSize : this.data.length,
-    });
+    if (!this.manualPaginationOptions) {
+      this.tableCore?.setState('pagination', {
+        ...this.tableState.pagination,
+        pageIndex: this.tableState.pagination.pageIndex,
+        pageSize: this.pagination
+          ? this.tableState.pagination.pageSize
+          : this.rowsExpandable
+            ? this.pageSizeList[0]
+            : this.data.length,
+      });
+    }
     this.tableCore?.setOptions('data', newVal);
   }
 
@@ -171,6 +179,9 @@ export class ModusTable {
 
   /** (Optional) Actions that can be performed on each row. A maximum of 4 icons will be shown, including overflow menu and expand icons. */
   @Prop() rowActions: ModusTableRowAction[] = [];
+
+  /** (Optional) The width and header of the rowActionsConfig. */
+  @Prop() rowActionsConfig: ModusTableRowActionConfig;
 
   /** (Optional) To display expanded rows. */
   @Prop() rowsExpandable = false;
@@ -391,6 +402,7 @@ export class ModusTable {
   }
 
   componentWillRender(): void {
+    getTranslations();
     this._context = this.getTableContext();
   }
 
@@ -487,6 +499,11 @@ export class ModusTable {
   getRowActionsWithOverflow(): TableRowActionWithOverflow[] {
     if (this.rowActions) {
       const sortedActions = this.rowActions.sort((a, b) => a.index - b.index);
+
+      if (this.rowActionsConfig?.menuOnly) {
+        return sortedActions.map((action) => ({ ...action, isOverflow: true }));
+      }
+
       const visibleLimit = sortedActions.length < 5 ? 4 : 3;
       const actionButtons = sortedActions.slice(0, visibleLimit);
       const overflowMenu = sortedActions.slice(visibleLimit).map((action) => ({ ...action, isOverflow: true }));
@@ -499,6 +516,7 @@ export class ModusTable {
 
   getTableContext(): TableContext {
     return {
+      anchorRowIndex: this.anchorRowIndex,
       element: this.element,
       data: this.data,
       density: this.density,
@@ -520,6 +538,8 @@ export class ModusTable {
       rowSelectionChange: this.rowSelectionChange,
       rowExpanded: this.rowExpanded,
       rowActionClick: this.rowActionClick,
+      rowActionSize: this.rowActionsConfig?.width,
+      rowActionHeader: this.rowActionsConfig?.header,
       sortChange: this.sortChange,
       paginationChange: this.paginationChange,
       columnSizingChange: this.columnSizingChange,
@@ -550,6 +570,8 @@ export class ModusTable {
       onToolbarOptionsChange: this.onToolbarOptionsChange,
       getRowId: this.getRowId,
       updateData: this.updateData.bind(this),
+      updateSelectedRows: this.updateSelectedRows.bind(this),
+      updateClickedRows: this.updateClickedRows.bind(this),
     };
   }
 
@@ -624,6 +646,7 @@ export class ModusTable {
       columnResize: this.columnResize,
       sort: this.sort,
       pagination: this.pagination,
+      rowsExpandable: this.rowsExpandable,
       pageSizeList: this.pageSizeList,
       rowSelection: this.rowSelection,
       rowSelectionOptions: this.rowSelectionOptions,
@@ -678,6 +701,79 @@ export class ModusTable {
     this.data = this.tableCore.getState(updater, this.data) as unknown[];
     this.tableCore.setState('data', this.data);
     this.cellValueChange.emit({ ...context, data: this.data });
+  }
+
+  lastDirection: string = null;
+
+  private anchorRowIndex: number | null = null;
+
+  updateSelectedRows(nextRowIndex: number, currentRowIndex: number): void {
+    if (!this.rowSelection) {
+      return;
+    }
+    if (this.anchorRowIndex === null) {
+      this.anchorRowIndex = currentRowIndex;
+    }
+
+    const start = Math.min(this.anchorRowIndex, nextRowIndex);
+    const end = Math.max(this.anchorRowIndex, nextRowIndex);
+
+    const rows = this.tableCore.getTableInstance().getExpandedRowModel().rows;
+    this.tableCore.getTableInstance().resetRowSelection();
+    for (let i = start; i <= end; i++) {
+      const row = rows[i];
+      if (row) {
+        row.toggleSelected(true, { selectChildren: true });
+      }
+    }
+    this.emitRowSelection();
+  }
+
+  updateClickedRows(currentRowIndex: number, isShiftClick: boolean): void {
+    const rows = this.tableCore.getTableInstance().getExpandedRowModel().rows;
+
+    if (this.rowSelectionOptions.multiple && isShiftClick) {
+      if (this.anchorRowIndex === null) {
+        this.anchorRowIndex = currentRowIndex;
+      }
+
+      const start = Math.min(this.anchorRowIndex, currentRowIndex);
+      const end = Math.max(this.anchorRowIndex, currentRowIndex);
+
+      this.tableCore.getTableInstance().resetRowSelection();
+      for (let i = start; i <= end; i++) {
+        const row = rows[i];
+        if (row) {
+          row.toggleSelected(true, { selectChildren: true });
+        }
+      }
+
+      this.emitRowSelection();
+      return;
+    }
+
+    const row = rows[currentRowIndex];
+    if (row) {
+      const isSelected = row.getIsSelected();
+      if (!isSelected) {
+        this.anchorRowIndex = currentRowIndex;
+      }
+
+      row.toggleSelected(undefined, { selectChildren: true });
+      this.emitRowSelection();
+    }
+  }
+
+  emitRowSelection(): void {
+    const selectedRows = this.tableCore
+      .getTableInstance()
+      .getSelectedRowModel()
+      .flatRows.map((row) => ({
+        id: row.id,
+        ...(typeof row.original === 'object' ? row.original : {}),
+      }));
+
+    this.rowSelectionChange.emit(selectedRows);
   }
 
   updateRowSelection(updater: Updater<unknown>): void {

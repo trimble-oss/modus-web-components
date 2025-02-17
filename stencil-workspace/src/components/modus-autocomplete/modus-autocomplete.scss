@@ -73,6 +73,27 @@
         height: 1.875rem;
       }
     }
+
+    .icons {
+      align-items: center;
+      color: $modus-input-helper-icon-color;
+      cursor: pointer;
+      display: flex;
+      font-size: $rem-16px;
+      height: 100%;
+      justify-content: center;
+      margin-left: 1px;
+      width: 2rem;
+
+      &.clear {
+        cursor: pointer;
+        min-height: 1.875rem;
+
+        &:hover svg path {
+          opacity: 0.75;
+        }
+      }
+    }
   }
 
   .error {
@@ -190,6 +211,21 @@
       font-size: $rem-14px;
       min-height: 3rem;
       padding: 0 $rem-16px;
+    }
+  }
+}
+
+.autocomplete[aria-readonly='true'] {
+  .chips-container {
+    background-color: $modus-autocomplete-readonly-bg;
+    border-color: transparent;
+
+    .input {
+      &::part(input-container) {
+        background-color: $modus-autocomplete-readonly-bg;
+        border-color: transparent;
+        color: $modus-autocomplete-readonly-color;
+      }
     }
   }
 }

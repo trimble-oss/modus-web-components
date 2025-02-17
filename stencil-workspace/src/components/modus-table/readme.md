@@ -26,6 +26,7 @@
 | `pageSizeList`            | --                        |                                                                                                                                                                                       | `number[]`                                | `PAGINATION_DEFAULT_SIZES`                                                                   |
 | `pagination`              | `pagination`              |                                                                                                                                                                                       | `boolean`                                 | `undefined`                                                                                  |
 | `rowActions`              | --                        | (Optional) Actions that can be performed on each row. A maximum of 4 icons will be shown, including overflow menu and expand icons.                                                   | `ModusTableRowAction[]`                   | `[]`                                                                                         |
+| `rowActionsConfig`        | --                        | (Optional) The width and header of the rowActionsConfig.                                                                                                                              | `ModusTableRowActionConfig`               | `undefined`                                                                                  |
 | `rowSelection`            | `row-selection`           | (Optional) To display checkbox.                                                                                                                                                       | `boolean`                                 | `false`                                                                                      |
 | `rowSelectionOptions`     | --                        | (Optional) To control multiple row selection.                                                                                                                                         | `ModusTableRowSelectionOptions`           | `{     multiple: false,     subRowSelection: false,   }`                                     |
 | `rowsExpandable`          | `rows-expandable`         | (Optional) To display expanded rows.                                                                                                                                                  | `boolean`                                 | `false`                                                                                      |
@@ -149,6 +150,7 @@ graph TD;
   modus-table-row-actions-menu --> modus-list
   modus-table-row-actions-menu --> modus-list-item
   modus-table-row-actions-cell --> modus-table-row-actions
+  modus-table-row-actions --> modus-tooltip
   modus-table-row-actions --> modus-button
   modus-table-cell-main --> modus-table-cell-editor
   modus-table-cell-main --> modus-badge

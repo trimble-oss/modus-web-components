@@ -1,10 +1,11 @@
-import { Story } from '@storybook/addon-docs';
+import { Story } from '@storybook/blocks';
+import * as Breadcrumb from './modus-breadcrumb.stories.tsx';
 
 # Breadcrumb
 
 ---
 
-[Modus Breadcrumb](https://modus.trimble.com/components/breadcrumbs/) web components are wrappers around native `<nav>` elements. They are referenced using the `<modus-breadcrumb>` custom HTML element.
+[Modus Breadcrumb](https://modus.trimble.com/components/web/breadcrumbs/) web components are wrappers around native `<nav>` elements. They are referenced using the `<modus-breadcrumb>` custom HTML element.
 
 A new TypeScript typing has been provided named Crumb defined as:
 
@@ -21,7 +22,7 @@ A new TypeScript typing has been provided named Crumb defined as:
 
 ### Default
 
-<Story id="components-breadcrumb--default" height={'72px'} />
+<Story of={Breadcrumb.Default} height={'72px'} />
 
 ```html
 <modus-breadcrumb></modus-breadcrumb>

@@ -1,6 +1,7 @@
 // @ts-ignore: JSX/MDX with Stencil
 import docs from './modus-toast-storybook-docs.mdx';
 import { html } from 'lit-html';
+import { withActions } from '@storybook/addon-actions/decorator';
 
 export default {
   title: 'Components/Toast',
@@ -26,11 +27,17 @@ export default {
         type: { summary: 'boolean' },
       },
     },
-    role: {
-      control: {
-        options: ['alert', 'log', 'marquee', 'status', 'timer'],
-        type: 'select',
+    retainElement: {
+      name: 'retain-element',
+      description: 'Whether to retain the element in the DOM after it has been dismissed',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
       },
+    },
+    role: {
+      options: ['alert', 'log', 'marquee', 'status', 'timer'],
+      type: 'select',
       description: 'Role taken by the toast',
       table: {
         defaultValue: { summary: 'status' },
@@ -46,10 +53,8 @@ export default {
       },
     },
     type: {
-      control: {
-        options: ['danger', 'primary', 'secondary', 'success'],
-        type: 'select',
-      },
+      options: ['danger', 'primary', 'secondary', 'success'],
+      type: 'select',
       description: 'The type of the toast',
       table: {
         defaultValue: { summary: `'default'` },
@@ -71,14 +76,16 @@ export default {
       isToolshown: true,
     },
   },
+  decorators: [withActions],
 };
 
-const Template = ({ ariaLabel, dismissible, showIcon, role, type, delay }) => html`
+const Template = ({ ariaLabel, dismissible, showIcon, retainElement, role, type, delay }) => html`
   <modus-toast
     aria-label=${ariaLabel}
     delay=${delay}
     dismissible=${dismissible}
     show-icon=${showIcon}
+    retain-element=${retainElement}
     role=${role}
     type=${type}
     >Toast!</modus-toast
@@ -90,6 +97,7 @@ Primary.args = {
   ariaLabel: '',
   delay: 0,
   dismissible: false,
+  retainElement: false,
   role: 'status',
   showIcon: true,
   type: 'primary',
@@ -100,6 +108,7 @@ Secondary.args = {
   ariaLabel: '',
   delay: 0,
   dismissible: false,
+  retainElement: false,
   role: 'status',
   showIcon: true,
   type: 'secondary',
@@ -110,6 +119,7 @@ Success.args = {
   ariaLabel: '',
   delay: 0,
   dismissible: false,
+  retainElement: false,
   role: 'status',
   showIcon: true,
   type: 'success',
@@ -120,7 +130,19 @@ Danger.args = {
   ariaLabel: '',
   delay: 0,
   dismissible: false,
+  retainElement: false,
   role: 'status',
   showIcon: true,
   type: 'danger',
+};
+
+export const RetainedToast = Template.bind({});
+RetainedToast.args = {
+  ariaLabel: '',
+  delay: 2000,
+  dismissible: false,
+  retainElement: true,
+  role: 'status',
+  showIcon: true,
+  type: 'primary',
 };

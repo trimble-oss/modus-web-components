@@ -135,6 +135,7 @@ table {
 
       th {
         background-color: $modus-table-header-bg;
+        border-bottom: 1px solid transparent; // Windows High Contrast Mode fix
         border-right: $rem-1px $modus-table-border-color solid;
         box-shadow: inset 0 -0.5px 0 $modus-table-border-color;
         font-weight: $font-weight-semi-bold;
@@ -144,6 +145,10 @@ table {
 
         &.row-checkbox {
           padding: $rem-4px $rem-8px;
+        }
+
+        &.row-checkbox > modus-checkbox {
+          justify-content: center;
         }
 
         &.header-base {
@@ -282,11 +287,14 @@ table {
         // density-relaxed
         padding-bottom: $rem-14px;
         padding-top: $rem-14px;
-        vertical-align: top;
 
         &.row-checkbox {
           padding-bottom: $rem-12px;
           padding-top: $rem-12px;
+        }
+
+        &.row-checkbox > modus-checkbox {
+          justify-content: center;
         }
 
         &.edit-mode {
@@ -444,6 +452,10 @@ table {
     position: sticky;
     right: 0;
     z-index: 1;
+  }
+
+  td.sticky-right {
+    z-index: 99;
   }
 
   &.density-relaxed {

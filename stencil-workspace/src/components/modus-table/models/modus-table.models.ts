@@ -57,6 +57,7 @@ export type ModusTableCellAutocompleteEditorArgs = {
   noResultsFoundSubtext: string;
   showNoResultsFoundMessage: boolean;
   showOptionsOnFocus: boolean;
+  filterOptions: (value: string) => Promise<ModusAutocompleteOption[] | string[]>;
 };
 export type ModusTableCellEditorArgs = ModusTableCellSelectEditorArgs | ModusTableCellDateEditorArgs;
 
@@ -66,8 +67,18 @@ export interface ModusTableRowAction {
   id: string;
   icon?: string;
   label?: string;
+  tooltipText?: string;
+  buttonStyle?: 'borderless' | 'fill' | 'outline';
+  color?: 'danger' | 'primary' | 'secondary' | 'tertiary' | 'special';
   index: number;
+  iconColor?: string;
   isDisabled?: (row: unknown) => boolean;
+}
+
+export interface ModusTableRowActionConfig {
+  header?: string;
+  width?: number;
+  menuOnly?: boolean;
 }
 
 export interface ModusTableRowActionClick {
