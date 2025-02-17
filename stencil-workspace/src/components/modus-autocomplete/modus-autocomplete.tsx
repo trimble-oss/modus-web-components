@@ -185,7 +185,7 @@ export class ModusAutocomplete {
       ],
     });
 
-    if (referenceElement && optionsContainer) {
+    if (referenceElement.offsetWidth && optionsContainer) {
       optionsContainer.style.width = `${referenceElement.offsetWidth}px`;
     }
   }
