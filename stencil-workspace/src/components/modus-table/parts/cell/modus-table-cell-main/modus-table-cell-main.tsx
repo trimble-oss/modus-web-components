@@ -14,6 +14,7 @@ import {
 import { Cell } from '@tanstack/table-core';
 import { ModusTableCellBadge, ModusTableCellEditorArgs, ModusTableCellLink } from '../../../models/modus-table.models';
 import {
+  COLUMN_DEF_DATATYPE_CUSTOM,
   COLUMN_DEF_DATATYPE_KEY,
   COLUMN_DEF_DATATYPE_INTEGER,
   COLUMN_DEF_CELL_EDITOR_TYPE_KEY,
@@ -32,6 +33,7 @@ import { ModusTableCellBadgeElement } from '../modus-table-cell-badge-element';
 import { TableContext, TableCellEdited } from '../../../models/table-context.models';
 import ModusTableCellExpandIcons from '../modus-table-cell-expand-icons';
 import { createPopper, Instance } from '@popperjs/core';
+import { ModusTableCustomCellElement } from '../modus-table-custom-cell-element';
 
 @Component({
   tag: 'modus-table-cell-main',
@@ -222,6 +224,7 @@ export class ModusTableCellMain {
   renderCellValue(): JSX.Element[] {
     const { row, getValue } = this.cell;
     const cellValue = getValue();
+    const cell = this.cell;
 
     if (cellValue === null || cellValue === undefined) return null;
 
@@ -237,7 +240,9 @@ export class ModusTableCellMain {
     };
 
     const renderCell = () => {
-      if (cellDataType === COLUMN_DEF_DATATYPE_LINK) {
+      if (cellDataType === COLUMN_DEF_DATATYPE_CUSTOM) {
+        return <ModusTableCustomCellElement customElement={cell} />;
+      } else if (cellDataType === COLUMN_DEF_DATATYPE_LINK) {
         return (
           <ModusTableCellLinkElement
             link={cellValue as ModusTableCellLink}

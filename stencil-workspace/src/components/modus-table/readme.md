@@ -154,6 +154,7 @@ graph TD;
   modus-table-row-actions --> modus-button
   modus-table-cell-main --> modus-table-cell-editor
   modus-table-cell-main --> modus-badge
+  modus-table-cell-main --> flex-renderer
   modus-table-cell-editor --> modus-number-input
   modus-table-cell-editor --> modus-text-input
   modus-table-cell-editor --> modus-select
