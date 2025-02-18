@@ -56,7 +56,7 @@
     "@trimble-oss/modus-icons": "1.16.0",
     "@types/jest": "^27.5.1",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
-    "@typescript-eslint/parser": "^5.58.0",
+    "@typescript-eslint/parser": "^6.20.0",
     "autoprefixer": "^10.4.20",
     "cheerio": "^1.0.0",
     "colors": "^1.4.0",
