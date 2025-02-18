@@ -374,3 +374,27 @@ describe('modus-side-navigation-item', () => {
     expect(focusEvent).toHaveReceivedEvent();
   });
 });
+
+it('should not get selected when other item is clicked', async () => {
+  const page = await newE2EPage();
+  await page.setContent(`
+  <modus-side-navigation>
+    <modus-side-navigation-item id="Test" label="Test" selected>
+     <svg slot="menu-icon"></svg>
+    </modus-side-navigation-item>
+    <modus-side-navigation-item id="Test2" label="Test2"/>
+     <svg slot="menu-icon"></svg>
+      </modus-side-navigation-item>
+  </modus-side-navigation>`);
+
+  const component = await page.find('modus-side-navigation-item >>> li');
+  await component.getAttribute('selected');
+  expect(component).toHaveClass('selected');
+
+  const secondItem = await page.find('modus-side-navigation-item:nth-child(2) >>> li');
+  await secondItem.click();
+  await page.waitForChanges();
+
+  expect(component).not.toHaveClass('selected');
+  expect(secondItem).toHaveClass('selected');
+});
