@@ -44,7 +44,7 @@ table.density-compact {
 }
 
 .autocomplete::part(options-container) {
-  width: auto;
+  z-index: 9999;
 }
 
 .editor::part(input-container) {

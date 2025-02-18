@@ -173,7 +173,7 @@ export class ModusAutocomplete {
     const referenceElement = this.el.shadowRoot.querySelector(`.chips-container`) as HTMLElement;
 
     this.popperInstance = createPopper(referenceElement, optionsContainer, {
-      placement: 'bottom-start',
+      placement: this.position,
       strategy: this.position === 'auto' ? 'fixed' : 'absolute',
       modifiers: [
         {
