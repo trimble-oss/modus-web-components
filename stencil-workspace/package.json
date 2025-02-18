@@ -45,7 +45,7 @@
     "@floating-ui/dom": "^1.6.13",
     "@popperjs/core": "^2.11.8",
     "@stencil/core": "^4.12.4",
-    "@tanstack/table-core": "^8.20.5"
+    "@tanstack/table-core": "^8.21.2"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.26.3",
