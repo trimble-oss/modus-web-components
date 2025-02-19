@@ -110,8 +110,7 @@ export default {
     },
     position: {
       name: 'position',
-      control: {
-        options: [
+      options: [
           'auto',
           'auto-start',
           'auto-end',
@@ -129,7 +128,6 @@ export default {
           'right',
         ],
         type: 'select',
-      },
     },
     readOnly: {
       name: 'read-only',
@@ -391,7 +389,6 @@ WithCustomOption.args = {
   noResultsFoundText: 'No results found',
   noResultsFoundSubtext: 'Check spelling or try a different keyword',
   placeholder: 'Search...',
-  postion: 'bottom-start',
   readOnly: false,
   required: false,
   showNoResultsFoundMessage: true,
