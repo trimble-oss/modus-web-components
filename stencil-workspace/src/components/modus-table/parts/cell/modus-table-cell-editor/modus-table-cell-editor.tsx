@@ -233,7 +233,7 @@ export class ModusTableCellEditor {
               this.editedValue = selectedDetail;
             }
           }}
-          position="auto"
+          position="auto-start"
           value={selectedOption}></modus-autocomplete>
       </div>
     );
