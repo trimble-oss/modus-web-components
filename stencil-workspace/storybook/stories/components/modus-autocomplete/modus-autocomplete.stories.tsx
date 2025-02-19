@@ -389,6 +389,7 @@ WithCustomOption.args = {
   noResultsFoundText: 'No results found',
   noResultsFoundSubtext: 'Check spelling or try a different keyword',
   placeholder: 'Search...',
+  position: 'bottom-start',
   readOnly: false,
   required: false,
   showNoResultsFoundMessage: true,
