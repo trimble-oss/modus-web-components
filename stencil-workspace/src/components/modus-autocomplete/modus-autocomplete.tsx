@@ -174,7 +174,7 @@ export class ModusAutocomplete {
 
     this.popperInstance = createPopper(referenceElement, optionsContainer, {
       placement: this.position,
-      strategy: this.position === 'auto' ? 'fixed' : 'absolute',
+      strategy: this.position === 'bottom' ? 'fixed' : 'absolute',
       modifiers: [
         {
           name: 'offset',
