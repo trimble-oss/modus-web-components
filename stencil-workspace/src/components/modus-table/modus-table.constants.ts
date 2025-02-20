@@ -14,6 +14,7 @@ export const COLUMN_DEF_SHOWTOTAL = 'showTotal';
 export const COLUMN_DEF_ROW_SELECTION_ID = 'row-checkbox';
 export const COLUMN_DEF_ROW_SELECTION_CSS = 'row-checkbox';
 
+export const COLUMN_DEF_DATATYPE_CUSTOM = 'custom';
 export const COLUMN_DEF_DATATYPE_TEXT = 'text';
 export const COLUMN_DEF_DATATYPE_INTEGER = 'integer';
 export const COLUMN_DEF_DATATYPE_LINK = 'link';
