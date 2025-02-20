@@ -17,6 +17,11 @@ function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
+function randomButtonVariant(){
+  const variants = ['danger', 'primary', 'secondary', 'tertiary', 'special'];
+  return variants[randomNumber(0, 5)];
+}
+
 function newPerson() {
   const namesIndex = randomNumber(0, 17);
   const firstName = Names[namesIndex].split(' ')[0];
@@ -24,6 +29,7 @@ function newPerson() {
   const email: string = `${firstName}${lastName}@example.com`.toLowerCase();
   const randomDate = new Date(randomNumber(1990, 2020), randomNumber(0, 11), randomNumber(1, 30));
   const formattedDate = `${randomDate.getFullYear()}-${(randomDate.getMonth() + 1).toString().padStart(2, '0')}-${randomDate.getDate().toString().padStart(2, '0')}`;
+  const customCell = `<modus-button color='${randomButtonVariant()}'>Custom ${namesIndex}</modus-button>`
   return {
     firstName,
     lastName,
@@ -34,6 +40,7 @@ function newPerson() {
     status: randomNumber(1, 100) > 66 ? 'Verified' : randomNumber(0, 100) > 33 ? 'Pending' : 'Rejected',
     createdAt: formattedDate,
     priority: Priorities[randomNumber(1, 100) > 66 ? 'high' : randomNumber(0, 100) > 33 ? 'medium' : 'low'],
+    custom: customCell,
   };
 }
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -812,6 +819,21 @@ const valueFormatterTable = (pageSizeList, toolbarOptions, displayOptions, rowSe
 
 export const Hyperlink = Template.bind({});
 Hyperlink.args = { ...DefaultArgs, columns: DefaultColumns, data: makeData(7) };
+
+export const CustomCell = Template.bind({});
+CustomCell.args = {
+  ...DefaultArgs,
+  columns: [
+    ...DefaultColumns.slice(0, DefaultColumns.length - 1),
+    {
+      header:'Custom Cell',
+      accessorKey: 'custom',
+      id: 'custom',
+      dataType: 'custom',
+    },
+  ],
+  data: makeData(7),
+};
 
 export const Badge = Template.bind({});
 Badge.args = {
