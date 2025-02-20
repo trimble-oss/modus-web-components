@@ -154,19 +154,35 @@ export class ModusAutocomplete {
   @State() ShowItemsOnKeyDown = false;
   private listId = generateElementId() + '_list';
 
+  private resizeObserver: ResizeObserver;
+
   componentDidLoad(): void {
     this.convertOptions();
     if (this.multiple) {
       this.initializeSelectedChips();
     }
     this.initializePopper();
+
+    const chipsContainer = this.el.shadowRoot.querySelector('.chips-container');
+    if (chipsContainer) {
+      this.resizeObserver = new ResizeObserver(() => {
+        if (this.popperInstance) {
+          this.popperInstance.update();
+        }
+      });
+      this.resizeObserver.observe(chipsContainer);
+    }
   }
 
   disconnectedCallback(): void {
     if (this.popperInstance) {
       this.popperInstance.destroy();
     }
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+    }
   }
+
 
   initializePopper(): void {
     const optionsContainer = this.el.shadowRoot.querySelector(`.options-container`) as HTMLElement;
