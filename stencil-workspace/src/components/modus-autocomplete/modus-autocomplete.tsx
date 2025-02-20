@@ -164,7 +164,7 @@ export class ModusAutocomplete {
     this.initializePopper();
 
     const chipsContainer = this.el.shadowRoot.querySelector('.chips-container');
-    if (chipsContainer) {
+    if (chipsContainer && typeof ResizeObserver !== 'undefined') {
       this.resizeObserver = new ResizeObserver(() => {
         if (this.popperInstance) {
           this.popperInstance.update();

@@ -7,13 +7,14 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { ModusActionBarOptions } from "./components/modus-action-bar/modus-action-bar";
 import { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
+import { Placement } from "@popperjs/core";
 import { BadgeProperties } from "./components/modus-badge/modus-badge";
 import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 import { ButtonColor, ButtonSize, ButtonStyle, ButtonType } from "./components/modus-button/modus-button.models";
 import { ButtonGroupSelectionType } from "./components/modus-button-group/modus-button-group.models";
 import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 import { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
-import { Placement } from "@floating-ui/dom";
+import { Placement as Placement1 } from "@floating-ui/dom";
 import { ModusIconName } from "./icons/ModusIconUtilities";
 import { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { ModusNavbarButton, ModusNavbarDropdownItem, ModusNavbarDropdownOptions, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
@@ -31,13 +32,14 @@ import { TreeItemSelectionChange, TreeViewItemInfo, TreeViewItemOptions } from "
 import { ModusActionBarOptions as ModusActionBarOptions1 } from "./components/modus-action-bar/modus-action-bar";
 export { ModusActionBarOptions } from "./components/modus-action-bar/modus-action-bar";
 export { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-autocomplete";
+export { Placement } from "@popperjs/core";
 export { BadgeProperties } from "./components/modus-badge/modus-badge";
 export { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 export { ButtonColor, ButtonSize, ButtonStyle, ButtonType } from "./components/modus-button/modus-button.models";
 export { ButtonGroupSelectionType } from "./components/modus-button-group/modus-button-group.models";
 export { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 export { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
-export { Placement } from "@floating-ui/dom";
+export { Placement as Placement1 } from "@floating-ui/dom";
 export { ModusIconName } from "./icons/ModusIconUtilities";
 export { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 export { ModusNavbarButton, ModusNavbarDropdownItem, ModusNavbarDropdownOptions, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
@@ -199,6 +201,10 @@ export namespace Components {
           * The autocomplete's input placeholder.
          */
         "placeholder": string;
+        /**
+          * (optional) The placement of the options
+         */
+        "position": Placement;
         /**
           * Whether the autocomplete is read-only.
          */
@@ -584,7 +590,7 @@ export namespace Components {
         /**
           * (optional) The placement of the calendar popup
          */
-        "position": Placement | 'auto' | 'auto-start' | 'auto-end';
+        "position": Placement1 | 'auto' | 'auto-start' | 'auto-end';
     }
     interface ModusDivider {
     }
@@ -3182,6 +3188,10 @@ declare namespace LocalJSX {
          */
         "placeholder"?: string;
         /**
+          * (optional) The placement of the options
+         */
+        "position"?: Placement;
+        /**
           * Whether the autocomplete is read-only.
          */
         "readOnly"?: boolean;
@@ -3610,7 +3620,7 @@ declare namespace LocalJSX {
         /**
           * (optional) The placement of the calendar popup
          */
-        "position"?: Placement | 'auto' | 'auto-start' | 'auto-end';
+        "position"?: Placement1 | 'auto' | 'auto-start' | 'auto-end';
     }
     interface ModusDivider {
     }
