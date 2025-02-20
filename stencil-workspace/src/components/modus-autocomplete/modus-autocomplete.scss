@@ -142,6 +142,10 @@
 
       &.selected {
         background-color: $modus-autocomplete-selected-option-color;
+
+        .highlight-text {
+          color: $modus-autocomplete-search-highlight-color;
+        }
       }
 
       &:hover {
@@ -150,6 +154,10 @@
 
       &:focus {
         background-color: $modus-autocomplete-options-hover-background-color;
+      }
+
+      .highlight-text {
+        font-weight: bold;
       }
     }
 
