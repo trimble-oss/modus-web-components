@@ -27,6 +27,10 @@
     }
 
     .initials {
+      background-color: $modus-navbar-icon-color;
+    }
+
+    .initials {
       align-items: center;
       color: $modus-navbar-profile-icon-initials-color;
       display: flex;
