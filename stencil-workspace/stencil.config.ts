@@ -80,6 +80,11 @@ export const config: Config = {
       proxiesFile: '../react-workspace/react-18/src/components/stencil-generated/index.ts',
       includeDefineCustomElements: true,
     }),
+    react({
+      componentCorePackage: '@trimble-oss/modus-web-components',
+      proxiesFile: '../react-workspace/react-19/src/components/stencil-generated/index.ts',
+      includeDefineCustomElements: true,
+    }),
   ],
   globalStyle: 'src/global/themes.scss',
   plugins: [

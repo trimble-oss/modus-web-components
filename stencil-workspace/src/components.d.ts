@@ -54,6 +54,9 @@ export { ModusToolTipPlacement } from "./components/modus-tooltip/modus-tooltip.
 export { TreeItemSelectionChange, TreeViewItemInfo, TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export { ModusActionBarOptions as ModusActionBarOptions1 } from "./components/modus-action-bar/modus-action-bar";
 export namespace Components {
+    interface FlexRenderer {
+        "content": string;
+    }
     interface ModusAccordion {
         /**
           * (optional) The accordion's aria-label.
@@ -2078,6 +2081,12 @@ export interface ModusUtilityPanelCustomEvent<T> extends CustomEvent<T> {
     target: HTMLModusUtilityPanelElement;
 }
 declare global {
+    interface HTMLFlexRendererElement extends Components.FlexRenderer, HTMLStencilElement {
+    }
+    var HTMLFlexRendererElement: {
+        prototype: HTMLFlexRendererElement;
+        new (): HTMLFlexRendererElement;
+    };
     interface HTMLModusAccordionElement extends Components.ModusAccordion, HTMLStencilElement {
     }
     var HTMLModusAccordionElement: {
@@ -2944,6 +2953,7 @@ declare global {
         new (): HTMLModusUtilityPanelElement;
     };
     interface HTMLElementTagNameMap {
+        "flex-renderer": HTMLFlexRendererElement;
         "modus-accordion": HTMLModusAccordionElement;
         "modus-accordion-item": HTMLModusAccordionItemElement;
         "modus-action-bar": HTMLModusActionBarElement;
@@ -3008,6 +3018,9 @@ declare global {
     }
 }
 declare namespace LocalJSX {
+    interface FlexRenderer {
+        "content"?: string;
+    }
     interface ModusAccordion {
         /**
           * (optional) The accordion's aria-label.
@@ -5108,6 +5121,7 @@ declare namespace LocalJSX {
         "targetContent"?: string;
     }
     interface IntrinsicElements {
+        "flex-renderer": FlexRenderer;
         "modus-accordion": ModusAccordion;
         "modus-accordion-item": ModusAccordionItem;
         "modus-action-bar": ModusActionBar;
@@ -5175,6 +5189,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "flex-renderer": LocalJSX.FlexRenderer & JSXBase.HTMLAttributes<HTMLFlexRendererElement>;
             "modus-accordion": LocalJSX.ModusAccordion & JSXBase.HTMLAttributes<HTMLModusAccordionElement>;
             "modus-accordion-item": LocalJSX.ModusAccordionItem & JSXBase.HTMLAttributes<HTMLModusAccordionItemElement>;
             "modus-action-bar": LocalJSX.ModusActionBar & JSXBase.HTMLAttributes<HTMLModusActionBarElement>;
