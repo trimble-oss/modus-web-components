@@ -478,25 +478,9 @@ export class ModusAutocomplete {
 
   getHighlightedText = (text, search) => {
     if (!search) return text;
-
-    const searchRegex = new RegExp(search, 'gi');
-    const parts = text.split(searchRegex).map((part) => {
-      const formattedPart = part.replace(/ /g, '\u00A0');
-      return formattedPart;
-    });
-
-    return parts.map((part, index) => {
-      if (index === parts.length - 1) {
-        return part;
-      }
-      const matches = text.match(searchRegex);
-      return (
-        <span key={index}>
-          {part}
-          <span class="highlight-text">{matches[index]}</span>
-        </span>
-      );
-    });
+    const regex = new RegExp(search, 'gi');
+    const highlightedText = text.replace(regex, (match) => `<span class="highlight-text">${match}</span>`);
+    return <span innerHTML={highlightedText}></span>;
   };
 
   // Do not display the slot for the custom options. We use this hidden slot to reference the slot's children.
