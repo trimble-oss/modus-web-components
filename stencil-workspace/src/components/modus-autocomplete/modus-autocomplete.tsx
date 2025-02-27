@@ -478,7 +478,8 @@ export class ModusAutocomplete {
 
   getHighlightedText = (text, search) => {
     if (!search) return text;
-    const regex = new RegExp(search, 'gi');
+    const escapedSearch = search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(escapedSearch, 'gi');
     const highlightedText = text.replace(regex, (match) => `<span class="highlight-text">${match}</span>`);
     return <span innerHTML={highlightedText}></span>;
   };
