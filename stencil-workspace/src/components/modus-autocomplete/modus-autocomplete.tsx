@@ -476,6 +476,14 @@ export class ModusAutocomplete {
     }
   };
 
+  getHighlightedText = (text, search) => {
+    if (!search) return text;
+    const escapedSearch = search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(escapedSearch, 'gi');
+    const highlightedText = text.replace(regex, (match) => `<span class="highlight-text">${match}</span>`);
+    return <span innerHTML={highlightedText}></span>;
+  };
+
   // Do not display the slot for the custom options. We use this hidden slot to reference the slot's children.
   CustomOptionsSlot = () => (
     <div style={{ display: 'none' }}>
@@ -609,7 +617,7 @@ export class ModusAutocomplete {
                     role="option"
                     onMouseDown={() => this.handleOptionClick(option)}
                     onKeyDown={(e) => this.handleOptionKeyDown(e, option)}>
-                    {option.value}
+                    {this.getHighlightedText(option.value, this.getValueAsString())}
                     {isSelected && <IconCheck size="16" />}
                   </li>
                 );
