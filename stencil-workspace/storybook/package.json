@@ -10,8 +10,8 @@
   "dependencies": {
     "@babel/preset-env": "^7.26.7",
     "@storybook/addon-docs": "^8.4.7",
-    "@storybook/components": "^8.5.2",
-    "@storybook/theming": "^8.5.2",
+    "@storybook/components": "^8.6.2",
+    "@storybook/theming": "^8.6.2",
     "@types/mdx": "^2.0.13",
     "lit-html": "^3.2.1"
   },
@@ -23,9 +23,9 @@
     "@storybook/addon-actions": "^8.4.7",
     "@storybook/addon-essentials": "^8.4.7",
     "@storybook/addon-links": "^8.4.7",
-    "@storybook/addon-mdx-gfm": "^8.5.2",
+    "@storybook/addon-mdx-gfm": "^8.6.2",
     "@storybook/addon-webpack5-compiler-babel": "^3.0.5",
-    "@storybook/manager-api": "^8.5.2",
+    "@storybook/manager-api": "^8.6.2",
     "@storybook/web-components": "^8.4.7",
     "@storybook/web-components-webpack5": "^8.5.2",
     "babel-loader": "8.2.5",
