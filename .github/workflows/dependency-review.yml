@@ -13,3 +13,5 @@ jobs:
 
       - name: 'Dependency Review'
         uses: actions/dependency-review-action@v4
+        with:
+          show-openssf-scorecard: false
