@@ -29,7 +29,7 @@
     "@storybook/web-components": "^8.4.7",
     "@storybook/web-components-webpack5": "^8.5.2",
     "babel-loader": "8.2.5",
-    "postcss": "^8.4.49",
+    "postcss": "^8.5.3",
     "storybook-dark-mode": "^4.0.2"
   },
   "engines": {
