@@ -623,9 +623,7 @@ export class ModusTreeView {
 
     if (!isShiftClick) {
       this.anchorItemId = itemId;
-    }
-
-    else {
+    } else {
       this.updateClickedItems(itemId, true);
       return;
     }
@@ -752,7 +750,6 @@ export class ModusTreeView {
 
     this.syncItems.push(...this.selectedItems);
   }
-
 
   isItemChecked(itemId: string): boolean {
     return this.checkedItems.includes(itemId);

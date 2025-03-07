@@ -3,7 +3,6 @@ import docs from './modus-breadcrumb-storybook-docs.mdx';
 import { html } from 'lit-html';
 import { withActions } from '@storybook/addon-actions/decorator';
 
-
 export default {
   title: 'Components/Breadcrumb',
   argTypes: {

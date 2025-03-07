@@ -3,7 +3,6 @@ import docs from './modus-checkbox-storybook-docs.mdx';
 import { html } from 'lit-html';
 import { withActions } from '@storybook/addon-actions/decorator';
 
-
 export default {
   title: 'User Inputs/Checkbox',
   argTypes: {
