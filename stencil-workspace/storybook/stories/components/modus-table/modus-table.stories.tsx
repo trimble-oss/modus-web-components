@@ -17,7 +17,7 @@ function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
-function randomButtonVariant(){
+function randomButtonVariant() {
   const variants = ['danger', 'primary', 'secondary', 'tertiary', 'special'];
   return variants[randomNumber(0, 5)];
 }
@@ -29,7 +29,7 @@ function newPerson() {
   const email: string = `${firstName}${lastName}@example.com`.toLowerCase();
   const randomDate = new Date(randomNumber(1990, 2020), randomNumber(0, 11), randomNumber(1, 30));
   const formattedDate = `${randomDate.getFullYear()}-${(randomDate.getMonth() + 1).toString().padStart(2, '0')}-${randomDate.getDate().toString().padStart(2, '0')}`;
-  const customCell = `<modus-button color='${randomButtonVariant()}'>Custom ${namesIndex}</modus-button>`
+  const customCell = `<modus-button color='${randomButtonVariant()}'>Custom ${namesIndex}</modus-button>`;
   return {
     firstName,
     lastName,
@@ -826,7 +826,7 @@ CustomCell.args = {
   columns: [
     ...DefaultColumns.slice(0, DefaultColumns.length - 1),
     {
-      header:'Custom Cell',
+      header: 'Custom Cell',
       accessorKey: 'custom',
       id: 'custom',
       dataType: 'custom',

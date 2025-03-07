@@ -45,13 +45,13 @@ export default {
         defaultValue: { summary: false },
       },
     },
-    disableCloseOnSelect:{
+    disableCloseOnSelect: {
       name: 'disable-close-on-select',
       description: 'Prevents the dropdown from closing when an option is selected.',
       table: {
         type: { summary: 'boolean' },
         defaultValue: { summary: false },
-      }
+      },
     },
     placement: {
       name: 'placement',
@@ -90,9 +90,16 @@ export default {
   decorators: [withActions],
 };
 
-
-const DefaultTemplate = ({ animateList, ariaLabel, borderRadius, customPlacement, disableCloseOnSelect, disabled, placement, showDropdownListBorder }) => html`
-
+const DefaultTemplate = ({
+  animateList,
+  ariaLabel,
+  borderRadius,
+  customPlacement,
+  disableCloseOnSelect,
+  disabled,
+  placement,
+  showDropdownListBorder,
+}) => html`
   <modus-dropdown
     animate-list=${animateList}
     aria-label=${ariaLabel}

@@ -64,8 +64,11 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
     );
   }
 
-  function handleRowClick(event: MouseEvent, currentRowIndex: number,row :Row<unknown>): void {
-    if(!rowSelectionOptions.subRowSelection && rowSelectionOptions.multiple && rowsExpandable  || !rowSelectionOptions.multiple){
+  function handleRowClick(event: MouseEvent, currentRowIndex: number, row: Row<unknown>): void {
+    if (
+      (!rowSelectionOptions.subRowSelection && rowSelectionOptions.multiple && rowsExpandable) ||
+      !rowSelectionOptions.multiple
+    ) {
       row.toggleSelected();
       return;
     }
@@ -92,14 +95,17 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
       updateSelectedRows(nextRowIndex, currentRowIndex);
     }
   }
-function handleCheckboxKeyDown(row :Row<unknown>): void {
-    if(!rowSelectionOptions.subRowSelection && rowSelectionOptions.multiple  && rowsExpandable || !rowSelectionOptions.multiple){
-        row.toggleSelected();
-        return;
+  function handleCheckboxKeyDown(row: Row<unknown>): void {
+    if (
+      (!rowSelectionOptions.subRowSelection && rowSelectionOptions.multiple && rowsExpandable) ||
+      !rowSelectionOptions.multiple
+    ) {
+      row.toggleSelected();
+      return;
     }
 
-    updateClickedRows(row.index,false)
-}
+    updateClickedRows(row.index, false);
+  }
   return (
     <tbody>
       {table.getRowModel()?.rows.map((row) => {
@@ -110,7 +116,7 @@ function handleCheckboxKeyDown(row :Row<unknown>): void {
           <tr
             key={id}
             class={{ 'enable-hover': hover, 'row-selected': isChecked }}
-            onClick={(event) => handleRowClick(event as MouseEvent,row.index,row)}
+            onClick={(event) => handleRowClick(event as MouseEvent, row.index, row)}
             {...(rowSelectionOptions.multiple && {
               onKeyDown: (event) => handleKeyDown(event as KeyboardEvent, row.index),
             })}>
@@ -120,9 +126,7 @@ function handleCheckboxKeyDown(row :Row<unknown>): void {
                 row={row}
                 isChecked={isChecked}
                 checkboxSize={checkboxSize}
-                updateRow={() =>
-                  handleCheckboxKeyDown(row)
-                }></ModusTableCellCheckbox>
+                updateRow={() => handleCheckboxKeyDown(row)}></ModusTableCellCheckbox>
             )}
             {getVisibleCells()?.map((cell, cellIndex) => {
               return (

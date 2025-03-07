@@ -603,7 +603,6 @@ describe('modus-tree-view-item', () => {
     expect(itemLabelChangeEvent).toHaveReceivedEventDetail('Original LabelNewLabel');
   });
 
-
   it('selects consecutive items on shift-click', async () => {
     const page = await newE2EPage();
     await page.setContent(`
@@ -631,5 +630,4 @@ describe('modus-tree-view-item', () => {
     expect(element1).toHaveClass('selected');
     expect(element2).toHaveClass('selected');
   });
-
 });
