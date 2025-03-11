@@ -18,10 +18,10 @@
     "@angular/platform-browser": "^17.2.2",
     "@angular/platform-browser-dynamic": "^17.2.2",
     "@angular/router": "^17.2.2",
-    "@trimble-oss/modus-web-components": "0.41.1",
-    "rxjs": "~7.8.1",
+    "@trimble-oss/modus-web-components": "1.4.0",
+    "rxjs": "~7.8.2",
     "tslib": "^2.5.3",
-    "zone.js": "~0.14.4"
+    "zone.js": "~0.15.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.2.1",
@@ -30,7 +30,7 @@
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
     "jasmine-core": "~4.0.0",
-    "karma": "~6.4.2",
+    "karma": "~6.4.4",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.1",
     "karma-jasmine": "~4.0.0",
@@ -40,5 +40,8 @@
   },
   "engines": {
     "node": ">=18.13.0"
+  },
+  "volta": {
+    "node": "18.20.5"
   }
 }
