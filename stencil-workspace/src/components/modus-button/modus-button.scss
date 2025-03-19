@@ -40,7 +40,7 @@ button {
   }
 
   svg {
-    z-index: 9;
+    position: relative;
   }
 
   &:hover {
@@ -81,7 +81,7 @@ button {
     .label {
       font-size: $rem-12px;
       padding: 0 4px;
-      z-index: 9;
+      position: relative;
     }
 
     .icon svg {
@@ -116,7 +116,7 @@ button {
     .label {
       font-size: $rem-14px;
       padding: 0 8px;
-      z-index: 9;
+      position: relative;
     }
 
     .icon svg {
@@ -151,7 +151,7 @@ button {
     .label {
       font-size: $rem-16px;
       padding: 0 8px;
-      z-index: 9;
+      position: relative;
     }
 
     .icon svg {
@@ -445,43 +445,42 @@ button {
     }
   }
 
-  &::after {
+  &::before {
     background-color: $btn-progress-bg;
+    block-size: 100%;
     content: '';
-    height: 100%;
-    left: 0;
+    inline-size: 0;
+    inset-block-start: 0;
+    inset-inline-start: 0;
     position: absolute;
-    top: 0;
-    transition: width 0.3s linear;
-    width: 0;
-    z-index: 1;
+    transition: inline-size 0.3s linear;
   }
 
   @keyframes progress-forward {
     0% {
-      width: 0;
+      inline-size: 0;
     }
 
     100% {
-      width: 100%;
+      inline-size: 100%;
     }
   }
 
   @keyframes progress-reverse {
     0% {
-      width: var(--progress-width, 100%);
+      inline-size: var(--progress-width, 100%);
     }
 
     100% {
-      width: 0;
+      inline-size: 0;
     }
   }
 
-  &.progress::after {
+  &.progress::before {
     animation: progress-forward 3s linear forwards;
   }
 
-  &.reverse::after {
+  &.reverse::before {
     animation: progress-reverse 3s linear forwards;
   }
 

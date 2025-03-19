@@ -187,3 +187,6 @@ SpecialButton.args = { ...DefaultTemplateArgs, label: 'Button', color: 'special'
 
 export const DangerButton = DefaultTemplate.bind({});
 DangerButton.args = { ...DefaultTemplateArgs, label: 'Danger', color: 'danger' };
+
+export const CriticalActionButton = DefaultTemplate.bind({});
+CriticalActionButton.args = { ...DefaultTemplateArgs, label: 'Critical Action', color: 'danger', criticalAction: true };
