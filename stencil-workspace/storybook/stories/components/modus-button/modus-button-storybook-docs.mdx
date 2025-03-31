@@ -161,6 +161,18 @@ The danger color variant is used for alerting or critical actions. It does not s
 <modus-button color="danger">Button</modus-button> <modus-button disabled color="danger">Disabled</modus-button>
 ```
 
+### Critical Action Button
+
+Critical action buttons require users to press and hold for 3 seconds in order to trigger a critical action that should only be performed with clear intent. Only supported with a color of `danger` and `fill` variant. It has a progress animation when pressed and held.
+
+<modus-button color="danger" critical-action>Critical Action</modus-button>
+<modus-button disabled color="danger" critical-action>Disabled</modus-button>
+
+```html
+<modus-button color="danger" critical-action>Critical Action</modus-button>
+<modus-button disabled color="danger" critical-action>Disabled</modus-button>
+```
+
 #### Accessibility Warning:
 
 The critical action button is currently not accessible on touch screen devices as it does not respond to taps or long presses.
