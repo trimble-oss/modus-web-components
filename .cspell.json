@@ -2,7 +2,9 @@
   "version": "0.2",
   "words": [
     "abled",
+    "Afficher",
     "ampm",
+    "anzeigen",
     "ARROWDOWN",
     "ARROWUP",
     "benc",
@@ -86,10 +88,7 @@
   ],
   "language": "en-US",
   "allowCompoundWords": true,
-  "flagWords": [
-    "hte",
-    "perticular"
-  ],
+  "flagWords": ["hte", "perticular"],
   "ignorePaths": [
     ".cspell.json",
     ".github/CODEOWNERS",
