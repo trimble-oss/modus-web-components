@@ -10,11 +10,13 @@ import {
   Listen,
   Element,
   Watch,
+  Method,
 } from '@stencil/core';
 
 import { IconSearch } from '../../icons/svgs/icon-search';
 import { generateElementId } from '../../utils/utils';
 import { IconCheck } from '../../icons/generated-icons/IconCheck';
+import { IconClose } from '../../icons/svgs/icon-close';
 
 export interface ModusAutocompleteOption {
   id: string;
@@ -159,6 +161,16 @@ export class ModusAutocomplete {
     }
   }
 
+  /** Focus the autocomplete component */
+  @Method()
+  async focusInput(): Promise<void> {
+    const textInputElement = this.el.shadowRoot.querySelector('modus-text-input');
+
+    if (textInputElement) {
+      textInputElement.focusInput();
+    }
+  }
+
   @Listen('mousedown', { target: 'document' })
   onMouseDown(event: MouseEvent): void {
     if (!this.hasFocus) {
@@ -282,6 +294,17 @@ export class ModusAutocomplete {
   handleClear(): void {
     this.selectedChips = [];
     this.selectedOption = '';
+    this.value = '';
+    this.valueChange.emit(this.multiple ? [] : '');
+    this.selectionsChanged.emit(this.multiple ? [] : null);
+  }
+
+  handleClearKeyDown(event: KeyboardEvent): void {
+    if (event.key !== 'Enter' && event.key !== ' ') {
+      return;
+    }
+
+    this.handleClear();
   }
 
   handleOptionClick = (option: ModusAutocompleteOption) => {
@@ -353,7 +376,18 @@ export class ModusAutocomplete {
     this.valueChange.emit(search);
   };
 
+  handleChipDelete = (e, chip) => {
+    if (e.key !== 'Delete') {
+      return;
+    }
+    this.removeChip(chip);
+  };
+
   handleCloseClick(chipValue: ModusAutocompleteOption) {
+    this.removeChip(chipValue);
+  }
+
+  removeChip(chipValue: ModusAutocompleteOption) {
     if (this.selectedChips.length != 0 && !this.readOnly) {
       this.selectedChips = this.selectedChips.filter((chip) => chip.id !== chipValue.id);
       this.valueChange.emit(this.selectedChips.map((v) => v.value));
@@ -442,6 +476,14 @@ export class ModusAutocomplete {
     }
   };
 
+  getHighlightedText = (text, search) => {
+    if (!search) return text;
+    const escapedSearch = search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(escapedSearch, 'gi');
+    const highlightedText = text.replace(regex, (match) => `<span class="highlight-text">${match}</span>`);
+    return <span innerHTML={highlightedText}></span>;
+  };
+
   // Do not display the slot for the custom options. We use this hidden slot to reference the slot's children.
   CustomOptionsSlot = () => (
     <div style={{ display: 'none' }}>
@@ -453,7 +495,6 @@ export class ModusAutocomplete {
     <modus-text-input
       class="input"
       autocomplete="off"
-      clearable={this.clearable && !this.readOnly && !!this.value}
       includeSearchIcon={false}
       onFocus={this.handleTextInputFocus}
       onValueChange={(searchEvent: CustomEvent<string>) => this.handleTextInputValueChange(searchEvent)}
@@ -493,6 +534,10 @@ export class ModusAutocomplete {
 
   render(): unknown {
     const classes = `autocomplete ${this.classBySize.get(this.size)}`;
+    const iconSize = this.size === 'large' ? '24' : '16';
+    const showClearIcon =
+      this.clearable && !this.readOnly && !this.disabled && (!!this.value || this.selectedChips.length > 0);
+
     return (
       <div
         aria-disabled={this.disabled ? 'true' : undefined}
@@ -522,19 +567,32 @@ export class ModusAutocomplete {
             {this.required ? <span class="required">*</span> : null}
           </div>
         ) : null}
-        <div class="chips-container">
+        <div class={`chips-container ${this.clearable ? 'clearable-icon' : ''}`}>
           {this.includeSearchIcon ? <IconSearch size="16" /> : null}
           {this.selectedChips.map((chip) => (
             <modus-chip
+              class="autocomplete-chip"
               tabIndex={this.disabled ? -1 : 0}
               value={chip.value}
               chipId={chip.id}
               disabled={this.disabled}
+              onKeyDown={(e) => this.handleChipDelete(e, chip)}
               size={this.size === 'large' ? 'medium' : 'small'}
               show-close
               onCloseClick={() => this.handleCloseClick(chip)}></modus-chip>
           ))}
           {this.TextInput()}
+          {showClearIcon && (
+            <span
+              class="icons clear"
+              tabIndex={0}
+              onKeyDown={(event) => this.handleClearKeyDown(event)}
+              onClick={() => this.handleClear()}
+              role="button"
+              aria-label="Clear entry">
+              <IconClose size={iconSize} />
+            </span>
+          )}
         </div>
         <div class={'error'}>{this.errorText ? <label class="sub-text error">{this.errorText}</label> : null}</div>
         <div
@@ -557,9 +615,9 @@ export class ModusAutocomplete {
                     class={className}
                     tabindex="-1"
                     role="option"
-                    onClick={() => this.handleOptionClick(option)}
+                    onMouseDown={() => this.handleOptionClick(option)}
                     onKeyDown={(e) => this.handleOptionKeyDown(e, option)}>
-                    {option.value}
+                    {this.getHighlightedText(option.value, this.getValueAsString())}
                     {isSelected && <IconCheck size="16" />}
                   </li>
                 );
@@ -579,7 +637,7 @@ export class ModusAutocomplete {
                     class={className}
                     tabindex="-1"
                     role="option"
-                    onClick={() => this.handleCustomOptionClick(option)}
+                    onMouseDown={() => this.handleCustomOptionClick(option)}
                     onKeyDown={(e) => this.handleOptionKeyDown(e, option, true)}
                     innerHTML={option.outerHTML}
                   />

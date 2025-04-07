@@ -1,7 +1,6 @@
 {
   "name": "@trimble-oss/modus-web-components",
-  "version": "0.41.1",
-  "private": true,
+  "version": "1.5.1",
   "license": "MIT",
   "description": "Trimble Modus Web Component Library",
   "homepage": "https://modus-web-components.trimble.com/",
@@ -43,41 +42,41 @@
     "prebuild": "tsc generate-icons/generate-icons.ts && node generate-icons/generate-icons.js"
   },
   "dependencies": {
-    "@floating-ui/dom": "^1.6.12",
+    "@floating-ui/dom": "^1.6.13",
     "@popperjs/core": "^2.11.8",
     "@stencil/core": "^4.12.4",
     "@tanstack/table-core": "^8.20.5"
   },
   "devDependencies": {
-    "@babel/preset-react": "^7.25.9",
-    "@stencil/angular-output-target": "^0.10.0",
+    "@babel/preset-react": "^7.26.3",
+    "@stencil/angular-output-target": "^0.10.2",
     "@stencil/postcss": "^2.1.0",
     "@stencil/react-output-target": "^0.5.3",
     "@stencil/sass": "^3.0.12",
-    "@trimble-oss/modus-icons": "1.15.0",
+    "@trimble-oss/modus-icons": "1.16.0",
     "@types/jest": "^27.5.1",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
     "@typescript-eslint/parser": "^5.58.0",
-    "autoprefixer": "^10.4.20",
-    "cheerio": "^1.0.0-rc.12",
+    "autoprefixer": "^10.4.21",
+    "cheerio": "^1.0.0",
     "colors": "^1.4.0",
     "ejs": "^3.1.10",
     "eslint": "8.57.1",
-    "eslint-plugin-storybook": "0.11.1",
+    "eslint-plugin-storybook": "0.12.0",
     "jest": "^27.0.3",
     "jest-cli": "^27.5.1",
-    "prettier": "3.4.0",
+    "prettier": "3.5.3",
     "puppeteer": "^19.11.1",
     "puppeteer-core": "^19.11.1",
-    "stylelint": "16.10.0",
-    "stylelint-config-standard-scss": "13.1.0",
+    "stylelint": "16.17.0",
+    "stylelint-config-standard-scss": "14.0.0",
     "stylelint-order": "6.0.4",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.3"
   },
   "engines": {
     "node": ">=18.20"
   },
   "volta": {
-    "node": "18.20.5"
+    "node": "18.20.8"
   }
 }

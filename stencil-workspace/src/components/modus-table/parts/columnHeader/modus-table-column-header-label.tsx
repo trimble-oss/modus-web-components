@@ -6,7 +6,7 @@ import {
 import { Column, RowData, SortDirection } from '@tanstack/table-core';
 import { ModusIconMap } from '../../../../icons/ModusIconMap';
 import { KEYBOARD_ENTER } from '../../modus-table.constants';
-import { getTranslations } from '../../../../lang/translations';
+import { translate } from '../../../../lang/translations';
 
 interface ModusTableColumnHeaderLabelProps {
   column: Column<RowData, unknown>;
@@ -56,24 +56,24 @@ function getAlphabeticalSortIcon(direction: false | SortDirection): string {
 
 /**
  * To show sorting status.
- * @param column Data related to the perticular column.
+ * @param column Data related to the particular column.
  * @returns Active sort or sort that will occur.
  */
 function getSortingStatus(column: Column<unknown, unknown>, isColumnResizing: boolean): string {
   return isColumnResizing
     ? '' // When column resize is enabled, we don't show the tooltip.
     : column.getIsSorted() === 'asc'
-      ? getTranslations().sortedAscending
+      ? translate('sortedAscending')
       : column.getIsSorted() === 'desc'
-        ? getTranslations().sortedDescending
+        ? translate('sortedDescending')
         : column.getNextSortingOrder() === 'asc'
-          ? getTranslations().sortAscending
-          : getTranslations().sortDescending;
+          ? translate('sortAscending')
+          : translate('sortDescending');
 }
 
 /**
  * Toggles column sort on 'Enter' key press.
- * @param column Data related to the perticular column.
+ * @param column Data related to the particular column.
  * @param event Keyboard event.
  */
 function sortOnKeyDown(column: Column<unknown, unknown>, event: KeyboardEvent): void {

@@ -38,15 +38,6 @@ export const config: Config = {
       componentCorePackage: '@trimble-oss/modus-web-components',
       outputType: 'component',
       directivesProxyFile:
-        '../angular-workspace/ng14/projects/trimble-oss/modus-angular-components/src/lib/stencil-generated/components.ts',
-      directivesArrayFile:
-        '../angular-workspace/ng14/projects/trimble-oss/modus-angular-components/src/lib/stencil-generated/index.ts',
-      valueAccessorConfigs: angularValueAccessorBindings,
-    }),
-    angularOutputTarget({
-      componentCorePackage: '@trimble-oss/modus-web-components',
-      outputType: 'component',
-      directivesProxyFile:
         '../angular-workspace/ng15/projects/trimble-oss/modus-angular-components/src/lib/stencil-generated/components.ts',
       directivesArrayFile:
         '../angular-workspace/ng15/projects/trimble-oss/modus-angular-components/src/lib/stencil-generated/index.ts',
@@ -87,6 +78,11 @@ export const config: Config = {
     react({
       componentCorePackage: '@trimble-oss/modus-web-components',
       proxiesFile: '../react-workspace/react-18/src/components/stencil-generated/index.ts',
+      includeDefineCustomElements: true,
+    }),
+    react({
+      componentCorePackage: '@trimble-oss/modus-web-components',
+      proxiesFile: '../react-workspace/react-19/src/components/stencil-generated/index.ts',
       includeDefineCustomElements: true,
     }),
   ],

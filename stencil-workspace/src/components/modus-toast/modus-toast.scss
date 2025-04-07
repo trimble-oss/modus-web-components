@@ -11,7 +11,7 @@
   flex-direction: row;
   font-family: $primary-font;
   font-size: $rem-14px;
-  height: 2.6875rem;
+  min-height: 2.6875rem;
   padding: 0 $rem-16px;
   width: 370px;
 
@@ -24,9 +24,6 @@
 
   .text {
     margin: 0 $rem-8px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
   }
 
   .close {

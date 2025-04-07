@@ -258,6 +258,9 @@
   --modus-file-upload-dropzone-disabled-color: var(--modus-gray-6);
   --modus-file-upload-dropzone-disabled-svg-color: var(--modus-gray-2);
 
+  // Modus-list
+  --modus-list-bg: var(--modus-white);
+
   // Message
   // Type - Info
   --modus-message-info-bg: var(--modus-blue-pale);
@@ -486,6 +489,9 @@
   --modus-alert-warning-border-color: var(--modus-warning);
 
   // Icon
+  --modus-alert-primary-icon-color: #fff;
+  --modus-alert-success-icon-color: #fff;
+  --modus-alert-danger-icon-color: #fff;
   --modus-alert-warning-icon-color: #fff;
 
   // Badge Primary
@@ -643,6 +649,9 @@
   --modus-file-upload-dropzone-error-border-color: var(--modus-red);
   --modus-file-upload-dropzone-error-color: var(--modus-file-upload-dropzone-color);
 
+  // Modus-list
+  --modus-list-bg: var(--modus-gray-9);
+
   // Message
   // Type - Info
   --modus-message-info-bg: #019aeb33;
@@ -650,7 +659,7 @@
 
   // Type - Question
   --modus-message-question-bg: var(--modus-gray-9);
-  --modus-message-question-color: var(--modus-gray-3);
+  --modus-message-question-color: var(--modus-white);
 
   // Modal
   --modus-modal-bg: var(--modus-gray-9);

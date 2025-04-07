@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Component, Event, EventEmitter, h, Method, Prop, State } from '@stencil/core';
+import { AttachInternals, Component, Event, EventEmitter, h, Method, Prop, State } from '@stencil/core';
 import { IconSearch } from '../../icons/svgs/icon-search';
 import { IconClose } from '../../icons/svgs/icon-close';
 import { IconVisibilityOff } from '../../icons/svgs/icon-visibility-off';
@@ -11,6 +11,7 @@ import { IconError } from '../../icons/svgs/icon-error';
   tag: 'modus-text-input',
   styleUrl: 'modus-text-input.scss',
   shadow: true,
+  formAssociated: true,
 })
 export class ModusTextInput {
   /** (optional) The input's aria-label. */
@@ -91,6 +92,9 @@ export class ModusTextInput {
   /** (optional) The input's valid state text. */
   @Prop() validText: string;
 
+  /** (optional) The input's name. */
+  @Prop() name: string;
+
   /** (optional) The input's value. */
   @Prop({ mutable: true }) value: string;
 
@@ -101,6 +105,8 @@ export class ModusTextInput {
 
   private inputId = generateElementId() + '_text_input';
 
+  @AttachInternals() internals: ElementInternals;
+
   classBySize: Map<string, string> = new Map([
     ['medium', 'medium'],
     ['large', 'large'],
@@ -108,6 +114,19 @@ export class ModusTextInput {
 
   textInput: HTMLInputElement;
   buttonTogglePassword: HTMLDivElement;
+
+  checkValidity() {
+    if (!this.internals || !this.internals.validity) {
+      return false;
+    }
+    return this.internals.checkValidity();
+  }
+
+  componentWillLoad() {
+    if (this.checkValidity()) {
+      this.internals.setFormValue(this.value);
+    }
+  }
 
   /** Focus the input. */
   @Method()
@@ -130,8 +149,15 @@ export class ModusTextInput {
   }
 
   handleOnInput(event: Event): void {
-    const value = (event.currentTarget as HTMLInputElement).value;
+    const input = event.currentTarget as HTMLInputElement;
+    if (!input) return;
+
+    const value = input.value;
     this.value = value;
+
+    if (this.checkValidity()) {
+      this.internals.setFormValue(value);
+    }
 
     this.valueChange.emit(value);
   }
@@ -215,6 +241,7 @@ export class ModusTextInput {
           {this.includeSearchIcon ? <IconSearch size={iconSize} /> : null}
           <input
             id={this.inputId}
+            name={this.name}
             aria-invalid={!!this.errorText}
             aria-label={this.ariaLabel || undefined}
             aria-required={this.required?.toString()}

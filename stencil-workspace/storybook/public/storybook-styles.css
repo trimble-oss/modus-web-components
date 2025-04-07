@@ -31,7 +31,7 @@ body[data-mwc-theme='dark'] {
   --theme-code-bg-color: #6a6e79;
   --theme-code-border-color: #6a6e79;
   --theme-header-underline-color: rgba(255, 255, 255, 0.2);
-  --icon-fill: #ffffff;
+  --icon-fill: #fff;
 }
 
 body {
@@ -152,7 +152,7 @@ body.dark .sidebar-header a[title='Storybook'] {
 
 .css-1qezoi6 :where(a:not(.sb-anchor, .sb-unstyled, .sb-unstyled a)) {
   line-height: unset !important;
-  text-decoration: unset !important;
+  text-decoration: underline !important;
 }
 
 /* dark mode */
@@ -176,6 +176,7 @@ body.dark .docblock-source {
 .css-1qezoi6 :where(h5:not(.sb-anchor, .sb-unstyled, .sb-unstyled h5)),
 .css-1qezoi6 :where(h3:not(.sb-anchor, .sb-unstyled, .sb-unstyled h3)),
 .css-1qezoi6 :where(h2:not(.sb-anchor, .sb-unstyled, .sb-unstyled h2)),
+.css-1qezoi6 :where(a:not(.sb-anchor, .sb-unstyled, .sb-unstyled a)),
 .css-1qezoi6 :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)) {
   color: unset !important;
 }

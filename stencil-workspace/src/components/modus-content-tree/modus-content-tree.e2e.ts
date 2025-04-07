@@ -602,4 +602,32 @@ describe('modus-tree-view-item', () => {
     await page.waitForChanges();
     expect(itemLabelChangeEvent).toHaveReceivedEventDetail('Original LabelNewLabel');
   });
+
+  it('selects consecutive items on shift-click', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <modus-tree-view multi-selection="true">
+        <modus-tree-view-item node-id="1" label="Node one"></modus-tree-view-item>
+        <modus-tree-view-item node-id="2" label="Node two"></modus-tree-view-item>
+        <modus-tree-view-item node-id="3" label="Node three"></modus-tree-view-item>
+      </modus-tree-view>
+    `);
+
+    const item1 = await page.find('modus-tree-view-item[node-id="1"]');
+    const item2 = await page.find('modus-tree-view-item[node-id="2"]');
+
+    const element1 = await page.find('modus-tree-view-item[node-id="1"] >>> li > div.tree-item');
+    const element2 = await page.find('modus-tree-view-item[node-id="2"] >>> li > div.tree-item');
+
+    await item1.click();
+    expect(element1).toHaveClass('selected');
+
+    await page.keyboard.down('Shift');
+    await item2.click();
+    await page.keyboard.up('Shift');
+    await page.waitForChanges();
+
+    expect(element1).toHaveClass('selected');
+    expect(element2).toHaveClass('selected');
+  });
 });

@@ -74,6 +74,7 @@ import { ModusTableBody } from './parts/modus-table-body';
 import { TableContext, TableCellEdited } from './models/table-context.models';
 import { TableRowActionWithOverflow } from './models/table-row-actions.models';
 import { createGuid } from '../../utils/utils';
+import { getTranslations } from '../../lang/translations';
 
 /**
  * @slot customFooter - Slot for custom footer.
@@ -401,6 +402,7 @@ export class ModusTable {
   }
 
   componentWillRender(): void {
+    getTranslations();
     this._context = this.getTableContext();
   }
 
@@ -497,6 +499,11 @@ export class ModusTable {
   getRowActionsWithOverflow(): TableRowActionWithOverflow[] {
     if (this.rowActions) {
       const sortedActions = this.rowActions.sort((a, b) => a.index - b.index);
+
+      if (this.rowActionsConfig?.menuOnly) {
+        return sortedActions.map((action) => ({ ...action, isOverflow: true }));
+      }
+
       const visibleLimit = sortedActions.length < 5 ? 4 : 3;
       const actionButtons = sortedActions.slice(0, visibleLimit);
       const overflowMenu = sortedActions.slice(visibleLimit).map((action) => ({ ...action, isOverflow: true }));
@@ -509,6 +516,7 @@ export class ModusTable {
 
   getTableContext(): TableContext {
     return {
+      anchorRowIndex: this.anchorRowIndex,
       element: this.element,
       data: this.data,
       density: this.density,
@@ -562,6 +570,8 @@ export class ModusTable {
       onToolbarOptionsChange: this.onToolbarOptionsChange,
       getRowId: this.getRowId,
       updateData: this.updateData.bind(this),
+      updateSelectedRows: this.updateSelectedRows.bind(this),
+      updateClickedRows: this.updateClickedRows.bind(this),
     };
   }
 
@@ -691,6 +701,79 @@ export class ModusTable {
     this.data = this.tableCore.getState(updater, this.data) as unknown[];
     this.tableCore.setState('data', this.data);
     this.cellValueChange.emit({ ...context, data: this.data });
+  }
+
+  lastDirection: string = null;
+
+  private anchorRowIndex: number | null = null;
+
+  updateSelectedRows(nextRowIndex: number, currentRowIndex: number): void {
+    if (!this.rowSelection) {
+      return;
+    }
+    if (this.anchorRowIndex === null) {
+      this.anchorRowIndex = currentRowIndex;
+    }
+
+    const start = Math.min(this.anchorRowIndex, nextRowIndex);
+    const end = Math.max(this.anchorRowIndex, nextRowIndex);
+
+    const rows = this.tableCore.getTableInstance().getExpandedRowModel().rows;
+    this.tableCore.getTableInstance().resetRowSelection();
+    for (let i = start; i <= end; i++) {
+      const row = rows[i];
+      if (row) {
+        row.toggleSelected(true, { selectChildren: true });
+      }
+    }
+    this.emitRowSelection();
+  }
+
+  updateClickedRows(currentRowIndex: number, isShiftClick: boolean): void {
+    const rows = this.tableCore.getTableInstance().getExpandedRowModel().rows;
+
+    if (this.rowSelectionOptions.multiple && isShiftClick) {
+      if (this.anchorRowIndex === null) {
+        this.anchorRowIndex = currentRowIndex;
+      }
+
+      const start = Math.min(this.anchorRowIndex, currentRowIndex);
+      const end = Math.max(this.anchorRowIndex, currentRowIndex);
+
+      this.tableCore.getTableInstance().resetRowSelection();
+      for (let i = start; i <= end; i++) {
+        const row = rows[i];
+        if (row) {
+          row.toggleSelected(true, { selectChildren: true });
+        }
+      }
+
+      this.emitRowSelection();
+      return;
+    }
+
+    const row = rows[currentRowIndex];
+    if (row) {
+      const isSelected = row.getIsSelected();
+      if (!isSelected) {
+        this.anchorRowIndex = currentRowIndex;
+      }
+
+      row.toggleSelected(undefined, { selectChildren: true });
+      this.emitRowSelection();
+    }
+  }
+
+  emitRowSelection(): void {
+    const selectedRows = this.tableCore
+      .getTableInstance()
+      .getSelectedRowModel()
+      .flatRows.map((row) => ({
+        id: row.id,
+        ...(typeof row.original === 'object' ? row.original : {}),
+      }));
+
+    this.rowSelectionChange.emit(selectedRows);
   }
 
   updateRowSelection(updater: Updater<unknown>): void {

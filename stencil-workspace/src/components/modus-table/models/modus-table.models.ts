@@ -22,6 +22,7 @@ import {
   CELL_EDIT_TYPE_AUTOCOMPLETE,
   CELL_EDIT_TYPE_INT,
   CELL_EDIT_TYPE_TEXT,
+  COLUMN_DEF_DATATYPE_CUSTOM,
 } from '../modus-table.constants';
 import { ModusAutocompleteOption } from '../../modus-autocomplete/modus-autocomplete';
 
@@ -67,13 +68,18 @@ export interface ModusTableRowAction {
   id: string;
   icon?: string;
   label?: string;
+  tooltipText?: string;
+  buttonStyle?: 'borderless' | 'fill' | 'outline';
+  color?: 'danger' | 'primary' | 'secondary' | 'tertiary' | 'special';
   index: number;
+  iconColor?: string;
   isDisabled?: (row: unknown) => boolean;
 }
 
 export interface ModusTableRowActionConfig {
   header?: string;
   width?: number;
+  menuOnly?: boolean;
 }
 
 export interface ModusTableRowActionClick {
@@ -126,6 +132,10 @@ export interface ModusTableCellLink {
   display: string;
   url: string;
   _type?: typeof COLUMN_DEF_DATATYPE_LINK;
+}
+
+export interface ModusTableCustomCell {
+  _type?: typeof COLUMN_DEF_DATATYPE_CUSTOM;
 }
 
 export interface ModusTableCellBadge extends BadgeProperties {

@@ -147,6 +147,10 @@ table {
           padding: $rem-4px $rem-8px;
         }
 
+        &.row-checkbox > modus-checkbox {
+          justify-content: center;
+        }
+
         &.header-base {
           outline: -webkit-focus-ring-color auto 1px;
         }
@@ -289,6 +293,10 @@ table {
           padding-top: $rem-12px;
         }
 
+        &.row-checkbox > modus-checkbox {
+          justify-content: center;
+        }
+
         &.edit-mode {
           // border: $rem-2px $modus-table-cell-border-color solid;
           box-sizing: border-box;
@@ -410,8 +418,6 @@ table {
       }
 
       &.hide-text-selection {
-        -webkit-user-select: none;
-        -moz-user-select: none;
         user-select: none;
       }
 
@@ -444,6 +450,10 @@ table {
     position: sticky;
     right: 0;
     z-index: 1;
+  }
+
+  td.sticky-right {
+    z-index: 99;
   }
 
   &.density-relaxed {

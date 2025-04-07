@@ -150,9 +150,11 @@ graph TD;
   modus-table-row-actions-menu --> modus-list
   modus-table-row-actions-menu --> modus-list-item
   modus-table-row-actions-cell --> modus-table-row-actions
+  modus-table-row-actions --> modus-tooltip
   modus-table-row-actions --> modus-button
   modus-table-cell-main --> modus-table-cell-editor
   modus-table-cell-main --> modus-badge
+  modus-table-cell-main --> flex-renderer
   modus-table-cell-editor --> modus-number-input
   modus-table-cell-editor --> modus-text-input
   modus-table-cell-editor --> modus-select

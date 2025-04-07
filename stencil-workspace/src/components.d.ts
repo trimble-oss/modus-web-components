@@ -20,8 +20,8 @@ import { ModusNavbarButton, ModusNavbarDropdownItem, ModusNavbarDropdownOptions,
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 import { ModusSentimentScaleType } from "./components/modus-sentiment-scale/modus-sentiment-scale.models";
-import { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-import { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnSort, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableErrors, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+import { ModusHeaderNavigationItemInfo, ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
+import { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnSort, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableErrors, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowActionConfig, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 import { Cell, Column, Row } from "@tanstack/table-core";
 import { TableCellEdited, TableContext } from "./components/modus-table/models/table-context.models";
 import { Tab } from "./components/modus-tabs/modus-tabs";
@@ -44,8 +44,8 @@ export { ModusNavbarButton, ModusNavbarDropdownItem, ModusNavbarDropdownOptions,
 export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 export { RadioButton } from "./components/modus-radio-group/modus-radio-button";
 export { ModusSentimentScaleType } from "./components/modus-sentiment-scale/modus-sentiment-scale.models";
-export { ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
-export { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnSort, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableErrors, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
+export { ModusHeaderNavigationItemInfo, ModusSideNavigationItemInfo } from "./components/modus-side-navigation/modus-side-navigation.models";
+export { ModusTableCellEditorArgs, ModusTableCellLink, ModusTableCellValueChange, ModusTableColumn, ModusTableColumnOrderState, ModusTableColumnSizingState, ModusTableColumnSort, ModusTableColumnsVisibilityOptions, ModusTableColumnVisibilityState, ModusTableDisplayOptions, ModusTableErrors, ModusTableExpandedState, ModusTableManualPaginationOptions, ModusTableManualSortingOptions, ModusTablePaginationState, ModusTableRowAction, ModusTableRowActionClick, ModusTableRowActionConfig, ModusTableRowSelectionOptions, ModusTableSortingState, ModusTableToolbarOptions } from "./components/modus-table/models/modus-table.models";
 export { Cell, Column, Row } from "@tanstack/table-core";
 export { TableCellEdited, TableContext } from "./components/modus-table/models/table-context.models";
 export { Tab } from "./components/modus-tabs/modus-tabs";
@@ -54,6 +54,9 @@ export { ModusToolTipPlacement } from "./components/modus-tooltip/modus-tooltip.
 export { TreeItemSelectionChange, TreeViewItemInfo, TreeViewItemOptions } from "./components/modus-content-tree/modus-content-tree.types";
 export { ModusActionBarOptions as ModusActionBarOptions1 } from "./components/modus-action-bar/modus-action-bar";
 export namespace Components {
+    interface FlexRenderer {
+        "content": string;
+    }
     interface ModusAccordion {
         /**
           * (optional) The accordion's aria-label.
@@ -163,6 +166,10 @@ export namespace Components {
           * A promise that returns the filtered options.
          */
         "filterOptions": (search: string) => Promise<ModusAutocompleteOption[] | string[]>;
+        /**
+          * Focus the autocomplete component
+         */
+        "focusInput": () => Promise<void>;
         /**
           * Whether the search icon is included.
          */
@@ -406,6 +413,10 @@ export namespace Components {
          */
         "active": boolean;
         /**
+          * (optional) Whether the chip is in advanced state
+         */
+        "advancedChip": boolean;
+        /**
           * (optional) The chip's aria-label.
          */
         "ariaLabel": string | null;
@@ -590,6 +601,10 @@ export namespace Components {
          */
         "ariaLabel": string | null;
         /**
+          * (optional) The border radius of the dropdown list.
+         */
+        "borderRadius": string;
+        /**
           * (optional) Determines custom dropdown placement offset.
          */
         "customPlacement": {
@@ -598,6 +613,10 @@ export namespace Components {
     bottom?: number;
     left?: number;
   };
+        /**
+          * (optional) Prevents the dropdown from closing when an option is selected.
+         */
+        "disableCloseOnSelect": boolean;
         /**
           * (optional) Disables the dropdown.
          */
@@ -610,6 +629,10 @@ export namespace Components {
           * (optional) Whether to show the dropdown list's border.
          */
         "showDropdownListBorder": boolean;
+        /**
+          * (optional) Toggles the list when clicked.
+         */
+        "toggleDropdown": boolean;
         /**
           * (required) The element id that the list renders near and that triggers the toggling of the list.
          */
@@ -715,6 +738,10 @@ export namespace Components {
          */
         "disabled": boolean;
         "focusItem": () => Promise<void>;
+        /**
+          * (optional) add color to left Icon
+         */
+        "iconColor": string;
         /**
           * (optional) Takes the icon name and shows the icon aligned to the left of the button text.
          */
@@ -1181,6 +1208,10 @@ export namespace Components {
         "expanded": boolean;
         "focusItem": () => Promise<void>;
         /**
+          * (optional to enable header dropdown feature)
+         */
+        "isHeader": ModusHeaderNavigationItemInfo;
+        /**
           * (optional) Label for the item and the tooltip message.
          */
         "label": string;
@@ -1322,6 +1353,10 @@ export namespace Components {
           * (Optional) Actions that can be performed on each row. A maximum of 4 icons will be shown, including overflow menu and expand icons.
          */
         "rowActions": ModusTableRowAction[];
+        /**
+          * (Optional) The width and header of the rowActionsConfig.
+         */
+        "rowActionsConfig": ModusTableRowActionConfig;
         /**
           * (Optional) To display checkbox.
          */
@@ -1515,6 +1550,10 @@ export namespace Components {
           * (optional) The input's minimum length.
          */
         "minLength": number;
+        /**
+          * (optional) The input's name.
+         */
+        "name": string;
         /**
           * (optional) The input's pattern HTML attribute.
          */
@@ -2042,6 +2081,12 @@ export interface ModusUtilityPanelCustomEvent<T> extends CustomEvent<T> {
     target: HTMLModusUtilityPanelElement;
 }
 declare global {
+    interface HTMLFlexRendererElement extends Components.FlexRenderer, HTMLStencilElement {
+    }
+    var HTMLFlexRendererElement: {
+        prototype: HTMLFlexRendererElement;
+        new (): HTMLFlexRendererElement;
+    };
     interface HTMLModusAccordionElement extends Components.ModusAccordion, HTMLStencilElement {
     }
     var HTMLModusAccordionElement: {
@@ -2583,9 +2628,11 @@ declare global {
     };
     interface HTMLModusSideNavigationItemElementEventMap {
         "sideNavItemClicked": { id: string; selected: boolean };
+        "sideNavItemHeaderClicked": { id: string; selected: boolean };
         "sideNavItemFocus": { id: string };
         "_sideNavItemAdded": HTMLElement;
         "_sideNavItemRemoved": HTMLElement;
+        "sideNavListItemClicked": { id: string };
     }
     interface HTMLModusSideNavigationItemElement extends Components.ModusSideNavigationItem, HTMLStencilElement {
         addEventListener<K extends keyof HTMLModusSideNavigationItemElementEventMap>(type: K, listener: (this: HTMLModusSideNavigationItemElement, ev: ModusSideNavigationItemCustomEvent<HTMLModusSideNavigationItemElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2906,6 +2953,7 @@ declare global {
         new (): HTMLModusUtilityPanelElement;
     };
     interface HTMLElementTagNameMap {
+        "flex-renderer": HTMLFlexRendererElement;
         "modus-accordion": HTMLModusAccordionElement;
         "modus-accordion-item": HTMLModusAccordionItemElement;
         "modus-action-bar": HTMLModusActionBarElement;
@@ -2970,6 +3018,9 @@ declare global {
     }
 }
 declare namespace LocalJSX {
+    interface FlexRenderer {
+        "content"?: string;
+    }
     interface ModusAccordion {
         /**
           * (optional) The accordion's aria-label.
@@ -3362,6 +3413,10 @@ declare namespace LocalJSX {
          */
         "active"?: boolean;
         /**
+          * (optional) Whether the chip is in advanced state
+         */
+        "advancedChip"?: boolean;
+        /**
           * (optional) The chip's aria-label.
          */
         "ariaLabel"?: string | null;
@@ -3582,6 +3637,10 @@ declare namespace LocalJSX {
          */
         "ariaLabel"?: string | null;
         /**
+          * (optional) The border radius of the dropdown list.
+         */
+        "borderRadius"?: string;
+        /**
           * (optional) Determines custom dropdown placement offset.
          */
         "customPlacement"?: {
@@ -3590,6 +3649,10 @@ declare namespace LocalJSX {
     bottom?: number;
     left?: number;
   };
+        /**
+          * (optional) Prevents the dropdown from closing when an option is selected.
+         */
+        "disableCloseOnSelect"?: boolean;
         /**
           * (optional) Disables the dropdown.
          */
@@ -3606,6 +3669,10 @@ declare namespace LocalJSX {
           * (optional) Whether to show the dropdown list's border.
          */
         "showDropdownListBorder"?: boolean;
+        /**
+          * (optional) Toggles the list when clicked.
+         */
+        "toggleDropdown"?: boolean;
         /**
           * (required) The element id that the list renders near and that triggers the toggling of the list.
          */
@@ -3702,6 +3769,10 @@ declare namespace LocalJSX {
           * (optional) Disables the list item
          */
         "disabled"?: boolean;
+        /**
+          * (optional) add color to left Icon
+         */
+        "iconColor"?: string;
         /**
           * (optional) Takes the icon name and shows the icon aligned to the left of the button text.
          */
@@ -4261,6 +4332,10 @@ declare namespace LocalJSX {
         "disabled"?: boolean;
         "expanded"?: boolean;
         /**
+          * (optional to enable header dropdown feature)
+         */
+        "isHeader"?: ModusHeaderNavigationItemInfo;
+        /**
           * (optional) Label for the item and the tooltip message.
          */
         "label"?: string;
@@ -4269,13 +4344,15 @@ declare namespace LocalJSX {
          */
         "menuIcon"?: string;
         /**
-          * An event that fires when mouse click or `Enter` key press on an item.
+          * An event that fires when a mouse click or `Enter` key press on an item.
          */
         "onSideNavItemClicked"?: (event: ModusSideNavigationItemCustomEvent<{ id: string; selected: boolean }>) => void;
         /**
           * An event that fires when an item is in focus.
          */
         "onSideNavItemFocus"?: (event: ModusSideNavigationItemCustomEvent<{ id: string }>) => void;
+        "onSideNavItemHeaderClicked"?: (event: ModusSideNavigationItemCustomEvent<{ id: string; selected: boolean }>) => void;
+        "onSideNavListItemClicked"?: (event: ModusSideNavigationItemCustomEvent<{ id: string }>) => void;
         "on_sideNavItemAdded"?: (event: ModusSideNavigationItemCustomEvent<HTMLElement>) => void;
         "on_sideNavItemRemoved"?: (event: ModusSideNavigationItemCustomEvent<HTMLElement>) => void;
         /**
@@ -4451,6 +4528,10 @@ declare namespace LocalJSX {
           * (Optional) Actions that can be performed on each row. A maximum of 4 icons will be shown, including overflow menu and expand icons.
          */
         "rowActions"?: ModusTableRowAction[];
+        /**
+          * (Optional) The width and header of the rowActionsConfig.
+         */
+        "rowActionsConfig"?: ModusTableRowActionConfig;
         /**
           * (Optional) To display checkbox.
          */
@@ -4633,6 +4714,10 @@ declare namespace LocalJSX {
           * (optional) The input's minimum length.
          */
         "minLength"?: number;
+        /**
+          * (optional) The input's name.
+         */
+        "name"?: string;
         /**
           * An event that fires on input value change.
          */
@@ -5036,6 +5121,7 @@ declare namespace LocalJSX {
         "targetContent"?: string;
     }
     interface IntrinsicElements {
+        "flex-renderer": FlexRenderer;
         "modus-accordion": ModusAccordion;
         "modus-accordion-item": ModusAccordionItem;
         "modus-action-bar": ModusActionBar;
@@ -5103,6 +5189,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "flex-renderer": LocalJSX.FlexRenderer & JSXBase.HTMLAttributes<HTMLFlexRendererElement>;
             "modus-accordion": LocalJSX.ModusAccordion & JSXBase.HTMLAttributes<HTMLModusAccordionElement>;
             "modus-accordion-item": LocalJSX.ModusAccordionItem & JSXBase.HTMLAttributes<HTMLModusAccordionItemElement>;
             "modus-action-bar": LocalJSX.ModusActionBar & JSXBase.HTMLAttributes<HTMLModusActionBarElement>;

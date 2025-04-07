@@ -67,19 +67,25 @@ export class ModusTableRowActions {
     }
     return (
       <Host>
-        {actionButtons?.map(({ label, icon, id, isDisabled = () => false }) => {
+        {actionButtons?.map(({ label, icon, id, tooltipText, buttonStyle, color, isDisabled = () => false }) => {
           const disabled = isDisabled(this.row.original);
           return (
-            <modus-button
-              class="row-actions"
-              button-style="borderless"
-              color="secondary"
-              icon-only={icon}
-              size="small"
-              ariaLabel={label}
-              disabled={disabled}
-              onKeyDown={(e) => this.handleActionButtonKeydown(e, id)}
-              onClick={(e) => (!disabled ? this.handleActionButtonClick(e, id) : e.preventDefault())}></modus-button>
+            <div>
+              <modus-tooltip text={tooltipText} position="top">
+                <modus-button
+                  class="row-actions"
+                  button-style={buttonStyle ? buttonStyle : 'borderless'}
+                  color={color ? color : 'secondary'}
+                  icon-only={icon}
+                  size="small"
+                  ariaLabel={label}
+                  disabled={disabled}
+                  onKeyDown={(e) => this.handleActionButtonKeydown(e, id)}
+                  onClick={(e) => (!disabled ? this.handleActionButtonClick(e, id) : e.preventDefault())}>
+                  {label}
+                </modus-button>
+              </modus-tooltip>{' '}
+            </div>
           );
         })}
 

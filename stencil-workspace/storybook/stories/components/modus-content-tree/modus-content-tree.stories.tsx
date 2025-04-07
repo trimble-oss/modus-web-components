@@ -76,6 +76,7 @@ export default {
         'itemLabelChange modus-tree-view-item',
         'itemDrop modus-tree-view',
         'itemSelectionChange modus-tree-view',
+        'checkboxClick modus-tree-view-item',
       ],
     },
     controls: { expanded: true, sort: 'requiredFirst' },
@@ -191,7 +192,6 @@ const ActionBarTemplate = ({
   size,
   isLastChild,
 }) => html`
-
   <style>
     .toolbar {
       gap: 4px;
@@ -234,7 +234,9 @@ const ActionBarTemplate = ({
         id="remove">
         <svg width="24" height="24" viewBox="0 0 24 24">
           <path d="M0,0H24V24H0Z" fill="none" />
-          <path d="M6,19a2.006,2.006,0,0,0,2,2h8a2.006,2.006,0,0,0,2-2V7H6ZM19,4H15.5l-1-1h-5l-1,1H5V6H19Z" fill="var(--icon-fill)" />
+          <path
+            d="M6,19a2.006,2.006,0,0,0,2,2h8a2.006,2.006,0,0,0,2-2V7H6ZM19,4H15.5l-1-1h-5l-1,1H5V6H19Z"
+            fill="var(--icon-fill)" />
         </svg>
       </modus-button>
       <modus-button button-style="borderless" size="small" aria-label="Edit" title="Edit" color="primary" disabled id="edit">

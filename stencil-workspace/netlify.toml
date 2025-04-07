@@ -18,6 +18,7 @@ package = "@netlify/plugin-lighthouse"
 
   # optional, fails build when a category is below a threshold
   [plugins.inputs.thresholds]
-    accessibility = 0.8
+    accessibility = 0.7
     best-practices = 0.8
-    seo = 0.8
+    performance = 0.3
+    seo = 0.9

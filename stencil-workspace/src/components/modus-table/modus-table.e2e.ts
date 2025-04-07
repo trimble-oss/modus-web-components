@@ -1350,10 +1350,23 @@ describe('modus-table', () => {
     expect(paginationText).toEqualText('Showing result');
 
     await page.evaluate(() => {
-      Object.defineProperty(navigator, 'language', { value: 'fr-FR', configurable: true });
+      document.documentElement.lang = 'fr-FR';
     });
+
     await page.click('modus-table >>> .pagination-container');
     await page.waitForChanges();
     expect(paginationText).toEqualText('Afficher le résultat');
+
+    await page.evaluate(() => {
+      document.documentElement.lang = '';
+    });
+
+    await page.evaluate(() => {
+      Object.defineProperty(navigator, 'language', { value: 'de-DE', configurable: true });
+    });
+
+    await page.click('modus-table >>> .pagination-container');
+    await page.waitForChanges();
+    expect(paginationText).toEqualText('Ergebnis anzeigen');
   });
 });

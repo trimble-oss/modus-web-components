@@ -33,6 +33,9 @@ export class ModusListItem {
   /** (optional) The type of list item */
   @Prop() type = 'standard'; // Future support for 'checkbox' | 'icon' | 'menu' | 'standard' | 'switchLeft' | 'switchRight'
 
+  /**(optional) add color to left Icon */
+  @Prop() iconColor: string;
+
   /** An event that fires on list item click */
   @Event() itemClick: EventEmitter;
 
@@ -64,13 +67,14 @@ export class ModusListItem {
     return (
       <li
         ref={(el) => (this.listItemRef = el)}
+        part="list-item-li"
         class={containerClass}
         tabIndex={this.disabled ? -1 : 0}
         onClick={() => (!this.disabled ? this.itemClick.emit() : null)}
         onKeyDown={(e) => this.handleKeydown(e)}>
         {this.leftIcon && (
           <span class="icon left-icon">
-            <ModusIcon icon={this.leftIcon} size="24"></ModusIcon>
+            <ModusIcon icon={this.leftIcon} size="24" color={this.iconColor}></ModusIcon>
           </span>
         )}
         <div class="text-container">

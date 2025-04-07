@@ -3,7 +3,6 @@ import docs from './modus-checkbox-storybook-docs.mdx';
 import { html } from 'lit-html';
 import { withActions } from '@storybook/addon-actions/decorator';
 
-
 export default {
   title: 'User Inputs/Checkbox',
   argTypes: {
@@ -69,15 +68,13 @@ export default {
 };
 
 const Template = ({ ariaLabel, checked, disabled, indeterminate, label, size }) => html`
-  <div style="width: fit-content">
-    <modus-checkbox
-      aria-label=${ariaLabel}
-      checked=${checked}
-      ?disabled=${disabled}
-      indeterminate=${indeterminate}
-      label=${label}
-      size=${size}></modus-checkbox>
-  </div>
+  <modus-checkbox
+    aria-label=${ariaLabel}
+    checked=${checked}
+    ?disabled=${disabled}
+    indeterminate=${indeterminate}
+    label=${label}
+    size=${size}></modus-checkbox>
 `;
 
 export const Medium = Template.bind({});

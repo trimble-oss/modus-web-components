@@ -67,6 +67,8 @@ export class ModusTreeView {
 
   private currentItem: TreeViewItemInfo;
 
+  private anchorItemId: string = null;
+
   private focusItem: string;
   private items: { [key: string]: TreeViewItemInfo } = {};
   private syncItems: string[] = [];
@@ -614,8 +616,17 @@ export class ModusTreeView {
 
   handleItemSelection(itemId: string, event?: KeyboardEvent | MouseEvent): void {
     if (this.items[itemId].disabled) return;
+
+    const isShiftClick = event instanceof MouseEvent && event.shiftKey;
     const allowMultipleSelection = this.multiSelection && event && (event.shiftKey || event.ctrlKey || event.metaKey);
     const isSelected = !this.isItemSelected(itemId);
+
+    if (!isShiftClick) {
+      this.anchorItemId = itemId;
+    } else {
+      this.updateClickedItems(itemId, true);
+      return;
+    }
 
     const oldItems = [...this.selectedItems];
     let newItems = [...this.selectedItems];
@@ -710,6 +721,34 @@ export class ModusTreeView {
       event.preventDefault();
       event.stopPropagation();
     }
+  }
+
+  updateClickedItems(currentItemId: string, isShiftClick: boolean): void {
+    const allItems = Object.keys(this.items);
+
+    if (this.multiSelection && isShiftClick) {
+      if (this.anchorItemId === null) {
+        this.anchorItemId = currentItemId;
+      }
+
+      const anchorIndex = allItems.indexOf(this.anchorItemId);
+      const currentIndex = allItems.indexOf(currentItemId);
+      const startIdx = Math.min(anchorIndex, currentIndex);
+      const endIdx = Math.max(anchorIndex, currentIndex);
+
+      this.selectedItems = allItems.slice(startIdx, endIdx + 1);
+      this.syncItems.push(...this.selectedItems);
+      return;
+    }
+
+    const isSelected = this.isItemSelected(currentItemId);
+    if (!isSelected) {
+      this.anchorItemId = currentItemId;
+    }
+
+    this.selectedItems = isSelected ? this.selectedItems.filter((id) => id !== currentItemId) : [currentItemId];
+
+    this.syncItems.push(...this.selectedItems);
   }
 
   isItemChecked(itemId: string): boolean {
