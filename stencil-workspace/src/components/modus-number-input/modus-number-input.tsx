@@ -170,7 +170,13 @@ export class ModusNumberInput {
     };
     const inputType = this.currency || this.locale ? 'text' : 'number';
     const inputAriaProps =
-      inputType === 'number' ? { ariaValuemax: this.maxValue, ariaValuemin: this.minValue, ariaValuenow: this.value } : {};
+      inputType === 'number'
+        ? {
+            ariaValuemax: this.maxValue ? parseFloat(this.value).toString() : undefined,
+            ariaValuemin: this.minValue ? parseFloat(this.value).toString() : undefined,
+            ariaValuenow: this.value ? parseFloat(this.value).toString() : undefined,
+          }
+        : {};
 
     return (
       <div class={buildContainerClassNames()}>
