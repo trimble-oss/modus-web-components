@@ -172,8 +172,8 @@ export class ModusNumberInput {
     const inputAriaProps =
       inputType === 'number'
         ? {
-            ariaValuemax: this.maxValue ? parseFloat(this.value).toString() : undefined,
-            ariaValuemin: this.minValue ? parseFloat(this.value).toString() : undefined,
+            ariaValuemax: this.maxValue !== undefined ? this.maxValue.toString() : undefined,
+            ariaValuemin: this.minValue !== undefined ? this.minValue.toString() : undefined,
             ariaValuenow: this.value ? parseFloat(this.value).toString() : undefined,
           }
         : {};
