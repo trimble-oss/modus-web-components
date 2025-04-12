@@ -13,7 +13,7 @@
     "@storybook/components": "^8.6.11",
     "@storybook/theming": "^8.6.12",
     "@types/mdx": "^2.0.13",
-    "lit-html": "^3.2.1"
+    "lit-html": "^3.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.26.10",
