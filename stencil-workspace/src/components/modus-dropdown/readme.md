@@ -28,6 +28,13 @@
 | `dropdownClose` | An event that fires on dropdown close. | `CustomEvent<any>` |
 
 
+## Shadow Parts
+
+| Part                  | Description |
+| --------------------- | ----------- |
+| `"dropdownlistpanel"` |             |
+
+
 ## Dependencies
 
 ### Used by
