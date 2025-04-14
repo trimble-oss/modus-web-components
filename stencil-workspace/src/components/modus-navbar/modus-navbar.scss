@@ -279,7 +279,7 @@ nav {
     }
   }
 
-  .dropdownNavbar::part(dropdownListPanel) {
+  .dropdown-navbar::part(dropdownListPanel) {
     overflow: visible;
   }
 }

@@ -16,7 +16,7 @@ export const ModusNavbarButtonList: FunctionalComponent<{
 
   return navbarButtons.map((button, index) => (
     <div onClick={(event) => onClick(event, button)} onKeyDown={(event) => onKeyDown(event, button)}>
-      <modus-dropdown toggle-element-id={'navbar-button-' + index} showDropdownListBorder={false} class="dropdownNavbar">
+      <modus-dropdown toggle-element-id={'navbar-button-' + index} showDropdownListBorder={false} class="dropdown-navbar">
         <div class="navbar-button" id={'navbar-button-' + index} slot="dropdownToggle">
           <span class="navbar-button-icon" role="button" tabIndex={0}>
             <modus-tooltip text={button.tooltip?.text} position="bottom">
