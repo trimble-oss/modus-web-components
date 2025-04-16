@@ -1084,11 +1084,12 @@ Users can use this to provide custom elements.
 
 ### Methods
 
-| Method name              | Description                                | Parameter                              | Return               |
-| ------------------------ | ------------------------------------------ | -------------------------------------- | -------------------- |
-| `getColumnData`          | Gets data of a particular column.          | `accessorKey: string`                  | `Promise<unknown[]>` |
-| `toggleColumnVisibility` | Decides the Data table column visibility.  | `columnId: string`, `show: boolean`    | `Promise<void>`      |
-| `getEditableCell`        | Handle the editability of a specific cell. | `rowIndex: string`, `columnId: string` | `Promise<void>`      |
+| Method name              | Description                                 | Parameter                              | Return               |
+| ------------------------ | ------------------------------------------- | -------------------------------------- | -------------------- |
+| `getColumnData`          | Gets data of a particular column.           | `accessorKey: string`                  | `Promise<unknown[]>` |
+| `toggleColumnVisibility` | Decides the Data table column visibility.   | `columnId: string`, `show: boolean`    | `Promise<void>`      |
+| `getEditableCell`        | Handle the editability of a specific cell.  | `rowIndex: string`, `columnId: string` | `Promise<void>`      |
+| `toggleAllRowSelection`  | Selects or deselects all rows in the table. | `select: boolean`                      | `Promise<void>`      |
 
 ### Text Wrapping
 
