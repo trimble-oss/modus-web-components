@@ -1,6 +1,6 @@
 import { Config } from '@stencil/core';
 import { sass } from '@stencil/sass';
-import { postcss } from '@stencil/postcss';
+import { postcss } from '@stencil-community/postcss';
 import { angularOutputTarget } from '@stencil/angular-output-target';
 import { reactOutputTarget as react } from '@stencil/react-output-target';
 import autoprefixer from 'autoprefixer';
