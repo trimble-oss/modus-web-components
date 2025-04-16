@@ -90,6 +90,22 @@ Type: `Promise<void>`
 
 Boolean indicating if the cell is editable.
 
+### `toggleAllRowsSelection(select: boolean) => Promise<void>`
+
+Selects or deselects all rows in the table.
+
+#### Parameters
+
+| Name     | Type      | Description                                            |
+| -------- | --------- | ------------------------------------------------------ |
+| `select` | `boolean` | - `true` to select all rows, `false` to deselect them. |
+
+#### Returns
+
+Type: `Promise<void>`
+
+A promise that resolves when the operation is complete.
+
 ### `toggleColumnVisibility(columnId: string, show: boolean) => Promise<void>`
 
 Toggle the table column visibility
