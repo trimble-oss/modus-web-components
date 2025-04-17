@@ -426,6 +426,22 @@ export class ModusTable {
   }
 
   /**
+   * Selects or deselects all rows in the table.
+   *
+   * @param select - `true` to select all rows, `false` to deselect them.
+   * @returns A promise that resolves when the operation is complete.
+   *
+   * @example
+   * await toggleAllRowsSelection(true);  // Select all
+   * await toggleAllRowsSelection(false); // Deselect all
+   */
+  @Method()
+  async toggleAllRowsSelection(select: boolean): Promise<void> {
+    if (!this.rowSelection) return;
+    this.tableCore.getTableInstance().toggleAllRowsSelected(select);
+  }
+
+  /**
    * Returns whether a cell is editable based on row index and column ID.
    * @param rowIndex The index of the row.
    * @param columnId The ID of the column.
