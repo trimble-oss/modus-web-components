@@ -726,7 +726,6 @@ export class ModusTable {
         row.toggleSelected(true, { selectChildren: true });
       }
     }
-    this.emitRowSelection();
   }
 
   updateClickedRows(currentRowIndex: number, isShiftClick: boolean): void {
@@ -747,8 +746,6 @@ export class ModusTable {
           row.toggleSelected(true, { selectChildren: true });
         }
       }
-
-      this.emitRowSelection();
       return;
     }
 
@@ -760,20 +757,7 @@ export class ModusTable {
       }
 
       row.toggleSelected(undefined, { selectChildren: true });
-      this.emitRowSelection();
     }
-  }
-
-  emitRowSelection(): void {
-    const selectedRows = this.tableCore
-      .getTableInstance()
-      .getSelectedRowModel()
-      .flatRows.map((row) => ({
-        id: row.id,
-        ...(typeof row.original === 'object' ? row.original : {}),
-      }));
-
-    this.rowSelectionChange.emit(selectedRows);
   }
 
   updateRowSelection(updater: Updater<unknown>): void {

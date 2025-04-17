@@ -44,13 +44,13 @@
   "dependencies": {
     "@floating-ui/dom": "^1.6.13",
     "@popperjs/core": "^2.11.8",
-    "@stencil/core": "^4.12.4",
+    "@stencil/core": "4.13.0",
     "@tanstack/table-core": "^8.20.5"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.26.3",
+    "@stencil-community/postcss": "^2.2.0",
     "@stencil/angular-output-target": "^0.10.2",
-    "@stencil/postcss": "^2.1.0",
     "@stencil/react-output-target": "^0.5.3",
     "@stencil/sass": "^3.0.12",
     "@trimble-oss/modus-icons": "1.16.0",
@@ -68,7 +68,7 @@
     "prettier": "3.5.3",
     "puppeteer": "^19.11.1",
     "puppeteer-core": "^19.11.1",
-    "stylelint": "16.17.0",
+    "stylelint": "16.18.0",
     "stylelint-config-standard-scss": "14.0.0",
     "stylelint-order": "6.0.4",
     "typescript": "^5.7.3"
