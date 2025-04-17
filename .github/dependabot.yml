@@ -2,15 +2,38 @@ version: 2
 updates:
   - package-ecosystem: npm
     directory: '/stencil-workspace/'
+    groups:
+      all-dependencies:
+        patterns:
+          - '*'
+        update-types:
+          - 'minor'
+          - 'patch'
     schedule:
-      interval: monthly
+      interval: weekly
     open-pull-requests-limit: 3
     versioning-strategy: increase
+    ignore:
+      - dependency-name: puppeteer
+        package-ecosystem: npm
+      - dependency-name: puppeteer-core
+        package-ecosystem: npm
+      - dependency-name: typescript
+        package-ecosystem: npm
+      - dependency-name: '@stencil/core'
+        package-ecosystem: npm
 
   - package-ecosystem: npm
     directory: '/stencil-workspace/storybook/'
+    groups:
+      all-dependencies:
+        patterns:
+          - '*'
+        update-types:
+          - 'minor'
+          - 'patch'
     schedule:
-      interval: monthly
+      interval: weekly
     open-pull-requests-limit: 3
     versioning-strategy: increase
 
