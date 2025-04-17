@@ -15,13 +15,9 @@ updates:
     versioning-strategy: increase
     ignore:
       - dependency-name: puppeteer
-        package-ecosystem: npm
       - dependency-name: puppeteer-core
-        package-ecosystem: npm
       - dependency-name: typescript
-        package-ecosystem: npm
       - dependency-name: '@stencil/core'
-        package-ecosystem: npm
 
   - package-ecosystem: npm
     directory: '/stencil-workspace/storybook/'
