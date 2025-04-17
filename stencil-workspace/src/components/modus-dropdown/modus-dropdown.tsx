@@ -147,6 +147,7 @@ export class ModusDropdown {
         <slot name="dropdownToggle" />
         <div
           class={listContainerClass}
+          part="dropdownListPanel"
           style={{
             top: this.customPlacement?.top ? `${this.customPlacement?.top}px` : '',
             right: this.customPlacement?.right ? `${this.customPlacement?.right}px` : '',
