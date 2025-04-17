@@ -14,7 +14,7 @@
 | `label`     | `label`      | (optional) The slider's label.               | `string`  | `undefined` |
 | `maxValue`  | `max-value`  | (optional) The slider's maximum value.       | `number`  | `100`       |
 | `minValue`  | `min-value`  | (optional) The slider's minimum value.       | `number`  | `0`         |
-| `value`     | `value`      | (optional) The slider's value.               | `string`  | `undefined` |
+| `value`     | `value`      | (optional) The slider's value.               | `string`  | `'50'`      |
 
 
 ## Events
