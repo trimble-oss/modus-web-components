@@ -533,7 +533,7 @@ describe('modus-date-input', () => {
     await page.waitForChanges();
 
     const input = await page.find('modus-date-input >>> input');
-    await input.type('28-02-2025', { delay: 20 });
+    await input.type('29-02-2025', { delay: 20 });
     await page.waitForChanges();
 
     await input.press('Enter');
