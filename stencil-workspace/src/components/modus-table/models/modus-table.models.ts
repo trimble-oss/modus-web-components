@@ -50,8 +50,13 @@ export type ModusTableCellEditorType =
   | typeof CELL_EDIT_TYPE_AUTOCOMPLETE
   | typeof CELL_EDIT_TYPE_DATE;
 
-export type ModusTableCellDateEditorArgs = { format: string };
-export type ModusTableCellSelectEditorArgs = { options: unknown[]; optionsDisplayProp?: string; placeholder?: string };
+export type ModusTableCellDateEditorArgs = { format: string; isCellDisabled?: (row: unknown) => boolean };
+export type ModusTableCellSelectEditorArgs = {
+  options: unknown[];
+  optionsDisplayProp?: string;
+  placeholder?: string;
+  isCellDisabled?: (row: unknown) => boolean;
+};
 export type ModusTableCellAutocompleteEditorArgs = {
   options: ModusAutocompleteOption[];
   noResultsFoundText: string;

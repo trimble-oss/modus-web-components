@@ -126,10 +126,18 @@ export class ModusTableCellMain {
     return this.cell.column.columnDef[COLUMN_DEF_CELL_EDITOR_ARGS_KEY];
   }
 
+  isCellEditable = (): boolean => {
+    const editable = this.cell.column.columnDef[this.cellEditableKey];
+    const isDisabledFn = this.getEditorArgs()?.isCellDisabled;
+    const isDisabled = typeof isDisabledFn === 'function' ? isDisabledFn(this.cell.row.original) : false;
+
+    return editable && !isDisabled;
+  };
+
   handleCellClick = (event: MouseEvent) => {
     if (event.defaultPrevented) return;
 
-    if (this.cell.column.columnDef[this.cellEditableKey]) {
+    if (this.isCellEditable()) {
       this.editMode = true;
     }
   };
@@ -168,10 +176,7 @@ export class ModusTableCellMain {
   handleCellKeydown = (event: KeyboardEvent) => {
     if (event.defaultPrevented) return;
 
-    const key = event.key?.toLowerCase();
-    const isCellEditable = this.cell.column.columnDef[this.cellEditableKey];
-
-    if (isCellEditable && !this.editMode && key === KEYBOARD_ENTER) {
+    if (this.isCellEditable()) {
       this.editMode = true;
       event.stopPropagation();
     } else {

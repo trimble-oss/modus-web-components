@@ -894,8 +894,13 @@ type ModusTableCellEditorType =
   | typeof CELL_EDIT_TYPE_INT
   | typeof CELL_EDIT_TYPE_AUTOCOMPLETE
   | typeof CELL_EDIT_TYPE_DATE;
-type ModusTableCellDateEditorArgs = { format: string };
-type ModusTableCellSelectEditorArgs = { options: unknown[] };
+type ModusTableCellDateEditorArgs = { format: string; isCellDisabled?: (row: unknown) => boolean  };
+type ModusTableCellSelectEditorArgs = {
+  options: unknown[];
+  optionsDisplayProp?: string;
+  placeholder?: string;
+  isCellDisabled?: (row: unknown) => boolean;
+};
 type ModusTableCellAutocompleteEditorArgs = {
   options: ModusAutocompleteOption[];
   noResultsFoundText: string;
