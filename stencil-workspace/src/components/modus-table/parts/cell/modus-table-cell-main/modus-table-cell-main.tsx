@@ -339,6 +339,7 @@ export class ModusTableCellMain {
             value={this.cell.getValue()}
             type={this.getEditorType()}
             args={this.getEditorArgs()}
+            row={this.cell.row}
             valueChange={(newVal: string) => this.handleCellEditorValueChange(newVal, valueString)}
             keyDown={(event: KeyboardEvent, newVal: string) => this.handleCellEditorKeyDown(event, newVal, valueString)}
             inputValueChangeHandler={(newVal: string) => this.handleCellEditorOnInputChange(newVal, valueString)}

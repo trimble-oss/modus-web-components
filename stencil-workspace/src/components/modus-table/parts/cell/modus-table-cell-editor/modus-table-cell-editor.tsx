@@ -18,6 +18,7 @@ import {
   ModusTableCellEditorArgs,
 } from '../../../models/modus-table.models';
 import { ModusDateInputEventDetails } from '../../../../modus-date-input/utils/modus-date-input.models';
+import { Row } from '@tanstack/table-core';
 
 @Component({
   tag: 'modus-table-cell-editor',
@@ -31,6 +32,7 @@ export class ModusTableCellEditor {
   @Prop() valueChange: (newValue: string) => void;
   @Prop() keyDown: (e: KeyboardEvent, newValue: string) => void;
   @Prop() inputValueChangeHandler: (newValue: string) => void;
+  @Prop() row: Row<unknown>;
 
   private editedValue: unknown;
   private inputElement: HTMLElement;
@@ -86,6 +88,7 @@ export class ModusTableCellEditor {
         textAlign="right"
         size="large"
         onBlur={this.handleBlur}
+        disabled={typeof this.args?.isCellDisabled === 'function' ? this.args.isCellDisabled(this.row?.original) : false}
         onValueChange={(e: CustomEvent<string>) => (this.editedValue = e.detail)}
         onKeyDown={(e) => handleArrowKeys(e, this.handleKeyDown)}></modus-number-input>
     );
@@ -102,6 +105,7 @@ export class ModusTableCellEditor {
         }}
         onBlur={this.handleBlur}
         onKeyDown={this.handleKeyDown}
+        disabled={typeof this.args?.isCellDisabled === 'function' ? this.args.isCellDisabled(this.row?.original) : false}
         autoFocusInput
         size="large"></modus-text-input>
     );
@@ -132,6 +136,7 @@ export class ModusTableCellEditor {
           options={options}
           placeholder={placeholder}
           onInputBlur={this.handleBlur}
+          disabled={typeof this.args?.isCellDisabled === 'function' ? this.args.isCellDisabled(this.row?.original) : false}
           onKeyDown={(e) => handleEnter(e, this.handleKeyDown)}
           onValueChange={(e: CustomEvent<unknown>) => {
             const detail = e.detail as { display: string; [key: string]: unknown };
@@ -163,6 +168,7 @@ export class ModusTableCellEditor {
           size="large"
           show-calendar-icon="true"
           value={this.value as string}
+          disabled={typeof this.args?.isCellDisabled === 'function' ? this.args.isCellDisabled(this.row?.original) : false}
           onValueChange={(e: CustomEvent<ModusDateInputEventDetails>) => {
             this.editedValue = e.detail[valueKey];
           }}></modus-date-input>
@@ -203,6 +209,7 @@ export class ModusTableCellEditor {
           options={options}
           onBlur={this.handleBlur}
           onKeyDown={(e) => handleArrowKeys(e, this.handleKeyDown)}
+          disabled={typeof this.args?.isCellDisabled === 'function' ? this.args.isCellDisabled(this.row?.original) : false}
           filterOptions={
             args.filterOptions
               ? (...props) => {

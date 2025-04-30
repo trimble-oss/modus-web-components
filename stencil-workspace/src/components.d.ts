@@ -1416,6 +1416,7 @@ export namespace Components {
         "dataType": string;
         "inputValueChangeHandler": (newValue: string) => void;
         "keyDown": (e: KeyboardEvent, newValue: string) => void;
+        "row": Row<unknown>;
         "type": string;
         "value": unknown;
         "valueChange": (newValue: string) => void;
@@ -4585,6 +4586,7 @@ declare namespace LocalJSX {
         "dataType"?: string;
         "inputValueChangeHandler"?: (newValue: string) => void;
         "keyDown"?: (e: KeyboardEvent, newValue: string) => void;
+        "row"?: Row<unknown>;
         "type"?: string;
         "value"?: unknown;
         "valueChange"?: (newValue: string) => void;
