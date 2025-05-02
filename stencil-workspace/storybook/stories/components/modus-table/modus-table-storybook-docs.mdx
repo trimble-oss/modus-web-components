@@ -856,6 +856,29 @@ function filterDynamicOptions(value) {
 }
 ```
 
+### Inline Editing - Disabling a Cell or Row
+
+You can disable specific cells or rows from being edited by using the `isCellDisabled` function in the `cellEditorArgs` property of a column. This function takes the row data as an argument and returns a boolean indicating whether the cell should be disabled.
+
+```javascript
+{
+  header: 'Status',
+  accessorKey: 'status',
+  id: 'status',
+  dataType: 'text',
+  cellEditable: true,
+  cellEditorType: 'select',
+  cellEditorArgs: {
+    options: [
+      { display: 'Active' },
+      { display: 'Inactive' },
+      { display: 'Pending' },
+    ],
+    isCellDisabled: (row) => row.status === 'Inactive', // Disable editing for 'Inactive' rows
+  },
+},
+```
+
 ### Row Actions
 
 Users can add actions to rows. These actions will be shown in the first column as icons. A maximum of 4 icons will be shown, including the expand icon for expandable rows, if there more actions are provided, an overflow menu will be shown with a list of the remaining actions displayed as their label.
