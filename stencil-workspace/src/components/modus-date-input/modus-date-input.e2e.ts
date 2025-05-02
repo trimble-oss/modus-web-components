@@ -524,4 +524,26 @@ describe('modus-date-input', () => {
     const errorText = await page.find('modus-date-input >>> .sub-text > label');
     expect(errorText.innerHTML).toEqual('Error.');
   });
+
+  it('checks whether an error is shown when an invalid date is entered', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <modus-date-input format="dd-mm-yyyy"></modus-date-input>
+    `);
+    await page.waitForChanges();
+
+    const input = await page.find('modus-date-input >>> input');
+    await input.type('29-02-2025', { delay: 20 });
+    await page.waitForChanges();
+
+    await input.press('Enter');
+    await page.waitForChanges();
+
+    // Check for error message
+    const errorText = await page.find('modus-date-input >>> .sub-text > label');
+    expect(errorText).not.toBeNull();
+
+    const errorMessage = await errorText.textContent;
+    expect(errorMessage.trim()).toEqual('Invalid date');
+  });
 });

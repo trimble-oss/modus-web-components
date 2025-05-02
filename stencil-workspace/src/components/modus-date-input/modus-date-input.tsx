@@ -278,12 +278,17 @@ export class ModusDateInput {
       } else {
         this.clearValidation();
       }
-    } else if (!this.value) {
+    } else if (!this.value || !this.isValidDate(String(this.value))) {
       this.internalErrorText = 'Invalid date';
       this.valueError.emit(this.internalErrorText);
     } else {
       this.validateMinMax();
     }
+  }
+
+  private isValidDate(dateString: string): boolean {
+    const date = new Date(dateString);
+    return date instanceof Date && !isNaN(date.getTime()) && date.toISOString().startsWith(dateString);
   }
 
   private validateMinMax(): void {
