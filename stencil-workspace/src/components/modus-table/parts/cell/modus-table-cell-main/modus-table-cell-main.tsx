@@ -25,6 +25,7 @@ import {
   KEYBOARD_ENTER,
   KEYBOARD_ESCAPE,
   COLUMN_DEF_DATATYPE_BADGE,
+  KEYBOARD_TAB,
 } from '../../../modus-table.constants';
 import NavigateTableCells from '../../../utilities/table-cell-navigation.utility';
 import { CellFormatter } from '../../../utilities/table-cell-formatter.utility';
@@ -170,10 +171,29 @@ export class ModusTableCellMain {
 
     const key = event.key?.toLowerCase();
     const isCellEditable = this.cell.column.columnDef[this.cellEditableKey];
-
     if (isCellEditable && !this.editMode && key === KEYBOARD_ENTER) {
       this.editMode = true;
       event.stopPropagation();
+    } else if (isCellEditable && this.editMode && key === KEYBOARD_TAB) {
+      const isShiftPressed = event.shiftKey;
+      NavigateTableCells({
+        eventKey: isShiftPressed ? 'shift+tab' : event.key,
+        cellElement: this.cellEl,
+        isCellEditable: isCellEditable,
+        onNavigateComplete: (cellElement) => {
+          if (cellElement) {
+            cellElement.focus();
+            const cellComponent = cellElement;
+            if (cellComponent) {
+              (cellComponent as any).componentOnReady().then((componentInstance) => {
+                const nextRowIndex = componentInstance.cell.row.index.toString();
+                const nextColumnId = componentInstance.cell.column.id;
+                componentInstance.handleCellEdit(nextRowIndex, nextColumnId);
+              });
+            }
+          }
+        },
+      });
     } else {
       NavigateTableCells({
         eventKey: event.key,

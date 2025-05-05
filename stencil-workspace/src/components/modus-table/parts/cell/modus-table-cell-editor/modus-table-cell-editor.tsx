@@ -163,6 +163,7 @@ export class ModusTableCellEditor {
           size="large"
           show-calendar-icon="true"
           value={this.value as string}
+          onBlur={this.handleBlur}
           onValueChange={(e: CustomEvent<ModusDateInputEventDetails>) => {
             this.editedValue = e.detail[valueKey];
           }}></modus-date-input>
