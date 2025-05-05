@@ -42,13 +42,13 @@
     "prebuild": "tsc generate-icons/generate-icons.ts && node generate-icons/generate-icons.js"
   },
   "dependencies": {
-    "@floating-ui/dom": "^1.6.13",
+    "@floating-ui/dom": "^1.7.0",
     "@popperjs/core": "^2.11.8",
     "@stencil/core": "4.13.0",
     "@tanstack/table-core": "^8.21.3"
   },
   "devDependencies": {
-    "@babel/preset-react": "^7.26.3",
+    "@babel/preset-react": "^7.27.1",
     "@stencil-community/postcss": "^2.2.0",
     "@stencil/angular-output-target": "^0.10.2",
     "@stencil/react-output-target": "^0.5.3",
