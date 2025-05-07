@@ -856,6 +856,29 @@ function filterDynamicOptions(value) {
 }
 ```
 
+### Inline Editing - Disabling a Cell or Row
+
+You can disable specific cells or rows from being edited by using the `isCellDisabled` function in the `cellEditorArgs` property of a column. This function takes the row data as an argument and returns a boolean indicating whether the cell should be disabled.For best results, ensure that this is a pure function it should not produce side effects or rely on external mutable state.
+
+```javascript
+{
+  header: 'Status',
+  accessorKey: 'status',
+  id: 'status',
+  dataType: 'text',
+  cellEditable: true,
+  cellEditorType: 'select',
+  cellEditorArgs: {
+    options: [
+      { display: 'Active' },
+      { display: 'Inactive' },
+      { display: 'Pending' },
+    ],
+    isCellDisabled: (row) => row.status === 'Inactive', // Disable editing for 'Inactive' rows
+  },
+},
+```
+
 ### Row Actions
 
 Users can add actions to rows. These actions will be shown in the first column as icons. A maximum of 4 icons will be shown, including the expand icon for expandable rows, if there more actions are provided, an overflow menu will be shown with a list of the remaining actions displayed as their label.
@@ -894,8 +917,13 @@ type ModusTableCellEditorType =
   | typeof CELL_EDIT_TYPE_INT
   | typeof CELL_EDIT_TYPE_AUTOCOMPLETE
   | typeof CELL_EDIT_TYPE_DATE;
-type ModusTableCellDateEditorArgs = { format: string };
-type ModusTableCellSelectEditorArgs = { options: unknown[] };
+type ModusTableCellDateEditorArgs = { format: string; isCellDisabled?: (row: unknown) => boolean  };
+type ModusTableCellSelectEditorArgs = {
+  options: unknown[];
+  optionsDisplayProp?: string;
+  placeholder?: string;
+  isCellDisabled?: (row: unknown) => boolean;
+};
 type ModusTableCellAutocompleteEditorArgs = {
   options: ModusAutocompleteOption[];
   noResultsFoundText: string;
