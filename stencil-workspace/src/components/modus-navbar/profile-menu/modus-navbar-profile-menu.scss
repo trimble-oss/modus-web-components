@@ -47,7 +47,7 @@
       .username {
         font-size: $rem-16px;
         font-weight: $font-weight-semi-bold;
-        overflow-wrap: break-word;
+        overflow-wrap: anywhere;
         text-align: center;
         width: fit-content;
       }
