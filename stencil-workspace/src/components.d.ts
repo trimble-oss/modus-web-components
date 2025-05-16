@@ -1362,6 +1362,10 @@ export namespace Components {
          */
         "rowSelection": boolean;
         /**
+          * (Optional) Function to determine if a row is disabled for selection.
+         */
+        "rowSelectionDisabled"?: (row: Row<unknown>) => boolean;
+        /**
           * (Optional) To control multiple row selection.
          */
         "rowSelectionOptions": ModusTableRowSelectionOptions;
@@ -4543,6 +4547,10 @@ declare namespace LocalJSX {
           * (Optional) To display checkbox.
          */
         "rowSelection"?: boolean;
+        /**
+          * (Optional) Function to determine if a row is disabled for selection.
+         */
+        "rowSelectionDisabled"?: (row: Row<unknown>) => boolean;
         /**
           * (Optional) To control multiple row selection.
          */

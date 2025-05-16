@@ -65,6 +65,8 @@ export interface TableContext {
 
   rowSelectionOptions: ModusTableRowSelectionOptions;
 
+  rowSelectionDisabled?: (row: Row<unknown>) => boolean;
+
   showSortIconOnHover: boolean;
 
   sort: boolean;

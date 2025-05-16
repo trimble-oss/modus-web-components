@@ -111,22 +111,25 @@ export const ModusTableBody: FunctionalComponent<ModusTableBodyProps> = ({ conte
       {table.getRowModel()?.rows.map((row) => {
         const { getIsSelected, getIsAllSubRowsSelected, getVisibleCells, subRows, id } = row;
         const isChecked = getIsSelected() && (subRows?.length ? getIsAllSubRowsSelected() : true);
+        const isDisabled = context.rowSelectionDisabled ? context.rowSelectionDisabled(row) : false;
 
         return (
           <tr
             key={id}
-            class={{ 'enable-hover': hover, 'row-selected': isChecked }}
-            onClick={(event) => handleRowClick(event as MouseEvent, row.index, row)}
-            {...(rowSelectionOptions.multiple && {
-              onKeyDown: (event) => handleKeyDown(event as KeyboardEvent, row.index),
-            })}>
+            class={{ 'enable-hover': hover, 'row-selected': isChecked, 'row-disabled': isDisabled }}
+            onClick={isDisabled ? undefined : (event) => handleRowClick(event as MouseEvent, row.index, row)}
+            {...(rowSelectionOptions.multiple &&
+              !isDisabled && {
+                onKeyDown: (event) => handleKeyDown(event as KeyboardEvent, row.index),
+              })}>
             {rowSelection && (
               <ModusTableCellCheckbox
                 multipleRowSelection={multipleRowSelection}
                 row={row}
                 isChecked={isChecked}
                 checkboxSize={checkboxSize}
-                updateRow={() => handleCheckboxKeyDown(row)}></ModusTableCellCheckbox>
+                updateRow={isDisabled ? undefined : () => handleCheckboxKeyDown(row)}
+                disableRow={isDisabled}></ModusTableCellCheckbox>
             )}
             {getVisibleCells()?.map((cell, cellIndex) => {
               return (

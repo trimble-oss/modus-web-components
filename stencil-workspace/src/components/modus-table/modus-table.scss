@@ -366,6 +366,14 @@ table {
           }
         }
       }
+
+      &.row-disabled {
+        pointer-events: none;
+      }
+
+      &.row-disabled .row-checkbox modus-checkbox {
+        pointer-events: none;
+      }
     }
   }
 
