@@ -19,10 +19,10 @@ This project provides Trimble Modus Elements as a web component library. Web com
 - [Handle Business Logic](#handle-business-logic)
 - [Manage State](#manage-state)
 - [Provide Data Access](#provide-data-access)
-- [Manage 3rd Party Libraries & Frameworks](#manage-3rd-party-libraries-&-frameworks)
+- [Manage 3rd Party Libraries & Frameworks](#manage-3rd-party-libraries--frameworks)
 - [Provide Static Assets](#provide-static-assets)
 - [Make the Site Available](#make-the-site-available)
-- [Create a Quality Product & Development Experience](#create-a-quality-product-&-development-experience)
+- [Create a Quality Product & Development Experience](#create-a-quality-product--development-experience)
 
 ## Capabilities
 
@@ -108,7 +108,7 @@ This project provides Trimble Modus Elements as a web component library. Web com
 
 ### Provide Static Assets
 
-**Patterns **for retrieving static assets are CDN or manual. Using a CDN is highly preferred for content used by multiple applications where performance and availability are the primary concern. Manually providing assets is as simple as including a file in an assets folder that the build knows to copy as is. This is a fine one off solution but shared resources should be made available in our CDN.
+**Patterns** for retrieving static assets are CDN or manual. Using a CDN is highly preferred for content used by multiple applications where performance and availability are the primary concern. Manually providing assets is as simple as including a file in an assets folder that the build knows to copy as is. This is a fine one off solution but shared resources should be made available in our CDN.
 
 *CDN Resources*
 
