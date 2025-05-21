@@ -1,0 +1,17 @@
+{
+  "extends": ["development"],
+  "hints": {
+    "compat-api/css": "off",
+    "typescript-config/consistent-casing": "off"
+  },
+  "ignoredUrls": [
+    {
+      "domain": "^https?://.*\\.google-analytics\\.com/.*",
+      "hints": ["*"]
+    },
+    {
+      "domain": "^https?://fonts\\.googleapis\\.com/.*",
+      "hints": ["*"]
+    }
+  ]
+}
