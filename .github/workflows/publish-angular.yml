@@ -6,10 +6,10 @@ on:
         required: true
         type: choice
         options:
-          - '15'
           - '16'
           - '17'
           - '18'
+          - '19'
         description: The version of Angular you want to build
 
 permissions:
@@ -29,20 +29,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Setup Node.js environment for Angular versions up to 16
-      - name: Setup Node.js environment (Angular <= 16)
-        if: ${{ github.event.inputs.angularVersion < 17 }}
+      # Setup Node.js environment for Angular 16 / 17
+      - name: Setup Node.js environment (Angular <= 17)
+        if: ${{ github.event.inputs.angularVersion < 18 }}
         uses: actions/setup-node@v4
         with:
           node-version: '18.x'
           registry-url: 'https://registry.npmjs.org'
 
-      # Setup Node.js environment specifically for Angular version 17 and above
-      - name: Setup Node.js environment (Angular >= 17)
-        if: ${{ github.event.inputs.angularVersion >= 17 }}
+      # Setup Node.js environment for Angular 18/ 19
+      - name: Setup Node.js environment (Angular >= 18)
+        if: ${{ github.event.inputs.angularVersion >= 18 }}
         uses: actions/setup-node@v4
         with:
-          node-version: '18.x'
+          node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install Modus Web Components
