@@ -294,6 +294,9 @@ export class ModusTable {
   /** (Optional) To wrap text that overflows the cell. */
   @Prop() wrapText = false;
 
+  /** (Optional) Function to determine if a row is disabled for selection. */
+  @Prop() rowSelectionDisabled?: (row: Row<unknown>) => boolean;
+
   /** Emits the cell value that was edited */
   @Event() cellValueChange: EventEmitter<ModusTableCellValueChange>;
 
@@ -588,6 +591,7 @@ export class ModusTable {
       updateData: this.updateData.bind(this),
       updateSelectedRows: this.updateSelectedRows.bind(this),
       updateClickedRows: this.updateClickedRows.bind(this),
+      rowSelectionDisabled: this.rowSelectionDisabled,
     };
   }
 
