@@ -22,7 +22,7 @@
   }
 
   .input-container {
-    position: relative;
+    position: static;
 
     &:hover {
       cursor: pointer;
@@ -45,7 +45,7 @@
       height: $rem-32px;
       padding-left: $rem-10px;
       padding-right: 2rem;
-      position: relative;
+      position: static;
       width: 100%;
 
       &.disabled {
