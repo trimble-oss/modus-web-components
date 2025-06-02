@@ -20,7 +20,7 @@
     "@babel/preset-flow": "^7.27.1",
     "@babel/preset-react": "^7.27.1",
     "@storybook/addon-a11y": "^8.6.12",
-    "@storybook/addon-actions": "^8.6.12",
+    "@storybook/addon-actions": "^9.0.4",
     "@storybook/addon-essentials": "^8.6.12",
     "@storybook/addon-links": "^8.6.12",
     "@storybook/addon-mdx-gfm": "^8.6.14",
