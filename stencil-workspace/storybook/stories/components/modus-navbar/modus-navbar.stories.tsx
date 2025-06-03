@@ -94,6 +94,10 @@ export default {
       isToolshown: true,
     },
     viewMode: 'docs',
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/design/wyfVJUHWRMkeCfdB38HFEE/Modus---Web?node-id=1919-12473&m=dev',
+    },
   },
   decorators: [withActions],
 };
