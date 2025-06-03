@@ -175,6 +175,10 @@ export default {
     options: {
       isToolshown: true,
     },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/design/wyfVJUHWRMkeCfdB38HFEE/Modus---Web?node-id=5799-22364&m=dev',
+    },
   },
   decorators: [withActions],
 };
