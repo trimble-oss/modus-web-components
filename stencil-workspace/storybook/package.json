@@ -34,9 +34,9 @@
     "storybook-dark-mode": "^4.0.2"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=18"
   },
   "volta": {
-    "node": "20.19.2"
+    "node": "18.20.8"
   }
 }
