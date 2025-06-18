@@ -31,7 +31,99 @@ npx -p @angular/cli@<version-number> ng generate library @trimble-oss/modus-angu
 
 You can delete the generated `*.component.ts`, `*.service.ts`, and `*.spec.ts` files in projects/trimble-oss/modus-angular-components/src/lib.
 
-### Step 4: Update `modus-angular-components` version to reflect target Angular version
+### Step 4: Add LICENSE file to new library
+
+Add a new LICENSE file at ng<version-number>/projects/trimble-oss/modus-angular-components with the following content replacing `<current-year>` with the current year.
+
+```text
+MIT License
+
+Copyright (c) <current-year> Trimble Inc.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+```
+
+### Step 5: Update library README.md
+
+Replace the content of the ng<version-number>/projects/trimble-oss/modus-angular-components/README.md file with the following. Replace the `<version-number>` and `<angular-cli-version-number>` placeholders.
+
+````markdown
+# Modus Angular Components
+
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version <angular-cli-version-number>.
+
+## Installation
+
+- Install the Modus Angular Components Library and its Modus Web Component dependency
+  `npm install @trimble-oss/modus-angular-components --save`
+
+- Add the following snippet to your `main.ts` (or any main module)
+
+  ```typescript
+  import { defineCustomElements } from '@trimble-oss/modus-web-components/loader';
+
+  defineCustomElements();
+  ```
+
+- Add the following snippet to your `app.module.ts` (or any app module)
+
+  ```typescript
+  import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
+  @NgModule({
+    ...
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  })
+  ```
+
+## Example Usage
+
+- Use a modus button in your `app.component.html`
+
+  ```html
+  <modus-button color="primary" [disabled]="false">Modus Button</modus-button>
+  ```
+
+## Contributing
+
+To contribute to the Modus Angular Components library please see the [Modus Web Components](https://www.npmjs.com/package/@trimble-oss/modus-web-components) [contributing guidelines](https://github.com/trimble-oss/modus-web-components/blob/main/CONTRIBUTING.md).
+
+## Build
+
+To rebuild the Modus Angular Components you need to perform the following steps:
+
+- from the `./stencil-workspace` project directory run the following:
+  `npm run build`
+
+- From the `./angular-workspace/ng<version-number>` project directory run
+  `npm run build`
+
+## Debugging Locally
+
+To use the Modus Angular components locally for debugging and other purposes:
+
+- From the `./angular-workspace/ng<version-number>` project directory run
+  `npm run start`
+````
+
+### Step 6: Update `modus-angular-components` version to reflect target Angular version
 
 Append `ng<version-number>` to the version field in the `ng<version-number>/projects/trimble-oss/modus-web-components/package.json`:
 
@@ -43,7 +135,7 @@ Append `ng<version-number>` to the version field in the `ng<version-number>/proj
 }
 ```
 
-### Step 5: Update Peer Dependencies
+### Step 7: Update Peer Dependencies
 
 Add `@trimble-oss/modus-web-components` as a peer dependency in the `package.json` file of your library located at `ng<version-number>/projects/trimble-oss/modus-angular-components/package.json`:
 
@@ -55,7 +147,7 @@ Add `@trimble-oss/modus-web-components` as a peer dependency in the `package.jso
 }
 ```
 
-### Step 6: Remove unnecessary testing packages
+### Step 8: Remove unnecessary testing packages
 
 Angular CLI will install Jasmine as a dependency in the angular workspace. However, Stencil uses Jest as it's testing solution,
 so to avoid type definition collisions when building stencil remove `jasmine-core` and `@types/jasmine`.
@@ -65,7 +157,7 @@ so to avoid type definition collisions when building stencil remove `jasmine-cor
 npm uninstall jasmine-core @types/jasmine
 ```
 
-### Step 7: Configure Stencil Output Target
+### Step 9: Configure Stencil Output Target
 
 In the root `stencil.config.ts` file, add the Angular output target to ensure proper integration with Angular:
 
@@ -84,7 +176,7 @@ angularOutputTarget({
 });
 ```
 
-### Step 8: Generate Angular Stencil Component Wrappers
+### Step 10: Generate Angular Stencil Component Wrappers
 
 Run the following command from the stencil-workspace directory to build the Stencil components and generate the Angular component wrappers:
 
@@ -94,7 +186,7 @@ npm run build
 
 You should now be able to see the stencil generated angular component wrappers under `projects/trimble-oss/modus-angular-components/src/lib/stencil-generated`
 
-### Step 9: Add the following .npmrc to your angular workspace
+### Step 11: Add the following .npmrc to your angular workspace
 
 Create this .npmrc in the angular workspace.
 
@@ -104,7 +196,7 @@ lockfile-version = "3"
 registry = https://registry.npmjs.org/
 ```
 
-### Step 10: Create Angular Module
+### Step 12: Create Angular Module
 
 Create a new module at `projects/trimble-oss/modus-angular-components/src/lib/modus-angular-components.module.ts` to import and export the generated component wrappers:
 
@@ -119,7 +211,7 @@ import { DIRECTIVES } from './stencil-generated';
 export class ModusAngularComponentsModule {}
 ```
 
-### Step 11: Update the Public API
+### Step 13: Update the Public API
 
 Update the `public-api.ts` file to export the components in the main entry point of your library:
 
@@ -134,7 +226,7 @@ export * from './lib/stencil-generated/components';
 
 Any components that are included in the exports array should additionally be exported in your main entry point (either public-api.ts or index.ts). Skipping this step will lead to Angular Ivy errors when building for production.
 
-### Step 12: Update and Run Root package.json Scripts
+### Step 14: Update and Run Root package.json Scripts
 
 Add the following to the end of the build-angular script in the root package.json
 
@@ -154,7 +246,7 @@ Then run the update-mwc-deps script from the root directory
 npm run update-mwc-deps
 ```
 
-### Step 13: Install Dependencies and Build
+### Step 15: Install Dependencies and Build
 
 Ensure `modus-web-components` dependency is installed in the `ng<version-number>/` angular workspace:
 
@@ -177,7 +269,7 @@ npm install
 npm run build
 ```
 
-### Step 14: Generate a New Test Harness App
+### Step 16: Generate a New Test Harness App
 
 From the angular workspace directory (`ng<version-number>/`) created in the previous step generate a new app:
 
@@ -235,7 +327,7 @@ export class App {
 }
 ```
 
-### Step 15: Run the Test Harness App
+### Step 17: Run the Test Harness App
 
 Run the test harness app and verify that the modus select component shows up
 
@@ -243,7 +335,7 @@ Run the test harness app and verify that the modus select component shows up
 ng serve
 ```
 
-### Step 16: Package for Local Testing
+### Step 18: Package for Local Testing
 
 You can package the angular component library for local testing by running the following command:
 
@@ -251,7 +343,7 @@ You can package the angular component library for local testing by running the f
 npm pack ./dist/trimble-oss/modus-angular-components
 ```
 
-### Step 17: Update publish-angular.yml
+### Step 19: Update publish-angular.yml
 
 Add the new version to the angularVersion options of workflow_dispatch inputs in .github/workflows/publish-angular.yml
 
@@ -283,7 +375,7 @@ Make sure the Node.js environment is setup to use the correct version for buildi
           registry-url: 'https://registry.npmjs.org'
 ```
 
-### Step 18: Run Prettier
+### Step 20: Run Prettier
 
 Run prettier to format files in the ng<version number> directory
 
