@@ -54,7 +54,7 @@
     "@stencil/react-output-target": "^0.5.3",
     "@stencil/sass": "^3.0.12",
     "@trimble-oss/modus-icons": "1.16.0",
-    "@types/jest": "^27.5.1",
+    "@types/jest": "^30.0.0",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.58.0",
     "autoprefixer": "^10.4.21",
