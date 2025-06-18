@@ -102,11 +102,11 @@ export default class TimeInputFormatter {
 
     // Subtract 12 hours for 12:00 AM or midnight to 12:59 AM
     if (ampm === 'AM') {
-      editedHours = hours - hours === 12 ? 12 : 0;
+      editedHours = hours - (hours === 12 ? 12 : 0);
     }
     // Add 12 hours for 1:00 PM to 11:59 PM
     else if (ampm === 'PM') {
-      editedHours = hours + hours !== 12 ? 12 : 0;
+      editedHours = hours + (hours !== 12 ? 12 : 0);
     }
     if (editedHours >= 0 && editedHours <= 23 && (minutes === 0 || minutes > 0))
       return `${this.pad(editedHours)}:${this.pad(minutes)}`;
