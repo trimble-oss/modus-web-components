@@ -50,6 +50,61 @@ export class ModusAccordionItem {
   accordionOpenTimeout;
   accordionCloseTimeout;
   chevronContainerRef: HTMLDivElement;
+  contentObserver: MutationObserver;
+  resizeObserver: ResizeObserver;
+
+  componentDidLoad() {
+    // Initialize MutationObserver to detect DOM changes
+    this.contentObserver = new MutationObserver(() => this.onContentChange());
+    this.contentObserver.observe(this.accordionBodyRef, {
+      childList: true,
+      subtree: true,
+      characterData: true,
+      attributes: true,
+    });
+
+    // Initialize ResizeObserver for more reliable size change detection
+    this.resizeObserver = new ResizeObserver(() => this.onContentChange());
+    this.resizeObserver.observe(this.accordionBodyRef.querySelector('.body-content'));
+
+    // Set initial height if expanded
+    if (this.expanded) {
+      this.adjustHeight();
+    }
+  }
+
+  disconnectedCallback() {
+    if (this.contentObserver) {
+      this.contentObserver.disconnect();
+    }
+
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+    }
+
+    if (this.accordionOpenTimeout) {
+      clearTimeout(this.accordionOpenTimeout);
+    }
+
+    if (this.accordionCloseTimeout) {
+      clearTimeout(this.accordionCloseTimeout);
+    }
+  }
+
+  onContentChange(): void {
+    if (this.expanded && this.accordionBodyRef) {
+      this.adjustHeight();
+    }
+  }
+
+  adjustHeight(): void {
+    requestAnimationFrame(() => {
+      if (this.accordionBodyRef) {
+        const currentHeight = this.accordionBodyRef.scrollHeight;
+        this.accordionBodyRef.style.height = `${currentHeight}px`;
+      }
+    });
+  }
 
   handleHeaderClick(): void {
     if (this.disabled) {
@@ -66,41 +121,50 @@ export class ModusAccordionItem {
       // Required to calculate scrollHeight and set the value on 'height' for transition to start
       this.accordionBodyRef.style.height = '0';
 
-      // Timeout to reset collapsing class
-      this.accordionOpenTimeout = setTimeout(() => {
-        this.accordionBodyRef.classList.remove('collapsing');
-        this.accordionBodyRef.classList.add('show');
-        this.accordionBodyRef.classList.add('collapse');
+      this.reflow(this.accordionBodyRef);
 
-        // reset height to original state
-        // this.accordionBodyRef.style.height = '';
+      requestAnimationFrame(() => {
+        this.accordionBodyRef.style.height = `${this.accordionBodyRef.scrollHeight}px`;
 
-        clearTimeout(this.accordionOpenTimeout);
-        this.expanded = true;
-        this.opened.emit();
-      }, 350);
+        // Timeout to reset collapsing class
+        this.accordionOpenTimeout = setTimeout(() => {
+          if (this.accordionBodyRef) {
+            this.accordionBodyRef.classList.remove('collapsing');
+            this.accordionBodyRef.classList.add('show');
+            this.accordionBodyRef.classList.add('collapse');
 
-      // Triggers transition
-      this.accordionBodyRef.style.height = `${this.accordionBodyRef.scrollHeight}px`;
+            this.adjustHeight();
+
+            clearTimeout(this.accordionOpenTimeout);
+            this.expanded = true;
+            this.opened.emit();
+          }
+        }, 350);
+      });
     } else {
-      this.accordionBodyRef.style.height = `${this.accordionBodyRef.getBoundingClientRect().height}px`;
+      const currentHeight = this.accordionBodyRef.getBoundingClientRect().height;
+      this.accordionBodyRef.style.height = `${currentHeight}px`;
       this.reflow(this.accordionBodyRef);
 
       this.accordionBodyRef.classList.add('collapsing');
       this.accordionBodyRef.classList.remove('collapse');
       this.accordionBodyRef.classList.remove('show');
 
-      // Timeout to reset collapsing class
-      this.accordionCloseTimeout = setTimeout(() => {
-        this.accordionBodyRef.classList.remove('collapsing');
-        this.accordionBodyRef.classList.add('collapse');
+      requestAnimationFrame(() => {
+        this.accordionBodyRef.style.height = '0';
 
-        clearTimeout(this.accordionCloseTimeout);
-        this.expanded = false;
-        this.closed.emit();
-      }, 350);
+        this.accordionCloseTimeout = setTimeout(() => {
+          if (this.accordionBodyRef) {
+            this.accordionBodyRef.classList.remove('collapsing');
+            this.accordionBodyRef.classList.add('collapse');
+            this.accordionBodyRef.style.height = '';
 
-      this.accordionBodyRef.style.height = '';
+            clearTimeout(this.accordionCloseTimeout);
+            this.expanded = false;
+            this.closed.emit();
+          }
+        }, 350);
+      });
     }
   }
 
