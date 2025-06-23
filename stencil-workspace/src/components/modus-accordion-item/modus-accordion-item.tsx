@@ -54,7 +54,7 @@ export class ModusAccordionItem {
   resizeObserver: ResizeObserver;
 
   componentDidLoad() {
-    // Initialize MutationObserver to detect DOM changes
+    // Initialize MutationObserver to detect DOM change
     this.contentObserver = new MutationObserver(() => this.onContentChange());
     this.contentObserver.observe(this.accordionBodyRef, {
       childList: true,
