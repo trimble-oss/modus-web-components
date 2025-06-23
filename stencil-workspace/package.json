@@ -1,6 +1,6 @@
 {
   "name": "@trimble-oss/modus-web-components",
-  "version": "1.5.1",
+  "version": "1.8.0",
   "license": "MIT",
   "description": "Trimble Modus Web Component Library",
   "homepage": "https://modus-web-components.trimble.com/",
@@ -42,20 +42,20 @@
     "prebuild": "tsc generate-icons/generate-icons.ts && node generate-icons/generate-icons.js"
   },
   "dependencies": {
-    "@floating-ui/dom": "^1.6.13",
+    "@floating-ui/dom": "^1.7.0",
     "@popperjs/core": "^2.11.8",
     "@stencil/core": "4.13.0",
     "@tanstack/table-core": "^8.21.3"
   },
   "devDependencies": {
-    "@babel/preset-react": "^7.26.3",
+    "@babel/preset-react": "^7.27.1",
     "@stencil-community/postcss": "^2.2.0",
     "@stencil/angular-output-target": "^0.10.2",
     "@stencil/react-output-target": "^0.5.3",
     "@stencil/sass": "^3.0.12",
     "@trimble-oss/modus-icons": "1.16.0",
     "@types/jest": "^27.5.1",
-    "@typescript-eslint/eslint-plugin": "^5.59.0",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.58.0",
     "autoprefixer": "^10.4.21",
     "cheerio": "^1.0.0",
@@ -65,11 +65,11 @@
     "eslint-plugin-storybook": "0.12.0",
     "jest": "^27.0.3",
     "jest-cli": "^27.5.1",
-    "prettier": "3.5.3",
+    "prettier": "3.6.0",
     "puppeteer": "^19.11.1",
     "puppeteer-core": "^19.11.1",
-    "stylelint": "16.18.0",
-    "stylelint-config-standard-scss": "14.0.0",
+    "stylelint": "16.21.0",
+    "stylelint-config-standard-scss": "15.0.1",
     "stylelint-order": "6.0.4",
     "typescript": "^5.7.3"
   },

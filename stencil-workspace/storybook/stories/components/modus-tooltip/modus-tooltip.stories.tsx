@@ -43,6 +43,10 @@ export default {
       isToolshown: true,
     },
     layout: 'centered',
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/design/wyfVJUHWRMkeCfdB38HFEE/Modus---Web?node-id=1346-3&m=dev',
+    },
   },
 };
 

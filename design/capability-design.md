@@ -19,10 +19,10 @@ This project provides Trimble Modus Elements as a web component library. Web com
 - [Handle Business Logic](#handle-business-logic)
 - [Manage State](#manage-state)
 - [Provide Data Access](#provide-data-access)
-- [Manage 3rd Party Libraries & Frameworks](#manage-3rd-party-libraries-&-frameworks)
+- [Manage 3rd Party Libraries & Frameworks](#manage-3rd-party-libraries--frameworks)
 - [Provide Static Assets](#provide-static-assets)
 - [Make the Site Available](#make-the-site-available)
-- [Create a Quality Product & Development Experience](#create-a-quality-product-&-development-experience)
+- [Create a Quality Product & Development Experience](#create-a-quality-product--development-experience)
 
 ## Capabilities
 
@@ -32,7 +32,7 @@ This project provides Trimble Modus Elements as a web component library. Web com
 
 **Feature Flagging** N/A
 
-------
+---
 
 ### Enforce Security
 
@@ -46,7 +46,7 @@ This project provides Trimble Modus Elements as a web component library. Web com
 
 **Testing** Possibly white source but likely just `npm audit` to start with.
 
-------
+---
 
 ### Handle Presentation
 
@@ -62,7 +62,7 @@ This project provides Trimble Modus Elements as a web component library. Web com
 
 **Design Systems & Component Libraries** Trimble Modus Design System with Figma as the latest spec.
 
-------
+---
 
 ### Handle Business Logic
 
@@ -72,7 +72,7 @@ This project provides Trimble Modus Elements as a web component library. Web com
 
 **Communication** Stencil provides a pattern for inputs and outputs that once compiled map to web component attributes, properties, and DOM events.
 
-------
+---
 
 ### Manage State
 
@@ -80,7 +80,7 @@ This project provides Trimble Modus Elements as a web component library. Web com
 
 **Technology** Stencil
 
-------
+---
 
 ### Provide Data Access
 
@@ -92,29 +92,25 @@ This project provides Trimble Modus Elements as a web component library. Web com
 
 **Mocking** Mocking is only needed for testing purposes and will be done through Jest.
 
-------
+---
 
 ### Manage 3rd Party Libraries & Frameworks
 
 **Patterns** for retrieving 3rd party libraries are package registry (npm or Yarn), CDN, and forking. npm is preferred for larger libraries or those needed by the IDE during development. Forking is highly discouraged as it leaves all future maintenance and security concerns on us.
 
-*npm Packages*
+#### npm Packages
 
 - eslint
 - @stencil/core
 - @stencil/sass
 
-------
+---
 
 ### Provide Static Assets
 
-**Patterns **for retrieving static assets are CDN or manual. Using a CDN is highly preferred for content used by multiple applications where performance and availability are the primary concern. Manually providing assets is as simple as including a file in an assets folder that the build knows to copy as is. This is a fine one off solution but shared resources should be made available in our CDN.
+**Patterns** for retrieving static assets are CDN or manual. Using a CDN is highly preferred for content used by multiple applications where performance and availability are the primary concern. Manually providing assets is as simple as including a file in an assets folder that the build knows to copy as is. This is a fine one off solution but shared resources should be made available in our CDN.
 
-*CDN Resources*
-
--
-
-------
+---
 
 ### Make the Site Available
 
@@ -126,7 +122,7 @@ This project provides Trimble Modus Elements as a web component library. Web com
 
 **Publishing** The primary method of distribution will be an npm package but a CDN is also a good idea. Published packages will follow semantic versioning rules.
 
-------
+---
 
 ### Create a Quality Product & Development Experience
 
@@ -141,7 +137,3 @@ This project provides Trimble Modus Elements as a web component library. Web com
 **Unit Testing** Jest will be used for unit testing. Follow the Stencil docs for best practices.
 
 **End to End Testing** Jest will be used for end-to-end testing. Follow the Stencil docs for best practices.
-
-------
-
-[Back to Top](#capability-design)

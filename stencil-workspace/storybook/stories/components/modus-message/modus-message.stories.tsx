@@ -37,6 +37,10 @@ export default {
     options: {
       isToolshown: true,
     },
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/design/wyfVJUHWRMkeCfdB38HFEE/Modus---Web?node-id=1850-12311&m=dev',
+    },
   },
 };
 

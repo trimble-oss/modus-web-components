@@ -12,6 +12,7 @@ interface ModusTableCellCheckboxProps {
   row: Row<unknown>;
   checkboxSize: 'small' | 'medium';
   updateRow: () => void;
+  disableRow?: boolean;
 }
 
 export const ModusTableCellCheckbox: FunctionalComponent<ModusTableCellCheckboxProps> = ({
@@ -20,6 +21,7 @@ export const ModusTableCellCheckbox: FunctionalComponent<ModusTableCellCheckboxP
   isChecked,
   checkboxSize,
   updateRow,
+  disableRow,
 }) => {
   let cellEl: HTMLTableCellElement = null;
   let checkboxInput: HTMLModusCheckboxElement = null;
@@ -37,6 +39,7 @@ export const ModusTableCellCheckbox: FunctionalComponent<ModusTableCellCheckboxP
   }
 
   function handleCheckboxKeyDown(e: KeyboardEvent): void {
+    if (disableRow) return;
     if (e.key.toLowerCase() === KEYBOARD_ENTER || e.key.toLowerCase() === KEYBOARD_SPACE) {
       e.preventDefault();
       updateRow();
@@ -56,6 +59,7 @@ export const ModusTableCellCheckbox: FunctionalComponent<ModusTableCellCheckboxP
         checked={isChecked}
         indeterminate={multipleRowSelection && row.getIsSomeSelected()}
         size={checkboxSize}
+        disabled={disableRow}
         onKeyDown={(e: KeyboardEvent) => handleCheckboxKeyDown(e)}></modus-checkbox>
     </td>
   );

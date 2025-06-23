@@ -3,6 +3,7 @@ module.exports = {
   staticDirs: ['../public'],
   addons: [
     '@storybook/addon-a11y',
+    '@storybook/addon-designs',
     '@storybook/addon-links',
     '@storybook/addon-docs',
     '@storybook/addon-actions',
