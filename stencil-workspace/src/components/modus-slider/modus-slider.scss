@@ -9,7 +9,11 @@
 
   .slider {
     appearance: none;
-    background: $modus-slider-range-bg;
+    background: linear-gradient(
+      to right,
+      $modus-slider-range-bg var(--value-percent, 0%),
+      $modus-slider-range-disabled-bg var(--value-percent, 0%)
+    );
     border-radius: $rem-8px;
     height: $rem-8px;
   }
@@ -59,7 +63,11 @@
     pointer-events: none;
 
     .slider {
-      background-color: $modus-slider-range-disabled-bg;
+      background: linear-gradient(
+        to right,
+        $modus-slider-thumb-disabled-border-color var(--value-percent, 0%),
+        $modus-slider-range-disabled-bg var(--value-percent, 0%)
+      );
     }
 
     .slider::-webkit-slider-thumb {
