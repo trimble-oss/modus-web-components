@@ -99,7 +99,7 @@ export class ModusAccordionItem {
 
   adjustHeight(): void {
     requestAnimationFrame(() => {
-      if (this.accordionBodyRef) {
+      if (this.accordionBodyRef && this.expanded && !this.accordionBodyRef.classList.contains('collapsing')) {
         const currentHeight = this.accordionBodyRef.scrollHeight;
         this.accordionBodyRef.style.height = `${currentHeight}px`;
       }
@@ -110,32 +110,27 @@ export class ModusAccordionItem {
     if (this.disabled) {
       return;
     }
+
     this.chevronContainerRef.classList.toggle('reverse');
 
-    // Logic to trigger a transition animation and handle it
-    // Because transition won't have any effect when using 'display:' on an element
     if (!this.expanded) {
       this.accordionBodyRef.classList.remove('collapse');
       this.accordionBodyRef.classList.add('collapsing');
-
-      // Required to calculate scrollHeight and set the value on 'height' for transition to start
       this.accordionBodyRef.style.height = '0';
 
       this.reflow(this.accordionBodyRef);
 
       requestAnimationFrame(() => {
-        this.accordionBodyRef.style.height = `${this.accordionBodyRef.scrollHeight}px`;
+        const scrollHeight = this.accordionBodyRef.scrollHeight;
+        this.accordionBodyRef.style.height = `${scrollHeight}px`;
 
-        // Timeout to reset collapsing class
         this.accordionOpenTimeout = setTimeout(() => {
           if (this.accordionBodyRef) {
             this.accordionBodyRef.classList.remove('collapsing');
             this.accordionBodyRef.classList.add('show');
             this.accordionBodyRef.classList.add('collapse');
+            this.accordionBodyRef.style.height = '';
 
-            this.adjustHeight();
-
-            clearTimeout(this.accordionOpenTimeout);
             this.expanded = true;
             this.opened.emit();
           }
@@ -147,8 +142,7 @@ export class ModusAccordionItem {
       this.reflow(this.accordionBodyRef);
 
       this.accordionBodyRef.classList.add('collapsing');
-      this.accordionBodyRef.classList.remove('collapse');
-      this.accordionBodyRef.classList.remove('show');
+      this.accordionBodyRef.classList.remove('collapse', 'show');
 
       requestAnimationFrame(() => {
         this.accordionBodyRef.style.height = '0';
@@ -159,7 +153,6 @@ export class ModusAccordionItem {
             this.accordionBodyRef.classList.add('collapse');
             this.accordionBodyRef.style.height = '';
 
-            clearTimeout(this.accordionCloseTimeout);
             this.expanded = false;
             this.closed.emit();
           }
