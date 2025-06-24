@@ -64,7 +64,7 @@ export class ModusAccordionItem {
     });
 
     // Initialize ResizeObserver for more reliable size change detection
-    this.resizeObserver = new ResizeObserver(() => this.onContentChange());
+      this.resizeObserver = new ResizeObserver(() => this.onContentChange());
     this.resizeObserver.observe(this.accordionBodyRef.querySelector('.body-content'));
 
     // Set initial height if expanded
@@ -100,8 +100,15 @@ export class ModusAccordionItem {
   adjustHeight(): void {
     requestAnimationFrame(() => {
       if (this.accordionBodyRef && this.expanded && !this.accordionBodyRef.classList.contains('collapsing')) {
-        const currentHeight = this.accordionBodyRef.scrollHeight;
-        this.accordionBodyRef.style.height = `${currentHeight}px`;
+        const oldHeight = this.accordionBodyRef.style.height;
+        this.accordionBodyRef.style.height = '';
+        const scrollHeight = this.accordionBodyRef.scrollHeight;
+        this.accordionBodyRef.style.height = oldHeight;
+
+        this.reflow(this.accordionBodyRef);
+        requestAnimationFrame(() => {
+          this.accordionBodyRef.style.height = `${scrollHeight}px`;
+        });
       }
     });
   }
