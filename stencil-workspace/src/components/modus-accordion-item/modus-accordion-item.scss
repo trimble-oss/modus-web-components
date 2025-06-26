@@ -111,6 +111,10 @@
   .body {
     overflow: hidden;
 
+    &.collapse.show {
+      transition: height 0.35s ease-out;
+    }
+
     .body-content {
       font-size: $rem-14px;
       padding: $rem-16px;

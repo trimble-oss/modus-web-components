@@ -1,6 +1,20 @@
 import { newSpecPage } from '@stencil/core/testing';
 import { ModusAccordionItem } from './modus-accordion-item';
 
+global.MutationObserver = class {
+  observe() {}
+  disconnect() {}
+  takeRecords() {
+    return [];
+  }
+} as any;
+
+global.ResizeObserver = class {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+} as any;
+
 describe('modus-accordion-item', () => {
   it('renders', async () => {
     const { root } = await newSpecPage({
