@@ -64,7 +64,7 @@ export class ModusAccordionItem {
     });
 
     // Initialize ResizeObserver for more reliable size change detection
-      this.resizeObserver = new ResizeObserver(() => this.onContentChange());
+    this.resizeObserver = new ResizeObserver(() => this.onContentChange());
     this.resizeObserver.observe(this.accordionBodyRef.querySelector('.body-content'));
 
     // Set initial height if expanded
