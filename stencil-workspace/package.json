@@ -42,7 +42,7 @@
     "prebuild": "tsc generate-icons/generate-icons.ts && node generate-icons/generate-icons.js"
   },
   "dependencies": {
-    "@floating-ui/dom": "^1.7.0",
+    "@floating-ui/dom": "^1.7.2",
     "@popperjs/core": "^2.11.8",
     "@stencil/core": "4.13.0",
     "@tanstack/table-core": "^8.21.3"
