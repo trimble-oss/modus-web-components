@@ -73,7 +73,7 @@ Note: You will need to manually install the packages in `./stencil-workspace/sto
 ## Submitting Issues
 
 Whether you're contributing directly to the code or have suggestions, submitting an issue through GitHub is needed
-for referencing changes. Please submit change items as an Issue [here](https://github.com/trimble-oss/modus-web-components/issues).
+for referencing changes. [Please submit change items as an Issue](https://github.com/trimble-oss/modus-web-components/issues).
 
 If the issue's considered a bug, add the 'bug' label to the issue.
 
@@ -151,7 +151,7 @@ Unit tests focus on testing a component's methods in isolation. For example, whe
 
 E2e tests focus on how the components are rendered in the DOM and how the individual components work together. For example, when my-component has the X attribute, the child component then renders the text Y, and expects to receive the event Z.
 
-For more information about Stencil's testing, and a better distinction between the unit and e2e tests, check out the testing docs [here](https://stenciljs.com/docs/testing-overview).
+For more information about Stencil's testing, and a better distinction between the unit and e2e tests, check out the [testing docs](https://stenciljs.com/docs/testing-overview).
 
 Run the tests with `npm run test`.
 
