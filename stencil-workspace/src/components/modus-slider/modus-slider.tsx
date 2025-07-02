@@ -65,8 +65,11 @@ export class ModusSlider {
     const className = `modus-slider ${this.disabled ? 'disabled' : ''}`;
 
     return (
-      <div aria-disabled={this.disabled ? 'true' : undefined} aria-label={this.ariaLabel || undefined} class={className}
-      style={{ '--value-percent': `${this.valuePercent}%`, marginBottom : '50px', marginTop:'50px'}}>
+      <div
+        aria-disabled={this.disabled ? 'true' : undefined}
+        aria-label={this.ariaLabel || undefined}
+        class={className}
+        style={{ '--value-percent': `${this.valuePercent}%`, marginBottom: '50px', marginTop: '50px' }}>
         {this.label && <label htmlFor={this.sliderId}>{this.label}</label>}
         <input
           class="slider"
