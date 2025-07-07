@@ -50,7 +50,7 @@
   "devDependencies": {
     "@babel/preset-react": "^7.27.1",
     "@stencil-community/postcss": "^2.2.0",
-    "@stencil/angular-output-target": "^0.10.2",
+    "@stencil/angular-output-target": "^1.1.0",
     "@stencil/react-output-target": "^0.5.3",
     "@stencil/sass": "^3.0.12",
     "@trimble-oss/modus-icons": "1.16.0",
