@@ -68,7 +68,7 @@
     "prettier": "3.6.2",
     "puppeteer": "^19.11.1",
     "puppeteer-core": "^19.11.1",
-    "stylelint": "16.21.0",
+    "stylelint": "16.21.1",
     "stylelint-config-standard-scss": "15.0.1",
     "stylelint-order": "6.0.4",
     "typescript": "^5.7.3"
