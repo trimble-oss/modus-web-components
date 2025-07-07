@@ -2,16 +2,9 @@ version: 2
 updates:
   - package-ecosystem: npm
     directory: '/stencil-workspace/'
-    groups:
-      all-dependencies:
-        patterns:
-          - '*'
-        update-types:
-          - 'minor'
-          - 'patch'
     schedule:
       interval: weekly
-    open-pull-requests-limit: 3
+    open-pull-requests-limit: 2
     versioning-strategy: increase
     ignore:
       - dependency-name: puppeteer
@@ -21,16 +14,9 @@ updates:
 
   - package-ecosystem: npm
     directory: '/stencil-workspace/storybook/'
-    groups:
-      all-dependencies:
-        patterns:
-          - '*'
-        update-types:
-          - 'minor'
-          - 'patch'
     schedule:
       interval: weekly
-    open-pull-requests-limit: 3
+    open-pull-requests-limit: 2
     versioning-strategy: increase
 
   - package-ecosystem: github-actions
