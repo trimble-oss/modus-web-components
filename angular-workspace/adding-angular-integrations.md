@@ -192,7 +192,6 @@ Create this .npmrc in the angular workspace.
 
 ```bash
 # .npmrc
-lockfile-version = "3"
 registry = https://registry.npmjs.org/
 ```
 
