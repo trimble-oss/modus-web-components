@@ -28,7 +28,7 @@ jobs:
       packages: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       # Setup Node.js environment for Angular 16 / 17
       - name: Setup Node.js environment (Angular <= 17)
