@@ -3,9 +3,8 @@ updates:
   - package-ecosystem: npm
     directory: '/stencil-workspace/'
     schedule:
-      interval: weekly
-    open-pull-requests-limit: 2
-    versioning-strategy: increase
+      interval: monthly
+    open-pull-requests-limit: 1
     ignore:
       - dependency-name: puppeteer
       - dependency-name: puppeteer-core
@@ -15,11 +14,10 @@ updates:
   - package-ecosystem: npm
     directory: '/stencil-workspace/storybook/'
     schedule:
-      interval: weekly
-    open-pull-requests-limit: 2
-    versioning-strategy: increase
+      interval: monthly
+    open-pull-requests-limit: 1
 
   - package-ecosystem: github-actions
     directory: '/'
     schedule:
-      interval: weekly
+      interval: monthly
