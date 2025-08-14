@@ -133,7 +133,7 @@ export class ModusAutocomplete {
   @Event() optionSelected: EventEmitter<string>;
 
   /** An event that fires when the input value changes. Emits the value string. */
-  @Event() valueChange: EventEmitter<string | string[]>;
+  @Event() valueChange: EventEmitter<{ value: string | string[]; reason?: string }>;
 
   /** An event that fires when an option is selected/removed. Emits the option ids. */
   @Event() selectionsChanged: EventEmitter<string[]>;
@@ -223,7 +223,7 @@ export class ModusAutocomplete {
       return;
     }
     this.selectedChips = [...this.selectedChips, value];
-    this.valueChange.emit(this.selectedChips.map((opt) => opt.value));
+    this.valueChange.emit({ value: this.selectedChips.map((opt) => opt.value), reason: 'reset' });
     this.selectionsChanged.emit(this.selectedChips.map((opt) => opt.id));
     this.value = '';
   }
@@ -236,7 +236,10 @@ export class ModusAutocomplete {
     } else {
       this.selectedOption = optionValue;
       this.disableFiltering = this.disableCloseOnSelect;
-      this.handleSearchChange(optionValue);
+      this.value = optionValue;
+      this.valueChange.emit({ value: optionValue, reason: 'reset' });
+      this.updateVisibleOptions(optionValue);
+      this.updateVisibleCustomOptions(optionValue);
       this.focusItemIndex = this.visibleCustomOptions.findIndex((el) => el.getAttribute(DATA_ID) === optionId);
     }
 
@@ -295,7 +298,7 @@ export class ModusAutocomplete {
     this.selectedChips = [];
     this.selectedOption = '';
     this.value = '';
-    this.valueChange.emit(this.multiple ? [] : '');
+    this.valueChange.emit({ value: this.multiple ? [] : '', reason: 'clear' });
     this.selectionsChanged.emit(this.multiple ? [] : null);
   }
 
@@ -314,7 +317,10 @@ export class ModusAutocomplete {
       this.selectedOption = option.value;
       this.disableFiltering = this.disableCloseOnSelect;
       this.focusItemIndex = this.visibleOptions.findIndex((el) => el.id === option.id);
-      this.handleSearchChange(option.value);
+      this.value = option.value;
+      this.valueChange.emit({ value: option.value, reason: 'reset' });
+      this.updateVisibleOptions(option.value);
+      this.updateVisibleCustomOptions(option.value);
     }
 
     this.hasFocus = this.disableCloseOnSelect;
@@ -343,7 +349,7 @@ export class ModusAutocomplete {
 
     if (e.key === 'Backspace' && this.multiple && !this.getValueAsString() && this.selectedChips.length > 0) {
       this.selectedChips = this.selectedChips.slice(0, -1);
-      this.valueChange.emit(this.selectedChips.map((opt) => opt.value));
+      this.valueChange.emit({ value: this.selectedChips.map((opt) => opt.value), reason: 'input' });
       this.selectionsChanged.emit(this.selectedChips.map((opt) => opt.id));
     }
   };
@@ -362,7 +368,7 @@ export class ModusAutocomplete {
       const val = this.value.map((v) => v.trim());
       const filteredOptions = (this.options as ModusAutocompleteOption[]).filter((option) => val.includes(option.value));
       this.selectedChips = filteredOptions;
-      this.valueChange.emit(this.selectedChips.map((opt) => opt.value));
+      this.valueChange.emit({ value: this.selectedChips.map((opt) => opt.value), reason: 'input' });
       this.selectionsChanged.emit(this.selectedChips.map((opt) => opt.id));
     }
   }
@@ -373,7 +379,7 @@ export class ModusAutocomplete {
       this.updateVisibleCustomOptions(search);
     }
     this.value = search;
-    this.valueChange.emit(search);
+    this.valueChange.emit({ value: search, reason: 'input' });
   };
 
   handleChipDelete = (e, chip) => {
@@ -390,7 +396,7 @@ export class ModusAutocomplete {
   removeChip(chipValue: ModusAutocompleteOption) {
     if (this.selectedChips.length != 0 && !this.readOnly) {
       this.selectedChips = this.selectedChips.filter((chip) => chip.id !== chipValue.id);
-      this.valueChange.emit(this.selectedChips.map((v) => v.value));
+      this.valueChange.emit({ value: this.selectedChips.map((v) => v.value), reason: 'input' });
       this.selectionsChanged.emit(this.selectedChips.map((opt) => opt.id));
     }
   }
@@ -514,8 +520,8 @@ export class ModusAutocomplete {
   );
 
   @Listen('valueChange')
-  valueChangedHandler(event: CustomEvent<string>) {
-    if (event.detail == null) {
+  valueChangedHandler(event: CustomEvent<{ value: string | string[]; reason?: string }>) {
+    if (event.detail?.value == null) {
       this.handleClear();
     }
   }
