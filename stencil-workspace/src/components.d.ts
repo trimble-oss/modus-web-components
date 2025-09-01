@@ -3194,7 +3194,7 @@ declare namespace LocalJSX {
          */
         "onSelectionsChanged"?: (event: ModusAutocompleteCustomEvent<string[]>) => void;
         /**
-          * An event that fires when the input value changes. Emits the value string.
+          * An event that fires when the input value changes. Emits an object containing the value (string or string[]) and an optional reason.
          */
         "onValueChange"?: (event: ModusAutocompleteCustomEvent<{ value: string | string[]; reason?: string }>) => void;
         /**

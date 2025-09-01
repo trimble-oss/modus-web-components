@@ -132,7 +132,10 @@ export class ModusAutocomplete {
   /** An event that fires when a dropdown option is selected. Emits the option id. */
   @Event() optionSelected: EventEmitter<string>;
 
-  /** An event that fires when the input value changes. Emits the value string. */
+  /**
+   * An event that fires when the input value changes.
+   * Emits an object containing the value (string or string[]) and an optional reason.
+   */
   @Event() valueChange: EventEmitter<{ value: string | string[]; reason?: string }>;
 
   /** An event that fires when an option is selected/removed. Emits the option ids. */

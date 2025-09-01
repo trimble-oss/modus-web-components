@@ -240,11 +240,19 @@ interface ModusAutocompleteOption {
 
 ### Events
 
-| Event               | Description                                                                   | Type                                                        |
-| ------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------- |
-| `optionSelected`    | An event that fires when a dropdown option is selected. Emits the option id.  | `CustomEvent<string>`                                       |
-| `valueChange`       | An event that fires when the input value changes. Emits the value string.     | `CustomEvent<{value: string \| string[]; reason?: string}>` |
-| `selectionsChanged` | An event that fires when an option is selected/removed. Emits the option ids. | `CustomEvent<string[]>`                                     |
+| Event               | Description                                                                                      | Type                                                        |
+| ------------------- | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------- |
+| `optionSelected`    | An event that fires when a dropdown option is selected. Emits the option id.                     | `CustomEvent<string>`                                       |
+| `valueChange`       | An event that fires when the input value changes. Emits the value string and an optional reason. | `CustomEvent<{value: string \| string[]; reason?: string}>` |
+| `selectionsChanged` | An event that fires when an option is selected/removed. Emits the option ids.                    | `CustomEvent<string[]>`                                     |
+
+### valueChange Event Reasons
+
+The `reason` property in the `valueChange` event object indicates why the value changed. Possible values:
+
+- `input`: The user typed or changed the input value.
+- `reset`: The value was set or reset programmatically or by selecting an option.
+- `clear`: The input was cleared (e.g., via clear button or chip removal).
 
 ### Methods
 
