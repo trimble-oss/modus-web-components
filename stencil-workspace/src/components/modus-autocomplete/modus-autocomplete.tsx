@@ -226,7 +226,7 @@ export class ModusAutocomplete {
       return;
     }
     this.selectedChips = [...this.selectedChips, value];
-    this.valueChange.emit({ value: this.selectedChips.map((opt) => opt.value), reason: 'reset' });
+    this.valueChange.emit({ value: this.selectedChips.map((opt) => opt.value), reason: 'selectionChange' });
     this.selectionsChanged.emit(this.selectedChips.map((opt) => opt.id));
     this.value = '';
   }
@@ -240,7 +240,7 @@ export class ModusAutocomplete {
       this.selectedOption = optionValue;
       this.disableFiltering = this.disableCloseOnSelect;
       this.value = optionValue;
-      this.valueChange.emit({ value: optionValue, reason: 'reset' });
+      this.valueChange.emit({ value: optionValue, reason: 'selectionChange' });
       this.updateVisibleOptions(optionValue);
       this.updateVisibleCustomOptions(optionValue);
       this.focusItemIndex = this.visibleCustomOptions.findIndex((el) => el.getAttribute(DATA_ID) === optionId);
@@ -321,7 +321,7 @@ export class ModusAutocomplete {
       this.disableFiltering = this.disableCloseOnSelect;
       this.focusItemIndex = this.visibleOptions.findIndex((el) => el.id === option.id);
       this.value = option.value;
-      this.valueChange.emit({ value: option.value, reason: 'reset' });
+      this.valueChange.emit({ value: option.value, reason: 'selectionChange' });
       this.updateVisibleOptions(option.value);
       this.updateVisibleCustomOptions(option.value);
     }
@@ -399,7 +399,7 @@ export class ModusAutocomplete {
   removeChip(chipValue: ModusAutocompleteOption) {
     if (this.selectedChips.length != 0 && !this.readOnly) {
       this.selectedChips = this.selectedChips.filter((chip) => chip.id !== chipValue.id);
-      this.valueChange.emit({ value: this.selectedChips.map((v) => v.value), reason: 'input' });
+      this.valueChange.emit({ value: this.selectedChips.map((v) => v.value), reason: 'selectionChange' });
       this.selectionsChanged.emit(this.selectedChips.map((opt) => opt.id));
     }
   }
