@@ -192,6 +192,10 @@ export class ModusFileDropzone {
   };
 
   render() {
+    let instructions: string | undefined;
+    if (!this.error) {
+      instructions = this.fileDraggedOver ? this.fileDraggedOverInstructions : this.instructions;
+    }
     return (
       <Host aria-label={this.ariaLabel} role="button" aria-disabled={this.disabled ? 'true' : undefined}>
         <div class="modus-file-dropzone">
@@ -222,7 +226,7 @@ export class ModusFileDropzone {
             style={{ height: this.dropzoneHeight, width: this.dropzoneWidth }}
             tabIndex={0}>
             {this.includeStateIcon && (this.error ? <IconCancel size={'36'} /> : <IconUploadCloud size={'36'} />)}
-            {!this.error && (this.fileDraggedOver ? this.fileDraggedOverInstructions : this.instructions)}
+            {instructions}
             {this.error && (
               <div class="error-messages" role="alert">
                 {this.errorMessageTop && <span>{this.errorMessageTop}</span>}
