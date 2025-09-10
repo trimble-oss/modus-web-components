@@ -20,9 +20,10 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Lint Code Base
         uses: super-linter/super-linter/slim@v8
@@ -40,14 +41,14 @@ jobs:
           VALIDATE_CSS: false
           VALIDATE_EDITORCONFIG: false
           VALIDATE_GITLEAKS: false
+          VALIDATE_GITHUB_ACTIONS_ZIZMOR: false
           VALIDATE_HTML: false
           VALIDATE_JAVASCRIPT_ES: false
-          VALIDATE_JAVASCRIPT_STANDARD: false
           VALIDATE_JSCPD: false
           VALIDATE_JSON: false
           VALIDATE_NATURAL_LANGUAGE: false
+          VALIDATE_TRIVY: false
           VALIDATE_TSX: false
           VALIDATE_TYPESCRIPT_ES: false
           VALIDATE_TYPESCRIPT_PRETTIER: false
-          VALIDATE_TYPESCRIPT_STANDARD: false
           VALIDATE_YAML: false
