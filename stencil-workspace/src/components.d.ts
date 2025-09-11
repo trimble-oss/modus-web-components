@@ -2159,7 +2159,7 @@ declare global {
     };
     interface HTMLModusAutocompleteElementEventMap {
         "optionSelected": string;
-        "valueChange": string | string[];
+        "valueChange": { value: string | string[]; reason?: string };
         "selectionsChanged": string[];
     }
     interface HTMLModusAutocompleteElement extends Components.ModusAutocomplete, HTMLStencilElement {
@@ -3194,9 +3194,9 @@ declare namespace LocalJSX {
          */
         "onSelectionsChanged"?: (event: ModusAutocompleteCustomEvent<string[]>) => void;
         /**
-          * An event that fires when the input value changes. Emits the value string.
+          * An event that fires when the input value changes. Emits an object containing the value (string or string[]) and an optional reason.
          */
-        "onValueChange"?: (event: ModusAutocompleteCustomEvent<string | string[]>) => void;
+        "onValueChange"?: (event: ModusAutocompleteCustomEvent<{ value: string | string[]; reason?: string }>) => void;
         /**
           * The autocomplete's options.
          */
