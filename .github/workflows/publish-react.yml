@@ -10,8 +10,10 @@ on:
           - '18'
           - '19'
         description: The version of react you want to build
+
 permissions:
   contents: read
+
 jobs:
   publish_react:
     runs-on: ubuntu-latest

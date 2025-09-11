@@ -10,7 +10,7 @@ permissions:
 jobs:
   triage:
     runs-on: ubuntu-latest
-    if: ${{ github.actor != 'coliff' && github.actor != 'egunther39' && github.actor != 'ElishaSamPeterPrabhu' && github.actor != 'HarshithaNous' && github.actor != 'mitch-trimble' && github.actor != 'msankaran0712' && github.actor != 'prashanth-offcl' && github.actor != 'prashanthr6383' }}
+    if: ${{ github.actor != 'coliff' && github.actor != 'ElishaSamPeterPrabhu' && github.actor != 'HarshithaNous' && github.actor != 'mitch-trimble' && github.actor != 'prashanth-offcl' && github.actor != 'prashanthr6383' }}
     steps:
       - uses: github/issue-labeler@v3.4
         with:
