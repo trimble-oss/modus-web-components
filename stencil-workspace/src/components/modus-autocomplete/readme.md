@@ -35,11 +35,11 @@
 
 ## Events
 
-| Event               | Description                                                                   | Type                              |
-| ------------------- | ----------------------------------------------------------------------------- | --------------------------------- |
-| `optionSelected`    | An event that fires when a dropdown option is selected. Emits the option id.  | `CustomEvent<string>`             |
-| `selectionsChanged` | An event that fires when an option is selected/removed. Emits the option ids. | `CustomEvent<string[]>`           |
-| `valueChange`       | An event that fires when the input value changes. Emits the value string.     | `CustomEvent<string \| string[]>` |
+| Event               | Description                                                                                                                         | Type                                                           |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| `optionSelected`    | An event that fires when a dropdown option is selected. Emits the option id.                                                        | `CustomEvent<string>`                                          |
+| `selectionsChanged` | An event that fires when an option is selected/removed. Emits the option ids.                                                       | `CustomEvent<string[]>`                                        |
+| `valueChange`       | An event that fires when the input value changes. Emits an object containing the value (string or string[]) and an optional reason. | `CustomEvent<{ value: string \| string[]; reason?: string; }>` |
 
 
 ## Methods
