@@ -21,7 +21,7 @@ describe('modus-autocomplete', () => {
             <modus-text-input aria-autocomplete="list" aria-controls="${listId}" class="input" role="combobox" autocomplete="off" size="medium" type="search"  value=""></modus-text-input>
           </div>
           <div class="error"></div>
-          <div class="options-container" style="max-height: 300px; z-index: 1; overflow-y: auto;">
+          <div class="options-container" part="options-container" style="max-height: 300px; z-index: 1; overflow-y: auto; position: absolute; left: 0; top: 0; margin: 0;">
             <ul aria-label="options" id="${listId}" role="listbox"></ul>
           </div>
           <div style="display: none;">
@@ -57,7 +57,7 @@ describe('modus-autocomplete', () => {
             <modus-text-input aria-autocomplete="list" aria-controls="${listId}" class="input" role="combobox" autocomplete="off" size="medium" type="search"  value=""></modus-text-input>
           </div>
           <div class="error"></div>
-          <div class="options-container" style="max-height: 300px; z-index: 1; overflow-y: auto;">
+          <div class="options-container" part="options-container" style="max-height: 300px; z-index: 1; overflow-y: auto; position: absolute; left: 0; top: 0; margin: 0;">
             <ul aria-label="options" id="${listId}" role="listbox"></ul>
           </div>
           <div style="display: none;">
