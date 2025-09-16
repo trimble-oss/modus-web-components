@@ -29,7 +29,7 @@ jobs:
           node-version: 18
 
       - name: Run Sonar Scan Action
-        uses: sonarsource/sonarqube-scan-action@master
+        uses: sonarsource/sonarqube-scan-action@5837ebfccaf5b347ae1783644ecff31e2bafa086 # master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}

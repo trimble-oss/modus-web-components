@@ -24,7 +24,7 @@ jobs:
         run: npm run full
 
       - name: Deploy Storybook to Netlify
-        uses: netlify/actions/cli@master
+        uses: netlify/actions/cli@3185065f4ab2f6df6f2ef41ee013626e1c02a426 # master
         with:
           args: deploy --dir=stencil-workspace/storybook/dist --prod
         env:

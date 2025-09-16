@@ -40,7 +40,7 @@ jobs:
           VALIDATE_CSS: false
           VALIDATE_EDITORCONFIG: false
           VALIDATE_GITLEAKS: false
-          VALIDATE_GITHUB_ACTIONS_ZIZMOR: false
+          VALIDATE_GIT_COMMITLINT: false
           VALIDATE_HTML: false
           VALIDATE_JAVASCRIPT_ES: false
           VALIDATE_JSCPD: false
