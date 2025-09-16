@@ -2,9 +2,13 @@ name: Storybook Deployment
 on:
   push:
     branches: [main]
+
+permissions:
+  contents: read
+
 jobs:
   deploy-storybook:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     if: github.repository == 'trimble-oss/modus-web-components'
     defaults:
       run:
