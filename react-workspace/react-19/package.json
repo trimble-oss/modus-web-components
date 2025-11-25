@@ -2,7 +2,7 @@
   "name": "@trimble-oss/modus-react-components",
   "version": "1.8.2-react19",
   "description": "Trimble Modus React Component Library for React 19",
-  "homepage": "https://modus-web-components.trimble.com/",
+  "homepage": "https://modus-web-components.trimble-v1.com/",
   "bugs": {
     "url": "https://github.com/trimble-oss/modus-web-components/issues/"
   },

@@ -136,7 +136,7 @@ The components are automatically registered with the browser in this environment
 ...
 ```
 
-You can find more in depth examples of how these attributes and properties are set on the [Modus Web Components Storybook site](https://modus-web-components.trimble.com/?path=/docs/introduction-getting-started--page).
+You can find more in depth examples of how these attributes and properties are set on the [Modus Web Components Storybook site](https://modus-web-components.trimble-v1.com/?path=/docs/introduction-getting-started--page).
 
 ## Style Guide
 
