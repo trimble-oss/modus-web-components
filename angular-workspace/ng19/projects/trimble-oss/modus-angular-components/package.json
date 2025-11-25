@@ -3,7 +3,7 @@
   "version": "1.8.2-ng19",
   "license": "MIT",
   "description": "Trimble Modus Angular Components Library",
-  "homepage": "https://modus-web-components.trimble.com/",
+  "homepage": "https://modus-web-components.trimble-v1.com/",
   "bugs": {
     "url": "https://github.com/trimble-oss/modus-web-components/issues/"
   },
