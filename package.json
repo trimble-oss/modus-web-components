@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "description": "Modus Web Components Monorepo",
-  "homepage": "https://modus-web-components.trimble.com/",
+  "homepage": "https://modus-web-components-v1.trimble.com/",
   "bugs": {
     "url": "https://github.com/trimble-oss/modus-web-components/issues/"
   },
@@ -14,7 +14,7 @@
   "license": "MIT",
   "author": "Trimble Inc",
   "scripts": {
-    "lint-links": "npx linkinator https://modus-web-components.trimble.com/ --recurse",
+    "lint-links": "npx linkinator https://modus-web-components-v1.trimble.com/ --recurse",
     "prettier": "npx prettier --write \"**/*.yml\"",
     "spellcheck": "npx cspell \"**/*.{html,json,md,mdx,toml,ts,yml}\" --no-progress",
     "build-angular": "cd angular-workspace/ng16 && npm i && npm run build && cd ../ng17 && npm i && npm run build && cd ../ng18 && npm i && npm run build && cd ../ng19 && npm i && npm run build && cd ../ng20 && npm i && npm run build",
@@ -24,6 +24,6 @@
     "node": ">=18"
   },
   "volta": {
-    "node": "20.19.2"
+    "node": "20.19.5"
   }
 }

@@ -3,7 +3,7 @@
   "version": "1.8.2",
   "license": "MIT",
   "description": "Trimble Modus Web Component Library",
-  "homepage": "https://modus-web-components.trimble.com/",
+  "homepage": "https://modus-web-components.trimble-v1.com/",
   "bugs": {
     "url": "https://github.com/trimble-oss/modus-web-components/issues/"
   },
@@ -53,7 +53,7 @@
     "@stencil/angular-output-target": "^0.10.2",
     "@stencil/react-output-target": "^0.5.3",
     "@stencil/sass": "^3.0.12",
-    "@trimble-oss/modus-icons": "1.16.1",
+    "@trimble-oss/modus-icons": "1.19.0",
     "@types/jest": "^27.5.1",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.58.0",

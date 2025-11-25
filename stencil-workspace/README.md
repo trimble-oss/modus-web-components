@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <a href="https://modus-web-components.trimble.com/" target="_blank">
+  <a href="https://modus-web-components.trimble-v1.com/" target="_blank">
     <img src="https://cdn.jsdelivr.net/gh/storybookjs/brand@master/badge/badge-storybook.svg" alt/>
   </a>
   <a href="https://www.npmjs.com/package/@trimble-oss/modus-web-components">
@@ -20,11 +20,11 @@ Modus Web Components are reusable, encapsulated UI elements that are framework a
 
 # Looking for documentation?
 
-You can check out <https://modus-web-components.trimble.com> for the library's latest Storybook documentation.
+You can check out <https://modus-web-components.trimble-v1.com> for the library's latest Storybook documentation.
 
 # Installing Modus Web Components
 
-Check out the [Getting Started page](https://modus-web-components.trimble.com/?path=/docs/introduction-getting-started--page).
+Check out the [Getting Started page](https://modus-web-components.trimble-v1.com/?path=/docs/introduction-getting-started--page).
 
 # Contributing
 
