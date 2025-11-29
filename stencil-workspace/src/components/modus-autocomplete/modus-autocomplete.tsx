@@ -16,6 +16,7 @@ import {
 import { IconSearch } from '../../icons/svgs/icon-search';
 import { generateElementId } from '../../utils/utils';
 import { IconCheck } from '../../icons/generated-icons/IconCheck';
+import { createPopper, Instance, Placement } from '@popperjs/core';
 import { IconClose } from '../../icons/svgs/icon-close';
 
 export interface ModusAutocompleteOption {
@@ -76,6 +77,9 @@ export class ModusAutocomplete {
   /** A promise that returns the filtered options. */
   @Prop() filterOptions: (search: string) => Promise<ModusAutocompleteOption[] | string[]>;
 
+  /** (optional) The placement of the options */
+  @Prop() position: Placement = 'bottom-start';
+
   /** An array to hold the selected chips. */
   @State() selectedChips: ModusAutocompleteOption[] = [];
 
@@ -87,6 +91,8 @@ export class ModusAutocomplete {
 
   /** Whether to show autocomplete's options when focus. */
   @Prop() showOptionsOnFocus: boolean;
+
+  private popperInstance: Instance;
 
   @Watch('options')
   watchOptions() {
@@ -150,6 +156,58 @@ export class ModusAutocomplete {
   @State() focusItemIndex = 0;
   @State() ShowItemsOnKeyDown = false;
   private listId = generateElementId() + '_list';
+
+  private resizeObserver: ResizeObserver;
+
+  componentDidLoad(): void {
+    this.convertOptions();
+    if (this.multiple) {
+      this.initializeSelectedChips();
+    }
+    this.initializePopper();
+
+    const chipsContainer = this.el.shadowRoot.querySelector('.chips-container');
+    if (chipsContainer && typeof ResizeObserver !== 'undefined') {
+      this.resizeObserver = new ResizeObserver(() => {
+        if (this.popperInstance) {
+          this.popperInstance.update();
+        }
+      });
+      this.resizeObserver.observe(chipsContainer);
+    }
+  }
+
+  disconnectedCallback(): void {
+    if (this.popperInstance) {
+      this.popperInstance.destroy();
+    }
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+    }
+  }
+
+
+  initializePopper(): void {
+    const optionsContainer = this.el.shadowRoot.querySelector(`.options-container`) as HTMLElement;
+    const referenceElement = this.el.shadowRoot.querySelector(`.chips-container`) as HTMLElement;
+
+    this.popperInstance = createPopper(referenceElement, optionsContainer, {
+      placement: this.position,
+      strategy: this.position === 'bottom' ? 'fixed' : 'absolute',
+      modifiers: [
+        {
+          name: 'offset',
+          options: {
+            offset: [0, 2],
+          },
+        },
+      ],
+    });
+
+    if (referenceElement.offsetWidth && optionsContainer) {
+      optionsContainer.style.width = `${referenceElement.offsetWidth}px`;
+    }
+  }
 
   componentWillLoad(): void {
     this.convertOptions();
@@ -537,7 +595,7 @@ export class ModusAutocomplete {
     const selectedOption = optionList.querySelector('li.selected') as HTMLElement;
 
     if (selectedOption) {
-      selectedOption.scrollIntoView({ behavior: 'smooth', inline: 'nearest' });
+      selectedOption.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
   };
 
@@ -606,6 +664,7 @@ export class ModusAutocomplete {
         <div class={'error'}>{this.errorText ? <label class="sub-text error">{this.errorText}</label> : null}</div>
         <div
           class="options-container"
+          part="options-container"
           style={{ maxHeight: this.dropdownMaxHeight, zIndex: this.dropdownZIndex, overflowY: 'auto' }}>
           <ul id={this.listId} aria-label="options" role="listbox">
             {this.displayOptions() &&
