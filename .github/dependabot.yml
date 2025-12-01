@@ -1,6 +1,66 @@
 version: 2
 updates:
   - package-ecosystem: npm
+    directory: '/angular-workspace/ng20/'
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 1
+    groups:
+      all-dependencies:
+        patterns:
+          - "*"
+        update-types:
+          - "patch"
+
+  - package-ecosystem: npm
+    directory: '/angular-workspace/ng19/'
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 1
+    groups:
+      all-dependencies:
+        patterns:
+          - "*"
+        update-types:
+          - "patch"
+
+  - package-ecosystem: npm
+    directory: '/angular-workspace/ng18/'
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 1
+    groups:
+      all-dependencies:
+        patterns:
+          - "*"
+        update-types:
+          - "patch"
+
+  - package-ecosystem: npm
+    directory: '/angular-workspace/ng17/'
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 1
+    groups:
+      all-dependencies:
+        patterns:
+          - "*"
+        update-types:
+          - "patch"
+
+  - package-ecosystem: npm
+    directory: '/angular-workspace/ng16/'
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 1
+    groups:
+      all-dependencies:
+        patterns:
+          - "*"
+        update-types:
+          - "patch"
+
+  - package-ecosystem: npm
     directory: '/stencil-workspace/'
     schedule:
       interval: monthly
@@ -10,12 +70,24 @@ updates:
       - dependency-name: puppeteer-core
       - dependency-name: typescript
       - dependency-name: '@stencil/core'
+    groups:
+      all-dependencies:
+        patterns:
+          - "*"
+        update-types:
+          - "patch"
 
   - package-ecosystem: npm
     directory: '/stencil-workspace/storybook/'
     schedule:
       interval: monthly
     open-pull-requests-limit: 1
+    groups:
+      all-dependencies:
+        patterns:
+          - "*"
+        update-types:
+          - "patch"
 
   - package-ecosystem: github-actions
     directory: '/'
