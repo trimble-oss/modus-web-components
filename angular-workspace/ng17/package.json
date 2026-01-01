@@ -21,7 +21,7 @@
     "@trimble-oss/modus-web-components": "1.8.2",
     "rxjs": "~7.8.2",
     "tslib": "^2.5.3",
-    "zone.js": "~0.14.4"
+    "zone.js": "~0.16.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.2.1",
