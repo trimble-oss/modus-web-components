@@ -13,7 +13,7 @@
     "@angular/common": "^20.0.0",
     "@angular/compiler": "^20.0.0",
     "@angular/core": "^20.0.0",
-    "@angular/forms": "^20.0.0",
+    "@angular/forms": "^21.1.2",
     "@angular/platform-browser": "^20.0.0",
     "@angular/router": "^20.0.0",
     "@trimble-oss/modus-web-components": "^1.8.2",
