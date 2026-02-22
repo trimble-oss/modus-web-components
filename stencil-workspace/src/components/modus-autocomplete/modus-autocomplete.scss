@@ -120,7 +120,12 @@
     margin: 0;
     padding: 0;
     position: absolute;
-    width: 100%;
+    width: auto;
+
+    &[data-popper-reference-hidden] {
+      pointer-events: none;
+      visibility: hidden;
+    }
 
     .icon-check {
       display: inline-flex;

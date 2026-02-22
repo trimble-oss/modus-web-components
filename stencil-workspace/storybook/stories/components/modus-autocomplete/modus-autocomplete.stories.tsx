@@ -108,6 +108,27 @@ export default {
         type: { summary: 'string' },
       },
     },
+    position: {
+      name: 'position',
+      options: [
+          'auto',
+          'auto-start',
+          'auto-end',
+          'top-start',
+          'top-end',
+          'bottom-start',
+          'bottom-end',
+          'right-start',
+          'right-end',
+          'left-start',
+          'left-end',
+          'top',
+          'left',
+          'bottom',
+          'right',
+        ],
+        type: 'select',
+    },
     readOnly: {
       name: 'read-only',
       description: 'Whether the autocomplete is read-only',
@@ -197,6 +218,7 @@ const Template = ({
   noResultsFoundText,
   noResultsFoundSubtext,
   placeholder,
+  position,
   readOnly,
   required,
   showNoResultsFoundMessage,
@@ -221,6 +243,7 @@ const Template = ({
       no-results-found-text=${noResultsFoundText}
       no-results-found-subtext=${noResultsFoundSubtext}
       placeholder=${placeholder}
+      position=${position}
       read-only=${readOnly}
       ?required=${required}
       show-no-results-found-message=${showNoResultsFoundMessage}
@@ -269,6 +292,7 @@ const defaultArgs = {
   noResultsFoundText: 'No results found',
   noResultsFoundSubtext: 'Check spelling or try a different keyword',
   placeholder: 'Search...',
+  position: 'bottom-start',
   readOnly: false,
   required: false,
   showNoResultsFoundMessage: true,
@@ -313,6 +337,7 @@ export const WithCustomOption = ({
   noResultsFoundText,
   noResultsFoundSubtext,
   placeholder,
+  position,
   readOnly,
   required,
   showNoResultsFoundMessage,
@@ -335,6 +360,7 @@ export const WithCustomOption = ({
       no-results-found-text=${noResultsFoundText}
       no-results-found-subtext=${noResultsFoundSubtext}
       placeholder=${placeholder}
+      position=${position}
       read-only=${readOnly}
       required=${required}
       show-no-results-found-message=${showNoResultsFoundMessage}
@@ -367,6 +393,7 @@ WithCustomOption.args = {
   noResultsFoundText: 'No results found',
   noResultsFoundSubtext: 'Check spelling or try a different keyword',
   placeholder: 'Search...',
+  position: 'bottom-start',
   readOnly: false,
   required: false,
   showNoResultsFoundMessage: true,
@@ -390,6 +417,7 @@ export const WithDynamicOptions = ({
   noResultsFoundText,
   noResultsFoundSubtext,
   placeholder,
+  position,
   readOnly,
   required,
   showNoResultsFoundMessage,
@@ -414,6 +442,7 @@ export const WithDynamicOptions = ({
       no-results-found-text=${noResultsFoundText}
       no-results-found-subtext=${noResultsFoundSubtext}
       placeholder=${placeholder}
+      position=${position}
       read-only=${readOnly}
       required=${required}
       show-no-results-found-message=${showNoResultsFoundMessage}
@@ -439,6 +468,7 @@ WithDynamicOptions.args = {
   noResultsFoundText: 'No results found',
   noResultsFoundSubtext: 'Check spelling or try a different keyword',
   placeholder: 'Search...',
+  position: 'bottom-start',
   readOnly: false,
   required: false,
   showNoResultsFoundMessage: true,

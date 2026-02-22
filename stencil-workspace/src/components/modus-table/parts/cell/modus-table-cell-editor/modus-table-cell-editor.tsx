@@ -200,6 +200,7 @@ export class ModusTableCellEditor {
           include-search-icon="false"
           size="medium"
           ref={(el) => (this.inputElement = el)}
+          class="autocomplete"
           options={options}
           onBlur={this.handleBlur}
           onKeyDown={(e) => handleArrowKeys(e, this.handleKeyDown)}
@@ -232,6 +233,7 @@ export class ModusTableCellEditor {
               this.editedValue = selectedDetail;
             }
           }}
+          position="bottom"
           value={selectedOption}></modus-autocomplete>
       </div>
     );
