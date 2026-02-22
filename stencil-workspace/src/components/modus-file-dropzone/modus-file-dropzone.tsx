@@ -10,7 +10,7 @@ import { IconCancel } from '../../icons/svgs/icon-cancel';
 })
 export class ModusFileDropzone {
   @State() dropzoneFiles: Array<File> = [];
-  @State() error: 'maxFileCount' | 'maxFileNameLength' | 'maxTotalFileSize' | null = null;
+  @State() error: 'maxFileCount' | 'maxFileNameLength' | 'maxTotalFileSize' | 'invalidFileType' | null = null;
   @State() fileDraggedOver = false;
 
   /** (optional) The dropzone's accepted file types */
@@ -154,6 +154,51 @@ export class ModusFileDropzone {
   };
 
   updateDropzoneState = (): void => {
+    // Checks and delete invalid accepted-file-types
+    if (this.acceptFileTypes) {
+      const acceptedFileTypes = this.acceptFileTypes
+        .split(',')
+        .map((ext) => ext.trim())
+        .filter((ext) => ext.length > 0);
+      const invalidFiles = [];
+
+      for (let i = 0; i < this.dropzoneFiles.length; i++) {
+        const fileType = this.dropzoneFiles[i].type;
+        const [typeCategory, fileExtension] = fileType.split('/');
+
+        const isAccepted = acceptedFileTypes.some((acceptedType) => {
+          if (acceptedType.includes('/')) {
+            const [acceptedCategory, acceptedExtension] = acceptedType.split('/');
+            if (acceptedExtension === '*' && acceptedCategory === typeCategory) {
+              return true;
+            }
+            return acceptedType === fileType;
+          } else {
+            return '.' + fileExtension === acceptedType;
+          }
+        });
+
+        if (!isAccepted) {
+          invalidFiles.push(this.dropzoneFiles[i]);
+        }
+      }
+
+      if (invalidFiles.length > 0) {
+        this.error = 'invalidFileType';
+        this.errorMessageTop = `Some files are not of the accepted types. Please remove the following file(s) to continue: ${invalidFiles
+          .map((file) => file.name)
+          .join(', ')}`;
+
+        this.files.emit([this.dropzoneFiles, this.error]);
+        return;
+      }
+
+      if (this.error === 'invalidFileType' && invalidFiles.length === 0) {
+        this.error = null;
+        this.errorMessageTop = '';
+      }
+    }
+
     // Raise error if having multiple files is invalid.
     if (!this.multiple && this.dropzoneFiles.length > 1) {
       this.error = 'maxFileCount';
