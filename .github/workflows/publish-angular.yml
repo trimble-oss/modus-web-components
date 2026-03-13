@@ -49,7 +49,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install Modus Web Components
-        run: npm ci
+        run: npm i
         working-directory: ./stencil-workspace
 
       - name: Build Modus Web Components
@@ -61,7 +61,7 @@ jobs:
         working-directory: ./angular-workspace/ng${{ github.event.inputs.angularVersion }}/projects/trimble-oss/modus-angular-components
 
       - name: Install Angular ${{ github.event.inputs.angularVersion }}
-        run: npm ci
+        run: npm i
 
       - name: Build Angular ${{ github.event.inputs.angularVersion }}
         run: npm run build

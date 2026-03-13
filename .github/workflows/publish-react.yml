@@ -38,7 +38,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install Modus Web Components
-        run: npm ci
+        run: npm i
         working-directory: ./stencil-workspace
 
       - name: Build Modus Web Components
@@ -46,7 +46,7 @@ jobs:
         working-directory: ./stencil-workspace
 
       - name: Install React ${{ github.event.inputs.reactVersion }}
-        run: npm ci
+        run: npm i
 
       - name: Build React ${{ github.event.inputs.reactVersion }}
         run: npm run build
