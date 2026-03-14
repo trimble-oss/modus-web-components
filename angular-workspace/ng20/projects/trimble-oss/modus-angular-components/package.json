@@ -3,7 +3,7 @@
   "version": "1.8.2-ng20",
   "peerDependencies": {
     "@angular/common": "^20.0.0",
-    "@angular/core": "^20.0.0",
+    "@angular/core": "^21.0.0",
     "@trimble-oss/modus-web-components": "1.8.2"
   },
   "dependencies": {
